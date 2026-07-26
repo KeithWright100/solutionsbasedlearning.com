@@ -439,8 +439,8 @@
   // anon/public key (Project Settings → API in the Supabase dashboard).
   // The anon key is safe to expose in frontend code — it only allows
   // what your Supabase security rules permit.
-  const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
-  const SUPABASE_ANON_KEY = "YOUR-ANON-KEY";
+  const SUPABASE_URL = "https://hkcnxactfpybwpntukrx.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrY254YWN0ZnB5YndwbnR1a3J4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNjM4ODgsImV4cCI6MjEwMDYzOTg4OH0.KU6kxLQbIj4GBTxPP0EZC9hLXimghv7DACQVMSJ2wbs";
   window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   window.dispatchEvent(new Event('supabase-ready'));
 </script>
