@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IB Geography Learning Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eae1cb;
+    --paper-dark:#ded2b0;
+    --ink:#22301f;
+    --ink-soft:#4a5c43;
+    --contour:#8a9a72;
+    --river:#2f6690;
+    --river-deep:#1d445f;
+    --elevation:#a9762c;
+    --white-ish:#f7f2e4;
+    --font-display:'Fraunces', serif;
+    --font-body:'Source Sans 3', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:
+      repeating-radial-gradient(circle at 20% 30%, transparent 0 26px, rgba(138,154,114,0.16) 27px 28px, transparent 29px 60px),
+      repeating-radial-gradient(circle at 80% 75%, transparent 0 34px, rgba(138,154,114,0.14) 35px 36px, transparent 37px 70px),
+      var(--paper);
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+  #sidebar{
+    width:340px;
+    min-width:340px;
+    background:var(--white-ish);
+    border-right:2px solid var(--ink);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  #sidebar-head{
+    padding:20px 20px 14px;
+    border-bottom:1px solid var(--contour);
+    background:var(--paper-dark);
+  }
+  #sidebar-head .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--river-deep);
+  }
+  #sidebar-head h1{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:24px;
+    margin:4px 0 2px;
+    line-height:1.15;
+  }
+  #sidebar-head .sub{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  #tree{
+    flex:1;
+    overflow-y:auto;
+    padding:10px 10px 24px;
+  }
+  #tree::-webkit-scrollbar{width:8px;}
+  #tree::-webkit-scrollbar-thumb{background:var(--contour);border-radius:4px;}
+
+  .paper-block{margin-bottom:6px;}
+  .paper-btn{
+    width:100%;
+    text-align:left;
+    background:var(--paper-dark);
+    border:1px solid var(--ink);
+    border-radius:3px;
+    padding:8px 10px;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.03em;
+    color:var(--ink);
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:8px;
+  }
+  .paper-btn:hover{background:var(--contour);color:var(--white-ish);}
+  .paper-body{
+    padding:6px 4px 4px 10px;
+    display:none;
+  }
+  .paper-body.open{display:block;}
+
+  .opt-btn{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    border-left:2px solid var(--river);
+    padding:6px 8px;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--river-deep);
+    cursor:pointer;
+    margin-top:2px;
+  }
+  .opt-btn:hover{background:rgba(47,102,144,0.08);}
+  .opt-body{padding-left:10px;display:none;}
+  .opt-body.open{display:block;}
+
+  .topic-btn{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:5px 6px 5px 10px;
+    font-size:12.8px;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    border-left:2px dotted var(--contour);
+    margin-top:1px;
+  }
+  .topic-btn:hover{color:var(--river-deep);}
+  .lesson-list{padding-left:14px;display:none;}
+  .lesson-list.open{display:block;}
+
+  .lesson-item{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:4px 6px;
+    font-size:12px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    border-radius:2px;
+    font-family:var(--font-body);
+  }
+  .lesson-item:hover{background:var(--paper-dark);color:var(--ink);}
+  .lesson-item.active{
+    background:var(--river);
+    color:var(--white-ish);
+    font-weight:600;
+  }
+  .lesson-item.soon, .opt-btn.soon{
+    opacity:0.5;
+  }
+  .lesson-item.soon:hover, .opt-btn.soon:hover{
+    opacity:0.75;
+  }
+  .soon-tag{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:9.5px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--elevation);
+    border:1px solid var(--elevation);
+    border-radius:3px;
+    padding:1px 5px;
+    margin-left:6px;
+    opacity:1;
+    vertical-align:middle;
+  }
+
+  /* ---------- MAIN ---------- */
+  #main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+  #topbar{
+    padding:16px 28px;
+    border-bottom:2px solid var(--ink);
+    background:var(--white-ish);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  #topbar .loc{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--river-deep);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  #topbar h2{
+    font-family:var(--font-display);
+    font-size:19px;
+    font-weight:600;
+    margin:2px 0 0;
+  }
+  #legend{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    color:var(--ink-soft);
+    text-align:right;
+    line-height:1.5;
+  }
+
+  #chat-scroll{
+    flex:1;
+    overflow-y:auto;
+    padding:24px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .msg{
+    max-width:640px;
+    padding:12px 15px;
+    border-radius:6px;
+    font-size:14.5px;
+    line-height:1.55;
+    white-space:pre-wrap;
+  }
+  .msg.bot{
+    background:var(--white-ish);
+    border:1px solid var(--contour);
+    align-self:flex-start;
+    border-top-left-radius:0;
+  }
+  .msg.user{
+    background:var(--river);
+    color:var(--white-ish);
+    align-self:flex-end;
+    border-top-right-radius:0;
+  }
+  .msg.system-note{
+    align-self:center;
+    background:none;
+    border:1px dashed var(--elevation);
+    color:var(--elevation);
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    text-align:center;
+  }
+
+  #composer{
+    border-top:2px solid var(--ink);
+    background:var(--white-ish);
+    padding:14px 28px 18px;
+    display:flex;
+    gap:10px;
+  }
+  #composer textarea{
+    flex:1;
+    resize:none;
+    border:1px solid var(--ink);
+    border-radius:4px;
+    padding:10px 12px;
+    font-family:var(--font-body);
+    font-size:14px;
+    height:44px;
+    background:var(--paper);
+  }
+  #composer textarea:focus{outline:2px solid var(--river);outline-offset:1px;}
+  #composer button{
+    background:var(--ink);
+    color:var(--white-ish);
+    border:none;
+    border-radius:4px;
+    padding:0 20px;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+  }
+  #composer button:hover{background:var(--river-deep);}
+  #composer button:disabled{opacity:0.5;cursor:default;}
+
+  .typing{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    align-self:flex-start;
+  }
+
+  /* ---------- AUTH SCREEN ---------- */
+  #auth-screen{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      repeating-radial-gradient(circle at 30% 30%, transparent 0 26px, rgba(138,154,114,0.16) 27px 28px, transparent 29px 60px),
+      var(--paper);
+  }
+  #auth-card{
+    width:320px;
+    background:var(--white-ish);
+    border:2px solid var(--ink);
+    border-radius:6px;
+    padding:26px 26px 22px;
+  }
+  #auth-card .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--river-deep);
+  }
+  #auth-card h1{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:24px;
+    margin:4px 0 2px;
+  }
+  .auth-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  #auth-form{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  #auth-form input{
+    border:1px solid var(--ink);
+    border-radius:4px;
+    padding:9px 11px;
+    font-family:var(--font-body);
+    font-size:14px;
+    background:var(--paper);
+  }
+  #auth-form input:focus{outline:2px solid var(--river);outline-offset:1px;}
+  #auth-form button{
+    background:var(--ink);
+    color:var(--white-ish);
+    border:none;
+    border-radius:4px;
+    padding:10px;
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    margin-top:4px;
+  }
+  #auth-form button:hover{background:var(--river-deep);}
+  .auth-link{
+    background:none;
+    border:none;
+    color:var(--river-deep);
+    font-size:12.5px;
+    cursor:pointer;
+    margin-top:14px;
+    padding:0;
+    text-decoration:underline;
+  }
+  #auth-error{
+    font-size:12.5px;
+    color:#a94438;
+    margin-top:10px;
+    min-height:14px;
+  }
+
+  #topbar-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  #logout-btn{
+    background:none;
+    border:1px solid var(--ink);
+    border-radius:4px;
+    padding:6px 12px;
+    font-family:var(--font-body);
+    font-size:12.5px;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  #logout-btn:hover{background:var(--paper-dark);}
+</style>
+</head>
+<body>
+
+<div id="auth-screen">
+  <div id="auth-card">
+    <div class="eyebrow">Survey Sheet · Diploma Programme</div>
+    <h1>IB Geography Hub</h1>
+    <p class="auth-sub">Sign in with your school email to start.</p>
+    <form id="auth-form">
+      <input type="email" id="auth-email" placeholder="Email" required autocomplete="email">
+      <input type="password" id="auth-password" placeholder="Password" required autocomplete="current-password">
+      <button type="submit" id="auth-submit">Log in</button>
+    </form>
+    <button id="auth-toggle" class="auth-link">Need an account? Sign up</button>
+    <div id="auth-error"></div>
+  </div>
+</div>
+
+<div id="app-shell" style="display:none;">
+<div id="sidebar">
+  <div id="sidebar-head">
+    <div class="eyebrow">Survey Sheet · Diploma Programme</div>
+    <h1>IB Geography Hub</h1>
+    <div class="sub">Select a lesson to focus the tutor</div>
+  </div>
+  <div id="tree"></div>
+</div>
+
+<div id="main">
+  <div id="topbar">
+    <div>
+      <div class="loc" id="loc-tag">GRID REF — NO LESSON SELECTED</div>
+      <h2 id="lesson-title">Choose a lesson from the map to begin</h2>
+    </div>
+    <div id="topbar-right">
+      <div id="legend">— contour = topic<br>· · · = lesson path<br>█ river = active selection</div>
+      <button id="logout-btn">Log out</button>
+    </div>
+  </div>
+
+  <div id="chat-scroll"></div>
+
+  <div id="composer">
+    <textarea id="input" placeholder="Ask about the current lesson..."></textarea>
+    <button id="send">Send</button>
+  </div>
+</div>
+</div><!-- /app-shell -->
+
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+  // Replace these two values with your own Supabase project's URL and
+  // anon/public key (Project Settings → API in the Supabase dashboard).
+  // The anon key is safe to expose in frontend code — it only allows
+  // what your Supabase security rules permit.
+  const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR-ANON-KEY";
+  window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  window.dispatchEvent(new Event('supabase-ready'));
+</script>
+<script>
+/* ---------------- AUTH ---------------- */
+let sb = null;
+let isSignupMode = false;
+
+function initAuth(){
+  sb = window.supabaseClient;
+
+  const form = document.getElementById('auth-form');
+  const toggle = document.getElementById('auth-toggle');
+  const errorEl = document.getElementById('auth-error');
+  const submitBtn = document.getElementById('auth-submit');
+
+  toggle.onclick = () => {
+    isSignupMode = !isSignupMode;
+    submitBtn.textContent = isSignupMode ? 'Sign up' : 'Log in';
+    toggle.textContent = isSignupMode ? 'Already have an account? Log in' : 'Need an account? Sign up';
+    errorEl.textContent = '';
+  };
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    errorEl.textContent = '';
+    submitBtn.disabled = true;
+    const email = document.getElementById('auth-email').value.trim();
+    const password = document.getElementById('auth-password').value;
+
+    const { error } = isSignupMode
+      ? await sb.auth.signUp({ email, password })
+      : await sb.auth.signInWithPassword({ email, password });
+
+    submitBtn.disabled = false;
+
+    if (error){
+      errorEl.textContent = error.message;
+      return;
+    }
+    if (isSignupMode){
+      errorEl.textContent = 'Account created. Check your email to confirm, then log in.';
+    }
+  };
+
+  document.getElementById('logout-btn').onclick = async () => {
+    await sb.auth.signOut();
+  };
+
+  sb.auth.onAuthStateChange((_event, session) => {
+    if (session){
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('app-shell').style.display = 'flex';
+    } else {
+      document.getElementById('auth-screen').style.display = 'flex';
+      document.getElementById('app-shell').style.display = 'none';
+    }
+  });
+}
+
+async function getAccessToken(){
+  const { data } = await sb.auth.getSession();
+  return data?.session?.access_token || null;
+}
+
+window.addEventListener('supabase-ready', initAuth);
+
+// Lessons/options can be a plain string (= live, fully built) or an
+// object { name, live:false } (= shown in the map, faded, "Coming soon").
+function soon(name){ return { name, live:false }; }
+
+const TREE = {
+  "Paper 1: Optional Themes": {
+    "Option A: Freshwater": {
+      "1. Drainage Basin Hydrology and Geomorphology": [
+        "Lesson 1: The Drainage Basin System",
+        "Lesson 2: Discharge",
+        "Lesson 3: Erosion, Transportation and Deposition",
+        "Lesson 4: River Landforms"
+      ],
+      "2. Flooding and Flood Mitigation": [
+        "Lesson 1: Hydrographs",
+        "Lesson 2: Factors Affecting Flood Risk",
+        "Lesson 3: Flood Mitigation",
+        "Lesson 4: Case Studies of Flood Mitigation"
+      ],
+      "3. Water Scarcity and Water Quality": [
+        "Lesson 1: Physical and Economic Water Scarcity",
+        "Lesson 2: Environmental Consequences of Agricultural Activities",
+        "Lesson 3: Human Pressures on Lakes and Aquifers",
+        "Lesson 4: Internationally Shared Water Resource Conflict"
+      ],
+      "4. Water Management Futures": [
+        "Lesson 1: Improving Local Water Management",
+        "Lesson 2: Intervention in Drainage Basins",
+        "Lesson 3: Integrated Drainage Basin Management (IDBM)",
+        "Lesson 4: Freshwater Wetland Management",
+        "Lesson 5: Wetlands Case Study"
+      ]
+    },
+    "Option E: Leisure, Sport and Tourism": soon("Option E: Leisure, Sport and Tourism"),
+    "Option F: Food and Health (HL only)": soon("Option F: Food and Health (HL only)")
+  },
+  "Paper 2": {
+    "1: Changing Population": soon("1: Changing Population"),
+    "2: Global Climate, Vulnerability and Resilience": soon("2: Global Climate, Vulnerability and Resilience"),
+    "3: Global Resource Consumption and Security": soon("3: Global Resource Consumption and Security")
+  },
+  "Paper 3": {
+    "Unit 4: Power, Places and Networks": soon("Unit 4: Power, Places and Networks"),
+    "Unit 5: Human Development and Diversity": soon("Unit 5: Human Development and Diversity"),
+    "Unit 6: Global Risks and Resilience": soon("Unit 6: Global Risks and Resilience")
+  }
+};
+
+const treeEl = document.getElementById('tree');
+let currentLesson = null;
+let currentPath = "";
+
+function isTopicsObject(val){
+  return val && typeof val === 'object' && !Array.isArray(val) && val.name === undefined;
+}
+
+function buildTree(){
+  Object.entries(TREE).forEach(([paperName, options], pIdx) => {
+    const block = document.createElement('div');
+    block.className = 'paper-block';
+
+    const paperBtn = document.createElement('button');
+    paperBtn.className = 'paper-btn';
+    paperBtn.innerHTML = `<span>${paperName}</span><span>+</span>`;
+    const paperBody = document.createElement('div');
+    paperBody.className = 'paper-body';
+    paperBtn.onclick = () => paperBody.classList.toggle('open');
+    block.appendChild(paperBtn);
+    block.appendChild(paperBody);
+
+    Object.entries(options).forEach(([optName, topics]) => {
+      const hasTopics = isTopicsObject(topics);
+      const optBtn = document.createElement('button');
+      optBtn.className = 'opt-btn';
+      optBtn.textContent = optName;
+      const optBody = document.createElement('div');
+      optBody.className = 'opt-body';
+
+      if (hasTopics){
+        Object.entries(topics).forEach(([topicName, lessons]) => {
+          const topicBtn = document.createElement('button');
+          topicBtn.className = 'topic-btn';
+          topicBtn.textContent = topicName;
+          const lessonList = document.createElement('div');
+          lessonList.className = 'lesson-list';
+          topicBtn.onclick = () => lessonList.classList.toggle('open');
+
+          lessons.forEach(lesson => {
+            const isLive = typeof lesson === 'string';
+            const lessonName = isLive ? lesson : lesson.name;
+            const li = document.createElement('button');
+            li.className = 'lesson-item' + (isLive ? '' : ' soon');
+            li.innerHTML = isLive
+              ? lessonName
+              : `${lessonName} <span class="soon-tag">Coming soon</span>`;
+            li.onclick = () => selectLesson(li, `${paperName} → ${optName} → ${topicName} → ${lessonName}`, lessonName, isLive);
+            lessonList.appendChild(li);
+          });
+
+          optBody.appendChild(topicBtn);
+          optBody.appendChild(lessonList);
+        });
+      } else {
+        // Option itself has no topic breakdown yet — it's a single
+        // selectable leaf, either live or coming soon.
+        const isLive = typeof topics === 'string';
+        optBtn.classList.add(isLive ? '' : 'soon');
+        if (!isLive){
+          optBtn.innerHTML = `${optName} <span class="soon-tag">Coming soon</span>`;
+        }
+        optBtn.onclick = () => selectLesson(optBtn, `${paperName} → ${optName}`, optName, isLive);
+      }
+
+      if (hasTopics){
+        optBtn.onclick = () => optBody.classList.toggle('open');
+      }
+
+      optBody.style.display = 'none';
+      optBtn.addEventListener('click', () => {
+        optBody.style.display = optBody.style.display === 'none' ? 'block' : 'none';
+      });
+
+      paperBody.appendChild(optBtn);
+      paperBody.appendChild(optBody);
+    });
+
+    treeEl.appendChild(block);
+    if (pIdx === 0) paperBody.classList.add('open');
+  });
+}
+buildTree();
+
+function selectLesson(el, path, shortName, isLive){
+  document.querySelectorAll('.lesson-item.active').forEach(n => n.classList.remove('active'));
+  if (el.classList.contains('lesson-item')) el.classList.add('active');
+  currentLesson = shortName;
+  currentPath = path;
+  document.getElementById('loc-tag').textContent = 'GRID REF — ' + path.toUpperCase();
+  document.getElementById('lesson-title').textContent = shortName;
+  if (isLive){
+    addMessage('system-note', `Tutor focused on: ${path}`);
+  } else {
+    addMessage('system-note', `${path} — full interactive lesson coming soon. The tutor can still help with questions on this topic in the meantime.`);
+  }
+}
+
+/* ---------------- CHAT ---------------- */
+const chatScroll = document.getElementById('chat-scroll');
+const inputEl = document.getElementById('input');
+const sendBtn = document.getElementById('send');
+let history = [];
+
+function addMessage(role, text){
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  chatScroll.appendChild(div);
+  chatScroll.scrollTop = chatScroll.scrollHeight;
+  return div;
+}
+
+function buildSyllabusOutline(){
+  let lines = [];
+  Object.entries(TREE).forEach(([paperName, options]) => {
+    lines.push(paperName);
+    Object.entries(options).forEach(([optName, topics]) => {
+      lines.push('  ' + optName);
+      Object.entries(topics).forEach(([topicName, lessons]) => {
+        lines.push('    ' + topicName);
+        lessons.forEach(l => lines.push('      ' + l));
+      });
+    });
+  });
+  return lines.join('\n');
+}
+
+async function sendMessage(){
+  const text = inputEl.value.trim();
+  if (!text) return;
+  inputEl.value = '';
+  sendBtn.disabled = true;
+  addMessage('user', text);
+  history.push({role:'user', content:text});
+
+  const typing = addMessage('typing', 'Tutor is thinking…');
+  typing.classList.add('typing');
+
+  const systemPrompt = `You are the tutor inside the "IB Geography Learning Hub," a study bot for IB Diploma Geography students.
+Stay strictly within the IB Geography syllabus below. If asked about something outside this syllabus, gently redirect the student back to it.
+Currently selected lesson/topic: ${currentPath || "none selected yet — encourage the student to pick a lesson from the sidebar, or ask what they'd like help with generally"}.
+Teach at the level of an IB Geography student (SL/HL). Use accurate terminology, real case study examples where relevant, and IB command-term style (define, explain, evaluate, examine) when appropriate. Keep answers focused and exam-relevant. Ask a short check-for-understanding question when it helps.
+
+Full syllabus map for reference:
+${buildSyllabusOutline()}`;
+
+  try{
+    // Calls our own backend (/api/chat) — the backend holds the real API key
+    // and talks to Anthropic on the server side, so the key is never exposed
+    // in the browser.
+    const token = await getAccessToken();
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({
+        system: systemPrompt,
+        messages: history
+      })
+    });
+    const data = await response.json();
+    if (response.status === 401){
+      typing.remove();
+      addMessage('bot', "Your session expired — please log in again.");
+      return;
+    }
+    if (data.error){
+      throw new Error(data.error);
+    }
+    const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text);
+    const reply = textBlocks.join('\n') || "Sorry, I couldn't generate a response just then.";
+    typing.remove();
+    addMessage('bot', reply);
+    history.push({role:'assistant', content: reply});
+  }catch(err){
+    typing.remove();
+    addMessage('bot', 'Something went wrong reaching the tutor. Please try again.');
+    console.error(err);
+  }finally{
+    sendBtn.disabled = false;
+  }
+}
+
+sendBtn.onclick = sendMessage;
+inputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+addMessage('bot', "Welcome — I'm your IB Geography tutor. Pick a lesson from the map on the left, or just ask a question to get started.");
+</script>
+
+</body>
+</html>
