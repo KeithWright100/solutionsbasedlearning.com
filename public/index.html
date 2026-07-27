@@ -5,6 +5,7 @@
 <title>IB Geography Learning Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 <style>
   :root{
     --paper:#eae1cb;
@@ -246,6 +247,41 @@
     font-family:var(--font-mono);
     font-size:11.5px;
     text-align:center;
+  }
+  .msg.bot h1, .msg.bot h2, .msg.bot h3{
+    font-family:var(--font-display);
+    margin:14px 0 6px;
+    line-height:1.25;
+  }
+  .msg.bot h3{font-size:16px;}
+  .msg.bot p{margin:0 0 10px;}
+  .msg.bot p:last-child{margin-bottom:0;}
+  .msg.bot ul, .msg.bot ol{margin:0 0 10px; padding-left:22px;}
+  .msg.bot li{margin-bottom:4px;}
+  .msg.bot strong{color:var(--river-deep);}
+  .msg.bot hr{border:none; border-top:1px solid var(--contour); margin:14px 0;}
+  .msg.bot table{
+    border-collapse:collapse;
+    margin:8px 0 14px;
+    font-size:13.5px;
+  }
+  .msg.bot th, .msg.bot td{
+    border:1px solid var(--contour);
+    padding:6px 10px;
+    text-align:left;
+  }
+  .msg.bot th{
+    background:var(--paper-dark);
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    text-transform:uppercase;
+  }
+  .msg.bot code{
+    background:var(--paper-dark);
+    padding:1px 5px;
+    border-radius:3px;
+    font-family:var(--font-mono);
+    font-size:0.9em;
   }
 
   #composer{
@@ -663,7 +699,11 @@ let history = [];
 function addMessage(role, text){
   const div = document.createElement('div');
   div.className = 'msg ' + role;
-  div.textContent = text;
+  if (role === 'bot' && window.marked){
+    div.innerHTML = marked.parse(text);
+  } else {
+    div.textContent = text;
+  }
   chatScroll.appendChild(div);
   chatScroll.scrollTop = chatScroll.scrollHeight;
   return div;
