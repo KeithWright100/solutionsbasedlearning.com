@@ -674,11 +674,20 @@ function buildSyllabusOutline(){
   Object.entries(TREE).forEach(([paperName, options]) => {
     lines.push(paperName);
     Object.entries(options).forEach(([optName, topics]) => {
-      lines.push('  ' + optName);
-      Object.entries(topics).forEach(([topicName, lessons]) => {
-        lines.push('    ' + topicName);
-        lessons.forEach(l => lines.push('      ' + l));
-      });
+      const hasTopics = isTopicsObject(topics);
+      if (hasTopics){
+        lines.push('  ' + optName);
+        Object.entries(topics).forEach(([topicName, lessons]) => {
+          lines.push('    ' + topicName);
+          lessons.forEach(l => {
+            const name = typeof l === 'string' ? l : l.name + ' (coming soon)';
+            lines.push('      ' + name);
+          });
+        });
+      } else {
+        const label = typeof topics === 'string' ? optName : optName + ' (coming soon)';
+        lines.push('  ' + label);
+      }
     });
   });
   return lines.join('\n');
