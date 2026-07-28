@@ -2,820 +2,276 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IB Geography Learning Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBL — Solutions Based Learning</title>
+<meta name="description" content="Solutions Based Learning. We do not fight AI. We teach students how to think with AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
 <style>
-  :root{
-    --paper:#eae1cb;
-    --paper-dark:#ded2b0;
-    --ink:#1c2a2e;
-    --ink-soft:#4a5c5c;
-    --contour:#7fa89c;
-    --sbl-teal:#0d9488;
-    --sbl-teal-light:#14b8a6;
-    --sbl-navy:#0f2a44;
-    --sbl-navy-deep:#081522;
-    --river:#0d9488;      /* was green-river, now SBL teal */
-    --river-deep:#0f2a44; /* was river-deep, now SBL navy */
-    --elevation:#a9762c;
-    --white-ish:#f7f2e4;
-    --font-display:'Fraunces', serif;
-    --font-body:'Source Sans 3', sans-serif;
-    --font-mono:'IBM Plex Mono', monospace;
+
+  /* ---- Top band: lockup + quote ---- */
+  .topband {
+    position: relative; z-index: 1;
+    max-width: 1180px; margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
   }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;height:100%;}
-  body{
-    font-family:var(--font-body);
-    color:var(--ink);
-    background:
-      repeating-radial-gradient(circle at 20% 30%, transparent 0 26px, rgba(13,148,136,0.10) 27px 28px, transparent 29px 60px),
-      repeating-radial-gradient(circle at 80% 75%, transparent 0 34px, rgba(13,148,136,0.08) 35px 36px, transparent 37px 70px),
-      var(--paper);
-    display:flex;
-    height:100vh;
-    overflow:hidden;
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.9rem, 2vw, 1.5rem);
+  }
+  .lockup__sbl {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.2rem, 8vw, 5rem);
+    line-height: 1;
+    margin: 0;
+    background: linear-gradient(160deg, var(--teal-bright) 0%, var(--teal) 55%, var(--white) 130%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lockup__divider { width: 2px; align-self: stretch; background: var(--navy-line); }
+  .lockup__text { line-height: 1.12; }
+  .lockup__text .name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1rem, 2.4vw, 1.5rem);
+    color: var(--white);
+  }
+  .lockup__text .name .accent { color: var(--teal-bright); }
+  .lockup__tag {
+    margin: 0.9rem 0 0;
+    font-family: var(--font-mono);
+    font-size: clamp(0.58rem, 1.2vw, 0.7rem);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate);
   }
 
-  /* ---------- SIDEBAR ---------- */
-  #sidebar{
-    width:340px;
-    min-width:340px;
-    background:var(--white-ish);
-    border-right:2px solid var(--sbl-navy);
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
+  .topquote {
+    border-left: 2px solid var(--teal);
+    padding-left: 1.5rem;
   }
-  #sidebar-head{
-    padding:20px 20px 14px;
-    border-bottom:1px solid var(--contour);
-    background:var(--sbl-navy);
+  .topquote p {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+    line-height: 1.45;
+    margin: 0;
+    color: var(--white);
   }
-  #sidebar-head .eyebrow{
-    font-family:var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--sbl-teal-light);
-  }
-  #sidebar-head h1{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:24px;
-    margin:4px 0 2px;
-    line-height:1.15;
-    color:#fff;
-  }
-  #sidebar-head .sub{
-    font-size:12.5px;
-    color:rgba(255,255,255,0.65);
-  }
-  #tree{
-    flex:1;
-    overflow-y:auto;
-    padding:10px 10px 24px;
-  }
-  #tree::-webkit-scrollbar{width:8px;}
-  #tree::-webkit-scrollbar-thumb{background:var(--contour);border-radius:4px;}
+  .topquote .em { color: var(--teal-bright); font-weight: 600; }
 
-  .paper-block{margin-bottom:6px;}
-  .paper-btn{
-    width:100%;
-    text-align:left;
-    background:var(--paper-dark);
-    border:1px solid var(--sbl-navy);
-    border-radius:3px;
-    padding:8px 10px;
-    font-family:var(--font-mono);
-    font-size:12.5px;
-    letter-spacing:0.03em;
-    color:var(--ink);
-    cursor:pointer;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:8px;
-  }
-  .paper-btn:hover{background:var(--sbl-teal);color:#fff;}
-  .paper-body{
-    padding:6px 4px 4px 10px;
-    display:none;
-  }
-  .paper-body.open{display:block;}
-
-  .opt-btn{
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    border-left:2px solid var(--sbl-teal);
-    padding:6px 8px;
-    font-family:var(--font-body);
-    font-weight:600;
-    font-size:13.5px;
-    color:var(--sbl-navy);
-    cursor:pointer;
-    margin-top:2px;
-  }
-  .opt-btn:hover{background:rgba(13,148,136,0.08);}
-  .opt-body{padding-left:10px;display:none;}
-  .opt-body.open{display:block;}
-
-  .topic-btn{
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    padding:5px 6px 5px 10px;
-    font-size:12.8px;
-    font-weight:600;
-    color:var(--ink);
-    cursor:pointer;
-    border-left:2px dotted var(--contour);
-    margin-top:1px;
-  }
-  .topic-btn:hover{color:var(--sbl-navy);}
-  .lesson-list{padding-left:14px;display:none;}
-  .lesson-list.open{display:block;}
-
-  .lesson-item{
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    padding:4px 6px;
-    font-size:12px;
-    color:var(--ink-soft);
-    cursor:pointer;
-    border-radius:2px;
-    font-family:var(--font-body);
-  }
-  .lesson-item:hover{background:var(--paper-dark);color:var(--ink);}
-  .lesson-item.active{
-    background:var(--sbl-teal);
-    color:#fff;
-    font-weight:600;
-  }
-  .lesson-item.soon, .opt-btn.soon{
-    opacity:0.5;
-  }
-  .lesson-item.soon:hover, .opt-btn.soon:hover{
-    opacity:0.75;
-  }
-  .soon-tag{
-    display:inline-block;
-    font-family:var(--font-mono);
-    font-size:9.5px;
-    letter-spacing:0.04em;
-    text-transform:uppercase;
-    color:var(--elevation);
-    border:1px solid var(--elevation);
-    border-radius:3px;
-    padding:1px 5px;
-    margin-left:6px;
-    opacity:1;
-    vertical-align:middle;
+  @media (max-width: 780px) {
+    .topband { grid-template-columns: 1fr; }
   }
 
-  /* ---------- MAIN ---------- */
-  #main{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    min-width:0;
+  /* ---- Value / Purpose ---- */
+  .vp {
+    position: relative; z-index: 1;
+    max-width: 1000px; margin: 0 auto;
+    padding: 1rem 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
-  #topbar{
-    padding:16px 28px;
-    border-bottom:2px solid var(--sbl-navy);
-    background:var(--white-ish);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+  .vp__card { border: 1px solid var(--navy-line); background: var(--navy-raised); border-radius: 4px; padding: 1.9rem; }
+  .vp__icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--teal-bright); background: rgba(45,225,203,0.1);
+    color: var(--teal-bright); margin-bottom: 1.1rem;
   }
-  #topbar .loc{
-    font-family:var(--font-mono);
-    font-size:11px;
-    color:var(--sbl-teal);
-    letter-spacing:0.06em;
-    text-transform:uppercase;
+  .vp__icon svg { width: 19px; height: 19px; }
+  .vp__card h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin: 0 0 0.6rem; }
+  .vp__card p { color: var(--slate); line-height: 1.6; margin: 0; font-size: 0.98rem; }
+
+  /* ---- Problems ---- */
+  .problems { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+  .problems__head { text-align: center; margin-bottom: 2.2rem; }
+  .problems__head h2 {
+    font-family: var(--font-display); font-weight: 600; font-size: clamp(1.3rem, 3vw, 1.7rem);
+    margin: 0; display: inline-flex; align-items: center; gap: 1rem;
   }
-  #topbar h2{
-    font-family:var(--font-display);
-    font-size:19px;
-    font-weight:600;
-    margin:2px 0 0;
+  .problems__head h2::before, .problems__head h2::after { content: ""; width: 40px; height: 1px; background: var(--navy-line); }
+  .problems__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.6rem; text-align: center; }
+  .problem__icon {
+    width: 56px; height: 56px; margin: 0 auto 0.9rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--navy-line); color: var(--teal-bright);
   }
-  #legend{
-    font-family:var(--font-mono);
-    font-size:10.5px;
-    color:var(--ink-soft);
-    text-align:right;
-    line-height:1.5;
+  .problem__icon svg { width: 24px; height: 24px; }
+  .problem p { font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin: 0; max-width: 16ch; margin-inline: auto; }
+
+  /* ---- Closing band: battlefield line + pathway teaser ---- */
+  .closing {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--navy-line);
+    background: linear-gradient(135deg, var(--navy-raised) 0%, #0d2033 100%);
+    padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+  }
+  .closing__inner {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: center;
+  }
+  .closing h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(1.4rem, 3.6vw, 2rem); line-height: 1.25; margin: 0 0 0.8rem;
+  }
+  .closing h2 .accent { color: var(--teal-bright); }
+  .closing p { color: var(--slate); max-width: 56ch; margin: 0; line-height: 1.6; }
+  .pathway-teaser { display: flex; justify-content: flex-end; gap: clamp(0.8rem, 2vw, 1.6rem); flex-wrap: wrap; }
+  .pt-node { text-align: center; }
+  .pt-node__icon {
+    width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 0.5rem;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--teal-bright); background: rgba(45,225,203,0.08); color: var(--teal-bright);
+  }
+  .pt-node__icon svg { width: 20px; height: 20px; }
+  .pt-node__label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+  @media (max-width: 780px) {
+    .closing__inner { grid-template-columns: 1fr; }
+    .pathway-teaser { justify-content: flex-start; }
   }
 
-  #chat-view{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    min-height:0;
+  /* ---- Click-anywhere entry banner ---- */
+  .enter {
+    position: relative; z-index: 1;
+    display: block;
+    text-align: center;
+    padding: clamp(1.6rem, 4vw, 2.1rem) 1.5rem;
+    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-bright) 100%);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    transition: filter 0.2s var(--ease);
   }
+  .enter:hover, .enter:focus-visible { filter: brightness(1.08); }
+  .enter__mark { display: inline-block; margin: 0 0.9rem; animation: pulseMark 2.4s var(--ease) infinite; }
+  @keyframes pulseMark { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-  #chat-scroll{
-    flex:1;
-    overflow-y:auto;
-    padding:24px 28px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-  }
-  .msg{
-    max-width:640px;
-    padding:12px 15px;
-    border-radius:6px;
-    font-size:14.5px;
-    line-height:1.55;
-    white-space:pre-wrap;
-  }
-  .msg.bot{
-    background:var(--white-ish);
-    border:1px solid var(--contour);
-    align-self:flex-start;
-    border-top-left-radius:0;
-  }
-  .msg.user{
-    background:var(--sbl-teal);
-    color:#fff;
-    align-self:flex-end;
-    border-top-right-radius:0;
-  }
-  .msg.system-note{
-    align-self:center;
-    background:none;
-    border:1px dashed var(--elevation);
-    color:var(--elevation);
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    text-align:center;
-  }
-  .msg.bot h1, .msg.bot h2, .msg.bot h3{
-    font-family:var(--font-display);
-    margin:14px 0 6px;
-    line-height:1.25;
-  }
-  .msg.bot h3{font-size:16px;}
-  .msg.bot p{margin:0 0 10px;}
-  .msg.bot p:last-child{margin-bottom:0;}
-  .msg.bot ul, .msg.bot ol{margin:0 0 10px; padding-left:22px;}
-  .msg.bot li{margin-bottom:4px;}
-  .msg.bot strong{color:var(--sbl-navy);}
-  .msg.bot hr{border:none; border-top:1px solid var(--contour); margin:14px 0;}
-  .msg.bot table{
-    border-collapse:collapse;
-    margin:8px 0 14px;
-    font-size:13.5px;
-  }
-  .msg.bot th, .msg.bot td{
-    border:1px solid var(--contour);
-    padding:6px 10px;
-    text-align:left;
-  }
-  .msg.bot th{
-    background:var(--paper-dark);
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    text-transform:uppercase;
-  }
-  .msg.bot code{
-    background:var(--paper-dark);
-    padding:1px 5px;
-    border-radius:3px;
-    font-family:var(--font-mono);
-    font-size:0.9em;
-  }
-
-  #composer{
-    border-top:2px solid var(--sbl-navy);
-    background:var(--white-ish);
-    padding:14px 28px 18px;
-    display:flex;
-    gap:10px;
-  }
-  #composer textarea{
-    flex:1;
-    resize:none;
-    border:1px solid var(--sbl-navy);
-    border-radius:4px;
-    padding:10px 12px;
-    font-family:var(--font-body);
-    font-size:14px;
-    height:44px;
-    background:var(--paper);
-  }
-  #composer textarea:focus{outline:2px solid var(--sbl-teal);outline-offset:1px;}
-  #composer button{
-    background:var(--sbl-navy);
-    color:#fff;
-    border:none;
-    border-radius:4px;
-    padding:0 20px;
-    font-family:var(--font-body);
-    font-weight:600;
-    font-size:14px;
-    cursor:pointer;
-  }
-  #composer button:hover{background:var(--sbl-teal);}
-  #composer button:disabled{opacity:0.5;cursor:default;}
-
-  .typing{
-    font-family:var(--font-mono);
-    font-size:12px;
-    color:var(--ink-soft);
-    align-self:flex-start;
-  }
-
-  /* ---------- LESSON MENU (5-section framework) ---------- */
-  #lesson-menu{
-    flex:1;
-    overflow-y:auto;
-    padding:26px 28px 30px;
-    display:none;
-  }
-  .lm-breadcrumb{
-    font-family:var(--font-mono);
-    font-size:11px;
-    color:var(--ink-soft);
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-  }
-  .lm-title{
-    font-family:var(--font-display);
-    font-size:23px;
-    font-weight:600;
-    margin:4px 0 4px;
-    color:var(--sbl-navy);
-  }
-  .lm-sub{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin:0 0 20px;
-  }
-  .mode-grid{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    max-width:720px;
-  }
-  .mode-card{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    background:var(--white-ish);
-    border:1px solid var(--contour);
-    border-radius:8px;
-    padding:14px 16px;
-    cursor:pointer;
-    transition:box-shadow .15s, border-color .15s, transform .15s;
-  }
-  .mode-card:hover{
-    border-color:var(--sbl-teal);
-    box-shadow:0 3px 14px rgba(13,148,136,0.18);
-    transform:translateY(-1px);
-  }
-  .mode-icon{
-    width:44px;
-    height:44px;
-    border-radius:9px;
-    background:linear-gradient(135deg, var(--sbl-teal-light), var(--sbl-navy));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    flex-shrink:0;
-    color:#fff;
-  }
-  .mode-text{flex:1;min-width:0;}
-  .mode-label{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:15px;
-    color:var(--ink);
-  }
-  .mode-desc{
-    font-size:12.5px;
-    color:var(--ink-soft);
-    margin-top:2px;
-    line-height:1.4;
-  }
-  .mode-btn{
-    background:var(--sbl-teal);
-    color:#fff;
-    border:none;
-    border-radius:5px;
-    padding:9px 16px;
-    font-family:var(--font-body);
-    font-weight:600;
-    font-size:13px;
-    cursor:pointer;
-    flex-shrink:0;
-    white-space:nowrap;
-  }
-  .mode-btn:hover{background:var(--sbl-navy);}
-
-  /* ---------- AUTH SCREEN ---------- */
-  #auth-screen{
-    width:100%;
-    height:100%;
-    display:flex;
-    background:var(--sbl-navy-deep);
-  }
-  #auth-visual{
-    flex:1.4;
-    position:relative;
-    overflow:hidden;
-    display:none;
-  }
-  #auth-visual img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    display:block;
-  }
-  @media(min-width:860px){
-    #auth-visual{display:block;}
-  }
-  #auth-panel{
-    flex:1;
-    min-width:320px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:32px;
-    background:linear-gradient(160deg, var(--sbl-navy), var(--sbl-navy-deep));
-  }
-  #auth-card{
-    width:100%;
-    max-width:360px;
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.14);
-    border-radius:10px;
-    padding:30px 28px 26px;
-    backdrop-filter:blur(10px);
-  }
-  #auth-card .eyebrow{
-    font-family:var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--sbl-teal-light);
-  }
-  #auth-card h1{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:26px;
-    margin:6px 0 2px;
-    color:#fff;
-  }
-  .auth-sub{
-    font-size:13px;
-    color:rgba(255,255,255,0.65);
-    margin:0 0 18px;
-  }
-  #auth-form{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  #auth-form input{
-    border:1px solid rgba(255,255,255,0.25);
-    border-radius:4px;
-    padding:10px 12px;
-    font-family:var(--font-body);
-    font-size:14px;
-    background:rgba(255,255,255,0.92);
-    color:var(--ink);
-  }
-  #auth-form input:focus{outline:2px solid var(--sbl-teal-light);outline-offset:1px;}
-  #auth-form button{
-    background:var(--sbl-teal);
-    color:#fff;
-    border:none;
-    border-radius:4px;
-    padding:11px;
-    font-weight:600;
-    font-size:14px;
-    cursor:pointer;
-    margin-top:4px;
-  }
-  #auth-form button:hover{background:var(--sbl-teal-light);}
-  .auth-link{
-    background:none;
-    border:none;
-    color:var(--sbl-teal-light);
-    font-size:12.5px;
-    cursor:pointer;
-    margin-top:14px;
-    padding:0;
-    text-decoration:underline;
-  }
-  #auth-error{
-    font-size:12.5px;
-    color:#ff8a80;
-    margin-top:10px;
-    min-height:14px;
-  }
-
-  #topbar-right{
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  #back-to-menu-btn{
-    display:none;
-    background:none;
-    border:1px solid var(--sbl-teal);
-    color:var(--sbl-teal);
-    border-radius:4px;
-    padding:6px 12px;
-    font-family:var(--font-body);
-    font-size:12.5px;
-    cursor:pointer;
-  }
-  #back-to-menu-btn:hover{background:var(--sbl-teal);color:#fff;}
-  #logout-btn{
-    background:none;
-    border:1px solid var(--sbl-navy);
-    border-radius:4px;
-    padding:6px 12px;
-    font-family:var(--font-body);
-    font-size:12.5px;
-    cursor:pointer;
-    color:var(--sbl-navy);
-  }
-  #logout-btn:hover{background:var(--paper-dark);}
+  body { cursor: pointer; }
 </style>
 </head>
 <body>
+<a class="sbl-skip" href="#main">Skip to content</a>
+<div class="sbl-contours" aria-hidden="true"></div>
 
-<div id="auth-screen">
-  <div id="auth-visual">
-    <img src="assets/sbl-brand.png" alt="Solutions Based Learning — Empowering Thinking. Enhancing Learning. Inspiring Futures.">
-  </div>
-  <div id="auth-panel">
-    <div id="auth-card">
-      <div class="eyebrow">Survey Sheet · Diploma Programme</div>
-      <h1>IB Geography Hub</h1>
-      <p class="auth-sub">Sign in with your school email to start.</p>
-      <form id="auth-form">
-        <input type="email" id="auth-email" placeholder="Email" required autocomplete="email">
-        <input type="password" id="auth-password" placeholder="Password" required autocomplete="current-password">
-        <button type="submit" id="auth-submit">Log in</button>
-      </form>
-      <button id="auth-toggle" class="auth-link">Need an account? Sign up</button>
-      <div id="auth-error"></div>
+<!-- The whole page is a click-through into the Hub. The anchor at the
+     bottom remains the real, keyboard-accessible link; the page-level
+     click handler just extends that same action to a click anywhere
+     else, so scrolling and text selection still work normally. -->
+<main id="main">
+
+  <section class="topband">
+    <div class="lockup">
+      <p class="lockup__sbl">SBL</p>
+      <div class="lockup__divider"></div>
+      <div class="lockup__text">
+        <span class="name">Solutions<br><span class="accent">Based</span><br>Learning</span>
+        <p class="lockup__tag">Empowering thinking &middot; Enhancing learning &middot; Inspiring futures</p>
+      </div>
     </div>
-  </div>
-</div>
+    <blockquote class="topquote">
+      <p>In the age of AI, students who learn how to <span class="em">think</span> will always outperform those who just ask for <span class="em">answers</span>.</p>
+    </blockquote>
+  </section>
 
-<div id="app-shell" style="display:none;">
-<div id="sidebar">
-  <div id="sidebar-head">
-    <div class="eyebrow">Survey Sheet · Diploma Programme</div>
-    <h1>IB Geography Hub</h1>
-    <div class="sub">Select a lesson to focus the tutor</div>
-  </div>
-  <div id="tree"></div>
-</div>
-
-<div id="main">
-  <div id="topbar">
-    <div>
-      <div class="loc" id="loc-tag">GRID REF — NO LESSON SELECTED</div>
-      <h2 id="lesson-title">Choose a lesson from the map to begin</h2>
+  <section class="vp" aria-label="Our value and purpose">
+    <div class="vp__card">
+      <span class="vp__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/></svg></span>
+      <h2>Our Value</h2>
+      <p>We turn educational challenges into practical, AI-enhanced solutions that save time, deepen understanding and drive better outcomes.</p>
     </div>
-    <div id="topbar-right">
-      <div id="legend">— contour = topic<br>· · · = lesson path<br>█ teal = active selection</div>
-      <button id="back-to-menu-btn">◄ Lesson Menu</button>
-      <button id="logout-btn">Log out</button>
+    <div class="vp__card">
+      <span class="vp__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></span>
+      <h2>Our Purpose</h2>
+      <p>To help teachers teach better and students think deeper, through intelligent, solutions-based learning.</p>
     </div>
-  </div>
+  </section>
 
-  <div id="lesson-menu"></div>
-
-  <div id="chat-view">
-    <div id="chat-scroll"></div>
-    <div id="composer">
-      <textarea id="input" placeholder="Ask about the current lesson..."></textarea>
-      <button id="send">Send</button>
+  <section class="problems" aria-label="Problems SBL solves">
+    <div class="problems__head"><h2>We solve the problems that matter</h2></div>
+    <div class="problems__grid">
+      <div class="problem">
+        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <p>Too much teacher workload</p>
+      </div>
+      <div class="problem">
+        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+        <p>Students lack independence and confidence</p>
+      </div>
+      <div class="problem">
+        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <p>Feedback is too slow or inconsistent</p>
+      </div>
+      <div class="problem">
+        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/><path d="M9.5 9.5l1.2 1.2 3-3"/></svg></span>
+        <p>Misconceptions go unnoticed for too long</p>
+      </div>
+      <div class="problem">
+        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg></span>
+        <p>AI is used ineffectively or inappropriately</p>
+      </div>
+      <div class="problem">
+        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-16 2 2-7 16-4-2z"/><path d="M12 19l-5.5 2 2-5.5"/></svg></span>
+        <p>Staff need clarity, training and support with AI</p>
+      </div>
     </div>
-  </div>
-</div>
-</div><!-- /app-shell -->
+  </section>
 
-<script type="module">
-  try {
-    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-    // Replace these two values with your own Supabase project's URL and
-    // anon/public key (Project Settings → API in the Supabase dashboard).
-    // The anon key is safe to expose in frontend code — it only allows
-    // what your Supabase security rules permit.
-    const SUPABASE_URL = "https://hkcnxactfpybwpntukrx.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhrY254YWN0ZnB5YndwbnR1a3J4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNjM4ODgsImV4cCI6MjEwMDYzOTg4OH0.KU6kxLQbIj4GBTxPP0EZC9hLXimghv7DACQVMSJ2wbs";
-    window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    window.dispatchEvent(new Event('supabase-ready'));
-  } catch (err) {
-    console.error('Failed to load Supabase library:', err);
-    window.dispatchEvent(new Event('supabase-failed'));
-  }
-</script>
+  <section class="closing">
+    <div class="closing__inner">
+      <div>
+        <span class="sbl-eyebrow">Don't let AI win the battlefield</span>
+        <h2>Teach it. Use technology <span class="accent">with purpose</span>.</h2>
+        <p>See the benefits in improving thinking, critical thinking, assessment and productive lesson time.</p>
+      </div>
+      <div class="pathway-teaser" aria-hidden="true">
+        <div class="pt-node">
+          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/><path d="M9.5 21h5"/></svg></span>
+          <span class="pt-node__label">Think</span>
+        </div>
+        <div class="pt-node">
+          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+          <span class="pt-node__label">Analyse</span>
+        </div>
+        <div class="pt-node">
+          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v3M12 18v3M5 12H3m18 0h-2"/><path d="M7 12a5 5 0 0 1 10 0"/><path d="M4 20h16"/></svg></span>
+          <span class="pt-node__label">Evaluate</span>
+        </div>
+        <div class="pt-node">
+          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="9" r="6"/><path d="M9 21h6M10 17.5h4"/></svg></span>
+          <span class="pt-node__label">Create</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="enter" href="/humanities-hub">
+    <span class="enter__mark" aria-hidden="true">&#10022;</span>Click anywhere to enter<span class="enter__mark" aria-hidden="true">&#10022;</span>
+  </a>
+
+</main>
+
 <script>
-/* ---------------- AUTH ---------------- */
-let sb = null;
-let isSignupMode = false;
-
-function initAuth(){
-  sb = window.supabaseClient;
-
-  const form = document.getElementById('auth-form');
-  const toggle = document.getElementById('auth-toggle');
-  const errorEl = document.getElementById('auth-error');
-  const submitBtn = document.getElementById('auth-submit');
-
-  toggle.onclick = () => {
-    isSignupMode = !isSignupMode;
-    submitBtn.textContent = isSignupMode ? 'Sign up' : 'Log in';
-    toggle.textContent = isSignupMode ? 'Already have an account? Log in' : 'Need an account? Sign up';
-    errorEl.textContent = '';
-  };
-
-  form.onsubmit = async (e) => {
-    e.preventDefault();
-    errorEl.textContent = '';
-    submitBtn.disabled = true;
-    const email = document.getElementById('auth-email').value.trim();
-    const password = document.getElementById('auth-password').value;
-
-    const { error } = isSignupMode
-      ? await sb.auth.signUp({ email, password })
-      : await sb.auth.signInWithPassword({ email, password });
-
-    submitBtn.disabled = false;
-
-    if (error){
-      errorEl.textContent = error.message;
-      return;
-    }
-    if (isSignupMode){
-      errorEl.textContent = 'Account created. Check your email to confirm, then log in.';
-    }
-  };
-
-  document.getElementById('logout-btn').onclick = async () => {
-    await sb.auth.signOut();
-  };
-
-  sb.auth.onAuthStateChange((_event, session) => {
-    if (session){
-      document.getElementById('auth-screen').style.display = 'none';
-      document.getElementById('app-shell').style.display = 'flex';
-    } else {
-      document.getElementById('auth-screen').style.display = 'flex';
-      document.getElementById('app-shell').style.display = 'none';
-    }
+  // Click anywhere on the page enters the Hub — but not if the person
+  // is selecting text, and not a second time if they clicked the
+  // real link (avoids double-navigation).
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('a')) return;
+    var selection = window.getSelection();
+    if (selection && selection.toString().length > 0) return;
+    window.location.href = '/humanities-hub';
   });
-}
-
-async function getAccessToken(){
-  const { data } = await sb.auth.getSession();
-  return data?.session?.access_token || null;
-}
-
-window.addEventListener('supabase-ready', initAuth);
-
-window.addEventListener('supabase-failed', () => {
-  const errorEl = document.getElementById('auth-error');
-  const submitBtn = document.getElementById('auth-submit');
-  if (errorEl){
-    errorEl.textContent = "Couldn't connect to the login service. This is often caused by a school or work network blocking part of the connection — try a different network (e.g. mobile data), or ask IT to allow this site.";
-  }
-  if (submitBtn) submitBtn.disabled = true;
-});
-
-// Lessons/options can be a plain string (= live, fully built) or an
-// object { name, live:false } (= shown in the map, faded, "Coming soon").
-function soon(name){ return { name, live:false }; }
-
-const TREE = {
-  "Paper 1: Optional Themes": {
-    "Option A: Freshwater": {
-      "1. Drainage Basin Hydrology and Geomorphology": [
-        "Lesson 1: The Drainage Basin System",
-        "Lesson 2: Discharge",
-        "Lesson 3: Erosion, Transportation and Deposition",
-        "Lesson 4: River Landforms"
-      ],
-      "2. Flooding and Flood Mitigation": [
-        "Lesson 1: Hydrographs",
-        "Lesson 2: Factors Affecting Flood Risk",
-        "Lesson 3: Flood Mitigation",
-        "Lesson 4: Case Studies of Flood Mitigation"
-      ],
-      "3. Water Scarcity and Water Quality": [
-        "Lesson 1: Physical and Economic Water Scarcity",
-        "Lesson 2: Environmental Consequences of Agricultural Activities",
-        "Lesson 3: Human Pressures on Lakes and Aquifers",
-        "Lesson 4: Internationally Shared Water Resource Conflict"
-      ],
-      "4. Water Management Futures": [
-        "Lesson 1: Improving Local Water Management",
-        "Lesson 2: Intervention in Drainage Basins",
-        "Lesson 3: Integrated Drainage Basin Management (IDBM)",
-        "Lesson 4: Freshwater Wetland Management",
-        "Lesson 5: Wetlands Case Study"
-      ]
-    },
-    "Option E: Leisure, Sport and Tourism": soon("Option E: Leisure, Sport and Tourism"),
-    "Option F: Food and Health (HL only)": soon("Option F: Food and Health (HL only)")
-  },
-  "Paper 2": {
-    "1: Changing Population": soon("1: Changing Population"),
-    "2: Global Climate, Vulnerability and Resilience": soon("2: Global Climate, Vulnerability and Resilience"),
-    "3: Global Resource Consumption and Security": soon("3: Global Resource Consumption and Security")
-  },
-  "Paper 3": {
-    "Unit 4: Power, Places and Networks": soon("Unit 4: Power, Places and Networks"),
-    "Unit 5: Human Development and Diversity": soon("Unit 5: Human Development and Diversity"),
-    "Unit 6: Global Risks and Resilience": soon("Unit 6: Global Risks and Resilience")
-  }
-};
-
-/* ---------------- 5-SECTION LESSON FRAMEWORK ---------------- */
-const MODES = [
-  {
-    id:'teach',
-    icon:'&#128214;',
-    label:'Teach Me This Topic',
-    desc:'Interactive explanations, diagrams, examples and case study analysis to help you understand the content.'
-  },
-  {
-    id:'test',
-    icon:'&#129504;',
-    label:'Test My Knowledge',
-    desc:'Check your understanding with a variety of questions and get instant feedback.'
-  },
-  {
-    id:'ib',
-    icon:'&#128221;',
-    label:'IB-Style Questions',
-    desc:'Practice authentic IB-style questions and get detailed feedback and model answers.'
-  },
-  {
-    id:'spaced',
-    icon:'&#128260;',
-    label:'Spaced Retrieval Quiz',
-    desc:"Strengthen your long-term memory with adaptive questions from this and previous lessons."
-  },
-  {
-    id:'challenge',
-    icon:'&#127942;',
-    label:'Challenge Mode',
-    desc:'Push your understanding further with higher-order thinking, synoptic questions and real-world scenarios.'
-  }
-];
-
-const MODE_PROMPTS = {
-  teach:"MODE: TEACH ME THIS TOPIC. Explain the content step-by-step using clear explanations, real examples and case study detail where relevant. Use diagrams described in words where useful. Check understanding with a short question at natural breakpoints.",
-  test:"MODE: TEST MY KNOWLEDGE. Ask the student one question at a time about this lesson's content. Wait for their answer, then give clear, specific feedback before asking the next question. Vary question style (short answer, define, describe).",
-  ib:"MODE: IB-STYLE QUESTIONS. Present authentic IB Geography exam-style questions using proper command terms (define, describe, explain, examine, evaluate, discuss) matched to this lesson's syllabus point and command term level. After the student answers, mark it against IB mark scheme conventions, note what's missing, and show a strong model answer.",
-  spaced:"MODE: SPACED RETRIEVAL QUIZ. Ask a mix of questions from this lesson and earlier related topics already covered, to reinforce long-term memory. Vary difficulty and topic each time.",
-  challenge:"MODE: CHALLENGE. Push the student with higher-order, synoptic questions that connect this topic to broader geographic issues, real-world case studies, and evaluative thinking. Expect and demand depth in their answers."
-};
-
-const MODE_OPENERS = {
-  teach: (name) => `Let's work through **${name}**. Ask me to explain any part of it, request an example or diagram, or just say "start" and I'll walk you through it from the beginning.`,
-  test: (name) => `Time to test your knowledge on **${name}**. Say "start" and I'll ask you a question — answer in your own words and I'll give you feedback.`,
-  ib: (name) => `Let's practice IB-style questions on **${name}**. Say "start" for your first question, written in authentic IB command-term style.`,
-  spaced: (name) => `Spaced retrieval time. I'll mix in questions from **${name}** and earlier topics to help it stick long-term. Say "start" when you're ready.`,
-  challenge: (name) => `Challenge mode: **${name}**. Expect higher-order, synoptic, real-world questions. Say "start" whenever you're ready.`
-};
-
-let currentMode = null;
-
-function renderLessonMenu(path, lessonName){
-  const menu = document.getElementById('lesson-menu');
-  menu.innerHTML = `
-    <div class="lm-breadcrumb">${path}</div>
-    <div class="lm-title">${lessonName}</div>
-    <p class="lm-sub">Pick how you'd like to work on this lesson. You can switch modes any time.</p>
-    <div class="mode-grid">
-      ${MODES.map((m, i) => `
-        <div class="mode-card" data-mode="${m.id}">
-          <div class="mode-icon">${m.icon}</div>
-          <div class="mode-text">
-            <div class="mode-label">${i+1}. ${m.label}</div>
-            <div class="mode-desc">${m.desc}</div>
-          </div>
-          <button class="mode-btn" data-mode="${m.id}">Start &rarr;</
+</script>
+</body>
+</html>
