@@ -14,10 +14,10 @@
   --lh-body:          #4B5566;
   --lh-muted:         #8A93A3;
 
-  --lh-sidebar-bg:    #14161F;
-  --lh-sidebar-line:  #262936;
-  --lh-sidebar-text:  #B7BCC9;
-  --lh-sidebar-dim:   #6B7080;
+  --lh-sidebar-bg:    #262C3B;   /* lightened from near-black #14161F */
+  --lh-sidebar-line:  #3B4356;
+  --lh-sidebar-text:  #CBD1DE;
+  --lh-sidebar-dim:   #8B93A6;
 
   --lh-green:         #22C55E;
   --lh-green-bg:      #E9FBF0;

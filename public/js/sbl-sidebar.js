@@ -14,40 +14,90 @@
         "status": "available",
         "topics": [
           {
-            "title": "1. Drainage basins as systems",
-            "lessons": []
+            "title": "1. Drainage basin hydrology and geomorphology",
+            "lessons": [
+              {
+                "label": "The drainage basin system",
+                "href": "/geography/paper-1/option-a/t1-drainage-basin/l1-the-drainage"
+              },
+              {
+                "label": "Discharge",
+                "href": "/geography/paper-1/option-a/t1-drainage-basin/l2-discharge"
+              },
+              {
+                "label": "Erosion, transportation and deposition",
+                "href": "/geography/paper-1/option-a/t1-drainage-basin/l3-erosion"
+              },
+              {
+                "label": "River landforms",
+                "href": "/geography/paper-1/option-a/t1-drainage-basin/l4-river-landforms"
+              }
+            ]
           },
           {
-            "title": "2. River processes and landforms",
-            "lessons": []
+            "title": "2. Flooding and flood mitigation",
+            "lessons": [
+              {
+                "label": "Hydrographs",
+                "href": "/geography/paper-1/option-a/t2-flooding-and/l1-hydrographs"
+              },
+              {
+                "label": "Factors affecting flood risk",
+                "href": "/geography/paper-1/option-a/t2-flooding-and/l2-factors"
+              },
+              {
+                "label": "Flood mitigation",
+                "href": "/geography/paper-1/option-a/t2-flooding-and/l3-flood-mitigation"
+              },
+              {
+                "label": "Case studies of flood mitigation",
+                "href": "/geography/paper-1/option-a/t2-flooding-and/l4-case-studies-of"
+              }
+            ]
           },
           {
-            "title": "3. Flooding and flood management",
-            "lessons": []
+            "title": "3. Water scarcity and water quality",
+            "lessons": [
+              {
+                "label": "Physical and economic water scarcity",
+                "href": "/geography/paper-1/option-a/t3-water-scarcity/l1-physical-and"
+              },
+              {
+                "label": "Environmental consequences of agricultural activities",
+                "href": "/geography/paper-1/option-a/t3-water-scarcity/l2-environmental"
+              },
+              {
+                "label": "Human pressures on lakes and aquifers",
+                "href": "/geography/paper-1/option-a/t3-water-scarcity/l3-human-pressures"
+              },
+              {
+                "label": "Internationally shared water resource conflict",
+                "href": "/geography/paper-1/option-a/t3-water-scarcity/l4-internationally"
+              }
+            ]
           },
           {
-            "title": "4. Water scarcity and management",
-            "lessons": []
+            "title": "4. Water management futures",
+            "lessons": [
+              {
+                "label": "Improving local water management",
+                "href": "/geography/paper-1/option-a/t4-water/l1-improving-local"
+              },
+              {
+                "label": "Intervention in drainage basins",
+                "href": "/geography/paper-1/option-a/t4-water/l2-intervention-in"
+              },
+              {
+                "label": "Integrated drainage basin management (IDBM)",
+                "href": "/geography/paper-1/option-a/t4-water/l3-integrated"
+              },
+              {
+                "label": "Freshwater wetland management",
+                "href": "/geography/paper-1/option-a/t4-water/l4-freshwater"
+              }
+            ]
           }
         ]
-      },
-      {
-        "slug": "option-b",
-        "label": "Option B: Oceans",
-        "href": null,
-        "status": "soon"
-      },
-      {
-        "slug": "option-c",
-        "label": "Option C: Extreme Environments",
-        "href": null,
-        "status": "soon"
-      },
-      {
-        "slug": "option-d",
-        "label": "Option D: Geophysical Hazards",
-        "href": null,
-        "status": "soon"
       },
       {
         "slug": "option-e",
