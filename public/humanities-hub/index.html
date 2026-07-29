@@ -1,495 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humanities Hub — SBL</title>
-<meta name="description" content="We do not fight AI. We teach students how to think with AI. Geography, History, Economics and Business — a humanities learning ecosystem for the AI age.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/sbl-theme.css">
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Humanities Hub | Solutions Based Learning</title>
 
-  /* Lightened background for this page only — homepage keeps the
-     original deep navy. Teal accent colors are unchanged. */
-  :root {
-    --navy: #22364C;
-    --navy-raised: #2C425C;
-    --navy-line: #3D566F;
-    --ink: #16283C;
-  }
-
-  /* ---------------- Header ---------------- */
-  .header {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1.5rem;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: clamp(1.5rem, 4vw, 2.5rem) 1.5rem 0;
-    flex-wrap: wrap;
-  }
-  .header__lockup {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    text-decoration: none;
-  }
-  .header__sbl {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.6rem;
-    background: linear-gradient(160deg, var(--teal-bright), var(--teal));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .header__text {
-    line-height: 1.15;
-  }
-  .header__text .name {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    color: var(--white);
-  }
-  .header__text .tag {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.1em;
-    color: var(--slate);
-    margin-top: 0.15rem;
-  }
-
-  .pillars {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-  }
-  .pillar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.8rem;
-    border: 1px solid var(--navy-line);
-    border-radius: 100px;
-    background: rgba(23,184,166,0.04);
-  }
-  .pillar__icon {
-    width: 18px; height: 18px;
-    color: var(--teal-bright);
-    flex-shrink: 0;
-  }
-  .pillar__label {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--slate);
-    white-space: nowrap;
-  }
-
-  /* ---------------- Hero ---------------- */
-  .hero {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: clamp(4rem, 10vw, 7.5rem) 1.5rem 3.5rem;
-    text-align: center;
-  }
-  .hero__eyebrow {
-    display: block;
-    margin-bottom: 1.5rem;
-  }
-  .hero__statement {
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1.06;
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-  .hero__statement .no {
-    display: block;
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: var(--slate);
-    font-weight: 500;
-  }
-  .hero__statement .yes {
-    display: block;
-    font-size: clamp(2.4rem, 7.5vw, 4.4rem);
-    background: linear-gradient(100deg, var(--white) 30%, var(--teal-bright) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin-top: 0.35rem;
-  }
-  .hero__sub {
-    margin: 2rem auto 0;
-    max-width: 46ch;
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    color: var(--slate);
-    line-height: 1.6;
-  }
-  .hero__sub strong { color: var(--white); font-weight: 600; }
-
-  /* ---------------- Constellation: pathway + panels ---------------- */
-  .constellation {
-    position: relative;
-    z-index: 1;
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 5rem;
-    display: grid;
-    grid-template-columns: minmax(0,1fr) 88px minmax(0,1fr);
-    column-gap: clamp(1.25rem, 3vw, 3rem);
-    row-gap: 2.25rem;
-  }
-
-  /* Pathway spine */
-  .pathway {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-  }
-  .pathway::before {
-    content: "";
-    position: absolute;
-    top: 6px; bottom: 6px; left: 50%;
-    width: 2px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, var(--slate-dimmer), var(--teal) 12%, var(--teal) 88%, var(--slate-dimmer));
-  }
-  .pathway__node {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .pathway__dot {
-    width: 11px; height: 11px;
-    border-radius: 50%;
-    background: var(--navy);
-    border: 2px solid var(--teal);
-    box-shadow: 0 0 0 4px var(--navy), 0 0 14px rgba(45,225,203,0.35);
-  }
-  .pathway__label {
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.16em;
-    color: var(--teal-bright);
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    white-space: nowrap;
-  }
-
-  /* Subject panels */
-  .panel {
-    position: relative;
-    border-radius: 4px;
-    border: 1px solid var(--navy-line);
-    background: var(--navy-raised);
-    padding: 1.9rem 1.75rem 1.75rem;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 240px;
-  }
-  .panel--geography { grid-column: 1; grid-row: 1; }
-  .panel--history    { grid-column: 3; grid-row: 1; }
-  .panel--economics  { grid-column: 1; grid-row: 2; }
-  .panel--business   { grid-column: 3; grid-row: 2; }
-
-  .panel__texture {
-    position: absolute; inset: 0; z-index: 0;
-    opacity: 0.5;
-    background-repeat: no-repeat;
-    background-position: right -20% bottom -30%;
-    background-size: 60%;
-    pointer-events: none;
-  }
-  .panel__body { position: relative; z-index: 1; display:flex; flex-direction:column; height:100%; }
-
-  .panel__top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.1rem;
-  }
-  .panel__icon {
-    width: 34px; height: 34px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .panel__title {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.55rem;
-    margin: 0 0 0.35rem;
-  }
-  .panel__tagline {
-    color: var(--slate);
-    font-size: 0.95rem;
-    margin: 0 0 1rem;
-    max-width: 28ch;
-  }
-  .panel__skills {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--slate-dim);
-    margin-top: auto;
-    padding-top: 1rem;
-  }
-
-  /* Geography — live */
-  .panel--geography {
-    border-color: rgba(23,184,166,0.4);
-    box-shadow: 0 0 0 1px rgba(23,184,166,0.08), 0 24px 60px -30px rgba(23,184,166,0.45);
-  }
-  .panel__badge--live {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--teal-bright);
-    background: rgba(45,225,203,0.12);
-    color: var(--teal-bright);
-    margin-bottom: 1rem;
-  }
-  .panel__badge--live svg { width: 19px; height: 19px; }
-  .panel--geography .panel__texture {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%2317B8A6' stroke-width='1.4'%3E%3Ccircle cx='320' cy='340' r='40'/%3E%3Ccircle cx='320' cy='340' r='75'/%3E%3Ccircle cx='320' cy='340' r='115'/%3E%3Ccircle cx='320' cy='340' r='160'/%3E%3C/g%3E%3C/svg%3E");
-  }
-  .panel__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-top: 1.4rem;
-    align-self: flex-start;
-    padding: 0.75rem 1.15rem;
-    border-radius: 3px;
-    background: var(--teal);
-    color: var(--ink);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
-    box-shadow: 0 0 0 0 rgba(45,225,203,0);
-  }
-  .panel--geography:hover .panel__cta,
-  .panel--geography:focus-within .panel__cta {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px -8px rgba(45,225,203,0.55);
-    background: var(--teal-bright);
-  }
-  .panel--geography:hover,
-  .panel--geography:focus-within {
-    border-color: var(--teal-bright);
-  }
-  .panel__cta svg { transition: transform 0.25s var(--ease); }
-  .panel--geography:hover .panel__cta svg { transform: translateX(3px); }
-
-  /* Coming soon subjects — each keeps its own identity color, but
-     stays visibly secondary to Geography: no glow, muted title,
-     disabled cursor. Color says "this is History"; greyscale would
-     say "this doesn't matter yet," which isn't the message. */
-  .panel--soon {
-    border-color: var(--slate-dimmer);
-    cursor: default;
-  }
-  .panel--soon::after {
-    content: "";
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: var(--accent);
-    opacity: 0.55;
-  }
-  .panel--soon .panel__title { color: var(--slate); }
-  .panel--soon .sbl-status--soon { color: var(--accent); opacity: 0.8; }
-  .panel--soon .panel__badge {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-  .panel--soon .panel__badge svg { width: 19px; height: 19px; }
-
-  .panel--history   { --accent: #D9A441; }
-  .panel--economics { --accent: #4A9EDB; }
-  .panel--business  { --accent: #B36FE0; }
-
-  .panel--history .panel__texture {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23D9A441' stroke-width='1'%3E%3Cpath d='M280 40 L360 100 L340 200 L380 300 L300 380'/%3E%3Cpath d='M240 60 L300 140 L260 240 L320 340'/%3E%3Cpath d='M200 90 L250 180 L210 280'/%3E%3C/g%3E%3C/svg%3E");
-  }
-  .panel--economics .panel__texture {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpolyline points='220,380 250,320 270,340 300,260 330,290 360,180 390,220' fill='none' stroke='%234A9EDB' stroke-width='1.4'/%3E%3C/svg%3E");
-  }
-  .panel--business .panel__texture {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cpolyline points='220,380 260,340 290,350 330,280 360,300 400,200' fill='none' stroke='%23B36FE0' stroke-width='1.4'/%3E%3Cpolyline points='400,200 380,200 400,180' fill='none' stroke='%23B36FE0' stroke-width='1.4'/%3E%3C/svg%3E");
-  }
-
-  /* Mobile */
-  @media (max-width: 860px) {
-    .constellation {
-      grid-template-columns: 1fr;
+  <style>
+    :root {
+      --navy: #031c33;
+      --deep-navy: #011526;
+      --teal: #00b8b0;
+      --teal-dark: #007c82;
+      --cyan: #20d7e2;
+      --white: #ffffff;
+      --soft-white: #eef7f8;
+      --ink: #062033;
+      --muted: #6b7f8d;
+      --shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --transition: all 0.35s ease;
     }
-    .pathway {
-      grid-column: 1;
-      grid-row: 1;
-      flex-direction: row;
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(0, 184, 176, 0.16), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(32, 215, 226, 0.12), transparent 30%),
+        linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .page { position: relative; min-height: 100vh; overflow: hidden; }
+
+    .network-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(0, 184, 176, 0.18), transparent 18%),
+        radial-gradient(circle at 82% 14%, rgba(32, 215, 226, 0.15), transparent 18%),
+        radial-gradient(circle at 85% 72%, rgba(0, 184, 176, 0.12), transparent 16%);
+    }
+
+    .top-bar {
+      position: relative;
+      padding: 26px 24px;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(1, 21, 38, 0.98), rgba(2, 50, 78, 0.96)),
+        radial-gradient(circle at 20% 25%, rgba(0, 184, 176, 0.32), transparent 26%),
+        radial-gradient(circle at 83% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .top-bar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
       align-items: center;
-      padding: 0 0.25rem 1.5rem;
+      justify-content: space-between;
+      gap: 20px;
     }
-    .pathway::before {
-      top: 50%; bottom: auto; left: 6px; right: 6px; width: auto; height: 2px;
-      transform: translateY(-50%);
-      background: linear-gradient(90deg, var(--slate-dimmer), var(--teal) 12%, var(--teal) 88%, var(--slate-dimmer));
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.85);
+      transition: var(--transition);
     }
-    .pathway__label { writing-mode: horizontal-tb; font-size: 0.6rem; }
-    .pathway__node { flex-direction: column; }
-    .panel--geography { grid-row: 2; }
-    .panel--history    { grid-column: 1; grid-row: 3; }
-    .panel--economics  { grid-column: 1; grid-row: 4; }
-    .panel--business   { grid-column: 1; grid-row: 5; }
-  }
-</style>
+
+    .back-link:hover { color: var(--cyan); }
+    .back-link svg { width: 18px; height: 18px; }
+
+    .top-bar-brand {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .top-bar-brand .teal { color: var(--teal); }
+
+    main {
+      max-width: 1240px;
+      margin: 40px auto 60px;
+      padding: 0 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hub-title {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .hub-kicker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 6px;
+    }
+
+    .hub-kicker::before,
+    .hub-kicker::after {
+      content: "";
+      width: 76px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 124, 130, 0.65));
+    }
+
+    .hub-kicker::after {
+      background: linear-gradient(90deg, rgba(0, 124, 130, 0.65), transparent);
+    }
+
+    .hub-title h1 {
+      font-size: clamp(1.8rem, 3.4vw, 3.1rem);
+      color: var(--navy);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hub-title p {
+      color: #03757a;
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-weight: 650;
+      margin-top: 6px;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .subject-card {
+      position: relative;
+      min-height: 390px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(5, 43, 65, 0.16);
+      background: #dbe6e9;
+      box-shadow: 0 18px 38px rgba(0, 25, 45, 0.15);
+      transition: var(--transition);
+      isolation: isolate;
+      cursor: default;
+    }
+
+    .subject-card.clickable { cursor: pointer; }
+
+    .subject-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s ease, filter 0.4s ease;
+      z-index: -3;
+    }
+
+    .subject-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(1, 21, 38, 0.08), rgba(1, 21, 38, 0.72)),
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 38%);
+    }
+
+    .subject-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 26px 52px rgba(0, 35, 58, 0.24);
+    }
+
+    .subject-card:hover::before {
+      transform: scale(1.08);
+      filter: saturate(1.12) contrast(1.06);
+    }
+
+    .subject-card.disabled { opacity: 0.72; filter: grayscale(0.25); }
+
+    .subject-card.disabled::after {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.78)),
+        linear-gradient(180deg, rgba(1, 21, 38, 0.04), rgba(1, 21, 38, 0.18));
+    }
+
+    .subject-card.disabled:hover { transform: translateY(-5px); opacity: 0.82; }
+
+    .geography::before {
+      background-image:
+        linear-gradient(rgba(0, 45, 65, 0.1), rgba(0, 45, 65, 0.1)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1300&q=80");
+    }
+
+    .history::before {
+      background-image: url("https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1300&q=80");
+    }
+
+    .economics::before {
+      background-image: url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1300&q=80");
+    }
+
+    .business::before {
+      background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1300&q=80");
+    }
+
+    .subject-content {
+      height: 100%;
+      min-height: 390px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      padding: 30px 24px;
+      color: var(--white);
+    }
+
+    .disabled .subject-content { color: var(--navy); }
+
+    .subject-icon {
+      position: absolute;
+      top: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 88px;
+      height: 88px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.74);
+      backdrop-filter: blur(4px);
+    }
+
+    .disabled .subject-icon {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(2, 32, 51, 0.16);
+    }
+
+    .subject-icon svg { width: 52px; height: 52px; stroke-width: 1.7; }
+
+    .subject-card h2 {
+      font-size: clamp(1.55rem, 2.2vw, 2.15rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 7px;
+    }
+
+    .subject-card .strapline {
+      font-size: 1.03rem;
+      font-weight: 750;
+      color: #54fff5;
+      margin-bottom: 18px;
+    }
+
+    .disabled .strapline { color: #007c82; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 110px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .status.live {
+      color: white;
+      background: linear-gradient(135deg, var(--teal), #0792a3);
+      box-shadow: 0 0 22px rgba(0, 184, 176, 0.48);
+    }
+
+    .status.soon { color: #fff; background: rgba(93, 105, 111, 0.58); }
+
+    .subject-copy {
+      font-size: 0.98rem;
+      line-height: 1.45;
+      max-width: 240px;
+      margin-bottom: 24px;
+    }
+
+    .enter-btn {
+      width: 100%;
+      max-width: 270px;
+      border: none;
+      border-radius: 18px;
+      padding: 17px 20px;
+      color: white;
+      background: linear-gradient(135deg, #00b8b0, #0392a2);
+      font-size: 1rem;
+      font-weight: 850;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+      transition: var(--transition);
+    }
+
+    .enter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45);
+    }
+
+    .enter-btn svg { width: 22px; height: 22px; transition: transform 0.25s ease; }
+    .enter-btn:hover svg { transform: translateX(4px); }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(120px);
+      max-width: min(92vw, 520px);
+      padding: 15px 20px;
+      border-radius: 999px;
+      background: rgba(1, 21, 38, 0.94);
+      color: white;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+      z-index: 20;
+      font-weight: 700;
+      transition: transform 0.35s ease;
+      text-align: center;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 1120px) {
+      .subject-grid { grid-template-columns: repeat(2, 1fr); }
+      .subject-card, .subject-content { min-height: 360px; }
+    }
+
+    @media (max-width: 760px) {
+      main { padding: 0 14px; }
+      .subject-grid { grid-template-columns: 1fr; }
+      .hub-kicker::before, .hub-kicker::after { width: 44px; }
+      .subject-card, .subject-content { min-height: 340px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<a class="sbl-skip" href="#main">Skip to content</a>
-<div class="sbl-contours" aria-hidden="true"></div>
+  <div class="page">
+    <div class="network-bg" aria-hidden="true"></div>
 
-<main id="main">
-
-  <header class="header">
-    <a class="header__lockup" href="/">
-      <span class="header__sbl">SBL</span>
-      <span class="header__text">
-        <span class="name">Solutions Based Learning</span>
-        <span class="tag">Empowering thinking &middot; Enhancing learning &middot; Inspiring futures</span>
-      </span>
-    </a>
-    <div class="pillars" aria-label="What SBL builds">
-      <div class="pillar">
-        <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/><path d="M9.5 21h5"/></svg>
-        <span class="pillar__label">Critical Thinking</span>
-      </div>
-      <div class="pillar">
-        <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
-        <span class="pillar__label">Real-World Solving</span>
-      </div>
-      <div class="pillar">
-        <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 9h18M8 4v14"/></svg>
-        <span class="pillar__label">AI Fluency</span>
+    <div class="top-bar">
+      <div class="top-bar-inner">
+        <a href="/" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+          Back to SBL
+        </a>
+        <div class="top-bar-brand">SBL <span class="teal">Humanities Hub</span></div>
+        <div style="width: 90px;" aria-hidden="true"></div>
       </div>
     </div>
-  </header>
 
-  <section class="hero">
-    <span class="sbl-eyebrow hero__eyebrow">Humanities Hub</span>
-    <h1 class="hero__statement">
-      <span class="no">We do not fight AI.</span>
-      <span class="yes">We teach students how<br>to think with AI.</span>
-    </h1>
-    <p class="hero__sub">
-      <strong>Develop critical thinking.</strong> Flip learning. Solve real-world problems —
-      a humanities ecosystem built for students who will graduate into an AI-driven world.
-    </p>
-  </section>
-
-  <section class="constellation" aria-label="Subjects and the SBL thinking pathway">
-
-    <ol class="pathway" aria-label="The SBL thinking pathway">
-      <li class="pathway__node"><span class="pathway__dot" aria-hidden="true"></span><span class="pathway__label">Think</span></li>
-      <li class="pathway__node"><span class="pathway__dot" aria-hidden="true"></span><span class="pathway__label">Analyse</span></li>
-      <li class="pathway__node"><span class="pathway__dot" aria-hidden="true"></span><span class="pathway__label">Evaluate</span></li>
-      <li class="pathway__node"><span class="pathway__dot" aria-hidden="true"></span><span class="pathway__label">Create</span></li>
-      <li class="pathway__node"><span class="pathway__dot" aria-hidden="true"></span><span class="pathway__label">Solve</span></li>
-    </ol>
-
-    <!-- GEOGRAPHY — live -->
-    <article class="panel panel--geography">
-      <div class="panel__texture" aria-hidden="true"></div>
-      <div class="panel__body">
-        <div class="panel__top-row">
-          <span class="sbl-status sbl-status--live"><span class="sbl-status__dot" aria-hidden="true"></span>Live</span>
+    <main>
+      <div class="hub-title">
+        <div class="hub-kicker">
+          <h1>Our Humanities Hub</h1>
         </div>
-        <span class="panel__badge panel__badge--live" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.8 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.8-4-9s1.5-6.4 4-9Z"/></svg></span>
-        <h2 class="panel__title">Geography</h2>
-        <p class="panel__tagline">Understanding our world.</p>
-        <p class="panel__skills">Analyse · Evaluate · Solve</p>
-        <a class="panel__cta" href="/geography">
-          Enter Geography
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        <p>Four disciplines. One shared purpose.</p>
       </div>
-    </article>
 
-    <!-- HISTORY — coming soon -->
-    <article class="panel panel--soon panel--history" aria-disabled="true">
-      <div class="panel__texture" aria-hidden="true"></div>
-      <div class="panel__body">
-        <div class="panel__top-row">
-          <span class="sbl-status sbl-status--soon"><span class="sbl-status__dot" aria-hidden="true"></span>Coming soon</span>
-        </div>
-        <span class="panel__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg></span>
-        <h2 class="panel__title">History</h2>
-        <p class="panel__tagline">Understanding how the past shapes the future.</p>
-        <p class="panel__skills">Interpret · Evaluate · Judge</p>
+      <div class="subject-grid">
+        <article
+          class="subject-card geography clickable"
+          tabindex="0"
+          role="link"
+          aria-label="Enter Geography"
+          data-route="/geography"
+        >
+          <div class="subject-content">
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <path d="M12 3a14 14 0 0 1 0 18" />
+                <path d="M12 3a14 14 0 0 0 0 18" />
+              </svg>
+            </div>
+            <h2>Geography</h2>
+            <p class="strapline">Explore &bull; Think &bull; Apply</p>
+            <span class="status live">Live</span>
+            <p class="subject-copy">
+              Understand our world. Solve real challenges. Create a better future.
+            </p>
+            <button class="enter-btn" type="button" aria-label="Click here to enter Geography">
+              Click here to enter Geography
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <article class="subject-card history disabled" aria-label="History coming soon">
+          <div class="subject-content">
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 20h16" />
+                <path d="M6 17V9" />
+                <path d="M10 17V9" />
+                <path d="M14 17V9" />
+                <path d="M18 17V9" />
+                <path d="M3 9h18" />
+                <path d="M12 3l9 6H3l9-6Z" />
+              </svg>
+            </div>
+            <h2>History</h2>
+            <p class="strapline">Interpret &bull; Evaluate &bull; Judge</p>
+            <span class="status soon">Coming Soon</span>
+            <p class="subject-copy">
+              Learn from the past. Question perspectives. Shape the future.
+            </p>
+          </div>
+        </article>
+
+        <article class="subject-card economics disabled" aria-label="Economics coming soon">
+          <div class="subject-content">
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 19h16" />
+                <path d="M6 16v-4" />
+                <path d="M11 16v-7" />
+                <path d="M16 16v-10" />
+                <path d="M5 9l4-4 4 4 6-6" />
+                <path d="M17 3h2v2" />
+              </svg>
+            </div>
+            <h2>Economics</h2>
+            <p class="strapline">Analyse &bull; Predict &bull; Decide</p>
+            <span class="status soon">Coming Soon</span>
+            <p class="subject-copy">
+              Understand choices. Evaluate trade-offs. Improve lives.
+            </p>
+          </div>
+        </article>
+
+        <article class="subject-card business disabled" aria-label="Business coming soon">
+          <div class="subject-content">
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
+                <rect x="4" y="6" width="16" height="14" rx="2" />
+                <path d="M4 11h16" />
+                <path d="M10 11v2h4v-2" />
+              </svg>
+            </div>
+            <h2>Business</h2>
+            <p class="strapline">Innovate &bull; Strategise &bull; Lead</p>
+            <span class="status soon">Coming Soon</span>
+            <p class="subject-copy">
+              Build ideas. Create value. Lead with purpose.
+            </p>
+          </div>
+        </article>
       </div>
-    </article>
+    </main>
 
-    <!-- ECONOMICS — coming soon -->
-    <article class="panel panel--soon panel--economics" aria-disabled="true">
-      <div class="panel__texture" aria-hidden="true"></div>
-      <div class="panel__body">
-        <div class="panel__top-row">
-          <span class="sbl-status sbl-status--soon"><span class="sbl-status__dot" aria-hidden="true"></span>Coming soon</span>
-        </div>
-        <span class="panel__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span>
-        <h2 class="panel__title">Economics</h2>
-        <p class="panel__tagline">Understanding choices and consequences.</p>
-        <p class="panel__skills">Analyse · Predict · Decide</p>
-      </div>
-    </article>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
 
-    <!-- BUSINESS — coming soon -->
-    <article class="panel panel--soon panel--business" aria-disabled="true">
-      <div class="panel__texture" aria-hidden="true"></div>
-      <div class="panel__body">
-        <div class="panel__top-row">
-          <span class="sbl-status sbl-status--soon"><span class="sbl-status__dot" aria-hidden="true"></span>Coming soon</span>
-        </div>
-        <span class="panel__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2s5 3 5 9c0 3-1.5 5-2.5 6.5L12 22l-2.5-4.5C8.5 16 7 14 7 11c0-6 5-9 5-9Z"/><path d="M9.5 14.5 6 18M14.5 14.5 18 18"/></svg></span>
-        <h2 class="panel__title">Business</h2>
-        <p class="panel__tagline">Understanding how ideas become impact.</p>
-        <p class="panel__skills">Innovate · Strategise · Lead</p>
-      </div>
-    </article>
+  <script>
+    const LIVE_ROUTES = { geography: "/geography" };
+    const toast = document.getElementById("toast");
 
-  </section>
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timeout);
+      showToast.timeout = window.setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2600);
+    }
 
-  <footer class="sbl-footer">
-    Students who learn how to think will always outperform those who just ask for answers.
-    <span style="display:block; margin-top:0.9rem; font-family: var(--font-mono); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color: var(--teal-bright); text-decoration: underline; text-underline-offset: 4px;">Think deeper &middot; Act better &middot; Build a better future</span>
-  </footer>
+    function navigateToRoute(route) {
+      if (route === LIVE_ROUTES.geography) {
+        window.location.href = route;
+      } else {
+        showToast("This subject area is coming soon.");
+      }
+    }
 
-</main>
+    function setupClickableCards() {
+      const clickableCards = document.querySelectorAll(".subject-card.clickable");
+      clickableCards.forEach((card) => {
+        const route = card.dataset.route;
+        card.addEventListener("click", (event) => {
+          const clickedButton = event.target.closest("button");
+          if (clickedButton || event.currentTarget === card) {
+            navigateToRoute(route);
+          }
+        });
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            navigateToRoute(route);
+          }
+        });
+      });
+
+      const disabledCards = document.querySelectorAll(".subject-card.disabled");
+      disabledCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          showToast("This subject area is coming soon.");
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setupClickableCards();
+    });
+  </script>
 </body>
 </html>

@@ -1,277 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SBL — Solutions Based Learning</title>
-<meta name="description" content="Solutions Based Learning. We do not fight AI. We teach students how to think with AI.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/sbl-theme.css">
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions Based Learning | SBL</title>
 
-  /* ---- Top band: lockup + quote ---- */
-  .topband {
-    position: relative; z-index: 1;
-    max-width: 1180px; margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4rem) 1.5rem 3rem;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-  .lockup {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.9rem, 2vw, 1.5rem);
-  }
-  .lockup__sbl {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(3.2rem, 8vw, 5rem);
-    line-height: 1;
-    margin: 0;
-    background: linear-gradient(160deg, var(--teal-bright) 0%, var(--teal) 55%, var(--white) 130%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-  .lockup__divider { width: 2px; align-self: stretch; background: var(--navy-line); }
-  .lockup__text { line-height: 1.12; }
-  .lockup__text .name {
-    display: block;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1rem, 2.4vw, 1.5rem);
-    color: var(--white);
-  }
-  .lockup__text .name .accent { color: var(--teal-bright); }
-  .lockup__tag {
-    margin: 0.9rem 0 0;
-    font-family: var(--font-mono);
-    font-size: clamp(0.58rem, 1.2vw, 0.7rem);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--slate);
-  }
+  <style>
+    :root {
+      --navy: #031c33;
+      --deep-navy: #011526;
+      --teal: #00b8b0;
+      --teal-dark: #007c82;
+      --cyan: #20d7e2;
+      --white: #ffffff;
+      --soft-white: #eef7f8;
+      --ink: #062033;
+      --muted: #6b7f8d;
+      --glass: rgba(255, 255, 255, 0.82);
+      --card-border: rgba(255, 255, 255, 0.45);
+      --shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --transition: all 0.35s ease;
+    }
 
-  .topquote {
-    border-left: 2px solid var(--teal);
-    padding-left: 1.5rem;
-  }
-  .topquote p {
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(1.05rem, 2.1vw, 1.3rem);
-    line-height: 1.45;
-    margin: 0;
-    color: var(--white);
-  }
-  .topquote .em { color: var(--teal-bright); font-weight: 600; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  @media (max-width: 780px) {
-    .topband { grid-template-columns: 1fr; }
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* ---- Value / Purpose ---- */
-  .vp {
-    position: relative; z-index: 1;
-    max-width: 1000px; margin: 0 auto;
-    padding: 1rem 1.5rem 4rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .vp__card { border: 1px solid var(--navy-line); background: var(--navy-raised); border-radius: 4px; padding: 1.9rem; }
-  .vp__icon {
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--teal-bright); background: rgba(45,225,203,0.1);
-    color: var(--teal-bright); margin-bottom: 1.1rem;
-  }
-  .vp__icon svg { width: 19px; height: 19px; }
-  .vp__card h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin: 0 0 0.6rem; }
-  .vp__card p { color: var(--slate); line-height: 1.6; margin: 0; font-size: 0.98rem; }
+    body {
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(0, 184, 176, 0.16), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(32, 215, 226, 0.12), transparent 30%),
+        linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-  /* ---- Problems ---- */
-  .problems { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
-  .problems__head { text-align: center; margin-bottom: 2.2rem; }
-  .problems__head h2 {
-    font-family: var(--font-display); font-weight: 600; font-size: clamp(1.3rem, 3vw, 1.7rem);
-    margin: 0; display: inline-flex; align-items: center; gap: 1rem;
-  }
-  .problems__head h2::before, .problems__head h2::after { content: ""; width: 40px; height: 1px; background: var(--navy-line); }
-  .problems__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.6rem; text-align: center; }
-  .problem__icon {
-    width: 56px; height: 56px; margin: 0 auto 0.9rem; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--navy-line); color: var(--teal-bright);
-  }
-  .problem__icon svg { width: 24px; height: 24px; }
-  .problem p { font-size: 0.85rem; color: var(--slate); line-height: 1.5; margin: 0; max-width: 16ch; margin-inline: auto; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  /* ---- Closing band: battlefield line + pathway teaser ---- */
-  .closing {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--navy-line);
-    background: linear-gradient(135deg, var(--navy-raised) 0%, #0d2033 100%);
-    padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
-  }
-  .closing__inner {
-    max-width: 1180px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: center;
-  }
-  .closing h2 {
-    font-family: var(--font-display); font-weight: 700;
-    font-size: clamp(1.4rem, 3.6vw, 2rem); line-height: 1.25; margin: 0 0 0.8rem;
-  }
-  .closing h2 .accent { color: var(--teal-bright); }
-  .closing p { color: var(--slate); max-width: 56ch; margin: 0; line-height: 1.6; }
-  .pathway-teaser { display: flex; justify-content: flex-end; gap: clamp(0.8rem, 2vw, 1.6rem); flex-wrap: wrap; }
-  .pt-node { text-align: center; }
-  .pt-node__icon {
-    width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 0.5rem;
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--teal-bright); background: rgba(45,225,203,0.08); color: var(--teal-bright);
-  }
-  .pt-node__icon svg { width: 20px; height: 20px; }
-  .pt-node__label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
-  @media (max-width: 780px) {
-    .closing__inner { grid-template-columns: 1fr; }
-    .pathway-teaser { justify-content: flex-start; }
-  }
+    button {
+      font-family: inherit;
+    }
 
-  /* ---- Click-anywhere entry banner ---- */
-  .enter {
-    position: relative; z-index: 1;
-    display: block;
-    text-align: center;
-    padding: clamp(1.6rem, 4vw, 2.1rem) 1.5rem;
-    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-bright) 100%);
-    color: var(--ink);
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: clamp(0.95rem, 2.2vw, 1.2rem);
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    transition: filter 0.2s var(--ease);
-  }
-  .enter:hover, .enter:focus-visible { filter: brightness(1.08); }
-  .enter__mark { display: inline-block; margin: 0 0.9rem; animation: pulseMark 2.4s var(--ease) infinite; }
-  @keyframes pulseMark { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+    .page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-  body { cursor: pointer; }
-</style>
+    .network-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(0, 184, 176, 0.18), transparent 18%),
+        radial-gradient(circle at 82% 14%, rgba(32, 215, 226, 0.15), transparent 18%),
+        radial-gradient(circle at 85% 72%, rgba(0, 184, 176, 0.12), transparent 16%);
+    }
+
+    .network-bg::before,
+    .network-bg::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background-image:
+        linear-gradient(rgba(0, 184, 176, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 184, 176, 0.12) 1px, transparent 1px);
+      background-size: 80px 80px;
+      transform: rotate(8deg);
+      animation: driftGrid 28s linear infinite;
+      opacity: 0.26;
+    }
+
+    .network-bg::after {
+      background-size: 130px 130px;
+      animation-duration: 42s;
+      opacity: 0.16;
+      transform: rotate(-11deg);
+    }
+
+    @keyframes driftGrid {
+      from { transform: translate3d(0, 0, 0) rotate(8deg); }
+      to { transform: translate3d(-80px, -80px, 0) rotate(8deg); }
+    }
+
+    .particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(0, 210, 220, 0.75);
+      box-shadow: 0 0 22px rgba(0, 210, 220, 0.95);
+      z-index: -1;
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.85; }
+      100% { transform: translateY(-120vh) scale(0.55); opacity: 0; }
+    }
+
+    .top-hero {
+      position: relative;
+      min-height: 310px;
+      padding: 42px 24px 58px;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(1, 21, 38, 0.98), rgba(2, 50, 78, 0.96)),
+        radial-gradient(circle at 20% 25%, rgba(0, 184, 176, 0.32), transparent 26%),
+        radial-gradient(circle at 83% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .top-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.08) 45%, transparent 70%);
+      transform: translateX(-100%);
+      animation: heroShine 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes heroShine {
+      0%, 45% { transform: translateX(-100%); }
+      70%, 100% { transform: translateX(120%); }
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1180px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .brand-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 22px;
+    }
+
+    .sbl-logo {
+      font-size: clamp(4.6rem, 12vw, 8.6rem);
+      line-height: 0.86;
+      letter-spacing: -7px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #18cbc2, #007ba8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 8px 24px rgba(0, 184, 176, 0.22));
+    }
+
+    .divider {
+      width: 2px;
+      height: 108px;
+      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+    }
+
+    .brand-text {
+      text-align: left;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 0.95;
+      font-weight: 850;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .brand-text span { display: block; }
+    .brand-text .teal { color: var(--teal); }
+
+    .tagline {
+      margin-top: 8px;
+      font-size: clamp(0.8rem, 1.3vw, 1rem);
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .tagline strong { color: var(--cyan); font-weight: 800; }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      max-width: 1000px;
+      margin: -30px auto 60px;
+      padding: 0 22px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .main-panel {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 252, 253, 0.88));
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      padding: clamp(36px, 6vw, 64px);
+    }
+
+    .vision {
+      text-align: center;
+      margin: 2px auto 36px;
+      max-width: 780px;
+    }
+
+    .vision h1 {
+      font-size: clamp(2rem, 4.4vw, 4rem);
+      color: var(--navy);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 4px;
+    }
+
+    .vision h2 {
+      font-size: clamp(1.8rem, 3.6vw, 3.3rem);
+      color: #147c82;
+      font-weight: 850;
+      line-height: 1.12;
+      margin-bottom: 22px;
+    }
+
+    .vision p {
+      font-size: clamp(1rem, 1.6vw, 1.23rem);
+      line-height: 1.55;
+      color: #163146;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: 36px 0 44px;
+    }
+
+    .principle-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 22px 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(0, 124, 130, 0.14);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .principle-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 184, 176, 0.12), transparent 62%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .principle-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 184, 176, 0.36);
+      box-shadow: 0 18px 36px rgba(0, 55, 82, 0.13);
+    }
+
+    .principle-card:hover::before { opacity: 1; }
+
+    .principle-icon {
+      position: relative;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: var(--teal-dark);
+      background: rgba(0, 184, 176, 0.08);
+      border: 1px solid rgba(0, 124, 130, 0.2);
+    }
+
+    .principle-icon svg { width: 36px; height: 36px; stroke-width: 1.8; }
+
+    .principle-content { position: relative; }
+    .principle-content h3 { font-size: 1rem; color: var(--navy); margin-bottom: 6px; font-weight: 850; }
+    .principle-content p { font-size: 0.92rem; color: #244253; line-height: 1.42; }
+
+    .enter-hub-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .enter-hub-btn {
+      width: 100%;
+      max-width: 420px;
+      border: none;
+      border-radius: 18px;
+      padding: 20px 26px;
+      color: white;
+      background: linear-gradient(135deg, #00b8b0, #0392a2);
+      font-size: 1.08rem;
+      font-weight: 850;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+      transition: var(--transition);
+    }
+
+    .enter-hub-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45);
+    }
+
+    .enter-hub-btn svg { width: 22px; height: 22px; transition: transform 0.25s ease; }
+    .enter-hub-btn:hover svg { transform: translateX(4px); }
+
+    .quote-panel {
+      margin-top: 30px;
+      padding: 24px 30px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 58, 85, 0.96)),
+        radial-gradient(circle at 85% 40%, rgba(0, 184, 176, 0.24), transparent 32%);
+      color: white;
+      text-align: center;
+      box-shadow: 0 18px 44px rgba(0, 31, 55, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-panel::before,
+    .quote-panel::after {
+      position: absolute;
+      font-size: 6rem;
+      line-height: 1;
+      color: rgba(0, 184, 176, 0.5);
+      font-weight: 900;
+    }
+
+    .quote-panel::before { content: "\201C"; left: 28px; top: 2px; }
+    .quote-panel::after { content: "\201D"; right: 28px; bottom: -42px; }
+
+    .quote-panel p {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(1rem, 1.7vw, 1.28rem);
+      line-height: 1.55;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .quote-panel strong { color: #38fff4; }
+
+    @media (max-width: 1120px) {
+      .principles { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 760px) {
+      .top-hero { min-height: auto; padding: 34px 18px 46px; }
+      .brand-row { display: block; }
+      .sbl-logo { letter-spacing: -4px; margin-bottom: 12px; }
+      .divider { display: none; }
+      .brand-text { text-align: center; font-size: 2.2rem; }
+      .tagline { letter-spacing: 0.18em; line-height: 1.8; }
+      main { margin-top: -20px; padding: 0 14px; }
+      .main-panel { padding: 30px 18px; }
+      .principles { grid-template-columns: 1fr; }
+      .principle-card { grid-template-columns: 54px 1fr; padding: 18px; }
+      .principle-icon { width: 54px; height: 54px; }
+      .quote-panel { padding: 24px 20px; }
+      .quote-panel::before, .quote-panel::after { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<a class="sbl-skip" href="#main">Skip to content</a>
-<div class="sbl-contours" aria-hidden="true"></div>
+  <div class="page">
+    <div class="network-bg" aria-hidden="true"></div>
 
-<!-- The whole page is a click-through into the Hub. The anchor at the
-     bottom remains the real, keyboard-accessible link; the page-level
-     click handler just extends that same action to a click anywhere
-     else, so scrolling and text selection still work normally. -->
-<main id="main">
-
-  <section class="topband">
-    <div class="lockup">
-      <p class="lockup__sbl">SBL</p>
-      <div class="lockup__divider"></div>
-      <div class="lockup__text">
-        <span class="name">Solutions<br><span class="accent">Based</span><br>Learning</span>
-        <p class="lockup__tag">Empowering thinking &middot; Enhancing learning &middot; Inspiring futures</p>
-      </div>
-    </div>
-    <blockquote class="topquote">
-      <p>In the age of AI, students who learn how to <span class="em">think</span> will always outperform those who just ask for <span class="em">answers</span>.</p>
-    </blockquote>
-  </section>
-
-  <section class="vp" aria-label="Our value and purpose">
-    <div class="vp__card">
-      <span class="vp__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/></svg></span>
-      <h2>Our Value</h2>
-      <p>We turn educational challenges into practical, AI-enhanced solutions that save time, deepen understanding and drive better outcomes.</p>
-    </div>
-    <div class="vp__card">
-      <span class="vp__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></span>
-      <h2>Our Purpose</h2>
-      <p>To help teachers teach better and students think deeper, through intelligent, solutions-based learning.</p>
-    </div>
-  </section>
-
-  <section class="problems" aria-label="Problems SBL solves">
-    <div class="problems__head"><h2>We solve the problems that matter</h2></div>
-    <div class="problems__grid">
-      <div class="problem">
-        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-        <p>Too much teacher workload</p>
-      </div>
-      <div class="problem">
-        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
-        <p>Students lack independence and confidence</p>
-      </div>
-      <div class="problem">
-        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-        <p>Feedback is too slow or inconsistent</p>
-      </div>
-      <div class="problem">
-        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/><path d="M9.5 9.5l1.2 1.2 3-3"/></svg></span>
-        <p>Misconceptions go unnoticed for too long</p>
-      </div>
-      <div class="problem">
-        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg></span>
-        <p>AI is used ineffectively or inappropriately</p>
-      </div>
-      <div class="problem">
-        <span class="problem__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-16 2 2-7 16-4-2z"/><path d="M12 19l-5.5 2 2-5.5"/></svg></span>
-        <p>Staff need clarity, training and support with AI</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="closing">
-    <div class="closing__inner">
-      <div>
-        <span class="sbl-eyebrow">Don't let AI win the battlefield</span>
-        <h2>Teach it. Use technology <span class="accent">with purpose</span>.</h2>
-        <p>See the benefits in improving thinking, critical thinking, assessment and productive lesson time.</p>
-      </div>
-      <div class="pathway-teaser" aria-hidden="true">
-        <div class="pt-node">
-          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/><path d="M9.5 21h5"/></svg></span>
-          <span class="pt-node__label">Think</span>
+    <header class="top-hero">
+      <div class="hero-inner">
+        <div class="brand-row" aria-label="Solutions Based Learning branding">
+          <div class="sbl-logo">SBL</div>
+          <div class="divider" aria-hidden="true"></div>
+          <div class="brand-text">
+            <span>Solutions</span>
+            <span class="teal">Based</span>
+            <span>Learning</span>
+          </div>
         </div>
-        <div class="pt-node">
-          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
-          <span class="pt-node__label">Analyse</span>
-        </div>
-        <div class="pt-node">
-          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v3M12 18v3M5 12H3m18 0h-2"/><path d="M7 12a5 5 0 0 1 10 0"/><path d="M4 20h16"/></svg></span>
-          <span class="pt-node__label">Evaluate</span>
-        </div>
-        <div class="pt-node">
-          <span class="pt-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="9" r="6"/><path d="M9 21h6M10 17.5h4"/></svg></span>
-          <span class="pt-node__label">Create</span>
-        </div>
+        <p class="tagline">
+          Empowering <strong>Thinking</strong>. Enhancing <strong>Learning</strong>. Inspiring Futures.
+        </p>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <a class="enter" href="/humanities-hub">
-    <span class="enter__mark" aria-hidden="true">&#10022;</span>Click anywhere to enter<span class="enter__mark" aria-hidden="true">&#10022;</span>
-  </a>
+    <main>
+      <section class="main-panel" aria-labelledby="main-heading">
+        <div class="vision">
+          <h1 id="main-heading">We do not fight AI.</h1>
+          <h2>We teach students how to think with AI.</h2>
+          <p>
+            Solutions Based Learning empowers students to think critically, evaluate evidence,
+            and solve real-world problems using intelligent tools and timeless human skills.
+          </p>
+        </div>
 
-</main>
+        <section class="principles" aria-label="Solutions Based Learning principles">
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 3a3 3 0 0 0-3 3v1a3 3 0 0 0 0 6v1a3 3 0 0 0 3 3" />
+                <path d="M15 3a3 3 0 0 1 3 3v1a3 3 0 0 1 0 6v1a3 3 0 0 1-3 3" />
+                <path d="M9 7h1" />
+                <path d="M14 7h1" />
+                <path d="M8 12h2" />
+                <path d="M14 12h2" />
+                <path d="M12 4v16" />
+              </svg>
+            </div>
+            <div class="principle-content">
+              <h3>Embrace AI</h3>
+              <p>Use technology responsibly and effectively.</p>
+            </div>
+          </article>
 
-<script>
-  // Click anywhere on the page enters the Hub — but not if the person
-  // is selecting text, and not a second time if they clicked the
-  // real link (avoids double-navigation).
-  document.addEventListener('click', function (e) {
-    if (e.target.closest('a')) return;
-    var selection = window.getSelection();
-    if (selection && selection.toString().length > 0) return;
-    window.location.href = '/humanities-hub';
-  });
-</script>
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 3a8 8 0 0 0-8 8c0 3.5 2.2 6.5 5.3 7.6V21h5.4v-2.4A8 8 0 0 0 12 3Z" />
+                <path d="M9 11h6" />
+                <path d="M12 8v6" />
+                <path d="M7 21h10" />
+              </svg>
+            </div>
+            <div class="principle-content">
+              <h3>Develop Critical Thinking</h3>
+              <p>Question. Analyse. Evaluate. Create.</p>
+            </div>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 7h12a4 4 0 0 1 0 8H8" />
+                <path d="M8 11H4v8h4" />
+                <path d="M18 7l2-2" />
+                <path d="M18 15l2 2" />
+              </svg>
+            </div>
+            <div class="principle-content">
+              <h3>Flip Learning</h3>
+              <p>Learn before class. Think deeper together.</p>
+            </div>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="8" />
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 12l6-6" />
+                <path d="M16 6h2V4" />
+              </svg>
+            </div>
+            <div class="principle-content">
+              <h3>Focus on Solutions</h3>
+              <p>Apply knowledge. Solve problems. Make an impact.</p>
+            </div>
+          </article>
+        </section>
+
+        <div class="enter-hub-wrap">
+          <a href="/humanities-hub" style="width:100%; max-width:420px;">
+            <button class="enter-hub-btn" type="button">
+              Enter the Humanities Hub
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </a>
+        </div>
+
+        <section class="quote-panel" aria-label="Platform quote">
+          <p>
+            In the age of AI, students who learn how to <strong>think</strong>
+            will always outperform those who simply ask for <strong>answers</strong>.
+          </p>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function createParticles() {
+      const particleCount = window.innerWidth < 760 ? 18 : 34;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+        const size = Math.random() * 5 + 3;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 12;
+        const duration = Math.random() * 12 + 13;
+        const bottom = Math.random() * 100 - 20;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.bottom = `${bottom}px`;
+        particle.style.animationDelay = `${delay}s`;
+        particle.style.animationDuration = `${duration}s`;
+        document.body.appendChild(particle);
+      }
+    }
+
+    function setupReducedMotionRespect() {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll(".particle").forEach((particle) => particle.remove());
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      createParticles();
+      setupReducedMotionRespect();
+    });
+  </script>
 </body>
 </html>
