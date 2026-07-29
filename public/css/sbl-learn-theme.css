@@ -14,10 +14,12 @@
   --lh-body:          #4B5566;
   --lh-muted:         #8A93A3;
 
-  --lh-sidebar-bg:    #262C3B;   /* lightened from near-black #14161F */
-  --lh-sidebar-line:  #3B4356;
-  --lh-sidebar-text:  #CBD1DE;
-  --lh-sidebar-dim:   #8B93A6;
+  --lh-sidebar-bg:    #F3F5F9;   /* lightened: soft off-white, distinct from main surface */
+  --lh-sidebar-line:  #E2E6EE;
+  --lh-sidebar-text:  #38414F;
+  --lh-sidebar-dim:   #7A8496;
+  --lh-sidebar-hover: rgba(20, 30, 50, 0.05);
+  --lh-sidebar-strong: #12161F; /* dark text used on light/green accent chips */
 
   --lh-green:         #22C55E;
   --lh-green-bg:      #E9FBF0;
@@ -94,7 +96,7 @@
 .lh-sidebar__brand-text { line-height: 1.2; }
 .lh-sidebar__brand-text .name {
   display: block;
-  color: #fff;
+  color: var(--lh-sidebar-strong);
   font-family: var(--lh-font-display);
   font-weight: 600;
   font-size: 0.85rem;
@@ -119,7 +121,7 @@
   color: var(--lh-sidebar-text);
   font-size: 0.82rem;
 }
-.lh-sidebar__home:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.lh-sidebar__home:hover { background: var(--lh-sidebar-hover); color: var(--lh-sidebar-strong); }
 .lh-sidebar__home svg { width: 15px; height: 15px; flex-shrink: 0; }
 
 .lh-sidebar__section {
@@ -148,7 +150,7 @@
   color: var(--lh-sidebar-text);
   border-radius: 6px;
 }
-.lh-unit__link:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.lh-unit__link:hover { background: var(--lh-sidebar-hover); color: var(--lh-sidebar-strong); }
 .lh-unit--active > .lh-unit__link {
   background: var(--lh-green);
   color: #0B1A10;
@@ -170,7 +172,7 @@
   color: var(--lh-sidebar-text);
   border-radius: 6px;
 }
-.lh-topic--active .lh-topic__title { color: #fff; font-weight: 600; }
+.lh-topic--active .lh-topic__title { color: var(--lh-sidebar-strong); font-weight: 600; }
 .lh-lessons { list-style: none; margin: 0.1rem 0 0.5rem; padding-left: 1.7rem; border-left: 1px solid var(--lh-sidebar-line); margin-left: 1.35rem; }
 .lh-lessons li { margin-bottom: 0.15rem; }
 .lh-lessons a {
@@ -181,7 +183,7 @@
   border-radius: 6px;
   line-height: 1.35;
 }
-.lh-lessons a:hover { color: #fff; background: rgba(255,255,255,0.04); }
+.lh-lessons a:hover { color: var(--lh-sidebar-strong); background: var(--lh-sidebar-hover); }
 .lh-lessons a.is-current { background: var(--lh-green); color: #0B1A10; font-weight: 600; }
 
 /* ---------------- Top bar ---------------- */
