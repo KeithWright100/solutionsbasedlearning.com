@@ -310,7 +310,7 @@
     ]
   },
   {
-    "section": "Paper 1 \u2014 Core",
+    "section": "Paper 2 \u2014 Core",
     "units": [
       {
         "slug": "core-1",
@@ -532,7 +532,7 @@
     ]
   },
   {
-    "section": "Paper 2 \u2014 HL Core Extension",
+    "section": "Paper 3 \u2014 HL Core Extension",
     "units": [
       {
         "slug": "hl-1",
@@ -726,7 +726,7 @@
     ]
   },
   {
-    "section": "Paper 3 \u2014 HL Extension",
+    "section": "Fieldwork",
     "units": [
       {
         "slug": "paper-3",
