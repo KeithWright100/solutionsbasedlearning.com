@@ -8,6 +8,274 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<style>
+  /* ============================================================
+     Lesson interface modals — Teach Me This Topic & Test My Knowledge
+     Front-end interface only. No AI is connected in this code.
+     A Microsoft Copilot Studio agent will be wired into the
+     designated placeholder area at a later date.
+     ============================================================ */
+
+  .sbl-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 20, 30, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 200;
+  }
+  .sbl-modal-overlay[hidden] { display: none; }
+
+  .sbl-modal {
+    background: var(--lh-surface);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 640px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(10, 15, 25, 0.35);
+  }
+
+  .sbl-modal__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem 1.1rem;
+    border-bottom: 1px solid var(--lh-border);
+    flex-shrink: 0;
+  }
+  .sbl-modal__header h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem;
+    color: var(--lh-ink);
+  }
+  .sbl-modal__subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--lh-muted);
+  }
+  .sbl-modal__close {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: var(--lh-bg);
+    color: var(--lh-body);
+    border-radius: 8px;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .sbl-modal__close:hover { background: var(--lh-border); color: var(--lh-ink); }
+
+  .sbl-modal__body {
+    padding: 1.4rem 1.6rem 1.6rem;
+    overflow-y: auto;
+  }
+
+  /* ---------------- Teach modal ---------------- */
+
+  .sbl-prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 1.3rem;
+  }
+  .sbl-prompt-btn {
+    text-align: left;
+    padding: 0.65rem 0.85rem;
+    border-radius: 10px;
+    border: 1px solid var(--lh-border);
+    background: var(--lh-bg);
+    color: var(--lh-ink);
+    font-family: var(--lh-font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .sbl-prompt-btn:hover {
+    border-color: var(--lh-indigo);
+    background: var(--lh-indigo-bg);
+    color: var(--lh-indigo);
+  }
+
+  .sbl-copilot-placeholder {
+    background: var(--lh-indigo-bg);
+    border: 1px dashed var(--lh-indigo);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1.3rem;
+    font-size: 0.82rem;
+    color: var(--lh-ink);
+    line-height: 1.5;
+  }
+  .sbl-copilot-placeholder strong {
+    display: block;
+    color: var(--lh-indigo);
+    font-family: var(--lh-font-display);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  .sbl-copilot-placeholder ul {
+    margin: 0.4rem 0 0.6rem;
+    padding-left: 1.2rem;
+  }
+  .sbl-copilot-placeholder li { margin-bottom: 0.2rem; }
+
+  .sbl-chat-area {
+    background: var(--lh-bg);
+    border: 1px solid var(--lh-border);
+    border-radius: 12px;
+    min-height: 110px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .sbl-chat-placeholder {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--lh-muted);
+  }
+
+  .sbl-chat-input-row {
+    display: flex;
+    gap: 0.6rem;
+  }
+  .sbl-chat-input {
+    flex: 1;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid var(--lh-border);
+    background: var(--lh-bg);
+    color: var(--lh-muted);
+    font-family: var(--lh-font-body);
+    font-size: 0.85rem;
+  }
+  .sbl-chat-input:disabled { cursor: not-allowed; }
+  .sbl-chat-send {
+    flex-shrink: 0;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--lh-border);
+    color: var(--lh-muted);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: not-allowed;
+  }
+
+  /* ---------------- Quiz modal ---------------- */
+
+  .sbl-quiz-progress {
+    font-family: var(--lh-font-mono);
+    font-size: 0.72rem;
+    color: var(--lh-muted);
+    margin-bottom: 0.9rem;
+  }
+  .sbl-quiz-question {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--lh-ink);
+    margin: 0 0 1rem;
+    line-height: 1.4;
+  }
+  .sbl-quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .sbl-quiz-option {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1.5px solid var(--lh-border);
+    background: var(--lh-bg);
+    color: var(--lh-ink);
+    font-family: var(--lh-font-body);
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .sbl-quiz-option:hover:not(:disabled) {
+    border-color: var(--lh-green);
+  }
+  .sbl-quiz-option:disabled { cursor: default; }
+  .sbl-quiz-option.is-correct {
+    border-color: var(--lh-green);
+    background: var(--lh-green-bg);
+    color: #14532D;
+    font-weight: 700;
+  }
+  .sbl-quiz-option.is-incorrect {
+    border-color: #E11D48;
+    background: #FDE8ED;
+    color: #9F1239;
+    font-weight: 700;
+  }
+
+  .sbl-quiz-feedback {
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .sbl-quiz-feedback.is-correct { background: var(--lh-green-bg); color: #14532D; }
+  .sbl-quiz-feedback.is-incorrect { background: #FDE8ED; color: #9F1239; }
+
+  .sbl-quiz-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--lh-green);
+    color: #0B1A10;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .sbl-quiz-result {
+    text-align: center;
+    padding: 1rem 0 0.5rem;
+  }
+  .sbl-quiz-result__score {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: var(--lh-green);
+    margin: 0.3rem 0 0.2rem;
+  }
+  .sbl-quiz-result__label {
+    font-size: 0.85rem;
+    color: var(--lh-muted);
+    margin-bottom: 1.4rem;
+  }
+  .sbl-quiz-retry {
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--lh-green);
+    color: #0B1A10;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body class="lh">
 <div class="lh-shell">
@@ -64,7 +332,7 @@
               <p class="lh-mode__title">Teach Me This Topic</p>
               <p class="lh-mode__desc">Interactive lesson with explanations, diagrams and examples to help you understand the content.</p>
             </div>
-            <a class="lh-mode__btn lh-c-indigo" href="#">Start Learning &rarr;</a>
+            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal">Start Learning &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -74,7 +342,7 @@
               <p class="lh-mode__title">Test My Knowledge</p>
               <p class="lh-mode__desc">Check your understanding with a variety of questions and get instant feedback.</p>
             </div>
-            <a class="lh-mode__btn lh-c-green" href="#">Start Quiz &rarr;</a>
+            <button type="button" class="lh-mode__btn lh-c-green" id="sblOpenQuizModal">Start Quiz &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -166,6 +434,78 @@
   </div>
 </div>
 
+<!-- ============================================================
+     TEACH ME THIS TOPIC — modal
+     Interface only. No AI connected. A Microsoft Copilot Studio
+     agent will be wired into the placeholder area below in future.
+     ============================================================ -->
+<div class="sbl-modal-overlay" id="sblTeachModalOverlay" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachModalTitle">
+    <div class="sbl-modal__header">
+      <div>
+        <h2 id="sblTeachModalTitle">Climate Change and Agriculture</h2>
+        <p class="sbl-modal__subtitle">Understand the syllabus before class.</p>
+      </div>
+      <button type="button" class="sbl-modal__close" id="sblCloseTeachModal" aria-label="Close">&times;</button>
+    </div>
+    <div class="sbl-modal__body">
+      <div class="sbl-prompt-grid">
+        <button type="button" class="sbl-prompt-btn">Explain the whole topic</button>
+        <button type="button" class="sbl-prompt-btn">How does climate change affect agriculture?</button>
+        <button type="button" class="sbl-prompt-btn">How does climate change affect crop yields?</button>
+        <button type="button" class="sbl-prompt-btn">How does climate change affect food security?</button>
+        <button type="button" class="sbl-prompt-btn">Explain climate change and livestock farming</button>
+        <button type="button" class="sbl-prompt-btn">What is adaptation in agriculture?</button>
+        <button type="button" class="sbl-prompt-btn">What are the winners and losers?</button>
+        <button type="button" class="sbl-prompt-btn">Give me a diagram</button>
+        <button type="button" class="sbl-prompt-btn">Explain this more simply</button>
+        <button type="button" class="sbl-prompt-btn">Help me make notes</button>
+      </div>
+
+      <div class="sbl-copilot-placeholder">
+        <strong>MICROSOFT COPILOT PLACEHOLDER</strong>
+        This area is reserved for the Microsoft Copilot Geography Teach Bot.
+        <p style="margin:0.6rem 0 0.2rem;">Students will be able to:</p>
+        <ul>
+          <li>Ask questions</li>
+          <li>Receive IB Geography explanations</li>
+          <li>Request simpler explanations</li>
+          <li>Generate diagram ideas</li>
+          <li>Receive video recommendations</li>
+          <li>Prepare notes for class</li>
+        </ul>
+        <p style="margin:0.4rem 0 0;">No non-Microsoft AI should be connected.</p>
+      </div>
+
+      <div class="sbl-chat-area" id="sblChatArea">
+        <p class="sbl-chat-placeholder">Chat messages will appear here once the Microsoft Copilot Studio agent is connected.</p>
+      </div>
+
+      <div class="sbl-chat-input-row">
+        <input type="text" class="sbl-chat-input" placeholder="Ask a question... (Microsoft Copilot agent coming soon)" disabled>
+        <button type="button" class="sbl-chat-send" disabled>Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TEST MY KNOWLEDGE — quiz modal
+     Fully working, client-side only. No AI connected.
+     ============================================================ -->
+<div class="sbl-modal-overlay" id="sblQuizModalOverlay" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblQuizModalTitle">
+    <div class="sbl-modal__header">
+      <div>
+        <h2 id="sblQuizModalTitle">Test My Knowledge</h2>
+        <p class="sbl-modal__subtitle">Climate Change and Agriculture</p>
+      </div>
+      <button type="button" class="sbl-modal__close" id="sblCloseQuizModal" aria-label="Close">&times;</button>
+    </div>
+    <div class="sbl-modal__body" id="sblQuizBody"></div>
+  </div>
+</div>
+
 <script src="/js/sbl-sidebar.js"></script>
 <script>
   renderSBLSidebar('lh-sidebar-mount', {
@@ -173,6 +513,201 @@
     activeTopic: 1,
     activeLessonHref: '/geography/paper-1/core-2/t2-consequences-of/l4-climate-change'
   });
+</script>
+
+<script>
+/* ============================================================
+   Lesson interface logic — Teach Me This Topic & Test My Knowledge
+   Front-end only. No AI/API calls of any kind happen in this file.
+   ============================================================ */
+(function () {
+
+  /* ---------------- Teach modal open/close ---------------- */
+  var teachOverlay = document.getElementById('sblTeachModalOverlay');
+  var openTeachBtn = document.getElementById('sblOpenTeachModal');
+  var closeTeachBtn = document.getElementById('sblCloseTeachModal');
+
+  function openTeachModal() {
+    teachOverlay.hidden = false;
+  }
+  function closeTeachModal() {
+    teachOverlay.hidden = true;
+  }
+
+  openTeachBtn.addEventListener('click', openTeachModal);
+  closeTeachBtn.addEventListener('click', closeTeachModal);
+  teachOverlay.addEventListener('click', function (e) {
+    if (e.target === teachOverlay) closeTeachModal();
+  });
+
+  /* Starter prompt buttons currently just drop a placeholder line
+     into the chat area — no AI is called. This gives a visual
+     preview of the future chat flow once Copilot Studio is wired in. */
+  var promptButtons = document.querySelectorAll('.sbl-prompt-btn');
+  var chatArea = document.getElementById('sblChatArea');
+  promptButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      chatArea.innerHTML =
+        '<p class="sbl-chat-placeholder">You asked: &ldquo;' + btn.textContent +
+        '&rdquo;<br>The Microsoft Copilot Studio agent will answer this once connected.</p>';
+    });
+  });
+
+  /* ---------------- Quiz data ---------------- */
+  var quizQuestions = [
+    {
+      question: 'How can rising temperatures affect agriculture?',
+      options: ['Increase soil moisture', 'Reduce evaporation', 'Increase crop stress', 'Stop rainfall'],
+      correct: 2,
+      feedback: 'Higher temperatures increase evaporation and place crops under greater stress.'
+    },
+    {
+      question: 'What is food security?',
+      options: ['Protection from crime', 'Reliable access to sufficient nutritious food', 'Crop exports', 'Food storage facilities'],
+      correct: 1,
+      feedback: 'Food security means consistent access to enough safe and nutritious food.'
+    },
+    {
+      question: 'Which farming system is often most vulnerable?',
+      options: ['Mechanised farming', 'Rain-fed subsistence farming', 'Hydroponics', 'Indoor farming'],
+      correct: 1,
+      feedback: 'Rain-fed farming depends heavily on climate conditions.'
+    },
+    {
+      question: 'Which climate hazard commonly damages crops?',
+      options: ['Drought', 'Tourism', 'Retail growth', 'Urbanisation'],
+      correct: 0,
+      feedback: 'Drought reduces water availability and crop yields.'
+    },
+    {
+      question: 'How can flooding affect agriculture?',
+      options: ['Improve all crop production', 'Destroy crops and soils', 'Reduce erosion', 'Remove pests permanently'],
+      correct: 1,
+      feedback: 'Floodwater can destroy crops and damage soils.'
+    },
+    {
+      question: 'What is adaptation?',
+      options: ['Ignoring environmental change', 'Actions taken to reduce impacts', 'Increasing emissions', 'Economic migration'],
+      correct: 1,
+      feedback: 'Adaptation means adjusting to climate change.'
+    },
+    {
+      question: 'Which adaptation strategy might farmers use?',
+      options: ['Climate-resistant crops', 'More pollution', 'Less irrigation', 'Deforestation'],
+      correct: 0,
+      feedback: 'Climate-resistant crops help reduce vulnerability.'
+    },
+    {
+      question: 'Why might food prices rise?',
+      options: ['Increased yields everywhere', 'Reduced crop productivity', 'Better transport', 'Cooler temperatures'],
+      correct: 1,
+      feedback: 'Lower production often increases prices.'
+    },
+    {
+      question: 'Which areas may benefit from longer growing seasons?',
+      options: ['Some northern regions', 'Low-lying islands', 'Desert interiors', 'Coastal Bangladesh'],
+      correct: 0,
+      feedback: 'Some higher-latitude regions may gain agricultural opportunities.'
+    },
+    {
+      question: 'Which statement is most accurate?',
+      options: ['Climate change affects all places equally', 'Agriculture is unaffected by climate', 'Some places may benefit while others suffer', 'Adaptation is impossible'],
+      correct: 2,
+      feedback: 'Climate impacts are uneven and vary by location.'
+    }
+  ];
+
+  var quizOverlay = document.getElementById('sblQuizModalOverlay');
+  var openQuizBtn = document.getElementById('sblOpenQuizModal');
+  var closeQuizBtn = document.getElementById('sblCloseQuizModal');
+  var quizBody = document.getElementById('sblQuizBody');
+
+  var quizState = { index: 0, score: 0, answered: false };
+
+  function openQuizModal() {
+    quizState = { index: 0, score: 0, answered: false };
+    renderQuizQuestion();
+    quizOverlay.hidden = false;
+  }
+  function closeQuizModal() {
+    quizOverlay.hidden = true;
+  }
+
+  function renderQuizQuestion() {
+    var q = quizQuestions[quizState.index];
+    var html = '<div class="sbl-quiz-progress">Question ' + (quizState.index + 1) + ' of ' + quizQuestions.length + '</div>';
+    html += '<p class="sbl-quiz-question">' + q.question + '</p>';
+    html += '<div class="sbl-quiz-options" id="sblQuizOptions">';
+    q.options.forEach(function (opt, i) {
+      html += '<button type="button" class="sbl-quiz-option" data-index="' + i + '">' + opt + '</button>';
+    });
+    html += '</div>';
+    html += '<div id="sblQuizFeedbackWrap"></div>';
+    quizBody.innerHTML = html;
+
+    var optionButtons = quizBody.querySelectorAll('.sbl-quiz-option');
+    optionButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (quizState.answered) return;
+        quizState.answered = true;
+        var chosen = parseInt(btn.getAttribute('data-index'), 10);
+        var isCorrect = chosen === q.correct;
+        if (isCorrect) quizState.score++;
+
+        optionButtons.forEach(function (b) {
+          b.disabled = true;
+          var i = parseInt(b.getAttribute('data-index'), 10);
+          if (i === q.correct) b.classList.add('is-correct');
+          else if (i === chosen) b.classList.add('is-incorrect');
+        });
+
+        var feedbackWrap = document.getElementById('sblQuizFeedbackWrap');
+        var feedbackClass = isCorrect ? 'is-correct' : 'is-incorrect';
+        var feedbackHeading = isCorrect ? 'Correct!' : 'Not quite.';
+        var isLast = quizState.index === quizQuestions.length - 1;
+        var nextLabel = isLast ? 'See my score' : 'Next question';
+
+        feedbackWrap.innerHTML =
+          '<div class="sbl-quiz-feedback ' + feedbackClass + '"><strong>' + feedbackHeading + '</strong> ' + q.feedback + '</div>' +
+          '<button type="button" class="sbl-quiz-next" id="sblQuizNextBtn">' + nextLabel + ' &rarr;</button>';
+
+        document.getElementById('sblQuizNextBtn').addEventListener('click', function () {
+          quizState.answered = false;
+          if (isLast) {
+            renderQuizResult();
+          } else {
+            quizState.index++;
+            renderQuizQuestion();
+          }
+        });
+      });
+    });
+  }
+
+  function renderQuizResult() {
+    var total = quizQuestions.length;
+    var score = quizState.score;
+    var html = '<div class="sbl-quiz-result">';
+    html += '<div class="sbl-quiz-progress">Quiz complete</div>';
+    html += '<div class="sbl-quiz-result__score">' + score + ' / ' + total + '</div>';
+    html += '<p class="sbl-quiz-result__label">' + Math.round((score / total) * 100) + '% correct</p>';
+    html += '<button type="button" class="sbl-quiz-retry" id="sblQuizRetryBtn">Retry quiz</button>';
+    html += '</div>';
+    quizBody.innerHTML = html;
+
+    document.getElementById('sblQuizRetryBtn').addEventListener('click', function () {
+      quizState = { index: 0, score: 0, answered: false };
+      renderQuizQuestion();
+    });
+  }
+
+  openQuizBtn.addEventListener('click', openQuizModal);
+  closeQuizBtn.addEventListener('click', closeQuizModal);
+  quizOverlay.addEventListener('click', function (e) {
+    if (e.target === quizOverlay) closeQuizModal();
+  });
+
+})();
 </script>
 </body>
 </html>
