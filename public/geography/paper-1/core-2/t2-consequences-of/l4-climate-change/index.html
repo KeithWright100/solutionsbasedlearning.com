@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
 <style>
   /* ============================================================
-     Lesson interface modals — Teach Me This Topic & Test My Knowledge
+     Lesson interface modals — SBL Geography Tutor & Test My Knowledge
      Front-end interface only. No AI is connected in this code.
-     A Microsoft Copilot Studio agent will be wired into the
-     designated placeholder area at a later date.
+     A Microsoft Copilot Studio agent ("SBL Geography Tutor") will
+     be wired into the placeholder area at a later date.
      ============================================================ */
 
   .sbl-modal-overlay {
@@ -32,7 +32,7 @@
     background: var(--lh-surface);
     border-radius: 16px;
     width: 100%;
-    max-width: 640px;
+    max-width: 660px;
     max-height: 88vh;
     display: flex;
     flex-direction: column;
@@ -52,14 +52,16 @@
   .sbl-modal__header h2 {
     font-family: var(--lh-font-display);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     margin: 0 0 0.25rem;
     color: var(--lh-ink);
+    line-height: 1.3;
   }
   .sbl-modal__subtitle {
     margin: 0;
     font-size: 0.85rem;
     color: var(--lh-muted);
+    line-height: 1.5;
   }
   .sbl-modal__close {
     flex-shrink: 0;
@@ -74,13 +76,17 @@
     cursor: pointer;
   }
   .sbl-modal__close:hover { background: var(--lh-border); color: var(--lh-ink); }
+  .sbl-modal__close:focus-visible {
+    outline: 2px solid var(--lh-indigo);
+    outline-offset: 2px;
+  }
 
   .sbl-modal__body {
     padding: 1.4rem 1.6rem 1.6rem;
     overflow-y: auto;
   }
 
-  /* ---------------- Teach modal ---------------- */
+  /* ---------------- SBL Geography Tutor panel ---------------- */
 
   .sbl-prompt-grid {
     display: grid;
@@ -99,80 +105,30 @@
     font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease;
   }
   .sbl-prompt-btn:hover {
     border-color: var(--lh-indigo);
     background: var(--lh-indigo-bg);
     color: var(--lh-indigo);
   }
+  .sbl-prompt-btn:focus-visible {
+    outline: 2px solid var(--lh-indigo);
+    outline-offset: 2px;
+  }
 
-  .sbl-copilot-placeholder {
+  .sbl-teach-bot-placeholder {
     background: var(--lh-indigo-bg);
     border: 1px dashed var(--lh-indigo);
     border-radius: 12px;
-    padding: 1rem 1.1rem;
-    margin-bottom: 1.3rem;
-    font-size: 0.82rem;
-    color: var(--lh-ink);
-    line-height: 1.5;
-  }
-  .sbl-copilot-placeholder strong {
-    display: block;
-    color: var(--lh-indigo);
-    font-family: var(--lh-font-display);
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-  }
-  .sbl-copilot-placeholder ul {
-    margin: 0.4rem 0 0.6rem;
-    padding-left: 1.2rem;
-  }
-  .sbl-copilot-placeholder li { margin-bottom: 0.2rem; }
-
-  .sbl-chat-area {
-    background: var(--lh-bg);
-    border: 1px solid var(--lh-border);
-    border-radius: 12px;
-    min-height: 110px;
-    padding: 1rem 1.1rem;
-    margin-bottom: 0.9rem;
+    padding: 1.6rem 1.3rem;
+    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-  }
-  .sbl-chat-placeholder {
-    margin: 0;
-    font-size: 0.82rem;
-    color: var(--lh-muted);
-  }
-
-  .sbl-chat-input-row {
-    display: flex;
-    gap: 0.6rem;
-  }
-  .sbl-chat-input {
-    flex: 1;
-    padding: 0.7rem 0.9rem;
-    border-radius: 10px;
-    border: 1px solid var(--lh-border);
-    background: var(--lh-bg);
-    color: var(--lh-muted);
-    font-family: var(--lh-font-body);
-    font-size: 0.85rem;
-  }
-  .sbl-chat-input:disabled { cursor: not-allowed; }
-  .sbl-chat-send {
-    flex-shrink: 0;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10px;
-    border: none;
-    background: var(--lh-border);
-    color: var(--lh-muted);
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: not-allowed;
+    font-size: 0.9rem;
+    color: var(--lh-ink);
+    line-height: 1.6;
   }
 
   /* ---------------- Quiz modal ---------------- */
@@ -332,7 +288,7 @@
               <p class="lh-mode__title">Teach Me This Topic</p>
               <p class="lh-mode__desc">Interactive lesson with explanations, diagrams and examples to help you understand the content.</p>
             </div>
-            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal">Start Learning &rarr;</button>
+            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal" onclick="openTeachBot()">Start Learning &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -435,55 +391,37 @@
 </div>
 
 <!-- ============================================================
-     TEACH ME THIS TOPIC — modal
-     Interface only. No AI connected. A Microsoft Copilot Studio
-     agent will be wired into the placeholder area below in future.
+     SBL GEOGRAPHY TUTOR — teaching panel modal (Climate Change and Agriculture)
+     Interface only. No AI connected. No fake answers are generated.
+     The Microsoft Copilot Studio agent ("SBL Geography Tutor") will
+     be wired into the placeholder area below in a later update.
+     Behaviour managed by /js/sbl-teach-bot.js (openTeachBot / closeTeachBot).
      ============================================================ -->
-<div class="sbl-modal-overlay" id="sblTeachModalOverlay" hidden>
-  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachModalTitle">
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle">
     <div class="sbl-modal__header">
       <div>
-        <h2 id="sblTeachModalTitle">Climate Change and Agriculture</h2>
-        <p class="sbl-modal__subtitle">Understand the syllabus before class.</p>
+        <h2 id="sblTeachBotTitle">SBL Geography Tutor: Climate Change and Agriculture</h2>
+        <p class="sbl-modal__subtitle">Use the tutor to learn the essential syllabus content before class. You can ask for an explanation, diagram guidance, note-making help, a video recommendation or a multiple-choice quiz.</p>
       </div>
-      <button type="button" class="sbl-modal__close" id="sblCloseTeachModal" aria-label="Close">&times;</button>
+      <button type="button" class="sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
     </div>
     <div class="sbl-modal__body">
       <div class="sbl-prompt-grid">
-        <button type="button" class="sbl-prompt-btn">Explain the whole topic</button>
-        <button type="button" class="sbl-prompt-btn">How does climate change affect agriculture?</button>
-        <button type="button" class="sbl-prompt-btn">How does climate change affect crop yields?</button>
-        <button type="button" class="sbl-prompt-btn">How does climate change affect food security?</button>
-        <button type="button" class="sbl-prompt-btn">Explain climate change and livestock farming</button>
-        <button type="button" class="sbl-prompt-btn">What is adaptation in agriculture?</button>
-        <button type="button" class="sbl-prompt-btn">What are the winners and losers?</button>
-        <button type="button" class="sbl-prompt-btn">Give me a diagram</button>
-        <button type="button" class="sbl-prompt-btn">Explain this more simply</button>
-        <button type="button" class="sbl-prompt-btn">Help me make notes</button>
+        <button type="button" class="sbl-prompt-btn">Teach me this lesson</button>
+        <button type="button" class="sbl-prompt-btn">Impacts on crop yields</button>
+        <button type="button" class="sbl-prompt-btn">Food security</button>
+        <button type="button" class="sbl-prompt-btn">Livestock</button>
+        <button type="button" class="sbl-prompt-btn">Pests and diseases</button>
+        <button type="button" class="sbl-prompt-btn">Drought and flooding</button>
+        <button type="button" class="sbl-prompt-btn">Changing growing seasons</button>
+        <button type="button" class="sbl-prompt-btn">Agricultural adaptation</button>
+        <button type="button" class="sbl-prompt-btn">Help me draw a diagram</button>
+        <button type="button" class="sbl-prompt-btn">Quiz me</button>
       </div>
 
-      <div class="sbl-copilot-placeholder">
-        <strong>MICROSOFT COPILOT PLACEHOLDER</strong>
-        This area is reserved for the Microsoft Copilot Geography Teach Bot.
-        <p style="margin:0.6rem 0 0.2rem;">Students will be able to:</p>
-        <ul>
-          <li>Ask questions</li>
-          <li>Receive IB Geography explanations</li>
-          <li>Request simpler explanations</li>
-          <li>Generate diagram ideas</li>
-          <li>Receive video recommendations</li>
-          <li>Prepare notes for class</li>
-        </ul>
-        <p style="margin:0.4rem 0 0;">No non-Microsoft AI should be connected.</p>
-      </div>
-
-      <div class="sbl-chat-area" id="sblChatArea">
-        <p class="sbl-chat-placeholder">Chat messages will appear here once the Microsoft Copilot Studio agent is connected.</p>
-      </div>
-
-      <div class="sbl-chat-input-row">
-        <input type="text" class="sbl-chat-input" placeholder="Ask a question... (Microsoft Copilot agent coming soon)" disabled>
-        <button type="button" class="sbl-chat-send" disabled>Send</button>
+      <div class="sbl-teach-bot-placeholder" id="sblTeachBotPlaceholder">
+        The Microsoft Copilot Studio agent will appear here.
       </div>
     </div>
   </div>
@@ -515,45 +453,15 @@
   });
 </script>
 
+<script src="/js/sbl-teach-bot.js"></script>
+
 <script>
 /* ============================================================
-   Lesson interface logic — Teach Me This Topic & Test My Knowledge
-   Front-end only. No AI/API calls of any kind happen in this file.
+   Test My Knowledge — quiz logic.
+   Front-end only. No AI/API calls happen in this file.
    ============================================================ */
 (function () {
 
-  /* ---------------- Teach modal open/close ---------------- */
-  var teachOverlay = document.getElementById('sblTeachModalOverlay');
-  var openTeachBtn = document.getElementById('sblOpenTeachModal');
-  var closeTeachBtn = document.getElementById('sblCloseTeachModal');
-
-  function openTeachModal() {
-    teachOverlay.hidden = false;
-  }
-  function closeTeachModal() {
-    teachOverlay.hidden = true;
-  }
-
-  openTeachBtn.addEventListener('click', openTeachModal);
-  closeTeachBtn.addEventListener('click', closeTeachModal);
-  teachOverlay.addEventListener('click', function (e) {
-    if (e.target === teachOverlay) closeTeachModal();
-  });
-
-  /* Starter prompt buttons currently just drop a placeholder line
-     into the chat area — no AI is called. This gives a visual
-     preview of the future chat flow once Copilot Studio is wired in. */
-  var promptButtons = document.querySelectorAll('.sbl-prompt-btn');
-  var chatArea = document.getElementById('sblChatArea');
-  promptButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      chatArea.innerHTML =
-        '<p class="sbl-chat-placeholder">You asked: &ldquo;' + btn.textContent +
-        '&rdquo;<br>The Microsoft Copilot Studio agent will answer this once connected.</p>';
-    });
-  });
-
-  /* ---------------- Quiz data ---------------- */
   var quizQuestions = [
     {
       question: 'How can rising temperatures affect agriculture?',
