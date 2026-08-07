@@ -165,15 +165,44 @@
 }
 
 .lh-topics { margin: 0.15rem 0 0.4rem; padding-left: 0.5rem; }
+
+/* Topic titles are now interactive toggle buttons rather than
+   plain text — reset default button styling to match the
+   previous static look, then layer on interactive states. */
 .lh-topic__title {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  width: 100%;
   padding: 0.4rem 0.6rem 0.4rem 1.1rem;
   font-size: 0.74rem;
+  font-family: inherit;
   color: var(--lh-sidebar-text);
+  background: none;
+  border: none;
   border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+}
+.lh-topic__title:hover { background: var(--lh-sidebar-hover); color: var(--lh-sidebar-strong); }
+.lh-topic__title:focus-visible {
+  outline: 2px solid var(--lh-green);
+  outline-offset: -2px;
 }
 .lh-topic--active .lh-topic__title { color: var(--lh-sidebar-strong); font-weight: 600; }
+
+.lh-topic__chevron {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transition: transform 0.15s var(--lh-ease);
+  transform: rotate(0deg);
+}
+.lh-topic--active .lh-topic__chevron { transform: rotate(90deg); }
+
 .lh-lessons { list-style: none; margin: 0.1rem 0 0.5rem; padding-left: 1.7rem; border-left: 1px solid var(--lh-sidebar-line); margin-left: 1.35rem; }
+.lh-lessons[hidden] { display: none; }
 .lh-lessons li { margin-bottom: 0.15rem; }
 .lh-lessons a {
   display: block;
@@ -328,6 +357,9 @@
   font-weight: 600;
   font-size: 0.82rem;
   transition: transform 0.15s var(--lh-ease), background 0.15s var(--lh-ease);
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 .lh-mode__btn:hover { transform: translateY(-1px); }
 .lh-mode--locked { opacity: 0.6; }

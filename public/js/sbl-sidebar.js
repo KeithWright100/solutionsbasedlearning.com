@@ -740,7 +740,8 @@
 
   function icon(name) {
     var icons = {
-      home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9"/></svg>'
+      home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9"/></svg>',
+      chevron: '<svg class="lh-topic__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" transform="rotate(90 12 12)"/></svg>'
     };
     return icons[name] || "";
   }
@@ -762,10 +763,12 @@
       out += '<div class="lh-topics">';
       unit.topics.forEach(function (topic, i) {
         var topicIsActive = opts.activeTopic === i;
-        out += '<div class="lh-topic' + (topicIsActive ? " lh-topic--active" : "") + '">';
-        out += '<span class="lh-topic__title">' + topic.title + "</span>";
-        if (topicIsActive && topic.lessons && topic.lessons.length) {
-          out += '<ul class="lh-lessons">';
+        out += '<div class="lh-topic' + (topicIsActive ? " lh-topic--active" : "") + '" data-topic-index="' + i + '">';
+        out += '<button type="button" class="lh-topic__title" aria-expanded="' + (topicIsActive ? "true" : "false") + '">';
+        out += '<span>' + topic.title + '</span>' + icon("chevron");
+        out += '</button>';
+        if (topic.lessons && topic.lessons.length) {
+          out += '<ul class="lh-lessons"' + (topicIsActive ? "" : " hidden") + '>';
           topic.lessons.forEach(function (lesson) {
             var isCurrent = opts.activeLessonHref && lesson.href === opts.activeLessonHref;
             out += '<li><a class="' + (isCurrent ? "is-current" : "") + '" href="' + lesson.href + '">' + lesson.label + "</a></li>";
@@ -803,5 +806,25 @@
     });
 
     mount.innerHTML = html;
+
+    /* Wire up topic-title toggle buttons: clicking expands/collapses
+       that topic's lesson list. Several topics can be open at once. */
+    mount.querySelectorAll(".lh-topic__title").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var topicEl = btn.closest(".lh-topic");
+        var list = topicEl.querySelector(".lh-lessons");
+        if (!list) return;
+        var isHidden = list.hasAttribute("hidden");
+        if (isHidden) {
+          list.removeAttribute("hidden");
+          btn.setAttribute("aria-expanded", "true");
+          topicEl.classList.add("lh-topic--active");
+        } else {
+          list.setAttribute("hidden", "");
+          btn.setAttribute("aria-expanded", "false");
+          topicEl.classList.remove("lh-topic--active");
+        }
+      });
+    });
   };
 })();
