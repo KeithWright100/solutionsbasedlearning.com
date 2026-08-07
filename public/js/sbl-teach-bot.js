@@ -1,8 +1,20 @@
 /* ============================================================
    SBL Geography Tutor — reusable engine
-   Reads lesson config from window.SBL_LESSONS[lessonId] (populated
-   by a lesson-config file such as sbl-population-lessons.js,
-   loaded before this file) and renders one shared tutor interface.
+   Reads lesson config from window.SBL_LESSONS[lessonId] and the
+   fixed syllabus sequence in window.SBL_LESSON_ORDER (populated by
+   a lesson-config file such as sbl-population-lessons.js, loaded
+   before this file) and renders one shared tutor interface with
+   three entry points:
+
+     openTeachBot(lessonId)        — full Teach Me Live panel
+     openTestMyKnowledge(lessonId) — jumps straight into the
+                                      10-question lesson quiz
+     openSpacedRetrieval(lessonId) — 5-question cumulative quiz
+                                      drawn only from lessons that
+                                      come BEFORE this one in
+                                      SBL_LESSON_ORDER (never from
+                                      future/untaught lessons)
+
    No Claude, Anthropic, OpenAI or other AI API is called anywhere
    in this file. The only network resource loaded is the iframe to
    the existing published Microsoft Copilot Studio agent.
@@ -12,7 +24,7 @@
   var SBL_TEACH_BOT_IFRAME_SRC =
     'https://copilotstudio.microsoft.com/environments/Default-9732db31-8695-4030-ae01-e3217b1daaec/bots/crf78_sblgeographytutor_cUR45B/webchat?__version__=2&enableFileAttachment=false&cliAgent=true';
 
-  var overlay, modal, bodyMount, titleEl, progressEl, closeBtn, expandBtn, announceEl;
+  var overlay, modal, bodyMount, titleEl, subtitleEl, progressEl, closeBtn, expandBtn, announceEl;
   var lastFocusedElement = null;
   var currentLesson = null;
   var isExpanded = false;
@@ -25,6 +37,12 @@
     if (!announceEl) return;
     announceEl.textContent = '';
     window.setTimeout(function () { announceEl.textContent = msg; }, 30);
+  }
+
+  function escapeHtml(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
   }
 
   function checklistKey(lessonId) { return 'sbl-checklist-' + lessonId; }
@@ -97,6 +115,49 @@
       '. Explain each of these simply first, then add IB Geography detail, with one example each. Finish with one short check-for-understanding question per topic. Do not write a full essay or an assessed answer for me.';
   }
 
+  function masteryBand(pct) {
+    if (pct >= 90) return 'Mastery';
+    if (pct >= 70) return 'Secure';
+    if (pct >= 50) return 'Developing';
+    return 'Beginning';
+  }
+
+  /* ---------------- Spaced retrieval bank ---------------- */
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  /* Builds the cumulative retrieval bank for a lesson: every quiz
+     question from every lesson that comes BEFORE this one in
+     SBL_LESSON_ORDER. Never includes the current lesson or any
+     lesson that comes after it — this is a cumulative model that
+     naturally grows as more lessons/units are added over time. */
+  function buildRetrievalBank(lessonId) {
+    var order = window.SBL_LESSON_ORDER || [];
+    var idx = order.indexOf(lessonId);
+    if (idx <= 0) return [];
+
+    var pool = [];
+    for (var i = 0; i < idx; i++) {
+      var prevLesson = window.SBL_LESSONS[order[i]];
+      if (!prevLesson) continue;
+      prevLesson.quiz.forEach(function (q) {
+        pool.push({
+          q: q.q, options: q.options, correct: q.correct,
+          explain: q.explain, misconception: q.misconception, tag: q.tag,
+          sourceLessonTitle: prevLesson.title
+        });
+      });
+    }
+    return pool;
+  }
+
   /* ---------------- Focus management ---------------- */
 
   function getFocusableElements() {
@@ -106,37 +167,92 @@
     ).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
   }
 
-  /* ---------------- Open / close / expand ---------------- */
+  /* ---------------- Shared setup ---------------- */
 
-  window.openTeachBot = function (lessonId) {
+  function bindElements() {
     overlay = document.getElementById('sblTeachBotOverlay');
-    if (!overlay) return;
-    lessonId = lessonId || overlay.getAttribute('data-lesson-id');
-    currentLesson = window.SBL_LESSONS && window.SBL_LESSONS[lessonId];
-    if (!currentLesson) {
-      console.error('SBL Geography Tutor: no lesson configuration found for id "' + lessonId + '"');
-      return;
-    }
-
     modal = document.getElementById('sblTeachBotModal');
     bodyMount = document.getElementById('sblTeachBotBody');
     titleEl = document.getElementById('sblTeachBotTitle');
+    subtitleEl = document.getElementById('sblTeachBotSubtitle');
     progressEl = document.getElementById('sblTeachBotProgress');
     closeBtn = document.getElementById('sblTeachBotClose');
     expandBtn = document.getElementById('sblTeachBotExpand');
     announceEl = document.getElementById('sblTeachBotAnnounce');
+  }
 
+  function openModalShell(lessonId) {
+    bindElements();
+    if (!overlay) return false;
+    lessonId = lessonId || overlay.getAttribute('data-lesson-id');
+    currentLesson = window.SBL_LESSONS && window.SBL_LESSONS[lessonId];
+    if (!currentLesson) {
+      console.error('SBL Geography Tutor: no lesson configuration found for id "' + lessonId + '"');
+      return false;
+    }
     lastFocusedElement = document.activeElement;
     iframeLoaded = false;
     quizState = null;
+    overlay.hidden = false;
+    return true;
+  }
 
+  /* ---------------- Entry point 1: Teach Me Live ---------------- */
+
+  window.openTeachBot = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
     titleEl.textContent = currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Knowledge acquisition for home learning';
     modal.setAttribute('aria-label', 'SBL Geography Tutor: ' + currentLesson.title);
 
-    renderBody();
+    renderTeachBody();
     updateProgress();
+    if (closeBtn) closeBtn.focus();
+  };
 
-    overlay.hidden = false;
+  /* ---------------- Entry point 2: Test My Knowledge ---------------- */
+
+  window.openTestMyKnowledge = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Test My Knowledge: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = '10 lesson-specific questions with instant feedback.';
+    modal.setAttribute('aria-label', 'Test My Knowledge: ' + currentLesson.title);
+
+    bodyMount.innerHTML = '<div class="sbl-teach-panel" style="border-right:none; width:100%;" id="sblQuizMount"></div>';
+    startQuizWithQuestions(shuffle(currentLesson.quiz), 'Test My Knowledge', false, null);
+    updateProgress();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 3: Spaced Retrieval ---------------- */
+
+  window.openSpacedRetrieval = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Spaced Retrieval: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Cumulative recall practice from previously taught lessons only.';
+    modal.setAttribute('aria-label', 'Spaced Retrieval: ' + currentLesson.title);
+
+    var bank = buildRetrievalBank(currentLesson.id);
+
+    if (bank.length === 0) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3>' +
+        '<p class="sbl-teach-focus">This is the first lesson in the unit, so there are no previous lessons to draw retrieval questions from yet. Spaced retrieval will unlock automatically as you move through later lessons.</p></div></div>';
+      if (closeBtn) closeBtn.focus();
+      return;
+    }
+
+    var picked = shuffle(bank).slice(0, Math.min(5, bank.length));
+    bodyMount.innerHTML = '<div class="sbl-teach-panel" style="border-right:none; width:100%;" id="sblQuizMount"></div>';
+    startQuizWithQuestions(picked, 'Spaced Retrieval', true, function () {
+      var note = document.createElement('div');
+      note.className = 'sbl-ready-note';
+      note.style.marginTop = '1rem';
+      note.textContent = 'Ready for class: bring this knowledge into today\u2019s discussion, case-study analysis, the 4Ps and written application.';
+      document.getElementById('sblQuizMount').appendChild(note);
+    });
+    updateProgress();
     if (closeBtn) closeBtn.focus();
   };
 
@@ -160,9 +276,9 @@
     document.body.style.overflow = (!overlay.hidden && isExpanded) ? 'hidden' : '';
   }
 
-  /* ---------------- Render ---------------- */
+  /* ---------------- Teach Me Live body ---------------- */
 
-  function renderBody() {
+  function renderTeachBody() {
     var lesson = currentLesson;
     var checklistState = getChecklistState(lesson.id, lesson.checklist.length);
     var doneCount = checklistState.filter(Boolean).length;
@@ -170,9 +286,7 @@
 
     var html = '<div class="sbl-teach-grid">';
 
-    /* Left panel */
     html += '<div class="sbl-teach-panel">';
-
     html += '<div class="sbl-teach-section"><h3>Syllabus focus</h3><p class="sbl-teach-focus">' + escapeHtml(lesson.syllabusFocus) + '</p></div>';
 
     html += '<div class="sbl-teach-section"><h3>Starter prompts</h3><div class="sbl-prompt-grid" id="sblPromptGrid"></div>';
@@ -183,13 +297,14 @@
     html += '<ul class="sbl-checklist-list" id="sblChecklistList"></ul>';
     html += '<p class="sbl-progress-note">Progress is currently stored on this device only.</p></div>';
 
-    html += '<div class="sbl-teach-section"><h3>Quiz</h3><div id="sblQuizMount"></div></div>';
+    html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">10 lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start 10-question quiz &rarr;</button></div>';
+
+    html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
 
     html += '<div class="sbl-teach-section sbl-ready-note">Ready for class: you will use this knowledge in class for discussion, collaboration, case-study analysis, the 4Ps and written application.</div>';
 
     html += '</div>';
 
-    /* Right panel */
     html += '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
 
     html += '</div>';
@@ -198,14 +313,14 @@
 
     renderPromptButtons(lesson);
     renderChecklist(lesson, checklistState);
-    renderQuizIntro(lesson);
     loadIframeIfNeeded();
-  }
 
-  function escapeHtml(str) {
-    var d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
+    document.getElementById('sblLaunchQuizFromTeach').addEventListener('click', function () {
+      window.openTestMyKnowledge(lesson.id);
+    });
+    document.getElementById('sblLaunchRetrievalFromTeach').addEventListener('click', function () {
+      window.openSpacedRetrieval(lesson.id);
+    });
   }
 
   function loadIframeIfNeeded() {
@@ -312,47 +427,36 @@
     progressEl.textContent = doneCount + '/' + currentLesson.checklist.length + ' checked';
   }
 
-  /* ---------------- Quiz ---------------- */
+  /* ---------------- Generic quiz engine (used by both
+     Test My Knowledge and Spaced Retrieval) ---------------- */
 
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
-    }
-    return a;
-  }
-
-  function renderQuizIntro(lesson) {
-    var mount = document.getElementById('sblQuizMount');
-    mount.innerHTML = '<button type="button" class="sbl-quiz-action" id="sblQuizStart">Start 5-question quiz &rarr;</button>';
-    document.getElementById('sblQuizStart').addEventListener('click', function () {
-      startQuiz(lesson);
-    });
-  }
-
-  function startQuiz(lesson) {
+  function startQuizWithQuestions(questions, contextLabel, showSource, onComplete) {
     quizState = {
-      questions: shuffle(lesson.quiz),
+      questions: questions,
       index: 0,
       score: 0,
       answered: false,
-      results: []
+      results: [],
+      contextLabel: contextLabel,
+      showSource: showSource,
+      onComplete: onComplete
     };
-    renderQuizQuestion(lesson);
+    renderQuizQuestion();
   }
 
-  function renderQuizQuestion(lesson) {
+  function renderQuizQuestion() {
     var mount = document.getElementById('sblQuizMount');
     var q = quizState.questions[quizState.index];
-    var options = q.options.map(function (opt, i) { return { text: opt, i: i }; });
 
-    var html = '<div class="sbl-quiz-progress">Question ' + (quizState.index + 1) + ' of ' + quizState.questions.length + '</div>';
+    var html = '<div class="sbl-quiz-progress">' + escapeHtml(quizState.contextLabel) + ' \u2014 Question ' + (quizState.index + 1) + ' of ' + quizState.questions.length + '</div>';
+    if (quizState.showSource && q.sourceLessonTitle) {
+      html += '<div class="sbl-quiz-progress" style="margin-top:-0.4rem; margin-bottom:0.6rem;">From: ' + escapeHtml(q.sourceLessonTitle) + '</div>';
+    }
     html += '<p class="sbl-quiz-question">' + escapeHtml(q.q) + '</p>';
     html += '<div class="sbl-quiz-options" id="sblQuizOptions">';
-    options.forEach(function (opt, idx) {
+    q.options.forEach(function (opt, idx) {
       var letter = ['A', 'B', 'C', 'D'][idx];
-      html += '<button type="button" class="sbl-quiz-option" data-index="' + opt.i + '">' + letter + '. ' + escapeHtml(opt.text) + '</button>';
+      html += '<button type="button" class="sbl-quiz-option" data-index="' + idx + '">' + letter + '. ' + escapeHtml(opt) + '</button>';
     });
     html += '</div><div id="sblQuizFeedbackWrap"></div>';
     mount.innerHTML = html;
@@ -377,8 +481,11 @@
         var isLast = quizState.index === quizState.questions.length - 1;
         var feedbackWrap = document.getElementById('sblQuizFeedbackWrap');
         var feedbackClass = isCorrect ? 'is-correct' : 'is-incorrect';
+        var feedbackText = isCorrect
+          ? q.explain
+          : q.explain + (q.misconception ? ' <strong>Common misconception:</strong> ' + escapeHtml(q.misconception) : '');
         feedbackWrap.innerHTML =
-          '<div class="sbl-quiz-feedback ' + feedbackClass + '"><strong>' + (isCorrect ? 'Correct.' : 'Not quite.') + '</strong> ' + escapeHtml(q.explain) + '</div>' +
+          '<div class="sbl-quiz-feedback ' + feedbackClass + '"><strong>' + (isCorrect ? 'Correct.' : 'Not quite.') + '</strong> ' + (isCorrect ? escapeHtml(q.explain) : escapeHtml(q.explain) + (q.misconception ? ' <em>Common misconception: ' + escapeHtml(q.misconception) + '</em>' : '')) + '</div>' +
           '<button type="button" class="sbl-quiz-next" id="sblQuizNextBtn">' + (isLast ? 'See my results' : 'Next question') + ' &rarr;</button>';
 
         announce(isCorrect ? 'Correct answer.' : 'Incorrect answer. ' + q.explain);
@@ -386,27 +493,30 @@
         document.getElementById('sblQuizNextBtn').addEventListener('click', function () {
           quizState.answered = false;
           if (isLast) {
-            renderQuizResult(lesson);
+            renderQuizResult();
           } else {
             quizState.index++;
-            renderQuizQuestion(lesson);
+            renderQuizQuestion();
           }
         });
       });
     });
   }
 
-  function renderQuizResult(lesson) {
+  function renderQuizResult() {
     var mount = document.getElementById('sblQuizMount');
+    var lesson = currentLesson;
     var total = quizState.questions.length;
     var score = quizState.score;
+    var pct = Math.round((score / total) * 100);
+    var band = masteryBand(pct);
     var strengths = quizState.results.filter(function (r) { return r.correct; }).map(function (r) { return r.tag; });
     var toRevisit = quizState.results.filter(function (r) { return !r.correct; }).map(function (r) { return r.tag; });
 
     var html = '<div class="sbl-quiz-result">';
-    html += '<div class="sbl-quiz-progress">Quiz complete</div>';
+    html += '<div class="sbl-quiz-progress">' + escapeHtml(quizState.contextLabel) + ' complete</div>';
     html += '<div class="sbl-quiz-result__score">' + score + ' / ' + total + '</div>';
-    html += '<p class="sbl-quiz-result__label">' + Math.round((score / total) * 100) + '% correct</p>';
+    html += '<p class="sbl-quiz-result__label">' + pct + '% correct \u2014 Mastery level: <strong>' + band + '</strong></p>';
     html += '<div class="sbl-quiz-result__breakdown">';
     html += '<p><strong>Strengths:</strong> ' + (strengths.length ? escapeHtml(strengths.join(', ')) : 'Keep practising \u2014 try again to build strengths here.') + '</p>';
     html += '<p><strong>Topics to revisit:</strong> ' + (toRevisit.length ? escapeHtml(toRevisit.join(', ')) : 'None \u2014 great work.') + '</p>';
@@ -419,69 +529,89 @@
     html += '</div></div>';
     mount.innerHTML = html;
 
-    document.getElementById('sblQuizRetry').addEventListener('click', function () { startQuiz(lesson); });
+    var savedState = quizState;
+
+    document.getElementById('sblQuizRetry').addEventListener('click', function () {
+      startQuizWithQuestions(savedState.questions.slice(), savedState.contextLabel, savedState.showSource, savedState.onComplete);
+    });
 
     document.getElementById('sblQuizReview').addEventListener('click', function () {
       var prompt = buildReviewPrompt(lesson, toRevisit);
       copyText(prompt, function (success) {
         var statusBox = document.getElementById('sblCopyStatus');
-        statusBox.className = 'sbl-copy-status is-visible';
-        statusBox.innerHTML = success
+        var target = statusBox || mount;
+        var msg = success
           ? 'Review prompt copied. Paste it into the tutor chat and press Send.'
           : 'Automatic copy did not work. Select and copy this prompt manually:<textarea readonly rows="3">' + escapeHtml(prompt) + '</textarea>';
+        if (statusBox) {
+          statusBox.className = 'sbl-copy-status is-visible';
+          statusBox.innerHTML = msg;
+        } else {
+          announce(success ? 'Review prompt copied to clipboard.' : 'Automatic copy failed.');
+        }
         announce(success ? 'Review prompt copied to clipboard.' : 'Automatic copy failed. A manual copy box is available.');
       });
     });
 
     document.getElementById('sblQuizDownload').addEventListener('click', function () {
-      downloadQuizReport(lesson, score, total, quizState);
+      downloadQuizReport(lesson, score, total, pct, band, savedState);
     });
 
     document.getElementById('sblQuizOneNote').addEventListener('click', function () {
-      var text = buildPlainTextReport(lesson, score, total, quizState);
+      var text = buildPlainTextReport(lesson, score, total, pct, band, savedState);
       copyText(text, function (success) {
         announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
       });
     });
+
+    if (typeof savedState.onComplete === 'function') {
+      savedState.onComplete();
+    }
   }
 
-  function buildPlainTextReport(lesson, score, total, state) {
+  function buildPlainTextReport(lesson, score, total, pct, band, state) {
     var lines = [];
     lines.push('SBL Geography');
     lines.push('Unit: Changing Population');
     lines.push('Topic ' + lesson.topicNumber + ': ' + lesson.topicTitle);
     lines.push('Lesson: ' + lesson.title);
+    lines.push('Assessment: ' + state.contextLabel);
     lines.push('Completed: ' + new Date().toLocaleString());
-    lines.push('Score: ' + score + ' / ' + total);
+    lines.push('Score: ' + score + ' / ' + total + ' (' + pct + '%) \u2014 Mastery level: ' + band);
     lines.push('');
     state.questions.forEach(function (q, i) {
       var result = state.results[i];
-      lines.push((i + 1) + '. ' + q.q);
+      lines.push((i + 1) + '. ' + q.q + (state.showSource && q.sourceLessonTitle ? ' [from: ' + q.sourceLessonTitle + ']' : ''));
       lines.push('Correct answer: ' + q.options[q.correct]);
       lines.push('Result: ' + (result && result.correct ? 'Correct' : 'Incorrect'));
       lines.push('Explanation: ' + q.explain);
+      if (!(result && result.correct) && q.misconception) lines.push('Common misconception: ' + q.misconception);
       lines.push('');
     });
     return lines.join('\n');
   }
 
-  function downloadQuizReport(lesson, score, total, state) {
+  function downloadQuizReport(lesson, score, total, pct, band, state) {
     var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Geography Quiz Report</title>' +
       '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:700px;margin:0 auto;color:#1B2029;}' +
       'h1{font-size:1.3rem;} .q{margin:1rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;}' +
-      '.correct{color:#14532D;} .incorrect{color:#9F1239;}</style></head><body>';
+      '.correct{color:#14532D;} .incorrect{color:#9F1239;} .src{font-size:0.8rem;color:#666;}</style></head><body>';
     html += '<h1>SBL Geography \u2014 Quiz Report</h1>';
     html += '<p><strong>Unit:</strong> Changing Population<br>';
     html += '<strong>Topic ' + lesson.topicNumber + ':</strong> ' + escapeHtml(lesson.topicTitle) + '<br>';
     html += '<strong>Lesson:</strong> ' + escapeHtml(lesson.title) + '<br>';
+    html += '<strong>Assessment:</strong> ' + escapeHtml(state.contextLabel) + '<br>';
     html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '<br>';
-    html += '<strong>Score:</strong> ' + score + ' / ' + total + '</p><hr>';
+    html += '<strong>Score:</strong> ' + score + ' / ' + total + ' (' + pct + '%) \u2014 Mastery level: ' + band + '</p><hr>';
     state.questions.forEach(function (q, i) {
       var result = state.results[i];
-      html += '<div class="q"><p><strong>' + (i + 1) + '. ' + escapeHtml(q.q) + '</strong></p>';
+      html += '<div class="q"><p><strong>' + (i + 1) + '. ' + escapeHtml(q.q) + '</strong>' +
+        (state.showSource && q.sourceLessonTitle ? ' <span class="src">(from: ' + escapeHtml(q.sourceLessonTitle) + ')</span>' : '') + '</p>';
       html += '<p>Correct answer: ' + escapeHtml(q.options[q.correct]) + '</p>';
       html += '<p class="' + (result && result.correct ? 'correct' : 'incorrect') + '">Result: ' + (result && result.correct ? 'Correct' : 'Incorrect') + '</p>';
-      html += '<p>' + escapeHtml(q.explain) + '</p></div>';
+      html += '<p>' + escapeHtml(q.explain) + '</p>';
+      if (!(result && result.correct) && q.misconception) html += '<p><em>Common misconception: ' + escapeHtml(q.misconception) + '</em></p>';
+      html += '</div>';
     });
     html += '<p><em>Use your browser\u2019s Print option and choose \u201cSave as PDF\u201d if you want a PDF copy.</em></p>';
     html += '</body></html>';
@@ -499,13 +629,8 @@
   /* ---------------- Global listeners ---------------- */
 
   document.addEventListener('DOMContentLoaded', function () {
-    overlay = document.getElementById('sblTeachBotOverlay');
+    bindElements();
     if (!overlay) return;
-
-    modal = document.getElementById('sblTeachBotModal');
-    closeBtn = document.getElementById('sblTeachBotClose');
-    expandBtn = document.getElementById('sblTeachBotExpand');
-    announceEl = document.getElementById('sblTeachBotAnnounce');
 
     if (closeBtn) closeBtn.addEventListener('click', window.closeTeachBot);
     if (expandBtn) expandBtn.addEventListener('click', function () { setExpanded(!isExpanded); });
