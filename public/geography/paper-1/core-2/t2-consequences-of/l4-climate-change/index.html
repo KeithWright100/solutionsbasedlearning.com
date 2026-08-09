@@ -8,256 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
-<style>
-  /* ============================================================
-     Lesson interface modals — SBL Geography Tutor & Test My Knowledge
-     The SBL Geography Tutor is a live Microsoft Copilot Studio
-     agent, embedded below via iframe (Custom website channel).
-     No Claude/Anthropic connection exists anywhere in this file.
-     ============================================================ */
-
-  .sbl-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 20, 30, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    z-index: 200;
-  }
-  .sbl-modal-overlay[hidden] { display: none; }
-
-  .sbl-modal {
-    background: var(--lh-surface);
-    border-radius: 16px;
-    width: 100%;
-    max-width: 660px;
-    max-height: 88vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(10, 15, 25, 0.35);
-  }
-
-  .sbl-modal__header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.4rem 1.6rem 1.1rem;
-    border-bottom: 1px solid var(--lh-border);
-    flex-shrink: 0;
-  }
-  .sbl-modal__header h2 {
-    font-family: var(--lh-font-display);
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin: 0 0 0.25rem;
-    color: var(--lh-ink);
-    line-height: 1.3;
-  }
-  .sbl-modal__subtitle {
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--lh-muted);
-    line-height: 1.5;
-  }
-  .sbl-modal__close {
-    flex-shrink: 0;
-    width: 34px;
-    height: 34px;
-    border: none;
-    background: var(--lh-bg);
-    color: var(--lh-body);
-    border-radius: 8px;
-    font-size: 1.3rem;
-    line-height: 1;
-    cursor: pointer;
-  }
-  .sbl-modal__close:hover { background: var(--lh-border); color: var(--lh-ink); }
-  .sbl-modal__close:focus-visible {
-    outline: 2px solid var(--lh-indigo);
-    outline-offset: 2px;
-  }
-
-  .sbl-modal__body {
-    padding: 1.2rem 1.4rem 1.4rem;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-  }
-
-  /* ---------------- SBL Geography Tutor panel ---------------- */
-
-  .sbl-prompt-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 0.5rem;
-    margin-bottom: 0.9rem;
-    flex-shrink: 0;
-  }
-  .sbl-prompt-btn {
-    text-align: left;
-    padding: 0.55rem 0.75rem;
-    border-radius: 9px;
-    border: 1px solid var(--lh-border);
-    background: var(--lh-bg);
-    color: var(--lh-ink);
-    font-family: var(--lh-font-body);
-    font-size: 0.78rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .sbl-prompt-btn:hover {
-    border-color: var(--lh-indigo);
-    background: var(--lh-indigo-bg);
-    color: var(--lh-indigo);
-  }
-  .sbl-prompt-btn:focus-visible {
-    outline: 2px solid var(--lh-indigo);
-    outline-offset: 2px;
-  }
-
-  .sbl-suggestion-box {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--lh-indigo-bg);
-    border: 1px solid var(--lh-indigo);
-    border-radius: 9px;
-    padding: 0.6rem 0.85rem;
-    margin-bottom: 0.9rem;
-    font-size: 0.8rem;
-    color: var(--lh-ink);
-    flex-shrink: 0;
-  }
-  .sbl-suggestion-box[hidden] { display: none; }
-  .sbl-suggestion-label {
-    font-weight: 700;
-    color: var(--lh-indigo);
-    flex-shrink: 0;
-  }
-  .sbl-suggestion-text { font-style: italic; }
-
-  .sbl-teach-bot-frame-wrap {
-    flex: 1;
-    min-height: 300px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--lh-border);
-  }
-  .sbl-teach-bot-frame-wrap iframe {
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
-    border: 0;
-    display: block;
-  }
-
-  /* ---------------- Quiz modal ---------------- */
-
-  .sbl-quiz-progress {
-    font-family: var(--lh-font-mono);
-    font-size: 0.72rem;
-    color: var(--lh-muted);
-    margin-bottom: 0.9rem;
-  }
-  .sbl-quiz-question {
-    font-family: var(--lh-font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--lh-ink);
-    margin: 0 0 1rem;
-    line-height: 1.4;
-  }
-  .sbl-quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .sbl-quiz-option {
-    text-align: left;
-    padding: 0.75rem 1rem;
-    border-radius: 10px;
-    border: 1.5px solid var(--lh-border);
-    background: var(--lh-bg);
-    color: var(--lh-ink);
-    font-family: var(--lh-font-body);
-    font-size: 0.88rem;
-    cursor: pointer;
-  }
-  .sbl-quiz-option:hover:not(:disabled) {
-    border-color: var(--lh-green);
-  }
-  .sbl-quiz-option:disabled { cursor: default; }
-  .sbl-quiz-option.is-correct {
-    border-color: var(--lh-green);
-    background: var(--lh-green-bg);
-    color: #14532D;
-    font-weight: 700;
-  }
-  .sbl-quiz-option.is-incorrect {
-    border-color: #E11D48;
-    background: #FDE8ED;
-    color: #9F1239;
-    font-weight: 700;
-  }
-
-  .sbl-quiz-feedback {
-    padding: 0.85rem 1rem;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
-  .sbl-quiz-feedback.is-correct { background: var(--lh-green-bg); color: #14532D; }
-  .sbl-quiz-feedback.is-incorrect { background: #FDE8ED; color: #9F1239; }
-
-  .sbl-quiz-next {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.65rem 1.2rem;
-    border-radius: 10px;
-    border: none;
-    background: var(--lh-green);
-    color: #0B1A10;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-  }
-
-  .sbl-quiz-result {
-    text-align: center;
-    padding: 1rem 0 0.5rem;
-  }
-  .sbl-quiz-result__score {
-    font-family: var(--lh-font-display);
-    font-weight: 700;
-    font-size: 2.2rem;
-    color: var(--lh-green);
-    margin: 0.3rem 0 0.2rem;
-  }
-  .sbl-quiz-result__label {
-    font-size: 0.85rem;
-    color: var(--lh-muted);
-    margin-bottom: 1.4rem;
-  }
-  .sbl-quiz-retry {
-    padding: 0.7rem 1.4rem;
-    border-radius: 10px;
-    border: none;
-    background: var(--lh-green);
-    color: #0B1A10;
-    font-weight: 700;
-    font-size: 0.88rem;
-    cursor: pointer;
-  }
-</style>
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
 </head>
 <body class="lh">
 <div class="lh-shell">
@@ -283,7 +34,7 @@
       <main>
         <div class="lh-page-head">
           <h1>Climate change and agriculture</h1>
-          <p>Part of “Consequences of global climate change” within Unit 2: Global Climate.</p>
+          <p>Part of "Consequences of global climate change" within Unit 2: Global Climate.</p>
         </div>
 
         <div class="lh-stats">
@@ -311,10 +62,10 @@
             <span class="lh-mode__icon lh-bg-indigo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg></span>
             <div class="lh-mode__body">
               <span class="lh-mode__num">1</span>
-              <p class="lh-mode__title">Teach Me This Topic</p>
-              <p class="lh-mode__desc">Interactive lesson with explanations, diagrams and examples to help you understand the content.</p>
+              <p class="lh-mode__title">Teach Me Live</p>
+              <p class="lh-mode__desc">Open the SBL Geography Tutor for an interactive lesson, starter prompts, a knowledge checklist and a quiz.</p>
             </div>
-            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal" onclick="openTeachBot()">Start Learning &rarr;</button>
+            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal" aria-label="Teach Me Live: Climate change and agriculture" onclick="openTeachBot('CC07')">Teach Me Live &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -324,7 +75,7 @@
               <p class="lh-mode__title">Test My Knowledge</p>
               <p class="lh-mode__desc">Check your understanding with a variety of questions and get instant feedback.</p>
             </div>
-            <button type="button" class="lh-mode__btn lh-c-green" id="sblOpenQuizModal">Start Quiz &rarr;</button>
+            <button type="button" class="lh-mode__btn lh-c-green" aria-label="Test My Knowledge: Climate change and agriculture" onclick="openTestMyKnowledge('CC07')">Start Quiz &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -337,14 +88,14 @@
             <a class="lh-mode__btn lh-c-blue" href="#">Practice Now &rarr;</a>
           </div>
 
-          <div class="lh-mode lh-mode--locked">
+          <div class="lh-mode">
             <span class="lh-mode__icon lh-bg-orange" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></span>
             <div class="lh-mode__body">
               <span class="lh-mode__num">4</span>
               <p class="lh-mode__title">Spaced Retrieval Quiz</p>
               <p class="lh-mode__desc">Strengthen your long-term memory with adaptive questions from this and previous lessons.</p>
             </div>
-            <span class="lh-mode__btn lh-c-orange">Start Quiz &rarr;</span>
+            <button type="button" class="lh-mode__btn lh-c-orange" aria-label="Spaced Retrieval: Climate change and agriculture" onclick="openSpacedRetrieval('CC07')">Start Quiz &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -382,7 +133,7 @@
             <span class="lh-ring__label">Not started</span>
           </div>
           <ul class="lh-checklist" style="text-align:left; margin-top:1.9rem;">
-            <li><span class="lh-checklist__dot"></span>Teach Me This Topic</li>
+            <li><span class="lh-checklist__dot"></span>Teach Me Live</li>
             <li><span class="lh-checklist__dot"></span>Test My Knowledge</li>
             <li><span class="lh-checklist__dot"></span>IB-Style Questions</li>
             <li><span class="lh-checklist__dot"></span>Spaced Retrieval Quiz</li>
@@ -417,66 +168,31 @@
 </div>
 
 <!-- ============================================================
-     SBL GEOGRAPHY TUTOR — teaching panel modal (Climate Change and Agriculture)
-     The Microsoft Copilot Studio agent "SBL Geography Tutor" is
-     embedded live below via iframe (Custom website channel).
-     No Claude/Anthropic connection exists anywhere in this file.
-     Behaviour managed by /js/sbl-teach-bot.js (openTeachBot / closeTeachBot).
+     SBL GEOGRAPHY TUTOR — shared modal shell.
+     Content is rendered dynamically by /js/sbl-teach-bot.js from
+     the lesson configuration in /js/sbl-climate-lessons.js
+     (lesson id: CC07). No AI/API connection exists in this markup
+     — the only remote resource is the existing published
+     Microsoft Copilot Studio "SBL Geography Tutor" agent iframe.
      ============================================================ -->
-<div class="sbl-modal-overlay" id="sblTeachBotOverlay" hidden>
-  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle">
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="CC07" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
     <div class="sbl-modal__header">
-      <div>
-        <h2 id="sblTeachBotTitle">SBL Geography Tutor: Climate Change and Agriculture</h2>
-        <p class="sbl-modal__subtitle">Use the tutor to learn the essential syllabus content before class. You can ask for an explanation, diagram guidance, note-making help, a video recommendation or a multiple-choice quiz.</p>
+      <div class="sbl-modal__header-text">
+        <p class="sbl-modal__eyebrow">SBL Geography Tutor</p>
+        <h2 id="sblTeachBotTitle"></h2>
+        <p class="sbl-modal__subtitle" id="sblTeachBotSubtitle">Knowledge acquisition for home learning</p>
       </div>
-      <button type="button" class="sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
-    </div>
-    <div class="sbl-modal__body">
-      <div class="sbl-prompt-grid">
-        <button type="button" class="sbl-prompt-btn">Teach me this lesson</button>
-        <button type="button" class="sbl-prompt-btn">Impacts on crop yields</button>
-        <button type="button" class="sbl-prompt-btn">Food security</button>
-        <button type="button" class="sbl-prompt-btn">Livestock</button>
-        <button type="button" class="sbl-prompt-btn">Pests and diseases</button>
-        <button type="button" class="sbl-prompt-btn">Drought and flooding</button>
-        <button type="button" class="sbl-prompt-btn">Changing growing seasons</button>
-        <button type="button" class="sbl-prompt-btn">Agricultural adaptation</button>
-        <button type="button" class="sbl-prompt-btn">Help me draw a diagram</button>
-        <button type="button" class="sbl-prompt-btn">Quiz me</button>
-      </div>
-
-      <div class="sbl-suggestion-box" id="sblTeachBotSuggestion" hidden>
-        <span class="sbl-suggestion-label">Try asking:</span>
-        <span class="sbl-suggestion-text"></span>
-      </div>
-
-      <div class="sbl-teach-bot-frame-wrap">
-        <iframe
-          title="SBL Geography Tutor chat"
-          src="https://copilotstudio.microsoft.com/environments/Default-9732db31-8695-4030-ae01-e3217b1daaec/bots/crf78_sblgeographytutor_cUR45B/webchat?__version__=2&amp;enableFileAttachment=false&amp;cliAgent=true"
-        ></iframe>
+      <div class="sbl-modal__header-actions">
+        <span class="sbl-modal__progress" id="sblTeachBotProgress"></span>
+        <button type="button" class="sbl-modal__icon-btn" id="sblTeachBotExpand">Expand to full page</button>
+        <button type="button" class="sbl-modal__icon-btn sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
       </div>
     </div>
+    <div class="sbl-modal__body" id="sblTeachBotBody"></div>
   </div>
 </div>
-
-<!-- ============================================================
-     TEST MY KNOWLEDGE — quiz modal
-     Fully working, client-side only. No AI connected.
-     ============================================================ -->
-<div class="sbl-modal-overlay" id="sblQuizModalOverlay" hidden>
-  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblQuizModalTitle">
-    <div class="sbl-modal__header">
-      <div>
-        <h2 id="sblQuizModalTitle">Test My Knowledge</h2>
-        <p class="sbl-modal__subtitle">Climate Change and Agriculture</p>
-      </div>
-      <button type="button" class="sbl-modal__close" id="sblCloseQuizModal" aria-label="Close">&times;</button>
-    </div>
-    <div class="sbl-modal__body" id="sblQuizBody"></div>
-  </div>
-</div>
+<div aria-live="polite" class="sbl-sr-only" id="sblTeachBotAnnounce"></div>
 
 <script src="/js/sbl-sidebar.js"></script>
 <script>
@@ -486,170 +202,8 @@
     activeLessonHref: '/geography/paper-1/core-2/t2-consequences-of/l4-climate-change'
   });
 </script>
-
+<script src="/js/sbl-population-lessons.js"></script>
+<script src="/js/sbl-climate-lessons.js"></script>
 <script src="/js/sbl-teach-bot.js"></script>
-
-<script>
-/* ============================================================
-   Test My Knowledge — quiz logic.
-   Front-end only. No AI/API calls happen in this file.
-   ============================================================ */
-(function () {
-
-  var quizQuestions = [
-    {
-      question: 'How can rising temperatures affect agriculture?',
-      options: ['Increase soil moisture', 'Reduce evaporation', 'Increase crop stress', 'Stop rainfall'],
-      correct: 2,
-      feedback: 'Higher temperatures increase evaporation and place crops under greater stress.'
-    },
-    {
-      question: 'What is food security?',
-      options: ['Protection from crime', 'Reliable access to sufficient nutritious food', 'Crop exports', 'Food storage facilities'],
-      correct: 1,
-      feedback: 'Food security means consistent access to enough safe and nutritious food.'
-    },
-    {
-      question: 'Which farming system is often most vulnerable?',
-      options: ['Mechanised farming', 'Rain-fed subsistence farming', 'Hydroponics', 'Indoor farming'],
-      correct: 1,
-      feedback: 'Rain-fed farming depends heavily on climate conditions.'
-    },
-    {
-      question: 'Which climate hazard commonly damages crops?',
-      options: ['Drought', 'Tourism', 'Retail growth', 'Urbanisation'],
-      correct: 0,
-      feedback: 'Drought reduces water availability and crop yields.'
-    },
-    {
-      question: 'How can flooding affect agriculture?',
-      options: ['Improve all crop production', 'Destroy crops and soils', 'Reduce erosion', 'Remove pests permanently'],
-      correct: 1,
-      feedback: 'Floodwater can destroy crops and damage soils.'
-    },
-    {
-      question: 'What is adaptation?',
-      options: ['Ignoring environmental change', 'Actions taken to reduce impacts', 'Increasing emissions', 'Economic migration'],
-      correct: 1,
-      feedback: 'Adaptation means adjusting to climate change.'
-    },
-    {
-      question: 'Which adaptation strategy might farmers use?',
-      options: ['Climate-resistant crops', 'More pollution', 'Less irrigation', 'Deforestation'],
-      correct: 0,
-      feedback: 'Climate-resistant crops help reduce vulnerability.'
-    },
-    {
-      question: 'Why might food prices rise?',
-      options: ['Increased yields everywhere', 'Reduced crop productivity', 'Better transport', 'Cooler temperatures'],
-      correct: 1,
-      feedback: 'Lower production often increases prices.'
-    },
-    {
-      question: 'Which areas may benefit from longer growing seasons?',
-      options: ['Some northern regions', 'Low-lying islands', 'Desert interiors', 'Coastal Bangladesh'],
-      correct: 0,
-      feedback: 'Some higher-latitude regions may gain agricultural opportunities.'
-    },
-    {
-      question: 'Which statement is most accurate?',
-      options: ['Climate change affects all places equally', 'Agriculture is unaffected by climate', 'Some places may benefit while others suffer', 'Adaptation is impossible'],
-      correct: 2,
-      feedback: 'Climate impacts are uneven and vary by location.'
-    }
-  ];
-
-  var quizOverlay = document.getElementById('sblQuizModalOverlay');
-  var openQuizBtn = document.getElementById('sblOpenQuizModal');
-  var closeQuizBtn = document.getElementById('sblCloseQuizModal');
-  var quizBody = document.getElementById('sblQuizBody');
-
-  var quizState = { index: 0, score: 0, answered: false };
-
-  function openQuizModal() {
-    quizState = { index: 0, score: 0, answered: false };
-    renderQuizQuestion();
-    quizOverlay.hidden = false;
-  }
-  function closeQuizModal() {
-    quizOverlay.hidden = true;
-  }
-
-  function renderQuizQuestion() {
-    var q = quizQuestions[quizState.index];
-    var html = '<div class="sbl-quiz-progress">Question ' + (quizState.index + 1) + ' of ' + quizQuestions.length + '</div>';
-    html += '<p class="sbl-quiz-question">' + q.question + '</p>';
-    html += '<div class="sbl-quiz-options" id="sblQuizOptions">';
-    q.options.forEach(function (opt, i) {
-      html += '<button type="button" class="sbl-quiz-option" data-index="' + i + '">' + opt + '</button>';
-    });
-    html += '</div>';
-    html += '<div id="sblQuizFeedbackWrap"></div>';
-    quizBody.innerHTML = html;
-
-    var optionButtons = quizBody.querySelectorAll('.sbl-quiz-option');
-    optionButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        if (quizState.answered) return;
-        quizState.answered = true;
-        var chosen = parseInt(btn.getAttribute('data-index'), 10);
-        var isCorrect = chosen === q.correct;
-        if (isCorrect) quizState.score++;
-
-        optionButtons.forEach(function (b) {
-          b.disabled = true;
-          var i = parseInt(b.getAttribute('data-index'), 10);
-          if (i === q.correct) b.classList.add('is-correct');
-          else if (i === chosen) b.classList.add('is-incorrect');
-        });
-
-        var feedbackWrap = document.getElementById('sblQuizFeedbackWrap');
-        var feedbackClass = isCorrect ? 'is-correct' : 'is-incorrect';
-        var feedbackHeading = isCorrect ? 'Correct!' : 'Not quite.';
-        var isLast = quizState.index === quizQuestions.length - 1;
-        var nextLabel = isLast ? 'See my score' : 'Next question';
-
-        feedbackWrap.innerHTML =
-          '<div class="sbl-quiz-feedback ' + feedbackClass + '"><strong>' + feedbackHeading + '</strong> ' + q.feedback + '</div>' +
-          '<button type="button" class="sbl-quiz-next" id="sblQuizNextBtn">' + nextLabel + ' &rarr;</button>';
-
-        document.getElementById('sblQuizNextBtn').addEventListener('click', function () {
-          quizState.answered = false;
-          if (isLast) {
-            renderQuizResult();
-          } else {
-            quizState.index++;
-            renderQuizQuestion();
-          }
-        });
-      });
-    });
-  }
-
-  function renderQuizResult() {
-    var total = quizQuestions.length;
-    var score = quizState.score;
-    var html = '<div class="sbl-quiz-result">';
-    html += '<div class="sbl-quiz-progress">Quiz complete</div>';
-    html += '<div class="sbl-quiz-result__score">' + score + ' / ' + total + '</div>';
-    html += '<p class="sbl-quiz-result__label">' + Math.round((score / total) * 100) + '% correct</p>';
-    html += '<button type="button" class="sbl-quiz-retry" id="sblQuizRetryBtn">Retry quiz</button>';
-    html += '</div>';
-    quizBody.innerHTML = html;
-
-    document.getElementById('sblQuizRetryBtn').addEventListener('click', function () {
-      quizState = { index: 0, score: 0, answered: false };
-      renderQuizQuestion();
-    });
-  }
-
-  openQuizBtn.addEventListener('click', openQuizModal);
-  closeQuizBtn.addEventListener('click', closeQuizModal);
-  quizOverlay.addEventListener('click', function (e) {
-    if (e.target === quizOverlay) closeQuizModal();
-  });
-
-})();
-</script>
 </body>
 </html>
