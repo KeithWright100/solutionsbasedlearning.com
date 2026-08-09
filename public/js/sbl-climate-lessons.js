@@ -120,6 +120,36 @@ window.SBL_LESSONS.CC03 = {
     'I can explain how globalization and trade affect emissions.',
     'I can describe uneven global patterns of emissions.'
   ],
+challenge: {
+    question: 'Climate change is caused by humans. To what extent do you agree with this statement?',
+    intro: 'Use the tutor to plan this essay, not to write it. Work through each stage below in order, then use your own notes to write the essay yourself.',
+    stages: [
+      {
+        label: 'Understand the question',
+        prompt: 'I am planning an IB Geography essay: "Climate change is caused by humans. To what extent do you agree with this statement?" Help me understand the question before I plan any content. Ask me what the command term "to what extent" is asking me to do, and ask me to define "climate change" and "caused by humans" in my own words. Do not give me the definitions or the answer \u2014 ask me questions and check my understanding, correcting me gently if I get something wrong.'
+      },
+      {
+        label: 'Identify human causes',
+        prompt: 'For the same essay question, help me identify the human causes of climate change. Ask me to list them first, then ask me follow-up questions to check I understand the evidence and mechanism behind each one, such as the enhanced greenhouse effect, fossil fuels and deforestation. Do not list them for me first \u2014 let me try, then check and extend my answer.'
+      },
+      {
+        label: 'Identify natural causes',
+        prompt: 'For the same essay question, help me identify the natural causes of climate change I have studied, such as Milankovitch cycles, solar variability and volcanic activity. Ask me to recall them first, then question me on the evidence and timescales involved for each one. Do not list them for me first.'
+      },
+      {
+        label: 'Weigh the evidence',
+        prompt: 'For the same essay question, help me weigh the human causes against the natural causes. Ask me questions about timescale, scale and magnitude, and scientific consensus. Push me to compare them directly rather than just listing them separately. Do not tell me which side is stronger \u2014 ask me to reason it out and challenge my logic if it is weak.'
+      },
+      {
+        label: 'Form your judgement',
+        prompt: 'For the same essay question, help me form my own judgement on "to what extent" I agree that climate change is caused by humans. Ask me to state my position and justify it using the evidence I have already discussed. Challenge me if my justification is weak or one-sided. Do not give me a thesis statement \u2014 ask me for mine and help me sharpen it.'
+      },
+      {
+        label: 'Plan your structure',
+        prompt: 'For the same essay question, help me plan the structure of my essay: introduction, main paragraphs, and conclusion, based on my judgement and evidence so far. Ask me what each paragraph should argue and in what order. Do not write any paragraph or sentence of the essay for me \u2014 only help me plan the structure and content of each section.'
+      }
+    ]
+  },
   quiz: [
     { q: 'The natural greenhouse effect is best described as:', options: ['A harmful process with no natural benefit', 'A natural process that keeps Earth warm enough to support life', 'A process caused entirely by human activity', 'A process that only began in the industrial era'], correct: 1, explain: 'The natural greenhouse effect is a naturally occurring process in which certain gases trap heat, keeping Earth\u2019s average temperature warm enough to support life.', misconception: 'The greenhouse effect itself is sometimes seen as entirely negative, when the natural version is essential for life; it is the human-caused enhancement of this effect that causes harmful additional warming.', tag: 'Natural vs enhanced greenhouse effect' },
     { q: 'The "enhanced" greenhouse effect refers to:', options: ['The complete absence of greenhouse gases', 'The intensification of the natural greenhouse effect due to increased human-caused greenhouse gas emissions', 'A process that only occurs in the stratosphere', 'A natural cycle unrelated to human activity'], correct: 1, explain: 'The enhanced greenhouse effect describes how human activities, particularly burning fossil fuels, have increased the concentration of greenhouse gases, intensifying the natural greenhouse effect and causing additional warming.', misconception: 'Enhanced and natural greenhouse effects are sometimes treated as unrelated, when the enhanced effect is specifically an intensification of the same natural process by human emissions.', tag: 'Natural vs enhanced greenhouse effect' },

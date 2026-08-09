@@ -2,9 +2,9 @@
    SBL Geography Tutor — reusable engine
    Reads lesson config from window.SBL_LESSONS[lessonId] and the
    fixed syllabus sequence in window.SBL_LESSON_ORDER (populated by
-   a lesson-config file such as sbl-population-lessons.js, loaded
-   before this file) and renders one shared tutor interface with
-   three entry points:
+   lesson-config files such as sbl-population-lessons.js and
+   sbl-climate-lessons.js, loaded before this file) and renders one
+   shared tutor interface with four entry points:
 
      openTeachBot(lessonId)        — full Teach Me Live panel
      openTestMyKnowledge(lessonId) — jumps straight into the
@@ -14,6 +14,14 @@
                                       come BEFORE this one in
                                       SBL_LESSON_ORDER (never from
                                       future/untaught lessons)
+     openChallengeMode(lessonId)   — guided essay-planning mode.
+                                      Reads lesson.challenge (question
+                                      + staged Socratic prompts) if
+                                      present; each prompt instructs
+                                      the tutor to question the
+                                      student, not answer for them,
+                                      and never to write any part of
+                                      the essay.
 
    No Claude, Anthropic, OpenAI or other AI API is called anywhere
    in this file. The only network resource loaded is the iframe to
@@ -63,6 +71,27 @@
   function saveChecklistState(lessonId, state) {
     try {
       window.localStorage.setItem(checklistKey(lessonId), JSON.stringify(state));
+    } catch (e) { /* localStorage unavailable — progress simply won't persist */ }
+  }
+
+  function challengeKey(lessonId) { return 'sbl-challenge-' + lessonId; }
+
+  function getChallengeState(lessonId, total) {
+    try {
+      var raw = window.localStorage.getItem(challengeKey(lessonId));
+      if (!raw) return new Array(total).fill(false);
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return new Array(total).fill(false);
+      while (parsed.length < total) parsed.push(false);
+      return parsed;
+    } catch (e) {
+      return new Array(total).fill(false);
+    }
+  }
+
+  function saveChallengeState(lessonId, state) {
+    try {
+      window.localStorage.setItem(challengeKey(lessonId), JSON.stringify(state));
     } catch (e) { /* localStorage unavailable — progress simply won't persist */ }
   }
 
@@ -132,11 +161,6 @@
     return a;
   }
 
-  /* Builds the cumulative retrieval bank for a lesson: every quiz
-     question from every lesson that comes BEFORE this one in
-     SBL_LESSON_ORDER. Never includes the current lesson or any
-     lesson that comes after it — this is a cumulative model that
-     naturally grows as more lessons/units are added over time. */
   function buildRetrievalBank(lessonId) {
     var order = window.SBL_LESSON_ORDER || [];
     var idx = order.indexOf(lessonId);
@@ -255,6 +279,18 @@
     if (closeBtn) closeBtn.focus();
   };
 
+  /* ---------------- Entry point 4: Challenge Mode ---------------- */
+
+  window.openChallengeMode = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Challenge: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Plan your essay with the tutor \u2014 you write it yourself.';
+    modal.setAttribute('aria-label', 'Challenge Mode: ' + currentLesson.title);
+
+    renderChallengeBody();
+    if (closeBtn) closeBtn.focus();
+  };
+
   window.closeTeachBot = function () {
     if (!overlay) return;
     overlay.hidden = true;
@@ -300,6 +336,10 @@
 
     html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
 
+    if (lesson.challenge) {
+      html += '<div class="sbl-teach-section"><h3>Challenge: Essay Planning</h3><p class="sbl-teach-focus">Plan a full essay with the tutor, step by step \u2014 you write the essay yourself.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchChallengeFromTeach">Start Challenge &rarr;</button></div>';
+    }
+
     html += '<div class="sbl-teach-section sbl-ready-note">Ready for class: you will use this knowledge in class for discussion, collaboration, case-study analysis, the 4Ps and written application.</div>';
 
     html += '</div>';
@@ -320,6 +360,12 @@
     document.getElementById('sblLaunchRetrievalFromTeach').addEventListener('click', function () {
       window.openSpacedRetrieval(lesson.id);
     });
+    var challengeBtn = document.getElementById('sblLaunchChallengeFromTeach');
+    if (challengeBtn) {
+      challengeBtn.addEventListener('click', function () {
+        window.openChallengeMode(lesson.id);
+      });
+    }
   }
 
   function loadIframeIfNeeded() {
@@ -424,6 +470,105 @@
     var state = getChecklistState(currentLesson.id, currentLesson.checklist.length);
     var doneCount = state.filter(Boolean).length;
     progressEl.textContent = doneCount + '/' + currentLesson.checklist.length + ' checked';
+  }
+
+  /* ---------------- Challenge Mode body ---------------- */
+
+  function renderChallengeBody() {
+    var lesson = currentLesson;
+
+    if (!lesson.challenge) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>Challenge Mode</h3>' +
+        '<p class="sbl-teach-focus">Challenge Mode is not yet available for this lesson.</p></div></div>';
+      return;
+    }
+
+    var challenge = lesson.challenge;
+    var state = getChallengeState(lesson.id, challenge.stages.length);
+    var doneCount = state.filter(Boolean).length;
+    var pct = Math.round((doneCount / challenge.stages.length) * 100);
+
+    var html = '<div class="sbl-teach-grid">';
+
+    html += '<div class="sbl-teach-panel">';
+    html += '<div class="sbl-teach-section"><h3>Essay question</h3><p class="sbl-teach-focus"><strong>' + escapeHtml(challenge.question) + '</strong></p>';
+    if (challenge.intro) {
+      html += '<p class="sbl-teach-focus">' + escapeHtml(challenge.intro) + '</p>';
+    }
+    html += '</div>';
+
+    html += '<div class="sbl-teach-section"><h3>Planning stages</h3>';
+    html += '<div class="sbl-progress-row"><div class="sbl-progress-track"><div class="sbl-progress-fill" id="sblChallengeFill" style="width:' + pct + '%;"></div></div><span id="sblChallengePct">' + pct + '%</span><button type="button" class="sbl-reset-btn" id="sblChallengeReset">Reset progress</button></div>';
+    html += '<div class="sbl-prompt-grid" id="sblChallengeStages"></div>';
+    html += '<div class="sbl-copy-status" id="sblChallengeCopyStatus"></div>';
+    html += '</div>';
+
+    html += '<div class="sbl-teach-section sbl-ready-note">Work through each stage with the tutor in order. Once all six are done, use your notes to write the essay yourself \u2014 the tutor will not write it for you.</div>';
+
+    html += '</div>';
+
+    html += '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
+
+    html += '</div>';
+
+    bodyMount.innerHTML = html;
+
+    renderChallengeStages(lesson, challenge, state);
+    loadIframeIfNeeded();
+  }
+
+  function renderChallengeStages(lesson, challenge, state) {
+    var grid = document.getElementById('sblChallengeStages');
+    var statusBox = document.getElementById('sblChallengeCopyStatus');
+    grid.innerHTML = '';
+
+    challenge.stages.forEach(function (stage, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'sbl-prompt-btn' + (state[i] ? ' is-copied' : '');
+      btn.textContent = (i + 1) + '. ' + stage.label;
+      btn.addEventListener('click', function () {
+        copyText(stage.prompt, function (success) {
+          if (success) {
+            state[i] = true;
+            saveChallengeState(lesson.id, state);
+            btn.classList.add('is-copied');
+            updateChallengeProgress(lesson, challenge, state);
+            statusBox.className = 'sbl-copy-status is-visible';
+            statusBox.innerHTML = 'Prompt copied. Paste it into the tutor chat and press Send.';
+            announce('Prompt copied to clipboard. Paste it into the tutor chat and press Send.');
+          } else {
+            statusBox.className = 'sbl-copy-status is-visible';
+            statusBox.innerHTML =
+              'Automatic copy did not work. Select and copy this prompt manually:' +
+              '<textarea readonly rows="3">' + escapeHtml(stage.prompt) + '</textarea>';
+            announce('Automatic copy failed. A manual copy box is available below the planning stages.');
+          }
+        });
+      });
+      grid.appendChild(btn);
+    });
+
+    var resetBtn = document.getElementById('sblChallengeReset');
+    resetBtn.addEventListener('click', function () {
+      var cleared = new Array(challenge.stages.length).fill(false);
+      saveChallengeState(lesson.id, cleared);
+      renderChallengeStages(lesson, challenge, cleared);
+      updateChallengeProgress(lesson, challenge, cleared);
+      announce('Challenge progress reset.');
+    });
+  }
+
+  function updateChallengeProgress(lesson, challenge, state) {
+    var doneCount = state.filter(Boolean).length;
+    var pct = Math.round((doneCount / challenge.stages.length) * 100);
+    var fill = document.getElementById('sblChallengeFill');
+    var pctEl = document.getElementById('sblChallengePct');
+    if (fill) fill.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+    announce('Challenge progress: ' + doneCount + ' of ' + challenge.stages.length + ' stages complete, ' + pct + ' percent.');
   }
 
   /* ---------------- Generic quiz engine (used by both
