@@ -83,7 +83,13 @@ window.SBL_LESSONS.CP02 = {
     'I can apply the model to examples.',
     'I can connect development and population patterns.'
   ],
-  quiz: [
+  readinessQuestions: [
+    'Name three indicators used to classify levels of economic development.',
+    'What is the difference between HICs, MICs and LICs?',
+    'Give an example of a country in each development category.',
+    'Explain what "core" and "periphery" mean in the context of global development patterns.',
+    'Give one criticism of using GDP per capita alone to classify development.'
+  ],quiz: [
     { q: 'LIC stands for:', options: ['Low Income Country', 'Least Industrialised Continent', 'Local Investment Class', 'Low Infrastructure Community'], correct: 0, explain: 'LIC = Low Income Country, one of the common development classifications.', misconception: 'LIC is sometimes confused with a description of infrastructure or geography rather than a strict income-based classification.', tag: 'LICs, MICs and HICs' },
     { q: 'Inequality in a development context refers to:', options: ['Equal access to resources for everyone', 'Uneven distribution of wealth, resources or opportunity', 'A country with no cities', 'The rate of population growth'], correct: 1, explain: 'Inequality describes uneven distribution of wealth, resources, or opportunities between people or places.', misconception: 'Some students think inequality only refers to income, but it also includes access to healthcare, education and opportunity.', tag: 'What is inequality?' },
     { q: 'In core-periphery theory, the "core" typically refers to:', options: ['Rural, less developed areas', 'Areas of concentrated economic activity and wealth', 'Areas with the lowest population density', 'Coastal fishing regions only'], correct: 1, explain: 'The core is the economically dominant region, while the periphery is less developed and often dependent on the core.', misconception: 'Core and periphery are sometimes confused with simple geographic centre/edge, when the terms actually describe economic dominance, not just location.', tag: 'Core-periphery model' },
@@ -123,7 +129,13 @@ window.SBL_LESSONS.CP03 = {
     'I can explain how development affects distribution.',
     'I can define a megacity.'
   ],
-  quiz: [
+  readinessQuestions: [
+    'Explain why population distribution is often uneven within a single country.',
+    'Give an example of a core region and a periphery region within one country.',
+    'Explain how physical factors can create uneven development within a country.',
+    'Explain how government policy can influence internal population distribution.',
+    'Give an example of rural-to-urban migration and explain one cause.'
+  ],quiz: [
     { q: 'Which city is the main core region of Thailand?', options: ['Chiang Mai', 'Bangkok', 'Phuket', 'Pattaya'], correct: 1, explain: 'Bangkok is Thailand\u2019s primary core region, concentrating population and economic activity.', misconception: 'Tourist-famous cities like Phuket or Pattaya are sometimes assumed to be the economic core, when Bangkok is the true centre of population and economic concentration.', tag: 'Core and periphery' },
     { q: '"Pull factors" in migration are:', options: ['Reasons people are forced to leave a place', 'Reasons that attract people to a new place', 'Government migration bans', 'Natural disasters only'], correct: 1, explain: 'Pull factors attract migrants to a destination, such as jobs or better services; push factors drive them away from their origin.', misconception: 'Push and pull factors are frequently swapped by students; a helpful check is that "pull" always relates to the destination, not the origin.', tag: 'Push and pull factors' },
     { q: 'A megacity is generally defined as a city with a population of at least:', options: ['1 million', '5 million', '10 million', '50 million'], correct: 2, explain: 'A megacity is commonly defined as a city with 10 million or more inhabitants.', misconception: 'Students often underestimate the threshold, assuming 1 or 5 million qualifies, when the standard definition requires at least 10 million.', tag: 'What is a megacity?' },
@@ -164,7 +176,13 @@ window.SBL_LESSONS.CP04 = {
     'I can compare physical and human controls.',
     'I can compare development and migration patterns.'
   ],
-  quiz: [
+  readinessQuestions: [
+    'Name one factor that explains Egypt\u2019s population distribution.',
+    'Name one factor that explains Thailand\u2019s population distribution.',
+    'Compare a core region in Egypt with a core region in Thailand.',
+    'Explain one similarity between population distribution patterns in Egypt and Thailand.',
+    'Explain one difference between population distribution patterns in Egypt and Thailand.'
+  ],quiz: [
     { q: 'Most of Egypt\u2019s population is concentrated along:', options: ['The Red Sea coast only', 'The Nile Valley and Delta', 'The Sinai desert', 'The Libyan border'], correct: 1, explain: 'The overwhelming majority of Egypt\u2019s population lives along the fertile Nile Valley and Delta.', misconception: 'Coastal areas are sometimes assumed to hold the largest population, but in Egypt it is the fertile river valley, not the coastline, that dominates.', tag: 'Why people live near the Nile' },
     { q: 'Egypt\u2019s desert regions have low population density mainly because of:', options: ['Government restrictions', 'Lack of water and fertile land', 'High crime rates', 'Cold climate'], correct: 1, explain: 'The desert areas lack reliable water and fertile soil, making them inhospitable for large-scale settlement.', misconception: 'Political or social causes are sometimes wrongly assumed; the primary driver in Egypt\u2019s deserts is a physical lack of water and fertile land.', tag: 'Physical factors' },
     { q: 'Which city dominates Thailand\u2019s population and economic distribution?', options: ['Chiang Mai', 'Bangkok', 'Phuket', 'Ayutthaya'], correct: 1, explain: 'Bangkok is Thailand\u2019s primate city, concentrating population, services and economic activity.', misconception: 'Historic or tourist cities are sometimes assumed to be the population centre, but Bangkok\u2019s modern economic dominance makes it the clear primate city.', tag: 'Thailand overview' },
