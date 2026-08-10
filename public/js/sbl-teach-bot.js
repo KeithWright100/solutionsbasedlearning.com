@@ -18,17 +18,13 @@
                                       using the separate, dedicated
                                       "SBL Challenge Tutor" agent.
      openIBQuestions(lessonId)     — authentic IB-style exam question
-                                      practice. Student types an
-                                      answer, then a prompt (question +
-                                      mark scheme + their answer) is
-                                      copied to the clipboard to paste
-                                      into the general tutor chat for
-                                      marking. Because the chat iframe
-                                      is cross-origin, this file cannot
-                                      read the tutor's reply directly —
-                                      the student pastes the feedback
-                                      back in so it can be included in
-                                      the downloadable report.
+                                      practice, with numbered on-screen
+                                      steps guiding the student through
+                                      answering, copying the marking
+                                      prompt to the general tutor chat,
+                                      and pasting the tutor's feedback
+                                      back in for the downloadable
+                                      report.
 
    No Claude, Anthropic, OpenAI or other AI API is called anywhere
    in this file. The only network resources loaded are iframes to
@@ -663,6 +659,7 @@
 
     var html = '<h3>Question' + (lesson.ibQuestions.length > 1 ? ' ' + (ibState.activeIndex + 1) : '') + '</h3>';
     html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(ibQ.question) + '</strong> [' + ibQ.marks + ' mark' + (ibQ.marks === 1 ? '' : 's') + ']</p>';
+    html += '<p class="sbl-progress-note"><strong>Step 1:</strong> Type your answer below. <strong>Step 2:</strong> Click "Submit for Marking" \u2014 this copies the question, mark scheme and your answer, ready to send to the tutor.</p>';
     html += '<textarea id="sblIBAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
     html += '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action" id="sblIBSubmit">Submit for Marking &rarr;</button></div>';
     html += '<div id="sblIBFeedbackSection"></div>';
@@ -691,7 +688,7 @@
   function renderIBFeedbackSection(lesson, ibQ, answerText) {
     var section = document.getElementById('sblIBFeedbackSection');
     section.innerHTML =
-      '<p class="sbl-progress-note" style="margin-top:1rem;">Paste this into the tutor chat on the right and press Send. Once the tutor has marked your answer, paste its feedback below.</p>' +
+      '<p class="sbl-progress-note" style="margin-top:1rem;"><strong>Step 3:</strong> Click into the tutor chat on the right, press Ctrl+V to paste, then press Send. <strong>Step 4:</strong> Once the tutor replies with your mark and feedback, copy its message and paste it into the box below.</p>' +
       '<textarea id="sblIBFeedback" rows="6" placeholder="Paste the tutor\u2019s mark and feedback here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical; margin-top:0.5rem;"></textarea>' +
       '<div style="margin-top:0.8rem; display:flex; gap:0.6rem; flex-wrap:wrap;">' +
       '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBDownload">Download report (print / save as PDF)</button>' +
