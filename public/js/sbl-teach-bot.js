@@ -4,7 +4,7 @@
    fixed syllabus sequence in window.SBL_LESSON_ORDER (populated by
    lesson-config files such as sbl-population-lessons.js and
    sbl-climate-lessons.js, loaded before this file) and renders one
-   shared tutor interface with four entry points:
+   shared tutor interface with five entry points:
 
      openTeachBot(lessonId)        — full Teach Me Live panel
      openTestMyKnowledge(lessonId) — jumps straight into the
@@ -14,18 +14,21 @@
                                       come BEFORE this one in
                                       SBL_LESSON_ORDER (never from
                                       future/untaught lessons)
-     openChallengeMode(lessonId)   — guided independent-thinking mode.
-                                      Reads lesson.challenge (question
-                                      + optional intro) if present.
-                                      Shows the question, a notes area
-                                      for the student's own thinking,
-                                      and a button that launches the
-                                      separate, dedicated "SBL
-                                      Challenge Tutor" agent (configured
-                                      in Copilot Studio to question
-                                      rather than answer) — distinct
-                                      from the general SBL Geography
-                                      Tutor used everywhere else.
+     openChallengeMode(lessonId)   — guided independent-thinking mode
+                                      using the separate, dedicated
+                                      "SBL Challenge Tutor" agent.
+     openIBQuestions(lessonId)     — authentic IB-style exam question
+                                      practice. Student types an
+                                      answer, then a prompt (question +
+                                      mark scheme + their answer) is
+                                      copied to the clipboard to paste
+                                      into the general tutor chat for
+                                      marking. Because the chat iframe
+                                      is cross-origin, this file cannot
+                                      read the tutor's reply directly —
+                                      the student pastes the feedback
+                                      back in so it can be included in
+                                      the downloadable report.
 
    No Claude, Anthropic, OpenAI or other AI API is called anywhere
    in this file. The only network resources loaded are iframes to
@@ -45,6 +48,7 @@
   var isExpanded = false;
   var iframeLoaded = false;
   var quizState = null;
+  var ibState = null;
 
   /* ---------------- Utilities ---------------- */
 
@@ -149,6 +153,19 @@
     return 'I am working on this challenge question: "' + challenge.question + '". Please help me think it through by asking me one question at a time. Do not give me answers, structures, plans, or model responses.';
   }
 
+  function buildMarkingPrompt(lesson, ibQ, answerText) {
+    var lines = [];
+    lines.push('I am practising an IB Geography exam-style question and would like it marked.');
+    lines.push('My current lesson is: ' + lesson.title + '.');
+    lines.push('Question: "' + ibQ.question + '" [' + ibQ.marks + ' marks]');
+    lines.push('Official mark scheme (for your reference only \u2014 please do not just read this back to me): ' + ibQ.markScheme);
+    lines.push('My answer: "' + answerText + '"');
+    lines.push('Please mark my answer against the mark scheme and tell me my mark out of ' + ibQ.marks + '.');
+    lines.push('Give me constructive feedback: what I got right, what I missed, and how to improve.');
+    lines.push('Do not simply restate the whole mark scheme \u2014 focus your feedback specifically on my answer.');
+    return lines.join(' ');
+  }
+
   function masteryBand(pct) {
     if (pct >= 90) return 'Mastery';
     if (pct >= 70) return 'Secure';
@@ -167,11 +184,6 @@
     return a;
   }
 
-  /* Builds the cumulative retrieval bank for a lesson: every quiz
-     question from every lesson that comes BEFORE this one in
-     SBL_LESSON_ORDER. Never includes the current lesson or any
-     lesson that comes after it — this is a cumulative model that
-     naturally grows as more lessons/units are added over time. */
   function buildRetrievalBank(lessonId) {
     var order = window.SBL_LESSON_ORDER || [];
     var idx = order.indexOf(lessonId);
@@ -227,6 +239,7 @@
     lastFocusedElement = document.activeElement;
     iframeLoaded = false;
     quizState = null;
+    ibState = null;
     overlay.hidden = false;
     return true;
   }
@@ -302,6 +315,18 @@
     if (closeBtn) closeBtn.focus();
   };
 
+  /* ---------------- Entry point 5: IB-Style Questions ---------------- */
+
+  window.openIBQuestions = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'IB-Style Questions: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Practice authentic IB questions and get marked feedback.';
+    modal.setAttribute('aria-label', 'IB-Style Questions: ' + currentLesson.title);
+
+    renderIBQuestionsBody();
+    if (closeBtn) closeBtn.focus();
+  };
+
   window.closeTeachBot = function () {
     if (!overlay) return;
     overlay.hidden = true;
@@ -347,6 +372,10 @@
 
     html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
 
+    if (lesson.ibQuestions && lesson.ibQuestions.length) {
+      html += '<div class="sbl-teach-section"><h3>IB-Style Questions</h3><p class="sbl-teach-focus">Practice authentic IB questions and get marked feedback against the real mark scheme.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchIBFromTeach">Practice Now &rarr;</button></div>';
+    }
+
     if (lesson.challenge) {
       html += '<div class="sbl-teach-section"><h3>Challenge</h3><p class="sbl-teach-focus">Think through a challenge question independently, then discuss it with the Challenge Tutor.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchChallengeFromTeach">Start Challenge &rarr;</button></div>';
     }
@@ -375,6 +404,12 @@
     if (challengeBtn) {
       challengeBtn.addEventListener('click', function () {
         window.openChallengeMode(lesson.id);
+      });
+    }
+    var ibBtn = document.getElementById('sblLaunchIBFromTeach');
+    if (ibBtn) {
+      ibBtn.addEventListener('click', function () {
+        window.openIBQuestions(lesson.id);
       });
     }
   }
@@ -483,15 +518,7 @@
     progressEl.textContent = doneCount + '/' + currentLesson.checklist.length + ' checked';
   }
 
-  /* ---------------- Challenge Mode body ----------------
-     Design: shows the challenge question, a free-form notes area
-     for the student's own independent thinking (auto-saved to this
-     device only), and a "Challenge Tutor" button. The tutor iframe
-     is NOT loaded until the student clicks that button — encouraging
-     them to read the question and make initial notes first, per the
-     intended workflow: read → notes → discuss → improve notes →
-     write the final response independently. Uses the separate,
-     dedicated SBL Challenge Tutor agent, not the general tutor. */
+  /* ---------------- Challenge Mode body ---------------- */
 
   function renderChallengeBody() {
     var lesson = currentLesson;
@@ -577,6 +604,150 @@
         }
       });
     });
+  }
+
+  /* ---------------- IB-Style Questions body ---------------- */
+
+  function renderIBQuestionsBody() {
+    var lesson = currentLesson;
+
+    if (!lesson.ibQuestions || !lesson.ibQuestions.length) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>IB-Style Questions</h3>' +
+        '<p class="sbl-teach-focus">No IB-style questions are available for this lesson yet.</p></div></div>';
+      return;
+    }
+
+    ibState = { lesson: lesson, activeIndex: 0, feedbackShown: false };
+
+    var html = '<div class="sbl-teach-grid">';
+    html += '<div class="sbl-teach-panel">';
+
+    if (lesson.ibQuestions.length > 1) {
+      html += '<div class="sbl-teach-section"><h3>Choose a question</h3><div class="sbl-prompt-grid" id="sblIBQuestionList"></div></div>';
+    }
+
+    html += '<div class="sbl-teach-section" id="sblIBQuestionWrap"></div>';
+    html += '</div>';
+
+    html += '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
+    html += '</div>';
+
+    bodyMount.innerHTML = html;
+
+    if (lesson.ibQuestions.length > 1) {
+      var list = document.getElementById('sblIBQuestionList');
+      lesson.ibQuestions.forEach(function (ibQ, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'sbl-prompt-btn';
+        btn.textContent = 'Question ' + (i + 1) + ' [' + ibQ.marks + ']';
+        btn.addEventListener('click', function () {
+          ibState.activeIndex = i;
+          ibState.feedbackShown = false;
+          renderIBQuestionWorkspace();
+        });
+        list.appendChild(btn);
+      });
+    }
+
+    renderIBQuestionWorkspace();
+    loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
+  }
+
+  function renderIBQuestionWorkspace() {
+    var lesson = ibState.lesson;
+    var ibQ = lesson.ibQuestions[ibState.activeIndex];
+    var wrap = document.getElementById('sblIBQuestionWrap');
+
+    var html = '<h3>Question' + (lesson.ibQuestions.length > 1 ? ' ' + (ibState.activeIndex + 1) : '') + '</h3>';
+    html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(ibQ.question) + '</strong> [' + ibQ.marks + ' mark' + (ibQ.marks === 1 ? '' : 's') + ']</p>';
+    html += '<textarea id="sblIBAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
+    html += '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action" id="sblIBSubmit">Submit for Marking &rarr;</button></div>';
+    html += '<div id="sblIBFeedbackSection"></div>';
+
+    wrap.innerHTML = html;
+
+    document.getElementById('sblIBSubmit').addEventListener('click', function () {
+      var answerText = document.getElementById('sblIBAnswer').value.trim();
+      if (!answerText) {
+        announce('Please write an answer before submitting for marking.');
+        return;
+      }
+      var prompt = buildMarkingPrompt(lesson, ibQ, answerText);
+      copyText(prompt, function (success) {
+        ibState.feedbackShown = true;
+        renderIBFeedbackSection(lesson, ibQ, answerText);
+        if (success) {
+          announce('Your answer and the mark scheme have been copied. Paste this into the tutor chat and press Send to get it marked.');
+        } else {
+          announce('Automatic copy failed. A manual copy box is available.');
+        }
+      });
+    });
+  }
+
+  function renderIBFeedbackSection(lesson, ibQ, answerText) {
+    var section = document.getElementById('sblIBFeedbackSection');
+    section.innerHTML =
+      '<p class="sbl-progress-note" style="margin-top:1rem;">Paste this into the tutor chat on the right and press Send. Once the tutor has marked your answer, paste its feedback below.</p>' +
+      '<textarea id="sblIBFeedback" rows="6" placeholder="Paste the tutor\u2019s mark and feedback here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical; margin-top:0.5rem;"></textarea>' +
+      '<div style="margin-top:0.8rem; display:flex; gap:0.6rem; flex-wrap:wrap;">' +
+      '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBDownload">Download report (print / save as PDF)</button>' +
+      '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBOneNote">Copy report for OneNote</button>' +
+      '</div>';
+
+    document.getElementById('sblIBDownload').addEventListener('click', function () {
+      var feedbackText = document.getElementById('sblIBFeedback').value.trim();
+      downloadIBReport(lesson, ibQ, answerText, feedbackText);
+    });
+    document.getElementById('sblIBOneNote').addEventListener('click', function () {
+      var feedbackText = document.getElementById('sblIBFeedback').value.trim();
+      var text = buildIBPlainTextReport(lesson, ibQ, answerText, feedbackText);
+      copyText(text, function (success) {
+        announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
+      });
+    });
+  }
+
+  function buildIBPlainTextReport(lesson, ibQ, answerText, feedbackText) {
+    var lines = [];
+    lines.push('SBL Geography \u2014 IB-Style Question Report');
+    lines.push('Lesson: ' + lesson.title);
+    lines.push('Completed: ' + new Date().toLocaleString());
+    lines.push('');
+    lines.push('Question [' + ibQ.marks + ' marks]: ' + ibQ.question);
+    lines.push('');
+    lines.push('My answer:');
+    lines.push(answerText);
+    lines.push('');
+    lines.push('Tutor feedback:');
+    lines.push(feedbackText || '(not yet added)');
+    return lines.join('\n');
+  }
+
+  function downloadIBReport(lesson, ibQ, answerText, feedbackText) {
+    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Geography IB-Style Question Report</title>' +
+      '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:700px;margin:0 auto;color:#1B2029;}' +
+      'h1{font-size:1.3rem;} .block{margin:1rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;white-space:pre-wrap;}</style></head><body>';
+    html += '<h1>SBL Geography \u2014 IB-Style Question Report</h1>';
+    html += '<p><strong>Lesson:</strong> ' + escapeHtml(lesson.title) + '<br>';
+    html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '</p><hr>';
+    html += '<p><strong>Question [' + ibQ.marks + ' marks]:</strong> ' + escapeHtml(ibQ.question) + '</p>';
+    html += '<p><strong>My answer:</strong></p><div class="block">' + escapeHtml(answerText) + '</div>';
+    html += '<p><strong>Tutor feedback:</strong></p><div class="block">' + escapeHtml(feedbackText || '(not yet added)') + '</div>';
+    html += '<p><em>Use your browser\u2019s Print option and choose \u201cSave as PDF\u201d if you want a PDF copy.</em></p>';
+    html += '</body></html>';
+
+    var reportWindow = window.open('', '_blank');
+    if (!reportWindow) {
+      announce('Please allow pop-ups to download the report.');
+      return;
+    }
+    reportWindow.document.open();
+    reportWindow.document.write(html);
+    reportWindow.document.close();
   }
 
   /* ---------------- Generic quiz engine (used by both

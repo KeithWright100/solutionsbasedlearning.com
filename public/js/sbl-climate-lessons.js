@@ -80,7 +80,14 @@ window.SBL_LESSONS.CC02 = {
     'I can explain the water vapour feedback loop.',
     'I can explain why feedback loops matter for predicting future climate change.'
   ],
-  quiz: [
+  ibQuestions: [
+    {
+      question: 'Outline what is meant by global dimming.',
+      marks: 2,
+      markScheme: 'Reduction in the amount of solar energy/sunlight reaching Earth\u2019s surface [1, reserved for a linked development]. Because volcanic activity has put dust in the atmosphere [1] and/or air pollution (sulphate aerosols) from industrialization [1], leading to a decrease in global temperatures [1]. Award a maximum of 2 marks total: 1 for identifying the reduction in solar energy reaching the surface, and 1 further mark for correctly linking this to a valid cause (volcanic dust or industrial aerosol pollution) and its effect (lower temperatures).'
+    }
+  ],
+quiz: [
     { q: 'Insolation refers to:', options: ['The amount of incoming solar radiation received at Earth\u2019s surface', 'The amount of heat trapped by greenhouse gases', 'The reflectivity of a surface', 'The total energy stored in the oceans'], correct: 0, explain: 'Insolation is the amount of incoming solar radiation received by a given area of Earth\u2019s surface.', misconception: 'Insolation is sometimes confused with the greenhouse effect; insolation is specifically about incoming solar energy, not trapped heat.', tag: 'What is insolation?' },
     { q: 'For Earth\u2019s climate to remain roughly stable over time, incoming and outgoing energy must be:', options: ['Completely unrelated', 'Roughly balanced', 'Always increasing', 'Always decreasing'], correct: 1, explain: 'A stable climate requires a rough balance between incoming solar radiation and outgoing radiation from Earth; an imbalance leads to warming or cooling.', misconception: 'Some students think Earth\u2019s energy budget is a one-way flow, when climate stability actually depends on a balance between energy in and energy out.', tag: 'The global energy budget' },
     { q: 'Albedo is best defined as:', options: ['The amount of solar radiation a surface reflects, expressed as a proportion', 'The temperature of a surface', 'The amount of carbon dioxide in the atmosphere', 'The rate of ice melt'], correct: 0, explain: 'Albedo is the proportion of incoming solar radiation that a surface reflects rather than absorbs, usually expressed as a percentage or decimal.', misconception: 'Albedo is sometimes confused with temperature; a highly reflective (high-albedo) surface like snow can still be very cold, but albedo itself measures reflectivity, not temperature directly.', tag: 'What is albedo?' },
