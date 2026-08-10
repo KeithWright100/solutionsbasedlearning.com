@@ -38,7 +38,13 @@ window.SBL_LESSONS.CP01 = {
     'I can explain human factors affecting distribution.',
     'I can interpret choropleth and dot maps.'
   ],
-  quiz: [
+  readinessQuestions: [
+    'Name two physical factors that affect where people choose to live.',
+    'Name two human factors that affect where people choose to live.',
+    'Give an example of an area with very high population density and explain why.',
+    'Give an example of an area with very low population density and explain why.',
+    'Explain how climate can act as both a "pull" and a "push" factor for population distribution.'
+  ],quiz: [
     { q: 'What does population distribution describe?', options: ['The total population of a country', 'How population is spread across an area', 'The rate of population growth', 'The average age of a population'], correct: 1, explain: 'Distribution describes the pattern of where people live across a space.', misconception: 'A common confusion is treating "distribution" as a single number (like total population) rather than a spatial pattern.', tag: 'Distribution vs density' },
     { q: 'Population density is best described as:', options: ['Total population divided by area', 'Total births minus total deaths', 'The number of cities in a country', 'The percentage of people over 65'], correct: 0, explain: 'Density is a measure of people per unit area, usually per km\u00b2.', misconception: 'Density is often confused with natural increase (births minus deaths), which is a rate of change, not a spatial measure.', tag: 'Distribution vs density' },
     { q: 'Which is an example of a physical factor affecting population distribution?', options: ['Employment opportunities', 'Government policy', 'Climate', 'Transport links'], correct: 2, explain: 'Climate is a physical factor, alongside relief, water supply and natural resources.', misconception: 'Students sometimes list transport or policy as "physical" because they affect where people live, but these are human, not natural, factors.', tag: 'Physical factors' },
