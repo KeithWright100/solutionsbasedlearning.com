@@ -59,6 +59,13 @@ window.SBL_LESSONS['PPN-t1-l1-globalization'] = {
     'I can make a brief comparison between the KOF and Kearney indices.',
     'I can provide a basic evaluation of indices used to measure global interactions.'
   ],
+  readinessQuestions: [
+    'What is globalisation, in your own words?',
+    'What does the KOF Index measure, and what scale does it use?',
+    'What is the difference between de facto and de jure globalisation? Can you give an example of each?',
+    'How does the Kearney Index differ from the KOF Index?',
+    'What is one limitation of using an index to measure how globalised a country is?'
+  ],
   quiz: [
     { q: 'Globalisation is best defined as:', options: ['The process by which countries become more isolated from one another', 'The growing interconnectedness and interdependence of countries through economic, social and political ties', 'A term only used to describe international trade', 'A process that only affects high-income countries'], correct: 1, explain: 'Globalisation describes the increasing interconnectedness and interdependence of countries and people worldwide, through flows of trade, investment, people, information and ideas.', misconception: 'Globalisation is sometimes reduced to just "trade" or "the economy," when it actually spans economic, social and political dimensions of interaction between countries.', tag: 'What is globalisation?' },
     { q: 'The KOF Globalisation Index measures globalisation across which three dimensions?', options: ['Military, cultural, environmental', 'Economic, social and political', 'Trade, tourism and language', 'Population, migration and urbanisation'], correct: 1, explain: 'The KOF Globalisation Index measures globalisation along three dimensions: economic, social and political.', misconception: 'Some students assume the KOF Index includes an environmental dimension, but it specifically does not cover environmental globalisation.', tag: 'The KOF Index' },
