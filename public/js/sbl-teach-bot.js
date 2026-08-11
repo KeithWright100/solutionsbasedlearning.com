@@ -189,25 +189,27 @@
     return a;
   }
 
-  function buildRetrievalBank(lessonId) {
-    var order = window.SBL_LESSON_ORDER || [];
-    var idx = order.indexOf(lessonId);
-    if (idx <= 0) return [];
+ function buildRetrievalBank(lessonId) {
+  var order = (window.SBL_LESSON_ORDER || []).indexOf(lessonId) !== -1
+    ? window.SBL_LESSON_ORDER
+    : (window.SBL_PPN_LESSON_ORDER || []);
+  var idx = order.indexOf(lessonId);
+  if (idx <= 0) return [];
 
-    var pool = [];
-    for (var i = 0; i < idx; i++) {
-      var prevLesson = window.SBL_LESSONS[order[i]];
-      if (!prevLesson) continue;
-      prevLesson.quiz.forEach(function (q) {
-        pool.push({
-          q: q.q, options: q.options, correct: q.correct,
-          explain: q.explain, misconception: q.misconception, tag: q.tag,
-          sourceLessonTitle: prevLesson.title
-        });
+  var pool = [];
+  for (var i = 0; i < idx; i++) {
+    var prevLesson = window.SBL_LESSONS[order[i]];
+    if (!prevLesson) continue;
+    prevLesson.quiz.forEach(function (q) {
+      pool.push({
+        q: q.q, options: q.options, correct: q.correct,
+        explain: q.explain, misconception: q.misconception, tag: q.tag,
+        sourceLessonTitle: prevLesson.title
       });
-    }
-    return pool;
+    });
   }
+  return pool;
+}
 
   /* ---------------- Focus management ---------------- */
 
