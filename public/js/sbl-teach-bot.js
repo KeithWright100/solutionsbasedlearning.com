@@ -746,18 +746,188 @@
 
     document.getElementById('sblIBDownload').addEventListener('click', function () {
       var feedbackText = document.getElementById('sblIBFeedback').value.trim();
-      downloadIBReport(lesson, ibQ, answerText, feedbackText);
+      /* ---------------- IB-Style Questions body (PPQ Marker) ----------------
+     Replaces the old two-step copy/paste chat flow. Submitting an answer
+     now calls the /api/mark-ppq serverless function directly (which itself
+     talks to the SBL PPQ Marker Copilot Studio agent via Direct Line, with
+     the secret held server-side). No chat window or copy/paste is
+     involved \u2014 the feedback is rendered straight into this panel.
+     ------------------------------------------------------------------ */
+
+  function renderIBQuestionsBody() {
+    var lesson = currentLesson;
+
+    if (!lesson.ibQuestions || !lesson.ibQuestions.length) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>IB-Style Questions</h3>' +
+        '<p class="sbl-teach-focus">No IB-style questions are available for this lesson yet.</p></div></div>';
+      return;
+    }
+
+    ibState = { lesson: lesson, activeIndex: 0 };
+
+    var html = '<div class="sbl-teach-panel" style="border-right:none; width:100%;">';
+
+    if (lesson.ibQuestions.length > 1) {
+      html += '<div class="sbl-teach-section"><h3>Choose a question</h3><div class="sbl-prompt-grid" id="sblIBQuestionList"></div></div>';
+    }
+
+    html += '<div class="sbl-teach-section" id="sblIBQuestionWrap"></div>';
+    html += '</div>';
+
+    bodyMount.innerHTML = html;
+
+    if (lesson.ibQuestions.length > 1) {
+      var list = document.getElementById('sblIBQuestionList');
+      lesson.ibQuestions.forEach(function (ibQ, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'sbl-prompt-btn';
+        btn.textContent = 'Question ' + (i + 1) + ' [' + ibQ.marks + ']';
+        btn.addEventListener('click', function () {
+          ibState.activeIndex = i;
+          renderIBQuestionWorkspace();
+        });
+        list.appendChild(btn);
+      });
+    }
+
+    renderIBQuestionWorkspace();
+  }
+
+  function renderIBQuestionWorkspace() {
+    var lesson = ibState.lesson;
+    var ibQ = lesson.ibQuestions[ibState.activeIndex];
+    var wrap = document.getElementById('sblIBQuestionWrap');
+
+    var html = '<h3>Question' + (lesson.ibQuestions.length > 1 ? ' ' + (ibState.activeIndex + 1) : '') + '</h3>';
+    html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(ibQ.question) + '</strong> [' + ibQ.marks + ' mark' + (ibQ.marks === 1 ? '' : 's') + ']</p>';
+
+    html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker \u2014 there is nothing to copy or paste.</p>';
+    html += '<textarea id="sblIBAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
+    html += '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action" id="sblIBSubmit">Submit for Marking &rarr;</button></div>';
+    html += '<div id="sblIBFeedbackSection"></div>';
+
+    wrap.innerHTML = html;
+
+    document.getElementById('sblIBSubmit').addEventListener('click', function () {
+      var answerBox = document.getElementById('sblIBAnswer');
+      var answerText = answerBox.value.trim();
+      if (!answerText) {
+        announce('Please write an answer before submitting for marking.');
+        answerBox.focus();
+        return;
+      }
+      submitForPPQMarking(lesson, ibQ, answerText);
+    });
+  }
+
+  function submitForPPQMarking(lesson, ibQ, answerText) {
+    var section = document.getElementById('sblIBFeedbackSection');
+    var submitBtn = document.getElementById('sblIBSubmit');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Marking\u2026';
+    section.innerHTML =
+      '<div class="sbl-progress-note" style="margin-top:1rem;" role="status">' +
+      'Marking your answer \u2014 this usually takes a few seconds\u2026</div>';
+    announce('Submitting your answer for marking. Please wait.');
+
+    fetch('/api/mark-ppq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: ibQ.question,
+        maxMark: ibQ.marks,
+        markingGuidance: ibQ.markScheme,
+        studentAnswer: answerText
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data && data.error ? data.error : 'Marking failed.');
+          return data;
+        });
+      })
+      .then(function (data) {
+        renderPPQFeedback(lesson, ibQ, answerText, data.feedback, data.raw);
+      })
+      .catch(function (err) {
+        section.innerHTML =
+          '<div class="sbl-quiz-feedback is-incorrect" style="margin-top:1rem;">' +
+          '<strong>Sorry, marking did not complete.</strong> ' + escapeHtml(err.message || 'Please try again.') +
+          '</div>' +
+          '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBRetry">Try again</button></div>';
+        announce('Marking failed. ' + (err.message || 'Please try again.'));
+        var retryBtn = document.getElementById('sblIBRetry');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', function () {
+            submitForPPQMarking(lesson, ibQ, answerText);
+          });
+        }
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit for Marking \u2192';
+      });
+  }
+
+  function renderPPQFeedback(lesson, ibQ, answerText, feedback, rawText) {
+    var section = document.getElementById('sblIBFeedbackSection');
+    feedback = feedback || {};
+
+    var markLine = feedback.markAwarded
+      ? escapeHtml(feedback.markAwarded)
+      : '\u2014 / ' + ibQ.marks;
+
+    var html = '<div class="sbl-quiz-result" style="margin-top:1.2rem;">';
+    html += '<div class="sbl-quiz-progress">Marked feedback</div>';
+    html += '<div class="sbl-quiz-result__score">' + markLine + '</div>';
+
+    html += '<div class="sbl-quiz-result__breakdown">';
+    if (feedback.whyThisMark) {
+      html += '<p><strong>Why this mark was awarded</strong><br>' + escapeHtml(feedback.whyThisMark) + '</p>';
+    }
+    if (feedback.whatWasDoneWell) {
+      html += '<p><strong>What was done well</strong><br>' + escapeHtml(feedback.whatWasDoneWell) + '</p>';
+    }
+    if (feedback.whatIsMissing) {
+      html += '<p><strong>What is missing or needs development</strong><br>' + escapeHtml(feedback.whatIsMissing) + '</p>';
+    }
+    if (feedback.nextStep) {
+      html += '<p><strong>Next step</strong><br>' + escapeHtml(feedback.nextStep) + '</p>';
+    }
+    if (feedback.followUpQuestion) {
+      html += '<p><strong>Follow-up question</strong><br>' + escapeHtml(feedback.followUpQuestion) + '</p>';
+    }
+    html += '</div>';
+
+    html += '<div class="sbl-quiz-result__actions">';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBTryAgain">Answer again</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBDownload">Download report (print / save as PDF)</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBOneNote">Copy report for OneNote</button>';
+    html += '</div></div>';
+
+    section.innerHTML = html;
+    announce('Marking complete. You scored ' + markLine + '.');
+
+    document.getElementById('sblIBTryAgain').addEventListener('click', function () {
+      renderIBQuestionWorkspace();
+    });
+    document.getElementById('sblIBDownload').addEventListener('click', function () {
+      downloadIBReport(lesson, ibQ, answerText, feedback);
     });
     document.getElementById('sblIBOneNote').addEventListener('click', function () {
-      var feedbackText = document.getElementById('sblIBFeedback').value.trim();
-      var text = buildIBPlainTextReport(lesson, ibQ, answerText, feedbackText);
+      var text = buildIBPlainTextReport(lesson, ibQ, answerText, feedback);
       copyText(text, function (success) {
         announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
       });
     });
   }
 
-  function buildIBPlainTextReport(lesson, ibQ, answerText, feedbackText) {
+  function buildIBPlainTextReport(lesson, ibQ, answerText, feedback) {
+    feedback = feedback || {};
     var lines = [];
     lines.push('SBL Geography \u2014 IB-Style Question Report');
     lines.push('Lesson: ' + lesson.title);
@@ -768,12 +938,17 @@
     lines.push('My answer:');
     lines.push(answerText);
     lines.push('');
-    lines.push('Tutor feedback:');
-    lines.push(feedbackText || '(not yet added)');
+    lines.push('Mark awarded: ' + (feedback.markAwarded || ('\u2014 / ' + ibQ.marks)));
+    if (feedback.whyThisMark) { lines.push(''); lines.push('Why this mark was awarded:'); lines.push(feedback.whyThisMark); }
+    if (feedback.whatWasDoneWell) { lines.push(''); lines.push('What was done well:'); lines.push(feedback.whatWasDoneWell); }
+    if (feedback.whatIsMissing) { lines.push(''); lines.push('What is missing or needs development:'); lines.push(feedback.whatIsMissing); }
+    if (feedback.nextStep) { lines.push(''); lines.push('Next step:'); lines.push(feedback.nextStep); }
+    if (feedback.followUpQuestion) { lines.push(''); lines.push('Follow-up question:'); lines.push(feedback.followUpQuestion); }
     return lines.join('\n');
   }
 
-  function downloadIBReport(lesson, ibQ, answerText, feedbackText) {
+  function downloadIBReport(lesson, ibQ, answerText, feedback) {
+    feedback = feedback || {};
     var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Geography IB-Style Question Report</title>' +
       '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:700px;margin:0 auto;color:#1B2029;}' +
       'h1{font-size:1.3rem;} .block{margin:1rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;white-space:pre-wrap;}</style></head><body>';
@@ -782,7 +957,12 @@
     html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '</p><hr>';
     html += '<p><strong>Question [' + ibQ.marks + ' marks]:</strong> ' + escapeHtml(ibQ.question) + '</p>';
     html += '<p><strong>My answer:</strong></p><div class="block">' + escapeHtml(answerText) + '</div>';
-    html += '<p><strong>Tutor feedback:</strong></p><div class="block">' + escapeHtml(feedbackText || '(not yet added)') + '</div>';
+    html += '<p><strong>Mark awarded:</strong> ' + escapeHtml(feedback.markAwarded || ('\u2014 / ' + ibQ.marks)) + '</p>';
+    if (feedback.whyThisMark) html += '<p><strong>Why this mark was awarded:</strong></p><div class="block">' + escapeHtml(feedback.whyThisMark) + '</div>';
+    if (feedback.whatWasDoneWell) html += '<p><strong>What was done well:</strong></p><div class="block">' + escapeHtml(feedback.whatWasDoneWell) + '</div>';
+    if (feedback.whatIsMissing) html += '<p><strong>What is missing or needs development:</strong></p><div class="block">' + escapeHtml(feedback.whatIsMissing) + '</div>';
+    if (feedback.nextStep) html += '<p><strong>Next step:</strong></p><div class="block">' + escapeHtml(feedback.nextStep) + '</div>';
+    if (feedback.followUpQuestion) html += '<p><strong>Follow-up question:</strong></p><div class="block">' + escapeHtml(feedback.followUpQuestion) + '</div>';
     html += '<p><em>Use your browser\u2019s Print option and choose \u201cSave as PDF\u201d if you want a PDF copy.</em></p>';
     html += '</body></html>';
 
@@ -795,8 +975,6 @@
     reportWindow.document.write(html);
     reportWindow.document.close();
   }
-
-  /* ---------------- Ready for the Classroom body ---------------- */
 
   function renderReadinessBody() {
     var lesson = currentLesson;
