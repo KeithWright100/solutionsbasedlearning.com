@@ -18,24 +18,25 @@
                                       using the separate, dedicated
                                       "SBL Challenge Tutor" agent.
      openIBQuestions(lessonId)     — authentic IB-style exam question
-                                      practice. Two-step copy flow:
-                                      first the question (with an
-                                      instruction telling the tutor to
-                                      wait rather than answer), then
-                                      the student's typed answer plus
-                                      mark scheme. A visible readonly
-                                      box always shows the exact text
-                                      to copy, so it works even if the
-                                      automatic clipboard copy fails.
+                                      practice. Submits the student's
+                                      answer to the /api/mark-ppq
+                                      serverless function, which talks
+                                      to the SBL PPQ Marker Copilot
+                                      Studio agent via Direct Line
+                                      (secret held server-side).
+                                      Feedback is rendered directly in
+                                      this panel — no chat window, no
+                                      copy/paste required.
      openReadinessCheck(lessonId)  — 3-5 oral-style discussion
                                       questions for pairs to work
                                       through at the start of class.
                                       No AI/chat involved — reads
                                       lesson.readinessQuestions.
 
-   No Claude, Anthropic, OpenAI or other AI API is called anywhere
-   in this file. The only network resources loaded are iframes to
-   the existing published Microsoft Copilot Studio agents.
+   Teach Me Live and Challenge Mode still use embedded Copilot
+   Studio webchat iframes. IB-Style Questions uses the server-side
+   /api/mark-ppq route instead — no Claude, Anthropic, OpenAI or
+   other AI API is called directly from this file.
    ============================================================ */
 (function () {
 
@@ -157,20 +158,6 @@
     return 'I am working on this challenge question: "' + challenge.question + '". Please help me think it through by asking me one question at a time. Do not give me answers, structures, plans, or model responses.';
   }
 
-  function buildQuestionOpener(ibQ) {
-    return 'I would like to practice this IB Geography exam-style question: "' + ibQ.question + '" [' + ibQ.marks + ' marks]. Please do not answer or explain it yet \u2014 just confirm you have noted it, then wait for me to send my own answer.';
-  }
-
-  function buildMarkingPrompt(lesson, ibQ, answerText) {
-    var lines = [];
-    lines.push('Here is my answer to that question: "' + answerText + '"');
-    lines.push('Official mark scheme (for your reference only \u2014 please do not just read this back to me): ' + ibQ.markScheme);
-    lines.push('Please mark my answer against the mark scheme and tell me my mark out of ' + ibQ.marks + '.');
-    lines.push('Give me constructive feedback: what I got right, what I missed, and how to improve.');
-    lines.push('Do not simply restate the whole mark scheme \u2014 focus your feedback specifically on my answer.');
-    return lines.join(' ');
-  }
-
   function masteryBand(pct) {
     if (pct >= 90) return 'Mastery';
     if (pct >= 70) return 'Secure';
@@ -189,27 +176,27 @@
     return a;
   }
 
- function buildRetrievalBank(lessonId) {
-  var order = (window.SBL_LESSON_ORDER || []).indexOf(lessonId) !== -1
-    ? window.SBL_LESSON_ORDER
-    : (window.SBL_PPN_LESSON_ORDER || []);
-  var idx = order.indexOf(lessonId);
-  if (idx <= 0) return [];
+  function buildRetrievalBank(lessonId) {
+    var order = (window.SBL_LESSON_ORDER || []).indexOf(lessonId) !== -1
+      ? window.SBL_LESSON_ORDER
+      : (window.SBL_PPN_LESSON_ORDER || []);
+    var idx = order.indexOf(lessonId);
+    if (idx <= 0) return [];
 
-  var pool = [];
-  for (var i = 0; i < idx; i++) {
-    var prevLesson = window.SBL_LESSONS[order[i]];
-    if (!prevLesson) continue;
-    prevLesson.quiz.forEach(function (q) {
-      pool.push({
-        q: q.q, options: q.options, correct: q.correct,
-        explain: q.explain, misconception: q.misconception, tag: q.tag,
-        sourceLessonTitle: prevLesson.title
+    var pool = [];
+    for (var i = 0; i < idx; i++) {
+      var prevLesson = window.SBL_LESSONS[order[i]];
+      if (!prevLesson) continue;
+      prevLesson.quiz.forEach(function (q) {
+        pool.push({
+          q: q.q, options: q.options, correct: q.correct,
+          explain: q.explain, misconception: q.misconception, tag: q.tag,
+          sourceLessonTitle: prevLesson.title
+        });
       });
-    });
+    }
+    return pool;
   }
-  return pool;
-}
 
   /* ---------------- Focus management ---------------- */
 
@@ -328,7 +315,7 @@
   window.openIBQuestions = function (lessonId) {
     if (!openModalShell(lessonId)) return;
     titleEl.textContent = 'IB-Style Questions: ' + currentLesson.title;
-    if (subtitleEl) subtitleEl.textContent = 'Practice authentic IB questions and get marked feedback.';
+    if (subtitleEl) subtitleEl.textContent = 'Practice authentic IB questions and get instant, examiner-style marked feedback.';
     modal.setAttribute('aria-label', 'IB-Style Questions: ' + currentLesson.title);
 
     renderIBQuestionsBody();
@@ -393,7 +380,7 @@
     html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
 
     if (lesson.ibQuestions && lesson.ibQuestions.length) {
-      html += '<div class="sbl-teach-section"><h3>IB-Style Questions</h3><p class="sbl-teach-focus">Practice authentic IB questions and get marked feedback against the real mark scheme.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchIBFromTeach">Practice Now &rarr;</button></div>';
+      html += '<div class="sbl-teach-section"><h3>IB-Style Questions</h3><p class="sbl-teach-focus">Practice authentic IB questions and get instant, examiner-style marked feedback.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchIBFromTeach">Practice Now &rarr;</button></div>';
     }
 
     if (lesson.challenge) {
@@ -636,122 +623,12 @@
     });
   }
 
-  /* ---------------- IB-Style Questions body ---------------- */
-
-  function renderIBQuestionsBody() {
-    var lesson = currentLesson;
-
-    if (!lesson.ibQuestions || !lesson.ibQuestions.length) {
-      bodyMount.innerHTML =
-        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
-        '<div class="sbl-teach-section"><h3>IB-Style Questions</h3>' +
-        '<p class="sbl-teach-focus">No IB-style questions are available for this lesson yet.</p></div></div>';
-      return;
-    }
-
-    ibState = { lesson: lesson, activeIndex: 0 };
-
-    var html = '<div class="sbl-teach-grid">';
-    html += '<div class="sbl-teach-panel">';
-
-    if (lesson.ibQuestions.length > 1) {
-      html += '<div class="sbl-teach-section"><h3>Choose a question</h3><div class="sbl-prompt-grid" id="sblIBQuestionList"></div></div>';
-    }
-
-    html += '<div class="sbl-teach-section" id="sblIBQuestionWrap"></div>';
-    html += '</div>';
-
-    html += '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
-    html += '</div>';
-
-    bodyMount.innerHTML = html;
-
-    if (lesson.ibQuestions.length > 1) {
-      var list = document.getElementById('sblIBQuestionList');
-      lesson.ibQuestions.forEach(function (ibQ, i) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'sbl-prompt-btn';
-        btn.textContent = 'Question ' + (i + 1) + ' [' + ibQ.marks + ']';
-        btn.addEventListener('click', function () {
-          ibState.activeIndex = i;
-          renderIBQuestionWorkspace();
-        });
-        list.appendChild(btn);
-      });
-    }
-
-    renderIBQuestionWorkspace();
-    loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
-  }
-
-  function renderIBQuestionWorkspace() {
-    var lesson = ibState.lesson;
-    var ibQ = lesson.ibQuestions[ibState.activeIndex];
-    var wrap = document.getElementById('sblIBQuestionWrap');
-    var questionOpener = buildQuestionOpener(ibQ);
-
-    var html = '<h3>Question' + (lesson.ibQuestions.length > 1 ? ' ' + (ibState.activeIndex + 1) : '') + '</h3>';
-    html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(ibQ.question) + '</strong> [' + ibQ.marks + ' mark' + (ibQ.marks === 1 ? '' : 's') + ']</p>';
-
-    html += '<p class="sbl-progress-note"><strong>Step 1:</strong> Copy the text below, paste it into the tutor chat on the right, and press Send. The tutor will just confirm it has the question \u2014 it will not answer it yet.</p>';
-    html += '<textarea readonly rows="3" style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.85rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; background:#f7f7f9;">' + escapeHtml(questionOpener) + '</textarea>';
-    html += '<div style="margin-top:0.5rem;"><button type="button" class="sbl-prompt-btn" id="sblIBCopyQuestion">Copy question text</button> <span class="sbl-progress-note" id="sblIBCopyQuestionNote" style="display:inline;"></span></div>';
-
-    html += '<p class="sbl-progress-note" style="margin-top:1.2rem;"><strong>Step 2:</strong> Type your answer below.</p>';
-    html += '<textarea id="sblIBAnswer" rows="6" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
-    html += '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action" id="sblIBSubmit">Submit for Marking &rarr;</button></div>';
-    html += '<div id="sblIBFeedbackSection"></div>';
-
-    wrap.innerHTML = html;
-
-    document.getElementById('sblIBCopyQuestion').addEventListener('click', function () {
-      copyText(questionOpener, function (success) {
-        var note = document.getElementById('sblIBCopyQuestionNote');
-        note.textContent = success ? 'Copied \u2014 paste it into the chat now.' : 'Automatic copy failed \u2014 select the text above and copy it manually.';
-      });
-    });
-
-    document.getElementById('sblIBSubmit').addEventListener('click', function () {
-      var answerText = document.getElementById('sblIBAnswer').value.trim();
-      if (!answerText) {
-        announce('Please write an answer before submitting for marking.');
-        return;
-      }
-      var prompt = buildMarkingPrompt(lesson, ibQ, answerText);
-      renderIBFeedbackSection(lesson, ibQ, answerText, prompt);
-      copyText(prompt, function (success) {
-        var copyNote = document.getElementById('sblIBCopyNote');
-        if (copyNote) {
-          copyNote.textContent = success
-            ? 'The text below was also copied to your clipboard automatically \u2014 you can just press Ctrl+V in the chat.'
-            : 'Automatic copy did not work \u2014 select all the text below and copy it manually (Ctrl+C).';
-        }
-      });
-    });
-  }
-
-  function renderIBFeedbackSection(lesson, ibQ, answerText, prompt) {
-    var section = document.getElementById('sblIBFeedbackSection');
-    section.innerHTML =
-      '<p class="sbl-progress-note" style="margin-top:1rem;"><strong>Step 3:</strong> Select all the text in the box below (click inside it, then Ctrl+A, Ctrl+C), paste it into the tutor chat on the right (Ctrl+V), and press Send.</p>' +
-      '<textarea readonly rows="6" style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.85rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; background:#f7f7f9;">' + escapeHtml(prompt) + '</textarea>' +
-      '<p class="sbl-progress-note" id="sblIBCopyNote" style="margin-top:0.3rem;"></p>' +
-      '<p class="sbl-progress-note" style="margin-top:1rem;"><strong>Step 4:</strong> Once the tutor replies with your mark and feedback, copy its message and paste it into the box below.</p>' +
-      '<textarea id="sblIBFeedback" rows="6" placeholder="Paste the tutor\u2019s mark and feedback here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical; margin-top:0.5rem;"></textarea>' +
-      '<div style="margin-top:0.8rem; display:flex; gap:0.6rem; flex-wrap:wrap;">' +
-      '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBDownload">Download report (print / save as PDF)</button>' +
-      '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBOneNote">Copy report for OneNote</button>' +
-      '</div>';
-
-    document.getElementById('sblIBDownload').addEventListener('click', function () {
-      var feedbackText = document.getElementById('sblIBFeedback').value.trim();
-      /* ---------------- IB-Style Questions body (PPQ Marker) ----------------
-     Replaces the old two-step copy/paste chat flow. Submitting an answer
-     now calls the /api/mark-ppq serverless function directly (which itself
-     talks to the SBL PPQ Marker Copilot Studio agent via Direct Line, with
-     the secret held server-side). No chat window or copy/paste is
-     involved \u2014 the feedback is rendered straight into this panel.
+  /* ---------------- IB-Style Questions body (PPQ Marker) ----------------
+     Submitting an answer calls the /api/mark-ppq serverless function
+     directly (which talks to the SBL PPQ Marker Copilot Studio agent
+     via Direct Line, with the secret held server-side). No chat window
+     or copy/paste is involved — feedback is rendered straight into
+     this panel.
      ------------------------------------------------------------------ */
 
   function renderIBQuestionsBody() {
@@ -976,6 +853,8 @@
     reportWindow.document.close();
   }
 
+  /* ---------------- Ready for the Classroom body ---------------- */
+
   function renderReadinessBody() {
     var lesson = currentLesson;
 
@@ -1093,9 +972,6 @@
         var isLast = quizState.index === quizState.questions.length - 1;
         var feedbackWrap = document.getElementById('sblQuizFeedbackWrap');
         var feedbackClass = isCorrect ? 'is-correct' : 'is-incorrect';
-        var feedbackText = isCorrect
-          ? q.explain
-          : q.explain + (q.misconception ? ' <strong>Common misconception:</strong> ' + escapeHtml(q.misconception) : '');
         feedbackWrap.innerHTML =
           '<div class="sbl-quiz-feedback ' + feedbackClass + '"><strong>' + (isCorrect ? 'Correct.' : 'Not quite.') + '</strong> ' + (isCorrect ? escapeHtml(q.explain) : escapeHtml(q.explain) + (q.misconception ? ' <em>Common misconception: ' + escapeHtml(q.misconception) + '</em>' : '')) + '</div>' +
           '<button type="button" class="sbl-quiz-next" id="sblQuizNextBtn">' + (isLast ? 'See my results' : 'Next question') + ' &rarr;</button>';
@@ -1151,15 +1027,12 @@
       var prompt = buildReviewPrompt(lesson, toRevisit);
       copyText(prompt, function (success) {
         var statusBox = document.getElementById('sblCopyStatus');
-        var target = statusBox || mount;
         var msg = success
           ? 'Review prompt copied. Paste it into the tutor chat and press Send.'
           : 'Automatic copy did not work. Select and copy this prompt manually:<textarea readonly rows="3">' + escapeHtml(prompt) + '</textarea>';
         if (statusBox) {
           statusBox.className = 'sbl-copy-status is-visible';
           statusBox.innerHTML = msg;
-        } else {
-          announce(success ? 'Review prompt copied to clipboard.' : 'Automatic copy failed.');
         }
         announce(success ? 'Review prompt copied to clipboard.' : 'Automatic copy failed. A manual copy box is available.');
       });
