@@ -175,12 +175,21 @@
     }
     return a;
   }
-
-  function buildRetrievalBank(lessonId) {
-    var order = (window.SBL_LESSON_ORDER || []).indexOf(lessonId) !== -1
-      ? window.SBL_LESSON_ORDER
-      : (window.SBL_PPN_LESSON_ORDER || []);
-    var idx = order.indexOf(lessonId);
+function buildRetrievalBank(lessonId) {
+  var candidateOrders = [
+    window.SBL_LESSON_ORDER,
+    window.SBL_PPN_LESSON_ORDER,
+    window.SBL_FH_LESSON_ORDER
+  ];
+  var order = [];
+  for (var k = 0; k < candidateOrders.length; k++) {
+    if (candidateOrders[k] && candidateOrders[k].indexOf(lessonId) !== -1) {
+      order = candidateOrders[k];
+      break;
+    }
+  }
+  var idx = order.indexOf(lessonId);
+  
     if (idx <= 0) return [];
 
     var pool = [];
