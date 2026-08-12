@@ -28,7 +28,7 @@ window.SBL_LESSONS.CP01 = {
     { label: 'Human factors', request: 'Explain the human factors affecting population distribution' },
     { label: 'Choropleth vs dot maps', request: 'Explain the difference between choropleth maps and dot maps for showing population' },
     { label: 'Help me draw a diagram', request: 'Suggest a simple labelled diagram I could draw for this lesson' }
-  ]
+  ],
   checklist: [
     'I can define population distribution.',
     'I can define population density.',
@@ -39,6 +39,7 @@ window.SBL_LESSONS.CP01 = {
     'I can interpret choropleth and dot maps.'
   ],
   readinessQuestions: [
+
     'Name two physical factors that affect where people choose to live.',
     'Name two human factors that affect where people choose to live.',
     'Give an example of an area with very high population density and explain why.',
