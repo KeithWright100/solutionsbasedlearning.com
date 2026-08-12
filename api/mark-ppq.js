@@ -25,7 +25,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 1. Generate a Direct Line token from the secret (short-lived, safe to use once).
+    // 1. Generate a Direct Line token from the secret.
+    //    NOTE: this endpoint returns only { token, expires_in } —
+    //    it does NOT start a conversation or return a conversationId.
     const tokenRes = await fetch(`${DIRECTLINE_BASE}/tokens/generate`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${secret}` }
@@ -35,11 +37,33 @@ export default async function handler(req, res) {
       console.error('Token generation failed:', tokenRes.status, text);
       return res.status(502).json({ error: 'Could not authenticate with the marking service.' });
     }
-    const { token, conversationId } = await tokenRes.json();
+    const { token } = await tokenRes.json();
 
-    // 2. Build the message sent to the agent. The agent's own instructions
-    //    define the required fields and the exact output format, so we pass
-    //    them through clearly labelled.
+    // 2. Actually START the conversation using that token. This is the
+    //    step that was previously missing — /tokens/generate alone does
+    //    NOT create a usable conversationId. This call returns a real
+    //    conversationId (and a conversation-scoped token/streamUrl).
+    const startRes = await fetch(`${DIRECTLINE_BASE}/conversations`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!startRes.ok) {
+      const text = await startRes.text();
+      console.error('Starting conversation failed:', startRes.status, text);
+      return res.status(502).json({ error: 'Could not start a conversation with the marking service.' });
+    }
+    const startData = await startRes.json();
+    const conversationId = startData.conversationId;
+    // Direct Line may issue a fresh, conversation-scoped token here; use
+    // it if present, otherwise fall back to the original token.
+    const activeToken = startData.token || token;
+
+    if (!conversationId) {
+      console.error('No conversationId returned from /conversations:', startData);
+      return res.status(502).json({ error: 'Could not establish a conversation with the marking service.' });
+    }
+
+    // 3. Build and post the message to the agent.
     const messageText = [
       `QUESTION: ${question}`,
       `MAXIMUM MARK: ${maxMark}`,
@@ -50,7 +74,7 @@ export default async function handler(req, res) {
     const postRes = await fetch(`${DIRECTLINE_BASE}/conversations/${conversationId}/activities`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${activeToken}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -65,8 +89,7 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Could not reach the marking service.' });
     }
 
-    // 3. Poll for the agent's reply. Direct Line delivers messages
-    //    asynchronously, so we poll a few times with a short delay.
+    // 4. Poll for the agent's reply.
     let replyText = null;
     let watermark = null;
     const maxAttempts = 12;
@@ -80,7 +103,7 @@ export default async function handler(req, res) {
         : `${DIRECTLINE_BASE}/conversations/${conversationId}/activities`;
 
       const getRes = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${activeToken}` }
       });
       if (!getRes.ok) continue;
 
@@ -99,8 +122,8 @@ export default async function handler(req, res) {
       return res.status(504).json({ error: 'The marking service took too long to respond. Please try again.' });
     }
 
-    // 4. Parse the agent's structured text reply into fields the front end
-    //    can render directly.
+    // 5. Parse the agent's structured text reply into fields the front
+    //    end can render directly.
     const feedback = parseMarkingReply(replyText);
 
     return res.status(200).json({ raw: replyText, feedback });
