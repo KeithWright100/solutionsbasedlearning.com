@@ -28,7 +28,7 @@ window.SBL_LESSONS.CP01 = {
     { label: 'Human factors', request: 'Explain the human factors affecting population distribution' },
     { label: 'Choropleth vs dot maps', request: 'Explain the difference between choropleth maps and dot maps for showing population' },
     { label: 'Help me draw a diagram', request: 'Suggest a simple labelled diagram I could draw for this lesson' }
-  ],
+  ]
   checklist: [
     'I can define population distribution.',
     'I can define population density.',
@@ -228,6 +228,13 @@ window.SBL_LESSONS.CP05 = {
     'I can explain fertility decline.',
     'I can identify strengths and limitations of the DTM.'
   ],
+ibQuestions: [
+  {
+    question: 'Outline what is meant by "fertility rate".',
+    marks: 2,
+    markScheme: 'The number of children/number of births per 1000 women [1] a woman gives birth to during her lifetime/fertile years/reproductive age/below 50 [1].'
+  },
+],
   quiz: [
     { q: 'Crude birth rate measures:', options: ['Births per 1,000 people per year', 'Births per woman over her lifetime', 'The total number of births ever recorded', 'Births compared to deaths only'], correct: 0, explain: 'Crude birth rate is the number of live births per 1,000 people in a population per year.', misconception: 'Crude birth rate is often confused with total fertility rate, which measures average births per woman, not per 1,000 people.', tag: 'Birth and death rates' },
     { q: 'Natural increase is calculated as:', options: ['Birth rate + death rate', 'Birth rate \u2212 death rate', 'Immigration \u2212 emigration', 'Fertility rate \u00d7 population'], correct: 1, explain: 'Natural increase is the birth rate minus the death rate, excluding migration.', misconception: 'Students sometimes add birth and death rates together instead of subtracting, or confuse natural increase with net migration.', tag: 'Natural increase' },
