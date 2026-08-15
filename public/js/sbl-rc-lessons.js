@@ -1,11 +1,24 @@
-BUILD STATUS: ALL 13 LESSONS COMPLETE (RC01–RC13). Topic 1
-   (Global trends in consumption), Topic 2 (Impacts of changing
-   trends, including Nepal RC08 and Israel RC09), and Topic 3
-   (Resource stewardship: SDGs, population and resource
-   consumption, circular economy) are all built. This whole file
-   is replaced wholesale each time, per standing project practice
-   — do not partially paste.
-   ============================================================ */
+// ============================================================
+// SBL Geography Tutor — Resource Consumption and Security
+// (Unit 3) lesson configurations. Same reusable tutor engine
+// (sbl-teach-bot.js) as Changing Population and Global Climate.
+// Hrefs and titles copied verbatim from sbl-sidebar.js "Unit 3:
+// Resource Consumption and Security" (core-3) navigation data.
+//
+// IMPORTANT: this file must load AFTER sbl-population-lessons.js
+// AND sbl-climate-lessons.js, so SBL_LESSON_ORDER is extended
+// (Population, then Climate, then Resource Consumption), not
+// overwritten — this keeps Spaced Retrieval cumulative across
+// all three units.
+//
+// BUILD STATUS: ALL 13 LESSONS COMPLETE (RC01-RC13). Topic 1
+// (Global trends in consumption), Topic 2 (Impacts of changing
+// trends, including Nepal RC08 and Israel RC09), and Topic 3
+// (Resource stewardship: SDGs, population and resource
+// consumption, circular economy) are all built. This whole file
+// is replaced wholesale each time, per standing project practice
+// - do not partially paste.
+// ============================================================
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_LESSON_ORDER = (window.SBL_LESSON_ORDER || []).concat(
   ['RC01','RC02','RC03','RC04','RC05','RC06','RC07','RC08','RC09','RC10','RC11','RC12','RC13']
