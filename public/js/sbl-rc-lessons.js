@@ -1,31 +1,15 @@
-/* ============================================================
-   SBL Geography Tutor — Resource Consumption and Security
-   (Unit 3) lesson configurations. Same reusable tutor engine
-   (sbl-teach-bot.js) as Changing Population and Global Climate.
-   Hrefs and titles copied verbatim from sbl-sidebar.js "Unit 3:
-   Resource Consumption and Security" (core-3) navigation data.
-
-   IMPORTANT: this file must load AFTER sbl-population-lessons.js
-   AND sbl-climate-lessons.js, so SBL_LESSON_ORDER is extended
-   (Population, then Climate, then Resource Consumption), not
-   overwritten — this keeps Spaced Retrieval cumulative across
-   all three units.
-
-   BUILD STATUS (Batch 2 of 3): RC01–RC07 and RC09 built (Topics
-   1 and most of Topic 2). RC08 (Nepal case study) is deliberately
-   SKIPPED for now, pending its source slide — it sits between
-   RC07 and RC09 in the true syllabus order. RC10–RC13 (Topic 3)
-   to follow in the final batch. This whole file is replaced
-   wholesale each time, per standing project practice — do not
-   partially paste. When RC08 arrives, this concat list must be
-   rebuilt in strict order (RC01..RC09) so Spaced Retrieval keeps
-   pooling lessons in the correct cumulative sequence.
+BUILD STATUS: ALL 13 LESSONS COMPLETE (RC01–RC13). Topic 1
+   (Global trends in consumption), Topic 2 (Impacts of changing
+   trends, including Nepal RC08 and Israel RC09), and Topic 3
+   (Resource stewardship: SDGs, population and resource
+   consumption, circular economy) are all built. This whole file
+   is replaced wholesale each time, per standing project practice
+   — do not partially paste.
    ============================================================ */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_LESSON_ORDER = (window.SBL_LESSON_ORDER || []).concat(
-  ['RC01','RC02','RC03','RC04','RC05','RC06','RC07','RC09']
+  ['RC01','RC02','RC03','RC04','RC05','RC06','RC07','RC08','RC09','RC10','RC11','RC12','RC13']
 );
-
 window.SBL_LESSONS.RC01 = {
   id: 'RC01',
   topicNumber: 1,
@@ -509,3 +493,58 @@ window.SBL_LESSONS.RC10 = {
     { q: 'Overall, effective management of consumer waste is best understood as depending on:', options: ['Recycling alone, with no role for reducing or reusing', 'A combination of reducing consumption, reusing items, and recycling materials effectively, alongside addressing the challenges of international waste flows', 'Exporting all waste to other countries as the primary long-term solution', 'A single global policy that applies identically to every country'], correct: 1, explain: 'Effective waste management requires a combined approach \u2014 reducing consumption in the first place, reusing items where possible, and recycling materials effectively \u2014 while also addressing the genuine ethical and environmental justice challenges raised by international waste flows.', misconception: 'Recycling is sometimes treated as a complete solution on its own, when it sits within a wider hierarchy alongside reducing and reusing, and alongside unresolved challenges around how waste moves internationally.', tag: 'International flows of waste' }
   ]
 };
+window.SBL_LESSONS.RC11 = {
+  id: 'RC11',
+  topicNumber: 3,
+  topicTitle: 'Resource stewardship',
+  title: 'The SDGs',
+  href: '/geography/paper-1/core-3/t3-resource/l1-course',
+  syllabusFocus: 'The role of the UN Sustainable Development Goals (SDGs) and the progress made towards meeting them, including analysing spatial patterns for a selected goal, evaluating how development projects contribute to the SDGs, and understanding the links between different goals.',
+  starterButtons: [
+    { label: 'Teach me this lesson', request: 'Give me a full overview of the SDGs and their relevance to this course' },
+    { label: 'What are the SDGs?', request: 'Explain what the UN Sustainable Development Goals are' },
+    { label: 'Key SDGs for this unit', request: 'Explain the SDGs most relevant to Resource Consumption and Security, such as SDG 2, 6, 7, 12 and 13' },
+    { label: 'Measuring progress', request: 'Explain how progress towards an SDG can be measured' },
+    { label: 'Spatial patterns of an SDG', request: 'Explain how to analyse spatial patterns of progress for a selected SDG' },
+    { label: 'How the SDGs link together', request: 'Explain how different SDGs are linked to one another' },
+    { label: 'Development projects and the SDGs', request: 'Explain how a development project can help meet one or more SDGs' }
+  ],
+  checklist: [
+    'I can explain what the SDGs are and when they were adopted.',
+    'I can name and explain the purpose of several SDGs relevant to this course.',
+    'I can explain how progress towards an SDG is measured.',
+    'I can analyse spatial patterns of progress for a selected SDG.',
+    'I can explain how one development project contributes to meeting the SDGs.',
+    'I can explain links between different SDGs.',
+    'I can explain why the SDGs are described as universal and interconnected.'
+  ],
+  readinessQuestions: [
+    'What are the UN Sustainable Development Goals, and how many are there?',
+    'Name two SDGs that are particularly relevant to this unit on resource consumption and security.',
+    'Explain how progress towards an SDG can be measured.',
+    'Give an example of how two different SDGs are linked to one another.',
+    'Explain how a development project can help a country make progress towards one or more SDGs.'
+  ],
+  quiz: [
+    { q: 'The UN Sustainable Development Goals (SDGs) are best described as:', options: ['A single environmental treaty focused only on climate change', 'A set of 17 universal goals, adopted in 2015, addressing social, economic and environmental challenges to be achieved by 2030', 'A set of goals that apply only to low-income countries', 'A binding legal agreement enforced by international courts'], correct: 1, explain: 'The SDGs are a set of 17 universal goals adopted by UN member states in 2015, addressing a wide range of interconnected social, economic and environmental challenges, with a target date of 2030.', misconception: 'The SDGs are sometimes assumed to apply only to LICs, when they are explicitly designed as universal goals intended to apply to every country, including HICs.', tag: 'What are the SDGs?' },
+    { q: 'Which SDG focuses specifically on ensuring access to affordable, reliable, sustainable and modern energy?', options: ['SDG 2 (Zero Hunger)', 'SDG 6 (Clean Water and Sanitation)', 'SDG 7 (Affordable and Clean Energy)', 'SDG 13 (Climate Action)'], correct: 2, explain: 'SDG 7 specifically addresses access to affordable, reliable, sustainable and modern energy for all, directly connecting to this unit\u2019s focus on energy security.', misconception: 'The individual SDG numbers and specific focus areas are easy to mix up; each numbered goal targets a distinct, defined area, even where goals are closely related.', tag: 'Key SDGs for this unit' },
+    { q: 'SDG 12, "Responsible Consumption and Production", is directly relevant to this unit because it addresses:', options: ['Only issues related to international peace and justice', 'Ensuring sustainable consumption and production patterns, including reducing waste and resource use', 'Only issues related to gender equality', 'A goal entirely unrelated to resource consumption'], correct: 1, explain: 'SDG 12 focuses on ensuring sustainable consumption and production patterns, directly connecting to this unit\u2019s themes of resource consumption, waste, recycling and the circular economy.', misconception: 'It is sometimes assumed the SDGs are only about environmental protection in a narrow sense; SDG 12 specifically targets the human systems of consumption and production that drive resource pressure.', tag: 'Key SDGs for this unit' },
+    { q: 'Measuring a country\u2019s progress towards a specific SDG typically involves:', options: ['Relying purely on opinion, with no data involved', 'Tracking specific quantitative indicators associated with that goal over time, such as access rates or emissions levels', 'Measuring progress once only, with no ongoing tracking', 'Using an identical single indicator for every SDG'], correct: 1, explain: 'Progress towards each SDG is generally tracked using specific quantitative indicators relevant to that goal (for example, percentage of population with access to clean water for SDG 6), monitored over time to assess change.', misconception: 'SDG progress is sometimes assumed to be assessed subjectively; in practice, each goal has specific, defined indicators used for consistent monitoring and comparison over time.', tag: 'Measuring progress' },
+    { q: 'When analysing the spatial pattern of progress for a selected SDG, geographers would typically look at:', options: ['Only the global average figure, with no attention to variation between places', 'How progress varies between and within countries or regions, and what factors might explain that variation', 'A single randomly chosen country, with no wider comparison', 'Whether the SDG has a catchy logo'], correct: 1, explain: 'Analysing spatial patterns involves examining how progress towards a goal varies between and within countries or regions, and considering what physical, economic, social or political factors might explain those differences.', misconception: 'It is sometimes assumed a single global average tells the full story; genuine spatial analysis requires looking at variation between places, not just an overall global figure.', tag: 'Spatial patterns of an SDG' },
+    { q: 'A key reason the SDGs are described as "interconnected" is that:', options: ['Each goal can only be addressed entirely in isolation from the others', 'Progress (or lack of progress) on one goal often directly affects the ability to make progress on other goals', 'The goals were designed with no relationship to one another whatsoever', 'Only two of the seventeen goals have any connection to each other'], correct: 1, explain: 'The SDGs are explicitly designed as an interconnected framework, since progress on one goal (such as SDG 6, clean water) often directly supports or constrains progress on others (such as SDG 2, zero hunger, given agriculture\u2019s reliance on water).', misconception: 'It is tempting to treat each SDG as a separate checklist item to address independently, when the framework is specifically designed around the recognition that these goals are deeply interconnected.', tag: 'How the SDGs link together' },
+    { q: 'A specific example of interconnection between SDGs relevant to this unit is:', options: ['SDG 6 (Clean Water) and SDG 2 (Zero Hunger) are entirely unrelated, since agriculture requires no water', 'Progress on SDG 7 (energy access) can support progress on SDG 6 (clean water), since energy is required to extract, treat and distribute water', 'SDGs relating to physical resources have no connection to SDGs relating to social issues', 'Climate action (SDG 13) has no relevance to water, food or energy security'], correct: 1, explain: 'This unit\u2019s water-food-energy nexus concept directly illustrates SDG interconnection: for example, progress on energy access (SDG 7) can support progress on clean water access (SDG 6), since significant energy is required to extract, treat and distribute water.', misconception: 'This is a good opportunity to explicitly connect the SDG framework back to the nexus concept studied earlier in this unit \u2014 they are describing the same underlying interconnections from slightly different angles.', tag: 'How the SDGs link together' },
+    { q: 'Development projects can contribute to meeting the SDGs by:', options: ['Having no measurable connection to any specific SDG target', 'Directly targeting specific, measurable improvements linked to one or more SDG indicators, such as improving water access or reducing emissions', 'Only being relevant if they are led entirely by national governments', 'Focusing exclusively on economic growth with no other considerations'], correct: 1, explain: 'Well-designed development projects typically target specific, measurable improvements that align directly with SDG indicators, such as expanding access to clean water, improving food security, or reducing carbon emissions.', misconception: 'Development projects are sometimes assessed only in general terms ("this helps the community"); a stronger geographical evaluation links project outcomes to specific, measurable SDG indicators and targets.', tag: 'Development projects and the SDGs' },
+    { q: 'A meaningful evaluation of whether a development project is genuinely helping meet the SDGs would consider:', options: ['Only whether the project received positive media coverage', 'Measurable outcomes against relevant SDG indicators, alongside considerations of long-term sustainability and unintended consequences', 'Only the total amount of money spent on the project', 'Whether the project has a name that references the SDGs'], correct: 1, explain: 'A genuine evaluation requires looking at measurable outcomes against relevant SDG indicators, as well as considering whether improvements are sustainable in the long term and whether the project has created any unintended negative consequences elsewhere.', misconception: 'Superficial signals (funding levels, publicity, or SDG branding) are sometimes mistaken for genuine evidence of impact; real evaluation requires evidence of measurable, sustainable outcomes.', tag: 'Development projects and the SDGs' },
+    { q: 'Overall, studying the SDGs within this unit is valuable because they:', options: ['Have no real connection to resource consumption and security', 'Provide a globally recognised framework connecting resource consumption, sustainability and development issues studied throughout this unit', 'Apply only to environmental issues, with no link to human development', 'Replace the need to study any other concept in this unit'], correct: 1, explain: 'The SDGs provide a globally recognised, structured framework that directly connects the resource consumption, sustainability, and development themes studied throughout this unit, helping to tie together water, food, energy, waste and stewardship into a coherent global agenda.', misconception: 'The SDGs are sometimes treated as a separate, add-on topic rather than as a unifying framework that directly connects to and reinforces the other concepts studied throughout this unit.', tag: 'What are the SDGs?' }
+  ]
+};
+
+window.SBL_LESSONS.RC12 = {
+  id: 'RC12',
+  topicNumber: 3,
+  topicTitle: 'Resource stewardship',
+  title: 'Population and resource consumption',
+  href: '/geography/paper-1/core-3/t3-resource/l2-population-and',
+  syllabusFocus: 'Divergent thinking about population and resource consumption trends, including pessimistic views such as neo-Malthusian theory, optimistic views such as Boserup\u2019s theory, and balanced views centred on the concept of resource stewardship.',
+  starterButtons: [
+    { label: 'Teach
