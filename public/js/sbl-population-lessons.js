@@ -39,13 +39,13 @@ window.SBL_LESSONS.CP01 = {
     'I can interpret choropleth and dot maps.'
   ],
   readinessQuestions: [
-
     'Name two physical factors that affect where people choose to live.',
     'Name two human factors that affect where people choose to live.',
     'Give an example of an area with very high population density and explain why.',
     'Give an example of an area with very low population density and explain why.',
     'Explain how climate can act as both a "pull" and a "push" factor for population distribution.'
-  ],quiz: [
+  ],
+  quiz: [
     { q: 'What does population distribution describe?', options: ['The total population of a country', 'How population is spread across an area', 'The rate of population growth', 'The average age of a population'], correct: 1, explain: 'Distribution describes the pattern of where people live across a space.', misconception: 'A common confusion is treating "distribution" as a single number (like total population) rather than a spatial pattern.', tag: 'Distribution vs density' },
     { q: 'Population density is best described as:', options: ['Total population divided by area', 'Total births minus total deaths', 'The number of cities in a country', 'The percentage of people over 65'], correct: 0, explain: 'Density is a measure of people per unit area, usually per km\u00b2.', misconception: 'Density is often confused with natural increase (births minus deaths), which is a rate of change, not a spatial measure.', tag: 'Distribution vs density' },
     { q: 'Which is an example of a physical factor affecting population distribution?', options: ['Employment opportunities', 'Government policy', 'Climate', 'Transport links'], correct: 2, explain: 'Climate is a physical factor, alongside relief, water supply and natural resources.', misconception: 'Students sometimes list transport or policy as "physical" because they affect where people live, but these are human, not natural, factors.', tag: 'Physical factors' },
@@ -90,7 +90,8 @@ window.SBL_LESSONS.CP02 = {
     'Give an example of a country in each development category.',
     'Explain what "core" and "periphery" mean in the context of global development patterns.',
     'Give one criticism of using GDP per capita alone to classify development.'
-  ],quiz: [
+  ],
+  quiz: [
     { q: 'LIC stands for:', options: ['Low Income Country', 'Least Industrialised Continent', 'Local Investment Class', 'Low Infrastructure Community'], correct: 0, explain: 'LIC = Low Income Country, one of the common development classifications.', misconception: 'LIC is sometimes confused with a description of infrastructure or geography rather than a strict income-based classification.', tag: 'LICs, MICs and HICs' },
     { q: 'Inequality in a development context refers to:', options: ['Equal access to resources for everyone', 'Uneven distribution of wealth, resources or opportunity', 'A country with no cities', 'The rate of population growth'], correct: 1, explain: 'Inequality describes uneven distribution of wealth, resources, or opportunities between people or places.', misconception: 'Some students think inequality only refers to income, but it also includes access to healthcare, education and opportunity.', tag: 'What is inequality?' },
     { q: 'In core-periphery theory, the "core" typically refers to:', options: ['Rural, less developed areas', 'Areas of concentrated economic activity and wealth', 'Areas with the lowest population density', 'Coastal fishing regions only'], correct: 1, explain: 'The core is the economically dominant region, while the periphery is less developed and often dependent on the core.', misconception: 'Core and periphery are sometimes confused with simple geographic centre/edge, when the terms actually describe economic dominance, not just location.', tag: 'Core-periphery model' },
@@ -136,7 +137,8 @@ window.SBL_LESSONS.CP03 = {
     'Explain how physical factors can create uneven development within a country.',
     'Explain how government policy can influence internal population distribution.',
     'Give an example of rural-to-urban migration and explain one cause.'
-  ],quiz: [
+  ],
+  quiz: [
     { q: 'Which city is the main core region of Thailand?', options: ['Chiang Mai', 'Bangkok', 'Phuket', 'Pattaya'], correct: 1, explain: 'Bangkok is Thailand\u2019s primary core region, concentrating population and economic activity.', misconception: 'Tourist-famous cities like Phuket or Pattaya are sometimes assumed to be the economic core, when Bangkok is the true centre of population and economic concentration.', tag: 'Core and periphery' },
     { q: '"Pull factors" in migration are:', options: ['Reasons people are forced to leave a place', 'Reasons that attract people to a new place', 'Government migration bans', 'Natural disasters only'], correct: 1, explain: 'Pull factors attract migrants to a destination, such as jobs or better services; push factors drive them away from their origin.', misconception: 'Push and pull factors are frequently swapped by students; a helpful check is that "pull" always relates to the destination, not the origin.', tag: 'Push and pull factors' },
     { q: 'A megacity is generally defined as a city with a population of at least:', options: ['1 million', '5 million', '10 million', '50 million'], correct: 2, explain: 'A megacity is commonly defined as a city with 10 million or more inhabitants.', misconception: 'Students often underestimate the threshold, assuming 1 or 5 million qualifies, when the standard definition requires at least 10 million.', tag: 'What is a megacity?' },
@@ -183,7 +185,8 @@ window.SBL_LESSONS.CP04 = {
     'Compare a core region in Egypt with a core region in Thailand.',
     'Explain one similarity between population distribution patterns in Egypt and Thailand.',
     'Explain one difference between population distribution patterns in Egypt and Thailand.'
-  ],quiz: [
+  ],
+  quiz: [
     { q: 'Most of Egypt\u2019s population is concentrated along:', options: ['The Red Sea coast only', 'The Nile Valley and Delta', 'The Sinai desert', 'The Libyan border'], correct: 1, explain: 'The overwhelming majority of Egypt\u2019s population lives along the fertile Nile Valley and Delta.', misconception: 'Coastal areas are sometimes assumed to hold the largest population, but in Egypt it is the fertile river valley, not the coastline, that dominates.', tag: 'Why people live near the Nile' },
     { q: 'Egypt\u2019s desert regions have low population density mainly because of:', options: ['Government restrictions', 'Lack of water and fertile land', 'High crime rates', 'Cold climate'], correct: 1, explain: 'The desert areas lack reliable water and fertile soil, making them inhospitable for large-scale settlement.', misconception: 'Political or social causes are sometimes wrongly assumed; the primary driver in Egypt\u2019s deserts is a physical lack of water and fertile land.', tag: 'Physical factors' },
     { q: 'Which city dominates Thailand\u2019s population and economic distribution?', options: ['Chiang Mai', 'Bangkok', 'Phuket', 'Ayutthaya'], correct: 1, explain: 'Bangkok is Thailand\u2019s primate city, concentrating population, services and economic activity.', misconception: 'Historic or tourist cities are sometimes assumed to be the population centre, but Bangkok\u2019s modern economic dominance makes it the clear primate city.', tag: 'Thailand overview' },
@@ -229,13 +232,20 @@ window.SBL_LESSONS.CP05 = {
     'I can explain fertility decline.',
     'I can identify strengths and limitations of the DTM.'
   ],
-ibQuestions: [
-  {
-    question: 'Outline what is meant by "fertility rate".',
-    marks: 2,
-    markScheme: 'The number of children/number of births per 1000 women [1] a woman gives birth to during her lifetime/fertile years/reproductive age/below 50 [1].'
-  },
-],
+  ibQuestions: [
+    {
+      question: 'Outline what is meant by "fertility rate".',
+      marks: 2,
+      markScheme: 'The number of children/number of births per 1000 women [1] a woman gives birth to during her lifetime/fertile years/reproductive age/below 50 [1].'
+    }
+  ],
+  readinessQuestions: [
+    'What is the difference between crude birth rate and total fertility rate?',
+    'Explain what natural increase measures.',
+    'Describe what a population pyramid with a wide base and narrow top tells you about a population.',
+    'Name the five stages of the Demographic Transition Model and briefly describe Stage 2.',
+    'Give one limitation of the Demographic Transition Model.'
+  ],
   quiz: [
     { q: 'Crude birth rate measures:', options: ['Births per 1,000 people per year', 'Births per woman over her lifetime', 'The total number of births ever recorded', 'Births compared to deaths only'], correct: 0, explain: 'Crude birth rate is the number of live births per 1,000 people in a population per year.', misconception: 'Crude birth rate is often confused with total fertility rate, which measures average births per woman, not per 1,000 people.', tag: 'Birth and death rates' },
     { q: 'Natural increase is calculated as:', options: ['Birth rate + death rate', 'Birth rate \u2212 death rate', 'Immigration \u2212 emigration', 'Fertility rate \u00d7 population'], correct: 1, explain: 'Natural increase is the birth rate minus the death rate, excluding migration.', misconception: 'Students sometimes add birth and death rates together instead of subtracting, or confuse natural increase with net migration.', tag: 'Natural increase' },
@@ -278,6 +288,13 @@ window.SBL_LESSONS.CP06 = {
     'I can explain Thailand\u2019s ageing challenge.',
     'I can explain The Gambia\u2019s youthful population.',
     'I can suggest appropriate responses.'
+  ],
+  readinessQuestions: [
+    'What does a dependency ratio measure?',
+    'Explain why Thailand\u2019s population structure is described as ageing.',
+    'Explain why the Gambia\u2019s population structure is described as youthful.',
+    'Give one challenge linked to an ageing population and one linked to a youthful population.',
+    'Suggest one policy response a government could use to manage an ageing population.'
   ],
   quiz: [
     { q: 'A dependency ratio compares:', options: ['Working-age people to non-working-age people', 'Men to women in a population', 'Rural to urban population', 'Births to deaths'], correct: 0, explain: 'The dependency ratio compares the economically dependent population (young and old) to the working-age population.', misconception: 'Dependency ratio is sometimes confused with the sex ratio or urban/rural split, but it specifically relates to economic dependency by age.', tag: 'What is dependency?' },
@@ -325,6 +342,13 @@ window.SBL_LESSONS.CP07 = {
     'I can explain environmental consequences.',
     'I can recall one detailed megacity example.'
   ],
+  readinessQuestions: [
+    'Explain the difference between urbanisation and urban growth.',
+    'Give two factors that drive megacity growth.',
+    'Describe one social consequence of rapid megacity growth.',
+    'Describe one economic and one environmental consequence of megacity growth.',
+    'Why is Mumbai used as a case study for this topic?'
+  ],
   quiz: [
     { q: 'Urbanisation refers to:', options: ['The physical growth of a city\u2019s built-up area', 'An increasing proportion of a population living in urban areas', 'A decrease in city population', 'Only international migration to cities'], correct: 1, explain: 'Urbanisation is the increase in the proportion of a population living in urban areas.', misconception: 'Urbanisation is often confused with the physical spread of a city (which is closer to urban growth) rather than the proportional shift in where people live.', tag: 'Urbanisation vs urban growth' },
     { q: 'Urban growth refers to:', options: ['The increase in the absolute number of people living in urban areas', 'A decline in a city\u2019s population', 'Only rural population change', 'A country\u2019s total GDP'], correct: 0, explain: 'Urban growth is the increase in the total number of people living in urban areas, which can occur even without urbanisation.', misconception: 'Urban growth and urbanisation are often used interchangeably by mistake, but they measure different things \u2014 absolute numbers versus proportion.', tag: 'Urbanisation vs urban growth' },
@@ -368,6 +392,13 @@ window.SBL_LESSONS.CP08 = {
     'I can explain consequences for receiving places.',
     'I can recall accurate case-study evidence.'
   ],
+  readinessQuestions: [
+    'Explain the difference between a refugee and an internally displaced person (IDP).',
+    'What is an asylum seeker?',
+    'Give one political push factor that can cause forced migration.',
+    'Explain why the Rohingya were displaced from Burma.',
+    'Give one consequence of displacement for the people affected and one for the receiving area.'
+  ],
   quiz: [
     { q: 'An internally displaced person (IDP) is someone who:', options: ['Has crossed an international border seeking safety', 'Has been forced to flee but remains within their own country', 'Has migrated voluntarily for work', 'Is a tourist visiting temporarily'], correct: 1, explain: 'An IDP is forced to flee their home but stays within their own country\u2019s borders, unlike a refugee.', misconception: 'IDP and refugee are very commonly confused; the key distinguishing feature is whether an international border has been crossed.', tag: 'Refugee vs IDP' },
     { q: 'A refugee is legally defined as someone who:', options: ['Has crossed an international border due to fear of persecution', 'Moves for better job opportunities', 'Is displaced but remains in their home country', 'Travels for tourism'], correct: 0, explain: 'A refugee has crossed an international border and cannot return due to a well-founded fear of persecution.', misconception: 'Economic migrants are sometimes mislabelled as refugees; the legal definition of refugee specifically requires fear of persecution, not economic motivation.', tag: 'Refugee vs IDP' },
@@ -409,6 +440,13 @@ window.SBL_LESSONS.CP09 = {
     'I can explain effects on the state.',
     'I can explain why rebuilding was difficult.',
     'I can explain how later hazards increased vulnerability.'
+  ],
+  readinessQuestions: [
+    'Why did the 2010 earthquake cause mass internal displacement in Haiti?',
+    'Give one short-term consequence and one long-term consequence of the earthquake.',
+    'Describe one problem commonly found within displacement camps.',
+    'Explain how Hurricane Matthew affected Haiti\u2019s recovery.',
+    'Give one reason rebuilding was particularly difficult in Haiti.'
   ],
   quiz: [
     { q: 'The 2010 Haiti earthquake caused mass internal displacement mainly because:', options: ['Homes and infrastructure were destroyed', 'The government banned people from staying in cities', 'It caused a drought', 'People chose to migrate for work'], correct: 0, explain: 'Widespread destruction of homes and infrastructure forced huge numbers of people from their homes.', misconception: 'Displacement after a natural disaster is sometimes framed as a policy choice, when it is directly caused by the physical destruction of homes and infrastructure.', tag: 'Why people were displaced' },
@@ -453,6 +491,13 @@ window.SBL_LESSONS.CP10 = {
     'I can explain opportunities created by these trends.',
     'I can explain challenges created by these trends.'
   ],
+  readinessQuestions: [
+    'What is meant by a sex ratio, and what does a ratio above 100 tell you?',
+    'Explain what is meant by an "ageing" or "greying" population.',
+    'Give one reason family size has been falling in many countries.',
+    'Which world region shows the most advanced population ageing, and why?',
+    'Give one opportunity and one challenge linked to these population trends.'
+  ],
   quiz: [
     { q: 'A sex ratio is usually expressed as:', options: ['The number of males per 100 females', 'The total male population only', 'The birth rate of a country', 'The percentage of the elderly population'], correct: 0, explain: 'A sex ratio is commonly expressed as the number of males per 100 females in a population.', misconception: 'Sex ratio is sometimes confused with a simple percentage of males in the total population, rather than a ratio relative to females specifically.', tag: 'Sex ratios' },
     { q: 'A sex ratio above 100 means:', options: ['There are more females than males', 'There are more males than females', 'The population is exactly balanced', 'The population is shrinking'], correct: 1, explain: 'A ratio above 100 means there are more males than females per 100 in that population.', misconception: 'Direction of the ratio is sometimes read backwards; above 100 always means more males, since the ratio is males per 100 females.', tag: 'Why sex ratios vary' },
@@ -495,6 +540,13 @@ window.SBL_LESSONS.CP11 = {
     'I can explain short-term impacts.',
     'I can explain long-term impacts.',
     'I can judge effectiveness using demographic evidence.'
+  ],
+  readinessQuestions: [
+    'Explain the difference between a pro-natalist and an anti-natalist policy.',
+    'Give one strategy commonly used in a pro-natalist policy.',
+    'Why is China\u2019s One Child Policy considered an anti-natalist policy?',
+    'Give one long-term consequence linked to China\u2019s One Child Policy.',
+    'How would a geographer judge whether a population policy has been effective?'
   ],
   quiz: [
     { q: 'A pro-natalist policy aims to:', options: ['Decrease birth rates', 'Increase birth rates', 'Increase death rates', 'Reduce migration'], correct: 1, explain: 'A pro-natalist policy is designed to encourage higher birth rates.', misconception: 'The "pro" prefix is sometimes read as "against"; pro-natalist means promoting (encouraging) births, not restricting them.', tag: 'Pro-natalist policies' },
@@ -545,6 +597,13 @@ window.SBL_LESSONS.CP12 = {
     'I can explain victim support.',
     'I can evaluate one policy project.'
   ],
+  readinessQuestions: [
+    'Explain the difference between gender equality and gender inequality.',
+    'What is SDG 5 focused on?',
+    'Explain the difference between human trafficking and people smuggling.',
+    'Give one factor that increases someone\u2019s vulnerability to trafficking.',
+    'Give one example of a trafficking prevention strategy.'
+  ],
   quiz: [
     { q: 'Gender inequality refers to:', options: ['Equal treatment of all genders', 'Unequal treatment or opportunity based on gender', 'A country\u2019s birth rate', 'A type of population pyramid'], correct: 1, explain: 'Gender inequality describes unequal treatment, rights, or opportunity based on a person\u2019s gender.', misconception: 'Gender equality and inequality are sometimes swapped in written answers; equality means fairness, inequality means the opposite \u2014 unequal treatment.', tag: 'Gender equality vs inequality' },
     { q: 'SDG 5 is the Sustainable Development Goal focused on:', options: ['Clean water', 'Gender equality', 'Climate action', 'No poverty'], correct: 1, explain: 'SDG 5 is the United Nations Sustainable Development Goal aiming to achieve gender equality and empower women and girls.', misconception: 'SDG numbers are easy to mix up; SDG 5 specifically targets gender equality, distinct from other numbered goals like clean water (SDG 6) or climate action (SDG 13).', tag: 'SDG 5' },
@@ -589,6 +648,13 @@ window.SBL_LESSONS.CP13 = {
     'I can apply the concept to Thailand.',
     'I can recall one successful example.',
     'I can discuss future opportunities and challenges.'
+  ],
+  readinessQuestions: [
+    'What is the demographic dividend?',
+    'What conditions does a country generally need to benefit from a demographic dividend?',
+    'Explain the difference between the first and second demographic dividend.',
+    'Give one barrier that could prevent a country from capturing a demographic dividend.',
+    'Why is South Korea often used as a successful example of the demographic dividend?'
   ],
   quiz: [
     { q: 'The demographic dividend refers to:', options: ['Economic growth potential from a large working-age population', 'A government subsidy for having children', 'A tax on elderly citizens', 'A decrease in total population'], correct: 0, explain: 'The demographic dividend is the potential for economic growth when a country has a large working-age population relative to dependents.', misconception: 'The demographic dividend is sometimes confused with a specific government payment or subsidy, when it actually describes a structural economic growth opportunity.', tag: 'What is the demographic dividend?' },
