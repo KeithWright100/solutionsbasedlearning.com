@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Climate change and agriculture — IB Geography Learning Hub — SBL</title>
-<meta name="description" content="Climate change and agriculture — part of Consequences of global climate change, Unit 2: Global Climate.">
+<title>The impacts of climate change on people and places — IB Geography Learning Hub — SBL</title>
+<meta name="description" content="The impacts of climate change on people and places — part of Consequences of global climate change, Unit 2: Global Climate.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
@@ -33,8 +33,8 @@
     <div class="lh-content-grid">
       <main>
         <div class="lh-page-head">
-          <h1>Climate change and agriculture</h1>
-          <p>Part of "Consequences of global climate change" within Unit 2: Global Climate.</p>
+          <h1>The impacts of climate change on people and places</h1>
+          <p>Part of &ldquo;Consequences of global climate change&rdquo; within Unit 2: Global Climate.</p>
         </div>
 
         <div class="lh-stats">
@@ -65,7 +65,7 @@
               <p class="lh-mode__title">Teach Me Live</p>
               <p class="lh-mode__desc">Open the SBL Geography Tutor for an interactive lesson, starter prompts, a knowledge checklist and a quiz.</p>
             </div>
-            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal" aria-label="Teach Me Live: Climate change and agriculture" onclick="openTeachBot('CC07')">Teach Me Live &rarr;</button>
+            <button type="button" class="lh-mode__btn lh-c-indigo" id="sblOpenTeachModal" aria-label="Teach Me Live: The impacts of climate change on people and places" onclick="openTeachBot('CC08')">Teach Me Live &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -75,7 +75,7 @@
               <p class="lh-mode__title">Test My Knowledge</p>
               <p class="lh-mode__desc">Check your understanding with a variety of questions and get instant feedback.</p>
             </div>
-            <button type="button" class="lh-mode__btn lh-c-green" aria-label="Test My Knowledge: Climate change and agriculture" onclick="openTestMyKnowledge('CC07')">Start Quiz &rarr;</button>
+            <button type="button" class="lh-mode__btn lh-c-green" aria-label="Test My Knowledge: The impacts of climate change on people and places" onclick="openTestMyKnowledge('CC08')">Start Quiz &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -85,7 +85,7 @@
               <p class="lh-mode__title">IB-Style Questions</p>
               <p class="lh-mode__desc">Practice authentic IB questions and get detailed feedback and model answers.</p>
             </div>
-            <a class="lh-mode__btn lh-c-blue" href="#">Practice Now &rarr;</a>
+            <button type="button" class="lh-mode__btn lh-c-blue" aria-label="IB-Style Questions: The impacts of climate change on people and places" onclick="openIBQuestions('CC08')">Practice Now &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -95,7 +95,7 @@
               <p class="lh-mode__title">Spaced Retrieval Quiz</p>
               <p class="lh-mode__desc">Strengthen your long-term memory with adaptive questions from this and previous lessons.</p>
             </div>
-            <button type="button" class="lh-mode__btn lh-c-orange" aria-label="Spaced Retrieval: Climate change and agriculture" onclick="openSpacedRetrieval('CC07')">Start Quiz &rarr;</button>
+            <button type="button" class="lh-mode__btn lh-c-orange" aria-label="Spaced Retrieval: The impacts of climate change on people and places" onclick="openSpacedRetrieval('CC08')">Start Quiz &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -105,7 +105,7 @@
               <p class="lh-mode__title">Challenge Mode</p>
               <p class="lh-mode__desc">Push your understanding further with higher-order thinking, synthesis questions and real-world scenarios.</p>
             </div>
-            <a class="lh-mode__btn lh-c-pink" href="#">Enter Challenge &rarr;</a>
+            <button type="button" class="lh-mode__btn lh-c-pink" aria-label="Challenge Mode: The impacts of climate change on people and places" onclick="openChallengeMode('CC08')">Enter Challenge &rarr;</button>
           </div>
 
           <div class="lh-mode">
@@ -115,7 +115,7 @@
               <p class="lh-mode__title">Ready for the Classroom?</p>
               <p class="lh-mode__desc">Answer 8&ndash;10 oral-style questions to see if you're ready to apply this in class.</p>
             </div>
-            <a class="lh-mode__btn lh-c-gold" href="#">Start Readiness Check &rarr;</a>
+            <button type="button" class="lh-mode__btn lh-c-gold" aria-label="Ready for the Classroom: The impacts of climate change on people and places" onclick="openReadinessCheck('CC08')">Start Readiness Check &rarr;</button>
           </div>
 
         </div>
@@ -167,15 +167,7 @@
   </div>
 </div>
 
-<!-- ============================================================
-     SBL GEOGRAPHY TUTOR — shared modal shell.
-     Content is rendered dynamically by /js/sbl-teach-bot.js from
-     the lesson configuration in /js/sbl-climate-lessons.js
-     (lesson id: CC07). No AI/API connection exists in this markup
-     — the only remote resource is the existing published
-     Microsoft Copilot Studio "SBL Geography Tutor" agent iframe.
-     ============================================================ -->
-<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="CC07" hidden>
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="CC08" hidden>
   <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
     <div class="sbl-modal__header">
       <div class="sbl-modal__header-text">
@@ -199,7 +191,7 @@
   renderSBLSidebar('lh-sidebar-mount', {
     activeUnit: 'core-2',
     activeTopic: 1,
-    activeLessonHref: '/geography/paper-1/core-2/t2-consequences-of/l4-climate-change'
+    activeLessonHref: '/geography/paper-1/core-2/t2-consequences-of/l5-the-impacts-of'
   });
 </script>
 <script src="/js/sbl-population-lessons.js"></script>
