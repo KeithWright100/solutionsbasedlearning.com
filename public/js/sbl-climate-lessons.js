@@ -40,6 +40,13 @@ window.SBL_LESSONS.CC01 = {
     'I can explain how volcanic eruptions affect climate.',
     'I can distinguish natural from human causes of climate change.'
   ],
+  readinessQuestions: [
+    'Explain the difference between weather and climate.',
+    'Describe the structure of the atmosphere and explain why the troposphere is most important for climate.',
+    'Explain what Milankovitch cycles are.',
+    'Give one way volcanic activity can cause short-term global cooling.',
+    'Explain one key difference between natural and human causes of climate change.'
+  ],
   quiz: [
     { q: 'The key difference between weather and climate is:', options: ['Weather and climate are the same thing', 'Weather is short-term atmospheric conditions; climate is the average pattern over a long period', 'Climate only refers to temperature', 'Weather only occurs in the stratosphere'], correct: 1, explain: 'Weather describes short-term, day-to-day atmospheric conditions, while climate describes the average weather pattern of a place over a long period, typically 30+ years.', misconception: 'Weather and climate are often used interchangeably in everyday speech, but geographically they describe different timescales — short-term versus long-term average conditions.', tag: 'Weather vs climate' },
     { q: 'Most weather and climate processes relevant to this course occur in which layer of the atmosphere?', options: ['The stratosphere', 'The troposphere', 'The mesosphere', 'The thermosphere'], correct: 1, explain: 'The troposphere is the lowest layer of the atmosphere, where most weather and climate processes take place.', misconception: 'The stratosphere is sometimes assumed to be where weather happens because it contains the ozone layer, but weather and climate processes are concentrated in the troposphere below it.', tag: 'Structure of the atmosphere' },
@@ -87,7 +94,14 @@ window.SBL_LESSONS.CC02 = {
       markScheme: 'Reduction in the amount of solar energy/sunlight reaching Earth\u2019s surface [1, reserved for a linked development]. Because volcanic activity has put dust in the atmosphere [1] and/or air pollution (sulphate aerosols) from industrialization [1], leading to a decrease in global temperatures [1]. Award a maximum of 2 marks total: 1 for identifying the reduction in solar energy reaching the surface, and 1 further mark for correctly linking this to a valid cause (volcanic dust or industrial aerosol pollution) and its effect (lower temperatures).'
     }
   ],
-quiz: [
+  readinessQuestions: [
+    'What is insolation?',
+    'Explain what albedo measures.',
+    'Explain the difference between a positive and a negative feedback loop.',
+    'Describe how the ice-albedo feedback loop works.',
+    'Explain the water vapour feedback loop.'
+  ],
+  quiz: [
     { q: 'Insolation refers to:', options: ['The amount of incoming solar radiation received at Earth\u2019s surface', 'The amount of heat trapped by greenhouse gases', 'The reflectivity of a surface', 'The total energy stored in the oceans'], correct: 0, explain: 'Insolation is the amount of incoming solar radiation received by a given area of Earth\u2019s surface.', misconception: 'Insolation is sometimes confused with the greenhouse effect; insolation is specifically about incoming solar energy, not trapped heat.', tag: 'What is insolation?' },
     { q: 'For Earth\u2019s climate to remain roughly stable over time, incoming and outgoing energy must be:', options: ['Completely unrelated', 'Roughly balanced', 'Always increasing', 'Always decreasing'], correct: 1, explain: 'A stable climate requires a rough balance between incoming solar radiation and outgoing radiation from Earth; an imbalance leads to warming or cooling.', misconception: 'Some students think Earth\u2019s energy budget is a one-way flow, when climate stability actually depends on a balance between energy in and energy out.', tag: 'The global energy budget' },
     { q: 'Albedo is best defined as:', options: ['The amount of solar radiation a surface reflects, expressed as a proportion', 'The temperature of a surface', 'The amount of carbon dioxide in the atmosphere', 'The rate of ice melt'], correct: 0, explain: 'Albedo is the proportion of incoming solar radiation that a surface reflects rather than absorbs, usually expressed as a percentage or decimal.', misconception: 'Albedo is sometimes confused with temperature; a highly reflective (high-albedo) surface like snow can still be very cold, but albedo itself measures reflectivity, not temperature directly.', tag: 'What is albedo?' },
@@ -131,6 +145,13 @@ window.SBL_LESSONS.CC03 = {
     question: 'Climate change is caused by humans. To what extent do you agree with this statement?',
     intro: 'This essay draws on everything from this topic — natural causes, feedback loops, and the enhanced greenhouse effect.'
   },
+  readinessQuestions: [
+    'Explain the difference between the natural and enhanced greenhouse effect.',
+    'Name two greenhouse gases and one source of each.',
+    'Explain how burning fossil fuels contributes to the enhanced greenhouse effect.',
+    'Explain how deforestation contributes to climate change.',
+    'Explain how economic development is linked to greenhouse gas emissions.'
+  ],
   quiz: [
     { q: 'The natural greenhouse effect is best described as:', options: ['A harmful process with no natural benefit', 'A natural process that keeps Earth warm enough to support life', 'A process caused entirely by human activity', 'A process that only began in the industrial era'], correct: 1, explain: 'The natural greenhouse effect is a naturally occurring process in which certain gases trap heat, keeping Earth\u2019s average temperature warm enough to support life.', misconception: 'The greenhouse effect itself is sometimes seen as entirely negative, when the natural version is essential for life; it is the human-caused enhancement of this effect that causes harmful additional warming.', tag: 'Natural vs enhanced greenhouse effect' },
     { q: 'The "enhanced" greenhouse effect refers to:', options: ['The complete absence of greenhouse gases', 'The intensification of the natural greenhouse effect due to increased human-caused greenhouse gas emissions', 'A process that only occurs in the stratosphere', 'A natural cycle unrelated to human activity'], correct: 1, explain: 'The enhanced greenhouse effect describes how human activities, particularly burning fossil fuels, have increased the concentration of greenhouse gases, intensifying the natural greenhouse effect and causing additional warming.', misconception: 'Enhanced and natural greenhouse effects are sometimes treated as unrelated, when the enhanced effect is specifically an intensification of the same natural process by human emissions.', tag: 'Natural vs enhanced greenhouse effect' },
@@ -170,6 +191,13 @@ window.SBL_LESSONS.CC04 = {
     'I can describe changes to global precipitation patterns.',
     'I can explain impacts on coastal areas.',
     'I can link hydrosphere changes back to the enhanced greenhouse effect.'
+  ],
+  readinessQuestions: [
+    'Explain the two main causes of sea level rise.',
+    'What is thermal expansion?',
+    'Explain what ocean acidification is and its main cause.',
+    'Explain how climate change is affecting global precipitation patterns.',
+    'Give one impact of sea level rise on coastal areas.'
   ],
   quiz: [
     { q: 'Which best describes what is happening to global ocean temperatures?', options: ['Oceans are cooling rapidly', 'Oceans are absorbing excess heat from the atmosphere and warming over time', 'Ocean temperature is unrelated to atmospheric warming', 'Oceans have shown no measurable change'], correct: 1, explain: 'The oceans absorb a large proportion of the excess heat trapped by the enhanced greenhouse effect, causing measurable long-term warming.', misconception: 'The ocean is sometimes assumed to be unaffected by atmospheric warming, but it acts as a major heat sink, absorbing much of the additional trapped energy.', tag: 'Ocean warming' },
@@ -211,6 +239,13 @@ window.SBL_LESSONS.CC05 = {
     'I can distinguish frequency from intensity.',
     'I can explain, in simple terms, how scientists attribute events to climate change.'
   ],
+  readinessQuestions: [
+    'Explain the difference between the frequency and intensity of an extreme weather event.',
+    'Explain the link between climate change and heatwaves.',
+    'Explain the link between climate change and droughts.',
+    'Explain why warmer sea temperatures are linked to more intense tropical storms.',
+    'Explain what attribution science is.'
+  ],
   quiz: [
     { q: 'An extreme weather event is best defined as:', options: ['Any day with rain', 'A weather event that is significantly different from the typical or average conditions for a place and time', 'A weather event that happens every year at the same time', 'An event that only occurs in polar regions'], correct: 1, explain: 'An extreme weather event is one that deviates significantly from the usual range of weather conditions expected for a particular place and season.', misconception: 'Ordinary weather variation is sometimes mislabelled as "extreme"; the key feature of a true extreme event is a significant departure from typical conditions.', tag: 'What counts as extreme weather?' },
     { q: 'Climate change is linked to more frequent and intense heatwaves mainly because:', options: ['Rising baseline global temperatures make extremely hot conditions more likely to occur', 'Heatwaves are entirely unrelated to average temperature', 'Climate change only affects winter temperatures', 'Heatwaves have decreased in frequency worldwide'], correct: 0, explain: 'As average global temperatures rise, the statistical likelihood of extremely hot conditions (heatwaves) occurring also increases.', misconception: 'It is sometimes assumed climate change only shifts average conditions slightly, without recognising that a small rise in average temperature can significantly increase the frequency of extreme heat events.', tag: 'Heatwaves' },
@@ -229,7 +264,7 @@ window.SBL_LESSONS.CC06 = {
   id: 'CC06',
   topicNumber: 2,
   topicTitle: 'Consequences of global climate change',
-  title: 'Climate change and the biosphere — biomes, habitats and animal migration patterns',
+  title: 'Climate change and the biosphere \u2014 biomes, habitats and animal migration patterns',
   href: '/geography/paper-1/core-2/t2-consequences-of/l3-climate-change',
   syllabusFocus: 'The impacts of climate change on biomes, habitats, species ranges, and the timing/patterns of animal migration, including risks of habitat loss and species extinction.',
   starterButtons: [
@@ -250,6 +285,13 @@ window.SBL_LESSONS.CC06 = {
     'I can explain changes to animal migration timing and patterns.',
     'I can explain coral bleaching.',
     'I can explain why some species face increased extinction risk.'
+  ],
+  readinessQuestions: [
+    'What is a biome?',
+    'Explain how climate change is shifting biome boundaries.',
+    'Explain what is meant by a species range shift.',
+    'Explain what coral bleaching is.',
+    'Explain why some species face higher extinction risk from climate change than others.'
   ],
   quiz: [
     { q: 'A biome is best defined as:', options: ['A single species of plant', 'A large-scale ecosystem characterised by a distinct climate, vegetation and animal community', 'A single country\u2019s national park system', 'A type of ocean current'], correct: 1, explain: 'A biome is a large-scale ecological region defined by its characteristic climate, vegetation type and associated animal communities, such as tropical rainforest or tundra.', misconception: 'A biome is sometimes confused with a single ecosystem or habitat at a smaller scale, when it actually refers to a much broader, climate-defined category encompassing many ecosystems.', tag: 'What is a biome?' },
@@ -291,6 +333,13 @@ window.SBL_LESSONS.CC07 = {
     'I can recall the Bangladesh case study.',
     'I can explain agricultural adaptation strategies.'
   ],
+  readinessQuestions: [
+    'Explain one way climate change can reduce crop yields.',
+    'Explain how climate change is affecting growing seasons for farmers.',
+    'Explain how climate change contributes to water stress in agriculture.',
+    'Why is Bangladesh used as a case study for climate change and agriculture?',
+    'Give one example of an agricultural adaptation strategy.'
+  ],
   quiz: [
     { q: 'Climate change can affect crop yields negatively mainly through:', options: ['Consistently ideal growing conditions everywhere', 'Increased heat stress, changing rainfall reliability, and more frequent extreme weather damaging crops', 'No measurable impact on agriculture', 'Only affecting livestock, never crops'], correct: 1, explain: 'Climate change can reduce crop yields through mechanisms such as heat stress on plants, less reliable rainfall, and increased damage from extreme weather events like floods or droughts.', misconception: 'It is sometimes assumed climate change only brings gradual warming with limited agricultural consequence, when unreliable rainfall and increased extreme weather are often the more damaging factors for yields.', tag: 'Climate change and crop yields' },
     { q: 'Shifting growing seasons due to climate change can create challenges for farmers because:', options: ['Growing seasons never change under any circumstances', 'Traditional planting and harvesting timings, based on historical climate patterns, may no longer match current conditions', 'Farmers automatically know the new correct planting dates with no adjustment needed', 'Growing seasons are entirely unrelated to temperature'], correct: 1, explain: 'As temperature and rainfall patterns shift, traditional planting and harvesting calendars — often based on generations of historical climate experience — may become misaligned with actual current conditions, creating risk for farmers.', misconception: 'It is sometimes assumed farmers can easily and immediately adjust to new growing seasons, when in practice this requires significant knowledge, resources and risk-taking to change established practices.', tag: 'Changing growing seasons' },
@@ -330,6 +379,13 @@ window.SBL_LESSONS.CC08 = {
     'I can explain why small island states are especially at risk.',
     'I can explain effects on ocean transport routes.',
     'I can recall accurate case-study evidence.'
+  ],
+  readinessQuestions: [
+    'Explain why the impacts of climate change are described as unevenly distributed.',
+    'What is meant by a "climate refugee" or "environmental migrant"?',
+    'Explain why LICs are often disproportionately vulnerable to climate change.',
+    'Explain why small island states are particularly vulnerable to climate change.',
+    'Give one way climate change is affecting ocean transport routes.'
   ],
   quiz: [
     { q: 'The impacts of climate change are described as "unevenly distributed" because:', options: ['Every country experiences identical impacts', 'Different places face different levels of exposure, vulnerability and capacity to adapt', 'Only wealthy countries experience any climate impacts', 'Climate change affects only one continent'], correct: 1, explain: 'Climate change impacts vary geographically because places differ in their physical exposure (e.g. coastal vs inland), social/economic vulnerability, and capacity to adapt or respond.', misconception: 'It is sometimes assumed climate change affects all places equally, when geographers emphasise that exposure, vulnerability and adaptive capacity vary significantly and combine to produce very different outcomes.', tag: 'Uneven impacts' },
@@ -371,6 +427,13 @@ window.SBL_LESSONS.CC09 = {
     'I can explain why vulnerability varies between places.',
     'I can apply these concepts to a real example.'
   ],
+  readinessQuestions: [
+    'Explain the difference between a hazard and vulnerability.',
+    'What is meant by exposure in the context of climate risk?',
+    'Explain what resilience means in the context of climate change.',
+    'Explain what adaptive capacity means.',
+    'Explain why two places facing the same hazard can experience very different levels of risk.'
+  ],
   quiz: [
     { q: 'In the context of climate change, risk is best understood as:', options: ['A fixed, unchangeable property of a place', 'The likelihood and scale of harmful impacts resulting from the interaction of hazard, exposure and vulnerability', 'Only relevant to financial investments', 'The same as a hazard'], correct: 1, explain: 'Climate risk is generally understood as the potential for harmful outcomes arising from the interaction of a hazard, the exposure of people/assets to it, and their vulnerability to being harmed.', misconception: 'Risk is sometimes treated as identical to hazard, when risk specifically describes the combined outcome of hazard, exposure and vulnerability interacting together, not the hazard alone.', tag: 'What is risk?' },
     { q: 'A hazard, in this context, refers to:', options: ['A place\u2019s social characteristics', 'A potentially damaging physical event or process, such as a flood or heatwave', 'A country\u2019s wealth level', 'The number of people affected by an event'], correct: 1, explain: 'A hazard is the potentially damaging physical event or process itself — for example, a flood, drought, heatwave or storm.', misconception: 'Hazard is sometimes confused with risk or vulnerability; a hazard is specifically the physical event, distinct from how exposed or vulnerable people are to it.', tag: 'Hazard vs exposure vs vulnerability' },
@@ -411,6 +474,13 @@ window.SBL_LESSONS.CC10 = {
     'I can compare responses at different scales.',
     'I can evaluate the effectiveness of a strategy.'
   ],
+  readinessQuestions: [
+    'Explain the difference between adaptation and mitigation.',
+    'Give one example of an adaptation strategy and one example of a mitigation strategy.',
+    'What is the Paris Agreement and what does it aim to achieve?',
+    'Give one challenge to achieving international cooperation on climate change.',
+    'How would a geographer judge whether a government climate strategy has been effective?'
+  ],
   quiz: [
     { q: 'The key difference between adaptation and mitigation is:', options: ['They mean exactly the same thing', 'Adaptation adjusts to the impacts of climate change; mitigation reduces the causes (greenhouse gas emissions)', 'Adaptation only applies to LICs; mitigation only applies to HICs', 'Mitigation adjusts to impacts; adaptation reduces emissions'], correct: 1, explain: 'Adaptation involves adjusting systems and practices to cope with the impacts of climate change already occurring or expected, while mitigation involves reducing greenhouse gas emissions to limit the extent of future climate change.', misconception: 'These two terms are very commonly confused or swapped; a useful check is that mitigation targets the cause (emissions), while adaptation targets living with the effects.', tag: 'Adaptation vs mitigation' },
     { q: 'Building flood defences to protect a coastal city is an example of:', options: ['Mitigation', 'Adaptation', 'Neither adaptation nor mitigation', 'A mitigation strategy that reduces emissions'], correct: 1, explain: 'Flood defences are an adaptation strategy — they help a place cope with and adjust to the impacts of climate change (like rising sea levels), rather than reducing the greenhouse gas emissions causing climate change.', misconception: 'Physical infrastructure projects are sometimes mislabelled as mitigation simply because they are large-scale, when their function (coping with impacts) makes them adaptation.', tag: 'Examples of adaptation strategies' },
@@ -450,6 +520,13 @@ window.SBL_LESSONS.CC11 = {
     'I can define greenwashing and explain why it is a concern.',
     'I can evaluate the role and limitations of individual action.',
     'I can compare civil society and government roles.'
+  ],
+  readinessQuestions: [
+    'Explain the role of NGOs in responding to climate change.',
+    'What is a grassroots climate movement?',
+    'Explain what corporate social responsibility (CSR) means.',
+    'Explain what greenwashing is and give one warning sign of it.',
+    'Explain the difference between the roles of civil society and government in responding to climate change.'
   ],
   quiz: [
     { q: 'Civil society, in the context of climate change response, refers to:', options: ['Government ministries and agencies only', 'Non-governmental organisations, community groups, and individuals acting outside of formal government and business structures', 'Only large multinational corporations', 'The military and police'], correct: 1, explain: 'Civil society refers to the space of collective action outside government and business, including NGOs, community groups, campaigners and individual citizens organising around shared causes such as climate action.', misconception: 'Civil society is sometimes confused with government institutions, when it specifically refers to non-state, non-corporate collective action.', tag: 'What is civil society?' },
