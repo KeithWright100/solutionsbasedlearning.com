@@ -179,6 +179,10 @@ window.SBL_LESSONS.CP04 = {
     'I can compare physical and human controls.',
     'I can compare development and migration patterns.'
   ],
+  challenge: {
+    question: 'Discuss whether human factors are more important than physical in determining population density and distribution.',
+    intro: 'This essay draws on everything from this topic \u2014 physical controls like climate, relief and water availability, and human controls like economic development, migration and government policy \u2014 including the Egypt and Thailand case study.'
+  },
   readinessQuestions: [
     'Name one factor that explains Egypt\u2019s population distribution.',
     'Name one factor that explains Thailand\u2019s population distribution.',
