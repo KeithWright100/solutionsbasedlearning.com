@@ -441,6 +441,13 @@ window.SBL_LESSONS.CP09 = {
     'I can explain why rebuilding was difficult.',
     'I can explain how later hazards increased vulnerability.'
   ],
+  ibQuestions: [
+    {
+      question: 'Explain one environmental consequence of one named forced migration.',
+      marks: 3,
+      markScheme: 'The example could be internal displacement or refugees. Accept a broad interpretation of "environmental", to include the built environment and landscape.\n\nIdentified and located example of a forced migration [1]. Identified environmental consequence [1]. Further developed explanation [1].\n\nEnvironmental consequence of migration may include:\n- Deforestation\n- Soil erosion\n- Contamination of water supplies \u2013 rivers/groundwater\n- Depletion of water resources\n- Waste disposal\n- Aesthetic damage\n- Production of environments that breed disease\n- Loss of biodiversity\n- Air pollution\n- Land degradation.\n\nFor example: Northern Cameroon hosts Nigerian refugees who have escaped violence [1] this has caused rapid deforestation [1] as refugees need firewood for cooking [1].\n\nFor example: Lebanon has many Syrian refugees escaping war [1] the waste from informal settlements is often dumped in an uncontrolled manner [1] this leads to soil and water pollution [1].'
+    }
+  ],
   readinessQuestions: [
     'Why did the 2010 earthquake cause mass internal displacement in Haiti?',
     'Give one short-term consequence and one long-term consequence of the earthquake.',
