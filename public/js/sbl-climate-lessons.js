@@ -199,6 +199,13 @@ window.SBL_LESSONS.CC04 = {
     'I can explain impacts on coastal areas.',
     'I can link hydrosphere changes back to the enhanced greenhouse effect.'
   ],
+  ibQuestions: [
+    {
+      question: 'Outline how extreme warming can affect: (i) the albedo of a region; (ii) the operation of a feedback loop.',
+      marks: 4,
+      markScheme: '(i) The albedo of a region\n\nIn each case, award [1] for a valid comment on effects of extreme warming and [1] for the impact on albedo.\n\nValid effects may include:\n- Decrease in the amount of ice, decrease in albedo less energy reflected.\n- Increases amount of cloud through increased evaporation, increases albedo.\n- Increased heat causes wildfires which destroy vegetation, increases albedo.\n- Expansion of deserts due to water loss decreases vegetation, increases albedo.\n\nFor example: Extreme warming is going to melt ice in the polar regions [1] and therefore the surface will reflect less solar radiation and decrease albedo [1].\n\nOR\n\nExtreme warming may increase evaporation in tropical areas [1], which can reduce vegetation cover and increase albedo [1].\n\n(ii) The operation of a feedback loop\n\nIn each case, award [1] for the valid identification and description of a loop and [1] for development linked to impact\n\nValid loops may include:\nPositive loops\n- Release of methane from frozen ground, causes increase in greenhouse gases which gives more warming.\n- Warming of atmosphere leads to more evaporation, causes more water vapour which traps heat and amplifies initial warming.\n- Warming melts ice which decreases albedo so absorbed heat warms atmosphere which melts more ice.\n- Warming gives conditions perfect for wildfires, causes release of more GHG/shrink forests as a carbon sink.\n- Warming causes the oceans to increase in temperature and become less efficient as a carbon sink, this increases the CO2 in the atmosphere which further increases warming.\n\nNegative loops\n- Increase in temperature increases the amount of cloud cover, decrease incoming solar radiation and decrease warming.\n\nFor example: Melting of frozen ground releases methane/greenhouse gas [1] so there is more warming and more melting [1].'
+    }
+  ],
   readinessQuestions: [
     'Explain the two main causes of sea level rise.',
     'What is thermal expansion?',
@@ -386,6 +393,13 @@ window.SBL_LESSONS.CC08 = {
     'I can explain why small island states are especially at risk.',
     'I can explain effects on ocean transport routes.',
     'I can recall accurate case-study evidence.'
+  ],
+  ibQuestions: [
+    {
+      question: 'Explain two ways in which climate change impacts upon ocean transport routes.',
+      marks: 4,
+      markScheme: 'In each case, allow [1] for a valid way and [1] for development/exemplification of impacts on ocean transport routes.\n\nValid possibilities include:\n- Warming may decrease the amount of sea ice and so ice-bound ports may be more accessible all year round.\n- Warming may increase the occurrence of natural hazards, such as hurricanes/storms, these would make some routes more dangerous and hazardous to navigation.\n- Increased natural hazards (storms and storm surges) may damage infrastructure, interrupt operations at terminals.\n- Climate change may result in sea level rise which leads to more frequent flooding of port facilities.\n- Existing routes may no longer be safe due to icebergs/increased sedimentation due to worsening coastal erosion, re-routing becomes more common.\n\nFor example: New sea routes opening up as sea ice melts [1] and allows passage through areas previously ice bound for large parts of the year [1].'
+    }
   ],
   readinessQuestions: [
     'Explain why the impacts of climate change are described as unevenly distributed.',

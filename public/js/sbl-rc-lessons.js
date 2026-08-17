@@ -148,6 +148,13 @@ window.SBL_LESSONS.RC03 = {
     'I can describe regional patterns in water availability.',
     'I can explain why water consumption varies between countries.'
   ],
+  ibQuestions: [
+    {
+      question: 'Describe what is meant by \u201cembedded water\u201d.',
+      marks: 2,
+      markScheme: 'Water resources that are used in the production of food and manufactured goods in one country/place [1] that are transferred to other, often water scarce, countries or regions via trading [1].'
+    }
+  ],
   readinessQuestions: [
     'What proportion of global water use is typically used for agriculture?',
     'Explain the difference between water stress and water scarcity.',
@@ -195,6 +202,13 @@ window.SBL_LESSONS.RC04 = {
     'I can explain the link between land use and food production patterns.',
     'I can describe global trends in calorie consumption.',
     'I can link changing diets back to the growth of the global middle class.'
+  ],
+  ibQuestions: [
+    {
+      question: 'Explain two reasons why diets are changing in middle-income countries.',
+      marks: 4,
+      markScheme: 'Award [1] for identifying and describing a valid reason, with [1] for explanatory development.\n\nFor example: Rising incomes in middle-income countries have given more people sufficient disposable income [1] to incorporate more meat into their diets at the expense of vegetables and grains [1].\n\nOther possible reasons include:\n- Health awareness\n- Advertising, especially by multinational food firms\n- Environmental awareness\n- Transition to global food systems\n- Rapid urbanization and shift to energy-dense diets\n- Real term fall in the cost of large number of foodstuffs\n- Globalization/Westernization/Cultural homogenization/Role of TNCs'
+    }
   ],
   readinessQuestions: [
     'What is meant by the "nutrition transition"?',
@@ -246,6 +260,13 @@ window.SBL_LESSONS.RC05 = {
     'I can explain factors that decrease oil production.',
     'I can explain the changing role of nuclear power and renewables.',
     'I can evaluate different forms of energy.'
+  ],
+  ibQuestions: [
+    {
+      question: 'Suggest two ways in which declining water availability might threaten a country\u2019s energy security.',
+      marks: 4,
+      markScheme: 'Award [1] identifying and describing a valid way, with [1] for explanatory development.\n\nPossible ways include:\n- less water for HEP production\n- need to safeguard supplies of safe water might lead to fracking being banned\n- falling availability of potable water may lead to increased need for desalinization plants (with their heavy energy usage)\n- lack of water needed for steam generation or cooling in thermal/nuclear power plants.\n- lack of water for geothermal energy production – water used in drilling/water used in cooling/water required in enhanced geothermal systems that rely on artificially created reservoirs in rock formations that do not have enough natural fluid\n- lack of water may lead to a decline in the production of Biofuels.\n\nFor example: Declining water availability might reduce the input of water into reservoirs in hydro-electric power generation schemes [1], so a country that is heavily dependent on hydro-power may be unable to generate as much electricity as previously and may be unable to meet demand [1].'
+    }
   ],
   readinessQuestions: [
     'What is meant by a country\u2019s "energy mix"?',

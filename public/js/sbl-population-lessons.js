@@ -289,6 +289,13 @@ window.SBL_LESSONS.CP06 = {
     'I can explain The Gambia\u2019s youthful population.',
     'I can suggest appropriate responses.'
   ],
+  ibQuestions: [
+    {
+      question: 'Suggest two reasons why fertility rates decline when the status of women is improved.',
+      marks: 4,
+      markScheme: 'In each case, award [1] for a valid reason and [1] for development of how it impacts upon the fertility rate.\n\nPossibilities include:\n- Employment – delayed marriage and delayed childbirth.\n- Access to family planning services.\n- Education for women – delays marriage/childbirth.\n- Reduced child mortality rates – fewer replacement births.\n- Societal status of women – women have more freedom and rights, thus giving them more decision-making powers\n\nFor example: One reason is because women have more access to contraception and birth control advice [1] which means they have more control over the number of children in their families [1].'
+    }
+  ],
   readinessQuestions: [
     'What does a dependency ratio measure?',
     'Explain why Thailand\u2019s population structure is described as ageing.',
@@ -497,6 +504,13 @@ window.SBL_LESSONS.CP10 = {
     'I can describe global and regional patterns.',
     'I can explain opportunities created by these trends.',
     'I can explain challenges created by these trends.'
+  ],
+  ibQuestions: [
+    {
+      question: 'Explain why some places have an uneven sex ratio as a result of: (i) migration; (ii) an ageing society.',
+      marks: 4,
+      markScheme: '(i) Migration\n\nAnswers may refer to source or destination places and can be based on international/regional/rural:urban migration.\n\nAward [1] for a basic explanatory comment and [1] for further valid explanation/exemplification linked to a valid and identified uneven sex ratio.\n\nValid reasons may include:\n- Migration of males to find work gives higher proportion of males in working in destination countries/gives lower proportion of males in origin countries.\n- Inability of male labourers to bring families with them gives higher proportion of males.\n- Migration of female domestic and care labour eg Sri Lanka leaves a gap in the middle age female groups.\n- Migration of males of fighting age to join armies, leaves places with a higher proportion of young females.\n\nFor example: Influx of male construction workers into an oil rich nation such as UAE [1] so there tends to be a larger proportion of men than women [1]\n\n(ii) An ageing society\n\nAward [1] for a basic explanatory comment and [1] for further explanation/exemplification linked to a valid and identified uneven sex ratio.\n\nValid reasons may include:\n- Macho culture encourages risky behaviour meaning higher mortality as the population ages.\n- Males occupy dangerous jobs that lead to a higher mortality leaving a smaller proportion of males in older age groups.\n- Child mortality is higher amongst boys, more females survive until old age.\n- Biological difference in chromosomes and hormones, females are advantaged [less fat surrounding organs] and live longer.\n- Females more willing to consult medical advice, live longer.\n\nFor example: Women tend to have higher life expectancies than men [1], so in the over 65s there tends to be a greater proportion of women than men [1].'
+    }
   ],
   readinessQuestions: [
     'What is meant by a sex ratio, and what does a ratio above 100 tell you?',
