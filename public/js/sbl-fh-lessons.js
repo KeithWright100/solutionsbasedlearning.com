@@ -15,10 +15,13 @@
 
    Lesson IDs: FH01-FH04 (Topic 1: Measuring food and health) follow
    the sidebar's own topic/lesson slugs, prefixed with FH, e.g.
-   FH-t1-l1-global-patterns. FH06-FH16 (Topics 2 and 3) use short
-   numeric IDs (FH06-FH16). FH05 (Food and Health Checkpoint) and
-   FH20 (Managing pandemics case study) are deliberately SKIPPED,
-   pending their source content. Topic 4 (FH17-FH19) still to come.
+   FH-t1-l1-global-patterns. FH06-FH20 (Topics 2, 3 and 4) use short
+   numeric IDs. FH05 (Food and Health Checkpoint) is deliberately
+   SKIPPED, pending its source content. The FH19 case study
+   (Majiang, China) covers the general prevention/treatment
+   framework in full, but its specific case-study facts (beyond
+   location and the Amity Foundation partnership) are marked as
+   pending the course's own Firefly case-study resource.
    ============================================================ */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_FH_LESSON_ORDER = [
@@ -36,7 +39,11 @@ window.SBL_FH_LESSON_ORDER = [
   'FH13',
   'FH14',
   'FH15',
-  'FH16'
+  'FH16',
+  'FH17',
+  'FH18',
+  'FH19',
+  'FH20'
 ];
 
 window.SBL_LESSONS['FH-t1-l1-global-patterns'] = {
@@ -1566,6 +1573,760 @@ window.SBL_LESSONS.FH16 = {
       "explain": "This case study demonstrates that while humanitarian assistance (food, vouchers, targeted nutrition support) is essential for meeting immediate needs, lasting solutions to a conflict-driven food security crisis ultimately require addressing the underlying political and conflict-related causes — humanitarian aid can limit suffering but cannot substitute for a political resolution.",
       "misconception": "This is the key evaluative conclusion of the whole case study: short-term humanitarian strategies and long-term structural solutions are both necessary, but they are not the same thing and cannot substitute for one another.",
       "tag": "Long-term difficulties: conflict and scale"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH17 = {
+  "id": "FH17",
+  "topicNumber": 4,
+  "topicTitle": "Future health and food security and sustainability",
+  "title": "Possible solutions to food insecurity",
+  "href": "/geography/paper-1/option-f/t4-future-health/l1-possible",
+  "syllabusFocus": "Possible solutions to food insecurity, including waste reduction.",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "What is food insecurity?",
+      "request": "Define food insecurity and explain where it is most at risk globally"
+    },
+    {
+      "label": "Increasing food aid and investment",
+      "request": "Explain increasing food aid and agricultural investment as solutions to food insecurity"
+    },
+    {
+      "label": "Trade-based solutions",
+      "request": "Explain free trade and export bans as factors affecting food insecurity"
+    },
+    {
+      "label": "Seeds, fertiliser and GM crops",
+      "request": "Explain increasing access to seeds and fertiliser, and the potential role of GM crops"
+    },
+    {
+      "label": "Sustainable diets and farming",
+      "request": "Explain sustainability, diet change and sustainable farming as long-term solutions"
+    },
+    {
+      "label": "Reducing food waste",
+      "request": "Explain the scale of global food waste and strategies to reduce it"
+    }
+  ],
+  "checklist": [
+    "I can define food insecurity.",
+    "I can identify areas of the world at high risk of food insecurity.",
+    "I can explain short-term solutions to food insecurity, such as food aid and seed/fertiliser access.",
+    "I can explain longer-term solutions, such as agricultural investment, trade reform and sustainable farming.",
+    "I can explain the scale of global food waste and strategies to reduce it.",
+    "I can assess the strengths and limitations of these solutions."
+  ],
+  "readinessQuestions": [
+    "Define food insecurity.",
+    "Explain one short-term and one long-term solution to food insecurity.",
+    "Why might reducing farm subsidies and trade protectionism in HICs help LIC farmers in the long term, but potentially worsen food insecurity in the short term?",
+    "Explain the scale of global food waste, and one way it could be reduced.",
+    "Evaluate whether food aid alone is likely to be a sustainable, long-term solution to food insecurity."
+  ],
+  "quiz": [
+    {
+      "q": "Food insecurity is best defined as:",
+      "options": [
+        "A situation where people always have too much food",
+        "A state in which people lack reliable access to sufficient, safe and nutritious food to meet their needs for an active, healthy life",
+        "A synonym for famine, with no distinct meaning",
+        "A condition that only affects rural populations"
+      ],
+      "correct": 1,
+      "explain": "Food insecurity describes a state in which people lack reliable access to sufficient, safe and nutritious food to meet their dietary needs for an active, healthy life — a broader and more chronic condition than famine itself.",
+      "misconception": "Food insecurity and famine are sometimes used interchangeably; food insecurity is the broader, more chronic condition, while famine (studied in the previous topic) is an extreme, acute event.",
+      "tag": "What is food insecurity?"
+    },
+    {
+      "q": "Increasing the amount of food aid delivered globally is limited as a solution because:",
+      "options": [
+        "The WFP already reaches every chronically hungry person in the world",
+        "The WFP reaches only around 80 million of the roughly 700 million chronically hungry people scattered across the world, showing aid alone cannot address the full scale of the problem",
+        "Food aid has completely eliminated global hunger",
+        "There are no chronically hungry people remaining globally"
+      ],
+      "correct": 1,
+      "explain": "The WFP reaches only around 80 million of the estimated 700 million chronically hungry people worldwide, illustrating that food aid — while vital in emergencies — cannot address the full scale of global food insecurity on its own.",
+      "misconception": "Food aid is sometimes assumed to be a complete solution; the scale mismatch between aid delivered and total need shows why it must be combined with longer-term strategies.",
+      "tag": "Increasing food aid and investment"
+    },
+    {
+      "q": "Agricultural investment is identified as a potential solution to food insecurity because:",
+      "options": [
+        "African yields could potentially increase up to fourfold with support such as irrigation, given only around 4% of African agriculture is currently irrigated compared to around 40% in Asia",
+        "Investment has no effect on crop yields anywhere",
+        "All African farms are already fully irrigated",
+        "Investment only benefits farmers in high-income countries"
+      ],
+      "correct": 0,
+      "explain": "Experts believe yields in Africa could increase up to fourfold with the right agricultural investment and support, since only around 4% of African agriculture is currently irrigated compared to around 40% in Asia — a significant untapped potential for improving food security.",
+      "misconception": "It is easy to assume yield potential is similar worldwide; the far lower irrigation rate in Africa compared to Asia highlights a specific, addressable gap.",
+      "tag": "Increasing food aid and investment"
+    },
+    {
+      "q": "A key challenge related to post-harvest crop losses in Africa is that:",
+      "options": [
+        "No crops are ever lost after harvest",
+        "At least a third of crops in an average African season are lost after harvest, largely because farmers cannot get produce to market in time",
+        "All harvested crops reach the market successfully in every country",
+        "Post-harvest loss is a problem unique to high-income countries"
+      ],
+      "correct": 1,
+      "explain": "At least a third of crops in an average African season are lost after harvest, largely because farmers cannot get their produce to market in time — highlighting that solutions to food insecurity often need to address infrastructure and market access, not just production.",
+      "misconception": "Solutions to food insecurity are sometimes assumed to focus only on growing more food; addressing losses after harvest (through infrastructure, storage and market access) can be just as important.",
+      "tag": "Increasing food aid and investment"
+    },
+    {
+      "q": "Free trade (such as reducing US farm subsidies and EU Common Agricultural Policy protectionism) is a debated solution to food insecurity because it:",
+      "options": [
+        "Has no possible effect on LIC farmers",
+        "Could help LIC farmers in the longer term by opening up markets, but may increase food insecurity in the shorter term if producers shift focus towards more lucrative western export markets",
+        "Would guarantee an immediate end to global food insecurity with no downsides",
+        "Only affects trade in non-food goods"
+      ],
+      "correct": 1,
+      "explain": "Trade liberalisation and reducing HIC subsidies/protectionism could help LIC farmers access larger markets in the longer term, but this is debated: in the shorter term it may encourage producers to focus on more lucrative western export markets rather than local food needs, potentially worsening local food insecurity.",
+      "misconception": "Trade reform is sometimes presented as a straightforwardly positive solution; in reality, geographers must weigh potential longer-term benefits against real shorter-term risks.",
+      "tag": "Trade-based solutions"
+    },
+    {
+      "q": "Banning exports of certain foodstuffs during a food crisis tends to:",
+      "options": [
+        "Stabilise global food prices with no side effects",
+        "Drive up global food prices and increase market volatility, which can paradoxically make food production more attractive and disrupt supply elsewhere",
+        "Have no effect on global markets",
+        "Guarantee lower prices for all countries"
+      ],
+      "correct": 1,
+      "explain": "Export bans on certain foodstuffs tend to drive up global food prices and increase market volatility, since supply is restricted. This volatility can paradoxically make food production more attractive to producers elsewhere, but it disrupts reliable supply and worsens price instability globally in the short term.",
+      "misconception": "Export bans might seem like a way to protect a country's own food supply; the wider effect can be to worsen global price volatility, harming food-insecure countries elsewhere.",
+      "tag": "Trade-based solutions"
+    },
+    {
+      "q": "Regarding GM crops as a solution to food insecurity, agricultural experts in the UN and developing countries note that:",
+      "options": [
+        "GM crops alone are expected to radically improve LIC crop yields immediately, with no further investment needed",
+        "GM crops alone are not expected to radically improve yields in LICs, mainly because most GM research to date has focused on crops for rich countries in the northern hemisphere rather than LIC-specific crops",
+        "GM crops have never been researched anywhere in the world",
+        "There is universal agreement that GM crops should never be used"
+      ],
+      "correct": 1,
+      "explain": "Experts note that GM crops alone are not expected to radically improve yields in LICs, largely because the vast majority of GM research to date has focused on crops relevant to rich, northern hemisphere countries. A stronger focus on GM research for LIC-specific crops could have a greater long-term impact.",
+      "misconception": "GM crops are sometimes seen as a ready-made global solution; the geographical imbalance in where GM research has actually been targeted limits their current impact in many LICs.",
+      "tag": "Seeds, fertiliser and GM crops"
+    },
+    {
+      "q": "Increasing access to seeds and fertiliser for LIC farmers is identified as an important solution because:",
+      "options": [
+        "Farmers never need to replant seeds between seasons",
+        "Millions of farmers have been forced to eat next season's seeds to survive, and fertiliser prices (largely dependent on oil) have risen sharply in some regions, threatening future harvests",
+        "Fertiliser prices have fallen consistently worldwide",
+        "This issue only affects wealthy, large-scale farmers"
+      ],
+      "correct": 1,
+      "explain": "During food crises, millions of subsistence farmers have been forced to eat the seeds they would normally plant for next season's crop just to survive, while fertiliser prices (closely tied to oil prices) have risen sharply — both of which threaten the following season's harvest and can perpetuate a cycle of food insecurity.",
+      "misconception": "It is easy to focus only on the immediate food crisis; without support to replant and re-fertilise, a single bad season can trigger a longer-term cycle of reduced harvests.",
+      "tag": "Seeds, fertiliser and GM crops"
+    },
+    {
+      "q": "Campaigners who argue for changes to global diets as a long-term solution to food insecurity suggest that:",
+      "options": [
+        "Global food security has no connection to dietary choices anywhere",
+        "The world may struggle to sustainably feed its population if emerging economies adopt high-calorie, meat-heavy Western diets, and that shifting towards more plant-based diets could significantly reduce the amount of food needed to be produced globally",
+        "Everyone in the world already eats an identical diet",
+        "Meat consumption has no environmental or resource impact"
+      ],
+      "correct": 1,
+      "explain": "Campaigners argue that if emerging economies such as China and India adopt high-calorie, meat-heavy diets similar to typical Western consumption, it may not be possible to sustainably feed the world's population. A shift towards more plant-based diets is argued to be one of the few genuine long-term solutions, since it could significantly reduce the total amount of food needed to be produced globally.",
+      "misconception": "Solutions to food insecurity are sometimes framed purely in terms of production (growing more); this argument instead focuses on the demand side — what and how much the world chooses to eat.",
+      "tag": "Sustainable diets and farming"
+    },
+    {
+      "q": "According to reporting on global food waste, approximately what proportion of the world's food is wasted, and how does this affect food security?",
+      "options": [
+        "None of the world's food is ever wasted",
+        "Up to a third of the world's food is wasted — enough that reducing waste is considered a significant potential contribution to tackling food insecurity, alongside squandering resources like water, energy and land used to produce it",
+        "Only 1% of food is wasted worldwide, a negligible amount",
+        "Food waste is a problem exclusive to developing countries"
+      ],
+      "correct": 1,
+      "explain": "Up to a third of the world's food is estimated to be wasted. In developing countries this waste tends to occur on farms or in transit to market due to poor infrastructure and storage, while in developed countries it occurs more at the retail and consumer level — and in both cases, wasted food also squanders the water, energy, fertiliser and land used to produce it.",
+      "misconception": "Food waste reduction is sometimes seen as a minor, developed-world consumer issue; it is a globally significant factor affecting food security and resource use at every stage of the food system.",
+      "tag": "Reducing food waste"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH18 = {
+  "id": "FH18",
+  "topicNumber": 4,
+  "topicTitle": "Future health and food security and sustainability",
+  "title": "Contemporary approaches to food production",
+  "href": "/geography/paper-1/option-f/t4-future-health/l2-contemporary",
+  "syllabusFocus": "Advantages and disadvantages of contemporary approaches to food production, including genetically modified organisms (GMOs).",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "Regenerative agriculture and the Green Revolution",
+      "request": "Explain regenerative/sustainable agriculture and the Green Revolution as approaches to food production"
+    },
+    {
+      "label": "Solar irrigation",
+      "request": "Explain solar irrigation as a contemporary approach to food production"
+    },
+    {
+      "label": "In vitro meat",
+      "request": "Explain in vitro (lab-grown) meat as a contemporary approach to food production"
+    },
+    {
+      "label": "Hydroponics, aeroponics and vertical farming",
+      "request": "Explain hydroponics, aeroponics and vertical farming as contemporary approaches to food production"
+    },
+    {
+      "label": "Genetically modified organisms (GMOs)",
+      "request": "Explain the advantages and disadvantages of genetically modified crops"
+    },
+    {
+      "label": "Satellite technology in agriculture",
+      "request": "Explain how satellite technology is used to improve agricultural production"
+    },
+    {
+      "label": "Case study: rice production",
+      "request": "Explain how rice production is being adapted to improve global food security"
+    }
+  ],
+  "checklist": [
+    "I can identify a range of contemporary approaches to food production.",
+    "I can explain the advantages and disadvantages of regenerative agriculture and the Green Revolution.",
+    "I can explain the advantages and disadvantages of solar irrigation and in vitro meat.",
+    "I can explain the advantages and disadvantages of hydroponics, aeroponics and vertical farming.",
+    "I can explain the advantages and disadvantages of genetically modified organisms (GMOs).",
+    "I can explain how satellite technology is used to improve agricultural production.",
+    "I can assess which contemporary approaches are most appropriate in different contexts."
+  ],
+  "readinessQuestions": [
+    "Identify three contemporary approaches to food production covered in this lesson.",
+    "Explain one advantage and one disadvantage of GMOs in food production.",
+    "Explain one advantage and one disadvantage of vertical farming or hydroponics.",
+    "Explain how satellite/earth observation technology can help improve agricultural production.",
+    "Using rice as an example, explain one way food production is being adapted to improve global food security."
+  ],
+  "quiz": [
+    {
+      "q": "Regenerative (sustainable) agriculture is best described as an approach that:",
+      "options": [
+        "Prioritises maximum short-term yield with no regard for environmental resources",
+        "Puts environmental resources such as soil, water and trees first, often through techniques like permaculture, while aiming to increase income and food supply for poor farmers",
+        "Has no connection to farmer income or food supply",
+        "Can only be practised in high-income countries"
+      ],
+      "correct": 1,
+      "explain": "Regenerative or sustainable agriculture prioritises long-term environmental resources — soil, water and trees — often through approaches like permaculture (sustainable, self-maintaining agricultural systems modelled on natural ecosystems), while aiming to increase both income and food supply for poorer farmers.",
+      "misconception": "Sustainable approaches are sometimes seen as being in conflict with productivity; regenerative agriculture aims to support both environmental health and farmer livelihoods together, though it typically needs state support, training and market access to succeed.",
+      "tag": "Regenerative agriculture and the Green Revolution"
+    },
+    {
+      "q": "The Green Revolution, dating from the 1960s, remains relevant to study today because:",
+      "options": [
+        "It has no lasting relevance or legacy",
+        "It dramatically raised crop yields through high-yield crop varieties and increased use of fertiliser and irrigation, but its approach and consequences (such as fertiliser dependency and environmental impacts) still shape debates about food production strategy today",
+        "It has since been completely reversed in every country",
+        "It only ever affected countries in Europe"
+      ],
+      "correct": 1,
+      "explain": "The Green Revolution of the 1960s dramatically raised crop yields worldwide through high-yield crop varieties, increased fertiliser use and expanded irrigation. Its legacy — including benefits in yield increases alongside longer-term issues such as fertiliser dependency and environmental impacts — continues to shape debates about food production strategy today.",
+      "misconception": "Older strategies like the Green Revolution are sometimes dismissed as no longer relevant; understanding both its successes and its longer-term consequences is directly useful when evaluating newer approaches.",
+      "tag": "Regenerative agriculture and the Green Revolution"
+    },
+    {
+      "q": "Solar irrigation is a contemporary approach to food production that works by:",
+      "options": [
+        "Using solar-powered pumps to draw and distribute water for crops, offering a renewable alternative to fuel-powered irrigation, particularly useful in areas without reliable electricity grids",
+        "Removing the need for water in crop production entirely",
+        "Using solar panels to directly replace soil",
+        "Only functioning at night"
+      ],
+      "correct": 0,
+      "explain": "Solar irrigation uses solar-powered pumps to draw and distribute water for crops, providing a renewable, lower-emission alternative to diesel or grid-powered irrigation — particularly valuable in rural areas of LICs without reliable access to the electricity grid.",
+      "misconception": "Irrigation technology is sometimes assumed to require fossil fuels or grid electricity; solar irrigation offers a way to expand irrigation access (a key limiting factor identified in the previous lesson) sustainably.",
+      "tag": "Solar irrigation"
+    },
+    {
+      "q": "In vitro (lab-grown) meat is produced by:",
+      "options": [
+        "Traditional livestock farming with no laboratory involvement",
+        "Culturing animal cells in a laboratory setting to grow meat tissue without raising and slaughtering a full animal",
+        "Genetically modifying live animals to grow larger",
+        "A term with no real scientific basis"
+      ],
+      "correct": 1,
+      "explain": "In vitro meat is produced by culturing animal cells in a laboratory setting to grow meat tissue, without the need to raise and slaughter a full animal — a technology being developed partly as a response to the resource and environmental costs of conventional livestock farming.",
+      "misconception": "In vitro meat is sometimes confused with plant-based meat substitutes; in vitro meat is genuine animal tissue grown from cells, rather than a plant-derived alternative.",
+      "tag": "In vitro meat"
+    },
+    {
+      "q": "Hydroponics and vertical farming are contemporary approaches to food production that involve:",
+      "options": [
+        "Growing crops in soil across large open fields only",
+        "Growing crops without soil (using nutrient-rich water solutions) and/or stacking growing systems vertically, often indoors, to increase yield per unit of land area",
+        "Removing the need for water in crop production",
+        "A method that can only be used for livestock, not crops"
+      ],
+      "correct": 1,
+      "explain": "Hydroponics involves growing crops without soil, using nutrient-rich water solutions, while vertical farming stacks growing systems vertically (often indoors, in controlled environments) — together allowing significantly higher yields per unit of land area, particularly valuable in space-constrained urban settings.",
+      "misconception": "These systems are sometimes assumed to be identical to traditional farming at a smaller scale; the defining feature is that they remove the need for large areas of open soil, changing where and how densely food can be produced.",
+      "tag": "Hydroponics, aeroponics and vertical farming"
+    },
+    {
+      "q": "A key advantage of genetically modified (GM) crops can include:",
+      "options": [
+        "Guaranteed elimination of world hunger with no further action needed",
+        "Improved resistance to pests, disease or drought, or increased yields, in crop varieties engineered for specific beneficial traits",
+        "GM crops always reduce yields compared to non-GM varieties",
+        "GM crops cannot be grown anywhere in the world"
+      ],
+      "correct": 1,
+      "explain": "GM crops can be engineered for beneficial traits such as improved resistance to pests, disease or drought, or increased yields, offering potential benefits for food security in vulnerable growing conditions.",
+      "misconception": "It is worth balancing this with the previous lesson's point: while GM crops offer real potential advantages, most current research has focused on crops for wealthy countries rather than LIC-specific needs, limiting the technology's global impact so far.",
+      "tag": "Genetically modified organisms (GMOs)"
+    },
+    {
+      "q": "A key disadvantage or concern associated with GM crops can include:",
+      "options": [
+        "No disadvantages exist at all",
+        "Concerns over corporate control of seed patents, potential loss of biodiversity, and public/consumer resistance in some markets, alongside ongoing scientific debate over environmental and health effects",
+        "GM crops are illegal to grow in every country",
+        "GM crops require no scientific regulation anywhere"
+      ],
+      "correct": 1,
+      "explain": "Concerns associated with GM crops include the potential for corporate control over seed patents (which can increase farmers' dependency, linking back to the food sovereignty concept studied earlier in this unit), potential loss of agricultural biodiversity, and public or consumer resistance in some markets, alongside ongoing scientific and political debate over environmental and health effects.",
+      "misconception": "GM crop debates are sometimes reduced to a simple ‘safe vs unsafe’ argument; geographers should also weigh economic and political dimensions, such as corporate control and food sovereignty, alongside the scientific debate.",
+      "tag": "Genetically modified organisms (GMOs)"
+    },
+    {
+      "q": "Earth observation satellite systems, such as Landsat, help improve agricultural production by:",
+      "options": [
+        "Having no practical application to farming",
+        "Monitoring crop health, soil moisture, irrigation needs and yield patterns remotely across large areas, helping target resources and interventions more precisely",
+        "Physically watering crops from space",
+        "Only being usable by a single country"
+      ],
+      "correct": 1,
+      "explain": "Earth observation satellite systems such as Landsat can remotely monitor crop health, soil moisture, irrigation needs and yield patterns across large areas, helping farmers, governments and organisations target resources, investment and interventions more precisely and efficiently.",
+      "misconception": "Satellite technology's role in agriculture is sometimes underestimated; remote monitoring at scale allows precision and early problem detection that would be very difficult to achieve through ground-based observation alone.",
+      "tag": "Satellite technology in agriculture"
+    },
+    {
+      "q": "Rice production illustrates several contemporary approaches to improving food security because:",
+      "options": [
+        "Rice production has remained completely unchanged for centuries with no adaptation",
+        "Approaches such as flood- and drought-tolerant rice varieties, more efficient irrigation, and remote sensing to monitor paddies have all been used to help rice production adapt to disaster risk and changing conditions",
+        "Rice cannot be genetically modified",
+        "Rice production has no connection to water resources"
+      ],
+      "correct": 1,
+      "explain": "Rice production has been adapted through approaches including flood- and drought-tolerant rice varieties (helping crops survive disasters such as flooding), more efficient irrigation methods, and the use of remote sensing to monitor paddies — all aimed at improving the resilience and efficiency of one of the world's most important staple crops.",
+      "misconception": "Staple crops like rice are sometimes assumed to be produced using unchanging traditional methods; in reality, rice production has been a significant focus of adaptation and technological innovation aimed at global food security.",
+      "tag": "Case study: rice production"
+    },
+    {
+      "q": "Rice is a particularly water-intensive crop to produce, which means that approaches to improving its production must often consider:",
+      "options": [
+        "Water use and efficiency, since rice's water footprint is one of the highest among staple crops, particularly where it is grown using traditional flooded paddy methods",
+        "Rice production requires no water at all",
+        "Water efficiency is irrelevant to rice farming",
+        "Rice can only be grown in deserts"
+      ],
+      "correct": 0,
+      "explain": "Rice has one of the highest water footprints of any staple crop, particularly where grown using traditional flooded paddy methods, making water use efficiency (such as improved irrigation techniques) a key consideration in adapting rice production for a more water-constrained future.",
+      "misconception": "The huge water requirement of rice production is easy to overlook given how central it is to diets in many regions; this is precisely why efficient irrigation and water management are such a significant focus of contemporary rice research.",
+      "tag": "Case study: rice production"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH19 = {
+  "id": "FH19",
+  "topicNumber": 4,
+  "topicTitle": "Future health and food security and sustainability",
+  "title": "Prevention and treatment in disease management",
+  "href": "/geography/paper-1/option-f/t4-future-health/l3-prevention-and",
+  "syllabusFocus": "The merits of prevention and treatment in managing disease, including social marginalisation issues, government priorities, means of infection and scientific intervention. Case study: preventative health care in Majiang, China.",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "Curative vs primary/preventative healthcare",
+      "request": "Explain the difference between curative and primary (preventative) healthcare"
+    },
+    {
+      "label": "Limitations of curative healthcare",
+      "request": "Explain the limitations of relying on curative healthcare"
+    },
+    {
+      "label": "Advantages and disadvantages of primary healthcare",
+      "request": "Explain the advantages and disadvantages of primary (preventative) healthcare"
+    },
+    {
+      "label": "Social marginalisation and disease",
+      "request": "Explain how social marginalisation affects disease prevention and treatment"
+    },
+    {
+      "label": "Government priorities and scientific intervention",
+      "request": "Explain how government priorities and scientific intervention shape disease management"
+    },
+    {
+      "label": "Case study: Majiang, China",
+      "request": "Explain what is known about preventative healthcare in Majiang, China"
+    }
+  ],
+  "checklist": [
+    "I can distinguish between curative and primary (preventative) healthcare.",
+    "I can identify limitations of curative healthcare.",
+    "I can explain the advantages and disadvantages of primary healthcare.",
+    "I can explain how social marginalisation can affect access to disease prevention and treatment.",
+    "I can explain how government priorities and scientific intervention shape approaches to disease management.",
+    "I can outline the general location and context of the Majiang, China case study."
+  ],
+  "readinessQuestions": [
+    "What is the difference between curative healthcare and primary (preventative) healthcare?",
+    "Explain one limitation of relying mainly on curative healthcare to manage disease.",
+    "Explain one advantage and one disadvantage of primary healthcare.",
+    "Explain how social marginalisation can act as a barrier to disease prevention or treatment.",
+    "Explain how government priorities can shape whether a country invests more in prevention or treatment."
+  ],
+  "quiz": [
+    {
+      "q": "Curative healthcare is best described as an approach that:",
+      "options": [
+        "Focuses on stopping disease before it occurs",
+        "Focuses on treating disease and illness after it has already developed, such as through hospital treatment, surgery or medication",
+        "Has no role in any healthcare system",
+        "Is identical to primary healthcare"
+      ],
+      "correct": 1,
+      "explain": "Curative healthcare focuses on treating disease and illness after it has already developed — for example, through hospital treatment, surgery, or medication — as opposed to preventing disease from occurring in the first place.",
+      "misconception": "Curative and primary (preventative) healthcare are sometimes used interchangeably; curative care responds to illness that has already occurred, while primary/preventative care aims to stop illness occurring at all.",
+      "tag": "Curative vs primary/preventative healthcare"
+    },
+    {
+      "q": "A key limitation of relying primarily on curative healthcare to manage disease is that it:",
+      "options": [
+        "Is always cheaper than prevention in every context",
+        "Tends to be more expensive per person treated and does not reduce the underlying rate at which new cases of disease occur, meaning healthcare systems can remain permanently under strain",
+        "Has no limitations of any kind",
+        "Always cures 100% of patients"
+      ],
+      "correct": 1,
+      "explain": "Curative healthcare tends to be more resource-intensive per person treated (requiring hospitals, specialist staff, equipment and medication) and does not reduce the underlying rate at which new cases of disease occur, meaning a healthcare system focused mainly on treatment can remain permanently under strain from a constant flow of new cases.",
+      "misconception": "It is tempting to think of curative care as the most direct way to help sick people; without parallel investment in prevention, curative systems can be overwhelmed by an unaddressed, ongoing source of new cases.",
+      "tag": "Limitations of curative healthcare"
+    },
+    {
+      "q": "Primary (preventative) healthcare focuses on:",
+      "options": [
+        "Only treating patients once they are critically ill",
+        "Preventing disease before it occurs, through measures such as vaccination, health education, sanitation improvements and early screening",
+        "Replacing the need for any hospitals",
+        "A concept with no practical application"
+      ],
+      "correct": 1,
+      "explain": "Primary (preventative) healthcare focuses on stopping disease before it occurs, through measures such as vaccination programmes, health education, improved sanitation and water access, and early screening and diagnosis.",
+      "misconception": "Preventative healthcare is sometimes seen as less urgent or important than treatment; in the long run it can reduce the overall disease burden a health system needs to treat.",
+      "tag": "Advantages and disadvantages of primary healthcare"
+    },
+    {
+      "q": "A key advantage of primary healthcare compared to curative healthcare is that it:",
+      "options": [
+        "Is generally more cost-effective in the long term, since preventing disease reduces the future demand for more expensive curative treatment",
+        "Is always more expensive than curative care",
+        "Has no measurable long-term benefit",
+        "Can only be delivered in high-income countries"
+      ],
+      "correct": 0,
+      "explain": "Primary healthcare is generally more cost-effective in the long term, since preventing disease from occurring in the first place reduces the future demand for more expensive curative treatment — a key reason many health systems and governments try to invest in both.",
+      "misconception": "Short-term costs of prevention programmes (such as vaccination campaigns) are sometimes seen as an unaffordable expense; over the longer term they are often significantly cheaper than treating the disease burden that would otherwise occur.",
+      "tag": "Advantages and disadvantages of primary healthcare"
+    },
+    {
+      "q": "A disadvantage or challenge of primary healthcare can include:",
+      "options": [
+        "It requires no infrastructure or trained staff at all",
+        "It requires sustained investment, community engagement and infrastructure (such as trained community health workers) over time, and its benefits are not always immediately visible to governments seeking quick results",
+        "It is only relevant to non-communicable diseases",
+        "It guarantees the complete elimination of all disease"
+      ],
+      "correct": 1,
+      "explain": "Primary healthcare requires sustained investment, community engagement and infrastructure (such as trained community health workers) over time. Because its benefits (cases prevented) are less immediately visible than curative treatment (patients cured), it can be harder for governments to prioritise, especially where resources or political attention are limited.",
+      "misconception": "Prevention can seem straightforward in theory; in practice it requires long-term, often less politically visible investment, which can make it harder to sustain compared to curative care with its more immediate, visible results.",
+      "tag": "Advantages and disadvantages of primary healthcare"
+    },
+    {
+      "q": "Social marginalisation can act as a barrier to disease prevention and treatment because:",
+      "options": [
+        "Marginalised groups always have equal access to healthcare as everyone else",
+        "Marginalised groups (such as those in poverty, minority ethnic groups, or people in remote areas) can face reduced access to healthcare information, services and facilities, increasing their vulnerability to disease",
+        "Social marginalisation has no connection to healthcare access anywhere",
+        "Marginalisation only affects access to curative care, never prevention"
+      ],
+      "correct": 1,
+      "explain": "Socially marginalised groups — including those living in poverty, minority ethnic groups, or people in remote or underserved areas — can face reduced access to healthcare information, prevention services and treatment facilities, increasing their vulnerability to both acquiring disease and experiencing worse outcomes from it.",
+      "misconception": "Disease risk and healthcare access are sometimes assumed to be evenly distributed within a population; social marginalisation is a significant, geographically relevant factor shaping who can access prevention and treatment.",
+      "tag": "Social marginalisation and disease"
+    },
+    {
+      "q": "Government priorities can shape a country's balance between prevention and treatment because:",
+      "options": [
+        "All governments allocate identical healthcare budgets with no variation",
+        "Political and budgetary decisions determine how much is invested in preventative programmes versus curative infrastructure, which can be shaped by short-term political pressures as much as by long-term health outcomes",
+        "Government decisions have no influence on healthcare systems",
+        "Healthcare spending is decided entirely by international organisations, never national governments"
+      ],
+      "correct": 1,
+      "explain": "A government's political and budgetary decisions determine how much is invested in preventative programmes (such as vaccination or sanitation) versus curative infrastructure (such as hospitals). These decisions can be shaped as much by short-term political pressures and visible results as by long-term health outcome evidence.",
+      "misconception": "Healthcare investment decisions can appear to be purely technical or evidence-based; in reality, political priorities and short-term visibility of results significantly influence real-world government spending choices.",
+      "tag": "Government priorities and scientific intervention"
+    },
+    {
+      "q": "Scientific intervention (such as vaccine development or improved diagnostics) contributes to disease management by:",
+      "options": [
+        "Having no practical effect on disease outcomes",
+        "Providing new tools for both prevention (such as vaccines) and treatment (such as improved diagnostics and medicines), which can shift the balance of what is achievable through either approach",
+        "Only ever being relevant to prevention, never treatment",
+        "Replacing the need for any government healthcare policy"
+      ],
+      "correct": 1,
+      "explain": "Scientific intervention provides new tools for both prevention (such as vaccines) and treatment (such as improved diagnostics and medicines), and can shift what is realistically achievable through either approach — for example, a new vaccine can shift a disease that previously required extensive curative treatment towards being primarily preventable.",
+      "misconception": "Prevention and treatment are sometimes seen as fixed, separate categories; scientific advances can shift a disease from one category towards the other over time.",
+      "tag": "Government priorities and scientific intervention"
+    },
+    {
+      "q": "Majiang County, used as a case study of preventative healthcare, is located in:",
+      "options": [
+        "Guizhou Province, in southwestern China",
+        "The United Kingdom",
+        "Northern Europe",
+        "A location that has not been identified"
+      ],
+      "correct": 0,
+      "explain": "Majiang County is located in Guizhou Province in southwestern China, a relatively rural, mountainous region where access to healthcare infrastructure has historically been more limited than in China's wealthier eastern provinces.",
+      "misconception": "This case study specifically illustrates how preventative healthcare initiatives can be developed in a lower-resource, rural regional context, rather than in a major urban centre.",
+      "tag": "Case study: Majiang, China"
+    },
+    {
+      "q": "In the Majiang case study, cooperation to promote preventative healthcare has involved:",
+      "options": [
+        "No external organisations of any kind",
+        "The Amity Foundation, a Chinese NGO, working alongside local county authorities to help expand access to preventative healthcare services",
+        "Only private for-profit companies with no charitable involvement",
+        "A programme run entirely by a foreign government"
+      ],
+      "correct": 1,
+      "explain": "The Majiang case study involves cooperation between local county authorities and the Amity Foundation, a Chinese NGO, working together to help expand access to preventative healthcare in the county. For the full detail of specific projects and clinic-siting decisions covered in your course materials, refer to your teacher's case study resources.",
+      "misconception": "It is worth checking your own course case-study notes or slides for the specific cooperation activities and clinic-siting factors used in Majiang, since these details are set by your own syllabus resources rather than general geography knowledge.",
+      "tag": "Case study: Majiang, China"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH20 = {
+  "id": "FH20",
+  "topicNumber": 4,
+  "topicTitle": "Future health and food security and sustainability",
+  "title": "Managing pandemics — case study: Ebola in West Africa, 2013-16",
+  "href": "/geography/paper-1/option-f/t4-future-health/l4-managing",
+  "syllabusFocus": "One case study of a contemporary pandemic and the lessons learned for pandemic management in the future: the 2013-16 Ebola outbreak in West Africa.",
+  "starterButtons": [
+    {
+      "label": "Teach me this case study",
+      "request": "Give me a full overview of this case study"
+    },
+    {
+      "label": "What is a pandemic?",
+      "request": "Define a pandemic and explain the difference between antigenic drift and antigenic shift"
+    },
+    {
+      "label": "Why Ebola is so dangerous",
+      "request": "Explain the characteristics of Ebola that make it so dangerous"
+    },
+    {
+      "label": "Why the outbreak spread unnoticed",
+      "request": "Explain why Ebola spread for months before being widely recognised in 2013-14"
+    },
+    {
+      "label": "The pattern of spread",
+      "request": "Describe the pattern of Ebola's spread across Guinea, Sierra Leone and Liberia"
+    },
+    {
+      "label": "West Point, Monrovia",
+      "request": "Explain what made West Point in Monrovia highly vulnerable to Ebola"
+    },
+    {
+      "label": "The international response",
+      "request": "Explain the role of awareness, international action and the media in reducing the spread of Ebola"
+    },
+    {
+      "label": "Lessons for the future",
+      "request": "Evaluate the lessons learned from the Ebola outbreak for managing future pandemics"
+    }
+  ],
+  "checklist": [
+    "I can define a pandemic and explain the difference between antigenic drift and antigenic shift.",
+    "I can describe the characteristics of Ebola that make it dangerous.",
+    "I can explain why the 2013-16 outbreak spread for months before being widely recognised.",
+    "I can describe the pattern and characteristics of the outbreak in Guinea, Sierra Leone and Liberia.",
+    "I can explain why West Point, Monrovia was highly vulnerable to the outbreak.",
+    "I can evaluate the role of local and international strategies, and the media, in managing the outbreak.",
+    "I can evaluate the lessons learned for pandemic management in the future."
+  ],
+  "readinessQuestions": [
+    "Define a pandemic, and explain the difference between antigenic drift and antigenic shift.",
+    "Explain two characteristics of Ebola that make it particularly dangerous.",
+    "Why did the 2013-16 Ebola outbreak spread for several months before becoming widely known?",
+    "Explain what made West Point, Monrovia highly vulnerable to the Ebola outbreak.",
+    "Evaluate the role of international action and the media in reducing the spread of Ebola."
+  ],
+  "quiz": [
+    {
+      "q": "A pandemic is best defined as:",
+      "options": [
+        "A disease outbreak confined to a single small local area",
+        "An outbreak of a disease that spreads across multiple countries or continents, affecting a very large number of people over a wide geographic area",
+        "A disease that only ever affects animals",
+        "A term identical in meaning to ‘endemic’"
+      ],
+      "correct": 1,
+      "explain": "A pandemic is an outbreak of a disease that spreads across multiple countries or continents, affecting a very large number of people over a wide geographic area — the largest scale of disease outbreak, distinct from a more geographically contained epidemic.",
+      "misconception": "This definition was introduced earlier in this unit (in the disease diffusion lesson); it is worth recalling it precisely, since ‘pandemic’, ‘epidemic’ and ‘endemic’ describe different scales and patterns of disease spread.",
+      "tag": "What is a pandemic?"
+    },
+    {
+      "q": "Antigenic drift refers to:",
+      "options": [
+        "A sudden, major genetic reassortment producing an entirely new virus subtype",
+        "Small, gradual genetic mutations in a virus over time, which can allow it to partially evade existing immunity",
+        "A term unrelated to viruses",
+        "The physical movement of a virus between countries"
+      ],
+      "correct": 1,
+      "explain": "Antigenic drift refers to small, gradual genetic mutations that accumulate in a virus over time. These minor changes can allow the virus to partially evade existing immunity in a population, which is one reason some viruses (such as seasonal influenza) require updated vaccines periodically.",
+      "misconception": "Antigenic drift and antigenic shift are often confused; drift involves small, gradual changes, while shift involves a sudden, major genetic change.",
+      "tag": "What is a pandemic?"
+    },
+    {
+      "q": "Antigenic shift refers to:",
+      "options": [
+        "Gradual, minor mutations accumulating slowly over many years",
+        "A sudden, major genetic change in a virus (such as through reassortment of genetic material between different strains), which can produce a new subtype capable of causing a pandemic if populations have little existing immunity",
+        "The physical transport of a virus by international travellers",
+        "A process that only affects bacteria, never viruses"
+      ],
+      "correct": 1,
+      "explain": "Antigenic shift is a sudden, major genetic change in a virus, sometimes through the reassortment of genetic material between different viral strains. Because this can produce an entirely new subtype against which populations have little or no existing immunity, antigenic shift carries a much higher risk of triggering a pandemic than the gradual changes of antigenic drift.",
+      "misconception": "It can help to remember: drift = small, slow, ongoing changes (like a gentle current); shift = a sudden, major jump capable of catching populations without any existing immunity.",
+      "tag": "What is a pandemic?"
+    },
+    {
+      "q": "A key characteristic of the Ebola virus that makes it particularly dangerous is:",
+      "options": [
+        "A very low mortality rate with mild symptoms in almost all cases",
+        "A high mortality rate (historically averaging around 40-50%, though varying by outbreak) combined with transmission through direct contact with the bodily fluids of infected or deceased individuals",
+        "Ebola cannot be transmitted between humans at all",
+        "Ebola has no incubation period, with symptoms appearing instantly"
+      ],
+      "correct": 1,
+      "explain": "Ebola is particularly dangerous due to its high mortality rate (historically averaging around 40-50%, though it has varied significantly between outbreaks) and its transmission through direct contact with the bodily fluids of infected or deceased individuals, which made traditional burial practices in West Africa a significant transmission risk.",
+      "misconception": "It is worth noting Ebola's transmission route specifically requires direct contact with bodily fluids, rather than airborne transmission — this shaped both how it spread and how control strategies (such as safe burial practices) were designed.",
+      "tag": "Why Ebola is so dangerous"
+    },
+    {
+      "q": "Ebola's incubation period (typically 2-21 days) contributed to the difficulty of controlling its spread because:",
+      "options": [
+        "It has no bearing on how the disease spreads",
+        "Infected individuals could travel and have contact with others for up to three weeks before showing symptoms, making it harder to identify and isolate cases early",
+        "The incubation period guarantees symptoms appear within hours",
+        "It only affects how the disease is treated, not how it spreads"
+      ],
+      "correct": 1,
+      "explain": "Ebola's incubation period of typically 2 to 21 days meant infected individuals could travel and have contact with others for up to three weeks before showing any symptoms, making early identification and isolation of cases significantly more difficult and contributing to wider geographic spread.",
+      "misconception": "A disease with symptoms that appear immediately is generally easier to contain than one with a long incubation period, since infected people can unknowingly spread it much further before being identified.",
+      "tag": "Why Ebola is so dangerous"
+    },
+    {
+      "q": "The 2013-16 Ebola outbreak spread for several months in its early stages without becoming widely known largely because:",
+      "options": [
+        "It began in a well-monitored, major capital city with strong health surveillance",
+        "It began in a remote, forested border region where Guinea, Sierra Leone and Liberia meet, with weak health surveillance systems and initial cases resembling other, more common illnesses, delaying recognition and international alert",
+        "International health authorities were alerted within days of the first case",
+        "Ebola outbreaks had never occurred before, so no monitoring systems existed anywhere"
+      ],
+      "correct": 1,
+      "explain": "The outbreak began in a remote, forested border region where Guinea, Sierra Leone and Liberia meet, an area with weak health surveillance infrastructure. Early cases also resembled other, more common illnesses, delaying accurate diagnosis, meaning the outbreak had already been spreading for months before international health authorities were formally alerted.",
+      "misconception": "It is easy to assume major disease outbreaks are identified almost immediately; weak surveillance in remote areas and non-specific early symptoms can allow an outbreak to spread substantially before it is even recognised as a new threat.",
+      "tag": "Why the outbreak spread unnoticed"
+    },
+    {
+      "q": "As the 2013-16 Ebola outbreak progressed, its geographic pattern showed that:",
+      "options": [
+        "It remained confined entirely to its original remote, rural origin point with no further spread",
+        "It spread from its rural, border-region origin into densely populated capital cities (including Conakry, Freetown and Monrovia), with population mobility and traditional burial practices accelerating urban transmission",
+        "It only ever affected rural areas, never reaching any capital cities",
+        "It spread only within a single country, with no cross-border transmission"
+      ],
+      "correct": 1,
+      "explain": "The outbreak spread from its rural, border-region origin into densely populated capital cities, including Conakry (Guinea), Freetown (Sierra Leone) and Monrovia (Liberia). Population mobility between rural and urban areas, along with traditional burial practices involving contact with the bodies of the deceased (who remain highly infectious), significantly accelerated transmission once the disease reached these cities.",
+      "misconception": "The most severe impacts of an outbreak are sometimes assumed to remain closest to its rural point of origin; in this case, the shift to dense urban areas dramatically increased the scale and severity of transmission.",
+      "tag": "The pattern of spread"
+    },
+    {
+      "q": "West Point, a densely populated informal settlement in Monrovia, Liberia, was highly vulnerable to the Ebola outbreak because it had:",
+      "options": [
+        "Low population density and excellent sanitation infrastructure",
+        "Very high population density, poor sanitation and water access, and limited healthcare infrastructure, combined with poverty that limited residents' ability to self-isolate or avoid close contact with others",
+        "No residents living in the area at the time",
+        "Complete trust in, and cooperation with, government quarantine measures with no unrest of any kind"
+      ],
+      "correct": 1,
+      "explain": "West Point's very high population density, limited sanitation and water infrastructure, and constrained healthcare access made it highly vulnerable to Ebola transmission. Poverty also limited many residents' ability to self-isolate or avoid close contact with others, and a controversial attempt to quarantine the settlement in 2014 led to unrest, reflecting distrust between residents and authorities.",
+      "misconception": "Vulnerability to disease outbreaks is sometimes seen purely in medical terms; the physical and social geography of a settlement (density, infrastructure, poverty and trust in authorities) can be just as significant in shaping how severely it is affected.",
+      "tag": "West Point, Monrovia"
+    },
+    {
+      "q": "International action played an important role in eventually reducing the spread of Ebola in West Africa, including through:",
+      "options": [
+        "No international involvement occurred at any stage",
+        "The World Health Organization declaring a Public Health Emergency of International Concern, alongside international support such as treatment centre construction, medical personnel deployment (including organisations like Médecins Sans Frontières) and, later, vaccine trials",
+        "International organisations refusing to send any support to the affected region",
+        "A complete absence of any coordinated response"
+      ],
+      "correct": 1,
+      "explain": "The World Health Organization declared a Public Health Emergency of International Concern in August 2014, helping to mobilise a larger international response. This included the construction of treatment centres, deployment of international medical personnel (including organisations such as Médecins Sans Frontières), and later, clinical trials of experimental Ebola vaccines — all contributing to eventually bringing the outbreak under control.",
+      "misconception": "The scale of international mobilisation required is sometimes underestimated; formally declaring a global health emergency was a significant, deliberate step that unlocked greater international resources and coordination.",
+      "tag": "The international response"
+    },
+    {
+      "q": "Overall, the key lessons learned from the 2013-16 Ebola outbreak for managing future pandemics include the importance of:",
+      "options": [
+        "Ignoring outbreaks in remote or low-income regions, since they pose no wider risk",
+        "Strong local health surveillance systems capable of early detection, rapid and well-coordinated international response, and culturally sensitive engagement with affected communities (including around practices like burial) to build trust and cooperation",
+        "Relying solely on curative treatment with no preventative or community engagement measures",
+        "Assuming media attention has no bearing on the scale of international response"
+      ],
+      "correct": 1,
+      "explain": "Key lessons from the Ebola outbreak include the critical importance of strong local health surveillance systems for early detection (to avoid the months-long delay seen in 2013-14), a rapid and well-coordinated international response once an outbreak is identified, and culturally sensitive engagement with affected communities — including around practices like traditional burial — to build the trust and cooperation needed for control measures to succeed.",
+      "misconception": "It is tempting to focus only on medical or scientific lessons from a pandemic; this case study shows that surveillance systems, international coordination speed, and social/cultural engagement were just as critical to the eventual outcome.",
+      "tag": "Lessons for the future"
     }
   ]
 };
