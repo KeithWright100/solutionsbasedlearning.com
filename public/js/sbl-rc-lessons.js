@@ -100,6 +100,13 @@ window.SBL_LESSONS.RC02 = {
     'I can link footprint size to income and consumption patterns.',
     'I can explain a limitation of the ecological footprint as a measure.'
   ],
+  ibQuestions: [
+    {
+      question: 'Suggest one way in which greater use of renewable energy can: (i) decrease the size of a nation\u2019s ecological footprint; (ii) increase the size of a nation\u2019s ecological footprint.',
+      marks: 4,
+      markScheme: '(i) Decrease the size of a nation’s ecological footprint\n\nAward [1] for a valid way and [1] for development linked to decrease in ecological footprint (land/sea/vegetation).\n\nValid possibilities include:\n- less need for fossil fuels like coal which means less land required to obtain energy\n- less need for fossil fuels like oil which means less land/sea polluted by oil spills\n- more energy is produced by wind farms which means less nuclear waste / land contamination issues\n- renewable energy is produced without the burning of fossil fuels and the resultant emissions, so less land/vegetation/ocean is required to absorb greenhouse gases.\n\nFor example: Decreased use of fossil fuels because of switching energy sources [1] decreases the amount of land required for mining or disposal of waste [1].\n\n(ii) Increase the size of a nation’s ecological footprint\n\nAward [1] for a valid way and [1] for development linked to increase in ecological footprint.\n\nValid possibilities include:\n- solar and wind farms require large areas of land and these can reduce the natural vegetation of an area\n- valleys drowned for HEP reservoirs which reduces vegetation and covers areas of soil.\n- use of electric cars increases demand for rare minerals which increases land destroyed by mining.\n\nFor example: Greater use of biofuels requires palm oil cultivation [1] across extensive areas of land [1].'
+    }
+  ],
   readinessQuestions: [
     'What is a global hectare and why is it a useful unit of measurement?',
     'Explain the difference between an ecological debtor country and an ecological creditor country.',

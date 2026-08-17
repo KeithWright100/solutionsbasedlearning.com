@@ -197,6 +197,13 @@ window.SBL_LESSONS['FH-t1-l4-the'] = {
     'I can read, interpret and explain the epidemiological transition model (ETM).',
     'I can explain the concept of the burden of disease.'
   ],
+  ibQuestions: [
+    {
+      question: 'Suggest three possible reasons why the health of populations in Asia might deteriorate as a result of the rising affluence shown in the diagram.',
+      marks: 6,
+      markScheme: 'In each case, award [1] for a valid reason, and [1] for an explanation of the link with the rising affluence shown.\n\nFor example: Rising affluence in Asia may lead to a greater incidence of obesity [1] because more people can afford to consume unhealthy, high-calorie fast food [1].\n\nOther changes for Asia have included:\n- diseases of affluence, eg increased type 2 diabetes linked with sugar; increased heart disease linked with diet; incidence of cancer if more people can afford cigarettes\n- greater proportion of people living in urban areas with poor air quality as the country modernises; resulting in asthma/respiratory illness\n- rising affluence is usually linked with industrialization in emerging economies, such as China and Bangladesh; which may result in industrial accidents and injuries\n- diseases may spread more rapidly in urban centres / megacities in emerging economies than they did in isolated rural areas in the past when distance between villages acted as a barrier to transmission.'
+    }
+  ],
   readinessQuestions: [
     'What is the difference between a disease of poverty and a disease of affluence?',
     'What is the difference between a communicable and a non-communicable disease?',
