@@ -15,10 +15,10 @@
 
    Lesson IDs: FH01-FH04 (Topic 1: Measuring food and health) follow
    the sidebar's own topic/lesson slugs, prefixed with FH, e.g.
-   FH-t1-l1-global-patterns. FH06-FH10 (Topic 2: Food systems and
-   spread of diseases) use short numeric IDs (FH06-FH10). FH05
-   (Food and Health Checkpoint) and FH20 (Managing pandemics case
-   study) are deliberately SKIPPED, pending their source content.
+   FH-t1-l1-global-patterns. FH06-FH16 (Topics 2 and 3) use short
+   numeric IDs (FH06-FH16). FH05 (Food and Health Checkpoint) and
+   FH20 (Managing pandemics case study) are deliberately SKIPPED,
+   pending their source content. Topic 4 (FH17-FH19) still to come.
    ============================================================ */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_FH_LESSON_ORDER = [
@@ -30,7 +30,13 @@ window.SBL_FH_LESSON_ORDER = [
   'FH07',
   'FH08',
   'FH09',
-  'FH10'
+  'FH10',
+  'FH11',
+  'FH12',
+  'FH13',
+  'FH14',
+  'FH15',
+  'FH16'
 ];
 
 window.SBL_LESSONS['FH-t1-l1-global-patterns'] = {
@@ -434,5 +440,1132 @@ window.SBL_LESSONS.FH10 = {
     { q: 'A socio-economic impact of cholera outbreaks can include:', options: ['Disruption to local markets, trade and daily economic activity due to illness and fear of contamination', 'A guaranteed boost to local economic activity', 'No effect on trade or markets', 'Complete elimination of the need for economic recovery efforts'], correct: 0, explain: 'Cholera outbreaks can disrupt local markets and trade, both through illness reducing economic participation and through fear of contamination affecting the sale of food and water in affected areas.', misconception: 'The socio-economic impact of disease outbreaks is sometimes underestimated when attention focuses only on health statistics; disruption to trade, markets and daily economic life is a significant, connected consequence.', tag: 'Demographic and socio-economic impacts' },
     { q: 'A key intervention strategy to combat cholera involves:', options: ['Improving access to clean water and sanitation infrastructure', 'Culling livestock', 'Insecticide-treated bed nets', 'Altitude-based population relocation'], correct: 0, explain: 'Since cholera is fundamentally linked to contaminated water and inadequate sanitation, improving access to clean water and proper sanitation infrastructure is a key, foundational intervention strategy.', misconception: 'Intervention strategies for cholera are sometimes confused with those used for vector-borne diseases (like bed nets for malaria); cholera control specifically requires addressing water and sanitation infrastructure.', tag: 'Intervention strategies' },
     { q: 'Comparing cholera and malaria as case studies illustrates that geographic factors influencing disease incidence:', options: ['Are identical for every disease, regardless of type', 'Differ significantly depending on how a disease is transmitted, requiring different, tailored intervention strategies', 'Have no real influence on disease incidence at all', 'Only apply to vector-borne diseases, never water-borne diseases'], correct: 1, explain: 'Comparing cholera (water-borne, linked to sanitation/water infrastructure) and malaria (vector-borne, linked to climate/mosquito breeding conditions) shows that the specific geographic factors influencing incidence differ significantly by disease type, requiring correspondingly different, tailored intervention strategies.', misconception: 'It is tempting to assume a single, universal set of factors explains all disease incidence; comparing these two contrasting case studies shows why understanding a disease\u2019s specific transmission mechanism is essential to identifying the right geographic factors and interventions.', tag: 'Comparing to malaria' }
+  ]
+};
+
+window.SBL_LESSONS.FH11 = {
+  "id": "FH11",
+  "topicNumber": 3,
+  "topicTitle": "Stakeholders in food and health",
+  "title": "The role of international organisations in combatting food insecurity and disease",
+  "href": "/geography/paper-1/option-f/t3-stakeholders-in/l1-the-role-of",
+  "syllabusFocus": "The role of international organisations (such as the World Food Programme, the Food and Agriculture Organization of the United Nations, and the World Health Organization), governments and NGOs in combatting food insecurity and disease.",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "What does the WFP do?",
+      "request": "Explain the role of the World Food Programme"
+    },
+    {
+      "label": "What does the FAO do?",
+      "request": "Explain the role of the Food and Agriculture Organization of the United Nations"
+    },
+    {
+      "label": "What does the WHO do?",
+      "request": "Explain the role of the World Health Organization"
+    },
+    {
+      "label": "Government aid and USAID",
+      "request": "Explain the role of national government aid agencies, using USAID as an example"
+    },
+    {
+      "label": "Oxfam and Save the Children",
+      "request": "Explain the role of NGOs such as Oxfam and Save the Children"
+    },
+    {
+      "label": "Evaluating these organisations",
+      "request": "Help me evaluate the effectiveness and limitations of these organisations"
+    }
+  ],
+  "checklist": [
+    "I can describe the role of the World Food Programme (WFP).",
+    "I can describe the role of the Food and Agriculture Organization (FAO).",
+    "I can describe the role of the World Health Organization (WHO).",
+    "I can describe the role of a national government aid agency, using USAID as an example.",
+    "I can describe the role of NGOs such as Oxfam and Save the Children.",
+    "I can link each organisation's work to relevant Sustainable Development Goals (SDGs).",
+    "I can evaluate the effectiveness and limitations of these organisations."
+  ],
+  "readinessQuestions": [
+    "What is the difference between the role of the WFP and the role of the FAO?",
+    "Give one example of a WHO-led response to a disease outbreak or health issue.",
+    "What happened to USAID in 2025, and why does this matter for global food security?",
+    "Give one limitation faced by an NGO such as Oxfam or Save the Children.",
+    "Evaluate the effectiveness of one international organisation studied in this lesson."
+  ],
+  "quiz": [
+    {
+      "q": "The primary role of the World Food Programme (WFP) is best described as:",
+      "options": [
+        "Setting binding international health regulations for all countries",
+        "The United Nations' frontline agency for delivering food assistance, including emergency relief, school feeding and nutrition support",
+        "A private company that trades food commodities on international markets",
+        "Providing only agricultural technical advice, with no direct food distribution"
+      ],
+      "correct": 1,
+      "explain": "The WFP is the food-assistance branch of the United Nations, delivering in-kind food, cash and voucher assistance, school feeding programmes and targeted nutrition support, particularly in emergencies such as conflict or famine.",
+      "misconception": "The WFP is sometimes confused with the FAO; the WFP focuses on delivering food and nutrition assistance directly, whereas the FAO focuses on technical and advisory support to improve food systems.",
+      "tag": "What does the WFP do?"
+    },
+    {
+      "q": "Which of the following best distinguishes the FAO from the WFP?",
+      "options": [
+        "The FAO focuses mainly on technical and advisory support to improve agricultural productivity and food security data, rather than direct emergency food distribution",
+        "The FAO only operates in high-income countries",
+        "The FAO has no connection to agriculture at all",
+        "The FAO and WFP have identical roles with no meaningful difference"
+      ],
+      "correct": 0,
+      "explain": "The FAO (Food and Agriculture Organization of the United Nations) focuses on technical and advisory work — improving agricultural productivity, sustainable farming practices, and collecting global food security data — rather than distributing emergency food aid directly, which is the WFP's role.",
+      "misconception": "It is easy to assume all UN food-related agencies do the same thing; the FAO and WFP are deliberately distinct, with FAO working ‘upstream’ on production and data, and WFP working ‘downstream’ on direct distribution.",
+      "tag": "What does the FAO do?"
+    },
+    {
+      "q": "A key role of the World Health Organization (WHO) in relation to food and health is to:",
+      "options": [
+        "Coordinate international responses to disease outbreaks and set global health standards",
+        "Distribute emergency food parcels directly to affected households",
+        "Manufacture vaccines for private sale",
+        "Set global food prices"
+      ],
+      "correct": 0,
+      "explain": "The WHO coordinates international responses to disease outbreaks (such as cholera or measles outbreaks), sets global health standards and guidelines, and supports countries in strengthening their health systems.",
+      "misconception": "The WHO's role is sometimes confused with direct aid delivery; its core function is coordination, standard-setting and technical guidance for health systems and outbreak response, rather than distributing food or supplies itself.",
+      "tag": "What does the WHO do?"
+    },
+    {
+      "q": "Historically, USAID's Feed the Future and Food for Peace programmes worked to:",
+      "options": [
+        "Tackle global hunger and food insecurity through agricultural development and emergency food assistance funded by the US government",
+        "Restrict food trade between countries",
+        "Fund only infrastructure projects unrelated to food or health",
+        "Operate exclusively within the United States"
+      ],
+      "correct": 0,
+      "explain": "USAID historically ran programmes such as Feed the Future (supporting agricultural development and food security in partner countries) and Food for Peace (emergency and development food assistance), funded by the US government as part of its foreign aid.",
+      "misconception": "It is easy to assume government aid agencies work identically to NGOs like Oxfam; USAID's programmes were funded and directed by a single national government, which is a significant difference discussed further in this lesson.",
+      "tag": "Government aid and USAID"
+    },
+    {
+      "q": "As of 2025, USAID's status changed significantly because:",
+      "options": [
+        "It merged with the FAO to form a new UN agency",
+        "It was dissolved as an independent US government agency, with its remaining functions absorbed into the State Department, leading to major cuts and disruption to global humanitarian and food security programmes",
+        "It doubled its funding for global food security programmes",
+        "It relocated its headquarters but continued operating exactly as before"
+      ],
+      "correct": 1,
+      "explain": "In 2025, USAID ceased operating as an independent agency after nearly 60 years, with its remaining functions absorbed into the US State Department. This led to major cuts to programmes such as Feed the Future and Food for Peace, with significant, well-documented disruption to global humanitarian and health aid.",
+      "misconception": "This is a genuinely recent and significant change; it is worth remembering as a real, current example of how a single government's policy decisions can rapidly reshape the global humanitarian landscape — directly illustrating the ‘governance’ factor studied later in this topic.",
+      "tag": "Government aid and USAID"
+    },
+    {
+      "q": "Oxfam's role in combatting food insecurity typically includes:",
+      "options": [
+        "Emergency relief such as water, sanitation and hygiene (WASH) programmes, alongside campaigning on poverty and inequality",
+        "Setting international trade tariffs",
+        "Manufacturing agricultural machinery",
+        "Only operating in high-income countries"
+      ],
+      "correct": 0,
+      "explain": "Oxfam is an international confederation of NGOs that provides emergency relief (such as clean water, sanitation and hygiene programmes) and campaigns on the underlying causes of poverty and inequality that contribute to food insecurity.",
+      "misconception": "NGOs like Oxfam are sometimes seen purely as aid deliverers; much of their work also involves advocacy and campaigning aimed at addressing the root causes of poverty and inequality, not just responding to immediate need.",
+      "tag": "Oxfam and Save the Children"
+    },
+    {
+      "q": "Save the Children's role in relation to food and health particularly focuses on:",
+      "options": [
+        "Adult employment programmes only",
+        "Child-focused nutrition, health and education support, including emergency response in crises such as Yemen",
+        "Setting global health regulations",
+        "Distributing food only to the elderly"
+      ],
+      "correct": 1,
+      "explain": "Save the Children focuses specifically on children's welfare, including nutrition programmes for malnourished children, health and education support, and emergency response in crises such as the ongoing situation in Yemen.",
+      "misconception": "It is useful to distinguish NGOs by their specific focus; Save the Children's distinguishing feature compared to broader organisations like Oxfam is its specific focus on children's rights and welfare.",
+      "tag": "Oxfam and Save the Children"
+    },
+    {
+      "q": "A common limitation shared by many of the organisations studied in this lesson is that they:",
+      "options": [
+        "Have unlimited funding with no constraints",
+        "Depend on funding from donor governments or the public, meaning their work can be disrupted by changing political priorities or funding shortfalls",
+        "Have no legal or political constraints anywhere in the world",
+        "Never face any access difficulties in conflict-affected areas"
+      ],
+      "correct": 1,
+      "explain": "International organisations and NGOs typically depend on funding from donor governments, international bodies or public donations. This means their work can be significantly disrupted by changing political priorities (as seen with USAID) or funding shortfalls, and access can be restricted in conflict zones.",
+      "misconception": "It is tempting to see large, well-known organisations as having limitless resources and reach; in reality, funding dependency and access constraints are shared limitations across almost all of them.",
+      "tag": "Evaluating these organisations"
+    },
+    {
+      "q": "Which Sustainable Development Goal (SDG) is most directly linked to the work of the WFP and FAO?",
+      "options": [
+        "SDG 2: Zero Hunger",
+        "SDG 13: Climate Action, exclusively",
+        "SDG 5: Gender Equality, exclusively",
+        "None of the SDGs relate to food organisations"
+      ],
+      "correct": 0,
+      "explain": "SDG 2 (Zero Hunger) is the most directly linked goal to the work of the WFP and FAO, though their work also connects to other goals such as SDG 1 (No Poverty) and SDG 3 (Good Health and Well-being).",
+      "misconception": "SDGs often interconnect, and it is worth recognising that food security work links to multiple goals simultaneously, even where one goal (like SDG 2) is the clearest primary link.",
+      "tag": "Evaluating these organisations"
+    },
+    {
+      "q": "When evaluating the effectiveness of an international organisation, geographers should consider:",
+      "options": [
+        "Only how well-known the organisation is",
+        "Its measurable impact on food security or health outcomes, alongside its funding stability, access constraints and any political limitations on its work",
+        "Only the size of its annual budget",
+        "Whether it has an attractive logo"
+      ],
+      "correct": 1,
+      "explain": "A genuine evaluation of an organisation's effectiveness requires looking at its measurable impact on food security or health outcomes, alongside practical constraints such as funding stability, access to affected populations, and political limitations — as illustrated by the USAID case.",
+      "misconception": "Effectiveness is sometimes judged only by an organisation's stated mission or public profile; a rigorous geographical evaluation instead weighs measurable outcomes against the real-world constraints the organisation operates under.",
+      "tag": "Evaluating these organisations"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH12 = {
+  "id": "FH12",
+  "topicNumber": 3,
+  "topicTitle": "Stakeholders in food and health",
+  "title": "The influence of TNCs in shaping food consumption",
+  "href": "/geography/paper-1/option-f/t3-stakeholders-in/l2-the-influence",
+  "syllabusFocus": "The influence of TNCs (agribusiness and the media) in shaping food consumption habits.",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "What is agribusiness?",
+      "request": "Define agribusiness and explain how it differs from traditional farming"
+    },
+    {
+      "label": "Vertical vs horizontal integration",
+      "request": "Explain the difference between vertical integration and horizontal integration"
+    },
+    {
+      "label": "Why TNCs operate at lower cost",
+      "request": "Explain why TNCs in the food industry can often operate at lower costs than smaller producers"
+    },
+    {
+      "label": "How TNCs influence consumption",
+      "request": "Explain how TNCs influence food consumption habits, including through the media"
+    },
+    {
+      "label": "What is food sovereignty?",
+      "request": "Define food sovereignty and explain how TNCs can threaten it"
+    },
+    {
+      "label": "Outcomes for consumers",
+      "request": "Explain the positive and negative outcomes of TNC dominance for consumers"
+    },
+    {
+      "label": "Outcomes for local producers",
+      "request": "Explain the outcomes of TNC dominance for local producers"
+    }
+  ],
+  "checklist": [
+    "I can define agribusiness.",
+    "I can define vertical integration.",
+    "I can define horizontal integration.",
+    "I can explain why TNCs can often operate at lower cost than smaller producers.",
+    "I can explain how TNCs use the media to influence food consumption habits.",
+    "I can define food sovereignty and explain how TNCs can threaten it.",
+    "I can evaluate positive and negative outcomes of TNC dominance for consumers and for local producers."
+  ],
+  "readinessQuestions": [
+    "Define agribusiness, vertical integration and horizontal integration.",
+    "Explain one reason why large food TNCs can often produce and sell food more cheaply than smaller producers.",
+    "Explain two ways TNCs use the media to influence food consumption habits.",
+    "What is food sovereignty, and how can TNC dominance threaten it?",
+    "Evaluate one positive and one negative outcome of TNC dominance in the food industry, for either consumers or local producers."
+  ],
+  "quiz": [
+    {
+      "q": "Agribusiness is best defined as:",
+      "options": [
+        "Small-scale subsistence farming carried out by a single family",
+        "The large-scale, industrialised business of food production, encompassing farming, processing, distribution and marketing, often run by transnational corporations",
+        "A government department responsible for agricultural policy",
+        "A term with no real meaning in geography"
+      ],
+      "correct": 1,
+      "explain": "Agribusiness refers to the large-scale, industrialised business of food production — spanning farming, processing, distribution and marketing — and is typically associated with transnational corporations operating at a global scale.",
+      "misconception": "Agribusiness is sometimes used loosely to mean ‘any farming’, but it specifically refers to industrialised, corporate-scale food production rather than small-scale or subsistence farming.",
+      "tag": "What is agribusiness?"
+    },
+    {
+      "q": "Vertical integration in the food industry refers to a company:",
+      "options": [
+        "Merging with a direct competitor selling the same product",
+        "Owning or controlling multiple stages of the supply chain, such as growing, processing, and retailing its own products",
+        "Only ever operating in a single country",
+        "Reducing the number of products it sells"
+      ],
+      "correct": 1,
+      "explain": "Vertical integration occurs when a company owns or controls multiple stages of the supply chain — for example, growing crops, processing them, and then retailing the final product — giving it greater control over cost and quality at every stage.",
+      "misconception": "Vertical and horizontal integration are commonly confused; vertical integration is about controlling different stages of the SAME supply chain, while horizontal integration is about controlling more of the SAME stage.",
+      "tag": "Vertical vs horizontal integration"
+    },
+    {
+      "q": "Horizontal integration in the food industry refers to a company:",
+      "options": [
+        "Controlling multiple different stages of the supply chain",
+        "Merging with or acquiring competitors operating at the same stage of production, increasing its market share",
+        "Only selling products directly to farmers",
+        "Reducing its overall size and market share"
+      ],
+      "correct": 1,
+      "explain": "Horizontal integration occurs when a company merges with or acquires competitors operating at the same stage of the supply chain (for example, one food processing company buying another), increasing its market share and reducing competition.",
+      "misconception": "It can help to remember: vertical integration moves UP or DOWN the supply chain (different stages); horizontal integration moves ACROSS the same stage (same type of business, bigger market share).",
+      "tag": "Vertical vs horizontal integration"
+    },
+    {
+      "q": "A key reason TNCs in the food industry can often operate at lower cost than smaller producers is:",
+      "options": [
+        "They are legally required to charge lower prices",
+        "Economies of scale — large-scale production, bulk purchasing and integrated supply chains reduce the cost per unit produced",
+        "They receive no scrutiny from any government",
+        "Smaller producers always choose to charge higher prices deliberately"
+      ],
+      "correct": 1,
+      "explain": "Economies of scale allow large TNCs to reduce their cost per unit through bulk purchasing of inputs, large-scale production, and integrated (often vertically integrated) supply chains — cost advantages that smaller, independent producers usually cannot match.",
+      "misconception": "Lower TNC prices are sometimes assumed to reflect unfair practices alone; economies of scale are a genuine, structural cost advantage that comes from scale itself, separate from any pricing strategy.",
+      "tag": "Why TNCs operate at lower cost"
+    },
+    {
+      "q": "TNCs commonly use the media to influence food consumption habits by:",
+      "options": [
+        "Advertising and branding that shapes consumer preferences and normalises certain diets or products",
+        "Refusing to advertise their products at all",
+        "Only communicating with governments, never consumers",
+        "Publishing scientific research with no marketing purpose"
+      ],
+      "correct": 0,
+      "explain": "TNCs use advertising, branding and media presence (including social media and sponsorship) to shape consumer preferences, build brand loyalty, and normalise the consumption of particular products or diets, often on a global scale.",
+      "misconception": "The influence of advertising is sometimes underestimated; sustained, global-scale media presence by TNCs can meaningfully shift entire populations' food consumption habits over time, contributing to processes like the nutrition transition studied earlier in this unit.",
+      "tag": "How TNCs influence consumption"
+    },
+    {
+      "q": "Food sovereignty is best defined as:",
+      "options": [
+        "A country's total food import value",
+        "The right of people and communities to define their own food and agriculture systems, including what is grown and how it is distributed, rather than this being controlled by external forces",
+        "A measure of a country's total food production",
+        "A synonym for food security with no distinct meaning"
+      ],
+      "correct": 1,
+      "explain": "Food sovereignty refers to the right of people and communities to define and control their own food and agriculture systems — including what is grown, how, and for whom — rather than these decisions being made by external corporations or forces.",
+      "misconception": "Food sovereignty is sometimes confused with food security (having enough food); food sovereignty is specifically about who has control and decision-making power over food systems, which is a distinct concept.",
+      "tag": "What is food sovereignty?"
+    },
+    {
+      "q": "TNC dominance in the food industry can threaten food sovereignty by:",
+      "options": [
+        "Increasing local communities' control over what food is grown and how",
+        "Encouraging dependency on TNC-supplied seeds, inputs or imported foods, reducing local communities' control over their own food systems",
+        "Having no effect on local food systems whatsoever",
+        "Guaranteeing that local diets remain unchanged"
+      ],
+      "correct": 1,
+      "explain": "When TNCs dominate a food system, local communities can become dependent on TNC-supplied seeds, fertilisers or imported foods, reducing their own control over what is grown, how, and for whose benefit — undermining food sovereignty.",
+      "misconception": "It is easy to see TNC involvement purely as adding choice; when it creates dependency and shifts decision-making away from local communities, it can specifically undermine food sovereignty rather than simply adding options.",
+      "tag": "What is food sovereignty?"
+    },
+    {
+      "q": "A positive outcome for consumers from TNC dominance in the food industry can include:",
+      "options": [
+        "Guaranteed elimination of all unhealthy food products",
+        "Greater variety, convenience and often lower prices due to economies of scale",
+        "Complete elimination of consumer choice",
+        "No effect on consumers whatsoever"
+      ],
+      "correct": 1,
+      "explain": "TNC dominance can bring consumers genuine benefits, including greater product variety, convenience, and often lower prices, resulting from the economies of scale and efficient supply chains TNCs can achieve.",
+      "misconception": "TNC influence is sometimes framed as entirely negative; a balanced evaluation recognises genuine consumer benefits alongside the negative outcomes covered elsewhere in this lesson.",
+      "tag": "Outcomes for consumers"
+    },
+    {
+      "q": "A negative outcome for consumers from TNC dominance in the food industry can include:",
+      "options": [
+        "Increased availability of processed, energy-dense foods, contributing to the nutrition transition and rising rates of diseases of affluence",
+        "A guaranteed increase in traditional diets",
+        "Complete elimination of food advertising",
+        "No connection to consumer health at all"
+      ],
+      "correct": 0,
+      "explain": "TNC-driven marketing of processed, energy-dense foods has been linked to the nutrition transition studied earlier in this unit, contributing to rising rates of diseases of affluence such as obesity and type 2 diabetes in many populations.",
+      "misconception": "This links directly back to earlier lessons in this course; TNC influence on diets is a key driver behind the nutrition transition and epidemiological transition, rather than an isolated, unconnected topic.",
+      "tag": "Outcomes for consumers"
+    },
+    {
+      "q": "For local producers, TNC dominance in the food industry can result in:",
+      "options": [
+        "A uniformly positive outcome with no downsides for any producer",
+        "Both potential benefits (such as access to larger markets through contracts) and potential harms (such as being undercut on price or losing bargaining power to larger competitors)",
+        "Guaranteed increased profits for every local producer",
+        "No effect on local producers whatsoever"
+      ],
+      "correct": 1,
+      "explain": "TNC dominance creates a mixed picture for local producers: some gain access to larger markets through supply contracts with TNCs, while others are undercut on price or lose bargaining power and market access to larger, more efficient competitors.",
+      "misconception": "Outcomes for local producers are sometimes assumed to be uniformly negative; in practice, the impact varies depending on whether producers are integrated into TNC supply chains as partners or forced to compete directly against them.",
+      "tag": "Outcomes for local producers"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH13 = {
+  "id": "FH13",
+  "topicNumber": 3,
+  "topicTitle": "Stakeholders in food and health",
+  "title": "Gender roles related to food and health",
+  "href": "/geography/paper-1/option-f/t3-stakeholders-in/l3-gender-roles",
+  "syllabusFocus": "Gender roles related to food and health, including food production/acquisition and disparities in health.",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "Gender disparities in food production",
+      "request": "Explain gender disparities in access to resources for food production"
+    },
+    {
+      "label": "The gender gap in agriculture",
+      "request": "Explain how closing the gender gap in agriculture could reduce global hunger"
+    },
+    {
+      "label": "Gender and household food security",
+      "request": "Explain the link between women's role in the household and food security"
+    },
+    {
+      "label": "Gender disparities in health access",
+      "request": "Explain gender disparities in access to healthcare"
+    },
+    {
+      "label": "Masculinity and men's health risks",
+      "request": "Explain how social norms around masculinity can affect men's health"
+    },
+    {
+      "label": "Strategies to close the gender gap",
+      "request": "Evaluate strategies aimed at reducing gender disparities in food and health"
+    }
+  ],
+  "checklist": [
+    "I can describe gender disparities in access to agricultural resources.",
+    "I can explain how closing the gender gap in agriculture could reduce global hunger.",
+    "I can explain the link between women's control of household income and children's health.",
+    "I can describe barriers preventing women from accessing healthcare in some LICs.",
+    "I can explain how social norms around masculinity can increase health risks for men.",
+    "I can evaluate strategies aimed at reducing gender disparities in food production and health."
+  ],
+  "readinessQuestions": [
+    "What proportion of the world's undernourished people are estimated to be women or girls?",
+    "Explain how closing the gender gap in access to agricultural resources could reduce global hunger.",
+    "Explain one barrier that can prevent women in LICs from accessing healthcare.",
+    "Explain one way that social norms around masculinity can negatively affect men's health.",
+    "Evaluate one strategy aimed at reducing gender disparities in food production or health."
+  ],
+  "quiz": [
+    {
+      "q": "According to UN estimates, approximately what proportion of the world's undernourished people are women or girls?",
+      "options": [
+        "10%",
+        "35%",
+        "60%",
+        "90%"
+      ],
+      "correct": 2,
+      "explain": "UN estimates suggest that around 60% of the undernourished globally are women or girls, reflecting persistent gender inequalities that constrain women's access to food, resources and economic opportunity.",
+      "misconception": "It is sometimes assumed hunger affects men and women equally; global data shows a clear gender imbalance, with women and girls disproportionately affected.",
+      "tag": "Gender disparities in food production"
+    },
+    {
+      "q": "Gender inequities identified as agricultural gender gaps include:",
+      "options": [
+        "Guaranteed equal access to land and credit for men and women in all countries",
+        "Unequal access to rural resources and services, undervaluation of women's roles, gender-neutral policies that ignore real disparities, and a lack of gender-specific data",
+        "A complete absence of any gender-based differences in agriculture",
+        "Women having greater legal land rights than men in most countries"
+      ],
+      "correct": 1,
+      "explain": "Documented agricultural gender gaps include unequal access to land, credit, labour markets and services; the undervaluation of women's roles and contributions; policies that claim to be gender-neutral but fail to address real disparities; and a lack of gender-specific data to identify and address these gaps.",
+      "misconception": "‘Gender-neutral’ policy is sometimes assumed to be automatically fair; if underlying disparities already exist, a gender-neutral approach can fail to address them and even reinforce existing inequality.",
+      "tag": "Gender disparities in food production"
+    },
+    {
+      "q": "According to FAO research, closing the gender gap in access to productive agricultural resources (such as land, credit, machinery or chemicals) could:",
+      "options": [
+        "Have no measurable effect on global hunger",
+        "Eliminate yield gaps of 20-30% between men and women, increase domestic agricultural output by 2.5-4%, and result in around 100 million fewer people living in hunger",
+        "Reduce global agricultural output significantly",
+        "Only benefit women, with no wider economic effect"
+      ],
+      "correct": 1,
+      "explain": "FAO research estimates that closing the gender gap in access to productive resources could eliminate yield gaps of 20-30% between men and women farmers, increase domestic agricultural output by 2.5-4%, and result in approximately 100 million fewer people living in hunger worldwide.",
+      "misconception": "Gender equality in agriculture is sometimes framed as a purely social justice issue disconnected from food security outcomes; this data shows it also has a very large, measurable effect on global hunger.",
+      "tag": "The gender gap in agriculture"
+    },
+    {
+      "q": "Research on household food security has found that when women control the household budget:",
+      "options": [
+        "Children's chances of survival decrease significantly",
+        "Children's chances of survival rise by around 20%, as women are more likely to spend income on food and children's needs",
+        "There is no measurable effect on children",
+        "Household food spending decreases substantially"
+      ],
+      "correct": 1,
+      "explain": "FAO research suggests that children's chances of survival rise by about 20% when women control the household budget, since women are statistically more likely than men to spend income received on food and children's needs.",
+      "misconception": "Household decision-making is sometimes assumed to have little bearing on nutrition outcomes; research shows who controls spending within a household can have a very direct, measurable effect on child survival.",
+      "tag": "Gender and household food security"
+    },
+    {
+      "q": "The World Food Programme estimates that the proportion of time spent preparing household food that is done by women globally is approximately:",
+      "options": [
+        "10-15%",
+        "85-90%",
+        "50%, split equally with men",
+        "This has never been measured"
+      ],
+      "correct": 1,
+      "explain": "The WFP estimates that 85-90% of the time spent preparing household food is done by women globally, reflecting the significant, often unrecognised role women play in household food security.",
+      "misconception": "Domestic food preparation is sometimes treated as a minor detail; given the scale of time women dedicate to it, it is directly relevant to understanding household-level food and nutrition outcomes.",
+      "tag": "Gender and household food security"
+    },
+    {
+      "q": "A specific barrier that can prevent women in some LICs from accessing healthcare is:",
+      "options": [
+        "An abundance of female doctors and paramedics in every country",
+        "Low levels of female education meaning most paramedics and doctors are male, which can be culturally inappropriate for treating women's gynaecological health problems, especially in rural areas",
+        "Free and unrestricted healthcare access for all women",
+        "Healthcare systems designed specifically around women's needs in every country"
+      ],
+      "correct": 1,
+      "explain": "In many LICs, low levels of female education have historically meant that most paramedics and doctors are male. In many traditional societies, it is considered inappropriate for an unrelated man to examine a woman, which is a particular problem for the gynaecological health issues many women experience, especially in rural areas.",
+      "misconception": "Healthcare access barriers are sometimes assumed to be purely about distance or cost; cultural and social barriers, such as the gender of available medical staff, can be just as significant.",
+      "tag": "Gender disparities in health access"
+    },
+    {
+      "q": "Globally, women in the workforce are reported to earn approximately how much less than men, with a large proportion working in the informal economy?",
+      "options": [
+        "23% less, with 75% of women in developing regions working in the informal economy",
+        "They earn more than men on average globally",
+        "Exactly the same as men in every country",
+        "2% less, a negligible difference"
+      ],
+      "correct": 0,
+      "explain": "Globally, women earn approximately 23% less than men, and 75% of women in developing regions work in the informal economy, where they are less likely to have employment contracts, legal rights or healthcare, and are often not paid enough to escape poverty — a major barrier to good health.",
+      "misconception": "The gender pay gap and informal employment are sometimes seen as separate issues from health; poverty resulting from both is one of the biggest barriers to accessing healthy food and adequate healthcare.",
+      "tag": "Gender disparities in health access"
+    },
+    {
+      "q": "Social norms around masculinity can negatively affect men's health because:",
+      "options": [
+        "Men are biologically unable to become unwell",
+        "Taking action on health is sometimes viewed as ‘unmanly’ in some communities, reducing men's willingness to seek health services, and masculinity can be expressed through risky behaviours such as violence or unsafe practices",
+        "Masculinity has no connection to health-seeking behaviour anywhere in the world",
+        "Men are statistically less likely to die from any cause than women"
+      ],
+      "correct": 1,
+      "explain": "In many communities, seeking healthcare is viewed as ‘unmanly’, reducing men's willingness to access health services. Masculinity can also be expressed through risky behaviours, such as violence or unsafe sexual practices, that increase men's exposure to health risks including tuberculosis, road traffic deaths, and HIV/AIDS.",
+      "misconception": "Gender disparities in health are sometimes assumed to disadvantage only women; men can also face specific, gendered health risks linked to social expectations of masculinity and reduced health-seeking behaviour.",
+      "tag": "Masculinity and men's health risks"
+    },
+    {
+      "q": "A strategy identified for improving gender disparities in food production and health is to:",
+      "options": [
+        "Remove all family planning and sexual health programmes",
+        "Tackle discriminatory laws around land ownership, boost gender equality in agriculture and the labour market, update education and employment policies to be more gender-sensitive, and expand access to reproductive health services",
+        "Reduce funding for all women's education programmes",
+        "Increase gender-based restrictions on women's employment"
+      ],
+      "correct": 1,
+      "explain": "Recommended strategies include tackling discriminatory land ownership laws, initiating programmes to boost gender equality in agriculture and the labour market, updating education and employment policies to be more gender-sensitive, developing food security strategies that improve women's access to childcare and credit, and expanding reproductive health services for the poorest women.",
+      "misconception": "Effective strategies typically need to address multiple interlinked barriers (legal, economic, educational and health-related) together, rather than any single intervention in isolation.",
+      "tag": "Strategies to close the gender gap"
+    },
+    {
+      "q": "Family planning programmes can help reduce gender disparities in health because they:",
+      "options": [
+        "Have no effect on maternal health outcomes",
+        "Reduce the number of unplanned pregnancies and maternal deaths (including deaths associated with unsafe abortions), and can empower women with greater control over their own lives",
+        "Are only relevant to men's health",
+        "Increase maternal mortality rates"
+      ],
+      "correct": 1,
+      "explain": "Family planning programmes reduce the number of unplanned pregnancies and decrease maternal deaths, including those associated with unsafe abortions in cases of unwanted pregnancy. Family planning and sexual health counselling can also empower women, giving them greater control over their own lives, alongside similar education and counselling for men and boys.",
+      "misconception": "Family planning is sometimes framed narrowly as being only about limiting births; it also has direct, measurable effects on reducing maternal mortality and on wider women's empowerment.",
+      "tag": "Strategies to close the gender gap"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH14 = {
+  "id": "FH14",
+  "topicNumber": 3,
+  "topicTitle": "Stakeholders in food and health",
+  "title": "Factors affecting the severity of famine",
+  "href": "/geography/paper-1/option-f/t3-stakeholders-in/l4-factors",
+  "syllabusFocus": "Factors affecting the severity of famine, including governance, the power of the media and access to international aid.",
+  "starterButtons": [
+    {
+      "label": "Teach me this lesson",
+      "request": "Give me a full overview of this lesson"
+    },
+    {
+      "label": "Food insecurity vs famine",
+      "request": "Explain the difference between food insecurity and famine"
+    },
+    {
+      "label": "Food Availability Deficit (FAD)",
+      "request": "Explain what a Food Availability Deficit is, with examples"
+    },
+    {
+      "label": "Food Entitlement Deficit (FED)",
+      "request": "Explain what a Food Entitlement Deficit is, with examples"
+    },
+    {
+      "label": "The role of governance",
+      "request": "Explain how governance affects the severity of famine"
+    },
+    {
+      "label": "The power of the media",
+      "request": "Explain how the media affects the severity of famine"
+    },
+    {
+      "label": "Access to international aid",
+      "request": "Explain how access to international aid affects the severity of famine"
+    },
+    {
+      "label": "The 2008 food price spike",
+      "request": "Explain the causes and consequences of the 2008 global food price spike"
+    }
+  ],
+  "checklist": [
+    "I can explain the difference between food insecurity and famine.",
+    "I can explain what a Food Availability Deficit (FAD) is, with an example.",
+    "I can explain what a Food Entitlement Deficit (FED) is, with an example.",
+    "I can explain how governance can affect the severity of famine.",
+    "I can explain how the media can affect the severity of famine.",
+    "I can explain how access to international aid can affect the severity of famine.",
+    "I can use the 2008 global food price spike as an example of these factors interacting."
+  ],
+  "readinessQuestions": [
+    "What is the difference between food insecurity and famine?",
+    "Explain the difference between a Food Availability Deficit (FAD) and a Food Entitlement Deficit (FED), using one example of each.",
+    "Explain how poor governance can worsen the severity of a famine.",
+    "Explain how the media can affect the international response to a famine.",
+    "Explain how the 2008 global food price spike illustrates the causes of food insecurity."
+  ],
+  "quiz": [
+    {
+      "q": "Famine is best distinguished from ongoing food insecurity as:",
+      "options": [
+        "Exactly the same thing, with no meaningful distinction",
+        "An extreme, geographically specific event involving widespread acute malnutrition and mortality due to a severe lack of food access, rather than a chronic, ongoing condition",
+        "A term only used to describe drought",
+        "A condition that only ever affects wealthy countries"
+      ],
+      "correct": 1,
+      "explain": "Famine refers to an extreme, geographically specific event involving widespread acute malnutrition and significant mortality due to a severe lack of food access, distinguishing it from the broader, more chronic condition of food insecurity.",
+      "misconception": "Food insecurity and famine are sometimes used interchangeably; famine specifically describes an extreme, acute crisis, while food insecurity can describe a more chronic, lower-severity condition.",
+      "tag": "Food insecurity vs famine"
+    },
+    {
+      "q": "A Food Availability Deficit (FAD) refers to famine caused primarily by:",
+      "options": [
+        "A physical shortage of food itself, such as crop failure caused by drought, pests or land degradation",
+        "People being unable to afford food that is otherwise available",
+        "Government policy alone, with no physical cause",
+        "A surplus of food with no distribution problems"
+      ],
+      "correct": 0,
+      "explain": "A Food Availability Deficit (FAD) describes famine driven primarily by a physical shortage of food itself — for example, crop failure caused by drought, pest outbreaks, or land degradation reducing the amount of food that is physically available.",
+      "misconception": "FAD and FED are commonly confused; FAD is about there simply not being enough food available (a physical cause), while FED is about food being available but people lacking the means to access it (an economic/political cause).",
+      "tag": "Food Availability Deficit (FAD)"
+    },
+    {
+      "q": "A Food Entitlement Deficit (FED) refers to famine caused primarily by:",
+      "options": [
+        "A total physical absence of food anywhere in the region",
+        "People lacking the economic or political means (income, rights or access) to obtain food that is otherwise available, such as due to poverty or unequal distribution",
+        "Excess food production with no other factors involved",
+        "A term with no real application to famine"
+      ],
+      "correct": 1,
+      "explain": "A Food Entitlement Deficit (FED) describes famine driven primarily by people lacking the economic or political means to access food that is otherwise available — for example, due to poverty, unemployment, unequal distribution, or being excluded from markets — rather than a physical absence of food.",
+      "misconception": "It is a common exam error to assume famine always means ‘no food exists’; FED-driven famines show that food can be physically present in a country or region while many people still cannot access it.",
+      "tag": "Food Entitlement Deficit (FED)"
+    },
+    {
+      "q": "During the 2008 global food price spike, staple food prices increased dramatically; wheat prices rose by approximately:",
+      "options": [
+        "5%",
+        "130%",
+        "1000%",
+        "They fell during this period"
+      ],
+      "correct": 1,
+      "explain": "During the 2008 food price spike, wheat prices rose by around 130%, with sorghum rising by 87% and rice by 74%, contributing to riots in 36 countries and, in Haiti, the toppling of the government.",
+      "misconception": "The scale of the 2008 price spike is easy to underestimate; increases of this size had severe, immediate political and social consequences in many countries simultaneously.",
+      "tag": "The 2008 food price spike"
+    },
+    {
+      "q": "The 2008 food price spike caused riots or civil unrest in a number of countries, including:",
+      "options": [
+        "Only wealthy, high-income countries",
+        "Countries including Yemen, Somalia, Pakistan, Egypt, Indonesia and several others",
+        "No countries at all",
+        "Only countries in Europe"
+      ],
+      "correct": 1,
+      "explain": "The 2008 food price spike caused riots or civil unrest in a number of countries, including Yemen, Somalia, Senegal, Pakistan, Mozambique, Indonesia, India, Egypt, Ivory Coast, Cameroon, Burkina Faso, the Philippines and Bangladesh — illustrating how a Food Entitlement Deficit can spark widespread instability.",
+      "misconception": "It is worth noting Yemen's appearance on this list even in 2008, well before the conflict that began in 2014 — a useful piece of context for the Yemen case study covered later in this topic.",
+      "tag": "The 2008 food price spike"
+    },
+    {
+      "q": "Water stress is a significant physical factor affecting food availability because:",
+      "options": [
+        "Farming has no meaningful water requirements",
+        "Farming accounts for around 70% of the world's freshwater use, and 2.8 billion people already live in areas of water stress, a figure predicted to rise significantly by 2030",
+        "All countries have unlimited access to fresh water",
+        "Water stress only affects countries with no agriculture"
+      ],
+      "correct": 1,
+      "explain": "Farming accounts for around 70% of the world's use of fresh water extracted for human use. An estimated 2.8 billion people currently live in areas of water stress, a figure predicted to rise to 3.9 billion by 2030 as irrigation demand increases by 50-100% by 2025, directly threatening food availability.",
+      "misconception": "Water stress is sometimes seen as a distant future problem; the scale of current water stress already directly threatens present-day food production in many regions.",
+      "tag": "Food Availability Deficit (FAD)"
+    },
+    {
+      "q": "The Striga weed illustrates a Food Availability Deficit factor because it:",
+      "options": [
+        "Improves soil fertility for neighbouring crops",
+        "Is a parasitic weed that competes with crops for nutrients, with seeds remaining viable in soil for up to 20 years, causing yield losses of 40-100% across around 100 million hectares of infested land in Africa",
+        "Has no effect on crop yields",
+        "Only affects crops grown in Europe"
+      ],
+      "correct": 1,
+      "explain": "The Striga weed is a parasitic plant that competes with crops for nutrients. Its seeds can lie viable in soil for up to 20 years, and it infests around 100 million hectares of land in Africa, causing yield losses of 40-100% where it takes hold — a clear physical (FAD) threat to food availability.",
+      "misconception": "Pests and weeds are sometimes treated as a minor agricultural nuisance; examples like Striga show they can cause total or near-total crop loss across huge areas, directly threatening food security.",
+      "tag": "Food Availability Deficit (FAD)"
+    },
+    {
+      "q": "Governance can affect the severity of a famine because:",
+      "options": [
+        "Government decisions have no bearing on famine outcomes",
+        "Decisions such as how aid and resources are distributed, whether conflict is allowed to continue, and how food security policy is prioritised can significantly worsen or lessen a famine's impact",
+        "All governments respond to famine identically",
+        "Famine severity is determined only by rainfall"
+      ],
+      "correct": 1,
+      "explain": "Governance — including how effectively (and fairly) a government distributes aid and resources, whether it allows or resolves conflict, and how it prioritises food security policy — can significantly worsen or reduce the severity of a famine, independent of the underlying physical or economic causes.",
+      "misconception": "Famine severity is sometimes seen as determined purely by physical shocks like drought; governance decisions about response and distribution can be just as decisive in how severe the resulting crisis becomes.",
+      "tag": "The role of governance"
+    },
+    {
+      "q": "The media can affect the severity of famine and the international response to it by:",
+      "options": [
+        "Having no influence on international aid decisions",
+        "Raising international awareness and pressure for a response to a famine, meaning under-reported crises can receive comparatively less international aid and attention",
+        "Guaranteeing equal aid to every famine, regardless of media coverage",
+        "Only reporting on famines after they have fully ended"
+      ],
+      "correct": 1,
+      "explain": "Media coverage can raise international awareness and generate pressure for a humanitarian response. This means famines or crises that receive less media attention (sometimes called ‘forgotten crises’) can receive comparatively less international aid and funding than more widely reported events.",
+      "misconception": "It is tempting to assume aid is distributed purely based on need; in practice, the level of media attention a crisis receives can significantly shape how much international support it actually attracts.",
+      "tag": "The power of the media"
+    },
+    {
+      "q": "Access to international aid can affect the severity of famine because:",
+      "options": [
+        "Aid delivery is always guaranteed and unaffected by local conditions",
+        "Conflict, insecurity or blocked access routes can prevent aid from reaching the people who need it most, worsening the severity of a famine even where aid has been pledged",
+        "Famine severity is entirely unrelated to aid access",
+        "International aid is never needed to address famine"
+      ],
+      "correct": 1,
+      "explain": "Even where international aid has been pledged, conflict, insecurity, damaged infrastructure or blocked access routes can prevent that aid from actually reaching the people who need it most, worsening the severity of a famine — a factor explored in detail in the Yemen case study later in this topic.",
+      "misconception": "Pledged aid is sometimes assumed to be equivalent to delivered aid; the practical ability to physically access affected populations is a separate and often decisive factor in famine severity.",
+      "tag": "Access to international aid"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH15 = {
+  "id": "FH15",
+  "topicNumber": 3,
+  "topicTitle": "Stakeholders in food and health",
+  "title": "Case study: Causes of famine and food insecurity in Yemen",
+  "href": "/geography/paper-1/option-f/t3-stakeholders-in/l5-case-study-a",
+  "syllabusFocus": "One case study of a famine-stricken country or area, evaluating the human and physical factors causing food insecurity and famine: Yemen.",
+  "starterButtons": [
+    {
+      "label": "Teach me this case study",
+      "request": "Give me a full overview of this case study"
+    },
+    {
+      "label": "Background to the Yemen conflict",
+      "request": "Outline the background to the conflict in Yemen since 2014"
+    },
+    {
+      "label": "Human/conflict-related causes",
+      "request": "Explain how conflict has caused food insecurity in Yemen"
+    },
+    {
+      "label": "The scale of malnutrition in Yemen",
+      "request": "Describe the scale of malnutrition among children and women in Yemen"
+    },
+    {
+      "label": "Healthcare collapse",
+      "request": "Explain how the collapse of healthcare has worsened the crisis in Yemen"
+    },
+    {
+      "label": "Measuring the crisis: the IPC scale",
+      "request": "Explain how the Integrated Food Security Phase Classification is used to measure famine severity"
+    },
+    {
+      "label": "Which governorates are worst affected?",
+      "request": "Explain which governorates in Yemen are most at risk of famine and why"
+    }
+  ],
+  "checklist": [
+    "I can outline the background to the conflict in Yemen since 2014.",
+    "I can explain how conflict has driven food insecurity in Yemen.",
+    "I can describe the scale of malnutrition among children and women in Yemen.",
+    "I can explain how healthcare collapse has worsened the crisis.",
+    "I can describe how the Integrated Food Security Phase Classification (IPC) is used to measure severity.",
+    "I can identify the governorates in Yemen most at risk of famine and explain why."
+  ],
+  "readinessQuestions": [
+    "Briefly outline the background to the conflict in Yemen since 2014.",
+    "Explain two ways the conflict has caused food insecurity in Yemen.",
+    "What proportion of children under five are chronically malnourished (stunted) in the worst-affected governorates of Yemen?",
+    "Explain how the collapse of the healthcare system has worsened Yemen's food and nutrition crisis.",
+    "Why are Taiz and Hodeidah governorates considered to be at particularly high risk of famine?"
+  ],
+  "quiz": [
+    {
+      "q": "The conflict in Yemen, which is central to this case study, began when:",
+      "options": [
+        "Houthi Shiite rebels swept into the capital Sana'a in September 2014, overthrowing President Abed-Rabbo Mansour Hadi's internationally recognised government",
+        "Yemen experienced a natural disaster with no political dimension",
+        "A trade dispute escalated into armed conflict in 2020",
+        "The conflict has no clear starting point"
+      ],
+      "correct": 0,
+      "explain": "Yemen has been engulfed in civil war since September 2014, when Houthi Shiite rebels swept into the capital, Sana'a, and overthrew President Abed-Rabbo Mansour Hadi's internationally recognised government.",
+      "misconception": "The Yemen crisis is sometimes assumed to be purely a natural disaster or purely economic; its roots lie specifically in this 2014 political and military takeover.",
+      "tag": "Background to the Yemen conflict"
+    },
+    {
+      "q": "In March 2015, the conflict in Yemen escalated significantly when:",
+      "options": [
+        "The United Nations declared Yemen independent",
+        "A Saudi-led coalition, backed by the United States, began a military campaign against Houthi forces allied with ousted former president Ali Abdullah Saleh",
+        "All fighting in Yemen ceased entirely",
+        "Yemen's government relocated permanently to Sana'a"
+      ],
+      "correct": 1,
+      "explain": "In March 2015, a Saudi-led coalition, backed by the United States, began a campaign against Houthi forces (who were allied with ousted former president Ali Abdullah Saleh) in support of Hadi's government, significantly escalating the conflict into a wider regional war.",
+      "misconception": "It is easy to see this as a purely internal Yemeni conflict; the 2015 escalation shows how external, regional powers became directly involved militarily.",
+      "tag": "Background to the Yemen conflict"
+    },
+    {
+      "q": "The conflict in Yemen has driven food insecurity primarily by:",
+      "options": [
+        "Having no effect on people's ability to buy food",
+        "Destroying people's livelihoods and ability to purchase food, disrupting markets, and damaging infrastructure needed to produce and distribute food",
+        "Increasing everyone's income across the country",
+        "Improving access to healthcare and food distribution networks"
+      ],
+      "correct": 1,
+      "explain": "The conflict has destroyed people's livelihoods and their ability to purchase food, making it difficult for many Yemenis to meet even minimal food and nutrition needs — a clear illustration of a Food Entitlement Deficit driven by conflict.",
+      "misconception": "It is worth explicitly linking this case study to the FAD/FED framework from the previous lesson: Yemen's crisis is driven overwhelmingly by a Food Entitlement Deficit (conflict destroying access and livelihoods), rather than a simple physical shortage of food.",
+      "tag": "Human/conflict-related causes"
+    },
+    {
+      "q": "In some of the worst-affected governorates of Yemen, the proportion of children under five who are chronically malnourished (stunted) reaches:",
+      "options": [
+        "Around 5%",
+        "Up to 67%",
+        "100%, with no exceptions",
+        "This has never been measured in Yemen"
+      ],
+      "correct": 1,
+      "explain": "In some governorates of Yemen, up to 67% of children under five are chronically malnourished (stunted), while rates of acute malnutrition (wasting) exceed 25% in some areas — placing their physical and mental development at severe, often irreversible risk.",
+      "misconception": "The scale of these figures is easy to underestimate; malnutrition at this level affects the majority of children in the worst-affected areas, not a small minority.",
+      "tag": "The scale of malnutrition in Yemen"
+    },
+    {
+      "q": "Among women of reproductive age (15-49) in Yemen, the nutrition situation is also serious: an estimated 25% are underweight, and what proportion are anaemic?",
+      "options": [
+        "Under 5%",
+        "More than four-fifths (over 80%)",
+        "Exactly half",
+        "Anaemia is not a recorded issue in Yemen"
+      ],
+      "correct": 1,
+      "explain": "Among women of reproductive age in Yemen, around 25% are underweight and more than four-fifths (over 80%) are anaemic, which can lead to maternal death and disabling health complications, and increases risks during pregnancy and breastfeeding.",
+      "misconception": "Malnutrition impacts are sometimes discussed only in relation to children; the scale of anaemia and underweight status among women of reproductive age in Yemen shows the crisis affects multiple demographic groups severely.",
+      "tag": "The scale of malnutrition in Yemen"
+    },
+    {
+      "q": "The collapse of Yemen's healthcare system has worsened the crisis because:",
+      "options": [
+        "All health facilities in Yemen remained fully functional throughout the conflict",
+        "An estimated 14.8 million people lack access to basic healthcare, and only around 45% of surveyed health facilities were found to be fully functional, facing severe shortages of medicine, equipment and staff",
+        "Healthcare access has no connection to malnutrition outcomes",
+        "Yemen's healthcare system was unaffected by the conflict"
+      ],
+      "correct": 1,
+      "explain": "An estimated 14.8 million people in Yemen lack access to basic healthcare, and a November 2016 survey found only around 45% of 3,507 health facilities were fully functional, with most facing severe shortages of medicine, equipment and staff — compounding the effects of malnutrition.",
+      "misconception": "Famine crises are sometimes analysed purely in terms of food supply; the collapse of healthcare infrastructure is a critical, compounding factor that worsens outcomes for those already malnourished.",
+      "tag": "Healthcare collapse"
+    },
+    {
+      "q": "The Integrated Food Security Phase Classification (IPC) is used by organisations responding to crises like Yemen's to:",
+      "options": [
+        "Set global food prices",
+        "Provide a standard, five-point international scale for classifying the severity of food insecurity in a given area, from minimal to famine",
+        "Measure only rainfall levels",
+        "Replace the need for any on-the-ground assessment"
+      ],
+      "correct": 1,
+      "explain": "The Integrated Food Security Phase Classification (IPC) is the standard international five-point scale used to classify the severity of food insecurity, ranging from minimal, through stressed, crisis and emergency, to famine — allowing responses to be prioritised and compared consistently across countries.",
+      "misconception": "Without a standardised scale like the IPC, comparing the severity of different crises (or tracking how one crisis changes over time) would be far less consistent and harder to act on.",
+      "tag": "Measuring the crisis: the IPC scale"
+    },
+    {
+      "q": "At the time of the data used in this case study, Yemen's crisis on the IPC scale included approximately:",
+      "options": [
+        "No people classified as food insecure at any level",
+        "17 million people facing severe food insecurity, including 6.8 million in the ‘emergency’ phase (one step from famine) and a further 10.2 million in ‘crisis’",
+        "Only a few thousand people affected nationally",
+        "The entire population equally affected with no variation by area"
+      ],
+      "correct": 1,
+      "explain": "At the time of this data, around 17 million people in Yemen were facing severe food insecurity, with 6.8 million classified in the IPC ‘emergency’ phase (one step from famine) and a further 10.2 million in ‘crisis’ — reflecting a 21% increase in hunger levels since the previous year.",
+      "misconception": "It is worth remembering the IPC phases are not just descriptive labels; ‘emergency’ specifically means a population is one classification step away from famine itself, which is the most severe possible IPC phase.",
+      "tag": "Measuring the crisis: the IPC scale"
+    },
+    {
+      "q": "Taiz and Hodeidah governorates are considered to be at particularly heightened risk of famine in Yemen because they:",
+      "options": [
+        "Have experienced no conflict at all",
+        "Are home to almost 25% of Yemen's population and have been the scene of intense conflict since the outbreak of civil war in 2015",
+        "Are the wealthiest regions of Yemen with no food insecurity",
+        "Have no connection to the wider national food security crisis"
+      ],
+      "correct": 1,
+      "explain": "Taiz and Hodeidah governorates are home to almost 25% of Yemen's roughly 28 million-strong population and have been the scene of particularly intense conflict since the civil war began, placing them at heightened risk of famine compared to less directly conflict-affected areas.",
+      "misconception": "Famine risk within a single country is rarely uniform; identifying which specific governorates face the highest risk (and why) is an important geographical skill this case study develops.",
+      "tag": "Which governorates are worst affected?"
+    },
+    {
+      "q": "Overall, this case study shows that Yemen's food insecurity crisis is best explained as:",
+      "options": [
+        "A purely physical (FAD) crisis with no human causes",
+        "A largely human-driven (FED) crisis, in which conflict has destroyed livelihoods, healthcare and infrastructure, severely reducing people's ability to access food that may otherwise be available",
+        "A crisis with no identifiable causes at all",
+        "A crisis entirely unrelated to governance or conflict"
+      ],
+      "correct": 1,
+      "explain": "Yemen's crisis is overwhelmingly a Food Entitlement Deficit (FED): conflict has destroyed livelihoods, healthcare and infrastructure, severely limiting people's economic and physical ability to access food, rather than there being a simple absence of food in the country.",
+      "misconception": "This ties the whole case study back to the FAD/FED framework introduced in the previous lesson — Yemen is a clear real-world example of a human-driven, conflict-based Food Entitlement Deficit.",
+      "tag": "Human/conflict-related causes"
+    }
+  ]
+};
+
+window.SBL_LESSONS.FH16 = {
+  "id": "FH16",
+  "topicNumber": 3,
+  "topicTitle": "Stakeholders in food and health",
+  "title": "Case study: Attempts to tackle food insecurity in Yemen",
+  "href": "/geography/paper-1/option-f/t3-stakeholders-in/l6-case-study",
+  "syllabusFocus": "One case study of attempts to tackle food insecurity, and the difficulties faced in the shorter and longer term: Yemen.",
+  "starterButtons": [
+    {
+      "label": "Teach me this case study",
+      "request": "Give me a full overview of this case study"
+    },
+    {
+      "label": "The WFP's Emergency Operation",
+      "request": "Describe the WFP's Emergency Operation in Yemen"
+    },
+    {
+      "label": "Cash and voucher assistance",
+      "request": "Explain how cash and voucher assistance works as a strategy in Yemen"
+    },
+    {
+      "label": "Targeted nutrition programmes",
+      "request": "Describe the targeted nutrition programmes used for malnourished children and mothers in Yemen"
+    },
+    {
+      "label": "How the WFP decides who receives aid",
+      "request": "Explain how the WFP prioritises which households receive support in Yemen"
+    },
+    {
+      "label": "Short-term difficulties: funding",
+      "request": "Explain the shorter-term difficulties faced in tackling food insecurity in Yemen"
+    },
+    {
+      "label": "Long-term difficulties: conflict and scale",
+      "request": "Explain the longer-term difficulties faced in tackling food insecurity in Yemen"
+    }
+  ],
+  "checklist": [
+    "I can describe the WFP's Emergency Operation in Yemen.",
+    "I can explain how cash and voucher assistance works as a strategy.",
+    "I can describe the targeted nutrition programmes used for malnourished children and mothers.",
+    "I can explain how the WFP decides which households receive priority support.",
+    "I can explain the shorter-term difficulties faced in tackling food insecurity in Yemen.",
+    "I can explain the longer-term difficulties faced in tackling food insecurity in Yemen."
+  ],
+  "readinessQuestions": [
+    "Describe one strategy used by the WFP to tackle food insecurity in Yemen.",
+    "Explain how the Cash Voucher through Traders Network (CV-TN) scheme works.",
+    "Which group of people receives the highest-priority share of household targeting under the WFP's criteria, and why?",
+    "Explain one shorter-term difficulty faced in tackling food insecurity in Yemen.",
+    "Explain one longer-term difficulty faced in tackling food insecurity in Yemen."
+  ],
+  "quiz": [
+    {
+      "q": "The WFP's Emergency Operation in Yemen aimed to provide General Food Assistance and nutrition support to approximately:",
+      "options": [
+        "A few thousand people only",
+        "6.8 million people through General Food Assistance and 2.9 million through critical nutrition support",
+        "The entire population of the Arabian Peninsula",
+        "Only people living in the capital city"
+      ],
+      "correct": 1,
+      "explain": "The WFP's Emergency Operation aimed to assist 6.8 million people through General Food Assistance (an in-kind food basket and commodity vouchers) and 2.9 million people through critical nutrition support, focusing on those classified as severely food insecure.",
+      "misconception": "It is worth noting the WFP explicitly targeted only the most severely food-insecure people with this operation, rather than Yemen's entire food-insecure population, due to limited resources.",
+      "tag": "The WFP's Emergency Operation"
+    },
+    {
+      "q": "The WFP's Cash Voucher through Traders Network (CV-TN) scheme in Yemen works by:",
+      "options": [
+        "Distributing only raw cash with no restrictions on its use",
+        "Providing beneficiaries with commodity vouchers that can be redeemed for food entitlements at participating local retail outlets linked to WFP's food service provider",
+        "Requiring beneficiaries to travel to a different country to redeem support",
+        "Replacing all other forms of assistance in Yemen entirely"
+      ],
+      "correct": 1,
+      "explain": "Under the CV-TN scheme, beneficiaries redeem commodity vouchers distributed by WFP's cooperating partners for food entitlements at the closest participating retail outlet linked to WFP's food service provider — a market-based transfer modality identified as suitable and cost-effective for the Yemeni context.",
+      "misconception": "Voucher-based assistance is sometimes assumed to be identical to cash assistance; vouchers specifically restrict spending to food entitlements at approved outlets, rather than being usable for any purpose.",
+      "tag": "Cash and voucher assistance"
+    },
+    {
+      "q": "The WFP's targeted supplementary feeding programme in Yemen treats moderate acute malnutrition in children aged 6 to 59 months using:",
+      "options": [
+        "No specific nutritional product, only general food aid",
+        "A ready-to-use supplementary food called Plumpy'Sup, providing 535 kcal per day for an average of 90 days",
+        "A programme that only accepts children over the age of 10",
+        "Only medical treatment with no nutritional component"
+      ],
+      "correct": 1,
+      "explain": "The WFP's targeted supplementary feeding programme treats moderate acute malnutrition in children aged 6 to 59 months using Plumpy'Sup, a ready-to-use supplementary food providing 535 kcal per day for an average of 90 days.",
+      "misconception": "Nutrition interventions are sometimes assumed to be generic food aid; targeted programmes like this use specific, ready-to-use therapeutic products designed for the particular nutritional needs of young children.",
+      "tag": "Targeted nutrition programmes"
+    },
+    {
+      "q": "Acutely malnourished pregnant and breastfeeding women in Yemen receive support from the WFP in the form of:",
+      "options": [
+        "No specific support of any kind",
+        "A monthly 6 kg take-home ration of a fortified blended flour called SuperCereal, from the beginning of the second trimester through to six months of breastfeeding",
+        "A one-off payment with no follow-up",
+        "Support only available to women in urban areas"
+      ],
+      "correct": 1,
+      "explain": "Acutely malnourished pregnant and breastfeeding women receive a monthly 6 kg take-home ration of SuperCereal, a fortified blended flour, provided from the beginning of the second trimester of pregnancy through to six months of breastfeeding.",
+      "misconception": "This programme specifically targets a nutritionally vulnerable group (pregnant and breastfeeding women) separately from the child-focused Plumpy'Sup programme, reflecting their distinct nutritional needs.",
+      "tag": "Targeted nutrition programmes"
+    },
+    {
+      "q": "The WFP prioritises which districts receive support in Yemen mainly based on:",
+      "options": [
+        "Random selection with no clear method",
+        "The percentage of severely food-insecure households in a district, using a 20% threshold, with some districts slightly below this also included to minimise the risk of excluding vulnerable people",
+        "Which districts have the largest population, regardless of need",
+        "Which districts request support first, on a first-come-first-served basis"
+      ],
+      "correct": 1,
+      "explain": "District prioritisation is based mainly on the percentage of severely food-insecure households, using a 20% threshold — any district with 20% or more severely food-insecure households is included, and some districts slightly below this threshold are also included to minimise the risk of excluding genuinely vulnerable people.",
+      "misconception": "Targeting decisions might seem arbitrary from the outside; in practice, they follow a defined, data-driven method designed to balance limited resources against the risk of missing vulnerable households.",
+      "tag": "How the WFP decides who receives aid"
+    },
+    {
+      "q": "Under the WFP's household targeting criteria in Yemen, the single highest-priority group (around 35% of the estimated share) is:",
+      "options": [
+        "Elderly-headed households with no income",
+        "Households with pregnant and lactating women and/or children under five registered in curative treatment for severe or moderate acute malnutrition (SAM/MAM)",
+        "Households headed by physically-challenged persons",
+        "Child-headed households"
+      ],
+      "correct": 1,
+      "explain": "Households with pregnant and lactating women (PLW) and/or children under five registered in curative activities for Severe Acute Malnutrition (SAM) or Moderate Acute Malnutrition (MAM) are given the highest household targeting priority, at an estimated 35% share, reflecting the severe nutritional vulnerability of these groups.",
+      "misconception": "It is worth linking this back to the nutrition programmes covered earlier in this lesson; the highest-priority targeting category is directly tied to the same malnutrition treatment programmes (Plumpy'Sup and SuperCereal).",
+      "tag": "How the WFP decides who receives aid"
+    },
+    {
+      "q": "A significant shorter-term difficulty faced by the WFP in tackling food insecurity in Yemen is:",
+      "options": [
+        "Having guaranteed, unlimited funding for every planned activity",
+        "The risk of funding shortfalls, which could force the WFP to prioritise only those most at risk of dying from starvation, rather than meeting all its planned life-saving objectives",
+        "No difficulties exist in the shorter term",
+        "Having too much funding relative to the scale of need"
+      ],
+      "correct": 1,
+      "explain": "A key shorter-term difficulty is the risk of funding shortfalls: the WFP has acknowledged it may not be able to raise the resources needed to support all 6.8 million people planned for assistance, and if funding is insufficient, it would have no option but to prioritise within the most vulnerable, focusing on those most at risk of dying from starvation.",
+      "misconception": "It is tempting to assume a well-known operation like this is always fully funded; the WFP's own assessment shows funding shortfalls are a genuine, acknowledged risk with direct, life-threatening consequences.",
+      "tag": "Short-term difficulties: funding"
+    },
+    {
+      "q": "A significant longer-term difficulty in tackling food insecurity in Yemen is that:",
+      "options": [
+        "The crisis has been fully resolved and no longer requires attention",
+        "Despite ongoing humanitarian assistance, hunger levels continued to rise (a 21% increase was recorded over one year), reflecting that the underlying conflict driving the crisis has not been resolved",
+        "Humanitarian aid alone has completely eliminated the root causes of the crisis",
+        "Yemen's food insecurity has no connection to the ongoing conflict"
+      ],
+      "correct": 1,
+      "explain": "A major longer-term difficulty is that, despite significant humanitarian assistance, hunger levels in Yemen continued to rise (a 21% increase was recorded over one year), showing that humanitarian aid alone cannot resolve a crisis whose root cause — ongoing conflict — remains unaddressed.",
+      "misconception": "Humanitarian assistance is sometimes assumed to be a complete solution; this case study shows that without addressing the underlying political and conflict-related causes, aid can only limit, not resolve, the severity of a crisis.",
+      "tag": "Long-term difficulties: conflict and scale"
+    },
+    {
+      "q": "The scale of need in Yemen (around 17 million people facing severe food insecurity) relative to any single humanitarian operation illustrates:",
+      "options": [
+        "That humanitarian operations can always meet 100% of need with no difficulty",
+        "That the scale of a crisis can far outstrip what any single operation or organisation can realistically deliver, requiring sustained, coordinated, long-term international support",
+        "That the scale of need has no bearing on how a crisis is managed",
+        "That smaller operations are always sufficient regardless of the scale of the crisis"
+      ],
+      "correct": 1,
+      "explain": "The scale of need in Yemen (around 17 million people facing severe food insecurity) far outstrips what a single operation like the WFP's Emergency Operation (targeting 6.8 million) can address alone, illustrating the need for sustained, coordinated, long-term international support rather than a single short-term response.",
+      "misconception": "It is easy to assume one well-resourced humanitarian operation can solve a national-scale crisis; the mismatch in scale here shows why sustained, multi-year, multi-organisation responses are usually necessary.",
+      "tag": "Long-term difficulties: conflict and scale"
+    },
+    {
+      "q": "Overall, this case study of Yemen demonstrates that lasting solutions to famine and food insecurity in a conflict-affected country ultimately require:",
+      "options": [
+        "Humanitarian food aid alone, with no other intervention needed",
+        "Addressing the underlying political and conflict-related causes of the crisis, alongside continued humanitarian assistance to meet immediate needs",
+        "No international involvement of any kind",
+        "Ignoring the affected population until the conflict ends naturally"
+      ],
+      "correct": 1,
+      "explain": "This case study demonstrates that while humanitarian assistance (food, vouchers, targeted nutrition support) is essential for meeting immediate needs, lasting solutions to a conflict-driven food security crisis ultimately require addressing the underlying political and conflict-related causes — humanitarian aid can limit suffering but cannot substitute for a political resolution.",
+      "misconception": "This is the key evaluative conclusion of the whole case study: short-term humanitarian strategies and long-term structural solutions are both necessary, but they are not the same thing and cannot substitute for one another.",
+      "tag": "Long-term difficulties: conflict and scale"
+    }
   ]
 };
