@@ -604,6 +604,13 @@ window.SBL_LESSONS.CP12 = {
     'I can explain victim support.',
     'I can evaluate one policy project.'
   ],
+  ibQuestions: [
+    {
+      question: 'Explain one policy designed to prevent human trafficking.',
+      marks: 3,
+      markScheme: 'Identification of a valid policy at societal, NGO, national or international level [1]; development with details on how it operated/operates [1] further development which may include why it was introduced or magnitude of the problem [1].\n\nPolicies may include:\n- Accreditation schemes such as Fair Trade, Global Organic Textile Standard, Ethical Trading initiative decrease demand for cheap clothes that cause trafficking of labour in LICs\n- Education of individuals to decrease demand for services provided by trafficked populations – “John Schools” in USA that are aimed at changing attitudes of sex buyers\n- National Agency against Trafficking in Persons in Romania educates target groups to increase their awareness\n- Travel restrictions – children not travel without parents’/parent’s signature eg Brazil\n- Community activities such as vigilance groups in India that detect trafficked population in villages\n- Prosecution of individuals/firms that use trafficked labour or groups that organize the trafficking of people by the National Crime Agency in UK\n- Government legislation intended to curb trafficking eg Danish Criminal Code, Modern Slavery Act in UK\n- Border controls such as border patrols by South African National Defence Force on SA’s northern borders\n- International co-operation – UN Protocol against trafficking\n- Improve the lives of vulnerable groups of people in LICs eg National Referral Mechanism (UK agency) improving women’s accessibility to work in Albania.\n\nFor example:\n- Cambodia passed legislation in 2008 [1] that criminalizes all forms of trafficking for men, women and children [1]. Fines and prison sentences are applied to those convicted [1].'
+    }
+  ],
   readinessQuestions: [
     'Explain the difference between gender equality and gender inequality.',
     'What is SDG 5 focused on?',

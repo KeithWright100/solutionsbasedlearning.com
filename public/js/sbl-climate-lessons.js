@@ -145,6 +145,13 @@ window.SBL_LESSONS.CC03 = {
     question: 'Climate change is caused by humans. To what extent do you agree with this statement?',
     intro: 'This essay draws on everything from this topic — natural causes, feedback loops, and the enhanced greenhouse effect.'
   },
+  ibQuestions: [
+    {
+      question: 'Explain two reasons why increased trade by emerging economies has led to increased greenhouse gas emissions.',
+      marks: 4,
+      markScheme: 'Identification of a valid reason [1] and [1] for further development/exemplification of how it has led to an increase in GHG emissions.\n\nPossibilities must be linked to increased trade and could include:\n- Increased export of manufactured goods – increased greenhouse gas emissions from factories/industry producing these.\n- TNCs locating manufacturing plants in emerging economies – local regulations may be more lax in terms of emissions.\n- Increased trade results in increased greenhouse gas emissions from container shipping/aircraft/road transport of goods.\n- Trade in emerging economies may be instrumental in improving standard of living – per capita greenhouse gas emissions increase due to increased consumption (meat, fossil fuels)\n- Reliance of emerging economies on fossil fuels.'
+    }
+  ],
   readinessQuestions: [
     'Explain the difference between the natural and enhanced greenhouse effect.',
     'Name two greenhouse gases and one source of each.',
@@ -473,6 +480,13 @@ window.SBL_LESSONS.CC10 = {
     'I can explain a challenge to international climate cooperation.',
     'I can compare responses at different scales.',
     'I can evaluate the effectiveness of a strategy.'
+  ],
+  ibQuestions: [
+    {
+      question: 'Explain how carbon offset schemes and carbon trading might lead to a global reduction in greenhouse gas emissions.',
+      marks: 4,
+      markScheme: 'Award [1] for explaining carbon offsetting and [1] for how it could reduce global emissions.\n\nAND\n\nAward [1] for explaining carbon trading and [1] for how it could reduce global emissions.\n\nExample: Carbon offset schemes are designed to reduce or offset carbon emissions by funding activities and projects [1] such as tree planting or solar power which reduce emissions elsewhere [1].\n\nExample: Carbon trading attempts to create a market in which emission permits issues by governments can be traded [1]. Companies that exceed their targets have to buy from those that do not – this market system attempts to limit emissions [1].\n\nAward a maximum of [2] for a description of carbon emissions offsetting and carbon trading that does not explain how global greenhouse gas emissions can be reduced over time by this approach.'
+    }
   ],
   readinessQuestions: [
     'Explain the difference between adaptation and mitigation.',
