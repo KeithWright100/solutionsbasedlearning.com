@@ -119,10 +119,6 @@
               {
                 "label": "What factors affect participation in sport and tourism?",
                 "href": "/geography/paper-1/option-e/t1-changing/l3-what-factors"
-              },
-              {
-                "label": "Changing leisure patterns checkpoint quiz",
-                "href": "/geography/paper-1/option-e/t1-changing/l4-changing"
               }
             ]
           },
@@ -223,10 +219,6 @@
               {
                 "label": "The epidemiological transition model",
                 "href": "/geography/paper-1/option-f/t1-measuring-food/l4-the"
-              },
-              {
-                "label": "Food and Health Checkpoint",
-                "href": "/geography/paper-1/option-f/t1-measuring-food/l5-food-and-health"
               }
             ]
           },
