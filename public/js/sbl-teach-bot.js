@@ -180,7 +180,8 @@ function buildRetrievalBank(lessonId) {
     window.SBL_LESSON_ORDER,
     window.SBL_PPN_LESSON_ORDER,
     window.SBL_FH_LESSON_ORDER,
- window.SBL_HD_LESSON_ORDER
+    window.SBL_HD_LESSON_ORDER,
+    window.SBL_FW_LESSON_ORDER
   ];
   var order = [];
   for (var k = 0; k < candidateOrders.length; k++) {
