@@ -53,30 +53,93 @@ function base64UrlToJson(base64url) {
   return JSON.parse(text);
 }
 
-// Verifies a Supabase HS256 JWT's signature and expiry using the
-// project's JWT secret (Supabase Dashboard → Settings → API → JWT
-// Settings → "JWT Secret"). Returns the decoded payload if valid,
-// otherwise null. Does not throw.
-async function verifySupabaseJwt(token, jwtSecret) {
+// Supabase projects sign access tokens one of two ways depending on
+// when the project was created / whether it has been rotated:
+//   - Legacy: HS256 with a single shared secret (Settings → API →
+//     JWT Settings → "JWT Secret" / "Legacy JWT Secret").
+//   - Newer:  ES256 (ECC P-256) asymmetric signing keys (Settings →
+//     JWT Keys). These are verified against the project's public
+//     JWKS endpoint — no secret required at all, since it's a public
+//     key. This is Supabase's current default for new/rotated
+//     projects.
+// verifySupabaseJwt() below handles BOTH, branching on the token's
+// own `alg` header, so this file works unmodified regardless of
+// which signing method a given Supabase project uses.
+
+let jwksCache = { keys: null, fetchedAt: 0 };
+const JWKS_CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes — best-effort; edge instances are short-lived anyway
+
+async function getJwks(supabaseUrl) {
+  const isFresh = jwksCache.keys && (Date.now() - jwksCache.fetchedAt) < JWKS_CACHE_TTL_MS;
+  if (isFresh) return jwksCache.keys;
+
+  try {
+    const res = await fetch(`${supabaseUrl}/auth/v1/.well-known/jwks.json`);
+    if (!res.ok) return jwksCache.keys; // fall back to a stale cache rather than nothing
+    const data = await res.json();
+    if (Array.isArray(data.keys) && data.keys.length) {
+      jwksCache = { keys: data.keys, fetchedAt: Date.now() };
+    }
+    return jwksCache.keys;
+  } catch (err) {
+    return jwksCache.keys;
+  }
+}
+
+async function verifyEs256(headerB64, payloadB64, signatureB64, header, supabaseUrl) {
+  const keys = await getJwks(supabaseUrl);
+  if (!keys) return false;
+
+  const jwk = keys.find((k) => k.kid === header.kid) || keys.find((k) => k.kty === 'EC');
+  if (!jwk) return false;
+
+  const key = await crypto.subtle.importKey(
+    'jwk',
+    jwk,
+    { name: 'ECDSA', namedCurve: jwk.crv || 'P-256' },
+    false,
+    ['verify']
+  );
+
+  const data = new TextEncoder().encode(`${headerB64}.${payloadB64}`);
+  const signature = base64UrlToUint8Array(signatureB64);
+  return crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, key, signature, data);
+}
+
+async function verifyHs256(headerB64, payloadB64, signatureB64, jwtSecret) {
+  if (!jwtSecret) return false;
+
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(jwtSecret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['verify']
+  );
+
+  const data = new TextEncoder().encode(`${headerB64}.${payloadB64}`);
+  const signature = base64UrlToUint8Array(signatureB64);
+  return crypto.subtle.verify('HMAC', key, signature, data);
+}
+
+// Verifies a Supabase JWT's signature and expiry, using whichever
+// algorithm the token itself declares. Returns the decoded payload
+// if valid, otherwise null. Does not throw.
+async function verifySupabaseJwt(token, { jwtSecret, supabaseUrl }) {
   try {
     const [headerB64, payloadB64, signatureB64] = token.split('.');
     if (!headerB64 || !payloadB64 || !signatureB64) return null;
 
+    const header = base64UrlToJson(headerB64);
     const payload = base64UrlToJson(payloadB64);
     if (!payload.exp || payload.exp * 1000 < Date.now()) return null;
 
-    const key = await crypto.subtle.importKey(
-      'raw',
-      new TextEncoder().encode(jwtSecret),
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['verify']
-    );
-
-    const data = new TextEncoder().encode(`${headerB64}.${payloadB64}`);
-    const signature = base64UrlToUint8Array(signatureB64);
-
-    const valid = await crypto.subtle.verify('HMAC', key, signature, data);
+    let valid = false;
+    if (header.alg === 'ES256') {
+      valid = await verifyEs256(headerB64, payloadB64, signatureB64, header, supabaseUrl);
+    } else if (header.alg === 'HS256') {
+      valid = await verifyHs256(headerB64, payloadB64, signatureB64, jwtSecret);
+    }
     return valid ? payload : null;
   } catch (err) {
     return null;
@@ -134,19 +197,23 @@ export default async function middleware(request) {
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const anonKey = process.env.SUPABASE_ANON_KEY;
+  // Optional: only used as a fallback for projects still on the
+  // legacy HS256 shared-secret signing method. Newer projects (ES256
+  // / JWKS) don't need this set at all — see the comment above
+  // verifySupabaseJwt().
   const jwtSecret = process.env.SUPABASE_JWT_SECRET;
 
-  if (!supabaseUrl || !anonKey || !jwtSecret) {
+  if (!supabaseUrl || !anonKey) {
     // Fail closed for admin (never expose the dashboard by
     // accident), fail open for regular content so a missing env var
     // doesn't take the whole public-facing site down. Fix the env
     // vars — see README-AUTH-SETUP.md.
-    console.error('SBL auth middleware: missing SUPABASE_URL / SUPABASE_ANON_KEY / SUPABASE_JWT_SECRET.');
+    console.error('SBL auth middleware: missing SUPABASE_URL / SUPABASE_ANON_KEY.');
     return isAdminPath ? redirectToLogin(request) : undefined;
   }
 
   const accessToken = getCookie(request, ACCESS_COOKIE);
-  let payload = accessToken ? await verifySupabaseJwt(accessToken, jwtSecret) : null;
+  let payload = accessToken ? await verifySupabaseJwt(accessToken, { jwtSecret, supabaseUrl }) : null;
   let refreshedCookies = null;
 
   if (!payload) {
@@ -156,7 +223,7 @@ export default async function middleware(request) {
     const refreshed = await refreshSession(refreshToken, supabaseUrl, anonKey);
     if (!refreshed) return redirectToLogin(request);
 
-    payload = await verifySupabaseJwt(refreshed.access_token, jwtSecret);
+    payload = await verifySupabaseJwt(refreshed.access_token, { jwtSecret, supabaseUrl });
     if (!payload) return redirectToLogin(request);
 
     // Re-issue the request to the same URL so the browser picks up
