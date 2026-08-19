@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-admin-shell">
+
+  <div class="sbl-admin-header">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Solutions Based Learning &middot; signed in as <span id="adminName">…</span></p>
+    </div>
+    <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+  </div>
+
+  <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
+  <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.5rem;"></div>
+
+  <div class="sbl-tabs">
+    <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="approved">Approved Users <span class="sbl-tab__count" id="countApproved">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="rejected">Rejected Applications <span class="sbl-tab__count" id="countRejected">0</span></button>
+  </div>
+
+  <section class="sbl-panel" id="panelPending">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Name</th><th>School</th><th>Email</th><th>Role</th><th>Submitted</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="pendingBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="pendingEmpty" style="display:none;">No pending applications right now.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelApproved" style="display:none;">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="approvedBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="approvedEmpty" style="display:none;">No approved users yet.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelRejected" style="display:none;">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Applicant Name</th><th>Email</th><th>Date Rejected</th></tr>
+      </thead>
+      <tbody id="rejectedBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="rejectedEmpty" style="display:none;">No rejected applications.</div>
+  </section>
+
+</div>
+
+<div class="sbl-modal-backdrop" id="viewModalBackdrop">
+  <div class="sbl-modal">
+    <h2>Application details</h2>
+    <dl id="viewModalBody"></dl>
+    <div class="sbl-auth-actions" style="margin-top:1.75rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary" id="closeModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/sbl-admin.js"></script>
+</body>
+</html>

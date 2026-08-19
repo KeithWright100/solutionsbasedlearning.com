@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forgot Password — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-auth-shell">
+  <a href="/" class="sbl-auth-brand">
+    <span class="sbl-auth-brand__mark">SBL</span>
+    <span class="sbl-auth-brand__name">Solutions <strong>Based</strong> Learning</span>
+  </a>
+
+  <div class="sbl-auth-card" id="requestCard">
+    <h1>Reset your password</h1>
+    <p class="sbl-auth-card__lead">Enter the email address on your Solutions Based Learning account and we'll send you a link to reset your password.</p>
+
+    <div class="sbl-alert sbl-alert--error" id="formError" role="alert"></div>
+
+    <form id="forgotForm" novalidate>
+      <div class="sbl-field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="sbl-auth-actions">
+        <button type="submit" class="sbl-btn sbl-btn--primary" id="submitBtn">SEND RESET LINK</button>
+      </div>
+    </form>
+
+    <div class="sbl-auth-links">
+      <a href="/login/">Back to login</a>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="sbl-auth-card" id="doneCard" style="display:none;">
+    <h1>Check your email</h1>
+    <p class="sbl-auth-card__lead">If an account exists for that email address, a password reset link has been sent. The link will expire in 1 hour.</p>
+    <a href="/login/" class="sbl-btn sbl-btn--secondary">Back to login</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('forgotForm');
+  var btn = document.getElementById('submitBtn');
+  var errorBox = document.getElementById('formError');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.classList.remove('is-visible');
+    btn.disabled = true;
+    btn.textContent = 'SENDING…';
+
+    fetch('/api/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: document.getElementById('email').value.trim() })
+    })
+      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+      .then(function (result) {
+        if (!result.ok) {
+          errorBox.textContent = result.data.error || 'Something went wrong. Please try again.';
+          errorBox.classList.add('is-visible');
+          btn.disabled = false;
+          btn.textContent = 'SEND RESET LINK';
+          return;
+        }
+        document.getElementById('requestCard').style.display = 'none';
+        document.getElementById('doneCard').style.display = 'block';
+      })
+      .catch(function () {
+        errorBox.textContent = 'Could not reach the server. Please check your connection and try again.';
+        errorBox.classList.add('is-visible');
+        btn.disabled = false;
+        btn.textContent = 'SEND RESET LINK';
+      });
+  });
+})();
+</script>
+</body>
+</html>

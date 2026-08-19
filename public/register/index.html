@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Access — Solutions Based Learning</title>
+<meta name="description" content="Request access to Solutions Based Learning.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-auth-shell">
+  <a href="/" class="sbl-auth-brand">
+    <span class="sbl-auth-brand__mark">SBL</span>
+    <span class="sbl-auth-brand__name">Solutions <strong>Based</strong> Learning</span>
+  </a>
+
+  <div class="sbl-auth-card sbl-auth-card--wide" id="formCard">
+    <h1>Request Access to Solutions Based Learning</h1>
+    <p class="sbl-auth-card__lead">
+      Solutions Based Learning (SBL) is an educational platform designed to support inquiry, critical
+      thinking, independent learning and the thoughtful integration of AI into education. Access is
+      currently available by application only. We welcome requests from educators, school leaders,
+      curriculum specialists and educational professionals who share an interest in innovative teaching
+      and learning. Please complete the form below. All applications are reviewed individually before
+      access is granted.
+    </p>
+
+    <div class="sbl-auth-notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <span>Solutions Based Learning is currently in active development. Access is being granted to a limited group of educational professionals as the platform continues to grow.</span>
+    </div>
+
+    <div class="sbl-alert sbl-alert--error" id="formError" role="alert"></div>
+
+    <form id="registerForm" novalidate>
+      <fieldset class="sbl-fieldset">
+        <legend>Personal Information</legend>
+        <div class="sbl-field-row">
+          <div class="sbl-field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="sbl-field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="sbl-field">
+          <label for="email">Professional Email Address</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="sbl-field-row">
+          <div class="sbl-field">
+            <label for="organisation">School / Organisation</label>
+            <input type="text" id="organisation" name="organisation" required>
+          </div>
+          <div class="sbl-field">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required>
+          </div>
+        </div>
+        <div class="sbl-field">
+          <label for="role">Current Role</label>
+          <select id="role" name="role" required>
+            <option value="" disabled selected>Select your role…</option>
+            <option>Teacher</option>
+            <option>Head of Department</option>
+            <option>School Leader</option>
+            <option>Curriculum Coordinator</option>
+            <option>Educational Consultant</option>
+            <option>University Lecturer</option>
+            <option>Trainee Teacher</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset">
+        <legend>Professional Interest</legend>
+        <div class="sbl-field">
+          <label for="reason">Why would you like access to Solutions Based Learning?</label>
+          <textarea id="reason" name="reason" required placeholder="Please tell us briefly how you hope to use the platform and what interests you most about SBL."></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset">
+        <legend>Areas of Interest</legend>
+        <div class="sbl-checkbox-group" id="interestGroup">
+          <label class="sbl-checkbox"><input type="checkbox" value="Geography Education"> Geography Education</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Humanities Education"> Humanities Education</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="AI in Education"> AI in Education</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Flipped Learning"> Flipped Learning</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Inquiry-Based Learning"> Inquiry-Based Learning</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Curriculum Development"> Curriculum Development</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Assessment and Feedback"> Assessment and Feedback</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Professional Learning"> Professional Learning</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Other"> Other</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset">
+        <legend>Terms of Access</legend>
+        <div class="sbl-checkbox-group">
+          <label class="sbl-checkbox"><input type="checkbox" id="termsProfessional" required> I am applying in a professional educational capacity.</label>
+          <label class="sbl-checkbox"><input type="checkbox" id="termsSharing" required> I will not share my account credentials with others.</label>
+          <label class="sbl-checkbox"><input type="checkbox" id="termsDiscretion" required> I understand that access is granted at the discretion of the site administrator.</label>
+          <label class="sbl-checkbox"><input type="checkbox" id="termsResponsible" required> I agree to use the platform responsibly and ethically.</label>
+        </div>
+      </fieldset>
+
+      <div class="sbl-auth-actions">
+        <button type="submit" class="sbl-btn sbl-btn--primary" id="submitBtn">REQUEST ACCESS</button>
+      </div>
+    </form>
+
+    <div class="sbl-auth-links">
+      <a href="/login/">Already have an account? Log in</a>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="sbl-auth-card" id="successCard" style="display:none;">
+    <h1>Application received</h1>
+    <p class="sbl-auth-card__lead" id="successMessage"></p>
+    <a href="/" class="sbl-btn sbl-btn--secondary">Return to homepage</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('registerForm');
+  var btn = document.getElementById('submitBtn');
+  var errorBox = document.getElementById('formError');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.classList.remove('is-visible');
+
+    var areas = Array.prototype.slice.call(document.querySelectorAll('#interestGroup input:checked')).map(function (el) { return el.value; });
+
+    var payload = {
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      organisation: document.getElementById('organisation').value.trim(),
+      country: document.getElementById('country').value.trim(),
+      roleAppliedFor: document.getElementById('role').value,
+      reason: document.getElementById('reason').value.trim(),
+      areasOfInterest: areas,
+      terms: {
+        professionalCapacity: document.getElementById('termsProfessional').checked,
+        noSharing: document.getElementById('termsSharing').checked,
+        adminDiscretion: document.getElementById('termsDiscretion').checked,
+        responsibleUse: document.getElementById('termsResponsible').checked
+      }
+    };
+
+    if (!form.reportValidity()) return;
+    if (!payload.terms.professionalCapacity || !payload.terms.noSharing || !payload.terms.adminDiscretion || !payload.terms.responsibleUse) {
+      errorBox.textContent = 'Please accept all four terms of access before submitting.';
+      errorBox.classList.add('is-visible');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'SUBMITTING…';
+
+    fetch('/api/register-application', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+      .then(function (result) {
+        if (!result.ok) {
+          errorBox.textContent = result.data.error || 'Could not submit your application. Please try again.';
+          errorBox.classList.add('is-visible');
+          btn.disabled = false;
+          btn.textContent = 'REQUEST ACCESS';
+          return;
+        }
+        document.getElementById('formCard').style.display = 'none';
+        var successCard = document.getElementById('successCard');
+        var msg = 'Thank you — your application has been received. Your reference ID is ' + result.data.referenceId + '. All applications are reviewed individually, so this can take a little time. We will email you as soon as a decision has been made.';
+        if (result.data.warning) msg += ' (' + result.data.warning + ')';
+        document.getElementById('successMessage').textContent = msg;
+        successCard.style.display = 'block';
+      })
+      .catch(function () {
+        errorBox.textContent = 'Could not reach the server. Please check your connection and try again.';
+        errorBox.classList.add('is-visible');
+        btn.disabled = false;
+        btn.textContent = 'REQUEST ACCESS';
+      });
+  });
+})();
+</script>
+</body>
+</html>

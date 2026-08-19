@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Your Password — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-auth-shell">
+  <a href="/" class="sbl-auth-brand">
+    <span class="sbl-auth-brand__mark">SBL</span>
+    <span class="sbl-auth-brand__name">Solutions <strong>Based</strong> Learning</span>
+  </a>
+
+  <div class="sbl-auth-card" id="formCard">
+    <h1 id="pageHeading">Set your password</h1>
+    <p class="sbl-auth-card__lead" id="pageLead">Choose a password to activate your account.</p>
+
+    <div class="sbl-alert sbl-alert--error" id="formError" role="alert"></div>
+
+    <form id="setPasswordForm" novalidate>
+      <div class="sbl-field">
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" required minlength="10">
+        <p class="sbl-field-hint">At least 10 characters.</p>
+      </div>
+      <div class="sbl-field">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required minlength="10">
+      </div>
+      <div class="sbl-auth-actions">
+        <button type="submit" class="sbl-btn sbl-btn--primary" id="submitBtn">SET PASSWORD</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="sbl-auth-card" id="invalidCard" style="display:none;">
+    <h1>Link missing or invalid</h1>
+    <p class="sbl-auth-card__lead">This page needs a valid activation or reset link. Please use the link from your email, or request a new one.</p>
+    <a href="/forgot-password/" class="sbl-btn sbl-btn--secondary">Request a new link</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get('token');
+  var purpose = params.get('purpose') === 'reset' ? 'reset' : 'activate';
+
+  if (!token) {
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('invalidCard').style.display = 'block';
+    return;
+  }
+
+  if (purpose === 'activate') {
+    document.getElementById('pageHeading').textContent = 'Activate your account';
+    document.getElementById('pageLead').textContent = 'Choose a password to activate your Solutions Based Learning account.';
+  } else {
+    document.getElementById('pageHeading').textContent = 'Choose a new password';
+    document.getElementById('pageLead').textContent = 'Enter a new password for your Solutions Based Learning account.';
+  }
+
+  var form = document.getElementById('setPasswordForm');
+  var btn = document.getElementById('submitBtn');
+  var errorBox = document.getElementById('formError');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.classList.remove('is-visible');
+
+    var password = document.getElementById('password').value;
+    var confirm = document.getElementById('confirmPassword').value;
+
+    if (password !== confirm) {
+      errorBox.textContent = 'Passwords do not match.';
+      errorBox.classList.add('is-visible');
+      return;
+    }
+    if (password.length < 10) {
+      errorBox.textContent = 'Password must be at least 10 characters long.';
+      errorBox.classList.add('is-visible');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'SAVING…';
+
+    fetch('/api/complete-password-setup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token, password: password, purpose: purpose })
+    })
+      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+      .then(function (result) {
+        if (!result.ok) {
+          errorBox.textContent = result.data.error || 'Could not set your password. Please try again.';
+          errorBox.classList.add('is-visible');
+          btn.disabled = false;
+          btn.textContent = 'SET PASSWORD';
+          return;
+        }
+        var flag = purpose === 'activate' ? 'activated=1' : 'reset=1';
+        window.location.href = '/login/?' + flag;
+      })
+      .catch(function () {
+        errorBox.textContent = 'Could not reach the server. Please check your connection and try again.';
+        errorBox.classList.add('is-visible');
+        btn.disabled = false;
+        btn.textContent = 'SET PASSWORD';
+      });
+  });
+})();
+</script>
+</body>
+</html>
