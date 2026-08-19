@@ -123,7 +123,11 @@ drag-and-drop process as before, or `git add` / `git commit` /
 - `api/session.js`
 - `api/forgot-password.js`
 - `api/complete-password-setup.js`
-- `api/admin/*.js` *(six new files)*
+- `api/admin/data.js`
+- `api/admin/action.js` *(handles approve / reject / suspend /
+  delete-user / bootstrap — combined into one file to stay under
+  Vercel's Hobby-plan limit of 12 Serverless Functions per
+  deployment; see the note at the end of Step 3)*
 - `public/css/sbl-auth.css`
 - `public/js/sbl-admin.js`
 - `public/login/index.html`
@@ -131,6 +135,18 @@ drag-and-drop process as before, or `git add` / `git commit` /
 - `public/forgot-password/index.html`
 - `public/set-password/index.html`
 - `public/admin/index.html`
+
+> **Important — delete these 5 old files if they're still in your
+> repo, they've been replaced by `api/admin/action.js` above:**
+> `api/admin/approve.js`, `api/admin/reject.js`,
+> `api/admin/suspend.js`, `api/admin/delete-user.js`,
+> `api/admin/bootstrap.js`. Leaving them in place alongside
+> `action.js` will push your Vercel project over the Hobby plan's
+> 12-Serverless-Function limit and every deployment will fail with
+> "No more than 12 Serverless Functions can be added to a
+> Deployment on the Hobby plan." Just select each file in File
+> Explorer and delete it, then commit/push as normal — deleting a
+> file is committed just like changing one.
 
 ---
 
@@ -174,10 +190,11 @@ in your own email, a password you'll actually use, and the secret
 you set in Step 4:
 
 ```js
-fetch('/api/admin/bootstrap', {
+fetch('/api/admin/action', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
+    action: 'bootstrap',
     email: 'you@example.com',
     password: 'choose-a-real-password-10-chars-plus',
     secret: 'the-ADMIN_BOOTSTRAP_SECRET-value-you-set-in-vercel'
@@ -284,7 +301,7 @@ and re-add it later.
 - **Registration** (`/register/` → `POST /api/register-application`)
   saves a row in `sbl_applications` with `status = 'pending'` and
   emails you + the applicant. No login account exists yet.
-- **Approval** (`POST /api/admin/approve`) creates the real Supabase
+- **Approval** (`POST /api/admin/action` with `action: 'approve'`) creates the real Supabase
   Auth user and a matching `sbl_profiles` row (`role: 'user'`,
   `status: 'active'`), marks the application approved, and emails
   the applicant a one-time activation link (`/set-password/`).

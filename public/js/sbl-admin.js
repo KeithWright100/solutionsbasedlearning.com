@@ -242,7 +242,7 @@
     if (!confirm('Approve this application? An account will be created and an activation email will be sent.')) return;
     clearMessages();
     withButtonBusy(btn, 'Approving…', function () {
-      return postJson('/api/admin/approve', { applicationId: id }).then(function (result) {
+      return postJson('/api/admin/action', { action: 'approve', applicationId: id }).then(function (result) {
         if (!result.ok) { showError(result.data.error || 'Could not approve this application.'); return; }
         showNotice(result.data.warning || 'Application approved. The applicant has been emailed an activation link.');
         loadData();
@@ -254,7 +254,7 @@
     if (!confirm('Reject this application? The applicant will be notified by email.')) return;
     clearMessages();
     withButtonBusy(btn, 'Rejecting…', function () {
-      return postJson('/api/admin/reject', { applicationId: id }).then(function (result) {
+      return postJson('/api/admin/action', { action: 'reject', applicationId: id }).then(function (result) {
         if (!result.ok) { showError(result.data.error || 'Could not reject this application.'); return; }
         showNotice(result.data.warning || 'Application rejected. The applicant has been notified by email.');
         loadData();
@@ -267,7 +267,7 @@
     if (!confirm('Are you sure you want to ' + verb + ' this user?')) return;
     clearMessages();
     withButtonBusy(btn, suspend ? 'Suspending…' : 'Reactivating…', function () {
-      return postJson('/api/admin/suspend', { userId: userId, suspend: suspend }).then(function (result) {
+      return postJson('/api/admin/action', { action: 'suspend', userId: userId, suspend: suspend }).then(function (result) {
         if (!result.ok) { showError(result.data.error || ('Could not ' + verb + ' this user.')); return; }
         showNotice('User ' + (suspend ? 'suspended' : 'reactivated') + '.');
         loadData();
@@ -279,7 +279,7 @@
     if (!confirm('Permanently delete ' + name + '’s account? This cannot be undone.')) return;
     clearMessages();
     withButtonBusy(btn, 'Deleting…', function () {
-      return postJson('/api/admin/delete-user', { userId: userId }).then(function (result) {
+      return postJson('/api/admin/action', { action: 'delete-user', userId: userId }).then(function (result) {
         if (!result.ok) { showError(result.data.error || 'Could not delete this user.'); return; }
         showNotice('User deleted.');
         loadData();
