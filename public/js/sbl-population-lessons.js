@@ -102,7 +102,11 @@ window.SBL_LESSONS.CP02 = {
     { q: 'Which best explains why some regions become an economic "periphery"?', options: ['They choose not to develop', 'They lack the same investment, infrastructure or opportunities as core regions', 'They have too many natural resources', 'Periphery status is permanent and unchangeable'], correct: 1, explain: 'Peripheral regions typically receive less investment and infrastructure, reinforcing the gap with core regions over time.', misconception: 'It is a misconception that peripheral status reflects a lack of effort or choice, rather than structural economic and historical factors.', tag: 'Causes of uneven development' },
     { q: 'Which indicator is commonly used to help classify a country\u2019s level of development?', options: ['Gross National Income (GNI) per capita', 'Total land area', 'Number of national holidays', 'Length of coastline'], correct: 0, explain: 'GNI per capita is a widely used economic indicator for classifying development levels, alongside indicators like HDI.', misconception: 'Physical geography facts such as land area or coastline length are sometimes mistaken for development indicators, but they do not measure economic or social development.', tag: 'Global development patterns' },
     { q: 'Inequality between core and periphery regions tends to:', options: ['Disappear naturally over time without intervention', 'Persist or widen without deliberate policy intervention', 'Only exist in LICs', 'Have no link to investment patterns'], correct: 1, explain: 'Without deliberate policy intervention, core-periphery inequality often persists or widens, since investment tends to concentrate further in already-developed core areas.', misconception: 'Assuming inequality will resolve itself naturally overlooks how investment and opportunity tend to reinforce existing core-periphery patterns.', tag: 'Core-periphery model' }
-  ]
+  ],
+  challenge: {
+    question: '"Physical geography is the main cause of global inequalities in development." To what extent do you agree — fully, partially, somewhat, or do you not agree at all? You need to justify your answer.',
+    intro: 'This is not an essay question — it is designed to develop your own thinking. Decide where you stand on the scale (fully / partially / somewhat / do not agree), then build a justified case: weigh physical factors (climate, resources, location, natural hazards) against human factors (history, colonialism, trade, governance, conflict, investment) to defend your position.'
+  }
 };
 
 window.SBL_LESSONS.CP03 = {
