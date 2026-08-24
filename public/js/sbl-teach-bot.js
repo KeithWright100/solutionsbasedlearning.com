@@ -32,6 +32,12 @@
                                       through at the start of class.
                                       No AI/chat involved — reads
                                       lesson.readinessQuestions.
+     openAskTutor()                — general "Ask AI Tutor" sidebar
+                                      panel, present on every lesson
+                                      page. Opens the same Teach Me
+                                      Live bot with no lesson attached
+                                      — a plain chat window, no
+                                      syllabus focus/checklist/quiz.
 
    Teach Me Live and Challenge Mode still use embedded Copilot
    Studio webchat iframes. IB-Style Questions uses the server-side
@@ -343,6 +349,35 @@ function buildRetrievalBank(lessonId) {
     modal.setAttribute('aria-label', 'Ready for the Classroom: ' + currentLesson.title);
 
     renderReadinessBody();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 7: Ask AI Tutor (general, no lesson) ---------------- */
+  /* Reuses the exact same "SBL Geography Tutor" Copilot Studio bot as
+     Teach Me Live, but with no lesson attached — just a plain chat
+     window for general IB Geography questions from anywhere on the
+     site. This is what the sidebar "Ask AI Tutor" panel calls. */
+
+  window.openAskTutor = function () {
+    bindElements();
+    if (!overlay) return;
+    currentLesson = null;
+    lastFocusedElement = document.activeElement;
+    iframeLoaded = false;
+    quizState = null;
+    ibState = null;
+    readinessState = null;
+    overlay.hidden = false;
+
+    titleEl.textContent = 'Ask AI Tutor';
+    if (subtitleEl) subtitleEl.textContent = 'General help with IB Geography — ask me anything.';
+    modal.setAttribute('aria-label', 'SBL Geography Tutor: general help');
+    if (progressEl) progressEl.textContent = '';
+
+    bodyMount.innerHTML =
+      '<div class="sbl-teach-panel sbl-teach-chatpanel" style="border-right:none; width:100%;" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
+    loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
+
     if (closeBtn) closeBtn.focus();
   };
 
