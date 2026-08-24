@@ -733,6 +733,7 @@
   function icon(name) {
     var icons = {
       home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-9"/></svg>',
+      book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>',
       chevron: '<svg class="lh-topic__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6" transform="rotate(90 12 12)"/></svg>'
     };
     return icons[name] || "";
@@ -787,6 +788,7 @@
     html += "</div>";
 
     html += '<a class="lh-sidebar__home" href="/geography">' + icon("home") + "<span>Geography overview</span></a>";
+    html += '<a class="lh-sidebar__home" href="/geography/revision">' + icon("book") + "<span>Revision</span></a>";
 
     TREE.forEach(function (group) {
       html += '<div class="lh-sidebar__section">';
