@@ -14,7 +14,18 @@
      {
        topic: 'Climate Change',
        questions: [
-         { question: '...', marks: 12, markScheme: '...' }
+         {
+           question: '...',
+           marks: 12,
+           markScheme: '...',
+           // Optional — omit entirely if the question has no resource.
+           // One entry per photo/graph/map that belongs to this question.
+           images: [
+             { src: '/images/revision-ppq/climate-change/2019-may-fig1.jpg',
+               alt: 'Line graph showing global mean temperature anomaly, 1950-2020',
+               caption: 'Figure 1' }
+           ]
+         }
        ]
      }
    ];
@@ -76,6 +87,19 @@
 
   function docIcon() {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>';
+  }
+
+  function renderImagesHtml(images) {
+    if (!images || !images.length) return '';
+    var html = '';
+    images.forEach(function (img) {
+      if (!img || !img.src) return;
+      html += '<figure style="margin:0 0 1rem;">';
+      html += '<img src="' + escapeHtml(img.src) + '" alt="' + escapeHtml(img.alt || '') + '" style="max-width:100%; height:auto; display:block; border:1px solid var(--lh-border, #d9dde3); border-radius:8px;">';
+      if (img.caption) html += '<figcaption style="font-size:0.8rem; color:var(--lh-muted, #666); margin-top:0.4rem;">' + escapeHtml(img.caption) + '</figcaption>';
+      html += '</figure>';
+    });
+    return html;
   }
 
   /* ---------------- Topic list ---------------- */
@@ -162,6 +186,7 @@
     var wrap = document.getElementById('sblRevisionQuestionWrap');
 
     var html = '<h3 style="margin-top:1rem;">Question' + (topic.questions.length > 1 ? ' ' + (activeQuestionIndex + 1) : '') + '</h3>';
+    html += renderImagesHtml(q.images);
     html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(q.question) + '</strong> [' + q.marks + ' mark' + (q.marks === 1 ? '' : 's') + ']</p>';
     html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker — there is nothing to copy or paste.</p>';
     html += '<textarea id="sblRevisionAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
@@ -281,6 +306,9 @@
     lines.push('Completed: ' + new Date().toLocaleString());
     lines.push('');
     lines.push('Question [' + q.marks + ' marks]: ' + q.question);
+    if (q.images && q.images.length) {
+      lines.push('(See the resource image' + (q.images.length > 1 ? 's' : '') + ' on the question page — not included in this text copy.)');
+    }
     lines.push('');
     lines.push('My answer:');
     lines.push(answerText);
@@ -302,6 +330,13 @@
     html += '<h1>SBL Geography — Full Past Paper Question Report</h1>';
     html += '<p><strong>Topic:</strong> ' + escapeHtml(topic.topic) + '<br>';
     html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '</p><hr>';
+    if (q.images && q.images.length) {
+      q.images.forEach(function (img) {
+        if (!img || !img.src) return;
+        html += '<img src="' + escapeHtml(img.src) + '" alt="' + escapeHtml(img.alt || '') + '" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; display:block; margin-bottom:0.4rem;">';
+        if (img.caption) html += '<p style="font-size:0.85rem; color:#666; margin-top:0;">' + escapeHtml(img.caption) + '</p>';
+      });
+    }
     html += '<p><strong>Question [' + q.marks + ' marks]:</strong> ' + escapeHtml(q.question) + '</p>';
     html += '<p><strong>My answer:</strong></p><div class="block">' + escapeHtml(answerText) + '</div>';
     html += '<p><strong>Mark awarded:</strong> ' + escapeHtml(feedback.markAwarded || ('— / ' + q.marks)) + '</p>';
