@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IB Economics Learning Hub — SBL</title>
+<meta name="description" content="IB Economics, taught with AI as a thinking partner. Microeconomics, macroeconomics, the global economy and development economics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<style>
+  .lh-units {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .lh-unit-card {
+    background: var(--lh-surface);
+    border: 1px solid var(--lh-border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+  }
+  .lh-unit-card__section {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .lh-unit-card h3 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.7rem;
+  }
+  .lh-unit-card--soon h3 { color: var(--lh-muted); }
+  .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
+  .lh-section-title { font-family: var(--lh-font-display); font-weight: 600; font-size: 1.05rem; margin: 2rem 0 1rem; }
+  .lh-section-title:first-of-type { margin-top: 0; }
+</style>
+</head>
+<body class="lh">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/">SBL</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Economics</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
+      <main>
+        <div class="lh-page-head">
+          <h1>IB Economics Learning Hub</h1>
+          <p>Understanding choices, trade-offs and how economies work — from individual markets to the global economy. Units are being added here one at a time; check the sidebar for what's available so far.</p>
+        </div>
+
+        <h2 class="lh-section-title">Syllabus</h2>
+        <div class="lh-units">
+          <div class="lh-unit-card lh-unit-card--soon">
+            <span class="lh-unit-card__section">In progress</span>
+            <h3>Units are being added</h3>
+            <p style="font-size:0.84rem; color:var(--lh-muted); margin:0 0 0.6rem;">Lessons, quizzes and revision materials will appear here as each unit is built, in the same format as the Geography Learning Hub.</p>
+            <div class="lh-unit-card__meta"><span>Check back soon</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="/js/sbl-economics-sidebar.js"></script>
+<script>renderSBLEconomicsSidebar('lh-sidebar-mount', {});</script>
+</body>
+</html>

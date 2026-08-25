@@ -453,7 +453,13 @@
           </div>
         </article>
 
-        <article class="subject-card economics disabled" aria-label="Economics coming soon">
+        <article
+          class="subject-card economics clickable"
+          tabindex="0"
+          role="link"
+          aria-label="Enter Economics"
+          data-route="/economics"
+        >
           <div class="subject-content">
             <div class="subject-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -467,10 +473,16 @@
             </div>
             <h2>Economics</h2>
             <p class="strapline">Analyse &bull; Predict &bull; Decide</p>
-            <span class="status soon">Coming Soon</span>
+            <span class="status live">In Progress</span>
             <p class="subject-copy">
               Understand choices. Evaluate trade-offs. Improve lives.
             </p>
+            <button class="enter-btn" type="button" aria-label="Click here to enter Economics">
+              Click here to enter Economics
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
           </div>
         </article>
 
@@ -499,7 +511,7 @@
   </div>
 
   <script>
-    const LIVE_ROUTES = { geography: "/geography" };
+    const LIVE_ROUTES = { geography: "/geography", economics: "/economics" };
     const toast = document.getElementById("toast");
 
     function showToast(message) {
@@ -512,7 +524,7 @@
     }
 
     function navigateToRoute(route) {
-      if (route === LIVE_ROUTES.geography) {
+      if (Object.values(LIVE_ROUTES).includes(route)) {
         window.location.href = route;
       } else {
         showToast("This subject area is coming soon.");
