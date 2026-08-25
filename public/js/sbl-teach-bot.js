@@ -181,6 +181,23 @@
     }
     return a;
   }
+
+  /* Returns a NEW question object with its options (and correct-answer
+     letter) shuffled into a random order. Never mutates the source
+     question, since the same authored quiz data is reused across every
+     student and every attempt — this keeps the underlying lesson data
+     untouched while making sure the correct answer doesn't keep landing
+     on the same letter (e.g. "B") question after question. */
+  function shuffleOptions(q) {
+    var order = shuffle(q.options.map(function (_, i) { return i; }));
+    var copy = {};
+    for (var key in q) {
+      if (Object.prototype.hasOwnProperty.call(q, key)) copy[key] = q[key];
+    }
+    copy.options = order.map(function (i) { return q.options[i]; });
+    copy.correct = order.indexOf(q.correct);
+    return copy;
+  }
 function buildRetrievalBank(lessonId) {
   var candidateOrders = [
     window.SBL_LESSON_ORDER,
@@ -970,7 +987,7 @@ function buildRetrievalBank(lessonId) {
 
   function startQuizWithQuestions(questions, contextLabel, showSource, onComplete) {
     quizState = {
-      questions: questions,
+      questions: questions.map(shuffleOptions),
       index: 0,
       score: 0,
       answered: false,
