@@ -68,7 +68,8 @@ export default async function handler(req, res) {
       `QUESTION: ${question}`,
       `MAXIMUM MARK: ${maxMark}`,
       markingGuidance ? `MARKING GUIDANCE: ${markingGuidance}` : null,
-      `STUDENT ANSWER: ${studentAnswer}`
+      `STUDENT ANSWER: ${studentAnswer}`,
+      `STYLE: Keep the feedback realistic and concise — a sentence or two per section is plenty. Students will not read long paragraphs, so avoid restating the whole mark scheme.`
     ].filter(Boolean).join('\n\n');
 
     const postRes = await fetch(`${DIRECTLINE_BASE}/conversations/${conversationId}/activities`, {

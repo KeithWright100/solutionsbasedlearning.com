@@ -18,6 +18,10 @@
            question: '...',
            marks: 12,
            markScheme: '...',
+           // Optional — a display label shown instead of the generic
+           // "Question N", useful for referencing a real past paper
+           // question number, e.g. 'May 2019 P2 — Question 4(c)'.
+           label: 'May 2019 P2 — Question 4(c)',
            // Optional — omit entirely if the question has no resource.
            // One entry per photo/graph/map that belongs to this question.
            images: [
@@ -168,7 +172,7 @@
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'sbl-prompt-btn';
-        btn.textContent = 'Question ' + (i + 1) + ' [' + q.marks + ']';
+        btn.textContent = (q.label || 'Question ' + (i + 1)) + ' [' + q.marks + ']';
         btn.addEventListener('click', function () {
           activeQuestionIndex = i;
           renderQuestionWorkspace();
@@ -185,7 +189,7 @@
     var q = topic.questions[activeQuestionIndex];
     var wrap = document.getElementById('sblRevisionQuestionWrap');
 
-    var html = '<h3 style="margin-top:1rem;">Question' + (topic.questions.length > 1 ? ' ' + (activeQuestionIndex + 1) : '') + '</h3>';
+    var html = '<h3 style="margin-top:1rem;">' + escapeHtml(q.label || ('Question' + (topic.questions.length > 1 ? ' ' + (activeQuestionIndex + 1) : ''))) + '</h3>';
     html += renderImagesHtml(q.images);
     html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(q.question) + '</strong> [' + q.marks + ' mark' + (q.marks === 1 ? '' : 's') + ']</p>';
     html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker — there is nothing to copy or paste.</p>';
