@@ -363,6 +363,80 @@
       .subject-card, .subject-content { min-height: 340px; }
     }
 
+    .igcse-banner {
+      margin-top: 34px;
+      border-radius: var(--radius-lg);
+      padding: 32px 34px;
+      background:
+        linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+        radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: var(--shadow);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .igcse-banner-kicker {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--cyan);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .igcse-banner-text h2 {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .igcse-banner-text p {
+      font-size: 0.94rem;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    .igcse-banner-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 22px;
+      color: white;
+      background: linear-gradient(135deg, #00b8b0, #0392a2);
+      font-size: 0.98rem;
+      font-weight: 850;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+      transition: var(--transition);
+    }
+
+    .igcse-banner-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45);
+    }
+
+    .igcse-banner-btn svg { width: 20px; height: 20px; transition: transform 0.25s ease; }
+    .igcse-banner-btn:hover svg { transform: translateX(4px); }
+
+    @media (max-width: 760px) {
+      .igcse-banner { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -505,6 +579,21 @@
           </div>
         </article>
       </div>
+
+      <section class="igcse-banner" aria-label="Humanities IGCSE Past Paper Practice">
+        <div class="igcse-banner-text">
+          <span class="igcse-banner-kicker">New</span>
+          <h2>Humanities IGCSE Past Paper Practice</h2>
+          <p>
+            Past paper questions for IGCSE Geography, History, Economics and Business —
+            marked instantly with examiner-style feedback.
+          </p>
+        </div>
+        <a class="igcse-banner-btn" href="/igcse" aria-label="Open Humanities IGCSE Past Paper Practice">
+          Explore IGCSE Paper Practice
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </section>
     </main>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
