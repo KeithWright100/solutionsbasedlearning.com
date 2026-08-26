@@ -18,13 +18,10 @@
 
 export const config = {
   matcher: [
-    // TEMPORARILY PAUSED — content gating turned off for
-    // /geography and /humanities-hub so students can get in during
-    // class before the login system is fully tested. Re-add these
-    // two lines (and redeploy) once ready to turn gating back on —
-    // see README-AUTH-SETUP.md, "Step 7 — Turn on content gating".
-    // '/geography/:path*',
-    // '/humanities-hub/:path*',
+    // Content gating is ON — a visitor needs a valid, active login
+    // to reach anything under these two paths.
+    '/geography/:path*',
+    '/humanities-hub/:path*',
     // The admin dashboard — always gated, and additionally requires
     // role === 'admin' (checked below), not just "logged in".
     '/admin/:path*'
