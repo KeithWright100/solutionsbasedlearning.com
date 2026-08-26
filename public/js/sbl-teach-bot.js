@@ -90,10 +90,18 @@
     }
   }
 
-  function saveChecklistState(lessonId, state) {
+  // Writes to this device's localStorage only — used when a value
+  // just arrived FROM the server, so there's no need to immediately
+  // send it straight back.
+  function saveChecklistStateLocalOnly(lessonId, state) {
     try {
       window.localStorage.setItem(checklistKey(lessonId), JSON.stringify(state));
     } catch (e) { /* localStorage unavailable — progress simply won't persist */ }
+  }
+
+  function saveChecklistState(lessonId, state) {
+    saveChecklistStateLocalOnly(lessonId, state);
+    syncProgress(lessonId, { checklist: state });
   }
 
   function challengeNotesKey(lessonId) { return 'sbl-challenge-notes-' + lessonId; }
@@ -110,6 +118,41 @@
     try {
       window.localStorage.setItem(challengeNotesKey(lessonId), text);
     } catch (e) { /* localStorage unavailable — notes simply won't persist */ }
+  }
+
+  /* ---------------- Server progress sync ----------------
+     Lesson pages are only reachable while logged in (middleware.js
+     gates them), so any visitor here has an account. This mirrors
+     a few key events — checklist ticks, quiz completions, readiness
+     check completion — up to the student's account via /api/progress,
+     so it carries across devices instead of living only in this
+     browser's localStorage. Best-effort and non-blocking: if the
+     request fails (offline, hiccup), localStorage still has the
+     student's progress and nothing in the UI breaks. */
+
+  function syncProgress(lessonId, patch) {
+    try {
+      fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId: lessonId, patch: patch })
+      }).catch(function () { /* offline/failed — local copy still saved */ });
+    } catch (e) { /* ignore */ }
+  }
+
+  function loadServerProgress(lessonId, callback) {
+    fetch('/api/progress?lessonId=' + encodeURIComponent(lessonId))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (result) { callback(result && result.data ? result.data : null); })
+      .catch(function () { callback(null); });
+  }
+
+  // Distinct top-level key per quiz "kind" (Test My Knowledge vs
+  // Spaced Retrieval currently share this engine but have different
+  // contextLabel text) so each one's saved result lives in its own
+  // slot and completing one never overwrites another's saved score.
+  function quizProgressKey(contextLabel) {
+    return 'quiz_' + contextLabel.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
   }
 
   function copyText(text, onDone) {
@@ -437,7 +480,7 @@ function buildRetrievalBank(lessonId) {
     html += '<div class="sbl-teach-section"><h3>What should I know?</h3>';
     html += '<div class="sbl-progress-row"><div class="sbl-progress-track"><div class="sbl-progress-fill" id="sblChecklistFill" style="width:' + pct + '%;"></div></div><span id="sblChecklistPct">' + pct + '%</span><button type="button" class="sbl-reset-btn" id="sblChecklistReset">Reset progress</button></div>';
     html += '<ul class="sbl-checklist-list" id="sblChecklistList"></ul>';
-    html += '<p class="sbl-progress-note">Progress is currently stored on this device only.</p></div>';
+    html += '<p class="sbl-progress-note">Progress is saved to your account, so it carries across devices when you log in.</p></div>';
 
     html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">10 lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start 10-question quiz &rarr;</button></div>';
 
@@ -468,6 +511,23 @@ function buildRetrievalBank(lessonId) {
     renderPromptButtons(lesson);
     renderChecklist(lesson, checklistState);
     loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
+
+    // Pull this student's saved checklist for this lesson from their
+    // account and, if it differs from what's on this device (e.g.
+    // they last ticked items on a different computer), re-render
+    // with the account version so progress follows them around.
+    (function () {
+      var lessonAtRequestTime = lesson;
+      loadServerProgress(lesson.id, function (serverData) {
+        if (currentLesson !== lessonAtRequestTime) return; // panel moved on already
+        if (!serverData || !Array.isArray(serverData.checklist)) return;
+        var serverState = serverData.checklist.slice();
+        while (serverState.length < lesson.checklist.length) serverState.push(false);
+        saveChecklistStateLocalOnly(lesson.id, serverState);
+        renderChecklist(lesson, serverState);
+        updateChecklistProgress(lesson, serverState);
+      });
+    })();
 
     document.getElementById('sblLaunchQuizFromTeach').addEventListener('click', function () {
       window.openTestMyKnowledge(lesson.id);
@@ -969,6 +1029,11 @@ function buildRetrievalBank(lessonId) {
   }
 
   function renderReadinessComplete() {
+    syncProgress(readinessState.lesson.id, {
+      readinessCompleted: true,
+      readinessCompletedAt: new Date().toISOString()
+    });
+
     var mount = document.getElementById('sblReadinessMount');
     mount.innerHTML =
       '<div class="sbl-quiz-result">' +
@@ -1112,6 +1177,19 @@ function buildRetrievalBank(lessonId) {
         announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
       });
     });
+
+    if (lesson) {
+      var quizPatch = {};
+      quizPatch[quizProgressKey(savedState.contextLabel)] = {
+        label: savedState.contextLabel,
+        score: score,
+        total: total,
+        pct: pct,
+        band: band,
+        completedAt: new Date().toISOString()
+      };
+      syncProgress(lesson.id, quizPatch);
+    }
 
     if (typeof savedState.onComplete === 'function') {
       savedState.onComplete();
