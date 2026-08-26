@@ -1,10 +1,12 @@
 // /api/register-application
 // Handles a "Request Access" submission. Does NOT create a login —
-// it saves a pending application, emails the admin, and emails the
-// applicant a confirmation. See README-AUTH-SETUP.md.
+// it saves a pending application and emails the applicant a
+// confirmation. No admin-notification email is sent; the admin
+// checks the pending list directly in /admin/ instead. See
+// README-AUTH-SETUP.md.
 
 import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
-import { sendAdminNotificationEmail, sendApplicantConfirmationEmail } from './_lib/emails.js';
+import { sendApplicantConfirmationEmail } from './_lib/emails.js';
 import { isValidEmail, isNonEmptyString, isValidRoleApplied, sanitizeAreasOfInterest } from './_lib/validate.js';
 
 export default async function handler(req, res) {
@@ -83,20 +85,8 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Could not save your application. Please try again.' });
   }
 
-  const siteUrl = process.env.SBL_SITE_URL || `https://${req.headers.host}`;
-  const dashboardUrl = `${siteUrl}/admin/`;
-  const adminEmail = process.env.SBL_ADMIN_EMAIL || 'keithwright100@icloud.com';
-
-  // Email failures should not stop the application being saved —
-  // the applicant already has a reference ID either way. We log and
-  // surface a soft warning in the response instead.
-  let emailWarning = null;
-  try {
-    await sendAdminNotificationEmail({ adminEmail, application: inserted, dashboardUrl });
-  } catch (err) {
-    console.error('Failed to send admin notification email:', err);
-    emailWarning = 'Your application was saved, but we could not send the admin notification email.';
-  }
+  // Email failure should not stop the application being saved — the
+  // applicant already has a reference ID either way.
   try {
     await sendApplicantConfirmationEmail({
       email: inserted.email,
@@ -108,7 +98,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(201).json({
-    referenceId: inserted.reference_id,
-    warning: emailWarning
+    referenceId: inserted.reference_id
   });
 }
