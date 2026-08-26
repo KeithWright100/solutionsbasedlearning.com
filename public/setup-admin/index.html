@@ -73,10 +73,10 @@
       var resultEl = document.getElementById('result');
       var email = document.getElementById('email').value.trim();
       var password = document.getElementById('password').value;
-      var secret = document.getElementById('secret').value;
+      var secret = document.getElementById('secret').value.trim();
 
       resultEl.className = '';
-      resultEl.style.display = 'none';
+      resultEl.removeAttribute('style');
 
       if (!email || !password || !secret) {
         resultEl.textContent = 'Please fill in all three fields.';
