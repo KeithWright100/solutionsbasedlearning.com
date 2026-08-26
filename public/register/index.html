@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="sbl-field">
-          <label for="email">Professional Email Address</label>
+          <label for="email" id="emailLabel">Professional Email Address</label>
           <input type="email" id="email" name="email" autocomplete="email" required>
         </div>
         <div class="sbl-field-row">
@@ -68,6 +68,7 @@
           <label for="role">Current Role</label>
           <select id="role" name="role" required>
             <option value="" disabled selected>Select your role…</option>
+            <option>Student</option>
             <option>Teacher</option>
             <option>Head of Department</option>
             <option>School Leader</option>
@@ -83,12 +84,12 @@
       <fieldset class="sbl-fieldset">
         <legend>Professional Interest</legend>
         <div class="sbl-field">
-          <label for="reason">Why would you like access to Solutions Based Learning?</label>
+          <label for="reason" id="reasonLabel">Why would you like access to Solutions Based Learning?</label>
           <textarea id="reason" name="reason" required placeholder="Please tell us briefly how you hope to use the platform and what interests you most about SBL."></textarea>
         </div>
       </fieldset>
 
-      <fieldset class="sbl-fieldset">
+      <fieldset class="sbl-fieldset" id="interestFieldset">
         <legend>Areas of Interest</legend>
         <div class="sbl-checkbox-group" id="interestGroup">
           <label class="sbl-checkbox"><input type="checkbox" value="Geography Education"> Geography Education</label>
@@ -106,7 +107,7 @@
       <fieldset class="sbl-fieldset">
         <legend>Terms of Access</legend>
         <div class="sbl-checkbox-group">
-          <label class="sbl-checkbox"><input type="checkbox" id="termsProfessional" required> I am applying in a professional educational capacity.</label>
+          <label class="sbl-checkbox"><input type="checkbox" id="termsProfessional" required> I am applying for genuine educational use of this platform.</label>
           <label class="sbl-checkbox"><input type="checkbox" id="termsSharing" required> I will not share my account credentials with others.</label>
           <label class="sbl-checkbox"><input type="checkbox" id="termsDiscretion" required> I understand that access is granted at the discretion of the site administrator.</label>
           <label class="sbl-checkbox"><input type="checkbox" id="termsResponsible" required> I agree to use the platform responsibly and ethically.</label>
@@ -136,6 +137,39 @@
   var form = document.getElementById('registerForm');
   var btn = document.getElementById('submitBtn');
   var errorBox = document.getElementById('formError');
+
+  // Same single application form and admin approval queue for
+  // everyone — but a few labels swap to fit students better when
+  // "Student" is picked from the role dropdown. Nothing here changes
+  // what gets validated or submitted, just the wording shown.
+  var roleSelect = document.getElementById('role');
+  var emailLabel = document.getElementById('emailLabel');
+  var reasonLabel = document.getElementById('reasonLabel');
+  var reasonInput = document.getElementById('reason');
+  var interestFieldset = document.getElementById('interestFieldset');
+
+  var STAFF_TEXT = {
+    email: 'Professional Email Address',
+    reasonLabel: 'Why would you like access to Solutions Based Learning?',
+    reasonPlaceholder: 'Please tell us briefly how you hope to use the platform and what interests you most about SBL.'
+  };
+  var STUDENT_TEXT = {
+    email: 'Email Address',
+    reasonLabel: 'Which class or teacher is this application for?',
+    reasonPlaceholder: 'e.g. Year 12 IB Geography, Mr Wright'
+  };
+
+  function updateFormForRole() {
+    var isStudent = roleSelect.value === 'Student';
+    var text = isStudent ? STUDENT_TEXT : STAFF_TEXT;
+    emailLabel.textContent = text.email;
+    reasonLabel.textContent = text.reasonLabel;
+    reasonInput.placeholder = text.reasonPlaceholder;
+    interestFieldset.style.display = isStudent ? 'none' : '';
+  }
+
+  roleSelect.addEventListener('change', updateFormForRole);
+  updateFormForRole();
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();

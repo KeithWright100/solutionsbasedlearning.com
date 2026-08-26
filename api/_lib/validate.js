@@ -15,6 +15,7 @@ export function isNonEmptyString(value, maxLength = 500) {
 }
 
 const VALID_ROLES = [
+  'Student',
   'Teacher', 'Head of Department', 'School Leader', 'Curriculum Coordinator',
   'Educational Consultant', 'University Lecturer', 'Trainee Teacher', 'Other'
 ];

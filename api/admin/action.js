@@ -100,13 +100,20 @@ async function handleApprove(req, res, session) {
 
   const userId = createdUser.user.id;
 
+  // Students get tagged with the 'student' role (already supported by
+  // the sbl_profiles CHECK constraint) so future features — progress
+  // tracking, teachers monitoring their own classes — can tell them
+  // apart from staff. Everyone else (any other applied-for role)
+  // becomes a plain 'user', same as before.
+  const assignedRole = application.role_applied_for === 'Student' ? 'student' : 'user';
+
   const { error: profileError } = await supabase.from('sbl_profiles').insert({
     id: userId,
     full_name: fullName,
     email: application.email,
     organisation: application.organisation,
     country: application.country,
-    role: 'user',
+    role: assignedRole,
     status: 'active',
     application_id: application.id
   });
