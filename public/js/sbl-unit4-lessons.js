@@ -508,6 +508,10 @@ window.SBL_LESSONS['PPN-t3-l5-the-influence'] = {
     'I can explain the factors that help explain the influence of the physical environment on global interactions.',
     'I can explain the effects of geographic isolation using specific examples.'
   ],
+  challenge: {
+    question: 'Political factors are the most important influence on Global Interactions. Discuss this statement (16).',
+    intro: 'This is a synoptic Unit 4 essay (16 marks) — it draws on everything you’ve covered across this unit, not just this lesson. Build a balanced, evidenced argument that weighs political factors against other influences on global interactions.'
+  },
   readinessQuestions: [
     'What is a natural resource, and can you give an example?',
     'Where are the world\u2019s major oil reserves generally located?',
