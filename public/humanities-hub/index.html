@@ -94,6 +94,20 @@
 
     .top-bar-brand .teal { color: var(--teal); }
 
+    .account-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.85);
+      transition: var(--transition);
+      justify-self: end;
+    }
+
+    .account-link:hover { color: var(--cyan); }
+
     main {
       max-width: 1240px;
       margin: 40px auto 60px;
@@ -461,7 +475,7 @@
           Back to SBL
         </a>
         <div class="top-bar-brand">SBL <span class="teal">Humanities Hub</span></div>
-        <div style="width: 90px;" aria-hidden="true"></div>
+        <a href="/login/" class="account-link">Log in</a>
       </div>
     </div>
 
