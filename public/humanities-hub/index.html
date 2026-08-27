@@ -380,7 +380,7 @@
     .igcse-banner {
       margin-top: 34px;
       border-radius: var(--radius-lg);
-      padding: 32px 34px;
+      padding: 10px 34px;
       background:
         linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
         radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
@@ -388,10 +388,21 @@
       box-shadow: var(--shadow);
       color: var(--white);
       display: flex;
+      flex-direction: column;
+    }
+
+    .igcse-banner-row {
+      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
       flex-wrap: wrap;
+      padding: 22px 0;
+    }
+
+    .igcse-banner-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.14);
     }
 
     .igcse-banner-kicker {
@@ -448,7 +459,8 @@
     .igcse-banner-btn:hover svg { transform: translateX(4px); }
 
     @media (max-width: 760px) {
-      .igcse-banner { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+      .igcse-banner { padding: 6px 20px; }
+      .igcse-banner-row { align-items: flex-start; flex-direction: column; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -594,19 +606,38 @@
         </article>
       </div>
 
-      <section class="igcse-banner" aria-label="Humanities IGCSE Past Paper Practice">
-        <div class="igcse-banner-text">
-          <span class="igcse-banner-kicker">New</span>
-          <h2>Humanities IGCSE Past Paper Practice</h2>
-          <p>
-            Past paper questions for IGCSE Geography, History, Economics and Business —
-            marked instantly with examiner-style feedback.
-          </p>
+      <section class="igcse-banner" aria-label="IGCSE Revision and Past Paper Practice">
+        <div class="igcse-banner-row" aria-label="IGCSE Geography Revision Guide and Quizzes">
+          <div class="igcse-banner-text">
+            <span class="igcse-banner-kicker">New</span>
+            <h2>IGCSE Geography Revision Guide &amp; Quizzes</h2>
+            <p>
+              Interactive topic revision — a Teach Me Bot with checklist, a randomised quiz
+              and Challenge Mode. Starting with Coastal Environments.
+            </p>
+          </div>
+          <a class="igcse-banner-btn" href="/igcse/geography/revision/topics" aria-label="Open IGCSE Geography Revision Topics">
+            Revise Topics
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
         </div>
-        <a class="igcse-banner-btn" href="/igcse" aria-label="Open Humanities IGCSE Past Paper Practice">
-          Explore IGCSE Paper Practice
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
+
+        <div class="igcse-banner-divider" aria-hidden="true"></div>
+
+        <div class="igcse-banner-row" aria-label="Humanities IGCSE Past Paper Practice">
+          <div class="igcse-banner-text">
+            <span class="igcse-banner-kicker">New</span>
+            <h2>Humanities IGCSE Past Paper Practice</h2>
+            <p>
+              Past paper questions for IGCSE Geography, History, Economics and Business —
+              marked instantly with examiner-style feedback.
+            </p>
+          </div>
+          <a class="igcse-banner-btn" href="/igcse" aria-label="Open Humanities IGCSE Past Paper Practice">
+            Explore IGCSE Paper Practice
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </div>
       </section>
     </main>
 
