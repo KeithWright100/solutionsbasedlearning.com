@@ -663,4 +663,75 @@
     quiz: poolQuestions('HD', 'HDREV')
   };
 
+  /* ---------------- Unit 6: Global Risks and Resilience ---------------- */
+
+  var GR_UNIT_TITLE = 'Unit 6: Global Risks and Resilience';
+
+  var GR_CHECKLIST = [
+    'I can define the key terms hacking, identity theft, cyber crime, black hat and surveillance.',
+    'I can describe and explain the impact of hacking and identity theft on personal freedoms.',
+    'I can describe and explain the impact of surveillance on personal freedoms, with reference to the example of the Uighur population in China.',
+    'I can define the term ‘supply chain’.',
+    'I can explain why oil is an important commodity globally.',
+    'I can describe and explain the political, economic and physical threats to oil and gas supplies.',
+    'I can explain what is meant by political and economic sovereignty.',
+    'I can define the key terms ‘profit repatriation’, ‘tax avoidance’ and ‘tax haven’, giving examples to illustrate each term.',
+    'I can explain why profit repatriation and tax avoidance are potential threats to a country’s economic and political sovereignty.',
+    'I can define the key term ‘disruptive technologies’ and give examples.',
+    'I can explain how disruptive technologies are a potential threat to a country’s political and economic sovereignty.',
+    'I can define the key terms ‘nationalism’ and ‘tribalization’.',
+    'I can outline some economic examples of nationalist policies.',
+    'I can outline some political examples of nationalist policies.',
+    'I can describe and explain how the National Front in France and Brexit in the UK could be argued as examples of a rise in nationalism in Europe.',
+    'I can describe and explain how Trump’s ‘America First’ campaign in the USA could be argued as an example of a rise in nationalism in North America.',
+    'I can evaluate the link between globalization and the rise in nationalism.',
+    'I can outline the causes, impacts and responses to the Ukraine–Russia conflict.',
+    'I can define the key term ‘transboundary pollution’ event.',
+    'I can describe and explain the consequences and responses to the South East Asian haze in 2015.',
+    'I can define a range of key terms associated with ocean pollution, e.g. ‘ballast’, ‘black water’, ‘grey water’ and ‘chemical waste’.',
+    'I can explain the environmental and social impacts of large container and cruise ships on shipping lanes and ports.',
+    'I can describe the concept of both a personal and food ‘carbon footprint’.',
+    'I can explain the ways in which the food we eat and our personal actions can impact the environment.',
+    'I can describe how and why the location of the majority of the world’s manufacturing industries has changed over the past 50 years.',
+    'I can describe and explain some of the environmental issues caused by the manufacturing industry in China (water and air pollution).',
+    'I can outline and evaluate China’s current environmental policies.',
+    'I can describe and explain the impact of the denim industry in China.',
+    'I can describe and explain the environmental and social impacts of agro-industrialisation/agribusiness, such as the US dairy industry.',
+    'I can describe and explain the environmental impacts of the palm oil industry, both locally and globally.',
+    'I can define the key term ‘civil society’.',
+    'I can give examples of civil society groups that are attempting to raise awareness of, and find solutions to, the environmental and social risks associated with global interactions.',
+    'I can explain how Greenpeace, as an organization, is aiming to raise awareness of and find solutions to the environmental risks associated with global interactions.',
+    'I can explain how Amnesty International, as an organization, is aiming to raise awareness of and find solutions to the social risks associated with global interactions.',
+    'I can describe the concept of ‘re-shoring’ by TNCs and explain how it is being used as a strategy to build resilience to global risks, including examples.',
+    'I can describe the concepts of ‘crowdsourcing’ and ‘crowdfunding’ and explain how they are being used as a strategy to build resilience by governments and civil society, including examples.',
+    'I can describe the concept of cybersecurity and explain how it is being used as a strategy to manage the flow of data, including an example.',
+    'I can describe the concept of ePassports and explain how they can be used as a strategy to manage the flow of people, including examples.',
+    'I can understand the structure and assessment criteria for a 12-mark essay.',
+    'I can understand the structure and assessment criteria for a 16-mark essay.',
+    'I can define and apply all of the key terminology from the HL Paper 3 glossary.'
+  ];
+
+  window.SBL_LESSONS.GRREV = {
+    id: 'GRREV',
+    title: 'Global Risks and Resilience — Full Unit Revision',
+    syllabusFocus: 'The whole of Unit 6: Global Risks and Resilience — geopolitical and economic risks, environmental risks, and local and global resilience strategies, including exam skills for Paper 3.',
+    starterButtons: [
+      { label: 'Overview of the whole unit', request: 'Give me a full overview of Unit 6: Global Risks and Resilience, covering geopolitical and economic risks, environmental risks, and resilience strategies.' },
+      { label: 'Threats to sovereignty', request: 'Explain how profit repatriation, tax avoidance and disruptive technologies can threaten a country’s political and economic sovereignty.' },
+      { label: 'Rise of nationalism', request: 'Evaluate the link between globalization and the rise in nationalism, using at least one named example.' },
+      { label: 'Transboundary pollution', request: 'Explain the consequences of and responses to a transboundary pollution event, such as the South East Asian haze in 2015.' },
+      { label: 'Environmental impacts of industry', request: 'Explain the environmental impacts of a globalized industry, such as palm oil or the denim industry in China.' },
+      { label: 'Building resilience', request: 'Explain how re-shoring, crowdsourcing, cybersecurity or ePassports are used as strategies to build resilience to global risks.' },
+      { label: 'Help me plan an essay', request: 'Help me plan a 16-mark essay evaluating the effectiveness of strategies used to build resilience to global risks.' }
+    ],
+    checklist: GR_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Unit 6 checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this unit — for example, “Explain the concept of re-shoring.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: GR_UNIT_TITLE,
+      checklistItems: GR_CHECKLIST
+    },
+    quiz: poolQuestions('GR', 'GRREV')
+  };
+
 })();
