@@ -141,4 +141,83 @@
     quiz: poolQuestions('CP', 'CPREV')
   };
 
+  /* ---------------- Unit 2: Global Climate ---------------- */
+
+  var CC_UNIT_TITLE = 'Unit 2: Global Climate';
+
+  var CC_CHECKLIST = [
+    'I can identify and describe the layers of the atmosphere.',
+    'I can explain the Earth’s energy budget using a diagram.',
+    'I can explain how cloud cover affects temperature.',
+    'I can explain how the output of solar radiation varies with reference to the Milankovitch cycles.',
+    'I can explain and give examples of positive and negative feedback loops.',
+    'I can explain how sunspots impact global temperatures.',
+    'I can explain global dimming and its human and physical causes.',
+    'I can describe the albedo effect using examples.',
+    'I can identify a number of greenhouse gases and their characteristics.',
+    'I can explain the difference between the enhanced greenhouse effect and the greenhouse effect.',
+    'I can critically evaluate the arguments for and against human-induced climate change.',
+    'I can define the four main spheres — hydrosphere, biosphere, lithosphere and atmosphere.',
+    'I can describe and explain ocean acidification.',
+    'I can describe and explain glacial retreat, including examples of places where it is occurring.',
+    'I can describe and explain the causes and impacts of rising sea levels.',
+    'I can describe the carbon cycle.',
+    'I can explain carbon sources, fluxes and sinks.',
+    'I can describe the key changes to extreme weather occurring due to climate change.',
+    'I can explain the link between climate change and El Niño.',
+    'I can describe the potential changes to the location of the world’s biomes due to climate change.',
+    'I can explain the impact of climate change on at least one plant or animal species in detail.',
+    'I can explain the impact of climate change on animal migratory patterns and habitat more generally.',
+    'I can describe and explain the impact of climate change on crop yields globally.',
+    'I can examine the impacts of climate change on agriculture more generally.',
+    'I can give examples of parts of the world where farmers will and will not benefit from climate change.',
+    'I can describe the possible impacts of climate change on human health.',
+    'I can define the key term ‘environmental migration’ and explain how this is linked to climate change, using examples of specific places around the world.',
+    'I can explain the possible impacts of climate change on ocean transport routes, e.g. the Northwest Passage.',
+    'I can define risk and vulnerability and describe how each is calculated.',
+    'I can describe the locations that are potentially most at risk from climate change.',
+    'I can explain the factors that increase or decrease vulnerability and risk.',
+    'I can explain what the Climate Change Vulnerability Index is.',
+    'I can discuss a case study of climate change impacts and vulnerability: Switzerland.',
+    'I can discuss a case study of climate change impacts and vulnerability: Nunavummiut, Northern Canada.',
+    'I can explain the connection between gender, vulnerability and climate change.',
+    'I can describe which countries in the world have made the most and least commitments to tackling climate change.',
+    'I can explain the key features of the UN Framework Convention on Climate Change, 1992.',
+    'I can explain the key features of the Kyoto Protocol, 1997.',
+    'I can explain the key features of the Paris Agreement, 2015.',
+    'I can explain the difference between adaptation and mitigation.',
+    'I can describe and explain carbon trading.',
+    'I can describe and explain carbon offsetting.',
+    'I can describe and explain geoengineering.',
+    'I can describe and explain afforestation.',
+    'I can describe and explain carbon capture and sequestration (CCS).',
+    'I can explain what civil society is and give examples.',
+    'I can explain strategies used by corporations to respond to climate change.',
+    'I can discuss a case study of NGO climate action: NGOs in Nicaragua.',
+    'I can discuss a case study of climate change impacts and responses: Bangladesh.'
+  ];
+
+  window.SBL_LESSONS.CCREV = {
+    id: 'CCREV',
+    title: 'Global Climate — Full Unit Revision',
+    syllabusFocus: 'The whole of Unit 2: Global Climate — the physical and human causes of climate change, its consequences for the atmosphere, oceans, ecosystems, agriculture and human health, and how the world is responding through adaptation, mitigation and international agreements.',
+    starterButtons: [
+      { label: 'Overview of the whole unit', request: 'Give me a full overview of Unit 2: Global Climate, covering causes, consequences, and responses to global climate change.' },
+      { label: 'Feedback loops', request: 'Explain positive and negative feedback loops in the climate system, with examples.' },
+      { label: 'Greenhouse effect vs enhanced', request: 'Explain the difference between the greenhouse effect and the enhanced greenhouse effect.' },
+      { label: 'The carbon cycle', request: 'Describe the carbon cycle and explain the difference between carbon sources, fluxes and sinks.' },
+      { label: 'Vulnerability and risk', request: 'Explain how risk and vulnerability to climate change are calculated, and what factors increase or decrease them.' },
+      { label: 'International agreements', request: 'Explain the key features of the UNFCCC, the Kyoto Protocol, and the Paris Agreement, and how they differ.' },
+      { label: 'Help me plan an essay', request: 'Help me plan an essay comparing adaptation and mitigation strategies for climate change, using specific examples.' }
+    ],
+    checklist: CC_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Unit 2 checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this unit — for example, “Explain the key features of the Paris Agreement, 2015.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: CC_UNIT_TITLE,
+      checklistItems: CC_CHECKLIST
+    },
+    quiz: poolQuestions('CC', 'CCREV')
+  };
+
 })();
