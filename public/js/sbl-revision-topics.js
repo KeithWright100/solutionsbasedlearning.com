@@ -600,4 +600,67 @@
     quiz: poolQuestions('PPN', 'PPNREV')
   };
 
+  /* ---------------- Unit 5: Human Development and Diversity ---------------- */
+
+  var HD_UNIT_TITLE = 'Unit 5: Human Development and Diversity';
+
+  var HD_CHECKLIST = [
+    'I can define the key term ‘human development’.',
+    'I can describe and explain the ways in which the SDGs can be used to measure development.',
+    'I can describe and explain the ways in which the Human Development Index (HDI) can be used to measure development.',
+    'I can describe and explain the ways in which the Gender Inequality Index (GII) can be used to measure development.',
+    'I can define and explain the term ‘affirmative action’.',
+    'I can explain, using examples, how affirmative action can help to close the development gap for women.',
+    'I can explain, using examples, how affirmative action can help to close the development gap for LGBTQ+ people.',
+    'I can explain, using examples, how affirmative action can help to close the development gap for ethnic minorities and/or indigenous groups.',
+    'I can explain, using examples, how microfinance can help to close the development gap.',
+    'I can explain, using examples, how international framework agreements can help to close the development gap.',
+    'I can explain, using examples, how corporate social responsibility can help to close the development gap.',
+    'I can explain, using examples, how alternative trading networks, e.g. fair trade, can help to close the development gap.',
+    'I can explain what is meant by the terms ‘culture’ and ‘cultural traits’.',
+    'I can define a range of key terms regarding changing cultures, such as ‘cultural imperialism’, ‘Americanisation’, ‘cultural hybridity’ and ‘glocalization’.',
+    'I can explain what is meant by a ‘global culture’ and give evidence for and against a global culture existing.',
+    'I can explain, using examples, how the glocalization of branded products can lead to increased cultural hybridity.',
+    'I can explain what is meant by the terms ‘homogenized landscapes’ and ‘uniform landscapes’.',
+    'I can explain, using examples, the arguments for and against Dubai and Bangkok experiencing a homogenization of their landscapes.',
+    'I can define the term ‘diaspora’ and describe where the world’s biggest diaspora groups have migrated from and to.',
+    'I can explain, using examples, how the Chinese diaspora population in the UK have maintained their culture.',
+    'I can explain, using examples, how the British have adopted some of the cultural traits of the Chinese diaspora groups.',
+    'I can define the key term ‘civil society’ and list some examples of civil society groups.',
+    'I can explain some reasons why individuals and/or groups might oppose globalization and global interactions.',
+    'I can give examples of at least two different anti-globalization movements and explain why they oppose globalization, e.g. the anti-Starbucks movement or the Ramin paper trail campaign.',
+    'I can describe and explain the rise in anti-immigration movements in Europe and the USA.',
+    'I can describe and explain how governments can restrict global interactions for their citizens through passports, visas and travel bans.',
+    'I can describe and explain how governments restrict global interactions for their citizens through internet censorship and control in a number of countries, e.g. China, North Korea and Iran.',
+    'I can describe and explain how governments restrict global interactions through protectionist trade measures, e.g. quotas, tariffs, resource nationalism, export bans and sanctions.',
+    'I can explain in detail the ways in which restricted freedoms have been challenged as a result of the Hong Kong pro-democracy campaigns.',
+    'I can explain in detail the ways in which restricted freedoms have been challenged as a result of the Malala Fund.',
+    'I can understand the structure and assessment criteria for a 12-mark essay.',
+    'I can understand the structure and assessment criteria for a 16-mark essay.',
+    'I can define and apply all of the key terminology from the HL Paper 3 glossary.'
+  ];
+
+  window.SBL_LESSONS.HDREV = {
+    id: 'HDREV',
+    title: 'Human Development and Diversity — Full Unit Revision',
+    syllabusFocus: 'The whole of Unit 5: Human Development and Diversity — development opportunities and closing the development gap, changing identities and culture, and local responses to global interactions, including exam skills for Paper 3.',
+    starterButtons: [
+      { label: 'Overview of the whole unit', request: 'Give me a full overview of Unit 5: Human Development and Diversity, covering development opportunities, changing identities and culture, and local responses to global interactions.' },
+      { label: 'Measuring development', request: 'Explain how the SDGs, HDI and GII are each used to measure development.' },
+      { label: 'Closing the development gap', request: 'Explain how affirmative action, microfinance, or corporate social responsibility can help close the development gap, using examples.' },
+      { label: 'Cultural hybridity', request: 'Explain what is meant by cultural hybridity and glocalization, using a named example of a branded product.' },
+      { label: 'Diaspora and culture', request: 'Explain how a diaspora group has maintained its culture while also influencing the culture of its host country, using the Chinese diaspora in the UK as an example.' },
+      { label: 'Resisting globalization', request: 'Explain why individuals or groups might oppose globalization, using at least one named anti-globalization movement.' },
+      { label: 'Help me plan an essay', request: 'Help me plan a 16-mark essay evaluating the effectiveness of strategies used to close the global development gap.' }
+    ],
+    checklist: HD_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Unit 5 checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this unit — for example, “Explain what is meant by cultural hybridity.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: HD_UNIT_TITLE,
+      checklistItems: HD_CHECKLIST
+    },
+    quiz: poolQuestions('HD', 'HDREV')
+  };
+
 })();
