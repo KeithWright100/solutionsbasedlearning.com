@@ -449,4 +449,88 @@
     quiz: poolQuestions('LT', 'LTREV')
   };
 
+  /* ---------------- Option F: Food and Health ---------------- */
+
+  var FH_UNIT_TITLE = 'Option F: Food and Health';
+
+  var FH_CHECKLIST = [
+    'I can define what health is and explain the factors that lead to good health.',
+    'I can describe the global pattern of food and nutritional intake using a number of indicators.',
+    'I can explain what the Global Hunger Index measures and how it is calculated.',
+    'I can define the key terms food security, malnutrition, undernutrition and overnutrition.',
+    'I can explain the stages of the nutrition transition model.',
+    'I can describe and explain regional variations in food consumption and nutrition choices.',
+    'I can define a range of health indicators, including HALE, infant mortality rate, maternal mortality rate and the ratio between doctors/physicians and people.',
+    'I can evaluate the effectiveness of these indicators in measuring the overall level of health of a population.',
+    'I can describe the spatial distribution of the above indicators.',
+    'I can describe and explain the epidemiological transition model.',
+    'I can explain the difference between degenerative diseases and infectious diseases.',
+    'I can explain the concept of ‘burden of disease’.',
+    'I can explain the link between the demographic transition model, epidemiological transition model and nutrition transition model.',
+    'I can identify ways in which energy and water are used throughout the food production process.',
+    'I can explain food production using a systems diagram for a range of different types of farming.',
+    'I can use an example (cornflakes) to illustrate inputs and outputs in a food production system.',
+    'I can link food production to the food-water-energy nexus.',
+    'I can describe how diseases spread.',
+    'I can identify types of disease diffusion.',
+    'I can explain the physical and human barriers to disease diffusion.',
+    'I can evaluate the strategies used to limit the spread of bird flu.',
+    'I can explain what diffusion of agricultural innovations is.',
+    'I can describe a range of agricultural innovations.',
+    'I can explain the possible advantages and drawbacks of these agricultural innovations for farmers.',
+    'I can explain what the ‘Green Revolution’ was and evaluate its effectiveness.',
+    'I can describe the diffusion of a vector-borne disease — malaria.',
+    'I can analyse the national and local impacts of malaria in Kenya.',
+    'I can evaluate the intervention strategies to combat malaria in Kenya.',
+    'I can describe the diffusion of a water-borne disease — cholera.',
+    'I can analyse the national and local impacts of cholera in the Republic of Congo.',
+    'I can evaluate the intervention strategies to combat cholera in the Republic of Congo.',
+    'I can describe the role of the World Food Programme, FAO, WHO, governments, and local and international NGOs in combatting disease and hunger.',
+    'I can outline a number of specific examples of development projects working in different areas of the world to tackle food insecurity and disease, and evaluate the effectiveness of each.',
+    'I can define the key terms TNC, globalization and glocalisation.',
+    'I can describe the ways in which TNCs use the media to influence global food consumption.',
+    'I can explain the impacts of TNCs on food consumption in LICs and HICs.',
+    'I can evaluate the social, environmental and economic impacts of a chosen food TNC.',
+    'I can describe some of the gender disparities in health and state possible solutions.',
+    'I can explain the link between gender inequality, malnutrition and food production.',
+    'I can evaluate some local and national strategies aimed at improving disparities in food production/acquisition and health.',
+    'I can explain the difference between food insecurity and famine.',
+    'I can examine the human and physical causes of famine (FAD/FED).',
+    'I can evaluate the effect of the media and food aid on the severity of famine.',
+    'I can discuss a case study of a famine-stricken country — Yemen — its causes and impacts.',
+    'I can discuss a case study of food insecurity in Yemen and evaluate attempts to tackle it.',
+    'I can explain the problems of food waste globally, including the link between food waste and food insecurity, with examples of strategies attempting to tackle food waste.',
+    'I can evaluate a range of contemporary solutions to food insecurity, including in-vitro meat, permaculture, aquaponics, hydroponics and GMOs.',
+    'I can explain the difference between curative, preventative and primary health care.',
+    'I can identify some examples of preventative care and evaluate their effectiveness.',
+    'I can explain and evaluate the success of the preventative health care system in Majiang, China.',
+    'I can define pandemic and epidemic.',
+    'I can explain the difference between antigenic drift and antigenic shift.',
+    'I can describe the pattern and characteristics of the 2013–2016 Ebola outbreak.',
+    'I can evaluate the effectiveness of the management of the 2013–2016 Ebola outbreak and suggest lessons learned for future pandemic management.'
+  ];
+
+  window.SBL_LESSONS.FHREV = {
+    id: 'FHREV',
+    title: 'Food and Health — Full Option Revision',
+    syllabusFocus: 'The whole of Option F: Food and Health — measuring food and health, food systems and the spread of disease, stakeholders in food and health, and future food security, sustainability and pandemic management.',
+    starterButtons: [
+      { label: 'Overview of the whole option', request: 'Give me a full overview of Option F: Food and Health, covering measuring food and health, food systems and disease spread, stakeholders, and future food security.' },
+      { label: 'Transition models', request: 'Explain the nutrition transition model and the epidemiological transition model, and how they link to the demographic transition model.' },
+      { label: 'Disease diffusion', request: 'Explain how diseases spread and the physical and human barriers to disease diffusion, using malaria or cholera as an example.' },
+      { label: 'TNCs and food', request: 'Explain the impacts of TNCs on food consumption in LICs and HICs, using a named example.' },
+      { label: 'Famine', request: 'Explain the human and physical causes of famine, using Yemen as a case study.' },
+      { label: 'Managing pandemics', request: 'Describe the pattern of the 2013-2016 Ebola outbreak and evaluate how effectively it was managed.' },
+      { label: 'Help me plan an essay', request: 'Help me plan an essay evaluating contemporary solutions to food insecurity, such as GMOs, hydroponics or in-vitro meat.' }
+    ],
+    checklist: FH_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Option F checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this option — for example, “Explain the difference between antigenic drift and antigenic shift.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: FH_UNIT_TITLE,
+      checklistItems: FH_CHECKLIST
+    },
+    quiz: poolQuestions('FH', 'FHREV')
+  };
+
 })();
