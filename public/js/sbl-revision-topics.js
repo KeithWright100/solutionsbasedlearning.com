@@ -45,22 +45,78 @@
   }
 
   /* Re-samples a fresh random set of `count` questions from the full
-     unit pool and assigns it to the revision lesson's .quiz, then
-     opens Test My Knowledge on it — so every attempt is a new random
-     draw, exactly like re-rolling a hand of cards. Falls back to the
-     whole pool if there are fewer than `count` questions available. */
-  window.sblStartUnitRevisionQuiz = function (revisionLessonId, unitPrefix, count) {
+     unit pool and assigns it to the revision lesson's .quiz. Shared by
+     both entry points below so the modal's own "Test My Knowledge"
+     button (inside Teach Me Bot) and the page's standalone quiz button
+     always agree on the question count. Falls back to the whole pool
+     if there are fewer than `count` questions available. */
+  function resampleUnitQuiz(revisionLessonId, unitPrefix, count) {
     var lesson = window.SBL_LESSONS && window.SBL_LESSONS[revisionLessonId];
     if (!lesson) return;
     var pool = poolQuestions(unitPrefix, revisionLessonId);
     var n = Math.min(count || 20, pool.length);
     lesson.quiz = shuffle(pool).slice(0, n);
+  }
+
+  /* Entry point: standalone "Test My Knowledge" card on the revision
+     topic page — re-samples then jumps straight into the quiz. */
+  window.sblStartUnitRevisionQuiz = function (revisionLessonId, unitPrefix, count) {
+    resampleUnitQuiz(revisionLessonId, unitPrefix, count);
     window.openTestMyKnowledge(revisionLessonId);
+  };
+
+  /* Entry point: "Teach Me Bot" card on the revision topic page —
+     re-samples first so that if the student launches the quiz from
+     *inside* the Teach Bot modal instead, it's still a fresh random
+     set of `count` questions, and the modal's own question-count text
+     (driven by lesson.quiz.length) reads correctly. */
+  window.sblOpenUnitTeachBot = function (revisionLessonId, unitPrefix, count) {
+    resampleUnitQuiz(revisionLessonId, unitPrefix, count);
+    window.openTeachBot(revisionLessonId);
   };
 
   /* ---------------- Unit 1: Changing Population ---------------- */
 
   window.SBL_LESSONS = window.SBL_LESSONS || {};
+
+  var CP_UNIT_TITLE = 'Unit 1: Changing Population';
+
+  var CP_CHECKLIST = [
+    'I can explain the difference between population distribution and population density.',
+    'I can describe and explain the human and physical factors affecting population distribution globally.',
+    'I can define LIC, MIC and HIC and give examples of countries in each category.',
+    'I can describe the characteristics of a range of HIC, LIC and MIC countries.',
+    'I can define development and explain how development indicators are used to measure development.',
+    'I can describe and explain the patterns of development and population distribution in Thailand.',
+    'I can explain the core-periphery model and apply it to Bangkok.',
+    'I can give reasons for voluntary internal migration.',
+    'I can describe and explain the patterns of development and population distribution in Egypt, and make comparisons with Thailand.',
+    'I can explain the Demographic Transition Model.',
+    'I can describe and interpret population pyramids.',
+    'I can explain the factors that affect birth and death rates in a country.',
+    'I can define and calculate dependency ratios.',
+    'I can explain the concept of demographic momentum.',
+    'I can define and explain population projections.',
+    'I can compare and contrast differences in population structure and demographic transition in Thailand and The Gambia.',
+    'I can define a ‘megacity’ and identify some megacities globally.',
+    'I can describe the problems associated with rapid megacity growth.',
+    'I can explain the social, economic and environmental consequences of rapid megacity growth, using Mumbai, India as a case study.',
+    'I can define IDP, refugee and economic migrant.',
+    'I can explain the causes of forced migration.',
+    'I can evaluate the causes and consequences of forced migration on donor and recipient countries.',
+    'I can discuss a social/political case study of forced migration: the Rohingya, Burma.',
+    'I can discuss a social/political case study of forced migration: Syria.',
+    'I can discuss an environmental case study of forced migration: Niger or Haiti.',
+    'I can describe trends in sex ratio, nationally and globally.',
+    'I can describe trends in family size, nationally and globally.',
+    'I can describe trends in ageing, nationally and globally.',
+    'I can explain the causes, consequences and possible solutions to an ageing population, using Japan as a case study.',
+    'I can explain pro-natal population policies in The Gambia.',
+    'I can describe some patterns and trends in gender equality globally and nationally.',
+    'I can explain the policies being put in place in Kerala, India to tackle gender equality.',
+    'I can define human trafficking and explain how it is an issue globally.',
+    'I can explain some policies being put in place to tackle human trafficking.'
+  ];
 
   window.SBL_LESSONS.CPREV = {
     id: 'CPREV',
@@ -75,45 +131,12 @@
       { label: 'Ageing populations', request: 'Explain the causes, consequences and possible solutions to an ageing population, using Japan as a case study.' },
       { label: 'Help me plan an essay', request: 'Help me plan an essay comparing the causes of population change in two contrasting countries from this unit.' }
     ],
-    checklist: [
-      'I can explain the difference between population distribution and population density.',
-      'I can describe and explain the human and physical factors affecting population distribution globally.',
-      'I can define LIC, MIC and HIC and give examples of countries in each category.',
-      'I can describe the characteristics of a range of HIC, LIC and MIC countries.',
-      'I can define development and explain how development indicators are used to measure development.',
-      'I can describe and explain the patterns of development and population distribution in Thailand.',
-      'I can explain the core-periphery model and apply it to Bangkok.',
-      'I can give reasons for voluntary internal migration.',
-      'I can describe and explain the patterns of development and population distribution in Egypt, and make comparisons with Thailand.',
-      'I can explain the Demographic Transition Model.',
-      'I can describe and interpret population pyramids.',
-      'I can explain the factors that affect birth and death rates in a country.',
-      'I can define and calculate dependency ratios.',
-      'I can explain the concept of demographic momentum.',
-      'I can define and explain population projections.',
-      'I can compare and contrast differences in population structure and demographic transition in Thailand and The Gambia.',
-      'I can define a ‘megacity’ and identify some megacities globally.',
-      'I can describe the problems associated with rapid megacity growth.',
-      'I can explain the social, economic and environmental consequences of rapid megacity growth, using Mumbai, India as a case study.',
-      'I can define IDP, refugee and economic migrant.',
-      'I can explain the causes of forced migration.',
-      'I can evaluate the causes and consequences of forced migration on donor and recipient countries.',
-      'I can discuss a social/political case study of forced migration: the Rohingya, Burma.',
-      'I can discuss a social/political case study of forced migration: Syria.',
-      'I can discuss an environmental case study of forced migration: Niger or Haiti.',
-      'I can describe trends in sex ratio, nationally and globally.',
-      'I can describe trends in family size, nationally and globally.',
-      'I can describe trends in ageing, nationally and globally.',
-      'I can explain the causes, consequences and possible solutions to an ageing population, using Japan as a case study.',
-      'I can explain pro-natal population policies in The Gambia.',
-      'I can describe some patterns and trends in gender equality globally and nationally.',
-      'I can explain the policies being put in place in Kerala, India to tackle gender equality.',
-      'I can define human trafficking and explain how it is an issue globally.',
-      'I can explain some policies being put in place to tackle human trafficking.'
-    ],
+    checklist: CP_CHECKLIST,
     challenge: {
-      question: 'To what extent is demographic transition a bigger driver of population challenges than migration?',
-      intro: 'This question draws on the whole of Unit 1: Changing Population — population structure, migration, and the challenges and opportunities that come with a changing population. Use specific examples and case studies from across the unit to support your answer.'
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Unit 1 checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this unit — for example, “Explain the pro-natal population policy in The Gambia.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: CP_UNIT_TITLE,
+      checklistItems: CP_CHECKLIST
     },
     quiz: poolQuestions('CP', 'CPREV')
   };

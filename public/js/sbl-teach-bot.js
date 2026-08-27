@@ -204,6 +204,12 @@
   }
 
   function buildChallengeOpener(challenge) {
+    if (challenge.checklistItems && challenge.checklistItems.length) {
+      return 'Please test me with simple, direct questions drawn one at a time from this checklist for ' +
+        (challenge.unitTitle || 'this unit') + ':\n' +
+        challenge.checklistItems.map(function (item) { return '- ' + item; }).join('\n') +
+        '\nAsk me about a different checklist item each time, in a random order, phrased as a direct question (for example: "Explain the pro-natal population policy in The Gambia."). Wait for my answer before asking the next question. If I get one clearly wrong, briefly correct me before moving on. Do not give me the answer before I attempt it.';
+    }
     return 'I am working on this challenge question: "' + challenge.question + '". Please help me think it through by asking me one question at a time. Do not give me answers, structures, plans, or model responses.';
   }
 
@@ -335,7 +341,7 @@ function buildRetrievalBank(lessonId) {
   window.openTestMyKnowledge = function (lessonId) {
     if (!openModalShell(lessonId)) return;
     titleEl.textContent = 'Test My Knowledge: ' + currentLesson.title;
-    if (subtitleEl) subtitleEl.textContent = '10 lesson-specific questions with instant feedback.';
+    if (subtitleEl) subtitleEl.textContent = currentLesson.quiz.length + ' lesson-specific questions with instant feedback.';
     modal.setAttribute('aria-label', 'Test My Knowledge: ' + currentLesson.title);
 
     bodyMount.innerHTML = '<div class="sbl-teach-panel" style="border-right:none; width:100%;" id="sblQuizMount"></div>';
@@ -482,7 +488,7 @@ function buildRetrievalBank(lessonId) {
     html += '<ul class="sbl-checklist-list" id="sblChecklistList"></ul>';
     html += '<p class="sbl-progress-note">Progress is saved to your account, so it carries across devices when you log in.</p></div>';
 
-    html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">10 lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start 10-question quiz &rarr;</button></div>';
+    html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">' + lesson.quiz.length + ' lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start ' + lesson.quiz.length + '-question quiz &rarr;</button></div>';
 
     html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
 
