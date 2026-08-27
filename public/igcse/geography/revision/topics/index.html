@@ -57,6 +57,89 @@
     border-bottom: 1px solid var(--lh-border);
   }
   .lh-paper-heading:first-of-type { margin-top: 0; }
+
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .igcse-hero-banner--cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 2.2rem 0 0;
+    padding: 24px 30px;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
+
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+    .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 </head>
 <body class="lh">
@@ -76,10 +159,11 @@
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
+        <section class="igcse-hero-banner" aria-label="IGCSE Geography Revision Topics">
+          <span class="igcse-hero-kicker">IGCSE Geography</span>
           <h1>Revision Topics</h1>
           <p>One page per topic &mdash; the Teach Me Bot with a full topic checklist next to it, a randomised 20-question quiz, and Challenge Mode. Several topics are ready now, with more IGCSE Geography topics on the way.</p>
-        </div>
+        </section>
 
         <h2 class="lh-paper-heading">Paper 1</h2>
         <div class="lh-units">
@@ -127,10 +211,17 @@
 
         <p class="lh-more-note">More IGCSE Geography topics are being added one at a time &mdash; check back soon.</p>
 
-        <div class="lh-tip" style="margin-top:2rem;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21h6M12 15v6"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/></svg>
-          <span>Prefer exam-style practice instead? Head to <a href="/igcse/geography" style="text-decoration:underline;">IGCSE Paper Practice</a> for real past paper questions marked instantly.</span>
-        </div>
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IGCSE Geography Past Paper Practice">
+          <div>
+            <span class="igcse-hero-kicker">Prefer exam practice?</span>
+            <h2>IGCSE Geography Past Papers</h2>
+            <p>Real past paper questions, marked instantly with examiner-style feedback.</p>
+          </div>
+          <a class="igcse-hero-btn" href="/igcse/geography" aria-label="Open IGCSE Geography Past Paper Practice">
+            Explore Past Papers
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </section>
       </main>
     </div>
   </div>
