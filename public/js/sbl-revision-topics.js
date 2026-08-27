@@ -220,4 +220,71 @@
     quiz: poolQuestions('CC', 'CCREV')
   };
 
+  /* ---------------- Unit 3: Resource Consumption and Security ---------------- */
+
+  var RC_UNIT_TITLE = 'Unit 3: Resource Consumption and Security';
+
+  var RC_CHECKLIST = [
+    'I can define the key terms Low Income Country (LIC) and High Income Country (HIC).',
+    'I can explain how different development indicators are used to assess a country’s level of development.',
+    'I can explain what the Millennium Development Goals are and outline some of their key successes and failures.',
+    'I can explain what the Sustainable Development Goals are, why they were set up, and their aims.',
+    'I can explain the growth of the ‘new’ middle class and its impacts on the global economy.',
+    'I can classify resources along a continuum from exhaustible to infinitely renewable.',
+    'I can define the key terms carrying capacity, overpopulation and underpopulation.',
+    'I can explain and calculate individual and national ecological footprints.',
+    'I can describe and explain spatial patterns relating to the size of ecological footprints.',
+    'I can describe and explain global patterns of water consumption.',
+    'I can explain the concept of embedded water.',
+    'I can describe and explain global patterns of food consumption.',
+    'I can explain how patterns of food consumption change due to the growth of middle income countries.',
+    'I can describe and explain the global pattern of oil production and consumption.',
+    'I can explain the importance of renewable energy sources and nuclear energy.',
+    'I can evaluate a number of alternative, non-fossil fuel energy sources, including biofuel, wind, solar, geothermal, nuclear, tidal, hydroelectric and fuel wood.',
+    'I can explain the water-food-energy nexus.',
+    'I can define water security, food security and energy security.',
+    'I can explain how climate change could influence the water-food-energy nexus.',
+    'I can give examples of how climate change can affect agricultural productivity.',
+    'I can give examples of how climate change can impact water supplies.',
+    'I can give examples of how climate change can impact energy demands.',
+    'I can explain how some countries and regions have adapted to the unwanted negative effects of climate change on the water-food-energy nexus.',
+    'I can discuss a water-food-energy nexus case study: Nepal, a small-scale approach.',
+    'I can discuss a water-food-energy nexus case study: Israel, a large-scale approach.',
+    'I can describe and explain global variations in the world’s waste.',
+    'I can explain the 3 R’s — reduce, reuse, recycle — and the waste hierarchy.',
+    'I can define e-waste and explain why it causes problems.',
+    'I can outline some of the solutions to the e-waste problem, with reference to examples.',
+    'I can explain the theories of Thomas Malthus and the neo-Malthusians.',
+    'I can explain the theories of Esther Boserup and other optimists.',
+    'I can apply the case study of the Ethiopian famine as evidence to support Malthusian theory.',
+    'I can apply the case study of India’s ‘Green and Gene Revolutions’ as evidence to support Boserup’s theory.',
+    'I can explain the theory of the ‘Tragedy of the Commons’.',
+    'I can explain the concept of resource stewardship.',
+    'I can explain the concept of the circular economy.',
+    'I can apply the concept of the circular economy to a case study, e.g. biochar in Chiang Mai or brewing beer from surplus bread in Europe.'
+  ];
+
+  window.SBL_LESSONS.RCREV = {
+    id: 'RCREV',
+    title: 'Resource Consumption and Security — Full Unit Revision',
+    syllabusFocus: 'The whole of Unit 3: Global Resource Consumption and Security — global trends in resource consumption and development, the water-food-energy nexus and its impacts, and theories and strategies of resource stewardship.',
+    starterButtons: [
+      { label: 'Overview of the whole unit', request: 'Give me a full overview of Unit 3: Global Resource Consumption and Security, covering global trends in consumption, the water-food-energy nexus, and resource stewardship.' },
+      { label: 'Ecological footprints', request: 'Explain how ecological footprints are calculated and why they vary spatially.' },
+      { label: 'Water-food-energy nexus', request: 'Explain the water-food-energy nexus and how climate change affects it.' },
+      { label: 'Malthus vs Boserup', request: 'Compare the theories of Thomas Malthus and Esther Boserup on population and resources.' },
+      { label: 'Circular economy', request: 'Explain the concept of the circular economy, using a real example.' },
+      { label: 'E-waste', request: 'Explain what e-waste is, why it is a problem, and some solutions to it.' },
+      { label: 'Help me plan an essay', request: 'Help me plan an essay evaluating whether resource consumption is a bigger threat to sustainability than population growth.' }
+    ],
+    checklist: RC_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Unit 3 checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this unit — for example, “Explain the concept of the circular economy.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: RC_UNIT_TITLE,
+      checklistItems: RC_CHECKLIST
+    },
+    quiz: poolQuestions('RC', 'RCREV')
+  };
+
 })();
