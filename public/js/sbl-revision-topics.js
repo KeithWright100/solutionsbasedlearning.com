@@ -533,4 +533,71 @@
     quiz: poolQuestions('FH', 'FHREV')
   };
 
+  /* ---------------- Unit 4: Power, Places and Networks ---------------- */
+
+  var PPN_UNIT_TITLE = 'Unit 4: Power, Places and Networks';
+
+  var PPN_CHECKLIST = [
+    'I can define the key terms ‘globalisation’ and ‘global interactions’.',
+    'I can describe at least two different globalisation indices and compare the ways they measure globalisation.',
+    'I can define the key term ‘global superpower’.',
+    'I can describe the cultural, economic, political and military influence of China as a superpower.',
+    'I can describe the cultural, economic, political and military influence of the USA as a superpower.',
+    'I can describe and explain the aims and work of the International Monetary Fund (IMF).',
+    'I can describe and explain the aims and work of the World Bank.',
+    'I can describe and explain the aims and work of the G7/8 and G20.',
+    'I can describe and explain the aims and work of the OECD.',
+    'I can describe and explain the aims and work of OPEC.',
+    'I can describe and explain the aims and work of the New Development Bank (NDB).',
+    'I can understand the global networks and flows of trade in materials, manufactured goods and services.',
+    'I can understand the global networks and flows of international aid.',
+    'I can understand the global networks and flows of loans and debt relief.',
+    'I can understand the global networks and flows of international remittances from economic migrants.',
+    'I can understand the illegal global networks and flows of human trafficking, drugs and counterfeit goods.',
+    'I can define ‘foreign direct investment’, ‘TNCs’ and ‘outsourcing’.',
+    'I can explain how FDI and outsourcing have led to increased global interactions.',
+    'I can describe and explain the strategies and supply chains of two contrasting TNCs — Tata and Ikea.',
+    'I can describe and explain how governments can influence global trade.',
+    'I can define the key term ‘multi-governmental organization’ and give a range of examples.',
+    'I can define the key terms ‘trading blocs’ and ‘free trade zones’ and explain how each can influence global trade.',
+    'I can explain the advantages and disadvantages of trading blocs.',
+    'I can describe and explain the ways in which the EU (as an MGO) influences global trade and migration.',
+    'I can describe and explain how global interactions are affected by government control and rules around economic migration.',
+    'I can explain the concepts of ‘friction of distance’ and ‘time-space convergence’.',
+    'I can use the key terms above to explain why the world can be said to have ‘shrunk’ over the past 50 years.',
+    'I can describe a range of transport innovations over time, including shipping (containerization), air travel, trains and roads.',
+    'I can explain how these transport innovations have contributed to the ‘shrinking world’ concept.',
+    'I can describe a range of communication infrastructure and use over time, e.g. the internet, mobile phones and social media.',
+    'I can explain how these communication innovations have contributed to the ‘shrinking world’ concept.',
+    'I can explain how physical factors such as natural resource availability can influence global interactions in a country.',
+    'I can describe and explain the concept of the ‘resource curse’ using examples.',
+    'I can explain how physical factors such as location and geographical isolation can influence the global interactions of a country, using examples.',
+    'I can understand the structure and assessment criteria for a 12-mark essay.',
+    'I can understand the structure and assessment criteria for a 16-mark essay.',
+    'I can define and apply all of the key terminology from the HL Paper 3 glossary.'
+  ];
+
+  window.SBL_LESSONS.PPNREV = {
+    id: 'PPNREV',
+    title: 'Power, Places and Networks — Full Unit Revision',
+    syllabusFocus: 'The whole of Unit 4: Power, Places and Networks — global interactions and global power, global networks and flows, and the human and physical influences on global interactions, including trade, transport, communication and exam skills for Paper 3.',
+    starterButtons: [
+      { label: 'Overview of the whole unit', request: 'Give me a full overview of Unit 4: Power, Places and Networks, covering global power, global networks and flows, and the influences on global interactions.' },
+      { label: 'Global superpowers', request: 'Compare the cultural, economic, political and military influence of China and the USA as global superpowers.' },
+      { label: 'Global organizations', request: 'Explain the aims and work of the IMF, World Bank, G7/8, G20, OECD, OPEC and the New Development Bank.' },
+      { label: 'TNCs and FDI', request: 'Explain how foreign direct investment and outsourcing have led to increased global interactions, using Tata and Ikea as case studies.' },
+      { label: 'Trading blocs', request: 'Explain the advantages and disadvantages of trading blocs, using the EU as an example.' },
+      { label: 'The shrinking world', request: 'Explain the concepts of friction of distance and time-space convergence, and how transport and communication innovations have contributed to a shrinking world.' },
+      { label: 'Help me plan an essay', request: 'Help me plan a 16-mark essay evaluating the factors that influence a country’s level of global interaction.' }
+    ],
+    checklist: PPN_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Unit 4 checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this unit — for example, “Explain the concept of the resource curse.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: PPN_UNIT_TITLE,
+      checklistItems: PPN_CHECKLIST
+    },
+    quiz: poolQuestions('PPN', 'PPNREV')
+  };
+
 })();
