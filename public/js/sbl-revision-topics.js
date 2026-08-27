@@ -379,4 +379,74 @@
     quiz: poolQuestions('FW', 'FWREV')
   };
 
+  /* ---------------- Option E: Leisure, Tourism and Sport ---------------- */
+
+  var LT_UNIT_TITLE = 'Option E: Leisure, Tourism and Sport';
+
+  var LT_CHECKLIST = [
+    'I can define the key terms: leisure, recreation, tourism and sport.',
+    'I can describe how leisure patterns have changed over time and in different places.',
+    'I can outline the factors that affect the growth in leisure time (changes in technology, affluence and accessibility).',
+    'I can categorise a range of tourist activities by cost, duration and destination.',
+    'I can categorise a range of sporting activities by cost, popularity and site.',
+    'I can explain the link between economic development and participation in leisure activities.',
+    'I can discuss a detailed example of the change in leisure activities in the USA.',
+    'I can discuss a detailed example of the change in leisure activities in China.',
+    'I can explain a range of factors that affect personal participation in sport, including affluence, gender, stage of life, personality and place of residence.',
+    'I can explain a range of factors that affect personal participation in tourism, including affluence, gender, stage of life, personality and place of residence.',
+    'I can define tourism hotspots and give examples of both rural and urban hotspots.',
+    'I can explain how primary and secondary touristic resources contribute to the development of a tourist location.',
+    'I can explain the Butler model of tourism and the associated features of each stage.',
+    'I can define the term sphere of influence and related terms to this concept.',
+    'I can explain the factors that would influence the size of the sphere of influence of leisure and tourism facilities/locations.',
+    'I can apply the above concepts to parks and stadiums in Bangkok.',
+    'I can discuss the case study of the English Premier League.',
+    'I can explain the costs and benefits of large-scale events such as festivals.',
+    'I can discuss the Glastonbury Festival case study.',
+    'I can define ‘mass tourism’ and ‘niche tourism’ and give examples of each.',
+    'I can discuss the case study of Iceland as a niche tourism destination.',
+    'I can outline the role of TNCs in expanding international tourism destinations.',
+    'I can discuss the costs and benefits of low cost/budget airlines for a range of stakeholders.',
+    'I can explain the concept of enclave tourism, and its costs and benefits for a range of stakeholders.',
+    'I can explain how tourism can be used as a development strategy by national governments.',
+    'I can discuss the case study of the Maldives’ use of tourism as a national development strategy.',
+    'I can explain the costs and benefits of hosting international sporting events such as the Olympics.',
+    'I can discuss the case study of the Rio 2016 Olympics.',
+    'I can explain the concepts of physical, ecological and perceptual carrying capacity.',
+    'I can explain what makes the tourism industry as a whole unsustainable.',
+    'I can outline the social, economic, environmental and cultural consequences of unsustainable tourism in a range of locations.',
+    'I can discuss the case study of the consequences of unsustainable tourism in Iceland.',
+    'I can describe the key concepts and features of ‘sustainable tourism’ and ‘ecotourism’.',
+    'I can discuss the case study of sustainable tourism in Rwanda.',
+    'I can explain how social media, international security and the influence of diaspora groups may impact tourism in the future.',
+    'I can define the key term ‘sports diplomacy’ and explain how governments use sport to exert ‘soft power’.',
+    'I can explain how and why sport and politics are linked.',
+    'I can discuss the case study of the 2018 Russian doping scandal.',
+    'I can describe and explain the growing importance of the Paralympics.',
+    'I can outline a range of issues associated with gender and sport.'
+  ];
+
+  window.SBL_LESSONS.LTREV = {
+    id: 'LTREV',
+    title: 'Leisure, Tourism and Sport — Full Option Revision',
+    syllabusFocus: 'The whole of Option E: Leisure, Tourism and Sport — changing leisure patterns, tourism and sport at local, national and international scales, and managing tourism and sport sustainably for the future.',
+    starterButtons: [
+      { label: 'Overview of the whole option', request: 'Give me a full overview of Option E: Leisure, Tourism and Sport, covering changing leisure patterns, tourism and sport at different scales, and managing tourism and sport for the future.' },
+      { label: 'The Butler model', request: 'Explain the Butler model of tourism and the features of each stage, with an example.' },
+      { label: 'Sphere of influence', request: 'Explain the concept of sphere of influence and the factors that affect its size for a leisure or tourism facility.' },
+      { label: 'Mass vs niche tourism', request: 'Compare mass tourism and niche tourism, with examples of each.' },
+      { label: 'Sustainable tourism', request: 'Explain what makes tourism unsustainable and how sustainable tourism or ecotourism addresses this, using a case study.' },
+      { label: 'Sport and politics', request: 'Explain how sport and politics are linked, using sports diplomacy and a named case study.' },
+      { label: 'Help me plan an essay', request: 'Help me plan an essay evaluating the costs and benefits of hosting a large-scale sporting event, using named examples.' }
+    ],
+    checklist: LT_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Option E checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this option — for example, “Explain the Butler model of tourism.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: LT_UNIT_TITLE,
+      checklistItems: LT_CHECKLIST
+    },
+    quiz: poolQuestions('LT', 'LTREV')
+  };
+
 })();
