@@ -287,4 +287,96 @@
     quiz: poolQuestions('RC', 'RCREV')
   };
 
+  /* ---------------- Option A: Freshwater ---------------- */
+
+  var FW_UNIT_TITLE = 'Option A: Freshwater';
+
+  var FW_CHECKLIST = [
+    'I can identify the key features of a drainage basin.',
+    'I can explain how a drainage basin is an open system with inputs, outputs, flows and stores.',
+    'I can define river discharge, cross-sectional area (CSA), velocity and hydraulic radius.',
+    'I can explain the relationship between river discharge, stream flow, channel characteristics and hydraulic radius.',
+    'I can explain the Bradshaw model.',
+    'I can explain Manning’s roughness coefficient.',
+    'I can define and describe the four main types of river erosion.',
+    'I can define and describe the four main types of river transportation.',
+    'I can define deposition.',
+    'I can explain how a river channel’s characteristics affect erosion, transportation and deposition.',
+    'I can explain how seasonality affects erosion, transportation and deposition in a river channel.',
+    'I can explain the difference between the long profile and the cross profile of a river.',
+    'I can explain the Hjulström curve.',
+    'I can explain the formation of waterfalls and gorges.',
+    'I can explain the formation of floodplains and bluffs.',
+    'I can explain the formation of levees.',
+    'I can explain the formation of meanders and oxbow lakes.',
+    'I can explain the formation of deltas.',
+    'I can describe the key features of a flood/storm hydrograph.',
+    'I can plot a flood hydrograph using geographical data.',
+    'I can explain how the shape of a hydrograph is affected by a number of human and physical factors.',
+    'I can describe and explain river regimes.',
+    'I can define the key terms ‘flooding’, ‘flood recurrence interval’, ‘flood magnitude’ and ‘flood frequency’.',
+    'I can describe attempts to predict flooding using weather forecasting and climate modelling.',
+    'I can explain the human factors that affect flooding.',
+    'I can explain the physical factors that affect flooding.',
+    'I can evaluate different structural methods of flood mitigation, e.g. dams, afforestation, channel modification and levee strengthening.',
+    'I can evaluate different planning methods used for flood mitigation, e.g. personal insurance, flood preparation and flood warning technology.',
+    'I can discuss the Cockermouth, Cumbria, UK flood management case study.',
+    'I can discuss an LIC or MIC flood management case study of my own choice.',
+    'I can define physical and economic water scarcity.',
+    'I can distinguish the difference between ‘water quality’ and ‘water quantity’.',
+    'I can describe the pattern of physical and economic water scarcity globally using a choropleth map.',
+    'I can explain the reasons for physical water scarcity in some regions.',
+    'I can explain the reasons for economic water scarcity in some regions.',
+    'I can explain the physical and human causes of droughts.',
+    'I can explain the impacts of drought, using the Horn of Africa 2011 drought as an extended example.',
+    'I can identify and describe a number of methods of irrigation.',
+    'I can define the key terms ‘eutrophication’, ‘biomagnification’, ‘bioaccumulation’ and ‘salinization’.',
+    'I can explain how eutrophication, biomagnification, bioaccumulation and salinization occur.',
+    'I can define groundwater.',
+    'I can describe the functions and characteristics of lakes.',
+    'I can describe the functions and characteristics of aquifers using a diagram.',
+    'I can discuss the Lake Chad case study.',
+    'I can discuss the California groundwater depletion and contamination case study.',
+    'I can describe the difference between groundwater pollution and contamination.',
+    'I can describe some sources of groundwater pollution and explain how the issue can be addressed.',
+    'I can explain why conflict can arise over shared water resources.',
+    'I can discuss conflict in the Nile basin as a case study.',
+    'I can explain the difference between large-scale and small-scale water management schemes.',
+    'I can explain examples of small-scale water management schemes put in place by WaterAid globally.',
+    'I can describe the purpose of dams as multifunctional schemes.',
+    'I can examine the costs and benefits of increased dam building.',
+    'I can discuss the Colorado River dam system case study.',
+    'I can discuss the Three Gorges Dam case study.',
+    'I can explain the concept and purpose of integrated drainage basin management (IDBM).',
+    'I can discuss America’s Great Watershed Initiative as a case study.',
+    'I can define wetland areas.',
+    'I can explain why wetland areas need to be managed and protected.',
+    'I can summarise the significance of the Ramsar Convention.',
+    'I can discuss the Kissimmee River/Everglades case study.',
+    'I can discuss the Louisiana wetlands case study.'
+  ];
+
+  window.SBL_LESSONS.FWREV = {
+    id: 'FWREV',
+    title: 'Freshwater — Full Option Revision',
+    syllabusFocus: 'The whole of Option A: Freshwater — drainage basin hydrology and geomorphology, flooding and flood mitigation, water scarcity and water quality, and water management futures including dams, integrated drainage basin management and wetland conservation.',
+    starterButtons: [
+      { label: 'Overview of the whole option', request: 'Give me a full overview of Option A: Freshwater, covering drainage basin hydrology, flooding, water scarcity, and water management futures.' },
+      { label: 'River processes', request: 'Explain the processes of erosion, transportation and deposition in a river channel, and how they change along its course.' },
+      { label: 'Landform formation', request: 'Explain the formation of one river landform of my choice, such as a meander, waterfall, or delta.' },
+      { label: 'Flood hydrographs', request: 'Explain how to interpret a flood hydrograph and the factors that affect its shape.' },
+      { label: 'Water scarcity', request: 'Explain the difference between physical and economic water scarcity, with examples.' },
+      { label: 'Dams and water management', request: 'Evaluate the costs and benefits of large-scale dam building, using a named case study.' },
+      { label: 'Help me plan an essay', request: 'Help me plan an essay evaluating whether large-scale or small-scale water management schemes are more effective, using named examples.' }
+    ],
+    checklist: FW_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Option A checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this option — for example, “Explain the formation of an oxbow lake.” Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: FW_UNIT_TITLE,
+      checklistItems: FW_CHECKLIST
+    },
+    quiz: poolQuestions('FW', 'FWREV')
+  };
+
 })();
