@@ -117,6 +117,8 @@
       return;
     }
 
+    var btnLabel = window.SBL_REVISION_BUTTON_LABEL || 'IB Full Past Paper Questions';
+
     var html = '<div class="lh-modes">';
     topics.forEach(function (t, i) {
       var qCount = t.questions.length;
@@ -127,7 +129,7 @@
       html += '<p class="lh-mode__title">' + escapeHtml(t.topic) + '</p>';
       html += '<p class="lh-mode__desc">' + qCount + ' full past paper question' + (qCount === 1 ? '' : 's') + '. Write your answer and get instant examiner-style marked feedback.</p>';
       html += '</div>';
-      html += '<button type="button" class="lh-mode__btn lh-c-blue" data-topic-index="' + i + '" aria-label="IB Full Past Paper Questions: ' + escapeHtml(t.topic) + '">IB Full Past Paper Questions &rarr;</button>';
+      html += '<button type="button" class="lh-mode__btn lh-c-blue" data-topic-index="' + i + '" aria-label="' + escapeHtml(btnLabel) + ': ' + escapeHtml(t.topic) + '">' + escapeHtml(btnLabel) + ' &rarr;</button>';
       html += '</div>';
     });
     html += '</div>';

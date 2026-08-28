@@ -25,6 +25,10 @@
    20 marks). Send over more past paper content and it gets added
    here, topic by topic. */
 
+/* This page's topic cards should read "IGCSE Full Past Paper Questions",
+   not the engine's IB-page default — see sbl-revision.js. */
+window.SBL_REVISION_BUTTON_LABEL = 'IGCSE Full Past Paper Questions';
+
 window.SBL_REVISION_TOPICS = [
   {
     topic: 'Investigating Coastal Environments — June 2019 Paper 1',
