@@ -49,6 +49,64 @@
     line-height: 1.55;
     margin: 0;
   }
+  .igcse-hero-banner--cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 2.2rem 0 0;
+    padding: 24px 30px;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
+
+  .igcse-hero-banner--soon {
+    background: var(--lh-surface);
+    border: 1px dashed var(--lh-border);
+    box-shadow: none;
+    color: var(--lh-body);
+  }
+  .igcse-hero-banner--soon .igcse-hero-kicker {
+    background: var(--lh-border);
+    color: var(--lh-muted);
+  }
+  .igcse-hero-banner--soon h2 { color: var(--lh-ink); }
+  .igcse-hero-banner--soon p { color: var(--lh-muted); }
+  .igcse-hero-btn--soon {
+    background: var(--lh-surface);
+    color: var(--lh-muted);
+    border: 1px solid var(--lh-border);
+    box-shadow: none;
+  }
+  .igcse-hero-btn--soon:hover { transform: none; box-shadow: none; }
 
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
@@ -121,6 +179,18 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21h6M12 15v6"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/></svg>
       <span><strong>Study tip:</strong> tick off the checklist honestly &mdash; if you can't explain it out loud in one sentence, it's not ticked yet.</span>
     </div>
+
+    <section class="igcse-hero-banner igcse-hero-banner--cta igcse-hero-banner--soon" aria-label="Freshwater Past Papers coming soon">
+      <div>
+        <span class="igcse-hero-kicker">Coming soon</span>
+        <h2>Freshwater &mdash; Past Papers</h2>
+        <p>Full past paper questions for this topic are being added &mdash; check back soon.</p>
+      </div>
+      <a class="igcse-hero-btn igcse-hero-btn--soon" href="/geography/revision/paper-questions/freshwater" aria-label="Freshwater Past Papers status">
+        View Status
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+      </a>
+    </section>
   </div>
 </div>
 
