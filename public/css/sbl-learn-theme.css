@@ -431,6 +431,11 @@
   padding: 0.5rem 0.95rem; border-radius: 8px;
   font-weight: 600; font-size: 0.8rem;
 }
+.lh-tutor__news { text-align: left; margin: 0 0 0.9rem; }
+.lh-tutor__news p { margin: 0 0 0.5rem; font-size: 0.78rem; color: var(--lh-ink); line-height: 1.45; }
+.lh-tutor__news ul { margin: 0; padding-left: 1.05rem; font-size: 0.76rem; color: var(--lh-ink); line-height: 1.5; }
+.lh-tutor__news li { margin-bottom: 0.3rem; }
+.lh-tutor__news li:last-child { margin-bottom: 0; }
 
 .lh-tip {
   margin: 0 1.75rem 1.75rem;
