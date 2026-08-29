@@ -3,13 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business — IGCSE Paper Practice — SBL</title>
-<meta name="description" content="IGCSE Business past paper questions organised by topic, marked instantly by an examiner-style AI marker.">
+<title>Revision Topics — IGCSE Business — SBL</title>
+<meta name="description" content="Full-topic revision pages for IGCSE Business — Teach Me Bot with checklist, a randomised quiz, and Challenge Mode for each topic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
-<link rel="stylesheet" href="/css/sbl-teach-bot.css">
 <style>
+  .lh-units {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .lh-unit-card {
+    background: var(--lh-surface);
+    border: 1px solid var(--lh-border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+  }
+  .lh-unit-card__section {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .lh-unit-card h3 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.7rem;
+  }
+  .lh-unit-card--soon h3 { color: var(--lh-muted); }
+  .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
+  .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
+  .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
+  .lh-more-note {
+    margin-top: 1.4rem;
+    padding: 1rem 1.2rem;
+    border: 1px dashed var(--lh-border);
+    border-radius: 12px;
+    color: var(--lh-muted);
+    font-size: 0.88rem;
+  }
+
   .igcse-hero-banner {
     border-radius: 22px;
     padding: 30px 36px;
@@ -103,31 +141,39 @@
         <span class="lh-crumbs__sep">/</span>
         <a href="/humanities-hub">Humanities Hub</a>
         <span class="lh-crumbs__sep">/</span>
-        <a href="/igcse">IGCSE Paper Practice</a>
+        <a href="/igcse/business">Business IGCSE</a>
         <span class="lh-crumbs__sep">/</span>
-        <span>Business</span>
+        <span>Revision Topics</span>
       </nav>
     </header>
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
-          <h1>Business — IGCSE Paper Practice</h1>
-          <p>Pick a topic below, choose a question, write a full answer, and get instant, examiner-style marked feedback.</p>
+        <section class="igcse-hero-banner" aria-label="IGCSE Business Revision Topics">
+          <span class="igcse-hero-kicker">IGCSE Business</span>
+          <h1>Revision Topics</h1>
+          <p>One page per topic &mdash; the Teach Me Bot with a full topic checklist next to it, a randomised quiz, and Challenge Mode. Topic 1 is ready now, with more IGCSE Business topics on the way.</p>
+        </section>
+
+        <div class="lh-units">
+          <a class="lh-unit-card" href="/igcse/business/revision/topics/business-activity-and-influences">
+            <span class="lh-unit-card__section">Available now</span>
+            <h3>Topic 1: Business Activity and Influences on Business</h3>
+            <p>Business objectives, types of business organisation, classification of businesses, location decisions, the international economy, government policy, external factors, and what makes a business successful.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
+          </a>
         </div>
 
-        <div id="sblRevisionTopicList"></div>
+        <p class="lh-more-note">More IGCSE Business topics are being added one at a time &mdash; check back soon.</p>
 
-        <div id="sblRevisionWorkspace" hidden style="margin-top:2rem;"></div>
-
-        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IGCSE Business Revision Topics">
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IGCSE Business Past Paper Practice">
           <div>
-            <span class="igcse-hero-kicker">Revise a topic first?</span>
-            <h2>IGCSE Business Revision Topics</h2>
-            <p>Teach Me Bot with a full topic checklist, a randomised quiz, and Challenge Mode for each topic.</p>
+            <span class="igcse-hero-kicker">Prefer exam practice?</span>
+            <h2>IGCSE Business Past Papers</h2>
+            <p>Real past paper questions, marked instantly with examiner-style feedback.</p>
           </div>
-          <a class="igcse-hero-btn" href="/igcse/business/revision/topics" aria-label="Open IGCSE Business Revision Topics">
-            Explore Revision Topics
+          <a class="igcse-hero-btn" href="/igcse/business" aria-label="Open IGCSE Business Past Paper Practice">
+            Explore Past Papers
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
         </section>
@@ -135,10 +181,5 @@
     </div>
   </div>
 </div>
-
-<div aria-live="polite" class="sbl-sr-only" id="sblRevisionAnnounce"></div>
-
-<script src="/js/sbl-igcse-business-questions.js"></script>
-<script src="/js/sbl-revision.js"></script>
 </body>
 </html>
