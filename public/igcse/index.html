@@ -38,6 +38,50 @@
   .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
   .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
   .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
+
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+  }
 </style>
 </head>
 <body class="lh">
@@ -55,10 +99,11 @@
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
-          <h1>IGCSE Paper Practice</h1>
+        <section class="igcse-hero-banner" aria-label="IGCSE Paper Practice">
+          <span class="igcse-hero-kicker">IGCSE Humanities</span>
+          <h1>Paper Practice</h1>
           <p>Practice real IGCSE past paper questions and get instant, examiner-style marked feedback &mdash; the same AI marker used across the IB Learning Hubs. Pick a subject below to get started.</p>
-        </div>
+        </section>
 
         <div class="lh-units">
           <a class="lh-unit-card" href="/igcse/geography">
