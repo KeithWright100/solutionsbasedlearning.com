@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revision Guides — Humanities IGCSE — SBL</title>
+<meta name="description" content="IGCSE revision guides across Geography, History, Economics and Business — a Teach Me Bot with checklist, a randomised quiz and Challenge Mode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<style>
+  .lh-units {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .lh-unit-card {
+    background: var(--lh-surface);
+    border: 1px solid var(--lh-border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+  }
+  .lh-unit-card__section {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .lh-unit-card h3 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.7rem;
+  }
+  .lh-unit-card--soon h3 { color: var(--lh-muted); }
+  .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
+  .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
+  .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
+
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .igcse-hero-banner--cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 2.2rem 0 0;
+    padding: 24px 30px;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
+
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+    .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body class="lh">
+<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/">SBL</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>IGCSE Revision Guides</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
+      <main>
+        <section class="igcse-hero-banner" aria-label="Humanities IGCSE Revision Guides">
+          <span class="igcse-hero-kicker">IGCSE Humanities</span>
+          <h1>Revision Guides</h1>
+          <p>One page per topic &mdash; the Teach Me Bot with a full topic checklist next to it, a randomised quiz, and Challenge Mode. Available now for Geography, with History, Economics and Business on the way.</p>
+        </section>
+
+        <div class="lh-units">
+          <a class="lh-unit-card" href="/igcse/geography/revision/topics">
+            <span class="lh-unit-card__section">Available now</span>
+            <h3>Geography</h3>
+            <p>Full-topic revision guides &mdash; Coastal Environments, Hazardous Environments, Rural Environments, and more, with matching fieldwork topics.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
+          </a>
+          <div class="lh-unit-card lh-unit-card--soon">
+            <span class="lh-unit-card__section">Coming soon</span>
+            <h3>History</h3>
+            <p>Topic-by-topic revision guides for IGCSE History are on the way.</p>
+            <div class="lh-unit-card__meta"><span>Coming soon</span></div>
+          </div>
+          <div class="lh-unit-card lh-unit-card--soon">
+            <span class="lh-unit-card__section">Coming soon</span>
+            <h3>Economics</h3>
+            <p>Topic-by-topic revision guides for IGCSE Economics are on the way.</p>
+            <div class="lh-unit-card__meta"><span>Coming soon</span></div>
+          </div>
+          <div class="lh-unit-card lh-unit-card--soon">
+            <span class="lh-unit-card__section">Coming soon</span>
+            <h3>Business</h3>
+            <p>Topic-by-topic revision guides for IGCSE Business are on the way.</p>
+            <div class="lh-unit-card__meta"><span>Coming soon</span></div>
+          </div>
+        </div>
+
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Humanities IGCSE Past Paper Practice">
+          <div>
+            <span class="igcse-hero-kicker">Prefer exam practice?</span>
+            <h2>Humanities IGCSE Past Papers</h2>
+            <p>Real past paper questions across Geography, History, Economics and Business, marked instantly with examiner-style feedback.</p>
+          </div>
+          <a class="igcse-hero-btn" href="/igcse" aria-label="Open Humanities IGCSE Past Paper Practice">
+            Explore Past Papers
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </section>
+      </main>
+    </div>
+  </div>
+</div>
+</body>
+</html>
