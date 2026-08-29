@@ -164,5 +164,11 @@ window.SBL_REVISION_TOPICS = [
         ]
       }
     ]
-  }
+  },
+  /* ---------------- Coming soon ---------------- */
+  { topic: 'Hazardous Environments', comingSoon: true },
+  { topic: 'Coastal Fieldwork', comingSoon: true },
+  { topic: 'Economic Activity and Energy', comingSoon: true },
+  { topic: 'Rural Fieldwork', comingSoon: true },
+  { topic: 'Development and Human Welfare', comingSoon: true }
 ];

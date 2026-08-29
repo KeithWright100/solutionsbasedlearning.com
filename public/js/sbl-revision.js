@@ -40,7 +40,7 @@
 (function () {
 
   var topics = (window.SBL_REVISION_TOPICS || []).filter(function (t) {
-    return t && t.questions && t.questions.length;
+    return t && (t.comingSoon || (t.questions && t.questions.length));
   });
 
   var listMount, workspaceMount;
@@ -121,6 +121,18 @@
 
     var html = '<div class="lh-modes">';
     topics.forEach(function (t, i) {
+      if (t.comingSoon) {
+        html += '<div class="lh-mode lh-mode--locked">';
+        html += '<span class="lh-mode__icon lh-bg-blue" aria-hidden="true">' + docIcon() + '</span>';
+        html += '<div class="lh-mode__body">';
+        html += '<span class="lh-mode__num">' + (i + 1) + '</span>';
+        html += '<p class="lh-mode__title">' + escapeHtml(t.topic) + '</p>';
+        html += '<p class="lh-mode__desc">Full past paper questions for this topic are on the way. Check back soon.</p>';
+        html += '</div>';
+        html += '<span class="lh-mode__btn lh-c-blue">Coming Soon</span>';
+        html += '</div>';
+        return;
+      }
       var qCount = t.questions.length;
       html += '<div class="lh-mode">';
       html += '<span class="lh-mode__icon lh-bg-blue" aria-hidden="true">' + docIcon() + '</span>';
