@@ -50,3 +50,22 @@ export async function requireAdmin(req, res) {
   }
   return session;
 }
+
+// For endpoints usable by any active logged-in visitor, not just
+// admins (e.g. reading lesson resources — the surrounding page is
+// already gated by middleware.js, but every /api endpoint checks
+// for itself regardless). Same call shape as requireAdmin:
+//   const session = await requireSession(req, res);
+//   if (!session) return;
+export async function requireSession(req, res) {
+  const session = await getSessionUser(req);
+  if (!session) {
+    res.status(401).json({ error: 'Not signed in.' });
+    return null;
+  }
+  if (session.profile.status !== 'active') {
+    res.status(403).json({ error: 'Account is suspended.' });
+    return null;
+  }
+  return session;
+}

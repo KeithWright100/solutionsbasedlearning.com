@@ -7,7 +7,7 @@
 // security boundary.
 
 (function () {
-  var state = { pending: [], rejected: [], users: [] };
+  var state = { pending: [], rejected: [], users: [], teachers: [] };
 
   var pageError = document.getElementById('pageError');
   var pageNotice = document.getElementById('pageNotice');
@@ -88,6 +88,7 @@
         state.pending = data.pending || [];
         state.rejected = data.rejected || [];
         state.users = data.users || [];
+        state.teachers = data.teachers || [];
         render();
       })
       .catch(function () {
@@ -129,6 +130,36 @@
     });
   }
 
+  // Role column: a badge, plus (for the two roles this dashboard is
+  // allowed to toggle — 'user' and 'teacher') a button to switch it.
+  // 'student' and any other future-proofed role just show as a
+  // plain badge, matching what api/admin/action.js's set-role will
+  // actually accept.
+  function renderRoleCell(u) {
+    var label = u.role.charAt(0).toUpperCase() + u.role.slice(1).replace(/_/g, ' ');
+    var badge = '<span class="sbl-badge" style="background:rgba(124,147,163,0.2);color:var(--slate);">' + escapeHtml(label) + '</span>';
+    if (u.role === 'teacher') {
+      return badge + '<div style="margin-top:0.35rem;"><button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="make-user" data-id="' + u.id + '">Make user</button></div>';
+    }
+    if (u.role === 'user') {
+      return badge + '<div style="margin-top:0.35rem;"><button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="make-teacher" data-id="' + u.id + '">Make teacher</button></div>';
+    }
+    return badge;
+  }
+
+  // Teacher column: only students can be assigned a teacher. A
+  // <select> of current teachers (from state.teachers), defaulting
+  // to whichever teacher_id is already on the row.
+  function renderTeacherCell(u) {
+    if (u.role !== 'student') return '—';
+    var options = '<option value="">— None —</option>' +
+      state.teachers.map(function (t) {
+        var selected = t.id === u.teacher_id ? ' selected' : '';
+        return '<option value="' + t.id + '"' + selected + '>' + escapeHtml(t.full_name || t.email) + '</option>';
+      }).join('');
+    return '<select class="sbl-teacher-select" data-action="assign-teacher" data-id="' + u.id + '">' + options + '</select>';
+  }
+
   function renderApproved() {
     var body = document.getElementById('approvedBody');
     var empty = document.getElementById('approvedEmpty');
@@ -148,6 +179,8 @@
         '<td>' + escapeHtml(u.full_name) + '</td>' +
         '<td>' + escapeHtml(u.email) + '</td>' +
         '<td>' + escapeHtml(u.organisation || '—') + '<div class="sbl-muted">' + escapeHtml(u.country || '') + '</div></td>' +
+        '<td>' + renderRoleCell(u) + '</td>' +
+        '<td>' + renderTeacherCell(u) + '</td>' +
         '<td>' + badge + '</td>' +
         '<td>' + formatDate(u.created_at) + '</td>' +
         '<td class="sbl-table-actions">' +
@@ -216,6 +249,15 @@
     if (action === 'suspend') return handleSuspendToggle(id, true, btn);
     if (action === 'reactivate') return handleSuspendToggle(id, false, btn);
     if (action === 'delete') return handleDelete(id, btn.getAttribute('data-name'), btn);
+    if (action === 'make-teacher') return handleSetRole(id, 'teacher', btn);
+    if (action === 'make-user') return handleSetRole(id, 'user', btn);
+  });
+
+  // Teacher-assignment dropdowns fire 'change', not 'click'.
+  document.querySelector('.sbl-admin-shell').addEventListener('change', function (e) {
+    var select = e.target.closest('select[data-action="assign-teacher"]');
+    if (!select) return;
+    handleAssignTeacher(select.getAttribute('data-id'), select.value || null, select);
   });
 
   function withButtonBusy(btn, busyLabel, fn) {
@@ -285,5 +327,30 @@
         loadData();
       });
     });
+  }
+
+  function handleSetRole(userId, role, btn) {
+    var verb = role === 'teacher' ? 'make this user a teacher' : 'change this teacher back to a regular user';
+    if (!confirm('Are you sure you want to ' + verb + '?')) return;
+    clearMessages();
+    withButtonBusy(btn, 'Updating…', function () {
+      return postJson('/api/admin/action', { action: 'set-role', userId: userId, role: role }).then(function (result) {
+        if (!result.ok) { showError(result.data.error || "Could not update this user's role."); return; }
+        showNotice(role === 'teacher' ? 'This user is now a teacher.' : 'This user is now a regular user.');
+        loadData();
+      });
+    });
+  }
+
+  function handleAssignTeacher(studentId, teacherId, select) {
+    clearMessages();
+    select.disabled = true;
+    postJson('/api/admin/action', { action: 'assign-teacher', studentId: studentId, teacherId: teacherId })
+      .then(function (result) {
+        if (!result.ok) { showError(result.data.error || 'Could not update the assigned teacher.'); loadData(); return; }
+        showNotice('Assigned teacher updated.');
+        loadData();
+      })
+      .finally(function () { select.disabled = false; });
   }
 })();

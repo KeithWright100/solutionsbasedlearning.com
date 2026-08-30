@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       .limit(200),
     supabase
       .from('sbl_profiles')
-      .select('id, full_name, email, organisation, country, role, status, created_at')
+      .select('id, full_name, email, organisation, country, role, status, teacher_id, created_at')
       .order('created_at', { ascending: false })
       .limit(500)
   ]);
@@ -39,9 +39,17 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Could not load dashboard data.' });
   }
 
+  // A lightweight list of current teachers, so the dashboard can
+  // offer an "assign to teacher" dropdown for each student row
+  // without a second round trip.
+  const teachers = (profilesRes.data || [])
+    .filter((p) => p.role === 'teacher')
+    .map((p) => ({ id: p.id, full_name: p.full_name, email: p.email }));
+
   return res.status(200).json({
     pending: pendingRes.data,
     rejected: decidedRes.data,
-    users: profilesRes.data
+    users: profilesRes.data,
+    teachers
   });
 }

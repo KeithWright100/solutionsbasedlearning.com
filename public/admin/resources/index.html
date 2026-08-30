@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson Resources — Admin Dashboard — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+<style>
+  .sbl-res-toolbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    margin-bottom: 1rem; flex-wrap: wrap;
+  }
+  .sbl-res-search {
+    flex: 1; min-width: 220px; max-width: 360px;
+    background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 10px;
+    color: var(--white); padding: 0.6rem 0.9rem; font-size: 0.88rem; font-family: inherit;
+  }
+  .sbl-res-search::placeholder { color: var(--slate); }
+  .sbl-res-table th, .sbl-res-table td { vertical-align: middle; }
+  .sbl-res-lesson { min-width: 220px; }
+  .sbl-res-lesson__topic { display: block; font-size: 0.72rem; color: var(--slate); margin-bottom: 0.2rem; }
+  .sbl-res-lesson__title { display: block; font-size: 0.86rem; color: var(--white); font-weight: 600; }
+  .sbl-res-slot { min-width: 190px; }
+  .sbl-res-slot__file {
+    display: block; font-size: 0.8rem; color: var(--teal-bright);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px;
+    margin-bottom: 0.4rem;
+  }
+  .sbl-res-slot__empty { display: block; font-size: 0.8rem; color: var(--slate); margin-bottom: 0.4rem; }
+  .sbl-res-slot__actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .sbl-res-row--hidden { display: none; }
+
+  /* Six columns is wider than the other admin tables at any normal
+     window width — always scroll horizontally rather than relying on
+     .sbl-table's mobile-only overflow rule. */
+  .sbl-res-scroll { overflow-x: auto; }
+  .sbl-res-table { min-width: 1080px; }
+</style>
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-admin-shell">
+
+  <div class="sbl-admin-header">
+    <div>
+      <h1>Lesson Resources</h1>
+      <p>Upload Lesson Slides, Lesson Notes, Key Terms, Diagrams &amp; Models and Data Sheets for each IB Geography lesson &middot; signed in as <span id="adminName">…</span></p>
+    </div>
+    <div style="display:flex; gap:0.6rem;">
+      <a href="/admin/" class="sbl-btn sbl-btn--secondary sbl-btn--small">&larr; Back to Dashboard</a>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
+  <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.5rem;"></div>
+
+  <div class="sbl-res-toolbar">
+    <input type="text" class="sbl-res-search" id="lessonSearch" placeholder="Filter by lesson or topic&hellip;">
+    <span class="sbl-tab__count" id="lessonCount" style="position:static;">0 lessons</span>
+  </div>
+
+  <section class="sbl-panel">
+    <div class="sbl-res-scroll">
+      <table class="sbl-table sbl-res-table">
+        <thead>
+          <tr>
+            <th>Lesson</th>
+            <th>Lesson Slides</th>
+            <th>Lesson Notes</th>
+            <th>Key Terms</th>
+            <th>Diagrams &amp; Models</th>
+            <th>Data Sheets</th>
+          </tr>
+        </thead>
+        <tbody id="resourcesBody"></tbody>
+      </table>
+    </div>
+    <div class="sbl-empty-state" id="resourcesEmpty" style="display:none;">No lessons found.</div>
+  </section>
+
+</div>
+
+<!-- Lesson data files — loaded purely to populate window.SBL_LESSONS with
+     every IB Geography lesson's id/title/topic/href, so this page has a
+     full lesson manifest to build the table from. Nothing on this page
+     actually runs a lesson or opens the Teach Bot. -->
+<script src="/js/sbl-population-lessons.js"></script>
+<script src="/js/sbl-climate-lessons.js"></script>
+<script src="/js/sbl-rc-lessons.js"></script>
+<script src="/js/sbl-hd-lessons.js"></script>
+<script src="/js/sbl-freshwater-lessons.js"></script>
+<script src="/js/sbl-leisure-lessons.js"></script>
+<script src="/js/sbl-fh-lessons.js"></script>
+<script src="/js/sbl-unit4-lessons.js"></script>
+<script src="/js/sbl-gr-lessons.js"></script>
+<script src="/js/sbl-admin-resources.js"></script>
+</body>
+</html>

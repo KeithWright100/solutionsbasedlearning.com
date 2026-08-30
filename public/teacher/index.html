@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Students — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-admin-shell">
+
+  <div class="sbl-admin-header">
+    <div>
+      <h1>My Students</h1>
+      <p>Students assigned to you, and a quick look at how they're progressing &middot; signed in as <span id="teacherName">…</span></p>
+    </div>
+    <div style="display:flex; gap:0.6rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
+
+  <section class="sbl-panel">
+    <table class="sbl-table">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Lessons with progress</th>
+          <th>Last activity</th>
+        </tr>
+      </thead>
+      <tbody id="studentsBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="studentsEmpty" style="display:none;">No students are assigned to you yet — ask your admin to assign some from the Admin Dashboard.</div>
+  </section>
+
+</div>
+
+<script src="/js/sbl-teacher.js"></script>
+</body>
+</html>

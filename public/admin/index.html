@@ -9,6 +9,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-theme.css">
 <link rel="stylesheet" href="/css/sbl-auth.css">
+<style>
+  /* The Approved Users table gained Role + Teacher columns on top of
+     its original six — wider than comfortably fits at normal window
+     widths, so scroll horizontally unconditionally rather than
+     relying on .sbl-table's mobile-only overflow rule. */
+  .sbl-approved-scroll { overflow-x: auto; }
+  .sbl-approved-table { min-width: 980px; }
+  .sbl-role-select,
+  .sbl-teacher-select {
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.35rem 1.6rem 0.35rem 0.55rem; font-size: 0.78rem;
+    font-family: inherit; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%237C93A3'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%237C93A3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 0.5rem center;
+  }
+  .sbl-role-select:disabled, .sbl-teacher-select:disabled { opacity: 0.5; }
+</style>
 </head>
 <body>
 <div class="sbl-contours" aria-hidden="true"></div>
@@ -19,7 +36,10 @@
       <h1>Admin Dashboard</h1>
       <p>Solutions Based Learning &middot; signed in as <span id="adminName">…</span></p>
     </div>
-    <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+    <div style="display:flex; gap:0.6rem;">
+      <a href="/admin/resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Lesson Resources</a>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+    </div>
   </div>
 
   <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
@@ -42,12 +62,14 @@
   </section>
 
   <section class="sbl-panel" id="panelApproved" style="display:none;">
-    <table class="sbl-table">
-      <thead>
-        <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
-      </thead>
-      <tbody id="approvedBody"></tbody>
-    </table>
+    <div class="sbl-approved-scroll">
+      <table class="sbl-table sbl-approved-table">
+        <thead>
+          <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Teacher</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="approvedBody"></tbody>
+      </table>
+    </div>
     <div class="sbl-empty-state" id="approvedEmpty" style="display:none;">No approved users yet.</div>
   </section>
 

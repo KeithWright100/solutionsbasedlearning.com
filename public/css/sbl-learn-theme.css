@@ -418,6 +418,24 @@
 .lh-resources li:last-child { border-bottom: none; }
 .lh-resources svg { width: 15px; height: 15px; color: var(--lh-muted); flex-shrink: 0; }
 
+/* Live link (a file has been uploaded for this slot) — the whole
+   row becomes clickable, styled to read as a link rather than plain
+   text, opening in a new tab. */
+.lh-resources li.is-live { padding: 0; }
+.lh-resources__link {
+  display: flex; align-items: center; gap: 0.6rem;
+  width: 100%; padding: 0.5rem 0;
+  color: var(--lh-blue); font-weight: 600;
+  text-decoration: none;
+}
+.lh-resources__link:hover { text-decoration: underline; }
+.lh-resources__link svg { color: var(--lh-blue); }
+
+/* Empty slot (nothing uploaded yet) — same muted treatment used for
+   "coming soon" elsewhere on the site (.lh-mode--locked). */
+.lh-resources li.is-empty { opacity: 0.6; }
+.lh-resources__status { font-size: 0.72rem; color: var(--lh-muted); margin-left: auto; }
+
 .lh-tutor {
   background: var(--lh-blue-bg);
   border-radius: 12px;

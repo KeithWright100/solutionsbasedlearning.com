@@ -45,6 +45,8 @@ export default async function handler(req, res) {
   if (action === 'reject') return handleReject(req, res, session);
   if (action === 'suspend') return handleSuspend(req, res, session);
   if (action === 'delete-user') return handleDeleteUser(req, res, session);
+  if (action === 'set-role') return handleSetRole(req, res, session);
+  if (action === 'assign-teacher') return handleAssignTeacher(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -255,6 +257,102 @@ async function handleDeleteUser(req, res, session) {
   if (error) {
     console.error('Failed to delete user:', error);
     return res.status(500).json({ error: 'Could not delete this user.' });
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// set-role — { userId, role }
+// Toggles an approved account between the plain 'user' role and
+// 'teacher' — this is the only way a 'teacher' account gets created
+// (there's no separate application flow for it; someone applies as
+// normal, gets approved, and the admin promotes them here once
+// they're ready to see a class of students' progress).
+//
+// Deliberately restricted to 'user' <-> 'teacher' only: it will not
+// touch an 'admin' or 'student' account, and it will not promote
+// anyone TO 'admin' — that stays a manual Supabase step (see
+// handleBootstrap's own comment) so it can never be done by mistake
+// through the dashboard.
+// ---------------------------------------------------------------
+async function handleSetRole(req, res, session) {
+  const { userId, role } = req.body || {};
+  if (!userId || (role !== 'user' && role !== 'teacher')) {
+    return res.status(400).json({ error: 'userId and role ("user" or "teacher") are required.' });
+  }
+
+  const supabase = getSupabaseAdmin();
+
+  const { data: target, error: fetchError } = await supabase
+    .from('sbl_profiles')
+    .select('id, role')
+    .eq('id', userId)
+    .maybeSingle();
+
+  if (fetchError || !target) {
+    return res.status(404).json({ error: 'User not found.' });
+  }
+  if (target.role !== 'user' && target.role !== 'teacher') {
+    return res.status(400).json({ error: `This account's role (${target.role}) can't be changed from here.` });
+  }
+
+  const { error } = await supabase.from('sbl_profiles').update({ role }).eq('id', userId);
+  if (error) {
+    console.error('Failed to update role:', error);
+    return res.status(500).json({ error: "Could not update this user's role." });
+  }
+
+  // Demoting a teacher back to a plain user: clear their students'
+  // assignments too, so no student is left "assigned" to someone
+  // who can no longer see a students list at all.
+  if (role === 'user') {
+    const { error: unassignError } = await supabase
+      .from('sbl_profiles')
+      .update({ teacher_id: null })
+      .eq('teacher_id', userId);
+    if (unassignError) {
+      console.error("Failed to clear former teacher's student assignments:", unassignError);
+    }
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// assign-teacher — { studentId, teacherId }
+// Sets (or, with teacherId omitted/null, clears) which teacher a
+// student is linked to. teacherId, if given, must belong to an
+// account whose role is currently 'teacher'.
+// ---------------------------------------------------------------
+async function handleAssignTeacher(req, res, session) {
+  const { studentId, teacherId } = req.body || {};
+  if (!studentId) {
+    return res.status(400).json({ error: 'studentId is required.' });
+  }
+
+  const supabase = getSupabaseAdmin();
+
+  if (teacherId) {
+    const { data: teacher, error: teacherError } = await supabase
+      .from('sbl_profiles')
+      .select('id, role')
+      .eq('id', teacherId)
+      .maybeSingle();
+
+    if (teacherError || !teacher || teacher.role !== 'teacher') {
+      return res.status(400).json({ error: 'That account is not a teacher.' });
+    }
+  }
+
+  const { error } = await supabase
+    .from('sbl_profiles')
+    .update({ teacher_id: teacherId || null })
+    .eq('id', studentId);
+
+  if (error) {
+    console.error('Failed to assign teacher:', error);
+    return res.status(500).json({ error: "Could not update this student's assigned teacher." });
   }
 
   return res.status(200).json({ ok: true });

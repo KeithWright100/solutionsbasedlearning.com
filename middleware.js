@@ -24,7 +24,10 @@ export const config = {
     '/humanities-hub/:path*',
     // The admin dashboard — always gated, and additionally requires
     // role === 'admin' (checked below), not just "logged in".
-    '/admin/:path*'
+    '/admin/:path*',
+    // The teacher dashboard ("My Students") — always gated, and
+    // additionally requires role === 'teacher' (checked below).
+    '/teacher/:path*'
   ]
 };
 
@@ -172,28 +175,32 @@ function redirectToLogin(request) {
   return Response.redirect(loginUrl, 302);
 }
 
-// For /admin/* — confirms the logged-in user's profile has
-// role === 'admin' and status === 'active', via PostgREST using the
-// visitor's OWN access token (RLS's "select own row" policy allows
-// this without needing the service role key at the edge).
-async function isActiveAdmin(accessToken, supabaseUrl, anonKey, userId) {
+// For /admin/* and /teacher/* — looks up the logged-in user's role,
+// via PostgREST using the visitor's OWN access token (RLS's "select
+// own row" policy allows this without needing the service role key
+// at the edge). Returns the role string if the profile is active,
+// otherwise null (missing profile, suspended, or a lookup failure —
+// all fail closed the same way).
+async function getActiveRole(accessToken, supabaseUrl, anonKey, userId) {
   try {
     const res = await fetch(
       `${supabaseUrl}/rest/v1/sbl_profiles?id=eq.${userId}&select=role,status`,
       { headers: { apikey: anonKey, Authorization: `Bearer ${accessToken}` } }
     );
-    if (!res.ok) return false;
+    if (!res.ok) return null;
     const rows = await res.json();
     const profile = rows[0];
-    return !!profile && profile.role === 'admin' && profile.status === 'active';
+    if (!profile || profile.status !== 'active') return null;
+    return profile.role;
   } catch (err) {
-    return false;
+    return null;
   }
 }
 
 export default async function middleware(request) {
   const { pathname } = new URL(request.url);
   const isAdminPath = pathname.startsWith('/admin');
+  const isTeacherPath = pathname.startsWith('/teacher');
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const anonKey = process.env.SUPABASE_ANON_KEY;
@@ -204,12 +211,12 @@ export default async function middleware(request) {
   const jwtSecret = process.env.SUPABASE_JWT_SECRET;
 
   if (!supabaseUrl || !anonKey) {
-    // Fail closed for admin (never expose the dashboard by
-    // accident), fail open for regular content so a missing env var
-    // doesn't take the whole public-facing site down. Fix the env
-    // vars — see README-AUTH-SETUP.md.
+    // Fail closed for admin/teacher (never expose either dashboard
+    // by accident), fail open for regular content so a missing env
+    // var doesn't take the whole public-facing site down. Fix the
+    // env vars — see README-AUTH-SETUP.md.
     console.error('SBL auth middleware: missing SUPABASE_URL / SUPABASE_ANON_KEY.');
-    return isAdminPath ? redirectToLogin(request) : undefined;
+    return (isAdminPath || isTeacherPath) ? redirectToLogin(request) : undefined;
   }
 
   const accessToken = getCookie(request, ACCESS_COOKIE);
@@ -240,9 +247,10 @@ export default async function middleware(request) {
     return response;
   }
 
-  if (isAdminPath) {
-    const allowed = await isActiveAdmin(accessToken, supabaseUrl, anonKey, payload.sub);
-    if (!allowed) return redirectToLogin(request);
+  if (isAdminPath || isTeacherPath) {
+    const role = await getActiveRole(accessToken, supabaseUrl, anonKey, payload.sub);
+    if (isAdminPath && role !== 'admin') return redirectToLogin(request);
+    if (isTeacherPath && role !== 'teacher') return redirectToLogin(request);
   }
 
   return undefined; // valid session — let the request through
