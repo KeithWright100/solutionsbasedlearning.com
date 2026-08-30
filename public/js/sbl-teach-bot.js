@@ -204,6 +204,9 @@
   }
 
   function buildChallengeOpener(challenge) {
+    if (challenge.openerPrompt) {
+      return challenge.openerPrompt;
+    }
     if (challenge.checklistItems && challenge.checklistItems.length) {
       return 'Please test me with simple, direct questions drawn one at a time from this checklist for ' +
         (challenge.unitTitle || 'this unit') + ':\n' +

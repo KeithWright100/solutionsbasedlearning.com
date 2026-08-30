@@ -587,6 +587,11 @@ window.SBL_LESSONS.CC11 = {
     'I can evaluate the role and limitations of individual action.',
     'I can compare civil society and government roles.'
   ],
+  challenge: {
+    question: 'How do civil society and businesses respond to climate change?',
+    intro: 'The Challenge Tutor will ask you seven questions, one at a time, covering civil society, NGOs, grassroots movements, corporate social responsibility, greenwashing, individual action, and the difference between civil society and government. Answer each one before it gives you the next — if you get one wrong, it will give you a clue before explaining the answer.',
+    openerPrompt: 'Ask me seven questions covering civil society, NGOs, grassroots movements, corporate social responsibility, greenwashing, individual action, and the difference between civil society and government. Ask one question at a time. Do not reveal the answer until I respond. If my answer is incorrect, give me a clue before explaining it.'
+  },
   readinessQuestions: [
     'Explain the role of NGOs in responding to climate change.',
     'What is a grassroots climate movement?',
