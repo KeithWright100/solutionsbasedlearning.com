@@ -366,6 +366,19 @@
 .lh-mode--locked .lh-mode__btn { border-style: dashed; cursor: default; }
 .lh-mode--locked .lh-mode__btn:hover { transform: none; }
 
+/* Each mode card's border picks up the same colour as its own icon/
+   button (they already carry an .lh-bg-<colour> class) — matched via
+   :has() so no HTML changes are needed on any lesson page. Width
+   matches .lh-mode__btn's own border (1.5px) so it reads as one
+   consistent accent rather than a heavier outline. */
+.lh-mode:has(.lh-bg-indigo) { border: 1.5px solid var(--lh-indigo); }
+.lh-mode:has(.lh-bg-green)  { border: 1.5px solid var(--lh-green); }
+.lh-mode:has(.lh-bg-blue)   { border: 1.5px solid var(--lh-blue); }
+.lh-mode:has(.lh-bg-orange) { border: 1.5px solid var(--lh-orange); }
+.lh-mode:has(.lh-bg-pink)   { border: 1.5px solid var(--lh-pink); }
+.lh-mode:has(.lh-bg-gold)   { border: 1.5px solid var(--lh-gold); }
+.lh-mode:has(.lh-bg-purple) { border: 1.5px solid var(--lh-purple); }
+
 .lh-c-indigo { color: var(--lh-indigo); } .lh-bg-indigo { background: var(--lh-indigo-bg); color: var(--lh-indigo); }
 .lh-c-green  { color: var(--lh-green);  } .lh-bg-green  { background: var(--lh-green-bg);  color: var(--lh-green); }
 .lh-c-blue   { color: var(--lh-blue);   } .lh-bg-blue   { background: var(--lh-blue-bg);   color: var(--lh-blue); }
