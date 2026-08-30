@@ -37,6 +37,7 @@
   --lh-purple-bg:     #F1EBFE;
   --lh-teal:          #14B8A6;
   --lh-teal-bg:       #E6FBF7;
+  --lh-teal-deep:     #0F766E;   /* darker/richer teal — used by the --dark banner + card-border variant */
 
   --lh-font-display: 'Space Grotesk', 'Arial Narrow', sans-serif;
   --lh-font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -339,6 +340,13 @@
   font-size: clamp(1.5rem, 3.2vw, 2rem);
   line-height: 1.2;
 }
+.lh-page-banner__desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--lh-body);
+  max-width: 60ch;
+}
 
 .lh-page-banner--teal   { background: linear-gradient(135deg, var(--lh-teal-bg), var(--lh-bg));   border-color: var(--lh-teal); }
 .lh-page-banner--teal   .lh-page-banner__icon { background: var(--lh-teal); }
@@ -364,6 +372,28 @@
 .lh-page-banner--purple { background: linear-gradient(135deg, var(--lh-purple-bg), var(--lh-bg)); border-color: var(--lh-purple); }
 .lh-page-banner--purple .lh-page-banner__icon { background: var(--lh-purple); }
 .lh-page-banner--purple .lh-page-banner__eyebrow { color: var(--lh-purple); }
+
+/* Dark variant — a deep navy banner (matching the homepage's IGCSE
+   promo banner) instead of a pale colour tint, with a darker/richer
+   border. Icon chip + eyebrow use the deep-teal accent; swap those
+   two properties for a different colour on a future page that wants
+   this same dark treatment but a different accent. */
+.lh-page-banner--dark {
+  background:
+    linear-gradient(135deg, rgba(3, 28, 51, 0.97), rgba(4, 60, 90, 0.95)),
+    radial-gradient(circle at 85% 20%, rgba(20, 184, 166, 0.22), transparent 60%);
+  border-color: var(--lh-teal-deep);
+  box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+}
+.lh-page-banner--dark .lh-page-banner__icon { background: var(--lh-teal-deep); }
+.lh-page-banner--dark .lh-page-banner__eyebrow { color: #5EEAD4; }
+.lh-page-banner--dark h1 { color: #FFFFFF; }
+.lh-page-banner--dark .lh-page-banner__desc { color: rgba(255, 255, 255, 0.82); }
+
+/* Pairs with .lh-page-banner--dark: darkens the topic-card borders
+   below it to the same deep teal, so the whole page reads as one
+   set rather than a light-bordered list under a dark banner. */
+.lh-unit-topics--dark .lh-unit-topic { border-color: var(--lh-teal-deep); }
 
 /* Stat chips */
 .lh-stats {
