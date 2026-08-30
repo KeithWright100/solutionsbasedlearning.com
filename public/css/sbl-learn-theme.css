@@ -35,6 +35,8 @@
   --lh-gold-bg:       #FBF2DD;
   --lh-purple:        #8B5CF6;
   --lh-purple-bg:     #F1EBFE;
+  --lh-teal:          #14B8A6;
+  --lh-teal-bg:       #E6FBF7;
 
   --lh-font-display: 'Space Grotesk', 'Arial Narrow', sans-serif;
   --lh-font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -297,6 +299,72 @@
   margin: 0 0 1.5rem;
 }
 
+/* Page banner — a coloured icon header used atop an option/unit
+   overview page (e.g. /geography/paper-1/option-a/). Colour + icon
+   are chosen per page with a modifier class (lh-page-banner--teal,
+   --blue, etc.) reusing the same accent palette used everywhere
+   else on the site, so any current or future overview page can pick
+   whichever fits. */
+.lh-page-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  border-radius: 14px;
+  border: 1.5px solid var(--lh-border);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1rem;
+}
+.lh-page-banner__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lh-page-banner__icon svg { width: 26px; height: 26px; stroke: #fff; }
+.lh-page-banner__eyebrow {
+  display: block;
+  font-family: var(--lh-font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.lh-page-banner h1 {
+  margin: 0;
+  font-family: var(--lh-font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  line-height: 1.2;
+}
+
+.lh-page-banner--teal   { background: linear-gradient(135deg, var(--lh-teal-bg), var(--lh-bg));   border-color: var(--lh-teal); }
+.lh-page-banner--teal   .lh-page-banner__icon { background: var(--lh-teal); }
+.lh-page-banner--teal   .lh-page-banner__eyebrow { color: var(--lh-teal); }
+.lh-page-banner--blue   { background: linear-gradient(135deg, var(--lh-blue-bg), var(--lh-bg));   border-color: var(--lh-blue); }
+.lh-page-banner--blue   .lh-page-banner__icon { background: var(--lh-blue); }
+.lh-page-banner--blue   .lh-page-banner__eyebrow { color: var(--lh-blue); }
+.lh-page-banner--green  { background: linear-gradient(135deg, var(--lh-green-bg), var(--lh-bg));  border-color: var(--lh-green); }
+.lh-page-banner--green  .lh-page-banner__icon { background: var(--lh-green); }
+.lh-page-banner--green  .lh-page-banner__eyebrow { color: var(--lh-green); }
+.lh-page-banner--indigo { background: linear-gradient(135deg, var(--lh-indigo-bg), var(--lh-bg)); border-color: var(--lh-indigo); }
+.lh-page-banner--indigo .lh-page-banner__icon { background: var(--lh-indigo); }
+.lh-page-banner--indigo .lh-page-banner__eyebrow { color: var(--lh-indigo); }
+.lh-page-banner--orange { background: linear-gradient(135deg, var(--lh-orange-bg), var(--lh-bg)); border-color: var(--lh-orange); }
+.lh-page-banner--orange .lh-page-banner__icon { background: var(--lh-orange); }
+.lh-page-banner--orange .lh-page-banner__eyebrow { color: var(--lh-orange); }
+.lh-page-banner--pink   { background: linear-gradient(135deg, var(--lh-pink-bg), var(--lh-bg));   border-color: var(--lh-pink); }
+.lh-page-banner--pink   .lh-page-banner__icon { background: var(--lh-pink); }
+.lh-page-banner--pink   .lh-page-banner__eyebrow { color: var(--lh-pink); }
+.lh-page-banner--gold   { background: linear-gradient(135deg, var(--lh-gold-bg), var(--lh-bg));   border-color: var(--lh-gold); }
+.lh-page-banner--gold   .lh-page-banner__icon { background: var(--lh-gold); }
+.lh-page-banner--gold   .lh-page-banner__eyebrow { color: var(--lh-gold); }
+.lh-page-banner--purple { background: linear-gradient(135deg, var(--lh-purple-bg), var(--lh-bg)); border-color: var(--lh-purple); }
+.lh-page-banner--purple .lh-page-banner__icon { background: var(--lh-purple); }
+.lh-page-banner--purple .lh-page-banner__eyebrow { color: var(--lh-purple); }
+
 /* Stat chips */
 .lh-stats {
   display: grid;
@@ -386,6 +454,25 @@
 .lh-c-pink   { color: var(--lh-pink);   } .lh-bg-pink   { background: var(--lh-pink-bg);   color: var(--lh-pink); }
 .lh-c-gold   { color: var(--lh-gold);   } .lh-bg-gold   { background: var(--lh-gold-bg);   color: var(--lh-gold); }
 .lh-c-purple { color: var(--lh-purple); } .lh-bg-purple { background: var(--lh-purple-bg); color: var(--lh-purple); }
+
+/* Topic-group cards — used on an option/unit's overview page (e.g.
+   /geography/paper-1/option-a/) to list each topic within it and
+   the lessons under that topic. Centralised here (rather than
+   repeated per-page in a local <style> block, as these pages used
+   to do) so every current and future overview page gets the same
+   look automatically. */
+.lh-unit-topics { display: flex; flex-direction: column; gap: 1rem; }
+.lh-unit-topic { background: var(--lh-surface); border: 1.5px solid var(--lh-teal); border-radius: 12px; padding: 1.3rem 1.4rem; }
+.lh-unit-topic__num { font-family: var(--lh-font-mono); font-size: 0.66rem; color: var(--lh-green); letter-spacing: 0.08em; }
+.lh-unit-topic h3 { font-family: var(--lh-font-display); font-weight: 700; font-size: 1.02rem; margin: 0.3rem 0 0.9rem; }
+.lh-unit-topic ul { list-style: none; margin: 0; padding: 0; }
+.lh-unit-topic li { position: relative; padding: 0.4rem 0 0.4rem 1.05rem; font-size: 0.86rem; color: var(--lh-body); line-height: 1.5; }
+.lh-unit-topic li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 5px; height: 5px; border-radius: 50%; background: var(--lh-green); }
+.lh-unit-topic li a { color: var(--lh-ink); font-weight: 600; }
+.lh-unit-topic li a:hover { color: var(--lh-green); }
+.lh-item-tag { display: inline-block; margin-left: 0.4rem; font-family: var(--lh-font-mono); font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.05rem 0.4rem; border-radius: 100px; }
+.lh-item-tag.case { color: var(--lh-blue); background: var(--lh-blue-bg); }
+.lh-item-tag.quiz { color: var(--lh-gold); background: var(--lh-gold-bg); }
 
 /* ---------------- Right rail ---------------- */
 .lh-rail { display: flex; flex-direction: column; gap: 1.1rem; }
