@@ -503,6 +503,36 @@ window.SBL_LESSONS.CC10 = {
     'I can compare responses at different scales.',
     'I can evaluate the effectiveness of a strategy.'
   ],
+  challenge: {
+    question: 'How effectively are adaptation, mitigation and international cooperation tackling climate change?',
+    intro: 'This challenge works through three levels of thinking — starting with why governments respond to climate change at all, then weighing up different approaches, before evaluating how effective and fair current strategies really are.',
+    levels: [
+      {
+        label: 'Level 1',
+        questions: [
+          'Why is adaptation important?',
+          'Why is mitigation important?',
+          'Why do countries cooperate on climate change?'
+        ]
+      },
+      {
+        label: 'Level 2',
+        questions: [
+          'Which is more important, adaptation or mitigation?',
+          'Why might poorer countries argue for financial support?',
+          'Why might some countries resist climate agreements?'
+        ]
+      },
+      {
+        label: 'Level 3',
+        questions: [
+          'Should countries that produce the most emissions have the most responsibility?',
+          'Is the Paris Agreement strong enough?',
+          'Can climate change be solved without international cooperation?'
+        ]
+      }
+    ]
+  },
   ibQuestions: [
     {
       question: 'Explain how carbon offset schemes and carbon trading might lead to a global reduction in greenhouse gas emissions.',

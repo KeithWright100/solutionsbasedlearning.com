@@ -210,6 +210,19 @@
         challenge.checklistItems.map(function (item) { return '- ' + item; }).join('\n') +
         '\nAsk me about a different checklist item each time, in a random order, phrased as a direct question (for example: "Explain the pro-natal population policy in The Gambia."). Wait for my answer before asking the next question. If I get one clearly wrong, briefly correct me before moving on. Do not give me the answer before I attempt it.';
     }
+    if (challenge.levels && challenge.levels.length) {
+      var lines = [
+        'I am working on this challenge question: "' + challenge.question + '".',
+        'Please help me think it through using the thinking questions below, moving through them one level at a time, starting at Level 1.',
+        'Ask me only one question at a time and wait for my answer before asking the next. Only move on to the next level once I have answered every question in the current level. Within a level you can ask the questions in any order.',
+        'Do not give me answers, structures, plans, or model responses — if I am stuck, help me reason my way there with a smaller follow-up prompt instead.'
+      ];
+      challenge.levels.forEach(function (lvl) {
+        lines.push((lvl.label || 'Level') + ':');
+        (lvl.questions || []).forEach(function (q) { lines.push('- ' + q); });
+      });
+      return lines.join('\n');
+    }
     return 'I am working on this challenge question: "' + challenge.question + '". Please help me think it through by asking me one question at a time. Do not give me answers, structures, plans, or model responses.';
   }
 
