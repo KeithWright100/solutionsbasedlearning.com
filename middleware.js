@@ -19,9 +19,14 @@
 export const config = {
   matcher: [
     // Content gating is ON — a visitor needs a valid, active login
-    // to reach anything under these two paths.
+    // to reach anything under these paths. A direct link into any of
+    // these bypasses the login page entirely if its path isn't
+    // listed here — the middleware never even runs for an unmatched
+    // path, since matching happens before this file's code does.
     '/geography/:path*',
     '/humanities-hub/:path*',
+    '/igcse/:path*',
+    '/economics/:path*',
     // The admin dashboard — always gated, and additionally requires
     // role === 'admin' (checked below), not just "logged in".
     '/admin/:path*',
