@@ -1,5 +1,6 @@
 /* ============================================================
-   SBL Geography Tutor — reusable engine
+   SBL Tutor — reusable engine (shared across Geography, Business
+   and Economics, and any future subject that reuses this file)
    Reads lesson config from window.SBL_LESSONS[lessonId] and the
    fixed syllabus sequence in window.SBL_LESSON_ORDER (populated by
    lesson-config files such as sbl-population-lessons.js and
@@ -189,7 +190,7 @@
     lines.push('My current lesson is: ' + lesson.title + '.');
     lines.push('Syllabus focus: ' + lesson.syllabusFocus);
     lines.push('Request: ' + requestText);
-    lines.push('Explain it simply first, then add IB Geography detail.');
+    lines.push('Explain it simply first, then add exam-level detail appropriate to this syllabus.');
     lines.push('Give a clear example, identify one common misconception if relevant, and finish with one short check-for-understanding question.');
     lines.push('Suggest a simple labelled diagram if useful.');
     lines.push('Do not write a full essay or an assessed answer for me.');
@@ -200,7 +201,7 @@
     var topics = weakTags.length ? weakTags.join(', ') : 'the topics I got wrong';
     return 'My current lesson is: ' + lesson.title +
       '. I just completed a quiz and want to review: ' + topics +
-      '. Explain each of these simply first, then add IB Geography detail, with one example each. Finish with one short check-for-understanding question per topic. Do not write a full essay or an assessed answer for me.';
+      '. Explain each of these simply first, then add exam-level detail appropriate to this syllabus, with one example each. Finish with one short check-for-understanding question per topic. Do not write a full essay or an assessed answer for me.';
   }
 
   function buildChallengeOpener(challenge) {
@@ -327,7 +328,7 @@ function buildRetrievalBank(lessonId) {
     lessonId = lessonId || overlay.getAttribute('data-lesson-id');
     currentLesson = window.SBL_LESSONS && window.SBL_LESSONS[lessonId];
     if (!currentLesson) {
-      console.error('SBL Geography Tutor: no lesson configuration found for id "' + lessonId + '"');
+      console.error('SBL Tutor: no lesson configuration found for id "' + lessonId + '"');
       return false;
     }
     lastFocusedElement = document.activeElement;
@@ -345,7 +346,7 @@ function buildRetrievalBank(lessonId) {
     if (!openModalShell(lessonId)) return;
     titleEl.textContent = currentLesson.title;
     if (subtitleEl) subtitleEl.textContent = 'Knowledge acquisition for home learning';
-    modal.setAttribute('aria-label', 'SBL Geography Tutor: ' + currentLesson.title);
+    modal.setAttribute('aria-label', 'SBL Tutor: ' + currentLesson.title);
 
     renderTeachBody();
     updateProgress();
@@ -435,9 +436,9 @@ function buildRetrievalBank(lessonId) {
   };
 
   /* ---------------- Entry point 7: Ask AI Tutor (general, no lesson) ---------------- */
-  /* Reuses the exact same "SBL Geography Tutor" Copilot Studio bot as
+  /* Reuses the exact same "SBL Tutor" Copilot Studio bot as
      Teach Me Live, but with no lesson attached — just a plain chat
-     window for general IB Geography questions from anywhere on the
+     window for general questions from anywhere on the
      site. This is what the sidebar "Ask AI Tutor" panel calls. */
 
   window.openAskTutor = function () {
@@ -452,8 +453,8 @@ function buildRetrievalBank(lessonId) {
     overlay.hidden = false;
 
     titleEl.textContent = 'Ask AI Tutor';
-    if (subtitleEl) subtitleEl.textContent = 'General help with IB Geography — ask me anything.';
-    modal.setAttribute('aria-label', 'SBL Geography Tutor: general help');
+    if (subtitleEl) subtitleEl.textContent = 'General help with your syllabus — ask me anything.';
+    modal.setAttribute('aria-label', 'SBL Tutor: general help');
     if (progressEl) progressEl.textContent = '';
 
     bodyMount.innerHTML =
@@ -582,7 +583,7 @@ function buildRetrievalBank(lessonId) {
     var wrap = document.getElementById('sblFrameWrap');
     if (!wrap) return;
     var iframe = document.createElement('iframe');
-    iframe.title = 'SBL Geography Tutor chat';
+    iframe.title = 'SBL Tutor chat';
     iframe.src = src || SBL_TEACH_BOT_IFRAME_SRC;
     wrap.appendChild(iframe);
     iframeLoaded = true;
@@ -1220,9 +1221,10 @@ function buildRetrievalBank(lessonId) {
 
   function buildPlainTextReport(lesson, score, total, pct, band, state) {
     var lines = [];
-    lines.push('SBL Geography');
-    lines.push('Unit: Changing Population');
-    lines.push('Topic ' + lesson.topicNumber + ': ' + lesson.topicTitle);
+    lines.push('SBL Quiz Report');
+    if (lesson.topicNumber && lesson.topicTitle) {
+      lines.push('Topic ' + lesson.topicNumber + ': ' + lesson.topicTitle);
+    }
     lines.push('Lesson: ' + lesson.title);
     lines.push('Assessment: ' + state.contextLabel);
     lines.push('Completed: ' + new Date().toLocaleString());
@@ -1241,13 +1243,15 @@ function buildRetrievalBank(lessonId) {
   }
 
   function downloadQuizReport(lesson, score, total, pct, band, state) {
-    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Geography Quiz Report</title>' +
+    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Quiz Report</title>' +
       '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:700px;margin:0 auto;color:#1B2029;}' +
       'h1{font-size:1.3rem;} .q{margin:1rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;}' +
       '.correct{color:#14532D;} .incorrect{color:#9F1239;} .src{font-size:0.8rem;color:#666;}</style></head><body>';
-    html += '<h1>SBL Geography \u2014 Quiz Report</h1>';
-    html += '<p><strong>Unit:</strong> Changing Population<br>';
-    html += '<strong>Topic ' + lesson.topicNumber + ':</strong> ' + escapeHtml(lesson.topicTitle) + '<br>';
+    html += '<h1>SBL \u2014 Quiz Report</h1>';
+    html += '<p>';
+    if (lesson.topicNumber && lesson.topicTitle) {
+      html += '<strong>Topic ' + lesson.topicNumber + ':</strong> ' + escapeHtml(lesson.topicTitle) + '<br>';
+    }
     html += '<strong>Lesson:</strong> ' + escapeHtml(lesson.title) + '<br>';
     html += '<strong>Assessment:</strong> ' + escapeHtml(state.contextLabel) + '<br>';
     html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '<br>';
