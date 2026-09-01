@@ -77,6 +77,7 @@
       tr.innerHTML =
         '<td>' + escapeHtml(s.fullName) + '</td>' +
         '<td>' + escapeHtml(s.email) + '</td>' +
+        '<td>' + (s.groupName ? escapeHtml(s.groupName) : '<span class="sbl-muted">&mdash;</span>') + '</td>' +
         '<td>' + badge + '</td>' +
         '<td>' + s.lessonsWithProgress + '</td>' +
         '<td>' + formatDate(s.lastUpdated) + '</td>';

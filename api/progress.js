@@ -140,8 +140,9 @@ async function handleMyStudents(req, res, session, supabase) {
 
   const { data: students, error: studentsError } = await supabase
     .from('sbl_profiles')
-    .select('id, full_name, email, status')
+    .select('id, full_name, email, status, group_name')
     .eq('teacher_id', session.user.id)
+    .order('group_name', { ascending: true, nullsFirst: false })
     .order('full_name', { ascending: true });
 
   if (studentsError) {
@@ -172,7 +173,7 @@ async function handleMyStudents(req, res, session, supabase) {
   });
 
   const result = students.map((s) => Object.assign(
-    { id: s.id, fullName: s.full_name, email: s.email, status: s.status },
+    { id: s.id, fullName: s.full_name, email: s.email, status: s.status, groupName: s.group_name || null },
     summary[s.id] || { lessonsWithProgress: 0, lastUpdated: null }
   ));
 

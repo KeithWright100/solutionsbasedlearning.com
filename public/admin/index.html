@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="/css/sbl-theme.css">
 <link rel="stylesheet" href="/css/sbl-auth.css">
 <style>
-  /* The Approved Users table gained Role + Teacher columns on top of
-     its original six — wider than comfortably fits at normal window
-     widths, so scroll horizontally unconditionally rather than
-     relying on .sbl-table's mobile-only overflow rule. */
+  /* The Approved Users table gained Role + Teacher (+ Group) columns
+     on top of its original six — wider than comfortably fits at
+     normal window widths, so scroll horizontally unconditionally
+     rather than relying on .sbl-table's mobile-only overflow rule. */
   .sbl-approved-scroll { overflow-x: auto; }
-  .sbl-approved-table { min-width: 980px; }
+  .sbl-approved-table { min-width: 1120px; }
   .sbl-role-select,
   .sbl-teacher-select {
     background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
@@ -25,6 +25,13 @@
     background-repeat: no-repeat; background-position: right 0.5rem center;
   }
   .sbl-role-select:disabled, .sbl-teacher-select:disabled { opacity: 0.5; }
+  .sbl-group-input {
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.35rem 0.55rem; font-size: 0.78rem;
+    font-family: inherit; width: 9.5rem;
+  }
+  .sbl-group-input::placeholder { color: var(--navy-line); }
+  .sbl-group-input:disabled { opacity: 0.5; }
 </style>
 </head>
 <body>
@@ -65,7 +72,7 @@
     <div class="sbl-approved-scroll">
       <table class="sbl-table sbl-approved-table">
         <thead>
-          <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Teacher</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
+          <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Teacher</th><th>Group</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
         </thead>
         <tbody id="approvedBody"></tbody>
       </table>

@@ -47,6 +47,7 @@ export default async function handler(req, res) {
   if (action === 'delete-user') return handleDeleteUser(req, res, session);
   if (action === 'set-role') return handleSetRole(req, res, session);
   if (action === 'assign-teacher') return handleAssignTeacher(req, res, session);
+  if (action === 'assign-group') return handleAssignGroup(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -355,6 +356,41 @@ async function handleAssignTeacher(req, res, session) {
   if (error) {
     console.error('Failed to assign teacher:', error);
     return res.status(500).json({ error: "Could not update this student's assigned teacher." });
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// assign-group — { studentId, groupName }
+// Sets (or, with groupName omitted/blank, clears) a free-text group
+// label on a profile, e.g. "SL Geography Grad'28". This is just a
+// label for a teacher's own roster at /teacher/ — it does not affect
+// login, content access, or who a student's assigned teacher is
+// (that is still the separate teacher_id link above). See
+// sql/006_student_groups.sql and README-STUDENT-GROUPS-SETUP.md.
+// ---------------------------------------------------------------
+async function handleAssignGroup(req, res, session) {
+  const { studentId, groupName } = req.body || {};
+  if (!studentId) {
+    return res.status(400).json({ error: 'studentId is required.' });
+  }
+
+  const trimmed = typeof groupName === 'string' ? groupName.trim() : '';
+  if (trimmed.length > 80) {
+    return res.status(400).json({ error: 'Group name is too long (80 characters max).' });
+  }
+
+  const supabase = getSupabaseAdmin();
+
+  const { error } = await supabase
+    .from('sbl_profiles')
+    .update({ group_name: trimmed || null })
+    .eq('id', studentId);
+
+  if (error) {
+    console.error('Failed to assign group:', error);
+    return res.status(500).json({ error: "Could not update this student's group." });
   }
 
   return res.status(200).json({ ok: true });

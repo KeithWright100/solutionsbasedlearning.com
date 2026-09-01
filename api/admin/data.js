@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       .limit(200),
     supabase
       .from('sbl_profiles')
-      .select('id, full_name, email, organisation, country, role, status, teacher_id, created_at')
+      .select('id, full_name, email, organisation, country, role, status, teacher_id, group_name, created_at')
       .order('created_at', { ascending: false })
       .limit(500)
   ]);

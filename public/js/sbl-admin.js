@@ -160,6 +160,16 @@
     return '<select class="sbl-teacher-select" data-action="assign-teacher" data-id="' + u.id + '">' + options + '</select>';
   }
 
+  // Group column: only students get a group label — a free-text
+  // field like "SL Geography Grad'28", shown on that student's
+  // teacher's /teacher/ roster. Saves on blur (same pattern as the
+  // Teacher <select>, just for a text field — Enter blurs it too).
+  function renderGroupCell(u) {
+    if (u.role !== 'student') return '—';
+    return '<input type="text" class="sbl-group-input" data-action="assign-group" data-id="' + u.id + '" value="' +
+      escapeHtml(u.group_name || '') + '" placeholder="e.g. SL Geography Grad’28" maxlength="80">';
+  }
+
   function renderApproved() {
     var body = document.getElementById('approvedBody');
     var empty = document.getElementById('approvedEmpty');
@@ -181,6 +191,7 @@
         '<td>' + escapeHtml(u.organisation || '—') + '<div class="sbl-muted">' + escapeHtml(u.country || '') + '</div></td>' +
         '<td>' + renderRoleCell(u) + '</td>' +
         '<td>' + renderTeacherCell(u) + '</td>' +
+        '<td>' + renderGroupCell(u) + '</td>' +
         '<td>' + badge + '</td>' +
         '<td>' + formatDate(u.created_at) + '</td>' +
         '<td class="sbl-table-actions">' +
@@ -256,8 +267,18 @@
   // Teacher-assignment dropdowns fire 'change', not 'click'.
   document.querySelector('.sbl-admin-shell').addEventListener('change', function (e) {
     var select = e.target.closest('select[data-action="assign-teacher"]');
-    if (!select) return;
-    handleAssignTeacher(select.getAttribute('data-id'), select.value || null, select);
+    if (select) { handleAssignTeacher(select.getAttribute('data-id'), select.value || null, select); return; }
+    var input = e.target.closest('input[data-action="assign-group"]');
+    if (input) { handleAssignGroup(input.getAttribute('data-id'), input.value, input); return; }
+  });
+
+  // The group text field saves on 'change' (fires on blur once the
+  // value differs) — pressing Enter blurs it immediately rather than
+  // making the person click away first.
+  document.querySelector('.sbl-admin-shell').addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter') return;
+    if (!e.target.closest('input[data-action="assign-group"]')) return;
+    e.target.blur();
   });
 
   function withButtonBusy(btn, busyLabel, fn) {
@@ -352,5 +373,17 @@
         loadData();
       })
       .finally(function () { select.disabled = false; });
+  }
+
+  function handleAssignGroup(studentId, groupName, input) {
+    clearMessages();
+    input.disabled = true;
+    postJson('/api/admin/action', { action: 'assign-group', studentId: studentId, groupName: groupName })
+      .then(function (result) {
+        if (!result.ok) { showError(result.data.error || "Could not update this student's group."); loadData(); return; }
+        showNotice('Group updated.');
+        loadData();
+      })
+      .finally(function () { input.disabled = false; });
   }
 })();
