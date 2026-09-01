@@ -323,7 +323,9 @@ async function handleSetRole(req, res, session) {
 // assign-teacher — { studentId, teacherId }
 // Sets (or, with teacherId omitted/null, clears) which teacher a
 // student is linked to. teacherId, if given, must belong to an
-// account whose role is currently 'teacher'.
+// account whose role is currently 'teacher' — or 'admin', since an
+// admin can also act as a teacher and have students assigned
+// directly to them (see README-TEACHER-LINKING-SETUP.md).
 // ---------------------------------------------------------------
 async function handleAssignTeacher(req, res, session) {
   const { studentId, teacherId } = req.body || {};
@@ -340,7 +342,7 @@ async function handleAssignTeacher(req, res, session) {
       .eq('id', teacherId)
       .maybeSingle();
 
-    if (teacherError || !teacher || teacher.role !== 'teacher') {
+    if (teacherError || !teacher || (teacher.role !== 'teacher' && teacher.role !== 'admin')) {
       return res.status(400).json({ error: 'That account is not a teacher.' });
     }
   }

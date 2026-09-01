@@ -31,7 +31,8 @@ export const config = {
     // role === 'admin' (checked below), not just "logged in".
     '/admin/:path*',
     // The teacher dashboard ("My Students") — always gated, and
-    // additionally requires role === 'teacher' (checked below).
+    // additionally requires role === 'teacher' or 'admin' (checked
+    // below) — an admin can also act as a teacher.
     '/teacher/:path*'
   ]
 };
@@ -255,7 +256,10 @@ export default async function middleware(request) {
   if (isAdminPath || isTeacherPath) {
     const role = await getActiveRole(accessToken, supabaseUrl, anonKey, payload.sub);
     if (isAdminPath && role !== 'admin') return redirectToLogin(request);
-    if (isTeacherPath && role !== 'teacher') return redirectToLogin(request);
+    // An admin can also act as a teacher and have students assigned
+    // directly to them, so /teacher/* accepts either role — see
+    // README-TEACHER-LINKING-SETUP.md.
+    if (isTeacherPath && role !== 'teacher' && role !== 'admin') return redirectToLogin(request);
   }
 
   return undefined; // valid session — let the request through

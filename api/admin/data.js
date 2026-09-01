@@ -41,9 +41,11 @@ export default async function handler(req, res) {
 
   // A lightweight list of current teachers, so the dashboard can
   // offer an "assign to teacher" dropdown for each student row
-  // without a second round trip.
+  // without a second round trip. Admin accounts count as teachers
+  // here too, since an admin may also want students assigned
+  // directly to them and see their own My Students page.
   const teachers = (profilesRes.data || [])
-    .filter((p) => p.role === 'teacher')
+    .filter((p) => p.role === 'teacher' || p.role === 'admin')
     .map((p) => ({ id: p.id, full_name: p.full_name, email: p.email }));
 
   return res.status(200).json({

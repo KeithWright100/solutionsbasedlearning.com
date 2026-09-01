@@ -131,7 +131,10 @@ export default async function handler(req, res) {
 // at a glance who's active and who isn't.
 // ---------------------------------------------------------------
 async function handleMyStudents(req, res, session, supabase) {
-  if (session.profile.role !== 'teacher') {
+  // Admin accounts can also act as a teacher and have students
+  // assigned directly to them, so this roster is available to
+  // 'teacher' and 'admin' alike — see README-TEACHER-LINKING-SETUP.md.
+  if (session.profile.role !== 'teacher' && session.profile.role !== 'admin') {
     return res.status(403).json({ error: 'Only teacher accounts have a student roster here.' });
   }
 

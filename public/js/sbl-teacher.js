@@ -3,8 +3,10 @@
 // teacher which students are assigned to them, and a lightweight
 // progress summary for each. All real authorization happens
 // server-side (middleware.js gates the page itself, requiring role
-// === 'teacher'; /api/progress?myStudents=1 independently re-checks
-// the caller's role) — this script only renders data.
+// === 'teacher' or 'admin'; /api/progress?myStudents=1 independently
+// re-checks the caller's role) — this script only renders data. An
+// admin can also act as a teacher and have students assigned
+// directly to them — see README-TEACHER-LINKING-SETUP.md.
 
 (function () {
   var pageError = document.getElementById('pageError');
@@ -31,7 +33,7 @@
   fetch('/api/session')
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      if (!data.loggedIn || data.user.role !== 'teacher') {
+      if (!data.loggedIn || (data.user.role !== 'teacher' && data.user.role !== 'admin')) {
         window.location.href = '/login/?redirect=/teacher/';
         return;
       }
