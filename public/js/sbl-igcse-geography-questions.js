@@ -20,12 +20,14 @@
 
    Content so far: Pearson Edexcel International GCSE Geography, Paper 1
    (4GE1/01R), June 2019 — Question 5, "Investigating Coastal
-   Environments" (Section B, 20 marks); Paper 2 (4GE1/02R), June
+   Environments" (Section B, 20 marks — shown on the site as "Coastal
+   Fieldwork — June 2019 Paper 1"); Paper 2 (4GE1/02R), June
    2019 — Question 5, "Investigating Rural Environments" (Section B,
    20 marks); Paper 1 (4GE1/01), June 2021 — Question 2, "Coastal
    Environments" (Section A, 25 marks), Question 3, "Hazardous
    Environments" (Section A, 25 marks), and Question 5, "Investigating
-   Coastal Environments" (Section B, 12 marks — this paper's Section B
+   Coastal Environments" (Section B, 12 marks — shown on the site as
+   "Coastal Fieldwork — June 2021 Paper 1"; this paper's Section B
    question was restructured to a shorter 12-mark format, unlike the
    20-mark June 2019 version above). Marking guidance for all three
    June 2021 Paper 1 entries was written in-house (no official Pearson
@@ -46,7 +48,7 @@ window.SBL_REVISION_BUTTON_LABEL = 'IGCSE Full Past Paper Questions';
 
 window.SBL_REVISION_TOPICS = [
   {
-    topic: 'Investigating Coastal Environments — June 2019 Paper 1',
+    topic: 'Coastal Fieldwork — June 2019 Paper 1',
     paper: 1,
     questionNumber: 5,
     questions: [
@@ -184,12 +186,12 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   },
-  /* ---------------- Investigating Coastal Environments — June 2021 Paper 1 ----------------
+  /* ---------------- Coastal Fieldwork — June 2021 Paper 1 ----------------
      No official Pearson mark scheme was available for this series, so the
      marking guidance below was written in-house to a similar standard —
      see the file header comment. */
   {
-    topic: 'Investigating Coastal Environments — June 2021 Paper 1',
+    topic: 'Coastal Fieldwork — June 2021 Paper 1',
     paper: 1,
     questionNumber: 5,
     questions: [
@@ -826,7 +828,5 @@ window.SBL_REVISION_TOPICS = [
         ]
       }
     ]
-  },
-  /* ---------------- Coming soon ---------------- */
-  { topic: 'Coastal Fieldwork', comingSoon: true }
+  }
 ];

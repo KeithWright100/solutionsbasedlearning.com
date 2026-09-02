@@ -12,7 +12,7 @@
     { key: 'notes', label: 'Lesson Notes' },
     { key: 'key_terms', label: 'Key Terms' },
     { key: 'diagrams', label: 'Diagrams & Models' },
-    { key: 'data_sheets', label: 'Data Sheets' }
+    { key: 'data_sheets', label: 'Quizzes' }
   ];
 
   var state = { lessons: [], resources: {} }; // resources: { "<lessonId>|<type>": {fileName, fileSize, uploadedAt} }
