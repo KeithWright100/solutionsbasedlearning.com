@@ -46,6 +46,13 @@
   var listMount, workspaceMount;
   var activeTopicIndex = null;
   var activeQuestionIndex = null;
+  // Answers/feedback collected so far for the CURRENTLY OPEN topic, keyed
+  // by question index — reset every time a (possibly different) topic is
+  // opened. Lets a student work through every question in a topic and
+  // then download one combined report with a running total score and
+  // all the feedback together, on top of the existing per-question
+  // download/copy already below.
+  var topicAnswers = {};
 
   /* ---------------- Utilities ---------------- */
 
@@ -159,6 +166,7 @@
   function openTopic(topicIndex) {
     activeTopicIndex = topicIndex;
     activeQuestionIndex = 0;
+    topicAnswers = {};
     workspaceMount.hidden = false;
     renderQuestionChooser();
     workspaceMount.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -169,6 +177,7 @@
 
     var html = '<div class="sbl-teach-panel" style="border-right:none; width:100%;">';
     html += '<div class="sbl-teach-section"><h3>' + escapeHtml(topic.topic) + '</h3>';
+    html += '<div id="sblRevisionTopicSummary" class="sbl-progress-note" style="margin:0.5rem 0 1.25rem;"></div>';
 
     if (topic.questions.length > 1) {
       html += '<p class="sbl-teach-focus">Choose a question:</p>';
@@ -196,6 +205,119 @@
     }
 
     renderQuestionWorkspace();
+    renderTopicSummary();
+  }
+
+  /* ---------------- Topic-wide running total + combined download ---------------- */
+
+  // Pulls the leading number out of whatever the marker returned as
+  // "mark awarded" (usually "5 / 8", sometimes just "5") so it can be
+  // summed. Returns null if nothing numeric could be found, rather than
+  // guessing — the caller shows that as "not counted" instead of
+  // silently treating it as zero.
+  function parseMarkNumber(markAwardedText) {
+    if (!markAwardedText) return null;
+    var m = String(markAwardedText).match(/(\d+(?:\.\d+)?)/);
+    return m ? parseFloat(m[1]) : null;
+  }
+
+  function renderTopicSummary() {
+    var mount = document.getElementById('sblRevisionTopicSummary');
+    if (!mount) return;
+    var topic = topics[activeTopicIndex];
+    var totalMax = topic.questions.reduce(function (sum, q) { return sum + q.marks; }, 0);
+    var totalQuestions = topic.questions.length;
+    var answeredCount = Object.keys(topicAnswers).length;
+
+    if (!answeredCount) {
+      mount.innerHTML = '<span>Answer each question' + (totalQuestions > 1 ? ' in this topic' : '') +
+        ', then download one combined report with your total score out of ' + totalMax + ' and all your feedback together.</span>';
+      return;
+    }
+
+    var scoredSum = 0;
+    var unparsedCount = 0;
+    Object.keys(topicAnswers).forEach(function (key) {
+      var n = parseMarkNumber(topicAnswers[key].feedback && topicAnswers[key].feedback.markAwarded);
+      if (n === null) { unparsedCount++; } else { scoredSum += n; }
+    });
+
+    var html = '<strong>Answered ' + answeredCount + ' of ' + totalQuestions + ' question' + (totalQuestions === 1 ? '' : 's') + '.</strong> ';
+    html += 'Total so far: <strong>' + scoredSum + ' / ' + totalMax + '</strong>';
+    if (unparsedCount) html += ' <span style="color:var(--lh-muted, #666);">(' + unparsedCount + ' mark' + (unparsedCount === 1 ? '' : 's') + ' could not be read automatically — check the downloaded report)</span>';
+    html += '<br><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblRevisionDownloadTopic" style="margin-top:0.6rem;">Download combined report (all questions)</button>';
+    mount.innerHTML = html;
+
+    var btn = document.getElementById('sblRevisionDownloadTopic');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        downloadTopicReport(topic, totalMax);
+      });
+    }
+  }
+
+  function downloadTopicReport(topic, totalMax) {
+    var scoredSum = 0;
+    var bodyHtml = '';
+
+    topic.questions.forEach(function (q, i) {
+      var entry = topicAnswers[i];
+      bodyHtml += '<div class="qblock">';
+      bodyHtml += '<h2>' + escapeHtml(q.label || ('Question ' + (i + 1))) + ' [' + q.marks + ' mark' + (q.marks === 1 ? '' : 's') + ']</h2>';
+      if (q.images && q.images.length) {
+        q.images.forEach(function (img) {
+          if (!img || !img.src) return;
+          bodyHtml += '<img src="' + escapeHtml(img.src) + '" alt="' + escapeHtml(img.alt || '') + '" style="max-width:100%; height:auto; border:1px solid #ddd; border-radius:8px; display:block; margin-bottom:0.4rem;">';
+          if (img.caption) bodyHtml += '<p style="font-size:0.85rem; color:#666; margin-top:0;">' + escapeHtml(img.caption) + '</p>';
+        });
+      }
+      bodyHtml += '<p><strong>Question:</strong> ' + escapeHtml(q.question) + '</p>';
+
+      if (!entry) {
+        bodyHtml += '<p style="color:#b23a3a; font-style:italic;">Not yet answered — not included in the total below.</p>';
+      } else {
+        var fb = entry.feedback || {};
+        var n = parseMarkNumber(fb.markAwarded);
+        if (n !== null) scoredSum += n;
+        bodyHtml += '<p><strong>My answer:</strong></p><div class="block">' + escapeHtml(entry.answerText) + '</div>';
+        bodyHtml += '<p><strong>Mark awarded:</strong> ' + escapeHtml(fb.markAwarded || ('— / ' + q.marks)) + '</p>';
+        if (fb.whyThisMark) bodyHtml += '<p><strong>Why this mark was awarded:</strong></p><div class="block">' + escapeHtml(fb.whyThisMark) + '</div>';
+        if (fb.whatWasDoneWell) bodyHtml += '<p><strong>What was done well:</strong></p><div class="block">' + escapeHtml(fb.whatWasDoneWell) + '</div>';
+        if (fb.whatIsMissing) bodyHtml += '<p><strong>What is missing or needs development:</strong></p><div class="block">' + escapeHtml(fb.whatIsMissing) + '</div>';
+        if (fb.nextStep) bodyHtml += '<p><strong>Next step:</strong></p><div class="block">' + escapeHtml(fb.nextStep) + '</div>';
+        if (fb.followUpQuestion) bodyHtml += '<p><strong>Follow-up question:</strong></p><div class="block">' + escapeHtml(fb.followUpQuestion) + '</div>';
+      }
+      bodyHtml += '</div><hr>';
+    });
+
+    var answeredCount = Object.keys(topicAnswers).length;
+    var totalQuestions = topic.questions.length;
+    var noteHtml = answeredCount < totalQuestions
+      ? '<p style="color:#b23a3a;"><strong>Note:</strong> ' + (totalQuestions - answeredCount) + ' question' + ((totalQuestions - answeredCount) === 1 ? '' : 's') + ' not yet answered, so not included in the total below.</p>'
+      : '';
+
+    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Geography — ' + escapeHtml(topic.topic) + ' — Combined Report</title>' +
+      '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:760px;margin:0 auto;color:#1B2029;}' +
+      'h1{font-size:1.3rem;} h2{font-size:1.05rem;margin-top:2rem;} .block{margin:0.5rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;white-space:pre-wrap;} .qblock{margin-bottom:1rem;}' +
+      '.totalbox{background:#f4f5f7;border:1px solid #ccc;border-radius:8px;padding:1rem;margin:1rem 0;font-size:1.15rem;}</style></head><body>';
+    html += '<h1>SBL Geography — Combined Report</h1>';
+    html += '<p><strong>Topic:</strong> ' + escapeHtml(topic.topic) + '<br>';
+    html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '</p>';
+    html += '<div class="totalbox"><strong>Total score: ' + scoredSum + ' / ' + totalMax + '</strong></div>';
+    html += noteHtml;
+    html += '<hr>';
+    html += bodyHtml;
+    html += '<p><em>Use your browser’s Print option and choose “Save as PDF” if you want a PDF copy.</em></p>';
+    html += '</body></html>';
+
+    var reportWindow = window.open('', '_blank');
+    if (!reportWindow) {
+      announce('Please allow pop-ups to download the report.');
+      return;
+    }
+    reportWindow.document.open();
+    reportWindow.document.write(html);
+    reportWindow.document.close();
   }
 
   function renderQuestionWorkspace() {
@@ -221,11 +343,15 @@
         answerBox.focus();
         return;
       }
-      submitForMarking(topic, q, answerText);
+      // Captured now, not read from the shared activeQuestionIndex later —
+      // if the student somehow switches questions while marking is still
+      // in flight, this result must still be filed under the question it
+      // actually answered.
+      submitForMarking(topic, q, answerText, activeQuestionIndex);
     });
   }
 
-  function submitForMarking(topic, q, answerText) {
+  function submitForMarking(topic, q, answerText, questionIndex) {
     var section = document.getElementById('sblRevisionFeedbackSection');
     var submitBtn = document.getElementById('sblRevisionSubmit');
 
@@ -253,7 +379,9 @@
         });
       })
       .then(function (data) {
+        topicAnswers[questionIndex] = { q: q, answerText: answerText, feedback: data.feedback };
         renderFeedback(topic, q, answerText, data.feedback);
+        renderTopicSummary();
       })
       .catch(function (err) {
         section.innerHTML =

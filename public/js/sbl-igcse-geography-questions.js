@@ -20,10 +20,17 @@
 
    Content so far: Pearson Edexcel International GCSE Geography, Paper 1
    (4GE1/01R), June 2019 — Question 5, "Investigating Coastal
-   Environments" (Section B, 20 marks); and Paper 2 (4GE1/02R), June
+   Environments" (Section B, 20 marks); Paper 2 (4GE1/02R), June
    2019 — Question 5, "Investigating Rural Environments" (Section B,
-   20 marks). Send over more past paper content and it gets added
-   here, topic by topic. */
+   20 marks); and Paper 1 (4GE1/01), June 2021 — Question 5,
+   "Investigating Coastal Environments" (Section B, 12 marks — this
+   paper's Section B question was restructured to a shorter 12-mark
+   format, unlike the 20-mark June 2019 version above). Marking
+   guidance for the June 2021 entry was written in-house (no official
+   Pearson mark scheme was available for this series) — if the real
+   mark scheme becomes available later it should replace this.
+   Send over more past paper content and it gets added here, topic by
+   topic. */
 
 /* This page's topic cards should read "IGCSE Full Past Paper Questions",
    not the engine's IB-page default — see sbl-revision.js. */
@@ -161,6 +168,55 @@ window.SBL_REVISION_TOPICS = [
           { src: '/images/revision-ppq/igcse-geography/jun-2019-p2/q5-fig5a-5b-tourist-survey-interview.png',
             alt: 'Figure 5a: a table of questionnaire survey responses (strongly disagree, slight disagreement, not sure, slight agreement) for 8 questions about a proposed tourist development, with a total for each question. Figure 5b: two speech-bubble quotes from an interview — a resident worried about noise and the development going wrong, and a local businessman wanting more visitors from Hong Kong to grow local businesses.',
             caption: 'Figures 5a and 5b — Resource Booklet, questionnaire and interview results on a proposed tourist development in the New Territories, Hong Kong' }
+        ]
+      }
+    ]
+  },
+  /* ---------------- Investigating Coastal Environments — June 2021 Paper 1 ----------------
+     No official Pearson mark scheme was available for this series, so the
+     marking guidance below was written in-house to a similar standard —
+     see the file header comment. */
+  {
+    topic: 'Investigating Coastal Environments — June 2021 Paper 1',
+    questions: [
+      {
+        label: 'June 2021 P1 — Question 5(a)(i)',
+        question:
+          'Identify the correct definition of systematic sampling. A Collecting data at random sites along a coastline. B Collecting data every 100m along a coastline. C Collecting data from two different coastlines. D Collecting data from three sites along a coastline.',
+        marks: 1,
+        markScheme:
+          'The correct answer is B. Systematic sampling means collecting data at regular, evenly-spaced intervals (e.g. every 100m) along a coastline, rather than at random locations (A), from multiple different coastlines (C), or from a fixed small number of sites regardless of spacing (D). Award the mark for identifying B, or for clearly describing sampling at even/regular fixed intervals along the coastline.'
+      },
+      {
+        label: 'June 2021 P1 — Question 5(a)(ii)',
+        question:
+          'Name one piece of equipment you would use to measure beach gradient.',
+        marks: 1,
+        markScheme:
+          'Any one valid piece of equipment used to measure the slope/gradient of a beach, e.g. a clinometer, ranging poles used together with a clinometer, a surveyor’s/Abney level, or a smartphone clinometer app. A quadrat, tape measure alone, or callipers should not be credited, as these measure sediment or distance rather than gradient/angle.'
+      },
+      {
+        label: 'June 2021 P1 — Question 5(a)(iii)',
+        question:
+          'Describe one health and safety risk it is important to be aware of when carrying out fieldwork in a coastal environment.',
+        marks: 2,
+        markScheme:
+          'One mark for identifying a plausible risk specific to a coastal environment, e.g. slipping on wet rocks or seaweed, being cut off by an incoming tide, strong currents/rip tides, falling from unstable cliffs, sunburn/heat exhaustion, or cold-water shock. A second mark for describing/developing that risk with a specific consequence or detail, e.g. ‘an incoming tide can cut off the route back to shore, trapping students on rocks or in a cove’, or ‘wet rocks and seaweed are very slippery underfoot, which could cause a student to fall and be injured’. A risk named with no development scores 1 mark only.'
+      },
+      {
+        label: 'June 2021 P1 — Question 5(b)',
+        question:
+          'Study Figure 5 in the Resource Booklet. It shows information about some design, some data collection methods used, data presentation and a conclusion. The aim of the student’s investigation was to examine change in beach characteristics along the stretch of coastline. Evaluate how far the design and the data collection methods provided reliable evidence for the student’s conclusions.',
+        marks: 8,
+        markScheme:
+          'Marked as a levels-based extended answer (Level 1: 1–3 marks, Level 2: 4–6 marks, Level 3: 7–8 marks). Strong answers give a balanced, well-developed evaluation that refers specifically to Figure 5a (the data collection methods) and Figure 5b (the beach profiles and conclusions), and link clearly back to the stated aim throughout. Relevant points include: only two sites were used, which is a very small sample for a whole ‘stretch of coastline’ and is unlikely to be representative, so Conclusion 1 (that characteristics changed along the coastline) is not strongly supported by only two data points; gradient, sediment shape and sediment size were all collected, which is an appropriate range of quantitative/qualitative techniques for a beach investigation, giving some support to Conclusion 2; however, no information is given about how the two sites were chosen, how many measurement points were taken across each profile, what specific equipment was used, or whether the same method/person was used at both sites, all of which affect reliability and repeatability; the beach profile graphs (Figure 5b) show the two sites to be broadly similar in overall shape, which reasonably supports Conclusion 2, though Site 2 shows a more irregular profile with a dip around 12–16m that is not explained, raising questions about measurement accuracy or a genuine feature being under-investigated; Conclusion 3 (little difference in sediment size) cannot actually be evaluated from Figure 5b at all, since no sediment size data is shown or presented there, so this conclusion is not well supported by the evidence given; weather conditions, tide state, and possible human/measurement error are not mentioned anywhere in the design, which further limits confidence in the results. Weaker answers describe the figures or the conclusions generically without evaluating whether the design/methods actually support them, or without referring to the resource booklet at all.',
+        images: [
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q5-fig5a-data-collection.png',
+            alt: 'Extract from data collection methods: at two different sites along a beach chosen at random on a map, measure gradient of the beach at set distances, record sediment shape, and measure sediment size.',
+            caption: 'Figure 5a — Extract from data collection methods' },
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q5-fig5b-beach-profiles-conclusions.png',
+            alt: 'Two beach profile line graphs (height in metres against distance from the sea in metres, 0-20m) for Site 1 and Site 2, both rising from the sea before flattening and rising again near the back of the beach, plus a table of three conclusions about how beach characteristics and sediment size changed along the coastline.',
+            caption: 'Figure 5b — An extract from the student’s data presentation and conclusion' }
         ]
       }
     ]
