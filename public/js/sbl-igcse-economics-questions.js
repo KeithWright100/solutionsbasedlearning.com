@@ -41,6 +41,32 @@
    mark scheme (4EC1_01R_1906_MS). Diagrams/figures given in the
    question paper (Figures 1-5) are included as images alongside the
    sub-questions that use them.
+
+   Also Paper 2: Macroeconomics and the Global Economy (4EC1/02R), June
+   2019 — all four questions, rendering in their own ordered "Paper 2"
+   column alongside the Paper 1 column above. Question 1 covers GDP and
+   the economic cycle, trade blocs, multinational corporations, economic
+   growth, the current account, exchange rates and fiscal policy, in the
+   context of Germany's current account, the UK's export trade with the
+   eurozone and Singapore's fiscal surplus. Question 2 covers GDP per
+   capita, monetary policy, the current account, absolute poverty,
+   exchange rates and the environmental impact of growth, in the context
+   of an appreciating Thai baht, China's environmental policy under
+   President Xi Jinping, and a UK report on pollution, parks and open
+   spaces. Question 3 covers the balance of payments, direct/indirect
+   taxation, inequality and poverty, inflation and unemployment, in the
+   context of Argentina's inflation rate and South Africa's record
+   unemployment. Question 4 covers tariffs and the current account, in
+   the context of a Chinese clothing tariff calculation, China's current
+   account balance 2015-2017, and China's tariff reductions following a
+   2017 trip to Asia by US President Donald Trump. Marking guidance for
+   all four questions is drawn from the official Pearson mark scheme
+   (4EC1_02R_1906_MS). Diagrams/figures given in the question paper are
+   included as images alongside the sub-questions that use them (the two
+   simple data tables, Figures 1 and 4, are given as plain text within
+   the question instead, following the same approach used elsewhere on
+   this page for short tabular data).
+
    Send over more past paper content and it gets added here, topic by
    topic. */
 
@@ -293,6 +319,225 @@ window.SBL_REVISION_TOPICS = [
             alt: 'Pie chart showing the South America search engine market share, October 2016 to October 2017: Google 94.33%, Bing 1.30%, Other 4.37%.',
             caption: 'Figure 5 — Search engine market share in South America' }
         ]
+      }
+    ]
+  },
+  {
+    topic: 'Question 1 — June 2019 Paper 2',
+    paper: 2,
+    questionNumber: 1,
+    questions: [
+      {
+        label: 'June 2019 P2 — Question 1(a)',
+        question: 'In a recovery, a country’s Gross Domestic Product (GDP) A rises. B falls. C stays the same. D fluctuates.',
+        marks: 1,
+        markScheme:
+          'A — rises is correct. In a recovery phase of the economic (business/trade) cycle, GDP is increasing after a period of decline. B, C and D do not describe a recovery, so they are incorrect.'
+      },
+      {
+        label: 'June 2019 P2 — Question 1(b)',
+        question:
+          'A trade bloc is a group of countries that have A the same interest rate. B common borders between members. C the same currency. D a reduction in trade barriers between members.',
+        marks: 1,
+        markScheme:
+          'D — a reduction in trade barriers between members is correct. This is the defining feature of a trade bloc. A, B and C are not necessary features of a trade bloc (members need not share a currency, an interest rate, or even a border), so they are incorrect.'
+      },
+      {
+        label: 'June 2019 P2 — Question 1(c)',
+        question: 'What is meant by the term multinational corporation (MNC)?',
+        marks: 2,
+        markScheme:
+          'Award 1 mark for reference to a firm and 1 mark for reference to different countries. An enterprise/company/firm (1) that produces/sells/operates in more than one country/many countries (1).'
+      },
+      {
+        label: 'June 2019 P2 — Question 1(d)',
+        question: 'Describe one impact of economic growth on the productive potential of a country.',
+        marks: 2,
+        markScheme:
+          'Award 1 mark for reference to the impact and 1 mark for further development. The productive potential will increase (1) due to greater investment in capital goods (1). OR: the productive potential will increase (1) as firms invest more from greater profits (1).'
+      },
+      {
+        label: 'June 2019 P2 — Question 1(e)',
+        question:
+          'Figure 1 shows the main components of Germany’s current account in 2016: trade in goods (visibles) +€271.7 billion, trade in services (invisibles) −€22.4 billion. (Source: Bundesbank) Using the data in Figure 1, calculate in € bn the current account balance for Germany in 2016.',
+        marks: 2,
+        markScheme:
+          'Award 1 mark for showing the calculation and 1 mark for the correct answer. 271.7 + (−22.4) (1) = €249.3bn (1). Award 2 marks if the correct answer is shown, with the euro symbol, even if no calculations are shown. Do not award marks for the formula.'
+      },
+      {
+        label: 'June 2019 P2 — Question 1(f)',
+        question:
+          'The UK exports goods to eurozone countries. Using the diagram in Figure 2, draw the effects of an increase in exports from the UK to the eurozone on the exchange rate of the £. Label the new curve, the new equilibrium exchange rate and the new equilibrium quantity.',
+        marks: 3,
+        markScheme:
+          'Award 1 mark for a right shift of the demand curve, labelled. Award 1 mark for a higher equilibrium price, labelled. Award 1 mark for a higher equilibrium quantity, labelled.',
+        images: [
+          { src: '/images/revision-ppq/igcse-economics/jun-2019-p2/q1-fig2-exchange-rate-diagram.png',
+            alt: 'Blank diagram for the market for £s, with axes labelled Price of £s in € and Quantity of £s, a downward-sloping demand curve D and an upward-sloping supply curve S crossing at equilibrium exchange rate ER1 and equilibrium quantity Q1.',
+            caption: 'Figure 2 — Market for £s' }
+        ]
+      },
+      {
+        label: 'June 2019 P2 — Question 1(g)',
+        question:
+          'In September 2017, the growth rate of the gross domestic product (GDP) in the UK was 0.4%, a slight increase of 0.1% on the previous quarter. Explain one reason why economic growth is a key macroeconomic objective for a country such as the UK.',
+        marks: 3,
+        markScheme:
+          'Award 1 mark for identifying a reason, 1 mark for developing the reason, and 1 mark for the reason being in context. E.g. one reason is because economic growth can improve living standards for the population (1). Growth of 0.4% leads to people having higher levels of income (1). This can lift people out of poverty in the UK (1). OR: one reason is because economic growth can result in higher levels of tax revenue for a government (1). This is due to higher levels of income within the economy (1) resulting in more revenue for public sector services in the UK such as education/healthcare (1). Accept any other appropriate response.'
+      },
+      {
+        label: 'June 2019 P2 — Question 1(h)',
+        question:
+          'The Government of Singapore had a fiscal surplus of 1.3% of GDP in 2016 and it is expected to have a 0.4% of GDP surplus in 2017. Analyse the impact of a fiscal surplus on a country such as Singapore.',
+        marks: 6,
+        markScheme:
+          'Marked as a levels-based extended answer assessing AO2 and AO3 together: Level 1 (1–2 marks), Level 2 (3–4 marks), Level 3 (5–6 marks) — as with Question 1(i) on Paper 1. Relevant points include: a fiscal surplus is when government tax receipts are greater than government spending, in this case 1.3% of GDP in 2016 and expected 0.4% of GDP in 2017; the government of Singapore has extra funds and these funds can be allocated to pay off any government debts; this reduces the interest payable on any debt and helps the economy in the future; the government of Singapore could use the fiscal surplus to reduce taxes; and it could fund new education and training programmes or improve existing public services such as healthcare.'
+      }
+    ]
+  },
+  {
+    topic: 'Question 2 — June 2019 Paper 2',
+    paper: 2,
+    questionNumber: 2,
+    questions: [
+      {
+        label: 'June 2019 P2 — Question 2(a)',
+        question:
+          'GDP per capita is a measure of a country’s economic output that accounts for population. If Sweden has a population of 10 million and a GDP of $511 bn (1bn = 1 000 000 000), then its GDP per capita is A $511. B $5 110. C $51 100. D $511 000.',
+        marks: 1,
+        markScheme:
+          'C — $51,100 is correct ($511,000,000,000 ÷ 10,000,000 = $51,100). A, B and D are incorrect due to errors in the division.'
+      },
+      {
+        label: 'June 2019 P2 — Question 2(b)',
+        question: 'What is the name of the policy that focuses on interest rate changes? A Deregulation. B Exchange rate. C Monetary. D Fiscal.',
+        marks: 1,
+        markScheme:
+          'C — Monetary is correct, as monetary policy focuses on interest rate (and money supply) changes. A, B and D are not primarily concerned with interest rate changes, so they are incorrect.'
+      },
+      {
+        label: 'June 2019 P2 — Question 2(c)',
+        question: 'State one impact of a current account deficit.',
+        marks: 1,
+        markScheme:
+          'Award 1 mark for one correct impact: leakage from the economy, problems finding foreign reserves to fund the deficit, can be inflationary, unemployment, or falling output/GDP. Accept any other appropriate response.'
+      },
+      {
+        label: 'June 2019 P2 — Question 2(d)',
+        question: 'What is meant by the term absolute poverty?',
+        marks: 2,
+        markScheme:
+          'Award 1 mark for reference to household income and 1 mark for reference to basic needs. A condition where household income is below a necessary level (1) to provide the basic needs for survival (1).'
+      },
+      {
+        label: 'June 2019 P2 — Question 2(e)',
+        question:
+          'In December 2017 the Thai baht appreciated to its highest value in 2 years against the US dollar. The Thai baht is predicted to continue its gradual appreciation in 2018. Explain one disadvantage of an appreciating currency for an economy such as Thailand.',
+        marks: 3,
+        markScheme:
+          'Award 1 mark for identifying a relevant disadvantage of an appreciating currency, 1 mark for developing the disadvantage, and 1 mark for the disadvantage being in context. E.g. a deterioration of the current account (1). A stronger value of the Thai baht leads to falling export sales (1) resulting in a larger trade deficit for Thailand’s economy (1). OR: reduced economic growth for the economy of Thailand (1). The price of exports should rise because of the stronger baht (1). This may result in a decrease in demand for goods/services (1). Accept any other appropriate response.'
+      },
+      {
+        label: 'June 2019 P2 — Question 2(f)',
+        question:
+          'President Xi Jinping of China has made environmental protection a priority. This is due to rising public concern over widespread environmental damage caused by years of uncontrolled economic growth. Explain one possible negative effect on the environment caused by the economic growth of a country such as China.',
+        marks: 3,
+        markScheme:
+          'Award 1 mark for identifying a possible negative effect, 1 mark for developing the possible negative effect, and 1 mark for the effect being in context. E.g. pollution from business activity (1). Many firms create air and noise pollution from making goods (1) which can negatively affect local communities near to factories in China (1). OR: more waste from production and consumption of goods and services (1). Waste must be disposed of in landfill sites (1). This can cause a health hazard to Chinese residents near to areas of waste disposal (1). Accept any other appropriate response.'
+      },
+      {
+        label: 'June 2019 P2 — Question 2(g)',
+        question:
+          'A new UK report identified the urgent need to reduce pollution from vehicles and provide more open spaces and parks. Researchers looked at the impact on health when participants walked for two hours on London’s busy Oxford Street. This was then compared to those walking in the nearby large open space of Hyde Park. The results showed that people walking in the park performed better. The air pollution from vehicle fumes largely removed the health benefit from the exercise in Oxford Street. The report suggests that people should avoid walking in busy streets and should instead walk in parks or open spaces. (Source: adapted from edition.cnn.com) With reference to the data above and your knowledge of economics, assess whether the government should provide more parks and open spaces.',
+        marks: 9,
+        markScheme:
+          'Marked as a levels-based extended answer assessing AO2, AO3 and AO4 together (Level 1: 1–3 marks, Level 2: 4–6 marks, Level 3: 7–9 marks — as with Question 2(g) on Paper 1). AO2/AO3 points include: the report indicates that parks decrease health costs, through encouraging exercise and reducing air pollution; this reduces government expenditure on health care and improves the lives and productivity of the population; parks and open spaces not only provide benefits to people but also protect wildlife and ecosystems within an urban area; parks can be used for recreational purposes and a place for children to play which can reduce negative externalities for a government; depending on their size, parks can bring in tourism revenue to local restaurants, hotels, snack shops, and stores; and parks can host festivals, concerts and athletics events, bringing additional boosts to the local economy. AO4 (evaluation) points include: however, there is an opportunity cost to the government in providing parks and open spaces; this area of land could be used for other purposes such as housing or for commercial development which may create jobs and increase output; there is a cost in creating and maintaining the park which must be funded by the government, as the park is free to use; and the overall benefits will depend on how many people use the park and if there are alternative ways to protect the environment/reduce pollution such as pollution permits, regulation or fines.'
+      }
+    ]
+  },
+  {
+    topic: 'Question 3 — June 2019 Paper 2',
+    paper: 2,
+    questionNumber: 3,
+    questions: [
+      {
+        label: 'June 2019 P2 — Question 3(a)',
+        question:
+          'Kenyans who holiday in South Africa would be shown on the Kenyan current account as A an invisible import. B a visible export. C a visible import. D an invisible export.',
+        marks: 1,
+        markScheme:
+          'A — an invisible import is correct. Tourism is a service (invisible), and Kenyans spending money on holiday in South Africa represents an outflow of money from Kenya for a service, i.e. an invisible import. B, C and D are incorrect: it is not a visible transaction (goods), and it is an import (money leaving Kenya), not an export.'
+      },
+      {
+        label: 'June 2019 P2 — Question 3(b)',
+        question: 'Which one of the following is an example of an indirect tax? A Inheritance tax. B Income tax. C Business tax. D Value added tax.',
+        marks: 1,
+        markScheme:
+          'D — Value added tax is correct, as it is a tax on spending/goods and services, charged indirectly through the price. A, B and C are all direct taxes charged directly on income or wealth, so they are incorrect.'
+      },
+      {
+        label: 'June 2019 P2 — Question 3(c)',
+        question: 'Explain one way a government could reduce inequality and poverty.',
+        marks: 3,
+        markScheme:
+          'Award 1 mark for identifying a way, 1 mark for developing the way, and 1 mark for the response being in context. E.g. through progressive taxation (1), higher income earners pay a larger proportion of their income in tax (1). The government can redistribute this to lower income earners in the country reducing inequality and poverty (1). OR: through government investment in education (1), human capital can be improved (1). This may result in a person being able to get a job in the future reducing inequality and poverty (1). Accept any other appropriate response.'
+      },
+      {
+        label: 'June 2019 P2 — Question 3(d)',
+        question:
+          'In December 2017, Argentina’s Consumer Price Index (CPI) increased from 20.9% to 25%. Analyse the possible impact of high inflation on consumers in a country such as Argentina.',
+        marks: 6,
+        markScheme:
+          'Marked as a levels-based extended answer assessing AO2 and AO3 together: Level 1 (1–2 marks), Level 2 (3–4 marks), Level 3 (5–6 marks) — as with Question 1(h) above. Relevant points include: the level of consumer confidence will be an important factor that determines the willingness of consumers to spend, borrow and save; inflation reduces purchasing power for consumers; high rates of inflation such as 25% in Argentina will result in consumers experiencing a fall in living standards as they cannot afford to purchase the same amount of goods and services; high rates of inflation make it difficult for consumers to know what they can afford or how much they need for purchases such as cars; high rates of inflation may discourage consumers from saving as they expect the value to decrease; and consumers are more likely to demand higher wages to keep up with inflation.'
+      },
+      {
+        label: 'June 2019 P2 — Question 3(e)',
+        question:
+          'Figure 3 shows South Africa’s unemployment rate (%) from January 2015 to July 2017. In 2017, unemployment in South Africa reached its highest level in 13 years at 27.7%. Concerns have been expressed about the very high levels of youth unemployment and the social problems this might cause. Statistics show that 39% of all unemployed South Africans have never worked before and for young people this figure is even higher, at 60.3%. With reference to the data above and your knowledge of economics, assess the impact of high rates of unemployment on a country such as South Africa.',
+        marks: 9,
+        markScheme:
+          'Marked as a levels-based extended answer assessing AO2, AO3 and AO4 together (Level 1: 1–3 marks, Level 2: 4–6 marks, Level 3: 7–9 marks — as with Question 2(g) above). AO2/AO3 points include: unemployment occurs when people of working age who are both willing and able to work cannot find a job; high levels of unemployment such as 27.7% will result in lower GDP as a large part of the workforce will be unproductive; there will be a much greater burden on the government to provide benefits to the unemployed; at the same time tax revenues will be lower meaning less is available to spend elsewhere; the government may have to provide more education and training schemes, especially for young people as 60.3% of young people have never had a job; and there may be an increase in poverty within the country as unemployed workers have no income apart from benefits from the South African government. AO4 (evaluation) points include: however, high rates of unemployment may help some firms compete; some firms within South Africa may find it easier to recruit from a larger pool of workers due to the 27.7% unemployment rate; some firms may see a reduction in labour costs if there are high levels of unemployment due to fewer wage demands; and the overall impact will depend upon the type of unemployment, the duration and the state of the economy in South Africa.',
+        images: [
+          { src: '/images/revision-ppq/igcse-economics/jun-2019-p2/q3-fig3-sa-unemployment-rate.png',
+            alt: 'Line graph titled "South Africa\'s unemployment rate (%)" from January 2015 to July 2017, rising from around 24.3% in January 2015 to 27.7% by mid-2017, with fluctuations along the way including a dip to around 24.5% in January 2016.',
+            caption: 'Figure 3 — South Africa’s unemployment rate (%), Jan 2015 to Jul 2017' }
+        ]
+      }
+    ]
+  },
+  {
+    topic: 'Question 4 — June 2019 Paper 2',
+    paper: 2,
+    questionNumber: 4,
+    questions: [
+      {
+        label: 'June 2019 P2 — Question 4(a)',
+        question:
+          'Figure 4 shows the tariff on clothing imported into China in 2018: Product Clothing, Imported Price ¥225, Tariff 8%. Calculate the final selling price of clothing in yuan (¥) after the tariff has been added. You are advised to show your working.',
+        marks: 2,
+        markScheme:
+          'Award 1 mark for calculating the tariff and 1 mark for calculating the final selling price in ¥ for 2018. 225 × 0.08 = 18 (1). 225 + 18 = ¥243 (1). Award 2 marks if the final selling price is accurately calculated, with the ¥ symbol, with no workings shown. Do not award marks for the formula.'
+      },
+      {
+        label: 'June 2019 P2 — Question 4(b)',
+        question:
+          'Figure 5 shows the current account balance for China 2015-2017 in US$bn. Analyse the benefits of a current account surplus for a country such as China.',
+        marks: 6,
+        markScheme:
+          'Marked as a levels-based extended answer assessing AO2 and AO3 together: Level 1 (1–2 marks), Level 2 (3–4 marks), Level 3 (5–6 marks) — as with Question 1(h) above. Relevant points include: a current account surplus means an economy is exporting a greater value of goods and services than it is importing; China’s current account has been in surplus with a high of over $900bn in January 2016; China’s current account surplus benefits the country in terms of employment as higher export sales help to create jobs; this encourages economic growth and a higher GDP; this is likely to result in a higher standard of living for China; and China’s current account surplus will mean that it will have surplus foreign exchange it can use to invest in other countries.',
+        images: [
+          { src: '/images/revision-ppq/igcse-economics/jun-2019-p2/q4-fig5-china-current-account-balance.png',
+            alt: 'Bar chart titled "Current account balance for China 2015-2017 in US$bn", showing values fluctuating between roughly $900bn (January 2015) and a low of around $120bn (January 2017), before rising again to around $400-500bn by mid-to-late 2017.',
+            caption: 'Figure 5 — Current account balance for China, 2015-2017 (US$bn)' }
+        ]
+      },
+      {
+        label: 'June 2019 P2 — Question 4(c)',
+        question:
+          'Following a trip to Asia in 2017 by US President Donald Trump, China has reduced tariffs from 17.3% to 7.7% on over 200 consumer products. These include pharmaceuticals, food, health supplements and clothing. Many multinational corporations may have major financial gains. Nestlé’s sales could increase by 15% or $18.7bn because of the reduction in tariffs. Procter & Gamble will also benefit from tariff reductions on items ranging from shampoos to electronic toothbrushes. With reference to the data above and your knowledge of economics, evaluate the possible benefits of reducing the level of tariffs on imported goods and services to China.',
+        marks: 12,
+        markScheme:
+          'Marked as a levels-based extended answer assessing AO2, AO3 and AO4 together: Level 1 (1–4 marks), Level 2 (5–8 marks), Level 3 (9–12 marks) — as with Question 4(c) on Paper 1. AO2/AO3 points include: there will be a reduction in prices of imports for Chinese consumers now that the average tariff has been reduced from 17.3% to 7.7%; there would be an increase in competition for domestic firms which may encourage them to become more efficient; Chinese consumers will not only have a greater choice but may have access to better quality goods which cannot currently be met domestically; Chinese consumers would see an increase in living standards overall; and if China reduces its tariffs other countries may do the same which would make it easier for China to export more goods. AO4 (evaluation) points include: however, tariffs can be a good way to protect Chinese infant industries which may now face increased competition from cheaper imports from MNCs such as Nestlé or Procter & Gamble; this may result in an increase in unemployment in Chinese firms who make consumer products; tariffs are also a good way to gain revenue for the Chinese government and this will be reduced as tariff rates have fallen from an average of 17.3% to 7.7%; reducing tariffs may also reduce the surplus on the current account balance as more consumers buy imported products; however, the overall impact on the Chinese economy may be limited as it also depends on whether Chinese consumers do switch to imported goods rather than buy Chinese products; and it may not have a great impact as only 200 products are involved.'
       }
     ]
   }
