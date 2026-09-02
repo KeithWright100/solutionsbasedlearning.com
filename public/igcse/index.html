@@ -78,9 +78,48 @@
     line-height: 1.55;
     margin: 0;
   }
+  .igcse-hero-banner--cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 2.2rem 0 0;
+    padding: 24px 30px;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
 
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
+    .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -131,6 +170,18 @@
             <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
           </a>
         </div>
+
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IGCSE Subject Menu">
+          <div>
+            <span class="igcse-hero-kicker">New: one page per subject</span>
+            <h2>IGCSE Subject Menu</h2>
+            <p>Examination tips and advice, revision guides, and past paper practice for every IGCSE subject, all in one place.</p>
+          </div>
+          <a class="igcse-hero-btn" href="/igcse/menu" aria-label="Open the IGCSE Subject Menu">
+            Open IGCSE Menu
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </section>
       </main>
     </div>
   </div>
