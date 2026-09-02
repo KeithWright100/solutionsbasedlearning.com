@@ -52,7 +52,13 @@
 <script>
 (function () {
   var params = new URLSearchParams(window.location.search);
-  var redirectTo = params.get('redirect') || '/';
+  // With no explicit ?redirect= (e.g. someone lands here directly, or via
+  // a bookmark) default to the Humanities Hub rather than back to this
+  // public marketing site's homepage — landing an already-logged-in
+  // visitor back on '/' looked exactly like login had silently failed,
+  // since '/' shows the same "Log in" link either way and gives no sign
+  // anything happened.
+  var redirectTo = params.get('redirect') || '/humanities-hub';
 
   // If already logged in, just go straight to the redirect target.
   fetch('/api/session').then(function (r) { return r.json(); }).then(function (data) {

@@ -456,7 +456,7 @@
 
     <header class="top-hero">
       <div class="top-hero-account">
-        <a href="/login/">Log in</a>
+        <a href="/login/" id="topAccountLink">Log in</a>
       </div>
       <div class="hero-inner">
         <div class="brand-row" aria-label="Solutions Based Learning branding">
@@ -603,6 +603,22 @@
       createParticles();
       setupReducedMotionRespect();
     });
+
+    // The top-right link is a static "Log in" regardless of session state
+    // by default — for an already-logged-in visitor that's confusing (it
+    // looks like they're not logged in, and clicking it just bounces them
+    // right back to this same page). Swap it to point into the site when
+    // a valid session exists.
+    fetch("/api/session")
+      .then((r) => r.json())
+      .then((data) => {
+        if (!data.loggedIn) return;
+        const link = document.getElementById("topAccountLink");
+        if (!link) return;
+        link.textContent = "Enter Hub";
+        link.href = "/humanities-hub";
+      })
+      .catch(() => {});
   </script>
 </body>
 </html>
