@@ -19,7 +19,7 @@
 import { requireAdmin } from '../_lib/auth.js';
 import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
 import { createSetupToken } from '../_lib/tokens.js';
-import { sendApprovalEmail, sendRejectionEmail } from '../_lib/emails.js';
+import { sendApprovalEmail, sendRejectionEmail, sendPasswordResetEmail } from '../_lib/emails.js';
 import { isValidEmail, isValidPassword } from '../_lib/validate.js';
 
 export default async function handler(req, res) {
@@ -48,6 +48,7 @@ export default async function handler(req, res) {
   if (action === 'set-role') return handleSetRole(req, res, session);
   if (action === 'assign-teacher') return handleAssignTeacher(req, res, session);
   if (action === 'assign-group') return handleAssignGroup(req, res, session);
+  if (action === 'reset-password') return handleResetPassword(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -391,6 +392,48 @@ async function handleAssignGroup(req, res, session) {
   if (error) {
     console.error('Failed to assign group:', error);
     return res.status(500).json({ error: "Could not update this student's group." });
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// reset-password — { userId }
+// For when a user (typically a student) is having trouble signing
+// in and doesn't want to go through the public "Forgot password?"
+// flow themselves — an admin can trigger the same reset email on
+// their behalf from here. Sends the identical email/link that
+// /api/forgot-password.js sends (a token-protected /set-password/
+// link, single use, time-limited), it's just admin-initiated rather
+// than self-service, so it always sends (no "only if active" check
+// — the admin already sees this account in front of them).
+// ---------------------------------------------------------------
+async function handleResetPassword(req, res, session) {
+  const { userId } = req.body || {};
+  if (!userId) {
+    return res.status(400).json({ error: 'userId is required.' });
+  }
+
+  const supabase = getSupabaseAdmin();
+  const { data: target, error: fetchError } = await supabase
+    .from('sbl_profiles')
+    .select('id, email, full_name')
+    .eq('id', userId)
+    .maybeSingle();
+
+  if (fetchError || !target) {
+    return res.status(404).json({ error: 'User not found.' });
+  }
+
+  try {
+    const rawToken = await createSetupToken({ userId: target.id, purpose: 'reset' });
+    const siteUrl = process.env.SBL_SITE_URL || `https://${req.headers.host}`;
+    const resetUrl = `${siteUrl}/set-password/?purpose=reset&token=${encodeURIComponent(rawToken)}`;
+    const firstName = (target.full_name || '').split(' ')[0];
+    await sendPasswordResetEmail({ email: target.email, firstName, resetUrl });
+  } catch (err) {
+    console.error('Failed to send admin-triggered password reset email:', err);
+    return res.status(500).json({ error: 'Could not send the password reset email. Please try again.' });
   }
 
   return res.status(200).json({ ok: true });

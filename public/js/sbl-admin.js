@@ -195,6 +195,7 @@
         '<td>' + badge + '</td>' +
         '<td>' + formatDate(u.created_at) + '</td>' +
         '<td class="sbl-table-actions">' +
+          '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="reset-password" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '">Reset Password</button>' +
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="' + toggleAction + '" data-id="' + u.id + '">' + toggleLabel + '</button>' +
           '<button class="sbl-btn sbl-btn--danger sbl-btn--small" data-action="delete" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '">Delete</button>' +
         '</td>';
@@ -262,6 +263,7 @@
     if (action === 'delete') return handleDelete(id, btn.getAttribute('data-name'), btn);
     if (action === 'make-teacher') return handleSetRole(id, 'teacher', btn);
     if (action === 'make-user') return handleSetRole(id, 'user', btn);
+    if (action === 'reset-password') return handleResetPassword(id, btn.getAttribute('data-name'), btn);
   });
 
   // Teacher-assignment dropdowns fire 'change', not 'click'.
@@ -359,6 +361,21 @@
         if (!result.ok) { showError(result.data.error || "Could not update this user's role."); return; }
         showNotice(role === 'teacher' ? 'This user is now a teacher.' : 'This user is now a regular user.');
         loadData();
+      });
+    });
+  }
+
+  // Sends the same password-reset email the public "Forgot password?"
+  // link sends, but triggered by the admin — for when a student (or
+  // any user) is stuck signing in and would rather not, or can't,
+  // use the self-service flow themselves.
+  function handleResetPassword(userId, name, btn) {
+    if (!confirm('Send a password reset email to ' + name + '?')) return;
+    clearMessages();
+    withButtonBusy(btn, 'Sending…', function () {
+      return postJson('/api/admin/action', { action: 'reset-password', userId: userId }).then(function (result) {
+        if (!result.ok) { showError(result.data.error || 'Could not send the password reset email.'); return; }
+        showNotice('Password reset email sent to ' + name + '.');
       });
     });
   }
