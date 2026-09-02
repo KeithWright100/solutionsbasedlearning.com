@@ -464,6 +464,32 @@
 .lh-mode--locked .lh-mode__btn { border-style: dashed; cursor: default; }
 .lh-mode--locked .lh-mode__btn:hover { transform: none; }
 
+/* Optional two-column "Paper 1 / Paper 2" grouping for a Full Past Paper
+   Questions topic list — rendered by sbl-revision.js only when at least
+   one topic in window.SBL_REVISION_TOPICS sets a `paper` field; pages
+   that never set it keep the plain single-column .lh-modes list above,
+   untouched. */
+.lh-modes-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .lh-modes-columns { grid-template-columns: 1fr; gap: 0.9rem; }
+}
+.lh-modes-col__heading {
+  font-family: var(--lh-font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lh-muted);
+  margin: 0 0 0.7rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--lh-border);
+}
+
 /* Each mode card's border picks up the same colour as its own icon/
    button (they already carry an .lh-bg-<colour> class) — matched via
    :has() so no HTML changes are needed on any lesson page. Width

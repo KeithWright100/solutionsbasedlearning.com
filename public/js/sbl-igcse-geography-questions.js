@@ -47,6 +47,8 @@ window.SBL_REVISION_BUTTON_LABEL = 'IGCSE Full Past Paper Questions';
 window.SBL_REVISION_TOPICS = [
   {
     topic: 'Investigating Coastal Environments — June 2019 Paper 1',
+    paper: 1,
+    questionNumber: 5,
     questions: [
       {
         label: 'June 2019 P1 — Question 5(a)(i)',
@@ -124,6 +126,8 @@ window.SBL_REVISION_TOPICS = [
   /* ---------------- Investigating Rural Environments — June 2019 Paper 2 ---------------- */
   {
     topic: 'Investigating Rural Environments — June 2019 Paper 2',
+    paper: 2,
+    questionNumber: 5,
     questions: [
       {
         label: 'June 2019 P2 — Question 5(a)(i)',
@@ -186,6 +190,8 @@ window.SBL_REVISION_TOPICS = [
      see the file header comment. */
   {
     topic: 'Investigating Coastal Environments — June 2021 Paper 1',
+    paper: 1,
+    questionNumber: 5,
     questions: [
       {
         label: 'June 2021 P1 — Question 5(a)(i)',
@@ -242,6 +248,8 @@ window.SBL_REVISION_TOPICS = [
      figures printed in the resource booklet. */
   {
     topic: 'Coastal Environments — June 2021 Paper 1',
+    paper: 1,
+    questionNumber: 2,
     questions: [
       {
         label: 'June 2021 P1 — Question 2(a)',
@@ -330,6 +338,8 @@ window.SBL_REVISION_TOPICS = [
      and data printed in the question paper/resource booklet. */
   {
     topic: 'Economic Activity and Energy — June 2021 Paper 2',
+    paper: 2,
+    questionNumber: 1,
     questions: [
       {
         label: 'June 2021 P2 — Question 1(a)(i)',
@@ -439,6 +449,8 @@ window.SBL_REVISION_TOPICS = [
      and data printed in the question paper/resource booklet. */
   {
     topic: 'Rural Environments — June 2021 Paper 2',
+    paper: 2,
+    questionNumber: 2,
     questions: [
       {
         label: 'June 2021 P2 — Question 2(a)(i)',
@@ -544,6 +556,8 @@ window.SBL_REVISION_TOPICS = [
      one clean, fully-completed chart. */
   {
     topic: 'Investigating Rural Environments — June 2021 Paper 2',
+    paper: 2,
+    questionNumber: 5,
     questions: [
       {
         label: 'June 2021 P2 — Question 5(a)(i)',
@@ -619,6 +633,8 @@ window.SBL_REVISION_TOPICS = [
      printed in the resource booklet. */
   {
     topic: 'Development and Human Welfare — June 2021 Paper 2',
+    paper: 2,
+    questionNumber: 9,
     questions: [
       {
         label: 'June 2021 P2 — Question 9(a)(i)',
@@ -728,6 +744,8 @@ window.SBL_REVISION_TOPICS = [
      figures and data printed in the resource booklet. */
   {
     topic: 'Hazardous Environments — June 2021 Paper 1',
+    paper: 1,
+    questionNumber: 3,
     questions: [
       {
         label: 'June 2021 P1 — Question 3(a)',

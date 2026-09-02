@@ -13,6 +13,17 @@
    window.SBL_REVISION_TOPICS = [
      {
        topic: 'Climate Change',
+       // Optional — set BOTH `paper` (1 or 2) and `questionNumber` (the
+       // exam question number, e.g. 5) on every topic in a data file to
+       // opt that page into a two-column "Paper 1 / Paper 2" topic list,
+       // each column sorted by questionNumber ascending. Leaving `paper`
+       // unset on every topic (the default) keeps the original plain,
+       // single-column list — used by pages/subjects that don't have a
+       // Paper 1/Paper 2 split. A topic with `comingSoon: true` and no
+       // `paper` set yet is shown in its own "Coming Soon" block below
+       // the two columns rather than guessed into one.
+       paper: 1,
+       questionNumber: 5,
        questions: [
          {
            question: '...',
@@ -115,6 +126,110 @@
 
   /* ---------------- Topic list ---------------- */
 
+  // Builds one .lh-mode card's HTML. displayNum is just the small ordinal
+  // badge shown above the title — it is NOT used for wiring the click
+  // handler, so it is safe to renumber per-column (see
+  // renderGroupedTopicList) without touching how a topic actually opens.
+  function buildModeCardHtml(t, topicIndex, displayNum, btnLabel) {
+    if (t.comingSoon) {
+      var html = '<div class="lh-mode lh-mode--locked">';
+      html += '<span class="lh-mode__icon lh-bg-blue" aria-hidden="true">' + docIcon() + '</span>';
+      html += '<div class="lh-mode__body">';
+      html += '<span class="lh-mode__num">' + displayNum + '</span>';
+      html += '<p class="lh-mode__title">' + escapeHtml(t.topic) + '</p>';
+      html += '<p class="lh-mode__desc">Full past paper questions for this topic are on the way. Check back soon.</p>';
+      html += '</div>';
+      html += '<span class="lh-mode__btn lh-c-blue">Coming Soon</span>';
+      html += '</div>';
+      return html;
+    }
+    var qCount = t.questions.length;
+    var html = '<div class="lh-mode">';
+    html += '<span class="lh-mode__icon lh-bg-blue" aria-hidden="true">' + docIcon() + '</span>';
+    html += '<div class="lh-mode__body">';
+    html += '<span class="lh-mode__num">' + displayNum + '</span>';
+    html += '<p class="lh-mode__title">' + escapeHtml(t.topic) + '</p>';
+    html += '<p class="lh-mode__desc">' + qCount + ' full past paper question' + (qCount === 1 ? '' : 's') + '. Write your answer and get instant examiner-style marked feedback.</p>';
+    html += '</div>';
+    html += '<button type="button" class="lh-mode__btn lh-c-blue" data-topic-index="' + topicIndex + '" aria-label="' + escapeHtml(btnLabel) + ': ' + escapeHtml(t.topic) + '">' + escapeHtml(btnLabel) + ' &rarr;</button>';
+    html += '</div>';
+    return html;
+  }
+
+  function wireTopicButtons() {
+    listMount.querySelectorAll('[data-topic-index]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        openTopic(parseInt(btn.getAttribute('data-topic-index'), 10));
+      });
+    });
+  }
+
+  function renderFlatTopicList(btnLabel) {
+    var html = '<div class="lh-modes">';
+    topics.forEach(function (t, i) {
+      html += buildModeCardHtml(t, i, i + 1, btnLabel);
+    });
+    html += '</div>';
+    listMount.innerHTML = html;
+    wireTopicButtons();
+  }
+
+  // Groups topics into a "Paper 1" / "Paper 2" two-column layout, each
+  // column ordered by questionNumber ascending (ties keep their original
+  // relative order — e.g. an older series' Question 5 stays above a
+  // newer series' Question 5). Only used when at least one topic sets a
+  // `paper` field (1 or 2) — a data-file opt-in, so pages/subjects that
+  // never set `paper` keep the plain single-column list exactly as
+  // before. Any topic without `paper` set (e.g. a comingSoon placeholder
+  // not yet assigned to a specific paper) is shown in its own "Coming
+  // Soon" block below the two columns, rather than guessed into one.
+  function renderGroupedTopicList(btnLabel) {
+    var withIndex = topics.map(function (t, i) { return { t: t, i: i }; });
+    var paper1 = withIndex.filter(function (e) { return e.t.paper === 1; });
+    var paper2 = withIndex.filter(function (e) { return e.t.paper === 2; });
+    var other = withIndex.filter(function (e) { return e.t.paper !== 1 && e.t.paper !== 2; });
+
+    function byQuestionNumber(a, b) {
+      var an = typeof a.t.questionNumber === 'number' ? a.t.questionNumber : 999;
+      var bn = typeof b.t.questionNumber === 'number' ? b.t.questionNumber : 999;
+      return an - bn;
+    }
+    paper1.sort(byQuestionNumber);
+    paper2.sort(byQuestionNumber);
+
+    function buildColumn(heading, entries) {
+      var html = '<div class="lh-modes-col">';
+      html += '<h3 class="lh-modes-col__heading">' + escapeHtml(heading) + '</h3>';
+      html += '<div class="lh-modes">';
+      if (entries.length) {
+        entries.forEach(function (e, pos) {
+          html += buildModeCardHtml(e.t, e.i, pos + 1, btnLabel);
+        });
+      } else {
+        html += '<p class="lh-mode__desc">No questions added yet.</p>';
+      }
+      html += '</div></div>';
+      return html;
+    }
+
+    var html = '<div class="lh-modes-columns">';
+    html += buildColumn('Paper 1', paper1);
+    html += buildColumn('Paper 2', paper2);
+    html += '</div>';
+
+    if (other.length) {
+      html += '<div class="lh-modes-col" style="margin-top:1.5rem;">' +
+        '<h3 class="lh-modes-col__heading">Coming Soon</h3><div class="lh-modes">';
+      other.forEach(function (e, pos) {
+        html += buildModeCardHtml(e.t, e.i, pos + 1, btnLabel);
+      });
+      html += '</div></div>';
+    }
+
+    listMount.innerHTML = html;
+    wireTopicButtons();
+  }
+
   function renderTopicList() {
     if (!topics.length) {
       listMount.innerHTML =
@@ -125,40 +240,13 @@
     }
 
     var btnLabel = window.SBL_REVISION_BUTTON_LABEL || 'IB Full Past Paper Questions';
+    var hasPaperGrouping = topics.some(function (t) { return t.paper === 1 || t.paper === 2; });
 
-    var html = '<div class="lh-modes">';
-    topics.forEach(function (t, i) {
-      if (t.comingSoon) {
-        html += '<div class="lh-mode lh-mode--locked">';
-        html += '<span class="lh-mode__icon lh-bg-blue" aria-hidden="true">' + docIcon() + '</span>';
-        html += '<div class="lh-mode__body">';
-        html += '<span class="lh-mode__num">' + (i + 1) + '</span>';
-        html += '<p class="lh-mode__title">' + escapeHtml(t.topic) + '</p>';
-        html += '<p class="lh-mode__desc">Full past paper questions for this topic are on the way. Check back soon.</p>';
-        html += '</div>';
-        html += '<span class="lh-mode__btn lh-c-blue">Coming Soon</span>';
-        html += '</div>';
-        return;
-      }
-      var qCount = t.questions.length;
-      html += '<div class="lh-mode">';
-      html += '<span class="lh-mode__icon lh-bg-blue" aria-hidden="true">' + docIcon() + '</span>';
-      html += '<div class="lh-mode__body">';
-      html += '<span class="lh-mode__num">' + (i + 1) + '</span>';
-      html += '<p class="lh-mode__title">' + escapeHtml(t.topic) + '</p>';
-      html += '<p class="lh-mode__desc">' + qCount + ' full past paper question' + (qCount === 1 ? '' : 's') + '. Write your answer and get instant examiner-style marked feedback.</p>';
-      html += '</div>';
-      html += '<button type="button" class="lh-mode__btn lh-c-blue" data-topic-index="' + i + '" aria-label="' + escapeHtml(btnLabel) + ': ' + escapeHtml(t.topic) + '">' + escapeHtml(btnLabel) + ' &rarr;</button>';
-      html += '</div>';
-    });
-    html += '</div>';
-    listMount.innerHTML = html;
-
-    listMount.querySelectorAll('[data-topic-index]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        openTopic(parseInt(btn.getAttribute('data-topic-index'), 10));
-      });
-    });
+    if (hasPaperGrouping) {
+      renderGroupedTopicList(btnLabel);
+    } else {
+      renderFlatTopicList(btnLabel);
+    }
   }
 
   /* ---------------- Workspace: choose question, answer, mark ---------------- */
