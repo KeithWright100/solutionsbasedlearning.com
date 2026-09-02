@@ -159,6 +159,29 @@ export async function sendRejectionEmail({ email, firstName }) {
   });
 }
 
+// Sent to every active admin whenever the self-service "Forgot
+// password?" flow is used, so an admin stays aware of these requests
+// even though the flow itself is otherwise fully automatic and
+// silent to them (see api/forgot-password.js). Purely informational —
+// the reset link has already been emailed to the student separately;
+// nothing further is required unless they get in touch still stuck,
+// in which case the Admin Dashboard's "Reset Password" button (in
+// the Approved Users tab) sends them a fresh one directly.
+export async function sendPasswordResetRequestedAdminEmail({ adminEmail, studentName, studentEmail }) {
+  const who = studentName ? `${studentName} (${studentEmail})` : studentEmail;
+  const html = wrapper(`
+    <p>Hello,</p>
+    <p><strong>${who}</strong> just requested a password reset on the Solutions Based Learning login page.</p>
+    <p style="font-size:13px;color:#7C93A3;">They've already been emailed a reset link automatically — no action is needed from you. If they get in touch still unable to log in, you can send them a fresh reset link yourself from the Admin Dashboard's Approved Users tab ("Reset Password" button).</p>
+  `);
+  return sendEmail({
+    to: adminEmail,
+    subject: `Password reset requested — ${studentName || studentEmail}`,
+    html,
+    text: `${who} just requested a password reset on the Solutions Based Learning login page.\n\nThey've already been emailed a reset link automatically — no action is needed from you. If they get in touch still unable to log in, you can send them a fresh reset link from the Admin Dashboard's Approved Users tab ("Reset Password" button).`
+  });
+}
+
 export async function sendPasswordResetEmail({ email, firstName, resetUrl }) {
   const html = wrapper(`
     <p>Hello ${firstName || 'there'},</p>

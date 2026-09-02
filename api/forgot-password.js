@@ -6,7 +6,7 @@
 import { isValidEmail } from './_lib/validate.js';
 import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
 import { createSetupToken } from './_lib/tokens.js';
-import { sendPasswordResetEmail } from './_lib/emails.js';
+import { sendPasswordResetEmail, sendPasswordResetRequestedAdminEmail } from './_lib/emails.js';
 
 const GENERIC_MESSAGE = 'If an account exists for that email address, a password reset link has been sent.';
 
@@ -38,6 +38,31 @@ export default async function handler(req, res) {
       await sendPasswordResetEmail({ email, firstName, resetUrl }).catch((err) => {
         console.error('Failed to send password reset email:', err);
       });
+
+      // Also let admins know this happened — this flow is otherwise
+      // fully self-service and invisible to them. Best-effort (never
+      // lets a notification failure affect the response) but awaited,
+      // since Vercel can freeze the function as soon as the response
+      // is sent and a fire-and-forget call here could get cut off
+      // mid-send.
+      try {
+        const { data: admins } = await supabase
+          .from('sbl_profiles')
+          .select('email')
+          .eq('role', 'admin')
+          .eq('status', 'active');
+        await Promise.all((admins || []).map((admin) =>
+          sendPasswordResetRequestedAdminEmail({
+            adminEmail: admin.email,
+            studentName: profile.full_name,
+            studentEmail: email
+          }).catch((err) => {
+            console.error('Failed to send admin reset-notification email:', err);
+          })
+        ));
+      } catch (err) {
+        console.error('Failed to look up admins for reset notification:', err);
+      }
     }
   } catch (err) {
     // Deliberately swallow errors here too, for the same reason —

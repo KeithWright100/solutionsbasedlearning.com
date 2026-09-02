@@ -81,6 +81,8 @@
   color: var(--white);
 }
 .sbl-auth-notice svg { flex: none; width: 18px; height: 18px; margin-top: 0.1rem; color: var(--teal-bright); }
+.sbl-auth-notice a { color: var(--teal-bright); font-weight: 600; }
+.sbl-auth-notice a:hover { text-decoration: underline; }
 
 .sbl-field { margin-bottom: 1.25rem; }
 .sbl-field label {
