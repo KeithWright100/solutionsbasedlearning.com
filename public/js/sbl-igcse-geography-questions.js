@@ -22,20 +22,21 @@
    (4GE1/01R), June 2019 — Question 5, "Investigating Coastal
    Environments" (Section B, 20 marks); Paper 2 (4GE1/02R), June
    2019 — Question 5, "Investigating Rural Environments" (Section B,
-   20 marks); Paper 1 (4GE1/01), June 2021 — Question 5,
-   "Investigating Coastal Environments" (Section B, 12 marks — this
-   paper's Section B question was restructured to a shorter 12-mark
-   format, unlike the 20-mark June 2019 version above). Marking
-   guidance for the June 2021 Paper 1 entry was written in-house (no
-   official Pearson mark scheme was available for that series) — if
-   the real mark scheme becomes available later it should replace
-   this. And Paper 2 (4GE1/02), June 2021 — Question 1, "Economic
-   Activity and Energy" (Section A, 25 marks), Question 2, "Rural
+   20 marks); Paper 1 (4GE1/01), June 2021 — Question 2, "Coastal
+   Environments" (Section A, 25 marks), Question 3, "Hazardous
    Environments" (Section A, 25 marks), and Question 5, "Investigating
-   Rural Environments" (Section B, 12 marks), and Question 9,
-   "Development and Human Welfare" (Section C, 35 marks) — all four
-   Paper 2 topics with marking guidance grounded in the official
-   Pearson mark scheme.
+   Coastal Environments" (Section B, 12 marks — this paper's Section B
+   question was restructured to a shorter 12-mark format, unlike the
+   20-mark June 2019 version above). Marking guidance for all three
+   June 2021 Paper 1 entries was written in-house (no official Pearson
+   mark scheme was available for that series) — if the real mark
+   scheme becomes available later it should replace this. And Paper 2
+   (4GE1/02), June 2021 — Question 1, "Economic Activity and Energy"
+   (Section A, 25 marks), Question 2, "Rural Environments" (Section A,
+   25 marks), Question 5, "Investigating Rural Environments" (Section
+   B, 12 marks), and Question 9, "Development and Human Welfare"
+   (Section C, 35 marks) — all four Paper 2 topics with marking
+   guidance grounded in the official Pearson mark scheme.
    Send over more past paper content and it gets added here, topic by
    topic. */
 
@@ -224,6 +225,96 @@ window.SBL_REVISION_TOPICS = [
           { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q5-fig5b-beach-profiles-conclusions.png',
             alt: 'Two beach profile line graphs (height in metres against distance from the sea in metres, 0-20m) for Site 1 and Site 2, both rising from the sea before flattening and rising again near the back of the beach, plus a table of three conclusions about how beach characteristics and sediment size changed along the coastline.',
             caption: 'Figure 5b — An extract from the student’s data presentation and conclusion' }
+        ]
+      }
+    ]
+  },
+  /* ---------------- Coastal Environments — June 2021 Paper 1 ----------------
+     Pearson Edexcel IGCSE Geography Paper 1 (4GE1/01), June 2021, Question 2
+     (Section A, 25 marks). No official Pearson mark scheme was available
+     for this series, so the marking guidance below was written in-house
+     to a similar standard — see the file header comment. Figure 2b (a
+     photograph of a Pembrokeshire coastal landscape) is described in the
+     question text rather than shown as an image, since it is a
+     copyrighted exam photograph (© Alan Morris / Alamy Stock Photo) — the
+     description covers everything needed to answer part (e). Figures 2a
+     and 2c are diagrams, recreated as clean graphics from the exact
+     figures printed in the resource booklet. */
+  {
+    topic: 'Coastal Environments — June 2021 Paper 1',
+    questions: [
+      {
+        label: 'June 2021 P1 — Question 2(a)',
+        question:
+          'Identify the best definition of mechanical weathering. A Where rocks are broken down by physical factors in the environment. B Where rocks are eroded by activities of plants and animals. C Where rocks are protected from physical processes on a coastline. D Where the chemical composition of the rocks is changed.',
+        marks: 1,
+        markScheme: 'A – Where rocks are broken down by physical factors in the environment is correct. B describes biological weathering, C describes the opposite of weathering (protection), and D describes chemical weathering, not mechanical weathering.'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(b)(i)',
+        question: 'Identify an abiotic factor that affects coastal ecosystems. A Animals B Climate C Plants D Fungi',
+        marks: 1,
+        markScheme: 'B – Climate is correct, as it is a non-living (abiotic) factor. Animals, Plants and Fungi are all living (biotic) factors.'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(b)(ii)',
+        question: 'Identify one feature of coral reef ecosystems.',
+        marks: 1,
+        markScheme:
+          'Any one valid feature, e.g. built from the calcium carbonate skeletons of coral polyps; found in warm, shallow, clear tropical waters; support very high levels of biodiversity; rely on a symbiotic relationship between coral polyps and algae (zooxanthellae). Accept any other accurate feature.'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(b)(iii)',
+        question: 'Explain one factor that controls the distribution of coral reef ecosystems.',
+        marks: 2,
+        markScheme:
+          'One mark for identifying a valid factor, a further mark for explaining how it controls distribution. E.g. ‘Water temperature (1) — coral needs consistently warm water, generally 23–29°C, so reefs are limited to tropical and sub-tropical latitudes (1).’ ‘Water clarity/depth (1) — coral’s symbiotic algae need sunlight to photosynthesise, so reefs are limited to shallow, clear water that light can penetrate (1).’ ‘Salinity (1) — coral needs normal, stable ocean salinity levels to survive, so reefs are absent near river mouths where fresh water dilutes the sea (1).’ Accept any other valid factor with explanation.'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(c)',
+        question:
+          'Figure 2a shows a diagram of coastal landforms found at a headland: a crack, a cave, an arch, a stack and a stump, in that erosional sequence. Suggest two marine processes forming these landforms.',
+        marks: 4,
+        markScheme:
+          'Award up to 2 marks per process (1 mark for naming/identifying the process, 1 further mark for developing how it forms these specific landforms), for two processes, up to 4 marks total. E.g. ‘Hydraulic action (1) — waves compress air into cracks and joints in the headland; the repeated pressure this creates widens the cracks over time, eventually forming caves and, as erosion continues through the headland, arches (1).’ ‘Corrasion/abrasion (1) — rock fragments and sediment picked up by waves are hurled against the headland, wearing away the rock and enlarging cracks and caves into arches, which eventually collapse to leave a stack (1).’ ‘Corrosion/solution (1) — slightly acidic seawater slowly dissolves alkaline rock such as limestone or chalk, wearing away weaknesses in the headland to help form and enlarge caves and arches (1).’ Accept any other valid marine erosion process, correctly linked to the landforms shown.',
+        images: [
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q2-fig2a-coastal-landforms.png',
+            alt: 'Diagram of coastal landforms at a headland, showing the erosional sequence from a crack, to a cave, to an arch, to a stack, to a stump, with vegetation on top of the headland and the sea at the base of the rock.',
+            caption: 'Figure 2a — Diagram of coastal landforms at a headland' }
+        ]
+      },
+      {
+        label: 'June 2021 P1 — Question 2(d)',
+        question: 'Explain one way industry can threaten coastal ecosystems.',
+        marks: 3,
+        markScheme:
+          'One mark for identifying a valid way, up to two further marks for explaining/developing the threat, up to 3 marks total. E.g. ‘Industrial waste and chemical pollution can be discharged or leak into coastal waters (1), reducing water quality (1) and killing or harming marine organisms such as coral and fish that are sensitive to pollution (1).’ ‘Coastal industrial development (e.g. ports, factories) often requires clearing habitats such as mangroves or salt marshes (1), which destroys nursery habitats for marine species (1), reducing biodiversity in the area (1).’ Accept any other valid, well-explained threat.'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(e)',
+        question:
+          'Figure 2b shows a photograph of a coastal landscape in Pembrokeshire, UK: a rocky headland and cliffs with clear turquoise water, with a rocky, gently-sloping platform of exposed, flat-lying rock at the foot of the cliffs, partly covered by shallow water, labelled X. Identify the feature labelled X.',
+        marks: 1,
+        markScheme: 'Wave-cut platform (also accept: shore platform, or abrasion platform) — the flat, gently-sloping rocky area exposed at the base of the cliff.'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(f)',
+        question: 'Explain how prevention strategies can reduce the impact of coastal flooding.',
+        marks: 4,
+        markScheme:
+          'Award marks for identifying valid prevention strategies with development of how each reduces flood impact, up to 4 marks. E.g. ‘Sea walls are built along the coast (1) to reflect wave energy back out to sea (1), preventing waves from overtopping onto land and property behind (1).’ ‘Storm surge barriers can be closed during periods of very high water/storm surge (1), physically blocking the flood water from passing further inland along rivers or estuaries (1), protecting people and property behind the barrier (1).’ ‘Beach nourishment adds extra sand/sediment to a beach (1), which absorbs and dissipates wave energy before it reaches the land (1), reducing the height and force of water reaching the coastline during a storm (1).’ Accept any other valid, well-explained prevention strategy (e.g. flood warning systems, planning restrictions preventing building in high-risk zones).'
+      },
+      {
+        label: 'June 2021 P1 — Question 2(g)',
+        question:
+          'Figure 2c shows different viewpoints on coastal management strategies along the Dorset coast, UK: a local business owner wants groynes and sea walls to protect the 25 million annual day visitors the coastline attracts; a conservationist wants nature to take its course to protect species diversity; a local councillor recognises the need to balance protecting natural beauty/biodiversity with protecting residents’ livelihoods, since tourism is a major employer; and a tourist feels sea walls and groynes harm the scenery and would prefer the area was left alone. The map shows a mix of hold the line (hard engineering) along the main tourist towns (Bournemouth, Christchurch, Burton, Hordle, Milford-on-Sea), a do nothing stretch, and managed retreat near Swanage, close to a National Nature Reserve of sand dunes and Poole. Analyse the different viewpoints affecting the decisions on coastal management strategies.',
+        marks: 8,
+        markScheme:
+          'Marked as a levels-based extended answer (Level 1: 1–3 marks, Level 2: 4–6 marks, Level 3: 7–8 marks). Strong answers analyse why different stakeholders hold different views, and link this clearly to the pattern of management strategies shown on the map, rather than simply describing each viewpoint in turn. Relevant points include: the local business owner and local councillor favour hard engineering (hold the line) along the busy tourist towns because the local economy depends heavily on the 25 million annual day visitors, so protecting beaches, promenades and property from erosion/flooding protects jobs and income, which explains why the ‘hold the line’ stretch covers exactly the built-up, high-value tourist towns (Bournemouth to Milford-on-Sea); the conservationist favours a ‘do nothing’ approach because hard engineering can disrupt natural sediment transport and coastal processes, and this view has been reflected near the National Nature Reserve (sand dunes), an environmentally sensitive area with little economic development to protect, so a low-cost, low-intervention strategy makes sense there; the tourist’s view partially aligns with the conservationist’s, valuing natural scenery over visible defences, showing that even among those who benefit from tourism there can be disagreement about how to manage the coast; managed retreat near Swanage suggests a compromise decision has been made in an area that may be lower-value or harder/more expensive to defend long-term, allowing the coastline to move inland gradually rather than paying for expensive hard engineering or leaving property completely undefended; overall, the map shows decision-makers appear to have balanced conflicting viewpoints by applying different strategies to different stretches of coast based on economic value, environmental sensitivity, and cost, rather than adopting a single strategy for the whole coastline. Weaker answers describe the different viewpoints and/or the map without clearly analysing why decisions differ along the coast or how the viewpoints relate to the pattern shown.',
+        images: [
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q2-fig2c-management-viewpoints.png',
+            alt: 'A map of the Dorset coast from Poole and Swanage to Hordle and Milford-on-Sea, showing a coastline management key: managed retreat (orange) near Swanage, do nothing (yellow) near a National Nature Reserve of sand dunes, and hold the line/hard engineering (black) along Bournemouth, Christchurch, Burton and towards Hordle. Four speech-bubble quotes surround the map from a local business owner, a conservationist, a local councillor, and a tourist, each giving a different view on coastal management.',
+            caption: 'Figure 2c — Different views on coastal management strategies along the Dorset coast, UK' }
         ]
       }
     ]
@@ -628,7 +719,96 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   },
+  /* ---------------- Hazardous Environments — June 2021 Paper 1 ----------------
+     Pearson Edexcel IGCSE Geography Paper 1 (4GE1/01), June 2021, Question 3
+     (Section A, 25 marks). No official Pearson mark scheme was available
+     for this series, so the marking guidance below was written in-house
+     to a similar standard — see the file header comment. Figures 3a, 3b
+     and 3c are diagrams/maps, recreated as clean graphics from the exact
+     figures and data printed in the resource booklet. */
+  {
+    topic: 'Hazardous Environments — June 2021 Paper 1',
+    questions: [
+      {
+        label: 'June 2021 P1 — Question 3(a)',
+        question: 'Identify which of the following can be used to record earthquakes. A Flow meter B Hygrometer C Richter scale D Seismograph',
+        marks: 1,
+        markScheme: 'D – Seismograph is correct, as this is the instrument used to detect and record ground shaking during an earthquake. A flow meter (A) measures river discharge, a hygrometer (B) measures humidity, and the Richter scale (C) is a scale used to express earthquake magnitude, not an instrument that records earthquakes.'
+      },
+      {
+        label: 'June 2021 P1 — Question 3(b)(i)',
+        question: 'Identify a method of measuring tropical cyclones. A Bradshaw scale B Pressure scale C Saffir-Simpson scale D Wind speed scale',
+        marks: 1,
+        markScheme: 'C – Saffir-Simpson scale is correct; this is the recognised scale (1 to 5) used to categorise the intensity of tropical cyclones based on sustained wind speed. The Bradshaw model (A) is used to describe changes in a river’s channel characteristics downstream, not cyclones; ‘Pressure scale’ (B) and ‘Wind speed scale’ (D) are not the names of real, recognised measurement scales.'
+      },
+      {
+        label: 'June 2021 P1 — Question 3(b)(ii)',
+        question: 'State one factor that influences the development of tropical cyclones.',
+        marks: 1,
+        markScheme:
+          'Any one valid factor, e.g. sea surface temperature of at least 26–27°C to a sufficient depth; location at least 5° latitude from the equator, to allow the Coriolis effect to create rotation; low levels of wind shear in the atmosphere; high humidity in the lower-to-mid atmosphere. Accept any other accurate factor.'
+      },
+      {
+        label: 'June 2021 P1 — Question 3(b)(iii)',
+        question: 'Explain one physical impact of a tropical cyclone hazard.',
+        marks: 2,
+        markScheme:
+          'One mark for identifying a valid physical impact, a further mark for explaining/developing it. E.g. ‘Storm surge (1) — strong winds push a mound of sea water onto the coast ahead of the storm, which can flood low-lying coastal land, damage property and drown people and livestock (1).’ ‘High winds (1) — can physically damage or destroy buildings, infrastructure and crops, and uproot trees, disrupting the local landscape and economy (1).’ ‘Heavy rainfall (1) — can trigger flooding and landslides, which damage land, property and infrastructure beyond the storm’s immediate path (1).’ Accept any other valid, well-explained physical impact.'
+      },
+      {
+        label: 'June 2021 P1 — Question 3(c)',
+        question:
+          'Figure 3a shows a world map of tectonic plate boundaries with the locations of the world’s megacities marked, showing that most megacities cluster close to or along tectonic plate boundaries, particularly around the Pacific ‘Ring of Fire’ (western coasts of the Americas, Japan, and Southeast Asia) and the Alpine-Himalayan belt (from the Mediterranean/Middle East through to southern/eastern Asia). Suggest two reasons why some places are more vulnerable to tectonic hazards than others.',
+        marks: 4,
+        markScheme:
+          'Award up to 2 marks per reason (1 mark for identifying the reason, 1 further mark for developing it), for two reasons, up to 4 marks total. E.g. ‘Proximity to a plate boundary (1) — places located on or very close to a plate boundary, as shown by many of the megacities in Figure 3a, experience more frequent and more intense earthquakes/volcanic activity than places further from a boundary, increasing their exposure to hazards (1).’ ‘Level of economic development (1) — poorer/developing countries often have less money to invest in earthquake-resistant building design, monitoring and early-warning systems, and emergency planning, so a tectonic hazard of the same magnitude is likely to cause far greater damage and loss of life than in a wealthier, better-prepared country (1).’ ‘Population density (1) — as Figure 3a shows, many megacities with very large populations are located near plate boundaries, meaning a hazard event in these areas has the potential to affect far more people than the same event in a sparsely populated area (1).’ Accept any other valid, well-explained reason.',
+        images: [
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q3-fig3a-tectonic-megacities.png',
+            alt: 'A simplified world map showing tectonic plate boundaries as lines and megacity locations as dots, with clusters of megacities along the west coasts of North and South America, and a dense cluster stretching from the Mediterranean/Middle East through South and East Asia to Japan and Southeast Asia — closely following the major plate boundaries.',
+            caption: 'Figure 3a — Tectonic plate boundaries and megacity locations' }
+        ]
+      },
+      {
+        label: 'June 2021 P1 — Question 3(d)',
+        question: 'Explain one strategy to reduce the impacts from earthquake events.',
+        marks: 3,
+        markScheme:
+          'One mark for identifying a valid strategy, up to two further marks for explaining/developing how it reduces impacts, up to 3 marks total. E.g. ‘Earthquake-resistant building design (1), such as flexible foundations, cross-bracing or base isolators (1), allows buildings to absorb or withstand ground shaking rather than collapsing, reducing deaths, injuries and damage (1).’ ‘Early warning systems (1) can detect the first, faster-travelling seismic waves and send out an alert before the stronger shaking arrives (1), giving people seconds to minutes to take cover, and allowing trains to stop and gas lines to shut off automatically, reducing casualties and secondary hazards such as fires (1).’ Accept any other valid, well-explained strategy (e.g. education/earthquake drills, land-use zoning restricting building in highest-risk areas, emergency response planning).'
+      },
+      {
+        label: 'June 2021 P1 — Question 3(e)',
+        question:
+          'Figure 3b shows a diagram of a plate boundary: two blocks of crust, Plate 1 and Plate 2, are shown moving apart from each other, away from a shared boundary, with earthquake epicentres shown close to the surface at the boundary itself and at shallow depth just below it. Identify the type of plate boundary.',
+        marks: 1,
+        markScheme: 'Divergent (also accept: constructive) plate boundary — the diagram shows the two plates moving apart from one another, which is characteristic of a divergent/constructive boundary.',
+        images: [
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q3-fig3b-plate-boundary.png',
+            alt: 'A 3D block diagram showing two plates, Plate 1 and Plate 2, side by side and moving apart from each other at a central boundary, with layered rock (crust and upper mantle) visible in cross-section and earthquake epicentres marked with concentric circles, one at the surface near the boundary and one at shallow depth just below it.',
+            caption: 'Figure 3b — Diagram of a plate boundary' }
+        ]
+      },
+      {
+        label: 'June 2021 P1 — Question 3(f)',
+        question: 'Explain the formation of a volcano.',
+        marks: 4,
+        markScheme:
+          'Award marks for a logical explanation of the process, up to 4 marks. Full marks can be credited for a clear, correctly-sequenced explanation of formation at a destructive (convergent) plate boundary, e.g.: at a destructive boundary, a denser oceanic plate is forced/subducts beneath a less dense oceanic or continental plate, down into the mantle (1); friction between the two plates, and the heat and pressure of the mantle, cause the subducted plate/surrounding rock to melt, forming magma (1); because magma is less dense than the solid rock around it, it rises up through cracks and weaknesses in the crust above (1); the magma erupts at the surface as lava (and ash), which cools and solidifies, building up a volcanic cone over repeated eruptions (1). Alternative correct routes to full marks include formation at a constructive/divergent boundary (magma rising to fill the gap as plates move apart) or over a hot spot (a fixed plume of magma rising through the crust); credit any well-explained, logically sequenced and geologically accurate route to volcano formation.'
+      },
+      {
+        label: 'June 2021 P1 — Question 3(g)',
+        question:
+          'Figure 3c gives details about the Haiti earthquake of 2010: magnitude 7.0, occurring on 12 January 2010 at a depth of 13km, in a country with a population of 9.95 million. Short-term impacts: 220,000 people killed; 300,000 people injured; transport and communications disrupted, with the airport damaged; a shortage of aid supplies due to lack of preparation. Long-term impacts: 2 million people with poor access to food and water; 1.3 million people made homeless; outbreaks of cholera; many businesses destroyed, particularly in the clothing industry. Analyse the short- and long-term impacts of the earthquake event.',
+        marks: 8,
+        markScheme:
+          'Marked as a levels-based extended answer (Level 1: 1–3 marks, Level 2: 4–6 marks, Level 3: 7–8 marks). Strong answers analyse the impacts given in Figure 3c rather than simply listing them, drawing out how they connect to one another and to Haiti’s status as a developing country. Relevant points include: the very high death toll (220,000) and injury count (300,000) reflect widespread building collapse, likely due to poor-quality/non-earthquake-resistant construction and high population density typical of a developing country; damage to the airport and disruption to transport/communications directly explain the shortage of aid supplies, since damaged infrastructure delayed the arrival of international search-and-rescue teams and relief supplies in the crucial first hours and days, likely increasing the eventual death toll; the shift from short-term impacts (deaths, injuries, immediate disruption) to long-term impacts (2 million with poor food/water access, 1.3 million homeless, cholera outbreaks) shows how an initial physical hazard event escalates into a prolonged humanitarian crisis, particularly where a country lacks the resources for a fast, well-resourced recovery; the outbreak of cholera is a secondary/long-term impact caused by the destruction of clean water and sanitation infrastructure, showing how impacts can compound well after the earthquake itself has ended; the destruction of businesses, especially the clothing industry (an important part of Haiti’s economy/exports), damaged the country’s ability to generate income and rebuild, illustrating how economic impacts extend the human/social impacts over the long term; overall, the scale and duration of impacts shown reflect Haiti’s vulnerability as a developing country — with weaker infrastructure, limited emergency funds, and a narrower economic base to draw on for recovery than a more developed country would have. Weaker answers list the short-term and long-term impacts from Figure 3c separately with little analysis of how or why they occurred or are connected.',
+        images: [
+          { src: '/images/revision-ppq/igcse-geography/jun-2021-p1/q3-fig3c-haiti-earthquake.png',
+            alt: 'An information box giving the Haiti earthquake of 2010 details (magnitude 7.0, 12 January 2010, depth 13km) plus a table giving the population of Haiti (9.95 million) and lists of the short-term impacts (220,000 killed, 300,000 injured, transport/communications disrupted and the airport damaged, shortage of aid supplies) and long-term impacts (2 million with poor food/water access, 1.3 million homeless, outbreaks of cholera, destroyed businesses particularly in the clothing industry).',
+            caption: 'Figure 3c — Details about an earthquake event in Haiti, a developing country, in 2010' }
+        ]
+      }
+    ]
+  },
   /* ---------------- Coming soon ---------------- */
-  { topic: 'Hazardous Environments', comingSoon: true },
   { topic: 'Coastal Fieldwork', comingSoon: true }
 ];
