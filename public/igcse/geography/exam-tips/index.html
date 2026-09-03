@@ -133,7 +133,7 @@
 
   .exam-tips-banner-row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 620px;
+    grid-template-columns: minmax(0, 1fr) 860px;
     gap: 1.75rem;
     align-items: stretch;
     margin-bottom: 1.8rem;
@@ -147,7 +147,7 @@
   .exam-tips-banner-row .igcse-hero-banner--cta .igcse-hero-btn {
     margin-top: 16px;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1160px) {
     .exam-tips-banner-row { grid-template-columns: 1fr; }
   }
 
@@ -159,23 +159,40 @@
   /* ---------------- Two-column layout: tips content + Socratic bot rail ---------------- */
   .exam-tips-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 620px;
+    grid-template-columns: minmax(0, 1fr) 860px;
     gap: 1.75rem;
     align-items: start;
   }
   .exam-tips-layout > .exam-tips-banner-row { grid-column: 1 / -1; }
-  @media (max-width: 1300px) {
+  @media (max-width: 1560px) {
     .exam-tips-layout { grid-template-columns: minmax(0, 1fr); }
   }
 
-  /* ---------------- Socratic fieldwork-planning bot ---------------- */
+  /* ---------------- Socratic fieldwork-planning bots, side by side by paper ---------------- */
+  .socratic-papers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .socratic-papers-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  .socratic-paper-label {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #0392a2;
+    margin: 0 0 0.6rem;
+  }
   .socratic-card {
     background: var(--lh-surface);
     border: 1px solid #02a7aa;
     border-radius: 14px;
     padding: 1.4rem 1.5rem;
   }
-  aside > .socratic-card:first-child {
+  .socratic-paper-col > .socratic-card:first-child {
     position: sticky;
     top: 1.75rem;
   }
@@ -324,7 +341,7 @@
     </header>
 
     <div class="lh-content-grid">
-      <main style="max-width: 1500px;">
+      <main style="max-width: 1680px;">
       <div class="exam-tips-layout">
         <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner" aria-label="IGCSE Geography Examination Tips and Advice">
@@ -461,6 +478,10 @@
         </div>
 
         <aside aria-label="Fieldwork enquiry planning and marking">
+        <div class="socratic-papers-grid">
+
+        <div class="socratic-paper-col">
+        <p class="socratic-paper-label">Paper 1 &mdash; Coast</p>
         <div class="socratic-card">
           <h2>Plan your fieldwork answer</h2>
           <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
@@ -487,8 +508,11 @@
           <p id="ppqStatus" class="socratic-status" role="status" aria-live="polite"></p>
           <div id="ppqFeedback" class="ppq-feedback" hidden></div>
         </div>
+        </div>
 
-        <div class="socratic-card" style="margin-top: 1.75rem;">
+        <div class="socratic-paper-col">
+        <p class="socratic-paper-label">Paper 2 &mdash; Rural</p>
+        <div class="socratic-card">
           <h2>Plan your data presentation answer</h2>
           <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
           <div class="socratic-question"><strong>(e)</strong> Study Figures 5a and 5b below. They show two different data presentation techniques from a student&rsquo;s fieldwork into the use of rural environments. The aim of the student&rsquo;s investigation was to identify attitudes towards the plans for a new tourist development in the New Territories, Hong Kong. Evaluate the student&rsquo;s data presentation techniques. <strong>(8)</strong></div>
@@ -507,6 +531,9 @@
           </div>
 
           <p id="socraticStatus2" class="socratic-status" role="status" aria-live="polite"></p>
+        </div>
+        </div>
+
         </div>
         </aside>
       </div>
