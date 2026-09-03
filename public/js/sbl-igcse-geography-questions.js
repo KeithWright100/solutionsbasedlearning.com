@@ -39,6 +39,21 @@
    B, 12 marks), and Question 9, "Development and Human Welfare"
    (Section C, 35 marks) — all four Paper 2 topics with marking
    guidance grounded in the official Pearson mark scheme.
+
+   Also: "Empowering Women, Indigenous and Minority Groups" (shown on
+   the site as Paper 2, sorted after Development and Human Welfare) —
+   a 12-mark extended question on affirmative action and the
+   development gap, written in-house for Unit 5: Human Development and
+   Diversity > 1. Development opportunities > Empowering women,
+   indigenous and minority groups. Unlike the in-house mark schemes
+   above, this question itself is also in-house (not from an official
+   Pearson past paper) — both the question and the mark scheme were
+   supplied by the teacher, together with a private model answer used
+   only to calibrate the mark scheme's standard (the model answer is
+   not stored here and is never shown to students; the marking engine
+   only ever sends the question, the mark scheme below, and the
+   student's own answer to the AI marker).
+
    Send over more past paper content and it gets added here, topic by
    topic. */
 
@@ -826,6 +841,21 @@ window.SBL_REVISION_TOPICS = [
             alt: 'An information box giving the Haiti earthquake of 2010 details (magnitude 7.0, 12 January 2010, depth 13km) plus a table giving the population of Haiti (9.95 million) and lists of the short-term impacts (220,000 killed, 300,000 injured, transport/communications disrupted and the airport damaged, shortage of aid supplies) and long-term impacts (2 million with poor food/water access, 1.3 million homeless, outbreaks of cholera, destroyed businesses particularly in the clothing industry).',
             caption: 'Figure 3c — Details about an earthquake event in Haiti, a developing country, in 2010' }
         ]
+      }
+    ]
+  },
+  {
+    topic: 'Empowering Women, Indigenous and Minority Groups',
+    paper: 2,
+    questionNumber: 10,
+    questions: [
+      {
+        label: 'In-house — Affirmative Action and the Development Gap',
+        question:
+          'Using examples, analyse how affirmative action can be used to close the development gap.',
+        marks: 12,
+        markScheme:
+          '[In-house guidance — this question and mark scheme were written in-house for Unit 5: Human Development and Diversity (Empowering women, indigenous and minority groups); it is not from an official Pearson past paper — see the header comment at the top of this file for full context.] Marked as a levels-based extended answer (Level 1: 1–4 marks, Level 2: 5–8 marks, Level 3: 9–12 marks). Level 1 answers show only a basic, partial understanding of affirmative action, use at most one simple example, are mostly descriptive, and make weak links to the development gap. Level 2 answers show a good understanding of affirmative action, use at least two relevant named examples, explain how the strategy works, offer some analysis of its impact on development including some discussion of successes and limitations, and use geographical terminology accurately. Level 3 answers give detailed analysis throughout, use three or more well-developed named examples, make strong and specific links to the development gap, offer a balanced evaluation of effectiveness, reach a well-supported judgement, and are organised in a clear, logically flowing structure with a conclusion. Indicative content — the following examples are not prescriptive; other relevant, well-explained affirmative action examples must also be credited: girls\' education programmes in Nepal, improving female literacy and access to employment and income; schools established for the Dani people in Indonesia (e.g. by missionaries), improving literacy, numeracy and participation in the wider economy, alongside government infrastructure, transport and solar electricity programmes for Dani communities — though poverty and low educational progression often remain, and some traditional cultural practices have declined; political quota systems in Rwanda giving women a high proportion of parliamentary seats, increasing their voice in decisions affecting education, healthcare and employment; and anti-discrimination and equal-opportunity employment legislation supporting LGBTQ communities in some countries, improving access to jobs and legal protection — though this protection and its effectiveness vary widely and discrimination continues in many places. The strongest answers evaluate effectiveness on both sides, recognising that affirmative action can meaningfully close aspects of the development gap while also creating unintended consequences (e.g. pressure on traditional culture and identity) or leaving some inequalities unresolved, and conclude that affirmative action is most effective when combined with wider development strategies that address the underlying causes of inequality.'
       }
     ]
   }
