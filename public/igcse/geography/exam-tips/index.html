@@ -133,7 +133,7 @@
 
   .exam-tips-banner-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) 620px;
     gap: 1.75rem;
     align-items: stretch;
     margin-bottom: 1.8rem;
@@ -147,7 +147,7 @@
   .exam-tips-banner-row .igcse-hero-banner--cta .igcse-hero-btn {
     margin-top: 16px;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     .exam-tips-banner-row { grid-template-columns: 1fr; }
   }
 
@@ -159,12 +159,12 @@
   /* ---------------- Two-column layout: tips content + Socratic bot rail ---------------- */
   .exam-tips-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 360px;
+    grid-template-columns: minmax(0, 1fr) 620px;
     gap: 1.75rem;
     align-items: start;
   }
   .exam-tips-layout > .exam-tips-banner-row { grid-column: 1 / -1; }
-  @media (max-width: 1000px) {
+  @media (max-width: 1300px) {
     .exam-tips-layout { grid-template-columns: minmax(0, 1fr); }
   }
 
@@ -324,7 +324,7 @@
     </header>
 
     <div class="lh-content-grid">
-      <main style="max-width: 1220px;">
+      <main style="max-width: 1500px;">
       <div class="exam-tips-layout">
         <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner" aria-label="IGCSE Geography Examination Tips and Advice">
