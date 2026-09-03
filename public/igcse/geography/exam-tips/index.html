@@ -155,6 +155,110 @@
     .igcse-hero-banner { padding: 22px 22px; }
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
   }
+
+  /* ---------------- Two-column layout: tips content + Socratic bot rail ---------------- */
+  .exam-tips-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  .exam-tips-layout > .exam-tips-banner-row { grid-column: 1 / -1; }
+  @media (max-width: 1000px) {
+    .exam-tips-layout { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* ---------------- Socratic fieldwork-planning bot ---------------- */
+  .socratic-card {
+    background: var(--lh-surface);
+    border: 1px solid var(--lh-border);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    position: sticky;
+    top: 1.75rem;
+  }
+  .socratic-card h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.5rem;
+    color: var(--lh-ink);
+  }
+  .socratic-card > p.socratic-intro {
+    color: var(--lh-body);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin: 0 0 0.9rem;
+  }
+  .socratic-question {
+    background: var(--lh-bg);
+    border: 1px solid var(--lh-border);
+    border-radius: 10px;
+    padding: 0.85rem 0.95rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--lh-body);
+    margin-bottom: 1rem;
+  }
+  .socratic-start-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    color: #ffffff;
+    font-family: var(--lh-font-body);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(0, 184, 176, 0.28);
+  }
+  .socratic-start-btn:disabled { opacity: 0.6; cursor: default; }
+  .socratic-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: 360px;
+    overflow-y: auto;
+    margin-bottom: 0.9rem;
+    padding-right: 2px;
+  }
+  .socratic-msg {
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    max-width: 92%;
+    white-space: pre-wrap;
+  }
+  .socratic-msg--bot { background: var(--lh-teal-bg); color: var(--lh-ink); align-self: flex-start; }
+  .socratic-msg--student { background: var(--lh-green-bg); color: var(--lh-ink); align-self: flex-end; }
+  .socratic-input-row { display: flex; gap: 0.5rem; }
+  .socratic-input-row textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 44px;
+    max-height: 120px;
+    font-family: inherit;
+    font-size: 0.84rem;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--lh-border);
+    border-radius: 8px;
+  }
+  .socratic-send-btn {
+    flex-shrink: 0;
+    border: none;
+    border-radius: 8px;
+    padding: 0 1rem;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.84rem;
+    cursor: pointer;
+  }
+  .socratic-send-btn:disabled { opacity: 0.5; cursor: default; }
+  .socratic-status { font-size: 0.76rem; color: var(--lh-muted); margin-top: 0.6rem; min-height: 1em; }
+  .socratic-status--error { color: #C0392B; }
 </style>
 </head>
 <body class="lh">
@@ -173,7 +277,8 @@
     </header>
 
     <div class="lh-content-grid">
-      <main style="max-width: 900px;">
+      <main style="max-width: 1220px;">
+      <div class="exam-tips-layout">
         <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner" aria-label="IGCSE Geography Examination Tips and Advice">
           <span class="igcse-hero-kicker">IGCSE Geography</span>
@@ -186,6 +291,7 @@
         </div>
         </div>
 
+        <div>
         <div class="tips-card">
           <h2>1. Know your command words</h2>
           <p>Every question is built around a command word. It tells you exactly what the examiner wants &mdash; get this wrong and you can write a page and still score low marks.</p>
@@ -272,9 +378,129 @@
           </a>
         </section>
         </div>
+        </div>
+
+        <aside class="socratic-card" aria-label="Fieldwork enquiry Socratic planning bot">
+          <h2>Plan your fieldwork answer</h2>
+          <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
+          <div class="socratic-question"><strong>(e)</strong> You have studied a coastal environment as part of your own geographical enquiry. Evaluate how effective your site selection and sampling strategies were in helping you answer your enquiry title. <strong>(8)</strong></div>
+
+          <div id="socraticChat" class="socratic-chat" hidden></div>
+          <button type="button" id="socraticStartBtn" class="socratic-start-btn">Start planning with the tutor</button>
+
+          <div id="socraticInputRow" class="socratic-input-row" hidden style="margin-top:0.9rem;">
+            <textarea id="socraticInput" placeholder="Type your answer here..." aria-label="Your reply to the tutor"></textarea>
+            <button type="button" id="socraticSendBtn" class="socratic-send-btn">Send</button>
+          </div>
+
+          <p id="socraticStatus" class="socratic-status" role="status" aria-live="polite"></p>
+        </aside>
+      </div>
       </main>
     </div>
   </div>
 </div>
+
+<script>
+(function () {
+  var QUESTION_KEY = 'geog-coastal-fieldwork-8mark';
+
+  var chatEl = document.getElementById('socraticChat');
+  var startBtn = document.getElementById('socraticStartBtn');
+  var inputRow = document.getElementById('socraticInputRow');
+  var inputEl = document.getElementById('socraticInput');
+  var sendBtn = document.getElementById('socraticSendBtn');
+  var statusEl = document.getElementById('socraticStatus');
+
+  var sessionId = null;
+  var busy = false;
+
+  function setStatus(text, isError) {
+    statusEl.textContent = text || '';
+    statusEl.classList.toggle('socratic-status--error', !!isError);
+  }
+
+  function addMessage(role, text) {
+    chatEl.hidden = false;
+    var bubble = document.createElement('div');
+    bubble.className = 'socratic-msg ' + (role === 'bot' ? 'socratic-msg--bot' : 'socratic-msg--student');
+    bubble.textContent = text;
+    chatEl.appendChild(bubble);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function setBusy(state) {
+    busy = state;
+    startBtn.disabled = state;
+    sendBtn.disabled = state;
+    inputEl.disabled = state;
+  }
+
+  startBtn.addEventListener('click', function () {
+    if (busy) return;
+    setBusy(true);
+    setStatus('Connecting to the tutor…');
+    startBtn.hidden = true;
+
+    fetch('/api/socratic-fieldwork', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'start', questionKey: QUESTION_KEY })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (result) {
+        if (!result.ok) throw new Error((result.data && result.data.error) || 'Could not start the tutor.');
+        sessionId = result.data.sessionId;
+        addMessage('bot', result.data.reply);
+        inputRow.hidden = false;
+        setStatus('');
+        setBusy(false);
+        inputEl.focus();
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong. Please try again.', true);
+        startBtn.hidden = false;
+        setBusy(false);
+      });
+  });
+
+  function sendReply() {
+    if (busy) return;
+    var text = inputEl.value.trim();
+    if (!text || !sessionId) return;
+
+    addMessage('student', text);
+    inputEl.value = '';
+    setBusy(true);
+    setStatus('Thinking…');
+
+    fetch('/api/socratic-fieldwork', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'reply', sessionId: sessionId, message: text })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (result) {
+        if (!result.ok) throw new Error((result.data && result.data.error) || 'Could not reach the tutor.');
+        addMessage('bot', result.data.reply);
+        setStatus('');
+        setBusy(false);
+        inputEl.focus();
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong. Please try again.', true);
+        setBusy(false);
+      });
+  }
+
+  sendBtn.addEventListener('click', sendReply);
+  inputEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendReply();
+    }
+  });
+})();
+</script>
 </body>
 </html>
