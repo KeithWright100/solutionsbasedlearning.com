@@ -174,9 +174,12 @@
     border: 1px solid #02a7aa;
     border-radius: 14px;
     padding: 1.4rem 1.5rem;
+  }
+  aside > .socratic-card:first-child {
     position: sticky;
     top: 1.75rem;
   }
+  .ppq-answer-card { margin-top: 1.75rem; }
   .socratic-card h2 {
     font-family: var(--lh-font-display);
     font-weight: 700;
@@ -259,6 +262,50 @@
   .socratic-send-btn:disabled { opacity: 0.5; cursor: default; }
   .socratic-status { font-size: 0.76rem; color: var(--lh-muted); margin-top: 0.6rem; min-height: 1em; }
   .socratic-status--error { color: #C0392B; }
+
+  /* ---------------- Full-answer PPQ (write-up + marking) ---------------- */
+  .ppq-answer-card h2 { font-family: var(--lh-font-display); font-weight: 700; font-size: 1.02rem; margin: 0 0 0.5rem; color: var(--lh-ink); }
+  .ppq-answer-card > p.socratic-intro { color: var(--lh-body); font-size: 0.84rem; line-height: 1.55; margin: 0 0 0.9rem; }
+  .ppq-answer-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 180px;
+    font-family: inherit;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--lh-border);
+    border-radius: 8px;
+    margin-bottom: 0.9rem;
+  }
+  .ppq-answer-card .socratic-status { margin-bottom: 0; }
+  .ppq-feedback { margin-top: 1.1rem; font-size: 0.84rem; line-height: 1.55; color: var(--lh-body); }
+  .ppq-feedback .ppq-mark {
+    display: inline-block;
+    background: var(--lh-teal-bg);
+    color: var(--lh-ink);
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+  }
+  .ppq-feedback h3 { font-family: var(--lh-font-display); font-weight: 700; font-size: 0.8rem; margin: 0.9rem 0 0.3rem; color: var(--lh-ink); }
+  .ppq-feedback p { margin: 0; }
+  .ppq-feedback .ppq-retry-btn {
+    margin-top: 1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    background: var(--lh-surface);
+    border: 1px solid #02a7aa;
+    color: var(--lh-ink);
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body class="lh">
@@ -380,7 +427,8 @@
         </div>
         </div>
 
-        <aside class="socratic-card" aria-label="Fieldwork enquiry Socratic planning bot">
+        <aside aria-label="Fieldwork enquiry planning and marking">
+        <div class="socratic-card">
           <h2>Plan your fieldwork answer</h2>
           <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
           <div class="socratic-question"><strong>(e)</strong> You have studied a coastal environment as part of your own geographical enquiry. Evaluate how effective your site selection and sampling strategies were in helping you answer your enquiry title. <strong>(8)</strong></div>
@@ -394,6 +442,18 @@
           </div>
 
           <p id="socraticStatus" class="socratic-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="socratic-card ppq-answer-card">
+          <h2>Now write your full answer</h2>
+          <p class="socratic-intro">Write your complete response to the same question, then submit it for marking. You'll get a mark out of 8 and examiner-style feedback.</p>
+
+          <textarea id="ppqAnswer" class="ppq-answer-textarea" placeholder="Type your full answer here..." aria-label="Your full written answer"></textarea>
+          <button type="button" id="ppqSubmitBtn" class="socratic-start-btn">Submit for Marking</button>
+
+          <p id="ppqStatus" class="socratic-status" role="status" aria-live="polite"></p>
+          <div id="ppqFeedback" class="ppq-feedback" hidden></div>
+        </div>
         </aside>
       </div>
       </main>
@@ -499,6 +559,81 @@
       e.preventDefault();
       sendReply();
     }
+  });
+})();
+
+(function () {
+  var QUESTION_KEY = 'geog-coastal-fieldwork-8mark';
+
+  var answerEl = document.getElementById('ppqAnswer');
+  var submitBtn = document.getElementById('ppqSubmitBtn');
+  var statusEl = document.getElementById('ppqStatus');
+  var feedbackEl = document.getElementById('ppqFeedback');
+
+  var busy = false;
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function setStatus(text, isError) {
+    statusEl.textContent = text || '';
+    statusEl.classList.toggle('socratic-status--error', !!isError);
+  }
+
+  function setBusy(state) {
+    busy = state;
+    submitBtn.disabled = state;
+    answerEl.disabled = state;
+  }
+
+  function renderFeedback(feedback) {
+    feedback = feedback || {};
+    var markLine = feedback.markAwarded ? escapeHtml(feedback.markAwarded) : '— / 8';
+
+    var html = '<div class="ppq-mark">Mark awarded: ' + markLine + '</div>';
+    if (feedback.whyThisMark) html += '<h3>Why this mark was awarded</h3><p>' + escapeHtml(feedback.whyThisMark) + '</p>';
+    if (feedback.whatWasDoneWell) html += '<h3>What was done well</h3><p>' + escapeHtml(feedback.whatWasDoneWell) + '</p>';
+    if (feedback.whatIsMissing) html += '<h3>What is missing or needs development</h3><p>' + escapeHtml(feedback.whatIsMissing) + '</p>';
+    if (feedback.nextStep) html += '<h3>Next step</h3><p>' + escapeHtml(feedback.nextStep) + '</p>';
+    if (feedback.followUpQuestion) html += '<h3>Follow-up question</h3><p>' + escapeHtml(feedback.followUpQuestion) + '</p>';
+
+    feedbackEl.innerHTML = html;
+    feedbackEl.hidden = false;
+  }
+
+  submitBtn.addEventListener('click', function () {
+    if (busy) return;
+    var studentAnswer = answerEl.value.trim();
+    if (!studentAnswer) {
+      setStatus('Please write an answer before submitting for marking.', true);
+      answerEl.focus();
+      return;
+    }
+
+    setBusy(true);
+    setStatus('Marking your answer — this usually takes a few seconds…');
+    feedbackEl.hidden = true;
+
+    fetch('/api/mark-fieldwork-ppq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ questionKey: QUESTION_KEY, studentAnswer: studentAnswer })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (result) {
+        if (!result.ok) throw new Error((result.data && result.data.error) || 'Marking failed.');
+        setStatus('');
+        setBusy(false);
+        renderFeedback(result.data.feedback);
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong. Please try again.', true);
+        setBusy(false);
+      });
   });
 })();
 </script>
