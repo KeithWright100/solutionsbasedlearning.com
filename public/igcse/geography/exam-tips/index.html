@@ -101,6 +101,29 @@
   .tips-checklist li:last-child { border-bottom: none; }
   .tips-checklist li::before { content: "\2713"; color: var(--lh-green); font-weight: 700; flex-shrink: 0; }
 
+  .exam-tips-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .exam-tips-banner {
+    border-radius: 18px;
+    padding: 22px 24px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 20px 46px rgba(0, 28, 52, 0.22);
+    color: #ffffff;
+  }
+  .exam-tips-banner h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
@@ -122,8 +145,8 @@
       </nav>
     </header>
 
-    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr); max-width: 900px;">
-      <main>
+    <div class="lh-content-grid">
+      <main style="max-width: 900px;">
         <section class="igcse-hero-banner" aria-label="IGCSE Geography Examination Tips and Advice">
           <span class="igcse-hero-kicker">IGCSE Geography</span>
           <h1>Examination Tips &amp; Advice</h1>
@@ -204,6 +227,13 @@
           </a>
         </section>
       </main>
+
+      <aside class="exam-tips-rail" aria-label="Extended answer practice">
+        <div class="exam-tips-banner">
+          <span class="igcse-hero-kicker">Extended answers</span>
+          <h2>Develop your ability to answer 6, 8 and 12 mark exam questions</h2>
+        </div>
+      </aside>
     </div>
   </div>
 </div>
