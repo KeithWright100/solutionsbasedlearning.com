@@ -131,6 +131,26 @@
     justify-content: center;
   }
 
+  .exam-tips-banner-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    align-items: stretch;
+    margin-bottom: 1.8rem;
+  }
+  .exam-tips-banner-row > * { margin-bottom: 0; }
+  .exam-tips-banner-row .igcse-hero-banner--cta {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .exam-tips-banner-row .igcse-hero-banner--cta .igcse-hero-btn {
+    margin-top: 16px;
+  }
+  @media (max-width: 700px) {
+    .exam-tips-banner-row { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
@@ -154,11 +174,17 @@
 
     <div class="lh-content-grid">
       <main style="max-width: 900px;">
+        <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner" aria-label="IGCSE Business Examination Tips and Advice">
           <span class="igcse-hero-kicker">IGCSE Business</span>
           <h1>Examination Tips &amp; Advice</h1>
           <p>How to read command words, manage your time, and structure case-study and extended answers so every point is properly rewarded.</p>
         </section>
+        <div class="exam-tips-banner">
+          <span class="igcse-hero-kicker">Extended answers</span>
+          <h2>Develop your ability to answer 6, 8 and 12 mark exam questions</h2>
+        </div>
+        </div>
 
         <div class="tips-card">
           <h2>1. Know your command words</h2>
@@ -218,6 +244,7 @@
           </ul>
         </div>
 
+        <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Put it into practice">
           <div>
             <span class="igcse-hero-kicker">Put it into practice</span>
@@ -229,7 +256,6 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
         </section>
-
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Practise past papers">
           <div>
             <span class="igcse-hero-kicker">Or jump straight in</span>
@@ -241,14 +267,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
         </section>
-      </main>
-
-      <aside class="exam-tips-rail" aria-label="Extended answer practice">
-        <div class="exam-tips-banner">
-          <span class="igcse-hero-kicker">Extended answers</span>
-          <h2>Develop your ability to answer 6, 8 and 12 mark exam questions</h2>
         </div>
-      </aside>
+      </main>
     </div>
   </div>
 </div>
