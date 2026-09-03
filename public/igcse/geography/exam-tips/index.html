@@ -487,6 +487,27 @@
           <p id="ppqStatus" class="socratic-status" role="status" aria-live="polite"></p>
           <div id="ppqFeedback" class="ppq-feedback" hidden></div>
         </div>
+
+        <div class="socratic-card" style="margin-top: 1.75rem;">
+          <h2>Plan your data presentation answer</h2>
+          <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
+          <div class="socratic-question"><strong>(e)</strong> Study Figures 5a and 5b below. They show two different data presentation techniques from a student&rsquo;s fieldwork into the use of rural environments. The aim of the student&rsquo;s investigation was to identify attitudes towards the plans for a new tourist development in the New Territories, Hong Kong. Evaluate the student&rsquo;s data presentation techniques. <strong>(8)</strong></div>
+
+          <figure style="margin:0 0 1rem;">
+            <img src="/images/revision-ppq/igcse-geography/jun-2019-p2/q5-fig5a-5b-tourist-survey-interview.png" alt="Figure 5a: a table of questionnaire survey responses (strongly disagree, slight disagreement, not sure, slight agreement) for 8 questions about a proposed tourist development, with a total for each question. Figure 5b: two speech-bubble quotes from an interview &mdash; a resident worried about noise and the development going wrong, and a local businessman wanting more visitors from Hong Kong to grow local businesses." style="max-width:100%; height:auto; display:block; border:1px solid var(--lh-border, #d9dde3); border-radius:8px;">
+            <figcaption style="font-size:0.8rem; color:var(--lh-muted, #666); margin-top:0.4rem;">Figures 5a and 5b &mdash; Resource Booklet, questionnaire and interview results on a proposed tourist development in the New Territories, Hong Kong</figcaption>
+          </figure>
+
+          <div id="socraticChat2" class="socratic-chat" hidden></div>
+          <button type="button" id="socraticStartBtn2" class="socratic-start-btn">Start planning with the tutor</button>
+
+          <div id="socraticInputRow2" class="socratic-input-row" hidden style="margin-top:0.9rem;">
+            <textarea id="socraticInput2" placeholder="Type your answer here..." aria-label="Your reply to the tutor"></textarea>
+            <button type="button" id="socraticSendBtn2" class="socratic-send-btn">Send</button>
+          </div>
+
+          <p id="socraticStatus2" class="socratic-status" role="status" aria-live="polite"></p>
+        </div>
         </aside>
       </div>
       </main>
@@ -495,15 +516,15 @@
 </div>
 
 <script>
-(function () {
-  var QUESTION_KEY = 'geog-coastal-fieldwork-8mark';
+function initSocraticBot(opts) {
+  var QUESTION_KEY = opts.questionKey;
 
-  var chatEl = document.getElementById('socraticChat');
-  var startBtn = document.getElementById('socraticStartBtn');
-  var inputRow = document.getElementById('socraticInputRow');
-  var inputEl = document.getElementById('socraticInput');
-  var sendBtn = document.getElementById('socraticSendBtn');
-  var statusEl = document.getElementById('socraticStatus');
+  var chatEl = document.getElementById(opts.chatId);
+  var startBtn = document.getElementById(opts.startBtnId);
+  var inputRow = document.getElementById(opts.inputRowId);
+  var inputEl = document.getElementById(opts.inputId);
+  var sendBtn = document.getElementById(opts.sendBtnId);
+  var statusEl = document.getElementById(opts.statusId);
 
   var sessionId = null;
   var busy = false;
@@ -593,7 +614,27 @@
       sendReply();
     }
   });
-})();
+}
+
+initSocraticBot({
+  questionKey: 'geog-coastal-fieldwork-8mark',
+  chatId: 'socraticChat',
+  startBtnId: 'socraticStartBtn',
+  inputRowId: 'socraticInputRow',
+  inputId: 'socraticInput',
+  sendBtnId: 'socraticSendBtn',
+  statusId: 'socraticStatus'
+});
+
+initSocraticBot({
+  questionKey: 'geog-data-presentation-8mark',
+  chatId: 'socraticChat2',
+  startBtnId: 'socraticStartBtn2',
+  inputRowId: 'socraticInputRow2',
+  inputId: 'socraticInput2',
+  sendBtnId: 'socraticSendBtn2',
+  statusId: 'socraticStatus2'
+});
 
 (function () {
   var QUESTION_KEY = 'geog-coastal-fieldwork-8mark';

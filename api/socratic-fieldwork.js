@@ -83,6 +83,60 @@ const QUESTIONS = {
       'as the offshore breakwaters) reduces wave energy and leads to wider beaches and increased ' +
       'deposition. However, limitations such as sample size, tidal variation and sampling gaps ' +
       'mean the conclusions are valid but only moderately reliable.'
+  },
+
+  'geog-data-presentation-8mark': {
+    // Reuses the same Copilot Studio agent/secret as the coastal-fieldwork
+    // question above — its instructions are generic ("plan, don't answer"),
+    // so no new agent or Vercel env var is needed for this second question.
+    secretEnvVar: 'DIRECTLINE_SECRET_SOCRATIC_FIELDWORK',
+    question:
+      'Study Figures 5a and 5b below. They show two different data presentation techniques from a ' +
+      'student’s fieldwork into the use of rural environments. The aim of the student’s ' +
+      'investigation was to identify attitudes towards the plans for a new tourist development in ' +
+      'the New Territories, Hong Kong. Evaluate the student’s data presentation techniques. (8)',
+    guidance:
+      'This is an 8-mark IGCSE Geography data-presentation evaluation question, marked as a ' +
+      'levels-based extended answer split between AO3 (4 marks) and AO4 (4 marks). A strong answer ' +
+      'evaluates BOTH presentation techniques shown — Figure 5a’s colour-coded results table and ' +
+      'Figure 5b’s two interview speech-bubble quotes — with well-developed judgements on their ' +
+      'effectiveness, not just descriptions of what they show. It refers to specific detail in each ' +
+      'figure (e.g. Figure 5a has no totals-by-category column, no ‘strongly agree’ option, and ' +
+      'questionable colour choices; Figure 5b shows only two opinions with no indication of how the ' +
+      'interviewees were selected or where/when the interviews took place) and links this back to how ' +
+      'far each technique helps answer the enquiry’s aim. It reaches a supported overall judgement ' +
+      'on how effective the data presentation was as a whole. Weaker answers describe the figures ' +
+      'generically without evaluating strengths or limitations, or without linking back to the ' +
+      'enquiry’s aim.',
+    modelAnswer:
+      'The student has chosen to present their data using the following methods: a table of survey ' +
+      'responses (Figure 5a) and quotations from interviews (Figure 5b). This essay will go on to ' +
+      'evaluate the advantages and disadvantages of using each data presentation technique and make ' +
+      'an overall judgment of the effectiveness of the student’s data presentation.\n\n' +
+      'In Figure 5a, the student has chosen to present their data using a colour-coded table. On the ' +
+      'one hand, this data presentation technique is effective as tables allow for clear communication ' +
+      'of results and we therefore can see some outcomes of the fieldwork surveys. However, there are ' +
+      'many flaws with the way the table has been presented here. For example, the student has not ' +
+      'given us the questions asked in a key and therefore it is difficult to make clear comparisons ' +
+      'or draw conclusions. There is no totals column for each response category and there is no ' +
+      '‘strongly agree’ category, so we do not have the full spectrum of responses. These errors ' +
+      'in the construction of the table make it difficult for us to analyse the data fairly and to draw ' +
+      'accurate conclusions. Perhaps an alternative method such as a bar chart or radar graph may have ' +
+      'been a more effective way of presenting the data.\n\n' +
+      'Figure 5b uses direct quotations from an interview, presented as speech bubbles, to give one ' +
+      'view from a resident and one from a local businessman on the proposed tourist development. ' +
+      'Using direct quotations from interviews can be an effective method of presenting data as it ' +
+      'gives us a snapshot of real opinions in people’s own words. However, in this case we are only ' +
+      'given two quotes and therefore we are only hearing two people’s opinions, which may not be ' +
+      'representative. The student gives us no information on how these two interviewees were selected, ' +
+      'nor where or when the interviews took place, so we cannot judge how far the views can be trusted ' +
+      'or how they relate to the wider population. It would have been more effective to include a wider ' +
+      'range of quotes from a properly sampled range of people to eliminate bias.\n\n' +
+      'Overall, there are flaws in the way that the data has been presented in this study which make it ' +
+      'difficult to draw accurate and unbiased conclusions about attitudes towards the tourist ' +
+      'development. Although some data has been presented allowing for very basic analysis, I believe ' +
+      'that as a result of the flaws I have outlined above, the data presentation as a whole in this ' +
+      'study is only partially effective.'
   }
 };
 
