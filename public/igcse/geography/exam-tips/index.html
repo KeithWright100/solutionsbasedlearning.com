@@ -188,6 +188,7 @@
     margin: 0 0 0.6rem;
   }
   .socratic-card {
+    position: relative;
     background: var(--lh-surface);
     border: 1px solid #02a7aa;
     border-radius: 14px;
@@ -280,6 +281,53 @@
   .socratic-send-btn:disabled { opacity: 0.5; cursor: default; }
   .socratic-status { font-size: 0.76rem; color: var(--lh-muted); margin-top: 0.6rem; min-height: 1em; }
   .socratic-status--error { color: #C0392B; }
+
+  /* ---------------- Full page view for the Socratic bots + PPQ marking card ---------------- */
+  .card-expand-btn {
+    position: absolute;
+    top: 0.9rem;
+    right: 0.95rem;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #02a7aa;
+    border-radius: 8px;
+    background: var(--lh-surface);
+    color: #0392a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    z-index: 5;
+    transition: background 0.2s ease;
+  }
+  .card-expand-btn:hover { background: var(--lh-teal-bg); }
+  .card-expand-btn svg { width: 16px; height: 16px; }
+
+  .card-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    z-index: 3000;
+    border-radius: 0 !important;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 2.2rem 2.4rem 3rem !important;
+  }
+  body.card-fullscreen-open { overflow: hidden; }
+  .card-fullscreen .card-expand-btn { top: 1.4rem; right: 1.6rem; }
+  .card-fullscreen .socratic-chat { max-height: calc(100vh - 320px); }
+  .card-fullscreen .ppq-answer-textarea { min-height: calc(100vh - 380px); }
+  @media (max-width: 640px) {
+    .card-fullscreen { padding: 1.2rem 1.2rem 2rem !important; }
+  }
 
   /* ---------------- Full-answer PPQ (write-up + marking) ---------------- */
   .ppq-answer-card h2 { font-family: var(--lh-font-display); font-weight: 700; font-size: 1.02rem; margin: 0 0 0.5rem; color: var(--lh-ink); }
@@ -459,6 +507,9 @@
         <div class="socratic-paper-col">
         <p class="socratic-paper-label">Paper 1 &mdash; Coast</p>
         <div class="socratic-card">
+          <button type="button" class="card-expand-btn" title="Full page view" aria-label="Full page view" onclick="toggleCardFullscreen(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
           <h2>Plan your fieldwork answer</h2>
           <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
           <div class="socratic-question"><strong>(e)</strong> You have studied a coastal environment as part of your own geographical enquiry. Evaluate how effective your site selection and sampling strategies were in helping you answer your enquiry title. <strong>(8)</strong></div>
@@ -475,6 +526,9 @@
         </div>
 
         <div class="socratic-card ppq-answer-card">
+          <button type="button" class="card-expand-btn" title="Full page view" aria-label="Full page view" onclick="toggleCardFullscreen(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
           <h2>Now write your full answer</h2>
           <p class="socratic-intro">Write your complete response to the same question, then submit it for marking. You'll get a mark out of 8 and examiner-style feedback.</p>
 
@@ -489,6 +543,9 @@
         <div class="socratic-paper-col">
         <p class="socratic-paper-label">Paper 2 &mdash; Rural</p>
         <div class="socratic-card">
+          <button type="button" class="card-expand-btn" title="Full page view" aria-label="Full page view" onclick="toggleCardFullscreen(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
           <h2>Plan your data presentation answer</h2>
           <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
           <div class="socratic-question"><strong>(e)</strong> Study Figures 5a and 5b below. They show two different data presentation techniques from a student&rsquo;s fieldwork into the use of rural environments. The aim of the student&rsquo;s investigation was to identify attitudes towards the plans for a new tourist development in the New Territories, Hong Kong. Evaluate the student&rsquo;s data presentation techniques. <strong>(8)</strong></div>
@@ -544,6 +601,31 @@
 </div>
 
 <script>
+/* ---------------- Full page view toggle (Socratic bots + PPQ marking card) ---------------- */
+var CARD_EXPAND_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>';
+var CARD_COLLAPSE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>';
+
+function toggleCardFullscreen(btn) {
+  var card = btn.closest('.socratic-card');
+  if (!card) return;
+  var isFull = card.classList.toggle('card-fullscreen');
+  document.body.classList.toggle('card-fullscreen-open', isFull);
+  btn.innerHTML = isFull ? CARD_COLLAPSE_ICON : CARD_EXPAND_ICON;
+  btn.title = isFull ? 'Exit full page view' : 'Full page view';
+  btn.setAttribute('aria-label', btn.title);
+  if (isFull) {
+    card.scrollTop = 0;
+  }
+}
+
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  var openCard = document.querySelector('.socratic-card.card-fullscreen');
+  if (!openCard) return;
+  var btn = openCard.querySelector('.card-expand-btn');
+  if (btn) toggleCardFullscreen(btn);
+});
+
 function initSocraticBot(opts) {
   var QUESTION_KEY = opts.questionKey;
 
