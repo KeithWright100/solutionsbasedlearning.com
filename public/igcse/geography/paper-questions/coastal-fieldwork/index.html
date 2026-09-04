@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coastal Fieldwork — Past Papers — IGCSE Geography — SBL</title>
-<meta name="description" content="Full past paper questions for Coastal Fieldwork (IGCSE Geography) are on the way.">
+<meta name="description" content="Full past paper questions for Coastal Fieldwork (IGCSE Geography) — write full answers and get instant, examiner-style marked feedback.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
 <style>
   .igcse-hero-banner {
     border-radius: 22px;
@@ -135,16 +136,16 @@
         <section class="igcse-hero-banner" aria-label="Coastal Fieldwork Past Papers">
           <span class="igcse-hero-kicker">IGCSE Geography</span>
           <h1>Coastal Fieldwork — Past Papers</h1>
-          <p>Full past paper questions for this topic are on the way. In the meantime, revise with the Teach Me Bot, quiz and Challenge Mode below, or explore the past papers already available for other topics.</p>
+          <p>Choose a question, write a full answer, and get instant, examiner-style marked feedback &mdash; the same AI marker used across the Learning Hubs.</p>
         </section>
 
-        <div class="lh-panel" style="text-align:center; padding:2.5rem 1.5rem; background:var(--lh-surface); border:1px dashed var(--lh-border); border-radius:12px;">
-          <p style="color:var(--lh-muted); margin:0;">No full past paper questions have been added for this topic yet &mdash; check back soon.</p>
-        </div>
+        <div id="sblRevisionTopicList"></div>
+
+        <div id="sblRevisionWorkspace" hidden style="margin-top:2rem;"></div>
 
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Revise Coastal Fieldwork first">
           <div>
-            <span class="igcse-hero-kicker">Revise this topic</span>
+            <span class="igcse-hero-kicker">Revise this topic first?</span>
             <h2>Coastal Fieldwork — Revision</h2>
             <p>Teach Me Bot with a full topic checklist, a randomised quiz, and Challenge Mode.</p>
           </div>
@@ -153,22 +154,19 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
         </section>
-
-        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Other IGCSE Geography past papers">
-          <div>
-            <span class="igcse-hero-kicker">Prefer another topic?</span>
-            <h2>IGCSE Geography Past Papers</h2>
-            <p>See which topics already have full past paper questions ready to practise.</p>
-          </div>
-          <a class="igcse-hero-btn" href="/igcse/geography" aria-label="Open IGCSE Geography Past Papers">
-            Explore Past Papers
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-          </a>
-        </section>
       </main>
     </div>
   </div>
 </div>
 
+<div aria-live="polite" class="sbl-sr-only" id="sblRevisionAnnounce"></div>
+
+<script src="/js/sbl-igcse-geography-questions.js"></script>
+<script>
+  window.SBL_REVISION_TOPICS = (window.SBL_REVISION_TOPICS || []).filter(function (t) {
+    return t && (t.topic === 'Coastal Fieldwork — June 2019 Paper 1' || t.topic === 'Coastal Fieldwork — June 2021 Paper 1');
+  });
+</script>
+<script src="/js/sbl-revision.js"></script>
 </body>
 </html>
