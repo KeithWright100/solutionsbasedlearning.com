@@ -300,6 +300,37 @@
   margin: 0 0 1.5rem;
 }
 
+/* Narrow banner variant — a slim, dark-gradient strip used in place of
+   the plain heading on individual lesson pages. Requires BOTH classes
+   (lh-page-head lh-page-head--banner) so it never affects the plain
+   .lh-page-head used elsewhere on the site. */
+.lh-page-head.lh-page-head--banner {
+  border-radius: 14px;
+  padding: 16px 22px;
+  background:
+    linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+    radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.20), transparent 30%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 26px rgba(0, 28, 52, 0.18);
+  margin-bottom: 1.3rem;
+}
+.lh-page-head.lh-page-head--banner h1 {
+  color: #ffffff;
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+.lh-page-head.lh-page-head--banner p {
+  color: rgba(255, 255, 255, 0.82);
+  max-width: none;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin: 0;
+}
+@media (max-width: 760px) {
+  .lh-page-head.lh-page-head--banner { padding: 14px 18px; }
+}
+
 /* Page banner — a coloured icon header used atop an option/unit
    overview page (e.g. /geography/paper-1/option-a/). Colour + icon
    are chosen per page with a modifier class (lh-page-banner--teal,
