@@ -245,6 +245,8 @@
         <span class="lh-crumbs__sep">/</span>
         <a href="/humanities-hub">Humanities Hub</a>
         <span class="lh-crumbs__sep">/</span>
+        <a href="/menu">IB Subject Menu</a>
+        <span class="lh-crumbs__sep">/</span>
         <a href="/business">Business</a>
         <span class="lh-crumbs__sep">/</span>
         <span>Examination Tips &amp; Advice</span>
@@ -390,7 +392,7 @@
         </div>
         </div>
 
-        <aside aria-label="Business Management Toolkit Socratic Challenge">
+        <aside aria-label="Business Management Toolkit Socratic Challenge" id="toolkit-challenge">
         <p class="socratic-paper-label">Socratic practice</p>
         <div class="socratic-card">
           <h2>The Business Management Toolkit</h2>
@@ -461,6 +463,13 @@
 
 <script src="/js/sbl-business-toolkit.js"></script>
 <script src="/js/sbl-teach-bot.js"></script>
+<script>
+  // Pop-out link support: /business/exam-tips#toolkit-challenge opens the
+  // Toolkit Socratic Challenge straight away, for links from the menu/hub pages.
+  if (window.location.hash === '#toolkit-challenge' && typeof window.openChallengeMode === 'function') {
+    openChallengeMode('IBBUSTOOLKIT');
+  }
+</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
