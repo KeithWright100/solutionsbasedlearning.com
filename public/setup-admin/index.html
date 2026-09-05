@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One-time admin setup — SBL</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 480px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    color: #1a1a1a;
+    background: #f7f8fa;
+  }
+  h1 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+  p.sub { color: #555; margin-top: 0; margin-bottom: 1.5rem; font-size: 0.95rem; }
+  label { display: block; font-weight: 600; margin-top: 1rem; margin-bottom: 0.3rem; font-size: 0.9rem; }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.7rem;
+    background: #14b8a6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.6; cursor: default; }
+  #result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    display: none;
+  }
+  #result.ok { background: #dcfce7; color: #14532d; display: block; }
+  #result.err { background: #fee2e2; color: #7f1d1d; display: block; }
+</style>
+</head>
+<body>
+  <h1>One-time admin account setup</h1>
+  <p class="sub">Fill in your details below and click the button. This only works once — after your admin account exists, this page will refuse to run again.</p>
+
+  <label for="email">Your email address</label>
+  <input type="email" id="email" autocomplete="email" placeholder="you@example.com">
+
+  <label for="password">Choose a password (10+ characters)</label>
+  <input type="password" id="password" autocomplete="new-password" placeholder="At least 10 characters">
+
+  <label for="secret">ADMIN_BOOTSTRAP_SECRET (from Vercel)</label>
+  <input type="password" id="secret" autocomplete="off" placeholder="The value you set in Vercel">
+
+  <button id="submitBtn" type="button">Create my admin account</button>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('submitBtn').addEventListener('click', async function () {
+      var btn = this;
+      var resultEl = document.getElementById('result');
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
+      var secret = document.getElementById('secret').value.trim();
+
+      resultEl.className = '';
+      resultEl.removeAttribute('style');
+
+      if (!email || !password || !secret) {
+        resultEl.textContent = 'Please fill in all three fields.';
+        resultEl.className = 'err';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Working...';
+
+      try {
+        var res = await fetch('/api/admin/action', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'bootstrap', email: email, password: password, secret: secret })
+        });
+        var data = await res.json();
+
+        if (res.ok) {
+          resultEl.textContent = 'Success! ' + (data.message || 'Admin account ready.') + '\n\nYou can now go to /login/ and sign in with the email and password you just entered.';
+          resultEl.className = 'ok';
+        } else {
+          resultEl.textContent = 'Error: ' + (data.error || ('Request failed with status ' + res.status));
+          resultEl.className = 'err';
+        }
+      } catch (err) {
+        resultEl.textContent = 'Network error: ' + err.message;
+        resultEl.className = 'err';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create my admin account';
+      }
+    });
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
