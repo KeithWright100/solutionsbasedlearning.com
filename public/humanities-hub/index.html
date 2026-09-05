@@ -603,7 +603,13 @@
           </div>
         </article>
 
-        <article class="subject-card business disabled" aria-label="IB Business coming soon">
+        <article
+          class="subject-card business clickable"
+          tabindex="0"
+          role="link"
+          aria-label="Enter IB Business"
+          data-route="/business"
+        >
           <div class="subject-content">
             <div class="subject-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -615,10 +621,16 @@
             </div>
             <h2>IB Business</h2>
             <p class="strapline">Innovate &bull; Strategise &bull; Lead</p>
-            <span class="status soon">Coming Soon</span>
+            <span class="status live">In Progress</span>
             <p class="subject-copy">
               Build ideas. Create value. Lead with purpose.
             </p>
+            <button class="enter-btn" type="button" aria-label="Click here to enter IB Business">
+              Click here to enter IB Business
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
           </div>
         </article>
       </div>
@@ -645,7 +657,7 @@
   </div>
 
   <script>
-    const LIVE_ROUTES = { geography: "/geography", economics: "/economics" };
+    const LIVE_ROUTES = { geography: "/geography", economics: "/economics", business: "/business" };
     const toast = document.getElementById("toast");
 
     function showToast(message) {

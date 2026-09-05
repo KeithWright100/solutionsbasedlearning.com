@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revision — IB Business Learning Hub — SBL</title>
+<meta name="description" content="Revision materials for IB Business Management — full unit revision pages with a Teach Me Bot, quiz and Challenge Mode, with past paper questions on the way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<style>
+  .lh-units {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .lh-unit-card {
+    background: var(--lh-surface);
+    border: 1px solid var(--lh-border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+  }
+  .lh-unit-card__section {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .lh-unit-card h3 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.7rem;
+  }
+  .lh-unit-card--soon h3 { color: var(--lh-muted); }
+  .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
+  .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
+  .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
+</style>
+</head>
+<body class="lh">
+<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/">SBL</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/business">Business</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Revision</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
+      <main>
+        <div class="lh-page-head">
+          <h1>Revision</h1>
+          <p>Revision resources for IB Business Management &mdash; start with full unit revision pages below, with past paper questions on the way.</p>
+        </div>
+
+        <div class="lh-units">
+          <a class="lh-unit-card" href="/business/revision/topics">
+            <span class="lh-unit-card__section">Available now</span>
+            <h3>Revision Topics</h3>
+            <p>One page per unit &mdash; Teach Me Bot with the full unit checklist, a randomised quiz, and Challenge Mode.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
+          </a>
+          <div class="lh-unit-card lh-unit-card--soon">
+            <span class="lh-unit-card__section">Coming soon</span>
+            <h3>Past Paper Questions</h3>
+            <p>Full IB past paper questions, organised by unit, marked instantly by the examiner-style AI marker.</p>
+            <div class="lh-unit-card__meta"><span>Coming soon</span></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
