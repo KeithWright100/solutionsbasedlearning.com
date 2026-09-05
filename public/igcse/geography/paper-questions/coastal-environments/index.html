@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coastal Environments — Past Papers — IGCSE Geography — SBL</title>
-<meta name="description" content="Full past paper questions for Coastal Environments (IGCSE Geography) are on the way.">
+<meta name="description" content="Practise IGCSE Geography Coastal Environments (Paper 1, June 2025) with your own copy of the paper — marked instantly with examiner-style feedback.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
@@ -108,6 +108,27 @@
   }
   .igcse-hero-btn--soon:hover { transform: none; box-shadow: none; }
 
+  .byo-callout {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--lh-surface);
+    border: 1px solid #d99a06;
+    border-left: 5px solid #d99a06;
+    border-radius: 12px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1.8rem;
+  }
+  .byo-callout svg { flex-shrink: 0; width: 22px; height: 22px; color: #d99a06; margin-top: 2px; }
+  .byo-callout h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    margin: 0 0 0.4rem;
+    color: var(--lh-ink);
+  }
+  .byo-callout p { color: var(--lh-body); font-size: 0.86rem; line-height: 1.55; margin: 0; }
+
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
@@ -136,12 +157,22 @@
         <section class="igcse-hero-banner" aria-label="Coastal Environments Past Papers">
           <span class="igcse-hero-kicker">IGCSE Geography</span>
           <h1>Coastal Environments — Past Papers</h1>
-          <p>Full past paper questions for this topic are on the way. In the meantime, revise with the Teach Me Bot, quiz and Challenge Mode below.</p>
+          <p>Practise Question 2 from the June 2025 Paper 1, marked instantly with examiner-style feedback.</p>
         </section>
 
-        <div class="lh-panel" style="text-align:center; padding:2.5rem 1.5rem; background:var(--lh-surface); border:1px dashed var(--lh-border); border-radius:12px;">
-          <p style="color:var(--lh-muted); margin:0;">No full past paper questions have been added yet &mdash; check back soon.</p>
+        <div class="byo-callout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+          <div>
+            <h2>Bring your own copy of the paper</h2>
+            <p>To respect exam board copyright, this page never shows the real question wording or the official mark scheme. Have your own authorised copy of the June 2025 Paper 1 (4GE1/01) exam paper and Resource Booklet open beside you. Each question below tells you the question number and marks available &mdash; read the actual question and any referenced figure from your paper, then type your answer into the box to get marked.</p>
+          </div>
         </div>
+
+        <div id="sblRevisionTopicList"></div>
+
+        <div id="sblRevisionWorkspace" hidden style="margin-top:2rem;"></div>
+
+        <div aria-live="polite" class="sbl-sr-only" id="sblRevisionAnnounce"></div>
 
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Revise Coastal Environments first">
           <div>
@@ -159,6 +190,8 @@
   </div>
 </div>
 
+<script src="/js/sbl-igcse-geography-coastal-environments.js"></script>
+<script src="/js/sbl-revision.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
