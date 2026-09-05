@@ -23,6 +23,7 @@
   }
   .igcse-hero-kicker {
     display: inline-block;
+    align-self: flex-start;
     font-family: var(--lh-font-mono);
     font-size: 0.68rem;
     font-weight: 800;
@@ -66,18 +67,6 @@
     color: #ffffff;
   }
   .igcse-hero-banner--cta p { margin: 0; }
-  .igcse-hero-banner--soon {
-    background: var(--lh-surface);
-    border: 1px dashed var(--lh-border);
-    box-shadow: none;
-    color: var(--lh-body);
-  }
-  .igcse-hero-banner--soon .igcse-hero-kicker {
-    background: var(--lh-border);
-    color: var(--lh-muted);
-  }
-  .igcse-hero-banner--soon h2 { color: var(--lh-ink); }
-  .igcse-hero-banner--soon p { color: var(--lh-muted); }
   .igcse-hero-btn {
     flex-shrink: 0;
     display: inline-flex;
@@ -99,15 +88,8 @@
   .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
   .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
   .igcse-hero-btn:hover svg { transform: translateX(4px); }
-  .igcse-hero-btn--soon {
-    background: var(--lh-surface);
-    color: var(--lh-muted);
-    border: 1px solid var(--lh-border);
-    box-shadow: none;
-  }
-  .igcse-hero-btn--soon:hover { transform: none; box-shadow: none; }
 
-  .tips-card { background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 14px; padding: 1.6rem 1.8rem; margin-bottom: 1.4rem; }
+  .tips-card { background: var(--lh-surface); border: 1px solid #02a7aa; border-radius: 14px; padding: 1.6rem 1.8rem; margin-bottom: 1.4rem; }
   .tips-card h2 { font-family: var(--lh-font-display); font-weight: 700; font-size: 1.2rem; margin: 0 0 0.8rem; color: var(--lh-ink); }
   .tips-card h3 { font-family: var(--lh-font-display); font-weight: 600; font-size: 0.98rem; margin: 1.1rem 0 0.4rem; color: var(--lh-ink); }
   .tips-card p { color: var(--lh-body); line-height: 1.65; margin: 0 0 0.8rem; }
@@ -162,7 +144,7 @@
   .exam-tips-banner-row .igcse-hero-banner--cta .igcse-hero-btn {
     margin-top: 16px;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 1160px) {
     .exam-tips-banner-row { grid-template-columns: 1fr; }
   }
 
@@ -171,15 +153,54 @@
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
   }
 
-  .toolkit-card {
-    background: linear-gradient(135deg, rgba(1, 21, 38, 0.05), rgba(2, 80, 90, 0.06));
+  /* ---------------- Two-column layout: tips content + Toolkit Challenge rail ---------------- */
+  .exam-tips-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  .exam-tips-layout > .exam-tips-banner-row { grid-column: 1 / -1; }
+  @media (max-width: 1560px) {
+    .exam-tips-layout { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* ---------------- Toolkit Challenge card ---------------- */
+  .socratic-paper-label {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #0392a2;
+    margin: 0 0 0.6rem;
+  }
+  .socratic-card {
+    position: sticky;
+    top: 1.75rem;
+    background: var(--lh-surface);
     border: 1px solid #02a7aa;
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+  }
+  .socratic-card h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.5rem;
+    color: var(--lh-ink);
+  }
+  .socratic-card > p.socratic-intro {
+    color: var(--lh-body);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin: 0 0 0.9rem;
   }
   .toolkit-tools {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.6rem;
-    margin: 0.8rem 0 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin: 0 0 1.1rem;
     padding: 0;
     list-style: none;
   }
@@ -187,8 +208,8 @@
     background: var(--lh-bg, #f4f7f9);
     border: 1px solid var(--lh-border);
     border-radius: 10px;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.84rem;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--lh-ink);
     margin-bottom: 0;
@@ -196,22 +217,23 @@
   .toolkit-tools li span {
     display: block;
     font-weight: 500;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: var(--lh-muted);
     margin-top: 2px;
   }
-  .toolkit-launch {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-    background: var(--lh-surface);
-    border: 1px solid var(--lh-border);
-    border-radius: 12px;
-    padding: 1rem 1.3rem;
+  .socratic-start-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    color: #ffffff;
+    font-family: var(--lh-font-body);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(0, 184, 176, 0.28);
   }
-  .toolkit-launch p { margin: 0; font-size: 0.86rem; color: var(--lh-muted); max-width: 34rem; }
 </style>
 </head>
 <body class="lh">
@@ -229,8 +251,9 @@
       </nav>
     </header>
 
-    <div class="lh-content-grid">
-      <main style="max-width: 900px;">
+    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
+      <main>
+      <div class="exam-tips-layout">
         <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner" aria-label="IB Business Management Examination Tips and Advice">
           <span class="igcse-hero-kicker">IB Business Management</span>
@@ -243,6 +266,7 @@
         </div>
         </div>
 
+        <div>
         <div class="tips-card">
           <h2>1. Know your assessment structure</h2>
           <p>IB Business Management is assessed across three exam papers plus an Internal Assessment. Knowing exactly what each paper is based on and how it is marked helps you prepare &mdash; and pace &mdash; correctly.</p>
@@ -343,27 +367,8 @@
           </ul>
         </div>
 
-        <div class="tips-card toolkit-card" aria-label="Business Management Toolkit Socratic Challenge">
-          <h2>5. The Business Management Toolkit &mdash; Socratic Challenge</h2>
-          <p>Across both papers you'll be expected to select, use, interpret and evaluate business tools &mdash; not just describe them. Use the Challenge Tutor to test yourself on all eight tools, one question at a time.</p>
-          <ul class="toolkit-tools">
-            <li>SWOT analysis<span>SL/HL</span></li>
-            <li>Ansoff Matrix<span>SL/HL</span></li>
-            <li>STEEPLE analysis<span>SL/HL</span></li>
-            <li>Business plan<span>SL/HL</span></li>
-            <li>Decision trees<span>SL/HL</span></li>
-            <li>Circular business models<span>SL/HL</span></li>
-            <li>Porter's generic strategies<span>HL only</span></li>
-            <li>Simple linear regression<span>HL only</span></li>
-          </ul>
-          <div class="toolkit-launch">
-            <p>The Challenge Tutor will pick one tool at a time and ask you to identify its purpose, use it, interpret it, apply it to a scenario, or evaluate its usefulness and limitations &mdash; then wait for your answer before moving on.</p>
-            <button type="button" class="lh-mode__btn lh-c-pink" style="flex-shrink:0;" aria-label="Start the Business Management Toolkit Challenge" onclick="openChallengeMode('IBBUSTOOLKIT')">Start Toolkit Challenge &rarr;</button>
-          </div>
-        </div>
-
         <div class="tips-card">
-          <h2>6. Common mistakes to avoid</h2>
+          <h2>5. Common mistakes to avoid</h2>
           <ul>
             <li>Writing a generic, textbook-style answer with no reference to the specific organisation in the case study or stimulus.</li>
             <li>Describing a tool (e.g. listing a SWOT's four headings) instead of using it to answer the question asked.</li>
@@ -374,7 +379,7 @@
         </div>
 
         <div class="tips-card">
-          <h2>7. Final checklist before you submit</h2>
+          <h2>6. Final checklist before you submit</h2>
           <ul class="tips-checklist">
             <li>I've answered the command term, not just the topic.</li>
             <li>Every point I've made is applied to the named organisation in the case study or stimulus.</li>
@@ -383,6 +388,27 @@
             <li>I've checked I haven't missed a question or part-question.</li>
           </ul>
         </div>
+        </div>
+
+        <aside aria-label="Business Management Toolkit Socratic Challenge">
+        <p class="socratic-paper-label">Socratic practice</p>
+        <div class="socratic-card">
+          <h2>The Business Management Toolkit</h2>
+          <p class="socratic-intro">Across both papers you'll be expected to select, use, interpret and evaluate business tools &mdash; not just describe them. Use the Challenge Tutor to test yourself on all eight tools, one question at a time.</p>
+          <ul class="toolkit-tools">
+            <li>SWOT analysis<span>SL/HL</span></li>
+            <li>Ansoff Matrix<span>SL/HL</span></li>
+            <li>STEEPLE analysis<span>SL/HL</span></li>
+            <li>Business plan<span>SL/HL</span></li>
+            <li>Decision trees<span>SL/HL</span></li>
+            <li>Circular business models<span>SL/HL</span></li>
+            <li>Porter's generic strategies<span>HL only</span></li>
+            <li>Simple linear regression<span>HL only</span></li>
+          </ul>
+          <p class="socratic-intro">The Challenge Tutor will pick one tool at a time and ask you to identify its purpose, use it, interpret it, apply it to a scenario, or evaluate its usefulness and limitations &mdash; then wait for your answer before moving on.</p>
+          <button type="button" class="socratic-start-btn" aria-label="Start the Business Management Toolkit Challenge" onclick="openChallengeMode('IBBUSTOOLKIT')">Start Toolkit Challenge &rarr;</button>
+        </div>
+        </aside>
 
         <div class="exam-tips-banner-row">
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Put it into practice">
@@ -396,18 +422,19 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
         </section>
-        <section class="igcse-hero-banner igcse-hero-banner--cta igcse-hero-banner--soon" aria-label="Past paper questions coming soon">
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Past paper questions">
           <div>
-            <span class="igcse-hero-kicker">Coming soon</span>
+            <span class="igcse-hero-kicker">Or jump straight in</span>
             <h2>IB Business Past Paper Questions</h2>
-            <p>Real past exam questions, organised by topic, marked instantly with examiner-style feedback.</p>
+            <p>Real past exam questions, organised by unit, marked instantly with examiner-style feedback.</p>
           </div>
-          <a class="igcse-hero-btn igcse-hero-btn--soon" href="/business/revision" aria-label="IB Business Past Paper Questions status">
-            View Status
+          <a class="igcse-hero-btn" href="/business/revision/paper-questions" aria-label="IB Business Past Paper Questions">
+            Past Paper Questions
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
         </section>
         </div>
+      </div>
       </main>
     </div>
   </div>
