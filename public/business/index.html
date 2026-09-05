@@ -41,6 +41,97 @@
   .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
   .lh-section-title { font-family: var(--lh-font-display); font-weight: 600; font-size: 1.05rem; margin: 2rem 0 1rem; }
   .lh-section-title:first-of-type { margin-top: 0; }
+
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .hub-cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-banner--cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+    margin-top: 6px;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
+
+  @media (max-width: 900px) {
+    .hub-cta-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+  }
 </style>
 </head>
 <body class="lh">
@@ -60,9 +151,35 @@
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
+        <section class="igcse-hero-banner" aria-label="IB Business Learning Hub">
+          <span class="igcse-hero-kicker">IB Business Management</span>
           <h1>IB Business Learning Hub</h1>
           <p>Understanding how organisations are run, financed, marketed and led. Lessons are being added here one unit at a time; in the meantime, start revising with the checklists, quizzes and Challenge Mode below.</p>
+        </section>
+
+        <div class="hub-cta-row">
+          <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Revise IB Business">
+            <div>
+              <span class="igcse-hero-kicker">In the meantime</span>
+              <h2>Revise IB Business</h2>
+              <p>Teach Me Bot with unit checklists, randomised quizzes, and Challenge Mode.</p>
+            </div>
+            <a class="igcse-hero-btn" href="/business/revision/topics" aria-label="Revise IB Business">
+              Revise IB Business
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </section>
+          <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IB Business Past Paper Questions">
+            <div>
+              <span class="igcse-hero-kicker">Or jump straight in</span>
+              <h2>IB Business Past Paper Questions</h2>
+              <p>Full past papers for Paper 1, 2 and 3, plus per-unit practice, marked instantly with examiner-style feedback.</p>
+            </div>
+            <a class="igcse-hero-btn" href="/business/revision/paper-questions" aria-label="IB Business Past Paper Questions">
+              Past Paper Questions
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </section>
         </div>
 
         <h2 class="lh-section-title">Syllabus</h2>
