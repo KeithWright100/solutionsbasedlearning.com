@@ -88,6 +88,36 @@
   .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
   .igcse-hero-btn:hover svg { transform: translateX(4px); }
 
+  .lh-units {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .lh-unit-card {
+    background: var(--lh-surface);
+    border: 1px solid var(--lh-border);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+  }
+  .lh-unit-card__section {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .lh-unit-card h3 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.7rem;
+  }
+  .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
+  .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
+  .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
+
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
@@ -117,11 +147,32 @@
         <section class="igcse-hero-banner" aria-label="IB Geography Full Past Paper Questions">
           <span class="igcse-hero-kicker">IB Geography</span>
           <h1>Full Past Paper Questions</h1>
-          <p>Full past paper questions are being added, topic by topic. In the meantime, revise with the Teach Me Bot, quiz and Challenge Mode for each unit.</p>
+          <p>Full past paper questions are being added, topic by topic. Bring your own authorised copy of the paper and resource booklet &mdash; pick a topic below to get started.</p>
         </section>
 
-        <div class="lh-panel" style="text-align:center; padding:2.5rem 1.5rem; background:var(--lh-surface); border:1px dashed var(--lh-border); border-radius:12px;">
-          <p style="color:var(--lh-muted); margin:0;">No full past paper questions have been added yet &mdash; check back soon.</p>
+        <div class="lh-units">
+          <a class="lh-unit-card" href="/geography/revision/paper-questions/freshwater">
+            <span class="lh-unit-card__section">Available now &middot; Paper 1, Option A</span>
+            <h3>Freshwater</h3>
+            <p>Questions 1&ndash;2, 20 marks in total.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Start practising &rarr;</span></div>
+          </a>
+          <a class="lh-unit-card" href="/geography/revision/paper-questions/leisure-tourism-sport">
+            <span class="lh-unit-card__section">Available now &middot; Paper 1, Option E</span>
+            <h3>Leisure, Tourism and Sport</h3>
+            <p>Questions 9&ndash;10, 20 marks in total.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Start practising &rarr;</span></div>
+          </a>
+          <a class="lh-unit-card" href="/geography/revision/paper-questions/food-and-health">
+            <span class="lh-unit-card__section">Available now &middot; Paper 1, Option F</span>
+            <h3>Food and Health</h3>
+            <p>Questions 11&ndash;12, 20 marks in total.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Start practising &rarr;</span></div>
+          </a>
+        </div>
+
+        <div class="lh-panel" style="text-align:center; padding:1.6rem 1.5rem; background:var(--lh-surface); border:1px dashed var(--lh-border); border-radius:12px; margin-top:1.2rem;">
+          <p style="color:var(--lh-muted); margin:0;">More topics are being added &mdash; check back soon.</p>
         </div>
 
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IB Geography Revision Topics">

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leisure, Tourism and Sport — Past Papers — IB Geography Learning Hub — SBL</title>
-<meta name="description" content="Full past paper questions for Leisure, Tourism and Sport (IB Geography) are on the way.">
+<meta name="description" content="Practise IB Geography Paper 1, Option E (Leisure, tourism and sport), with your own copy of the paper — marked instantly with examiner-style feedback.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
@@ -87,25 +87,26 @@
   .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
   .igcse-hero-btn:hover svg { transform: translateX(4px); }
 
-  .igcse-hero-banner--soon {
+  .byo-callout {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
     background: var(--lh-surface);
-    border: 1px dashed var(--lh-border);
-    box-shadow: none;
-    color: var(--lh-body);
+    border: 1px solid #d99a06;
+    border-left: 5px solid #d99a06;
+    border-radius: 12px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1.8rem;
   }
-  .igcse-hero-banner--soon .igcse-hero-kicker {
-    background: var(--lh-border);
-    color: var(--lh-muted);
+  .byo-callout svg { flex-shrink: 0; width: 22px; height: 22px; color: #d99a06; margin-top: 2px; }
+  .byo-callout h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
+    margin: 0 0 0.4rem;
+    color: var(--lh-ink);
   }
-  .igcse-hero-banner--soon h2 { color: var(--lh-ink); }
-  .igcse-hero-banner--soon p { color: var(--lh-muted); }
-  .igcse-hero-btn--soon {
-    background: var(--lh-surface);
-    color: var(--lh-muted);
-    border: 1px solid var(--lh-border);
-    box-shadow: none;
-  }
-  .igcse-hero-btn--soon:hover { transform: none; box-shadow: none; }
+  .byo-callout p { color: var(--lh-body); font-size: 0.86rem; line-height: 1.55; margin: 0; }
 
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
@@ -136,14 +137,22 @@
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
         <section class="igcse-hero-banner" aria-label="Leisure, Tourism and Sport Past Papers">
-          <span class="igcse-hero-kicker">IB Geography</span>
+          <span class="igcse-hero-kicker">IB Geography &middot; Paper 1, Option E</span>
           <h1>Leisure, Tourism and Sport — Past Papers</h1>
-          <p>Full past paper questions for this topic are on the way. In the meantime, revise with the Teach Me Bot, quiz and Challenge Mode below, or explore the past papers already available for other topics.</p>
+          <p>Practise Questions 9 and 10 from Option E: Leisure, tourism and sport, marked instantly with examiner-style feedback.</p>
         </section>
 
-        <div class="lh-panel" style="text-align:center; padding:2.5rem 1.5rem; background:var(--lh-surface); border:1px dashed var(--lh-border); border-radius:12px;">
-          <p style="color:var(--lh-muted); margin:0;">No full past paper questions have been added for this topic yet &mdash; check back soon.</p>
+        <div class="byo-callout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+          <div>
+            <h2>Bring your own copy of the paper</h2>
+            <p>To respect exam board copyright, this page never shows the real question wording, the aerial photograph, or the official mark scheme. Have your own authorised copy of the question booklet and resource booklet open beside you. Each question below tells you which question number and mark allocation to answer &mdash; read the actual question and photograph from your paper, then type your answer into the box to get marked.</p>
+          </div>
         </div>
+
+        <div id="sblRevisionTopicList"></div>
+
+        <div id="sblRevisionWorkspace" hidden style="margin-top:2rem;"></div>
 
         <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Revise Leisure, Tourism and Sport first">
           <div>
@@ -173,6 +182,10 @@
   </div>
 </div>
 
+<div aria-live="polite" class="sbl-sr-only" id="sblRevisionAnnounce"></div>
+
+<script src="/js/sbl-geography-paper1-leisure-tourism-sport.js"></script>
+<script src="/js/sbl-revision.js"></script>
 <script src="/js/sbl-sidebar.js"></script>
 <script>renderSBLSidebar('lh-sidebar-mount', {});</script>
 
