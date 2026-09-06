@@ -1,7 +1,7 @@
 /* ============================================================
    SBL Revision — Unit Revision Topics
    Adds one synthetic "lesson" entry to window.SBL_LESSONS per full
-   revision topic (unit), so the existing Teach Me Bot / Test My
+   revision topic (unit), so the existing Revise Me Bot / Test My
    Knowledge / Challenge Mode modal machinery in sbl-teach-bot.js can
    be reused as-is on a topic-level revision page.
 
@@ -47,7 +47,7 @@
   /* Re-samples a fresh random set of `count` questions from the full
      unit pool and assigns it to the revision lesson's .quiz. Shared by
      both entry points below so the modal's own "Test My Knowledge"
-     button (inside Teach Me Bot) and the page's standalone quiz button
+     button (inside Revise Me Bot) and the page's standalone quiz button
      always agree on the question count. Falls back to the whole pool
      if there are fewer than `count` questions available. */
   function resampleUnitQuiz(revisionLessonId, unitPrefix, count) {
@@ -65,7 +65,7 @@
     window.openTestMyKnowledge(revisionLessonId);
   };
 
-  /* Entry point: "Teach Me Bot" card on the revision topic page —
+  /* Entry point: "Revise Me Bot" card on the revision topic page —
      re-samples first so that if the student launches the quiz from
      *inside* the Teach Bot modal instead, it's still a fresh random
      set of `count` questions, and the modal's own question-count text

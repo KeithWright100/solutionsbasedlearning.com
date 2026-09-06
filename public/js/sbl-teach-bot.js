@@ -505,7 +505,9 @@ function buildRetrievalBank(lessonId) {
     html += '<ul class="sbl-checklist-list" id="sblChecklistList"></ul>';
     html += '<p class="sbl-progress-note">Progress is saved to your account, so it carries across devices when you log in.</p></div>';
 
-    html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">' + lesson.quiz.length + ' lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start ' + lesson.quiz.length + '-question quiz &rarr;</button></div>';
+    if (lesson.quiz && lesson.quiz.length) {
+      html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">' + lesson.quiz.length + ' lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start ' + lesson.quiz.length + '-question quiz &rarr;</button></div>';
+    }
 
     html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
 
@@ -552,9 +554,12 @@ function buildRetrievalBank(lessonId) {
       });
     })();
 
-    document.getElementById('sblLaunchQuizFromTeach').addEventListener('click', function () {
-      window.openTestMyKnowledge(lesson.id);
-    });
+    var quizFromTeachBtn = document.getElementById('sblLaunchQuizFromTeach');
+    if (quizFromTeachBtn) {
+      quizFromTeachBtn.addEventListener('click', function () {
+        window.openTestMyKnowledge(lesson.id);
+      });
+    }
     document.getElementById('sblLaunchRetrievalFromTeach').addEventListener('click', function () {
       window.openSpacedRetrieval(lesson.id);
     });

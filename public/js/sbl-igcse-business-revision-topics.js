@@ -4,7 +4,7 @@
    Mirrors sbl-igcse-revision-topics.js (used for IGCSE Geography
    topics), but for Edexcel IGCSE Business topics. Adds one synthetic
    "lesson" entry to window.SBL_LESSONS per IGCSE Business topic, so
-   the existing Teach Me Bot / Test My Knowledge / Challenge Mode
+   the existing Revise Me Bot / Test My Knowledge / Challenge Mode
    modal machinery in sbl-teach-bot.js can be reused as-is.
 
    Load order on an IGCSE Business revision topic page:

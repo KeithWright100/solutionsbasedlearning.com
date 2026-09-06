@@ -3,7 +3,7 @@
 
    Mirrors sbl-igcse-business-revision-topics.js, but for Edexcel
    IGCSE History depth studies. Adds one synthetic "lesson" entry to
-   window.SBL_LESSONS per topic, so the existing Teach Me Bot /
+   window.SBL_LESSONS per topic, so the existing Revise Me Bot /
    Challenge Mode modal machinery in sbl-teach-bot.js can be reused
    as-is.
 

@@ -7,7 +7,7 @@
    and a fresh random set is drawn from that bank on every attempt.
 
    Adds one synthetic "lesson" entry to window.SBL_LESSONS per IB
-   Business unit, so the existing Teach Me Bot / Test My Knowledge /
+   Business unit, so the existing Revise Me Bot / Test My Knowledge /
    Challenge Mode modal machinery in sbl-teach-bot.js can be reused
    as-is.
 
@@ -29,7 +29,7 @@
   /* Re-samples a fresh random set of `count` questions from a unit's
      full question bank (lesson._questionBank) and assigns it to the
      revision lesson's .quiz. Shared by both entry points below so the
-     modal's own "Test My Knowledge" button (inside Teach Me Bot) and
+     modal's own "Test My Knowledge" button (inside Revise Me Bot) and
      the page's standalone quiz button always agree on the question
      count. Falls back to the whole bank if it has fewer than `count`
      questions. */
@@ -47,7 +47,7 @@
     window.openTestMyKnowledge(revisionLessonId);
   };
 
-  /* Entry point: "Teach Me Bot" card on the revision topic page —
+  /* Entry point: "Revise Me Bot" card on the revision topic page —
      re-samples first so that if the student launches the quiz from
      *inside* the Teach Bot modal instead, it's still a fresh random
      set of `count` questions, and the modal's own question-count text

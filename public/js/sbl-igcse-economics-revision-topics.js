@@ -4,7 +4,7 @@
    Mirrors sbl-igcse-business-revision-topics.js (used for IGCSE
    Business topics), but for Edexcel IGCSE Economics topics. Adds one
    synthetic "lesson" entry to window.SBL_LESSONS per IGCSE Economics
-   topic, so the existing Teach Me Bot / Test My Knowledge / Challenge
+   topic, so the existing Revise Me Bot / Test My Knowledge / Challenge
    Mode modal machinery in sbl-teach-bot.js can be reused as-is.
 
    Load order on an IGCSE Economics revision topic page:
