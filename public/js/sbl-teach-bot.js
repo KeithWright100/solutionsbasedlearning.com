@@ -500,7 +500,7 @@ function buildRetrievalBank(lessonId) {
 
     var label = subjectLabel ? subjectLabel + ' Socratic Challenge' : 'Socratic Challenge';
     titleEl.textContent = label;
-    if (subtitleEl) subtitleEl.textContent = 'Paste in your challenge question to begin.';
+    if (subtitleEl) subtitleEl.textContent = 'Copy in your teacher’s question or information to begin.';
     modal.setAttribute('aria-label', label);
     if (progressEl) progressEl.textContent = '';
 
@@ -508,7 +508,7 @@ function buildRetrievalBank(lessonId) {
       '<div class="sbl-teach-grid">' +
       '<div class="sbl-teach-panel">' +
       '<div class="sbl-teach-section"><h3>How this works</h3>' +
-      '<p class="sbl-teach-focus">Your teacher may give you a challenge. Paste your challenge question into the bot and it will ask you questions to apply your knowledge, skills and develop your thinking.</p>' +
+      '<p class="sbl-teach-focus">Copy in the question or information your teacher has given you. The bot will then ask you questions relating to the topic, to develop and stretch your understanding &mdash; it won’t give you answers, structures or model responses.</p>' +
       '</div></div>' +
       '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>' +
       '</div>';
