@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — IGCSE Business — SBL</title>
+<meta name="description" content="IGCSE Business Research and Socratic Challenge bots — general AI research help and a Socratic Challenge Tutor for teacher-set challenge questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
+<style>
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+  }
+</style>
+</head>
+<body class="lh">
+<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/">SBL</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/igcse/menu">IGCSE Subject Menu</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/igcse/business">Business</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Research</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
+      <main>
+        <section class="igcse-hero-banner" aria-label="IGCSE Business Research">
+          <span class="igcse-hero-kicker">IGCSE Business</span>
+          <h1>Research &amp; Socratic Challenge</h1>
+          <p>Two general-purpose bots for Business &mdash; one for open research questions, one for working through a challenge question your teacher has set. Neither is tied to a specific topic, so they're ready to use right away.</p>
+        </section>
+
+        <div class="lh-modes">
+
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-indigo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4a7 7 0 1 0 4.9 12l4.6 4.6M11 4a7 7 0 0 1 7 7"/><path d="M8 11h6M11 8v6"/></svg></span>
+            <div class="lh-mode__body">
+              <span class="lh-mode__num">1</span>
+              <p class="lh-mode__title">IGCSE Business Research</p>
+              <p class="lh-mode__desc">Ask questions to research real businesses, case studies and current events — a general chat window for exploring the subject, not tied to one topic.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-indigo" aria-label="Open IGCSE Business Research" onclick="openAskTutor('IGCSE Business')">Open Research Bot &rarr;</button>
+          </div>
+
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-pink" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4a3 3 0 0 0 3 5M17 6h3a3 3 0 0 1-3 5"/></svg></span>
+            <div class="lh-mode__body">
+              <span class="lh-mode__num">2</span>
+              <p class="lh-mode__title">Socratic Challenge</p>
+              <p class="lh-mode__desc">Your teacher may give you a challenge. Paste your challenge question into the bot and it will ask you questions to apply your knowledge, skills and develop your thinking.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-pink" aria-label="Open IGCSE Business Socratic Challenge" onclick="openSocraticChallenge('IGCSE Business')">Start Socratic Challenge &rarr;</button>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+    <div class="lh-tip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21h6M12 15v6"/><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z"/></svg>
+      <span><strong>Tip:</strong> the Socratic Challenge bot won't give you answers, structures or model responses &mdash; it will only ask you questions. Think it through yourself first.</span>
+    </div>
+  </div>
+</div>
+
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
+    <div class="sbl-modal__header">
+      <div class="sbl-modal__header-text">
+        <p class="sbl-modal__eyebrow">SBL Tutor</p>
+        <h2 id="sblTeachBotTitle"></h2>
+        <p class="sbl-modal__subtitle" id="sblTeachBotSubtitle">Knowledge acquisition for home learning</p>
+      </div>
+      <div class="sbl-modal__header-actions">
+        <span class="sbl-modal__progress" id="sblTeachBotProgress"></span>
+        <button type="button" class="sbl-modal__icon-btn" id="sblTeachBotExpand">Expand to full page</button>
+        <button type="button" class="sbl-modal__icon-btn sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="sbl-modal__body" id="sblTeachBotBody"></div>
+  </div>
+</div>
+<div aria-live="polite" class="sbl-sr-only" id="sblTeachBotAnnounce"></div>
+
+<script src="/js/sbl-teach-bot.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

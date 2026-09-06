@@ -33,12 +33,25 @@
                                       through at the start of class.
                                       No AI/chat involved — reads
                                       lesson.readinessQuestions.
-     openAskTutor()                — general "Ask AI Tutor" sidebar
+     openAskTutor(subjectLabel)    — general "Ask AI Tutor" sidebar
                                       panel, present on every lesson
                                       page. Opens the same Teach Me
                                       Live bot with no lesson attached
                                       — a plain chat window, no
                                       syllabus focus/checklist/quiz.
+                                      Optional subjectLabel (e.g.
+                                      "IGCSE Geography") retitles the
+                                      modal as "<subjectLabel> Research"
+                                      for subject research pages.
+     openSocraticChallenge(label)  — general Socratic Challenge Tutor
+                                      with no lesson attached — a
+                                      student pastes a teacher-set
+                                      challenge question straight into
+                                      the chat, no fixed question list
+                                      required. Optional label (e.g.
+                                      "IGCSE Geography") retitles the
+                                      modal as "<label> Socratic
+                                      Challenge".
 
    Teach Me Live and Challenge Mode still use embedded Copilot
    Studio webchat iframes. IB-Style Questions uses the server-side
@@ -441,7 +454,7 @@ function buildRetrievalBank(lessonId) {
      window for general questions from anywhere on the
      site. This is what the sidebar "Ask AI Tutor" panel calls. */
 
-  window.openAskTutor = function () {
+  window.openAskTutor = function (subjectLabel) {
     bindElements();
     if (!overlay) return;
     currentLesson = null;
@@ -452,14 +465,54 @@ function buildRetrievalBank(lessonId) {
     readinessState = null;
     overlay.hidden = false;
 
-    titleEl.textContent = 'Ask AI Tutor';
-    if (subtitleEl) subtitleEl.textContent = 'General help with your syllabus — ask me anything.';
-    modal.setAttribute('aria-label', 'SBL Tutor: general help');
+    titleEl.textContent = subjectLabel ? subjectLabel + ' Research' : 'Ask AI Tutor';
+    if (subtitleEl) {
+      subtitleEl.textContent = subjectLabel
+        ? 'Ask questions to research and explore ' + subjectLabel + ' topics.'
+        : 'General help with your syllabus — ask me anything.';
+    }
+    modal.setAttribute('aria-label', subjectLabel ? subjectLabel + ' Research' : 'SBL Tutor: general help');
     if (progressEl) progressEl.textContent = '';
 
     bodyMount.innerHTML =
       '<div class="sbl-teach-panel sbl-teach-chatpanel" style="border-right:none; width:100%;" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
     loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
+
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 8: Socratic Challenge (general, no lesson) ---------------- */
+  /* Reuses the exact same "SBL Challenge Tutor" Copilot Studio bot as
+     Challenge Mode, but with no lesson attached — a student pastes a
+     teacher-set challenge question straight into the chat rather than
+     working through a fixed pre-written question. */
+
+  window.openSocraticChallenge = function (subjectLabel) {
+    bindElements();
+    if (!overlay) return;
+    currentLesson = null;
+    lastFocusedElement = document.activeElement;
+    iframeLoaded = false;
+    quizState = null;
+    ibState = null;
+    readinessState = null;
+    overlay.hidden = false;
+
+    var label = subjectLabel ? subjectLabel + ' Socratic Challenge' : 'Socratic Challenge';
+    titleEl.textContent = label;
+    if (subtitleEl) subtitleEl.textContent = 'Paste in your challenge question to begin.';
+    modal.setAttribute('aria-label', label);
+    if (progressEl) progressEl.textContent = '';
+
+    bodyMount.innerHTML =
+      '<div class="sbl-teach-grid">' +
+      '<div class="sbl-teach-panel">' +
+      '<div class="sbl-teach-section"><h3>How this works</h3>' +
+      '<p class="sbl-teach-focus">Your teacher may give you a challenge. Paste your challenge question into the bot and it will ask you questions to apply your knowledge, skills and develop your thinking.</p>' +
+      '</div></div>' +
+      '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>' +
+      '</div>';
+    loadIframeIfNeeded(SBL_CHALLENGE_TUTOR_IFRAME_SRC);
 
     if (closeBtn) closeBtn.focus();
   };

@@ -86,6 +86,31 @@
     font-size: 0.84rem;
     margin-top: 1.4rem;
   }
+  .lh-unit-card {
+    background: var(--lh-surface);
+    border: 1.5px solid rgba(15, 23, 42, 0.35);
+    border-radius: 12px;
+    padding: 1.3rem 1.4rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .lh-unit-card__section {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .lh-unit-card h3 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.7rem;
+  }
+  .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
+  .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
+  .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
 </style>
 </head>
 <body class="lh">
@@ -106,6 +131,7 @@
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/geography/exam-tips"><span>Examination tips and advice</span></a></div>
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/geography/revision/topics"><span>Revise IGCSE Geography</span></a></div>
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/geography"><span>IGCSE Geography Past Paper questions</span></a></div>
+      <div class="lh-unit"><a class="lh-unit__link" href="/igcse/geography/research"><span>IGCSE Geography Research</span></a></div>
     </div>
 
     <div class="lh-sidebar__section">
@@ -113,6 +139,7 @@
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/economics/exam-tips"><span>Examination tips and advice</span></a></div>
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/economics/revision/topics"><span>Revise IGCSE Economics</span></a></div>
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/economics"><span>IGCSE Economics Past Paper questions</span></a></div>
+      <div class="lh-unit"><a class="lh-unit__link" href="/igcse/economics/research"><span>IGCSE Economics Research</span></a></div>
     </div>
 
     <div class="lh-sidebar__section">
@@ -120,6 +147,7 @@
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/business/exam-tips"><span>Examination tips and advice</span></a></div>
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/business/revision/topics"><span>Revise IGCSE Business</span></a></div>
       <div class="lh-unit"><a class="lh-unit__link" href="/igcse/business"><span>IGCSE Business Past Paper questions</span></a></div>
+      <div class="lh-unit"><a class="lh-unit__link" href="/igcse/business/research"><span>IGCSE Business Research</span></a></div>
     </div>
 
     <div class="lh-sidebar__section">
@@ -165,6 +193,28 @@
         </div>
 
         <p class="menu-note">History&rsquo;s past paper bank is on the way &mdash; examination tips and advice and the revision guide for History are ready now.</p>
+
+        <h2 style="font-family: var(--lh-font-display); font-weight: 600; font-size: 1.05rem; margin: 2rem 0 1rem;">Research &amp; Socratic Challenge</h2>
+        <div class="lh-units">
+          <a class="lh-unit-card" href="/igcse/geography/research">
+            <span class="lh-unit-card__section">Available now</span>
+            <h3>IGCSE Geography</h3>
+            <p>A general Research bot for open questions, plus a Socratic Challenge bot for teacher-set challenge questions.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
+          </a>
+          <a class="lh-unit-card" href="/igcse/economics/research">
+            <span class="lh-unit-card__section">Available now</span>
+            <h3>IGCSE Economics</h3>
+            <p>A general Research bot for open questions, plus a Socratic Challenge bot for teacher-set challenge questions.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
+          </a>
+          <a class="lh-unit-card" href="/igcse/business/research">
+            <span class="lh-unit-card__section">Available now</span>
+            <h3>IGCSE Business</h3>
+            <p>A general Research bot for open questions, plus a Socratic Challenge bot for teacher-set challenge questions.</p>
+            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
+          </a>
+        </div>
       </main>
     </div>
   </div>
