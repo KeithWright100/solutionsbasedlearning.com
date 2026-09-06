@@ -310,7 +310,7 @@
   background:
     linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
     radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.20), transparent 30%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1.5px solid var(--lh-teal);
   box-shadow: 0 10px 26px rgba(0, 28, 52, 0.18);
   margin-bottom: 1.3rem;
 }
@@ -569,6 +569,11 @@
   border-radius: 12px;
   padding: 1.2rem 1.3rem;
 }
+/* Teal-accent variant — matches the .lh-unit-topic border colour used
+   on topic-overview pages. Requires BOTH classes (lh-panel
+   lh-panel--accent) so it never affects the plain .lh-panel used
+   elsewhere (e.g. the "coming soon" placeholder panels). */
+.lh-panel.lh-panel--accent { border: 1.5px solid var(--lh-teal); }
 .lh-panel h2 {
   font-family: var(--lh-font-display);
   font-size: 0.85rem;
