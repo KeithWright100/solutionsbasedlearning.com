@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IB Economics Learning Hub — SBL</title>
-<meta name="description" content="IB Economics, taught with AI as a thinking partner. Microeconomics, macroeconomics, the global economy and development economics.">
+<title>Revision Topics — IB Economics — SBL</title>
+<meta name="description" content="Full-unit revision pages for IB Economics — Revise Me Bot with checklist and Challenge Mode for each unit.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
@@ -37,14 +37,57 @@
     margin: 0 0 0.7rem;
   }
   .lh-unit-card--soon h3 { color: var(--lh-muted); }
+  .lh-unit-card p { color: var(--lh-body); font-size: 0.84rem; line-height: 1.45; margin: 0 0 0.8rem; }
   .lh-unit-card__meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.74rem; color: var(--lh-muted); }
-  .lh-section-title { font-family: var(--lh-font-display); font-weight: 600; font-size: 1.05rem; margin: 2rem 0 1rem; }
-  .lh-section-title:first-of-type { margin-top: 0; }
+  .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
+
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+  }
 </style>
 </head>
 <body class="lh">
-<div class="lh-shell">
-  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
+<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
   <div>
     <header class="lh-topbar">
       <nav class="lh-crumbs" aria-label="Breadcrumb">
@@ -52,28 +95,22 @@
         <span class="lh-crumbs__sep">/</span>
         <a href="/humanities-hub">Humanities Hub</a>
         <span class="lh-crumbs__sep">/</span>
-        <span>Economics</span>
+        <a href="/menu">IB Subject Menu</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/economics">Economics</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Revision Topics</span>
       </nav>
     </header>
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
-          <h1>IB Economics Learning Hub</h1>
-          <p>Understanding choices, trade-offs and how economies work — from individual markets to the global economy. Units are being added here one at a time; check the sidebar for what's available so far.</p>
-        </div>
+        <section class="igcse-hero-banner" aria-label="IB Economics Revision Topics">
+          <span class="igcse-hero-kicker">IB Economics</span>
+          <h1>Revision Topics</h1>
+          <p>One page per unit &mdash; the Revise Me Bot with a full unit checklist next to it, and Challenge Mode. All four units of the syllabus are ready now. Self-marking quizzes will be added once each has been written and checked against the class textbook.</p>
+        </section>
 
-        <h2 class="lh-section-title">Syllabus</h2>
-        <div class="lh-units">
-          <div class="lh-unit-card lh-unit-card--soon">
-            <span class="lh-unit-card__section">In progress</span>
-            <h3>Units are being added</h3>
-            <p style="font-size:0.84rem; color:var(--lh-muted); margin:0 0 0.6rem;">Lessons, quizzes and revision materials will appear here as each unit is built, in the same format as the Geography Learning Hub.</p>
-            <div class="lh-unit-card__meta"><span>Check back soon</span></div>
-          </div>
-        </div>
-
-        <h2 class="lh-section-title">Revision</h2>
         <div class="lh-units">
           <a class="lh-unit-card" href="/economics/revision/topics/introduction-to-economics">
             <span class="lh-unit-card__section">Available now</span>
@@ -100,23 +137,10 @@
             <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
           </a>
         </div>
-
-        <h2 class="lh-section-title">Practice</h2>
-        <div class="lh-units">
-          <a class="lh-unit-card" href="/economics/exam-tips">
-            <span class="lh-unit-card__section">Available now</span>
-            <h3>Examination Tips &amp; Advice</h3>
-            <p>The Learner Profile in Economics, command terms and assessment objectives, with more guidance being added.</p>
-            <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
-          </a>
-        </div>
       </main>
     </div>
   </div>
 </div>
-
-<script src="/js/sbl-economics-sidebar.js"></script>
-<script>renderSBLEconomicsSidebar('lh-sidebar-mount', {});</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
