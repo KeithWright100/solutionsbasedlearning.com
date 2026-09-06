@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
 <style>
   .igcse-hero-banner {
     border-radius: 22px;
@@ -105,6 +106,40 @@
   .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
   .igcse-hero-btn:hover svg { transform: translateX(4px); }
 
+  .cmd-term-glossary {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.6rem 1.4rem;
+  }
+  .cmd-term-glossary li {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--lh-border);
+  }
+  .cmd-term-glossary strong {
+    display: block;
+    font-family: var(--lh-font-display);
+    font-size: 0.88rem;
+    color: var(--lh-ink);
+    margin-bottom: 0.15rem;
+  }
+  .cmd-term-glossary span {
+    font-size: 0.83rem;
+    color: var(--lh-body);
+    line-height: 1.5;
+  }
+  .cmd-term-glossary__ao {
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    margin: 1.2rem 0 0.5rem;
+  }
+  .cmd-term-glossary__ao:first-child { margin-top: 0; }
+
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
@@ -158,6 +193,54 @@
           <p style="font-size:0.8rem; color:var(--lh-muted); margin-bottom:0;">Command terms aren't spelled out anywhere else in the syllabus content itself, so it's worth learning this classification directly &mdash; it's the fastest way to judge how much depth a question wants before you start writing.</p>
         </div>
 
+        <div class="tips-card">
+          <h2>What each command term actually means</h2>
+          <p>Here's every command term from the table above, one at a time, with a plain-English explanation of exactly what it wants from your answer.</p>
+
+          <p class="cmd-term-glossary__ao">AO1 &mdash; Knowledge and understanding</p>
+          <ul class="cmd-term-glossary">
+            <li><strong>Classify</strong><span>Arrange things into groups or categories based on shared characteristics.</span></li>
+            <li><strong>Define</strong><span>Give the precise, accepted meaning of a word or term.</span></li>
+            <li><strong>Describe</strong><span>State the main features or give a detailed account of what something is like, without saying why it happens.</span></li>
+            <li><strong>Determine</strong><span>Work out or identify something precisely from the evidence or data given.</span></li>
+            <li><strong>Estimate</strong><span>Give an approximate value or judgement, based on the information provided rather than an exact calculation.</span></li>
+            <li><strong>Identify</strong><span>Pick out and name a specific feature, factor or trend from the evidence given.</span></li>
+            <li><strong>Outline</strong><span>Give a brief summary or overview of the main points, without detailed explanation.</span></li>
+            <li><strong>State</strong><span>Give a short, precise answer with no supporting argument required.</span></li>
+          </ul>
+
+          <p class="cmd-term-glossary__ao">AO2 &mdash; Application and analysis</p>
+          <ul class="cmd-term-glossary">
+            <li><strong>Analyse</strong><span>Break something down into its parts to show how they relate to each other and to the bigger picture.</span></li>
+            <li><strong>Distinguish</strong><span>Explain the difference(s) between two or more things, concepts or processes.</span></li>
+            <li><strong>Explain</strong><span>Give reasons or causes for something, showing how or why it happens.</span></li>
+            <li><strong>Suggest</strong><span>Propose a solution, hypothesis or explanation, applying your own knowledge and reasoning &mdash; often to an unfamiliar situation.</span></li>
+          </ul>
+
+          <p class="cmd-term-glossary__ao">AO3 &mdash; Synthesis and evaluation</p>
+          <ul class="cmd-term-glossary">
+            <li><strong>Compare</strong><span>Point out the similarities between two or more things.</span></li>
+            <li><strong>Compare and contrast</strong><span>Point out both the similarities and the differences between two or more things.</span></li>
+            <li><strong>Contrast</strong><span>Point out the differences between two or more things.</span></li>
+            <li><strong>Discuss</strong><span>Present a balanced review of an issue, considering different viewpoints or arguments.</span></li>
+            <li><strong>Evaluate</strong><span>Weigh up strengths and weaknesses, or make a judgement backed by evidence, about the value or significance of something.</span></li>
+            <li><strong>Examine</strong><span>Consider something in close detail, uncovering the assumptions and interrelationships that underlie an issue.</span></li>
+            <li><strong>Justify</strong><span>Give valid reasons or evidence to support an answer or conclusion.</span></li>
+            <li><strong>To what extent</strong><span>Consider the merits of an argument or concept and reach an evidence-based conclusion about how accurate, valid or significant it is.</span></li>
+          </ul>
+        </div>
+
+        <div class="lh-modes" style="margin-bottom: 1.4rem;">
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/><path d="M9.5 18h5M10 21h4"/></svg></span>
+            <div class="lh-mode__body">
+              <p class="lh-mode__title">Test yourself on command terms</p>
+              <p class="lh-mode__desc">A self-marking quiz on what each command term is really asking you to do &mdash; instant feedback on every answer.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-green" aria-label="Start the IB Geography Command Terms quiz" onclick="openTestMyKnowledge('GEOGCMDTERMS')">Start Command Terms Quiz &rarr;</button>
+          </div>
+        </div>
+
         <div class="status-panel">
           <h2>More sections coming soon</h2>
           <p>Paper structure and timing, answer-structuring guidance and common mistakes are being added next. In the meantime, revise with the topic checklists, quizzes and Challenge Mode, or head to Past Paper Questions for real exam practice.</p>
@@ -178,6 +261,28 @@
     </div>
   </div>
 </div>
+
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="GEOGCMDTERMS" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
+    <div class="sbl-modal__header">
+      <div class="sbl-modal__header-text">
+        <p class="sbl-modal__eyebrow">SBL Geography Tutor</p>
+        <h2 id="sblTeachBotTitle"></h2>
+        <p class="sbl-modal__subtitle" id="sblTeachBotSubtitle">Knowledge acquisition for home learning</p>
+      </div>
+      <div class="sbl-modal__header-actions">
+        <span class="sbl-modal__progress" id="sblTeachBotProgress"></span>
+        <button type="button" class="sbl-modal__icon-btn" id="sblTeachBotExpand">Expand to full page</button>
+        <button type="button" class="sbl-modal__icon-btn sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="sbl-modal__body" id="sblTeachBotBody"></div>
+  </div>
+</div>
+<div aria-live="polite" class="sbl-sr-only" id="sblTeachBotAnnounce"></div>
+
+<script src="/js/sbl-geography-command-terms.js"></script>
+<script src="/js/sbl-teach-bot.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
