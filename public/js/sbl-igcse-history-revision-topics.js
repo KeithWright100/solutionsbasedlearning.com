@@ -251,4 +251,87 @@
     }
   };
 
+  /* ---------------- Topic: Superpower Relations, 1943-72 ---------------- */
+  /* Checklist written from the class textbook — "A World Divided:
+     Superpower Relations, 1943-72" Student Book (Pearson) — cross-
+     checked against the Pearson Edexcel International GCSE History
+     specification (4HI1) content list for this unit. Pending sign-off
+     from the Head of History before this is treated as final. */
+
+  var SPW_UNIT_TITLE = 'Superpower Relations, 1943-72';
+
+  var SPW_CHECKLIST = [
+    'I can explain the long-term ideological differences between capitalism and communism.',
+    'I can explain the historical background to Soviet-Western rivalry before 1941, including the Bolshevik Revolution and the Nazi-Soviet Pact.',
+    'I can describe the wartime Grand Alliance between the USA, Britain and the Soviet Union.',
+    'I can explain the tensions and disagreements between the Allies during the Second World War, including the delayed second front.',
+    'I can describe the key decisions made at the Tehran Conference (1943).',
+    'I can describe the key decisions made at the Yalta Conference (February 1945).',
+    'I can describe the key decisions made at the Potsdam Conference (July-August 1945).',
+    'I can compare the attitudes of Truman and Stalin towards each other after 1945.',
+    'I can explain the impact of the atomic bomb on relations between the USA and the Soviet Union.',
+    'I can explain how the Soviet Union expanded its influence in Eastern Europe after 1945.',
+    "I can explain the significance of Churchill's 'Iron Curtain' speech.",
+    'I can explain the Truman Doctrine and its significance.',
+    'I can explain the Marshall Plan and its significance.',
+    'I can explain the purpose of Cominform.',
+    'I can explain the purpose of Comecon.',
+    'I can explain the disagreements between the wartime allies over the future of Germany, including the creation of Bizonia.',
+    'I can explain the causes of the Berlin Crisis (1948-49).',
+    'I can describe the key events of the Berlin Blockade and the Berlin Airlift.',
+    'I can assess the results of the Berlin Crisis, including the setting up of NATO.',
+    'I can explain the creation of the two Germanys: the Federal Republic (FRG) and the Democratic Republic (GDR).',
+    'I can explain the causes of the Korean War.',
+    'I can explain the impact of the Korean War on superpower relations.',
+    'I can explain the reasons for the formation of the Warsaw Pact.',
+    "I can explain Khrushchev's policy of peaceful co-existence.",
+    'I can explain the impact of Soviet rule on Hungary under Rakosi.',
+    'I can explain de-Stalinisation and its effects on Eastern Europe.',
+    "I can explain Imre Nagy's demands during the Hungarian Uprising.",
+    'I can explain the reasons for the Soviet invasion of Hungary (1956).',
+    'I can assess the effects of the Soviet invasion of Hungary and the international reaction to it.',
+    'I can explain the development of the nuclear arms race in the 1950s and its impact on superpower relations.',
+    'I can explain the U-2 incident (1960) and its effects on the Paris Summit Conference.',
+    'I can explain the reasons for the construction of the Berlin Wall in 1961, including the refugee problem.',
+    'I can explain the effects of the Berlin Wall on relations between East and West Germany.',
+    'I can explain the effects of the Berlin Wall on relations between the superpowers.',
+    'I can explain the causes and key events of the Bay of Pigs invasion.',
+    'I can explain the causes of the Cuban Missile Crisis.',
+    'I can describe the key events of the Cuban Missile Crisis.',
+    'I can explain the reasons for the outcome of the Cuban Missile Crisis.',
+    'I can explain the causes of the Soviet invasion of Czechoslovakia (1968).',
+    'I can describe the key events of the Prague Spring and the Soviet invasion of Czechoslovakia.',
+    'I can assess the impact of the invasion of Czechoslovakia, including the Brezhnev Doctrine.',
+    'I can explain the significance of the Hotline between the USA and the Soviet Union.',
+    'I can explain the significance of the Limited Test Ban Treaty (1963).',
+    'I can explain the significance of the Outer Space Treaty (1967).',
+    'I can explain the significance of the Nuclear Non-Proliferation Treaty.',
+    'I can explain the reasons for Detente developing between the superpowers.',
+    'I can explain the significance of the SALT talks and the SALT 1 treaty.',
+    "I can explain the significance of Nixon's visits to Beijing and Moscow in 1972.",
+    'I can assess the extent of Detente achieved by 1972.'
+  ];
+
+  window.SBL_LESSONS.IGHISTSPWREV = {
+    id: 'IGHISTSPWREV',
+    title: 'Superpower Relations, 1943-72 — Full Topic Revision',
+    syllabusFocus: 'The whole of Superpower Relations, 1943-72 — reasons for the Cold War, early developments 1945-49, the Cold War in the 1950s, the crises over Berlin, Cuba and Czechoslovakia, and the Thaw and moves towards Detente to 1972.',
+    starterButtons: [
+      { label: 'Overview of the whole topic', request: 'Give me a full overview of Superpower Relations, 1943-72, covering the reasons for the Cold War, developments to 1949, the 1950s, the three crises, and the move towards Detente.' },
+      { label: 'Reasons for the Cold War', request: 'Explain the ideological differences between capitalism and communism, and how wartime tensions between the Allies led to the Cold War.' },
+      { label: 'Early developments, 1945-49', request: 'Explain the Truman Doctrine, the Marshall Plan, and the causes and results of the Berlin Crisis.' },
+      { label: 'The Cold War in the 1950s', request: 'Explain the impact of the Korean War and the reasons for, and effects of, the Soviet invasion of Hungary in 1956.' },
+      { label: 'Berlin, Cuba and Czechoslovakia', request: 'Explain the causes and outcomes of the Berlin Wall, the Cuban Missile Crisis, and the Soviet invasion of Czechoslovakia.' },
+      { label: 'The Thaw and Detente', request: 'Explain the reasons for Detente developing between the superpowers by 1972, including the SALT talks.' },
+      { label: 'Help me plan an answer', request: 'Help me plan an answer explaining two effects of the Cuban Missile Crisis on superpower relations.' }
+    ],
+    checklist: SPW_CHECKLIST,
+    challenge: {
+      question: 'Checklist Q&A: simple, direct questions drawn one at a time from the Superpower Relations checklist.',
+      intro: 'The Challenge Tutor will ask you simple, direct questions based on the checklist for this topic — for example, "Explain the significance of the Marshall Plan." Answer each one before it moves on to the next; it will briefly correct you if you get one wrong.',
+      unitTitle: SPW_UNIT_TITLE,
+      checklistItems: SPW_CHECKLIST
+    }
+  };
+
 })();
