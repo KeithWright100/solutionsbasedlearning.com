@@ -78,6 +78,33 @@
   .lh-bot-note__prompts li { margin: 0.15rem 0; padding-left: 1rem; position: relative; }
   .lh-bot-note__prompts li::before { content: "\2022"; position: absolute; left: 0; color: #02a7aa; }
 
+  .lh-bot-stack { display: flex; flex-direction: column; gap: 1.4rem; }
+  .lh-bot-stack .lh-bot-note { margin: 0; }
+
+  .lh-soon-panel {
+    border: 1px dashed var(--lh-border);
+    border-radius: 16px;
+    padding: 2rem 1.6rem;
+    text-align: center;
+    color: var(--lh-muted);
+    background: var(--lh-surface);
+  }
+  .lh-soon-panel .lh-soon-badge {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--lh-muted);
+    background: var(--lh-border);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .lh-soon-panel h2 { font-family: var(--lh-font-display); color: var(--lh-ink); margin: 0 0 0.6rem; font-size: 1.1rem; }
+  .lh-soon-panel p { margin: 0; font-size: 0.88rem; line-height: 1.6; }
+
   @media (max-width: 760px) {
     .igcse-hero-banner { padding: 22px 22px; }
     .lh-bot-grid { grid-template-columns: 1fr; }
@@ -111,7 +138,8 @@
 
         <div class="lh-bot-grid">
 
-          <div class="lh-bot-col">
+          <div class="lh-bot-col lh-bot-stack">
+
             <div class="lh-bot-note">
               <strong>This bot is for IGCSE Business use only.</strong> Please use it for research, as instructed by your teacher.
               <ul class="lh-bot-note__prompts">
@@ -129,9 +157,7 @@
               </div>
               <button type="button" class="lh-mode__btn lh-c-indigo" aria-label="Open IGCSE Business Research" onclick="openAskTutor('IGCSE Business')">Open Research Bot &rarr;</button>
             </div>
-          </div>
 
-          <div class="lh-bot-col">
             <div class="lh-bot-note">
               <strong>This bot is for IGCSE Business use only.</strong> Copy in the question or information your teacher has given you &mdash; the bot will then ask you questions about it to develop and stretch your understanding.
             </div>
@@ -143,6 +169,15 @@
                 <p class="lh-mode__desc">Copy in the question or information your teacher has given you. The bot will ask you questions about it to develop and stretch your understanding.</p>
               </div>
               <button type="button" class="lh-mode__btn lh-c-pink" aria-label="Open IGCSE Business Socratic Challenge" onclick="openSocraticChallenge('IGCSE Business')">Start Socratic Challenge &rarr;</button>
+            </div>
+
+          </div>
+
+          <div class="lh-bot-col">
+            <div class="lh-soon-panel">
+              <span class="lh-soon-badge">Coming soon</span>
+              <h2>Short IGCSE Business self-marking questions</h2>
+              <p>Short, IGCSE-style practice questions for each topic, marked instantly with examiner-style feedback &mdash; being added soon.</p>
             </div>
           </div>
 
