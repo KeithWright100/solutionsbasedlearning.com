@@ -5,9 +5,11 @@
 // notifies admins of a password reset request.
 //
 // POST { ratingOverall?, ratingUnderstanding?, effectiveMethods?,
-//        suggestions?, contactEmail?, pageUrl? }
-// Everything is optional individually, but at least ONE of a rating,
-// a ticked option, or the suggestions text must be present -- an
+//        suggestions?, contactEmail, pageUrl? }
+// contactEmail is REQUIRED -- Keith wants honest, attributable
+// feedback rather than anonymous submissions. Everything else is
+// optional individually, but at least ONE of a rating, a ticked
+// option, or the suggestions text must also be present -- an
 // entirely empty submission is refused so the table doesn't fill up
 // with blank rows from a stray click on the floating button.
 
@@ -53,8 +55,8 @@ export default async function handler(req, res) {
   const contactEmail = typeof body.contactEmail === 'string' ? body.contactEmail.trim() : '';
   const pageUrl = typeof body.pageUrl === 'string' ? body.pageUrl.trim().slice(0, 500) : '';
 
-  if (contactEmail && !isValidEmail(contactEmail)) {
-    return res.status(400).json({ error: 'Please enter a valid email address, or leave it blank.' });
+  if (!contactEmail || !isValidEmail(contactEmail)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
   }
   if (!ratingOverall && !ratingUnderstanding && !effectiveMethods.length && !isNonEmptyString(suggestions, MAX_SUGGESTIONS_LENGTH)) {
     return res.status(400).json({ error: 'Please give a rating, tick an option, or leave a suggestion before sending.' });
@@ -87,7 +89,7 @@ export default async function handler(req, res) {
       rating_understanding: ratingUnderstanding,
       effective_methods: effectiveMethods,
       suggestions: suggestions || null,
-      contact_email: contactEmail || null,
+      contact_email: contactEmail,
       page_url: pageUrl || null,
       user_agent: (req.headers['user-agent'] || '').slice(0, 300),
       submitter_ip: ip

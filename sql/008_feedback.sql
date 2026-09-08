@@ -5,9 +5,9 @@
 -- every page (public/js/sbl-feedback-widget.js).
 --
 -- No login is required to submit, so this table is NOT linked to
--- sbl_profiles — submissions are anonymous by default. contact_email
--- is optional: it's only present if the visitor chose to leave one
--- because they'd like a reply. It is never shown anywhere publicly,
+-- sbl_profiles. contact_email IS required (Keith wants honesty up
+-- front rather than anonymous submissions) — api/feedback.js refuses
+-- to insert a row without one. It is never shown anywhere publicly,
 -- only in the Admin Dashboard's Feedback tab.
 --
 -- Run this once in the Supabase SQL Editor (Project -> SQL Editor ->
@@ -35,8 +35,8 @@ create table if not exists public.sbl_feedback (
   -- visitor may only want to leave ratings/ticks.
   suggestions          text,
 
-  -- Optional -- only set if the visitor wants a reply.
-  contact_email        text,
+  -- Required -- see the comment at the top of this file.
+  contact_email        text not null,
 
   -- Which page the feedback box was opened from, and a short browser
   -- string -- both just useful context for Keith when reading a

@@ -1,15 +1,14 @@
 // public/js/sbl-feedback-widget.js
 // A small floating "Feedback" button, included on every page of the
 // site, that opens a short questionnaire (two 1-5 ratings, a
-// multi-select "what's most effective for you" list, and an open
-// suggestions box) plus an optional email address field. The email
-// field is phrased as plainly optional ("leave blank to stay
-// anonymous") rather than "only if you'd like a reply" — the latter
-// reads as a promise that leaving an email guarantees a personal
-// reply, which isn't something this form should commit Keith to.
-// Submits to /api/feedback.js, which saves it to the sbl_feedback
-// table and emails Keith a copy — nothing here ever shows a personal
-// contact address anywhere on the page.
+// multi-select "what's most effective for you" list, an open
+// suggestions box, and a required email address). The email is
+// required — Keith wants honest, attributable feedback rather than
+// anonymous submissions — enforced here client-side and again in
+// api/feedback.js server-side (never trust client-side validation
+// alone). Submits to /api/feedback.js, which saves it to the
+// sbl_feedback table and emails Keith a copy — nothing here ever
+// shows a personal contact address anywhere on the page.
 //
 // Entirely self-contained (injects its own <style>, builds its own
 // DOM) so it can be dropped into every page with a single <script>
@@ -138,7 +137,7 @@
         '</div>' +
         '<div class="sblfw-field">' +
           '<label class="sblfw-label" for="sblfw-email">Your email address</label>' +
-          '<input type="email" class="sblfw-emailinput" id="sblfw-email" maxlength="254" placeholder="Optional">' +
+          '<input type="email" class="sblfw-emailinput" id="sblfw-email" maxlength="254" placeholder="name@school.com">' +
         '</div>' +
         '<div class="sblfw-actions">' +
           '<button type="button" class="sblfw-btn sblfw-btn-secondary" id="sblfw-cancel">Cancel</button>' +
@@ -223,12 +222,16 @@
 
       var effectiveMethods = Array.prototype.map.call(methodEls, function (el) { return el.value; });
 
-      if (!overallEl && !understandingEl && !effectiveMethods.length && !suggestions) {
-        showError('Please give a rating, tick an option, or leave a suggestion before sending.');
+      if (!email) {
+        showError('Please enter your email address.');
         return;
       }
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError('Please enter a valid email address, or leave it blank.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('Please enter a valid email address.');
+        return;
+      }
+      if (!overallEl && !understandingEl && !effectiveMethods.length && !suggestions) {
+        showError('Please give a rating, tick an option, or leave a suggestion before sending.');
         return;
       }
 

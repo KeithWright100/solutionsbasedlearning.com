@@ -305,7 +305,7 @@
       '<dt>Supports learning</dt><dd>' + (f.rating_understanding ? f.rating_understanding + ' / 5' : '—') + '</dd>' +
       '<dt>Most effective for them</dt><dd>' + escapeHtml(formatMethods(f.effective_methods)) + '</dd>' +
       '<dt>Suggestions</dt><dd>' + escapeHtml(f.suggestions || '—') + '</dd>' +
-      '<dt>Reply-to email</dt><dd>' + escapeHtml(f.contact_email || '—') + '</dd>' +
+      '<dt>Contact email</dt><dd>' + escapeHtml(f.contact_email || '—') + '</dd>' +
       '<dt>Page</dt><dd>' + escapeHtml(f.page_url || '—') + '</dd>';
     feedbackModalBackdrop.classList.add('is-open');
   }

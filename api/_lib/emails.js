@@ -245,7 +245,7 @@ export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dash
       <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Supports learning</td><td style="padding:3px 0;">${stars(rating_understanding)}</td></tr>
       <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Most effective for them</td><td style="padding:3px 0;">${escapeHtml(methodsDisplay)}</td></tr>
       <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Suggestions</td><td style="padding:3px 0;">${suggestionsHtml}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Reply-to (if given)</td><td style="padding:3px 0;">${escapeHtml(contact_email) || '—'}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;">Contact email</td><td style="padding:3px 0;">${escapeHtml(contact_email) || '—'}</td></tr>
       <tr><td style="color:#7C93A3;padding:3px 0;">Page</td><td style="padding:3px 0;">${escapeHtml(page_url) || '—'}</td></tr>
       <tr><td style="color:#7C93A3;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
     </table>
@@ -260,7 +260,7 @@ export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dash
     `Supports learning: ${stars(rating_understanding)}`,
     `Most effective for them: ${methodsDisplay}`,
     `Suggestions: ${suggestions || '—'}`,
-    `Reply-to (if given): ${contact_email || '—'}`,
+    `Contact email: ${contact_email || '—'}`,
     `Page: ${page_url || '—'}`,
     `Submitted: ${submittedDisplay}`,
     '',
