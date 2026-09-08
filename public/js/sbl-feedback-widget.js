@@ -138,7 +138,6 @@
         '</div>' +
         '<div class="sblfw-field">' +
           '<label class="sblfw-label" for="sblfw-email">Your email address</label>' +
-          '<div class="sblfw-note">Optional — leave blank to stay anonymous.</div>' +
           '<input type="email" class="sblfw-emailinput" id="sblfw-email" maxlength="254" placeholder="Optional">' +
         '</div>' +
         '<div class="sblfw-actions">' +
