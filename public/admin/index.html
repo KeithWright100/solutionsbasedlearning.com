@@ -56,6 +56,7 @@
     <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>
     <button type="button" class="sbl-tab" data-tab="approved">Approved Users <span class="sbl-tab__count" id="countApproved">0</span></button>
     <button type="button" class="sbl-tab" data-tab="rejected">Rejected Applications <span class="sbl-tab__count" id="countRejected">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="feedback">Feedback <span class="sbl-tab__count" id="countFeedback">0</span></button>
   </div>
 
   <section class="sbl-panel" id="panelPending">
@@ -90,6 +91,16 @@
     <div class="sbl-empty-state" id="rejectedEmpty" style="display:none;">No rejected applications.</div>
   </section>
 
+  <section class="sbl-panel" id="panelFeedback" style="display:none;">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Submitted</th><th>Overall</th><th>Supports Learning</th><th>Most Effective</th><th>Suggestion</th><th>Status</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="feedbackBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="feedbackEmpty" style="display:none;">No feedback submitted yet.</div>
+  </section>
+
 </div>
 
 <div class="sbl-modal-backdrop" id="viewModalBackdrop">
@@ -102,7 +113,18 @@
   </div>
 </div>
 
+<div class="sbl-modal-backdrop" id="feedbackModalBackdrop">
+  <div class="sbl-modal">
+    <h2>Feedback details</h2>
+    <dl id="feedbackModalBody"></dl>
+    <div class="sbl-auth-actions" style="margin-top:1.75rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary" id="closeFeedbackModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
 <script src="/js/sbl-admin.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
 </body>
 </html>

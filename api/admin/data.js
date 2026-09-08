@@ -1,5 +1,5 @@
 // /api/admin/data — GET: everything the admin dashboard needs to
-// render its three tabs (pending / approved / rejected).
+// render its four tabs (pending / approved / rejected / feedback).
 
 import { requireAdmin } from '../_lib/auth.js';
 import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   const supabase = getSupabaseAdmin();
 
-  const [pendingRes, decidedRes, profilesRes] = await Promise.all([
+  const [pendingRes, decidedRes, profilesRes, feedbackRes] = await Promise.all([
     supabase
       .from('sbl_applications')
       .select('id, reference_id, first_name, last_name, email, organisation, country, role_applied_for, areas_of_interest, reason, submitted_at, status')
@@ -31,11 +31,16 @@ export default async function handler(req, res) {
       .from('sbl_profiles')
       .select('id, full_name, email, organisation, country, role, status, teacher_id, group_name, created_at')
       .order('created_at', { ascending: false })
-      .limit(500)
+      .limit(500),
+    supabase
+      .from('sbl_feedback')
+      .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, page_url, status, created_at')
+      .order('created_at', { ascending: false })
+      .limit(300)
   ]);
 
-  if (pendingRes.error || decidedRes.error || profilesRes.error) {
-    console.error('admin/data query error:', pendingRes.error || decidedRes.error || profilesRes.error);
+  if (pendingRes.error || decidedRes.error || profilesRes.error || feedbackRes.error) {
+    console.error('admin/data query error:', pendingRes.error || decidedRes.error || profilesRes.error || feedbackRes.error);
     return res.status(500).json({ error: 'Could not load dashboard data.' });
   }
 
@@ -52,6 +57,7 @@ export default async function handler(req, res) {
     pending: pendingRes.data,
     rejected: decidedRes.data,
     users: profilesRes.data,
-    teachers
+    teachers,
+    feedback: feedbackRes.data
   });
 }

@@ -49,6 +49,7 @@ export default async function handler(req, res) {
   if (action === 'assign-teacher') return handleAssignTeacher(req, res, session);
   if (action === 'assign-group') return handleAssignGroup(req, res, session);
   if (action === 'reset-password') return handleResetPassword(req, res, session);
+  if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -437,6 +438,35 @@ async function handleResetPassword(req, res, session) {
   } catch (err) {
     console.error('Failed to send admin-triggered password reset email:', err);
     return res.status(500).json({ error: 'Could not send the password reset email. Please try again.' });
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// mark-feedback — { feedbackId, reviewed: true|false }
+// Toggles a site-feedback submission (sql/008_feedback.sql, filled
+// in via public/js/sbl-feedback-widget.js + api/feedback.js) between
+// 'new' and 'reviewed', so Keith can track which ones she's already
+// looked at in the Admin Dashboard's Feedback tab without deleting
+// anything.
+// ---------------------------------------------------------------
+async function handleMarkFeedback(req, res, session) {
+  const feedbackId = req.body && req.body.feedbackId;
+  const reviewed = !!(req.body && req.body.reviewed);
+  if (!feedbackId) {
+    return res.status(400).json({ error: 'feedbackId is required.' });
+  }
+
+  const supabase = getSupabaseAdmin();
+  const { error } = await supabase
+    .from('sbl_feedback')
+    .update({ status: reviewed ? 'reviewed' : 'new' })
+    .eq('id', feedbackId);
+
+  if (error) {
+    console.error('Failed to update feedback status:', error);
+    return res.status(500).json({ error: 'Could not update this feedback item.' });
   }
 
   return res.status(200).json({ ok: true });

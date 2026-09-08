@@ -205,6 +205,76 @@ export async function sendPasswordResetRequestedAdminEmail({ adminEmail, student
   });
 }
 
+// Tiny escaper for the one email template below that embeds a chunk
+// of free-form visitor text (the open "suggestions" question) --
+// none of the other templates above need this because their inputs
+// are either fixed strings or short fields already validated
+// elsewhere, but a suggestions box is exactly the kind of field
+// someone might paste odd characters into.
+function escapeHtml(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Sent to every active admin whenever a visitor submits the site
+// feedback box (public/js/sbl-feedback-widget.js). Purely
+// informational -- the submission is already saved in sbl_feedback
+// and browsable from the Admin Dashboard's Feedback tab; this just
+// means Keith doesn't have to go looking for new ones.
+export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dashboardUrl }) {
+  const {
+    rating_overall, rating_understanding, effective_methods,
+    suggestions, contact_email, page_url, created_at
+  } = feedback;
+
+  const submittedDisplay = new Date(created_at).toLocaleString('en-GB', {
+    dateStyle: 'medium', timeStyle: 'short'
+  });
+  const stars = (n) => (n ? `${n} / 5` : '—');
+  const methodsDisplay = (effective_methods || []).join(', ') || '—';
+  const suggestionsHtml = suggestions ? escapeHtml(suggestions).replace(/\n/g, '<br/>') : '—';
+
+  const html = wrapper(`
+    <p>Hello Keith,</p>
+    <p>Someone just submitted feedback through the site's feedback box.</p>
+    <table role="presentation" style="width:100%;font-size:14px;color:#F6FAFA;">
+      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Overall rating</td><td style="padding:3px 0;">${stars(rating_overall)}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Supports learning</td><td style="padding:3px 0;">${stars(rating_understanding)}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Most effective for them</td><td style="padding:3px 0;">${escapeHtml(methodsDisplay)}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Suggestions</td><td style="padding:3px 0;">${suggestionsHtml}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;">Reply-to (if given)</td><td style="padding:3px 0;">${escapeHtml(contact_email) || '—'}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;">Page</td><td style="padding:3px 0;">${escapeHtml(page_url) || '—'}</td></tr>
+      <tr><td style="color:#7C93A3;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
+    </table>
+    <p style="margin-top:22px;">This is also saved in the Admin Dashboard's Feedback tab if you'd rather browse it there.</p>
+    <div style="margin-top:8px;">${button(dashboardUrl, 'VIEW IN ADMIN DASHBOARD')}</div>
+  `);
+
+  const text = [
+    'Someone just submitted feedback through the site feedback box.',
+    '',
+    `Overall rating: ${stars(rating_overall)}`,
+    `Supports learning: ${stars(rating_understanding)}`,
+    `Most effective for them: ${methodsDisplay}`,
+    `Suggestions: ${suggestions || '—'}`,
+    `Reply-to (if given): ${contact_email || '—'}`,
+    `Page: ${page_url || '—'}`,
+    `Submitted: ${submittedDisplay}`,
+    '',
+    `View it at: ${dashboardUrl}`
+  ].join('\n');
+
+  return sendEmail({
+    to: adminEmail,
+    subject: 'New SBL site feedback submitted',
+    html,
+    text
+  });
+}
+
 export async function sendPasswordResetEmail({ email, firstName, resetUrl }) {
   const html = wrapper(`
     <p>Hello ${firstName || 'there'},</p>

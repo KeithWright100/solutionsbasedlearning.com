@@ -7,7 +7,7 @@
 // security boundary.
 
 (function () {
-  var state = { pending: [], rejected: [], users: [], teachers: [] };
+  var state = { pending: [], rejected: [], users: [], teachers: [], feedback: [] };
 
   var pageError = document.getElementById('pageError');
   var pageNotice = document.getElementById('pageNotice');
@@ -66,7 +66,8 @@
   var panels = {
     pending: document.getElementById('panelPending'),
     approved: document.getElementById('panelApproved'),
-    rejected: document.getElementById('panelRejected')
+    rejected: document.getElementById('panelRejected'),
+    feedback: document.getElementById('panelFeedback')
   };
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
@@ -89,6 +90,7 @@
         state.rejected = data.rejected || [];
         state.users = data.users || [];
         state.teachers = data.teachers || [];
+        state.feedback = data.feedback || [];
         render();
       })
       .catch(function () {
@@ -100,10 +102,15 @@
     document.getElementById('countPending').textContent = state.pending.length;
     document.getElementById('countRejected').textContent = state.rejected.length;
     document.getElementById('countApproved').textContent = state.users.filter(function (u) { return u.role !== 'admin'; }).length;
+    // The Feedback badge counts only unreviewed ('new') items, the
+    // same way Pending Applications' count is really "awaiting you" —
+    // once Keith has looked at one, it stops nagging her from the tab.
+    document.getElementById('countFeedback').textContent = state.feedback.filter(function (f) { return f.status !== 'reviewed'; }).length;
 
     renderPending();
     renderApproved();
     renderRejected();
+    renderFeedback();
   }
 
   function renderPending() {
@@ -220,6 +227,43 @@
     });
   }
 
+  function formatMethods(arr) {
+    return (arr && arr.length) ? arr.join(', ') : '—';
+  }
+
+  function truncateText(str, n) {
+    if (!str) return '—';
+    return str.length > n ? str.slice(0, n).trim() + '…' : str;
+  }
+
+  function renderFeedback() {
+    var body = document.getElementById('feedbackBody');
+    var empty = document.getElementById('feedbackEmpty');
+    body.innerHTML = '';
+    if (!state.feedback.length) { empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+
+    state.feedback.forEach(function (f) {
+      var tr = document.createElement('tr');
+      var statusBadge = f.status === 'reviewed'
+        ? '<span class="sbl-badge" style="background:rgba(124,147,163,0.2);color:var(--slate);">Reviewed</span>'
+        : '<span class="sbl-badge sbl-badge--approved">New</span>';
+      var toggleLabel = f.status === 'reviewed' ? 'Mark new' : 'Mark reviewed';
+      tr.innerHTML =
+        '<td>' + formatDate(f.created_at) + '</td>' +
+        '<td>' + (f.rating_overall ? f.rating_overall + ' / 5' : '—') + '</td>' +
+        '<td>' + (f.rating_understanding ? f.rating_understanding + ' / 5' : '—') + '</td>' +
+        '<td>' + escapeHtml(formatMethods(f.effective_methods)) + '</td>' +
+        '<td>' + escapeHtml(truncateText(f.suggestions, 60)) + '</td>' +
+        '<td>' + statusBadge + '</td>' +
+        '<td class="sbl-table-actions">' +
+          '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="view-feedback" data-id="' + f.id + '">View</button>' +
+          '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="toggle-feedback" data-id="' + f.id + '">' + toggleLabel + '</button>' +
+        '</td>';
+      body.appendChild(tr);
+    });
+  }
+
   // ---- Modal: view application ----
   var modalBackdrop = document.getElementById('viewModalBackdrop');
   var modalBody = document.getElementById('viewModalBody');
@@ -244,6 +288,28 @@
     modalBackdrop.classList.add('is-open');
   }
 
+  // ---- Modal: view feedback ----
+  var feedbackModalBackdrop = document.getElementById('feedbackModalBackdrop');
+  var feedbackModalBody = document.getElementById('feedbackModalBody');
+  document.getElementById('closeFeedbackModalBtn').addEventListener('click', function () {
+    feedbackModalBackdrop.classList.remove('is-open');
+  });
+  feedbackModalBackdrop.addEventListener('click', function (e) {
+    if (e.target === feedbackModalBackdrop) feedbackModalBackdrop.classList.remove('is-open');
+  });
+
+  function openFeedbackModal(f) {
+    feedbackModalBody.innerHTML =
+      '<dt>Submitted</dt><dd>' + formatDate(f.created_at) + '</dd>' +
+      '<dt>Overall rating</dt><dd>' + (f.rating_overall ? f.rating_overall + ' / 5' : '—') + '</dd>' +
+      '<dt>Supports learning</dt><dd>' + (f.rating_understanding ? f.rating_understanding + ' / 5' : '—') + '</dd>' +
+      '<dt>Most effective for them</dt><dd>' + escapeHtml(formatMethods(f.effective_methods)) + '</dd>' +
+      '<dt>Suggestions</dt><dd>' + escapeHtml(f.suggestions || '—') + '</dd>' +
+      '<dt>Reply-to email</dt><dd>' + escapeHtml(f.contact_email || '—') + '</dd>' +
+      '<dt>Page</dt><dd>' + escapeHtml(f.page_url || '—') + '</dd>';
+    feedbackModalBackdrop.classList.add('is-open');
+  }
+
   // ---- Action handling (event delegation across all three tables) ----
   document.querySelector('.sbl-admin-shell').addEventListener('click', function (e) {
     var btn = e.target.closest('button[data-action]');
@@ -264,6 +330,12 @@
     if (action === 'make-teacher') return handleSetRole(id, 'teacher', btn);
     if (action === 'make-user') return handleSetRole(id, 'user', btn);
     if (action === 'reset-password') return handleResetPassword(id, btn.getAttribute('data-name'), btn);
+    if (action === 'view-feedback') {
+      var fb = state.feedback.find(function (f) { return f.id === id; });
+      if (fb) openFeedbackModal(fb);
+      return;
+    }
+    if (action === 'toggle-feedback') return handleToggleFeedback(id, btn);
   });
 
   // Teacher-assignment dropdowns fire 'change', not 'click'.
@@ -378,6 +450,20 @@
       return postJson('/api/admin/action', { action: 'reset-password', userId: userId }).then(function (result) {
         if (!result.ok) { showError(result.data.error || 'Could not send the password reset email.'); return; }
         showNotice('Password reset email sent to ' + name + '.');
+      });
+    });
+  }
+
+  function handleToggleFeedback(id, btn) {
+    var fb = state.feedback.find(function (f) { return f.id === id; });
+    if (!fb) return;
+    var reviewed = fb.status !== 'reviewed';
+    clearMessages();
+    withButtonBusy(btn, 'Updating…', function () {
+      return postJson('/api/admin/action', { action: 'mark-feedback', feedbackId: id, reviewed: reviewed }).then(function (result) {
+        if (!result.ok) { showError(result.data.error || 'Could not update this feedback item.'); return; }
+        showNotice(reviewed ? 'Marked as reviewed.' : 'Marked as new.');
+        loadData();
       });
     });
   }
