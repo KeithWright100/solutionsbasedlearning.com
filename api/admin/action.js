@@ -156,11 +156,14 @@ async function handleApprove(req, res, session) {
 }
 
 // ---------------------------------------------------------------
-// reject — { applicationId, note? }
+// reject — { applicationId, note?, reason? }
+// reason: 'general' (default) or 'duplicate' — see sendRejectionEmail
+// in emails.js for what each sends the applicant.
 // ---------------------------------------------------------------
 async function handleReject(req, res, session) {
   const applicationId = req.body && req.body.applicationId;
   const note = req.body && req.body.note ? String(req.body.note).slice(0, 2000) : null;
+  const reason = req.body && req.body.reason === 'duplicate' ? 'duplicate' : 'general';
   if (!applicationId) {
     return res.status(400).json({ error: 'applicationId is required.' });
   }
@@ -197,7 +200,7 @@ async function handleReject(req, res, session) {
 
   let emailWarning = null;
   try {
-    await sendRejectionEmail({ email: application.email, firstName: application.first_name });
+    await sendRejectionEmail({ email: application.email, firstName: application.first_name, reason });
   } catch (err) {
     console.error('Failed to send rejection email:', err);
     emailWarning = 'The application was rejected, but the notification email could not be sent.';

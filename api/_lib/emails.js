@@ -143,7 +143,30 @@ export async function sendApprovalEmail({ email, firstName, activateUrl }) {
   });
 }
 
-export async function sendRejectionEmail({ email, firstName }) {
+// reason: 'general' (default) or 'duplicate' — 'duplicate' is for the
+// common case where a student already has a working account and
+// mistakenly submitted a new application (usually because they
+// couldn't log in), rather than a genuine rejection. It points them
+// at the self-service "Forgot password?" flow instead of the
+// standard "we can't approve this" wording, which would otherwise
+// read as a rejection of them personally.
+export async function sendRejectionEmail({ email, firstName, reason }) {
+  if (reason === 'duplicate') {
+    const html = wrapper(`
+      <p>Hello ${firstName},</p>
+      <p>Thank you for your interest in Solutions Based Learning.</p>
+      <p>It looks like you already have an SBL account registered with this email address, so there's no need for a new application.</p>
+      <p>If you're having trouble logging in, please use the &ldquo;Forgot password?&rdquo; link on the login page to reset your password. If you're still stuck after that, just reply to this email and we'll help directly.</p>
+      <p>Kind regards,<br/>Keith Wright<br/>Founder, Solutions Based Learning</p>
+    `);
+    return sendEmail({
+      to: email,
+      subject: 'SBL Access Request Update',
+      html,
+      text: `Hello ${firstName},\n\nThank you for your interest in Solutions Based Learning. It looks like you already have an SBL account registered with this email address, so there's no need for a new application.\n\nIf you're having trouble logging in, please use the "Forgot password?" link on the login page to reset your password. If you're still stuck after that, just reply to this email and we'll help directly.\n\nKind regards,\nKeith Wright\nFounder, Solutions Based Learning`
+    });
+  }
+
   const html = wrapper(`
     <p>Hello ${firstName},</p>
     <p>Thank you for your interest in Solutions Based Learning.</p>

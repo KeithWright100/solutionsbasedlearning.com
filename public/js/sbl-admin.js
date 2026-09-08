@@ -317,9 +317,11 @@
 
   function handleReject(id, btn) {
     if (!confirm('Reject this application? The applicant will be notified by email.')) return;
+    var isDuplicate = confirm('Is this because the applicant already has an SBL account (e.g. they re-applied after trouble logging in)?\n\nOK — send the "you already have an account, use Forgot password" email.\nCancel — send the standard rejection email instead.');
+    var reason = isDuplicate ? 'duplicate' : 'general';
     clearMessages();
     withButtonBusy(btn, 'Rejecting…', function () {
-      return postJson('/api/admin/action', { action: 'reject', applicationId: id }).then(function (result) {
+      return postJson('/api/admin/action', { action: 'reject', applicationId: id, reason: reason }).then(function (result) {
         if (!result.ok) { showError(result.data.error || 'Could not reject this application.'); return; }
         showNotice(result.data.warning || 'Application rejected. The applicant has been notified by email.');
         loadData();
