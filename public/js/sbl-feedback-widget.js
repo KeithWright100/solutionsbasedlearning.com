@@ -2,10 +2,14 @@
 // A small floating "Feedback" button, included on every page of the
 // site, that opens a short questionnaire (two 1-5 ratings, a
 // multi-select "what's most effective for you" list, and an open
-// suggestions box) plus an optional "your email, if you'd like a
-// reply" field. Submits to /api/feedback.js, which saves it to the
-// sbl_feedback table and emails Keith a copy — nothing here ever
-// shows a personal contact address anywhere on the page.
+// suggestions box) plus an optional email address field. The email
+// field is phrased as plainly optional ("leave blank to stay
+// anonymous") rather than "only if you'd like a reply" — the latter
+// reads as a promise that leaving an email guarantees a personal
+// reply, which isn't something this form should commit Keith to.
+// Submits to /api/feedback.js, which saves it to the sbl_feedback
+// table and emails Keith a copy — nothing here ever shows a personal
+// contact address anywhere on the page.
 //
 // Entirely self-contained (injects its own <style>, builds its own
 // DOM) so it can be dropped into every page with a single <script>
@@ -133,7 +137,8 @@
           '<textarea class="sblfw-textarea" id="sblfw-suggestions" maxlength="4000" placeholder="Optional"></textarea>' +
         '</div>' +
         '<div class="sblfw-field">' +
-          '<label class="sblfw-label" for="sblfw-email">Your email, only if you would like a reply</label>' +
+          '<label class="sblfw-label" for="sblfw-email">Your email address</label>' +
+          '<div class="sblfw-note">Optional — leave blank to stay anonymous.</div>' +
           '<input type="email" class="sblfw-emailinput" id="sblfw-email" maxlength="254" placeholder="Optional">' +
         '</div>' +
         '<div class="sblfw-actions">' +
