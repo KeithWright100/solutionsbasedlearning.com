@@ -15,9 +15,9 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-background:#e9f0f7;
+background:#eaf1f8;
+padding:25px;
 margin:0;
-padding:30px;
 }
 
 .tscc-topnav {
@@ -52,182 +52,258 @@ align-items:flex-start;
 flex-wrap:wrap;
 }
 
+/* PANELS */
+
 .panel{
 background:white;
 border-radius:16px;
-box-shadow:0 4px 12px rgba(0,0,0,0.15);
 padding:20px;
-}
-
-.diagram-panel{
-width:850px;
-max-width:100%;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
 .labels-panel{
 width:320px;
 }
 
-.labels-panel h2{
-margin-top:0;
+.diagram-panel{
+width:950px;
+max-width:100%;
 }
+
+/* LABELS */
 
 .label{
 background:#1976d2;
 color:white;
-padding:12px;
-margin:10px 0;
+padding:14px;
+margin-bottom:12px;
 border-radius:8px;
-cursor:grab;
 font-weight:bold;
 text-align:center;
-transition:0.2s;
+cursor:grab;
+transition:.2s;
 }
 
 .label:hover{
-transform:translateY(-2px);
+transform:translateY(-3px);
 }
+
+/* DIAGRAM */
 
 .diagram{
 position:relative;
 width:100%;
-height:600px;
-background:linear-gradient(to bottom,#cce8ff,#ffffff);
-border-radius:12px;
+height:700px;
+border-radius:20px;
 overflow:hidden;
+background:linear-gradient(
+to bottom,
+#5a9de6 0%,
+#99c7f4 35%,
+#cfe6fb 75%
+);
 }
 
-/* STORM */
-
-.eye{
-position:absolute;
-left:390px;
-top:210px;
-width:80px;
-height:80px;
-background:#fff176;
-border:4px solid #fbc02d;
-border-radius:50%;
-z-index:5;
-}
-
-.cloud-left{
-position:absolute;
-left:140px;
-top:110px;
-width:250px;
-height:140px;
-background:#d9d9d9;
-border-radius:50%;
-}
-
-.cloud-right{
-position:absolute;
-right:140px;
-top:110px;
-width:250px;
-height:140px;
-background:#d9d9d9;
-border-radius:50%;
-}
-
-.band1{
-position:absolute;
-left:120px;
-top:260px;
-width:600px;
-height:140px;
-border:6px dashed #64b5f6;
-border-radius:50%;
-}
-
-.band2{
-position:absolute;
-left:180px;
-top:180px;
-width:460px;
-height:100px;
-border:6px dashed #90caf9;
-border-radius:50%;
-}
+/* OCEAN */
 
 .ocean{
 position:absolute;
 bottom:0;
+left:0;
 width:100%;
-height:100px;
-background:#29b6f6;
+height:120px;
+background:#2da9e3;
+}
+
+/* ANVIL CLOUD */
+
+.anvil{
+position:absolute;
+top:70px;
+left:120px;
+width:700px;
+height:120px;
+background:white;
+border-radius:50%;
+box-shadow:0px 10px 25px rgba(255,255,255,0.7);
+z-index:2;
+}
+
+/* OUTFLOW */
+
+.outflow{
+position:absolute;
+top:105px;
+left:250px;
+width:430px;
+height:70px;
+border-top:5px solid #6fb4f0;
+border-bottom:5px solid #6fb4f0;
+border-radius:50%;
+z-index:3;
+}
+
+/* EYE */
+
+.eye{
+position:absolute;
+top:295px;
+left:430px;
+width:90px;
+height:90px;
+background:#f7df67;
+border-radius:50%;
+border:4px solid #f4b400;
+z-index:10;
+}
+
+/* EYEWALLS */
+
+.eyewall{
+position:absolute;
+height:240px;
+width:170px;
+background:#dddddd;
+border-radius:50%;
+z-index:5;
+}
+
+.left-wall{
+left:250px;
+top:180px;
+}
+
+.right-wall{
+left:530px;
+top:180px;
+}
+
+/* RAIN BANDS */
+
+.rain-band{
+position:absolute;
+border:6px dashed #5aa7ef;
+border-radius:50%;
+z-index:1;
+}
+
+.band1{
+left:180px;
+top:320px;
+width:600px;
+height:150px;
+}
+
+.band2{
+left:110px;
+top:280px;
+width:740px;
+height:260px;
+}
+
+/* ARROWS */
+
+.arrow{
+position:absolute;
+font-size:50px;
+color:#ff6ab5;
+font-weight:bold;
+z-index:11;
+}
+
+.a1{
+left:310px;
+top:330px;
+}
+
+.a2{
+left:360px;
+top:260px;
+}
+
+.a3{
+left:555px;
+top:260px;
+}
+
+.a4{
+left:605px;
+top:330px;
 }
 
 /* HOTSPOTS */
 
 .hotspot{
 position:absolute;
-width:150px;
-height:42px;
-border:3px dashed #9e9e9e;
-border-radius:8px;
-background:white;
+width:160px;
+height:50px;
+border:3px dashed #999;
+background:rgba(255,255,255,0.95);
+border-radius:10px;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 font-size:12px;
 text-align:center;
 }
 
-#eye{
-top:225px;
-left:355px;
+/* LOCATION OF LABEL TARGETS */
+
+#clouds{
+top:35px;
+left:620px;
 }
 
 #eyewall{
-top:150px;
-left:500px;
+top:270px;
+left:640px;
 }
 
-#clouds{
-top:40px;
-left:600px;
+#eye{
+top:405px;
+left:405px;
 }
 
-#rainbands{
-top:305px;
-left:80px;
+#bands{
+top:430px;
+left:720px;
 }
 
-#rainfall{
-top:290px;
-left:630px;
+#rain{
+top:360px;
+left:705px;
 }
 
-#risingair{
-top:220px;
-left:580px;
-}
-
-#ocean{
-bottom:25px;
-left:300px;
+#air{
+top:280px;
+left:120px;
 }
 
 #pressure{
-bottom:120px;
-left:340px;
+top:530px;
+left:390px;
+}
+
+#water{
+bottom:35px;
+left:370px;
 }
 
 .correct{
-border:3px solid #4caf50 !important;
 background:#e8f5e9 !important;
+border-color:#43a047 !important;
 }
 
 .incorrect{
-border:3px solid #e53935 !important;
 background:#ffebee !important;
+border-color:#e53935 !important;
 }
+
+/* BUTTONS */
 
 .controls{
 text-align:center;
-margin-top:25px;
+margin-top:20px;
 }
 
 button{
@@ -299,31 +375,39 @@ Drag each label onto the correct location on the tropical storm diagram.
 
 <div class="diagram">
 
-<div class="band1"></div>
-<div class="band2"></div>
+<div class="rain-band band2"></div>
+<div class="rain-band band1"></div>
 
-<div class="cloud-left"></div>
-<div class="cloud-right"></div>
+<div class="anvil"></div>
+<div class="outflow"></div>
+
+<div class="eyewall left-wall"></div>
+<div class="eyewall right-wall"></div>
 
 <div class="eye"></div>
 
+<div class="arrow a1">&#8593;</div>
+<div class="arrow a2">&#8593;</div>
+<div class="arrow a3">&#8593;</div>
+<div class="arrow a4">&#8593;</div>
+
 <div class="ocean"></div>
-
-<div id="eye" class="hotspot" data-answer="Eye"></div>
-
-<div id="eyewall" class="hotspot" data-answer="Eyewall"></div>
 
 <div id="clouds" class="hotspot" data-answer="Cumulonimbus Clouds"></div>
 
-<div id="rainbands" class="hotspot" data-answer="Spiral Rain Bands"></div>
+<div id="eyewall" class="hotspot" data-answer="Eyewall"></div>
 
-<div id="rainfall" class="hotspot" data-answer="Heavy Rainfall"></div>
+<div id="eye" class="hotspot" data-answer="Eye"></div>
 
-<div id="risingair" class="hotspot" data-answer="Rising Air"></div>
+<div id="bands" class="hotspot" data-answer="Spiral Rain Bands"></div>
 
-<div id="ocean" class="hotspot" data-answer="Warm Ocean Water"></div>
+<div id="rain" class="hotspot" data-answer="Heavy Rainfall"></div>
+
+<div id="air" class="hotspot" data-answer="Rising Air"></div>
 
 <div id="pressure" class="hotspot" data-answer="Low Pressure"></div>
+
+<div id="water" class="hotspot" data-answer="Warm Ocean Water"></div>
 
 </div>
 
