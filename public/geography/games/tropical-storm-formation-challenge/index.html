@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tropical Storm Formation Challenge — SBL</title>
+<meta name="description" content="Drag and drop practice game: put the 8 stages of tropical storm formation into the correct order before the timer runs out — part of the Interactive KS3 Geography Games hub.">
+
+<style>
+
+body{
+font-family:Segoe UI, Arial, sans-serif;
+background:#eef6ff;
+margin:0;
+padding:20px;
+}
+
+.tsc-topnav {
+max-width: 900px;
+margin: 0 auto 14px;
+font-size: 0.9rem;
+}
+.tsc-topnav a {
+color: #1565c0;
+text-decoration: none;
+font-weight: 600;
+}
+.tsc-topnav a:hover { text-decoration: underline; }
+
+h1{
+text-align:center;
+color:#1565c0;
+}
+
+.subtitle{
+text-align:center;
+font-size:18px;
+margin-bottom:20px;
+}
+
+#timer{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+color:#e67e22;
+margin-bottom:20px;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.instructions,
+.sequence{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0px 3px 8px rgba(0,0,0,0.15);
+}
+
+.instructions{
+width:350px;
+}
+
+.sequence{
+width:500px;
+}
+
+.card{
+background:#1976d2;
+color:white;
+padding:12px;
+margin:8px 0;
+border-radius:8px;
+cursor:move;
+font-weight:bold;
+text-align:center;
+}
+
+.slot{
+height:60px;
+border:3px dashed #bbb;
+margin:10px 0;
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#f9f9f9;
+}
+
+.correct{
+background:#4caf50 !important;
+color:white;
+}
+
+.incorrect{
+background:#e53935 !important;
+color:white;
+}
+
+button{
+padding:12px 20px;
+font-size:16px;
+margin:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#checkBtn{
+background:#43a047;
+color:white;
+}
+
+#resetBtn{
+background:#e53935;
+color:white;
+}
+
+.controls{
+text-align:center;
+margin-top:20px;
+}
+
+#result{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-top:20px;
+}
+
+#extension{
+display:none;
+background:white;
+margin-top:25px;
+padding:20px;
+border-radius:12px;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+}
+
+textarea{
+width:100%;
+height:120px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="tsc-topnav"><a href="/geography/games">&larr; Back to Interactive KS3 Geography Games</a></div>
+
+<h1>&#127744; Tropical Storm Formation Challenge</h1>
+
+<div class="subtitle">
+
+Drag each stage into the correct order to show how a tropical storm develops.
+
+</div>
+
+<div id="timer">&#9203; 3:00</div>
+
+<div class="container">
+
+<div class="instructions">
+
+<h2>Stages</h2>
+
+<div id="cards"></div>
+
+</div>
+
+<div class="sequence">
+
+<h2>Correct Formation Sequence</h2>
+
+<div class="slot" data-position="1"></div>
+<div class="slot" data-position="2"></div>
+<div class="slot" data-position="3"></div>
+<div class="slot" data-position="4"></div>
+<div class="slot" data-position="5"></div>
+<div class="slot" data-position="6"></div>
+<div class="slot" data-position="7"></div>
+<div class="slot" data-position="8"></div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="checkBtn">Check Sequence</button>
+
+<button id="resetBtn">Play Again</button>
+
+</div>
+
+<div id="result"></div>
+
+<div id="extension">
+
+<h2>&#127942; Challenge Question</h2>
+
+<p>
+Why do tropical storms normally weaken once they move over land?
+</p>
+
+<textarea placeholder="Write your answer here..."></textarea>
+
+</div>
+
+<script>
+
+const stages = [
+
+"Warm Ocean (>27°C)",
+
+"Evaporation",
+
+"Warm Moist Air Rises",
+
+"Condensation",
+
+"Latent Heat Release",
+
+"Pressure Falls",
+
+"More Air Drawn In",
+
+"Tropical Storm Develops"
+
+];
+
+const shuffled = [...stages]
+.sort(() => Math.random() - 0.5);
+
+const cardsDiv = document.getElementById("cards");
+
+shuffled.forEach(stage => {
+
+const card = document.createElement("div");
+
+card.className = "card";
+card.draggable = true;
+card.textContent = stage;
+
+card.addEventListener("dragstart", () => {
+window.dragged = card;
+});
+
+cardsDiv.appendChild(card);
+
+});
+
+document.querySelectorAll(".slot,#cards")
+.forEach(area => {
+
+area.addEventListener("dragover", e => {
+e.preventDefault();
+});
+
+area.addEventListener("drop", e => {
+
+e.preventDefault();
+
+if(window.dragged){
+
+area.appendChild(window.dragged);
+
+}
+
+});
+
+});
+
+document.getElementById("checkBtn")
+.addEventListener("click", () => {
+
+let score = 0;
+
+document.querySelectorAll(".slot")
+.forEach((slot,index)=>{
+
+slot.classList.remove("correct");
+slot.classList.remove("incorrect");
+
+const card = slot.querySelector(".card");
+
+if(!card){
+
+slot.classList.add("incorrect");
+return;
+
+}
+
+if(card.textContent === stages[index]){
+
+slot.classList.add("correct");
+score++;
+
+}
+else{
+
+slot.classList.add("incorrect");
+
+}
+
+});
+
+document.getElementById("result")
+.innerHTML =
+`&#127744; Formation Score: ${score}/8`;
+
+if(score === 8){
+
+document.getElementById("result")
+.innerHTML =
+"&#127942; Perfect! Tropical Storm Successfully Formed!";
+
+document.getElementById("extension")
+.style.display="block";
+
+}
+
+});
+
+document.getElementById("resetBtn")
+.addEventListener("click",()=>{
+
+location.reload();
+
+});
+
+let time = 180;
+
+const countdown = setInterval(()=>{
+
+time--;
+
+let mins = Math.floor(time/60);
+let secs = time % 60;
+
+document.getElementById("timer")
+.innerHTML =
+`&#9203; ${mins}:${secs.toString().padStart(2,"0")}`;
+
+if(time<=0){
+
+clearInterval(countdown);
+
+document.getElementById("checkBtn").click();
+
+}
+
+},1000);
+
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
