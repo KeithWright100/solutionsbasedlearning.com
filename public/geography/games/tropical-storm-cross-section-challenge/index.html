@@ -11,7 +11,7 @@
 
 *{
 box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+font-family:'Segoe UI',Arial,sans-serif;
 }
 
 body{
@@ -44,6 +44,7 @@ font-size:18px;
 margin-bottom:25px;
 }
 
+
 .game-container{
 display:flex;
 gap:25px;
@@ -68,6 +69,7 @@ width:320px;
 .diagram-panel{
 width:950px;
 max-width:100%;
+padding:12px;
 }
 
 /* LABELS */
@@ -88,216 +90,64 @@ transition:.2s;
 transform:translateY(-3px);
 }
 
-/* DIAGRAM */
+.label.dragging{
+opacity:0.5;
+}
+
+/* DIAGRAM (background photo, aspect-ratio matches the source image) */
 
 .diagram{
 position:relative;
 width:100%;
-height:700px;
-border-radius:20px;
+aspect-ratio:1536/1024;
+border-radius:14px;
 overflow:hidden;
-background:linear-gradient(
-to bottom,
-#5a9de6 0%,
-#99c7f4 35%,
-#cfe6fb 75%
-);
+background-image:url('/images/games/tropical-storm-cross-section.jpg');
+background-size:cover;
+background-position:center;
 }
 
-/* OCEAN */
-
-.ocean{
-position:absolute;
-bottom:0;
-left:0;
-width:100%;
-height:120px;
-background:#2da9e3;
-}
-
-/* ANVIL CLOUD */
-
-.anvil{
-position:absolute;
-top:70px;
-left:120px;
-width:700px;
-height:120px;
-background:white;
-border-radius:50%;
-box-shadow:0px 10px 25px rgba(255,255,255,0.7);
-z-index:2;
-}
-
-/* OUTFLOW */
-
-.outflow{
-position:absolute;
-top:105px;
-left:250px;
-width:430px;
-height:70px;
-border-top:5px solid #6fb4f0;
-border-bottom:5px solid #6fb4f0;
-border-radius:50%;
-z-index:3;
-}
-
-/* EYE */
-
-.eye{
-position:absolute;
-top:295px;
-left:430px;
-width:90px;
-height:90px;
-background:#f7df67;
-border-radius:50%;
-border:4px solid #f4b400;
-z-index:10;
-}
-
-/* EYEWALLS */
-
-.eyewall{
-position:absolute;
-height:240px;
-width:170px;
-background:#dddddd;
-border-radius:50%;
-z-index:5;
-}
-
-.left-wall{
-left:250px;
-top:180px;
-}
-
-.right-wall{
-left:530px;
-top:180px;
-}
-
-/* RAIN BANDS */
-
-.rain-band{
-position:absolute;
-border:6px dashed #5aa7ef;
-border-radius:50%;
-z-index:1;
-}
-
-.band1{
-left:180px;
-top:320px;
-width:600px;
-height:150px;
-}
-
-.band2{
-left:110px;
-top:280px;
-width:740px;
-height:260px;
-}
-
-/* ARROWS */
-
-.arrow{
-position:absolute;
-font-size:50px;
-color:#ff6ab5;
-font-weight:bold;
-z-index:11;
-}
-
-.a1{
-left:310px;
-top:330px;
-}
-
-.a2{
-left:360px;
-top:260px;
-}
-
-.a3{
-left:555px;
-top:260px;
-}
-
-.a4{
-left:605px;
-top:330px;
-}
-
-/* HOTSPOTS */
+/* HOTSPOTS — sit right over the blank boxes already drawn into the photo */
 
 .hotspot{
 position:absolute;
-width:160px;
-height:50px;
-border:3px dashed #999;
-background:rgba(255,255,255,0.95);
+border:3px solid transparent;
 border-radius:10px;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:12px;
-text-align:center;
+padding:4px;
+overflow:hidden;
 }
 
-/* LOCATION OF LABEL TARGETS */
-
-#clouds{
-top:35px;
-left:620px;
+.hotspot .label{
+width:100%;
+margin-bottom:0;
+padding:8px 6px;
+font-size:0.8rem;
+line-height:1.15;
+cursor:grab;
 }
 
-#eyewall{
-top:270px;
-left:640px;
-}
-
-#eye{
-top:405px;
-left:405px;
-}
-
-#bands{
-top:430px;
-left:720px;
-}
-
-#rain{
-top:360px;
-left:705px;
-}
-
-#air{
-top:280px;
-left:120px;
-}
-
-#pressure{
-top:530px;
-left:390px;
-}
-
-#water{
-bottom:35px;
-left:370px;
-}
+#outflow{ left:40.62%; top:3.03%; width:18.03%; height:7.23%; }
+#eye{ left:46.16%; top:31.93%; width:7.55%; height:7.23%; }
+#eyewall{ left:7.62%; top:36.13%; width:16.02%; height:7.32%; }
+#clouds{ left:78.71%; top:37.79%; width:17.06%; height:7.23%; }
+#bands-left{ left:1.11%; top:46.88%; width:15.04%; height:7.42%; }
+#bands-right{ left:85.22%; top:49.80%; width:14.06%; height:7.32%; }
+#rising{ left:78.13%; top:67.29%; width:13.22%; height:8.01%; }
+#pressure{ left:42.45%; top:80.96%; width:16.02%; height:6.93%; }
+#ocean{ left:36.85%; top:90.92%; width:24.54%; height:7.42%; }
 
 .correct{
-background:#e8f5e9 !important;
 border-color:#43a047 !important;
 }
+.correct .label{ background:#43a047 !important; }
 
 .incorrect{
-background:#ffebee !important;
 border-color:#e53935 !important;
 }
+.incorrect .label{ background:#e53935 !important; }
 
 /* BUTTONS */
 
@@ -349,6 +199,10 @@ margin-top:10px;
 padding:10px;
 }
 
+@media (max-width:900px){
+.hotspot .label{ font-size:0.62rem; }
+}
+
 </style>
 </head>
 <body>
@@ -375,39 +229,15 @@ Drag each label onto the correct location on the tropical storm diagram.
 
 <div class="diagram">
 
-<div class="rain-band band2"></div>
-<div class="rain-band band1"></div>
-
-<div class="anvil"></div>
-<div class="outflow"></div>
-
-<div class="eyewall left-wall"></div>
-<div class="eyewall right-wall"></div>
-
-<div class="eye"></div>
-
-<div class="arrow a1">&#8593;</div>
-<div class="arrow a2">&#8593;</div>
-<div class="arrow a3">&#8593;</div>
-<div class="arrow a4">&#8593;</div>
-
-<div class="ocean"></div>
-
+<div id="outflow" class="hotspot" data-answer="Outflow"></div>
+<div id="eye" class="hotspot" data-answer="Eye (High Pressure)"></div>
+<div id="eyewall" class="hotspot" data-answer="Eye Wall"></div>
 <div id="clouds" class="hotspot" data-answer="Cumulonimbus Clouds"></div>
-
-<div id="eyewall" class="hotspot" data-answer="Eyewall"></div>
-
-<div id="eye" class="hotspot" data-answer="Eye"></div>
-
-<div id="bands" class="hotspot" data-answer="Spiral Rain Bands"></div>
-
-<div id="rain" class="hotspot" data-answer="Heavy Rainfall"></div>
-
-<div id="air" class="hotspot" data-answer="Rising Air"></div>
-
+<div id="bands-left" class="hotspot" data-answer="Spiral Rain Bands"></div>
+<div id="bands-right" class="hotspot" data-answer="Spiral Rain Bands"></div>
+<div id="rising" class="hotspot" data-answer="Warm Rising Air"></div>
 <div id="pressure" class="hotspot" data-answer="Low Pressure"></div>
-
-<div id="water" class="hotspot" data-answer="Warm Ocean Water"></div>
+<div id="ocean" class="hotspot" data-answer="Warm Ocean Water"></div>
 
 </div>
 
@@ -434,7 +264,7 @@ Play Again
 <h2>&#127942; Storm Expert Challenge</h2>
 
 <p>
-Explain why the strongest winds occur in the eyewall rather than in the eye.
+Explain why the strongest winds occur in the eye wall rather than in the eye.
 </p>
 
 <textarea placeholder="Write your answer here..."></textarea>
@@ -445,16 +275,19 @@ Explain why the strongest winds occur in the eyewall rather than in the eye.
 
 const labels = [
 
-"Eye",
-"Eyewall",
+"Outflow",
+"Eye (High Pressure)",
+"Eye Wall",
 "Cumulonimbus Clouds",
 "Spiral Rain Bands",
-"Heavy Rainfall",
-"Rising Air",
-"Warm Ocean Water",
-"Low Pressure"
+"Spiral Rain Bands",
+"Warm Rising Air",
+"Low Pressure",
+"Warm Ocean Water"
 
 ];
+
+const TOTAL = labels.length;
 
 labels.sort(() => Math.random() - 0.5);
 
@@ -473,7 +306,12 @@ label.textContent=text;
 label.addEventListener("dragstart", () => {
 
 window.dragged = label;
+label.classList.add("dragging");
 
+});
+
+label.addEventListener("dragend", () => {
+label.classList.remove("dragging");
 });
 
 bank.appendChild(label);
@@ -542,9 +380,9 @@ spot.classList.add("incorrect");
 
 document.getElementById("result")
 .innerHTML =
-`&#127744; Score: ${score}/8`;
+`&#127744; Score: ${score}/${TOTAL}`;
 
-if(score === 8){
+if(score === TOTAL){
 
 document.getElementById("result")
 .innerHTML =
