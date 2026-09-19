@@ -463,6 +463,27 @@
       .igcse-banner-row { align-items: flex-start; flex-direction: column; }
     }
 
+    .games-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .games-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: 0.82rem;
+      font-weight: 750;
+      color: rgba(255, 255, 255, 0.94);
+      white-space: nowrap;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -634,6 +655,28 @@
           </div>
         </article>
       </div>
+
+      <section class="igcse-banner" aria-label="Interactive KS3 Geography Games" style="margin-top: 34px; margin-bottom: 34px;">
+        <div class="igcse-banner-row" aria-label="Interactive KS3 Geography Games">
+          <div class="igcse-banner-text">
+            <span class="igcse-banner-kicker">New: play &amp; learn</span>
+            <h2>&#127918; Interactive KS3 Geography Games</h2>
+            <p>
+              Develop geographical knowledge, retrieval skills and critical thinking through
+              interactive challenges.
+            </p>
+            <div class="games-stats" aria-hidden="false">
+              <span class="games-stat">&#127757; 1 Game Available</span>
+              <span class="games-stat">&#127942; Leaderboards</span>
+              <span class="games-stat">&#9889; Quick Play</span>
+            </div>
+          </div>
+          <a class="igcse-banner-btn" href="/geography/games" aria-label="Open the Interactive KS3 Geography Games hub">
+            Play Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </div>
+      </section>
 
       <section class="igcse-banner" aria-label="IGCSE Subject Menu">
         <div class="igcse-banner-row" aria-label="IGCSE Subject Menu">
