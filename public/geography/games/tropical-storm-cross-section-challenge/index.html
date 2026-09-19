@@ -203,6 +203,316 @@ padding:10px;
 .hotspot .label{ font-size:0.62rem; }
 }
 
+/* ==================================================== */
+/* FINAL MISSION — Build and Steer a Tropical Storm      */
+/* ==================================================== */
+
+.sr-only{
+position:absolute !important;
+width:1px !important;
+height:1px !important;
+padding:0 !important;
+margin:-1px !important;
+overflow:hidden !important;
+clip:rect(0,0,0,0) !important;
+white-space:nowrap !important;
+border:0 !important;
+}
+
+#finalMission button:focus-visible,
+#finalMission input:focus-visible{
+outline:4px solid #ffbf47;
+outline-offset:3px;
+}
+
+.fm-wrap{
+max-width:1100px;
+margin:35px auto 0;
+background:white;
+padding:24px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.fm-wrap h2{
+text-align:center;
+color:#0b5fa5;
+margin:0 0 10px;
+font-size:clamp(1.5rem,3.4vw,2.2rem);
+}
+
+.fm-intro{
+text-align:center;
+max-width:820px;
+margin:0 auto 18px;
+font-size:1.05rem;
+color:#15263c;
+}
+
+.fm-scoreboard{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin:16px 0;
+}
+
+.fm-score-chip{
+background:#eef6ff;
+border:2px solid #7caad5;
+border-radius:999px;
+padding:9px 16px;
+font-weight:900;
+color:#15263c;
+}
+
+.fm-score-chip strong{
+color:#0b5fa5;
+}
+
+.fm-progress{
+max-width:650px;
+height:20px;
+margin:0 auto 22px;
+background:#dce5ed;
+border:2px solid #64748b;
+border-radius:999px;
+overflow:hidden;
+}
+
+.fm-progress span{
+display:block;
+width:0;
+height:100%;
+background:linear-gradient(90deg,#08783f,#54b56f);
+transition:width 0.35s ease;
+}
+
+.fm-intensity{
+text-align:center;
+font-size:1.2rem;
+font-weight:900;
+min-height:1.8em;
+color:#6536b4;
+margin:0 0 10px;
+}
+
+.fm-fields{
+display:grid;
+grid-template-columns:repeat(3,minmax(190px,1fr));
+gap:14px;
+}
+
+.fm-field{
+background:#f3f8fd;
+border:2px solid #c5d9ec;
+border-radius:12px;
+padding:13px;
+}
+
+.fm-field label{
+display:block;
+font-weight:900;
+margin-bottom:5px;
+color:#15263c;
+}
+
+.fm-field input{
+width:100%;
+padding:10px;
+border:2px solid #617184;
+border-radius:7px;
+font:inherit;
+color:#111111;
+background:#ffffff;
+}
+
+.fm-field input[aria-invalid="true"]{
+border:3px solid #b42318;
+background:#fff0ee;
+}
+
+.fm-field input.fm-valid{
+border:3px solid #08783f;
+background:#eefaf2;
+}
+
+.fm-help{
+display:block;
+margin-top:5px;
+font-size:0.86rem;
+color:#46566b;
+}
+
+.fm-feedback{
+display:block;
+min-height:1.5em;
+margin-top:4px;
+font-weight:800;
+}
+
+.fm-feedback.fm-good{
+color:#08783f;
+}
+
+.fm-feedback.fm-bad{
+color:#b42318;
+}
+
+.fm-controls{
+text-align:center;
+margin:18px 0;
+}
+
+.fm-controls button{
+border:0;
+border-radius:9px;
+padding:13px 22px;
+color:#ffffff;
+font:inherit;
+font-weight:900;
+cursor:pointer;
+margin:5px;
+}
+
+.fm-launch{
+background:#6536b4;
+}
+
+.fm-reset{
+background:#b42318;
+}
+
+.fm-ocean-track{
+position:relative;
+height:320px;
+overflow:hidden;
+border-radius:16px;
+border:3px solid #285b88;
+background:linear-gradient(#a7ddff 0 28%,#169eda 28% 100%);
+}
+
+.fm-sky-label{
+position:absolute;
+top:12px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,0.9);
+padding:6px 12px;
+border-radius:20px;
+font-weight:900;
+color:#173c62;
+}
+
+.fm-east,
+.fm-west{
+position:absolute;
+top:54px;
+background:#ffffff;
+padding:5px 10px;
+border-radius:8px;
+font-weight:900;
+color:#15263c;
+}
+
+.fm-east{ right:15px; }
+.fm-west{ left:15px; }
+
+.fm-trade-winds{
+position:absolute;
+top:88px;
+left:14%;
+right:14%;
+text-align:center;
+color:#ffffff;
+font-weight:900;
+font-size:2rem;
+text-shadow:0 2px 3px rgba(0,0,0,0.55);
+}
+
+.fm-island{
+position:absolute;
+left:3%;
+bottom:26px;
+width:115px;
+height:54px;
+background:#76a94d;
+border-top:10px solid #e5c078;
+border-radius:52% 52% 28% 30%;
+}
+
+.fm-island::after{
+content:"LAND";
+position:absolute;
+left:26px;
+top:12px;
+font-weight:900;
+color:#153b20;
+}
+
+.fm-storm{
+position:absolute;
+right:5%;
+top:130px;
+width:96px;
+height:96px;
+border-radius:50%;
+background:radial-gradient(circle,#dff7ff 0 11%,#2d88ca 12% 28%,#ffffff 29% 39%,#176fb5 40% 56%,#ffffff 57% 67%,#0c4c87 68%);
+box-shadow:0 4px 16px rgba(0,0,0,0.45);
+}
+
+.fm-storm.run{
+animation:fmStormTravel 6s linear forwards, fmStormSpin 1s linear infinite;
+}
+
+@keyframes fmStormTravel{
+0%{ right:5%; top:130px; filter:brightness(0.85); }
+35%{ right:36%; top:112px; filter:brightness(1); }
+70%{ right:66%; top:120px; filter:brightness(1.08); }
+100%{ right:82%; top:155px; transform:scale(0.7); filter:brightness(0.72); }
+}
+
+@keyframes fmStormSpin{
+to{ rotate:-360deg; }
+}
+
+.fm-track-message{
+text-align:center;
+font-size:1.14rem;
+font-weight:900;
+min-height:1.8em;
+margin:14px 0 0;
+color:#15263c;
+}
+
+.fm-summary{
+display:none;
+margin-top:15px;
+padding:15px;
+border-left:6px solid #08783f;
+background:#eaf8ef;
+border-radius:8px;
+color:#15263c;
+}
+
+@media (max-width:900px){
+.fm-fields{ grid-template-columns:1fr; }
+.fm-ocean-track{ height:285px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+#finalMission *{
+animation:none !important;
+transition:none !important;
+}
+#finalMission .fm-storm.run{
+right:82%;
+top:155px;
+transform:scale(0.7);
+filter:brightness(0.72);
+}
+}
+
 </style>
 </head>
 <body>
@@ -270,6 +580,148 @@ Explain why the strongest winds occur in the eye wall rather than in the eye.
 <textarea placeholder="Write your answer here..."></textarea>
 
 </div>
+
+<!-- ==================================================== -->
+<!-- FINAL MISSION — Build and Steer a Tropical Storm      -->
+<!-- Appears only once the diagram above scores 9/9        -->
+<!-- ==================================================== -->
+
+<section id="finalMission" class="fm-wrap" hidden aria-labelledby="fmHeading">
+
+<h2 id="fmHeading">&#127754; Final Mission: Build and Steer a Tropical Storm</h2>
+
+<p class="fm-intro">
+Enter the six environmental conditions needed for a tropical storm to form.
+When all six conditions are suitable, the storm will develop in the east
+and travel westwards across the tropical ocean.
+</p>
+
+<div class="fm-scoreboard" aria-label="Final Mission scoreboard">
+
+<div class="fm-score-chip">
+Conditions score: <strong id="fmConditionsScore">0 / 6</strong>
+</div>
+
+<div class="fm-score-chip">
+Attempts: <strong id="fmAttempts">0</strong>
+</div>
+
+<div class="fm-score-chip">
+Overall game score: <strong id="fmTotalScore">9 / 15</strong>
+</div>
+
+</div>
+
+<div
+class="fm-progress"
+id="fmProgress"
+role="progressbar"
+aria-label="Conditions mission progress"
+aria-valuemin="0"
+aria-valuemax="6"
+aria-valuenow="0"
+>
+<span id="fmProgressFill"></span>
+</div>
+
+<p class="fm-intensity" id="fmIntensity" role="status" aria-live="polite">
+Storm status: No organised storm
+</p>
+
+<form id="fmForm" novalidate>
+
+<div class="fm-fields">
+
+<div class="fm-field">
+<label for="fmSeaTemp">Sea temperature in &deg;C</label>
+<input id="fmSeaTemp" type="number" inputmode="decimal" step="0.1" aria-describedby="fmSeaTempHelp fmSeaTempFeedback">
+<span class="fm-help" id="fmSeaTempHelp">Enter the minimum suitable ocean temperature.</span>
+<span class="fm-feedback" id="fmSeaTempFeedback" aria-live="polite"></span>
+</div>
+
+<div class="fm-field">
+<label for="fmLatitude">Latitude from the Equator in degrees</label>
+<input id="fmLatitude" type="number" inputmode="numeric" min="0" max="90" aria-describedby="fmLatitudeHelp fmLatitudeFeedback">
+<span class="fm-help" id="fmLatitudeHelp">Enter a suitable tropical latitude.</span>
+<span class="fm-feedback" id="fmLatitudeFeedback" aria-live="polite"></span>
+</div>
+
+<div class="fm-field">
+<label for="fmWarmDepth">Depth of warm ocean water in metres</label>
+<input id="fmWarmDepth" type="number" inputmode="numeric" min="0" aria-describedby="fmWarmDepthHelp fmWarmDepthFeedback">
+<span class="fm-help" id="fmWarmDepthHelp">Warm water must extend below the surface.</span>
+<span class="fm-feedback" id="fmWarmDepthFeedback" aria-live="polite"></span>
+</div>
+
+<div class="fm-field">
+<label for="fmWindShear">Vertical wind shear in km/h</label>
+<input id="fmWindShear" type="number" inputmode="decimal" min="0" aria-describedby="fmWindShearHelp fmWindShearFeedback">
+<span class="fm-help" id="fmWindShearHelp">Enter a value that will not tear the storm apart.</span>
+<span class="fm-feedback" id="fmWindShearFeedback" aria-live="polite"></span>
+</div>
+
+<div class="fm-field">
+<label for="fmAirMoisture">Mid-level air condition</label>
+<input id="fmAirMoisture" type="text" autocomplete="off" aria-describedby="fmAirMoistureHelp fmAirMoistureFeedback">
+<span class="fm-help" id="fmAirMoistureHelp">Type one or two words describing the air.</span>
+<span class="fm-feedback" id="fmAirMoistureFeedback" aria-live="polite"></span>
+</div>
+
+<div class="fm-field">
+<label for="fmDisturbance">Starting weather feature</label>
+<input id="fmDisturbance" type="text" autocomplete="off" aria-describedby="fmDisturbanceHelp fmDisturbanceFeedback">
+<span class="fm-help" id="fmDisturbanceHelp">Type the near-surface feature needed at the start.</span>
+<span class="fm-feedback" id="fmDisturbanceFeedback" aria-live="polite"></span>
+</div>
+
+</div>
+
+<div class="fm-controls">
+
+<button class="fm-launch" type="submit">
+Test conditions and launch storm
+</button>
+
+<button class="fm-reset" type="button" id="fmResetButton">
+Reset mission
+</button>
+
+</div>
+
+</form>
+
+<div class="fm-ocean-track" aria-label="A tropical ocean route running from east to west">
+
+<div class="fm-sky-label">Tropical easterly trade winds</div>
+
+<div class="fm-west">WEST</div>
+<div class="fm-east">EAST</div>
+
+<div class="fm-trade-winds" aria-hidden="true">&larr; &larr; &larr; &larr; &larr; &larr;</div>
+
+<div class="fm-island" aria-hidden="true"></div>
+
+<div class="fm-storm" id="fmStorm" aria-hidden="true"></div>
+
+</div>
+
+<p class="fm-track-message" id="fmTrackMessage" role="status" aria-live="assertive">
+The storm is waiting in the east.
+</p>
+
+<div class="fm-summary" id="fmSummary" tabindex="-1">
+
+<strong>&#127942; Mission Complete: Conditions Score 6/6, Overall Score 15/15</strong>
+
+You successfully created and steered a tropical storm.
+The storm moved westward due to the tropical easterly trade winds.
+The storm weakened over land because it lost access to warm ocean water.
+
+</div>
+
+<div class="sr-only" id="fmLiveRegion" role="status" aria-live="assertive" aria-atomic="true"></div>
+
+</section>
 
 <script>
 
@@ -391,9 +843,398 @@ document.getElementById("result")
 document.getElementById("challenge")
 .style.display="block";
 
+revealFinalMission();
+
 }
 
 }
+
+/* ==================================================== */
+/* FINAL MISSION — Build and Steer a Tropical Storm      */
+/* ==================================================== */
+
+const fmForm =
+document.getElementById("fmForm");
+
+const fmStorm =
+document.getElementById("fmStorm");
+
+const fmTrackMessage =
+document.getElementById("fmTrackMessage");
+
+const fmSummary =
+document.getElementById("fmSummary");
+
+const fmConditionsScore =
+document.getElementById("fmConditionsScore");
+
+const fmAttemptsDisplay =
+document.getElementById("fmAttempts");
+
+const fmTotalScore =
+document.getElementById("fmTotalScore");
+
+const fmProgress =
+document.getElementById("fmProgress");
+
+const fmProgressFill =
+document.getElementById("fmProgressFill");
+
+const fmIntensity =
+document.getElementById("fmIntensity");
+
+const fmLiveRegion =
+document.getElementById("fmLiveRegion");
+
+const CROSS_SECTION_SCORE = 9;
+
+let fmAttempts = 0;
+let fmRevealed = false;
+
+
+/* REVEAL THE MISSION (called once the diagram scores 9/9) */
+
+function revealFinalMission(){
+
+if(fmRevealed) return;
+
+fmRevealed = true;
+
+const mission =
+document.getElementById("finalMission");
+
+mission.hidden = false;
+
+fmUpdateScore(0);
+
+mission.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+
+/* SCREEN-READER ANNOUNCEMENT */
+
+function fmAnnounce(message){
+
+fmLiveRegion.textContent = "";
+
+window.setTimeout(() => {
+fmLiveRegion.textContent = message;
+}, 25);
+
+}
+
+
+/* NORMALISE TEXT ANSWERS */
+
+function fmNormaliseText(value){
+
+return value
+.trim()
+.toLowerCase()
+.replace(/[^a-z\s-]/g, "");
+
+}
+
+
+/* DISPLAY FIELD FEEDBACK */
+
+function fmSetFieldResult(id, isValid, message){
+
+const input =
+document.getElementById(id);
+
+const feedback =
+document.getElementById(id + "Feedback");
+
+input.setAttribute(
+"aria-invalid",
+String(!isValid)
+);
+
+input.classList.toggle(
+"fm-valid",
+isValid
+);
+
+feedback.className =
+"fm-feedback " +
+(isValid ? "fm-good" : "fm-bad");
+
+feedback.textContent =
+(isValid ? "✅ Correct. " : "❌ Try again. ") +
+message;
+
+}
+
+
+/* UPDATE SCOREBOARD */
+
+function fmUpdateScore(score){
+
+fmConditionsScore.textContent =
+`${score} / 6`;
+
+fmAttemptsDisplay.textContent =
+String(fmAttempts);
+
+fmTotalScore.textContent =
+`${CROSS_SECTION_SCORE + score} / 15`;
+
+fmProgress.setAttribute(
+"aria-valuenow",
+String(score)
+);
+
+fmProgressFill.style.width =
+`${(score / 6) * 100}%`;
+
+if(score <= 3){
+fmIntensity.textContent =
+"Storm status: No organised storm";
+}
+
+if(score === 4){
+fmIntensity.textContent =
+"Storm status: Tropical depression";
+}
+
+if(score === 5){
+fmIntensity.textContent =
+"Storm status: Tropical storm";
+}
+
+if(score === 6){
+fmIntensity.textContent =
+"Storm status: Hurricane formed";
+}
+
+}
+
+
+/* CHECK CONDITIONS */
+
+function fmValidateConditions(){
+
+const temperature =
+Number(
+document.getElementById("fmSeaTemp").value
+);
+
+const latitude =
+Number(
+document.getElementById("fmLatitude").value
+);
+
+const depth =
+Number(
+document.getElementById("fmWarmDepth").value
+);
+
+const shear =
+Number(
+document.getElementById("fmWindShear").value
+);
+
+const moisture =
+fmNormaliseText(
+document.getElementById("fmAirMoisture").value
+);
+
+const disturbance =
+fmNormaliseText(
+document.getElementById("fmDisturbance").value
+);
+
+const checks = {
+
+seaTemp:
+Number.isFinite(temperature) &&
+temperature >= 27,
+
+latitude:
+Number.isFinite(latitude) &&
+latitude >= 5 &&
+latitude <= 30,
+
+warmDepth:
+Number.isFinite(depth) &&
+depth >= 46,
+
+windShear:
+Number.isFinite(shear) &&
+shear >= 0 &&
+shear < 37,
+
+airMoisture:
+[
+"moist",
+"moist air",
+"humid",
+"humid air",
+"high humidity"
+].includes(moisture),
+
+disturbance:
+disturbance.includes("disturbance") ||
+disturbance.includes("low pressure") ||
+disturbance.includes("tropical wave")
+
+};
+
+
+fmSetFieldResult(
+"fmSeaTemp",
+checks.seaTemp,
+"Water not warm enough. The sea must be at least 27°C."
+);
+
+fmSetFieldResult(
+"fmLatitude",
+checks.latitude,
+"Too close to or too far from the Equator. Use a latitude between 5° and 30°."
+);
+
+fmSetFieldResult(
+"fmWarmDepth",
+checks.warmDepth,
+"Warm water layer too shallow. It should extend to at least 46 metres."
+);
+
+fmSetFieldResult(
+"fmWindShear",
+checks.windShear,
+"Wind shear too strong. It should be below 37 km/h."
+);
+
+fmSetFieldResult(
+"fmAirMoisture",
+checks.airMoisture,
+"The mid-level air should be moist or humid."
+);
+
+fmSetFieldResult(
+"fmDisturbance",
+checks.disturbance,
+"Enter disturbance, low pressure, or tropical wave."
+);
+
+
+const score =
+Object.values(checks)
+.filter(Boolean)
+.length;
+
+return {
+score: score,
+allCorrect: score === 6
+};
+
+}
+
+
+/* SUBMIT CONDITIONS */
+
+fmForm.addEventListener("submit", event => {
+
+event.preventDefault();
+
+fmAttempts++;
+
+fmStorm.classList.remove("run");
+
+fmSummary.style.display = "none";
+
+const result =
+fmValidateConditions();
+
+fmUpdateScore(result.score);
+
+
+if(!result.allCorrect){
+
+const remaining =
+6 - result.score;
+
+const message =
+`${result.score} of 6 conditions correct. ${remaining} condition${remaining === 1 ? "" : "s"} ` +
+`${remaining === 1 ? "still needs" : "still need"} adjusting. Check the feedback below and try again.`;
+
+fmTrackMessage.textContent = message;
+fmAnnounce(message);
+
+return;
+
+}
+
+
+fmTrackMessage.textContent =
+"All conditions met! The storm is forming and heading west...";
+
+fmAnnounce(
+"All six conditions correct. The storm is forming and heading west."
+);
+
+fmStorm.classList.add("run");
+
+window.setTimeout(() => {
+
+const landfallMessage =
+"The storm weakened after reaching land because it lost its source of warm ocean energy.";
+
+fmTrackMessage.textContent = landfallMessage;
+
+fmAnnounce(
+landfallMessage +
+" Mission complete. Conditions score 6 out of 6. Overall score 15 out of 15."
+);
+
+fmSummary.style.display = "block";
+fmSummary.focus();
+
+}, 6000);
+
+});
+
+
+/* RESET MISSION */
+
+document.getElementById("fmResetButton")
+.addEventListener("click", () => {
+
+fmForm.reset();
+
+document.querySelectorAll("#finalMission input")
+.forEach(input => {
+
+input.removeAttribute("aria-invalid");
+input.classList.remove("fm-valid");
+
+});
+
+document.querySelectorAll("#finalMission .fm-feedback")
+.forEach(feedback => {
+
+feedback.className = "fm-feedback";
+feedback.textContent = "";
+
+});
+
+fmAttempts = 0;
+
+fmStorm.classList.remove("run");
+
+fmSummary.style.display = "none";
+
+fmTrackMessage.textContent =
+"The storm is waiting in the east.";
+
+fmUpdateScore(0);
+
+});
 
 </script>
 
