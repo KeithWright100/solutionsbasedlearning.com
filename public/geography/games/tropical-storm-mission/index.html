@@ -1042,9 +1042,23 @@ window.removeEventListener("pointermove", onMove);
 window.removeEventListener("pointerup", onUp);
 window.removeEventListener("pointercancel", onUp);
 
-item.style.pointerEvents = "none";
-const under = document.elementFromPoint(ev.clientX, ev.clientY);
-item.style.pointerEvents = "";
+/* Find the drop zone by plain geometry (does the release point fall
+   inside its rectangle?) instead of asking the browser to hit-test the
+   DOM. Hit-testing methods (elementFromPoint/elementsFromPoint) depend
+   on the browser's current paint/style state, and on some real-world
+   Chromium/Edge builds that state wasn't reliably settled at the exact
+   moment we read it, so the drop silently missed the hotspot and the
+   label snapped back to the bank. A rectangle check has no such
+   dependency - it only needs each zone's current layout position. */
+const candidates = document.querySelectorAll(item.dataset.dropZoneSelector);
+let zone = null;
+for(const candidate of candidates){
+const r = candidate.getBoundingClientRect();
+if(ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom){
+zone = candidate;
+break;
+}
+}
 
 item.classList.remove("dragging");
 item.style.position = "";
@@ -1052,8 +1066,6 @@ item.style.left = "";
 item.style.top = "";
 item.style.width = "";
 item.style.zIndex = "";
-
-const zone = under ? under.closest(item.dataset.dropZoneSelector) : null;
 
 if(zone){
 
