@@ -989,6 +989,104 @@ document.getElementById("tracker")
 
 
 /* ==================================================== */
+/* SHARED DRAG-AND-DROP ENGINE (mouse + touch/iPad)       */
+/* ==================================================== */
+/* Uses Pointer Events instead of the HTML5 drag-and-drop
+   API, because iOS/iPadOS Safari never fires native
+   dragstart/dragover/drop for touch input. Pointer Events
+   work the same way for mouse, touch and pen, so one code
+   path now drives both missions on every device. */
+
+function makeItemDraggable(item, getHomeZone){
+
+item.style.touchAction = "none";
+
+item.addEventListener("pointerdown", e => {
+
+e.preventDefault();
+
+const startRect = item.getBoundingClientRect();
+const offsetX = e.clientX - startRect.left;
+const offsetY = e.clientY - startRect.top;
+const originParent = item.parentElement;
+
+/* hold the item's place while it's lifted out, so removing it from the
+   label bank (or a slot) can't reflow the layout underneath the drag -
+   on narrow/tablet widths the bank and the diagram can wrap onto
+   separate rows, and without this the whole diagram used to jump the
+   moment a label was picked up. */
+const itemStyle = getComputedStyle(item);
+const placeholder = document.createElement("div");
+placeholder.style.width = startRect.width + "px";
+placeholder.style.height = startRect.height + "px";
+placeholder.style.marginBottom = itemStyle.marginBottom;
+placeholder.style.visibility = "hidden";
+originParent.insertBefore(placeholder, item);
+
+item.classList.add("dragging");
+item.style.position = "fixed";
+item.style.left = startRect.left + "px";
+item.style.top = startRect.top + "px";
+item.style.width = startRect.width + "px";
+item.style.zIndex = 9999;
+document.body.appendChild(item);
+
+function onMove(ev){
+item.style.left = (ev.clientX - offsetX) + "px";
+item.style.top = (ev.clientY - offsetY) + "px";
+}
+
+function onUp(ev){
+
+window.removeEventListener("pointermove", onMove);
+window.removeEventListener("pointerup", onUp);
+window.removeEventListener("pointercancel", onUp);
+
+item.style.pointerEvents = "none";
+const under = document.elementFromPoint(ev.clientX, ev.clientY);
+item.style.pointerEvents = "";
+
+item.classList.remove("dragging");
+item.style.position = "";
+item.style.left = "";
+item.style.top = "";
+item.style.width = "";
+item.style.zIndex = "";
+
+const zone = under ? under.closest(item.dataset.dropZoneSelector) : null;
+
+if(zone){
+
+const isMulti = zone.matches(item.dataset.multiZoneSelector);
+
+if(!isMulti){
+const existing = zone.querySelector(item.dataset.itemSelector);
+if(existing && existing !== item){
+getHomeZone().appendChild(existing);
+}
+}
+
+zone.appendChild(item);
+placeholder.remove();
+
+}else{
+
+originParent.insertBefore(item, placeholder);
+placeholder.remove();
+
+}
+
+}
+
+window.addEventListener("pointermove", onMove);
+window.addEventListener("pointerup", onUp);
+window.addEventListener("pointercancel", onUp);
+
+});
+
+}
+
+/* ==================================================== */
 /* MISSION 1 — CROSS-SECTION CHALLENGE                    */
 /* ==================================================== */
 
@@ -1022,17 +1120,12 @@ const label =
 document.createElement("div");
 
 label.className = "m1-label";
-label.draggable = true;
 label.textContent = text;
+label.dataset.dropZoneSelector = "#mission1 .m1-hotspot,#m1-labelBank";
+label.dataset.multiZoneSelector = "#m1-labelBank";
+label.dataset.itemSelector = ".m1-label";
 
-label.addEventListener("dragstart", () => {
-window.dragged = label;
-label.classList.add("dragging");
-});
-
-label.addEventListener("dragend", () => {
-label.classList.remove("dragging");
-});
+makeItemDraggable(label, () => document.getElementById("m1-labelBank"));
 
 bank.appendChild(label);
 
@@ -1041,26 +1134,6 @@ bank.appendChild(label);
 }
 
 buildMission1Labels();
-
-document.querySelectorAll("#mission1 .m1-hotspot,#m1-labelBank")
-.forEach(zone => {
-
-zone.addEventListener("dragover", e => {
-e.preventDefault();
-});
-
-zone.addEventListener("drop", e => {
-
-e.preventDefault();
-
-if(window.dragged){
-zone.innerHTML = "";
-zone.appendChild(window.dragged);
-}
-
-});
-
-});
 
 function checkMission1(){
 
@@ -1182,37 +1255,18 @@ const card =
 document.createElement("div");
 
 card.className = "m2-card";
-card.draggable = true;
 card.textContent = stage;
+card.dataset.dropZoneSelector = "#mission2 .m2-slot,#m2-cards";
+card.dataset.multiZoneSelector = "#m2-cards";
+card.dataset.itemSelector = ".m2-card";
 
-card.addEventListener("dragstart", () => {
-window.dragged = card;
-});
+makeItemDraggable(card, () => document.getElementById("m2-cards"));
 
 cardsDiv.appendChild(card);
 
 });
 
 }
-
-document.querySelectorAll("#mission2 .m2-slot,#m2-cards")
-.forEach(area => {
-
-area.addEventListener("dragover", e => {
-e.preventDefault();
-});
-
-area.addEventListener("drop", e => {
-
-e.preventDefault();
-
-if(window.dragged){
-area.appendChild(window.dragged);
-}
-
-});
-
-});
 
 function checkMission2(){
 
