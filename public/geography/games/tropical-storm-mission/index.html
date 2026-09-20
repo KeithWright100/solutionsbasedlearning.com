@@ -174,12 +174,19 @@ margin-right:auto;
 /* MISSION 1 — CROSS-SECTION CHALLENGE                   */
 /* ==================================================== */
 
+#mission1.mission-section{ max-width:1340px; }
+
 #mission1 .m1-game-container{
 display:flex;
+flex-direction:row-reverse;
 gap:25px;
 justify-content:center;
 align-items:flex-start;
 flex-wrap:wrap;
+}
+
+@media (max-width:1300px){
+#mission1 .m1-game-container{ flex-direction:column; align-items:center; }
 }
 
 #mission1 .m1-panel{
