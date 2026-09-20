@@ -249,6 +249,30 @@ window.SBL_LESSONS.CP05 = {
       question: 'Outline what is meant by "fertility rate".',
       marks: 2,
       markScheme: 'The number of children/number of births per 1000 women [1] a woman gives birth to during her lifetime/fertile years/reproductive age/below 50 [1].'
+    },
+    {
+      question: 'The graph shows the actual and projected population trends in Japan, from 1880 to 2100. Describe the projected trends for the two dependent population groups (aged 0–14, and aged 65 and over) from 2020 to 2060.',
+      marks: 2,
+      markScheme: 'Award [1] for each valid descriptive statement. Needs separate reference to both elderly [1] and children [1] for maximum marks. Quantification is needed for [2]. Possibilities include: 65 and over — no change / the proportion increases (actual amount remains 34-36 million but the percentage of 65 and over increases); 0–14 — drops (from 14-16 million in 2020 to 7-9 million in 2060) / the proportion of the total population decreases.',
+      image: '/images/revision-ppq/population/2022-may-fig1.png',
+      imageAlt: 'Area graph showing Japan’s actual and projected total population, 1880 to 2100, split into three age bands (0–14, 15–64, 65 and over), with a line marking 2020 where the projection begins'
+    },
+    {
+      question: 'Refer again to the Japan population graph. Suggest two potential socio-economic problems that could result from the projected population trend.',
+      marks: 4,
+      markScheme: 'Allow [1] for a valid problem and [1] for development or exemplification, for each of two problems. Possibilities include: declining population and the resulting economic implications, such as a reduced workforce, decreased tax revenue, shortage of qualified workers, declining productivity, high labour costs, a smaller tax base; declining population and social implications, such as social consequences of immigration caused by shortage of workers; increased dependency ratio/ageing population — increased expenditure to care for an ageing population due to pensions, health care; decreasing number of children — may lead to closure of schools, unemployment in the education sector. For example: An ageing population [1] would need more money to be spent on pensions [1], which would take a larger proportion of a nation’s GDP [1], as seen in the UK [1].',
+      image: '/images/revision-ppq/population/2022-may-fig1.png',
+      imageAlt: 'Area graph showing Japan’s actual and projected total population, 1880 to 2100, split into three age bands (0–14, 15–64, 65 and over), with a line marking 2020 where the projection begins'
+    },
+    {
+      question: 'Explain two physical reasons why some areas have a low population density.',
+      marks: 4,
+      markScheme: 'Identification of a valid physical reason [1] and further development of how it has led to a low population density [1], for each of two reasons. For example: Mountainous areas frequently have low population densities [1] as the terrain is rugged and steep and agriculture is difficult to practice, and accessibility is poor [1]. Possibilities include: Extreme climate — too cold (e.g. Antarctica) or too hot (e.g. Sahara Desert) — problems of agricultural production/human survival; Vegetation — dense vegetation (e.g. Amazon Rainforest) — difficult accessibility; Water supply — low/unpredictable — difficulty with agriculture/limited water to drink; Poor soils — thin and unproductive — cannot produce crops or raise livestock; Resources — few resources e.g. minerals — lack of opportunity for economic development; Frequent natural hazards — high risk of death/injury; Disease — high incidence of vector-borne diseases e.g. malaria — avoided to cut down risk of illness; Remote/inaccessible location.'
+    },
+    {
+      question: 'Explain one cultural reason and one economic reason why fertility rates are decreasing.',
+      marks: 4,
+      markScheme: 'In each case, award [1] for a valid reason with [1] for further development linked to decreasing fertility rates. For example: There has been a decreasing influence of religion [1] — religious influence on birth control is no longer strong in western societies [1]. Cultural reasons may include: female empowerment/gender equality — females have careers/greater role in decisions that impact their lives; loosening of extended family ties; shifting attitudes towards life — younger people feel their sense of self can be complete without children; mass media influence; Westernization of culture in LICs/MICs; access to reproductive health services; increasing age of marriage; changing perceptions of parenting; concern for the environment — fewer children puts less pressure on the environment. Economic reasons may include: employment opportunities — the prospect of a career, women may have fewer children and marry later; the cost of having children — education and childcare costs; recession — people put off having children; development of a country’s economy — allows investment in education; lack of affordable housing; provision of pensions — lessens the need to have children to support old age; high cost of living.'
     }
   ],
   readinessQuestions: [
