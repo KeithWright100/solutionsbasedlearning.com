@@ -168,7 +168,6 @@
 }
 
 .lh-topics { margin: 0.15rem 0 0.4rem; padding-left: 0.5rem; }
-
 /* Topic titles are now interactive toggle buttons rather than
    plain text — reset default button styling to match the
    previous static look, then layer on interactive states. */
@@ -425,7 +424,6 @@
    below it to the same deep teal, so the whole page reads as one
    set rather than a light-bordered list under a dark banner. */
 .lh-unit-topics--dark .lh-unit-topic { border-color: var(--lh-teal-deep); }
-
 /* Stat chips */
 .lh-stats {
   display: grid;
@@ -533,7 +531,6 @@
 .lh-mode:has(.lh-bg-pink)   { border: 1.5px solid var(--lh-pink); }
 .lh-mode:has(.lh-bg-gold)   { border: 1.5px solid var(--lh-gold); }
 .lh-mode:has(.lh-bg-purple) { border: 1.5px solid var(--lh-purple); }
-
 .lh-c-indigo { color: var(--lh-indigo); } .lh-bg-indigo { background: var(--lh-indigo-bg); color: var(--lh-indigo); }
 .lh-c-green  { color: var(--lh-green);  } .lh-bg-green  { background: var(--lh-green-bg);  color: var(--lh-green); }
 .lh-c-blue   { color: var(--lh-blue);   } .lh-bg-blue   { background: var(--lh-blue-bg);   color: var(--lh-blue); }
@@ -560,7 +557,6 @@
 .lh-item-tag { display: inline-block; margin-left: 0.4rem; font-family: var(--lh-font-mono); font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.05rem 0.4rem; border-radius: 100px; }
 .lh-item-tag.case { color: var(--lh-blue); background: var(--lh-blue-bg); }
 .lh-item-tag.quiz { color: var(--lh-gold); background: var(--lh-gold-bg); }
-
 /* ---------------- Right rail ---------------- */
 .lh-rail { display: flex; flex-direction: column; gap: 1.1rem; }
 .lh-panel {
@@ -627,7 +623,6 @@
    "coming soon" elsewhere on the site (.lh-mode--locked). */
 .lh-resources li.is-empty { opacity: 0.6; }
 .lh-resources__status { font-size: 0.72rem; color: var(--lh-muted); margin-left: auto; }
-
 .lh-tutor {
   background: var(--lh-blue-bg);
   border-radius: 12px;
