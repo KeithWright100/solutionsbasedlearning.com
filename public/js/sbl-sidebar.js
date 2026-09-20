@@ -98,8 +98,6 @@
             ]
           }
         ]
-          }
-        ]
       },
       {
         "slug": "option-e",
@@ -121,7 +119,6 @@
               {
                 "label": "What factors affect participation in sport and tourism?",
                 "href": "/geography/paper-1/option-e/t1-changing/l3-what-factors"
-
               }
             ]
           },
@@ -147,7 +144,6 @@
               {
                 "label": "A case study of a festival in a rural location: Glastonbury",
                 "href": "/geography/paper-1/option-e/t2-tourism-and/l5-a-case-study-of"
-
               }
             ]
           },
@@ -173,7 +169,6 @@
               {
                 "label": "Case study of a country hosting an international event: Rio Olympics 2016",
                 "href": "/geography/paper-1/option-e/t3-tourism-and/l5-case-study-of-a"
-
               }
             ]
           },
@@ -195,7 +190,6 @@
               {
                 "label": "Political and cultural influences on international sport participation",
                 "href": "/geography/paper-1/option-e/t4-managing/l4-political-and"
-
               }
             ]
           }
@@ -225,7 +219,6 @@
               {
                 "label": "The epidemiological transition model",
                 "href": "/geography/paper-1/option-f/t1-measuring-food/l4-the"
-
               }
             ]
           },
@@ -245,13 +238,12 @@
                 "href": "/geography/paper-1/option-f/t2-food-systems/l3-the-role-of"
               },
               {
-                "label": "Malaria in Kenya — a vector-borne disease case study",
+                "label": "Malaria in Kenya \u2014 a vector-borne disease case study",
                 "href": "/geography/paper-1/option-f/t2-food-systems/l4-malaria-in"
               },
               {
-                "label": "Cholera — a water-borne disease case study",
+                "label": "Cholera \u2014 a water-borne disease case study",
                 "href": "/geography/paper-1/option-f/t2-food-systems/l5-cholera-a-water"
-
               }
             ]
           },
@@ -281,7 +273,6 @@
               {
                 "label": "Case study: Attempts to tackle food insecurity",
                 "href": "/geography/paper-1/option-f/t3-stakeholders-in/l6-case-study"
-
               }
             ]
           },
@@ -301,9 +292,8 @@
                 "href": "/geography/paper-1/option-f/t4-future-health/l3-prevention-and"
               },
               {
-                "label": "Managing pandemics — Case Study",
+                "label": "Managing pandemics \u2014 Case Study",
                 "href": "/geography/paper-1/option-f/t4-future-health/l4-managing"
-
               }
             ]
           }
@@ -318,8 +308,6 @@
         "slug": "core-1",
         "label": "Unit 1: Changing Population",
         "href": "/geography/paper-1/core-1",
-        "status": "available",
-        "topics": [
         "status": "available",
         "topics": [
           {
@@ -340,7 +328,6 @@
               {
                 "label": "Lesson 4: Case study \u2014 Two countries with uneven population distributions: Egypt and Thailand",
                 "href": "/geography/paper-1/core-1/t1-population-and/l4-lesson-4-case"
-
               }
             ]
           },
@@ -366,7 +353,6 @@
               {
                 "label": "Internal displacement in Haiti",
                 "href": "/geography/paper-1/core-1/t2-changing/l5-internal"
-
               }
             ]
           },
@@ -388,7 +374,6 @@
               {
                 "label": "The demographic dividend",
                 "href": "/geography/paper-1/core-1/t3-challenges-and/l4-the-demographic"
-
               }
             ]
           }
@@ -398,8 +383,6 @@
         "slug": "core-2",
         "label": "Unit 2: Global Climate",
         "href": "/geography/paper-1/core-2",
-        "status": "available",
-        "topics": [
         "status": "available",
         "topics": [
           {
@@ -416,7 +399,6 @@
               {
                 "label": "The enhanced greenhouse effect, development, globalization and trade",
                 "href": "/geography/paper-1/core-2/t1-causes-of/l3-the-enhanced"
-
               }
             ]
           },
@@ -442,7 +424,6 @@
               {
                 "label": "The impacts of climate change on people and places",
                 "href": "/geography/paper-1/core-2/t2-consequences-of/l5-the-impacts-of"
-
               }
             ]
           },
@@ -460,7 +441,6 @@
               {
                 "label": "Civil society and corporate strategy",
                 "href": "/geography/paper-1/core-2/t3-responding-to/l3-civil-society"
-
               }
             ]
           }
@@ -470,8 +450,6 @@
         "slug": "core-3",
         "label": "Unit 3: Resource Consumption and Security",
         "href": "/geography/paper-1/core-3",
-        "status": "available",
-        "topics": [
         "status": "available",
         "topics": [
           {
@@ -496,7 +474,6 @@
               {
                 "label": "Patterns and trends in the global availability and consumption of energy",
                 "href": "/geography/paper-1/core-3/t1-global-trends/l5-patterns-and"
-
               }
             ]
           },
@@ -522,7 +499,6 @@
               {
                 "label": "The disposal and recycling of consumer items",
                 "href": "/geography/paper-1/core-3/t2-impacts-of/l5-the-disposal"
-
               }
             ]
           },
@@ -540,7 +516,6 @@
               {
                 "label": "The value of the circular economy",
                 "href": "/geography/paper-1/core-3/t3-resource/l3-the-value-of"
-
               }
             ]
           }
@@ -557,8 +532,6 @@
         "href": "/geography/paper-2/hl-1",
         "status": "available",
         "topics": [
-        "status": "available",
-        "topics": [
           {
             "title": "1. Global interactions and global power",
             "lessons": [
@@ -573,7 +546,6 @@
               {
                 "label": "Powerful organizations and global groups",
                 "href": "/geography/paper-2/hl-1/t1-global/l3-powerful"
-
               }
             ]
           },
@@ -595,7 +567,6 @@
               {
                 "label": "Synthesis: Graphically representing flows and interactions",
                 "href": "/geography/paper-2/hl-1/t2-global-networks/l4-synthesis"
-
               }
             ]
           },
@@ -621,7 +592,6 @@
               {
                 "label": "The influence of the physical environment on global interactions",
                 "href": "/geography/paper-2/hl-1/t3-human-and/l5-the-influence"
-
               }
             ]
           }
@@ -631,8 +601,6 @@
         "slug": "hl-2",
         "label": "Unit 5: Human Development and Diversity",
         "href": "/geography/paper-2/hl-2",
-        "status": "available",
-        "topics": [
         "status": "available",
         "topics": [
           {
@@ -653,7 +621,6 @@
               {
                 "label": "TNCs and Corporate Social Responsibility",
                 "href": "/geography/paper-2/hl-2/t1-development/l4-tncs-and"
-
               }
             ]
           },
@@ -671,7 +638,6 @@
               {
                 "label": "How diasporas influence cultural diversity and identity \u2014 Chinatown in London",
                 "href": "/geography/paper-2/hl-2/t2-changing/l3-how-diasporas"
-
               }
             ]
           },
@@ -689,7 +655,6 @@
               {
                 "label": "The role of civil society in promoting international-mindedness",
                 "href": "/geography/paper-2/hl-2/t3-local-responses/l3-the-role-of"
-
               }
             ]
           }
@@ -699,8 +664,6 @@
         "slug": "hl-3",
         "label": "Unit 6: Global Risks and Resilience",
         "href": "/geography/paper-2/hl-3",
-        "status": "available",
-        "topics": [
         "status": "available",
         "topics": [
           {
@@ -717,7 +680,6 @@
               {
                 "label": "The link between globalization and increased nationalism",
                 "href": "/geography/paper-2/hl-3/t1-geopolitical/l3-the-link"
-
               }
             ]
           },
@@ -735,7 +697,6 @@
               {
                 "label": "Environmental issues linked with global shift of industry",
                 "href": "/geography/paper-2/hl-3/t2-environmental/l3-environmental"
-
               }
             ]
           },
@@ -749,7 +710,6 @@
               {
                 "label": "Strategies to build resilience",
                 "href": "/geography/paper-2/hl-3/t3-local-and/l2-strategies-to"
-
               }
             ]
           }
@@ -759,9 +719,6 @@
   },
   {
     "section": "Fieldwork",
-    "units": [
-      {
-        "slug": "paper-3",
     "units": [
       {
         "slug": "paper-3",
@@ -831,9 +788,9 @@
     html += '<span class="lh-sidebar__brand-text"><span class="name">IB Geography</span><span class="sub">Learning Hub</span></span>';
     html += "</div>";
 
-    html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Home Page</span></a>';
-    html += '<a class="lh-sidebar__home" href="/geography">' + icon("home") + "<span>Geography overview</span></a>';
-    html += '<a class="lh-sidebar__home" href="/geography/revision">' + icon("book") + "<span>Revision</span></a>';
+    html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Home Page</span></a>";
+    html += '<a class="lh-sidebar__home" href="/geography">' + icon("home") + "<span>Geography overview</span></a>";
+    html += '<a class="lh-sidebar__home" href="/geography/revision">' + icon("book") + "<span>Revision</span></a>";
 
     TREE.forEach(function (group) {
       html += '<div class="lh-sidebar__section">';
@@ -845,6 +802,7 @@
     });
 
     mount.innerHTML = html;
+
     /* Wire up topic-title toggle buttons: clicking expands/collapses
        that topic's lesson list. Several topics can be open at once. */
     mount.querySelectorAll(".lh-topic__title").forEach(function (btn) {
