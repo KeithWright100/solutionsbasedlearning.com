@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+<style>
+  /* The Approved Users table gained Role + Teacher (+ Group) columns
+     on top of its original six — wider than comfortably fits at
+     normal window widths, so scroll horizontally unconditionally
+     rather than relying on .sbl-table's mobile-only overflow rule. */
+  .sbl-approved-scroll { overflow-x: auto; }
+  .sbl-approved-table { min-width: 1280px; }
+  .sbl-role-select,
+  .sbl-teacher-select {
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.35rem 1.6rem 0.35rem 0.55rem; font-size: 0.78rem;
+    font-family: inherit; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%237C93A3'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%237C93A3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 0.5rem center;
+  }
+  .sbl-role-select:disabled, .sbl-teacher-select:disabled { opacity: 0.5; }
+  .sbl-group-input {
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.35rem 0.55rem; font-size: 0.78rem;
+    font-family: inherit; width: 9.5rem;
+  }
+  .sbl-group-input::placeholder { color: var(--navy-line); }
+  .sbl-group-input:disabled { opacity: 0.5; }
+</style>
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-admin-shell">
+
+  <div class="sbl-admin-header">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Solutions Based Learning &middot; signed in as <span id="adminName">…</span></p>
+    </div>
+    <div style="display:flex; gap:0.6rem;">
+      <a href="/admin/resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Lesson Resources</a>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
+  <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.5rem;"></div>
+
+  <div class="sbl-tabs">
+    <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="approved">Approved Users <span class="sbl-tab__count" id="countApproved">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="rejected">Rejected Applications <span class="sbl-tab__count" id="countRejected">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="feedback">Feedback <span class="sbl-tab__count" id="countFeedback">0</span></button>
+  </div>
+
+  <section class="sbl-panel" id="panelPending">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Name</th><th>School</th><th>Email</th><th>Role</th><th>Submitted</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="pendingBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="pendingEmpty" style="display:none;">No pending applications right now.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelApproved" style="display:none;">
+    <div class="sbl-approved-scroll">
+      <table class="sbl-table sbl-approved-table">
+        <thead>
+          <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Teacher</th><th>Group</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="approvedBody"></tbody>
+      </table>
+    </div>
+    <div class="sbl-empty-state" id="approvedEmpty" style="display:none;">No approved users yet.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelRejected" style="display:none;">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Applicant Name</th><th>Email</th><th>Date Rejected</th></tr>
+      </thead>
+      <tbody id="rejectedBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="rejectedEmpty" style="display:none;">No rejected applications.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelFeedback" style="display:none;">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Submitted</th><th>Overall</th><th>Supports Learning</th><th>Most Effective</th><th>Suggestion</th><th>Status</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="feedbackBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="feedbackEmpty" style="display:none;">No feedback submitted yet.</div>
+  </section>
+
+</div>
+
+<div class="sbl-modal-backdrop" id="viewModalBackdrop">
+  <div class="sbl-modal">
+    <h2>Application details</h2>
+    <dl id="viewModalBody"></dl>
+    <div class="sbl-auth-actions" style="margin-top:1.75rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary" id="closeModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="sbl-modal-backdrop" id="feedbackModalBackdrop">
+  <div class="sbl-modal">
+    <h2>Feedback details</h2>
+    <dl id="feedbackModalBody"></dl>
+    <div class="sbl-auth-actions" style="margin-top:1.75rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary" id="closeFeedbackModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/sbl-admin.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

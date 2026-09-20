@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examination Tips &amp; Advice — IGCSE Geography — SBL</title>
+<meta name="description" content="How to read command words, manage your time, and structure full-mark answers for IGCSE Geography, including the extended 8-mark question.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<style>
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .igcse-hero-banner--cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 2.2rem 0 0;
+    padding: 24px 30px;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
+
+  .tips-card { background: var(--lh-surface); border: 1px solid #02a7aa; border-radius: 14px; padding: 1.6rem 1.8rem; margin-bottom: 1.4rem; }
+  .tips-card h2 { font-family: var(--lh-font-display); font-weight: 700; font-size: 1.2rem; margin: 0 0 0.8rem; color: var(--lh-ink); }
+  .tips-card h3 { font-family: var(--lh-font-display); font-weight: 600; font-size: 0.98rem; margin: 1.1rem 0 0.4rem; color: var(--lh-ink); }
+  .tips-card p { color: var(--lh-body); line-height: 1.65; margin: 0 0 0.8rem; }
+  .tips-card ul, .tips-card ol { color: var(--lh-body); line-height: 1.65; margin: 0 0 0.8rem; padding-left: 1.3rem; }
+  .tips-card li { margin-bottom: 0.35rem; }
+  .tips-card table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1rem; font-size: 0.86rem; }
+  .tips-card th, .tips-card td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--lh-border); vertical-align: top; }
+  .tips-card th { font-family: var(--lh-font-mono); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--lh-muted); }
+  .tips-checklist { list-style: none; padding: 0; margin: 0; }
+  .tips-checklist li { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.5rem 0; border-bottom: 1px dashed var(--lh-border); }
+  .tips-checklist li:last-child { border-bottom: none; }
+  .tips-checklist li::before { content: "\2713"; color: var(--lh-green); font-weight: 700; flex-shrink: 0; }
+
+  .exam-tips-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .exam-tips-banner {
+    border-radius: 18px;
+    padding: 22px 24px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 20px 46px rgba(0, 28, 52, 0.22);
+    color: #ffffff;
+  }
+  .exam-tips-banner h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .igcse-hero-banner:not(.igcse-hero-banner--cta),
+  .exam-tips-banner {
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .exam-tips-banner-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    align-items: stretch;
+    margin-bottom: 1.8rem;
+  }
+  .exam-tips-banner-row > * { margin-bottom: 0; }
+  .exam-tips-banner-row .igcse-hero-banner--cta {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .exam-tips-banner-row .igcse-hero-banner--cta .igcse-hero-btn {
+    margin-top: 16px;
+  }
+  @media (max-width: 1160px) {
+    .exam-tips-banner-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+    .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ---------------- Two-column layout: tips content + Socratic bot rail ---------------- */
+  .exam-tips-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  .exam-tips-layout > .exam-tips-banner-row { grid-column: 1 / -1; }
+  @media (max-width: 1560px) {
+    .exam-tips-layout { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* ---------------- Socratic fieldwork-planning bots, side by side by paper ---------------- */
+  .socratic-papers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .socratic-papers-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  .socratic-paper-label {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #0392a2;
+    margin: 0 0 0.6rem;
+  }
+  .socratic-card {
+    position: relative;
+    background: var(--lh-surface);
+    border: 1px solid #02a7aa;
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+  }
+  .socratic-paper-col > .socratic-card:first-child {
+    position: sticky;
+    top: 1.75rem;
+  }
+  .ppq-answer-card { margin-top: 1.75rem; }
+  .socratic-card h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin: 0 0 0.5rem;
+    color: var(--lh-ink);
+  }
+  .socratic-card > p.socratic-intro {
+    color: var(--lh-body);
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin: 0 0 0.9rem;
+  }
+  .socratic-question {
+    background: var(--lh-bg);
+    border: 1px solid var(--lh-border);
+    border-radius: 10px;
+    padding: 0.85rem 0.95rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--lh-body);
+    margin-bottom: 1rem;
+  }
+  .socratic-start-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    color: #ffffff;
+    font-family: var(--lh-font-body);
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(0, 184, 176, 0.28);
+  }
+  .socratic-start-btn:disabled { opacity: 0.6; cursor: default; }
+  .socratic-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: 360px;
+    overflow-y: auto;
+    margin-bottom: 0.9rem;
+    padding-right: 2px;
+  }
+  .socratic-msg {
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    max-width: 92%;
+    white-space: pre-wrap;
+  }
+  .socratic-msg--bot { background: var(--lh-teal-bg); color: var(--lh-ink); align-self: flex-start; }
+  .socratic-msg--student { background: var(--lh-green-bg); color: var(--lh-ink); align-self: flex-end; }
+  .socratic-input-row { display: flex; gap: 0.5rem; }
+  .socratic-input-row textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 44px;
+    max-height: 120px;
+    font-family: inherit;
+    font-size: 0.84rem;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--lh-border);
+    border-radius: 8px;
+  }
+  .socratic-send-btn {
+    flex-shrink: 0;
+    border: none;
+    border-radius: 8px;
+    padding: 0 1rem;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.84rem;
+    cursor: pointer;
+  }
+  .socratic-send-btn:disabled { opacity: 0.5; cursor: default; }
+  .socratic-status { font-size: 0.76rem; color: var(--lh-muted); margin-top: 0.6rem; min-height: 1em; }
+  .socratic-status--error { color: #C0392B; }
+
+  /* ---------------- Full page view for the Socratic bots + PPQ marking card ---------------- */
+  .card-expand-btn {
+    position: absolute;
+    top: 0.9rem;
+    right: 0.95rem;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #02a7aa;
+    border-radius: 8px;
+    background: var(--lh-surface);
+    color: #0392a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    z-index: 5;
+    transition: background 0.2s ease;
+  }
+  .card-expand-btn:hover { background: var(--lh-teal-bg); }
+  .card-expand-btn svg { width: 16px; height: 16px; }
+
+  .card-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    z-index: 3000;
+    border-radius: 0 !important;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 2.2rem 2.4rem 3rem !important;
+  }
+  body.card-fullscreen-open { overflow: hidden; }
+  .card-fullscreen .card-expand-btn { top: 1.4rem; right: 1.6rem; }
+  .card-fullscreen .socratic-chat { max-height: calc(100vh - 320px); }
+  .card-fullscreen .ppq-answer-textarea { min-height: calc(100vh - 380px); }
+  @media (max-width: 640px) {
+    .card-fullscreen { padding: 1.2rem 1.2rem 2rem !important; }
+  }
+
+  /* ---------------- Full-answer PPQ (write-up + marking) ---------------- */
+  .ppq-answer-card h2 { font-family: var(--lh-font-display); font-weight: 700; font-size: 1.02rem; margin: 0 0 0.5rem; color: var(--lh-ink); }
+  .ppq-answer-card > p.socratic-intro { color: var(--lh-body); font-size: 0.84rem; line-height: 1.55; margin: 0 0 0.9rem; }
+  .ppq-answer-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 180px;
+    font-family: inherit;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--lh-border);
+    border-radius: 8px;
+    margin-bottom: 0.9rem;
+  }
+  .ppq-answer-card .socratic-status { margin-bottom: 0; }
+  .ppq-feedback { margin-top: 1.1rem; font-size: 0.84rem; line-height: 1.55; color: var(--lh-body); }
+  .ppq-feedback .ppq-mark {
+    display: inline-block;
+    background: var(--lh-teal-bg);
+    color: var(--lh-ink);
+    font-family: var(--lh-font-display);
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+  }
+  .ppq-feedback h3 { font-family: var(--lh-font-display); font-weight: 700; font-size: 0.8rem; margin: 0.9rem 0 0.3rem; color: var(--lh-ink); }
+  .ppq-feedback p { margin: 0; }
+  .ppq-feedback .ppq-retry-btn {
+    margin-top: 1rem;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    background: var(--lh-surface);
+    border: 1px solid #02a7aa;
+    color: var(--lh-ink);
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body class="lh">
+<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/">SBL</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/igcse/menu">IGCSE Subject Menu</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Geography</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
+      <main>
+      <div class="exam-tips-layout">
+        <div class="exam-tips-banner-row">
+        <section class="igcse-hero-banner" aria-label="IGCSE Geography Examination Tips and Advice">
+          <span class="igcse-hero-kicker">IGCSE Geography</span>
+          <h1>Examination Tips &amp; Advice</h1>
+          <p>How to read command words, manage your time, and structure answers that pick up every mark on offer &mdash; from one-mark definitions to the extended 8-mark question.</p>
+        </section>
+        <div class="exam-tips-banner">
+          <span class="igcse-hero-kicker">Extended answers</span>
+          <h2>Develop your ability to answer 6, 8 and 12 mark exam questions</h2>
+        </div>
+        </div>
+
+        <div>
+        <div class="tips-card">
+          <h2>1. Know your command words</h2>
+          <p>Every question is built around a command word. It tells you exactly what the examiner wants &mdash; get this wrong and you can write a page and still score low marks.</p>
+          <table>
+            <tr><th>Command word</th><th>What it wants</th></tr>
+            <tr><td>State / Identify</td><td>A short, precise fact. No explanation needed &mdash; and none rewarded.</td></tr>
+            <tr><td>Define</td><td>A clear, accurate meaning of a geographical term.</td></tr>
+            <tr><td>Describe</td><td>What a graph, map or photo shows. Use data and direction of change (e.g. &ldquo;rose from 12&deg;C to 19&deg;C between June and August&rdquo;). No reasons yet.</td></tr>
+            <tr><td>Explain / Suggest reasons for</td><td>The <em>why</em>. Give a cause, then say how it leads to the effect &mdash; a chain of reasoning, not just a description.</td></tr>
+            <tr><td>Compare</td><td>Similarities <em>and</em> differences, using linking words like &ldquo;whereas&rdquo; or &ldquo;in contrast&rdquo;. Never describe the two things separately.</td></tr>
+            <tr><td>Assess / Evaluate / To what extent</td><td>Weigh up more than one side (e.g. costs vs benefits, or how far you agree) and reach a justified conclusion. This is where the extended-writing marks live.</td></tr>
+            <tr><td>Using Figure/Photo X&hellip;</td><td>You must refer directly to that resource &mdash; quote data, name features, or describe what is visible.</td></tr>
+          </table>
+        </div>
+
+        <div class="tips-card">
+          <h2>2. Manage your time by the mark</h2>
+          <p>Work on roughly <strong>one minute per mark</strong>, plus a couple of minutes spare to check your answers at the end. If a question is worth 2 marks, two short points is enough &mdash; don&rsquo;t write four sentences on it and run out of time for the 8-mark question later in the paper.</p>
+          <ul>
+            <li>Skim the whole paper first and note the marks for each question.</li>
+            <li>Spend the most time on the extended-writing question (usually 6&ndash;8 marks) &mdash; it&rsquo;s where structure and depth are rewarded most.</li>
+            <li>For a &ldquo;State two&hellip;&rdquo; or &ldquo;Give one reason&hellip;&rdquo; question, stop once you&rsquo;ve given that many points &mdash; extra points beyond what&rsquo;s asked don&rsquo;t earn extra marks and cost you time.</li>
+          </ul>
+        </div>
+
+        <div class="tips-card">
+          <h2>3. Structuring your answers</h2>
+          <h3>Short-answer and data-response questions</h3>
+          <p>Match your answer length to the marks. For a describe question using a graph or map: state the overall trend, then quote specific data or a named location to back it up.</p>
+          <h3>The extended (6&ndash;8 mark) question</h3>
+          <p>Use a Point &rarr; Evidence &rarr; Explain &rarr; Link (PEEL) structure for each paragraph, and always finish with a conclusion that directly answers the question:</p>
+          <ul>
+            <li><strong>Point</strong> &mdash; make one clear point that answers the question.</li>
+            <li><strong>Evidence</strong> &mdash; support it with a named example, place, or data from the resource booklet.</li>
+            <li><strong>Explain</strong> &mdash; say how or why this supports your point (the geographical reasoning).</li>
+            <li><strong>Link</strong> &mdash; tie it back to the question, especially the command word (e.g. &ldquo;this is why the benefits outweigh the costs&hellip;&rdquo;).</li>
+          </ul>
+          <p>If the question says <strong>&ldquo;with reference to a named example&rdquo;</strong> or <strong>&ldquo;case study&rdquo;</strong>, you must name a real place &mdash; a generic, unnamed answer is capped well below full marks even if everything else is correct.</p>
+        </div>
+
+        <div class="tips-card">
+          <h2>4. Answering 6, 8 and 12 mark questions</h2>
+          <p>These are the marks that separate a good grade from a great one. Each length of question rewards a slightly different balance of skills &mdash; here&rsquo;s how to approach each one.</p>
+
+          <h3>6-mark questions (usually &ldquo;Assess&rdquo;)</h3>
+          <p>Assess means weighing up importance, effectiveness or relevance and reaching a judgement &mdash; not just listing facts.</p>
+          <ul>
+            <li>Open with a one-sentence thesis: your overall judgement on the question.</li>
+            <li>Cover <strong>2&ndash;3 points in depth</strong> rather than many points superficially &mdash; each with a named example and an explanation of how it supports your judgement.</li>
+            <li>Briefly acknowledge a counterargument or limitation &mdash; this shows a more nuanced answer than a one-sided list.</li>
+            <li>Finish with a short conclusion that restates your overall position.</li>
+          </ul>
+
+          <h3>8-mark questions (analysis + using a resource)</h3>
+          <p>These questions usually split into two halves: <strong>AO3</strong> (analysis and application, 4 marks) and <strong>AO4</strong> (using a figure or resource, 4 marks) &mdash; both need equal attention.</p>
+          <ul>
+            <li>Plan 2&ndash;3 points across both halves before you start writing.</li>
+            <li>For AO3: state your point, then explain how it applies to the question using your geographical knowledge.</li>
+            <li>For AO4: refer <strong>directly</strong> to the figure or resource given &mdash; quote data or named features, then link what it shows back to the question. Comparing data within the resource can add depth.</li>
+            <li>Conclude by briefly synthesising how your AO3 points and AO4 evidence together answer the question.</li>
+          </ul>
+
+          <h3>12-mark questions (the full extended essay)</h3>
+          <p>The longest answers on the paper, marked against a levels-based mark scheme across <strong>AO2</strong> (application), <strong>AO3</strong> (analysis and evaluation) and <strong>AO4</strong> (using geographical data/skills).</p>
+          <ul>
+            <li>Introduce the topic and outline the main points you&rsquo;ll cover &mdash; this shows the examiner you understand the full scope of the question.</li>
+            <li>Give each body paragraph one clear focus &mdash; a different aspect, case study or counter-argument &mdash; always linking back to the question, not just describing.</li>
+            <li>Weave in data, maps or statistics (AO4) as evidence, not as a separate add-on.</li>
+            <li><strong>Evaluate, don&rsquo;t just describe</strong>: weigh strengths against weaknesses or compare perspectives throughout, not only in the conclusion.</li>
+            <li>End with a conclusion that draws your points together and gives a clear, reasoned judgement on the question.</li>
+          </ul>
+        </div>
+
+        <div class="tips-card">
+          <h2>5. Common mistakes to avoid</h2>
+          <ul>
+            <li>Describing a resource instead of explaining it (or the reverse) &mdash; always check the command word before you start writing.</li>
+            <li>Forgetting to name a place, case study or example when the question asks for one.</li>
+            <li>Writing everything you know about a topic instead of directly answering the question asked.</li>
+            <li>Ignoring the resource booklet &mdash; many marks are only available if you use the map, graph, or photo you&rsquo;ve been given.</li>
+            <li>Ending an extended answer without a conclusion that clearly answers &ldquo;to what extent&rdquo; or weighs up the question.</li>
+          </ul>
+        </div>
+
+        <div class="tips-card">
+          <h2>6. Final checklist before you submit</h2>
+          <ul class="tips-checklist">
+            <li>I&rsquo;ve answered the command word, not just the topic.</li>
+            <li>I&rsquo;ve used data or named examples wherever the question needs them.</li>
+            <li>My time matched the marks available for each question.</li>
+            <li>My extended answer has a clear structure and a conclusion.</li>
+            <li>I&rsquo;ve checked I haven&rsquo;t missed a question or part-question.</li>
+          </ul>
+        </div>
+        </div>
+
+        <aside aria-label="Fieldwork enquiry planning and marking">
+        <div class="socratic-papers-grid">
+
+        <div class="socratic-paper-col">
+        <p class="socratic-paper-label">Paper 1 &mdash; Coast</p>
+        <div class="socratic-card">
+          <button type="button" class="card-expand-btn" title="Full page view" aria-label="Full page view" onclick="toggleCardFullscreen(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
+          <h2>Plan your fieldwork answer</h2>
+          <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
+          <div class="socratic-question"><strong>(e)</strong> You have studied a coastal environment as part of your own geographical enquiry. Evaluate how effective your site selection and sampling strategies were in helping you answer your enquiry title. <strong>(8)</strong></div>
+
+          <div id="socraticChat" class="socratic-chat" hidden></div>
+          <button type="button" id="socraticStartBtn" class="socratic-start-btn">Start planning with the tutor</button>
+
+          <div id="socraticInputRow" class="socratic-input-row" hidden style="margin-top:0.9rem;">
+            <textarea id="socraticInput" placeholder="Type your answer here..." aria-label="Your reply to the tutor"></textarea>
+            <button type="button" id="socraticSendBtn" class="socratic-send-btn">Send</button>
+          </div>
+
+          <p id="socraticStatus" class="socratic-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="socratic-card ppq-answer-card">
+          <button type="button" class="card-expand-btn" title="Full page view" aria-label="Full page view" onclick="toggleCardFullscreen(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
+          <h2>Now write your full answer</h2>
+          <p class="socratic-intro">Write your complete response to the same question, then submit it for marking. You'll get a mark out of 8 and examiner-style feedback.</p>
+
+          <textarea id="ppqAnswer" class="ppq-answer-textarea" placeholder="Type your full answer here..." aria-label="Your full written answer"></textarea>
+          <button type="button" id="ppqSubmitBtn" class="socratic-start-btn">Submit for Marking</button>
+
+          <p id="ppqStatus" class="socratic-status" role="status" aria-live="polite"></p>
+          <div id="ppqFeedback" class="ppq-feedback" hidden></div>
+        </div>
+        </div>
+
+        <div class="socratic-paper-col">
+        <p class="socratic-paper-label">Paper 2 &mdash; Rural</p>
+        <div class="socratic-card">
+          <button type="button" class="card-expand-btn" title="Full page view" aria-label="Full page view" onclick="toggleCardFullscreen(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+          </button>
+          <h2>Plan your data presentation answer</h2>
+          <p class="socratic-intro">Talk through your plan with the tutor before you write. It will ask you questions one at a time &mdash; it will not give you a structure or a model answer.</p>
+          <div class="socratic-question"><strong>(e)</strong> Study Figures 5a and 5b below. They show two different data presentation techniques from a student&rsquo;s fieldwork into the use of rural environments. The aim of the student&rsquo;s investigation was to identify attitudes towards the plans for a new tourist development in the New Territories, Hong Kong. Evaluate the student&rsquo;s data presentation techniques. <strong>(8)</strong></div>
+
+          <figure style="margin:0 0 1rem;">
+            <img src="/images/revision-ppq/igcse-geography/jun-2019-p2/q5-fig5a-5b-tourist-survey-interview.png" alt="Figure 5a: a table of questionnaire survey responses (strongly disagree, slight disagreement, not sure, slight agreement) for 8 questions about a proposed tourist development, with a total for each question. Figure 5b: two speech-bubble quotes from an interview &mdash; a resident worried about noise and the development going wrong, and a local businessman wanting more visitors from Hong Kong to grow local businesses." style="max-width:100%; height:auto; display:block; border:1px solid var(--lh-border, #d9dde3); border-radius:8px;">
+            <figcaption style="font-size:0.8rem; color:var(--lh-muted, #666); margin-top:0.4rem;">Figures 5a and 5b &mdash; Resource Booklet, questionnaire and interview results on a proposed tourist development in the New Territories, Hong Kong</figcaption>
+          </figure>
+
+          <div id="socraticChat2" class="socratic-chat" hidden></div>
+          <button type="button" id="socraticStartBtn2" class="socratic-start-btn">Start planning with the tutor</button>
+
+          <div id="socraticInputRow2" class="socratic-input-row" hidden style="margin-top:0.9rem;">
+            <textarea id="socraticInput2" placeholder="Type your answer here..." aria-label="Your reply to the tutor"></textarea>
+            <button type="button" id="socraticSendBtn2" class="socratic-send-btn">Send</button>
+          </div>
+
+          <p id="socraticStatus2" class="socratic-status" role="status" aria-live="polite"></p>
+        </div>
+        </div>
+
+        </div>
+        </aside>
+
+        <div class="exam-tips-banner-row">
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Put it into practice">
+          <div>
+            <span class="igcse-hero-kicker">Put it into practice</span>
+            <h2>Revise IGCSE Geography</h2>
+            <p>Try the Revise Me Bot and quiz, or move straight on to marked past paper questions.</p>
+          </div>
+          <a class="igcse-hero-btn" href="/igcse/geography/revision/topics" aria-label="Revise IGCSE Geography">
+            Revise IGCSE Geography
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </section>
+        <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Practise past papers">
+          <div>
+            <span class="igcse-hero-kicker">Or jump straight in</span>
+            <h2>IGCSE Geography Past Paper Questions</h2>
+            <p>Real past exam questions, organised by topic, marked instantly with examiner-style feedback.</p>
+          </div>
+          <a class="igcse-hero-btn" href="/igcse/geography" aria-label="IGCSE Geography Past Paper Questions">
+            Past Paper Questions
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+          </a>
+        </section>
+        </div>
+      </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------------- Full page view toggle (Socratic bots + PPQ marking card) ---------------- */
+var CARD_EXPAND_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>';
+var CARD_COLLAPSE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>';
+
+function toggleCardFullscreen(btn) {
+  var card = btn.closest('.socratic-card');
+  if (!card) return;
+  var isFull = card.classList.toggle('card-fullscreen');
+  document.body.classList.toggle('card-fullscreen-open', isFull);
+  btn.innerHTML = isFull ? CARD_COLLAPSE_ICON : CARD_EXPAND_ICON;
+  btn.title = isFull ? 'Exit full page view' : 'Full page view';
+  btn.setAttribute('aria-label', btn.title);
+  if (isFull) {
+    card.scrollTop = 0;
+  }
+}
+
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  var openCard = document.querySelector('.socratic-card.card-fullscreen');
+  if (!openCard) return;
+  var btn = openCard.querySelector('.card-expand-btn');
+  if (btn) toggleCardFullscreen(btn);
+});
+
+function initSocraticBot(opts) {
+  var QUESTION_KEY = opts.questionKey;
+
+  var chatEl = document.getElementById(opts.chatId);
+  var startBtn = document.getElementById(opts.startBtnId);
+  var inputRow = document.getElementById(opts.inputRowId);
+  var inputEl = document.getElementById(opts.inputId);
+  var sendBtn = document.getElementById(opts.sendBtnId);
+  var statusEl = document.getElementById(opts.statusId);
+
+  var sessionId = null;
+  var busy = false;
+
+  function setStatus(text, isError) {
+    statusEl.textContent = text || '';
+    statusEl.classList.toggle('socratic-status--error', !!isError);
+  }
+
+  function addMessage(role, text) {
+    chatEl.hidden = false;
+    var bubble = document.createElement('div');
+    bubble.className = 'socratic-msg ' + (role === 'bot' ? 'socratic-msg--bot' : 'socratic-msg--student');
+    bubble.textContent = text;
+    chatEl.appendChild(bubble);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function setBusy(state) {
+    busy = state;
+    startBtn.disabled = state;
+    sendBtn.disabled = state;
+    inputEl.disabled = state;
+  }
+
+  startBtn.addEventListener('click', function () {
+    if (busy) return;
+    setBusy(true);
+    setStatus('Connecting to the tutor…');
+    startBtn.hidden = true;
+
+    fetch('/api/socratic-fieldwork', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'start', questionKey: QUESTION_KEY })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (result) {
+        if (!result.ok) throw new Error((result.data && result.data.error) || 'Could not start the tutor.');
+        sessionId = result.data.sessionId;
+        addMessage('bot', result.data.reply);
+        inputRow.hidden = false;
+        setStatus('');
+        setBusy(false);
+        inputEl.focus();
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong. Please try again.', true);
+        startBtn.hidden = false;
+        setBusy(false);
+      });
+  });
+
+  function sendReply() {
+    if (busy) return;
+    var text = inputEl.value.trim();
+    if (!text || !sessionId) return;
+
+    addMessage('student', text);
+    inputEl.value = '';
+    setBusy(true);
+    setStatus('Thinking…');
+
+    fetch('/api/socratic-fieldwork', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'reply', sessionId: sessionId, message: text })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (result) {
+        if (!result.ok) throw new Error((result.data && result.data.error) || 'Could not reach the tutor.');
+        addMessage('bot', result.data.reply);
+        setStatus('');
+        setBusy(false);
+        inputEl.focus();
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong. Please try again.', true);
+        setBusy(false);
+      });
+  }
+
+  sendBtn.addEventListener('click', sendReply);
+  inputEl.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendReply();
+    }
+  });
+}
+
+initSocraticBot({
+  questionKey: 'geog-coastal-fieldwork-8mark',
+  chatId: 'socraticChat',
+  startBtnId: 'socraticStartBtn',
+  inputRowId: 'socraticInputRow',
+  inputId: 'socraticInput',
+  sendBtnId: 'socraticSendBtn',
+  statusId: 'socraticStatus'
+});
+
+initSocraticBot({
+  questionKey: 'geog-data-presentation-8mark',
+  chatId: 'socraticChat2',
+  startBtnId: 'socraticStartBtn2',
+  inputRowId: 'socraticInputRow2',
+  inputId: 'socraticInput2',
+  sendBtnId: 'socraticSendBtn2',
+  statusId: 'socraticStatus2'
+});
+
+(function () {
+  var QUESTION_KEY = 'geog-coastal-fieldwork-8mark';
+
+  var answerEl = document.getElementById('ppqAnswer');
+  var submitBtn = document.getElementById('ppqSubmitBtn');
+  var statusEl = document.getElementById('ppqStatus');
+  var feedbackEl = document.getElementById('ppqFeedback');
+
+  var busy = false;
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function setStatus(text, isError) {
+    statusEl.textContent = text || '';
+    statusEl.classList.toggle('socratic-status--error', !!isError);
+  }
+
+  function setBusy(state) {
+    busy = state;
+    submitBtn.disabled = state;
+    answerEl.disabled = state;
+  }
+
+  function renderFeedback(feedback) {
+    feedback = feedback || {};
+    var markLine = feedback.markAwarded ? escapeHtml(feedback.markAwarded) : '— / 8';
+
+    var html = '<div class="ppq-mark">Mark awarded: ' + markLine + '</div>';
+    if (feedback.whyThisMark) html += '<h3>Why this mark was awarded</h3><p>' + escapeHtml(feedback.whyThisMark) + '</p>';
+    if (feedback.whatWasDoneWell) html += '<h3>What was done well</h3><p>' + escapeHtml(feedback.whatWasDoneWell) + '</p>';
+    if (feedback.whatIsMissing) html += '<h3>What is missing or needs development</h3><p>' + escapeHtml(feedback.whatIsMissing) + '</p>';
+    if (feedback.nextStep) html += '<h3>Next step</h3><p>' + escapeHtml(feedback.nextStep) + '</p>';
+    if (feedback.followUpQuestion) html += '<h3>Follow-up question</h3><p>' + escapeHtml(feedback.followUpQuestion) + '</p>';
+
+    feedbackEl.innerHTML = html;
+    feedbackEl.hidden = false;
+  }
+
+  submitBtn.addEventListener('click', function () {
+    if (busy) return;
+    var studentAnswer = answerEl.value.trim();
+    if (!studentAnswer) {
+      setStatus('Please write an answer before submitting for marking.', true);
+      answerEl.focus();
+      return;
+    }
+
+    setBusy(true);
+    setStatus('Marking your answer — this usually takes a few seconds…');
+    feedbackEl.hidden = true;
+
+    fetch('/api/mark-fieldwork-ppq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ questionKey: QUESTION_KEY, studentAnswer: studentAnswer })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (result) {
+        if (!result.ok) throw new Error((result.data && result.data.error) || 'Marking failed.');
+        setStatus('');
+        setBusy(false);
+        renderFeedback(result.data.feedback);
+      })
+      .catch(function (err) {
+        setStatus(err.message || 'Something went wrong. Please try again.', true);
+        setBusy(false);
+      });
+  });
+})();
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

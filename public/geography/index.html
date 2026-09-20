@@ -16,9 +16,10 @@
   }
   .lh-unit-card {
     background: var(--lh-surface);
-    border: 1px solid var(--lh-border);
+    border: 2px solid rgba(15, 23, 42, 0.5);
     border-radius: 12px;
     padding: 1.3rem 1.4rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
   }
   .lh-unit-card__section {
     font-family: var(--lh-font-mono);
@@ -42,6 +43,97 @@
   .lh-unit-card__go { color: var(--lh-green); font-weight: 600; }
   .lh-section-title { font-family: var(--lh-font-display); font-weight: 600; font-size: 1.05rem; margin: 2rem 0 1rem; }
   .lh-section-title:first-of-type { margin-top: 0; }
+
+  .igcse-hero-banner {
+    border-radius: 22px;
+    padding: 30px 36px;
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
+      radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    color: #ffffff;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-kicker {
+    display: inline-block;
+    font-family: var(--lh-font-mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #031c33;
+    background: #20d7e2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .igcse-hero-banner h1 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+  .igcse-hero-banner p {
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .hub-cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+  }
+  .igcse-hero-banner--cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .igcse-hero-banner--cta h2 {
+    font-family: var(--lh-font-display);
+    font-weight: 800;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    margin: 0 0 6px;
+    color: #ffffff;
+  }
+  .igcse-hero-banner--cta p { margin: 0; }
+  .igcse-hero-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: 18px;
+    padding: 14px 22px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-family: var(--lh-font-body);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
+    transition: all 0.25s ease;
+    margin-top: 6px;
+  }
+  .igcse-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45); }
+  .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .igcse-hero-btn:hover svg { transform: translateX(4px); }
+
+  @media (max-width: 900px) {
+    .hub-cta-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .igcse-hero-banner { padding: 22px 22px; }
+  }
 </style>
 </head>
 <body class="lh">
@@ -53,6 +145,8 @@
         <a href="/">SBL</a>
         <span class="lh-crumbs__sep">/</span>
         <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/menu">IB Subject Menu</a>
         <span class="lh-crumbs__sep">/</span>
         <span>Geography</span>
       </nav>
@@ -66,53 +160,49 @@
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
+        <section class="igcse-hero-banner" aria-label="IB Geography Learning Hub">
+          <span class="igcse-hero-kicker">IB Geography</span>
           <h1>IB Geography Learning Hub</h1>
           <p>Understanding our world — drainage basins to development, hazards to human diversity. Pick a unit from the sidebar or below to start lessons, quizzes, retrieval practice and your AI tutor.</p>
-        </div>
+        </section>
 
         <h2 class="lh-section-title">Paper 1 &mdash; Optional Themes</h2>
         <div class="lh-units">
-          <a class="lh-unit-card" href="/geography/paper-1/option-a-freshwater">
+          <a class="lh-unit-card" href="/geography/paper-1/option-a">
             <span class="lh-unit-card__section">Option A</span>
             <h3>Freshwater</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:28%;"></div></div>
             <div class="lh-unit-card__meta"><span>4 topics &middot; 28%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
           </a>
-          <a class="lh-unit-card" href="/geography/paper-1/option-e-leisure-tourism-sport">
+          <a class="lh-unit-card" href="/geography/paper-1/option-e">
             <span class="lh-unit-card__section">Option E</span>
             <h3>Leisure, Tourism and Sport</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:10%;"></div></div>
             <div class="lh-unit-card__meta"><span>4 topics &middot; 10%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
           </a>
-          <a class="lh-unit-card" href="/geography/paper-1/option-f-food-health">
+          <a class="lh-unit-card" href="/geography/paper-1/option-f">
             <span class="lh-unit-card__section">Option F</span>
             <h3>Food and Health</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:5%;"></div></div>
             <div class="lh-unit-card__meta"><span>4 topics &middot; 5%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
           </a>
-          <div class="lh-unit-card lh-unit-card--soon">
-            <span class="lh-unit-card__section">Options B &middot; C &middot; D</span>
-            <h3>Oceans &middot; Extreme Environments &middot; Geophysical Hazards</h3>
-            <div class="lh-unit-card__meta"><span>Coming soon</span></div>
-          </div>
         </div>
 
-        <h2 class="lh-section-title">Paper 1 &mdash; Core</h2>
+        <h2 class="lh-section-title">Paper 2 &mdash; Core</h2>
         <div class="lh-units">
-          <a class="lh-unit-card" href="/geography/paper-1/core-1-changing-population">
+          <a class="lh-unit-card" href="/geography/paper-1/core-1">
             <span class="lh-unit-card__section">Unit 1</span>
             <h3>Changing Population</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:42%;"></div></div>
             <div class="lh-unit-card__meta"><span>3 topics &middot; 42%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
           </a>
-          <a class="lh-unit-card" href="/geography/paper-1/core-2-global-climate">
+          <a class="lh-unit-card" href="/geography/paper-1/core-2">
             <span class="lh-unit-card__section">Unit 2</span>
             <h3>Global Climate</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
             <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
-          <a class="lh-unit-card" href="/geography/paper-1/core-3-resource-consumption">
+          <a class="lh-unit-card" href="/geography/paper-1/core-3">
             <span class="lh-unit-card__section">Unit 3</span>
             <h3>Resource Consumption and Security</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
@@ -120,21 +210,21 @@
           </a>
         </div>
 
-        <h2 class="lh-section-title">Paper 2 &mdash; HL Core Extension</h2>
+        <h2 class="lh-section-title">Paper 3 &mdash; HL Core Extension</h2>
         <div class="lh-units">
-          <a class="lh-unit-card" href="/geography/paper-2/hl-1-power-places-networks">
+          <a class="lh-unit-card" href="/geography/paper-2/hl-1">
             <span class="lh-unit-card__section">Unit 4</span>
             <h3>Power, Places and Networks</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
             <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
-          <a class="lh-unit-card" href="/geography/paper-2/hl-2-human-development-diversity">
+          <a class="lh-unit-card" href="/geography/paper-2/hl-2">
             <span class="lh-unit-card__section">Unit 5</span>
             <h3>Human Development and Diversity</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
             <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
-          <a class="lh-unit-card" href="/geography/paper-2/hl-3-global-risks-resilience">
+          <a class="lh-unit-card" href="/geography/paper-2/hl-3">
             <span class="lh-unit-card__section">Unit 6</span>
             <h3>Global Risks and Resilience</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
@@ -142,13 +232,42 @@
           </a>
         </div>
 
-        <h2 class="lh-section-title">Paper 3 &mdash; HL Extension</h2>
+        <h2 class="lh-section-title">Fieldwork</h2>
         <div class="lh-units">
           <div class="lh-unit-card lh-unit-card--soon">
-            <span class="lh-unit-card__section">Paper 3</span>
+            <span class="lh-unit-card__section">Internal Assessment advice</span>
             <h3>Research and fieldwork skills</h3>
             <div class="lh-unit-card__meta"><span>Coming soon</span></div>
           </div>
+        </div>
+            <h3>Research and fieldwork skills</h3>
+            <div class="lh-unit-card__meta"><span>Coming soon</span></div>
+          </div>
+        </div>
+
+        <div class="hub-cta-row">
+          <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Revise IB Geography">
+            <div>
+              <span class="igcse-hero-kicker">In the meantime</span>
+              <h2>Revise IB Geography</h2>
+              <p>Revise Me Bot with topic checklists, randomised quizzes, and Challenge Mode.</p>
+            </div>
+            <a class="igcse-hero-btn" href="/geography/revision/topics" aria-label="Revise IB Geography">
+              Revise IB Geography
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </section>
+          <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IB Geography Past Paper Questions">
+            <div>
+              <span class="igcse-hero-kicker">Or jump straight in</span>
+              <h2>IB Geography Past Paper Questions</h2>
+              <p>Real past exam questions for Freshwater, Leisure/Tourism/Sport and Food &amp; Health, marked instantly with examiner-style feedback.</p>
+            </div>
+            <a class="igcse-hero-btn" href="/geography/revision/paper-questions" aria-label="IB Geography Past Paper Questions">
+              Past Paper Questions
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </section>
         </div>
       </main>
     </div>
@@ -157,5 +276,7 @@
 
 <script src="/js/sbl-sidebar.js"></script>
 <script>renderSBLSidebar('lh-sidebar-mount', {});</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
 </body>
 </html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Classification Challenge — IB Geography Learning Hub — SBL</title>
+<meta name="description" content="Drag and drop practice game: sort 16 resources into Renewable, Non-Renewable, Biotic and Abiotic — part of the IB Geography Resource Consumption and Security unit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #1f2937;
+  }
+  .rcc-topnav {
+    max-width: 1200px;
+    margin: 0 auto 14px;
+    font-size: 0.88rem;
+  }
+  .rcc-topnav a {
+    color: #6f42c1;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .rcc-topnav a:hover { text-decoration: underline; }
+  h1 {
+    font-family: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    color: #6f42c1;
+    margin: 0 0 8px;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #4b5563;
+    margin: 0 0 20px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #topBar {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+  }
+  #timer { color: #ff6b35; }
+  #score { color: #6f42c1; }
+  #resources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 auto 25px;
+    max-width: 1200px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    min-height: 90px;
+  }
+  .card {
+    padding: 10px 16px;
+    background: #6f42c1;
+    color: white;
+    border-radius: 8px;
+    cursor: grab;
+    font-weight: 700;
+    font-size: 0.92rem;
+    user-select: none;
+    touch-action: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover { transform: scale(1.04); box-shadow: 0 4px 10px rgba(111,66,193,0.35); }
+  .card.dragging { cursor: grabbing; box-shadow: 0 8px 20px rgba(0,0,0,0.25); opacity: 0.95; }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .zone {
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    min-height: 220px;
+    border: 4px dashed #ddd;
+  }
+  .zone h2 {
+    font-family: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+  }
+  .zone-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-content: flex-start;
+    min-height: 60px;
+  }
+  .zone.renewable { border-color: #2ecc71; }
+  .zone.nonrenewable { border-color: #e74c3c; }
+  .zone.biotic { border-color: #3498db; }
+  .zone.abiotic { border-color: #f39c12; }
+  .card.correct { background: #2ecc71 !important; }
+  .card.incorrect { background: #e74c3c !important; }
+  .controls { margin-top: 22px; text-align: center; }
+  button {
+    padding: 12px 22px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  #checkBtn { background: #27ae60; color: white; }
+  #checkBtn:hover { background: #219150; }
+  #resetBtn { background: #e74c3c; color: white; }
+  #resetBtn:hover { background: #c0392b; }
+  #result {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 20px;
+    min-height: 1.6rem;
+  }
+  #extension {
+    display: none;
+    margin: 25px auto 0;
+    background: white;
+    padding: 20px 24px;
+    border-radius: 10px;
+    max-width: 1000px;
+    border: 1px dashed #d1d5db;
+  }
+  #extension h2 {
+    font-family: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+    color: #6f42c1;
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+  }
+  #extension p { margin: 0 0 10px; line-height: 1.5; color: #374151; }
+  #extension .rcc-note { font-size: 0.8rem; color: #6b7280; margin-top: 8px; }
+  textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 4px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
+  }
+  @media (max-width: 900px) {
+    .board { grid-template-columns: 1fr; }
+    #topBar { gap: 18px; font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="rcc-topnav"><a href="/geography/paper-1/core-3/t1-global-trends/l2-measuring">&larr; Back to lesson: Measuring trends and patterns in resource consumption</a></div>
+
+<h1>&#127757; Resource Classification Challenge</h1>
+<div class="subtitle">Drag each resource into the zone where it best fits. There are two ways resources get grouped here: by how quickly they can be replaced (Renewable / Non-Renewable) for energy resources, and by whether they come from a living source (Biotic / Abiotic) for raw materials.</div>
+
+<div id="topBar">
+  <div id="timer">&#9203; 5:00</div>
+  <div id="score">Score: 0/16</div>
+</div>
+
+<div id="resources"></div>
+
+<div class="board">
+  <div class="zone renewable" data-category="renewable">
+    <h2>&#9851; Renewable</h2>
+    <div class="zone-cards"></div>
+  </div>
+  <div class="zone nonrenewable" data-category="nonrenewable">
+    <h2>&#9981; Non-Renewable</h2>
+    <div class="zone-cards"></div>
+  </div>
+  <div class="zone biotic" data-category="biotic">
+    <h2>&#127793; Biotic</h2>
+    <div class="zone-cards"></div>
+  </div>
+  <div class="zone abiotic" data-category="abiotic">
+    <h2>&#129704; Abiotic</h2>
+    <div class="zone-cards"></div>
+  </div>
+</div>
+
+<div class="controls">
+  <button type="button" id="checkBtn">Check Answers</button>
+  <button type="button" id="resetBtn">Reset</button>
+</div>
+
+<div id="result"></div>
+
+<div id="extension">
+  <h2>&#129300; Think Further</h2>
+  <p>Some resources can move between categories over time. For example, a resource might become scarce enough that it starts to behave like a non-renewable one, or a new technology might turn a non-renewable process into a renewable one. Pick one resource from the game above and explain how its classification could change in the future, and why.</p>
+  <textarea placeholder="Type your thinking here..." aria-label="Extension reflection notes"></textarea>
+  <p class="rcc-note">This is just for your own thinking — it isn&rsquo;t saved or marked. Use it to prepare a point to share in class.</p>
+</div>
+
+<script>
+(function () {
+  var RESOURCES = [
+    { id: 'livestock', label: 'Livestock', category: 'biotic' },
+    { id: 'cotton', label: 'Cotton', category: 'biotic' },
+    { id: 'hydro', label: 'Hydroelectric Power', category: 'renewable' },
+    { id: 'iron', label: 'Iron Ore', category: 'abiotic' },
+    { id: 'gas', label: 'Natural Gas', category: 'nonrenewable' },
+    { id: 'fish', label: 'Fish', category: 'biotic' },
+    { id: 'limestone', label: 'Limestone', category: 'abiotic' },
+    { id: 'copper', label: 'Copper', category: 'abiotic' },
+    { id: 'uranium', label: 'Uranium', category: 'nonrenewable' },
+    { id: 'oil', label: 'Oil', category: 'nonrenewable' },
+    { id: 'coal', label: 'Coal', category: 'nonrenewable' },
+    { id: 'wind', label: 'Wind Energy', category: 'renewable' },
+    { id: 'timber', label: 'Timber', category: 'biotic' },
+    { id: 'sand', label: 'Sand', category: 'abiotic' },
+    { id: 'bamboo', label: 'Bamboo', category: 'biotic' },
+    { id: 'solar', label: 'Solar Energy', category: 'renewable' }
+  ];
+  var TOTAL = RESOURCES.length;
+
+  var resourcesEl = document.getElementById('resources');
+  var timerEl = document.getElementById('timer');
+  var scoreEl = document.getElementById('score');
+  var resultEl = document.getElementById('result');
+  var extensionEl = document.getElementById('extension');
+
+  var timeLeft = 300;
+  var timerInterval = null;
+
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function formatTime(s) {
+    var m = Math.floor(s / 60);
+    var sec = s % 60;
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  function buildCard(item) {
+    var card = document.createElement('div');
+    card.className = 'card';
+    card.textContent = item.label;
+    card.dataset.id = item.id;
+    card.dataset.category = item.category;
+    return card;
+  }
+
+  function renderCards() {
+    resourcesEl.innerHTML = '';
+    var order = shuffle(RESOURCES.slice());
+    order.forEach(function (item) {
+      resourcesEl.appendChild(buildCard(item));
+    });
+  }
+
+  // Pointer-based drag and drop (works with mouse and touch)
+  var dragEl = null, offsetX = 0, offsetY = 0, startParent = null, startNext = null;
+
+  document.addEventListener('pointerdown', function (e) {
+    var card = e.target.closest ? e.target.closest('.card') : null;
+    if (!card) return;
+    dragEl = card;
+    startParent = card.parentNode;
+    startNext = card.nextSibling;
+    var rect = card.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+    card.style.width = rect.width + 'px';
+    card.style.position = 'fixed';
+    card.style.left = rect.left + 'px';
+    card.style.top = rect.top + 'px';
+    card.style.zIndex = 1000;
+    card.classList.add('dragging');
+    try { card.setPointerCapture(e.pointerId); } catch (err) {}
+    e.preventDefault();
+  });
+
+  document.addEventListener('pointermove', function (e) {
+    if (!dragEl) return;
+    dragEl.style.left = (e.clientX - offsetX) + 'px';
+    dragEl.style.top = (e.clientY - offsetY) + 'px';
+  });
+
+  function endDrag(e) {
+    if (!dragEl) return;
+    var card = dragEl;
+    card.classList.remove('dragging');
+    card.style.position = '';
+    card.style.left = '';
+    card.style.top = '';
+    card.style.zIndex = '';
+    card.style.width = '';
+    card.classList.remove('correct', 'incorrect');
+
+    card.style.pointerEvents = 'none';
+    var target = document.elementFromPoint(e.clientX, e.clientY);
+    card.style.pointerEvents = '';
+
+    var zone = target && target.closest ? target.closest('.zone') : null;
+    if (zone) {
+      zone.querySelector('.zone-cards').appendChild(card);
+    } else if (target && target.closest && target.closest('#resources')) {
+      resourcesEl.appendChild(card);
+    } else {
+      // dropped somewhere invalid — put it back where it started
+      if (startNext) startParent.insertBefore(card, startNext);
+      else startParent.appendChild(card);
+    }
+    dragEl = null;
+  }
+
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+
+  function checkAnswers() {
+    var correctCount = 0;
+    document.querySelectorAll('.zone').forEach(function (zone) {
+      var cat = zone.dataset.category;
+      zone.querySelectorAll('.card').forEach(function (card) {
+        if (card.dataset.category === cat) {
+          card.classList.add('correct');
+          card.classList.remove('incorrect');
+          correctCount++;
+        } else {
+          card.classList.add('incorrect');
+          card.classList.remove('correct');
+        }
+      });
+    });
+
+    scoreEl.textContent = 'Score: ' + correctCount + '/' + TOTAL;
+    var unplaced = resourcesEl.children.length;
+
+    if (correctCount === TOTAL) {
+      resultEl.textContent = 'Perfect! All ' + TOTAL + ' resources correctly classified.';
+      resultEl.style.color = '#219150';
+      stopTimer();
+    } else if (unplaced > 0) {
+      resultEl.textContent = 'You still have ' + unplaced + ' resource(s) left to place. Score so far: ' + correctCount + '/' + TOTAL + '.';
+      resultEl.style.color = '#d97706';
+    } else {
+      resultEl.textContent = 'You got ' + correctCount + ' out of ' + TOTAL + ' correct — drag the red ones to a different zone and check again.';
+      resultEl.style.color = '#c0392b';
+    }
+    extensionEl.style.display = 'block';
+  }
+
+  function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  function startTimer() {
+    stopTimer();
+    timerInterval = setInterval(function () {
+      timeLeft--;
+      timerEl.textContent = '⏳ ' + formatTime(timeLeft);
+      if (timeLeft <= 0) {
+        stopTimer();
+        timerEl.textContent = '⏰ 0:00';
+        checkAnswers();
+        resultEl.textContent = "Time's up! " + resultEl.textContent;
+      }
+    }, 1000);
+  }
+
+  function resetGame() {
+    document.querySelectorAll('.card').forEach(function (c) {
+      c.classList.remove('correct', 'incorrect');
+    });
+    renderCards();
+    scoreEl.textContent = 'Score: 0/' + TOTAL;
+    resultEl.textContent = '';
+    extensionEl.style.display = 'none';
+    timeLeft = 300;
+    timerEl.textContent = '⏳ 5:00';
+    startTimer();
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+  document.getElementById('resetBtn').addEventListener('click', resetGame);
+
+  renderCards();
+  startTimer();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

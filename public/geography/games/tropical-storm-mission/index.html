@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tropical Storm Mission — SBL</title>
+<meta name="description" content="A three-part interactive mission: label a tropical storm cross-section, sequence its formation stages, then set the conditions to build and steer your own storm — part of the Interactive KS3 Geography Games hub.">
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+margin:0;
+padding:25px;
+background:linear-gradient(180deg,#eaf1f8,#eef6ff);
+color:#15263c;
+line-height:1.5;
+}
+
+.sr-only{
+position:absolute !important;
+width:1px !important;
+height:1px !important;
+padding:0 !important;
+margin:-1px !important;
+overflow:hidden !important;
+clip:rect(0,0,0,0) !important;
+white-space:nowrap !important;
+border:0 !important;
+}
+
+.topnav{
+max-width:1200px;
+margin:0 auto 14px;
+font-size:16px;
+}
+.topnav a{
+color:#1565c0;
+text-decoration:none;
+font-weight:bold;
+}
+.topnav a:hover{ text-decoration:underline; }
+
+h1{
+text-align:center;
+color:#1565c0;
+margin-bottom:8px;
+font-size:clamp(1.7rem,4vw,2.6rem);
+}
+
+.subtitle{
+text-align:center;
+font-size:18px;
+max-width:760px;
+margin:0 auto 22px;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+outline:4px solid #ffbf47;
+outline-offset:3px;
+}
+
+button{
+padding:14px 24px;
+font-size:16px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+margin:5px;
+color:white;
+font-weight:bold;
+font:inherit;
+}
+
+/* ==================================================== */
+/* MISSION TRACKER + OVERALL SCORE                       */
+/* ==================================================== */
+
+.tracker{
+max-width:820px;
+margin:0 auto 10px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+flex-wrap:wrap;
+}
+
+.tracker-step{
+display:flex;
+align-items:center;
+gap:8px;
+padding:10px 16px;
+border-radius:999px;
+font-weight:800;
+background:#e3ecf5;
+color:#5a6b80;
+border:2px solid #c7d5e3;
+}
+
+.tracker-step .step-num{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:24px;
+height:24px;
+border-radius:50%;
+background:#c7d5e3;
+color:#ffffff;
+font-size:0.85rem;
+}
+
+.tracker-step.active{
+background:#e3f0ff;
+color:#0b5fa5;
+border-color:#0b5fa5;
+}
+.tracker-step.active .step-num{ background:#0b5fa5; }
+
+.tracker-step.complete{
+background:#eafaf0;
+color:#08783f;
+border-color:#08783f;
+}
+.tracker-step.complete .step-num{ background:#08783f; }
+
+.tracker-arrow{
+color:#9fb0c2;
+font-weight:900;
+}
+
+.overall-score{
+text-align:center;
+font-size:1.15rem;
+font-weight:900;
+margin:0 auto 30px;
+color:#0b5fa5;
+}
+
+.overall-score strong{ color:#08783f; }
+
+/* ==================================================== */
+/* SHARED MISSION SECTION CHROME                         */
+/* ==================================================== */
+
+.mission-section{
+max-width:1180px;
+margin:0 auto 30px;
+}
+
+.mission-section h2{
+text-align:center;
+color:#1565c0;
+margin-bottom:6px;
+}
+
+.mission-intro{
+text-align:center;
+font-size:18px;
+margin-bottom:22px;
+max-width:820px;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* ==================================================== */
+/* MISSION 1 — CROSS-SECTION CHALLENGE                   */
+/* ==================================================== */
+
+#mission1 .m1-game-container{
+display:flex;
+gap:25px;
+justify-content:center;
+align-items:flex-start;
+flex-wrap:wrap;
+}
+
+#mission1 .m1-panel{
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+#mission1 .m1-labels-panel{ width:320px; }
+
+#mission1 .m1-diagram-panel{
+width:950px;
+max-width:100%;
+padding:12px;
+}
+
+#mission1 .m1-label{
+background:#1976d2;
+color:white;
+padding:14px;
+margin-bottom:12px;
+border-radius:8px;
+font-weight:bold;
+text-align:center;
+cursor:grab;
+transition:.2s;
+}
+
+#mission1 .m1-label:hover{ transform:translateY(-3px); }
+#mission1 .m1-label.dragging{ opacity:0.5; }
+
+#mission1 .m1-diagram{
+position:relative;
+width:100%;
+aspect-ratio:1536/1024;
+border-radius:14px;
+overflow:hidden;
+background-image:url('/images/games/tropical-storm-cross-section.jpg');
+background-size:cover;
+background-position:center;
+}
+
+#mission1 .m1-hotspot{
+position:absolute;
+border:3px solid transparent;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:4px;
+overflow:hidden;
+}
+
+#mission1 .m1-hotspot .m1-label{
+width:100%;
+margin-bottom:0;
+padding:8px 6px;
+font-size:0.8rem;
+line-height:1.15;
+cursor:grab;
+}
+
+#outflow{ left:40.62%; top:3.03%; width:18.03%; height:7.23%; }
+#eye{ left:46.16%; top:31.93%; width:7.55%; height:7.23%; }
+#eyewall{ left:7.62%; top:36.13%; width:16.02%; height:7.32%; }
+#clouds{ left:78.71%; top:37.79%; width:17.06%; height:7.23%; }
+#bands-left{ left:1.11%; top:46.88%; width:15.04%; height:7.42%; }
+#bands-right{ left:85.22%; top:49.80%; width:14.06%; height:7.32%; }
+#rising{ left:78.13%; top:67.29%; width:13.22%; height:8.01%; }
+#pressure{ left:42.45%; top:80.96%; width:16.02%; height:6.93%; }
+#ocean{ left:36.85%; top:90.92%; width:24.54%; height:7.42%; }
+
+#mission1 .m1-hotspot.m1-correct{ border-color:#43a047 !important; }
+#mission1 .m1-hotspot.m1-correct .m1-label{ background:#43a047 !important; }
+
+#mission1 .m1-hotspot.m1-incorrect{ border-color:#e53935 !important; }
+#mission1 .m1-hotspot.m1-incorrect .m1-label{ background:#e53935 !important; }
+
+#mission1 .m1-controls{ text-align:center; margin-top:20px; }
+
+#mission1 .m1-check{ background:#43a047; }
+#mission1 .m1-reset{ background:#e53935; }
+
+#mission1 .m1-result{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-top:20px;
+}
+
+#mission1 .m1-challenge{
+display:none;
+max-width:900px;
+margin:25px auto 0;
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+#mission1 textarea{
+width:100%;
+height:120px;
+margin-top:10px;
+padding:10px;
+font:inherit;
+}
+
+@media (max-width:900px){
+#mission1 .m1-hotspot .m1-label{ font-size:0.62rem; }
+}
+
+/* ==================================================== */
+/* MISSION 2 — FORMATION CHALLENGE                       */
+/* ==================================================== */
+
+#mission2 #m2-timer{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+color:#e67e22;
+margin-bottom:20px;
+}
+
+#mission2 .m2-container{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+#mission2 .m2-instructions,
+#mission2 .m2-sequence{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0px 3px 8px rgba(0,0,0,0.15);
+}
+
+#mission2 .m2-instructions{ width:350px; }
+#mission2 .m2-sequence{ width:500px; }
+
+#mission2 .m2-card{
+background:#1976d2;
+color:white;
+padding:12px;
+margin:8px 0;
+border-radius:8px;
+cursor:move;
+font-weight:bold;
+text-align:center;
+}
+
+#mission2 .m2-slot{
+height:60px;
+border:3px dashed #bbb;
+margin:10px 0;
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#f9f9f9;
+}
+
+#mission2 .m2-slot.m2-correct{ background:#4caf50 !important; color:white; }
+#mission2 .m2-slot.m2-incorrect{ background:#e53935 !important; color:white; }
+
+#mission2 .m2-check{ background:#43a047; }
+#mission2 .m2-reset{ background:#e53935; }
+
+#mission2 .m2-controls{ text-align:center; margin-top:20px; }
+
+#mission2 .m2-result{
+text-align:center;
+font-size:24px;
+font-weight:bold;
+margin-top:20px;
+}
+
+#mission2 .m2-extension{
+display:none;
+background:white;
+margin:25px auto 0;
+padding:20px;
+border-radius:12px;
+max-width:900px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+#mission2 textarea{
+width:100%;
+height:120px;
+margin-top:10px;
+font:inherit;
+padding:10px;
+}
+
+/* ==================================================== */
+/* MISSION 3 — FINAL MISSION                              */
+/* ==================================================== */
+
+.m3-wrap{
+max-width:1100px;
+margin:0 auto;
+background:white;
+padding:24px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.m3-wrap h2{
+text-align:center;
+color:#0b5fa5;
+margin:0 0 10px;
+font-size:clamp(1.5rem,3.4vw,2.2rem);
+}
+
+.m3-intro{
+text-align:center;
+max-width:820px;
+margin:0 auto 18px;
+font-size:1.05rem;
+}
+
+.m3-scoreboard{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin:16px 0;
+}
+
+.m3-score-chip{
+background:#eef6ff;
+border:2px solid #7caad5;
+border-radius:999px;
+padding:9px 16px;
+font-weight:900;
+}
+
+.m3-score-chip strong{ color:#0b5fa5; }
+
+.m3-progress{
+max-width:650px;
+height:20px;
+margin:0 auto 22px;
+background:#dce5ed;
+border:2px solid #64748b;
+border-radius:999px;
+overflow:hidden;
+}
+
+.m3-progress span{
+display:block;
+width:0;
+height:100%;
+background:linear-gradient(90deg,#08783f,#54b56f);
+transition:width 0.35s ease;
+}
+
+.m3-intensity{
+text-align:center;
+font-size:1.2rem;
+font-weight:900;
+min-height:1.8em;
+color:#6536b4;
+margin:0 0 10px;
+}
+
+.m3-fields{
+display:grid;
+grid-template-columns:repeat(3,minmax(190px,1fr));
+gap:14px;
+}
+
+.m3-field{
+background:#f3f8fd;
+border:2px solid #c5d9ec;
+border-radius:12px;
+padding:13px;
+}
+
+.m3-field label{
+display:block;
+font-weight:900;
+margin-bottom:5px;
+}
+
+.m3-field input{
+width:100%;
+padding:10px;
+border:2px solid #617184;
+border-radius:7px;
+font:inherit;
+color:#111111;
+background:#ffffff;
+}
+
+.m3-field input[aria-invalid="true"]{
+border:3px solid #b42318;
+background:#fff0ee;
+}
+
+.m3-field input.m3-valid{
+border:3px solid #08783f;
+background:#eefaf2;
+}
+
+.m3-help{
+display:block;
+margin-top:5px;
+font-size:0.86rem;
+color:#46566b;
+}
+
+.m3-feedback{
+display:block;
+min-height:1.5em;
+margin-top:4px;
+font-weight:800;
+}
+
+.m3-feedback.m3-good{ color:#08783f; }
+.m3-feedback.m3-bad{ color:#b42318; }
+
+.m3-controls{ text-align:center; margin:18px 0; }
+
+.m3-launch{ background:#6536b4; }
+.m3-reset{ background:#b42318; }
+
+.m3-ocean-track{
+position:relative;
+height:320px;
+overflow:hidden;
+border-radius:16px;
+border:3px solid #285b88;
+background:linear-gradient(#a7ddff 0 28%,#169eda 28% 100%);
+}
+
+.m3-sky-label{
+position:absolute;
+top:12px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,0.9);
+padding:6px 12px;
+border-radius:20px;
+font-weight:900;
+color:#173c62;
+}
+
+.m3-east,
+.m3-west{
+position:absolute;
+top:54px;
+background:#ffffff;
+padding:5px 10px;
+border-radius:8px;
+font-weight:900;
+color:#15263c;
+}
+
+.m3-east{ right:15px; }
+.m3-west{ left:15px; }
+
+.m3-trade-winds{
+position:absolute;
+top:88px;
+left:14%;
+right:14%;
+text-align:center;
+color:#ffffff;
+font-weight:900;
+font-size:2rem;
+text-shadow:0 2px 3px rgba(0,0,0,0.55);
+}
+
+.m3-island{
+position:absolute;
+left:3%;
+bottom:26px;
+width:115px;
+height:54px;
+background:#76a94d;
+border-top:10px solid #e5c078;
+border-radius:52% 52% 28% 30%;
+}
+
+.m3-island::after{
+content:"LAND";
+position:absolute;
+left:26px;
+top:12px;
+font-weight:900;
+color:#153b20;
+}
+
+.m3-storm{
+position:absolute;
+right:5%;
+top:130px;
+width:96px;
+height:96px;
+border-radius:50%;
+background:radial-gradient(circle,#dff7ff 0 11%,#2d88ca 12% 28%,#ffffff 29% 39%,#176fb5 40% 56%,#ffffff 57% 67%,#0c4c87 68%);
+box-shadow:0 4px 16px rgba(0,0,0,0.45);
+}
+
+.m3-storm.run{
+animation:m3StormTravel 6s linear forwards, m3StormSpin 1s linear infinite;
+}
+
+@keyframes m3StormTravel{
+0%{ right:5%; top:130px; filter:brightness(0.85); }
+35%{ right:36%; top:112px; filter:brightness(1); }
+70%{ right:66%; top:120px; filter:brightness(1.08); }
+100%{ right:82%; top:155px; transform:scale(0.7); filter:brightness(0.72); }
+}
+
+@keyframes m3StormSpin{ to{ rotate:-360deg; } }
+
+.m3-track-message{
+text-align:center;
+font-size:1.14rem;
+font-weight:900;
+min-height:1.8em;
+margin:14px 0 0;
+}
+
+.m3-summary{
+display:none;
+margin-top:15px;
+padding:15px;
+border-left:6px solid #08783f;
+background:#eaf8ef;
+border-radius:8px;
+}
+
+@media (max-width:900px){
+.m3-fields{ grid-template-columns:1fr; }
+.m3-ocean-track{ height:285px; }
+}
+
+@media (max-width:900px){
+#mission2 .m2-instructions,
+#mission2 .m2-sequence{ width:100%; }
+}
+
+@media (prefers-reduced-motion:reduce){
+*{ animation:none !important; transition:none !important; }
+.m3-storm.run{
+right:82%;
+top:155px;
+transform:scale(0.7);
+filter:brightness(0.72);
+}
+}
+
+</style>
+</head>
+<body>
+
+<div class="topnav"><a href="/geography/games">&larr; Back to Interactive KS3 Geography Games</a></div>
+
+<h1>&#127786; Tropical Storm Mission</h1>
+
+<div class="subtitle">
+Complete all three missions to build a full picture of how tropical storms form, develop and move.
+</div>
+
+<div class="tracker" id="tracker" role="status" aria-label="Mission progress: Mission 1 of 3, Cross-Section, in progress">
+
+<div class="tracker-step active" id="trackerStep1">
+<span class="step-num">1</span> Cross-Section
+</div>
+
+<div class="tracker-arrow" aria-hidden="true">&rarr;</div>
+
+<div class="tracker-step" id="trackerStep2">
+<span class="step-num">2</span> Formation
+</div>
+
+<div class="tracker-arrow" aria-hidden="true">&rarr;</div>
+
+<div class="tracker-step" id="trackerStep3">
+<span class="step-num">3</span> Final Mission
+</div>
+
+</div>
+
+<div class="overall-score">
+Overall Mission Score: <strong id="overallScore">0 / 23</strong>
+</div>
+
+<div class="sr-only" id="pageLiveRegion" role="status" aria-live="assertive" aria-atomic="true"></div>
+
+<!-- ==================================================== -->
+<!-- MISSION 1 — CROSS-SECTION CHALLENGE                    -->
+<!-- ==================================================== -->
+
+<section id="mission1" class="mission-section" aria-labelledby="m1Heading">
+
+<h2 id="m1Heading">Mission 1: Tropical Storm Cross-Section Challenge</h2>
+
+<p class="mission-intro">
+Drag each label onto the correct location on the tropical storm diagram.
+</p>
+
+<div class="m1-game-container">
+
+<div class="m1-panel m1-labels-panel">
+<h3>Labels</h3>
+<div id="m1-labelBank"></div>
+</div>
+
+<div class="m1-panel m1-diagram-panel">
+<div class="m1-diagram">
+
+<div id="outflow" class="m1-hotspot" data-answer="Outflow"></div>
+<div id="eye" class="m1-hotspot" data-answer="Eye (High Pressure)"></div>
+<div id="eyewall" class="m1-hotspot" data-answer="Eye Wall"></div>
+<div id="clouds" class="m1-hotspot" data-answer="Cumulonimbus Clouds"></div>
+<div id="bands-left" class="m1-hotspot" data-answer="Low Pressure"></div>
+<div id="bands-right" class="m1-hotspot" data-answer="Spiral Rain Bands"></div>
+<div id="rising" class="m1-hotspot" data-answer="Warm Rising Air"></div>
+<div id="pressure" class="m1-hotspot" data-answer="The Coriolis Effect"></div>
+<div id="ocean" class="m1-hotspot" data-answer="Warm Ocean Water"></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="m1-controls">
+<button class="m1-check" id="m1CheckButton">Check Diagram</button>
+<button class="m1-reset" id="m1ResetButton">Reset Mission 1</button>
+</div>
+
+<div class="m1-result" id="m1Result"></div>
+
+<div class="m1-challenge" id="m1Challenge">
+<h3>&#127942; Storm Expert Challenge</h3>
+<p>Explain why the strongest winds occur in the eye wall rather than in the eye.</p>
+<textarea placeholder="Write your answer here..."></textarea>
+</div>
+
+</section>
+
+<!-- ==================================================== -->
+<!-- MISSION 2 — FORMATION CHALLENGE                        -->
+<!-- ==================================================== -->
+
+<section id="mission2" class="mission-section" hidden aria-labelledby="m2Heading">
+
+<h2 id="m2Heading">Mission 2: Tropical Storm Formation Challenge</h2>
+
+<p class="mission-intro">
+Drag each stage into the correct order to show how a tropical storm develops, starting at the top box.
+</p>
+
+<div id="m2-timer">&#9203; 3:00</div>
+
+<div class="m2-container">
+
+<div class="m2-instructions">
+<h3>Stages</h3>
+<div id="m2-cards"></div>
+</div>
+
+<div class="m2-sequence">
+<h3>Correct Formation Sequence</h3>
+<div class="m2-slot" data-position="1"></div>
+<div class="m2-slot" data-position="2"></div>
+<div class="m2-slot" data-position="3"></div>
+<div class="m2-slot" data-position="4"></div>
+<div class="m2-slot" data-position="5"></div>
+<div class="m2-slot" data-position="6"></div>
+<div class="m2-slot" data-position="7"></div>
+<div class="m2-slot" data-position="8"></div>
+</div>
+
+</div>
+
+<div class="m2-controls">
+<button class="m2-check" id="m2CheckButton">Check Sequence</button>
+<button class="m2-reset" id="m2ResetButton">Reset Mission 2</button>
+</div>
+
+<div class="m2-result" id="m2Result"></div>
+
+<div class="m2-extension" id="m2Extension">
+<h3>&#127942; Challenge Question</h3>
+<p>Why do tropical storms normally weaken once they move over land?</p>
+<textarea placeholder="Write your answer here..."></textarea>
+</div>
+
+</section>
+
+<!-- ==================================================== -->
+<!-- MISSION 3 — FINAL MISSION: BUILD AND STEER A STORM      -->
+<!-- ==================================================== -->
+
+<section id="mission3" class="mission-section" hidden aria-labelledby="m3Heading">
+
+<div class="m3-wrap">
+
+<h2 id="m3Heading">&#127754; Final Mission: Build and Steer a Tropical Storm</h2>
+
+<p class="m3-intro">
+Enter the six environmental conditions needed for a tropical storm to form.
+When all six conditions are suitable, the storm will develop in the east
+and travel westwards across the tropical ocean.
+</p>
+
+<div class="m3-scoreboard" aria-label="Final Mission scoreboard">
+
+<div class="m3-score-chip">
+Conditions score: <strong id="m3ConditionsScore">0 / 6</strong>
+</div>
+
+<div class="m3-score-chip">
+Attempts: <strong id="m3Attempts">0</strong>
+</div>
+
+<div class="m3-score-chip">
+Overall game score: <strong id="m3TotalScore">17 / 23</strong>
+</div>
+
+</div>
+
+<div
+class="m3-progress"
+id="m3Progress"
+role="progressbar"
+aria-label="Conditions mission progress"
+aria-valuemin="0"
+aria-valuemax="6"
+aria-valuenow="0"
+>
+<span id="m3ProgressFill"></span>
+</div>
+
+<p class="m3-intensity" id="m3Intensity" role="status" aria-live="polite">
+Storm status: No organised storm
+</p>
+
+<form id="m3Form" novalidate>
+
+<div class="m3-fields">
+
+<div class="m3-field">
+<label for="m3SeaTemp">Sea temperature in &deg;C</label>
+<input id="m3SeaTemp" type="number" inputmode="decimal" step="0.1" aria-describedby="m3SeaTempHelp m3SeaTempFeedback">
+<span class="m3-help" id="m3SeaTempHelp">Enter the minimum suitable ocean temperature.</span>
+<span class="m3-feedback" id="m3SeaTempFeedback" aria-live="polite"></span>
+</div>
+
+<div class="m3-field">
+<label for="m3Latitude">Latitude from the Equator in degrees</label>
+<input id="m3Latitude" type="number" inputmode="numeric" min="0" max="90" aria-describedby="m3LatitudeHelp m3LatitudeFeedback">
+<span class="m3-help" id="m3LatitudeHelp">Enter a suitable tropical latitude.</span>
+<span class="m3-feedback" id="m3LatitudeFeedback" aria-live="polite"></span>
+</div>
+
+<div class="m3-field">
+<label for="m3WarmDepth">Depth of warm ocean water in metres</label>
+<input id="m3WarmDepth" type="number" inputmode="numeric" min="0" aria-describedby="m3WarmDepthHelp m3WarmDepthFeedback">
+<span class="m3-help" id="m3WarmDepthHelp">Warm water must extend below the surface.</span>
+<span class="m3-feedback" id="m3WarmDepthFeedback" aria-live="polite"></span>
+</div>
+
+<div class="m3-field">
+<label for="m3WindShear">Vertical wind shear in km/h</label>
+<input id="m3WindShear" type="number" inputmode="decimal" min="0" aria-describedby="m3WindShearHelp m3WindShearFeedback">
+<span class="m3-help" id="m3WindShearHelp">Enter a value that will not tear the storm apart.</span>
+<span class="m3-feedback" id="m3WindShearFeedback" aria-live="polite"></span>
+</div>
+
+<div class="m3-field">
+<label for="m3AirMoisture">Mid-level air condition</label>
+<input id="m3AirMoisture" type="text" autocomplete="off" aria-describedby="m3AirMoistureHelp m3AirMoistureFeedback">
+<span class="m3-help" id="m3AirMoistureHelp">Type one or two words describing the air.</span>
+<span class="m3-feedback" id="m3AirMoistureFeedback" aria-live="polite"></span>
+</div>
+
+<div class="m3-field">
+<label for="m3Disturbance">Starting weather feature</label>
+<input id="m3Disturbance" type="text" autocomplete="off" aria-describedby="m3DisturbanceHelp m3DisturbanceFeedback">
+<span class="m3-help" id="m3DisturbanceHelp">Type the near-surface feature needed at the start.</span>
+<span class="m3-feedback" id="m3DisturbanceFeedback" aria-live="polite"></span>
+</div>
+
+</div>
+
+<div class="m3-controls">
+<button class="m3-launch" type="submit">Test conditions and launch storm</button>
+<button class="m3-reset" type="button" id="m3ResetButton">Reset mission</button>
+</div>
+
+</form>
+
+<div class="m3-ocean-track" aria-label="A tropical ocean route running from east to west">
+<div class="m3-sky-label">Tropical easterly trade winds</div>
+<div class="m3-west">WEST</div>
+<div class="m3-east">EAST</div>
+<div class="m3-trade-winds" aria-hidden="true">&larr; &larr; &larr; &larr; &larr; &larr;</div>
+<div class="m3-island" aria-hidden="true"></div>
+<div class="m3-storm" id="m3Storm" aria-hidden="true"></div>
+</div>
+
+<p class="m3-track-message" id="m3TrackMessage" role="status" aria-live="assertive">
+The storm is waiting in the east.
+</p>
+
+<div class="m3-summary" id="m3Summary" tabindex="-1">
+<strong>&#127942; Mission Complete: Conditions Score 6/6, Overall Score 23/23</strong>
+You successfully created and steered a tropical storm.
+The storm moved westward due to the tropical easterly trade winds.
+The storm weakened over land because it lost access to warm ocean water.
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* ==================================================== */
+/* SHARED PAGE HELPERS                                    */
+/* ==================================================== */
+
+const M1_TOTAL = 9;
+const M2_TOTAL = 8;
+const M3_TOTAL = 6;
+const OVERALL_TOTAL = M1_TOTAL + M2_TOTAL + M3_TOTAL;
+
+let m1Score = 0;
+let m2Score = 0;
+let m3Score = 0;
+
+const pageLiveRegion =
+document.getElementById("pageLiveRegion");
+
+function announce(message){
+
+pageLiveRegion.textContent = "";
+
+window.setTimeout(() => {
+pageLiveRegion.textContent = message;
+}, 25);
+
+}
+
+function updateOverallScore(){
+
+const total = m1Score + m2Score + m3Score;
+
+document.getElementById("overallScore")
+.textContent = `${total} / ${OVERALL_TOTAL}`;
+
+const m3TotalScore =
+document.getElementById("m3TotalScore");
+
+if(m3TotalScore){
+m3TotalScore.textContent = `${total} / ${OVERALL_TOTAL}`;
+}
+
+updateTracker();
+
+}
+
+function updateTracker(){
+
+const step1 = document.getElementById("trackerStep1");
+const step2 = document.getElementById("trackerStep2");
+const step3 = document.getElementById("trackerStep3");
+
+const m2Visible = !document.getElementById("mission2").hidden;
+const m3Visible = !document.getElementById("mission3").hidden;
+
+step1.classList.toggle("complete", m1Score === M1_TOTAL);
+step1.classList.toggle("active", m1Score !== M1_TOTAL);
+
+step2.classList.toggle("complete", m2Score === M2_TOTAL);
+step2.classList.toggle("active", m2Visible && m2Score !== M2_TOTAL);
+
+step3.classList.toggle("complete", m3Score === M3_TOTAL);
+step3.classList.toggle("active", m3Visible && m3Score !== M3_TOTAL);
+
+let label = "Mission progress: ";
+
+if(m1Score !== M1_TOTAL){
+label += "Mission 1 of 3, Cross-Section, in progress.";
+}else if(m2Score !== M2_TOTAL){
+label += "Mission 1 complete. Mission 2 of 3, Formation, in progress.";
+}else if(m3Score !== M3_TOTAL){
+label += "Mission 2 complete. Final Mission in progress.";
+}else{
+label += "All three missions complete.";
+}
+
+document.getElementById("tracker")
+.setAttribute("aria-label", label);
+
+}
+
+
+/* ==================================================== */
+/* SHARED DRAG-AND-DROP ENGINE (mouse + touch/iPad)       */
+/* ==================================================== */
+/* Uses Pointer Events instead of the HTML5 drag-and-drop
+   API, because iOS/iPadOS Safari never fires native
+   dragstart/dragover/drop for touch input. Pointer Events
+   work the same way for mouse, touch and pen, so one code
+   path now drives both missions on every device. */
+
+function makeItemDraggable(item, getHomeZone){
+
+item.style.touchAction = "none";
+
+item.addEventListener("pointerdown", e => {
+
+e.preventDefault();
+
+const startRect = item.getBoundingClientRect();
+const offsetX = e.clientX - startRect.left;
+const offsetY = e.clientY - startRect.top;
+const originParent = item.parentElement;
+
+/* hold the item's place while it's lifted out, so removing it from the
+   label bank (or a slot) can't reflow the layout underneath the drag -
+   on narrow/tablet widths the bank and the diagram can wrap onto
+   separate rows, and without this the whole diagram used to jump the
+   moment a label was picked up. */
+const itemStyle = getComputedStyle(item);
+const placeholder = document.createElement("div");
+placeholder.style.width = startRect.width + "px";
+placeholder.style.height = startRect.height + "px";
+placeholder.style.marginBottom = itemStyle.marginBottom;
+placeholder.style.visibility = "hidden";
+originParent.insertBefore(placeholder, item);
+
+item.classList.add("dragging");
+item.style.position = "fixed";
+item.style.left = startRect.left + "px";
+item.style.top = startRect.top + "px";
+item.style.width = startRect.width + "px";
+item.style.zIndex = 9999;
+document.body.appendChild(item);
+
+function onMove(ev){
+item.style.left = (ev.clientX - offsetX) + "px";
+item.style.top = (ev.clientY - offsetY) + "px";
+}
+
+function onUp(ev){
+
+window.removeEventListener("pointermove", onMove);
+window.removeEventListener("pointerup", onUp);
+window.removeEventListener("pointercancel", onUp);
+
+/* Find the drop zone by plain geometry (does the release point fall
+   inside its rectangle?) instead of asking the browser to hit-test the
+   DOM. Hit-testing methods (elementFromPoint/elementsFromPoint) depend
+   on the browser's current paint/style state, and on some real-world
+   Chromium/Edge builds that state wasn't reliably settled at the exact
+   moment we read it, so the drop silently missed the hotspot and the
+   label snapped back to the bank. A rectangle check has no such
+   dependency - it only needs each zone's current layout position. */
+const candidates = document.querySelectorAll(item.dataset.dropZoneSelector);
+let zone = null;
+for(const candidate of candidates){
+const r = candidate.getBoundingClientRect();
+if(ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom){
+zone = candidate;
+break;
+}
+}
+
+item.classList.remove("dragging");
+item.style.position = "";
+item.style.left = "";
+item.style.top = "";
+item.style.width = "";
+item.style.zIndex = "";
+
+if(zone){
+
+const isMulti = zone.matches(item.dataset.multiZoneSelector);
+
+if(!isMulti){
+const existing = zone.querySelector(item.dataset.itemSelector);
+if(existing && existing !== item){
+getHomeZone().appendChild(existing);
+}
+}
+
+zone.appendChild(item);
+placeholder.remove();
+
+}else{
+
+originParent.insertBefore(item, placeholder);
+placeholder.remove();
+
+}
+
+}
+
+window.addEventListener("pointermove", onMove);
+window.addEventListener("pointerup", onUp);
+window.addEventListener("pointercancel", onUp);
+
+});
+
+}
+
+/* ==================================================== */
+/* MISSION 1 — CROSS-SECTION CHALLENGE                    */
+/* ==================================================== */
+
+const m1Labels = [
+
+"Outflow",
+"Eye (High Pressure)",
+"Eye Wall",
+"Cumulonimbus Clouds",
+"Low Pressure",
+"Spiral Rain Bands",
+"Warm Rising Air",
+"The Coriolis Effect",
+"Warm Ocean Water"
+
+];
+
+function buildMission1Labels(){
+
+const bank =
+document.getElementById("m1-labelBank");
+
+bank.innerHTML = "";
+
+const shuffled =
+[...m1Labels].sort(() => Math.random() - 0.5);
+
+shuffled.forEach(text => {
+
+const label =
+document.createElement("div");
+
+label.className = "m1-label";
+label.textContent = text;
+label.dataset.dropZoneSelector = "#mission1 .m1-hotspot,#m1-labelBank";
+label.dataset.multiZoneSelector = "#m1-labelBank";
+label.dataset.itemSelector = ".m1-label";
+
+makeItemDraggable(label, () => document.getElementById("m1-labelBank"));
+
+bank.appendChild(label);
+
+});
+
+}
+
+buildMission1Labels();
+
+function checkMission1(){
+
+let score = 0;
+
+document.querySelectorAll("#mission1 .m1-hotspot")
+.forEach(spot => {
+
+spot.classList.remove("m1-correct", "m1-incorrect");
+
+const label =
+spot.querySelector(".m1-label");
+
+if(!label){
+spot.classList.add("m1-incorrect");
+return;
+}
+
+if(label.textContent === spot.dataset.answer){
+spot.classList.add("m1-correct");
+score++;
+}else{
+spot.classList.add("m1-incorrect");
+}
+
+});
+
+m1Score = score;
+
+const result =
+document.getElementById("m1Result");
+
+result.innerHTML =
+`&#127744; Score: ${score}/${M1_TOTAL}`;
+
+if(score === M1_TOTAL){
+
+result.innerHTML =
+"&#127942; Perfect! Tropical Storm Expert!";
+
+document.getElementById("m1Challenge")
+.style.display = "block";
+
+announce("Mission 1 complete with a perfect score. Mission 2, Formation, has unlocked below.");
+
+revealMission2();
+
+}
+
+updateOverallScore();
+
+}
+
+function resetMission1(){
+
+document.querySelectorAll("#mission1 .m1-hotspot")
+.forEach(spot => {
+spot.classList.remove("m1-correct", "m1-incorrect");
+spot.innerHTML = "";
+});
+
+buildMission1Labels();
+
+document.getElementById("m1Result").innerHTML = "";
+document.getElementById("m1Challenge").style.display = "none";
+
+m1Score = 0;
+updateOverallScore();
+
+}
+
+document.getElementById("m1CheckButton")
+.addEventListener("click", checkMission1);
+
+document.getElementById("m1ResetButton")
+.addEventListener("click", resetMission1);
+
+
+/* ==================================================== */
+/* MISSION 2 — FORMATION CHALLENGE                        */
+/* ==================================================== */
+
+const m2Stages = [
+
+"Warm Ocean (>27°C)",
+"Evaporation",
+"Warm Moist Air Rises",
+"Condensation",
+"Latent Heat Release",
+"Pressure Falls",
+"More Air Drawn In",
+"Tropical Storm Develops"
+
+];
+
+let m2Revealed = false;
+let m2CountdownInterval = null;
+let m2TimeRemaining = 180;
+
+function buildMission2Cards(){
+
+const cardsDiv =
+document.getElementById("m2-cards");
+
+cardsDiv.innerHTML = "";
+
+document.querySelectorAll("#mission2 .m2-slot")
+.forEach(slot => {
+slot.innerHTML = "";
+slot.classList.remove("m2-correct", "m2-incorrect");
+});
+
+const shuffled =
+[...m2Stages].sort(() => Math.random() - 0.5);
+
+shuffled.forEach(stage => {
+
+const card =
+document.createElement("div");
+
+card.className = "m2-card";
+card.textContent = stage;
+card.dataset.dropZoneSelector = "#mission2 .m2-slot,#m2-cards";
+card.dataset.multiZoneSelector = "#m2-cards";
+card.dataset.itemSelector = ".m2-card";
+
+makeItemDraggable(card, () => document.getElementById("m2-cards"));
+
+cardsDiv.appendChild(card);
+
+});
+
+}
+
+function checkMission2(){
+
+let score = 0;
+
+document.querySelectorAll("#mission2 .m2-slot")
+.forEach((slot, index) => {
+
+slot.classList.remove("m2-correct", "m2-incorrect");
+
+const card =
+slot.querySelector(".m2-card");
+
+if(!card){
+slot.classList.add("m2-incorrect");
+return;
+}
+
+if(card.textContent === m2Stages[index]){
+slot.classList.add("m2-correct");
+score++;
+}else{
+slot.classList.add("m2-incorrect");
+}
+
+});
+
+m2Score = score;
+
+const result =
+document.getElementById("m2Result");
+
+result.innerHTML =
+`&#127744; Formation Score: ${score}/${M2_TOTAL}`;
+
+if(score === M2_TOTAL){
+
+result.innerHTML =
+"&#127942; Perfect! Tropical Storm Successfully Formed!";
+
+document.getElementById("m2Extension")
+.style.display = "block";
+
+stopMission2Timer();
+
+announce("Mission 2 complete with a perfect score. The Final Mission has unlocked below.");
+
+revealMission3();
+
+}
+
+updateOverallScore();
+
+}
+
+function startMission2Timer(){
+
+stopMission2Timer();
+
+m2TimeRemaining = 180;
+updateMission2TimerDisplay();
+
+m2CountdownInterval = setInterval(() => {
+
+m2TimeRemaining--;
+updateMission2TimerDisplay();
+
+if(m2TimeRemaining <= 0){
+stopMission2Timer();
+checkMission2();
+}
+
+}, 1000);
+
+}
+
+function stopMission2Timer(){
+
+if(m2CountdownInterval){
+clearInterval(m2CountdownInterval);
+m2CountdownInterval = null;
+}
+
+}
+
+function updateMission2TimerDisplay(){
+
+const mins = Math.floor(m2TimeRemaining / 60);
+const secs = m2TimeRemaining % 60;
+
+document.getElementById("m2-timer").innerHTML =
+`&#9203; ${mins}:${secs.toString().padStart(2, "0")}`;
+
+}
+
+function resetMission2(){
+
+buildMission2Cards();
+
+document.getElementById("m2Result").innerHTML = "";
+document.getElementById("m2Extension").style.display = "none";
+
+m2Score = 0;
+updateOverallScore();
+
+startMission2Timer();
+
+}
+
+function revealMission2(){
+
+if(m2Revealed) return;
+
+m2Revealed = true;
+
+const mission =
+document.getElementById("mission2");
+
+mission.hidden = false;
+
+buildMission2Cards();
+startMission2Timer();
+updateOverallScore();
+
+mission.scrollIntoView({ behavior: "smooth", block: "start" });
+
+}
+
+document.getElementById("m2CheckButton")
+.addEventListener("click", checkMission2);
+
+document.getElementById("m2ResetButton")
+.addEventListener("click", resetMission2);
+
+
+/* ==================================================== */
+/* MISSION 3 — FINAL MISSION                              */
+/* ==================================================== */
+
+const m3Form =
+document.getElementById("m3Form");
+
+const m3Storm =
+document.getElementById("m3Storm");
+
+const m3TrackMessage =
+document.getElementById("m3TrackMessage");
+
+const m3Summary =
+document.getElementById("m3Summary");
+
+const m3ConditionsScore =
+document.getElementById("m3ConditionsScore");
+
+const m3AttemptsDisplay =
+document.getElementById("m3Attempts");
+
+const m3Progress =
+document.getElementById("m3Progress");
+
+const m3ProgressFill =
+document.getElementById("m3ProgressFill");
+
+const m3Intensity =
+document.getElementById("m3Intensity");
+
+let m3Attempts = 0;
+let m3Revealed = false;
+
+
+function revealMission3(){
+
+if(m3Revealed) return;
+
+m3Revealed = true;
+
+const mission =
+document.getElementById("mission3");
+
+mission.hidden = false;
+
+updateMission3Score(0);
+
+mission.scrollIntoView({ behavior: "smooth", block: "start" });
+
+}
+
+
+function m3NormaliseText(value){
+
+return value
+.trim()
+.toLowerCase()
+.replace(/[^a-z\s-]/g, "");
+
+}
+
+
+function m3SetFieldResult(id, isValid, message){
+
+const input =
+document.getElementById(id);
+
+const feedback =
+document.getElementById(id + "Feedback");
+
+input.setAttribute("aria-invalid", String(!isValid));
+input.classList.toggle("m3-valid", isValid);
+
+feedback.className =
+"m3-feedback " + (isValid ? "m3-good" : "m3-bad");
+
+feedback.textContent =
+(isValid ? "✅ Correct. " : "❌ Try again. ") + message;
+
+}
+
+
+function updateMission3Score(score){
+
+m3Score = score;
+
+m3ConditionsScore.textContent = `${score} / ${M3_TOTAL}`;
+m3AttemptsDisplay.textContent = String(m3Attempts);
+
+m3Progress.setAttribute("aria-valuenow", String(score));
+m3ProgressFill.style.width = `${(score / M3_TOTAL) * 100}%`;
+
+if(score <= 3){
+m3Intensity.textContent = "Storm status: No organised storm";
+}
+if(score === 4){
+m3Intensity.textContent = "Storm status: Tropical depression";
+}
+if(score === 5){
+m3Intensity.textContent = "Storm status: Tropical storm";
+}
+if(score === 6){
+m3Intensity.textContent = "Storm status: Hurricane formed";
+}
+
+updateOverallScore();
+
+}
+
+
+function validateMission3(){
+
+const temperature =
+Number(document.getElementById("m3SeaTemp").value);
+
+const latitude =
+Number(document.getElementById("m3Latitude").value);
+
+const depth =
+Number(document.getElementById("m3WarmDepth").value);
+
+const shear =
+Number(document.getElementById("m3WindShear").value);
+
+const moisture =
+m3NormaliseText(document.getElementById("m3AirMoisture").value);
+
+const disturbance =
+m3NormaliseText(document.getElementById("m3Disturbance").value);
+
+const checks = {
+
+seaTemp:
+Number.isFinite(temperature) && temperature >= 27,
+
+latitude:
+Number.isFinite(latitude) && latitude >= 5 && latitude <= 30,
+
+warmDepth:
+Number.isFinite(depth) && depth >= 46,
+
+windShear:
+Number.isFinite(shear) && shear >= 0 && shear < 37,
+
+airMoisture:
+["moist", "moist air", "humid", "humid air", "high humidity"].includes(moisture),
+
+disturbance:
+disturbance.includes("disturbance") ||
+disturbance.includes("low pressure") ||
+disturbance.includes("tropical wave")
+
+};
+
+m3SetFieldResult("m3SeaTemp", checks.seaTemp,
+"Water not warm enough. The sea must be at least 27°C.");
+
+m3SetFieldResult("m3Latitude", checks.latitude,
+"Too close to or too far from the Equator. Use a latitude between 5° and 30°.");
+
+m3SetFieldResult("m3WarmDepth", checks.warmDepth,
+"Warm water layer too shallow. It should extend to at least 46 metres.");
+
+m3SetFieldResult("m3WindShear", checks.windShear,
+"Wind shear too strong. It should be below 37 km/h.");
+
+m3SetFieldResult("m3AirMoisture", checks.airMoisture,
+"The mid-level air should be moist or humid.");
+
+m3SetFieldResult("m3Disturbance", checks.disturbance,
+"Enter disturbance, low pressure, or tropical wave.");
+
+const score =
+Object.values(checks).filter(Boolean).length;
+
+return { score: score, allCorrect: score === M3_TOTAL };
+
+}
+
+
+m3Form.addEventListener("submit", event => {
+
+event.preventDefault();
+
+m3Attempts++;
+
+m3Storm.classList.remove("run");
+m3Summary.style.display = "none";
+
+const result = validateMission3();
+
+updateMission3Score(result.score);
+
+if(!result.allCorrect){
+
+const remaining = M3_TOTAL - result.score;
+
+const message =
+`${result.score} of ${M3_TOTAL} conditions correct. ${remaining} condition${remaining === 1 ? "" : "s"} ` +
+`${remaining === 1 ? "still needs" : "still need"} adjusting. Check the feedback below and try again.`;
+
+m3TrackMessage.textContent = message;
+announce(message);
+
+return;
+
+}
+
+m3TrackMessage.textContent =
+"All conditions met! The storm is forming and heading west...";
+
+announce("All six conditions correct. The storm is forming and heading west.");
+
+m3Storm.classList.add("run");
+
+window.setTimeout(() => {
+
+const landfallMessage =
+"The storm weakened after reaching land because it lost its source of warm ocean energy.";
+
+m3TrackMessage.textContent = landfallMessage;
+
+announce(
+landfallMessage +
+` Mission complete. All three missions finished with ${OVERALL_TOTAL} out of ${OVERALL_TOTAL}.`
+);
+
+m3Summary.style.display = "block";
+m3Summary.focus();
+
+}, 6000);
+
+});
+
+
+document.getElementById("m3ResetButton")
+.addEventListener("click", () => {
+
+m3Form.reset();
+
+document.querySelectorAll("#mission3 input")
+.forEach(input => {
+input.removeAttribute("aria-invalid");
+input.classList.remove("m3-valid");
+});
+
+document.querySelectorAll("#mission3 .m3-feedback")
+.forEach(feedback => {
+feedback.className = "m3-feedback";
+feedback.textContent = "";
+});
+
+m3Attempts = 0;
+
+m3Storm.classList.remove("run");
+m3Summary.style.display = "none";
+
+m3TrackMessage.textContent = "The storm is waiting in the east.";
+
+updateMission3Score(0);
+
+});
+
+
+/* INITIAL STATE */
+
+updateOverallScore();
+
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
