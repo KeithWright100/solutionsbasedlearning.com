@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Energy Sort — IGCSE Geography Games — SBL</title>
+<meta name="description" content="Starter game: sort energy resources into renewable and non-renewable, then justify the tricky cases. Edexcel IGCSE Geography Topic 4: Economic Activity and Energy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --renew: #0f9d58;
+    --nonrenew: #b45309;
+    --card-bg: #ffffff;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(0, 184, 176, 0.14), transparent 35%),
+      linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+
+  .top-bar {
+    padding: 20px 22px;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(1, 21, 38, 0.98), rgba(2, 50, 78, 0.96));
+  }
+  .top-bar-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1100px; margin: 28px auto 60px; padding: 0 18px; }
+
+  .intro { text-align: center; margin-bottom: 22px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 680px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  .steps { display: flex; justify-content: center; gap: 10px; margin: 18px 0 20px; flex-wrap: wrap; }
+  .step { padding: 7px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 750; background: rgba(255,255,255,0.7); border: 1px solid rgba(5,43,65,0.14); color: var(--muted); }
+  .step.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.3); }
+
+  .hud { display: flex; justify-content: center; gap: 26px; font-weight: 850; font-size: 1.05rem; margin-bottom: 14px; }
+  .hud .time { color: var(--amber); }
+  .hud .score { color: var(--teal-dark); }
+
+  .panel { background: rgba(255,255,255,0.85); border: 1px solid rgba(5,43,65,0.12); border-radius: var(--radius); padding: 16px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+
+  .tray-label { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; text-align: center; }
+  #tray { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; min-height: 58px; }
+  .tray-empty { color: var(--muted); font-size: 0.9rem; align-self: center; }
+
+  .ecard {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-radius: 12px;
+    background: var(--card-bg); color: var(--ink);
+    border: 2px solid rgba(5,43,65,0.18);
+    font-weight: 750; font-size: 0.93rem;
+    cursor: grab; user-select: none; touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,25,45,0.08);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .ecard .emo { font-size: 1.15rem; line-height: 1; }
+  .ecard:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,25,45,0.14); }
+  .ecard.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .ecard.dragging { cursor: grabbing; opacity: 0.95; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .ecard.correct { border-color: var(--green); background: var(--green-soft); }
+  .ecard.incorrect { border-color: var(--red); background: var(--red-soft); }
+
+  .zones { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .zone { border-radius: var(--radius); padding: 14px; min-height: 230px; background: rgba(255,255,255,0.9); border: 3px dashed; cursor: pointer; transition: background .2s ease; }
+  .zone.renewable { border-color: rgba(15,157,88,0.55); }
+  .zone.nonrenewable { border-color: rgba(180,83,9,0.55); }
+  .zone.hover, .zone.target-ready:hover { background: #f0fbfa; }
+  .zone h2 { font-size: 1.1rem; font-weight: 900; text-align: center; }
+  .zone.renewable h2 { color: var(--renew); }
+  .zone.nonrenewable h2 { color: var(--nonrenew); }
+  .zone .def { text-align: center; font-size: 0.82rem; color: var(--muted); margin: 4px 0 12px; }
+  .zone-cards { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-content: flex-start; min-height: 60px; }
+
+  .controls { text-align: center; margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: .5; cursor: default; transform: none; }
+
+  #result { text-align: center; margin-top: 14px; font-weight: 750; min-height: 1.5em; }
+  .hint { text-align: center; font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+
+  /* Round 2 */
+  #round2, #finish { display: none; }
+  .q-card { max-width: 760px; margin: 0 auto; }
+  .q-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .q-source { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .q-source .emo { font-size: 2.2rem; }
+  .q-source h3 { font-size: 1.35rem; font-weight: 900; color: var(--navy); }
+  .q-text { font-size: 1.02rem; line-height: 1.5; margin-bottom: 14px; font-weight: 600; }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; padding: 13px 15px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.15); background: #fff; font-size: 0.95rem; font-weight: 600; color: var(--ink); cursor: pointer; line-height: 1.4; }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.right { border-color: var(--green); background: var(--green-soft); }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt:disabled { cursor: default; }
+  .feedback { display: none; margin-top: 14px; padding: 14px 16px; border-radius: 12px; background: #f1f7f9; border-left: 5px solid var(--teal); line-height: 1.5; font-size: 0.94rem; }
+  .feedback strong { display: block; margin-bottom: 4px; }
+  .q-next { margin-top: 14px; text-align: right; }
+
+  .finish-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+  .stat { text-align: center; padding: 16px; border-radius: 14px; background: #fff; border: 1px solid rgba(5,43,65,0.12); }
+  .stat .n { font-size: 1.9rem; font-weight: 900; color: var(--navy); }
+  .stat .l { font-size: 0.8rem; font-weight: 750; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .think { margin-top: 12px; padding: 16px; border-radius: 14px; background: #fff; border: 1px dashed rgba(0,124,130,0.4); }
+  .think h3 { font-size: 1rem; font-weight: 900; color: var(--teal-dark); margin-bottom: 6px; }
+  .think p { line-height: 1.55; font-size: 0.95rem; }
+  .think textarea { width: 100%; min-height: 90px; margin-top: 10px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.2); font: inherit; font-size: 0.93rem; resize: vertical; }
+  .note { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+
+  @media (max-width: 720px) {
+    .zones { grid-template-columns: 1fr; }
+    .finish-grid { grid-template-columns: 1fr; }
+    .zone { min-height: 150px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Energy Sort</span></div>
+    <a href="/igcse/geography/revision/topics/economic-activity-and-energy" class="back-link">Topic 4 revision &rarr;</a>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">IGCSE Topic 4 &middot; Starter</span>
+    <h1>&#9889; Energy Sort</h1>
+    <p>Sort each energy resource into <strong>Renewable</strong> or <strong>Non-renewable</strong>. Then justify the tricky cases &mdash; the ones that cause mistakes in exams.</p>
+  </div>
+
+  <div class="steps">
+    <span class="step active" id="step1">1 &middot; Sort</span>
+    <span class="step" id="step2">2 &middot; Justify the tricky cases</span>
+    <span class="step" id="step3">3 &middot; Think</span>
+  </div>
+
+  <!-- ROUND 1 -->
+  <section id="round1">
+    <div class="hud">
+      <div class="time" id="timer">&#9203; 3:00</div>
+      <div class="score" id="score">Placed: 0/15</div>
+    </div>
+
+    <div class="panel">
+      <div class="tray-label">Energy resources</div>
+      <div id="tray"></div>
+    </div>
+
+    <div class="zones">
+      <div class="zone renewable" data-cat="renewable" role="button" tabindex="0" aria-label="Renewable zone">
+        <h2>&#9851;&#65039; Renewable</h2>
+        <div class="def">Naturally replenished &mdash; will not run out if used sustainably</div>
+        <div class="zone-cards"></div>
+      </div>
+      <div class="zone nonrenewable" data-cat="nonrenewable" role="button" tabindex="0" aria-label="Non-renewable zone">
+        <h2>&#9981; Non-renewable</h2>
+        <div class="def">Finite stock &mdash; formed over millions of years, will eventually run out</div>
+        <div class="zone-cards"></div>
+      </div>
+    </div>
+
+    <div class="hint">Drag a card into a zone &mdash; or tap a card, then tap a zone.</div>
+
+    <div class="controls">
+      <button class="btn primary" id="checkBtn" type="button">Check answers</button>
+      <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+      <button class="btn primary" id="toRound2" type="button" style="display:none">Next: justify the tricky cases &rarr;</button>
+    </div>
+    <div id="result" role="status"></div>
+  </section>
+
+  <!-- ROUND 2 -->
+  <section id="round2">
+    <div class="panel q-card">
+      <div class="q-top"><span id="qCount">Tricky case 1 of 5</span><span id="qScore">Score: 0</span></div>
+      <div class="q-source"><span class="emo" id="qEmo"></span><h3 id="qTitle"></h3></div>
+      <div class="q-text" id="qText"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="feedback" id="qFeedback" role="status"></div>
+      <div class="q-next"><button class="btn primary" id="qNext" type="button" style="display:none">Next &rarr;</button></div>
+    </div>
+  </section>
+
+  <!-- FINISH -->
+  <section id="finish">
+    <div class="panel q-card">
+      <h2 style="font-weight:900;color:var(--navy);text-align:center">&#127942; Starter complete</h2>
+      <div class="finish-grid">
+        <div class="stat"><div class="n" id="fSort">0/15</div><div class="l">Sorted correctly (first check)</div></div>
+        <div class="stat"><div class="n" id="fTricky">0/5</div><div class="l">Tricky cases justified</div></div>
+        <div class="stat"><div class="n" id="fTime">0:00</div><div class="l">Sort time</div></div>
+      </div>
+      <div class="think">
+        <h3>&#129300; Think &mdash; ready for today&rsquo;s lesson</h3>
+        <p id="thinkPrompt"></p>
+        <textarea aria-label="Your thinking" placeholder="Jot your answer here, ready to share..."></textarea>
+        <div class="note">Just for your own thinking &mdash; this isn&rsquo;t saved or marked.</div>
+      </div>
+      <div class="controls">
+        <button class="btn ghost" id="playAgain" type="button">Play again</button>
+        <a class="btn primary" href="/geography/games/energy-minister">Try Energy Minister &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var RESOURCES = [
+    { id: 'coal', label: 'Coal', emo: '⚫', cat: 'nonrenewable', why: 'Coal is a fossil fuel formed from plant remains over millions of years — a finite stock.' },
+    { id: 'oil', label: 'Crude oil', emo: '🛢️', cat: 'nonrenewable', why: 'Oil is a fossil fuel — once extracted and burned it cannot be replaced on a human timescale.' },
+    { id: 'gas', label: 'Natural gas', emo: '🔥', cat: 'nonrenewable', why: 'Natural gas is a fossil fuel. It is cleaner-burning than coal, but still finite.' },
+    { id: 'shale', label: 'Shale gas', emo: '⛏️', cat: 'nonrenewable', why: 'Shale gas is natural gas trapped in rock and extracted by fracking — still a finite fossil fuel.' },
+    { id: 'uranium', label: 'Uranium (nuclear)', emo: '☢️', cat: 'nonrenewable', why: 'Nuclear power is low-carbon, but uranium is a mined mineral with finite reserves.' },
+    { id: 'tarsands', label: 'Oil sands', emo: '🪨', cat: 'nonrenewable', why: 'Oil sands (tar sands) are a fossil-fuel deposit — finite, and energy-intensive to extract.' },
+    { id: 'solar', label: 'Solar', emo: '☀️', cat: 'renewable', why: 'Sunlight arrives every day and is not used up by solar panels.' },
+    { id: 'wind', label: 'Wind', emo: '🌬️', cat: 'renewable', why: 'Wind is driven by the Sun heating the atmosphere unevenly — it is constantly replenished.' },
+    { id: 'hep', label: 'Hydroelectric (HEP)', emo: '💧', cat: 'renewable', why: 'HEP uses the water cycle, which is continually replenished by rainfall.' },
+    { id: 'geo', label: 'Geothermal', emo: '🌋', cat: 'renewable', why: 'Heat from the Earth’s interior is continually generated by radioactive decay.' },
+    { id: 'biomass', label: 'Biomass', emo: '🌾', cat: 'renewable', why: 'Biomass (crops, waste, pellets) is renewable if it is regrown as fast as it is used.' },
+    { id: 'fuelwood', label: 'Fuelwood', emo: '🪵', cat: 'renewable', why: 'Fuelwood is renewable only if trees are replanted — over-harvesting causes deforestation.' },
+    { id: 'tidal', label: 'Tidal', emo: '🌊', cat: 'renewable', why: 'Tides are driven by the gravitational pull of the Moon and Sun — predictable and endless.' },
+    { id: 'wave', label: 'Wave', emo: '🏄', cat: 'renewable', why: 'Waves are generated by wind blowing over the sea, so they are continually replenished.' },
+    { id: 'biogas', label: 'Biogas', emo: '🐄', cat: 'renewable', why: 'Biogas comes from rotting organic waste (e.g. manure), which is produced continually.' }
+  ];
+  var TOTAL = RESOURCES.length;
+  var TIME_LIMIT = 180;
+
+  var TRICKY = [
+    { emo: '☢️', title: 'Nuclear power',
+      text: 'A student writes: “Nuclear power is renewable because it produces almost no carbon dioxide.” What is the best correction?',
+      options: [
+        'Nuclear is non-renewable because uranium is a finite mineral, even though it is low-carbon.',
+        'The student is correct — anything low-carbon counts as renewable.',
+        'Nuclear is non-renewable because it produces a lot of carbon dioxide.',
+        'Nuclear is renewable because the reactors can be reused.'
+      ], correct: 0,
+      explain: 'Renewable/non-renewable is about whether the resource is <em>replenished</em>, not about emissions. Uranium is mined from finite reserves, so nuclear is non-renewable — but it is also low-carbon. Exam tip: “low-carbon” and “renewable” are not the same thing.' },
+    { emo: '🪵', title: 'Fuelwood & biomass',
+      text: 'Under what condition is fuelwood a renewable energy resource?',
+      options: [
+        'Always — all plant-based fuels are renewable.',
+        'Only if trees are replanted and regrow at least as fast as they are cut down.',
+        'Only if the wood is burned in a power station.',
+        'Never — burning wood releases carbon dioxide, so it is non-renewable.'
+      ], correct: 1,
+      explain: 'Biomass is only renewable if it is managed sustainably. In many developing countries, fuelwood is collected faster than forests regrow, which leads to deforestation and soil erosion — the resource is renewable in theory but not in practice.' },
+    { emo: '💧', title: 'Hydroelectric power',
+      text: 'HEP is renewable. Which statement about its environmental impact is most accurate?',
+      options: [
+        'Because it is renewable, HEP has no environmental impact.',
+        'HEP is renewable, but large dams can flood valleys, displace people and disrupt fish migration and sediment flow.',
+        'HEP releases more greenhouse gases than coal.',
+        'HEP only affects the environment if the dam breaks.'
+      ], correct: 1,
+      explain: 'Renewable does not mean impact-free. Large dams flood land, displace communities, trap sediment and block fish migration. Exam questions often ask you to <em>compare</em> the impacts of renewable and non-renewable resources — both have costs.' },
+    { emo: '🌋', title: 'Geothermal',
+      text: 'Why is geothermal energy classed as renewable, and why can’t every country use it?',
+      options: [
+        'It uses heat from the Earth’s interior, which is constantly replenished — but it is only practical where hot rocks are near the surface, e.g. near plate boundaries (Kenya, Iceland).',
+        'It is renewable because it uses sunlight; every country could use it if they wanted to.',
+        'It uses underground coal seams, so it is only found in coal-mining countries.',
+        'It is renewable because it is expensive to build.'
+      ], correct: 0,
+      explain: 'Geothermal taps heat from radioactive decay deep in the Earth. It is most viable in tectonically active areas such as the East African Rift (Kenya gets roughly 40–45% of its electricity from geothermal) and Iceland. Location is a key limit on renewable resources.' },
+    { emo: '⛏️', title: 'Shale gas',
+      text: 'Some countries have increased supplies of shale gas through fracking. Which statement is correct?',
+      options: [
+        'Shale gas is renewable because new reserves keep being discovered.',
+        'Shale gas is non-renewable — finding new reserves extends supply but does not make a fossil fuel renewable.',
+        'Shale gas is renewable because it is extracted using water.',
+        'Shale gas is neither renewable nor non-renewable.'
+      ], correct: 1,
+      explain: 'Discovering and extracting more of a finite resource (e.g. the US shale boom) increases supply and can improve energy security, but the stock is still finite. Fracking also raises concerns about water contamination, small earthquakes and methane leaks.' }
+  ];
+
+  var THINK = [
+    'Your country could only choose THREE energy resources from today’s cards. Which three would you choose, and why? Think about cost, reliability, environmental impact and energy security.',
+    'Solar and wind are renewable but do not generate all the time. Why might a country still keep some non-renewable power stations?',
+    'Why might a developing country rely on fuelwood even though it can lead to deforestation?'
+  ];
+
+  var trayEl = document.getElementById('tray');
+  var timerEl = document.getElementById('timer');
+  var scoreEl = document.getElementById('score');
+  var resultEl = document.getElementById('result');
+  var checkBtn = document.getElementById('checkBtn');
+  var toRound2 = document.getElementById('toRound2');
+
+  var timeLeft = TIME_LIMIT, timerId = null, firstCheckScore = null, sortTime = 0, selected = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function fmt(s) { var m = Math.floor(s / 60), x = s % 60; return m + ':' + (x < 10 ? '0' : '') + x; }
+
+  function makeCard(r) {
+    var c = document.createElement('div');
+    c.className = 'ecard';
+    c.dataset.id = r.id; c.dataset.cat = r.cat;
+    c.setAttribute('tabindex', '0');
+    c.setAttribute('role', 'button');
+    c.setAttribute('aria-label', r.label);
+    c.innerHTML = '<span class="emo" aria-hidden="true">' + r.emo + '</span><span>' + r.label + '</span>';
+    c.title = '';
+    return c;
+  }
+
+  function render() {
+    trayEl.innerHTML = '';
+    document.querySelectorAll('.zone-cards').forEach(function (z) { z.innerHTML = ''; });
+    shuffle(RESOURCES.slice()).forEach(function (r) { trayEl.appendChild(makeCard(r)); });
+    updatePlaced();
+  }
+
+  function updatePlaced() {
+    var placed = document.querySelectorAll('.zone .ecard').length;
+    scoreEl.textContent = 'Placed: ' + placed + '/' + TOTAL;
+    if (!trayEl.querySelector('.ecard')) {
+      if (!trayEl.querySelector('.tray-empty')) {
+        var e = document.createElement('span'); e.className = 'tray-empty'; e.textContent = 'All cards placed — press Check answers.'; trayEl.appendChild(e);
+      }
+    } else {
+      var t = trayEl.querySelector('.tray-empty'); if (t) t.remove();
+    }
+  }
+
+  function placeIn(card, zone) {
+    card.classList.remove('correct', 'incorrect', 'selected');
+    card.title = '';
+    zone.querySelector('.zone-cards').appendChild(card);
+    selected = null;
+    updatePlaced();
+  }
+
+  // Tap-to-select, tap-to-place
+  function select(card) {
+    if (selected) selected.classList.remove('selected');
+    if (selected === card) { selected = null; return; }
+    selected = card; card.classList.add('selected');
+  }
+  document.querySelectorAll('.zone').forEach(function (zone) {
+    zone.addEventListener('click', function (e) {
+      if (e.target.closest('.ecard')) return;
+      if (selected) placeIn(selected, zone);
+    });
+    zone.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && selected) { e.preventDefault(); placeIn(selected, zone); }
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    var c = e.target.closest && e.target.closest('.ecard');
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(c); }
+  });
+
+  // Pointer drag
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('#round1 .ecard') : null;
+    if (!c) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top;
+    e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) {
+      moved = true;
+      var r = drag.getBoundingClientRect();
+      drag.style.width = r.width + 'px';
+      drag.style.position = 'fixed'; drag.style.zIndex = 1000;
+      drag.classList.add('dragging');
+    }
+    drag.style.left = (e.clientX - ox) + 'px';
+    drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none';
+    var t = document.elementFromPoint(e.clientX, e.clientY);
+    drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.zone') : null;
+    if (z) z.classList.add('hover');
+  });
+  function endDrag(e) {
+    if (!drag) return;
+    var c = drag; drag = null;
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { select(c); return; }
+    c.classList.remove('dragging');
+    c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none';
+    var t = document.elementFromPoint(e.clientX, e.clientY);
+    c.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.zone') : null;
+    if (z) placeIn(c, z);
+    else if (t && t.closest && t.closest('#tray')) { c.classList.remove('correct', 'incorrect'); trayEl.appendChild(c); updatePlaced(); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+
+  function check(timeUp) {
+    var correct = 0;
+    document.querySelectorAll('.zone').forEach(function (z) {
+      z.querySelectorAll('.ecard').forEach(function (c) {
+        var ok = c.dataset.cat === z.dataset.cat;
+        c.classList.toggle('correct', ok); c.classList.toggle('incorrect', !ok);
+        if (!ok) {
+          var r = RESOURCES.filter(function (x) { return x.id === c.dataset.id; })[0];
+          c.title = r.why;
+        }
+        if (ok) correct++;
+      });
+    });
+    var left = trayEl.querySelectorAll('.ecard').length;
+    if (firstCheckScore === null && (left === 0 || timeUp)) firstCheckScore = correct;
+    scoreEl.textContent = 'Correct: ' + correct + '/' + TOTAL;
+
+    if (correct === TOTAL) {
+      stopTimer();
+      sortTime = TIME_LIMIT - timeLeft;
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = 'All ' + TOTAL + ' correct in ' + fmt(sortTime) + '! Now for the tricky cases.';
+      toRound2.style.display = ''; checkBtn.style.display = 'none';
+    } else if (timeUp) {
+      sortTime = TIME_LIMIT;
+      resultEl.style.color = 'var(--amber)';
+      resultEl.textContent = 'Time’s up! ' + correct + '/' + TOTAL + ' correct. Hover or long-press a red card for a clue, or move on.';
+      toRound2.style.display = '';
+    } else if (left > 0) {
+      resultEl.style.color = 'var(--amber)';
+      resultEl.textContent = left + ' card(s) still to place. ' + correct + ' correct so far.';
+    } else {
+      resultEl.style.color = 'var(--red)';
+      resultEl.innerHTML = correct + '/' + TOTAL + ' correct. Move the red cards and check again. <span style="font-weight:500">(Hover a red card for a clue.)</span>';
+    }
+  }
+
+  function stopTimer() { clearInterval(timerId); timerId = null; }
+  function startTimer() {
+    stopTimer();
+    timerId = setInterval(function () {
+      timeLeft--;
+      timerEl.textContent = '⏳ ' + fmt(Math.max(timeLeft, 0));
+      if (timeLeft <= 0) { stopTimer(); check(true); }
+    }, 1000);
+  }
+
+  function resetRound1() {
+    timeLeft = TIME_LIMIT; firstCheckScore = null; sortTime = 0; selected = null;
+    timerEl.textContent = '⏳ ' + fmt(TIME_LIMIT);
+    resultEl.textContent = '';
+    toRound2.style.display = 'none'; checkBtn.style.display = '';
+    render(); startTimer();
+  }
+
+  checkBtn.addEventListener('click', function () { check(false); });
+  document.getElementById('resetBtn').addEventListener('click', resetRound1);
+
+  // ROUND 2
+  var qi = 0, qScore = 0, order = [];
+  function showStep(n) {
+    ['step1', 'step2', 'step3'].forEach(function (id, i) {
+      var el = document.getElementById(id);
+      el.className = 'step' + (i + 1 < n ? ' done' : i + 1 === n ? ' active' : '');
+    });
+  }
+  toRound2.addEventListener('click', function () {
+    stopTimer();
+    if (firstCheckScore === null) firstCheckScore = document.querySelectorAll('.zone .ecard.correct').length;
+    if (!sortTime) sortTime = TIME_LIMIT - timeLeft;
+    document.getElementById('round1').style.display = 'none';
+    document.getElementById('round2').style.display = 'block';
+    showStep(2);
+    qi = 0; qScore = 0; order = TRICKY.slice();
+    renderQ();
+  });
+
+  function renderQ() {
+    var q = order[qi];
+    document.getElementById('qCount').textContent = 'Tricky case ' + (qi + 1) + ' of ' + order.length;
+    document.getElementById('qScore').textContent = 'Score: ' + qScore;
+    document.getElementById('qEmo').textContent = q.emo;
+    document.getElementById('qTitle').textContent = q.title;
+    document.getElementById('qText').textContent = q.text;
+    var fb = document.getElementById('qFeedback'); fb.style.display = 'none';
+    var nx = document.getElementById('qNext'); nx.style.display = 'none';
+    var box = document.getElementById('qOpts'); box.innerHTML = '';
+    var idx = shuffle(q.options.map(function (_, i) { return i; }));
+    idx.forEach(function (i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.textContent = q.options[i];
+      b.addEventListener('click', function () {
+        var ok = i === q.correct;
+        if (ok) qScore++;
+        box.querySelectorAll('.opt').forEach(function (o) { o.disabled = true; });
+        b.classList.add(ok ? 'right' : 'wrong');
+        if (!ok) box.children[idx.indexOf(q.correct)].classList.add('right');
+        fb.innerHTML = '<strong>' + (ok ? '✅ Well justified.' : '❌ Not quite.') + '</strong>' + q.explain;
+        fb.style.display = 'block';
+        document.getElementById('qScore').textContent = 'Score: ' + qScore;
+        nx.textContent = qi < order.length - 1 ? 'Next →' : 'Finish →';
+        nx.style.display = '';
+        nx.focus();
+      });
+      box.appendChild(b);
+    });
+  }
+  document.getElementById('qNext').addEventListener('click', function () {
+    qi++;
+    if (qi < order.length) renderQ(); else finish();
+  });
+
+  function finish() {
+    document.getElementById('round2').style.display = 'none';
+    document.getElementById('finish').style.display = 'block';
+    showStep(3);
+    document.getElementById('fSort').textContent = firstCheckScore + '/' + TOTAL;
+    document.getElementById('fTricky').textContent = qScore + '/' + TRICKY.length;
+    document.getElementById('fTime').textContent = fmt(sortTime);
+    document.getElementById('thinkPrompt').textContent = THINK[Math.floor(Math.random() * THINK.length)];
+  }
+
+  document.getElementById('playAgain').addEventListener('click', function () {
+    document.getElementById('finish').style.display = 'none';
+    document.getElementById('round1').style.display = 'block';
+    showStep(1);
+    resetRound1();
+  });
+
+  render(); startTimer();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
