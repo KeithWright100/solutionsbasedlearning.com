@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thailand, The Gambia or Both? — IB Geography Games — SBL</title>
+<meta name="description" content="Retrieval game: sort demographic facts into Thailand, The Gambia or Both, then justify the shared features. IB DP Geography Unit 1: Changing Population.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --th: #1d4ed8;
+    --gm: #c2410c;
+    --both: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(0, 184, 176, 0.14), transparent 35%),
+      linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1200px; margin: 28px auto 60px; padding: 0 18px; }
+
+  .intro { text-align: center; margin-bottom: 20px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.2vw, 2.3rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 720px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  .steps { display: flex; justify-content: center; gap: 10px; margin: 16px 0 18px; flex-wrap: wrap; }
+  .step { padding: 7px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 750; background: rgba(255,255,255,0.7); border: 1px solid rgba(5,43,65,0.14); color: var(--muted); }
+  .step.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.3); }
+
+  .hud { display: flex; justify-content: center; gap: 26px; font-weight: 850; font-size: 1.05rem; margin-bottom: 14px; }
+  .hud .time { color: var(--amber); }
+  .hud .score { color: var(--teal-dark); }
+
+  .panel { background: rgba(255,255,255,0.88); border: 1px solid rgba(5,43,65,0.12); border-radius: var(--radius); padding: 16px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .tray-label { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; text-align: center; }
+  #tray { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; min-height: 54px; }
+  .tray-empty { color: var(--muted); font-size: 0.9rem; align-self: center; }
+
+  .fcard {
+    display: inline-block; max-width: 260px;
+    padding: 9px 13px; border-radius: 12px;
+    background: #fff; color: var(--ink);
+    border: 2px solid rgba(5,43,65,0.18);
+    font-weight: 700; font-size: 0.88rem; line-height: 1.35; text-align: center;
+    cursor: grab; user-select: none; touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,25,45,0.08);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .fcard:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,25,45,0.14); }
+  .fcard.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .fcard.dragging { cursor: grabbing; opacity: 0.95; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .fcard.correct { border-color: var(--green); background: var(--green-soft); }
+  .fcard.incorrect { border-color: var(--red); background: var(--red-soft); }
+
+  .zones { display: grid; grid-template-columns: 1fr 0.9fr 1fr; gap: 0; margin-top: 18px; align-items: stretch; }
+  .zone { padding: 14px; min-height: 280px; cursor: pointer; transition: background .2s ease; border: 3px dashed; background: rgba(255,255,255,0.92); }
+  .zone.th { border-color: rgba(29,78,216,0.5); border-radius: 140px 18px 18px 140px / 180px 18px 18px 180px; padding-left: 26px; }
+  .zone.both { border-color: rgba(124,58,237,0.55); border-left: none; border-right: none; background: linear-gradient(90deg, rgba(29,78,216,0.06), rgba(124,58,237,0.08), rgba(194,65,12,0.06)); }
+  .zone.gm { border-color: rgba(194,65,12,0.5); border-radius: 18px 140px 140px 18px / 18px 180px 180px 18px; padding-right: 26px; }
+  .zone.hover { background: #f0fbfa; }
+  .zone h2 { font-size: 1.1rem; font-weight: 900; text-align: center; }
+  .zone.th h2 { color: var(--th); }
+  .zone.both h2 { color: var(--both); }
+  .zone.gm h2 { color: var(--gm); }
+  .zone .def { text-align: center; font-size: 0.8rem; color: var(--muted); margin: 4px 0 12px; }
+  .zone-cards { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-content: flex-start; min-height: 60px; }
+
+  .controls { text-align: center; margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform .2s ease; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  #result { text-align: center; margin-top: 14px; font-weight: 750; min-height: 1.5em; }
+  .hint { text-align: center; font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+  .why-list { max-width: 900px; margin: 14px auto 0; display: none; }
+  .why-list h3 { font-size: 0.95rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+  .why-list ul { list-style: none; display: grid; gap: 6px; }
+  .why-list li { font-size: 0.88rem; line-height: 1.45; padding: 8px 12px; border-radius: 10px; background: var(--red-soft); border-left: 4px solid var(--red); }
+
+  #round2, #finish { display: none; }
+  .q-card { max-width: 780px; margin: 0 auto; }
+  .q-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .q-source { font-size: 0.78rem; font-weight: 850; color: var(--both); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .q-text { font-size: 1.08rem; line-height: 1.5; margin-bottom: 14px; font-weight: 700; color: var(--navy); }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; padding: 13px 15px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.15); background: #fff; font-size: 0.95rem; font-weight: 600; color: var(--ink); cursor: pointer; line-height: 1.4; }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.right { border-color: var(--green); background: var(--green-soft); }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt:disabled { cursor: default; }
+  .feedback { display: none; margin-top: 14px; padding: 14px 16px; border-radius: 12px; background: #f1f7f9; border-left: 5px solid var(--teal); line-height: 1.5; font-size: 0.94rem; }
+  .feedback strong { display: block; margin-bottom: 4px; }
+  .q-next { margin-top: 14px; text-align: right; }
+
+  .finish-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+  .stat { text-align: center; padding: 16px; border-radius: 14px; background: #fff; border: 1px solid rgba(5,43,65,0.12); }
+  .stat .n { font-size: 1.9rem; font-weight: 900; color: var(--navy); }
+  .stat .l { font-size: 0.8rem; font-weight: 750; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  table.cmp { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 8px; background: #fff; border-radius: 12px; overflow: hidden; }
+  table.cmp th, table.cmp td { padding: 9px 12px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: left; }
+  table.cmp th { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: #f3f8fa; }
+  table.cmp td:nth-child(2) { color: var(--th); font-weight: 750; }
+  table.cmp td:nth-child(3) { color: var(--gm); font-weight: 750; }
+  .think { margin-top: 16px; padding: 16px; border-radius: 14px; background: #fff; border: 1px dashed rgba(0,124,130,0.4); }
+  .think h3 { font-size: 1rem; font-weight: 900; color: var(--teal-dark); margin-bottom: 6px; }
+  .think p { line-height: 1.55; font-size: 0.95rem; }
+  .think textarea { width: 100%; min-height: 90px; margin-top: 10px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.2); font: inherit; font-size: 0.93rem; resize: vertical; }
+  .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+  @media (max-width: 860px) {
+    .zones { grid-template-columns: 1fr; gap: 12px; }
+    .zone, .zone.th, .zone.gm { border-radius: 18px; padding: 14px; min-height: 140px; }
+    .zone.both { border: 3px dashed rgba(124,58,237,0.55); border-radius: 18px; }
+    .finish-grid { grid-template-columns: 1fr; }
+    main { padding: 0 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Thailand, The Gambia or Both?</span></div>
+    <a href="/geography/paper-1/core-1/t2-changing/l2-comparing" class="back-link">Back to lesson &rarr;</a>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">IB Unit 1 &middot; Changing Population &middot; Retrieval</span>
+    <h1>&#127481;&#127469; Thailand, The Gambia or Both? &#127468;&#127474;</h1>
+    <p>Sort each statement into <strong>Thailand</strong> (ageing), <strong>The Gambia</strong> (youthful) or <strong>Both</strong>. Then explain the shared features &mdash; that&rsquo;s where the comparison marks are.</p>
+  </div>
+
+  <div class="steps">
+    <span class="step active" id="step1">1 &middot; Sort</span>
+    <span class="step" id="step2">2 &middot; Explain the &lsquo;Both&rsquo;</span>
+    <span class="step" id="step3">3 &middot; Compare</span>
+  </div>
+
+  <section id="round1">
+    <div class="hud">
+      <div class="time" id="timer">&#9203; 4:00</div>
+      <div class="score" id="score">Placed: 0/0</div>
+    </div>
+
+    <div class="panel">
+      <div class="tray-label">Statements</div>
+      <div id="tray"></div>
+    </div>
+
+    <div class="zones">
+      <div class="zone th" data-cat="th" role="button" tabindex="0" aria-label="Thailand zone">
+        <h2>&#127481;&#127469; Thailand</h2>
+        <div class="def">Ageing population</div>
+        <div class="zone-cards"></div>
+      </div>
+      <div class="zone both" data-cat="both" role="button" tabindex="0" aria-label="Both zone">
+        <h2>&#129309; Both</h2>
+        <div class="def">True of both countries</div>
+        <div class="zone-cards"></div>
+      </div>
+      <div class="zone gm" data-cat="gm" role="button" tabindex="0" aria-label="The Gambia zone">
+        <h2>&#127468;&#127474; The Gambia</h2>
+        <div class="def">Youthful population</div>
+        <div class="zone-cards"></div>
+      </div>
+    </div>
+
+    <div class="hint">Drag a statement into a zone &mdash; or tap a statement, then tap a zone.</div>
+
+    <div class="controls">
+      <button class="btn primary" id="checkBtn" type="button">Check answers</button>
+      <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+      <button class="btn primary" id="toRound2" type="button" style="display:none">Next: explain the &lsquo;Both&rsquo; &rarr;</button>
+    </div>
+    <div id="result" role="status"></div>
+    <div class="why-list panel" id="whyList"><h3>Clues for the red cards</h3><ul id="whyItems"></ul></div>
+  </section>
+
+  <section id="round2">
+    <div class="panel q-card">
+      <div class="q-top"><span id="qCount"></span><span id="qScore">Score: 0</span></div>
+      <div class="q-source" id="qSource"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="feedback" id="qFeedback" role="status"></div>
+      <div class="q-next"><button class="btn primary" id="qNext" type="button" style="display:none">Next &rarr;</button></div>
+    </div>
+  </section>
+
+  <section id="finish">
+    <div class="panel q-card">
+      <h2 style="font-weight:900;color:var(--navy);text-align:center">&#127942; Comparison complete</h2>
+      <div class="finish-grid">
+        <div class="stat"><div class="n" id="fSort">0</div><div class="l">Sorted correctly (first check)</div></div>
+        <div class="stat"><div class="n" id="fBoth">0/4</div><div class="l">&lsquo;Both&rsquo; explained</div></div>
+        <div class="stat"><div class="n" id="fTime">0:00</div><div class="l">Sort time</div></div>
+      </div>
+
+      <h3 style="font-weight:900;color:var(--navy);margin-top:6px">Your comparison at a glance</h3>
+      <table class="cmp">
+        <thead><tr><th>Indicator (approx.)</th><th>&#127481;&#127469; Thailand</th><th>&#127468;&#127474; The Gambia</th></tr></thead>
+        <tbody>
+          <tr><td>Total fertility rate</td><td>~1.0&ndash;1.2</td><td>~4</td></tr>
+          <tr><td>Median age</td><td>~40</td><td>~18</td></tr>
+          <tr><td>Population growth</td><td>Falling (&minus;)</td><td>~2.3% per year</td></tr>
+          <tr><td>Life expectancy</td><td>~77</td><td>~66</td></tr>
+          <tr><td>Main dependents</td><td>Elderly</td><td>Children</td></tr>
+          <tr><td>Likely DTM stage</td><td>4, moving to 5</td><td>2&ndash;3</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Rounded from UN World Population Prospects 2024 and Thailand&rsquo;s 2024 civil registration data (TFR ~1.0 on registered births; the UN estimate is ~1.2).</p>
+
+      <div class="think">
+        <h3>&#9997;&#65039; Compare in one sentence</h3>
+        <p id="thinkPrompt"></p>
+        <textarea aria-label="Your comparison sentence" placeholder="Whereas Thailand..., The Gambia..."></textarea>
+        <div class="note">Just for your own thinking &mdash; this isn&rsquo;t saved or marked.</div>
+      </div>
+      <div class="controls">
+        <button class="btn ghost" id="playAgain" type="button">Play again</button>
+        <a class="btn primary" href="/geography/games/population-minister">Try Population Minister &rarr;</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var CARDS = [
+    // Thailand
+    { t: 'Fertility rate of about 1.0–1.2', c: 'th', why: 'Thailand’s TFR is among the lowest in the world — far below replacement level (2.1).' },
+    { t: 'Median age of about 40', c: 'th', why: 'A median age around 40 indicates an ageing population. The Gambia’s is about 18.' },
+    { t: 'Deaths now outnumber births', c: 'th', why: 'Since 2021, Thailand has recorded more deaths than births each year — natural decrease.' },
+    { t: 'About 1 in 5 people aged 60+', c: 'th', why: 'Thailand became an “aged society” (20%+ aged 60 or over) in the early 2020s.' },
+    { t: 'Rising demand for pensions and elderly care', c: 'th', why: 'A growing elderly population increases spending on pensions, healthcare and long-term care.' },
+    { t: 'Shrinking working-age population', c: 'th', why: 'Low fertility since the 1990s means fewer young people entering the workforce.' },
+    { t: 'Relies on migrant workers from Myanmar, Cambodia and Laos', c: 'th', why: 'Millions of migrant workers fill labour shortages in Thailand’s construction, fishing and farming sectors.' },
+    { t: 'Government campaigns encourage couples to have more children', c: 'th', why: 'Thailand now uses pro-natalist policies — the reverse of its successful family planning campaigns of the 1970s.' },
+    // The Gambia
+    { t: 'Fertility rate of about 4', c: 'gm', why: 'The Gambia’s TFR (around 4) is well above replacement level.' },
+    { t: 'Median age of about 18', c: 'gm', why: 'Half the population is under about 18 — a youthful structure.' },
+    { t: 'Around 4 in 10 people are under 15', c: 'gm', why: 'The Gambia has a very wide-based population pyramid.' },
+    { t: 'Population growing by over 2% per year', c: 'gm', why: 'High fertility plus falling death rates give rapid natural increase.' },
+    { t: 'Pressure on schools and youth jobs', c: 'gm', why: 'A youthful population needs school places now, and jobs as young people reach working age.' },
+    { t: 'Population will keep growing for decades even if fertility falls', c: 'gm', why: 'Population momentum: a large young cohort is about to enter childbearing age.' },
+    { t: 'Many young people emigrate via the “backway” to Europe', c: 'gm', why: 'Youth unemployment drives irregular emigration from The Gambia; remittances are a large share of GDP.' },
+    { t: 'Girls’ education and family planning are key responses', c: 'gm', why: 'For a youthful, high-fertility country these responses reduce fertility over time.' },
+    // Both
+    { t: 'High dependency ratio', c: 'both', why: 'Both have a high dependency burden — elderly dependents in Thailand, child dependents in The Gambia.' },
+    { t: 'Death rates have fallen since the 1950s', c: 'both', why: 'Both have seen falling mortality through better healthcare, sanitation and vaccination.' },
+    { t: 'Fertility has fallen since the 1960s', c: 'both', why: 'Both fell from 6+ children per woman — Thailand fast (to ~1), The Gambia slowly (to ~4).' },
+    { t: 'Migration is changing the population structure', c: 'both', why: 'Thailand gains young migrant workers; The Gambia loses young emigrants.' }
+  ];
+  var TOTAL = CARDS.length, TIME_LIMIT = 240;
+
+  var BOTHQ = [
+    { src: 'High dependency ratio', text: 'Both countries have a high dependency ratio. What is the key difference?',
+      options: [
+        'Thailand’s dependents are mainly elderly; The Gambia’s are mainly children.',
+        'Thailand’s dependents are mainly children; The Gambia’s are mainly elderly.',
+        'There is no difference — the ratio is the same in both.',
+        'Only The Gambia has dependents; Thailand’s ratio is high because of unemployment.'
+      ], correct: 0,
+      explain: 'The dependency ratio adds young (0–14) and old (65+) dependents together. Thailand’s old-age dependency is rising; The Gambia’s youth dependency is very high. <em>Same ratio type, opposite causes and different policy responses.</em>' },
+    { src: 'Fertility has fallen', text: 'Fertility has fallen in both countries since the 1960s. Why did Thailand’s fall so much faster?',
+      options: [
+        'A highly successful national family planning programme, rapid urbanisation, and rising female education and employment.',
+        'Thailand banned families from having more than one child.',
+        'Thailand’s death rate rose sharply in the 1970s.',
+        'The Gambia’s fertility has actually fallen faster than Thailand’s.'
+      ], correct: 0,
+      explain: 'Thailand’s voluntary family planning programme (from 1970, with Mechai Viravaidya’s famous campaigns) combined with economic growth, urbanisation and women’s education cut TFR from over 6 to below replacement by about 1990. It was not a coercive policy like China’s one-child policy.' },
+    { src: 'Death rates have fallen', text: 'Death rates have fallen in both countries. What does falling mortality with still-high birth rates tell you about The Gambia?',
+      options: [
+        'It is in DTM stage 2–3, with rapid natural increase.',
+        'It is in DTM stage 5, with natural decrease.',
+        'Its population must be shrinking.',
+        'It has already completed demographic transition.'
+      ], correct: 0,
+      explain: 'Falling death rates and high (but slowly falling) birth rates create a large gap — rapid natural increase, typical of stage 2 to early stage 3. Thailand passed this stage decades ago and is now in stage 4, approaching stage 5.' },
+    { src: 'Migration', text: 'Migration affects both countries’ population structures. Which statement is correct?',
+      options: [
+        'Immigration adds young workers to Thailand, easing its ageing; emigration removes young adults from The Gambia.',
+        'Both countries mainly receive elderly retirees from abroad.',
+        'Migration has no effect on age structure, only on total population.',
+        'The Gambia receives millions of migrant workers from Thailand.'
+      ], correct: 0,
+      explain: 'Migrants are usually young adults, so migration reshapes the pyramid. Thailand’s migrant workers widen its working-age bars; Gambian emigration narrows them — but sends back remittances. Migration is a response to <em>both</em> population structures.' }
+  ];
+
+  var THINK = [
+    'Write one sentence comparing the dependency patterns of Thailand and The Gambia. Use “whereas”.',
+    'Write one sentence comparing the likely DTM stages of the two countries, with one piece of evidence for each.',
+    'Write one sentence comparing the main challenge each government faces, and one response each could use.'
+  ];
+
+  var trayEl = document.getElementById('tray'), timerEl = document.getElementById('timer'), scoreEl = document.getElementById('score');
+  var resultEl = document.getElementById('result'), checkBtn = document.getElementById('checkBtn'), toRound2 = document.getElementById('toRound2');
+  var whyList = document.getElementById('whyList'), whyItems = document.getElementById('whyItems');
+  var timeLeft = TIME_LIMIT, timerId = null, firstCheck = null, sortTime = 0, selected = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function fmt(s) { var m = Math.floor(s / 60), x = s % 60; return m + ':' + (x < 10 ? '0' : '') + x; }
+
+  function render() {
+    trayEl.innerHTML = '';
+    document.querySelectorAll('.zone-cards').forEach(function (z) { z.innerHTML = ''; });
+    shuffle(CARDS.map(function (c, i) { return i; })).forEach(function (i) {
+      var el = document.createElement('div');
+      el.className = 'fcard'; el.dataset.i = i; el.dataset.cat = CARDS[i].c;
+      el.setAttribute('tabindex', '0'); el.setAttribute('role', 'button');
+      el.textContent = CARDS[i].t;
+      trayEl.appendChild(el);
+    });
+    whyList.style.display = 'none';
+    updatePlaced();
+  }
+  function updatePlaced() {
+    scoreEl.textContent = 'Placed: ' + document.querySelectorAll('.zone .fcard').length + '/' + TOTAL;
+    var e = trayEl.querySelector('.tray-empty');
+    if (!trayEl.querySelector('.fcard')) {
+      if (!e) { e = document.createElement('span'); e.className = 'tray-empty'; e.textContent = 'All statements placed — press Check answers.'; trayEl.appendChild(e); }
+    } else if (e) e.remove();
+  }
+  function placeIn(card, zone) {
+    card.classList.remove('correct', 'incorrect', 'selected');
+    zone.querySelector('.zone-cards').appendChild(card);
+    selected = null; updatePlaced();
+  }
+  function select(card) {
+    if (selected) selected.classList.remove('selected');
+    if (selected === card) { selected = null; return; }
+    selected = card; card.classList.add('selected');
+  }
+  document.querySelectorAll('.zone').forEach(function (zone) {
+    zone.addEventListener('click', function (e) { if (e.target.closest('.fcard')) return; if (selected) placeIn(selected, zone); });
+    zone.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && selected) { e.preventDefault(); placeIn(selected, zone); } });
+  });
+  document.addEventListener('keydown', function (e) {
+    var c = e.target.closest && e.target.closest('.fcard');
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(c); }
+  });
+
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('#round1 .fcard') : null;
+    if (!c) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top;
+    e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) {
+      moved = true;
+      var r = drag.getBoundingClientRect();
+      drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000;
+      drag.classList.add('dragging');
+    }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none';
+    var t = document.elementFromPoint(e.clientX, e.clientY);
+    drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.zone') : null;
+    if (z) z.classList.add('hover');
+  });
+  function endDrag(e) {
+    if (!drag) return;
+    var c = drag; drag = null;
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { select(c); return; }
+    c.classList.remove('dragging');
+    c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none';
+    var t = document.elementFromPoint(e.clientX, e.clientY);
+    c.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.zone') : null;
+    if (z) placeIn(c, z);
+    else if (t && t.closest && t.closest('#tray')) { c.classList.remove('correct', 'incorrect'); trayEl.appendChild(c); updatePlaced(); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+
+  function check(timeUp) {
+    var correct = 0, wrongWhy = [];
+    document.querySelectorAll('.zone').forEach(function (z) {
+      z.querySelectorAll('.fcard').forEach(function (c) {
+        var ok = c.dataset.cat === z.dataset.cat;
+        c.classList.toggle('correct', ok); c.classList.toggle('incorrect', !ok);
+        if (ok) correct++; else wrongWhy.push(CARDS[+c.dataset.i]);
+      });
+    });
+    var left = trayEl.querySelectorAll('.fcard').length;
+    if (firstCheck === null && (left === 0 || timeUp)) firstCheck = correct;
+    scoreEl.textContent = 'Correct: ' + correct + '/' + TOTAL;
+
+    if (wrongWhy.length && (left === 0 || timeUp)) {
+      whyItems.innerHTML = wrongWhy.map(function (w) { return '<li><b>“' + w.t + '”</b> — ' + w.why + '</li>'; }).join('');
+      whyList.style.display = 'block';
+    } else whyList.style.display = 'none';
+
+    if (correct === TOTAL) {
+      stopTimer(); sortTime = TIME_LIMIT - timeLeft;
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = 'All ' + TOTAL + ' correct in ' + fmt(sortTime) + '! Now explain the ‘Both’ statements.';
+      toRound2.style.display = ''; checkBtn.style.display = 'none';
+    } else if (timeUp) {
+      sortTime = TIME_LIMIT;
+      resultEl.style.color = 'var(--amber)';
+      resultEl.textContent = 'Time’s up! ' + correct + '/' + TOTAL + ' correct. Read the clues below, then move on.';
+      toRound2.style.display = '';
+    } else if (left > 0) {
+      resultEl.style.color = 'var(--amber)';
+      resultEl.textContent = left + ' statement(s) still to place. ' + correct + ' correct so far.';
+    } else {
+      resultEl.style.color = 'var(--red)';
+      resultEl.textContent = correct + '/' + TOTAL + ' correct. Use the clues to move the red cards, then check again.';
+    }
+  }
+  function stopTimer() { clearInterval(timerId); timerId = null; }
+  function startTimer() {
+    stopTimer();
+    timerId = setInterval(function () {
+      timeLeft--;
+      timerEl.textContent = '⏳ ' + fmt(Math.max(timeLeft, 0));
+      if (timeLeft <= 0) { stopTimer(); check(true); }
+    }, 1000);
+  }
+  function resetRound1() {
+    timeLeft = TIME_LIMIT; firstCheck = null; sortTime = 0; selected = null;
+    timerEl.textContent = '⏳ ' + fmt(TIME_LIMIT);
+    resultEl.textContent = '';
+    toRound2.style.display = 'none'; checkBtn.style.display = '';
+    render(); startTimer();
+  }
+  checkBtn.addEventListener('click', function () { check(false); });
+  document.getElementById('resetBtn').addEventListener('click', resetRound1);
+
+  var qi = 0, qScore = 0;
+  function showStep(n) {
+    ['step1', 'step2', 'step3'].forEach(function (id, i) {
+      document.getElementById(id).className = 'step' + (i + 1 < n ? ' done' : i + 1 === n ? ' active' : '');
+    });
+  }
+  toRound2.addEventListener('click', function () {
+    stopTimer();
+    if (firstCheck === null) firstCheck = document.querySelectorAll('.zone .fcard.correct').length;
+    if (!sortTime) sortTime = TIME_LIMIT - timeLeft;
+    document.getElementById('round1').style.display = 'none';
+    document.getElementById('round2').style.display = 'block';
+    showStep(2); qi = 0; qScore = 0; renderQ(); window.scrollTo(0, 0);
+  });
+  function renderQ() {
+    var q = BOTHQ[qi];
+    document.getElementById('qCount').textContent = '‘Both’ statement ' + (qi + 1) + ' of ' + BOTHQ.length;
+    document.getElementById('qScore').textContent = 'Score: ' + qScore;
+    document.getElementById('qSource').textContent = '🤝 ' + q.src;
+    document.getElementById('qText').textContent = q.text;
+    var fb = document.getElementById('qFeedback'); fb.style.display = 'none';
+    var nx = document.getElementById('qNext'); nx.style.display = 'none';
+    var box = document.getElementById('qOpts'); box.innerHTML = '';
+    var idx = shuffle(q.options.map(function (_, i) { return i; }));
+    idx.forEach(function (i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.textContent = q.options[i];
+      b.addEventListener('click', function () {
+        var ok = i === q.correct;
+        if (ok) qScore++;
+        box.querySelectorAll('.opt').forEach(function (o) { o.disabled = true; });
+        b.classList.add(ok ? 'right' : 'wrong');
+        if (!ok) box.children[idx.indexOf(q.correct)].classList.add('right');
+        fb.innerHTML = '<strong>' + (ok ? '✅ Well explained.' : '❌ Not quite.') + '</strong>' + q.explain;
+        fb.style.display = 'block';
+        document.getElementById('qScore').textContent = 'Score: ' + qScore;
+        nx.textContent = qi < BOTHQ.length - 1 ? 'Next →' : 'Finish →';
+        nx.style.display = ''; nx.focus();
+      });
+      box.appendChild(b);
+    });
+  }
+  document.getElementById('qNext').addEventListener('click', function () { qi++; if (qi < BOTHQ.length) renderQ(); else finish(); });
+  function finish() {
+    document.getElementById('round2').style.display = 'none';
+    document.getElementById('finish').style.display = 'block';
+    showStep(3);
+    document.getElementById('fSort').textContent = firstCheck + '/' + TOTAL;
+    document.getElementById('fBoth').textContent = qScore + '/' + BOTHQ.length;
+    document.getElementById('fTime').textContent = fmt(sortTime);
+    document.getElementById('thinkPrompt').textContent = THINK[Math.floor(Math.random() * THINK.length)];
+    window.scrollTo(0, 0);
+  }
+  document.getElementById('playAgain').addEventListener('click', function () {
+    document.getElementById('finish').style.display = 'none';
+    document.getElementById('round1').style.display = 'block';
+    showStep(1); resetRound1();
+  });
+
+  render(); startTimer();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Population Minister — IB Geography Games — SBL</title>
+<meta name="description" content="Plenary game: manage Thailand's ageing population or The Gambia's youthful population from 2025 to 2055. Choose policy responses, watch the population pyramid change, then compare. IB DP Geography Unit 1: Changing Population.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --line: rgba(5, 43, 65, 0.13);
+    --green: #16a34a;
+    --red: #dc2626;
+    --amber: #d97706;
+    --th: #1d4ed8;
+    --gm: #c2410c;
+    --male: #0ea5e9;
+    --female: #f472b6;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(0, 184, 176, 0.14), transparent 35%),
+      linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1200px; margin: 26px auto 60px; padding: 0 18px; }
+  .screen { display: none; }
+  .screen.on { display: block; }
+
+  .intro { text-align: center; margin-bottom: 22px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 780px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  .panel { background: rgba(255,255,255,0.92); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .panel h2 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+
+  .how { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 24px; }
+  .how div { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px; font-size: 0.88rem; line-height: 1.45; color: var(--muted); }
+  .how b { display: block; color: var(--navy); font-size: 0.95rem; margin-bottom: 4px; }
+
+  .countries { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .country { text-align: left; background: #fff; border: 2px solid var(--line); border-radius: var(--radius); padding: 18px; cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; display: grid; grid-template-columns: 1fr 190px; gap: 16px; color: var(--ink); align-items: center; }
+  .country:hover { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 16px 30px rgba(0,35,58,0.14); }
+  .country h3 { font-size: 1.35rem; font-weight: 900; }
+  .country .flag { font-size: 1.9rem; margin-right: 6px; vertical-align: -3px; }
+  .country p { font-size: 0.88rem; line-height: 1.5; color: var(--muted); margin: 8px 0; }
+  .country ul { list-style: none; font-size: 0.83rem; display: grid; gap: 3px; font-weight: 650; }
+  .country .done-badge { display: inline-block; font-size: 0.7rem; font-weight: 850; padding: 3px 9px; border-radius: 999px; background: #e7f7ed; color: var(--green); margin-left: 6px; vertical-align: 4px; }
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; }
+  .tag.th { background: #dbeafe; color: var(--th); }
+  .tag.gm { background: #ffedd5; color: var(--gm); }
+
+  .dhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  .dhead h1 { font-size: clamp(1.3rem, 2.6vw, 1.9rem); }
+  .dhead .sub { color: var(--muted); font-weight: 600; font-size: 0.92rem; margin-top: 2px; }
+  .timeline { display: flex; gap: 6px; }
+  .timeline span { padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .timeline span.done { background: #e7f7ed; color: var(--green); border-color: rgba(22,163,74,0.3); }
+  .timeline span.now { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  .layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; align-items: start; }
+
+  .pyr-wrap { position: relative; }
+  .pyr-title { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+  .pyr-title span { font-size: 0.78rem; color: var(--muted); font-weight: 650; }
+  svg.pyr { width: 100%; height: auto; display: block; margin-top: 6px; }
+  .pyr-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.76rem; color: var(--muted); margin-top: 6px; justify-content: center; }
+  .pyr-legend i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+  .pyr-legend i.outline { border: 2px dashed #334155; background: transparent; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+  .st { padding: 9px 10px; border-radius: 12px; background: #f3f8fa; border: 1px solid var(--line); }
+  .st .k { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .st .v { font-size: 1.1rem; font-weight: 900; color: var(--navy); }
+  .st .v small { font-size: 0.72rem; font-weight: 750; }
+  .up { color: var(--green); } .down { color: var(--red); }
+
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .chip { flex: 1; min-width: 140px; padding: 10px 12px; border-radius: 12px; background: #f3f8fa; border: 1px solid var(--line); }
+  .chip .k { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .chip .v { font-size: 1.35rem; font-weight: 900; color: var(--navy); }
+  .chip.warn .v { color: var(--amber); }
+
+  .pgroup { font-size: 0.72rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 12px 0 6px; }
+  .policies { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .policy { display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.82rem; line-height: 1.4; color: var(--ink); position: relative; }
+  .policy:hover:not(:disabled) { border-color: var(--teal); }
+  .policy.sel { border-color: var(--teal); background: #eefaf9; }
+  .policy.sel::after { content: "\2713"; position: absolute; top: 6px; right: 9px; font-weight: 900; color: var(--teal-dark); }
+  .policy:disabled { opacity: 0.42; cursor: not-allowed; }
+  .policy .pe { font-size: 1.25rem; }
+  .policy b { display: block; font-size: 0.88rem; padding-right: 14px; }
+  .policy .cost { display: inline-block; margin-top: 4px; font-size: 0.72rem; font-weight: 850; color: var(--teal-dark); }
+  .policy .eff { display: block; margin-top: 2px; font-size: 0.74rem; color: var(--muted); font-weight: 650; }
+
+  .meters { display: grid; gap: 11px; }
+  .meter .top { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; margin-bottom: 4px; }
+  .meter .top small { font-weight: 600; color: var(--muted); font-size: 0.74rem; display: block; }
+  .meter .bar { height: 11px; background: #e8eff2; border-radius: 99px; overflow: hidden; }
+  .meter .bar div { height: 100%; border-radius: 99px; transition: width .35s ease; }
+  .overall { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; font-weight: 900; }
+  .overall .big { font-size: 1.6rem; color: var(--navy); }
+
+  .actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+  .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform .2s ease; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+  .why-blocked { font-size: 0.82rem; color: var(--amber); font-weight: 700; }
+
+  .event { max-width: 860px; margin: 0 auto; }
+  .event .ehead { display: flex; gap: 14px; align-items: center; margin-bottom: 10px; }
+  .event .eemo { font-size: 2.6rem; }
+  .event .eyear { font-size: 0.78rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); }
+  .event h2 { font-size: 1.4rem; }
+  .event p { line-height: 1.55; margin-bottom: 10px; }
+  .effect { padding: 12px 14px; border-radius: 12px; background: #fff7ed; border-left: 5px solid var(--amber); font-weight: 650; margin: 10px 0; line-height: 1.5; }
+  .effect.good { background: #ecfdf5; border-left-color: var(--green); }
+  .effect.neutral { background: #f1f5f9; border-left-color: #64748b; }
+  .iblink { padding: 12px 14px; border-radius: 12px; background: #eef7fa; border-left: 5px solid var(--teal); font-size: 0.92rem; line-height: 1.5; }
+  .iblink b { color: var(--teal-dark); }
+  .pressure { padding: 10px 14px; border-radius: 12px; background: #fef2f2; border-left: 5px solid var(--red); font-size: 0.9rem; line-height: 1.5; margin-top: 10px; font-weight: 600; }
+  .scorerow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0 6px; }
+  .sc { text-align: center; padding: 12px 8px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .sc .n { font-size: 1.5rem; font-weight: 900; color: var(--navy); }
+  .sc .l { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .sc .d { font-size: 0.75rem; font-weight: 800; }
+
+  .final-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
+  .verdict { text-align: center; }
+  .verdict .title { font-size: 1.7rem; font-weight: 900; color: var(--navy); }
+  .verdict .score { font-size: 3rem; font-weight: 900; color: var(--teal-dark); line-height: 1; margin: 6px 0; }
+  .log { list-style: none; display: grid; gap: 8px; }
+  .log li { padding: 10px 12px; border-radius: 10px; background: #fff; border: 1px solid var(--line); font-size: 0.86rem; line-height: 1.45; }
+  .log li b { color: var(--navy); }
+  .prompts { list-style: none; counter-reset: q; display: grid; gap: 8px; }
+  .prompts li { counter-increment: q; padding: 10px 12px 10px 40px; position: relative; background: #fff; border: 1px solid var(--line); border-radius: 10px; font-size: 0.92rem; line-height: 1.45; }
+  .prompts li::before { content: counter(q); position: absolute; left: 12px; top: 10px; width: 20px; height: 20px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 0.75rem; font-weight: 900; display: grid; place-items: center; }
+  table.cmp { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: #fff; border-radius: 12px; overflow: hidden; }
+  table.cmp th, table.cmp td { padding: 8px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: left; }
+  table.cmp th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: #f3f8fa; }
+  .exam textarea { width: 100%; min-height: 200px; padding: 12px; border-radius: 12px; border: 1px solid rgba(5,43,65,0.2); font: inherit; font-size: 0.92rem; line-height: 1.5; resize: vertical; margin-top: 8px; }
+  .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+  .copied { color: var(--green); font-weight: 800; font-size: 0.85rem; }
+
+  @media (max-width: 980px) {
+    .layout, .final-grid, .countries { grid-template-columns: 1fr; }
+    .how { grid-template-columns: 1fr 1fr; }
+    .scorerow { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 12px; }
+    .panel { padding: 14px; }
+    .how, .policies { grid-template-columns: 1fr; }
+    .country { grid-template-columns: 1fr; }
+    .scorerow { grid-template-columns: repeat(2, 1fr); }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .chip { min-width: 0; flex: 1 1 40%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Population Minister</span></div>
+    <a href="/geography/paper-1/core-1/t2-changing/l2-comparing" class="back-link">Back to lesson &rarr;</a>
+  </div>
+</div>
+
+<main>
+  <!-- START -->
+  <section class="screen on" id="sStart">
+    <div class="intro">
+      <span class="kicker">IB Unit 1 &middot; Changing Population &middot; Plenary</span>
+      <h1>&#128101; Population Minister 2025&ndash;2055</h1>
+      <p>You are the minister responsible for population policy. Over three decades, choose responses to your country&rsquo;s population structure and watch the pyramid change. Then swap countries &mdash; or compare with a group who ran the other one.</p>
+    </div>
+    <div class="how">
+      <div><b>1 &middot; Read the pyramid</b>Study the age structure, dependency ratio and fertility rate. What is the main challenge?</div>
+      <div><b>2 &middot; Choose responses</b>Spend your policy budget each decade. Some responses work in one country and backfire in the other.</div>
+      <div><b>3 &middot; Face events</b>Recessions, pandemics, migration crises and elections will test your plan.</div>
+      <div><b>4 &middot; Evaluate</b>See your 2055 pyramid, compare both countries and write an evaluative paragraph from your own data.</div>
+    </div>
+    <div class="panel">
+      <h2>Choose your country</h2>
+      <div class="countries" id="countryList"></div>
+      <p class="note">Starting data rounded from UN World Population Prospects 2024. The projection is a simplified cohort model (10-year age bands) for teaching &mdash; it shows the direction and scale of change, not an official forecast.</p>
+    </div>
+  </section>
+
+  <!-- DECADE -->
+  <section class="screen" id="sDecade">
+    <div class="dhead">
+      <div><h1 id="dTitle"></h1><div class="sub" id="dSub"></div></div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+    <div class="layout">
+      <div style="display:grid;gap:18px">
+        <div class="panel pyr-wrap">
+          <div class="pyr-title"><h2 id="pyrHead"></h2><span id="pyrNote"></span></div>
+          <div id="pyr"></div>
+          <div class="pyr-legend"><span><i style="background:var(--male)"></i>Male</span><span><i style="background:var(--female)"></i>Female</span><span><i class="outline"></i>Now (before your decade)</span><span><i style="background:rgba(220,38,38,0.25)"></i>Dependent ages</span></div>
+          <div class="stats" id="stats"></div>
+        </div>
+        <div class="panel">
+          <h2>Projected scorecard <span style="font-weight:600;color:var(--muted);font-size:0.8rem">(before this decade&rsquo;s event)</span></h2>
+          <div class="meters" id="meters"></div>
+          <div class="overall"><span>Overall</span><span class="big" id="overall"></span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="chips">
+          <div class="chip" id="chipBudget"><div class="k">Policy budget left</div><div class="v" id="vBudget"></div></div>
+          <div class="chip"><div class="k">Policies chosen</div><div class="v" id="vChosen"></div></div>
+        </div>
+        <div id="policyList"></div>
+      </div>
+    </div>
+    <div class="actions">
+      <span class="why-blocked" id="whyBlocked"></span>
+      <button class="btn ghost" id="clearBtn" type="button">Clear choices</button>
+      <button class="btn primary" id="confirmBtn" type="button">Confirm policies &rarr;</button>
+    </div>
+  </section>
+
+  <!-- EVENT -->
+  <section class="screen" id="sEvent">
+    <div class="panel event">
+      <div class="ehead"><div class="eemo" id="eEmo"></div><div><div class="eyear" id="eYear"></div><h2 id="eTitle"></h2></div></div>
+      <p id="eText"></p>
+      <div class="effect" id="eEffect"></div>
+      <div class="iblink" id="eLink"></div>
+      <div id="ePressure"></div>
+      <div class="scorerow" id="eScores"></div>
+      <div class="actions"><button class="btn primary" id="nextBtn" type="button">Continue &rarr;</button></div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="screen" id="sFinal">
+    <div class="intro"><span class="kicker">2055 Review</span><h1 id="fTitle"></h1></div>
+    <div class="final-grid">
+      <div class="panel verdict">
+        <div class="title" id="fVerdict"></div>
+        <div class="score" id="fScore"></div>
+        <div class="note" id="fVerdictText" style="font-size:0.9rem"></div>
+        <div class="scorerow" id="fScores" style="grid-template-columns:repeat(4,1fr)"></div>
+      </div>
+      <div class="panel">
+        <div class="pyr-title"><h2>Your pyramid: 2025 vs 2055</h2></div>
+        <div id="fPyr"></div>
+        <div class="pyr-legend"><span><i style="background:var(--male)"></i>2055 male</span><span><i style="background:var(--female)"></i>2055 female</span><span><i class="outline"></i>2025</span></div>
+        <div class="stats" id="fStats"></div>
+      </div>
+      <div class="panel">
+        <h2>Your term in office</h2>
+        <ul class="log" id="fLog"></ul>
+      </div>
+      <div class="panel">
+        <h2>Plenary discussion</h2>
+        <ol class="prompts" id="fPrompts"></ol>
+      </div>
+    </div>
+
+    <div class="panel" id="compareBox" style="margin-top:18px;display:none">
+      <h2>&#127481;&#127469; vs &#127468;&#127474; Comparing your two terms</h2>
+      <div style="overflow-x:auto"><table class="cmp" id="cmpTable"></table></div>
+    </div>
+
+    <div class="panel exam" style="margin-top:18px">
+      <h2>&#9997;&#65039; Exam practice: use your own data</h2>
+      <p style="line-height:1.5"><strong id="examQ"></strong> The opening below uses your game data. Finish it with evaluation (effectiveness, time scale, cost, acceptability) and a clear judgement.</p>
+      <textarea id="fPara" aria-label="Exam paragraph"></textarea>
+      <div class="actions" style="justify-content:flex-start">
+        <button class="btn ghost" id="copyBtn" type="button">Copy paragraph</button>
+        <span class="copied" id="copied"></span>
+      </div>
+      <p class="note">Not saved or marked &mdash; copy it into your notes before you leave the page.</p>
+    </div>
+
+    <div class="actions" style="justify-content:center;margin-top:20px">
+      <button class="btn primary" id="otherBtn" type="button"></button>
+      <button class="btn ghost" id="againBtn" type="button">Back to country choice</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  /* ================= DATA ================= */
+  var BANDS = ['0–9', '10–19', '20–29', '30–39', '40–49', '50–59', '60–69', '70–79', '80+'];
+  var FEMALE_SHARE = [0.49, 0.49, 0.495, 0.5, 0.5, 0.51, 0.53, 0.56, 0.62];
+
+  var COUNTRIES = {
+    th: { id: 'th', name: 'Thailand', flag: '🇹🇭', type: 'Ageing', other: 'gm',
+      blurb: 'One of the fastest-ageing countries in the world. Fertility collapsed from over 6 in the 1960s to about 1 today. Deaths now exceed births.',
+      facts: ['TFR ~1.0–1.2', 'Median age ~40', 'Life expectancy ~77', '1 in 5 aged 60+'],
+      bands: [6.6, 7.9, 9.1, 9.9, 10.6, 11.2, 8.3, 4.9, 2.3], unit: 'm', scale: 6.5,
+      tfr: 1.1, targetBirths: 5.0, inf: 0.993, tfrDrift: -0.05, tfrFloor: 0.8, tfrCap: 2.2,
+      surv: [0.995, 0.99, 0.985, 0.98, 0.965, 0.93, 0.85, 0.62, 0.35],
+      econ: 62, wb: 66, sup: 60, budget: 6, jobs: 0, migIn: 1.5, migOut: -0.4,
+      pressureName: 'elderly care', pressureFix: ['eldercare', 'pension', 'health'] },
+    gm: { id: 'gm', name: 'The Gambia', flag: '🇬🇲', type: 'Youthful', other: 'th',
+      blurb: 'One of Africa’s smallest and most densely populated countries. High fertility and falling child mortality give a very young, fast-growing population.',
+      facts: ['TFR ~4', 'Median age ~18', 'Life expectancy ~66', '4 in 10 under 15'],
+      bands: [0.82, 0.66, 0.47, 0.35, 0.21, 0.13, 0.075, 0.035, 0.01], unit: 'm', scale: 0.75,
+      tfr: 4.0, targetBirths: 1.05, inf: 0.95, tfrDrift: -0.3, tfrFloor: 1.6, tfrCap: 5.5,
+      surv: [0.965, 0.985, 0.975, 0.965, 0.94, 0.89, 0.78, 0.55, 0.25],
+      econ: 44, wb: 44, sup: 60, budget: 5, jobs: 18, migIn: 0.04, migOut: -0.08,
+      pressureName: 'schools and health services', pressureFix: ['schools', 'health'] }
+  };
+
+  // effect fields: tfr, tfrHigh (only if TFR>2.5), tfrLow (only if TFR<2), retire, prod, econ, wb, sup, jobs, mig ('in'|'out'), inf
+  var POLICIES = [
+    { group: 'Fertility', id: 'bonus', emo: '👶', name: 'Baby bonus & child allowances', text: 'Cash payments for each new baby.', cost: 2,
+      fx: { tfr: 0.1, sup: 4, econ: -1 }, eff: 'Fertility ↑ slightly · Popular' },
+    { group: 'Fertility', id: 'childcare', emo: '🧸', name: 'Childcare & parental leave', text: 'Affordable nurseries, paid leave for both parents.', cost: 3,
+      fx: { tfr: 0.15, prod: 2, wb: 3, sup: 2 }, eff: 'Fertility ↑ · More women in work' },
+    { group: 'Fertility', id: 'fp', emo: '💊', name: 'Family planning & maternal health', text: 'Free contraception, clinics and midwives.', cost: 2,
+      fx: { tfrHigh: -0.45, tfrLow: -0.03, wb: 3, sup: -2 }, eff: 'Fertility ↓ (a lot if TFR is high)' },
+    { group: 'Fertility', id: 'girls', emo: '🎓', name: 'Keep girls in secondary school', text: 'Scholarships, safe transport, school meals.', cost: 3,
+      fx: { tfrHigh: -0.35, tfrLow: -0.02, prod: 3, wb: 4, sup: 1 }, eff: 'Fertility ↓ · Skills ↑ (slow but lasting)' },
+    { group: 'Workforce & economy', id: 'retire', emo: '👴', name: 'Raise the retirement age by 5 years', text: 'People work longer before drawing a pension.', cost: 0,
+      fx: { retire: 5, econ: 2, sup: -10 }, eff: 'Dependency ↓ · Very unpopular' },
+    { group: 'Workforce & economy', id: 'immig', emo: '🛂', name: 'Recruit migrant workers', text: 'Work permits for young workers from neighbouring countries.', cost: 1,
+      fx: { mig: 'in', econ: 3, sup: -5 }, eff: 'Working-age population ↑ · Some opposition' },
+    { group: 'Workforce & economy', id: 'robots', emo: '🤖', name: 'Automation & robotics', text: 'Invest in technology to raise output per worker.', cost: 3,
+      fx: { prod: 5, jobsGm: -6 }, eff: 'Productivity ↑ · Fewer jobs for low-skilled workers' },
+    { group: 'Workforce & economy', id: 'jobs', emo: '🛠️', name: 'Youth jobs & vocational training', text: 'Apprenticeships, small-business loans, tourism and agri-processing.', cost: 3,
+      fx: { jobs: 14, econ: 2, sup: 4 }, eff: 'Jobs for young people ↑' },
+    { group: 'Workforce & economy', id: 'emig', emo: '✈️', name: 'Encourage emigration & remittances', text: 'Labour agreements abroad; lower fees to send money home.', cost: 0,
+      fx: { mig: 'out', econRem: 3, wb: -2 }, eff: 'Fewer young adults · Remittances ↑ · Brain drain' },
+    { group: 'Services', id: 'schools', emo: '🏫', name: 'Build schools & train teachers', text: 'More classrooms and teachers for a growing school-age population.', cost: 2,
+      fx: { wb: 3, sup: 3, prod: 1 }, eff: 'Relieves pressure on schools' },
+    { group: 'Services', id: 'health', emo: '🏥', name: 'Primary healthcare & vaccination', text: 'Clinics, community health workers, child vaccination.', cost: 3,
+      fx: { inf: 0.015, wb: 4, sup: 2, tfrHigh: -0.1 }, eff: 'Child deaths ↓ · Health ↑' },
+    { group: 'Services', id: 'eldercare', emo: '🧓', name: 'Community elderly care', text: 'Village health volunteers, elderly clubs, home-care training.', cost: 2,
+      fx: { wb: 4, sup: 2, econ: 1 }, eff: 'Relieves pressure on elderly care · Cheap' },
+    { group: 'Services', id: 'pension', emo: '💰', name: 'Increase the old-age allowance', text: 'Higher universal monthly pension for over-60s.', cost: 3,
+      fx: { wb: 5, sup: 6, econ: -3 }, eff: 'Wellbeing ↑ · Popular · Costly' }
+  ];
+  var P = {}; POLICIES.forEach(function (p) { P[p.id] = p; });
+
+  var EVENTS = [
+    { id: 'recession', emo: '📉', title: 'Global recession',
+      text: 'A global economic slowdown hits exports and tourism. Tax revenues fall.',
+      link: 'Economic shocks make dependency harder to fund: fewer workers paying tax must support pensions or schools. High-productivity economies are more resilient.',
+      apply: function (s) { var hit = s.prod >= 5 ? 3 : 7; s.econMod -= hit; return { good: hit < 5, msg: 'Economy −' + hit + '.' + (hit < 5 ? ' Your productivity investment cushioned the blow.' : ' With low productivity, the recession bites hard.') }; } },
+    { id: 'pandemic', emo: '🦠', title: 'Pandemic',
+      text: 'A new respiratory virus spreads rapidly. Older people and those with poor access to healthcare are most at risk.',
+      link: 'Mortality shocks affect age groups differently: older populations face higher death rates, while weak health systems struggle everywhere.',
+      apply: function (s) {
+        var prepared = hadPolicy(s, ['health', 'eldercare']);
+        s.b[7] *= prepared ? 0.99 : 0.97; s.b[8] *= prepared ? 0.97 : 0.92;
+        s.wbMod -= prepared ? 2 : 6; s.econMod -= 3;
+        return { good: prepared, msg: prepared ? 'Your health and care investments reduced deaths and disruption.' : 'Without health or elderly-care investment, deaths among the elderly are high and wellbeing falls.' };
+      } },
+    { id: 'climate', emo: '🌊', title: 'Climate disaster',
+      text: 'Severe flooding and crop failure hit rural areas. Many young people move to the city — or leave the country.',
+      link: 'Environmental push factors drive rural–urban migration and emigration, which changes the age structure of both source and destination areas.',
+      apply: function (s) {
+        s.econMod -= 4;
+        if (s.c.id === 'gm') { s.b[2] -= 0.02; return { good: false, msg: 'Economy −4. Around 20,000 young adults emigrate via the “backway”.' }; }
+        return { good: false, msg: 'Economy −4. Farming regions lose young workers to Bangkok.' };
+      } },
+    { id: 'tech', emo: '🚀', title: 'Foreign investment boom',
+      text: 'Multinational companies look for new places to invest. They want a skilled, healthy workforce.',
+      link: 'A demographic dividend only pays off if the working-age population is educated and employed. Human capital attracts investment.',
+      apply: function (s) { var g = s.prod >= 5 ? 8 : 3; s.econMod += g; return { good: g > 5, msg: 'Economy +' + g + '.' + (g > 5 ? ' Your skilled workforce attracted major investment.' : ' Investors found too few skilled workers — most went elsewhere.') }; } },
+    { id: 'election', emo: '🗳️', title: 'General election',
+      text: 'Voters judge your population policies at the ballot box.',
+      link: 'Population policies must be politically acceptable. Unpopular but effective responses (e.g. raising the retirement age) are often delayed.',
+      apply: function (s) {
+        if (s.sup < 45) { s.nextBudget -= 2; return { good: false, msg: 'Public support is low (' + Math.round(s.sup) + '). Your party loses seats: −2 policy budget next decade.' }; }
+        s.nextBudget += 1; return { good: true, msg: 'Public support is solid (' + Math.round(s.sup) + '). Re-elected with a strong mandate: +1 policy budget next decade.' };
+      } },
+    { id: 'marriage', emo: '💍', title: 'Social change: later marriage',
+      text: 'More young people, especially women, stay in education and delay marriage and children.',
+      link: 'Fertility falls as the status of women rises — education, employment and later marriage reduce family size.',
+      apply: function (s) { var d = s.c.id === 'gm' ? -0.3 : -0.08; s.tfr = Math.max(s.c.tfrFloor, s.tfr + d); return { good: s.c.id === 'gm', msg: 'Fertility rate ' + d.toFixed(2).replace('-', '−') + ' (now ' + s.tfr.toFixed(1) + ').' + (s.c.id === 'gm' ? ' This speeds up demographic transition.' : ' This deepens Thailand’s low-fertility challenge.') }; } },
+    { id: 'myanmar', emo: '🚶', only: 'th', title: 'Crisis in a neighbouring country',
+      text: 'Conflict across the border pushes large numbers of young people into Thailand looking for work and safety.',
+      link: 'Thailand already relies on millions of migrant workers from Myanmar, Cambodia and Laos. Migrants can offset a shrinking workforce, but integration is contested.',
+      apply: function (s) { s.b[2] += 0.5; s.b[3] += 0.3; s.sup -= 4; return { good: true, msg: 'The working-age population grows by about 800,000. Support −4 as some voters object.' }; } },
+    { id: 'silver', emo: '🏨', only: 'th', title: 'Silver economy & medical tourism boom',
+      text: 'Wealthy retirees from abroad come to Thailand for healthcare and long stays.',
+      link: 'An ageing population can create economic opportunities — the “silver economy” of health, care and leisure services.',
+      apply: function (s) { var g = hadPolicy(s, ['eldercare', 'health']) ? 6 : 3; s.econMod += g; return { good: true, msg: 'Economy +' + g + '.' + (g > 3 ? ' Your care sector was ready to benefit.' : '') }; } },
+    { id: 'aid', emo: '🤝', only: 'gm', title: 'International development partnership',
+      text: 'Donors and development banks offer funding for education and health.',
+      link: 'Low-income countries with youthful populations often depend on aid and partnerships to fund services for a rapidly growing population.',
+      apply: function (s) { s.nextBudget += 2; return { good: true, msg: '+2 policy budget next decade.' }; } },
+    { id: 'remit', emo: '💸', only: 'gm', title: 'Remittances surge',
+      text: 'Gambians working abroad send record amounts of money home.',
+      link: 'Remittances are a large share of The Gambia’s GDP — a benefit of emigration that partly offsets the loss of young workers.',
+      apply: function (s) { var g = hadPolicy(s, ['emig']) ? 6 : 3; s.econMod += g; return { good: true, msg: 'Economy +' + g + '.' }; } }
+  ];
+
+  var METERS = [
+    { k: 'dp', name: 'Dependency balance', sub: 'Workers vs dependents', color: '#7c3aed' },
+    { k: 'ec', name: 'Economy & jobs', sub: 'Workforce, productivity, employment', color: '#0ea5e9' },
+    { k: 'wb', name: 'Wellbeing', sub: 'Health, education, care', color: '#16a34a' },
+    { k: 'sp', name: 'Public support', sub: 'Political acceptability', color: '#f59e0b' }
+  ];
+  var YEARS = [2035, 2045, 2055];
+
+  /* ================= MODEL ================= */
+  var st, results = {};
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function clamp(v) { return Math.max(0, Math.min(100, Math.round(v))); }
+  function sum(a) { return a.reduce(function (x, y) { return x + y; }, 0); }
+  function oldPop(b, r) { return r <= 60 ? b[6] + b[7] + b[8] : r <= 65 ? 0.5 * b[6] + b[7] + b[8] : b[7] + b[8]; }
+  function workPop(b, r) { var w = 0.5 * b[1] + b[2] + b[3] + b[4] + b[5]; if (r >= 65) w += 0.5 * b[6]; if (r >= 70) w += 0.5 * b[6]; return w; }
+  function youngPop(b) { return b[0] + 0.5 * b[1]; }
+  function depRatio(s) { return (youngPop(s.b) + oldPop(s.b, s.retire)) / workPop(s.b, s.retire) * 100; }
+  function hadPolicy(s, ids) { return ids.some(function (id) { return s.chosen.indexOf(id) > -1; }); }
+
+  function newState(c) {
+    var women = (c.bands[2] + c.bands[3]) / 2;
+    var s = { c: c, b: c.bands.slice(), tfr: c.tfr, k: c.targetBirths / (c.tfr * women), inf: c.inf, retire: 60,
+      prod: 0, econMod: 0, wbMod: 0, sup: c.sup, wf: 0, growth: 0, round: 0, chosen: [], budget: c.budget, nextBudget: 0,
+      history: [], log: [], eventsUsed: [], start: c.bands.slice(), startTfr: c.tfr };
+    s.startScores = scores(s);
+    return s;
+  }
+
+  function applyPolicies(s, ids) {
+    var jobsGrowth = s.c.jobs;
+    var mig = 0;
+    ids.forEach(function (id) {
+      var f = P[id].fx;
+      if (f.tfr) s.tfr += f.tfr;
+      if (f.tfrHigh && s.tfr > 2.5) s.tfr += f.tfrHigh;
+      if (f.tfrLow && s.tfr <= 2.5) s.tfr += f.tfrLow;
+      if (f.retire) s.retire = Math.min(70, s.retire + f.retire);
+      if (f.prod) s.prod += f.prod;
+      if (f.econ) s.econMod += f.econ;
+      if (f.econRem) s.econMod += s.c.id === 'gm' ? f.econRem : 1;
+      if (f.wb) s.wbMod += f.wb;
+      if (f.sup) s.sup += f.sup;
+      if (f.jobs) jobsGrowth += f.jobs;
+      if (f.jobsGm && s.c.id === 'gm') jobsGrowth += f.jobsGm;
+      if (f.inf) s.inf = Math.min(0.995, s.inf + f.inf);
+      if (f.mig === 'in') mig += s.c.migIn;
+      if (f.mig === 'out') mig += s.c.migOut;
+    });
+    s.tfr = Math.max(s.c.tfrFloor, Math.min(s.c.tfrCap, s.tfr));
+    // service pressure if nothing addresses it
+    s.pressure = !hadPolicy({ chosen: ids }, s.c.pressureFix);
+    if (s.pressure) { s.wbMod -= 5; s.sup -= 3; }
+    return { jobs: jobsGrowth, mig: mig };
+  }
+
+  function project(s, jobsGrowth, mig) {
+    var b = s.b, c = s.c;
+    var births = s.k * s.tfr * (b[2] + b[3]) / 2;
+    var n = new Array(9);
+    n[0] = births * s.inf;
+    for (var i = 1; i < 9; i++) n[i] = b[i - 1] * c.surv[i - 1];
+    n[8] += b[8] * c.surv[8];
+    n[2] = Math.max(0, n[2] + mig * 0.6); n[3] = Math.max(0, n[3] + mig * 0.4);
+    var wPrev = workPop(b, s.retire), wNow = workPop(n, s.retire);
+    s.growth = (wNow / wPrev - 1) * 100;
+    s.wf = c.id === 'gm' ? -Math.max(0, s.growth - jobsGrowth) * 0.7 : Math.min(0, s.growth) * 1.5;
+    s.b = n;
+    // natural fertility drift for next decade
+    s.tfr = Math.max(c.tfrFloor, s.tfr + c.tfrDrift);
+  }
+
+  function scores(s) {
+    var r = depRatio(s);
+    var o = {
+      dp: clamp(100 - (r - 40) * 1.25),
+      ec: clamp(s.c.econ + s.prod + s.wf + s.econMod),
+      wb: clamp(s.c.wb + s.wbMod),
+      sp: clamp(s.sup)
+    };
+    o.overall = Math.round((o.dp + o.ec + o.wb + o.sp) / 4);
+    o.ratio = Math.round(r);
+    o.pop = sum(s.b);
+    o.u15 = Math.round((s.b[0] + 0.5 * s.b[1]) / o.pop * 100);
+    o.o60 = Math.round((s.b[6] + s.b[7] + s.b[8]) / o.pop * 100);
+    o.tfr = s.tfr;
+    return o;
+  }
+
+  function simulate(ids) {
+    var p = clone(st); p.c = st.c;
+    var r = applyPolicies(p, ids);
+    project(p, r.jobs, r.mig);
+    return p;
+  }
+
+  /* ================= PYRAMID SVG ================= */
+  function pyramidSVG(b, outline, scale, opts) {
+    opts = opts || {};
+    var W = 420, H = 260, mid = W / 2, gap = 34, top = 8, rowH = (H - top - 26) / 9, half = mid - gap / 2 - 6;
+    var retire = opts.retire || 60, out = '';
+    out += '<svg class="pyr" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + (opts.label || 'Population pyramid') + '">';
+    for (var i = 0; i < 9; i++) {
+      var y = top + (8 - i) * rowH;
+      var dependent = i === 0 || i >= (retire >= 70 ? 7 : 6);
+      if (dependent && !opts.noShade) out += '<rect x="0" y="' + y + '" width="' + W + '" height="' + rowH + '" fill="rgba(220,38,38,0.07)"/>';
+      if (i === 1 && !opts.noShade) out += '<rect x="0" y="' + (y + rowH / 2) + '" width="' + W + '" height="' + rowH / 2 + '" fill="rgba(220,38,38,0.07)"/>';
+      if (i === 6 && retire === 65 && !opts.noShade) out += '<rect x="0" y="' + y + '" width="' + W + '" height="' + rowH / 2 + '" fill="rgba(220,38,38,0.07)"/>';
+      var f = b[i] * FEMALE_SHARE[i], m = b[i] - f;
+      var mw = Math.min(half, m / scale * half), fw = Math.min(half, f / scale * half);
+      out += '<rect x="' + (mid - gap / 2 - mw) + '" y="' + (y + 2) + '" width="' + mw + '" height="' + (rowH - 4) + '" rx="2" fill="var(--male)"/>';
+      out += '<rect x="' + (mid + gap / 2) + '" y="' + (y + 2) + '" width="' + fw + '" height="' + (rowH - 4) + '" rx="2" fill="var(--female)"/>';
+      if (outline) {
+        var of = outline[i] * FEMALE_SHARE[i], om = outline[i] - of;
+        var omw = Math.min(half, om / scale * half), ofw = Math.min(half, of / scale * half);
+        out += '<rect x="' + (mid - gap / 2 - omw) + '" y="' + (y + 2) + '" width="' + omw + '" height="' + (rowH - 4) + '" fill="none" stroke="#334155" stroke-width="1.6" stroke-dasharray="4 3"/>';
+        out += '<rect x="' + (mid + gap / 2) + '" y="' + (y + 2) + '" width="' + ofw + '" height="' + (rowH - 4) + '" fill="none" stroke="#334155" stroke-width="1.6" stroke-dasharray="4 3"/>';
+      }
+      out += '<text x="' + mid + '" y="' + (y + rowH / 2 + 4) + '" text-anchor="middle" font-size="10.5" font-weight="700" fill="#4a6272">' + BANDS[i] + '</text>';
+    }
+    var axisY = H - 12, unit = scale >= 2 ? 'm' : 'k', mult = scale >= 2 ? 1 : 1000;
+    [0.5, 1].forEach(function (fr) {
+      var v = scale * fr * mult; var lbl = (v >= 100 ? Math.round(v) : v.toFixed(v < 10 ? 1 : 0)) + unit + (fr === 1 ? ' ' : '');
+      out += '<text x="' + (mid - gap / 2 - half * fr) + '" y="' + axisY + '" text-anchor="' + (fr === 1 ? 'start' : 'middle') + '" font-size="10" fill="#4a6272">' + lbl + '</text>';
+      out += '<text x="' + (mid + gap / 2 + half * fr) + '" y="' + axisY + '" text-anchor="' + (fr === 1 ? 'end' : 'middle') + '" font-size="10" fill="#4a6272">' + lbl + '</text>';
+    });
+    out += '</svg>';
+    return out;
+  }
+
+  /* ================= UI HELPERS ================= */
+  function $(id) { return document.getElementById(id); }
+  function show(id) { document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('on'); }); $(id).classList.add('on'); window.scrollTo(0, 0); }
+  function fmtPop(v, c) { return c.id === 'th' ? v.toFixed(1) + 'm' : v.toFixed(2) + 'm'; }
+  function diffSpan(d, invert, suffix) {
+    if (Math.abs(d) < 0.05) return '';
+    var good = invert ? d < 0 : d > 0;
+    return ' <small class="' + (good ? 'up' : 'down') + '">' + (d > 0 ? '▲' : '▼') + Math.abs(d).toFixed(suffix === '' ? 1 : 0) + (suffix || '') + '</small>';
+  }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function deltaCell(d) { return '<div class="d" style="color:' + (d > 0 ? 'var(--green)' : d < 0 ? 'var(--red)' : 'var(--muted)') + '">' + (d > 0 ? '▲ ' + d : d < 0 ? '▼ ' + (-d) : '–') + '</div>'; }
+
+  /* ================= START ================= */
+  function renderStart() {
+    $('countryList').innerHTML = ['th', 'gm'].map(function (id) {
+      var c = COUNTRIES[id];
+      return '<button class="country" type="button" data-id="' + id + '"><div>' +
+        '<h3><span class="flag" aria-hidden="true">' + c.flag + '</span>' + c.name + (results[id] ? '<span class="done-badge">Played ✓</span>' : '') + '</h3>' +
+        '<span class="tag ' + id + '">' + c.type + ' population</span>' +
+        '<p>' + c.blurb + '</p><ul>' + c.facts.map(function (f) { return '<li>• ' + f + '</li>'; }).join('') + '</ul>' +
+        '<p style="margin-bottom:0"><b style="color:var(--navy)">Policy budget: ' + c.budget + ' pts/decade</b></p></div>' +
+        '<div>' + pyramidSVG(c.bands, null, c.scale, { label: c.name + ' population pyramid 2025' }) + '</div></button>';
+    }).join('');
+    $('countryList').querySelectorAll('.country').forEach(function (btn) {
+      btn.addEventListener('click', function () { startCountry(btn.dataset.id); });
+    });
+  }
+  function startCountry(id) {
+    st = newState(COUNTRIES[id]);
+    beginRound();
+  }
+
+  /* ================= DECADE ================= */
+  var picks = [];
+  function beginRound() {
+    st.budget = st.c.budget + st.nextBudget; st.nextBudget = 0;
+    picks = [];
+    renderDecade();
+    show('sDecade');
+  }
+  function spent() { return picks.reduce(function (a, id) { return a + P[id].cost; }, 0); }
+
+  function renderDecade() {
+    var c = st.c, yr = YEARS[st.round], from = st.round === 0 ? 2025 : YEARS[st.round - 1];
+    $('dTitle').textContent = c.flag + ' ' + c.name + ': policies for ' + from + '–' + yr;
+    $('dSub').textContent = 'Decade ' + (st.round + 1) + ' of 3 · ' + c.type + ' population · Retirement age ' + st.retire;
+    $('timeline').innerHTML = YEARS.map(function (y, i) { return '<span class="' + (i < st.round ? 'done' : i === st.round ? 'now' : '') + '">' + y + '</span>'; }).join('');
+
+    var sim = simulate(picks);
+    var now = scores(st), proj = scores(sim);
+    $('pyrHead').textContent = 'Projected pyramid ' + yr;
+    $('pyrNote').textContent = 'Updates as you choose policies';
+    $('pyr').innerHTML = pyramidSVG(sim.b, st.b, c.scale, { retire: sim.retire, label: 'Projected population pyramid ' + yr });
+    $('stats').innerHTML =
+      '<div class="st"><div class="k">Population</div><div class="v">' + fmtPop(proj.pop, c) + diffSpan((proj.pop - now.pop) / now.pop * 100, false, '%') + '</div></div>' +
+      '<div class="st"><div class="k">Dependency ratio</div><div class="v">' + proj.ratio + diffSpan(proj.ratio - now.ratio, true, '') + '</div></div>' +
+      '<div class="st"><div class="k">Fertility (TFR)</div><div class="v">' + sim.tfr.toFixed(1) + '</div></div>' +
+      '<div class="st"><div class="k">Under 15</div><div class="v">' + proj.u15 + '%</div></div>' +
+      '<div class="st"><div class="k">Aged 60+</div><div class="v">' + proj.o60 + '%</div></div>' +
+      '<div class="st"><div class="k">Working-age change</div><div class="v">' + (sim.growth > 0 ? '+' : '') + sim.growth.toFixed(0) + '%</div></div>';
+
+    var prev = st.history.length ? st.history[st.history.length - 1].scores : st.startScores;
+    $('meters').innerHTML = METERS.map(function (m) {
+      var d = proj[m.k] - prev[m.k];
+      return '<div class="meter"><div class="top"><span>' + m.name + '<small>' + m.sub + '</small></span><span>' + proj[m.k] +
+        ' <span style="font-size:0.75rem;color:' + (d > 0 ? 'var(--green)' : d < 0 ? 'var(--red)' : 'var(--muted)') + '">' + (d > 0 ? '▲' + d : d < 0 ? '▼' + (-d) : '') + '</span></span></div>' +
+        '<div class="bar"><div style="width:' + proj[m.k] + '%;background:' + m.color + '"></div></div></div>';
+    }).join('');
+    $('overall').textContent = proj.overall;
+
+    var left = st.budget - spent();
+    $('vBudget').textContent = left + ' / ' + st.budget + ' pts';
+    $('chipBudget').className = 'chip' + (left === 0 ? ' warn' : '');
+    $('vChosen').textContent = picks.length;
+
+    var groups = [];
+    POLICIES.forEach(function (p) { if (groups.indexOf(p.group) < 0) groups.push(p.group); });
+    $('policyList').innerHTML = groups.map(function (g) {
+      return '<div class="pgroup">' + g + '</div><div class="policies">' + POLICIES.filter(function (p) { return p.group === g; }).map(function (p) {
+        var sel = picks.indexOf(p.id) > -1;
+        var blocked = !sel && (p.cost > left || (p.id === 'retire' && st.retire >= 70));
+        var reason = p.id === 'retire' && st.retire >= 70 ? ' (already 70)' : '';
+        return '<button type="button" class="policy' + (sel ? ' sel' : '') + '" data-p="' + p.id + '"' + (blocked ? ' disabled' : '') + ' aria-pressed="' + sel + '">' +
+          '<span class="pe" aria-hidden="true">' + p.emo + '</span><span><b>' + p.name + reason + '</b>' + p.text +
+          '<span class="eff">' + p.eff + '</span><span class="cost">' + (p.cost === 0 ? 'Free' : p.cost + ' pt' + (p.cost > 1 ? 's' : '')) + '</span></span></button>';
+      }).join('') + '</div>';
+    }).join('');
+
+    var why = picks.length ? '' : 'Choose at least one policy to continue.';
+    if (!why && !hadPolicy({ chosen: picks }, c.pressureFix)) why = '⚠️ Nothing addresses pressure on ' + c.pressureName + ' this decade — wellbeing will fall.';
+    $('whyBlocked').textContent = why;
+    $('confirmBtn').disabled = picks.length === 0;
+  }
+
+  $('policyList').addEventListener('click', function (e) {
+    var b = e.target.closest('.policy'); if (!b || b.disabled) return;
+    var id = b.dataset.p, i = picks.indexOf(id);
+    if (i > -1) picks.splice(i, 1); else picks.push(id);
+    renderDecade();
+  });
+  $('clearBtn').addEventListener('click', function () { picks = []; renderDecade(); });
+
+  $('confirmBtn').addEventListener('click', function () {
+    var prev = st.history.length ? st.history[st.history.length - 1].scores : st.startScores;
+    st.chosen = picks.slice();
+    var r = applyPolicies(st, picks);
+    var pressure = st.pressure;
+    project(st, r.jobs, r.mig);
+
+    var pool = EVENTS.filter(function (ev) {
+      return st.eventsUsed.indexOf(ev.id) < 0 && (!ev.only || ev.only === st.c.id) && !((ev.id === 'aid' || ev.id === 'election') && st.round === 2);
+    });
+    if (st.round === 1 && st.eventsUsed.indexOf('election') < 0) pool = pool.filter(function (e) { return e.id === 'election'; }); // always an election mid-game
+    var ev = shuffle(pool)[0];
+    st.eventsUsed.push(ev.id);
+    var res = ev.apply(st);
+    var sc = scores(st);
+    st.history.push({ year: YEARS[st.round], b: st.b.slice(), scores: sc, event: ev, res: res, picks: picks.slice(), retire: st.retire });
+    st.log.push('<b>' + (st.round === 0 ? 2025 : YEARS[st.round - 1]) + '–' + YEARS[st.round] + ':</b> ' + picks.map(function (id) { return P[id].emo + ' ' + P[id].name; }).join(', ') +
+      '<br>' + ev.emo + ' <i>' + ev.title + '</i> — ' + res.msg + (pressure ? ' <span style="color:var(--red)">No action on ' + st.c.pressureName + '.</span>' : ''));
+
+    $('eEmo').textContent = ev.emo;
+    $('eYear').textContent = 'Event · ' + YEARS[st.round];
+    $('eTitle').textContent = ev.title;
+    $('eText').textContent = ev.text;
+    $('eEffect').className = 'effect' + (res.good ? ' good' : '');
+    $('eEffect').textContent = (res.good ? '✅ ' : '⚠️ ') + res.msg;
+    $('eLink').innerHTML = '<b>IB link:</b> ' + ev.link;
+    $('ePressure').innerHTML = pressure ? '<div class="pressure">⚠️ You did not invest in ' + st.c.pressureName + ' this decade. Services are overstretched: wellbeing −5, support −3.</div>' : '';
+    var from = st.round === 0 ? 2025 : YEARS[st.round - 1];
+    var cells = METERS.map(function (m) { return '<div class="sc"><div class="n">' + sc[m.k] + '</div><div class="l">' + m.name + '</div>' + deltaCell(sc[m.k] - prev[m.k]) + '</div>'; });
+    cells.push('<div class="sc" style="background:#eefaf9"><div class="n">' + sc.overall + '</div><div class="l">Overall</div>' + deltaCell(sc.overall - prev.overall) + '</div>');
+    $('eScores').innerHTML = cells.join('');
+    $('nextBtn').innerHTML = st.round < 2 ? 'Plan ' + YEARS[st.round] + '–' + YEARS[st.round + 1] + ' →' : 'See your 2055 review →';
+    show('sEvent');
+  });
+  $('nextBtn').addEventListener('click', function () { if (st.round < 2) { st.round++; beginRound(); } else renderFinal(); });
+
+  /* ================= FINAL ================= */
+  function renderFinal() {
+    var c = st.c, last = st.history[st.history.length - 1].scores, first = st.startScores;
+    results[c.id] = { first: first, last: last, retire: st.retire, tfr0: st.startTfr, picks: st.history.map(function (h) { return h.picks; }) };
+    $('fTitle').textContent = c.flag + ' ' + c.name + ' in 2055';
+    var o = last.overall, v, vt;
+    if (o >= 70) { v = '🌟 Visionary Minister'; vt = 'You balanced the demographic challenge with a strong economy, good services and public support.'; }
+    else if (o >= 58) { v = '👍 Steady Hand'; vt = 'A sound approach with some trade-offs. Which score would you target next time?'; }
+    else if (o >= 45) { v = '😬 Under Pressure'; vt = 'Your responses did not keep pace with population change. Look at which decade went wrong.'; }
+    else { v = '⚠️ Demographic Crisis'; vt = 'The population structure overwhelmed services and the economy. What would you do differently?'; }
+    $('fVerdict').textContent = v; $('fVerdictText').textContent = vt; $('fScore').textContent = o;
+    $('fScores').innerHTML = METERS.map(function (m) { return '<div class="sc"><div class="n">' + last[m.k] + '</div><div class="l">' + m.name + '</div>' + deltaCell(last[m.k] - first[m.k]) + '</div>'; }).join('');
+    $('fPyr').innerHTML = pyramidSVG(st.b, st.start, c.scale, { retire: st.retire, label: c.name + ' population pyramid 2055 compared with 2025' });
+    $('fStats').innerHTML =
+      '<div class="st"><div class="k">Population</div><div class="v">' + fmtPop(first.pop, c) + ' → ' + fmtPop(last.pop, c) + '</div></div>' +
+      '<div class="st"><div class="k">Dependency ratio</div><div class="v">' + first.ratio + ' → ' + last.ratio + '</div></div>' +
+      '<div class="st"><div class="k">Fertility (TFR)</div><div class="v">' + st.startTfr.toFixed(1) + ' → ' + st.tfr.toFixed(1) + '</div></div>' +
+      '<div class="st"><div class="k">Under 15</div><div class="v">' + first.u15 + '% → ' + last.u15 + '%</div></div>' +
+      '<div class="st"><div class="k">Aged 60+</div><div class="v">' + first.o60 + '% → ' + last.o60 + '%</div></div>' +
+      '<div class="st"><div class="k">Retirement age</div><div class="v">60 → ' + st.retire + '</div></div>';
+    $('fLog').innerHTML = st.log.map(function (l) { return '<li>' + l + '</li>'; }).join('');
+
+    var other = COUNTRIES[c.other];
+    var all = [].concat.apply([], st.history.map(function (h) { return h.picks; }));
+    var mostUsed = all.sort(function (a, b) { return all.filter(function (x) { return x === b; }).length - all.filter(function (x) { return x === a; }).length; })[0];
+    var backfire = c.id === 'gm' ? 'baby bonuses or migrant-worker recruitment' : 'family planning or encouraging emigration';
+    $('fPrompts').innerHTML = [
+      'Your most-used response was <b>' + P[mostUsed].name.toLowerCase() + '</b>. How effective was it, and over what time scale did it work?',
+      'Which responses would <b>backfire</b> in ' + c.name + ' (e.g. ' + backfire + ')? Why do responses depend on the population structure?',
+      'Compare with ' + other.name + ': both countries have a high dependency ratio — why do they need <b>opposite</b> responses?',
+      'Which trade-off was hardest: effectiveness versus public support, or short-term cost versus long-term benefit?'
+    ].map(function (q) { return '<li>' + q + '</li>'; }).join('');
+
+    // comparison when both played
+    if (results.th && results.gm) {
+      var rows = [
+        ['Overall score', 'overall'], ['Dependency ratio 2025 → 2055', 'ratio'], ['Under 15', 'u15'], ['Aged 60+', 'o60'],
+        ['Dependency balance', 'dp'], ['Economy & jobs', 'ec'], ['Wellbeing', 'wb'], ['Public support', 'sp']
+      ];
+      $('cmpTable').innerHTML = '<thead><tr><th>Measure</th><th>🇹🇭 Thailand</th><th>🇬🇲 The Gambia</th></tr></thead><tbody>' +
+        rows.map(function (r) {
+          function cell(id) { var x = results[id]; var pct = r[1] === 'u15' || r[1] === 'o60' ? '%' : ''; return x.first[r[1]] + pct + ' → <b>' + x.last[r[1]] + pct + '</b>'; }
+          return '<tr><td>' + r[0] + '</td><td>' + cell('th') + '</td><td>' + cell('gm') + '</td></tr>';
+        }).join('') +
+        '<tr><td>Responses used</td><td>' + usedList('th') + '</td><td>' + usedList('gm') + '</td></tr></tbody>';
+      $('compareBox').style.display = 'block';
+    } else $('compareBox').style.display = 'none';
+
+    var both = results.th && results.gm;
+    $('examQ').textContent = both
+      ? 'Evaluate the responses to the challenges of an ageing population and a youthful population.'
+      : 'Evaluate the responses to the challenges of ' + (c.id === 'th' ? 'an ageing' : 'a youthful') + ' population in one country you have studied.';
+    var picksAll = st.history.map(function (h) { return h.picks; });
+    var firstResp = P[picksAll[0][0]].name.toLowerCase();
+    var para = (c.id === 'th'
+      ? 'Thailand has an ageing population: in 2025 about ' + first.o60 + '% of people were aged 60+ and the fertility rate was only about ' + st.startTfr.toFixed(1) + ', well below replacement level. '
+      : 'The Gambia has a youthful population: in 2025 about ' + first.u15 + '% of people were under 15 and the fertility rate was about ' + st.startTfr.toFixed(1) + '. ') +
+      'In my simulation, one response was ' + firstResp + '. By 2055 the dependency ratio had changed from ' + first.ratio + ' to ' + last.ratio +
+      (last.ratio < first.ratio ? ', suggesting the responses were partly effective because ...' : ', suggesting the responses were not enough to offset population change because ...') + ' ' +
+      'However, ' + '...' + ' (consider cost, time scale and public acceptability — public support ended at ' + last.sp + '/100).' +
+      (both ? '\n\nIn contrast, ' + (c.id === 'th' ? 'The Gambia' : 'Thailand') + ' needed ... because ...' : '') +
+      '\n\nOverall, ...';
+    $('fPara').value = para; $('copied').textContent = '';
+
+    if (!results[c.other]) { $('otherBtn').style.display = ''; $('otherBtn').textContent = 'Now run ' + other.name + ' →'; }
+    else { $('otherBtn').style.display = ''; $('otherBtn').textContent = 'Play ' + c.name + ' again'; }
+    $('otherBtn').dataset.go = results[c.other] ? c.id : c.other;
+    show('sFinal');
+  }
+  function usedList(id) {
+    var flat = [].concat.apply([], results[id].picks), seen = [];
+    flat.forEach(function (p) { if (seen.indexOf(p) < 0) seen.push(p); });
+    return seen.map(function (p) { return P[p].emo; }).join(' ') + '<br><span class="note">' + seen.map(function (p) { return P[p].name; }).join('; ') + '</span>';
+  }
+
+  $('otherBtn').addEventListener('click', function () { startCountry(this.dataset.go); });
+  $('againBtn').addEventListener('click', function () { renderStart(); show('sStart'); });
+  $('copyBtn').addEventListener('click', function () {
+    var ta = $('fPara');
+    function done() { $('copied').textContent = 'Copied!'; setTimeout(function () { $('copied').textContent = ''; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(done, function () { ta.select(); document.execCommand('copy'); done(); });
+    else { ta.select(); document.execCommand('copy'); done(); }
+  });
+
+  renderStart();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
