@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Water Security Decision Game — IB Geography Games — SBL</title>
+<meta name="description" content="Choose two water security strategies for a region, test them in a drought, then justify each with a benefit, a limitation and regional fit. IB DP Geography Unit 3: Resource Consumption and Security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c;
+    --deep: #031c33;
+    --teal: #129a94;
+    --teal2: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --line: rgba(5, 43, 65, 0.13);
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(0, 184, 176, 0.14), transparent 35%),
+      linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, select, textarea { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal2); }
+
+  main { max-width: 1200px; margin: 26px auto 60px; padding: 0 18px; }
+  .screen { display: none; }
+  .screen.on { display: block; }
+
+  .intro { text-align: center; margin-bottom: 20px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal2), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 780px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  .steps { display: flex; justify-content: center; gap: 8px; margin: 14px 0 20px; flex-wrap: wrap; }
+  .step { padding: 7px 14px; border-radius: 999px; font-size: 0.8rem; font-weight: 750; background: rgba(255,255,255,0.7); border: 1px solid var(--line); color: var(--muted); }
+  .step.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.3); }
+
+  .panel { background: rgba(255,255,255,0.94); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .panel h2 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+
+  /* Regions */
+  .regions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .region { text-align: left; background: #fff; border: 2px solid var(--line); border-radius: var(--radius); padding: 16px; cursor: pointer; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; color: var(--ink); display: flex; flex-direction: column; gap: 8px; }
+  .region:hover { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 16px 30px rgba(0,35,58,0.14); }
+  .region .flag { font-size: 1.8rem; line-height: 1; }
+  .region h3 { font-size: 1.15rem; font-weight: 900; }
+  .region p { font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
+  .tag { display: inline-block; width: fit-content; font-size: 0.68rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; }
+  .tag.phys { background: #fee2e2; color: #991b1b; }
+  .tag.econ { background: #fef3c7; color: #92400e; }
+  .tag.stress { background: #e0f2fe; color: #075985; }
+  .played { font-size: 0.72rem; font-weight: 850; color: var(--green); }
+
+  /* Choose */
+  .choose-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 18px; align-items: start; }
+  .board { position: relative; border-radius: 14px; overflow: hidden; line-height: 0; }
+  .board img { width: 100%; height: auto; display: block; }
+  .hot { position: absolute; border-radius: 10px; border: 3px solid transparent; background: transparent; cursor: pointer; transition: border-color .15s ease, background .15s ease; padding: 0; }
+  .hot:hover { border-color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.12); }
+  .hot.sel { border-color: #facc15; background: rgba(250,204,21,0.18); box-shadow: 0 0 0 3px rgba(3,28,51,0.55); }
+  .hot.off { background: rgba(3,28,51,0.62); cursor: not-allowed; border-color: transparent; }
+  .hot .badge { position: absolute; top: -12px; right: -12px; width: 26px; height: 26px; border-radius: 50%; background: #facc15; color: var(--deep); font-weight: 900; font-size: 0.85rem; display: none; place-items: center; line-height: 26px; }
+  .hot.sel .badge { display: grid; }
+  .hot .x { display: none; position: absolute; inset: 0; color: #fff; font-weight: 900; font-size: 0.72rem; line-height: 1.2; align-items: center; justify-content: center; text-align: center; padding: 2px 6px; }
+  .hot.off .x { display: flex; }
+  .board-note { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
+
+  .brief { display: grid; gap: 8px; margin-bottom: 12px; }
+  .brief .row { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; line-height: 1.45; }
+  .brief .row b { color: var(--navy); }
+  .brief .ic { width: 22px; flex: none; text-align: center; }
+  .need { padding: 10px 12px; border-radius: 12px; background: #eef7fa; border-left: 4px solid var(--teal); font-size: 0.88rem; line-height: 1.5; font-weight: 600; margin-bottom: 12px; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .card { text-align: left; border: 2px solid var(--line); border-radius: 12px; background: #fff; padding: 0; overflow: hidden; cursor: pointer; color: var(--ink); display: flex; flex-direction: column; }
+  .card .ch { padding: 8px 11px; font-weight: 850; font-size: 0.9rem; color: #fff; background: var(--navy); display: flex; justify-content: space-between; align-items: center; }
+  .card:nth-child(even) .ch { background: var(--teal); }
+  .card .cb { padding: 8px 11px; font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+  .card .kind { font-size: 0.66rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.85; }
+  .card:hover:not(:disabled) { border-color: var(--teal); }
+  .card.sel { border-color: #eab308; box-shadow: 0 0 0 3px rgba(250,204,21,0.35); }
+  .card:disabled { opacity: 0.45; cursor: not-allowed; }
+  .card .why { color: var(--red); font-weight: 750; }
+
+  .actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+  .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform .2s ease; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+  .hint { font-size: 0.84rem; color: var(--amber); font-weight: 700; }
+
+  /* Results */
+  .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  .gauge { margin: 6px 0 14px; }
+  .gauge .lbl { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; margin-bottom: 5px; }
+  .gauge .track { position: relative; height: 22px; background: #e8eff2; border-radius: 99px; overflow: hidden; }
+  .gauge .fill { height: 100%; border-radius: 99px; transition: width .6s ease; }
+  .gauge .ghost { position: absolute; top: 0; bottom: 0; border-right: 3px dashed #334155; }
+  .gauge .sub { font-size: 0.76rem; color: var(--muted); margin-top: 4px; }
+  .bars { display: grid; gap: 10px; }
+  .bar .top { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.86rem; margin-bottom: 4px; }
+  .bar .top small { display: block; font-weight: 600; color: var(--muted); font-size: 0.72rem; }
+  .bar .track { height: 10px; background: #e8eff2; border-radius: 99px; overflow: hidden; }
+  .bar .track div { height: 100%; border-radius: 99px; }
+  .drought { padding: 14px; border-radius: 14px; background: #fff7ed; border-left: 5px solid var(--amber); margin-top: 12px; line-height: 1.5; font-size: 0.92rem; }
+  .drought.good { background: #ecfdf5; border-left-color: var(--green); }
+  .drought b { display: block; margin-bottom: 4px; }
+  .note-list { list-style: none; display: grid; gap: 8px; margin-top: 4px; }
+  .note-list li { padding: 10px 12px; border-radius: 10px; background: #fff; border: 1px solid var(--line); font-size: 0.88rem; line-height: 1.45; }
+  .note-list li.plus { border-left: 4px solid var(--green); }
+  .note-list li.minus { border-left: 4px solid var(--red); }
+  .real { padding: 14px; border-radius: 14px; background: #eef7fa; border-left: 5px solid var(--teal); line-height: 1.55; font-size: 0.92rem; margin-top: 12px; }
+  .real b { color: var(--teal-dark); }
+  .grade { font-size: 2.6rem; font-weight: 900; color: var(--navy); line-height: 1; }
+
+  /* Justify */
+  .just { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .jcard h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+  .jrow { margin-bottom: 12px; }
+  .jrow label { display: block; font-size: 0.76rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .jrow select { width: 100%; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 0.88rem; background: #fff; color: var(--ink); }
+  .jrow select.right { border-color: var(--green); background: var(--green-soft); }
+  .jrow select.wrong { border-color: var(--red); background: var(--red-soft); }
+  .jfb { font-size: 0.82rem; line-height: 1.45; margin-top: 5px; display: none; }
+  .jfb.show { display: block; }
+  .jfb.ok { color: var(--green); } .jfb.no { color: var(--red); }
+
+  textarea.para { width: 100%; min-height: 210px; padding: 12px; border-radius: 12px; border: 1px solid rgba(5,43,65,0.2); font-size: 0.92rem; line-height: 1.55; resize: vertical; margin-top: 8px; }
+  .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+  .copied { color: var(--green); font-weight: 800; font-size: 0.85rem; }
+  table.sum { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: #fff; border-radius: 12px; overflow: hidden; }
+  table.sum th, table.sum td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: left; }
+  table.sum th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: #f3f8fa; }
+
+  @media (max-width: 980px) {
+    .regions { grid-template-columns: 1fr 1fr; }
+    .choose-grid, .res-grid, .just { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 12px; }
+    .panel { padding: 14px; }
+    .regions { grid-template-columns: 1fr; }
+    .hot .x { font-size: 0.55rem; }
+    .hot .badge { width: 20px; height: 20px; line-height: 20px; top: -8px; right: -8px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Water Security Decision</span></div>
+    <a href="/geography/paper-1/core-3/t1-global-trends/l3-patterns-and" class="back-link">Back to lesson &rarr;</a>
+  </div>
+</div>
+
+<main>
+  <div class="steps">
+    <span class="step active" data-s="1">1 &middot; Region</span>
+    <span class="step" data-s="2">2 &middot; Choose TWO</span>
+    <span class="step" data-s="3">3 &middot; Drought test</span>
+    <span class="step" data-s="4">4 &middot; Justify</span>
+  </div>
+
+  <!-- 1 REGION -->
+  <section class="screen on" id="sRegion">
+    <div class="intro">
+      <span class="kicker">IB Unit 3 &middot; Resource Consumption &amp; Security &middot; Apply and evaluate</span>
+      <h1>&#128167; Water Security Decision Game</h1>
+      <p>Your budget can fund only <strong>two</strong> strategies. The best pair depends on the region &mdash; its climate, coastline, wealth and what the water is used for. Choose, survive a drought year, then justify your decisions.</p>
+    </div>
+    <div class="panel">
+      <h2>Choose a region to advise</h2>
+      <div class="regions" id="regionList"></div>
+    </div>
+    <div class="panel" id="summaryBox" style="margin-top:18px;display:none">
+      <h2>Your decisions so far</h2>
+      <div style="overflow-x:auto"><table class="sum" id="summaryTable"></table></div>
+      <p class="note">Notice how the best pair changes from region to region &mdash; there is no one-size-fits-all solution to water insecurity.</p>
+    </div>
+  </section>
+
+  <!-- 2 CHOOSE -->
+  <section class="screen" id="sChoose">
+    <div class="choose-grid">
+      <div class="panel">
+        <h2 id="cTitle"></h2>
+        <div class="board" id="board">
+          <img src="/images/games/water-security-decision.jpg" alt="Illustration of six water security strategies: reservoir, desalination plant, repaired pipe network, efficient irrigation, wastewater recycling and water conservation" width="765" height="528">
+        </div>
+        <p class="board-note">Click a strategy on the picture or in the list. Greyed-out strategies are not possible in this region.</p>
+      </div>
+      <div class="panel">
+        <div class="need" id="cNeed"></div>
+        <div class="brief" id="cBrief"></div>
+        <div class="cards" id="cards"></div>
+        <div class="actions">
+          <span class="hint" id="cHint"></span>
+          <button class="btn ghost" id="backRegion" type="button">Change region</button>
+          <button class="btn primary" id="testBtn" type="button">Fund these two &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 RESULTS -->
+  <section class="screen" id="sResult">
+    <div class="res-grid">
+      <div class="panel">
+        <h2 id="rTitle"></h2>
+        <div class="gauge">
+          <div class="lbl"><span>Water security &mdash; normal year</span><span id="gNormal"></span></div>
+          <div class="track"><div class="fill" id="fNormal"></div><div class="ghost" id="ghost1"></div></div>
+          <div class="sub">Dashed line = before your strategies. 100 = demand fully and reliably met.</div>
+        </div>
+        <div class="gauge">
+          <div class="lbl"><span>Water security &mdash; drought year</span><span id="gDrought"></span></div>
+          <div class="track"><div class="fill" id="fDrought"></div><div class="ghost" id="ghost2"></div></div>
+        </div>
+        <div class="drought" id="dBox"></div>
+        <h2 style="margin-top:16px">Other things decision-makers weigh up</h2>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+          <h2 style="margin:0">Adviser&rsquo;s verdict</h2>
+          <div style="text-align:right"><div class="grade" id="grade"></div><div class="note" style="margin:0">overall</div></div>
+        </div>
+        <ul class="note-list" id="notes" style="margin-top:12px"></ul>
+        <div class="real" id="real"></div>
+        <div class="actions">
+          <button class="btn ghost" id="retryBtn" type="button">Try a different pair</button>
+          <button class="btn primary" id="toJustify" type="button">Justify my choices &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 JUSTIFY -->
+  <section class="screen" id="sJustify">
+    <div class="intro" style="margin-bottom:14px">
+      <h1 style="font-size:clamp(1.3rem,2.6vw,1.9rem)" id="jTitle"></h1>
+      <p>For each strategy, choose its main <strong>benefit</strong>, a key <strong>limitation</strong>, and the <strong>regional fact</strong> that best explains why it fits (or doesn&rsquo;t fit) this region.</p>
+    </div>
+    <div class="just" id="jCards"></div>
+    <div class="actions" style="justify-content:center">
+      <span class="hint" id="jHint"></span>
+      <button class="btn primary" id="checkJust" type="button">Check my justification</button>
+    </div>
+    <div class="panel" id="paraBox" style="margin-top:18px;display:none">
+      <h2>&#9997;&#65039; Your evaluation paragraph</h2>
+      <p style="line-height:1.5;font-size:0.92rem">Built from your choices. Improve it in your own words and add a judgement: <em>which of the two will do more for water security here, and why?</em></p>
+      <textarea class="para" id="para" aria-label="Evaluation paragraph"></textarea>
+      <div class="actions" style="justify-content:flex-start">
+        <button class="btn ghost" id="copyBtn" type="button">Copy paragraph</button>
+        <span class="copied" id="copied"></span>
+      </div>
+      <p class="note">Not saved or marked &mdash; copy it into your notes before you leave the page.</p>
+      <div class="actions">
+        <button class="btn primary" id="anotherBtn" type="button">Advise another region &rarr;</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  /* ================= STRATEGIES ================= */
+  // hot: hotspot position on the illustration, in % of width/height
+  var STRATS = [
+    { id: 'res', name: 'Reservoir', short: 'store seasonal water', kind: 'supply', hot: [0.5, 1, 31, 18], pb: 'A reservoir stores wet-season water so it can be used in dry periods',
+      benefit: 'Stores wet-season water for use in dry periods, supplying cities and irrigation',
+      limitation: 'It floods land and displaces people, and loses water to evaporation — useless if the rain fails' },
+    { id: 'des', name: 'Desalination', short: 'new coastal supply', kind: 'supply', hot: [70.5, 2.5, 29, 16.5], pb: 'Desalination creates a new supply of fresh water that does not depend on rainfall',
+      benefit: 'Creates a new, rainfall-independent supply of fresh water from the sea',
+      limitation: 'It is very expensive and energy-intensive, and produces salty brine that harms marine life' },
+    { id: 'pip', name: 'Pipe networks', short: 'reduce leakage, connect', kind: 'access', hot: [26.8, 30, 34.6, 16], pb: 'Repairing and extending pipe networks cuts leakage and brings piped water to people who lack access',
+      benefit: 'Cuts leakage and extends piped water to people who currently lack access',
+      limitation: 'It is costly and slow to install across a whole region, and does not create any new water' },
+    { id: 'irr', name: 'Efficient irrigation', short: 'reduce farm demand', kind: 'demand', hot: [0, 50, 31, 15.5], pb: 'Efficient irrigation lets farmers grow the same crops with much less water',
+      benefit: 'Drip and sprinkler systems grow the same crops with much less water, cutting the largest use',
+      limitation: 'It has a high upfront cost for farmers, and saved water may simply be used to farm more land' },
+    { id: 'rec', name: 'Recycling', short: 'treat and reuse', kind: 'supply', hot: [33, 68, 23, 26], pb: 'Wastewater recycling turns used water into a reliable new supply',
+      benefit: 'Treats wastewater so it can be reused, creating a reliable new supply and cutting pollution',
+      limitation: 'It needs sewer networks and treatment plants, and faces public resistance to drinking recycled water' },
+    { id: 'con', name: 'Conservation', short: 'change behaviour', kind: 'demand', hot: [70, 57, 30, 38], pb: 'Conservation reduces demand quickly and cheaply through metering, pricing and efficient appliances',
+      benefit: 'Cheap measures (efficient appliances, metering, pricing, campaigns) reduce demand quickly',
+      limitation: 'It relies on people changing behaviour, and saves little where people already use very little water' }
+  ];
+  var S = {}; STRATS.forEach(function (s) { S[s.id] = s; });
+
+  /* ================= REGIONS =================
+     fx[id] = [security, drought, afford, environment, equity, speed] each 0-10
+     fit[id] = fact ids that best explain its fit here; off[id] = reason it is impossible */
+  var REGIONS = [
+    { id: 'isr', flag: '🇮🇱', name: 'Israel', type: 'phys', typeName: 'Physical scarcity',
+      blurb: 'A dry, wealthy country on the Mediterranean. Natural rainfall cannot meet demand.', base: 35,
+      need: 'Main problem: there simply isn’t enough natural fresh water — you need NEW supply that does not depend on rain.',
+      facts: {
+        a: 'Very low rainfall, especially in the south (often under 200 mm a year)',
+        b: 'A long Mediterranean coastline',
+        c: 'High income and advanced water technology',
+        d: 'Farmers already use drip irrigation widely',
+        e: 'Physical water scarcity — demand exceeds natural supply'
+      },
+      fx: { res: [2, 1, 5, 4, 5, 3], des: [9, 10, 6, 4, 6, 5], pip: [3, 5, 7, 8, 5, 6], irr: [3, 6, 7, 8, 6, 7], rec: [8, 9, 6, 7, 7, 5], con: [4, 6, 9, 10, 6, 5] },
+      fit: { res: ['a', 'e'], des: ['b', 'c', 'e'], pip: ['c'], irr: ['d'], rec: ['c', 'e', 'd'], con: ['e'] },
+      off: {},
+      real: '<b>What Israel actually did:</b> invested heavily in <b>desalination</b> (large plants on the Mediterranean coast now supply most of its drinking water) and <b>recycling</b> — it reuses the large majority of its wastewater for farming, the highest rate in the world. Drip irrigation was pioneered there decades earlier.',
+      realPair: ['des', 'rec'] },
+    { id: 'sgp', flag: '🇸🇬', name: 'Singapore', type: 'phys', typeName: 'Physical scarcity',
+      blurb: 'A small, wealthy island city-state with plenty of rain but very little land to collect it.', base: 40,
+      need: 'Main problem: nowhere to collect and store enough rain, and long-term reliance on imported water.',
+      facts: {
+        a: 'A small island with little land to collect and store rainwater',
+        b: 'Imports water from Malaysia under an agreement that ends in 2061',
+        c: 'High income and advanced water technology',
+        d: 'Almost no farming',
+        e: 'Very low pipe leakage already (around 5%)'
+      },
+      fx: { res: [4, 2, 6, 5, 7, 4], des: [8, 10, 6, 4, 7, 5], pip: [2, 4, 7, 8, 6, 6], irr: [1, 1, 7, 8, 5, 6], rec: [9, 9, 7, 7, 7, 5], con: [5, 6, 9, 10, 6, 5] },
+      fit: { res: ['a'], des: ['b', 'c'], pip: ['e'], irr: ['d'], rec: ['a', 'b', 'c'], con: ['a', 'b'] },
+      off: {},
+      real: '<b>What Singapore actually did:</b> built its “Four National Taps” — local catchments, imported water, <b>NEWater</b> (highly treated <b>recycled</b> water, able to meet up to about 40% of demand) and <b>desalination</b> — to become self-sufficient before the Malaysian agreement ends.',
+      realPair: ['rec', 'des'] },
+    { id: 'eth', flag: '🇪🇹', name: 'Rural Ethiopia', type: 'econ', typeName: 'Economic scarcity',
+      blurb: 'Highland villages with heavy seasonal rain, but many households lack a safe, nearby water source.', base: 25,
+      need: 'Main problem: water exists, but people can’t reach it — the gap is infrastructure and access, not rainfall.',
+      facts: {
+        a: 'Landlocked — no coastline',
+        b: 'Heavy but seasonal rainfall in the highlands',
+        c: 'Many rural households walk long distances to collect water',
+        d: 'Low income, with little money for large infrastructure',
+        e: 'Economic water scarcity — water exists but infrastructure to reach people is lacking'
+      },
+      fx: { res: [7, 6, 6, 5, 6, 5], des: [0, 0, 0, 0, 0, 0], pip: [9, 5, 5, 8, 10, 6], irr: [5, 5, 4, 8, 6, 5], rec: [2, 3, 2, 6, 3, 2], con: [1, 2, 8, 8, 1, 3] },
+      fit: { res: ['b', 'e'], pip: ['c', 'e'], irr: ['b', 'd'], rec: ['d'], con: ['c', 'd'], des: ['a'] },
+      off: { des: 'Landlocked — no sea' },
+      real: '<b>What is actually happening:</b> government and NGO programmes focus on <b>wells, boreholes and pipe networks</b> to bring safe water closer to villages, plus <b>small reservoirs and rainwater harvesting</b> to store the wet-season rain. Conserving water is not the answer where people already use far less than they need.',
+      realPair: ['pip', 'res'] },
+    { id: 'pun', flag: '🇮🇳', name: 'Punjab, India', type: 'stress', typeName: 'Water stress (over-use)',
+      blurb: 'India’s “bread basket”. Flood-irrigated rice and wheat are draining the groundwater.', base: 30,
+      need: 'Main problem: farming uses far more water than can be replaced — groundwater is being over-pumped.',
+      facts: {
+        a: 'Farming uses the vast majority of water, mostly flood-irrigated rice and wheat',
+        b: 'Groundwater tables are falling fast from over-pumping',
+        c: 'Free or cheap electricity for farm pumps encourages over-use',
+        d: 'Inland — far from the sea',
+        e: 'Lower-middle income, with many small farmers'
+      },
+      fx: { res: [5, 4, 5, 3, 5, 2], des: [0, 0, 0, 0, 0, 0], pip: [4, 4, 6, 7, 7, 6], irr: [9, 7, 6, 9, 7, 6], rec: [4, 6, 5, 7, 5, 4], con: [7, 7, 8, 9, 5, 4] },
+      fit: { res: ['e'], pip: ['e'], irr: ['a', 'b'], rec: ['a'], con: ['b', 'c'], des: ['d'] },
+      off: { des: 'Inland — far from the sea' },
+      real: '<b>What Punjab actually did:</b> focused on <b>cutting farm demand</b>. A 2009 law delays rice transplanting until the monsoon arrives (saving groundwater), and schemes promote <b>efficient irrigation</b>, direct seeding of rice and switching to less thirsty crops. Progress is slow because cheap power for pumps is politically hard to remove.',
+      realPair: ['irr', 'con'] },
+    { id: 'bkk', flag: '🇹🇭', name: 'Bangkok, Thailand', type: 'stress', typeName: 'Seasonal water stress',
+      blurb: 'A fast-growing mega-city on the Chao Phraya river. Monsoon floods, then a long dry season.', base: 45,
+      need: 'Main problem: plenty of water in the wet season, too little in the dry season — and a lot is lost before it reaches taps.',
+      facts: {
+        a: 'Heavy monsoon rain, followed by a long dry season',
+        b: 'A large share of treated water is lost through leaking pipes',
+        c: 'Seawater pushes up the Chao Phraya river in the dry season',
+        d: 'A fast-growing city with rising domestic and industrial demand',
+        e: 'Upper-middle income'
+      },
+      fx: { res: [7, 5, 6, 4, 6, 3], des: [4, 8, 4, 4, 5, 4], pip: [8, 6, 7, 8, 8, 6], irr: [5, 5, 6, 8, 6, 5], rec: [5, 7, 6, 8, 6, 5], con: [4, 5, 9, 9, 6, 5] },
+      fit: { res: ['a', 'c'], des: ['c', 'e'], pip: ['b', 'd'], irr: ['a'], rec: ['d', 'e'], con: ['d'] },
+      off: {},
+      real: '<b>What Bangkok actually relies on:</b> large <b>upstream reservoirs</b> (such as the Bhumibol and Sirikit dams) store monsoon water and release it in the dry season — partly to push back saltwater in the river — while the water authority works to <b>reduce pipe leakage</b>, one of the cheapest ways to “find” more water.',
+      realPair: ['res', 'pip'] }
+  ];
+  var R = {}; REGIONS.forEach(function (r) { R[r.id] = r; });
+
+  var FACTORS = [
+    { i: 2, name: 'Affordability', sub: 'Can the region pay for it?', color: '#f59e0b' },
+    { i: 3, name: 'Environmental impact', sub: 'Higher = less harmful', color: '#16a34a' },
+    { i: 4, name: 'Equity', sub: 'Do the poorest benefit?', color: '#7c3aed' },
+    { i: 5, name: 'Speed', sub: 'How quickly it helps', color: '#0ea5e9' }
+  ];
+
+  /* ================= STATE ================= */
+  var region = null, picks = [], results = {}, lastRes = null;
+
+  function $(id) { return document.getElementById(id); }
+  function show(id, step) {
+    document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('on'); });
+    $(id).classList.add('on');
+    document.querySelectorAll('.step').forEach(function (s) {
+      var n = +s.dataset.s; s.className = 'step' + (n < step ? ' done' : n === step ? ' active' : '');
+    });
+    window.scrollTo(0, 0);
+  }
+  function clamp(v) { return Math.max(0, Math.min(100, Math.round(v))); }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function colorFor(v) { return v >= 75 ? 'var(--green)' : v >= 55 ? '#0ea5e9' : v >= 40 ? 'var(--amber)' : 'var(--red)'; }
+
+  /* ================= REGION SCREEN ================= */
+  function renderRegions() {
+    $('regionList').innerHTML = REGIONS.map(function (r) {
+      return '<button class="region" type="button" data-id="' + r.id + '"><span class="flag" aria-hidden="true">' + r.flag + '</span>' +
+        '<h3>' + r.name + '</h3><span class="tag ' + r.type + '">' + r.typeName + '</span><p>' + r.blurb + '</p>' +
+        (results[r.id] ? '<span class="played">✓ Advised — ' + results[r.id].pair.map(function (p) { return S[p].name; }).join(' + ') + ' (' + results[r.id].overall + ')</span>' : '') + '</button>';
+    }).join('');
+    var ids = Object.keys(results);
+    if (ids.length) {
+      $('summaryBox').style.display = 'block';
+      $('summaryTable').innerHTML = '<thead><tr><th>Region</th><th>Type of problem</th><th>Your pair</th><th>Drought-year security</th><th>What actually happened</th></tr></thead><tbody>' +
+        ids.map(function (id) {
+          var r = R[id], x = results[id];
+          return '<tr><td>' + r.flag + ' ' + r.name + '</td><td>' + r.typeName + '</td><td>' + x.pair.map(function (p) { return S[p].name; }).join(' + ') + '</td><td>' + x.drought + '</td><td>' + r.realPair.map(function (p) { return S[p].name; }).join(' + ') + '</td></tr>';
+        }).join('') + '</tbody>';
+    }
+    $('regionList').querySelectorAll('.region').forEach(function (b) {
+      b.addEventListener('click', function () { region = R[b.dataset.id]; picks = []; renderChoose(); show('sChoose', 2); });
+    });
+  }
+
+  /* ================= CHOOSE ================= */
+  function buildBoard() {
+    var board = $('board');
+    board.querySelectorAll('.hot').forEach(function (h) { h.remove(); });
+    STRATS.forEach(function (s) {
+      var h = document.createElement('button');
+      h.type = 'button'; h.className = 'hot'; h.dataset.id = s.id;
+      h.style.left = s.hot[0] + '%'; h.style.top = s.hot[1] + '%'; h.style.width = s.hot[2] + '%'; h.style.height = s.hot[3] + '%';
+      h.setAttribute('aria-label', s.name);
+      h.innerHTML = '<span class="badge"></span><span class="x"></span>';
+      h.addEventListener('click', function () { toggle(s.id); });
+      board.appendChild(h);
+    });
+  }
+  function toggle(id) {
+    if (region.off[id]) return;
+    var i = picks.indexOf(id);
+    if (i > -1) picks.splice(i, 1);
+    else if (picks.length < 2) picks.push(id);
+    else { picks.shift(); picks.push(id); }
+    renderChoose();
+  }
+  function renderChoose() {
+    var r = region;
+    $('cTitle').textContent = r.flag + ' ' + r.name + ' — choose TWO strategies';
+    $('cNeed').textContent = r.need;
+    $('cBrief').innerHTML = Object.keys(r.facts).map(function (k) { return '<div class="row"><span class="ic">•</span><span>' + r.facts[k] + '</span></div>'; }).join('');
+    $('cards').innerHTML = STRATS.map(function (s) {
+      var off = r.off[s.id], sel = picks.indexOf(s.id);
+      return '<button type="button" class="card' + (sel > -1 ? ' sel' : '') + '" data-id="' + s.id + '"' + (off ? ' disabled' : '') + '>' +
+        '<span class="ch"><span>' + (sel > -1 ? (sel + 1) + '. ' : '') + s.name + '</span><span class="kind">' + (s.kind === 'demand' ? 'Cut demand' : s.kind === 'access' ? 'Access' : 'Supply') + '</span></span>' +
+        '<span class="cb">' + (off ? '<span class="why">✕ ' + off + '</span>' : s.short) + '</span></button>';
+    }).join('');
+    $('cards').querySelectorAll('.card').forEach(function (c) { c.addEventListener('click', function () { toggle(c.dataset.id); }); });
+    $('board').querySelectorAll('.hot').forEach(function (h) {
+      var id = h.dataset.id, sel = picks.indexOf(id);
+      h.classList.toggle('sel', sel > -1); h.classList.toggle('off', !!r.off[id]);
+      h.querySelector('.badge').textContent = sel > -1 ? sel + 1 : '';
+      h.querySelector('.x').textContent = r.off[id] ? '✕ ' + r.off[id] : '';
+      h.disabled = !!r.off[id];
+    });
+    $('cHint').textContent = picks.length < 2 ? 'Choose ' + (2 - picks.length) + ' more.' : '';
+    $('testBtn').disabled = picks.length < 2;
+  }
+  $('backRegion').addEventListener('click', function () { renderRegions(); show('sRegion', 1); });
+
+  /* ================= EVALUATE ================= */
+  function evaluate() {
+    var r = region, a = r.fx[picks[0]], b = r.fx[picks[1]];
+    var kinds = picks.map(function (p) { return S[p].kind; });
+    var twin = kinds.indexOf('demand') > -1 && kinds.some(function (k) { return k !== 'demand'; });
+    var normal = clamp(r.base + (a[0] + b[0]) * 3 + (twin ? 5 : 0));
+    var droughtAvg = (a[1] + b[1]) / 2;
+    var drought = clamp(normal - (10 - droughtAvg) * 4.5);
+    var factors = FACTORS.map(function (f) { return clamp((a[f.i] + b[f.i]) * 5); });
+    var overall = Math.round(normal * 0.35 + drought * 0.25 + (factors[0] + factors[1] + factors[2] + factors[3]) / 4 * 0.4);
+    return { normal: normal, drought: drought, factors: factors, overall: overall, twin: twin, droughtAvg: droughtAvg };
+  }
+
+  $('testBtn').addEventListener('click', function () {
+    var r = region, res = evaluate(); lastRes = res;
+    $('rTitle').textContent = r.flag + ' ' + r.name + ': ' + S[picks[0]].name + ' + ' + S[picks[1]].name;
+    $('gNormal').textContent = res.normal; $('gDrought').textContent = res.drought;
+    $('fNormal').style.width = '0%'; $('fDrought').style.width = '0%';
+    $('fNormal').style.background = colorFor(res.normal); $('fDrought').style.background = colorFor(res.drought);
+    $('ghost1').style.width = r.base + '%'; $('ghost2').style.width = r.base + '%';
+    setTimeout(function () { $('fNormal').style.width = res.normal + '%'; $('fDrought').style.width = res.drought + '%'; }, 60);
+
+    var weakest = picks.slice().sort(function (x, y) { return r.fx[x][1] - r.fx[y][1]; })[0];
+    var goodDrought = res.normal - res.drought <= 12;
+    $('dBox').className = 'drought' + (goodDrought ? ' good' : '');
+    $('dBox').innerHTML = '<b>🏜️ Drought year: rainfall falls by 40%</b>' + (goodDrought
+      ? 'Your strategies held up well — at least one does not depend on rainfall, so security dropped only ' + (res.normal - res.drought) + ' points.'
+      : 'Security fell ' + (res.normal - res.drought) + ' points. ' + (S[weakest].kind === 'demand'
+        ? '<b style="display:inline">' + S[weakest].name + '</b> only reduces demand — it adds no rain-independent supply to fall back on when the rain fails.'
+        : '<b style="display:inline">' + S[weakest].name + '</b> depends on rain or river flow, so it delivers much less when the rain fails.'));
+
+    $('bars').innerHTML = FACTORS.map(function (f, i) {
+      return '<div class="bar"><div class="top"><span>' + f.name + '<small>' + f.sub + '</small></span><span>' + res.factors[i] + '</span></div><div class="track"><div style="width:' + res.factors[i] + '%;background:' + f.color + '"></div></div></div>';
+    }).join('');
+
+    $('grade').textContent = res.overall;
+    var notes = [];
+    picks.forEach(function (p) {
+      var v = r.fx[p][0];
+      if (v >= 8) notes.push(['plus', '<b>' + S[p].name + '</b> tackles this region’s main problem directly.']);
+      else if (v <= 3) notes.push(['minus', '<b>' + S[p].name + '</b> does little here: ' + (regionWhyWeak(r, p)) ]);
+    });
+    if (res.twin) notes.push(['plus', '<b>Twin-track approach:</b> you combined increasing supply or access with reducing demand — more resilient than relying on one side alone (+5).']);
+    else if (picks.every(function (p) { return S[p].kind === 'demand'; })) notes.push(['minus', 'Both strategies only cut demand — nothing adds supply or improves access.']);
+    if (res.factors[0] < 45) notes.push(['minus', 'This pair is <b>expensive for this region</b> — would it get funded, and who would pay?']);
+    if (res.factors[2] < 45) notes.push(['minus', 'Low <b>equity</b>: the poorest people may not benefit much.']);
+    if (!notes.length) notes.push(['plus', 'A reasonable pair with trade-offs — compare it with what actually happened below.']);
+    $('notes').innerHTML = notes.map(function (n) { return '<li class="' + n[0] + '">' + n[1] + '</li>'; }).join('');
+    var match = r.realPair.filter(function (p) { return picks.indexOf(p) > -1; }).length;
+    $('real').innerHTML = r.real + '<br><br>' + (match === 2 ? '✅ Your pair matches the real-world approach.' : match === 1 ? '🔄 You matched one of the two main real-world strategies.' : '🤔 Your pair differs from the real-world approach — can you justify why yours might still work?');
+
+    results[r.id] = { pair: picks.slice(), overall: res.overall, drought: res.drought };
+    show('sResult', 3);
+  });
+  function regionWhyWeak(r, p) {
+    var f = r.fit[p] && r.fit[p][0];
+    return f ? r.facts[f].charAt(0).toLowerCase() + r.facts[f].slice(1) + '.' : 'it does not match the main problem.';
+  }
+  $('retryBtn').addEventListener('click', function () { picks = []; renderChoose(); show('sChoose', 2); });
+
+  /* ================= JUSTIFY ================= */
+  $('toJustify').addEventListener('click', function () {
+    var r = region;
+    $('jTitle').textContent = 'Justify: ' + S[picks[0]].name + ' + ' + S[picks[1]].name + ' in ' + r.name;
+    $('jCards').innerHTML = picks.map(function (p, n) {
+      var others = STRATS.filter(function (s) { return s.id !== p; });
+      var ben = shuffle([S[p].benefit].concat(shuffle(others.slice()).slice(0, 2).map(function (s) { return s.benefit; })));
+      var lim = shuffle([S[p].limitation].concat(shuffle(others.slice()).slice(0, 2).map(function (s) { return s.limitation; })));
+      function opts(list) { return '<option value="">Choose…</option>' + list.map(function (t) { return '<option>' + t + '</option>'; }).join(''); }
+      var facts = '<option value="">Choose…</option>' + Object.keys(r.facts).map(function (k) { return '<option value="' + k + '">' + r.facts[k] + '</option>'; }).join('');
+      return '<div class="panel jcard" data-p="' + p + '"><h3>' + (n + 1) + '. ' + S[p].name + '</h3>' +
+        '<div class="jrow"><label>Benefit</label><select data-k="ben">' + opts(ben) + '</select><div class="jfb"></div></div>' +
+        '<div class="jrow"><label>Limitation</label><select data-k="lim">' + opts(lim) + '</select><div class="jfb"></div></div>' +
+        '<div class="jrow"><label>Regional fit — the key fact</label><select data-k="fit">' + facts + '</select><div class="jfb"></div></div></div>';
+    }).join('');
+    $('paraBox').style.display = 'none'; $('jHint').textContent = '';
+    show('sJustify', 4);
+  });
+
+  $('checkJust').addEventListener('click', function () {
+    var r = region, blank = false, score = 0, chosen = {};
+    document.querySelectorAll('.jcard').forEach(function (card) {
+      var p = card.dataset.p; chosen[p] = {};
+      card.querySelectorAll('select').forEach(function (sel) {
+        var k = sel.dataset.k, v = sel.value, fb = sel.nextElementSibling, ok;
+        if (!v) { blank = true; return; }
+        chosen[p][k] = v;
+        if (k === 'ben') ok = v === S[p].benefit;
+        else if (k === 'lim') ok = v === S[p].limitation;
+        else ok = (r.fit[p] || []).indexOf(v) > -1;
+        if (ok) score++;
+        sel.className = ok ? 'right' : 'wrong';
+        fb.className = 'jfb show ' + (ok ? 'ok' : 'no');
+        if (k === 'fit') {
+          var best = (r.fit[p] || []).map(function (f) { return '“' + r.facts[f] + '”'; }).join(' or ');
+          fb.textContent = ok ? '✔ Good regional evidence.' : '✖ Stronger evidence: ' + best + '.';
+        } else fb.textContent = ok ? '✔ Correct.' : '✖ That describes a different strategy. Correct: ' + (k === 'ben' ? S[p].benefit : S[p].limitation) + '.';
+      });
+    });
+    if (blank) { $('jHint').textContent = 'Complete all six choices first.'; return; }
+    $('jHint').textContent = 'Justification score: ' + score + '/6';
+    // build paragraph using the CORRECT content, so students start from a sound base
+    var p1 = picks[0], p2 = picks[1];
+    function fitFact(p) { var f = (r.fit[p] || [])[0]; return f ? r.facts[f].charAt(0).toLowerCase() + r.facts[f].slice(1) : ''; }
+    function lc(t) { return t.charAt(0).toLowerCase() + t.slice(1); }
+    var goodHere = function (p) { return r.fx[p][0] >= 6; };
+    var para =
+      'In ' + r.name + ', which faces ' + lc(r.typeName) + ', I would fund ' + S[p1].name.toLowerCase() + ' and ' + S[p2].name.toLowerCase() + '. ' +
+      S[p1].pb + '. This ' + (goodHere(p1) ? 'suits' : 'is less suited to') + ' ' + r.name + ' \u2014 the key regional factor is: ' + fitFact(p1) + '. However, ' + lc(S[p1].limitation) + '. ' +
+      S[p2].pb + '. This ' + (goodHere(p2) ? 'suits' : 'is less suited to') + ' the region \u2014 the key regional factor is: ' + fitFact(p2) + '. However, ' + lc(S[p2].limitation) + '. ' +
+      'In a drought year, water security ' + (lastRes.normal - lastRes.drought <= 12 ? 'stayed high because' : 'fell sharply because') + ' ...' +
+      '\n\nOverall, ...';
+    $('para').value = para;
+    $('paraBox').style.display = 'block';
+    $('paraBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  $('copyBtn').addEventListener('click', function () {
+    var ta = $('para');
+    function done() { $('copied').textContent = 'Copied!'; setTimeout(function () { $('copied').textContent = ''; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(done, function () { ta.select(); document.execCommand('copy'); done(); });
+    else { ta.select(); document.execCommand('copy'); done(); }
+  });
+  $('anotherBtn').addEventListener('click', function () { renderRegions(); show('sRegion', 1); });
+
+  buildBoard();
+  renderRegions();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
