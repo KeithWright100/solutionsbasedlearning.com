@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Interactive KS3 Geography Games | Solutions Based Learning</title>
-<meta name="description" content="Play interactive KS3 Geography games — quick, focused challenges that build geographical knowledge, retrieval skills and critical thinking.">
+<title>Interactive Geography Games | Solutions Based Learning</title>
+<meta name="description" content="Play interactive KS3, IGCSE and IB Geography games — quick, focused challenges that build geographical knowledge, retrieval skills and critical thinking.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850&display=swap" rel="stylesheet">
 <style>
@@ -244,6 +244,17 @@
     font-weight: 650;
   }
 
+
+  .level-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: -8px 0 30px; }
+  .level-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: #fff; border: 1px solid rgba(5, 43, 65, 0.16); font-weight: 800; font-size: 0.92rem; color: var(--navy); box-shadow: 0 6px 16px rgba(0, 25, 45, 0.06); transition: var(--transition); }
+  .level-nav a:hover { border-color: var(--teal); color: var(--teal-dark); transform: translateY(-2px); }
+  .level-nav a span { font-size: 0.74rem; padding: 2px 8px; border-radius: 999px; background: rgba(0, 184, 176, 0.14); color: var(--teal-dark); }
+  .level { margin-bottom: 38px; scroll-margin-top: 20px; }
+  .level-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 2px solid rgba(0, 124, 130, 0.18); padding-bottom: 8px; margin-bottom: 6px; }
+  .level-head h2 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-weight: 900; color: var(--navy); }
+  .level-count { font-size: 0.82rem; font-weight: 800; color: #03757a; white-space: nowrap; }
+  .level-sub { color: #244253; font-size: 0.95rem; margin-bottom: 16px; }
+
   @media (max-width: 760px) {
     main { padding: 0 14px; }
     .game-grid { grid-template-columns: 1fr; }
@@ -268,25 +279,21 @@
   <main>
     <div class="hub-title">
       <div class="hub-kicker">
-        <h1>&#127918; Interactive KS3 Geography Games</h1>
+        <h1>&#127918; Interactive Geography Games</h1>
       </div>
-      <p>Develop geographical knowledge, retrieval skills and critical thinking through interactive challenges. Quick to play, easy to repeat.</p>
+      <p>Games for KS3, IGCSE and the IB Diploma. Develop geographical knowledge, retrieval skills and critical thinking through interactive challenges &mdash; quick to play, easy to repeat.</p>
     </div>
 
-    <div class="game-grid">
+    <nav class="level-nav" aria-label="Jump to a level">
+      <a href="#ks3">KS3 <span>2</span></a>
+      <a href="#igcse">IGCSE / KS4 <span>2</span></a>
+      <a href="#ib">IB Diploma <span>4</span></a>
+    </nav>
 
-      <article class="game-card">
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        </div>
-        <h2>Resource Classification Challenge</h2>
-        <span class="status live">Live</span>
-        <p class="desc">Drag and drop 16 real-world resources into Renewable, Non-Renewable, Biotic and Abiotic before the clock runs out.</p>
-        <a class="play-btn" href="/geography/games/resource-classification-challenge" aria-label="Play Resource Classification Challenge">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
+    <section class="level" id="ks3" aria-labelledby="ks3-h">
+      <div class="level-head"><h2 id="ks3-h">&#127757; KS3 Geography</h2><span class="level-count">2 games</span></div>
+      <p class="level-sub">Years 7&ndash;9: build core geographical knowledge and skills.</p>
+      <div class="game-grid">
 
       <article class="game-card">
         <div class="game-icon" aria-hidden="true">
@@ -314,12 +321,20 @@
         </a>
       </article>
 
+      </div>
+    </section>
+
+    <section class="level" id="igcse" aria-labelledby="igcse-h">
+      <div class="level-head"><h2 id="igcse-h">&#128218; IGCSE Geography (KS4)</h2><span class="level-count">2 games</span></div>
+      <p class="level-sub">Edexcel IGCSE: starters and plenaries linked to the specification.</p>
+      <div class="game-grid">
+
       <article class="game-card">
         <div class="game-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
         </div>
         <h2>Energy Sort</h2>
-        <span class="status live">Live &middot; IGCSE Starter</span>
+        <span class="status live">Live &middot; Starter</span>
         <p class="desc">Sort 15 energy resources into Renewable and Non-renewable against the clock, then justify the tricky cases: nuclear, fuelwood, HEP, geothermal and shale gas.</p>
         <a class="play-btn" href="/geography/games/energy-sort" aria-label="Play Energy Sort">
           Play Now
@@ -332,9 +347,30 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg>
         </div>
         <h2>Energy Minister 2025&ndash;2050</h2>
-        <span class="status live">Live &middot; IGCSE Plenary</span>
+        <span class="status live">Live &middot; Plenary</span>
         <p class="desc">Run the UK, Thailand, India or Kenya's electricity mix for three decades. Balance sustainability, energy security, reliability and cost, survive random events, then write up your pathway.</p>
         <a class="play-btn" href="/geography/games/energy-minister" aria-label="Play Energy Minister">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      </div>
+    </section>
+
+    <section class="level" id="ib" aria-labelledby="ib-h">
+      <div class="level-head"><h2 id="ib-h">&#127891; IB Diploma Geography</h2><span class="level-count">4 games</span></div>
+      <p class="level-sub">IB DP: retrieval, case-study comparison and evaluation games linked to SBL lessons.</p>
+      <div class="game-grid">
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <h2>Resource Classification Challenge</h2>
+        <span class="status live">Live &middot; Unit 3 &middot; Sort</span>
+        <p class="desc">Drag and drop 16 real-world resources into Renewable, Non-Renewable, Biotic and Abiotic before the clock runs out.</p>
+        <a class="play-btn" href="/geography/games/resource-classification-challenge" aria-label="Play Resource Classification Challenge">
           Play Now
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
         </a>
@@ -345,7 +381,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg>
         </div>
         <h2>Thailand, The Gambia or Both?</h2>
-        <span class="status live">Live &middot; IB Retrieval</span>
+        <span class="status live">Live &middot; Unit 1 &middot; Retrieval</span>
         <p class="desc">Sort 20 demographic statements into Thailand, The Gambia or Both, then explain the shared features &mdash; dependency, falling fertility, falling mortality and migration.</p>
         <a class="play-btn" href="/geography/games/thailand-or-gambia" aria-label="Play Thailand, The Gambia or Both">
           Play Now
@@ -358,7 +394,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18"/><path d="M11 6H7M11 10H4M11 14H6M11 18H8"/><path d="M13 6h3M13 10h6M13 14h5M13 18h4"/></svg>
         </div>
         <h2>Population Minister 2025&ndash;2055</h2>
-        <span class="status live">Live &middot; IB Plenary</span>
+        <span class="status live">Live &middot; Unit 1 &middot; Plenary</span>
         <p class="desc">Manage Thailand's ageing or The Gambia's youthful population for three decades. Choose responses, watch the pyramid change, survive events, then compare both countries.</p>
         <a class="play-btn" href="/geography/games/population-minister" aria-label="Play Population Minister">
           Play Now
@@ -371,7 +407,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c3.5 4.2 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.5-6.8 6-11Z"/></svg>
         </div>
         <h2>Water Security Decision Game</h2>
-        <span class="status live">Live &middot; IB Apply &amp; Evaluate</span>
+        <span class="status live">Live &middot; Unit 3 &middot; Apply &amp; evaluate</span>
         <p class="desc">Advise Israel, Singapore, rural Ethiopia, Punjab or Bangkok. Fund only two strategies, survive a drought year, then justify each with a benefit, a limitation and regional fit.</p>
         <a class="play-btn" href="/geography/games/water-security-decision" aria-label="Play the Water Security Decision Game">
           Play Now
@@ -379,7 +415,8 @@
         </a>
       </article>
 
-    </div>
+      </div>
+    </section>
 
     <div class="more-note">More games are being added &mdash; check back soon.</div>
   </main>

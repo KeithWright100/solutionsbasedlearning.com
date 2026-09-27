@@ -484,6 +484,9 @@
       white-space: nowrap;
     }
 
+    a.games-stat { text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease; }
+    a.games-stat:hover { background: rgba(32, 215, 226, 0.22); border-color: rgba(32, 215, 226, 0.7); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -656,22 +659,23 @@
         </article>
       </div>
 
-      <section class="igcse-banner" aria-label="Interactive KS3 Geography Games" style="margin-top: 34px; margin-bottom: 34px;">
-        <div class="igcse-banner-row" aria-label="Interactive KS3 Geography Games">
+      <section class="igcse-banner" aria-label="Interactive Geography Games" style="margin-top: 34px; margin-bottom: 34px;">
+        <div class="igcse-banner-row" aria-label="Interactive Geography Games">
           <div class="igcse-banner-text">
             <span class="igcse-banner-kicker">New: play &amp; learn</span>
-            <h2>&#127918; Interactive KS3 Geography Games</h2>
+            <h2>&#127918; Interactive Geography Games</h2>
             <p>
-              Develop geographical knowledge, retrieval skills and critical thinking through
-              interactive challenges.
+              Games for KS3, IGCSE and the IB Diploma &mdash; develop geographical knowledge,
+              retrieval skills and critical thinking through interactive challenges.
             </p>
-            <div class="games-stats" aria-hidden="false">
-              <span class="games-stat">&#127757; 3 Games Available</span>
-              <span class="games-stat">&#127942; Leaderboards</span>
-              <span class="games-stat">&#9889; Quick Play</span>
+            <div class="games-stats" aria-label="Jump to games by level">
+              <a class="games-stat" href="/geography/games#ks3">&#127757; KS3</a>
+              <a class="games-stat" href="/geography/games#igcse">&#128218; IGCSE</a>
+              <a class="games-stat" href="/geography/games#ib">&#127891; IB Diploma</a>
+              <span class="games-stat">&#9889; 8 Games</span>
             </div>
           </div>
-          <a class="igcse-banner-btn" href="/geography/games" aria-label="Open the Interactive KS3 Geography Games hub">
+          <a class="igcse-banner-btn" href="/geography/games" aria-label="Open the Interactive Geography Games hub">
             Play Now
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
           </a>
