@@ -1,7 +1,7 @@
 // /api/admin/resources — POST { action, ...payload }
 //
 // Teacher-only management of the lesson Resources card (Lesson
-// Slides / Lesson Notes / Key Terms / Diagrams & Models / Data
+// Slides / Lesson Notes / Student Workbooks (key_terms) / OneNote Pages (diagrams) / Data
 // Sheets). Consolidated into ONE serverless function together with
 // /api/resources.js (the student-facing read/download endpoint),
 // the same way /api/admin/action.js already consolidates several

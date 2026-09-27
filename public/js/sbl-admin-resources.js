@@ -10,8 +10,8 @@
   var RESOURCE_TYPES = [
     { key: 'slides', label: 'Lesson Slides' },
     { key: 'notes', label: 'Lesson Notes' },
-    { key: 'key_terms', label: 'Key Terms' },
-    { key: 'diagrams', label: 'Diagrams & Models' },
+    { key: 'key_terms', label: 'Student Workbooks' },
+    { key: 'diagrams', label: 'OneNote Pages' },
     { key: 'data_sheets', label: 'Quizzes' }
   ];
 
