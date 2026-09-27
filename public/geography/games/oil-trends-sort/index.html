@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oil Trends Sort — IB Geography Games — SBL</title>
+<meta name="description" content="Drag-and-drop game: sort 28 factors into increased or decreased oil consumption and production. IB DP Geography Unit 3: Resource Consumption and Security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --line: rgba(5, 43, 65, 0.13);
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --up: #0f766e;
+    --down: #b91c1c;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top right, rgba(0,184,176,0.14), transparent 35%), linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink); min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, textarea { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1240px; margin: 24px auto 60px; padding: 0 18px; }
+  .intro { text-align: center; margin-bottom: 16px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 820px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+  .factors { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
+  .factors span { font-size: 0.78rem; font-weight: 750; padding: 5px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--navy); }
+  .fact { max-width: 820px; margin: 12px auto 0; font-size: 0.84rem; color: var(--muted); background: #fff; border: 1px dashed rgba(0,124,130,0.35); border-radius: 12px; padding: 8px 12px; }
+
+  .hud { display: flex; justify-content: center; gap: 24px; font-weight: 850; font-size: 1rem; margin: 14px 0; flex-wrap: wrap; }
+  .hud .time { color: var(--amber); }
+  .hud .score { color: var(--teal-dark); }
+
+  .layout { display: grid; grid-template-columns: 340px 1fr; gap: 16px; align-items: start; }
+  .tray-wrap { position: sticky; top: 10px; max-height: calc(100vh - 20px); overflow-y: auto; background: rgba(255,255,255,0.9); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .tray-label { font-size: 0.76rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+  #tray { display: grid; gap: 7px; min-height: 60px; }
+  .tray-empty { color: var(--muted); font-size: 0.88rem; text-align: center; padding: 14px 6px; }
+
+  .card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 11px; padding: 8px 10px; cursor: grab; user-select: none; touch-action: none; font-size: 0.8rem; line-height: 1.35; color: var(--muted); box-shadow: 0 3px 8px rgba(0,25,45,0.06); transition: border-color .15s ease, box-shadow .15s ease; }
+  .card b { display: block; color: var(--ink); font-size: 0.86rem; margin-bottom: 2px; }
+  .card:hover { box-shadow: 0 8px 16px rgba(0,25,45,0.12); }
+  .card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .card.dragging { cursor: grabbing; opacity: 0.95; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .card.correct { border-color: var(--green); background: var(--green-soft); }
+  .card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .card .why { display: none; margin-top: 5px; font-size: 0.76rem; color: #7f1d1d; font-weight: 650; }
+  .card.incorrect .why { display: block; }
+  .card .alt { display: none; margin-top: 5px; font-size: 0.74rem; color: var(--teal-dark); font-weight: 700; }
+  .card.correct .alt { display: block; }
+
+  .zones { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .zone { border-radius: var(--radius); padding: 12px; min-height: 220px; background: rgba(255,255,255,0.93); border: 3px dashed; cursor: pointer; transition: background .2s ease; }
+  .zone.hover { background: #f0fbfa; }
+  .zone h2 { font-size: 1rem; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+  .zone .sub { font-size: 0.78rem; color: var(--muted); margin: 2px 0 10px; }
+  .zone .cnt { margin-left: auto; font-size: 0.74rem; font-weight: 850; padding: 3px 8px; border-radius: 999px; background: #f1f5f9; color: var(--muted); }
+  .zone.up { border-color: rgba(15,118,110,0.5); }
+  .zone.up h2 { color: var(--up); }
+  .zone.down { border-color: rgba(185,28,28,0.45); }
+  .zone.down h2 { color: var(--down); }
+  .zone-cards { display: grid; gap: 7px; min-height: 60px; align-content: start; }
+  .group-label { grid-column: 1 / -1; font-size: 0.78rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin: 6px 0 -4px; display: flex; align-items: center; gap: 8px; }
+  .group-label::after { content: ""; flex: 1; height: 2px; background: rgba(15,58,92,0.15); }
+
+  .controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  #result { text-align: center; margin-top: 12px; font-weight: 750; min-height: 1.5em; }
+  .hint { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+
+  #finish { display: none; margin-top: 20px; }
+  .panel { background: rgba(255,255,255,0.95); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .panel h2 { font-size: 1.1rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 10px 0 14px; }
+  .stat { text-align: center; padding: 14px; border-radius: 14px; background: #fff; border: 1px solid var(--line); }
+  .stat .n { font-size: 1.8rem; font-weight: 900; color: var(--navy); }
+  .stat .l { font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .think p { line-height: 1.55; font-size: 0.94rem; margin-bottom: 6px; }
+  .think ul { margin: 4px 0 8px 18px; font-size: 0.9rem; line-height: 1.5; }
+  .think textarea { width: 100%; min-height: 150px; margin-top: 8px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.2); font-size: 0.92rem; line-height: 1.5; resize: vertical; }
+  .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; }
+
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; }
+    .tray-wrap { position: static; max-height: 340px; }
+  }
+  @media (max-width: 640px) {
+    main { padding: 0 12px; }
+    .zones { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games#ib" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Oil Trends Sort</span></div>
+    <a href="/geography/paper-1/core-3/t1-global-trends/l5-patterns-and" class="back-link">Back to lesson &rarr;</a>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">IB Unit 3 &middot; Resource Consumption &amp; Security</span>
+    <h1>&#128738;&#65039; Examine global trends in oil production &amp; consumption</h1>
+    <p>Sort all 28 statements into the right box: do they <strong>increase</strong> or <strong>decrease</strong> the <strong>consumption (demand)</strong> or the <strong>production</strong> of oil?</p>
+    <div class="factors" aria-label="Types of factor">
+      <span>1 &middot; Economic development level</span><span>2 &middot; Access to capital</span><span>3 &middot; Technology</span>
+      <span>4 &middot; Political &amp; economic control</span><span>5 &middot; Environmental factors</span><span>6 &middot; Cultural factors</span>
+    </div>
+    <div class="fact">&#9201;&#65039; At today&rsquo;s production rates, the world&rsquo;s proven oil reserves would last roughly <b>50 years</b> (the reserves-to-production ratio) &mdash; though this figure changes as new reserves are found and demand shifts.</div>
+  </div>
+
+  <div class="hud">
+    <div class="time" id="timer">&#9203; 0:00</div>
+    <div class="score" id="score">Placed: 0/28</div>
+  </div>
+
+  <div class="layout">
+    <aside class="tray-wrap" aria-label="Statements to sort">
+      <div class="tray-label"><span>Statements</span><span id="left">28 left</span></div>
+      <div id="tray"></div>
+    </aside>
+    <div>
+      <div class="zones">
+        <div class="group-label">&#128738;&#65039; Consumption (demand)</div>
+        <div class="zone up" data-cat="ic" role="button" tabindex="0" aria-label="Increased consumption">
+          <h2>&#11014;&#65039; Increased consumption <span class="cnt" id="c-ic">0</span></h2>
+          <div class="sub">Factors that lead to increased demand for oil</div>
+          <div class="zone-cards"></div>
+        </div>
+        <div class="zone down" data-cat="dc" role="button" tabindex="0" aria-label="Decreased consumption">
+          <h2>&#11015;&#65039; Decreased consumption <span class="cnt" id="c-dc">0</span></h2>
+          <div class="sub">Factors that lead to decreased demand for oil</div>
+          <div class="zone-cards"></div>
+        </div>
+        <div class="group-label">&#9981; Production (supply)</div>
+        <div class="zone up" data-cat="ip" role="button" tabindex="0" aria-label="Increased production">
+          <h2>&#11014;&#65039; Increased production <span class="cnt" id="c-ip">0</span></h2>
+          <div class="sub">Factors that lead to increased production of oil</div>
+          <div class="zone-cards"></div>
+        </div>
+        <div class="zone down" data-cat="dp" role="button" tabindex="0" aria-label="Decreased production">
+          <h2>&#11015;&#65039; Decreased production <span class="cnt" id="c-dp">0</span></h2>
+          <div class="sub">Factors that lead to decreased production of oil</div>
+          <div class="zone-cards"></div>
+        </div>
+      </div>
+      <div class="hint">Drag a statement into a box &mdash; or tap a statement, then tap a box.</div>
+      <div class="controls">
+        <button class="btn primary" id="checkBtn" type="button">Check answers</button>
+        <button class="btn ghost" id="resetBtn" type="button">Start again</button>
+      </div>
+      <div id="result" role="status"></div>
+    </div>
+  </div>
+
+  <section id="finish" class="panel">
+    <h2>&#127942; All 28 sorted!</h2>
+    <div class="stats">
+      <div class="stat"><div class="n" id="fFirst">0</div><div class="l">Correct on first check</div></div>
+      <div class="stat"><div class="n" id="fChecks">0</div><div class="l">Checks used</div></div>
+      <div class="stat"><div class="n" id="fTime">0:00</div><div class="l">Time</div></div>
+    </div>
+    <div class="think">
+      <h2>&#9997;&#65039; Now examine it</h2>
+      <p>Use your sorted boxes to answer: <b>Examine the global patterns and trends in oil production and consumption.</b></p>
+      <ul>
+        <li>Which <b>type of factor</b> (economic, capital, technology, political, environmental, cultural) appears most often in the &ldquo;increased consumption&rdquo; box? Why?</li>
+        <li>Several statements affect <b>both</b> demand and supply (e.g. war, oil shortages). Pick one and explain how.</li>
+        <li>Which single factor do you think will matter most over the next 30 years? Justify it.</li>
+      </ul>
+      <textarea aria-label="Your answer" placeholder="Global oil consumption has increased mainly because..."></textarea>
+      <p class="note">Just for your own thinking &mdash; this isn&rsquo;t saved or marked.</p>
+    </div>
+    <div class="controls"><button class="btn ghost" id="againBtn" type="button">Play again</button></div>
+  </section>
+</main>
+
+<script>
+(function () {
+  // cat: ic = increased consumption, dc = decreased consumption, ip = increased production, dp = decreased production
+  // also: other acceptable box for genuinely two-sided statements
+  var NAMES = { ic: 'increased consumption', dc: 'decreased consumption', ip: 'increased production', dp: 'decreased production' };
+  var CARDS = [
+    { t: 'Environmental awareness & pressure groups', d: 'Oil pollutes the natural environment. Incidents such as the Exxon Valdez spill (1989), the Gulf War (1991), global warming and acid rain.', cat: 'dp', also: 'dc', why: 'Pressure groups campaign against drilling and spills, restricting where and how oil is produced — and also persuade people to use less.' },
+    { t: 'Oil profits are high', d: '', cat: 'ip', why: 'High profits give companies and governments an incentive (and the capital) to produce more.' },
+    { t: 'Technological developments', d: 'Allowed generation of electricity to shift from coal to oil.', cat: 'ic', why: 'Using oil in power stations creates a new source of demand.' },
+    { t: 'Lower production costs', d: 'Stimulates more demand, which increases production.', cat: 'ip', why: 'Cheaper extraction makes more oil fields profitable to produce.' },
+    { t: 'More inaccessible reserves', d: 'Difficult to access, hostile environments, permafrost, mountainous terrain and deep oceans all increase the costs of production.', cat: 'dp', why: 'Higher extraction costs make some reserves uneconomic, so less is produced.' },
+    { t: 'Population growth', d: 'Each new person creates an increased demand for energy.', cat: 'ic', why: 'More people means more energy use, and more demand for oil.' },
+    { t: 'Decline of competing energy sources', d: 'e.g. coal — heavy, bulky, expensive to transport, causes air pollution (acid rain).', cat: 'ic', why: 'As coal becomes less attractive, oil takes its place, increasing demand.' },
+    { t: 'Industrial decline', d: 'Less demand for oil.', cat: 'dc', why: 'Fewer factories means less energy and oil used.' },
+    { t: 'War & civil unrest', d: 'Fighting damages oil fields, pipelines and ports (e.g. Kuwait 1990–91, Libya 2011).', cat: 'dp', why: 'Conflict disrupts or destroys oil infrastructure, cutting output.' },
+    { t: 'World recession', d: 'Less industrial production stimulates less demand for oil.', cat: 'dc', why: 'In a recession, industry and transport slow down, so demand falls.' },
+    { t: 'Favourable taxation', d: 'e.g. US citizens consume more oil because low taxation on oil encourages consumption.', cat: 'ic', why: 'Low tax keeps fuel cheap, encouraging people to use more.' },
+    { t: 'Political instability', d: 'e.g. the break-up of the former Soviet Union.', cat: 'dp', why: 'Instability disrupts investment and management of oil fields, so output falls (Russian production fell sharply in the early 1990s).' },
+    { t: 'Energy efficiency', d: 'By encouraging energy saving and efficiency, demand for electricity has decreased.', cat: 'dc', why: 'Using energy more efficiently means less oil is needed for the same output.' },
+    { t: 'Development of new oil fields', d: 'e.g. Siberia came online in the 1970s.', cat: 'ip', why: 'New fields add to the supply that can be produced.' },
+    { t: 'Economic growth', d: 'Industrialisation requires vast amounts of energy. Industrialised countries have 23% of the world’s people but consume 70% of the energy produced.', cat: 'ic', why: 'Growing economies need more energy for industry, transport and homes.' },
+    { t: 'Limiting production to fix prices', d: 'Decreasing production to set prices allows oil-producing countries (e.g. OPEC) to maintain stable prices.', cat: 'dp', why: 'Producers deliberately cut output (quotas) to keep prices high and stable.' },
+    { t: 'Lifestyle – high average incomes', d: 'Increased affluence enables people to buy more appliances, which use more energy.', cat: 'ic', why: 'Wealthier households own more cars and appliances, so use more energy.' },
+    { t: 'New technology', d: 'To extract, transport and store oil.', cat: 'ip', why: 'Technology such as deep-water drilling and fracking makes more oil recoverable.' },
+    { t: 'Less interest in alternative forms of energy', d: 'e.g. after the danger of a radioactive leak in Pennsylvania (Three Mile Island, 1979).', cat: 'ic', why: 'If alternatives like nuclear lose public support, countries rely more on oil.' },
+    { t: 'Environmental protection', d: 'Especially Antarctic oil reserves — extraction is not permitted.', cat: 'dp', why: 'Protected areas are closed to drilling, so those reserves are not produced.' },
+    { t: 'Falling demand for oil', d: '', cat: 'dp', why: 'If less oil is wanted, producers cut output to avoid a price collapse.' },
+    { t: 'Competition from alternative energy sources', d: 'Non-renewable (e.g. gas, nuclear) and renewable (e.g. solar, wind). In 1995 the USA alone had about 110 nuclear reactors.', cat: 'dc', why: 'Other energy sources replace oil, reducing demand.' },
+    { t: 'Increased car ownership & mobility', d: '', cat: 'ic', why: 'Transport runs mainly on oil products, so more cars means more demand.' },
+    { t: 'War – fears that supplies may run out', d: 'Panic buying and stockpiling, e.g. the 1979 Iranian Revolution and the 1980 Iran–Iraq war.', cat: 'ip', also: 'ic', why: 'Fear of shortages drives panic buying (demand) and pushes other producers to pump more to fill the gap.' },
+    { t: 'Low energy prices', d: '', cat: 'ic', why: 'Cheap oil encourages people and businesses to use more of it.' },
+    { t: 'Multiple uses', d: 'Oil is used to produce many fuels and chemicals; as more uses are discovered, more demand is created, e.g. aviation fuel, asphalt, plastics.', cat: 'ic', why: 'Every new use for oil adds to demand.' },
+    { t: 'Oil shortages', d: 'Declining oil reserves (e.g. US oil fields) can increase the cost and decrease demand.', cat: 'dp', also: 'dc', why: 'Depleting fields produce less oil, and the higher cost that follows also reduces demand.' },
+    { t: 'High dependence', d: 'Economies depend on oil for transport, industry and power.', cat: 'ic', why: 'Economies that rely heavily on oil keep demand high because it is hard to switch.' }
+  ];
+  var TOTAL = CARDS.length;
+  var trayEl = document.getElementById('tray'), resultEl = document.getElementById('result');
+  var selected = null, secs = 0, timerId = null, checks = 0, first = null;
+
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function fmt(s) { var m = Math.floor(s / 60), x = s % 60; return m + ':' + (x < 10 ? '0' : '') + x; }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+  function render() {
+    trayEl.innerHTML = '';
+    document.querySelectorAll('.zone-cards').forEach(function (z) { z.innerHTML = ''; });
+    shuffle(CARDS.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = CARDS[i], el = document.createElement('div');
+      el.className = 'card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = '<b>' + esc(c.t) + '</b>' + (c.d ? esc(c.d) : '') + '<span class="why"></span><span class="alt"></span>';
+      trayEl.appendChild(el);
+    });
+    update();
+  }
+  function update() {
+    var left = trayEl.querySelectorAll('.card').length;
+    document.getElementById('left').textContent = left + ' left';
+    document.getElementById('score').textContent = 'Placed: ' + (TOTAL - left) + '/' + TOTAL;
+    ['ic', 'dc', 'ip', 'dp'].forEach(function (k) {
+      document.getElementById('c-' + k).textContent = document.querySelectorAll('.zone[data-cat="' + k + '"] .card').length;
+    });
+    var e = trayEl.querySelector('.tray-empty');
+    if (!left && !e) { e = document.createElement('div'); e.className = 'tray-empty'; e.textContent = 'All placed — press Check answers.'; trayEl.appendChild(e); }
+    if (left && e) e.remove();
+  }
+  function clearMarks(c) { c.classList.remove('correct', 'incorrect', 'selected'); }
+  function placeIn(card, zone) { clearMarks(card); zone.querySelector('.zone-cards').appendChild(card); selected = null; update(); }
+  function select(card) {
+    if (selected) selected.classList.remove('selected');
+    if (selected === card) { selected = null; return; }
+    selected = card; card.classList.add('selected');
+  }
+  document.querySelectorAll('.zone').forEach(function (z) {
+    z.addEventListener('click', function (e) { if (e.target.closest('.card')) return; if (selected) placeIn(selected, z); });
+    z.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && selected) { e.preventDefault(); placeIn(selected, z); } });
+  });
+  document.addEventListener('keydown', function (e) {
+    var c = e.target.closest && e.target.closest('.card');
+    if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(c); }
+  });
+
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null, nextSib = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.card') : null; if (!c) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode; nextSib = c.nextSibling;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top;
+    e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); document.body.appendChild(drag); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 50) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return;
+    var c = drag; drag = null;
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { select(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.zone') : null;
+    if (z) placeIn(c, z);
+    else if (t && t.closest && t.closest('.tray-wrap')) { clearMarks(c); trayEl.appendChild(c); update(); }
+    else if (nextSib && nextSib.parentNode === origin) origin.insertBefore(c, nextSib); else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+
+  function startTimer() { clearInterval(timerId); timerId = setInterval(function () { secs++; document.getElementById('timer').textContent = '⏳ ' + fmt(secs); }, 1000); }
+
+  document.getElementById('checkBtn').addEventListener('click', function () {
+    var correct = 0;
+    checks++;
+    document.querySelectorAll('.zone').forEach(function (z) {
+      var cat = z.dataset.cat;
+      z.querySelectorAll('.card').forEach(function (el) {
+        var c = CARDS[+el.dataset.i];
+        var ok = c.cat === cat || c.also === cat;
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        el.querySelector('.why').textContent = ok ? '' : '✖ Not ' + NAMES[cat] + '. Clue: ' + c.why;
+        el.querySelector('.alt').textContent = ok && c.also ? '✔ Accepted — this one can affect both ' + NAMES[c.cat] + ' and ' + NAMES[c.also] + '.' : '';
+        if (ok) correct++;
+      });
+    });
+    var left = trayEl.querySelectorAll('.card').length;
+    if (first === null && left === 0) first = correct;
+    document.getElementById('score').textContent = 'Correct: ' + correct + '/' + TOTAL;
+    if (correct === TOTAL) {
+      clearInterval(timerId);
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = '✅ All 28 correct in ' + fmt(secs) + '!';
+      document.getElementById('fFirst').textContent = (first === null ? correct : first) + '/' + TOTAL;
+      document.getElementById('fChecks').textContent = checks;
+      document.getElementById('fTime').textContent = fmt(secs);
+      document.getElementById('finish').style.display = 'block';
+      document.getElementById('finish').scrollIntoView({ behavior: 'smooth' });
+    } else if (left) {
+      resultEl.style.color = 'var(--amber)';
+      resultEl.textContent = left + ' statement(s) still to place — ' + correct + ' correct so far. Red cards show a clue.';
+    } else {
+      resultEl.style.color = 'var(--red)';
+      resultEl.textContent = correct + '/' + TOTAL + ' correct. Read the clues on the red cards, move them, and check again.';
+    }
+  });
+
+  function reset() {
+    secs = 0; checks = 0; first = null; selected = null;
+    document.getElementById('timer').textContent = '⏳ 0:00';
+    resultEl.textContent = '';
+    document.getElementById('finish').style.display = 'none';
+    render(); startTimer(); window.scrollTo(0, 0);
+  }
+  document.getElementById('resetBtn').addEventListener('click', reset);
+  document.getElementById('againBtn').addEventListener('click', reset);
+
+  render(); startTimer();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
