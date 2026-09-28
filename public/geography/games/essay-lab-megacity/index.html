@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Essay Lab: Megacity Growth — IB Geography — SBL</title>
+<meta name="description" content="Rebuild, colour-code and grade a model IB Geography essay on the consequences and solutions of rapid megacity growth in Mumbai, then work out why it reaches the top markband.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c;
+    --deep: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --line: rgba(5, 43, 65, 0.13);
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --radius: 18px;
+    /* 6 P's */
+    --c-eval: #7c3aed;   --c-eval-bg: #ede4ff;
+    --c-def: #2563eb;    --c-def-bg: #dbe8ff;
+    --c-place: #15803d;  --c-place-bg: #d6f5df;
+    --c-proc: #a16207;   --c-proc-bg: #fdf0b3;
+    --c-poss: #db2777;   --c-poss-bg: #fde0ee;
+    --c-power: #ea580c;  --c-power-bg: #ffe2cc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top right, rgba(0,184,176,0.14), transparent 35%), linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink); min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, select, textarea { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1100px; margin: 24px auto 60px; padding: 0 18px; }
+  .intro { text-align: center; margin-bottom: 14px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.2vw, 2.2rem); font-weight: 900; color: var(--navy); }
+  .question { max-width: 820px; margin: 12px auto 0; padding: 14px 18px; border-radius: 14px; background: #fff; border: 2px solid rgba(0,124,130,0.3); font-weight: 800; font-size: 1.08rem; color: var(--deep); line-height: 1.45; }
+  .question small { display: block; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 4px; }
+
+  .steps { display: flex; justify-content: center; gap: 8px; margin: 18px 0; flex-wrap: wrap; }
+  .step { padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 750; background: rgba(255,255,255,0.75); border: 1px solid var(--line); color: var(--muted); }
+  .step.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.3); }
+
+  .screen { display: none; }
+  .screen.on { display: block; }
+  .panel { background: rgba(255,255,255,0.95); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .panel h2 { font-size: 1.1rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+  .how { font-size: 0.92rem; color: var(--muted); line-height: 1.5; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+
+  .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .stat { font-weight: 850; font-size: 0.92rem; padding: 7px 12px; border-radius: 10px; background: #f3f8fa; border: 1px solid var(--line); }
+  .stat b { color: var(--teal-dark); }
+
+  /* Stage 1 jigsaw */
+  .pieces { list-style: none; display: grid; gap: 8px; }
+  .piece { display: flex; gap: 10px; align-items: stretch; background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 0; box-shadow: 0 3px 8px rgba(0,25,45,0.06); touch-action: pan-y; user-select: none; transition: border-color .2s ease, background .2s ease, transform .15s ease; }
+  .piece .grip { flex: none; width: 36px; display: flex; align-items: center; justify-content: center; cursor: grab; color: #94a3b8; font-size: 1.2rem; border-right: 1px dashed rgba(5,43,65,0.15); touch-action: none; }
+  .piece .txt { flex: 1; padding: 11px 4px; font-size: 0.93rem; line-height: 1.55; }
+  .piece .arrows { flex: none; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 6px 8px; }
+  .piece .arrows button { width: 30px; height: 26px; border-radius: 7px; border: 1px solid var(--line); background: #f8fafc; cursor: pointer; font-weight: 900; color: var(--navy); }
+  .piece .arrows button:hover:not(:disabled) { border-color: var(--teal); }
+  .piece .arrows button:disabled { opacity: 0.3; cursor: default; }
+  .piece.dragging { opacity: 0.9; box-shadow: 0 16px 30px rgba(0,0,0,0.2); transform: scale(1.01); border-color: var(--teal); z-index: 5; position: relative; }
+  .piece.right { border-color: var(--green); background: var(--green-soft); }
+  .piece.right .grip { cursor: default; color: var(--green); }
+  .piece.wrong { border-color: rgba(220,38,38,0.6); background: #fff7f7; }
+  .piece.placeholder { border-style: dashed; background: rgba(0,184,176,0.06); }
+  .sec-tag { display: none; font-size: 0.7rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 3px; }
+  .show-sec .sec-tag { display: block; }
+  .structure { display: none; margin-bottom: 12px; padding: 10px 14px; border-radius: 12px; background: #eef7fa; border-left: 4px solid var(--teal); font-size: 0.88rem; line-height: 1.5; }
+
+  .actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+  .msg { font-weight: 750; font-size: 0.9rem; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+
+  /* Stage 2 colour-coding */
+  .palette { position: sticky; top: 8px; z-index: 20; display: flex; gap: 8px; flex-wrap: wrap; padding: 10px; border-radius: 14px; background: rgba(255,255,255,0.97); border: 1px solid var(--line); box-shadow: 0 8px 20px rgba(0,25,45,0.08); margin-bottom: 14px; }
+  .swatch { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border-radius: 10px; border: 2px solid transparent; font-weight: 850; font-size: 0.86rem; cursor: pointer; background: #f8fafc; color: var(--ink); }
+  .swatch i { width: 16px; height: 16px; border-radius: 5px; display: inline-block; }
+  .swatch small { font-weight: 650; color: var(--muted); }
+  .swatch.on { border-color: var(--deep); box-shadow: 0 0 0 3px rgba(3,28,51,0.12); background: #fff; }
+  .essay { font-size: 1rem; line-height: 2.05; }
+  .essay h3 { font-size: 0.8rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 16px 0 2px; }
+  .essay h3:first-child { margin-top: 0; }
+  .essay p { margin-bottom: 6px; }
+  .w { cursor: pointer; border-radius: 4px; padding: 2px 0; transition: background .1s ease; }
+  .w:hover { background: rgba(0,184,176,0.12); }
+  .w.eval { background: var(--c-eval-bg); box-shadow: inset 0 -2px 0 var(--c-eval); }
+  .w.def { background: var(--c-def-bg); box-shadow: inset 0 -2px 0 var(--c-def); }
+  .w.place { background: var(--c-place-bg); box-shadow: inset 0 -2px 0 var(--c-place); }
+  .w.proc { background: var(--c-proc-bg); box-shadow: inset 0 -2px 0 var(--c-proc); }
+  .w.poss { background: var(--c-poss-bg); box-shadow: inset 0 -2px 0 var(--c-poss); }
+  .w.power { background: var(--c-power-bg); box-shadow: inset 0 -2px 0 var(--c-power); }
+  .w.miss { outline: 2px dashed var(--red); outline-offset: 1px; }
+  .w.bad { text-decoration: line-through wavy var(--red); }
+  .cat-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+  .cr { padding: 10px 12px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-size: 0.86rem; }
+  .cr b { display: block; font-size: 0.9rem; }
+  .cr .bar { height: 7px; border-radius: 99px; background: #e8eff2; overflow: hidden; margin-top: 6px; }
+  .cr .bar div { height: 100%; border-radius: 99px; }
+  .legend-note { font-size: 0.8rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  /* Stage 3 grade */
+  .grade-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; align-items: start; }
+  .bands { display: grid; gap: 8px; }
+  .band { display: grid; grid-template-columns: 70px 1fr; gap: 10px; text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; color: var(--ink); font-size: 0.86rem; line-height: 1.45; }
+  .band b { font-size: 1.05rem; color: var(--navy); }
+  .band:hover { border-color: var(--teal); }
+  .band.on { border-color: var(--teal); background: #eefaf9; }
+  .marks { display: flex; gap: 6px; margin: 10px 0 4px; flex-wrap: wrap; }
+  .marks button { width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--line); background: #fff; font-weight: 900; font-size: 1rem; cursor: pointer; color: var(--navy); }
+  .marks button.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .marks button:disabled { opacity: 0.3; cursor: default; }
+  .crit { display: grid; gap: 8px; margin-bottom: 12px; }
+  .crit .row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; font-size: 0.86rem; padding: 8px 10px; border-radius: 10px; background: #f8fafc; border: 1px solid var(--line); }
+  .crit .row b { display: block; font-size: 0.86rem; }
+  .crit .row small { color: var(--muted); }
+  .seg { display: flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+  .seg button { border: none; background: #fff; padding: 6px 9px; font-size: 0.76rem; font-weight: 800; cursor: pointer; color: var(--muted); }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button.on { background: var(--teal-dark); color: #fff; }
+  label.lbl { display: block; font-size: 0.76rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin: 10px 0 5px; }
+  textarea.fb { width: 100%; min-height: 80px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.2); font-size: 0.9rem; line-height: 1.5; resize: vertical; }
+  .reveal { display: none; margin-top: 16px; }
+  .reveal .verdict { padding: 14px; border-radius: 14px; background: #eef7fa; border-left: 5px solid var(--teal); line-height: 1.55; font-size: 0.92rem; }
+  .reveal .verdict h3 { font-size: 1rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .reveal ul { margin: 6px 0 0 18px; }
+  .reveal li { margin-bottom: 4px; }
+  .cmp { display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+  .cmp .box { flex: 1; min-width: 140px; text-align: center; padding: 12px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .cmp .box .n { font-size: 2rem; font-weight: 900; color: var(--navy); }
+  .cmp .box .l { font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+  .why4 { display: grid; gap: 12px; }
+  .w4 { padding: 12px 14px; border-radius: 14px; background: #fff; border: 2px solid var(--line); }
+  .w4.right { border-color: var(--green); background: var(--green-soft); }
+  .w4.wrong { border-color: var(--red); background: #fff7f7; }
+  .w4 .crit4 { font-weight: 850; color: var(--navy); font-size: 0.98rem; display: flex; gap: 10px; align-items: baseline; }
+  .w4 .crit4 span { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: inline-grid; place-items: center; font-size: 0.8rem; }
+  .w4 .opts4 { display: grid; gap: 6px; margin-top: 8px; }
+  .w4 label { display: flex; gap: 8px; align-items: flex-start; font-size: 0.86rem; line-height: 1.45; padding: 7px 9px; border-radius: 9px; border: 1px solid var(--line); background: #f8fafc; cursor: pointer; }
+  .w4 label:hover { border-color: var(--teal); }
+  .w4 label.taken { opacity: 0.45; }
+  .w4 input { margin-top: 3px; accent-color: var(--teal-dark); }
+  .w4 .fb4 { display: none; margin-top: 8px; font-size: 0.86rem; line-height: 1.5; }
+  .w4.right .fb4, .w4.wrong .fb4 { display: block; }
+  .w4.right .fb4 { color: #14532d; } .w4.wrong .fb4 { color: #7f1d1d; }
+  @media (max-width: 860px) {
+    .grade-grid { grid-template-columns: 1fr; }
+    .cat-results { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 12px; }
+    .panel { padding: 14px; }
+    .piece .txt { font-size: 0.88rem; }
+    .swatch small { display: none; }
+    .band { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games#ib" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Essay Lab</span></div>
+    <a href="/geography/paper-1/core-1/t2-changing/l3-the" class="back-link">Back to lesson &rarr;</a>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">IB Unit 1 &middot; Changing Population &middot; 10-mark essay</span>
+    <h1>&#129513; Essay Lab: Megacity Growth (Mumbai)</h1>
+    <div class="question"><small>Essay question</small><span id="qText"></span></div>
+  </div>
+
+  <div class="steps">
+    <span class="step active" data-s="1">1 &middot; Rebuild the essay</span>
+    <span class="step" data-s="2">2 &middot; Colour-code the 6 P&rsquo;s</span>
+    <span class="step" data-s="3">3 &middot; Grade it /10</span>
+    <span class="step" data-s="4">4 &middot; Why the top band?</span>
+  </div>
+
+  <!-- STAGE 1 -->
+  <section class="screen on" id="s1">
+    <div class="panel">
+      <h2>Stage 1: Rebuild the model essay</h2>
+      <p class="how">The essay has been cut into pieces and shuffled. <b>Drag the &#8942;&#8942; handle</b> (or use the arrows) to put the pieces in order. Look for clues: signposting words (<i>However, Therefore, For example, Overall</i>), which place is being discussed, and how each paragraph builds on the last.</p>
+      <div class="toolbar">
+        <span class="stat">Correct: <b id="s1Score">0</b> / <b id="s1Total">0</b></span>
+        <span class="stat">Checks: <b id="s1Checks">0</b></span>
+        <button class="btn ghost" id="hintBtn" type="button">&#128161; Show essay structure</button>
+      </div>
+      <div class="structure" id="structure"></div>
+      <ol class="pieces" id="pieces"></ol>
+      <div class="actions">
+        <span class="msg" id="s1Msg"></span>
+        <button class="btn ghost" id="shuffleBtn" type="button">Reshuffle</button>
+        <button class="btn primary" id="checkOrder" type="button">Check order</button>
+        <button class="btn primary" id="toS2" type="button" style="display:none">Stage 2: colour-code &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section class="screen" id="s2">
+    <div class="panel">
+      <h2>Stage 2: Colour-code the 6 P&rsquo;s</h2>
+      <p class="how">Choose a colour, then <b>click words</b> to highlight them (on a computer you can also <b>click and drag</b> across a phrase). Click a highlighted word again with the same colour to remove it. Find the key <b>evaluation</b> statements, <b>definitions</b> and key terms, <b>places</b>, <b>processes</b>, <b>possibilities</b> and <b>power</b> (players and decision-makers).</p>
+      <div class="palette" id="palette" role="toolbar" aria-label="Highlight colour"></div>
+      <div class="essay" id="essay"></div>
+      <div class="cat-results" id="catResults"></div>
+      <div class="actions">
+        <span class="msg" id="s2Msg"></span>
+        <button class="btn ghost" id="clearBtn" type="button">Clear all</button>
+        <button class="btn ghost" id="keyBtn" type="button" style="display:none">Show the answer key</button>
+        <button class="btn primary" id="checkColours" type="button">Check my colours</button>
+        <button class="btn primary" id="toS3" type="button" style="display:none">Stage 3: grade it &rarr;</button>
+      </div>
+      <p class="legend-note">Dashed red outline = a key phrase you haven&rsquo;t found yet. Wavy red line = a key phrase given the wrong colour. You need to find at least <b id="needPct">70</b>% of the key phrases to unlock Stage 3.</p>
+    </div>
+  </section>
+
+  <!-- STAGE 3 -->
+  <section class="screen" id="s3">
+    <div class="grade-grid">
+      <div class="panel">
+        <h2>Stage 3: Grade the essay like an examiner</h2>
+        <p class="how">Use the <b>IB Paper 2 extended-response markbands</b> (paraphrased below). First judge each criterion, then choose the markband that fits best, then the exact mark.</p>
+        <div class="crit" id="crit"></div>
+        <div class="bands" id="bands"></div>
+      </div>
+      <div class="panel">
+        <h2>Your mark and feedback</h2>
+        <div class="marks" id="marks"></div>
+        <p class="note">Choose a markband on the left first, then pick a mark within it.</p>
+        <label class="lbl" for="www">What went well (be specific &mdash; quote the essay)</label>
+        <textarea class="fb" id="www" placeholder="e.g. The essay uses three contrasting case studies..."></textarea>
+        <label class="lbl" for="ebi">Even better if&hellip; (one improvement)</label>
+        <textarea class="fb" id="ebi" placeholder="e.g. It could add a statistic for India..."></textarea>
+        <div class="actions">
+          <span class="msg" id="s3Msg"></span>
+          <button class="btn primary" id="submitGrade" type="button">Submit my grade</button>
+        </div>
+        <div class="reveal" id="reveal">
+          <div class="cmp">
+            <div class="box"><div class="n" id="yourMark"></div><div class="l">Your mark</div></div>
+            <div class="box"><div class="n" id="examMark"></div><div class="l">Examiner-style mark</div></div>
+          </div>
+          <div class="verdict" id="verdict"></div>
+          <div class="actions">
+            <button class="btn ghost" id="copyBtn" type="button">Copy my feedback</button>
+            <span class="msg ok" id="copied"></span>
+            <button class="btn primary" id="toS4" type="button">Stage 4: why the top band? &rarr;</button>
+          </div>
+          <p class="note">Nothing is saved or marked &mdash; copy your feedback into your notes if you want to keep it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 4 -->
+  <section class="screen" id="s4">
+    <div class="panel">
+      <h2>Stage 4: Why does this essay reach the top band?</h2>
+      <p class="how">Examiners say this essay reaches the top range for <b>six reasons</b>. For each reason, choose the extract from the essay that <b>proves</b> it. Each extract is used once.</p>
+      <div class="why4" id="why4"></div>
+      <div class="actions">
+        <span class="msg" id="s4Msg"></span>
+        <button class="btn primary" id="check4" type="button">Check my evidence</button>
+      </div>
+      <div class="reveal" id="reveal4">
+        <div class="verdict">
+          <h3>&#127919; Use this checklist in your own essays</h3>
+          <ul id="tips4"></ul>
+          <p style="margin-top:8px">Next time you write a 10-mark essay, check it against these six points before you hand it in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  /* =====================================================================
+     ESSAY DATA — to reuse this Essay Lab for another essay, change only
+     this block: the question, the ordered chunks (1–3 sentences each,
+     with their section), the colour key and the examiner verdict.
+     ===================================================================== */
+  var ESSAY = {
+    question: 'Using a named case study, describe the consequences and solutions of rapid megacity growth. (10)',
+    sections: ['Introduction', 'Social consequences', 'Economic consequences', 'Environmental consequences', 'Solutions', 'Conclusion'],
+    chunks: [
+      [0, 'A megacity is an urban area with more than 10 million inhabitants. Mumbai, on India’s west coast, has expanded through rural-to-urban migration, natural increase and its growth as a financial, commercial, port and entertainment centre.'],
+      [0, 'Rapid growth has generated jobs, investment and global connectivity, but it has also intensified housing shortages, service pressure, inequality and environmental risk. The impacts are spatially uneven because residents’ experiences vary according to income, tenure, employment and location.'],
+      [1, 'A major consequence is pressure on affordable housing, water, sanitation and healthcare.'],
+      [1, 'Dharavi occupies about 2.39 km² and published population estimates range from roughly 700,000 to one million. Such density can intensify overcrowding, fire risk and exposure to poor sanitation.'],
+      [1, 'However, it is inaccurate to treat Dharavi only as a zone of deprivation. The settlement provides comparatively affordable accommodation close to employment, as well as social networks that help migrants obtain work and support.'],
+      [1, 'Therefore, the severity of social problems is not caused by density alone; insecure tenure, inadequate infrastructure and exclusion from formal planning are more decisive.'],
+      [2, 'Growth has reinforced Mumbai’s role as India’s financial and commercial hub. Banking, trade, port activity, manufacturing and film attract investment and migrants, expanding the labour force and consumer market.'],
+      [2, 'Dharavi also illustrates the productive informal economy: leather, textile and pottery enterprises operate within the settlement, and published annual-turnover estimates exceed US$1 billion.'],
+      [2, 'Nevertheless, economic success is highly uneven. Informal workers often lack secure contracts and benefits, while high land prices and long journeys reduce the advantages of urban employment.'],
+      [2, 'Megacity growth therefore creates prosperity, but does not automatically produce inclusive prosperity.'],
+      [3, 'Rapid urban expansion has placed pressure on drainage, waste systems and waterways.'],
+      [3, 'The Mithi River is about 18 km long and has a catchment of 7,295 ha. It carries overflow from Powai and Vihar lakes and acts as a natural monsoon drainage channel.'],
+      [3, 'The MMRDA reports that suburban development, raw sewage, industrial and municipal waste, sludge and garbage have degraded the river and contributed to stagnation.'],
+      [3, 'Flood risk is produced by interacting physical and human factors: on 26 July 2005, 944 mm of rain fell in 24 hours while a 4.48 m high tide restricted drainage. This means the disaster cannot be attributed to urban growth alone; extreme rainfall, tide, blocked drainage, encroachment and weak management combined to produce uneven risk.'],
+      [4, 'Management includes in-situ housing and sanitation upgrading, affordable housing, public transport, river rehabilitation, drainage improvement, mangrove protection and community participation.'],
+      [4, 'In-situ upgrading may protect livelihoods and social networks, whereas clearance or distant relocation may disrupt employment and increase travel costs.'],
+      [4, 'Mithi River management requires coordination between the Mithi River Development and Protection Authority, MMRDA and the municipal corporation. Yet coordination does not guarantee implementation because responsibility for works, land acquisition and rehabilitation remains divided among agencies.'],
+      [4, 'Transport schemes can improve connectivity, but they cannot by themselves resolve insecure housing, unequal service access or water pollution. Solutions are therefore most effective when integrated, maintained and shaped with residents.'],
+      [5, 'Overall, Mumbai’s growth has strengthened employment, investment, cultural influence and connectivity, while also intensifying overcrowding, inequality, pollution and flood exposure. The most serious impacts occur where rapid growth intersects with low income, insecure tenure and weak infrastructure.'],
+      [5, 'Solutions should therefore be judged not by the scale or visibility of construction, but by whether they reduce vulnerability without destroying livelihoods. Megacity growth is not inevitably unsustainable; outcomes depend on inclusive planning, environmental protection, accountable governance and long-term maintenance.']
+    ],
+    // Order in which categories claim words when phrases overlap (power before place, so the Mithi River Authority stays orange).
+    order: ['eval', 'power', 'place', 'def', 'proc', 'poss'],
+    key: {
+      eval: [
+        'The impacts are spatially uneven',
+        'However, it is inaccurate to treat Dharavi only as a zone of deprivation',
+        'Therefore, the severity of social problems is not caused by density alone',
+        'Nevertheless, economic success is highly uneven',
+        'Megacity growth therefore creates prosperity, but does not automatically produce inclusive prosperity',
+        'This means the disaster cannot be attributed to urban growth alone',
+        'Yet coordination does not guarantee implementation',
+        'Solutions are therefore most effective when integrated, maintained and shaped with residents',
+        'Solutions should therefore be judged not by the scale or visibility of construction, but by whether they reduce vulnerability without destroying livelihoods',
+        'Megacity growth is not inevitably unsustainable'
+      ],
+      power: [
+        { p: 'MMRDA', all: true }, 'Mithi River Development and Protection Authority', 'municipal corporation',
+        'formal planning', 'community participation', 'accountable governance'
+      ],
+      place: [
+        { p: 'Mumbai', all: true }, { p: 'Mumbai’s', all: true }, { p: 'Dharavi', all: true }, 'India’s west coast',
+        { p: 'Mithi River', all: true }, 'Powai and Vihar lakes'
+      ],
+      def: [
+        'megacity is an urban area with more than 10 million inhabitants', 'rural-to-urban migration', 'natural increase',
+        'informal economy', 'catchment', { p: 'insecure tenure', all: true }
+      ],
+      proc: [
+        'Rapid urban expansion', 'suburban development', 'stagnation', 'high tide restricted drainage',
+        'extreme rainfall', 'blocked drainage', 'encroachment'
+      ],
+      poss: [
+        'can intensify overcrowding, fire risk and exposure to poor sanitation', 'may protect livelihoods and social networks',
+        'may disrupt employment and increase travel costs', 'can improve connectivity'
+      ]
+    },
+    examinerMark: 10,
+    examinerBand: [9, 10],
+    verdict: '<h3>Examiner-style verdict: 10/10 (top markband, 9–10)</h3>' +
+      '<p>This response covers <b>both</b> parts of the question &mdash; consequences <i>and</i> solutions &mdash; using one well-developed named case study.</p>' +
+      '<ul>' +
+      '<li><b>Precise, named evidence</b> rather than generic claims: Dharavi (2.39 km², 700,000–1 million people, US$1 billion turnover), the Mithi River, and the 26 July 2005 flood.</li>' +
+      '<li><b>Spatial connections</b> between citywide growth and local risk &mdash; suburban development upstream degrades the Mithi River and raises flood risk downstream.</li>' +
+      '<li><b>Who benefits and who bears the costs</b> &mdash; investment and jobs for some, insecure informal work and long journeys for others.</li>' +
+      '<li><b>No deterministic claims</b>: the 2005 flood is explained by interacting causes (rainfall, tide, blocked drainage, encroachment, weak management).</li>' +
+      '<li><b>Solutions are evaluated</b> through affordability, displacement, governance and maintenance, not simply listed.</li>' +
+      '<li><b>A qualified judgement</b> is sustained from introduction to conclusion.</li>' +
+      '</ul>' +
+      '<p style="margin-top:8px"><b>Even better if&hellip;</b> the solutions section could cite the outcome of one specific project (for example, a named redevelopment or river-rehabilitation scheme) to show evidence of how effective it has actually been.</p>'
+  };
+
+  /* Stage 4: why the top band — each reason and the extract that proves it */
+  var WHY = [
+    { r: 'Uses precise, named evidence rather than generic claims.', q: 'Dharavi occupies about 2.39 km² and published population estimates range from roughly 700,000 to one million.',
+      fb: 'Named place + area + population range. Compare a generic claim like “slums are very crowded”.' },
+    { r: 'Shows spatial connections between citywide growth and local risk.', q: 'The MMRDA reports that suburban development, raw sewage, industrial and municipal waste, sludge and garbage have degraded the river and contributed to stagnation.',
+      fb: 'Growth across the city (suburban development, waste) is linked to a specific local risk: a degraded, stagnant river that drains badly in the monsoon.' },
+    { r: 'Evaluates who benefits and who bears costs.', q: 'Informal workers often lack secure contracts and benefits, while high land prices and long journeys reduce the advantages of urban employment.',
+      fb: 'It separates the winners from growth (investment, the financial hub) from the people who carry the costs (informal workers, long commutes).' },
+    { r: 'Avoids deterministic claims by recognising interacting causes.', q: 'This means the disaster cannot be attributed to urban growth alone; extreme rainfall, tide, blocked drainage, encroachment and weak management combined to produce uneven risk.',
+      fb: 'It rejects a single cause (“growth caused the flood”) and shows physical and human factors interacting.' },
+    { r: 'Evaluates solutions through affordability, displacement, governance and maintenance.', q: 'In-situ upgrading may protect livelihoods and social networks, whereas clearance or distant relocation may disrupt employment and increase travel costs.',
+      fb: 'It weighs two solutions against each other by their effect on people’s livelihoods (displacement) — not just “build more housing”. The next sentences add governance and maintenance.' },
+    { r: 'Sustains a qualified judgement throughout.', q: 'Megacity growth is not inevitably unsustainable; outcomes depend on inclusive planning, environmental protection, accountable governance and long-term maintenance.',
+      fb: 'A qualified (“not inevitably… depends on…”) judgement that echoes the “spatially uneven” argument set up in the introduction.' }
+  ];
+
+  /* ================= MARKBANDS (paraphrased, as used across SBL) ================= */
+  var BANDS = [
+    { r: [0, 0], t: 'Does not reach the standard described below.' },
+    { r: [1, 2], t: 'Brief and largely irrelevant; not focused on the question; little structure. Examples missing or just listed; no real analysis; terminology missing or misused.' },
+    { r: [3, 4], t: 'General and lacking detail; a mix of relevant and irrelevant facts with links to the question only listed, not developed. Any conclusion is unsupported; basic terminology with errors.' },
+    { r: [5, 6], t: 'Engages with the question, but narrowly: one line of argument, possibly repeated, with limited evaluation. Evidence is described with some links to the question; conclusion general or unsupported.' },
+    { r: [7, 8], t: 'Addresses the whole question with a clear, evaluated argument and accurate supporting examples &mdash; but it leans one way rather than genuinely weighing alternatives, so the conclusion is relevant but not fully balanced.' },
+    { r: [9, 10], t: 'Precisely focused on the command term; weighs complexity, exceptions and comparisons; integrates accurate examples and statistics throughout; balanced, well-justified conclusion; clear structure and correct terminology throughout.' }
+  ];
+  var CRITERIA = [
+    { k: 'ao1', t: 'Knowledge & terminology', s: 'Accurate content and key terms' },
+    { k: 'ao2', t: 'Focus on the question', s: 'Answers how AND why' },
+    { k: 'ao3', t: 'Evaluation & conclusion', s: 'Weighs up, reaches a judgement' },
+    { k: 'ao4', t: 'Examples & structure', s: 'Case studies, data, organisation' }
+  ];
+  var CATS = [
+    { k: 'eval', n: 'Evaluation', d: 'purple', c: 'var(--c-eval)' },
+    { k: 'def', n: 'Definitions', d: 'key terms', c: 'var(--c-def)' },
+    { k: 'place', n: 'Places', d: 'where', c: 'var(--c-place)' },
+    { k: 'proc', n: 'Processes', d: 'how/why change', c: 'var(--c-proc)' },
+    { k: 'poss', n: 'Possibilities', d: 'may / can / could', c: 'var(--c-poss)' },
+    { k: 'power', n: 'Power', d: 'players & decision-makers', c: 'var(--c-power)' }
+  ];
+  var CAT_ORDER = ['eval', 'place', 'def', 'power', 'proc', 'poss'];
+  var NEED = 0.7;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function setStep(n) {
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' active' : ''); });
+    document.querySelectorAll('.screen').forEach(function (s, i) { s.classList.toggle('on', i === n - 1); });
+    window.scrollTo(0, 0);
+  }
+  $('qText').textContent = ESSAY.question;
+  $('needPct').textContent = Math.round(NEED * 100);
+
+  /* ================= STAGE 1: JIGSAW ================= */
+  var order = [], locked = {}, checks = 0;
+  var list = $('pieces');
+  $('s1Total').textContent = ESSAY.chunks.length;
+  $('structure').innerHTML = '<b>The essay has 5 sections, in this order:</b> ' + ESSAY.sections.map(function (s, i) {
+    var n = ESSAY.chunks.filter(function (c) { return c[0] === i; }).length;
+    return (i + 1) + '. ' + s + ' (' + n + ' pieces)';
+  }).join(' &nbsp;&middot;&nbsp; ');
+
+  function newShuffle() {
+    locked = {}; checks = 0;
+    do { order = shuffle(ESSAY.chunks.map(function (_, i) { return i; })); }
+    while (order.filter(function (v, i) { return v === i; }).length > 2);
+    $('s1Checks').textContent = 0; $('s1Score').textContent = 0; $('s1Msg').textContent = '';
+    $('checkOrder').style.display = ''; $('toS2').style.display = 'none';
+    renderPieces();
+  }
+  function renderPieces() {
+    list.innerHTML = order.map(function (ci, pos) {
+      var isLocked = locked[pos] === ci;
+      return '<li class="piece' + (isLocked ? ' right' : '') + '" data-pos="' + pos + '">' +
+        '<span class="grip" aria-hidden="true">' + (isLocked ? '&#10003;' : '&#8942;&#8942;') + '</span>' +
+        '<span class="txt"><span class="sec-tag">' + ESSAY.sections[ESSAY.chunks[ci][0]] + '</span>' + esc(ESSAY.chunks[ci][1]) + '</span>' +
+        '<span class="arrows"><button type="button" data-mv="-1" aria-label="Move up"' + (isLocked || pos === 0 ? ' disabled' : '') + '>&#9650;</button>' +
+        '<button type="button" data-mv="1" aria-label="Move down"' + (isLocked || pos === order.length - 1 ? ' disabled' : '') + '>&#9660;</button></span></li>';
+    }).join('');
+  }
+  function isLockedPos(p) { return locked[p] === order[p]; }
+  function move(from, to) {
+    if (from === to || isLockedPos(from) || to < 0 || to >= order.length) return;
+    // skip over locked slots: find nearest unlocked target in the direction of travel
+    var dir = to > from ? 1 : -1;
+    while (to >= 0 && to < order.length && isLockedPos(to)) to += dir;
+    if (to < 0 || to >= order.length) return;
+    // remove from 'from' and insert at 'to' while keeping locked items fixed
+    var free = []; for (var i = 0; i < order.length; i++) if (!isLockedPos(i)) free.push(i);
+    var vals = free.map(function (i) { return order[i]; });
+    var fi = free.indexOf(from), ti = free.indexOf(to);
+    var v = vals.splice(fi, 1)[0]; vals.splice(ti, 0, v);
+    free.forEach(function (slot, k) { order[slot] = vals[k]; });
+    list.querySelectorAll('.piece').forEach(function (p) { p.classList.remove('wrong'); });
+    renderPieces();
+  }
+  list.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-mv]'); if (!b) return;
+    var pos = +b.closest('.piece').dataset.pos; move(pos, pos + (+b.dataset.mv));
+  });
+  // Pointer drag via the grip
+  var drag = null;
+  list.addEventListener('pointerdown', function (e) {
+    var g = e.target.closest('.grip'); if (!g) return;
+    var li = g.closest('.piece'); var pos = +li.dataset.pos;
+    if (isLockedPos(pos)) return;
+    e.preventDefault();
+    drag = { from: pos, li: li, startY: e.clientY, over: pos };
+    li.classList.add('dragging');
+    try { g.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    drag.li.style.transform = 'translateY(' + (e.clientY - drag.startY) + 'px)';
+    var items = [].slice.call(list.querySelectorAll('.piece'));
+    var over = drag.from;
+    items.forEach(function (it, i) { var r = it.getBoundingClientRect(); if (e.clientY > r.top + r.height / 2) over = i; });
+    if (e.clientY < items[0].getBoundingClientRect().top + 10) over = 0;
+    items.forEach(function (it) { it.classList.remove('placeholder'); });
+    if (items[over] && over !== drag.from) items[over].classList.add('placeholder');
+    drag.over = over;
+    if (e.clientY < 60) window.scrollBy(0, -12); else if (e.clientY > window.innerHeight - 60) window.scrollBy(0, 12);
+  });
+  function endDrag() {
+    if (!drag) return;
+    var d = drag; drag = null;
+    d.li.style.transform = ''; d.li.classList.remove('dragging');
+    move(d.from, d.over);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+
+  $('checkOrder').addEventListener('click', function () {
+    checks++; $('s1Checks').textContent = checks;
+    var right = 0;
+    order.forEach(function (ci, pos) { if (ci === pos) { locked[pos] = ci; right++; } });
+    renderPieces();
+    list.querySelectorAll('.piece').forEach(function (li) { var p = +li.dataset.pos; if (!isLockedPos(p)) li.classList.add('wrong'); });
+    $('s1Score').textContent = right;
+    if (right === order.length) {
+      $('s1Msg').className = 'msg ok'; $('s1Msg').textContent = '✅ Essay rebuilt in ' + checks + ' check' + (checks === 1 ? '' : 's') + '!';
+      $('checkOrder').style.display = 'none'; $('toS2').style.display = '';
+      list.classList.add('show-sec');
+    } else {
+      $('s1Msg').className = 'msg info';
+      $('s1Msg').textContent = right + ' of ' + order.length + ' in the right place — green pieces are locked. Keep going!';
+    }
+  });
+  $('shuffleBtn').addEventListener('click', newShuffle);
+  $('hintBtn').addEventListener('click', function () {
+    var s = $('structure'); var on = s.style.display !== 'block';
+    s.style.display = on ? 'block' : 'none';
+    this.innerHTML = on ? '&#128161; Hide essay structure' : '&#128161; Show essay structure';
+  });
+  $('toS2').addEventListener('click', function () { buildEssay(); setStep(2); });
+
+  /* ================= STAGE 2: COLOUR-CODING ================= */
+  var words = [], keyOf = [], phrases = [], paint = [], tool = 'eval', built = false, stage2Passed = false;
+  function norm(w) { return w.toLowerCase().replace(/[^a-z0-9$\-]/g, ''); }
+  function buildEssay() {
+    if (built) return; built = true;
+    var html = '', idx = 0, lastSec = -1, para = null;
+    ESSAY.chunks.forEach(function (c) {
+      if (c[0] !== lastSec) {
+        if (para !== null) html += '</p>';
+        html += '<h3>' + ESSAY.sections[c[0]] + '</h3><p>';
+        lastSec = c[0]; para = true;
+      }
+      c[1].split(/\s+/).forEach(function (w) {
+        words.push(w);
+        html += '<span class="w" data-i="' + idx + '">' + esc(w) + '</span> ';
+        idx++;
+      });
+    });
+    html += '</p>';
+    $('essay').innerHTML = html;
+    keyOf = new Array(words.length).fill(null);
+    paint = new Array(words.length).fill(null);
+    var nw = words.map(norm);
+    (ESSAY.order || CAT_ORDER).forEach(function (cat) {
+      ESSAY.key[cat].forEach(function (item) {
+        var p = typeof item === 'string' ? item : item.p, all = typeof item !== 'string' && item.all;
+        var toks = p.split(/\s+/).map(norm);
+        for (var i = 0; i + toks.length <= nw.length; i++) {
+          var ok = true;
+          for (var j = 0; j < toks.length; j++) if (nw[i + j] !== toks[j]) { ok = false; break; }
+          if (!ok) continue;
+          var ws = [];
+          for (var j2 = 0; j2 < toks.length; j2++) if (keyOf[i + j2] === null) ws.push(i + j2);
+          if (ws.length) {
+            var ph = { cat: cat, text: p, words: ws };
+            ws.forEach(function (w) { keyOf[w] = phrases.length; });
+            phrases.push(ph);
+          }
+          if (!all) break;
+        }
+      });
+    });
+    renderPalette();
+  }
+  function renderPalette() {
+    $('palette').innerHTML = CATS.map(function (c) {
+      return '<button type="button" class="swatch' + (tool === c.k ? ' on' : '') + '" data-k="' + c.k + '" aria-pressed="' + (tool === c.k) + '"><i style="background:' + c.c + '"></i>' + c.n + ' <small>' + (c.k === 'eval' ? 'judgements' : c.d) + '</small></button>';
+    }).join('') + '<button type="button" class="swatch' + (tool === 'erase' ? ' on' : '') + '" data-k="erase" aria-pressed="' + (tool === 'erase') + '"><i style="background:#fff;border:2px solid #94a3b8"></i>Eraser</button>';
+  }
+  $('palette').addEventListener('click', function (e) {
+    var b = e.target.closest('.swatch'); if (!b) return; tool = b.dataset.k; renderPalette();
+  });
+  function applyWord(i, mode) {
+    var cur = paint[i];
+    if (mode === 'toggle') paint[i] = (tool === 'erase' || cur === tool) ? null : tool;
+    else paint[i] = tool === 'erase' ? null : tool;
+    var el = $('essay').querySelector('.w[data-i="' + i + '"]');
+    el.className = 'w' + (paint[i] ? ' ' + paint[i] : '');
+  }
+  var painting = false, paintMode = 'set', lastW = -1;
+  $('essay').addEventListener('pointerdown', function (e) {
+    var w = e.target.closest('.w'); if (!w) return;
+    var i = +w.dataset.i;
+    if (e.pointerType === 'mouse') { e.preventDefault(); painting = true; paintMode = (paint[i] === tool || tool === 'erase') ? 'erase' : 'set'; }
+    var prevTool = tool;
+    if (paintMode === 'erase' && painting) { var t = tool; tool = 'erase'; applyWord(i, 'set'); tool = t; }
+    else applyWord(i, painting ? 'set' : 'toggle');
+    lastW = i;
+  });
+  $('essay').addEventListener('pointerover', function (e) {
+    if (!painting) return;
+    var w = e.target.closest('.w'); if (!w) return;
+    var i = +w.dataset.i; if (i === lastW) return;
+    var a = Math.min(i, lastW), b = Math.max(i, lastW);
+    for (var k = a; k <= b; k++) {
+      if (paintMode === 'erase') { var t = tool; tool = 'erase'; applyWord(k, 'set'); tool = t; } else applyWord(k, 'set');
+    }
+    lastW = i;
+  });
+  document.addEventListener('pointerup', function () { painting = false; });
+
+  function checkColours(showKey) {
+    var byCat = {}; CATS.forEach(function (c) { byCat[c.k] = { found: 0, total: 0 }; });
+    var foundAll = 0;
+    document.querySelectorAll('#essay .w').forEach(function (el) { el.classList.remove('miss', 'bad', 'keyshow'); });
+    phrases.forEach(function (ph) {
+      var good = ph.words.filter(function (w) { return paint[w] === ph.cat; }).length;
+      var painted = ph.words.filter(function (w) { return paint[w]; }).length;
+      var found = good / ph.words.length >= 0.6;
+      byCat[ph.cat].total++;
+      if (found) { byCat[ph.cat].found++; foundAll++; }
+      ph.words.forEach(function (w) {
+        var el = $('essay').querySelector('.w[data-i="' + w + '"]');
+        if (showKey) { el.className = 'w ' + ph.cat + ' keyshow'; }
+        else if (!found && painted && painted - good > 0) el.classList.add('bad');
+        else if (!found) el.classList.add('miss');
+      });
+    });
+    if (showKey) phrases.forEach(function (ph) { ph.words.forEach(function (w) { paint[w] = ph.cat; }); });
+    $('catResults').innerHTML = CATS.map(function (c) {
+      var r = byCat[c.k], pct = r.total ? Math.round(r.found / r.total * 100) : 0;
+      return '<div class="cr"><b style="color:' + c.c + '">' + c.n + '</b>' + r.found + ' / ' + r.total + ' found<div class="bar"><div style="width:' + pct + '%;background:' + c.c + '"></div></div></div>';
+    }).join('');
+    return foundAll / phrases.length;
+  }
+  $('checkColours').addEventListener('click', function () {
+    var pct = checkColours(false);
+    $('keyBtn').style.display = '';
+    if (pct >= NEED) {
+      stage2Passed = true;
+      $('s2Msg').className = 'msg ok';
+      $('s2Msg').textContent = '✅ ' + Math.round(pct * 100) + '% of key phrases found — Stage 3 unlocked. Fix any red ones first if you like.';
+      $('toS3').style.display = '';
+    } else {
+      $('s2Msg').className = 'msg info';
+      $('s2Msg').textContent = Math.round(pct * 100) + '% found — you need ' + Math.round(NEED * 100) + '%. Look for the dashed red outlines.';
+    }
+  });
+  $('keyBtn').addEventListener('click', function () {
+    checkColours(true); checkColours(false);
+    $('s2Msg').className = 'msg ok'; $('s2Msg').textContent = 'Answer key shown. Compare it with your choices, then move on.';
+    $('toS3').style.display = '';
+  });
+  $('clearBtn').addEventListener('click', function () {
+    paint = paint.map(function () { return null; });
+    document.querySelectorAll('#essay .w').forEach(function (el) { el.className = 'w'; });
+    $('catResults').innerHTML = ''; $('s2Msg').textContent = '';
+  });
+  $('toS3').addEventListener('click', function () { renderGrade(); setStep(3); });
+
+  /* ================= STAGE 3: GRADE ================= */
+  var crit = {}, band = null, mark = null;
+  function renderGrade() {
+    $('crit').innerHTML = CRITERIA.map(function (c) {
+      return '<div class="row"><span><b>' + c.t + '</b><small>' + c.s + '</small></span><span class="seg" data-k="' + c.k + '">' +
+        ['Weak', 'Partial', 'Strong'].map(function (l) { return '<button type="button" class="' + (crit[c.k] === l ? 'on' : '') + '">' + l + '</button>'; }).join('') + '</span></div>';
+    }).join('');
+    $('bands').innerHTML = BANDS.slice().reverse().map(function (b, i) {
+      var id = BANDS.length - 1 - i;
+      return '<button type="button" class="band' + (band === id ? ' on' : '') + '" data-b="' + id + '"><b>' + (b.r[0] === b.r[1] ? b.r[0] : b.r[0] + '–' + b.r[1]) + '</b><span>' + b.t + '</span></button>';
+    }).join('');
+    $('marks').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (m) {
+      var ok = band !== null && m >= BANDS[band].r[0] && m <= BANDS[band].r[1];
+      return '<button type="button" data-m="' + m + '" class="' + (mark === m ? 'on' : '') + '"' + (ok ? '' : ' disabled') + '>' + m + '</button>';
+    }).join('');
+  }
+  $('crit').addEventListener('click', function (e) {
+    var b = e.target.closest('.seg button'); if (!b) return;
+    crit[b.parentNode.dataset.k] = b.textContent; renderGrade();
+  });
+  $('bands').addEventListener('click', function (e) {
+    var b = e.target.closest('.band'); if (!b) return;
+    band = +b.dataset.b;
+    if (mark === null || mark < BANDS[band].r[0] || mark > BANDS[band].r[1]) mark = BANDS[band].r[1] === BANDS[band].r[0] ? BANDS[band].r[0] : null;
+    renderGrade();
+  });
+  $('marks').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-m]'); if (!b || b.disabled) return; mark = +b.dataset.m; renderGrade();
+  });
+  $('submitGrade').addEventListener('click', function () {
+    var missing = [];
+    if (Object.keys(crit).length < CRITERIA.length) missing.push('judge all four criteria');
+    if (mark === null) missing.push('choose a markband and a mark');
+    if ($('www').value.trim().length < 15) missing.push('write what went well');
+    if ($('ebi').value.trim().length < 10) missing.push('write an improvement');
+    if (missing.length) { $('s3Msg').className = 'msg no'; $('s3Msg').textContent = 'Please ' + missing.join(', ') + '.'; return; }
+    $('s3Msg').textContent = '';
+    $('yourMark').textContent = mark + '/10';
+    $('examMark').textContent = ESSAY.examinerMark + '/10';
+    var diff = mark - ESSAY.examinerMark, inBand = mark >= ESSAY.examinerBand[0] && mark <= ESSAY.examinerBand[1];
+    var weakCrit = CRITERIA.filter(function (c) { return crit[c.k] !== 'Strong'; }).map(function (c) { return c.t.toLowerCase(); });
+    var intro = inBand
+      ? '<p style="margin-bottom:10px">✅ <b>You placed it in the right markband.</b> ' + (diff === 0 ? 'Your mark matches exactly.' : 'Within one mark of the examiner-style mark.') + '</p>'
+      : '<p style="margin-bottom:10px">🤔 <b>You were ' + Math.abs(diff) + ' mark' + (Math.abs(diff) === 1 ? '' : 's') + ' ' + (diff < 0 ? 'harsher' : 'more generous') + '</b> than the examiner-style mark.' +
+        (weakCrit.length ? ' You judged <i>' + weakCrit.join(', ') + '</i> as less than strong — find the evidence below and decide whether you still agree.' : '') + '</p>';
+    $('verdict').innerHTML = intro + ESSAY.verdict;
+    $('reveal').style.display = 'block';
+    $('reveal').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('copyBtn').addEventListener('click', function () {
+    var txt = 'Essay: ' + ESSAY.question + '\nMy mark: ' + mark + '/10\nWhat went well: ' + $('www').value.trim() + '\nEven better if: ' + $('ebi').value.trim();
+    function done() { $('copied').textContent = 'Copied!'; setTimeout(function () { $('copied').textContent = ''; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done); else done();
+  });
+
+  /* ================= STAGE 4: WHY THE TOP BAND ================= */
+  var order4 = [], built4 = false;
+  $('toS4').addEventListener('click', function () { build4(); setStep(4); });
+  function build4() {
+    if (built4) return; built4 = true;
+    order4 = shuffle(WHY.map(function (_, i) { return i; }));
+    $('why4').innerHTML = WHY.map(function (w, i) {
+      return '<div class="w4" data-i="' + i + '"><div class="crit4"><span>' + (i + 1) + '</span>' + esc(w.r) + '</div><div class="opts4">' +
+        order4.map(function (qi) { return '<label data-q="' + qi + '"><input type="radio" name="w4-' + i + '" value="' + qi + '"><span>&ldquo;' + esc(WHY[qi].q) + '&rdquo;</span></label>'; }).join('') +
+        '</div><div class="fb4"></div></div>';
+    }).join('');
+    $('tips4').innerHTML = WHY.map(function (w) { return '<li><b>' + esc(w.r) + '</b> ' + esc(w.fb) + '</li>'; }).join('');
+  }
+  $('why4').addEventListener('change', function () {
+    var used = {};
+    document.querySelectorAll('#why4 input:checked').forEach(function (inp) { used[inp.value] = inp.name; });
+    document.querySelectorAll('#why4 label').forEach(function (l) {
+      var inp = l.querySelector('input'); var by = used[inp.value];
+      l.classList.toggle('taken', !!by && by !== inp.name);
+    });
+  });
+  $('check4').addEventListener('click', function () {
+    var right = 0, blank = 0;
+    document.querySelectorAll('#why4 .w4').forEach(function (box) {
+      var i = +box.dataset.i, sel = box.querySelector('input:checked');
+      box.classList.remove('right', 'wrong');
+      if (!sel) { blank++; return; }
+      var ok = +sel.value === i;
+      box.classList.add(ok ? 'right' : 'wrong');
+      box.querySelector('.fb4').textContent = ok ? '✔ ' + WHY[i].fb : '✖ That extract proves a different point. Look for one that shows: ' + WHY[i].r.toLowerCase();
+      if (ok) right++;
+    });
+    if (blank) { $('s4Msg').className = 'msg info'; $('s4Msg').textContent = 'Choose an extract for all six reasons (' + blank + ' left).'; return; }
+    $('s4Msg').className = right === WHY.length ? 'msg ok' : 'msg info';
+    $('s4Msg').textContent = right + ' / ' + WHY.length + ' matched' + (right === WHY.length ? ' — excellent examiner thinking!' : ' — fix the red ones and check again.');
+    if (right === WHY.length) { $('reveal4').style.display = 'block'; $('reveal4').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+
+  newShuffle();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
