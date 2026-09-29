@@ -40,6 +40,22 @@ export const config = {
 const ACCESS_COOKIE = 'sbl_at';
 const REFRESH_COOKIE = 'sbl_rt';
 
+// Paths that fall inside a gated prefix above (e.g. under /geography/)
+// but should stay open to everyone, no login required. Used for KS3
+// games that should be freely accessible while the rest of that
+// section (IGCSE / IB, KS4-5) stays behind the login wall.
+// Keep entries as exact folder paths, no trailing slash — both the
+// bare path and anything nested under it (a trailing "/...") are
+// treated as public. Add more paths here as needed.
+const PUBLIC_PATHS = [
+  '/geography/games/tropical-storm-mission', // KS3 — Tropical Storm Mission
+  '/geography/games/place-detective'         // KS3 — Place Detective
+];
+
+function isPublicPath(pathname) {
+  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+}
+
 function getCookie(request, name) {
   const header = request.headers.get('cookie');
   if (!header) return null;
@@ -205,6 +221,10 @@ async function getActiveRole(accessToken, supabaseUrl, anonKey, userId) {
 
 export default async function middleware(request) {
   const { pathname } = new URL(request.url);
+
+  // Open KS3 games — let these through before any auth check runs.
+  if (isPublicPath(pathname)) return undefined;
+
   const isAdminPath = pathname.startsWith('/admin');
   const isTeacherPath = pathname.startsWith('/teacher');
 
