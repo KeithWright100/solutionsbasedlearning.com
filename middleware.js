@@ -44,16 +44,26 @@ const REFRESH_COOKIE = 'sbl_rt';
 // but should stay open to everyone, no login required. Used for KS3
 // games that should be freely accessible while the rest of that
 // section (IGCSE / IB, KS4-5) stays behind the login wall.
-// Keep entries as exact folder paths, no trailing slash — both the
-// bare path and anything nested under it (a trailing "/...") are
-// treated as public. Add more paths here as needed.
-const PUBLIC_PATHS = [
+//
+// PUBLIC_PATH_TREES — this path AND anything nested under it (a
+// trailing "/...") is public. Use for a whole game's own folder.
+const PUBLIC_PATH_TREES = [
   '/geography/games/tropical-storm-mission', // KS3 — Tropical Storm Mission
-  '/geography/games/place-detective'         // KS3 — Place Detective
+  '/geography/games/place-detective',        // KS3 — Place Detective
+  '/geography/games/tropical-storm-links'    // KS3 — Tropical Storm: Link It Up
+];
+// PUBLIC_PATH_EXACT — only this exact path is public, nothing nested
+// under it. Use for the games hub listing page itself: it lives at
+// /geography/games, one level above the still-gated IGCSE/IB games
+// (e.g. /geography/games/energy-sort), so it must NOT be a tree match
+// or every game would become public.
+const PUBLIC_PATH_EXACT = [
+  '/geography/games' // the games hub listing page
 ];
 
 function isPublicPath(pathname) {
-  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+  if (PUBLIC_PATH_EXACT.includes(pathname)) return true;
+  return PUBLIC_PATH_TREES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
 
 function getCookie(request, name) {

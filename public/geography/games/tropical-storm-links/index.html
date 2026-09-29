@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tropical Storm: Link It Up — SBL</title>
+<meta name="description" content="Link the characteristics and impacts of a tropical storm, then explain each connection and get instant AI feedback — part of the Interactive KS3 Geography Games hub.">
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+margin:0;
+padding:25px;
+background:linear-gradient(180deg,#eaf1f8,#eef6ff);
+color:#15263c;
+line-height:1.5;
+}
+
+.sr-only{
+position:absolute !important;
+width:1px !important;
+height:1px !important;
+padding:0 !important;
+margin:-1px !important;
+overflow:hidden !important;
+clip:rect(0,0,0,0) !important;
+white-space:nowrap !important;
+border:0 !important;
+}
+
+.topnav{
+max-width:1100px;
+margin:0 auto 14px;
+font-size:16px;
+}
+.topnav a{
+color:#1565c0;
+text-decoration:none;
+font-weight:bold;
+}
+.topnav a:hover{ text-decoration:underline; }
+
+h1{
+text-align:center;
+color:#1565c0;
+margin-bottom:8px;
+font-size:clamp(1.6rem,4vw,2.4rem);
+}
+
+.subtitle{
+text-align:center;
+font-size:18px;
+max-width:760px;
+margin:0 auto 18px;
+}
+
+.wrap{
+max-width:1100px;
+margin:0 auto;
+}
+
+.example-box{
+max-width:760px;
+margin:0 auto 26px;
+background:#fff8e6;
+border:1px solid #f0d68a;
+border-radius:12px;
+padding:14px 18px;
+font-size:15px;
+color:#5a4a12;
+}
+.example-box strong{ color:#8a6d00; }
+
+.board{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:16px;
+margin-bottom:8px;
+}
+
+.node{
+appearance:none;
+border:2px solid #1565c0;
+background:#ffffff;
+color:#15263c;
+border-radius:999px;
+padding:18px 22px;
+min-width:150px;
+max-width:190px;
+font-size:15px;
+font-weight:700;
+text-align:center;
+cursor:pointer;
+box-shadow:0 6px 14px rgba(21,38,60,0.08);
+transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.node:hover{ transform:translateY(-3px); box-shadow:0 10px 20px rgba(21,38,60,0.14); }
+.node:focus-visible{ outline:3px solid #ffb703; outline-offset:2px; }
+
+.node.is-cause{
+background:#1565c0;
+border-color:#1565c0;
+color:#ffffff;
+}
+.node.is-effect{
+background:#0f9d58;
+border-color:#0f9d58;
+color:#ffffff;
+}
+.node.is-disabled{
+opacity:0.55;
+cursor:default;
+transform:none;
+box-shadow:0 6px 14px rgba(21,38,60,0.08);
+}
+
+.status-row{
+max-width:760px;
+margin:18px auto 0;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+font-size:15px;
+color:#3a4b5c;
+}
+.status-row .chip{
+display:inline-flex;
+align-items:center;
+gap:6px;
+padding:4px 12px;
+border-radius:999px;
+font-weight:700;
+font-size:13px;
+}
+.chip.cause{ background:rgba(21,101,192,0.12); color:#1565c0; }
+.chip.effect{ background:rgba(15,157,88,0.12); color:#0f9d58; }
+.chip.arrow{ color:#5a6b7c; font-weight:900; }
+
+.reset-link{
+background:none;
+border:none;
+color:#1565c0;
+font-weight:700;
+text-decoration:underline;
+cursor:pointer;
+font-size:14px;
+padding:0;
+}
+
+.answer-card{
+max-width:760px;
+margin:20px auto 0;
+background:#ffffff;
+border:1px solid #d7e2ef;
+border-radius:14px;
+padding:22px 24px;
+box-shadow:0 10px 26px rgba(21,38,60,0.08);
+}
+.answer-card h2{
+margin:0 0 4px;
+font-size:19px;
+color:#15263c;
+}
+.answer-card .prompt-line{
+font-size:15px;
+color:#3a4b5c;
+margin-bottom:14px;
+}
+.answer-card .prompt-line b.cause-text{ color:#1565c0; }
+.answer-card .prompt-line b.effect-text{ color:#0f9d58; }
+
+textarea#linkAnswer{
+width:100%;
+box-sizing:border-box;
+font-family:inherit;
+font-size:15px;
+padding:12px;
+border:1px solid #c7d4e2;
+border-radius:10px;
+resize:vertical;
+min-height:90px;
+}
+
+.answer-actions{
+margin-top:12px;
+display:flex;
+align-items:center;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.btn{
+appearance:none;
+border:none;
+border-radius:10px;
+padding:11px 20px;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+color:#fff;
+background:#1565c0;
+transition:transform 0.15s ease, opacity 0.15s ease;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:disabled{ opacity:0.5; cursor:default; transform:none; }
+.btn.secondary{ background:#5a6b7c; }
+.btn.ghost{ background:transparent; color:#1565c0; border:2px solid #1565c0; padding:9px 18px; }
+
+.hint{ font-size:13px; color:#647587; }
+
+.feedback{
+margin-top:16px;
+border-top:1px dashed #d7e2ef;
+padding-top:14px;
+}
+.feedback .mark-badge{
+display:inline-block;
+background:#1565c0;
+color:#fff;
+font-weight:800;
+padding:6px 14px;
+border-radius:999px;
+font-size:14px;
+margin-bottom:10px;
+}
+.feedback p{ margin:8px 0; font-size:14.5px; }
+.feedback p strong{ color:#15263c; }
+.feedback.is-error{ color:#8a1f1f; }
+
+.log-section{
+max-width:760px;
+margin:34px auto 0;
+}
+.log-header{
+display:flex;
+align-items:baseline;
+justify-content:space-between;
+gap:10px;
+margin-bottom:10px;
+}
+.log-header h2{ font-size:18px; color:#15263c; margin:0; }
+.log-count{ font-size:14px; font-weight:700; color:#1565c0; }
+
+.log-item{
+background:#ffffff;
+border:1px solid #d7e2ef;
+border-radius:12px;
+padding:14px 18px;
+margin-bottom:12px;
+box-shadow:0 4px 12px rgba(21,38,60,0.06);
+}
+.log-item .log-pair{
+font-weight:800;
+font-size:14.5px;
+margin-bottom:4px;
+}
+.log-item .log-pair .cause-text{ color:#1565c0; }
+.log-item .log-pair .effect-text{ color:#0f9d58; }
+.log-item .log-answer{ font-size:14px; color:#3a4b5c; font-style:italic; margin-bottom:6px; }
+.log-item .log-mark{ font-size:13px; font-weight:700; color:#1565c0; }
+
+.empty-log{
+text-align:center;
+color:#8393a3;
+font-size:14px;
+padding:16px 0;
+}
+
+@media (max-width:600px){
+  .node{ min-width:120px; padding:14px 16px; font-size:14px; }
+  .answer-card{ padding:18px 16px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topnav"><a href="/geography/games">&larr; Back to Interactive KS3 Geography Games</a></div>
+
+<div class="wrap">
+  <h1>Tropical Storm: Link It Up</h1>
+  <p class="subtitle">In pairs, make as many links between the characteristics and impacts as you can. Tap a <strong>cause</strong> circle, then tap the <strong>impact</strong> circle it leads to, and explain the link.</p>
+
+  <div class="example-box">
+    <strong>Example:</strong> Education &rarr; Number of injuries/deaths &mdash; &ldquo;Better education may lead to fewer deaths because people understand storm warnings and know how to respond safely.&rdquo;
+  </div>
+
+  <div class="board" id="board" role="group" aria-label="Characteristics and impacts — tap two to link them"></div>
+
+  <div class="status-row" id="statusRow"></div>
+
+  <div class="answer-card" id="answerCard" style="display:none;">
+    <h2>Explain your link</h2>
+    <p class="prompt-line" id="promptLine"></p>
+    <textarea id="linkAnswer" rows="4" placeholder="e.g. ...may lead to... because..."></textarea>
+    <div class="answer-actions">
+      <button type="button" class="btn" id="checkBtn">Check my link &rarr;</button>
+      <button type="button" class="btn ghost" id="cancelBtn">Choose different circles</button>
+      <span class="hint" id="lengthHint"></span>
+    </div>
+    <div id="feedbackMount"></div>
+  </div>
+
+  <div class="log-section">
+    <div class="log-header">
+      <h2>Links you&rsquo;ve made</h2>
+      <span class="log-count" id="logCount">0 links</span>
+    </div>
+    <div id="logList"><div class="empty-log">Your checked links will appear here as you make them.</div></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var NODES = [
+    'Category of storm',
+    'Wealth of the country',
+    'Warning systems',
+    'Education',
+    'Shape of the land',
+    'Building design',
+    'Emergency services',
+    'Frequency of tropical storms',
+    'Damage to transport links',
+    'Damage to buildings',
+    'Number of injuries/deaths'
+  ];
+
+  var board = document.getElementById('board');
+  var statusRow = document.getElementById('statusRow');
+  var answerCard = document.getElementById('answerCard');
+  var promptLine = document.getElementById('promptLine');
+  var linkAnswer = document.getElementById('linkAnswer');
+  var checkBtn = document.getElementById('checkBtn');
+  var cancelBtn = document.getElementById('cancelBtn');
+  var lengthHint = document.getElementById('lengthHint');
+  var feedbackMount = document.getElementById('feedbackMount');
+  var logList = document.getElementById('logList');
+  var logCount = document.getElementById('logCount');
+
+  var cause = null;
+  var effect = null;
+  var linksMade = 0;
+  var nodeButtons = {};
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function buildBoard() {
+    NODES.forEach(function (label) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'node';
+      btn.textContent = label;
+      btn.addEventListener('click', function () { onNodeClick(label, btn); });
+      board.appendChild(btn);
+      nodeButtons[label] = btn;
+    });
+  }
+
+  function onNodeClick(label) {
+    if (cause === label) {
+      // tapping the selected cause again cancels it
+      cause = null;
+      refreshBoardState();
+      return;
+    }
+    if (effect === label) {
+      effect = null;
+      refreshBoardState();
+      return;
+    }
+    if (!cause) {
+      cause = label;
+    } else if (!effect) {
+      effect = label;
+    }
+    // if both already chosen, ignore further taps until reset
+    refreshBoardState();
+  }
+
+  function refreshBoardState() {
+    NODES.forEach(function (label) {
+      var btn = nodeButtons[label];
+      btn.classList.remove('is-cause', 'is-effect', 'is-disabled');
+      if (label === cause) btn.classList.add('is-cause');
+      else if (label === effect) btn.classList.add('is-effect');
+      else if (cause && effect) btn.classList.add('is-disabled');
+    });
+
+    renderStatusRow();
+
+    if (cause && effect) {
+      showAnswerCard();
+    } else {
+      answerCard.style.display = 'none';
+    }
+  }
+
+  function renderStatusRow() {
+    if (!cause && !effect) {
+      statusRow.innerHTML = '<span class="hint">Tap a circle to start a link.</span>';
+      return;
+    }
+    var html = '';
+    html += '<span class="chip cause">' + escapeHtml(cause || 'choose a cause') + '</span>';
+    html += '<span class="chip arrow">&rarr;</span>';
+    html += '<span class="chip effect">' + escapeHtml(effect || 'choose an impact') + '</span>';
+    if (cause || effect) {
+      html += '<button type="button" class="reset-link" id="clearPairBtn">Clear</button>';
+    }
+    statusRow.innerHTML = html;
+    var clearBtn = document.getElementById('clearPairBtn');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        cause = null;
+        effect = null;
+        refreshBoardState();
+      });
+    }
+  }
+
+  function showAnswerCard() {
+    promptLine.innerHTML = 'How does <b class="cause-text">' + escapeHtml(cause) + '</b> connect to <b class="effect-text">' + escapeHtml(effect) + '</b>? Finish the sentence: &ldquo;' + escapeHtml(cause) + ' may lead to ' + escapeHtml(effect) + ' because&hellip;&rdquo;';
+    linkAnswer.value = '';
+    feedbackMount.innerHTML = '';
+    checkBtn.disabled = false;
+    checkBtn.textContent = 'Check my link →';
+    lengthHint.textContent = '';
+    answerCard.style.display = 'block';
+    answerCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    linkAnswer.focus();
+  }
+
+  cancelBtn.addEventListener('click', function () {
+    cause = null;
+    effect = null;
+    refreshBoardState();
+  });
+
+  checkBtn.addEventListener('click', function () {
+    var answer = linkAnswer.value.trim();
+    if (answer.length < 10) {
+      lengthHint.textContent = 'Write a little more — explain the "because..." part.';
+      linkAnswer.focus();
+      return;
+    }
+    lengthHint.textContent = '';
+    submitLink(cause, effect, answer);
+  });
+
+  function submitLink(causeLabel, effectLabel, answerText) {
+    checkBtn.disabled = true;
+    checkBtn.textContent = 'Checking…';
+    feedbackMount.innerHTML = '<p class="hint" role="status">Checking your link — this usually takes a few seconds…</p>';
+
+    var question = 'A KS3 geography student is linking a characteristic or impact of a tropical storm to another one. ' +
+      'They chose "' + causeLabel + '" as the cause and "' + effectLabel + '" as the impact/effect it leads to, ' +
+      'and wrote a sentence explaining the connection.';
+    var markingGuidance = 'Award 1 mark for a plausible, sensible connection between the two ideas (it does not need to be the only correct answer — several links between these cards can be valid). ' +
+      'Award a second mark for a clear explanation of *why* or *how* one leads to the other, in the student\'s own words. ' +
+      'This is a Year 7-9 (KS3) class activity, not an exam — keep all feedback short, warm and encouraging, in simple language with no exam jargon. 1-2 short sentences per section is plenty.';
+
+    fetch('/api/mark-ppq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: question,
+        maxMark: 2,
+        markingGuidance: markingGuidance,
+        studentAnswer: answerText
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error((data && data.error) || 'Checking failed.');
+          return data;
+        });
+      })
+      .then(function (data) {
+        renderFeedback(causeLabel, effectLabel, answerText, data.feedback || {});
+      })
+      .catch(function (err) {
+        feedbackMount.innerHTML =
+          '<div class="feedback is-error"><strong>Sorry, that didn’t go through.</strong> ' +
+          escapeHtml(err.message || 'Please try again.') + '</div>' +
+          '<div class="answer-actions"><button type="button" class="btn secondary" id="retryBtn">Try again</button></div>';
+        var retryBtn = document.getElementById('retryBtn');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', function () { submitLink(causeLabel, effectLabel, answerText); });
+        }
+      })
+      .finally(function () {
+        checkBtn.disabled = false;
+        checkBtn.textContent = 'Check my link →';
+      });
+  }
+
+  function renderFeedback(causeLabel, effectLabel, answerText, feedback) {
+    var markLine = feedback.markAwarded ? escapeHtml(feedback.markAwarded) : '— / 2';
+
+    var html = '<div class="feedback">';
+    html += '<span class="mark-badge">' + markLine + '</span>';
+    if (feedback.whyThisMark) html += '<p><strong>Feedback</strong><br>' + escapeHtml(feedback.whyThisMark) + '</p>';
+    if (feedback.whatWasDoneWell) html += '<p><strong>What was good</strong><br>' + escapeHtml(feedback.whatWasDoneWell) + '</p>';
+    if (feedback.whatIsMissing) html += '<p><strong>How to improve it</strong><br>' + escapeHtml(feedback.whatIsMissing) + '</p>';
+    html += '</div>';
+    html += '<div class="answer-actions" style="margin-top:14px;">';
+    html += '<button type="button" class="btn" id="nextLinkBtn">Make another link →</button>';
+    html += '</div>';
+    feedbackMount.innerHTML = html;
+
+    document.getElementById('nextLinkBtn').addEventListener('click', function () {
+      cause = null;
+      effect = null;
+      refreshBoardState();
+    });
+
+    addToLog(causeLabel, effectLabel, answerText, markLine);
+  }
+
+  function addToLog(causeLabel, effectLabel, answerText, markLine) {
+    linksMade += 1;
+    logCount.textContent = linksMade + (linksMade === 1 ? ' link' : ' links');
+
+    if (linksMade === 1) logList.innerHTML = '';
+
+    var item = document.createElement('div');
+    item.className = 'log-item';
+    item.innerHTML =
+      '<div class="log-pair"><span class="cause-text">' + escapeHtml(causeLabel) + '</span> &rarr; <span class="effect-text">' + escapeHtml(effectLabel) + '</span></div>' +
+      '<div class="log-answer">&ldquo;' + escapeHtml(answerText) + '&rdquo;</div>' +
+      '<div class="log-mark">' + escapeHtml(markLine) + '</div>';
+    logList.insertBefore(item, logList.firstChild);
+  }
+
+  buildBoard();
+  refreshBoardState();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
