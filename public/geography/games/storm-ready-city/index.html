@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Storm-Ready City — KS3 Geography Games — SBL</title>
+<meta name="description" content="KS3 Geography game: how can we reduce the impacts of tropical storms? Sort 12 strategies into Prediction, Preparation and Protection, spend a city budget, survive a storm, then try again with only $10 million.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c;
+    --deep: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --line: rgba(5, 43, 65, 0.13);
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --pred: #2563eb;  --pred-bg: #e0ebff;
+    --prep: #d97706;  --prep-bg: #fff1dc;
+    --prot: #7c3aed;  --prot-bg: #efe6ff;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top right, rgba(0,184,176,0.14), transparent 35%), linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink); min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, textarea { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1200px; margin: 24px auto 60px; padding: 0 18px; }
+  .intro { text-align: center; margin-bottom: 14px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 780px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  .steps { display: flex; justify-content: center; gap: 8px; margin: 14px 0 18px; flex-wrap: wrap; }
+  .step { padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 750; background: rgba(255,255,255,0.75); border: 1px solid var(--line); color: var(--muted); }
+  .step.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.3); }
+
+  .screen { display: none; }
+  .screen.on { display: block; }
+  .panel { background: rgba(255,255,255,0.95); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .panel h2 { font-size: 1.1rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+  .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.4em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+
+  /* ROUND 1 */
+  .ps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .p-def { border-radius: 14px; padding: 10px 12px; font-size: 0.84rem; line-height: 1.45; border: 2px solid; }
+  .p-def b { display: block; font-size: 0.98rem; }
+  .p-def.pred { background: var(--pred-bg); border-color: var(--pred); } .p-def.pred b { color: var(--pred); }
+  .p-def.prep { background: var(--prep-bg); border-color: var(--prep); } .p-def.prep b { color: var(--prep); }
+  .p-def.prot { background: var(--prot-bg); border-color: var(--prot); } .p-def.prot b { color: var(--prot); }
+
+  #tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; min-height: 60px; padding: 12px; border-radius: 14px; background: rgba(255,255,255,0.8); border: 1px dashed var(--line); }
+  .tray-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 8px; }
+  .card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.8rem; line-height: 1.4; color: var(--muted); box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .card b { display: block; color: var(--ink); font-size: 0.9rem; margin-bottom: 2px; }
+  .card .emo { font-size: 1.1rem; margin-right: 4px; }
+  .card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .card.dragging { cursor: grabbing; opacity: 0.95; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .card.correct { border-color: var(--green); background: var(--green-soft); }
+  .card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .card .fb { display: none; margin-top: 5px; font-size: 0.76rem; font-weight: 700; }
+  .card.incorrect .fb { display: block; color: #7f1d1d; }
+  .card.correct .fb.alt { display: block; color: var(--teal-dark); }
+
+  .zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  .zone { border-radius: var(--radius); padding: 12px; min-height: 240px; border: 3px dashed; background: rgba(255,255,255,0.9); cursor: pointer; }
+  .zone.hover { background: #f0fbfa; }
+  .zone h3 { font-size: 1.05rem; font-weight: 900; display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .zone.pred { border-color: var(--pred); } .zone.pred h3 { color: var(--pred); }
+  .zone.prep { border-color: var(--prep); } .zone.prep h3 { color: var(--prep); }
+  .zone.prot { border-color: var(--prot); } .zone.prot h3 { color: var(--prot); }
+  .zone-cards { display: grid; gap: 7px; min-height: 60px; }
+
+  /* ROUND 2 */
+  .budget-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0; }
+  .bchoice { text-align: left; padding: 16px; border-radius: 16px; border: 2px solid var(--line); background: #fff; cursor: pointer; color: var(--ink); }
+  .bchoice:hover { border-color: var(--teal); }
+  .bchoice .amt { font-size: 2rem; font-weight: 900; color: var(--navy); }
+  .bchoice p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+  .bchoice .done { font-size: 0.78rem; font-weight: 850; color: var(--green); }
+
+  .bar-wrap { position: sticky; top: 8px; z-index: 20; background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; box-shadow: 0 8px 20px rgba(0,25,45,0.08); margin-bottom: 12px; }
+  .bar-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; font-weight: 850; }
+  .bar-top .left { font-size: 1.3rem; color: var(--navy); }
+  .bar { height: 14px; border-radius: 99px; background: #e8eff2; overflow: hidden; margin-top: 8px; display: flex; }
+  .bar div { height: 100%; transition: width .3s ease; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); margin-top: 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+
+  .strats { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .strat { text-align: left; border: 2px solid var(--line); border-radius: 14px; background: #fff; padding: 12px; cursor: pointer; color: var(--ink); display: flex; flex-direction: column; gap: 6px; position: relative; }
+  .strat:hover:not(:disabled) { border-color: var(--teal); }
+  .strat.sel { border-color: var(--teal-dark); background: #eefaf9; box-shadow: 0 0 0 3px rgba(0,184,176,0.2); }
+  .strat.sel::after { content: "\2713 Funded"; position: absolute; top: 10px; right: 12px; font-size: 0.72rem; font-weight: 900; color: var(--teal-dark); }
+  .strat:disabled { opacity: 0.45; cursor: not-allowed; }
+  .strat .t { font-weight: 850; font-size: 0.95rem; padding-right: 60px; }
+  .strat .d { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+  .strat .meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+  .strat .cost { font-weight: 900; color: var(--navy); }
+  .ptag { font-size: 0.68rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+  .ptag.pred { background: var(--pred-bg); color: var(--pred); }
+  .ptag.prep { background: var(--prep-bg); color: var(--prep); }
+  .ptag.prot { background: var(--prot-bg); color: var(--prot); }
+  .toodear { font-size: 0.74rem; font-weight: 800; color: var(--red); }
+
+  /* storm */
+  .storm { text-align: center; padding: 22px; border-radius: 18px; background: linear-gradient(135deg, #0b2742, #174a73); color: #fff; margin-bottom: 14px; }
+  .storm .big { font-size: 3rem; line-height: 1; }
+  .storm h2 { color: #fff; font-size: 1.4rem; margin: 8px 0 4px; }
+  .storm p { color: rgba(255,255,255,0.85); max-width: 680px; margin: 0 auto; line-height: 1.5; font-size: 0.94rem; }
+  .meters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0 14px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+  .meter .k { font-size: 0.72rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .meter .v { font-size: 1.7rem; font-weight: 900; color: var(--navy); }
+  .meter .b { height: 8px; border-radius: 99px; background: #e8eff2; overflow: hidden; margin-top: 6px; }
+  .meter .b div { height: 100%; border-radius: 99px; }
+  .news { list-style: none; display: grid; gap: 8px; }
+  .news li { padding: 10px 12px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-size: 0.9rem; line-height: 1.5; }
+  .news li.good { border-left: 5px solid var(--green); }
+  .news li.bad { border-left: 5px solid var(--red); }
+  .news li.mid { border-left: 5px solid var(--amber); }
+  table.cmp { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: #fff; border-radius: 12px; overflow: hidden; margin-top: 8px; }
+  table.cmp th, table.cmp td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: left; vertical-align: top; }
+  table.cmp th { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: #f3f8fa; }
+
+  /* ROUND 3 */
+  .q3 { padding: 14px; border-radius: 14px; background: #fff; border: 2px solid var(--line); margin-bottom: 12px; }
+  .q3 h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; }
+  .q3 .opt { display: block; width: 100%; text-align: left; padding: 10px 12px; margin-top: 6px; border-radius: 10px; border: 2px solid var(--line); background: #f8fafc; cursor: pointer; font-size: 0.9rem; color: var(--ink); line-height: 1.4; }
+  .q3 .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .q3 .opt.right { border-color: var(--green); background: var(--green-soft); }
+  .q3 .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .q3 .opt:disabled { cursor: default; }
+  .q3 .fb3 { display: none; margin-top: 8px; font-size: 0.88rem; line-height: 1.5; color: var(--teal-dark); font-weight: 650; }
+  textarea.write { width: 100%; min-height: 130px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.2); font-size: 0.93rem; line-height: 1.5; resize: vertical; margin-top: 8px; }
+  .note { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+
+  /* BREAKING NEWS */
+  .bn-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(3,20,36,0.72); display: none; align-items: center; justify-content: center; padding: 16px; }
+  .bn-overlay.on { display: flex; }
+  .bn { width: 100%; max-width: 640px; max-height: calc(100vh - 32px); overflow-y: auto; background: #fff; border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); animation: bnIn .35s ease; }
+  @keyframes bnIn { from { transform: translateY(24px) scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
+  .bn-head { display: flex; align-items: stretch; border-radius: 18px 18px 0 0; overflow: hidden; }
+  .bn-head .bk { background: #1e3a8a; color: #fff; font-weight: 900; font-size: 1.35rem; letter-spacing: 0.02em; padding: 12px 16px; line-height: 1; display: flex; align-items: center; }
+  .bn-head .live { background: #dc2626; color: #fff; font-weight: 900; font-style: italic; font-size: 1.35rem; padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+  .bn-head .live::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; animation: blink 1s infinite; }
+  @keyframes blink { 50% { opacity: 0.2; } }
+  .bn-head .when { flex: 1; background: #0f172a; color: #cbd5e1; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: flex-end; padding: 0 14px; text-align: right; }
+  .bn-body { padding: 18px; }
+  .bn-body .headline { font-size: 1.25rem; font-weight: 900; color: var(--ink); line-height: 1.3; }
+  .bn-body .ask { font-size: 1.02rem; margin-top: 10px; color: var(--muted); font-weight: 600; }
+  .bn-yn { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .bn-yn button { padding: 13px; border-radius: 12px; font-weight: 850; font-size: 0.95rem; cursor: pointer; border: 2px solid var(--line); background: #f8fafc; color: var(--ink); }
+  .bn-yn button:hover:not(:disabled) { border-color: var(--teal); }
+  .bn-yn button.picked { border-color: var(--navy); background: #e8f0f7; }
+  .bn-yn button:disabled { cursor: default; }
+  .bn-verdict { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-size: 0.93rem; line-height: 1.55; }
+  .bn-verdict.good { background: var(--green-soft); border-left: 5px solid var(--green); }
+  .bn-verdict.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .bn-verdict .you { display: block; font-weight: 850; margin-bottom: 4px; }
+  .bn-verdict .tip { display: block; margin-top: 6px; color: var(--teal-dark); font-weight: 700; }
+  .news li.breaking { border-left: 5px solid #1e3a8a; background: #f1f5ff; }
+  .news li.breaking .tag { display: inline-block; font-size: 0.66rem; font-weight: 900; letter-spacing: 0.06em; color: #fff; background: #dc2626; padding: 2px 7px; border-radius: 4px; margin-right: 6px; vertical-align: 1px; }
+
+  @media (max-width: 860px) {
+    .zones, .ps { grid-template-columns: 1fr; }
+    .meters { grid-template-columns: 1fr 1fr; }
+    .budget-pick { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) { main { padding: 0 12px; } .panel { padding: 14px; } }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games#ks3" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Storm-Ready City</span></div>
+    <span></span>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">KS3 &middot; Tropical storms</span>
+    <h1>&#127744; Storm-Ready City</h1>
+    <p>You are the city&rsquo;s emergency planning team. A tropical storm season is coming. <strong>How can we reduce the impacts of tropical storms?</strong></p>
+  </div>
+  <div class="steps">
+    <span class="step active" data-s="1">1 &middot; Sort the 3 P&rsquo;s</span>
+    <span class="step" data-s="2">2 &middot; Spend the budget</span>
+    <span class="step" data-s="3">3 &middot; How does it reduce impacts?</span>
+  </div>
+
+  <!-- ROUND 1 -->
+  <section class="screen on" id="r1">
+    <div class="panel">
+      <h2>Round 1: Prediction, Preparation or Protection?</h2>
+      <div class="ps">
+        <div class="p-def pred"><b>&#128225; Prediction</b>Forecasting and tracking the storm, so people know what is coming and when.</div>
+        <div class="p-def prep"><b>&#127890; Preparation</b>Getting people and communities ready before the storm arrives.</div>
+        <div class="p-def prot"><b>&#129521; Protection</b>Physical measures designed to reduce damage.</div>
+      </div>
+      <p class="how">Drag each of the city&rsquo;s 12 plans into the right P &mdash; or tap a plan, then tap a box.</p>
+      <div id="tray"></div>
+      <div class="zones">
+        <div class="zone pred" data-cat="pred" role="button" tabindex="0" aria-label="Prediction"><h3>&#128225; Prediction</h3><div class="zone-cards"></div></div>
+        <div class="zone prep" data-cat="prep" role="button" tabindex="0" aria-label="Preparation"><h3>&#127890; Preparation</h3><div class="zone-cards"></div></div>
+        <div class="zone prot" data-cat="prot" role="button" tabindex="0" aria-label="Protection"><h3>&#129521; Protection</h3><div class="zone-cards"></div></div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="check1" type="button">Check answers</button>
+        <button class="btn primary" id="to2" type="button" style="display:none">Round 2: spend the budget &rarr;</button>
+      </div>
+      <div class="msg" id="msg1" role="status"></div>
+    </div>
+  </section>
+
+  <!-- ROUND 2 -->
+  <section class="screen" id="r2">
+    <div class="panel" id="pickPanel">
+      <h2>Round 2: How much money does your city have?</h2>
+      <p class="how">You cannot afford everything. Choose a budget, fund your plans, then the storm arrives. <b>Play both budgets</b> to compare.</p>
+      <div class="budget-pick" id="budgetPick"></div>
+    </div>
+    <div id="planPanel" style="display:none">
+      <div class="bar-wrap">
+        <div class="bar-top"><span>Budget: <span id="bTotal"></span></span><span class="left" id="bLeft"></span></div>
+        <div class="bar" id="bar"></div>
+        <div class="legend"><span><i style="background:var(--pred)"></i>Prediction</span><span><i style="background:var(--prep)"></i>Preparation</span><span><i style="background:var(--prot)"></i>Protection</span></div>
+      </div>
+      <div class="strats" id="strats"></div>
+      <div class="actions">
+        <button class="btn ghost" id="backBudget" type="button">Change budget</button>
+        <button class="btn primary" id="stormBtn" type="button">&#127744; The storm arrives &rarr;</button>
+      </div>
+      <div class="msg" id="msg2"></div>
+    </div>
+    <div id="stormPanel" style="display:none">
+      <div class="storm">
+        <div class="big">&#127744;</div>
+        <h2 id="stormHead">Category 4 tropical storm hits the city</h2>
+        <p id="stormSub">Winds of over 200 km/h, 400 mm of rain in two days and a 4 m storm surge along the coast.</p>
+      </div>
+      <div class="panel">
+        <h2 id="resTitle"></h2>
+        <div class="meters" id="meters"></div>
+        <ul class="news" id="news"></ul>
+        <div id="compare" style="display:none;margin-top:14px">
+          <h2>&#9878;&#65039; $50 million vs $10 million</h2>
+          <div style="overflow-x:auto"><table class="cmp" id="cmpTable"></table></div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="replay" type="button"></button>
+          <button class="btn primary" id="to3" type="button">Round 3: how does this reduce impacts? &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUND 3 -->
+  <section class="screen" id="r3">
+    <div class="panel">
+      <h2>Round 3: How does each P reduce the impacts?</h2>
+      <div id="q3"></div>
+      <div class="q3">
+        <h3>&#9997;&#65039; Your judgement</h3>
+        <p style="font-size:0.92rem;line-height:1.5">A poor city has <b>only $10 million</b>. Which P should it spend most on, and why? Use examples from the game.</p>
+        <textarea class="write" aria-label="Your answer" placeholder="I would spend most on ... because ... For example ... However ..."></textarea>
+        <p class="note">Just for your own thinking &mdash; this isn&rsquo;t saved or marked.</p>
+      </div>
+      <div class="actions"><button class="btn ghost" id="restart" type="button">Play again</button></div>
+    </div>
+  </section>
+</main>
+
+<div class="bn-overlay" id="bnOverlay" role="dialog" aria-modal="true" aria-labelledby="bnHeadline">
+  <div class="bn">
+    <div class="bn-head"><span class="bk">BREAKING NEWS</span><span class="live">LIVE</span><span class="when" id="bnWhen"></span></div>
+    <div class="bn-body">
+      <div class="headline" id="bnHeadline"></div>
+      <div class="ask">Does your evacuation plan still work?</div>
+      <div class="bn-yn" id="bnYN">
+        <button type="button" data-a="1">&#128077; Yes, it still works</button>
+        <button type="button" data-a="0">&#9888;&#65039; No, it has a weakness</button>
+      </div>
+      <div class="bn-verdict" id="bnVerdict"></div>
+      <div class="actions" id="bnActions" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* The 12 plans from the lesson information sheets.
+     cat = main P; also = other P accepted (with explanation).
+     cost in $ millions. Effects (0–5): lives, prop(erty), fair (helps the poorest), rec(overy). */
+  var S = [
+    { id: 'fore', emo: '📡', t: 'Improve weather forecasting equipment', d: 'New weather stations, radar and computer technology to predict the storm’s path and strength more accurately.', cat: 'pred', cost: 12, lives: 3, prop: 1, fair: 1, rec: 0,
+      why: 'It forecasts and tracks the storm — that is prediction.' },
+    { id: 'warn', emo: '📱', t: 'Mobile-phone early-warning system', d: 'Emergency alerts sent to people’s phones, telling them when to evacuate and where to go.', cat: 'prep', also: 'pred', cost: 3, lives: 4, prop: 1, fair: 1, rec: 0,
+      why: 'Warning systems get people ready to act — preparation (it relies on prediction to know when to send the alert).', altNote: 'Accepted — warnings link prediction and preparation.' },
+    { id: 'wall', emo: '🧱', t: 'Build a coastal sea wall', d: 'A concrete wall along the most densely populated coastline to reduce flooding from waves and storm surge. It cannot protect the whole coast.', cat: 'prot', cost: 30, lives: 3, prop: 5, fair: 1, rec: 1,
+      why: 'A physical structure that reduces damage — protection.' },
+    { id: 'schl', emo: '🏫', t: 'Strengthen 20 schools to use as shelters', d: 'Stronger roofs, windows and structures so schools can be opened as emergency shelters.', cat: 'prot', also: 'prep', cost: 8, lives: 3, prop: 1, fair: 2, rec: 1,
+      why: 'Strengthening buildings is protection (and preparing shelters is also preparation).', altNote: 'Accepted — strengthening is protection; preparing shelters is preparation.' },
+    { id: 'evac', emo: '🧭', t: 'Create evacuation routes and signs', d: 'Marked routes and maps directing people away from low-lying coastal areas to higher ground.', cat: 'prep', cost: 2, lives: 3, prop: 0, fair: 2, rec: 0,
+      why: 'Evacuation routes get people ready to move safely — preparation.' },
+    { id: 'edu', emo: '📣', t: 'Public education campaign', d: 'Schools, TV, social media and community groups teach people what warnings mean and what to do.', cat: 'prep', cost: 1, lives: 3, prop: 1, fair: 2, rec: 1,
+      why: 'Teaching people what to do before a storm is preparation.' },
+    { id: 'home', emo: '🏠', t: 'Strengthen homes in vulnerable communities', d: 'Stronger roofs, shutters and materials for weaker homes in the poorest neighbourhoods.', cat: 'prot', cost: 15, lives: 2, prop: 4, fair: 3, rec: 2,
+      why: 'Stronger buildings reduce physical damage — protection.' },
+    { id: 'shel', emo: '🏛️', t: 'Construct raised emergency shelters', d: 'Purpose-built reinforced shelters above flood level in vulnerable coastal communities.', cat: 'prot', also: 'prep', cost: 12, lives: 4, prop: 0, fair: 3, rec: 1,
+      why: 'Raised, reinforced buildings are protection (having shelters ready is also preparation).', altNote: 'Accepted — raised buildings are protection; shelters are also preparation.' },
+    { id: 'drain', emo: '🚰', t: 'Improve drainage', d: 'Larger drains, pumps and channels to remove rainwater from streets more quickly.', cat: 'prot', cost: 10, lives: 1, prop: 3, fair: 1, rec: 2,
+      why: 'Drains and pumps are physical measures that reduce flood damage — protection.' },
+    { id: 'supp', emo: '📦', t: 'Emergency food and water supplies', d: 'Stores of drinking water, food and medicine ready to distribute if communities are cut off.', cat: 'prep', cost: 3, lives: 2, prop: 0, fair: 2, rec: 4,
+      why: 'Stockpiling supplies before the storm is preparation.' },
+    { id: 'team', emo: '🚑', t: 'Train emergency-response teams', d: 'More firefighters, paramedics and rescue workers trained in flood rescue and first aid.', cat: 'prep', cost: 4, lives: 3, prop: 0, fair: 2, rec: 3,
+      why: 'Emergency services planning and training is preparation.' },
+    { id: 'relo', emo: '🚚', t: 'Relocate the highest-risk coastal community', d: 'Residents in the most exposed storm-surge zone are offered new homes inland on higher ground.', cat: 'prot', also: 'prep', cost: 25, lives: 3, prop: 3, fair: 1, rec: 2,
+      why: 'Moving people out of the danger zone protects them from the surge permanently. Some geographers call this a fourth P: planning.', altNote: 'Accepted — relocation is sometimes called a fourth P: planning.' }
+  ];
+  var P = { pred: 'Prediction', prep: 'Preparation', prot: 'Protection' };
+  var PC = { pred: 'var(--pred)', prep: 'var(--prep)', prot: 'var(--prot)' };
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function setStep(n) {
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' active' : ''); });
+    ['r1', 'r2', 'r3'].forEach(function (id, i) { $(id).classList.toggle('on', i === n - 1); });
+    window.scrollTo(0, 0);
+  }
+
+  /* ============ ROUND 1: SORT ============ */
+  var tray = $('tray'), selected = null;
+  function render1() {
+    tray.innerHTML = '';
+    document.querySelectorAll('#r1 .zone-cards').forEach(function (z) { z.innerHTML = ''; });
+    shuffle(S.map(function (_, i) { return i; })).forEach(function (i) {
+      var s = S[i], el = document.createElement('div');
+      el.className = 'card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = '<b><span class="emo" aria-hidden="true">' + s.emo + '</span>' + esc(s.t) + '</b>' + esc(s.d) + '<span class="fb"></span>';
+      tray.appendChild(el);
+    });
+    trayState();
+  }
+  function trayState() {
+    var e = tray.querySelector('.tray-empty'), n = tray.querySelectorAll('.card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'tray-empty'; e.textContent = 'All 12 plans sorted — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  function place(card, zone) { card.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zone-cards').appendChild(card); selected = null; trayState(); }
+  function select(card) { if (selected) selected.classList.remove('selected'); if (selected === card) { selected = null; return; } selected = card; card.classList.add('selected'); }
+  document.querySelectorAll('#r1 .zone').forEach(function (z) {
+    z.addEventListener('click', function (e) { if (e.target.closest('.card')) return; if (selected) place(selected, z); });
+    z.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && selected) { e.preventDefault(); place(selected, z); } });
+  });
+  document.addEventListener('keydown', function (e) { var c = e.target.closest && e.target.closest('#r1 .card'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(c); } });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('#r1 .card') : null; if (!c) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('#r1 .zone').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('#r1 .zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 50) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('#r1 .zone').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { select(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('#r1 .zone') : null;
+    if (z) place(c, z); else if (t && t.closest && t.closest('#tray')) { c.classList.remove('correct', 'incorrect'); tray.appendChild(c); trayState(); } else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  $('check1').addEventListener('click', function () {
+    var right = 0;
+    document.querySelectorAll('#r1 .zone').forEach(function (z) {
+      z.querySelectorAll('.card').forEach(function (el) {
+        var s = S[+el.dataset.i], cat = z.dataset.cat, ok = s.cat === cat || s.also === cat;
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        var fb = el.querySelector('.fb');
+        fb.className = 'fb' + (ok && s.also ? ' alt' : '');
+        fb.textContent = ok ? (s.also ? '✔ ' + s.altNote : '') : '✖ Not ' + P[cat] + '. Clue: ' + s.why;
+        if (ok) right++;
+      });
+    });
+    var left = tray.querySelectorAll('.card').length;
+    if (right === S.length) { $('msg1').className = 'msg ok'; $('msg1').textContent = '✅ All 12 sorted correctly!'; $('check1').style.display = 'none'; $('to2').style.display = ''; }
+    else if (left) { $('msg1').className = 'msg info'; $('msg1').textContent = left + ' plan(s) still to sort. ' + right + ' correct so far.'; }
+    else { $('msg1').className = 'msg no'; $('msg1').textContent = right + '/12 correct. Read the clues on the red cards and try again.'; }
+  });
+  $('to2').addEventListener('click', function () { showPick(); setStep(2); });
+
+  /* ============ ROUND 2: BUDGET ============ */
+  var BUDGETS = {
+    50: { name: 'A wealthier city', desc: 'A growing economy with money to invest in major projects.' },
+    10: { name: 'A poorer city', desc: 'Only $10 million. Sea walls, strengthening every home and sophisticated forecasting may be out of reach.' }
+  };
+  var budget = 50, picks = [], results = {};
+  function showPick() {
+    $('pickPanel').style.display = ''; $('planPanel').style.display = 'none'; $('stormPanel').style.display = 'none';
+    $('budgetPick').innerHTML = [50, 10].map(function (b) {
+      return '<button type="button" class="bchoice" data-b="' + b + '"><div class="amt">$' + b + ' million</div><b>' + BUDGETS[b].name + '</b><p>' + BUDGETS[b].desc + '</p>' +
+        (results[b] ? '<div class="done">✓ Played — score ' + results[b].overall + '/100</div>' : '') + '</button>';
+    }).join('');
+  }
+  $('budgetPick').addEventListener('click', function (e) {
+    var b = e.target.closest('.bchoice'); if (!b) return;
+    budget = +b.dataset.b; picks = []; runNews = []; midShown = false;
+    $('pickPanel').style.display = 'none'; $('planPanel').style.display = ''; $('msg2').textContent = '';
+    renderPlans(); window.scrollTo(0, 0);
+  });
+  function spent() { return picks.reduce(function (a, id) { return a + byId(id).cost; }, 0); }
+  function byId(id) { return S.filter(function (s) { return s.id === id; })[0]; }
+  function renderPlans() {
+    var left = budget - spent();
+    $('bTotal').textContent = '$' + budget + ' million';
+    $('bLeft').textContent = '$' + left + 'm left';
+    $('bar').innerHTML = ['pred', 'prep', 'prot'].map(function (c) {
+      var m = picks.filter(function (id) { return byId(id).cat === c; }).reduce(function (a, id) { return a + byId(id).cost; }, 0);
+      return '<div style="width:' + (m / budget * 100) + '%;background:' + PC[c] + '"></div>';
+    }).join('');
+    $('strats').innerHTML = S.map(function (s) {
+      var sel = picks.indexOf(s.id) > -1, afford = s.cost <= left;
+      return '<button type="button" class="strat' + (sel ? ' sel' : '') + '" data-id="' + s.id + '"' + (!sel && !afford ? ' disabled' : '') + '>' +
+        '<span class="t">' + s.emo + ' ' + esc(s.t) + '</span><span class="d">' + esc(s.d) + '</span>' +
+        '<span class="meta"><span class="ptag ' + s.cat + '">' + P[s.cat] + '</span><span class="cost">$' + s.cost + 'm</span></span>' +
+        (!sel && s.cost > budget ? '<span class="toodear">Costs more than the whole budget</span>' : '') + '</button>';
+    }).join('');
+    $('stormBtn').disabled = picks.length === 0;
+  }
+  $('strats').addEventListener('click', function (e) {
+    var b = e.target.closest('.strat'); if (!b || b.disabled) return;
+    var id = b.dataset.id, i = picks.indexOf(id);
+    if (i > -1) picks.splice(i, 1); else picks.push(id);
+    renderPlans();
+    if (!midShown && picks.length >= 2 && spent() >= budget * 0.4) { midShown = true; setTimeout(function () { showNews('mid', function () {}); }, 350); }
+  });
+  $('backBudget').addEventListener('click', showPick);
+
+  /* ---------- BREAKING NEWS scenarios ----------
+     Each checks the funded plan and returns whether it still works,
+     an explanation, a tip, and score changes (same units as plan effects). */
+  var NEWS = [
+    { id: 'trust', head: 'Some residents do not trust government warnings.',
+      check: function () {
+        if (has('edu')) return { ok: true, txt: 'Your public education campaign ran through schools, community groups and local leaders, so people heard the message from voices they trust. Most people left when told to.', fx: {} };
+        if (has('warn') || has('evac')) return { ok: false, txt: 'The phone alerts went out, but many residents ignored them and stayed at home. A warning only works if people believe it and know what to do.', tip: 'Fix: a public education campaign using trusted community voices.', fx: { lives: -3, fair: -1 } };
+        return { ok: false, txt: 'You have no warning or education plan, so even people who might have listened didn\u2019t hear anything.', tip: 'Fix: a warning system plus public education.', fx: { lives: -2 } };
+      } },
+    { id: 'roofs', head: 'The poorest neighbourhood contains many homes with lightweight roofs.',
+      check: function () {
+        if (has('home')) return { ok: true, txt: 'You strengthened homes in the most vulnerable communities, so those roofs have stronger fixings and shutters.', fx: {} };
+        if ((has('shel') || has('schl')) && (has('warn') || has('edu') || has('evac'))) return { ok: true, txt: 'Many lightweight roofs will be torn off, but families were told to leave for your strengthened shelters, so people are safe even if property is damaged.', tip: 'Property will still be lost: strengthening homes would reduce that.', fx: { prop: -1 } };
+        return { ok: false, txt: 'Lightweight roofs will be ripped off by 200 km/h winds. With nowhere strong to shelter, families in the poorest neighbourhood are the most at risk.', tip: 'Fix: strengthen homes, or build strong shelters and tell people to go there.', fx: { lives: -3, fair: -3, prop: -1 } };
+      } },
+    { id: 'surge', head: 'A Category 5 storm surge exceeds the height of your sea wall.', cat5: true,
+      check: function () {
+        if (has('wall') && (has('warn') || has('evac'))) return { ok: true, txt: 'The surge pours over the wall and floods the coast, but people had already evacuated along your routes. Buildings are damaged, lives are saved.', tip: 'Protection has limits; preparation is the back-up.', fx: { prop: -3 } };
+        if (has('wall')) return { ok: false, txt: 'People felt safe behind the wall and stayed at home. When the surge overtopped it, there was no warning or evacuation plan. A sea wall can give a false sense of security.', tip: 'Fix: never rely on protection alone. Add warnings and evacuation routes.', fx: { lives: -5, prop: -3 } };
+        if (has('evac') || has('relo') || has('shel')) return { ok: true, txt: 'You didn\u2019t rely on a wall. People in the surge zone had been moved, or had routes and shelters on higher ground.', fx: {} };
+        return { ok: false, txt: 'There is no wall, no evacuation route and no raised shelter. People in low-lying coastal areas have nowhere to go.', tip: 'Fix: evacuation routes to higher ground or raised shelters.', fx: { lives: -3 } };
+      } },
+    { id: 'centre', head: 'Your evacuation centre is located in a flood-risk area.',
+      check: function () {
+        if (has('shel')) return { ok: true, txt: 'Your purpose-built shelters are raised above expected flood levels, so people stay dry and safe even if the area floods.', fx: {} };
+        if (has('schl') && has('evac')) return { ok: false, txt: 'Some of your school shelters are in low-lying streets and start to flood. Your marked routes to higher ground let people move on, but it is dangerous and slow.', tip: 'Fix: check the hazard map, and use raised shelters above flood level.', fx: { lives: -1 } };
+        if (has('schl')) return { ok: false, txt: 'Some of your school shelters are in the flood zone. People who went there have to be rescued from the rising water.', tip: 'Fix: raised shelters, or evacuation routes to higher ground.', fx: { lives: -2, rec: -1 } };
+        if (has('evac')) return { ok: true, txt: 'Your routes and signs lead people away from low-lying areas to higher ground rather than to one centre.', fx: {} };
+        return { ok: false, txt: 'You have no safe evacuation centre or route, so people shelter wherever they can, often in flood-risk areas.', tip: 'Fix: raised shelters or evacuation routes to higher ground.', fx: { lives: -2, fair: -1 } };
+      } }
+  ];
+  var newsQueue = [], runNews = [], midShown = false, bnGuesses = [];
+  function nextNews() {
+    if (!newsQueue.length) newsQueue = shuffle(NEWS.slice());
+    return newsQueue.shift();
+  }
+  function showNews(stage, done) {
+    var n = nextNews(); runNews.push(n.id);
+    $('bnWhen').textContent = stage === 'mid' ? 'While you are planning\u2026' : '6 hours before landfall';
+    $('bnHeadline').textContent = n.head;
+    $('bnVerdict').style.display = 'none'; $('bnActions').style.display = 'none';
+    var btns = $('bnYN').querySelectorAll('button');
+    btns.forEach(function (b) { b.disabled = false; b.classList.remove('picked'); });
+    $('bnYN').onclick = function (e) {
+      var b = e.target.closest('button'); if (!b || b.disabled) return;
+      btns.forEach(function (x) { x.disabled = true; }); b.classList.add('picked');
+      var r = n.check(), said = b.dataset.a === '1', right = said === r.ok;
+      bnGuesses.push(right);
+      var v = $('bnVerdict'); v.className = 'bn-verdict ' + (r.ok ? 'good' : 'bad'); v.style.display = 'block';
+      v.innerHTML = '<span class="you">' + (right ? '\u2714 Good judgement: ' : '\u2716 Look again: ') + 'your plan ' + (r.ok ? 'still works.' : 'has a weakness.') + '</span>' + r.txt + (r.tip ? '<span class="tip">' + r.tip + '</span>' : '');
+      var a = $('bnActions'); a.style.display = 'flex';
+      a.innerHTML = stage === 'mid'
+        ? '<button type="button" class="btn primary" data-go="1">Back to my plan (you can still change it)</button>'
+        : '<button type="button" class="btn primary" data-go="1">See the storm report &rarr;</button>';
+      a.querySelector('button').onclick = function () { $('bnOverlay').classList.remove('on'); done(); };
+      a.querySelector('button').focus();
+    };
+    $('bnOverlay').classList.add('on');
+    btns[0].focus();
+  }
+
+  function clamp(v) { return Math.max(0, Math.min(100, Math.round(v))); }
+  function has(id) { return picks.indexOf(id) > -1; }
+  function evaluate() {
+    var sum = { lives: 0, prop: 0, fair: 0, rec: 0 };
+    picks.forEach(function (id) { var s = byId(id); sum.lives += s.lives; sum.prop += s.prop; sum.fair += s.fair; sum.rec += s.rec; });
+    var news = [];
+    // interactions between plans
+    if (has('warn') && !has('fore')) { sum.lives -= 1; news.push(['mid', '📱 Phone alerts went out, but without better forecasting the warning came late and the storm’s path was uncertain.']); }
+    if (has('warn') && has('fore')) { sum.lives += 2; news.push(['good', '📡📱 Accurate forecasts plus phone alerts gave people <b>two days</b> to act. Prediction gives time to act.']); }
+    if (has('evac') && (has('warn') || has('edu'))) { sum.lives += 2; news.push(['good', '🧭 People knew when to leave <i>and</i> which route to take, so evacuation was fast and orderly.']); }
+    else if (has('evac')) news.push(['mid', '🧭 Evacuation routes existed, but many people didn’t hear the warning in time to use them.']);
+    if ((has('shel') || has('schl')) && !has('warn') && !has('edu')) { sum.lives -= 1; news.push(['mid', '🏛️ Shelters were ready, but some people didn’t know where they were or when to go.']); }
+    if (has('wall')) news.push(['good', '🧱 The sea wall held back the storm surge along the city centre — but communities on the unprotected coast still flooded.']);
+    if (!has('wall') && !has('relo')) news.push(['bad', '🌊 The 4 m storm surge swept into low-lying coastal neighbourhoods with no defences.']);
+    if (has('relo')) news.push(['good', '🚚 The highest-risk coastal community had been moved inland, so nobody lived where the surge hit hardest. Some families missed their old neighbourhood and jobs by the sea.']);
+    if (has('home')) news.push(['good', '🏠 Strengthened homes in the poorest neighbourhoods kept their roofs.']);
+    else news.push(['bad', '🏠 Many weaker homes in poorer neighbourhoods lost roofs to the wind and flying debris.']);
+    if (!has('drain')) news.push(['bad', '🚰 400 mm of rain overwhelmed the drains — streets flooded for days.']);
+    if (has('supp') || has('team')) news.push(['good', (has('team') ? '🚑 Trained rescue teams reached cut-off communities quickly. ' : '') + (has('supp') ? '📦 Stored food, water and medicine were handed out the next day.' : '')]);
+    else news.push(['bad', '⏳ After the storm, cut-off communities waited days for rescue, clean water and food.']);
+    var bn = [];
+    runNews.forEach(function (nid) {
+      var n = NEWS.filter(function (x) { return x.id === nid; })[0], c = n.check();
+      for (var k in c.fx) sum[k] += c.fx[k];
+      bn.push(['breaking', '<span class="tag">BREAKING</span><b>' + n.head + '</b> ' + (c.ok ? '\u2714 Your final plan coped: ' : '\u2716 Your final plan was caught out: ') + c.txt]);
+    });
+    news = bn.concat(news);
+    var r = {
+      lives: clamp(sum.lives * 2.6 + 8), prop: clamp(sum.prop * 5 + 5), fair: clamp(sum.fair * 4 + 5), rec: clamp(sum.rec * 6 + 5)
+    };
+    r.overall = Math.round(r.lives * 0.4 + r.prop * 0.2 + r.fair * 0.2 + r.rec * 0.2);
+    r.news = news; r.spent = spent();
+    r.mix = {}; ['pred', 'prep', 'prot'].forEach(function (c) { r.mix[c] = picks.filter(function (id) { return byId(id).cat === c; }).reduce(function (a, id) { return a + byId(id).cost; }, 0); });
+    r.picks = picks.slice();
+    return r;
+  }
+  $('stormBtn').addEventListener('click', function () {
+    if (!midShown) { midShown = true; showNews('mid', function () {}); return; }
+    showNews('storm', showReport);
+  });
+  function showReport() {
+    var cat5 = runNews.indexOf('surge') > -1;
+    $('stormHead').textContent = 'Category ' + (cat5 ? 5 : 4) + ' tropical storm hits the city';
+    $('stormSub').textContent = cat5 ? 'Winds of over 250 km/h, 400 mm of rain in two days and a storm surge higher than any sea wall.' : 'Winds of over 200 km/h, 400 mm of rain in two days and a 4 m storm surge along the coast.';
+    var r = evaluate(); results[budget] = r;
+    $('planPanel').style.display = 'none'; $('stormPanel').style.display = '';
+    $('resTitle').textContent = 'Storm report: $' + budget + ' million city — overall ' + r.overall + '/100';
+    var M = [['Lives protected', r.lives, 'var(--green)'], ['Property protected', r.prop, 'var(--prot)'], ['Poorest helped', r.fair, 'var(--prep)'], ['Recovery speed', r.rec, 'var(--pred)']];
+    $('meters').innerHTML = M.map(function (m) { return '<div class="meter"><div class="k">' + m[0] + '</div><div class="v">' + m[1] + '</div><div class="b"><div style="width:' + m[1] + '%;background:' + m[2] + '"></div></div></div>'; }).join('');
+    $('news').innerHTML = r.news.map(function (n) { return '<li class="' + n[0] + '">' + n[1] + '</li>'; }).join('');
+    var other = budget === 50 ? 10 : 50;
+    $('replay').textContent = results[other] ? 'Try a different plan' : 'Now try with $' + other + ' million →';
+    $('replay').dataset.b = results[other] ? budget : other;
+    if (results[50] && results[10]) {
+      var rows = [['Overall', 'overall'], ['Lives protected', 'lives'], ['Property protected', 'prop'], ['Poorest helped', 'fair'], ['Recovery speed', 'rec']];
+      $('cmpTable').innerHTML = '<thead><tr><th></th><th>$50 million</th><th>$10 million</th></tr></thead><tbody>' +
+        rows.map(function (x) { return '<tr><td>' + x[0] + '</td><td><b>' + results[50][x[1]] + '</b></td><td><b>' + results[10][x[1]] + '</b></td></tr>'; }).join('') +
+        '<tr><td>Spent on&hellip;</td>' + [50, 10].map(function (b) { var m = results[b].mix; return '<td>Prediction $' + m.pred + 'm<br>Preparation $' + m.prep + 'm<br>Protection $' + m.prot + 'm</td>'; }).join('') + '</tr></tbody>';
+      $('compare').style.display = '';
+    } else $('compare').style.display = 'none';
+    window.scrollTo(0, 0);
+  }
+  $('replay').addEventListener('click', function () { budget = +this.dataset.b; picks = []; runNews = []; midShown = false; $('stormPanel').style.display = 'none'; $('planPanel').style.display = ''; $('msg2').textContent = ''; renderPlans(); window.scrollTo(0, 0); });
+  $('to3').addEventListener('click', function () { render3(); setStep(3); });
+
+  /* ============ ROUND 3 ============ */
+  var Q3 = [
+    { p: '📡 How does <b>prediction</b> reduce the impacts of a tropical storm?', o: ['It gives governments and communities time to act before the storm arrives.', 'It stops the storm from forming.', 'It makes buildings stronger.', 'It pays for repairs after the storm.'], c: 0,
+      fb: 'Forecasting the path and strength of the storm gives time to warn people, evacuate and prepare.' },
+    { p: '🎒 How does <b>preparation</b> reduce the impacts?', o: ['It reduces the wind speed of the storm.', 'People and communities know what to do, where to go and have supplies ready, so fewer people are hurt.', 'It means nobody needs to evacuate.', 'It only helps after the storm has passed.'], c: 1,
+      fb: 'Education, warnings, evacuation routes, shelters and supplies mean people can act quickly and safely.' },
+    { p: '🧱 How does <b>protection</b> reduce the impacts?', o: ['It tells people when the storm will arrive.', 'Physical measures like sea walls, drainage and stronger buildings reduce damage to homes and infrastructure.', 'It is always the cheapest option.', 'It protects every part of the coastline equally.'], c: 1,
+      fb: 'Protection reduces physical damage — but it is usually expensive and cannot protect everywhere (the sea wall only covered part of the coast).' },
+    { p: '💰 With <b>only $10 million</b>, which statement is most accurate?', o: ['The city can still build a sea wall and strengthen every home.', 'Cheaper prediction and preparation measures (warnings, education, evacuation routes, supplies) can still save many lives.', 'Nothing useful can be done.', 'Money only matters for prediction.'], c: 1,
+      fb: 'Poorer places often get the most lives saved per dollar from preparation — warnings, education and evacuation are cheap compared with sea walls.' }
+  ];
+  function render3() {
+    $('q3').innerHTML = Q3.map(function (q, i) {
+      return '<div class="q3" data-i="' + i + '"><h3>' + q.p + '</h3>' + q.o.map(function (o, j) { return '<button type="button" class="opt" data-j="' + j + '">' + o + '</button>'; }).join('') + '<div class="fb3"></div></div>';
+    }).join('');
+  }
+  $('q3').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b || b.disabled) return;
+    var box = b.closest('.q3'), q = Q3[+box.dataset.i], j = +b.dataset.j;
+    box.querySelectorAll('.opt').forEach(function (o) { o.disabled = true; });
+    b.classList.add(j === q.c ? 'right' : 'wrong');
+    if (j !== q.c) box.querySelectorAll('.opt')[q.c].classList.add('right');
+    var fb = box.querySelector('.fb3'); fb.style.display = 'block'; fb.textContent = (j === q.c ? '✔ ' : '✖ ') + q.fb;
+  });
+  $('restart').addEventListener('click', function () {
+    results = {}; picks = []; $('check1').style.display = ''; $('to2').style.display = 'none'; $('msg1').textContent = '';
+    render1(); setStep(1);
+  });
+
+  render1();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
