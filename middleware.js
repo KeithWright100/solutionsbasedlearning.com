@@ -50,7 +50,8 @@ const REFRESH_COOKIE = 'sbl_rt';
 const PUBLIC_PATH_TREES = [
   '/geography/games/tropical-storm-mission', // KS3 — Tropical Storm Mission
   '/geography/games/place-detective',        // KS3 — Place Detective
-  '/geography/games/tropical-storm-links'    // KS3 — Tropical Storm: Link It Up
+  '/geography/games/tropical-storm-links',   // KS3 — Tropical Storm: Link It Up
+  '/geography/quizzes'                       // KS3 — Geography Quizzes + Geography Helper bot
 ];
 // PUBLIC_PATH_EXACT — only this exact path is public, nothing nested
 // under it. Use for the games hub listing page itself: it lives at

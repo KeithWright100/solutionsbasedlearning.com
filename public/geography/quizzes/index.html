@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KS3 Geography Quizzes — SBL</title>
+<meta name="description" content="Quick KS3 geography quizzes on tropical storms, map skills and population, plus a Geography Helper for quiz hints — part of the Interactive KS3 Geography Games hub.">
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+margin:0;
+padding:25px;
+background:linear-gradient(180deg,#eaf1f8,#eef6ff);
+color:#15263c;
+line-height:1.5;
+}
+
+.sr-only{
+position:absolute !important;
+width:1px !important;
+height:1px !important;
+padding:0 !important;
+margin:-1px !important;
+overflow:hidden !important;
+clip:rect(0,0,0,0) !important;
+white-space:nowrap !important;
+border:0 !important;
+}
+
+.topnav{
+max-width:1100px;
+margin:0 auto 14px;
+font-size:16px;
+}
+.topnav a{
+color:#1565c0;
+text-decoration:none;
+font-weight:bold;
+}
+.topnav a:hover{ text-decoration:underline; }
+
+h1{
+text-align:center;
+color:#1565c0;
+margin-bottom:8px;
+font-size:clamp(1.6rem,4vw,2.4rem);
+}
+
+.subtitle{
+text-align:center;
+font-size:18px;
+max-width:760px;
+margin:0 auto 26px;
+}
+
+.wrap{
+max-width:1000px;
+margin:0 auto 80px;
+}
+
+/* ---------- quiz picker ---------- */
+
+.quiz-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
+margin-bottom:10px;
+}
+
+.quiz-card{
+background:#ffffff;
+border:1px solid #d7e2ef;
+border-radius:14px;
+padding:22px 22px 20px;
+box-shadow:0 10px 24px rgba(21,38,60,0.08);
+text-align:center;
+}
+.quiz-card .quiz-emoji{ font-size:34px; margin-bottom:8px; }
+.quiz-card h2{ font-size:18px; margin:0 0 6px; color:#15263c; }
+.quiz-card p{ font-size:14px; color:#4a5c6d; margin:0 0 16px; }
+
+.btn{
+appearance:none;
+border:none;
+border-radius:10px;
+padding:11px 20px;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+color:#fff;
+background:#1565c0;
+transition:transform 0.15s ease, opacity 0.15s ease;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:disabled{ opacity:0.5; cursor:default; transform:none; }
+.btn.secondary{ background:#5a6b7c; }
+.btn.ghost{ background:transparent; color:#1565c0; border:2px solid #1565c0; padding:9px 18px; }
+
+/* ---------- active quiz ---------- */
+
+.quiz-panel{
+display:none;
+background:#ffffff;
+border:1px solid #d7e2ef;
+border-radius:14px;
+padding:26px 26px 22px;
+box-shadow:0 10px 26px rgba(21,38,60,0.08);
+margin-top:22px;
+}
+.quiz-panel.is-active{ display:block; }
+
+.quiz-panel-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:6px;
+flex-wrap:wrap;
+}
+.quiz-panel-head h2{ margin:0; font-size:20px; color:#15263c; }
+.quiz-progress{ font-size:13px; font-weight:700; color:#1565c0; }
+
+.quiz-question{ font-size:17px; font-weight:700; margin:18px 0 14px; }
+
+.quiz-options{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-bottom:16px;
+}
+.quiz-option{
+appearance:none;
+text-align:left;
+border:2px solid #c7d4e2;
+background:#f7fafd;
+color:#15263c;
+border-radius:10px;
+padding:12px 16px;
+font-size:15px;
+cursor:pointer;
+transition:border-color 0.15s ease, background 0.15s ease;
+}
+.quiz-option:hover{ border-color:#1565c0; }
+.quiz-option.is-correct{ border-color:#0f9d58; background:#e8f8ee; color:#0f6b3c; font-weight:700; }
+.quiz-option.is-wrong{ border-color:#c62828; background:#fdecea; color:#8a1f1f; font-weight:700; }
+.quiz-option:disabled{ cursor:default; }
+
+.quiz-feedback{
+font-size:14.5px;
+padding:12px 14px;
+border-radius:10px;
+margin-bottom:14px;
+}
+.quiz-feedback.correct{ background:#e8f8ee; color:#0f6b3c; }
+.quiz-feedback.wrong{ background:#fdecea; color:#8a1f1f; }
+
+.quiz-result{ text-align:center; padding:10px 0; }
+.quiz-result .score{ font-size:32px; font-weight:800; color:#1565c0; margin-bottom:6px; }
+.quiz-result p{ margin:0 0 18px; color:#4a5c6d; }
+
+/* ---------- geography helper chat ---------- */
+
+#helperToggle{
+position:fixed;
+right:22px;
+bottom:22px;
+width:60px;
+height:60px;
+border-radius:50%;
+background:#1565c0;
+color:#fff;
+border:none;
+font-size:26px;
+cursor:pointer;
+box-shadow:0 10px 24px rgba(21,38,60,0.3);
+z-index:40;
+}
+#helperToggle:hover{ transform:translateY(-2px); }
+
+#helperPanel{
+position:fixed;
+right:22px;
+bottom:92px;
+width:320px;
+max-width:calc(100vw - 44px);
+max-height:70vh;
+background:#ffffff;
+border:1px solid #d7e2ef;
+border-radius:16px;
+box-shadow:0 20px 50px rgba(21,38,60,0.28);
+display:none;
+flex-direction:column;
+overflow:hidden;
+z-index:40;
+}
+#helperPanel.is-open{ display:flex; }
+
+.helper-head{
+background:#1565c0;
+color:#fff;
+padding:14px 16px;
+font-weight:800;
+font-size:15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+.helper-head button{
+background:none;
+border:none;
+color:#fff;
+font-size:18px;
+cursor:pointer;
+line-height:1;
+}
+
+#helperMessages{
+flex:1;
+overflow-y:auto;
+padding:14px 14px 6px;
+display:flex;
+flex-direction:column;
+gap:10px;
+min-height:180px;
+max-height:44vh;
+}
+.helper-msg{
+max-width:85%;
+padding:9px 12px;
+border-radius:12px;
+font-size:13.5px;
+line-height:1.4;
+}
+.helper-msg.bot{
+background:#eef3fa;
+color:#15263c;
+align-self:flex-start;
+border-bottom-left-radius:4px;
+}
+.helper-msg.user{
+background:#1565c0;
+color:#fff;
+align-self:flex-end;
+border-bottom-right-radius:4px;
+}
+
+.helper-input-row{
+display:flex;
+gap:8px;
+padding:12px;
+border-top:1px solid #e5ecf3;
+}
+.helper-input-row input{
+flex:1;
+border:1px solid #c7d4e2;
+border-radius:999px;
+padding:9px 14px;
+font-size:14px;
+font-family:inherit;
+}
+.helper-input-row button{
+border:none;
+background:#1565c0;
+color:#fff;
+border-radius:999px;
+width:38px;
+height:38px;
+font-size:16px;
+cursor:pointer;
+flex-shrink:0;
+}
+
+.helper-suggestions{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+padding:0 14px 12px;
+}
+.helper-suggestions button{
+appearance:none;
+border:1px solid #c7d4e2;
+background:#f7fafd;
+color:#1565c0;
+border-radius:999px;
+padding:5px 11px;
+font-size:12px;
+cursor:pointer;
+}
+.helper-suggestions button:hover{ border-color:#1565c0; }
+
+@media (max-width:600px){
+  .quiz-panel{ padding:20px 18px; }
+  #helperPanel{ right:12px; left:12px; width:auto; bottom:86px; }
+  #helperToggle{ right:16px; bottom:16px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topnav"><a href="/geography/games">&larr; Back to Interactive KS3 Geography Games</a></div>
+
+<div class="wrap">
+  <h1>KS3 Geography Quizzes</h1>
+  <p class="subtitle">Pick a topic and test yourself. Stuck on a term? Tap the Geography Helper in the corner for a quick hint.</p>
+
+  <div class="quiz-grid" id="quizPicker"></div>
+
+  <div class="quiz-panel" id="quizPanel">
+    <div class="quiz-panel-head">
+      <h2 id="quizPanelTitle"></h2>
+      <span class="quiz-progress" id="quizProgress"></span>
+    </div>
+    <div id="quizBody"></div>
+  </div>
+</div>
+
+<button type="button" id="helperToggle" aria-label="Open Geography Helper">&#128172;</button>
+<div id="helperPanel" aria-live="polite">
+  <div class="helper-head">
+    <span>&#127757; Geography Helper</span>
+    <button type="button" id="helperClose" aria-label="Close Geography Helper">&times;</button>
+  </div>
+  <div id="helperMessages"></div>
+  <div class="helper-suggestions" id="helperSuggestions"></div>
+  <div class="helper-input-row">
+    <input type="text" id="helperInput" placeholder="Ask about a quiz term..." maxlength="120">
+    <button type="button" id="helperSend" aria-label="Send">&#10148;</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ==================== QUIZ DATA ==================== */
+
+  var QUIZZES = [
+    {
+      id: 'storms',
+      emoji: '🌀',
+      title: 'Tropical Storms',
+      blurb: 'Formation, structure and impacts.',
+      questions: [
+        {
+          q: 'What forms at the centre of a tropical storm, where the weather is calm?',
+          options: ['The eye', 'The eyewall', 'The spiral rain band', 'The storm surge'],
+          correct: 0,
+          explain: 'The eye is the calm centre. The eyewall around it has the strongest winds and heaviest rain.'
+        },
+        {
+          q: 'Tropical storms form over ocean water that is at least how warm?',
+          options: ['10°C', '18°C', '27°C', '40°C'],
+          correct: 2,
+          explain: 'Sea temperatures of 26-27°C or higher provide the energy (heat and moisture) a tropical storm needs to form.'
+        },
+        {
+          q: 'Which of these is a PRIMARY effect of a tropical storm?',
+          options: ['Disease spreading afterwards', 'Damage to buildings from high winds', 'Shortage of clean water', 'The cost of rebuilding'],
+          correct: 1,
+          explain: 'Primary effects happen immediately, caused directly by the storm itself — like wind damage. The others are secondary effects that follow afterwards.'
+        },
+        {
+          q: 'Why do wealthier countries usually have fewer deaths from tropical storms than poorer countries?',
+          options: ['They get fewer storms', 'Storms are weaker near wealthy countries', 'They can afford warning systems, strong buildings and emergency services', 'They are always further from the coast'],
+          correct: 2,
+          explain: 'Wealth affects how well a country can prepare for and respond to a hazard — through warning systems, building design, and emergency services.'
+        },
+        {
+          q: 'What is a storm surge?',
+          options: ['A sudden rise in sea level pushed onshore by the storm', 'A very strong gust of wind', 'The path the storm travels along', 'A type of tropical storm found only in Asia'],
+          correct: 0,
+          explain: 'A storm surge is a wall of sea water pushed ashore by the storm’s winds and low pressure — it causes major coastal flooding.'
+        }
+      ]
+    },
+    {
+      id: 'mapskills',
+      emoji: '🧭',
+      title: 'Map &amp; Location Skills',
+      blurb: 'Compass points, scale and grid references.',
+      questions: [
+        {
+          q: 'If you are facing North and turn 90° clockwise, which direction do you now face?',
+          options: ['South', 'East', 'West', 'North-West'],
+          correct: 1,
+          explain: 'Clockwise from North goes N → E → S → W. A 90° clockwise turn from North faces East.'
+        },
+        {
+          q: 'On an Ordnance Survey-style grid reference, which set of digits do you read FIRST?',
+          options: ['The northing (vertical, up the side)', 'The easting (horizontal, along the bottom)', 'Whichever is larger', 'It doesn’t matter'],
+          correct: 1,
+          explain: 'Remember "along the corridor, up the stairs" — read the easting (horizontal) first, then the northing (vertical).'
+        },
+        {
+          q: 'A map has a scale of 1:50,000. How much real distance does 1cm on the map represent?',
+          options: ['50 m', '500 m', '5 km', '50 km'],
+          correct: 1,
+          explain: '1:50,000 means 1cm on the map = 50,000cm in real life = 500m.'
+        },
+        {
+          q: 'What do contour lines on a map show?',
+          options: ['Roads and paths', 'Height above sea level', 'Rivers and lakes', 'Country borders'],
+          correct: 1,
+          explain: 'Contour lines join points of equal height. Lines close together show steep slopes; lines far apart show gentle slopes.'
+        },
+        {
+          q: 'Which continent is entirely south of the Equator?',
+          options: ['Africa', 'South America', 'Australia', 'Antarctica'],
+          correct: 3,
+          explain: 'Antarctica lies entirely south of the Equator. Africa and South America are crossed by it, and Australia is south of it but not the only correct type of answer here — Antarctica is fully south.'
+        }
+      ]
+    },
+    {
+      id: 'population',
+      emoji: '👥',
+      title: 'Population &amp; Places',
+      blurb: 'Key vocabulary for describing places and people.',
+      questions: [
+        {
+          q: 'What does "population density" measure?',
+          options: ['The total number of people in a country', 'The number of people per square kilometre', 'How fast a population is growing', 'The average age of a population'],
+          correct: 1,
+          explain: 'Population density = number of people ÷ area. It tells us how crowded or spread out a population is.'
+        },
+        {
+          q: 'What is "urbanisation"?',
+          options: ['Building new farms in the countryside', 'The growing proportion of people living in towns and cities', 'A type of natural disaster', 'The process of a city becoming smaller'],
+          correct: 1,
+          explain: 'Urbanisation is the increase in the proportion of a population living in urban areas rather than rural areas.'
+        },
+        {
+          q: 'A country with a low GDP per person, often with a young, fast-growing population, is usually described as:',
+          options: ['A HIC (High Income Country)', 'A LIC (Low Income Country)', 'A NEE (Newly Emerging Economy)', 'A landlocked country'],
+          correct: 1,
+          explain: 'LICs (Low Income Countries) tend to have lower average incomes and often have younger, faster-growing populations than HICs.'
+        },
+        {
+          q: 'What does "life expectancy" mean?',
+          options: ['The number of children a person has', 'The average age a person is expected to live to', 'How long someone has lived so far', 'The retirement age in a country'],
+          correct: 1,
+          explain: 'Life expectancy is the average number of years a person born in a place today is expected to live.'
+        },
+        {
+          q: 'Which of these would most likely INCREASE the birth rate of a country?',
+          options: ['Better access to education for girls', 'Improved contraception and family planning', 'A strong cultural preference for large families', 'Rising costs of raising children'],
+          correct: 2,
+          explain: 'A cultural preference for large families tends to raise birth rates. The other options are all factors that typically lower birth rates.'
+        }
+      ]
+    }
+  ];
+
+  /* ==================== GEOGRAPHY HELPER (scripted FAQ) ====================
+     This is a simple keyword-matching helper, not an AI service — it
+     looks for known terms in what the student types and replies with a
+     short prepared explanation. No data leaves the browser. */
+
+  var HELPER_FAQ = [
+    { keys: ['eye', 'eyewall'], a: 'The "eye" is the calm centre of a tropical storm. The "eyewall" surrounds it and has the strongest winds and heaviest rain.' },
+    { keys: ['storm surge', 'surge'], a: 'A storm surge is sea water pushed onshore by a storm’s strong winds and low pressure — it causes serious coastal flooding.' },
+    { keys: ['primary effect'], a: 'A primary effect happens immediately and is caused directly by the hazard — like buildings collapsing in high winds.' },
+    { keys: ['secondary effect'], a: 'A secondary effect happens afterwards, as a result of the primary effects — like disease spreading after flooding.' },
+    { keys: ['grid reference', 'grid ref'], a: 'Read "along the corridor, up the stairs": the easting (horizontal number) first, then the northing (vertical number).' },
+    { keys: ['contour'], a: 'Contour lines join points of equal height on a map. Lines close together = steep; lines far apart = gentle slope.' },
+    { keys: ['scale'], a: 'Map scale (like 1:50,000) tells you how a distance on the map relates to real life. 1cm at 1:50,000 = 500m in reality.' },
+    { keys: ['population density'], a: 'Population density = number of people ÷ area of land. It shows how crowded or spread out an area is.' },
+    { keys: ['urbanisation', 'urbanization'], a: 'Urbanisation is the growing proportion of a population living in towns and cities rather than the countryside.' },
+    { keys: ['life expectancy'], a: 'Life expectancy is the average number of years a person born today is expected to live.' },
+    { keys: ['lic'], a: 'LIC = Low Income Country — generally lower average incomes, often with younger, faster-growing populations.' },
+    { keys: ['hic'], a: 'HIC = High Income Country — generally higher average incomes and more developed infrastructure and services.' },
+    { keys: ['nee'], a: 'NEE = Newly Emerging Economy — a country with rapidly growing industry and incomes, moving from LIC towards HIC.' },
+    { keys: ['birth rate'], a: 'Birth rate is the number of live births per 1,000 people per year. Education, family planning and culture all affect it.' },
+    { keys: ['death rate'], a: 'Death rate is the number of deaths per 1,000 people per year. Healthcare, sanitation and age structure all affect it.' },
+    { keys: ['weather'], a: 'Weather is the day-to-day condition of the atmosphere (today’s rain, wind, temperature) — compare with climate, which is the average pattern over many years.' },
+    { keys: ['climate'], a: 'Climate is the average weather pattern of a place over a long period (usually 30+ years) — compare with weather, which is day-to-day.' },
+    { keys: ['delta'], a: 'A delta forms where a river deposits sediment as it slows down entering the sea or a lake, often creating a fan-shaped or branching landform.' },
+    { keys: ['compass', 'north-east', 'north east', 'direction'], a: 'The compass runs clockwise: N → NE → E → SE → S → SW → W → NW → back to N. A 90° clockwise turn moves you one main point round.' }
+  ];
+
+  var HELPER_SUGGESTIONS = ['What is the eye of a storm?', 'What is population density?', 'How do I read a grid reference?', 'Weather vs climate?'];
+
+  var HELPER_FALLBACK = 'I don’t have a note on that one yet — try asking your teacher, or check the quiz explanation after you answer!';
+  var HELPER_GREETING = 'Hi! I’m the Geography Helper. Ask me about a term from the quizzes above, like "what is a storm surge?"';
+
+  /* ==================== QUIZ RENDERING ==================== */
+
+  var picker = document.getElementById('quizPicker');
+  var panel = document.getElementById('quizPanel');
+  var panelTitle = document.getElementById('quizPanelTitle');
+  var progressEl = document.getElementById('quizProgress');
+  var body = document.getElementById('quizBody');
+
+  var activeQuiz = null;
+  var qIndex = 0;
+  var score = 0;
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  QUIZZES.forEach(function (quiz) {
+    var card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.innerHTML =
+      '<div class="quiz-emoji">' + quiz.emoji + '</div>' +
+      '<h2>' + quiz.title + '</h2>' +
+      '<p>' + quiz.blurb + ' &middot; ' + quiz.questions.length + ' questions</p>' +
+      '<button type="button" class="btn">Start quiz</button>';
+    card.querySelector('button').addEventListener('click', function () { startQuiz(quiz); });
+    picker.appendChild(card);
+  });
+
+  function startQuiz(quiz) {
+    activeQuiz = quiz;
+    qIndex = 0;
+    score = 0;
+    panel.classList.add('is-active');
+    panelTitle.textContent = quiz.emoji + ' ' + quiz.title;
+    renderQuestion();
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderQuestion() {
+    var q = activeQuiz.questions[qIndex];
+    progressEl.textContent = 'Question ' + (qIndex + 1) + ' of ' + activeQuiz.questions.length;
+
+    var html = '<div class="quiz-question">' + escapeHtml(q.q) + '</div>';
+    html += '<div class="quiz-options" id="quizOptions">';
+    q.options.forEach(function (opt, i) {
+      html += '<button type="button" class="quiz-option" data-index="' + i + '">' + escapeHtml(opt) + '</button>';
+    });
+    html += '</div>';
+    html += '<div id="quizFeedback"></div>';
+    body.innerHTML = html;
+
+    var optionButtons = body.querySelectorAll('.quiz-option');
+    optionButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () { answerQuestion(parseInt(btn.getAttribute('data-index'), 10)); });
+    });
+  }
+
+  function answerQuestion(chosenIndex) {
+    var q = activeQuiz.questions[qIndex];
+    var optionButtons = body.querySelectorAll('.quiz-option');
+    optionButtons.forEach(function (btn, i) {
+      btn.disabled = true;
+      if (i === q.correct) btn.classList.add('is-correct');
+      else if (i === chosenIndex) btn.classList.add('is-wrong');
+    });
+
+    var isCorrect = chosenIndex === q.correct;
+    if (isCorrect) score += 1;
+
+    var feedback = document.getElementById('quizFeedback');
+    feedback.innerHTML =
+      '<div class="quiz-feedback ' + (isCorrect ? 'correct' : 'wrong') + '">' +
+      (isCorrect ? '<strong>Correct!</strong> ' : '<strong>Not quite.</strong> ') +
+      escapeHtml(q.explain) + '</div>' +
+      '<button type="button" class="btn" id="quizNextBtn">' +
+      (qIndex + 1 < activeQuiz.questions.length ? 'Next question →' : 'See my score →') +
+      '</button>';
+
+    document.getElementById('quizNextBtn').addEventListener('click', function () {
+      qIndex += 1;
+      if (qIndex < activeQuiz.questions.length) {
+        renderQuestion();
+      } else {
+        renderResult();
+      }
+    });
+  }
+
+  function renderResult() {
+    progressEl.textContent = 'Complete';
+    var total = activeQuiz.questions.length;
+    var msg;
+    if (score === total) msg = 'Brilliant — full marks!';
+    else if (score >= total * 0.6) msg = 'Good work — review the ones you missed and try again.';
+    else msg = 'Worth another go — use the Geography Helper for any terms you’re unsure of.';
+
+    body.innerHTML =
+      '<div class="quiz-result">' +
+      '<div class="score">' + score + ' / ' + total + '</div>' +
+      '<p>' + msg + '</p>' +
+      '<button type="button" class="btn" id="quizRetryBtn">Try again</button> ' +
+      '<button type="button" class="btn ghost" id="quizBackBtn">Choose another quiz</button>' +
+      '</div>';
+
+    document.getElementById('quizRetryBtn').addEventListener('click', function () { startQuiz(activeQuiz); });
+    document.getElementById('quizBackBtn').addEventListener('click', function () {
+      panel.classList.remove('is-active');
+      picker.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  /* ==================== GEOGRAPHY HELPER UI ==================== */
+
+  var helperToggle = document.getElementById('helperToggle');
+  var helperPanel = document.getElementById('helperPanel');
+  var helperClose = document.getElementById('helperClose');
+  var helperMessages = document.getElementById('helperMessages');
+  var helperInput = document.getElementById('helperInput');
+  var helperSend = document.getElementById('helperSend');
+  var helperSuggestions = document.getElementById('helperSuggestions');
+
+  var helperOpened = false;
+
+  function addHelperMessage(text, who) {
+    var div = document.createElement('div');
+    div.className = 'helper-msg ' + who;
+    div.textContent = text;
+    helperMessages.appendChild(div);
+    helperMessages.scrollTop = helperMessages.scrollHeight;
+  }
+
+  function answerHelper(question) {
+    var lower = question.toLowerCase();
+    var match = HELPER_FAQ.find(function (entry) {
+      return entry.keys.some(function (key) { return lower.indexOf(key) !== -1; });
+    });
+    addHelperMessage(match ? match.a : HELPER_FALLBACK, 'bot');
+  }
+
+  function sendHelperQuestion() {
+    var text = helperInput.value.trim();
+    if (!text) return;
+    addHelperMessage(text, 'user');
+    helperInput.value = '';
+    setTimeout(function () { answerHelper(text); }, 250);
+  }
+
+  HELPER_SUGGESTIONS.forEach(function (s) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = s;
+    btn.addEventListener('click', function () {
+      addHelperMessage(s, 'user');
+      setTimeout(function () { answerHelper(s); }, 250);
+    });
+    helperSuggestions.appendChild(btn);
+  });
+
+  helperToggle.addEventListener('click', function () {
+    helperPanel.classList.toggle('is-open');
+    if (helperPanel.classList.contains('is-open') && !helperOpened) {
+      helperOpened = true;
+      addHelperMessage(HELPER_GREETING, 'bot');
+    }
+  });
+  helperClose.addEventListener('click', function () { helperPanel.classList.remove('is-open'); });
+  helperSend.addEventListener('click', sendHelperQuestion);
+  helperInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') sendHelperQuestion();
+  });
+
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
