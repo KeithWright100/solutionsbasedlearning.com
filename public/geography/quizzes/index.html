@@ -175,30 +175,30 @@ margin-bottom:14px;
 position:fixed;
 left:22px;
 bottom:22px;
-height:52px;
-padding:0 20px 0 18px;
+height:66px;
+padding:0 26px 0 22px;
 border-radius:999px;
 background:#1565c0;
 color:#fff;
 border:none;
-font-size:15px;
+font-size:18px;
 font-weight:800;
 font-family:inherit;
 cursor:pointer;
-box-shadow:0 10px 24px rgba(21,38,60,0.3);
+box-shadow:0 12px 28px rgba(21,38,60,0.32);
 z-index:900000;
 display:inline-flex;
 align-items:center;
-gap:9px;
+gap:11px;
 white-space:nowrap;
 }
-#helperToggle .helper-toggle-icon{ font-size:20px; line-height:1; }
+#helperToggle .helper-toggle-icon{ font-size:26px; line-height:1; }
 #helperToggle:hover{ transform:translateY(-2px); }
 
 #helperPanel{
 position:fixed;
 left:22px;
-bottom:92px;
+bottom:106px;
 width:320px;
 max-width:calc(100vw - 44px);
 max-height:70vh;
@@ -214,9 +214,9 @@ transition:width 0.2s ease, max-height 0.2s ease;
 }
 #helperPanel.is-open{ display:flex; }
 #helperPanel.is-expanded{
-width:460px;
+width:640px;
 max-width:calc(100vw - 44px);
-max-height:82vh;
+max-height:92vh;
 }
 
 .helper-head{
@@ -254,9 +254,10 @@ gap:10px;
 min-height:180px;
 max-height:44vh;
 }
-#helperPanel.is-expanded #helperMessages{ max-height:60vh; min-height:280px; }
+#helperPanel.is-expanded #helperMessages{ max-height:70vh; min-height:340px; }
 
 .helper-msg.typing{ font-style:italic; color:#5a6b7c; }
+.helper-msg-image{ display:block; max-width:100%; margin-top:8px; border-radius:8px; }
 .helper-msg{
 max-width:85%;
 padding:9px 12px;
@@ -323,7 +324,8 @@ cursor:pointer;
 
 @media (max-width:600px){
   .quiz-panel{ padding:20px 18px; }
-  #helperPanel{ right:12px; left:12px; width:auto; bottom:86px; }
+  #helperPanel{ right:12px; left:12px; width:auto; bottom:98px; }
+  #helperPanel.is-expanded{ max-height:88vh; }
   #helperToggle{ left:16px; bottom:16px; }
 }
 
@@ -497,7 +499,7 @@ cursor:pointer;
      a soft per-visit question cap (MAX_HELPER_QUESTIONS) is applied
      purely to limit runaway usage of the shared marking service. */
 
-  var HELPER_SUGGESTIONS = ['What is the eye of a storm?', 'What is population density?', 'How do I read a grid reference?', 'Weather vs climate?'];
+  var HELPER_SUGGESTIONS = [{ label: 'e.g. What is a delta?', value: 'What is a delta?' }];
 
   var HELPER_GREETING = 'Hi! I’m the Geography Helper. Ask me any geography question — not just from these quizzes.';
   var MAX_HELPER_QUESTIONS = 20;
@@ -507,12 +509,75 @@ cursor:pointer;
     return {
       question: 'You are the "Geography Helper", a friendly chatbot for KS3 (Year 7-9, ages 11-14) students on a geography quizzes page. ' +
         'The student has typed a free-form geography question of their own (it appears as STUDENT ANSWER below, even though it is a QUESTION, not an answer — that is just the shape of this system). ' +
-        'Answer it directly and simply, in 2-4 short sentences, in a warm, encouraging tone suitable for an 11-14 year old. ' +
-        'Do NOT mark or grade anything. Do NOT give a mark, a score, or a score out of any number. Do NOT use exam-style section headings such as "MARK AWARDED", "WHY THIS MARK", "WHAT WAS DONE WELL" or similar — just write a plain, direct answer. ' +
-        'If the question is not about geography, gently say so and suggest a geography topic instead, without being unfriendly.',
+        'STRICT LENGTH LIMIT: your entire reply must be no more than 2 short sentences and about 35 words in total. This is a hard limit, not a target — a longer reply is a failure, even if accurate. ' +
+        'Write like you are quickly explaining it out loud to an 11-year-old who is standing in front of you, not writing a paragraph or an essay. One plain idea, in plain words. ' +
+        'Never use bullet points, numbered lists, multiple paragraphs, sub-points, or more than one example. ' +
+        'Do NOT mark or grade anything. Do NOT give a mark, a score, or a score out of any number. Do NOT use exam-style section headings such as "MARK AWARDED", "WHY THIS MARK", "WHAT WAS DONE WELL" or similar, and do not add a follow-up question of your own — just the short answer itself. ' +
+        'If the question is not about geography, say so in one short friendly sentence and suggest a geography topic instead.',
       maxMark: 1,
-      markingGuidance: 'This is not an exam question. There is no mark scheme and no score — just answer the student’s question helpfully and simply.'
+      markingGuidance: 'This is not an exam question. There is no mark scheme and no score. The single most important rule is brevity: 2 sentences maximum, around 35 words maximum, no exceptions.'
     };
+  }
+
+  // Hard backstop in case the bot ignores the length instruction above.
+  // Keeps at most the first 2 sentences and ~260 characters, so a reply
+  // never balloons into an exam-style essay regardless of what the
+  // underlying marking bot returns.
+  function trimHelperAnswer(text) {
+    if (!text) return text;
+    var sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g);
+    var trimmed = sentences ? sentences.slice(0, 2).join('').trim() : text;
+    if (trimmed.length > 260) trimmed = trimmed.slice(0, 257).trim() + '…';
+    return trimmed;
+  }
+
+  /* ==================== GEOGRAPHY HELPER — curated photos ====================
+     Keitth is supplying real photos for these topics (Mount Ruapehu case
+     study) over time. Each entry's `image` path is where that photo
+     should be saved — once a file actually exists there, it will start
+     appearing automatically next to any matching answer. Until then,
+     the onerror handler on the <img> (see renderHelperAnswer) hides a
+     missing photo silently rather than showing a broken image icon, so
+     it's safe to ship this ahead of having every photo in hand.
+
+     Order matters: the FIRST matching entry wins, so more specific
+     topics (e.g. "lahar") are listed before generic ones ("volcano"). */
+
+  var HELPER_IMAGE_FOLDER = '/images/geography-helper/ruapehu/';
+
+  var HELPER_IMAGES = [
+    { keys: ['lahar'], file: 'lahar.jpg', alt: 'A lahar — a fast-moving volcanic mudflow' },
+    { keys: ['magma', 'magama'], file: 'magma.jpg', alt: 'Magma — molten rock beneath the surface' },
+    { keys: ['subduction'], file: 'subduction.jpg', alt: 'A subduction zone at a destructive plate boundary' },
+    { keys: ['destructive plate boundary', 'destructive boundary'], file: 'destructive-plate-boundary.jpg', alt: 'A simple diagram of a destructive plate boundary' },
+    { keys: ['landslide', 'landslides'], file: 'landslide.jpg', alt: 'A landslide' },
+    { keys: ['glacier', 'glaciers'], file: 'glacier.jpg', alt: 'A glacier' },
+    { keys: ['lava'], file: 'lava.jpg', alt: 'Lava from a volcanic eruption' },
+    { keys: ['volcanic ash', ' ash '], file: 'ash.jpg', alt: 'Volcanic ash' },
+    { keys: ['stratovolcano', 'strato volcano', 'erupting'], file: 'stratovolcano-erupting.jpg', alt: 'A stratovolcano erupting' },
+    { keys: ['volcanic mineral', 'coloured mineral', 'colored mineral'], file: 'volcanic-minerals.jpg', alt: 'Coloured volcanic minerals' },
+    { keys: ['tourist site', 'tourist sites'], file: 'ruapehu-tourist-sites.jpg', alt: 'Tourist sites around Mount Ruapehu' },
+    { keys: ['damage'], file: 'volcano-damage.jpg', alt: 'Damage caused by a volcanic eruption' },
+    { keys: ['local resident'], file: 'local-residents.jpg', alt: 'Local residents near Mount Ruapehu' },
+    { keys: ['tour operator'], file: 'tour-operators.jpg', alt: 'Tour operators at Mount Ruapehu' },
+    { keys: ['ruapehu'], file: 'ruapehu.jpg', alt: 'Mount Ruapehu' },
+    { keys: ['volcano'], file: 'volcano.jpg', alt: 'A volcano' }
+  ];
+
+  function findHelperImage(studentQuestion) {
+    var lower = ' ' + studentQuestion.toLowerCase() + ' ';
+    var match = HELPER_IMAGES.find(function (entry) {
+      return entry.keys.some(function (key) { return lower.indexOf(key) !== -1; });
+    });
+    return match ? { src: HELPER_IMAGE_FOLDER + match.file, alt: match.alt } : null;
+  }
+
+  function renderHelperAnswer(container, text, imageMatch) {
+    var html = escapeHtml(text);
+    if (imageMatch) {
+      html += '<img src="' + escapeHtml(imageMatch.src) + '" alt="' + escapeHtml(imageMatch.alt) + '" class="helper-msg-image" loading="lazy" onerror="this.remove()">';
+    }
+    container.innerHTML = html;
   }
 
   /* ==================== QUIZ RENDERING ==================== */
@@ -686,7 +751,8 @@ cursor:pointer;
       .then(function (data) {
         var feedback = data.feedback || {};
         var answerText = feedback.whyThisMark || data.raw || 'Sorry, I couldn’t work out an answer to that — try rephrasing your question.';
-        typingMsg.textContent = answerText;
+        var imageMatch = findHelperImage(studentQuestion);
+        renderHelperAnswer(typingMsg, trimHelperAnswer(answerText), imageMatch);
         typingMsg.className = 'helper-msg bot';
       })
       .catch(function (err) {
@@ -720,10 +786,10 @@ cursor:pointer;
   HELPER_SUGGESTIONS.forEach(function (s) {
     var btn = document.createElement('button');
     btn.type = 'button';
-    btn.textContent = s;
+    btn.textContent = s.label;
     btn.addEventListener('click', function () {
       if (helperBusy) return;
-      helperInput.value = s;
+      helperInput.value = s.value;
       sendHelperQuestion();
     });
     helperSuggestions.appendChild(btn);
