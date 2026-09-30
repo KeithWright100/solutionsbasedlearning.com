@@ -167,9 +167,13 @@ margin-bottom:14px;
 
 /* ---------- geography helper chat ---------- */
 
+/* Note: the site-wide feedback widget (sbl-feedback-widget.js) plants
+   its own launcher button at bottom-RIGHT with an extremely high
+   z-index (999999) on every page. The Geography Helper lives at
+   bottom-LEFT instead so the two never overlap or hide each other. */
 #helperToggle{
 position:fixed;
-right:22px;
+left:22px;
 bottom:22px;
 width:60px;
 height:60px;
@@ -180,13 +184,13 @@ border:none;
 font-size:26px;
 cursor:pointer;
 box-shadow:0 10px 24px rgba(21,38,60,0.3);
-z-index:40;
+z-index:900000;
 }
 #helperToggle:hover{ transform:translateY(-2px); }
 
 #helperPanel{
 position:fixed;
-right:22px;
+left:22px;
 bottom:92px;
 width:320px;
 max-width:calc(100vw - 44px);
@@ -198,7 +202,7 @@ box-shadow:0 20px 50px rgba(21,38,60,0.28);
 display:none;
 flex-direction:column;
 overflow:hidden;
-z-index:40;
+z-index:900000;
 }
 #helperPanel.is-open{ display:flex; }
 
@@ -298,7 +302,7 @@ cursor:pointer;
 @media (max-width:600px){
   .quiz-panel{ padding:20px 18px; }
   #helperPanel{ right:12px; left:12px; width:auto; bottom:86px; }
-  #helperToggle{ right:16px; bottom:16px; }
+  #helperToggle{ left:16px; bottom:16px; }
 }
 
 </style>
