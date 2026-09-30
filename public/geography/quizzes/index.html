@@ -210,8 +210,14 @@ display:none;
 flex-direction:column;
 overflow:hidden;
 z-index:900000;
+transition:width 0.2s ease, max-height 0.2s ease;
 }
 #helperPanel.is-open{ display:flex; }
+#helperPanel.is-expanded{
+width:460px;
+max-width:calc(100vw - 44px);
+max-height:82vh;
+}
 
 .helper-head{
 background:#1565c0;
@@ -222,15 +228,21 @@ font-size:15px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+gap:10px;
 }
-.helper-head button{
+.helper-head-actions{ display:flex; align-items:center; gap:4px; flex-shrink:0; }
+.helper-head-actions button{
 background:none;
 border:none;
 color:#fff;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
 line-height:1;
+padding:4px;
+border-radius:6px;
 }
+.helper-head-actions button:hover{ background:rgba(255,255,255,0.18); }
+#helperClose{ font-size:20px; }
 
 #helperMessages{
 flex:1;
@@ -242,6 +254,9 @@ gap:10px;
 min-height:180px;
 max-height:44vh;
 }
+#helperPanel.is-expanded #helperMessages{ max-height:60vh; min-height:280px; }
+
+.helper-msg.typing{ font-style:italic; color:#5a6b7c; }
 .helper-msg{
 max-width:85%;
 padding:9px 12px;
@@ -337,12 +352,15 @@ cursor:pointer;
 <div id="helperPanel" aria-live="polite">
   <div class="helper-head">
     <span>&#127757; Geography Helper</span>
-    <button type="button" id="helperClose" aria-label="Close Geography Helper">&times;</button>
+    <div class="helper-head-actions">
+      <button type="button" id="helperExpand" aria-label="Expand Geography Helper">&#10530;</button>
+      <button type="button" id="helperClose" aria-label="Close Geography Helper">&times;</button>
+    </div>
   </div>
   <div id="helperMessages"></div>
   <div class="helper-suggestions" id="helperSuggestions"></div>
   <div class="helper-input-row">
-    <input type="text" id="helperInput" placeholder="Ask about a quiz term..." maxlength="120">
+    <input type="text" id="helperInput" placeholder="Ask any geography question..." maxlength="300">
     <button type="button" id="helperSend" aria-label="Send">&#10148;</button>
   </div>
 </div>
@@ -470,37 +488,32 @@ cursor:pointer;
     }
   ];
 
-  /* ==================== GEOGRAPHY HELPER (scripted FAQ) ====================
-     This is a simple keyword-matching helper, not an AI service — it
-     looks for known terms in what the student types and replies with a
-     short prepared explanation. No data leaves the browser. */
-
-  var HELPER_FAQ = [
-    { keys: ['eye', 'eyewall'], a: 'The "eye" is the calm centre of a tropical storm. The "eyewall" surrounds it and has the strongest winds and heaviest rain.' },
-    { keys: ['storm surge', 'surge'], a: 'A storm surge is sea water pushed onshore by a storm’s strong winds and low pressure — it causes serious coastal flooding.' },
-    { keys: ['primary effect'], a: 'A primary effect happens immediately and is caused directly by the hazard — like buildings collapsing in high winds.' },
-    { keys: ['secondary effect'], a: 'A secondary effect happens afterwards, as a result of the primary effects — like disease spreading after flooding.' },
-    { keys: ['grid reference', 'grid ref'], a: 'Read "along the corridor, up the stairs": the easting (horizontal number) first, then the northing (vertical number).' },
-    { keys: ['contour'], a: 'Contour lines join points of equal height on a map. Lines close together = steep; lines far apart = gentle slope.' },
-    { keys: ['scale'], a: 'Map scale (like 1:50,000) tells you how a distance on the map relates to real life. 1cm at 1:50,000 = 500m in reality.' },
-    { keys: ['population density'], a: 'Population density = number of people ÷ area of land. It shows how crowded or spread out an area is.' },
-    { keys: ['urbanisation', 'urbanization'], a: 'Urbanisation is the growing proportion of a population living in towns and cities rather than the countryside.' },
-    { keys: ['life expectancy'], a: 'Life expectancy is the average number of years a person born today is expected to live.' },
-    { keys: ['lic'], a: 'LIC = Low Income Country — generally lower average incomes, often with younger, faster-growing populations.' },
-    { keys: ['hic'], a: 'HIC = High Income Country — generally higher average incomes and more developed infrastructure and services.' },
-    { keys: ['nee'], a: 'NEE = Newly Emerging Economy — a country with rapidly growing industry and incomes, moving from LIC towards HIC.' },
-    { keys: ['birth rate'], a: 'Birth rate is the number of live births per 1,000 people per year. Education, family planning and culture all affect it.' },
-    { keys: ['death rate'], a: 'Death rate is the number of deaths per 1,000 people per year. Healthcare, sanitation and age structure all affect it.' },
-    { keys: ['weather'], a: 'Weather is the day-to-day condition of the atmosphere (today’s rain, wind, temperature) — compare with climate, which is the average pattern over many years.' },
-    { keys: ['climate'], a: 'Climate is the average weather pattern of a place over a long period (usually 30+ years) — compare with weather, which is day-to-day.' },
-    { keys: ['delta'], a: 'A delta forms where a river deposits sediment as it slows down entering the sea or a lake, often creating a fan-shaped or branching landform.' },
-    { keys: ['compass', 'north-east', 'north east', 'direction'], a: 'The compass runs clockwise: N → NE → E → SE → S → SW → W → NW → back to N. A 90° clockwise turn moves you one main point round.' }
-  ];
+  /* ==================== GEOGRAPHY HELPER (AI-backed) ====================
+     Open-ended geography Q&A. Reuses the same /api/mark-ppq serverless
+     function (and the "SBL PPQ Marker" bot behind it) as the IB
+     Style Questions marking feature elsewhere on the site, but framed
+     as an answer-a-question prompt rather than a mark-this-answer one
+     — see buildHelperPrompt() below. Because this page has no login,
+     a soft per-visit question cap (MAX_HELPER_QUESTIONS) is applied
+     purely to limit runaway usage of the shared marking service. */
 
   var HELPER_SUGGESTIONS = ['What is the eye of a storm?', 'What is population density?', 'How do I read a grid reference?', 'Weather vs climate?'];
 
-  var HELPER_FALLBACK = 'I don’t have a note on that one yet — try asking your teacher, or check the quiz explanation after you answer!';
-  var HELPER_GREETING = 'Hi! I’m the Geography Helper. Ask me about a term from the quizzes above, like "what is a storm surge?"';
+  var HELPER_GREETING = 'Hi! I’m the Geography Helper. Ask me any geography question — not just from these quizzes.';
+  var MAX_HELPER_QUESTIONS = 20;
+  var HELPER_LIMIT_MESSAGE = 'You’ve asked lots of questions this visit — nice work! Please check back a bit later, or ask your teacher in the meantime.';
+
+  function buildHelperPrompt(studentQuestion) {
+    return {
+      question: 'You are the "Geography Helper", a friendly chatbot for KS3 (Year 7-9, ages 11-14) students on a geography quizzes page. ' +
+        'The student has typed a free-form geography question of their own (it appears as STUDENT ANSWER below, even though it is a QUESTION, not an answer — that is just the shape of this system). ' +
+        'Answer it directly and simply, in 2-4 short sentences, in a warm, encouraging tone suitable for an 11-14 year old. ' +
+        'Do NOT mark or grade anything. Do NOT give a mark, a score, or a score out of any number. Do NOT use exam-style section headings such as "MARK AWARDED", "WHY THIS MARK", "WHAT WAS DONE WELL" or similar — just write a plain, direct answer. ' +
+        'If the question is not about geography, gently say so and suggest a geography topic instead, without being unfriendly.',
+      maxMark: 1,
+      markingGuidance: 'This is not an exam question. There is no mark scheme and no score — just answer the student’s question helpfully and simply.'
+    };
+  }
 
   /* ==================== QUIZ RENDERING ==================== */
 
@@ -623,12 +636,15 @@ cursor:pointer;
   var helperToggle = document.getElementById('helperToggle');
   var helperPanel = document.getElementById('helperPanel');
   var helperClose = document.getElementById('helperClose');
+  var helperExpand = document.getElementById('helperExpand');
   var helperMessages = document.getElementById('helperMessages');
   var helperInput = document.getElementById('helperInput');
   var helperSend = document.getElementById('helperSend');
   var helperSuggestions = document.getElementById('helperSuggestions');
 
   var helperOpened = false;
+  var helperBusy = false;
+  var helperQuestionCount = 0;
 
   function addHelperMessage(text, who) {
     var div = document.createElement('div');
@@ -636,22 +652,69 @@ cursor:pointer;
     div.textContent = text;
     helperMessages.appendChild(div);
     helperMessages.scrollTop = helperMessages.scrollHeight;
+    return div;
   }
 
-  function answerHelper(question) {
-    var lower = question.toLowerCase();
-    var match = HELPER_FAQ.find(function (entry) {
-      return entry.keys.some(function (key) { return lower.indexOf(key) !== -1; });
-    });
-    addHelperMessage(match ? match.a : HELPER_FALLBACK, 'bot');
+  function setHelperBusy(isBusy) {
+    helperBusy = isBusy;
+    helperSend.disabled = isBusy;
+    helperInput.disabled = isBusy;
+  }
+
+  function answerHelper(studentQuestion) {
+    setHelperBusy(true);
+    var typingMsg = addHelperMessage('Thinking…', 'bot typing');
+
+    var payload = buildHelperPrompt(studentQuestion);
+
+    fetch('/api/mark-ppq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: payload.question,
+        maxMark: payload.maxMark,
+        markingGuidance: payload.markingGuidance,
+        studentAnswer: studentQuestion
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error((data && data.error) || 'Could not get an answer.');
+          return data;
+        });
+      })
+      .then(function (data) {
+        var feedback = data.feedback || {};
+        var answerText = feedback.whyThisMark || data.raw || 'Sorry, I couldn’t work out an answer to that — try rephrasing your question.';
+        typingMsg.textContent = answerText;
+        typingMsg.className = 'helper-msg bot';
+      })
+      .catch(function (err) {
+        typingMsg.textContent = 'Sorry, that didn’t go through (' + (err.message || 'please try again') + ').';
+        typingMsg.className = 'helper-msg bot';
+      })
+      .finally(function () {
+        setHelperBusy(false);
+        helperInput.focus();
+      });
   }
 
   function sendHelperQuestion() {
+    if (helperBusy) return;
     var text = helperInput.value.trim();
     if (!text) return;
+
+    if (helperQuestionCount >= MAX_HELPER_QUESTIONS) {
+      addHelperMessage(text, 'user');
+      helperInput.value = '';
+      addHelperMessage(HELPER_LIMIT_MESSAGE, 'bot');
+      return;
+    }
+
+    helperQuestionCount += 1;
     addHelperMessage(text, 'user');
     helperInput.value = '';
-    setTimeout(function () { answerHelper(text); }, 250);
+    answerHelper(text);
   }
 
   HELPER_SUGGESTIONS.forEach(function (s) {
@@ -659,8 +722,9 @@ cursor:pointer;
     btn.type = 'button';
     btn.textContent = s;
     btn.addEventListener('click', function () {
-      addHelperMessage(s, 'user');
-      setTimeout(function () { answerHelper(s); }, 250);
+      if (helperBusy) return;
+      helperInput.value = s;
+      sendHelperQuestion();
     });
     helperSuggestions.appendChild(btn);
   });
@@ -673,6 +737,11 @@ cursor:pointer;
     }
   });
   helperClose.addEventListener('click', function () { helperPanel.classList.remove('is-open'); });
+  helperExpand.addEventListener('click', function () {
+    var isExpanded = helperPanel.classList.toggle('is-expanded');
+    helperExpand.innerHTML = isExpanded ? '&#10531;' : '&#10530;';
+    helperExpand.setAttribute('aria-label', isExpanded ? 'Shrink Geography Helper' : 'Expand Geography Helper');
+  });
   helperSend.addEventListener('click', sendHelperQuestion);
   helperInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') sendHelperQuestion();
