@@ -192,6 +192,32 @@
   .news li.breaking { border-left: 5px solid #1e3a8a; background: #f1f5ff; }
   .news li.breaking .tag { display: inline-block; font-size: 0.66rem; font-weight: 900; letter-spacing: 0.06em; color: #fff; background: #dc2626; padding: 2px 7px; border-radius: 4px; margin-right: 6px; vertical-align: 1px; }
 
+  /* MAP */
+  .map-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 10px 10px 8px; }
+  .map-card .mt { text-align: center; font-weight: 900; color: var(--ink); font-size: 0.98rem; }
+  .map-card .ms { text-align: center; font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; }
+  .map-card svg { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .mkey { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 0.68rem; color: var(--muted); margin-top: 6px; padding: 6px 4px 0; border-top: 1px solid var(--line); }
+  .mkey span { display: inline-flex; align-items: center; gap: 4px; }
+  .mkey i { width: 11px; height: 11px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,0.15); }
+  .mkey.plans { color: var(--ink); font-weight: 700; font-size: 0.72rem; }
+  .mkey.plans b { color: var(--teal-dark); }
+  .pl.pop { animation: pop .45s ease; transform-box: fill-box; transform-origin: center; }
+  @keyframes pop { 0% { transform: scale(0.2); opacity: 0; } 70% { transform: scale(1.25); } 100% { transform: scale(1); opacity: 1; } }
+  .plan-grid { display: block; }
+  @media (min-width: 1000px) {
+    .plan-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+    .plan-side { position: sticky; top: 8px; }
+    .plan-side .bar-wrap { position: static; }
+    .plan-grid .strats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 999px) { .plan-side { display: contents; } .plan-side .map-card { margin-bottom: 12px; } }
+  .bn-map { margin-top: 12px; }
+  .bn-map .map-card { padding: 6px; }
+  .bn-map .mkey { display: none; }
+  .storm-map { margin-bottom: 14px; }
+  .news li .num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; color: #fff; font-size: 0.72rem; font-weight: 900; margin-right: 6px; vertical-align: 1px; }
+
   @media (max-width: 860px) {
     .zones, .ps { grid-template-columns: 1fr; }
     .meters { grid-template-columns: 1fr 1fr; }
@@ -217,7 +243,7 @@
   <div class="intro">
     <span class="kicker">KS3 &middot; Tropical storms</span>
     <h1>&#127744; Storm-Ready City</h1>
-    <p>You are the city&rsquo;s emergency planning team. A tropical storm season is coming. <strong>How can we reduce the impacts of tropical storms?</strong></p>
+    <p>Welcome to <strong>San Isidro</strong>, a coastal city of 500,000 people. You are the city&rsquo;s emergency planning team. A tropical storm season is coming. <strong>How can we reduce the impacts of tropical storms?</strong></p>
   </div>
   <div class="steps">
     <span class="step active" data-s="1">1 &middot; Sort the 3 P&rsquo;s</span>
@@ -255,14 +281,20 @@
       <h2>Round 2: How much money does your city have?</h2>
       <p class="how">You cannot afford everything. Choose a budget, fund your plans, then the storm arrives. <b>Play both budgets</b> to compare.</p>
       <div class="budget-pick" id="budgetPick"></div>
+      <div id="welcomeMap" style="max-width:760px;margin:14px auto 0"></div>
     </div>
     <div id="planPanel" style="display:none">
+     <div class="plan-grid">
+      <div class="plan-side">
       <div class="bar-wrap">
         <div class="bar-top"><span>Budget: <span id="bTotal"></span></span><span class="left" id="bLeft"></span></div>
         <div class="bar" id="bar"></div>
         <div class="legend"><span><i style="background:var(--pred)"></i>Prediction</span><span><i style="background:var(--prep)"></i>Preparation</span><span><i style="background:var(--prot)"></i>Protection</span></div>
       </div>
+      <div id="planMap"></div>
+      </div>
       <div class="strats" id="strats"></div>
+     </div>
       <div class="actions">
         <button class="btn ghost" id="backBudget" type="button">Change budget</button>
         <button class="btn primary" id="stormBtn" type="button">&#127744; The storm arrives &rarr;</button>
@@ -277,6 +309,7 @@
       </div>
       <div class="panel">
         <h2 id="resTitle"></h2>
+        <div class="storm-map" id="stormMap"></div>
         <div class="meters" id="meters"></div>
         <ul class="news" id="news"></ul>
         <div id="compare" style="display:none;margin-top:14px">
@@ -312,6 +345,7 @@
     <div class="bn-head"><span class="bk">BREAKING NEWS</span><span class="live">LIVE</span><span class="when" id="bnWhen"></span></div>
     <div class="bn-body">
       <div class="headline" id="bnHeadline"></div>
+      <div class="bn-map" id="bnMap"></div>
       <div class="ask">Does your evacuation plan still work?</div>
       <div class="bn-yn" id="bnYN">
         <button type="button" data-a="1">&#128077; Yes, it still works</button>
@@ -445,6 +479,7 @@
   var budget = 50, picks = [], results = {};
   function showPick() {
     $('pickPanel').style.display = ''; $('planPanel').style.display = 'none'; $('stormPanel').style.display = 'none';
+    $('welcomeMap').innerHTML = mapCard({});
     $('budgetPick').innerHTML = [50, 10].map(function (b) {
       return '<button type="button" class="bchoice" data-b="' + b + '"><div class="amt">$' + b + ' million</div><b>' + BUDGETS[b].name + '</b><p>' + BUDGETS[b].desc + '</p>' +
         (results[b] ? '<div class="done">✓ Played — score ' + results[b].overall + '/100</div>' : '') + '</button>';
@@ -454,11 +489,13 @@
     var b = e.target.closest('.bchoice'); if (!b) return;
     budget = +b.dataset.b; picks = []; runNews = []; midShown = false;
     $('pickPanel').style.display = 'none'; $('planPanel').style.display = ''; $('msg2').textContent = '';
-    renderPlans(); window.scrollTo(0, 0);
+    lastAdded = null; renderPlans(); window.scrollTo(0, 0);
   });
   function spent() { return picks.reduce(function (a, id) { return a + byId(id).cost; }, 0); }
   function byId(id) { return S.filter(function (s) { return s.id === id; })[0]; }
+  var lastAdded = null;
   function renderPlans() {
+    $('planMap').innerHTML = mapCard({ picks: picks, fresh: lastAdded });
     var left = budget - spent();
     $('bTotal').textContent = '$' + budget + ' million';
     $('bLeft').textContent = '$' + left + 'm left';
@@ -478,11 +515,120 @@
   $('strats').addEventListener('click', function (e) {
     var b = e.target.closest('.strat'); if (!b || b.disabled) return;
     var id = b.dataset.id, i = picks.indexOf(id);
-    if (i > -1) picks.splice(i, 1); else picks.push(id);
+    if (i > -1) { picks.splice(i, 1); lastAdded = null; } else { picks.push(id); lastAdded = id; }
     renderPlans();
     if (!midShown && picks.length >= 2 && spent() >= budget * 0.4) { midShown = true; setTimeout(function () { showNews('mid', function () {}); }, 350); }
   });
   $('backBudget').addEventListener('click', showPick);
+
+  /* ---------- SAN ISIDRO MAP ---------- */
+  var COAST = 'C195 60 205 110 192 170 S180 250 192 300 S185 380 200 440';
+  var RIVER = 'M196 286 C250 290 300 282 345 252 S425 196 475 184 S570 150 650 22';
+  var NEWS_LOC = { trust: [272, 62], roofs: [246, 346], surge: null, centre: null };
+  function newsLoc(id, h) {
+    if (id === 'surge') return h('wall') ? [205, 100] : [200, 235];
+    if (id === 'centre') return h('shel') ? [300, 372] : h('schl') ? [300, 124] : [262, 210];
+    return NEWS_LOC[id];
+  }
+  var mapN = 0;
+  function mapSVG(o) {
+    var u = 'm' + (++mapN);
+    var picks = o.picks || [], h = function (id) { return picks.indexOf(id) > -1; };
+    var s = [];
+    s.push('<svg viewBox="0 0 660 440" role="img" aria-label="Map of San Isidro"><defs>' +
+      '<marker id="arr' + u + '" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#15803d"/></marker>' +
+      '<marker id="arrT' + u + '" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0f766e"/></marker>' +
+      '<clipPath id="lowClip' + u + '"><path d="M205 0 ' + COAST + ' H330 V0Z"/></clipPath></defs>');
+    // land zones
+    s.push('<rect width="660" height="440" fill="#ecdfb0"/><rect x="330" width="150" height="440" fill="#d8e8c4"/><rect x="480" width="180" height="440" fill="#a9d18e"/>');
+    for (var c = 0; c < 5; c++) s.push('<path d="M490 ' + (60 + c * 80) + ' q60 -25 160 -8" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1.5"/>');
+    // beach + ocean
+    s.push('<path d="M205 0 ' + COAST + '" fill="none" stroke="#f5ecc9" stroke-width="26"/>');
+    s.push('<path d="M0 0 H205 ' + COAST + ' H0Z" fill="#5b9bd5"/>');
+    [40, 120, 200, 280, 360].forEach(function (y, i) { s.push('<path d="M' + (15 + (i % 2) * 20) + ' ' + y + ' q25 -6 50 0 t50 0" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>'); });
+    // rain flooding (impact)
+    if (o.impact) {
+      if (!h('drain')) {
+        s.push('<path d="' + RIVER + '" fill="none" stroke="rgba(37,99,235,0.35)" stroke-width="40" stroke-linecap="round"/>');
+        s.push('<ellipse cx="275" cy="255" rx="48" ry="26" fill="rgba(37,99,235,0.35)"/>');
+      } else s.push('<path d="' + RIVER + '" fill="none" stroke="rgba(37,99,235,0.2)" stroke-width="16" stroke-linecap="round"/>');
+    }
+    // river
+    s.push('<path d="' + RIVER + '" fill="none" stroke="#3a78c2" stroke-width="9" stroke-linecap="round"/><path d="' + RIVER + '" fill="none" stroke="#7fb0e6" stroke-width="3" stroke-linecap="round"/>');
+    // storm surge (impact)
+    if (o.impact) {
+      var wallHolds = h('wall') && !o.cat5;
+      s.push('<g clip-path="url(#lowClip' + u + ')"><rect x="150" y="' + (wallHolds ? 192 : 0) + '" width="' + (o.cat5 ? 230 : 190) + '" height="440" fill="rgba(29,78,216,0.42)"/>');
+      for (var y = (wallHolds ? 215 : 25); y < 440; y += 45) s.push('<path d="M215 ' + y + ' q12 -6 24 0 t24 0 t24 0 t24 0" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>');
+      s.push('</g>');
+      if (o.cat5) s.push('<rect x="330" y="0" width="45" height="440" fill="rgba(29,78,216,0.25)"/>');
+    }
+    // dense population zone
+    s.push('<rect x="214" y="18" width="112" height="165" fill="rgba(142,107,176,0.2)" stroke="#8e6bb0" stroke-width="1.5" stroke-dasharray="5 4"/>');
+    [[230, 36, 50], [248, 28, 58], [266, 42, 44]].forEach(function (b) { s.push('<rect x="' + b[0] + '" y="' + b[1] + '" width="13" height="' + b[2] + '" fill="#f4f7fb" stroke="#5a7fa8" stroke-width="1.5"/>'); });
+    [[226, 112], [240, 106], [254, 112], [232, 126], [248, 124], [266, 116], [236, 144], [252, 140], [280, 150], [296, 96], [306, 160], [224, 162]].forEach(function (q) { s.push('<rect x="' + q[0] + '" y="' + q[1] + '" width="8" height="8" fill="#a07cc0"/>'); });
+    function school(x, y) { return '<path d="M' + (x - 10) + ' ' + (y - 3) + ' L' + x + ' ' + (y - 11) + ' L' + (x + 10) + ' ' + (y - 3) + 'Z" fill="#b8860b"/><rect x="' + (x - 8) + '" y="' + (y - 3) + '" width="16" height="12" fill="#f3d9a0" stroke="#b8860b" stroke-width="1.5"/>'; }
+    s.push(school(300, 124) + school(400, 330) + school(560, 345));
+    // hospital
+    s.push('<rect x="355" y="228" width="22" height="22" fill="#fff" stroke="#dc2626" stroke-width="2"/><path d="M366 232v14M359 239h14" stroke="#dc2626" stroke-width="4"/>');
+    // informal housing
+    var inf = [[226, 328], [240, 322], [254, 330], [232, 342], [248, 344], [262, 340], [236, 356], [252, 358]];
+    inf.forEach(function (q) { s.push('<rect x="' + q[0] + '" y="' + q[1] + '" width="10" height="9" fill="#9a5b2c" stroke="' + (h('home') ? '#16a34a' : 'none') + '" stroke-width="2"/>'); });
+    // port + fishing community
+    s.push('<rect x="140" y="356" width="48" height="7" fill="#9ca3af"/><path d="M152 356 V336 L166 342" fill="none" stroke="#6b7280" stroke-width="3"/>');
+    var fishOp = h('relo') ? 0.25 : 1;
+    s.push('<g opacity="' + fishOp + '">' + [[206, 392], [220, 400], [210, 410], [226, 414]].map(function (q) { return '<path d="M' + q[0] + ' ' + (q[1] + 7) + ' l6 -7 l6 7z" fill="#2f6f6a"/><rect x="' + (q[0] + 1) + '" y="' + (q[1] + 7) + '" width="10" height="6" fill="#2f6f6a"/>'; }).join('') + '</g>');
+    s.push('<path d="M176 382 h14 l-3 5 h-8z" fill="#2f6f6a"/><path d="M168 398 h14 l-3 5 h-8z" fill="#2f6f6a"/>');
+    // compass + scale
+    s.push('<circle cx="626" cy="404" r="16" fill="#fff" stroke="#334155" stroke-width="1.5"/><path d="M626 392 l5 12 l-5 12 l-5 -12z" fill="#334155"/><text x="626" y="386" font-size="10" font-weight="700" text-anchor="middle" fill="#334155">N</text>');
+    s.push('<rect x="20" y="420" width="60" height="4" fill="#1e293b"/><text x="20" y="414" font-size="9" fill="#fff">0</text><text x="72" y="414" font-size="9" fill="#fff">1 km</text>');
+
+    // ---- student plans ----
+    function badge(x, y, emo, id) { return '<g class="pl' + (o.fresh === id ? ' pop' : '') + '"><circle cx="' + x + '" cy="' + y + '" r="13" fill="#fff" stroke="#0f766e" stroke-width="2.5"/><text x="' + x + '" y="' + (y + 5) + '" font-size="14" text-anchor="middle">' + emo + '</text></g>'; }
+    var b = [];
+    if (h('wall')) { s.push('<path d="M206 10 C197 60 207 110 194 175" fill="none" stroke="#475569" stroke-width="7" stroke-linecap="round"/>'); b.push(badge(186, 95, '\uD83E\uDDF1', 'wall')); }
+    if (h('relo')) { s.push('<path d="M232 402 C330 420 470 380 580 290" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#arrT' + u + ')"/>'); [[582, 262], [596, 270], [610, 262], [598, 282]].forEach(function (q) { s.push('<path d="M' + q[0] + ' ' + (q[1] + 7) + ' l6 -7 l6 7z" fill="#2f6f6a"/><rect x="' + (q[0] + 1) + '" y="' + (q[1] + 7) + '" width="10" height="6" fill="#2f6f6a"/>'); }); b.push(badge(420, 400, '\uD83D\uDE9A', 'relo')); }
+    if (h('evac')) {
+      ['M300 60 C380 50 450 70 540 70', 'M270 336 C340 300 420 290 520 300', 'M325 190 C400 170 460 170 540 180'].forEach(function (d) { s.push('<path d="' + d + '" fill="none" stroke="#15803d" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#arr' + u + ')"/>'); });
+      b.push(badge(440, 58, '\uD83E\uDDED', 'evac'));
+    }
+    if (h('fore')) b.push(badge(600, 150, '\uD83D\uDCE1', 'fore'));
+    if (h('warn')) { s.push('<path d="M420 96 a14 14 0 0 1 20 0 M414 90 a22 22 0 0 1 32 0" fill="none" stroke="#0f766e" stroke-width="2"/>'); b.push(badge(430, 116, '\uD83D\uDCF1', 'warn')); }
+    if (h('schl')) { [[300, 124], [400, 330], [560, 345]].forEach(function (q, i) { b.push(badge(q[0] + 16, q[1] - 16, '\uD83D\uDEE1\uFE0F', i === 0 ? 'schl' : 'schl')); }); }
+    if (h('edu')) b.push(badge(296, 170, '\uD83D\uDCE3', 'edu'));
+    if (h('home')) b.push(badge(276, 322, '\uD83C\uDFE0', 'home'));
+    if (h('shel')) { s.push('<g><rect x="288" y="360" width="22" height="12" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/><path d="M291 372v8M307 372v8" stroke="#475569" stroke-width="2"/></g><g><rect x="300" y="196" width="22" height="12" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/><path d="M303 208v8M319 208v8" stroke="#475569" stroke-width="2"/></g>'); b.push(badge(299, 344, '\uD83C\uDFDB\uFE0F', 'shel')); }
+    if (h('drain')) { [[232, 290], [262, 300], [292, 290], [248, 214]].forEach(function (q) { s.push('<circle cx="' + q[0] + '" cy="' + q[1] + '" r="4" fill="#1d4ed8" stroke="#fff" stroke-width="1.5"/>'); }); b.push(badge(282, 316, '\uD83D\uDEB0', 'drain')); }
+    if (h('supp')) b.push(badge(520, 240, '\uD83D\uDCE6', 'supp'));
+    if (h('team')) b.push(badge(392, 262, '\uD83D\uDE91', 'team'));
+
+    // ---- impacts ----
+    if (o.impact) {
+      if (!h('home')) inf.forEach(function (q, i) { if (i % 2 === 0) s.push('<text x="' + (q[0] + 5) + '" y="' + (q[1] + 8) + '" font-size="11" font-weight="900" fill="#dc2626" text-anchor="middle">\u2716</text>'); });
+      if (h('evac') && (h('warn') || h('edu'))) [[560, 64], [548, 296], [556, 176]].forEach(function (q) { s.push('<text x="' + q[0] + '" y="' + q[1] + '" font-size="15" text-anchor="middle">\uD83D\uDC65</text>'); });
+      if (o.cat5 && h('wall')) s.push('<text x="222" y="60" font-size="16" text-anchor="middle">\uD83D\uDCA5</text>');
+    }
+    s = s.concat(b);
+    // numbered BREAKING markers
+    (o.news || []).forEach(function (n, i) {
+      var L = newsLoc(n.id, h); var col = n.ok ? '#16a34a' : '#dc2626';
+      s.push('<g><circle cx="' + (L[0] + 16) + '" cy="' + (L[1] + 14) + '" r="11" fill="' + col + '" stroke="#fff" stroke-width="2.5"/><text x="' + (L[0] + 16) + '" y="' + (L[1] + 18.5) + '" font-size="12" font-weight="900" fill="#fff" text-anchor="middle">' + (i + 1) + '</text></g>');
+    });
+    // highlight (pop-up)
+    if (o.hl) {
+      var L = newsLoc(o.hl, h);
+      s.push('<circle cx="' + L[0] + '" cy="' + L[1] + '" r="30" fill="rgba(220,38,38,0.12)" stroke="#dc2626" stroke-width="3"><animate attributeName="r" values="22;34;22" dur="1.4s" repeatCount="indefinite"/></circle>');
+    }
+    s.push('</svg>');
+    return s.join('');
+  }
+  function mapCard(o) {
+    var key = '<div class="mkey">' + [['#ecdfb0', 'Low-lying land'], ['#d8e8c4', 'Mid elevation'], ['#a9d18e', 'Higher ground'], ['rgba(142,107,176,0.35)', 'Dense population'], ['#9a5b2c', 'Informal housing'], ['#fff;border-color:#dc2626', 'Hospital'], ['#f3d9a0', 'School'], ['#f4f7fb;border-color:#5a7fa8', 'Tourist hotels'], ['#9ca3af', 'Port'], ['#2f6f6a', 'Fishing community']].map(function (k) { return '<span><i style="background:' + k[0] + '"></i>' + k[1] + '</span>'; }).join('') + '</div>';
+    var plans = '';
+    if (o.picks) plans = '<div class="mkey plans"><b>Your plans:</b> ' + (o.picks.length ? o.picks.map(function (id) { var s = byId(id); return '<span>' + s.emo + ' ' + esc(s.t) + '</span>'; }).join('') : '<span style="font-weight:500;color:var(--muted)">none yet \u2014 fund a plan and it appears on the map</span>') + '</div>';
+    var imp = o.impact ? '<div class="mkey"><span><i style="background:rgba(29,78,216,0.5)"></i>Storm surge flooding</span><span><i style="background:rgba(37,99,235,0.3)"></i>River / rain flooding</span><span style="color:#dc2626;font-weight:800">\u2716 Roofs lost</span><span>\uD83D\uDC65 Evacuated safely</span><span><i style="background:#dc2626;border-radius:50%"></i><i style="background:#16a34a;border-radius:50%"></i>Breaking news (numbered)</span></div>' : '';
+    return '<div class="map-card"><div class="mt">San Isidro \u2014 City Map</div><div class="ms">Fictional coastal city \u2022 Population: 500,000</div>' + mapSVG(o) + imp + plans + key + '</div>';
+  }
 
   /* ---------- BREAKING NEWS scenarios ----------
      Each checks the funded plan and returns whether it still works,
@@ -525,6 +671,7 @@
     var n = nextNews(); runNews.push(n.id);
     $('bnWhen').textContent = stage === 'mid' ? 'While you are planning\u2026' : '6 hours before landfall';
     $('bnHeadline').textContent = n.head;
+    $('bnMap').innerHTML = mapCard({ picks: picks, hl: n.id, cat5: n.cat5 });
     $('bnVerdict').style.display = 'none'; $('bnActions').style.display = 'none';
     var btns = $('bnYN').querySelectorAll('button');
     btns.forEach(function (b) { b.disabled = false; b.classList.remove('picked'); });
@@ -567,10 +714,10 @@
     if (has('supp') || has('team')) news.push(['good', (has('team') ? '🚑 Trained rescue teams reached cut-off communities quickly. ' : '') + (has('supp') ? '📦 Stored food, water and medicine were handed out the next day.' : '')]);
     else news.push(['bad', '⏳ After the storm, cut-off communities waited days for rescue, clean water and food.']);
     var bn = [];
-    runNews.forEach(function (nid) {
+    runNews.forEach(function (nid, ni) {
       var n = NEWS.filter(function (x) { return x.id === nid; })[0], c = n.check();
       for (var k in c.fx) sum[k] += c.fx[k];
-      bn.push(['breaking', '<span class="tag">BREAKING</span><b>' + n.head + '</b> ' + (c.ok ? '\u2714 Your final plan coped: ' : '\u2716 Your final plan was caught out: ') + c.txt]);
+      bn.push(['breaking', '<span class="num" style="background:' + (c.ok ? '#16a34a' : '#dc2626') + '">' + (ni + 1) + '</span><span class="tag">BREAKING</span><b>' + n.head + '</b> ' + (c.ok ? '\u2714 Your final plan coped: ' : '\u2716 Your final plan was caught out: ') + c.txt]);
     });
     news = bn.concat(news);
     var r = {
@@ -591,6 +738,7 @@
     $('stormHead').textContent = 'Category ' + (cat5 ? 5 : 4) + ' tropical storm hits the city';
     $('stormSub').textContent = cat5 ? 'Winds of over 250 km/h, 400 mm of rain in two days and a storm surge higher than any sea wall.' : 'Winds of over 200 km/h, 400 mm of rain in two days and a 4 m storm surge along the coast.';
     var r = evaluate(); results[budget] = r;
+    $('stormMap').innerHTML = mapCard({ picks: picks, impact: true, cat5: cat5, news: runNews.map(function (nid) { var n = NEWS.filter(function (x) { return x.id === nid; })[0]; return { id: nid, ok: n.check().ok }; }) });
     $('planPanel').style.display = 'none'; $('stormPanel').style.display = '';
     $('resTitle').textContent = 'Storm report: $' + budget + ' million city — overall ' + r.overall + '/100';
     var M = [['Lives protected', r.lives, 'var(--green)'], ['Property protected', r.prop, 'var(--prot)'], ['Poorest helped', r.fair, 'var(--prep)'], ['Recovery speed', r.rec, 'var(--pred)']];
