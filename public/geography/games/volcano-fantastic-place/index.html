@@ -234,7 +234,91 @@
   .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; }
   .fact { background: #fff7ed; border-left: 5px solid #ea580c; border-radius: 10px; padding: 10px 12px; font-size: 0.88rem; line-height: 1.5; margin: 10px 0; }
 
+  /* gap fill */
+  .cloze { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
+  .cz-bank { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border-radius: 10px; background: #fff7ed; border: 1px dashed #fdba74; margin-bottom: 10px; }
+  .cz-bank button { border: 2px solid #fb923c; background: #fff; color: #9a3412; border-radius: 999px; padding: 5px 12px; font-weight: 800; font-size: 0.88rem; cursor: pointer; }
+  .cz-bank button.used { opacity: 0.3; cursor: default; }
+  .cz-bank button.sel { background: #ea580c; color: #fff; }
+  .cz-text { font-size: 1.02rem; line-height: 2.3; }
+  .gap { display: inline-block; min-width: 92px; padding: 0 8px; margin: 0 2px; border: none; border-bottom: 3px solid #94a3b8; background: #f1f5f9; border-radius: 6px 6px 0 0; font: inherit; font-weight: 800; color: var(--navy); cursor: pointer; line-height: 1.6; }
+  .gap.active { border-bottom-color: var(--teal); background: #e6fbf9; box-shadow: 0 0 0 2px rgba(0,184,176,0.3); }
+  .gap.right { border-bottom-color: var(--green); background: var(--green-soft); color: var(--green); }
+  .gap.wrong { border-bottom-color: var(--red); background: var(--red-soft); color: var(--red); }
+
+  /* tap-to-explain words */
+  .term { border: none; background: none; padding: 0; font: inherit; color: inherit; border-bottom: 2px dotted currentColor; cursor: help; font-weight: 750; }
+  .term[aria-expanded="true"] { background: #fef9c3; }
+  .def-pop { display: none; margin: 4px 0; padding: 6px 9px; border-radius: 9px; background: #fff; border: 1px solid #fde047; color: var(--ink); font-size: 0.8rem; font-weight: 600; line-height: 1.4; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+  .term[aria-expanded="true"] + .def-pop { display: block; }
+  .help-note { font-size: 0.8rem; color: var(--muted); margin: -4px 0 10px; }
+  details.example { margin-top: 8px; border-radius: 10px; background: #fff; border: 1px dashed rgba(0,124,130,0.4); padding: 8px 10px; }
+  details.example summary { cursor: pointer; font-weight: 800; color: var(--teal-dark); font-size: 0.86rem; }
+  details.example p { font-size: 0.86rem; line-height: 1.55; margin-top: 6px; }
+
+  /* definitions */
+  .defs { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-top: 12px; }
+  .def { background: #fff; border: 1px solid var(--line); border-left: 5px solid #ea580c; border-radius: 12px; padding: 9px 11px; font-size: 0.84rem; line-height: 1.45; }
+  .def b { display: block; font-size: 0.95rem; color: var(--navy); }
+  .def .say { display: block; font-size: 0.74rem; color: #9a3412; font-weight: 700; margin-top: 2px; }
+  .def.oce { border-left-color: #475569; } .def.con { border-left-color: #a16207; } .def.man { border-left-color: #f97316; }
+  .def.mag { border-left-color: #dc2626; } .def.wat { border-left-color: #2563eb; }
+
+  /* animation */
+  .anim-wrap { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .anim { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .anim svg { display: block; width: 100%; height: auto; }
+  .cap { border-radius: 14px; padding: 14px; background: #fff7ed; border: 2px solid #fdba74; min-height: 150px; }
+  .cap .sn { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: #c2410c; }
+  .cap h3 { margin: 4px 0 6px; font-size: 1.1rem; }
+  .cap p { font-size: 1rem; line-height: 1.55; }
+  .dots { display: flex; gap: 6px; margin: 10px 0; flex-wrap: wrap; }
+  .dots button { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fdba74; background: #fff; font-weight: 900; font-size: 0.78rem; cursor: pointer; color: #9a3412; }
+  .dots button.on { background: #ea580c; color: #fff; border-color: #ea580c; }
+  .ctrl { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ctrl .btn { padding: 9px 14px; font-size: 0.88rem; }
+  #av .slab { stroke-dasharray: 100 100; stroke-dashoffset: 59; transition: stroke-dashoffset 2.2s ease; }
+  #av.s2 .slab, #av.s3 .slab, #av.s4 .slab, #av.s5 .slab, #av.s6 .slab { stroke-dashoffset: 0; }
+  #av .belt { stroke-dasharray: 6 14; animation: belt 1.6s linear infinite; opacity: 0; transition: opacity .6s; }
+  #av:not(.s0) .belt.top { opacity: 0.85; }
+  #av.s2 .belt.full, #av.s3 .belt.full, #av.s4 .belt.full, #av.s5 .belt.full, #av.s6 .belt.full { opacity: 0.85; transition-delay: 2s; }
+  @keyframes belt { to { stroke-dashoffset: -20; } }
+  #av .mv-arrow { opacity: 0; transition: opacity .5s; }
+  #av:not(.s0) .mv-arrow { opacity: 1; animation: nudge 1.4s ease-in-out infinite; }
+  @keyframes nudge { 50% { transform: translateX(-14px); } }
+  #av .sub-arrow, #av .sub-lbl { opacity: 0; transition: opacity .6s .8s; }
+  #av.s2 .sub-arrow, #av.s2 .sub-lbl { opacity: 1; }
+  #av .drop { opacity: 0; }
+  #av.s3 .drop, #av.s4 .drop, #av.s5 .drop, #av.s6 .drop { animation: drip 1.8s ease-in infinite; }
+  #av .drop.d2 { animation-delay: .6s !important; } #av .drop.d3 { animation-delay: 1.2s !important; }
+  @keyframes drip { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(-22px, -30px); } }
+  #av .melt { transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform 1.2s ease .6s; }
+  #av.s3 .melt, #av.s4 .melt, #av.s5 .melt, #av.s6 .melt { transform: scale(1); }
+  #av .conduit { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.6s ease; }
+  #av.s4 .conduit, #av.s5 .conduit, #av.s6 .conduit { stroke-dashoffset: 0; }
+  #av .flow { stroke-dasharray: 3 9; opacity: 0; animation: flow 1s linear infinite; transition: opacity .5s 2.4s; }
+  #av.s4 .flow, #av.s5 .flow, #av.s6 .flow { opacity: 1; }
+  @keyframes flow { to { stroke-dashoffset: 12; } }
+  #av .chamber { opacity: 0; transition: opacity .8s 1.6s; }
+  #av.s4 .chamber, #av.s5 .chamber, #av.s6 .chamber { opacity: 1; }
+  #av .cone2 { opacity: 0; transition: opacity 1.5s 1.5s; }
+  #av.s5 .cone2, #av.s6 .cone2 { opacity: 1; }
+  #av .ash { opacity: 0; transform-box: fill-box; transform-origin: center bottom; }
+  #av.s5 .ash { animation: puff 2.4s ease-out infinite; }
+  #av .ash.a2 { animation-delay: .8s !important; } #av .ash.a3 { animation-delay: 1.6s !important; }
+  @keyframes puff { 0% { opacity: 0; transform: translateY(10px) scale(0.3); } 30% { opacity: 0.9; } 100% { opacity: 0; transform: translateY(-40px) scale(1.4); } }
+  #av .lava { stroke-dasharray: 100 100; stroke-dashoffset: 100; }
+  #av.s5 .lava, #av.s6 .lava { stroke-dashoffset: 0; transition: stroke-dashoffset 2s ease .4s; }
+  #av .lahar, #av .lahar-lbl { opacity: 0; }
+  #av .lahar { stroke-dasharray: 100 100; stroke-dashoffset: 100; }
+  #av.s6 .lahar { opacity: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 2.4s ease; }
+  #av.s6 .lahar-lbl { opacity: 1; transition: opacity .6s 1.8s; }
+  #av .glacier { opacity: 0; transition: opacity .8s; }
+  #av.s6 .glacier { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { #av * { animation: none !important; transition: none !important; } }
+
   @media (max-width: 900px) {
+    .anim-wrap { grid-template-columns: 1fr; }
     .ps { grid-template-columns: 1fr 1fr; }
     .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
     .sg-zones.z3 { grid-template-columns: 1fr; }
@@ -353,6 +437,7 @@
     '<div class="pcard power"><b>⚖️ POWER</b>Who decides? Who benefits? Whose views and safety matter?</div>' +
     '<div class="pcard poss"><b>🔮 POSSIBILITIES</b>What might happen next? How should it be managed?</div></div>';
 
+  function T(w, d) { return '<button type="button" class="term" aria-expanded="false">' + w + '</button><span class="def-pop">' + d + '</span>'; }
   function next(label) { return '<div class="nav-row"><button type="button" class="btn ghost" data-go="-1">← Back</button><button type="button" class="btn primary" data-go="1">' + (label || 'Next station →') + '</button></div>'; }
 
   var H = {};
@@ -374,22 +459,46 @@
     '<div class="photos">' + photo('ruapehu') + photo('crater') + photo('ski') + '</div>' +
     '<h3>Fact or fiction? Tap True or False</h3><div class="tf" id="tf"></div><div class="msg" id="tfMsg"></div></div>' +
     '<div class="panel"><h3>Place cards</h3>' +
+    '<p class="help-note">\uD83D\uDCA1 Tap any <u>dotted word</u> to see what it means.</p>' +
     '<div class="ps">' +
-    '<div class="pcard place"><b>LOCATION</b>A volcano in the central North Island of New Zealand, in Tongariro National Park.</div>' +
-    '<div class="pcard place"><b>DISTINCTIVE LANDSCAPE</b>Snow-capped composite volcano, glaciers, a crater lake, layers of lava and ash, colourful mineral-stained rocks.</div>' +
-    '<div class="pcard place"><b>MEANING TO RESIDENTS</b>Culturally significant to local iwi (Māori tribes), a place to work and relax, and an active volcano people live beside.</div>' +
-    '<div class="pcard place"><b>MEANING TO VISITORS</b>Dramatic scenery, skiing, walking, colourful landscapes and learning about volcanoes.</div></div>' +
-    wb('place', 's1b', 'Evidence / note: Pick TWO place cards. Add your own evidence from the photos or your research.', { frame: 'e.g. “Distinctive landscape: the photo shows…” · “Meaning to visitors: …”' }) + '</div>' + next();
+    '<div class="pcard place"><b>LOCATION</b>A ' + T('volcano', 'A mountain where melted rock, ash and gas come out from inside the Earth.') + ' in the central ' + T('North Island', 'New Zealand has two main islands: the North Island and the South Island.') + ' of New Zealand, in ' + T('Tongariro National Park', 'A protected area of land. It was New Zealand\u2019s first national park.') + '.</div>' +
+    '<div class="pcard place"><b>DISTINCTIVE LANDSCAPE</b>' + T('Distinctive', 'Special or different \u2014 it makes a place stand out from other places.') + ' features: a snow-capped ' + T('composite volcano', 'A tall, steep volcano built from layers of lava and ash.') + ', ' + T('glaciers', 'Slow-moving rivers of ice.') + ', a ' + T('crater lake', 'A lake that fills the hole (crater) at the top of a volcano.') + ', layers of lava and ash, and colourful ' + T('mineral-stained', 'Coloured by chemicals (minerals) from inside the volcano.') + ' rocks.</div>' +
+    '<div class="pcard place"><b>MEANING TO RESIDENTS</b>' + T('Culturally significant', 'Very important to people\u2019s history, beliefs and way of life.') + ' to local ' + T('iwi', 'M\u0101ori tribes. M\u0101ori are the first people of New Zealand.') + ', a place to work and relax, and an ' + T('active volcano', 'A volcano that has erupted recently and could erupt again.') + ' people live beside.</div>' +
+    '<div class="pcard place"><b>MEANING TO VISITORS</b>' + T('Dramatic scenery', 'Exciting, impressive views.') + ', skiing, walking, colourful landscapes and learning about volcanoes.</div></div>' +
+    wb('place', 's1b', 'Evidence / note: Pick TWO place cards. Add your own evidence from the photos or your research.', { frame: 'Tap a sentence starter to begin. Try to use a fact, a name or a number as evidence.', chips: ['Location: Mount Ruapehu is found in', 'Distinctive landscape: the photo shows', 'Meaning to residents: it is important to', 'Meaning to visitors: people come here to', 'This is evidence because'], rows: 4 }) +
+    '<details class="example"><summary>\uD83D\uDC40 See an example answer</summary><p><b>Location:</b> Mount Ruapehu is found in the central North Island of New Zealand, in Tongariro National Park. Google Maps shows it is near the middle of the island.</p><p><b>Distinctive landscape:</b> The photo shows snow on top of the volcano and a blue crater lake at the summit. This is unusual because it has fire (a volcano) and ice (snow and glaciers) together.</p></details></div>' + next();
 
-  H.s2 = '<div class="panel"><span class="act-tag">Activity 2 · Processes</span><h2>🌋 Label the diagram: why is New Zealand volcanic?</h2>' +
+  H.s2 = '<div class="panel"><span class="act-tag">Activity 2 \u00B7 Processes</span><h2>\uD83C\uDFAC Watch it happen: a destructive plate boundary</h2>' +
+    '<p class="how">Press <b>Play</b> and watch how New Zealand\u2019s volcanoes are made. Use <b>Next</b> to go at your own speed. Watch it as many times as you like!</p>' +
+    '<div class="anim-wrap"><div class="anim" id="anim"></div><div><div class="cap" id="cap" aria-live="polite"></div><div class="dots" id="dots"></div>' +
+    '<div class="ctrl"><button type="button" class="btn ghost" id="aBack">\u25C0 Back</button><button type="button" class="btn orange" id="aPlay">\u25B6 Play</button><button type="button" class="btn ghost" id="aNext">Next \u25B6</button></div></div></div></div>' +
+    '<div class="panel"><h2>\uD83C\uDF0B Label the diagram: why is New Zealand volcanic?</h2>' +
     '<p class="how">New Zealand sits on the <b>Pacific Ring of Fire</b>. Tap a label, then tap the numbered box it belongs to. Use the numbers on the diagram.</p>' +
     '<div class="diagram-wrap"><div class="diagram" id="diagram"></div><div><div class="lbl-bank" id="lblBank"></div><div class="slots" id="slots"></div>' +
-    '<div class="actions"><button type="button" class="btn primary" id="lblCheck">Check labels</button></div><div class="msg" id="lblMsg"></div></div></div></div>' +
-    '<div class="panel"><h3>⛓️ Follow the chain of cause and effect</h3><p class="how">Tap the steps <b>in order</b> to build the chain. Tap a step in your chain to take it out.</p>' +
+    '<div class="actions"><button type="button" class="btn ghost" id="lblHint">\uD83D\uDCA1 Hint</button><button type="button" class="btn primary" id="lblCheck">Check labels</button></div><div class="msg" id="lblMsg"></div></div></div>' +
+    '<h3 style="margin-top:14px">\uD83D\uDCD6 Key words: simple definitions</h3><div class="defs">' +
+    [['\uD83E\uDDE9 Tectonic plate', 'A giant piece of the Earth\u2019s outer layer. Plates move very slowly \u2014 a few centimetres a year.', '', ''],
+     ['\uD83E\uDD5A Crust', 'The thin, hard outer layer of the Earth, like the shell on an egg.', '', ''],
+     ['\uD83C\uDF0A Oceanic crust', 'Crust under the sea. Thin but <b style="display:inline">heavy</b> (dense). The Pacific Plate is oceanic.', '', 'oce'],
+     ['\uD83C\uDFD4\uFE0F Continental crust', 'Crust that makes the land. Thick but <b style="display:inline">lighter</b>. The Australian Plate here is continental.', '', 'con'],
+     ['\uD83D\uDD25 Mantle', 'The very hot layer of rock under the crust.', '', 'man'],
+     ['\uD83D\uDCA5 Destructive plate boundary', 'Where two plates move towards each other. One plate sinks and is destroyed.', 'say: dis-TRUK-tiv', ''],
+     ['\u2B07\uFE0F Subduction', 'When a heavy plate sinks under a lighter plate.', 'say: sub-DUK-shun', 'oce'],
+     ['\uD83D\uDD73\uFE0F Ocean trench', 'A very deep valley in the sea floor, where the plate starts to sink.', '', 'oce'],
+     ['\uD83D\uDCA7 Water released', 'The sinking plate carries sea water. When it gets hot, the water escapes and helps rock melt.', '', 'wat'],
+     ['\uD83D\uDD34 Magma', 'Melted (liquid) rock <b style="display:inline">under</b> the ground.', 'say: MAG-ma', 'mag'],
+     ['\uD83C\uDF0B Lava', 'Melted rock that has come <b style="display:inline">out onto</b> the surface.', 'say: LAH-va', 'mag'],
+     ['\u26F0\uFE0F Composite volcano', 'A tall, steep volcano made of layers of lava and ash. Also called a stratovolcano.', 'say: COM-po-zit', ''],
+     ['\uD83D\uDCA7 Crater lake', 'A lake that fills the hole (crater) at the top of a volcano.', '', 'wat'],
+     ['\uD83C\uDF0A Lahar', 'A fast, dangerous mudflow of water, ash and rocks from a volcano.', 'say: LAH-har', '']
+    ].map(function (d) { return '<div class="def ' + d[3] + '"><b>' + d[0] + '</b>' + d[1] + (d[2] ? '<span class="say">\uD83D\uDDE3\uFE0F ' + d[2] + '</span>' : '') + '</div>'; }).join('') + '</div></div>' +
+    '<div class="panel"><h3>⛓️ Follow the chain of cause and effect</h3><p class="how">Tap the steps <b>in order</b> to build the chain. Tap a step in your chain to take it out. <b>Stuck?</b> The steps are in the same order as the animation at the top.</p>' +
     '<div class="chain-pool" id="chainPool"></div><div class="chain" id="chain"></div>' +
     '<div class="actions"><button type="button" class="btn primary" id="chainCheck">Check my chain</button></div><div class="msg" id="chainMsg"></div></div>' +
-    '<div class="panel"><h3>✍️ Explain the processes</h3><p class="how">Underline (or look up) any word you don’t understand. Tap the key words to add them to your answer.</p>' +
+    '<div class="panel"><h3>✍️ Explain the processes</h3><p class="how"><b>Step 1:</b> Fill the gaps \u2014 tap a word in the word bank, then tap a gap. (Tap a filled gap to empty it.) <b>Step 2:</b> When it is all correct, it goes into your answer box. Add a sentence of your own to make it better!</p>' +
+    '<h3>A) New Zealand is volcanic because\u2026</h3><div class="cloze" id="cz1"></div>' +
     wb('proc1', 's2', 'New Zealand is volcanic because…', { chips: ['Pacific Plate', 'Australian Plate', 'subducts', 'destructive plate boundary', 'mantle', 'melts', 'magma', 'rises', 'erupts', 'Ring of Fire'], rows: 5 }) +
+    '<h3 style="margin-top:16px">B) This has shaped New Zealand by\u2026</h3><div class="cloze" id="cz2"></div>' +
     wb('proc2', 's2', 'This has shaped New Zealand by…', { chips: ['composite volcano', 'layers of lava and ash', 'crater lake', 'glaciers', 'lahars', 'landslides'], rows: 4 }) + '</div>' + next();
 
   H.s3 = '<div class="panel"><span class="act-tag">Activity 3</span><h2>⚖️ Fantastic or dangerous?</h2>' +
@@ -511,6 +620,10 @@
     }
     var cp = e.target.closest('[data-copy]');
     if (cp) { var w2 = WB.filter(function (x) { return x.id === cp.dataset.copy; })[0]; var ans = (state.a[w2.id] || '').trim(); copyText(stripTags(w2.prompt) + '\n' + (ans || '(not answered yet)'), null, cp); }
+  });
+  document.addEventListener('click', function (e) {
+    var tm = e.target.closest('.term'); if (!tm) return;
+    tm.setAttribute('aria-expanded', tm.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
   });
   function stripTags(s) { var d = document.createElement('div'); d.innerHTML = s; return d.textContent; }
 
@@ -774,7 +887,15 @@
     }
     $('slots').addEventListener('click', function (e) { var sl = e.target.closest('.slot'); if (sl) slotHit(sl); });
     $('slots').addEventListener('keydown', function (e) { var sl = e.target.closest('.slot'); if (sl && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); slotHit(sl); } });
-    var tries = 0;
+    var tries = 0, hints = 0;
+    $('lblHint').addEventListener('click', function () {
+      var gap = LBL.filter(function (l) { return placed[l.n] !== l.n; })[0];
+      if (!gap) { $('lblMsg').className = 'msg ok'; $('lblMsg').textContent = 'All labels are already in the right place \u2014 press Check labels.'; return; }
+      for (var k in placed) if (placed[k] === gap.n) delete placed[k];
+      placed[gap.n] = gap.n; selL = null; paint(); hints++;
+      document.querySelector('#slots .slot[data-n="' + gap.n + '"]').classList.add('right');
+      $('lblMsg').className = 'msg info'; $('lblMsg').textContent = '\uD83D\uDCA1 Number ' + gap.n + ' is \u201C' + gap.t + '\u201D. Read the key words below if you are unsure.';
+    });
     $('lblCheck').addEventListener('click', function () {
       var right = 0, n = Object.keys(placed).length; done = {};
       document.querySelectorAll('#slots .slot').forEach(function (sl) {
@@ -783,9 +904,121 @@
       });
       $('diagram').innerHTML = diagramSVG(done);
       var m = $('lblMsg');
-      if (right === LBL.length) { m.className = 'msg ok'; m.textContent = '✅ Diagram fully labelled!'; if (!state.r.diagram) state.r.diagram = tries ? '8/8 (after ' + (tries + 1) + ' tries)' : '8/8 first time'; save(); markDone('s2d'); if (state.done.s2c) markDone('s2'); }
+      if (right === LBL.length) { m.className = 'msg ok'; m.textContent = '✅ Diagram fully labelled!'; if (!state.r.diagram) state.r.diagram = (tries ? '8/8 (after ' + (tries + 1) + ' tries)' : '8/8 first time') + (hints ? ', ' + hints + ' hint' + (hints > 1 ? 's' : '') + ' used' : ''); save(); markDone('s2d'); if (state.done.s2c) markDone('s2'); }
       else { tries++; m.className = 'msg ' + (n < LBL.length ? 'info' : 'no'); m.textContent = right + '/' + LBL.length + ' correct' + (n < LBL.length ? ' — ' + (LBL.length - n) + ' boxes still empty.' : '. Tap a red box to empty it, then try again.'); }
     });
+  })();
+
+  /* ==================== GAP FILL ==================== */
+  function cloze(id, key, wbId, parts, extra) {
+    var box = $(id), gaps = parts.filter(function (x) { return typeof x !== 'string'; }), fill = {}, active = 0, selW = null, tries = 0;
+    var words = shuffle(gaps.map(function (g) { return g.a; }).concat(extra));
+    function firstEmpty() { for (var i = 0; i < gaps.length; i++) if (!fill[i]) return i; return -1; }
+    function paint(checked) {
+      var used = {}; for (var k in fill) used[fill[k]] = (used[fill[k]] || 0) + 1;
+      var gi = 0;
+      box.innerHTML = '<div class="cz-bank" aria-label="Word bank">' + words.map(function (w, i) { return '<button type="button" data-w="' + i + '" class="' + (used[w] ? 'used' : '') + (selW === i ? ' sel' : '') + '">' + esc(w) + '</button>'; }).join('') + '</div>' +
+        '<div class="cz-text">' + parts.map(function (x) {
+          if (typeof x === 'string') return esc(x);
+          var i = gi++, v = fill[i], cls = 'gap' + (i === active ? ' active' : '') + (checked && v ? (v === x.a ? ' right' : ' wrong') : '');
+          return '<button type="button" class="' + cls + '" data-g="' + i + '" aria-label="Gap ' + (i + 1) + '">' + (v ? esc(v) : '\u00A0') + '</button>';
+        }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-czc="1">Check</button></div><div class="msg"></div>';
+    }
+    box.addEventListener('click', function (e) {
+      var w = e.target.closest('[data-w]'), g = e.target.closest('[data-g]'), c = e.target.closest('[data-czc]');
+      if (w && !w.classList.contains('used')) {
+        if (active < 0) active = firstEmpty();
+        if (active >= 0) { fill[active] = words[+w.dataset.w]; active = firstEmpty(); }
+        paint();
+      } else if (g) {
+        var i = +g.dataset.g; if (fill[i]) delete fill[i]; active = i; paint();
+      } else if (c) {
+        var right = gaps.filter(function (x, i) { return fill[i] === x.a; }).length, m;
+        paint(true); m = box.querySelector('.msg');
+        if (Object.keys(fill).length < gaps.length) { m.className = 'msg info'; m.textContent = 'Fill every gap first.'; return; }
+        if (right === gaps.length) {
+          m.className = 'msg ok'; m.textContent = '\u2705 All correct! Your paragraph is now in the answer box below \u2014 add a sentence of your own.';
+          var gi = 0, txt = parts.map(function (x) { return typeof x === 'string' ? x : gaps[gi++].a; }).join('');
+          var ta = $('wb-' + wbId); if (ta.value.indexOf(txt) < 0) { ta.value = txt + (ta.value.trim() ? '\n' + ta.value : ''); ta.dispatchEvent(new Event('input')); }
+          if (!state.r[key]) { state.r[key] = gaps.length + '/' + gaps.length + (tries ? ' (after ' + (tries + 1) + ' tries)' : ' first time'); save(); }
+          box.querySelectorAll('.gap, .cz-bank button').forEach(function (b) { b.disabled = true; });
+        } else { tries++; m.className = 'msg no'; m.textContent = right + '/' + gaps.length + ' correct. Tap the red words to take them out and try again. Watch the animation if you are stuck!'; }
+      }
+    });
+    paint();
+  }
+  cloze('cz1', 'cloze1', 'proc1', ['New Zealand is on a ', { a: 'destructive' }, ' plate boundary. The heavy ', { a: 'Pacific' }, ' Plate is sinking under the lighter ', { a: 'Australian' }, ' Plate. This is called ', { a: 'subduction' }, '. As the plate sinks, it releases ', { a: 'water' }, ', which helps the ', { a: 'mantle' }, ' rock above it melt and form ', { a: 'magma' }, '. The magma ', { a: 'rises' }, ' through cracks in the crust and ', { a: 'erupts' }, ' at the surface.'], ['constructive', 'Sun', 'sinks']);
+  cloze('cz2', 'cloze2', 'proc2', ['Eruptions of ', { a: 'lava' }, ' and ash have built up layers, making a tall, steep ', { a: 'composite' }, ' volcano: Mount Ruapehu. At the top there is a ', { a: 'crater' }, ' lake. ', { a: 'Glaciers' }, ', landslides and ', { a: 'lahars' }, ' (volcanic mudflows) keep changing the shape of its slopes.'], ['shield', 'sand']);
+
+  /* ==================== ANIMATION ==================== */
+  var AN = [
+    ['Two plates meet', 'The Earth\u2019s surface is broken into giant pieces called <b>tectonic plates</b>. Under New Zealand, two plates meet: the <b>Pacific Plate</b> and the <b>Australian Plate</b>.'],
+    ['The plates move', 'The <b>Pacific Plate</b> moves slowly <b>west</b> towards the Australian Plate \u2014 only a few centimetres a year, about as fast as your fingernails grow.'],
+    ['Subduction', 'The Pacific Plate is <b>oceanic crust</b>: thin but <b>heavy</b>. So it <b>sinks under</b> the lighter Australian Plate. This is called <b>subduction</b>. Where plates collide like this is a <b>destructive plate boundary</b>.'],
+    ['Rock melts', 'As the plate sinks, it gets hotter and <b>releases water</b>. The water helps the <b>mantle</b> rock above it <b>melt</b>. Melted rock underground is called <b>magma</b>.'],
+    ['Magma rises', '<b>Magma</b> is lighter than the solid rock around it, so it <b>rises</b> up through cracks in the crust and collects in a <b>magma chamber</b>.'],
+    ['Eruption!', 'Magma <b>erupts</b> at the surface as <b>lava</b> and <b>ash</b>. Layer after layer builds a tall, steep <b>composite volcano</b>: Mount Ruapehu.'],
+    ['The landscape changes', '<b>Glaciers</b>, <b>landslides</b> and <b>lahars</b> (volcanic mudflows) keep reshaping the volcano\u2019s slopes. The process never stops!']];
+  function animSVG() {
+    var s = '<svg id="av" class="s0" viewBox="0 0 800 430" role="img" aria-label="Animation of subduction under New Zealand">';
+    s += '<defs><linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#f0f9ff"/></linearGradient>' +
+      '<linearGradient id="mantA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#ea580c"/></linearGradient>' +
+      '<marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker>' +
+      '<marker id="ahB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1e293b"/></marker></defs>';
+    s += '<rect width="800" height="430" fill="url(#skyA)"/><rect y="150" width="800" height="280" fill="url(#mantA)"/>';
+    s += '<text x="110" y="405" font-size="16" font-weight="800" fill="#7c2d12" opacity="0.7">MANTLE (very hot rock)</text>';
+    s += '<path d="M520 150 H800 V172 H585 L566 180 Z" fill="#60a5fa"/>';
+    s += '<path class="slab" pathLength="100" d="M800 187 H592 L556 204 L470 262 L400 322 L360 380" fill="none" stroke="#475569" stroke-width="30"/>';
+    s += '<path class="belt top" d="M800 187 H592" fill="none" stroke="#fff" stroke-width="3"/>';
+    s += '<path class="belt full" d="M592 187 L556 204 L470 262 L400 322 L360 380" fill="none" stroke="#fff" stroke-width="3"/>';
+    s += '<path d="M0 150 H520 L566 180 L520 212 L440 214 H0 Z" fill="#a16207"/>';
+    s += '<path class="cone2" d="M150 150 L262 50 L374 150 Z" fill="#92400e"/>';
+    s += '<path d="M170 150 L262 58 L350 150 Z" fill="#a16207"/>';
+    s += '<path d="M0 150 H170 L262 58 L350 150 H520" fill="none" stroke="#65a30d" stroke-width="5"/>';
+    s += '<path d="M205 115 L262 58 L318 115" fill="none" stroke="#78350f" stroke-width="2" opacity="0.5"/><path d="M185 132 L262 58 L338 132" fill="none" stroke="#78350f" stroke-width="2" opacity="0.4"/>';
+    s += '<path d="M228 92 L262 58 L296 92 L285 86 L274 94 L262 84 L250 94 L238 86 Z" fill="#fff"/>';
+    s += '<path class="glacier" d="M292 86 L312 106 L300 104 Z M232 86 L214 104 L226 101 Z" fill="#e0f2fe" stroke="#7dd3fc"/>';
+    s += '<ellipse cx="262" cy="62" rx="12" ry="4" fill="#38bdf8"/>';
+    s += '<ellipse class="melt" cx="392" cy="330" rx="36" ry="17" fill="#ef4444" opacity="0.9"/>';
+    [[428, 312, 'd1'], [440, 298, 'd2'], [418, 300, 'd3']].forEach(function (d) { s += '<circle class="drop ' + d[2] + '" cx="' + d[0] + '" cy="' + d[1] + '" r="5" fill="#1d4ed8"/>'; });
+    s += '<path class="conduit" pathLength="100" d="M382 318 C330 270 282 220 268 176 C258 140 265 100 262 64" fill="none" stroke="#dc2626" stroke-width="9" stroke-linecap="round"/>';
+    s += '<path class="flow" d="M382 318 C330 270 282 220 268 176 C258 140 265 100 262 64" fill="none" stroke="#fde047" stroke-width="3" stroke-linecap="round"/>';
+    s += '<ellipse class="chamber" cx="270" cy="190" rx="26" ry="14" fill="#dc2626"/>';
+    s += '<path class="lava" pathLength="100" d="M258 62 L230 96 L214 116" fill="none" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>';
+    s += '<path class="lava" pathLength="100" d="M266 62 L292 92 L306 110" fill="none" stroke="#f97316" stroke-width="5" stroke-linecap="round"/>';
+    [[250, 40, 18, 'a1'], [272, 30, 22, 'a2'], [260, 20, 16, 'a3']].forEach(function (a) { s += '<circle class="ash ' + a[3] + '" cx="' + a[0] + '" cy="' + a[1] + '" r="' + a[2] + '" fill="#6b7280"/>'; });
+    s += '<path class="lahar" pathLength="100" d="M280 72 C300 100 320 125 340 145 C360 150 400 150 440 150" fill="none" stroke="#78350f" stroke-width="7" stroke-linecap="round"/>';
+    s += '<text class="lahar-lbl" x="400" y="140" font-size="13" font-weight="800" fill="#78350f">lahar</text>';
+    s += '<g class="mv-arrow"><path d="M760 187 H660" stroke="#fff" stroke-width="4" marker-end="url(#ahA)"/></g>';
+    s += '<path class="sub-arrow" d="M520 222 L470 262" stroke="#1e293b" stroke-width="3" marker-end="url(#ahB)"/><text class="sub-lbl" x="480" y="250" font-size="13" font-weight="800" fill="#fff" stroke="#1e293b" stroke-width="3" paint-order="stroke">subduction</text>';
+    s += '<text x="12" y="24" font-size="13" font-weight="800" fill="#334155">West</text><text x="745" y="24" font-size="13" font-weight="800" fill="#334155">East</text>';
+    s += '<text x="620" y="215" font-size="12" font-weight="800" fill="#fff">Pacific Plate</text><text x="20" y="190" font-size="12" font-weight="800" fill="#fff">Australian Plate</text>';
+    s += '<text x="610" y="140" font-size="12" font-weight="700" fill="#1e3a8a">Pacific Ocean</text><text x="40" y="140" font-size="12" font-weight="700" fill="#365314">North Island</text>';
+    s += '<text x="200" y="45" font-size="12" font-weight="800" fill="#062033" text-anchor="end">Mount Ruapehu</text>';
+    return s + '</svg>';
+  }
+  (function () {
+    var step = 0, timer = null;
+    $('anim').innerHTML = animSVG();
+    $('dots').innerHTML = AN.map(function (_, i) { return '<button type="button" data-s="' + i + '" aria-label="Step ' + (i + 1) + '">' + (i + 1) + '</button>'; }).join('');
+    function show(i) {
+      step = Math.max(0, Math.min(AN.length - 1, i));
+      $('av').setAttribute('class', 's' + step);
+      $('cap').innerHTML = '<div class="sn">Step ' + (step + 1) + ' of ' + AN.length + '</div><h3>' + AN[step][0] + '</h3><p>' + AN[step][1] + '</p>';
+      $('dots').querySelectorAll('button').forEach(function (b, k) { b.classList.toggle('on', k === step); });
+      $('aBack').disabled = step === 0; $('aNext').disabled = step === AN.length - 1;
+    }
+    function stop() { clearInterval(timer); timer = null; $('aPlay').textContent = step === AN.length - 1 ? '\u21BB Replay' : '\u25B6 Play'; }
+    $('aPlay').addEventListener('click', function () {
+      if (timer) { stop(); return; }
+      if (step === AN.length - 1) show(0);
+      $('aPlay').textContent = '\u23F8 Pause';
+      timer = setInterval(function () { show(step + 1); if (step >= AN.length - 1) stop(); }, 5000);
+    });
+    $('aNext').addEventListener('click', function () { stop(); show(step + 1); stop(); });
+    $('aBack').addEventListener('click', function () { stop(); show(step - 1); stop(); });
+    $('dots').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { stop(); show(+b.dataset.s); stop(); } });
+    show(0);
   })();
 
   /* chain of cause and effect */
@@ -909,7 +1142,7 @@
       if (s.id === 'end') return;
       var ws = WB.filter(function (w) { return w.st === s.id; }), extra = [];
       if (s.id === 's1b' && state.r.tf) extra.push('Fact or fiction quiz: ' + state.r.tf);
-      if (s.id === 's2') { if (state.r.diagram) extra.push('Labelled diagram: ' + state.r.diagram); if (state.r.chain) extra.push('Chain of cause and effect: ' + state.r.chain); extra.push('Chain: ' + CHAIN.map(function (c, i) { return (i + 1) + ') ' + c; }).join(' ')); }
+      if (s.id === 's2') { if (state.r.diagram) extra.push('Labelled diagram: ' + state.r.diagram); if (state.r.chain) extra.push('Chain of cause and effect: ' + state.r.chain); if (state.r.cloze1) extra.push('Gap fill A: ' + state.r.cloze1); if (state.r.cloze2) extra.push('Gap fill B: ' + state.r.cloze2); extra.push('Chain: ' + CHAIN.map(function (c, i) { return (i + 1) + ') ' + c; }).join(' ')); }
       if (s.id === 's3' && state.r['g-fd']) extra.push('My sort (' + state.r['g-fd'].first + '):\n' + zoneList(state.r['g-fd']));
       if (s.id === 's4' && state.r['g-pow']) extra.push('Matching: ' + state.r['g-pow'].first);
       if (s.id === 's1' && state.r['g-enq']) extra.push('4 Ps matching: ' + state.r['g-enq'].first);
