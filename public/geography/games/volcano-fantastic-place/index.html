@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ruapehu Mission — Can a volcano be a fantastic place? — KS3 Geography Games — SBL</title>
+<meta name="description" content="Year 7 geography enquiry game on Mount Ruapehu, New Zealand. Use the 4 Ps (Place, Processes, Power, Possibilities) to decide whether a volcano can be a fantastic place, label a subduction diagram and copy your answers into OneNote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706;
+    --place: #0284c7; --place-bg: #e0f2fe;
+    --proc: #ea580c; --proc-bg: #ffedd5;
+    --power: #7c3aed; --power-bg: #ede9fe;
+    --poss: #16a34a; --poss-bg: #dcfce7;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Inter", "Segoe UI", Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at top right, rgba(234,88,12,0.10), transparent 35%), linear-gradient(180deg, #f7fbfc 0%, #edf4f6 100%); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea, input { font-family: inherit; }
+
+  .top-bar { padding: 18px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.1rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1150px; margin: 22px auto 60px; padding: 0 18px; }
+  .intro { text-align: center; margin-bottom: 12px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, #ea580c, #c2410c); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.4vw, 2.3rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* station nav */
+  .stations { display: flex; gap: 6px; overflow-x: auto; padding: 6px 2px 10px; margin: 10px 0 8px; scrollbar-width: thin; }
+  .st { flex: 0 0 auto; border: 1px solid var(--line); background: rgba(255,255,255,0.85); color: var(--muted); border-radius: 999px; padding: 7px 12px; font-size: 0.8rem; font-weight: 750; cursor: pointer; white-space: nowrap; }
+  .st.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .st.done { border-color: rgba(22,163,74,0.4); color: var(--green); background: var(--green-soft); }
+  .st.done.on { background: var(--navy); color: #fff; }
+  .progress { height: 8px; background: #dde7eb; border-radius: 99px; overflow: hidden; margin-bottom: 14px; }
+  .progress div { height: 100%; background: linear-gradient(90deg, var(--teal), #ea580c); width: 0; transition: width .4s ease; }
+
+  .screen { display: none; }
+  .screen.on { display: block; animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .panel { background: rgba(255,255,255,0.96); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .panel h3 { font-size: 1rem; font-weight: 850; color: var(--navy); margin: 4px 0 8px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .act-tag { display: inline-block; font-size: 0.7rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase; color: #c2410c; background: #fff1e6; border-radius: 999px; padding: 3px 9px; margin-bottom: 6px; }
+
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.orange { color: #fff; background: linear-gradient(135deg, #ea580c, #c2410c); box-shadow: 0 8px 20px rgba(234,88,12,0.28); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .nav-row { display: flex; justify-content: space-between; gap: 10px; margin: 6px 0 20px; flex-wrap: wrap; }
+  .msg { font-weight: 750; font-size: 0.9rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+
+  /* photos */
+  .photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 8px 0 12px; }
+  .photo { margin: 0; background: #0b2239; border-radius: 14px; overflow: hidden; position: relative; }
+  .photo img { display: block; width: 100%; height: 170px; object-fit: cover; }
+  .photo.big img { height: 300px; }
+  .photo figcaption { font-size: 0.76rem; color: #e2e8f0; padding: 7px 10px; line-height: 1.35; }
+  .photo figcaption a { color: #7dd3fc; font-size: 0.66rem; display: block; margin-top: 2px; }
+  .photo .ph { display: none; height: 170px; align-items: center; justify-content: center; font-size: 3rem; background: linear-gradient(135deg, #1e3a5f, #7c2d12); }
+  .photo.missing img { display: none; } .photo.missing .ph { display: flex; }
+
+  /* write box (OneNote) */
+  .wb { margin: 12px 0; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb .frame { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+  .wb textarea { width: 100%; min-height: 84px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; background: #fff; }
+  .wb textarea:focus { outline: 2px solid var(--teal); border-color: transparent; }
+  .wb .wb-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .wb .count { font-size: 0.74rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 6px 11px; font-size: 0.8rem; font-weight: 800; cursor: pointer; }
+  .copy.copied { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.4); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+  .chip { border: 1px dashed rgba(234,88,12,0.5); background: #fff7ed; color: #9a3412; border-radius: 999px; padding: 4px 10px; font-size: 0.78rem; font-weight: 750; cursor: pointer; }
+  .chip.used { border-style: solid; background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.4); }
+
+  /* sort game */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.86rem; line-height: 1.4; font-weight: 650; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.75rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); }
+  .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); }
+  .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 4px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .z-place { border-color: var(--place); } .z-place h4 { color: var(--place); }
+  .z-proc { border-color: var(--proc); } .z-proc h4 { color: var(--proc); }
+  .z-power { border-color: var(--power); } .z-power h4 { color: var(--power); }
+  .z-poss { border-color: var(--poss); } .z-poss h4 { color: var(--poss); }
+  .z-fan { border-color: var(--green); } .z-fan h4 { color: var(--green); }
+  .z-dan { border-color: var(--red); } .z-dan h4 { color: var(--red); }
+  .z-both { border-color: var(--amber); } .z-both h4 { color: var(--amber); }
+  .z-plain h4 { color: var(--navy); }
+
+  /* 4P cards */
+  .ps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 6px 0 12px; }
+  .pcard { border-radius: 14px; padding: 10px 12px; font-size: 0.82rem; line-height: 1.45; border: 2px solid; }
+  .pcard b { display: block; font-size: 0.95rem; }
+  .pcard.place { background: var(--place-bg); border-color: var(--place); } .pcard.place b { color: var(--place); }
+  .pcard.proc { background: var(--proc-bg); border-color: var(--proc); } .pcard.proc b { color: var(--proc); }
+  .pcard.power { background: var(--power-bg); border-color: var(--power); } .pcard.power b { color: var(--power); }
+  .pcard.poss { background: var(--poss-bg); border-color: var(--poss); } .pcard.poss b { color: var(--poss); }
+
+  /* choice buttons */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.picked { border-color: var(--navy); background: #e8f0f7; }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice:disabled { cursor: default; }
+  .choice small { display: block; font-weight: 500; color: var(--muted); margin-top: 3px; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; background: #f0fbfa; border-left: 5px solid var(--teal); }
+  .fbk.show { display: block; }
+  .fbk.bad { background: var(--red-soft); border-left-color: var(--red); }
+  .fbk.good { background: var(--green-soft); border-left-color: var(--green); }
+
+  /* true/false */
+  .tf { display: grid; gap: 8px; }
+  .tf-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #fff; border: 2px solid var(--line); }
+  .tf-row.right { border-color: var(--green); background: var(--green-soft); }
+  .tf-row.wrong { border-color: var(--red); background: var(--red-soft); }
+  .tf-row .s { font-weight: 650; font-size: 0.9rem; line-height: 1.4; }
+  .tf-row .why { grid-column: 1 / -1; font-size: 0.8rem; color: var(--teal-dark); font-weight: 650; display: none; }
+  .tf-row.right .why, .tf-row.wrong .why { display: block; }
+  .tf-row .bt { display: flex; gap: 6px; }
+  .tf-row .bt button { border: 2px solid var(--line); background: #f8fafc; border-radius: 9px; padding: 6px 11px; font-weight: 850; cursor: pointer; font-size: 0.82rem; }
+  .tf-row .bt button:disabled { cursor: default; opacity: 0.7; }
+
+  /* diagram */
+  .diagram-wrap { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .diagram { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  .lbl-bank { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .lbl { border: 2px solid rgba(5,43,65,0.2); background: #fff; border-radius: 10px; padding: 6px 10px; font-size: 0.82rem; font-weight: 750; cursor: pointer; }
+  .lbl.selected { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,184,176,0.25); }
+  .lbl.placed { opacity: 0.35; cursor: default; }
+  .slots { display: grid; gap: 6px; }
+  .slot { display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: center; padding: 6px 8px; border-radius: 10px; border: 2px dashed #cbd5e1; background: #fff; cursor: pointer; min-height: 40px; font-size: 0.84rem; font-weight: 700; }
+  .slot .n { width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 900; }
+  .slot .v { color: var(--muted); font-weight: 600; }
+  .slot.filled .v { color: var(--ink); font-weight: 750; }
+  .slot.right { border-style: solid; border-color: var(--green); background: var(--green-soft); }
+  .slot.wrong { border-style: solid; border-color: var(--red); background: var(--red-soft); }
+  .slot.target { border-color: var(--teal); background: #f0fbfa; }
+
+  /* chain */
+  .chain-pool, .chain { display: grid; gap: 7px; }
+  .chain { counter-reset: step; min-height: 60px; padding: 10px; border-radius: 14px; border: 2px dashed #fdba74; background: #fffaf5; margin-top: 10px; }
+  .chain-item { padding: 9px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.4; text-align: left; color: var(--ink); }
+  .chain .chain-item { border-color: #fb923c; position: relative; padding-left: 40px; }
+  .chain .chain-item::before { counter-increment: step; content: counter(step); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: #ea580c; color: #fff; font-size: 0.76rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .chain .chain-item.right { border-color: var(--green); background: var(--green-soft); }
+  .chain .chain-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .chain-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow-down { text-align: center; color: #ea580c; font-weight: 900; line-height: 0.6; }
+
+  /* rank */
+  .rank-list { display: grid; gap: 8px; }
+  .rank-item { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: #fff; border: 2px solid var(--line); }
+  .rank-item .rn { width: 30px; height: 30px; border-radius: 50%; background: var(--poss); color: #fff; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .rank-item .rt { font-weight: 700; font-size: 0.9rem; line-height: 1.4; }
+  .rank-item .rt small { display: block; font-weight: 500; color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .rank-item .mv { display: flex; flex-direction: column; gap: 3px; }
+  .rank-item .mv button { border: 1px solid var(--line); background: #f8fafc; border-radius: 6px; width: 30px; height: 24px; cursor: pointer; font-size: 0.8rem; }
+
+  /* news/alert */
+  .alert-box { border-radius: 16px; padding: 16px; background: linear-gradient(135deg, #7c2d12, #c2410c); color: #fff; margin-bottom: 12px; }
+  .alert-box .lvl { display: inline-block; background: #fde047; color: #422006; font-weight: 900; font-size: 0.78rem; padding: 3px 9px; border-radius: 6px; letter-spacing: 0.04em; }
+  .alert-box h3 { color: #fff; font-size: 1.15rem; margin: 8px 0 6px; }
+  .alert-box p { color: rgba(255,255,255,0.9); line-height: 1.5; font-size: 0.93rem; }
+
+  /* advert */
+  .adv-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .field { margin-bottom: 8px; }
+  .field label { display: block; font-size: 0.8rem; font-weight: 850; margin-bottom: 3px; }
+  .field label .pt { font-size: 0.66rem; padding: 2px 7px; border-radius: 999px; margin-left: 4px; vertical-align: 1px; }
+  .field input, .field textarea { width: 100%; padding: 8px 10px; border-radius: 9px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.9rem; line-height: 1.45; }
+  .field textarea { min-height: 58px; resize: vertical; }
+  .checklist { list-style: none; display: grid; gap: 5px; margin: 8px 0; font-size: 0.84rem; }
+  .checklist li { padding: 6px 10px; border-radius: 9px; background: #f1f5f9; color: var(--muted); font-weight: 650; }
+  .checklist li::before { content: "\25CB  "; }
+  .checklist li.ok { background: var(--green-soft); color: var(--green); }
+  .checklist li.ok::before { content: "\2714  "; }
+  .poster { border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 10px 26px rgba(0,25,45,0.12); position: sticky; top: 10px; }
+  .poster .pimg { height: 180px; background: #1e3a5f center/cover no-repeat; position: relative; }
+  .poster .pimg .ttl { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px; background: linear-gradient(transparent, rgba(0,0,0,0.75)); color: #fff; }
+  .poster .ttl h3 { color: #fff; font-size: 1.35rem; margin: 0; font-weight: 900; }
+  .poster .ttl p { font-style: italic; font-size: 0.9rem; opacity: 0.95; }
+  .poster .pbody { padding: 14px; font-size: 0.88rem; line-height: 1.55; }
+  .poster .pbody p { margin-bottom: 8px; }
+  .poster .safe { background: #fef3c7; border-left: 4px solid var(--amber); padding: 8px 10px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; }
+  .poster .placeholder { color: #94a3b8; font-style: italic; }
+  details.model { margin-top: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; padding: 10px 12px; }
+  details.model summary { cursor: pointer; font-weight: 800; color: var(--teal-dark); }
+  details.model p { font-size: 0.88rem; line-height: 1.55; margin-top: 8px; }
+
+  /* finish */
+  .copy-all { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .copy-all h2 { color: #fff; }
+  .copy-all p { color: rgba(255,255,255,0.85); margin: 6px auto 12px; max-width: 620px; line-height: 1.5; }
+  .scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 12px 0; }
+  .score { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px; font-size: 0.82rem; }
+  .score b { display: block; font-size: 1.2rem; color: var(--navy); }
+  .note { font-size: 0.76rem; color: var(--muted); margin-top: 6px; }
+  .fact { background: #fff7ed; border-left: 5px solid #ea580c; border-radius: 10px; padding: 10px 12px; font-size: 0.88rem; line-height: 1.5; margin: 10px 0; }
+
+  @media (max-width: 900px) {
+    .ps { grid-template-columns: 1fr 1fr; }
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .sg-zones.z3 { grid-template-columns: 1fr; }
+    .diagram-wrap, .adv-grid { grid-template-columns: 1fr; }
+    .poster { position: static; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 12px; } .panel { padding: 14px; }
+    .sg-zones.z2, .sg-zones.z4 { grid-template-columns: 1fr; }
+    .photo.big img { height: 210px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games#ks3" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Ruapehu Mission</span></div>
+    <span></span>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">KS3 &middot; Year 7 enquiry</span>
+    <h1>&#127755; Can a volcano be a fantastic place?</h1>
+    <p>Investigate <strong>Mount Ruapehu, New Zealand</strong> using the 4 Ps: Place, Processes, Power and Possibilities. Complete each station, then copy your answers into <strong>OneNote</strong>.</p>
+  </div>
+  <div class="stations" id="stations" role="tablist" aria-label="Mission stations"></div>
+  <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+  <div id="screens"></div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ==================== PHOTOS ====================
+     Hot-linked from Wikimedia Commons (free licences; each caption links
+     to the file page with its author and licence). To use your own photo
+     instead, put a URL/path in `src` (e.g. '/images/geography-helper/ruapehu/ruapehu.jpg'). */
+  function commons(f) { return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(f) + '?width=960'; }
+  function commonsPage(f) { return 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(f); }
+  var PHOTOS = {
+    minerals: { f: 'Emerald_Lake_and_Red_Crater,_NZ.jpg', cap: 'Colourful mineral-stained rocks and lakes in Tongariro National Park, near Ruapehu', emo: '🌈' },
+    ruapehu: { f: '00_0901_Mount_Ruapehu,_volcano_in_New_Zealand.jpg', cap: 'Mount Ruapehu: a snow-capped composite volcano, 2,797 m high', emo: '🏔️' },
+    distant: { f: 'Mt._Ruapehu,_New_Zealand_(5639787282).jpg', cap: 'Mount Ruapehu rising above the central North Island', emo: '🌋' },
+    crater: { f: 'Ruapehu_Crater_Lake_n.jpg', cap: 'Crater Lake on the summit: a hot, acidic lake inside the active vent', emo: '💧' },
+    ski: { f: 'TuroaView.JPG', cap: 'Tūroa ski area on the slopes of Ruapehu', emo: '⛷️' },
+    lahar: { f: 'Tangiwai_disaster_destroyed_bridge.jpg', cap: 'The rail bridge destroyed by the 1953 Tangiwai lahar from Ruapehu’s Crater Lake', emo: '🌊' }
+  };
+  function photo(key, big) {
+    var p = PHOTOS[key], src = p.src || commons(p.f);
+    return '<figure class="photo' + (big ? ' big' : '') + '"><img src="' + src + '" alt="' + esc(p.cap) + '" loading="lazy" onerror="this.parentNode.classList.add(\'missing\')"><div class="ph" aria-hidden="true">' + p.emo + '</div>' +
+      '<figcaption>' + esc(p.cap) + (p.src ? '' : '<a href="' + commonsPage(p.f) + '" target="_blank" rel="noopener">Photo: Wikimedia Commons (author &amp; licence)</a>') + '</figcaption></figure>';
+  }
+
+  /* ==================== SAVE (this browser only) ==================== */
+  var KEY = 'sbl-ruapehu-mission-v1', state = { a: {}, r: {}, done: {} };
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && saved.a) state = saved; } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ==================== WRITE BOXES (copy to OneNote) ==================== */
+  var WB = []; // {id, st, prompt}
+  function wb(id, st, prompt, opts) {
+    opts = opts || {};
+    WB.push({ id: id, st: st, prompt: prompt });
+    return '<div class="wb"><label for="wb-' + id + '">✏️ ' + prompt + '</label>' +
+      (opts.frame ? '<div class="frame">' + opts.frame + '</div>' : '') +
+      (opts.chips ? '<div class="chips" data-for="wb-' + id + '">' + opts.chips.map(function (c) { return '<button type="button" class="chip">' + esc(c) + '</button>'; }).join('') + '</div>' : '') +
+      '<textarea id="wb-' + id + '" data-wb="' + id + '" placeholder="' + esc(opts.ph || 'Write your answer here…') + '"' + (opts.rows ? ' style="min-height:' + opts.rows * 26 + 'px"' : '') + '></textarea>' +
+      '<div class="wb-foot"><span class="count" data-count="' + id + '"></span><button type="button" class="copy" data-copy="' + id + '">📋 Copy for OneNote</button></div></div>';
+  }
+  function copyText(text, html, btn) {
+    function ok() { if (btn) { var o = btn.textContent; btn.classList.add('copied'); btn.textContent = '✔ Copied — now paste in OneNote'; setTimeout(function () { btn.classList.remove('copied'); btn.textContent = o; }, 2200); } }
+    function fallback() { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (e) { alert('Select the text and press Ctrl+C to copy.'); } ta.remove(); }
+    try {
+      if (html && window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/plain': new Blob([text], { type: 'text/plain' }), 'text/html': new Blob([html], { type: 'text/html' }) })]).then(ok, function () {
+          navigator.clipboard.writeText(text).then(ok, fallback);
+        });
+      } else if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  /* ==================== STATIONS ==================== */
+  var ST = [
+    { id: 's0', short: 'Starter', title: 'Starter: Photo detective' },
+    { id: 's1', short: '1 · Enquiry', title: 'Activity 1: The enquiry — the 4 Ps' },
+    { id: 's1b', short: '1b · Place', title: 'Place: what makes Ruapehu distinctive?' },
+    { id: 's2', short: '2 · Processes', title: 'Activity 2: Why is New Zealand volcanic?' },
+    { id: 's3', short: '3 · Fantastic?', title: 'Activity 3: Fantastic or dangerous?' },
+    { id: 's4', short: '4 · Power', title: 'Activity 4: Power — who decides?' },
+    { id: 's5', short: '5 · Decision', title: 'Activity 5: Decision challenge' },
+    { id: 's6', short: '6 · Possibilities', title: 'Activity 6: What are the possibilities?' },
+    { id: 's7', short: '7 · Sort', title: 'Activity 7: Evidence sort' },
+    { id: 's7q', short: 'Quiz', title: 'Checkpoint quiz' },
+    { id: 's8', short: '8 · Advert', title: 'Activity 8: Persuasive tourist advert' },
+    { id: 's9', short: '9 · Verdict', title: 'Activity 9: Final geographical judgement' },
+    { id: 'end', short: '📋 OneNote', title: 'Copy everything to OneNote' }
+  ];
+  var cur = 0;
+
+  var PCARDS = '<div class="ps">' +
+    '<div class="pcard place"><b>📍 PLACE</b>What is it like? Where is it? What makes it distinctive?</div>' +
+    '<div class="pcard proc"><b>🌋 PROCESSES</b>How have plates, magma, eruptions and lahars shaped it?</div>' +
+    '<div class="pcard power"><b>⚖️ POWER</b>Who decides? Who benefits? Whose views and safety matter?</div>' +
+    '<div class="pcard poss"><b>🔮 POSSIBILITIES</b>What might happen next? How should it be managed?</div></div>';
+
+  function next(label) { return '<div class="nav-row"><button type="button" class="btn ghost" data-go="-1">← Back</button><button type="button" class="btn primary" data-go="1">' + (label || 'Next station →') + '</button></div>'; }
+
+  var H = {};
+  H.s0 = '<div class="panel"><span class="act-tag">Starter</span><h2>🔍 Photo detective</h2>' +
+    '<p class="how">Look closely at the photo. Answer the four questions — there are no wrong answers yet!</p>' + photo('minerals', true) +
+    wb('s0q1', 's0', '1. Where do you think the photograph was taken?') +
+    wb('s0q2', 's0', '2. What can you observe? (colours, landforms, water, rocks…)') +
+    wb('s0q3', 's0', '3. What processes may have shaped this landscape?') +
+    wb('s0q4', 's0', '4. What would you need to know before calling it “fantastic”?') + '</div>' +
+    '<div class="panel"><h3>🗺️ Your mission</h3><p class="how" style="margin:0">It was taken in <b>Tongariro National Park, New Zealand</b>, next to <b>Mount Ruapehu</b>. You are going to follow a sequenced investigation to decide: <b>can a volcano be a fantastic place?</b> Work with a partner, but make sure you <b>both</b> complete the work.</p></div>' + next('Start the mission →');
+
+  H.s1 = '<div class="panel"><span class="act-tag">Activity 1</span><h2>The enquiry: the 4 Ps</h2>' +
+    '<p class="how">Geographers use four lenses to investigate a place. <b>Match each Ruapehu question to its P</b> — drag it, or tap the question then tap the box.</p><div id="g-enq"></div></div>' +
+    '<div class="panel"><h3>🧪 Initial hypothesis</h3><p class="how">Before investigating any further: <b>I think Mount Ruapehu is / is not / is partly a fantastic place because…</b></p>' +
+    '<div class="choices" id="hypo">' + ['is', 'is partly', 'is not'].map(function (v) { return '<button type="button" class="choice" data-v="' + v + '">Mount Ruapehu <b>' + v + '</b> a fantastic place</button>'; }).join('') + '</div>' +
+    wb('hypo', 's1', 'My hypothesis: Mount Ruapehu is… because…', { ph: 'Mount Ruapehu is … a fantastic place because …' }) + '</div>' + next();
+
+  H.s1b = '<div class="panel"><span class="act-tag">Activity 1 · Place</span><h2>📍 What makes Ruapehu distinctive?</h2>' +
+    '<div class="photos">' + photo('ruapehu') + photo('crater') + photo('ski') + '</div>' +
+    '<h3>Fact or fiction? Tap True or False</h3><div class="tf" id="tf"></div><div class="msg" id="tfMsg"></div></div>' +
+    '<div class="panel"><h3>Place cards</h3>' +
+    '<div class="ps">' +
+    '<div class="pcard place"><b>LOCATION</b>A volcano in the central North Island of New Zealand, in Tongariro National Park.</div>' +
+    '<div class="pcard place"><b>DISTINCTIVE LANDSCAPE</b>Snow-capped composite volcano, glaciers, a crater lake, layers of lava and ash, colourful mineral-stained rocks.</div>' +
+    '<div class="pcard place"><b>MEANING TO RESIDENTS</b>Culturally significant to local iwi (Māori tribes), a place to work and relax, and an active volcano people live beside.</div>' +
+    '<div class="pcard place"><b>MEANING TO VISITORS</b>Dramatic scenery, skiing, walking, colourful landscapes and learning about volcanoes.</div></div>' +
+    wb('place', 's1b', 'Evidence / note: Pick TWO place cards. Add your own evidence from the photos or your research.', { frame: 'e.g. “Distinctive landscape: the photo shows…” · “Meaning to visitors: …”' }) + '</div>' + next();
+
+  H.s2 = '<div class="panel"><span class="act-tag">Activity 2 · Processes</span><h2>🌋 Label the diagram: why is New Zealand volcanic?</h2>' +
+    '<p class="how">New Zealand sits on the <b>Pacific Ring of Fire</b>. Tap a label, then tap the numbered box it belongs to. Use the numbers on the diagram.</p>' +
+    '<div class="diagram-wrap"><div class="diagram" id="diagram"></div><div><div class="lbl-bank" id="lblBank"></div><div class="slots" id="slots"></div>' +
+    '<div class="actions"><button type="button" class="btn primary" id="lblCheck">Check labels</button></div><div class="msg" id="lblMsg"></div></div></div></div>' +
+    '<div class="panel"><h3>⛓️ Follow the chain of cause and effect</h3><p class="how">Tap the steps <b>in order</b> to build the chain. Tap a step in your chain to take it out.</p>' +
+    '<div class="chain-pool" id="chainPool"></div><div class="chain" id="chain"></div>' +
+    '<div class="actions"><button type="button" class="btn primary" id="chainCheck">Check my chain</button></div><div class="msg" id="chainMsg"></div></div>' +
+    '<div class="panel"><h3>✍️ Explain the processes</h3><p class="how">Underline (or look up) any word you don’t understand. Tap the key words to add them to your answer.</p>' +
+    wb('proc1', 's2', 'New Zealand is volcanic because…', { chips: ['Pacific Plate', 'Australian Plate', 'subducts', 'destructive plate boundary', 'mantle', 'melts', 'magma', 'rises', 'erupts', 'Ring of Fire'], rows: 5 }) +
+    wb('proc2', 's2', 'This has shaped New Zealand by…', { chips: ['composite volcano', 'layers of lava and ash', 'crater lake', 'glaciers', 'lahars', 'landslides'], rows: 4 }) + '</div>' + next();
+
+  H.s3 = '<div class="panel"><span class="act-tag">Activity 3</span><h2>⚖️ Fantastic or dangerous?</h2>' +
+    '<div class="photos">' + photo('ski') + photo('lahar') + '</div>' +
+    '<p class="how">Sort the evidence. Some evidence is <b>both</b> — that’s what makes this a good geography question!</p><div id="g-fd"></div>' +
+    '<div class="fact">📰 <b>Real events:</b> On 24 December 1953, Crater Lake burst out as a <b>lahar</b> (volcanic mudflow) and destroyed the rail bridge at Tangiwai — 151 people died. Eruptions in 1995–96 closed the ski areas and spread ash across the North Island. In 2007 a sudden eruption threw rocks and mud onto a mountain hut, badly injuring a climber.</div></div>' +
+    '<div class="panel">' + wb('fd1', 's3', 'Which evidence makes Ruapehu FANTASTIC?') + wb('fd2', 's3', 'Which evidence makes Ruapehu DANGEROUS?') + '</div>' + next();
+
+  H.s4 = '<div class="panel"><span class="act-tag">Activity 4 · Power</span><h2>⚖️ Who decides?</h2>' +
+    '<p class="how">Volcano decisions involve different people with different jobs. <b>Match each group to what they do.</b></p><div id="g-pow"></div></div>' +
+    '<div class="panel">' + wb('pow1', 's4', 'Which group has the MOST power over whether people can visit Ruapehu? Why?') +
+    wb('pow2', 's4', 'Whose views and safety matter most? Explain one group.') + '</div>' + next();
+
+  H.s5 = '<div class="panel"><span class="act-tag">Activity 5</span><h2>🚨 Decision challenge</h2>' +
+    '<div class="alert-box"><span class="lvl">VOLCANIC ALERT LEVEL: 1 → 2</span><h3>Monitoring update: Mount Ruapehu</h3><p>Scientists have recorded <b>volcanic tremor</b> (shaking) and Crater Lake is <b>heating up</b>. They say an eruption is more likely than usual, although it may not happen. A popular walking track and viewpoint are close to the crater. It is the middle of the ski season.</p></div>' +
+    '<h3>a) Should the visitor site stay open, be restricted, or close?</h3><div class="choices" id="dec1">' +
+    '<button type="button" class="choice" data-v="open">🟢 Stay open<small>Business as usual</small></button>' +
+    '<button type="button" class="choice" data-v="restrict">🟠 Restrict<small>Close the area near the crater; keep lower slopes open</small></button>' +
+    '<button type="button" class="choice" data-v="close">🔴 Close everything<small>Nobody goes up the mountain</small></button></div><div class="fbk" id="dec1fb"></div>' +
+    wb('dec1', 's5', 'I decided to… because… However…', { ph: 'I decided to … because … However …' }) + '</div>' +
+    '<div class="panel"><h3>b) POWER QUESTION: If conditions change, who should decide whether a volcanic site opens?</h3><div class="choices" id="dec2">' +
+    '<button type="button" class="choice" data-v="sci">🔬 Scientists on their own</button>' +
+    '<button type="button" class="choice" data-v="tour">🚌 Ski areas and tour operators</button>' +
+    '<button type="button" class="choice" data-v="auth">🏛️ Authorities, using scientists’ advice and listening to iwi and communities</button>' +
+    '<button type="button" class="choice" data-v="vis">🎒 Each visitor for themselves</button></div><div class="fbk" id="dec2fb"></div>' +
+    wb('dec2', 's5', 'Who should decide, and why?') + '</div>' + next();
+
+  H.s6 = '<div class="panel"><span class="act-tag">Activity 6 · Possibilities</span><h2>🔮 Rank the futures</h2>' +
+    '<p class="how">Use the arrows to rank A–D. Put the one that should be the <b>priority</b> at number 1. There is no single right answer — but every choice has a <b>trade-off</b>.</p>' +
+    '<div class="rank-list" id="rank"></div><div class="actions"><button type="button" class="btn primary" id="rankDone">Show the trade-offs</button></div><div id="rankFb"></div></div>' +
+    '<div class="panel">' + wb('rank', 's6', 'My priority is… because… The trade-off is…', { ph: 'My priority is … because … The trade-off is …' }) + '</div>' + next();
+
+  H.s7 = '<div class="panel"><span class="act-tag">Activity 7</span><h2>🗂️ Evidence sort: which P?</h2>' + PCARDS +
+    '<p class="how">Sort all 8 cards into the right P.</p><div id="g-4p"></div></div>' +
+    '<div class="panel"><h3>🔗 Connection challenge</h3>' + wb('conn', 's7', 'Choose one card that fits TWO Ps. Explain the connection.', { frame: 'e.g. “Scientists monitor activity” is POWER because… but also POSSIBILITIES because…' }) + '</div>' + next();
+
+  H.s7q = '<div class="panel"><span class="act-tag">Checkpoint</span><h2>✅ Checkpoint quiz</h2><p class="how">Six quick questions. Read the feedback after each one.</p><div id="quiz"></div><div class="msg" id="quizMsg"></div></div>' + next();
+
+  var ADJ = ['breathtaking', 'spectacular', 'stunning', 'dramatic', 'unforgettable', 'magnificent', 'incredible', 'amazing', 'awe-inspiring', 'colourful', 'colorful', 'majestic', 'unique', 'extraordinary', 'remarkable', 'beautiful', 'thrilling', 'wild', 'epic', 'iconic', 'fantastic', 'snow-capped', 'powerful', 'vivid', 'mighty', 'glittering', 'sparkling', 'ancient', 'fiery', 'jaw-dropping', 'unbelievable', 'exciting', 'gorgeous', 'impressive', 'mysterious'];
+  H.s8 = '<div class="panel"><span class="act-tag">Activity 8</span><h2>📣 Persuasive tourist advert</h2>' +
+    '<p class="how"><b>ROLE:</b> You are a travel writer <i>and</i> a geographer. Persuade people to visit Mount Ruapehu, while keeping the geography accurate and the advice responsible. Your advert builds itself as you type.</p>' +
+    '<div class="adv-grid"><div>' +
+    '<div class="field"><label for="ad-title">Title</label><input id="ad-title" data-ad="title" placeholder="e.g. Ruapehu: Where Fire Meets Ice"></div>' +
+    '<div class="field"><label for="ad-slogan">Slogan</label><input id="ad-slogan" data-ad="slogan" placeholder="A short, catchy line"></div>' +
+    '<div class="field"><label for="ad-place">PLACE: what makes Ruapehu distinctive? <span class="pt" style="background:var(--place-bg);color:var(--place)">Place</span></label><textarea id="ad-place" data-ad="place"></textarea></div>' +
+    '<div class="field"><label for="ad-proc">PROCESSES: how did volcanic activity shape it? <span class="pt" style="background:var(--proc-bg);color:var(--proc)">Processes</span></label><textarea id="ad-proc" data-ad="proc"></textarea></div>' +
+    '<div class="field"><label for="ad-power">POWER: how do scientists, communities or authorities keep access safe? <span class="pt" style="background:var(--power-bg);color:var(--power)">Power</span></label><textarea id="ad-power" data-ad="power"></textarea></div>' +
+    '<div class="field"><label for="ad-poss">POSSIBILITIES: one positive but responsible future idea <span class="pt" style="background:var(--poss-bg);color:var(--poss)">Possibilities</span></label><textarea id="ad-poss" data-ad="poss"></textarea></div>' +
+    '<div class="field"><label for="ad-safe">Safety statement</label><textarea id="ad-safe" data-ad="safe" placeholder="Always check… and follow…"></textarea></div>' +
+    '<h3>Success checklist</h3><ul class="checklist" id="adCheck"></ul>' +
+    '<div class="actions"><button type="button" class="copy" id="adCopy">📋 Copy my advert for OneNote</button></div>' +
+    '</div><div><div class="poster" id="poster"></div>' +
+    '<details class="model"><summary>💡 Example for inspiration (yours needs to be better and more detailed — you can do this!)</summary>' +
+    '<p><b>Visit Mount Ruapehu: Where Fire Meets Ice</b><br><i>Discover a snow-capped volcanic icon!</i></p>' +
+    '<p>Have you ever stood on a volcano that is still alive? Explore a breathtaking landscape of glaciers, a steaming crater lake and colourful mineral-stained rocks. This mountain was built by powerful Earth processes, as the Pacific Plate sinks beneath the Australian Plate and magma rises to erupt layers of lava and ash.</p>' +
+    '<p>Scientists watch the volcano every day, and park authorities use their advice to keep visitors safe. In the future, carefully managed trails could help more people learn about Ruapehu while protecting it.</p>' +
+    '<p><b>Always check the Volcanic Alert Level and follow official guidance and restrictions.</b></p></details>' +
+    '</div></div></div>' + next();
+
+  H.s9 = '<div class="panel"><span class="act-tag">Activity 9</span><h2>🏁 Final geographical judgement</h2>' +
+    '<p class="how">Go back to your hypothesis: <b id="hypoBack"></b></p>' +
+    '<h3>Can a volcano be a fantastic place? Overall, I…</h3><div class="choices" id="verdict">' +
+    ['agree', 'partly agree', 'disagree'].map(function (v) { return '<button type="button" class="choice" data-v="' + v + '"><b>' + v.charAt(0).toUpperCase() + v.slice(1) + '</b></button>'; }).join('') + '</div>' +
+    wb('verdict', 's9', 'VERDICT: Overall, I agree / partly agree / disagree because the most important evidence is…', { rows: 4 }) + '</div>' +
+    '<div class="panel"><h3>🎟️ Exit ticket: one idea for each P</h3>' + PCARDS +
+    wb('ex-place', 's9', 'PLACE — Evidence: … Why it matters: …') +
+    wb('ex-proc', 's9', 'PROCESSES — Evidence: … Why it matters: …') +
+    wb('ex-power', 's9', 'POWER — Evidence: … Why it matters: …') +
+    wb('ex-poss', 's9', 'POSSIBILITIES — Evidence: … Why it matters: …') + '</div>' + next('Finish →');
+
+  H.end = '<div class="copy-all"><h2>📋 Copy everything to OneNote</h2><p>One click copies <b>all your answers and results</b>, with headings for every activity. Open your OneNote page and press <b>Ctrl + V</b> (or ⌘ + V).</p>' +
+    '<button type="button" class="btn orange" id="copyAll">📋 Copy all my answers</button><p class="note" style="color:rgba(255,255,255,0.7)">Your answers are also saved in this browser, so you can come back to them.</p></div>' +
+    '<div class="panel" style="margin-top:14px"><h3>Your mission results</h3><div class="scores" id="scores"></div><div id="missing"></div>' +
+    '<div class="actions"><button type="button" class="btn ghost" id="resetAll">Start again (clears answers)</button></div></div>';
+
+  /* build screens + nav */
+  $('screens').innerHTML = ST.map(function (s) { return '<section class="screen" id="sc-' + s.id + '" aria-label="' + esc(s.title) + '">' + H[s.id] + '</section>'; }).join('');
+  $('stations').innerHTML = ST.map(function (s, i) { return '<button type="button" class="st" role="tab" data-i="' + i + '">' + s.short + '</button>'; }).join('');
+  function markDone(id) { if (!state.done[id]) { state.done[id] = 1; save(); } paintNav(); }
+  function paintNav() {
+    document.querySelectorAll('.st').forEach(function (b, i) { b.classList.toggle('on', i === cur); b.classList.toggle('done', !!state.done[ST[i].id]); b.setAttribute('aria-selected', i === cur); });
+    var n = ST.filter(function (s) { return s.id !== 'end' && state.done[s.id]; }).length;
+    $('progressBar').style.width = (n / (ST.length - 1) * 100) + '%';
+  }
+  function go(i) {
+    if (i < 0 || i >= ST.length) return;
+    cur = i;
+    document.querySelectorAll('.screen').forEach(function (s, k) { s.classList.toggle('on', k === i); });
+    paintNav();
+    var b = document.querySelector('.st[data-i="' + i + '"]'); if (b && b.scrollIntoView) b.scrollIntoView({ block: 'nearest', inline: 'center' });
+    window.scrollTo(0, 0);
+    if (ST[i].id === 's9') $('hypoBack').textContent = state.a.hypo ? '“' + state.a.hypo + '”' : '(you haven’t written one yet — go back to Activity 1)';
+    if (ST[i].id === 'end') renderEnd();
+  }
+  $('stations').addEventListener('click', function (e) { var b = e.target.closest('.st'); if (b) go(+b.dataset.i); });
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-go]'); if (g) { var st = ST[cur].id; if (+g.dataset.go > 0 && /^(s0|s9)$/.test(st) && writtenIn(st)) markDone(st); go(cur + (+g.dataset.go)); }
+  });
+  function writtenIn(st) { return WB.some(function (w) { return w.st === st && (state.a[w.id] || '').trim().length > 0; }); }
+
+  /* write-box wiring */
+  document.querySelectorAll('textarea[data-wb]').forEach(function (ta) {
+    var id = ta.dataset.wb; ta.value = state.a[id] || '';
+    function upd() { state.a[id] = ta.value; save(); var c = document.querySelector('[data-count="' + id + '"]'); var w = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0; c.textContent = w ? w + ' words' : ''; paintChips(ta); }
+    ta.addEventListener('input', upd); upd();
+  });
+  function paintChips(ta) {
+    var box = document.querySelector('.chips[data-for="' + ta.id + '"]'); if (!box) return;
+    var v = ta.value.toLowerCase();
+    box.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('used', v.indexOf(c.textContent.toLowerCase()) > -1); });
+  }
+  document.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (chip) {
+      var ta = $(chip.parentNode.dataset.for), w = chip.textContent, s = ta.selectionStart != null ? ta.selectionStart : ta.value.length;
+      var before = ta.value.slice(0, s), after = ta.value.slice(s), pad = before && !/\s$/.test(before) ? ' ' : '';
+      ta.value = before + pad + w + ' ' + after; ta.focus(); var pos = (before + pad + w + ' ').length; ta.setSelectionRange(pos, pos);
+      ta.dispatchEvent(new Event('input'));
+    }
+    var cp = e.target.closest('[data-copy]');
+    if (cp) { var w2 = WB.filter(function (x) { return x.id === cp.dataset.copy; })[0]; var ans = (state.a[w2.id] || '').trim(); copyText(stripTags(w2.prompt) + '\n' + (ans || '(not answered yet)'), null, cp); }
+  });
+  function stripTags(s) { var d = document.createElement('div'); d.innerHTML = s; return d.textContent; }
+
+  /* ==================== SORT ENGINE (drag or tap) ==================== */
+  var SG = {};
+  function sortGame(id, cfg) {
+    var root = $(id); SG[id] = cfg; cfg.root = root;
+    root.innerHTML = '<div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + z.cls + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="' + id + '">Check answers</button></div><div class="msg" data-sgmsg="' + id + '"></div>';
+    var tray = root.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(cfg.cards[i].t) + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(root);
+  }
+  function trayState(root) {
+    var tray = root.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All sorted — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('.sg-zones').parentNode); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[id]') === z.closest('[id]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.dataset.sgcheck);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 50) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null, home = origin.closest('.sg-tray, .sg-zones').parentNode;
+    if (z && z.closest('.sg-zones').parentNode === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('.sg-tray').parentNode === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(id) {
+    var cfg = SG[id], root = cfg.root, right = 0, zn = {};
+    cfg.zones.forEach(function (z) { zn[z.id] = z.label.replace(/<[^>]+>/g, ''); });
+    root.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ Clue: ' + c.why;
+        if (ok) right++;
+      });
+    });
+    var left = root.querySelectorAll('.sg-tray .sg-card').length, m = root.querySelector('[data-sgmsg]'), total = cfg.cards.length;
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      if (!state.r[id]) { state.r[id] = { first: cfg.tries ? right + '/' + total + ' (after ' + (cfg.tries + 1) + ' tries)' : total + '/' + total + ' first time' }; }
+      var out = {}; root.querySelectorAll('.sg-zone').forEach(function (z) { out[zn[z.dataset.z]] = [].map.call(z.querySelectorAll('.sg-card'), function (el) { return cfg.cards[+el.dataset.i].t; }); });
+      state.r[id].placed = out; save(); markDone(cfg.station);
+    } else if (left) { m.className = 'msg info'; m.textContent = left + ' still to sort. ' + right + ' correct so far.'; }
+    else { cfg.tries = (cfg.tries || 0) + 1; m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards and move them.'; }
+  }
+
+  /* Activity 1: match questions to Ps */
+  var PZ = [
+    { id: 'place', label: '📍 PLACE', cls: 'z-place' }, { id: 'proc', label: '🌋 PROCESSES', cls: 'z-proc' },
+    { id: 'power', label: '⚖️ POWER', cls: 'z-power' }, { id: 'poss', label: '🔮 POSSIBILITIES', cls: 'z-poss' }];
+  sortGame('g-enq', { station: 's1', zones: PZ, cards: [
+    { t: 'What is Mount Ruapehu like? Where is it? What makes it distinctive?', a: ['place'], why: 'This is about what the place is like and where it is.' },
+    { t: 'How have subduction, magma, eruptions and lahars shaped Mount Ruapehu?', a: ['proc'], why: 'Subduction, magma and eruptions are natural processes.' },
+    { t: 'Who decides? Who benefits? Whose views and safety matter?', a: ['power'], why: '“Who decides” is always a power question.' },
+    { t: 'What might happen next? How should Mount Ruapehu and its visitors be managed?', a: ['poss'], why: '“What might happen next” is about the future.' }] });
+
+  /* Activity 3: fantastic / dangerous / both */
+  sortGame('g-fd', { station: 's3', zones: [
+    { id: 'fan', label: '😍 Fantastic', cls: 'z-fan', sub: 'Benefits and opportunities' },
+    { id: 'both', label: '🤔 Both', cls: 'z-both', sub: 'Amazing AND risky' },
+    { id: 'dan', label: '⚠️ Dangerous', cls: 'z-dan', sub: 'Hazards and risks' }], cards: [
+    { t: 'Skiing on the Whakapapa and Tūroa ski areas', a: ['fan'], why: 'Skiing is an opportunity for fun and income.' },
+    { t: 'Jobs in hotels, cafés and tour companies', a: ['fan'], why: 'Tourism creates jobs — a benefit.' },
+    { t: 'Dramatic snow-capped scenery and glaciers', a: ['fan'], why: 'Scenery attracts visitors.' },
+    { t: 'Scientists and students learn about volcanoes here', a: ['fan'], why: 'Learning and science are opportunities.' },
+    { t: 'Lahars (volcanic mudflows) race down river valleys', a: ['dan'], why: 'Lahars destroy bridges, roads and homes.' },
+    { t: 'Ballistics: rocks thrown out during eruptions', a: ['dan'], why: 'Flying rocks can kill or injure people near the crater.' },
+    { t: 'Ash falls on roads, farms and ski areas', a: ['dan'], why: 'Ash damages crops, machines and makes roads unsafe.' },
+    { t: 'Crater Lake: stunning to see, but it can burst out as a lahar', a: ['both'], also: ['dan'], alt: 'Good thinking — it is both amazing and dangerous.', why: 'It is beautiful AND hazardous — which box fits both?' },
+    { t: 'Summit tracks close when volcanic unrest increases', a: ['both', 'dan'], alt: 'Accepted — closures keep people safe, but visitors and businesses lose out.', why: 'Closures happen because of danger, but they also affect tourism.' }] });
+  // treat 'also' as accepted
+  SG['g-fd'].cards.forEach(function (c) { if (c.also) c.a = c.a.concat(c.also); });
+
+  /* Activity 4: power match */
+  sortGame('g-pow', { station: 's4', zones: [
+    { id: 'gns', label: '🔬 GNS Science & volcano scientists', cls: 'z-plain' },
+    { id: 'doc', label: '🏛️ DOC, Civil Defence & local authorities', cls: 'z-plain' },
+    { id: 'iwi', label: '🏡 Iwi, local communities & businesses', cls: 'z-plain' },
+    { id: 'vis', label: '🎒 Visitors, ski areas & tour operators', cls: 'z-plain' }], cards: [
+    { t: 'Monitor earthquakes, ground movement, gases and Crater Lake, then report the volcano’s alert level.', a: ['gns'], why: 'Who has the equipment to measure the volcano?' },
+    { t: 'Use scientific advice to manage access, emergency plans and warnings.', a: ['doc'], why: 'Who is in charge of the national park and emergencies?' },
+    { t: 'Hold cultural connections to the mountain, live with the risks and may depend on tourism for income.', a: ['iwi'], why: 'Who lives beside the mountain and has cultural links to it?' },
+    { t: 'Need accurate information and must follow guidance and restrictions.', a: ['vis'], why: 'Who comes to use the mountain and must follow the rules?' }] });
+
+  /* Activity 7: 4P sort */
+  sortGame('g-4p', { station: 's7', zones: PZ, cards: [
+    { t: 'Central North Island volcano', a: ['place'], why: 'This describes where it is.' },
+    { t: 'Glaciers, crater lake and mineral-stained rocks', a: ['place', 'proc'], alt: 'Accepted — a distinctive landscape (Place) made by processes.', why: 'This describes what the place looks like.' },
+    { t: 'Pacific Plate subducts beneath the Australian Plate', a: ['proc'], why: 'Plate movement is a physical process.' },
+    { t: 'Magma forms above the subducting plate and rises', a: ['proc'], why: 'Magma forming and rising is a process.' },
+    { t: 'Scientists monitor activity', a: ['power', 'poss'], alt: 'Accepted — monitoring gives scientists power, and helps plan the future.', why: 'Who has the information to advise decisions?' },
+    { t: 'Access decisions affect communities', a: ['power'], why: 'Decisions = power.' },
+    { t: 'Managed year-round tourism could develop', a: ['poss'], why: '“Could develop” is about the future.' },
+    { t: 'Monitoring could improve preparedness', a: ['poss', 'power'], alt: 'Accepted — it links power (who monitors) and possibilities (the future).', why: '“Could improve” is about the future.' }] });
+
+  /* ==================== HYPOTHESIS / VERDICT / DECISIONS ==================== */
+  function choiceGroup(id, key, onPick) {
+    var box = $(id);
+    function paint() { box.querySelectorAll('.choice').forEach(function (b) { b.classList.toggle('picked', state.r[key] === b.dataset.v); }); }
+    box.addEventListener('click', function (e) { var b = e.target.closest('.choice'); if (!b) return; state.r[key] = b.dataset.v; save(); paint(); if (onPick) onPick(b.dataset.v); });
+    paint(); if (state.r[key] && onPick) onPick(state.r[key], true);
+  }
+  choiceGroup('hypo', 'hypoChoice', function (v, init) {
+    var ta = $('wb-hypo'); if (!init && !ta.value.trim()) { ta.value = 'Mount Ruapehu ' + v + ' a fantastic place because '; ta.dispatchEvent(new Event('input')); }
+    if (!init) markDone('s1h');
+  });
+  choiceGroup('verdict', 'verdictChoice', function (v, init) {
+    var ta = $('wb-verdict'); if (!init && !ta.value.trim()) { ta.value = 'Overall, I ' + v + ' that a volcano can be a fantastic place because the most important evidence is '; ta.dispatchEvent(new Event('input')); }
+  });
+  var DEC1 = {
+    open: ['bad', '⚠️ Risky. Scientists are warning that an eruption is more likely. People near the crater could be hit by ballistics (flying rocks) or lahars, like the climber injured in 2007. Businesses would be happy — until something went wrong.'],
+    restrict: ['good', '✔ A balanced choice. Closing the area near the crater protects people from the biggest hazards, while lower slopes, ski areas and businesses can keep going. This is similar to how New Zealand usually responds when the alert level rises. Trade-off: some visitors and tour guides lose out.'],
+    close: ['', '🔴 The safest choice for people, but ski areas, hotels and local workers lose income, and if nothing happens people may stop trusting warnings. Is closing everything proportionate to an alert level of 2?']
+  };
+  choiceGroup('dec1', 'dec1', function (v) { var f = $('dec1fb'); f.className = 'fbk show ' + DEC1[v][0]; f.textContent = DEC1[v][1]; markDone('s5a'); });
+  var DEC2 = {
+    sci: ['', 'Scientists have the best evidence, and they set the Volcanic Alert Level. But they don’t usually make access decisions on their own — those affect jobs, culture and safety.'],
+    tour: ['bad', 'Ski areas and tour operators know the mountain well, but they also make money from visitors. Is it fair for them to decide alone?'],
+    auth: ['good', '✔ This is closest to what happens in New Zealand: GNS Science monitors the volcano and gives advice; the Department of Conservation (DOC), Civil Defence and local authorities make access decisions, and iwi and communities should have a voice.'],
+    vis: ['bad', 'Visitors often don’t have the scientific information to judge the risk. That is why official guidance exists.']
+  };
+  choiceGroup('dec2', 'dec2', function (v) { var f = $('dec2fb'); f.className = 'fbk show ' + DEC2[v][0]; f.textContent = DEC2[v][1]; if (state.r.dec1) markDone('s5'); });
+
+  /* ==================== PLACE: TRUE / FALSE ==================== */
+  var TF = [
+    { s: 'Mount Ruapehu is in the central North Island of New Zealand.', a: true, why: 'True — it is in Tongariro National Park, in the middle of the North Island.' },
+    { s: 'Mount Ruapehu is an island.', a: false, why: 'False — it is a volcano (a mountain) ON the North Island of New Zealand.' },
+    { s: 'At 2,797 m, Ruapehu is the highest mountain in the North Island.', a: true, why: 'True — and high enough to have snow and glaciers.' },
+    { s: 'Ruapehu is extinct and will never erupt again.', a: false, why: 'False — it is one of the world’s most active volcanoes. It erupted in 1995–96 and 2007.' },
+    { s: 'Ruapehu has glaciers and a crater lake near its summit.', a: true, why: 'True — fire and ice on the same mountain!' },
+    { s: 'Tongariro National Park was New Zealand’s first national park.', a: true, why: 'True — created in 1887 after the land was gifted by Ngāti Tūwharetoa chief Te Heuheu Tūkino IV.' }];
+  (function () {
+    var box = $('tf'), right = 0, answered = 0;
+    box.innerHTML = TF.map(function (q, i) { return '<div class="tf-row" data-i="' + i + '"><span class="s">' + esc(q.s) + '</span><span class="bt"><button type="button" data-v="1">True</button><button type="button" data-v="0">False</button></span><span class="why">' + esc(q.why) + '</span></div>'; }).join('');
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || b.disabled) return;
+      var row = b.closest('.tf-row'), q = TF[+row.dataset.i], ok = (b.dataset.v === '1') === q.a;
+      row.querySelectorAll('button').forEach(function (x) { x.disabled = true; });
+      row.classList.add(ok ? 'right' : 'wrong'); answered++; if (ok) right++;
+      if (answered === TF.length) { $('tfMsg').className = 'msg ok'; $('tfMsg').textContent = right + '/' + TF.length + ' correct.'; state.r.tf = right + '/' + TF.length; save(); markDone('s1b'); }
+    });
+  })();
+
+  /* ==================== PROCESSES DIAGRAM ==================== */
+  var LBL = [
+    { n: 1, t: 'Pacific Plate (oceanic crust)', x: 690, y: 188 },
+    { n: 2, t: 'Australian Plate (continental crust)', x: 70, y: 196 },
+    { n: 3, t: 'Ocean trench', x: 566, y: 186 },
+    { n: 4, t: 'Subduction: the Pacific Plate sinks', x: 500, y: 262 },
+    { n: 5, t: 'Water released → mantle rock melts into magma', x: 400, y: 356 },
+    { n: 6, t: 'Magma rises', x: 322, y: 236 },
+    { n: 7, t: 'Mount Ruapehu (composite volcano)', x: 180, y: 112 },
+    { n: 8, t: 'Crater Lake', x: 250, y: 30 }];
+  function diagramSVG(done) {
+    var s = '<svg viewBox="0 0 800 430" role="img" aria-label="Cross-section of the destructive plate boundary under New Zealand">';
+    s += '<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#f0f9ff"/></linearGradient>' +
+      '<linearGradient id="mant" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#ea580c"/></linearGradient>' +
+      '<marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1e293b"/></marker>' +
+      '<marker id="ahr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker></defs>';
+    s += '<rect width="800" height="430" fill="url(#sky)"/>';
+    s += '<rect y="150" width="800" height="280" fill="url(#mant)"/>'; // mantle
+    s += '<text x="120" y="400" font-size="15" font-weight="800" fill="#7c2d12" opacity="0.7">MANTLE</text>';
+    // ocean
+    s += '<path d="M520 150 H800 V172 H585 L566 180 Z" fill="#60a5fa"/>';
+    // pacific plate (oceanic) sinking left
+    s += '<path d="M800 172 H585 L566 182 L520 210 L440 270 L380 330 L350 372 L375 385 L408 345 L468 290 L548 232 L600 205 H800 Z" fill="#475569"/>';
+    // australian plate (continental)
+    s += '<path d="M0 150 H170 L262 58 L350 150 H520 L566 180 L520 212 L440 214 H0 Z" fill="#a16207"/>';
+    s += '<path d="M0 150 H170 L262 58 L350 150 H520" fill="none" stroke="#65a30d" stroke-width="5"/>';
+    // volcano layers + snow
+    s += '<path d="M205 115 L262 58 L318 115" fill="none" stroke="#78350f" stroke-width="2" opacity="0.5"/><path d="M185 132 L262 58 L338 132" fill="none" stroke="#78350f" stroke-width="2" opacity="0.4"/>';
+    s += '<path d="M228 92 L262 58 L296 92 L285 86 L274 94 L262 84 L250 94 L238 86 Z" fill="#fff"/>';
+    s += '<ellipse cx="262" cy="62" rx="12" ry="4" fill="#38bdf8"/>';
+    // magma chamber + conduit
+    s += '<path d="M262 64 C265 100 258 140 268 176 C282 220 330 270 382 318" fill="none" stroke="#dc2626" stroke-width="9" stroke-linecap="round"/>';
+    s += '<path d="M262 64 C265 100 258 140 268 176 C282 220 330 270 382 318" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 7"/>';
+    s += '<ellipse cx="270" cy="190" rx="26" ry="14" fill="#dc2626"/>';
+    s += '<path d="M330 262 L310 238" stroke="#dc2626" stroke-width="3" marker-end="url(#ahr)"/>';
+    // melt zone + water drops
+    s += '<ellipse cx="392" cy="330" rx="34" ry="16" fill="#ef4444" opacity="0.85"/>';
+    [[420, 318], [432, 304], [410, 300]].forEach(function (p) { s += '<path d="M' + p[0] + ' ' + p[1] + ' q4 6 0 9 q-4 -3 0 -9z" fill="#1d4ed8"/>'; });
+    // plate motion arrows
+    s += '<path d="M770 190 H640" stroke="#1e293b" stroke-width="4" marker-end="url(#ah)"/>';
+    s += '<path d="M60 182 H140" stroke="#1e293b" stroke-width="4" marker-end="url(#ah)"/>';
+    s += '<path d="M520 222 L470 262" stroke="#1e293b" stroke-width="3" marker-end="url(#ah)"/>';
+    // compass-ish
+    s += '<text x="12" y="24" font-size="13" font-weight="800" fill="#334155">West</text><text x="745" y="24" font-size="13" font-weight="800" fill="#334155">East</text>';
+    s += '<text x="610" y="140" font-size="12" font-weight="700" fill="#1e3a8a">Pacific Ocean</text><text x="40" y="140" font-size="12" font-weight="700" fill="#365314">North Island</text>';
+    // number markers / labels
+    LBL.forEach(function (l) {
+      var ok = done && done[l.n];
+      s += '<g><circle cx="' + l.x + '" cy="' + l.y + '" r="13" fill="' + (ok ? '#16a34a' : '#0f3a5c') + '" stroke="#fff" stroke-width="2.5"/><text x="' + l.x + '" y="' + (l.y + 5) + '" font-size="13" font-weight="900" fill="#fff" text-anchor="middle">' + l.n + '</text>';
+      if (ok) {
+        var tx = l.x + 17, anchor = 'start'; if (l.x > 560) { tx = l.x - 17; anchor = 'end'; }
+        var short = l.t.replace(/ \(.*\)/, '').replace(/: .*/, '').replace(' → mantle rock melts into magma', ' → rock melts');
+        s += '<text x="' + tx + '" y="' + (l.y + 5) + '" font-size="12.5" font-weight="800" fill="#062033" text-anchor="' + anchor + '" stroke="#fff" stroke-width="3.5" paint-order="stroke">' + esc(short) + '</text>';
+      }
+      s += '</g>';
+    });
+    return s + '</svg>';
+  }
+  (function () {
+    var placed = {}, selL = null, done = null;
+    $('diagram').innerHTML = diagramSVG();
+    $('lblBank').innerHTML = shuffle(LBL).map(function (l) { return '<button type="button" class="lbl" data-n="' + l.n + '">' + esc(l.t) + '</button>'; }).join('');
+    $('slots').innerHTML = LBL.map(function (l) { return '<div class="slot" data-n="' + l.n + '" role="button" tabindex="0"><span class="n">' + l.n + '</span><span class="v">tap a label, then tap here</span></div>'; }).join('');
+    function paint() {
+      document.querySelectorAll('#slots .slot').forEach(function (sl) {
+        var n = +sl.dataset.n, v = placed[n]; sl.classList.toggle('filled', !!v); sl.classList.remove('right', 'wrong');
+        sl.querySelector('.v').textContent = v ? LBL.filter(function (l) { return l.n === v; })[0].t : 'tap a label, then tap here';
+        sl.classList.toggle('target', !!selL && !v);
+      });
+      var used = {}; for (var k in placed) used[placed[k]] = 1;
+      document.querySelectorAll('#lblBank .lbl').forEach(function (b) { b.classList.toggle('placed', !!used[b.dataset.n]); b.classList.toggle('selected', selL === +b.dataset.n); });
+    }
+    $('lblBank').addEventListener('click', function (e) { var b = e.target.closest('.lbl'); if (!b || b.classList.contains('placed')) return; selL = selL === +b.dataset.n ? null : +b.dataset.n; paint(); });
+    function slotHit(sl) {
+      var n = +sl.dataset.n;
+      if (selL) { for (var k in placed) if (placed[k] === selL) delete placed[k]; placed[n] = selL; selL = null; }
+      else if (placed[n]) delete placed[n];
+      paint();
+    }
+    $('slots').addEventListener('click', function (e) { var sl = e.target.closest('.slot'); if (sl) slotHit(sl); });
+    $('slots').addEventListener('keydown', function (e) { var sl = e.target.closest('.slot'); if (sl && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); slotHit(sl); } });
+    var tries = 0;
+    $('lblCheck').addEventListener('click', function () {
+      var right = 0, n = Object.keys(placed).length; done = {};
+      document.querySelectorAll('#slots .slot').forEach(function (sl) {
+        var k = +sl.dataset.n; if (!placed[k]) return;
+        var ok = placed[k] === k; sl.classList.add(ok ? 'right' : 'wrong'); if (ok) { right++; done[k] = 1; }
+      });
+      $('diagram').innerHTML = diagramSVG(done);
+      var m = $('lblMsg');
+      if (right === LBL.length) { m.className = 'msg ok'; m.textContent = '✅ Diagram fully labelled!'; if (!state.r.diagram) state.r.diagram = tries ? '8/8 (after ' + (tries + 1) + ' tries)' : '8/8 first time'; save(); markDone('s2d'); if (state.done.s2c) markDone('s2'); }
+      else { tries++; m.className = 'msg ' + (n < LBL.length ? 'info' : 'no'); m.textContent = right + '/' + LBL.length + ' correct' + (n < LBL.length ? ' — ' + (LBL.length - n) + ' boxes still empty.' : '. Tap a red box to empty it, then try again.'); }
+    });
+  })();
+
+  /* chain of cause and effect */
+  var CHAIN = [
+    'The Pacific Plate moves west towards the Australian Plate.',
+    'At the destructive plate boundary, the heavier Pacific Plate subducts (sinks) beneath the Australian Plate.',
+    'Water released from the sinking plate helps the mantle rock above it melt, forming magma.',
+    'Magma is less dense, so it rises up through cracks in the crust.',
+    'Magma erupts as lava and ash, building layers that form a composite volcano: Mount Ruapehu.',
+    'Glaciers, landslides and lahars reshape the volcano’s slopes.'];
+  (function () {
+    var order = [], pool = shuffle(CHAIN.map(function (_, i) { return i; }));
+    function paint(checked) {
+      $('chainPool').innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="chain-item" data-i="' + i + '">' + esc(CHAIN[i]) + '</button>'; }).join('');
+      $('chain').innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow-down" aria-hidden="true">▼</div>' : '') + '<button type="button" class="chain-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(CHAIN[i]) + '</button>'; }).join('') : '<div class="chain-empty">Your chain starts here: tap the FIRST step above.</div>';
+      // arrows mess up counter spacing: fine visually
+    }
+    $('chainPool').addEventListener('click', function (e) { var b = e.target.closest('.chain-item'); if (!b) return; order.push(+b.dataset.i); paint(); $('chainMsg').textContent = ''; });
+    $('chain').addEventListener('click', function (e) { var b = e.target.closest('.chain-item'); if (!b) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    var tries = 0;
+    $('chainCheck').addEventListener('click', function () {
+      var m = $('chainMsg');
+      if (order.length < CHAIN.length) { m.className = 'msg info'; m.textContent = 'Add all ' + CHAIN.length + ' steps first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (right === CHAIN.length) { m.className = 'msg ok'; m.textContent = '✅ Perfect chain of cause and effect!'; if (!state.r.chain) state.r.chain = tries ? '6/6 (after ' + (tries + 1) + ' tries)' : '6/6 first time'; save(); markDone('s2c'); if (state.done.s2d) markDone('s2'); }
+      else { tries++; m.className = 'msg no'; m.textContent = right + '/6 in the right place. Tap the red steps to take them out and try again. Hint: start with the plates moving.'; }
+    });
+    paint();
+  })();
+
+  /* ==================== RANK FUTURES ==================== */
+  var FUT = [
+    { t: 'A: Expand carefully managed volcano tourism', off: 'More jobs and income, but more visitors means more people exposed to hazards and more damage to fragile landscapes.' },
+    { t: 'B: Increase protection of fragile landscapes', off: 'Protects nature and culturally significant places, but may limit access, skiing and tourism jobs.' },
+    { t: 'C: Develop more geothermal energy where appropriate', off: 'Clean, renewable energy from volcanic heat, but it can change landscapes and places that matter to iwi.' },
+    { t: 'D: Invest further in monitoring and preparedness', off: 'Keeps people safer and gives earlier warnings, but costs money that could be spent on other things.' }];
+  (function () {
+    var order = state.r.rank ? state.r.rank.slice() : [0, 1, 2, 3];
+    function paint() {
+      $('rank').innerHTML = order.map(function (i, k) { return '<div class="rank-item"><span class="rn">' + (k + 1) + '</span><span class="rt">' + esc(FUT[i].t) + '</span><span class="mv"><button type="button" data-m="-1" data-k="' + k + '" aria-label="Move up"' + (k === 0 ? ' disabled' : '') + '>▲</button><button type="button" data-m="1" data-k="' + k + '" aria-label="Move down"' + (k === 3 ? ' disabled' : '') + '>▼</button></span></div>'; }).join('');
+    }
+    $('rank').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-m]'); if (!b) return; var k = +b.dataset.k, j = k + (+b.dataset.m);
+      var t = order[k]; order[k] = order[j]; order[j] = t; state.r.rank = order.slice(); save(); paint();
+    });
+    $('rankDone').addEventListener('click', function () {
+      state.r.rank = order.slice(); save();
+      $('rankFb').innerHTML = '<div class="fbk show" style="margin-top:12px"><b>Trade-offs:</b><br>' + order.map(function (i, k) { return '<b>' + (k + 1) + '. ' + esc(FUT[i].t.slice(0, 1)) + '</b> — ' + esc(FUT[i].off); }).join('<br>') + '</div>';
+      var ta = $('wb-rank'); if (!ta.value.trim()) { ta.value = 'My priority is ' + FUT[order[0]].t.slice(3).toLowerCase() + ' because '; ta.dispatchEvent(new Event('input')); }
+      markDone('s6');
+    });
+    paint();
+  })();
+
+  /* ==================== QUIZ ==================== */
+  var QZ = [
+    { q: 'Which plate sinks (subducts) beneath the other under New Zealand’s North Island?', o: ['The Pacific Plate sinks beneath the Australian Plate', 'The Australian Plate sinks beneath the Pacific Plate', 'The plates are moving apart', 'No plates meet near New Zealand'], c: 0, f: 'The heavier oceanic Pacific Plate subducts beneath the Australian Plate.' },
+    { q: 'What type of volcano is Mount Ruapehu?', o: ['A shield volcano with runny lava', 'A composite (strato) volcano made of layers of lava and ash', 'An extinct volcano', 'A fold mountain'], c: 1, f: 'Layers of lava and ash build a steep-sided composite volcano.' },
+    { q: 'What is a lahar?', o: ['A type of glacier', 'A fast-moving volcanic mudflow', 'A hot spring', 'A cloud of ash'], c: 1, f: 'Lahars are mudflows of water and volcanic debris, like the 1953 Tangiwai lahar.' },
+    { q: 'Why does magma form above the sinking plate?', o: ['The Sun heats the rocks', 'Water released from the sinking plate helps mantle rock melt', 'The plates rub and catch fire', 'Glaciers melt into the mantle'], c: 1, f: 'Water lowers the melting point of mantle rock, so it melts into magma.' },
+    { q: 'Who monitors Ruapehu and reports its Volcanic Alert Level?', o: ['Tour operators', 'GNS Science (volcano scientists)', 'Visitors', 'Ski instructors'], c: 1, f: 'GNS Science monitors the volcano and reports the alert level; authorities use this advice.' },
+    { q: 'Which statement is a POSSIBILITY?', o: ['Ruapehu is in the central North Island', 'Magma rises through the crust', 'Monitoring could improve preparedness in the future', 'Glaciers are found near the summit'], c: 2, f: 'Possibilities are about what could happen in the future.' }];
+  (function () {
+    var right = 0, answered = 0;
+    $('quiz').innerHTML = QZ.map(function (q, i) { return '<div class="panel" style="box-shadow:none;background:#f8fbfd" data-q="' + i + '"><h3>' + (i + 1) + '. ' + esc(q.q) + '</h3><div class="choices">' + q.o.map(function (o, j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(o) + '</button>'; }).join('') + '</div><div class="fbk"></div></div>'; }).join('');
+    $('quiz').addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = QZ[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x, k) { x.disabled = true; if (k === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      answered++; if (ok) right++;
+      if (answered === QZ.length) { $('quizMsg').className = 'msg ok'; $('quizMsg').textContent = 'You scored ' + right + '/' + QZ.length + '.'; state.r.quiz = right + '/' + QZ.length; save(); markDone('s7q'); }
+    });
+  })();
+
+  /* ==================== ADVERT ==================== */
+  var AD = ['title', 'slogan', 'place', 'proc', 'power', 'poss', 'safe'];
+  var AD_NAMES = { title: 'Title', slogan: 'Slogan', place: 'PLACE', proc: 'PROCESSES', power: 'POWER', poss: 'POSSIBILITIES', safe: 'Safety statement' };
+  function ad(k) { return (state.a['ad-' + k] || '').trim(); }
+  function adjectivesUsed() { var all = AD.map(ad).join(' ').toLowerCase(); return ADJ.filter(function (w) { return new RegExp('(^|[^a-z-])' + w + '([^a-z-]|$)').test(all); }); }
+  function adChecks() {
+    var all = AD.map(ad).join(' '), adj = adjectivesUsed();
+    return [
+      ['A title and a slogan', ad('title') && ad('slogan')],
+      ['PLACE: what makes Ruapehu distinctive', ad('place').length > 15],
+      ['PROCESSES: how volcanic activity shaped it', ad('proc').length > 15],
+      ['POWER: who keeps access safe', ad('power').length > 15],
+      ['POSSIBILITIES: a positive, responsible future idea', ad('poss').length > 15],
+      ['A rhetorical question (?)', /\?/.test(all)],
+      ['Direct address (you / your)', /\byou(r|rself)?\b/i.test(all)],
+      ['At least 3 persuasive adjectives' + (adj.length ? ' (' + adj.slice(0, 5).join(', ') + ')' : ''), adj.length >= 3],
+      ['A clear safety statement about official guidance', /guidance|restriction|alert|warning|follow|rules/i.test(ad('safe'))]];
+  }
+  function paintAd() {
+    var ch = adChecks();
+    $('adCheck').innerHTML = ch.map(function (c) { return '<li class="' + (c[1] ? 'ok' : '') + '">' + esc(c[0]) + '</li>'; }).join('');
+    var ph = function (k, t) { return ad(k) ? esc(ad(k)) : '<span class="placeholder">' + t + '</span>'; };
+    $('poster').innerHTML = '<div class="pimg" style="background-image:url(\'' + (PHOTOS.ruapehu.src || commons(PHOTOS.ruapehu.f)) + '\')"><div class="ttl"><h3>' + ph('title', 'Your title') + '</h3><p>' + ph('slogan', 'Your slogan') + '</p></div></div>' +
+      '<div class="pbody"><p>' + ph('place', 'Place: what makes Ruapehu distinctive…') + '</p><p>' + ph('proc', 'Processes: how it was shaped…') + '</p><p>' + ph('power', 'Power: who keeps visitors safe…') + '</p><p>' + ph('poss', 'Possibilities: an exciting future…') + '</p>' +
+      '<div class="safe">⚠️ ' + ph('safe', 'Safety statement…') + '</div></div>';
+    var n = ch.filter(function (c) { return c[1]; }).length; state.r.advert = n + '/' + ch.length + ' checklist'; if (n === ch.length) markDone('s8'); save();
+  }
+  AD.forEach(function (k) {
+    var el = document.querySelector('[data-ad="' + k + '"]'); el.value = state.a['ad-' + k] || '';
+    el.addEventListener('input', function () { state.a['ad-' + k] = el.value; save(); paintAd(); });
+  });
+  paintAd();
+  function advertText() { return AD.map(function (k) { return AD_NAMES[k] + ': ' + (ad(k) || '—'); }).join('\n'); }
+  $('adCopy').addEventListener('click', function () { copyText('Persuasive tourist advert: Mount Ruapehu\n' + advertText(), null, this); });
+
+  /* ==================== FINISH / COPY ALL ==================== */
+  function zoneList(r) { if (!r || !r.placed) return ''; return Object.keys(r.placed).map(function (z) { return z + ': ' + (r.placed[z].join('; ') || '—'); }).join('\n'); }
+  function buildAll() {
+    var T = [], Hh = [];
+    function h(t) { T.push('', '== ' + t + ' =='); Hh.push('<h2>' + esc(t) + '</h2>'); }
+    function qa(q, a) { T.push(q, a || '(not answered yet)'); Hh.push('<p><b>' + esc(q) + '</b><br>' + (a ? esc(a).replace(/\n/g, '<br>') : '<i>(not answered yet)</i>') + '</p>'); }
+    function line(t) { T.push(t); Hh.push('<p>' + esc(t).replace(/\n/g, '<br>') + '</p>'); }
+    T.push('Can a volcano be a fantastic place? — Mount Ruapehu enquiry'); Hh.push('<h1>Can a volcano be a fantastic place? — Mount Ruapehu enquiry</h1>');
+    ST.forEach(function (s) {
+      if (s.id === 'end') return;
+      var ws = WB.filter(function (w) { return w.st === s.id; }), extra = [];
+      if (s.id === 's1b' && state.r.tf) extra.push('Fact or fiction quiz: ' + state.r.tf);
+      if (s.id === 's2') { if (state.r.diagram) extra.push('Labelled diagram: ' + state.r.diagram); if (state.r.chain) extra.push('Chain of cause and effect: ' + state.r.chain); extra.push('Chain: ' + CHAIN.map(function (c, i) { return (i + 1) + ') ' + c; }).join(' ')); }
+      if (s.id === 's3' && state.r['g-fd']) extra.push('My sort (' + state.r['g-fd'].first + '):\n' + zoneList(state.r['g-fd']));
+      if (s.id === 's4' && state.r['g-pow']) extra.push('Matching: ' + state.r['g-pow'].first);
+      if (s.id === 's1' && state.r['g-enq']) extra.push('4 Ps matching: ' + state.r['g-enq'].first);
+      if (s.id === 's5') { if (state.r.dec1) extra.push('My decision: ' + { open: 'Stay open', restrict: 'Restrict access', close: 'Close everything' }[state.r.dec1]); if (state.r.dec2) extra.push('Who should decide: ' + { sci: 'Scientists on their own', tour: 'Ski areas and tour operators', auth: 'Authorities using scientists’ advice, listening to iwi and communities', vis: 'Each visitor' }[state.r.dec2]); }
+      if (s.id === 's6' && state.r.rank) extra.push('My ranking:\n' + state.r.rank.map(function (i, k) { return (k + 1) + '. ' + FUT[i].t; }).join('\n'));
+      if (s.id === 's7' && state.r['g-4p']) extra.push('My sort (' + state.r['g-4p'].first + '):\n' + zoneList(state.r['g-4p']));
+      if (s.id === 's7q' && state.r.quiz) extra.push('Checkpoint quiz score: ' + state.r.quiz);
+      if (s.id === 's9' && state.r.verdictChoice) extra.push('Overall I ' + state.r.verdictChoice + '.');
+      if (!ws.length && !extra.length && s.id !== 's8') return;
+      h(s.title); extra.forEach(line);
+      if (s.id === 's8') { line(advertText()); return; }
+      ws.forEach(function (w) { qa(stripTags(w.prompt), (state.a[w.id] || '').trim()); });
+    });
+    return { text: T.join('\n'), html: '<div>' + Hh.join('') + '</div>' };
+  }
+  function renderEnd() {
+    var items = [['Diagram', state.r.diagram], ['Cause & effect chain', state.r.chain], ['Fact or fiction', state.r.tf], ['Fantastic/dangerous sort', state.r['g-fd'] && state.r['g-fd'].first], ['4P evidence sort', state.r['g-4p'] && state.r['g-4p'].first], ['Checkpoint quiz', state.r.quiz], ['Advert checklist', state.r.advert]];
+    $('scores').innerHTML = items.map(function (x) { return '<div class="score"><b>' + esc(x[1] || '—') + '</b>' + x[0] + '</div>'; }).join('');
+    var empty = WB.filter(function (w) { return !(state.a[w.id] || '').trim(); });
+    $('missing').innerHTML = empty.length ? '<p class="how" style="margin-top:6px">⚠️ <b>' + empty.length + ' writing box' + (empty.length > 1 ? 'es are' : ' is') + ' still empty</b> — check: ' + esc(ST.filter(function (s) { return empty.some(function (w) { return w.st === s.id; }); }).map(function (s) { return s.short; }).join(', ')) + '.</p>' : '<p class="how" style="margin-top:6px">🎉 Every writing box has an answer. Great work!</p>';
+  }
+  $('copyAll').addEventListener('click', function () { var b = buildAll(); copyText(b.text, b.html, this); });
+  $('resetAll').addEventListener('click', function () {
+    if (!confirm('Clear all your answers on this device?')) return;
+    try { localStorage.removeItem(KEY); } catch (e) {} location.reload();
+  });
+
+  go(0);
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
