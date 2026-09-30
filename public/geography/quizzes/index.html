@@ -175,17 +175,24 @@ margin-bottom:14px;
 position:fixed;
 left:22px;
 bottom:22px;
-width:60px;
-height:60px;
-border-radius:50%;
+height:52px;
+padding:0 20px 0 18px;
+border-radius:999px;
 background:#1565c0;
 color:#fff;
 border:none;
-font-size:26px;
+font-size:15px;
+font-weight:800;
+font-family:inherit;
 cursor:pointer;
 box-shadow:0 10px 24px rgba(21,38,60,0.3);
 z-index:900000;
+display:inline-flex;
+align-items:center;
+gap:9px;
+white-space:nowrap;
 }
+#helperToggle .helper-toggle-icon{ font-size:20px; line-height:1; }
 #helperToggle:hover{ transform:translateY(-2px); }
 
 #helperPanel{
@@ -326,7 +333,7 @@ cursor:pointer;
   </div>
 </div>
 
-<button type="button" id="helperToggle" aria-label="Open Geography Helper">&#128172;</button>
+<button type="button" id="helperToggle" aria-label="Open Geography Helper"><span class="helper-toggle-icon">&#127757;</span> Geography Helper</button>
 <div id="helperPanel" aria-live="polite">
   <div class="helper-head">
     <span>&#127757; Geography Helper</span>
