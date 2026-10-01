@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Micro-Hydro Mission — KS3 Geography Games — SBL</title>
+<meta name="description" content="KS3 Geography game: how does micro-hydro bring electricity to last-mile communities? Label a micro-hydro system, sort diesel vs micro-hydro, then investigate Long Tanid in Malaysian Borneo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c;
+    --deep: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --ink: #062033;
+    --muted: #4a6272;
+    --line: rgba(5, 43, 65, 0.13);
+    --green: #16a34a;
+    --green-soft: #e7f7ed;
+    --red: #dc2626;
+    --red-soft: #fdecec;
+    --amber: #d97706;
+    --diesel: #7c2d12; --diesel-bg: #fdeee4;
+    --hydro: #0369a1;  --hydro-bg: #e0f2fe;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top right, rgba(0,184,176,0.14), transparent 35%), linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink); min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, textarea { font-family: inherit; }
+
+  .top-bar { padding: 20px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.98), rgba(2,50,78,0.96)); }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; }
+  .brand .teal { color: var(--teal); }
+
+  main { max-width: 1200px; margin: 24px auto 60px; padding: 0 18px; }
+  .intro { text-align: center; margin-bottom: 14px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 900; color: var(--navy); }
+  .intro p { color: var(--muted); max-width: 800px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+  .keyterm { max-width: 800px; margin: 12px auto 0; text-align: left; background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--teal); border-radius: 12px; padding: 10px 14px; font-size: 0.9rem; line-height: 1.5; color: var(--muted); }
+  .keyterm b { color: var(--ink); }
+
+  .steps { display: flex; justify-content: center; gap: 8px; margin: 14px 0 18px; flex-wrap: wrap; }
+  .step { padding: 8px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 750; background: rgba(255,255,255,0.75); border: 1px solid var(--line); color: var(--muted); }
+  .step.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.3); }
+
+  .screen { display: none; }
+  .screen.on { display: block; }
+  .panel { background: rgba(255,255,255,0.95); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.08); }
+  .panel + .panel { margin-top: 14px; }
+  .panel h2 { font-size: 1.1rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+  .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 10px 24px rgba(0,184,176,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.4em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+
+  /* cards + drag */
+  .tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 8px; min-height: 60px; padding: 12px; border-radius: 14px; background: rgba(255,255,255,0.8); border: 1px dashed var(--line); }
+  .tray-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.9rem; padding: 8px; }
+  .card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.86rem; line-height: 1.45; color: var(--ink); box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .card b { color: var(--navy); }
+  .card.locked { cursor: default; background: #f5f9fa; border-style: dashed; }
+  .card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .card.dragging { cursor: grabbing; opacity: 0.95; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .card.correct { border-color: var(--green); background: var(--green-soft); }
+  .card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .card .fb { display: none; margin-top: 5px; font-size: 0.78rem; font-weight: 700; color: #7f1d1d; }
+  .card.incorrect .fb { display: block; }
+
+  /* ROUND 1: diagram + slots */
+  .r1-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  .diagram { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: #e3f4fb; position: sticky; top: 10px; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  .badge circle { fill: #fff; stroke: var(--navy); stroke-width: 3; transition: fill .2s ease; }
+  .badge text { font-weight: 900; font-size: 17px; fill: var(--navy); text-anchor: middle; dominant-baseline: central; font-family: Inter, Arial, sans-serif; }
+  .badge.lit circle { fill: #fde047; }
+  .badge.good circle { fill: #bbf7d0; stroke: var(--green); }
+  .slots { display: grid; gap: 8px; }
+  .slot { display: grid; grid-template-columns: 38px 1fr; gap: 8px; align-items: stretch; }
+  .slot .num { display: flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--navy); color: #fff; font-weight: 900; font-size: 1.1rem; }
+  .zone { border-radius: 12px; border: 2px dashed rgba(5,43,65,0.25); background: rgba(255,255,255,0.9); min-height: 58px; padding: 5px; cursor: pointer; display: grid; align-content: center; }
+  .zone:empty::before { content: "Drop a statement here"; color: #94a3b8; font-size: 0.8rem; text-align: center; }
+  .zone.hover { background: #f0fbfa; border-color: var(--teal); }
+  .example-tag { font-size: 0.7rem; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; color: var(--teal-dark); display: block; margin-bottom: 2px; }
+
+  /* ROUND 2 */
+  .bins { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .bin { border-radius: var(--radius); padding: 12px; min-height: 260px; border: 3px dashed; background: rgba(255,255,255,0.9); cursor: pointer; }
+  .bin.hover { background: #f0fbfa; }
+  .bin h3 { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; }
+  .bin.diesel { border-color: var(--diesel); } .bin.diesel h3 { color: var(--diesel); }
+  .bin.hydro { border-color: var(--hydro); } .bin.hydro h3 { color: var(--hydro); }
+  .bin-cards { display: grid; gap: 7px; min-height: 60px; }
+
+  /* ROUND 3 */
+  .case { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .factbox { background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; border-radius: 16px; padding: 16px; line-height: 1.6; font-size: 0.92rem; }
+  .factbox h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .factbox p + p { margin-top: 8px; }
+  .q { border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #fff; margin-bottom: 10px; }
+  .q p { font-weight: 800; font-size: 0.92rem; margin-bottom: 8px; }
+  .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .opt { text-align: left; border: 2px solid var(--line); border-radius: 10px; background: #fff; padding: 8px 10px; font-size: 0.86rem; cursor: pointer; color: var(--ink); }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.right { border-color: var(--green); background: var(--green-soft); font-weight: 800; }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt:disabled { cursor: default; }
+  .q .why { display: none; margin-top: 8px; font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+  .q.answered .why { display: block; }
+
+  .write textarea { width: 100%; min-height: 150px; border: 1px solid rgba(5,43,65,0.25); border-radius: 12px; padding: 12px; font-size: 0.95rem; line-height: 1.5; resize: vertical; }
+  .write textarea:focus { outline: 3px solid rgba(0,184,176,0.3); border-color: var(--teal); }
+  .scaffold { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .scaffold span { font-size: 0.78rem; font-weight: 700; background: #eefaf9; color: var(--teal-dark); border: 1px solid rgba(0,124,130,0.25); border-radius: 999px; padding: 4px 10px; }
+  .score-final { text-align: center; font-weight: 900; color: var(--navy); font-size: 1.1rem; margin-top: 6px; }
+
+  @media (max-width: 860px) {
+    .r1-grid, .case { grid-template-columns: 1fr; }
+    .diagram { position: static; }
+  }
+  @media (max-width: 600px) {
+    .bins, .opts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="/geography/games#ks3" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+      Back to Geography Games
+    </a>
+    <div class="brand">SBL <span class="teal">Micro-Hydro Mission</span></div>
+    <span></span>
+  </div>
+</div>
+
+<main>
+  <div class="intro">
+    <span class="kicker">KS3 &middot; Energy</span>
+    <h1>&#128167; Micro-Hydro Mission</h1>
+    <p>Around the world, millions of people in remote villages still have no electricity. <strong>How can a small river light up a whole village?</strong></p>
+    <div class="keyterm"><b>Last-mile communities</b> are the villages furthest from the national electricity grid. They are often remote, with poor road access, so it is too expensive to build power lines all the way to them. <b>Micro-hydro</b> is a small hydroelectric system that uses a local stream to make electricity for one community.</div>
+  </div>
+  <div class="steps">
+    <span class="step active" data-s="1">1 &middot; Label the system</span>
+    <span class="step" data-s="2">2 &middot; Diesel or micro-hydro?</span>
+    <span class="step" data-s="3">3 &middot; Case study: Long Tanid</span>
+  </div>
+
+  <!-- ROUND 1 -->
+  <section class="screen on" id="r1">
+    <div class="panel">
+      <h2>Round 1: How does a micro-hydro system work?</h2>
+      <p class="how">Follow the water from the river to the village. Drag each statement to the <b>number</b> it describes on the diagram, or tap a statement and then tap a box. Number 7 has been done for you.</p>
+      <div class="r1-grid">
+        <div class="diagram" aria-label="Diagram of a micro-hydro system with seven numbered points">
+          <svg viewBox="0 0 800 480" role="img" aria-labelledby="dgTitle">
+            <title id="dgTitle">Micro-hydro system: water is taken from a river high in the hills, piped down to a powerhouse, then returned to the river. Electricity is sent to a village.</title>
+            <defs>
+              <linearGradient id="land" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fcf74"/><stop offset="1" stop-color="#6fb35a"/></linearGradient>
+            </defs>
+            <rect width="800" height="480" fill="#dff1fa"/>
+            <path d="M0 150 Q110 70 230 120 Q360 20 500 70 Q640 0 800 40 L800 480 L0 480Z" fill="#3f8a45"/>
+            <path d="M0 220 Q140 150 290 190 Q430 120 560 150 Q690 110 800 140 L800 480 L0 480Z" fill="url(#land)"/>
+            <!-- trees -->
+            <g fill="#2f7a3a">
+              <circle cx="470" cy="60" r="14"/><circle cx="430" cy="78" r="12"/><circle cx="640" cy="40" r="13"/><circle cx="600" cy="150" r="13"/>
+              <circle cx="660" cy="180" r="15"/><circle cx="720" cy="160" r="12"/><circle cx="500" cy="200" r="14"/><circle cx="520" cy="330" r="15"/>
+              <circle cx="560" cy="380" r="13"/><circle cx="470" cy="420" r="14"/><circle cx="250" cy="200" r="13"/><circle cx="300" cy="220" r="11"/>
+              <circle cx="230" cy="420" r="14"/><circle cx="190" cy="440" r="12"/><circle cx="720" cy="300" r="15"/><circle cx="760" cy="350" r="13"/>
+              <circle cx="380" cy="150" r="12"/><circle cx="350" cy="110" r="11"/>
+            </g>
+            <!-- river -->
+            <path d="M805 52 C 740 66, 700 100, 668 150 S 600 250, 485 282 S 360 350, 380 415 S 335 468, 300 490" fill="none" stroke="#4aa8db" stroke-width="28" stroke-linecap="round"/>
+            <path d="M805 52 C 740 66, 700 100, 668 150 S 600 250, 485 282 S 360 350, 380 415 S 335 468, 300 490" fill="none" stroke="#9fd8f5" stroke-width="8" stroke-linecap="round" stroke-dasharray="18 22"/>
+            <!-- 7 intake weir -->
+            <rect x="716" y="56" width="50" height="18" rx="2" fill="#bdb5a8" stroke="#5f574c" stroke-width="2" transform="rotate(-14 741 65)"/>
+            <!-- channel to forebay -->
+            <path d="M716 74 C 670 86, 625 92, 590 98" fill="none" stroke="#3d5a6c" stroke-width="6" stroke-linecap="round"/>
+            <!-- 6 forebay -->
+            <rect x="536" y="84" width="58" height="32" rx="3" fill="#cfc7ba" stroke="#5f574c" stroke-width="2"/>
+            <rect x="541" y="89" width="48" height="10" fill="#6cc0ea"/>
+            <!-- 5 penstock -->
+            <path d="M556 114 C 500 175, 420 245, 338 318" fill="none" stroke="#1f2a33" stroke-width="12" stroke-linecap="round"/>
+            <path d="M556 114 C 500 175, 420 245, 338 318" fill="none" stroke="#56636e" stroke-width="3" stroke-dasharray="2 40"/>
+            <!-- 3 powerhouse -->
+            <rect x="268" y="300" width="84" height="56" fill="#f3ead7" stroke="#8a7c63" stroke-width="2"/>
+            <polygon points="260,302 310,266 360,302" fill="#b33a2e" stroke="#7a2219" stroke-width="2"/>
+            <rect x="300" y="326" width="18" height="30" fill="#8a7c63"/>
+            <!-- 4 tailrace -->
+            <path d="M340 352 L 392 392" fill="none" stroke="#4aa8db" stroke-width="12" stroke-linecap="round"/>
+            <!-- wire powerhouse -> control box -->
+            <path d="M268 318 L 236 306" stroke="#1f2a33" stroke-width="2"/>
+            <!-- 2 control box -->
+            <rect x="196" y="286" width="40" height="38" rx="3" fill="#f2994a" stroke="#9a5a1c" stroke-width="2"/>
+            <path d="M219 292 L209 306 L216 306 L211 318 L224 302 L217 302 Z" fill="#fff7d6"/>
+            <!-- 1 transmission lines -->
+            <g stroke="#3b3b3b" stroke-width="3" stroke-linecap="round">
+              <line x1="170" y1="330" x2="170" y2="268"/><line x1="160" y1="274" x2="180" y2="274"/>
+              <line x1="110" y1="350" x2="110" y2="288"/><line x1="100" y1="294" x2="120" y2="294"/>
+            </g>
+            <path d="M200 292 Q185 284 170 272 Q140 288 110 292 Q90 320 72 356" fill="none" stroke="#3b3b3b" stroke-width="1.6"/>
+            <path d="M200 298 Q186 292 178 276" fill="none" stroke="#3b3b3b" stroke-width="1.2"/>
+            <!-- village -->
+            <g>
+              <rect x="40" y="370" width="34" height="24" fill="#fff4dc" stroke="#8a7c63" stroke-width="1.5"/><polygon points="36,371 57,354 78,371" fill="#7a5230"/><rect x="51" y="377" width="9" height="8" fill="#fde047"/>
+              <rect x="88" y="392" width="34" height="24" fill="#fff4dc" stroke="#8a7c63" stroke-width="1.5"/><polygon points="84,393 105,376 126,393" fill="#7a5230"/><rect x="99" y="399" width="9" height="8" fill="#fde047"/>
+              <rect x="26" y="418" width="34" height="24" fill="#fff4dc" stroke="#8a7c63" stroke-width="1.5"/><polygon points="22,419 43,402 64,419" fill="#7a5230"/><rect x="37" y="425" width="9" height="8" fill="#fde047"/>
+              <text x="74" y="465" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#062033" text-anchor="middle">Village</text>
+            </g>
+            <!-- badges -->
+            <g class="badge" data-n="1"><circle cx="86" cy="262" r="16"/><text x="86" y="262">1</text></g>
+            <g class="badge" data-n="2"><circle cx="216" cy="262" r="16"/><text x="216" y="262">2</text></g>
+            <g class="badge" data-n="3"><circle cx="310" cy="244" r="16"/><text x="310" y="244">3</text></g>
+            <g class="badge" data-n="4"><circle cx="412" cy="372" r="16"/><text x="412" y="372">4</text></g>
+            <g class="badge" data-n="5"><circle cx="472" cy="196" r="16"/><text x="472" y="196">5</text></g>
+            <g class="badge" data-n="6"><circle cx="565" cy="60" r="16"/><text x="565" y="60">6</text></g>
+            <g class="badge good" data-n="7"><circle cx="760" cy="28" r="16"/><text x="760" y="28">7</text></g>
+          </svg>
+        </div>
+        <div class="slots" id="slots"></div>
+      </div>
+      <p class="how" style="margin-top:14px;margin-bottom:6px"><b>Statements</b></p>
+      <div class="tray" id="tray1"></div>
+      <div class="actions">
+        <button class="btn primary" id="check1" type="button">Check answers</button>
+        <button class="btn primary" id="to2" type="button" style="display:none">Round 2: diesel or micro-hydro? &rarr;</button>
+      </div>
+      <div class="msg" id="msg1" role="status"></div>
+    </div>
+  </section>
+
+  <!-- ROUND 2 -->
+  <section class="screen" id="r2">
+    <div class="panel">
+      <h2>Round 2: Diesel generator or micro-hydro?</h2>
+      <p class="how">Without micro-hydro, many remote villages rely on <b>diesel generators</b> for electricity. Sort each statement into the right box.</p>
+      <div class="tray" id="tray2"></div>
+      <div class="bins">
+        <div class="bin diesel zone2" data-cat="diesel" role="button" tabindex="0" aria-label="Diesel generator"><h3>&#9981; Diesel generator</h3><div class="bin-cards"></div></div>
+        <div class="bin hydro zone2" data-cat="hydro" role="button" tabindex="0" aria-label="Micro-hydro"><h3>&#128167; Micro-hydro</h3><div class="bin-cards"></div></div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" id="back1" type="button">&larr; Round 1</button>
+        <button class="btn primary" id="check2" type="button">Check answers</button>
+        <button class="btn primary" id="to3" type="button" style="display:none">Round 3: Long Tanid &rarr;</button>
+      </div>
+      <div class="msg" id="msg2" role="status"></div>
+    </div>
+  </section>
+
+  <!-- ROUND 3 -->
+  <section class="screen" id="r3">
+    <div class="panel">
+      <h2>Round 3: Case study &mdash; Long Tanid, Malaysian Borneo</h2>
+      <div class="case">
+        <div class="factbox">
+          <h3>&#127796; Long Tanid</h3>
+          <p>Long Tanid is a small village in the rainforest of <b>Malaysian Borneo</b>. Like many last-mile communities, it used diesel generators that were costly, noisy and only ran some of the time.</p>
+          <p>In <b>2022</b>, the charity Green Empowerment and its local partner TONIBUNG worked <b>with community members</b> to install a micro-hydro system. It now gives <b>11.6 kW</b> of power, <b>24 hours a day</b>, to <b>54 households</b>.</p>
+          <p>The project was funded by Seacology. In return, the community promised to <b>protect 1,379 acres of rainforest</b> in the river&rsquo;s watershed.</p>
+          <p>A <b>community-elected energy committee</b> runs the system. Households pay a small fee (a <b>tariff</b>), which pays for repairs and maintenance.</p>
+        </div>
+        <div id="quiz"></div>
+      </div>
+    </div>
+    <div class="panel write">
+      <h2>&#9997;&#65039; Explain it</h2>
+      <p class="how">Why is micro-hydro a good way to bring electricity to last-mile communities? Use <b>evidence from Long Tanid</b> in your answer.</p>
+      <div class="scaffold"><span>One reason is&hellip;</span><span>This is because&hellip;</span><span>For example, in Long Tanid&hellip;</span><span>Compared to diesel&hellip;</span><span>However&hellip;</span></div>
+      <textarea id="answer" placeholder="Write your answer here..."></textarea>
+      <div class="score-final" id="finalScore"></div>
+      <div class="actions">
+        <button class="btn ghost" id="back2" type="button">&larr; Round 2</button>
+        <button class="btn primary" id="copyAll" type="button">&#128203; Copy my work for OneNote</button>
+      </div>
+      <div class="msg" id="msg3" role="status"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var score = { r1: null, r2: null, r3: 0 };
+
+  /* ==================== DATA ==================== */
+  var R1 = [
+    { n: 1, t: 'Power is carried to homes in the village along <b>transmission lines</b>, giving electricity 24 hours a day.', hint: 'Hint: look for the poles and wires leading to the village.' },
+    { n: 2, t: 'The electricity passes through a <b>control box (transformer)</b>, which controls the power before it is sent to the community.', hint: 'Hint: look for the small box with a lightning symbol.' },
+    { n: 3, t: 'Inside the <b>powerhouse</b>, the fast-moving water spins a <b>turbine</b>, which drives a <b>generator</b> to make electricity.', hint: 'Hint: this happens inside the building at the bottom of the pipe.' },
+    { n: 4, t: 'The used water leaves through the <b>tailrace</b> and is <b>returned to the river</b>, so none of it is used up.', hint: 'Hint: where does the water go after it leaves the building?' },
+    { n: 5, t: 'Water rushes steeply downhill through a large pipe called the <b>penstock</b>, gaining speed and pressure.', hint: 'Hint: find the big dark pipe running down the hillside.' },
+    { n: 6, t: 'Water flows along a channel into a concrete <b>forebay</b>. Here it collects and any sediment settles to the bottom.', hint: 'Hint: this is the concrete tank at the top of the big pipe.' }
+  ];
+  var EX7 = 'Water is diverted from a stream or river at an <b>intake weir</b>.';
+
+  var R2 = [
+    { c: 'diesel', t: 'Fuel is expensive and has to be transported to the village.' },
+    { c: 'diesel', t: 'Noisy, and gives off harmful exhaust fumes.' },
+    { c: 'diesel', t: 'Usually only run for a few hours, so electricity is not available all the time.' },
+    { c: 'diesel', t: 'Burns a fossil fuel, adding carbon dioxide to the atmosphere.' },
+    { c: 'hydro', t: 'Gives clean, reliable electricity 24 hours a day.' },
+    { c: 'hydro', t: 'Built from cheap materials such as steel, concrete and PVC pipe.' },
+    { c: 'hydro', t: 'Simple design, so local people can be trained to repair it.' },
+    { c: 'hydro', t: 'No fuel to buy: the river keeps flowing for free.' },
+    { c: 'hydro', t: 'The water is returned to the river after it has been used.' }
+  ];
+
+  var QUIZ = [
+    { q: 'Where is Long Tanid?', o: ['Malaysian Borneo', 'Northern Thailand', 'Nepal', 'Kenya'], a: 0, why: 'Long Tanid is a small village in the rainforest of Malaysian Borneo.' },
+    { q: 'How many households get power from the system?', o: ['12', '54', '250', '1,379'], a: 1, why: '54 households. (1,379 is the number of acres of rainforest protected.)' },
+    { q: 'How much power does the system provide?', o: ['11.6 kW, 24 hours a day', '11.6 kW, only at night', '500 kW, 24 hours a day', '2 kW, a few hours a day'], a: 0, why: '11.6 kW of power, 24/7 &mdash; unlike diesel, which only ran some of the time.' },
+    { q: 'What did the community promise in return for the funding?', o: ['To stop using electricity at night', 'To protect 1,379 acres of rainforest', 'To build a road to the village', 'To sell power to the national grid'], a: 1, why: 'Seacology funds community-led conservation, so the village agreed to protect 1,379 acres of rainforest in the watershed.' },
+    { q: 'How is the system looked after?', o: ['A foreign company repairs it every 5 years', 'The government pays for all repairs', 'A community energy committee charges a small tariff to pay for maintenance', 'Nobody &mdash; it never breaks'], a: 2, why: 'A community-elected energy committee set a tariff (fee) that pays for maintenance, so the village runs it themselves.' }
+  ];
+
+  /* ==================== STEPS ==================== */
+  function go(n) {
+    ['r1', 'r2', 'r3'].forEach(function (id, i) { $(id).classList.toggle('on', i + 1 === n); });
+    document.querySelectorAll('.step').forEach(function (s) {
+      var k = +s.dataset.s; s.classList.toggle('active', k === n); s.classList.toggle('done', k < n);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ==================== GENERIC DRAG / TAP ENGINE ==================== */
+  function makeSorter(opts) {
+    var scope = opts.scope, tray = opts.tray, zoneSel = opts.zoneSel, holderSel = opts.holderSel, single = opts.single;
+    var selected = null;
+    function trayState() {
+      var empty = tray.querySelector('.tray-empty'); var has = tray.querySelector('.card');
+      if (!has && !empty) { var d = document.createElement('div'); d.className = 'tray-empty'; d.textContent = 'All statements placed ✔ Now check your answers.'; tray.appendChild(d); }
+      if (has && empty) empty.remove();
+    }
+    function holder(z) { return holderSel ? z.querySelector(holderSel) : z; }
+    function place(card, zone) {
+      card.classList.remove('correct', 'incorrect', 'selected');
+      var h = holder(zone);
+      if (single) { var old = h.querySelector('.card'); if (old && old !== card) { old.classList.remove('correct', 'incorrect'); tray.appendChild(old); } }
+      h.appendChild(card); selected = null; trayState(); if (opts.onChange) opts.onChange();
+    }
+    function select(card) { if (selected) selected.classList.remove('selected'); if (selected === card) { selected = null; return; } selected = card; card.classList.add('selected'); }
+    scope.querySelectorAll(zoneSel).forEach(function (z) {
+      z.addEventListener('click', function (e) { if (e.target.closest('.card')) return; if (selected) place(selected, z); });
+      z.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && selected) { e.preventDefault(); place(selected, z); } });
+    });
+    tray.addEventListener('click', function (e) { if (e.target.closest('.card')) return; if (selected) { selected.classList.remove('selected', 'correct', 'incorrect'); tray.appendChild(selected); selected = null; trayState(); } });
+    scope.addEventListener('keydown', function (e) { var c = e.target.closest && e.target.closest('.card:not(.locked)'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(c); } });
+
+    var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+    scope.addEventListener('pointerdown', function (e) {
+      var c = e.target.closest ? e.target.closest('.card:not(.locked)') : null; if (!c || !scope.contains(c)) return;
+      drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+      var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+    });
+    function zoneAt(x, y, el) {
+      el.style.pointerEvents = 'none'; var t = document.elementFromPoint(x, y); el.style.pointerEvents = '';
+      return { t: t, z: t && t.closest ? t.closest(zoneSel) : null };
+    }
+    document.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+      if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+      drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+      scope.querySelectorAll(zoneSel).forEach(function (z) { z.classList.remove('hover'); });
+      var hit = zoneAt(e.clientX, e.clientY, drag); if (hit.z && scope.contains(hit.z)) hit.z.classList.add('hover');
+      if (e.clientY < 50) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+    });
+    function endDrag(e) {
+      if (!drag) return; var c = drag; drag = null;
+      scope.querySelectorAll(zoneSel).forEach(function (z) { z.classList.remove('hover'); });
+      if (!moved) { select(c); return; }
+      c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+      var hit = zoneAt(e.clientX, e.clientY, c);
+      if (hit.z && scope.contains(hit.z)) place(c, hit.z);
+      else if (hit.t && hit.t.closest && hit.t.closest('.tray') === tray) { c.classList.remove('correct', 'incorrect'); tray.appendChild(c); trayState(); if (opts.onChange) opts.onChange(); }
+      else origin.appendChild(c);
+    }
+    document.addEventListener('pointerup', endDrag);
+    document.addEventListener('pointercancel', endDrag);
+    return { trayState: trayState };
+  }
+
+  function makeCard(html, data) {
+    var c = document.createElement('div'); c.className = 'card'; c.tabIndex = 0; c.innerHTML = html;
+    Object.keys(data).forEach(function (k) { c.dataset[k] = data[k]; });
+    return c;
+  }
+
+  /* ==================== ROUND 1 ==================== */
+  var slots = $('slots'), tray1 = $('tray1');
+  for (var n = 1; n <= 7; n++) {
+    var s = document.createElement('div'); s.className = 'slot';
+    s.innerHTML = '<div class="num">' + n + '</div><div class="zone" data-n="' + n + '"' + (n === 7 ? '' : ' role="button" tabindex="0" aria-label="Point ' + n + '"') + '></div>';
+    slots.appendChild(s);
+  }
+  var z7 = slots.querySelector('.zone[data-n="7"]');
+  z7.classList.remove('zone'); z7.style.cssText = 'border-radius:12px;padding:5px;';
+  var ex = makeCard('<span class="example-tag">Example</span>' + EX7, {}); ex.classList.add('locked', 'correct'); ex.removeAttribute('tabindex'); z7.appendChild(ex);
+
+  shuffle(R1).forEach(function (st) { tray1.appendChild(makeCard(st.t + '<div class="fb">' + st.hint + '</div>', { n: st.n })); });
+
+  function litBadge(n, on) { var b = document.querySelector('.badge[data-n="' + n + '"]'); if (b && !b.classList.contains('good')) b.classList.toggle('lit', on); }
+  slots.addEventListener('pointerover', function (e) { var sl = e.target.closest('.slot'); if (sl) litBadge(sl.querySelector('.num').textContent, true); });
+  slots.addEventListener('pointerout', function (e) { var sl = e.target.closest('.slot'); if (sl) litBadge(sl.querySelector('.num').textContent, false); });
+
+  var sorter1 = makeSorter({ scope: $('r1'), tray: tray1, zoneSel: '.zone', single: true, onChange: function () { $('msg1').textContent = ''; } });
+  sorter1.trayState();
+
+  $('check1').addEventListener('click', function () {
+    var right = 0, placed = 0;
+    slots.querySelectorAll('.zone').forEach(function (z) {
+      var c = z.querySelector('.card'); var badge = document.querySelector('.badge[data-n="' + z.dataset.n + '"]');
+      badge.classList.remove('good', 'lit');
+      if (!c) return; placed++;
+      var ok = c.dataset.n === z.dataset.n;
+      c.classList.toggle('correct', ok); c.classList.toggle('incorrect', !ok);
+      if (ok) { right++; badge.classList.add('good'); }
+    });
+    if (score.r1 === null) score.r1 = right;
+    var m = $('msg1');
+    if (placed < 6) { m.className = 'msg info'; m.textContent = 'Place all 6 statements first (' + placed + '/6 placed).'; return; }
+    if (right === 6) { m.className = 'msg ok'; m.textContent = '✔ 6/6 — you followed the water all the way from the river to the village!'; $('to2').style.display = ''; $('check1').style.display = 'none'; }
+    else { m.className = 'msg no'; m.textContent = right + '/6 correct. Read the hints on the red cards, move them, then check again.'; }
+  });
+  $('to2').addEventListener('click', function () { go(2); });
+
+  /* ==================== ROUND 2 ==================== */
+  var tray2 = $('tray2');
+  shuffle(R2).forEach(function (st) { tray2.appendChild(makeCard(st.t, { c: st.c })); });
+  var sorter2 = makeSorter({ scope: $('r2'), tray: tray2, zoneSel: '.zone2', holderSel: '.bin-cards', single: false, onChange: function () { $('msg2').textContent = ''; } });
+  sorter2.trayState();
+  $('check2').addEventListener('click', function () {
+    var right = 0, placed = 0;
+    $('r2').querySelectorAll('.zone2').forEach(function (z) {
+      z.querySelectorAll('.card').forEach(function (c) { placed++; var ok = c.dataset.c === z.dataset.cat; if (ok) right++; c.classList.toggle('correct', ok); c.classList.toggle('incorrect', !ok); });
+    });
+    if (score.r2 === null && placed === R2.length) score.r2 = right;
+    var m = $('msg2');
+    if (placed < R2.length) { m.className = 'msg info'; m.textContent = 'Sort all ' + R2.length + ' statements first (' + placed + '/' + R2.length + ' placed).'; return; }
+    if (right === R2.length) { m.className = 'msg ok'; m.textContent = '✔ ' + right + '/' + R2.length + ' — micro-hydro solves the problems that diesel causes.'; $('to3').style.display = ''; $('check2').style.display = 'none'; }
+    else { m.className = 'msg no'; m.textContent = right + '/' + R2.length + ' correct. Move the red cards to the other box and check again.'; }
+  });
+  $('back1').addEventListener('click', function () { go(1); });
+  $('to3').addEventListener('click', function () { go(3); });
+
+  /* ==================== ROUND 3 ==================== */
+  var quiz = $('quiz'), answered = 0;
+  QUIZ.forEach(function (item, qi) {
+    var d = document.createElement('div'); d.className = 'q';
+    d.innerHTML = '<p>' + (qi + 1) + '. ' + item.q + '</p><div class="opts">' +
+      item.o.map(function (o, oi) { return '<button type="button" class="opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</button>'; }).join('') +
+      '</div><div class="why">' + item.why + '</div>';
+    quiz.appendChild(d);
+  });
+  quiz.addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b || b.disabled) return;
+    var qi = +b.dataset.q, oi = +b.dataset.o, item = QUIZ[qi], box = b.closest('.q');
+    box.querySelectorAll('.opt').forEach(function (x) { x.disabled = true; if (+x.dataset.o === item.a) x.classList.add('right'); });
+    if (oi === item.a) score.r3++; else b.classList.add('wrong');
+    box.classList.add('answered'); answered++;
+    if (answered === QUIZ.length) $('finalScore').textContent = 'Case study quiz: ' + score.r3 + '/' + QUIZ.length;
+  });
+  $('back2').addEventListener('click', function () { go(2); });
+
+  function plain(html) { var d = document.createElement('div'); d.innerHTML = html; return d.textContent; }
+  $('copyAll').addEventListener('click', function () {
+    var btn = this, lines = [];
+    lines.push('MICRO-HYDRO MISSION');
+    lines.push('');
+    lines.push('How a micro-hydro system works (following the water):');
+    lines.push('7. ' + plain(EX7));
+    [6, 5, 3, 4, 2, 1].forEach(function (k) { var st = R1.filter(function (x) { return x.n === k; })[0]; lines.push(k + '. ' + plain(st.t)); });
+    lines.push('');
+    lines.push('Diesel generators: ' + R2.filter(function (x) { return x.c === 'diesel'; }).map(function (x) { return x.t; }).join(' '));
+    lines.push('Micro-hydro: ' + R2.filter(function (x) { return x.c === 'hydro'; }).map(function (x) { return x.t; }).join(' '));
+    lines.push('');
+    lines.push('Case study: Long Tanid, Malaysian Borneo (2022): 11.6 kW, 24/7 power for 54 households. Community protects 1,379 acres of rainforest. Run by an elected energy committee; a tariff pays for maintenance.');
+    lines.push('');
+    lines.push('My answer: Why is micro-hydro a good way to bring electricity to last-mile communities?');
+    lines.push(($('answer').value || '').trim() || '(not answered yet)');
+    lines.push('');
+    lines.push('Scores: Round 1 ' + (score.r1 === null ? '-' : score.r1) + '/6 (first try), Round 2 ' + (score.r2 === null ? '-' : score.r2) + '/' + R2.length + ' (first try), Quiz ' + score.r3 + '/' + QUIZ.length);
+    var text = lines.join('\n');
+    function ok() { var m = $('msg3'); m.className = 'msg ok'; m.textContent = '✔ Copied — now open OneNote and press Ctrl + V'; var o = btn.innerHTML; btn.innerHTML = '✔ Copied'; setTimeout(function () { btn.innerHTML = o; }, 2200); }
+    function fallback() { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (err) { $('msg3').className = 'msg no'; $('msg3').textContent = 'Could not copy — select your answer and press Ctrl + C.'; } ta.remove(); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+  });
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

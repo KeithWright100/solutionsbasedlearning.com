@@ -53,6 +53,7 @@ const PUBLIC_PATH_TREES = [
   '/geography/games/tropical-storm-links',   // KS3 — Tropical Storm: Link It Up     
   '/geography/games/storm-ready-city',          // KS3 — Storm-Ready City
      '/geography/games/volcano-fantastic-place',   // KS3 — Ruapehu Mission
+  '/geography/games/micro-hydro-mission',       // KS3 — Micro-Hydro Mission
   '/geography/quizzes'                       // KS3 — Geography Quizzes + Geography Helper bot
 ];
 // PUBLIC_PATH_EXACT — only this exact path is public, nothing nested
