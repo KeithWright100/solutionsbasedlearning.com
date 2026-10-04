@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Consequence Carousel — The Rohingya Crisis — IB Geography Games — SBL</title>
+<meta name="description" content="IB Geography Unit 1 game: sort the consequences of the Rohingya forced migration for refugees, Bangladesh and host communities, Myanmar (Burma) and humanitarian organisations; label them; link causes and effects; then build an exam paragraph.">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --gold: #f59e0b;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --s1: #b45309; --s2: #0f766e; --s3: #7c2d12; --s4: #1d4ed8;
+    --soc: #db2777; --eco: #d97706; --pol: #7c3aed; --env: #16a34a;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 0% 0%, rgba(180,83,9,0.10), transparent 40%), radial-gradient(circle at 100% 10%, rgba(0,184,176,0.12), transparent 35%), linear-gradient(180deg, #f6f9fa, #eaf1f3); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px 26px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.95), rgba(120,53,15,0.88)); position: relative; overflow: hidden; }
+  .hero .kicker { display: inline-block; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; line-height: 1.15; }
+  .hero p { color: rgba(255,255,255,0.88); max-width: 760px; margin-top: 8px; line-height: 1.55; }
+  .hero .facts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .hero .facts span { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 11px; font-size: 0.78rem; font-weight: 700; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .step { padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .step.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.35); }
+
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; scroll-margin-top: 80px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .panel h3 { font-size: 1rem; font-weight: 900; color: var(--navy); margin: 4px 0 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+
+  .zs1 { border-color: var(--s1); } .zs1 h4 { color: var(--s1); }
+  .zs2 { border-color: var(--s2); } .zs2 h4 { color: var(--s2); }
+  .zs3 { border-color: var(--s3); } .zs3 h4 { color: var(--s3); }
+  .zs4 { border-color: var(--s4); } .zs4 h4 { color: var(--s4); }
+
+  /* carousel nav (round 1) */
+  .car-nav { display: none; }
+
+  /* tagging */
+  .tags { display: grid; gap: 10px; }
+  .tagcard { border: 2px solid var(--line); border-radius: 14px; padding: 12px; background: #fff; }
+  .tagcard .who { font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .tagcard .what { font-weight: 750; margin: 3px 0 8px; line-height: 1.4; font-size: 0.93rem; }
+  .tagrow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
+  .tagrow .lab { font-size: 0.72rem; font-weight: 800; color: var(--muted); min-width: 74px; }
+  .tg { border: 2px solid var(--line); background: #f8fafc; border-radius: 999px; padding: 5px 11px; font-size: 0.8rem; font-weight: 800; cursor: pointer; color: var(--ink); }
+  .tg.on { color: #fff; border-color: transparent; }
+  .tg.on[data-v="soc"] { background: var(--soc); } .tg.on[data-v="eco"] { background: var(--eco); } .tg.on[data-v="pol"] { background: var(--pol); } .tg.on[data-v="env"] { background: var(--env); }
+  .tg.on[data-v="short"], .tg.on[data-v="long"], .tg.on[data-v="dir"], .tg.on[data-v="ind"] { background: var(--navy); }
+  .tg.right { box-shadow: 0 0 0 3px rgba(22,163,74,0.55); }
+  .tg.wrong { box-shadow: 0 0 0 3px rgba(220,38,38,0.65); }
+  .tagcard .tfb { display: none; margin-top: 8px; font-size: 0.82rem; line-height: 1.45; padding: 8px 10px; border-radius: 10px; }
+  .tagcard .tfb.show { display: block; }
+  .tagcard .tfb.good { background: var(--green-soft); color: #14532d; } .tagcard .tfb.bad { background: var(--red-soft); color: #7f1d1d; }
+  .key { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.78rem; color: var(--muted); margin-bottom: 10px; }
+  .key b { color: var(--ink); }
+
+  /* arrows */
+  .arrows-wrap { position: relative; }
+  .acols { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; position: relative; z-index: 1; }
+  .acol h4 { font-size: 0.78rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .acard { display: block; width: 100%; text-align: left; margin-bottom: 8px; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 700; line-height: 1.4; color: var(--ink); }
+  .acard .who { display: block; font-size: 0.66rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
+  .acard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .acard.linked { border-color: var(--navy); }
+  .acard.right { border-color: var(--green); background: var(--green-soft); }
+  .acard.wrong { border-color: var(--red); background: var(--red-soft); }
+  svg.alines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; overflow: visible; }
+
+  /* paragraph builder */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.12rem; margin-top: 4px; }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 60px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .wb { margin-top: 14px; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb textarea { width: 100%; min-height: 140px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; }
+  .wb .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 8px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 7px 12px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+
+  .finish { text-align: center; padding: 22px; border-radius: 20px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .finish h2 { color: #fff; font-size: 1.5rem; }
+  .finish .stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+  .finish .stats div { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .finish .stats b { display: block; font-size: 1.3rem; color: #fcd34d; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) { .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .acols { gap: 46px; } }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; } .hero { padding: 20px 18px; }
+    .sg-zones.z4 { grid-template-columns: 1fr; }
+    .acols { gap: 34px; } .acard { font-size: 0.78rem; padding: 8px 9px; }
+    .hud .lv { display: none; } .hud-inner { grid-template-columns: auto 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Consequence Carousel</span></div>
+  <a href="/geography/paper-1/core-1/t2-changing/l4-the-causes-and" class="back-link">Rohingya lesson &rarr;</a>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <div class="xp" id="hudXp">&#11088; 0 XP</div><div class="bar" aria-hidden="true"><div id="hudBar"></div></div><div class="lv" id="hudLv">Round 1 of 4</div>
+</div></div>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <span class="kicker">IB Geography &middot; Unit 1 &middot; Forced migration</span>
+    <h1>&#127904; Consequence Carousel: the Rohingya crisis</h1>
+    <p>In 2017, violence in Rakhine State forced hundreds of thousands of Rohingya to flee Myanmar (Burma) into Bangladesh. Who is affected, how, and for how long? Work through four rounds to map the consequences for every stakeholder.</p>
+    <div class="facts"><span>&#128197; Aug 2017 onwards</span><span>&#128101; ~740,000 fled in 2017</span><span>&#9978; ~1 million in Cox&rsquo;s Bazar camps</span><span>&#128220; Stateless since the 1982 Citizenship Law</span></div>
+  </section>
+  <div class="steps" id="steps">
+    <span class="step on" data-s="1">1 &middot; Carousel</span><span class="step" data-s="2">2 &middot; Label it</span><span class="step" data-s="3">3 &middot; Draw the arrows</span><span class="step" data-s="4">4 &middot; Exam paragraph</span>
+  </div>
+  <div id="app"></div>
+</main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- score / HUD ---------- */
+  var run = { c: 0, t: 0, xp: 0 }, round = 1;
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+  function score(c, t, el) { run.c += c; run.t += t; run.xp += c * 10; xpPop(c * 10, el); paintHud(); }
+  function paintHud() { $('hudXp').textContent = '⭐ ' + run.xp + ' XP'; $('hudBar').style.width = ((round - 1) / 4 * 100) + '%'; $('hudLv').textContent = round <= 4 ? 'Round ' + round + ' of 4' + (run.t ? ' · ' + Math.round(run.c / run.t * 100) + '%' : '') : 'Complete!'; }
+  function setRound(n) {
+    round = n; paintHud();
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' on' : ''); });
+  }
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 240 : 110;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) { ctx.clearRect(0, 0, cv.width, cv.height); P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); }); if (t - t0 < (big ? 4000 : 2400)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height); })(t0);
+  }
+  function panel(tag, title, how) {
+    var p = document.createElement('div'); p.className = 'panel';
+    p.innerHTML = '<span class="stage-tag">' + tag + '</span><h2>' + title + '</h2>' + (how ? '<p class="how">' + how + '</p>' : '') + '<div class="sb"></div>';
+    $('app').appendChild(p); setTimeout(function () { p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    return p.querySelector('.sb');
+  }
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+
+
+  /* ---------- CONTENT ---------- */
+  var WHO = { r: ['Rohingya refugees', 'zs1', '#b45309'], b: ['Bangladesh & hosts', 'zs2', '#0f766e'], m: ['Myanmar (Burma)', 'zs3', '#7c2d12'], h: ['Humanitarian organisations', 'zs4', '#1d4ed8'] };
+  // type: soc/eco/pol/env (array = accepted); term: short/long (array); dir: dir/ind (array)
+  var C = [
+    { id: 'r1', w: 'r', t: 'Homes, land and livelihoods lost when villages in Rakhine State were burned in 2017', type: ['eco', 'soc'], term: ['short'], dir: ['dir'], why: 'The loss happened immediately (short term) as a direct result of the violence; losing land and income is mainly economic, losing homes is also social.' },
+    { id: 'r2', w: 'r', t: 'Around 1 million people crowded into bamboo-and-tarpaulin shelters in the Cox’s Bazar camps', type: ['soc'], term: ['long', 'short'], dir: ['dir'], why: 'Overcrowded living conditions are a social consequence. It began as short term but has lasted since 2017, so both short and long term are accepted.' },
+    { id: 'r3', w: 'r', t: 'Children miss years of formal schooling, limiting their future job prospects', type: ['soc'], term: ['long'], dir: ['ind'], why: 'Education is social; the damage to future prospects is long term, and it is an indirect result of displacement into camps.' },
+    { id: 'r4', w: 'r', t: 'Some refugees risk dangerous boat journeys to Malaysia and Indonesia, often with people traffickers', type: ['soc'], term: ['long'], dir: ['ind'], why: 'This is a social (human safety) consequence that grows over years as hope of return fades — an indirect result.' },
+    { id: 'b1', w: 'b', t: 'Over 6,000 acres of forest in Cox’s Bazar cleared for shelters and firewood', type: ['env'], term: ['short'], dir: ['dir'], why: 'Forest loss is environmental and happened very quickly in 2017–18 as a direct result of the arrivals.' },
+    { id: 'b2', w: 'b', t: 'Local day-labour wages fell and food prices rose as refugees competed for informal work and goods', type: ['eco'], term: ['short', 'long'], dir: ['ind'], why: 'Wages and prices are economic, and they change indirectly through competition in the local labour market.' },
+    { id: 'b3', w: 'b', t: 'Hillsides stripped of trees face more landslides and flooding during each monsoon', type: ['env'], term: ['long'], dir: ['ind'], why: 'This is an environmental, long-term and indirect effect — it is caused by the deforestation, not by the arrivals directly.' },
+    { id: 'b4', w: 'b', t: 'The government moved tens of thousands of refugees to Bhasan Char, a remote island in the Bay of Bengal', type: ['pol'], term: ['long'], dir: ['ind'], why: 'This is a political decision by the Bangladesh government, made years later in response to pressure on Cox’s Bazar.' },
+    { id: 'm1', w: 'm', t: 'The Gambia brought a genocide case against Myanmar at the International Court of Justice (2019)', type: ['pol'], term: ['long'], dir: ['ind'], why: 'International legal action is political, long term and an indirect consequence of the violence.' },
+    { id: 'm2', w: 'm', t: 'The USA, EU and others imposed targeted sanctions on Myanmar’s military leaders', type: ['pol', 'eco'], term: ['long'], dir: ['ind'], why: 'Sanctions are mainly political pressure with economic effects; they are long term and indirect.' },
+    { id: 'm3', w: 'm', t: 'Northern Rakhine lost much of its population and workforce; abandoned villages were bulldozed and the land reused', type: ['eco', 'soc'], term: ['long'], dir: ['dir'], why: 'Losing people and workers is economic and social; it is a direct result of the expulsion and long lasting.' },
+    { id: 'm4', w: 'm', t: 'Conflict in Rakhine continues, with fighting between the military and the Arakan Army after the 2021 coup', type: ['pol'], term: ['long'], dir: ['ind'], why: 'Continuing conflict is political, long term and indirect — instability makes safe return impossible.' },
+    { id: 'h1', w: 'h', t: 'A huge emergency operation in 2017: shelters, clean water, sanitation and mass vaccination', type: ['soc'], term: ['short'], dir: ['dir'], why: 'Emergency relief meets social (health and welfare) needs, in the short term, as a direct response.' },
+    { id: 'h2', w: 'h', t: 'Persistent funding shortfalls forced the World Food Programme to cut food vouchers (from $12 to $8 a person a month in 2023)', type: ['eco'], term: ['long'], dir: ['ind'], why: 'Funding gaps are economic, build up over the long term as donor attention fades, and are an indirect consequence.' },
+    { id: 'h3', w: 'h', t: 'Agencies distribute LPG cooking gas and run reforestation projects to reduce firewood collection', type: ['env'], term: ['long'], dir: ['ind'], why: 'This responds to environmental damage over the long term — an indirect consequence of the camps.' },
+    { id: 'h4', w: 'h', t: 'Focus shifts from emergency relief to long-term services such as schooling using the Myanmar curriculum', type: ['soc'], term: ['long'], dir: ['ind'], why: 'Education services are social and long term, an indirect result of a protracted crisis.' }];
+  function byId(id) { return C.filter(function (c) { return c.id === id; })[0]; }
+
+  /* ---------- ROUND 1: CAROUSEL SORT ---------- */
+  function round1() {
+    var el = panel('Round 1 of 4', '🎠 The carousel: who is affected?', 'Drag each consequence onto the right stakeholder board — or tap a card, then tap a board. Each board should end up with four consequences.');
+    sortGame(el, { zones: ['r', 'b', 'm', 'h'].map(function (k) { return { id: k, label: WHO[k][0], cls: WHO[k][1] }; }),
+      cards: C.map(function (c) { return { t: c.t, a: [c.w], why: 'Think about who experiences this most directly.' }; }) }, function () { setRound(2); round2(); });
+  }
+
+  /* ---------- ROUND 2: LABEL IT ---------- */
+  var TAGSET = [['type', 'Type', [['soc', 'Social'], ['eco', 'Economic'], ['pol', 'Political'], ['env', 'Environmental']]], ['term', 'Time', [['short', 'Short term'], ['long', 'Long term']]], ['dir', 'Link', [['dir', 'Direct'], ['ind', 'Indirect']]]];
+  function round2() {
+    var picks = shuffle(['r', 'b', 'm', 'h']).reduce(function (acc, k) { return acc.concat(shuffle(C.filter(function (c) { return c.w === k; })).slice(0, 2)); }, []);
+    var el = panel('Round 2 of 4', '🏷️ Label it', 'For each consequence choose its <b>type</b> (social, economic, political or environmental), whether it is <b>short or long term</b>, and whether it is a <b>direct</b> result of the displacement or <b>indirect</b> (caused by another consequence).');
+    var sel = {}, checked = false;
+    el.innerHTML = '<div class="key"><span><b>Short term</b> = immediate / first months</span><span><b>Long term</b> = years or ongoing</span><span><b>Direct</b> = caused by the displacement itself</span><span><b>Indirect</b> = a knock-on effect of another consequence</span></div><div class="tags">' + picks.map(function (c) {
+      return '<div class="tagcard" data-id="' + c.id + '" style="border-left:6px solid ' + WHO[c.w][2] + '"><div class="who" style="color:' + WHO[c.w][2] + '">' + WHO[c.w][0] + '</div><div class="what">' + esc(c.t) + '</div>' +
+        TAGSET.map(function (g) { return '<div class="tagrow" role="group" aria-label="' + g[1] + '"><span class="lab">' + g[1] + '</span>' + g[2].map(function (o) { return '<button type="button" class="tg" data-g="' + g[0] + '" data-v="' + o[0] + '" aria-pressed="false">' + o[1] + '</button>'; }).join('') + '</div>'; }).join('') +
+        '<div class="tfb"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" id="tagCheck">Check labels</button></div><div class="msg" id="tagMsg" aria-live="polite"></div>';
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.tg'); if (!b || b.disabled) return;
+      var card = b.closest('.tagcard'), id = card.dataset.id, g = b.dataset.g;
+      sel[id] = sel[id] || {}; sel[id][g] = b.dataset.v;
+      card.querySelectorAll('.tg[data-g="' + g + '"]').forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b); x.classList.remove('right', 'wrong'); });
+    });
+    $('tagCheck').addEventListener('click', function () {
+      var m = $('tagMsg'), missing = picks.filter(function (c) { return !sel[c.id] || TAGSET.some(function (g) { return !sel[c.id][g[0]]; }); }).length;
+      if (missing) { m.className = 'msg info'; m.textContent = missing + ' card' + (missing > 1 ? 's' : '') + ' still need all three labels.'; return; }
+      var right = 0, total = picks.length * 3;
+      picks.forEach(function (c) {
+        var card = el.querySelector('.tagcard[data-id="' + c.id + '"]'), allOk = true;
+        TAGSET.forEach(function (g) {
+          var v = sel[c.id][g[0]], ok = c[g[0]].indexOf(v) > -1, b = card.querySelector('.tg[data-g="' + g[0] + '"][data-v="' + v + '"]');
+          b.classList.toggle('right', ok); b.classList.toggle('wrong', !ok); if (ok) right++; else allOk = false;
+        });
+        var f = card.querySelector('.tfb'); f.className = 'tfb show ' + (allOk ? 'good' : 'bad'); f.textContent = (allOk ? '✔ ' : '✖ ') + c.why;
+      });
+      if (!checked) { checked = true; score(right, total, this); }
+      if (right === total) { m.className = 'msg ok'; m.textContent = '✅ All labels correct!'; this.disabled = true; el.querySelectorAll('.tg').forEach(function (x) { x.disabled = true; }); setTimeout(function () { setRound(3); round3(); }, 1600); }
+      else { m.className = 'msg no'; m.textContent = right + '/' + total + ' labels correct. Read the feedback on each card, change the red labels and check again.'; }
+    });
+  }
+
+  /* ---------- ROUND 3: DRAW THE ARROWS ---------- */
+  var LINKS = [['b1', 'b3'], ['r2', 'h1'], ['b2', 'bx'], ['h2', 'r4'], ['r1', 'm1'], ['r3', 'rx']];
+  var EXTRA = { bx: { w: 'b', t: 'Tension grows between host communities and refugees, who now outnumber locals in Ukhiya and Teknaf' }, rx: { w: 'r', t: 'Limited skills and no right to work keep refugees dependent on aid for years' } };
+  function card(id) { return byId(id) || EXTRA[id]; }
+  function round3() {
+    var el = panel('Round 3 of 4', '➡️ Draw the arrows', 'Where does one consequence become the <b>cause</b> of another? Tap a cause on the left, then the consequence it leads to on the right. An arrow is drawn between them. Tap a cause again to remove its arrow.');
+    var causes = shuffle(LINKS.map(function (l, i) { return i; })), effects = shuffle(LINKS.map(function (l, i) { return i; }));
+    var link = {}, sel = null, checked = false, done = false;
+    el.innerHTML = '<div class="arrows-wrap" id="aw"><svg class="alines" id="alines" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker><marker id="ahN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0f3a5c"/></marker><marker id="ahG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="ahR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker></defs></svg>' +
+      '<div class="acols"><div class="acol"><h4>Cause</h4>' + causes.map(function (i) { var c = card(LINKS[i][0]); return '<button type="button" class="acard" data-c="' + i + '"' + (DEBUG ? ' data-k="' + i + '"' : '') + '><span class="who" style="color:' + WHO[c.w][2] + '">' + WHO[c.w][0] + '</span>' + esc(c.t) + '</button>'; }).join('') + '</div>' +
+      '<div class="acol"><h4>Leads to…</h4>' + effects.map(function (i) { var c = card(LINKS[i][1]); return '<button type="button" class="acard" data-e="' + i + '"' + (DEBUG ? ' data-k="' + i + '"' : '') + '><span class="who" style="color:' + WHO[c.w][2] + '">' + WHO[c.w][0] + '</span>' + esc(c.t) + '</button>'; }).join('') + '</div></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" id="arrCheck">Check my arrows</button></div><div class="msg" id="arrMsg" aria-live="polite"></div>';
+    function center(b, side) { var w = $('aw').getBoundingClientRect(), r = b.getBoundingClientRect(); return [side === 'r' ? r.right - w.left : r.left - w.left, r.top - w.top + r.height / 2]; }
+    function draw(result) {
+      var svg = $('alines'); if (!svg) return; svg.querySelectorAll('path.ln').forEach(function (p) { p.remove(); });
+      Object.keys(link).forEach(function (ci) {
+        var a = el.querySelector('[data-c="' + ci + '"]'), b = el.querySelector('[data-e="' + link[ci] + '"]'); if (!a || !b) return;
+        var p1 = center(a, 'r'), p2 = center(b, 'l'), mx = (p1[0] + p2[0]) / 2;
+        var ok = result ? (+ci === link[ci]) : null, col = ok === null ? '#0f3a5c' : ok ? '#16a34a' : '#dc2626';
+        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('class', 'ln'); path.setAttribute('d', 'M' + p1[0] + ' ' + p1[1] + ' C' + mx + ' ' + p1[1] + ' ' + mx + ' ' + p2[1] + ' ' + (p2[0] - 2) + ' ' + p2[1]);
+        path.setAttribute('fill', 'none'); path.setAttribute('stroke', col); path.setAttribute('stroke-width', '3');
+        path.setAttribute('marker-end', 'url(#' + (ok === null ? 'ahN' : ok ? 'ahG' : 'ahR') + ')');
+        svg.appendChild(path);
+      });
+    }
+    var lastResult = false;
+    function paint() {
+      el.querySelectorAll('[data-c]').forEach(function (b) { b.classList.toggle('sel', sel === +b.dataset.c); b.classList.toggle('linked', link[b.dataset.c] != null); if (!lastResult) b.classList.remove('right', 'wrong'); });
+      var usedE = {}; for (var k in link) usedE[link[k]] = 1;
+      el.querySelectorAll('[data-e]').forEach(function (b) { b.classList.toggle('linked', !!usedE[b.dataset.e]); if (!lastResult) b.classList.remove('right', 'wrong'); });
+      draw(lastResult);
+    }
+    el.addEventListener('click', function (e) {
+      if (done) return;
+      var c = e.target.closest('[data-c]'), f = e.target.closest('[data-e]');
+      if (c) { var i = +c.dataset.c; lastResult = false; if (link[i] != null && sel !== i) { delete link[i]; sel = i; } else sel = sel === i ? null : i; paint(); }
+      else if (f && sel != null) { var j = +f.dataset.e; lastResult = false; for (var k in link) if (link[k] === j) delete link[k]; link[sel] = j; sel = null; paint(); }
+    });
+    window.addEventListener('resize', function () { draw(lastResult); });
+    $('arrCheck').addEventListener('click', function () {
+      var m = $('arrMsg'), n = Object.keys(link).length;
+      if (n < LINKS.length) { m.className = 'msg info'; m.textContent = 'Draw all ' + LINKS.length + ' arrows first (' + n + ' so far).'; return; }
+      var right = Object.keys(link).filter(function (ci) { return +ci === link[ci]; }).length;
+      lastResult = true; draw(true);
+      el.querySelectorAll('[data-c]').forEach(function (b) { var ok = link[b.dataset.c] === +b.dataset.c; b.classList.toggle('right', ok); b.classList.toggle('wrong', !ok); });
+      if (!checked) { checked = true; score(right, LINKS.length, this); }
+      if (right === LINKS.length) { done = true; this.disabled = true; m.className = 'msg ok'; m.textContent = '✅ Every arrow is right! Notice how consequences for one stakeholder become causes for another.'; setTimeout(function () { setRound(4); round4(); }, 1800); }
+      else { m.className = 'msg no'; m.textContent = right + '/' + LINKS.length + ' arrows correct (green). Tap a red cause to remove its arrow and try again.'; }
+    });
+    paint();
+  }
+
+  /* ---------- ROUND 4: EXAM PARAGRAPH ---------- */
+  var PAR = { C: 'The Rohingya forced migration has had serious consequences for several stakeholders, but the refugees themselves have been affected most severely.',
+    E: 'For example, around 1 million stateless Rohingya live in overcrowded camps in Cox’s Bazar, with no right to work and food vouchers cut to $8 a month in 2023 because of funding shortfalls.',
+    X: 'These consequences are linked: deforestation for shelters and firewood increases landslide risk, competition for work lowers local wages and raises tension with host communities, and fading donor funding deepens dependence on aid.',
+    J: 'Overall, the long-term, indirect consequences now outweigh the short-term emergency, because without safe return to Myanmar or a legal right to work, the crisis has become protracted for refugees and hosts alike.',
+    D: ['The Rohingya mainly left Myanmar for better-paid jobs in Bangladesh, so this is voluntary economic migration.', 'The crisis has been fully resolved because all refugees have returned safely to Rakhine State.'] };
+  function round4() {
+    var el = panel('Round 4 of 4', '📝 Build the exam paragraph', 'Tap a sentence card, then tap the box it belongs in. Two cards are <b>traps</b> — leave them out!');
+    var cards = shuffle([['C', PAR.C], ['E', PAR.E], ['X', PAR.X], ['J', PAR.J], ['D', PAR.D[0]], ['D', PAR.D[1]]]), place = {}, selC = null, first = true;
+    var SL = [['C', 'p', 'Claim / Point'], ['E', 'e', 'Evidence'], ['X', 'x', 'Explain / Link'], ['J', 'j', 'Evaluate / Judgement']];
+    el.innerHTML = '<div class="exq"><div class="mk">IB-style extended response</div><h3>Examine the consequences of the Rohingya forced migration for different stakeholders.</h3></div>' +
+      '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+      '<div class="pee">' + SL.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+      '<div class="actions"><button type="button" class="btn gold" id="parCheck">Check my paragraph</button></div><div class="msg" id="parMsg" aria-live="polite"></div><div id="own"></div>';
+    function paint() {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+      el.querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+    }
+    function hit(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+    $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+    el.querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hit(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hit(s); } }); });
+    $('parCheck').addEventListener('click', function () {
+      var m = $('parMsg');
+      if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+      var right = 0; el.querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+      if (first) { first = false; score(right, 4, this); }
+      if (right === 4) { this.disabled = true; m.className = 'msg ok'; m.textContent = '✅ A fully developed, evaluated paragraph!'; ownWriting(); }
+      else { var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; }); m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate. ' : '') + 'Tap a red box to empty it and try again.'; }
+    });
+    paint();
+  }
+  function ownWriting() {
+    $('own').innerHTML = '<div class="wb"><label for="ownTa">✏️ Your turn: write your own paragraph about a DIFFERENT stakeholder (for example Myanmar, or humanitarian organisations). Include a claim, evidence, an explained link and a judgement.</label>' +
+      '<textarea id="ownTa" placeholder="For Myanmar, the most significant consequence has been… For example… This is because… Overall…"></textarea>' +
+      '<div class="foot"><span id="wc">0 words</span><button type="button" class="copy" id="copyBtn">📋 Copy for OneNote</button></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" id="finishBtn">Finish →</button></div>';
+    try { $('ownTa').value = localStorage.getItem('sbl-carousel-own') || ''; } catch (e) {}
+    $('ownTa').addEventListener('input', function () { var v = this.value.trim(); $('wc').textContent = (v ? v.split(/\s+/).length : 0) + ' words'; try { localStorage.setItem('sbl-carousel-own', this.value); } catch (e) {} });
+    $('copyBtn').addEventListener('click', function () {
+      var b = this, txt = 'Consequence Carousel — the Rohingya crisis\n\nModel paragraph:\n' + [PAR.C, PAR.E, PAR.X, PAR.J].join(' ') + '\n\nMy paragraph:\n' + ($('ownTa').value.trim() || '(not written yet)');
+      function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy for OneNote'; }, 2200); }
+      try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
+    });
+    $('finishBtn').addEventListener('click', finish);
+  }
+  function fallback(txt) { var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+  function finish() {
+    setRound(5);
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 0;
+    var el = document.createElement('div'); el.className = 'finish';
+    el.innerHTML = '<div style="font-size:3rem">' + (pct >= 90 ? '🏆' : '🌟') + '</div><h2>Carousel complete!</h2><div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>' + run.xp + '</b>XP</div></div>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — you can link consequences across stakeholders like an examiner.' : 'Well done. Play again to beat your first-try accuracy.') + '</p>' +
+      '<div class="actions"><button type="button" class="btn gold" onclick="location.reload()">Play again</button><a class="btn ghost" href="/geography/paper-1/core-1/t2-changing/l4-the-causes-and">Back to the lesson</a></div>';
+    $('app').appendChild(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); confetti(pct >= 90);
+  }
+
+  paintHud(); round1();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
