@@ -41,29 +41,23 @@ const ACCESS_COOKIE = 'sbl_at';
 const REFRESH_COOKIE = 'sbl_rt';
 
 // Paths that fall inside a gated prefix above (e.g. under /geography/)
-// but should stay open to everyone, no login required. Used for KS3
-// games that should be freely accessible while the rest of that
-// section (IGCSE / IB, KS4-5) stays behind the login wall.
+// but should stay open to everyone, no login required.
 //
 // PUBLIC_PATH_TREES — this path AND anything nested under it (a
-// trailing "/...") is public. Use for a whole game's own folder.
+// trailing "/...") is public.
+//
+// ALL GAMES ARE PUBLIC (KS3, IGCSE/KS4 and IB) so they can be used to
+// promote the site. '/geography/games' as a tree covers the games hub
+// page itself plus every game folder under it — including any new
+// game added later, with no change needed here. Lessons, revision,
+// past-paper and dashboard pages stay behind the login wall.
 const PUBLIC_PATH_TREES = [
-  '/geography/games/tropical-storm-mission', // KS3 — Tropical Storm Mission
-  '/geography/games/place-detective',        // KS3 — Place Detective
-  '/geography/games/tropical-storm-links',   // KS3 — Tropical Storm: Link It Up     
-  '/geography/games/storm-ready-city',          // KS3 — Storm-Ready City
-     '/geography/games/volcano-fantastic-place',   // KS3 — Ruapehu Mission
-  '/geography/games/micro-hydro-mission',       // KS3 — Micro-Hydro Mission
-  '/geography/quizzes'                       // KS3 — Geography Quizzes + Geography Helper bot
+  '/geography/games',   // Games hub + every KS3, IGCSE and IB game
+  '/geography/quizzes'  // KS3 — Geography Quizzes + Geography Helper bot
 ];
 // PUBLIC_PATH_EXACT — only this exact path is public, nothing nested
-// under it. Use for the games hub listing page itself: it lives at
-// /geography/games, one level above the still-gated IGCSE/IB games
-// (e.g. /geography/games/energy-sort), so it must NOT be a tree match
-// or every game would become public.
-const PUBLIC_PATH_EXACT = [
-  '/geography/games' // the games hub listing page
-];
+// under it. (Currently unused — kept for one-off public pages.)
+const PUBLIC_PATH_EXACT = [];
 
 function isPublicPath(pathname) {
   if (PUBLIC_PATH_EXACT.includes(pathname)) return true;
@@ -236,7 +230,7 @@ async function getActiveRole(accessToken, supabaseUrl, anonKey, userId) {
 export default async function middleware(request) {
   const { pathname } = new URL(request.url);
 
-  // Open KS3 games — let these through before any auth check runs.
+  // Open games (KS3, IGCSE and IB) — let these through before any auth check runs.
   if (isPublicPath(pathname)) return undefined;
 
   const isAdminPath = pathname.startsWith('/admin');
