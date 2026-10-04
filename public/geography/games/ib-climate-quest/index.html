@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Climate Quest — IB Geography Changing Climate Revision Game — SBL</title>
+<meta name="description" content="IB Geography revision game for Unit 2 Global Climate: 12 levels covering causes, consequences and responses to climate change, finishing with an IB Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Climate Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 12 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-ib-climate-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '⛅', t: 'The Atmospheric System', d: 'Weather vs climate, layers and natural causes' },
+    { n: 2, z: 'A', emo: '☀️', t: 'Energy Balance & Feedback Loops', d: 'Albedo and positive vs negative feedback' },
+    { n: 3, z: 'A', emo: '🏭', t: 'The Enhanced Greenhouse Effect', d: 'Gases, development, globalisation and trade' },
+    { n: 4, z: 'B', emo: '🌊', t: 'Climate Change & the Hydrosphere', d: 'Sea level rise and ocean acidification' },
+    { n: 5, z: 'B', emo: '🌀', t: 'Extreme Weather Events', d: 'Mechanisms, frequency vs intensity, attribution' },
+    { n: 6, z: 'B', emo: '🦋', t: 'Climate Change & the Biosphere', d: 'Range shifts, migration and coral bleaching' },
+    { n: 7, z: 'B', emo: '🌾', t: 'Climate Change & Agriculture', d: 'Food security and the Bangladesh case study' },
+    { n: 8, z: 'B', emo: '🗺️', t: 'Impacts on People & Places', d: 'Uneven impacts, migrants and small islands' },
+    { n: 9, z: 'C', emo: '⚖️', t: 'Risk & Vulnerability', d: 'Hazard, exposure, vulnerability, resilience' },
+    { n: 10, z: 'C', emo: '⏱️', t: 'Adaptation vs Mitigation', d: 'Speed round plus the Paris Agreement' },
+    { n: 11, z: 'C', emo: '🕵️', t: 'Civil Society & Corporate Strategy', d: 'NGOs, grassroots, CSR and greenwashing' },
+    { n: 12, z: 'X', emo: '👹', t: 'The IB Examiner', d: 'Final boss: Claim, Evidence, Explain, Judgement' }];
+  var ZONES = { A: ['Topic 01', 'Causes', '#ea580c'], B: ['Topic 02', 'Consequences', '#0284c7'], C: ['Topic 03', 'Responding', '#16a34a'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'causes', i: '🏭', t: 'Causes Expert', d: 'Complete Topic 01 (Levels 1–3)', ok: function () { return [1, 2, 3].every(isDone); } },
+    { id: 'cons', i: '🌊', t: 'Consequences Expert', d: 'Complete Topic 02 (Levels 4–8)', ok: function () { return [4, 5, 6, 7, 8].every(isDone); } },
+    { id: 'resp', i: '🌱', t: 'Response Strategist', d: 'Complete Topic 03 (Levels 9–11)', ok: function () { return [9, 10, 11].every(isDone); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the IB Examiner', ok: function () { return isDone(12); } },
+    { id: 'champ', i: '🏆', t: 'Climate Champion', d: 'All 12 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n - 1) || isDone(n); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && unlocked(l.n); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">IB Geography \u00B7 Paper 1 Core \u00B7 Unit 2</span>' +
+      '<h1>\uD83C\uDF0D Climate Quest<br>Changing Climate Revision</h1>' +
+      '<p>Work through all three topics \u2014 <b>Causes</b>, <b>Consequences</b> and <b>Responding</b> \u2014 one level per lesson, then face the <b>IB Examiner</b>. <b>Each level unlocks the next.</b> Earn XP for every first-try correct answer and collect all five badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n];
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (u ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Climate Champion!' : ' — reach 90% for Climate Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>' : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — CC01 The atmospheric system */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '⛅ Weather or climate?', how: '<b>Weather</b> = short-term atmospheric conditions at a place and time. <b>Climate</b> = the average pattern over a long period (usually 30+ years). Press the right button, or use the keys.',
+        build: function (el, next) { flash(el, { yes: '☀️ Weather', no: '🌍 Climate', ky: 'w', kn: 'c', items: [
+          { t: 'A thunderstorm hits Bangkok this afternoon', a: true, why: 'A single event on a single day is weather.' },
+          { t: 'The Sahara receives under 100 mm of rain a year on average', a: false, why: 'A long-term average is climate.' },
+          { t: 'Tomorrow will be 34°C with 70% humidity', a: true, why: 'A short-term forecast describes weather.' },
+          { t: 'Southeast Asia has a monsoon wet season every year', a: false, why: 'A regular long-term seasonal pattern is climate.' },
+          { t: 'Global average temperature has risen about 1.1°C since pre-industrial times', a: false, why: 'A change in the long-term average is climate change.' },
+          { t: 'Fog closed London airports this morning', a: true, why: 'A short-lived condition is weather.' }] }, next); } },
+      { title: '🗂️ Build the atmosphere', how: 'Tap the layers in order, starting from the <b>Earth’s surface</b> and going up.',
+        build: function (el, next) { orderGame(el, ['Troposphere — where weather happens and most water vapour is found', 'Stratosphere — contains the ozone layer', 'Mesosphere — temperature falls with height again', 'Thermosphere — very thin air, absorbs high-energy radiation'], 'Tap the layer nearest the ground first.', next); } },
+      { title: '☀️ Natural causes of climate change', how: 'Match each natural forcing to what it does.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['orb', '🌐 Milankovitch (orbital) cycles'], ['sun', '☀️ Solar variability'], ['vol', '🌋 Volcanic activity']]), cards: [
+          { t: 'Eccentricity: the shape of Earth’s orbit changes over about 100,000 years', a: ['orb'], why: 'Changes in Earth’s orbit are Milankovitch cycles.' },
+          { t: 'Obliquity: the tilt of Earth’s axis varies over about 41,000 years', a: ['orb'], why: 'Axial tilt is one of the three Milankovitch cycles.' },
+          { t: 'Precession: Earth’s axis wobbles, changing which season is nearest the Sun', a: ['orb'], why: 'The wobble of the axis is a Milankovitch cycle.' },
+          { t: 'Sunspot cycles slightly change the energy the Sun gives out', a: ['sun'], why: 'Changes in the Sun’s output are solar variability.' },
+          { t: 'The Maunder Minimum (low sunspot activity) coincided with the Little Ice Age', a: ['sun'], why: 'This is the classic example of solar variability.' },
+          { t: 'Sulphur dioxide forms aerosols that reflect sunlight and cool the planet', a: ['vol'], why: 'Sulphate aerosols come from large eruptions.' },
+          { t: 'Mount Pinatubo (1991) cooled global temperatures by about 0.5°C for around two years', a: ['vol'], why: 'Pinatubo is the classic volcanic cooling example.' }] }, next); } },
+      { title: '🧠 Quick check', build: function (el, next) { mcq(el, [
+        { q: 'Why is the <b>troposphere</b> the most important layer for weather and climate?', o: ['It contains most of the atmosphere’s mass and water vapour, so clouds, rain and weather form there', 'It contains the ozone layer', 'It is the hottest layer', 'It is where the Sun’s energy is produced'], c: 0, f: 'About 75–80% of the atmosphere’s mass and almost all its water vapour are in the troposphere.' },
+        { q: 'Why can natural causes NOT explain the rapid warming since about 1950?', o: ['Solar output has been flat or slightly falling and orbital cycles act over thousands of years, while warming matches the rise in greenhouse gases', 'Volcanoes have stopped erupting', 'The Earth has moved closer to the Sun', 'Natural causes only affect weather, not climate'], c: 0, f: 'Natural forcings are too slow or point the wrong way — human greenhouse gas emissions best explain recent warming.' }], next); } }]);
+  };
+
+  /* L2 — CC02 Energy balance and feedback loops */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '☀️ Rank the albedo', how: '<b>Albedo</b> = the proportion of incoming sunlight a surface reflects (0 = absorbs it all, 1 = reflects it all). Tap the surfaces from <b>HIGHEST</b> to <b>LOWEST</b> albedo.',
+        build: function (el, next) { orderGame(el, ['Fresh snow (about 0.8–0.9)', 'Sea ice (about 0.5–0.7)', 'Desert sand (about 0.3–0.4)', 'Grassland (about 0.25)', 'Forest (about 0.1–0.15)', 'Open ocean (about 0.06)'], 'Tap the MOST reflective surface first.', next); } },
+      { title: '🔄 Positive or negative feedback?', how: '<b>Positive feedback</b> amplifies (speeds up) a change. <b>Negative feedback</b> dampens (slows down) a change.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['pos', '➕ Positive feedback', 'Amplifies warming'], ['neg', '➖ Negative feedback', 'Dampens warming']], ['zr', 'zg']), cards: [
+          { t: 'Ice melts → darker surface absorbs more heat → more ice melts', a: ['pos'], why: 'The ice–albedo loop amplifies warming.' },
+          { t: 'Warmer air holds more water vapour, a greenhouse gas → more warming', a: ['pos'], why: 'The water vapour loop amplifies warming.' },
+          { t: 'Permafrost thaws, releasing methane → more warming', a: ['pos'], why: 'Thawing permafrost releases greenhouse gases — amplifying.' },
+          { t: 'Warmer oceans absorb less CO₂, so more stays in the air', a: ['pos'], why: 'A weaker ocean carbon sink amplifies warming.' },
+          { t: 'More CO₂ boosts plant growth, which absorbs more CO₂ (CO₂ fertilisation)', a: ['neg'], why: 'Extra plant growth removes CO₂ — dampening.' },
+          { t: 'More low cloud reflects more sunlight back to space', a: ['neg'], why: 'Higher albedo from low cloud cools — dampening (though high cloud can trap heat).' },
+          { t: 'Hotter Earth radiates more heat to space', a: ['neg'], why: 'Increased outgoing radiation is the most basic negative feedback.' }] }, next); } },
+      { title: '⛓️ Build the ice–albedo loop', how: 'Tap the links in order to show how this positive feedback loop works.',
+        build: function (el, next) { orderGame(el, ['Greenhouse gases cause global temperatures to rise', 'Arctic sea ice and snow cover melt', 'Darker ocean and land are exposed, lowering albedo', 'More solar radiation is absorbed rather than reflected', 'Temperatures rise further, melting even more ice'], 'Tap the FIRST link.', next); } },
+      { title: '🧠 Energy budget check', build: function (el, next) { mcq(el, [
+        { q: 'Roughly what proportion of incoming solar radiation is reflected back to space by clouds, the atmosphere and the surface?', o: ['About 30%', 'About 5%', 'About 70%', 'About 95%'], c: 0, f: 'About 30% is reflected (Earth’s average albedo is about 0.3); about 70% is absorbed.' },
+        { q: 'Why do feedback loops make future climate change hard to predict?', o: ['They can amplify warming in non-linear ways and may pass tipping points that are hard to reverse', 'They always cancel each other out', 'They only operate over millions of years', 'They only affect the weather, not the climate'], c: 0, f: 'Positive feedbacks and tipping points (e.g. permafrost, ice sheets) make outcomes uncertain and potentially rapid.' }], next); } }]);
+  };
+
+  /* L3 — CC03 Enhanced greenhouse effect */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🏭 Match each greenhouse gas to its sources', how: 'Drag each source to the gas it mainly releases.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['co2', 'CO₂ Carbon dioxide'], ['ch4', 'CH₄ Methane'], ['n2o', 'N₂O Nitrous oxide'], ['cfc', 'CFCs / halocarbons']]), cards: [
+          { t: 'Burning coal, oil and gas', a: ['co2'], why: 'Burning fossil fuels mainly releases CO₂.' },
+          { t: 'Deforestation and burning forests', a: ['co2'], why: 'Cutting and burning trees releases stored carbon as CO₂.' },
+          { t: 'Cattle and other livestock', a: ['ch4'], why: 'Livestock digestion releases methane.' },
+          { t: 'Flooded rice paddies', a: ['ch4'], why: 'Waterlogged soils release methane.' },
+          { t: 'Landfill sites', a: ['ch4'], why: 'Rotting waste without oxygen produces methane.' },
+          { t: 'Nitrogen-based fertilisers', a: ['n2o'], why: 'Fertilisers are the main human source of nitrous oxide.' },
+          { t: 'Old refrigerators and aerosol sprays', a: ['cfc'], why: 'Refrigerants and propellants release CFCs and other halocarbons.' }] }, next); } },
+      { title: '🌡️ Natural or enhanced greenhouse effect?', build: function (el, next) { flash(el, { yes: '🌿 Natural', no: '🏭 Enhanced', ky: 'n', kn: 'e', items: [
+        { t: 'Without it, Earth’s average temperature would be about −18°C instead of about 15°C', a: true, why: 'The natural greenhouse effect keeps Earth habitable.' },
+        { t: 'CO₂ concentration has risen from about 280 ppm to over 420 ppm since 1750', a: false, why: 'Extra CO₂ from human activity drives the enhanced effect.' },
+        { t: 'Water vapour and CO₂ have trapped outgoing heat for millions of years', a: true, why: 'This is the natural greenhouse effect.' },
+        { t: 'More heat is trapped because of fossil fuel burning and deforestation', a: false, why: 'Human activity strengthening the effect = enhanced greenhouse effect.' },
+        { t: 'Methane from expanding cattle farming adds to warming', a: false, why: 'Human-caused increases in greenhouse gases are part of the enhanced effect.' }] }, next); } },
+      { title: '📊 Emissions, development and trade', build: function (el, next) { mcq(el, [
+        { q: 'Which country has the largest <b>cumulative</b> (historical) CO₂ emissions?', o: ['USA', 'China', 'India', 'Bangladesh'], c: 0, f: 'The USA has emitted the most CO₂ since the Industrial Revolution, although China has the largest ANNUAL emissions today.' },
+        { q: 'Why do emissions usually rise as a country develops economically?', o: ['Industrialisation, urbanisation and rising consumption increase energy use, mostly from fossil fuels', 'Richer people breathe out more CO₂', 'Developed countries have more volcanoes', 'Economic growth always reduces emissions'], c: 0, f: 'Development increases energy demand for industry, transport and consumption.' },
+        { q: 'What are <b>embedded (consumption-based) emissions</b>?', o: ['Emissions released in one country to make goods that are consumed in another', 'Emissions trapped in ice cores', 'Emissions from volcanoes under the sea', 'Emissions that do not affect the climate'], c: 0, f: 'Globalisation and trade mean HICs can ‘outsource’ emissions to manufacturing countries such as China.' },
+        { q: 'Which statement about emissions <b>per person</b> is most accurate?', o: ['Emissions per person are usually far higher in HICs (e.g. USA, Australia) than in LICs', 'Emissions per person are the same everywhere', 'LICs emit the most per person', 'Per-person emissions do not matter'], c: 0, f: 'Uneven emissions are a key equity issue: those who emit least are often most vulnerable.' }], next); } }]);
+  };
+
+  /* L4 — CC04 Hydrosphere */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '🌊 What raises sea level?', how: 'Sort each change. Watch out — one big one does NOT raise sea level much!',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['te', '🌡️ Thermal expansion'], ['ice', '🧊 Melting LAND ice'], ['no', '❌ Little or no sea level rise']], ['zc3', 'zc4', 'zr']), cards: [
+          { t: 'Ocean water warms and its volume increases', a: ['te'], why: 'Warmer water expands — thermal expansion.' },
+          { t: 'Most of the heat trapped by greenhouse gases goes into the oceans, which expand', a: ['te'], why: 'Over 90% of extra heat goes into the oceans, causing expansion.' },
+          { t: 'The Greenland ice sheet loses mass', a: ['ice'], why: 'Ice on land adds new water to the ocean.' },
+          { t: 'Mountain glaciers in the Himalayas and Andes retreat', a: ['ice'], why: 'Glacier meltwater flows into the sea.' },
+          { t: 'Antarctic ice sheet melts and slides into the ocean', a: ['ice'], why: 'Land ice entering the sea raises sea level.' },
+          { t: 'Floating Arctic sea ice melts', a: ['no'], why: 'Sea ice is already floating, so melting it barely changes sea level (like ice melting in a glass) — but it does lower albedo!' }] }, next); } },
+      { title: '🧪 Ocean acidification chain', how: 'Tap the links in order.',
+        build: function (el, next) { orderGame(el, ['More CO₂ is released into the atmosphere', 'The oceans absorb about a quarter of this extra CO₂', 'CO₂ dissolves to form carbonic acid, lowering ocean pH', 'Fewer carbonate ions are available in the water', 'Corals, shellfish and plankton struggle to build shells and skeletons'], 'Tap the FIRST link.', next); } },
+      { title: '🧠 Hydrosphere check', build: function (el, next) { mcq(el, [
+        { q: 'Since pre-industrial times, ocean surface pH has fallen from about 8.2 to about 8.1. Why is this significant?', o: ['pH is logarithmic, so this is roughly a 30% increase in acidity', 'It means the ocean is now acidic (below 7)', 'It has no effect on marine life', 'It shows the oceans are cooling'], c: 0, f: 'A 0.1 fall on the logarithmic pH scale is about a 30% rise in hydrogen ions — still alkaline, but less so.' },
+        { q: 'How is climate change expected to change global precipitation patterns?', o: ['Generally ‘wet gets wetter, dry gets drier’, with more intense heavy-rain events', 'Rainfall will become the same everywhere', 'All places will get less rain', 'Precipitation will not change'], c: 0, f: 'A warmer atmosphere intensifies the water cycle, so contrasts increase.' },
+        { q: 'Which is an impact of sea level rise on coastal areas?', o: ['Saltwater intrusion into farmland and drinking water, more coastal flooding and erosion', 'Deserts expand inland', 'Coral reefs grow faster', 'Rivers flow uphill'], c: 0, f: 'Low-lying deltas such as Bangladesh and small island states face saltwater intrusion and flooding.' }], next); } }]);
+  };
+
+  /* L5 — CC05 Extreme weather */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '⚡ Match the hazard to the climate mechanism', how: 'Why does a warmer world change each type of extreme weather?',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['heat', '🥵 Heatwaves'], ['drought', '🏜️ Droughts'], ['storm', '🌀 Tropical storms'], ['rain', '🌧️ Heavy rain & floods']]), cards: [
+          { t: 'A warmer baseline means hot extremes are reached more often', a: ['heat'], why: 'Shifting the average up makes hot extremes more frequent.' },
+          { t: 'Higher temperatures increase evaporation from soils and plants', a: ['drought'], why: 'More evaporation dries out land faster.' },
+          { t: 'Warmer sea surface temperatures supply more energy to storms', a: ['storm'], why: 'Warm oceans fuel tropical cyclones, increasing intensity.' },
+          { t: 'Each 1°C of warming lets air hold about 7% more water vapour', a: ['rain'], why: 'More moisture means heavier downpours.' },
+          { t: 'Rising sea levels make storm surges reach further inland', a: ['storm'], why: 'Storm surges start from a higher base level.' },
+          { t: 'Shifting rainfall belts leave some regions with long dry spells', a: ['drought'], why: 'Changes in circulation can reduce rainfall in dry regions.' }] }, next); } },
+      { title: '📈 Frequency or intensity?', how: '<b>Frequency</b> = how often events happen. <b>Intensity</b> = how strong/severe each event is.',
+        build: function (el, next) { flash(el, { yes: '🔁 Frequency', no: '💥 Intensity', ky: 'f', kn: 'i', items: [
+          { t: 'Heatwaves that used to occur once every 50 years now happen about every 10 years', a: true, why: 'This describes how often — frequency.' },
+          { t: 'The proportion of Category 4–5 tropical cyclones is increasing', a: false, why: 'Stronger storms = intensity. Total cyclone numbers may not rise.' },
+          { t: 'The heaviest one-day rainfall totals are getting larger', a: false, why: 'Bigger rainfall totals per event = intensity.' },
+          { t: 'Droughts in a region now occur more years per decade', a: true, why: 'More events per time period = frequency.' }] }, next); } },
+      { title: '🔍 Attribution science', build: function (el, next) { mcq(el, [
+        { q: 'How do scientists ‘attribute’ an extreme event to climate change?', o: ['They compare climate models of the world with and without human warming to see how much more likely or intense the event became', 'They ask people affected whether they think it was climate change', 'They check whether the event broke a record', 'They assume every extreme event is caused by climate change'], c: 0, f: 'Attribution studies estimate how much human warming changed the probability or strength of an event.' },
+        { q: 'Which statement about tropical storms and climate change is best supported?', o: ['They are likely to become more intense, with heavier rainfall and higher storm surges, even if not more frequent', 'There will be no more tropical storms', 'Every storm will become Category 5', 'Tropical storms will move to the poles'], c: 0, f: 'The strongest evidence is for increased intensity, rainfall and surge height.' }], next); } }]);
+  };
+
+  /* L6 — CC06 Biosphere */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🦋 Species on the move', how: 'Sort each impact on the biosphere.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['range', '🧭 Range shift', 'Species move to new areas'], ['timing', '⏰ Timing / migration change', 'Seasons out of sync'], ['loss', '⚠️ Habitat loss / extinction risk']]), cards: [
+          { t: 'Species move towards the poles as temperatures rise', a: ['range'], why: 'Poleward movement is a range shift.' },
+          { t: 'Mountain species move upslope to cooler altitudes', a: ['range'], why: 'Moving to higher altitude is a range shift.' },
+          { t: 'Birds arrive after the peak of the insects they feed their chicks on', a: ['timing'], why: 'This is a phenological (timing) mismatch.' },
+          { t: 'Migrating animals leave earlier in spring as it warms', a: ['timing'], why: 'Changes to migration timing.' },
+          { t: 'Polar bears lose the sea ice they hunt seals from', a: ['loss'], why: 'Sea ice is their hunting habitat — habitat loss.' },
+          { t: 'Species on mountain tops have nowhere higher to go', a: ['loss'], why: 'They face a ‘mountain-top extinction’ risk.' }] }, next); } },
+      { title: '🪸 Coral bleaching chain', how: 'Tap the links in order.',
+        build: function (el, next) { orderGame(el, ['Ocean temperatures rise above normal for weeks', 'Corals become stressed by the heat', 'Corals expel the colourful algae (zooxanthellae) living in their tissues', 'The coral turns white (bleaching) and loses its main food source', 'If high temperatures last, the coral dies and reef ecosystems collapse'], 'Tap the FIRST link.', next); } },
+      { title: '🧠 Biosphere check', build: function (el, next) { mcq(el, [
+        { q: 'What is a <b>biome</b>?', o: ['A large-scale ecosystem defined by its climate and dominant vegetation, e.g. tropical rainforest or tundra', 'A single species of animal', 'A small pond ecosystem', 'A type of weather'], c: 0, f: 'Biomes are global-scale ecosystems controlled mainly by temperature and precipitation.' },
+        { q: 'Why are climate-driven biome shifts a problem for many species?', o: ['Climate zones can shift faster than some species can move, and barriers like cities, farms or coastlines block their movement', 'Species always move easily to new areas', 'Biomes never change', 'Warmer temperatures help every species'], c: 0, f: 'The speed of change plus habitat fragmentation increase extinction risk.' }], next); } }]);
+  };
+
+  /* L7 — CC07 Agriculture (Bangladesh) */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '🌾 Winners and losers', how: 'Does each change help or harm agriculture? (Climate change has some positive effects for some places — but many more negative ones.)',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['plus', '👍 Can help farming'], ['minus', '👎 Harms farming']], ['zg', 'zr']), cards: [
+          { t: 'Longer growing seasons in high-latitude countries such as Canada or Russia', a: ['plus'], why: 'Some cooler regions gain a longer growing season.' },
+          { t: 'CO₂ fertilisation boosts the growth of some crops', a: ['plus'], why: 'Extra CO₂ can increase growth of crops like wheat and rice (if water and nutrients allow).' },
+          { t: 'Heat stress during flowering lowers rice and maize yields', a: ['minus'], why: 'High temperatures at key growth stages reduce yields.' },
+          { t: 'Pests and diseases spread into new areas as winters warm', a: ['minus'], why: 'Milder winters let pests survive and spread.' },
+          { t: 'Less reliable monsoon rainfall and more droughts', a: ['minus'], why: 'Water stress reduces harvests.' },
+          { t: 'Saltwater intrusion into coastal fields', a: ['minus'], why: 'Salt damages soils and kills salt-sensitive crops.' }] }, next); } },
+      { title: '🇧🇩 Bangladesh farm survival: choose the best adaptation', how: 'You advise a farming family in coastal Bangladesh. For each threat, choose the most suitable adaptation.',
+        build: function (el, next) { mcq(el, [
+          { q: '🌊 <b>Threat:</b> Sea level rise and storm surges push salt water into the rice fields.', o: ['Plant salt-tolerant rice varieties, or switch some land to shrimp and crab farming', 'Plant more of the same rice', 'Burn the crop residue', 'Move the farm to the coast'], c: 0, f: 'Salt-tolerant varieties and brackish-water aquaculture turn salinity into a manageable problem.' },
+          { q: '🌧️ <b>Threat:</b> Fields are flooded for months during the monsoon.', o: ['Use floating gardens (rafts of water hyacinth) to grow vegetables on the water', 'Grow cacti', 'Abandon all farming', 'Build a ski slope'], c: 0, f: 'Floating gardens (baira) are a traditional adaptation that lets crops grow during long floods.' },
+          { q: '🏠 <b>Threat:</b> Livestock and stored seed are lost in floods.', o: ['Build raised earth platforms (plinths) for homes, animals and seed stores', 'Keep animals in the lowest field', 'Sell all the animals before the monsoon every year', 'Do nothing'], c: 0, f: 'Raised plinths keep assets above flood level.' },
+          { q: 'Why is Bangladesh such a useful case study for climate change and agriculture?', o: ['It is a low-lying, densely populated delta where most people depend on farming, so it faces sea level rise, salinity, floods and cyclones with limited resources', 'It is a high mountain country with no farming', 'It has a cold climate that will benefit from warming', 'It has very few people'], c: 0, f: 'High exposure + high vulnerability make Bangladesh a classic example.' }], next); } },
+      { title: '🧠 Food security check', build: function (el, next) { mcq(el, [
+        { q: 'Which is the best definition of <b>food security</b>?', o: ['When all people at all times have physical and economic access to enough safe, nutritious food', 'When a country grows all its own food', 'When food prices are high', 'When farmers have large farms'], c: 0, f: 'Food security covers availability, access, use and stability (FAO definition).' }], next); } }]);
+  };
+
+  /* L8 — CC08 People and places */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🗺️ Match the place to its main climate risk', build: function (el, next) { sortGame(el, { zones: zonesFrom([['sids', '🏝️ Small island states', 'e.g. Tuvalu, Kiribati, Maldives'], ['arctic', '❄️ Arctic'], ['lic', '🌾 Low-income farming countries'], ['tropics', '🦟 Expanding tropical zones']]), cards: [
+          { t: 'Sea level rise threatens whole countries where most land is under 2 m above sea level', a: ['sids'], why: 'Small island states are low-lying with nowhere higher to go.' },
+          { t: 'Saltwater contaminates the limited freshwater supply', a: ['sids'], why: 'Islands rely on small freshwater lenses that salt water can spoil.' },
+          { t: 'Melting sea ice opens new shipping routes such as the Northern Sea Route', a: ['arctic'], why: 'Less sea ice changes ocean transport routes — an opportunity and a risk.' },
+          { t: 'Thawing permafrost damages buildings, roads and pipelines', a: ['arctic'], why: 'Infrastructure built on frozen ground becomes unstable.' },
+          { t: 'Harvest failures hit incomes because most people depend on rain-fed farming', a: ['lic'], why: 'High dependence on climate-sensitive livelihoods increases vulnerability.' },
+          { t: 'Malaria and dengue spread to higher altitudes and new regions', a: ['tropics'], why: 'Warmer temperatures widen the range of disease-carrying mosquitoes.' }] }, next); } },
+      { title: '⚖️ Unequal impacts', build: function (el, next) { mcq(el, [
+        { q: 'Why are <b>LICs</b> often disproportionately vulnerable to climate change?', o: ['They depend more on agriculture, have less money for defences and healthcare, and have lower adaptive capacity — despite emitting least', 'They emit the most greenhouse gases', 'They have the coldest climates', 'They are all landlocked'], c: 0, f: 'This is the climate justice issue: low responsibility, high vulnerability.' },
+        { q: 'What is a <b>climate refugee</b> (environmental migrant)?', o: ['Someone forced to move because of environmental change such as sea level rise, drought or extreme weather', 'A tourist who visits polar regions', 'A scientist studying climate', 'Someone who moves for a better-paid job only'], c: 0, f: 'Environmental migrants move because of climate-related changes to their environment.' },
+        { q: 'Why is protecting climate refugees internationally difficult?', o: ['The 1951 Refugee Convention does not recognise climate or environmental change as grounds for refugee status', 'Climate refugees do not exist', 'Every country welcomes climate refugees', 'Climate migration only happens within cities'], c: 0, f: 'There is no legal ‘climate refugee’ status, so people have little international protection.' },
+        { q: 'Which is an example of <b>differentiated vulnerability</b>?', o: ['In the same flood, poorer households in informal housing suffer far more than wealthier households nearby', 'Everyone is affected equally by climate change', 'Only animals are affected', 'Wealthy people are always more vulnerable'], c: 0, f: 'Vulnerability varies with wealth, age, gender, health and location — even within one place.' }], next); } }]);
+  };
+
+  /* L9 — CC09 Risk and vulnerability */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '📖 Match the key term to its meaning', build: function (el, next) { sortGame(el, { zones: zonesFrom([['hazard', '⚡ Hazard'], ['exposure', '📍 Exposure'], ['vuln', '🩹 Vulnerability'], ['res', '💪 Resilience']]), cards: [
+          { t: 'A physical event with the potential to cause harm, e.g. a storm surge', a: ['hazard'], why: 'The event itself is the hazard.' },
+          { t: 'People and property being located in a place where the hazard can occur', a: ['exposure'], why: 'Being in harm’s way = exposure.' },
+          { t: 'How likely people are to suffer harm because of poverty, poor housing or lack of services', a: ['vuln'], why: 'Susceptibility to harm = vulnerability.' },
+          { t: 'The ability of a community to absorb, cope with and recover from a hazard', a: ['res'], why: 'Bouncing back = resilience.' }] }, next); } },
+      { title: '⚖️ Same hazard, different risk', how: 'A 1-metre storm surge hits <b>Rotterdam (Netherlands)</b> and a <b>delta village in coastal Bangladesh</b>. Sort each factor by which place it describes.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['nl', '🇳🇱 Rotterdam: lower risk'], ['bd', '🇧🇩 Bangladesh village: higher risk']], ['zg', 'zr']), cards: [
+          { t: 'Huge storm-surge barriers and dykes (e.g. the Maeslantkering)', a: ['nl'], why: 'Engineering reduces exposure.' },
+          { t: 'Homes made of mud, bamboo and corrugated iron', a: ['bd'], why: 'Weak housing increases vulnerability.' },
+          { t: 'Most income comes from farming fields that flood', a: ['bd'], why: 'Climate-sensitive livelihoods increase vulnerability.' },
+          { t: 'Well-funded government and insurance help people recover', a: ['nl'], why: 'High adaptive capacity increases resilience.' },
+          { t: 'Early warnings and evacuation plans reach almost everyone', a: ['nl'], why: 'Preparedness lowers vulnerability.' },
+          { t: 'Limited money to rebuild after each flood', a: ['bd'], why: 'Low adaptive capacity means slower recovery.' }] }, next); } },
+      { title: '🧮 The risk equation', build: function (el, next) { mcq(el, [
+        { q: 'Which equation best summarises climate risk?', o: ['Risk = Hazard × Exposure × Vulnerability (reduced by adaptive capacity)', 'Risk = Hazard ÷ Population', 'Risk = Temperature + Rainfall', 'Risk = Wealth × Development'], c: 0, f: 'Risk depends on the hazard AND who is exposed AND how vulnerable they are.' },
+        { q: 'What does <b>adaptive capacity</b> mean?', o: ['The ability of a system or society to adjust to climate change, reduce damage and take advantage of opportunities', 'The size of a country', 'How much CO₂ a country emits', 'The speed of a hurricane'], c: 0, f: 'Adaptive capacity depends on wealth, technology, education, governance and institutions.' }], next); } }]);
+  };
+
+  /* L10 — CC10 Adaptation vs mitigation */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '⏱️ Speed round: adaptation or mitigation?', how: '<b>Mitigation</b> = reducing the causes (cutting greenhouse gas emissions or removing them). <b>Adaptation</b> = adjusting to cope with the effects. Perfect round = time bonus!',
+        build: function (el, next) { flash(el, { yes: '🛡️ Adaptation', no: '🌱 Mitigation', ky: 'a', kn: 'm', timer: 45, items: [
+          { t: 'Building sea walls to protect a coastal city', a: true, why: 'Coping with sea level rise = adaptation.' },
+          { t: 'A carbon tax on fossil fuels', a: false, why: 'Cutting emissions = mitigation.' },
+          { t: 'Subsidies for solar panels and wind farms', a: false, why: 'Replacing fossil fuels = mitigation.' },
+          { t: 'Planting drought-resistant crops', a: true, why: 'Coping with drought = adaptation.' },
+          { t: 'Reforestation to absorb CO₂', a: false, why: 'Removing CO₂ (carbon sinks) = mitigation.' },
+          { t: 'Building cyclone shelters in Bangladesh', a: true, why: 'Coping with storms = adaptation.' },
+          { t: 'Carbon capture and storage at power stations', a: false, why: 'Preventing CO₂ entering the air = mitigation.' },
+          { t: 'Early-warning systems for heatwaves', a: true, why: 'Reducing harm from heat = adaptation.' },
+          { t: 'Banning new petrol cars from 2035', a: false, why: 'Cutting transport emissions = mitigation.' },
+          { t: 'Raising homes on stilts in flood zones', a: true, why: 'Coping with floods = adaptation.' },
+          { t: 'An emissions trading scheme (cap and trade)', a: false, why: 'Putting a price on emissions = mitigation.' },
+          { t: 'Managed retreat from eroding coastlines', a: true, why: 'Moving away from the hazard = adaptation.' }] }, next); } },
+      { title: '🌍 International action', build: function (el, next) { mcq(el, [
+        { q: 'What is the main goal of the <b>Paris Agreement (2015)</b>?', o: ['To keep global warming well below 2°C above pre-industrial levels, and pursue efforts to limit it to 1.5°C', 'To stop all fossil fuel use by 2020', 'To make only HICs cut emissions', 'To ban air travel'], c: 0, f: 'Nearly every country signed up to the ‘well below 2°C’ goal.' },
+        { q: 'How do countries contribute under the Paris Agreement?', o: ['Each sets its own targets (Nationally Determined Contributions), updated about every five years', 'The UN sets a fixed target for every country', 'Only the largest emitters take part', 'Countries pay a fine for every tonne of CO₂'], c: 0, f: 'NDCs are set nationally and ratcheted up over time — but they are not legally enforced.' },
+        { q: 'Which is a major challenge for international climate cooperation?', o: ['The ‘free-rider’ problem: countries may benefit from others’ cuts without cutting their own, and targets are hard to enforce', 'All countries agree on everything', 'Climate change only affects one country', 'There are too few scientists'], c: 0, f: 'Weak enforcement and competing national interests limit effectiveness.' },
+        { q: 'Why are BOTH adaptation and mitigation needed?', o: ['Some warming is already locked in, so we must adapt; but without mitigation, impacts would eventually exceed what anyone can adapt to', 'Adaptation alone is enough', 'Mitigation alone is enough', 'Neither is needed'], c: 0, f: 'They are complementary: mitigation limits future change; adaptation manages unavoidable change.' }], next); } }]);
+  };
+
+  /* L11 — CC11 Civil society and corporate strategy */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '🕵️ Greenwashing detector', how: '<b>Greenwashing</b> = making misleading claims that a product or company is better for the environment than it really is. Genuine action or greenwashing?',
+        build: function (el, next) { flash(el, { yes: '✅ Genuine', no: '🟢🧽 Greenwashing', ky: 'g', kn: 'w', items: [
+          { t: 'An oil company spends more on adverts about its tiny solar project than on the project itself', a: false, why: 'Advertising spend out of proportion to real action is a classic warning sign.' },
+          { t: 'A company publishes independently audited emissions data and cuts them every year', a: true, why: 'Independent verification and measurable cuts suggest genuine action.' },
+          { t: 'A bottle labelled ‘eco-friendly’ with no evidence or certification', a: false, why: 'Vague claims with no proof are greenwashing.' },
+          { t: 'An airline claims flights are ‘carbon neutral’ using cheap offsets while increasing flights', a: false, why: 'Relying on offsets while emissions grow is widely criticised as greenwashing.' },
+          { t: 'A tech firm switches its data centres to 100% renewable electricity on site', a: true, why: 'A real change to its own emissions is genuine.' },
+          { t: 'A clothing brand releases one small ‘green’ range while its main business is unchanged fast fashion', a: false, why: 'Highlighting a small green product to distract from the main impact is greenwashing.' }] }, next); } },
+      { title: '👥 Who does what?', how: 'Match each action to the type of player.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ngo', '🌍 NGOs', 'e.g. Greenpeace, WWF'], ['grass', '✊ Grassroots movements', 'e.g. Fridays for Future'], ['corp', '🏢 Corporations (CSR)'], ['ind', '🧍 Individuals']]), cards: [
+          { t: 'Campaigning and lobbying governments at international climate conferences', a: ['ngo'], why: 'NGOs advocate and lobby at national and international scales.' },
+          { t: 'School students striking to demand faster climate action', a: ['grass'], why: 'Bottom-up, community-led action = grassroots.' },
+          { t: 'Setting science-based targets to reach net zero in its supply chain', a: ['corp'], why: 'Corporate social responsibility (CSR) commitments.' },
+          { t: 'Cutting meat, flying less and switching energy supplier', a: ['ind'], why: 'Personal lifestyle choices.' },
+          { t: 'Funding scientific research and running awareness campaigns', a: ['ngo'], why: 'NGOs often fund research and raise awareness.' },
+          { t: 'Local residents organising community solar or tree-planting schemes', a: ['grass'], why: 'Community-led action = grassroots.' }] }, next); } },
+      { title: '🧠 Evaluate the players', build: function (el, next) { mcq(el, [
+        { q: 'What is a key <b>limitation</b> of individual action on climate change?', o: ['It matters, but on its own it cannot match the scale of change needed without government policy and corporate change', 'It has no value at all', 'It is the only thing that matters', 'Individuals cause all emissions'], c: 0, f: 'Individual action is important for demand and pressure, but systemic change needs governments and businesses.' },
+        { q: 'How can civil society influence corporate behaviour?', o: ['Through consumer boycotts, shareholder pressure, campaigns and media attention that damage reputations', 'By passing laws', 'By setting international treaties', 'It cannot influence corporations'], c: 0, f: 'Civil society uses pressure and reputation, whereas governments can legislate.' }], next); } }]);
+  };
+
+  /* L12 — IB EXAM BOSS */
+  var EXQ = [
+    { q: 'Examine why the impacts of global climate change are unevenly distributed.', mk: 'Paper 1 · extended response',
+      C: 'Climate change impacts are unevenly distributed because places differ in both their exposure to hazards and their vulnerability.',
+      E: 'For example, small island states such as Tuvalu face existential threats from sea level rise, while low-lying, densely populated Bangladesh suffers saltwater intrusion and flooding.',
+      X: 'These places often have lower adaptive capacity — less money for defences and more dependence on farming — so the same hazard causes far greater losses than in wealthy countries such as the Netherlands.',
+      J: 'Overall, vulnerability matters more than the hazard itself, which creates a climate justice issue because those who emitted least are often affected most.',
+      D: ['Climate change affects every place in exactly the same way.', 'Ocean acidification is caused by sulphur dioxide from volcanoes.'] },
+    { q: 'Evaluate the effectiveness of government-led mitigation strategies.', mk: 'Paper 1 · extended response',
+      C: 'Government-led mitigation strategies, such as carbon taxes and renewable energy subsidies, can significantly reduce greenhouse gas emissions.',
+      E: 'For example, the Paris Agreement (2015) committed almost every country to keep warming well below 2°C through Nationally Determined Contributions.',
+      X: 'However, effectiveness is limited because targets are not legally enforced, countries can act as free-riders, and current pledges are not yet enough to meet the 1.5°C goal.',
+      J: 'Therefore, mitigation strategies are essential but only partly effective so far; their success depends on stronger enforcement and cooperation with business and civil society.',
+      D: ['Building sea walls is the most effective mitigation strategy.', 'Mitigation means adjusting to the effects of climate change.'] },
+    { q: 'To what extent is the enhanced greenhouse effect linked to economic development and globalization?', mk: 'Paper 1 · extended response',
+      C: 'The enhanced greenhouse effect is strongly linked to economic development, because industrialisation and rising consumption increase fossil fuel use.',
+      E: 'For example, the USA has the largest cumulative CO₂ emissions, while China became the largest annual emitter as it industrialised and became a manufacturing hub for global trade.',
+      X: 'Globalization also creates embedded emissions: goods consumed in HICs are made in emerging economies, so emissions are ‘outsourced’ through trade.',
+      J: 'To a large extent the link is clear, although land-use change such as deforestation and agriculture also matter, and some HICs are now decoupling growth from emissions.',
+      D: ['The natural greenhouse effect is entirely caused by humans.', 'Low-income countries have the highest emissions per person.'] },
+    { q: 'Discuss the role of civil society in responding to global climate change.', mk: 'Paper 1 · extended response',
+      C: 'Civil society plays an important role by raising awareness and putting pressure on governments and corporations to act on climate change.',
+      E: 'For example, NGOs such as Greenpeace lobby at international conferences, and grassroots movements such as Fridays for Future have mobilised millions of young people.',
+      X: 'This pressure can shift public opinion, expose greenwashing and push companies towards real corporate social responsibility.',
+      J: 'However, civil society cannot pass laws or enforce targets, so its role is most effective when it works alongside government regulation and business change.',
+      D: ['Civil society refers only to government departments.', 'Greenwashing means a company has genuinely cut its emissions.'] }];
+  LV[12] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Claim / Point'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Explain / Develop'], ['J', 'j', 'Evaluate / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the IB Examiner', how: 'For each extended-response question, tap a sentence card and then tap the box it belongs in: <b>Claim</b>, <b>Evidence</b>, <b>Explain</b> and <b>Judgement</b>. Two cards are <b>traps</b> — leave them out! IB answers need a judgement, so that box matters.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The IB Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A fully developed, evaluated paragraph.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Claim = your main point; Evidence = specific facts or case study; Explain = how/why it links; Judgement = how far / overall. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
