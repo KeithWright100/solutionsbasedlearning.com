@@ -11,6 +11,9 @@
    Paper 2R (4GE1/02R), June 2024 — Question 1, "Economic activity and
    energy" (Section A, 25 marks).
 
+   Also: Pearson Edexcel International GCSE Geography,
+   Paper 2R (4GE1/02R), June 2019 — Question 1, "Economic activity and energy" (Section A, 25 marks).
+
    Data shape: same shared engine as sbl-revision.js. */
 
 window.SBL_REVISION_BUTTON_LABEL = 'Practise This Topic';
@@ -72,6 +75,65 @@ window.SBL_REVISION_TOPICS = [
         marks: 8,
         question: 'Question 1(h) refers to Figure 1c in your Resource Booklet, a graph of global fossil fuel energy consumption over several decades. This is an eight-mark ‘analyse’ question asking you to analyse the possible reasons for the changes in global energy consumption shown. You must refer to the resource in your answer.',
         markScheme: 'Mark holistically against three levels. Level 1 (1–3 marks): identifies at least one relevant driver of energy consumption change (such as population growth, industrialisation, or climate policy) but the explanation is thin, unbalanced, or barely connected to the specific pattern described in the student’s own resource. Level 2 (4–6 marks): identifies more than one driver and makes a reasonably clear, mostly accurate attempt to link those drivers to the trend described in the resource, though the argument may not be fully balanced or coherent throughout. Level 3 (7–8 marks): builds a well-organised, well-evidenced argument that explains how several factors (for example population growth, industrialisation in developing or emerging economies, energy security concerns, and international pressure to reduce carbon emissions) interact to shape the overall trend, draws specifically and accurately on detail the student describes from their own resource throughout, and reaches a clear, justified judgement about which factor has been most significant or whether the rate of change is slowing. Since this system cannot see the actual resource, judge the level by the quality of reasoning and the specificity of the trend detail the student supplies themselves.'
+      }
+    ]
+  },
+  {
+    topic: 'Economic Activity and Energy — June 2019, Paper 2R, Question 1 (25 marks)',
+    questions: [
+      {
+        label: 'Q1(a) — 1 mark',
+        marks: 1,
+        question: 'Question 1(a) is a one-mark ‘identify’ multiple-choice question about the Clark Fisher model: which stage is the one where farming dominates the economy? Type the name of the stage you chose.',
+        markScheme: 'In the Clark Fisher model, the stage before industrialisation, when most people work in agriculture and other primary activities, is the pre-industrial stage. Award the mark only if the student names the pre-industrial stage. Do not award for the industrial (manufacturing-dominated) or post-industrial (service-dominated) stages, or for invented stage names.'
+      },
+      {
+        label: 'Q1(b) — 1 mark',
+        marks: 1,
+        question: 'Question 1(b) is a one-mark ‘define’ question asking for a definition of the term employment structure.',
+        markScheme: 'Award the mark for a definition showing that employment structure is how a country’s workforce is divided between the economic sectors — the proportion (percentage) of workers in the primary, secondary and tertiary (and quaternary) sectors. Do not award vague answers such as ‘the types of jobs people do’ with no idea of proportion or sectors.'
+      },
+      {
+        label: 'Q1(c) — 1 mark',
+        marks: 1,
+        question: 'Question 1(c) is a one-mark ‘identify’ multiple-choice question asking which economic sector includes manufacturing. Type the sector you chose.',
+        markScheme: 'Manufacturing (processing raw materials into products) belongs to the secondary sector. Award the mark only for ‘secondary’.'
+      },
+      {
+        label: 'Q1(d) — 2 marks',
+        marks: 2,
+        question: 'Question 1(d) refers to Figure 1a in your Resource Booklet, which shows the proportions of GDP from different economic sectors in one country. This is a two-mark ‘suggest’ question asking you to give a likely reason why the economy is split between the sectors in this way. Quote the part of the figure you are explaining.',
+        markScheme: 'Award one mark for using the resource to identify which sector or proportion is being explained (quoting the figure alone, without a reason, can earn this first mark), and a second mark for a plausible reason. Valid reasons include: a large tertiary/quaternary share because of an educated workforce, tourism or growing services; a significant secondary share because the country is industrialising and attracting factories/foreign investment (an emerging economy); a remaining primary share because farming is still important to the economy; globalisation, foreign direct investment, rural–urban migration or improved transport. Since this system does not hold the figure, judge whether the reason plausibly explains the part of the data the student quotes.'
+      },
+      {
+        label: 'Q1(e) — 1 mark',
+        marks: 1,
+        question: 'Question 1(e) is a one-mark ‘state’ question in which you name an energy source that will run out (is finite).',
+        markScheme: 'Award the mark for any fossil fuel — coal, oil (including tar sands/oil shale) or natural gas (including shale gas) — or nuclear fuel (uranium). Do not award renewable resources such as wind, solar, hydro, biomass, geothermal, wave or tidal.'
+      },
+      {
+        label: 'Q1(f) — 4 marks',
+        marks: 4,
+        question: 'Question 1(f) is a four-mark ‘explain’ question asking for two reasons why energy demand varies around the world.',
+        markScheme: 'Award up to two marks for each of two different reasons (maximum 4): one mark for the reason and a second for explaining its effect on demand. Valid reasons include: level of economic development/wealth (richer countries and people use more energy for cars, appliances, industry); population size and growth; level of industrialisation and type of economy; climate (heating in cold countries, air-conditioning in hot ones); availability and price of energy resources (countries with cheap, abundant oil or gas often use more); level of technology and energy efficiency; and urbanisation. Two clearly different reasons are needed for full marks.'
+      },
+      {
+        label: 'Q1(g) — 3 marks',
+        marks: 3,
+        question: 'Question 1(g) refers to Figure 1b in your Resource Booklet, which shows a change in where a company’s manufacturing production takes place. This is a three-mark ‘suggest’ question asking for one reason for this shift.',
+        markScheme: 'Award one mark for a reason linked to the resource and up to two further marks for developing it into a chain of explanation (maximum 3). Valid reasons include: lower labour/production costs in emerging economies, so the company cuts costs and increases profit; access to large and growing new markets, so selling cars or goods made locally is cheaper and avoids import costs; government incentives, tax breaks or trade agreements; a large available workforce; improved technology, transport and communications (globalisation) making it easier to produce overseas. Since this system does not hold the figure, judge whether the reason is plausible and developed, not whether it names specific countries.'
+      },
+      {
+        label: 'Q1(h) — 4 marks',
+        marks: 4,
+        question: 'Question 1(h) is about sustainable energy management in a developing or emerging country you have studied. Type the country first, then explain two different things that have been done there to manage energy more sustainably.',
+        markScheme: 'Award up to two marks for each of two different ways (maximum 4): one mark for a valid sustainable management method and a second for developing it with explanation or specific exemplification in the named country. Valid ways include increasing renewable supply (solar, wind, HEP, geothermal, biogas), improving energy efficiency or insulation, government targets, subsidies or incentives, reducing demand, or moving away from coal. Cap at a maximum of 2 marks (one per way) if no developing/emerging country is named or a developed country (such as the UK or USA) is used. A city within a developing/emerging country is acceptable. Judge on whether the country is genuinely developing/emerging and whether each method is a plausible, specific action there.'
+      },
+      {
+        label: 'Q1(i) — 8 marks',
+        marks: 8,
+        question: 'Question 1(i) refers to Figure 1c in your Resource Booklet, which shows graphs of two different theories about the relationship between population and resources (such as food supply). This is an eight-mark ‘analyse’ question asking why the two theories predict such different outcomes for population and resources — analyse the reasons using the graphs.',
+        markScheme: 'Mark holistically against three levels. Level 1 (1–3 marks): Level 1 shows limited understanding of the theories (for example simply naming Malthus or Boserup or describing a graph line) with flawed connections, an unbalanced or incomplete argument and little accurate use of the resource. Level 2 (4–6 marks): Level 2 makes some logical links between the theories and the graphs — for example Malthus’s view that population grows faster (geometrically) than food supply (arithmetically), leading to a crisis when demand overtakes supply and checks such as famine, disease or war; and Boserup’s view that population pressure drives innovation and agricultural intensification so food supply rises to keep pace — using accurate detail from the student’s own resource for some of the argument. Level 3 (7–8 marks): Level 3 builds a balanced, well-developed analysis throughout, explaining WHY each relationship occurs (for example Malthus writing before modern farming technology, fertilisers and the Green Revolution; Boserup basing her ideas on farming in developing countries where growing populations adopted new methods), recognising carrying capacity and that real-world outcomes vary between places, reaching supported judgements, and referring accurately and specifically to the shape and crossing points of the lines on the student’s own figure throughout. Since this system does not hold the figure, judge on the quality of reasoning and how specifically the student describes their own graphs.'
       }
     ]
   }
