@@ -327,23 +327,6 @@
   try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
-  var LEVELS = [
-    { n: 1, emo: '🗂️', t: 'Sector Sort', d: 'Primary, secondary, tertiary or quaternary?' },
-    { n: 2, emo: '⏳', t: 'Clark Fisher Time Machine', d: 'Put countries in development order' },
-    { n: 3, emo: '🔐', t: 'Location Factor Escape Room', d: 'Pick the best site to open each lock' },
-    { n: 4, emo: '🕵️', t: 'Economic Change Detective', d: 'Why is tertiary employment increasing?' },
-    { n: 5, emo: '🛒', t: 'Informal Employment Challenge', d: 'Would this be informal? Pros and cons' },
-    { n: 6, emo: '⚔️', t: 'Malthus vs Boserup Battle', d: 'Throw each idea at the right thinker' },
-    { n: 7, emo: '⚡', t: 'Energy Mix Builder', d: 'Design a secure energy future' },
-    { n: 8, emo: '⏱️', t: 'Renewable or Not?', d: 'Speed round with a time bonus' },
-    { n: 9, emo: '👣', t: 'Carbon Footprint Challenge', d: 'Build, compare and calculate' },
-    { n: 10, emo: '👹', t: 'Exam Survival Arena', d: 'Final boss: Point, Evidence, Explain' }];
-  var BADGES = [
-    { id: 'sector', i: '🏅', t: 'Sector Specialist', d: 'Complete Levels 1–4', ok: function () { return [1, 2, 3, 4].every(isDone); } },
-    { id: 'pop', i: '🧑‍🔬', t: 'Population Expert', d: 'Win the Malthus vs Boserup battle', ok: function () { return isDone(6); } },
-    { id: 'energy', i: '⚡', t: 'Energy Master', d: 'Complete Levels 7–9', ok: function () { return [7, 8, 9].every(isDone); } },
-    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Beat the final boss', ok: function () { return isDone(10); } },
-    { id: 'champ', i: '🏆', t: 'Topic 4 Champion', d: 'All 10 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
   function isDone(n) { return !!S.done[n]; }
   function unlocked(n) { return S.unlockAll || n === 1 || isDone(n - 1) || isDone(n); }
   function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
@@ -384,8 +367,8 @@
   function showMap() {
     run = null; closeModal();
     var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && unlocked(l.n); })[0] || {}).n;
-    $('app').innerHTML = '<div class="hero"><span class="kicker">IGCSE Geography · Topic 4</span>' +
-      '<h1>🎮 Economic Activity &amp; Energy<br>Exam Survival Challenge</h1>' +
+    $('app').innerHTML = '<div class="hero"><span class="kicker">Year 8 Geography · Tropical Storms</span>' +
+      '<h1>🌀 Tropical Storms<br>Exam Survival Challenge</h1>' +
       '<p>A tropical storm is heading for the coast and the SBL Emergency Geography Team needs you! Complete 6 mini-games covering measuring storms, Typhoon Haiyan, managing the risk, why some storms are deadlier than others, and the future of tropical storms. <b>Each level unlocks the next.</b> Earn XP for every first-try correct answer and collect all the badges.</p></div>' +
       '<div class="map">' + LEVELS.map(function (l) {
         var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n];
@@ -423,7 +406,7 @@
       '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
       '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
       newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
-      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Topic 4 Champion!' : ' — reach 90% for Topic 4 Champion.') + '</p>' : '') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Tropical Storms Champion!' : ' — reach 90% for Tropical Storms Champion.') + '</p>' : '') +
       '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>' : '') + '</div>');
     confetti(last || newB.length > 0);
   }
