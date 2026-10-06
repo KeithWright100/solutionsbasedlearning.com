@@ -104,6 +104,29 @@
 
   .study-modal__body { padding: 20px 22px 26px; }
 
+  /* ---- Dependency ratio stats + population pyramid pop-out ---- */
+  .dep-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 16px; }
+  .dep-stat { background: #f4f8fa; border: 1px solid #dde6ea; border-radius: 12px; padding: 12px 10px; text-align: center; }
+  .dep-stat .dep-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); font-variant-numeric: proportional-nums; }
+  .dep-stat .dep-label { font-size: 0.72rem; color: #4a5f6c; margin-top: 2px; line-height: 1.3; }
+  @media (max-width: 560px) { .dep-stats { grid-template-columns: 1fr; } }
+
+  .pyramid-trigger {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: #fff; border: none;
+    padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: 0.86rem; cursor: pointer; margin-bottom: 18px;
+  }
+  .pyramid-trigger:hover { background: var(--teal-dark); }
+
+  .pyramid-modal { max-width: 640px; }
+  .modal-backdrop--top { z-index: 1100; }
+  .pyramid-legend { display: flex; gap: 18px; align-items: center; justify-content: center; margin: 0 0 8px; font-size: 0.82rem; font-weight: 700; color: #33495a; }
+  .pyramid-legend-swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+  .pyramid-chart-wrap { overflow-x: auto; }
+  .pyramid-chart-wrap svg { display: block; margin: 0 auto; }
+  .pyramid-bar { cursor: pointer; }
+  .pyramid-bar:hover, .pyramid-bar:focus { filter: brightness(1.1); }
+  .pyramid-readout { text-align: center; min-height: 1.3em; font-size: 0.84rem; font-weight: 700; color: var(--navy); margin: 10px 0 2px; }
+  .pyramid-source { text-align: center; font-size: 0.72rem; color: #8599a6; margin: 2px 0 0; }
 
   .ps-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
@@ -167,6 +190,7 @@
       <p class="study-modal__paper" id="studyPaper">&nbsp;</p>
     </div>
     <div class="study-modal__body">
+      <div id="studyExtras"></div>
       <div class="ps-grid">
         <div class="ps-box ps-place">
           <h3><span class="ps-swatch"></span>Place</h3>
@@ -189,10 +213,29 @@
   </div>
 </div>
 
+<!-- Population pyramid lightbox -->
+<div class="modal-backdrop modal-backdrop--top" id="pyramidBackdrop">
+  <div class="study-modal pyramid-modal" role="dialog" aria-modal="true" aria-labelledby="pyramidTitle">
+    <div class="study-modal__head">
+      <button type="button" class="study-modal__close" id="pyramidClose" aria-label="Close">&times;</button>
+      <p class="study-modal__eyebrow">Population pyramid</p>
+      <h2 class="study-modal__title" id="pyramidTitle">&nbsp;</h2>
+    </div>
+    <div class="study-modal__body">
+      <div class="pyramid-legend">
+        <span><span class="pyramid-legend-swatch" style="background:#2a78d6"></span>Male</span>
+        <span><span class="pyramid-legend-swatch" style="background:#eb6834"></span>Female</span>
+      </div>
+      <div class="pyramid-chart-wrap" id="pyramidChartWrap"></div>
+      <p class="pyramid-readout" id="pyramidReadout">Tap or click a bar to see its value.</p>
+      <p class="pyramid-source" id="pyramidSource"></p>
+    </div>
+  </div>
+</div>
+
 <script>
 var TOPICS = {
-  population: { label: 'Population', color: '#e63946' },
-  structure: { label: 'Population Structure', color: '#f59e0b' }
+  population: { label: 'Population', color: '#e63946' }
 };
 
 var CASE_STUDIES = [
@@ -262,7 +305,7 @@ var CASE_STUDIES = [
   },
   {
     id: 'gambia-youthful-population',
-    topic: 'structure',
+    topic: 'population',
     coords: [-16.579, 13.4549],
     label: 'The Gambia',
     title: 'A youthful population in The Gambia',
@@ -276,6 +319,7 @@ var CASE_STUDIES = [
     processes: [
       'A total fertility rate of 3.7 children per woman — well above the 2.1 replacement level — keeps adding a large number of children to the base of the pyramid every year.',
       'The population is still growing by around 2.2% a year, among the fastest rates in West Africa.',
+      'The total dependency ratio is around 74 per 100 working-age people — one of the highest in the world — and it is almost entirely a youth story: the youth dependency ratio is 68, versus an old-age dependency ratio of just 6.',
       'Falling child mortality combined with still-high fertility is the classic early DTM pattern: death rates have fallen faster than birth rates (Stage 2, moving toward Stage 3).',
       'Large families remain the cultural and economic norm in many rural communities, where children provide farm labour and old-age security.'
     ],
@@ -289,11 +333,23 @@ var CASE_STUDIES = [
       'Could expanding technical and vocational training turn the youth bulge into a "demographic dividend" — extra workers driving growth — rather than a source of unemployment and outward migration?',
       'Will investment in girls’ secondary education close the rural completion gap, and over time help lower the fertility rate too?',
       'As fertility slowly falls (the under-15 share dropped from 46.8% in 2000 to 39.7% in 2025), how long before The Gambia reaches the falling-dependency-ratio "sweet spot" that fuelled rapid growth in countries like Thailand a generation ago?'
-    ]
+    ],
+    pyramid: {
+      year: 2026,
+      source: 'UN-based population projections, populationpyramids.org',
+      dependency: { total: 73.8, youth: 68.0, old: 5.7 },
+      bands: [
+        { a: '80+', v: 0.4 }, { a: '75–79', v: 0.5 }, { a: '70–74', v: 0.9 }, { a: '65–69', v: 1.5 },
+        { a: '60–64', v: 2.2 }, { a: '55–59', v: 2.6 }, { a: '50–54', v: 2.9 }, { a: '45–49', v: 3.4 },
+        { a: '40–44', v: 4.6 }, { a: '35–39', v: 5.9 }, { a: '30–34', v: 7.2 }, { a: '25–29', v: 8.2 },
+        { a: '20–24', v: 9.4 }, { a: '15–19', v: 11.2 }, { a: '10–14', v: 12.6 }, { a: '5–9', v: 12.8 },
+        { a: '0–4', v: 13.7 }
+      ]
+    }
   },
   {
     id: 'thailand-ageing-population',
-    topic: 'structure',
+    topic: 'population',
     coords: [100.4712, 7.0061],
     label: 'Thailand',
     title: 'An ageing population in Thailand',
@@ -308,7 +364,7 @@ var CASE_STUDIES = [
       'The total fertility rate has fallen to around 1.2–1.3 children per woman — far below the 2.1 replacement level, and one of the lowest in Southeast Asia.',
       'Life expectancy has risen to 77 years, so people now live for decades after retirement.',
       'With deaths now outnumbering births, Thailand’s population is shrinking by about 0.08% a year — a Stage 5 DTM pattern.',
-      'The old-age dependency ratio (19.3%) is catching up fast with the young dependency ratio (23.2%) and is projected to overtake it within years.'
+      'The old-age dependency ratio (24.1 per 100 working-age people) has now overtaken the young dependency ratio (20.3) — for the first time, Thailand has more elderly dependants than child dependants.'
     ],
     power: [
       '34% of Thai seniors live below the poverty line, and nearly half have no savings at all — the state’s means-tested old-age allowance pays only around $16–27 a month.',
@@ -318,9 +374,21 @@ var CASE_STUDIES = [
     ],
     possibilities: [
       'Can Thailand raise productivity and automate enough to offset a shrinking workforce, rather than relying on population growth for economic growth?',
-      'Will stronger pensions and healthcare funding arrive before the old-age dependency ratio overtakes the young dependency ratio, as projected within the next few years?',
+      'Will stronger pensions and healthcare funding arrive quickly enough, now that the old-age dependency ratio has overtaken the young dependency ratio and the gap is set to keep widening?',
       'Could positioning Chiang Mai and other regions as retirement and healthcare hubs turn ageing into an economic opportunity instead of only a cost?'
-    ]
+    ],
+    pyramid: {
+      year: 2026,
+      source: 'UN-based population projections, populationpyramids.org',
+      dependency: { total: 44.4, youth: 20.3, old: 24.1 },
+      bands: [
+        { a: '80+', v: 3.5 }, { a: '75–79', v: 3.0 }, { a: '70–74', v: 4.4 }, { a: '65–69', v: 5.8 },
+        { a: '60–64', v: 6.8 }, { a: '55–59', v: 7.4 }, { a: '50–54', v: 7.3 }, { a: '45–49', v: 7.3 },
+        { a: '40–44', v: 7.2 }, { a: '35–39', v: 6.9 }, { a: '30–34', v: 7.1 }, { a: '25–29', v: 6.8 },
+        { a: '20–24', v: 6.5 }, { a: '15–19', v: 5.9 }, { a: '10–14', v: 5.4 }, { a: '5–9', v: 4.6 },
+        { a: '0–4', v: 4.1 }
+      ]
+    }
   }
 ];
 
@@ -409,6 +477,21 @@ function openStudy(d) {
   fillList('psPower', d.power);
   fillList('psPossibilities', d.possibilities);
 
+  var extras = document.getElementById('studyExtras');
+  if (d.pyramid) {
+    var dep = d.pyramid.dependency;
+    extras.innerHTML =
+      '<div class="dep-stats">' +
+        '<div class="dep-stat"><div class="dep-value">' + dep.total + '</div><div class="dep-label">Total dependency ratio<br>per 100 working-age (15&ndash;64)</div></div>' +
+        '<div class="dep-stat"><div class="dep-value">' + dep.youth + '</div><div class="dep-label">Youth dependency ratio<br>(ages 0&ndash;14)</div></div>' +
+        '<div class="dep-stat"><div class="dep-value">' + dep.old + '</div><div class="dep-label">Old-age dependency ratio<br>(ages 65+)</div></div>' +
+      '</div>' +
+      '<button type="button" class="pyramid-trigger" id="pyramidTriggerBtn">&#128202; View population pyramid</button>';
+    document.getElementById('pyramidTriggerBtn').addEventListener('click', function () { openPyramid(d); });
+  } else {
+    extras.innerHTML = '';
+  }
+
   studyBackdrop.classList.add('open');
   document.getElementById('studyClose').focus();
   document.addEventListener('keydown', onStudyKeydown);
@@ -424,6 +507,83 @@ function onStudyKeydown(e) { if (e.key === 'Escape') closeStudy(); }
 
 document.getElementById('studyClose').addEventListener('click', closeStudy);
 studyBackdrop.addEventListener('click', function (e) { if (e.target === studyBackdrop) closeStudy(); });
+
+// ---- Population pyramid pop-out ----
+var pyramidBackdrop = document.getElementById('pyramidBackdrop');
+var pyramidLastFocused = null;
+var PYR_MALE = '#2a78d6';
+var PYR_FEMALE = '#eb6834';
+
+function openPyramid(d) {
+  pyramidLastFocused = document.activeElement;
+  document.getElementById('pyramidTitle').textContent = d.label + ' — population pyramid (' + d.pyramid.year + ')';
+  document.getElementById('pyramidSource').textContent = 'Each age band split evenly between male and female for clarity. Source: ' + d.pyramid.source + '.';
+  document.getElementById('pyramidReadout').textContent = 'Tap or click a bar to see its value.';
+  renderPyramidSVG(document.getElementById('pyramidChartWrap'), d.pyramid.bands);
+
+  pyramidBackdrop.classList.add('open');
+  document.getElementById('pyramidClose').focus();
+  document.addEventListener('keydown', onPyramidKeydown);
+}
+
+function closePyramid() {
+  pyramidBackdrop.classList.remove('open');
+  document.removeEventListener('keydown', onPyramidKeydown);
+  if (pyramidLastFocused) pyramidLastFocused.focus();
+}
+
+function onPyramidKeydown(e) { if (e.key === 'Escape') closePyramid(); }
+
+document.getElementById('pyramidClose').addEventListener('click', closePyramid);
+pyramidBackdrop.addEventListener('click', function (e) { if (e.target === pyramidBackdrop) closePyramid(); });
+
+function renderPyramidSVG(wrap, bands) {
+  var width = 600, centerGutter = 58, topMargin = 6, rowHeight = 18, barThickness = 13;
+  var bottomMargin = 24;
+  var sideWidth = (width - centerGutter) / 2;
+  var height = topMargin + bands.length * rowHeight + bottomMargin;
+  var maxHalf = 0;
+  bands.forEach(function (b) { var h = b.v / 2; if (h > maxHalf) maxHalf = h; });
+
+  var cx = width / 2;
+  var parts = [];
+
+  // gridlines at 0 / half / max on each side
+  [0, 0.5, 1].forEach(function (f) {
+    var gx1 = cx - sideWidth * f, gx2 = cx + sideWidth * f;
+    parts.push('<line x1="' + gx1 + '" y1="' + topMargin + '" x2="' + gx1 + '" y2="' + (height - bottomMargin) + '" stroke="#e1e0d9" stroke-width="1"></line>');
+    parts.push('<line x1="' + gx2 + '" y1="' + topMargin + '" x2="' + gx2 + '" y2="' + (height - bottomMargin) + '" stroke="#e1e0d9" stroke-width="1"></line>');
+  });
+
+  bands.forEach(function (b, i) {
+    var y = topMargin + i * rowHeight + (rowHeight - barThickness) / 2;
+    var half = b.v / 2;
+    var w = maxHalf > 0 ? (half / maxHalf) * (sideWidth - 6) : 0;
+    var maleX = cx - centerGutter / 2 - w;
+    var femaleX = cx + centerGutter / 2;
+    var title = '<title>' + b.a + ': ' + b.v.toFixed(1) + '% of the population (' + half.toFixed(1) + '% each, male/female)</title>';
+
+    parts.push('<rect class="pyramid-bar" data-age="' + b.a + '" data-sex="Male" data-val="' + half.toFixed(1) +
+      '" x="' + maleX + '" y="' + y + '" width="' + w + '" height="' + barThickness + '" rx="3" fill="' + PYR_MALE + '">' + title + '</rect>');
+    parts.push('<rect class="pyramid-bar" data-age="' + b.a + '" data-sex="Female" data-val="' + half.toFixed(1) +
+      '" x="' + femaleX + '" y="' + y + '" width="' + w + '" height="' + barThickness + '" rx="3" fill="' + PYR_FEMALE + '">' + title + '</rect>');
+    parts.push('<text x="' + cx + '" y="' + (y + barThickness - 2) + '" text-anchor="middle" font-size="9.5" font-family="Inter, sans-serif" font-weight="600" fill="#52514e">' + b.a + '</text>');
+  });
+
+  var axisY = height - bottomMargin + 14;
+  parts.push('<text x="' + (cx - sideWidth) + '" y="' + axisY + '" text-anchor="start" font-size="10" font-family="Inter, sans-serif" fill="#8599a6">' + maxHalf.toFixed(1) + '%</text>');
+  parts.push('<text x="' + cx + '" y="' + axisY + '" text-anchor="middle" font-size="10" font-family="Inter, sans-serif" fill="#8599a6">0%</text>');
+  parts.push('<text x="' + (cx + sideWidth) + '" y="' + axisY + '" text-anchor="end" font-size="10" font-family="Inter, sans-serif" fill="#8599a6">' + maxHalf.toFixed(1) + '%</text>');
+
+  wrap.innerHTML = '<svg viewBox="0 0 ' + width + ' ' + height + '" width="' + width + '" height="' + height + '" role="img" aria-label="Population pyramid">' + parts.join('') + '</svg>';
+
+  wrap.querySelectorAll('.pyramid-bar').forEach(function (bar) {
+    bar.addEventListener('click', function () {
+      document.getElementById('pyramidReadout').textContent =
+        bar.getAttribute('data-sex') + ', ' + bar.getAttribute('data-age') + ': ' + bar.getAttribute('data-val') + '% of the population';
+    });
+  });
+}
 
 </script>
 
