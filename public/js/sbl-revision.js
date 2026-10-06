@@ -408,6 +408,95 @@
     reportWindow.document.close();
   }
 
+  /* ---------------- Photo-of-handwriting answer attach ----------------
+     Students can attach a photo of a handwritten answer instead of
+     typing. The photo is read client-side with Tesseract.js (loaded
+     from a CDN only the first time a student actually uses this, so
+     typing-only students never pay the cost) and the extracted text is
+     dropped into the existing answer textarea for the student to check
+     and correct — it is never auto-submitted. Handwriting recognition
+     is not reliable, so the student always reviews the text before
+     pressing "Submit for Marking" as normal. No change to the marking
+     pipeline itself.
+     ------------------------------------------------------------------ */
+
+  var TESSERACT_CDN_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+  var tesseractLoadPromise = null;
+
+  function loadTesseract() {
+    if (window.Tesseract) return Promise.resolve();
+    if (tesseractLoadPromise) return tesseractLoadPromise;
+    tesseractLoadPromise = new Promise(function (resolve, reject) {
+      var script = document.createElement('script');
+      script.src = TESSERACT_CDN_URL;
+      script.onload = function () { resolve(); };
+      script.onerror = function () {
+        tesseractLoadPromise = null;
+        reject(new Error('Could not load the handwriting reader.'));
+      };
+      document.head.appendChild(script);
+    });
+    return tesseractLoadPromise;
+  }
+
+  function renderPhotoAttachUI(mountId, textareaId) {
+    var mount = document.getElementById(mountId);
+    if (!mount) return;
+
+    mount.innerHTML =
+      '<button type="button" id="' + mountId + 'Btn" ' +
+      'style="background:#fff; border:1px dashed var(--lh-border, #d9dde3); border-radius:8px; padding:0.5rem 0.9rem; font-size:0.85rem; font-family:inherit; cursor:pointer; color:#33495a;">' +
+      '📷 Attach a photo of your handwritten answer instead</button>' +
+      '<input type="file" accept="image/*" capture="environment" id="' + mountId + 'File" style="display:none;">' +
+      '<div id="' + mountId + 'Status"></div>';
+
+    var btn = document.getElementById(mountId + 'Btn');
+    var fileInput = document.getElementById(mountId + 'File');
+    var status = document.getElementById(mountId + 'Status');
+
+    btn.addEventListener('click', function () { fileInput.click(); });
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+
+      var previewUrl = URL.createObjectURL(file);
+      status.innerHTML =
+        '<div style="display:flex; gap:10px; align-items:flex-start; margin-top:0.5rem;">' +
+        '<img src="' + previewUrl + '" alt="Preview of the attached photo" style="width:64px; height:64px; object-fit:cover; border-radius:6px; border:1px solid var(--lh-border, #d9dde3); flex:none;">' +
+        '<p class="sbl-progress-note" style="margin:0;" role="status">Reading your handwriting… this can take a little while, especially the first time.</p>' +
+        '</div>';
+      announce('Reading your handwriting, please wait.');
+      btn.disabled = true;
+
+      loadTesseract()
+        .then(function () { return window.Tesseract.recognize(file, 'eng'); })
+        .then(function (result) {
+          var text = ((result && result.data && result.data.text) || '').trim();
+          btn.disabled = false;
+          if (!text) {
+            status.innerHTML =
+              '<p class="sbl-progress-note" style="margin-top:0.5rem; color:#9a3b3b;">We couldn’t read any text in that photo. Try a clearer, well-lit, straight-on photo — or type your answer instead.</p>';
+            announce('We could not read any text in that photo. Please try again or type your answer.');
+            return;
+          }
+          var textarea = document.getElementById(textareaId);
+          textarea.value = textarea.value.trim() ? textarea.value.trim() + '\n\n' + text : text;
+          status.innerHTML =
+            '<p class="sbl-progress-note" style="margin-top:0.5rem;">We’ve added what we could read from your photo into the box above — <strong>check it over and fix anything that’s wrong</strong> before you submit, as handwriting reading isn’t perfect.</p>';
+          announce('We have read your photo. Please check the text in the answer box before submitting, as handwriting reading is not perfect.');
+          textarea.focus();
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          console.error('Photo answer OCR failed:', err);
+          status.innerHTML =
+            '<p class="sbl-progress-note" style="margin-top:0.5rem; color:#9a3b3b;">Sorry, we couldn’t read that photo right now. Please check your internet connection and try again, or type your answer instead.</p>';
+          announce('We could not read that photo. Please try again or type your answer.');
+        });
+    });
+  }
+
   function renderQuestionWorkspace() {
     var topic = topics[activeTopicIndex];
     var q = topic.questions[activeQuestionIndex];
@@ -418,10 +507,13 @@
     html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(q.question) + '</strong> [' + q.marks + ' mark' + (q.marks === 1 ? '' : 's') + ']</p>';
     html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker — there is nothing to copy or paste.</p>';
     html += '<textarea id="sblRevisionAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
+    html += '<div id="sblRevisionPhotoAttach" style="margin-top:0.6rem;"></div>';
     html += '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action" id="sblRevisionSubmit">Submit for Marking &rarr;</button></div>';
     html += '<div id="sblRevisionFeedbackSection"></div>';
 
     wrap.innerHTML = html;
+
+    renderPhotoAttachUI('sblRevisionPhotoAttach', 'sblRevisionAnswer');
 
     document.getElementById('sblRevisionSubmit').addEventListener('click', function () {
       var answerBox = document.getElementById('sblRevisionAnswer');
