@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tropical Storms: Exam Survival Challenge — Year 8 Geography Games</title>
+<meta name="description" content="Year 8 Geography revision adventure: 6 mini-games on measuring storms, Typhoon Haiyan (hazard, exposure, vulnerability), the 3Ps of management, why some storms are deadlier than others, and the future of tropical storms.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ks3" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Storm Survival</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 6 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-ks3-tropicalstorms-survival-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, emo: '🗂️', t: 'Sector Sort', d: 'Primary, secondary, tertiary or quaternary?' },
+    { n: 2, emo: '⏳', t: 'Clark Fisher Time Machine', d: 'Put countries in development order' },
+    { n: 3, emo: '🔐', t: 'Location Factor Escape Room', d: 'Pick the best site to open each lock' },
+    { n: 4, emo: '🕵️', t: 'Economic Change Detective', d: 'Why is tertiary employment increasing?' },
+    { n: 5, emo: '🛒', t: 'Informal Employment Challenge', d: 'Would this be informal? Pros and cons' },
+    { n: 6, emo: '⚔️', t: 'Malthus vs Boserup Battle', d: 'Throw each idea at the right thinker' },
+    { n: 7, emo: '⚡', t: 'Energy Mix Builder', d: 'Design a secure energy future' },
+    { n: 8, emo: '⏱️', t: 'Renewable or Not?', d: 'Speed round with a time bonus' },
+    { n: 9, emo: '👣', t: 'Carbon Footprint Challenge', d: 'Build, compare and calculate' },
+    { n: 10, emo: '👹', t: 'Exam Survival Arena', d: 'Final boss: Point, Evidence, Explain' }];
+  var BADGES = [
+    { id: 'sector', i: '🏅', t: 'Sector Specialist', d: 'Complete Levels 1–4', ok: function () { return [1, 2, 3, 4].every(isDone); } },
+    { id: 'pop', i: '🧑‍🔬', t: 'Population Expert', d: 'Win the Malthus vs Boserup battle', ok: function () { return isDone(6); } },
+    { id: 'energy', i: '⚡', t: 'Energy Master', d: 'Complete Levels 7–9', ok: function () { return [7, 8, 9].every(isDone); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Beat the final boss', ok: function () { return isDone(10); } },
+    { id: 'champ', i: '🏆', t: 'Topic 4 Champion', d: 'All 10 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n - 1) || isDone(n); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n * (100 / LEVELS.length)) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && unlocked(l.n); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">IGCSE Geography · Topic 4</span>' +
+      '<h1>🎮 Economic Activity &amp; Energy<br>Exam Survival Challenge</h1>' +
+      '<p>A tropical storm is heading for the coast and the SBL Emergency Geography Team needs you! Complete 6 mini-games covering measuring storms, Typhoon Haiyan, managing the risk, why some storms are deadlier than others, and the future of tropical storms. <b>Each level unlocks the next.</b> Earn XP for every first-try correct answer and collect all the badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n];
+        return '<button type="button" class="lvcard' + (d ? ' done' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (u ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : u ? '' : '🔒') + '</span><span class="num">Level ' + l.n + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Topic 4 Champion!' : ' — reach 90% for Topic 4 Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>' : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  var LEVELS = [
+    { n: 1, emo: '📡', t: 'Measure It!', d: 'The Saffir-Simpson Scale — and why category isn’t everything' },
+    { n: 2, emo: '🌀', t: 'Hazard, Exposure or Vulnerability?', d: 'Why Typhoon Haiyan became such a disaster' },
+    { n: 3, emo: '🧱', t: 'The 3Ps', d: 'Prediction, Preparation or Protection?' },
+    { n: 4, emo: '📖', t: 'Key Terms Match-Up', d: 'Wealth, infrastructure, governance and more' },
+    { n: 5, emo: '⚖️', t: 'Why Was It Deadlier?', d: 'Comparing Odisha, the Philippines and the USA' },
+    { n: 6, emo: '🔮', t: 'Tropical Storms in 2050', d: 'Will frequency, intensity or distribution change?' }];
+
+  var BADGES = [
+    { id: 'tracker', i: '📡', t: 'Storm Tracker', d: 'Complete Levels 1–2', ok: function () { return [1, 2].every(isDone); } },
+    { id: 'manager', i: '🧱', t: 'Risk Manager', d: 'Complete Level 3', ok: function () { return isDone(3); } },
+    { id: 'scholar', i: '📖', t: 'Geography Scholar', d: 'Complete Levels 4–5', ok: function () { return [4, 5].every(isDone); } },
+    { id: 'forecaster', i: '🔮', t: 'Future Forecaster', d: 'Complete Level 6', ok: function () { return isDone(6); } },
+    { id: 'champ', i: '🏆', t: 'Tropical Storms Champion', d: 'All 6 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+
+  var ZHAZ = [
+    { id: 'hazard', label: '🌪️ Hazard', cls: 'zr', sub: 'The physical event itself' },
+    { id: 'exposure', label: '📍 Exposure', cls: 'zc2', sub: 'People/places in the storm’s path' },
+    { id: 'vulnerability', label: '🛡️ Vulnerability', cls: 'zc4', sub: 'How able people are to cope' }];
+
+  var ZPPP = [
+    { id: 'prediction', label: '🔭 Prediction', cls: 'zc3', sub: 'Knowing when, where, how powerful' },
+    { id: 'preparation', label: '🎒 Preparation', cls: 'zc2', sub: 'Getting ready before it arrives' },
+    { id: 'protection', label: '🧱 Protection', cls: 'zc1', sub: 'Physical measures to reduce damage' }];
+
+  var ZFUT = [
+    { id: 'frequency', label: '⏱️ Frequency', cls: 'zc3', sub: 'How often storms form' },
+    { id: 'intensity', label: '💪 Intensity', cls: 'zr', sub: 'How powerful storms are' },
+    { id: 'distribution', label: '🌍 Distribution', cls: 'zc4', sub: 'Where storms are found' }];
+
+  /* L1 — Measure It! (Saffir-Simpson + category isn't everything) */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: 'How do we measure and track a tropical storm?', how: 'Answer each question. Read the feedback carefully — some of these are tricky!',
+        build: function (el, next) {
+          mcq(el, [
+            { q: 'A storm has sustained winds of 100 knots. Using the Saffir-Simpson Scale, which category is it?', o: ['Category 1 (64–82 kt)', 'Category 2 (83–95 kt)', 'Category 3 (96–112 kt)', 'Category 4 (113–136 kt)'], c: 2, f: '100 knots falls in the 96–112 kt range — Category 3, “devastating damage”.' },
+            { q: 'Which of these is generally true?', o: ['Lower air pressure usually means a more intense storm', 'Higher air pressure usually means a more intense storm', 'Air pressure has no link to storm intensity', 'Air pressure only affects rainfall, not wind'], c: 0, f: 'Lower pressure at the centre of a storm is linked to stronger, more intense storms.' },
+            { q: 'Which of these is NOT normally used to measure or track a tropical storm?', o: ['Satellite imagery', 'Forecast track', 'Seismometer', 'Wind speed sensors'], c: 2, f: 'A seismometer detects earthquakes — meteorologists use satellites, forecast tracks and wind/pressure data instead.' },
+            { q: 'Storm A is Category 5, small, moving quickly, and hits a sparsely populated coastline with 100mm of rainfall. Storm B is Category 2, huge, moving very slowly, hits a major city, with 700mm of rainfall and a large storm surge. Which is more dangerous overall?', o: ['Storm A — it’s Category 5', 'Storm B — its size, slow speed, location, rainfall and storm surge all increase the risk', 'They are equally dangerous', 'It can’t be worked out from this information'], c: 1, f: 'A lower category storm can still cause a bigger disaster if it is huge, slow-moving, hits a populated area and brings extreme rainfall and storm surge.' },
+            { q: 'Explain why knowing the category of a tropical storm is not enough to know how dangerous it will be.', o: ['Category only measures wind speed — not rainfall, storm surge or who is affected', 'Categories are not based on any real data', 'Categories always underestimate how dangerous a storm is', 'Categories only apply to hurricanes, not typhoons or cyclones'], c: 0, f: 'The Saffir-Simpson Scale measures wind speed only. Rainfall, storm surge, the shape of the land and who is in the storm’s path all matter too.' }
+          ], next);
+        } }
+    ]);
+  };
+
+  /* L2 — Hazard, Exposure or Vulnerability? (Typhoon Haiyan) */
+  LV[2] = function (root) {
+    var cards = [
+      { t: 'Winds of around 170 knots at peak — one of the most powerful typhoons ever recorded at landfall', a: ['hazard'], why: 'This describes the physical power of the storm itself — that’s the Hazard.' },
+      { t: 'A storm surge of 5–7 metres above normal sea level hit the Tacloban area', a: ['hazard'], why: 'The storm surge is a physical hazard produced by the typhoon.' },
+      { t: 'Heavy rainfall and flooding affected the islands of Leyte and Samar', a: ['hazard'], why: 'Rainfall and flooding are physical hazards of the storm.' },
+      { t: 'Large, destructive waves battered the coastline', a: ['hazard'], why: 'Large waves are part of the physical hazard, not about who was affected.' },
+      { t: 'Large numbers of people lived close to the coast around Tacloban', a: ['exposure'], why: 'This is about WHO/WHAT was in the storm’s path — that’s Exposure.' },
+      { t: 'The Philippines regularly lies in the path of tropical cyclones', a: ['exposure'], why: 'Being in a location that storms often pass through is Exposure.' },
+      { t: 'Tacloban is a coastal city directly in Haiyan’s track', a: ['exposure'], why: 'A place located directly in the storm’s path is Exposure.' },
+      { t: 'Many coastal communities depended on fishing, so lived right by the sea', a: ['exposure'], why: 'Living close to the hazard because of livelihoods is Exposure.' },
+      { t: 'Some poorer families lived in homes built from lightweight materials that couldn’t withstand the winds', a: ['vulnerability'], why: 'This is about how ABLE people were to cope — that’s Vulnerability.' },
+      { t: 'Some residents didn’t fully understand what “storm surge” meant, so underestimated the danger', a: ['vulnerability'], why: 'Not understanding the risk reduces people’s ability to protect themselves — Vulnerability.' },
+      { t: 'Not everyone had a private vehicle or enough money to evacuate', a: ['vulnerability'], why: 'Limited resources to respond to a hazard is Vulnerability.' },
+      { t: 'Damaged roads, airports and communications made it harder for aid to reach people', a: ['vulnerability'], why: 'This made the disaster worse by reducing the ability to respond — Vulnerability.' }
+    ];
+    stages(root, [
+      { title: 'Why did Typhoon Haiyan become such a disaster?', how: 'Sort each fact about Typhoon Haiyan into Hazard, Exposure or Vulnerability. Drag a card into a box — or tap a card, then tap a box.',
+        build: function (el, next) { sortGame(el, { zones: ZHAZ, cards: cards }, next); } },
+      { title: 'Quick check', build: function (el, next) {
+        mcq(el, [
+          { q: 'Which definition best matches “Exposure”?', o: ['The natural event or process that could cause harm', 'People, buildings and infrastructure located where the hazard could affect them', 'How likely people are to be harmed and how able they are to cope', 'How powerful a storm is on the Saffir-Simpson Scale'], c: 1, f: 'Exposure = people/places located where the hazard could reach them.' },
+          { q: 'Overall, was Typhoon Haiyan such a devastating disaster because of the storm’s strength, or because of exposure and vulnerability in the Philippines?', o: ['Only the storm’s strength mattered', 'A combination of an extremely powerful hazard AND high exposure/vulnerability', 'Only exposure and vulnerability mattered — the storm wasn’t that strong', 'None of these factors affected the outcome'], c: 1, f: 'Haiyan was genuinely one of the most powerful storms ever recorded — but exposure and vulnerability in the Philippines turned that hazard into such a severe disaster.' }
+        ], next);
+      } }
+    ]);
+  };
+
+  /* L3 — The 3Ps: Prediction, Preparation or Protection? */
+  LV[3] = function (root) {
+    var cards = [
+      { t: 'Improve weather forecasting equipment', a: ['prediction'], why: 'Forecasting is about knowing when/where/how powerful a storm will be — Prediction.' },
+      { t: 'Satellites, computer forecasting and aircraft observations', a: ['prediction'], why: 'These are all tools used to predict a storm’s path and strength.' },
+      { t: 'Tracking storm paths over time', a: ['prediction'], why: 'Tracking a storm is part of Prediction.' },
+      { t: 'Mobile-phone early-warning system', a: ['preparation'], why: 'Warning people so they can get ready is Preparation.' },
+      { t: 'Create evacuation routes and signs', a: ['preparation'], why: 'Planning how people will get to safety is Preparation.' },
+      { t: 'Public education campaign', a: ['preparation'], why: 'Teaching people what to do before a storm arrives is Preparation.' },
+      { t: 'Emergency food and water supplies', a: ['preparation'], why: 'Stocking supplies in advance is Preparation.' },
+      { t: 'Train emergency-response teams', a: ['preparation'], why: 'Getting responders ready before the storm hits is Preparation.' },
+      { t: 'Build a coastal sea wall', a: ['protection'], why: 'A physical structure that reduces damage is Protection.' },
+      { t: 'Strengthen homes in vulnerable communities', a: ['protection'], why: 'Making buildings physically stronger is Protection.' },
+      { t: 'Strengthen 20 schools to use as shelters', a: ['protection', 'preparation'], alt: 'Also fine as Preparation — getting shelters ready in advance — but strengthening a building is a physical measure, so Protection fits best.', why: 'This is mainly a physical measure to reduce damage — Protection (Preparation is also a reasonable answer).' },
+      { t: 'Improve drainage', a: ['protection'], why: 'Better drainage is a physical measure that reduces flood damage — Protection.' }
+    ];
+    stages(root, [
+      { title: 'San Isidro has $100 million to prepare for future tropical storms', how: 'Sort each strategy into Prediction, Preparation or Protection.',
+        build: function (el, next) { sortGame(el, { zones: ZPPP, cards: cards }, next); } },
+      { title: 'Quick check', build: function (el, next) {
+        mcq(el, [
+          { q: '40% of San Isidro’s population doesn’t own a car. Which P does this mainly challenge?', o: ['Prediction — forecasting becomes impossible', 'Preparation — an evacuation plan may not work if people can’t travel', 'Protection — sea walls will fail', 'None of the Ps are affected'], c: 1, f: 'An evacuation plan (Preparation) depends on people being able to actually reach safety — car ownership matters.' },
+          { q: 'If San Isidro only had $10 million instead of $100 million, which strategies would likely become impossible?', o: ['Cheap warning systems only', 'Expensive measures like sea walls and strengthening every home', 'Nothing would change', 'Only Prediction strategies would be affected'], c: 1, f: 'Large-scale physical Protection measures (sea walls, strengthening every home) are expensive — these become hardest to afford with a smaller budget.' }
+        ], next);
+      } }
+    ]);
+  };
+
+  /* L4 — Key Terms Match-Up */
+  LV[4] = function (root) {
+    var terms = [
+      { term: 'Wealth', def: 'The amount of money and resources available to people and governments to prepare for, respond to and recover from a tropical storm.' },
+      { term: 'Infrastructure', def: 'The basic systems and structures a country needs to function, such as roads, hospitals, electricity, drainage and communications.' },
+      { term: 'Technology', def: 'The equipment and systems used to monitor, predict and communicate information about tropical storms, such as satellites, radar and warning systems.' },
+      { term: 'Governance', def: 'How effectively a country is organised and managed by its government, including organising evacuations, enforcing building rules and coordinating emergency services.' },
+      { term: 'Education', def: 'How well people understand tropical-storm risks and know how to respond to warnings and evacuation instructions.' },
+      { term: 'Inequality', def: 'Differences between groups of people in their wealth, opportunities and access to resources — meaning some people may be much more vulnerable than others within the same country.' },
+      { term: 'Accessibility', def: 'How easily people can reach safety and emergency services, and how easily rescuers and aid can reach affected communities.' }
+    ];
+    var qs = terms.map(function (item) {
+      var decoys = pick(terms.filter(function (t) { return t.term !== item.term; }), 3).map(function (t) { return t.def; });
+      return { q: 'What does <b>“' + item.term + '”</b> mean when studying the impacts of tropical storms?', o: [item.def].concat(decoys), c: 0, f: item.def };
+    });
+    stages(root, [
+      { title: 'Key terms match-up', how: 'These terms come up again and again when comparing why some tropical storms are deadlier than others. Pick the correct definition for each.',
+        build: function (el, next) { mcq(el, qs, next); } }
+    ]);
+  };
+
+  /* L5 — Why Was It Deadlier? (Odisha/Phailin, Haiyan, Ian) */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: 'Comparing Odisha (India), the Philippines and the USA', how: 'In 1999, around 10,000 people died in the Odisha Super Cyclone, India. In 2013, the similarly powerful Cyclone Phailin hit the same region — but fewer than 40 people died. Also in 2013, Typhoon Haiyan killed over 6,300 in the Philippines. In 2022, Hurricane Ian hit the wealthy, well-prepared USA and still caused over $100 billion in damage.',
+        build: function (el, next) {
+          mcq(el, [
+            { q: 'What was the MAIN reason so many fewer people died in Phailin (2013) compared with the 1999 Odisha cyclone, even though both were extremely powerful?', o: ['Phailin was a much weaker storm', 'India invested heavily in forecasting, shelters and evacuation planning after 1999', 'The 2013 cyclone missed all populated areas', 'Odisha built a sea wall around its entire coastline'], c: 1, f: 'A stronger storm does not automatically mean more deaths — improvements in forecasting, shelters, evacuation and governance dramatically reduced deaths between 1999 and 2013.' },
+            { q: 'Typhoon Haiyan killed over 6,300 people despite warnings being issued in advance. What does this best show?', o: ['Warnings are pointless and should be stopped', 'Knowing a storm is coming doesn’t automatically mean everyone can protect themselves', 'The Philippines had no warning system at all', 'Haiyan was not actually a dangerous storm'], c: 1, f: 'Some residents didn’t fully understand “storm surge”, and not everyone had the money or transport to evacuate — a warning alone isn’t enough.' },
+            { q: 'Hurricane Ian hit one of the world’s wealthiest countries with advanced forecasting technology, yet still caused over $100 billion in damage and many deaths, especially among older people. What does this best show?', o: ['Wealth and technology always prevent disasters', 'Even a wealthy country with advanced technology cannot make every individual equally safe', 'The USA actually has poor forecasting', 'Rich countries are never seriously affected by tropical storms'], c: 1, f: 'National wealth doesn’t make everyone equally safe — inequality, age and accessibility can leave particular groups vulnerable even in a high-income country.' },
+            { q: 'Which of these increases a country’s EXPOSURE to tropical storms?', o: ['Large numbers of people living close to the coast', 'Having an early-warning system', 'Having strong building regulations', 'Having a wealthy economy'], c: 0, f: 'Exposure is about people/places being located where the hazard can reach them — living close to the coast increases exposure.' },
+            { q: 'What made it especially hard for rescuers to reach some people after Typhoon Haiyan?', o: ['The Philippines consists of 7,000+ islands, and roads/communications were badly damaged', 'The storm was not actually that powerful', 'Nobody needed emergency help', 'The Philippines has no coastline'], c: 0, f: 'More than 7,000 islands, plus damaged roads, airports and communications, made reaching the worst-affected areas very difficult.' },
+            { q: 'Why did many of Hurricane Ian’s victims in the USA tend to be older people?', o: ['Older people were more likely to ignore warnings on purpose', 'Older people may have difficulty travelling, need medical equipment, or be reluctant to leave home', 'Hurricanes specifically target older people', 'Older people live further from the coast than everyone else'], c: 1, f: 'Age can increase individual vulnerability even within a wealthy country — mobility, health conditions and transport all matter.' }
+          ], next);
+        } }
+    ]);
+  };
+
+  /* L6 — Tropical Storms in 2050 (Frequency, Intensity, Distribution) */
+  LV[6] = function (root) {
+    var cards = [
+      { t: 'There is no obvious overall upward trend in how often tropical storms form worldwide', a: ['frequency'], why: 'This is about HOW OFTEN storms form — Frequency.' },
+      { t: 'Records show fluctuations in hurricanes reaching the USA, but no clear increase over time', a: ['frequency'], why: 'Fluctuating but with no clear trend is still about Frequency.' },
+      { t: 'The number of severe Category 4 and 5 storms is expected to rise', a: ['intensity'], why: 'This is about HOW POWERFUL storms are — Intensity.' },
+      { t: 'Storms are expected to become 2–11% more intense by 2100', a: ['intensity'], why: 'A change in storm power is Intensity.' },
+      { t: 'The ocean has absorbed about 90% of the extra heat from global warming, fuelling stronger storms', a: ['intensity'], why: 'This explains WHY storms may become more powerful — Intensity.' },
+      { t: '“Rapid intensification” needs a wind-speed increase of 35mph or more', a: ['intensity'], why: 'This is a measure of how quickly a storm’s power increases — Intensity.' },
+      { t: 'The South China Sea and Eastern China are expected to see an increase in storms', a: ['distribution'], why: 'This is about WHERE storms are found — Distribution.' },
+      { t: 'The Arabian Peninsula (Yemen, Oman) is expected to see a decrease in storms', a: ['distribution'], why: 'A regional change in where storms occur is Distribution.' },
+      { t: 'The Caribbean (Jamaica, Cuba, Haiti) is expected to see an increase in storms', a: ['distribution'], why: 'This is a regional/location change — Distribution.' },
+      { t: 'The Philippines and Vietnam are expected to see a decrease in storms', a: ['distribution'], why: 'A regional decrease is still about Distribution.' }
+    ];
+    stages(root, [
+      { title: 'Will tropical storms cause bigger disasters in the future?', how: 'Sort each fact into Frequency, Intensity or Distribution.',
+        build: function (el, next) { sortGame(el, { zones: ZFUT, cards: cards }, next); } },
+      { title: 'Quick check', build: function (el, next) {
+        mcq(el, [
+          { q: 'Based on the evidence, which statement is most accurate about the future of tropical storms?', o: ['Storms will become much more frequent everywhere', 'Overall frequency may not change much, but the most severe storms (Category 4/5) are expected to become more common, and some regions will see more storms while others see fewer', 'Nothing about tropical storms is expected to change', 'All regions will see the same increase in storms'], c: 1, f: 'The clearest evidence points to little overall change in frequency, a rise in the most intense storms, and regional shifts in distribution — not a simple "more storms everywhere" picture.' },
+          { q: 'Even if the frequency of storms doesn’t change much, why might future disasters still get worse?', o: ['Because exposure and vulnerability (more people, more coastal development) can increase even if storms don’t', 'Because this is impossible — disasters can only get worse if storms become more frequent', 'Because the Saffir-Simpson Scale will change', 'Because governments will stop preparing for storms'], c: 0, f: 'Remember Hazard, Exposure and Vulnerability from Level 2 — rising population, coastal development and inequality can all increase disaster risk even without more storms.' }
+        ], next);
+      } }
+    ]);
+  };
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
