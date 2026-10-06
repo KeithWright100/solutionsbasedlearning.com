@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Was Bangkok the Venice of the East? — 4 Ps Challenge — IB Geography Games — SBL</title>
+<meta name="description" content="KS3 Geography Year 7 enquiry game: sort clues about old Bangkok and modern Venice into Place, Processes, Power and Possibilities, justify your thinking, rate your confidence, then decide — was Bangkok really the Venice of the East?">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --gold: #f59e0b;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --c-place: #2563eb; --c-processes: #0f766e; --c-power: #7c3aed; --c-possibilities: #d97706;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 0% 0%, rgba(37,99,235,0.08), transparent 40%), radial-gradient(circle at 100% 10%, rgba(0,184,176,0.12), transparent 35%), linear-gradient(180deg, #f6f9fa, #eaf1f3); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px 26px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.95), rgba(15,58,92,0.9)); position: relative; overflow: hidden; }
+  .hero .kicker { display: inline-block; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; line-height: 1.15; }
+  .hero p { color: rgba(255,255,255,0.88); max-width: 780px; margin-top: 8px; line-height: 1.55; }
+  .hero .facts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .hero .facts span { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 11px; font-size: 0.78rem; font-weight: 700; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .step { padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .step.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.35); }
+
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; scroll-margin-top: 80px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.86rem; line-height: 1.35; font-weight: 650; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); font-size: 0.68rem; margin-bottom: 3px; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-zones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 150px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.72rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .z-place { border-color: var(--c-place); } .z-place h4 { color: var(--c-place); }
+  .z-processes { border-color: var(--c-processes); } .z-processes h4 { color: var(--c-processes); }
+  .z-power { border-color: var(--c-power); } .z-power h4 { color: var(--c-power); }
+  .z-possibilities { border-color: var(--c-possibilities); } .z-possibilities h4 { color: var(--c-possibilities); }
+
+  /* justify step */
+  .jcard { border: 2px solid var(--line); border-left-width: 6px; border-radius: 14px; padding: 12px 14px; background: #fff; margin-bottom: 12px; }
+  .jcard .jwho { font-size: 0.68rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; }
+  .jcard .jtext { font-weight: 700; margin: 3px 0 10px; line-height: 1.42; font-size: 0.94rem; }
+  .jcard label { display: block; font-size: 0.76rem; font-weight: 800; color: var(--muted); margin-bottom: 4px; }
+  .jcard input[type="text"] { width: 100%; padding: 9px 10px; border-radius: 9px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.88rem; margin-bottom: 10px; }
+  .conf-row { display: flex; gap: 6px; margin-bottom: 4px; }
+  .conf-btn { flex: 1; border: 2px solid var(--line); background: #f8fafc; border-radius: 10px; padding: 7px 6px; font-size: 0.78rem; font-weight: 800; cursor: pointer; color: var(--ink); }
+  .conf-btn.on { color: #fff; border-color: transparent; }
+  .conf-btn.on[data-v="low"] { background: #dc2626; }
+  .conf-btn.on[data-v="medium"] { background: #d97706; }
+  .conf-btn.on[data-v="high"] { background: #16a34a; }
+  .bonus-toggle { margin-top: 10px; border: 2px dashed var(--gold); background: #fffbea; color: #92400e; border-radius: 10px; padding: 8px 10px; font-size: 0.8rem; font-weight: 800; cursor: pointer; width: 100%; text-align: left; }
+  .bonus-box { display: none; margin-top: 8px; padding: 10px; border-radius: 10px; background: #fffbea; border: 1px solid rgba(217,119,6,0.3); }
+  .bonus-box.show { display: block; }
+  .bonus-box .bwhy { font-size: 0.82rem; color: #78350f; line-height: 1.45; margin-bottom: 8px; }
+  .bonus-box input[type="text"] { width: 100%; padding: 8px 9px; border-radius: 8px; border: 1px solid rgba(217,119,6,0.4); font-size: 0.86rem; }
+
+  /* reflection */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.1rem; margin-top: 4px; line-height: 1.35; }
+  .wb { margin-top: 4px; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb textarea { width: 100%; min-height: 120px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; }
+  .wb .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 8px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 7px 12px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+
+  .finish { text-align: center; padding: 22px; border-radius: 20px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .finish h2 { color: #fff; font-size: 1.5rem; }
+  .finish .stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+  .finish .stats div { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .finish .stats b { display: block; font-size: 1.3rem; color: #fcd34d; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) { .sg-zones { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; } .hero { padding: 20px 18px; }
+    .sg-zones { grid-template-columns: 1fr; }
+    .hud .lv { display: none; } .hud-inner { grid-template-columns: auto 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ks3" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>4 Ps Challenge</span></div>
+  <span></span>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <div class="xp" id="hudXp">&#11088; 0 XP</div><div class="bar" aria-hidden="true"><div id="hudBar"></div></div><div class="lv" id="hudLv">Step 1 of 3</div>
+</div></div>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <span class="kicker">KS3 Geography &middot; Year 7 &middot; Enquiry</span>
+    <h1>&#127754; Was Bangkok the Venice of the East?</h1>
+    <p>Bangkok was once nicknamed &ldquo;the Venice of the East&rdquo; because of its canals. Sort 15 clues about old Bangkok and modern Venice into <b>Place</b>, <b>Processes</b>, <b>Power</b> and <b>Possibilities</b> &mdash; then justify your thinking and give your verdict.</p>
+    <div class="facts"><span>&#128675; 1,682 canals still exist in Bangkok</span><span>&#127959;&#65039; Venice: 175,000 &rarr; ~50,000 residents</span><span>&#127754; 30 million tourists visit Venice a year</span></div>
+  </section>
+  <div class="steps" id="steps">
+    <span class="step on" data-s="1">1 &middot; Sort the clues</span><span class="step" data-s="2">2 &middot; Justify &amp; confidence</span><span class="step" data-s="3">3 &middot; Your verdict</span>
+  </div>
+  <div id="app"></div>
+</main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- score / HUD ---------- */
+  var run = { c: 0, t: 0, xp: 0 }, step = 1;
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+  function score(c, t, el) { run.c += c; run.t += t; run.xp += c * 10; xpPop(c * 10, el); paintHud(); }
+  function bonusXp(n, el) { run.xp += n; xpPop(n, el); paintHud(); }
+  function paintHud() { $('hudXp').textContent = '⭐ ' + run.xp + ' XP'; $('hudBar').style.width = ((step - 1) / 3 * 100) + '%'; $('hudLv').textContent = step <= 3 ? 'Step ' + step + ' of 3' : 'Complete!'; }
+  function setStep(n) {
+    step = n; paintHud();
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' on' : ''); });
+  }
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#2563eb', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 240 : 110;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) { ctx.clearRect(0, 0, cv.width, cv.height); P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); }); if (t - t0 < (big ? 4000 : 2400)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height); })(t0);
+  }
+  function panel(tag, title, how) {
+    var p = document.createElement('div'); p.className = 'panel';
+    p.innerHTML = '<span class="stage-tag">' + tag + '</span><h2>' + title + '</h2>' + (how ? '<p class="how">' + how + '</p>' : '') + '<div class="sb"></div>';
+    $('app').appendChild(p); setTimeout(function () { p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    return p.querySelector('.sb');
+  }
+
+  /* ---------- CONTENT ---------- */
+  var CATS = {
+    place: { label: 'Place', sub: 'What this place is actually like &ndash; its physical and human character.' },
+    processes: { label: 'Processes', sub: 'A physical or human process that has changed, or is changing, the place.' },
+    power: { label: 'Power', sub: 'Who makes the decisions, and who gains or loses control over the place.' },
+    possibilities: { label: 'Possibilities', sub: 'What could happen next &ndash; options and ideas for the future.' }
+  };
+  var CARDS = [
+    { id: 'b1', loc: 'Bangkok, 1800s', t: 'Visitors nicknamed Bangkok &lsquo;the Venice of the East&rsquo; because canals (khlongs) &ndash; not roads &ndash; were the main way to get around.', cat: ['place'], why: 'This describes what the place was actually like &ndash; its character and how it worked day to day.' },
+    { id: 'b2', loc: 'Bangkok, today', t: 'Bangkok still has around 1,682 canals today, stretching over 2,600km in total &ndash; far more than most people realise.', cat: ['place'], why: 'Another fact about what the place is actually like today.' },
+    { id: 'b3', loc: 'Bangkok, 1900s', t: 'During the 1900s, many of Bangkok&rsquo;s canals were filled in and paved over to build roads for cars.', cat: ['processes', 'power'], why: 'This is a process &ndash; a change that happened to the city over time.', bonusWhy: 'It&rsquo;s also about power: someone had to decide that roads mattered more than canals.' },
+    { id: 'b4', loc: 'Bangkok, today', t: 'Bangkok&rsquo;s land sinks by about 2cm every year &ndash; partly because so many natural canals and wetlands have been built over.', cat: ['processes'], why: 'Subsidence (sinking land) is a physical process.' },
+    { id: 'b5', loc: 'Bangkok, 1900s', t: 'City planners chose to prioritise roads for cars over canals in the 1900s &ndash; a decision that shaped how the whole city grew.', cat: ['power', 'processes'], why: 'This is about who had the power to decide the city&rsquo;s future.', bonusWhy: 'It&rsquo;s also a process &ndash; that decision is still shaping how the city grows today.' },
+    { id: 'b6', loc: 'Bangkok, today', t: 'A new &lsquo;Blue &amp; Green Network&rsquo; plan, including a 4.5km canal park at Chong Nonsi, is bringing some waterways back for flood control and green space.', cat: ['possibilities'], why: 'This is about what could happen next &ndash; a plan for the future.' },
+    { id: 'b7', loc: 'Bangkok, today', t: 'Floating markets like Damnoen Saduak are now visited mostly by tourists, rather than used by local people for everyday shopping like they once were.', cat: ['processes', 'power'], why: 'This is a process &ndash; how the canals are used has changed over time.', bonusWhy: 'It&rsquo;s also about power: the markets now serve tourists&rsquo; money more than local people&rsquo;s daily needs.' },
+    { id: 'v1', loc: 'Venice, today', t: 'Many houses in Venice have a door that opens straight onto a canal &ndash; boats are used the way cars are used elsewhere.', cat: ['place'], why: 'This describes what the place is actually like.' },
+    { id: 'v2', loc: 'Venice, today', t: 'Venice&rsquo;s canals are its main streets: Venetians get around by vaporetto water buses and gondolas instead of cars or buses.', cat: ['place'], why: 'Another detail about the character of the place itself.' },
+    { id: 'v3', loc: 'Venice, today', t: 'Venice&rsquo;s population has fallen from about 175,000 to around 50,000 residents, as locals are priced out by tourism and the cost of living in a flooding city.', cat: ['processes', 'power'], why: 'This is a process &ndash; a long-term change in who lives there.', bonusWhy: 'It&rsquo;s also about power: tourism and property prices are pushing out people with less money.' },
+    { id: 'v4', loc: 'Venice, today', t: 'About 30 million tourists visit Venice every year &ndash; hundreds of times more people than actually live there.', cat: ['power', 'place'], why: 'This is about power: who really controls the city&rsquo;s space and economy &ndash; residents, or visitors?', bonusWhy: 'It&rsquo;s also about place: a city that can feel more like a visitor attraction than a home.' },
+    { id: 'v5', loc: 'Venice, Nov 2019', t: 'A tide over 6 feet high flooded nearly every ground floor on the island of Pellestrina &ndash; the worst flooding in more than 50 years.', cat: ['processes'], why: 'Acqua alta (high water) is a physical process.' },
+    { id: 'v6', loc: 'Venice, 2003&ndash;2020', t: 'The MOSE flood barrier cost $5.5 billion and took over 16 years to build, delayed for years by corruption scandals, before finally working successfully in 2020.', cat: ['power', 'processes'], why: 'This is about power: huge decisions, huge money, and who controlled the project.', bonusWhy: 'It&rsquo;s also a process &ndash; an engineering response to the physical problem of flooding.' },
+    { id: 'v7', loc: 'Venice, today', t: 'Some people argue Venice needs limits on cruise ships and an entry fee for day-trippers, so the city can survive as a place people actually live in, not just visit.', cat: ['possibilities'], why: 'This is about what could be done next &ndash; options for the future.' },
+    { id: 'v8', loc: 'Venice, today', t: 'Others argue the whole lagoon ecosystem needs managing together, not just blocked off by one barrier, if Venice is going to survive long-term.', cat: ['possibilities'], why: 'Another idea about what could happen next.' }
+  ];
+  function byId(id) { return CARDS.filter(function (c) { return c.id === id; })[0]; }
+
+  /* ---------- STEP 1: SORT THE CLUES ---------- */
+  var sortState = {}; // id -> zone placed in
+  function step1() {
+    var el = panel('Step 1 of 3', '&#128203; Sort the clues', 'Drag each clue onto the P it best fits &ndash; or tap a card, then tap a box. A few clues genuinely fit more than one P: any box you see as correct for that card will be accepted. You&rsquo;ll get a chance to explain your thinking next.');
+    var zoneKeys = ['place', 'processes', 'power', 'possibilities'];
+    el.innerHTML = '<div class="sg-tray"></div><div class="sg-zones">' + zoneKeys.map(function (z) {
+      return '<div class="sg-zone z-' + z + '" data-z="' + z + '" role="button" tabindex="0" aria-label="Drop zone: ' + CATS[z].label + '"><h4>' + CATS[z].label + '</h4><div class="zsub">' + CATS[z].sub + '</div><div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" id="sgCheck">Check answers</button></div><div class="msg" id="sgMsg" aria-live="polite"></div>';
+    var tray = el.querySelector('.sg-tray');
+    shuffle(CARDS.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = CARDS[i], card = document.createElement('div'); card.className = 'sg-card'; card.dataset.i = i; card.tabIndex = 0; card.setAttribute('role', 'button');
+      card.innerHTML = '<small>' + esc(c.loc) + '</small>' + c.t + '<span class="fb"></span>'; tray.appendChild(card);
+    });
+    trayState(el);
+
+    var sel = null;
+    function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+    function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(el); }
+    function trayState(root) {
+      var t = root.querySelector('.sg-tray'), e = t.querySelector('.sg-empty'), n = t.querySelectorAll('.sg-card').length;
+      if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; t.appendChild(e); }
+      if (n && e) e.remove();
+    }
+    el.addEventListener('click', function (e) {
+      var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel) placeCard(sel, z);
+    });
+    el.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+      var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+    });
+    var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+    el.addEventListener('pointerdown', function (e) {
+      var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+      drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+      var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+    });
+    el.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+      if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+      drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+      el.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+      drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+      var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+      if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+    });
+    function endDrag(e) {
+      if (!drag) return; var c = drag; drag = null;
+      el.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+      if (!moved) {
+        // Tapping a DIFFERENT card than the one currently selected: if that
+        // card already lives inside a zone, treat the tap as "drop my
+        // selected card here" rather than re-selecting the tapped card —
+        // otherwise a zone with several cards in it would have almost no
+        // empty space left to tap, and tap-to-place would silently fail.
+        if (sel && sel !== c) {
+          var hostZone = c.closest('.sg-zone');
+          if (hostZone) { placeCard(sel, hostZone); return; }
+        }
+        selCard(c); return;
+      }
+      c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+      c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+      var z = t && t.closest ? t.closest('.sg-zone') : null;
+      if (z) placeCard(c, z);
+      else if (t && t.closest && t.closest('.sg-tray')) { c.classList.remove('correct', 'incorrect'); el.querySelector('.sg-tray').appendChild(c); trayState(el); }
+      else origin.appendChild(c);
+    }
+    el.addEventListener('pointerup', endDrag);
+    el.addEventListener('pointercancel', endDrag);
+
+    var firstChecked = false;
+    $('sgCheck').addEventListener('click', function () {
+      var left = el.querySelectorAll('.sg-tray .sg-card').length, m = $('sgMsg');
+      if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+      var right = 0;
+      el.querySelectorAll('.sg-zone').forEach(function (z) {
+        z.querySelectorAll('.sg-card').forEach(function (card) {
+          var c = CARDS[+card.dataset.i], ok = c.cat.indexOf(z.dataset.z) > -1, fb = card.querySelector('.fb');
+          card.classList.toggle('correct', ok); card.classList.toggle('incorrect', !ok);
+          fb.textContent = ok ? '' : '✖ Have another think about this one.';
+          if (ok) { right++; sortState[c.id] = z.dataset.z; }
+        });
+      });
+      if (!firstChecked) { firstChecked = true; score(right, CARDS.length, this); }
+      if (right === CARDS.length) {
+        m.className = 'msg ok'; m.textContent = '✅ All ' + CARDS.length + ' sorted correctly!';
+        this.disabled = true; el.querySelectorAll('.sg-card').forEach(function (c) { c.dataset.locked = 1; });
+        setTimeout(function () { setStep(2); step2(); }, 700);
+      } else { m.className = 'msg no'; m.textContent = right + '/' + CARDS.length + ' correct. Move the red cards and check again.'; }
+    });
+  }
+
+  /* ---------- STEP 2: JUSTIFY & CONFIDENCE ---------- */
+  var justify = {}; // id -> { text, conf, bonusOpen, bonusText }
+  function step2() {
+    var el = panel('Step 2 of 3', '&#9999;&#65039; Justify your thinking', 'For every clue, write <b>one sentence</b> explaining why it fits the P you chose, then set how confident you are &ndash; low, medium or high. A few clues have a &#11088; bonus: tap it if you can also explain how the clue fits a second P.');
+    el.innerHTML = CARDS.map(function (c) {
+      var zone = sortState[c.id] || c.cat[0];
+      return '<div class="jcard" data-id="' + c.id + '" style="border-left-color:var(--c-' + zone + ')">' +
+        '<div class="jwho" style="color:var(--c-' + zone + ')">' + CATS[zone].label + ' &middot; ' + esc(c.loc) + '</div>' +
+        '<div class="jtext">' + c.t + '</div>' +
+        '<label for="jt-' + c.id + '">Why does this fit ' + CATS[zone].label + '?</label>' +
+        '<input type="text" id="jt-' + c.id + '" maxlength="220" placeholder="Write one sentence…">' +
+        '<div class="conf-row" role="group" aria-label="Confidence">' +
+        ['low', 'medium', 'high'].map(function (v) { return '<button type="button" class="conf-btn" data-v="' + v + '">' + v.charAt(0).toUpperCase() + v.slice(1) + '</button>'; }).join('') +
+        '</div>' +
+        (c.cat.length > 1 ? '<button type="button" class="bonus-toggle" data-bonus="' + c.id + '">&#11088; Bonus: this clue could also fit another P &mdash; tap to explain and earn +5 XP</button>' +
+          '<div class="bonus-box" id="bb-' + c.id + '"><div class="bwhy">' + c.bonusWhy + '</div><input type="text" maxlength="220" id="bt-' + c.id + '" placeholder="Explain how it also fits…"></div>' : '') +
+        '</div>';
+    }).join('') + '<div class="actions"><button type="button" class="btn primary" id="justifyNext">Continue to your verdict &rarr;</button></div><div class="msg" id="justMsg" aria-live="polite"></div>';
+
+    CARDS.forEach(function (c) { justify[c.id] = { text: '', conf: '', bonusOpen: false, bonusText: '' }; });
+
+    el.addEventListener('click', function (e) {
+      var cb = e.target.closest('.conf-btn');
+      if (cb) {
+        var card = cb.closest('.jcard'), id = card.dataset.id;
+        card.querySelectorAll('.conf-btn').forEach(function (b) { b.classList.toggle('on', b === cb); });
+        justify[id].conf = cb.dataset.v;
+        return;
+      }
+      var bt = e.target.closest('[data-bonus]');
+      if (bt) {
+        var bid = bt.dataset.bonus, box = $('bb-' + bid);
+        box.classList.add('show'); justify[bid].bonusOpen = true;
+        if (!bt.dataset.claimed) { bt.dataset.claimed = '1'; bt.textContent = '⭐ Bonus claimed — explain below'; bonusXp(5, bt); }
+        return;
+      }
+    });
+    el.addEventListener('input', function (e) {
+      var card = e.target.closest('.jcard'); if (!card) return;
+      var id = card.dataset.id;
+      if (e.target.id === 'jt-' + id) justify[id].text = e.target.value;
+      if (e.target.id === 'bt-' + id) justify[id].bonusText = e.target.value;
+    });
+
+    $('justifyNext').addEventListener('click', function () {
+      var missing = CARDS.filter(function (c) { return !justify[c.id].text.trim() || !justify[c.id].conf; }).length;
+      var m = $('justMsg');
+      if (missing) { m.className = 'msg info'; m.textContent = missing + ' clue' + (missing > 1 ? 's' : '') + ' still need' + (missing > 1 ? '' : 's') + ' a sentence and a confidence rating.'; return; }
+      setStep(3); step3();
+    });
+  }
+
+  /* ---------- STEP 3: YOUR VERDICT ---------- */
+  function step3() {
+    var el = panel('Step 3 of 3', '&#127942; Your verdict', 'Write 3&ndash;4 sentences giving your answer to the enquiry question. Use what you sorted in Step 1 to mention at least one Place, one Process, one example of Power, and one Possibility.');
+    el.innerHTML = '<div class="exq"><div class="mk">Enquiry question</div><h3>Was Bangkok the Venice of the East?</h3></div>' +
+      '<div class="wb"><label for="verdictTa">Your verdict:</label>' +
+      '<textarea id="verdictTa" placeholder="I think Bangkok was/was not really the Venice of the East because… For example, Place… A key process was… Power mattered because… In the future, a possibility is…"></textarea>' +
+      '<div class="foot"><span id="wc">0 words</span><button type="button" class="copy" id="copyBtn">📋 Copy everything for OneNote</button></div></div>' +
+      '<div class="actions"><button type="button" class="btn gold" id="finishBtn">Finish →</button></div>';
+    try { $('verdictTa').value = localStorage.getItem('sbl-bve-verdict') || ''; } catch (e) {}
+    $('verdictTa').addEventListener('input', function () { var v = this.value.trim(); $('wc').textContent = (v ? v.split(/\s+/).length : 0) + ' words'; try { localStorage.setItem('sbl-bve-verdict', this.value); } catch (e) {} });
+    $('copyBtn').addEventListener('click', function () {
+      var b = this, lines = ['Was Bangkok the Venice of the East? — 4 Ps Challenge', ''];
+      CARDS.forEach(function (c) {
+        var zone = sortState[c.id] || c.cat[0], j = justify[c.id] || {};
+        lines.push('[' + CATS[zone].label + '] ' + c.loc + ': ' + c.t.replace(/&ndash;/g, '-').replace(/&rsquo;/g, "'").replace(/&lsquo;/g, "'").replace(/&mdash;/g, '-'));
+        lines.push('My justification (' + (j.conf || 'no confidence set') + ' confidence): ' + (j.text || '(not written)'));
+        if (j.bonusOpen) lines.push('Bonus — also fits another P: ' + (j.bonusText || '(not written)'));
+        lines.push('');
+      });
+      lines.push('My verdict:'); lines.push($('verdictTa').value.trim() || '(not written yet)');
+      var txt = lines.join('\n');
+      function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy everything for OneNote'; }, 2200); }
+      try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
+    });
+    $('finishBtn').addEventListener('click', finish);
+  }
+  function fallback(txt) { var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+  function finish() {
+    setStep(4);
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 0;
+    var el = document.createElement('div'); el.className = 'finish';
+    el.innerHTML = '<div style="font-size:3rem">' + (pct >= 90 ? '🏆' : '🌟') + '</div><h2>Challenge complete!</h2><div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>' + run.xp + '</b>XP</div></div>' +
+      '<p>' + (pct >= 90 ? 'Excellent — you can tell Place, Processes, Power and Possibilities apart like a geographer.' : 'Well done. Play again to beat your first-try accuracy.') + '</p>' +
+      '<div class="actions"><button type="button" class="btn gold" onclick="location.reload()">Play again</button><a class="btn ghost" href="/geography/games#ks3">Back to Geography Games</a></div>';
+    $('app').appendChild(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); confetti(pct >= 90);
+  }
+
+  paintHud(); step1();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
