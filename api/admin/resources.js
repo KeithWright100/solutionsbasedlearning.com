@@ -98,7 +98,7 @@ async function handleList(req, res) {
 
   const { data, error } = await supabase
     .from('sbl_lesson_resources')
-    .select('id, lesson_id, resource_type, file_name, file_size, content_type, uploaded_at, link_url')
+    .select('*') // '*' so this still works before sql/009 adds link_url
     .order('lesson_id', { ascending: true });
 
   if (error) {
