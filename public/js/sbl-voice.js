@@ -187,19 +187,34 @@
   function renderCopilotChat(mount, tokenUrl, onFail) {
     mount.innerHTML = '<div class="sbl-webchat" role="region" aria-label="SBL Tutor chat"></div>';
     var target = mount.firstChild;
-    var envEndpoint = tokenUrl.slice(0, tokenUrl.indexOf('/powervirtualagents'));
-    var apiVersion = (new URL(tokenUrl)).searchParams.get('api-version') || '2022-03-01-preview';
-    loadWebChat()
+    var serverToken = tokenUrl.charAt(0) === '/'; // our own /api route (secret kept on the server)
+    Promise.resolve()
       .then(function () {
+        if (serverToken) {
+          return fetch(tokenUrl, { credentials: 'same-origin' }).then(function (r) {
+            if (!r.ok) throw new Error('token ' + r.status);
+            return r.json();
+          }).then(function (t) { return { token: t.token, domain: null }; });
+        }
+        // Copilot Studio public token endpoint (no-authentication agents)
+        var envEndpoint = tokenUrl.slice(0, tokenUrl.indexOf('/powervirtualagents'));
+        var apiVersion = (new URL(tokenUrl)).searchParams.get('api-version') || '2022-03-01-preview';
         return Promise.all([
           fetch(envEndpoint + '/powervirtualagents/regionalchannelsettings?api-version=' + apiVersion).then(function (r) { if (!r.ok) throw new Error('settings ' + r.status); return r.json(); }),
           fetch(tokenUrl).then(function (r) { if (!r.ok) throw new Error('token ' + r.status); return r.json(); })
-        ]);
+        ]).then(function (res) {
+          return { token: res[1].token, domain: new URL('v3/directline', res[0].channelUrlsById.directline).toString() };
+        });
       })
-      .then(function (res) {
-        var directlineBase = res[0].channelUrlsById.directline;
-        var token = res[1].token;
-        var directLine = window.WebChat.createDirectLine({ domain: new URL('v3/directline', directlineBase).toString(), token: token });
+      .then(function (conn) {
+        if (!conn.token) throw new Error('no token');
+        // only download Web Chat once we know a connection is possible
+        return loadWebChat().then(function () { return conn; });
+      })
+      .then(function (conn) {
+        var dlOpts = { token: conn.token };
+        if (conn.domain) dlOpts.domain = conn.domain;
+        var directLine = window.WebChat.createDirectLine(dlOpts);
         var store = window.WebChat.createStore({}, function (api) {
           return function (next) {
             return function (action) {

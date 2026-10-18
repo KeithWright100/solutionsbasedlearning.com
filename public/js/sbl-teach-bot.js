@@ -68,12 +68,14 @@
     'https://copilotstudio.microsoft.com/environments/Default-9732db31-8695-4030-ae01-e3217b1daaec/bots/crf78_sblchallengetutor_6y7BmB/webchat?__version__=2&enableFileAttachment=false&cliAgent=true';
 
   /* Voice chat (speak + listen) for the Copilot Studio tutors.
-     Paste each agent's token endpoint here (Copilot Studio -> agent ->
-     Channels -> Mobile app / Web app -> Token endpoint). While a value is
-     empty, that tutor keeps using the normal iframe above. If the voice
-     chat ever fails to load, it falls back to the iframe automatically. */
-  var SBL_TEACH_BOT_TOKEN_URL = '';
-  var SBL_CHALLENGE_TUTOR_TOKEN_URL = '';
+     Tokens come from /api/session?tutorToken=..., which uses the Direct
+     Line secrets stored in Vercel (DIRECTLINE_SECRET_TUTOR and
+     DIRECTLINE_SECRET_CHALLENGE). Until a secret is added, that route
+     returns 503 and the tutor quietly uses the normal iframe above. If the
+     voice chat ever fails to load, it falls back to the iframe too.
+     Set a value to '' to switch voice chat off for that tutor. */
+  var SBL_TEACH_BOT_TOKEN_URL = '/api/session?tutorToken=tutor';
+  var SBL_CHALLENGE_TUTOR_TOKEN_URL = '/api/session?tutorToken=challenge';
 
   // Load the shared speak/listen helper (mic on answer boxes, read-aloud).
   (function () {
