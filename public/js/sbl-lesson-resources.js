@@ -66,16 +66,28 @@
           var labelText = label ? label.textContent : '';
 
           if (resource) {
-            li.classList.add('is-live');
-            var link = document.createElement('a');
-            link.className = 'lh-resources__link';
-            link.href = '/api/resources?lessonId=' + encodeURIComponent(lessonId) + '&open=' + encodeURIComponent(type);
-            link.target = '_blank';
-            link.rel = 'noopener';
-            link.setAttribute('aria-label', 'Open ' + labelText + ' (' + resource.fileName + ')');
-            link.innerHTML = li.innerHTML;
-            li.innerHTML = '';
-            li.appendChild(link);
+            var base = '/api/resources?lessonId=' + encodeURIComponent(lessonId) + '&open=' + encodeURIComponent(type);
+            var count = resource.linkCount > 1 ? resource.linkCount : 1;
+            var template = li.innerHTML;
+            var prev = li;
+            for (var n = 0; n < count; n++) {
+              var row = n === 0 ? li : document.createElement('li');
+              if (n > 0) { row.className = li.className; prev.parentNode.insertBefore(row, prev.nextSibling); prev = row; }
+              row.classList.add('is-live');
+              var link = document.createElement('a');
+              link.className = 'lh-resources__link';
+              link.href = base + (count > 1 ? '&n=' + n : '');
+              link.target = '_blank';
+              link.rel = 'noopener';
+              link.setAttribute('aria-label', 'Open ' + labelText + (count > 1 ? ' ' + (n + 1) : '') + ' (' + resource.fileName + ')');
+              link.innerHTML = template;
+              if (count > 1) {
+                var lab = link.querySelector('.lh-resources__label');
+                if (lab) lab.textContent = labelText + ' (' + (n + 1) + ')';
+              }
+              row.innerHTML = '';
+              row.appendChild(link);
+            }
           } else {
             li.classList.add('is-empty');
             if (label) {

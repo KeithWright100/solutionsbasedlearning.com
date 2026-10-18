@@ -25,9 +25,10 @@
 //   3. 'confirm-upload' — record the completed upload in the table
 //      (and clean up whatever file previously occupied that slot).
 //
-// A slot can hold a LINK instead of a file ('set-link') — used for
+// A slot can hold LINKS instead of a file ('set-link') — used for
 // OneNote Pages, which live in a OneNote notebook rather than as a
-// file. Needs sql/009_resource_links.sql to have been run.
+// file. Up to MAX_LINKS_PER_SLOT links per slot, stored one per line
+// in link_url. Needs sql/009_resource_links.sql to have been run.
 
 import { requireAdmin } from '../_lib/auth.js';
 import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
@@ -37,6 +38,7 @@ const RESOURCE_TYPES = ['slides', 'notes', 'key_terms', 'diagrams', 'data_sheets
 const MAX_LESSON_ID_LENGTH = 200;
 const MAX_FILE_NAME_LENGTH = 200;
 const MAX_LINK_LENGTH = 2000;
+const MAX_LINKS_PER_SLOT = 5;
 
 function isValidResourceType(t) {
   return typeof t === 'string' && RESOURCE_TYPES.indexOf(t) !== -1;
@@ -115,7 +117,7 @@ async function handleList(req, res) {
       fileSize: row.file_size,
       contentType: row.content_type,
       uploadedAt: row.uploaded_at,
-      linkUrl: row.link_url || null
+      linkUrls: row.link_url ? String(row.link_url).split('\n').filter(Boolean) : []
     }))
   });
 }
@@ -220,13 +222,13 @@ async function handleConfirmUpload(req, res, session) {
 }
 
 // ---------------------------------------------------------------
-// set-link — { lessonId, resourceType, url, label? }
-// Saves a link (e.g. a OneNote page) in a slot instead of a file,
-// replacing whatever was there. Any file that previously occupied
-// the slot is removed from Storage.
+// set-link — { lessonId, resourceType, urls: [..] (or url), label? }
+// Saves one or more links (e.g. OneNote pages) in a slot instead of
+// a file, replacing whatever was there. Any file that previously
+// occupied the slot is removed from Storage.
 // ---------------------------------------------------------------
 async function handleSetLink(req, res, session) {
-  const { lessonId, resourceType, url, label } = req.body || {};
+  const { lessonId, resourceType, url, urls, label } = req.body || {};
 
   if (!isNonEmptyString(lessonId, MAX_LESSON_ID_LENGTH)) {
     return res.status(400).json({ error: 'lessonId is required.' });
@@ -234,10 +236,23 @@ async function handleSetLink(req, res, session) {
   if (!isValidResourceType(resourceType)) {
     return res.status(400).json({ error: 'resourceType must be one of: ' + RESOURCE_TYPES.join(', ') + '.' });
   }
-  const linkUrl = cleanHttpsUrl(url);
-  if (!linkUrl) {
-    return res.status(400).json({ error: 'Paste a full link starting with https:// (in OneNote: right-click the page, then Copy link to page).' });
+  const raw = Array.isArray(urls) ? urls : [url];
+  const filled = raw.filter((u) => typeof u === 'string' && u.trim());
+  if (!filled.length) {
+    return res.status(400).json({ error: 'Paste at least one link.' });
   }
+  if (filled.length > MAX_LINKS_PER_SLOT) {
+    return res.status(400).json({ error: 'You can add up to ' + MAX_LINKS_PER_SLOT + ' links per lesson.' });
+  }
+  const cleaned = [];
+  for (let i = 0; i < filled.length; i++) {
+    const c = cleanHttpsUrl(filled[i]);
+    if (!c) {
+      return res.status(400).json({ error: 'Link ' + (i + 1) + ' is not a full https:// link (in OneNote: right-click the page, then Copy link to page).' });
+    }
+    if (cleaned.indexOf(c) === -1) cleaned.push(c);
+  }
+  const linkUrl = cleaned.join('\n');
   const name = isNonEmptyString(label, MAX_FILE_NAME_LENGTH) ? label.trim() : 'OneNote page';
 
   const supabase = getSupabaseAdmin();

@@ -162,8 +162,11 @@
     var ids = 'data-lesson-id="' + escapeHtml(lessonId) + '" data-resource-type="' + escapeHtml(type) + '"';
 
     if (isLinkType(type)) {
-      if (resource && resource.linkUrl) {
-        cell += '<a class="sbl-res-slot__file" href="' + escapeHtml(resource.linkUrl) + '" target="_blank" rel="noopener" title="' + escapeHtml(resource.linkUrl) + '">' + escapeHtml(resource.fileName || 'OneNote page') + ' &#8599;</a>';
+      var links = resource && resource.linkUrls ? resource.linkUrls : [];
+      if (links.length) {
+        links.forEach(function (u, i) {
+          cell += '<a class="sbl-res-slot__file" href="' + escapeHtml(u) + '" target="_blank" rel="noopener" title="' + escapeHtml(u) + '">OneNote page' + (links.length > 1 ? ' ' + (i + 1) : '') + ' &#8599;</a>';
+        });
       } else if (resource) {
         cell += '<span class="sbl-res-slot__file" title="' + escapeHtml(resource.fileName) + '">' + escapeHtml(resource.fileName) + ' <span class="sbl-muted">(file)</span></span>';
       } else {
@@ -206,49 +209,72 @@
 
   // ---- OneNote links ----
   // In OneNote: right-click a page in the page list, Copy link to
-  // page, then paste it here. The server keeps only the https link.
+  // page, then paste it here. Up to MAX_LINKS links per lesson; the
+  // server keeps only the https part of each.
+  var MAX_LINKS = 5;
   function startLinkEdit(lessonId, type) {
     var cell = body.querySelector('[data-slot-cell="' + lessonId + '|' + type + '"]');
     if (!cell) return;
     var existing = state.resources[resourceKey(lessonId, type)];
-    var inputId = 'link-' + lessonId.replace(/[^a-zA-Z0-9_-]/g, '_') + '-' + type;
+    var current = existing && existing.linkUrls && existing.linkUrls.length ? existing.linkUrls.slice() : [''];
+    var idBase = 'link-' + lessonId.replace(/[^a-zA-Z0-9_-]/g, '_') + '-' + type + '-';
+
     cell.innerHTML =
-      '<label class="sbl-res-link__label" for="' + escapeHtml(inputId) + '">Paste the OneNote page link</label>' +
-      '<input type="url" class="sbl-res-link__input" id="' + escapeHtml(inputId) + '" placeholder="https://…" value="' + escapeHtml(existing && existing.linkUrl ? existing.linkUrl : '') + '">' +
+      '<div data-link-list></div>' +
+      '<span class="sbl-res-slot__actions" style="margin-bottom:0.4rem">' +
+      '<button type="button" class="sbl-btn sbl-btn--small" data-link-add>+ Add another link</button></span>' +
       '<span class="sbl-res-slot__actions">' +
       '<button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" data-link-save>Save</button>' +
       '<button type="button" class="sbl-btn sbl-btn--small" data-link-cancel>Cancel</button></span>';
-    var input = cell.querySelector('input');
-    input.focus();
+    var list = cell.querySelector('[data-link-list]');
+    var addBtn = cell.querySelector('[data-link-add]');
+
+    function addInput(value) {
+      var i = list.querySelectorAll('input').length;
+      var wrap = document.createElement('div');
+      wrap.innerHTML =
+        '<label class="sbl-res-link__label" for="' + escapeHtml(idBase + i) + '">OneNote page ' + (i + 1) + ' link</label>' +
+        '<input type="url" class="sbl-res-link__input" id="' + escapeHtml(idBase + i) + '" placeholder="https://…">';
+      var input = wrap.querySelector('input');
+      input.value = value || '';
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); save(); }
+        if (e.key === 'Escape') refreshSlotCell(lessonId, type);
+      });
+      list.appendChild(wrap);
+      addBtn.style.display = list.querySelectorAll('input').length >= MAX_LINKS ? 'none' : '';
+      return input;
+    }
+    current.forEach(function (u) { addInput(u); });
+    list.querySelector('input').focus();
+    addBtn.addEventListener('click', function () { addInput('').focus(); });
+
     function save() {
-      var url = input.value.trim();
-      if (!url) { showError('Paste a link first.'); return; }
+      var urls = Array.prototype.map.call(list.querySelectorAll('input'), function (el) { return el.value.trim(); })
+        .filter(function (u) { return u; });
+      if (!urls.length) { showError('Paste at least one link, or use Remove to clear this slot.'); return; }
       clearMessages();
       cell.innerHTML = '<span class="sbl-res-slot__empty">Saving&hellip;</span>';
       fetch('/api/admin/resources', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'set-link', lessonId: lessonId, resourceType: type, url: url, label: 'OneNote page' })
+        body: JSON.stringify({ action: 'set-link', lessonId: lessonId, resourceType: type, urls: urls, label: 'OneNote page' })
       })
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
         .then(function (res) {
-          if (!res.ok) throw new Error(res.data.error || 'Could not save this link.');
+          if (!res.ok) throw new Error(res.data.error || 'Could not save these links.');
           return loadResourcesOnly();
         })
         .then(function () {
           refreshSlotCell(lessonId, type);
-          showNotice('OneNote link saved.');
+          showNotice(urls.length > 1 ? urls.length + ' OneNote links saved.' : 'OneNote link saved.');
         })
         .catch(function (err) {
           refreshSlotCell(lessonId, type);
-          showError(err.message || 'Could not save this link.');
+          showError(err.message || 'Could not save these links.');
         });
     }
     cell.querySelector('[data-link-save]').addEventListener('click', save);
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') { e.preventDefault(); save(); }
-      if (e.key === 'Escape') refreshSlotCell(lessonId, type);
-    });
     cell.querySelector('[data-link-cancel]').addEventListener('click', function () { refreshSlotCell(lessonId, type); });
   }
 
@@ -363,7 +389,7 @@
   function deleteResource(id, lessonId, type) {
     if (!id) return;
     var label = RESOURCE_TYPES.filter(function (rt) { return rt.key === type; }).map(function (rt) { return rt.label; })[0] || type;
-    if (!confirm((isLinkType(type) ? 'Remove the ' + label + ' link' : 'Delete the ' + label + ' file') + ' for this lesson? This cannot be undone.')) return;
+    if (!confirm((isLinkType(type) ? 'Remove the ' + label + ' link(s)' : 'Delete the ' + label + ' file') + ' for this lesson? This cannot be undone.')) return;
 
     clearMessages();
     fetch('/api/admin/resources', {

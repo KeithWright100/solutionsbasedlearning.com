@@ -70,11 +70,17 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'That resource has not been added yet.' });
     }
 
-    // A link (e.g. a OneNote page) rather than a file: send the
-    // teacher straight on to it. Only https links are ever stored.
-    if (row.link_url && /^https:\/\//.test(row.link_url)) {
-      res.writeHead(302, { Location: row.link_url });
-      return res.end();
+    // Links (e.g. OneNote pages) rather than a file: send the teacher
+    // straight on to the one asked for (&n=0, 1, ...; default first).
+    // Only https links are ever stored, one per line.
+    if (row.link_url) {
+      const links = String(row.link_url).split('\n').filter(Boolean);
+      const n = parseInt(req.query.n, 10);
+      const target = links[Number.isInteger(n) && n >= 0 && n < links.length ? n : 0];
+      if (target && /^https:\/\//.test(target)) {
+        res.writeHead(302, { Location: target });
+        return res.end();
+      }
     }
     if (!row.storage_path) {
       return res.status(404).json({ error: 'That resource has not been added yet.' });
@@ -95,7 +101,7 @@ export default async function handler(req, res) {
 
   const { data, error } = await supabase
     .from('sbl_lesson_resources')
-    .select('resource_type, file_name')
+    .select('*')
     .eq('lesson_id', lessonId);
 
   if (error) {
@@ -105,7 +111,8 @@ export default async function handler(req, res) {
 
   const resources = {};
   (data || []).forEach((row) => {
-    resources[row.resource_type] = { fileName: row.file_name };
+    const linkCount = row.link_url ? String(row.link_url).split('\n').filter(Boolean).length : 0;
+    resources[row.resource_type] = { fileName: row.file_name, linkCount: linkCount };
   });
 
   return res.status(200).json({ resources });
