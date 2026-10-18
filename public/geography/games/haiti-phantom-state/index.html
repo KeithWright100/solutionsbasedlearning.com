@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Phantom State: Haiti 2010 — Forced Migration Challenge — IB Geography Games — SBL</title>
+<meta name="description" content="IB DP Geography forced migration game: crack the evidence vault on the 2010 Haiti earthquake, build the doom loop between state fragility and displacement, then try to do better as Minister of Reconstruction.">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --gold: #f59e0b;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --c-place: #2563eb; --c-processes: #0f766e; --c-power: #7c3aed; --c-possibilities: #d97706;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 0% 0%, rgba(37,99,235,0.08), transparent 40%), radial-gradient(circle at 100% 10%, rgba(0,184,176,0.12), transparent 35%), linear-gradient(180deg, #f6f9fa, #eaf1f3); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px 26px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.95), rgba(15,58,92,0.9)); position: relative; overflow: hidden; }
+  .hero .kicker { display: inline-block; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; line-height: 1.15; }
+  .hero p { color: rgba(255,255,255,0.88); max-width: 780px; margin-top: 8px; line-height: 1.55; }
+  .hero .facts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .hero .facts span { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 11px; font-size: 0.78rem; font-weight: 700; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .step { padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .step.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.35); }
+
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; scroll-margin-top: 80px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  /* reflection */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.1rem; margin-top: 4px; line-height: 1.35; }
+  .wb { margin-top: 4px; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb textarea { width: 100%; min-height: 120px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; }
+  .wb .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 8px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 7px 12px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+
+  .finish { text-align: center; padding: 22px; border-radius: 20px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .finish h2 { color: #fff; font-size: 1.5rem; }
+  .finish .stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+  .finish .stats div { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .finish .stats b { display: block; font-size: 1.3rem; color: #fcd34d; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) { .sg-zones { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; } .hero { padding: 20px 18px; }
+    .sg-zones { grid-template-columns: 1fr; }
+    .hud .lv { display: none; } .hud-inner { grid-template-columns: auto 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* evidence vault */
+  .code-bar { display: flex; gap: 8px; justify-content: center; margin: 4px 0 14px; flex-wrap: wrap; }
+  .code-bar span { width: 44px; height: 54px; border-radius: 10px; display: grid; place-items: center; font-size: 1.6rem; font-weight: 900; background: #0f2236; color: rgba(255,255,255,0.25); border: 2px solid #1e3a55; transition: all .4s ease; }
+  .code-bar span.on { background: linear-gradient(135deg, #fcd34d, #f59e0b); color: #422006; border-color: #f59e0b; transform: translateY(-3px); }
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .lock { border: 2px solid var(--line); border-radius: 16px; padding: 14px; background: #fff; position: relative; }
+  .lock .lk-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .lock .lk-ico { font-size: 1.3rem; }
+  .lock .lk-name { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .lock .lk-q { font-weight: 750; line-height: 1.42; font-size: 0.94rem; margin-bottom: 10px; }
+  .lock .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .opt { border: 2px solid var(--line); background: #f8fafc; border-radius: 10px; padding: 8px 6px; font-size: 0.86rem; font-weight: 800; cursor: pointer; color: var(--ink); }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.no { border-color: var(--red); background: var(--red-soft); color: #7f1d1d; animation: shake .35s; }
+  .opt.yes { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+  .opt:disabled { cursor: default; }
+  .lock.open { border-color: rgba(22,163,74,0.5); background: #fbfefc; }
+  .lock .lk-note { display: none; margin-top: 10px; font-size: 0.84rem; line-height: 1.45; color: #14532d; background: var(--green-soft); border-radius: 10px; padding: 8px 10px; }
+  .lock.open .lk-note { display: block; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  /* doom loop */
+  .loop-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .chain { display: grid; gap: 0; }
+  .chain .arrow { text-align: center; color: var(--muted); font-size: 1.1rem; line-height: 1.3; }
+  .slot { border: 3px dashed #94a3b8; border-radius: 14px; min-height: 64px; padding: 10px 12px; background: rgba(255,255,255,0.9); cursor: pointer; display: flex; gap: 10px; align-items: center; font-size: 0.88rem; font-weight: 700; line-height: 1.38; }
+  .slot .n { flex: 0 0 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--navy); color: #fff; font-weight: 900; font-size: 0.82rem; }
+  .slot.empty { color: var(--muted); font-weight: 650; }
+  .slot.ready { border-color: var(--teal); background: #f0fbfa; }
+  .slot.filled { border-style: solid; border-color: rgba(5,43,65,0.25); background: #fff; }
+  .slot.fixed { border-style: solid; border-color: var(--navy); background: #eef4f8; cursor: default; }
+  .slot.correct { border-style: solid; border-color: var(--green); background: var(--green-soft); cursor: default; }
+  .slot.incorrect { border-style: solid; border-color: var(--red); background: var(--red-soft); }
+  .loop-back { margin-top: 6px; border-radius: 14px; padding: 10px 12px; background: linear-gradient(135deg, #7f1d1d, #b91c1c); color: #fff; font-weight: 800; font-size: 0.88rem; text-align: center; }
+  .tray h3 { font-size: 0.9rem; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+  .tray .cards { display: grid; gap: 8px; }
+  .lcard { border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 10px 12px; background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.38; box-shadow: 0 3px 8px rgba(0,25,45,0.06); text-align: left; color: var(--ink); width: 100%; }
+  .lcard.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .bin { margin-top: 12px; border: 3px dashed #cbd5e1; border-radius: 14px; padding: 10px; background: #f8fafc; cursor: pointer; }
+  .bin h3 { font-size: 0.85rem; color: var(--muted); }
+  .bin .cards { margin-top: 6px; }
+  .bin.ready { border-color: var(--red); background: #fff7f7; }
+  .herring { font-size: 0.84rem; line-height: 1.45; background: var(--amber-soft); border-radius: 10px; padding: 8px 10px; margin-top: 8px; color: #78350f; }
+  .links-pick { display: grid; gap: 6px; margin: 8px 0 12px; }
+  .links-pick label { display: flex; gap: 8px; align-items: flex-start; font-size: 0.88rem; font-weight: 650; line-height: 1.4; border: 2px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; background: #fff; }
+  .links-pick input { margin-top: 3px; }
+  .links-pick label.on { border-color: var(--teal); background: #f0fbfa; }
+
+  /* minister */
+  .budget { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; font-weight: 900; color: var(--navy); }
+  .budget .tokens { display: flex; gap: 4px; flex-wrap: wrap; }
+  .budget .tk { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #fcd34d, #f59e0b); border: 2px solid #b45309; }
+  .budget .tk.spent { background: #e2e8f0; border-color: #cbd5e1; }
+  .policy { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; border: 2px solid var(--line); border-radius: 14px; padding: 12px 14px; background: #fff; margin-bottom: 10px; }
+  .policy h4 { font-size: 0.98rem; font-weight: 900; color: var(--navy); }
+  .policy p { font-size: 0.84rem; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+  .stepper { display: flex; align-items: center; gap: 8px; }
+  .stepper button { width: 36px; height: 36px; border-radius: 10px; border: 2px solid var(--line); background: #f8fafc; font-size: 1.2rem; font-weight: 900; cursor: pointer; color: var(--navy); }
+  .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .stepper b { min-width: 26px; text-align: center; font-size: 1.2rem; color: var(--navy); }
+  .compare { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 0.86rem; }
+  .compare th, .compare td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; }
+  .compare th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .compare td:first-child { font-weight: 800; color: var(--navy); }
+  .dots { white-space: nowrap; letter-spacing: 2px; color: var(--gold); font-size: 0.95rem; }
+  .dots i { font-style: normal; color: #cbd5e1; }
+  .fbk { list-style: none; display: grid; gap: 6px; margin-top: 12px; }
+  .fbk li { border-radius: 10px; padding: 8px 10px; font-size: 0.87rem; line-height: 1.45; }
+  .fbk li.ok { background: var(--green-soft); color: #14532d; }
+  .fbk li.no { background: var(--amber-soft); color: #78350f; }
+  .verdict-box { margin-top: 12px; border-radius: 14px; padding: 12px 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; font-size: 0.92rem; line-height: 1.5; }
+  .verdict-box b { color: #fcd34d; }
+  .scroll-x { overflow-x: auto; }
+  @media (max-width: 760px) { .loop-wrap { grid-template-columns: 1fr; } .policy { grid-template-columns: 1fr; } }
+  @media (max-width: 400px) { .code-bar span { width: 36px; height: 46px; font-size: 1.3rem; } .lock .opts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Phantom State</span></div>
+  <span></span>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <div class="xp" id="hudXp">&#11088; 0 XP</div><div class="bar" aria-hidden="true"><div id="hudBar"></div></div><div class="lv" id="hudLv">Round 1 of 3</div>
+</div></div>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <span class="kicker">IB DP Geography &middot; Unit 1 &middot; Forced migration</span>
+    <h1>&#127464;&#127481; The Phantom State: Haiti 2010</h1>
+    <p>Haitians call their state &ldquo;the phantom state&rdquo;. When the January 2010 earthquake struck, it couldn&rsquo;t protect its people &mdash; and the mass displacement that followed made it weaker still. Have the article <b>&lsquo;The phantom state of Haiti&rsquo;</b> (Forced Migration Review, on Firefly) open. Crack the evidence vault, build the doom loop, then try to do better as Minister of Reconstruction.</p>
+    <div class="facts"><span>&#127970; 1/3 of the capital made homeless</span><span>&#9978; 1,555 camps at the peak</span><span>&#128101; 1.5 million internally displaced</span></div>
+  </section>
+  <div class="steps" id="steps">
+    <span class="step on" data-s="1">1 &middot; Evidence vault</span><span class="step" data-s="2">2 &middot; The doom loop</span><span class="step" data-s="3">3 &middot; Minister of Reconstruction</span>
+  </div>
+  <div id="app"></div>
+</main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function plain(h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent; }
+
+  /* ---------- score / HUD ---------- */
+  var run = { c: 0, t: 0, xp: 0 }, step = 1;
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+  function score(c, t, el) { run.c += c; run.t += t; run.xp += c * 10; xpPop(c * 10, el); paintHud(); }
+  function bonusXp(n, el) { run.xp += n; xpPop(n, el); paintHud(); }
+  function paintHud() { $('hudXp').textContent = '⭐ ' + run.xp + ' XP'; $('hudBar').style.width = ((step - 1) / 3 * 100) + '%'; $('hudLv').textContent = step <= 3 ? 'Round ' + step + ' of 3' : 'Complete!'; }
+  function setStep(n) {
+    step = n; paintHud();
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' on' : ''); });
+  }
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#2563eb', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 240 : 110;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) { ctx.clearRect(0, 0, cv.width, cv.height); P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); }); if (t - t0 < (big ? 4000 : 2400)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height); })(t0);
+  }
+  function panel(tag, title, how) {
+    var p = document.createElement('div'); p.className = 'panel';
+    p.innerHTML = '<span class="stage-tag">' + tag + '</span><h2>' + title + '</h2>' + (how ? '<p class="how">' + how + '</p>' : '') + '<div class="sb"></div>';
+    $('app').appendChild(p); setTimeout(function () { p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    return p.querySelector('.sb');
+  }
+  function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+  /* =========================================================
+     ROUND 1 — EVIDENCE VAULT (each lock reveals a letter of FRAGILE)
+     ========================================================= */
+  var CODE = 'FRAGILE';
+  var LOCKS = [
+    { name: 'Homeless in the capital', ico: '&#127970;', q: 'In Port-au-Prince alone, what share of the population was made homeless by the earthquake?',
+      opts: ['One tenth', 'One quarter', 'One third', 'One half'], a: 2,
+      note: 'A third of the capital lost their homes &mdash; many fled to relatives, thousands more to parks, streets and open spaces.' },
+    { name: 'Camps at the peak', ico: '&#9978;', q: 'At the peak of the crisis, how many camps had sprung up?',
+      opts: ['155', '555', '1,555', '15,550'], a: 2,
+      note: 'Up to 1,555 camps of every shape and size, according to the Haitian Camp Coordination and Camp Management Cluster.' },
+    { name: 'Internally displaced', ico: '&#128101;', q: 'How many internally displaced people (IDPs) were living in those camps?',
+      opts: ['150,000', '500,000', '1.5 million', '15 million'], a: 2,
+      note: '1.5 million IDPs &mdash; displaced inside their own country, so not refugees.' },
+    { name: 'Still waiting', ico: '&#8987;', q: 'By October 2012 &mdash; almost three years later &mdash; what was still left?',
+      opts: ['All camps closed', '96 camps, 35,800 people', '496 camps, 358,000 people', '1,555 camps, 1.5 million people'], a: 2,
+      note: '496 camps and 358,000 people still displaced: a fragile state couldn&rsquo;t fix the problem.' },
+    { name: 'Life in Golgotha camp', ico: '&#128703;', q: 'In Golgotha, a typical camp, there was one shower for every &hellip; people.',
+      opts: ['12', '120', '1,200', '12,000'], a: 2,
+      note: 'One shower per 1,200 people and one working latrine per 77. Camps were overcrowded, with no electricity or running water.' },
+    { name: 'Whose land?', ico: '&#127968;', q: 'What fraction of camps and settlements had been set up on private land?',
+      opts: ['A quarter', 'A half', 'Three quarters', 'All of them'], a: 2,
+      note: 'Three quarters &mdash; so landowners threatened residents with eviction or paid them small sums to leave. Camps were also unsafe, especially for women and girls.' },
+    { name: 'The diaspora', ico: '&#127758;', q: 'Roughly how many Haitians live in the neighbouring Dominican Republic?',
+      opts: ['10,000', '100,000', '1 million', '10 million'], a: 2,
+      note: 'About 1 million &mdash; with large Haitian communities in Canada, the US, France and Latin America too.' }
+  ];
+
+  function round1() {
+    setStep(1);
+    var sb = panel('Round 1', '&#128274; Crack the evidence vault',
+      'Use the article to open all seven locks. Each lock you open reveals one letter of the vault code. <b>First-try answers earn 10 XP.</b>');
+    var bar = document.createElement('div'); bar.className = 'code-bar'; bar.setAttribute('aria-label', 'Vault code');
+    for (var i = 0; i < CODE.length; i++) bar.innerHTML += '<span>?</span>';
+    sb.appendChild(bar);
+    var grid = document.createElement('div'); grid.className = 'locks'; sb.appendChild(grid);
+    var msg = document.createElement('p'); msg.className = 'msg'; sb.appendChild(msg);
+    var opened = 0;
+
+    // shuffle the option order per lock, keeping track of the right answer
+    LOCKS.forEach(function (L, li) {
+      var order = shuffle(L.opts.map(function (o, k) { return k; }));
+      var el = document.createElement('div'); el.className = 'lock';
+      el.innerHTML = '<div class="lk-top"><span class="lk-ico">&#128274;</span><span class="lk-name">Lock ' + (li + 1) + ' &middot; ' + L.name + '</span></div>' +
+        '<div class="lk-q">' + L.ico + ' ' + L.q + '</div><div class="opts"></div><div class="lk-note">' + L.note + '</div>';
+      var opts = el.querySelector('.opts'), tries = 0;
+      order.forEach(function (k) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.innerHTML = L.opts[k];
+        b.addEventListener('click', function () {
+          tries++;
+          if (k === L.a) {
+            b.classList.add('yes');
+            opts.querySelectorAll('.opt').forEach(function (x) { x.disabled = true; });
+            el.classList.add('open'); el.querySelector('.lk-ico').innerHTML = '&#128275;';
+            score(tries === 1 ? 1 : 0, 1, b);
+            var slot = bar.children[opened]; slot.textContent = CODE[opened]; slot.classList.add('on');
+            opened++;
+            if (opened === LOCKS.length) {
+              msg.className = 'msg ok'; msg.innerHTML = 'Vault code: <b>FRAGILE</b>. That one word is the whole story of Haiti &mdash; now find out why.';
+              confetti(false);
+              var go = document.createElement('div'); go.className = 'actions';
+              go.innerHTML = '<button type="button" class="btn primary">Round 2: The doom loop &rarr;</button>';
+              go.querySelector('button').addEventListener('click', function () { go.remove(); round2(); });
+              sb.appendChild(go);
+            }
+          } else {
+            b.classList.remove('no'); void b.offsetWidth; b.classList.add('no'); b.disabled = true;
+          }
+        });
+        opts.appendChild(b);
+      });
+      grid.appendChild(el);
+    });
+  }
+
+  /* =========================================================
+     ROUND 2 — THE DOOM LOOP
+     ========================================================= */
+  var FIXED = 'A fragile &lsquo;phantom state&rsquo; that can&rsquo;t collect taxes, run a bureaucracy or control how and where people build.';
+  var LOOP = [
+    { id: 'l1', t: 'Poor rural migrants, pushed out by the collapse of farming, build slums on unclaimed land around Port-au-Prince.' },
+    { id: 'l2', t: 'The earthquake strikes: sub-standard slums collapse and the poorest suffer most &mdash; vulnerability magnifies the damage.' },
+    { id: 'l3', t: 'With no army and no clear chain of command, the state can&rsquo;t lead the rescue &mdash; 1.5 million end up in camps.' },
+    { id: 'l4', t: 'The state pours its few resources into the emergency, so other urgent problems are put off.' },
+    { id: 'l5', t: 'Reconstruction is channelled almost entirely through NGOs, bypassing the Haitian state.' }
+  ];
+  var HERRINGS = [
+    { id: 'h1', t: 'Haiti&rsquo;s national army quickly takes charge of search and rescue.', why: 'Haiti had <b>no national army</b> and no unified force with heavy equipment &mdash; survivors had to fend for themselves.' },
+    { id: 'h2', t: 'Rebuilding plans revitalise Port-au-Prince&rsquo;s damaged neighbourhoods.', why: 'The authorities chose <b>depopulating</b> the city (rural decentralisation) rather than revitalising its urban areas.' }
+  ];
+  var BREAKS = [
+    'Between the weak state and the slums &mdash; e.g. building rules, land rights, rural investment',
+    'Between the slums and the disaster &mdash; e.g. earthquake-resistant housing',
+    'Between the disaster and the camps &mdash; e.g. a trained national rescue force',
+    'Between the emergency and postponed problems &mdash; e.g. outside aid covering the emergency',
+    'Between NGOs and the weaker state &mdash; e.g. aid channelled through Haitian institutions'
+  ];
+  var r2 = { pick: null, breakLink: null, breakText: '' };
+
+  function round2() {
+    setStep(2);
+    var sb = panel('Round 2', '&#128260; Build the doom loop',
+      'The article ends with a &ldquo;<b>circular relationship</b> between state fragility and forced migration&rdquo;. Put the five links in order to complete the cycle. Two cards are <b>red herrings</b> &mdash; they didn&rsquo;t happen. Drop those in the bin. <b>Tap a card, then tap a slot</b> (or tap a card twice to drop it in the next empty slot). Tap a placed card to send it back.');
+    var placed = [null, null, null, null, null], binned = [], locked = [false, false, false, false, false], firstCheck = true;
+    var ALL = shuffle(LOOP.concat(HERRINGS));
+    var byId = {}; ALL.forEach(function (c) { byId[c.id] = c; });
+
+    var wrap = document.createElement('div'); wrap.className = 'loop-wrap';
+    wrap.innerHTML = '<div class="chain" id="chain"></div><div class="tray"><h3>Cards</h3><div class="cards" id="tray"></div>' +
+      '<div class="bin" id="bin" role="button" tabindex="0" aria-label="Red herring bin"><h3>&#128465;&#65039; Red herring bin &mdash; these didn&rsquo;t happen</h3><div class="cards" id="binCards"></div></div></div>';
+    sb.appendChild(wrap);
+    var msg = document.createElement('p'); msg.className = 'msg'; sb.appendChild(msg);
+    var acts = document.createElement('div'); acts.className = 'actions';
+    acts.innerHTML = '<button type="button" class="btn primary" id="checkLoop">Check my loop</button>';
+    sb.appendChild(acts);
+
+    function used(id) { return placed.indexOf(id) !== -1 || binned.indexOf(id) !== -1; }
+    function nextEmpty() { for (var i = 0; i < placed.length; i++) if (!placed[i]) return i; return -1; }
+
+    function draw() {
+      var ch = $('chain'); ch.innerHTML = '';
+      var f = document.createElement('div'); f.className = 'slot fixed'; f.innerHTML = '<span class="n">1</span><span>' + FIXED + '</span>'; ch.appendChild(f);
+      placed.forEach(function (id, i) {
+        var a = document.createElement('div'); a.className = 'arrow'; a.innerHTML = '&darr;'; ch.appendChild(a);
+        var s = document.createElement('div'); s.setAttribute('role', 'button'); s.tabIndex = 0;
+        s.className = 'slot ' + (locked[i] ? 'correct' : id ? 'filled' : 'empty' + (r2.pick ? ' ready' : ''));
+        s.innerHTML = '<span class="n">' + (i + 2) + '</span><span>' + (id ? byId[id].t : 'Empty &mdash; what happens next?') + '</span>';
+        s.addEventListener('click', function () { slotClick(i); });
+        s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); slotClick(i); } });
+        ch.appendChild(s);
+      });
+      var back = document.createElement('div'); back.className = 'loop-back'; back.innerHTML = '&#8635; &hellip;leaving the state even weaker &mdash; back to 1, and the cycle repeats.'; ch.appendChild(back);
+
+      var tr = $('tray'); tr.innerHTML = '';
+      ALL.forEach(function (c) {
+        if (used(c.id)) return;
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'lcard' + (r2.pick === c.id ? ' selected' : ''); b.innerHTML = c.t;
+        b.addEventListener('click', function () {
+          if (r2.pick === c.id) { var n = nextEmpty(); if (n !== -1) { placed[n] = c.id; r2.pick = null; } }
+          else r2.pick = c.id;
+          draw();
+        });
+        tr.appendChild(b);
+      });
+      if (!tr.children.length) tr.innerHTML = '<p class="how" style="margin:0">All cards placed. Check your loop!</p>';
+
+      var bc = $('binCards'); bc.innerHTML = '';
+      $('bin').className = 'bin' + (r2.pick ? ' ready' : '');
+      binned.forEach(function (id) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'lcard'; b.innerHTML = byId[id].t;
+        b.addEventListener('click', function (e) { if (r2.pick) return; e.stopPropagation(); binned.splice(binned.indexOf(id), 1); draw(); });
+        bc.appendChild(b);
+      });
+    }
+    function slotClick(i) {
+      if (locked[i]) return;
+      if (r2.pick) { placed[i] = r2.pick; r2.pick = null; }
+      else if (placed[i]) placed[i] = null;
+      draw();
+    }
+    function binClick() { if (r2.pick) { binned.push(r2.pick); r2.pick = null; draw(); } }
+    $('bin').addEventListener('click', binClick);
+    $('bin').addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); binClick(); } });
+
+    $('checkLoop').addEventListener('click', function () {
+      if (nextEmpty() !== -1 || binned.length < 2) { msg.className = 'msg info'; msg.textContent = 'Fill all five slots and bin the two red herrings first.'; return; }
+      var right = 0, newly = 0;
+      placed.forEach(function (id, i) {
+        if (locked[i]) { right++; return; }
+        if (id === LOOP[i].id) { locked[i] = true; right++; newly++; }
+      });
+      var binRight = binned.filter(function (id) { return id.charAt(0) === 'h'; }).length;
+      if (firstCheck) { score(right + binRight, 7, this); firstCheck = false; }
+      // send wrong cards back
+      placed = placed.map(function (id, i) { return locked[i] ? id : null; });
+      binned = binned.filter(function (id) { return id.charAt(0) === 'h'; });
+      draw();
+      if (right === 5 && binned.length === 2) {
+        msg.className = 'msg ok'; msg.textContent = 'Loop complete! You have shown how fragility causes displacement — and displacement causes more fragility.';
+        this.disabled = true; confetti(false); afterLoop(sb);
+      } else {
+        msg.className = 'msg no'; msg.textContent = right + ' of 5 links in the right place. The wrong ones are back in the tray — check the article and try again.';
+        if (binned.length < 2) msg.textContent += ' One of your binned cards really happened!';
+      }
+    });
+    draw();
+  }
+
+  function afterLoop(sb) {
+    var h = document.createElement('div');
+    h.innerHTML = HERRINGS.map(function (x) { return '<div class="herring">&#128031; <b>Red herring:</b> &ldquo;' + x.t + '&rdquo; &mdash; ' + x.why + '</div>'; }).join('');
+    sb.appendChild(h);
+    var box = document.createElement('div'); box.style.marginTop = '16px';
+    box.innerHTML = '<div class="exq"><div class="mk">Break the cycle</div><h3>Where would you break the loop? Choose one link.</h3></div>' +
+      '<div class="links-pick" id="breakPick">' + BREAKS.map(function (b, i) { return '<label><input type="radio" name="brk" value="' + i + '"> <span>' + b + '</span></label>'; }).join('') + '</div>' +
+      '<div class="wb"><label for="breakTa">How would you break it, and who should do it &mdash; the Haitian government, NGOs or other countries? Why?</label>' +
+      '<textarea id="breakTa" placeholder="I would break the link between&hellip; because&hellip;"></textarea>' +
+      '<div class="foot"><span id="breakWc">0 words &middot; 25+ words earns bonus XP</span></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" id="toR3" disabled>Round 3: Minister of Reconstruction &rarr;</button></div>';
+    sb.appendChild(box);
+    var bonusGiven = false;
+    function check() {
+      var n = wordCount($('breakTa').value);
+      r2.breakText = $('breakTa').value.trim();
+      $('breakWc').textContent = n + ' words · 25+ words earns bonus XP';
+      $('toR3').disabled = r2.breakLink === null || n < 5;
+    }
+    box.querySelectorAll('input[name="brk"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        r2.breakLink = +r.value;
+        box.querySelectorAll('.links-pick label').forEach(function (l) { l.classList.toggle('on', l.querySelector('input').checked); });
+        check();
+      });
+    });
+    $('breakTa').addEventListener('input', check);
+    $('toR3').addEventListener('click', function () {
+      if (!bonusGiven && wordCount($('breakTa').value) >= 25) { bonusXp(20, this); bonusGiven = true; }
+      this.parentNode.remove(); round3();
+    });
+  }
+
+  /* =========================================================
+     ROUND 3 — MINISTER OF RECONSTRUCTION
+     ========================================================= */
+  var POLICIES = [
+    { id: 'sec', name: '&#128110; Camp security &amp; police', d: 'Send police into the camps to deal with violence and protect residents.',
+      haiti: 3, did: 'Police were reassigned away from communities to deal with violence in the camps.',
+      result: 'Needed, but it pulled police away from everyone else, and tension grew between camp residents and the urban poor who got no help.' },
+    { id: 'city', name: '&#127959;&#65039; Rebuild Port-au-Prince', d: 'Repair and revitalise the damaged urban neighbourhoods so people can return home.',
+      haiti: 1, did: 'Hardly at all &mdash; the authorities chose not to revitalise urban areas.',
+      result: 'With no homes to return to, people stayed in camps for years.' },
+    { id: 'rural', name: '&#127806; Move people to rural areas', d: 'Depopulate the city: rural revitalisation and industrial decentralisation.',
+      haiti: 3, did: 'The main plan &mdash; drawn up in a rush, under pressure.',
+      result: 'Plans made &ldquo;in a haze&rdquo; produced only piecemeal efforts that ignored what people actually needed and wanted.' },
+    { id: 'ngo', name: '&#127963;&#65039; Fund NGOs to deliver programmes', d: 'Give aid money to international NGOs to run reconstruction directly.',
+      haiti: 5, did: 'Almost everything &mdash; there were few reliable local state partners.',
+      result: 'NGOs often lacked the resources and expertise, and bypassing the state left it even weaker. It also fed a culture of dependency.' },
+    { id: 'state', name: '&#127891; Build Haitian state capacity', d: 'Train officials, fund local government and build institutions so Haiti can lead its own recovery.',
+      haiti: 0, did: 'Almost nothing &mdash; the state&rsquo;s few resources went on the emergency.',
+      result: 'This is the article&rsquo;s key recommendation: without a stronger, legitimate state, the cycle repeats.' }
+  ];
+  var r3 = { alloc: { sec: 0, city: 0, rural: 0, ngo: 0, state: 0 }, justify: '' };
+  var TOTAL = 10;
+
+  function round3() {
+    setStep(3);
+    var sb = panel('Round 3', '&#127963;&#65039; Minister of Reconstruction',
+      'It&rsquo;s 2010 and you are in charge. You have <b>10 tokens</b> of reconstruction money. Spend all 10 across the five policies, then lock in your plan to see what Haiti actually did &mdash; and what happened next.');
+    var budget = document.createElement('div'); budget.className = 'budget'; sb.appendChild(budget);
+    var list = document.createElement('div'); sb.appendChild(list);
+    var acts = document.createElement('div'); acts.className = 'actions';
+    acts.innerHTML = '<button type="button" class="btn gold" id="lockPlan" disabled>Lock in my plan</button>';
+    sb.appendChild(acts);
+    var locked = false;
+
+    function spent() { var s = 0; for (var k in r3.alloc) s += r3.alloc[k]; return s; }
+    function draw() {
+      var left = TOTAL - spent();
+      var tk = ''; for (var i = 0; i < TOTAL; i++) tk += '<span class="tk' + (i >= left ? ' spent' : '') + '"></span>';
+      budget.innerHTML = '<span>' + left + ' token' + (left === 1 ? '' : 's') + ' left</span><span class="tokens" aria-hidden="true">' + tk + '</span>';
+      list.innerHTML = '';
+      POLICIES.forEach(function (p) {
+        var row = document.createElement('div'); row.className = 'policy';
+        row.innerHTML = '<div><h4>' + p.name + '</h4><p>' + p.d + '</p></div>' +
+          '<div class="stepper"><button type="button" aria-label="Remove a token">&minus;</button><b>' + r3.alloc[p.id] + '</b><button type="button" aria-label="Add a token">+</button></div>';
+        var bs = row.querySelectorAll('button');
+        bs[0].disabled = locked || r3.alloc[p.id] === 0;
+        bs[1].disabled = locked || left === 0;
+        bs[0].addEventListener('click', function () { r3.alloc[p.id]--; draw(); });
+        bs[1].addEventListener('click', function () { r3.alloc[p.id]++; draw(); });
+        list.appendChild(row);
+      });
+      $('lockPlan').disabled = locked || left !== 0;
+    }
+    $('lockPlan').addEventListener('click', function () { locked = true; draw(); this.parentNode.remove(); reveal(sb); });
+    draw();
+  }
+
+  function dots(n, max) { var s = ''; for (var i = 0; i < max; i++) s += i < n ? '●' : '<i>●</i>'; return '<span class="dots" aria-label="' + n + ' of ' + max + '">' + s + '</span>'; }
+
+  function reveal(sb) {
+    var a = r3.alloc;
+    var box = document.createElement('div');
+    var rows = POLICIES.map(function (p) {
+      return '<tr><td>' + p.name + '</td><td>' + dots(a[p.id], 10) + ' <b>' + a[p.id] + '</b></td><td>' + dots(p.haiti, 5) + '<br>' + p.did + '</td><td>' + p.result + '</td></tr>';
+    }).join('');
+    box.innerHTML = '<h3 style="margin:6px 0 4px;color:var(--navy)">Your plan vs what Haiti did</h3>' +
+      '<p class="how" style="margin-bottom:4px">Haiti&rsquo;s levels are an approximate reading of the article, not exact figures.</p>' +
+      '<div class="scroll-x"><table class="compare"><thead><tr><th>Policy</th><th>Your tokens</th><th>What Haiti did</th><th>What happened</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+
+    var fb = [], pts = 0;
+    if (a.state >= 2) { fb.push(['ok', 'You invested in <b>state capacity</b> &mdash; the article says this is critical to stop the cycle.']); pts += 2; }
+    else fb.push(['no', 'You spent little on <b>state capacity</b>. The article&rsquo;s conclusion: all actors must work to strengthen the capacity and legitimacy of the Haitian state.']);
+    if (a.ngo <= 4) { fb.push(['ok', 'You didn&rsquo;t rely on <b>NGOs</b> alone, so the state wasn&rsquo;t completely bypassed.']); pts += 1; }
+    else fb.push(['no', 'Most of your money went through <b>NGOs</b> &mdash; just like Haiti. That risks a culture of dependency and an even weaker state.']);
+    if (a.city >= 1) { fb.push(['ok', 'You put money into <b>rebuilding the city</b>, giving people homes to go back to and a way out of the camps.']); pts += 1; }
+    else fb.push(['no', 'No money to <b>rebuild the city</b> &mdash; with no homes to return to, people may stay in camps for years.']);
+    if (a.sec >= 1) { fb.push(['ok', 'You funded <b>camp security</b> &mdash; residents were facing violence, eviction threats and impunity.']); pts += 1; }
+    else fb.push(['no', 'No <b>camp security</b> &mdash; but the camps were unsafe, especially for women and girls.']);
+    box.innerHTML += '<ul class="fbk">' + fb.map(function (f) { return '<li class="' + f[0] + '">' + (f[0] === 'ok' ? '&#9989; ' : '&#9888;&#65039; ') + f[1] + '</li>'; }).join('') + '</ul>';
+    box.innerHTML += '<div class="verdict-box">Your plan scores <b>' + pts + ' / 5</b> against the article&rsquo;s argument. There is no single right answer &mdash; but the author&rsquo;s point is that however resourceful Haitians are, lasting solutions are unlikely &ldquo;against the backdrop of a <b>&lsquo;phantom state&rsquo;</b>&rdquo;.</div>';
+
+    box.innerHTML += '<div class="wb" style="margin-top:14px"><label for="mjTa">Justify your plan. Would it have broken the doom loop? Use evidence from the article.</label>' +
+      '<textarea id="mjTa" placeholder="My plan focused on&hellip; because the article shows&hellip; However&hellip;"></textarea>' +
+      '<div class="foot"><span id="mjWc">0 words &middot; 40+ words earns bonus XP</span><button type="button" class="copy" id="copyAll">&#128203; Copy everything for OneNote</button></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" id="finishBtn">Finish</button></div>';
+    sb.appendChild(box);
+    bonusXp(pts * 10, box);
+    setTimeout(function () { box.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+
+    $('mjTa').addEventListener('input', function () { r3.justify = this.value.trim(); $('mjWc').textContent = wordCount(this.value) + ' words · 40+ words earns bonus XP'; });
+    $('copyAll').addEventListener('click', function () {
+      var b = this, L = ['The Phantom State: Haiti 2010', ''];
+      L.push('Where I would break the doom loop: ' + (r2.breakLink === null ? '(not chosen)' : plain(BREAKS[r2.breakLink])));
+      L.push(r2.breakText || '(not written)'); L.push('');
+      L.push('My reconstruction plan (10 tokens):');
+      POLICIES.forEach(function (p) { L.push('- ' + plain(p.name).trim() + ': ' + r3.alloc[p.id]); });
+      L.push('Score against the article: ' + pts + '/5'); L.push('');
+      L.push('My justification:'); L.push(r3.justify || '(not written yet)');
+      var txt = L.join('\n');
+      function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy everything for OneNote'; }, 2200); }
+      try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
+    });
+    $('finishBtn').addEventListener('click', function () {
+      if (wordCount($('mjTa').value) >= 40) bonusXp(20, this);
+      this.parentNode.remove(); finish();
+    });
+  }
+  function fallback(txt) { var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+
+  function finish() {
+    setStep(4);
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 0;
+    var el = document.createElement('div'); el.className = 'finish';
+    el.innerHTML = '<div style="font-size:3rem">' + (pct >= 90 ? '🏆' : '🌟') + '</div><h2>Mission complete!</h2><div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>' + run.xp + '</b>XP</div></div>' +
+      '<p>' + (pct >= 90 ? 'Excellent &mdash; you can explain the cycle between state fragility and forced migration.' : 'Well done. Play again to beat your first-try accuracy.') + '</p>' +
+      '<p style="margin-top:8px;opacity:.9">Next: answer the reading questions on the article in your OneNote.</p>' +
+      '<div class="actions"><button type="button" class="btn gold" onclick="location.reload()">Play again</button><a class="btn ghost" href="/geography/games#ib">Back to Geography Games</a></div>';
+    $('app').appendChild(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); confetti(pct >= 90);
+  }
+
+  paintHud(); round1();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
