@@ -40,6 +40,26 @@
     } catch (e) { return iso; }
   }
 
+  // ---- Search (name/email filter, shared by Pending/Approved/Rejected) ----
+  // Purely a client-side filter over data already loaded by loadData() —
+  // no extra request per keystroke. Matches if the query is a substring
+  // of any given field, case-insensitive.
+  function matchesSearch(query, fields) {
+    var q = (query || '').trim().toLowerCase();
+    if (!q) return true;
+    return fields.some(function (f) { return (f || '').toLowerCase().indexOf(q) !== -1; });
+  }
+
+  function searchValue(inputId) {
+    var el = document.getElementById(inputId);
+    return el ? el.value : '';
+  }
+
+  function noMatchesMessage(query, defaultMessage) {
+    var q = (query || '').trim();
+    return q ? 'No matches for “' + q + '”.' : defaultMessage;
+  }
+
   // ---- Session check / bounce non-admins ----
   fetch('/api/session')
     .then(function (r) { return r.json(); })
@@ -77,6 +97,11 @@
       panels[tab.getAttribute('data-tab')].style.display = 'block';
     });
   });
+
+  // ---- Search boxes: filter instantly as you type, no server call ----
+  document.getElementById('pendingSearch').addEventListener('input', renderPending);
+  document.getElementById('approvedSearch').addEventListener('input', renderApproved);
+  document.getElementById('rejectedSearch').addEventListener('input', renderRejected);
 
   // ---- Data loading + rendering ----
   function loadData() {
@@ -116,11 +141,19 @@
   function renderPending() {
     var body = document.getElementById('pendingBody');
     var empty = document.getElementById('pendingEmpty');
+    var query = searchValue('pendingSearch');
+    var list = state.pending.filter(function (app) {
+      return matchesSearch(query, [app.first_name, app.last_name, app.email]);
+    });
     body.innerHTML = '';
-    if (!state.pending.length) { empty.style.display = 'block'; return; }
+    if (!list.length) {
+      empty.textContent = noMatchesMessage(query, 'No pending applications right now.');
+      empty.style.display = 'block';
+      return;
+    }
     empty.style.display = 'none';
 
-    state.pending.forEach(function (app) {
+    list.forEach(function (app) {
       var tr = document.createElement('tr');
       tr.innerHTML =
         '<td>' + escapeHtml(app.first_name + ' ' + app.last_name) + '<div class="sbl-muted">' + escapeHtml(app.reference_id) + '</div></td>' +
@@ -180,9 +213,17 @@
   function renderApproved() {
     var body = document.getElementById('approvedBody');
     var empty = document.getElementById('approvedEmpty');
+    var query = searchValue('approvedSearch');
+    var allUsers = state.users.filter(function (u) { return u.role !== 'admin'; });
+    var users = allUsers.filter(function (u) {
+      return matchesSearch(query, [u.full_name, u.email]);
+    });
     body.innerHTML = '';
-    var users = state.users.filter(function (u) { return u.role !== 'admin'; });
-    if (!users.length) { empty.style.display = 'block'; return; }
+    if (!users.length) {
+      empty.textContent = noMatchesMessage(query, 'No approved users yet.');
+      empty.style.display = 'block';
+      return;
+    }
     empty.style.display = 'none';
 
     users.forEach(function (u) {
@@ -213,11 +254,19 @@
   function renderRejected() {
     var body = document.getElementById('rejectedBody');
     var empty = document.getElementById('rejectedEmpty');
+    var query = searchValue('rejectedSearch');
+    var list = state.rejected.filter(function (app) {
+      return matchesSearch(query, [app.first_name, app.last_name, app.email]);
+    });
     body.innerHTML = '';
-    if (!state.rejected.length) { empty.style.display = 'block'; return; }
+    if (!list.length) {
+      empty.textContent = noMatchesMessage(query, 'No rejected applications.');
+      empty.style.display = 'block';
+      return;
+    }
     empty.style.display = 'none';
 
-    state.rejected.forEach(function (app) {
+    list.forEach(function (app) {
       var tr = document.createElement('tr');
       tr.innerHTML =
         '<td>' + escapeHtml(app.first_name + ' ' + app.last_name) + '</td>' +
