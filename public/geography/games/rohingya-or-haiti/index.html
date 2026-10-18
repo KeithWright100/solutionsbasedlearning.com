@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rohingya, Haiti or Both? — Forced Migration Compare — IB Geography Games — SBL</title>
+<meta name="description" content="IB DP Geography forced migration comparison game: sort evidence into Rohingya only, Haiti only or Both, decide if each essay theme is a similarity or difference, then build a comparative essay paragraph.">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --gold: #f59e0b;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --c-place: #2563eb; --c-processes: #0f766e; --c-power: #7c3aed; --c-possibilities: #d97706;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 0% 0%, rgba(37,99,235,0.08), transparent 40%), radial-gradient(circle at 100% 10%, rgba(0,184,176,0.12), transparent 35%), linear-gradient(180deg, #f6f9fa, #eaf1f3); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px 26px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.95), rgba(15,58,92,0.9)); position: relative; overflow: hidden; }
+  .hero .kicker { display: inline-block; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; line-height: 1.15; }
+  .hero p { color: rgba(255,255,255,0.88); max-width: 780px; margin-top: 8px; line-height: 1.55; }
+  .hero .facts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .hero .facts span { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 11px; font-size: 0.78rem; font-weight: 700; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .step { padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .step.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.35); }
+
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; scroll-margin-top: 80px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  /* reflection */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.1rem; margin-top: 4px; line-height: 1.35; }
+  .wb { margin-top: 4px; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb textarea { width: 100%; min-height: 120px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; }
+  .wb .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 8px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 7px 12px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+
+  .finish { text-align: center; padding: 22px; border-radius: 20px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .finish h2 { color: #fff; font-size: 1.5rem; }
+  .finish .stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+  .finish .stats div { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .finish .stats b { display: block; font-size: 1.3rem; color: #fcd34d; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) { .sg-zones { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; } .hero { padding: 20px 18px; }
+    .sg-zones { grid-template-columns: 1fr; }
+    .hud .lv { display: none; } .hud-inner { grid-template-columns: auto 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  :root { --roh: #7c3aed; --hai: #0284c7; --both: #0f766e; }
+  .tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); min-height: 54px; }
+  .tray .empty-note { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .ccard { border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 650; line-height: 1.36; text-align: left; color: var(--ink); box-shadow: 0 3px 8px rgba(0,25,45,0.06); width: 100%; }
+  .ccard.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .ccard.correct { border-color: var(--green); background: var(--green-soft); cursor: default; }
+  .ccard.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .zones { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .zone { border-radius: 16px; padding: 10px; min-height: 170px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .zone.ready { background: #f0fbfa; }
+  .zone h4 { font-size: 1rem; font-weight: 900; margin-bottom: 2px; }
+  .zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 8px; line-height: 1.35; }
+  .zone .zc { display: grid; gap: 6px; }
+  .z-roh { border-color: var(--roh); } .z-roh h4 { color: var(--roh); }
+  .z-both { border-color: var(--both); background: linear-gradient(180deg, #f3faf9, #fff); } .z-both h4 { color: var(--both); }
+  .z-hai { border-color: var(--hai); } .z-hai h4 { color: var(--hai); }
+  .counter { text-align: center; font-size: 0.85rem; font-weight: 800; color: var(--muted); margin-top: 8px; }
+  .whylist { list-style: none; display: grid; gap: 6px; margin-top: 10px; }
+  .whylist li { background: var(--amber-soft); color: #78350f; border-radius: 10px; padding: 8px 10px; font-size: 0.86rem; line-height: 1.45; }
+
+  /* round 2 */
+  .theme { border: 2px solid var(--line); border-radius: 16px; padding: 14px; background: #fff; margin-bottom: 12px; }
+  .theme .th-name { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .theme .th-q { font-weight: 800; font-size: 1rem; color: var(--navy); margin: 4px 0 8px; }
+  .theme .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .theme .pair div { border-radius: 10px; padding: 8px 10px; font-size: 0.86rem; line-height: 1.42; }
+  .theme .pair .r { background: #f5f0ff; border-left: 4px solid var(--roh); }
+  .theme .pair .h { background: #eef7fd; border-left: 4px solid var(--hai); }
+  .theme .pair b { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+  .theme .choices { display: flex; gap: 8px; flex-wrap: wrap; }
+  .choice { flex: 1; min-width: 150px; border: 2px solid var(--line); background: #f8fafc; border-radius: 10px; padding: 9px; font-weight: 800; font-size: 0.88rem; cursor: pointer; color: var(--ink); }
+  .choice.yes { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+  .choice.no { border-color: var(--red); background: var(--red-soft); color: #7f1d1d; }
+  .choice:disabled { cursor: default; }
+  .model { display: none; margin-top: 10px; border-radius: 10px; padding: 10px 12px; background: #0f2236; color: #e2e8f0; font-size: 0.9rem; line-height: 1.55; }
+  .model.show { display: block; }
+  .model .tag { display: inline-block; font-size: 0.68rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: #0f2236; background: #5eead4; border-radius: 999px; padding: 2px 8px; margin-bottom: 6px; }
+  .model mark { background: #fcd34d; color: #422006; border-radius: 4px; padding: 0 3px; font-weight: 800; }
+
+  /* round 3 */
+  .eq-pick { display: grid; gap: 6px; margin-bottom: 14px; }
+  .eq-pick label { display: flex; gap: 8px; align-items: flex-start; border: 2px solid var(--line); border-radius: 10px; padding: 9px 11px; cursor: pointer; background: #fff; font-weight: 700; font-size: 0.9rem; line-height: 1.4; }
+  .eq-pick label.on { border-color: var(--teal); background: #f0fbfa; }
+  .eq-pick input { margin-top: 3px; }
+  .peel { display: grid; gap: 10px; }
+  .peel .f { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: #f8fbfd; }
+  .peel .f label { display: block; font-weight: 900; font-size: 0.86rem; color: var(--navy); margin-bottom: 2px; }
+  .peel .f .hint { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; line-height: 1.4; }
+  .peel textarea { width: 100%; min-height: 62px; padding: 8px 10px; border-radius: 9px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.9rem; line-height: 1.5; resize: vertical; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  .chip { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 999px; padding: 4px 10px; font-size: 0.76rem; font-weight: 800; cursor: pointer; }
+  .chip:hover { background: #f0fbfa; }
+  .preview { margin-top: 14px; border-radius: 14px; padding: 14px 16px; background: #fff; border: 2px solid var(--teal); font-size: 0.95rem; line-height: 1.65; }
+  .preview h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--teal-dark); margin-bottom: 6px; }
+  .preview .ph { color: #94a3b8; font-style: italic; }
+  .scaffold { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+  @media (max-width: 760px) { .zones { grid-template-columns: 1fr; } .theme .pair { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Compare &amp; Contrast</span></div>
+  <span></span>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <div class="xp" id="hudXp">&#11088; 0 XP</div><div class="bar" aria-hidden="true"><div id="hudBar"></div></div><div class="lv" id="hudLv">Round 1 of 3</div>
+</div></div>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <span class="kicker">IB DP Geography &middot; Unit 1 &middot; Forced migration</span>
+    <h1>&#9878;&#65039; Rohingya, Haiti or Both?</h1>
+    <p>Two forced migration case studies, one political and one environmental. Sort the evidence, spot whether each theme is mainly a similarity or a difference, then build a comparative essay paragraph you can paste straight into OneNote.</p>
+    <div class="facts"><span>&#127474;&#127474; Rohingya: Burma &rarr; Bangladesh (political)</span><span>&#127469;&#127481; Haiti 2010: earthquake IDPs (environmental)</span></div>
+  </section>
+  <div class="steps" id="steps">
+    <span class="step on" data-s="1">1 &middot; Sort the evidence</span><span class="step" data-s="2">2 &middot; Similar or different?</span><span class="step" data-s="3">3 &middot; Build a paragraph</span>
+  </div>
+  <div id="app"></div>
+</main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function plain(h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent; }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+  /* ---------- score / HUD ---------- */
+  var run = { c: 0, t: 0, xp: 0 }, step = 1;
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+  function score(c, t, el) { run.c += c; run.t += t; run.xp += c * 10; xpPop(c * 10, el); paintHud(); }
+  function bonusXp(n, el) { run.xp += n; xpPop(n, el); paintHud(); }
+  function paintHud() { $('hudXp').textContent = '⭐ ' + run.xp + ' XP'; $('hudBar').style.width = ((step - 1) / 3 * 100) + '%'; $('hudLv').textContent = step <= 3 ? 'Round ' + step + ' of 3' : 'Complete!'; }
+  function setStep(n) {
+    step = n; paintHud();
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' on' : ''); });
+  }
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#2563eb', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 240 : 110;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) { ctx.clearRect(0, 0, cv.width, cv.height); P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); }); if (t - t0 < (big ? 4000 : 2400)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height); })(t0);
+  }
+  function panel(tag, title, how) {
+    var p = document.createElement('div'); p.className = 'panel';
+    p.innerHTML = '<span class="stage-tag">' + tag + '</span><h2>' + title + '</h2>' + (how ? '<p class="how">' + how + '</p>' : '') + '<div class="sb"></div>';
+    $('app').appendChild(p); setTimeout(function () { p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    return p.querySelector('.sb');
+  }
+
+  /* =========================================================
+     ROUND 1 — SORT: Rohingya only / Both / Haiti only
+     ========================================================= */
+  var ZONES = {
+    roh: { label: 'Rohingya only', sub: 'Burma &rarr; Bangladesh. Political forced migration.' },
+    both: { label: 'Both', sub: 'A similarity &mdash; true of both case studies.' },
+    hai: { label: 'Haiti only', sub: '2010 earthquake. Environmental forced migration.' }
+  };
+  var CARDS = [
+    // Rohingya only
+    { id: 'r1', z: 'roh', t: 'Displacement caused by persecution carried out by the military and police.', why: 'A <b>political</b> cause &mdash; Haiti&rsquo;s displacement was caused by an earthquake.' },
+    { id: 'r2', z: 'roh', t: 'One ethnic and religious minority group was targeted.', why: 'The Rohingya were singled out. In Haiti the disaster hit everyone, especially the poorest.' },
+    { id: 'r3', z: 'roh', t: 'People were denied citizenship, leaving them stateless.', why: 'Burma&rsquo;s 1982 citizenship law excludes the Rohingya. Displaced Haitians stayed Haitian citizens.' },
+    { id: 'r4', z: 'roh', t: 'People crossed an international border and became refugees.', why: 'Rohingya fled into Bangladesh. Most displaced Haitians stayed in Haiti as IDPs.' },
+    { id: 'r5', z: 'roh', t: 'No political will in the home country to help or welcome people back.', why: 'Burma&rsquo;s government did not want the Rohingya back. Haiti&rsquo;s government wanted to help but lacked power.' },
+    { id: 'r6', z: 'roh', t: 'Many NGOs had only limited access to the affected area.', why: 'Aid agencies were restricted in Rakhine State. In Haiti NGOs were allowed in.' },
+    { id: 'r7', z: 'roh', t: 'Refugees have no legal right to work in the host country, so jobs are very limited.', why: 'Rohingya in Bangladesh have no status to work. Displaced Haitians could look for work in their own country.' },
+    { id: 'r8', z: 'roh', t: 'Over 700,000 people fled in a few months in 2017.', why: 'The 2017 military &ldquo;clearance operations&rdquo; drove the Rohingya into Bangladesh.' },
+    { id: 'r9', z: 'roh', t: 'Camps at Cox&rsquo;s Bazar grew into the world&rsquo;s largest refugee camp.', why: 'Kutupalong, Cox&rsquo;s Bazar, Bangladesh &mdash; a Rohingya refugee camp.' },
+    // Haiti only
+    { id: 'h1', z: 'hai', t: 'Displacement caused by a natural hazard: a magnitude 7.0 earthquake.', why: 'An <b>environmental</b> cause &mdash; the Rohingya were driven out by persecution.' },
+    { id: 'h2', z: 'hai', t: 'The disaster affected everyone &mdash; even people not directly hit.', why: 'In Haiti forced migration hurt the urban poor who weren&rsquo;t eligible for aid. The Rohingya crisis targeted one group.' },
+    { id: 'h3', z: 'hai', t: 'Most displaced people stayed inside their own country as IDPs.', why: 'Haiti&rsquo;s 1.5 million were internally displaced. The Rohingya crossed into Bangladesh as refugees.' },
+    { id: 'h4', z: 'hai', t: 'The government wanted to help, but a fragile state had little power.', why: 'Haiti&rsquo;s &ldquo;phantom state&rdquo; had political will but no capacity. Burma had capacity but no will.' },
+    { id: 'h5', z: 'hai', t: 'NGOs were allowed in, and reconstruction went almost entirely through them.', why: 'In Haiti NGOs led the response. In Burma many NGOs had limited access.' },
+    { id: 'h6', z: 'hai', t: 'The country had no national army or police organisation able to lead the rescue.', why: 'Haiti lacked a military to organise search and rescue. In Burma the military caused the displacement.' },
+    { id: 'h7', z: 'hai', t: 'Returning migrants were free to look for work in their own country.', why: 'Displaced Haitians kept their rights at home. Rohingya refugees have no right to work in Bangladesh.' },
+    { id: 'h8', z: 'hai', t: 'The authorities chose to depopulate the capital rather than rebuild it.', why: 'Haiti&rsquo;s plans pushed rural decentralisation away from Port-au-Prince.' },
+    { id: 'h9', z: 'hai', t: 'Up to 1,555 camps held 1.5 million people at the peak.', why: 'Figures from Port-au-Prince after the 2010 earthquake.' },
+    // Both
+    { id: 'b1', z: 'both', t: 'Displacement of hundreds of thousands of people.', why: 'Both: over 700,000 Rohingya and 1.5 million Haitians.' },
+    { id: 'b2', z: 'both', t: 'Overcrowded camps with poor sanitation and living conditions.', why: 'Both: Cox&rsquo;s Bazar and Port-au-Prince camps lacked water, sanitation and space.' },
+    { id: 'b3', z: 'both', t: 'The affected groups were already living in poverty and poor conditions.', why: 'Both: the Rohingya were marginalised in Rakhine; Haiti&rsquo;s slum dwellers were the poorest.' },
+    { id: 'b4', z: 'both', t: 'Violence and insecurity added to people&rsquo;s suffering.', why: 'Both: military violence in Burma; armed groups and evictions in Haiti&rsquo;s camps.' },
+    { id: 'b5', z: 'both', t: 'Women and girls were especially vulnerable in the camps.', why: 'Both case studies report camps being unsafe for women and girls.' },
+    { id: 'b6', z: 'both', t: '&lsquo;Temporary&rsquo; camps lasted for years, with no quick solution.', why: 'Both: Haiti still had 496 camps in 2012; Rohingya camps have existed since 2017.' },
+    { id: 'b7', z: 'both', t: 'Displaced people became heavily dependent on aid.', why: 'Both: a culture of dependency is a risk in long-term camps.' },
+    { id: 'b8', z: 'both', t: 'Children&rsquo;s education was badly disrupted.', why: 'Both: many camp children could not attend school.' }
+  ];
+  var sortState = {}, picked = null, firstCheck = true, lockedIds = {};
+
+  function round1() {
+    setStep(1);
+    var sb = panel('Round 1', '&#128450;&#65039; Sort the evidence',
+      '<b>Tap a card, then tap a box</b> &mdash; Rohingya only, Both or Haiti only. Tap a placed card to send it back. When every card is placed, check your sort. <b>First-try correct cards earn 10 XP.</b>');
+    sb.innerHTML = '<div class="tray" id="tray"></div><div class="zones" id="zones"></div><div class="counter" id="counter"></div><p class="msg" id="r1msg"></p><ul class="whylist" id="whyList"></ul>' +
+      '<div class="actions"><button type="button" class="btn primary" id="checkSort" disabled>Check my sort</button></div>';
+    var zEl = $('zones');
+    ['roh', 'both', 'hai'].forEach(function (k) {
+      var z = document.createElement('div'); z.className = 'zone z-' + k; z.dataset.z = k; z.tabIndex = 0; z.setAttribute('role', 'button'); z.setAttribute('aria-label', 'Place in ' + plain(ZONES[k].label));
+      z.innerHTML = '<h4>' + ZONES[k].label + '</h4><div class="zsub">' + ZONES[k].sub + '</div><div class="zc"></div>';
+      z.addEventListener('click', function (e) { if (e.target.closest('.ccard') && !picked) return; zoneClick(k); });
+      z.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); zoneClick(k); } });
+      zEl.appendChild(z);
+    });
+    var order = shuffle(CARDS);
+    function zoneClick(k) { if (picked) { sortState[picked] = k; picked = null; draw(); } }
+    function draw() {
+      var tray = $('tray'); tray.innerHTML = '';
+      document.querySelectorAll('.zone .zc').forEach(function (c) { c.innerHTML = ''; });
+      var placed = 0;
+      order.forEach(function (c) {
+        var b = document.createElement('button'); b.type = 'button'; b.innerHTML = c.t;
+        var z = sortState[c.id];
+        b.className = 'ccard' + (picked === c.id ? ' selected' : '') + (lockedIds[c.id] ? ' correct' : '');
+        b.addEventListener('click', function (e) {
+          if (lockedIds[c.id]) return;
+          if (sortState[c.id]) {
+            if (picked) return; // let the zone receive the picked card
+            e.stopPropagation(); delete sortState[c.id]; draw(); return;
+          }
+          picked = picked === c.id ? null : c.id; draw();
+        });
+        if (z) { placed++; document.querySelector('.zone[data-z="' + z + '"] .zc').appendChild(b); }
+        else tray.appendChild(b);
+      });
+      if (!tray.children.length) tray.innerHTML = '<p class="empty-note">All cards placed &mdash; check your sort!</p>';
+      document.querySelectorAll('.zone').forEach(function (z) { z.classList.toggle('ready', !!picked); });
+      $('counter').textContent = placed + ' / ' + CARDS.length + ' placed';
+      $('checkSort').disabled = placed < CARDS.length;
+    }
+    $('checkSort').addEventListener('click', function () {
+      var right = 0, wrong = [];
+      CARDS.forEach(function (c) {
+        if (sortState[c.id] === c.z) { right++; lockedIds[c.id] = true; }
+        else { wrong.push(c); delete sortState[c.id]; }
+      });
+      if (firstCheck) { score(right, CARDS.length, this); firstCheck = false; }
+      draw();
+      var msg = $('r1msg');
+      if (!wrong.length) {
+        msg.className = 'msg ok'; msg.textContent = 'Perfect sort! All ' + CARDS.length + ' cards in the right place.';
+        $('whyList').innerHTML = '';
+        this.parentNode.innerHTML = '<button type="button" class="btn primary" id="toR2">Round 2: Similar or different? &rarr;</button>';
+        $('toR2').addEventListener('click', function () { this.parentNode.remove(); round2(); });
+        confetti(false);
+      } else {
+        msg.className = 'msg no'; msg.textContent = right + ' / ' + CARDS.length + ' correct. The ' + wrong.length + ' wrong card' + (wrong.length === 1 ? ' is' : 's are') + ' back at the top. Read the hints, then sort again.';
+        $('whyList').innerHTML = wrong.map(function (c) { return '<li>&#128161; <b>&ldquo;' + c.t + '&rdquo;</b> &mdash; ' + ZONES[c.z].label + '. ' + c.why + '</li>'; }).join('');
+      }
+    });
+    draw();
+  }
+
+  /* =========================================================
+     ROUND 2 — Similar or different? (by essay theme)
+     ========================================================= */
+  var THEMES = [
+    { name: 'Cause', q: 'What caused the displacement?', r: 'Persecution of one ethnic group by the military and police.', h: 'A magnitude 7.0 earthquake hitting a fragile state.', a: 'diff',
+      model: 'The Rohingya were forced out by <b>political</b> persecution, <mark>whereas</mark> Haitians were displaced by an <b>environmental</b> hazard.' },
+    { name: 'Conditions', q: 'What were conditions like for displaced people?', r: 'Overcrowded camps at Cox&rsquo;s Bazar, poor sanitation, cyclone and landslide risk.', h: 'Up to 1,555 camps; one shower per 1,200 people in Golgotha camp.', a: 'sim',
+      model: '<mark>In both cases</mark>, displaced people ended up in overcrowded camps with poor sanitation that lasted for years.' },
+    { name: 'Role of the state', q: 'How did the home government respond?', r: 'Burma had the power, but no political will to help or take people back.', h: 'Haiti had the political will, but a fragile &lsquo;phantom state&rsquo; had little power.', a: 'diff',
+      model: 'Burma had the capacity to help but chose not to; <mark>in contrast</mark>, Haiti wanted to help but lacked the capacity to do so.' },
+    { name: 'Role of NGOs', q: 'Could aid organisations help?', r: 'Many NGOs had limited access inside Burma.', h: 'NGOs were let in &mdash; and ended up running almost all reconstruction.', a: 'diff',
+      model: 'NGOs were restricted in Burma, <mark>while</mark> in Haiti they were so dominant that they bypassed the state.' },
+    { name: 'Legal status', q: 'What rights did displaced people have?', r: 'Stateless refugees with no right to work in Bangladesh.', h: 'IDPs who kept citizenship and could look for work in Haiti.', a: 'diff',
+      model: 'Rohingya refugees have no legal status in Bangladesh, <mark>unlike</mark> Haiti&rsquo;s IDPs, who remained citizens with the right to work.' },
+    { name: 'Who was vulnerable', q: 'Who suffered most?', r: 'An already marginalised, poor minority; women and girls at risk in camps.', h: 'The poorest slum dwellers; women and girls at risk in camps.', a: 'sim',
+      model: '<mark>Similarly</mark>, in both cases the people who suffered most were those already living in poverty, especially women and girls.' }
+  ];
+  var r2right = 0;
+  function round2() {
+    setStep(2);
+    var sb = panel('Round 2', '&#9878;&#65039; Similar or different?',
+      'Essays are organised by <b>theme</b>, not by case study. For each theme, decide whether the two cases are <b>mainly similar</b> or <b>mainly different</b>. Then read the model sentence &mdash; notice the <mark style="background:#fcd34d;border-radius:4px;padding:0 3px">comparative connective</mark>.');
+    var done = 0;
+    THEMES.forEach(function (T) {
+      var el = document.createElement('div'); el.className = 'theme';
+      el.innerHTML = '<div class="th-name">Theme: ' + T.name + '</div><div class="th-q">' + T.q + '</div>' +
+        '<div class="pair"><div class="r"><b style="color:var(--roh)">Rohingya</b>' + T.r + '</div><div class="h"><b style="color:var(--hai)">Haiti</b>' + T.h + '</div></div>' +
+        '<div class="choices"><button type="button" class="choice" data-v="sim">&#129309; Mainly similar</button><button type="button" class="choice" data-v="diff">&#8596;&#65039; Mainly different</button></div>' +
+        '<div class="model"><span class="tag">Model sentence</span><br>' + T.model + '</div>';
+      el.querySelectorAll('.choice').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var ok = b.dataset.v === T.a;
+          el.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (x.dataset.v === T.a) x.classList.add('yes'); });
+          if (!ok) b.classList.add('no');
+          score(ok ? 1 : 0, 1, b); if (ok) r2right++;
+          el.querySelector('.model').classList.add('show');
+          done++;
+          if (done === THEMES.length) {
+            var tally = document.createElement('p'); tally.className = 'msg ok';
+            tally.innerHTML = r2right + ' / ' + THEMES.length + ' correct. Notice there are more differences than similarities &mdash; a good essay can still argue <b>both</b> are shaped by poverty and weak protection.';
+            sb.appendChild(tally);
+            var go = document.createElement('div'); go.className = 'actions';
+            go.innerHTML = '<button type="button" class="btn primary">Round 3: Build a paragraph &rarr;</button>';
+            go.querySelector('button').addEventListener('click', function () { go.remove(); round3(); });
+            sb.appendChild(go);
+          }
+        });
+      });
+      sb.appendChild(el);
+    });
+  }
+
+  /* =========================================================
+     ROUND 3 — Comparative paragraph builder
+     ========================================================= */
+  var QUESTIONS = [
+    'Examine the causes and consequences of forced migration in two contrasting contexts.',
+    'To what extent is the power of the state the most important factor in how forced migration is managed?',
+    '&ldquo;The impacts of forced migration are greater when it is caused by conflict rather than a natural disaster.&rdquo; Discuss.',
+    'Compare the role of NGOs in responding to forced migration in two contrasting places.'
+  ];
+  var CONNECTIVES = ['whereas', 'in contrast', 'similarly', 'in both cases', 'unlike', 'while', 'however', 'likewise'];
+  var r3 = { q: null, f: { point: '', roh: '', hai: '', link: '', judge: '' } };
+  function round3() {
+    setStep(3);
+    var sb = panel('Round 3', '&#9997;&#65039; Build a comparative paragraph',
+      'Pick a practice essay question, then build one <b>comparative</b> paragraph: a point for one theme, evidence from <b>both</b> case studies, a link using a comparative connective, and a mini-judgement. Tap the chips to drop in evidence or connectives.');
+    var html = '<div class="eq-pick" id="eqPick">' + QUESTIONS.map(function (q, i) { return '<label><input type="radio" name="eq" value="' + i + '"> <span>' + q + '</span></label>'; }).join('') + '</div>';
+    var chipsR = CARDS.filter(function (c) { return c.z === 'roh'; }).slice(0, 7).concat(CARDS.filter(function (c) { return c.z === 'both'; }).slice(0, 3));
+    var chipsH = CARDS.filter(function (c) { return c.z === 'hai'; }).slice(0, 7).concat(CARDS.filter(function (c) { return c.z === 'both'; }).slice(0, 3));
+    function chipRow(list, target) { return '<div class="chips">' + list.map(function (c) { return '<button type="button" class="chip" data-t="' + target + '" data-v="' + esc(plain(c.t)) + '">+ ' + esc(plain(c.t).slice(0, 38)) + (plain(c.t).length > 38 ? '&hellip;' : '') + '</button>'; }).join('') + '</div>'; }
+    html += '<div class="peel">' +
+      '<div class="f"><label for="f_point">P &middot; Point</label><div class="hint">Name the theme and make a clear comparative claim. e.g. &ldquo;The most significant difference between the two cases is the role of the state.&rdquo;</div><textarea id="f_point"></textarea></div>' +
+      '<div class="f"><label for="f_roh">E &middot; Rohingya evidence</label><div class="hint">Specific facts or figures from the Rohingya case.</div>' + chipRow(chipsR, 'f_roh') + '<textarea id="f_roh"></textarea></div>' +
+      '<div class="f"><label for="f_hai">E &middot; Haiti evidence</label><div class="hint">Specific facts or figures from Haiti.</div>' + chipRow(chipsH, 'f_hai') + '<textarea id="f_hai"></textarea></div>' +
+      '<div class="f"><label for="f_link">E &middot; Explain the comparison</label><div class="hint">Use a comparative connective to explain <b>why</b> the cases are similar or different.</div>' +
+        '<div class="chips">' + CONNECTIVES.map(function (c) { return '<button type="button" class="chip" data-t="f_link" data-v="' + c + '">' + c + '</button>'; }).join('') + '</div><textarea id="f_link"></textarea></div>' +
+      '<div class="f"><label for="f_judge">L &middot; Link back with a judgement</label><div class="hint">Answer the question. e.g. &ldquo;This suggests that&hellip; is more important than&hellip; because&hellip;&rdquo;</div><textarea id="f_judge"></textarea></div>' +
+      '</div>' +
+      '<div class="preview" id="preview"><h3>Your paragraph</h3><div id="pvText"></div></div>' +
+      '<div class="scaffold" id="pvStats"></div>' +
+      '<div class="actions"><button type="button" class="copy" id="copyAll">&#128203; Copy question + paragraph for OneNote</button><button type="button" class="btn primary" id="finishBtn" disabled>Finish</button></div>';
+    sb.innerHTML = html;
+
+    sb.querySelectorAll('input[name="eq"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        r3.q = +r.value;
+        sb.querySelectorAll('#eqPick label').forEach(function (l) { l.classList.toggle('on', l.querySelector('input').checked); });
+        update();
+      });
+    });
+    sb.querySelectorAll('.chip').forEach(function (c) {
+      c.addEventListener('click', function () {
+        var ta = $(c.dataset.t), v = c.dataset.v;
+        var mid = ['whereas', 'while', 'unlike'].indexOf(v) !== -1;
+        if (c.dataset.t === 'f_link' && mid) ta.value = (ta.value.trim() ? ta.value.trim() + ' ' : '') + v + ' ';
+        else ta.value = (ta.value.trim() ? ta.value.trim() + ' ' : '') + (c.dataset.t === 'f_link' ? v.charAt(0).toUpperCase() + v.slice(1) + ', ' : v + ' ');
+        ta.focus(); update();
+      });
+    });
+    ['point', 'roh', 'hai', 'link', 'judge'].forEach(function (k) { $('f_' + k).addEventListener('input', update); });
+
+    function update() {
+      ['point', 'roh', 'hai', 'link', 'judge'].forEach(function (k) { r3.f[k] = $('f_' + k).value.trim(); });
+      var parts = ['point', 'roh', 'hai', 'link', 'judge'].map(function (k) { return r3.f[k]; }).filter(Boolean);
+      $('pvText').innerHTML = parts.length ? esc(parts.join(' ')) : '<span class="ph">Start typing &mdash; your paragraph builds here.</span>';
+      var all = parts.join(' ').toLowerCase(), n = wordCount(all);
+      var conn = CONNECTIVES.filter(function (c) { return all.indexOf(c) !== -1; });
+      var filled = parts.length;
+      $('pvStats').innerHTML = n + ' words &middot; ' + filled + ' / 5 parts &middot; connectives used: ' + (conn.length ? conn.join(', ') : 'none yet');
+      $('finishBtn').disabled = r3.q === null || filled < 5;
+    }
+    $('copyAll').addEventListener('click', function () {
+      var b = this;
+      var txt = 'Rohingya, Haiti or Both? — comparative paragraph\n\nQuestion: ' + (r3.q === null ? '(not chosen)' : plain(QUESTIONS[r3.q])) + '\n\n' +
+        ['point', 'roh', 'hai', 'link', 'judge'].map(function (k) { return r3.f[k]; }).filter(Boolean).join(' ');
+      function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy question + paragraph for OneNote'; }, 2200); }
+      try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
+    });
+    $('finishBtn').addEventListener('click', function () {
+      var all = ['point', 'roh', 'hai', 'link', 'judge'].map(function (k) { return r3.f[k]; }).join(' ').toLowerCase();
+      var bonus = 20; // completed all five parts
+      if (wordCount(all) >= 120) bonus += 20;
+      if (CONNECTIVES.some(function (c) { return all.indexOf(c) !== -1; })) bonus += 10;
+      bonusXp(bonus, this);
+      this.parentNode.removeChild(this); finish();
+    });
+    update();
+  }
+  function fallback(txt) { var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+
+  function finish() {
+    setStep(4);
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 0;
+    var el = document.createElement('div'); el.className = 'finish';
+    el.innerHTML = '<div style="font-size:3rem">' + (pct >= 90 ? '🏆' : '🌟') + '</div><h2>Comparison complete!</h2><div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>' + run.xp + '</b>XP</div></div>' +
+      '<p>' + (pct >= 90 ? 'Excellent &mdash; you can compare political and environmental forced migration like an IB geographer.' : 'Well done. Play again to beat your first-try accuracy.') + '</p>' +
+      '<p style="margin-top:8px;opacity:.9">Next: write two more paragraphs on different themes to complete your essay plan.</p>' +
+      '<div class="actions"><button type="button" class="btn gold" onclick="location.reload()">Play again</button><a class="btn ghost" href="/geography/games#ib">Back to Geography Games</a></div>';
+    $('app').appendChild(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); confetti(pct >= 90);
+  }
+
+  paintHud(); round1();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
