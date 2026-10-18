@@ -33,6 +33,14 @@
   .sbl-res-slot__empty { display: block; font-size: 0.8rem; color: var(--slate); margin-bottom: 0.4rem; }
   .sbl-res-slot__actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
   .sbl-res-row--hidden { display: none; }
+  .sbl-res-link__label { display: block; font-size: 0.72rem; color: var(--slate); margin-bottom: 0.25rem; }
+  .sbl-res-link__input {
+    width: 100%; box-sizing: border-box; margin-bottom: 0.4rem;
+    background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.4rem 0.6rem; font-size: 0.8rem; font-family: inherit;
+  }
+  a.sbl-res-slot__file { text-decoration: none; }
+  a.sbl-res-slot__file:hover { text-decoration: underline; }
 
   /* Six columns is wider than the other admin tables at any normal
      window width — always scroll horizontally rather than relying on
@@ -48,7 +56,7 @@
   <div class="sbl-admin-header">
     <div>
       <h1>Lesson Resources</h1>
-      <p>Upload Lesson Slides, Lesson Notes, Student Workbooks, OneNote Pages and Quizzes for each IB Geography lesson &middot; signed in as <span id="adminName">…</span></p>
+      <p>Upload Lesson Slides, Lesson Notes, Student Workbooks and Quizzes, and paste a OneNote page link, for each IB Geography lesson &middot; signed in as <span id="adminName">…</span></p>
     </div>
     <div style="display:flex; gap:0.6rem;">
       <a href="/admin/" class="sbl-btn sbl-btn--secondary sbl-btn--small">&larr; Back to Dashboard</a>

@@ -14,7 +14,9 @@
 // GET ?lessonId=xyz&open=slides — redirects (302) to a short-lived
 //                                  signed URL for that one file, so
 //                                  a plain <a href> can be used on
-//                                  the lesson page.
+//                                  the lesson page. If the slot holds
+//                                  a link (OneNote page), redirects
+//                                  to that link instead.
 //
 // Teacher-only: only role 'teacher' or 'admin' gets a response.
 //
@@ -59,12 +61,22 @@ export default async function handler(req, res) {
   if (openType) {
     const { data: row, error } = await supabase
       .from('sbl_lesson_resources')
-      .select('storage_path')
+      .select('*')
       .eq('lesson_id', lessonId)
       .eq('resource_type', openType)
       .maybeSingle();
 
     if (error || !row) {
+      return res.status(404).json({ error: 'That resource has not been added yet.' });
+    }
+
+    // A link (e.g. a OneNote page) rather than a file: send the
+    // teacher straight on to it. Only https links are ever stored.
+    if (row.link_url && /^https:\/\//.test(row.link_url)) {
+      res.writeHead(302, { Location: row.link_url });
+      return res.end();
+    }
+    if (!row.storage_path) {
       return res.status(404).json({ error: 'That resource has not been added yet.' });
     }
 

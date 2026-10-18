@@ -24,6 +24,10 @@
 //   2. Browser PUTs the file directly to that URL.
 //   3. 'confirm-upload' — record the completed upload in the table
 //      (and clean up whatever file previously occupied that slot).
+//
+// A slot can hold a LINK instead of a file ('set-link') — used for
+// OneNote Pages, which live in a OneNote notebook rather than as a
+// file. Needs sql/009_resource_links.sql to have been run.
 
 import { requireAdmin } from '../_lib/auth.js';
 import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
@@ -32,12 +36,30 @@ const BUCKET = 'lesson-resources';
 const RESOURCE_TYPES = ['slides', 'notes', 'key_terms', 'diagrams', 'data_sheets'];
 const MAX_LESSON_ID_LENGTH = 200;
 const MAX_FILE_NAME_LENGTH = 200;
+const MAX_LINK_LENGTH = 2000;
 
 function isValidResourceType(t) {
   return typeof t === 'string' && RESOURCE_TYPES.indexOf(t) !== -1;
 }
 function isNonEmptyString(s, max) {
   return typeof s === 'string' && s.trim().length > 0 && s.length <= max;
+}
+// Only plain https:// links are stored, so a link can never run
+// script or point at a local file.
+function cleanHttpsUrl(raw) {
+  if (typeof raw !== 'string') return null;
+  // OneNote's "Copy link to page" can put two links on separate lines
+  // (a web link and an onenote: app link) — keep the first https one.
+  const m = raw.match(/https:\/\/\S+/);
+  if (!m) return null;
+  try {
+    const u = new URL(m[0]);
+    if (u.protocol !== 'https:') return null;
+    const href = u.toString();
+    return href.length <= MAX_LINK_LENGTH ? href : null;
+  } catch (e) {
+    return null;
+  }
 }
 
 // Keeps the storage path readable (for debugging in the Supabase
@@ -60,6 +82,7 @@ export default async function handler(req, res) {
   if (action === 'list') return handleList(req, res);
   if (action === 'create-upload-url') return handleCreateUploadUrl(req, res);
   if (action === 'confirm-upload') return handleConfirmUpload(req, res, session);
+  if (action === 'set-link') return handleSetLink(req, res, session);
   if (action === 'delete') return handleDelete(req, res);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
@@ -75,7 +98,7 @@ async function handleList(req, res) {
 
   const { data, error } = await supabase
     .from('sbl_lesson_resources')
-    .select('id, lesson_id, resource_type, file_name, file_size, content_type, uploaded_at')
+    .select('id, lesson_id, resource_type, file_name, file_size, content_type, uploaded_at, link_url')
     .order('lesson_id', { ascending: true });
 
   if (error) {
@@ -91,7 +114,8 @@ async function handleList(req, res) {
       fileName: row.file_name,
       fileSize: row.file_size,
       contentType: row.content_type,
-      uploadedAt: row.uploaded_at
+      uploadedAt: row.uploaded_at,
+      linkUrl: row.link_url || null
     }))
   });
 }
@@ -171,6 +195,7 @@ async function handleConfirmUpload(req, res, session) {
         storage_path: storagePath,
         file_size: typeof fileSize === 'number' ? fileSize : null,
         content_type: typeof contentType === 'string' ? contentType : null,
+        link_url: null,
         uploaded_by: session.user.id,
         uploaded_at: new Date().toISOString()
       },
@@ -189,6 +214,66 @@ async function handleConfirmUpload(req, res, session) {
       // Not fatal — the new file is live either way, this just leaves
       // an orphaned old file in Storage.
     }
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// set-link — { lessonId, resourceType, url, label? }
+// Saves a link (e.g. a OneNote page) in a slot instead of a file,
+// replacing whatever was there. Any file that previously occupied
+// the slot is removed from Storage.
+// ---------------------------------------------------------------
+async function handleSetLink(req, res, session) {
+  const { lessonId, resourceType, url, label } = req.body || {};
+
+  if (!isNonEmptyString(lessonId, MAX_LESSON_ID_LENGTH)) {
+    return res.status(400).json({ error: 'lessonId is required.' });
+  }
+  if (!isValidResourceType(resourceType)) {
+    return res.status(400).json({ error: 'resourceType must be one of: ' + RESOURCE_TYPES.join(', ') + '.' });
+  }
+  const linkUrl = cleanHttpsUrl(url);
+  if (!linkUrl) {
+    return res.status(400).json({ error: 'Paste a full link starting with https:// (in OneNote: right-click the page, then Copy link to page).' });
+  }
+  const name = isNonEmptyString(label, MAX_FILE_NAME_LENGTH) ? label.trim() : 'OneNote page';
+
+  const supabase = getSupabaseAdmin();
+
+  const { data: existing } = await supabase
+    .from('sbl_lesson_resources')
+    .select('storage_path')
+    .eq('lesson_id', lessonId)
+    .eq('resource_type', resourceType)
+    .maybeSingle();
+
+  const { error: upsertError } = await supabase
+    .from('sbl_lesson_resources')
+    .upsert(
+      {
+        lesson_id: lessonId,
+        resource_type: resourceType,
+        file_name: name,
+        storage_path: null,
+        file_size: null,
+        content_type: null,
+        link_url: linkUrl,
+        uploaded_by: session.user.id,
+        uploaded_at: new Date().toISOString()
+      },
+      { onConflict: 'lesson_id,resource_type' }
+    );
+
+  if (upsertError) {
+    console.error('Failed to save lesson resource link:', upsertError);
+    return res.status(500).json({ error: 'Could not save this link. If this is the first link, check that sql/009_resource_links.sql has been run in Supabase.' });
+  }
+
+  if (existing && existing.storage_path) {
+    const { error: removeError } = await supabase.storage.from(BUCKET).remove([existing.storage_path]);
+    if (removeError) console.error('Failed to remove replaced resource file:', removeError);
   }
 
   return res.status(200).json({ ok: true });
@@ -227,11 +312,14 @@ async function handleDelete(req, res) {
     return res.status(500).json({ error: 'Could not delete this resource.' });
   }
 
-  const { error: removeError } = await supabase.storage.from(BUCKET).remove([row.storage_path]);
-  if (removeError) {
-    console.error('Failed to remove deleted resource file from storage:', removeError);
-    // Row is already gone from the table (so the site no longer
-    // links to it) — a leftover file in Storage isn't user-visible.
+  // Link rows have no file in Storage.
+  if (row.storage_path) {
+    const { error: removeError } = await supabase.storage.from(BUCKET).remove([row.storage_path]);
+    if (removeError) {
+      console.error('Failed to remove deleted resource file from storage:', removeError);
+      // Row is already gone from the table (so the site no longer
+      // links to it) — a leftover file in Storage isn't user-visible.
+    }
   }
 
   return res.status(200).json({ ok: true });
