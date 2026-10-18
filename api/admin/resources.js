@@ -268,7 +268,11 @@ async function handleSetLink(req, res, session) {
 
   if (upsertError) {
     console.error('Failed to save lesson resource link:', upsertError);
-    return res.status(500).json({ error: 'Could not save this link. If this is the first link, check that sql/009_resource_links.sql has been run in Supabase.' });
+    const detail = upsertError.message || upsertError.code || 'unknown error';
+    const hint = /link_url|storage_path|null value|column/i.test(detail)
+      ? ' This usually means sql/009_resource_links.sql has not been run in Supabase yet.'
+      : '';
+    return res.status(500).json({ error: 'Could not save this link (' + detail + ').' + hint });
   }
 
   if (existing && existing.storage_path) {
