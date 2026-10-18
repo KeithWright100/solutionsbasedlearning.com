@@ -57,6 +57,7 @@
    Studio webchat iframes. IB-Style Questions uses the server-side
    /api/mark-ppq route instead — no Claude, Anthropic, OpenAI or
    other AI API is called directly from this file.
+   Speak/listen support lives in /js/sbl-voice.js (loaded below).
    ============================================================ */
 (function () {
 
@@ -65,6 +66,40 @@
 
   var SBL_CHALLENGE_TUTOR_IFRAME_SRC =
     'https://copilotstudio.microsoft.com/environments/Default-9732db31-8695-4030-ae01-e3217b1daaec/bots/crf78_sblchallengetutor_6y7BmB/webchat?__version__=2&enableFileAttachment=false&cliAgent=true';
+
+  /* Voice chat (speak + listen) for the Copilot Studio tutors.
+     Paste each agent's token endpoint here (Copilot Studio -> agent ->
+     Channels -> Mobile app / Web app -> Token endpoint). While a value is
+     empty, that tutor keeps using the normal iframe above. If the voice
+     chat ever fails to load, it falls back to the iframe automatically. */
+  var SBL_TEACH_BOT_TOKEN_URL = '';
+  var SBL_CHALLENGE_TUTOR_TOKEN_URL = '';
+
+  // Load the shared speak/listen helper (mic on answer boxes, read-aloud).
+  (function () {
+    if (window.SBLVoice || document.querySelector('script[src="/js/sbl-voice.js"]')) return;
+    var s = document.createElement('script'); s.src = '/js/sbl-voice.js'; s.defer = true;
+    document.head.appendChild(s);
+  })();
+
+  // Puts a tutor chat into `wrap`: voice-enabled Web Chat when a token
+  // endpoint is set, otherwise (or on any failure) the standard iframe.
+  function mountTutorChat(wrap, iframeSrc, title) {
+    var tokenUrl = iframeSrc === SBL_CHALLENGE_TUTOR_IFRAME_SRC ? SBL_CHALLENGE_TUTOR_TOKEN_URL : SBL_TEACH_BOT_TOKEN_URL;
+    function useIframe() {
+      wrap.innerHTML = '';
+      var iframe = document.createElement('iframe');
+      iframe.title = title;
+      iframe.src = iframeSrc;
+      iframe.setAttribute('allow', 'microphone');
+      wrap.appendChild(iframe);
+    }
+    if (tokenUrl && window.SBLVoice && window.SBLVoice.renderCopilotChat) {
+      window.SBLVoice.renderCopilotChat(wrap, tokenUrl, useIframe);
+    } else {
+      useIframe();
+    }
+  }
 
   var overlay, modal, bodyMount, titleEl, subtitleEl, progressEl, closeBtn, expandBtn, announceEl;
   var lastFocusedElement = null;
@@ -520,6 +555,7 @@ function buildRetrievalBank(lessonId) {
   window.closeTeachBot = function () {
     if (!overlay) return;
     overlay.hidden = true;
+    if (window.SBLVoice) window.SBLVoice.stop();
     setExpanded(false);
     if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
       lastFocusedElement.focus();
@@ -640,10 +676,7 @@ function buildRetrievalBank(lessonId) {
     if (iframeLoaded) return;
     var wrap = document.getElementById('sblFrameWrap');
     if (!wrap) return;
-    var iframe = document.createElement('iframe');
-    iframe.title = 'SBL Tutor chat';
-    iframe.src = src || SBL_TEACH_BOT_IFRAME_SRC;
-    wrap.appendChild(iframe);
+    mountTutorChat(wrap, src || SBL_TEACH_BOT_IFRAME_SRC, 'SBL Tutor chat');
     iframeLoaded = true;
   }
 
@@ -813,11 +846,7 @@ function buildRetrievalBank(lessonId) {
     wrap.appendChild(launch);
 
     document.getElementById('sblLaunchChallengeTutor').addEventListener('click', function () {
-      wrap.innerHTML = '';
-      var iframe = document.createElement('iframe');
-      iframe.title = 'SBL Challenge Tutor chat';
-      iframe.src = SBL_CHALLENGE_TUTOR_IFRAME_SRC;
-      wrap.appendChild(iframe);
+      mountTutorChat(wrap, SBL_CHALLENGE_TUTOR_IFRAME_SRC, 'SBL Challenge Tutor chat');
       iframeLoaded = true;
 
       copyText(buildChallengeOpener(challenge), function (success) {

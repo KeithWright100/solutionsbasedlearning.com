@@ -48,6 +48,12 @@
    Starts empty — this file works fine with zero topics and shows a
    simple "nothing added yet" message until content is added.
    ============================================================ */
+// Speak/listen helper: mic on answer boxes and read-aloud feedback.
+(function () {
+  if (window.SBLVoice || document.querySelector('script[src="/js/sbl-voice.js"]')) return;
+  var s = document.createElement('script'); s.src = '/js/sbl-voice.js'; s.defer = true;
+  document.head.appendChild(s);
+})();
 (function () {
 
   var topics = (window.SBL_REVISION_TOPICS || []).filter(function (t) {
