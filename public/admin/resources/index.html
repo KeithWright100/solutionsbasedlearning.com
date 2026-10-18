@@ -21,10 +21,10 @@
   }
   .sbl-res-search::placeholder { color: var(--slate); }
   .sbl-res-table th, .sbl-res-table td { vertical-align: middle; }
-  .sbl-res-lesson { min-width: 220px; }
+  .sbl-res-lesson { min-width: 200px; max-width: 240px; }
   .sbl-res-lesson__topic { display: block; font-size: 0.72rem; color: var(--slate); margin-bottom: 0.2rem; }
   .sbl-res-lesson__title { display: block; font-size: 0.86rem; color: var(--white); font-weight: 600; }
-  .sbl-res-slot { min-width: 190px; }
+  .sbl-res-slot { min-width: 150px; }
   .sbl-res-slot__file {
     display: block; font-size: 0.8rem; color: var(--teal-bright);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px;
@@ -45,8 +45,15 @@
   /* Six columns is wider than the other admin tables at any normal
      window width — always scroll horizontally rather than relying on
      .sbl-table's mobile-only overflow rule. */
-  .sbl-res-scroll { overflow-x: auto; }
-  .sbl-res-table { min-width: 1080px; }
+  .sbl-res-scroll { overflow: auto; max-height: 72vh; }
+  /* Keep the column headings visible while scrolling down, and the
+     horizontal scrollbar always in reach at the bottom of the box. */
+  .sbl-res-table thead th { position: sticky; top: 0; z-index: 2; background: var(--navy-raised); }
+  .sbl-res-table td:first-child, .sbl-res-table th:first-child { position: sticky; left: 0; z-index: 1; background: var(--navy-raised); }
+  .sbl-res-table thead th:first-child { z-index: 3; }
+  /* This page needs more width than the other admin pages. */
+  .sbl-admin-shell { max-width: 1440px; }
+  .sbl-res-table { min-width: 1000px; }
 </style>
 </head>
 <body>
