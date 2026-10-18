@@ -623,6 +623,15 @@
    "coming soon" elsewhere on the site (.lh-mode--locked). */
 .lh-resources li.is-empty { opacity: 0.6; }
 .lh-resources__status { font-size: 0.72rem; color: var(--lh-muted); margin-left: auto; }
+
+/* Students see this note instead of the Resources list (the card is
+   teacher-only; see js/sbl-lesson-resources.js). */
+.lh-resources__note {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  margin: 0; font-size: 0.82rem; line-height: 1.45; color: var(--lh-muted);
+}
+.lh-resources__note svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; color: var(--lh-muted); }
+.lh-resources__note strong { display: block; color: var(--lh-body); font-weight: 600; }
 .lh-tutor {
   background: var(--lh-blue-bg);
   border-radius: 12px;

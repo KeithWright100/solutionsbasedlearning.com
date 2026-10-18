@@ -16,6 +16,8 @@
 //                                  a plain <a href> can be used on
 //                                  the lesson page.
 //
+// Teacher-only: only role 'teacher' or 'admin' gets a response.
+//
 // Lesson pages are gated by middleware.js, so only a logged-in
 // visitor can normally reach a page that calls this — but this route
 // checks for itself regardless, same as every other /api endpoint
@@ -27,6 +29,7 @@ import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
 const BUCKET = 'lesson-resources';
 const MAX_LESSON_ID_LENGTH = 200;
 const SIGNED_URL_TTL_SECONDS = 60;
+const TEACHER_ROLES = ['teacher', 'admin'];
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -36,6 +39,13 @@ export default async function handler(req, res) {
 
   const session = await requireSession(req, res);
   if (!session) return; // requireSession has already sent the 401/403
+
+  // Lesson resources are teacher-only: students get a 403 even if
+  // they have a direct link. (The lesson page shows them a short
+  // "Teacher resources" note instead of the list.)
+  if (!TEACHER_ROLES.includes(session.profile.role)) {
+    return res.status(403).json({ error: 'Lesson resources are available to teachers only.', teacherOnly: true });
+  }
 
   const lessonId = typeof req.query.lessonId === 'string' ? req.query.lessonId : null;
   if (!lessonId || !lessonId.trim() || lessonId.length > MAX_LESSON_ID_LENGTH) {

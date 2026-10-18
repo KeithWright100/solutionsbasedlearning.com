@@ -1,33 +1,57 @@
 // public/js/sbl-lesson-resources.js
-// Turns the static "Resources" card on an IB Geography lesson page
-// into live links, once files have been uploaded for that lesson via
-// the teacher-only /admin/resources/ page.
+// Runs on every IB Geography lesson page that has a "Resources" card.
 //
-// Reads the lesson id off the same #sblTeachBotOverlay[data-lesson-id]
-// element the Teach Me Live / Challenge Mode / etc. buttons already
-// use, so no page needs a second, separate id anywhere. If that
-// element or the .lh-resources__item slots aren't present, this does
-// nothing — safe to include on any page.
+// The Resources card is TEACHER-ONLY:
+//   - Teachers and admins see the card as before. Where the page has
+//     a lesson id and the .lh-resources__item slots, each slot becomes
+//     a live link once a file has been uploaded via /admin/resources/,
+//     or shows "Not added yet".
+//   - Everyone else (students, not logged in, or if the role can't be
+//     checked) sees a short "Teacher resources" note instead of the
+//     list.
 //
-// Fails silently on any error (not logged in, API not deployed yet,
-// network issue, etc.) so a lesson page never breaks or shows a
-// scary error because of this — worst case, the Resources list just
-// stays as plain, non-clickable text, exactly as it always has.
+// This only controls what the page SHOWS. The files themselves are
+// protected on the server: /api/resources refuses anyone who isn't a
+// teacher or admin (see api/resources.js), so a shared link won't
+// open for a student either.
 
 (function () {
-  function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.textContent = str == null ? '' : String(str);
-    return div.innerHTML;
+  var TEACHER_ROLES = ['teacher', 'admin'];
+
+  var LOCK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
+    '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+
+  function lists() {
+    return Array.prototype.slice.call(document.querySelectorAll('ul.lh-resources'));
   }
 
-  function init() {
+  // Hide the lists straight away so a student never sees the file
+  // names flash up before the role check comes back.
+  function hideLists() {
+    lists().forEach(function (ul) { ul.style.visibility = 'hidden'; });
+  }
+
+  function showLists() {
+    lists().forEach(function (ul) { ul.style.visibility = ''; });
+  }
+
+  function showTeacherNote() {
+    lists().forEach(function (ul) {
+      var note = document.createElement('p');
+      note.className = 'lh-resources__note';
+      note.innerHTML = LOCK_SVG + '<span><strong>Teacher resources</strong>' +
+        'Lesson slides, notes and workbooks for this lesson are available to teachers.</span>';
+      ul.parentNode.replaceChild(note, ul);
+    });
+  }
+
+  // Teacher view: the original behaviour — turn uploaded slots into
+  // links and mark the rest "Not added yet".
+  function wireTeacherLinks() {
     var overlay = document.getElementById('sblTeachBotOverlay');
     var lessonId = overlay && overlay.getAttribute('data-lesson-id');
-    if (!lessonId) return;
-
     var items = document.querySelectorAll('.lh-resources__item[data-resource-type]');
-    if (!items.length) return;
+    if (!lessonId || !items.length) return;
 
     fetch('/api/resources?lessonId=' + encodeURIComponent(lessonId), { credentials: 'same-origin' })
       .then(function (r) { return r.ok ? r.json() : null; })
@@ -64,8 +88,28 @@
         });
       })
       .catch(function () {
-        // Not logged in, API not live yet, or a network hiccup — leave
-        // the Resources card exactly as it was.
+        // API not reachable — leave the list as plain text.
+      });
+  }
+
+  function init() {
+    if (!lists().length) return;
+    hideLists();
+
+    fetch('/api/session', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (s) {
+        var role = s && s.loggedIn && s.user ? s.user.role : null;
+        if (role && TEACHER_ROLES.indexOf(role) !== -1) {
+          showLists();
+          wireTeacherLinks();
+        } else {
+          showTeacherNote();
+        }
+      })
+      .catch(function () {
+        // Can't confirm the visitor is a teacher, so show the note.
+        showTeacherNote();
       });
   }
 
