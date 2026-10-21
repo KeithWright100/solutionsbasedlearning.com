@@ -151,17 +151,41 @@ async function handleMyStudents(req, res, session, supabase) {
   // assignments names me (sql/010), or — for older data — their single
   // teacher_id does. Falls back to teacher_id alone if the new column
   // doesn't exist yet.
-  const me = session.user.id;
-  const [byLegacy, byAssignments] = await Promise.all([
-    supabase.from('sbl_profiles').select('*').eq('teacher_id', me),
-    supabase.from('sbl_profiles').select('*').contains('teacher_assignments', [{ teacher_id: me }])
-  ]);
-  const studentsError = byLegacy.error;
-  const merged = {};
-  (byLegacy.data || []).concat(byAssignments.error ? [] : (byAssignments.data || []))
-    .forEach((p) => { merged[p.id] = p; });
-  const students = Object.values(merged)
-    .sort((x, y) => String(x.full_name || '').localeCompare(String(y.full_name || ''), 'en', { sensitivity: 'base' }));
+  // Admins can also look at another teacher's sheet (&teacherId=) or
+  // every student on the site (&all=1). Teachers only ever see their own.
+  const isAdmin = session.profile.role === 'admin';
+  const allMode = isAdmin && req.query.all === '1';
+  const me = (isAdmin && typeof req.query.teacherId === 'string' && req.query.teacherId) || session.user.id;
+
+  let students = [];
+  let studentsError = null;
+  if (allMode) {
+    const r = await supabase.from('sbl_profiles').select('*').eq('role', 'student');
+    studentsError = r.error;
+    students = r.data || [];
+  } else {
+    const [byLegacy, byAssignments] = await Promise.all([
+      supabase.from('sbl_profiles').select('*').eq('teacher_id', me),
+      supabase.from('sbl_profiles').select('*').contains('teacher_assignments', [{ teacher_id: me }])
+    ]);
+    studentsError = byLegacy.error;
+    const merged = {};
+    (byLegacy.data || []).concat(byAssignments.error ? [] : (byAssignments.data || []))
+      .forEach((p) => { merged[p.id] = p; });
+    students = Object.values(merged);
+  }
+  students.sort((x, y) => String(x.full_name || '').localeCompare(String(y.full_name || ''), 'en', { sensitivity: 'base' }));
+
+  // For admins: the list of teachers (for the sheet's Teacher picker)
+  // and a name lookup so "all students" can show who teaches whom.
+  let teacherList = null;
+  const teacherName = {};
+  if (isAdmin) {
+    const t = await supabase.from('sbl_profiles').select('id, full_name, email, role').in('role', ['teacher', 'admin']);
+    teacherList = (t.data || []).map((x) => ({ id: x.id, name: x.full_name || x.email }))
+      .sort((x, y) => x.name.localeCompare(y.name));
+    teacherList.forEach((x) => { teacherName[x.id] = x.name; });
+  }
 
   if (studentsError) {
     console.error('Failed to load assigned students:', studentsError);
@@ -169,7 +193,7 @@ async function handleMyStudents(req, res, session, supabase) {
   }
 
   if (!students || !students.length) {
-    return res.status(200).json({ students: [] });
+    return res.status(200).json({ students: [], teachers: teacherList });
   }
 
   const studentIds = students.map((s) => s.id);
@@ -228,13 +252,19 @@ async function handleMyStudents(req, res, session, supabase) {
       id: s.id, fullName: s.full_name, email: s.email, status: s.status, groupName: s.group_name || null,
       // the subjects I teach this student (from their assignments)
       subjects: (Array.isArray(s.teacher_assignments) ? s.teacher_assignments : [])
-        .filter((a) => a && a.teacher_id === me).map((a) => a.subject)
+        .filter((a) => a && (allMode || a.teacher_id === me)).map((a) => a.subject)
+        .filter((v, i, arr) => arr.indexOf(v) === i),
+      // admins only: every subject + teacher for this student
+      assignments: isAdmin
+        ? (Array.isArray(s.teacher_assignments) ? s.teacher_assignments : [])
+            .map((a) => ({ subject: a.subject, teacher: teacherName[a.teacher_id] || 'Unknown' }))
+        : undefined
     },
     summary[s.id] || { lessonsWithProgress: 0, lastUpdated: null, quizCount: 0, quizAvgPct: null, ibCount: 0, ibAvgPct: null },
     wantSheet ? { cells: cells[s.id] || {} } : {}
   ));
 
-  return res.status(200).json({ students: result });
+  return res.status(200).json({ students: result, teachers: teacherList, viewing: allMode ? 'all' : me });
 }
 
 // ---------------------------------------------------------------

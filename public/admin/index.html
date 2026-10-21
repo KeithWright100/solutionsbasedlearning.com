@@ -25,6 +25,18 @@
     background-repeat: no-repeat; background-position: right 0.5rem center;
   }
   .sbl-role-select:disabled, .sbl-teacher-select:disabled { opacity: 0.5; }
+  .us-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:0.7rem; margin-bottom:1.2rem; }
+  .us-stat { background:var(--navy); border:1px solid var(--navy-line); border-radius:12px; padding:0.8rem 1rem; }
+  .us-stat b { display:block; font-family:var(--font-display); font-size:1.45rem; color:var(--white); }
+  .us-stat span { font-size:0.78rem; color:var(--slate); }
+  .us-h { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); margin:1.2rem 0 0.6rem; }
+  .us-bars { display:grid; grid-template-columns:repeat(8,1fr); gap:0.5rem; align-items:end; height:150px; padding:0.5rem 0; }
+  .us-bar { display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; font-size:0.72rem; color:var(--slate); gap:3px; }
+  .us-bar i { display:block; width:100%; max-width:46px; border-radius:6px 6px 0 0; background:var(--teal); min-height:2px; }
+  .us-bar i.ppq { background:#f59e0b; }
+  .us-bar .pair { display:flex; gap:3px; align-items:flex-end; width:100%; justify-content:center; height:110px; }
+  .us-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+  @media (max-width: 900px) { .us-grid2 { grid-template-columns:1fr; } }
   .sbl-group-input {
     background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
     color: var(--white); padding: 0.35rem 0.55rem; font-size: 0.78rem;
@@ -68,6 +80,7 @@
     <button type="button" class="sbl-tab" data-tab="approved">Approved Users <span class="sbl-tab__count" id="countApproved">0</span></button>
     <button type="button" class="sbl-tab" data-tab="rejected">Rejected Applications <span class="sbl-tab__count" id="countRejected">0</span></button>
     <button type="button" class="sbl-tab" data-tab="feedback">Feedback <span class="sbl-tab__count" id="countFeedback">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="usage">Usage</button>
   </div>
 
   <section class="sbl-panel" id="panelPending">
@@ -109,6 +122,14 @@
       <tbody id="rejectedBody"></tbody>
     </table>
     <div class="sbl-empty-state" id="rejectedEmpty" style="display:none;">No rejected applications.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelUsage" style="display:none; padding:1.2rem 1.3rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+      <p class="sbl-muted" style="margin:0;">Student activity from saved lesson progress: quizzes, IB-style and past paper marks. Teachers&rsquo; and admins&rsquo; own activity is left out. Games are open without login, so they&rsquo;re not counted here.</p>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="usageRefresh">Refresh</button>
+    </div>
+    <div id="usageBody"><div class="sbl-empty-state">Loading usage&hellip;</div></div>
   </section>
 
   <section class="sbl-panel" id="panelFeedback" style="display:none;">

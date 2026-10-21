@@ -87,7 +87,8 @@
     pending: document.getElementById('panelPending'),
     approved: document.getElementById('panelApproved'),
     rejected: document.getElementById('panelRejected'),
-    feedback: document.getElementById('panelFeedback')
+    feedback: document.getElementById('panelFeedback'),
+    usage: document.getElementById('panelUsage')
   };
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
@@ -95,8 +96,52 @@
       tab.classList.add('is-active');
       Object.keys(panels).forEach(function (key) { panels[key].style.display = 'none'; });
       panels[tab.getAttribute('data-tab')].style.display = 'block';
+      if (tab.getAttribute('data-tab') === 'usage' && !usageLoaded) loadUsage();
     });
   });
+
+  // ---- Usage tab (loaded the first time it's opened) ----
+  var usageLoaded = false;
+  document.getElementById('usageRefresh').addEventListener('click', loadUsage);
+  function loadUsage() {
+    usageLoaded = true;
+    var box = document.getElementById('usageBody');
+    box.innerHTML = '<div class="sbl-empty-state">Loading usage…</div>';
+    fetch('/api/admin/data?usage=1')
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Could not load usage.'); return d; }); })
+      .then(renderUsage)
+      .catch(function (err) { box.innerHTML = '<div class="sbl-empty-state">' + escapeHtml(err.message) + '</div>'; });
+  }
+  function renderUsage(d) {
+    var T = d.totals || {};
+    var stat = function (b, t) { return '<div class="us-stat"><b>' + b + '</b><span>' + t + '</span></div>'; };
+    var pc = function (v) { return v == null ? '—' : v + '%'; };
+    var html = '<div class="us-stats">' +
+      stat(T.students, 'student accounts') +
+      stat(T.active7, 'active in the last 7 days') +
+      stat(T.active30, 'active in the last 30 days') +
+      stat(T.quizzes30, 'quizzes in the last 30 days (' + T.quizzes + ' total)') +
+      stat(T.ppqs30, 'PPQs marked in the last 30 days (' + T.ppqs + ' total)') + '</div>';
+    var max = 1;
+    (d.weeks || []).forEach(function (w) { max = Math.max(max, w.quizzes, w.ppqs); });
+    html += '<h3 class="us-h">Last 8 weeks <span class="sbl-muted" style="text-transform:none;letter-spacing:0;">— <span style="color:var(--teal)">■</span> quizzes &nbsp;<span style="color:#f59e0b">■</span> PPQs marked</span></h3><div class="us-bars">' +
+      (d.weeks || []).map(function (w) {
+        var label = w.weeksAgo === 0 ? 'This wk' : w.weeksAgo + 'w ago';
+        return '<div class="us-bar" title="' + w.quizzes + ' quizzes, ' + w.ppqs + ' PPQs, ' + w.activeStudents + ' students"><div class="pair">' +
+          '<i style="height:' + Math.round(w.quizzes / max * 100) + '%"></i><i class="ppq" style="height:' + Math.round(w.ppqs / max * 100) + '%"></i></div>' +
+          '<span>' + w.activeStudents + ' stu</span><span>' + label + '</span></div>';
+      }).join('') + '</div>';
+    html += '<h3 class="us-h">By unit</h3><table class="sbl-table"><thead><tr><th>Unit</th><th>Students</th><th>Quizzes</th><th>Avg quiz</th><th>Avg PPQ</th></tr></thead><tbody>' +
+      (d.units || []).map(function (u) { return '<tr><td>' + escapeHtml(u.name) + '</td><td>' + u.students + '</td><td>' + u.quizzes + '</td><td>' + pc(u.quizAvg) + '</td><td>' + pc(u.ppqAvg) + '</td></tr>'; }).join('') +
+      '</tbody></table>';
+    var lessonRows = function (list) {
+      return (list || []).map(function (l) { return '<tr><td>' + escapeHtml(l.id.indexOf('PPQ:') === 0 ? l.id.slice(4) : l.id) + '<div class="sbl-muted">' + escapeHtml(l.unit) + '</div></td><td>' + l.students + '</td><td>' + pc(l.quizAvg) + '</td><td>' + pc(l.ppqAvg) + '</td></tr>'; }).join('') ||
+        '<tr><td colspan="4" class="sbl-muted">Not enough data yet.</td></tr>';
+    };
+    html += '<div class="us-grid2"><div><h3 class="us-h">Most used lessons</h3><table class="sbl-table"><thead><tr><th>Lesson</th><th>Students</th><th>Avg quiz</th><th>Avg PPQ</th></tr></thead><tbody>' + lessonRows(d.topLessons) + '</tbody></table></div>' +
+      '<div><h3 class="us-h">Lowest quiz scores <span class="sbl-muted" style="text-transform:none;letter-spacing:0;">(3+ quizzes)</span></h3><table class="sbl-table"><thead><tr><th>Lesson</th><th>Students</th><th>Avg quiz</th><th>Avg PPQ</th></tr></thead><tbody>' + lessonRows(d.weakestLessons) + '</tbody></table></div></div>';
+    document.getElementById('usageBody').innerHTML = html;
+  }
 
   // ---- Search boxes: filter instantly as you type, no server call ----
   document.getElementById('pendingSearch').addEventListener('input', renderPending);

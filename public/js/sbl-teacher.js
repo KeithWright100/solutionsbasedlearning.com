@@ -34,6 +34,8 @@
   var students = [];
   var current = { cls: '__all', view: 'u1', q: '', subj: '__all' };
   var DAY = 86400000;
+  var isAdmin = false;
+  var viewing = '';   // admin only: '' = my students, 'all', or a teacher id
 
   function showError(msg) { pageError.textContent = msg; pageError.classList.add('is-visible'); }
   function esc(str) { var d = document.createElement('div'); d.textContent = str == null ? '' : String(str); return d.innerHTML; }
@@ -54,7 +56,8 @@
         return;
       }
       $('teacherName').textContent = data.user.fullName || data.user.email;
-      if (data.user.role === 'admin') $('adminLink').hidden = false;
+      isAdmin = data.user.role === 'admin';
+      if (isAdmin) $('adminLink').hidden = false;
       init();
     })
     .catch(function () { window.location.href = '/login/?redirect=/teacher/'; });
@@ -77,13 +80,39 @@
     $('drawerBg').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
 
-    fetch('/api/progress?myStudents=1&sheet=1')
+    $('teacherSel').addEventListener('change', function () {
+      viewing = this.value;
+      try { localStorage.setItem('sbl-teacher-viewing', viewing); } catch (e) {}
+      loadStudents();
+    });
+    if (isAdmin) { try { viewing = localStorage.getItem('sbl-teacher-viewing') || ''; } catch (e) {} }
+    loadStudents();
+  }
+
+  var teachersFilled = false;
+  function fillTeachers(list) {
+    if (!isAdmin || !list || teachersFilled) return;
+    teachersFilled = true;
+    var sel = $('teacherSel');
+    sel.innerHTML = '<option value="">My students</option><option value="all">All students on the site</option>' +
+      list.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(t.name) + '’s students</option>'; }).join('');
+    if (!sel.querySelector('option[value="' + String(viewing).replace(/"/g, '') + '"]')) viewing = '';
+    sel.value = viewing;
+    $('teacherField').hidden = false;
+  }
+
+  function loadStudents() {
+    $('sheetWrap').innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">Loading students…</div>';
+    var url = '/api/progress?myStudents=1&sheet=1' +
+      (isAdmin && viewing === 'all' ? '&all=1' : isAdmin && viewing ? '&teacherId=' + encodeURIComponent(viewing) : '');
+    fetch(url)
       .then(function (r) {
         if (!r.ok) return r.json().then(function (d) { throw new Error(d.error || 'Could not load your students.'); });
         return r.json();
       })
       .then(function (data) {
         students = data.students || [];
+        fillTeachers(data.teachers);
         fillClasses();
         fillSubjects();
         showView();
@@ -104,6 +133,7 @@
         return '<option value="' + esc(g) + '">' + esc(g) + ' (' + n + ')</option>';
       }).join('') +
       (groups[''] && names.length ? '<option value="__none">No class set</option>' : '');
+    current.cls = '__all';
     try { var saved = localStorage.getItem('sbl-teacher-class'); if (saved && sel.querySelector('option[value="' + saved.replace(/"/g, '') + '"]')) sel.value = saved; } catch (e) {}
     current.cls = sel.value;
   }
@@ -225,8 +255,10 @@
 
     var body = '';
     list.forEach(function (s) {
-      var sub = [s.groupName].concat(s.subjects || []).filter(Boolean).join(' · ');
-      var r = '<tr><td class="cs-name">' + esc(s.fullName || s.email) + '<small>' + esc(sub) + '</small></td>';
+      var sub = viewing === 'all' && s.assignments && s.assignments.length
+        ? [s.groupName].concat(s.assignments.map(function (a) { return a.subject + ' – ' + a.teacher; })).filter(Boolean).join(' · ')
+        : [s.groupName].concat(s.subjects || []).filter(Boolean).join(' · ');
+      var r = '<tr><td class="cs-name"><button type="button" class="cs-who" data-student="' + esc(s.id) + '" title="See all of this student’s work">' + esc(s.fullName || s.email) + '</button><small>' + esc(sub) + '</small></td>';
       cols.forEach(function (c) {
         var cell = (s.cells || {})[c.id];
         var data = ' data-s="' + esc(s.id) + '" data-l="' + esc(c.id) + '"';
@@ -255,6 +287,9 @@
     wrap.innerHTML = '<table class="cs-sheet"><thead>' + h1 + h2 + '</thead><tbody>' + body + '</tbody></table>';
     var first = wrap.querySelector('thead tr:first-child th:nth-child(2)');
     if (first) wrap.style.setProperty('--cs-head1', first.offsetHeight + 'px');
+    wrap.querySelectorAll('button.cs-who').forEach(function (b) {
+      b.addEventListener('click', function () { openStudent(b.dataset.student); });
+    });
     wrap.querySelectorAll('td.cs-cell[data-s]').forEach(function (td) {
       td.tabIndex = 0;
       td.addEventListener('click', function () { openDetail(td.dataset.s, td.dataset.l); });
@@ -286,9 +321,64 @@
   }
 
   // ---- detail drawer: one student, one lesson ----
-  function openDetail(studentId, lessonId) {
+  // ---- whole-student overview: every lesson and PPQ topic they've saved ----
+  var UNIT_PREFIX = [['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
+  function viewOf(id) {
+    if (id.indexOf('PPQ:') === 0) return 'ppq';
+    for (var i = 0; i < UNIT_PREFIX.length; i++) if (id.indexOf(UNIT_PREFIX[i][0]) === 0) return UNIT_PREFIX[i][1];
+    return 'other';
+  }
+  function openStudent(studentId) {
     var s = students.filter(function (x) { return x.id === studentId; })[0] || {};
-    var col = cols.filter(function (c) { return c.id === lessonId; })[0] || { title: lessonId };
+    $('drawerBody').innerHTML = '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">All units · loading…</div>';
+    $('drawer').classList.add('is-open'); $('drawerBg').classList.add('is-open'); $('drawer').setAttribute('aria-hidden', 'false');
+    $('drawerClose').focus();
+    var unitViews = VIEWS.filter(function (v) { return v.src; });
+    Promise.all([
+      fetch('/api/progress?studentId=' + encodeURIComponent(studentId)).then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Could not load.'); return d; }); }),
+      Promise.all(unitViews.map(lessonsFor))
+    ]).then(function (res) {
+      var d = res[0], lessons = d.lessons || {}, updated = d.updated || {};
+      var titles = {}, order = {};
+      unitViews.forEach(function (v, vi) { (viewLessons[v.key] || []).forEach(function (l, li) { titles[l.id] = l.title; order[l.id] = vi * 1000 + li; }); });
+      var ids = Object.keys(lessons).sort(function (a, b) {
+        var oa = order[a] == null ? 99999 : order[a], ob = order[b] == null ? 99999 : order[b];
+        return oa - ob || a.localeCompare(b);
+      });
+      var html = '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">' + esc(s.email || '') +
+        (s.assignments && s.assignments.length ? ' · ' + esc(s.assignments.map(function (a) { return a.subject + ' – ' + a.teacher; }).join(', ')) : '') + '</div>';
+      if (!ids.length) html += '<div class="cs-block">No saved work yet.</div>';
+      var lastView = null;
+      ids.forEach(function (id) {
+        var v = viewOf(id);
+        if (v !== lastView) {
+          if (lastView !== null) html += '</tbody></table></div>';
+          var vl = (VIEWS.filter(function (x) { return x.key === v; })[0] || { label: 'Other' }).label;
+          html += '<div class="cs-block"><h3>' + esc(vl) + '</h3><table class="cs-mini"><thead><tr><th>Lesson</th><th>Quiz</th><th>SR</th><th>PPQ</th></tr></thead><tbody>';
+          lastView = v;
+        }
+        var L = lessons[id] || {}, aw = 0, mx = 0;
+        Object.keys(L).forEach(function (k) { var a = L[k]; if (k.indexOf('ib_q') === 0 && a && typeof a.awarded === 'number' && a.marks) { aw += a.awarded; mx += a.marks; } });
+        var t = id.indexOf('PPQ:') === 0 ? id.slice(4) : (titles[id] || id);
+        var tmk = L.quiz_test_my_knowledge && L.quiz_test_my_knowledge.pct, sr = L.quiz_spaced_retrieval && L.quiz_spaced_retrieval.pct;
+        html += '<tr data-lesson="' + esc(id) + '" data-title="' + esc(t) + '"><td>' + esc(t.length > 70 ? t.slice(0, 68) + '…' : t) + '<small>' + fmtDate(updated[id]) + '</small></td>' +
+          '<td class="' + band(tmk) + '">' + (tmk == null ? '·' : tmk + '%') + '</td>' +
+          '<td class="' + band(sr) + '">' + (sr == null ? '·' : sr + '%') + '</td>' +
+          '<td class="' + band(pctOf(aw, mx)) + '">' + (mx ? aw + '/' + mx : '·') + '</td></tr>';
+      });
+      if (lastView !== null) html += '</tbody></table></div>';
+      html += '<p class="cs-sub">Click a lesson to see answers and feedback.</p>';
+      $('drawerBody').innerHTML = html;
+      $('drawerBody').querySelectorAll('tr[data-lesson]').forEach(function (tr) {
+        tr.addEventListener('click', function () { openDetail(studentId, tr.dataset.lesson, tr.dataset.title, true); });
+      });
+    }).catch(function (err) { $('drawerBody').innerHTML += '<div class="cs-block">' + esc(err.message) + '</div>'; });
+  }
+
+  function openDetail(studentId, lessonId, titleOverride, fromOverview) {
+    var s = students.filter(function (x) { return x.id === studentId; })[0] || {};
+    var col = cols.filter(function (c) { return c.id === lessonId; })[0] || { title: titleOverride || lessonId };
+    backTo = fromOverview ? studentId : null;
     $('drawerBody').innerHTML = '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">' + esc(col.title) + '</div><p class="cs-sub">Loading…</p>';
     $('drawer').classList.add('is-open'); $('drawerBg').classList.add('is-open'); $('drawer').setAttribute('aria-hidden', 'false');
     $('drawerClose').focus();
@@ -305,8 +395,10 @@
       '<p><b>Completed:</b> ' + fmtDate(q.completedAt, true) + '</p></div>';
   }
 
+  var backTo = null;
   function renderDetail(s, col, data) {
-    var html = '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">' + esc(col.title) + '</div>';
+    var html = (backTo ? '<button type="button" class="cs-back" id="csBack">← All of ' + esc(s.fullName || 'this student') + '’s work</button>' : '') +
+      '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">' + esc(col.title) + '</div>';
     html += quizBlock('Test My Knowledge', data.quiz_test_my_knowledge);
     html += quizBlock('Spaced Retrieval', data.quiz_spaced_retrieval);
     if (Array.isArray(data.checklist) && data.checklist.length) {
@@ -333,6 +425,7 @@
     });
     if (html.indexOf('cs-block') === -1) html += '<div class="cs-block">Nothing saved for this lesson yet.</div>';
     $('drawerBody').innerHTML = html;
+    if (backTo) { var id = backTo; $('csBack').addEventListener('click', function () { openStudent(id); }); }
   }
 
   function closeDrawer() {

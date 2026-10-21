@@ -64,6 +64,16 @@
   .cs-block .cs-answer { white-space: pre-wrap; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 0.6rem 0.7rem; margin-top: 0.4rem; color: #dbe7ef; }
   .cs-block p { margin: 0.35rem 0; }
   .cs-block p b { color: var(--slate); font-weight: 600; }
+  .cs-who { background: none; border: none; padding: 0; color: var(--white); font: inherit; font-weight: 600; cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: rgba(45,225,203,0.35); text-underline-offset: 3px; }
+  .cs-who:hover { color: var(--teal-bright); }
+  .cs-back { background: none; border: none; color: var(--teal-bright); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 0; margin-bottom: 0.6rem; }
+  table.cs-mini { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  .cs-mini th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--slate); padding: 0.3rem 0.4rem; }
+  .cs-mini td { padding: 0.45rem 0.4rem; border-top: 1px solid var(--navy-line); font-family: var(--font-mono); }
+  .cs-mini td:first-child { font-family: var(--font-body); }
+  .cs-mini td small { display: block; color: var(--slate); font-size: 0.7rem; }
+  .cs-mini tr[data-lesson] { cursor: pointer; }
+  .cs-mini tr[data-lesson]:hover td:first-child { color: var(--teal-bright); }
 </style>
 </head>
 <body>
@@ -86,6 +96,7 @@
 
   <div class="cs-toolbar">
     <div class="cs-field"><label for="classSel">Class</label><select id="classSel"></select></div>
+    <div class="cs-field" id="teacherField" hidden><label for="teacherSel">Viewing</label><select id="teacherSel"></select></div>
     <div class="cs-field" id="subjField" hidden><label for="subjSel">Subject</label><select id="subjSel"></select></div>
     <div class="cs-field"><label for="viewSel">Unit</label><select id="viewSel"></select></div>
     <div class="cs-field"><label for="searchBox">Find student</label><input id="searchBox" type="search" placeholder="Type a name…"></div>
