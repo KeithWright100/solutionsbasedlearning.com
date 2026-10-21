@@ -54,6 +54,7 @@
         return;
       }
       $('teacherName').textContent = data.user.fullName || data.user.email;
+      if (data.user.role === 'admin') $('adminLink').hidden = false;
       init();
     })
     .catch(function () { window.location.href = '/login/?redirect=/teacher/'; });

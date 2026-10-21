@@ -226,7 +226,21 @@
     }
     empty.style.display = 'none';
 
-    users.forEach(function (u) {
+    // Not-yet-assigned accounts first, then those already assigned to a
+    // teacher; each part A-Z by name (first name first, as entered).
+    var byName = function (x, y) {
+      return String(x.full_name || x.email || '').localeCompare(String(y.full_name || y.email || ''), 'en', { sensitivity: 'base' });
+    };
+    var unassigned = users.filter(function (u) { return !u.teacher_id; }).sort(byName);
+    var assigned = users.filter(function (u) { return !!u.teacher_id; }).sort(byName);
+    users = unassigned.concat(assigned);
+
+    users.forEach(function (u, i) {
+      if (i === unassigned.length && assigned.length) {
+        var divider = document.createElement('tr');
+        divider.innerHTML = '<td colspan="9" style="padding:0.9rem 1rem 0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); border-top:2px solid var(--navy-line);">Assigned to a teacher (' + assigned.length + ')</td>';
+        body.appendChild(divider);
+      }
       var tr = document.createElement('tr');
       var badge = u.status === 'suspended'
         ? '<span class="sbl-badge sbl-badge--suspended">Suspended</span>'
