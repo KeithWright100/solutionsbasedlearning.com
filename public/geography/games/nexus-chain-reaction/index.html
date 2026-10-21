@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nexus Chain Reaction — Climate Change and the Water–Energy–Food Nexus — IB Geography Games — SBL</title>
+<meta name="description" content="IB DP Geography Unit 3 game: rebuild eight chain reactions showing how climate change puts pressure on the water–energy–food nexus, sort effects into water, energy or food, then explain one chain.">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --gold: #f59e0b;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --c-place: #2563eb; --c-processes: #0f766e; --c-power: #7c3aed; --c-possibilities: #d97706;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 0% 0%, rgba(37,99,235,0.08), transparent 40%), radial-gradient(circle at 100% 10%, rgba(0,184,176,0.12), transparent 35%), linear-gradient(180deg, #f6f9fa, #eaf1f3); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px 26px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.95), rgba(15,58,92,0.9)); position: relative; overflow: hidden; }
+  .hero .kicker { display: inline-block; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; line-height: 1.15; }
+  .hero p { color: rgba(255,255,255,0.88); max-width: 780px; margin-top: 8px; line-height: 1.55; }
+  .hero .facts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .hero .facts span { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 11px; font-size: 0.78rem; font-weight: 700; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .step { padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .step.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.35); }
+
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; scroll-margin-top: 80px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  /* reflection */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.1rem; margin-top: 4px; line-height: 1.35; }
+  .wb { margin-top: 4px; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb textarea { width: 100%; min-height: 120px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; }
+  .wb .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 8px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 7px 12px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+
+  .finish { text-align: center; padding: 22px; border-radius: 20px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .finish h2 { color: #fff; font-size: 1.5rem; }
+  .finish .stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+  .finish .stats div { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .finish .stats b { display: block; font-size: 1.3rem; color: #fcd34d; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) { .sg-zones { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; } .hero { padding: 20px 18px; }
+    .sg-zones { grid-template-columns: 1fr; }
+    .hud .lv { display: none; } .hud-inner { grid-template-columns: auto 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  :root { --w: #0284c7; --e: #15803d; --f: #dc2626; }
+  .chain-pick { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .chain-pick span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; font-size: 0.85rem; background: #fff; border: 2px solid var(--line); color: var(--muted); }
+  .chain-pick span.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .chain-pick span.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.4); }
+  .links { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; align-items: stretch; margin-bottom: 14px; }
+  .link { position: relative; border-radius: 12px; padding: 10px 11px; font-size: 0.84rem; line-height: 1.38; min-height: 110px; border: 2px solid transparent; margin-right: 18px; }
+  .link:last-child { margin-right: 0; }
+  .link:not(:last-child)::after { content: '➜'; position: absolute; right: -17px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1rem; }
+  .link .lab { display: block; font-size: 0.64rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(6,32,51,0.55); margin-bottom: 4px; }
+  .link.c0 { background: #fde6b4; } .link.c1 { background: #d3e8c8; } .link.c2 { background: #fff27a; } .link.c3 { background: #dbe5f4; } .link.c4 { background: #d4d4d4; }
+  .link.empty { background: #fff; border: 2px dashed #94a3b8; color: var(--muted); display: grid; place-items: center; text-align: center; font-weight: 700; }
+  .link.next { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.18); }
+  .link.pop { animation: pop .35s ease; }
+  @keyframes pop { 0% { transform: scale(0.92); } 60% { transform: scale(1.04); } 100% { transform: scale(1); } }
+  .choose-h { font-weight: 900; color: var(--navy); margin: 4px 0 8px; font-size: 0.95rem; }
+  .cands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cand { text-align: left; border: 2px solid rgba(5,43,65,0.16); background: #fff; border-radius: 12px; padding: 11px 12px; font-size: 0.88rem; line-height: 1.42; cursor: pointer; color: var(--ink); font-weight: 600; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .cand:hover:not(:disabled) { border-color: var(--teal); transform: translateY(-2px); }
+  .cand.no { border-color: var(--red); background: var(--red-soft); color: #7f1d1d; animation: shake .35s; }
+  .cand:disabled { cursor: default; opacity: 0.7; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  .hint { margin-top: 8px; font-size: 0.85rem; color: #78350f; background: var(--amber-soft); border-radius: 10px; padding: 8px 10px; display: none; }
+  .hint.show { display: block; }
+
+  /* round 2 */
+  .wef-legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .wef-legend span { font-weight: 900; font-size: 0.8rem; color: #fff; border-radius: 999px; padding: 4px 12px; }
+  .sorts { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; }
+  .srt { border: 2px solid var(--line); border-radius: 14px; padding: 12px; background: #fff; }
+  .srt p { font-size: 0.9rem; line-height: 1.45; font-weight: 650; margin-bottom: 9px; }
+  .srt .btns { display: flex; gap: 6px; }
+  .wef { flex: 1; border: 2px solid var(--line); border-radius: 10px; padding: 7px 4px; font-weight: 900; font-size: 0.82rem; cursor: pointer; background: #f8fafc; }
+  .wef.w { color: var(--w); } .wef.e { color: var(--e); } .wef.f { color: var(--f); }
+  .wef.yes.w { background: var(--w); color: #fff; border-color: var(--w); }
+  .wef.yes.e { background: var(--e); color: #fff; border-color: var(--e); }
+  .wef.yes.f { background: var(--f); color: #fff; border-color: var(--f); }
+  .wef.no { background: var(--red-soft); border-color: var(--red); color: #7f1d1d; }
+  .wef:disabled { cursor: default; }
+  .srt .why { display: none; font-size: 0.8rem; color: var(--muted); margin-top: 7px; line-height: 1.4; }
+  .srt.done .why { display: block; }
+  .srt.done.w { border-color: var(--w); } .srt.done.e { border-color: var(--e); } .srt.done.f { border-color: var(--f); }
+
+  /* round 3 */
+  .pickchain { display: grid; gap: 6px; margin-bottom: 12px; }
+  .pickchain label { display: flex; gap: 8px; align-items: flex-start; border: 2px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; background: #fff; font-size: 0.88rem; font-weight: 650; line-height: 1.4; }
+  .pickchain label.on { border-color: var(--teal); background: #f0fbfa; }
+  .pickchain input { margin-top: 3px; }
+  @media (max-width: 900px) {
+    .links { grid-template-columns: 1fr; gap: 0; }
+    .link { margin-right: 0; margin-bottom: 18px; min-height: 0; }
+    .link:not(:last-child)::after { content: '⬇'; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+    .cands { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Nexus Chain Reaction</span></div>
+  <span></span>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <div class="xp" id="hudXp">&#11088; 0 XP</div><div class="bar" aria-hidden="true"><div id="hudBar"></div></div><div class="lv" id="hudLv">Round 1 of 3</div>
+</div></div>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <span class="kicker">IB DP Geography &middot; Unit 3 &middot; Climate change and the nexus</span>
+    <h1>&#128279; Nexus Chain Reaction</h1>
+    <p>One change in the climate sets off a chain of effects that ends up squeezing <b style="color:#7dd3fc">water</b>, <b style="color:#86efac">energy</b> and <b style="color:#fca5a5">food</b>. Rebuild eight chain reactions link by link, decide which part of the nexus each effect hits, then explain one chain in your own words.</p>
+    <div class="facts"><span>&#128167; Water</span><span>&#9889; Energy</span><span>&#127806; Food</span><span>&#128279; 8 chains &middot; 32 links</span></div>
+  </section>
+  <div class="steps" id="steps">
+    <span class="step on" data-s="1">1 &middot; Build the chains</span><span class="step" data-s="2">2 &middot; Water, energy or food?</span><span class="step" data-s="3">3 &middot; Explain a chain</span>
+  </div>
+  <div id="app"></div>
+</main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+  /* ---------- score / HUD ---------- */
+  var run = { c: 0, t: 0, xp: 0 }, step = 1;
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+  function score(c, t, el) { run.c += c; run.t += t; run.xp += c * 10; xpPop(c * 10, el); paintHud(); }
+  function bonusXp(n, el) { run.xp += n; xpPop(n, el); paintHud(); }
+  function paintHud() { $('hudXp').textContent = '⭐ ' + run.xp + ' XP'; $('hudBar').style.width = ((step - 1) / 3 * 100) + '%'; $('hudLv').textContent = step <= 3 ? 'Round ' + step + ' of 3' : 'Complete!'; }
+  function setStep(n) {
+    step = n; paintHud();
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' on' : ''); });
+  }
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#2563eb', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 240 : 110;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) { ctx.clearRect(0, 0, cv.width, cv.height); P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); }); if (t - t0 < (big ? 4000 : 2400)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height); })(t0);
+  }
+  function panel(tag, title, how) {
+    var p = document.createElement('div'); p.className = 'panel';
+    p.innerHTML = '<span class="stage-tag">' + tag + '</span><h2>' + title + '</h2>' + (how ? '<p class="how">' + how + '</p>' : '') + '<div class="sb"></div>';
+    $('app').appendChild(p); setTimeout(function () { p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    return p.querySelector('.sb');
+  }
+
+  /* =========================================================
+     DATA — eight chain reactions (from the SBL lesson tables)
+     ========================================================= */
+  var LABELS = ['Climate change', 'Impact', 'Consequence', 'Knock-on effect', 'Pressure on the nexus'];
+  var CHAINS = [
+    { name: 'Drier soils and desertification', links: [
+      'Increased temperatures result in more evapotranspiration, leading to drier soils.',
+      'Arid and semi-arid regions such as the Sahel experience greater levels of desertification.',
+      'People are forced onto more marginal land, and trees are chopped down for fuelwood.',
+      'Less vegetation means soils are not bound together and easily erode. Loss of fertile soil reduces crop yields.',
+      'This can lead to forced migration, adding pressure on water, energy and food supplies in the destination region.'] },
+    { name: 'Sea level rise in Bangladesh', links: [
+      'Higher temperatures mean that sea levels around the world rise.',
+      'Low-lying countries experience coastal flooding. Salt water encroaches onto productive land and mixes with freshwater.',
+      'The result is lower crop yields, as crops are unable to grow in salty soils.',
+      'Rising sea levels in Bangladesh have forced many thousands of people to move away from their land.',
+      'Many move to Dhaka, where they end up in urban slums and water, food and energy supplies are in greater demand.'] },
+    { name: 'More tropical storms', links: [
+      'Higher temperatures mean more energy in the atmosphere, resulting in more tropical storms.',
+      'Hurricanes, cyclones and typhoons can devastate low-lying coastal areas, especially in LEDCs.',
+      'People in LEDCs are more vulnerable, so large storms increase water, food and energy insecurity.',
+      'In places such as Sri Lanka, where cyclones are common, coastal defences are being built on productive land.',
+      'Hard engineering such as sea walls is expensive and requires a lot of energy to construct.'] },
+    { name: 'Record harvests in the USA', links: [
+      'In some parts of the world higher temperatures have a positive impact on agriculture — more crops can be grown.',
+      'Corn, rice and wheat crops in the USA have reached record yields in recent years.',
+      'This has caused a huge increase in water use for irrigation, from aquifers and rivers like the Colorado.',
+      'Large dams such as the Hoover Dam control water supply for agricultural, industrial and domestic use.',
+      'Multi-purpose dams can also provide reliable, clean energy through hydro-electric power.'] },
+    { name: 'El Niño drought in Australia', links: [
+      'There is some evidence that increasing temperatures are causing stronger El Niño / La Niña episodes.',
+      'Strong El Niño episodes bring longer droughts to Northern Australia, and wildfires can run out of control.',
+      'Farmers extract more water from underground aquifers to irrigate crops, so groundwater levels have dropped.',
+      'Energy-intensive technology, such as large-scale pumps, is needed to reach the deep groundwater.',
+      'As new water supplies open up arid regions, population growth puts further pressure on the nexus.'] },
+    { name: 'Pests and pesticides', links: [
+      'Warmer temperatures and higher CO₂ levels are changing the distribution of pests and diseases.',
+      'Crop pests such as locusts and whitefly thrive in hotter climates, so more crops may be devastated.',
+      'Farmers use more (and more powerful) pesticides, which take huge amounts of energy to make and distribute.',
+      'Pesticides run off into the water system and may devastate river and lake ecosystems.',
+      'Monitoring, managing and treating rivers and freshwater supplies is a very energy-intensive process.'] },
+    { name: 'Melting glaciers and India’s groundwater', links: [
+      'Higher temperatures result in the melting of mountain glaciers.',
+      'Glaciers are a shrinking store of freshwater, so many Asian countries now rely heavily on groundwater.',
+      'India is the world’s largest extractor of groundwater, much of it used to irrigate rice and wheat.',
+      'Extracting ancient ‘fossil’ groundwater is unsustainable and energy-inefficient — it is used faster than it is recharged.',
+      'Despite this, millions of Indians still lack toilets and rely on basic energy such as charcoal and firewood.'] },
+    { name: 'Less rain and salty soils', links: [
+      'Many parts of the world are receiving lower levels of precipitation.',
+      'Soils need more irrigation, and in many places over-irrigation leads to salinisation.',
+      'Crop yields decline, as most plants cannot be grown in salty fields.',
+      'Farmers in LEDCs may have to move onto more marginal land in order to grow crops.',
+      'Energy-intensive fertilisers such as nitrates may be needed to increase the productivity of the soil.'] }
+  ];
+
+  /* =========================================================
+     ROUND 1 — rebuild each chain, one link at a time
+     ========================================================= */
+  var order = shuffle(CHAINS.map(function (_, i) { return i; }));
+  var ci = 0;
+
+  function round1() {
+    setStep(1);
+    var sb = panel('Round 1', '&#128279; Build the chains',
+      'Each chain starts with a change in the climate. Choose the link that <b>follows on</b> from the one before &mdash; there are three to choose from each time. <b>First-try picks earn 10 XP.</b>');
+    sb.innerHTML = '<div class="chain-pick" id="chainPick"></div><div id="chainArea"></div>';
+    var pick = $('chainPick');
+    order.forEach(function (_, i) { var s = document.createElement('span'); s.textContent = i + 1; pick.appendChild(s); });
+    playChain();
+  }
+
+  function playChain() {
+    var chainIdx = order[ci], C = CHAINS[chainIdx], k = 1, tries = 0;
+    var dots = $('chainPick').children;
+    for (var i = 0; i < dots.length; i++) dots[i].className = i < ci ? 'done' : i === ci ? 'on' : '';
+    var area = $('chainArea');
+    area.innerHTML = '<div class="links" id="links"></div><div id="chooser"></div>';
+    function drawLinks() {
+      $('links').innerHTML = LABELS.map(function (lab, j) {
+        if (j < k) return '<div class="link c' + j + (j === k - 1 && j > 0 ? ' pop' : '') + '"><span class="lab">' + lab + '</span>' + C.links[j] + '</div>';
+        return '<div class="link empty' + (j === k ? ' next' : '') + '">' + (j === k ? '?' : '') + '</div>';
+      }).join('');
+    }
+    function drawChoices() {
+      tries = 0;
+      var others = shuffle(CHAINS.map(function (_, i) { return i; }).filter(function (i) { return i !== chainIdx; })).slice(0, 2);
+      var cands = shuffle([chainIdx].concat(others));
+      var ch = $('chooser');
+      ch.innerHTML = '<p class="choose-h">What happens next? <span style="color:var(--muted);font-weight:700">(' + LABELS[k] + ')</span></p><div class="cands"></div><div class="hint" id="hint"></div>';
+      var box = ch.querySelector('.cands');
+      cands.forEach(function (idx) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'cand'; b.textContent = CHAINS[idx].links[k];
+        b.addEventListener('click', function () {
+          tries++;
+          if (idx === chainIdx) {
+            score(tries === 1 ? 1 : 0, 1, b);
+            k++;
+            drawLinks();
+            if (k < LABELS.length) drawChoices(); else chainDone();
+          } else {
+            b.classList.remove('no'); void b.offsetWidth; b.classList.add('no'); b.disabled = true;
+            var h = $('hint'); h.classList.add('show');
+            h.innerHTML = '&#128161; That one belongs to a different chain. Which option follows directly from: <i>&ldquo;' + C.links[k - 1] + '&rdquo;</i>';
+          }
+        });
+        box.appendChild(b);
+      });
+    }
+    function chainDone() {
+      var dots2 = $('chainPick').children; dots2[ci].className = 'done';
+      ci++;
+      var last = ci >= order.length;
+      $('chooser').innerHTML = '<p class="msg ok">&#9989; Chain complete: <b>' + C.name + '</b></p><div class="actions"><button type="button" class="btn ' + (last ? 'gold' : 'primary') + '" id="nextChain">' + (last ? 'Round 2: Water, energy or food? &rarr;' : 'Next chain &rarr;') + '</button></div>';
+      if (last) confetti(false);
+      $('nextChain').addEventListener('click', function () {
+        if (last) { this.parentNode.remove(); round2(); }
+        else { playChain(); $('chainArea').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      });
+    }
+    drawLinks(); drawChoices();
+  }
+
+  /* =========================================================
+     ROUND 2 — which part of the nexus does each effect hit?
+     ========================================================= */
+  var WEF = [
+    { t: 'Salt water encroaches onto low-lying land and mixes with freshwater.', a: 'w', why: 'Freshwater supplies are contaminated with salt.' },
+    { t: 'Groundwater levels in Australia have dropped considerably.', a: 'w', why: 'Aquifers are being used faster than they refill.' },
+    { t: 'Melting glaciers are a shrinking store of freshwater.', a: 'w', why: 'Glacier meltwater feeds rivers that millions depend on.' },
+    { t: 'Pesticides run off into rivers and lakes.', a: 'w', why: 'Water quality falls and ecosystems are damaged.' },
+    { t: 'Sea walls require a lot of energy to construct.', a: 'e', why: 'Hard engineering uses energy-intensive materials and machinery.' },
+    { t: 'Large-scale pumps are needed to reach deep groundwater.', a: 'e', why: 'Pumping water from deep aquifers takes lots of energy.' },
+    { t: 'Treating river water is a very energy-intensive process.', a: 'e', why: 'Cleaning polluted water needs energy for treatment plants.' },
+    { t: 'Most households still use charcoal and firewood for heating and lighting.', a: 'e', why: 'This shows low energy security and puts pressure on forests.' },
+    { t: 'Loss of fertile soil reduces crop yields.', a: 'f', why: 'Eroded soils produce less food.' },
+    { t: 'Crops are unable to grow in salty soils.', a: 'f', why: 'Salinisation cuts harvests.' },
+    { t: 'Coastal defences are being built on productive farmland.', a: 'f', why: 'Land used for defences can no longer grow food.' },
+    { t: 'Locusts and whitefly devastate more crops.', a: 'f', why: 'Pests destroy harvests, threatening food security.' }
+  ];
+  var NAMES = { w: 'Water', e: 'Energy', f: 'Food' };
+
+  function round2() {
+    setStep(2);
+    var sb = panel('Round 2', '&#127919; Water, energy or food?',
+      'Every effect puts pressure on the nexus somewhere. For each one, choose the part of the nexus it hits <b>most directly</b>.');
+    sb.innerHTML = '<div class="wef-legend"><span style="background:var(--w)">&#128167; Water</span><span style="background:var(--e)">&#9889; Energy</span><span style="background:var(--f)">&#127806; Food</span></div><div class="sorts" id="sorts"></div><p class="msg" id="r2msg"></p>';
+    var left = WEF.length;
+    shuffle(WEF).forEach(function (q) {
+      var el = document.createElement('div'); el.className = 'srt';
+      el.innerHTML = '<p>' + q.t + '</p><div class="btns">' +
+        ['w', 'e', 'f'].map(function (k) { return '<button type="button" class="wef ' + k + '" data-k="' + k + '">' + NAMES[k] + '</button>'; }).join('') +
+        '</div><div class="why">' + q.why + '</div>';
+      var tries = 0;
+      el.querySelectorAll('.wef').forEach(function (b) {
+        b.addEventListener('click', function () {
+          tries++;
+          if (b.dataset.k === q.a) {
+            b.classList.add('yes'); el.classList.add('done', q.a);
+            el.querySelectorAll('.wef').forEach(function (x) { x.disabled = true; });
+            score(tries === 1 ? 1 : 0, 1, b);
+            left--;
+            if (!left) {
+              $('r2msg').className = 'msg ok'; $('r2msg').textContent = 'All sorted! Notice how one chain often hits all three — that’s why it’s called a nexus.';
+              confetti(false);
+              var go = document.createElement('div'); go.className = 'actions';
+              go.innerHTML = '<button type="button" class="btn primary">Round 3: Explain a chain &rarr;</button>';
+              go.querySelector('button').addEventListener('click', function () { go.remove(); round3(); });
+              sb.appendChild(go);
+            }
+          } else { b.classList.add('no'); b.disabled = true; }
+        });
+      });
+      $('sorts').appendChild(el);
+    });
+  }
+
+  /* =========================================================
+     ROUND 3 — explain one chain
+     ========================================================= */
+  function round3() {
+    setStep(3);
+    var sb = panel('Round 3', '&#9997;&#65039; Explain a chain',
+      'Pick one chain and explain it in your own words. Show how the climate change leads, step by step, to pressure on <b>water</b>, <b>energy</b> and <b>food</b>. Use connectives such as <i>this leads to</i>, <i>as a result</i> and <i>therefore</i>.');
+    sb.innerHTML = '<div class="pickchain" id="pickChain">' + CHAINS.map(function (c, i) { return '<label><input type="radio" name="pc" value="' + i + '"> <span>' + c.name + '</span></label>'; }).join('') + '</div>' +
+      '<div class="wb"><label for="explainTa">Your explanation</label><textarea id="explainTa" placeholder="Rising temperatures lead to… As a result… This puts pressure on water because… It also affects energy/food because…"></textarea>' +
+      '<div class="foot"><span id="exWc">0 words · mention water, energy and food for bonus XP</span><button type="button" class="copy" id="copyBtn">&#128203; Copy for OneNote</button></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" id="finishBtn" disabled>Finish</button></div>';
+    var chosen = null;
+    sb.querySelectorAll('input[name="pc"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        chosen = +r.value;
+        sb.querySelectorAll('#pickChain label').forEach(function (l) { l.classList.toggle('on', l.querySelector('input').checked); });
+        check();
+      });
+    });
+    function mentions(t) { t = t.toLowerCase(); return ['water', 'energy', 'food'].filter(function (w) { return t.indexOf(w) !== -1; }); }
+    function check() {
+      var t = $('explainTa').value, n = wordCount(t), m = mentions(t);
+      $('exWc').textContent = n + ' words · mentions: ' + (m.length ? m.join(', ') : 'none yet') + ' (all three for bonus XP)';
+      $('finishBtn').disabled = chosen === null || n < 15;
+    }
+    $('explainTa').addEventListener('input', check);
+    $('copyBtn').addEventListener('click', function () {
+      var b = this, lines = ['Nexus Chain Reaction'];
+      if (chosen !== null) { lines.push('', 'Chain: ' + CHAINS[chosen].name); CHAINS[chosen].links.forEach(function (l, i) { lines.push((i + 1) + '. ' + l); }); }
+      lines.push('', 'My explanation:', $('explainTa').value.trim() || '(not written yet)');
+      var txt = lines.join('\n');
+      function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy for OneNote'; }, 2200); }
+      try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
+    });
+    $('finishBtn').addEventListener('click', function () {
+      var t = $('explainTa').value;
+      if (mentions(t).length === 3) bonusXp(20, this);
+      if (wordCount(t) >= 60) bonusXp(20, this);
+      this.parentNode.remove(); finish();
+    });
+  }
+  function fallback(txt) { var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+
+  function finish() {
+    setStep(4);
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 0;
+    var el = document.createElement('div'); el.className = 'finish';
+    el.innerHTML = '<div style="font-size:3rem">' + (pct >= 90 ? '🏆' : '🌟') + '</div><h2>Chain reaction complete!</h2><div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>' + run.xp + '</b>XP</div></div>' +
+      '<p>' + (pct >= 90 ? 'Excellent — you can trace how climate change ripples through the water–energy–food nexus.' : 'Well done. Play again to beat your first-try accuracy.') + '</p>' +
+      '<div class="actions"><button type="button" class="btn gold" onclick="location.reload()">Play again</button><a class="btn ghost" href="/geography/games#ib">Back to Geography Games</a></div>';
+    $('app').appendChild(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); confetti(pct >= 90);
+  }
+
+  paintHud(); round1();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
