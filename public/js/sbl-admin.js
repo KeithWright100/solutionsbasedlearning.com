@@ -187,17 +187,62 @@
     return badge;
   }
 
-  // Teacher column: only students can be assigned a teacher. A
-  // <select> of current teachers (from state.teachers), defaulting
-  // to whichever teacher_id is already on the row.
+  // Subjects & teachers column: up to three subject + teacher pairs
+  // per student (e.g. Geography with Mr A, Business with Ms B). Each
+  // row saves once BOTH its subject and teacher are chosen; choosing
+  // "— None —" for the subject clears that row. Stored in
+  // sbl_profiles.teacher_assignments (sql/010). Older single
+  // teacher_id links show as Geography until edited.
+  var SUBJECTS = ['Geography', 'Business', 'Economics', 'History'];
+  var MAX_SUBJECTS = 3;
+
+  function assignmentsOf(u) {
+    if (Array.isArray(u.teacher_assignments) && u.teacher_assignments.length) return u.teacher_assignments;
+    return u.teacher_id ? [{ subject: 'Geography', teacher_id: u.teacher_id }] : [];
+  }
+
   function renderTeacherCell(u) {
     if (u.role !== 'student') return '—';
-    var options = '<option value="">— None —</option>' +
-      state.teachers.map(function (t) {
-        var selected = t.id === u.teacher_id ? ' selected' : '';
-        return '<option value="' + t.id + '"' + selected + '>' + escapeHtml(t.full_name || t.email) + '</option>';
+    var list = assignmentsOf(u);
+    var html = '<div class="sbl-subj-list" data-id="' + u.id + '" style="display:grid; gap:4px; min-width:300px;">';
+    for (var i = 0; i < MAX_SUBJECTS; i++) {
+      var a = list[i] || {};
+      var subj = '<option value="">— Subject —</option>' + SUBJECTS.map(function (sname) {
+        return '<option value="' + sname + '"' + (a.subject === sname ? ' selected' : '') + '>' + sname + '</option>';
       }).join('');
-    return '<select class="sbl-teacher-select" data-action="assign-teacher" data-id="' + u.id + '">' + options + '</select>';
+      var teach = '<option value="">— Teacher —</option>' + state.teachers.map(function (t) {
+        return '<option value="' + t.id + '"' + (t.id === a.teacher_id ? ' selected' : '') + '>' + escapeHtml(t.full_name || t.email) + '</option>';
+      }).join('');
+      html += '<div class="sbl-subj-row" style="display:flex; gap:4px;">' +
+        '<select class="sbl-teacher-select" data-role="subject" aria-label="Subject ' + (i + 1) + '" style="width:118px;">' + subj + '</select>' +
+        '<select class="sbl-teacher-select" data-role="teacher" aria-label="Teacher ' + (i + 1) + '" style="flex:1; min-width:150px;">' + teach + '</select>' +
+        '</div>';
+    }
+    return html + '<div class="sbl-subj-hint sbl-muted" style="font-size:0.72rem; min-height:1em;"></div></div>';
+  }
+
+  function handleSubjectChange(listEl) {
+    var rows = listEl.querySelectorAll('.sbl-subj-row');
+    var hint = listEl.querySelector('.sbl-subj-hint');
+    var assignments = [], incomplete = false;
+    rows.forEach(function (row) {
+      var subj = row.querySelector('[data-role="subject"]').value;
+      var teacher = row.querySelector('[data-role="teacher"]').value;
+      if (subj && teacher) assignments.push({ subject: subj, teacherId: teacher });
+      else if (subj || teacher) incomplete = true;
+    });
+    if (incomplete) { hint.textContent = 'Choose both a subject and a teacher to save that row.'; return; }
+    hint.textContent = 'Saving…';
+    clearMessages();
+    var selects = listEl.querySelectorAll('select');
+    selects.forEach(function (sel) { sel.disabled = true; });
+    postJson('/api/admin/action', { action: 'assign-subjects', studentId: listEl.getAttribute('data-id'), assignments: assignments })
+      .then(function (result) {
+        if (!result.ok) { showError(result.data.error || "Could not update this student's subjects."); loadData(); return; }
+        showNotice('Subjects and teachers updated.');
+        loadData();
+      })
+      .finally(function () { selects.forEach(function (sel) { sel.disabled = false; }); });
   }
 
   // Group column: only students get a group label — a free-text
@@ -231,8 +276,9 @@
     var byName = function (x, y) {
       return String(x.full_name || x.email || '').localeCompare(String(y.full_name || y.email || ''), 'en', { sensitivity: 'base' });
     };
-    var unassigned = users.filter(function (u) { return !u.teacher_id; }).sort(byName);
-    var assigned = users.filter(function (u) { return !!u.teacher_id; }).sort(byName);
+    var isAssigned = function (u) { return assignmentsOf(u).length > 0; };
+    var unassigned = users.filter(function (u) { return !isAssigned(u); }).sort(byName);
+    var assigned = users.filter(isAssigned).sort(byName);
     users = unassigned.concat(assigned);
 
     users.forEach(function (u, i) {
@@ -403,6 +449,8 @@
 
   // Teacher-assignment dropdowns fire 'change', not 'click'.
   document.querySelector('.sbl-admin-shell').addEventListener('change', function (e) {
+    var subjList = e.target.closest('.sbl-subj-list');
+    if (subjList) { handleSubjectChange(subjList); return; }
     var select = e.target.closest('select[data-action="assign-teacher"]');
     if (select) { handleAssignTeacher(select.getAttribute('data-id'), select.value || null, select); return; }
     var input = e.target.closest('input[data-action="assign-group"]');

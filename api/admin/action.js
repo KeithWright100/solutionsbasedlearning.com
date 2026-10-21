@@ -48,6 +48,7 @@ export default async function handler(req, res) {
   if (action === 'set-role') return handleSetRole(req, res, session);
   if (action === 'assign-teacher') return handleAssignTeacher(req, res, session);
   if (action === 'assign-group') return handleAssignGroup(req, res, session);
+  if (action === 'assign-subjects') return handleAssignSubjects(req, res, session);
   if (action === 'reset-password') return handleResetPassword(req, res, session);
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
 
@@ -320,6 +321,7 @@ async function handleSetRole(req, res, session) {
     if (unassignError) {
       console.error("Failed to clear former teacher's student assignments:", unassignError);
     }
+    await removeTeacherFromAssignments(supabase, userId);
   }
 
   return res.status(200).json({ ok: true });
@@ -556,4 +558,86 @@ async function handleBootstrap(req, res) {
   }
 
   return res.status(200).json({ ok: true, message: 'Admin account ready. You can now log in at /login/.' });
+}
+
+// ---------------------------------------------------------------
+// assign-subjects — { studentId, assignments: [{ subject, teacherId }] }
+// Replaces a student's subject/teacher list (max 3). Subjects must be
+// one of SUBJECTS; each teacherId must be a teacher or admin account.
+// The legacy teacher_id column mirrors the first entry so older code
+// keeps working. Needs sql/010_teacher_subject_assignments.sql.
+// ---------------------------------------------------------------
+const SUBJECTS = ['Geography', 'Business', 'Economics', 'History'];
+const MAX_ASSIGNMENTS = 3;
+
+async function handleAssignSubjects(req, res, session) {
+  const { studentId, assignments } = req.body || {};
+  if (!studentId) return res.status(400).json({ error: 'studentId is required.' });
+  if (!Array.isArray(assignments)) return res.status(400).json({ error: 'assignments must be a list.' });
+
+  const clean = [];
+  for (const a of assignments) {
+    if (!a || !a.subject || !a.teacherId) continue;
+    if (SUBJECTS.indexOf(a.subject) === -1) return res.status(400).json({ error: `Unknown subject: ${a.subject}` });
+    if (clean.some((c) => c.subject === a.subject && c.teacher_id === a.teacherId)) continue; // ignore exact duplicates
+    clean.push({ subject: a.subject, teacher_id: String(a.teacherId) });
+  }
+  if (clean.length > MAX_ASSIGNMENTS) {
+    return res.status(400).json({ error: `A student can have at most ${MAX_ASSIGNMENTS} subject/teacher assignments.` });
+  }
+
+  const supabase = getSupabaseAdmin();
+
+  const teacherIds = [...new Set(clean.map((c) => c.teacher_id))];
+  if (teacherIds.length) {
+    const { data: teachers, error: tErr } = await supabase
+      .from('sbl_profiles')
+      .select('id, role')
+      .in('id', teacherIds);
+    if (tErr) {
+      console.error('Failed to check teachers:', tErr);
+      return res.status(500).json({ error: 'Could not check the chosen teachers.' });
+    }
+    const ok = new Set((teachers || []).filter((t) => t.role === 'teacher' || t.role === 'admin').map((t) => t.id));
+    if (teacherIds.some((id) => !ok.has(id))) {
+      return res.status(400).json({ error: 'One of the chosen accounts is not a teacher.' });
+    }
+  }
+
+  const { error } = await supabase
+    .from('sbl_profiles')
+    .update({ teacher_assignments: clean, teacher_id: clean.length ? clean[0].teacher_id : null })
+    .eq('id', studentId);
+
+  if (error) {
+    console.error('Failed to save subject assignments:', error);
+    const missing = /teacher_assignments/.test(error.message || '');
+    return res.status(500).json({
+      error: missing
+        ? 'The database is missing the new subjects column — run sql/010_teacher_subject_assignments.sql in Supabase first.'
+        : "Could not save this student's subjects and teachers."
+    });
+  }
+
+  return res.status(200).json({ ok: true });
+}
+
+// Removes a (demoted) teacher from every student's subject list.
+async function removeTeacherFromAssignments(supabase, teacherId) {
+  try {
+    const { data: rows, error } = await supabase
+      .from('sbl_profiles')
+      .select('id, teacher_assignments')
+      .contains('teacher_assignments', [{ teacher_id: teacherId }]);
+    if (error || !rows) return;
+    for (const row of rows) {
+      const kept = (row.teacher_assignments || []).filter((a) => a.teacher_id !== teacherId);
+      await supabase
+        .from('sbl_profiles')
+        .update({ teacher_assignments: kept, teacher_id: kept.length ? kept[0].teacher_id : null })
+        .eq('id', row.id);
+    }
+  } catch (e) {
+    console.error('Failed to remove teacher from subject assignments:', e);
+  }
 }

@@ -147,12 +147,21 @@ async function handleMyStudents(req, res, session, supabase) {
     return res.status(403).json({ error: 'Only teacher accounts have a student roster here.' });
   }
 
-  const { data: students, error: studentsError } = await supabase
-    .from('sbl_profiles')
-    .select('id, full_name, email, status, group_name')
-    .eq('teacher_id', session.user.id)
-    .order('group_name', { ascending: true, nullsFirst: false })
-    .order('full_name', { ascending: true });
+  // A student is "mine" if any of their (up to three) subject
+  // assignments names me (sql/010), or — for older data — their single
+  // teacher_id does. Falls back to teacher_id alone if the new column
+  // doesn't exist yet.
+  const me = session.user.id;
+  const [byLegacy, byAssignments] = await Promise.all([
+    supabase.from('sbl_profiles').select('*').eq('teacher_id', me),
+    supabase.from('sbl_profiles').select('*').contains('teacher_assignments', [{ teacher_id: me }])
+  ]);
+  const studentsError = byLegacy.error;
+  const merged = {};
+  (byLegacy.data || []).concat(byAssignments.error ? [] : (byAssignments.data || []))
+    .forEach((p) => { merged[p.id] = p; });
+  const students = Object.values(merged)
+    .sort((x, y) => String(x.full_name || '').localeCompare(String(y.full_name || ''), 'en', { sensitivity: 'base' }));
 
   if (studentsError) {
     console.error('Failed to load assigned students:', studentsError);
@@ -215,7 +224,12 @@ async function handleMyStudents(req, res, session, supabase) {
   });
 
   const result = students.map((s) => Object.assign(
-    { id: s.id, fullName: s.full_name, email: s.email, status: s.status, groupName: s.group_name || null },
+    {
+      id: s.id, fullName: s.full_name, email: s.email, status: s.status, groupName: s.group_name || null,
+      // the subjects I teach this student (from their assignments)
+      subjects: (Array.isArray(s.teacher_assignments) ? s.teacher_assignments : [])
+        .filter((a) => a && a.teacher_id === me).map((a) => a.subject)
+    },
     summary[s.id] || { lessonsWithProgress: 0, lastUpdated: null, quizCount: 0, quizAvgPct: null, ibCount: 0, ibAvgPct: null },
     wantSheet ? { cells: cells[s.id] || {} } : {}
   ));
@@ -233,7 +247,7 @@ async function handleMyStudents(req, res, session, supabase) {
 async function handleStudentProgress(req, res, session, supabase, studentId, lessonId) {
   const { data: student, error: studentError } = await supabase
     .from('sbl_profiles')
-    .select('id, full_name, email, teacher_id, group_name')
+    .select('*')
     .eq('id', studentId)
     .maybeSingle();
 
@@ -242,7 +256,9 @@ async function handleStudentProgress(req, res, session, supabase, studentId, les
   }
 
   const isAdmin = session.profile.role === 'admin';
-  const isAssignedTeacher = session.profile.role === 'teacher' && student.teacher_id === session.user.id;
+  const assignedToMe = student.teacher_id === session.user.id ||
+    (Array.isArray(student.teacher_assignments) && student.teacher_assignments.some((a) => a && a.teacher_id === session.user.id));
+  const isAssignedTeacher = session.profile.role === 'teacher' && assignedToMe;
   if (!isAdmin && !isAssignedTeacher) {
     return res.status(403).json({ error: "You do not have access to this student's progress." });
   }
