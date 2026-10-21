@@ -394,19 +394,19 @@ cursor:pointer;
         },
         {
           q: 'Which of these is a PRIMARY effect of a tropical storm?',
-          options: ['Disease spreading afterwards', 'Damage to buildings from high winds', 'Shortage of clean water', 'The cost of rebuilding'],
+          options: ['Disease spreading in the weeks afterwards', 'Damage to buildings and roads from high winds', 'Shortage of clean drinking water later on', 'The cost of rebuilding homes and roads'],
           correct: 1,
           explain: 'Primary effects happen immediately, caused directly by the storm itself — like wind damage. The others are secondary effects that follow afterwards.'
         },
         {
           q: 'Why do wealthier countries usually have fewer deaths from tropical storms than poorer countries?',
-          options: ['They get fewer storms', 'Storms are weaker near wealthy countries', 'They can afford warning systems, strong buildings and emergency services', 'They are always further from the coast'],
+          options: ['They get fewer storms because they are mostly located far from warm oceans', 'Storms are weaker near wealthy countries because the sea there is cooler', 'They can afford warning systems, strong buildings and emergency services', 'They are always further from the coast, so storm surges cannot reach them'],
           correct: 2,
           explain: 'Wealth affects how well a country can prepare for and respond to a hazard — through warning systems, building design, and emergency services.'
         },
         {
           q: 'What is a storm surge?',
-          options: ['A sudden rise in sea level pushed onshore by the storm', 'A very strong gust of wind', 'The path the storm travels along', 'A type of tropical storm found only in Asia'],
+          options: ['A sudden rise in sea level pushed onshore by the storm', 'A very strong gust of wind that knocks down trees', 'The path the storm travels along as it moves across the land', 'A type of tropical storm that is found only in Asia'],
           correct: 0,
           explain: 'A storm surge is a wall of sea water pushed ashore by the storm’s winds and low pressure — it causes major coastal flooding.'
         }
@@ -426,7 +426,7 @@ cursor:pointer;
         },
         {
           q: 'On an Ordnance Survey-style grid reference, which set of digits do you read FIRST?',
-          options: ['The northing (vertical, up the side)', 'The easting (horizontal, along the bottom)', 'Whichever is larger', 'It doesn’t matter'],
+          options: ['The northing (up the side)', 'The easting (along the bottom)', 'Whichever number is larger', 'It doesn’t matter which comes first'],
           correct: 1,
           explain: 'Remember "along the corridor, up the stairs" — read the easting (horizontal) first, then the northing (vertical).'
         },
@@ -438,7 +438,7 @@ cursor:pointer;
         },
         {
           q: 'What do contour lines on a map show?',
-          options: ['Roads and paths', 'Height above sea level', 'Rivers and lakes', 'Country borders'],
+          options: ['Roads, tracks and paths', 'Height above sea level', 'Rivers, lakes and streams', 'Country and county borders'],
           correct: 1,
           explain: 'Contour lines join points of equal height. Lines close together show steep slopes; lines far apart show gentle slopes.'
         },
@@ -458,13 +458,13 @@ cursor:pointer;
       questions: [
         {
           q: 'What does "population density" measure?',
-          options: ['The total number of people in a country', 'The number of people per square kilometre', 'How fast a population is growing', 'The average age of a population'],
+          options: ['The total number of people living in a country', 'The number of people per square kilometre', 'How fast a population is growing each year', 'The average age of the people in a population'],
           correct: 1,
           explain: 'Population density = number of people ÷ area. It tells us how crowded or spread out a population is.'
         },
         {
           q: 'What is "urbanisation"?',
-          options: ['Building new farms in the countryside', 'The growing proportion of people living in towns and cities', 'A type of natural disaster', 'The process of a city becoming smaller'],
+          options: ['Building new farms and villages in the countryside', 'The growing proportion of people living in towns and cities', 'A type of natural disaster that affects big cities', 'The process of a city becoming smaller as people move to rural areas'],
           correct: 1,
           explain: 'Urbanisation is the increase in the proportion of a population living in urban areas rather than rural areas.'
         },
@@ -476,13 +476,13 @@ cursor:pointer;
         },
         {
           q: 'What does "life expectancy" mean?',
-          options: ['The number of children a person has', 'The average age a person is expected to live to', 'How long someone has lived so far', 'The retirement age in a country'],
+          options: ['The number of children a person is expected to have', 'The average age a person is expected to live to', 'How long someone has already lived so far', 'The age at which people usually retire in a country'],
           correct: 1,
           explain: 'Life expectancy is the average number of years a person born in a place today is expected to live.'
         },
         {
           q: 'Which of these would most likely INCREASE the birth rate of a country?',
-          options: ['Better access to education for girls', 'Improved contraception and family planning', 'A strong cultural preference for large families', 'Rising costs of raising children'],
+          options: ['Better access to education for girls and women', 'Improved access to contraception and family planning', 'A strong cultural preference for large families', 'Rising costs of raising and educating children'],
           correct: 2,
           explain: 'A cultural preference for large families tends to raise birth rates. The other options are all factors that typically lower birth rates.'
         }
@@ -629,8 +629,11 @@ cursor:pointer;
 
     var html = '<div class="quiz-question">' + escapeHtml(q.q) + '</div>';
     html += '<div class="quiz-options" id="quizOptions">';
-    q.options.forEach(function (opt, i) {
-      html += '<button type="button" class="quiz-option" data-index="' + i + '">' + escapeHtml(opt) + '</button>';
+    // Show the options in a random order each time (data-index keeps the original position).
+    var order = q.options.map(function (_, i) { return i; });
+    for (var s = order.length - 1; s > 0; s--) { var r = Math.floor(Math.random() * (s + 1)); var t = order[s]; order[s] = order[r]; order[r] = t; }
+    order.forEach(function (i) {
+      html += '<button type="button" class="quiz-option" data-index="' + i + '">' + escapeHtml(q.options[i]) + '</button>';
     });
     html += '</div>';
     html += '<div id="quizFeedback"></div>';
@@ -645,7 +648,8 @@ cursor:pointer;
   function answerQuestion(chosenIndex) {
     var q = activeQuiz.questions[qIndex];
     var optionButtons = body.querySelectorAll('.quiz-option');
-    optionButtons.forEach(function (btn, i) {
+    optionButtons.forEach(function (btn) {
+      var i = parseInt(btn.getAttribute('data-index'), 10);
       btn.disabled = true;
       if (i === q.correct) btn.classList.add('is-correct');
       else if (i === chosenIndex) btn.classList.add('is-wrong');

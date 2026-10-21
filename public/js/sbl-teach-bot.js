@@ -1119,6 +1119,7 @@ function buildRetrievalBank(lessonId) {
 
     section.innerHTML = html;
     announce('Marking complete. You scored ' + markLine + '.');
+    saveIBAttempt(lesson, ibQ, answerText, feedback);
 
     document.getElementById('sblIBTryAgain').addEventListener('click', function () {
       renderIBQuestionWorkspace();
@@ -1132,6 +1133,30 @@ function buildRetrievalBank(lessonId) {
         announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
       });
     });
+  }
+
+  // Saves the latest marked attempt for this IB-style question to the
+  // student's progress (one key per question, "ib_q<n>"), so their
+  // assigned teacher can see it on /teacher/. Best-effort, like the
+  // other progress syncs.
+  function saveIBAttempt(lesson, ibQ, answerText, feedback) {
+    if (!lesson || !lesson.id || !ibState) return;
+    var idx = ibState.activeIndex || 0;
+    var m = String(feedback.markAwarded || '').match(/(\d+(?:\.\d+)?)/);
+    var patch = {};
+    patch['ib_q' + idx] = {
+      question: String(ibQ.question || '').slice(0, 600),
+      marks: Number(ibQ.marks) || null,
+      awarded: m ? Number(m[1]) : null,
+      markAwarded: feedback.markAwarded || null,
+      answer: String(answerText || '').slice(0, 6000),
+      whyThisMark: feedback.whyThisMark || '',
+      whatWasDoneWell: feedback.whatWasDoneWell || '',
+      whatIsMissing: feedback.whatIsMissing || '',
+      nextStep: feedback.nextStep || '',
+      at: new Date().toISOString()
+    };
+    syncProgress(lesson.id, patch);
   }
 
   function buildIBPlainTextReport(lesson, ibQ, answerText, feedback) {

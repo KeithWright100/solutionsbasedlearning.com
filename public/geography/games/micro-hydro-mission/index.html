@@ -333,8 +333,8 @@
     { q: 'Where is Long Tanid?', o: ['Malaysian Borneo', 'Northern Thailand', 'Nepal', 'Kenya'], a: 0, why: 'Long Tanid is a small village in the rainforest of Malaysian Borneo.' },
     { q: 'How many households get power from the system?', o: ['12', '54', '250', '1,379'], a: 1, why: '54 households. (1,379 is the number of acres of rainforest protected.)' },
     { q: 'How much power does the system provide?', o: ['11.6 kW, 24 hours a day', '11.6 kW, only at night', '500 kW, 24 hours a day', '2 kW, a few hours a day'], a: 0, why: '11.6 kW of power, 24/7 &mdash; unlike diesel, which only ran some of the time.' },
-    { q: 'What did the community promise in return for the funding?', o: ['To stop using electricity at night', 'To protect 1,379 acres of rainforest', 'To build a road to the village', 'To sell power to the national grid'], a: 1, why: 'Seacology funds community-led conservation, so the village agreed to protect 1,379 acres of rainforest in the watershed.' },
-    { q: 'How is the system looked after?', o: ['A foreign company repairs it every 5 years', 'The government pays for all repairs', 'A community energy committee charges a small tariff to pay for maintenance', 'Nobody &mdash; it never breaks'], a: 2, why: 'A community-elected energy committee set a tariff (fee) that pays for maintenance, so the village runs it themselves.' }
+    { q: 'What did the community promise in return for the funding?', o: ['To stop using any electricity at night-time', 'To protect 1,379 acres of rainforest', 'To build a road to the village', 'To sell spare power to the national grid'], a: 1, why: 'Seacology funds community-led conservation, so the village agreed to protect 1,379 acres of rainforest in the watershed.' },
+    { q: 'How is the system looked after?', o: ['A foreign company flies in to repair it every five years for free', 'The government pays for all the repairs and the spare parts', 'A community committee charges a small tariff to pay for repairs', 'Nobody looks after it, because micro-hydro systems never break down'], a: 2, why: 'A community-elected energy committee set a tariff (fee) that pays for maintenance, so the village runs it themselves.' }
   ];
 
   /* ==================== STEPS ==================== */
@@ -472,7 +472,7 @@
   QUIZ.forEach(function (item, qi) {
     var d = document.createElement('div'); d.className = 'q';
     d.innerHTML = '<p>' + (qi + 1) + '. ' + item.q + '</p><div class="opts">' +
-      item.o.map(function (o, oi) { return '<button type="button" class="opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</button>'; }).join('') +
+      shuffle(item.o.map(function (_, oi) { return oi; })).map(function (oi) { var o = item.o[oi]; return '<button type="button" class="opt" data-q="' + qi + '" data-o="' + oi + '">' + o + '</button>'; }).join('') +
       '</div><div class="why">' + item.why + '</div>';
     quiz.appendChild(d);
   });

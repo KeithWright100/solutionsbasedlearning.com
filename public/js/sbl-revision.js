@@ -589,6 +589,37 @@
       });
   }
 
+  // Saves the latest marked attempt at this past paper question to the
+  // student's account so it appears in their teacher's class sheet
+  // (/teacher/). Stored under lessonId "PPQ:<topic>" with one key per
+  // question ("ib_q<n>"), the same shape as lesson IB-style questions.
+  // Best-effort: a failed save never affects the student's feedback.
+  function savePPQAttempt(topic, q, answerText, feedback) {
+    try {
+      var m = String(feedback.markAwarded || '').match(/(\d+(?:\.\d+)?)/);
+      var patch = {};
+      patch['ib_q' + activeQuestionIndex] = {
+        question: String(q.label ? q.label + ': ' + q.question : q.question || '').slice(0, 600),
+        marks: Number(q.marks) || null,
+        awarded: m ? Number(m[1]) : null,
+        markAwarded: feedback.markAwarded || null,
+        answer: String(answerText || '').slice(0, 6000),
+        whyThisMark: feedback.whyThisMark || '',
+        whatWasDoneWell: feedback.whatWasDoneWell || '',
+        whatIsMissing: feedback.whatIsMissing || '',
+        nextStep: feedback.nextStep || '',
+        topic: topic.topic || '',
+        page: window.location.pathname,
+        at: new Date().toISOString()
+      };
+      fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId: ('PPQ:' + (topic.topic || 'Revision')).slice(0, 190), patch: patch })
+      }).catch(function () {});
+    } catch (e) { /* ignore */ }
+  }
+
   function renderFeedback(topic, q, answerText, feedback) {
     var section = document.getElementById('sblRevisionFeedbackSection');
     feedback = feedback || {};
@@ -615,6 +646,7 @@
 
     section.innerHTML = html;
     announce('Marking complete. You scored ' + markLine + '.');
+    savePPQAttempt(topic, q, answerText, feedback);
 
     document.getElementById('sblRevisionTryAgain').addEventListener('click', function () {
       renderQuestionWorkspace();

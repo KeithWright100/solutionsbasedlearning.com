@@ -3,12 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Students — Solutions Based Learning</title>
+<title>Class Sheet — Solutions Based Learning</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-theme.css">
 <link rel="stylesheet" href="/css/sbl-auth.css">
+<style>
+  .sbl-admin-shell { max-width: 1500px; }
+  .cs-toolbar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: flex-end; margin-bottom: 1rem; }
+  .cs-field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .cs-field label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate); }
+  .cs-field select, .cs-field input { background: var(--navy); color: var(--white); border: 1px solid var(--navy-line); border-radius: 10px; padding: 0.55rem 0.7rem; font: inherit; font-size: 0.9rem; min-width: 210px; }
+  .cs-spacer { flex: 1; }
+  .cs-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.7rem; margin-bottom: 1rem; }
+  .cs-stat { background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 14px; padding: 0.8rem 1rem; }
+  .cs-stat b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--white); }
+  .cs-stat span { font-size: 0.78rem; color: var(--slate); }
+  .cs-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.78rem; color: var(--slate); margin: 0 0 0.7rem; align-items: center; }
+  .cs-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -2px; }
+
+  .cs-scroll { overflow: auto; max-height: 70vh; border: 1px solid var(--navy-line); border-radius: 14px; background: var(--navy-raised); }
+  table.cs-sheet { border-collapse: separate; border-spacing: 0; font-size: 0.82rem; min-width: 100%; }
+  .cs-sheet th, .cs-sheet td { border-right: 1px solid var(--navy-line); border-bottom: 1px solid var(--navy-line); padding: 0.45rem 0.55rem; white-space: nowrap; text-align: center; }
+  .cs-sheet thead th { position: sticky; background: #0E2034; z-index: 2; color: var(--white); font-weight: 600; }
+  .cs-sheet thead tr:first-child th { top: 0; }
+  .cs-sheet thead tr:nth-child(2) th { top: var(--cs-head1, 54px); font-size: 0.7rem; color: var(--slate); text-transform: uppercase; letter-spacing: 0.05em; }
+  .cs-sheet .cs-lessonhead { max-width: 190px; white-space: normal; line-height: 1.25; font-size: 0.74rem; vertical-align: bottom; }
+  .cs-sheet .cs-lessonhead b { display: block; color: var(--teal-bright); font-family: var(--font-mono); font-size: 0.72rem; }
+  .cs-sheet .cs-name { position: sticky; left: 0; z-index: 1; background: #0E2034; text-align: left; min-width: 190px; }
+  .cs-sheet thead .cs-name { z-index: 3; }
+  .cs-sheet td.cs-name { color: var(--white); font-weight: 600; }
+  .cs-sheet td.cs-name small { display: block; color: var(--slate); font-weight: 400; font-size: 0.72rem; }
+  .cs-sheet td.cs-cell { cursor: pointer; font-family: var(--font-mono); min-width: 62px; color: var(--white); }
+  .cs-sheet td.cs-cell:hover { outline: 2px solid var(--teal); outline-offset: -2px; }
+  .cs-sheet td.cs-empty { color: var(--slate-dim); cursor: default; }
+  .cs-sheet td.cs-empty:hover { outline: none; }
+  .cs-good { background: rgba(34,197,94,0.22); }
+  .cs-ok { background: rgba(245,158,11,0.22); }
+  .cs-low { background: rgba(239,68,68,0.25); }
+  .cs-sheet .cs-sum { background: #0C1C2E; font-weight: 700; }
+  .cs-sheet .cs-groupstart { border-left: 2px solid var(--slate-dim); }
+  .cs-flag { display: inline-block; font-size: 0.68rem; font-weight: 700; border-radius: 999px; padding: 2px 7px; margin: 1px; background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .cs-flag--warn { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .cs-note { font-size: 0.8rem; color: var(--slate); margin-top: 0.7rem; }
+
+  /* detail drawer */
+  .cs-drawer-bg { position: fixed; inset: 0; background: rgba(2,8,16,0.6); z-index: 50; display: none; }
+  .cs-drawer-bg.is-open { display: block; }
+  .cs-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(620px, 100%); background: var(--navy-raised); border-left: 1px solid var(--navy-line); z-index: 51; overflow-y: auto; padding: 1.4rem 1.5rem 2rem; transform: translateX(100%); transition: transform .25s var(--ease); }
+  .cs-drawer.is-open { transform: none; }
+  .cs-drawer h2 { font-family: var(--font-display); color: var(--white); font-size: 1.25rem; margin: 0 0 0.2rem; padding-right: 2.5rem; }
+  .cs-drawer .cs-sub { color: var(--slate); font-size: 0.85rem; margin-bottom: 1rem; }
+  .cs-close { position: absolute; top: 1rem; right: 1rem; background: var(--navy); border: 1px solid var(--navy-line); color: var(--white); border-radius: 10px; width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; }
+  .cs-block { background: var(--navy); border: 1px solid var(--navy-line); border-radius: 12px; padding: 0.9rem 1rem; margin-bottom: 0.8rem; color: var(--white); font-size: 0.88rem; line-height: 1.5; }
+  .cs-block h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--teal-bright); margin: 0 0 0.4rem; }
+  .cs-block .cs-mark { font-family: var(--font-display); font-size: 1.2rem; float: right; }
+  .cs-block details { margin-top: 0.5rem; }
+  .cs-block summary { cursor: pointer; color: var(--teal-bright); font-weight: 600; font-size: 0.82rem; }
+  .cs-block .cs-answer { white-space: pre-wrap; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 0.6rem 0.7rem; margin-top: 0.4rem; color: #dbe7ef; }
+  .cs-block p { margin: 0.35rem 0; }
+  .cs-block p b { color: var(--slate); font-weight: 600; }
+</style>
 </head>
 <body>
 <div class="sbl-contours" aria-hidden="true"></div>
@@ -16,34 +72,43 @@
 
   <div class="sbl-admin-header">
     <div>
-      <h1>My Students</h1>
-      <p>Students assigned to you, and a quick look at how they're progressing &middot; signed in as <span id="teacherName">…</span></p>
+      <h1>Class Sheet</h1>
+      <p>Quiz scores and marked past paper questions for your students, filled in automatically &middot; signed in as <span id="teacherName">…</span></p>
     </div>
     <div style="display:flex; gap:0.6rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="csvBtn">Download CSV</button>
       <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
     </div>
   </div>
 
   <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
 
-  <section class="sbl-panel">
-    <table class="sbl-table">
-      <thead>
-        <tr>
-          <th>Student</th>
-          <th>Email</th>
-          <th>Group</th>
-          <th>Status</th>
-          <th>Lessons with progress</th>
-          <th>Last activity</th>
-        </tr>
-      </thead>
-      <tbody id="studentsBody"></tbody>
-    </table>
-    <div class="sbl-empty-state" id="studentsEmpty" style="display:none;">No students are assigned to you yet — ask your admin to assign some from the Admin Dashboard.</div>
-  </section>
+  <div class="cs-toolbar">
+    <div class="cs-field"><label for="classSel">Class</label><select id="classSel"></select></div>
+    <div class="cs-field"><label for="viewSel">Unit</label><select id="viewSel"></select></div>
+    <div class="cs-field"><label for="searchBox">Find student</label><input id="searchBox" type="search" placeholder="Type a name…"></div>
+    <div class="cs-spacer"></div>
+  </div>
+
+  <div class="cs-stats" id="stats"></div>
+
+  <div class="cs-legend">
+    <span><i style="background:rgba(34,197,94,0.5)"></i>70%+</span>
+    <span><i style="background:rgba(245,158,11,0.5)"></i>50&ndash;69%</span>
+    <span><i style="background:rgba(239,68,68,0.55)"></i>Under 50%</span>
+    <span>&middot; <b style="color:var(--white)">Quiz</b> = Test My Knowledge % &middot; <b style="color:var(--white)">PPQ</b> = marks on IB-style / past paper questions (latest attempt) &middot; click any score for answers and feedback</span>
+  </div>
+
+  <div class="cs-scroll" id="sheetWrap"><div class="sbl-empty-state" style="padding:2rem;">Loading your class…</div></div>
+  <p class="cs-note" id="sheetNote"></p>
 
 </div>
+
+<div class="cs-drawer-bg" id="drawerBg"></div>
+<aside class="cs-drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+  <button type="button" class="cs-close" id="drawerClose" aria-label="Close">&times;</button>
+  <div id="drawerBody"></div>
+</aside>
 
 <script src="/js/sbl-teacher.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>

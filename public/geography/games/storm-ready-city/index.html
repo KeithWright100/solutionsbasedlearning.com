@@ -761,18 +761,18 @@
 
   /* ============ ROUND 3 ============ */
   var Q3 = [
-    { p: '📡 How does <b>prediction</b> reduce the impacts of a tropical storm?', o: ['It gives governments and communities time to act before the storm arrives.', 'It stops the storm from forming.', 'It makes buildings stronger.', 'It pays for repairs after the storm.'], c: 0,
+    { p: '📡 How does <b>prediction</b> reduce the impacts of a tropical storm?', o: ['It gives governments and communities time to warn people and act before the storm arrives.', 'It stops the storm from forming by detecting it early over the warm ocean water.', 'It makes buildings stronger because engineers know exactly what wind speeds to design for.', 'It pays for repairs after the storm, because insurance companies use the forecasts.'], c: 0,
       fb: 'Forecasting the path and strength of the storm gives time to warn people, evacuate and prepare.' },
-    { p: '🎒 How does <b>preparation</b> reduce the impacts?', o: ['It reduces the wind speed of the storm.', 'People and communities know what to do, where to go and have supplies ready, so fewer people are hurt.', 'It means nobody needs to evacuate.', 'It only helps after the storm has passed.'], c: 1,
+    { p: '🎒 How does <b>preparation</b> reduce the impacts?', o: ['It reduces the wind speed of the storm before it reaches the coast, so damage is lower.', 'People know what to do, where to go and have supplies ready, so fewer people are hurt.', 'It means nobody needs to evacuate, because every family can safely stay at home instead.', 'It only helps after the storm has passed, by making the clean-up and rebuilding faster.'], c: 1,
       fb: 'Education, warnings, evacuation routes, shelters and supplies mean people can act quickly and safely.' },
-    { p: '🧱 How does <b>protection</b> reduce the impacts?', o: ['It tells people when the storm will arrive.', 'Physical measures like sea walls, drainage and stronger buildings reduce damage to homes and infrastructure.', 'It is always the cheapest option.', 'It protects every part of the coastline equally.'], c: 1,
+    { p: '🧱 How does <b>protection</b> reduce the impacts?', o: ['It tells people exactly when and where the storm will arrive, so they can get out of its way.', 'Sea walls, drainage and stronger buildings reduce damage to homes and infrastructure.', 'It is always the cheapest option, so even the poorest cities can afford to use it fully.', 'It protects every part of the coastline equally, including people living in informal housing.'], c: 1,
       fb: 'Protection reduces physical damage — but it is usually expensive and cannot protect everywhere (the sea wall only covered part of the coast).' },
-    { p: '💰 With <b>only $10 million</b>, which statement is most accurate?', o: ['The city can still build a sea wall and strengthen every home.', 'Cheaper prediction and preparation measures (warnings, education, evacuation routes, supplies) can still save many lives.', 'Nothing useful can be done.', 'Money only matters for prediction.'], c: 1,
+    { p: '💰 With <b>only $10 million</b>, which statement is most accurate?', o: ['The city can still build a full sea wall and strengthen every home if it spreads the cost over time.', 'Cheaper warnings, education and evacuation planning can still save many lives, even without a sea wall.', 'Nothing useful can be done without at least $100 million, so the city should wait for aid.', 'Money only matters for prediction, so the city should spend all of it on satellite forecasting.'], c: 1,
       fb: 'Poorer places often get the most lives saved per dollar from preparation — warnings, education and evacuation are cheap compared with sea walls.' }
   ];
   function render3() {
     $('q3').innerHTML = Q3.map(function (q, i) {
-      return '<div class="q3" data-i="' + i + '"><h3>' + q.p + '</h3>' + q.o.map(function (o, j) { return '<button type="button" class="opt" data-j="' + j + '">' + o + '</button>'; }).join('') + '<div class="fb3"></div></div>';
+      return '<div class="q3" data-i="' + i + '"><h3>' + q.p + '</h3>' + shuffle(q.o.map(function (_, j) { return j; })).map(function (j) { var o = q.o[j]; return '<button type="button" class="opt" data-j="' + j + '">' + o + '</button>'; }).join('') + '<div class="fb3"></div></div>';
     }).join('');
   }
   $('q3').addEventListener('click', function (e) {
@@ -780,7 +780,7 @@
     var box = b.closest('.q3'), q = Q3[+box.dataset.i], j = +b.dataset.j;
     box.querySelectorAll('.opt').forEach(function (o) { o.disabled = true; });
     b.classList.add(j === q.c ? 'right' : 'wrong');
-    if (j !== q.c) box.querySelectorAll('.opt')[q.c].classList.add('right');
+    if (j !== q.c) box.querySelector('.opt[data-j="' + q.c + '"]').classList.add('right');
     var fb = box.querySelector('.fb3'); fb.style.display = 'block'; fb.textContent = (j === q.c ? '✔ ' : '✖ ') + q.fb;
   });
   $('restart').addEventListener('click', function () {

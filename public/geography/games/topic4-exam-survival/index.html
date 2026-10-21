@@ -617,8 +617,8 @@
           setTimeout(function () { $('cfg').classList.add('go'); }, 100);
           $('cfReplay').addEventListener('click', function () { var g = $('cfg'); g.classList.remove('go'); void g.offsetWidth; setTimeout(function () { g.classList.add('go'); }, 50); });
           mcq($('cfq'), [
-            { q: '🔮 Predict: what will happen next to <b>Country A</b> as it develops?', o: ['Secondary employment will rise as factories open', 'Primary employment will rise to 90%', 'Tertiary will fall to 0%', 'Nothing will change'], c: 0, f: 'As LICs industrialise, people move from farms into factories, so the secondary sector grows.' },
-            { q: '🔮 Predict: what will happen next to <b>Country C</b>?', o: ['Primary employment will increase again', 'Quaternary (research & ICT) jobs will grow and secondary will keep falling', 'Secondary will become the largest sector again', 'Everyone will work in farming'], c: 1, f: 'Post-industrial HICs see growth in knowledge-based quaternary jobs while manufacturing moves overseas.' }], next);
+            { q: '🔮 Predict: what will happen next to <b>Country A</b> as it develops?', o: ['Secondary employment will rise as factories open', 'Primary employment will rise to 90% as more farms open', 'Tertiary jobs will fall to 0% as services disappear', 'Nothing will change, because the sectors are fixed'], c: 0, f: 'As LICs industrialise, people move from farms into factories, so the secondary sector grows.' },
+            { q: '🔮 Predict: what will happen next to <b>Country C</b>?', o: ['Primary employment will increase again as people return to farming', 'Quaternary (research and ICT) jobs will grow; secondary will keep falling', 'Secondary will become the largest sector again as factories return from abroad', 'Everyone will work in services, so primary and secondary will disappear completely'], c: 1, f: 'Post-industrial HICs see growth in knowledge-based quaternary jobs while manufacturing moves overseas.' }], next);
         } }]);
   };
   function clarkFisher() {
@@ -703,11 +703,7 @@
           'Incomes rise and people have more money to spend',
           'Demand for services grows, so tertiary employment increases'], 'Tap the FIRST link of the chain.', next); } },
       { title: '🧐 Case closed?', build: function (el, next) { mcq(el, [
-        { q: 'Why is tertiary employment increasing? Choose the <b>best</b> exam answer.', o: [
-          'Because people like services more.',
-          'Because mechanisation and deindustrialisation reduce primary and secondary jobs, while rising incomes and education increase demand for, and supply of workers in, services.',
-          'Because the government bans factories.',
-          'Because primary jobs pay more money.'], c: 1, f: 'The best answer explains BOTH the push (fewer primary/secondary jobs) and the pull (more demand for services).' }], next); } }]);
+        { q: 'Why is tertiary employment increasing? Choose the <b>best</b> exam answer.', o: ['Because people simply prefer working in services, so they choose to leave farms and factories even when the pay there is higher.', 'Mechanisation and deindustrialisation cut primary and secondary jobs, while rising incomes increase demand for services.', 'Because governments have banned new factories, which forces workers out of secondary industry into service jobs.', 'Because primary jobs now pay much more money, so fewer people need to work and more can afford to retire early.'], c: 1, f: 'The best answer explains BOTH the push (fewer primary/secondary jobs) and the pull (more demand for services).' }], next); } }]);
   };
 
   /* L5 */
@@ -862,8 +858,8 @@
           paint();
         } },
       { title: '🧠 Energy debrief', build: function (el, next) { mcq(el, [
-        { q: 'Why does a <b>diverse</b> energy mix improve energy security?', o: ['If one source fails or prices rise, others can still supply energy', 'It always makes electricity free', 'It means the country needs no power stations', 'It stops all carbon emissions'], c: 0, f: 'Not relying on one source spreads the risk — that is energy security.' },
-        { q: 'Which is the main <b>disadvantage</b> of relying on imported oil and gas?', o: ['They produce no emissions', 'Supply and prices depend on other countries', 'They only work when it is windy', 'They need a deep valley to be flooded'], c: 1, f: 'Importing fuel makes a country vulnerable to price rises and supply disruption.' }], next); } }]);
+        { q: 'Why does a <b>diverse</b> energy mix improve energy security?', o: ['If one source fails or its prices rise, other sources can still supply the energy needed', 'It always makes electricity free because countries can choose the cheapest source', 'It means the country no longer needs any power stations or electricity grid', 'It stops all carbon emissions, because renewables are always part of the mix'], c: 0, f: 'Not relying on one source spreads the risk — that is energy security.' },
+        { q: 'Which is the main <b>disadvantage</b> of relying on imported oil and gas?', o: ['They produce no emissions, so they cannot be taxed by the government', 'Supply and prices depend on other countries and world markets', 'They only work when it is windy enough to move the tankers', 'They need a deep valley to be flooded before they can be stored'], c: 1, f: 'Importing fuel makes a country vulnerable to price rises and supply disruption.' }], next); } }]);
   };
 
   /* L8 */

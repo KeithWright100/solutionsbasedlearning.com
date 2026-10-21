@@ -9,7 +9,16 @@
 //                       students assigned to the caller, each with a
 //                       lightweight progress summary:
 //                       { students: [{ id, fullName, email, status,
-//                         lessonsWithProgress, lastUpdated }, ...] }
+//                         groupName, lessonsWithProgress, lastUpdated,
+//                         quizCount, quizAvgPct, ibCount, ibAvgPct }, ...] }
+//                       quiz* = lesson quizzes (Test My Knowledge +
+//                       Spaced Retrieval); ib* = marked IB-style
+//                       answers (keys "ib_q<n>", latest attempt each).
+//                       Add &sheet=1 to also get each student's
+//                       per-lesson "cells" for the class sheet:
+//                       { <lessonId>: { tmk, sr, ibAwarded, ibMax,
+//                         ibCount, page, updated } } — revision past
+//                       paper questions are saved as lessonId "PPQ:...".
 // GET  ?studentId=xyz — one specific student's per-lesson progress,
 //                       for an admin or that student's assigned
 //                       teacher only: { student: {...}, lessons: {...} }
@@ -157,7 +166,7 @@ async function handleMyStudents(req, res, session, supabase) {
   const studentIds = students.map((s) => s.id);
   const { data: progressRows, error: progressError } = await supabase
     .from('sbl_lesson_progress')
-    .select('user_id, lesson_id, updated_at')
+    .select('user_id, lesson_id, updated_at, data')
     .in('user_id', studentIds);
 
   if (progressError) {
@@ -165,16 +174,50 @@ async function handleMyStudents(req, res, session, supabase) {
     return res.status(500).json({ error: "Could not load your students' progress." });
   }
 
+  const blank = () => ({ lessonsWithProgress: 0, lastUpdated: null, quizCount: 0, quizPctSum: 0, ibCount: 0, ibAwarded: 0, ibMax: 0 });
+  const wantSheet = req.query.sheet === '1';
+  const cells = {};
   const summary = {};
   (progressRows || []).forEach((row) => {
-    const entry = summary[row.user_id] || (summary[row.user_id] = { lessonsWithProgress: 0, lastUpdated: null });
+    const entry = summary[row.user_id] || (summary[row.user_id] = blank());
+    if (wantSheet) {
+      const d0 = row.data || {};
+      const cell = { tmk: null, sr: null, ibAwarded: 0, ibMax: 0, ibCount: 0, page: null, updated: row.updated_at };
+      if (d0.quiz_test_my_knowledge && typeof d0.quiz_test_my_knowledge.pct === 'number') cell.tmk = d0.quiz_test_my_knowledge.pct;
+      if (d0.quiz_spaced_retrieval && typeof d0.quiz_spaced_retrieval.pct === 'number') cell.sr = d0.quiz_spaced_retrieval.pct;
+      Object.keys(d0).forEach((k) => {
+        const v = d0[k];
+        if (k.indexOf('ib_q') === 0 && v && typeof v.awarded === 'number' && typeof v.marks === 'number' && v.marks > 0) {
+          cell.ibAwarded += v.awarded; cell.ibMax += v.marks; cell.ibCount += 1;
+          if (!cell.page && v.page) cell.page = v.page;
+        }
+      });
+      (cells[row.user_id] || (cells[row.user_id] = {}))[row.lesson_id] = cell;
+    }
     entry.lessonsWithProgress += 1;
     if (!entry.lastUpdated || row.updated_at > entry.lastUpdated) entry.lastUpdated = row.updated_at;
+    const d = row.data || {};
+    Object.keys(d).forEach((key) => {
+      const v = d[key];
+      if (!v || typeof v !== 'object') return;
+      if (key.indexOf('quiz_') === 0 && typeof v.pct === 'number') {
+        entry.quizCount += 1; entry.quizPctSum += v.pct;
+      } else if (key.indexOf('ib_q') === 0 && typeof v.awarded === 'number' && typeof v.marks === 'number' && v.marks > 0) {
+        entry.ibCount += 1; entry.ibAwarded += v.awarded; entry.ibMax += v.marks;
+      }
+    });
+  });
+  Object.keys(summary).forEach((id) => {
+    const e = summary[id];
+    e.quizAvgPct = e.quizCount ? Math.round(e.quizPctSum / e.quizCount) : null;
+    e.ibAvgPct = e.ibMax ? Math.round((e.ibAwarded / e.ibMax) * 100) : null;
+    delete e.quizPctSum; delete e.ibAwarded; delete e.ibMax;
   });
 
   const result = students.map((s) => Object.assign(
     { id: s.id, fullName: s.full_name, email: s.email, status: s.status, groupName: s.group_name || null },
-    summary[s.id] || { lessonsWithProgress: 0, lastUpdated: null }
+    summary[s.id] || { lessonsWithProgress: 0, lastUpdated: null, quizCount: 0, quizAvgPct: null, ibCount: 0, ibAvgPct: null },
+    wantSheet ? { cells: cells[s.id] || {} } : {}
   ));
 
   return res.status(200).json({ students: result });
@@ -190,7 +233,7 @@ async function handleMyStudents(req, res, session, supabase) {
 async function handleStudentProgress(req, res, session, supabase, studentId, lessonId) {
   const { data: student, error: studentError } = await supabase
     .from('sbl_profiles')
-    .select('id, full_name, email, teacher_id')
+    .select('id, full_name, email, teacher_id, group_name')
     .eq('id', studentId)
     .maybeSingle();
 
@@ -206,7 +249,7 @@ async function handleStudentProgress(req, res, session, supabase, studentId, les
 
   let query = supabase
     .from('sbl_lesson_progress')
-    .select('lesson_id, data')
+    .select('lesson_id, data, updated_at')
     .eq('user_id', studentId);
 
   if (lessonId) query = query.eq('lesson_id', lessonId);
@@ -218,10 +261,12 @@ async function handleStudentProgress(req, res, session, supabase, studentId, les
   }
 
   const byLesson = {};
-  (data || []).forEach((row) => { byLesson[row.lesson_id] = row.data; });
+  const updated = {};
+  (data || []).forEach((row) => { byLesson[row.lesson_id] = row.data; updated[row.lesson_id] = row.updated_at; });
 
   return res.status(200).json({
-    student: { id: student.id, fullName: student.full_name, email: student.email },
-    lessons: byLesson
+    student: { id: student.id, fullName: student.full_name, email: student.email, groupName: student.group_name || null },
+    lessons: byLesson,
+    updated
   });
 }
