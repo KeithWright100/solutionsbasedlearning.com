@@ -285,8 +285,11 @@ async function handleDeleteUser(req, res, session) {
 // ---------------------------------------------------------------
 async function handleSetRole(req, res, session) {
   const { userId, role } = req.body || {};
-  if (!userId || (role !== 'user' && role !== 'teacher')) {
-    return res.status(400).json({ error: 'userId and role ("user" or "teacher") are required.' });
+  // 'student' added so an account that applied with the wrong role
+  // can be corrected (and then given subjects/teachers).
+  const SETTABLE = ['user', 'teacher', 'student'];
+  if (!userId || SETTABLE.indexOf(role) === -1) {
+    return res.status(400).json({ error: 'userId and role ("user", "teacher" or "student") are required.' });
   }
 
   const supabase = getSupabaseAdmin();
@@ -300,7 +303,7 @@ async function handleSetRole(req, res, session) {
   if (fetchError || !target) {
     return res.status(404).json({ error: 'User not found.' });
   }
-  if (target.role !== 'user' && target.role !== 'teacher') {
+  if (SETTABLE.indexOf(target.role) === -1) {
     return res.status(400).json({ error: `This account's role (${target.role}) can't be changed from here.` });
   }
 
@@ -313,7 +316,7 @@ async function handleSetRole(req, res, session) {
   // Demoting a teacher back to a plain user: clear their students'
   // assignments too, so no student is left "assigned" to someone
   // who can no longer see a students list at all.
-  if (role === 'user') {
+  if (target.role === 'teacher' && role !== 'teacher') {
     const { error: unassignError } = await supabase
       .from('sbl_profiles')
       .update({ teacher_id: null })

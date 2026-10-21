@@ -178,12 +178,12 @@
   function renderRoleCell(u) {
     var label = u.role.charAt(0).toUpperCase() + u.role.slice(1).replace(/_/g, ' ');
     var badge = '<span class="sbl-badge" style="background:rgba(124,147,163,0.2);color:var(--slate);">' + escapeHtml(label) + '</span>';
-    if (u.role === 'teacher') {
-      return badge + '<div style="margin-top:0.35rem;"><button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="make-user" data-id="' + u.id + '">Make user</button></div>';
-    }
-    if (u.role === 'user') {
-      return badge + '<div style="margin-top:0.35rem;"><button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="make-teacher" data-id="' + u.id + '">Make teacher</button></div>';
-    }
+    var btn = function (action, text) {
+      return '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" style="margin:0.35rem 0.3rem 0 0;" data-action="' + action + '" data-id="' + u.id + '">' + text + '</button>';
+    };
+    if (u.role === 'teacher') return badge + '<div>' + btn('make-user', 'Make user') + '</div>';
+    if (u.role === 'user') return badge + '<div>' + btn('make-student', 'Make student') + btn('make-teacher', 'Make teacher') + '</div>';
+    if (u.role === 'student') return badge + '<div>' + btn('make-user', 'Make user') + '</div>';
     return badge;
   }
 
@@ -438,6 +438,7 @@
     if (action === 'delete') return handleDelete(id, btn.getAttribute('data-name'), btn);
     if (action === 'make-teacher') return handleSetRole(id, 'teacher', btn);
     if (action === 'make-user') return handleSetRole(id, 'user', btn);
+    if (action === 'make-student') return handleSetRole(id, 'student', btn);
     if (action === 'reset-password') return handleResetPassword(id, btn.getAttribute('data-name'), btn);
     if (action === 'view-feedback') {
       var fb = state.feedback.find(function (f) { return f.id === id; });
@@ -538,13 +539,17 @@
   }
 
   function handleSetRole(userId, role, btn) {
-    var verb = role === 'teacher' ? 'make this user a teacher' : 'change this teacher back to a regular user';
+    var verb = role === 'teacher' ? 'make this user a teacher'
+      : role === 'student' ? 'make this account a student'
+      : 'change this account back to a regular user';
     if (!confirm('Are you sure you want to ' + verb + '?')) return;
     clearMessages();
     withButtonBusy(btn, 'Updating…', function () {
       return postJson('/api/admin/action', { action: 'set-role', userId: userId, role: role }).then(function (result) {
         if (!result.ok) { showError(result.data.error || "Could not update this user's role."); return; }
-        showNotice(role === 'teacher' ? 'This user is now a teacher.' : 'This user is now a regular user.');
+        showNotice(role === 'teacher' ? 'This user is now a teacher.'
+          : role === 'student' ? 'This account is now a student \u2014 you can now give them subjects and teachers.'
+          : 'This account is now a regular user.');
         loadData();
       });
     });
