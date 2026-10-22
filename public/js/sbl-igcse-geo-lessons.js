@@ -6,6 +6,7 @@
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_GEO_LESSON_ORDER = ["IGCO01", "IGCO02", "IGCO03", "IGCO04", "IGCO05", "IGCO06", "IGCO07", "IGCO08", "IGCO09", "IGCO10", "IGCO11", "IGCO12", "IGCO13", "IGCO14", "IGCO15"];
 window.SBL_IGCSE_GEO_HAZ_LESSON_ORDER = ["IGHZ01", "IGHZ02", "IGHZ03", "IGHZ04", "IGHZ05", "IGHZ06", "IGHZ07", "IGHZ08", "IGHZ09", "IGHZ10", "IGHZ11", "IGHZ12"];
+window.SBL_IGCSE_GEO_CFW_LESSON_ORDER = ["IGCF01", "IGCF02", "IGCF03", "IGCF04", "IGCF05", "IGCF06", "IGCF07"];
 window.SBL_IGCSE_GEO_DEV_LESSON_ORDER = ["IGDV01", "IGDV02", "IGDV03", "IGDV04", "IGDV05", "IGDV06", "IGDV07", "IGDV08", "IGDV09"];
 
 window.SBL_LESSONS["IGCO01"] = {
@@ -3695,6 +3696,959 @@ window.SBL_LESSONS["IGHZ12"] = {
    "correct": 0,
    "explain": "About 20 a year enter its waters.",
    "tag": "Vulnerability"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF01"] = {
+ "id": "IGCF01",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Why is fieldwork important in geography?",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l01-why-fieldwork",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Why fieldwork? The enquiry process.",
+ "checklist": [
+  "I can explain what fieldwork is and why it is important in geography",
+  "I can describe the six stages of a geographical enquiry",
+  "I can state our coastal enquiry question, location and hypotheses"
+ ],
+ "quiz": [
+  {
+   "q": "What is fieldwork?",
+   "options": [
+    "Collecting primary data outside the classroom",
+    "Reading textbooks at home",
+    "Watching documentaries about geography in class",
+    "Copying data from a website"
+   ],
+   "correct": 0,
+   "explain": "Primary data, in the field.",
+   "tag": "Fieldwork"
+  },
+  {
+   "q": "What is a hypothesis?",
+   "options": [
+    "A testable statement",
+    "A list of equipment needed",
+    "A type of graph used to show data",
+    "The final conclusion of a study"
+   ],
+   "correct": 0,
+   "explain": "Accepted or rejected with data.",
+   "tag": "Planning"
+  },
+  {
+   "q": "Which stage comes first in an enquiry?",
+   "options": [
+    "Introduction and planning",
+    "Data analysis and presentation",
+    "Evaluation",
+    "Conclusions"
+   ],
+   "correct": 0,
+   "explain": "Question, hypotheses, location.",
+   "tag": "Enquiry"
+  },
+  {
+   "q": "In which stage do you identify anomalies?",
+   "options": [
+    "Data analysis",
+    "Introduction and planning",
+    "Risk assessment",
+    "Methods and data collection"
+   ],
+   "correct": 0,
+   "explain": "Describe and explain patterns and anomalies.",
+   "tag": "Enquiry"
+  },
+  {
+   "q": "In which stage do you accept or reject hypotheses?",
+   "options": [
+    "Conclusions",
+    "Data presentation",
+    "Methods",
+    "Planning"
+   ],
+   "correct": 0,
+   "explain": "Using your evidence.",
+   "tag": "Enquiry"
+  },
+  {
+   "q": "What was our fieldwork focus?",
+   "options": [
+    "Human intervention and coastal processes",
+    "Rural settlement size and the services provided",
+    "River velocity and discharge",
+    "Urban land use and traffic"
+   ],
+   "correct": 0,
+   "explain": "The coastal enquiry.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "Which is secondary data in our study?",
+   "options": [
+    "Historical photographs",
+    "Beach width measurements",
+    "Wave frequency counts",
+    "Our own field sketches"
+   ],
+   "correct": 0,
+   "explain": "Collected by others.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "Which is a qualitative method we used?",
+   "options": [
+    "Field sketches",
+    "Beach gradient",
+    "Wave frequency",
+    "Longshore drift"
+   ],
+   "correct": 0,
+   "explain": "Recorded in pictures/words.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "Where was our coastal study?",
+   "options": [
+    "Sam Roi Yot National Park",
+    "Hua Hin town centre",
+    "Khao Yai National Park (Nakhon Ratchasima)",
+    "Pattaya beach"
+   ],
+   "correct": 0,
+   "explain": "On the Gulf of Thailand.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "Why is fieldwork important?",
+   "options": [
+    "It applies theory to real places",
+    "It replaces all classroom learning",
+    "It avoids collecting any data",
+    "It is only for physical geography"
+   ],
+   "correct": 0,
+   "explain": "Skills and understanding.",
+   "tag": "Fieldwork"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF02"] = {
+ "id": "IGCF02",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Planning: types of data, pilot surveys and risk assessment",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l02-planning-data-and-risk",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Data types, pilot surveys and risk.",
+ "checklist": [
+  "I can explain the difference between primary and secondary data, and their advantages and disadvantages",
+  "I can explain the difference between quantitative and qualitative data",
+  "I can explain why a pilot survey is carried out",
+  "I can complete a risk assessment for coastal fieldwork"
+ ],
+ "quiz": [
+  {
+   "q": "Which is primary data?",
+   "options": [
+    "Beach width we measured",
+    "A geological map of the area",
+    "A newspaper report on erosion",
+    "Weather station rainfall data"
+   ],
+   "correct": 0,
+   "explain": "Collected by us.",
+   "tag": "Data"
+  },
+  {
+   "q": "Which is an advantage of secondary data?",
+   "options": [
+    "It saves time",
+    "It is always up to date",
+    "It always fits your question",
+    "You always see it being collected"
+   ],
+   "correct": 0,
+   "explain": "Already collected.",
+   "tag": "Data"
+  },
+  {
+   "q": "Which is a disadvantage of secondary data?",
+   "options": [
+    "It may be out of date",
+    "It takes days to collect yourself",
+    "It needs a clinometer",
+    "It can only be qualitative"
+   ],
+   "correct": 0,
+   "explain": "And may be biased.",
+   "tag": "Data"
+  },
+  {
+   "q": "Which is quantitative data?",
+   "options": [
+    "Waves per minute",
+    "An annotated field sketch",
+    "An interview",
+    "A photograph"
+   ],
+   "correct": 0,
+   "explain": "A number.",
+   "tag": "Data"
+  },
+  {
+   "q": "Why is qualitative data sometimes criticised?",
+   "options": [
+    "It is subjective",
+    "It is always numerical",
+    "It is never useful",
+    "It cannot be collected outdoors"
+   ],
+   "correct": 0,
+   "explain": "Open to interpretation.",
+   "tag": "Data"
+  },
+  {
+   "q": "What is a pilot survey?",
+   "options": [
+    "A small trial before the main survey",
+    "The final survey of the investigation",
+    "A survey done from an aeroplane",
+    "A survey of secondary data only"
+   ],
+   "correct": 0,
+   "explain": "Tests methods and sites.",
+   "tag": "Pilot"
+  },
+  {
+   "q": "Why carry out a pilot survey?",
+   "options": [
+    "To test methods and save time later",
+    "To avoid writing a risk assessment",
+    "To collect all the final data in one go",
+    "To make the study less representative"
+   ],
+   "correct": 0,
+   "explain": "Checks everything works.",
+   "tag": "Pilot"
+  },
+  {
+   "q": "What is a hazard?",
+   "options": [
+    "Something that could cause harm",
+    "The likelihood of harm happening",
+    "A method of sampling a beach",
+    "A type of secondary data"
+   ],
+   "correct": 0,
+   "explain": "Potential to cause injury.",
+   "tag": "Risk"
+  },
+  {
+   "q": "How can the risk from waves be reduced?",
+   "options": [
+    "Only go knee-deep and work in pairs",
+    "Measure LSD from far out at sea",
+    "Work alone so that nobody gets distracted",
+    "Collect data during a storm"
+   ],
+   "correct": 0,
+   "explain": "Stay safe in the sea.",
+   "tag": "Risk"
+  },
+  {
+   "q": "What does risk take into account?",
+   "options": [
+    "Likelihood and seriousness of harm",
+    "Only the cost of replacing broken equipment",
+    "Only the number of students",
+    "The colour of the sand"
+   ],
+   "correct": 0,
+   "explain": "How likely and how bad.",
+   "tag": "Risk"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF03"] = {
+ "id": "IGCF03",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Sampling, transects and avoiding bias",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l03-sampling",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Sampling and transects.",
+ "checklist": [
+  "I can describe systematic, stratified and random sampling",
+  "I can explain why we sample and how to avoid bias",
+  "I can explain which sampling techniques were used in our coastal enquiry"
+ ],
+ "quiz": [
+  {
+   "q": "What is systematic sampling?",
+   "options": [
+    "Sampling at regular intervals",
+    "Sampling using random numbers",
+    "Sampling each group by its size",
+    "Sampling only the best spots"
+   ],
+   "correct": 0,
+   "explain": "e.g. every 10 m.",
+   "tag": "Methods"
+  },
+  {
+   "q": "What is stratified sampling?",
+   "options": [
+    "Sampling groups in proportion",
+    "Sampling at regular intervals",
+    "Sampling wherever you like",
+    "Sampling only once at each site"
+   ],
+   "correct": 0,
+   "explain": "Divide into strata.",
+   "tag": "Methods"
+  },
+  {
+   "q": "What does random sampling require?",
+   "options": [
+    "Random numbers",
+    "A clinometer and ranging poles",
+    "Closing your eyes and pointing",
+    "Sampling every 5 metres"
+   ],
+   "correct": 0,
+   "explain": "Equal chance for every point.",
+   "tag": "Methods"
+  },
+  {
+   "q": "Which sampling did we use for quadrats?",
+   "options": [
+    "Systematic, every 10 m",
+    "Random, using a calculator",
+    "Stratified by vegetation type",
+    "No sampling at all"
+   ],
+   "correct": 0,
+   "explain": "Along the transect.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "What is a transect?",
+   "options": [
+    "A line along which data is collected",
+    "A square frame used to measure cover",
+    "An instrument to measure angles",
+    "A map of the whole coastline"
+   ],
+   "correct": 0,
+   "explain": "From sea to back of beach.",
+   "tag": "Transects"
+  },
+  {
+   "q": "Why do we sample?",
+   "options": [
+    "It is quicker and cheaper",
+    "It is always perfectly accurate",
+    "It removes the need to repeat readings",
+    "It makes data less representative"
+   ],
+   "correct": 0,
+   "explain": "Can’t measure everything.",
+   "tag": "Why sample"
+  },
+  {
+   "q": "Why drop the quadrat over your shoulder?",
+   "options": [
+    "To reduce human bias",
+    "To make it land faster",
+    "To measure the gradient",
+    "To keep it out of the sea"
+   ],
+   "correct": 0,
+   "explain": "You don’t choose the spot.",
+   "tag": "Bias"
+  },
+  {
+   "q": "Which could cause bias?",
+   "options": [
+    "Only sampling the most interesting spots",
+    "Sampling every 10 m",
+    "Using random numbers",
+    "Repeating each reading three times and averaging"
+   ],
+   "correct": 0,
+   "explain": "Not representative.",
+   "tag": "Bias"
+  },
+  {
+   "q": "What is a limitation of systematic sampling?",
+   "options": [
+    "Features between points can be missed",
+    "It needs random number tables to choose points",
+    "It cannot be used on beaches",
+    "It always takes too long"
+   ],
+   "correct": 0,
+   "explain": "Gaps between samples.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "Why use the same methods at each site?",
+   "options": [
+    "To compare the sites fairly",
+    "To save sun cream",
+    "To avoid using a transect",
+    "To make the data qualitative"
+   ],
+   "correct": 0,
+   "explain": "Fair comparison.",
+   "tag": "Our enquiry"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF04"] = {
+ "id": "IGCF04",
+ "topicNumber": 2,
+ "topicTitle": "Collecting the data (IGCSE)",
+ "title": "Coastal enquiry methods: how to collect the data",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l04-data-collection-methods",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Coastal data collection methods.",
+ "checklist": [
+  "I can understand the data collection methods used in the coastal enquiry",
+  "I can understand the sampling technique used for each method",
+  "I can explain how each method helps to answer the hypotheses and enquiry question"
+ ],
+ "quiz": [
+  {
+   "q": "Where should the beach width tape start (0 m)?",
+   "options": [
+    "Where the swash breaks",
+    "At the back of the beach",
+    "In the car park",
+    "Halfway up the beach"
+   ],
+   "correct": 0,
+   "explain": "Water’s edge.",
+   "tag": "Width"
+  },
+  {
+   "q": "Which instrument measures beach gradient?",
+   "options": [
+    "Clinometer",
+    "Anemometer",
+    "Quadrat",
+    "Stopwatch"
+   ],
+   "correct": 0,
+   "explain": "Measures angles.",
+   "tag": "Gradient"
+  },
+  {
+   "q": "How far apart were the ranging poles?",
+   "options": [
+    "5 m",
+    "50 m",
+    "1 m",
+    "25 m"
+   ],
+   "correct": 0,
+   "explain": "Systematic sampling every 5 m.",
+   "tag": "Gradient"
+  },
+  {
+   "q": "What is the foresight?",
+   "options": [
+    "The angle measured up the beach",
+    "The angle measured down the beach",
+    "The width of the beach in metres",
+    "A prediction of the results"
+   ],
+   "correct": 0,
+   "explain": "Backsight is down.",
+   "tag": "Gradient"
+  },
+  {
+   "q": "How often was the quadrat dropped?",
+   "options": [
+    "Every 10 m",
+    "Every 1 m",
+    "Once per beach",
+    "Every 100 m"
+   ],
+   "correct": 0,
+   "explain": "Along the transect.",
+   "tag": "Transect"
+  },
+  {
+   "q": "What does each small square in the quadrat represent?",
+   "options": [
+    "1%",
+    "10%",
+    "25%",
+    "100%"
+   ],
+   "correct": 0,
+   "explain": "100 squares.",
+   "tag": "Transect"
+  },
+  {
+   "q": "How is wave frequency measured?",
+   "options": [
+    "Waves breaking in one minute",
+    "Height of the tallest wave in an hour",
+    "Distance a ball travels",
+    "Angle of the beach"
+   ],
+   "correct": 0,
+   "explain": "Repeat and average.",
+   "tag": "Waves"
+  },
+  {
+   "q": "How is longshore drift measured?",
+   "options": [
+    "Timing a float along the shore",
+    "Counting the waves that break in one minute",
+    "Using a quadrat in the sea",
+    "Measuring the beach angle"
+   ],
+   "correct": 0,
+   "explain": "Distance in one minute.",
+   "tag": "LSD"
+  },
+  {
+   "q": "Why repeat readings three times?",
+   "options": [
+    "To calculate a reliable mean",
+    "To make the study take longer",
+    "Because the first is always wrong",
+    "To create more risks"
+   ],
+   "correct": 0,
+   "explain": "Improves reliability.",
+   "tag": "Reliability"
+  },
+  {
+   "q": "What should a field sketch include?",
+   "options": [
+    "Labelled features and management",
+    "Only the colour of the sea",
+    "No labels or annotations",
+    "A copy of a photo downloaded from online"
+   ],
+   "correct": 0,
+   "explain": "Natural and human features.",
+   "tag": "Sketch"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF05"] = {
+ "id": "IGCF05",
+ "topicNumber": 3,
+ "topicTitle": "Presenting, analysing and evaluating (IGCSE)",
+ "title": "Presenting fieldwork data",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l05-presenting-data",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Presenting fieldwork data.",
+ "checklist": [
+  "I can process data by calculating percentages and means",
+  "I can choose and draw appropriate simple and complex graphs for coastal data",
+  "I can evaluate data presentation techniques"
+ ],
+ "quiz": [
+  {
+   "q": "Wave counts were 10, 12 and 11. What is the mean?",
+   "options": [
+    "11",
+    "12",
+    "33",
+    "10"
+   ],
+   "correct": 0,
+   "explain": "33 ÷ 3.",
+   "tag": "Processing"
+  },
+  {
+   "q": "Why use the mean?",
+   "options": [
+    "It shows the overall pattern",
+    "It shows every extreme value",
+    "It shows the spread of data",
+    "It removes the need for data"
+   ],
+   "correct": 0,
+   "explain": "Easy to compare.",
+   "tag": "Processing"
+  },
+  {
+   "q": "What is a disadvantage of averages?",
+   "options": [
+    "They hide extremes",
+    "They are hard to calculate",
+    "They need a clinometer",
+    "They cannot be compared"
+   ],
+   "correct": 0,
+   "explain": "Range is lost.",
+   "tag": "Processing"
+  },
+  {
+   "q": "Which graph best shows beach width and gradient?",
+   "options": [
+    "Beach profile",
+    "Pie chart",
+    "Scatter graph",
+    "Climate graph"
+   ],
+   "correct": 0,
+   "explain": "A cross-section.",
+   "tag": "Graphs"
+  },
+  {
+   "q": "Which graph shows % cover along a transect?",
+   "options": [
+    "Kite diagram",
+    "Population pyramid",
+    "Rose diagram of winds",
+    "Line graph of temperature"
+   ],
+   "correct": 0,
+   "explain": "Width shows % cover.",
+   "tag": "Graphs"
+  },
+  {
+   "q": "Best way to compare wave frequency at 3 sites?",
+   "options": [
+    "Bar chart",
+    "Kite diagram",
+    "Field sketch",
+    "Pie chart"
+   ],
+   "correct": 0,
+   "explain": "One bar per site.",
+   "tag": "Graphs"
+  },
+  {
+   "q": "How can LSD direction be shown?",
+   "options": [
+    "Arrows on a map",
+    "A pie chart",
+    "A kite diagram",
+    "A climate graph"
+   ],
+   "correct": 0,
+   "explain": "Scaled arrows.",
+   "tag": "Graphs"
+  },
+  {
+   "q": "What is a strength of beach profiles?",
+   "options": [
+    "Easy to compare sites visually",
+    "They show wave frequency",
+    "They need no measurements",
+    "They show the opinions of people interviewed"
+   ],
+   "correct": 0,
+   "explain": "Width and gradient together.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "What is a limitation of small overlaid pie charts?",
+   "options": [
+    "Hard to read precisely",
+    "They cannot show percentages",
+    "They need random sampling",
+    "They only show one site"
+   ],
+   "correct": 0,
+   "explain": "Small segments.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "What is the range?",
+   "options": [
+    "Highest minus lowest value",
+    "The middle value in a list",
+    "The most common value",
+    "The total of all values"
+   ],
+   "correct": 0,
+   "explain": "Shows spread.",
+   "tag": "Processing"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF06"] = {
+ "id": "IGCF06",
+ "topicNumber": 3,
+ "topicTitle": "Presenting, analysing and evaluating (IGCSE)",
+ "title": "Analysing data and drawing conclusions",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l06-analysis-and-conclusions",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Analysis and conclusions.",
+ "checklist": [
+  "I can describe and explain patterns and trends in fieldwork data",
+  "I can identify and explain anomalies",
+  "I can draw conclusions and accept or reject hypotheses using evidence"
+ ],
+ "quiz": [
+  {
+   "q": "What is an anomaly?",
+   "options": [
+    "A result that does not fit the pattern",
+    "The average of all the results",
+    "The most common result",
+    "A result that proves the hypothesis is correct"
+   ],
+   "correct": 0,
+   "explain": "Must be explained.",
+   "tag": "Analysis"
+  },
+  {
+   "q": "Which site had the widest beach?",
+   "options": [
+    "Site 3, Pranburi Forest Park",
+    "Site 2, Pak Nam Pran",
+    "Site 1, Sam Roi Yot south",
+    "All three beaches were exactly the same width"
+   ],
+   "correct": 0,
+   "explain": "About 110 m.",
+   "tag": "Results"
+  },
+  {
+   "q": "Why was Site 3’s beach wider?",
+   "options": [
+    "The reef absorbs wave energy",
+    "More tourists visit Site 3",
+    "The tide was always high there",
+    "There were no waves at all"
+   ],
+   "correct": 0,
+   "explain": "Constructive waves deposit.",
+   "tag": "Explain"
+  },
+  {
+   "q": "What did the data show about LSD at Site 3?",
+   "options": [
+    "It was slower",
+    "It was faster",
+    "It changed direction",
+    "It was not measured"
+   ],
+   "correct": 0,
+   "explain": "Lower wave energy.",
+   "tag": "Results"
+  },
+  {
+   "q": "What could explain a sudden steep section?",
+   "options": [
+    "A berm left by high tide",
+    "Using random sampling",
+    "A wider tape measure",
+    "Calculating the mean of the readings"
+   ],
+   "correct": 0,
+   "explain": "A natural ridge.",
+   "tag": "Anomalies"
+  },
+  {
+   "q": "What could cause an unusually high wave count?",
+   "options": [
+    "A passing boat",
+    "A gentle breeze",
+    "Dry sand",
+    "A clinometer"
+   ],
+   "correct": 0,
+   "explain": "Boat wake.",
+   "tag": "Anomalies"
+  },
+  {
+   "q": "Hypothesis 2 (wider beach) should be…",
+   "options": [
+    "Accepted",
+    "Rejected",
+    "Ignored",
+    "Changed after the results"
+   ],
+   "correct": 0,
+   "explain": "Site 3 was widest.",
+   "tag": "Conclusions"
+  },
+  {
+   "q": "Hypothesis 1 (steeper beach) should be…",
+   "options": [
+    "Rejected",
+    "Accepted",
+    "Proven true",
+    "Removed from the study"
+   ],
+   "correct": 0,
+   "explain": "Site 3 was gentler.",
+   "tag": "Conclusions"
+  },
+  {
+   "q": "What must a conclusion do?",
+   "options": [
+    "Answer the enquiry question",
+    "List all the equipment used",
+    "Repeat the risk assessment",
+    "Describe the journey to the site"
+   ],
+   "correct": 0,
+   "explain": "Using evidence.",
+   "tag": "Conclusions"
+  },
+  {
+   "q": "What does GCSE A stand for when describing?",
+   "options": [
+    "General, specific, anomaly",
+    "Graph, scale, axis (and title)",
+    "Gradient, sand, area",
+    "Group, sample, average"
+   ],
+   "correct": 0,
+   "explain": "Describing framework.",
+   "tag": "Analysis"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCF07"] = {
+ "id": "IGCF07",
+ "topicNumber": 3,
+ "topicTitle": "Presenting, analysing and evaluating (IGCSE)",
+ "title": "Evaluating the enquiry",
+ "href": "/igcse/geography/learn/coastal-fieldwork/l07-evaluation",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Fieldwork: Evaluating the enquiry.",
+ "checklist": [
+  "I can identify problems and limitations of the methods and data",
+  "I can suggest solutions to improve accuracy and reliability",
+  "I can suggest how the investigation could be extended"
+ ],
+ "quiz": [
+  {
+   "q": "What is reliability?",
+   "options": [
+    "Getting the same results if repeated",
+    "How close the data is to the true value",
+    "How quickly data was collected",
+    "How many graphs were drawn"
+   ],
+   "correct": 0,
+   "explain": "Repeatability.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is accuracy?",
+   "options": [
+    "Closeness to the true value",
+    "Getting the same results again",
+    "Using many different methods",
+    "Sampling at random"
+   ],
+   "correct": 0,
+   "explain": "True value.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Why did tides affect our results?",
+   "options": [
+    "Sites were visited at different times",
+    "The tide never changes along the Thai coast",
+    "Tides make clinometers break",
+    "Tides only affect wave counts"
+   ],
+   "correct": 0,
+   "explain": "Beaches looked wider or narrower.",
+   "tag": "Limitations"
+  },
+  {
+   "q": "How could the tide problem be solved?",
+   "options": [
+    "Visit at the same state of tide",
+    "Measure only at night",
+    "Use a bigger quadrat",
+    "Stop measuring beach width at all three sites"
+   ],
+   "correct": 0,
+   "explain": "Comparable conditions.",
+   "tag": "Solutions"
+  },
+  {
+   "q": "Why is measuring beach width difficult?",
+   "options": [
+    "The start and end points are subjective",
+    "Tape measures are always far too short",
+    "Beaches have no width",
+    "It needs random numbers"
+   ],
+   "correct": 0,
+   "explain": "Where does the beach end?",
+   "tag": "Limitations"
+  },
+  {
+   "q": "Which improves reliability?",
+   "options": [
+    "Repeating readings and averaging",
+    "Taking only one reading",
+    "Changing the methods used at each site",
+    "Guessing missing values"
+   ],
+   "correct": 0,
+   "explain": "Repeat and average.",
+   "tag": "Solutions"
+  },
+  {
+   "q": "Which extends the investigation?",
+   "options": [
+    "Visiting in different seasons",
+    "Deleting anomalies",
+    "Using fewer sites",
+    "Removing the hypotheses from the study"
+   ],
+   "correct": 0,
+   "explain": "Seasonal comparison.",
+   "tag": "Extending"
+  },
+  {
+   "q": "What is a limitation of systematic sampling here?",
+   "options": [
+    "Parts of the beach are missed",
+    "It uses random numbers",
+    "It takes no time at all",
+    "It only works in rivers, not on beaches"
+   ],
+   "correct": 0,
+   "explain": "Gaps between points.",
+   "tag": "Limitations"
+  },
+  {
+   "q": "How could LSD measurements be improved?",
+   "options": [
+    "Record wind and repeat more times",
+    "Use a heavier tape measure on the beach",
+    "Measure gradient instead",
+    "Only use one trial"
+   ],
+   "correct": 0,
+   "explain": "Wind affects floats.",
+   "tag": "Solutions"
+  },
+  {
+   "q": "Which secondary data could extend the study?",
+   "options": [
+    "Historical satellite images",
+    "Our own wave frequency counts",
+    "Our beach transect",
+    "Our field sketches"
+   ],
+   "correct": 0,
+   "explain": "Shows change over time.",
+   "tag": "Extending"
   }
  ]
 };

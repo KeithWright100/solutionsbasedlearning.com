@@ -324,7 +324,8 @@ function buildRetrievalBank(lessonId) {
     window.SBL_LT_LESSON_ORDER,
     window.SBL_IGCSE_GEO_LESSON_ORDER,
     window.SBL_IGCSE_GEO_DEV_LESSON_ORDER,
-    window.SBL_IGCSE_GEO_HAZ_LESSON_ORDER
+    window.SBL_IGCSE_GEO_HAZ_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_CFW_LESSON_ORDER
   ];
   var order = [];
   for (var k = 0; k < candidateOrders.length; k++) {

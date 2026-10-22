@@ -171,8 +171,53 @@
       {
         "slug": "coastal-fieldwork",
         "label": "Coastal Fieldwork",
-        "href": null,
-        "status": "soon"
+        "href": "/igcse/geography/learn/coastal-fieldwork",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Planning the enquiry",
+            "lessons": [
+              {
+                "label": "Why fieldwork? The enquiry process",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l01-why-fieldwork"
+              },
+              {
+                "label": "Data types, pilot surveys and risk",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l02-planning-data-and-risk"
+              },
+              {
+                "label": "Sampling and transects",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l03-sampling"
+              }
+            ]
+          },
+          {
+            "title": "Collecting the data",
+            "lessons": [
+              {
+                "label": "Coastal data collection methods",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l04-data-collection-methods"
+              }
+            ]
+          },
+          {
+            "title": "Presenting, analysing and evaluating",
+            "lessons": [
+              {
+                "label": "Presenting fieldwork data",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l05-presenting-data"
+              },
+              {
+                "label": "Analysis and conclusions",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l06-analysis-and-conclusions"
+              },
+              {
+                "label": "Evaluating the enquiry",
+                "href": "/igcse/geography/learn/coastal-fieldwork/l07-evaluation"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
