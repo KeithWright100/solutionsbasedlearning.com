@@ -1,10 +1,11 @@
 /* SBL — Edexcel IGCSE Geography lesson config.
    Read by sbl-teach-bot.js (Test My Knowledge + Spaced Retrieval) and
    by the admin Lesson Resources page and the teacher Class Sheet.
-   Spaced Retrieval only draws on lessons EARLIER in
-   SBL_IGCSE_GEO_LESSON_ORDER (its own isolated order array). */
+   Spaced Retrieval only draws on lessons EARLIER in the same topic's
+   order array (each IGCSE topic has its own isolated order array). */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_GEO_LESSON_ORDER = ["IGCO01", "IGCO02", "IGCO03", "IGCO04", "IGCO05", "IGCO06", "IGCO07", "IGCO08", "IGCO09", "IGCO10", "IGCO11", "IGCO12", "IGCO13", "IGCO14", "IGCO15"];
+window.SBL_IGCSE_GEO_DEV_LESSON_ORDER = ["IGDV01", "IGDV02", "IGDV03", "IGDV04", "IGDV05", "IGDV06", "IGDV07", "IGDV08", "IGDV09"];
 
 window.SBL_LESSONS["IGCO01"] = {
  "id": "IGCO01",
@@ -2057,6 +2058,1231 @@ window.SBL_LESSONS["IGCO15"] = {
    "correct": 0,
    "explain": "Spurn depends on eroded sediment.",
    "tag": "Evaluation"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV01"] = {
+ "id": "IGDV01",
+ "topicNumber": 1,
+ "topicTitle": "Defining and measuring development (IGCSE)",
+ "title": "What is development and what factors contribute to a country's development?",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l01-what-is-development",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: What is development?.",
+ "checklist": [
+  "I can define the key terms ‘development’ and ‘human welfare’",
+  "I can understand the factors that contribute to the development and human welfare of a country",
+  "I can describe the pattern of development globally in 2022 using the World Bank classifications"
+ ],
+ "quiz": [
+  {
+   "q": "Which is the best definition of development?",
+   "options": [
+    "Change that improves people’s lives",
+    "An increase in a country’s total land area",
+    "Growth in the number of people in cities",
+    "A rise in the amount of farming"
+   ],
+   "correct": 0,
+   "explain": "Development is about improving lives.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "What does human welfare refer to?",
+   "options": [
+    "Health, happiness and quality of life",
+    "Only the money a government spends",
+    "The number of hospitals in a capital city",
+    "The amount of foreign aid received each year"
+   ],
+   "correct": 0,
+   "explain": "Welfare is about people’s quality of life.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "Which is a SOCIAL measure of development?",
+   "options": [
+    "Literacy rate",
+    "GDP per capita",
+    "Value of exports",
+    "Number of factories built"
+   ],
+   "correct": 0,
+   "explain": "Education is a social measure.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "Which is a POLITICAL aspect of development?",
+   "options": [
+    "Freedom of speech",
+    "Life expectancy",
+    "Calories per person",
+    "Number of doctors"
+   ],
+   "correct": 0,
+   "explain": "Freedom and rights are political.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "How does water security help development?",
+   "options": [
+    "It reduces disease and time spent collecting water",
+    "It increases the size of rivers",
+    "It makes the climate cooler",
+    "It stops droughts and floods from happening in every region"
+   ],
+   "correct": 0,
+   "explain": "Safe water improves health and saves time.",
+   "tag": "Factors"
+  },
+  {
+   "q": "Which is a technological factor in development?",
+   "options": [
+    "Mobile phone banking",
+    "Family size traditions",
+    "Rainfall totals",
+    "Religious festivals"
+   ],
+   "correct": 0,
+   "explain": "Mobile money is a technology.",
+   "tag": "Factors"
+  },
+  {
+   "q": "What does the World Bank use to classify countries?",
+   "options": [
+    "GNI per capita",
+    "Human Development Index",
+    "Corruption Perceptions Index",
+    "Number of people living in cities"
+   ],
+   "correct": 0,
+   "explain": "Income groups are based on GNI per capita.",
+   "tag": "World Bank"
+  },
+  {
+   "q": "In 2022, what income group was Nigeria in?",
+   "options": [
+    "Lower-middle income",
+    "High income",
+    "Low income",
+    "Upper-middle income"
+   ],
+   "correct": 0,
+   "explain": "Nigeria was lower-middle income.",
+   "tag": "World Bank"
+  },
+  {
+   "q": "Where are most low-income countries found?",
+   "options": [
+    "Sub-Saharan Africa",
+    "Western Europe",
+    "South America",
+    "North America and the Caribbean"
+   ],
+   "correct": 0,
+   "explain": "Especially the Sahel.",
+   "tag": "World Bank"
+  },
+  {
+   "q": "Which country was high income in 2022?",
+   "options": [
+    "Saudi Arabia",
+    "Kenya",
+    "India",
+    "Thailand (Kingdom of)"
+   ],
+   "correct": 0,
+   "explain": "Oil wealth makes it high income.",
+   "tag": "World Bank"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV02"] = {
+ "id": "IGDV02",
+ "topicNumber": 1,
+ "topicTitle": "Defining and measuring development (IGCSE)",
+ "title": "Measuring development: GDP per capita",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l02-measuring-development-gdp",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Measuring development: GDP.",
+ "checklist": [
+  "I can describe what GDP is and how it is measured",
+  "I can discuss the advantages and disadvantages of using GDP to measure development",
+  "I can understand how other social indicators can help to measure development",
+  "I can explain why no one single indicator can tell us how developed a place is"
+ ],
+ "quiz": [
+  {
+   "q": "What does GDP measure?",
+   "options": [
+    "Value of goods and services produced in a year",
+    "The number of people working in factories and offices",
+    "Total amount of money held in banks",
+    "The amount of aid a country receives"
+   ],
+   "correct": 0,
+   "explain": "GDP = total output in a year.",
+   "tag": "GDP"
+  },
+  {
+   "q": "How is GDP per capita calculated?",
+   "options": [
+    "GDP divided by population",
+    "GDP multiplied by population",
+    "GDP minus government spending",
+    "GDP divided by the land area"
+   ],
+   "correct": 0,
+   "explain": "Per capita means per person.",
+   "tag": "GDP"
+  },
+  {
+   "q": "Why is PPP used?",
+   "options": [
+    "To adjust for the cost of living",
+    "To add income from abroad",
+    "To remove the informal economy",
+    "To include the value of all exports and imports"
+   ],
+   "correct": 0,
+   "explain": "PPP compares what money can buy.",
+   "tag": "GDP"
+  },
+  {
+   "q": "Which is a disadvantage of GDP per capita?",
+   "options": [
+    "It hides inequality",
+    "It is collected every year",
+    "It is easy to compare",
+    "It is a single number"
+   ],
+   "correct": 0,
+   "explain": "An average hides rich–poor gaps.",
+   "tag": "Evaluation"
+  },
+  {
+   "q": "Why can GDP underestimate wealth in poorer countries?",
+   "options": [
+    "It misses the informal economy",
+    "It counts tourists twice",
+    "It includes income from abroad",
+    "It is measured in local currency"
+   ],
+   "correct": 0,
+   "explain": "Informal work is not recorded.",
+   "tag": "Evaluation"
+  },
+  {
+   "q": "Which shows a MORE developed country?",
+   "options": [
+    "Low infant mortality",
+    "High fertility rate",
+    "Low literacy rate",
+    "Few doctors per person"
+   ],
+   "correct": 0,
+   "explain": "Low infant mortality reflects good health care.",
+   "tag": "Indicators"
+  },
+  {
+   "q": "What is the infant mortality rate?",
+   "options": [
+    "Babies dying before age 1 per 1,000 births",
+    "Children per woman over her lifetime",
+    "Mothers dying per 100,000 births",
+    "Deaths of children before the age of 18 in a single year"
+   ],
+   "correct": 0,
+   "explain": "Under-1 deaths per 1,000 live births.",
+   "tag": "Indicators"
+  },
+  {
+   "q": "What is a composite index?",
+   "options": [
+    "A measure combining several indicators",
+    "A list of countries by population",
+    "One indicator measured only in US dollars",
+    "A map showing income groups"
+   ],
+   "correct": 0,
+   "explain": "e.g. the HDI.",
+   "tag": "Indicators"
+  },
+  {
+   "q": "Why is one indicator never enough?",
+   "options": [
+    "It shows only one aspect of development",
+    "Indicators are never recorded",
+    "All countries score the same",
+    "It always relies on very old data collected in 1990"
+   ],
+   "correct": 0,
+   "explain": "Development has many aspects.",
+   "tag": "Indicators"
+  },
+  {
+   "q": "Which measure does the World Bank use for income groups?",
+   "options": [
+    "GNI per capita",
+    "GDP total",
+    "Life expectancy",
+    "Literacy rate"
+   ],
+   "correct": 0,
+   "explain": "GNI per capita.",
+   "tag": "GDP"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV03"] = {
+ "id": "IGDV03",
+ "topicNumber": 1,
+ "topicTitle": "Defining and measuring development (IGCSE)",
+ "title": "Measuring development: HDI, Gini coefficient and corruption",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l03-hdi-gini-and-corruption",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: HDI, Gini and corruption.",
+ "checklist": [
+  "I can describe what the HDI is and explain how it is measured",
+  "I can describe what the Gini coefficient is and explain how it is measured",
+  "I can describe what the Corruption Perceptions Index is and explain how it is measured",
+  "I can compare and contrast recent data from the above composite indices"
+ ],
+ "quiz": [
+  {
+   "q": "Which three things make up the HDI?",
+   "options": [
+    "Health, education and income",
+    "Income, inequality and corruption",
+    "Birth rate, death rate and migration",
+    "Trade, aid and debt"
+   ],
+   "correct": 0,
+   "explain": "Life expectancy, schooling and GNI per capita.",
+   "tag": "HDI"
+  },
+  {
+   "q": "Which organisation publishes the HDI?",
+   "options": [
+    "UNDP",
+    "Transparency International",
+    "World Trade Organization",
+    "Fairtrade Foundation"
+   ],
+   "correct": 0,
+   "explain": "The United Nations Development Programme.",
+   "tag": "HDI"
+  },
+  {
+   "q": "An HDI of 0.820 is classed as…",
+   "options": [
+    "Very high",
+    "Low",
+    "Medium (middle)",
+    "High"
+   ],
+   "correct": 0,
+   "explain": "0.800 and above is very high.",
+   "tag": "HDI"
+  },
+  {
+   "q": "Which country had the lowest HDI in the 2025 report?",
+   "options": [
+    "South Sudan",
+    "Iceland",
+    "India",
+    "Thailand"
+   ],
+   "correct": 0,
+   "explain": "South Sudan scored 0.388.",
+   "tag": "HDI"
+  },
+  {
+   "q": "What does the Gini coefficient measure?",
+   "options": [
+    "Inequality of income",
+    "Average life expectancy",
+    "How corrupt officials are",
+    "The total value of a country’s exports"
+   ],
+   "correct": 0,
+   "explain": "It measures how evenly income is shared.",
+   "tag": "Gini"
+  },
+  {
+   "q": "A Gini coefficient of 0 means…",
+   "options": [
+    "Everyone has the same income",
+    "One person has all the income",
+    "The country is very corrupt",
+    "The country has no exports at all"
+   ],
+   "correct": 0,
+   "explain": "0 = perfect equality.",
+   "tag": "Gini"
+  },
+  {
+   "q": "Which graph is used to work out the Gini coefficient?",
+   "options": [
+    "Lorenz curve",
+    "Population pyramid",
+    "Climate graph",
+    "Demographic transition model"
+   ],
+   "correct": 0,
+   "explain": "Gini = A ÷ (A + B) on a Lorenz curve.",
+   "tag": "Gini"
+  },
+  {
+   "q": "How is the CPI produced?",
+   "options": [
+    "From expert and business surveys",
+    "By counting bribes paid each year",
+    "From national census data",
+    "By measuring the cost of living"
+   ],
+   "correct": 0,
+   "explain": "Corruption is hidden, so perceptions are surveyed.",
+   "tag": "CPI"
+  },
+  {
+   "q": "On the CPI, a score of 89 means…",
+   "options": [
+    "Very clean (little corruption)",
+    "Very corrupt government",
+    "High income inequality",
+    "Low life expectancy and poor health care"
+   ],
+   "correct": 0,
+   "explain": "100 = very clean.",
+   "tag": "CPI"
+  },
+  {
+   "q": "Why should several indices be used together?",
+   "options": [
+    "Each measures a different aspect",
+    "They always give the same results",
+    "Only one is published each year",
+    "They all use the same data"
+   ],
+   "correct": 0,
+   "explain": "Health, inequality and corruption differ.",
+   "tag": "Comparing"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV04"] = {
+ "id": "IGDV04",
+ "topicNumber": 2,
+ "topicTitle": "Development and population (IGCSE)",
+ "title": "Demographic data and the demographic transition model",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l04-demographic-transition-model",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Demographic data and the DTM.",
+ "checklist": [
+  "I can describe and explain population structures using the demographic transition model",
+  "I can interpret population pyramids",
+  "I can use demographic data to show different levels of development"
+ ],
+ "quiz": [
+  {
+   "q": "What is natural increase?",
+   "options": [
+    "Birth rate minus death rate",
+    "Immigration minus emigration",
+    "Death rate minus birth rate",
+    "Births plus all immigrants in a year"
+   ],
+   "correct": 0,
+   "explain": "BR − DR.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What fertility rate is roughly replacement level?",
+   "options": [
+    "2.1",
+    "1.0",
+    "4.5",
+    "6.0"
+   ],
+   "correct": 0,
+   "explain": "About 2.1 children per woman.",
+   "tag": "Terms"
+  },
+  {
+   "q": "How is infant mortality measured?",
+   "options": [
+    "Deaths under age 1 per 1,000 live births",
+    "Deaths under 5 per 100 people",
+    "Mothers’ deaths per 100,000 births",
+    "All deaths at any age per 1,000 people per year"
+   ],
+   "correct": 0,
+   "explain": "Under-1 deaths per 1,000 live births.",
+   "tag": "Terms"
+  },
+  {
+   "q": "In which DTM stage does the death rate fall quickly but the birth rate stays high?",
+   "options": [
+    "Stage 2",
+    "Stage 1",
+    "Stage 4",
+    "Stage 5"
+   ],
+   "correct": 0,
+   "explain": "Early expanding.",
+   "tag": "DTM"
+  },
+  {
+   "q": "Why does the death rate fall in stage 2?",
+   "options": [
+    "Better health care and clean water",
+    "More women go to university",
+    "Contraception becomes widely available",
+    "People move abroad for work"
+   ],
+   "correct": 0,
+   "explain": "Medical and sanitation improvements.",
+   "tag": "DTM"
+  },
+  {
+   "q": "Why does the birth rate fall in stage 3?",
+   "options": [
+    "Contraception and education of women",
+    "More wars and famines occur",
+    "Death rates start to rise",
+    "Children are needed to work on family farms"
+   ],
+   "correct": 0,
+   "explain": "Family planning and changing roles.",
+   "tag": "DTM"
+  },
+  {
+   "q": "Which country best fits stage 5?",
+   "options": [
+    "Japan",
+    "Niger",
+    "Kenya",
+    "Nigeria"
+   ],
+   "correct": 0,
+   "explain": "Japan’s population is shrinking.",
+   "tag": "DTM"
+  },
+  {
+   "q": "A pyramid with a very wide base shows…",
+   "options": [
+    "A high birth rate",
+    "An ageing population",
+    "A low birth rate",
+    "Lots of elderly migrants"
+   ],
+   "correct": 0,
+   "explain": "Many young children.",
+   "tag": "Pyramids"
+  },
+  {
+   "q": "Which data suggests a MORE developed country?",
+   "options": [
+    "Fertility 1.4, infant mortality 4",
+    "Fertility 6.1, infant mortality 60",
+    "Fertility 4.5, life expectancy 54",
+    "Half the population under 15"
+   ],
+   "correct": 0,
+   "explain": "Low fertility and infant mortality.",
+   "tag": "Data"
+  },
+  {
+   "q": "Which age group is the working population?",
+   "options": [
+    "15–64",
+    "0–14",
+    "65 and over",
+    "18–30 only"
+   ],
+   "correct": 0,
+   "explain": "15–64.",
+   "tag": "Pyramids"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV05"] = {
+ "id": "IGDV05",
+ "topicNumber": 2,
+ "topicTitle": "Development and population (IGCSE)",
+ "title": "Demographic transition model and population pyramids",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l05-population-pyramids",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Population pyramids and the DTM.",
+ "checklist": [
+  "I can interpret population pyramids",
+  "I can link population pyramids to the DTM",
+  "I can use demographic data to show different levels of development"
+ ],
+ "quiz": [
+  {
+   "q": "On a pyramid, which side usually shows males?",
+   "options": [
+    "Left",
+    "Right",
+    "Top",
+    "Bottom"
+   ],
+   "correct": 0,
+   "explain": "Males left, females right.",
+   "tag": "Pyramids"
+  },
+  {
+   "q": "Straight sides on a pyramid show…",
+   "options": [
+    "A low death rate",
+    "A high birth rate",
+    "Lots of emigration",
+    "A war in the past"
+   ],
+   "correct": 0,
+   "explain": "Most people survive to old age.",
+   "tag": "Pyramids"
+  },
+  {
+   "q": "Which pyramid shape matches DTM stage 2?",
+   "options": [
+    "Triangular with a very wide base",
+    "Narrow base and wide top",
+    "Straight sides with a wide top section",
+    "Bulge of working-age men"
+   ],
+   "correct": 0,
+   "explain": "High births, falling deaths.",
+   "tag": "DTM link"
+  },
+  {
+   "q": "A narrowing base suggests…",
+   "options": [
+    "A falling birth rate",
+    "A rising death rate",
+    "Rising infant mortality",
+    "A new baby boom starting"
+   ],
+   "correct": 0,
+   "explain": "Fewer births each year.",
+   "tag": "Pyramids"
+  },
+  {
+   "q": "Which country is likely to have a stage 5 pyramid?",
+   "options": [
+    "Italy",
+    "Niger",
+    "Chad",
+    "Nigeria"
+   ],
+   "correct": 0,
+   "explain": "Low fertility and ageing.",
+   "tag": "DTM link"
+  },
+  {
+   "q": "A large bulge of men aged 25–40 in Qatar is caused by…",
+   "options": [
+    "Male migrant workers",
+    "A baby boom",
+    "A high death rate",
+    "A strict one-child policy"
+   ],
+   "correct": 0,
+   "explain": "Migrant construction workers.",
+   "tag": "Pyramids"
+  },
+  {
+   "q": "What does a youthful population need most?",
+   "options": [
+    "Schools and jobs",
+    "Care homes and pensions",
+    "Fewer hospitals",
+    "Smaller farms"
+   ],
+   "correct": 0,
+   "explain": "Many children and young adults.",
+   "tag": "DTM link"
+  },
+  {
+   "q": "What does a wide top show?",
+   "options": [
+    "High life expectancy",
+    "High infant mortality",
+    "A high birth rate",
+    "Many young migrants"
+   ],
+   "correct": 0,
+   "explain": "Many people live to old age.",
+   "tag": "Pyramids"
+  },
+  {
+   "q": "Which indicator is MUCH higher in Nigeria than in the UK?",
+   "options": [
+    "Maternal mortality",
+    "Life expectancy",
+    "Share of people over 65",
+    "Average years at school"
+   ],
+   "correct": 0,
+   "explain": "Roughly 1 in 100 births.",
+   "tag": "Data"
+  },
+  {
+   "q": "In BSTAD, what does the D stand for?",
+   "options": [
+    "Dependency",
+    "Density",
+    "Distribution",
+    "Death rate"
+   ],
+   "correct": 0,
+   "explain": "Young and old dependents.",
+   "tag": "Pyramids"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV06"] = {
+ "id": "IGDV06",
+ "topicNumber": 3,
+ "topicTitle": "Uneven development (IGCSE)",
+ "title": "Causes of uneven development",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l06-causes-of-uneven-development",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Causes of uneven development.",
+ "checklist": [
+  "I can describe the ways in which the world is an unequal place",
+  "I can explain the social, historical, economic and physical factors that have led to uneven development between countries",
+  "I can understand the ways in which ‘dependency theory’ has contributed to uneven development globally"
+ ],
+ "quiz": [
+  {
+   "q": "What is the development gap?",
+   "options": [
+    "The difference between richest and poorest countries",
+    "The distance between the capital cities of two countries",
+    "The time taken for a country to develop",
+    "The gap between births and deaths"
+   ],
+   "correct": 0,
+   "explain": "The gap in wealth and well-being.",
+   "tag": "Unequal world"
+  },
+  {
+   "q": "Why does being landlocked slow development?",
+   "options": [
+    "Trade is harder and more expensive",
+    "There are more tropical storms",
+    "The soil is always infertile",
+    "It has more people than coastal countries"
+   ],
+   "correct": 0,
+   "explain": "No direct access to ports.",
+   "tag": "Physical"
+  },
+  {
+   "q": "Which is a HISTORICAL cause of uneven development?",
+   "options": [
+    "Colonialism",
+    "Malaria",
+    "Drought",
+    "Earthquakes"
+   ],
+   "correct": 0,
+   "explain": "Colonial powers exploited colonies.",
+   "tag": "Historical"
+  },
+  {
+   "q": "Why is relying on primary products a problem?",
+   "options": [
+    "Prices are low and change a lot",
+    "They are too valuable to export",
+    "They cannot be grown in the tropics",
+    "Rich countries never buy them"
+   ],
+   "correct": 0,
+   "explain": "Low value and price swings.",
+   "tag": "Economic"
+  },
+  {
+   "q": "Which is a SOCIAL or political cause?",
+   "options": [
+    "Civil war",
+    "Tropical climate",
+    "Volcanic eruptions",
+    "Being landlocked"
+   ],
+   "correct": 0,
+   "explain": "Conflict destroys development.",
+   "tag": "Social"
+  },
+  {
+   "q": "Who developed dependency theory?",
+   "options": [
+    "Andre Gunder Frank",
+    "Walt Rostow",
+    "Thomas Robert Malthus",
+    "Ester Boserup"
+   ],
+   "correct": 0,
+   "explain": "Frank, in the 1960s.",
+   "tag": "Dependency"
+  },
+  {
+   "q": "In dependency theory, the periphery supplies…",
+   "options": [
+    "Cheap raw materials and labour",
+    "Expensive manufactured goods",
+    "Loans to the core countries",
+    "Most of the world’s technology"
+   ],
+   "correct": 0,
+   "explain": "Raw materials flow to the core.",
+   "tag": "Dependency"
+  },
+  {
+   "q": "Where do the profits flow in dependency theory?",
+   "options": [
+    "From periphery to core",
+    "From core to periphery",
+    "Equally between both",
+    "Only within the periphery"
+   ],
+   "correct": 0,
+   "explain": "Wealth moves to the core.",
+   "tag": "Dependency"
+  },
+  {
+   "q": "Which example challenges dependency theory?",
+   "options": [
+    "South Korea becoming rich",
+    "Niger staying a low-income country",
+    "Cocoa prices falling",
+    "Chad being landlocked"
+   ],
+   "correct": 0,
+   "explain": "A former colony that grew rich.",
+   "tag": "Dependency"
+  },
+  {
+   "q": "What is a cycle of poverty?",
+   "options": [
+    "Low income leading to low investment and more poverty",
+    "Seasonal changes in farm income",
+    "Repeated tropical storms each year",
+    "People migrating from cities back to rural areas to farm the land"
+   ],
+   "correct": 0,
+   "explain": "Poverty reinforces itself.",
+   "tag": "Unequal world"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV07"] = {
+ "id": "IGDV07",
+ "topicNumber": 3,
+ "topicTitle": "Uneven development (IGCSE)",
+ "title": "Causes of uneven development within countries: Italy case study",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l07-italy-uneven-development",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Case study: Italy.",
+ "checklist": [
+  "I can understand some of the reasons for uneven development within countries",
+  "I can explain the difference in development between the north and south of Italy",
+  "I can outline the reasons for these differences in development in Italy"
+ ],
+ "quiz": [
+  {
+   "q": "What is the Mezzogiorno?",
+   "options": [
+    "The South of Italy",
+    "Italy’s main mountain range",
+    "A fund for northern industry",
+    "The flat valley around Milan"
+   ],
+   "correct": 0,
+   "explain": "Southern Italy, including the islands.",
+   "tag": "Italy"
+  },
+  {
+   "q": "Which cities form the industrial triangle?",
+   "options": [
+    "Milan, Turin and Genoa",
+    "Rome, Naples and Bari",
+    "Palermo, Catania and Messina",
+    "Venice, Florence and Pisa"
+   ],
+   "correct": 0,
+   "explain": "In the North-West.",
+   "tag": "Italy"
+  },
+  {
+   "q": "How does unemployment in the South compare with the North?",
+   "options": [
+    "About three times higher",
+    "About the same",
+    "About half as high",
+    "Slightly lower than the North overall"
+   ],
+   "correct": 0,
+   "explain": "Around 14% vs under 5% (2023).",
+   "tag": "Italy"
+  },
+  {
+   "q": "Which physical feature helps the North?",
+   "options": [
+    "The flat, fertile Po Valley",
+    "The Apennine mountains",
+    "Active volcanoes like Etna",
+    "A hot, dry summer climate with little rain"
+   ],
+   "correct": 0,
+   "explain": "Good farmland and easy building.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Why does location help northern Italy?",
+   "options": [
+    "It is close to Europe’s core markets",
+    "It is closer to North Africa",
+    "It has more coastline than the South",
+    "It is far from the Alps"
+   ],
+   "correct": 0,
+   "explain": "Near France, Switzerland and Germany.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "What was the Cassa per il Mezzogiorno?",
+   "options": [
+    "A fund to develop the South",
+    "A mafia group based in western Sicily",
+    "A motorway in the North",
+    "A steelworks in Milan"
+   ],
+   "correct": 0,
+   "explain": "Government investment 1950–1984.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "What is a ‘cathedral in the desert’?",
+   "options": [
+    "A large factory with few linked jobs",
+    "A church built in the middle of the Sahara",
+    "A tourist resort in Sicily",
+    "A new high-speed railway line"
+   ],
+   "correct": 0,
+   "explain": "e.g. the Taranto steelworks.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Which group is linked to Calabria?",
+   "options": [
+    "The ’Ndrangheta",
+    "The Camorra",
+    "The Cassa",
+    "The Mezzogiorno"
+   ],
+   "correct": 0,
+   "explain": "The Camorra is in Campania.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "What is brain drain?",
+   "options": [
+    "Skilled people leaving a region",
+    "Water leaking from old pipes",
+    "Factories closing in a city",
+    "Young people moving into the South"
+   ],
+   "correct": 0,
+   "explain": "The South loses skills.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Why does development become uneven within a country?",
+   "options": [
+    "Investment concentrates in core regions",
+    "All regions get equal investment",
+    "Mountain areas attract the most new industry",
+    "Remote areas grow fastest"
+   ],
+   "correct": 0,
+   "explain": "Core and periphery.",
+   "tag": "Uneven"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV08"] = {
+ "id": "IGDV08",
+ "topicNumber": 4,
+ "topicTitle": "Reducing the development gap (IGCSE)",
+ "title": "International strategies to reduce the development gap",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l08-reducing-the-development-gap",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Strategies to reduce the gap.",
+ "checklist": [
+  "I can outline a range of international strategies that can be used to reduce the development gap (international aid, trade, debt relief, fair trade etc.)",
+  "I can evaluate the positives and negatives of each strategy"
+ ],
+ "quiz": [
+  {
+   "q": "What is bilateral aid?",
+   "options": [
+    "Aid from one government to another",
+    "Aid through the World Bank or United Nations",
+    "Aid raised by charities",
+    "Aid in the form of loans only"
+   ],
+   "correct": 0,
+   "explain": "Government to government.",
+   "tag": "Aid"
+  },
+  {
+   "q": "What is tied aid?",
+   "options": [
+    "Aid spent on the donor’s goods",
+    "Aid given after a disaster",
+    "Aid that never has to be repaid",
+    "Aid given by several countries"
+   ],
+   "correct": 0,
+   "explain": "Conditions favour the donor.",
+   "tag": "Aid"
+  },
+  {
+   "q": "What is the UN aid target for rich countries?",
+   "options": [
+    "0.7% of GNI",
+    "7% of GDP",
+    "0.07% of GNI",
+    "10% of GDP"
+   ],
+   "correct": 0,
+   "explain": "0.7% of GNI.",
+   "tag": "Aid"
+  },
+  {
+   "q": "Which is short-term aid?",
+   "options": [
+    "Tents and food after an earthquake",
+    "Building a new secondary school",
+    "Training teachers for ten years",
+    "Funding a long-term water scheme"
+   ],
+   "correct": 0,
+   "explain": "Emergency relief.",
+   "tag": "Aid"
+  },
+  {
+   "q": "What does the Fairtrade Premium pay for?",
+   "options": [
+    "Community projects",
+    "Advertising in rich countries",
+    "Shipping costs",
+    "Shop staff wages abroad"
+   ],
+   "correct": 0,
+   "explain": "Chosen by the community.",
+   "tag": "Fair trade"
+  },
+  {
+   "q": "How does debt relief help development?",
+   "options": [
+    "Money can go on health and education",
+    "It raises the price that exports sell for abroad",
+    "It increases tied aid",
+    "It reduces the population quickly"
+   ],
+   "correct": 0,
+   "explain": "Repayments are freed up.",
+   "tag": "Debt"
+  },
+  {
+   "q": "When were the Sustainable Development Goals agreed?",
+   "options": [
+    "2015",
+    "2000",
+    "1996",
+    "2005"
+   ],
+   "correct": 0,
+   "explain": "17 goals for 2015–2030.",
+   "tag": "Agreements"
+  },
+  {
+   "q": "Which is a negative of long-term aid?",
+   "options": [
+    "It can create dependency",
+    "It saves lives quickly",
+    "It builds local skills",
+    "It improves infrastructure"
+   ],
+   "correct": 0,
+   "explain": "Countries may come to rely on it.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Why can trade rules hold back poorer countries?",
+   "options": [
+    "Tariffs and rules favour richer countries",
+    "Poorer countries are not allowed to export anything at all",
+    "Trade always creates dependency on aid",
+    "All trade is fair trade"
+   ],
+   "correct": 0,
+   "explain": "Barriers to processed exports.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Which group usually favours small community-led projects?",
+   "options": [
+    "NGOs such as WaterAid",
+    "The IMF",
+    "Donor governments",
+    "Large construction companies"
+   ],
+   "correct": 0,
+   "explain": "Bottom-up approaches.",
+   "tag": "Views"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGDV09"] = {
+ "id": "IGDV09",
+ "topicNumber": 4,
+ "topicTitle": "Reducing the development gap (IGCSE)",
+ "title": "Case studies: Development projects in Nigeria and Kenya",
+ "href": "/igcse/geography/learn/development-and-human-welfare/l09-nigeria-and-kenya-projects",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Development and Human Welfare: Case studies: Nigeria and Kenya.",
+ "checklist": [
+  "I can understand the difference between top-down and bottom-up development projects",
+  "I can evaluate the top-down coastal railway project in Nigeria",
+  "I can evaluate the bottom-up WaterAid project in Kenya"
+ ],
+ "quiz": [
+  {
+   "q": "Which describes a top-down project?",
+   "options": [
+    "Large scheme planned by a government",
+    "Small well dug by villagers",
+    "Hygiene club run by pupils",
+    "A charity training local mechanics to repair pumps"
+   ],
+   "correct": 0,
+   "explain": "Decided at the top.",
+   "tag": "Top-down"
+  },
+  {
+   "q": "What is appropriate technology?",
+   "options": [
+    "Technology suited to local skills and money",
+    "The most advanced and expensive technology available",
+    "Technology imported from rich countries",
+    "Machines that need foreign engineers"
+   ],
+   "correct": 0,
+   "explain": "Local people can run and repair it.",
+   "tag": "Bottom-up"
+  },
+  {
+   "q": "Which cities does the coastal railway link?",
+   "options": [
+    "Lagos and Calabar",
+    "Kano and Maradi",
+    "Abuja and Kaduna",
+    "Lagos and Ibadan"
+   ],
+   "correct": 0,
+   "explain": "Along the southern coast.",
+   "tag": "Nigeria"
+  },
+  {
+   "q": "How long is the planned coastal railway?",
+   "options": [
+    "About 1,400 km",
+    "About 140 km",
+    "About 14,000 km",
+    "About 400 km"
+   ],
+   "correct": 0,
+   "explain": "1,402 km.",
+   "tag": "Nigeria"
+  },
+  {
+   "q": "Which company was contracted to build it?",
+   "options": [
+    "CCECC (China)",
+    "WaterAid",
+    "Fiat",
+    "Standard Chartered"
+   ],
+   "correct": 0,
+   "explain": "China Civil Engineering Construction Corporation.",
+   "tag": "Nigeria"
+  },
+  {
+   "q": "What is a major weakness of the coastal railway?",
+   "options": [
+    "Delays and large foreign debt",
+    "It is too cheap to build",
+    "It only helps a few local villages nearby",
+    "It uses hand pumps"
+   ],
+   "correct": 0,
+   "explain": "Funding problems and debt.",
+   "tag": "Nigeria"
+  },
+  {
+   "q": "How is WaterAid funded?",
+   "options": [
+    "Donations and grants",
+    "Loans from China",
+    "Taxes on Kenyan water",
+    "Profits from railways"
+   ],
+   "correct": 0,
+   "explain": "It is a charity.",
+   "tag": "Kenya"
+  },
+  {
+   "q": "Which technology does WaterAid use?",
+   "options": [
+    "Hand pumps and rainwater harvesting",
+    "High-speed trains",
+    "Large hydroelectric dams",
+    "Desalination plants built along the coast"
+   ],
+   "correct": 0,
+   "explain": "Low-cost, repairable.",
+   "tag": "Kenya"
+  },
+  {
+   "q": "Who benefits most from clean water projects?",
+   "options": [
+    "Women and girls",
+    "Large companies",
+    "Foreign contractors",
+    "Oil exporters"
+   ],
+   "correct": 0,
+   "explain": "Less time collecting water.",
+   "tag": "Kenya"
+  },
+  {
+   "q": "What is a weakness of bottom-up projects?",
+   "options": [
+    "They reach fewer people",
+    "They create huge debts",
+    "They displace many people",
+    "They need foreign engineers"
+   ],
+   "correct": 0,
+   "explain": "Small scale.",
+   "tag": "Bottom-up"
   }
  ]
 };

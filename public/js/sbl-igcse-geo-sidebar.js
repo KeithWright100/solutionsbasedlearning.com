@@ -130,8 +130,66 @@
       {
         "slug": "development",
         "label": "Development and Human Welfare",
-        "href": null,
-        "status": "soon"
+        "href": "/igcse/geography/learn/development-and-human-welfare",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Defining and measuring development",
+            "lessons": [
+              {
+                "label": "What is development?",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l01-what-is-development"
+              },
+              {
+                "label": "Measuring development: GDP",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l02-measuring-development-gdp"
+              },
+              {
+                "label": "HDI, Gini and corruption",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l03-hdi-gini-and-corruption"
+              }
+            ]
+          },
+          {
+            "title": "Development and population",
+            "lessons": [
+              {
+                "label": "Demographic data and the DTM",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l04-demographic-transition-model"
+              },
+              {
+                "label": "Population pyramids and the DTM",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l05-population-pyramids"
+              }
+            ]
+          },
+          {
+            "title": "Uneven development",
+            "lessons": [
+              {
+                "label": "Causes of uneven development",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l06-causes-of-uneven-development"
+              },
+              {
+                "label": "Case study: Italy",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l07-italy-uneven-development"
+              }
+            ]
+          },
+          {
+            "title": "Reducing the development gap",
+            "lessons": [
+              {
+                "label": "Strategies to reduce the gap",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l08-reducing-the-development-gap"
+              },
+              {
+                "label": "Case studies: Nigeria and Kenya",
+                "href": "/igcse/geography/learn/development-and-human-welfare/l09-nigeria-and-kenya-projects"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
