@@ -7379,3 +7379,2319 @@ window.SBL_LESSONS["IGDV09"] = {
   }
  ]
 };
+
+window.SBL_LESSONS["IGEC01"] = {
+ "id": "IGEC01",
+ "topicNumber": 1,
+ "topicTitle": "Economic sectors and location (IGCSE)",
+ "title": "Economic sectors and employment",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l01-economic-sectors-and-employment",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Economic sectors and employment.",
+ "checklist": [
+  "I can describe how and why different types of employment can be categorised into primary, secondary, tertiary and quaternary sectors and give examples",
+  "I can draw and interpret triangular graphs showing employment sectors",
+  "I can identify how and why a country’s employment structure can tell us about its level of development"
+ ],
+ "quiz": [
+  {
+   "q": "Which job is in the primary sector?",
+   "options": [
+    "Fisherman",
+    "Teacher",
+    "Car assembler",
+    "Software designer"
+   ],
+   "correct": 0,
+   "explain": "Extracting resources.",
+   "tag": "Sectors"
+  },
+  {
+   "q": "Which job is in the secondary sector?",
+   "options": [
+    "Steel worker",
+    "Dentist in a city clinic",
+    "Farmer",
+    "Researcher"
+   ],
+   "correct": 0,
+   "explain": "Manufacturing.",
+   "tag": "Sectors"
+  },
+  {
+   "q": "Which job is in the tertiary sector?",
+   "options": [
+    "Shop assistant",
+    "Coal miner underground",
+    "Builder",
+    "Forester"
+   ],
+   "correct": 0,
+   "explain": "A service.",
+   "tag": "Sectors"
+  },
+  {
+   "q": "Which job is in the quaternary sector?",
+   "options": [
+    "Computer programmer",
+    "Lorry driver",
+    "Fisherman",
+    "Factory production-line worker"
+   ],
+   "correct": 0,
+   "explain": "Information and expertise.",
+   "tag": "Sectors"
+  },
+  {
+   "q": "What must the three values on a triangular graph add up to?",
+   "options": [
+    "100%",
+    "50%",
+    "300%",
+    "It varies"
+   ],
+   "correct": 0,
+   "explain": "Three percentages.",
+   "tag": "Graphs"
+  },
+  {
+   "q": "Where would a mainly farming country plot?",
+   "options": [
+    "Near the primary corner",
+    "Near the services corner",
+    "In the exact centre",
+    "Off the graph"
+   ],
+   "correct": 0,
+   "explain": "High primary %.",
+   "tag": "Graphs"
+  },
+  {
+   "q": "In which stage does the secondary sector peak?",
+   "options": [
+    "Industrial",
+    "Pre-industrial",
+    "Post-industrial",
+    "It never peaks"
+   ],
+   "correct": 0,
+   "explain": "Factory jobs grow.",
+   "tag": "Clark–Fisher"
+  },
+  {
+   "q": "Which country is post-industrial?",
+   "options": [
+    "UK",
+    "Ethiopia",
+    "India",
+    "China"
+   ],
+   "correct": 0,
+   "explain": "Mostly services.",
+   "tag": "Clark–Fisher"
+  },
+  {
+   "q": "Why do primary jobs fall as countries develop?",
+   "options": [
+    "Farming is mechanised",
+    "Food is no longer needed",
+    "All farms close",
+    "Mines open everywhere"
+   ],
+   "correct": 0,
+   "explain": "Fewer workers needed.",
+   "tag": "Clark–Fisher"
+  },
+  {
+   "q": "What does a high tertiary percentage suggest?",
+   "options": [
+    "A high-income country",
+    "A low-income country",
+    "A country with no services",
+    "A mainly farming country"
+   ],
+   "correct": 0,
+   "explain": "Post-industrial.",
+   "tag": "Development"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC02"] = {
+ "id": "IGEC02",
+ "topicNumber": 1,
+ "topicTitle": "Economic sectors and location (IGCSE)",
+ "title": "Factors affecting the location of economic activities",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l02-location-of-economic-activity",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Location of economic activity.",
+ "checklist": [
+  "I can compare the relative importance of different locational factors for different industries",
+  "I can identify how the location of economic activity changes over time and give examples"
+ ],
+ "quiz": [
+  {
+   "q": "Which is a physical locational factor?",
+   "options": [
+    "Flat land",
+    "Skilled labour",
+    "Government grants",
+    "Market"
+   ],
+   "correct": 0,
+   "explain": "Natural factor.",
+   "tag": "Factors"
+  },
+  {
+   "q": "Which is a human locational factor?",
+   "options": [
+    "Cheap labour",
+    "Water supply",
+    "Climate",
+    "Flat land"
+   ],
+   "correct": 0,
+   "explain": "Related to people.",
+   "tag": "Factors"
+  },
+  {
+   "q": "What matters most for coal mining?",
+   "options": [
+    "Location of coal seams",
+    "Nearby universities and science parks",
+    "Shopping centres",
+    "Pleasant scenery"
+   ],
+   "correct": 0,
+   "explain": "Raw material.",
+   "tag": "Industries"
+  },
+  {
+   "q": "What matters most for app design firms?",
+   "options": [
+    "Skilled graduates and broadband",
+    "Large coal deposits and iron ore nearby",
+    "Deep rivers for barges",
+    "Cheap unskilled labour"
+   ],
+   "correct": 0,
+   "explain": "Quaternary.",
+   "tag": "Industries"
+  },
+  {
+   "q": "Why do clothes factories locate in LICs?",
+   "options": [
+    "Cheap labour",
+    "Cold climate",
+    "Large coal reserves",
+    "High wages"
+   ],
+   "correct": 0,
+   "explain": "Labour-intensive.",
+   "tag": "Industries"
+  },
+  {
+   "q": "What is a footloose industry?",
+   "options": [
+    "One not tied to raw materials",
+    "One that uses many feet of land",
+    "A farming industry",
+    "A mining industry"
+   ],
+   "correct": 0,
+   "explain": "Can locate anywhere.",
+   "tag": "Change"
+  },
+  {
+   "q": "Why did UK steelworks move to the coast?",
+   "options": [
+    "To use imported raw materials",
+    "To be near tourist resorts and beaches",
+    "To avoid using coal",
+    "For sea views"
+   ],
+   "correct": 0,
+   "explain": "e.g. Port Talbot.",
+   "tag": "Change"
+  },
+  {
+   "q": "How has the internet changed retail location?",
+   "options": [
+    "More warehouses, fewer high-street shops",
+    "Many more high-street shops in town centres",
+    "Shops moved to mountains",
+    "No change at all"
+   ],
+   "correct": 0,
+   "explain": "Online shopping.",
+   "tag": "Change"
+  },
+  {
+   "q": "Which is a greenfield site?",
+   "options": [
+    "Land not built on before",
+    "An old factory site in a city centre",
+    "A polluted mine",
+    "A city centre car park"
+   ],
+   "correct": 0,
+   "explain": "No clean-up costs.",
+   "tag": "Factors"
+  },
+  {
+   "q": "Why do retailers want accessible locations?",
+   "options": [
+    "To reach many customers",
+    "To be near coal",
+    "To get cheap labour",
+    "To use river water for cooling machines"
+   ],
+   "correct": 0,
+   "explain": "The market.",
+   "tag": "Industries"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC03"] = {
+ "id": "IGEC03",
+ "topicNumber": 2,
+ "topicTitle": "Changing employment (IGCSE)",
+ "title": "Changes in sector employment",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l03-changes-in-sector-employment",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Changes in sector employment.",
+ "checklist": [
+  "I can analyse, evaluate and categorise information",
+  "I can effectively research one way in which demographic or social changes have impacted the relative numbers of people employed in different economic sectors",
+  "I can effectively summarise and share information as part of a whole-class presentation",
+  "I can apply knowledge and understanding to an exam-style question"
+ ],
+ "quiz": [
+  {
+   "q": "Why did UK coal mining jobs decline?",
+   "options": [
+    "Coal became too expensive to extract",
+    "Coal was no longer used anywhere in the world",
+    "Miners moved into farming",
+    "Coal was banned in 1900"
+   ],
+   "correct": 0,
+   "explain": "Depleted, costly reserves.",
+   "tag": "Raw materials"
+  },
+  {
+   "q": "What is mechanisation?",
+   "options": [
+    "Replacing workers with machines",
+    "Moving factories abroad to cheaper countries",
+    "Training new teachers",
+    "Building new houses"
+   ],
+   "correct": 0,
+   "explain": "Machines do the work.",
+   "tag": "Technology"
+  },
+  {
+   "q": "How did containerisation affect jobs?",
+   "options": [
+    "Fewer dock workers needed",
+    "More dock workers needed",
+    "Ports closed completely across the world",
+    "No effect on jobs"
+   ],
+   "correct": 0,
+   "explain": "Mechanised loading.",
+   "tag": "Technology"
+  },
+  {
+   "q": "What is deindustrialisation?",
+   "options": [
+    "Decline of manufacturing",
+    "Growth of factories and manufacturing jobs",
+    "Growth of farming",
+    "Building new mines"
+   ],
+   "correct": 0,
+   "explain": "Common in HICs.",
+   "tag": "Globalisation"
+  },
+  {
+   "q": "Why have many firms moved production to Vietnam?",
+   "options": [
+    "Lower labour costs",
+    "A colder climate for workers",
+    "Higher wages",
+    "Fewer workers"
+   ],
+   "correct": 0,
+   "explain": "Globalisation.",
+   "tag": "Globalisation"
+  },
+  {
+   "q": "Which change is demographic?",
+   "options": [
+    "An ageing population",
+    "New robots on assembly lines",
+    "Cheaper shipping",
+    "Lower taxes"
+   ],
+   "correct": 0,
+   "explain": "Population structure.",
+   "tag": "Demographic"
+  },
+  {
+   "q": "How did Singapore’s government grow its economy?",
+   "options": [
+    "Investing in education and ports",
+    "Banning all foreign companies from trading",
+    "Raising taxes very high",
+    "Closing its airport"
+   ],
+   "correct": 0,
+   "explain": "Policy-led growth.",
+   "tag": "Government"
+  },
+  {
+   "q": "Which sector is growing fastest in China now?",
+   "options": [
+    "Tertiary",
+    "Primary",
+    "Secondary only",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "Rising middle class.",
+   "tag": "Examples"
+  },
+  {
+   "q": "Why has India’s IT sector grown?",
+   "options": [
+    "English-speaking workforce and technology",
+    "Large coal reserves and a cold climate for factories",
+    "Cold climate",
+    "Few universities"
+   ],
+   "correct": 0,
+   "explain": "Outsourcing.",
+   "tag": "Examples"
+  },
+  {
+   "q": "Which creates new quaternary jobs?",
+   "options": [
+    "Digital technology",
+    "Coal mining",
+    "Subsistence farming",
+    "Street vending"
+   ],
+   "correct": 0,
+   "explain": "Software and research.",
+   "tag": "Technology"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC04"] = {
+ "id": "IGEC04",
+ "topicNumber": 2,
+ "topicTitle": "Changing employment (IGCSE)",
+ "title": "Sector shifts in three countries",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l04-sector-shifts-in-three-countries",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Sector shifts in three countries.",
+ "checklist": [
+  "I can distinguish between the terms pre-industrial, industrial and post-industrial",
+  "I can compare and contrast countries at different levels of development, using numerical economic data",
+  "I can demonstrate how changes to a country’s employment sector can have positive and negative socio-economic consequences"
+ ],
+ "quiz": [
+  {
+   "q": "Which statement fits a pre-industrial society?",
+   "options": [
+    "Farming is mainly subsistence",
+    "Healthcare is very good",
+    "Most people work in shops and offices in retail",
+    "Food is mainly imported"
+   ],
+   "correct": 0,
+   "explain": "Early stage.",
+   "tag": "Stages"
+  },
+  {
+   "q": "Which statement fits an industrial society?",
+   "options": [
+    "TNCs open textile factories",
+    "Most people farm only to feed their families",
+    "Most jobs are in research",
+    "Few people go to school"
+   ],
+   "correct": 0,
+   "explain": "Manufacturing grows.",
+   "tag": "Stages"
+  },
+  {
+   "q": "Which statement fits a post-industrial society?",
+   "options": [
+    "Lots of people work in retail",
+    "Farming is mainly subsistence",
+    "Very few hospitals",
+    "Selling food at stalls"
+   ],
+   "correct": 0,
+   "explain": "Service economy.",
+   "tag": "Stages"
+  },
+  {
+   "q": "Roughly what share of UK workers are in services?",
+   "options": [
+    "About 81%",
+    "About 30%",
+    "About 50%",
+    "About 10%"
+   ],
+   "correct": 0,
+   "explain": "Post-industrial.",
+   "tag": "Data"
+  },
+  {
+   "q": "Which of the three countries has the most primary workers?",
+   "options": [
+    "Ethiopia",
+    "UK",
+    "China",
+    "They are equal"
+   ],
+   "correct": 0,
+   "explain": "About three-quarters of jobs.",
+   "tag": "Data"
+  },
+  {
+   "q": "What drove China’s industrialisation?",
+   "options": [
+    "Rural–urban migration to factories",
+    "Closure of almost all factories in the cities",
+    "Fewer people in cities",
+    "Lower exports"
+   ],
+   "correct": 0,
+   "explain": "Since the 1980s.",
+   "tag": "China"
+  },
+  {
+   "q": "A negative impact of UK deindustrialisation is…",
+   "options": [
+    "Unemployment in former industrial towns",
+    "More air pollution from heavy factories in towns",
+    "More coal mining jobs",
+    "Lower service employment"
+   ],
+   "correct": 0,
+   "explain": "e.g. north-east England.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "A negative impact of China’s industrialisation is…",
+   "options": [
+    "Air and water pollution",
+    "Fewer people in poverty",
+    "More infrastructure",
+    "Growing exports"
+   ],
+   "correct": 0,
+   "explain": "Environmental cost.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "A risk of Ethiopia’s growth in commercial crops is…",
+   "options": [
+    "Food shortages for subsistence farmers",
+    "Less export income from coffee and flowers",
+    "Fewer cut flowers",
+    "More rainfall"
+   ],
+   "correct": 0,
+   "explain": "Land taken from food crops.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which UK industries declined?",
+   "options": [
+    "Coal, steel and shipbuilding",
+    "Finance, banking and insurance",
+    "Software and design",
+    "Tourism and retail"
+   ],
+   "correct": 0,
+   "explain": "Since the 1970s.",
+   "tag": "UK"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC05"] = {
+ "id": "IGEC05",
+ "topicNumber": 2,
+ "topicTitle": "Changing employment (IGCSE)",
+ "title": "Informal employment",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l05-informal-employment-bangkok",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Informal employment: Bangkok.",
+ "checklist": [
+  "I can identify a range of different types of informal employment and comment on the typical characteristics",
+  "I can give reasons for the rise in informal employment in developing and emerging economies",
+  "I can comment on the advantages and disadvantages of informal employment",
+  "I can make reference to the role of the informal sector in Bangkok"
+ ],
+ "quiz": [
+  {
+   "q": "What is informal employment?",
+   "options": [
+    "Work not registered or taxed",
+    "Work in a government office",
+    "Work with a long-term contract",
+    "Work in a large factory"
+   ],
+   "correct": 0,
+   "explain": "No legal protection.",
+   "tag": "Definition"
+  },
+  {
+   "q": "Which is an informal job?",
+   "options": [
+    "Street food vendor",
+    "Bank manager",
+    "Government teacher",
+    "Airline pilot"
+   ],
+   "correct": 0,
+   "explain": "Unregistered work.",
+   "tag": "Types"
+  },
+  {
+   "q": "Why is informal work growing in megacities?",
+   "options": [
+    "Migrants arrive faster than formal jobs appear",
+    "Formal jobs are growing much faster than the migrant population",
+    "Fewer people move to cities",
+    "All workers have degrees"
+   ],
+   "correct": 0,
+   "explain": "Rural–urban migration.",
+   "tag": "Causes"
+  },
+  {
+   "q": "Which is an advantage of informal work?",
+   "options": [
+    "Easy to start",
+    "Paid sick leave",
+    "A good pension",
+    "Strong legal protection"
+   ],
+   "correct": 0,
+   "explain": "Low barriers.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Which is a disadvantage?",
+   "options": [
+    "No job security",
+    "Flexible hours",
+    "Cheap goods for residents",
+    "Easy to start"
+   ],
+   "correct": 0,
+   "explain": "No contract.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Why does informal work affect public services?",
+   "options": [
+    "No taxes are paid",
+    "Workers pay too much tax",
+    "It increases taxes",
+    "It has no effect"
+   ],
+   "correct": 0,
+   "explain": "Lower tax revenue.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Which city is our megacity example?",
+   "options": [
+    "Bangkok",
+    "Chiang Mai",
+    "London",
+    "Lima"
+   ],
+   "correct": 0,
+   "explain": "Thailand’s capital.",
+   "tag": "Bangkok"
+  },
+  {
+   "q": "Where do many Bangkok migrants come from?",
+   "options": [
+    "The North-East (Isan)",
+    "Japan",
+    "The UK",
+    "The far South near Malaysia"
+   ],
+   "correct": 0,
+   "explain": "Poorer region.",
+   "tag": "Bangkok"
+  },
+  {
+   "q": "How have Bangkok’s motorbike taxis been formalised?",
+   "options": [
+    "Registration and numbered vests",
+    "They have been banned from all roads",
+    "They pay no fares",
+    "They became buses"
+   ],
+   "correct": 0,
+   "explain": "Some recognition.",
+   "tag": "Bangkok"
+  },
+  {
+   "q": "Why have some Bangkok vendors been cleared?",
+   "options": [
+    "To reduce pavement congestion",
+    "To attract more vendors to the main streets",
+    "To increase street food",
+    "To build stalls"
+   ],
+   "correct": 0,
+   "explain": "Authorities’ view.",
+   "tag": "Bangkok"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC06"] = {
+ "id": "IGEC06",
+ "topicNumber": 3,
+ "topicTitle": "Energy resources (IGCSE)",
+ "title": "Rising energy demand",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l06-rising-energy-demand",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Rising energy demand.",
+ "checklist": [
+  "I can describe the trend in global energy consumption",
+  "I can explain why the demand for energy is increasing",
+  "I can describe global differences in energy consumption between countries at different levels of development",
+  "I can compare different views on population growth and resources (Malthus, Boserup and optimum population)"
+ ],
+ "quiz": [
+  {
+   "q": "What is the global trend in energy consumption?",
+   "options": [
+    "Rising overall",
+    "Falling steadily",
+    "Staying the same",
+    "Halving every decade"
+   ],
+   "correct": 0,
+   "explain": "Roughly quadrupled since 1965.",
+   "tag": "Trend"
+  },
+  {
+   "q": "In which year did global energy use dip because of the pandemic?",
+   "options": [
+    "2020",
+    "1990",
+    "2000",
+    "1975"
+   ],
+   "correct": 0,
+   "explain": "COVID-19.",
+   "tag": "Trend"
+  },
+  {
+   "q": "Roughly what share of energy comes from fossil fuels?",
+   "options": [
+    "About four-fifths",
+    "About one-tenth only",
+    "About a quarter",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "Oil, coal and gas.",
+   "tag": "Trend"
+  },
+  {
+   "q": "Which is a reason for rising energy demand?",
+   "options": [
+    "Population growth",
+    "Falling incomes worldwide",
+    "Fewer devices",
+    "Smaller cities"
+   ],
+   "correct": 0,
+   "explain": "More people.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "How does industrialisation affect energy demand?",
+   "options": [
+    "It increases it",
+    "It reduces it",
+    "It has no effect",
+    "It stops it"
+   ],
+   "correct": 0,
+   "explain": "Factories use energy.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Which shows rising living standards?",
+   "options": [
+    "Buying an air conditioner",
+    "Collecting firewood each morning",
+    "Walking to school",
+    "Using a candle"
+   ],
+   "correct": 0,
+   "explain": "Middle class.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Which technology is increasing electricity demand?",
+   "options": [
+    "Data centres",
+    "Oil lamps",
+    "Steam trains",
+    "Horse carts"
+   ],
+   "correct": 0,
+   "explain": "Cloud and AI.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Which country uses the most energy in total?",
+   "options": [
+    "China",
+    "UK",
+    "Ethiopia",
+    "Peru"
+   ],
+   "correct": 0,
+   "explain": "Largest consumer.",
+   "tag": "Uneven"
+  },
+  {
+   "q": "Who uses the most energy per person?",
+   "options": [
+    "People in HICs",
+    "People in LICs",
+    "Everyone equally",
+    "Rural farmers"
+   ],
+   "correct": 0,
+   "explain": "Uneven use.",
+   "tag": "Uneven"
+  },
+  {
+   "q": "Where do most people without electricity live?",
+   "options": [
+    "Sub-Saharan Africa",
+    "Western and northern Europe",
+    "North America",
+    "Japan"
+   ],
+   "correct": 0,
+   "explain": "Energy poverty.",
+   "tag": "Uneven"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC07"] = {
+ "id": "IGEC07",
+ "topicNumber": 3,
+ "topicTitle": "Energy resources (IGCSE)",
+ "title": "Renewable versus non-renewable energy",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l07-renewable-and-non-renewable-energy",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Renewable vs non-renewable.",
+ "checklist": [
+  "I can classify energy resources as renewable or non-renewable",
+  "I can describe the advantages and disadvantages of different energy resources",
+  "I can explain why countries need a diverse energy mix",
+  "I can evaluate which energy resources are most suitable for different countries"
+ ],
+ "quiz": [
+  {
+   "q": "Which is a renewable resource?",
+   "options": [
+    "Wind",
+    "Coal",
+    "Oil",
+    "Natural gas"
+   ],
+   "correct": 0,
+   "explain": "Naturally replaced.",
+   "tag": "Classify"
+  },
+  {
+   "q": "Which is non-renewable?",
+   "options": [
+    "Uranium",
+    "Solar",
+    "Tidal",
+    "Geothermal"
+   ],
+   "correct": 0,
+   "explain": "Finite.",
+   "tag": "Classify"
+  },
+  {
+   "q": "Why is shale gas non-renewable?",
+   "options": [
+    "It is a finite fossil fuel",
+    "It is made from the movement of wind",
+    "It is replaced daily",
+    "It comes from the Sun"
+   ],
+   "correct": 0,
+   "explain": "Formed over millions of years.",
+   "tag": "Classify"
+  },
+  {
+   "q": "Which fuel produces the most CO₂?",
+   "options": [
+    "Coal",
+    "Wind",
+    "Nuclear",
+    "Solar"
+   ],
+   "correct": 0,
+   "explain": "Highest emissions.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "A disadvantage of nuclear power is…",
+   "options": [
+    "Radioactive waste",
+    "High carbon emissions",
+    "It only works in sunlight",
+    "It needs strong winds"
+   ],
+   "correct": 0,
+   "explain": "Long-lived waste.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Why are solar and wind called intermittent?",
+   "options": [
+    "They are not always available",
+    "They always produce power day and night",
+    "They use coal at night",
+    "They never work"
+   ],
+   "correct": 0,
+   "explain": "Weather-dependent.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "A disadvantage of large HEP dams is…",
+   "options": [
+    "Flooding valleys and displacing people",
+    "Very high CO₂ emissions from burning water",
+    "Radioactive waste",
+    "Fuel running out"
+   ],
+   "correct": 0,
+   "explain": "Social and ecological costs.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Where is geothermal power possible?",
+   "options": [
+    "Tectonically active areas",
+    "Any flat area with good roads",
+    "Only deserts",
+    "Only cities"
+   ],
+   "correct": 0,
+   "explain": "e.g. Iceland, Kenya.",
+   "tag": "Suitability"
+  },
+  {
+   "q": "When did the UK’s last coal power station close?",
+   "options": [
+    "2024",
+    "1990",
+    "2004",
+    "2014"
+   ],
+   "correct": 0,
+   "explain": "Ratcliffe-on-Soar.",
+   "tag": "Suitability"
+  },
+  {
+   "q": "Which mostly supplies Norway’s electricity?",
+   "options": [
+    "Hydroelectric power",
+    "Coal-fired power stations",
+    "Nuclear",
+    "Oil"
+   ],
+   "correct": 0,
+   "explain": "Mountain rivers.",
+   "tag": "Suitability"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC08"] = {
+ "id": "IGEC08",
+ "topicNumber": 3,
+ "topicTitle": "Energy resources (IGCSE)",
+ "title": "Case study: fracking in the UK",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l08-case-study-fracking-in-the-uk",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Case study: fracking in the UK.",
+ "checklist": [
+  "I can explain how fracking works",
+  "I can describe the potential advantages and disadvantages of fracking in the UK",
+  "I can evaluate the views of different stakeholders about fracking"
+ ],
+ "quiz": [
+  {
+   "q": "What does fracking extract?",
+   "options": [
+    "Shale gas",
+    "Coal",
+    "Uranium",
+    "Geothermal heat"
+   ],
+   "correct": 0,
+   "explain": "From shale rock.",
+   "tag": "Process"
+  },
+  {
+   "q": "What is pumped down a fracking well?",
+   "options": [
+    "Water, sand and chemicals",
+    "Only compressed air from the surface",
+    "Only oil",
+    "Molten rock"
+   ],
+   "correct": 0,
+   "explain": "At high pressure.",
+   "tag": "Process"
+  },
+  {
+   "q": "Why is sand added to fracking fluid?",
+   "options": [
+    "To hold cracks open",
+    "To make it colder",
+    "To stop gas flowing",
+    "To clean the pipes"
+   ],
+   "correct": 0,
+   "explain": "Proppant.",
+   "tag": "Process"
+  },
+  {
+   "q": "Which shale lies beneath Lancashire?",
+   "options": [
+    "Bowland Shale",
+    "Chalk of the South Downs",
+    "London Clay",
+    "Granite"
+   ],
+   "correct": 0,
+   "explain": "Main UK reserve.",
+   "tag": "UK"
+  },
+  {
+   "q": "Where was Cuadrilla’s main fracking site?",
+   "options": [
+    "Preston New Road",
+    "Port Talbot, Wales",
+    "Sunderland",
+    "Bangkok"
+   ],
+   "correct": 0,
+   "explain": "Lancashire.",
+   "tag": "UK"
+  },
+  {
+   "q": "What triggered the 2019 moratorium?",
+   "options": [
+    "A magnitude 2.9 tremor",
+    "A large oil spill at sea nearby",
+    "A nuclear accident",
+    "A flood"
+   ],
+   "correct": 0,
+   "explain": "August 2019.",
+   "tag": "UK"
+  },
+  {
+   "q": "What is a moratorium?",
+   "options": [
+    "A temporary ban",
+    "A tax rebate for gas firms",
+    "A new gas well",
+    "A type of rock"
+   ],
+   "correct": 0,
+   "explain": "Halt on activity.",
+   "tag": "UK"
+  },
+  {
+   "q": "An advantage of fracking for the UK is…",
+   "options": [
+    "Less reliance on imported gas",
+    "Zero carbon emissions from the gas burned",
+    "No earthquakes",
+    "No lorry traffic"
+   ],
+   "correct": 0,
+   "explain": "Energy security.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "An environmental risk of fracking is…",
+   "options": [
+    "Groundwater contamination",
+    "More bird strikes from turbines",
+    "Radioactive waste storage",
+    "Valleys flooded by dams"
+   ],
+   "correct": 0,
+   "explain": "Fluids leaking.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Who is most likely to oppose fracking?",
+   "options": [
+    "Local residents near a site",
+    "The gas company that owns the well",
+    "Shareholders",
+    "Drilling contractors"
+   ],
+   "correct": 0,
+   "explain": "Local impacts.",
+   "tag": "Stakeholders"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC09"] = {
+ "id": "IGEC09",
+ "topicNumber": 4,
+ "topicTitle": "Sustainable energy (IGCSE)",
+ "title": "Sustainable energy",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l09-sustainable-energy",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Sustainable energy.",
+ "checklist": [
+  "I can define carbon footprint, ecological footprint, global hectare, biocapacity and Earth Overshoot Day",
+  "I can calculate and compare personal footprints",
+  "I can evaluate strategies to make energy use more sustainable at different scales, including the Sustainable Development Goals"
+ ],
+ "quiz": [
+  {
+   "q": "What is a carbon footprint?",
+   "options": [
+    "Greenhouse gases a person produces",
+    "The size of your shoe",
+    "Land used for farming",
+    "The total energy produced by a country in a year"
+   ],
+   "correct": 0,
+   "explain": "Tonnes of CO₂e.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "What does an ecological footprint measure?",
+   "options": [
+    "Land and sea needed for a lifestyle",
+    "Only the CO₂ produced by your family car",
+    "Only water used",
+    "Population density"
+   ],
+   "correct": 0,
+   "explain": "Global hectares.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "What is sustainable energy?",
+   "options": [
+    "Meets present needs without harming the future",
+    "Always the cheapest energy available today, whatever the cost",
+    "Energy from coal only",
+    "Any imported energy"
+   ],
+   "correct": 0,
+   "explain": "Long-term thinking.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "Which country has a very high CO₂ per person?",
+   "options": [
+    "USA",
+    "Ethiopia",
+    "India",
+    "Peru"
+   ],
+   "correct": 0,
+   "explain": "About 14–15 t.",
+   "tag": "Compare"
+  },
+  {
+   "q": "Which country has very low CO₂ per person?",
+   "options": [
+    "Ethiopia",
+    "USA (United States)",
+    "China",
+    "UK"
+   ],
+   "correct": 0,
+   "explain": "Under 0.2 t.",
+   "tag": "Compare"
+  },
+  {
+   "q": "How many Earths does humanity currently use?",
+   "options": [
+    "About 1.7",
+    "Exactly 1",
+    "About 0.5",
+    "About 10"
+   ],
+   "correct": 0,
+   "explain": "Global Footprint Network.",
+   "tag": "Compare"
+  },
+  {
+   "q": "Which is an individual strategy?",
+   "options": [
+    "Cycling to school",
+    "The Paris Agreement",
+    "Renewable subsidies",
+    "Carbon trading"
+   ],
+   "correct": 0,
+   "explain": "Personal action.",
+   "tag": "Scales"
+  },
+  {
+   "q": "Which is a national strategy?",
+   "options": [
+    "Building insulation standards",
+    "Turning off lights and TVs at home",
+    "Walking to school",
+    "A school solar panel"
+   ],
+   "correct": 0,
+   "explain": "Government policy.",
+   "tag": "Scales"
+  },
+  {
+   "q": "Which is a global strategy?",
+   "options": [
+    "The Paris Agreement",
+    "A new town bus service",
+    "Home solar panels",
+    "Turning off a TV"
+   ],
+   "correct": 0,
+   "explain": "International.",
+   "tag": "Scales"
+  },
+  {
+   "q": "Why are global agreements limited?",
+   "options": [
+    "They are hard to enforce",
+    "They are too cheap",
+    "They only affect one person",
+    "They ban all energy use"
+   ],
+   "correct": 0,
+   "explain": "Voluntary targets.",
+   "tag": "Evaluate"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGEC10"] = {
+ "id": "IGEC10",
+ "topicNumber": 4,
+ "topicTitle": "Sustainable energy (IGCSE)",
+ "title": "Case study: micro-hydro in Peru",
+ "href": "/igcse/geography/learn/economic-activity-and-energy/l10-case-study-micro-hydro-in-peru",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Economic Activity and Energy: Case study: micro-hydro in Peru.",
+ "checklist": [
+  "I can describe the location and need for the Chambamontera micro-hydro scheme",
+  "I can explain how a micro-hydro scheme works",
+  "I can evaluate the social, economic and environmental impacts and the sustainability of the scheme"
+ ],
+ "quiz": [
+  {
+   "q": "In which country is Chambamontera?",
+   "options": [
+    "Peru",
+    "Thailand",
+    "Kenya",
+    "Nepal"
+   ],
+   "correct": 0,
+   "explain": "Northern Andes.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which is the nearest town to Chambamontera?",
+   "options": [
+    "Jaén",
+    "Lima",
+    "Cusco",
+    "Bangkok"
+   ],
+   "correct": 0,
+   "explain": "Two hours by track.",
+   "tag": "Location"
+  },
+  {
+   "q": "Why was the village not on the national grid?",
+   "options": [
+    "Too remote and costly to connect",
+    "It already had a large nuclear power station",
+    "People did not want light",
+    "It is in a desert"
+   ],
+   "correct": 0,
+   "explain": "Off-grid.",
+   "tag": "Need"
+  },
+  {
+   "q": "What does the penstock do?",
+   "options": [
+    "Carries water down to the turbine",
+    "Stores electricity in large batteries",
+    "Holds back a reservoir",
+    "Burns fuel"
+   ],
+   "correct": 0,
+   "explain": "Pipe.",
+   "tag": "How it works"
+  },
+  {
+   "q": "Why does micro-hydro not flood the valley?",
+   "options": [
+    "There is no large dam",
+    "It uses no water from the river",
+    "It is underground",
+    "It runs on wind"
+   ],
+   "correct": 0,
+   "explain": "Run-of-river.",
+   "tag": "How it works"
+  },
+  {
+   "q": "Which NGO helped build the scheme?",
+   "options": [
+    "Practical Action",
+    "Greenpeace International",
+    "Red Cross",
+    "WaterAid"
+   ],
+   "correct": 0,
+   "explain": "Appropriate technology.",
+   "tag": "Funding"
+  },
+  {
+   "q": "Roughly how much did the scheme cost?",
+   "options": [
+    "US$51,000",
+    "US$5 million",
+    "US$500",
+    "US$1 billion"
+   ],
+   "correct": 0,
+   "explain": "Shared funding.",
+   "tag": "Funding"
+  },
+  {
+   "q": "What did each family contribute?",
+   "options": [
+    "About US$750",
+    "Nothing at all",
+    "US$51,000 each",
+    "About US$7"
+   ],
+   "correct": 0,
+   "explain": "Credit available.",
+   "tag": "Funding"
+  },
+  {
+   "q": "An economic benefit of the scheme is…",
+   "options": [
+    "Faster coffee processing",
+    "More money spent on kerosene",
+    "Fewer computers",
+    "Higher fuel costs"
+   ],
+   "correct": 0,
+   "explain": "Machinery.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "An environmental benefit of the scheme is…",
+   "options": [
+    "Less wood burning",
+    "More smoke indoors",
+    "Flooded valleys",
+    "More kerosene use"
+   ],
+   "correct": 0,
+   "explain": "Less deforestation.",
+   "tag": "Impacts"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF01"] = {
+ "id": "IGRF01",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Our rural enquiry: question, location and the enquiry process",
+ "href": "/igcse/geography/learn/rural-fieldwork/l01-our-rural-enquiry",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Our rural enquiry and location.",
+ "checklist": [
+  "I can state our rural enquiry question",
+  "I can describe the location of our rural enquiry and explain why it was chosen",
+  "I can describe the six stages of a geographical enquiry"
+ ],
+ "quiz": [
+  {
+   "q": "What was our rural enquiry about?",
+   "options": [
+    "Settlement size and services",
+    "Coastal management and beaches",
+    "River speed and discharge",
+    "Urban crime and housing"
+   ],
+   "correct": 0,
+   "explain": "Settlement hierarchy.",
+   "tag": "Enquiry"
+  },
+  {
+   "q": "Where was our rural enquiry?",
+   "options": [
+    "Sam Roi Yot National Park",
+    "Khao Yai National Park, Nakhon Ratchasima",
+    "Central Bangkok",
+    "Chiang Mai old city"
+   ],
+   "correct": 0,
+   "explain": "Prachuap Khiri Khan.",
+   "tag": "Location"
+  },
+  {
+   "q": "Roughly how far is the park from Bangkok?",
+   "options": [
+    "About 250 km south",
+    "About 47 km north",
+    "About 1,000 km east",
+    "About 10 km west"
+   ],
+   "correct": 0,
+   "explain": "Down the Gulf coast.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which major settlement is closest?",
+   "options": [
+    "Hua Hin",
+    "Pattaya",
+    "Phuket",
+    "Ayutthaya"
+   ],
+   "correct": 0,
+   "explain": "About 47 km north.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which was one of our study villages?",
+   "options": [
+    "Ban Khao Daeng",
+    "Ban Pak Nam Pran",
+    "Ban Pattaya Nuea",
+    "Ban Silom"
+   ],
+   "correct": 0,
+   "explain": "One of three.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which coast is the park on?",
+   "options": [
+    "Gulf of Thailand",
+    "Andaman Sea on the west coast",
+    "South China Sea",
+    "Bay of Bengal"
+   ],
+   "correct": 0,
+   "explain": "East-facing coast.",
+   "tag": "Location"
+  },
+  {
+   "q": "Why was this location suitable?",
+   "options": [
+    "Several villages of different sizes close together",
+    "It has only one very large village for us to study there",
+    "It is in a large city",
+    "It has no secondary data at all"
+   ],
+   "correct": 0,
+   "explain": "Fair comparison.",
+   "tag": "Location"
+  },
+  {
+   "q": "What does “to what extent” require?",
+   "options": [
+    "A judgement in the conclusion",
+    "A full list of all the equipment used",
+    "A risk assessment",
+    "Only a description"
+   ],
+   "correct": 0,
+   "explain": "How strong?",
+   "tag": "Enquiry"
+  },
+  {
+   "q": "Which stage includes drawing pie charts?",
+   "options": [
+    "Data presentation",
+    "Planning",
+    "Evaluation",
+    "Data collection in the field"
+   ],
+   "correct": 0,
+   "explain": "Presenting.",
+   "tag": "Process"
+  },
+  {
+   "q": "Which stage includes suggesting improvements?",
+   "options": [
+    "Evaluation",
+    "Planning",
+    "Data collection",
+    "Data presentation"
+   ],
+   "correct": 0,
+   "explain": "Limitations and fixes.",
+   "tag": "Process"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF02"] = {
+ "id": "IGRF02",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Settlement hierarchy: the theory behind our hypothesis",
+ "href": "/igcse/geography/learn/rural-fieldwork/l02-settlement-hierarchy-and-hypothesis",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Settlement hierarchy and hypothesis.",
+ "checklist": [
+  "I can explain settlement hierarchy, threshold, range and sphere of influence",
+  "I can distinguish between high-order and low-order services",
+  "I can write a hypothesis for the rural enquiry and explain the theory that supports it"
+ ],
+ "quiz": [
+  {
+   "q": "What is settlement hierarchy?",
+   "options": [
+    "Ranking settlements by size and services",
+    "A map of all the roads between towns and cities",
+    "The age of a settlement",
+    "A list of village names"
+   ],
+   "correct": 0,
+   "explain": "Size vs services.",
+   "tag": "Theory"
+  },
+  {
+   "q": "What is a threshold population?",
+   "options": [
+    "Minimum customers needed for a service",
+    "Maximum distance people travel",
+    "The total population of the whole of Thailand",
+    "The number of houses in a village"
+   ],
+   "correct": 0,
+   "explain": "To be viable.",
+   "tag": "Theory"
+  },
+  {
+   "q": "What is the range of a service?",
+   "options": [
+    "Maximum distance people will travel",
+    "The minimum number of customers",
+    "The number of shops in a village",
+    "The price range of the goods sold in a shop"
+   ],
+   "correct": 0,
+   "explain": "Distance.",
+   "tag": "Theory"
+  },
+  {
+   "q": "Which settlements have the largest sphere of influence?",
+   "options": [
+    "Large cities",
+    "Hamlets",
+    "Isolated dwellings",
+    "Small villages"
+   ],
+   "correct": 0,
+   "explain": "Serve a wide area.",
+   "tag": "Theory"
+  },
+  {
+   "q": "Which is a low-order service?",
+   "options": [
+    "Noodle stall",
+    "Hospital",
+    "Car showroom",
+    "Bank branch"
+   ],
+   "correct": 0,
+   "explain": "Used daily.",
+   "tag": "Services"
+  },
+  {
+   "q": "Which is a high-order service?",
+   "options": [
+    "Hospital",
+    "Grocery shop",
+    "Village temple",
+    "Food stall"
+   ],
+   "correct": 0,
+   "explain": "High threshold.",
+   "tag": "Services"
+  },
+  {
+   "q": "Why are high-order services in larger settlements?",
+   "options": [
+    "They need a high threshold population",
+    "They need a short range",
+    "They are used daily by everyone in the village",
+    "They need fewer customers"
+   ],
+   "correct": 0,
+   "explain": "Enough customers.",
+   "tag": "Services"
+  },
+  {
+   "q": "Where are hamlets in the hierarchy pyramid?",
+   "options": [
+    "Near the bottom",
+    "At the top",
+    "In the middle",
+    "Not on the pyramid"
+   ],
+   "correct": 0,
+   "explain": "Small, numerous.",
+   "tag": "Theory"
+  },
+  {
+   "q": "What would we expect in a larger village?",
+   "options": [
+    "More and varied services",
+    "Fewer services overall, mainly temples",
+    "Only low-order services",
+    "No shops at all"
+   ],
+   "correct": 0,
+   "explain": "Our hypothesis.",
+   "tag": "Hypothesis"
+  },
+  {
+   "q": "Low-order services have…",
+   "options": [
+    "A low threshold and short range",
+    "A high threshold and long range",
+    "No threshold at all",
+    "A long range and high threshold"
+   ],
+   "correct": 0,
+   "explain": "Used often, nearby.",
+   "tag": "Services"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF03"] = {
+ "id": "IGRF03",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Planning: types of data, secondary research, equipment and risk",
+ "href": "/igcse/geography/learn/rural-fieldwork/l03-data-types-equipment-and-risk",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Data types, equipment and risk.",
+ "checklist": [
+  "I can explain the difference between primary and secondary data, with examples",
+  "I can explain the difference between quantitative and qualitative data, with examples",
+  "I can explain how secondary data helped our enquiry",
+  "I can describe the equipment used and assess the risks of rural fieldwork"
+ ],
+ "quiz": [
+  {
+   "q": "Which is primary data?",
+   "options": [
+    "Our pedestrian count",
+    "Census data from a government website",
+    "A tourism website",
+    "A newspaper report"
+   ],
+   "correct": 0,
+   "explain": "Collected by us.",
+   "tag": "Data types"
+  },
+  {
+   "q": "Which is secondary data?",
+   "options": [
+    "Census data",
+    "Our traffic count",
+    "Our photographs",
+    "Our interviews"
+   ],
+   "correct": 0,
+   "explain": "Collected by others.",
+   "tag": "Data types"
+  },
+  {
+   "q": "Which is quantitative data?",
+   "options": [
+    "Traffic count",
+    "Annotated photos",
+    "Interview answers",
+    "Field notes"
+   ],
+   "correct": 0,
+   "explain": "Numbers.",
+   "tag": "Data types"
+  },
+  {
+   "q": "Which is qualitative data?",
+   "options": [
+    "Interview answers",
+    "Pedestrian count",
+    "Services tally",
+    "Number of buildings"
+   ],
+   "correct": 0,
+   "explain": "Words.",
+   "tag": "Data types"
+  },
+  {
+   "q": "What did census data tell us?",
+   "options": [
+    "The population of each village",
+    "The number of cars passing in both directions",
+    "The views of shopkeepers",
+    "The weather that day"
+   ],
+   "correct": 0,
+   "explain": "Settlement size.",
+   "tag": "Secondary"
+  },
+  {
+   "q": "Why use the tourism website?",
+   "options": [
+    "To learn the functions of each village",
+    "To count the pedestrians in each village",
+    "To measure traffic",
+    "To draw the land use map"
+   ],
+   "correct": 0,
+   "explain": "Background research.",
+   "tag": "Secondary"
+  },
+  {
+   "q": "What is a clicker used for?",
+   "options": [
+    "Counting pedestrians and traffic",
+    "Measuring the gradient of the beach",
+    "Taking photographs",
+    "Measuring temperature"
+   ],
+   "correct": 0,
+   "explain": "Tally counter.",
+   "tag": "Equipment"
+  },
+  {
+   "q": "Why use a timer?",
+   "options": [
+    "Counts last the same time",
+    "To measure distances between villages",
+    "To photograph buildings",
+    "To find the population"
+   ],
+   "correct": 0,
+   "explain": "Fair comparison.",
+   "tag": "Equipment"
+  },
+  {
+   "q": "How did we reduce the risk of traffic accidents?",
+   "options": [
+    "High-vis jackets and safe crossings",
+    "Walking alone quickly",
+    "Counting traffic while standing in the road",
+    "Wearing sandals"
+   ],
+   "correct": 0,
+   "explain": "Be visible.",
+   "tag": "Risk"
+  },
+  {
+   "q": "How did we reduce heat stroke risk?",
+   "options": [
+    "Sun cream, hats and shade breaks",
+    "Working straight through the midday heat",
+    "Wearing dark clothes",
+    "Skipping water breaks"
+   ],
+   "correct": 0,
+   "explain": "Thai heat.",
+   "tag": "Risk"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF04"] = {
+ "id": "IGRF04",
+ "topicNumber": 1,
+ "topicTitle": "Planning the enquiry (IGCSE)",
+ "title": "Sampling: why and how we sample",
+ "href": "/igcse/geography/learn/rural-fieldwork/l04-sampling",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Sampling.",
+ "checklist": [
+  "I can explain what sampling is and why we sample",
+  "I can describe random, systematic, stratified and convenience sampling",
+  "I can explain which sampling techniques were used in our rural enquiry"
+ ],
+ "quiz": [
+  {
+   "q": "What is sampling?",
+   "options": [
+    "Investigating part to represent the whole",
+    "Measuring every single item in the population",
+    "Only using secondary data",
+    "Drawing a land use map"
+   ],
+   "correct": 0,
+   "explain": "Shortcut method.",
+   "tag": "Sampling"
+  },
+  {
+   "q": "Why do we sample?",
+   "options": [
+    "Not enough time or money to measure everything",
+    "It is always more accurate than measuring everything",
+    "It removes all bias completely",
+    "Examiners require it"
+   ],
+   "correct": 0,
+   "explain": "Practical limits.",
+   "tag": "Sampling"
+  },
+  {
+   "q": "Which method is unbiased?",
+   "options": [
+    "Random",
+    "Convenience",
+    "Choosing your favourite spots",
+    "Asking only friends"
+   ],
+   "correct": 0,
+   "explain": "Equal chance.",
+   "tag": "Methods"
+  },
+  {
+   "q": "Interviewing every 10th person is…",
+   "options": [
+    "Systematic",
+    "Random",
+    "Convenience",
+    "Stratified"
+   ],
+   "correct": 0,
+   "explain": "Regular interval.",
+   "tag": "Methods"
+  },
+  {
+   "q": "Five people from each age range is…",
+   "options": [
+    "Stratified",
+    "Systematic",
+    "Random",
+    "Convenience"
+   ],
+   "correct": 0,
+   "explain": "Groups.",
+   "tag": "Methods"
+  },
+  {
+   "q": "Interviewing whoever is available is…",
+   "options": [
+    "Convenience",
+    "Systematic sampling",
+    "Random",
+    "Stratified"
+   ],
+   "correct": 0,
+   "explain": "Easiest to access.",
+   "tag": "Methods"
+  },
+  {
+   "q": "What does random point sampling use?",
+   "options": [
+    "A grid and random number tables",
+    "Every 10th house",
+    "Only people who are willing to talk",
+    "One site per village"
+   ],
+   "correct": 0,
+   "explain": "Grid references.",
+   "tag": "Methods"
+  },
+  {
+   "q": "Which sampling did our timed traffic counts use?",
+   "options": [
+    "Systematic",
+    "Random point",
+    "Convenience only",
+    "None at all"
+   ],
+   "correct": 0,
+   "explain": "Regular time periods.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "A limitation of convenience sampling is…",
+   "options": [
+    "It may be biased",
+    "It needs random numbers",
+    "It takes far too long",
+    "It needs a clinometer"
+   ],
+   "correct": 0,
+   "explain": "Not representative.",
+   "tag": "Our enquiry"
+  },
+  {
+   "q": "What is a sampling frame?",
+   "options": [
+    "The whole population sampled from",
+    "A wooden quadrat used to measure plant cover",
+    "A type of graph",
+    "A camera setting"
+   ],
+   "correct": 0,
+   "explain": "Parent population.",
+   "tag": "Sampling"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF05"] = {
+ "id": "IGRF05",
+ "topicNumber": 2,
+ "topicTitle": "Collecting the data (IGCSE)",
+ "title": "Rural enquiry methods: how we collected the data",
+ "href": "/igcse/geography/learn/rural-fieldwork/l05-data-collection-methods",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Rural data collection methods.",
+ "checklist": [
+  "I can describe how each data collection method was carried out",
+  "I can explain how each method helped to answer the enquiry question",
+  "I can identify whether each method is quantitative or qualitative"
+ ],
+ "quiz": [
+  {
+   "q": "What did we record on the land use base map?",
+   "options": [
+    "The use of each building",
+    "Wave heights at the beach",
+    "Beach gradient",
+    "Rainfall totals"
+   ],
+   "correct": 0,
+   "explain": "Residential, commercial, public.",
+   "tag": "Land use"
+  },
+  {
+   "q": "Why does a land use map need a key?",
+   "options": [
+    "To show what each colour or letter means",
+    "To lock the map away",
+    "To measure the distances between all buildings",
+    "To count traffic"
+   ],
+   "correct": 0,
+   "explain": "Clear data.",
+   "tag": "Land use"
+  },
+  {
+   "q": "What did the services tally record?",
+   "options": [
+    "High-order, low-order and other services",
+    "Pedestrians and traffic in both directions",
+    "Interview answers",
+    "Population figures"
+   ],
+   "correct": 0,
+   "explain": "Numbers of services.",
+   "tag": "Tally"
+  },
+  {
+   "q": "How long was each traffic count?",
+   "options": [
+    "A fixed time, e.g. 2 minutes",
+    "As long as each person liked",
+    "A whole day",
+    "One hour each time"
+   ],
+   "correct": 0,
+   "explain": "Same timeframe.",
+   "tag": "Counts"
+  },
+  {
+   "q": "Why give each group member a role?",
+   "options": [
+    "To count accurately and fairly",
+    "To finish quickly and get back on the bus",
+    "To avoid using a timer",
+    "To make data qualitative"
+   ],
+   "correct": 0,
+   "explain": "Timer and counters.",
+   "tag": "Counts"
+  },
+  {
+   "q": "What would we expect in a larger village?",
+   "options": [
+    "More pedestrians and traffic",
+    "Fewer pedestrians and less traffic",
+    "No traffic at all",
+    "Fewer services"
+   ],
+   "correct": 0,
+   "explain": "Bigger sphere of influence.",
+   "tag": "Counts"
+  },
+  {
+   "q": "How many people did we interview per village?",
+   "options": [
+    "At least 2",
+    "Exactly 50",
+    "None",
+    "Only 1 in total"
+   ],
+   "correct": 0,
+   "explain": "Shopkeepers, owners.",
+   "tag": "Interviews"
+  },
+  {
+   "q": "What question tests sphere of influence?",
+   "options": [
+    "Where do your customers come from?",
+    "What colour is your shop painted inside?",
+    "What time is it?",
+    "How tall is the building?"
+   ],
+   "correct": 0,
+   "explain": "Customers’ origins.",
+   "tag": "Interviews"
+  },
+  {
+   "q": "Annotated photographs are…",
+   "options": [
+    "Qualitative",
+    "Quantitative",
+    "Secondary",
+    "Statistical"
+   ],
+   "correct": 0,
+   "explain": "Descriptive.",
+   "tag": "Photos"
+  },
+  {
+   "q": "What did we record with each photo?",
+   "options": [
+    "Weather and time of day",
+    "Wave frequency at the coast",
+    "Census data",
+    "Beach width"
+   ],
+   "correct": 0,
+   "explain": "Context.",
+   "tag": "Photos"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF06"] = {
+ "id": "IGRF06",
+ "topicNumber": 3,
+ "topicTitle": "Presenting, analysing and evaluating (IGCSE)",
+ "title": "Presenting rural fieldwork data",
+ "href": "/igcse/geography/learn/rural-fieldwork/l06-presenting-data",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Presenting rural data.",
+ "checklist": [
+  "I can describe the techniques used to present our data",
+  "I can choose appropriate techniques for different types of data",
+  "I can evaluate the strengths and limitations of each technique"
+ ],
+ "quiz": [
+  {
+   "q": "What do pie charts and divided bars show?",
+   "options": [
+    "Proportions or percentages",
+    "Exact locations of every shop",
+    "Changes over time",
+    "Interview opinions"
+   ],
+   "correct": 0,
+   "explain": "Parts of a whole.",
+   "tag": "Techniques"
+  },
+  {
+   "q": "How do you convert a percentage to degrees?",
+   "options": [
+    "Multiply by 3.6",
+    "Divide by 3.6",
+    "Multiply by 100",
+    "Add 360"
+   ],
+   "correct": 0,
+   "explain": "100% = 360°.",
+   "tag": "Techniques"
+  },
+  {
+   "q": "A limitation of pie charts here is…",
+   "options": [
+    "They hide the actual numbers",
+    "They show the exact locations of every village",
+    "They need a word cloud",
+    "They need random sampling"
+   ],
+   "correct": 0,
+   "explain": "Proportions only.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "What do proportional symbols maps show?",
+   "options": [
+    "Data and location together",
+    "Only the words used in interviews",
+    "Only percentages",
+    "Only photographs"
+   ],
+   "correct": 0,
+   "explain": "Sized symbols.",
+   "tag": "Techniques"
+  },
+  {
+   "q": "What should be proportional to the value?",
+   "options": [
+    "The circle area",
+    "The circle radius",
+    "The circle colour",
+    "The label size"
+   ],
+   "correct": 0,
+   "explain": "Use square roots.",
+   "tag": "Techniques"
+  },
+  {
+   "q": "A limitation of proportional symbols is…",
+   "options": [
+    "Symbols can overlap",
+    "They need no data",
+    "They are always qualitative",
+    "They show no location"
+   ],
+   "correct": 0,
+   "explain": "Hard to read.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Which presents qualitative interview data?",
+   "options": [
+    "Word cloud",
+    "Divided bar graph",
+    "Proportional symbols map",
+    "Pie chart of traffic"
+   ],
+   "correct": 0,
+   "explain": "Word frequency.",
+   "tag": "Techniques"
+  },
+  {
+   "q": "What does word size show in a word cloud?",
+   "options": [
+    "How often it was mentioned",
+    "How important the speaker was",
+    "The age of the speaker",
+    "The village size"
+   ],
+   "correct": 0,
+   "explain": "Frequency.",
+   "tag": "Techniques"
+  },
+  {
+   "q": "A limitation of annotated photos is…",
+   "options": [
+    "They can be selective",
+    "They show numbers exactly",
+    "They need a clicker",
+    "They show every building"
+   ],
+   "correct": 0,
+   "explain": "Photographer chooses.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Best way to compare services in 3 villages side by side?",
+   "options": [
+    "Divided bar graphs",
+    "A word cloud of interviews",
+    "One photograph",
+    "A risk assessment"
+   ],
+   "correct": 0,
+   "explain": "Same-length bars.",
+   "tag": "Choose"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRF07"] = {
+ "id": "IGRF07",
+ "topicNumber": 3,
+ "topicTitle": "Presenting, analysing and evaluating (IGCSE)",
+ "title": "Analysis, conclusions and evaluation",
+ "href": "/igcse/geography/learn/rural-fieldwork/l07-analysis-conclusions-evaluation",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Fieldwork: Analysis, conclusions and evaluation.",
+ "checklist": [
+  "I can describe and explain patterns and anomalies in the rural data",
+  "I can draw a conclusion and accept or reject the hypothesis",
+  "I can evaluate the reliability and accuracy of the enquiry and suggest improvements and extensions"
+ ],
+ "quiz": [
+  {
+   "q": "What does GCSE A stand for when describing?",
+   "options": [
+    "General, specific, anomaly",
+    "Graph, scale, axis",
+    "Group, sample, average, accuracy",
+    "Gradient, sand, area"
+   ],
+   "correct": 0,
+   "explain": "Describing framework.",
+   "tag": "Analysis"
+  },
+  {
+   "q": "What is an anomaly?",
+   "options": [
+    "A result that does not fit the pattern",
+    "The average of all the results",
+    "The most common result",
+    "A result that proves the hypothesis is correct"
+   ],
+   "correct": 0,
+   "explain": "Must be explained.",
+   "tag": "Analysis"
+  },
+  {
+   "q": "Why might a small village have many services?",
+   "options": [
+    "Tourists or a main road",
+    "It has a low population",
+    "It has no visitors",
+    "It has no road"
+   ],
+   "correct": 0,
+   "explain": "Extra customers.",
+   "tag": "Anomalies"
+  },
+  {
+   "q": "Why are high-order services only in larger villages?",
+   "options": [
+    "They need a larger threshold",
+    "They need fewer customers to survive",
+    "They are used every day",
+    "They have a short range"
+   ],
+   "correct": 0,
+   "explain": "Theory.",
+   "tag": "Explain"
+  },
+  {
+   "q": "What must a conclusion do?",
+   "options": [
+    "Answer the enquiry question",
+    "List all of the equipment used",
+    "Repeat the risk assessment",
+    "Describe the bus journey"
+   ],
+   "correct": 0,
+   "explain": "With evidence.",
+   "tag": "Conclusions"
+  },
+  {
+   "q": "Which finding supports the hypothesis?",
+   "options": [
+    "The largest village had most services",
+    "Two villages had exactly the same services",
+    "A small village had most shops",
+    "No village had services"
+   ],
+   "correct": 0,
+   "explain": "Size vs services.",
+   "tag": "Conclusions"
+  },
+  {
+   "q": "Why is a 2-minute count a limitation?",
+   "options": [
+    "It is only a snapshot",
+    "It is too accurate",
+    "It uses a clicker",
+    "It is qualitative data only"
+   ],
+   "correct": 0,
+   "explain": "May not be representative.",
+   "tag": "Evaluation"
+  },
+  {
+   "q": "How could counts be made more reliable?",
+   "options": [
+    "Repeat at different times and average",
+    "Count for only 10 seconds each time we visit",
+    "Count only once",
+    "Stop using a timer"
+   ],
+   "correct": 0,
+   "explain": "Repeat and mean.",
+   "tag": "Evaluation"
+  },
+  {
+   "q": "What is reliability?",
+   "options": [
+    "Same results if repeated",
+    "Closeness to the true value",
+    "Speed of data collection",
+    "Number of graphs drawn"
+   ],
+   "correct": 0,
+   "explain": "Repeatability.",
+   "tag": "Evaluation"
+  },
+  {
+   "q": "Which would extend the study?",
+   "options": [
+    "Visiting more villages and a town",
+    "Using fewer villages and only one site",
+    "Deleting anomalies",
+    "Removing the hypothesis"
+   ],
+   "correct": 0,
+   "explain": "Wider hierarchy.",
+   "tag": "Evaluation"
+  }
+ ]
+};

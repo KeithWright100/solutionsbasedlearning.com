@@ -23,6 +23,44 @@
   function linkLabel(type) { return LINK_LABELS[type] || 'Link'; }
   function isLinkType(type) { return LINK_TYPES.indexOf(type) !== -1; }
 
+  // Which lessons this page manages: 'ib' (/admin/resources/) or
+  // 'igcse' (/admin/igcse-resources/), set by data-scope on <body>.
+  // Both pages share the same API and storage — a resource is keyed
+  // only by lesson id, and IGCSE ids all start with "IG".
+  var SCOPE = (document.body.getAttribute('data-scope') || 'ib').toLowerCase();
+  var PAGE_PATH = SCOPE === 'igcse' ? '/admin/igcse-resources/' : '/admin/resources/';
+  function isIgcse(id, l) { return /^IG[A-Z]{2}\d/.test(id) || /^\/igcse\//.test((l && l.href) || ''); }
+  // Paper -> unit groups, in syllabus order. A lesson belongs to the
+  // first group whose URL prefix its href starts with.
+  var GROUPS = SCOPE === 'igcse' ? [
+    { paper: 'Paper 1', paperTitle: 'Physical Geography', unit: 'Coastal Environments', prefix: '/igcse/geography/learn/coastal-environments/' },
+    { paper: 'Paper 1', paperTitle: 'Physical Geography', unit: 'Hazardous Environments', prefix: '/igcse/geography/learn/hazardous-environments/' },
+    { paper: 'Paper 1', paperTitle: 'Physical Geography', unit: 'Coastal Fieldwork', prefix: '/igcse/geography/learn/coastal-fieldwork/' },
+    { paper: 'Paper 2', paperTitle: 'Human Geography', unit: 'Economic Activity and Energy', prefix: '/igcse/geography/learn/economic-activity-and-energy/' },
+    { paper: 'Paper 2', paperTitle: 'Human Geography', unit: 'Rural Environments', prefix: '/igcse/geography/learn/rural-environments/' },
+    { paper: 'Paper 2', paperTitle: 'Human Geography', unit: 'Rural Fieldwork', prefix: '/igcse/geography/learn/rural-fieldwork/' },
+    { paper: 'Paper 2', paperTitle: 'Human Geography', unit: 'Development and Human Welfare', prefix: '/igcse/geography/learn/development-and-human-welfare/' }
+  ] : [
+    { paper: 'Paper 1', paperTitle: 'Optional Themes', unit: 'Option A: Freshwater', prefix: '/geography/paper-1/option-a/' },
+    { paper: 'Paper 1', paperTitle: 'Optional Themes', unit: 'Option E: Leisure, Tourism and Sport', prefix: '/geography/paper-1/option-e/' },
+    { paper: 'Paper 1', paperTitle: 'Optional Themes', unit: 'Option F: Food and Health', prefix: '/geography/paper-1/option-f/' },
+    { paper: 'Paper 2', paperTitle: 'Core', unit: 'Unit 1: Changing Population', prefix: '/geography/paper-1/core-1/' },
+    { paper: 'Paper 2', paperTitle: 'Core', unit: 'Unit 2: Global Climate', prefix: '/geography/paper-1/core-2/' },
+    { paper: 'Paper 2', paperTitle: 'Core', unit: 'Unit 3: Resource Consumption and Security', prefix: '/geography/paper-1/core-3/' },
+    { paper: 'Paper 3', paperTitle: 'HL Core Extension', unit: 'Unit 4: Power, Places and Networks', prefix: '/geography/paper-2/hl-1/' },
+    { paper: 'Paper 3', paperTitle: 'HL Core Extension', unit: 'Unit 5: Human Development and Diversity', prefix: '/geography/paper-2/hl-2/' },
+    { paper: 'Paper 3', paperTitle: 'HL Core Extension', unit: 'Unit 6: Global Risks and Resilience', prefix: '/geography/paper-2/hl-3/' }
+  ];
+  var OTHER = { paper: 'Other', paperTitle: '', unit: 'Other lessons', prefix: '' };
+  GROUPS.forEach(function (g, i) { g.n = i; g.key = 'u' + i; });
+  OTHER.n = GROUPS.length; OTHER.key = 'u' + GROUPS.length;
+  function groupFor(href) {
+    href = (href || '').replace(/\/?$/, '/');
+    for (var i = 0; i < GROUPS.length; i++) if (href.indexOf(GROUPS[i].prefix) === 0) return GROUPS[i];
+    return OTHER;
+  }
+  var filter = { paper: '', unit: '' };
+
   var state = { lessons: [], resources: {} }; // resources: { "<lessonId>|<type>": {fileName, fileSize, uploadedAt} }
 
   var pageError = document.getElementById('pageError');
@@ -67,14 +105,14 @@
     .then(function (r) { return r.json(); })
     .then(function (data) {
       if (!data.loggedIn || data.user.role !== 'admin') {
-        window.location.href = '/login/?redirect=/admin/resources/';
+        window.location.href = '/login/?redirect=' + PAGE_PATH;
         return;
       }
       document.getElementById('adminName').textContent = data.user.fullName || data.user.email;
       loadData();
     })
     .catch(function () {
-      window.location.href = '/login/?redirect=/admin/resources/';
+      window.location.href = '/login/?redirect=' + PAGE_PATH;
     });
 
   document.getElementById('logoutBtn').addEventListener('click', function () {
@@ -86,12 +124,15 @@
   // ---- Load lesson manifest (from window.SBL_LESSONS, populated by
   // the lesson-data <script> tags on this page) + existing resources ----
   function loadData() {
-    var lessons = Object.keys(window.SBL_LESSONS || {}).map(function (id) {
+    var lessons = Object.keys(window.SBL_LESSONS || {}).filter(function (id) {
+      return isIgcse(id, window.SBL_LESSONS[id]) === (SCOPE === 'igcse');
+    }).map(function (id) {
       var l = window.SBL_LESSONS[id];
-      return { id: id, title: l.title, topicTitle: l.topicTitle || '', href: l.href || '' };
+      var g = groupFor(l.href);
+      return { id: id, title: l.title, topicTitle: (l.topicTitle || '').replace(/\s*\(IGCSE\)\s*$/, ''), href: l.href || '', group: g };
     });
     lessons.sort(function (a, b) {
-      return (a.href || a.id).localeCompare(b.href || b.id);
+      return (a.group.n - b.group.n) || (a.href || a.id).localeCompare(b.href || b.id);
     });
     state.lessons = lessons;
 
@@ -126,9 +167,18 @@
     emptyState.style.display = 'none';
 
     var html = '';
+    var lastGroup = null;
     state.lessons.forEach(function (lesson) {
-      html += '<tr data-lesson-row="' + escapeHtml(lesson.id) + '" data-search="' +
-        escapeHtml((lesson.title + ' ' + lesson.topicTitle).toLowerCase()) + '">';
+      var g = lesson.group;
+      if (g !== lastGroup) {
+        lastGroup = g;
+        var n = state.lessons.filter(function (x) { return x.group === g; }).length;
+        html += '<tr class="sbl-res-group" id="res-' + g.key + '" data-unit="' + g.key + '" data-paper="' + escapeHtml(g.paper) + '"><td colspan="' + (RESOURCE_TYPES.length + 1) + '">' +
+          '<span class="sbl-res-group__paper">' + escapeHtml(g.paper + (g.paperTitle ? ' \u00b7 ' + g.paperTitle : '')) + '</span>' +
+          '<span class="sbl-res-group__unit">' + escapeHtml(g.unit) + '</span><span class="sbl-res-group__n">' + n + ' lesson' + (n === 1 ? '' : 's') + '</span></td></tr>';
+      }
+      html += '<tr data-lesson-row="' + escapeHtml(lesson.id) + '" data-unit="' + g.key + '" data-paper="' + escapeHtml(g.paper) + '" data-search="' +
+        escapeHtml((lesson.title + ' ' + lesson.topicTitle + ' ' + g.unit + ' ' + g.paper).toLowerCase()) + '">';
       html += '<td class="sbl-res-lesson">' +
         (lesson.topicTitle ? '<span class="sbl-res-lesson__topic">' + escapeHtml(lesson.topicTitle) + '</span>' : '') +
         '<span class="sbl-res-lesson__title">' + escapeHtml(lesson.title) + '</span></td>';
@@ -146,6 +196,8 @@
       html += '</tr>';
     });
     body.innerHTML = html;
+    renderNav();
+    applyFilter();
     bindCellButtons(body);
   }
 
@@ -290,13 +342,68 @@
   }
 
   // ---- Filter ----
-  searchInput.addEventListener('input', function () {
+  searchInput.addEventListener('input', applyFilter);
+
+  // Rows shown = search match AND the chosen paper/unit. Unit header
+  // rows show only when at least one of their lessons is visible.
+  function applyFilter() {
     var q = searchInput.value.trim().toLowerCase();
+    var shown = {};
     body.querySelectorAll('tr[data-search]').forEach(function (row) {
-      var match = !q || row.getAttribute('data-search').indexOf(q) !== -1;
+      var match = (!q || row.getAttribute('data-search').indexOf(q) !== -1) &&
+        (!filter.paper || row.getAttribute('data-paper') === filter.paper) &&
+        (!filter.unit || row.getAttribute('data-unit') === filter.unit);
       row.classList.toggle('sbl-res-row--hidden', !match);
+      if (match) shown[row.getAttribute('data-unit')] = (shown[row.getAttribute('data-unit')] || 0) + 1;
     });
-  });
+    body.querySelectorAll('tr.sbl-res-group').forEach(function (row) {
+      row.classList.toggle('sbl-res-row--hidden', !shown[row.getAttribute('data-unit')]);
+    });
+    var total = Object.keys(shown).reduce(function (t, k) { return t + shown[k]; }, 0);
+    lessonCount.textContent = total + ' of ' + state.lessons.length + ' lessons';
+    var nav = document.getElementById('resNav');
+    if (nav) nav.querySelectorAll('[data-f]').forEach(function (b) {
+      var on = b.getAttribute('data-f') === (filter.unit ? 'unit:' + filter.unit : filter.paper ? 'paper:' + filter.paper : 'all');
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  // Paper / unit navigation: one column per paper with its units.
+  function renderNav() {
+    var nav = document.getElementById('resNav');
+    if (!nav || nav.getAttribute('data-built')) return;
+    var counts = {}; var papers = [];
+    state.lessons.forEach(function (l) { counts[l.group.key] = (counts[l.group.key] || 0) + 1; });
+    GROUPS.concat([OTHER]).forEach(function (g) {
+      if (!counts[g.key]) return;
+      var p = papers.filter(function (x) { return x.paper === g.paper; })[0];
+      if (!p) { p = { paper: g.paper, title: g.paperTitle, units: [] }; papers.push(p); }
+      p.units.push(g);
+    });
+    var h = '<button type="button" class="sbl-res-nav__all" data-f="all">All papers <span>' + state.lessons.length + '</span></button><div class="sbl-res-nav__grid">';
+    papers.forEach(function (p) {
+      var n = p.units.reduce(function (t, g) { return t + counts[g.key]; }, 0);
+      h += '<div class="sbl-res-nav__paper"><button type="button" class="sbl-res-nav__ph" data-f="paper:' + escapeHtml(p.paper) + '"><b>' + escapeHtml(p.paper) + '</b>' +
+        (p.title ? '<i>' + escapeHtml(p.title) + '</i>' : '') + '<span>' + n + '</span></button>';
+      p.units.forEach(function (g) {
+        h += '<button type="button" class="sbl-res-nav__unit" data-f="unit:' + g.key + '">' + escapeHtml(g.unit) + ' <span>' + counts[g.key] + '</span></button>';
+      });
+      h += '</div>';
+    });
+    nav.innerHTML = h + '</div>';
+    nav.setAttribute('data-built', '1');
+    nav.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-f]'); if (!b) return;
+      var f = b.getAttribute('data-f');
+      filter.paper = f.indexOf('paper:') === 0 ? f.slice(6) : '';
+      filter.unit = f.indexOf('unit:') === 0 ? f.slice(5) : '';
+      applyFilter();
+      var scroller = document.querySelector('.sbl-res-scroll');
+      if (scroller) scroller.scrollTop = 0;
+    });
+  }
+
 
   // ---- Upload flow ----
   // Step 1: ask for a signed upload URL. Step 2: PUT the file bytes

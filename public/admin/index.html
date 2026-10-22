@@ -54,6 +54,12 @@
   }
   .sbl-search-input::placeholder { color: var(--slate); }
   .sbl-search-input:focus { outline: 2px solid var(--teal, #2DE1CB); outline-offset: 1px; }
+  .sbl-quick { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:0.8rem; margin-bottom:1.6rem; }
+  .sbl-quick a { display:block; background:var(--navy-raised); border:1px solid var(--navy-line); border-radius:14px; padding:0.95rem 1.05rem; text-decoration:none; transition:border-color .15s, transform .15s; }
+  .sbl-quick a:hover, .sbl-quick a:focus-visible { border-color:var(--teal-bright); transform:translateY(-1px); }
+  .sbl-quick b { display:block; color:var(--white); font-family:var(--font-display); font-size:1rem; margin-bottom:0.25rem; }
+  .sbl-quick span { display:block; color:var(--slate); font-size:0.8rem; line-height:1.4; }
+  .sbl-quick i { font-style:normal; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); display:block; margin-bottom:0.35rem; }
 </style>
 </head>
 <body>
@@ -67,13 +73,21 @@
     </div>
     <div style="display:flex; gap:0.6rem;">
       <a href="/teacher/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Class Sheet</a>
-      <a href="/admin/resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Lesson Resources</a>
+      <a href="/admin/resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">IB Lesson Resources</a>
+      <a href="/admin/igcse-resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">IGCSE Lesson Resources</a>
       <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
     </div>
   </div>
 
   <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
   <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.5rem;"></div>
+
+  <nav class="sbl-quick" aria-label="Admin quick links">
+    <a href="/teacher/"><i>Teaching</i><b>Class Sheet</b><span>Student quiz, IB-style and past paper scores by lesson.</span></a>
+    <a href="/admin/resources/"><i>IB Geography</i><b>IB Lesson Resources</b><span>Slides, notes, workbooks, OneNote links, quizzes and PPQs for each IB lesson.</span></a>
+    <a href="/admin/igcse-resources/"><i>Edexcel IGCSE</i><b>IGCSE Lesson Resources</b><span>The same resource slots for every IGCSE Geography lesson.</span></a>
+    <a href="/igcse/geography/learn"><i>Edexcel IGCSE</i><b>IGCSE Learning Hub</b><span>Open the IGCSE lessons and past paper questions.</span></a>
+  </nav>
 
   <div class="sbl-tabs">
     <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>

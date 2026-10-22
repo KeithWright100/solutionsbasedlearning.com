@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson Resources — Admin Dashboard — Solutions Based Learning</title>
+<title>IB Lesson Resources — Admin Dashboard — Solutions Based Learning</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,25 +57,47 @@
   .sbl-res-sub { display: flex; flex-direction: column; gap: 0.3rem; }
   .sbl-res-sub + .sbl-res-sublabel { margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px dashed var(--navy-line); }
   .sbl-res-sublabel { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 0.3rem; }
+  /* Paper / unit navigation and group headings */
+  .sbl-res-nav { margin-bottom: 1.2rem; }
+  .sbl-res-nav button { font-family: inherit; cursor: pointer; }
+  .sbl-res-nav__all { background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 999px; color: var(--white); padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; }
+  .sbl-res-nav__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.8rem; }
+  .sbl-res-nav__paper { background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 14px; padding: 0.7rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .sbl-res-nav__ph { display: flex; align-items: baseline; gap: 0.5rem; background: none; border: 0; border-radius: 8px; color: var(--white); padding: 0.35rem 0.5rem; text-align: left; }
+  .sbl-res-nav__ph b { font-family: var(--font-display); font-size: 1.05rem; }
+  .sbl-res-nav__ph i { font-style: normal; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-bright); }
+  .sbl-res-nav__unit { background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px; color: var(--white); padding: 0.45rem 0.6rem; font-size: 0.82rem; text-align: left; display: flex; justify-content: space-between; gap: 0.5rem; }
+  .sbl-res-nav span { color: var(--slate); font-size: 0.72rem; font-family: 'IBM Plex Mono', monospace; margin-left: auto; }
+  .sbl-res-nav__all span { margin-left: 0.4rem; }
+  .sbl-res-nav__unit:hover, .sbl-res-nav__ph:hover, .sbl-res-nav__all:hover { border-color: var(--teal-bright); }
+  .sbl-res-nav .is-active { background: var(--teal, #2DE1CB); border-color: var(--teal, #2DE1CB); color: #04211d; }
+  .sbl-res-nav .is-active span, .sbl-res-nav .is-active i { color: #04211d; }
+  .sbl-res-group td { background: var(--navy) !important; padding: 0.75rem 1rem !important; border-top: 2px solid var(--teal-bright); }
+  .sbl-res-group__paper { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-bright); margin-right: 0.7rem; }
+  .sbl-res-group__unit { font-family: var(--font-display); font-size: 1rem; color: var(--white); font-weight: 700; }
+  .sbl-res-group__n { font-size: 0.75rem; color: var(--slate); margin-left: 0.7rem; }
 </style>
 </head>
-<body>
+<body data-scope="ib">
 <div class="sbl-contours" aria-hidden="true"></div>
 <div class="sbl-admin-shell">
 
   <div class="sbl-admin-header">
     <div>
-      <h1>Lesson Resources</h1>
+      <h1>IB Lesson Resources</h1>
       <p>Upload Lesson Slides, Lesson Notes, Student Workbooks, Quizzes and PPQs, and paste OneNote page and mark scheme links, for each IB Geography lesson &middot; signed in as <span id="adminName">…</span></p>
     </div>
     <div style="display:flex; gap:0.6rem;">
       <a href="/admin/" class="sbl-btn sbl-btn--secondary sbl-btn--small">&larr; Back to Dashboard</a>
+      <a href="/admin/igcse-resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">IGCSE Lesson Resources</a>
       <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
     </div>
   </div>
 
   <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
   <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.5rem;"></div>
+
+  <nav class="sbl-res-nav" id="resNav" aria-label="Papers and units"></nav>
 
   <div class="sbl-res-toolbar">
     <input type="text" class="sbl-res-search" id="lessonSearch" placeholder="Filter by lesson or topic&hellip;">
@@ -117,7 +139,6 @@
 <script src="/js/sbl-fh-lessons.js"></script>
 <script src="/js/sbl-unit4-lessons.js"></script>
 <script src="/js/sbl-gr-lessons.js"></script>
-<script src="/js/sbl-igcse-geo-lessons.js"></script>
 <script src="/js/sbl-admin-resources.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
