@@ -87,3 +87,27 @@ a.ig-card:hover { border-color: var(--lh-teal); transform: translateY(-2px); }
   .ig-terms dl { grid-template-columns: 1fr; }
   .ig-terms dd { margin-bottom: 6px; }
 }
+
+/* lesson focus: learning intention, syllabus statement, success criteria */
+.ig-focus { margin: 18px 0 8px; }
+.ig-li { border: 3px solid #ea7317; border-radius: 14px; padding: 12px 18px; text-align: center; background: var(--lh-surface); margin-bottom: 12px; }
+.ig-li h2, .ig-syl h2, .ig-sc h2 { font-family: var(--lh-font-display); font-size: 1.05rem; color: var(--lh-ink); margin: 0 0 4px; }
+.ig-li p { margin: 0; font-weight: 700; color: var(--lh-ink); }
+.ig-focus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ig-syl, .ig-sc { border: 3px solid #16a34a; border-radius: 14px; padding: 12px 16px; background: var(--lh-surface); }
+.ig-syl p { margin: 0 0 8px; color: var(--lh-ink); line-height: 1.5; }
+.ig-syl p + p { font-weight: 600; }
+.ig-sc-sub { margin: 0 0 6px; font-weight: 700; color: var(--lh-ink); }
+.ig-sc-sub span { font-weight: 500; color: var(--lh-muted); font-size: 0.82rem; margin-left: 6px; }
+.ig-sc ul { list-style: none; margin: 0; padding: 0; }
+.ig-sc li { margin: 6px 0; }
+.ig-sc label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; color: var(--lh-ink); line-height: 1.45; font-size: 0.93rem; }
+.ig-sc input { width: 18px; height: 18px; margin-top: 2px; accent-color: #16a34a; flex: none; }
+.ig-sc input:checked + span { color: var(--lh-muted); text-decoration: line-through; text-decoration-color: rgba(22,163,74,0.6); }
+.ig-sc-note { font-size: 0.78rem; color: var(--lh-muted); margin: 8px 0 0; }
+.ig-sc-tag { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #15803d; background: var(--lh-green-bg); border-radius: 999px; padding: 3px 9px; margin-bottom: 6px; }
+.ig-note { width: 100%; min-height: 90px; border-radius: 10px; border: 1px solid var(--lh-border); padding: 10px 12px; font: inherit; font-size: 0.93rem; line-height: 1.5; resize: vertical; margin-top: 4px; }
+.ig-matrix th { background: var(--lh-bg); }
+.ig-matrix td { text-align: center; font-size: 1rem; }
+.ig-checknote { font-size: 0.82rem; color: var(--lh-muted); font-style: italic; }
+@media (max-width: 720px) { .ig-focus-grid { grid-template-columns: 1fr; } }

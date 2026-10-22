@@ -4,80 +4,318 @@
    Spaced Retrieval only draws on lessons EARLIER in
    SBL_IGCSE_GEO_LESSON_ORDER (its own isolated order array). */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_IGCSE_GEO_LESSON_ORDER = ["IGCO01", "IGCO02", "IGCO03", "IGCO04", "IGCO05", "IGCO06"];
+window.SBL_IGCSE_GEO_LESSON_ORDER = ["IGCO01", "IGCO02", "IGCO03", "IGCO04", "IGCO05", "IGCO06", "IGCO07", "IGCO08", "IGCO09", "IGCO10", "IGCO11", "IGCO12", "IGCO13", "IGCO14", "IGCO15"];
 
 window.SBL_LESSONS["IGCO01"] = {
  "id": "IGCO01",
  "topicNumber": 1,
- "topicTitle": "Coastal Environments (IGCSE)",
- "title": "Coastal processes: waves, weathering and mass movement",
- "href": "/igcse/geography/learn/coastal-environments/l1-waves-and-weathering",
- "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Waves, weathering and mass movement.",
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "What are the characteristics of waves?",
+ "href": "/igcse/geography/learn/coastal-environments/l01-characteristics-of-waves",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Characteristics of waves.",
  "checklist": [
-  "I can explain how waves form and what affects their energy (wind, fetch, duration).",
-  "I can compare constructive and destructive waves.",
-  "I can describe types of weathering and mass movement on cliffs."
+  "I can describe and explain why coasts are important",
+  "I can describe the features of constructive and destructive waves, with reference to height, frequency, wavelength and the swash and backwash",
+  "I can describe and explain how waves break on the shoreline",
+  "I can explain how wind speed and fetch influence the size of waves"
  ],
  "quiz": [
   {
-   "q": "What creates most sea waves?",
+   "q": "Roughly what share of the world’s population lives within about 100 km of the coast?",
    "options": [
-    "Wind blowing over the surface of the sea",
-    "The pull of the Moon dragging water across the ocean floor",
-    "Earthquakes shaking the sea bed every few minutes",
-    "Rivers flowing into the sea"
-   ],
-   "correct": 0,
-   "explain": "Friction between wind and water creates waves. Tides are caused by the Moon; tsunamis by earthquakes.",
-   "tag": "Wave formation"
-  },
-  {
-   "q": "What is meant by the fetch of a wave?",
-   "options": [
-    "The height of a wave from trough to crest",
-    "The distance of open water the wind blows over",
-    "The time between two waves breaking on a beach",
-    "How far the swash travels up the beach"
+    "About 5%",
+    "About 40%",
+    "About 75%",
+    "Almost 100%"
    ],
    "correct": 1,
-   "explain": "A longer fetch allows the wind to transfer more energy, producing bigger waves.",
-   "tag": "Wave formation"
+   "explain": "Around 40% of people live near the coast, including many megacities.",
+   "tag": "Importance of coasts"
+  },
+  {
+   "q": "Which is a way that coastal ecosystems protect people?",
+   "options": [
+    "They absorb wave energy and reduce storm damage",
+    "They stop heavy rain from falling on coastal towns and farmland",
+    "They raise the height of the tide",
+    "They make waves travel faster towards the land"
+   ],
+   "correct": 0,
+   "explain": "Reefs, mangroves, dunes and beaches absorb wave energy.",
+   "tag": "Importance of coasts"
+  },
+  {
+   "q": "What is the frequency of a wave?",
+   "options": [
+    "Its height from trough to crest",
+    "The number of waves per minute",
+    "The distance between two crests",
+    "How far the swash travels"
+   ],
+   "correct": 1,
+   "explain": "Frequency is how many waves break per minute.",
+   "tag": "Wave features"
   },
   {
    "q": "Which describes a constructive wave?",
    "options": [
-    "High and steep with a strong backwash",
-    "Low and long with a strong swash",
-    "High and frequent, 10–14 per minute",
-    "Short wavelength with a weak swash"
+    "High and steep, with a strong backwash",
+    "Low and long, with a strong swash",
+    "High frequency, 10–14 per minute",
+    "Short wavelength and a weak swash"
    ],
    "correct": 1,
-   "explain": "Constructive waves have a strong swash that pushes material up the beach.",
-   "tag": "Wave types"
+   "explain": "Constructive waves have a strong swash that builds the beach up.",
+   "tag": "Wave features"
   },
   {
-   "q": "Why do destructive waves erode beaches?",
+   "q": "Why do destructive waves remove material from beaches?",
    "options": [
     "Their backwash is stronger than their swash",
-    "They only break at high tide",
-    "They carry no sediment at all",
+    "They only break when the tide is very low",
+    "They never carry any sediment at all",
     "Their swash is stronger than their backwash"
    ],
    "correct": 0,
-   "explain": "A strong backwash drags material back down the beach and offshore.",
-   "tag": "Wave types"
+   "explain": "A strong backwash drags material back down the beach.",
+   "tag": "Wave features"
   },
   {
-   "q": "When are destructive waves most common in the UK?",
+   "q": "In deep water, how does the water in a wave move?",
    "options": [
-    "During calm summer weather",
-    "During winter storms",
-    "Only at low tide",
-    "Only in sheltered bays"
+    "In a circular (orbital) motion",
+    "Straight forward towards the coast",
+    "Only up and down in a straight line",
+    "Backwards, away from the coast"
+   ],
+   "correct": 0,
+   "explain": "Energy moves forward, but the water itself moves in circles.",
+   "tag": "Breaking waves"
+  },
+  {
+   "q": "Why does a wave break as it reaches the shore?",
+   "options": [
+    "Friction slows its base, so the crest topples forward",
+    "The wind suddenly stops blowing as the wave nears the beach",
+    "Salt water becomes heavier in shallow water",
+    "The tide pulls the top of the wave backwards out to sea"
+   ],
+   "correct": 0,
+   "explain": "The base slows in shallow water while the top keeps going.",
+   "tag": "Breaking waves"
+  },
+  {
+   "q": "What happens to a wave as the water gets shallower?",
+   "options": [
+    "It becomes taller and steeper",
+    "It becomes longer and flatter",
+    "It gets faster and smaller",
+    "It stops moving completely"
+   ],
+   "correct": 0,
+   "explain": "The wavelength shortens and the wave height increases.",
+   "tag": "Breaking waves"
+  },
+  {
+   "q": "What is fetch?",
+   "options": [
+    "The distance of open water the wind blows over",
+    "The length of time that the wind has been blowing for",
+    "The height of a wave when it breaks",
+    "The speed at which a wave travels towards the coast"
+   ],
+   "correct": 0,
+   "explain": "A longer fetch means bigger waves.",
+   "tag": "Wind and fetch"
+  },
+  {
+   "q": "Which coast would receive the most powerful waves?",
+   "options": [
+    "An Atlantic-facing coast with a long fetch",
+    "A sheltered bay with a short fetch and calm winds",
+    "A small lake on a calm day",
+    "An estuary protected by a long spit and a salt marsh"
+   ],
+   "correct": 0,
+   "explain": "A long fetch and strong winds create large, powerful waves.",
+   "tag": "Wind and fetch"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO02"] = {
+ "id": "IGCO02",
+ "topicNumber": 1,
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "Processes of erosion, transportation and deposition",
+ "href": "/igcse/geography/learn/coastal-environments/l02-erosion-transportation-deposition",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Erosion, transportation and deposition.",
+ "checklist": [
+  "I can describe and explain the four processes of coastal erosion",
+  "I can describe and explain the four processes of coastal transportation",
+  "I can describe and explain the process of longshore drift",
+  "I can understand the meaning of coastal deposition"
+ ],
+ "quiz": [
+  {
+   "q": "Which erosion process involves air being compressed in cracks?",
+   "options": [
+    "Abrasion",
+    "Attrition",
+    "Hydraulic action",
+    "Solution"
+   ],
+   "correct": 2,
+   "explain": "Compressed air expands as the wave retreats, widening cracks.",
+   "tag": "Erosion"
+  },
+  {
+   "q": "What is abrasion?",
+   "options": [
+    "Rocks knocking into each other and becoming smaller",
+    "Sediment thrown at the cliff, wearing it away",
+    "Sea water dissolving chalk and limestone",
+    "Air pressure widening cracks in a cliff face"
    ],
    "correct": 1,
-   "explain": "Strong winter winds create high-energy, destructive waves.",
-   "tag": "Wave types"
+   "explain": "Abrasion works like sandpaper on the cliff.",
+   "tag": "Erosion"
+  },
+  {
+   "q": "Attrition makes pebbles:",
+   "options": [
+    "Larger and more angular",
+    "Smaller and more rounded",
+    "Dissolve completely into the sea",
+    "Stick together into new rock"
+   ],
+   "correct": 1,
+   "explain": "Collisions knock off corners.",
+   "tag": "Erosion"
+  },
+  {
+   "q": "Which rock is most affected by solution?",
+   "options": [
+    "Granite",
+    "Chalk",
+    "Basalt",
+    "Slate"
+   ],
+   "correct": 1,
+   "explain": "Chalk and limestone dissolve in slightly acidic water.",
+   "tag": "Erosion"
+  },
+  {
+   "q": "Which transport process rolls large boulders along the sea bed?",
+   "options": [
+    "Traction",
+    "Saltation",
+    "Suspension",
+    "Solution"
+   ],
+   "correct": 0,
+   "explain": "Traction moves the largest material.",
+   "tag": "Transportation"
+  },
+  {
+   "q": "How are pebbles bounced along the sea bed?",
+   "options": [
+    "Traction",
+    "Saltation",
+    "Suspension",
+    "Solution"
+   ],
+   "correct": 1,
+   "explain": "Saltation is a bouncing motion.",
+   "tag": "Transportation"
+  },
+  {
+   "q": "In longshore drift, which way does the backwash flow?",
+   "options": [
+    "At the same angle as the swash",
+    "Straight down the beach due to gravity",
+    "Along the beach in the direction of the wind",
+    "Up the beach towards the cliffs"
+   ],
+   "correct": 1,
+   "explain": "Gravity pulls the backwash straight down the beach.",
+   "tag": "Longshore drift"
+  },
+  {
+   "q": "What controls the direction of longshore drift?",
+   "options": [
+    "The time of the tides",
+    "The prevailing wind",
+    "The rock type of the cliffs",
+    "The depth of the sea bed"
+   ],
+   "correct": 1,
+   "explain": "Waves follow the prevailing wind.",
+   "tag": "Longshore drift"
+  },
+  {
+   "q": "What is deposition?",
+   "options": [
+    "When the sea drops material because it has lost energy",
+    "When waves wear away the base of a cliff by hydraulic action",
+    "When rocks are broken down by the weather",
+    "When material slides down a cliff under the pull of gravity"
+   ],
+   "correct": 0,
+   "explain": "Waves drop material when they cannot carry it any further.",
+   "tag": "Deposition"
+  },
+  {
+   "q": "Where is deposition most likely?",
+   "options": [
+    "On an exposed headland",
+    "In a sheltered bay",
+    "At the base of a cliff in a storm",
+    "Where the fetch is longest"
+   ],
+   "correct": 1,
+   "explain": "Bays spread wave energy out.",
+   "tag": "Deposition"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO03"] = {
+ "id": "IGCO03",
+ "topicNumber": 1,
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "Weathering and mass movement",
+ "href": "/igcse/geography/learn/coastal-environments/l03-weathering-and-mass-movement",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Weathering and mass movement.",
+ "checklist": [
+  "I can define weathering and mass movement",
+  "I can describe and explain the processes of mechanical, chemical and biological weathering",
+  "I can describe and explain the mass movement types of sliding and slumping"
+ ],
+ "quiz": [
+  {
+   "q": "What is weathering?",
+   "options": [
+    "The breakdown of rock in situ",
+    "The movement of sediment along a beach",
+    "The removal of rock by waves",
+    "The downhill movement of soil"
+   ],
+   "correct": 0,
+   "explain": "Weathering breaks rock down where it lies.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "What is mass movement?",
+   "options": [
+    "Downhill movement of material under gravity",
+    "The movement of sediment along the beach by longshore drift",
+    "The dissolving of rock by rain",
+    "The transport of sand inland by strong onshore winds"
+   ],
+   "correct": 0,
+   "explain": "Gravity drives mass movement.",
+   "tag": "Definitions"
   },
   {
    "q": "How does freeze–thaw weathering break rock?",
@@ -85,11 +323,11 @@ window.SBL_LESSONS["IGCO01"] = {
     "Salt crystals dissolve the rock chemically from the inside",
     "Water in cracks freezes, expands and widens them",
     "Plant roots push the rock apart",
-    "Rain slowly wears the surface of the rock away by friction"
+    "Rain wears the surface of the rock away by friction"
    ],
    "correct": 1,
-   "explain": "Water expands by about 9% when it freezes, putting pressure on the crack.",
-   "tag": "Weathering"
+   "explain": "Water expands by about 9% when it freezes.",
+   "tag": "Mechanical weathering"
   },
   {
    "q": "Which is an example of chemical weathering?",
@@ -100,255 +338,429 @@ window.SBL_LESSONS["IGCO01"] = {
     "Roots growing into a crack and splitting the rock"
    ],
    "correct": 0,
-   "explain": "Rainwater is a weak acid that dissolves calcium carbonate rocks.",
-   "tag": "Weathering"
+   "explain": "Rainwater is a weak carbonic acid.",
+   "tag": "Chemical weathering"
   },
   {
-   "q": "What is mass movement?",
+   "q": "What causes salt weathering?",
    "options": [
-    "The movement of sediment along a beach by longshore drift",
-    "The downhill movement of material under gravity",
-    "The breakdown of rock where it lies by the weather",
-    "The transport of sand by the wind"
+    "Salt crystals growing in cracks as sea spray evaporates",
+    "Salt water freezing into ice on the cliff top during cold winter nights",
+    "Salt making the sea water more acidic over time",
+    "Salt attracting animals that burrow into the cliff face"
    ],
-   "correct": 1,
-   "explain": "Mass movement includes rock falls, slumping and landslides.",
-   "tag": "Mass movement"
+   "correct": 0,
+   "explain": "Growing crystals force the rock apart.",
+   "tag": "Mechanical weathering"
   },
   {
-   "q": "Why is slumping common on clay cliffs after heavy rain?",
+   "q": "Which is an example of biological weathering?",
    "options": [
-    "Rain freezes inside the clay so that it splits apart",
-    "Rain makes the clay heavy and slippery so it slides",
-    "Rain dissolves the clay completely",
-    "Rain stops the waves from reaching the base of the cliff"
+    "Freeze–thaw in winter",
+    "Plant roots widening cracks",
+    "Rainwater dissolving limestone",
+    "Waves hitting the cliff"
    ],
    "correct": 1,
-   "explain": "Saturated clay is heavier and loses friction, so it slides along a curved slip surface.",
-   "tag": "Mass movement"
+   "explain": "Roots and burrowing animals break rock apart.",
+   "tag": "Biological weathering"
   },
   {
-   "q": "What happens to material that falls to the base of a cliff?",
+   "q": "What type of rock is most affected by slumping?",
    "options": [
-    "It always stays there and protects the base of the cliff for good",
-    "It is removed by the waves, so the cliff stays steep",
-    "It is turned straight into sand dunes",
-    "It is carried back up the cliff face by the swash"
+    "Hard granite",
+    "Soft clay",
+    "Resistant limestone",
+    "Solid basalt"
    ],
    "correct": 1,
-   "explain": "Waves clear the debris, exposing the cliff base to more erosion.",
+   "explain": "Saturated clay slides down a curved surface.",
+   "tag": "Slumping"
+  },
+  {
+   "q": "Why does heavy rain make slumping more likely?",
+   "options": [
+    "It makes the clay heavier and reduces friction",
+    "It freezes inside the clay so that the cliff splits apart",
+    "It dissolves the clay completely",
+    "It stops waves from reaching the base of the cliff"
+   ],
+   "correct": 0,
+   "explain": "Saturated material is heavier and slips more easily.",
+   "tag": "Slumping"
+  },
+  {
+   "q": "How is sliding different from slumping?",
+   "options": [
+    "Sliding moves along a flat slip plane; slumping is rotational",
+    "Sliding only happens underwater, while slumping happens on land",
+    "Sliding is caused by wind, slumping by waves",
+    "There is no real difference between the two processes"
+   ],
+   "correct": 0,
+   "explain": "Slumping happens on a curved surface; sliding on a flat plane.",
+   "tag": "Sliding"
+  },
+  {
+   "q": "What happens to the debris at the foot of a cliff after mass movement?",
+   "options": [
+    "It is removed by waves, so the cliff stays steep",
+    "It always stays there and protects the cliff for good",
+    "It turns straight into sand dunes",
+    "It is carried back up the cliff by the swash"
+   ],
+   "correct": 0,
+   "explain": "Waves remove the debris and the cycle repeats.",
    "tag": "Mass movement"
   }
  ]
 };
 
-window.SBL_LESSONS["IGCO02"] = {
- "id": "IGCO02",
+window.SBL_LESSONS["IGCO04"] = {
+ "id": "IGCO04",
  "topicNumber": 1,
- "topicTitle": "Coastal Environments (IGCSE)",
- "title": "Coastal erosion, transportation and deposition",
- "href": "/igcse/geography/learn/coastal-environments/l2-erosion-transport-deposition",
- "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Erosion, transportation and deposition.",
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "Geology, vegetation, people and sea level rise",
+ "href": "/igcse/geography/learn/coastal-environments/l04-geology-vegetation-people-sea-level",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Geology, vegetation, people and sea level.",
  "checklist": [
-  "I can explain the four processes of coastal erosion.",
-  "I can describe how sediment is transported, including longshore drift.",
-  "I can explain why deposition happens."
+  "I can define geology",
+  "I can describe and explain how rock structure influences the rate of erosion",
+  "I can describe and explain how vegetation influences weathering and erosion",
+  "I can describe and explain how numbers of people impact the natural coastline",
+  "I can explain how changes in the sea level can affect the coastline"
  ],
  "quiz": [
   {
-   "q": "Which erosion process involves air being forced into cracks?",
+   "q": "What is geology?",
    "options": [
-    "Abrasion (corrasion)",
-    "Attrition",
-    "Hydraulic action",
-    "Solution (corrosion)"
+    "The study of rocks: their type, structure and formation",
+    "The study of waves, tides and how they break on the coast",
+    "The study of plants growing on cliffs",
+    "The study of how people use and manage the coast"
    ],
-   "correct": 2,
-   "explain": "Compressed air expands as the wave retreats, widening cracks.",
-   "tag": "Erosion"
-  },
-  {
-   "q": "What is abrasion?",
-   "options": [
-    "Rocks knocking into each other and getting smaller",
-    "Sediment thrown at the cliff, wearing it away",
-    "Sea water dissolving chalk and limestone",
-    "Air pressure widening cracks in the cliff"
-   ],
-   "correct": 1,
-   "explain": "Abrasion works like sandpaper on the cliff face.",
-   "tag": "Erosion"
-  },
-  {
-   "q": "Attrition makes beach pebbles:",
-   "options": [
-    "Larger and more angular",
-    "Smaller and more rounded",
-    "Dissolve completely into the sea",
-    "Stick together into new rock"
-   ],
-   "correct": 1,
-   "explain": "Collisions knock off corners, so pebbles get smaller and rounder.",
-   "tag": "Erosion"
-  },
-  {
-   "q": "Which rock is most affected by solution?",
-   "options": [
-    "Granite",
-    "Chalk",
-    "Basalt",
-    "Sandstone"
-   ],
-   "correct": 1,
-   "explain": "Chalk and limestone (calcium carbonate) dissolve in slightly acidic water.",
-   "tag": "Erosion"
-  },
-  {
-   "q": "Which factor would increase the rate of cliff erosion?",
-   "options": [
-    "A wide beach in front of the cliff",
-    "Hard, resistant rock",
-    "Soft rock and powerful waves",
-    "A sheltered bay with calm water"
-   ],
-   "correct": 2,
-   "explain": "Soft rock and high-energy waves erode fastest; wide beaches absorb wave energy.",
-   "tag": "Erosion"
-  },
-  {
-   "q": "How is fine sand usually transported?",
-   "options": [
-    "Traction",
-    "Saltation",
-    "Suspension",
-    "Solution"
-   ],
-   "correct": 2,
-   "explain": "Fine material is carried in the water in suspension.",
-   "tag": "Transportation"
-  },
-  {
-   "q": "In longshore drift, which way does the backwash flow?",
-   "options": [
-    "At the same angle as the swash",
-    "Straight back down the beach due to gravity",
-    "Along the beach in the direction of the wind",
-    "Up the beach towards the cliff"
-   ],
-   "correct": 1,
-   "explain": "Gravity pulls the backwash straight down, at right angles to the coast.",
-   "tag": "Longshore drift"
-  },
-  {
-   "q": "What controls the direction of longshore drift?",
-   "options": [
-    "The tide times",
-    "The prevailing wind",
-    "The type of rock in the cliffs",
-    "The depth of the sea"
-   ],
-   "correct": 1,
-   "explain": "Waves follow the prevailing wind, so sediment moves in that direction.",
-   "tag": "Longshore drift"
-  },
-  {
-   "q": "When does deposition happen?",
-   "options": [
-    "When waves gain energy in a storm",
-    "When waves lose energy",
-    "Only at high tide",
-    "Only where cliffs are made of hard rock"
-   ],
-   "correct": 1,
-   "explain": "Waves drop material when they no longer have the energy to carry it.",
-   "tag": "Deposition"
-  },
-  {
-   "q": "Where is deposition most likely?",
-   "options": [
-    "On an exposed headland",
-    "In a sheltered bay",
-    "At the base of a steep cliff",
-    "In a storm with a long fetch"
-   ],
-   "correct": 1,
-   "explain": "Bays spread wave energy out, so material is dropped.",
-   "tag": "Deposition"
-  }
- ]
-};
-
-window.SBL_LESSONS["IGCO03"] = {
- "id": "IGCO03",
- "topicNumber": 1,
- "topicTitle": "Coastal Environments (IGCSE)",
- "title": "Landforms of coastal erosion",
- "href": "/igcse/geography/learn/coastal-environments/l3-landforms-of-erosion",
- "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Landforms of erosion.",
- "checklist": [
-  "I can explain how geology creates concordant and discordant coasts.",
-  "I can explain the formation of headlands and bays.",
-  "I can explain the formation of wave-cut platforms, caves, arches, stacks and stumps."
- ],
- "quiz": [
-  {
-   "q": "What is a discordant coast?",
-   "options": [
-    "Rock bands running parallel to the coast",
-    "Rock bands running at right angles to the coast",
-    "A coast made of a single type of rock, such as chalk",
-    "A coast with no headlands or bays"
-   ],
-   "correct": 1,
-   "explain": "Alternating hard and soft rock at right angles produces headlands and bays.",
+   "correct": 0,
+   "explain": "Geology is the study of rocks.",
    "tag": "Geology"
   },
   {
-   "q": "Why do bays form?",
+   "q": "Which rock would erode fastest?",
    "options": [
-    "Hard rock is eroded faster than soft rock",
-    "Soft rock is eroded faster than hard rock",
-    "Deposition builds them out into the sea",
-    "Rivers carve them out of headlands"
+    "Granite",
+    "Boulder clay",
+    "Basalt",
+    "Hard limestone"
    ],
    "correct": 1,
-   "explain": "Soft rock such as clay erodes quickly, leaving the hard rock as headlands.",
+   "explain": "Soft clay erodes quickly.",
+   "tag": "Rock structure"
+  },
+  {
+   "q": "Why do joints and faults increase erosion?",
+   "options": [
+    "They are lines of weakness that waves can exploit",
+    "They make the rock harder and more resistant to wave attack",
+    "They stop water from entering the rock",
+    "They reflect waves back out to sea before they break"
+   ],
+   "correct": 0,
+   "explain": "Hydraulic action widens cracks.",
+   "tag": "Rock structure"
+  },
+  {
+   "q": "How does marram grass protect sand dunes?",
+   "options": [
+    "Its roots bind the sand together",
+    "It makes the sand heavier and wetter",
+    "It attracts animals that dig the sand away",
+    "It reflects waves back out to sea"
+   ],
+   "correct": 0,
+   "explain": "Roots stabilise the dunes.",
+   "tag": "Vegetation"
+  },
+  {
+   "q": "How can vegetation increase weathering?",
+   "options": [
+    "Roots grow into cracks and widen them",
+    "Leaves keep the cliff completely dry",
+    "Plants stop all rain reaching the rock",
+    "Vegetation lowers the sea level"
+   ],
+   "correct": 0,
+   "explain": "This is biological weathering.",
+   "tag": "Vegetation"
+  },
+  {
+   "q": "How can building on a cliff top increase mass movement?",
+   "options": [
+    "It adds weight and increases surface run-off",
+    "It makes the cliff top lighter, drier and more stable",
+    "It stops waves reaching the cliff base",
+    "It plants extra vegetation that holds the slope together"
+   ],
+   "correct": 0,
+   "explain": "Extra weight and water make collapse more likely.",
+   "tag": "People"
+  },
+  {
+   "q": "How can coastal defences affect other places?",
+   "options": [
+    "They can starve beaches further along of sediment",
+    "They always increase the supply of sediment everywhere along the coast",
+    "They stop the tide along the whole coast",
+    "They have no effect beyond where they are built"
+   ],
+   "correct": 0,
+   "explain": "Trapping sediment in one place reduces supply elsewhere.",
+   "tag": "People"
+  },
+  {
+   "q": "What is a eustatic change in sea level?",
+   "options": [
+    "A global change in the volume of ocean water",
+    "The land slowly rising up after the weight of an ice sheet melts",
+    "Daily changes caused by the tides",
+    "Waves becoming larger in a storm"
+   ],
+   "correct": 0,
+   "explain": "Eustatic change is global, e.g. melting ice or warming water.",
+   "tag": "Sea level"
+  },
+  {
+   "q": "Which is an effect of rising sea levels on the coast?",
+   "options": [
+    "More flooding and erosion",
+    "More raised beaches forming",
+    "Less salt water in farmland",
+    "Wider beaches everywhere"
+   ],
+   "correct": 0,
+   "explain": "Higher seas reach further inland.",
+   "tag": "Sea level"
+  },
+  {
+   "q": "Which country is especially vulnerable to sea level rise?",
+   "options": [
+    "Switzerland",
+    "The Maldives",
+    "Mongolia",
+    "Nepal"
+   ],
+   "correct": 1,
+   "explain": "Low-lying island nations are most at risk.",
+   "tag": "Sea level"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO05"] = {
+ "id": "IGCO05",
+ "topicNumber": 1,
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "Role of erosion and deposition in creating coastal landforms – Part 1",
+ "href": "/igcse/geography/learn/coastal-environments/l05-headlands-bays-coves",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Landforms 1: headlands, bays and coves.",
+ "checklist": [
+  "I can describe and explain how headlands and bays are created",
+  "I can describe and explain how coves are formed",
+  "I can describe and explain the difference between discordant and concordant coastlines"
+ ],
+ "quiz": [
+  {
+   "q": "Why do bays form?",
+   "options": [
+    "Soft rock is eroded faster than hard rock",
+    "Hard rock is eroded faster than soft rock",
+    "Deposition builds land out into the sea",
+    "Rivers carve inlets into the cliffs"
+   ],
+   "correct": 0,
+   "explain": "Soft rock erodes quickly; hard rock is left as headlands.",
    "tag": "Headlands and bays"
   },
   {
    "q": "Why is a beach often found in a bay?",
    "options": [
-    "Bays receive the most wave energy",
-    "Waves lose energy in the sheltered bay and deposit sediment",
-    "Cliffs in bays are always made of loose sand",
-    "Longshore drift is much stronger inside bays than anywhere else on the coast"
+    "Bays receive the most powerful waves",
+    "Waves lose energy in the sheltered bay and deposit sand",
+    "Cliffs in bays are always made of sand",
+    "Longshore drift is much stronger inside bays than elsewhere"
    ],
    "correct": 1,
-   "explain": "Wave energy is spread out in a bay, so material is deposited.",
+   "explain": "Wave energy is spread out in bays.",
    "tag": "Headlands and bays"
   },
   {
-   "q": "Which landform is Lulworth Cove an example of?",
+   "q": "Why do headlands receive more erosion once formed?",
    "options": [
-    "A stack on a discordant coast",
-    "A cove on a concordant coast",
-    "A spit at a river mouth",
-    "An arch in a chalk headland"
+    "They stick out into the sea and receive more wave energy",
+    "They are made of softer rock than the bays beside them",
+    "They are protected by wide sandy beaches that absorb energy",
+    "Longshore drift deposits sand on them"
+   ],
+   "correct": 0,
+   "explain": "Waves concentrate their energy on headlands.",
+   "tag": "Headlands and bays"
+  },
+  {
+   "q": "What is a cove?",
+   "options": [
+    "A small, rounded bay with a narrow entrance",
+    "A ridge of sand joining an island to the land",
+    "A pillar of rock separated from the cliff",
+    "A flat rocky area exposed at low tide"
+   ],
+   "correct": 0,
+   "explain": "Coves form where hard rock is breached.",
+   "tag": "Coves"
+  },
+  {
+   "q": "What has to happen for a cove to form?",
+   "options": [
+    "The sea breaks through a band of hard rock",
+    "A spit grows right across the mouth of a river estuary",
+    "A stack collapses into a stump",
+    "Sand dunes grow at the back of a beach"
+   ],
+   "correct": 0,
+   "explain": "Once breached, the soft rock behind erodes quickly.",
+   "tag": "Coves"
+  },
+  {
+   "q": "Lulworth Cove is an example of a landform on a:",
+   "options": [
+    "Concordant coast",
+    "Discordant coast",
+    "Depositional coast",
+    "Coral coast"
+   ],
+   "correct": 0,
+   "explain": "The rock bands run parallel to the coast.",
+   "tag": "Coves"
+  },
+  {
+   "q": "On a discordant coast, rock bands run:",
+   "options": [
+    "At right angles to the coast",
+    "Parallel to the coast",
+    "Only underneath the sea bed, out of sight",
+    "In circles around the bays and headlands"
+   ],
+   "correct": 0,
+   "explain": "Alternating rocks meet the sea at right angles.",
+   "tag": "Discordant and concordant"
+  },
+  {
+   "q": "What kind of coastline does a discordant coast produce?",
+   "options": [
+    "An irregular coast of headlands and bays",
+    "A perfectly straight coast with no inlets",
+    "A coast made only of sand dunes",
+    "A coast with no cliffs at all"
+   ],
+   "correct": 0,
+   "explain": "Different erosion rates create an indented coast.",
+   "tag": "Discordant and concordant"
+  },
+  {
+   "q": "Swanage Bay lies between which two headlands?",
+   "options": [
+    "Ballard Point and Durlston Head",
+    "Spurn Head and Flamborough Head",
+    "Old Harry and Durdle Door",
+    "Mappleton and Hornsea"
+   ],
+   "correct": 0,
+   "explain": "Chalk at Ballard Point and limestone at Durlston Head.",
+   "tag": "Case study"
+  },
+  {
+   "q": "On a concordant coast, what protects the soft rock?",
+   "options": [
+    "A band of hard rock running parallel to the sea",
+    "A wide spit built across the front of the bay",
+    "Coral reefs growing offshore",
+    "Groynes and sea walls built along the whole beach"
+   ],
+   "correct": 0,
+   "explain": "The hard outer band shields the softer rock.",
+   "tag": "Discordant and concordant"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO06"] = {
+ "id": "IGCO06",
+ "topicNumber": 1,
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "Role of erosion and deposition in creating coastal landforms – Part 2",
+ "href": "/igcse/geography/learn/coastal-environments/l06-cliffs-caves-arches-stacks",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Landforms 2: cliffs, caves, arches, stacks.",
+ "checklist": [
+  "I can apply and use relevant terminology related to types of erosion, including hydraulic action, abrasion, attrition and solution (corrosion)",
+  "I can describe and explain how erosion creates wave-cut notches and wave-cut platforms",
+  "I can describe and explain how erosion creates cracks, caves, arches, stacks and stumps"
+ ],
+ "quiz": [
+  {
+   "q": "Which term describes waves forcing air into cracks?",
+   "options": [
+    "Hydraulic action",
+    "Abrasion",
+    "Attrition",
+    "Solution"
+   ],
+   "correct": 0,
+   "explain": "Air pressure widens the cracks.",
+   "tag": "Erosion terms"
+  },
+  {
+   "q": "Which term describes pebbles being thrown at a cliff?",
+   "options": [
+    "Attrition",
+    "Abrasion",
+    "Solution",
+    "Traction"
    ],
    "correct": 1,
-   "explain": "The sea broke through resistant limestone and eroded the softer rock behind.",
-   "tag": "Geology"
+   "explain": "Abrasion is like sandpaper.",
+   "tag": "Erosion terms"
+  },
+  {
+   "q": "What is solution (corrosion)?",
+   "options": [
+    "Acidic sea water dissolving chalk or limestone",
+    "Rocks colliding with each other and becoming smaller and rounder",
+    "Air pressure breaking open cracks",
+    "Sediment rolling along the sea bed"
+   ],
+   "correct": 0,
+   "explain": "Soluble rocks are dissolved.",
+   "tag": "Erosion terms"
   },
   {
    "q": "Where does a wave-cut notch form?",
    "options": [
-    "At the very top of the cliff, where rain falls",
-    "Between high and low tide at the cliff base",
-    "On the beach behind the highest berm",
-    "Under the sea far offshore"
+    "At the cliff base between high and low tide",
+    "At the very top of the cliff where rain falls",
+    "Behind the highest berm on the beach",
+    "Far offshore on the sea bed"
    ],
-   "correct": 1,
-   "explain": "Waves concentrate their erosion at the base of the cliff, between the tide levels.",
+   "correct": 0,
+   "explain": "Erosion is concentrated at the cliff base.",
+   "tag": "Wave-cut platforms"
+  },
+  {
+   "q": "What happens after a cliff is undercut?",
+   "options": [
+    "The overhanging cliff collapses",
+    "The cliff grows taller as sediment builds up",
+    "A spit forms at its base",
+    "The waves stop reaching it"
+   ],
+   "correct": 0,
+   "explain": "Unsupported rock falls under gravity.",
    "tag": "Wave-cut platforms"
   },
   {
@@ -356,11 +768,23 @@ window.SBL_LESSONS["IGCO03"] = {
    "options": [
     "A spit",
     "A wave-cut platform",
-    "A tombolo joining an island",
+    "A tombolo",
     "A salt marsh"
    ],
    "correct": 1,
-   "explain": "The gently sloping rocky platform is exposed at low tide.",
+   "explain": "The rocky platform is exposed at low tide.",
+   "tag": "Wave-cut platforms"
+  },
+  {
+   "q": "Why does the retreat of a cliff slow down over time?",
+   "options": [
+    "A wider platform makes waves lose energy before reaching the cliff",
+    "The cliff becomes made of softer and softer rock",
+    "The tide stops reaching the cliff",
+    "The fetch gets longer and the waves become far more powerful"
+   ],
+   "correct": 0,
+   "explain": "Waves break further out on the platform.",
    "tag": "Wave-cut platforms"
   },
   {
@@ -372,163 +796,153 @@ window.SBL_LESSONS["IGCO03"] = {
     "Stack, arch, cave, crack, stump"
    ],
    "correct": 1,
-   "explain": "A crack widens into a cave, then an arch, which collapses to a stack, then a stump.",
-   "tag": "Cave to stump"
+   "explain": "Crack → cave → arch → stack → stump.",
+   "tag": "Caves to stumps"
   },
   {
-   "q": "What causes an arch to become a stack?",
+   "q": "What turns an arch into a stack?",
    "options": [
-    "Deposition fills the arch with sand",
-    "The roof of the arch collapses",
-    "The sea level falls",
-    "Plants grow over the arch"
+    "The arch roof collapses",
+    "Sand is deposited and fills the arch",
+    "Sea level falls",
+    "Plants grow over it and pull it down"
    ],
-   "correct": 1,
-   "explain": "Erosion widens the arch until the roof is unsupported and falls.",
-   "tag": "Cave to stump"
+   "correct": 0,
+   "explain": "The roof is weakened until it falls.",
+   "tag": "Caves to stumps"
   },
   {
-   "q": "Old Harry Rocks in Dorset are an example of:",
+   "q": "Durdle Door in Dorset is an example of:",
    "options": [
+    "An arch",
+    "A stack",
     "A spit",
-    "Stacks and a stump",
-    "A wave-cut notch and platform",
-    "A bay"
+    "A cove"
    ],
-   "correct": 1,
-   "explain": "They are chalk stacks at the end of Handfast Point.",
+   "correct": 0,
+   "explain": "It is a limestone arch.",
    "tag": "Case study"
-  },
-  {
-   "q": "Why do headlands experience more erosion once they have formed?",
-   "options": [
-    "They are made of softer rock than the bays beside them",
-    "They stick out and receive more wave energy",
-    "They are protected by wide beaches",
-    "Longshore drift deposits sand on them"
-   ],
-   "correct": 1,
-   "explain": "Waves wrap around and concentrate their energy on the headland.",
-   "tag": "Headlands and bays"
   }
  ]
 };
 
-window.SBL_LESSONS["IGCO04"] = {
- "id": "IGCO04",
+window.SBL_LESSONS["IGCO07"] = {
+ "id": "IGCO07",
  "topicNumber": 1,
- "topicTitle": "Coastal Environments (IGCSE)",
- "title": "Landforms of coastal deposition",
- "href": "/igcse/geography/learn/coastal-environments/l4-landforms-of-deposition",
- "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Landforms of deposition.",
+ "topicTitle": "2.1 Coastal processes and landforms (IGCSE)",
+ "title": "Role of erosion and deposition in creating coastal landforms – Part 3",
+ "href": "/igcse/geography/learn/coastal-environments/l07-beaches-spits-bars",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Landforms 3: beaches, spits, bars, tombolos.",
  "checklist": [
-  "I can explain how beaches form and why their profiles change.",
-  "I can explain the formation of spits.",
-  "I can explain the formation of bars and tombolos."
+  "I can define what a beach is and describe the different types of beaches",
+  "I can define what a spit is",
+  "I can describe the conditions required for a spit to develop",
+  "I can explain how a spit is formed",
+  "I can describe and explain the formation of bars and tombolos"
  ],
  "quiz": [
   {
-   "q": "Why are shingle beaches usually steeper than sandy beaches?",
+   "q": "What is a beach?",
    "options": [
-    "Water drains quickly through pebbles, so the backwash is weak",
-    "Pebbles are lighter than sand grains, so waves throw them higher up",
-    "Shingle beaches only form in winter",
-    "Sand is always deposited on top of pebbles"
+    "An accumulation of sand and shingle on the coast",
+    "A ridge of sand and shingle joining an island to the mainland",
+    "A rocky platform exposed at low tide",
+    "A wall built across the beach to stop longshore drift"
    ],
    "correct": 0,
-   "explain": "A weak backwash cannot drag the pebbles back down, so they pile up steeply.",
+   "explain": "Beaches are deposits of sand and shingle.",
    "tag": "Beaches"
   },
   {
-   "q": "What is a berm?",
+   "q": "Why are shingle beaches usually steeper than sandy ones?",
    "options": [
-    "A ridge on a beach marking a high tide line",
-    "A wooden wall built across the beach to stop longshore drift",
-    "A small cave at the base of a cliff",
-    "A pool of water behind a bar"
+    "Water drains through the pebbles, so the backwash is weak",
+    "Pebbles are lighter than sand, so waves throw them higher up",
+    "Shingle beaches only form in the winter months",
+    "Sand always lies on top of pebbles"
    ],
    "correct": 0,
-   "explain": "Berms are ridges of sand or shingle left by high tides.",
+   "explain": "A weak backwash leaves the pebbles piled up.",
    "tag": "Beaches"
   },
   {
-   "q": "How do beaches usually change in winter?",
+   "q": "What is a spit?",
    "options": [
-    "They grow wider and flatter",
-    "They become narrower and steeper as storm waves remove material",
-    "They turn into salt marshes as mud is deposited in the calm winter weather",
-    "They are not affected by the seasons"
+    "A narrow ridge of sediment attached to the land at one end",
+    "A ridge of sediment joining two headlands right across a bay",
+    "An isolated pillar of rock in the sea",
+    "A small rounded bay"
    ],
-   "correct": 1,
-   "explain": "Destructive winter waves drag sediment offshore.",
-   "tag": "Beaches"
+   "correct": 0,
+   "explain": "Spits stick out from the land.",
+   "tag": "Spits"
+  },
+  {
+   "q": "Which condition is needed for a spit to form?",
+   "options": [
+    "A change in the direction of the coastline",
+    "A coastline made only of hard, resistant granite cliffs",
+    "A very strong river current",
+    "No longshore drift at all along the coast"
+   ],
+   "correct": 0,
+   "explain": "Sediment is deposited where the coast changes direction.",
+   "tag": "Spit conditions"
   },
   {
    "q": "Which process supplies sediment to a spit?",
    "options": [
-    "Freeze–thaw weathering",
     "Longshore drift",
-    "Hydraulic action",
-    "Slumping"
-   ],
-   "correct": 1,
-   "explain": "Sediment is carried along the coast by longshore drift until it is deposited.",
-   "tag": "Spits"
-  },
-  {
-   "q": "Why is sediment deposited where a spit begins?",
-   "options": [
-    "The coast changes direction and the water is calmer",
-    "The waves become more powerful there because the fetch is longer",
-    "The cliffs are made of harder rock there",
-    "The tide never reaches that point"
+    "Freeze–thaw",
+    "Slumping",
+    "Hydraulic action"
    ],
    "correct": 0,
-   "explain": "At a bend in the coast the water loses energy and drops its load.",
-   "tag": "Spits"
+   "explain": "Longshore drift moves sediment along the coast.",
+   "tag": "Spit formation"
   },
   {
    "q": "What causes the recurved end of a spit?",
    "options": [
-    "A river depositing mud on it",
     "Changes in wind and wave direction",
-    "Plants growing on the sand and pulling it round",
-    "People building groynes"
+    "A river depositing mud on the end of it",
+    "Plants pulling the sand round",
+    "People building groynes along the spit"
    ],
-   "correct": 1,
-   "explain": "Secondary winds and waves curve the end of the spit.",
-   "tag": "Spits"
+   "correct": 0,
+   "explain": "Secondary winds curve the tip.",
+   "tag": "Spit formation"
   },
   {
-   "q": "What forms in the sheltered water behind a spit?",
+   "q": "What forms behind a spit?",
    "options": [
-    "A wave-cut platform",
     "A salt marsh",
+    "A wave-cut platform",
     "A stack",
     "A coral reef"
    ],
-   "correct": 1,
-   "explain": "Calm water lets fine mud settle and salt-tolerant plants colonise.",
-   "tag": "Spits"
+   "correct": 0,
+   "explain": "Calm water lets mud settle.",
+   "tag": "Spit formation"
   },
   {
    "q": "What is a bar?",
    "options": [
-    "A rocky platform left behind by a retreating cliff",
     "A ridge of sediment across a bay, trapping a lagoon",
+    "A rocky platform left behind by a retreating cliff",
     "A ridge of sand joining an offshore island to the mainland",
     "A sand dune at the back of the beach"
    ],
-   "correct": 1,
-   "explain": "When a spit joins two headlands it becomes a bar, e.g. Slapton Ley.",
+   "correct": 0,
+   "explain": "E.g. Slapton Ley.",
    "tag": "Bars and tombolos"
   },
   {
-   "q": "Chesil Beach in Dorset is an example of:",
+   "q": "Chesil Beach is an example of:",
    "options": [
     "A spit",
     "A tombolo",
-    "A stack and stump",
+    "A stack",
     "A cove"
    ],
    "correct": 1,
@@ -536,288 +950,1113 @@ window.SBL_LESSONS["IGCO04"] = {
    "tag": "Bars and tombolos"
   },
   {
-   "q": "Where does the sediment that forms Spurn Head come from?",
+   "q": "Where does Spurn Head’s sediment come from?",
    "options": [
-    "Eroded boulder-clay cliffs of Holderness",
-    "Coral reefs growing in the warm North Sea",
+    "Eroding boulder-clay cliffs of Holderness",
+    "Coral reefs growing in the warm, shallow North Sea",
     "Rivers in the Lake District",
-    "Chalk headlands and stacks on the Dorset coast"
+    "Chalk stacks on the Dorset coast"
    ],
    "correct": 0,
-   "explain": "Material eroded from Holderness is carried south by longshore drift.",
+   "explain": "Longshore drift carries it south.",
    "tag": "Case study"
   }
  ]
 };
 
-window.SBL_LESSONS["IGCO05"] = {
- "id": "IGCO05",
- "topicNumber": 1,
- "topicTitle": "Coastal Environments (IGCSE)",
- "title": "Coastal ecosystems: dunes, salt marshes, mangroves and coral reefs",
- "href": "/igcse/geography/learn/coastal-environments/l5-coastal-ecosystems",
- "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Coastal ecosystems.",
+window.SBL_LESSONS["IGCO08"] = {
+ "id": "IGCO08",
+ "topicNumber": 2,
+ "topicTitle": "2.2 Coastal ecosystems (IGCSE)",
+ "title": "Distinctive ecosystems develop along particular stretches of coastline",
+ "href": "/igcse/geography/learn/coastal-environments/l08-coastal-ecosystems",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Coastal ecosystems: distribution and value.",
  "checklist": [
-  "I can describe the global distribution of coral reefs and mangroves.",
-  "I can explain how plants and animals are adapted to coastal ecosystems.",
-  "I can explain the value of coastal ecosystems and the threats they face."
+  "I can define the following ecosystems: coral reefs, mangroves, sand dunes and salt marshes",
+  "I can describe the global distribution of these ecosystems",
+  "I can explain the reasons for the distribution of these four types of coastal ecosystems",
+  "I can explain the value of each ecosystem"
  ],
  "quiz": [
   {
-   "q": "Which plant is a pioneer species on sand dunes?",
+   "q": "What is a mangrove?",
    "options": [
-    "Marram grass",
-    "Cordgrass",
-    "Mangrove",
-    "English oak tree"
+    "Salt-tolerant trees growing in tropical intertidal mud",
+    "An underwater ridge built by coral polyps in warm, clear seas",
+    "A hill of wind-blown sand at the back of a beach",
+    "A ridge of sand joining an island to the mainland"
    ],
    "correct": 0,
-   "explain": "Marram grass has long roots and rolled leaves to survive dry, salty conditions.",
-   "tag": "Sand dunes"
+   "explain": "Mangroves grow on muddy tropical coasts.",
+   "tag": "Definitions"
   },
   {
-   "q": "How does marram grass reduce water loss?",
+   "q": "What builds coral reefs?",
    "options": [
-    "It has rolled leaves",
-    "It grows only in winter",
-    "It has floating roots",
-    "It sheds its leaves every day"
+    "Tiny animals called coral polyps",
+    "Sand blown inland from the beach by the wind",
+    "Mud deposited by rivers",
+    "Salt-tolerant grasses"
    ],
    "correct": 0,
-   "explain": "Rolled leaves reduce the surface area exposed to drying winds.",
-   "tag": "Sand dunes"
+   "explain": "Polyps build calcium carbonate skeletons.",
+   "tag": "Definitions"
   },
   {
-   "q": "Where do salt marshes usually form?",
-   "options": [
-    "On exposed rocky headlands battered by waves",
-    "In sheltered, calm water behind spits or in estuaries",
-    "On the top of chalk cliffs",
-    "On coral reefs far offshore"
-   ],
-   "correct": 1,
-   "explain": "Calm water allows fine mud to settle.",
-   "tag": "Salt marshes"
-  },
-  {
-   "q": "Between which latitudes are most mangroves and coral reefs found?",
+   "q": "Between which latitudes are most coral reefs found?",
    "options": [
     "About 30°N and 30°S",
-    "About 60°N and 90°N",
-    "Only on the Equator",
-    "About 40°S and 70°S"
+    "About 50°N and 70°N",
+    "Only near the poles",
+    "About 40°S and 60°S"
    ],
    "correct": 0,
-   "explain": "Both need the warm conditions of tropical and subtropical coasts.",
+   "explain": "Reefs need warm water.",
    "tag": "Distribution"
   },
   {
-   "q": "What are pneumatophores?",
+   "q": "Which country has the largest area of mangroves?",
    "options": [
-    "Breathing roots that stick up out of the mud",
-    "Tiny animals that build up coral reefs over time",
-    "Plants that colonise sand dunes first",
-    "Ridges at the top of a beach"
+    "Indonesia",
+    "Iceland",
+    "Canada",
+    "Egypt"
    ],
    "correct": 0,
-   "explain": "They let mangrove roots get oxygen in waterlogged mud.",
-   "tag": "Mangroves"
+   "explain": "Indonesia has the most mangroves.",
+   "tag": "Distribution"
   },
   {
-   "q": "Which is a major threat to mangrove forests?",
+   "q": "Where are salt marshes most typical?",
    "options": [
-    "Clearance for shrimp farms",
-    "Too much freeze–thaw weathering",
-    "Coral bleaching",
-    "Longshore drift"
+    "Sheltered temperate coasts such as the UK",
+    "Exposed tropical headlands",
+    "The middle of hot deserts far from the sea",
+    "Deep ocean floors well away from any coastline"
    ],
    "correct": 0,
-   "explain": "Large areas have been cleared for aquaculture and agriculture.",
-   "tag": "Mangroves"
+   "explain": "They form in calm, temperate estuaries.",
+   "tag": "Distribution"
   },
   {
-   "q": "Why do coral reefs need clear, shallow water?",
+   "q": "Why are coral reefs rarely found near large river mouths?",
    "options": [
-    "So that sunlight can reach the algae living in the coral",
-    "So that waves can break over them",
-    "Because coral cannot survive in salty water at all",
-    "So that large fish cannot swim down to reach them and feed"
-   ],
-   "correct": 0,
-   "explain": "The algae photosynthesise and provide food for the coral polyps.",
-   "tag": "Coral reefs"
-  },
-  {
-   "q": "What is coral bleaching?",
-   "options": [
-    "Stressed coral expelling its algae and turning white",
-    "Tourists painting reefs white for underwater photographs",
-    "Sand being deposited on top of coral",
-    "The rapid growth of new young coral polyps"
-   ],
-   "correct": 0,
-   "explain": "Higher sea temperatures stress coral, which can then die.",
-   "tag": "Coral reefs"
-  },
-  {
-   "q": "Why are reefs rarely found near large river mouths?",
-   "options": [
-    "Fresh water and sediment harm coral",
-    "Rivers make the sea too warm for coral",
+    "Fresh water and sediment harm the coral",
+    "Rivers make the sea water far too warm for coral",
     "Rivers bring too much sunlight",
-    "Rivers increase the salt content"
+    "Rivers make the sea saltier"
    ],
    "correct": 0,
-   "explain": "Coral needs clear, salty water; rivers bring fresh water and mud.",
-   "tag": "Coral reefs"
+   "explain": "Coral needs clear, salty water.",
+   "tag": "Reasons"
   },
   {
-   "q": "The Sundarbans helps protect Bangladesh by:",
+   "q": "What do sand dunes need to form?",
    "options": [
-    "Reducing the impact of cyclones and storm surges",
-    "Stopping the monsoon rains from reaching the farmland inland",
-    "Producing hydroelectric power",
-    "Preventing earthquakes along the plate boundary"
+    "A large sand supply and strong onshore winds",
+    "Warm, clear, shallow water with plenty of sunlight",
+    "Deep, muddy estuaries with no wind",
+    "Coral polyps and algae"
    ],
    "correct": 0,
-   "explain": "Mangroves absorb wave energy, as during Cyclone Sidr in 2007.",
-   "tag": "Case study"
+   "explain": "Wind blows dry sand inland.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Why can mangroves not grow in the UK?",
+   "options": [
+    "It is too cold – mangroves cannot survive frost",
+    "The UK has no muddy coasts or estuaries at all",
+    "The sea around the UK is not salty",
+    "There are no tides anywhere around the UK coast"
+   ],
+   "correct": 0,
+   "explain": "Mangroves need warm, frost-free conditions.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "How do mangroves help coastal communities?",
+   "options": [
+    "They protect coasts from storm surges and erosion",
+    "They increase the height of storm waves",
+    "They stop rain falling on farmland",
+    "They raise the local sea level and cause flooding inland"
+   ],
+   "correct": 0,
+   "explain": "Roots absorb wave energy and trap sediment.",
+   "tag": "Value"
+  },
+  {
+   "q": "Which is a value of salt marshes?",
+   "options": [
+    "They absorb wave energy and provide bird habitats",
+    "They are the main source of the world’s timber",
+    "They produce most of the world’s coral reefs and atolls",
+    "They create large waves for surfing"
+   ],
+   "correct": 0,
+   "explain": "Salt marshes reduce flooding and support wildlife.",
+   "tag": "Value"
   }
  ]
 };
 
-window.SBL_LESSONS["IGCO06"] = {
- "id": "IGCO06",
- "topicNumber": 1,
- "topicTitle": "Coastal Environments (IGCSE)",
- "title": "Coastal pressures, conflict and management",
- "href": "/igcse/geography/learn/coastal-environments/l6-coastal-management",
- "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Coastal management and conflict.",
+window.SBL_LESSONS["IGCO09"] = {
+ "id": "IGCO09",
+ "topicNumber": 2,
+ "topicTitle": "2.2 Coastal ecosystems (IGCSE)",
+ "title": "Coral reefs: a named coastal ecosystem",
+ "href": "/igcse/geography/learn/coastal-environments/l09-coral-reefs",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Coral reefs: a named ecosystem.",
  "checklist": [
-  "I can explain why coasts are under pressure and how this creates conflict.",
-  "I can compare hard and soft engineering strategies.",
-  "I can evaluate the management of a named coastline."
+  "I can retrieve information on coral reefs from previous learning",
+  "I can define coral reefs",
+  "I can describe the global distribution of coral reefs",
+  "I can explain the reasons for the distribution of coral reefs",
+  "I can explain the different types of reefs",
+  "I can explain the abiotic and biotic characteristics",
+  "I can explain the value of coral reefs"
  ],
  "quiz": [
   {
-   "q": "Why is the Holderness coast eroding so quickly?",
+   "q": "What lives inside coral polyps and gives them food?",
    "options": [
-    "Soft boulder clay and powerful North Sea waves",
-    "Hard granite cliffs and a very short fetch",
-    "Coral reefs that absorb wave energy",
-    "Very wide beaches protecting the base of the cliffs"
+    "Zooxanthellae algae",
+    "Marram grass",
+    "Plankton nets",
+    "Mangrove roots"
    ],
    "correct": 0,
-   "explain": "Soft clay cliffs and a long fetch make Holderness one of Europe’s fastest-eroding coasts.",
+   "explain": "The algae photosynthesise and share food with the coral.",
+   "tag": "Definition"
+  },
+  {
+   "q": "What fraction of the ocean floor do coral reefs cover?",
+   "options": [
+    "Less than 1%",
+    "About 10%",
+    "About 25%",
+    "Over 50%"
+   ],
+   "correct": 0,
+   "explain": "Tiny area, but about a quarter of marine species.",
+   "tag": "Definition"
+  },
+  {
+   "q": "Why are reefs mostly on the eastern sides of continents?",
+   "options": [
+    "Warm currents flow there; cold currents cool western coasts",
+    "Eastern coasts have far more large rivers reaching the sea",
+    "Western coasts have no sunlight",
+    "Coral cannot live anywhere in the Atlantic Ocean, east or west"
+   ],
+   "correct": 0,
+   "explain": "Ocean currents control water temperature.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "Why do reefs need clear, shallow water?",
+   "options": [
+    "So sunlight reaches the algae for photosynthesis",
+    "So that waves can break over them and bring food",
+    "So fish cannot reach them",
+    "So that they can dry out completely at every low tide"
+   ],
+   "correct": 0,
+   "explain": "The algae need light.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "What is the ideal water temperature for coral?",
+   "options": [
+    "About 18–29°C",
+    "About 0–10°C",
+    "About 35–45°C",
+    "Below freezing"
+   ],
+   "correct": 0,
+   "explain": "Too warm and the coral bleaches.",
+   "tag": "Reasons"
+  },
+  {
+   "q": "Which type of reef grows close to the shore?",
+   "options": [
+    "Fringing reef",
+    "Barrier reef",
+    "Atoll",
+    "Offshore bar"
+   ],
+   "correct": 0,
+   "explain": "Fringing reefs grow right next to the land.",
+   "tag": "Types of reef"
+  },
+  {
+   "q": "What is an atoll?",
+   "options": [
+    "A ring of coral around a central lagoon",
+    "A reef growing right next to the beach",
+    "A reef separated from land by a deep lagoon",
+    "A ridge of sand joining two islands"
+   ],
+   "correct": 0,
+   "explain": "Formed as a volcanic island sinks.",
+   "tag": "Types of reef"
+  },
+  {
+   "q": "Which is an abiotic characteristic of a coral reef?",
+   "options": [
+    "Warm water temperature",
+    "Parrotfish feeding on algae",
+    "Zooxanthellae inside the polyps",
+    "Sharks hunting smaller fish"
+   ],
+   "correct": 0,
+   "explain": "Abiotic means non-living.",
+   "tag": "Abiotic and biotic"
+  },
+  {
+   "q": "Roughly how long is the Great Barrier Reef?",
+   "options": [
+    "About 2,300 km",
+    "About 23 km",
+    "About 230 km",
+    "About 23,000 km"
+   ],
+   "correct": 0,
+   "explain": "It runs along the Queensland coast.",
    "tag": "Case study"
   },
   {
-   "q": "Which is an example of hard engineering?",
+   "q": "Which is a value of coral reefs?",
    "options": [
-    "Beach nourishment",
-    "Rock armour",
-    "Dune regeneration",
-    "Managed retreat"
+    "They protect coasts by breaking up waves",
+    "They make the sea water much colder",
+    "They increase coastal erosion along nearby beaches",
+    "They stop rivers flowing into the sea"
    ],
-   "correct": 1,
-   "explain": "Hard engineering builds artificial structures such as rock armour and sea walls.",
-   "tag": "Hard engineering"
+   "correct": 0,
+   "explain": "Reefs absorb wave energy.",
+   "tag": "Value"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO10"] = {
+ "id": "IGCO10",
+ "topicNumber": 2,
+ "topicTitle": "2.2 Coastal ecosystems (IGCSE)",
+ "title": "Threats to coastal ecosystems",
+ "href": "/igcse/geography/learn/coastal-environments/l10-threats-to-coastal-ecosystems",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Threats to coastal ecosystems.",
+ "checklist": [
+  "I can retrieve prior learning on the conditions required for development of the four coastal ecosystems",
+  "I can describe and explain the threats to coastal ecosystems",
+  "I can apply examination technique to an 8 mark 'Analyse' PPQ"
+ ],
+ "quiz": [
+  {
+   "q": "How does fertiliser run-off threaten coral reefs?",
+   "options": [
+    "It causes algal blooms that block sunlight",
+    "It makes the sea water too cold for coral polyps to survive",
+    "It increases the salt content of the sea",
+    "It makes waves larger"
+   ],
+   "correct": 0,
+   "explain": "Nutrients feed algae that shade the coral.",
+   "tag": "Agriculture"
   },
   {
-   "q": "How do groynes protect a beach?",
+   "q": "Why are mangroves cleared in South-East Asia?",
    "options": [
-    "They reflect waves back out to sea before they break",
-    "They trap sediment moving by longshore drift",
-    "They allow the land behind the beach to flood naturally",
-    "They stop the tide coming in"
+    "For shrimp farms, rice and building land",
+    "Because they cause too much flooding inland",
+    "To increase coral growth offshore",
+    "Because they block the tides from reaching the beach"
    ],
-   "correct": 1,
-   "explain": "Groynes build up a wider beach that absorbs wave energy.",
-   "tag": "Hard engineering"
+   "correct": 0,
+   "explain": "Aquaculture and development replace mangroves.",
+   "tag": "Deforestation"
+  },
+  {
+   "q": "How does dredging damage reefs?",
+   "options": [
+    "It stirs up sediment that blocks light",
+    "It adds extra oxygen to the water",
+    "It cools the sea down until the coral freezes",
+    "It creates new lagoons"
+   ],
+   "correct": 0,
+   "explain": "Sediment smothers coral and blocks light.",
+   "tag": "Industrialisation"
+  },
+  {
+   "q": "How does tourism threaten sand dunes?",
+   "options": [
+    "Trampling destroys vegetation that holds the sand",
+    "Tourists bring extra sand to the beach",
+    "Tourism reduces the wind speed",
+    "Hotels plant too much marram grass, which smothers the sand"
+   ],
+   "correct": 0,
+   "explain": "Without plants, sand blows away.",
+   "tag": "Tourism"
+  },
+  {
+   "q": "Which is a large-scale threat to coral reefs?",
+   "options": [
+    "Mass bleaching caused by warming seas",
+    "A single boat anchor dropped on one reef",
+    "One diver touching coral",
+    "A small beach café"
+   ],
+   "correct": 0,
+   "explain": "Bleaching can affect whole reef systems.",
+   "tag": "Scale"
+  },
+  {
+   "q": "How does inland deforestation affect coral reefs?",
+   "options": [
+    "More soil is washed into rivers and onto reefs",
+    "It lowers the sea temperature around the coast",
+    "It stops rivers reaching the sea",
+    "It increases the amount of sunlight"
+   ],
+   "correct": 0,
+   "explain": "Eroded soil becomes sediment.",
+   "tag": "Deforestation"
+  },
+  {
+   "q": "What does the command word “Analyse” require?",
+   "options": [
+    "Break down the parts, explain links and judge importance",
+    "Simply list as many facts as possible without explaining them",
+    "Draw a labelled diagram only",
+    "Give a one-word answer"
+   ],
+   "correct": 0,
+   "explain": "Analyse needs explanation and judgement.",
+   "tag": "Exam technique"
+  },
+  {
+   "q": "What should an 8-mark answer end with?",
+   "options": [
+    "A supported judgement on which factor matters most",
+    "A list of new key terms",
+    "A word-for-word copy of the question as the conclusion",
+    "A diagram with no labels"
+   ],
+   "correct": 0,
+   "explain": "Top-level answers reach a judgement.",
+   "tag": "Exam technique"
+  },
+  {
+   "q": "Which is a threat from industrialisation?",
+   "options": [
+    "Oil and chemical pollution",
+    "Trampling of dunes",
+    "Fertiliser run-off from farms",
+    "Divers breaking coral"
+   ],
+   "correct": 0,
+   "explain": "Ports, refineries and factories pollute.",
+   "tag": "Industrialisation"
+  },
+  {
+   "q": "Which condition does an algal bloom change?",
+   "options": [
+    "The amount of light reaching the coral",
+    "The latitude of the reef",
+    "The type of rock on the coast nearby",
+    "The direction and speed of longshore drift along the beach"
+   ],
+   "correct": 0,
+   "explain": "Algae shade out the coral.",
+   "tag": "Retrieval"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO11"] = {
+ "id": "IGCO11",
+ "topicNumber": 3,
+ "topicTitle": "2.3 People and coastal management (IGCSE)",
+ "title": "Conflicts between users of the coast",
+ "href": "/igcse/geography/learn/coastal-environments/l11-coastal-conflicts",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Conflicts on the coast.",
+ "checklist": [
+  "I can identify and describe the different stakeholders along a stretch of coastline",
+  "I can produce a conflict matrix explaining specific conflicts between the different stakeholders",
+  "I can apply conflict learning to a specific case study",
+  "I can begin to suggest solutions to the conflict issues"
+ ],
+ "quiz": [
+  {
+   "q": "What is a stakeholder?",
+   "options": [
+    "A person or group with an interest in how an area is used",
+    "A wooden post used to build groynes and fences on the beach",
+    "A type of coastal landform",
+    "A government tax on beach use"
+   ],
+   "correct": 0,
+   "explain": "Stakeholders have an interest in a place.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "What is the main conflict on many coastlines?",
+   "options": [
+    "Development versus conservation",
+    "Erosion versus weathering",
+    "Spits versus bars and tombolos",
+    "Tides versus waves"
+   ],
+   "correct": 0,
+   "explain": "Economic use versus protection.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Which stakeholder most wants reefs and mangroves protected as fish nurseries?",
+   "options": [
+    "Fishing communities",
+    "Port developers",
+    "Sand miners",
+    "Hotel builders"
+   ],
+   "correct": 0,
+   "explain": "Fish breed in reefs and mangroves.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "What does a conflict matrix show?",
+   "options": [
+    "Where each pair of stakeholders agrees or disagrees",
+    "The rate of erosion along the coast",
+    "The order in which coastal landforms are formed over time",
+    "The height of waves at high tide"
+   ],
+   "correct": 0,
+   "explain": "It compares stakeholders pair by pair.",
+   "tag": "Conflict matrix"
+  },
+  {
+   "q": "Why might tourism conflict with fishing?",
+   "options": [
+    "Hotels take over beaches used to land boats",
+    "Tourists catch all of the fish",
+    "Fishing boats cause coastal flooding",
+    "Fishermen build hotels on the dunes behind the beach"
+   ],
+   "correct": 0,
+   "explain": "Space and reef damage cause conflict.",
+   "tag": "Conflict matrix"
+  },
+  {
+   "q": "Why have coral reefs been mined in Sri Lanka?",
+   "options": [
+    "To make lime for building",
+    "To create new beaches for tourists",
+    "To feed fishing communities",
+    "To build sea walls"
+   ],
+   "correct": 0,
+   "explain": "Coral was burnt to produce lime.",
+   "tag": "Case study"
+  },
+  {
+   "q": "How does coral mining increase erosion?",
+   "options": [
+    "It removes the natural barrier that absorbs waves",
+    "It adds extra sand and shingle to nearby beaches",
+    "It slows longshore drift",
+    "It makes waves smaller"
+   ],
+   "correct": 0,
+   "explain": "Reefs break up waves before they reach the beach.",
+   "tag": "Case study"
+  },
+  {
+   "q": "What is a setback zone?",
+   "options": [
+    "An area near the shore where new building is not allowed",
+    "A wall built in front of hotels to stop waves",
+    "A section of reef used for diving",
+    "A type of fishing boat"
+   ],
+   "correct": 0,
+   "explain": "It keeps development away from the shoreline.",
+   "tag": "Solutions"
+  },
+  {
+   "q": "How can mooring buoys reduce conflict?",
+   "options": [
+    "Boats tie up to them instead of dropping anchors on coral",
+    "They stop tourists visiting the coast",
+    "They increase the size of waves",
+    "They allow more sand mining because boats can stay longer"
+   ],
+   "correct": 0,
+   "explain": "Anchors break coral.",
+   "tag": "Solutions"
+  },
+  {
+   "q": "Which approach plans a whole coastline together?",
+   "options": [
+    "Integrated Coastal Zone Management",
+    "Beach nourishment only",
+    "Building a single groyne",
+    "Coral mining"
+   ],
+   "correct": 0,
+   "explain": "ICZM avoids one area harming another.",
+   "tag": "Solutions"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO12"] = {
+ "id": "IGCO12",
+ "topicNumber": 3,
+ "topicTitle": "2.3 People and coastal management (IGCSE)",
+ "title": "Coastal flooding: causes, prediction and prevention",
+ "href": "/igcse/geography/learn/coastal-environments/l12-coastal-flooding",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Coastal flooding: causes and prevention.",
+ "checklist": [
+  "I can describe and explain the causes of coastal flooding",
+  "I can describe and explain a variety of strategies to predict and prevent flooding in coastal areas",
+  "I can make decisions relating to the importance of these strategies"
+ ],
+ "quiz": [
+  {
+   "q": "What causes a storm surge?",
+   "options": [
+    "Low pressure and strong winds piling water onshore",
+    "An undersea earthquake",
+    "Melting glaciers suddenly sliding into the sea in a single day",
+    "Heavy rain falling on the sea"
+   ],
+   "correct": 0,
+   "explain": "Low pressure raises the sea; wind pushes it inland.",
+   "tag": "Causes"
+  },
+  {
+   "q": "What usually causes a tsunami?",
+   "options": [
+    "An undersea earthquake displacing water",
+    "A deep low-pressure storm with strong winds",
+    "A very high spring tide",
+    "Strong onshore winds"
+   ],
+   "correct": 0,
+   "explain": "Sudden displacement of the sea bed or water.",
+   "tag": "Causes"
+  },
+  {
+   "q": "Roughly how many people died in the 2004 Indian Ocean tsunami?",
+   "options": [
+    "About 230,000",
+    "About 2,300",
+    "About 23,000",
+    "About 2.3 million"
+   ],
+   "correct": 0,
+   "explain": "Around 230,000 in 14 countries.",
+   "tag": "Causes"
+  },
+  {
+   "q": "How does climate change increase coastal flood risk?",
+   "options": [
+    "Sea levels rise and storms may become stronger",
+    "It makes the land rise higher",
+    "It stops tsunamis from forming anywhere in the world",
+    "It reduces the height of the tides"
+   ],
+   "correct": 0,
+   "explain": "Higher seas reach further inland.",
+   "tag": "Causes"
+  },
+  {
+   "q": "When is a storm surge most dangerous?",
+   "options": [
+    "When it coincides with high tide",
+    "When it happens at low tide",
+    "When the wind blows offshore, away from the land",
+    "When air pressure is very high"
+   ],
+   "correct": 0,
+   "explain": "Surge plus high tide gives the highest water.",
+   "tag": "Causes"
+  },
+  {
+   "q": "Which is a forecasting method?",
+   "options": [
+    "Satellites and tide gauges",
+    "Building on stilts",
+    "Planting mangroves",
+    "Teaching evacuation routes"
+   ],
+   "correct": 0,
+   "explain": "Data is used to predict surges.",
+   "tag": "Prediction"
+  },
+  {
+   "q": "How does building design reduce flood damage?",
+   "options": [
+    "Raising buildings on stilts above flood level",
+    "Building houses closer to the beach",
+    "Using cheaper, lighter materials that are quicker to build",
+    "Removing coastal vegetation"
+   ],
+   "correct": 0,
+   "explain": "Water flows underneath raised buildings.",
+   "tag": "Prevention"
+  },
+  {
+   "q": "What is the purpose of a coastal buffer zone?",
+   "options": [
+    "To keep development away from the highest-risk areas",
+    "To create new beaches for tourists",
+    "To build more hotels by the sea",
+    "To store flood water inside homes until it drains away"
+   ],
+   "correct": 0,
+   "explain": "Planning keeps people out of danger.",
+   "tag": "Prevention"
+  },
+  {
+   "q": "Why is education especially important for tsunamis?",
+   "options": [
+    "Waves can arrive within minutes, so people must act fast",
+    "Tsunamis can be stopped by teaching",
+    "Education raises the level of the land",
+    "Tsunamis only happen to schools"
+   ],
+   "correct": 0,
+   "explain": "Knowing the warning signs saves lives.",
+   "tag": "Prevention"
+  },
+  {
+   "q": "Which strategy is usually cheapest and saves the most lives in a poor country?",
+   "options": [
+    "Warnings, education and raised shelters",
+    "A large tidal barrier like the Thames Barrier",
+    "A continuous concrete sea wall",
+    "Relocating every coastal city"
+   ],
+   "correct": 0,
+   "explain": "Low-cost measures protect lives effectively.",
+   "tag": "Decision making"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO13"] = {
+ "id": "IGCO13",
+ "topicNumber": 3,
+ "topicTitle": "2.3 People and coastal management (IGCSE)",
+ "title": "Coastal management strategies: hard and soft engineering",
+ "href": "/igcse/geography/learn/coastal-environments/l13-hard-and-soft-engineering",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Hard and soft engineering.",
+ "checklist": [
+  "I can define hard and soft engineering",
+  "I can describe and explain how various coastal management schemes work",
+  "I can evaluate hard and soft engineering techniques in their ability to defend coastlines and the impacts they have"
+ ],
+ "quiz": [
+  {
+   "q": "What is soft engineering?",
+   "options": [
+    "Working with natural processes to manage the coast",
+    "Building large concrete structures along the beach",
+    "Removing all sand from the beach",
+    "Stopping all tourism on the coast"
+   ],
+   "correct": 0,
+   "explain": "Soft engineering works with nature.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "Which of these is hard engineering?",
+   "options": [
+    "Gabions",
+    "Beach replenishment",
+    "Managed retreat",
+    "Revegetation"
+   ],
+   "correct": 0,
+   "explain": "Gabions are rock-filled wire cages.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "How does a sea wall protect the coast?",
+   "options": [
+    "It reflects wave energy back out to sea",
+    "It traps sand moving by longshore drift",
+    "It lets the land flood naturally",
+    "It plants vegetation on the cliff"
+   ],
+   "correct": 0,
+   "explain": "Curved walls reflect waves.",
+   "tag": "How schemes work"
+  },
+  {
+   "q": "What do groynes do?",
+   "options": [
+    "Trap sediment moving by longshore drift",
+    "Reflect waves back out to sea",
+    "Reshape the cliff to a gentler slope",
+    "Add sand dredged from offshore"
+   ],
+   "correct": 0,
+   "explain": "They build up a wider beach.",
+   "tag": "How schemes work"
+  },
+  {
+   "q": "What is cliff regrading?",
+   "options": [
+    "Reshaping a cliff to a gentler slope",
+    "Building a concrete wall at the base of the cliff",
+    "Adding sand to the beach",
+    "Planting mangroves offshore"
+   ],
+   "correct": 0,
+   "explain": "A gentler slope is more stable.",
+   "tag": "How schemes work"
+  },
+  {
+   "q": "What is managed retreat?",
+   "options": [
+    "Allowing low-value land to flood or erode",
+    "Building higher sea walls",
+    "Moving the beach further out to sea",
+    "Pumping water off the land and back into the sea"
+   ],
+   "correct": 0,
+   "explain": "It creates natural salt marsh defences.",
+   "tag": "How schemes work"
+  },
+  {
+   "q": "Which SMP policy means keeping defences where they are?",
+   "options": [
+    "Hold the line",
+    "Advance the line",
+    "Managed realignment",
+    "No active intervention"
+   ],
+   "correct": 0,
+   "explain": "Hold the line maintains the current shoreline.",
+   "tag": "SMPs"
   },
   {
    "q": "What is a disadvantage of groynes?",
    "options": [
-    "They make the beach narrower where they are built",
-    "They starve beaches further along the coast of sediment",
-    "They are always the most expensive form of defence available",
+    "They starve beaches further along of sediment",
+    "They make the local beach narrower",
+    "They are the most expensive form of defence available",
     "They encourage salt marsh to grow"
    ],
-   "correct": 1,
-   "explain": "Less sediment reaches areas downdrift, so erosion increases there.",
-   "tag": "Hard engineering"
+   "correct": 0,
+   "explain": "Less sediment reaches downdrift areas.",
+   "tag": "Evaluation"
   },
   {
-   "q": "What happened at Cowden after groynes were built at Mappleton?",
+   "q": "Why must beach replenishment be repeated?",
+   "options": [
+    "Waves and longshore drift remove the added sand",
+    "The sand slowly turns into solid rock over time",
+    "Tourists take the sand home",
+    "The sea level falls each year"
+   ],
+   "correct": 0,
+   "explain": "Natural processes keep moving sediment.",
+   "tag": "Evaluation"
+  },
+  {
+   "q": "Which group is most likely to object to managed retreat?",
+   "options": [
+    "Landowners and farmers who lose land",
+    "Conservationists who want new habitats",
+    "Birdwatchers",
+    "Scientists studying salt marshes"
+   ],
+   "correct": 0,
+   "explain": "They lose land and property.",
+   "tag": "Evaluation"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO14"] = {
+ "id": "IGCO14",
+ "topicNumber": 3,
+ "topicTitle": "2.3 People and coastal management (IGCSE)",
+ "title": "Coastal management case study: Sri Lanka",
+ "href": "/igcse/geography/learn/coastal-environments/l14-sri-lanka-coastal-management",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Case study: Sri Lanka (CZMP).",
+ "checklist": [
+  "I can apply knowledge of hard and soft engineering schemes to the Sri Lanka case study",
+  "I can summarise relevant information from the CZMP for Sri Lanka",
+  "I can describe and explain the need for coastal management in Sri Lanka, applying the CZMP concept",
+  "I can apply critical thinking relating to the need for coastal management"
+ ],
+ "quiz": [
+  {
+   "q": "What does CZMP stand for?",
+   "options": [
+    "Coastal Zone Management Plan",
+    "Coral Zone Mining Permit",
+    "Coastal Zoning for Marine Ports",
+    "Climate Zone Monitoring Programme"
+   ],
+   "correct": 0,
+   "explain": "It is Sri Lanka’s national coastal plan.",
+   "tag": "CZMP"
+  },
+  {
+   "q": "Which law set up coastal management in Sri Lanka?",
+   "options": [
+    "The Coast Conservation Act of 1981",
+    "The Clean Air Act of 1956",
+    "The Paris Agreement on climate change of 2015",
+    "The Kyoto Protocol of 1997"
+   ],
+   "correct": 0,
+   "explain": "The 1981 Act created the coast conservation department.",
+   "tag": "CZMP"
+  },
+  {
+   "q": "What is a setback area?",
+   "options": [
+    "A zone near the shore where building is restricted",
+    "A wall built to protect hotels",
+    "A reef used only for diving and snorkelling",
+    "A type of fishing harbour"
+   ],
+   "correct": 0,
+   "explain": "It keeps development back from the sea.",
+   "tag": "CZMP"
+  },
+  {
+   "q": "What is Special Area Management?",
+   "options": [
+    "Communities and government managing local resources together",
+    "Building sea walls in special places only",
+    "Closing beaches to all visitors",
+    "Mining coral in selected areas"
+   ],
+   "correct": 0,
+   "explain": "Community-based management at selected sites.",
+   "tag": "CZMP"
+  },
+  {
+   "q": "Which human activity has increased erosion in Sri Lanka?",
+   "options": [
+    "Coral and sand mining",
+    "Planting mangroves",
+    "Building cyclone shelters",
+    "Setting up marine parks"
+   ],
+   "correct": 0,
+   "explain": "Mining removes natural protection and sediment.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "Roughly how many people died in Sri Lanka in the 2004 tsunami?",
+   "options": [
+    "About 35,000",
+    "About 350",
+    "About 3,500",
+    "About 350,000"
+   ],
+   "correct": 0,
+   "explain": "Around 35,000 people in Sri Lanka.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "Which is an example of soft engineering used in Sri Lanka?",
+   "options": [
+    "Replanting mangroves",
+    "Building rock revetments",
+    "Constructing offshore breakwaters",
+    "Building groynes of rock"
+   ],
+   "correct": 0,
+   "explain": "Mangroves are a natural defence.",
+   "tag": "Engineering"
+  },
+  {
+   "q": "Why is Sri Lanka’s coastal zone under so much pressure?",
+   "options": [
+    "Population, tourism, fishing and industry are concentrated there",
+    "Nobody lives near the coast",
+    "The coast has no ecosystems",
+    "The sea level is falling quickly"
+   ],
+   "correct": 0,
+   "explain": "Many users compete for a narrow strip.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "Which coral reef site is in Sri Lanka?",
+   "options": [
+    "Hikkaduwa",
+    "The Great Barrier Reef",
+    "Old Harry Rocks",
+    "Spurn Head"
+   ],
+   "correct": 0,
+   "explain": "Hikkaduwa is on the south-west coast.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "What is the main idea behind the CZMP?",
+   "options": [
+    "Managing all coastal issues together for the whole coast",
+    "Protecting only the capital city of Colombo from all erosion",
+    "Building sea walls everywhere",
+    "Moving everyone away from the coast"
+   ],
+   "correct": 0,
+   "explain": "An integrated, whole-coast approach.",
+   "tag": "CZMP"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGCO15"] = {
+ "id": "IGCO15",
+ "topicNumber": 3,
+ "topicTitle": "2.3 People and coastal management (IGCSE)",
+ "title": "Coastal management case study: the Holderness coast, UK",
+ "href": "/igcse/geography/learn/coastal-environments/l15-holderness-coastal-management",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Coastal Environments: Case study: Holderness, UK.",
+ "checklist": [
+  "I can describe the location of the Holderness coast",
+  "I can describe the physical geography (lithology, climate and coastal conditions) of the Holderness coast",
+  "I can explain the need for coastal management",
+  "I can make informed decisions relating to why coastal management is required",
+  "I can evaluate the effectiveness of these decisions with reference to different stakeholders"
+ ],
+ "quiz": [
+  {
+   "q": "Where is the Holderness coast?",
+   "options": [
+    "East Yorkshire, facing the North Sea",
+    "Dorset, facing the English Channel",
+    "Cornwall, facing the Atlantic Ocean",
+    "North Wales, facing the Irish Sea"
+   ],
+   "correct": 0,
+   "explain": "It runs from Flamborough Head to Spurn Head.",
+   "tag": "Location"
+  },
+  {
+   "q": "What are most Holderness cliffs made of?",
+   "options": [
+    "Soft boulder clay",
+    "Hard granite",
+    "Resistant limestone",
+    "Volcanic basalt"
+   ],
+   "correct": 0,
+   "explain": "Glacial till erodes easily.",
+   "tag": "Physical geography"
+  },
+  {
+   "q": "About how fast does the Holderness coast retreat on average?",
+   "options": [
+    "About 1.8 m a year",
+    "About 1.8 mm a year",
+    "About 18 m a year",
+    "About 180 m a year"
+   ],
+   "correct": 0,
+   "explain": "One of Europe’s fastest-eroding coasts.",
+   "tag": "Physical geography"
+  },
+  {
+   "q": "Why are Holderness beaches narrow?",
+   "options": [
+    "Eroded clay is fine and carried away in suspension",
+    "The tides never go out far enough to expose the sand",
+    "Sand is mined for building",
+    "Coral reefs trap the sand offshore"
+   ],
+   "correct": 0,
+   "explain": "Little coarse material stays on the beach.",
+   "tag": "Physical geography"
+  },
+  {
+   "q": "Which direction do the most powerful waves come from?",
+   "options": [
+    "North-east, across the North Sea",
+    "South-west, across the Atlantic",
+    "West, across the Irish Sea",
+    "Directly from the land"
+   ],
+   "correct": 0,
+   "explain": "A long fetch across the North Sea.",
+   "tag": "Physical geography"
+  },
+  {
+   "q": "Why is the Easington gas terminal protected?",
+   "options": [
+    "It supplies a significant share of UK gas",
+    "It is a historic castle",
+    "It is a nature reserve",
+    "It is the most popular tourist beach in Yorkshire"
+   ],
+   "correct": 0,
+   "explain": "Energy security is a national priority.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "What was built at Mappleton in 1991?",
+   "options": [
+    "Two rock groynes and rock revetment",
+    "A tidal barrier",
+    "A new spit",
+    "An offshore wind farm with its own sea wall"
+   ],
+   "correct": 0,
+   "explain": "About £2 million was spent.",
+   "tag": "Decisions"
+  },
+  {
+   "q": "What happened at Cowden after Mappleton was protected?",
    "options": [
     "Erosion increased",
-    "A new spit formed",
+    "A new beach formed",
     "Erosion stopped completely",
-    "A coral reef developed"
+    "A coral reef grew"
    ],
    "correct": 0,
-   "explain": "Sediment was trapped at Mappleton, so less reached Cowden to the south.",
-   "tag": "Case study"
+   "explain": "Sediment was trapped at Mappleton.",
+   "tag": "Evaluation"
   },
   {
-   "q": "What is beach nourishment?",
+   "q": "Why are many isolated farms not protected?",
    "options": [
-    "Adding sand to a beach to widen it",
-    "Building a concrete wall along the beach",
-    "Planting trees on the cliffs",
-    "Removing pebbles from the beach"
+    "The cost would be greater than the value of the land",
+    "Farmers asked for no protection",
+    "Farmland never erodes",
+    "The law forbids defences there"
    ],
    "correct": 0,
-   "explain": "A wider beach absorbs wave energy; it has to be repeated.",
-   "tag": "Soft engineering"
+   "explain": "Cost–benefit decisions guide management.",
+   "tag": "Decisions"
   },
   {
-   "q": "Managed retreat involves:",
+   "q": "Why might conservationists worry about defences at Holderness?",
    "options": [
-    "Building higher sea walls along the coast",
-    "Allowing low-value land to flood or erode",
-    "Moving the whole beach further out to sea",
-    "Pumping water off the land"
-   ],
-   "correct": 1,
-   "explain": "It creates new habitats such as salt marsh that absorb wave energy.",
-   "tag": "Soft engineering"
-  },
-  {
-   "q": "What does ICZM aim to do?",
-   "options": [
-    "Manage a whole stretch of coast together",
-    "Protect only the most expensive homes",
-    "Stop all erosion everywhere",
-    "Replace all soft engineering with sea walls"
+    "They reduce the sediment that feeds Spurn Head",
+    "They increase the size of the spit",
+    "They create too many new beaches",
+    "They stop all birds visiting"
    ],
    "correct": 0,
-   "explain": "Planning together stops one scheme causing problems elsewhere.",
-   "tag": "Management"
-  },
-  {
-   "q": "Which group is most likely to support managed retreat?",
-   "options": [
-    "Conservationists",
-    "Farmers who would lose land",
-    "Owners of seafront hotels",
-    "Residents in the area being flooded"
-   ],
-   "correct": 0,
-   "explain": "Managed retreat creates new salt marsh habitats.",
-   "tag": "Conflict"
-  },
-  {
-   "q": "How will sea level rise affect coastal management?",
-   "options": [
-    "It will make coasts more stable",
-    "It will increase the risk of flooding and erosion",
-    "It will stop longshore drift along every coastline",
-    "It will only affect coral reefs in tropical seas"
-   ],
-   "correct": 1,
-   "explain": "Higher seas and stronger storms put more pressure on defences.",
-   "tag": "Climate change"
+   "explain": "Spurn depends on eroded sediment.",
+   "tag": "Evaluation"
   }
  ]
 };

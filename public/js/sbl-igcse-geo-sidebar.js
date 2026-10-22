@@ -16,31 +16,77 @@
         "status": "available",
         "topics": [
           {
-            "title": "Coastal Environments",
+            "title": "2.1 Coastal processes and landforms",
             "lessons": [
               {
-                "label": "Waves, weathering and mass movement",
-                "href": "/igcse/geography/learn/coastal-environments/l1-waves-and-weathering"
+                "label": "Characteristics of waves",
+                "href": "/igcse/geography/learn/coastal-environments/l01-characteristics-of-waves"
               },
               {
                 "label": "Erosion, transportation and deposition",
-                "href": "/igcse/geography/learn/coastal-environments/l2-erosion-transport-deposition"
+                "href": "/igcse/geography/learn/coastal-environments/l02-erosion-transportation-deposition"
               },
               {
-                "label": "Landforms of erosion",
-                "href": "/igcse/geography/learn/coastal-environments/l3-landforms-of-erosion"
+                "label": "Weathering and mass movement",
+                "href": "/igcse/geography/learn/coastal-environments/l03-weathering-and-mass-movement"
               },
               {
-                "label": "Landforms of deposition",
-                "href": "/igcse/geography/learn/coastal-environments/l4-landforms-of-deposition"
+                "label": "Geology, vegetation, people and sea level",
+                "href": "/igcse/geography/learn/coastal-environments/l04-geology-vegetation-people-sea-level"
               },
               {
-                "label": "Coastal ecosystems",
-                "href": "/igcse/geography/learn/coastal-environments/l5-coastal-ecosystems"
+                "label": "Landforms 1: headlands, bays and coves",
+                "href": "/igcse/geography/learn/coastal-environments/l05-headlands-bays-coves"
               },
               {
-                "label": "Coastal management and conflict",
-                "href": "/igcse/geography/learn/coastal-environments/l6-coastal-management"
+                "label": "Landforms 2: cliffs, caves, arches, stacks",
+                "href": "/igcse/geography/learn/coastal-environments/l06-cliffs-caves-arches-stacks"
+              },
+              {
+                "label": "Landforms 3: beaches, spits, bars, tombolos",
+                "href": "/igcse/geography/learn/coastal-environments/l07-beaches-spits-bars"
+              }
+            ]
+          },
+          {
+            "title": "2.2 Coastal ecosystems",
+            "lessons": [
+              {
+                "label": "Coastal ecosystems: distribution and value",
+                "href": "/igcse/geography/learn/coastal-environments/l08-coastal-ecosystems"
+              },
+              {
+                "label": "Coral reefs: a named ecosystem",
+                "href": "/igcse/geography/learn/coastal-environments/l09-coral-reefs"
+              },
+              {
+                "label": "Threats to coastal ecosystems",
+                "href": "/igcse/geography/learn/coastal-environments/l10-threats-to-coastal-ecosystems"
+              }
+            ]
+          },
+          {
+            "title": "2.3 People and coastal management",
+            "lessons": [
+              {
+                "label": "Conflicts on the coast",
+                "href": "/igcse/geography/learn/coastal-environments/l11-coastal-conflicts"
+              },
+              {
+                "label": "Coastal flooding: causes and prevention",
+                "href": "/igcse/geography/learn/coastal-environments/l12-coastal-flooding"
+              },
+              {
+                "label": "Hard and soft engineering",
+                "href": "/igcse/geography/learn/coastal-environments/l13-hard-and-soft-engineering"
+              },
+              {
+                "label": "Case study: Sri Lanka (CZMP)",
+                "href": "/igcse/geography/learn/coastal-environments/l14-sri-lanka-coastal-management"
+              },
+              {
+                "label": "Case study: Holderness, UK",
+                "href": "/igcse/geography/learn/coastal-environments/l15-holderness-coastal-management"
               }
             ]
           }
