@@ -323,7 +323,7 @@
 
   // ---- detail drawer: one student, one lesson ----
   // ---- whole-student overview: every lesson and PPQ topic they've saved ----
-  var UNIT_PREFIX = [['IGCO', 'igeo'], ['IGDV', 'igeo'], ['IGHZ', 'igeo'], ['IGCF', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
+  var UNIT_PREFIX = [['IGCO', 'igeo'], ['IGDV', 'igeo'], ['IGHZ', 'igeo'], ['IGCF', 'igeo'], ['IGRU', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
   function viewOf(id) {
     if (id.indexOf('PPQ:') === 0) return 'ppq';
     for (var i = 0; i < UNIT_PREFIX.length; i++) if (id.indexOf(UNIT_PREFIX[i][0]) === 0) return UNIT_PREFIX[i][1];

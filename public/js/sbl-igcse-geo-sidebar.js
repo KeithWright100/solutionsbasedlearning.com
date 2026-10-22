@@ -260,8 +260,74 @@
       {
         "slug": "rural",
         "label": "Rural Environments",
-        "href": null,
-        "status": "soon"
+        "href": "/igcse/geography/learn/rural-environments",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Ecosystems and biomes",
+            "lessons": [
+              {
+                "label": "The world\u2019s biomes",
+                "href": "/igcse/geography/learn/rural-environments/l01-world-biomes"
+              },
+              {
+                "label": "Ecosystem goods and services",
+                "href": "/igcse/geography/learn/rural-environments/l02-ecosystem-goods-and-services"
+              },
+              {
+                "label": "Case study: the Amazon",
+                "href": "/igcse/geography/learn/rural-environments/l03-amazon-rainforest"
+              }
+            ]
+          },
+          {
+            "title": "Farming and rural areas",
+            "lessons": [
+              {
+                "label": "Food production and farming",
+                "href": "/igcse/geography/learn/rural-environments/l04-food-production-and-farming"
+              },
+              {
+                "label": "Characteristics of rural areas",
+                "href": "/igcse/geography/learn/rural-environments/l05-characteristics-of-rural-areas"
+              }
+            ]
+          },
+          {
+            "title": "Rural change in a developed country (UK)",
+            "lessons": [
+              {
+                "label": "UK rural change (1): counter-urbanisation",
+                "href": "/igcse/geography/learn/rural-environments/l06-uk-rural-change-counter-urbanisation"
+              },
+              {
+                "label": "UK rural change (2): tourism and isolation",
+                "href": "/igcse/geography/learn/rural-environments/l07-uk-rural-change-tourism-and-isolation"
+              },
+              {
+                "label": "Diversification of farming",
+                "href": "/igcse/geography/learn/rural-environments/l08-diversification-of-farming"
+              },
+              {
+                "label": "Sustainable rural living (UK)",
+                "href": "/igcse/geography/learn/rural-environments/l09-sustainable-rural-living"
+              }
+            ]
+          },
+          {
+            "title": "Rural change in an emerging country (Thailand)",
+            "lessons": [
+              {
+                "label": "Thailand (1): rural\u2013urban migration",
+                "href": "/igcse/geography/learn/rural-environments/l10-thailand-rural-urban-migration"
+              },
+              {
+                "label": "Thailand (2): managing rural challenges",
+                "href": "/igcse/geography/learn/rural-environments/l11-managing-rural-challenges-thailand"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "rural-fieldwork",

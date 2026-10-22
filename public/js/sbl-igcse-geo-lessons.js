@@ -7,6 +7,7 @@ window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_GEO_LESSON_ORDER = ["IGCO01", "IGCO02", "IGCO03", "IGCO04", "IGCO05", "IGCO06", "IGCO07", "IGCO08", "IGCO09", "IGCO10", "IGCO11", "IGCO12", "IGCO13", "IGCO14", "IGCO15"];
 window.SBL_IGCSE_GEO_HAZ_LESSON_ORDER = ["IGHZ01", "IGHZ02", "IGHZ03", "IGHZ04", "IGHZ05", "IGHZ06", "IGHZ07", "IGHZ08", "IGHZ09", "IGHZ10", "IGHZ11", "IGHZ12"];
 window.SBL_IGCSE_GEO_CFW_LESSON_ORDER = ["IGCF01", "IGCF02", "IGCF03", "IGCF04", "IGCF05", "IGCF06", "IGCF07"];
+window.SBL_IGCSE_GEO_RUR_LESSON_ORDER = ["IGRU01", "IGRU02", "IGRU03", "IGRU04", "IGRU05", "IGRU06", "IGRU07", "IGRU08", "IGRU09", "IGRU10", "IGRU11"];
 window.SBL_IGCSE_GEO_DEV_LESSON_ORDER = ["IGDV01", "IGDV02", "IGDV03", "IGDV04", "IGDV05", "IGDV06", "IGDV07", "IGDV08", "IGDV09"];
 
 window.SBL_LESSONS["IGCO01"] = {
@@ -4649,6 +4650,1505 @@ window.SBL_LESSONS["IGCF07"] = {
    "correct": 0,
    "explain": "Shows change over time.",
    "tag": "Extending"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU01"] = {
+ "id": "IGRU01",
+ "topicNumber": 1,
+ "topicTitle": "Ecosystems and biomes (IGCSE)",
+ "title": "The world’s biomes",
+ "href": "/igcse/geography/learn/rural-environments/l01-world-biomes",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: The world’s biomes.",
+ "checklist": [
+  "I can define the key terms ‘biome’, ‘biosphere’, ‘biodiversity’ and ‘ecosystem’",
+  "I can describe the location of the world’s major biomes",
+  "I can describe the climate and vegetation of each biome"
+ ],
+ "quiz": [
+  {
+   "q": "What is a biome?",
+   "options": [
+    "A large-scale plant and animal community",
+    "A single pond and the life in it",
+    "Only the animals living in one forest or wood",
+    "The layer of air around the Earth"
+   ],
+   "correct": 0,
+   "explain": "e.g. tropical rainforest.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is biodiversity?",
+   "options": [
+    "The variety of species in an area",
+    "The total weight of all trees",
+    "The amount of rain in a biome",
+    "The number of people living nearby"
+   ],
+   "correct": 0,
+   "explain": "Number and variety of species.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is the biosphere?",
+   "options": [
+    "The parts of Earth with living things",
+    "The frozen ground found under the tundra biome",
+    "The top layer of rainforest trees",
+    "The rocks beneath the soil"
+   ],
+   "correct": 0,
+   "explain": "Land, water and air with life.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Where are tropical rainforests mainly found?",
+   "options": [
+    "Near the Equator",
+    "Around the Arctic Circle",
+    "Along the Tropic lines only",
+    "In continental interiors"
+   ],
+   "correct": 0,
+   "explain": "e.g. the Amazon.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which biome has permafrost?",
+   "options": [
+    "Tundra",
+    "Savanna",
+    "Rainforest",
+    "Hot desert"
+   ],
+   "correct": 0,
+   "explain": "Ground frozen all year.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "Which biome has a long dry season and scattered trees?",
+   "options": [
+    "Savanna",
+    "Taiga",
+    "Tundra",
+    "Temperate forest"
+   ],
+   "correct": 0,
+   "explain": "Tropical grassland.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "Which trees dominate the taiga?",
+   "options": [
+    "Coniferous evergreens",
+    "Broad-leaved deciduous trees",
+    "Palm trees and mangroves",
+    "Acacia and baobab trees"
+   ],
+   "correct": 0,
+   "explain": "Needles shed snow.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "Roughly how much rain does a hot desert get?",
+   "options": [
+    "Under 25 cm a year",
+    "Over 200 cm a year",
+    "About 100 cm a year",
+    "About 75 cm a year"
+   ],
+   "correct": 0,
+   "explain": "Very dry.",
+   "tag": "Climate"
+  },
+  {
+   "q": "Where are hot deserts mainly found?",
+   "options": [
+    "Around the Tropics",
+    "On the Equator",
+    "Near the poles",
+    "In western Europe and the UK"
+   ],
+   "correct": 0,
+   "explain": "About 15–30° N and S.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which biome has the highest biodiversity?",
+   "options": [
+    "Tropical rainforest",
+    "Tundra",
+    "Hot desert (e.g. Sahara)",
+    "Taiga"
+   ],
+   "correct": 0,
+   "explain": "Warm and wet all year.",
+   "tag": "Characteristics"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU02"] = {
+ "id": "IGRU02",
+ "topicNumber": 1,
+ "topicTitle": "Ecosystems and biomes (IGCSE)",
+ "title": "What is an ecosystem? Why are ecosystems so valuable?",
+ "href": "/igcse/geography/learn/rural-environments/l02-ecosystem-goods-and-services",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Ecosystem goods and services.",
+ "checklist": [
+  "I can explain how ecosystems are open systems with inputs, outputs and internal flows of energy",
+  "I can define the key terms ‘goods’ and ‘services’",
+  "I can describe a range of goods and services provided by varying ecosystems"
+ ],
+ "quiz": [
+  {
+   "q": "Why is an ecosystem an open system?",
+   "options": [
+    "Energy and matter enter and leave",
+    "Nothing can enter or leave it at any time",
+    "It has no living things",
+    "It is always the same size"
+   ],
+   "correct": 0,
+   "explain": "Inputs and outputs.",
+   "tag": "Systems"
+  },
+  {
+   "q": "Which is an INPUT to an ecosystem?",
+   "options": [
+    "Solar radiation",
+    "Eroded soil",
+    "Heat lost to space",
+    "Water run-off"
+   ],
+   "correct": 0,
+   "explain": "Energy from the Sun.",
+   "tag": "Systems"
+  },
+  {
+   "q": "What do decomposers do?",
+   "options": [
+    "Break down dead material",
+    "Produce food by photosynthesis",
+    "Eat only other animals",
+    "Absorb sunlight in the canopy"
+   ],
+   "correct": 0,
+   "explain": "Return nutrients to soil.",
+   "tag": "Systems"
+  },
+  {
+   "q": "What are ecosystem goods?",
+   "options": [
+    "Material products taken from an ecosystem",
+    "Long-term benefits such as climate control",
+    "Payments made to protect forests",
+    "Laws that protect wildlife"
+   ],
+   "correct": 0,
+   "explain": "e.g. timber.",
+   "tag": "Goods"
+  },
+  {
+   "q": "Which is a service?",
+   "options": [
+    "Climate regulation",
+    "Timber for building furniture",
+    "Fuelwood",
+    "Fruit"
+   ],
+   "correct": 0,
+   "explain": "A long-term benefit.",
+   "tag": "Services"
+  },
+  {
+   "q": "Which type of service is tourism?",
+   "options": [
+    "Cultural",
+    "Provisioning",
+    "Regulating",
+    "Supporting"
+   ],
+   "correct": 0,
+   "explain": "Recreation and spiritual benefits.",
+   "tag": "Services"
+  },
+  {
+   "q": "Which type of service is the nutrient cycle?",
+   "options": [
+    "Supporting",
+    "Cultural",
+    "Provisioning",
+    "Recreational"
+   ],
+   "correct": 0,
+   "explain": "Supports other services.",
+   "tag": "Services"
+  },
+  {
+   "q": "How do mangroves protect people?",
+   "options": [
+    "They reduce storm surge energy",
+    "They provide fuelwood for cooking and heating",
+    "They attract tourists",
+    "They make the sea warmer"
+   ],
+   "correct": 0,
+   "explain": "Natural protection.",
+   "tag": "Services"
+  },
+  {
+   "q": "Why is fuelwood important in LICs?",
+   "options": [
+    "It is a cheap energy source",
+    "It is exported abroad for a large profit",
+    "It cools the climate",
+    "It stops soil erosion"
+   ],
+   "correct": 0,
+   "explain": "For cooking and heating.",
+   "tag": "Goods"
+  },
+  {
+   "q": "Which ecosystem gives water and HEP?",
+   "options": [
+    "Mountains and uplands",
+    "Hot deserts such as the Sahara",
+    "Tundra",
+    "Savanna"
+   ],
+   "correct": 0,
+   "explain": "Water storage and energy.",
+   "tag": "Goods"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU03"] = {
+ "id": "IGRU03",
+ "topicNumber": 1,
+ "topicTitle": "Ecosystems and biomes (IGCSE)",
+ "title": "Exploitation of the Amazon rainforest",
+ "href": "/igcse/geography/learn/rural-environments/l03-amazon-rainforest",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Case study: the Amazon.",
+ "checklist": [
+  "I can describe the location of the Amazon rainforest",
+  "I can outline some of the ways in which the Amazon rainforest is being exploited",
+  "I can explain the social, economic and environmental impacts of this exploitation"
+ ],
+ "quiz": [
+  {
+   "q": "On which continent is the Amazon?",
+   "options": [
+    "South America",
+    "Africa",
+    "Asia",
+    "Central America"
+   ],
+   "correct": 0,
+   "explain": "Northern South America.",
+   "tag": "Location"
+  },
+  {
+   "q": "Which country has most of the Amazon?",
+   "options": [
+    "Brazil",
+    "Peru",
+    "Colombia",
+    "Venezuela"
+   ],
+   "correct": 0,
+   "explain": "About 60%.",
+   "tag": "Location"
+  },
+  {
+   "q": "What is the biggest cause of Amazon deforestation?",
+   "options": [
+    "Cattle ranching",
+    "Tourism",
+    "Fishing",
+    "Rubber tapping by local people"
+   ],
+   "correct": 0,
+   "explain": "Cleared for pasture.",
+   "tag": "Exploitation"
+  },
+  {
+   "q": "What is the Carajás complex?",
+   "options": [
+    "A huge iron ore mine",
+    "A hydroelectric dam",
+    "A national park",
+    "A soya farm cooperative"
+   ],
+   "correct": 0,
+   "explain": "World’s largest iron ore mine.",
+   "tag": "Exploitation"
+  },
+  {
+   "q": "Why does road building cause more deforestation?",
+   "options": [
+    "It opens up the forest to settlers",
+    "It reduces the number of trees needed",
+    "It stops illegal logging",
+    "It floods the forest"
+   ],
+   "correct": 0,
+   "explain": "Access for development.",
+   "tag": "Exploitation"
+  },
+  {
+   "q": "Which is an environmental impact?",
+   "options": [
+    "Loss of biodiversity",
+    "Export income from soya",
+    "Jobs in mining",
+    "Loss of indigenous land"
+   ],
+   "correct": 0,
+   "explain": "Habitats destroyed.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which is a social impact?",
+   "options": [
+    "Indigenous people lose their land",
+    "Carbon dioxide is released into the atmosphere",
+    "Soil is eroded by heavy rain",
+    "Rivers are polluted by mining"
+   ],
+   "correct": 0,
+   "explain": "Affects people’s lives.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "How does deforestation affect climate change?",
+   "options": [
+    "It releases stored carbon",
+    "It cools the atmosphere",
+    "It increases rainfall worldwide",
+    "It has no effect"
+   ],
+   "correct": 0,
+   "explain": "CO2 released.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "What is selective logging?",
+   "options": [
+    "Cutting only certain trees",
+    "Clearing whole areas of forest",
+    "Burning trees for farmland",
+    "Planting new conifer forests"
+   ],
+   "correct": 0,
+   "explain": "Leaves most trees standing.",
+   "tag": "Management"
+  },
+  {
+   "q": "What happened to Amazon deforestation from 2021 to 2025?",
+   "options": [
+    "It fell each year",
+    "It doubled",
+    "It stayed the same",
+    "It stopped completely"
+   ],
+   "correct": 0,
+   "explain": "About 13,000 to 5,800 km².",
+   "tag": "Exploitation"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU04"] = {
+ "id": "IGRU04",
+ "topicNumber": 2,
+ "topicTitle": "Farming and rural areas (IGCSE)",
+ "title": "Food production and farming",
+ "href": "/igcse/geography/learn/rural-environments/l04-food-production-and-farming",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Food production and farming.",
+ "checklist": [
+  "I can describe how farming/food production can be represented as a system",
+  "I can explain a range of different farming systems",
+  "I can explain how rural areas/ecosystems can be modified and changed by humans to grow food"
+ ],
+ "quiz": [
+  {
+   "q": "What is arable farming?",
+   "options": [
+    "Growing crops",
+    "Rearing animals for milk",
+    "Moving from area to area",
+    "Keeping sheep on hills"
+   ],
+   "correct": 0,
+   "explain": "Ploughing and crops.",
+   "tag": "Types"
+  },
+  {
+   "q": "What is pastoral farming?",
+   "options": [
+    "Rearing animals",
+    "Growing salad crops",
+    "Growing food for the family only",
+    "Farming on terraces"
+   ],
+   "correct": 0,
+   "explain": "Livestock.",
+   "tag": "Types"
+  },
+  {
+   "q": "What is subsistence farming?",
+   "options": [
+    "Growing food for the farmer’s family",
+    "Selling crops to supermarkets abroad",
+    "Using lots of machinery and fertiliser",
+    "Farming on very large estates"
+   ],
+   "correct": 0,
+   "explain": "Not for sale.",
+   "tag": "Types"
+  },
+  {
+   "q": "What is intensive farming?",
+   "options": [
+    "High inputs on a small area",
+    "Low inputs on a large area",
+    "Farming without any machinery",
+    "Farming only in deserts"
+   ],
+   "correct": 0,
+   "explain": "High yields per hectare.",
+   "tag": "Types"
+  },
+  {
+   "q": "Which is an example of extensive farming?",
+   "options": [
+    "Cattle ranching on huge areas",
+    "Growing tomatoes in heated greenhouses",
+    "Rice terraces",
+    "Market gardening"
+   ],
+   "correct": 0,
+   "explain": "Low inputs, large area.",
+   "tag": "Types"
+  },
+  {
+   "q": "In the farm system, what is harvesting?",
+   "options": [
+    "A process",
+    "An input",
+    "An output",
+    "A feedback"
+   ],
+   "correct": 0,
+   "explain": "Activities on the farm.",
+   "tag": "System"
+  },
+  {
+   "q": "Which is a farm output?",
+   "options": [
+    "Milk",
+    "Fertiliser",
+    "Labour",
+    "Rainfall"
+   ],
+   "correct": 0,
+   "explain": "Products from the farm.",
+   "tag": "System"
+  },
+  {
+   "q": "Which is a physical factor affecting farming?",
+   "options": [
+    "Soil fertility",
+    "Government subsidies",
+    "Market demand",
+    "Capital"
+   ],
+   "correct": 0,
+   "explain": "Natural factor.",
+   "tag": "Factors"
+  },
+  {
+   "q": "Which is a human factor affecting farming?",
+   "options": [
+    "Government subsidies",
+    "Temperature and rainfall",
+    "Drainage",
+    "Slope"
+   ],
+   "correct": 0,
+   "explain": "Decided by people.",
+   "tag": "Factors"
+  },
+  {
+   "q": "How do people modify ecosystems to farm?",
+   "options": [
+    "Clearing forests and irrigating land",
+    "Leaving land untouched",
+    "Planting only wild native species everywhere",
+    "Stopping all water use"
+   ],
+   "correct": 0,
+   "explain": "Changes to grow food.",
+   "tag": "Modification"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU05"] = {
+ "id": "IGRU05",
+ "topicNumber": 2,
+ "topicTitle": "Farming and rural areas (IGCSE)",
+ "title": "Characteristics of rural areas",
+ "href": "/igcse/geography/learn/rural-environments/l05-characteristics-of-rural-areas",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Characteristics of rural areas.",
+ "checklist": [
+  "I can define the key terms urban, rural and suburban",
+  "I can outline some of the key characteristics of rural areas",
+  "I can compare and contrast the characteristics of three rural environments from differing parts of the world"
+ ],
+ "quiz": [
+  {
+   "q": "What is a rural area?",
+   "options": [
+    "The countryside with low population density",
+    "A busy city centre full of high-rise office blocks",
+    "The edge of a city with many houses",
+    "An area of factories near a port"
+   ],
+   "correct": 0,
+   "explain": "Countryside.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is a suburban area?",
+   "options": [
+    "Housing on the edge of a city",
+    "A remote mountain village",
+    "A city centre business district",
+    "An area of farmland only"
+   ],
+   "correct": 0,
+   "explain": "Lower-density residential.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is the rural–urban fringe?",
+   "options": [
+    "Where town meets countryside",
+    "The centre of a large city",
+    "The boundary of a national park in the uplands",
+    "A remote island"
+   ],
+   "correct": 0,
+   "explain": "Competing land uses.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Which job is typical in rural areas?",
+   "options": [
+    "Farming",
+    "Banking",
+    "Car manufacturing",
+    "Call centre work"
+   ],
+   "correct": 0,
+   "explain": "Primary sector.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "What does accessibility mean?",
+   "options": [
+    "How easy a place is to reach",
+    "How many tourists visit it every year",
+    "How fertile the soil is",
+    "How high the land is"
+   ],
+   "correct": 0,
+   "explain": "Roads, transport, internet.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "What kind of settlements are common in rural areas?",
+   "options": [
+    "Hamlets and villages",
+    "Large cities",
+    "Megacities",
+    "Industrial estates and retail parks"
+   ],
+   "correct": 0,
+   "explain": "Small settlements.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "How is the Lake District managed?",
+   "options": [
+    "As a National Park",
+    "As an industrial zone",
+    "As a mining area",
+    "It is not managed"
+   ],
+   "correct": 0,
+   "explain": "Since 1951.",
+   "tag": "Compare"
+  },
+  {
+   "q": "Which rural area has a tropical monsoon climate?",
+   "options": [
+    "Isan, Thailand",
+    "Lake District, UK",
+    "Scottish Highlands",
+    "Canadian prairies"
+   ],
+   "correct": 0,
+   "explain": "Long dry season.",
+   "tag": "Compare"
+  },
+  {
+   "q": "Why do young people leave Isan?",
+   "options": [
+    "To find work in Bangkok",
+    "To retire to the coast near Phuket",
+    "To go fishing at sea",
+    "To farm in the Amazon"
+   ],
+   "correct": 0,
+   "explain": "Rural–urban migration.",
+   "tag": "Compare"
+  },
+  {
+   "q": "What is ‘conservation’ management?",
+   "options": [
+    "Protecting the landscape and wildlife",
+    "Building new roads, housing and shopping centres",
+    "Opening new mines",
+    "Clearing forest for farms"
+   ],
+   "correct": 0,
+   "explain": "Opposite of development.",
+   "tag": "Characteristics"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU06"] = {
+ "id": "IGRU06",
+ "topicNumber": 3,
+ "topicTitle": "Rural change in a developed country (UK) (IGCSE)",
+ "title": "How are rural areas changing in developed countries? UK case study (1)",
+ "href": "/igcse/geography/learn/rural-environments/l06-uk-rural-change-counter-urbanisation",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: UK rural change (1): counter-urbanisation.",
+ "checklist": [
+  "I can define the key terms ‘suburbanisation’ and ‘counter-urbanisation’",
+  "I can identify some of the key features of differing rural areas in developed countries such as the UK",
+  "I can explain the causes and consequences of both suburbanisation and counter-urbanisation in the UK"
+ ],
+ "quiz": [
+  {
+   "q": "What is counter-urbanisation?",
+   "options": [
+    "Movement from cities to rural areas",
+    "Movement from rural areas to cities",
+    "Growth of city centres upwards",
+    "Building new towns abroad"
+   ],
+   "correct": 0,
+   "explain": "Out of cities.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is suburbanisation?",
+   "options": [
+    "Outward spread of urban areas",
+    "People leaving the country",
+    "Growth of farm employment",
+    "Building new homes on brownfield sites in cities"
+   ],
+   "correct": 0,
+   "explain": "Lower-density edges.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Which is a PULL factor to the countryside?",
+   "options": [
+    "Larger houses with gardens",
+    "Traffic congestion and parking shortages",
+    "Higher crime rates",
+    "Air pollution"
+   ],
+   "correct": 0,
+   "explain": "Attracts people.",
+   "tag": "Causes"
+  },
+  {
+   "q": "Which is a PUSH factor from cities?",
+   "options": [
+    "Noise pollution",
+    "Pleasant scenery",
+    "Safer roads",
+    "Bigger gardens"
+   ],
+   "correct": 0,
+   "explain": "Drives people away.",
+   "tag": "Causes"
+  },
+  {
+   "q": "How has the internet helped counter-urbanisation?",
+   "options": [
+    "People can work from home",
+    "It made houses cheaper",
+    "It closed city offices",
+    "It reduced traffic in villages"
+   ],
+   "correct": 0,
+   "explain": "Home-working.",
+   "tag": "Causes"
+  },
+  {
+   "q": "Why can young locals not afford village homes?",
+   "options": [
+    "Prices rise and second homes",
+    "There are too many new houses",
+    "Villages have no jobs at all",
+    "Banks will not lend in rural areas"
+   ],
+   "correct": 0,
+   "explain": "Demand pushes prices up.",
+   "tag": "Consequences"
+  },
+  {
+   "q": "Which is a POSITIVE effect of counter-urbanisation?",
+   "options": [
+    "Village schools stay open",
+    "Loss of community spirit in villages",
+    "More congestion",
+    "Rising house prices"
+   ],
+   "correct": 0,
+   "explain": "Young families arrive.",
+   "tag": "Consequences"
+  },
+  {
+   "q": "Why do some village services close?",
+   "options": [
+    "Commuters shop in towns",
+    "Too many people use them",
+    "They are too profitable",
+    "Tourists ban them"
+   ],
+   "correct": 0,
+   "explain": "Lack of local custom.",
+   "tag": "Consequences"
+  },
+  {
+   "q": "Why does new housing raise flood risk?",
+   "options": [
+    "More impermeable surfaces",
+    "More trees are planted on new estates",
+    "Rivers get deeper",
+    "It rains less"
+   ],
+   "correct": 0,
+   "explain": "Faster run-off.",
+   "tag": "Consequences"
+  },
+  {
+   "q": "Which villages change most?",
+   "options": [
+    "Those closest to cities",
+    "The most remote and isolated ones",
+    "Those on islands",
+    "Those with no roads"
+   ],
+   "correct": 0,
+   "explain": "Easy commuting.",
+   "tag": "Consequences"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU07"] = {
+ "id": "IGRU07",
+ "topicNumber": 3,
+ "topicTitle": "Rural change in a developed country (UK) (IGCSE)",
+ "title": "How are rural areas changing in developed countries? UK case study (2)",
+ "href": "/igcse/geography/learn/rural-environments/l07-uk-rural-change-tourism-and-isolation",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: UK rural change (2): tourism and isolation.",
+ "checklist": [
+  "I can describe some of the ways accessible and remote tourism areas in the UK are changing",
+  "I can explain the growth in tourism in the Lake District (an area of accessible countryside) and evaluate its impacts on the local area",
+  "I can describe how and why the number of people employed in agriculture has changed in the UK",
+  "I can explain how rural isolation and decline can impact on more remote rural areas in the UK such as Cumbria"
+ ],
+ "quiz": [
+  {
+   "q": "When did the Lake District become a National Park?",
+   "options": [
+    "1951",
+    "2017",
+    "1901",
+    "1971"
+   ],
+   "correct": 0,
+   "explain": "World Heritage Site in 2017.",
+   "tag": "Lake District"
+  },
+  {
+   "q": "Roughly how many visitors does the Lake District get each year?",
+   "options": [
+    "About 17 million",
+    "About 1.7 million",
+    "About 170,000",
+    "About 170 million"
+   ],
+   "correct": 0,
+   "explain": "17.45 million in 2025.",
+   "tag": "Lake District"
+  },
+  {
+   "q": "What is a honeypot site?",
+   "options": [
+    "A popular place attracting many visitors",
+    "A farm that keeps bees",
+    "A remote valley that is rarely visited by tourists",
+    "A protected wildlife reserve"
+   ],
+   "correct": 0,
+   "explain": "e.g. Bowness.",
+   "tag": "Lake District"
+  },
+  {
+   "q": "Which is a negative impact of tourism?",
+   "options": [
+    "Footpath erosion",
+    "More jobs in hotels",
+    "Money for conservation",
+    "Support for local shops"
+   ],
+   "correct": 0,
+   "explain": "Too many walkers.",
+   "tag": "Lake District"
+  },
+  {
+   "q": "Why are local people priced out of housing?",
+   "options": [
+    "Second homes and holiday lets",
+    "Too few tourists visit",
+    "Farms pay very high wages to all their workers",
+    "Houses are too large"
+   ],
+   "correct": 0,
+   "explain": "About 24% of homes.",
+   "tag": "Lake District"
+  },
+  {
+   "q": "What share of UK employment is in farming?",
+   "options": [
+    "About 1%",
+    "About 10%",
+    "About 25%",
+    "About 50%"
+   ],
+   "correct": 0,
+   "explain": "Very small.",
+   "tag": "Farm employment"
+  },
+  {
+   "q": "Why have farm jobs declined?",
+   "options": [
+    "Mechanisation",
+    "More small farms",
+    "Higher food prices",
+    "Fewer machines"
+   ],
+   "correct": 0,
+   "explain": "Machines replaced workers.",
+   "tag": "Farm employment"
+  },
+  {
+   "q": "What is the negative multiplier effect?",
+   "options": [
+    "A spiral of decline",
+    "Growth from tourism",
+    "Rising house prices",
+    "More services opening"
+   ],
+   "correct": 0,
+   "explain": "Losses lead to more losses.",
+   "tag": "Isolation"
+  },
+  {
+   "q": "Which shows rural isolation?",
+   "options": [
+    "Shops and buses closing",
+    "New schools and surgeries opening",
+    "Faster broadband",
+    "More young families"
+   ],
+   "correct": 0,
+   "explain": "Cut off from services.",
+   "tag": "Isolation"
+  },
+  {
+   "q": "Which storm flooded Cumbria in 2015?",
+   "options": [
+    "Storm Desmond",
+    "Hurricane Katrina",
+    "Typhoon Haiyan",
+    "Cyclone Nargis"
+   ],
+   "correct": 0,
+   "explain": "December 2015.",
+   "tag": "Hazards"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU08"] = {
+ "id": "IGRU08",
+ "topicNumber": 3,
+ "topicTitle": "Rural change in a developed country (UK) (IGCSE)",
+ "title": "Diversification of farming",
+ "href": "/igcse/geography/learn/rural-environments/l08-diversification-of-farming",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Diversification of farming.",
+ "checklist": [
+  "I can describe some of the changes to agriculture in developed countries in recent years",
+  "I can explain the concept of ‘farm diversification’",
+  "I can evaluate some methods of farm diversification used in the UK"
+ ],
+ "quiz": [
+  {
+   "q": "About what share of UK jobs are in farming?",
+   "options": [
+    "About 1%",
+    "About 20%",
+    "About 40%",
+    "About 60%"
+   ],
+   "correct": 0,
+   "explain": "Very small share.",
+   "tag": "Change"
+  },
+  {
+   "q": "Roughly how much of its food does the UK grow?",
+   "options": [
+    "About 60%",
+    "About 100%",
+    "About 10%",
+    "About 90%"
+   ],
+   "correct": 0,
+   "explain": "The rest is imported.",
+   "tag": "Change"
+  },
+  {
+   "q": "Why do small farms struggle to make a profit?",
+   "options": [
+    "Supermarkets want cheap food",
+    "There is no demand for food",
+    "Farms have too many workers",
+    "Farmland is too expensive to rent out"
+   ],
+   "correct": 0,
+   "explain": "Low prices.",
+   "tag": "Change"
+  },
+  {
+   "q": "What is farm diversification?",
+   "options": [
+    "Developing new sources of income",
+    "Growing only one crop on all of the land",
+    "Selling the whole farm",
+    "Moving the farm abroad"
+   ],
+   "correct": 0,
+   "explain": "New income streams.",
+   "tag": "Concept"
+  },
+  {
+   "q": "Which is a recreation-based diversification?",
+   "options": [
+    "Glamping site",
+    "Growing more wheat",
+    "Buying a new tractor",
+    "Removing hedgerows"
+   ],
+   "correct": 0,
+   "explain": "Leisure income.",
+   "tag": "Methods"
+  },
+  {
+   "q": "What does organic farming avoid?",
+   "options": [
+    "Synthetic fertilisers and pesticides",
+    "Crop rotation",
+    "Animal manure",
+    "Selling food locally at farmers’ markets"
+   ],
+   "correct": 0,
+   "explain": "Natural methods only.",
+   "tag": "Methods"
+  },
+  {
+   "q": "What is a disadvantage of organic farming?",
+   "options": [
+    "Lower yields",
+    "Higher pesticide use",
+    "Worse soils",
+    "Fewer wildlife species"
+   ],
+   "correct": 0,
+   "explain": "Produces less per hectare.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "What is an advantage of a farm shop?",
+   "options": [
+    "Higher profit per item",
+    "No staff are needed",
+    "Supermarkets supply it",
+    "It needs no marketing"
+   ],
+   "correct": 0,
+   "explain": "Cuts out the middleman.",
+   "tag": "Evaluate"
+  },
+  {
+   "q": "Are GM crops grown commercially in the UK?",
+   "options": [
+    "No",
+    "Yes, everywhere",
+    "Only in Scotland",
+    "Only potatoes"
+   ],
+   "correct": 0,
+   "explain": "Gene editing is now being developed.",
+   "tag": "Methods"
+  },
+  {
+   "q": "Which is an energy diversification?",
+   "options": [
+    "Solar panels on fields",
+    "Pick-your-own fruit fields",
+    "Farm shop",
+    "Petting zoo"
+   ],
+   "correct": 0,
+   "explain": "Rent for renewables.",
+   "tag": "Methods"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU09"] = {
+ "id": "IGRU09",
+ "topicNumber": 3,
+ "topicTitle": "Rural change in a developed country (UK) (IGCSE)",
+ "title": "How can we make life in rural areas more sustainable?",
+ "href": "/igcse/geography/learn/rural-environments/l09-sustainable-rural-living",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Sustainable rural living (UK).",
+ "checklist": [
+  "I can define the key term ‘sustainable rural living’",
+  "I can categorise a range of sustainable rural management strategies into social, economic and environmental",
+  "I can outline how organic farming can be used as a strategy to improve sustainability in rural areas in the UK",
+  "I can explain some of the strategies being used by UK NGOs to make rural communities more sustainable"
+ ],
+ "quiz": [
+  {
+   "q": "What does sustainable rural living mean?",
+   "options": [
+    "Meeting needs now without harming the future",
+    "Building as many new houses as possible in villages",
+    "Stopping all farming",
+    "Moving everyone into cities"
+   ],
+   "correct": 0,
+   "explain": "Balances people and environment.",
+   "tag": "Definition"
+  },
+  {
+   "q": "How many criteria are on Egan’s Wheel?",
+   "options": [
+    "Eight",
+    "Four",
+    "Six",
+    "Twelve"
+   ],
+   "correct": 0,
+   "explain": "Eight sections.",
+   "tag": "Egan"
+  },
+  {
+   "q": "Which is an Egan’s Wheel criterion?",
+   "options": [
+    "Well connected",
+    "Highly populated",
+    "Fully industrial",
+    "Car dependent"
+   ],
+   "correct": 0,
+   "explain": "Transport.",
+   "tag": "Egan"
+  },
+  {
+   "q": "Which strategy is mainly ENVIRONMENTAL?",
+   "options": [
+    "Restoring hedgerows and peat bogs",
+    "Affordable housing schemes for local people",
+    "Grants for farm shops",
+    "Countryside education"
+   ],
+   "correct": 0,
+   "explain": "Ecosystem preservation.",
+   "tag": "Strategies"
+  },
+  {
+   "q": "Which strategy is mainly SOCIAL?",
+   "options": [
+    "Better rural bus services",
+    "Eco-tourism jobs",
+    "Farm diversification grants",
+    "Peat restoration"
+   ],
+   "correct": 0,
+   "explain": "Reduces isolation.",
+   "tag": "Strategies"
+  },
+  {
+   "q": "Which strategy is mainly ECONOMIC?",
+   "options": [
+    "Grants to help farms diversify",
+    "Restoring woodland",
+    "Park-and-ride schemes at honeypot sites",
+    "Village hall activities"
+   ],
+   "correct": 0,
+   "explain": "Jobs and income.",
+   "tag": "Strategies"
+  },
+  {
+   "q": "How does organic farming help rivers?",
+   "options": [
+    "Less chemical run-off",
+    "More fertiliser in the water",
+    "It drains the land faster",
+    "It stops all rainfall"
+   ],
+   "correct": 0,
+   "explain": "Cleaner water.",
+   "tag": "Organic"
+  },
+  {
+   "q": "What is a drawback of organic farming?",
+   "options": [
+    "Lower yields",
+    "More pesticides",
+    "Poorer soils",
+    "Less biodiversity"
+   ],
+   "correct": 0,
+   "explain": "Less food per hectare.",
+   "tag": "Organic"
+  },
+  {
+   "q": "Which NGO campaigns to protect the green belt?",
+   "options": [
+    "CPRE",
+    "Operation Smile",
+    "FAO",
+    "World Bank"
+   ],
+   "correct": 0,
+   "explain": "The countryside charity.",
+   "tag": "NGOs"
+  },
+  {
+   "q": "What does ACRE help rural communities with?",
+   "options": [
+    "Village halls and affordable housing",
+    "Building new motorways and bypasses",
+    "Selling GM crops",
+    "Running airports"
+   ],
+   "correct": 0,
+   "explain": "Community services.",
+   "tag": "NGOs"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU10"] = {
+ "id": "IGRU10",
+ "topicNumber": 4,
+ "topicTitle": "Rural change in an emerging country (Thailand) (IGCSE)",
+ "title": "How are rural areas changing in developing/emerging countries? Thailand case study (1)",
+ "href": "/igcse/geography/learn/rural-environments/l10-thailand-rural-urban-migration",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Thailand (1): rural–urban migration.",
+ "checklist": [
+  "I can define a range of key terminology including ‘urbanisation’ and ‘rural–urban migration’",
+  "I can outline some basic population statistics for Thailand",
+  "I can explain the concept of rural–urban migration and push–pull factors",
+  "I can outline the impact of rural–urban migration on rural areas in Thailand"
+ ],
+ "quiz": [
+  {
+   "q": "What is rural–urban migration?",
+   "options": [
+    "Moving from countryside to cities",
+    "Moving from cities to countryside",
+    "Moving to another country",
+    "Moving between two villages"
+   ],
+   "correct": 0,
+   "explain": "Usually for work.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Which is a PUSH factor?",
+   "options": [
+    "Low farm wages",
+    "Better hospitals",
+    "More jobs in cities",
+    "Access to education"
+   ],
+   "correct": 0,
+   "explain": "Drives people away.",
+   "tag": "Push-pull"
+  },
+  {
+   "q": "Which is a PULL factor?",
+   "options": [
+    "Job opportunities in the city",
+    "Drought and famine in the countryside",
+    "Lack of medical services",
+    "High birth rates"
+   ],
+   "correct": 0,
+   "explain": "Attracts people.",
+   "tag": "Push-pull"
+  },
+  {
+   "q": "Which region do most migrants to Bangkok come from?",
+   "options": [
+    "The North-East (Isan)",
+    "The far South near Malaysia",
+    "The Gulf islands",
+    "Myanmar"
+   ],
+   "correct": 0,
+   "explain": "Poorer region.",
+   "tag": "Thailand"
+  },
+  {
+   "q": "Roughly what share of Thais lived in urban areas in 2021?",
+   "options": [
+    "About 52%",
+    "About 25%",
+    "About 80%",
+    "About 10%"
+   ],
+   "correct": 0,
+   "explain": "52.16%.",
+   "tag": "Thailand"
+  },
+  {
+   "q": "What is Thailand’s income group?",
+   "options": [
+    "Upper-middle income",
+    "Low income",
+    "High income",
+    "Lower-middle income"
+   ],
+   "correct": 0,
+   "explain": "An emerging economy.",
+   "tag": "Thailand"
+  },
+  {
+   "q": "What is a skip-generation household?",
+   "options": [
+    "Children raised by grandparents",
+    "Families with no children",
+    "Only young adults living together",
+    "Households that skip school"
+   ],
+   "correct": 0,
+   "explain": "Parents work away.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "What are remittances?",
+   "options": [
+    "Money sent home by migrants",
+    "Taxes paid to the government",
+    "Loans from banks to farmers",
+    "Payments for rice exports"
+   ],
+   "correct": 0,
+   "explain": "Support rural families.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Why might food security be at risk?",
+   "options": [
+    "Fewer young farm workers",
+    "Too many farm workers",
+    "Rice exports have stopped",
+    "Farmland is increasing fast"
+   ],
+   "correct": 0,
+   "explain": "Ageing farm population.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Where is Thailand’s population densest?",
+   "options": [
+    "Bangkok and the Central Plain",
+    "The northern mountains",
+    "The western hills along the border",
+    "Offshore islands"
+   ],
+   "correct": 0,
+   "explain": "Fertile lowlands and the capital.",
+   "tag": "Thailand"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGRU11"] = {
+ "id": "IGRU11",
+ "topicNumber": 4,
+ "topicTitle": "Rural change in an emerging country (Thailand) (IGCSE)",
+ "title": "Managing rural challenges in Thailand",
+ "href": "/igcse/geography/learn/rural-environments/l11-managing-rural-challenges-thailand",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 2: Human Geography — Rural Environments: Thailand (2): managing rural challenges.",
+ "checklist": [
+  "I can identify a range of social, economic and environmental challenges faced in rural areas of Thailand",
+  "I can explain the ways in which a range of different groups are aiming to manage those challenges in Thailand",
+  "I can develop my research and presentation skills"
+ ],
+ "quiz": [
+  {
+   "q": "What is an IGO?",
+   "options": [
+    "An organisation whose members are countries",
+    "A local village council",
+    "A private company",
+    "A charity run by volunteers in one village"
+   ],
+   "correct": 0,
+   "explain": "e.g. the UN.",
+   "tag": "Groups"
+  },
+  {
+   "q": "What is an NGO?",
+   "options": [
+    "A non-governmental organisation",
+    "A national government ministry",
+    "An international bank that lends money",
+    "A UN agency"
+   ],
+   "correct": 0,
+   "explain": "Often a charity.",
+   "tag": "Groups"
+  },
+  {
+   "q": "Which is an IGO?",
+   "options": [
+    "FAO",
+    "Operation Smile",
+    "Royal Project Foundation",
+    "A village cooperative"
+   ],
+   "correct": 0,
+   "explain": "UN Food and Agriculture Organization.",
+   "tag": "Groups"
+  },
+  {
+   "q": "What did the Royal Project replace?",
+   "options": [
+    "Opium growing",
+    "Rice farming",
+    "Rubber plantations",
+    "Fishing"
+   ],
+   "correct": 0,
+   "explain": "With cash crops.",
+   "tag": "Projects"
+  },
+  {
+   "q": "Who founded the Royal Project?",
+   "options": [
+    "King Bhumibol",
+    "The World Bank",
+    "The UK government",
+    "The FAO"
+   ],
+   "correct": 0,
+   "explain": "In 1969.",
+   "tag": "Projects"
+  },
+  {
+   "q": "What does Operation Smile provide?",
+   "options": [
+    "Free cleft lip surgery",
+    "Low-interest loans to farmers",
+    "New roads",
+    "Rice seeds"
+   ],
+   "correct": 0,
+   "explain": "Health care for children.",
+   "tag": "Projects"
+  },
+  {
+   "q": "What problem does the Tom Yum Project tackle?",
+   "options": [
+    "Elephants raiding crops",
+    "Coastal flooding",
+    "Traffic congestion in Bangkok",
+    "Coral bleaching"
+   ],
+   "correct": 0,
+   "explain": "Human–elephant conflict.",
+   "tag": "Projects"
+  },
+  {
+   "q": "What is OTOP?",
+   "options": [
+    "A scheme promoting village products",
+    "A national health insurance plan",
+    "A rice export tax",
+    "An elephant reserve"
+   ],
+   "correct": 0,
+   "explain": "One Tambon One Product.",
+   "tag": "Government"
+  },
+  {
+   "q": "Which is an environmental challenge in rural Thailand?",
+   "options": [
+    "Haze from burning crop waste",
+    "Low and unstable crop prices",
+    "Skip-generation households",
+    "Household debt"
+   ],
+   "correct": 0,
+   "explain": "Air pollution.",
+   "tag": "Challenges"
+  },
+  {
+   "q": "Which is a social challenge?",
+   "options": [
+    "Poorer access to schools and health care",
+    "Soil salinity on farmland in Isan",
+    "Deforestation",
+    "Drought"
+   ],
+   "correct": 0,
+   "explain": "Affects people’s wellbeing.",
+   "tag": "Challenges"
   }
  ]
 };
