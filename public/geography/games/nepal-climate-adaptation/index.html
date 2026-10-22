@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nepal: Adapting to Climate Change — IB Geography Games — SBL</title>
+<meta name="description" content="IB DP Geography game on rural Nepal and climate change: crack the evidence vault, sort monsoon and dry-season impacts, then plan adaptation projects for a village in the Siwalik Hills.">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --gold: #f59e0b;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --c-place: #2563eb; --c-processes: #0f766e; --c-power: #7c3aed; --c-possibilities: #d97706;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 0% 0%, rgba(37,99,235,0.08), transparent 40%), radial-gradient(circle at 100% 10%, rgba(0,184,176,0.12), transparent 35%), linear-gradient(180deg, #f6f9fa, #eaf1f3); }
+  a { color: inherit; text-decoration: none; }
+  button, textarea, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px 26px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,0.95), rgba(15,58,92,0.9)); position: relative; overflow: hidden; }
+  .hero .kicker { display: inline-block; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; line-height: 1.15; }
+  .hero p { color: rgba(255,255,255,0.88); max-width: 780px; margin-top: 8px; line-height: 1.55; }
+  .hero .facts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .hero .facts span { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 5px 11px; font-size: 0.78rem; font-weight: 700; }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .step { padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  .step.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .step.done { background: var(--green-soft); color: var(--green); border-color: rgba(22,163,74,0.35); }
+
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; scroll-margin-top: 80px; }
+  .panel h2 { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  /* reflection */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.1rem; margin-top: 4px; line-height: 1.35; }
+  .wb { margin-top: 4px; padding: 12px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); }
+  .wb label { display: block; font-weight: 800; font-size: 0.92rem; margin-bottom: 6px; line-height: 1.4; }
+  .wb textarea { width: 100%; min-height: 120px; padding: 10px; border-radius: 10px; border: 1px solid rgba(5,43,65,0.22); font-size: 0.93rem; line-height: 1.5; resize: vertical; }
+  .wb .foot { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 8px; flex-wrap: wrap; font-size: 0.76rem; color: var(--muted); }
+  .copy { border: 1px solid rgba(0,124,130,0.35); background: #fff; color: var(--teal-dark); border-radius: 9px; padding: 7px 12px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+
+  .finish { text-align: center; padding: 22px; border-radius: 20px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .finish h2 { color: #fff; font-size: 1.5rem; }
+  .finish .stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 14px 0; }
+  .finish .stats div { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; }
+  .finish .stats b { display: block; font-size: 1.3rem; color: #fcd34d; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) { .sg-zones { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; } .hero { padding: 20px 18px; }
+    .sg-zones { grid-template-columns: 1fr; }
+    .hud .lv { display: none; } .hud-inner { grid-template-columns: auto 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+  /* evidence vault */
+  .code-bar { display: flex; gap: 8px; justify-content: center; margin: 4px 0 14px; flex-wrap: wrap; }
+  .code-bar span { width: 44px; height: 54px; border-radius: 10px; display: grid; place-items: center; font-size: 1.6rem; font-weight: 900; background: #0f2236; color: rgba(255,255,255,0.25); border: 2px solid #1e3a55; transition: all .4s ease; }
+  .code-bar span.on { background: linear-gradient(135deg, #fcd34d, #f59e0b); color: #422006; border-color: #f59e0b; transform: translateY(-3px); }
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .lock { border: 2px solid var(--line); border-radius: 16px; padding: 14px; background: #fff; position: relative; }
+  .lock .lk-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .lock .lk-ico { font-size: 1.3rem; }
+  .lock .lk-name { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .lock .lk-q { font-weight: 750; line-height: 1.42; font-size: 0.94rem; margin-bottom: 10px; }
+  .lock .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .opt { border: 2px solid var(--line); background: #f8fafc; border-radius: 10px; padding: 8px 6px; font-size: 0.86rem; font-weight: 800; cursor: pointer; color: var(--ink); }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.no { border-color: var(--red); background: var(--red-soft); color: #7f1d1d; animation: shake .35s; }
+  .opt.yes { border-color: var(--green); background: var(--green-soft); color: var(--green); }
+  .opt:disabled { cursor: default; }
+  .lock.open { border-color: rgba(22,163,74,0.5); background: #fbfefc; }
+  .lock .lk-note { display: none; margin-top: 10px; font-size: 0.84rem; line-height: 1.45; color: #14532d; background: var(--green-soft); border-radius: 10px; padding: 8px 10px; }
+  .lock.open .lk-note { display: block; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  /* season sort */
+  .tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); min-height: 54px; }
+  .tray .empty-note { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .ccard { border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.36; text-align: left; color: var(--ink); box-shadow: 0 3px 8px rgba(0,25,45,0.06); width: 100%; }
+  .ccard.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .ccard.correct { border-color: var(--green); background: var(--green-soft); cursor: default; }
+  .zones { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .zone { border-radius: 16px; padding: 10px; min-height: 170px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .zone.ready { background: #f0fbfa; }
+  .zone h4 { font-size: 1rem; font-weight: 900; margin-bottom: 2px; }
+  .zone .zsub { font-size: 0.76rem; color: var(--muted); margin-bottom: 8px; line-height: 1.35; }
+  .zone .zc { display: grid; gap: 6px; }
+  .z-wet { border-color: #0284c7; background: linear-gradient(180deg, #eef7fd, #fff); } .z-wet h4 { color: #0369a1; }
+  .z-dry { border-color: #d97706; background: linear-gradient(180deg, #fff7e8, #fff); } .z-dry h4 { color: #b45309; }
+  .counter { text-align: center; font-size: 0.85rem; font-weight: 800; color: var(--muted); margin-top: 8px; }
+  .whylist { list-style: none; display: grid; gap: 6px; margin-top: 10px; }
+  .whylist li { background: var(--amber-soft); color: #78350f; border-radius: 10px; padding: 8px 10px; font-size: 0.86rem; line-height: 1.45; }
+
+  /* village planner */
+  .plans { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+  .plan { border: 2px solid var(--line); border-radius: 14px; padding: 12px 13px; background: #fff; cursor: pointer; text-align: left; color: var(--ink); font: inherit; }
+  .plan h4 { font-size: 0.98rem; font-weight: 900; color: var(--navy); margin-bottom: 3px; }
+  .plan p { font-size: 0.84rem; color: var(--muted); line-height: 1.42; }
+  .plan.on { border-color: var(--teal); background: #f0fbfa; box-shadow: 0 0 0 4px rgba(0,184,176,0.18); }
+  .plan:disabled { cursor: default; }
+  .plan .res { display: none; margin-top: 8px; font-size: 0.83rem; line-height: 1.45; border-radius: 9px; padding: 7px 9px; }
+  .plan.show .res { display: block; }
+  .plan .res.good { background: var(--green-soft); color: #14532d; }
+  .plan .res.meh { background: var(--amber-soft); color: #78350f; }
+  .budget { text-align: center; font-weight: 900; color: var(--navy); margin-bottom: 10px; }
+  .keypts { border-radius: 14px; background: #e8f6f8; border-left: 5px solid #0891b2; padding: 12px 14px; margin-bottom: 12px; }
+  .keypts h4 { color: #0e7490; font-size: 0.95rem; margin-bottom: 6px; }
+  .keypts li { margin-left: 18px; font-size: 0.9rem; line-height: 1.5; margin-bottom: 4px; }
+  .verdict-box { margin-top: 12px; border-radius: 14px; padding: 12px 14px; background: linear-gradient(135deg, #1e1b4b, #0f3a5c); color: #fff; font-size: 0.92rem; line-height: 1.5; }
+  .verdict-box b { color: #fcd34d; }
+  @media (max-width: 700px) { .zones { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Nepal Adapts</span></div>
+  <span></span>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <div class="xp" id="hudXp">&#11088; 0 XP</div><div class="bar" aria-hidden="true"><div id="hudBar"></div></div><div class="lv" id="hudLv">Round 1 of 3</div>
+</div></div>
+
+<main>
+  <section class="hero" aria-label="Introduction">
+    <span class="kicker">IB DP Geography &middot; Unit 3 &middot; Nepal case study</span>
+    <h1>&#127956;&#65039; Nepal: Adapting to Climate Change</h1>
+    <p>In the Siwalik Hills of rural Nepal, families depend on the monsoon &mdash; but the rain is changing. Have the article <b>&lsquo;Adapting to climate change: a case study from Nepal&rsquo;</b> (Geography Review) open. Crack the evidence vault, sort the seasons, then plan how to help a village adapt.</p>
+    <div class="facts"><span>&#127783;&#65039; 80%+ of rain falls June&ndash;September</span><span>&#128207; ~2,500 mm rain a year</span><span>&#9968;&#65039; Villages at 150&ndash;1,200 m</span></div>
+  </section>
+  <div class="steps" id="steps">
+    <span class="step on" data-s="1">1 &middot; Evidence vault</span><span class="step" data-s="2">2 &middot; Monsoon or dry season?</span><span class="step" data-s="3">3 &middot; Plan your village</span>
+  </div>
+  <div id="app"></div>
+</main>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function plain(h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent; }
+
+  /* ---------- score / HUD ---------- */
+  var run = { c: 0, t: 0, xp: 0 }, step = 1;
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+  function score(c, t, el) { run.c += c; run.t += t; run.xp += c * 10; xpPop(c * 10, el); paintHud(); }
+  function bonusXp(n, el) { run.xp += n; xpPop(n, el); paintHud(); }
+  function paintHud() { $('hudXp').textContent = '⭐ ' + run.xp + ' XP'; $('hudBar').style.width = ((step - 1) / 3 * 100) + '%'; $('hudLv').textContent = step <= 3 ? 'Round ' + step + ' of 3' : 'Complete!'; }
+  function setStep(n) {
+    step = n; paintHud();
+    document.querySelectorAll('.step').forEach(function (s) { var k = +s.dataset.s; s.className = 'step' + (k < n ? ' done' : k === n ? ' on' : ''); });
+  }
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#2563eb', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 240 : 110;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) { ctx.clearRect(0, 0, cv.width, cv.height); P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); }); if (t - t0 < (big ? 4000 : 2400)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height); })(t0);
+  }
+  function panel(tag, title, how) {
+    var p = document.createElement('div'); p.className = 'panel';
+    p.innerHTML = '<span class="stage-tag">' + tag + '</span><h2>' + title + '</h2>' + (how ? '<p class="how">' + how + '</p>' : '') + '<div class="sb"></div>';
+    $('app').appendChild(p); setTimeout(function () { p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    return p.querySelector('.sb');
+  }
+  function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+  /* =========================================================
+     ROUND 1 DATA — evidence vault (code: HIMALAYA)
+     ========================================================= */
+  var CODE = 'HIMALAYA';
+  var LOCKS = [
+    { name: 'Hazards', ico: '&#9888;&#65039;', q: 'Because Nepal is so poor, people are vulnerable to which three environmental hazards?',
+      opts: ['Drought, flooding and landslides', 'Earthquakes, tsunamis and volcanoes', 'Hurricanes, heatwaves and wildfires', 'Avalanches, blizzards and sea level rise'], a: 0,
+      note: 'Drought, flooding and landslides &mdash; and being poor makes it hard to adapt to them.' },
+    { name: 'Poverty', ico: '&#127968;', q: 'In which parts of Nepal is poverty worst?',
+      opts: ['In the capital city, Kathmandu', 'In rural, farming areas', 'Along the border with China', 'In the large tourist towns'], a: 1,
+      note: 'Poverty is worst in rural areas, where it is hardest to adapt to a lack of resources like water.' },
+    { name: 'Power', ico: '&#9889;', q: 'Which power source does Nepal rely on the most?',
+      opts: ['Coal-fired power stations', 'Imported natural gas', 'Hydroelectric power (HEP)', 'Solar and wind farms'], a: 2,
+      note: 'HEP &mdash; which is why water shortages in the dry season also mean energy shortages.' },
+    { name: 'Too much rain', ico: '&#127783;&#65039;', q: 'The immense monsoon deluges of rain can result in which problems?',
+      opts: ['Drought, desertification and wildfires', 'Coastal flooding and salt water intruding inland', 'Flash flooding, landslides and soil erosion', 'Glacier growth and more avalanches'], a: 2,
+      note: 'Flash flooding, landslides and soil erosion &mdash; especially on the steep, weak Siwalik Hills.' },
+    { name: 'Forests', ico: '&#127795;', q: 'Why is preserving forests important in Nepal?',
+      opts: ['Forests attract extra rain clouds, which brings an end to the dry winter season completely',
+             'Trees reduce soil erosion and stabilise slopes, so landslides are less frequent',
+             'Trees store floodwater in their leaves, so the rivers never overflow in summer',
+             'Forests are only needed for wood, so cutting them down has no other effect'], a: 1,
+      note: 'Forests bind the soil, stabilise slopes, reduce runoff and protect biodiversity &mdash; which also helps farming and tourism.' },
+    { name: 'Erratic rain', ico: '&#127746;', q: 'What does &lsquo;more erratic, intense monsoon downpours&rsquo; mean?',
+      opts: ['Gentle, steady rain that falls every single day', 'Short, heavy bursts of rain at unpredictable times', 'Rain that falls only as snow in the mountains', 'Monsoon rain arriving on the same date each year'], a: 1,
+      note: 'Heavy, unpredictable bursts replace steady rain &mdash; more runoff, flash floods and erosion, and less water soaking in.' },
+    { name: 'Hotter crops', ico: '&#128027;', q: 'What extra agricultural problem comes from rising temperatures?',
+      opts: ['Crops freezing during the winter', 'More crop diseases and pests', 'Too much rain falling in winter', 'Soils becoming salty from the sea'], a: 1,
+      note: 'More crop diseases and pests &mdash; and none of the communities had any way of dealing with them.' },
+    { name: 'Memories', ico: '&#129504;', q: 'With little accurate climate data, people&rsquo;s memories were used. Which three changes did they notice?',
+      opts: ['A longer monsoon, more winter snowfall and much cooler summers', 'A shorter, fiercer monsoon, less winter rain and hotter days', 'No real change in rainfall, but far colder nights in winter', 'More earthquakes, more tropical cyclones and rising sea levels'], a: 1,
+      note: 'A shorter, more intense monsoon; less winter rain; and hotter summers and winters &mdash; so summer rivers became flashier and winter flows dropped.' }
+  ];
+
+
+  function round1() {
+    setStep(1);
+    var sb = panel('Round 1', '&#128274; Crack the evidence vault',
+      'Use the article to open all eight locks. Each lock you open reveals one letter of the vault code. <b>First-try answers earn 10 XP.</b>');
+    var bar = document.createElement('div'); bar.className = 'code-bar'; bar.setAttribute('aria-label', 'Vault code');
+    for (var i = 0; i < CODE.length; i++) bar.innerHTML += '<span>?</span>';
+    sb.appendChild(bar);
+    var grid = document.createElement('div'); grid.className = 'locks'; sb.appendChild(grid);
+    var msg = document.createElement('p'); msg.className = 'msg'; sb.appendChild(msg);
+    var opened = 0;
+
+    // shuffle the option order per lock, keeping track of the right answer
+    LOCKS.forEach(function (L, li) {
+      var order = shuffle(L.opts.map(function (o, k) { return k; }));
+      var el = document.createElement('div'); el.className = 'lock';
+      el.innerHTML = '<div class="lk-top"><span class="lk-ico">&#128274;</span><span class="lk-name">Lock ' + (li + 1) + ' &middot; ' + L.name + '</span></div>' +
+        '<div class="lk-q">' + L.ico + ' ' + L.q + '</div><div class="opts"></div><div class="lk-note">' + L.note + '</div>';
+      var opts = el.querySelector('.opts'), tries = 0;
+      order.forEach(function (k) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.innerHTML = L.opts[k];
+        b.addEventListener('click', function () {
+          tries++;
+          if (k === L.a) {
+            b.classList.add('yes');
+            opts.querySelectorAll('.opt').forEach(function (x) { x.disabled = true; });
+            el.classList.add('open'); el.querySelector('.lk-ico').innerHTML = '&#128275;';
+            score(tries === 1 ? 1 : 0, 1, b);
+            var slot = bar.children[opened]; slot.textContent = CODE[opened]; slot.classList.add('on');
+            opened++;
+            if (opened === LOCKS.length) {
+              msg.className = 'msg ok'; msg.innerHTML = 'Vault code: <b>HIMALAYA</b>. Now see how the seasons shape life in these hills.';
+              confetti(false);
+              var go = document.createElement('div'); go.className = 'actions';
+              go.innerHTML = '<button type="button" class="btn primary">Round 2: Monsoon or dry season? &rarr;</button>';
+              go.querySelector('button').addEventListener('click', function () { go.remove(); round2(); });
+              sb.appendChild(go);
+            }
+          } else {
+            b.classList.remove('no'); void b.offsetWidth; b.classList.add('no'); b.disabled = true;
+          }
+        });
+        opts.appendChild(b);
+      });
+      grid.appendChild(el);
+    });
+  }
+
+
+  /* =========================================================
+     ROUND 2 — monsoon or dry season?
+     ========================================================= */
+  var ZONES = {
+    wet: { label: '&#127783;&#65039; Summer monsoon', sub: 'June&ndash;September: more than 80% of the year&rsquo;s rain.' },
+    dry: { label: '&#9728;&#65039; Dry winter', sub: 'October&ndash;May: rainfall is sparse.' }
+  };
+  var CARDS = [
+    { id: 'w1', z: 'wet', t: 'Good conditions for growing crops', why: 'The monsoon rain waters the fields.' },
+    { id: 'w2', z: 'wet', t: 'Plenty of water to generate hydroelectric power', why: 'Full rivers turn the HEP turbines.' },
+    { id: 'w3', z: 'wet', t: 'Flash flooding along the rivers', why: 'Immense deluges in summer cause flash floods.' },
+    { id: 'w4', z: 'wet', t: 'Landslides on steep, unstable slopes', why: 'Heavy rain saturates the weak hillsides.' },
+    { id: 'w5', z: 'wet', t: 'Soil erosion and lots of sediment in rivers', why: 'Runoff washes soil off the slopes.' },
+    { id: 'w6', z: 'wet', t: 'Water reserves are replenished', why: 'The monsoon refills Nepal’s water stores.' },
+    { id: 'd1', z: 'dry', t: 'Water becomes scarce', why: 'Very little rain falls from October to May.' },
+    { id: 'd2', z: 'dry', t: 'A lack of food for families without irrigation', why: 'Without stored water, crops can’t grow.' },
+    { id: 'd3', z: 'dry', t: 'Limited access to good-quality drinking water', why: 'Supplies shrink in the dry months.' },
+    { id: 'd4', z: 'dry', t: 'Less water for keeping clean and healthy', why: 'Hygiene suffers when water is short.' },
+    { id: 'd5', z: 'dry', t: 'Energy reserves run low', why: 'Low rivers mean less HEP electricity.' },
+    { id: 'd6', z: 'dry', t: 'Drought conditions are now common', why: 'Winter rain events are getting smaller.' }
+  ];
+  var sortState = {}, picked = null, firstCheck = true, lockedIds = {};
+
+  function round2() {
+    setStep(2);
+    var sb = panel('Round 2', '&#127783;&#65039; Monsoon or dry season?',
+      'Nepal’s year is split in two. <b>Tap a card, then tap a season.</b> Tap a placed card to send it back. Check when every card is placed &mdash; first-try correct cards earn 10 XP.');
+    sb.innerHTML = '<div class="tray" id="tray"></div><div class="zones" id="zones"></div><div class="counter" id="counter"></div><p class="msg" id="r2msg"></p><ul class="whylist" id="whyList"></ul>' +
+      '<div class="actions"><button type="button" class="btn primary" id="checkSort" disabled>Check my sort</button></div>';
+    ['wet', 'dry'].forEach(function (k) {
+      var z = document.createElement('div'); z.className = 'zone z-' + k; z.dataset.z = k; z.tabIndex = 0; z.setAttribute('role', 'button');
+      z.innerHTML = '<h4>' + ZONES[k].label + '</h4><div class="zsub">' + ZONES[k].sub + '</div><div class="zc"></div>';
+      z.addEventListener('click', function (e) { if (e.target.closest('.ccard') && !picked) return; zoneClick(k); });
+      z.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); zoneClick(k); } });
+      $('zones').appendChild(z);
+    });
+    var order = shuffle(CARDS);
+    function zoneClick(k) { if (picked) { sortState[picked] = k; picked = null; draw(); } }
+    function draw() {
+      var tray = $('tray'); tray.innerHTML = '';
+      document.querySelectorAll('.zone .zc').forEach(function (c) { c.innerHTML = ''; });
+      var placed = 0;
+      order.forEach(function (c) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = c.t;
+        b.className = 'ccard' + (picked === c.id ? ' selected' : '') + (lockedIds[c.id] ? ' correct' : '');
+        b.addEventListener('click', function (e) {
+          if (lockedIds[c.id]) return;
+          if (sortState[c.id]) { if (picked) return; e.stopPropagation(); delete sortState[c.id]; draw(); return; }
+          picked = picked === c.id ? null : c.id; draw();
+        });
+        if (sortState[c.id]) { placed++; document.querySelector('.zone[data-z="' + sortState[c.id] + '"] .zc').appendChild(b); }
+        else tray.appendChild(b);
+      });
+      if (!tray.children.length) tray.innerHTML = '<p class="empty-note">All cards placed &mdash; check your sort!</p>';
+      document.querySelectorAll('.zone').forEach(function (z) { z.classList.toggle('ready', !!picked); });
+      $('counter').textContent = placed + ' / ' + CARDS.length + ' placed';
+      $('checkSort').disabled = placed < CARDS.length;
+    }
+    $('checkSort').addEventListener('click', function () {
+      var right = 0, wrong = [];
+      CARDS.forEach(function (c) {
+        if (sortState[c.id] === c.z) { right++; lockedIds[c.id] = true; } else { wrong.push(c); delete sortState[c.id]; }
+      });
+      if (firstCheck) { score(right, CARDS.length, this); firstCheck = false; }
+      draw();
+      if (!wrong.length) {
+        $('r2msg').className = 'msg ok'; $('r2msg').textContent = 'Perfect! Too much water in summer, too little in winter — and both hit food, water and energy.';
+        $('whyList').innerHTML = '';
+        this.parentNode.innerHTML = '<button type="button" class="btn primary" id="toR3">Round 3: Plan your village &rarr;</button>';
+        $('toR3').addEventListener('click', function () { this.parentNode.remove(); round3(); });
+        confetti(false);
+      } else {
+        $('r2msg').className = 'msg no'; $('r2msg').textContent = right + ' / ' + CARDS.length + ' correct. The others are back in the tray — read the hints and try again.';
+        $('whyList').innerHTML = wrong.map(function (c) { return '<li>&#128161; <b>' + c.t + '</b> &mdash; ' + c.why + '</li>'; }).join('');
+      }
+    });
+    draw();
+  }
+
+  /* =========================================================
+     ROUND 3 — plan your village + your own key point
+     ========================================================= */
+  var PLANS = [
+    { id: 'irr', h: '&#128167; Small-scale irrigation', d: 'Store water so fields can be watered in the dry months.', good: true, xp: 20,
+      r: 'Highlighted in the article: with a small injection of money, communities built irrigation to store water and grow <b>more than one crop a year</b> &mdash; no longer relying on the rainy season.' },
+    { id: 'def', h: '&#129521; Flood and erosion defences', d: 'Protect fields and homes beside the river from flash floods.', good: true, xp: 20,
+      r: 'Highlighted in the article: flood/erosion defences were the other measure that worked when money was available &mdash; vital for food security.' },
+    { id: 'edu', h: '&#127891; Education and awareness', d: 'Teach the community about managing water and the environment.', good: true, xp: 20,
+      r: 'Key finding: the <b>most successful management of depleted water</b> was in communities where <b>education levels were greater</b> and people knew more about environmental issues.' },
+    { id: 'for', h: '&#127795; Protect the forest', d: 'Stop clearing trees on the slopes above the village.', good: true, xp: 15,
+      r: 'Good thinking: forests reduce soil erosion and stabilise slopes, cutting landslides &mdash; and widespread deforestation has made these hills unstable.' },
+    { id: 'pest', h: '&#128027; Tackle crop pests and disease', d: 'Train farmers to spot and control pests and plant disease.', good: true, xp: 15,
+      r: 'Spot on: the article says <b>none</b> of the communities had measures to deal with crop disease or pests &mdash; a gap that will grow as temperatures rise.' },
+    { id: 'city', h: '&#127961;&#65039; Send workers to the city', d: 'Family members find jobs in Kathmandu or abroad and send money home.', good: false, xp: 0,
+      r: 'This is how <b>poorer</b> communities cope when they have no money for adaptation &mdash; it helps families buy food, but it doesn’t make the village more resilient.' }
+  ];
+
+  function round3() {
+    setStep(3);
+    var sb = panel('Round 3', '&#127968; Plan your village',
+      'Your village in the Siwalik Hills has received a small grant from a charity. You can afford <b>three</b> projects. Choose them, then see what the article found.');
+    sb.innerHTML = '<div class="budget" id="budget">3 projects left</div><div class="plans" id="plans"></div>' +
+      '<div class="actions"><button type="button" class="btn gold" id="lockPlan" disabled>Lock in my plan</button></div><div id="planResult"></div>';
+    var chosen = [];
+    shuffle(PLANS).forEach(function (P) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'plan'; b.dataset.id = P.id;
+      b.innerHTML = '<h4>' + P.h + '</h4><p>' + P.d + '</p><div class="res ' + (P.good ? 'good' : 'meh') + '">' + P.r + '</div>';
+      b.addEventListener('click', function () {
+        var i = chosen.indexOf(P.id);
+        if (i !== -1) chosen.splice(i, 1); else if (chosen.length < 3) chosen.push(P.id);
+        document.querySelectorAll('.plan').forEach(function (x) { x.classList.toggle('on', chosen.indexOf(x.dataset.id) !== -1); });
+        var left = 3 - chosen.length;
+        $('budget').textContent = left ? left + ' project' + (left === 1 ? '' : 's') + ' left' : 'Budget spent — lock in your plan';
+        $('lockPlan').disabled = chosen.length !== 3;
+      });
+      $('plans').appendChild(b);
+    });
+    $('lockPlan').addEventListener('click', function () {
+      var btn = this;
+      document.querySelectorAll('.plan').forEach(function (x) { x.disabled = true; x.classList.add('show'); });
+      var xp = 0, poorChoice = false;
+      chosen.forEach(function (id) { var P = PLANS.filter(function (p) { return p.id === id; })[0]; xp += P.xp; if (!P.good) poorChoice = true; });
+      bonusXp(xp, btn);
+      btn.parentNode.remove();
+      $('planResult').innerHTML = '<div class="verdict-box">The article found two projects worked especially well with a small injection of money: <b>small-scale irrigation</b> and <b>flood/erosion defences</b>. And the most successful water management happened where <b>education levels were higher</b>.' +
+        (poorChoice ? ' Sending workers away helps a family survive, but it isn’t adaptation.' : ' Your plan builds real resilience.') + '</div>';
+      keyPoint(sb);
+    });
+  }
+
+  function keyPoint(sb) {
+    var box = document.createElement('div'); box.style.marginTop = '16px';
+    box.innerHTML = '<div class="keypts"><h4>&#128273; Key points from the article</h4><ul>' +
+      '<li>Communities in rural Nepal are noticing the impacts of climate change and have experienced an increase in environmental hazards.</li>' +
+      '<li>Education and environmental awareness are key factors that need to be addressed to help communities adapt successfully and sustainably.</li></ul></div>' +
+      '<div class="wb"><label for="kpTa">&#11088; Bonus: add a key point of your own</label><textarea id="kpTa" placeholder="e.g. Rural communities need funding as well as education, because…"></textarea>' +
+      '<div class="foot"><span id="kpWc">0 words</span><button type="button" class="copy" id="copyBtn">&#128203; Copy for OneNote</button></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" id="finishBtn">Finish</button></div>';
+    sb.appendChild(box);
+    setTimeout(function () { box.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    $('kpTa').addEventListener('input', function () { $('kpWc').textContent = wordCount(this.value) + ' words' + (wordCount(this.value) >= 15 ? ' · bonus XP unlocked' : ''); });
+    $('copyBtn').addEventListener('click', function () {
+      var b = this, txt = 'Nepal: Adapting to Climate Change\n\nMy key point:\n' + ($('kpTa').value.trim() || '(not written yet)');
+      function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy for OneNote'; }, 2200); }
+      try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
+    });
+    $('finishBtn').addEventListener('click', function () {
+      if (wordCount($('kpTa').value) >= 15) bonusXp(20, this);
+      this.parentNode.remove(); finish();
+    });
+  }
+  function fallback(txt) { var ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); }
+
+  function finish() {
+    setStep(4);
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 0;
+    var el = document.createElement('div'); el.className = 'finish';
+    el.innerHTML = '<div style="font-size:3rem">' + (pct >= 90 ? '🏆' : '🌟') + '</div><h2>Mission complete!</h2><div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>' + run.xp + '</b>XP</div></div>' +
+      '<p>' + (pct >= 90 ? 'Excellent — you know how rural Nepal is adapting to a changing climate.' : 'Well done. Play again to beat your first-try accuracy.') + '</p>' +
+      '<div class="actions"><button type="button" class="btn gold" onclick="location.reload()">Play again</button><a class="btn ghost" href="/geography/games#ib">Back to Geography Games</a></div>';
+    $('app').appendChild(el); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); confetti(pct >= 90);
+  }
+
+  paintHud(); round1();
+
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
