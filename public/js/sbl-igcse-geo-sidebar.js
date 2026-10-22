@@ -316,6 +316,15 @@
                 "href": "/igcse/geography/learn/economic-activity-and-energy/l10-case-study-micro-hydro-in-peru"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/past-papers"
+              }
+            ]
           }
         ]
       },
@@ -388,14 +397,77 @@
                 "href": "/igcse/geography/learn/rural-environments/l11-managing-rural-challenges-thailand"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/rural-environments/past-papers"
+              }
+            ]
           }
         ]
       },
       {
         "slug": "rural-fieldwork",
         "label": "Rural Fieldwork",
-        "href": null,
-        "status": "soon"
+        "href": "/igcse/geography/learn/rural-fieldwork",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Planning the enquiry",
+            "lessons": [
+              {
+                "label": "Our rural enquiry and location",
+                "href": "/igcse/geography/learn/rural-fieldwork/l01-our-rural-enquiry"
+              },
+              {
+                "label": "Settlement hierarchy and hypothesis",
+                "href": "/igcse/geography/learn/rural-fieldwork/l02-settlement-hierarchy-and-hypothesis"
+              },
+              {
+                "label": "Data types, equipment and risk",
+                "href": "/igcse/geography/learn/rural-fieldwork/l03-data-types-equipment-and-risk"
+              },
+              {
+                "label": "Sampling",
+                "href": "/igcse/geography/learn/rural-fieldwork/l04-sampling"
+              }
+            ]
+          },
+          {
+            "title": "Collecting the data",
+            "lessons": [
+              {
+                "label": "Rural data collection methods",
+                "href": "/igcse/geography/learn/rural-fieldwork/l05-data-collection-methods"
+              }
+            ]
+          },
+          {
+            "title": "Presenting, analysing and evaluating",
+            "lessons": [
+              {
+                "label": "Presenting rural data",
+                "href": "/igcse/geography/learn/rural-fieldwork/l06-presenting-data"
+              },
+              {
+                "label": "Analysis, conclusions and evaluation",
+                "href": "/igcse/geography/learn/rural-fieldwork/l07-analysis-conclusions-evaluation"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/rural-fieldwork/past-papers"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "development",
@@ -456,6 +528,15 @@
               {
                 "label": "Case studies: Nigeria and Kenya",
                 "href": "/igcse/geography/learn/development-and-human-welfare/l09-nigeria-and-kenya-projects"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/development-and-human-welfare/past-papers"
               }
             ]
           }
