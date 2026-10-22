@@ -47,7 +47,30 @@
 
   // Teacher view: the original behaviour — turn uploaded slots into
   // links and mark the rest "Not added yet".
+  // The PPQ slots were added after the lesson pages were built, so
+  // they're added to each Resources list here instead of editing
+  // every page.
+  var EXTRA_ITEMS = [
+    { type: 'ppq', label: 'Past Paper Questions',
+      svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>' },
+    { type: 'ppq_markscheme', label: 'PPQ Mark Schemes',
+      svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>' }
+  ];
+  function addExtraItems() {
+    lists().forEach(function (ul) {
+      EXTRA_ITEMS.forEach(function (it) {
+        if (ul.querySelector('[data-resource-type="' + it.type + '"]')) return;
+        var li = document.createElement('li');
+        li.className = 'lh-resources__item';
+        li.setAttribute('data-resource-type', it.type);
+        li.innerHTML = it.svg + '<span class="lh-resources__label">' + it.label + '</span>';
+        ul.appendChild(li);
+      });
+    });
+  }
+
   function wireTeacherLinks() {
+    addExtraItems();
     var overlay = document.getElementById('sblTeachBotOverlay');
     var lessonId = overlay && overlay.getAttribute('data-lesson-id');
     var items = document.querySelectorAll('.lh-resources__item[data-resource-type]');

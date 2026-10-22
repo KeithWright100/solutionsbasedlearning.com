@@ -34,7 +34,9 @@ import { requireAdmin } from '../_lib/auth.js';
 import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
 
 const BUCKET = 'lesson-resources';
-const RESOURCE_TYPES = ['slides', 'notes', 'key_terms', 'diagrams', 'data_sheets'];
+// 'ppq' (past paper questions file) and 'ppq_markscheme' (mark scheme links)
+// were added by sql/011_ppq_resource_slots.sql.
+const RESOURCE_TYPES = ['slides', 'notes', 'key_terms', 'diagrams', 'data_sheets', 'ppq', 'ppq_markscheme'];
 const MAX_LESSON_ID_LENGTH = 200;
 const MAX_FILE_NAME_LENGTH = 200;
 const MAX_LINK_LENGTH = 2000;

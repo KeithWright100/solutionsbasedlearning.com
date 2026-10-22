@@ -12,10 +12,15 @@
     { key: 'notes', label: 'Lesson Notes' },
     { key: 'key_terms', label: 'Student Workbooks' },
     { key: 'diagrams', label: 'OneNote Pages' },
-    { key: 'data_sheets', label: 'Quizzes' }
+    { key: 'data_sheets', label: 'Quizzes' },
+    { key: 'ppq', label: 'PPQs', below: 'ppq_markscheme' }
   ];
-  // Slots that hold a link (a live OneNote page) instead of a file.
-  var LINK_TYPES = ['diagrams'];
+  // Slots that hold a link instead of a file: live OneNote pages, and
+  // mark scheme links (shown under the PPQ file in the PPQs column).
+  var LINK_TYPES = ['diagrams', 'ppq_markscheme'];
+  var LINK_LABELS = { diagrams: 'OneNote page', ppq_markscheme: 'Mark scheme' };
+  var TYPE_LABELS = { ppq_markscheme: 'Mark scheme' };
+  function linkLabel(type) { return LINK_LABELS[type] || 'Link'; }
   function isLinkType(type) { return LINK_TYPES.indexOf(type) !== -1; }
 
   var state = { lessons: [], resources: {} }; // resources: { "<lessonId>|<type>": {fileName, fileSize, uploadedAt} }
@@ -129,7 +134,13 @@
         '<span class="sbl-res-lesson__title">' + escapeHtml(lesson.title) + '</span></td>';
 
       RESOURCE_TYPES.forEach(function (rt) {
-        html += renderSlotCell(lesson.id, rt.key);
+        if (rt.below) {
+          html += '<td class="sbl-res-slot">' +
+            '<span class="sbl-res-sublabel">Past paper questions</span>' + renderSlotCell(lesson.id, rt.key) +
+            '<span class="sbl-res-sublabel">Mark scheme' + '</span>' + renderSlotCell(lesson.id, rt.below) + '</td>';
+        } else {
+          html += '<td class="sbl-res-slot">' + renderSlotCell(lesson.id, rt.key) + '</td>';
+        }
       });
 
       html += '</tr>';
@@ -158,14 +169,14 @@
 
   function renderSlotCell(lessonId, type) {
     var resource = state.resources[resourceKey(lessonId, type)];
-    var cell = '<td class="sbl-res-slot" data-slot-cell="' + escapeHtml(lessonId) + '|' + escapeHtml(type) + '">';
+    var cell = '<div class="sbl-res-sub" data-slot-cell="' + escapeHtml(lessonId) + '|' + escapeHtml(type) + '">';
     var ids = 'data-lesson-id="' + escapeHtml(lessonId) + '" data-resource-type="' + escapeHtml(type) + '"';
 
     if (isLinkType(type)) {
       var links = resource && resource.linkUrls ? resource.linkUrls : [];
       if (links.length) {
         links.forEach(function (u, i) {
-          cell += '<a class="sbl-res-slot__file" href="' + escapeHtml(u) + '" target="_blank" rel="noopener" title="' + escapeHtml(u) + '">OneNote page' + (links.length > 1 ? ' ' + (i + 1) : '') + ' &#8599;</a>';
+          cell += '<a class="sbl-res-slot__file" href="' + escapeHtml(u) + '" target="_blank" rel="noopener" title="' + escapeHtml(u) + '">' + linkLabel(type) + (links.length > 1 ? ' ' + (i + 1) : '') + ' &#8599;</a>';
         });
       } else if (resource) {
         cell += '<span class="sbl-res-slot__file" title="' + escapeHtml(resource.fileName) + '">' + escapeHtml(resource.fileName) + ' <span class="sbl-muted">(file)</span></span>';
@@ -175,7 +186,7 @@
       cell += '<span class="sbl-res-slot__actions">';
       cell += '<button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" data-link-btn ' + ids + '>' + (resource ? 'Change link' : 'Add link') + '</button>';
       if (resource) cell += '<button type="button" class="sbl-btn sbl-btn--danger sbl-btn--small" data-delete-btn data-resource-id="' + escapeHtml(resource.id || '') + '" ' + ids + '>Remove</button>';
-      cell += '</span></td>';
+      cell += '</span></div>';
       return cell;
     }
 
@@ -193,16 +204,16 @@
       cell += '</span>';
     }
 
-    cell += '</td>';
+    cell += '</div>';
     return cell;
   }
 
   function refreshSlotCell(lessonId, type) {
     var cell = body.querySelector('[data-slot-cell="' + lessonId + '|' + type + '"]');
     if (!cell) return;
-    var temp = document.createElement('tbody');
-    temp.innerHTML = '<tr>' + renderSlotCell(lessonId, type) + '</tr>';
-    var newCell = temp.querySelector('td');
+    var temp = document.createElement('div');
+    temp.innerHTML = renderSlotCell(lessonId, type);
+    var newCell = temp.firstChild;
     cell.replaceWith(newCell);
     bindCellButtons(newCell);
   }
@@ -233,7 +244,7 @@
       var i = list.querySelectorAll('input').length;
       var wrap = document.createElement('div');
       wrap.innerHTML =
-        '<label class="sbl-res-link__label" for="' + escapeHtml(idBase + i) + '">OneNote page ' + (i + 1) + ' link</label>' +
+        '<label class="sbl-res-link__label" for="' + escapeHtml(idBase + i) + '">' + linkLabel(type) + ' ' + (i + 1) + ' link</label>' +
         '<input type="url" class="sbl-res-link__input" id="' + escapeHtml(idBase + i) + '" placeholder="https://…">';
       var input = wrap.querySelector('input');
       input.value = value || '';
@@ -258,7 +269,7 @@
       fetch('/api/admin/resources', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'set-link', lessonId: lessonId, resourceType: type, urls: urls, label: 'OneNote page' })
+        body: JSON.stringify({ action: 'set-link', lessonId: lessonId, resourceType: type, urls: urls, label: linkLabel(type) })
       })
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
         .then(function (res) {
@@ -267,7 +278,7 @@
         })
         .then(function () {
           refreshSlotCell(lessonId, type);
-          showNotice(urls.length > 1 ? urls.length + ' OneNote links saved.' : 'OneNote link saved.');
+          showNotice(urls.length > 1 ? urls.length + ' ' + linkLabel(type) + ' links saved.' : linkLabel(type) + ' link saved.');
         })
         .catch(function (err) {
           refreshSlotCell(lessonId, type);
@@ -388,7 +399,7 @@
   // ---- Delete ----
   function deleteResource(id, lessonId, type) {
     if (!id) return;
-    var label = RESOURCE_TYPES.filter(function (rt) { return rt.key === type; }).map(function (rt) { return rt.label; })[0] || type;
+    var label = TYPE_LABELS[type] || RESOURCE_TYPES.filter(function (rt) { return rt.key === type; }).map(function (rt) { return rt.label; })[0] || type;
     if (!confirm((isLinkType(type) ? 'Remove the ' + label + ' link(s)' : 'Delete the ' + label + ' file') + ' for this lesson? This cannot be undone.')) return;
 
     clearMessages();
