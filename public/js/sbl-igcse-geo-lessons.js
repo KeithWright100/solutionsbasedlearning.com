@@ -5,6 +5,7 @@
    order array (each IGCSE topic has its own isolated order array). */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_GEO_LESSON_ORDER = ["IGCO01", "IGCO02", "IGCO03", "IGCO04", "IGCO05", "IGCO06", "IGCO07", "IGCO08", "IGCO09", "IGCO10", "IGCO11", "IGCO12", "IGCO13", "IGCO14", "IGCO15"];
+window.SBL_IGCSE_GEO_HAZ_LESSON_ORDER = ["IGHZ01", "IGHZ02", "IGHZ03", "IGHZ04", "IGHZ05", "IGHZ06", "IGHZ07", "IGHZ08", "IGHZ09", "IGHZ10", "IGHZ11", "IGHZ12"];
 window.SBL_IGCSE_GEO_DEV_LESSON_ORDER = ["IGDV01", "IGDV02", "IGDV03", "IGDV04", "IGDV05", "IGDV06", "IGDV07", "IGDV08", "IGDV09"];
 
 window.SBL_LESSONS["IGCO01"] = {
@@ -2058,6 +2059,1642 @@ window.SBL_LESSONS["IGCO15"] = {
    "correct": 0,
    "explain": "Spurn depends on eroded sediment.",
    "tag": "Evaluation"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ01"] = {
+ "id": "IGHZ01",
+ "topicNumber": 1,
+ "topicTitle": "Hazards and plate tectonics (IGCSE)",
+ "title": "What is a hazard?",
+ "href": "/igcse/geography/learn/hazardous-environments/l01-what-is-a-hazard",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: What is a hazard?.",
+ "checklist": [
+  "I can understand the different types of hazards",
+  "I can know where different hazards occur",
+  "I can identify some factors influencing their severity"
+ ],
+ "quiz": [
+  {
+   "q": "What is a natural hazard?",
+   "options": [
+    "A natural event that threatens people",
+    "Any very large storm that forms far out at sea",
+    "Damage caused only by humans",
+    "A disaster that has already happened"
+   ],
+   "correct": 0,
+   "explain": "A threat to people and property.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "When does a hazard become a disaster?",
+   "options": [
+    "When it causes serious loss a community cannot cope with",
+    "Whenever it happens anywhere on Earth, even with nobody nearby",
+    "Only when it is an earthquake",
+    "When it is measured by scientists"
+   ],
+   "correct": 0,
+   "explain": "Impact on people makes it a disaster.",
+   "tag": "Definitions"
+  },
+  {
+   "q": "Which is a tectonic hazard?",
+   "options": [
+    "Tsunami",
+    "Drought",
+    "Tropical cyclone",
+    "Locust swarm"
+   ],
+   "correct": 0,
+   "explain": "Caused by plate movement.",
+   "tag": "Types"
+  },
+  {
+   "q": "Which is an atmospheric hazard?",
+   "options": [
+    "Tropical cyclone",
+    "Volcanic eruption",
+    "Earthquake",
+    "Landslide"
+   ],
+   "correct": 0,
+   "explain": "Caused by weather.",
+   "tag": "Types"
+  },
+  {
+   "q": "Where are most earthquakes and volcanoes found?",
+   "options": [
+    "Along plate boundaries",
+    "In the middle of continents",
+    "Near the North and South Poles",
+    "Only in tropical countries"
+   ],
+   "correct": 0,
+   "explain": "Especially the Ring of Fire.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "Roughly what share of earthquakes occur on the Ring of Fire?",
+   "options": [
+    "About 90%",
+    "About 10%",
+    "About 50%",
+    "About 25%"
+   ],
+   "correct": 0,
+   "explain": "Around the Pacific.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "Between which latitudes do tropical cyclones form?",
+   "options": [
+    "5° and 30° north and south",
+    "0° and 5° only",
+    "40° and 60° north and south",
+    "Within the Arctic Circle"
+   ],
+   "correct": 0,
+   "explain": "Not on the Equator itself.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "Which is a HUMAN factor affecting severity?",
+   "options": [
+    "Quality of buildings",
+    "Depth of the earthquake",
+    "Magnitude of the event",
+    "Type of rock"
+   ],
+   "correct": 0,
+   "explain": "People control building quality.",
+   "tag": "Severity"
+  },
+  {
+   "q": "Why did Haiti 2010 kill more than Japan 2011?",
+   "options": [
+    "Haiti was poorer and less prepared",
+    "Haiti’s earthquake was much stronger",
+    "Japan had no people near the coast",
+    "Japan’s earthquake was very deep"
+   ],
+   "correct": 0,
+   "explain": "Vulnerability matters.",
+   "tag": "Severity"
+  },
+  {
+   "q": "What is vulnerability?",
+   "options": [
+    "How likely people are to be harmed",
+    "The magnitude of the hazard",
+    "The distance between two tectonic plates",
+    "The number of hazards each year"
+   ],
+   "correct": 0,
+   "explain": "Depends on wealth and preparation.",
+   "tag": "Definitions"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ02"] = {
+ "id": "IGHZ02",
+ "topicNumber": 1,
+ "topicTitle": "Hazards and plate tectonics (IGCSE)",
+ "title": "Structure of the Earth",
+ "href": "/igcse/geography/learn/hazardous-environments/l02-structure-of-the-earth",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Structure of the Earth.",
+ "checklist": [
+  "I can use the correct terminology in describing the different components of the Earth’s structure",
+  "I can identify some of the world’s tectonic plates and give reasons for their movement",
+  "I can refer to evidence supporting the continental drift theory"
+ ],
+ "quiz": [
+  {
+   "q": "Which layer is liquid?",
+   "options": [
+    "Outer core",
+    "Inner core",
+    "Crust",
+    "Lithosphere"
+   ],
+   "correct": 0,
+   "explain": "Liquid iron and nickel.",
+   "tag": "Layers"
+  },
+  {
+   "q": "Why is the inner core solid?",
+   "options": [
+    "Enormous pressure",
+    "It is very cold",
+    "It is made of granite",
+    "It contains water ice"
+   ],
+   "correct": 0,
+   "explain": "Pressure stops it melting.",
+   "tag": "Layers"
+  },
+  {
+   "q": "How does oceanic crust differ from continental crust?",
+   "options": [
+    "Thinner and denser",
+    "Thicker and lighter",
+    "Older and made of granite",
+    "Exactly the same"
+   ],
+   "correct": 0,
+   "explain": "Basalt, 5–10 km thick.",
+   "tag": "Layers"
+  },
+  {
+   "q": "What is the lithosphere?",
+   "options": [
+    "Crust and rigid upper mantle",
+    "The liquid outer core",
+    "The whole of the mantle",
+    "The atmosphere above the crust"
+   ],
+   "correct": 0,
+   "explain": "It forms the plates.",
+   "tag": "Layers"
+  },
+  {
+   "q": "Which is a major tectonic plate?",
+   "options": [
+    "Pacific",
+    "Mediterranean",
+    "Himalayan",
+    "Sahara"
+   ],
+   "correct": 0,
+   "explain": "One of seven major plates.",
+   "tag": "Plates"
+  },
+  {
+   "q": "What is slab pull?",
+   "options": [
+    "A sinking plate edge pulling the plate",
+    "Magma pushing upwards inside a volcano",
+    "Wind pushing the continents",
+    "Tides pulling the sea floor"
+   ],
+   "correct": 0,
+   "explain": "Cold, dense plate sinks.",
+   "tag": "Movement"
+  },
+  {
+   "q": "What drives convection currents?",
+   "options": [
+    "Heat from the core",
+    "Heat from the Sun warming the crust",
+    "Ocean currents",
+    "Earthquakes"
+   ],
+   "correct": 0,
+   "explain": "Hot rock rises, cool rock sinks.",
+   "tag": "Movement"
+  },
+  {
+   "q": "Who proposed continental drift?",
+   "options": [
+    "Alfred Wegener",
+    "Charles Darwin",
+    "Isaac Newton",
+    "Charles Richter"
+   ],
+   "correct": 0,
+   "explain": "In 1912.",
+   "tag": "Drift"
+  },
+  {
+   "q": "Which is evidence for continental drift?",
+   "options": [
+    "Matching fossils on different continents",
+    "Different languages spoken on each continent",
+    "Rivers flowing into the sea",
+    "Hurricanes crossing oceans"
+   ],
+   "correct": 0,
+   "explain": "e.g. Mesosaurus.",
+   "tag": "Drift"
+  },
+  {
+   "q": "Why was Wegener’s idea first rejected?",
+   "options": [
+    "He could not explain how continents moved",
+    "There were no fossils at all",
+    "The continents did not fit",
+    "He had studied the rocks of only one country"
+   ],
+   "correct": 0,
+   "explain": "No mechanism until the 1960s.",
+   "tag": "Drift"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ03"] = {
+ "id": "IGHZ03",
+ "topicNumber": 1,
+ "topicTitle": "Hazards and plate tectonics (IGCSE)",
+ "title": "Plate boundaries",
+ "href": "/igcse/geography/learn/hazardous-environments/l03-plate-boundaries",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Plate boundaries.",
+ "checklist": [
+  "I can understand the types of plate boundaries",
+  "I can explain why earthquakes and volcanoes occur in certain locations"
+ ],
+ "quiz": [
+  {
+   "q": "At which boundary do plates move apart?",
+   "options": [
+    "Constructive",
+    "Destructive",
+    "Conservative",
+    "Collision"
+   ],
+   "correct": 0,
+   "explain": "Divergent boundary.",
+   "tag": "Boundaries"
+  },
+  {
+   "q": "What happens at a destructive boundary?",
+   "options": [
+    "The denser plate subducts",
+    "Plates slide past each other",
+    "New crust is formed",
+    "Nothing moves at all"
+   ],
+   "correct": 0,
+   "explain": "Oceanic plate sinks and melts.",
+   "tag": "Boundaries"
+  },
+  {
+   "q": "Which boundary has earthquakes but no volcanoes?",
+   "options": [
+    "Conservative",
+    "Constructive",
+    "Destructive (ocean–continent)",
+    "Hotspot"
+   ],
+   "correct": 0,
+   "explain": "No magma is produced.",
+   "tag": "Boundaries"
+  },
+  {
+   "q": "Which is an example of a constructive boundary?",
+   "options": [
+    "Mid-Atlantic Ridge",
+    "San Andreas Fault",
+    "Himalayas",
+    "Andes mountains (South America)"
+   ],
+   "correct": 0,
+   "explain": "Iceland sits on it.",
+   "tag": "Examples"
+  },
+  {
+   "q": "Which plates formed the Himalayas?",
+   "options": [
+    "Indo-Australian and Eurasian",
+    "Nazca and South American",
+    "Pacific and North American plates",
+    "African and South American"
+   ],
+   "correct": 0,
+   "explain": "Continental collision.",
+   "tag": "Examples"
+  },
+  {
+   "q": "Why are there no volcanoes in the Himalayas?",
+   "options": [
+    "Neither continental plate subducts",
+    "The mountains are far too high for magma to reach",
+    "It is too cold there",
+    "The plates move apart"
+   ],
+   "correct": 0,
+   "explain": "No melting, no magma.",
+   "tag": "Explain"
+  },
+  {
+   "q": "Where do the most powerful earthquakes happen?",
+   "options": [
+    "Destructive boundaries",
+    "Constructive boundaries",
+    "Hotspots",
+    "The centre of plates"
+   ],
+   "correct": 0,
+   "explain": "Huge locked areas.",
+   "tag": "Explain"
+  },
+  {
+   "q": "Which boundary affects Haiti?",
+   "options": [
+    "Conservative",
+    "Constructive",
+    "Collision",
+    "Hotspot"
+   ],
+   "correct": 0,
+   "explain": "Caribbean and North American plates.",
+   "tag": "Examples"
+  },
+  {
+   "q": "What type of eruptions occur at constructive boundaries?",
+   "options": [
+    "Gentle, effusive eruptions",
+    "Very explosive eruptions only",
+    "No eruptions ever",
+    "Only underwater ash clouds"
+   ],
+   "correct": 0,
+   "explain": "Runny basalt lava.",
+   "tag": "Explain"
+  },
+  {
+   "q": "What creates volcanoes in Hawai‘i?",
+   "options": [
+    "A hotspot",
+    "A conservative boundary",
+    "A collision boundary",
+    "A subduction zone"
+   ],
+   "correct": 0,
+   "explain": "Mantle plume under the Pacific plate.",
+   "tag": "Explain"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ04"] = {
+ "id": "IGHZ04",
+ "topicNumber": 2,
+ "topicTitle": "Earthquakes (IGCSE)",
+ "title": "Earthquakes",
+ "href": "/igcse/geography/learn/hazardous-environments/l04-earthquakes",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Earthquakes.",
+ "checklist": [
+  "I can use the correct terminology when describing earthquakes and their measurement"
+ ],
+ "quiz": [
+  {
+   "q": "What is the focus of an earthquake?",
+   "options": [
+    "Where the rock breaks underground",
+    "The point on the surface above",
+    "The city that suffers the most damage",
+    "The seismometer that records it"
+   ],
+   "correct": 0,
+   "explain": "Also called the hypocentre.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What is the epicentre?",
+   "options": [
+    "The point on the surface above the focus",
+    "The deepest point reached by the fault line",
+    "The edge of the tectonic plate",
+    "The place where waves end"
+   ],
+   "correct": 0,
+   "explain": "Directly above the focus.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Why do earthquakes happen?",
+   "options": [
+    "Stress builds until rocks slip",
+    "Magma cooling and shrinking inside a volcano",
+    "The tides pull on the crust",
+    "Heavy rain soaks the ground"
+   ],
+   "correct": 0,
+   "explain": "Friction then sudden slip.",
+   "tag": "Causes"
+  },
+  {
+   "q": "Which seismic waves arrive first?",
+   "options": [
+    "P-waves",
+    "S-waves",
+    "Surface waves",
+    "Tsunami waves"
+   ],
+   "correct": 0,
+   "explain": "Primary waves are fastest.",
+   "tag": "Terms"
+  },
+  {
+   "q": "Which earthquakes usually cause most surface damage?",
+   "options": [
+    "Shallow-focus ones",
+    "Deep-focus ones",
+    "Those under the open ocean far away",
+    "Those with a high Mercalli number only"
+   ],
+   "correct": 0,
+   "explain": "Less energy is lost on the way up.",
+   "tag": "Terms"
+  },
+  {
+   "q": "What does the moment magnitude scale measure?",
+   "options": [
+    "Energy released",
+    "Damage caused",
+    "Number of deaths",
+    "Length of shaking only"
+   ],
+   "correct": 0,
+   "explain": "Magnitude, not intensity.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "How much more energy is magnitude 7 than magnitude 6?",
+   "options": [
+    "About 32 times",
+    "About 2 times",
+    "About 10 times",
+    "About 1,000 times"
+   ],
+   "correct": 0,
+   "explain": "Each step ≈ 32×.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "What does the Mercalli scale measure?",
+   "options": [
+    "Effects and damage",
+    "Energy released",
+    "Depth of the focus",
+    "Plate speed"
+   ],
+   "correct": 0,
+   "explain": "Intensity, I–XII.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "Which instrument records earthquakes?",
+   "options": [
+    "Seismometer",
+    "Barometer",
+    "Anemometer (wind gauge)",
+    "Tiltmeter"
+   ],
+   "correct": 0,
+   "explain": "Produces a seismogram.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "What is an aftershock?",
+   "options": [
+    "A smaller quake after the main one",
+    "The first small warning tremor before a quake",
+    "A tsunami reaching the coast",
+    "A volcanic eruption"
+   ],
+   "correct": 0,
+   "explain": "Can last for weeks.",
+   "tag": "Terms"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ05"] = {
+ "id": "IGHZ05",
+ "topicNumber": 2,
+ "topicTitle": "Earthquakes (IGCSE)",
+ "title": "Earthquake hazards and tsunamis",
+ "href": "/igcse/geography/learn/hazardous-environments/l05-earthquake-hazards-and-tsunamis",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Earthquake hazards and tsunamis.",
+ "checklist": [
+  "I can identify and describe the main primary and secondary hazards, in particular tsunamis",
+  "I can describe the factors affecting the impact of an earthquake"
+ ],
+ "quiz": [
+  {
+   "q": "Which is a primary earthquake hazard?",
+   "options": [
+    "Ground shaking",
+    "Tsunami",
+    "Cholera outbreak",
+    "Landslide"
+   ],
+   "correct": 0,
+   "explain": "Caused directly by the earthquake.",
+   "tag": "Hazards"
+  },
+  {
+   "q": "Which is a secondary hazard?",
+   "options": [
+    "Fire from broken gas pipes",
+    "Ground shaking",
+    "Ground rupture",
+    "Building collapse during shaking"
+   ],
+   "correct": 0,
+   "explain": "Results from the primary effects.",
+   "tag": "Hazards"
+  },
+  {
+   "q": "What is liquefaction?",
+   "options": [
+    "Wet soil behaving like a liquid",
+    "Lava flowing quickly down a steep slope",
+    "Rain falling after a quake",
+    "Melting rock under a plate"
+   ],
+   "correct": 0,
+   "explain": "Buildings sink or tilt.",
+   "tag": "Hazards"
+  },
+  {
+   "q": "What usually triggers a tsunami?",
+   "options": [
+    "The sea floor jerking upwards",
+    "A strong onshore wind",
+    "A very high spring tide reaching the coast",
+    "Heavy rain over the sea"
+   ],
+   "correct": 0,
+   "explain": "Undersea earthquake.",
+   "tag": "Tsunami"
+  },
+  {
+   "q": "How fast can a tsunami travel in deep ocean?",
+   "options": [
+    "700–900 km/h",
+    "7–9 km/h",
+    "70–90 km/h",
+    "7,000–9,000 km/h"
+   ],
+   "correct": 0,
+   "explain": "As fast as a jet plane.",
+   "tag": "Tsunami"
+  },
+  {
+   "q": "Why do tsunami waves grow taller near the coast?",
+   "options": [
+    "The water becomes shallower",
+    "The wind gets stronger near the land",
+    "The tide always rises",
+    "Rivers add extra water"
+   ],
+   "correct": 0,
+   "explain": "Waves slow and pile up.",
+   "tag": "Tsunami"
+  },
+  {
+   "q": "What is a natural warning sign of a tsunami?",
+   "options": [
+    "The sea retreating",
+    "Heavy rain",
+    "Strong winds",
+    "A rise in temperature"
+   ],
+   "correct": 0,
+   "explain": "Drawback.",
+   "tag": "Tsunami"
+  },
+  {
+   "q": "Which makes an earthquake MORE deadly?",
+   "options": [
+    "A shallow focus near a city",
+    "A deep focus under the ocean",
+    "Strict building codes",
+    "Regular earthquake drills"
+   ],
+   "correct": 0,
+   "explain": "Shallow and near people.",
+   "tag": "Factors"
+  },
+  {
+   "q": "Why does geology affect impact?",
+   "options": [
+    "Soft ground shakes more",
+    "Hard rock creates tsunamis",
+    "Granite causes fires",
+    "Clay stops seismic waves"
+   ],
+   "correct": 0,
+   "explain": "And may liquefy.",
+   "tag": "Factors"
+  },
+  {
+   "q": "How many people did the 2004 tsunami kill?",
+   "options": [
+    "About 230,000",
+    "About 2,300",
+    "About 23,000",
+    "About 2.3 million"
+   ],
+   "correct": 0,
+   "explain": "In 14 countries.",
+   "tag": "Tsunami"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ06"] = {
+ "id": "IGHZ06",
+ "topicNumber": 2,
+ "topicTitle": "Earthquakes (IGCSE)",
+ "title": "Earthquake management",
+ "href": "/igcse/geography/learn/hazardous-environments/l06-earthquake-management",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Earthquake management.",
+ "checklist": [
+  "I can understand how people can prepare for earthquakes",
+  "I can know short-term and long-term responses and relief",
+  "I can understand why people continue to live in areas at risk",
+  "I can apply this knowledge to case studies"
+ ],
+ "quiz": [
+  {
+   "q": "Why does management focus on preparation?",
+   "options": [
+    "Earthquakes cannot be predicted accurately",
+    "Earthquakes always happen at night",
+    "Preparation is never expensive",
+    "Warning systems always give several hours of notice"
+   ],
+   "correct": 0,
+   "explain": "Prediction is not yet possible.",
+   "tag": "Prepare"
+  },
+  {
+   "q": "What does a base isolator do?",
+   "options": [
+    "Absorbs ground movement",
+    "Measures earthquake magnitude",
+    "Warns people by text message",
+    "Stops tsunamis reaching land"
+   ],
+   "correct": 0,
+   "explain": "Rubber pads under the building.",
+   "tag": "Prepare"
+  },
+  {
+   "q": "What is retrofitting?",
+   "options": [
+    "Strengthening existing buildings",
+    "Building new sea walls",
+    "Moving a whole city to a safer location",
+    "Rebuilding after a quake"
+   ],
+   "correct": 0,
+   "explain": "Upgrading older buildings.",
+   "tag": "Prepare"
+  },
+  {
+   "q": "What should you do in an earthquake?",
+   "options": [
+    "Drop, cover and hold on",
+    "Run outside immediately",
+    "Stand next to windows",
+    "Use the lift to escape"
+   ],
+   "correct": 0,
+   "explain": "Standard advice.",
+   "tag": "Prepare"
+  },
+  {
+   "q": "Which is a short-term response?",
+   "options": [
+    "Search and rescue",
+    "New building codes",
+    "Rebuilding schools",
+    "Creating new jobs"
+   ],
+   "correct": 0,
+   "explain": "Immediate relief.",
+   "tag": "Responses"
+  },
+  {
+   "q": "Which is a long-term response?",
+   "options": [
+    "Rebuilding to higher standards",
+    "Handing out tents",
+    "Field hospitals",
+    "Rescuing people trapped in collapsed buildings"
+   ],
+   "correct": 0,
+   "explain": "Recovery takes years.",
+   "tag": "Responses"
+  },
+  {
+   "q": "Why do richer countries recover faster?",
+   "options": [
+    "They can afford to rebuild quickly",
+    "Their earthquakes are always much weaker",
+    "They have no tectonic plates",
+    "They never need any aid"
+   ],
+   "correct": 0,
+   "explain": "Money, insurance and planning.",
+   "tag": "Responses"
+  },
+  {
+   "q": "Why might people stay near volcanoes?",
+   "options": [
+    "Fertile soils",
+    "Free housing",
+    "No earthquakes",
+    "Colder climate"
+   ],
+   "correct": 0,
+   "explain": "Rich in minerals.",
+   "tag": "Living at risk"
+  },
+  {
+   "q": "Why might poor people stay in a risky area?",
+   "options": [
+    "They cannot afford to move",
+    "They are paid by the government to stay",
+    "It is the safest place",
+    "There are no hazards"
+   ],
+   "correct": 0,
+   "explain": "Poverty limits choice.",
+   "tag": "Living at risk"
+  },
+  {
+   "q": "Which is an example of land-use planning?",
+   "options": [
+    "Keeping hospitals off unstable ground",
+    "Handing out food parcels to families after a quake",
+    "Running school drills",
+    "Measuring magnitude"
+   ],
+   "correct": 0,
+   "explain": "Deciding where to build.",
+   "tag": "Prepare"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ07"] = {
+ "id": "IGHZ07",
+ "topicNumber": 2,
+ "topicTitle": "Earthquakes (IGCSE)",
+ "title": "Earthquake case study (HIC): Japan 2011",
+ "href": "/igcse/geography/learn/hazardous-environments/l07-japan-2011-earthquake",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Case study: Japan 2011 (HIC).",
+ "checklist": [
+  "I can understand the cause of the Japan 2011 earthquake and tsunami",
+  "I can understand the impacts of the 2011 earthquake",
+  "I can explain the long- and short-term impacts of the earthquake",
+  "I can know the hazard management plan in Japan"
+ ],
+ "quiz": [
+  {
+   "q": "When did the Tōhoku earthquake happen?",
+   "options": [
+    "11 March 2011",
+    "12 January 2010",
+    "26 December 2004",
+    "8 November 2013"
+   ],
+   "correct": 0,
+   "explain": "At 14:46 local time.",
+   "tag": "Cause"
+  },
+  {
+   "q": "What was its magnitude?",
+   "options": [
+    "9.0–9.1",
+    "7.0",
+    "6.9",
+    "8.0 (Richter)"
+   ],
+   "correct": 0,
+   "explain": "Japan’s strongest recorded.",
+   "tag": "Cause"
+  },
+  {
+   "q": "Which plate subducts beneath northern Japan?",
+   "options": [
+    "Pacific",
+    "Caribbean",
+    "Indo-Australian",
+    "Nazca"
+   ],
+   "correct": 0,
+   "explain": "At the Japan Trench.",
+   "tag": "Cause"
+  },
+  {
+   "q": "What type of plate boundary caused it?",
+   "options": [
+    "Destructive",
+    "Constructive",
+    "Conservative",
+    "Hotspot"
+   ],
+   "correct": 0,
+   "explain": "Subduction zone.",
+   "tag": "Cause"
+  },
+  {
+   "q": "What caused most of the deaths?",
+   "options": [
+    "The tsunami",
+    "Collapsing tall buildings",
+    "Volcanic ash",
+    "Forest fires"
+   ],
+   "correct": 0,
+   "explain": "Buildings mostly survived the shaking.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Roughly how high did the tsunami reach?",
+   "options": [
+    "About 40 m",
+    "About 4 m",
+    "About 400 m",
+    "About 1 m"
+   ],
+   "correct": 0,
+   "explain": "Up to 40.5 m at Miyako.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which nuclear plant was damaged?",
+   "options": [
+    "Fukushima Daiichi",
+    "Chernobyl",
+    "Three Mile Island",
+    "Sellafield"
+   ],
+   "correct": 0,
+   "explain": "Three reactors melted down.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Why was it so costly?",
+   "options": [
+    "Japan is rich with lots of infrastructure",
+    "Japan had no building codes before 2011",
+    "It lasted for several weeks",
+    "It hit only farmland"
+   ],
+   "correct": 0,
+   "explain": "High-value property and industry.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which is a long-term response in Japan?",
+   "options": [
+    "Building higher sea walls",
+    "Search and rescue",
+    "Opening evacuation centres",
+    "Stopping bullet trains"
+   ],
+   "correct": 0,
+   "explain": "Recovery over years.",
+   "tag": "Responses"
+  },
+  {
+   "q": "When is Japan’s Disaster Prevention Day?",
+   "options": [
+    "1 September",
+    "11 March",
+    "1 January",
+    "25 December"
+   ],
+   "correct": 0,
+   "explain": "Remembers the 1923 Kantō earthquake.",
+   "tag": "Management"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ08"] = {
+ "id": "IGHZ08",
+ "topicNumber": 2,
+ "topicTitle": "Earthquakes (IGCSE)",
+ "title": "Earthquake case study (LIC): Haiti 2010",
+ "href": "/igcse/geography/learn/hazardous-environments/l08-haiti-2010-earthquake",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Case study: Haiti 2010 (LIC).",
+ "checklist": [
+  "I can understand the cause of the Haiti 2010 earthquake",
+  "I can understand the impacts of the 2010 earthquake",
+  "I can explain the long- and short-term impacts of the earthquake",
+  "I can know the hazard management plan in Haiti before and after 2010"
+ ],
+ "quiz": [
+  {
+   "q": "When did the Haiti earthquake happen?",
+   "options": [
+    "12 January 2010",
+    "11 March 2011",
+    "8 November 2013",
+    "3 May 2018"
+   ],
+   "correct": 0,
+   "explain": "At 16:53 local time.",
+   "tag": "Cause"
+  },
+  {
+   "q": "What was its magnitude?",
+   "options": [
+    "7.0",
+    "9.1",
+    "5.5",
+    "8.8"
+   ],
+   "correct": 0,
+   "explain": "Weaker than Japan 2011.",
+   "tag": "Cause"
+  },
+  {
+   "q": "Which type of boundary caused it?",
+   "options": [
+    "Conservative",
+    "Destructive",
+    "Constructive",
+    "Collision"
+   ],
+   "correct": 0,
+   "explain": "Caribbean plate sliding past North American.",
+   "tag": "Cause"
+  },
+  {
+   "q": "Why was the earthquake so destructive?",
+   "options": [
+    "Shallow focus near the capital",
+    "Very deep focus far out at sea",
+    "It caused a 40 m tsunami",
+    "It happened in the middle of winter"
+   ],
+   "correct": 0,
+   "explain": "About 13 km deep, 25 km from Port-au-Prince.",
+   "tag": "Cause"
+  },
+  {
+   "q": "Roughly how many people were made homeless?",
+   "options": [
+    "1.5 million",
+    "15,000",
+    "150,000",
+    "About 15 million"
+   ],
+   "correct": 0,
+   "explain": "About 1.5 million.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "How did the damage compare with Haiti’s GDP?",
+   "options": [
+    "It was more than a whole year’s GDP",
+    "It was about 1% of GDP",
+    "It was less than Japan’s per person",
+    "It was fully insured"
+   ],
+   "correct": 0,
+   "explain": "About $8 billion.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which disease broke out later in 2010?",
+   "options": [
+    "Cholera",
+    "Malaria",
+    "Ebola",
+    "Measles"
+   ],
+   "correct": 0,
+   "explain": "Spread through water.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Why was aid slow to arrive?",
+   "options": [
+    "Damaged port, roads and congested airport",
+    "No other country offered to help Haiti at all",
+    "The weather was too cold",
+    "Aid was not needed"
+   ],
+   "correct": 0,
+   "explain": "Infrastructure was destroyed.",
+   "tag": "Responses"
+  },
+  {
+   "q": "What did Haiti lack before 2010?",
+   "options": [
+    "Building codes",
+    "Tectonic plates",
+    "A capital city",
+    "A coastline"
+   ],
+   "correct": 0,
+   "explain": "Buildings were poorly built.",
+   "tag": "Management"
+  },
+  {
+   "q": "What did the 2021 earthquake show?",
+   "options": [
+    "Haiti is still very vulnerable",
+    "Haiti is now fully prepared",
+    "Earthquakes have stopped there",
+    "The plates no longer move"
+   ],
+   "correct": 0,
+   "explain": "Over 2,000 killed.",
+   "tag": "Management"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ09"] = {
+ "id": "IGHZ09",
+ "topicNumber": 3,
+ "topicTitle": "Volcanoes (IGCSE)",
+ "title": "Volcanoes",
+ "href": "/igcse/geography/learn/hazardous-environments/l09-volcanoes",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Volcanoes.",
+ "checklist": [
+  "I can describe the distribution of volcanoes with reference to plate boundaries",
+  "I can identify and label key features of a volcano",
+  "I can identify and describe the main hazards associated with volcanoes",
+  "I can understand how different countries manage volcanoes"
+ ],
+ "quiz": [
+  {
+   "q": "Where are most volcanoes found?",
+   "options": [
+    "Around the Pacific Ring of Fire",
+    "In the middle of Africa",
+    "Along conservative plate boundaries",
+    "Near the North Pole"
+   ],
+   "correct": 0,
+   "explain": "About three-quarters.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "At which boundary are there NO volcanoes?",
+   "options": [
+    "Conservative",
+    "Constructive",
+    "Destructive",
+    "Above a hotspot"
+   ],
+   "correct": 0,
+   "explain": "No magma is produced.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "What is the magma chamber?",
+   "options": [
+    "Store of molten rock below the volcano",
+    "The opening at the top of the volcano",
+    "A small cone on the side",
+    "The cloud of ash above"
+   ],
+   "correct": 0,
+   "explain": "Feeds the eruption.",
+   "tag": "Features"
+  },
+  {
+   "q": "Which describes a composite volcano?",
+   "options": [
+    "Steep with layers of ash and lava",
+    "Wide with gentle slopes",
+    "Formed only over hotspots in the middle of plates",
+    "Erupts runny basalt lava"
+   ],
+   "correct": 0,
+   "explain": "e.g. Mount Fuji.",
+   "tag": "Features"
+  },
+  {
+   "q": "Which is a shield volcano?",
+   "options": [
+    "Kīlauea",
+    "Mount Fuji",
+    "Mount St Helens",
+    "Vesuvius"
+   ],
+   "correct": 0,
+   "explain": "Wide and gentle.",
+   "tag": "Features"
+  },
+  {
+   "q": "What is a pyroclastic flow?",
+   "options": [
+    "A fast avalanche of hot gas and ash",
+    "A slow stream of runny lava",
+    "A mudflow after heavy rain",
+    "A cloud of steam rising over the sea after an eruption"
+   ],
+   "correct": 0,
+   "explain": "The deadliest hazard.",
+   "tag": "Hazards"
+  },
+  {
+   "q": "What is a lahar?",
+   "options": [
+    "A volcanic mudflow",
+    "A volcanic bomb thrown out",
+    "A type of lava",
+    "A gas cloud"
+   ],
+   "correct": 0,
+   "explain": "e.g. Armero 1985.",
+   "tag": "Hazards"
+  },
+  {
+   "q": "What does the VEI measure?",
+   "options": [
+    "How explosive an eruption is",
+    "How many people died in the eruption",
+    "How deep the magma is",
+    "The temperature of the lava"
+   ],
+   "correct": 0,
+   "explain": "Scale 0–8.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "Which shows magma is rising?",
+   "options": [
+    "The ground swelling",
+    "Falling sea levels",
+    "More rainfall",
+    "Fewer earthquakes"
+   ],
+   "correct": 0,
+   "explain": "Measured by tiltmeters and GPS.",
+   "tag": "Management"
+  },
+  {
+   "q": "How was lava managed in Heimaey in 1973?",
+   "options": [
+    "Cooling it with sea water",
+    "Bombing it from aircraft",
+    "Building a dam of sandbags",
+    "Covering it with ash"
+   ],
+   "correct": 0,
+   "explain": "Pumped sea water.",
+   "tag": "Management"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ10"] = {
+ "id": "IGHZ10",
+ "topicNumber": 3,
+ "topicTitle": "Volcanoes (IGCSE)",
+ "title": "Volcano case study: Mount Kīlauea 2018",
+ "href": "/igcse/geography/learn/hazardous-environments/l10-kilauea-2018",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Case study: Kīlauea 2018.",
+ "checklist": [
+  "I can describe the location of Mount Kīlauea",
+  "I can explain how hotspots cause volcanoes",
+  "I can classify the impacts of the 2018 eruption into social, economic and environmental",
+  "I can explain the long- and short-term impacts of the eruption",
+  "I can explain why people choose to live beside this volcano"
+ ],
+ "quiz": [
+  {
+   "q": "On which island is Kīlauea?",
+   "options": [
+    "The Island of Hawai‘i (Big Island)",
+    "Maui (Hawaiian Islands)",
+    "Iceland",
+    "Honshu"
+   ],
+   "correct": 0,
+   "explain": "The largest Hawaiian island.",
+   "tag": "Location"
+  },
+  {
+   "q": "What type of volcano is Kīlauea?",
+   "options": [
+    "Shield",
+    "Composite",
+    "Caldera only",
+    "Cinder cone"
+   ],
+   "correct": 0,
+   "explain": "Wide with runny lava.",
+   "tag": "Location"
+  },
+  {
+   "q": "What causes volcanoes in Hawai‘i?",
+   "options": [
+    "A hotspot",
+    "A destructive boundary",
+    "A conservative boundary",
+    "A collision boundary"
+   ],
+   "correct": 0,
+   "explain": "Mantle plume.",
+   "tag": "Hotspot"
+  },
+  {
+   "q": "Why do the Hawaiian islands get older to the north-west?",
+   "options": [
+    "The plate moves over a still hotspot",
+    "The hotspot itself moves south-east every year",
+    "Sea level is falling",
+    "Erosion creates new islands"
+   ],
+   "correct": 0,
+   "explain": "Plate moves north-west.",
+   "tag": "Hotspot"
+  },
+  {
+   "q": "When did the 2018 eruption begin?",
+   "options": [
+    "3 May 2018",
+    "11 March 2018",
+    "1 January 2018",
+    "8 November 2018"
+   ],
+   "correct": 0,
+   "explain": "Fissures in Leilani Estates.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Roughly how many homes were destroyed?",
+   "options": [
+    "Over 700",
+    "About 70",
+    "About 7,000",
+    "About 70,000"
+   ],
+   "correct": 0,
+   "explain": "Over 700.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which is an ENVIRONMENTAL impact?",
+   "options": [
+    "Kapoho Bay filled with lava",
+    "Over 700 homes destroyed",
+    "Tourism fell sharply",
+    "About 2,000 people evacuated"
+   ],
+   "correct": 0,
+   "explain": "Change to the landscape.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "What is vog?",
+   "options": [
+    "Volcanic smog",
+    "A lava fountain",
+    "A volcanic mudflow",
+    "A tsunami"
+   ],
+   "correct": 0,
+   "explain": "Sulfur dioxide haze.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "How many people died in the 2018 eruption?",
+   "options": [
+    "None",
+    "About 70",
+    "About 700",
+    "About 2,000"
+   ],
+   "correct": 0,
+   "explain": "About 24 were injured.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Why did many people live in Leilani Estates?",
+   "options": [
+    "Land there was cheap",
+    "There were no volcanic hazards",
+    "It was the capital city",
+    "The government paid them"
+   ],
+   "correct": 0,
+   "explain": "Affordable land in lava zones.",
+   "tag": "Living at risk"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ11"] = {
+ "id": "IGHZ11",
+ "topicNumber": 4,
+ "topicTitle": "Tropical cyclones (IGCSE)",
+ "title": "Tropical storms",
+ "href": "/igcse/geography/learn/hazardous-environments/l11-tropical-storms",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Tropical storms.",
+ "checklist": [
+  "I can describe the distribution of tropical cyclones and their characteristics",
+  "I can understand how tropical cyclones are measured",
+  "I can identify the components needed for a tropical cyclone to form",
+  "I can understand the vulnerability of countries to these hazards"
+ ],
+ "quiz": [
+  {
+   "q": "What is a tropical cyclone called in the north-west Pacific?",
+   "options": [
+    "Typhoon",
+    "Hurricane",
+    "Tornado",
+    "Monsoon"
+   ],
+   "correct": 0,
+   "explain": "e.g. Typhoon Haiyan.",
+   "tag": "Distribution"
+  },
+  {
+   "q": "Why do cyclones not form on the Equator?",
+   "options": [
+    "The Coriolis effect is too weak",
+    "The sea is too cold",
+    "There is no wind at all near the Equator",
+    "The air pressure is too low"
+   ],
+   "correct": 0,
+   "explain": "Needs at least 5° latitude to spin.",
+   "tag": "Formation"
+  },
+  {
+   "q": "What sea temperature is needed?",
+   "options": [
+    "At least 26.5°C",
+    "At least 10°C at the surface",
+    "Below 15°C",
+    "Exactly 20°C"
+   ],
+   "correct": 0,
+   "explain": "Warm water supplies energy.",
+   "tag": "Formation"
+  },
+  {
+   "q": "What is the eye of a storm?",
+   "options": [
+    "The calm centre",
+    "The strongest winds",
+    "The outer rain bands",
+    "The storm surge"
+   ],
+   "correct": 0,
+   "explain": "Sinking air.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "Why do cyclones weaken over land?",
+   "options": [
+    "They lose heat and moisture",
+    "Mountains reflect the wind",
+    "The Coriolis effect stops",
+    "They gain too much energy"
+   ],
+   "correct": 0,
+   "explain": "No warm ocean below.",
+   "tag": "Characteristics"
+  },
+  {
+   "q": "What does the Saffir–Simpson scale measure?",
+   "options": [
+    "Sustained wind speed",
+    "Total rainfall during the storm",
+    "Number of deaths",
+    "Size of the eye"
+   ],
+   "correct": 0,
+   "explain": "Categories 1–5.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "What wind speed is a category 5?",
+   "options": [
+    "252 km/h or more",
+    "119–153 km/h",
+    "50–100 km/h",
+    "178–208 km/h"
+   ],
+   "correct": 0,
+   "explain": "The most severe.",
+   "tag": "Measurement"
+  },
+  {
+   "q": "What is a storm surge?",
+   "options": [
+    "A rise in sea level pushed onshore",
+    "A sudden drop in air pressure only",
+    "Heavy rain on mountains",
+    "A tornado over the sea"
+   ],
+   "correct": 0,
+   "explain": "Causes most deaths.",
+   "tag": "Vulnerability"
+  },
+  {
+   "q": "Which makes a place more vulnerable?",
+   "options": [
+    "Low-lying coasts and poverty",
+    "High mountains far inland",
+    "Strict building codes",
+    "Good warning systems and storm shelters"
+   ],
+   "correct": 0,
+   "explain": "e.g. Bangladesh.",
+   "tag": "Vulnerability"
+  },
+  {
+   "q": "What is low wind shear?",
+   "options": [
+    "Similar wind speeds at different heights",
+    "Very strong winds blowing at the sea surface",
+    "No wind anywhere",
+    "Winds blowing from the poles"
+   ],
+   "correct": 0,
+   "explain": "Stops the storm being torn apart.",
+   "tag": "Formation"
+  }
+ ]
+};
+
+window.SBL_LESSONS["IGHZ12"] = {
+ "id": "IGHZ12",
+ "topicNumber": 4,
+ "topicTitle": "Tropical cyclones (IGCSE)",
+ "title": "Tropical storm case study: Typhoon Haiyan 2013",
+ "href": "/igcse/geography/learn/hazardous-environments/l12-typhoon-haiyan-2013",
+ "syllabusFocus": "Edexcel IGCSE Geography, Paper 1: Physical Geography — Hazardous Environments: Case study: Typhoon Haiyan 2013.",
+ "checklist": [
+  "I can understand the cause of Typhoon Haiyan",
+  "I can understand the short- and long-term impacts of the typhoon",
+  "I can explain why people continue to live in areas at risk from hazards",
+  "I can understand that some countries are more vulnerable than others to tropical storms"
+ ],
+ "quiz": [
+  {
+   "q": "What was Haiyan called in the Philippines?",
+   "options": [
+    "Yolanda",
+    "Katrina",
+    "Nargis",
+    "Sandy"
+   ],
+   "correct": 0,
+   "explain": "Local name.",
+   "tag": "Cause"
+  },
+  {
+   "q": "When did Haiyan make landfall?",
+   "options": [
+    "8 November 2013",
+    "11 March 2011",
+    "12 January 2010",
+    "3 May 2018"
+   ],
+   "correct": 0,
+   "explain": "At Guiuan, Eastern Samar.",
+   "tag": "Cause"
+  },
+  {
+   "q": "What category was Haiyan?",
+   "options": [
+    "Category 5",
+    "Category 1",
+    "Category 2",
+    "Category 3"
+   ],
+   "correct": 0,
+   "explain": "A super typhoon.",
+   "tag": "Cause"
+  },
+  {
+   "q": "Which city was worst hit?",
+   "options": [
+    "Tacloban",
+    "Manila",
+    "Cebu",
+    "Davao"
+   ],
+   "correct": 0,
+   "explain": "On Leyte.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "What caused most deaths?",
+   "options": [
+    "The storm surge",
+    "Volcanic ash falling",
+    "An earthquake",
+    "Snowfall"
+   ],
+   "correct": 0,
+   "explain": "Over 5 m high in Tacloban.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Roughly how many people died?",
+   "options": [
+    "About 6,300",
+    "About 630",
+    "About 63,000",
+    "About 630,000"
+   ],
+   "correct": 0,
+   "explain": "NDRRMC figure.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Roughly how many people were displaced?",
+   "options": [
+    "About 4.1 million",
+    "About 41,000",
+    "About 410,000",
+    "About 41 million"
+   ],
+   "correct": 0,
+   "explain": "Displaced from homes.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Which is a long-term impact?",
+   "options": [
+    "Coconut farmers losing income for years",
+    "Search and rescue",
+    "Airport closed for a day",
+    "Power cuts that lasted during the storm itself"
+   ],
+   "correct": 0,
+   "explain": "Trees take years to regrow.",
+   "tag": "Impacts"
+  },
+  {
+   "q": "Why do fishing families live on the coast?",
+   "options": [
+    "Their livelihoods depend on it",
+    "There are no storms there",
+    "Land there is the most expensive",
+    "The government forces them"
+   ],
+   "correct": 0,
+   "explain": "Jobs and income.",
+   "tag": "Living at risk"
+  },
+  {
+   "q": "Why is the Philippines vulnerable to typhoons?",
+   "options": [
+    "It lies in the path of Pacific typhoons",
+    "It is far from any ocean so storms build over land",
+    "It has cold seas around it",
+    "It is on the Equator"
+   ],
+   "correct": 0,
+   "explain": "About 20 a year enter its waters.",
+   "tag": "Vulnerability"
   }
  ]
 };

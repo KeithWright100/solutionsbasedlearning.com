@@ -95,8 +95,78 @@
       {
         "slug": "hazardous",
         "label": "Hazardous Environments",
-        "href": null,
-        "status": "soon"
+        "href": "/igcse/geography/learn/hazardous-environments",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Hazards and plate tectonics",
+            "lessons": [
+              {
+                "label": "What is a hazard?",
+                "href": "/igcse/geography/learn/hazardous-environments/l01-what-is-a-hazard"
+              },
+              {
+                "label": "Structure of the Earth",
+                "href": "/igcse/geography/learn/hazardous-environments/l02-structure-of-the-earth"
+              },
+              {
+                "label": "Plate boundaries",
+                "href": "/igcse/geography/learn/hazardous-environments/l03-plate-boundaries"
+              }
+            ]
+          },
+          {
+            "title": "Earthquakes",
+            "lessons": [
+              {
+                "label": "Earthquakes",
+                "href": "/igcse/geography/learn/hazardous-environments/l04-earthquakes"
+              },
+              {
+                "label": "Earthquake hazards and tsunamis",
+                "href": "/igcse/geography/learn/hazardous-environments/l05-earthquake-hazards-and-tsunamis"
+              },
+              {
+                "label": "Earthquake management",
+                "href": "/igcse/geography/learn/hazardous-environments/l06-earthquake-management"
+              },
+              {
+                "label": "Case study: Japan 2011 (HIC)",
+                "href": "/igcse/geography/learn/hazardous-environments/l07-japan-2011-earthquake"
+              },
+              {
+                "label": "Case study: Haiti 2010 (LIC)",
+                "href": "/igcse/geography/learn/hazardous-environments/l08-haiti-2010-earthquake"
+              }
+            ]
+          },
+          {
+            "title": "Volcanoes",
+            "lessons": [
+              {
+                "label": "Volcanoes",
+                "href": "/igcse/geography/learn/hazardous-environments/l09-volcanoes"
+              },
+              {
+                "label": "Case study: K\u012blauea 2018",
+                "href": "/igcse/geography/learn/hazardous-environments/l10-kilauea-2018"
+              }
+            ]
+          },
+          {
+            "title": "Tropical cyclones",
+            "lessons": [
+              {
+                "label": "Tropical storms",
+                "href": "/igcse/geography/learn/hazardous-environments/l11-tropical-storms"
+              },
+              {
+                "label": "Case study: Typhoon Haiyan 2013",
+                "href": "/igcse/geography/learn/hazardous-environments/l12-typhoon-haiyan-2013"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "coastal-fieldwork",
