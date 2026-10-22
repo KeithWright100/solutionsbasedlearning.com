@@ -28,6 +28,7 @@
     { key: 'ppn', label: 'HL: Power, places and networks', src: '/js/sbl-unit4-lessons.js' },
     { key: 'hd', label: 'HL: Human development and diversity', src: '/js/sbl-hd-lessons.js' },
     { key: 'gr', label: 'HL: Global risks and resilience', src: '/js/sbl-gr-lessons.js' },
+    { key: 'igeo', label: 'IGCSE Geography (Edexcel)', src: '/js/sbl-igcse-geo-lessons.js' },
     { key: 'ppq', label: 'Past paper questions (revision)', src: null }
   ];
   var viewLessons = {};   // view key -> [{ id, title }]
@@ -322,7 +323,7 @@
 
   // ---- detail drawer: one student, one lesson ----
   // ---- whole-student overview: every lesson and PPQ topic they've saved ----
-  var UNIT_PREFIX = [['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
+  var UNIT_PREFIX = [['IGCO', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
   function viewOf(id) {
     if (id.indexOf('PPQ:') === 0) return 'ppq';
     for (var i = 0; i < UNIT_PREFIX.length; i++) if (id.indexOf(UNIT_PREFIX[i][0]) === 0) return UNIT_PREFIX[i][1];

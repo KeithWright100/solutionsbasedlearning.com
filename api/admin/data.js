@@ -75,7 +75,7 @@ const WEEK = 7 * 86400000;
 function unitOf(lessonId) {
   const id = String(lessonId || '');
   if (id.indexOf('PPQ:') === 0) return 'Past paper revision';
-  const map = [['CP', 'Unit 1: Changing population'], ['CC', 'Unit 2: Global climate'], ['RC', 'Unit 3: Resource consumption'],
+  const map = [['IGCO', 'IGCSE: Coastal environments'], ['CP', 'Unit 1: Changing population'], ['CC', 'Unit 2: Global climate'], ['RC', 'Unit 3: Resource consumption'],
     ['FW', 'Option: Freshwater'], ['LT', 'Option: Leisure, tourism & sport'], ['FH', 'Option: Food & health'],
     ['PPN', 'HL: Power, places & networks'], ['HD', 'HL: Human development'], ['GR', 'HL: Global risks & resilience']];
   for (const [p, name] of map) if (id.indexOf(p) === 0) return name;

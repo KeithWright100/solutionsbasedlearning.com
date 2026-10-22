@@ -1,0 +1,89 @@
+/* SBL — IGCSE Geography "traditional" lesson pages.
+   Sits on top of sbl-learn-theme.css (same shell, sidebar and right
+   rail as the IB pages) and only styles the reading content. */
+
+.lh-stat__label { display: block; }
+.ig-objectives { background: var(--lh-teal-bg); border: 1px solid rgba(20,184,166,0.25); border-radius: 14px; padding: 16px 20px; margin: 18px 0 8px; }
+.ig-objectives h2 { font-family: var(--lh-font-display); font-size: 1rem; color: var(--lh-teal-deep); margin: 0 0 8px; }
+.ig-objectives ul { margin: 0; padding-left: 1.2rem; color: var(--lh-ink); }
+.ig-objectives li { margin: 4px 0; line-height: 1.5; }
+
+.ig-section { background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 16px; padding: 20px 24px; margin: 16px 0; scroll-margin-top: 20px; }
+.ig-section h2 { font-family: var(--lh-font-display); font-size: 1.3rem; color: var(--lh-ink); margin: 0 0 10px; }
+.ig-section p, .ig-section li { color: var(--lh-body); line-height: 1.7; font-size: 0.97rem; }
+.ig-section p { margin: 0 0 10px; }
+.ig-section ul, .ig-section ol { margin: 0 0 10px; padding-left: 1.3rem; }
+.ig-section li { margin: 4px 0; }
+.ig-section b { color: var(--lh-ink); }
+.ig-section h4 { font-family: var(--lh-font-display); margin: 0 0 6px; color: var(--lh-ink); }
+
+.ig-fig { margin: 14px 0; }
+.ig-fig svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--lh-border); display: block; }
+.ig-fig figcaption { font-size: 0.84rem; color: var(--lh-muted); margin-top: 6px; line-height: 1.45; }
+
+.ig-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+.ig-compare > div { border-radius: 12px; padding: 12px 14px; border: 1px solid var(--lh-border); background: var(--lh-bg); }
+.ig-compare > div:first-child { border-top: 4px solid var(--lh-teal); }
+.ig-compare > div:last-child { border-top: 4px solid #ef4444; }
+
+.ig-table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 0.9rem; }
+.ig-table th { text-align: left; background: var(--lh-bg); color: var(--lh-ink); font-weight: 700; padding: 9px 10px; border-bottom: 2px solid var(--lh-border); }
+.ig-table td { padding: 9px 10px; border-bottom: 1px solid var(--lh-border); color: var(--lh-body); vertical-align: top; line-height: 1.5; }
+.ig-table-wrap { overflow-x: auto; }
+
+.ig-terms { background: var(--lh-gold-bg); border: 1px solid rgba(201,154,46,0.3); border-radius: 16px; padding: 16px 20px; margin: 16px 0; }
+.ig-terms h2 { font-family: var(--lh-font-display); font-size: 1.05rem; color: #8a6514; margin: 0 0 8px; }
+.ig-terms dl { margin: 0; display: grid; grid-template-columns: minmax(130px, max-content) 1fr; gap: 6px 14px; }
+.ig-terms dt { font-weight: 700; color: var(--lh-ink); }
+.ig-terms dd { margin: 0; color: var(--lh-body); line-height: 1.5; }
+
+.ig-case { background: var(--lh-blue-bg); border: 1px solid rgba(59,130,246,0.25); border-left: 5px solid var(--lh-blue); border-radius: 16px; padding: 16px 22px; margin: 16px 0; }
+.ig-case .ig-tag { display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--lh-blue); border-radius: 999px; padding: 3px 10px; margin-bottom: 6px; }
+.ig-case h2 { font-family: var(--lh-font-display); font-size: 1.15rem; margin: 2px 0 8px; color: var(--lh-ink); }
+.ig-case p, .ig-case li { color: var(--lh-body); line-height: 1.65; font-size: 0.95rem; }
+.ig-case ul { padding-left: 1.2rem; margin: 6px 0; }
+
+.ig-exam { background: var(--lh-purple-bg); border: 1px solid rgba(139,92,246,0.25); border-radius: 16px; padding: 16px 22px; margin: 16px 0; }
+.ig-exam .ig-tag { display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--lh-purple); border-radius: 999px; padding: 3px 10px; }
+.ig-exam .ig-q { font-weight: 700; color: var(--lh-ink); font-size: 1.02rem; margin: 10px 0; line-height: 1.5; }
+.ig-exam .ig-marks { color: var(--lh-purple); font-weight: 800; white-space: nowrap; }
+.ig-exam details { background: var(--lh-surface); border-radius: 10px; padding: 10px 14px; border: 1px solid var(--lh-border); }
+.ig-exam summary { cursor: pointer; font-weight: 700; color: var(--lh-purple); }
+.ig-exam details ul { margin: 8px 0 0; padding-left: 1.2rem; }
+.ig-exam details li { color: var(--lh-body); line-height: 1.55; margin: 4px 0; font-size: 0.93rem; }
+.ig-exam textarea { width: 100%; min-height: 120px; margin: 4px 0 10px; border-radius: 10px; border: 1px solid var(--lh-border); padding: 10px 12px; font: inherit; font-size: 0.93rem; line-height: 1.55; resize: vertical; background: #fff; }
+
+.ig-test-h { font-family: var(--lh-font-display); font-size: 1.2rem; color: var(--lh-ink); margin: 26px 0 4px; }
+.ig-test-p { color: var(--lh-body); margin: 0 0 10px; }
+
+.ig-pager { display: flex; justify-content: space-between; gap: 12px; margin: 22px 0 8px; flex-wrap: wrap; }
+.ig-pager a { flex: 1; min-width: 200px; border: 1px solid var(--lh-border); background: var(--lh-surface); border-radius: 14px; padding: 12px 16px; text-decoration: none; color: var(--lh-ink); }
+.ig-pager a:hover { border-color: var(--lh-teal); }
+.ig-pager a small { display: block; color: var(--lh-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.ig-pager a.next { text-align: right; }
+
+.ig-toc { list-style: none; margin: 0; padding: 0; }
+.ig-toc li { margin: 2px 0; }
+.ig-toc a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--lh-body); text-decoration: none; font-size: 0.88rem; line-height: 1.35; }
+.ig-toc a:hover { background: var(--lh-bg); color: var(--lh-ink); }
+
+/* hub + topic pages */
+.ig-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 24px; }
+.ig-card { display: block; background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 16px; padding: 16px 18px; text-decoration: none; color: var(--lh-ink); transition: border-color .2s, transform .2s; }
+a.ig-card:hover { border-color: var(--lh-teal); transform: translateY(-2px); }
+.ig-card .ig-num { font-family: var(--lh-font-mono); font-size: 0.75rem; color: var(--lh-teal-deep); font-weight: 600; }
+.ig-card h3 { font-family: var(--lh-font-display); font-size: 1.08rem; margin: 4px 0 6px; }
+.ig-card p { font-size: 0.88rem; color: var(--lh-body); line-height: 1.5; margin: 0; }
+.ig-card.is-soon { opacity: 0.6; }
+.ig-card .ig-badge { display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-top: 8px; }
+.ig-badge--live { background: var(--lh-green-bg); color: #15803d; }
+.ig-badge--soon { background: var(--lh-bg); color: var(--lh-muted); }
+.ig-h2 { font-family: var(--lh-font-display); font-size: 1.15rem; color: var(--lh-ink); margin: 22px 0 4px; }
+.ig-sub { color: var(--lh-body); margin: 0 0 6px; font-size: 0.93rem; }
+
+@media (max-width: 720px) {
+  .ig-compare { grid-template-columns: 1fr; }
+  .ig-section { padding: 16px; }
+  .ig-terms dl { grid-template-columns: 1fr; }
+  .ig-terms dd { margin-bottom: 6px; }
+}
