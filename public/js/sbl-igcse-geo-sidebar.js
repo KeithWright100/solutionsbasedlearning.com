@@ -254,8 +254,70 @@
       {
         "slug": "economic",
         "label": "Economic Activity and Energy",
-        "href": null,
-        "status": "soon"
+        "href": "/igcse/geography/learn/economic-activity-and-energy",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Economic sectors and location",
+            "lessons": [
+              {
+                "label": "Economic sectors and employment",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l01-economic-sectors-and-employment"
+              },
+              {
+                "label": "Location of economic activity",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l02-location-of-economic-activity"
+              }
+            ]
+          },
+          {
+            "title": "Changing employment",
+            "lessons": [
+              {
+                "label": "Changes in sector employment",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l03-changes-in-sector-employment"
+              },
+              {
+                "label": "Sector shifts in three countries",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l04-sector-shifts-in-three-countries"
+              },
+              {
+                "label": "Informal employment: Bangkok",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l05-informal-employment-bangkok"
+              }
+            ]
+          },
+          {
+            "title": "Energy resources",
+            "lessons": [
+              {
+                "label": "Rising energy demand",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l06-rising-energy-demand"
+              },
+              {
+                "label": "Renewable vs non-renewable",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l07-renewable-and-non-renewable-energy"
+              },
+              {
+                "label": "Case study: fracking in the UK",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l08-case-study-fracking-in-the-uk"
+              }
+            ]
+          },
+          {
+            "title": "Sustainable energy",
+            "lessons": [
+              {
+                "label": "Sustainable energy",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l09-sustainable-energy"
+              },
+              {
+                "label": "Case study: micro-hydro in Peru",
+                "href": "/igcse/geography/learn/economic-activity-and-energy/l10-case-study-micro-hydro-in-peru"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "rural",
