@@ -1815,109 +1815,109 @@ window.SBL_LESSONS["IGCO14"] = {
   {
    "q": "Which law set up coastal management in Sri Lanka?",
    "options": [
-    "The Coast Conservation Act of 1981",
-    "The Clean Air Act of 1956",
-    "The Paris Agreement on climate change of 2015",
-    "The Kyoto Protocol of 1997"
+    "The Coast Conservation Act, 1981",
+    "The Clean Air Act, 1956",
+    "The Paris Agreement, 2015",
+    "The Kyoto Protocol, 1997"
    ],
    "correct": 0,
-   "explain": "The 1981 Act created the coast conservation department.",
+   "explain": "Act No. 57 of 1981 created the framework.",
+   "tag": "CZMP"
+  },
+  {
+   "q": "How is Sri Lanka’s coastal zone defined?",
+   "options": [
+    "300 m inland and 2 km out to sea",
+    "3 km inland and 20 km out to sea",
+    "The whole island and its waters",
+    "30 m inland and 200 m out to sea"
+   ],
+   "correct": 0,
+   "explain": "300 m landward of high water and 2 km seaward of low water.",
+   "tag": "CZMP"
+  },
+  {
+   "q": "Which hazard is most common in Sri Lanka’s disaster records?",
+   "options": [
+    "Floods",
+    "Tsunamis",
+    "Earthquakes",
+    "Volcanic eruptions"
+   ],
+   "correct": 0,
+   "explain": "Monsoon floods are the most frequent hazard.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "Why did some areas suffer less damage in the 2004 tsunami?",
+   "options": [
+    "Mangroves absorbed wave energy",
+    "The tsunami arrived at low tide only",
+    "Hotels acted as a sea wall",
+    "Coral mining had deepened the sea"
+   ],
+   "correct": 0,
+   "explain": "Healthy mangroves reduced the waves’ energy.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "Which is an ENVIRONMENTAL reason for coastal management?",
+   "options": [
+    "Coral reefs degraded by mining",
+    "Hotels earning tourist income",
+    "Fishing families losing homes",
+    "Coastal railway threatened by erosion"
+   ],
+   "correct": 0,
+   "explain": "Reef damage is an environmental issue.",
+   "tag": "Need for management"
+  },
+  {
+   "q": "Where is Sri Lanka’s population most concentrated?",
+   "options": [
+    "West and south-west, near Colombo",
+    "North-central dry zone",
+    "Central highland forests",
+    "East coast lagoons only"
+   ],
+   "correct": 0,
+   "explain": "Density is highest in the Western Province.",
+   "tag": "Population"
+  },
+  {
+   "q": "Which is one of the 2018 CZMP objectives?",
+   "options": [
+    "End coral mining and control sand mining",
+    "Build a sea wall round the whole island",
+    "Move all hotels inland by 5 km",
+    "Ban fishing along the west coast"
+   ],
+   "correct": 0,
+   "explain": "Beach stability depends on controlling mining.",
    "tag": "CZMP"
   },
   {
    "q": "What is a setback area?",
    "options": [
-    "A zone near the shore where building is restricted",
-    "A wall built to protect hotels",
-    "A reef used only for diving and snorkelling",
-    "A type of fishing harbour"
+    "A zone where building near the shore is restricted",
+    "A wall built in front of hotels to stop waves",
+    "A reef set aside only for diving tourists",
+    "A harbour where fishing boats shelter"
    ],
    "correct": 0,
    "explain": "It keeps development back from the sea.",
    "tag": "CZMP"
   },
   {
-   "q": "What is Special Area Management?",
+   "q": "Which describes Special Area Management?",
    "options": [
-    "Communities and government managing local resources together",
-    "Building sea walls in special places only",
-    "Closing beaches to all visitors",
-    "Mining coral in selected areas"
+    "Communities and government managing resources together",
+    "Engineers building defences at selected sites",
+    "Closing selected beaches to all visitors",
+    "Government selling coral mining permits"
    ],
    "correct": 0,
-   "explain": "Community-based management at selected sites.",
-   "tag": "CZMP"
-  },
-  {
-   "q": "Which human activity has increased erosion in Sri Lanka?",
-   "options": [
-    "Coral and sand mining",
-    "Planting mangroves",
-    "Building cyclone shelters",
-    "Setting up marine parks"
-   ],
-   "correct": 0,
-   "explain": "Mining removes natural protection and sediment.",
-   "tag": "Need for management"
-  },
-  {
-   "q": "Roughly how many people died in Sri Lanka in the 2004 tsunami?",
-   "options": [
-    "About 35,000",
-    "About 350",
-    "About 3,500",
-    "About 350,000"
-   ],
-   "correct": 0,
-   "explain": "Around 35,000 people in Sri Lanka.",
-   "tag": "Need for management"
-  },
-  {
-   "q": "Which is an example of soft engineering used in Sri Lanka?",
-   "options": [
-    "Replanting mangroves",
-    "Building rock revetments",
-    "Constructing offshore breakwaters",
-    "Building groynes of rock"
-   ],
-   "correct": 0,
-   "explain": "Mangroves are a natural defence.",
-   "tag": "Engineering"
-  },
-  {
-   "q": "Why is Sri Lanka’s coastal zone under so much pressure?",
-   "options": [
-    "Population, tourism, fishing and industry are concentrated there",
-    "Nobody lives near the coast",
-    "The coast has no ecosystems",
-    "The sea level is falling quickly"
-   ],
-   "correct": 0,
-   "explain": "Many users compete for a narrow strip.",
-   "tag": "Need for management"
-  },
-  {
-   "q": "Which coral reef site is in Sri Lanka?",
-   "options": [
-    "Hikkaduwa",
-    "The Great Barrier Reef",
-    "Old Harry Rocks",
-    "Spurn Head"
-   ],
-   "correct": 0,
-   "explain": "Hikkaduwa is on the south-west coast.",
-   "tag": "Need for management"
-  },
-  {
-   "q": "What is the main idea behind the CZMP?",
-   "options": [
-    "Managing all coastal issues together for the whole coast",
-    "Protecting only the capital city of Colombo from all erosion",
-    "Building sea walls everywhere",
-    "Moving everyone away from the coast"
-   ],
-   "correct": 0,
-   "explain": "An integrated, whole-coast approach.",
+   "explain": "Community-based, integrated management.",
    "tag": "CZMP"
   }
  ]
