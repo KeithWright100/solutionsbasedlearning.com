@@ -89,6 +89,15 @@
                 "href": "/igcse/geography/learn/coastal-environments/l15-holderness-coastal-management"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/coastal-environments/past-papers"
+              }
+            ]
           }
         ]
       },
@@ -165,6 +174,15 @@
                 "href": "/igcse/geography/learn/hazardous-environments/l12-typhoon-haiyan-2013"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/hazardous-environments/past-papers"
+              }
+            ]
           }
         ]
       },
@@ -214,6 +232,15 @@
               {
                 "label": "Evaluating the enquiry",
                 "href": "/igcse/geography/learn/coastal-fieldwork/l07-evaluation"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/geography/learn/coastal-fieldwork/past-papers"
               }
             ]
           }
