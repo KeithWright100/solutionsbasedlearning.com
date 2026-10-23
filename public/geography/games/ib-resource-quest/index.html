@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resource Quest — IB Geography Global Resource Consumption and Security Revision Game — SBL</title>
+<meta name="description" content="IB Geography revision game for Unit 3 Global Resource Consumption and Security: 14 levels covering poverty reduction, ecological footprints, water, food and energy, the nexus, Nepal and Israel, waste, the SDGs, Malthus and Boserup and the circular economy, with labelled diagrams, data skills, past paper checkpoint questions and an IB Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Resource Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 14 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-ib-resource-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '📉', t: 'Progress Towards Poverty Reduction', d: 'Extreme poverty, the new middle class and who is left behind' },
+    { n: 2, z: 'A', emo: '👣', t: 'Measuring Resource Consumption', d: 'Ecological footprints, biocapacity and overshoot' },
+    { n: 3, z: 'A', emo: '💧', t: 'Water: Availability and Consumption', d: 'Scarcity, water use and virtual water' },
+    { n: 4, z: 'A', emo: '🌾', t: 'Land and Food', d: 'Food security, changing diets and land pressure' },
+    { n: 5, z: 'A', emo: '⚡', t: 'Energy', d: 'The global energy mix, energy poverty and energy security' },
+    { n: 6, z: 'B', emo: '🔗', t: 'The Water–Food–Energy Nexus', d: 'How the three securities depend on each other' },
+    { n: 7, z: 'B', emo: '🌡️', t: 'Climate Change and the Nexus', d: 'Droughts, heatwaves and failing hydropower' },
+    { n: 8, z: 'B', emo: '🇳🇵', t: 'Case Study: Nepal (Small Scale)', d: 'Micro-hydro, water mills and community action' },
+    { n: 9, z: 'B', emo: '🇮🇱', t: 'Case Study: Israel (Large Scale)', d: 'Desalination, wastewater reuse and drip irrigation' },
+    { n: 10, z: 'B', emo: '🗑️', t: 'Disposal and Recycling', d: 'E-waste, plastics and where our rubbish goes' },
+    { n: 11, z: 'C', emo: '🎯', t: 'The SDGs and Stewardship', d: 'From the MDGs to the Sustainable Development Goals' },
+    { n: 12, z: 'C', emo: '⚖️', t: 'Population and Resources', d: 'Malthus, Boserup and the neo-Malthusians' },
+    { n: 13, z: 'C', emo: '🔄', t: 'The Circular Economy', d: 'From take–make–dispose to closing the loop' },
+    { n: 14, z: 'X', emo: '👹', t: 'The IB Examiner', d: 'Final boss: Claim, Evidence, Explain, Judgement' }];
+  var ZONES = { A: ['Topic 01', 'Consumption trends', '#ea580c'], B: ['Topic 02', 'Impacts', '#0284c7'], C: ['Topic 03', 'Stewardship', '#16a34a'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'trend', i: '📈', t: 'Trends Expert', d: 'Complete Topic 01 (Levels 1–5)', ok: function () { return [1, 2, 3, 4, 5].every(isDone); } },
+    { id: 'nexus', i: '🔗', t: 'Nexus Expert', d: 'Complete Topic 02 (Levels 6–10)', ok: function () { return [6, 7, 8, 9, 10].every(isDone); } },
+    { id: 'stew', i: '🌱', t: 'Resource Steward', d: 'Complete Topic 03 (Levels 11–13)', ok: function () { return [11, 12, 13].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Exam Technique', d: 'Pass all 13 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the IB Examiner', ok: function () { return isDone(14); } },
+    { id: 'champ', i: '🏆', t: 'Resource Champion', d: 'All 14 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">IB Geography \u00B7 Paper 1 Core \u00B7 Unit 3</span>' +
+      '<h1>\u267B\uFE0F Resource Quest<br>Global Resource Consumption and Security</h1>' +
+      '<p>Work through all three topics \u2014 <b>Global trends in consumption</b>, <b>Impacts of changing trends</b> and <b>Resource stewardship</b> \u2014 one level per lesson, then face the <b>IB Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all six badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Resource Champion!' : ' — reach 90% for Resource Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — Poverty reduction */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '📉 Data skills: the fall in extreme poverty', how: '<b>Extreme poverty</b> = living on less than the World Bank’s international poverty line ($2.15 a day at 2017 prices; updated to $3.00 a day at 2021 prices in 2025).',
+        build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Share of world population in extreme poverty', x0: 1990, x1: 2022, xticks: [1990, 1995, 2000, 2005, 2010, 2015, 2020], y0: 0, y1: 40, ystep: 10, minor: 2, xlab: 'Year', ylab: '% of world population',
+            series: [{ c: '#dc2626', dots: true, pts: [[1990, 38], [1995, 35], [2000, 29], [2005, 21], [2010, 16], [2015, 11], [2019, 9], [2020, 9.7], [2022, 9]] }] }),
+          cap: 'Approximate share of the world population living below $2.15 a day (World Bank).', qs: [
+          { type: 'num', q: 'By how many percentage points did extreme poverty fall between 1990 and 2019?', ans: 29, tol: 0.5, unit: 'percentage points', f: '38 − 9 = <b>29 percentage points</b>.' },
+          { type: 'num', q: 'Calculate the percentage decrease in the poverty rate from 1990 to 2019, to the nearest whole number.', ans: 76, tol: 1, unit: '%', f: '29 ÷ 38 × 100 = <b>76%</b> decrease.' },
+          { type: 'mc', q: 'What explains the small rise in 2020?', o: ['The COVID-19 pandemic pushed millions back into poverty', 'The World Bank changed the poverty line that year', 'China’s economy collapsed and most of its people became poor', 'Rapid population growth in Europe increased the total'], c: 0, f: 'COVID-19 caused the first rise in global extreme poverty for a generation.' }] }, next); } },
+      { title: '🌍 Where has progress been fastest?', how: 'Sort each statement into the right region.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ea', '🇨🇳 East Asia & Pacific'], ['sa', '🇮🇳 South Asia'], ['ssa', '🌍 Sub-Saharan Africa']], ['zc3', 'zc2', 'zr']), cards: [
+          { t: 'China lifted around 800 million people out of extreme poverty after 1980', a: ['ea'], why: 'Export-led industrial growth transformed incomes.' },
+          { t: 'Extreme poverty has fallen to very low levels in this region', a: ['ea'], why: 'East Asia has almost eliminated extreme poverty.' },
+          { t: 'Now home to more than half of the world’s extreme poor', a: ['ssa'], why: 'Poverty has fallen more slowly here while population grows fast.' },
+          { t: 'Conflict, fragile states and rapid population growth slow progress', a: ['ssa'], why: 'Fragility and conflict keep many trapped in poverty.' },
+          { t: 'India’s rapid growth since the 1990s cut poverty sharply', a: ['sa'], why: 'Economic liberalisation and growth reduced poverty.' },
+          { t: 'Bangladesh’s garment exports created millions of jobs for women', a: ['sa'], why: 'Manufacturing jobs helped reduce poverty.' }] }, next); } },
+      { title: '👜 The new global middle class', how: 'Is each statement a likely <b>consequence</b> of a growing middle class?',
+        build: function (el, next) { flash(el, { yes: '✅ Likely', no: '❌ Unlikely', ky: 'y', kn: 'n', items: [
+          { t: 'More meat, dairy and processed food in diets', a: true, why: 'Higher incomes change diets — the nutrition transition.' },
+          { t: 'Rising car ownership and energy use', a: true, why: 'More consumption means more energy demand.' },
+          { t: 'Lower demand for water, because people buy bottled drinks', a: false, why: 'Water demand rises with industry, diets and lifestyles.' },
+          { t: 'More demand for housing, causing land-use change', a: true, why: 'Middle-class families want their own homes.' },
+          { t: 'Fewer international flights as people stay at home', a: false, why: 'Tourism and air travel grow with incomes.' },
+          { t: 'Larger ecological footprints per person', a: true, why: 'More consumption = bigger footprint.' }] }, next); } },
+      { title: '🧠 Poverty check', build: function (el, next) { mcq(el, [
+        { q: 'Why is the Multidimensional Poverty Index (MPI) useful?', o: ['It measures deprivations in health, education and living standards, not just income', 'It only measures income, but it uses a much higher poverty line than the World Bank', 'It counts the number of millionaires in each country to show inequality', 'It measures how much food a country exports compared with its imports'], c: 0, f: 'The MPI shows poverty as more than a lack of money.' },
+        { q: 'Which statement about global poverty reduction is most accurate?', o: ['Progress has been dramatic but uneven, and it slowed after 2015', 'Poverty has now been eliminated everywhere in the world except in Europe', 'Poverty has risen steadily since 1990 in every region', 'Progress has been equal in every region of the world'], c: 0, f: 'Rapid falls in Asia contrast with slower progress in sub-Saharan Africa.' }], next); } }]);
+  };
+
+  /* L2 — Measuring consumption */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '👣 Data skills: ecological footprints', how: 'An <b>ecological footprint</b> is the area of productive land and sea needed to supply a person’s resources and absorb their waste, measured in <b>global hectares (gha)</b>. Earth’s <b>biocapacity</b> is about 1.5 gha per person.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Ecological footprint per person', y0: 0, y1: 16, ystep: 2, minor: 0.5, ylab: 'Global hectares per person', values: true,
+            bars: [['Qatar', 14, '#7c3aed'], ['USA', 8, '#dc2626'], ['UK', 4, '#ea580c'], ['China', 3.7, '#ca8a04'], ['World', 2.6, '#0284c7'], ['India', 1.2, '#16a34a']] }),
+          cap: 'Approximate ecological footprint per person (Global Footprint Network). World biocapacity ≈ 1.5 gha per person.', qs: [
+          { type: 'num', q: 'How many Earths would we need if everyone lived like the average American? One decimal place.', ans: 5.3, tol: 0.1, unit: 'Earths', f: '8 ÷ 1.5 = <b>5.3 Earths</b>.' },
+          { type: 'num', q: 'How many Earths does humanity use now, based on the world average? One decimal place.', ans: 1.7, tol: 0.1, unit: 'Earths', f: '2.6 ÷ 1.5 = <b>1.7 Earths</b> — we are in ecological <b>overshoot</b>.' },
+          { type: 'mc', q: 'Why is Qatar’s footprint so large?', o: ['Very high energy use for air conditioning, desalination and cars, from fossil fuels', 'It has a huge population of over 500 million people living in the desert interior of the country', 'Its farms grow most of the world’s rice and use enormous amounts of land', 'Its forests absorb so much carbon that its footprint is counted twice'], c: 0, f: 'The carbon part of the footprint dominates in high-income, fossil-fuel economies.' }] }, next); } },
+      { title: '📏 Which measure is it?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['eco', '👣 Ecological footprint'], ['car', '🏭 Carbon footprint'], ['wat', '💧 Water footprint']]), cards: [
+          { t: 'Global hectares needed to support a lifestyle', a: ['eco'], why: 'Measured in gha.' },
+          { t: 'Earth Overshoot Day — when we have used a year’s worth of nature', a: ['eco'], why: 'Calculated from footprint and biocapacity (about late July in recent years).' },
+          { t: 'Tonnes of CO₂ equivalent emitted by a product or person', a: ['car'], why: 'Greenhouse gases measured in CO₂e.' },
+          { t: 'A return flight from London to Bangkok', a: ['car'], why: 'Aviation is a big part of many carbon footprints.' },
+          { t: 'About 15,000 litres for 1 kg of beef', a: ['wat'], why: 'Virtual water used to produce a product.' },
+          { t: 'Litres of water used to make a cotton T-shirt', a: ['wat'], why: 'About 2,500–2,700 litres.' }] }, next); } },
+      { title: '🧠 Footprint check', build: function (el, next) { mcq(el, [
+        { q: 'What is a criticism of the ecological footprint?', o: ['It simplifies complex impacts into one number and depends on many assumptions', 'It is measured in US dollars, so it only really works for high-income countries', 'It counts only water use, so it ignores energy and food completely', 'It is updated every day, so the numbers change too often to compare'], c: 0, f: 'Footprints are useful for comparison, but hide details like pollution and biodiversity loss.' },
+        { q: 'Why do some people argue footprints should be <b>consumption-based</b>?', o: ['Goods made in one country are often consumed in another, so impacts are exported', 'Production in high-income countries is always much cleaner than their consumption', 'Consumption cannot be measured, so footprints should be guessed', 'Only governments consume resources, not individuals or firms'], c: 0, f: 'Consumption-based accounting assigns impacts to the people who buy the goods.' }], next); } }]);
+  };
+
+  /* L3 — Water */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '💧 Data skills: how is fresh water used?', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Global freshwater withdrawals by sector', y0: 0, y1: 80, ystep: 20, minor: 5, ylab: '% of withdrawals', values: true, fmt: function (v) { return v + '%'; },
+          bars: [['Agriculture', 70, '#16a34a'], ['Industry', 19, '#64748b'], ['Domestic', 11, '#0284c7']] }),
+          cap: 'Approximate global freshwater withdrawals by sector (FAO AQUASTAT). Only about 2.5% of all water on Earth is fresh, and most of that is ice.', qs: [
+          { type: 'num', q: 'How many times more water does agriculture withdraw than domestic use? One decimal place.', ans: 6.4, tol: 0.1, unit: 'times', f: '70 ÷ 11 = <b>6.4 times</b>.' },
+          { type: 'mc', q: 'Why is agriculture’s share usually even higher in low-income countries?', o: ['They depend more on irrigated farming and have less industry', 'Their people drink much more water than people in rich countries', 'Their factories are banned from using any fresh water at all', 'They import all their food, so farms need more water'], c: 0, f: 'In countries like India, agriculture can take about 90% of withdrawals.' },
+          { type: 'num', q: 'A cup of coffee needs about 140 litres of virtual water. How much is needed for 500 cups (a café’s week)? Give your answer in litres.', ans: 70000, tol: 0, unit: 'litres', f: '140 × 500 = <b>70,000 litres</b>.' }] }, next); } },
+      { title: '🏜️ Physical or economic water scarcity?', how: '<b>Physical scarcity</b> = not enough water to meet demand. <b>Economic scarcity</b> = water exists, but there is no money or infrastructure to use it.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['phy', '🏜️ Physical scarcity'], ['eco', '💰 Economic scarcity']], ['zc2', 'zc4']), cards: [
+          { t: 'Much of the Middle East and North Africa', a: ['phy'], why: 'Arid climates and over-used aquifers.' },
+          { t: 'North-west India, where groundwater tables are falling fast', a: ['phy'], why: 'Withdrawals exceed recharge.' },
+          { t: 'Much of sub-Saharan Africa, where rivers flow but few pipes or dams exist', a: ['eco'], why: 'Lack of investment, not lack of water.' },
+          { t: 'Rural communities walking hours to collect water from a river', a: ['eco'], why: 'Water exists but is not piped or treated.' },
+          { t: 'South-west USA, where the Colorado River is over-allocated', a: ['phy'], why: 'Demand exceeds supply in a dry region.' },
+          { t: 'Cities where poor households buy water from vendors at high prices', a: ['eco'], why: 'Access depends on money and infrastructure.' }] }, next); } },
+      { title: '🧠 Water check', build: function (el, next) { mcq(el, [
+        { q: 'About how many people lacked safely managed drinking water in the early 2020s?', o: ['About 2 billion', 'About 20 million', 'About 200 million', 'About 7 billion'], c: 0, f: 'Around 2.2 billion people (WHO/UNICEF JMP, 2022).' },
+        { q: 'What is <b>virtual water</b>?', o: ['The water used to produce goods, which is traded when the goods are traded', 'Water that exists only in computer models of future climate change scenarios', 'Rainwater that evaporates before it reaches the ground or rivers', 'Recycled wastewater that is treated and used for drinking supplies'], c: 0, f: 'Countries that import food are also importing the water used to grow it.' }], next); } }]);
+  };
+
+  /* L4 — Land and food */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '🍽️ The four pillars of food security', how: 'Food security exists when all people, at all times, have access to enough safe, nutritious food (FAO). Match each example to its pillar.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['av', 'Availability', 'enough food produced'], ['ac', 'Access', 'can people get or afford it?'], ['ut', 'Utilisation', 'can the body use it?'], ['st', 'Stability', 'all of the time?']]), cards: [
+          { t: 'A drought cuts the national maize harvest', a: ['av'], why: 'Less food produced.' },
+          { t: 'Food prices double, so poor families cannot afford enough', a: ['ac'], why: 'Economic access.' },
+          { t: 'Unclean water causes diarrhoea, so nutrients are not absorbed', a: ['ut'], why: 'Health and sanitation affect utilisation.' },
+          { t: 'Conflict blocks roads to markets for months at a time', a: ['st', 'ac'], why: 'Shocks over time = stability (also access).', alt: 'Accept stability or access.' },
+          { t: 'A lack of knowledge about a balanced diet', a: ['ut'], why: 'Nutrition knowledge affects utilisation.' },
+          { t: 'Seasonal hunger every year before the harvest', a: ['st'], why: 'Supply varies through the year.' }] }, next); } },
+      { title: '🥩 Data skills: livestock and land', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Livestock vs crops', y0: 0, y1: 100, ystep: 20, minor: 5, ylab: '%', values: true, fmt: function (v) { return v + '%'; },
+          bars: [['Livestock: share of farmland', 77, '#b91c1c'], ['Crops: share of farmland', 23, '#16a34a'], ['Livestock: share of calories', 18, '#b91c1c'], ['Crops: share of calories', 82, '#16a34a']] }),
+          cap: 'Global share of agricultural land and of the world’s food calories (approximate, Our World in Data based on FAO).', qs: [
+          { type: 'mc', q: 'What does the chart show?', o: ['Livestock uses most farmland but supplies a small share of calories', 'Crops use most farmland but supply only a small share of calories', 'Livestock and crops use the same land area and supply the same calories', 'Livestock supplies most calories while using very little farmland'], c: 0, f: '77% of farmland → only 18% of calories.' },
+          { type: 'num', q: 'Calories per % of farmland: divide each sector’s calorie share by its land share. How many times more efficient are crops? One decimal place.', ans: 15.2, tol: 0.3, unit: 'times', f: 'Crops: 82 ÷ 23 = 3.57; livestock: 18 ÷ 77 = 0.23; 3.57 ÷ 0.23 ≈ <b>15.2 times</b>.' },
+          { type: 'mc', q: 'Why does a growing middle class put pressure on land?', o: ['Diets with more meat and dairy need much more land for feed and grazing', 'Middle-class families need less land because they buy smaller, cheaper cars', 'Wealthier people stop eating rice, which frees up land for forests', 'A growing middle class always reduces demand for housing land'], c: 0, f: 'The nutrition transition raises land demand; housing and infrastructure add more.' }] }, next); } },
+      { title: '🧠 Land and food check', build: function (el, next) { mcq(el, [
+        { q: 'What is a <b>land grab</b>?', o: ['Large-scale buying or leasing of farmland, often by foreign investors, displacing local users', 'Farmers clearing small plots of forest to grow food for their own families each growing season', 'Governments taking unused land to build new public parks in cities', 'Rising sea levels covering coastal farmland in low-lying countries'], c: 0, f: 'Land acquisitions can threaten local food security and indigenous rights.' },
+        { q: 'Roughly how many people were hungry (undernourished) in the mid-2020s?', o: ['Around 700 million', 'Around 70 million people', 'Around 3 billion', 'Around 7 million'], c: 0, f: 'About one in eleven people (FAO, SOFI reports).' }], next); } }]);
+  };
+
+  /* L5 — Energy */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '⚡ Data skills: the global energy mix', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Global primary energy consumption by source', y0: 0, y1: 40, ystep: 10, minor: 2, ylab: '% of total', values: true, fmt: function (v) { return v + '%'; },
+          bars: [['Oil', 32, '#1e293b'], ['Coal', 26, '#57534e'], ['Gas', 23, '#64748b'], ['Hydro', 6, '#0284c7'], ['Nuclear', 4, '#7c3aed'], ['Wind, solar & other', 8, '#16a34a']] }),
+          cap: 'Approximate shares of global primary energy, early 2020s (Energy Institute Statistical Review).', qs: [
+          { type: 'num', q: 'What percentage of global primary energy comes from fossil fuels?', ans: 81, tol: 0, unit: '%', f: '32 + 26 + 23 = <b>81%</b>.' },
+          { type: 'num', q: 'What percentage comes from low-carbon sources (hydro, nuclear, wind, solar and other)?', ans: 18, tol: 0, unit: '%', f: '6 + 4 + 8 = <b>18%</b> (shares are rounded, so they add to 99).' },
+          { type: 'mc', q: 'Which statement best describes the trend in renewables?', o: ['Wind and solar are growing fastest, but fossil fuels still dominate total use', 'Renewables have already replaced most coal use in every single region of the world', 'Renewable energy use has fallen as oil has become cheaper', 'Renewables are only used in high-income countries'], c: 0, f: 'Record growth in solar and wind, but total energy demand is also rising.' }] }, next); } },
+      { title: '🔐 Energy security', how: 'Does each factor <b>increase</b> or <b>reduce</b> a country’s energy security?',
+        build: function (el, next) { flash(el, { yes: '🔒 Increases', no: '⚠️ Reduces', ky: 'i', kn: 'r', items: [
+          { t: 'A diverse energy mix with many sources', a: true, why: 'Diversity spreads risk.' },
+          { t: 'Importing most of its gas from one supplier', a: false, why: 'Dependence on one supplier is risky (e.g. Europe and Russian gas in 2022).' },
+          { t: 'Building domestic solar and wind capacity', a: true, why: 'Home-grown supply reduces dependence on imports.' },
+          { t: 'Oil tankers passing through a narrow strait in a conflict zone', a: false, why: 'Choke points like the Strait of Hormuz are vulnerable.' },
+          { t: 'Strategic reserves of oil and gas', a: true, why: 'Reserves buffer short-term shocks.' },
+          { t: 'Ageing power grids that fail in heatwaves', a: false, why: 'Weak infrastructure reduces security.' }] }, next); } },
+      { title: '🧠 Energy check', build: function (el, next) { mcq(el, [
+        { q: 'About how many people had no access to electricity in the early 2020s?', o: ['About 670 million, mostly in sub-Saharan Africa', 'About 6 million people, mostly in South America', 'About 3 billion, mostly in Europe', 'Nobody — every home now has electricity'], c: 0, f: 'Around 670 million (IEA), about 80% of them in sub-Saharan Africa.' },
+        { q: 'Why does energy consumption per person vary so much between countries?', o: ['Income, climate, industry and transport all affect how much energy people use', 'People in hot countries need no energy at all for cooking or cooling', 'Energy use per person is the same everywhere because it is fixed by the United Nations', 'Countries with more people always use more energy per person'], c: 0, f: 'Wealth and lifestyle are the strongest influences.' }], next); } }]);
+  };
+
+  /* L6 — The nexus */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the water–food–energy nexus', how: 'Each arrow shows how one resource depends on another. One label is a trap.',
+        build: function (el, next) { labelGame(el, { svg: SVG_NEXUS, pins: PINS_NEXUS, cap: 'The water–food–energy nexus: security in one depends on the others.', labels: [
+          { t: 'Water is needed to cool power stations and to generate hydropower', pin: 1 },
+          { t: 'Energy is needed to pump, treat and desalinate water', pin: 2 },
+          { t: 'Irrigation uses about 70% of freshwater withdrawals', pin: 3 },
+          { t: 'Energy powers farm machinery and makes fertiliser', pin: 4 },
+          { t: 'Crops such as maize and sugarcane are turned into biofuels', pin: 5 },
+          { t: 'Growing more food creates new rainfall for rivers', pin: null }] }, next); } },
+      { title: '⚖️ Trade-off or synergy?', how: 'A <b>trade-off</b> helps one security but harms another. A <b>synergy</b> helps more than one.',
+        build: function (el, next) { flash(el, { yes: '🤝 Synergy', no: '⚖️ Trade-off', ky: 's', kn: 't', items: [
+          { t: 'Growing biofuels on farmland that used to grow food', a: false, why: 'Energy gains, but food and water may suffer.' },
+          { t: 'Solar-powered drip irrigation', a: true, why: 'Saves water and uses clean energy to grow food.' },
+          { t: 'A large dam floods farmland to generate hydropower', a: false, why: 'Energy gain, food and land loss.' },
+          { t: 'Using treated wastewater to irrigate crops', a: true, why: 'Saves fresh water while supporting food production.' },
+          { t: 'Pumping groundwater with cheap diesel until aquifers run dry', a: false, why: 'Short-term food gain, long-term water loss.' },
+          { t: 'Turning farm waste into biogas for cooking', a: true, why: 'Reduces waste, provides energy, can return fertiliser to fields.' }] }, next); } },
+      { title: '🧠 Nexus check', build: function (el, next) { mcq(el, [
+        { q: 'Why is a <b>nexus</b> approach to resource management useful?', o: ['It considers the links between water, food and energy, avoiding solutions that solve one problem but create another', 'It manages water, food and energy completely separately, so each government department can work faster on its own priorities', 'It focuses only on energy, because energy is the most important resource for development', 'It removes the need for any planning, because markets always balance resources automatically'], c: 0, f: 'Integrated planning reduces harmful trade-offs.' }], next); } }]);
+  };
+
+  /* L7 — Climate change and the nexus */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '⛓️ Drought ripples through the nexus', how: 'Tap the links in order.',
+        build: function (el, next) { orderGame(el, ['Climate change makes droughts longer and more severe', 'River flows and reservoir levels fall', 'Hydropower output drops and power cuts follow', 'Farmers pump more groundwater, using more energy', 'Crop yields fall and food prices rise'], 'Tap the FIRST link.', next); } },
+      { title: '🌡️ Water, food or energy impact?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['w', '💧 Water'], ['f', '🌾 Food'], ['e', '⚡ Energy']], ['zc3', 'zg', 'zc2']), cards: [
+          { t: 'Himalayan glaciers shrink, threatening long-term river flow', a: ['w'], why: 'Glacier melt affects water supply for over a billion people.' },
+          { t: 'Saltwater intrusion into coastal aquifers', a: ['w'], why: 'Sea level rise contaminates groundwater.' },
+          { t: 'Heat stress lowers wheat and maize yields', a: ['f'], why: 'High temperatures damage crops.' },
+          { t: 'Shifting rainfall patterns disrupt planting seasons', a: ['f'], why: 'Unpredictable monsoons affect harvests.' },
+          { t: 'Heatwaves raise electricity demand for air conditioning', a: ['e'], why: 'Peak demand rises in hot weather.' },
+          { t: 'In 2024, drought cut hydropower from Lake Kariba, causing long power cuts in Zambia and Zimbabwe', a: ['e'], why: 'Low water levels reduce hydropower.' }] }, next); } },
+      { title: '🧠 Climate nexus check', build: function (el, next) { mcq(el, [
+        { q: 'Why can thermal power stations struggle during heatwaves?', o: ['River water used for cooling becomes too warm or too low to use', 'Hot air makes coal and gas burn far too quickly to control safely', 'Heatwaves always cause earthquakes that damage power stations', 'Power stations stop working above 25°C by international law'], c: 0, f: 'French nuclear plants and others have cut output when rivers were too warm.' },
+        { q: 'Which response strengthens the nexus against climate change?', o: ['Diversifying energy away from drought-sensitive hydropower and investing in water storage', 'Building more coal power stations that need very large amounts of river water for cooling', 'Increasing irrigation from aquifers that are already falling', 'Clearing forests to make more room for biofuel crops'], c: 0, f: 'Resilience comes from diversity and efficient water use.' }], next); } }]);
+  };
+
+  /* L8 — Nepal */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🇳🇵 Nepal’s small-scale nexus', how: 'Nepal has huge hydropower potential from Himalayan rivers. Sort each feature of its <b>small-scale, community</b> approach.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['w', '💧 Water'], ['e', '⚡ Energy'], ['f', '🌾 Food']], ['zc3', 'zc2', 'zg']), cards: [
+          { t: 'Micro-hydro schemes (under 100 kW) run off a river without a large dam', a: ['e'], why: 'Run-of-river micro-hydro supplies remote villages.' },
+          { t: 'Improved water mills (ghatta) grind grain faster using river flow', a: ['f', 'e'], why: 'Water power processes food.', alt: 'Accept food or energy — it links both!' },
+          { t: 'Rainwater harvesting tanks and multiple-use water systems for hill farms', a: ['w'], why: 'Small-scale water storage for homes and crops.' },
+          { t: 'Drip irrigation kits let farmers grow vegetables in the dry season', a: ['f'], why: 'Efficient water use boosts food production and incomes.' },
+          { t: 'Biogas digesters turn animal dung into cooking gas', a: ['e'], why: 'Reduces firewood use and indoor smoke.' },
+          { t: 'Community forest user groups protect watersheds and forests', a: ['w'], why: 'Forests protect springs and reduce erosion.' }] }, next); } },
+      { title: '⚖️ Strengths and limitations', how: 'Is each point a <b>strength</b> or a <b>limitation</b> of Nepal’s small-scale approach?',
+        build: function (el, next) { flash(el, { yes: '👍 Strength', no: '👎 Limitation', ky: 's', kn: 'l', items: [
+          { t: 'Owned and run by communities, so local people decide how it is used', a: true, why: 'Bottom-up schemes build local skills and ownership.' },
+          { t: 'Cheap to build and has little environmental impact compared with a large dam', a: true, why: 'Run-of-river schemes avoid flooding valleys.' },
+          { t: 'River flow falls in the dry season, so output drops', a: false, why: 'Seasonal flow is a major limitation.' },
+          { t: 'Electric light lets children study and businesses work after dark', a: true, why: 'Social and economic benefits.' },
+          { t: 'Flash floods and glacial lake outbursts can destroy schemes', a: false, why: 'Climate change increases the hazard risk in the Himalayas.' },
+          { t: 'Each scheme supplies only a small amount of power', a: false, why: 'Small scale limits industrial use.' }] }, next); } },
+      { title: '🧠 Nepal check', build: function (el, next) { mcq(el, [
+        { q: 'Why are small-scale schemes well suited to rural Nepal?', o: ['Steep, remote mountain villages are expensive to connect to the national grid', 'Nepal has no rivers large enough for big hydropower stations', 'Nepal’s government has banned all large-scale energy projects in the mountains', 'Small schemes produce more electricity than large dams'], c: 0, f: 'Terrain and remoteness make local, off-grid solutions practical.' },
+        { q: 'How might the expansion of the national grid affect micro-hydro schemes?', o: ['Some may become unused as villages switch to cheaper, more reliable grid power', 'They will all be expanded into large dams owned by the government', 'Grid electricity will make rivers flow faster, which increases micro-hydro output', 'It will have no effect, because the grid and micro-hydro cannot connect'], c: 0, f: 'Many schemes now aim to connect to the grid and sell surplus power.' }], next); } }]);
+  };
+
+  /* L9 — Israel */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '🇮🇱 Israel’s large-scale approach', how: 'Israel is a dry country that now produces a water surplus. Put its water story in order.',
+        build: function (el, next) { orderGame(el, ['1964: the National Water Carrier pipes water south from the Sea of Galilee', 'Drip irrigation, developed in Israel (Netafim, 1965), cuts farm water use', 'Most treated wastewater (about 85–90%) is reused, mainly for farming', 'Large coastal desalination plants supply most domestic water', 'Since 2023, desalinated water is pumped back into the Sea of Galilee'], 'Tap the EARLIEST development first.', next); } },
+      { title: '🔗 Nexus links in Israel', build: function (el, next) { sortGame(el, { zones: zonesFrom([['b', '✅ Benefit'], ['c', '⚠️ Cost or concern']], ['zg', 'zr']), cards: [
+          { t: 'Desalination provides a reliable supply even in drought years', a: ['b'], why: 'Independent of rainfall.' },
+          { t: 'Desalination uses a lot of energy, mostly from natural gas', a: ['c'], why: 'The water–energy trade-off.' },
+          { t: 'Salty brine is discharged back into the Mediterranean', a: ['c'], why: 'Brine can harm marine ecosystems.' },
+          { t: 'Reusing wastewater frees fresh water for homes', a: ['b'], why: 'Efficient reuse reduces pressure on aquifers.' },
+          { t: 'Israeli drip technology is exported around the world', a: ['b'], why: 'Knowledge and technology spread water efficiency.' },
+          { t: 'Critics highlight unequal water access between Israelis and Palestinians', a: ['c'], why: 'Water security is also political.' }] }, next); } },
+      { title: '🧠 Israel check', build: function (el, next) { mcq(el, [
+        { q: 'Why is Israel’s approach described as <b>large-scale</b> and <b>top-down</b>?', o: ['It relies on national government planning and big infrastructure such as desalination plants', 'It depends on thousands of separate village groups with no national planning or coordination at all', 'It uses only small rainwater tanks built by individual farmers', 'It has no infrastructure and relies only on importing bottled water'], c: 0, f: 'Contrast with Nepal’s bottom-up, community-scale schemes.' },
+        { q: 'How does Israel’s gas discovery link to its water security?', o: ['Offshore gas fields provide the energy needed to run desalination plants', 'Gas is pumped into aquifers to push much more groundwater up to the surface', 'Gas is used to make fertiliser that removes salt from seawater', 'There is no link, because desalination uses no energy at all'], c: 0, f: 'Water security depends on energy security — the nexus in action.' }], next); } }]);
+  };
+
+  /* L10 — Disposal and recycling */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '🗑️ Data skills: the e-waste mountain', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'E-waste generated worldwide', y0: 0, y1: 90, ystep: 10, minor: 2, ylab: 'Million tonnes', values: true,
+          bars: [['2010', 34, '#94a3b8'], ['2022', 62, '#ea580c'], ['2030 (projected)', 82, '#b91c1c']] }),
+          cap: 'Global e-waste generated (Global E-waste Monitor 2024). Only about 22% was documented as properly collected and recycled in 2022.', qs: [
+          { type: 'num', q: 'Calculate the percentage increase in e-waste from 2010 to 2022, to the nearest whole number.', ans: 82, tol: 1, unit: '%', f: '(62 − 34) ÷ 34 × 100 = <b>82%</b>.' },
+          { type: 'num', q: 'If 22% of the 62 million tonnes was recycled properly, how many million tonnes were not? One decimal place.', ans: 48.4, tol: 0.2, unit: 'million tonnes', f: '62 × 0.78 = <b>48.4 million tonnes</b>.' },
+          { type: 'mc', q: 'Why is e-waste often exported to low- and middle-income countries?', o: ['Labour is cheaper and regulations are weaker, so informal recycling is profitable', 'These countries have the best and safest technology to recycle complex modern electronics', 'High-income countries are not allowed to recycle electronics by law', 'Electronics last longer in hot climates, so they can be reused there'], c: 0, f: 'Informal recycling (e.g. burning cables for copper) harms health and the environment.' }] }, next); } },
+      { title: '♻️ Better or worse disposal?', how: 'Use the <b>waste hierarchy</b>: reduce → reuse → recycle → recover energy → landfill. Is each option <b>higher</b> or <b>lower</b> on the hierarchy?',
+        build: function (el, next) { flash(el, { yes: '⬆️ Higher (better)', no: '⬇️ Lower (worse)', ky: 'h', kn: 'l', items: [
+          { t: 'Repairing a phone instead of buying a new one', a: true, why: 'Reuse keeps products in use.' },
+          { t: 'Sending mixed plastic to landfill', a: false, why: 'Landfill is the lowest option.' },
+          { t: 'Buying fewer, longer-lasting products', a: true, why: 'Reduce is the top of the hierarchy.' },
+          { t: 'Open burning of waste on the edge of a city', a: false, why: 'Releases toxic smoke — worse than landfill.' },
+          { t: 'Refillable containers instead of single-use bottles', a: true, why: 'Reduces and reuses.' },
+          { t: 'Exporting low-grade plastic waste to be dumped overseas', a: false, why: 'Moves the problem rather than solving it.' }] }, next); } },
+      { title: '🧠 Waste check', build: function (el, next) { mcq(el, [
+        { q: 'What did China’s 2018 “National Sword” policy do?', o: ['Banned most imports of foreign plastic and paper waste, so waste was redirected to South-East Asia', 'Required every Chinese household to recycle all of its plastic waste within a single year of the law', 'Banned the export of Chinese electronics to Europe and North America', 'Made China the world’s largest importer of plastic waste for recycling'], c: 0, f: 'Waste flows shifted to Malaysia, Vietnam, Thailand and others, which later restricted imports too.' },
+        { q: 'Roughly what share of all plastic ever produced has been recycled?', o: ['About 9%', 'About 50%', 'About 90%', 'About 1%'], c: 0, f: 'Most has been landfilled, incinerated or mismanaged (OECD).' }], next); } }]);
+  };
+
+  /* L11 — SDGs and stewardship */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '🎯 Match the target to the SDG', build: function (el, next) { sortGame(el, { zones: zonesFrom([['2', 'SDG 2 · Zero hunger'], ['6', 'SDG 6 · Clean water & sanitation'], ['7', 'SDG 7 · Affordable & clean energy'], ['12', 'SDG 12 · Responsible consumption']]), cards: [
+          { t: 'Double the productivity of small-scale farmers', a: ['2'], why: 'Food security target.' },
+          { t: 'End malnutrition in all its forms', a: ['2'], why: 'Zero hunger.' },
+          { t: 'Universal access to safe drinking water', a: ['6'], why: 'Water target.' },
+          { t: 'Halve the proportion of untreated wastewater', a: ['6'], why: 'Water quality target.' },
+          { t: 'Universal access to modern electricity', a: ['7'], why: 'Energy access.' },
+          { t: 'Double the global rate of improvement in energy efficiency', a: ['7'], why: 'Energy efficiency.' },
+          { t: 'Halve global food waste per person', a: ['12'], why: 'Responsible consumption.' },
+          { t: 'Substantially reduce waste through recycling and reuse', a: ['12'], why: 'Responsible production and consumption.' }] }, next); } },
+      { title: '📜 MDGs or SDGs?', build: function (el, next) { flash(el, { yes: '📜 MDGs', no: '🎯 SDGs', ky: 'm', kn: 's', items: [
+          { t: 'Eight goals, 2000–2015', a: true, why: 'The Millennium Development Goals.' },
+          { t: 'Seventeen goals, 2015–2030', a: false, why: 'The Sustainable Development Goals.' },
+          { t: 'Apply to every country, rich and poor', a: false, why: 'The SDGs are universal.' },
+          { t: 'Aimed mainly at developing countries', a: true, why: 'The MDGs focused on low-income countries.' },
+          { t: 'Include goals on climate action and responsible consumption', a: false, why: 'Sustainability is central to the SDGs.' },
+          { t: 'Halved extreme poverty five years early', a: true, why: 'MDG 1’s poverty target was met by 2010.' }] }, next); } },
+      { title: '🧠 Stewardship check', build: function (el, next) { mcq(el, [
+        { q: 'What is <b>resource stewardship</b>?', o: ['Careful, responsible management of resources so that future generations can also meet their needs', 'Using as many resources as possible now, because technology will always find replacements for them later', 'Letting each country control all resources inside its borders without international rules', 'Selling a country’s resources to the highest bidder to raise money for development'], c: 0, f: 'Stewardship links to sustainability and the SDGs.' },
+        { q: 'Why is progress on the SDGs often described as off track?', o: ['Many targets are behind schedule after COVID-19, conflict and debt crises', 'All of the goals were achieved early in 2020, so they were replaced with new ones', 'The SDGs have no targets, so progress cannot be measured', 'Only high-income countries signed up to the SDGs'], c: 0, f: 'UN reports show only a small share of targets on track.' }], next); } }]);
+  };
+
+  /* L12 — Population and resources */
+  LV[12] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label Malthus vs Boserup', how: '<b>Malthus (1798)</b>: population grows geometrically, food arithmetically, so crisis follows. <b>Boserup (1965)</b>: population pressure drives innovation, so food supply rises to meet demand.',
+        build: function (el, next) { labelGame(el, { svg: SVG_MALTHUS, pins: PINS_MALTHUS, cap: 'Malthus’s theory with Boserup’s alternative (purple dashed line).', labels: [
+          { t: 'Population grows geometrically (red line)', pin: 1 },
+          { t: 'Food supply grows arithmetically (green line)', pin: 2 },
+          { t: 'Crisis point: population exceeds food supply', pin: 3 },
+          { t: 'Positive checks (famine, disease, war) reduce population', pin: 4 },
+          { t: 'Boserup: innovation steps up food production', pin: 5 },
+          { t: 'Preventive checks raise food supply instantly', pin: null }] }, next); } },
+      { title: '🧠 Who said it?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['m', '📉 Malthus / neo-Malthusian'], ['b', '📈 Boserup / anti-Malthusian']], ['zr', 'zg']), cards: [
+          { t: 'Population growth will outrun the food supply', a: ['m'], why: 'Malthus’s core argument.' },
+          { t: '“Necessity is the mother of invention”', a: ['b'], why: 'Boserup argued pressure drives innovation.' },
+          { t: 'The Limits to Growth (Club of Rome, 1972) warned of resource collapse', a: ['m'], why: 'A neo-Malthusian report.' },
+          { t: 'The Green Revolution’s high-yield crops raised food output in Asia', a: ['b'], why: 'Supports Boserup: technology raised food supply.' },
+          { t: 'Climate change and soil loss mean limits are being reached', a: ['m'], why: 'A neo-Malthusian view.' },
+          { t: 'Human ingenuity is the “ultimate resource” (Julian Simon)', a: ['b'], why: 'An anti-Malthusian view.' }] }, next); } },
+      { title: '🧠 Theory check', build: function (el, next) { mcq(el, [
+        { q: 'Why have Malthus’s predictions largely not come true at a global scale?', o: ['Technology, trade and falling fertility have kept food supply ahead of population growth', 'The world’s population has fallen in every decade since Malthus wrote his famous essay in 1798', 'Food production has grown geometrically, exactly as Malthus said it would', 'Famines have killed most of the world’s population since 1800'], c: 0, f: 'Food per person has risen despite population growth — though hunger persists locally.' },
+        { q: 'What is <b>carrying capacity</b>?', o: ['The largest population an environment can support sustainably', 'The amount of food a country can carry by ship each and every year', 'The number of people a city can transport each day', 'The maximum number of children a family can afford'], c: 0, f: 'Overshoot happens when population or consumption exceeds carrying capacity.' }], next); } }]);
+  };
+
+  /* L13 — Circular economy */
+  LV[13] = function (root) {
+    stages(root, [
+      { title: '🔄 Linear or circular?', how: 'The <b>linear economy</b> is take → make → dispose. The <b>circular economy</b> keeps materials in use.',
+        build: function (el, next) { flash(el, { yes: '🔄 Circular', no: '➡️ Linear', ky: 'c', kn: 'l', items: [
+          { t: 'Leasing lighting as a service, with the maker keeping ownership of the lamps', a: true, why: 'Product-as-a-service (e.g. Philips at Schiphol Airport).' },
+          { t: 'Fast fashion worn a few times then thrown away', a: false, why: 'Classic take–make–dispose.' },
+          { t: 'A modular phone you can repair yourself (e.g. Fairphone)', a: true, why: 'Designed for repair and long life.' },
+          { t: 'Single-use plastic packaging sent to landfill', a: false, why: 'Linear.' },
+          { t: 'A clothing brand that buys back, repairs and resells old items', a: true, why: 'Reuse and repair (e.g. Patagonia Worn Wear).' },
+          { t: 'Carpet tiles collected and recycled into new tiles', a: true, why: 'Closed-loop recycling (e.g. Interface).' }] }, next); } },
+      { title: '⛓️ Design out waste', how: 'Order the strategies from <b>best</b> (keeps most value) to <b>least good</b>.',
+        build: function (el, next) { orderGame(el, ['Refuse or reduce: design products that need fewer materials', 'Reuse and share products', 'Repair and maintain to extend product life', 'Remanufacture or refurbish', 'Recycle materials into new products'], 'Tap the BEST strategy first.', next); } },
+      { title: '🧠 Circular check', build: function (el, next) { mcq(el, [
+        { q: 'Roughly what share of materials used by the global economy are cycled back into use?', o: ['Less than 10%', 'About 50%', 'About 75%', 'Almost 100% of them'], c: 0, f: 'The Circularity Gap Report estimates only about 7%.' },
+        { q: 'What is a limitation of the circular economy?', o: ['It needs new business models, design changes and regulation, which take time and investment', 'It increases the amount of waste sent to landfill in every country that tries to use it properly', 'It only works in low-income countries where repair is already common', 'It means consumers can never buy new products again'], c: 0, f: 'Transition costs and rebound effects can limit gains.' }], next); } }]);
+  };
+
+  /* L14 — IB EXAM BOSS */
+  var EXQ = [
+    { q: 'Examine the ways in which the water–food–energy nexus affects resource security.', mk: 'Paper 2 · extended response',
+      C: 'The nexus means that security in water, food and energy cannot be achieved separately, because each resource depends on the others.',
+      E: 'For example, Israel’s desalination plants secure water supplies but rely on large amounts of energy from offshore gas, while biofuel crops compete with food for land and water.',
+      X: 'This creates trade-offs, where solving one shortage can worsen another, but also synergies, such as solar-powered drip irrigation in Nepal.',
+      J: 'Overall, the nexus increases risk when resources are managed separately, but integrated planning can turn trade-offs into synergies.',
+      D: ['The nexus refers only to the link between water and climate.', 'Desalination uses no energy, so it has no effect on energy security.'] },
+    { q: 'Evaluate the view that Malthus’s ideas are no longer relevant.', mk: 'Paper 2 · extended response',
+      C: 'At a global scale, Malthus’s prediction of famine has not come true, which suggests his ideas are less relevant today.',
+      E: 'For example, the Green Revolution raised cereal yields across Asia, and world food production per person has increased despite population growth since 1960.',
+      X: 'This supports Boserup’s view that population pressure drives innovation, although soil degradation, water scarcity and climate change may limit future gains.',
+      J: 'Therefore, Malthus’s specific predictions were wrong, but neo-Malthusian concerns about environmental limits remain highly relevant.',
+      D: ['Malthus argued that food supply grows geometrically.', 'The world’s population has been falling since 1950.'] },
+    { q: 'To what extent can a circular economy reduce pressure on global resources?', mk: 'Paper 2 · extended response',
+      C: 'A circular economy can significantly reduce resource pressure by keeping materials in use for longer and designing out waste.',
+      E: 'For example, product-as-a-service models such as Philips lighting and modular repairable phones such as the Fairphone reduce the need for new raw materials.',
+      X: 'However, only about 7% of the materials used by the global economy are currently cycled back, so the impact depends on scaling up these models.',
+      J: 'To a moderate extent, it can help, but it must be combined with reduced consumption and strong regulation to make a global difference.',
+      D: ['A circular economy means burning all waste for energy.', 'Recycling is the best option in the waste hierarchy.'] },
+    { q: 'Examine how the growth of the global middle class is changing patterns of resource consumption.', mk: 'Paper 2 · extended response',
+      C: 'The growth of the global middle class is increasing and changing the demand for water, food and energy.',
+      E: 'For example, rising incomes in China and India have led to more meat and dairy in diets, more car ownership and higher electricity use.',
+      X: 'This raises ecological footprints and puts pressure on land and water, because meat needs far more land and water per calorie than crops.',
+      J: 'Overall, middle-class growth reduces poverty but increases resource pressure, so its impact depends on how efficiently and sustainably resources are used.',
+      D: ['A growing middle class always reduces energy consumption.', 'Ecological footprints are measured in litres of water.'] }];
+  LV[14] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Claim / Point'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Explain / Develop'], ['J', 'j', 'Evaluate / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the IB Examiner', how: 'For each extended-response question, tap a sentence card and then tap the box it belongs in: <b>Claim</b>, <b>Evidence</b>, <b>Explain</b> and <b>Judgement</b>. Two cards are <b>traps</b> — leave them out! IB answers need a judgement, so that box matters.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The IB Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A fully developed, evaluated paragraph.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Claim = your main point; Evidence = specific facts or case study; Explain = how/why it links; Judgement = how far / overall. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var ARW2 = '<defs><marker id="mA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#334155"/></marker></defs>';
+  var SVG_MALTHUS = '<svg viewBox="0 0 640 380" role="img" aria-label="Malthus and Boserup">' + ARW2 +
+    '<rect width="640" height="380" fill="#fff"/>' +
+    '<line x1="60" y1="330" x2="610" y2="330" stroke="#1e293b"/><line x1="60" y1="330" x2="60" y2="30" stroke="#1e293b"/>' +
+    '<text x="335" y="365" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Time →</text>' +
+    '<text transform="translate(24,180) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Population / food supply</text>' +
+    '<line x1="60" y1="250" x2="600" y2="110" stroke="#16a34a" stroke-width="4"/>' +
+    '<path d="M60 300 C 200 295, 300 270, 380 200 C 410 172, 425 160, 440 150 C 455 165, 470 200, 490 215 C 510 205, 530 190, 560 170" fill="none" stroke="#dc2626" stroke-width="4"/>' +
+    '<circle cx="432" cy="158" r="14" fill="none" stroke="#7c3aed" stroke-width="3"/>' +
+    '<path d="M300 188 L 350 188 L 350 160 L 400 160 L 400 128 L 470 128 L 470 85 L 600 85" fill="none" stroke="#7c3aed" stroke-width="3" stroke-dasharray="7 5"/>' +
+    '<g font-size="11" fill="#475569"><text x="600" y="162" text-anchor="end">arithmetic: 1, 2, 3, 4…</text><text x="250" y="300">geometric: 1, 2, 4, 8…</text></g></svg>';
+  var PINS_MALTHUS = [{ n: 1, x: 300, y: 252 }, { n: 2, x: 170, y: 200 }, { n: 3, x: 432, y: 196 }, { n: 4, x: 488, y: 238 }, { n: 5, x: 535, y: 64 }];
+
+  var SVG_NEXUS = '<svg viewBox="0 0 640 380" role="img" aria-label="The water-food-energy nexus">' + ARW2 +
+    '<rect width="640" height="380" fill="#f8fafc"/>' +
+    '<g stroke="#334155" stroke-width="3" marker-end="url(#mA)"><line x1="282" y1="98" x2="132" y2="262"/><line x1="152" y1="282" x2="302" y2="118"/><line x1="358" y1="98" x2="508" y2="262"/><line x1="160" y1="296" x2="478" y2="296"/><line x1="478" y1="322" x2="160" y2="322"/></g>' +
+    '<circle cx="320" cy="62" r="46" fill="#0ea5e9"/><text x="320" y="67" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">WATER</text>' +
+    '<circle cx="108" cy="306" r="46" fill="#f59e0b"/><text x="108" y="311" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">ENERGY</text>' +
+    '<circle cx="532" cy="306" r="46" fill="#16a34a"/><text x="532" y="311" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">FOOD</text></svg>';
+  var PINS_NEXUS = [{ n: 1, x: 182, y: 172 }, { n: 2, x: 252, y: 212 }, { n: 3, x: 455, y: 170 }, { n: 4, x: 320, y: 280 }, { n: 5, x: 320, y: 342 }];
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  var GATES = {
+    1: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on IB May 2021 Paper 2, Q3(b)(i)', q: 'Explain how the growth of a country’s middle class can lead to changes in diet.', o: [
+          'As people join the middle class they have more disposable income, so they can afford more expensive foods such as meat, dairy and processed or imported food.',
+          'As people join the middle class they become busier at work, so they have less time to eat and their total food consumption falls, which is why middle-class diets contain fewer calories and less meat than the diets of rural farming families.',
+          'The middle class eat different food.',
+          'Middle-class people eat more meat.'], c: 0,
+        ms: '1 mark for a valid dietary change (e.g. <b>more meat/dairy</b>, <b>more processed or imported food</b>, <b>more sugar</b>) and 1 for explaining why it follows from middle-class growth (<b>more disposable income</b>, Western lifestyles).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Extreme poverty fell from 38% of the world population in 1990 to 9% in 2019. Calculate the percentage decrease, to the nearest whole number.', ans: 76, tol: 1, unit: '%',
+        ms: '(38 − 9) ÷ 38 × 100 = <b>76%</b>.' }],
+    2: [
+      { type: 'best', marks: 2, cmd: 'Suggest', src: 'Based on IB May 2021 Paper 2, Q3(c)(i)', q: 'Suggest one way in which using more renewable energy can reduce a country’s ecological footprint.', o: [
+          'Replacing fossil fuels with wind and solar power means less CO₂ is emitted, so less land and forest is needed to absorb the country’s carbon emissions, reducing its footprint.',
+          'Renewable energy reduces the ecological footprint because wind turbines and solar panels are counted as forests in the calculation, so a country that builds more of them automatically gains biocapacity and its footprint becomes negative.',
+          'Renewable energy is better for the environment.',
+          'Renewable energy reduces pollution.'], c: 0,
+        ms: '1 mark for a valid way (e.g. <b>less fossil fuel use</b>) and 1 for linking it to a smaller footprint (<b>less land needed to absorb CO₂</b>, less land for mining, fewer oil spills).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country’s ecological footprint is 6.0 gha per person. World biocapacity is 1.5 gha per person. How many Earths would be needed if everyone lived like this?', ans: 4, tol: 0.05, unit: 'Earths',
+        ms: '6.0 ÷ 1.5 = <b>4 Earths</b>.' }],
+    3: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between physical water scarcity and economic water scarcity.', o: [
+          'Physical water scarcity is when there is not enough water to meet demand, often in arid regions, whereas economic water scarcity is when water is available but a lack of money or infrastructure prevents people using it.',
+          'Physical water scarcity is when people cannot afford to buy water from vendors, whereas economic water scarcity is when there is not enough rainfall to fill rivers, lakes and aquifers, which mostly happens in deserts such as the Sahara and the Middle East.',
+          'Both mean there is not enough water.',
+          'Physical scarcity happens in deserts and economic scarcity happens in poor countries.'], c: 0,
+        ms: 'One mark for each side: <b>physical</b> = demand exceeds available supply; <b>economic</b> = water exists but investment/infrastructure/money is lacking.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three reasons why global water demand is rising.', need: 3, items: [
+          { t: 'Population growth increases demand for drinking water and food', ok: true },
+          { t: 'Changing diets with more meat need more water per calorie', ok: true },
+          { t: 'Industrialisation and energy production use large volumes of water for cooling and processing', ok: true },
+          { t: 'Rainfall is increasing everywhere because of climate change', ok: false },
+          { t: 'Desalination has made fresh water unlimited', ok: false },
+          { t: 'Agriculture now uses almost no water', ok: false }],
+        ms: 'Credit population growth, dietary change, industrialisation/energy use and urbanisation. Agriculture is still the largest user.' }],
+    4: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on IB May 2021 Paper 2, Q3(b)(ii)', q: 'Explain how a growing middle class can increase pressure on land use.', o: [
+          'Middle-class families want their own homes, so demand for housing grows and new developments are built on farmland or forest, putting pressure on other land uses.',
+          'A growing middle class reduces pressure on land, because wealthy people move into apartments in city centres, so farmland and forests on the edge of cities are no longer needed and can be returned to nature, which increases biodiversity.',
+          'The middle class needs more land.',
+          'There are more people, so more land is used.'], c: 0,
+        ms: '1 mark for a valid land-use change (<b>housing</b>, <b>more cropland or pasture for meat</b>, <b>transport infrastructure</b>, land acquisition) and 1 for the pressure it creates on another land use or group.' },
+      { type: 'multi', marks: 4, cmd: 'Outline', q: 'Outline the four pillars of food security.', need: 4, items: [
+          { t: 'Availability — enough food is produced or imported', ok: true },
+          { t: 'Access — people can afford or obtain food', ok: true },
+          { t: 'Utilisation — people have the health, water and knowledge to use food well', ok: true },
+          { t: 'Stability — supply and access are reliable over time', ok: true },
+          { t: 'Profitability — farmers make a large profit', ok: false },
+          { t: 'Exportability — the country sells food abroad', ok: false }],
+        ms: 'The FAO pillars: <b>availability, access, utilisation, stability</b>.' }],
+    5: [
+      { type: 'best', marks: 2, cmd: 'Suggest', src: 'Based on IB May 2021 Paper 2, Q3(c)(ii)', q: 'Suggest one way in which using more renewable energy could increase a country’s ecological footprint.', o: [
+          'Growing biofuel crops such as palm oil needs large areas of land, often cleared from forest, which increases the land counted in the country’s footprint.',
+          'Renewable energy increases the footprint because solar panels absorb sunlight and heat the atmosphere, which is counted as extra carbon emissions, and because wind turbines slow down the wind, which reduces rainfall over farmland across the country.',
+          'Renewable energy can be bad for the environment.',
+          'Wind farms are ugly and spoil the view.'], c: 0,
+        ms: '1 mark for a valid way (<b>land for solar/wind farms</b>, <b>reservoirs flooding valleys</b>, <b>mining for battery minerals</b>, <b>biofuel plantations</b>) and 1 for development linked to a larger footprint.' },
+      { type: 'num', marks: 1, cmd: 'Calculate', q: 'Oil supplies 32%, coal 26% and gas 23% of global primary energy. What percentage comes from fossil fuels?', ans: 81, tol: 0, unit: '%',
+        ms: '32 + 26 + 23 = <b>81%</b>.' }],
+    6: [
+      { type: 'best', marks: 4, cmd: 'Explain', q: 'Explain two ways in which water security and energy security are linked.', o: [
+          'Energy depends on water: thermal power stations need water for cooling and hydropower needs river flow, so droughts cut electricity. Water depends on energy: pumping, treating and desalinating water use large amounts of power, so energy shortages threaten water supply.',
+          'Water and energy are linked because both are sold by the same government companies, so when water prices rise, electricity prices automatically rise by the same amount, and because electricity is made from water molecules, which are split into hydrogen and oxygen in power stations.',
+          'Water and energy are linked because you need both to live.',
+          'Hydropower uses water to make electricity.'], c: 0,
+        ms: 'Two links, each identified (1) and explained (1): <b>water for energy</b> (cooling, hydropower, fuel extraction) and <b>energy for water</b> (pumping, treatment, desalination).' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three examples of trade-offs in the water–food–energy nexus.', need: 3, items: [
+          { t: 'Biofuel crops use land and water that could grow food', ok: true },
+          { t: 'Dams for hydropower flood farmland and change river flows downstream', ok: true },
+          { t: 'Cheap electricity for pumps encourages over-use of groundwater for irrigation', ok: true },
+          { t: 'Solar-powered drip irrigation saves water and energy', ok: false },
+          { t: 'Recycling wastewater for crops saves fresh water', ok: false },
+          { t: 'Biogas from farm waste reduces firewood use', ok: false }],
+        ms: 'Trade-offs help one security but harm another. Solar drip irrigation, wastewater reuse and biogas are <b>synergies</b>.' }],
+    7: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how climate change may threaten energy security in countries that rely on hydropower.', o: [
+          'Climate change makes droughts longer and rainfall less reliable, so river flows and reservoir levels fall. Hydropower stations then produce less electricity, as in Zambia and Zimbabwe in 2024, causing power cuts that affect homes, industry and water pumping.',
+          'Climate change will increase hydropower output everywhere, because warmer air holds more moisture and rivers flow faster when the water is warmer, so countries that rely on hydropower will produce a surplus of electricity that they can export to their neighbours.',
+          'Climate change causes droughts.',
+          'Hydropower uses water to make electricity and is renewable.'], c: 0,
+        ms: 'Causal chain (1) → impact on hydropower output (1) → consequence for energy security, ideally with an example (1).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A hydropower station normally produces 1,000 MW. During a drought its output falls to 250 MW. Calculate the percentage fall.', ans: 75, tol: 0, unit: '%',
+        ms: '(1,000 − 250) ÷ 1,000 × 100 = <b>75%</b>.' }],
+    8: [
+      { type: 'best', marks: 4, cmd: 'Examine', q: 'Examine the advantages and disadvantages of a small-scale approach to managing the water–food–energy nexus in one named country.', o: [
+          'In Nepal, community micro-hydro schemes are cheap, run-of-river and locally owned, bringing electricity to remote villages and powering water mills that process food. However, output falls in the dry season, each scheme is small, and floods can destroy them, so they work best alongside the national grid.',
+          'In Nepal, small-scale schemes have no disadvantages, because micro-hydro produces more electricity than large dams, works equally well all year round, cannot be damaged by floods, and has already made Nepal the world’s largest exporter of electricity, selling huge amounts every year to both China and India.',
+          'Small-scale schemes are good because they are cheap, but bad because they are small.',
+          'Nepal uses micro-hydro power in mountain villages.'], c: 0,
+        ms: '<b>Examine</b> needs advantages and disadvantages with named, specific detail, and ideally a judgement.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three features of Nepal’s small-scale approach to the nexus.', need: 3, items: [
+          { t: 'Run-of-river micro-hydro schemes owned by communities', ok: true },
+          { t: 'Improved water mills that use river flow to grind grain', ok: true },
+          { t: 'Biogas digesters and community forestry that reduce firewood use', ok: true },
+          { t: 'Giant coastal desalination plants', ok: false },
+          { t: 'Nuclear power stations in the Himalayas', ok: false },
+          { t: 'A national water carrier pumping water across the country', ok: false }],
+        ms: 'Credit community-scale, bottom-up schemes. Desalination and a national water carrier belong to Israel’s large-scale approach.' }],
+    9: [
+      { type: 'best', marks: 4, cmd: 'Evaluate', q: 'Evaluate the large-scale approach to water security in one named country.', o: [
+          'Israel’s desalination plants, wastewater reuse (about 85–90%) and drip irrigation have turned a water deficit into a surplus, even in drought years. However, desalination is energy-intensive, relies on natural gas, discharges brine and is costly, and access to water remains politically contested. Overall it is very effective technically but depends on energy and money.',
+          'Israel’s approach is completely sustainable, because desalination uses no energy, produces no waste and costs nothing to run, and the brine produced is sold to farmers as fertiliser, so every country in the world should copy it immediately without any changes, whatever its climate, wealth or energy supply, and Israel no longer needs any other water sources at all, including rainfall, rivers and aquifers.',
+          'Israel has good water management because it uses desalination.',
+          'Israel uses desalination, wastewater reuse and drip irrigation.'], c: 0,
+        ms: '<b>Evaluate</b> = strengths and weaknesses with evidence, then a judgement.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country treats 600 million m³ of wastewater a year and reuses 87% of it. How many million m³ are reused?', ans: 522, tol: 0, unit: 'million m³',
+        ms: '600 × 0.87 = <b>522 million m³</b>.' }],
+    10: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why e-waste is often exported from high-income countries to lower-income countries.', o: [
+          'Recycling electronics is expensive in high-income countries because of labour costs and strict environmental laws. In lower-income countries, labour is cheaper and regulation weaker, so informal recyclers can profit from extracting metals such as copper and gold, although this harms health and the environment.',
+          'E-waste is exported because lower-income countries have the most advanced recycling technology and strict environmental laws, so they can recycle electronics more safely and cheaply, and because the Basel Convention requires rich countries to send all of their electronic waste abroad for recycling in specialist plants.',
+          'E-waste is exported because rich countries do not want it.',
+          'E-waste contains valuable metals like gold.'], c: 0,
+        ms: 'Explain the <b>cost difference</b> (1), <b>weaker regulation/cheap labour</b> (1) and the <b>value of recovered materials</b> or the consequence (1).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'E-waste rose from 34 million tonnes in 2010 to 62 million tonnes in 2022. Calculate the percentage increase, to the nearest whole number.', ans: 82, tol: 1, unit: '%',
+        ms: '(62 − 34) ÷ 34 × 100 = <b>82%</b>.' }],
+    11: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between the Millennium Development Goals (MDGs) and the Sustainable Development Goals (SDGs).', o: [
+          'The MDGs were eight goals (2000–2015) aimed mainly at reducing poverty in developing countries, whereas the SDGs are seventeen goals (2015–2030) that apply to all countries and include environmental sustainability.',
+          'The MDGs were seventeen goals that applied only to high-income countries and focused on climate change, whereas the SDGs are eight goals that focus only on ending poverty in Africa and do not include any targets on the environment or on resource consumption.',
+          'The SDGs replaced the MDGs.',
+          'Both are goals set by the United Nations.'], c: 0,
+        ms: 'One mark for each side, with a clear difference: number, timeframe, scope (developing vs universal) or the sustainability focus.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three examples of resource stewardship.', need: 3, items: [
+          { t: 'Reducing food waste in households and supermarkets', ok: true },
+          { t: 'Protecting watersheds and aquifers from over-use and pollution', ok: true },
+          { t: 'Switching to renewable energy and improving efficiency', ok: true },
+          { t: 'Increasing single-use plastic production to create jobs', ok: false },
+          { t: 'Pumping aquifers faster than they recharge', ok: false },
+          { t: 'Clearing rainforest to grow biofuels', ok: false }],
+        ms: 'Stewardship means responsible, sustainable management of resources for the future.' }],
+    12: [
+      { type: 'best', marks: 4, cmd: 'Compare', q: 'Compare the views of Malthus and Boserup on population and resources.', o: [
+          'Malthus argued that population grows geometrically while food grows arithmetically, so population would outstrip food and be reduced by famine, disease and war. Boserup argued the opposite: population pressure drives innovation, such as new farming techniques, so food supply rises to meet demand. Both link population to resources, but disagree on whether people are a problem or a solution.',
+          'Malthus and Boserup agreed that technology would always increase food production fast enough to feed any population, so both believed famines were impossible. The only difference is that Malthus wrote in the 20th century about Africa, while Boserup wrote in the 18th century about Britain and the Industrial Revolution, which is why their ideas about the link between population and food supply are exactly the same.',
+          'Malthus was pessimistic and Boserup was optimistic.',
+          'Malthus thought there would be famine.'], c: 0,
+        ms: '<b>Compare</b> needs both theories explained with a clear point of comparison (similarity and/or difference).' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three pieces of evidence that support Boserup’s view.', need: 3, items: [
+          { t: 'The Green Revolution raised cereal yields across Asia from the 1960s', ok: true },
+          { t: 'Global food production per person has risen while population grew', ok: true },
+          { t: 'Intensive terracing and irrigation developed in densely populated regions', ok: true },
+          { t: 'Famines killed most of the world’s population in the 20th century', ok: false },
+          { t: 'Population growth has always been followed by economic collapse', ok: false },
+          { t: 'The Limits to Growth report (1972) predicted resource collapse', ok: false }],
+        ms: 'Evidence of innovation increasing food supply supports Boserup. The Limits to Growth is a neo-Malthusian source.' }],
+    13: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how a circular economy can reduce pressure on resources.', o: [
+          'A circular economy keeps products and materials in use through design for durability, reuse, repair and recycling. This reduces the need to extract new raw materials and cuts waste, for example when a company leases lighting as a service and recovers the lamps at the end of their life.',
+          'A circular economy reduces pressure on resources by encouraging people to buy new products more often, which creates jobs in factories and mines, and by burning all waste for energy so that landfill sites are no longer needed at all and new raw materials can be extracted much faster from mines and forests.',
+          'A circular economy recycles things.',
+          'It reduces waste and is better for the environment.'], c: 0,
+        ms: 'Identify the principle (1), explain how it reduces extraction or waste (1) and support with an example (1).' },
+      { type: 'num', marks: 1, cmd: 'Calculate', q: 'The global economy uses about 100 billion tonnes of materials a year, and about 7% is cycled back into use. How many billion tonnes are cycled back?', ans: 7, tol: 0, unit: 'billion tonnes',
+        ms: '100 × 0.07 = <b>7 billion tonnes</b>.' }]
+  };
+
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'IB-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">Which answer would score <b>full marks</b>?</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
