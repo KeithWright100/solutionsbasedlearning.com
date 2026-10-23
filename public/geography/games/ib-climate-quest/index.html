@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Climate Quest — IB Geography Changing Climate Revision Game — SBL</title>
-<meta name="description" content="IB Geography revision game for Unit 2 Global Climate: 12 levels covering causes, consequences and responses to climate change, finishing with an IB Examiner boss fight.">
+<meta name="description" content="IB Geography revision game for Unit 2 Global Climate: 12 levels covering causes, consequences and responses to climate change, with labelled diagrams, data skills, past paper checkpoint questions and an IB Examiner boss fight.">
 <style>
   :root {
     --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
@@ -291,6 +291,44 @@
     .flash .card { font-size: 1.15rem; }
   }
   @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -326,6 +364,7 @@
   var KEY = 'sbl-ib-climate-quest-v1';
   var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
   try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
   var LEVELS = [
@@ -346,10 +385,11 @@
     { id: 'causes', i: '🏭', t: 'Causes Expert', d: 'Complete Topic 01 (Levels 1–3)', ok: function () { return [1, 2, 3].every(isDone); } },
     { id: 'cons', i: '🌊', t: 'Consequences Expert', d: 'Complete Topic 02 (Levels 4–8)', ok: function () { return [4, 5, 6, 7, 8].every(isDone); } },
     { id: 'resp', i: '🌱', t: 'Response Strategist', d: 'Complete Topic 03 (Levels 9–11)', ok: function () { return [9, 10, 11].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Exam Technique', d: 'Pass all 11 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].every(gatePassed); } },
     { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the IB Examiner', ok: function () { return isDone(12); } },
     { id: 'champ', i: '🏆', t: 'Climate Champion', d: 'All 12 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
   function isDone(n) { return !!S.done[n]; }
-  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n - 1) || isDone(n); }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
   function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
 
   function paintHud() {
@@ -387,23 +427,23 @@
 
   function showMap() {
     run = null; closeModal();
-    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && unlocked(l.n); })[0] || {}).n;
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
     $('app').innerHTML = '<div class="hero"><span class="kicker">IB Geography \u00B7 Paper 1 Core \u00B7 Unit 2</span>' +
       '<h1>\uD83C\uDF0D Climate Quest<br>Changing Climate Revision</h1>' +
-      '<p>Work through all three topics \u2014 <b>Causes</b>, <b>Consequences</b> and <b>Responding</b> \u2014 one level per lesson, then face the <b>IB Examiner</b>. <b>Each level unlocks the next.</b> Earn XP for every first-try correct answer and collect all five badges.</p></div>' +
+      '<p>Work through all three topics \u2014 <b>Causes</b>, <b>Consequences</b> and <b>Responding</b> \u2014 one level per lesson, then face the <b>IB Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all six badges.</p></div>' +
       '<div class="map">' + LEVELS.map(function (l) {
-        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n];
-        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (u ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
-          '<span class="st">' + (d ? '✅' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : esc(l.d)) + '</small></button>';
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
       }).join('') + '</div>' +
       '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
       '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
     paintHud();
   }
   $('app').addEventListener('click', function (e) {
-    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { startLevel(+c.dataset.lv); return; }
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
     if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
-    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false }; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
     if (e.target.closest('[data-map]')) showMap();
   });
 
@@ -428,14 +468,14 @@
       '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
       newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
       (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Climate Champion!' : ' — reach 90% for Climate Champion.') + '</p>' : '') +
-      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>' : '') + '</div>');
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
     confetti(last || newB.length > 0);
   }
   function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
   function closeModal() { $('modal').classList.remove('on'); }
   $('modal').addEventListener('click', function (e) {
     var b = e.target.closest('[data-m]'); if (!b) return;
-    if (b.dataset.m === 'map') showMap(); else { closeModal(); startLevel(run.n + 1); }
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
 
@@ -561,6 +601,7 @@
   }
   function stages(root, list) {
     // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
     var i = 0;
     function show() {
       var s = list[i], el;
@@ -923,6 +964,468 @@
         paintBoss(); showQ();
       } }]);
   };
+
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= DIAGRAMS ================= */
+  var ARW = '<defs><marker id="aY" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#eab308"/></marker><marker id="aR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#dc2626"/></marker></defs>';
+  var SVG_ATMOS = '<svg viewBox="0 0 640 400" role="img" aria-label="Structure of the atmosphere">' +
+    '<rect x="60" y="300" width="420" height="80" fill="#bfdbfe"/><rect x="60" y="180" width="420" height="120" fill="#c7d2fe"/><rect x="60" y="85" width="420" height="95" fill="#ddd6fe"/><rect x="60" y="10" width="420" height="75" fill="#ede9fe"/>' +
+    '<rect x="60" y="380" width="420" height="6" fill="#65a30d"/><rect x="60" y="232" width="420" height="22" fill="#a5b4fc" opacity=".8"/>' +
+    '<line x1="60" y1="300" x2="480" y2="300" stroke="#1e293b" stroke-dasharray="6 4"/><line x1="60" y1="180" x2="480" y2="180" stroke="#64748b" stroke-dasharray="3 4"/><line x1="60" y1="85" x2="480" y2="85" stroke="#64748b" stroke-dasharray="3 4"/>' +
+    '<path d="M110 365 q12 -14 28 -6 q10 -16 28 -4 q16 -2 12 12 z" fill="#fff" stroke="#94a3b8"/><path d="M300 350 q10 -12 24 -5 q9 -12 23 -3 q13 0 10 10 z" fill="#fff" stroke="#94a3b8"/>' +
+    '<polyline points="420,380 330,300 340,240 400,180 300,85 380,40 460,12" fill="none" stroke="#dc2626" stroke-width="3"/>' +
+    '<g font-size="11" fill="#334155"><text x="54" y="384" text-anchor="end">0 km</text><text x="54" y="304" text-anchor="end">~12 km</text><text x="54" y="184" text-anchor="end">~50 km</text><text x="54" y="89" text-anchor="end">~85 km</text></g>' +
+    '<text x="560" y="250" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700">Red line =</text><text x="560" y="266" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700">temperature</text>' +
+    '<text x="560" y="392" text-anchor="middle" font-size="11" fill="#475569">Not to scale</text><text x="270" y="398" text-anchor="middle" font-size="11" fill="#dc2626">colder ← temperature → warmer</text></svg>';
+  var PINS_ATMOS = [{ n: 1, x: 200, y: 340 }, { n: 2, x: 230, y: 300 }, { n: 3, x: 160, y: 243 }, { n: 4, x: 240, y: 205 }, { n: 5, x: 200, y: 130 }, { n: 6, x: 200, y: 45 }];
+
+  var SVG_BUDGET = '<svg viewBox="0 0 680 420" role="img" aria-label="Global energy budget">' + ARW +
+    '<rect width="680" height="420" fill="#f0f9ff"/><rect x="0" y="0" width="680" height="70" fill="#0f172a"/><text x="660" y="22" text-anchor="end" font-size="12" fill="#e2e8f0">SPACE</text>' +
+    '<rect x="0" y="150" width="680" height="70" fill="#94a3b8" opacity=".35"/><text x="660" y="190" text-anchor="end" font-size="11" fill="#334155">greenhouse gases</text>' +
+    '<path d="M80 125 q20 -26 48 -12 q18 -24 46 -6 q26 -2 20 22 z" fill="#fff" stroke="#94a3b8"/>' +
+    '<rect x="0" y="360" width="680" height="60" fill="#65a30d"/><rect x="260" y="360" width="160" height="60" fill="#0ea5e9"/><text x="20" y="400" font-size="12" fill="#fff" font-weight="700">EARTH’S SURFACE</text>' +
+    '<circle cx="40" cy="35" r="24" fill="#facc15"/>' +
+    '<line x1="70" y1="45" x2="210" y2="350" stroke="#eab308" stroke-width="7" marker-end="url(#aY)"/>' +
+    '<line x1="130" y1="115" x2="170" y2="20" stroke="#eab308" stroke-width="4" marker-end="url(#aY)"/>' +
+    '<line x1="230" y1="355" x2="275" y2="25" stroke="#eab308" stroke-width="3" marker-end="url(#aY)"/>' +
+    '<line x1="140" y1="178" x2="185" y2="190" stroke="#eab308" stroke-width="4"/><circle cx="190" cy="191" r="7" fill="#eab308"/>' +
+    '<path d="M330 352 q12 -20 0 -40 q-12 -20 0 -40 q12 -20 0 -40" fill="none" stroke="#dc2626" stroke-width="5" marker-end="url(#aR)"/>' +
+    '<path d="M450 165 q12 30 0 60 q-12 30 0 60 q12 25 0 55" fill="none" stroke="#dc2626" stroke-width="5" marker-end="url(#aR)"/>' +
+    '<path d="M560 150 q12 -20 0 -40 q-12 -20 0 -40 q12 -14 0 -40" fill="none" stroke="#dc2626" stroke-width="4" marker-end="url(#aR)"/>' +
+    '<text x="340" y="250" font-size="11" fill="#475569"></text></svg>';
+  var PINS_BUDGET = [{ n: 1, x: 120, y: 160 }, { n: 2, x: 160, y: 60 }, { n: 3, x: 250, y: 190 }, { n: 4, x: 196, y: 220 }, { n: 5, x: 210, y: 375 }, { n: 6, x: 300, y: 290 }, { n: 7, x: 480, y: 290 }, { n: 8, x: 590, y: 95 }];
+
+  var SVG_EGE = '<svg viewBox="0 0 680 440" role="img" aria-label="The enhanced greenhouse effect">' + ARW +
+    '<rect width="680" height="440" fill="#f0f9ff"/><rect width="680" height="60" fill="#0f172a"/><text x="660" y="22" text-anchor="end" font-size="12" fill="#e2e8f0">SPACE</text>' +
+    '<rect x="0" y="130" width="680" height="80" fill="#64748b" opacity=".45"/><rect x="0" y="130" width="680" height="80" fill="none" stroke="#475569" stroke-dasharray="6 4"/>' +
+    '<g font-size="12" fill="#1e293b" font-weight="700"><text x="560" y="152">CO₂ CH₄ N₂O</text><text x="560" y="170" font-weight="400" font-size="11">(thicker blanket)</text></g>' +
+    '<circle cx="45" cy="32" r="24" fill="#facc15"/>' +
+    '<line x1="70" y1="45" x2="190" y2="345" stroke="#eab308" stroke-width="7" marker-end="url(#aY)"/>' +
+    '<line x1="120" y1="170" x2="150" y2="22" stroke="#eab308" stroke-width="3" marker-end="url(#aY)"/>' +
+    '<rect x="0" y="350" width="680" height="90" fill="#65a30d"/><text x="14" y="430" font-size="12" fill="#fff" font-weight="700">EARTH’S SURFACE — WARMS</text>' +
+    '<path d="M300 345 q12 -18 0 -36 q-12 -18 0 -36 q12 -18 0 -36 q-12 -18 0 -40" fill="none" stroke="#dc2626" stroke-width="5" marker-end="url(#aR)"/>' +
+    '<path d="M330 175 q20 40 50 60 q20 30 40 100" fill="none" stroke="#dc2626" stroke-width="5" marker-end="url(#aR)"/>' +
+    '<path d="M470 205 q10 -40 0 -80 q-10 -30 0 -70" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#aR)"/>' +
+    '<g transform="translate(470,300)"><rect x="0" y="10" width="40" height="40" fill="#78716c"/><rect x="26" y="-20" width="9" height="32" fill="#57534e"/><circle cx="31" cy="-30" r="10" fill="#cbd5e1"/><circle cx="40" cy="-44" r="12" fill="#cbd5e1"/></g>' +
+    '<g transform="translate(540,325)"><rect x="0" y="6" width="44" height="16" rx="5" fill="#2563eb"/><circle cx="10" cy="24" r="5" fill="#111"/><circle cx="34" cy="24" r="5" fill="#111"/></g>' +
+    '<g transform="translate(610,320)"><rect x="0" y="0" width="12" height="30" fill="#78350f"/><rect x="18" y="16" width="16" height="14" fill="#a16207"/><text x="-6" y="-4" font-size="10" fill="#1e293b">felled</text></g></svg>';
+  var PINS_EGE = [{ n: 1, x: 105, y: 95 }, { n: 2, x: 150, y: 95 }, { n: 3, x: 230, y: 390 }, { n: 4, x: 320, y: 290 }, { n: 5, x: 60, y: 170 }, { n: 6, x: 400, y: 245 }, { n: 7, x: 495, y: 90 }, { n: 8, x: 520, y: 400 }];
+
+  /* ================= EXTRA STAGES (inserted before each level's final quick check) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+  EXTRA[1] = [
+    { title: '🏷️ Label the structure of the atmosphere', how: 'Use the temperature line (red) to help: temperature <b>falls</b> with height in the troposphere and mesosphere, and <b>rises</b> in the stratosphere (ozone absorbs UV) and thermosphere.',
+      build: function (el, next) { labelGame(el, { svg: SVG_ATMOS, pins: PINS_ATMOS, cap: 'The four layers of the atmosphere (not to scale).', hint: 'Remember the order from the ground: troposphere, stratosphere, mesosphere, thermosphere.', labels: [
+        { t: 'Troposphere — weather and clouds; about 80% of the atmosphere’s mass', pin: 1 },
+        { t: 'Tropopause — boundary where temperature stops falling', pin: 2 },
+        { t: 'Ozone layer — absorbs ultraviolet radiation', pin: 3 },
+        { t: 'Stratosphere — temperature rises with height', pin: 4 },
+        { t: 'Mesosphere — temperature falls again', pin: 5 },
+        { t: 'Thermosphere — very thin air; temperature rises', pin: 6 },
+        { t: 'Ozone hole — lets in extra heat that causes global warming', pin: null }] }, next); } }];
+  EXTRA[2] = [
+    { title: '🏷️ Label the global energy budget', how: '<b>Yellow</b> arrows = incoming <b>short-wave</b> solar radiation. <b>Red</b> wavy arrows = <b>long-wave (infrared)</b> radiation given off by the Earth. One label is a trap.',
+      build: function (el, next) { labelGame(el, { svg: SVG_BUDGET, pins: PINS_BUDGET, cap: 'The global energy budget. Of incoming solar radiation, about 29% is reflected, 23% absorbed by the atmosphere and 48% absorbed by the surface (NASA).', labels: [
+        { t: 'Incoming short-wave solar radiation (100%)', pin: 1 },
+        { t: 'Reflected back to space by clouds and the atmosphere', pin: 2 },
+        { t: 'Reflected by the surface (albedo)', pin: 3 },
+        { t: 'Absorbed by the atmosphere and clouds (about 23%)', pin: 4 },
+        { t: 'Absorbed by the surface (about 48%)', pin: 5 },
+        { t: 'Long-wave (infrared) radiation emitted by the surface', pin: 6 },
+        { t: 'Re-radiated back to the surface by greenhouse gases', pin: 7 },
+        { t: 'Long-wave radiation lost to space', pin: 8 },
+        { t: 'Ultraviolet radiation bounced off the ozone layer to warm the surface', pin: null }] }, next); } },
+    { title: '📉 Data skills: Arctic sea ice', how: 'Read values from the graph carefully using the minor gridlines. Show your working on paper.',
+      build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Arctic September sea ice extent', x0: 1979, x1: 2023, xticks: [1980, 1990, 2000, 2010, 2020], y0: 3, y1: 8, ystep: 1, minor: 0.2, xlab: 'Year', ylab: 'Extent (million km²)',
+          series: [{ c: '#0284c7', dots: true, pts: [[1979, 7.05], [1985, 6.93], [1990, 6.14], [1995, 6.08], [2000, 6.25], [2005, 5.50], [2007, 4.27], [2010, 4.87], [2012, 3.39], [2015, 4.62], [2020, 3.82], [2023, 4.23]] }] }),
+        cap: 'Arctic sea ice extent in September (the annual minimum), 1979–2023 (approximate values, NSIDC).', qs: [
+        { type: 'num', q: 'Calculate the change in September sea ice extent from 1979 (7.05) to 2023 (4.23). Give your answer in million km².', ans: -2.82, tol: 0.06, unit: 'million km²', f: '4.23 − 7.05 = <b>−2.82 million km²</b> (a decrease). Always include the minus sign or say “decrease of”.' },
+        { type: 'num', q: 'Calculate the <b>percentage decrease</b> from 1979 to 2023, to the nearest whole number.', ans: 40, tol: 1, unit: '%', f: '2.82 ÷ 7.05 × 100 = <b>40%</b> decrease.' },
+        { type: 'num', q: 'In which year was the lowest extent recorded?', ans: 2012, tol: 0, unit: '', f: '<b>2012</b> (about 3.4 million km²) — the record low. Mention anomalies like this when you describe a trend.' },
+        { type: 'mc', q: 'Which statement best links this trend to a feedback loop?', o: ['Less sea ice lowers albedo, so the ocean absorbs more heat and melts more ice — positive feedback', 'Less sea ice raises albedo, so more sunlight is reflected and the Arctic cools — negative feedback', 'Melting sea ice raises sea level, which cools the ocean and slows melting — negative feedback', 'Less sea ice means more clouds form, which always stops further melting — negative feedback'], c: 0, f: 'The ice–albedo effect is the classic <b>positive</b> feedback.' }] }, next); } }];
+  EXTRA[3] = [
+    { title: '🏷️ Label the enhanced greenhouse effect', how: 'This is one of the most important diagrams in the unit — learn to draw and annotate it. <b>Yellow</b> = short-wave solar radiation, <b>red</b> = long-wave (infrared) radiation. Beware of the trap label.',
+      build: function (el, next) { labelGame(el, { svg: SVG_EGE, pins: PINS_EGE, cap: 'The enhanced greenhouse effect: human activities thicken the “blanket” of greenhouse gases, so more long-wave radiation is trapped.', hint: 'Short-wave comes IN from the Sun; long-wave goes OUT from the Earth.', labels: [
+        { t: 'Short-wave solar radiation passes through the atmosphere', pin: 1 },
+        { t: 'Some solar radiation is reflected back to space', pin: 2 },
+        { t: 'Earth’s surface absorbs the energy and warms', pin: 3 },
+        { t: 'The surface emits long-wave (infrared) radiation', pin: 4 },
+        { t: 'A thicker layer of greenhouse gases (CO₂, CH₄, N₂O)', pin: 5 },
+        { t: 'More long-wave radiation is absorbed and re-radiated back to Earth', pin: 6 },
+        { t: 'Less heat escapes to space', pin: 7 },
+        { t: 'Human activities: burning fossil fuels, transport, deforestation', pin: 8 },
+        { t: 'A hole in the ozone layer lets extra heat in', pin: null }] }, next); } },
+    { title: '📈 Data skills: the Keeling curve', how: 'Atmospheric CO₂ has been measured at Mauna Loa, Hawaii, since 1958. Read the graph, then calculate.',
+      build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Atmospheric CO2 at Mauna Loa', x0: 1960, x1: 2023, xticks: [1960, 1970, 1980, 1990, 2000, 2010, 2020], y0: 300, y1: 430, ystep: 20, minor: 5, xlab: 'Year', ylab: 'CO₂ (parts per million)',
+          series: [{ c: '#dc2626', dots: true, pts: [[1960, 316.9], [1970, 325.7], [1980, 338.8], [1990, 354.4], [2000, 369.7], [2010, 389.9], [2020, 414.2], [2023, 421.1]] }] }),
+        cap: 'Annual mean CO₂ concentration at Mauna Loa (approximate values, NOAA). Pre-industrial level: about 280 ppm.', qs: [
+        { type: 'num', q: 'Calculate the increase in CO₂ concentration from 1960 (316.9 ppm) to 2020 (414.2 ppm).', ans: 97.3, tol: 1, unit: 'ppm', f: '414.2 − 316.9 = <b>97.3 ppm</b>.' },
+        { type: 'num', q: 'Calculate the <b>mean annual rate</b> of increase between 1960 and 2020, to 1 decimal place.', ans: 1.6, tol: 0.05, unit: 'ppm per year', f: '97.3 ÷ 60 years = <b>1.6 ppm per year</b>.' },
+        { type: 'num', q: 'By what percentage was CO₂ in 2023 (421 ppm) above the pre-industrial level of 280 ppm? Nearest whole number.', ans: 50, tol: 1, unit: '%', f: '(421 − 280) ÷ 280 × 100 = <b>50%</b> higher.' },
+        { type: 'mc', q: 'Which describes the trend most accurately (as an examiner would want)?', o: ['CO₂ rose throughout, from about 317 ppm in 1960 to 421 ppm in 2023, and the rate of increase accelerated', 'CO₂ rose steadily at the same rate every decade, from about 317 ppm in 1960 to 421 ppm in 2023', 'CO₂ rose until 2000 and then levelled off at about 370 ppm as countries cut their emissions', 'CO₂ fluctuated up and down with no clear trend, staying between 300 ppm and 430 ppm throughout'], c: 0, f: 'Give the overall trend, use data from the start and end, and comment on the rate (about 0.9 ppm a year in the 1960s, over 2 ppm a year since 2000).' }] }, next); } }];
+  EXTRA[4] = [
+    { title: '🧪 Ocean acidification: build the chain', how: 'Tap the steps in order, from cause to impact.',
+      build: function (el, next) { orderGame(el, ['More CO₂ is released into the atmosphere by human activity', 'The oceans absorb about a quarter of this extra CO₂', 'CO₂ reacts with seawater to form carbonic acid', 'Ocean pH falls (from about 8.2 to 8.1 since pre-industrial times)', 'Fewer carbonate ions are available in the water', 'Corals, shellfish and plankton struggle to build their skeletons and shells'], 'Tap the CAUSE first…', next); } },
+    { title: '📈 Data skills: sea level rise', how: 'Satellites have measured global mean sea level since 1993.',
+      build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Global mean sea level change since 1993', x0: 1993, x1: 2023, xticks: [1995, 2000, 2005, 2010, 2015, 2020], y0: 0, y1: 12, ystep: 2, minor: 0.5, xlab: 'Year', ylab: 'Change since 1993 (cm)',
+          series: [{ c: '#0284c7', dots: true, pts: [[1993, 0], [1998, 1.4], [2003, 2.9], [2008, 4.3], [2013, 6.0], [2018, 8.0], [2023, 10.1]] }] }),
+        cap: 'Global mean sea level measured by satellites (approximate values, NASA).', qs: [
+        { type: 'num', q: 'Calculate the mean rate of sea level rise from 1993 to 2023 in <b>millimetres per year</b>, to 1 decimal place. (Total rise = 10.1 cm.)', ans: 3.4, tol: 0.05, unit: 'mm per year', f: '10.1 cm = 101 mm; 101 ÷ 30 years = <b>3.4 mm per year</b>. Watch the units!' },
+        { type: 'num', q: 'Calculate the rise between 2013 (6.0 cm) and 2023 (10.1 cm).', ans: 4.1, tol: 0.1, unit: 'cm', f: '10.1 − 6.0 = <b>4.1 cm</b> in ten years — faster than the 1993–2003 rise of 2.9 cm.' },
+        { type: 'mc', q: 'What does the graph suggest about the <b>rate</b> of sea level rise?', o: ['The rate is accelerating: the rise in the last decade was greater than in the first', 'The rate is slowing down: the rise in the last decade was smaller than in the first', 'The rate is constant: sea level rose by exactly the same amount every single year', 'The rate cannot be judged from the graph because it only shows the change since 1993'], c: 0, f: '2.9 cm (1993–2003) compared with 4.1 cm (2013–2023) shows <b>acceleration</b>, linked to faster ice-sheet melt.' }] }, next); } }];
+  EXTRA[5] = [
+    { title: '🌡️ Data skills: global temperature', how: 'Temperature <b>anomaly</b> = the difference from a long-term average (here 1951–1980). Positive values are warmer than that average.',
+      build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Global temperature anomaly', x0: 1880, x1: 2023, xticks: [1880, 1900, 1920, 1940, 1960, 1980, 2000, 2020], y0: -0.6, y1: 1.4, ystep: 0.2, minor: 0.05, zero: 0, xlab: 'Year', ylab: 'Anomaly (°C)', yfmt: function (y) { return (y > 0 ? '+' : '') + y.toFixed(1); },
+          series: [{ c: '#dc2626', dots: true, pts: [[1880, -0.17], [1900, -0.08], [1910, -0.43], [1920, -0.27], [1940, 0.13], [1960, -0.03], [1980, 0.26], [1990, 0.45], [2000, 0.39], [2010, 0.72], [2016, 1.01], [2020, 1.01], [2023, 1.17]] }] }),
+        cap: 'Global surface temperature anomaly relative to 1951–1980 (approximate values, NASA GISS).', qs: [
+        { type: 'num', q: 'Calculate the change in anomaly from 1980 (+0.26°C) to 2023 (+1.17°C).', ans: 0.91, tol: 0.02, unit: '°C', f: '1.17 − 0.26 = <b>+0.91°C</b> in about 40 years.' },
+        { type: 'num', q: 'Calculate the mean rate of warming from 1980 to 2023 in °C per decade, to 2 decimal places. (43 years = 4.3 decades.)', ans: 0.21, tol: 0.01, unit: '°C per decade', f: '0.91 ÷ 4.3 = <b>0.21°C per decade</b>.' },
+        { type: 'mc', q: 'Which is the coldest year shown — an anomaly you should mention?', o: ['1910', '1940', '1960', '2000'], c: 0, f: '<b>1910</b> (−0.43°C). Name anomalies with data when you describe a graph.' },
+        { type: 'mc', q: 'Why does a warmer atmosphere make extreme rainfall events more intense?', o: ['Warmer air holds about 7% more water vapour for each 1°C, so storms can release more rain', 'Warmer air holds less water vapour, so the rain that does fall is concentrated into fewer storms', 'Warmer air sinks more strongly, which squeezes extra rain out of clouds near the ground', 'Warmer air lowers sea levels, so more water is left in the atmosphere to fall as rain'], c: 0, f: 'This is the Clausius–Clapeyron relationship: about <b>7% more water vapour per °C</b>.' }] }, next); } }];
+  EXTRA[6] = [
+    { title: '🪸 Coral bleaching: build the chain', how: 'Tap the steps in order.',
+      build: function (el, next) { orderGame(el, ['Sea surface temperatures rise 1–2°C above the normal summer maximum', 'Heat stress damages the algae (zooxanthellae) living in the coral', 'The coral expels the algae', 'The coral turns white (bleaching) and loses its main food source', 'If high temperatures last for weeks, the coral starves and dies', 'Reef ecosystems, fisheries and coastal protection are lost'], 'Tap the FIRST step…', next); } },
+    { title: '📊 Data skills: Great Barrier Reef bleaching events', how: 'Mass bleaching events on the Great Barrier Reef have been recorded in the years marked below.',
+      build: function (el, next) {
+        var yrs = [1998, 2002, 2016, 2017, 2020, 2022, 2024], X = function (y) { return 40 + (y - 1995) * 20; };
+        var tl = '<svg viewBox="0 0 680 150" role="img" aria-label="Timeline of mass bleaching events"><rect width="680" height="150" fill="#fff"/><line x1="40" x2="640" y1="90" y2="90" stroke="#1e293b" stroke-width="2"/>' +
+          [1995, 2000, 2005, 2010, 2015, 2020, 2025].map(function (y) { return '<line x1="' + X(y) + '" x2="' + X(y) + '" y1="86" y2="96" stroke="#1e293b"/><text x="' + X(y) + '" y="114" text-anchor="middle" font-size="11" fill="#475569">' + y + '</text>'; }).join('') +
+          yrs.map(function (y, k) { return '<circle cx="' + X(y) + '" cy="90" r="8" fill="#f97316"/><text x="' + X(y) + '" y="' + (k % 2 ? 50 : 66) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#9a3412">' + y + '</text>'; }).join('') +
+          '<text x="340" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Year</text></svg>';
+        dataGame(el, { chart: tl, cap: 'Years of mass coral bleaching on the Great Barrier Reef (AIMS / Great Barrier Reef Marine Park Authority).', qs: [
+          { type: 'num', q: 'How many mass bleaching events occurred from 2016 to 2024 (inclusive)?', ans: 5, tol: 0, unit: 'events', f: '2016, 2017, 2020, 2022, 2024 = <b>5 events in 9 years</b>.' },
+          { type: 'num', q: 'Calculate the mean interval between events from 1998 to 2024, to 1 decimal place. (There are 6 gaps between the 7 events.)', ans: 4.3, tol: 0.05, unit: 'years', f: '(2024 − 1998) ÷ 6 = 26 ÷ 6 = <b>4.3 years</b>.' },
+          { type: 'mc', q: 'Why is the shorter gap between recent events so damaging?', o: ['Reefs need roughly 10–15 years to recover, so frequent bleaching gives too little recovery time', 'Reefs recover in a few weeks, so the gaps make no difference to the health of the reef', 'Frequent bleaching helps reefs to adapt quickly, so the gaps actually make reefs stronger', 'The gaps are shorter because scientists measure more often, not because bleaching has increased'], c: 0, f: 'Recovery takes about a decade, so more frequent events mean reefs <b>cannot recover</b> between them.' }] }, next); } }];
+  EXTRA[7] = [
+    { title: '🌾 Winners and losers', how: 'Climate change does not affect all farming in the same way. Sort each impact.',
+      build: function (el, next) { sortGame(el, { zones: zonesFrom([['pos', '👍 Possible benefit', 'often in higher latitudes'], ['neg', '👎 Negative impact', 'often in the tropics and LICs']], ['zg', 'zr']), cards: [
+        { t: 'Longer growing seasons in Canada and northern Russia', a: ['pos'], why: 'Warming extends the frost-free season at high latitudes.' },
+        { t: 'CO₂ fertilisation raises yields of C3 crops such as wheat and rice', a: ['pos'], why: 'More CO₂ can boost photosynthesis in some crops (if water and nutrients allow).' },
+        { t: 'New land becomes farmable as permafrost and snow cover retreat', a: ['pos'], why: 'Some northern land may become usable.' },
+        { t: 'Heat stress reduces maize yields in sub-Saharan Africa', a: ['neg'], why: 'Many tropical crops are already near their maximum temperature tolerance.' },
+        { t: 'More frequent droughts cause crop failure', a: ['neg'], why: 'Drought is one of the biggest threats to food security.' },
+        { t: 'Pests and diseases spread to new areas', a: ['neg'], why: 'Warmer winters allow pests to survive and spread.' },
+        { t: 'Saltwater intrusion damages rice paddies in deltas', a: ['neg'], why: 'Sea level rise pushes salt water into farmland (e.g. Bangladesh).' }] }, next); } }];
+  EXTRA[8] = [
+    { title: '⚖️ Data skills: climate justice', how: 'Compare carbon dioxide emissions per person.',
+      build: function (el, next) {
+        var D = [['USA', 14.9], ['China', 8.9], ['UK', 4.7], ['India', 2.0], ['Bangladesh', 0.6]];
+        var bars = '<svg viewBox="0 0 660 260" role="img" aria-label="CO2 emissions per person"><rect width="660" height="260" fill="#fff"/>' +
+          [0, 4, 8, 12, 16].map(function (v) { var y = 220 - v * 12; return '<line x1="70" x2="640" y1="' + y + '" y2="' + y + '" stroke="#e2e8f0"/><text x="64" y="' + (y + 4) + '" text-anchor="end" font-size="11" fill="#475569">' + v + '</text>'; }).join('') +
+          D.map(function (d, k) { var x = 100 + k * 110, h = d[1] * 12; return '<rect x="' + x + '" y="' + (220 - h) + '" width="60" height="' + h + '" fill="' + (k < 3 ? '#dc2626' : '#f97316') + '"/><text x="' + (x + 30) + '" y="' + (214 - h) + '" text-anchor="middle" font-size="12" font-weight="700">' + d[1] + '</text><text x="' + (x + 30) + '" y="238" text-anchor="middle" font-size="12">' + d[0] + '</text>'; }).join('') +
+          '<text transform="translate(18,130) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700">Tonnes CO₂ per person per year</text></svg>';
+        dataGame(el, { chart: bars, cap: 'Annual CO₂ emissions per person from fossil fuels (approximate recent values, Global Carbon Project / Our World in Data).', qs: [
+          { type: 'num', q: 'How many times greater are emissions per person in the USA than in Bangladesh? Nearest whole number.', ans: 25, tol: 1, unit: 'times', f: '14.9 ÷ 0.6 = <b>about 25 times</b>.' },
+          { type: 'mc', q: 'Bangladesh is one of the countries most vulnerable to climate change. What does this data show about <b>climate justice</b>?', o: ['Those who have contributed least to emissions often suffer the worst impacts', 'Countries with the highest emissions always suffer the most severe climate impacts', 'Emissions per person are similar everywhere, so responsibility is shared equally', 'Bangladesh should cut its emissions the most because it has the largest population'], c: 0, f: 'Climate justice: <b>low emitters, high vulnerability</b>. Also mention cumulative (historical) emissions.' }] }, next); } }];
+  EXTRA[9] = [
+    { title: '🧮 Skills: the disaster risk equation', how: '<b>Risk = (Hazard × Vulnerability) ÷ Capacity to cope</b>. Use scores out of 5 to compare two places facing the same cyclone.',
+      build: function (el, next) { dataGame(el, { chart: '<table class="dg-table"><thead><tr><th></th><th>Hazard</th><th>Vulnerability</th><th>Capacity</th></tr></thead><tbody><tr><td><b>Place A</b> (low-lying delta, LIC)</td><td>4</td><td>5</td><td>2</td></tr><tr><td><b>Place B</b> (coastal city, HIC)</td><td>4</td><td>2</td><td>4</td></tr></tbody></table>', qs: [
+        { type: 'num', q: 'Calculate the risk score for Place A.', ans: 10, tol: 0, unit: '', f: '(4 × 5) ÷ 2 = <b>10</b>.' },
+        { type: 'num', q: 'Calculate the risk score for Place B.', ans: 2, tol: 0, unit: '', f: '(4 × 2) ÷ 4 = <b>2</b>.' },
+        { type: 'mc', q: 'The hazard is the same in both places. What does this show?', o: ['Vulnerability and capacity, not the hazard alone, explain why the risk is five times greater at A', 'The hazard is the only factor that matters, so both places face exactly the same risk', 'Place B faces more risk because cities have more buildings that can be damaged', 'Risk cannot be compared between places, because every cyclone is completely different'], c: 0, f: 'Same hazard, but risk is <b>5 times greater</b> at A because of higher vulnerability and lower capacity.' }] }, next); } }];
+  EXTRA[10] = [
+    { title: '📉 Data skills: the emissions gap', how: 'Compare current policies with the emissions pathways needed to meet the Paris Agreement goals.',
+      build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Global greenhouse gas emissions pathways', x0: 2020, x1: 2050, xticks: [2020, 2025, 2030, 2035, 2040, 2045, 2050], y0: 0, y1: 60, ystep: 10, minor: 2, legendBottom: true, xlab: 'Year', ylab: 'Emissions (GtCO₂e per year)',
+          series: [{ c: '#475569', label: 'Current policies', pts: [[2020, 55], [2030, 56], [2040, 55], [2050, 53]] }, { c: '#f59e0b', label: '2°C pathway', dash: '7 4', pts: [[2020, 55], [2030, 40], [2040, 29], [2050, 20]] }, { c: '#16a34a', label: '1.5°C pathway', pts: [[2020, 55], [2030, 31], [2040, 17], [2050, 8]] }] }),
+        cap: 'Approximate global greenhouse gas emissions pathways (based on IPCC AR6 and UNEP Emissions Gap reports).', qs: [
+        { type: 'num', q: 'Calculate the percentage cut in emissions needed from 2020 (55) to 2030 (31) on the 1.5°C pathway. Nearest whole number.', ans: 44, tol: 1, unit: '%', f: '(55 − 31) ÷ 55 × 100 = <b>44%</b> — close to the IPCC figure of about 43%.' },
+        { type: 'num', q: 'What is the <b>emissions gap</b> in 2030 between current policies (56) and the 1.5°C pathway (31)?', ans: 25, tol: 1, unit: 'GtCO₂e', f: '56 − 31 = <b>25 GtCO₂e</b> per year.' },
+        { type: 'mc', q: 'What does the gap tell us about the Paris Agreement?', o: ['Current pledges and policies are not enough to keep warming to 1.5°C', 'The 1.5°C goal will be met easily if countries carry on with current policies', 'Emissions must stay at today’s level until 2050 to meet the 1.5°C goal', 'The graph shows that the Paris Agreement has already reduced emissions by half'], c: 0, f: 'Current policies point to roughly 2.5–3°C of warming — the <b>ambition gap</b>.' }] }, next); } }];
+  EXTRA[11] = [
+    { title: '⚖️ Strength or limitation?', how: 'For evaluation questions you need both sides. Sort each statement.',
+      build: function (el, next) { sortGame(el, { zones: zonesFrom([['s', '✅ Strength', 'why it works'], ['l', '⚠️ Limitation', 'why it may not work']], ['zg', 'zr']), cards: [
+        { t: 'Grassroots movements such as Fridays for Future mobilise millions and shift public opinion', a: ['s'], why: 'Mass mobilisation raises awareness and political pressure.' },
+        { t: 'NGOs expose greenwashing and hold companies to account', a: ['s'], why: 'Scrutiny makes corporate claims more honest.' },
+        { t: 'Corporate science-based targets cut emissions across whole supply chains', a: ['s'], why: 'Large firms can make big, measurable cuts.' },
+        { t: 'Civil society cannot pass laws or enforce emissions targets', a: ['l'], why: 'Only governments can legislate and enforce.' },
+        { t: 'Corporate pledges are often voluntary and rely on cheap carbon offsets', a: ['l'], why: 'Voluntary targets and offsets may not lead to real cuts.' },
+        { t: 'Protests can lose public support if they are seen as disruptive', a: ['l'], why: 'Backlash can weaken a movement’s influence.' }] }, next); } }];
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  // type 'best': choose the answer that would score full marks; 'multi': select exactly the creditworthy points; 'num': calculation.
+  var GATES = {
+    1: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between weather and climate.', o: [
+          'Weather is the short-term state of the atmosphere at a place, such as today’s rainfall, whereas climate is the average of weather conditions over a long period, usually 30 years or more.',
+          'Climate is the average weather in a place, measured over a long period of time, usually around 30 years, using data such as temperature and rainfall from weather stations.',
+          'Weather is about hot or cold days, while climate is about global warming caused by people burning fossil fuels.',
+          'Weather is the day-to-day state of the atmosphere, such as rain or sunshine, whereas climate is the change in temperature caused by the enhanced greenhouse effect over the last 150 years.'], c: 0,
+        ms: 'A <b>distinguish</b> answer must make a clear difference between both terms (1 mark each): weather = short-term conditions; climate = long-term average (30+ years). Defining only one term scores 1 mark.' },
+      { type: 'multi', marks: 4, cmd: 'Outline', q: 'Outline two natural causes of climate change.', need: 3, items: [
+          { t: 'Milankovitch cycles — changes in Earth’s orbit, tilt and wobble alter the solar radiation received over tens of thousands of years', ok: true },
+          { t: 'Large volcanic eruptions release sulphur dioxide aerosols that reflect sunlight; Pinatubo (1991) cooled the Earth by about 0.5°C', ok: true },
+          { t: 'Variations in solar output, such as low sunspot activity during the Maunder Minimum (Little Ice Age)', ok: true },
+          { t: 'Burning fossil fuels increases the concentration of carbon dioxide in the atmosphere', ok: false },
+          { t: 'The hole in the ozone layer lets more heat in, warming the planet', ok: false },
+          { t: 'Earthquakes move the continents quickly and warm the oceans', ok: false }],
+        ms: 'Credit natural causes with a developed point: <b>Milankovitch cycles</b>, <b>volcanic aerosols</b>, <b>solar variability</b>. Fossil fuels are a human cause, and the ozone hole and earthquakes are misconceptions.' }],
+    2: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how the ice–albedo effect can amplify global warming.', o: [
+          'As temperatures rise, snow and sea ice melt, exposing darker ocean and land with a lower albedo. These surfaces absorb more solar radiation instead of reflecting it, which raises temperatures further and melts more ice — a positive feedback loop.',
+          'Ice and snow have a high albedo of about 0.8–0.9, so they reflect most incoming solar radiation back into space. As the climate warms, more snow falls in polar regions, increasing the area of ice and reflecting even more sunlight, which cools the planet — so the ice–albedo effect slows global warming.',
+          'As temperatures rise, Arctic sea ice melts and sea level rises. The larger area of ocean then absorbs more heat from the atmosphere, which raises temperatures further and melts more ice — a negative feedback loop.',
+          'Melting ice releases methane which is a greenhouse gas, so it causes more warming.'], c: 0,
+        ms: 'Full marks need the <b>chain</b>: warming → ice melts → lower albedo → more absorption → more warming (positive feedback). The second answer is only a definition (1 mark); the last describes a different feedback (permafrost).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Arctic September sea ice extent was 7.05 million km² in 1979 and 4.23 million km² in 2023. Calculate the percentage decrease. Give your answer to the nearest whole number.', ans: 40, tol: 0.6, unit: '%',
+        ms: '(7.05 − 4.23) ÷ 7.05 × 100 = 2.82 ÷ 7.05 × 100 = <b>40%</b>. 1 mark for the method, 1 for the answer.' }],
+    3: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between the natural greenhouse effect and the enhanced greenhouse effect.', o: [
+          'The natural greenhouse effect is the trapping of long-wave radiation by gases such as water vapour and CO₂, keeping Earth about 33°C warmer than it would be. The enhanced greenhouse effect is the extra warming caused by humans increasing greenhouse gas concentrations, e.g. by burning fossil fuels.',
+          'The natural greenhouse effect happens when gases such as water vapour, CO₂ and methane absorb incoming short-wave radiation from the Sun before it reaches the surface. The enhanced greenhouse effect is when these gases absorb even more short-wave radiation because of human activity, such as burning fossil fuels and cutting down forests.',
+          'The natural greenhouse effect keeps the Earth warm by trapping heat, while the enhanced greenhouse effect is caused by the hole in the ozone layer letting in more of the Sun’s heat, so temperatures rise.',
+          'The natural greenhouse effect traps short-wave radiation, while the enhanced effect traps ultraviolet radiation.'], c: 0,
+        ms: 'One mark for each side of the distinction: <b>natural</b> = gases trap long-wave radiation and keep Earth habitable (about 15°C rather than −18°C); <b>enhanced</b> = human-caused increases in gases trap extra heat.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Atmospheric CO₂ was 316.9 ppm in 1960 and 421.1 ppm in 2023. Calculate the mean annual increase, 1960–2023, to 1 decimal place.', ans: 1.65, tol: 0.06, unit: 'ppm per year',
+        ms: '421.1 − 316.9 = 104.2 ppm; 104.2 ÷ 63 years = <b>1.7 ppm per year</b> (accept 1.6–1.7).' }],
+    4: [
+      { type: 'best', marks: 4, cmd: 'Explain', q: 'Explain two reasons why global mean sea level is rising.', o: [
+          'Thermal expansion: as the oceans absorb heat, the water expands and takes up more volume, raising sea level. Melting land ice: glaciers and the Greenland and Antarctic ice sheets melt, and the meltwater flows into the oceans, adding extra water.',
+          'Thermal expansion: warmer water expands, so the same mass of ocean takes up more space and sea level rises. Melting ice: as the climate warms, floating Arctic sea ice and Antarctic ice shelves melt, and this meltwater is added to the ocean, making it the largest single cause of sea level rise today.',
+          'Melting Arctic sea ice adds extra water to the oceans, raising sea level. Also, glaciers on land are melting because of global warming, and the meltwater flows into rivers and then into the sea.',
+          'Ice is melting because of global warming, which is caused by burning fossil fuels and deforestation.'], c: 0,
+        ms: 'Two reasons, each identified (1) and explained (1): <b>thermal expansion</b> and <b>melting land ice</b>. Melting <i>sea</i> ice does not significantly raise sea level, because it is already floating.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline the causes and impacts of ocean acidification.', need: 3, items: [
+          { t: 'The oceans absorb about a quarter of the CO₂ released by human activity', ok: true },
+          { t: 'CO₂ reacts with seawater to form carbonic acid, lowering ocean pH from about 8.2 to 8.1', ok: true },
+          { t: 'Fewer carbonate ions make it harder for corals and shellfish to build skeletons and shells', ok: true },
+          { t: 'Acid rain from sulphur dioxide is the main cause of ocean acidification', ok: false },
+          { t: 'Melting sea ice dilutes the salt in seawater, making the ocean more acidic', ok: false },
+          { t: 'Warmer oceans absorb much more CO₂, so warming speeds up acidification', ok: false }],
+        ms: 'Credit: CO₂ absorption → carbonic acid → falling pH → fewer carbonate ions → impacts on calcifying organisms. Warmer water actually absorbs <b>less</b> CO₂.' }],
+    5: [
+      { type: 'best', marks: 2, cmd: 'Describe', q: 'Global temperature anomaly (relative to 1951–1980) was −0.03°C in 1960, +0.26°C in 1980, +0.39°C in 2000 and +1.17°C in 2023. Describe the trend.', o: [
+          'Global temperature has risen overall, from −0.03°C in 1960 to +1.17°C in 2023, a rise of 1.2°C. The rate of warming has increased, especially since 2000.',
+          'Global temperature has gone up because of the enhanced greenhouse effect.',
+          'Global temperature has risen because of more CO₂ from burning fossil fuels and deforestation, which strengthens the greenhouse effect and traps more long-wave radiation.',
+          'The temperature was −0.03°C in 1960, 0.26°C in 1980, 0.39°C in 2000 and 1.17°C in 2023.'], c: 0,
+        ms: '<b>Describe</b> = overall trend + data (with units) + a comment on the rate or anomalies. Explaining causes earns no marks, and listing every value without a trend is not a description.' },
+      { type: 'multi', marks: 3, cmd: 'Explain', q: 'Explain how climate change may increase the impacts of tropical cyclones.', need: 3, items: [
+          { t: 'Warmer sea surface temperatures provide more energy, so the strongest storms may become more intense', ok: true },
+          { t: 'Warmer air holds about 7% more water vapour per °C, so cyclones bring heavier rainfall and flooding', ok: true },
+          { t: 'Higher sea levels mean storm surges reach further inland', ok: true },
+          { t: 'Climate change will definitely make many more cyclones form in every ocean basin each year', ok: false },
+          { t: 'Tropical cyclones form over cold water, so warming will stop them forming', ok: false },
+          { t: 'Cyclones are caused by the hole in the ozone layer', ok: false }],
+        ms: 'The evidence points to greater <b>intensity</b>, rainfall and surge impacts. Changes in <b>frequency</b> are uncertain, so “definitely more cyclones” is not credited.' }],
+    6: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why coral reefs are vulnerable to climate change.', o: [
+          'Corals live close to their upper temperature limit, so a rise of only 1–2°C causes them to expel their algae (bleaching). Prolonged heat makes them starve and die. Ocean acidification also reduces the carbonate they need to build skeletons, so reefs cannot recover.',
+          'Coral reefs are vulnerable because warmer oceans hold more dissolved oxygen, which corals cannot tolerate, and because rising sea levels leave reefs too deep for sunlight to reach, so the algae inside them cannot photosynthesise and the corals slowly die over many decades.',
+          'Coral reefs are vulnerable because tourists damage them by standing on them, boats drop anchors on them and overfishing removes the fish that keep the algae under control, so the reefs die.',
+          'Corals bleach when the water gets warmer.'], c: 0,
+        ms: 'Full marks need developed explanation linked to climate change: <b>thermal stress → bleaching → death</b>, plus <b>acidification</b> or slow recovery. Tourism is not a climate change factor.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Mass bleaching occurred on the Great Barrier Reef in 1998, 2002, 2016, 2017, 2020, 2022 and 2024. Calculate the mean interval between events, to 1 decimal place.', ans: 4.33, tol: 0.06, unit: 'years',
+        ms: '7 events = 6 intervals. (2024 − 1998) ÷ 6 = 26 ÷ 6 = <b>4.3 years</b>.' }],
+    7: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'With reference to a named country, explain one way climate change threatens food security.', o: [
+          'In Bangladesh, sea level rise and storm surges push salt water into rice paddies in the low-lying delta. Salinisation reduces rice yields, and because most people depend on farming for food and income, food availability and access fall.',
+          'Climate change causes droughts and floods, which destroy crops, so people do not have enough food.',
+          'In Bangladesh, climate change will make the monsoon weaker, so there will be less flooding of the delta. This means farmers will lose the fertile silt deposited by floods each year, and without it rice yields will fall, so less food will be available and prices will rise across the country.',
+          'In Canada, warmer temperatures and longer growing seasons allow farmers to grow wheat further north, and CO₂ fertilisation increases yields, so food production rises.'], c: 0,
+        ms: 'Named place (1), impact (1) and developed link to food security (1). The Canada answer describes a benefit, not a threat.' },
+      { type: 'multi', marks: 2, cmd: 'Outline', q: 'Outline two possible positive impacts of climate change on agriculture.', need: 2, items: [
+          { t: 'Longer growing seasons in high-latitude countries such as Canada and Russia', ok: true },
+          { t: 'CO₂ fertilisation can increase yields of crops such as wheat and rice', ok: true },
+          { t: 'More frequent droughts mean farmers can grow drought-resistant crops', ok: false },
+          { t: 'Pests move away from farms as temperatures rise', ok: false },
+          { t: 'Sea level rise brings fertile sediment to low-lying farms', ok: false }],
+        ms: 'Credit: <b>longer growing seasons</b> at high latitudes and <b>CO₂ fertilisation</b>. In reality pests spread to new areas, and salt water damages farmland.' }],
+    8: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why climate change is an issue of climate justice.', o: [
+          'High-income countries such as the USA have produced most cumulative emissions, but low-income countries such as Bangladesh and small island states are often the most vulnerable. They have less money for adaptation, so those who contributed least suffer the greatest impacts.',
+          'Climate justice is about fairness: the countries with the most emissions today, such as China and India, should pay for all the damage caused by climate change, because emissions per person in these countries are now higher than in the USA or the UK, and they have the largest populations.',
+          'Climate justice means that all countries must cut their emissions by the same amount, because every country is affected by global warming and everyone should share the costs equally.',
+          'Rich countries have more emissions per person than poor countries.'], c: 0,
+        ms: 'Credit the <b>mismatch</b> between responsibility (cumulative or per-person emissions) and vulnerability or capacity, with examples.' },
+      { type: 'num', marks: 1, cmd: 'Calculate', q: 'CO₂ emissions per person are 14.9 tonnes in the USA and 0.6 tonnes in Bangladesh. How many times greater is the USA’s figure? Nearest whole number.', ans: 25, tol: 0.6, unit: 'times',
+        ms: '14.9 ÷ 0.6 = 24.8 ≈ <b>25 times</b>.' }],
+    9: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between exposure and vulnerability.', o: [
+          'Exposure is the presence of people, property or infrastructure in places that could be affected by a hazard, whereas vulnerability is how susceptible they are to harm, for example because of poverty or poor housing.',
+          'Exposure is how likely it is that people in a place will be harmed by a hazard because of poverty, poor housing or weak governance, whereas vulnerability is the presence of people and buildings in an area where hazards such as cyclones and floods occur.',
+          'Exposure and vulnerability both mean being in danger from climate change.',
+          'Exposure is how strong or severe a hazard is, for example the wind speed of a cyclone, whereas vulnerability is how often the hazard happens in that place, for example once every ten years.'], c: 0,
+        ms: 'Exposure = being <b>in harm’s way</b>; vulnerability = <b>susceptibility</b> to harm (social, economic or physical). One mark for each side.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Risk = (Hazard × Vulnerability) ÷ Capacity. Place A: H = 4, V = 5, C = 2. Place B: H = 4, V = 2, C = 4. How many times greater is the risk at Place A than at Place B?', ans: 5, tol: 0, unit: 'times',
+        ms: 'A = 20 ÷ 2 = 10; B = 8 ÷ 4 = 2; 10 ÷ 2 = <b>5 times</b>.' }],
+    10: [
+      { type: 'best', marks: 4, cmd: 'Distinguish', q: 'Distinguish between mitigation and adaptation, using an example of each.', o: [
+          'Mitigation reduces the causes of climate change by cutting greenhouse gas emissions or increasing sinks, e.g. replacing coal power with solar or wind. Adaptation reduces the impacts by adjusting to change, e.g. building sea walls or planting salt-tolerant rice.',
+          'Mitigation reduces greenhouse gas emissions, for example building sea walls to protect coastal cities from rising seas. Adaptation means adjusting to the impacts of climate change, for example a carbon tax on fossil fuels that encourages people to use public transport and renewable energy instead.',
+          'Mitigation means adjusting to the effects of climate change, for example building sea walls in Bangladesh, whereas adaptation means reducing greenhouse gas emissions, for example switching from coal to solar power.',
+          'Mitigation and adaptation are both ways that governments respond to climate change.'], c: 0,
+        ms: 'Definition (1) + example (1) for each. The second answer has definitions but no examples (2 marks); the third has them the wrong way round.' },
+      { type: 'multi', marks: 4, cmd: 'Evaluate', q: 'Evaluate the Paris Agreement (2015). Select the accurate points that would earn credit.', need: 3, items: [
+          { t: 'Almost every country set its own target (a Nationally Determined Contribution) — near-universal participation', ok: true },
+          { t: 'NDCs are not legally enforceable, so countries can miss their targets without penalty', ok: true },
+          { t: 'Current pledges put the world on track for about 2.5–3°C, above the 1.5°C goal', ok: true },
+          { t: 'The UN sets fixed, legally binding targets for every country', ok: false },
+          { t: 'Only developed countries have to reduce their emissions', ok: false },
+          { t: 'It has already halved global emissions since 2015', ok: false }],
+        ms: 'A good evaluation balances <b>strengths</b> (universal NDCs, a long-term goal, a five-yearly ratchet) with <b>limitations</b> (not enforceable, an ambition gap). Global emissions have not halved.' }],
+    11: [
+      { type: 'best', marks: 4, cmd: 'Examine', q: 'Examine the role of corporations in responding to climate change.', o: [
+          'Corporations can cut large amounts of emissions, e.g. by setting science-based targets and switching to renewable electricity across supply chains. However, many pledges are voluntary and rely on carbon offsets, and some firms greenwash, so their impact depends on regulation and scrutiny from civil society.',
+          'Corporations play a central role because the Paris Agreement legally requires them to cut their emissions to net zero by 2030. Companies that miss their targets are fined by the UN, which is why almost all large firms, including oil companies, have now stopped investing in fossil fuels altogether and switched entirely to renewables.',
+          'Corporations are very effective because many now advertise their products as eco-friendly and carbon neutral, and buying carbon offsets means their emissions no longer contribute to climate change.',
+          'Corporations cannot do anything about climate change; only governments can.'], c: 0,
+        ms: '<b>Examine</b> needs both strengths and limitations, with examples and a judgement. Advertising “eco-friendly” products may be <b>greenwashing</b>.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline evidence that a company’s climate action is genuine rather than greenwashing.', need: 3, items: [
+          { t: 'Its emissions data is independently audited and falls year on year', ok: true },
+          { t: 'It has science-based targets that include its supply chain emissions', ok: true },
+          { t: 'It has switched its own operations to renewable energy', ok: true },
+          { t: 'It labels products ‘eco-friendly’ without any certification', ok: false },
+          { t: 'It spends more on green adverts than on green projects', ok: false },
+          { t: 'It relies on cheap offsets while its emissions keep rising', ok: false }],
+        ms: 'Genuine action is <b>measurable, verified and covers the whole business</b>. Vague claims, adverts and offset-only strategies are classic greenwashing.' }]
+  };
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">IB-style question · Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">Which answer would score <b>full marks</b>?</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
 
   paintHud(); showMap();
 })();
