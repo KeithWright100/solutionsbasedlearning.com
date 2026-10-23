@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Development Quest — IGCSE Geography Development and Human Welfare Revision Game — SBL</title>
+<meta name="description" content="Edexcel IGCSE Geography revision game for Paper 2 Development and Human Welfare: 10 levels covering measuring development, GDP, HDI, Gini and corruption, the demographic transition model, population pyramids, causes of uneven development, Italy, aid and trade, and top-down and bottom-up projects in Nigeria and Kenya, with labelled diagrams, data skills, past paper checkpoint questions and an Edexcel Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#igcse-development" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Development Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 10 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-igcse-development-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '🌱', t: 'What Is Development?', d: 'Economic, social and political development, human welfare and the World Bank groups' },
+    { n: 2, z: 'A', emo: '💵', t: 'Measuring Development: GDP', d: 'GDP, GNI, PPP and other indicators' },
+    { n: 3, z: 'A', emo: '📊', t: 'HDI, Gini and Corruption', d: 'Composite indices, inequality and the CPI' },
+    { n: 4, z: 'B', emo: '📉', t: 'The Demographic Transition Model', d: 'Birth rates, death rates and the five stages' },
+    { n: 5, z: 'B', emo: '🔺', t: 'Population Pyramids', d: 'Reading pyramids with BSTAD and linking them to development' },
+    { n: 6, z: 'C', emo: '🌐', t: 'Causes of Uneven Development', d: 'Physical, historical, economic and political factors; dependency theory' },
+    { n: 7, z: 'C', emo: '🇮🇹', t: 'Case Study: Italy’s North–South Divide', d: 'Uneven development within a country' },
+    { n: 8, z: 'D', emo: '🤝', t: 'Reducing the Development Gap', d: 'Aid, trade, fair trade, debt relief and the SDGs' },
+    { n: 9, z: 'D', emo: '🚆', t: 'Case Study: Nigeria and Kenya', d: 'Top-down railway versus bottom-up WaterAid' },
+    { n: 10, z: 'X', emo: '👹', t: 'The Edexcel Examiner', d: 'Final boss: a 12-mark Discuss answer' }];
+  var ZONES = { A: ['Topic 01', 'Measuring development', '#16a34a'], B: ['Topic 02', 'Population and development', '#0284c7'], C: ['Topic 03', 'Uneven development', '#b45309'], D: ['Topic 04', 'Reducing the gap', '#db2777'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'meas', i: '📊', t: 'Measurement Expert', d: 'Complete Topic 01 (Levels 1–3)', ok: function () { return [1, 2, 3].every(isDone); } },
+    { id: 'pop', i: '🔺', t: 'Population Expert', d: 'Complete Topic 02 (Levels 4–5)', ok: function () { return [4, 5].every(isDone); } },
+    { id: 'uneven', i: '🌐', t: 'Inequality Expert', d: 'Complete Topic 03 (Levels 6–7)', ok: function () { return [6, 7].every(isDone); } },
+    { id: 'gap', i: '🤝', t: 'Gap Closer', d: 'Complete Topic 04 (Levels 8–9)', ok: function () { return [8, 9].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Past Paper Pro', d: 'Pass all 9 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the Edexcel Examiner', ok: function () { return isDone(10); } },
+    { id: 'champ', i: '🏆', t: 'Development Champion', d: 'All 10 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">Edexcel IGCSE Geography \u00B7 Paper 2 \u00B7 Development and Human Welfare</span>' +
+      '<h1>\uD83E\uDD1D Development Quest<br>Development and Human Welfare Revision</h1>' +
+      '<p>Work through all four topics \u2014 <b>Measuring development</b>, <b>Population and development</b>, <b>Uneven development</b> and <b>Reducing the gap</b> \u2014 one level per lesson, then face the <b>Edexcel Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all seven badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Development Champion!' : ' — reach 90% for Development Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — What is development? */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '🌱 Economic, social or political?', how: '<b>Development</b> is the process of change that improves people’s lives economically, socially and politically.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ec', '💰 Economic'], ['so', '🏥 Social'], ['po', '🗳️ Political']], ['zc1', 'zg', 'zc2']), cards: [
+          { t: 'A rise in GDP per capita', a: ['ec'], why: 'Growth in wealth.' },
+          { t: 'More jobs and higher wages in industry', a: ['ec'], why: 'Economic development.' },
+          { t: 'More children completing secondary school', a: ['so'], why: 'Education is social.' },
+          { t: 'More homes with access to clean water', a: ['so'], why: 'Social development.' },
+          { t: 'Greater gender equality', a: ['so'], why: 'Social progress.' },
+          { t: 'Free and fair elections', a: ['po'], why: 'Democracy.' },
+          { t: 'Freedom of speech and the rule of law', a: ['po'], why: 'Political development.' },
+          { t: 'Lower corruption in government', a: ['po'], why: 'Honest government.' }] }, next); } },
+      { title: '🔗 Which factor helps welfare?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['t', '📱 Technological'], ['c', '🎭 Cultural'], ['f', '🍲 Food security'], ['w', '💧 Water security']], ['zc2', 'zc4', 'zc1', 'zc3']), cards: [
+          { t: 'Mobile banking in Kenya lets people save and borrow', a: ['t'], why: 'Technology raises productivity.' },
+          { t: 'Mechanised farming increases crop yields', a: ['t'], why: 'Technology.' },
+          { t: 'Attitudes to family size and women’s roles', a: ['c'], why: 'Affect birth rates and who can work.' },
+          { t: 'Everyone always has enough safe, nutritious food', a: ['f'], why: 'Healthier people can learn and work.' },
+          { t: 'Reliable safe water reduces cholera and diarrhoea', a: ['w'], why: 'Health improves.' },
+          { t: 'Girls spend less time collecting water and can attend school', a: ['w'], why: 'Water security links to education.' }] }, next); } },
+      { title: '🌍 Which World Bank income group?', how: 'The World Bank groups countries by <b>GNI per capita</b>.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['h', '💎 High income'], ['um', '🟢 Upper-middle'], ['lm', '🟡 Lower-middle'], ['l', '🔴 Low income']], ['zc2', 'zg', 'zc4', 'zr']), cards: [
+          { t: 'UK and Japan', a: ['h'], why: 'High income.' },
+          { t: 'Saudi Arabia', a: ['h'], why: 'An oil-rich Gulf state.' },
+          { t: 'China and Brazil', a: ['um'], why: 'Upper-middle income.' },
+          { t: 'Thailand and Mexico', a: ['um'], why: 'Upper-middle income.' },
+          { t: 'India and Nigeria', a: ['lm'], why: 'Lower-middle income.' },
+          { t: 'Kenya and Vietnam', a: ['lm'], why: 'Lower-middle income.' },
+          { t: 'Niger and Chad', a: ['l'], why: 'Low income — the Sahel.' }] }, next); } },
+      { title: '🧠 Development check', build: function (el, next) { mcq(el, [
+        { q: 'What is human welfare?', o: ['The health, happiness and quality of life of people', 'The total value of goods a country exports each year', 'The number of people living in a country’s cities', 'The amount of money a government spends on its army'], c: 0, f: 'Basic needs met plus opportunities to improve life.' },
+        { q: 'How can a country become richer without its people’s welfare improving?', o: ['The new wealth may be held by a small elite instead of being shared', 'Richer countries always have worse health care than poorer countries', 'GDP only rises when everyone in the country earns exactly the same', 'Welfare cannot change, because it is fixed when a country is founded'], c: 0, f: 'Averages can hide inequality.' },
+        { q: 'Where are low-income countries mainly concentrated?', o: ['Sub-Saharan Africa, especially the Sahel', 'Western Europe and Scandinavia', 'North America and the Caribbean', 'East Asia, especially Japan and South Korea'], c: 0, f: 'Plus a few conflict-affected countries such as Afghanistan and Yemen.' }], next); } }]);
+  };
+
+  /* L2 — Measuring development: GDP */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '💵 Advantage or disadvantage of GDP?', how: '<b>GDP per capita</b> = the average value of goods and services produced per person in a year.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['a', '👍 Advantage'], ['d', '👎 Disadvantage']], ['zg', 'zr']), cards: [
+          { t: 'Data is collected for almost every country, every year', a: ['a'], why: 'Easy to compare.' },
+          { t: 'A single number that is easy to understand', a: ['a'], why: 'Simple.' },
+          { t: 'Wealth often pays for schools and hospitals', a: ['a'], why: 'Links to quality of life.' },
+          { t: 'It is an average, so it hides inequality', a: ['d'], why: 'Rich and poor are averaged together.' },
+          { t: 'It ignores the informal economy such as street selling', a: ['d'], why: 'Large in many developing countries.' },
+          { t: 'It says nothing about health, education or freedom', a: ['d'], why: 'Only economic.' },
+          { t: 'Activities that damage the environment still add to GDP', a: ['d'], why: 'Growth is not always good.' }] }, next); } },
+      { title: '📈 Higher or lower in more developed countries?', build: function (el, next) { flash(el, { yes: '⬆️ Higher', no: '⬇️ Lower', ky: 'h', kn: 'l', items: [
+          { t: 'Life expectancy', a: true, why: '80+ years in many HICs.' },
+          { t: 'Infant mortality rate', a: false, why: 'Under 5 per 1,000 in HICs.' },
+          { t: 'Literacy rate', a: true, why: 'Close to 100%.' },
+          { t: 'Maternal mortality rate', a: false, why: 'Better health care.' },
+          { t: 'Doctors per 1,000 people', a: true, why: 'Better access to health care.' },
+          { t: 'Fertility rate', a: false, why: 'Fewer children per woman.' }] }, next); } },
+      { title: '📊 Data skills: GDP per capita', how: 'Approximate GDP per capita (US$).',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'GDP per capita (approximate)', bars: [['USA', 85000, '#1d4ed8'], ['UK', 50000, '#3b82f6'], ['Thailand', 7500, '#16a34a'], ['Kenya', 2000, '#f59e0b'], ['Niger', 700, '#dc2626']], y0: 0, y1: 90000, ystep: 15000, minor: 5000, values: true, fmt: function (v) { return '$' + v.toLocaleString(); }, yfmt: function (v) { return '$' + v.toLocaleString(); }, xlab: 'Country', ylab: 'GDP per capita (US$)' }),
+          cap: 'Approximate recent values.', qs: [
+          { type: 'num', q: 'How many times larger is the UK’s GDP per capita than Kenya’s?', ans: 25, tol: 0, unit: 'times', f: '50,000 ÷ 2,000 = <b>25</b>.' },
+          { type: 'num', q: 'What is the range of GDP per capita shown, in US$?', ans: 84300, tol: 0, unit: 'US$', f: '85,000 − 700 = <b>$84,300</b>.' },
+          { type: 'mc', q: 'Why is GDP per capita (PPP) fairer for comparing countries?', o: ['It adjusts for the cost of living, because $1 buys more in some countries', 'It counts only the income of the richest 10% of people living in each country', 'It removes all of the money that people earn from working in factories', 'It converts all currencies into gold, so that inflation is ignored'], c: 0, f: 'Purchasing power parity.' }] }, next); } },
+      { title: '🧠 Measuring check', build: function (el, next) { mcq(el, [
+        { q: 'How is GNI different from GDP?', o: ['GNI also includes income earned abroad by a country’s people and businesses', 'GNI only includes income from farming and ignores all of the other industries', 'GNI measures health and education instead of income or production', 'GNI is the value of a country’s imports minus the value of its exports'], c: 0, f: 'The World Bank uses GNI per capita.' },
+        { q: 'Which countries show that high income does not always mean high political development?', o: ['Saudi Arabia and Qatar — high incomes but limited freedoms', 'Cuba and Sri Lanka — modest incomes but high life expectancy', 'Niger and Chad — low incomes and low life expectancy', 'Norway and Iceland — high incomes and very high HDI'], c: 0, f: 'One indicator is never enough.' }], next); } }]);
+  };
+
+  /* L3 — HDI, Gini and corruption */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🧮 Which index?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['hdi', '🧭 HDI'], ['gini', '⚖️ Gini coefficient'], ['cpi', '🕵️ Corruption Perceptions Index']], ['zg', 'zc1', 'zc4']), cards: [
+          { t: 'Combines life expectancy, schooling and GNI per capita', a: ['hdi'], why: 'Created by the UNDP in 1990.' },
+          { t: 'A score from 0 to 1, where above 0.800 is “very high”', a: ['hdi'], why: 'Iceland was top in the 2025 report (0.972).' },
+          { t: 'Measures inequality of income within a country', a: ['gini'], why: '0 = perfect equality; 1 = one person has everything.' },
+          { t: 'Worked out from a Lorenz curve', a: ['gini'], why: 'Gini = A ÷ (A + B).' },
+          { t: 'Published by Transparency International', a: ['cpi'], why: 'Every year.' },
+          { t: 'Scores from 0 (highly corrupt) to 100 (very clean)', a: ['cpi'], why: 'Denmark scored 89 in 2025.' }] }, next); } },
+      { title: '🏷️ Label the Lorenz curve', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_LORENZ, pins: PINS_LORENZ, cap: 'The bigger area A is, the more unequal the country.', labels: [
+          { t: 'Line of perfect equality', pin: 1 },
+          { t: 'Lorenz curve', pin: 2 },
+          { t: 'Area A — the gap between equality and reality', pin: 3 },
+          { t: 'Area B — below the Lorenz curve', pin: 4 },
+          { t: 'Birth rate', pin: null }] }, next); } },
+      { title: '📊 Data skills: comparing indices', how: 'HDI (2023) and CPI (2025) for selected countries.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Corruption Perceptions Index 2025', bars: [['Norway', 81, '#16a34a'], ['UK', 70, '#22c55e'], ['Italy', 53, '#facc15'], ['India', 39, '#f97316'], ['Thailand', 33, '#f97316'], ['Niger', 31, '#ef4444'], ['S. Sudan', 9, '#991b1b']], y0: 0, y1: 100, ystep: 20, minor: 5, values: true, xlab: 'Country', ylab: 'CPI score (100 = very clean)' }),
+          cap: 'Transparency International CPI 2025.', qs: [
+          { type: 'num', q: 'What is the range of CPI scores shown?', ans: 72, tol: 0, unit: '', f: '81 − 9 = <b>72</b>.' },
+          { type: 'mc', q: 'Norway has an HDI of 0.970 and a Gini of 0.28; Niger has an HDI of 0.419 and a Gini of 0.33. What does this show?', o: ['The Gini alone can mislead: a very poor country can look fairly “equal”', 'Niger is a much more developed country than Norway on every measure', 'The Gini and HDI always rise and fall together in every single country in the world', 'Norway is the most unequal country in the world according to the Gini'], c: 0, f: 'Use several indices together.' },
+          { type: 'mc', q: 'Why does corruption hold back development?', o: ['Money for schools and hospitals is stolen or wasted, and investors are put off', 'Corruption makes governments spend far more on schools and hospitals', 'Corruption only affects sport and has no effect on the rest of the national economy', 'Corrupt countries always receive more foreign investment than honest ones'], c: 0, f: 'Aid may not reach the people who need it.' }] }, next); } },
+      { title: '🧠 Index check', build: function (el, next) { mcq(el, [
+        { q: 'What is a limitation of the HDI?', o: ['It does not measure inequality, freedom, corruption or the environment', 'It only measures income and ignores health and education completely', 'It is only calculated for a handful of countries in Western Europe', 'It is a score from 0 to 1,000, which makes it hard to compare countries'], c: 0, f: 'It is still a national average.' },
+        { q: 'Which country is one of the most unequal in the world, with a Gini of about 0.63?', o: ['South Africa', 'Slovenia', 'Norway', 'The Slovak Republic'], c: 0, f: 'Slovakia and Slovenia are among the most equal (about 0.24).' }], next); } }]);
+  };
+
+  /* L4 — DTM */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '📖 Demographic terms', build: function (el, next) { sortGame(el, { zones: zonesFrom([['br', '👶 Birth rate'], ['fr', '🤰 Fertility rate'], ['imr', '🍼 Infant mortality rate'], ['ni', '➕ Natural increase']], ['zc1', 'zc4', 'zr', 'zg']), cards: [
+          { t: 'Live births per 1,000 people per year', a: ['br'], why: 'Birth rate.' },
+          { t: 'The average number of children born to each woman', a: ['fr'], why: 'About 2.1 is replacement level.' },
+          { t: 'Babies dying before their first birthday per 1,000 live births', a: ['imr'], why: 'A key development indicator.' },
+          { t: 'Birth rate minus death rate', a: ['ni'], why: 'Usually given as a %.' }] }, next); } },
+      { title: '🏷️ Label the DTM', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_DTM, pins: PINS_DTM, cap: 'The demographic transition model (DTM).', hint: 'Death rates fall before birth rates. Stage 5 is when the birth rate drops below the death rate.', labels: [
+          { t: 'Stage 1 — High fluctuating', pin: 1 },
+          { t: 'Stage 2 — Early expanding: death rate falls quickly', pin: 2 },
+          { t: 'Stage 3 — Late expanding: birth rate falls', pin: 3 },
+          { t: 'Stage 4 — Low fluctuating: both rates low', pin: 4 },
+          { t: 'Stage 5 — Declining: birth rate below death rate', pin: 5 },
+          { t: 'Birth rate', pin: 6 },
+          { t: 'Death rate', pin: 7 },
+          { t: 'Total population', pin: 8 },
+          { t: 'Gini coefficient', pin: null }] }, next); } },
+      { title: '🔢 Which DTM stage?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['s2', '2️⃣ Stage 2'], ['s3', '3️⃣ Stage 3'], ['s4', '4️⃣ Stage 4'], ['s5', '5️⃣ Stage 5']], ['zr', 'zc4', 'zc2', 'zc1']), cards: [
+          { t: 'Niger and Chad', a: ['s2'], why: 'High birth rate, falling death rate.' },
+          { t: 'Vaccinations and clean water make the death rate fall rapidly', a: ['s2'], why: 'Early expanding.' },
+          { t: 'Kenya and India', a: ['s3'], why: 'Late expanding.' },
+          { t: 'Contraception and educating women make the birth rate fall', a: ['s3'], why: 'Fewer children needed as infant mortality falls.' },
+          { t: 'UK and USA', a: ['s4'], why: 'Low fluctuating.' },
+          { t: 'Japan and Italy', a: ['s5'], why: 'Birth rate below death rate.' }] }, next); } },
+      { title: '🧠 DTM check', build: function (el, next) { mcq(el, [
+        { q: 'In which stages is natural increase largest?', o: ['Stages 2 and 3', 'Stages 1 and 5', 'Stages 4 and 5', 'Stage 1 only'], c: 0, f: 'The gap between birth and death rates is widest.' },
+        { q: 'Why does the birth rate stay high in stage 2 even as the death rate falls?', o: ['Families still need children for farm work and expect some to die young', 'Health care gets worse in stage 2, so many more children are born', 'Governments in stage 2 ban all forms of contraception by law', 'Women in stage 2 have the highest levels of education of any of the five stages'], c: 0, f: 'Attitudes change more slowly than health care.' }], next); } }]);
+  };
+
+  /* L5 — Population pyramids */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '📊 Data skills: Niger and Japan', how: 'Use <b>BSTAD</b>: Base, Sides, Top, Anomalies, Dependency. Always quote figures from the axes.',
+        build: function (el, next) { dataGame(el, { chart: twoPyramids(PYR_NE, PYR_JP), cap: 'Simplified pyramids based on UN estimates.', qs: [
+          { type: 'num', q: 'Niger: add the six bars for ages 0–14 (male 9.5, 7.7, 6.6; female 9.3, 7.5, 6.5). What % of the population is under 15?', ans: 47.1, tol: 0.1, unit: '%', f: '9.5 + 7.7 + 6.6 + 9.3 + 7.5 + 6.5 = <b>47.1%</b>.' },
+          { type: 'num', q: 'Japan: females aged 80+ are 5.6% and males aged 80+ are 3.0%. How many percentage points more women than men are aged 80+?', ans: 2.6, tol: 0.05, unit: 'percentage points', f: '5.6 − 3.0 = <b>2.6</b>. Women live longer.' },
+          { type: 'mc', q: 'Which DTM stage does Japan’s pyramid best match?', o: ['Stage 5 — narrow base, wide middle and top', 'Stage 2 — very wide base and triangular shape', 'Stage 1 — wide base and very narrow top', 'Stage 3 — base narrowing, wider middle'], c: 0, f: 'An ageing, shrinking population.' }] }, next); } },
+      { title: '🔍 What does it show?', how: 'Match each pyramid feature to what it tells you.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['b', '⬇️ Base'], ['s', '📐 Sides'], ['t', '⬆️ Top'], ['a', '❗ Anomaly']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'A wide base shows a high birth rate', a: ['b'], why: 'Many young children.' },
+          { t: 'A narrowing base shows a falling birth rate', a: ['b'], why: 'Fewer births each year.' },
+          { t: 'Steep, concave sides show a high death rate at all ages', a: ['s'], why: 'Few people survive to old age.' },
+          { t: 'A wide top shows high life expectancy', a: ['t'], why: 'An ageing population.' },
+          { t: 'Far more men than women aged 20–40 in Qatar', a: ['a'], why: 'Male migrant workers.' },
+          { t: 'A bulge caused by a baby boom', a: ['a'], why: 'An anomaly.' }] }, next); } },
+      { title: '🧒👵 Youthful or ageing population?', how: 'Does each country need this mainly because it has a <b>youthful</b> or an <b>ageing</b> population?',
+        build: function (el, next) { flash(el, { yes: '🧒 Youthful', no: '👵 Ageing', ky: 'y', kn: 'a', items: [
+          { t: 'More primary schools and teachers', a: true, why: 'Many children.' },
+          { t: 'Health care for mothers and babies', a: true, why: 'High birth rate.' },
+          { t: 'Pensions and care homes', a: false, why: 'Many older people.' },
+          { t: 'Migrant workers to fill jobs', a: false, why: 'A shrinking workforce.' },
+          { t: 'Millions of new jobs for school leavers', a: true, why: 'A large young workforce.' }] }, next); } },
+      { title: '🧠 Pyramid check', build: function (el, next) { mcq(el, [
+        { q: 'Maternal mortality is roughly 1 in 100 births in Nigeria but fewer than 1 in 10,000 in the UK. What does this mainly reflect?', o: ['Differences in health care, nutrition, clean water and education', 'Differences in the number of hospitals per square kilometre of desert', 'The UK having a much higher birth rate than Nigeria every year', 'Nigerian mothers being older than mothers in the United Kingdom'], c: 0, f: 'This is why maternal mortality is such a useful indicator.' },
+        { q: 'What is the dependency ratio?', o: ['The number of dependents (young and old) compared with the working population', 'The number of countries that depend on aid from the World Bank in a typical year', 'The share of a country’s food that it has to import from other countries', 'The number of children per woman needed to keep a population stable'], c: 0, f: 'Dependents are aged 0–14 and 65+.' }], next); } }]);
+  };
+
+  /* L6 — Causes of uneven development */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🌐 Why is development uneven?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['ph', '🏜️ Physical'], ['hi', '📜 Historical'], ['ec', '💰 Economic'], ['po', '🏛️ Social and political']], ['zc4', 'zc2', 'zc1', 'zr']), cards: [
+          { t: 'Landlocked countries such as Niger find trade harder and more expensive', a: ['ph'], why: 'No coastline or ports.' },
+          { t: 'Drought and desertification make farming difficult', a: ['ph'], why: 'Extreme climate.' },
+          { t: 'Tropical diseases such as malaria reduce people’s ability to work', a: ['ph'], why: 'A physical factor.' },
+          { t: 'Colonial powers took raw materials and drew borders that caused conflict', a: ['hi'], why: 'Colonialism.' },
+          { t: 'The slave trade removed millions of people from Africa', a: ['hi'], why: 'A historical factor.' },
+          { t: 'Reliance on low-value primary products such as cocoa, whose prices go up and down', a: ['ec'], why: 'Unfair terms of trade.' },
+          { t: 'Large debts to richer countries and banks', a: ['ec'], why: 'Repayments take money from schools.' },
+          { t: 'Civil war in South Sudan and Yemen', a: ['po'], why: 'Conflict destroys development.' },
+          { t: 'Corruption wastes money meant for development', a: ['po'], why: 'Weak governance.' }] }, next); } },
+      { title: '🔁 The cycle of poverty', build: function (el, next) { orderGame(el, ['Low incomes', 'Little tax and investment', 'Poor schools and hospitals', 'A low-skilled, unhealthy workforce', 'Low productivity keeps incomes low'], 'Tap the FIRST link.', next); } },
+      { title: '🍫 Dependency theory', how: 'Andre Gunder Frank (1960s): poorer countries are poor because of how they are linked to richer ones. Does each statement <b>support</b> dependency theory?',
+        build: function (el, next) { flash(el, { yes: '✅ Supports it', no: '❌ Challenges it', ky: 's', kn: 'c', items: [
+          { t: 'Ghana and Côte d’Ivoire grow most of the world’s cocoa but earn little of a chocolate bar’s value', a: true, why: 'Value is added in the core.' },
+          { t: 'Profits from transnational corporations flow back to richer countries', a: true, why: 'Periphery to core.' },
+          { t: 'Debt repayments flow from poor countries to rich banks', a: true, why: 'Continuing dependence.' },
+          { t: 'South Korea and Singapore became rich through education and industry', a: false, why: 'Dependency can be broken.' },
+          { t: 'China, Brazil and Thailand are closing the development gap', a: false, why: 'Emerging economies challenge the theory.' }] }, next); } },
+      { title: '🧠 Uneven development check', build: function (el, next) { mcq(el, [
+        { q: 'In dependency theory, what does the periphery supply to the core?', o: ['Cheap raw materials and labour', 'Expensive manufactured goods', 'Loans and development aid', 'Banking and financial services'], c: 0, f: 'The core sells manufactured goods back at higher prices.' },
+        { q: 'What is meant by the Global North and Global South?', o: ['A broad divide between richer countries and poorer countries', 'The northern and southern hemispheres, divided by the Equator', 'Two trade blocs that were set up by the United Nations in 1945', 'The richest and poorest regions inside each individual country'], c: 0, f: 'It is not a strict line on the map — Australia is in the “North”.' }], next); } }]);
+  };
+
+  /* L7 — Italy */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '🇮🇹 North or South?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['n', '🏭 The North'], ['s', '🌋 The South (Mezzogiorno)']], ['zc2', 'zc4']), cards: [
+          { t: 'The industrial triangle of Milan, Turin and Genoa', a: ['n'], why: 'Cars (Fiat), fashion, finance.' },
+          { t: 'Flat, fertile Po Valley and Alpine hydroelectric power', a: ['n'], why: 'Physical advantages.' },
+          { t: 'Close to Europe’s core markets in France, Switzerland and Germany', a: ['n'], why: 'Accessibility.' },
+          { t: 'Unemployment around 14% in 2023, about three times higher', a: ['s'], why: 'Youth unemployment is higher still.' },
+          { t: 'Mountainous Apennines, a drier climate and poorer soils', a: ['s'], why: 'Physical disadvantages.' },
+          { t: 'Earthquakes and volcanoes such as Vesuvius and Etna', a: ['s'], why: 'Natural hazards.' },
+          { t: 'Organised crime such as the Mafia and the ’Ndrangheta discourages investment', a: ['s'], why: 'Social and political factor.' }] }, next); } },
+      { title: '🔄 Cumulative causation', how: 'Why does the gap between regions <b>grow</b>?',
+        build: function (el, next) { orderGame(el, ['A core region such as Lombardy attracts investment and industry', 'New jobs attract skilled young workers from the South (brain drain)', 'The core earns more taxes and builds better infrastructure', 'Even more businesses choose the core, so the gap widens', 'The South loses skills and young people, making it harder to catch up'], 'Tap the FIRST link.', next); } },
+      { title: '🏛️ Did it reduce the gap?', how: 'The <b>Cassa per il Mezzogiorno</b> (1950–1984) spent government money on the South.',
+        build: function (el, next) { flash(el, { yes: '✅ Helped', no: '⚠️ Limited success', ky: 'y', kn: 'n', items: [
+          { t: 'New roads and motorways were built in the South', a: true, why: 'Better infrastructure.' },
+          { t: 'Large plants such as the Taranto steelworks created few linked jobs', a: false, why: '“Cathedrals in the desert”.' },
+          { t: 'Young graduates still leave for the North or abroad', a: false, why: 'The brain drain continues.' },
+          { t: 'Irrigation and land reform improved some farming', a: true, why: 'Some progress.' }] }, next); } },
+      { title: '🧠 Italy check', build: function (el, next) { mcq(el, [
+        { q: 'GDP per person in the South is roughly what share of the Centre-North level?', o: ['A little over half', 'About twice as high', 'Exactly the same', 'About one-tenth'], c: 0, f: 'Lombardy is roughly twice as wealthy as Calabria or Sicily.' },
+        { q: 'What is a “brain drain”?', o: ['Skilled and educated people leaving a region or country', 'Government money being wasted on large unused factories', 'Young children leaving school before the age of sixteen', 'Factories closing because machines have replaced workers'], c: 0, f: 'It weakens the region that loses its skilled people.' }], next); } }]);
+  };
+
+  /* L8 — Reducing the gap */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🤝 Which type of aid?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['bi', '🇬🇧➡️🇰🇪 Bilateral'], ['mu', '🏦 Multilateral'], ['ngo', '❤️ NGO'], ['ti', '🔗 Tied']], ['zc1', 'zc2', 'zg', 'zr']), cards: [
+          { t: 'The UK government gives money directly to Kenya', a: ['bi'], why: 'Government to government.' },
+          { t: 'Many governments fund projects through the World Bank', a: ['mu'], why: 'Through an international organisation.' },
+          { t: 'The UN and the EU fund a vaccination programme', a: ['mu'], why: 'Multilateral aid.' },
+          { t: 'WaterAid builds wells with money from public donations', a: ['ngo'], why: 'Voluntary aid.' },
+          { t: 'Aid that must be spent on goods from the donor country', a: ['ti'], why: 'Benefits donor businesses.' }] }, next); } },
+      { title: '⚖️ Positive or negative?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '👍 Positive'], ['n', '👎 Negative']], ['zg', 'zr']), cards: [
+          { t: 'Emergency aid saves lives quickly after a disaster', a: ['p'], why: 'Short-term relief.' },
+          { t: 'Fair trade pays farmers a guaranteed minimum price plus a premium', a: ['p'], why: 'Spent on schools and clean water.' },
+          { t: 'Debt relief frees money for schools and hospitals', a: ['p'], why: 'HIPC (1996) and MDRI (2005).' },
+          { t: 'Long-term aid can create dependency', a: ['n'], why: 'Countries may rely on donors.' },
+          { t: 'Tied aid can make the recipient pay more for unsuitable goods', a: ['n'], why: 'Benefits the donor.' },
+          { t: 'The SDGs are not legally binding and many targets are off track', a: ['n'], why: 'Limited enforcement.' },
+          { t: 'Fair trade is only a small share of world trade', a: ['n'], why: 'Limited reach.' }] }, next); } },
+      { title: '📊 Data skills: aid as a share of GNI', how: 'The UN target is for rich countries to give <b>0.7%</b> of GNI as aid.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'UK aid as a share of GNI', bars: [['UN target', 0.7, '#16a34a'], ['UK to 2020', 0.7, '#3b82f6'], ['UK from 2021', 0.5, '#f59e0b'], ['UK plan for 2027', 0.3, '#dc2626']], y0: 0, y1: 0.8, ystep: 0.2, minor: 0.1, values: true, fmt: function (v) { return v + '%'; }, yfmt: function (v) { return v.toFixed(1) + '%'; }, xlab: '', ylab: '% of GNI' }),
+          cap: 'UK aid spending as a share of gross national income.', qs: [
+          { type: 'num', q: 'A country’s GNI is £2,500 billion. How much aid, in £ billion, would meet the 0.7% target?', ans: 17.5, tol: 0.05, unit: '£ billion', f: '2,500 × 0.007 = <b>£17.5 billion</b>.' },
+          { type: 'num', q: 'By how many percentage points will UK aid have fallen from the 0.7% target to the planned 0.3%?', ans: 0.4, tol: 0.01, unit: 'percentage points', f: '0.7 − 0.3 = <b>0.4</b>.' },
+          { type: 'mc', q: 'Why might a donor government cut its aid?', o: ['Budgets are tight and some voters believe charity should begin at home', 'All poorer countries have now fully closed the development gap', 'The UN has banned rich countries from giving any more aid', 'Aid always makes the donor country poorer than the receiving country is'], c: 0, f: 'Views on aid differ between individuals, NGOs and governments.' }] }, next); } },
+      { title: '🧠 Strategies check', build: function (el, next) { mcq(el, [
+        { q: 'What is microfinance?', o: ['Small loans to people who cannot borrow from banks, so they can start businesses', 'Cancelling a country’s debts so that its government can spend much more on schools and health care', 'A tax on imports that protects a country’s farmers from competition', 'Large loans from the World Bank to build dams and national railways'], c: 0, f: 'Often used by women to start small businesses.' },
+        { q: 'How many Sustainable Development Goals are there, and when do they end?', o: ['17 goals, 2015–2030', '8 goals, 2000–2015', '10 goals, 1990–2020', '5 goals, 2020–2050'], c: 0, f: 'They replaced the eight Millennium Development Goals.' }], next); } }]);
+  };
+
+  /* L9 — Nigeria and Kenya */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '⬇️⬆️ Top-down or bottom-up?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['td', '⬇️ Top-down'], ['bu', '⬆️ Bottom-up']], ['zc1', 'zg']), cards: [
+          { t: 'Decided by governments, international organisations and large companies', a: ['td'], why: 'Top-down.' },
+          { t: 'Large and very expensive, such as dams, railways and ports', a: ['td'], why: 'Big infrastructure.' },
+          { t: 'High-tech, often built by foreign firms', a: ['td'], why: 'For example a Chinese contractor.' },
+          { t: 'Planned with and run by local communities, often with NGOs', a: ['bu'], why: 'Bottom-up.' },
+          { t: 'Small and low cost, such as wells, latrines and training', a: ['bu'], why: 'Local scale.' },
+          { t: 'Appropriate technology that local people can run and repair', a: ['bu'], why: 'Sustainable.' }] }, next); } },
+      { title: '🚆 Nigeria or 💧 Kenya?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['ng', '🚆 Lagos–Calabar railway, Nigeria'], ['ke', '💧 WaterAid, Kenya']], ['zc1', 'zc2']), cards: [
+          { t: 'A planned 1,402 km standard-gauge line with 22 stations', a: ['ng'], why: 'Top-down infrastructure.' },
+          { t: 'About $11–12 billion, mainly through foreign loans', a: ['ng'], why: 'Risk of debt.' },
+          { t: 'Built by the China Civil Engineering Construction Corporation', a: ['ng'], why: 'A large foreign company.' },
+          { t: 'Repeated delays and funding problems', a: ['ng'], why: 'Little progress by 2021.' },
+          { t: 'Hand pumps, rainwater harvesting and community latrines', a: ['ke'], why: 'Appropriate technology.' },
+          { t: 'School health clubs, for example at Kangemi School in Nairobi', a: ['ke'], why: 'Hygiene education.' },
+          { t: 'Funded by donations, fundraising and grants', a: ['ke'], why: 'A UK-based charity founded in 1981.' },
+          { t: 'Women and girls spend less time collecting water', a: ['ke'], why: 'Can attend school and work.' }] }, next); } },
+      { title: '⚖️ Strength or weakness?', how: 'For the <b>WaterAid</b> project in Kenya.',
+        build: function (el, next) { flash(el, { yes: '👍 Strength', no: '👎 Weakness', ky: 's', kn: 'w', items: [
+          { t: 'Low cost and local people can repair it', a: true, why: 'Appropriate technology.' },
+          { t: 'Community ownership makes it sustainable', a: true, why: 'Local people care for it.' },
+          { t: 'Reaches relatively few people', a: false, why: 'Small scale.' },
+          { t: 'Depends on donations', a: false, why: 'Funding may fall.' },
+          { t: 'Directly improves health and school attendance', a: true, why: 'Fewer water-borne diseases.' },
+          { t: 'Pumps can break if maintenance is not funded', a: false, why: 'Up to a third of pumps are broken at any time.' }] }, next); } },
+      { title: '🧠 Projects check', build: function (el, next) { mcq(el, [
+        { q: 'Why might the poorest people benefit little from the Lagos–Calabar railway?', o: ['Benefits may go mainly to businesses, ports and the oil industry', 'The railway will carry only the poorest people, free of charge', 'Railways have no effect on trade, jobs or the price of goods', 'The railway is being built entirely in the arid north of Nigeria'], c: 0, f: 'Land may also be taken from local people.' },
+        { q: 'What did Nigeria secure in March 2024?', o: ['$1.3 billion to complete a railway from Kano to Maradi in Niger', 'A new WaterAid programme for every school in the capital, Abuja', 'Full cancellation of all of its debts by the World Bank', 'Membership of the European Union’s single market'], c: 0, f: 'A CCECC-led group provides 85% of the funding.' }], next); } }]);
+  };
+
+  /* L10 — EDEXCEL EXAM BOSS (12-mark Discuss) */
+  var EXQ = [
+    { q: 'Discuss the view: “Improvements in human welfare are mainly driven by economic development.”', mk: 'Based on Edexcel June 2024 Paper 2, Q9(f) · 12 marks · Discuss',
+      C: 'Economic development can drive welfare, because higher incomes and taxes pay for schools, hospitals, clean water and infrastructure.',
+      E: 'For example, high-income countries such as the UK have life expectancy above 80 and infant mortality below 5 per 1,000, compared with about 60 per 1,000 in Niger.',
+      X: 'However, wealth does not always improve welfare: Saudi Arabia is rich but has limited freedoms, while Cuba and Sri Lanka have modest incomes but high life expectancy and literacy.',
+      J: 'Overall, economic development is an important driver, but welfare depends just as much on how wealth is shared and spent, so social and political factors matter too.',
+      D: ['Economic development always makes every person in a country equally rich.', 'Human welfare cannot be measured, so economic development has no effect on it.'] },
+    { q: 'Discuss the view: “Top-down projects are the most effective way to tackle the development gap between countries.”', mk: 'Based on Edexcel June 2022 Paper 2, Q9(f) · 12 marks · Discuss',
+      C: 'Top-down projects can be effective because they invest on a large scale and can transform a whole region’s economy and trade.',
+      E: 'Nigeria’s Lagos–Calabar coastal railway would link ports, oil and coastal cities along 1,402 km, cutting congestion and creating jobs.',
+      X: 'However, it costs about $11–12 billion in foreign loans, has suffered repeated delays, and may benefit businesses more than the poorest, whereas WaterAid’s low-cost hand pumps directly improve health in Kenya.',
+      J: 'Overall, top-down projects are effective for national growth, but bottom-up projects are often more effective for the poorest, so a combination is needed.',
+      D: ['Top-down projects are always cheap and never create any debt.', 'Bottom-up projects are planned by foreign companies without local people.'] },
+    { q: 'Discuss the view: “Uneven global development can be reduced most effectively through international aid.”', mk: 'Based on Edexcel June 2023 Paper 2R, Q9(g) · 12 marks · Discuss',
+      C: 'International aid can reduce uneven development by funding health, education and infrastructure that poorer countries cannot afford.',
+      E: 'Debt relief through the HIPC initiative and the MDRI cancelled debts for over 30 countries, freeing money for schools and hospitals.',
+      X: 'However, aid can create dependency, tied aid benefits donors, and aid is falling — the UK cut its aid from 0.7% to 0.5% of GNI — whereas fairer trade creates income without dependency.',
+      J: 'Overall, aid is most effective in emergencies and for basic services, but trade, investment and good governance are needed to close the gap in the long term.',
+      D: ['Every rich country gives far more than the 0.7% UN aid target.', 'International aid has no effect at all on health or education.'] },
+    { q: 'Discuss the view: “Demographic characteristics are the most important factors affecting economic development.”', mk: 'Based on Edexcel Summer 2021 Paper 2, Q9(f) · 12 marks · Discuss',
+      C: 'Demographic characteristics can strongly affect development, because a youthful population needs schools and jobs, while an ageing one needs pensions and care.',
+      E: 'Niger has a fertility rate of about 6.1 and about 48% of its population under 15, which puts pressure on schools, health care and jobs.',
+      X: 'However, other factors also matter: landlocked location, colonial history, reliance on primary products, debt and corruption all hold back development, as dependency theory suggests.',
+      J: 'Overall, demographic characteristics are important but are often a result of low development as well as a cause, so economic and political factors are at least as important.',
+      D: ['All countries have exactly the same population structure.', 'A high fertility rate always makes a country richer straight away.'] }];
+
+  LV[10] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Point (for the view)'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Counter-argument'], ['J', 'j', 'Conclusion / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the Edexcel Examiner', how: 'For each 12-mark <b>Discuss</b> question, tap a sentence card and then tap the box it belongs in: <b>Point</b>, <b>Evidence</b>, <b>Counter-argument</b> and <b>Conclusion</b>. Two cards are <b>traps</b> — leave them out! Discuss answers must look at both sides before reaching a judgement.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The Edexcel Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A balanced, evidenced argument with a judgement.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Point = supports the view; Evidence = specific facts or case study; Counter-argument = the other side (often starts “However”); Conclusion = an overall judgement. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var SVG_DTM = '<svg viewBox="0 0 680 420" role="img" aria-label="The demographic transition model">' +
+    '<rect width="680" height="420" fill="#fff"/>' +
+    '<rect x="70" y="40" width="120" height="330" fill="#fef3c7"/><rect x="190" y="40" width="120" height="330" fill="#fde68a"/><rect x="310" y="40" width="120" height="330" fill="#fef3c7"/><rect x="430" y="40" width="120" height="330" fill="#fde68a"/><rect x="550" y="40" width="110" height="330" fill="#fef3c7"/>' +
+    '<path d="M190 92 C 260 92, 300 96, 320 120 C 360 190, 400 290, 430 302 L 430 298 C 370 282, 300 268, 250 230 C 225 200, 205 130, 190 102 Z" fill="#fca5a5" opacity=".6"/>' +
+    '<path d="M70 85 C 100 80, 140 92, 190 90 C 240 88, 280 92, 320 120 C 360 190, 400 290, 430 302 C 470 312, 520 312, 550 310 C 590 318, 630 330, 660 334" fill="none" stroke="#2563eb" stroke-width="4"/>' +
+    '<path d="M70 95 C 85 70, 100 120, 115 85 C 130 60, 145 120, 160 88 C 172 70, 182 95, 190 102 C 205 130, 225 200, 250 230 C 300 268, 370 282, 430 298 C 470 304, 520 306, 550 306 C 590 304, 630 308, 660 312" fill="none" stroke="#dc2626" stroke-width="4"/>' +
+    '<path d="M70 360 C 150 358, 190 356, 230 345 C 300 320, 360 250, 430 190 C 480 150, 530 132, 560 128 C 600 126, 640 132, 660 138" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="8 5"/>' +
+    '<line x1="70" y1="40" x2="70" y2="370" stroke="#1e293b"/><line x1="70" y1="370" x2="660" y2="370" stroke="#1e293b"/>' +
+    '<text transform="translate(28,205) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Birth & death rates (per 1,000)</text>' +
+    '<text x="365" y="400" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Time →</text></svg>';
+  var PINS_DTM = [{ n: 1, x: 130, y: 22 }, { n: 2, x: 250, y: 22 }, { n: 3, x: 370, y: 22 }, { n: 4, x: 490, y: 22 }, { n: 5, x: 605, y: 22 }, { n: 6, x: 280, y: 70 }, { n: 7, x: 225, y: 170 }, { n: 8, x: 470, y: 160 }];
+
+  var SVG_LORENZ = '<svg viewBox="0 0 520 420" role="img" aria-label="A Lorenz curve">' +
+    '<rect width="520" height="420" fill="#fff"/>' +
+    '<path d="M70 360 L450 40 Q 330 330 70 360 Z" fill="#fde68a"/>' +
+    '<path d="M70 360 Q 330 330 450 40 L450 360 Z" fill="#bfdbfe"/>' +
+    '<line x1="70" y1="360" x2="450" y2="40" stroke="#16a34a" stroke-width="3"/>' +
+    '<path d="M70 360 Q 330 330 450 40" fill="none" stroke="#dc2626" stroke-width="4"/>' +
+    '<line x1="70" y1="40" x2="70" y2="360" stroke="#1e293b"/><line x1="70" y1="360" x2="450" y2="360" stroke="#1e293b"/>' +
+    '<text x="260" y="398" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">% of population (poorest to richest)</text>' +
+    '<text transform="translate(28,200) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">% of income</text>' +
+    '<g font-size="11" fill="#475569"><text x="70" y="376" text-anchor="middle">0</text><text x="450" y="376" text-anchor="middle">100</text><text x="62" y="44" text-anchor="end">100</text></g></svg>';
+  var PINS_LORENZ = [{ n: 1, x: 200, y: 250 }, { n: 2, x: 340, y: 218 }, { n: 3, x: 280, y: 222 }, { n: 4, x: 405, y: 310 }];
+
+  var PYR_NE = { title: 'Niger (simplified)', max: 10,
+    male: [9.5, 7.7, 6.6, 5.3, 4.2, 3.4, 2.8, 2.2, 1.8, 1.4, 1.1, 0.9, 0.7, 0.5, 0.3, 0.2, 0.1],
+    female: [9.3, 7.5, 6.5, 5.3, 4.3, 3.5, 2.8, 2.2, 1.7, 1.4, 1.1, 0.9, 0.7, 0.5, 0.35, 0.2, 0.15] };
+  var PYR_JP = { title: 'Japan (simplified)', max: 10,
+    male: [1.8, 2.0, 2.2, 2.2, 2.4, 2.5, 2.6, 2.9, 3.2, 3.9, 3.7, 3.2, 3.0, 3.0, 3.6, 2.6, 3.0],
+    female: [1.7, 1.9, 2.0, 2.1, 2.3, 2.4, 2.5, 2.8, 3.1, 3.8, 3.6, 3.2, 3.0, 3.2, 4.0, 3.1, 5.6] };
+
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  var GATES = {
+    1: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 2, Q9(a)(i)', q: 'What is meant by the term quality of life?', o: [
+          'a person’s well-being in terms of health and happiness', 'a person’s level of deprivation', 'a person’s cultural identity', 'a person’s type of employment and income level'], c: 0,
+        ms: '<b>A person’s well-being in terms of health and happiness.</b>' },
+      { type: 'best', marks: 2, cmd: 'Explain', q: 'Explain one way in which water security can improve human welfare.', o: [
+          'Reliable, safe water reduces diseases such as cholera and diarrhoea, so people are healthier, children miss less school and adults can work.',
+          'Reliable, safe water increases diseases such as cholera, so people stay at home and have more time to rest, which makes them much happier and more productive.',
+          'Clean water is good for people.',
+          'People need water to live.'], c: 0,
+        ms: '1 mark for a way (e.g. <b>less water-borne disease</b>, less time collecting water) and 1 for development (e.g. <b>healthier → can work/attend school</b>).' }],
+    2: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 2, Q9(a)(i)', q: 'Which is the definition of gross domestic product (GDP)?', o: [
+          'the total value of goods and services produced by a country in a year', 'a measure of development including health and income', 'a measure of improvement in inequality', 'the total value of all imports within a country in a year'], c: 0,
+        ms: '<b>The total value of goods and services produced by a country in a year.</b>' },
+      { type: 'best', marks: 2, cmd: 'State', src: 'Based on Edexcel June 2023 Paper 2R, Q9(b)', q: 'Give one reason why there are different measures of development.', o: [
+          'Some measures focus on only one part of development — for example, GDP is purely economic — so other measures are needed for health and education.',
+          'All measures of development measure exactly the same thing, so having several different measures makes no difference at all to the picture of development that they give.',
+          'Because development is complicated.',
+          'Different countries like different measures.'], c: 0,
+        ms: '1 mark for a reason and 1 for development: e.g. <b>single indicators only show one aspect</b> (1) → <b>GDP is economic only</b> / composite indices combine several (1).' },
+      { type: 'multi', marks: 2, cmd: 'State', src: 'Based on Edexcel June 2023 Paper 2R, Q9(d)', q: 'Give two quality of life indicators other than GDP per capita.', need: 2, items: [
+          { t: 'Literacy rate', ok: true },
+          { t: 'Infant mortality rate', ok: true },
+          { t: 'Total value of exports', ok: false },
+          { t: 'Number of motorways', ok: false }],
+        ms: 'Credit e.g. <b>literacy rate</b>, <b>infant mortality</b>, life expectancy, employment rate, access to safe water.' }],
+    3: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 2, Q9(a)(i)', q: 'Which indicator is used to calculate the Human Development Index (HDI)?', o: ['life expectancy', 'infant mortality rate', 'access to water', 'houses with electricity'], c: 0,
+        ms: '<b>Life expectancy.</b> The HDI uses life expectancy, years of schooling and GNI per capita.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 2, Q9(a)(ii)', q: 'Complete the sentence: the … can be used to measure inequality.', o: ['Gini-coefficient', 'adult literacy rate', 'rate of natural increase', 'dependency ratio'], c: 0,
+        ms: '<b>Gini coefficient.</b>' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 2, Q9(a)(ii)', q: 'What is meant by the term inequality?', o: ['unequal access to resources and services', 'poor access to resources and services', 'good access to resources and services', 'equal access to resources and services'], c: 0,
+        ms: '<b>Unequal access to resources and services.</b>' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2019 Paper 2, Q9(e)(i)', q: 'Thailand’s HDI was 0.495 in 1980 and 0.740 in 2016. Calculate the range.', ans: 0.245, tol: 0.006, unit: '',
+        ms: '0.740 − 0.495 = <b>0.245</b> (accept 0.25).' }],
+    4: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 2R, Q9(a)(ii)', q: 'Which is a reason for lower mortality rates in developed countries?', o: ['improved access to healthcare services', 'improved access to retail services', 'improved access to airports', 'improved access to legal services'], c: 0,
+        ms: '<b>Improved access to healthcare services.</b>' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 2R, Q9(a)(ii)', q: 'What is meant by the term fertility rate?', o: [
+          'the number of births per woman in a population', 'the number of live births per thousand of population per year', 'the number of deaths in a particular population', 'the number of births in the total population'], c: 0,
+        ms: '<b>The number of births per woman in a population.</b> Births per 1,000 per year is the birth rate.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 2, Q9(c)', q: 'Explain how fertility rates and population structures change as a country develops.', o: [
+          'Fertility rates fall, because women gain access to contraception and education and fewer children die young. The population structure changes from a wide-based pyramid to one with a narrower base and a wider top, as more people live to old age.',
+          'Fertility rates rise, because women have less education and more children are needed for farm work. The population structure changes from a narrow base to a very wide base, as fewer and fewer people manage to live to old age and life expectancy falls.',
+          'Fertility falls and the pyramid changes shape.',
+          'People have fewer babies.'], c: 0,
+        ms: '1 mark for each change and 1 for explanation: <b>fertility falls</b> (contraception, education, lower infant mortality); <b>structure becomes narrower at the base and wider at the top</b> (ageing).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2022 Paper 2R, Q9(e)(i)', q: 'Bolivia’s mortality rate fell from 12.6 per 1,000 in 1990 to 6.8 per 1,000 in 2018. Calculate the percentage decrease to one decimal place.', ans: 46.0, tol: 0.1, unit: '%',
+        ms: '(12.6 − 6.8) ÷ 12.6 × 100 = <b>46.0%</b>.' }],
+    5: [
+      { type: 'best', marks: 2, cmd: 'Suggest', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(b)(iv)', q: 'Suggest one reason why population structure can indicate a country’s level of development.', o: [
+          'Less developed countries have pyramid-shaped structures with wide bases, because birth rates are high and life expectancy is low.',
+          'More developed countries have pyramid-shaped structures with wide bases, because birth rates are high and life expectancy is low.',
+          'Pyramids are different shapes.',
+          'It shows how many people live there.'], c: 0,
+        ms: '1 mark for a reason and 1 for development: e.g. <b>developing countries: wide base</b> (high birth rate) / <b>developed: wider top</b> (longer life expectancy).' },
+      { type: 'best', marks: 2, cmd: 'Identify', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(b)(iii)', q: 'Give one reason why the UK’s population structure changed between 1980 and 2015.', o: [
+          'Life expectancy increased because of better health care, so there are more older people.',
+          'Life expectancy fell because of worse health care, so there are far fewer older people left.',
+          'More people.',
+          'The population changed.'], c: 0,
+        ms: '1 mark for a reason and 1 for development: e.g. <b>increased life expectancy</b> (1) due to <b>better health care</b> (1); falling infant mortality; migration.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2022 Paper 2, Q9(d)(i)', q: 'India’s mortality rate between 1990 and 2018 was highest at 10.9 per 1,000 and lowest at 7.2 per 1,000. Calculate the range to one decimal place.', ans: 3.7, tol: 0.05, unit: 'per 1,000',
+        ms: '10.9 − 7.2 = <b>3.7</b>.' }],
+    6: [
+      { type: 'best', marks: 1, cmd: 'Define', src: 'Based on Edexcel June 2022 Paper 2, Q9(b)(i)', q: 'What is meant by the term development gap?', o: [
+          'The difference in levels of development and standards of living between countries.',
+          'The time it takes a country to move from one stage of the DTM to the next.',
+          'The amount of money a rich country gives to a poor country as aid each year to support it.',
+          'The difference between a country’s birth rate and its death rate each year.'], c: 0,
+        ms: '1 mark: <b>the difference in levels of development / standards of living between countries (or regions)</b>.' },
+      { type: 'best', marks: 1, cmd: 'Define', src: 'Based on Edexcel June 2019 Paper 2R, Q9(b)(i)', q: 'What is meant by the term water security?', o: [
+          'Reliable access to enough safe water for health, livelihoods and sanitation.',
+          'Guarding reservoirs and rivers with soldiers so that no one else can use them.',
+          'The total amount of rain that falls on a country in an average year.',
+          'A country selling its spare water to neighbouring countries for profit.'], c: 0,
+        ms: '1 mark: <b>reliable availability of an acceptable quantity and quality of water</b> for health and livelihoods.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2024 Paper 2, Q9(d)(i)', q: 'Between 2015 and 2019, the number of people affected by food insecurity in Nigeria was highest at 120 million and lowest at 68 million. Calculate the range, in millions.', ans: 52, tol: 0, unit: 'million',
+        ms: '120 − 68 = <b>52 million</b>.' }],
+    7: [
+      { type: 'multi', marks: 2, cmd: 'State', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(c)', q: 'Give two reasons why development can be uneven within a country.', need: 2, items: [
+          { t: 'Differences in transport infrastructure', ok: true },
+          { t: 'Differences in physical landscape, such as mountains', ok: true },
+          { t: 'All regions receive exactly the same investment', ok: false },
+          { t: 'Every region has the same access to markets', ok: false }],
+        ms: 'Credit e.g. <b>transport infrastructure</b>, <b>physical landscape</b>, investment, provision of health and education, government policy.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 2R, Q9(e)', q: 'Explain two impacts of uneven development within a country.', o: [
+          'Young, skilled people leave poorer regions for the core, so the poorer regions lose workers and fall further behind, as in southern Italy. Unemployment is higher in poorer regions, so incomes are lower and more families depend on benefits.',
+          'Skilled people move from the core to the poorer regions, so the poorer regions quickly catch up with the core. Unemployment is lower in poorer regions, so incomes there are always higher than in the capital city, so families there are much better off.',
+          'Brain drain and unemployment.',
+          'Some areas are richer than others.'], c: 0,
+        ms: '1 mark for each impact and 1 for development, ×2: e.g. <b>brain drain</b> → regions fall further behind; <b>higher unemployment/poverty</b>; poorer housing and infrastructure.' }],
+    8: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 2, Q9(a)(ii)', q: 'Which organisation attempts to address the global development gap?', o: ['World Bank', 'United States Geological Survey', 'North American Free Trade Association (NAFTA)', 'North Atlantic Treaty Organisation (NATO)'], c: 0,
+        ms: '<b>World Bank.</b> The USGS studies science and hazards; NAFTA is a trade bloc; NATO is a security alliance.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(a)(ii)', q: 'Explain what is meant by the term international aid.', o: [
+          'Help given by one country or international organisation to another country, as money, goods, expertise or loans.',
+          'Money that a poor country pays to a rich country each year in return for protection by its army and navy, which it cannot provide for itself.',
+          'Help for poor people.',
+          'Money from charities.'], c: 0,
+        ms: '1 mark for <b>help given from one country/organisation to another</b> and 1 for development (e.g. <b>money, goods or loans</b>, may have conditions).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 2, Q9(d)', q: 'Explain how two international strategies have tried to reduce uneven development.', o: [
+          'Debt relief, such as the HIPC initiative, cancelled debts for over 30 countries, so money could be spent on schools and hospitals instead of repayments. Fair trade guarantees farmers a minimum price plus a premium, which communities spend on projects such as clean water.',
+          'Debt relief increased the debts of poor countries, so they had to cut spending on schools and hospitals. Fair trade pays farmers the lowest possible price, so communities have no money left for projects such as clean water, schools or health centres in their own villages and towns.',
+          'Aid and fair trade.',
+          'Countries help each other.'], c: 0,
+        ms: '1 mark for each strategy and 1 for explanation, ×2: e.g. <b>debt relief</b>, <b>fair trade</b>, official aid/loans, trade agreements, the SDGs.' }],
+    9: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(a)(i)', q: 'What is the main characteristic of top-down development?', o: [
+          'Usually involves government decisions.', 'Usually involves decisions at the local level.', 'Usually involves small amounts of funding.', 'Usually involves the ideas of local people.'], c: 0,
+        ms: '<b>Usually involves government decisions.</b>' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(a)(iii)', q: 'Which type of project could be created by a non-governmental organisation (NGO)?', o: [
+          'Improving water supplies in an informal settlement.', 'Large investments in high speed rail network.', 'Facilitating increases in trade between two national governments.', 'Large investments in national agricultural development.'], c: 0,
+        ms: '<b>Improving water supplies in an informal settlement.</b> The others are large, government-scale projects.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q9(c)', q: 'Explain one advantage and one disadvantage of top-down development projects.', o: [
+          'Advantage: large investment, such as Nigeria’s coastal railway, can transform trade and create jobs across a whole region. Disadvantage: projects funded by foreign loans can leave the country in debt, and the poorest people may not benefit.',
+          'Advantage: top-down projects are always small and cheap, so they never need loans from other countries. Disadvantage: they are planned only by local villagers, so they can never be scaled up to help a whole region of the country or bring in large-scale investment.',
+          'They are big but expensive.',
+          'They help the economy.'], c: 0,
+        ms: '1 mark for the advantage and 1 for development, and the same for the disadvantage: e.g. <b>large-scale investment/infrastructure</b>; <b>debt</b>, delays, corruption, local people displaced.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 2, Q9(d)', q: 'For a named developing or emerging country, explain one advantage and one disadvantage of a bottom-up development project.', o: [
+          'Kenya (WaterAid): an advantage is that hand pumps use appropriate technology that local people can repair, so the project is sustainable. A disadvantage is that it reaches relatively few people and depends on donations.',
+          'Kenya (WaterAid): an advantage is that it uses high-tech machinery built by foreign firms, so local people never need to repair it. A disadvantage is that it costs billions of dollars in foreign loans, leaving the country in serious debt.',
+          'Kenya: it is cheap but small.',
+          'It helps local people.'], c: 0,
+        ms: '1 mark for the advantage and 1 for development, and the same for the disadvantage, with a named country: e.g. <b>appropriate technology / community ownership</b>; <b>small scale / reliance on donations</b>.' }]
+  };
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'Exam-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">' + (G.marks === 1 ? 'Choose the <b>correct</b> answer.' : 'Which answer would score <b>full marks</b>?') + '</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

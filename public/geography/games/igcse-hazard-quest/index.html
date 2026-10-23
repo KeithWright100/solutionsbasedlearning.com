@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hazard Quest — IGCSE Geography Hazardous Environments Revision Game — SBL</title>
+<meta name="description" content="Edexcel IGCSE Geography revision game for Paper 1 Hazardous Environments: 13 levels covering hazards and vulnerability, plate tectonics, earthquakes and tsunamis, Japan 2011, Haiti 2010, volcanoes, Kīlauea 2018, tropical cyclones and Typhoon Haiyan, with labelled diagrams, data skills, past paper checkpoint questions and an Edexcel Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#igcse-hazards" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Hazard Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 13 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-igcse-hazard-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '⚠️', t: 'What Is a Hazard?', d: 'Hazards, disasters, vulnerability and risk' },
+    { n: 2, z: 'A', emo: '🌍', t: 'Structure of the Earth', d: 'Layers, plates, convection and continental drift' },
+    { n: 3, z: 'A', emo: '🧩', t: 'Plate Boundaries', d: 'Constructive, destructive, collision and conservative' },
+    { n: 4, z: 'B', emo: '📈', t: 'Earthquakes', d: 'Focus, epicentre, seismic waves and how quakes are measured' },
+    { n: 5, z: 'B', emo: '🌊', t: 'Earthquake Hazards and Tsunamis', d: 'Primary and secondary hazards and what affects the impact' },
+    { n: 6, z: 'B', emo: '🏗️', t: 'Earthquake Management', d: 'Preparation, responses and why people live in risky areas' },
+    { n: 7, z: 'B', emo: '🇯🇵', t: 'Case Study: Japan 2011', d: 'The Tōhoku earthquake and tsunami' },
+    { n: 8, z: 'B', emo: '🇭🇹', t: 'Case Study: Haiti 2010', d: 'A magnitude 7.0 earthquake in a low-income country' },
+    { n: 9, z: 'C', emo: '🌋', t: 'Volcanoes', d: 'Distribution, volcano types, hazards, the VEI and management' },
+    { n: 10, z: 'C', emo: '🔥', t: 'Case Study: Kīlauea 2018', d: 'A hotspot eruption in Hawai‘i' },
+    { n: 11, z: 'D', emo: '🌀', t: 'Tropical Cyclones', d: 'Formation, structure, the Saffir–Simpson scale and vulnerability' },
+    { n: 12, z: 'D', emo: '🇵🇭', t: 'Case Study: Typhoon Haiyan 2013', d: 'Impacts and responses in the Philippines' },
+    { n: 13, z: 'X', emo: '👹', t: 'The Edexcel Examiner', d: 'Final boss: Point, Evidence, Explain, Conclusion' }];
+  var ZONES = { A: ['Topic 01', 'Hazards and tectonics', '#7c2d12'], B: ['Topic 02', 'Earthquakes', '#dc2626'], C: ['Topic 03', 'Volcanoes', '#ea580c'], D: ['Topic 04', 'Tropical cyclones', '#0284c7'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'tect', i: '🌍', t: 'Tectonics Expert', d: 'Complete Topic 01 (Levels 1–3)', ok: function () { return [1, 2, 3].every(isDone); } },
+    { id: 'quake', i: '📈', t: 'Earthquake Expert', d: 'Complete Topic 02 (Levels 4–8)', ok: function () { return [4, 5, 6, 7, 8].every(isDone); } },
+    { id: 'volc', i: '🌋', t: 'Volcano Expert', d: 'Complete Topic 03 (Levels 9–10)', ok: function () { return [9, 10].every(isDone); } },
+    { id: 'storm', i: '🌀', t: 'Storm Chaser', d: 'Complete Topic 04 (Levels 11–12)', ok: function () { return [11, 12].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Past Paper Pro', d: 'Pass all 12 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the Edexcel Examiner', ok: function () { return isDone(13); } },
+    { id: 'champ', i: '🏆', t: 'Hazard Champion', d: 'All 13 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">Edexcel IGCSE Geography \u00B7 Paper 1 \u00B7 Hazardous Environments</span>' +
+      '<h1>\uD83C\uDF0B Hazard Quest<br>Hazardous Environments Revision</h1>' +
+      '<p>Work through all four topics \u2014 <b>Hazards and tectonics</b>, <b>Earthquakes</b>, <b>Volcanoes</b> and <b>Tropical cyclones</b> \u2014 one level per lesson, then face the <b>Edexcel Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all seven badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Hazard Champion!' : ' — reach 90% for Hazard Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — What is a hazard? */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '⚠️ Which type of hazard?', how: 'A <b>natural hazard</b> is a natural event that threatens people, property or the environment.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['t', '🌋 Tectonic'], ['a', '🌀 Atmospheric'], ['h', '🌊 Hydrological'], ['g', '⛰️ Geomorphological']], ['zr', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Earthquake', a: ['t'], why: 'Caused by plate movement.' },
+          { t: 'Volcanic eruption', a: ['t'], why: 'Caused by plate movement or hotspots.' },
+          { t: 'Tropical cyclone', a: ['a'], why: 'Caused by weather and climate.' },
+          { t: 'Drought', a: ['a'], why: 'An atmospheric hazard.' },
+          { t: 'River flood', a: ['h'], why: 'Water on or near the land.' },
+          { t: 'Coastal flood', a: ['h'], why: 'A hydrological hazard.' },
+          { t: 'Landslide', a: ['g'], why: 'Movement of land and slopes.' },
+          { t: 'Avalanche', a: ['g'], why: 'A geomorphological hazard.' }] }, next); } },
+      { title: '🧮 Hazard or disaster?', how: 'A hazard only becomes a <b>disaster</b> when it causes serious damage and loss of life that a community cannot cope with on its own.',
+        build: function (el, next) { flash(el, { yes: '💥 Disaster', no: '⚠️ Hazard event only', ky: 'd', kn: 'h', items: [
+          { t: 'A volcano erupts on an uninhabited island', a: false, why: 'Nobody is harmed, so it is a hazard event but not a disaster.' },
+          { t: 'A magnitude 7.0 earthquake destroys much of a capital city', a: true, why: 'Haiti 2010: the country could not cope alone.' },
+          { t: 'A tropical storm stays far out at sea and weakens', a: false, why: 'No people or property affected.' },
+          { t: 'A storm surge kills thousands and displaces millions', a: true, why: 'Typhoon Haiyan 2013.' },
+          { t: 'A small earthquake is felt but causes no damage', a: false, why: 'A hazard event, not a disaster.' }] }, next); } },
+      { title: '⚖️ Physical or human factor?', how: '<b>Risk = hazard × vulnerability ÷ capacity to cope</b>. Is each factor that makes a hazard more severe <b>physical</b> or <b>human</b>?',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '🌍 Physical factor'], ['h', '👥 Human factor']], ['zc3', 'zc1']), cards: [
+          { t: 'Magnitude and duration of the event', a: ['p'], why: 'A property of the hazard.' },
+          { t: 'A shallow earthquake focus', a: ['p'], why: 'Shallow quakes do more damage at the surface.' },
+          { t: 'Soft ground that shakes more and can liquefy', a: ['p'], why: 'Geology is physical.' },
+          { t: 'Living near steep slopes at risk of landslides', a: ['p'], why: 'Relief is a physical factor.' },
+          { t: 'Poorly built homes and no building codes', a: ['h'], why: 'A human factor.' },
+          { t: 'High population density near the hazard', a: ['h'], why: 'More people exposed.' },
+          { t: 'Weak warning systems and little education', a: ['h'], why: 'Less preparation.' },
+          { t: 'Corruption and a slow emergency response', a: ['h'], why: 'Governance matters.' }] }, next); } },
+      { title: '🧠 Hazard check', build: function (el, next) { mcq(el, [
+        { q: 'Which of these is NOT a natural hazard?', o: ['An oil spill from a damaged tanker ship', 'A landslide after heavy monsoon rain', 'A drought lasting for several years', 'A swarm of locusts destroying crops'], c: 0, f: 'An oil spill is a human-made (technological) hazard.' },
+        { q: 'Why did the 2010 Haiti earthquake (M7.0) kill far more people than the 2011 Japan earthquake (M9.0)?', o: ['Haiti was poorer, had no building codes and was much less prepared', 'The Haiti earthquake released far more energy than the Japan earthquake', 'Japan has no people living near its coast, so few people were exposed', 'Haiti’s earthquake happened in the middle of the ocean, far from land'], c: 0, f: 'Vulnerability, not just magnitude, decides the death toll.' }], next); } }]);
+  };
+
+  /* L2 — Structure of the Earth */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the Earth', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_EARTH, pins: PINS_EARTH, cap: 'The layers of the Earth (not to scale).', labels: [
+          { t: 'Crust — thin, solid rock: oceanic 5–10 km, continental 25–70 km', pin: 1 },
+          { t: 'Mantle — about 2,900 km of slowly flowing rock', pin: 2 },
+          { t: 'Outer core — liquid iron and nickel', pin: 3 },
+          { t: 'Inner core — solid iron and nickel, about 5,500°C', pin: 4 },
+          { t: 'Convection currents that drag the plates', pin: 5 },
+          { t: 'Eye — calm, sinking air', pin: null }] }, next); } },
+      { title: '🌊 Oceanic or continental crust?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['o', '🌊 Oceanic crust'], ['c', '🏔️ Continental crust']], ['zc2', 'zc4']), cards: [
+          { t: 'Thin: 5–10 km', a: ['o'], why: 'Oceanic crust is thin.' },
+          { t: 'Dense, so it sinks at subduction zones', a: ['o'], why: 'Denser than continental crust.' },
+          { t: 'Made of basalt and geologically young', a: ['o'], why: 'Constantly created and destroyed.' },
+          { t: 'Thick: 25–70 km', a: ['c'], why: 'Continental crust is thick.' },
+          { t: 'Lighter, so it is not subducted', a: ['c'], why: 'Less dense.' },
+          { t: 'Made mainly of granite and very old', a: ['c'], why: 'Some is billions of years old.' }] }, next); } },
+      { title: '🧩 Evidence for continental drift', how: 'In 1912 Alfred Wegener suggested the continents were once joined as <b>Pangaea</b>. Is each statement evidence that supports his theory?',
+        build: function (el, next) { flash(el, { yes: '✅ Evidence', no: '❌ Not evidence', ky: 'y', kn: 'n', items: [
+          { t: 'The coasts of South America and Africa fit together like a jigsaw', a: true, why: 'Jigsaw fit.' },
+          { t: 'Mesosaurus fossils are found in both South America and Africa', a: true, why: 'A freshwater reptile could not swim an ocean.' },
+          { t: 'Matching mountain ranges in North America, Scotland and Norway', a: true, why: 'Rock and mountain evidence.' },
+          { t: 'Coal, formed in tropical forests, is found in Antarctica', a: true, why: 'Climate evidence.' },
+          { t: 'Hurricanes form over warm oceans in late summer', a: false, why: 'Nothing to do with continental drift.' }] }, next); } },
+      { title: '🧠 Plates check', build: function (el, next) { mcq(el, [
+        { q: 'What do scientists now think is the most important force moving plates?', o: ['Slab pull — the cold, dense edge of a plate sinking at a subduction zone', 'The Moon’s gravity pulling the continents across the surface of the Earth each day', 'Strong winds blowing across the oceans and pushing the plates along', 'Earthquakes shaking the plates so hard that they slide downhill'], c: 0, f: 'Convection currents and ridge push also play a part.' },
+        { q: 'What is the lithosphere?', o: ['The crust and the rigid top of the mantle, broken into plates', 'The liquid outer core that creates the Earth’s magnetic field', 'The layer of the atmosphere where most of our weather happens', 'The solid inner core of iron and nickel at the Earth’s centre'], c: 0, f: 'Plates are pieces of lithosphere.' }], next); } }]);
+  };
+
+  /* L3 — Plate boundaries */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🧩 Which plate boundary?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['cn', '↔️ Constructive'], ['de', '➡️⬅️ Destructive'], ['co', '🏔️ Collision'], ['cs', '⇅ Conservative']], ['zc3', 'zr', 'zc4', 'zc2']), cards: [
+          { t: 'Plates move apart and magma rises to form new crust', a: ['cn'], why: 'Divergent boundary.' },
+          { t: 'Mid-Atlantic Ridge and Iceland', a: ['cn'], why: 'A constructive example.' },
+          { t: 'The denser oceanic plate subducts and melts', a: ['de'], why: 'Convergent boundary.' },
+          { t: 'The Pacific plate under Japan; the Nazca plate under the Andes', a: ['de'], why: 'Destructive examples.' },
+          { t: 'Two continental plates crumple into fold mountains', a: ['co'], why: 'Neither plate subducts.' },
+          { t: 'The Himalayas and the Nepal earthquake of 2015', a: ['co'], why: 'Indo-Australian and Eurasian plates.' },
+          { t: 'Plates slide past each other, stick, then suddenly slip', a: ['cs'], why: 'Transform boundary.' },
+          { t: 'The San Andreas Fault and Haiti', a: ['cs'], why: 'Conservative examples.' }] }, next); } },
+      { title: '🏷️ Label a destructive boundary', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_SUB, pins: PINS_SUB, cap: 'An oceanic plate subducting beneath a continental plate.', labels: [
+          { t: 'Dense oceanic plate', pin: 1 },
+          { t: 'Lighter continental plate', pin: 2 },
+          { t: 'Ocean trench', pin: 3 },
+          { t: 'Subduction zone: the plate sinks and melts', pin: 4 },
+          { t: 'Magma rises from the melting plate', pin: 5 },
+          { t: 'Explosive composite volcano', pin: 6 },
+          { t: 'Hotspot plume', pin: null }] }, next); } },
+      { title: '🌋 Volcanoes here?', how: 'Volcanoes need <b>magma</b>. Will volcanoes form at this boundary?',
+        build: function (el, next) { flash(el, { yes: '🌋 Volcanoes', no: '🚫 No volcanoes', ky: 'v', kn: 'n', items: [
+          { t: 'Constructive boundary', a: true, why: 'Falling pressure lets the mantle melt.' },
+          { t: 'Destructive (oceanic–continental) boundary', a: true, why: 'The subducting plate melts.' },
+          { t: 'Conservative boundary', a: false, why: 'No magma is created.' },
+          { t: 'Collision boundary', a: false, why: 'No subduction, so no magma.' },
+          { t: 'A hotspot in the middle of a plate', a: true, why: 'For example Hawai‘i.' }] }, next); } },
+      { title: '🧠 Boundary check', build: function (el, next) { mcq(el, [
+        { q: 'Why are there no volcanoes in the Himalayas?', o: ['Two continental plates collide, so neither plate subducts and no magma forms', 'The plates move apart so slowly that magma cools before it can reach the summit at the top', 'The mountains are too high and too cold for any magma to reach the surface', 'The Himalayas sit over a hotspot, which only produces earthquakes'], c: 0, f: 'Collision boundaries make fold mountains and earthquakes but no volcanoes.' },
+        { q: 'Why do the most powerful earthquakes happen at destructive boundaries?', o: ['Huge areas of plate lock together, so enormous stress builds up before they slip', 'The plates move apart so quickly that the crust is torn completely in half every single year', 'Volcanoes erupt so often that the ground is shaken by the falling ash', 'There is no friction there, so the plates slide past without stopping'], c: 0, f: 'Japan 2011 was a magnitude 9.0–9.1 subduction earthquake.' }], next); } }]);
+  };
+
+  /* L4 — Earthquakes */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the earthquake', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_QUAKE, pins: PINS_QUAKE, cap: 'Stress builds up where plates lock; when rock slips along a fault, energy is released.', labels: [
+          { t: 'Epicentre — the point on the surface directly above the focus', pin: 1 },
+          { t: 'Focus (hypocentre) — where the rock breaks underground', pin: 2 },
+          { t: 'Seismic waves spreading out', pin: 3 },
+          { t: 'Fault line', pin: 4 },
+          { t: 'Magma chamber', pin: null }] }, next); } },
+      { title: '📏 Magnitude or intensity?', how: 'The <b>moment magnitude scale</b> measures the energy released. The <b>Modified Mercalli scale</b> (I–XII) measures the effects and damage.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['m', '⚡ Moment magnitude scale'], ['i', '🏚️ Mercalli scale']], ['zc1', 'zc4']), cards: [
+          { t: 'Measures the energy released', a: ['m'], why: 'Magnitude.' },
+          { t: 'Each whole number is about 32 times more energy', a: ['m'], why: 'A logarithmic scale.' },
+          { t: 'Has replaced the older Richter scale', a: ['m'], why: 'Used by seismologists today.' },
+          { t: 'Based on observations of what people feel and the damage caused', a: ['i'], why: 'Intensity.' },
+          { t: 'Uses Roman numerals from I (not felt) to XII (total destruction)', a: ['i'], why: 'The Mercalli scale.' },
+          { t: 'The value varies from place to place for the same earthquake', a: ['i'], why: 'Intensity falls with distance.' }] }, next); } },
+      { title: '📊 Data skills: how much more energy?', how: 'Each whole number on the moment magnitude scale is about <b>32 times</b> more energy than the one below.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Energy released compared with a magnitude 7.0 earthquake', bars: [['M7.0 (Haiti 2010)', 1, '#f59e0b'], ['M8.0', 32, '#f97316'], ['M9.0 (Japan 2011)', 1024, '#dc2626']], y0: 0, y1: 1100, ystep: 200, minor: 50, values: true, xlab: 'Magnitude', ylab: 'Times the energy of M7.0' }),
+          cap: 'Approximate energy release, using 32 times per whole magnitude.', qs: [
+          { type: 'num', q: 'How many times more energy does a magnitude 9.0 release than a magnitude 7.0? (32 × 32)', ans: 1024, tol: 0, unit: 'times', f: '32 × 32 = <b>1,024</b> — roughly a thousand times.' },
+          { type: 'mc', q: 'Haiti 2010 (M7.0) killed far more people than Japan 2011 (M9.0). What does this show?', o: ['Vulnerability and preparation matter as much as the size of the earthquake', 'The moment magnitude scale must be wrong about the true size of these two events', 'Larger earthquakes always cause fewer deaths than smaller earthquakes', 'Japan’s earthquake happened at night, so nobody was in any buildings'], c: 0, f: 'Magnitude is only one factor in the impact.' }] }, next); } },
+      { title: '🧠 Earthquake check', build: function (el, next) { mcq(el, [
+        { q: 'Which seismic waves arrive first at a seismometer?', o: ['P-waves (primary)', 'S-waves (secondary)', 'Surface waves', 'Aftershock waves'], c: 0, f: 'Fast P-waves arrive first; S-waves and surface waves cause most damage.' },
+        { q: 'What was the largest earthquake ever recorded?', o: ['Magnitude 9.5 in Chile, 1960', 'Magnitude 7.0 in Haiti, 2010', 'Magnitude 6.9 in Hawai‘i, 2018', 'Magnitude 7.8 in Nepal, 2015'], c: 0, f: 'Japan 2011 (9.0–9.1) is among the five strongest ever recorded.' },
+        { q: 'Why do shallow-focus earthquakes usually cause more damage?', o: ['Less rock lies between the focus and the surface, so the shaking is stronger', 'Shallow earthquakes always have a far higher magnitude than deep ones', 'Deep earthquakes happen only under the oceans, far away from any people', 'Seismic waves from shallow earthquakes travel more slowly and last much longer'], c: 0, f: 'Shallow = less than 70 km deep.' }], next); } }]);
+  };
+
+  /* L5 — Earthquake hazards and tsunamis */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '1️⃣2️⃣ Primary or secondary hazard?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '1️⃣ Primary hazard'], ['s', '2️⃣ Secondary hazard']], ['zr', 'zc2']), cards: [
+          { t: 'Ground shaking', a: ['p'], why: 'Caused directly by the earthquake.' },
+          { t: 'Ground rupture along the fault', a: ['p'], why: 'Primary.' },
+          { t: 'Collapse of buildings, bridges and roads', a: ['p'], why: 'Caused directly by the shaking.' },
+          { t: 'Tsunamis', a: ['s'], why: 'Caused by the sea floor moving.' },
+          { t: 'Landslides', a: ['s'], why: 'Triggered by the shaking.' },
+          { t: 'Fires from broken gas pipes', a: ['s'], why: 'A result of primary damage.' },
+          { t: 'Liquefaction of wet, loose soil', a: ['s'], why: 'Buildings sink or tilt.' },
+          { t: 'Cholera from broken water and sewage pipes', a: ['s'], why: 'Disease follows damage to infrastructure.' }] }, next); } },
+      { title: '🌊 How a tsunami forms', build: function (el, next) { orderGame(el, ['An earthquake at a destructive boundary under the sea jerks the sea floor upwards', 'The whole column of water above is lifted, creating a series of waves', 'In deep ocean the waves are low but travel at up to 700–900 km/h', 'Near the coast the water gets shallower, so the waves slow down and grow much taller', 'The sea often retreats first (drawback), then the waves surge inland'], 'Tap the FIRST step.', next); } },
+      { title: '🔺 More or less damage?', how: 'Would each factor make the impact of an earthquake <b>worse</b>?',
+        build: function (el, next) { flash(el, { yes: '⬆️ Worse impact', no: '⬇️ Less impact', ky: 'w', kn: 'l', items: [
+          { t: 'A shallow focus close to a large city', a: true, why: 'Stronger shaking where many people live.' },
+          { t: 'Soft sediments and reclaimed land', a: true, why: 'Shake more and can liquefy.' },
+          { t: 'Earthquake-resistant buildings and strict codes', a: false, why: 'Buildings stay standing.' },
+          { t: 'Regular drills and public education', a: false, why: 'People react correctly.' },
+          { t: 'Striking at night when people are asleep indoors', a: true, why: 'Time of day matters.' },
+          { t: 'A rich country with fast rescue teams', a: false, why: 'Development reduces impact.' }] }, next); } },
+      { title: '🧠 Tsunami check', build: function (el, next) { mcq(el, [
+        { q: 'What is liquefaction?', o: ['Shaking makes wet, loose soil behave like a liquid, so buildings sink or tilt', 'Lava becomes so runny that it flows many kilometres from the volcano', 'Heavy rain from a tropical cyclone turns hillsides into fast mudflows', 'The sea retreats from the coast just before a tsunami wave finally reaches the land'], c: 0, f: 'A secondary hazard on soft sediments and reclaimed land.' },
+        { q: 'Why is the sea retreating from a beach a warning sign?', o: ['It is the drawback that often comes just before tsunami waves surge inland', 'It means a tropical cyclone is about to form directly over the beach', 'It shows that the tide is going out and the sea will be calm for many hours', 'It proves that a volcano is about to erupt somewhere under the beach'], c: 0, f: 'Recognising drawback has saved lives.' }], next); } }]);
+  };
+
+  /* L6 — Earthquake management */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🏗️ Make it earthquake-resistant', how: 'Will each feature help a building survive an earthquake?',
+        build: function (el, next) { flash(el, { yes: '✅ Helps', no: '❌ Does not help', ky: 'y', kn: 'n', items: [
+          { t: 'Base isolators — rubber pads that absorb ground movement', a: true, why: 'The building moves less than the ground.' },
+          { t: 'Cross-bracing on the walls', a: true, why: 'Stops the frame twisting.' },
+          { t: 'A steel frame that can bend', a: true, why: 'Flexes instead of snapping.' },
+          { t: 'A counterweight on the roof', a: true, why: 'Reduces swaying.' },
+          { t: 'Heavy concrete with no steel reinforcement', a: false, why: 'Brittle and collapses — as in Haiti.' },
+          { t: 'Shatterproof glass', a: true, why: 'Prevents injuries from falling glass.' }] }, next); } },
+      { title: '⏱️ Short-term or long-term response?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['s', '⏱️ Short-term (relief)'], ['l', '📅 Long-term (recovery)']], ['zr', 'zc2']), cards: [
+          { t: 'Search and rescue for trapped people', a: ['s'], why: 'Hours to days.' },
+          { t: 'Field hospitals and emergency medical care', a: ['s'], why: 'Immediate relief.' },
+          { t: 'Food, clean water, tents and blankets', a: ['s'], why: 'Emergency aid.' },
+          { t: 'Rebuilding homes and schools to higher standards', a: ['l'], why: 'Months to years.' },
+          { t: 'New building codes and warning systems', a: ['l'], why: 'Reducing future risk.' },
+          { t: 'Creating jobs and rebuilding the economy', a: ['l'], why: 'Recovery.' }] }, next); } },
+      { title: '🏠 Why live in a hazard zone?', how: 'Is each a reason why people continue to live in areas at risk?',
+        build: function (el, next) { flash(el, { yes: '✅ A reason', no: '❌ Not a reason', ky: 'y', kn: 'n', items: [
+          { t: 'Fertile volcanic soils', a: true, why: 'Rich in minerals.' },
+          { t: 'Jobs and services in big cities such as Tokyo and Istanbul', a: true, why: 'Economic pull.' },
+          { t: 'Poverty means people cannot afford to move', a: true, why: 'No choice.' },
+          { t: 'Big earthquakes are rare, so people think “it won’t happen to me”', a: true, why: 'Low perceived risk.' },
+          { t: 'Earthquakes can now be predicted to the exact hour', a: false, why: 'They cannot yet be predicted accurately.' }] }, next); } },
+      { title: '🧠 Management check', build: function (el, next) { mcq(el, [
+        { q: 'Why can preparation be more effective in some countries than others?', o: ['Richer countries can afford building codes, warning systems and regular drills', 'Poorer countries always have smaller earthquakes, so they need less preparation', 'Preparation works the same in every country, whatever its level of wealth', 'Richer countries are never located near plate boundaries or fault lines'], c: 0, f: 'Wealth, governance and education affect preparedness.' },
+        { q: 'Why is emergency aid important after an earthquake?', o: ['It meets short-term needs such as rescue, medical care, food and shelter', 'It rebuilds the entire country within one week of the earthquake happening', 'It stops aftershocks from happening by stabilising the fault line', 'It is only needed in high-income countries with modern hospitals'], c: 0, f: 'Especially in poorer countries that cannot cope alone.' }], next); } }]);
+  };
+
+  /* L7 — Japan 2011 */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '🇯🇵 What happened?', how: '11 March 2011, 14:46: magnitude <b>9.0–9.1</b>, about 70 km off the Tōhoku coast, focus about 30 km deep.',
+        build: function (el, next) { orderGame(el, ['The Pacific plate subducts beneath northern Japan at the Japan Trench', 'The locked plates suddenly slip and the sea floor is pushed up by several metres', 'Shaking lasts about six minutes along the Tōhoku coast', 'A tsunami up to about 40 m high floods land up to 10 km inland', 'Flooding causes meltdowns in three reactors at Fukushima Daiichi'], 'Tap the FIRST event.', next); } },
+      { title: '⚖️ Social, economic or environmental?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['so', '👥 Social'], ['ec', '💰 Economic'], ['en', '🌿 Environmental']], ['zc2', 'zc1', 'zg']), cards: [
+          { t: 'About 15,900 people killed directly; about 2,500 missing', a: ['so'], why: 'Most deaths were caused by the tsunami.' },
+          { t: 'Hundreds of thousands living in evacuation centres', a: ['so'], why: 'Homelessness.' },
+          { t: 'Damage of US$235–360 billion, the most expensive natural disaster in history', a: ['ec'], why: 'An economic impact.' },
+          { t: 'Car and electronics supply chains shut down', a: ['ec'], why: 'Global economic effects.' },
+          { t: 'Radiation released from Fukushima; a 20 km exclusion zone', a: ['en'], why: 'An environmental impact.' },
+          { t: 'The coastline sank by up to about 1 m', a: ['en'], why: 'Raising future flood risk.' }] }, next); } },
+      { title: '🛡️ How did Japan’s preparation help?', how: 'Did each measure reduce the impact in 2011?',
+        build: function (el, next) { flash(el, { yes: '✅ Reduced impact', no: '❌ Did not help', ky: 'y', kn: 'n', items: [
+          { t: 'The Earthquake Early Warning system alerted people seconds before shaking', a: true, why: 'Bullet trains stopped automatically.' },
+          { t: 'Strict building codes with base isolators and flexible frames', a: true, why: 'Most buildings survived the shaking itself.' },
+          { t: 'Annual drills on Disaster Prevention Day (1 September)', a: true, why: 'People knew what to do.' },
+          { t: 'Sea walls built for smaller tsunamis than the one in 2011', a: false, why: 'Many walls were overtopped.' },
+          { t: 'About 100,000 Self-Defence Force troops sent for search and rescue', a: true, why: 'A fast national response.' }] }, next); } },
+      { title: '🧠 Japan check', build: function (el, next) { mcq(el, [
+        { q: 'What caused most of the deaths in Japan in 2011?', o: ['The tsunami, which flooded coastal towns such as Minamisanriku', 'The collapse of tall buildings in Tokyo during the shaking', 'Lava flows from volcanoes that erupted soon after the earthquake', 'A tropical cyclone that struck Japan on the same afternoon'], c: 0, f: 'Japan’s buildings mostly withstood the shaking.' },
+        { q: 'Which was a long-term impact of the 2011 earthquake?', o: ['Japan shut down its nuclear power plants, increasing energy imports', 'Bullet trains stopped automatically as the first shaking was detected', 'Search and rescue teams dug survivors out of the rubble that week', 'Evacuation centres opened in schools on the night of the earthquake'], c: 0, f: 'The others were short-term responses.' }], next); } }]);
+  };
+
+  /* L8 — Haiti 2010 */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🇭🇹 Japan or Haiti?', how: 'Haiti, 12 January 2010: magnitude <b>7.0</b>, focus only about 13 km deep, about 25 km from Port-au-Prince.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['j', '🇯🇵 Japan 2011'], ['h', '🇭🇹 Haiti 2010']], ['zc2', 'zr']), cards: [
+          { t: 'Destructive boundary: Pacific plate subducting', a: ['j'], why: 'The Japan Trench.' },
+          { t: 'Conservative boundary: Caribbean plate sliding past the North American plate', a: ['h'], why: 'Enriquillo–Plantain Garden fault.' },
+          { t: 'Strict building codes strengthened in 1981 and 2000', a: ['j'], why: 'A high-income country.' },
+          { t: 'No building codes; cheap concrete without steel reinforcement', a: ['h'], why: 'The poorest country in the Americas.' },
+          { t: 'Damage greater than the country’s whole annual GDP', a: ['h'], why: 'About US$7.8–8.5 billion.' },
+          { t: 'Most expensive natural disaster in history', a: ['j'], why: 'US$235–360 billion.' },
+          { t: 'About 1.5 million people made homeless', a: ['h'], why: 'Relief camps lasted for years.' },
+          { t: 'A cholera outbreak killed nearly 10,000 people', a: ['h'], why: 'From October 2010.' }] }, next); } },
+      { title: '⏱️ Short-term or long-term?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['s', '⏱️ Short-term'], ['l', '📅 Long-term']], ['zr', 'zc2']), cards: [
+          { t: 'Local people searched the rubble with bare hands', a: ['s'], why: 'Before international teams arrived.' },
+          { t: 'The USA took over the airport, which became congested', a: ['s'], why: 'Aid was slow to reach people.' },
+          { t: 'Bodies buried in mass graves', a: ['s'], why: 'An immediate response.' },
+          { t: 'About 1.6 million people still in camps six months later', a: ['l'], why: 'Slow recovery.' },
+          { t: 'Less than half of the US$5.3 billion pledged had arrived by 2012', a: ['l'], why: 'Recovery was underfunded.' },
+          { t: 'Haiti’s first national building code (2012)', a: ['l'], why: 'Reducing future risk.' }] }, next); } },
+      { title: '📊 Data skills: comparing the two earthquakes', how: 'Use approximate figures.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Deaths (thousands)', bars: [['Japan 2011', 15.9, '#0284c7'], ['Haiti 2010 (low estimate)', 100, '#f97316'], ['Haiti 2010 (high estimate)', 220, '#dc2626']], y0: 0, y1: 250, ystep: 50, minor: 10, values: true, xlab: 'Earthquake', ylab: 'Deaths (thousands)' }),
+          cap: 'Haiti’s death toll is uncertain: estimates range from about 100,000 to over 220,000.', qs: [
+          { type: 'num', q: 'Using the low estimate, how many times more people died in Haiti than in Japan? (1 d.p.)', ans: 6.3, tol: 0.1, unit: 'times', f: '100 ÷ 15.9 = <b>6.3</b>.' },
+          { type: 'mc', q: 'Why is Haiti’s death toll given as a range?', o: ['Records were poor and the government’s figure of 316,000 is disputed', 'Nobody died in Haiti, so the figures are all predictions for the future', 'The earthquake lasted for several years, so deaths are still being counted', 'Japan counted Haiti’s deaths as well, which doubled the total figure'], c: 0, f: 'Uncertain data is common after disasters in low-income countries.' }] }, next); } },
+      { title: '🧠 Haiti check', build: function (el, next) { mcq(el, [
+        { q: 'Why did so many buildings collapse in Port-au-Prince?', o: ['There were no building codes, and concrete was used without steel reinforcement', 'The buildings were all made of wood, which burned in fires after the earthquake', 'The tsunami was over 40 m high and swept away the whole capital city', 'Every building had base isolators, which failed in the strong shaking'], c: 0, f: 'Poverty and weak regulation increased vulnerability.' },
+        { q: 'What did the 2021 magnitude 7.2 earthquake in Haiti show?', o: ['Building codes were still weakly enforced, so Haiti remained very vulnerable', 'Haiti had become completely earthquake-proof since the 2010 disaster', 'Earthquakes in Haiti only ever affect the capital, Port-au-Prince', 'Haiti had moved away from the plate boundary since the 2010 earthquake struck'], c: 0, f: 'Over 2,000 people died in 2021.' }], next); } }]);
+  };
+
+  /* L9 — Volcanoes */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the composite volcano', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_VOLC, pins: PINS_VOLC, cap: 'A composite (strato) volcano is steep-sided and built from layers of ash and lava.', labels: [
+          { t: 'Ash cloud', pin: 1 },
+          { t: 'Crater', pin: 2 },
+          { t: 'Main vent', pin: 3 },
+          { t: 'Secondary cone', pin: 4 },
+          { t: 'Lava flow', pin: 5 },
+          { t: 'Magma chamber', pin: 6 },
+          { t: 'Alternating layers of ash and lava', pin: 7 },
+          { t: 'Epicentre', pin: null }] }, next); } },
+      { title: '🌋 Shield or composite?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['s', '🛡️ Shield volcano'], ['c', '🗻 Composite volcano']], ['zc3', 'zr']), cards: [
+          { t: 'Wide with gentle slopes', a: ['s'], why: 'Runny lava spreads out.' },
+          { t: 'Runny basalt lava that flows a long way', a: ['s'], why: 'Low viscosity.' },
+          { t: 'Frequent but gentle (effusive) eruptions', a: ['s'], why: 'Gas escapes easily.' },
+          { t: 'Kīlauea and Mauna Loa', a: ['s'], why: 'Hawai‘i.' },
+          { t: 'Tall, steep and cone-shaped', a: ['c'], why: 'Sticky lava does not flow far.' },
+          { t: 'Thick, sticky andesite lava with lots of gas', a: ['c'], why: 'High viscosity.' },
+          { t: 'Less frequent but explosive eruptions', a: ['c'], why: 'Pressure builds up.' },
+          { t: 'Mount Fuji and Mount St Helens', a: ['c'], why: 'Destructive boundaries.' }] }, next); } },
+      { title: '☠️ Name the volcanic hazard', build: function (el, next) { sortGame(el, { zones: zonesFrom([['py', '🔥 Pyroclastic flow'], ['la', '🟤 Lahar'], ['as', '🌫️ Ash fall'], ['ga', '💨 Gases']], ['zr', 'zc4', 'zc1', 'zc2']), cards: [
+          { t: 'An avalanche of hot gas, ash and rock at over 100 km/h', a: ['py'], why: 'The deadliest volcanic hazard.' },
+          { t: 'A mudflow of ash mixed with rain or melted snow', a: ['la'], why: 'Armero, Colombia, 1985: about 23,000 deaths.' },
+          { t: 'Collapses roofs, ruins crops and grounds aircraft', a: ['as'], why: 'Ash fall.' },
+          { t: 'Sulfur dioxide that can suffocate people and cause acid rain', a: ['ga'], why: 'Volcanic gases.' }] }, next); } },
+      { title: '🧠 Volcano check', build: function (el, next) { mcq(el, [
+        { q: 'At which type of plate boundary do volcanoes NOT form?', o: ['conservative (transform)', 'constructive (divergent)', 'destructive (convergent)', 'hotspot'], c: 0, f: 'No magma is created at conservative boundaries.' },
+        { q: 'Which volcanic hazard buried the town of Armero, Colombia, in 1985?', o: ['A lahar', 'A lava flow', 'Ash fall', 'A tsunami'], c: 0, f: 'A mudflow from Nevado del Ruiz killed about 23,000 people.' },
+        { q: 'How did evacuation reduce deaths at Mount Pinatubo in 1991?', o: ['About 60,000 people were moved before the eruption, saving thousands of lives', 'Lava was cooled with sea water, so it stopped before it reached any nearby towns', 'The eruption was gentle, so there was no need for anyone to leave home', 'A sea wall was built around the volcano to stop the pyroclastic flows'], c: 0, f: 'Monitoring and evacuation save lives.' }], next); } }]);
+  };
+
+  /* L10 — Kīlauea 2018 */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '🔥 How a hotspot island chain forms', build: function (el, next) { orderGame(el, ['A plume of unusually hot mantle rises beneath the middle of the Pacific plate', 'It melts the base of the plate and magma rises to the surface', 'A shield volcano builds up over the hotspot', 'The plate moves north-west (about 7–10 cm a year), carrying the volcano away', 'A new volcano forms over the hotspot, leaving older, extinct islands to the north-west'], 'Tap the FIRST step.', next); } },
+      { title: '⚖️ Kīlauea 2018: impacts', how: 'From 3 May 2018, 24 fissures opened in <b>Leilani Estates</b> in the Puna district.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['so', '👥 Social'], ['ec', '💰 Economic'], ['en', '🌿 Environmental']], ['zc2', 'zc1', 'zg']), cards: [
+          { t: 'About 2,000 people evacuated', a: ['so'], why: 'A social impact.' },
+          { t: 'No deaths; about 24 people injured', a: ['so'], why: 'Including 23 on a tour boat hit by a lava bomb.' },
+          { t: 'Over 700 homes destroyed', a: ['ec'], why: 'Many had no insurance.' },
+          { t: 'Recovery cost over US$800 million', a: ['ec'], why: 'New roads over the lava.' },
+          { t: 'The national park closed for months, so tourism fell', a: ['ec'], why: 'Lost income.' },
+          { t: 'Lava covered about 35 km² of land', a: ['en'], why: 'An environmental impact.' },
+          { t: 'Green Lake boiled away and Kapoho Bay filled with lava', a: ['en'], why: 'Landscape change.' },
+          { t: 'About 875 acres of new land created', a: ['en'], why: 'Lava reached the sea.' }] }, next); } },
+      { title: '🏠 Why live beside Kīlauea?', how: 'Is each a reason people live near the volcano?',
+        build: function (el, next) { flash(el, { yes: '✅ A reason', no: '❌ Not a reason', ky: 'y', kn: 'n', items: [
+          { t: 'Land in the lava zones was sold cheaply', a: true, why: 'Affordable homes.' },
+          { t: 'Fertile volcanic soils for papaya and flowers', a: true, why: 'Farming.' },
+          { t: 'Effusive eruptions are well monitored, so people expect to escape', a: true, why: 'Low risk to life.' },
+          { t: 'Geothermal energy from the hot rock', a: true, why: 'Energy resource.' },
+          { t: 'Kīlauea never erupts, so the risk is zero', a: false, why: 'It erupted almost continuously from 1983 to 2018.' }] }, next); } },
+      { title: '🧠 Kīlauea check', build: function (el, next) { mcq(el, [
+        { q: 'What is a hotspot?', o: ['A plume of hot mantle that creates volcanoes away from plate boundaries', 'A place where two plates slide past each other and create frequent earthquakes', 'An area of warm ocean water where tropical cyclones begin to form', 'The point on the surface directly above where an earthquake starts'], c: 0, f: 'Hawai‘i is about 3,000 km from the nearest plate boundary.' },
+        { q: 'Why did nobody die in the 2018 eruption?', o: ['The eruption was effusive and monitored, so people were evacuated in time', 'The lava was cold, so it could not damage any homes or roads at all', 'Nobody lived anywhere near Kīlauea, so the whole area was completely empty', 'A sea wall diverted all of the lava straight into the Pacific Ocean'], c: 0, f: 'The USGS Hawaiian Volcano Observatory monitors Kīlauea.' }], next); } }]);
+  };
+
+  /* L11 — Tropical cyclones */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the tropical cyclone', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_TC, pins: PINS_TC, cap: 'Warm, moist air rises, cools and condenses, releasing heat that powers the storm.', labels: [
+          { t: 'Eye — calm, sinking air', pin: 1 },
+          { t: 'Eyewall — strongest winds and heaviest rain', pin: 2 },
+          { t: 'Warm, moist air spirals inwards', pin: 3 },
+          { t: 'Air flows out at the top', pin: 4 },
+          { t: 'Warm ocean of at least 26.5°C', pin: 5 },
+          { t: 'Magma chamber', pin: null }] }, next); } },
+      { title: '🌡️ Needed for formation?', how: 'Is each condition needed for a tropical cyclone to form?',
+        build: function (el, next) { flash(el, { yes: '✅ Needed', no: '❌ Not needed', ky: 'y', kn: 'n', items: [
+          { t: 'Sea surface temperature of at least 26.5°C', a: true, why: 'Warm water to a depth of about 50–60 m.' },
+          { t: 'At least 5° from the Equator', a: true, why: 'So the Coriolis effect can make it spin.' },
+          { t: 'Low wind shear', a: true, why: 'Strong shear tears the storm apart.' },
+          { t: 'Moist, unstable air that rises rapidly', a: true, why: 'Condensation releases latent heat.' },
+          { t: 'A large area of high pressure', a: false, why: 'Cyclones are areas of very LOW pressure.' },
+          { t: 'An undersea earthquake', a: false, why: 'That causes tsunamis, not cyclones.' }] }, next); } },
+      { title: '📏 Saffir–Simpson scale', how: 'Category 1: 119–153 km/h · 2: 154–177 · 3: 178–208 · 4: 209–251 · 5: 252 km/h or more.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Sustained wind speeds of four storms', bars: [['Storm A', 140, '#facc15'], ['Storm B', 195, '#f97316'], ['Storm C', 230, '#ef4444'], ['Haiyan 2013', 280, '#7f1d1d']], y0: 0, y1: 300, ystep: 50, minor: 10, values: true, xlab: 'Storm', ylab: 'Wind speed (km/h)' }),
+          cap: 'Storms A–C are example data; Haiyan’s sustained winds were about 280 km/h.', qs: [
+          { type: 'num', q: 'What category was Storm B?', ans: 3, tol: 0, unit: '', f: '195 km/h is in the 178–208 range: <b>category 3</b>.' },
+          { type: 'num', q: 'How much faster were Haiyan’s winds than the minimum for category 5?', ans: 28, tol: 0, unit: 'km/h', f: '280 − 252 = <b>28 km/h</b>.' },
+          { type: 'mc', q: 'Why do tropical cyclones lose energy when they reach land?', o: ['They are cut off from the warm, moist ocean air that powers them', 'The land is so much hotter than the sea that the storm overheats', 'Mountains add extra moisture, which makes the clouds too heavy to move', 'The Coriolis effect stops working completely over any area of land'], c: 0, f: 'Less evaporation means less latent heat; friction also slows the winds.' }] }, next); } },
+      { title: '🧠 Cyclone check', build: function (el, next) { mcq(el, [
+        { q: 'What is a tropical cyclone called in the north-west Pacific?', o: ['A typhoon', 'A hurricane', 'A tornado', 'A monsoon'], c: 0, f: 'Hurricanes in the Atlantic and north-east Pacific; cyclones in the Indian Ocean.' },
+        { q: 'How does the Coriolis effect affect tropical cyclones?', o: ['The Earth’s rotation deflects moving air, making the storm spin', 'It warms the ocean surface to above 26.5°C so the storm can form', 'It pushes all tropical cyclones directly towards the Equator', 'It creates high pressure at the centre of the storm, forming the eye'], c: 0, f: 'This is why cyclones do not form within 5° of the Equator.' },
+        { q: 'Which hazard from a tropical cyclone usually causes the most deaths?', o: ['The storm surge — a rise in sea level pushed onshore by low pressure and winds', 'Hailstones the size of footballs that fall from the eyewall clouds', 'Lightning strikes from the calm, cloudless air in the very centre of the eye of the storm', 'Volcanic eruptions that are triggered by the very low air pressure'], c: 0, f: 'Haiyan’s surge was over 5 m in Tacloban.' }], next); } }]);
+  };
+
+  /* L12 — Typhoon Haiyan */
+  LV[12] = function (root) {
+    stages(root, [
+      { title: '🌀 Haiyan’s track', build: function (el, next) { orderGame(el, ['Haiyan forms over the warm western Pacific in early November 2013', 'It moves west over water above 30°C with low wind shear', 'It intensifies rapidly into a category 5 super typhoon', 'It makes landfall at Guiuan, Eastern Samar, on 8 November with winds of about 280 km/h', 'It crosses the Visayas, including Tacloban, then continues to Vietnam'], 'Tap the FIRST event.', next); } },
+      { title: '⏱️ Short-term or long-term impact?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['s', '⏱️ Short-term'], ['l', '📅 Long-term']], ['zr', 'zc2']), cards: [
+          { t: 'About 6,300 people killed, most by a storm surge over 5 m', a: ['s'], why: 'An immediate impact.' },
+          { t: 'Tacloban airport, power and water supplies destroyed', a: ['s'], why: 'Immediate damage.' },
+          { t: 'Looting and shortages of food and water', a: ['s'], why: 'In the days after landfall.' },
+          { t: 'About 4.1 million people displaced, many for months or years', a: ['l'], why: 'Slow rebuilding.' },
+          { t: 'Millions of coconut trees destroyed, which take years to regrow', a: ['l'], why: 'Farmers lost their income.' },
+          { t: 'Jobs and schooling disrupted', a: ['l'], why: 'Long-term social impacts.' }] }, next); } },
+      { title: '🇵🇭 Why is the Philippines vulnerable?', how: 'Does each factor make the Philippines <b>more vulnerable</b>?',
+        build: function (el, next) { flash(el, { yes: '⬆️ More vulnerable', no: '⬇️ Less vulnerable', ky: 'm', kn: 'l', items: [
+          { t: 'Over 7,000 islands with long, low-lying coastlines in the typhoon path', a: true, why: 'Physical exposure.' },
+          { t: 'Many people live in light, poorly built homes on the coast', a: true, why: 'Human vulnerability.' },
+          { t: 'Mangroves removed from the coast', a: true, why: 'Less protection from storm surges.' },
+          { t: 'Many people in 2013 did not understand the term “storm surge”', a: true, why: 'Warnings were not acted on.' },
+          { t: 'New storm-surge warnings, shelters and “build back better” homes', a: false, why: 'These reduce vulnerability.' }] }, next); } },
+      { title: '🧠 Haiyan check', build: function (el, next) { mcq(el, [
+        { q: 'Why do people still live in coastal areas at risk from typhoons?', o: ['Fishing and farming livelihoods depend on the coast, and many cannot afford to move', 'Typhoons never reach the coast, so the coastline is the safest place for families to live', 'The government pays everyone to live on the coast for at least ten years', 'The coast is the only place in the Philippines where houses can be built'], c: 0, f: 'Poverty, livelihoods and family ties keep people at risk.' },
+        { q: 'Which is a long-term impact of a tropical cyclone?', o: ['Farmers lose income for years because coconut trees take years to regrow', 'Strong winds blow roofs off houses as the eyewall passes overhead', 'A storm surge floods the city within an hour of the storm making landfall', 'Rescue teams search for survivors in the rubble on the first day'], c: 0, f: 'The others are short-term.' }], next); } }]);
+  };
+
+  /* L13 — EDEXCEL EXAM BOSS */
+  var EXQ = [
+    { q: 'Analyse possible reasons why some countries are more vulnerable to the impact of earthquakes.', mk: 'Based on Edexcel June 2023 Paper 1, Q3(h) · 8 marks · Analyse',
+      C: 'Some countries are more vulnerable because their level of development affects how well buildings, warnings and emergency services protect people.',
+      E: 'Haiti’s magnitude 7.0 earthquake in 2010 killed over 100,000 people, while Japan’s far stronger magnitude 9.0 earthquake in 2011 killed about 15,900.',
+      X: 'Haiti had no building codes and used concrete without steel reinforcement, so buildings collapsed, whereas Japan’s base isolators and drills meant most buildings survived the shaking.',
+      J: 'Overall, human factors such as wealth and preparation matter more than magnitude, although physical factors such as a shallow focus near a capital city made Haiti’s impact worse.',
+      D: ['Countries far from plate boundaries are always the most vulnerable to earthquakes.', 'Japan was more vulnerable because it has no warning systems or building codes.'] },
+    { q: 'Analyse the reasons why people continue to live in areas prone to volcanic eruptions.', mk: 'Based on Edexcel June 2023 Paper 1R, Q3(g) · 8 marks · Analyse',
+      C: 'People continue to live near volcanoes mainly because the economic benefits outweigh the risk they perceive.',
+      E: 'Around Kīlauea, land in the Puna lava zones was sold cheaply, and volcanic soils support papaya and flower farms.',
+      X: 'Because Kīlauea’s eruptions are effusive and closely monitored, people expect to escape in time, so the risk to life feels low even though over 700 homes were lost in 2018.',
+      J: 'Therefore the main reason is that people judge the risk to their lives as low, but this is less true for explosive composite volcanoes, where evacuation is essential.',
+      D: ['People live near volcanoes because volcanoes never erupt more than once.', 'Volcanic soils are completely infertile, so nobody farms near volcanoes.'] },
+    { q: 'Analyse the short- and long-term impacts of a tropical cyclone.', mk: 'Edexcel-style · 8 marks · Analyse',
+      C: 'Tropical cyclones cause severe short-term loss of life and damage, but their long-term economic impacts can be just as serious.',
+      E: 'Typhoon Haiyan (2013) killed about 6,300 people, mostly through a storm surge over 5 m high in Tacloban, and displaced about 4.1 million people.',
+      X: 'In the long term, millions of coconut trees were destroyed and take years to regrow, so farming families lost their income and many lived in temporary shelters for years.',
+      J: 'Overall, the short-term impacts were the most deadly, but the long-term impacts lasted longer and fell hardest on the poorest people.',
+      D: ['Tropical cyclones only affect high-income countries with large cities.', 'Haiyan was a weak category 1 storm that caused very little damage.'] },
+    { q: 'Analyse the use of hazard, vulnerability and risk mapping in reducing the impact of earthquakes.', mk: 'Based on Edexcel June 2019 Paper 1, Q3(g) · 8 marks · Analyse',
+      C: 'Hazard and risk maps reduce the impact of earthquakes by showing planners where the danger is greatest and where people are most vulnerable.',
+      E: 'After 2010, Haiti added new seismic monitoring stations and hazard mapping, while Japan uses hazard maps to plan tsunami evacuation routes and sea walls.',
+      X: 'Maps let governments keep hospitals and schools off unstable ground and target building codes and drills at the highest-risk areas, so fewer people are exposed.',
+      J: 'However, maps are only effective if they are acted on: in Haiti, weak enforcement meant the 2021 earthquake still killed over 2,000 people.',
+      D: ['Hazard maps can predict the exact date and time of the next earthquake.', 'Risk maps stop earthquakes from happening along mapped faults.'] }];
+
+  LV[13] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Point'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Explain / Develop'], ['J', 'j', 'Conclusion / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the Edexcel Examiner', how: 'For each 8-mark <b>Analyse</b> question, tap a sentence card and then tap the box it belongs in: <b>Point</b>, <b>Evidence</b>, <b>Explain</b> and <b>Conclusion</b>. Two cards are <b>traps</b> — leave them out! Top-level answers use specific evidence and reach a supported conclusion.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The Edexcel Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A developed, evidenced paragraph with a conclusion.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Point = your main idea; Evidence = specific facts or case study; Explain = how/why it links; Conclusion = an overall judgement. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var MK = '<defs><marker id="mB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0f3a5c"/></marker><marker id="mR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#dc2626"/></marker><marker id="mW" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#fff"/></marker></defs>';
+  var SVG_EARTH = '<svg viewBox="0 0 640 400" role="img" aria-label="The structure of the Earth">' + MK + '<rect width="640" height="400" fill="#f8fafc"/>' +
+    '<path d="M60 380 A260 260 0 0 1 580 380 Z" fill="#78350f"/>' +
+    '<path d="M72 380 A248 248 0 0 1 568 380 Z" fill="#f97316"/>' +
+    '<path d="M170 380 A150 150 0 0 1 470 380 Z" fill="#fbbf24"/>' +
+    '<path d="M245 380 A75 75 0 0 1 395 380 Z" fill="#fef3c7"/>' +
+    '<g stroke="#7c2d12" stroke-width="2.5" fill="none" marker-end="url(#mB)"><path d="M155 350 Q 140 250 230 175"/><path d="M485 350 Q 500 250 410 175"/></g></svg>';
+  var PINS_EARTH = [{ n: 1, x: 140, y: 199 }, { n: 2, x: 320, y: 180 }, { n: 3, x: 320, y: 268 }, { n: 4, x: 320, y: 350 }, { n: 5, x: 168, y: 262 }];
+
+  var SVG_SUB = '<svg viewBox="0 0 680 330" role="img" aria-label="A destructive plate boundary">' + MK + '<rect width="680" height="330" fill="#e0f2fe"/>' +
+    '<rect x="0" y="150" width="680" height="180" fill="#fdba74"/>' +
+    '<rect x="0" y="110" width="330" height="40" fill="#38bdf8"/>' +
+    '<path d="M0 150 L300 150 Q 340 160 380 230 L 420 300 L 380 300 L 345 235 Q 320 190 290 185 L0 185 Z" fill="#475569"/>' +
+    '<path d="M330 150 L330 110 L 420 110 L 470 60 L 520 110 L 680 110 L 680 230 L 420 230 Q 380 180 330 150 Z" fill="#a16207"/>' +
+    '<path d="M455 75 L470 60 L485 75 Z" fill="#dc2626"/><path d="M470 60 Q 465 30 480 10" stroke="#64748b" stroke-width="6" fill="none" opacity=".6"/>' +
+    '<path d="M462 225 Q 455 150 470 70" stroke="#dc2626" stroke-width="5" fill="none"/>' +
+    '<ellipse cx="455" cy="230" rx="30" ry="12" fill="#dc2626"/>' +
+    '<rect x="0" y="300" width="680" height="30" fill="#fdba74"/>' +
+    '<g stroke="#0f3a5c" stroke-width="3" marker-end="url(#mB)"><line x1="120" y1="168" x2="210" y2="168"/><line x1="640" y1="170" x2="560" y2="170"/></g>' +
+    '<path d="M312 150 L346 150 L346 176 Z" fill="#0369a1"/></svg>';
+  var PINS_SUB = [{ n: 1, x: 60, y: 168 }, { n: 2, x: 600, y: 140 }, { n: 3, x: 322, y: 128 }, { n: 4, x: 395, y: 262 }, { n: 5, x: 500, y: 232 }, { n: 6, x: 510, y: 60 }];
+
+  var SVG_QUAKE = '<svg viewBox="0 0 640 340" role="img" aria-label="Focus, epicentre and seismic waves">' + MK + '<rect width="640" height="340" fill="#f8fafc"/>' +
+    '<rect x="0" y="90" width="640" height="250" fill="#d6b88b"/><rect x="0" y="80" width="640" height="12" fill="#65a30d"/>' +
+    '<g fill="#475569"><rect x="140" y="50" width="22" height="30"/><rect x="170" y="40" width="18" height="40"/><rect x="460" y="55" width="26" height="25"/></g>' +
+    '<line x1="250" y1="340" x2="370" y2="80" stroke="#7c2d12" stroke-width="4" stroke-dasharray="10 5"/>' +
+    '<g fill="none" stroke="#dc2626" stroke-width="2" opacity=".8"><circle cx="300" cy="230" r="30"/><circle cx="300" cy="230" r="60"/><circle cx="300" cy="230" r="95"/><circle cx="300" cy="230" r="130"/></g>' +
+    '<circle cx="300" cy="230" r="8" fill="#7f1d1d"/><path d="M290 80 L300 66 L310 80 Z" fill="#7f1d1d"/>' +
+    '<line x1="300" y1="92" x2="300" y2="222" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="4 4"/></svg>';
+  var PINS_QUAKE = [{ n: 1, x: 330, y: 56 }, { n: 2, x: 330, y: 244 }, { n: 3, x: 420, y: 300 }, { n: 4, x: 245, y: 318 }];
+
+  var SVG_VOLC = '<svg viewBox="0 0 640 380" role="img" aria-label="Cross-section of a composite volcano">' + MK + '<rect width="640" height="380" fill="#e0f2fe"/>' +
+    '<ellipse cx="320" cy="50" rx="110" ry="34" fill="#64748b" opacity=".7"/><ellipse cx="270" cy="40" rx="50" ry="22" fill="#94a3b8" opacity=".8"/>' +
+    '<path d="M40 300 L280 100 L360 100 L600 300 Z" fill="#78716c"/>' +
+    '<g stroke="#a8a29e" stroke-width="7" fill="none"><path d="M90 290 L290 120"/><path d="M140 293 L300 150"/><path d="M550 290 L350 120"/><path d="M500 293 L340 150"/></g>' +
+    '<path d="M480 200 L520 168 L556 200 Z" fill="#57534e"/>' +
+    '<path d="M310 320 L310 104 L330 104 L330 320 Z" fill="#dc2626"/><path d="M330 250 Q 430 240 510 180" stroke="#dc2626" stroke-width="8" fill="none"/>' +
+    '<path d="M360 102 Q 400 160 380 230" stroke="#ea580c" stroke-width="10" fill="none" stroke-linecap="round"/>' +
+    '<rect x="0" y="300" width="640" height="80" fill="#a16207"/><ellipse cx="320" cy="335" rx="110" ry="30" fill="#dc2626"/></svg>';
+  var PINS_VOLC = [{ n: 1, x: 390, y: 40 }, { n: 2, x: 320, y: 88 }, { n: 3, x: 320, y: 220 }, { n: 4, x: 535, y: 165 }, { n: 5, x: 410, y: 205 }, { n: 6, x: 320, y: 340 }, { n: 7, x: 180, y: 220 }];
+
+  var SVG_TC = '<svg viewBox="0 0 680 330" role="img" aria-label="Cross-section of a tropical cyclone">' + MK + '<rect width="680" height="330" fill="#f0f9ff"/>' +
+    '<rect x="0" y="270" width="680" height="60" fill="#0ea5e9"/>' +
+    '<path d="M60 270 Q 120 120 260 70 L 290 70 Q 300 160 300 270 Z" fill="#cbd5e1"/><path d="M620 270 Q 560 120 420 70 L 390 70 Q 380 160 380 270 Z" fill="#cbd5e1"/>' +
+    '<path d="M250 270 L 255 80 L 300 75 L 300 270 Z" fill="#64748b"/><path d="M430 270 L 425 80 L 380 75 L 380 270 Z" fill="#64748b"/>' +
+    '<g stroke="#0f3a5c" stroke-width="2.5" fill="none" marker-end="url(#mB)"><path d="M40 255 L 200 255"/><path d="M640 255 L 480 255"/><path d="M270 60 L 140 40"/><path d="M410 60 L 540 40"/></g>' +
+    '<g stroke="#dc2626" stroke-width="2.5" fill="none" marker-end="url(#mR)"><path d="M340 90 L 340 230"/></g>' +
+    '<g fill="#1e3a8a"><path d="M262 120 l-3 8 h6z"/><path d="M272 160 l-3 8 h6z"/><path d="M412 130 l-3 8 h6z"/><path d="M402 175 l-3 8 h6z"/></g></svg>';
+  var PINS_TC = [{ n: 1, x: 340, y: 160 }, { n: 2, x: 277, y: 210 }, { n: 3, x: 120, y: 240 }, { n: 4, x: 200, y: 38 }, { n: 5, x: 560, y: 300 }];
+
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  var GATES = {
+    1: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1R, Q3(a)', q: 'Which of these is a natural hazard?', o: ['volcanic eruption', 'car emission pollution', 'nuclear meltdown', 'oil slick from a ship'], c: 0,
+        ms: '<b>Volcanic eruption.</b> The others are hazards created by human activity.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q3(d)', q: 'Explain one physical factor that can make people more vulnerable to natural hazards.', o: [
+          'Living near steep slopes: earthquakes and heavy rain can trigger landslides or lahars, so homes on or below the slopes are more likely to be destroyed and people killed.',
+          'Living on flat, high ground far from the coast: this makes landslides, floods and storm surges much more likely, so damage and deaths always increase there compared with low-lying valleys.',
+          'Steep slopes are dangerous.',
+          'Living near a volcano.'], c: 0,
+        ms: '1 mark for the initial explanation and 2 for development: e.g. <b>steep slopes</b> (1) → greater risk of <b>landslides/lahars</b> (1) → <b>more damage</b> (1). Also credit soft ground/liquefaction, low-lying coasts, proximity to plate boundaries.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1, Q3(f)', q: 'Explain why some countries are more vulnerable than others to the impacts of natural hazards.', o: [
+          'Poorer countries often lack education and emergency plans, so people do not know how to respond. They also have weaker buildings and no building codes, so more buildings collapse and more people die.',
+          'Richer countries are more vulnerable because they spend money on education and emergency plans, which confuses people. Strong building codes also make buildings collapse more easily and trap more people inside.',
+          'Some countries are poorer than others.',
+          'Because of where they are.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development (1+1+1+1, 2+2 or 3+1): e.g. <b>lack of education</b> → people don’t know what to do; <b>lack of emergency planning</b>; <b>poor building quality</b> → collapse.' }],
+    2: [
+      { type: 'multi', marks: 2, cmd: 'Identify', q: 'Identify two pieces of evidence that support the theory of continental drift.', need: 2, items: [
+          { t: 'The same Mesosaurus fossils are found in South America and Africa', ok: true },
+          { t: 'The coastlines of South America and Africa fit together', ok: true },
+          { t: 'Tropical cyclones form over oceans warmer than 26.5°C', ok: false },
+          { t: 'The Earth’s inner core is made of solid iron and nickel', ok: false }],
+        ms: 'Credit <b>jigsaw fit</b>, <b>matching fossils</b>, matching rocks and mountain ranges, and climate evidence (coal in Antarctica, glacial deposits in India).' },
+      { type: 'best', marks: 2, cmd: 'Explain', q: 'Explain how convection currents cause tectonic plates to move.', o: [
+          'Heat from the core makes mantle rock rise, spread out beneath the plates and sink as it cools; this circulation drags the plates above it apart or together.',
+          'Cold air from the atmosphere sinks into the core, where it heats up and rises; this pushes the oceans across the plates and makes the continents float on the water.',
+          'Convection currents move the plates.',
+          'Heat moves the plates.'], c: 0,
+        ms: '1 mark for <b>heat from the core makes the mantle circulate</b> and 1 for development: the moving mantle <b>drags the plates</b> (also accept slab pull or ridge push).' }],
+    3: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 1, Q3(a)', q: 'Which of these is a type of plate boundary?', o: ['constructive', 'asymmetrical', 'hot spot', 'mantle'], c: 0,
+        ms: '<b>Constructive.</b> A hot spot is not at a plate boundary; the mantle is a layer of the Earth.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 1R, Q3(a)', q: 'Which statement best describes a destructive (convergent) plate margin?', o: [
+          'the plates push together and one plate is destroyed', 'the plates pull apart and magma rises', 'the plates push together and both plates are destroyed', 'the plates pull apart and volcanoes erupt'], c: 0,
+        ms: '<b>The plates push together and one plate is destroyed.</b> Pulling apart describes constructive margins.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q3(c)', q: 'Explain how a constructive plate margin forms.', o: [
+          'Convection currents in the mantle pull two plates apart. Hot magma rises to fill the gap, cools and forms new crust, creating features such as ocean ridges and gentle volcanoes.',
+          'Two plates push together and the denser oceanic plate sinks beneath the lighter one. The sinking plate melts and the magma rises to form tall, steep and explosive composite volcanoes on the continent.',
+          'Plates move apart.',
+          'Magma comes up between the plates.'], c: 0,
+        ms: '1 mark for the initial point and 2 for development: plates <b>move apart</b> (1) due to <b>convection currents</b> (1); <b>magma rises</b> and forms new crust/ridges (1).' }],
+    4: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 1, Q3(a)', q: 'Which statement best describes the epicentre of an earthquake?', o: [
+          'the point on the Earth’s surface directly above the focus', 'the area around the earthquake on the surface', 'the area around the earthquake underground', 'the location underground where the earthquake occurs'], c: 0,
+        ms: '<b>The point on the Earth’s surface directly above the focus.</b>' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel Summer 2021 Paper 1, Q3(a)', q: 'Which of these can be used to record earthquakes?', o: ['Seismograph', 'Flow meter', 'Hygrometer', 'Richter scale'], c: 0,
+        ms: '<b>Seismograph.</b> A flow meter measures river speed; a hygrometer measures water vapour; the Richter scale measures size.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1, Q3(b)(iii)', q: 'Explain one cause of an earthquake.', o: [
+          'Plates stick together because of friction and stress builds up; when the rocks suddenly slip along a fault, energy is released as seismic waves.',
+          'Warm, moist air rises over the ocean and condenses; when the air sinks again it pushes down on the crust and makes the ground shake for several minutes.',
+          'Plates moving.',
+          'The ground shakes.'], c: 0,
+        ms: '1 mark for a cause (e.g. <b>tectonic activity at plate margins and faults</b>) and 1 for development (e.g. <b>stress builds up and is released suddenly</b>).' }],
+    5: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1, Q3(a)', q: 'Which hazard is often associated with earthquakes?', o: ['landslide', 'volcanic bombs', 'heavy rain', 'high wind speeds'], c: 0,
+        ms: '<b>Landslide.</b> Volcanic bombs come from volcanoes; heavy rain and high winds from tropical cyclones.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1, Q3(d)', q: 'Explain one way in which earthquakes can cause tsunamis.', o: [
+          'An earthquake under the sea bed jerks the sea floor upwards, lifting the water above and creating a wave. As the wave reaches shallow water near the coast it slows down and grows much taller.',
+          'An earthquake on land shakes the trees so hard that the wind they create blows across the sea. The wind pushes the water into waves that get smaller and smaller as they reach the shallow water at the coast.',
+          'Earthquakes make big waves.',
+          'The sea floor moves.'], c: 0,
+        ms: '1 mark for the initial point and 2 for development: <b>sea floor displaced</b> (1) → <b>water column lifted</b>, forming waves (1) → waves <b>grow taller in shallow water</b> (1).' }],
+    6: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q3(c)', q: 'Explain one way in which people can prepare for earthquakes.', o: [
+          'Earthquake drills in schools, so people know to “drop, cover and hold on” and react quickly when the shaking starts.',
+          'Building houses with heavy concrete roofs and no steel, so that they stay standing when the ground begins to shake hard.',
+          'Have a drill.',
+          'Be prepared.'], c: 0,
+        ms: '1 mark for a way (e.g. <b>drills</b>, emergency kits, building design) and 1 for explanation (e.g. <b>people know how to respond</b>).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q3(e)', q: 'Explain one way in which building design can help to prepare for earthquakes.', o: [
+          'Base isolators — rubber pads under the foundations — absorb the ground movement, so the building shakes less, is less likely to collapse and fewer people are injured.',
+          'Heavy concrete walls without steel reinforcement make the building rigid, so it cannot move and is certain to survive even the most powerful earthquakes without any damage.',
+          'Base isolators help.',
+          'Strong buildings.'], c: 0,
+        ms: '1 mark for the reason and 2 for development: e.g. <b>base isolators/cross-bracing/steel frames</b> (1) → <b>absorb or resist movement</b> (1) → <b>less collapse, fewer deaths</b> (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q3(c)', q: 'Explain two reasons why earthquake preparation may be more effective in some countries than others.', o: [
+          'Richer countries can afford early warning systems, which give people seconds to take cover. They can also enforce strict building codes, so buildings resist shaking and fewer collapse.',
+          'Poorer countries can afford more warning systems, so people always have hours to escape. They also have the strictest building codes, so buildings never collapse there, however strong the shaking is.',
+          'Money and education.',
+          'Some countries are richer.'], c: 0,
+        ms: '1 mark for each strategy and 1 for explanation, ×2: e.g. <b>early warning systems</b>; <b>building codes enforced</b>; clearly signposted <b>evacuation routes</b>; regular <b>drills</b>.' }],
+    7: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why the 2011 Tōhoku earthquake in Japan caused a tsunami.', o: [
+          'It happened at a destructive boundary where the Pacific plate subducts at the Japan Trench. When the locked plates slipped, the sea floor was pushed up by several metres, lifting the water above to form a tsunami.',
+          'It happened at a conservative boundary where two plates slide past each other on land. The friction heated the air above Japan, creating strong winds that blew huge waves onto the coast of Japan and flooded the land.',
+          'The earthquake was under the sea.',
+          'There was a big earthquake.'], c: 0,
+        ms: '1 mark for the cause and 2 for development: <b>subduction at the Japan Trench</b> (1) → <b>sea floor pushed up</b> (1) → <b>water displaced</b>, forming a tsunami (1).' },
+      { type: 'num', marks: 1, cmd: 'Calculate', q: 'About 15,900 people were killed directly in Japan in 2011, and about 19,700 including later disaster-related deaths. How many disaster-related deaths were there?', ans: 3800, tol: 0, unit: 'deaths',
+        ms: '19,700 − 15,900 = <b>3,800</b>.' }],
+    8: [
+      { type: 'best', marks: 4, cmd: 'Explain', q: 'Explain two reasons why the 2010 Haiti earthquake had such a high death toll.', o: [
+          'Haiti had no building codes, so concrete buildings without steel reinforcement collapsed onto people. The focus was very shallow (about 13 km) and near the densely populated capital, so the shaking was very strong where many people lived.',
+          'Haiti had very strict building codes, so buildings were too strong and trapped people inside. The focus was very deep (about 700 km) and far out at sea, so the shaking was weak and lasted for several weeks, giving people plenty of time to escape.',
+          'Haiti is poor and the earthquake was big.',
+          'Lots of buildings fell down.'], c: 0,
+        ms: '1 mark for each reason and 1 for development, ×2: e.g. <b>no building codes</b> → collapse; <b>shallow focus near Port-au-Prince</b> → strong shaking in a dense city; <b>poverty</b> → slow response.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'About US$5.3 billion was pledged to rebuild Haiti. By 2012 less than half had been delivered. What is half of US$5.3 billion?', ans: 2.65, tol: 0.01, unit: 'billion US$',
+        ms: '5.3 ÷ 2 = <b>US$2.65 billion</b>, so less than this had arrived.' }],
+    9: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 1R, Q3(b)(i)', q: 'Which of these is a measurement of a volcanic hazard?', o: ['Volcanic Explosivity Index', 'Volcanic Mercalli Scale', 'Volcanic Saffir-Simpson Scale', 'Volcanic Eruption Source'], c: 0,
+        ms: '<b>Volcanic Explosivity Index (VEI).</b>' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q3(g)', q: 'Explain two hazards associated with volcanic eruptions.', o: [
+          'Pyroclastic flows: a mix of hot gas, ash and rock rushes down the slopes at over 100 km/h, burning and burying everything. Lahars: ash mixes with rain or melted snow to form mudflows that can bury whole towns.',
+          'Pyroclastic flows: slow-moving rivers of cool water that people can easily walk away from. Lahars: strong winds that blow ash into the sea, where it forms a tsunami that floods the coast many kilometres away from the volcano.',
+          'Lava and ash.',
+          'Volcanoes are dangerous.'], c: 0,
+        ms: '1 mark for each hazard and 1 for development, ×2: e.g. <b>pyroclastic flows</b>, <b>lahars</b>, <b>ash fall</b>, lava flows, volcanic bombs, gases.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q3(g)', q: 'Explain how volcanoes form at a destructive plate boundary.', o: [
+          'An oceanic plate and a continental plate move together. The denser oceanic plate is subducted into the mantle, where it melts. The magma is less dense, so it rises through cracks in the crust and erupts at the surface, building a volcano.',
+          'Two plates move apart and hot magma rises to fill the gap. The lighter continental plate sinks beneath the oceanic plate and freezes, so the solid rock is pushed upwards to form a tall, steep volcano with no magma, gas or lava inside it at all.',
+          'Plates collide and magma rises.',
+          'Volcanoes form when plates move.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development: <b>plates converge</b> (1); <b>oceanic plate subducted</b> (1) and <b>melts</b> (1); <b>magma rises</b> and erupts (1).' }],
+    10: [
+      { type: 'best', marks: 1, cmd: 'Define', src: 'Based on Edexcel June 2023 Paper 1, Q3(b)(ii)', q: 'What is meant by the term “hot spot”?', o: [
+          'A plume of hot magma that creates volcanoes away from a plate boundary.', 'A place where two plates slide past each other, causing frequent earthquakes.', 'An area of warm ocean water where tropical cyclones begin to form.', 'The point on the surface directly above an earthquake’s focus.'], c: 0,
+        ms: '1 mark: <b>an area of tectonic activity away from a plate margin</b> / a magma plume that creates volcanoes.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1R, Q3(d)', q: 'Explain one way in which a hotspot can lead to a tectonic hazard.', o: [
+          'Hot material from deep in the mantle rises in a plume and melts the base of the plate. Magma rises through the crust and erupts, producing lava flows that destroy homes, as at Kīlauea in 2018.',
+          'Cold water from the ocean sinks into the mantle and freezes the plate. The ice expands and splits the crust, producing tsunamis that flood the whole of the Pacific Ocean, as happened in Hawai‘i in 2018.',
+          'A hotspot makes a volcano.',
+          'Magma comes up.'], c: 0,
+        ms: '1 mark for the initial point and 2 for development: <b>mantle plume rises</b> (1) → <b>magma erupts</b> through the crust (1) → hazard such as <b>lava flows/earthquakes</b> (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q3(d)', q: 'Explain two reasons why people continue to live in areas at risk from volcanoes.', o: [
+          'Volcanic soils are very fertile, so farmers can grow valuable crops such as papaya. Serious eruptions are rare or well monitored, so people believe they will be warned and can escape in time.',
+          'Volcanic soils are completely infertile, so nobody can farm there. Eruptions happen every day without warning, so people believe that living there is the safest choice they can possibly make for their families.',
+          'Fertile soil and jobs.',
+          'They like living there.'], c: 0,
+        ms: '1 mark for each reason and 1 for development, ×2: e.g. <b>fertile soils</b>, <b>rare eruptions / low perceived risk</b>, tourism jobs, geothermal energy, cheap land.' }],
+    11: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 1, Q3(b)(i)', q: 'Which is the correct way to measure tropical cyclone intensity?', o: ['Saffir-Simpson scale', 'Mercalli scale', 'Moment magnitude scale', 'Richter scale'], c: 0,
+        ms: '<b>Saffir-Simpson scale.</b> The others measure earthquakes.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1R, Q3(b)(i)', q: 'Which factor affects the development of tropical cyclones?', o: ['warm sea surface temperatures', 'large areas of high pressure', 'an undersea earthquake', 'pyroclastic flows'], c: 0,
+        ms: '<b>Warm sea surface temperatures.</b>' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 1, Q3(b)(i)', q: 'Which is a characteristic of a tropical cyclone?', o: ['eye in the centre', 'area of very high pressure', 'very little rainfall', 'low wind speeds'], c: 0,
+        ms: '<b>Eye in the centre.</b> Cyclones have low pressure, heavy rain and high wind speeds.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q3(b)(iii)', q: 'Explain one reason why tropical cyclones lose energy when they reach land.', o: [
+          'Their energy comes from warm ocean water and high evaporation; over land this supply of heat and moisture is cut off.',
+          'Their energy comes from the land surface; over the ocean they gain moisture, which makes them too heavy to move any further.',
+          'There is no sea.',
+          'The storm stops.'], c: 0,
+        ms: '1 mark for the initial point (<b>energy comes from warm ocean water</b>) and 1 for development (<b>no evaporation/moisture over land</b>; friction slows winds).' }],
+    12: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q3(c)', q: 'Explain one long-term impact of a tropical cyclone.', o: [
+          'Crops such as coconut trees are destroyed and take years to regrow, so farmers lose their income for a long time.',
+          'Strong winds blow roofs off houses as the eyewall passes, so people need shelter on the night of the storm itself.',
+          'Damage to buildings.',
+          'People die.'], c: 0,
+        ms: '1 mark for a long-term impact (e.g. <b>infrastructure damage</b>, <b>loss of income</b>, displacement) and 1 for explanation (e.g. <b>heavy investment needed</b>, years to recover).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q3(f)', q: 'Explain the long-term impacts of tropical cyclones.', o: [
+          'Millions of people can be displaced for months or years, as after Haiyan, when about 4.1 million lost their homes. Destroyed crops and fishing boats mean families lose their income for years, slowing the recovery of the whole economy.',
+          'Long-term impacts only last a few hours, because the storm moves away quickly. Crops and fishing boats are never damaged, so families can return to work the next morning and the economy grows faster than it did before the cyclone struck.',
+          'People lose their homes and jobs.',
+          'It takes a long time to recover.'], c: 0,
+        ms: '1 mark for each initial point and up to 3 for extension: e.g. <b>displacement</b> (4.1 million after Haiyan); <b>loss of livelihoods</b> (coconut trees, boats); cost of rebuilding infrastructure.' }]
+  };
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'Exam-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">' + (G.marks === 1 ? 'Choose the <b>correct</b> answer.' : 'Which answer would score <b>full marks</b>?') + '</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
