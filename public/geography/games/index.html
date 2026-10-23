@@ -269,6 +269,11 @@
 .topic-nav a { padding: 6px 12px; border-radius: 999px; background: rgba(0, 184, 176, 0.08); border: 1px solid rgba(0, 124, 130, 0.22); font-size: 0.84rem; font-weight: 750; color: var(--navy); transition: var(--transition); }
 .topic-nav a:hover { background: rgba(0, 184, 176, 0.18); }
 .topic-nav a span { font-size: 0.72rem; color: var(--teal-dark); margin-left: 4px; }
+.topic-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; align-items: start; }
+.topic-pair.wide-first { grid-template-columns: 2fr 1fr; }
+.topic-pair .game-grid { grid-template-columns: 1fr; }
+.topic-pair.wide-first .topic:first-child .game-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) { .topic-pair, .topic-pair.wide-first { grid-template-columns: 1fr; } }
 .topic-soon { margin-top: 6px; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,0.6); border: 1px dashed rgba(0, 124, 130, 0.3); color: #03757a; font-weight: 650; font-size: 0.9rem; }
 @media (max-width: 760px) {
     main { padding: 0 14px; }
@@ -439,6 +444,7 @@
   <div class="level-head"><h2 id="igcse-h">&#128218; IGCSE Geography (KS4)</h2><span class="level-count">8 games</span></div>
   <p class="level-sub">Edexcel IGCSE: starters, plenaries and revision games, organised by topic.</p>
   <nav class="topic-nav" aria-label="IGCSE Geography (KS4) topics"><a href="#igcse-coastal">Paper 1 · Coastal Environments <span>1</span></a><a href="#igcse-hazards">Paper 1 · Hazardous Environments <span>1</span></a><a href="#igcse-economic">Paper 2 · Economic Activity and Energy <span>3</span></a><a href="#igcse-rural">Paper 2 · Rural Environments <span>1</span></a><a href="#igcse-development">Paper 2 · Development and Human Welfare <span>1</span></a><a href="#igcse-fieldwork">Papers 1 and 2 · Fieldwork <span>1</span></a></nav>
+    <div class="topic-pair">
     <div class="topic" id="igcse-coastal">
       <div class="topic-head"><h3>Paper 1 · Coastal Environments</h3><span>1 game</span></div>
       <p class="topic-sub">Links to the <a href="/igcse/geography/learn/coastal-environments">Coastal Environments lessons</a>.</p>
@@ -475,6 +481,8 @@
       </article>
       </div>
     </div>
+    </div>
+    <div class="topic-pair wide-first">
     <div class="topic" id="igcse-economic">
       <div class="topic-head"><h3>Paper 2 · Economic Activity and Energy</h3><span>3 games</span></div>
       <p class="topic-sub">Links to the <a href="/igcse/geography/learn/economic-activity-and-energy">Economic Activity and Energy lessons</a>.</p>
@@ -535,6 +543,8 @@
       </article>
       </div>
     </div>
+    </div>
+    <div class="topic-pair">
     <div class="topic" id="igcse-development">
       <div class="topic-head"><h3>Paper 2 · Development and Human Welfare</h3><span>1 game</span></div>
       <p class="topic-sub">Links to the <a href="/igcse/geography/learn/development-and-human-welfare">Development and Human Welfare lessons</a>.</p>
@@ -571,7 +581,7 @@
       </article>
       </div>
     </div>
-
+    </div>
 </section>
 <section class="level" id="ib" aria-labelledby="ib-h">
   <div class="level-head"><h2 id="ib-h">&#127891; IB Diploma Geography</h2><span class="level-count">17 games</span></div>
