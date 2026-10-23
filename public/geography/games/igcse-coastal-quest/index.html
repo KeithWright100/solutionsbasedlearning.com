@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coastal Quest — IGCSE Geography Coastal Environments Revision Game — SBL</title>
+<meta name="description" content="Edexcel IGCSE Geography revision game for Paper 1 Coastal Environments: 16 levels covering waves, erosion, weathering, landforms, coastal ecosystems, coral reefs, threats, conflicts, flooding, hard and soft engineering, Sri Lanka and Holderness, with labelled diagrams, data skills, past paper checkpoint questions and an Edexcel Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#igcse-coastal" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Coastal Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 16 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-igcse-coastal-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '🌊', t: 'Waves', d: 'How waves form, fetch, swash and backwash, constructive and destructive waves' },
+    { n: 2, z: 'A', emo: '🪨', t: 'Erosion, Transport and Deposition', d: 'Hydraulic action, abrasion, attrition, solution and longshore drift' },
+    { n: 3, z: 'A', emo: '🧊', t: 'Weathering and Mass Movement', d: 'Freeze–thaw, chemical and biological weathering, slumping and rockfalls' },
+    { n: 4, z: 'A', emo: '⛰️', t: 'Factors Affecting Coastlines', d: 'Geology, vegetation, people and changing sea levels' },
+    { n: 5, z: 'B', emo: '🏞️', t: 'Headlands, Bays and Coves', d: 'Concordant and discordant coastlines' },
+    { n: 6, z: 'B', emo: '🗿', t: 'Cliffs, Caves, Arches and Stacks', d: 'Wave-cut notches, wave-cut platforms and the headland sequence' },
+    { n: 7, z: 'B', emo: '🏖️', t: 'Beaches, Spits and Bars', d: 'Landforms of deposition' },
+    { n: 8, z: 'C', emo: '🌿', t: 'Coastal Ecosystems', d: 'Mangroves, sand dunes, salt marshes and abiotic factors' },
+    { n: 9, z: 'C', emo: '🪸', t: 'Coral Reefs', d: 'Distribution, conditions for growth and reef types' },
+    { n: 10, z: 'C', emo: '⚠️', t: 'Threats to Coastal Ecosystems', d: 'Industry, agriculture, tourism and deforestation' },
+    { n: 11, z: 'D', emo: '⚖️', t: 'Coastal Conflicts', d: 'Competing users and development versus conservation' },
+    { n: 12, z: 'D', emo: '🌀', t: 'Coastal Flooding', d: 'Storm surges, tsunamis, sea level rise and reducing the impact' },
+    { n: 13, z: 'D', emo: '🧱', t: 'Hard and Soft Engineering', d: 'Sea walls, groynes, rock armour, beach nourishment and managed retreat' },
+    { n: 14, z: 'D', emo: '🇱🇰', t: 'Case Study: Sri Lanka', d: 'The Coastal Zone Management Plan (CZMP)' },
+    { n: 15, z: 'D', emo: '🏴', t: 'Case Study: Holderness', d: 'Europe’s fastest-eroding coastline' },
+    { n: 16, z: 'X', emo: '👹', t: 'The Edexcel Examiner', d: 'Final boss: Point, Evidence, Explain, Conclusion' }];
+  var ZONES = { A: ['Topic 01', 'Coastal processes', '#0284c7'], B: ['Topic 02', 'Landforms', '#b45309'], C: ['Topic 03', 'Ecosystems', '#16a34a'], D: ['Topic 04', 'Management', '#db2777'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'proc', i: '🌊', t: 'Process Expert', d: 'Complete Topic 01 (Levels 1–4)', ok: function () { return [1, 2, 3, 4].every(isDone); } },
+    { id: 'land', i: '🗿', t: 'Landform Expert', d: 'Complete Topic 02 (Levels 5–7)', ok: function () { return [5, 6, 7].every(isDone); } },
+    { id: 'eco', i: '🪸', t: 'Ecosystem Expert', d: 'Complete Topic 03 (Levels 8–10)', ok: function () { return [8, 9, 10].every(isDone); } },
+    { id: 'mgmt', i: '🧱', t: 'Coastal Manager', d: 'Complete Topic 04 (Levels 11–15)', ok: function () { return [11, 12, 13, 14, 15].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Past Paper Pro', d: 'Pass all 15 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the Edexcel Examiner', ok: function () { return isDone(16); } },
+    { id: 'champ', i: '🏆', t: 'Coastal Champion', d: 'All 16 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">Edexcel IGCSE Geography \u00B7 Paper 1 \u00B7 Coastal Environments</span>' +
+      '<h1>\uD83C\uDF0A Coastal Quest<br>Coastal Environments Revision</h1>' +
+      '<p>Work through all four topics \u2014 <b>Coastal processes</b>, <b>Landforms</b>, <b>Ecosystems</b> and <b>Management</b> \u2014 one level per lesson, then face the <b>Edexcel Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all seven badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Coastal Champion!' : ' — reach 90% for Coastal Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — Waves */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the wave', how: 'Waves are created by <b>wind blowing over the surface of the sea</b>. Friction between the wind and the water transfers energy to the water. Tap a label, then tap the number it belongs to. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_WAVE, pins: PINS_WAVE, cap: 'The parts of a wave and how water moves up and down a beach.', labels: [
+          { t: 'Crest — the highest point of a wave', pin: 1 },
+          { t: 'Trough — the lowest point of a wave', pin: 2 },
+          { t: 'Wavelength — the distance between two crests', pin: 3 },
+          { t: 'Wave height — from trough to crest', pin: 4 },
+          { t: 'Swash — water moving up the beach', pin: 5 },
+          { t: 'Backwash — water moving back down the beach', pin: 6 },
+          { t: 'Fetch — the depth of water under a wave', pin: null }] }, next); } },
+      { title: '💪 What makes a wave more powerful?', how: '<b>Fetch</b> = the distance of open water the wind blows over. Does each factor make waves <b>more powerful</b>?',
+        build: function (el, next) { flash(el, { yes: '⬆️ More powerful', no: '⬇️ Less powerful', ky: 'm', kn: 'l', items: [
+          { t: 'A long fetch across an open ocean', a: true, why: 'The wind has a longer distance to transfer energy to the water.' },
+          { t: 'Strong winds', a: true, why: 'Stronger winds transfer more energy.' },
+          { t: 'Wind blowing for a long time', a: true, why: 'The longer the wind blows, the more energy builds up.' },
+          { t: 'A sheltered bay facing away from the prevailing wind', a: false, why: 'The fetch is short and the wind is blocked.' },
+          { t: 'Light winds over a small lake', a: false, why: 'Weak winds and a short fetch give small waves.' },
+          { t: 'Storm conditions over the open sea', a: true, why: 'Storms bring strong, long-lasting winds.' }] }, next); } },
+      { title: '🌊 Constructive or destructive?', how: '<b>Constructive waves</b> build beaches up. <b>Destructive waves</b> erode and remove material.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['c', '🏖️ Constructive wave'], ['d', '💥 Destructive wave']], ['zg', 'zr']), cards: [
+          { t: 'Strong swash, weak backwash', a: ['c'], why: 'Material is pushed up the beach and left there.' },
+          { t: 'Weak swash, strong backwash', a: ['d'], why: 'The backwash drags material back out to sea.' },
+          { t: 'Long wavelength', a: ['c'], why: 'Constructive waves are spread out.' },
+          { t: 'Short wavelength', a: ['d'], why: 'Destructive waves are close together.' },
+          { t: 'Low and gentle, about 6–8 per minute', a: ['c'], why: 'Low frequency, low energy.' },
+          { t: 'High and steep, about 10–14 per minute', a: ['d'], why: 'High frequency, high energy.' },
+          { t: 'Builds wide, gently sloping beaches', a: ['c'], why: 'Deposition outweighs erosion.' },
+          { t: 'Common in storms; causes erosion', a: ['d'], why: 'Storm waves have lots of energy.' }] }, next); } },
+      { title: '📊 Data skills: wave frequency', how: 'Read the bar chart carefully. Always use the units.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Waves per minute on five days', bars: [['Mon', 7, '#38bdf8'], ['Tue', 8, '#38bdf8'], ['Wed', 13, '#dc2626'], ['Thu', 12, '#dc2626'], ['Fri', 6, '#38bdf8']], y0: 0, y1: 15, ystep: 5, minor: 1, values: true, xlab: 'Day', ylab: 'Waves per minute' }),
+          cap: 'Waves counted at a beach over five days (example data).', qs: [
+          { type: 'num', q: 'Calculate the mean number of waves per minute over the five days.', ans: 9.2, tol: 0.05, unit: 'waves per minute', f: '(7 + 8 + 13 + 12 + 6) ÷ 5 = 46 ÷ 5 = <b>9.2</b>.' },
+          { type: 'num', q: 'What is the range?', ans: 7, tol: 0, unit: 'waves per minute', f: '13 − 6 = <b>7</b>.' },
+          { type: 'mc', q: 'On which days were the waves most likely to be destructive?', o: ['Wednesday and Thursday', 'Monday and Friday only', 'Tuesday and Friday', 'Monday, Tuesday and Friday'], c: 0, f: 'More than 10 waves per minute suggests destructive, storm waves.' }] }, next); } },
+      { title: '🧠 Wave check', build: function (el, next) { mcq(el, [
+        { q: 'What is the best definition of swash?', o: ['The movement of water up the beach after a wave breaks', 'The movement of water back down the beach under gravity', 'The distance of open sea that the wind blows across', 'The friction between the wind and the surface of the water'], c: 0, f: 'Swash goes up the beach; backwash comes back down.' },
+        { q: 'Why does a wave break?', o: ['Friction with the sea bed slows the base, so the top topples over', 'The wind suddenly stops blowing as the wave gets near to the shore', 'Salt water is heavier at the coast, so the wave sinks', 'The wave meets the backwash of the wave in front and stops'], c: 0, f: 'In shallow water the base slows, the wave gets steeper and the crest spills over.' }], next); } }]);
+  };
+
+  /* L2 — Erosion, transport, deposition */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '🪨 Name the erosion process', how: 'There are four processes of marine erosion. Match each description.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['h', '💥 Hydraulic action'], ['ab', '🪨 Abrasion'], ['at', '⚪ Attrition'], ['so', '🧪 Solution']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Waves force air into cracks in the cliff, which is compressed and weakens the rock', a: ['h'], why: 'The sheer force of water and trapped air.' },
+          { t: 'The sheer force of waves hitting the cliff face', a: ['h'], why: 'Hydraulic action is the power of the water itself.' },
+          { t: 'Waves pick up stones and throw them at the cliff, wearing it away like sandpaper', a: ['ab'], why: 'Also called corrasion.' },
+          { t: 'Rocks carried by the sea knock into each other and become smaller and rounder', a: ['at'], why: 'Attrition wears down the load, not the cliff.' },
+          { t: 'Weak acids in sea water dissolve rocks such as chalk and limestone', a: ['so'], why: 'Also called corrosion.' },
+          { t: 'Pebbles on a beach become smooth and rounded over time', a: ['at'], why: 'Evidence of attrition.' }] }, next); } },
+      { title: '🚚 How is material transported?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['tr', '🛞 Traction'], ['sa', '🦘 Saltation'], ['su', '☁️ Suspension'], ['so', '🧪 Solution']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Large boulders rolled along the sea bed', a: ['tr'], why: 'Traction moves the heaviest load.' },
+          { t: 'Pebbles bounced along the sea bed', a: ['sa'], why: 'Saltation is a hopping motion.' },
+          { t: 'Fine sand and silt carried along in the water', a: ['su'], why: 'Light particles stay suspended.' },
+          { t: 'Dissolved minerals carried in the water', a: ['so'], why: 'Invisible load carried in solution.' }] }, next); } },
+      { title: '↗️ Put longshore drift in order', how: '<b>Longshore drift</b> moves sediment along the coast in a zig-zag pattern.',
+        build: function (el, next) { orderGame(el, ['The prevailing wind blows waves towards the beach at an angle', 'The swash carries sediment up the beach at the same angle', 'The backwash pulls sediment straight back down the beach under gravity', 'The process repeats, moving sediment along the coast in a zig-zag'], 'Tap the FIRST step.', next); } },
+      { title: '🏖️ Deposition likely?', how: '<b>Deposition</b> happens when the sea loses energy and drops its load.',
+        build: function (el, next) { flash(el, { yes: '✅ Deposition likely', no: '❌ Erosion likely', ky: 'd', kn: 'e', items: [
+          { t: 'Sheltered bays where waves lose energy', a: true, why: 'Low energy means the load is dropped.' },
+          { t: 'Constructive waves with strong swash', a: true, why: 'Swash carries material up and leaves it.' },
+          { t: 'Large destructive storm waves', a: false, why: 'High-energy waves erode.' },
+          { t: 'A plentiful supply of sediment from rivers and cliffs', a: true, why: 'More sediment means more to deposit.' },
+          { t: 'Exposed headlands facing a long fetch', a: false, why: 'Wave energy is concentrated on headlands.' },
+          { t: 'Where the coastline changes direction and the water slows', a: true, why: 'This is where spits begin to form.' }] }, next); } },
+      { title: '🧠 Process check', build: function (el, next) { mcq(el, [
+        { q: 'Which process makes beach pebbles smaller and rounder?', o: ['Attrition', 'Hydraulic action', 'Abrasion', 'Solution'], c: 0, f: 'Attrition is rocks colliding with each other.' },
+        { q: 'Groynes are built at right angles to a beach. Which process do they reduce?', o: ['Longshore drift, by trapping sediment on the updrift side', 'Freeze–thaw weathering of the cliff face behind the beach', 'Solution of limestone by acidic sea water at high tide', 'Rotational slumping caused by heavy rain soaking the cliff'], c: 0, f: 'Groynes trap sediment moving along the beach.' }], next); } }]);
+  };
+
+  /* L3 — Weathering and mass movement */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🧊 Which type of weathering?', how: '<b>Weathering</b> is the breakdown of rock <b>in place</b>, without movement. <b>Erosion</b> involves movement.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['m', '🧊 Mechanical (physical)'], ['c', '🧪 Chemical'], ['b', '🌱 Biological']], ['zc3', 'zc4', 'zg']), cards: [
+          { t: 'Freeze–thaw: water in cracks freezes and expands by about 9%', a: ['m'], why: 'Repeated freezing and thawing breaks rock apart.' },
+          { t: 'Salt crystals grow in cracks and force the rock apart', a: ['m'], why: 'Salt weathering is common at the coast.' },
+          { t: 'Onion-skin weathering: the outer layers heat and cool and peel away', a: ['m'], why: 'Also called exfoliation.' },
+          { t: 'Rainwater (a weak carbonic acid) dissolves limestone and chalk', a: ['c'], why: 'Carbonation changes the chemistry of the rock.' },
+          { t: 'Salt water reacts with minerals in the rock and weakens it', a: ['c'], why: 'A chemical change.' },
+          { t: 'Plant roots grow into cracks and widen them', a: ['b'], why: 'Living organisms break the rock.' },
+          { t: 'Burrowing animals and seabirds loosen cliff material', a: ['b'], why: 'Another biological process.' }] }, next); } },
+      { title: '🧊 Freeze–thaw in order', build: function (el, next) { orderGame(el, ['Water seeps into a crack in the rock', 'The temperature falls below 0°C and the water freezes', 'The ice expands and puts pressure on the rock', 'The ice thaws and the water seeps deeper into the crack', 'Repeated cycles widen the crack until pieces break off'], 'Tap the FIRST step.', next); } },
+      { title: '⛰️ Name the mass movement', how: '<b>Mass movement</b> = the downhill movement of material under gravity.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['rf', '🪨 Rockfall'], ['sl', '🌀 Slumping (rotational slip)'], ['ls', '⬇️ Landslide']], ['zc1', 'zc2', 'zc4']), cards: [
+          { t: 'Pieces of rock break off a steep cliff face and fall to the bottom', a: ['rf'], why: 'Often after freeze–thaw weathering.' },
+          { t: 'Saturated clay moves down a curved slip plane, leaving a step-like cliff', a: ['sl'], why: 'Common on soft boulder clay cliffs such as Holderness.' },
+          { t: 'A large block of rock slides down a straight slip plane', a: ['ls'], why: 'A landslide moves along a flat plane.' },
+          { t: 'Heavy rain soaks soft cliffs, making them heavy and weak', a: ['sl'], why: 'Water adds weight and lubricates the slip plane.' },
+          { t: 'Rock debris (scree) piles up at the base of a hard rock cliff', a: ['rf'], why: 'Scree is the result of rockfall.' }] }, next); } },
+      { title: '🧠 Weathering check', build: function (el, next) { mcq(el, [
+        { q: 'What is the difference between weathering and erosion?', o: ['Weathering breaks rock down in place; erosion wears it away and moves it', 'Weathering only happens underwater; erosion only happens on land above the cliffs', 'Weathering is caused by waves; erosion is caused by the weather', 'There is no difference — they are two words for the same process'], c: 0, f: 'Movement is the key difference.' },
+        { q: 'Why is mass movement more likely after heavy rainfall?', o: ['Water adds weight and lubricates the rock, reducing friction', 'Rain cools the cliff so that freeze–thaw stops working altogether', 'Rainwater makes the cliff top dry out and set hard like concrete', 'Heavy rain calms the sea, so the waves cannot reach the cliff'], c: 0, f: 'Saturated cliffs are heavier and slip more easily.' }], next); } }]);
+  };
+
+  /* L4 — Geology, vegetation, people, sea level */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '⚡ Faster or slower erosion?', how: 'Does each factor <b>increase</b> the rate of coastal erosion?',
+        build: function (el, next) { flash(el, { yes: '⬆️ Faster erosion', no: '⬇️ Slower erosion', ky: 'f', kn: 's', items: [
+          { t: 'Soft rock such as clay or sands', a: true, why: 'Soft rock is easily eroded — Holderness loses about 1.8 m a year.' },
+          { t: 'Hard rock such as granite', a: false, why: 'Resistant rock erodes very slowly.' },
+          { t: 'Rocks with many joints, faults and cracks', a: true, why: 'Lines of weakness are attacked by hydraulic action.' },
+          { t: 'A wide beach in front of the cliff', a: false, why: 'Beaches absorb wave energy.' },
+          { t: 'Vegetation such as marram grass binding the sand', a: false, why: 'Roots hold sediment together.' },
+          { t: 'Removing sand and shingle from beaches for building', a: true, why: 'Less beach means less protection.' },
+          { t: 'Rising sea levels', a: true, why: 'Waves reach further up the cliff.' }] }, next); } },
+      { title: '🗂️ Which factor is it?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['g', '🪨 Geology'], ['v', '🌿 Vegetation'], ['p', '👷 People'], ['s', '📈 Sea level change']], ['zc1', 'zg', 'zc2', 'zc3']), cards: [
+          { t: 'Bands of hard and soft rock produce headlands and bays', a: ['g'], why: 'Differential erosion.' },
+          { t: 'Joints in limestone are widened by hydraulic action', a: ['g'], why: 'Rock structure matters.' },
+          { t: 'Mangrove roots trap sediment and absorb wave energy', a: ['v'], why: 'Plants protect the coast.' },
+          { t: 'Marram grass stabilises sand dunes', a: ['v'], why: 'Long roots bind loose sand.' },
+          { t: 'Groynes in one place starve beaches further down the coast', a: ['p'], why: 'Human activity changes sediment flows.' },
+          { t: 'Building on cliff tops adds weight and drainage water', a: ['p'], why: 'Development can increase mass movement.' },
+          { t: 'A raised beach left above today’s high tide line', a: ['s'], why: 'Formed when sea level fell relative to the land.' },
+          { t: 'A ria — a flooded river valley', a: ['s'], why: 'Formed when sea level rose after the last ice age.' }] }, next); } },
+      { title: '🧠 Sea level check', build: function (el, next) { mcq(el, [
+        { q: 'How is a fjord formed?', o: ['Sea level rose and flooded a deep glacial valley', 'Sea level fell and left a beach high above the sea', 'Longshore drift built a ridge of sand across a bay', 'Waves eroded a cave right through a narrow headland'], c: 0, f: 'Fjords are drowned glacial valleys; rias are drowned river valleys.' },
+        { q: 'Which landform shows that sea level has FALLEN relative to the land?', o: ['A raised beach with old cliffs behind it', 'A ria, a river valley flooded by the sea', 'A fjord, a glacial valley flooded by the sea', 'A spit that grows across a river estuary'], c: 0, f: 'Raised beaches are emergent landforms.' }], next); } }]);
+  };
+
+  /* L5 — Headlands, bays, coves */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '🗺️ Concordant or discordant?', how: '<b>Discordant</b> coast: bands of hard and soft rock run at <b>right angles</b> to the coastline. <b>Concordant</b> coast: the bands run <b>parallel</b> to the coastline.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['d', '📐 Discordant coastline'], ['c', '〰️ Concordant coastline']], ['zc1', 'zc3']), cards: [
+          { t: 'Rock bands run at right angles to the coast', a: ['d'], why: 'Waves hit hard and soft rock at the same time.' },
+          { t: 'Rock bands run parallel to the coast', a: ['c'], why: 'Waves hit one rock type first.' },
+          { t: 'Produces alternating headlands and bays', a: ['d'], why: 'Soft rock erodes back into bays.' },
+          { t: 'Produces coves when the hard outer rock is breached', a: ['c'], why: 'For example Lulworth Cove in Dorset.' },
+          { t: 'Example: Swanage Bay with Old Harry Rocks and Durlston Head', a: ['d'], why: 'Dorset’s east coast is discordant.' },
+          { t: 'Example: Lulworth Cove', a: ['c'], why: 'Portland limestone was breached and the soft clay behind it eroded.' }] }, next); } },
+      { title: '🏞️ How a headland forms', how: 'Put the steps of an Edexcel 4-mark “Explain the formation of…” answer in order.',
+        build: function (el, next) { orderGame(el, ['Bands of hard and soft rock meet the coast at right angles', 'Waves erode the soft rock (such as clay) more quickly by hydraulic action and abrasion', 'The soft rock is worn back to form a bay', 'The hard rock (such as chalk) is more resistant and is left sticking out as a headland', 'Wave refraction now concentrates energy on the headland, and the bay is sheltered'], 'Tap the FIRST step.', next); } },
+      { title: '🧠 Headlands check', build: function (el, next) { mcq(el, [
+        { q: 'Why do bays often have beaches?', o: ['Waves lose energy as they spread out in the bay, so they deposit sediment', 'Bays are made of harder rock that does not break down into sand or pebbles', 'Bays face directly into the prevailing wind and the longest fetch', 'People import sand into every bay to attract tourists in summer'], c: 0, f: 'Wave refraction spreads energy out in bays and focuses it on headlands.' },
+        { q: 'What is a cove?', o: ['A small, circular bay with a narrow entrance', 'A narrow ridge of sand joining an island to land', 'A cave that has been eroded through a headland', 'A long finger of sand growing out into the sea'], c: 0, f: 'Coves form on concordant coasts when the outer hard rock is breached.' }], next); } }]);
+  };
+
+  /* L6 — Cliffs, caves, arches, stacks */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the eroding headland', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_HEAD, pins: PINS_HEAD, cap: 'Erosion of a headland over time, from left to right.', labels: [
+          { t: 'Crack or joint widened by hydraulic action', pin: 1 },
+          { t: 'Cave', pin: 2 },
+          { t: 'Arch', pin: 3 },
+          { t: 'Stack', pin: 4 },
+          { t: 'Stump', pin: 5 },
+          { t: 'Wave-cut platform', pin: 6 },
+          { t: 'Spit', pin: null }] }, next); } },
+      { title: '🗿 Crack to stump in order', build: function (el, next) { orderGame(el, ['Hydraulic action and abrasion widen a crack in the headland', 'The crack grows into a cave', 'The cave is eroded right through the headland to form an arch', 'The roof of the arch is weakened by erosion and weathering and collapses', 'A stack is left standing apart from the headland', 'The stack is eroded at its base and collapses to form a stump'], 'Tap the FIRST step.', next); } },
+      { title: '🧗 Cliff retreat in order', build: function (el, next) { orderGame(el, ['Destructive waves attack the base of the cliff between high and low tide', 'A wave-cut notch forms', 'The notch grows and the cliff above is left overhanging', 'The overhang becomes unstable and collapses', 'The cliff retreats and leaves a gently sloping wave-cut platform'], 'Tap the FIRST step.', next); } },
+      { title: '🧠 Landform check', build: function (el, next) { mcq(el, [
+        { q: 'Which of these is a landform of erosion?', o: ['Wave-cut platform', 'Shingle spit', 'Tombolo', 'Offshore barrier bar'], c: 0, f: 'Spits, bars and tombolos are depositional.' },
+        { q: 'Why does a wave-cut platform become wider over time?', o: ['The cliff keeps retreating inland, leaving more rock exposed at low tide', 'Sand is deposited on top of it by waves, so it is built higher every year', 'Freeze–thaw raises the rock up from below the level of the sea', 'It is a coral reef that keeps growing out into deeper water'], c: 0, f: 'As the cliff retreats, the platform is left behind.' }], next); } }]);
+  };
+
+  /* L7 — Beaches, spits, bars */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the spit', how: 'A <b>spit</b> is a long, narrow ridge of sand or shingle joined to the land at one end. Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_SPIT, pins: PINS_SPIT, cap: 'How a spit forms where the coastline changes direction.', labels: [
+          { t: 'Longshore drift moving sediment along the coast', pin: 1 },
+          { t: 'Prevailing wind', pin: 2 },
+          { t: 'Spit built from deposited sand and shingle', pin: 3 },
+          { t: 'Recurved (hooked) end caused by a change in wind direction', pin: 4 },
+          { t: 'Salt marsh in the sheltered water behind the spit', pin: 5 },
+          { t: 'Stack', pin: null }] }, next); } },
+      { title: '🏖️ Name the landform', build: function (el, next) { sortGame(el, { zones: zonesFrom([['b', '🏖️ Beach'], ['s', '🪝 Spit'], ['ba', '🚧 Bar'], ['t', '🏝️ Tombolo']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'A zone of sand and shingle between high and low tide', a: ['b'], why: 'Found in sheltered bays.' },
+          { t: 'Joined to the land at one end, with the other end out at sea', a: ['s'], why: 'Example: Spurn Head.' },
+          { t: 'A ridge of sediment that grows right across a bay, trapping a lagoon', a: ['ba'], why: 'Example: Slapton Ley in Devon.' },
+          { t: 'A ridge of sediment that joins an island to the mainland', a: ['t'], why: 'Example: Chesil Beach joins the Isle of Portland to the mainland.' },
+          { t: 'Has a hooked, recurved end', a: ['s'], why: 'Changes in wind direction curve the end.' },
+          { t: 'Has berms, ridges marking high tide levels', a: ['b'], why: 'Beach profile features.' }] }, next); } },
+      { title: '🧠 Deposition check', build: function (el, next) { mcq(el, [
+        { q: 'Why does a spit form where the coastline changes direction?', o: ['Longshore drift continues, but the water is deeper and calmer, so sediment is deposited', 'Destructive waves erode the coast, leaving a long, narrow ridge of hard rock standing out to sea', 'The sea level falls suddenly at that point and leaves sand exposed', 'Rivers always flow into the sea there, washing sand off the land'], c: 0, f: 'Sediment keeps moving but loses energy and is deposited out into the sea.' },
+        { q: 'Which physical factor would INCREASE deposition on a coast?', o: ['A large supply of sediment from eroding cliffs and rivers', 'Strong destructive waves breaking 14 times every minute', 'A long fetch facing the prevailing wind on an open coast', 'Deep water close to the shore with steep underwater slopes'], c: 0, f: 'Sediment supply is a key physical factor.' }], next); } }]);
+  };
+
+  /* L8 — Coastal ecosystems */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🔬 Abiotic or biotic?', how: '<b>Abiotic</b> = non-living (climate, temperature, light, salinity, soil). <b>Biotic</b> = living (plants, animals, fungi, bacteria).',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['a', '🌡️ Abiotic'], ['b', '🦀 Biotic']], ['zc2', 'zg']), cards: [
+          { t: 'Temperature', a: ['a'], why: 'Non-living.' }, { t: 'Salinity of the water', a: ['a'], why: 'Non-living.' },
+          { t: 'Sunlight', a: ['a'], why: 'Non-living.' }, { t: 'Climate', a: ['a'], why: 'Non-living.' },
+          { t: 'Phytoplankton', a: ['b'], why: 'Tiny living plants.' }, { t: 'Coral polyps', a: ['b'], why: 'Living animals.' },
+          { t: 'Fungi', a: ['b'], why: 'Living organisms.' }, { t: 'Mangrove trees', a: ['b'], why: 'Living plants.' }] }, next); } },
+      { title: '🏷️ Sand dune succession', how: 'Dunes get <b>older</b> further from the sea. Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_DUNE, pins: PINS_DUNE, cap: 'A cross-section through a sand dune system.', labels: [
+          { t: 'Embryo dune — first sand trapped by sea couch grass', pin: 1 },
+          { t: 'Fore dune', pin: 2 },
+          { t: 'Yellow dune — marram grass, loose sand', pin: 3 },
+          { t: 'Grey dune — more humus, shrubs such as heather', pin: 4 },
+          { t: 'Dune slack — damp hollow near the water table', pin: 5 },
+          { t: 'Woodland (climax community)', pin: 6 },
+          { t: 'Coral reef', pin: null }] }, next); } },
+      { title: '🌿 Which ecosystem?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['m', '🌳 Mangrove'], ['d', '🏜️ Sand dune'], ['s', '🦆 Salt marsh']], ['zg', 'zc4', 'zc2']), cards: [
+          { t: 'Trees with complex, tangled roots that grow in salty water', a: ['m'], why: 'Prop roots and breathing roots (pneumatophores).' },
+          { t: 'Found on tropical coasts between about 30°N and 30°S', a: ['m'], why: 'Mangroves need warm water.' },
+          { t: 'Marram grass with roots up to several metres long', a: ['d'], why: 'Marram is adapted to dry, shifting sand.' },
+          { t: 'Formed by onshore winds blowing sand inland from a wide beach', a: ['d'], why: 'Needs a large sand supply.' },
+          { t: 'Mudflats in sheltered estuaries, flooded at high tide', a: ['s'], why: 'Fine silt settles in calm water.' },
+          { t: 'Plants such as glasswort tolerate salt and regular flooding', a: ['s'], why: 'Halophytes.' }] }, next); } },
+      { title: '🧠 Ecosystem check', build: function (el, next) { mcq(el, [
+        { q: 'Which physical factor most limits where mangroves grow?', o: ['Temperature — they need warm tropical or subtropical water', 'Altitude — they only grow on high, cold mountain coastlines', 'Snowfall — they need a cold winter to produce seeds', 'Rock type — they only grow on hard granite cliffs'], c: 0, f: 'Mangroves are found on sheltered, warm, shallow tropical coasts.' },
+        { q: 'Why does soil quality improve further inland in a dune system?', o: ['Dead plants add humus, so the soil holds more water and nutrients', 'The sea washes nutrients further inland during every high tide', 'Wind brings fresh salt from the beach to fertilise the older dunes', 'Older dunes are made of rock instead of loose sand and shells'], c: 0, f: 'Each stage of succession changes the conditions for the next.' }], next); } }]);
+  };
+
+  /* L9 — Coral reefs */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '🪸 What do corals need?', how: 'Coral reefs are built by tiny animals called <b>polyps</b>. They live in <b>symbiosis</b> with algae called <b>zooxanthellae</b>, which photosynthesise and give the polyps food. Is each condition <b>good</b> for coral?',
+        build: function (el, next) { flash(el, { yes: '✅ Good for coral', no: '❌ Bad for coral', ky: 'g', kn: 'b', items: [
+          { t: 'Warm water between about 18°C and 29°C', a: true, why: 'Below 18°C coral cannot grow; very warm water causes bleaching.' },
+          { t: 'Shallow water less than about 50 m deep', a: true, why: 'Sunlight is needed for the algae to photosynthesise.' },
+          { t: 'Clear water with little sediment', a: true, why: 'Sediment blocks light and smothers polyps.' },
+          { t: 'A river mouth carrying lots of mud and fresh water', a: false, why: 'Fresh water and sediment kill coral.' },
+          { t: 'Salty sea water', a: true, why: 'Coral needs salt water.' },
+          { t: 'Water temperatures above 30°C for several weeks', a: false, why: 'Heat stress makes polyps expel their algae — coral bleaching.' }] }, next); } },
+      { title: '🏝️ Which type of reef?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['f', '🏖️ Fringing reef'], ['b', '🚧 Barrier reef'], ['a', '⭕ Atoll']], ['zc1', 'zc2', 'zc3']), cards: [
+          { t: 'Grows close to the shore with no deep lagoon', a: ['f'], why: 'The most common type.' },
+          { t: 'Separated from the coast by a wide, deep lagoon', a: ['b'], why: 'Further offshore.' },
+          { t: 'A ring of coral around a lagoon, where a volcanic island has sunk', a: ['a'], why: 'Darwin’s theory of atoll formation.' },
+          { t: 'The Great Barrier Reef, about 2,300 km long', a: ['b'], why: 'The world’s largest reef system.' },
+          { t: 'The Maldives', a: ['a'], why: 'A chain of atolls in the Indian Ocean.' },
+          { t: 'The reefs at Hikkaduwa on Sri Lanka’s south-west coast', a: ['f'], why: 'Close to the beach — easy for tourists to reach.' }] }, next); } },
+      { title: '📊 Data skills: reefs at risk', how: 'Read the bar chart carefully.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Reefs threatened by local activities and warming', bars: [['SE Asia', 95, '#dc2626'], ['Atlantic', 75, '#f97316'], ['Indian Ocean', 66, '#f59e0b'], ['Middle East', 65, '#f59e0b'], ['Pacific', 48, '#38bdf8'], ['Australia', 14, '#16a34a']], y0: 0, y1: 100, ystep: 20, minor: 5, values: true, xlab: 'Region', ylab: '% of reefs threatened' }),
+          cap: 'Approximate share of reefs threatened by local activities and recent warming (Reefs at Risk Revisited, 2011).', qs: [
+          { type: 'num', q: 'What is the difference between the region with the highest share and the region with the lowest?', ans: 81, tol: 0, unit: 'percentage points', f: '95 − 14 = <b>81 percentage points</b>.' },
+          { type: 'mc', q: 'Suggest why so many reefs in South-East Asia are threatened.', o: ['Dense coastal populations, overfishing, blast fishing and pollution', 'The water there is far too cold for corals to grow well at any depth', 'There are almost no tourists or fishing boats in the region', 'Reefs in South-East Asia are protected by strict marine parks'], c: 0, f: 'Large populations depend on reef fisheries and coastal development is rapid.' }] }, next); } },
+      { title: '🧠 Coral check', build: function (el, next) { mcq(el, [
+        { q: 'Why are coral reefs not found off the west coast of South America?', o: ['Cold ocean currents keep the water below about 18°C', 'The water there is too shallow and too clear for coral', 'There is too much sunlight reaching the sea bed there', 'The sea there is fresh water, not salt water, all year'], c: 0, f: 'Cold currents limit coral on the west coasts of continents.' },
+        { q: 'Which is a feature of coral reef ecosystems?', o: ['Very high biodiversity — about 25% of marine species in under 1% of the sea bed', 'Very low biodiversity, because only a few species can survive in such warm, salty water', 'They are made of sand, which is held together by grasses and shrubs', 'They grow best in deep, dark and muddy water near the mouths of rivers'], c: 0, f: 'Reefs are called the rainforests of the sea.' }], next); } }]);
+  };
+
+  /* L10 — Threats to coastal ecosystems */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '⚠️ Sort the threats', build: function (el, next) { sortGame(el, { zones: zonesFrom([['i', '🏭 Industrialisation'], ['a', '🚜 Agriculture'], ['t', '🏨 Tourism'], ['d', '🪓 Deforestation']], ['zc1', 'zg', 'zc2', 'zr']), cards: [
+          { t: 'Industrial waste and oil spills pollute the water', a: ['i'], why: 'Toxic chemicals kill marine life.' },
+          { t: 'Ports and factories built on reclaimed wetlands', a: ['i'], why: 'Habitats are lost completely.' },
+          { t: 'Fertiliser runoff causes algal blooms', a: ['a'], why: 'Eutrophication.' },
+          { t: 'Mangroves cleared for shrimp farms', a: ['a'], why: 'Aquaculture is a major cause of mangrove loss.' },
+          { t: 'Divers and boat anchors break coral', a: ['t'], why: 'Physical damage.' },
+          { t: 'Hotels built on sand dunes; trampling destroys marram grass', a: ['t'], why: 'Dunes become unstable.' },
+          { t: 'Mangrove trees cut down for timber and firewood', a: ['d'], why: 'Loss of the coast’s natural protection.' },
+          { t: 'Inland forests cleared, so more sediment reaches the reef', a: ['d'], why: 'Sediment blocks light.' }] }, next); } },
+      { title: '🔗 Fertiliser to dead zone', build: function (el, next) { orderGame(el, ['Farmers spread fertiliser on fields', 'Heavy rain washes nitrates into rivers and the sea', 'Algae grow rapidly in the nutrient-rich water (an algal bloom)', 'The algae block sunlight and then die and decompose', 'Bacteria use up the oxygen, so fish and coral die'], 'Tap the FIRST step.', next); } },
+      { title: '✍️ 8-mark technique: Analyse', how: 'Edexcel 8-mark <b>Analyse</b> questions are marked in levels. Is each feature something that would <b>raise</b> an answer into the top level?',
+        build: function (el, next) { flash(el, { yes: '⬆️ Top-level feature', no: '⬇️ Holds marks back', ky: 'u', kn: 'd', items: [
+          { t: 'Uses specific evidence and figures from the resource', a: true, why: '“Refer to the resource” is an instruction, not a suggestion.' },
+          { t: 'Explains the links between causes and effects', a: true, why: 'Analysis means breaking an issue down and linking ideas.' },
+          { t: 'Lists six threats in one sentence each', a: false, why: 'Lists lack development — two or three well-developed points are better.' },
+          { t: 'Reaches a supported conclusion about which factor is most important', a: true, why: 'A judgement shows evaluation (AO4).' },
+          { t: 'Copies out the whole resource without comment', a: false, why: 'Quoting is not analysing.' },
+          { t: 'Considers both short-term and long-term impacts', a: true, why: 'Shows breadth and balance.' }] }, next); } },
+      { title: '🧠 Threats check', build: function (el, next) { mcq(el, [
+        { q: 'How can the loss of mangroves increase the risk to coastal communities?', o: ['Mangroves absorb wave energy, so without them storm surges reach further inland', 'Mangroves attract cyclones, so removing them makes tropical storms less likely to form', 'Mangroves block fishing boats, so removing them always makes coasts safer', 'Mangroves cause erosion, so removing them makes the coastline grow outwards'], c: 0, f: 'Mangroves are a natural sea defence.' },
+        { q: 'Which is the best example of an industry threatening a coastal ecosystem?', o: ['Waste water from a factory pollutes a salt marsh and kills invertebrates', 'A school takes a large class on a field trip to measure a sand dune transect', 'A fisherman uses a small rowing boat and a single line to catch fish', 'Marram grass is planted on a yellow dune to stop the sand blowing away'], c: 0, f: 'Industrial pollution damages food chains.' }], next); } }]);
+  };
+
+  /* L11 — Coastal conflicts */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '👥 What does each group want?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['dev', '🏗️ Wants development'], ['con', '🌿 Wants conservation']], ['zc1', 'zg']), cards: [
+          { t: 'A hotel company wanting to build a beachfront resort', a: ['dev'], why: 'Tourism brings jobs and income.' },
+          { t: 'A port authority wanting to dredge a deeper shipping channel', a: ['dev'], why: 'Economic growth.' },
+          { t: 'A shrimp farm owner wanting to clear mangroves', a: ['dev'], why: 'Profit from aquaculture.' },
+          { t: 'A wildlife trust protecting nesting birds on a salt marsh', a: ['con'], why: 'Habitat protection.' },
+          { t: 'Local fishers who need healthy reefs and mangrove nurseries', a: ['con'], why: 'Their livelihoods depend on the ecosystem.' },
+          { t: 'Scientists monitoring coral bleaching', a: ['con'], why: 'Research to protect reefs.' }] }, next); } },
+      { title: '⚔️ Conflict likely?', how: 'Is a <b>conflict</b> between users likely?',
+        build: function (el, next) { flash(el, { yes: '⚔️ Conflict likely', no: '🤝 Little conflict', ky: 'c', kn: 'n', items: [
+          { t: 'Jet skis operating next to a bird-nesting area', a: true, why: 'Noise disturbs breeding birds.' },
+          { t: 'Coral mined for lime for building, beside a diving resort', a: true, why: 'Mining destroys the reef tourists come to see.' },
+          { t: 'A council protects one village but not the next village along', a: true, why: 'Residents of unprotected areas lose homes and property values.' },
+          { t: 'Hotels and tourists use the same beach as fishing boats', a: true, why: 'Competition for space — as at Hikkaduwa, Sri Lanka.' },
+          { t: 'Walkers using a footpath behind the dunes', a: false, why: 'A managed path reduces trampling.' }] }, next); } },
+      { title: '🧠 Conflict check', build: function (el, next) { mcq(el, [
+        { q: 'Why might homeowners object to a “no active intervention” policy?', o: ['Their homes will not be protected, so they may lose property and its value', 'They will have to pay much more council tax to build the new concrete sea walls', 'The beach in front of their homes will become much wider every year', 'Tourists will no longer be allowed to visit their stretch of coast'], c: 0, f: 'Not defending a coast is cheap for the council but costly for residents.' },
+        { q: 'Why can groynes cause conflict along a coastline?', o: ['They trap sediment, starving beaches further down the coast and increasing erosion there', 'They are invisible from the beach, so tourists keep crashing into them', 'They always increase the size of every beach along the whole coastline, so erosion stops everywhere', 'They stop all waves reaching the coast, so surfers cannot use the beach'], c: 0, f: 'This is the terminal groyne effect, seen at Mappleton and Cowden.' }], next); } }]);
+  };
+
+  /* L12 — Coastal flooding */
+  LV[12] = function (root) {
+    stages(root, [
+      { title: '🌀 How a storm surge happens', build: function (el, next) { orderGame(el, ['An area of very low pressure forms (a depression or tropical cyclone)', 'Low pressure lets the sea surface rise, by about 1 cm for each 1 mb fall', 'Strong onshore winds pile water up against the coast', 'If this coincides with a high tide, the sea overtops defences', 'Low-lying coasts and estuaries are flooded'], 'Tap the FIRST step.', next); } },
+      { title: '📈 Data skills: rising sea level', how: 'Read the line graph carefully.',
+        build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Global mean sea level change since 1900', x0: 1900, x1: 2020, xticks: [1900, 1920, 1940, 1960, 1980, 2000, 2020], y0: 0, y1: 30, ystep: 5, minor: 1, xlab: 'Year', ylab: 'Change since 1900 (cm)',
+            series: [{ c: '#0284c7', dots: true, pts: [[1900, 0], [1920, 3], [1940, 6], [1960, 10], [1980, 13], [2000, 17], [2020, 24]] }] }),
+          cap: 'Approximate rise in global mean sea level (NOAA / NASA).', qs: [
+          { type: 'num', q: 'By how many cm did sea level rise between 2000 and 2020?', ans: 7, tol: 0.5, unit: 'cm', f: '24 − 17 = <b>7 cm</b>.' },
+          { type: 'num', q: 'Use your answer to calculate the average rate of rise in mm per year between 2000 and 2020.', ans: 3.5, tol: 0.1, unit: 'mm per year', f: '70 mm ÷ 20 years = <b>3.5 mm per year</b>.' },
+          { type: 'mc', q: 'Which statement best describes the trend?', o: ['Sea level has risen throughout, and the rise has speeded up since 2000', 'Sea level has fallen steadily since 1900, and the fall has slowed down after 2000', 'Sea level has stayed the same until 2000 and then started to rise', 'Sea level rose quickly until 1960 and has stayed level since then'], c: 0, f: 'Melting ice and thermal expansion are speeding up the rise.' }] }, next); } },
+      { title: '🛡️ Reduce the impact', how: 'Sort each strategy.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['f', '📡 Forecasting and warning'], ['b', '🏠 Building design'], ['p', '🗺️ Planning'], ['d', '🧱 Defences']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Satellites track cyclones so people can be evacuated in time', a: ['f'], why: 'Warnings save lives.' },
+          { t: 'Text-message flood alerts sent to residents', a: ['f'], why: 'Early warning.' },
+          { t: 'Houses built on stilts above expected flood levels', a: ['b'], why: 'Water passes underneath.' },
+          { t: 'Electric sockets placed high up the walls', a: ['b'], why: 'Reduces damage and repair costs.' },
+          { t: 'Banning new houses on low-lying land at risk', a: ['p'], why: 'Land-use zoning.' },
+          { t: 'Cyclone shelters built on high ground', a: ['p'], why: 'Safe places for evacuation.' },
+          { t: 'The Thames Barrier, operational since 1982', a: ['d'], why: 'Gates close when a surge is forecast.' },
+          { t: 'Sea walls and raised embankments', a: ['d'], why: 'Hard engineering.' }] }, next); } },
+      { title: '🧠 Flooding check', build: function (el, next) { mcq(el, [
+        { q: 'Why are some countries’ populations more at risk from coastal flooding than others?', o: ['Large populations on low-lying deltas, with less money for defences and warnings', 'Their coasts face the Arctic Ocean, where there are no tides or storms at all', 'They have mountains right at the coast, so their cities are all built high up on the slopes', 'They have small populations, so there are fewer people to warn in an emergency'], c: 0, f: 'Bangladesh and Myanmar combine low-lying deltas, dense populations and limited funding.' },
+        { q: 'How can climate change increase the risk of coastal flooding?', o: ['Thermal expansion and melting ice raise sea level, so storm surges reach further inland', 'Warmer air makes the sea evaporate so fast that the coastline dries out and the sea retreats', 'Cooler oceans will make tropical cyclones weaker and much less frequent', 'Melting ice lowers sea level, because ice takes up more room than water'], c: 0, f: 'Higher base sea level means every surge is more dangerous.' }], next); } }]);
+  };
+
+  /* L13 — Hard and soft engineering */
+  LV[13] = function (root) {
+    stages(root, [
+      { title: '🧱 Hard or soft engineering?', how: '<b>Hard engineering</b> = building structures to resist the sea. <b>Soft engineering</b> = working with natural processes.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['h', '🧱 Hard engineering'], ['s', '🌿 Soft engineering']], ['zc1', 'zg']), cards: [
+          { t: 'Sea wall', a: ['h'], why: 'A concrete wall reflects wave energy.' },
+          { t: 'Groynes', a: ['h'], why: 'Timber or rock barriers trap sediment.' },
+          { t: 'Rock armour (rip-rap)', a: ['h'], why: 'Large boulders absorb wave energy.' },
+          { t: 'Gabions', a: ['h'], why: 'Wire cages filled with rocks.' },
+          { t: 'Beach nourishment (replenishment)', a: ['s'], why: 'Adds sand or shingle to the beach.' },
+          { t: 'Dune regeneration — planting marram grass', a: ['s'], why: 'Natural protection.' },
+          { t: 'Managed retreat — letting the sea flood low-value land', a: ['s'], why: 'Creates salt marsh that absorbs wave energy.' },
+          { t: 'Replanting mangroves', a: ['s'], why: 'Roots trap sediment and reduce wave energy.' }] }, next); } },
+      { title: '⚖️ Advantage or disadvantage?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['a', '👍 Advantage'], ['d', '👎 Disadvantage']], ['zg', 'zr']), cards: [
+          { t: 'Sea walls give strong protection to high-value towns', a: ['a'], why: 'Effective where property is valuable.' },
+          { t: 'Sea walls are very expensive and can cause scouring of the beach', a: ['d'], why: 'Reflected waves remove sand.' },
+          { t: 'Beach nourishment looks natural and keeps a beach for tourists', a: ['a'], why: 'Good for tourism.' },
+          { t: 'Beach nourishment must be repeated because the sand is washed away', a: ['d'], why: 'Ongoing costs.' },
+          { t: 'Managed retreat is cheap and creates new wildlife habitats', a: ['a'], why: 'Salt marshes form.' },
+          { t: 'Managed retreat means farmland is lost and owners may need compensation', a: ['d'], why: 'A source of conflict.' }] }, next); } },
+      { title: '💷 Data skills: comparing costs', how: 'A council must protect a 400 m stretch of coast. Use the costs below.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Cost per metre (example data)', bars: [['Sea wall', 6000, '#64748b'], ['Rock armour (rip-rap)', 3000, '#92400e'], ['Beach nourishment', 1500, '#f59e0b']], y0: 0, y1: 7000, ystep: 1000, minor: 500, values: true, fmt: function (v) { return '£' + v.toLocaleString(); }, yfmt: function (v) { return '£' + v.toLocaleString(); }, xlab: 'Strategy', ylab: 'Cost per metre' }),
+          cap: 'Example costs per metre of coastline, for practice calculations.', qs: [
+          { type: 'num', q: 'Calculate the cost, in £, of building a sea wall along the whole 400 m.', ans: 2400000, tol: 0, unit: '£', f: '400 × £6,000 = <b>£2,400,000</b>.' },
+          { type: 'num', q: 'How much cheaper, in £, is beach nourishment than rock armour for the 400 m?', ans: 600000, tol: 0, unit: '£', f: '400 × (£3,000 − £1,500) = <b>£600,000</b>.' },
+          { type: 'mc', q: 'Why might the council still choose the sea wall?', o: ['It protects a high-value town centre and lasts for decades', 'It is the cheapest option and needs no maintenance at all', 'It always makes the beach wider and attracts more tourists', 'It stops longshore drift reaching the beaches down the coast'], c: 0, f: 'Cost–benefit analysis: high-value land justifies high costs.' }] }, next); } },
+      { title: '🧠 Engineering check', build: function (el, next) { mcq(el, [
+        { q: 'Which of these is a soft engineering strategy?', o: ['Beach replenishment', 'Rock armour (rip-rap)', 'Groynes', 'Sea wall'], c: 0, f: 'Only beach replenishment works with natural processes.' },
+        { q: 'What does “hold the line” mean in a Shoreline Management Plan?', o: ['Keep the coastline where it is now by maintaining or building defences', 'Let the sea erode the coast naturally, with no money spent on any new defences', 'Move the coastline seawards by building new land out into the sea', 'Allow the sea to flood an area of farmland to create a new salt marsh'], c: 0, f: 'The four options are hold the line, advance the line, managed realignment and no active intervention.' }], next); } }]);
+  };
+
+  /* L14 — Sri Lanka */
+  LV[14] = function (root) {
+    stages(root, [
+      { title: '🇱🇰 Sri Lanka: the coastline', how: 'Sri Lanka has about <b>1,600 km</b> of coastline and about 22 million people. The 2004 Indian Ocean tsunami killed about <b>35,000</b> people there.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '⚠️ Problem on the coast'], ['s', '✅ Management strategy']], ['zr', 'zg']), cards: [
+          { t: 'Coral mined to make lime for building', a: ['p'], why: 'Destroys the reefs that protect beaches.' },
+          { t: 'Sand mined from beaches and rivers', a: ['p'], why: 'Reduces the sediment supply.' },
+          { t: 'Hotels built right up to the high water line', a: ['p'], why: 'Exposed to erosion and storms.' },
+          { t: 'Mangroves cleared for shrimp farms', a: ['p'], why: 'Loss of natural protection.' },
+          { t: 'A ban on coral mining', a: ['s'], why: 'Protects reefs.' },
+          { t: 'Setback areas where building is not allowed', a: ['s'], why: 'Keeps development away from the hazard.' },
+          { t: 'Special Area Management (SAM) plans run with local communities', a: ['s'], why: 'For example Hikkaduwa’s marine sanctuary.' },
+          { t: 'Mangrove replanting', a: ['s'], why: 'Soft engineering.' }] }, next); } },
+      { title: '📅 Coastal management timeline', build: function (el, next) { orderGame(el, ['The Coast Conservation Act (No. 57 of 1981) is passed', 'The first Coastal Zone Management Plan (CZMP) is published in 1990', 'The plan is revised in 1997', 'The 2004 Indian Ocean tsunami devastates the coast', 'The CZMP is revised in 2004 and again in 2018'], 'Tap the FIRST event.', next); } },
+      { title: '🧠 Sri Lanka check', build: function (el, next) { mcq(el, [
+        { q: 'How is Sri Lanka’s “coastal zone” defined in law?', o: ['300 m inland from the high water line and 2 km out to sea from the low water line', '3 km inland from the high water line and 20 km out to sea from the low water line', 'The whole country, because no part of the island is far from the coast', 'Only the beaches used by tourists in the south and west of the island'], c: 0, f: 'This area is regulated by the Coast Conservation Department.' },
+        { q: 'Why is conflict common on the Hikkaduwa–Matara coast?', o: ['Tourism, fishing, and coral and sand mining all compete for the same coast', 'Nobody lives on the coast there, so the government cannot decide on its use', 'The coast is too cold for tourists, so hotels and farms compete for land', 'The coastline is only used by fishers, who argue over the price of fish'], c: 0, f: 'Several users need the same space and resources.' },
+        { q: 'Which is the strongest evaluation of the CZMP?', o: ['It has reduced coral mining and controlled building, but enforcement and funding are still weak in places', 'It has completely stopped all erosion everywhere on the coast of Sri Lanka', 'It has failed completely because Sri Lanka has done nothing to protect its coast', 'It is only about tourism and does not include any plans for local fishing communities or for protecting the coral reefs'], c: 0, f: 'A good evaluation weighs successes against limitations.' }], next); } }]);
+  };
+
+  /* L15 — Holderness */
+  LV[15] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the Holderness coast', how: 'The Holderness coast runs about <b>61 km</b> from Flamborough Head to Spurn Head. Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_HOLD, pins: PINS_HOLD, cap: 'Sketch map of the Holderness coast, East Yorkshire.', labels: [
+          { t: 'Hard chalk headland', pin: 1 },
+          { t: 'Longshore drift moving sediment south', pin: 2 },
+          { t: 'Mappleton: 2 rock groynes and rock armour (1991, £2 million)', pin: 3 },
+          { t: 'Easington gas terminal, protected by a revetment', pin: 4 },
+          { t: 'Spurn Head spit', pin: 5 },
+          { t: 'Soft boulder clay that erodes quickly', pin: 6 },
+          { t: 'A coral reef protecting the coast', pin: null }] }, next); } },
+      { title: '📏 Data skills: how fast is it eroding?', how: 'The Holderness coast retreats by an average of about <b>1.8 m a year</b>.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Cliff retreat over 50 years at 1.8 m a year', bars: [['10 yrs', 18, '#f59e0b'], ['20 yrs', 36, '#f97316'], ['30 yrs', 54, '#ea580c'], ['40 yrs', 72, '#dc2626'], ['50 yrs', 90, '#991b1b']], y0: 0, y1: 100, ystep: 20, minor: 5, values: true, xlab: 'Time', ylab: 'Land lost (m)' }),
+          cap: 'Distance of cliff retreat at the average Holderness rate.', qs: [
+          { type: 'num', q: 'A farmhouse is 45 m from the cliff edge. At 1.8 m a year, how many years until the cliff reaches it?', ans: 25, tol: 0, unit: 'years', f: '45 ÷ 1.8 = <b>25 years</b>.' },
+          { type: 'num', q: 'The coast is about 61 km long. Roughly how many m² of land is lost each year? (61,000 × 1.8)', ans: 109800, tol: 0, unit: 'm²', f: '61,000 m × 1.8 m = <b>109,800 m²</b> — about 15 football pitches every year.' },
+          { type: 'mc', q: 'Why does Holderness erode so quickly?', o: ['Soft boulder clay, a long fetch from the north-east and narrow beaches', 'Hard granite cliffs that are slowly dissolved by acidic rain and sea spray', 'Very calm seas that are sheltered by a large offshore reef', 'Thick mangrove forests whose roots loosen the cliff face'], c: 0, f: 'Weak geology plus powerful waves.' }] }, next); } },
+      { title: '🧱 Where is each strategy?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['h', '🏘️ Hold the line (towns and key sites)'], ['n', '🌾 No active intervention']], ['zc1', 'zc3']), cards: [
+          { t: 'Hornsea — sea wall, groynes and rock armour', a: ['h'], why: 'A tourist town with high-value property.' },
+          { t: 'Withernsea — sea wall and rock armour', a: ['h'], why: 'Protects homes and businesses.' },
+          { t: 'Mappleton — rock groynes and rock armour', a: ['h'], why: 'Protects the village and the B1242 coast road.' },
+          { t: 'Easington gas terminal — rock revetment', a: ['h'], why: 'Nationally important energy infrastructure.' },
+          { t: 'Farmland between the towns', a: ['n'], why: 'The cost of defence is more than the value of the land.' },
+          { t: 'Isolated caravan parks and farms south of Mappleton', a: ['n'], why: 'Not cost-effective to protect.' }] }, next); } },
+      { title: '🧠 Holderness check', build: function (el, next) { mcq(el, [
+        { q: 'What happened at Cowden after defences were built at Mappleton?', o: ['Erosion increased, because the groynes trapped sediment moving south', 'Erosion stopped completely, because the groynes protected the whole coast', 'A new spit formed at Cowden from sand washed out of the groynes', 'Cowden was flooded by a storm surge coming down the Humber Estuary'], c: 0, f: 'The terminal groyne effect: beaches downdrift are starved of sediment.' },
+        { q: 'Why does some sediment eroded from Holderness matter to Spurn Head?', o: ['Longshore drift carries it south to build and maintain the spit', 'It is carried north to build the chalk cliffs at Flamborough Head', 'It is dissolved in the sea, so it never reaches anywhere else', 'It is dumped by ships on the beaches at Hornsea every summer'], c: 0, f: 'Protecting the cliffs can starve Spurn Head of sediment.' }], next); } }]);
+  };
+
+  /* L16 — EDEXCEL EXAM BOSS */
+  var EXQ = [
+    { q: 'Analyse the importance of managing the threats to coral reef ecosystems.', mk: 'Paper 1 · 8 marks · Analyse',
+      C: 'Managing threats to coral reefs is important because reefs support very high biodiversity and many people depend on them for food, income and protection.',
+      E: 'For example, about 25% of marine species live on reefs, yet around 75% of reefs are threatened by overfishing, pollution and warming seas.',
+      X: 'If reefs die, fish stocks fall, tourism income is lost and waves reach the coast with more energy, so erosion and flooding increase.',
+      J: 'Overall, management is most important where large coastal populations rely on reefs, such as South-East Asia, because the economic and social impacts there are greatest.',
+      D: ['Coral reefs are made of sand held together by marram grass, so they are easy to replant.', 'Coral reefs grow best in cold, muddy water, so threats to them do not matter much.'] },
+    { q: 'Analyse the effectiveness of hard engineering strategies in protecting a coastline.', mk: 'Paper 1 · 8 marks · Analyse',
+      C: 'Hard engineering can protect high-value places effectively, but it often moves the problem further along the coast.',
+      E: 'At Mappleton on the Holderness coast, two rock groynes and rock armour built in 1991 for £2 million protected the village and the coast road.',
+      X: 'However, the groynes trapped sediment moving south by longshore drift, so beaches at Cowden were starved and erosion there increased.',
+      J: 'Therefore hard engineering is effective locally where land values are high, but less effective for the coastline as a whole.',
+      D: ['Hard engineering always works because sea walls never need repairing.', 'Mappleton was protected by planting mangroves, which are a type of hard engineering.'] },
+    { q: 'Analyse why conflicts between development and conservation occur in coastal areas.', mk: 'Paper 1 · 8 marks · Analyse',
+      C: 'Conflicts occur because different groups want to use the same limited coastal space and resources in different ways.',
+      E: 'On Sri Lanka’s Hikkaduwa–Matara coast, hotels, fishers and coral and sand miners all compete for the same stretch of coast.',
+      X: 'Coral mining for lime brings income but destroys the reef that protects beaches and attracts tourists, so one use damages another.',
+      J: 'The conflict is greatest where livelihoods depend directly on the coast, which is why Sri Lanka’s CZMP uses setback areas and community-led Special Area Management.',
+      D: ['There are no conflicts on coasts because everyone wants the same thing.', 'Conflicts only happen in rich countries, because poor countries do not use their coasts.'] },
+    { q: 'Analyse why the populations of some countries are more at risk from coastal flooding than others.', mk: 'Paper 1 · 8 marks · Analyse',
+      C: 'Some populations are more at risk because of a combination of physical exposure and limited money to prepare and respond.',
+      E: 'In 2008 Cyclone Nargis caused a storm surge that killed around 138,000 people on Myanmar’s low-lying Irrawaddy Delta.',
+      X: 'Dense populations on low, flat deltas are exposed, and poorer countries have fewer warning systems, shelters and defences, so more people die.',
+      J: 'Overall, wealth and preparation matter more than exposure alone: the Netherlands and the UK are low-lying too, but defences such as the Thames Barrier reduce their risk.',
+      D: ['Countries with mountains are always more at risk of coastal flooding than flat countries.', 'Coastal flooding only happens because of tsunamis, so storms do not increase the risk.'] }];
+
+  LV[16] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Point'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Explain / Develop'], ['J', 'j', 'Conclusion / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the Edexcel Examiner', how: 'For each 8-mark <b>Analyse</b> question, tap a sentence card and then tap the box it belongs in: <b>Point</b>, <b>Evidence</b>, <b>Explain</b> and <b>Conclusion</b>. Two cards are <b>traps</b> — leave them out! Top-level answers use specific evidence and reach a supported conclusion.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The Edexcel Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A developed, evidenced paragraph with a conclusion.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Point = your main idea; Evidence = specific facts or case study; Explain = how/why it links; Conclusion = an overall judgement. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var MK = '<defs><marker id="mB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0f3a5c"/></marker><marker id="mR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#dc2626"/></marker><marker id="mR0" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M8 0L0 4L8 8z" fill="#0f3a5c"/></marker></defs>';
+  var SVG_WAVE = '<svg viewBox="0 0 680 300" role="img" aria-label="Parts of a wave">' + MK +
+    '<rect width="680" height="300" fill="#f0f9ff"/>' +
+    '<path d="M20 150 Q60 70 100 150 T180 150 T260 150 T340 150 T420 150 L470 250 L0 250 L0 150 Z" fill="#7dd3fc" opacity=".55"/>' +
+    '<path d="M20 150 Q60 70 100 150 T180 150 T260 150 T340 150 T420 150" fill="none" stroke="#0369a1" stroke-width="4"/>' +
+    '<polygon points="440,262 680,150 680,300 440,300" fill="#fde68a"/><line x1="440" y1="262" x2="680" y2="150" stroke="#b45309" stroke-width="2"/>' +
+    '<line x1="60" y1="62" x2="220" y2="62" stroke="#0f3a5c" stroke-width="2" marker-end="url(#mB)" marker-start="url(#mR0)"/><line x1="60" y1="66" x2="60" y2="108" stroke="#0f3a5c" stroke-dasharray="3 3"/><line x1="220" y1="66" x2="220" y2="108" stroke="#0f3a5c" stroke-dasharray="3 3"/>' +
+    '<line x1="230" y1="110" x2="300" y2="110" stroke="#64748b" stroke-dasharray="3 3"/><line x1="230" y1="190" x2="300" y2="190" stroke="#64748b" stroke-dasharray="3 3"/><line x1="262" y1="112" x2="262" y2="188" stroke="#0f3a5c" stroke-width="2" marker-end="url(#mB)" marker-start="url(#mR0)"/>' +
+    '<line x1="478" y1="222" x2="590" y2="172" stroke="#0f3a5c" stroke-width="3" marker-end="url(#mB)"/><line x1="600" y1="200" x2="490" y2="250" stroke="#dc2626" stroke-width="3" marker-end="url(#mR)"/>' +
+    '<text x="660" y="290" text-anchor="end" font-size="11" fill="#92400e">beach</text></svg>';
+  var PINS_WAVE = [{ n: 1, x: 60, y: 92 }, { n: 2, x: 140, y: 212 }, { n: 3, x: 140, y: 40 }, { n: 4, x: 285, y: 150 }, { n: 5, x: 520, y: 180 }, { n: 6, x: 560, y: 250 }];
+
+  var SVG_HEAD = '<svg viewBox="0 0 680 320" role="img" aria-label="Erosion of a headland: crack, cave, arch, stack and stump">' +
+    '<rect width="680" height="320" fill="#e0f2fe"/><rect x="0" y="250" width="680" height="70" fill="#7dd3fc"/>' +
+    '<rect x="0" y="270" width="680" height="50" fill="#a8a29e" opacity=".55"/>' +
+    '<path d="M20 80 L200 80 L200 270 L20 270 Z" fill="#a16207"/><path d="M110 270 L104 240 L114 215 L106 190 L112 170" fill="none" stroke="#1c1917" stroke-width="3"/>' +
+    '<path d="M200 80 L330 80 L330 270 L200 270 Z" fill="#a16207"/><path d="M235 270 Q235 205 265 205 Q295 205 295 270 Z" fill="#292524"/>' +
+    '<path d="M330 80 L460 80 L460 270 L430 270 L430 205 Q395 155 360 205 L360 270 L330 270 Z" fill="#a16207"/>' +
+    '<path d="M492 110 L540 110 L540 270 L492 270 Z" fill="#a16207"/><path d="M590 225 L625 225 L625 270 L590 270 Z" fill="#a16207"/>' +
+    '<rect x="0" y="80" width="460" height="12" fill="#4d7c0f"/><rect x="492" y="110" width="48" height="8" fill="#4d7c0f"/>' +
+    '<text x="670" y="262" text-anchor="end" font-size="11" fill="#0c4a6e">sea level</text></svg>';
+  var PINS_HEAD = [{ n: 1, x: 140, y: 175 }, { n: 2, x: 265, y: 180 }, { n: 3, x: 395, y: 220 }, { n: 4, x: 516, y: 170 }, { n: 5, x: 607, y: 205 }, { n: 6, x: 340, y: 295 }];
+
+  var SVG_SPIT = '<svg viewBox="0 0 680 340" role="img" aria-label="Formation of a spit">' + MK +
+    '<rect width="680" height="340" fill="#7dd3fc"/>' +
+    '<path d="M0 0 L680 0 L680 40 L640 40 L600 60 L520 60 L260 60 Q215 70 195 120 L0 150 Z" fill="#86efac"/>' +
+    '<path d="M270 70 L500 70 L520 120 L300 130 Z" fill="#4ade80" opacity=".8"/>' +
+    '<g stroke="#166534" stroke-width="1.5"><line x1="300" y1="85" x2="310" y2="95"/><line x1="340" y1="85" x2="350" y2="95"/><line x1="380" y1="90" x2="390" y2="100"/><line x1="420" y1="90" x2="430" y2="100"/><line x1="460" y1="92" x2="470" y2="102"/><line x1="330" y1="110" x2="340" y2="120"/><line x1="400" y1="108" x2="410" y2="118"/></g>' +
+    '<path d="M195 118 L300 132 L520 148 Q565 150 575 115 L560 110 Q550 135 515 132 L300 118 L198 104 Z" fill="#fde68a" stroke="#b45309"/>' +
+    '<g stroke="#0f3a5c" stroke-width="2.5" fill="none" marker-end="url(#mB)"><path d="M240 190 L260 150 L280 190 L300 150"/><path d="M360 200 L380 162 L400 200 L420 162"/><path d="M460 205 L480 168 L500 205 L520 168"/></g>' +
+    '<line x1="90" y1="310" x2="170" y2="240" stroke="#dc2626" stroke-width="4" marker-end="url(#mR)"/>' +
+    '<text x="20" y="40" font-size="12" font-weight="700" fill="#14532d">LAND</text><text x="300" y="300" font-size="12" font-weight="700" fill="#0c4a6e">SEA</text></svg>';
+  var PINS_SPIT = [{ n: 1, x: 380, y: 222 }, { n: 2, x: 110, y: 268 }, { n: 3, x: 420, y: 138 }, { n: 4, x: 595, y: 120 }, { n: 5, x: 360, y: 90 }];
+
+  var SVG_DUNE = '<svg viewBox="0 0 680 280" role="img" aria-label="Sand dune succession from the sea inland">' + MK +
+    '<rect width="680" height="280" fill="#f0f9ff"/><rect x="0" y="215" width="110" height="65" fill="#7dd3fc"/>' +
+    '<path d="M0 222 L110 218 L150 214 Q175 196 200 212 Q250 150 300 205 Q360 100 420 200 Q470 150 520 205 L560 214 Q580 222 600 208 Q630 170 680 175 L680 280 L0 280 Z" fill="#fde68a" stroke="#b45309" stroke-width="2"/>' +
+    '<path d="M540 214 Q560 228 585 214 L585 280 L540 280 Z" fill="#93c5fd" opacity=".55"/>' +
+    '<g stroke="#65a30d" stroke-width="2"><line x1="170" y1="203" x2="168" y2="194"/><line x1="180" y1="203" x2="182" y2="195"/><line x1="240" y1="172" x2="236" y2="160"/><line x1="255" y1="168" x2="258" y2="156"/><line x1="268" y1="178" x2="266" y2="166"/><line x1="340" y1="138" x2="336" y2="124"/><line x1="355" y1="120" x2="352" y2="106"/><line x1="370" y1="118" x2="374" y2="104"/><line x1="385" y1="140" x2="388" y2="126"/></g>' +
+    '<g fill="#4d7c0f"><ellipse cx="455" cy="168" rx="16" ry="8"/><ellipse cx="480" cy="170" rx="14" ry="7"/><ellipse cx="500" cy="183" rx="12" ry="6"/></g>' +
+    '<g fill="#166534"><rect x="618" y="150" width="5" height="25"/><circle cx="620" cy="140" r="16"/><rect x="653" y="146" width="5" height="30"/><circle cx="655" cy="134" r="18"/></g>' +
+    '<line x1="40" y1="40" x2="640" y2="40" stroke="#0f3a5c" stroke-width="2" marker-end="url(#mB)"/>' +
+    '<text x="340" y="30" text-anchor="middle" font-size="11" fill="#0f3a5c">older dunes, more vegetation, more organic matter and less salt</text>' +
+    '<text x="40" y="248" font-size="11" font-weight="700" fill="#0c4a6e">SEA</text></svg>';
+  var PINS_DUNE = [{ n: 1, x: 175, y: 228 }, { n: 2, x: 252, y: 200 }, { n: 3, x: 360, y: 168 }, { n: 4, x: 470, y: 205 }, { n: 5, x: 562, y: 246 }, { n: 6, x: 638, y: 205 }];
+
+  var SVG_HOLD = '<svg viewBox="0 0 520 440" role="img" aria-label="Sketch map of the Holderness coast">' + MK +
+    '<rect width="520" height="440" fill="#7dd3fc"/>' +
+    '<path d="M0 0 L240 0 L250 30 L300 40 L292 80 L300 150 L320 220 L345 290 L375 350 L400 395 L410 410 L380 440 L0 440 Z" fill="#bbf7d0" stroke="#166534" stroke-width="2"/>' +
+    '<path d="M400 395 Q425 410 432 438 L424 440 Q418 415 396 402 Z" fill="#fde68a" stroke="#b45309"/>' +
+    '<path d="M0 360 Q200 370 380 440 L0 440 Z" fill="#7dd3fc" opacity=".9"/>' +
+    '<g fill="#0f3a5c"><circle cx="292" cy="120" r="5"/><circle cx="306" cy="175" r="5"/><circle cx="312" cy="200" r="4"/><circle cx="345" cy="285" r="5"/><circle cx="380" cy="345" r="5"/></g>' +
+    '<g font-size="11" fill="#0f172a"><text x="248" y="22">Flamborough Head (chalk)</text><text x="200" y="124">Hornsea</text><text x="210" y="179">Mappleton</text><text x="232" y="204">Cowden</text><text x="248" y="289">Withernsea</text><text x="292" y="349">Easington</text><text x="438" y="430">Spurn Head</text><text x="60" y="415">Humber Estuary</text></g>' +
+    '<line x1="420" y1="120" x2="455" y2="260" stroke="#dc2626" stroke-width="4" marker-end="url(#mR)"/>' +
+    '<text x="120" y="300" font-size="12" font-weight="700" fill="#166534">boulder clay</text></svg>';
+  var PINS_HOLD = [{ n: 1, x: 270, y: 50 }, { n: 2, x: 455, y: 180 }, { n: 3, x: 325, y: 158 }, { n: 4, x: 400, y: 345 }, { n: 5, x: 420, y: 412 }, { n: 6, x: 140, y: 270 }];
+
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  var GATES = {
+    1: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 1, Q2(b)(i)', q: 'Which of these is the best definition of backwash?', o: [
+          'movement of water down the beach', 'distance between two wave crests', 'friction between wind and water surface', 'movement of water up the beach'], c: 0,
+        ms: '<b>Movement of water down the beach.</b> Not the distance between crests (wavelength), friction with the wind (how waves form) or movement up the beach (swash).' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 1, Q2(a)', q: 'Which statement best describes the characteristics of a destructive wave?', o: [
+          'short wavelength and strong backwash', 'long wavelength and weak backwash', 'long wavelength and strong backwash', 'short wavelength and weak backwash'], c: 0,
+        ms: '<b>Short wavelength and strong backwash.</b> Long wavelength and weak backwash describes a constructive wave; the other two options are only partly correct.' },
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel June 2024 Paper 1, Q2(b)(ii)', q: 'Give one characteristic of a constructive wave.', o: [
+          'A long wavelength, with a stronger swash than backwash.',
+          'A short wavelength, with a backwash that is stronger than the swash.',
+          'High and steep, breaking about 13–15 times every minute.',
+          'It removes material from beaches and erodes the cliffs.'], c: 0,
+        ms: '1 mark for any one: <b>long wavelength</b>, low height / gentle, less frequent, <b>strong swash / weak backwash</b>, low energy / deposition.' }],
+    2: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1, Q2(b)(i)', q: 'Which of these is the best definition of hydraulic action?', o: [
+          'waves hit the cliffs forcing pockets of air into cracks', 'where waves pick up stones and they hit the cliffs', 'waves carry material along the coast', 'where rocks are dissolved by sea water'], c: 0,
+        ms: '<b>Waves hit the cliffs forcing pockets of air into cracks.</b> Stones thrown at cliffs is abrasion; carrying material is transportation; dissolving rocks is solution.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 1, Q2(b)(i)', q: 'Which of these is a process of coastal erosion?', o: ['abrasion', 'beach', 'fetch', 'swash'], c: 0,
+        ms: '<b>Abrasion.</b> A beach is a landform; fetch and swash are features of waves.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q2(e)', q: 'Explain how longshore drift moves sediment along a coastline.', o: [
+          'The prevailing wind makes waves approach the beach at an angle, so the swash carries sediment up the beach at that angle. The backwash then pulls it straight back down under gravity, so the sediment moves along the coast in a zig-zag.',
+          'Longshore drift is when waves erode the cliffs by hydraulic action, forcing air into cracks, which makes the cliff collapse and the material stays at the bottom of the cliff where it fell, forming a beach that does not move along the coast at all.',
+          'Longshore drift moves sand along the beach.',
+          'Waves move sediment up and down the beach.'], c: 0,
+        ms: '1 mark for the initial point and 2 for development: waves arrive <b>at an angle</b> due to the prevailing wind (1); <b>swash</b> carries sediment up the beach at that angle (1); <b>backwash</b> drags it straight back down, so sediment moves along the coast (1).' }],
+    3: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel Summer 2021 Paper 1, Q2(a)', q: 'Which is the best definition of mechanical weathering?', o: [
+          'Where rocks are broken down by physical factors in the environment.', 'Where rocks are eroded by activities of plants and animals.', 'Where rocks are protected from physical processes on a coastline.', 'Where the chemical composition of the rocks is changed.'], c: 0,
+        ms: '<b>Rocks broken down by physical factors in the environment.</b> Plants and animals is biological weathering; a change in chemical composition is chemical weathering.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q2(b)(iii)', q: 'Explain one type of mass movement that happens on coasts.', o: [
+          'Slumping: soft rock such as clay becomes saturated after heavy rain, so it becomes heavy and slides down a curved slip plane under gravity.',
+          'Slumping is when the sea dissolves the cliff by solution, so the cliff gets smaller every year and the dissolved rock is carried away in the sea.',
+          'Rockfall happens on cliffs.',
+          'Mass movement is when rocks move.'], c: 0,
+        ms: '1 mark for identifying a type (e.g. <b>slumping</b>, rockfall, landslide) and 1 for explaining it (e.g. <b>saturated clay moves down a curved slip plane under gravity</b>).' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1, Q2(b)(iii)', q: 'Explain one type of mechanical weathering that takes place at the coast.', o: [
+          'Freeze–thaw: water in cracks freezes and expands, putting pressure on the rock. Repeated freezing and thawing makes pieces of rock break off.',
+          'Freeze–thaw is when acid rain freezes on the cliff and reacts with the minerals, changing the chemical make-up of the rock until it dissolves away.',
+          'Freeze–thaw weathering.',
+          'Rocks break up because of the weather.'], c: 0,
+        ms: '1 mark for a type of physical weathering (e.g. <b>freeze–thaw</b>, salt weathering, onion-skin) and 1 for explanation (e.g. <b>water freezes and expands, causing rock to break off</b>).' }],
+    4: [
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q2(d)', q: 'Explain one factor that influences the rate of coastal erosion.', o: [
+          'Geology: rocks differ in hardness, so soft rocks such as clay erode much faster than hard rocks such as granite. This is why soft rock coasts like Holderness retreat quickly.',
+          'Geology: all rocks are exactly the same hardness, so they all erode at the same rate, which means the type of rock has no effect at all on the rate of coastal erosion anywhere.',
+          'Geology affects erosion.',
+          'The type of rock and the waves.'], c: 0,
+        ms: '1 mark for the factor (e.g. <b>geology</b>, wave energy, fetch, beach width) and 2 for development (e.g. <b>soft rock erodes faster</b> (1) → <b>so the coast retreats more quickly</b> or forms bays (1)).' },
+      { type: 'best', marks: 4, cmd: 'Suggest', src: 'Based on Edexcel June 2019 Paper 1R, Q2(c)', q: 'Suggest two ways geology can influence the shape of a coastline.', o: [
+          'Hard and soft rocks erode at different rates, so soft rock is worn back into bays while hard rock forms headlands. Rocks with lots of joints and faults are eroded more quickly, so caves, arches and stacks form along these weaknesses.',
+          'Geology influences the coastline because hard rocks erode faster than soft rocks, so the hard rock is worn back into bays while the soft rock forms headlands. Also, rocks with lots of joints and faults are stronger, so they are never eroded into caves, arches or stacks.',
+          'Hard rocks make headlands. Soft rocks make bays.',
+          'Geology changes the shape of the coastline.'], c: 0,
+        ms: '1 mark for each way geology affects the coast and 1 for development, ×2: <b>differential erosion</b> → headlands and bays; <b>joints and faults</b> → caves, arches and stacks.' }],
+    5: [
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1, Q2(f)', q: 'Explain how a headland is formed.', o: [
+          'Headlands form on discordant coasts, where bands of hard and soft rock meet the coast at right angles. The soft rock is eroded more quickly by hydraulic action and abrasion to form bays, while the more resistant hard rock is left sticking out into the sea as a headland.',
+          'Headlands form on concordant coasts where the rock bands are parallel to the sea. Hard rock erodes faster than soft rock, so the hard rock is worn back to form a bay and the soft rock is left sticking out into the sea as a headland, protected by the sheltered bays on either side of it.',
+          'A headland is formed by erosion of hard and soft rock.',
+          'A headland is land that sticks out into the sea.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development: <b>discordant coastline</b> (1); <b>bands of hard and soft rock at right angles</b> (1); soft rock <b>eroded faster</b> to form bays (1); <b>hard rock is resistant</b> and left as a headland (1).' },
+      { type: 'multi', marks: 2, cmd: 'Identify', q: 'Identify two features of a concordant coastline.', need: 2, items: [
+          { t: 'Bands of rock run parallel to the coastline', ok: true },
+          { t: 'Coves form when the outer band of hard rock is breached', ok: true },
+          { t: 'Bands of hard and soft rock meet the coast at right angles', ok: false },
+          { t: 'A long series of alternating headlands and bays', ok: false }],
+        ms: 'Concordant: rock bands <b>parallel</b> to the coast; <b>coves</b> such as Lulworth Cove form when the hard outer rock is breached. Headlands and bays are features of discordant coasts.' }],
+    6: [
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q2(f)', q: 'Explain how a coastal arch forms.', o: [
+          'Arches form on headlands. Waves erode lines of weakness such as joints by hydraulic action and abrasion, forming a cave. Caves on either side of the headland are eroded further until they meet, or one cave cuts right through, forming an arch.',
+          'Arches form in bays where constructive waves deposit sand in a curved shape. Over time the sand is cemented together into rock, and the arch grows taller and wider each year as more sand and shingle are added on top by the swash of the waves.',
+          'An arch is formed when a cave is eroded.',
+          'Arches are made by the sea.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development: arches form at <b>headlands</b> (1); waves erode <b>weaknesses/joints</b> (1) forming a <b>cave</b> (1); erosion continues until the cave <b>breaks through</b> the headland (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q2(g)', q: 'Explain how a cave forms.', o: [
+          'Caves form in headlands. Waves attack a line of weakness such as a joint or fault. Hydraulic action forces air into the crack and abrasion wears it away, so the crack widens and deepens over time into a cave.',
+          'Caves form when longshore drift deposits sand and shingle in a curved ridge across a bay, which traps water behind it. The water is then slowly dissolved to leave a large hollow space under the beach, which becomes a cave.',
+          'A cave is formed by erosion of a cliff.',
+          'Waves make a hole in the rock.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development: forms along a <b>headland</b> (1); waves attack <b>joints/faults</b> (1); <b>hydraulic action/abrasion</b> widen the crack (1); it grows into a <b>cave</b> (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1R, Q2(f)', q: 'Explain how a cliff forms.', o: [
+          'Destructive waves erode the base of the rock between high and low tide by hydraulic action and abrasion, forming a wave-cut notch. The rock above overhangs and eventually collapses, so the cliff retreats and becomes steep.',
+          'Cliffs form when constructive waves deposit sand at the bottom of a slope. The sand builds up higher and higher over many years until it is cemented together and forms a tall, steep wall of rock at the back of the beach, which then retreats seawards.',
+          'Cliffs are formed by erosion from the sea.',
+          'A cliff is a steep rock face at the coast.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development: <b>destructive waves</b> erode the base (1); a <b>wave-cut notch</b> forms (1); the <b>overhang collapses</b> (1); the cliff <b>retreats</b>, leaving a steep face (1).' }],
+    7: [
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q2(f)', q: 'Explain two physical factors that influence coastal deposition.', o: [
+          'Sediment supply: coasts with lots of sediment from rivers and eroding cliffs have more material to build beaches. Wave type: constructive waves have a strong swash and weak backwash, so they push sediment up the beach and leave it there.',
+          'Sediment supply: coasts with very little sediment build the biggest beaches. Wave type: destructive waves have a strong backwash and a weak swash, so they push sediment up the beach and leave it there, building wide, gently sloping beaches in the bays.',
+          'The amount of sand and the type of wave.',
+          'Waves and the wind affect deposition.'], c: 0,
+        ms: '1 mark for each factor and 1 for explanation, ×2: e.g. <b>sediment supply</b> → more material to deposit; <b>constructive waves</b> → strong swash builds beaches; <b>sheltered / shallow water</b> → waves lose energy.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1, Q2(a)', q: 'Which coastal landform is formed by deposition?', o: ['spit', 'cave', 'cliff', 'wave-cut platform'], c: 0,
+        ms: '<b>Spit.</b> Caves, cliffs and wave-cut platforms are all landforms of erosion.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 1R, Q2(b)(i)', q: 'Which of these is a depositional landform?', o: ['spit', 'headland', 'cave', 'stack'], c: 0,
+        ms: '<b>Spit.</b> Headlands, caves and stacks are all erosional landforms.' }],
+    8: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 1, Q2(a)', q: 'Which of these is an abiotic characteristic of a coastal ecosystem?', o: ['temperature', 'coral', 'fungi', 'phytoplankton'], c: 0,
+        ms: '<b>Temperature.</b> Coral, fungi and phytoplankton are all living (biotic).' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 1, Q2(a)', q: 'Which of these is a feature of a mangrove ecosystem?', o: ['complex root system', 'high altitude', 'steep land gradient', 'cold temperatures'], c: 0,
+        ms: '<b>Complex root system.</b> Mangroves grow on low, gently sloping coasts in warm water.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1, Q2(d)', q: 'Explain one physical factor that affects where mangrove ecosystems are found.', o: [
+          'Temperature: mangroves need warm water, so they are found on tropical and subtropical coasts between about 30°N and 30°S. They cannot survive where the sea is cold or freezes.',
+          'Altitude: mangroves need high mountain slopes, so they are found mostly on steep cliffs above the sea, where cold temperatures and winter snow help their seeds to grow, so they are not found on low tropical coasts.',
+          'Temperature affects mangroves.',
+          'Mangroves are found in hot places.'], c: 0,
+        ms: '1 mark for the factor (e.g. <b>temperature</b>, salinity, shelter, tidal range, rainfall) and 2 for development (e.g. need <b>warm water</b> (1) → so found <b>between about 30°N and 30°S</b> (1)).' }],
+    9: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1R, Q2(b)(i)', q: 'Which is the best definition of a coral reef ecosystem?', o: [
+          'an ecosystem made of small animals (polyps) living together in water with a temperature of 23–27°C', 'an ecosystem consisting of sandy deposits', 'an ecosystem consisting of small shrubs and trees', 'an ecosystem where plants and animals are adapted to both salt and fresh water'], c: 0,
+        ms: '<b>Polyps living together in water of 23–27°C.</b> Sandy deposits describes sand dunes; shrubs and trees describes mangroves; salt and fresh water describes a salt marsh.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 1, Q2(b)(iii)', q: 'Explain one factor that influences the distribution of coral reefs.', o: [
+          'Light: coral needs shallow, clear water (less than about 50 m deep), because the algae living in the polyps need sunlight to photosynthesise.',
+          'Light: coral needs very deep, dark water of more than 500 m, because sunlight would overheat the polyps and stop them from growing near the surface.',
+          'Coral needs sunlight.',
+          'Coral reefs are found in warm places.'], c: 0,
+        ms: '1 mark for the factor (e.g. <b>temperature</b>, <b>light/depth</b>, salinity, sediment) and 1 for explanation (e.g. <b>algae need sunlight to photosynthesise</b>; coral needs <b>at least 18°C</b>).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 1R, Q2(d)', q: 'Explain one physical factor that affects where coral reefs are found.', o: [
+          'Temperature: coral needs a minimum water temperature of about 18°C, so reefs are found in tropical seas between about 30°N and 30°S. Where cold currents flow, such as off west coasts, the water is too cold for reefs.',
+          'Temperature: coral needs cold water below about 5°C, so reefs are mostly found near the poles. Warm currents flowing along tropical coasts stop coral from growing anywhere in the tropics, so reefs are rare near the equator.',
+          'Temperature controls where coral grows.',
+          'Coral is found in hot countries.'], c: 0,
+        ms: '1 mark for the factor and 2 for development: e.g. <b>temperature</b> (1) → needs <b>at least 18°C</b> (1) → so reefs are <b>limited to tropical seas</b> / absent where cold currents flow (1).' }],
+    10: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q2(c)', q: 'Explain one way in which human activity can threaten coastal ecosystems.', o: [
+          'Mangroves are cleared for shrimp farms, which destroys the habitat of fish and birds and removes the natural protection from storms.',
+          'Planting marram grass on sand dunes threatens coastal ecosystems because the roots hold the sand together and stop new plants from growing anywhere.',
+          'Pollution damages coasts.',
+          'Tourism is bad for coral reefs.'], c: 0,
+        ms: '1 mark for a human activity (e.g. <b>pollution</b>, <b>deforestation of mangroves</b>, tourism) and 1 for how it threatens the ecosystem (e.g. <b>destroys habitat</b>, kills coral).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 1, Q2(d)', q: 'Explain one way in which industry can threaten coastal ecosystems.', o: [
+          'Factories dump industrial waste into the sea, causing water pollution. Toxic chemicals kill fish and coral, and they build up in food chains, reducing biodiversity.',
+          'Industry threatens coastal ecosystems because factories are always built inland, so they take workers away from the coast and nobody is left to look after the beaches.',
+          'Industry causes pollution.',
+          'Factories are bad for the environment.'], c: 0,
+        ms: '1 mark for identifying the threat and 2 for development: e.g. <b>dumping industrial waste</b> (1) → <b>water pollution</b> (1) → <b>kills species / reduces biodiversity</b> (1).' }],
+    11: [
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q2(d)', q: 'Explain why one conflict could develop between different users of a coastline.', o: [
+          'Tourists and conservationists may disagree, because tourists using jet skis and boats make a lot of noise, which disturbs birds and can disrupt their breeding grounds.',
+          'Tourists and conservationists never disagree, because tourists always stay in hotels far away from the coast and never visit the beaches or the sea, so birds are not disturbed.',
+          'Tourists and fishers want the beach.',
+          'People argue about the coast.'], c: 0,
+        ms: '1 mark for identifying a conflict and 2 for development: e.g. <b>tourists vs bird watchers</b> (1) → <b>noise</b> (1) → <b>disturbs breeding grounds</b> (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q2(d)', q: 'Explain two reasons why coastal management strategies can cause conflict.', o: [
+          'Some stretches of coast are left unprotected, so people living there face faster erosion and the value of their homes falls. Groynes in one place trap sediment, so beaches further down the coast are starved and erode more quickly.',
+          'All stretches of coast are always protected equally, so nobody loses out. Groynes add extra sediment to beaches further down the coast, so everyone benefits from wider beaches, house prices rise everywhere and nobody along the coast complains about the plans.',
+          'Some people are not protected. It costs a lot.',
+          'People disagree about what to do.'], c: 0,
+        ms: '1 mark for each reason and 1 for development, ×2: e.g. <b>unprotected areas</b> → faster erosion / lost property; defences <b>move the problem downdrift</b>; <b>high cost</b> to taxpayers.' }],
+    12: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q2(c)', q: 'Explain one way of reducing the impact of coastal flooding.', o: [
+          'Build houses on raised stilts, so that they are above the level that floods usually reach and water can pass underneath.',
+          'Build houses closer to the sea, so that the floodwater reaches them more quickly and drains away again before it causes any damage.',
+          'Build sea walls.',
+          'Move people away.'], c: 0,
+        ms: '1 mark for a way (e.g. <b>building design</b>, <b>planning</b>, forecasting, defences) and 1 for explanation (e.g. <b>raised above flood level</b>).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q2(e)', q: 'Explain one way in which climate change may affect coastal environments.', o: [
+          'Climate change melts ice sheets and makes sea water expand, so sea levels rise. Low-lying coastal settlements and ecosystems may then flood more often or have to be abandoned.',
+          'Climate change makes sea levels fall, because warmer water takes up less space than cold water. This means that coastal settlements will be further from the sea and safer from flooding.',
+          'Sea levels will rise.',
+          'Climate change makes coasts warmer.'], c: 0,
+        ms: '1 mark for the initial point and 2 for development: e.g. <b>melting ice caps</b> (1) → <b>sea level rises</b> (1) → <b>settlements flooded or abandoned</b> (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 1, Q2(f)', q: 'Explain how prevention strategies can reduce the impact of coastal flooding.', o: [
+          'Forecasting and warning systems track storms with satellites, so people can be evacuated before a surge arrives, saving lives. Planning bans new building on low-lying land, so fewer homes are at risk and damage costs are lower.',
+          'Forecasting and warning systems stop storms from forming, so surges never arrive. Planning moves all new buildings onto low-lying land near the sea, so that people are closer to the shelters and can reach them quickly when a flood warning is given.',
+          'Warnings and planning reduce flooding.',
+          'They stop the floods happening.'], c: 0,
+        ms: '1 mark for the initial point and 3 for development; credit 1+1+1+1 or two developed strategies: e.g. <b>forecasting</b> → <b>evacuation</b> → lives saved; <b>land-use planning</b> → fewer homes at risk.' }],
+    13: [
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q2(g)', q: 'Explain one advantage and one disadvantage of soft engineering strategies.', o: [
+          'Advantage: managed retreat is cheaper than building defences, because no structures need to be built or maintained. Disadvantage: farmland is flooded and lost, so landowners may need compensation and may object.',
+          'Advantage: soft engineering uses huge concrete walls that last for ever. Disadvantage: beach nourishment adds too much sand, which makes the beach so wide that waves cannot reach it any more, so it never needs to be repeated.',
+          'It is cheap but it does not last.',
+          'It looks natural. It can be expensive.'], c: 0,
+        ms: '1 mark for the advantage and 1 for development, and the same for the disadvantage: e.g. <b>cheaper</b> / looks natural / creates habitats; <b>land is lost</b> / needs repeating (beach nourishment).' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 1R, Q2(a)', q: 'Which of these is a soft engineering technique used on coastlines?', o: ['beach replenishment', 'rock armour', 'groynes', 'sea wall'], c: 0,
+        ms: '<b>Beach replenishment.</b> Rock armour, groynes and sea walls are all hard engineering.' }],
+    14: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain one way in which Sri Lanka’s Coastal Zone Management Plan (CZMP) has reduced coastal erosion.', o: [
+          'The CZMP banned coral mining, so reefs that absorb wave energy are protected. This means less wave energy reaches the beaches, so erosion is reduced.',
+          'The CZMP encouraged more coral mining, so there is more lime for building sea walls. The extra concrete walls absorb wave energy everywhere on the coast.',
+          'The CZMP protects the coast.',
+          'It stopped coral mining.'], c: 0,
+        ms: '1 mark for a strategy (e.g. <b>coral mining ban</b>, setback areas, mangrove replanting, revetments) and 2 for development (e.g. reefs <b>absorb wave energy</b> (1) → <b>less erosion</b> of beaches (1)).' },
+      { type: 'multi', marks: 2, cmd: 'Identify', q: 'Identify two strategies used in Sri Lanka’s coastal management.', need: 2, items: [
+          { t: 'Setback areas where new building is not allowed', ok: true },
+          { t: 'Special Area Management (SAM) plans with local communities', ok: true },
+          { t: 'Building the Thames Barrier across the river at Colombo', ok: false },
+          { t: 'Encouraging hotels to build right up to the high water line', ok: false }],
+        ms: 'Sri Lanka uses <b>setback areas</b>, <b>Special Area Management</b>, a coral mining ban, mangrove replanting and hard engineering such as revetments and groynes.' }],
+    15: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why the Holderness coastline is eroding rapidly.', o: [
+          'The cliffs are made of soft boulder clay, which is easily eroded and slumps when saturated. Powerful waves arrive from the north-east across a long fetch, and narrow beaches give little protection, so the coast retreats about 1.8 m a year.',
+          'The cliffs are made of very hard granite, which is resistant to erosion. Waves are weak because the fetch is very short, and wide beaches protect the cliffs, so the coast retreats very slowly, by only a few millimetres each year on average.',
+          'The cliffs are soft and the waves are strong.',
+          'Holderness is eroding because of the sea.'], c: 0,
+        ms: '1 mark for a reason (e.g. <b>soft boulder clay</b>, <b>long fetch</b>, narrow beaches) and 2 for development (e.g. clay <b>slumps when saturated</b> (1) → retreats about <b>1.8 m a year</b> (1)).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A cliff-top road is 63 m from the edge of a Holderness cliff that is retreating at 1.8 m a year. How many years until the road is reached?', ans: 35, tol: 0, unit: 'years',
+        ms: '63 ÷ 1.8 = <b>35 years</b>.' }]
+  };
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'Exam-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">' + (G.marks === 1 ? 'Choose the <b>correct</b> answer.' : 'Which answer would score <b>full marks</b>?') + '</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
