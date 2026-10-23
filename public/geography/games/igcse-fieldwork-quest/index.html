@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fieldwork Quest — IGCSE Geography Coastal and Rural Fieldwork Revision Game — SBL</title>
+<meta name="description" content="Edexcel IGCSE Geography fieldwork revision game: 13 levels covering the enquiry process, data types, sampling, risk assessment, presenting and analysing data, evaluation, and the Sam Roi Yot coastal and rural enquiries, with labelled diagrams, data skills, past paper checkpoint questions and an Edexcel Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#igcse-fieldwork" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Fieldwork Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 13 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-igcse-fieldwork-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '🧭', t: 'The Enquiry Process', d: 'Enquiry questions, hypotheses and the six stages of fieldwork' },
+    { n: 2, z: 'A', emo: '🗂️', t: 'Types of Data', d: 'Primary and secondary, quantitative and qualitative, pilot surveys' },
+    { n: 3, z: 'A', emo: '🎯', t: 'Sampling', d: 'Random, systematic, stratified and convenience — pros and cons' },
+    { n: 4, z: 'A', emo: '⛑️', t: 'Risk Assessment', d: 'Hazards, risks and how to manage them' },
+    { n: 5, z: 'A', emo: '📊', t: 'Presenting and Analysing Data', d: 'Mean, median, range, graphs, correlation and anomalies' },
+    { n: 6, z: 'A', emo: '🔍', t: 'Conclusions and Evaluation', d: 'Accuracy, reliability, limitations and improvements' },
+    { n: 7, z: 'B', emo: '🏖️', t: 'Coastal Enquiry: Planning', d: 'Sam Roi Yot beaches: question, hypotheses and location' },
+    { n: 8, z: 'B', emo: '📏', t: 'Coastal Enquiry: Methods', d: 'Beach width, gradient, quadrats, longshore drift and wave frequency' },
+    { n: 9, z: 'B', emo: '📈', t: 'Coastal Enquiry: Results and Evaluation', d: 'Beach profiles, conclusions and improvements' },
+    { n: 10, z: 'C', emo: '🏘️', t: 'Rural Enquiry: Planning', d: 'Settlement hierarchy, services and the hypothesis' },
+    { n: 11, z: 'C', emo: '📝', t: 'Rural Enquiry: Methods', d: 'Land use, services tally, traffic counts and interviews' },
+    { n: 12, z: 'C', emo: '🗺️', t: 'Rural Enquiry: Results and Evaluation', d: 'Located bar graphs, conclusions and improvements' },
+    { n: 13, z: 'X', emo: '👹', t: 'The Edexcel Examiner', d: 'Final boss: 8-mark Evaluate questions' }];
+  var ZONES = { A: ['Part 01', 'Fieldwork skills', '#0d9488'], B: ['Part 02', 'Coastal study', '#0284c7'], C: ['Part 03', 'Rural study', '#16a34a'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'skills', i: '🧭', t: 'Skills Expert', d: 'Complete Part 01 (Levels 1–6)', ok: function () { return [1, 2, 3, 4, 5, 6].every(isDone); } },
+    { id: 'coast', i: '🏖️', t: 'Coastal Investigator', d: 'Complete Part 02 (Levels 7–9)', ok: function () { return [7, 8, 9].every(isDone); } },
+    { id: 'rural', i: '🏘️', t: 'Rural Investigator', d: 'Complete Part 03 (Levels 10–12)', ok: function () { return [10, 11, 12].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Past Paper Pro', d: 'Pass all 12 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the Edexcel Examiner', ok: function () { return isDone(13); } },
+    { id: 'champ', i: '🏆', t: 'Fieldwork Champion', d: 'All 13 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">Edexcel IGCSE Geography \u00B7 Papers 1 and 2 \u00B7 Fieldwork</span>' +
+      '<h1>\uD83E\uDDED Fieldwork Quest<br>Coastal and Rural Fieldwork Revision</h1>' +
+      '<p>Work through all three parts \u2014 <b>Fieldwork skills</b>, the <b>Coastal study</b> and the <b>Rural study</b> \u2014 one level per skill, then face the <b>Edexcel Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all six badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Fieldwork Champion!' : ' — reach 90% for Fieldwork Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — The enquiry process */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '🧭 The six stages of an enquiry', build: function (el, next) { orderGame(el, ['Introduction and planning: enquiry question, hypotheses and secondary research', 'Methods and data collection: equipment, risk assessment and collecting data', 'Data presentation: processing data and drawing graphs and maps', 'Data analysis: describing and explaining patterns and anomalies', 'Conclusions: accepting or rejecting each hypothesis', 'Evaluation: strengths, limitations and improvements'], 'Tap the FIRST stage.', next); } },
+      { title: '📖 Key terms', build: function (el, next) { sortGame(el, { zones: zonesFrom([['fw', '🥾 Fieldwork'], ['eq', '❓ Enquiry question'], ['hy', '🧪 Hypothesis'], ['an', '❗ Anomaly']], ['zc1', 'zc2', 'zc3', 'zr']), cards: [
+          { t: 'Collecting primary data outside the classroom to answer a geographical question', a: ['fw'], why: 'Fieldwork.' },
+          { t: 'The overall question an investigation sets out to answer', a: ['eq'], why: 'Often begins “To what extent…”.' },
+          { t: 'A testable statement that can be accepted or rejected using data', a: ['hy'], why: 'It should be specific and measurable.' },
+          { t: 'A result that does not fit the general pattern', a: ['an'], why: 'Identify it and suggest why it happened.' }] }, next); } },
+      { title: '🧪 Good hypothesis?', how: 'A good hypothesis is <b>specific</b> and <b>measurable</b>, so it can be tested with data.',
+        build: function (el, next) { flash(el, { yes: '✅ Good hypothesis', no: '❌ Weak hypothesis', ky: 'g', kn: 'w', items: [
+          { t: 'Where coastal defences have been built, the beach will be wider.', a: true, why: 'Beach width can be measured.' },
+          { t: 'The larger a village’s population, the more services it will have.', a: true, why: 'Population and services can be counted.' },
+          { t: 'Beaches are nice.', a: false, why: 'Not measurable.' },
+          { t: 'What is the coast like?', a: false, why: 'A question, not a testable statement.' },
+          { t: 'Pebble size will decrease with distance along the coast in the direction of longshore drift.', a: true, why: 'Specific and measurable.' }] }, next); } },
+      { title: '🧠 Enquiry check', build: function (el, next) { mcq(el, [
+        { q: 'Why does a “to what extent” enquiry question need a careful conclusion?', o: ['The conclusion must judge how strong the relationship is, not just say yes or no', 'It means the student does not need to collect any data at all', 'It can only be answered using secondary data found on the internet before the trip begins', 'It means the hypothesis must always be accepted in the end'], c: 0, f: 'Weigh the evidence and make a judgement.' },
+        { q: 'At which stage would you research newspaper articles and maps of the area?', o: ['Introduction and planning', 'Data presentation and graphs', 'Data analysis', 'Evaluation'], c: 0, f: 'Background research helps you write hypotheses.' }], next); } }]);
+  };
+
+  /* L2 — Types of data */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '🗂️ Primary or secondary?', how: '<b>Primary</b> data = collected yourself. <b>Secondary</b> data = collected by someone else.',
+        build: function (el, next) { flash(el, { yes: '🥾 Primary', no: '📚 Secondary', ky: 'p', kn: 's', items: [
+          { t: 'A field sketch you drew of the beach', a: true, why: 'You made it yourself.' },
+          { t: 'Your traffic count in a village', a: true, why: 'Collected first-hand.' },
+          { t: 'A local shoreline management plan', a: false, why: 'Written by someone else.' },
+          { t: 'Census data from a government website', a: false, why: 'Secondary.' },
+          { t: 'Historical photographs of the coastline', a: false, why: 'Taken by someone else.' },
+          { t: 'Photographs you took of shops in a village', a: true, why: 'Primary.' }] }, next); } },
+      { title: '🔢 Quantitative or qualitative?', how: '<b>Quantitative</b> = numbers that can be measured or counted. <b>Qualitative</b> = words, pictures or diagrams.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['qn', '🔢 Quantitative'], ['ql', '🖼️ Qualitative']], ['zc2', 'zc4']), cards: [
+          { t: 'Beach gradient in degrees', a: ['qn'], why: 'A measurement.' },
+          { t: 'Number of waves breaking per minute', a: ['qn'], why: 'A count.' },
+          { t: 'A closed question: “Do you support the plan? Yes / No”', a: ['qn'], why: 'Answers can be counted.' },
+          { t: 'Environmental quality score from 1 to 5', a: ['qn'], why: 'Turns opinions into numbers.' },
+          { t: 'An annotated field sketch', a: ['ql'], why: 'Pictures and words.' },
+          { t: 'An open question: “What benefits does it bring?”', a: ['ql'], why: 'Answers are in words.' },
+          { t: 'An interview with a shopkeeper', a: ['ql'], why: 'Descriptive views.' }] }, next); } },
+      { title: '⚖️ Strengths and limitations', build: function (el, next) { sortGame(el, { zones: zonesFrom([['ps', '🥾 Primary: strength'], ['pl', '🥾 Primary: limitation'], ['ss', '📚 Secondary: strength'], ['sl', '📚 Secondary: limitation']], ['zg', 'zr', 'zc2', 'zc4']), cards: [
+          { t: 'You know exactly how and when it was collected', a: ['ps'], why: 'Fits your question.' },
+          { t: 'Takes time and is limited by weather and equipment', a: ['pl'], why: 'A snapshot of one day.' },
+          { t: 'Saves time and money and can show change over time', a: ['ss'], why: 'E.g. historical maps.' },
+          { t: 'May be out of date, biased or collected for a different purpose', a: ['sl'], why: 'Check the source and date.' }] }, next); } },
+      { title: '🧠 Data check', build: function (el, next) { mcq(el, [
+        { q: 'What is a pilot survey?', o: ['A small trial before the main data collection to test methods and sites', 'A survey of aeroplane flights over the study area on the day of fieldwork', 'The final survey carried out after all the other data has been collected', 'A questionnaire given only to the teachers who organise the trip'], c: 0, f: 'It saves time and improves the methods.' },
+        { q: 'Which is a limitation of qualitative data?', o: ['It is more subjective and can be interpreted differently by different people', 'It can only be collected using expensive equipment such as a clinometer or anemometer', 'It can never be presented in any way, so it is not used in an enquiry', 'It is always out of date because someone else collected it years ago'], c: 0, f: 'But it gives depth and context.' }], next); } }]);
+  };
+
+  /* L3 — Sampling */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🏷️ Spot the sampling strategy', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_SAMP, pins: PINS_SAMP, cap: 'Three sampling plans for an area, and a beach transect.', labels: [
+          { t: 'Random sampling', pin: 1 },
+          { t: 'Systematic sampling', pin: 2 },
+          { t: 'Stratified sampling (more samples in the larger area)', pin: 3 },
+          { t: 'Transect — a line along which measurements are taken', pin: 4 },
+          { t: 'Quadrat — a square frame to estimate % cover', pin: 5 },
+          { t: 'Clinometer', pin: null }] }, next); } },
+      { title: '🎯 Name the sampling method', build: function (el, next) { sortGame(el, { zones: zonesFrom([['r', '🎲 Random'], ['sy', '📏 Systematic'], ['st', '🧱 Stratified'], ['c', '🙋 Convenience']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Using random number tables to pick grid references on a map', a: ['r'], why: 'Every point has an equal chance.' },
+          { t: 'A quadrat every 10 m along a transect', a: ['sy'], why: 'Regular intervals in space.' },
+          { t: 'Interviewing every 10th person who walks past', a: ['sy'], why: 'Regular intervals in number.' },
+          { t: 'A 2-minute traffic count every 30 minutes', a: ['sy'], why: 'Regular intervals in time.' },
+          { t: '60% of the beach is sand, so 6 of every 10 samples are taken on sand', a: ['st'], why: 'In proportion to each group.' },
+          { t: 'Interviewing two people from each age group', a: ['st'], why: 'Each group is sampled.' },
+          { t: 'Interviewing whichever shopkeepers were free and willing', a: ['c'], why: 'Easiest to reach — also called opportunistic.' }] }, next); } },
+      { title: '⚖️ Pros and cons', build: function (el, next) { sortGame(el, { zones: zonesFrom([['r', '🎲 Random'], ['sy', '📏 Systematic'], ['st', '🧱 Stratified'], ['c', '🙋 Convenience']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Pro: unbiased, because no person or place is deliberately chosen', a: ['r'], why: 'Random.' },
+          { t: 'Con: may miss important areas or bunch samples together by chance', a: ['r'], why: 'Random.' },
+          { t: 'Pro: quick and easy, with even coverage of the area', a: ['sy'], why: 'Systematic.' },
+          { t: 'Con: can miss features that fall between the sampling points', a: ['sy'], why: 'Systematic.' },
+          { t: 'Pro: every group or area is fairly represented', a: ['st'], why: 'Stratified.' },
+          { t: 'Con: you need to know the size of each group first', a: ['st'], why: 'Stratified.' },
+          { t: 'Pro: quick and practical when time is short', a: ['c'], why: 'Convenience.' },
+          { t: 'Con: likely to be biased and unrepresentative', a: ['c'], why: 'Convenience.' }] }, next); } },
+      { title: '🧠 Sampling check', build: function (el, next) { mcq(el, [
+        { q: 'Why do geographers sample instead of measuring everything?', o: ['It is quicker and cheaper, and a good sample represents the whole population', 'Measuring everything is against the rules of the Edexcel examination', 'A sample always gives more accurate results than measuring everything', 'There is no need to cover the whole area if you choose the most interesting spots'], c: 0, f: 'There is never enough time, money or equipment to measure everything.' },
+        { q: 'How can you reduce bias when placing a quadrat?', o: ['Use a sampling strategy, e.g. drop it over your shoulder at fixed intervals', 'Place it on the most interesting part of the beach that you can possibly find', 'Only sample where it is easiest to walk and the sand is driest', 'Choose spots that you think will support your hypothesis best'], c: 0, f: 'Bias happens when the sample is not representative.' }], next); } }]);
+  };
+
+  /* L4 — Risk assessment */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '⛑️ Hazard or risk?', how: 'A <b>hazard</b> is anything that could cause harm. A <b>risk</b> is the likelihood of that harm happening and how serious it would be.',
+        build: function (el, next) { flash(el, { yes: '⚠️ Hazard', no: '📊 Risk', ky: 'h', kn: 'r', items: [
+          { t: 'Waves and the incoming tide', a: true, why: 'Something that could cause harm.' },
+          { t: 'The chance of being knocked over when standing in the sea', a: false, why: 'The likelihood of harm.' },
+          { t: 'Busy traffic on a village road', a: true, why: 'A hazard.' },
+          { t: 'The likelihood of being hit by a motorbike while counting traffic', a: false, why: 'A risk.' },
+          { t: 'Slippery rocks and breakwaters', a: true, why: 'A hazard.' }] }, next); } },
+      { title: '🛡️ Match the risk to how it is managed', build: function (el, next) { sortGame(el, { zones: zonesFrom([['sea', '🌊 Being swept away by waves'], ['sun', '☀️ Sunburn and heatstroke'], ['tr', '🚗 Traffic accidents'], ['lost', '🧭 Getting lost']], ['zc2', 'zc4', 'zr', 'zc3']), cards: [
+          { t: 'Only go knee-deep and check tide times', a: ['sea'], why: 'Limits exposure to the sea.' },
+          { t: 'Work in pairs with a teacher watching', a: ['sea'], why: 'Supervision.' },
+          { t: 'Sun cream, hats, water and breaks in the shade', a: ['sun'], why: 'Prevents heat illness.' },
+          { t: 'High-vis jackets and safe crossing points', a: ['tr'], why: 'Be seen and cross safely.' },
+          { t: 'Stay together with a 12:1 student-to-adult ratio', a: ['lost'], why: 'Nobody wanders off.' },
+          { t: 'Carry a map and a phone with the teacher’s number', a: ['lost'], why: 'Can find the group.' }] }, next); } },
+      { title: '🧠 Risk check', build: function (el, next) { mcq(el, [
+        { q: 'Which is the best description of managing a risk?', o: ['Wearing strong shoes so that you do not slip on wet rocks', 'Noticing that the rocks are wet but carrying on anyway', 'Writing “weather” on the risk assessment with no detail', 'Collecting the data faster so you spend less time worrying'], c: 0, f: 'Name the risk and say exactly how it was reduced.' },
+        { q: 'Why is “the weather” not enough as a risk on its own in an exam answer?', o: ['It is too vague — you must say how, e.g. heavy rain making rocks slippery', 'Weather is never a risk during fieldwork in any environment', 'Examiners only credit risks to do with traffic and roads', 'Weather can only be included if you have secondary data about it from a website'], c: 0, f: 'Be specific about the hazard and its effect.' }], next); } }]);
+  };
+
+  /* L5 — Presenting and analysing data */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '🧮 Data skills: pebble sizes', how: '<b>Mean</b> = total ÷ number of values. <b>Median</b> = the middle value when in order. <b>Range</b> = highest − lowest.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Pebble length at one site (10 pebbles)', bars: [['1', 12, '#0284c7'], ['2', 8, '#0284c7'], ['3', 17, '#0284c7'], ['4', 10, '#0284c7'], ['5', 4, '#0284c7'], ['6', 9, '#0284c7'], ['7', 11, '#0284c7'], ['8', 7, '#0284c7'], ['9', 14, '#0284c7'], ['10', 8, '#0284c7']], y0: 0, y1: 20, ystep: 5, minor: 1, values: true, xlab: 'Pebble number', ylab: 'Length (cm)' }),
+          cap: 'Example data for practice.', qs: [
+          { type: 'num', q: 'Calculate the range.', ans: 13, tol: 0, unit: 'cm', f: '17 − 4 = <b>13 cm</b>.' },
+          { type: 'num', q: 'Calculate the mean.', ans: 10, tol: 0, unit: 'cm', f: '100 ÷ 10 = <b>10 cm</b>.' },
+          { type: 'num', q: 'Calculate the median. (In order: 4, 7, 8, 8, 9, 10, 11, 12, 14, 17)', ans: 9.5, tol: 0, unit: 'cm', f: 'The two middle values are 9 and 10: (9 + 10) ÷ 2 = <b>9.5 cm</b>.' }] }, next); } },
+      { title: '📊 Choose the best graph', build: function (el, next) { sortGame(el, { zones: zonesFrom([['bar', '📊 Bar chart'], ['pie', '🥧 Pie chart or divided bar'], ['sc', '✳️ Scatter graph'], ['map', '🗺️ Map-based (located or proportional)']], ['zc1', 'zc4', 'zc2', 'zg']), cards: [
+          { t: 'Mean wave frequency at three beaches', a: ['bar'], why: 'Comparing separate categories.' },
+          { t: 'The % of high- and low-order services in a village', a: ['pie'], why: 'Proportions of a whole.' },
+          { t: 'The % of sand, shingle and vegetation in a quadrat', a: ['pie'], why: 'Parts of a whole.' },
+          { t: 'Pebble size against distance along the coast', a: ['sc'], why: 'Tests a relationship between two variables.' },
+          { t: 'Environmental quality score against distance from a new farm shop', a: ['sc'], why: 'Two variables.' },
+          { t: 'Traffic totals shown at each village’s location', a: ['map'], why: 'Data and location together.' }] }, next); } },
+      { title: '📈 Correlation', how: 'Describe the relationship shown on a scatter graph.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['pos', '↗️ Positive correlation'], ['neg', '↘️ Negative correlation'], ['none', '➖ No correlation']], ['zg', 'zr', 'zc4']), cards: [
+          { t: 'As village population increases, the number of services increases', a: ['pos'], why: 'Both rise together.' },
+          { t: 'As distance along the coast increases, pebble size decreases', a: ['neg'], why: 'One rises as the other falls — attrition.' },
+          { t: 'Points are scattered with no clear pattern', a: ['none'], why: 'No relationship.' },
+          { t: 'As distance from the farm shop increases, environmental quality decreases', a: ['neg'], why: 'Negative relationship.' }] }, next); } },
+      { title: '🧠 Analysis check', build: function (el, next) { mcq(el, [
+        { q: 'What is a limitation of using the mean?', o: ['It hides the spread of the data and can be pulled by an extreme value', 'It can only be calculated for qualitative data such as interviews and photos', 'It always gives exactly the same answer as the median and range', 'It cannot be shown on any type of graph, chart or map at all'], c: 0, f: 'Give the range as well to show the spread.' },
+        { q: 'How should a line of best fit be drawn on a scatter graph?', o: ['A straight line through the middle of the points, with roughly equal numbers either side', 'A line that joins every single point together, from left to right in order, like a dot-to-dot puzzle', 'A curved line that starts at zero and passes through the highest point', 'A line drawn only through the anomalies, ignoring all the other points'], c: 0, f: 'Edexcel does not credit curved or dot-to-dot lines.' }], next); } }]);
+  };
+
+  /* L6 — Conclusions and evaluation */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🎯 Accuracy or reliability?', how: '<b>Accuracy</b> = how close a measurement is to the true value. <b>Reliability</b> = whether repeating the study would give the same results.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['acc', '🎯 Improves accuracy'], ['rel', '🔁 Improves reliability']], ['zc2', 'zg']), cards: [
+          { t: 'Using a spirit level so the ranging poles are upright', a: ['acc'], why: 'A truer measurement.' },
+          { t: 'Averaging the foresight and backsight readings', a: ['acc'], why: 'Reduces reading error.' },
+          { t: 'Two people reading each angle', a: ['acc'], why: 'Checks the measurement.' },
+          { t: 'Repeating traffic counts at the same times on several days', a: ['rel'], why: 'Results can be repeated.' },
+          { t: 'Visiting every beach at the same state of the tide', a: ['rel'], why: 'Fair comparison.' },
+          { t: 'Taking more samples at more sites', a: ['rel'], why: 'More representative.' }] }, next); } },
+      { title: '❗ Why might this anomaly have happened?', how: 'Is each a sensible explanation for an anomalous result?',
+        build: function (el, next) { flash(el, { yes: '✅ Sensible', no: '❌ Not sensible', ky: 'y', kn: 'n', items: [
+          { t: 'Human error when reading the measuring equipment', a: true, why: 'A common cause.' },
+          { t: 'A boat passed and created extra waves during the count', a: true, why: 'An outside factor.' },
+          { t: 'The reading was taken at a different state of the tide', a: true, why: 'Conditions changed.' },
+          { t: 'The hypothesis was wrong, so the result must be ignored', a: false, why: 'Anomalies are explained, not ignored.' },
+          { t: 'A smaller sample was taken at that site', a: true, why: 'Less representative.' }] }, next); } },
+      { title: '🔧 Limitation and improvement', build: function (el, next) { sortGame(el, { zones: zonesFrom([['l', '⚠️ Limitation'], ['i', '🔧 Improvement']], ['zr', 'zg']), cards: [
+          { t: 'Only one visit, on one day', a: ['l'], why: 'A snapshot.' },
+          { t: 'Only three sites were studied', a: ['l'], why: 'May not be representative.' },
+          { t: 'Systematic sampling missed features between points', a: ['l'], why: 'Gaps in coverage.' },
+          { t: 'Repeat the study in different seasons', a: ['i'], why: 'Shows change over time.' },
+          { t: 'Add more transects or sites', a: ['i'], why: 'Improves reliability.' },
+          { t: 'Agree fixed rules before collecting data', a: ['i'], why: 'Makes results consistent.' }] }, next); } },
+      { title: '🧠 Evaluation check', build: function (el, next) { mcq(el, [
+        { q: 'What makes a strong conclusion?', o: ['It answers the enquiry question with a judgement and uses data and theory as evidence', 'It repeats the hypothesis word for word without referring to any of the results or the data collected', 'It describes how much the student enjoyed the fieldwork trip on the day', 'It lists every measurement that was taken without any comment at all'], c: 0, f: 'And it recognises the limits of the study.' },
+        { q: 'Which is the best exam technique when evaluating methods?', o: ['Link each limitation to a solution and explain how it improves accuracy or reliability', 'List as many problems as possible without explaining any of them', 'Only describe what went well, so the examiner sees a positive view', 'Say that every method worked perfectly and nothing could be improved in any way at all next time'], c: 0, f: 'Limitation → solution → effect on accuracy or reliability.' }], next); } }]);
+  };
+
+  /* L7 — Coastal enquiry: planning */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '🏖️ Our coastal enquiry', how: '<b>Enquiry question:</b> “To what extent have coastal management methods impacted coastal processes on 3 beaches along the coast of Sam Roi Yot National Park, Thailand?”',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['s1', '1️⃣ Sam Roi Yot south'], ['s2', '2️⃣ Pak Nam Pran'], ['s3', '3️⃣ Pranburi Forest Park']], ['zc1', 'zc2', 'zc3']), cards: [
+          { t: 'A fishing village with a river mouth and breakwaters', a: ['s2'], why: 'Site 2.' },
+          { t: 'A beach protected by an offshore reef and breakwaters', a: ['s3'], why: 'Site 3.' },
+          { t: 'The beach south of Sam Roi Yot', a: ['s1'], why: 'Site 1.' },
+          { t: 'Busy with boats and traffic, so we kept away from launch areas', a: ['s2'], why: 'A specific risk at Pak Nam Pran.' }] }, next); } },
+      { title: '🧪 Which hypothesis does it test?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['h1', 'H1: beach will be steeper'], ['h2', 'H2: beach will be wider'], ['h3', 'H3: wave frequency and height lower']], ['zc1', 'zc2', 'zc3']), cards: [
+          { t: 'Beach gradient with ranging poles and a clinometer', a: ['h1'], why: 'Measures steepness.' },
+          { t: 'Beach width with a tape measure', a: ['h2'], why: 'Measures width.' },
+          { t: 'Counting waves breaking per minute', a: ['h3'], why: 'Wave frequency.' }] }, next); } },
+      { title: '📍 Why was it a good location?', how: 'Is each a good reason for choosing the Sam Roi Yot beaches?',
+        build: function (el, next) { flash(el, { yes: '✅ Good reason', no: '❌ Not a good reason', ky: 'y', kn: 'n', items: [
+          { t: 'Three beaches with different coastal management could be compared', a: true, why: 'Directly tests the enquiry question.' },
+          { t: 'The beaches were safe and accessible and could be reached in one trip', a: true, why: 'Practical.' },
+          { t: 'Secondary data was available from the national park and tourism websites', a: true, why: 'Supports the research.' },
+          { t: 'None of the beaches had any human intervention at all', a: false, why: 'The enquiry needed managed beaches.' }] }, next); } },
+      { title: '🧠 Coastal planning check', build: function (el, next) { mcq(el, [
+        { q: 'Which secondary data was used in the coastal enquiry?', o: ['Online newspaper reports and historical photographs', 'Our own field sketches of each beach', 'Our wave counts from each of the three beaches we visited', 'Our quadrat results along each transect'], c: 0, f: 'Also the Sam Roi Yot National Park and Tourism Authority of Thailand websites.' }], next); } }]);
+  };
+
+  /* L8 — Coastal enquiry: methods */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🏷️ Measuring beach gradient', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_GRAD, pins: PINS_GRAD, cap: 'Take a foresight and a backsight and average the two angles.', labels: [
+          { t: 'Ranging pole', pin: 1 },
+          { t: 'Clinometer', pin: 2 },
+          { t: 'Foresight to the same height on the next pole', pin: 3 },
+          { t: 'Start at the water’s edge where the swash breaks', pin: 4 },
+          { t: 'Poles 5 m apart; move both up the beach and repeat', pin: 5 },
+          { t: 'Anemometer', pin: null }] }, next); } },
+      { title: '🌊 Measuring longshore drift', build: function (el, next) { orderGame(el, ['Work out which way longshore drift is moving from the angle of the waves', 'Place the first ranging pole at 0 m at the water’s edge', 'Stand about 3 m into the sea and drop a float in line with the pole', 'After one minute, place the second pole level with the float and measure the distance', 'Repeat three times and calculate the mean'], 'Tap the FIRST step.', next); } },
+      { title: '🧰 Which equipment?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['cl', '📐 Clinometer'], ['qu', '🔲 Quadrat'], ['sw', '⏱️ Stopwatch'], ['tm', '📏 Tape measure']], ['zc1', 'zg', 'zc2', 'zc4']), cards: [
+          { t: 'Measuring beach gradient', a: ['cl'], why: 'Measures angles.' },
+          { t: 'Estimating % cover of sand, shingle and vegetation', a: ['qu'], why: '100 small squares = 1% each.' },
+          { t: 'Counting waves breaking in one minute', a: ['sw'], why: 'Times the count.' },
+          { t: 'Measuring beach width from the swash to the back of the beach', a: ['tm'], why: 'In metres.' }] }, next); } },
+      { title: '🧠 Coastal methods check', build: function (el, next) { mcq(el, [
+        { q: 'Why did the students repeat the wave counts three times?', o: ['To calculate a mean and reduce the effect of any one unusual reading', 'Because the stopwatch only worked properly on the third attempt', 'To make the fieldwork last longer so they could stay at the beach for longer', 'Because Edexcel rules say every method must be done three times'], c: 0, f: 'Repeat readings improve reliability.' },
+        { q: 'What does more vegetation in the quadrats suggest about a beach?', o: ['It is more stable and sheltered, so sediment is not being removed', 'It is exposed to powerful destructive waves every single day', 'The beach has been recently replenished with new sand by lorries from inland', 'The tide never reaches that part of the coast at any time'], c: 0, f: 'Links to the effect of management.' }], next); } }]);
+  };
+
+  /* L9 — Coastal enquiry: results and evaluation */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '📊 Data skills: beach width', how: 'Results from a student’s beach profiles.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Beach width at each site', bars: [['Site 1: SRY south', 55, '#f59e0b'], ['Site 2: Pak Nam Pran', 78, '#0284c7'], ['Site 3: Pranburi (offshore reef)', 110, '#16a34a']], y0: 0, y1: 120, ystep: 20, minor: 5, values: true, xlab: 'Site', ylab: 'Beach width (m)' }),
+          cap: 'Approximate widths read from a student’s beach profiles.', qs: [
+          { type: 'num', q: 'Calculate the mean beach width of the three sites, to one decimal place.', ans: 81, tol: 0.05, unit: 'm', f: '(55 + 78 + 110) ÷ 3 = 243 ÷ 3 = <b>81.0 m</b>.' },
+          { type: 'num', q: 'How many times wider is Site 3 than Site 1?', ans: 2, tol: 0, unit: 'times', f: '110 ÷ 55 = <b>2</b>.' },
+          { type: 'mc', q: 'Which explanation best fits the pattern?', o: ['The offshore reef absorbs wave energy, so sediment is deposited and the beach is wider', 'Site 1 is wider because it has no defences, so more sediment is deposited there by the waves', 'The width depends only on how long the tape measure was on each day', 'Wider beaches always form where there are the most tourists and hotels'], c: 0, f: 'Lower wave energy also slows longshore drift.' }] }, next); } },
+      { title: '✅ Accept or reject?', how: 'The student found the Site 3 beach was wider with a gentler gradient. What do the results show for each hypothesis?',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['a', '✅ Accept'], ['r', '❌ Reject'], ['m', '❓ Need more data']], ['zg', 'zr', 'zc4']), cards: [
+          { t: 'H2: where management has been used, the beach will be wider', a: ['a'], why: 'Site 3 was widest.' },
+          { t: 'H1: where management has been used, the beach will be steeper', a: ['r'], why: 'Site 3 had a gentler gradient.' },
+          { t: 'H3: wave frequency and height will be lower (no wave data in the conclusion)', a: ['m'], why: 'You cannot judge without the data.' }] }, next); } },
+      { title: '🔧 Coastal limitations and solutions', build: function (el, next) { sortGame(el, { zones: zonesFrom([['w', '📏 Beach width'], ['g', '📐 Gradient'], ['l', '🌊 Longshore drift'], ['wf', '⏱️ Wave frequency']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Unclear start and end points; tide changes → agree fixed markers and visit at the same state of tide', a: ['w'], why: 'Improves consistency.' },
+          { t: 'Poles not upright; clinometer misread → spirit level and two readers', a: ['g'], why: 'Improves accuracy.' },
+          { t: 'Float blown by the wind or lost → repeat more times and use a weighted float', a: ['l'], why: 'Improves reliability.' },
+          { t: 'Hard to decide what counts as a wave → agree a rule and use two counters', a: ['wf'], why: 'Improves accuracy.' }] }, next); } }]);
+  };
+
+  /* L10 — Rural enquiry: planning */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '🏷️ The settlement hierarchy', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_HIER, pins: PINS_HIER, cap: 'The settlement hierarchy, using places near our study area.', labels: [
+          { t: 'Capital city', pin: 1 },
+          { t: 'Large town', pin: 2 },
+          { t: 'Small town', pin: 3 },
+          { t: 'Village (our three study villages)', pin: 4 },
+          { t: 'Hamlet', pin: 5 },
+          { t: 'Fewer settlements, larger populations, more high-order services', pin: 6 },
+          { t: 'More settlements, smaller populations, few low-order services', pin: 7 },
+          { t: 'Beach profile', pin: null }] }, next); } },
+      { title: '🏪 Low-order or high-order service?', how: '<b>Threshold</b> = the minimum number of customers needed. <b>Range</b> = the maximum distance people will travel.',
+        build: function (el, next) { flash(el, { yes: '🏪 Low-order', no: '🏥 High-order', ky: 'l', kn: 'h', items: [
+          { t: 'Small grocery shop', a: true, why: 'Used daily; low threshold.' },
+          { t: 'Noodle stall', a: true, why: 'Low order.' },
+          { t: 'Village temple', a: true, why: 'Found in almost every village.' },
+          { t: 'Hospital', a: false, why: 'High threshold and long range.' },
+          { t: 'Bank branch', a: false, why: 'High order.' },
+          { t: 'Specialist electronics shop', a: false, why: 'Used rarely.' },
+          { t: 'Primary school', a: true, why: 'Low order.' }] }, next); } },
+      { title: '🧠 Rural planning check', build: function (el, next) { mcq(el, [
+        { q: 'What was our rural enquiry question?', o: ['To what extent is there a relationship between rural settlement size and services in 3 villages in Sam Roi Yot National Park?', 'To what extent have coastal management methods impacted coastal processes on 3 beaches along the coast of Sam Roi Yot National Park, Thailand?', 'How much rice do farmers grow in Isan compared with farmers in the Central Plain of Thailand?', 'Why do tourists visit Hua Hin more often than Bangkok during the hot season each year?'], c: 0, f: 'Learn it word for word.' },
+        { q: 'Why should a larger village have more high-order services?', o: ['They need a higher threshold population and a larger sphere of influence', 'High-order services are used every day, so they are needed in every village', 'Small villages are not allowed to have any shops by law', 'High-order services only need one or two customers to make a profit'], c: 0, f: 'This is the theory behind the hypothesis.' }], next); } }]);
+  };
+
+  /* L11 — Rural enquiry: methods */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '📝 Name the method', build: function (el, next) { sortGame(el, { zones: zonesFrom([['lu', '🗺️ Land use survey'], ['tal', '🔢 Services tally'], ['tc', '🚗 Traffic and pedestrian counts'], ['iv', '🎤 Interviews']], ['zc1', 'zc2', 'zc4', 'zg']), cards: [
+          { t: 'Drawing each building on a base map with a key for residential, commercial and public', a: ['lu'], why: 'Shows land use.' },
+          { t: 'Counting high-order, low-order and other services in each village', a: ['tal'], why: 'Quantitative.' },
+          { t: 'Tallying vehicles in both directions for 2 minutes with a clicker and timer', a: ['tc'], why: 'Shows how busy each village is.' },
+          { t: 'Asking 3 planned questions to at least 2 shopkeepers per village', a: ['iv'], why: 'Qualitative views.' },
+          { t: '“Where do most of your customers come from?”', a: ['iv'], why: 'Tests the sphere of influence.' }] }, next); } },
+      { title: '📚 Secondary data in the rural enquiry', how: 'Is each a piece of <b>secondary</b> data we used?',
+        build: function (el, next) { flash(el, { yes: '📚 Secondary', no: '🥾 Primary', ky: 's', kn: 'p', items: [
+          { t: 'Census data giving the population of each village', a: true, why: 'From a government website.' },
+          { t: 'The Thai national parks website', a: true, why: 'Background research.' },
+          { t: 'Our annotated photographs of services', a: false, why: 'We took them.' },
+          { t: 'The Tourism Authority of Thailand website', a: true, why: 'Secondary.' },
+          { t: 'Our pedestrian count', a: false, why: 'Primary.' }] }, next); } },
+      { title: '🧠 Rural methods check', build: function (el, next) { mcq(el, [
+        { q: 'What type of sampling were the interviews mainly?', o: ['Convenience — whoever was available and willing to talk', 'Random — names were drawn from the census of each village', 'Systematic — every 10th shop along the road was chosen', 'Stratified — exactly in proportion to the age of every resident'], c: 0, f: 'With a stratified element: people from each village.' },
+        { q: 'Why did the students use the same timer length for every traffic count?', o: ['So the counts at different villages could be compared fairly', 'So that the timer battery would last for the whole of the trip', 'Because longer counts always give lower numbers of vehicles', 'Because the census data told them how long to count for'], c: 0, f: 'Keeping methods the same improves reliability.' }], next); } }]);
+  };
+
+  /* L12 — Rural enquiry: results and evaluation */
+  LV[12] = function (root) {
+    stages(root, [
+      { title: '📊 Data skills: traffic in three villages', how: 'Vehicles passing in both directions in 3 minutes (a student’s results).',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Total vehicles in 3 minutes', bars: [['Ban Phu Yai Noi', 15, '#16a34a'], ['Ban Khao Daeng', 15, '#0284c7'], ['Ban Khung Tanot', 8, '#f59e0b']], y0: 0, y1: 20, ystep: 5, minor: 1, values: true, xlab: 'Village', ylab: 'Vehicles' }),
+          cap: 'Ban Phu Yai Noi: 7 cars, 5 songthaews, 3 motorbikes. Ban Khao Daeng: 6 cars, 2 buses, 7 motorbikes. Ban Khung Tanot: 1 car, 2 songthaews, 2 bicycles, 3 motorbikes.', qs: [
+          { type: 'num', q: 'What percentage of vehicles at Ban Khao Daeng were motorbikes? (1 d.p.)', ans: 46.7, tol: 0.1, unit: '%', f: '7 ÷ 15 × 100 = <b>46.7%</b>.' },
+          { type: 'num', q: 'What is the range in total vehicles?', ans: 7, tol: 0, unit: 'vehicles', f: '15 − 8 = <b>7</b>.' },
+          { type: 'mc', q: 'Ban Khao Daeng had as much traffic as the largest village. Which is the best explanation?', o: ['It is on a main route used by tourists visiting the national park', 'It has the largest population of the three villages in the census', 'The traffic counter there counted every vehicle at least four times', 'Nobody in Ban Khao Daeng owns a car, motorbike or any vehicle'], c: 0, f: 'Tourism adds customers beyond the resident population.' }] }, next); } },
+      { title: '🖼️ Strength or limitation?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['s', '👍 Strength'], ['l', '👎 Limitation']], ['zg', 'zr']), cards: [
+          { t: 'Located divided bars give an instant comparison of total and type at every site', a: ['s'], why: 'One key works for all three.' },
+          { t: 'Proportional symbols are very visual and show location', a: ['s'], why: 'Easy to see the largest village.' },
+          { t: 'Word clouds quickly show common themes in interviews', a: ['s'], why: 'Presents qualitative data.' },
+          { t: 'Proportional circles can overlap and exact values are hard to read', a: ['l'], why: 'Less precise.' },
+          { t: 'Pie charts hide the actual numbers', a: ['l'], why: 'Only percentages.' },
+          { t: 'Word clouds lose the context of what people said', a: ['l'], why: 'Meaning is lost.' }] }, next); } },
+      { title: '🔧 Rural limitations and solutions', build: function (el, next) { sortGame(el, { zones: zonesFrom([['st', '🔢 Services tally'], ['tc', '🚗 Traffic counts'], ['iv', '🎤 Interviews'], ['sd', '📚 Census data']], ['zc1', 'zc2', 'zg', 'zc4']), cards: [
+          { t: 'Classifying services is subjective → agree a classification list before the trip', a: ['st'], why: 'Consistent results.' },
+          { t: 'Counts at different times of day → count at the same times on several days and calculate a mean', a: ['tc'], why: 'More reliable.' },
+          { t: 'Only 2 people and a language barrier → interview more people with questions prepared in Thai', a: ['iv'], why: 'More representative.' },
+          { t: 'Figures may be out of date → use the latest figures and note the date', a: ['sd'], why: 'More accurate.' }] }, next); } }]);
+  };
+
+  /* L13 — EDEXCEL EXAM BOSS (8-mark Evaluate) */
+  var EXQ = [
+    { q: 'You have studied a coastal environment as part of your own geographical enquiry. Evaluate the accuracy and reliability of your data collection methods.', mk: 'Based on Edexcel June 2024 Paper 1, Q5(e) · 8 marks · Evaluate',
+      C: 'Measuring beach gradient with ranging poles and a clinometer was fairly accurate, because we averaged a foresight and a backsight every 5 m.',
+      E: 'At Pranburi Forest Park we measured a gentler gradient and a width of about 110 m, compared with 55 m at the beach south of Sam Roi Yot.',
+      X: 'However, reliability was limited because we visited the three beaches at different states of the tide, and deciding where the beach started and ended was subjective.',
+      J: 'Overall, the methods were accurate enough to compare the beaches, but visiting at the same state of tide and using fixed markers would make them more reliable.',
+      D: ['We measured the beach gradient using a stopwatch, which was perfectly accurate.', 'Our results were completely reliable because we only measured one beach once.'] },
+    { q: 'You have studied a coastal environment. Evaluate how successful your chosen data analysis methods were in answering your enquiry question.', mk: 'Based on Edexcel June 2019 Paper 1, Q5(c) · 8 marks · Evaluate',
+      C: 'Drawing beach profiles from our width and gradient data was successful because it let us compare all three beaches side by side.',
+      E: 'The profiles showed that the beach with the offshore reef was about twice as wide as the beach south of Sam Roi Yot, so we could accept the hypothesis that managed beaches are wider.',
+      X: 'However, calculating means for wave frequency hid the spread of the readings, and the vertical scale on the profiles was exaggerated.',
+      J: 'Overall, the analysis answered the enquiry question for width and gradient, but adding the range and more wave data would make the judgement more secure.',
+      D: ['Calculating the mean showed every individual reading exactly.', 'We did not need to analyse any data because the hypothesis was obviously true.'] },
+    { q: 'You have studied a rural environment as part of your own enquiry. Evaluate how far your data collection methods allowed you to achieve your aim.', mk: 'Based on Edexcel June 2023 Paper 2R, Q5(d) · 8 marks · Evaluate',
+      C: 'The services tally and land use survey allowed us to achieve our aim, because they gave numerical data on the number and type of services in each village.',
+      E: 'We could compare the three Sam Roi Yot villages with their census populations to test whether larger villages had more high-order services.',
+      X: 'However, our traffic counts lasted only a few minutes at different times of day, and our interviews used a convenience sample of just two people per village.',
+      J: 'Overall, the methods mostly achieved the aim, but counting at the same times on several days and interviewing more people would make the conclusions more reliable.',
+      D: ['Our traffic counts lasted a whole week at every village, so they were perfect.', 'We did not use any secondary data, so we could not know the village populations.'] },
+    { q: 'Evaluate the data presentation techniques you used in your rural enquiry.', mk: 'Edexcel-style · 8 marks · Evaluate',
+      C: 'Located divided bar graphs were an effective technique because they showed both the total and the type of traffic at each village on one map.',
+      E: 'They showed at a glance that Ban Phu Yai Noi and Ban Khao Daeng each had 15 vehicles in three minutes, almost double Ban Khung Tanot’s 8.',
+      X: 'However, the word cloud of interview answers lost the context of what people said, and pie charts hid the actual numbers of services.',
+      J: 'Overall, the map-based graphs were the most effective, but combining them with a table of raw data would make the presentation clearer and more precise.',
+      D: ['Word clouds show exact numbers, so they are the most precise technique.', 'Using a different vertical scale on each bar makes them easier to compare.'] }];
+
+  LV[13] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Strength'], ['E', 'e', 'Evidence from your study'], ['X', 'x', 'Limitation'], ['J', 'j', 'Judgement and improvement']];
+    stages(root, [{ title: '👹 Final boss: the Edexcel Examiner', how: 'For each 8-mark <b>Evaluate</b> question, tap a sentence card and then tap the box it belongs in: <b>Strength</b>, <b>Evidence</b>, <b>Limitation</b> and <b>Judgement</b>. Two cards are <b>traps</b> — leave them out! Evaluate answers weigh strengths against limitations and reach a judgement.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The Edexcel Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A balanced evaluation with evidence and a judgement.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Strength = what worked well; Evidence = specific results from your study; Limitation = what reduced accuracy or reliability (often starts “However”); Judgement = overall verdict plus an improvement. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var MK = '<defs><marker id="mB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0f3a5c"/></marker></defs>';
+  var SVG_SAMP = '<svg viewBox="0 0 680 400" role="img" aria-label="Sampling strategies">' + MK + '<rect width="680" height="400" fill="#f8fafc"/>' +
+    '<rect x="20" y="60" width="190" height="190" fill="#fef9c3" stroke="#0f3a5c" stroke-width="2"/><circle cx="71" cy="89" r="5" fill="#dc2626"/><circle cx="97" cy="97" r="5" fill="#dc2626"/><circle cx="43" cy="138" r="5" fill="#dc2626"/><circle cx="184" cy="204" r="5" fill="#dc2626"/><circle cx="159" cy="108" r="5" fill="#dc2626"/><circle cx="121" cy="117" r="5" fill="#dc2626"/><circle cx="60" cy="89" r="5" fill="#dc2626"/><circle cx="67" cy="225" r="5" fill="#dc2626"/><circle cx="169" cy="205" r="5" fill="#dc2626"/><circle cx="164" cy="104" r="5" fill="#dc2626"/><circle cx="83" cy="176" r="5" fill="#dc2626"/><circle cx="153" cy="213" r="5" fill="#dc2626"/><rect x="245" y="60" width="190" height="190" fill="#fef9c3" stroke="#0f3a5c" stroke-width="2"/><circle cx="269" cy="84" r="5" fill="#dc2626"/><circle cx="269" cy="131" r="5" fill="#dc2626"/><circle cx="269" cy="178" r="5" fill="#dc2626"/><circle cx="269" cy="225" r="5" fill="#dc2626"/><circle cx="316" cy="84" r="5" fill="#dc2626"/><circle cx="316" cy="131" r="5" fill="#dc2626"/><circle cx="316" cy="178" r="5" fill="#dc2626"/><circle cx="316" cy="225" r="5" fill="#dc2626"/><circle cx="363" cy="84" r="5" fill="#dc2626"/><circle cx="363" cy="131" r="5" fill="#dc2626"/><circle cx="363" cy="178" r="5" fill="#dc2626"/><circle cx="363" cy="225" r="5" fill="#dc2626"/><circle cx="410" cy="84" r="5" fill="#dc2626"/><circle cx="410" cy="131" r="5" fill="#dc2626"/><circle cx="410" cy="178" r="5" fill="#dc2626"/><circle cx="410" cy="225" r="5" fill="#dc2626"/><rect x="470" y="60" width="190" height="190" fill="#fef9c3" stroke="#0f3a5c" stroke-width="2"/><rect x="470" y="60" width="190" height="120" fill="#fde68a" stroke="#0f3a5c" stroke-width="2"/><rect x="470" y="180" width="190" height="70" fill="#86efac" stroke="#0f3a5c" stroke-width="2"/><circle cx="490" cy="90" r="5" fill="#dc2626"/><circle cx="520" cy="140" r="5" fill="#dc2626"/><circle cx="550" cy="90" r="5" fill="#dc2626"/><circle cx="580" cy="140" r="5" fill="#dc2626"/><circle cx="610" cy="90" r="5" fill="#dc2626"/><circle cx="640" cy="140" r="5" fill="#dc2626"/><circle cx="500" cy="215" r="5" fill="#dc2626"/><circle cx="542" cy="215" r="5" fill="#dc2626"/><circle cx="584" cy="215" r="5" fill="#dc2626"/><circle cx="626" cy="215" r="5" fill="#dc2626"/>' +
+    '<rect x="20" y="300" width="640" height="80" fill="#fde68a" stroke="#0f3a5c" stroke-width="2"/><rect x="20" y="300" width="80" height="80" fill="#38bdf8"/>' +
+    '<line x1="100" y1="340" x2="640" y2="340" stroke="#0f3a5c" stroke-width="3" stroke-dasharray="8 5"/>' +
+    '<g fill="none" stroke="#166534" stroke-width="3"><rect x="180" y="322" width="36" height="36"/><rect x="320" y="322" width="36" height="36"/><rect x="460" y="322" width="36" height="36"/></g>' +
+    '<g font-size="11" fill="#475569"><text x="50" y="395" text-anchor="middle">sea</text></g></svg>';
+  var PINS_SAMP = [{ n: 1, x: 115, y: 40 }, { n: 2, x: 400, y: 40 }, { n: 3, x: 625, y: 40 }, { n: 4, x: 600, y: 322 }, { n: 5, x: 338, y: 300 }];
+
+  var SVG_GRAD = '<svg viewBox="0 0 680 320" role="img" aria-label="Measuring beach gradient">' + MK + '<rect width="680" height="320" fill="#f0f9ff"/>' +
+    '<polygon points="0,260 680,150 680,320 0,320" fill="#fde68a"/><polygon points="0,260 120,240 120,320 0,320" fill="#38bdf8" opacity=".8"/>' +
+    '<g stroke="#dc2626" stroke-width="6"><line x1="200" y1="227" x2="200" y2="97"/><line x1="460" y1="185" x2="460" y2="55"/></g>' +
+    '<g stroke="#fff" stroke-width="6" stroke-dasharray="13 13"><line x1="200" y1="227" x2="200" y2="97"/><line x1="460" y1="185" x2="460" y2="55"/></g>' +
+    '<line x1="200" y1="150" x2="460" y2="108" stroke="#0f3a5c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#mB)"/>' +
+    '<rect x="188" y="142" width="26" height="16" rx="3" fill="#0f3a5c"/>' +
+    '<line x1="200" y1="270" x2="460" y2="228" stroke="#0f3a5c" stroke-width="2" marker-end="url(#mB)"/><line x1="460" y1="228" x2="200" y2="270" stroke="#0f3a5c" stroke-width="2" marker-end="url(#mB)"/>' +
+    '<text x="330" y="270" text-anchor="middle" font-size="13" font-weight="700" fill="#0f3a5c">5 m</text></svg>';
+  var PINS_GRAD = [{ n: 1, x: 175, y: 110 }, { n: 2, x: 240, y: 165 }, { n: 3, x: 340, y: 110 }, { n: 4, x: 60, y: 290 }, { n: 5, x: 420, y: 262 }];
+
+  var SVG_HIER = '<svg viewBox="0 0 640 380" role="img" aria-label="The settlement hierarchy">' + MK + '<rect width="640" height="380" fill="#f8fafc"/>' +
+    '<polygon points="320,20 560,340 80,340" fill="#e0e7ff" stroke="#0f3a5c" stroke-width="2"/>' +
+    '<g stroke="#0f3a5c" stroke-width="1.5"><line x1="275" y1="80" x2="365" y2="80"/><line x1="230" y1="140" x2="410" y2="140"/><line x1="185" y1="200" x2="455" y2="200"/><line x1="140" y1="260" x2="500" y2="260"/></g>' +
+    '<g font-size="12" fill="#1e293b" text-anchor="middle"><text x="320" y="70">Bangkok</text><text x="320" y="125">Hua Hin</text><text x="320" y="185">Pranburi</text><text x="320" y="245">Ban Khao Daeng</text><text x="320" y="305">a few houses</text></g>' +
+    '<line x1="590" y1="330" x2="590" y2="40" stroke="#0f3a5c" stroke-width="3" marker-end="url(#mB)"/>' +
+    '<line x1="40" y1="40" x2="40" y2="330" stroke="#0f3a5c" stroke-width="3" marker-end="url(#mB)"/></svg>';
+  var PINS_HIER = [{ n: 1, x: 320, y: 45 }, { n: 2, x: 250, y: 115 }, { n: 3, x: 225, y: 175 }, { n: 4, x: 180, y: 235 }, { n: 5, x: 150, y: 300 }, { n: 6, x: 610, y: 185 }, { n: 7, x: 20, y: 185 }];
+
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  var GATES = {
+    1: [
+      { type: 'best', marks: 1, cmd: 'Identify', q: 'Which of these is the best hypothesis for a fieldwork enquiry?', o: [
+          'Pebble size will decrease with distance along the coast in the direction of longshore drift.',
+          'What happens to the pebbles on the beach when the waves come in and go out again?',
+          'Beaches are interesting places, and pebbles can be found on many beaches around the world.',
+          'We will go to the beach and collect lots of data about it, then look at the results afterwards.'], c: 0,
+        ms: 'A hypothesis is a <b>testable statement</b> that is <b>specific and measurable</b>. The others are a question, an opinion and a plan.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 2R, Q5(b)', q: 'Explain one reason why your enquiry title was suitable for a geographical enquiry.', o: [
+          'It compared three villages of different sizes close together, so we could collect measurable data to test the link between settlement size and services.',
+          'It was about a place we had never visited and could not reach, so we would have to make up the data instead of collecting any of it ourselves on the day of the trip.',
+          'It was about villages.',
+          'It was an interesting title.'], c: 0,
+        ms: '1 mark for a reason and 1 for development: e.g. <b>linked to a real, accessible place</b> (1) → <b>allowed measurable data to be collected and compared</b> (1).' }],
+    2: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 1, Q5(a)(i)', q: 'Which of these is a type of primary data?', o: ['field sketches', 'local shoreline management plan', 'local historical map', 'newspaper articles'], c: 0,
+        ms: '<b>Field sketches.</b> The others are all secondary sources.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 2R, Q5(b)', q: 'Give one advantage of using a questionnaire to collect data.', o: [
+          'It can collect both qualitative and quantitative data', 'It always gives a perfectly representative sample', 'It needs no planning, so it can be written on the day', 'It measures physical features such as beach gradient'], c: 0,
+        ms: '1 mark, e.g. <b>can include open and closed questions</b> / qualitative and quantitative data / easy to analyse.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 2, Q5(a)(ii)', q: 'Explain why photographs are a useful source of primary data.', o: [
+          'They capture lots of detail at that moment, so the site can be examined and annotated properly after the fieldwork has ended.',
+          'They give exact numerical measurements, so they can be used instead of collecting any quantitative data during the fieldwork.',
+          'They show what it looks like.',
+          'They are easy to take.'], c: 0,
+        ms: '1 mark for the point and 1 for explanation: e.g. <b>capture lots of detail</b> (1) → <b>can be examined after the trip</b> (1); an accurate record of the site at that time.' }],
+    3: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel Summer 2021 Paper 1, Q5(a)(i)', q: 'Which is the correct definition of systematic sampling?', o: [
+          'Collecting data every 100m along a coastline.', 'Collecting data at random sites along a coastline.', 'Collecting data from two different coastline.', 'Collecting data from three sites along a coastline.'], c: 0,
+        ms: '<b>Collecting data every 100 m along a coastline.</b> Random sites is random sampling; the others do not say how sites were chosen.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 2, Q5(c)', q: 'Explain one type of sampling that could be used in a rural investigation.', o: [
+          'Systematic sampling: collecting data in a regular way, such as interviewing every 5th person, which gives even coverage and reduces bias.',
+          'Systematic sampling: choosing only the people who look friendliest, which gives the most interesting answers for the whole of the investigation.',
+          'Random sampling.',
+          'Asking people questions.'], c: 0,
+        ms: '1 mark for the technique and 1 for explanation: e.g. <b>systematic</b> — every 5th person; <b>stratified</b> — a set number from each group; <b>random</b> — every person has an equal chance.' },
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel June 2019 Paper 1, Q5(a)(ii)', q: 'Give one disadvantage of systematic sampling.', o: [
+          'It can miss features that lie between the sampling points', 'It is completely unbiased, so every point has an equal chance', 'It is quick and gives an even coverage of the whole area', 'It is easy to carry out even when time is very short'], c: 0,
+        ms: '1 mark, e.g. <b>can miss features between points</b> / under-representative / can be biased.' }],
+    4: [
+      { type: 'best', marks: 2, cmd: 'Describe', src: 'Based on Edexcel Summer 2021 Paper 1, Q5(a)(iii)', q: 'Describe one health and safety risk to be aware of when doing fieldwork at the coast.', o: [
+          'Slipping on wet rocks or breakwaters, which could lead to cuts or broken bones.',
+          'Getting bored while waiting for the tide, which could make the fieldwork less fun.',
+          'The weather.',
+          'Being careful.'], c: 0,
+        ms: '1 mark for the risk and 1 for why it matters: e.g. <b>slipping on rocks</b> (1) → <b>injury</b> (1); being swept away by waves; getting lost.' },
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel June 2019 Paper 1R, Q5(a)(ii)', q: 'Students identified slipping on rocks as a risk. Give one way this risk could be managed.', o: [
+          'Wearing strong shoes with good grip', 'Running quickly across the rocks', 'Collecting data only on top of the rocks', 'Visiting the beach in the dark'], c: 0,
+        ms: '1 mark, e.g. <b>strong shoes / walking boots</b>, not climbing on structures, checking the weather forecast.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 2, Q5(c)', q: 'Explain one way you could manage a risk during fieldwork in a rural area with a new development.', o: [
+          'Stay alert and wear high-vis jackets near roads, so drivers can see you and you are aware of traffic, which prevents accidents.',
+          'Stand in the middle of the road while counting traffic, so you can see every vehicle clearly and are less likely to miss any of them.',
+          'Be careful of cars.',
+          'Wear a hat.'], c: 0,
+        ms: '1 mark for the way and 2 for expansion: e.g. <b>remain alert / high-vis</b> (1) → <b>aware of traffic</b> (1) → <b>prevents accidents</b> (1).' }],
+    5: [
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2022 Paper 1, Q5(b)(i)', q: 'At Site 2 four pebbles measured 25, 20, 22 and 18 mm. Calculate the mean pebble size to one decimal place.', ans: 21.3, tol: 0.05, unit: 'mm',
+        ms: '(25 + 20 + 22 + 18) ÷ 4 = 85 ÷ 4 = <b>21.3</b>.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 1, Q5(c)(ii)', q: 'Explain one advantage of using a line graph (such as a beach profile) to present results.', o: [
+          'It shows the pattern clearly, so the profiles of different sites can be compared easily to see whether they support the hypothesis.',
+          'It shows the pattern clearly, so there is no need to compare the different sites or check the hypothesis at all afterwards in the conclusion.',
+          'It is easy to draw.',
+          'It looks neat.'], c: 0,
+        ms: '1 mark for the advantage and 2 for explanation: <b>patterns are easy to see</b> (1) → <b>sites can be compared</b> (1) → <b>check against the hypothesis</b> (1).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q5(c)', q: 'Explain one advantage of a technique you used to present your fieldwork data.', o: [
+          'A scatter graph let me see the correlation between two variables, such as pebble size and distance, so I could decide whether to accept the hypothesis.',
+          'A scatter graph hid the relationship between the two variables, so I did not need to decide whether to accept the hypothesis or not in my conclusion at the end.',
+          'A scatter graph is useful.',
+          'I drew a graph.'], c: 0,
+        ms: '1 mark for the advantage and 2 for development: e.g. <b>scatter graph shows correlation</b> (1) → <b>relationship between variables</b> (1) → <b>test the hypothesis</b> (1).' }],
+    6: [
+      { type: 'best', marks: 2, cmd: 'Suggest', src: 'Based on Edexcel June 2019 Paper 1, Q5(a)(vi)', q: 'One site showed an anomalous mean shingle size. Suggest one possible explanation.', o: [
+          'Human error when measuring the shingle or calculating the mean, so the result does not match the other sites.',
+          'The hypothesis was correct, so the anomaly proves that all of the other results collected at the other sites must be wrong.',
+          'It was different.',
+          'Mistakes happen.'], c: 0,
+        ms: '1 mark for the reason and 1 for extension: e.g. <b>human error</b> with equipment, calculation or sample selection (1) → result does not fit the pattern (1).' },
+      { type: 'best', marks: 3, cmd: 'Suggest', src: 'Based on Edexcel June 2024 Paper 2, Q5(d)', q: 'Suggest one reason why the conclusions from your enquiry were reliable.', o: [
+          'Data was collected at several sites using the same methods, so it represented the area fairly and the conclusions were supported by evidence.',
+          'Data was collected at one site using different methods each time, so the conclusions depended on which method happened to be used on the day of the fieldwork.',
+          'We collected lots of data.',
+          'The conclusion was good.'], c: 0,
+        ms: '1 mark for the point and 2 for explanation: e.g. <b>several sites</b> (1) → <b>representative</b> (1) → <b>conclusions supported by evidence</b> (1).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 2R, Q5(c)', q: 'Explain one limitation of a method you used to collect quantitative data.', o: [
+          'The environmental quality score is subjective, so different people may give the same place different scores, which makes the data less reliable.',
+          'The environmental quality score is completely objective, so every person always gives exactly the same score in every place on every day of the week.',
+          'It took a long time.',
+          'It was hard.'], c: 0,
+        ms: '1 mark for the limitation and 2 for explanation: e.g. <b>EQ score is uncalibrated / subjective</b> (1) → <b>different people score differently</b> (1) → <b>less reliable</b> (1).' }],
+    7: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q5(a)', q: 'Explain why your fieldwork location was suitable for this enquiry.', o: [
+          'The coastline had different coastal management at different beaches, so we could compare the beach characteristics at each site.',
+          'The coastline had no coastal management anywhere, so there was nothing to compare at any of the beaches we visited on the day of the fieldwork.',
+          'It was a nice beach.',
+          'It was near the school.'], c: 0,
+        ms: '1 mark for a reason and 1 for development: e.g. <b>different management in different sections</b> (1) → <b>could compare characteristics</b> (1).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q5(b)', q: 'Explain one way you decided on the sites for your data collection.', o: [
+          'We chose three beaches with different types of coastal management, so we could compare them fairly and test whether management affected beach width and gradient.',
+          'We chose the three beaches closest to the café, so we could have lunch, even though none of them had any coastal management or defences for us to compare with each other.',
+          'We picked three beaches.',
+          'The teacher chose them.'], c: 0,
+        ms: '1 mark for the initial point and 2 for explanation: practical reasons (access, safety) or sampling reasons (comparison, representative).' }],
+    8: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 1, Q5(a)(i)', q: 'Which piece of equipment is used to measure gradient?', o: ['clinometer', 'calliper', 'compass', 'quadrat'], c: 0,
+        ms: '<b>Clinometer.</b> A calliper measures size/shape, a compass direction and a quadrat % cover.' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 1, Q5(d)', q: 'Explain one other primary data collection method that would be useful in a coastal enquiry.', o: [
+          'Measuring beach gradient with ranging poles and a clinometer, because gradient is likely to affect sediment size, as smaller sediment is carried further up gentler beaches.',
+          'Reading newspaper reports about the beach, because these are written by journalists and so they are the most accurate type of primary data that can be collected at the coast.',
+          'Taking photographs.',
+          'Measuring the beach.'], c: 0,
+        ms: '1 mark for the method and 2 for development: e.g. <b>beach gradient</b> (1) → <b>likely to influence sediment size</b> (1) → explains the link (1).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1R, Q5(b)', q: 'Explain one quantitative method you chose for data collection.', o: [
+          'Measuring beach width and gradient, which gave numerical data on beach height and angles, so we could draw beach profiles and compare the sites.',
+          'Drawing field sketches, which gave numerical data on beach height and angles, so we did not need to draw any beach profiles to compare the sites.',
+          'We measured the beach.',
+          'We used a tape measure.'], c: 0,
+        ms: '1 mark for the method and 2 for explanation: e.g. <b>beach profile</b> (1) → <b>quantitative data on height and angle</b> (1) → <b>compare sites</b> (1).' }],
+    9: [
+      { type: 'best', marks: 2, cmd: 'Suggest', src: 'Based on Edexcel June 2024 Paper 1, Q5(c)(iii)', q: 'A scatter graph shows that pebble size decreases with distance along the coast. Suggest one reason for this relationship.', o: [
+          'The further pebbles are carried by longshore drift, the longer they are worn down by attrition, so they become smaller.',
+          'The further pebbles are carried by longshore drift, the more sand sticks to them, so they become larger and rounder over time.',
+          'Pebbles get smaller.',
+          'Because of the sea.'], c: 0,
+        ms: '1 mark for the relationship (<b>negative correlation</b>) and 1 for explanation (<b>attrition during longshore drift</b>).' },
+      { type: 'best', marks: 3, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 1, Q5(d)', q: 'Explain one technique you used to analyse your data.', o: [
+          'I calculated the mean by adding the measurements and dividing by the number of readings, which smoothed out variation so the sites could be compared.',
+          'I calculated the mean by choosing the largest measurement at each site, which showed the extremes so that the sites could not be compared with each other fairly.',
+          'I worked out the mean.',
+          'I looked at the data.'], c: 0,
+        ms: '1 mark for the technique and 2 for development: e.g. <b>mean</b> (1) → how it was calculated (1) → <b>allowed comparison</b> (1).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2019 Paper 1R, Q5(a)(iii)', q: 'Mean shingle size at five sites was 8.1, 14.5, 16.1, 15.0 and 30.0 mm. Calculate the overall mean to one decimal place.', ans: 16.7, tol: 0.05, unit: 'mm',
+        ms: '83.7 ÷ 5 = <b>16.7</b> (not 16.74 — give one decimal place).' }],
+    10: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q5(a)(ii)', q: 'Explain one factor that affected your choice of sites for collecting data.', o: [
+          'Accessibility: the villages had to be safe to reach by road in one day, so that all the data could be collected.',
+          'Popularity: we chose the busiest shopping malls in Bangkok, because villages were too small to be worth visiting.',
+          'They were close.',
+          'We liked them.'], c: 0,
+        ms: '1 mark for the factor and 1 for explanation: e.g. <b>accessibility</b> (1) → data could be collected (1); a range of village sizes for comparison.' },
+      { type: 'best', marks: 1, cmd: 'Identify', q: 'Which statement best describes a high-order service?', o: [
+          'It has a high threshold population and people travel a long way to use it', 'It has a low threshold population and is used every day by local people', 'It is found in almost every hamlet and isolated dwelling in the countryside', 'It only needs one or two customers a week to stay open and profitable'], c: 0,
+        ms: '<b>High threshold and long range</b>, e.g. a hospital or bank.' }],
+    11: [
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q5(b)', q: 'Explain one way secondary data was used to support your enquiry.', o: [
+          'Census data gave the population of each village, so we could compare settlement size with the number of services we counted.',
+          'Census data told us exactly how many shops were open on the day, so we did not need to collect any primary data ourselves at all.',
+          'We used the internet.',
+          'It helped us.'], c: 0,
+        ms: '1 mark for the way and 1 for development: e.g. <b>census data</b> → village populations to compare with services; newspaper articles → supporting evidence.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 2R, Q5(a)(ii)', q: 'Explain why closed questions can be useful in a questionnaire.', o: [
+          'They allow opinions to be counted and quantified, which makes analysis and drawing graphs straightforward.',
+          'They allow people to give long, detailed answers, which makes drawing graphs and charts very difficult to do.',
+          'They are quick.',
+          'People like them.'], c: 0,
+        ms: '1 mark for the point and 1 for explanation: <b>opinions can be quantified</b> (1) → <b>easy to analyse and graph</b> (1).' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 2, Q5(d)', q: 'Explain two limitations of a method you used to collect qualitative data.', o: [
+          'Interviews used a convenience sample of only two people per village, so the views may not represent everyone. A language barrier meant some answers may have been misunderstood, reducing accuracy.',
+          'Interviews used a random sample of every resident in each village, so the views were perfectly representative. There was no language barrier, so every answer was completely accurate and fully understood by us.',
+          'Not enough people and language.',
+          'Interviews are hard.'], c: 0,
+        ms: '1 mark for each limitation and 1 for expansion, ×2: e.g. <b>small or unrepresentative sample</b>; <b>language barrier / misunderstanding</b>; answers are subjective.' }],
+    12: [
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q5(c)', q: 'Explain one advantage and one disadvantage of a data presentation technique you used in your enquiry.', o: [
+          'Advantage: located divided bar graphs showed both the total and type of traffic at each village on a map, so sites were easy to compare. Disadvantage: small bars made exact values hard to read.',
+          'Advantage: located divided bar graphs hid the total and type of traffic, so the villages were harder to compare. Disadvantage: they showed every exact value for every vehicle type very clearly.',
+          'Easy to read but small.',
+          'It was a good graph.'], c: 0,
+        ms: '1 mark for an advantage and 1 for a disadvantage, each with a development mark (max 2 each).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel Summer 2021 Paper 2, Q5(b)(iv)', q: 'Environmental quality scores at five sites ranged from a lowest of 10 to a highest of 23. Calculate the range.', ans: 13, tol: 0, unit: '',
+        ms: '23 − 10 = <b>13</b>.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', src: 'Based on Edexcel June 2023 Paper 2R, Q5(b)(iv)', q: 'When the environmental quality scores are put in order, the two middle values are 52 and 60. Calculate the median.', ans: 56, tol: 0, unit: '',
+        ms: '(52 + 60) ÷ 2 = <b>56</b>.' }]
+  };
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'Exam-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">' + (G.marks === 1 ? 'Choose the <b>correct</b> answer.' : 'Which answer would score <b>full marks</b>?') + '</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
