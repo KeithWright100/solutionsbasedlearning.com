@@ -346,6 +346,49 @@
     .enter-btn svg { width: 22px; height: 22px; transition: transform 0.25s ease; }
     .enter-btn:hover svg { transform: translateX(4px); }
 
+
+    /* ---- Level sections (IB Diploma / Edexcel IGCSE) ---- */
+    .level-head {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      margin: 0 0 14px; padding-bottom: 10px; border-bottom: 2px solid rgba(0, 124, 130, 0.18);
+    }
+    .level-head h2 { font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 900; color: var(--navy); letter-spacing: 0.02em; }
+    .level-head h2 span { color: var(--teal-dark); }
+    .level-head p { color: var(--muted); font-size: 0.92rem; font-weight: 600; }
+    .level-section { margin-bottom: 34px; }
+    .level-section + .level-section { margin-top: 6px; }
+
+    /* Compact cards: both rows are a little smaller than the original full-height cards */
+    .subject-grid.compact { gap: 16px; }
+    .compact .subject-card, .compact .subject-content { min-height: 300px; }
+    .compact .subject-content { padding: 22px 18px; }
+    .compact .subject-content { justify-content: center; }
+    .compact .subject-icon { position: static; transform: none; flex-shrink: 0; width: 62px; height: 62px; margin: 0 auto 12px; }
+    .compact .subject-icon svg { width: 38px; height: 38px; }
+    .compact .subject-card h2 { font-size: clamp(1.2rem, 1.7vw, 1.6rem); margin-bottom: 4px; }
+    .compact .subject-card .strapline { font-size: 0.9rem; margin-bottom: 12px; }
+    .compact .status { min-width: 96px; padding: 6px 13px; font-size: 0.74rem; margin-bottom: 12px; }
+    .compact .subject-copy { font-size: 0.88rem; margin-bottom: 16px; max-width: 220px; }
+    .compact .enter-btn { padding: 12px 16px; font-size: 0.84rem; border-radius: 14px; max-width: 230px; }
+    .compact .enter-btn svg { width: 18px; height: 18px; }
+    .igcse-row .subject-card::after {
+      background:
+        linear-gradient(180deg, rgba(0, 60, 70, 0.10), rgba(0, 45, 60, 0.78)),
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 38%);
+    }
+    .igcse-row .subject-card.disabled::after {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.78)),
+        linear-gradient(180deg, rgba(1, 21, 38, 0.04), rgba(1, 21, 38, 0.18));
+    }
+    .level-tag {
+      position: absolute; top: 14px; left: 14px; z-index: 2;
+      font-size: 0.66rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 999px; background: rgba(1, 21, 38, 0.72); color: #fff;
+    }
+    .disabled .level-tag { background: rgba(1, 21, 38, 0.45); }
+    @media (max-width: 1120px) { .compact .subject-card, .compact .subject-content { min-height: 290px; } }
+
     .toast {
       position: fixed;
       left: 50%;
@@ -520,7 +563,7 @@
         <div class="hub-kicker">
           <h1>Our Humanities Hub</h1>
         </div>
-        <p>Four disciplines. One shared purpose.</p>
+        <p>Four disciplines. Two qualifications. One shared purpose.</p>
       </div>
 
       <section class="igcse-banner" aria-label="IB Subject Menu" style="margin-top: 0; margin-bottom: 34px;">
@@ -540,7 +583,9 @@
         </div>
       </section>
 
-      <div class="subject-grid">
+      <section class="level-section" aria-labelledby="ibHead">
+        <div class="level-head"><h2 id="ibHead">IB <span>Diploma</span></h2><p>Ages 16–19 &middot; Geography, History, Economics and Business</p></div>
+      <div class="subject-grid compact">
         <article
           class="subject-card geography clickable"
           tabindex="0"
@@ -549,6 +594,7 @@
           data-route="/geography"
         >
           <div class="subject-content">
+            <span class="level-tag">IB</span>
             <div class="subject-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="12" cy="12" r="9" />
@@ -574,6 +620,7 @@
 
         <article class="subject-card history disabled" aria-label="IB History coming soon">
           <div class="subject-content">
+            <span class="level-tag">IB</span>
             <div class="subject-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M4 20h16" />
@@ -602,6 +649,7 @@
           data-route="/economics"
         >
           <div class="subject-content">
+            <span class="level-tag">IB</span>
             <div class="subject-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M4 19h16" />
@@ -635,6 +683,7 @@
           data-route="/business"
         >
           <div class="subject-content">
+            <span class="level-tag">IB</span>
             <div class="subject-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
@@ -658,6 +707,98 @@
           </div>
         </article>
       </div>
+      </section>
+
+      <section class="level-section" aria-labelledby="igcseHead">
+        <div class="level-head"><h2 id="igcseHead">Edexcel <span>IGCSE</span></h2><p>Ages 14–16 &middot; full lesson courses, past paper questions and revision</p></div>
+      <div class="subject-grid compact igcse-row">
+        <article
+          class="subject-card geography clickable"
+          tabindex="0"
+          role="link"
+          aria-label="Enter IGCSE Geography"
+          data-route="/igcse/geography/learn"
+        >
+          <div class="subject-content">
+            <span class="level-tag">IGCSE</span>
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <path d="M12 3a14 14 0 0 1 0 18" />
+                <path d="M12 3a14 14 0 0 0 0 18" />
+              </svg>
+            </div>
+            <h2>IGCSE Geography</h2>
+            <p class="strapline">Explore &bull; Think &bull; Apply</p>
+            <span class="status live">Live</span>
+            <p class="subject-copy">Five topics and fieldwork, with lessons, quizzes and past paper questions.</p>
+            <button class="enter-btn" type="button" aria-label="Click here to enter IGCSE Geography">
+              Enter IGCSE Geography
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </article>
+        <article class="subject-card history disabled" aria-label="IGCSE History coming soon">
+          <div class="subject-content">
+            <span class="level-tag">IGCSE</span>
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 20h16" />
+                <path d="M6 17V9" />
+                <path d="M10 17V9" />
+                <path d="M14 17V9" />
+                <path d="M18 17V9" />
+                <path d="M3 9h18" />
+                <path d="M12 3l9 6H3l9-6Z" />
+              </svg>
+            </div>
+            <h2>IGCSE History</h2>
+            <p class="strapline">Interpret &bull; Evaluate &bull; Judge</p>
+            <span class="status soon">Coming Soon</span>
+            <p class="subject-copy">Learn from the past. Question perspectives. Shape the future.</p>
+          </div>
+        </article>
+        <article class="subject-card economics disabled" aria-label="IGCSE Economics coming soon">
+          <div class="subject-content">
+            <span class="level-tag">IGCSE</span>
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 19h16" />
+                <path d="M6 16v-4" />
+                <path d="M11 16v-7" />
+                <path d="M16 16v-10" />
+                <path d="M5 9l4-4 4 4 6-6" />
+                <path d="M17 3h2v2" />
+              </svg>
+            </div>
+            <h2>IGCSE Economics</h2>
+            <p class="strapline">Analyse &bull; Predict &bull; Decide</p>
+            <span class="status soon">Coming Soon</span>
+            <p class="subject-copy">Understand choices. Evaluate trade-offs. Improve lives.</p>
+          </div>
+        </article>
+        <article class="subject-card business disabled" aria-label="IGCSE Business coming soon">
+          <div class="subject-content">
+            <span class="level-tag">IGCSE</span>
+            <div class="subject-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
+                <rect x="4" y="6" width="16" height="14" rx="2" />
+                <path d="M4 11h16" />
+                <path d="M10 11v2h4v-2" />
+              </svg>
+            </div>
+            <h2>IGCSE Business</h2>
+            <p class="strapline">Innovate &bull; Strategise &bull; Lead</p>
+            <span class="status soon">Coming Soon</span>
+            <p class="subject-copy">Build ideas. Create value. Lead with purpose.</p>
+          </div>
+        </article>
+      </div>
+      </section>
 
       <section class="igcse-banner" aria-label="Interactive Geography Games" style="margin-top: 34px; margin-bottom: 34px;">
         <div class="igcse-banner-row" aria-label="Interactive Geography Games">
@@ -672,7 +813,7 @@
               <a class="games-stat" href="/geography/games#ks3">&#127757; KS3</a>
               <a class="games-stat" href="/geography/games#igcse">&#128218; IGCSE</a>
               <a class="games-stat" href="/geography/games#ib">&#127891; IB Diploma</a>
-              <span class="games-stat">&#9889; 16 Games</span>
+              <span class="games-stat">&#9889; 34 Games</span>
             </div>
           </div>
           <a class="igcse-banner-btn" href="/geography/games" aria-label="Open the Interactive Geography Games hub">
@@ -704,7 +845,7 @@
   </div>
 
   <script>
-    const LIVE_ROUTES = { geography: "/geography", economics: "/economics", business: "/business" };
+    const LIVE_ROUTES = { geography: "/geography", economics: "/economics", business: "/business", igcseGeography: "/igcse/geography/learn" };
     const toast = document.getElementById("toast");
 
     function showToast(message) {
