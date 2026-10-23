@@ -1156,7 +1156,7 @@
         { type: 'num', q: 'Calculate the increase in CO₂ concentration from 1960 (316.9 ppm) to 2020 (414.2 ppm).', ans: 97.3, tol: 1, unit: 'ppm', f: '414.2 − 316.9 = <b>97.3 ppm</b>.' },
         { type: 'num', q: 'Calculate the <b>mean annual rate</b> of increase between 1960 and 2020, to 1 decimal place.', ans: 1.6, tol: 0.05, unit: 'ppm per year', f: '97.3 ÷ 60 years = <b>1.6 ppm per year</b>.' },
         { type: 'num', q: 'By what percentage was CO₂ in 2023 (421 ppm) above the pre-industrial level of 280 ppm? Nearest whole number.', ans: 50, tol: 1, unit: '%', f: '(421 − 280) ÷ 280 × 100 = <b>50%</b> higher.' },
-        { type: 'mc', q: 'Which describes the trend most accurately (as an examiner would want)?', o: ['CO₂ rose throughout, from about 317 ppm in 1960 to 421 ppm in 2023, and the rate of increase accelerated', 'CO₂ rose steadily at the same rate every decade, from about 317 ppm in 1960 to 421 ppm in 2023', 'CO₂ rose until 2000 and then levelled off at about 370 ppm as countries cut their emissions', 'CO₂ fluctuated up and down with no clear trend, staying between 300 ppm and 430 ppm throughout'], c: 0, f: 'Give the overall trend, use data from the start and end, and comment on the rate (about 0.9 ppm a year in the 1960s, over 2 ppm a year since 2000).' }] }, next); } }];
+        { type: 'mc', q: 'Which describes the trend most accurately (as an examiner would want)?', o: ['CO₂ rose throughout, from about 317 ppm in 1960 to 421 ppm in 2023, and the rate of increase accelerated', 'CO₂ rose steadily at exactly the same rate every single decade, from about 317 ppm in 1960 to 421 ppm in 2023', 'CO₂ rose until 2000 and then levelled off at about 370 ppm as countries cut their emissions', 'CO₂ fluctuated up and down with no clear trend, staying between 300 ppm and 430 ppm throughout'], c: 0, f: 'Give the overall trend, use data from the start and end, and comment on the rate (about 0.9 ppm a year in the 1960s, over 2 ppm a year since 2000).' }] }, next); } }];
   EXTRA[4] = [
     { title: '🧪 Ocean acidification: build the chain', how: 'Tap the steps in order, from cause to impact.',
       build: function (el, next) { orderGame(el, ['More CO₂ is released into the atmosphere by human activity', 'The oceans absorb about a quarter of this extra CO₂', 'CO₂ reacts with seawater to form carbonic acid', 'Ocean pH falls (from about 8.2 to 8.1 since pre-industrial times)', 'Fewer carbonate ions are available in the water', 'Corals, shellfish and plankton struggle to build their skeletons and shells'], 'Tap the CAUSE first…', next); } },
@@ -1216,7 +1216,7 @@
       build: function (el, next) { dataGame(el, { chart: '<table class="dg-table"><thead><tr><th></th><th>Hazard</th><th>Vulnerability</th><th>Capacity</th></tr></thead><tbody><tr><td><b>Place A</b> (low-lying delta, LIC)</td><td>4</td><td>5</td><td>2</td></tr><tr><td><b>Place B</b> (coastal city, HIC)</td><td>4</td><td>2</td><td>4</td></tr></tbody></table>', qs: [
         { type: 'num', q: 'Calculate the risk score for Place A.', ans: 10, tol: 0, unit: '', f: '(4 × 5) ÷ 2 = <b>10</b>.' },
         { type: 'num', q: 'Calculate the risk score for Place B.', ans: 2, tol: 0, unit: '', f: '(4 × 2) ÷ 4 = <b>2</b>.' },
-        { type: 'mc', q: 'The hazard is the same in both places. What does this show?', o: ['Vulnerability and capacity, not the hazard alone, explain why the risk is five times greater at A', 'The hazard is the only factor that matters, so both places face exactly the same risk', 'Place B faces more risk because cities have more buildings that can be damaged', 'Risk cannot be compared between places, because every cyclone is completely different'], c: 0, f: 'Same hazard, but risk is <b>5 times greater</b> at A because of higher vulnerability and lower capacity.' }] }, next); } }];
+        { type: 'mc', q: 'The hazard is the same in both places. What does this show?', o: ['Vulnerability and capacity, not the hazard alone, explain why the risk is five times greater at A', 'The hazard is the only factor that matters, so both places face exactly the same level of overall risk', 'Place B faces more risk because cities have more buildings that can be damaged', 'Risk cannot be compared between places, because every cyclone is completely different'], c: 0, f: 'Same hazard, but risk is <b>5 times greater</b> at A because of higher vulnerability and lower capacity.' }] }, next); } }];
   EXTRA[10] = [
     { title: '📉 Data skills: the emissions gap', how: 'Compare current policies with the emissions pathways needed to meet the Paris Agreement goals.',
       build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Global greenhouse gas emissions pathways', x0: 2020, x1: 2050, xticks: [2020, 2025, 2030, 2035, 2040, 2045, 2050], y0: 0, y1: 60, ystep: 10, minor: 2, legendBottom: true, xlab: 'Year', ylab: 'Emissions (GtCO₂e per year)',
@@ -1254,6 +1254,18 @@
           { t: 'Earthquakes move the continents quickly and warm the oceans', ok: false }],
         ms: 'Credit natural causes with a developed point: <b>Milankovitch cycles</b>, <b>volcanic aerosols</b>, <b>solar variability</b>. Fossil fuels are a human cause, and the ozone hole and earthquakes are misconceptions.' }],
     2: [
+      { type: 'best', marks: 2, cmd: 'Outline', src: 'Based on IB May 2021 Paper 2, Q2(b)(i)', q: 'Outline one way in which extreme warming can change the albedo of a region.', o: [
+          'Extreme warming melts snow and ice in polar and mountain regions, exposing darker land and sea beneath, so the surface reflects less solar radiation and its albedo falls.',
+          'Extreme warming makes the Sun give out more radiation, so more energy reaches the Earth and the albedo of every region rises, because albedo measures the total amount of sunlight that arrives at the surface each day.',
+          'Warming changes the albedo of a region.',
+          'Albedo is the proportion of incoming solar radiation reflected by a surface.'], c: 0,
+        ms: '1 mark for a valid effect of extreme warming (e.g. <b>melting ice</b>, <b>more cloud</b>, <b>wildfires or desertification removing vegetation</b>) and 1 for the resulting change in albedo. A definition alone scores 0.' },
+      { type: 'best', marks: 2, cmd: 'Outline', src: 'Based on IB May 2021 Paper 2, Q2(b)(ii)', q: 'Outline how extreme warming can trigger a feedback loop.', o: [
+          'Warming thaws permafrost, which releases methane, a greenhouse gas. This traps more heat, causing further warming and more thawing — a positive feedback loop.',
+          'Warming always triggers a negative feedback loop, because a hotter Earth sends out more radiation and every extra degree of warming is cancelled out within a few years, so feedback loops cannot make climate change any worse.',
+          'Feedback loops happen when warming causes more warming.',
+          'Warming melts permafrost in Siberia.'], c: 0,
+        ms: '1 mark for identifying and describing a loop (e.g. <b>permafrost methane</b>, <b>water vapour</b>, <b>ice–albedo</b>, <b>wildfires</b>, <b>weaker ocean sink</b>, or the negative <b>cloud</b> loop) and 1 for development showing how it amplifies or reduces the original warming.' },
       { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how the ice–albedo effect can amplify global warming.', o: [
           'As temperatures rise, snow and sea ice melt, exposing darker ocean and land with a lower albedo. These surfaces absorb more solar radiation instead of reflecting it, which raises temperatures further and melts more ice — a positive feedback loop.',
           'Ice and snow have a high albedo of about 0.8–0.9, so they reflect most incoming solar radiation back into space. As the climate warms, more snow falls in polar regions, increasing the area of ice and reflecting even more sunlight, which cools the planet — so the ice–albedo effect slows global warming.',
@@ -1325,6 +1337,14 @@
           { t: 'Sea level rise brings fertile sediment to low-lying farms', ok: false }],
         ms: 'Credit: <b>longer growing seasons</b> at high latitudes and <b>CO₂ fertilisation</b>. In reality pests spread to new areas, and salt water damages farmland.' }],
     8: [
+      { type: 'multi', marks: 4, cmd: 'Explain', src: 'Based on IB May 2021 Paper 2, Q2(c)', q: 'Explain two ways in which climate change can affect ocean shipping routes.', need: 3, items: [
+          { t: 'Melting Arctic sea ice opens new routes such as the Northern Sea Route, which are shorter and ice-free for more of the year', ok: true },
+          { t: 'Stronger tropical storms make some routes more dangerous and can force ships to re-route', ok: true },
+          { t: 'Sea level rise and storm surges flood port facilities and disrupt terminal operations', ok: true },
+          { t: 'Rising sea levels make all oceans deeper, so ships can carry much heavier loads everywhere', ok: false },
+          { t: 'Warmer water makes ships travel faster, so journeys take half the time', ok: false },
+          { t: 'Ocean acidification corrodes ships’ hulls so badly that most routes have closed', ok: false }],
+        ms: 'Each way is identified (1) and developed with its impact on routes or ports (1): <b>new Arctic routes</b>, <b>more hazardous storms and re-routing</b>, <b>flooding and damage to ports</b>, <b>icebergs or sedimentation</b>.' },
       { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why climate change is an issue of climate justice.', o: [
           'High-income countries such as the USA have produced most cumulative emissions, but low-income countries such as Bangladesh and small island states are often the most vulnerable. They have less money for adaptation, so those who contributed least suffer the greatest impacts.',
           'Climate justice is about fairness: the countries with the most emissions today, such as China and India, should pay for all the damage caused by climate change, because emissions per person in these countries are now higher than in the USA or the UK, and they have the largest populations.',
@@ -1384,7 +1404,7 @@
       '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
     window.scrollTo(0, 0);
     function render() {
-      var h = '<div class="exq"><div class="mk">IB-style question · Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'IB-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
       if (G.type === 'best') h += '<p class="gate-ins">Which answer would score <b>full marks</b>?</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
       if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
       if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
