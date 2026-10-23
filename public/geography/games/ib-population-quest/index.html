@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Population Quest — IB Geography Changing Population Revision Game — SBL</title>
+<meta name="description" content="IB Geography revision game for Unit 1 Changing Population: 14 levels covering population distribution, development, demographic transition, migration, megacities, ageing, population policies and the demographic dividend, with labelled diagrams, data skills, past paper checkpoint questions and an IB Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Population Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 14 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-ib-population-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '🌍', t: 'Where in the World Do People Live?', d: 'Physical and human factors affecting global distribution' },
+    { n: 2, z: 'A', emo: '💰', t: 'Measuring Economic Development', d: 'GNI, HDI, income groups and global patterns' },
+    { n: 3, z: 'A', emo: '🏙️', t: 'Core and Periphery', d: 'National-scale distribution, cumulative causation, primate cities' },
+    { n: 4, z: 'A', emo: '🇪🇬', t: 'Case Study: Egypt and Thailand', d: 'Two countries with uneven population distributions' },
+    { n: 5, z: 'B', emo: '📈', t: 'Population Change & the DTM', d: 'Birth, death and growth rates, and demographic transition' },
+    { n: 6, z: 'B', emo: '🇹🇭', t: 'Case Study: Thailand vs The Gambia', d: 'Population pyramids, fertility and dependency ratios' },
+    { n: 7, z: 'B', emo: '🌆', t: 'Megacity Growth', d: 'Causes and consequences for individuals and societies' },
+    { n: 8, z: 'B', emo: '🚶', t: 'Forced Migration: the Rohingya', d: 'Types of migrant and the Rohingya case study' },
+    { n: 9, z: 'B', emo: '🇭🇹', t: 'Internal Displacement in Haiti', d: 'Disasters, violence and over a million IDPs' },
+    { n: 10, z: 'C', emo: '👨‍👩‍👧', t: 'Family Size, Sex Ratios & Ageing', d: 'Falling fertility, missing women and ageing societies' },
+    { n: 11, z: 'C', emo: '🏛️', t: 'Population Policies', d: 'Pro-natalist, anti-natalist, ageing and migration policies' },
+    { n: 12, z: 'C', emo: '⚖️', t: 'Gender Equality & Human Trafficking', d: 'Women’s empowerment and the trafficking of people' },
+    { n: 13, z: 'C', emo: '📊', t: 'The Demographic Dividend', d: 'A window of opportunity, and what it needs to work' },
+    { n: 14, z: 'X', emo: '👹', t: 'The IB Examiner', d: 'Final boss: Claim, Evidence, Explain, Judgement' }];
+  var ZONES = { A: ['Topic 01', 'Patterns', '#ea580c'], B: ['Topic 02', 'Changing places', '#0284c7'], C: ['Topic 03', 'Challenges', '#16a34a'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'pat', i: '🌍', t: 'Patterns Expert', d: 'Complete Topic 01 (Levels 1–4)', ok: function () { return [1, 2, 3, 4].every(isDone); } },
+    { id: 'chg', i: '🚶', t: 'Change Expert', d: 'Complete Topic 02 (Levels 5–9)', ok: function () { return [5, 6, 7, 8, 9].every(isDone); } },
+    { id: 'pol', i: '🏛️', t: 'Policy Strategist', d: 'Complete Topic 03 (Levels 10–13)', ok: function () { return [10, 11, 12, 13].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Exam Technique', d: 'Pass all 13 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the IB Examiner', ok: function () { return isDone(14); } },
+    { id: 'champ', i: '🏆', t: 'Population Champion', d: 'All 14 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">IB Geography \u00B7 Paper 1 Core \u00B7 Unit 1</span>' +
+      '<h1>\uD83C\uDF0F Population Quest<br>Changing Population Revision</h1>' +
+      '<p>Work through all three topics \u2014 <b>Population and development patterns</b>, <b>Changing populations and places</b> and <b>Challenges and opportunities</b> \u2014 one level per lesson, then face the <b>IB Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all six badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Population Champion!' : ' — reach 90% for Population Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — Global population distribution */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '🧭 Physical or human factor?', how: '<b>Population distribution</b> = the way people are spread out across an area. <b>Population density</b> = the number of people per km². Is each factor <b>physical</b> (natural environment) or <b>human</b> (economic, social, political)?',
+        build: function (el, next) { flash(el, { yes: '⛰️ Physical', no: '🏭 Human', ky: 'p', kn: 'h', items: [
+          { t: 'Fertile alluvial soils on the Ganges floodplain support intensive farming', a: true, why: 'Soil fertility is a physical (natural) factor.' },
+          { t: 'Jobs in factories and offices attract people to Shenzhen', a: false, why: 'Employment opportunities are an economic (human) factor.' },
+          { t: 'Very low temperatures and permafrost in northern Siberia', a: true, why: 'Climate is a physical factor that discourages settlement.' },
+          { t: 'Brazil built a new capital, Brasília, to pull people inland', a: false, why: 'Government decisions are political (human) factors.' },
+          { t: 'Reliable monsoon rainfall allows rice to be grown in South-East Asia', a: true, why: 'Climate and water supply are physical factors.' },
+          { t: 'A deep-water port and trade links helped Singapore grow', a: false, why: 'Trade and infrastructure are human factors (even though the natural harbour helped).' },
+          { t: 'High altitude and thin air on the Tibetan Plateau', a: true, why: 'Relief and altitude are physical factors.' },
+          { t: 'Good schools, hospitals and services in large cities', a: false, why: 'Services are social (human) factors.' }] }, next); } },
+      { title: '🗺️ Densely or sparsely populated?', how: 'Sort each region. Think about <b>why</b> — the reason on the card is the clue.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['d', '👥 Densely populated'], ['s', '🏜️ Sparsely populated']], ['zc2', 'zc3']), cards: [
+          { t: 'The Nile valley and delta', s: 'water and fertile soils in a desert', a: ['d'], why: 'Almost all Egyptians live along the Nile.' },
+          { t: 'Java, Indonesia', s: 'volcanic soils, rice farming', a: ['d'], why: 'Java is one of the most densely populated islands on Earth.' },
+          { t: 'North-east USA (Boston to Washington)', s: 'ports, industry, services', a: ['d'], why: 'A huge urban corridor (megalopolis).' },
+          { t: 'The Ganges plain, India and Bangladesh', s: 'flat, fertile, well watered', a: ['d'], why: 'One of the most densely populated regions on Earth.' },
+          { t: 'The Sahara', s: 'hot desert, little water', a: ['s'], why: 'Lack of water limits settlement.' },
+          { t: 'The Amazon Basin', s: 'dense rainforest, poor soils', a: ['s'], why: 'Dense forest, disease and poor access limit settlement.' },
+          { t: 'Greenland', s: 'ice sheet, very cold', a: ['s'], why: 'Most of Greenland is covered by ice.' },
+          { t: 'The Australian outback', s: 'arid interior', a: ['s'], why: 'Most Australians live near the coast; the interior is dry.' }] }, next); } },
+      { title: '🔢 Data skills: population density', how: 'Population density = total population ÷ land area. Use a calculator and show working on paper.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Population density', y0: 0, y1: 1400, ystep: 200, minor: 50, ylab: 'People per km²', values: true,
+            bars: [['Bangladesh', 1160, '#dc2626'], ['India', 440, '#ea580c'], ['UK', 280, '#0284c7'], ['Thailand', 140, '#16a34a'], ['Egypt', 110, '#ca8a04'], ['Australia', 3.5, '#7c3aed']] }),
+          cap: 'Approximate population density, people per km² (rounded; World Bank/UN estimates).', qs: [
+          { type: 'num', q: 'Bangladesh has a population of about 171 million and an area of about 148,000 km². Calculate its population density (people per km²) to the nearest whole number.', ans: 1155, tol: 8, unit: 'people/km²', f: '171,000,000 ÷ 148,000 = <b>about 1,155 people per km²</b>.' },
+          { type: 'num', q: 'Using the graph, how many times greater is the density of Bangladesh than that of Thailand? Nearest whole number.', ans: 8, tol: 0.6, unit: 'times', f: '1,160 ÷ 140 = 8.3 ≈ <b>8 times</b>.' },
+          { type: 'mc', q: 'Egypt’s average density is only about 110 people per km². Why is this figure misleading?', o: ['Almost everyone lives on a small strip of land beside the Nile, where densities are far higher', 'The figure includes tourists, who are not part of the resident population of Egypt', 'Most Egyptians actually live in the Western Desert oases, which have the highest densities in the country', 'Egypt’s population is falling fast, so the average is already out of date and too high'], c: 0, f: 'An average hides <b>distribution</b>. About 95% of Egyptians live on about 5% of the land.' }] }, next); } },
+      { title: '🧠 Global distribution check', build: function (el, next) { mcq(el, [
+        { q: 'Roughly what share of the world’s population lives in Asia?', o: ['About 60%', 'About 25%', 'About 40%', 'About 80%'], c: 0, f: 'Asia has about 4.8 billion of the world’s 8+ billion people — about 60%.' },
+        { q: 'What is the <b>ecumene</b>?', o: ['The part of the Earth’s surface that is permanently inhabited', 'The part of the Earth that is too cold or dry for people to live', 'The world’s largest urban areas, where more than ten million live', 'The total number of people living in the world at any one time'], c: 0, f: 'The ecumene is the permanently inhabited area; uninhabited areas are the <b>anecumene</b>.' },
+        { q: 'Which statement about the global pattern is correct?', o: ['Most people live in the Northern Hemisphere and within a few hundred km of the coast', 'People are spread fairly evenly across all the continents, in proportion to land area', 'Most people live in the Southern Hemisphere, because it has more land than the north', 'Most people live in mountain regions, because they are cooler and have more rainfall'], c: 0, f: 'About 90% of people live in the Northern Hemisphere, and many live near coasts and rivers.' }], next); } }]);
+  };
+
+  /* L2 — Measuring economic development */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '💵 Sort countries by World Bank income group', how: 'The World Bank groups countries by <b>GNI per capita</b> (gross national income per person). Sort each country.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['l', 'Low income'], ['lm', 'Lower-middle income'], ['um', 'Upper-middle income'], ['h', 'High income']]), cards: [
+          { t: 'Chad', a: ['l'], why: 'Chad is a low-income country.' },
+          { t: 'The Gambia', a: ['l'], why: 'The Gambia is a low-income country.' },
+          { t: 'India', a: ['lm'], why: 'India is lower-middle income.' },
+          { t: 'Egypt', a: ['lm'], why: 'Egypt is lower-middle income.' },
+          { t: 'Thailand', a: ['um'], why: 'Thailand is upper-middle income.' },
+          { t: 'Brazil', a: ['um'], why: 'Brazil is upper-middle income.' },
+          { t: 'Japan', a: ['h'], why: 'Japan is high income.' },
+          { t: 'Saudi Arabia', a: ['h'], why: 'Saudi Arabia is high income.' }] }, next); } },
+      { title: '📏 Economic or social indicator?', how: 'Economic indicators measure wealth and the economy; social indicators measure people’s quality of life.',
+        build: function (el, next) { flash(el, { yes: '💰 Economic', no: '❤️ Social', ky: 'e', kn: 's', items: [
+          { t: 'GNI per capita (PPP)', a: true, why: 'Income per person is economic.' },
+          { t: 'Life expectancy at birth', a: false, why: 'Health outcomes are social.' },
+          { t: 'Adult literacy rate', a: false, why: 'Education is social.' },
+          { t: '% of workers employed in farming (primary sector)', a: true, why: 'Employment structure is an economic indicator.' },
+          { t: 'Infant mortality rate', a: false, why: 'Deaths of babies under 1 is a social (health) indicator.' },
+          { t: 'GDP growth rate', a: true, why: 'Growth of output is economic.' }] }, next); } },
+      { title: '📊 Data skills: Human Development Index', how: 'HDI combines <b>life expectancy</b>, <b>education</b> (mean and expected years of schooling) and <b>GNI per capita (PPP)</b> into a score from 0 to 1.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Human Development Index', y0: 0, y1: 1, ystep: 0.2, minor: 0.05, ylab: 'HDI', values: true, fmt: function (v) { return v.toFixed(3); },
+            bars: [['Japan', 0.925, '#16a34a'], ['Thailand', 0.798, '#0284c7'], ['Egypt', 0.754, '#ca8a04'], ['Bangladesh', 0.685, '#ea580c'], ['The Gambia', 0.524, '#dc2626']] }),
+          cap: 'Human Development Index, approximate values (UNDP Human Development Report, 2023 data). Categories: very high ≥ 0.800; high 0.700–0.799; medium 0.550–0.699; low < 0.550.', qs: [
+          { type: 'num', q: 'Calculate the difference in HDI between Japan and The Gambia.', ans: 0.401, tol: 0.003, unit: '', f: '0.925 − 0.524 = <b>0.401</b>.' },
+          { type: 'mc', q: 'Which HDI category is Thailand in?', o: ['High (it is just below the very high threshold of 0.800)', 'Very high (it is above the very high threshold of 0.800)', 'Medium (it is between 0.550 and 0.699 on the scale)', 'Low (it is below the low threshold of 0.550)'], c: 0, f: '0.798 is in the <b>high</b> category — just 0.002 below very high.' },
+          { type: 'mc', q: 'Why is HDI often preferred to GNI per capita alone?', o: ['It combines health, education and income, so it shows quality of life, not just wealth', 'It only uses income data, so it is more accurate than GNI and easier to compare', 'It measures inequality between rich and poor within a country, which GNI per capita completely ignores', 'It is updated every day, so it always reflects the latest economic situation'], c: 0, f: 'HDI is a <b>composite</b> indicator. (It does not measure inequality — the IHDI adjusts for that.)' }] }, next); } },
+      { title: '🧠 Development check', build: function (el, next) { mcq(el, [
+        { q: 'What does <b>PPP</b> (purchasing power parity) do to GNI figures?', o: ['Adjusts them for the cost of living, so they show what money actually buys in each country', 'Converts them into US dollars at the official exchange rate on a single fixed date', 'Removes the income of the richest 10% so the average better represents most people', 'Adds the full value of unpaid work, such as caring and subsistence farming, to the national total'], c: 0, f: 'PPP adjusts for price differences, so $1 buys a similar amount everywhere.' },
+        { q: 'What is a limitation of using GNI per capita to measure development?', o: ['It is an average, so it hides inequality and ignores the informal economy', 'It counts only the income of women, so it underestimates total national income', 'It cannot be compared between countries, because each uses its own currency', 'It is only collected for high-income countries, so most of the world has no data'], c: 0, f: 'Averages hide inequality, and informal or subsistence activity is often missed.' },
+        { q: 'Why is the <b>Brandt Line</b> (1980) now seen as outdated?', o: ['Many countries south of the line, such as Singapore and South Korea, are now high income', 'It was drawn only around Europe, so it never included any countries in Asia, Africa or the Americas', 'It divided countries by population size, not by wealth or economic development', 'All countries north of the line have since become low-income countries'], c: 0, f: 'Rapid growth in Asia and elsewhere means a simple north–south divide no longer fits.' }], next); } }]);
+  };
+
+  /* L3 — Core and periphery at a national scale */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the core–periphery model', how: 'The <b>core</b> is the dominant region with most wealth, people and power; the <b>periphery</b> is less developed. <b>Red</b> arrows flow into the core; the <b>green</b> arrow flows out.',
+        build: function (el, next) { labelGame(el, { svg: SVG_CP, pins: PINS_CP, cap: 'A simplified core–periphery model at a national scale (based on Friedmann).', labels: [
+          { t: 'Core: concentration of people, investment, jobs and political power', pin: 1 },
+          { t: 'Semi-periphery: areas near the core that benefit from its growth', pin: 2 },
+          { t: 'Periphery: remote, less developed, losing young people', pin: 3 },
+          { t: 'Backwash effects: migrants, capital and resources flow to the core', pin: 4 },
+          { t: 'Spread (trickle-down) effects: growth reaches regional centres', pin: 5 },
+          { t: 'Periphery: highest land values and the densest population', pin: null }] }, next); } },
+      { title: '⛓️ Cumulative causation (Myrdal)', how: 'Tap the links in order to show how a core region keeps growing.',
+        build: function (el, next) { orderGame(el, ['A new industry or investment locates in a region', 'It creates jobs, and suppliers and services grow (the multiplier effect)', 'Young workers migrate in from the periphery', 'More people and businesses pay taxes and attract more investment', 'Better infrastructure and services attract even more growth'], 'Tap the FIRST link.', next); } },
+      { title: '↔️ Backwash or spread?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['b', '🔴 Backwash (core gains, periphery loses)'], ['s', '🟢 Spread (growth reaches the periphery)']], ['zr', 'zg']), cards: [
+          { t: 'Young, educated people leave rural Isan to work in Bangkok', a: ['b'], why: 'Loss of young workers from the periphery = backwash.' },
+          { t: 'Banks lend most of their money to firms in the capital', a: ['b'], why: 'Capital flowing to the core = backwash.' },
+          { t: 'Factories move to cheaper regional towns as city land becomes expensive', a: ['s'], why: 'Decentralisation of industry = spread.' },
+          { t: 'Demand from the city raises farm prices in the countryside', a: ['s'], why: 'Growth in the core benefits rural producers = spread.' },
+          { t: 'Remittances sent home by migrant workers', a: ['s'], why: 'Money flowing back to the periphery = spread.' },
+          { t: 'Rural schools close as the population ages and falls', a: ['b'], why: 'Decline of services in the periphery = backwash.' }] }, next); } },
+      { title: '🧠 Core–periphery check', build: function (el, next) { mcq(el, [
+        { q: 'What is a <b>primate city</b>?', o: ['A city that is more than twice the size of the country’s next largest city', 'The oldest city in a country, usually where the first settlers lived', 'Any city with more than ten million inhabitants, wherever in the world it is located', 'A city built by the government to replace an overcrowded capital city'], c: 0, f: 'Bangkok is a classic primate city — many times bigger than any other Thai city.' },
+        { q: 'Which policy aims to reduce regional inequality?', o: ['Investing in transport and special economic zones in poorer regions', 'Moving all of the country’s universities and hospitals into the capital city', 'Cutting spending on rural roads to save money for the core', 'Ending all government jobs outside the capital region'], c: 0, f: 'Regional policy tries to spread investment to the periphery.' },
+        { q: 'In Friedmann’s model, what happens in the final (post-industrial) stage?', o: ['A connected system of cities develops and regional differences narrow', 'A single core region keeps growing while the rest of the country declines', 'The country returns to small, independent local centres', 'The core collapses and the periphery becomes the new core'], c: 0, f: 'Friedmann predicted a functionally interdependent system of cities in the final stage.' }], next); } }]);
+  };
+
+  /* L4 — Egypt and Thailand */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '🇪🇬 or 🇹🇭? Sort the facts', how: 'Egypt or Thailand — or both?',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['e', '🇪🇬 Egypt'], ['t', '🇹🇭 Thailand'], ['b', '🤝 Both']], ['zc2', 'zc3', 'zc4']), cards: [
+          { t: 'About 95% of people live on about 5% of the land', a: ['e'], why: 'Egyptians crowd into the Nile valley and delta.' },
+          { t: 'The Aswan High Dam controls a major river’s floods', a: ['e'], why: 'Completed in 1970 on the Nile.' },
+          { t: 'A new administrative capital is being built in the desert east of the old capital', a: ['e'], why: 'Egypt’s New Administrative Capital aims to relieve Cairo.' },
+          { t: 'Its capital is a primate city many times larger than the next city', a: ['t'], why: 'Bangkok dominates the Thai urban system.' },
+          { t: 'The poorer north-east (Isan) plateau loses young migrants to the capital', a: ['t'], why: 'Isan has poor soils and drought, so many people migrate.' },
+          { t: 'The Eastern Economic Corridor attracts factories near the coast', a: ['t'], why: 'Thailand’s EEC (Chonburi, Rayong, Chachoengsao).' },
+          { t: 'A large river delta with fertile soil holds a dense farming population', a: ['b'], why: 'Nile delta (Egypt) and Chao Phraya plain (Thailand).' },
+          { t: 'The capital city dominates jobs, investment and government', a: ['b'], why: 'Cairo and Bangkok are both dominant core regions.' }] }, next); } },
+      { title: '🔢 Data skills: Egypt’s real density', how: 'Egypt has about 110 million people and a land area of about 1,000,000 km².',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Egypt: share of population and land', y0: 0, y1: 100, ystep: 20, minor: 5, ylab: '%', values: true, fmt: function (v) { return v + '%'; },
+            bars: [['Land: Nile valley & delta', 5, '#16a34a'], ['Land: desert', 95, '#ca8a04'], ['People: Nile valley & delta', 95, '#16a34a'], ['People: desert', 5, '#ca8a04']] }),
+          cap: 'Approximate shares of Egypt’s land area and population.', qs: [
+          { type: 'num', q: 'Calculate Egypt’s average population density (people per km²).', ans: 110, tol: 1, unit: 'people/km²', f: '110,000,000 ÷ 1,000,000 = <b>110 people per km²</b>.' },
+          { type: 'num', q: 'Now calculate the density in the Nile valley and delta (95% of the people on 5% of the land). Nearest whole number.', ans: 2090, tol: 15, unit: 'people/km²', f: '104,500,000 ÷ 50,000 km² = <b>2,090 people per km²</b> — about 19 times the national average!' },
+          { type: 'mc', q: 'Which is the main <b>physical</b> reason for this pattern?', o: ['The Nile provides water and fertile silt in an otherwise hot desert', 'The government has banned people from living outside the Nile valley', 'The desert is too mountainous and high to build any settlements', 'The Nile valley is much cooler than the desert all year round'], c: 0, f: 'Water and fertile soil in a desert climate explain the concentration.' }] }, next); } },
+      { title: '🧠 Case study check', build: function (el, next) { mcq(el, [
+        { q: 'Why does Thailand’s Isan region have high out-migration?', o: ['Thin, sandy soils and unreliable rain make farming incomes low and uncertain', 'It is the most industrial region, so workers want to escape the factory pollution', 'It is covered by high mountains that make farming and travel impossible', 'The government forces families to move from Isan to the southern provinces'], c: 0, f: 'Isan (the Khorat Plateau) has poor soils and drought, so many people move to Bangkok and the EEC.' },
+        { q: 'How might Egypt’s New Administrative Capital and new desert cities change distribution?', o: ['They aim to pull people and government away from crowded Cairo into the desert', 'They are designed to move most of Egypt’s population onto the Mediterranean islands', 'They are designed to increase the population density of central Cairo', 'They will flood the desert to create new farmland around Lake Nasser'], c: 0, f: 'New cities aim to decentralise people and jobs, though progress is slow and costly.' }], next); } }]);
+  };
+
+  /* L5 — Population change and the DTM */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '🏷️ Label the demographic transition model', how: '<b>Blue</b> = birth rate. <b>Red</b> = death rate. <b>Green dashed</b> = total population. The shaded gap shows <b>natural increase</b>. Numbers 1–5 are the stages.',
+        build: function (el, next) { labelGame(el, { svg: SVG_DTM, pins: PINS_DTM, cap: 'The demographic transition model (DTM).', hint: 'Death rates fall before birth rates. Stage 5 is when birth rate drops below death rate.', labels: [
+          { t: 'Stage 1 — High stationary: high, fluctuating birth and death rates', pin: 1 },
+          { t: 'Stage 2 — Early expanding: death rate falls quickly', pin: 2 },
+          { t: 'Stage 3 — Late expanding: birth rate falls', pin: 3 },
+          { t: 'Stage 4 — Low stationary: both rates low', pin: 4 },
+          { t: 'Stage 5 — Declining: birth rate below death rate', pin: 5 },
+          { t: 'Birth rate', pin: 6 },
+          { t: 'Death rate', pin: 7 },
+          { t: 'Total population', pin: 8 },
+          { t: 'Stage 6 — Birth rates rise again as countries get richer', pin: null }] }, next); } },
+      { title: '📈 Why do the rates change?', how: 'Match each change to the stage where it mainly happens.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['s2', 'Stage 2'], ['s3', 'Stage 3'], ['s4', 'Stage 4'], ['s5', 'Stage 5']]), cards: [
+          { t: 'Clean water, vaccinations and better food supply cut deaths', a: ['s2'], why: 'Falling death rates drive Stage 2.' },
+          { t: 'The population grows fastest of all', a: ['s2', 's3'], why: 'Natural increase is highest in late Stage 2 / early Stage 3.', alt: 'Accept Stage 2 or 3 — the gap is widest here.' },
+          { t: 'Family planning, female education and urban living cut family size', a: ['s3'], why: 'Falling birth rates define Stage 3.' },
+          { t: 'Low, stable birth and death rates; slow growth', a: ['s4'], why: 'Stage 4 = low stationary.' },
+          { t: 'Birth rate drops below death rate, so the population starts to fall', a: ['s5'], why: 'Stage 5 = natural decrease (e.g. Japan).' },
+          { t: 'An ageing population with a large share over 65', a: ['s5', 's4'], why: 'Ageing is a feature of Stages 4 and 5.', alt: 'Accept Stage 4 or 5.' }] }, next); } },
+      { title: '🔢 Data skills: growth calculations', how: '<b>Natural increase rate (%)</b> = (CBR − CDR) ÷ 10. <b>Doubling time</b> ≈ 70 ÷ growth rate (%).',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Crude birth and death rates', y0: 0, y1: 50, ystep: 10, minor: 2, ylab: 'Per 1,000 people', values: true,
+            bars: [['Niger CBR', 44, '#2563eb'], ['Niger CDR', 8, '#dc2626'], ['Thailand CBR', 7, '#2563eb'], ['Thailand CDR', 9, '#dc2626']] }),
+          cap: 'Approximate crude birth (CBR) and death (CDR) rates per 1,000 people, about 2023.', qs: [
+          { type: 'num', q: 'Niger: CBR = 44, CDR = 8. Calculate the natural increase rate as a percentage.', ans: 3.6, tol: 0.05, unit: '%', f: '(44 − 8) ÷ 10 = <b>3.6%</b> per year.' },
+          { type: 'num', q: 'Using the rule of 70, estimate how many years Niger’s population would take to double at that rate. Nearest whole number.', ans: 19, tol: 1, unit: 'years', f: '70 ÷ 3.6 = 19.4 ≈ <b>19 years</b>.' },
+          { type: 'num', q: 'Thailand: CBR = 7, CDR = 9. Calculate the natural increase rate (%).', ans: -0.2, tol: 0.01, unit: '%', f: '(7 − 9) ÷ 10 = <b>−0.2%</b>: natural <b>decrease</b> — a Stage 5 feature.' },
+          { type: 'mc', q: 'What is <b>replacement-level fertility</b>?', o: ['About 2.1 children per woman — enough to replace both parents over time', 'About 1.0 child per woman, because each woman only needs to replace herself', 'About 4.0 children per woman, to allow for high levels of infant mortality', 'The number of births needed to replace everyone who dies in a single year'], c: 0, f: 'Slightly above 2 to allow for some deaths before adulthood.' }] }, next); } },
+      { title: '🧠 DTM check', build: function (el, next) { mcq(el, [
+        { q: 'Which is a limitation of the DTM?', o: ['It is based on European history and may not fit countries developing today', 'It includes migration, which makes it far too complicated for most countries', 'It only works for countries that have very high birth rates and death rates today', 'It shows that every country passes through all of the stages within fifty years'], c: 0, f: 'The DTM ignores migration and assumes industrialisation drives change, as in Europe.' },
+        { q: 'Why did death rates in many LICs fall much faster than in 19th-century Europe?', o: ['Modern medicine, vaccines and aid were imported, rather than developed slowly', 'Their climates are naturally healthier, so diseases have always been much rarer', 'Their birth rates fell first, so there were fewer babies to die in each year', 'They had fewer people, so infectious diseases could not spread between towns'], c: 0, f: 'Imported medical technology meant very rapid falls in death rates after 1950.' }], next); } }]);
+  };
+
+  /* L6 — Thailand vs The Gambia */
+  var PYR_GM = { title: 'Country A', male: [7.2, 6.6, 6.0, 5.3, 4.6, 4.0, 3.4, 2.8, 2.3, 1.8, 1.4, 1.1, 0.9, 0.6, 0.4, 0.25, 0.15], female: [7.1, 6.5, 5.9, 5.3, 4.7, 4.1, 3.5, 2.9, 2.4, 1.9, 1.5, 1.2, 0.9, 0.7, 0.5, 0.3, 0.2] };
+  var PYR_TH = { title: 'Country B', male: [2.3, 2.6, 2.9, 3.0, 3.1, 3.3, 3.5, 3.7, 3.8, 3.9, 3.9, 3.6, 3.1, 2.4, 1.7, 1.1, 0.9], female: [2.2, 2.5, 2.8, 2.9, 3.0, 3.2, 3.5, 3.8, 4.0, 4.2, 4.3, 4.1, 3.6, 2.9, 2.2, 1.5, 1.6] };
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '🔺 Read the population pyramids', how: 'One pyramid is <b>Thailand</b> and one is <b>The Gambia</b> (simplified, about 2023). Look at the base, the middle and the top.',
+        build: function (el, next) { dataGame(el, { chart: twoPyramids(PYR_GM, PYR_TH), cap: 'Simplified population pyramids based on UN estimates.', qs: [
+          { type: 'mc', q: 'Which country is <b>Country A</b>?', o: ['The Gambia — a wide base shows high fertility and a youthful population', 'Thailand — a wide base shows that the population is ageing very quickly', 'The Gambia — a narrow top shows that many people live past 80', 'Thailand — a narrow top shows that birth rates are now very low'], c: 0, f: 'An <b>expansive</b> pyramid with a wide base = high birth rate: The Gambia (TFR about 4.5).' },
+          { type: 'mc', q: 'Country B’s base is narrower than its middle. What does this show?', o: ['Birth rates have fallen sharply, so each new generation is smaller than the one before', 'Many young children have recently emigrated abroad with relatives, leaving mainly adults behind', 'Death rates for children have risen sharply because of new diseases', 'The country has recently had a baby boom, so the base will soon widen'], c: 0, f: 'A <b>constrictive</b> pyramid: Thailand’s TFR is now about 1.0–1.2, among the lowest in Asia.' },
+          { type: 'mc', q: 'Why is Country B’s top slightly wider for females?', o: ['Women have a higher life expectancy than men', 'More girls than boys are born in this country', 'Men emigrate when they reach retirement age', 'Women are counted twice in the census data'], c: 0, f: 'Female life expectancy is several years higher, so more women survive to old age.' }] }, next); } },
+      { title: '🔢 Data skills: dependency ratios', how: '<b>Dependency ratio</b> = (people aged 0–14 + people aged 65+) ÷ people aged 15–64 × 100.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Age structure', y0: 0, y1: 80, ystep: 20, minor: 5, ylab: '% of population', values: true, fmt: function (v) { return v + '%'; },
+            bars: [['Gambia 0–14', 42, '#38bdf8'], ['Gambia 15–64', 55.5, '#0284c7'], ['Gambia 65+', 2.5, '#0c4a6e'], ['Thailand 0–14', 15, '#fda4af'], ['Thailand 15–64', 69, '#e11d48'], ['Thailand 65+', 16, '#881337']] }),
+          cap: 'Approximate age structure (% of population), about 2023.', qs: [
+          { type: 'num', q: 'Calculate the dependency ratio for The Gambia. One decimal place.', ans: 80.2, tol: 0.2, unit: '', f: '(42 + 2.5) ÷ 55.5 × 100 = <b>80.2</b> dependants per 100 working-age people.' },
+          { type: 'num', q: 'Calculate the dependency ratio for Thailand. One decimal place.', ans: 44.9, tol: 0.2, unit: '', f: '(15 + 16) ÷ 69 × 100 = <b>44.9</b>.' },
+          { type: 'mc', q: 'What is the key difference between the two ratios?', o: ['The Gambia’s dependants are mostly young, while Thailand’s are split between young and old', 'Both countries have mostly elderly dependants, but Thailand has far more of them in every age group', 'Thailand’s dependants are mostly children, while The Gambia’s are mostly elderly', 'There is no real difference, because both ratios measure the same age groups'], c: 0, f: 'Youth dependency dominates in The Gambia; Thailand’s old-age dependency is rising fast.' }] }, next); } },
+      { title: '🧩 Why are their fertility rates so different?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['g', '🇬🇲 Keeps fertility high (The Gambia)'], ['t', '🇹🇭 Brought fertility down (Thailand)']], ['zc2', 'zc3']), cards: [
+          { t: 'Children help on family farms and support parents in old age', a: ['g'], why: 'Children have economic value in rural, agricultural societies.' },
+          { t: 'Relatively high infant mortality, so families have more children', a: ['g'], why: 'Parents may have more children to ensure some survive.' },
+          { t: 'Early marriage and lower access to contraception', a: ['g'], why: 'These raise fertility.' },
+          { t: 'A national family planning programme from 1970, backed by Mechai Viravaidya’s campaigns', a: ['t'], why: 'Thailand’s programme made contraception widely available and accepted.' },
+          { t: 'More women in higher education and paid work', a: ['t'], why: 'Education and careers delay marriage and reduce family size.' },
+          { t: 'High costs of housing and education in Bangkok', a: ['t'], why: 'Children are expensive in urban economies.' }] }, next); } },
+      { title: '🧠 Case study check', build: function (el, next) { mcq(el, [
+        { q: 'Which phrase is often used to describe Thailand’s demographic challenge?', o: ['Getting old before getting rich', 'Too many young people for too few schools', 'A country with no working-age population', 'Population growth faster than any other country'], c: 0, f: 'Thailand is ageing rapidly while still upper-middle income.' },
+        { q: 'Where would you place The Gambia on the DTM?', o: ['Late Stage 2 / early Stage 3: death rates have fallen, birth rates are only starting to fall', 'Stage 5: birth rates have already fallen below death rates and the population is shrinking fast', 'Stage 1: birth and death rates are both very high and fluctuating', 'Stage 4: both birth and death rates are low, so growth is slow'], c: 0, f: 'High natural increase (about 2.5–3% per year) fits late Stage 2 / early Stage 3.' }], next); } }]);
+  };
+
+  /* L7 — Megacity growth */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '🌆 Why do megacities grow?', how: 'A <b>megacity</b> has 10 million or more people. Sort each cause of growth.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['push', '⬅️ Push from rural areas'], ['pull', '➡️ Pull of the city'], ['ni', '👶 Natural increase']], ['zc2', 'zc3', 'zc4']), cards: [
+          { t: 'Drought and falling crop yields in the countryside', a: ['push'], why: 'Rural hardship pushes people out.' },
+          { t: 'Mechanisation of farming reduces rural jobs', a: ['push'], why: 'Fewer farm jobs = push factor.' },
+          { t: 'Higher wages in factories and services', a: ['pull'], why: 'Economic opportunity pulls migrants in.' },
+          { t: 'Better schools and hospitals', a: ['pull'], why: 'Services are pull factors.' },
+          { t: 'Young migrants have children in the city', a: ['ni'], why: 'Migrants are mostly of child-bearing age, boosting natural increase.' },
+          { t: 'Birth rates in the city remain higher than death rates', a: ['ni'], why: 'This is natural increase.' }] }, next); } },
+      { title: '⚖️ Opportunity or challenge?', how: 'Is each consequence of megacity growth mainly <b>positive</b> or <b>negative</b> for individuals and societies?',
+        build: function (el, next) { flash(el, { yes: '👍 Positive', no: '👎 Negative', ky: 'p', kn: 'n', items: [
+          { t: 'Agglomeration: firms cluster together, sharing workers and ideas', a: true, why: 'Clustering raises productivity and innovation.' },
+          { t: 'Informal settlements without sanitation, such as parts of Dharavi, Mumbai', a: false, why: 'Poor housing and sanitation harm health.' },
+          { t: 'Hours lost in traffic congestion in Lagos and Jakarta', a: false, why: 'Congestion costs time, money and health.' },
+          { t: 'Migrants send remittances home to rural families', a: true, why: 'Remittances support rural areas.' },
+          { t: 'Severe air pollution, such as in Delhi in winter', a: false, why: 'Air pollution causes respiratory disease and early deaths.' },
+          { t: 'Women gain access to jobs, education and healthcare', a: true, why: 'Cities can widen opportunities for women.' },
+          { t: 'Land subsidence from over-pumping groundwater in Jakarta', a: false, why: 'Parts of Jakarta are sinking, increasing flood risk.' }] }, next); } },
+      { title: '📈 Data skills: the rise of megacities', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Number of megacities', y0: 0, y1: 50, ystep: 10, minor: 2, ylab: 'Number of megacities', values: true,
+          bars: [['1950', 2, '#94a3b8'], ['1990', 10, '#38bdf8'], ['2018', 33, '#0284c7'], ['2030 (projected)', 43, '#0c4a6e']] }),
+          cap: 'Number of cities with 10 million+ inhabitants (UN World Urbanization Prospects, 2018 revision).', qs: [
+          { type: 'num', q: 'By how many did the number of megacities increase between 1990 and 2018?', ans: 23, tol: 0, unit: 'megacities', f: '33 − 10 = <b>23</b>.' },
+          { type: 'num', q: 'Calculate the percentage increase from 1990 to 2018.', ans: 230, tol: 1, unit: '%', f: '23 ÷ 10 × 100 = <b>230%</b>.' },
+          { type: 'mc', q: 'Where are most new megacities growing?', o: ['In Asia and Africa, in low- and middle-income countries', 'In Europe, where birth rates are now rising quickly', 'In North America, because of very high rates of immigration', 'In Australia, because people are leaving the outback'], c: 0, f: 'Most growth is in Asia and Africa, e.g. Dhaka, Lagos, Kinshasa.' }] }, next); } },
+      { title: '🧠 Megacity check', build: function (el, next) { mcq(el, [
+        { q: 'Which strategy improves informal settlements without moving residents away?', o: ['In-situ upgrading: adding water, sanitation and secure tenure', 'Bulldozing the whole settlement and building new offices on the land', 'Banning rural migrants from entering the city', 'Moving all residents to new towns 100 km away'], c: 0, f: 'In-situ upgrading keeps communities and livelihoods in place.' },
+        { q: 'Why can megacity growth be described as both an opportunity and a challenge?', o: ['It concentrates jobs, ideas and services, but also overcrowding, pollution and inequality', 'It always improves life for everyone, because cities are richer than rural areas and share their wealth', 'It only causes problems, because large cities have no economic benefits', 'It mainly affects the countryside, because cities do not change as they grow'], c: 0, f: 'Megacities bring both opportunities and challenges, and these are often unequally shared.' }], next); } }]);
+  };
+
+  /* L8 — Forced migration: the Rohingya */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🧳 What kind of migrant?', how: 'Sort each person. The legal difference matters in IB answers.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ref', '🛡️ Refugee', 'crossed a border, fleeing persecution or conflict'], ['idp', '🏠 Internally displaced person', 'forced to flee but still in own country'], ['asy', '📝 Asylum seeker', 'waiting for refugee status to be decided'], ['eco', '💼 Economic migrant', 'moves by choice for work']]), cards: [
+          { t: 'A Rohingya family living in a camp in Cox’s Bazar, Bangladesh', a: ['ref'], why: 'They crossed an international border to escape persecution.' },
+          { t: 'A family in Port-au-Prince who fled gang violence to a school in another district', a: ['idp'], why: 'Forced to flee but still inside Haiti.' },
+          { t: 'A Syrian who has applied for protection in Germany and is awaiting a decision', a: ['asy'], why: 'Status not yet decided = asylum seeker.' },
+          { t: 'A Filipino nurse who moves to the UK for a better salary', a: ['eco'], why: 'A voluntary move for work.' },
+          { t: 'A Ukrainian who fled to Poland after the 2022 invasion', a: ['ref'], why: 'Fleeing war across a border (temporary protection in the EU).' },
+          { t: 'A farmer from Isan who moves to Bangkok to work on building sites', a: ['eco'], why: 'Voluntary internal economic migration.' }] }, next); } },
+      { title: '⛓️ The Rohingya crisis', how: 'Put the causes and events in order.',
+        build: function (el, next) { orderGame(el, ['1982: Myanmar’s Citizenship Law leaves most Rohingya stateless', 'Decades of restrictions on movement, marriage, education and jobs in Rakhine State', 'August 2017: militant attacks on police posts are followed by military “clearance operations”', 'Villages are burned and thousands are killed; about 740,000 people flee', 'Most settle in camps around Kutupalong in Cox’s Bazar, Bangladesh — now about a million refugees'], 'Tap the EARLIEST event first.', next); } },
+      { title: '🌍 Consequences for the host area', how: 'Is each consequence for Bangladesh mainly <b>environmental</b>, <b>economic</b> or <b>social</b>?',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['env', '🌳 Environmental'], ['eco', '💰 Economic'], ['soc', '👥 Social / political']], ['zc3', 'zc2', 'zc4']), cards: [
+          { t: 'Hillsides are cleared for shelters and firewood, causing landslides in the monsoon', a: ['env'], why: 'Deforestation and slope instability are environmental impacts.' },
+          { t: 'Groundwater is over-pumped for camp water supplies', a: ['env'], why: 'Pressure on water resources is environmental.' },
+          { t: 'Refugees working informally push down local wages', a: ['eco'], why: 'Labour market competition is economic.' },
+          { t: 'Aid agencies create jobs and buy local goods', a: ['eco'], why: 'Humanitarian spending also brings economic benefits.' },
+          { t: 'Tension grows between refugees and the host community', a: ['soc'], why: 'Social tension is a common consequence.' },
+          { t: 'Bangladesh relocates some refugees to Bhasan Char island', a: ['soc'], why: 'A political response that has been criticised by rights groups.' }] }, next); } },
+      { title: '🧠 Forced migration check', build: function (el, next) { mcq(el, [
+        { q: 'In Lee’s migration model, what is an <b>intervening obstacle</b>?', o: ['A barrier between origin and destination, such as distance, cost or border controls', 'A factor at the origin that encourages people to leave their home, such as war or famine', 'A factor at the destination that attracts migrants, such as jobs or safety', 'A government payment that persuades migrants to return to their origin'], c: 0, f: 'Lee’s model: push and pull factors, plus intervening obstacles.' },
+        { q: 'Which country brought a genocide case against Myanmar at the International Court of Justice in 2019?', o: ['The Gambia', 'Bangladesh', 'Thailand', 'India'], c: 0, f: 'The Gambia filed the case at the ICJ — a nice link to your other case study.' }], next); } }]);
+  };
+
+  /* L9 — Haiti */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '🇭🇹 Why are Haitians displaced?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['haz', '🌋 Natural hazards'], ['vio', '🔫 Violence and insecurity'], ['dev', '📉 Poverty and weak governance']], ['zc2', 'zr', 'zc4']), cards: [
+          { t: 'January 2010: a magnitude 7.0 earthquake near Port-au-Prince displaces about 1.5 million people', a: ['haz'], why: 'A natural hazard caused mass displacement.' },
+          { t: 'August 2021: a magnitude 7.2 earthquake hits the south-west', a: ['haz'], why: 'Another earthquake, in a different region.' },
+          { t: 'Armed gangs take control of most of Port-au-Prince', a: ['vio'], why: 'Gang violence is now the main driver of displacement.' },
+          { t: 'Families flee kidnappings, killings and the burning of homes', a: ['vio'], why: 'Insecurity forces people to move.' },
+          { t: 'The assassination of President Jovenel Moïse in July 2021 leaves a political vacuum', a: ['dev'], why: 'Weak, contested government allowed gangs to expand.' },
+          { t: 'Badly built, unregulated housing collapses easily', a: ['dev'], why: 'Poverty and weak building control increase vulnerability.' }] }, next); } },
+      { title: '📈 Data skills: displacement is soaring', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Internally displaced people in Haiti', y0: 0, y1: 1.4, ystep: 0.2, minor: 0.05, ylab: 'IDPs (millions)', values: true, fmt: function (v) { return v.toFixed(2); },
+          bars: [['Dec 2023', 0.31, '#fca5a5'], ['Jun 2024', 0.58, '#f87171'], ['Dec 2024', 1.04, '#dc2626'], ['Jun 2025', 1.29, '#991b1b']] }),
+          cap: 'Internally displaced people in Haiti, approximate (IOM Displacement Tracking Matrix).', qs: [
+          { type: 'num', q: 'How many times greater was the number of IDPs in June 2025 than in December 2023? One decimal place.', ans: 4.2, tol: 0.1, unit: 'times', f: '1.29 ÷ 0.31 = <b>4.2 times</b>.' },
+          { type: 'num', q: 'Calculate the increase in IDPs between June 2024 and December 2024, in millions.', ans: 0.46, tol: 0.01, unit: 'million', f: '1.04 − 0.58 = <b>0.46 million</b> (460,000 people) in six months.' },
+          { type: 'mc', q: 'Where do most Haitian IDPs live?', o: ['With host families or in crowded sites such as schools and churches', 'In large, well-equipped UN camps across the border in the Dominican Republic', 'In new government housing built outside Port-au-Prince', 'In hotels paid for by the national government'], c: 0, f: 'Many stay with host families, which spreads the pressure across poor communities.' }] }, next); } },
+      { title: '⚠️ Consequences for IDPs', how: 'Is each one a true consequence of Haiti’s displacement crisis?',
+        build: function (el, next) { flash(el, { yes: '✅ True', no: '❌ False', ky: 't', kn: 'f', items: [
+          { t: 'Crowded sites with poor sanitation raise the risk of cholera', a: true, why: 'Cholera, introduced in 2010, has resurfaced in displacement sites.' },
+          { t: 'Children lose months or years of schooling', a: true, why: 'Schools close or are used as shelters.' },
+          { t: 'Most IDPs quickly return home once a disaster ends', a: false, why: 'Many were displaced for years after 2010, and violence keeps people away.' },
+          { t: 'About half the population faces acute food insecurity', a: true, why: 'Displacement and blocked roads disrupt food supplies and incomes.' },
+          { t: 'Displacement mainly affects wealthy suburbs, not poor neighbourhoods', a: false, why: 'The poorest neighbourhoods are hit hardest.' }] }, next); } },
+      { title: '🧠 Haiti check', build: function (el, next) { mcq(el, [
+        { q: 'What is the main difference between Haiti’s IDPs and the Rohingya?', o: ['Haiti’s IDPs remain inside their own country; the Rohingya crossed a border as refugees', 'Haiti’s IDPs are economic migrants; the Rohingya moved voluntarily to find better-paid work', 'Haiti’s IDPs have all returned home; the Rohingya are still displaced today', 'There is no difference, because both groups are classed as asylum seekers'], c: 0, f: 'IDPs are not protected by the 1951 Refugee Convention, because they have not crossed a border.' },
+        { q: 'Which international response was deployed in 2024 to support Haiti’s police?', o: ['A Kenyan-led Multinational Security Support mission', 'A NATO peacekeeping force led by the United States', 'An African Union army that took over the government', 'A European Union border force on the Dominican border'], c: 0, f: 'The UN-backed, Kenyan-led mission began arriving in mid-2024.' }], next); } }]);
+  };
+
+  /* L10 — Family size, sex ratios and ageing */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '👪 Why are families getting smaller?', how: 'Global fertility has fallen from about 5 children per woman (1950) to about 2.3 today. Which of these are real reasons?',
+        build: function (el, next) { flash(el, { yes: '✅ Reason', no: '❌ Not a reason', ky: 'r', kn: 'n', items: [
+          { t: 'More girls stay in school and go to university', a: true, why: 'Education delays marriage and childbirth.' },
+          { t: 'Lower infant mortality means parents expect their children to survive', a: true, why: 'Fewer births are needed to reach the desired family size.' },
+          { t: 'Contraception is cheaper and easier to get', a: true, why: 'Access to family planning reduces unplanned births.' },
+          { t: 'Children are more useful on family farms in cities', a: false, why: 'In cities, children are an economic cost, not a source of farm labour.' },
+          { t: 'Housing, childcare and education are expensive in cities', a: true, why: 'High costs discourage large families.' },
+          { t: 'Pension systems mean parents rely less on children in old age', a: true, why: 'Social security reduces the need for many children.' }] }, next); } },
+      { title: '🔢 Data skills: sex ratios and ageing', how: '<b>Sex ratio at birth</b> = boys born per 100 girls. The natural ratio is about 105.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Sex ratio at birth', y0: 100, y1: 125, ystep: 5, minor: 1, ylab: 'Boys per 100 girls', values: true,
+            bars: [['Natural', 105, '#94a3b8'], ['China (peak ~2005)', 120, '#dc2626'], ['China (2020)', 111, '#f87171'], ['India (~2020)', 108, '#ea580c']] }),
+          cap: 'Approximate sex ratios at birth (census and survey estimates).', qs: [
+          { type: 'num', q: 'At China’s peak ratio of 120, how many more boys than girls were born for every 1,000 girls?', ans: 200, tol: 0, unit: 'boys', f: '120 per 100 = 1,200 per 1,000, so <b>200 more boys</b> per 1,000 girls.' },
+          { type: 'mc', q: 'What caused these high sex ratios?', o: ['Son preference combined with prenatal sex selection', 'Higher death rates among baby boys in the first year', 'Large numbers of girls emigrating as young children', 'Errors in counting babies born in rural hospitals'], c: 0, f: 'Son preference plus ultrasound and sex-selective abortion. The result is “missing women” and a marriage squeeze.' },
+          { type: 'num', q: 'Japan: 29.3% aged 65+, 11.4% aged 0–14, 59.3% aged 15–64. Calculate the <b>old-age</b> dependency ratio (65+ ÷ 15–64 × 100). One decimal place.', ans: 49.4, tol: 0.2, unit: '', f: '29.3 ÷ 59.3 × 100 = <b>49.4</b> older people per 100 of working age.' }] }, next); } },
+      { title: '👴 Consequences of ageing', build: function (el, next) { sortGame(el, { zones: zonesFrom([['eco', '💰 Economic'], ['soc', '👥 Social'], ['pol', '🏛️ Political']], ['zc2', 'zc3', 'zc4']), cards: [
+          { t: 'A shrinking workforce and labour shortages', a: ['eco'], why: 'Fewer workers can slow economic growth.' },
+          { t: 'Rising pension and healthcare costs', a: ['eco'], why: 'Government spending on older people rises.' },
+          { t: 'More older people living and dying alone (kodokushi in Japan)', a: ['soc'], why: 'Isolation is a social consequence.' },
+          { t: 'Rural villages empty and schools close', a: ['soc'], why: 'Depopulation changes communities.' },
+          { t: 'Older voters have a larger influence on elections', a: ['pol'], why: '“Grey power” shapes policy.' },
+          { t: 'Debates about raising the retirement age and allowing more immigration', a: ['pol'], why: 'Ageing forces difficult political choices.' }] }, next); } },
+      { title: '🧠 Ageing check', build: function (el, next) { mcq(el, [
+        { q: 'South Korea’s total fertility rate was about 0.72 in 2023. What does this mean?', o: ['On average each woman has fewer than one child — far below replacement level', 'There are only 0.72 births for every death, so the population is growing slowly', 'Seventy-two percent of women have exactly one child each during their life', 'Each woman has about seven children, but most of them die in infancy'], c: 0, f: 'The world’s lowest TFR (it rose slightly to about 0.75 in 2024).' },
+        { q: 'Which can be an <b>opportunity</b> of an ageing population?', o: ['The “silver economy”: new markets in health, leisure and care for older people', 'More young people entering the workforce every single year, so wages fall quickly', 'Lower government spending on pensions and healthcare for the elderly', 'Higher birth rates as older people take on caring for grandchildren'], c: 0, f: 'Older consumers create new markets, and many keep working or volunteering.' }], next); } }]);
+  };
+
+  /* L11 — Population policies */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '🏛️ Sort the population policies', build: function (el, next) { sortGame(el, { zones: zonesFrom([['pro', '👶 Pro-natalist', 'encourage births'], ['anti', '🚫 Anti-natalist', 'reduce births'], ['age', '👴 Ageing policy'], ['mig', '🛂 Migration policy']]), cards: [
+          { t: 'China’s one-child policy (from 1980)', a: ['anti'], why: 'Limited most urban couples to one child.' },
+          { t: 'Singapore’s Baby Bonus cash gifts and savings accounts', a: ['pro'], why: 'Financial incentives to have children.' },
+          { t: 'Hungary: mothers of four or more children pay no income tax for life', a: ['pro'], why: 'A strong pro-natalist tax incentive (from 2020).' },
+          { t: 'Thailand’s national family planning programme (1970s)', a: ['anti'], why: 'Voluntary family planning reduced fertility.' },
+          { t: 'Japan raises the age at which employees can retire', a: ['age'], why: 'Keeps older people working longer.' },
+          { t: 'Canada’s points-based system for skilled immigrants', a: ['mig'], why: 'Selects migrants with skills the economy needs.' },
+          { t: 'Japan’s Specified Skilled Worker visa (2019) for care and construction', a: ['mig'], why: 'Opens doors to foreign workers to fill labour shortages.' },
+          { t: 'India’s forced sterilisation campaign (1975–77)', a: ['anti'], why: 'A coercive anti-natalist policy, widely condemned.' }] }, next); } },
+      { title: '⛓️ China’s changing policy', how: 'Put the stages of China’s policy in order.',
+        build: function (el, next) { orderGame(el, ['1980: the one-child policy limits most couples to one child', 'Fines, rewards and in some places forced abortions and sterilisations enforce it', '2016: all couples are allowed two children', '2021: a three-child policy is introduced as births keep falling', '2025: national childcare subsidies try to encourage births'], 'Tap the EARLIEST stage first.', next); } },
+      { title: '⚖️ Evaluate the one-child policy', how: 'Is each point a <b>success</b> (or intended effect) or a <b>problem</b>?',
+        build: function (el, next) { flash(el, { yes: '✅ Success', no: '⚠️ Problem', ky: 's', kn: 'p', items: [
+          { t: 'Hundreds of millions of births were averted, easing pressure on food and resources', a: true, why: 'The government’s main aim (though estimates are disputed, as fertility was already falling).' },
+          { t: 'A skewed sex ratio and millions of “missing women”', a: false, why: 'Son preference led to sex-selective abortion.' },
+          { t: 'The “4-2-1 problem”: one child supporting two parents and four grandparents', a: false, why: 'A rapid ageing problem.' },
+          { t: 'Smaller families could invest more in each child’s education', a: true, why: 'Higher investment per child supported economic growth.' },
+          { t: 'Coercion, including forced abortions and sterilisations', a: false, why: 'Serious human rights abuses.' },
+          { t: 'A shrinking workforce is now slowing growth', a: false, why: 'China’s population has fallen since 2022.' }] }, next); } },
+      { title: '🧠 Policy check', build: function (el, next) { mcq(el, [
+        { q: 'Singapore and South Korea have spent heavily on pro-natalist policies. How effective have they been?', o: ['Fertility remains far below replacement, so money alone has had limited effect', 'Fertility has risen well above replacement level, so the policies have ended', 'Birth rates have doubled, but deaths have risen faster, so populations still fall', 'They have had no effect, because no couple in either country receives payments'], c: 0, f: 'Both have TFRs around or below 1. Costs, long working hours and gender roles matter more than one-off cash.' },
+        { q: 'Why can it be hard to judge the success of China’s one-child policy?', o: ['Fertility was already falling quickly in the 1970s, so it is hard to separate its effect', 'China did not publish any population data at all between 1980 and 2015', 'The policy only applied for a single year, so there are far too few births in the records to measure', 'Birth rates rose during the policy, so it clearly made no difference'], c: 0, f: 'China’s TFR fell from about 5.8 (1970) to about 2.7 (1979) before the policy began.' }], next); } }]);
+  };
+
+  /* L12 — Gender equality and trafficking */
+  LV[12] = function (root) {
+    stages(root, [
+      { title: '⛓️ How gender equality changes populations', how: 'Tap the links in order.',
+        build: function (el, next) { orderGame(el, ['More girls complete secondary education', 'Women marry later and know more about contraception', 'Women have fewer children, later in life', 'More women enter paid work and earn incomes', 'Families invest more in each child’s health and education'], 'Tap the FIRST link.', next); } },
+      { title: '🔗 Human trafficking: forms, causes and responses', build: function (el, next) { sortGame(el, { zones: zonesFrom([['form', '⛓️ Form of trafficking'], ['cause', '⬅️ Why people are vulnerable'], ['resp', '🛡️ Response']], ['zr', 'zc2', 'zg']), cards: [
+          { t: 'Forced labour on fishing boats', a: ['form'], why: 'Thailand’s fishing industry was exposed for forced labour in the 2010s.' },
+          { t: 'Sexual exploitation', a: ['form'], why: 'A major form of trafficking, mostly affecting women and girls.' },
+          { t: 'Forced marriage', a: ['form'], why: 'Recognised by the ILO as a form of modern slavery.' },
+          { t: 'Poverty, debt and lack of jobs at home', a: ['cause'], why: 'Economic desperation makes people accept risky offers.' },
+          { t: 'Being stateless or undocumented, like many Rohingya', a: ['cause'], why: 'People without legal status have little protection.' },
+          { t: 'The UN Palermo Protocol (2000) defines and criminalises trafficking', a: ['resp'], why: 'The key international legal framework.' },
+          { t: 'The US Trafficking in Persons report ranks countries in tiers', a: ['resp'], why: 'Naming and ranking puts pressure on governments.' }] }, next); } },
+      { title: '📊 Data skills: modern slavery', build: function (el, next) { dataGame(el, { chart: barChart({ title: 'People in modern slavery', y0: 0, y1: 30, ystep: 5, minor: 1, ylab: 'Millions of people', values: true,
+          bars: [['Forced labour', 28, '#dc2626'], ['Forced marriage', 22, '#7c3aed']] }),
+          cap: 'Global estimates of modern slavery, 2021 (ILO, Walk Free and IOM).', qs: [
+          { type: 'num', q: 'How many people in total were in modern slavery in 2021 (millions)?', ans: 50, tol: 0, unit: 'million', f: '28 + 22 = <b>50 million</b> people.' },
+          { type: 'num', q: 'What percentage of the total were in forced marriage?', ans: 44, tol: 0.5, unit: '%', f: '22 ÷ 50 × 100 = <b>44%</b>.' },
+          { type: 'mc', q: 'Which is part of the UNDP <b>Gender Inequality Index</b>?', o: ['Maternal mortality, women’s share of seats in parliament and labour force participation', 'The number of girls born per 100 boys and the average age of first marriage', 'The share of women in the total population and their average life expectancy at birth and at 65', 'The wages of the highest-paid women compared with those of the highest-paid men'], c: 0, f: 'GII covers reproductive health, empowerment and the labour market.' }] }, next); } },
+      { title: '🧠 Gender check', build: function (el, next) { mcq(el, [
+        { q: 'In 2015 the EU gave Thailand a “yellow card” warning. Why?', o: ['Illegal fishing and abuse of workers, including trafficked migrants, in its fishing industry', 'Using child labour in its car factories, which export vehicles to Europe', 'Refusing to accept Rohingya refugees who arrived by boat on its beaches', 'Allowing foreign tourists to visit protected coral reefs in its national parks without paying any entry fees'], c: 0, f: 'After reforms, the yellow card was lifted in 2019.' },
+        { q: 'Why is women’s education often called the most effective “population policy”?', o: ['It lowers fertility voluntarily while also improving health, incomes and children’s welfare', 'It forces women to have fewer children by law, so results come very quickly', 'It increases birth rates, which helps countries with ageing populations', 'It only affects the women who are still in school, so it has no effect on the next generation'], c: 0, f: 'Education empowers choice, so fertility falls without coercion.' }], next); } }]);
+  };
+
+  /* L13 — The demographic dividend */
+  LV[13] = function (root) {
+    stages(root, [
+      { title: '⛓️ How a demographic dividend happens', how: 'Tap the links in order.',
+        build: function (el, next) { orderGame(el, ['Death rates fall, then birth rates fall', 'The share of working-age people (15–64) rises', 'There are fewer dependants for each worker', 'Households and governments save and invest more', 'If there are enough jobs, the economy grows faster'], 'Tap the FIRST link.', next); } },
+      { title: '📉 Data skills: South Korea’s window of opportunity', build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'South Korea dependency ratio', x0: 1970, x1: 2040, xticks: [1970, 1980, 1990, 2000, 2010, 2020, 2030, 2040], y0: 30, y1: 90, ystep: 10, minor: 2, xlab: 'Year', ylab: 'Dependants per 100 aged 15–64',
+            series: [{ c: '#0284c7', dots: true, pts: [[1970, 83], [1980, 61], [1990, 44], [2000, 39], [2010, 37], [2020, 39]] }, { c: '#dc2626', dots: true, dash: '6 4', pts: [[2020, 39], [2030, 53], [2040, 77]] }] }),
+          cap: 'Approximate total dependency ratio for South Korea. Blue = estimates; red dashed = projections (UN World Population Prospects).', qs: [
+          { type: 'num', q: 'By how much did the dependency ratio fall between 1970 and 2010?', ans: 46, tol: 1, unit: '', f: '83 − 37 = <b>46</b> fewer dependants per 100 workers.' },
+          { type: 'num', q: 'In which year shown was the ratio at its lowest?', ans: 2010, tol: 0, unit: '', f: '<b>2010</b> (about 37) — the peak of the dividend window.' },
+          { type: 'mc', q: 'What happens after 2020?', o: ['The ratio rises fast as the population ages — the dividend turns into a burden', 'The ratio keeps falling because more children are being born every year', 'The ratio stays exactly the same because the whole population has stopped changing', 'The ratio rises because many more young adults are moving into the country'], c: 0, f: 'Rapid ageing means the window closes; Korea must raise productivity or work longer.' }] }, next); } },
+      { title: '🔑 What makes the dividend work?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['y', '✅ Helps a country cash in'], ['n', '❌ Risks a demographic burden']], ['zg', 'zr']), cards: [
+          { t: 'High-quality education and training for young people', a: ['y'], why: 'A skilled workforce is essential.' },
+          { t: 'Investment in export manufacturing that creates millions of jobs', a: ['y'], why: 'The East Asian Tigers did this.' },
+          { t: 'Good health care and family planning', a: ['y'], why: 'Healthy workers with smaller families can save more.' },
+          { t: 'High youth unemployment and few formal jobs', a: ['n'], why: 'Without jobs, a large young workforce can cause frustration and instability.' },
+          { t: 'Corruption and political instability that discourage investment', a: ['n'], why: 'Investors avoid unstable countries.' },
+          { t: 'Women excluded from paid work', a: ['n'], why: 'Half the potential workforce is not used.' }] }, next); } },
+      { title: '🧠 Dividend check', build: function (el, next) { mcq(el, [
+        { q: 'What share of the East Asian “economic miracle” has been linked to the demographic dividend?', o: ['Up to about one-third of the growth', 'Almost all of the growth', 'None of the growth at all', 'Exactly one-tenth of all the growth'], c: 0, f: 'Bloom and Williamson estimated up to about a third.' },
+        { q: 'Why is a dividend not guaranteed for countries such as Nigeria?', o: ['A larger working-age population only helps if there are enough jobs, skills and good governance', 'Nigeria’s birth rate is already below replacement level, so its workforce is shrinking very fast', 'Dividends only happen in countries with very old populations and high pension costs', 'Nigeria has no young people, because most of them have emigrated to Europe'], c: 0, f: 'The window of opportunity must be used with the right policies.' }], next); } }]);
+  };
+
+  /* L14 — IB EXAM BOSS */
+  var EXQ = [
+    { q: 'Examine the consequences of megacity growth for individuals and societies.', mk: 'Paper 1 · extended response',
+      C: 'Megacity growth brings important opportunities for individuals, but it also creates serious challenges for societies.',
+      E: 'For example, migrants to Mumbai earn higher wages than in rural Maharashtra, but around a million people live in informal settlements such as Dharavi with shared toilets.',
+      X: 'This is because rapid growth outpaces the ability of governments to provide housing, sanitation and transport, so the benefits are unequally shared.',
+      J: 'Overall, the consequences depend on governance: where cities invest in upgrading and infrastructure, megacity growth is more positive than negative.',
+      D: ['Megacities are cities with more than one million people.', 'Megacity growth only happens in high-income countries.'] },
+    { q: 'Evaluate the effectiveness of anti-natalist policies.', mk: 'Paper 1 · extended response',
+      C: 'Anti-natalist policies can reduce fertility, but their effectiveness and fairness vary greatly.',
+      E: 'For example, China’s one-child policy (1980–2015) is said to have averted hundreds of millions of births, while Thailand’s voluntary family planning cut its TFR from about 6 to below 2.',
+      X: 'However, China’s coercive approach led to a skewed sex ratio and rapid ageing, whereas Thailand’s voluntary approach achieved a similar fall without human rights abuses.',
+      J: 'Therefore, voluntary policies linked to education and contraception are the most effective in the long term, because coercion creates new demographic problems.',
+      D: ['China’s one-child policy increased the birth rate.', 'Anti-natalist policies give cash rewards for having more children.'] },
+    { q: 'To what extent can a demographic dividend support economic development?', mk: 'Paper 1 · extended response',
+      C: 'A demographic dividend can strongly support development, because a larger working-age population means fewer dependants for each worker.',
+      E: 'For example, South Korea’s dependency ratio fell from about 83 in 1970 to about 37 in 2010, as it became a high-income economy.',
+      X: 'This allowed more saving and investment, but only because Korea invested heavily in education and export industries that created jobs.',
+      J: 'To a large extent the dividend helps, but it is not automatic: without jobs and good governance it can become a burden, and it is temporary as populations age.',
+      D: ['A demographic dividend is a payment made to older people.', 'The demographic dividend lasts forever once it begins.'] },
+    { q: 'Examine the causes and consequences of forced migration.', mk: 'Paper 1 · extended response',
+      C: 'Forced migration is mainly caused by persecution, conflict and disasters, and it has major consequences for both the migrants and the places that receive them.',
+      E: 'For example, about 740,000 Rohingya fled Myanmar to Cox’s Bazar in Bangladesh after the military violence of 2017, having been made stateless in 1982.',
+      X: 'The camps have caused deforestation and landslides and put pressure on local jobs and services, while refugees face restricted rights and depend on aid.',
+      J: 'Overall, the consequences are long-lasting because repatriation depends on political change in the country of origin, so forced migration often becomes protracted.',
+      D: ['Economic migrants are forced to move because of conflict.', 'Forced migrants usually return home within a few weeks.'] }];
+  LV[14] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Claim / Point'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Explain / Develop'], ['J', 'j', 'Evaluate / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the IB Examiner', how: 'For each extended-response question, tap a sentence card and then tap the box it belongs in: <b>Claim</b>, <b>Evidence</b>, <b>Explain</b> and <b>Judgement</b>. Two cards are <b>traps</b> — leave them out! IB answers need a judgement, so that box matters.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The IB Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A fully developed, evaluated paragraph.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Claim = your main point; Evidence = specific facts or case study; Explain = how/why it links; Judgement = how far / overall. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var SVG_DTM = '<svg viewBox="0 0 680 420" role="img" aria-label="The demographic transition model">' +
+    '<rect width="680" height="420" fill="#fff"/>' +
+    '<rect x="70" y="40" width="120" height="330" fill="#fef3c7"/><rect x="190" y="40" width="120" height="330" fill="#fde68a"/><rect x="310" y="40" width="120" height="330" fill="#fef3c7"/><rect x="430" y="40" width="120" height="330" fill="#fde68a"/><rect x="550" y="40" width="110" height="330" fill="#fef3c7"/>' +
+    '<path d="M190 92 C 260 92, 300 96, 320 120 C 360 190, 400 290, 430 302 L 430 298 C 370 282, 300 268, 250 230 C 225 200, 205 130, 190 102 Z" fill="#fca5a5" opacity=".6"/>' +
+    '<path d="M70 85 C 100 80, 140 92, 190 90 C 240 88, 280 92, 320 120 C 360 190, 400 290, 430 302 C 470 312, 520 312, 550 310 C 590 318, 630 330, 660 334" fill="none" stroke="#2563eb" stroke-width="4"/>' +
+    '<path d="M70 95 C 85 70, 100 120, 115 85 C 130 60, 145 120, 160 88 C 172 70, 182 95, 190 102 C 205 130, 225 200, 250 230 C 300 268, 370 282, 430 298 C 470 304, 520 306, 550 306 C 590 304, 630 308, 660 312" fill="none" stroke="#dc2626" stroke-width="4"/>' +
+    '<path d="M70 360 C 150 358, 190 356, 230 345 C 300 320, 360 250, 430 190 C 480 150, 530 132, 560 128 C 600 126, 640 132, 660 138" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="8 5"/>' +
+    '<line x1="70" y1="40" x2="70" y2="370" stroke="#1e293b"/><line x1="70" y1="370" x2="660" y2="370" stroke="#1e293b"/>' +
+    '<text transform="translate(28,205) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Birth & death rates (per 1,000)</text>' +
+    '<text x="365" y="400" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Time →</text></svg>';
+  var PINS_DTM = [{ n: 1, x: 130, y: 22 }, { n: 2, x: 250, y: 22 }, { n: 3, x: 370, y: 22 }, { n: 4, x: 490, y: 22 }, { n: 5, x: 605, y: 22 }, { n: 6, x: 280, y: 70 }, { n: 7, x: 225, y: 170 }, { n: 8, x: 470, y: 160 }];
+
+  var SVG_CP = '<svg viewBox="0 0 640 380" role="img" aria-label="Core and periphery model">' +
+    '<rect width="640" height="380" fill="#f8fafc"/><ellipse cx="320" cy="190" rx="290" ry="170" fill="#e2e8f0" stroke="#94a3b8"/>' +
+    '<ellipse cx="320" cy="190" rx="190" ry="110" fill="#cbd5e1" stroke="#94a3b8" stroke-dasharray="5 4"/>' +
+    '<circle cx="320" cy="190" r="60" fill="#0f3a5c"/><text x="320" y="195" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">CITY</text>' +
+    '<g stroke="#dc2626" stroke-width="4" fill="none"><path d="M90 120 C 160 140, 220 160, 262 176"/><path d="M110 300 C 170 260, 230 230, 268 214"/><path d="M560 300 C 480 260, 420 230, 376 212"/></g>' +
+    '<g fill="#dc2626"><path d="M262 176 l-12 -9 l2 13z"/><path d="M268 214 l-13 2 l9 9z"/><path d="M376 212 l12 -1 l-8 10z"/></g>' +
+    '<g stroke="#16a34a" stroke-width="3" fill="none" stroke-dasharray="6 4"><path d="M380 170 C 440 140, 500 110, 560 90"/></g><path d="M560 90 l-13 -1 l6 11z" fill="#16a34a"/>' +
+    '<g font-size="11" fill="#1e293b"><text x="80" y="110">rural periphery</text><text x="455" y="80">regional centre</text></g></svg>';
+  var PINS_CP = [{ n: 1, x: 320, y: 150 }, { n: 2, x: 240, y: 112 }, { n: 3, x: 70, y: 190 }, { n: 4, x: 160, y: 140 }, { n: 5, x: 480, y: 128 }];
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  // type 'best': choose the answer that would score full marks; 'multi': select exactly the creditworthy points; 'num': calculation.
+  var GATES = {
+    1: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between population distribution and population density.', o: [
+          'Population distribution is the pattern of where people live across an area, such as clustering along coasts, whereas population density is the number of people per unit of area, such as people per km².',
+          'Population density is the pattern of where people live across an area, such as clustering along rivers and coasts, whereas population distribution is the total number of people living in a country divided by the number of regions it has.',
+          'Population distribution and density both describe how crowded a place is, so they mean the same thing.',
+          'Population distribution is where people live, for example most people live in Asia.'], c: 0,
+        ms: 'One mark for each side: <b>distribution</b> = the spatial pattern of where people live; <b>density</b> = people per unit area (e.g. per km²). A definition of only one term scores 1.' },
+      { type: 'multi', marks: 3, cmd: 'Explain', q: 'Explain two physical factors that lead to high population densities.', need: 3, items: [
+          { t: 'Fertile alluvial soils on floodplains and deltas support intensive farming, e.g. the Ganges plain', ok: true },
+          { t: 'A reliable water supply from rivers or rainfall, e.g. the Nile in Egypt', ok: true },
+          { t: 'Flat, low-lying land makes farming, building and transport easier', ok: true },
+          { t: 'Government policies that build new towns in empty regions', ok: false },
+          { t: 'High-altitude plateaus with cold temperatures attract farmers', ok: false },
+          { t: 'Jobs in manufacturing and services in large cities', ok: false }],
+        ms: 'Credit <b>physical</b> factors with a reason: fertile soils, water supply, flat relief, moderate climate. Government policy and jobs are <b>human</b> factors.' }],
+    2: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why the Human Development Index (HDI) may be a better measure of development than GNI per capita.', o: [
+          'HDI combines three dimensions — life expectancy, education (years of schooling) and GNI per capita (PPP) — so it measures quality of life, not just income. GNI per capita is a single economic average that can hide poor health and education.',
+          'HDI is better because it measures the income of the richest people in a country, while GNI per capita measures only the income of the poorest people, so HDI gives a fuller picture of how much money a country has and how fast its economy is growing each year.',
+          'HDI is better because it is a newer and more modern measure than GNI per capita.',
+          'HDI measures happiness, health and income, so it shows how happy people are in each country, whereas GNI per capita only measures how many people have jobs and pay tax.'], c: 0,
+        ms: 'Identify the three components of HDI (1), explain that it reflects social as well as economic wellbeing (1), and contrast with GNI as a single income average (1).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Country X has an HDI of 0.925 and Country Y has an HDI of 0.524. Calculate how many times higher Country X’s HDI is, to 1 decimal place.', ans: 1.77, tol: 0.06, unit: 'times',
+        ms: '0.925 ÷ 0.524 = 1.765 ≈ <b>1.8 times</b> (accept 1.7–1.8).' }],
+    3: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how the process of cumulative causation can increase regional inequality within a country.', o: [
+          'Once growth starts in a core region, it creates jobs and a multiplier effect, attracting migrants and investment from the periphery (backwash). This raises tax income and services in the core, attracting yet more growth, while the periphery loses young workers and capital, so the gap widens.',
+          'Cumulative causation means that growth spreads evenly from the core to all other regions, because companies always choose to move to the periphery where land and labour are cheaper, so over time the country becomes much more equal as every region receives the same amount of public and private investment.',
+          'Cumulative causation is when rich regions get richer.',
+          'Regional inequality increases because the periphery has poor soils and a difficult climate, so people move away.'], c: 0,
+        ms: 'Full marks need the <b>self-reinforcing chain</b>: initial growth → multiplier → in-migration and investment (backwash) → more growth in the core, while the periphery declines.' },
+      { type: 'multi', marks: 2, cmd: 'Outline', q: 'Outline two characteristics of a primate city.', need: 2, items: [
+          { t: 'It is more than twice the size of the next largest city in the country', ok: true },
+          { t: 'It dominates the country’s economy, government and services', ok: true },
+          { t: 'It is always the oldest city in the country', ok: false },
+          { t: 'It must have more than 20 million inhabitants', ok: false },
+          { t: 'It is usually located in the poorest region of the country', ok: false }],
+        ms: 'A primate city is disproportionately large (often more than twice the size of the second city) and dominates the national economy and politics, e.g. Bangkok.' }],
+    4: [
+      { type: 'best', marks: 4, cmd: 'Explain', q: 'With reference to one named country, explain why its population distribution is uneven.', o: [
+          'In Egypt, about 95% of people live on about 5% of the land, in the Nile valley and delta. The Nile provides water and fertile silt for farming in a desert climate, so settlement concentrates there. Cairo, the capital, also attracts migrants with jobs and services, while the Western Desert is almost empty.',
+          'In Egypt, most people live in the Western Desert because the land there is flat, cheap and close to the Mediterranean coast. The Nile valley is almost empty because the Aswan High Dam floods it every year, so farmers moved away to new towns in the desert where water and good farmland are much easier to find.',
+          'Population distribution is uneven because some places are good to live in and others are not, such as deserts and mountains.',
+          'In Thailand, most people live in Bangkok.'], c: 0,
+        ms: 'Named country (1); physical reason with detail (1); human reason with detail (1); reference to the empty or sparse areas (1).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country has 110 million people. 95% of them live on 5% of its 1,000,000 km² land area. Calculate the population density of the inhabited area (people per km²).', ans: 2090, tol: 15, unit: 'people/km²',
+        ms: '110,000,000 × 0.95 = 104,500,000 people; 1,000,000 × 0.05 = 50,000 km²; 104,500,000 ÷ 50,000 = <b>2,090 per km²</b>.' }],
+    5: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why death rates fall in Stage 2 of the demographic transition model.', o: [
+          'Death rates fall because of improvements in public health, such as clean water and sanitation, vaccinations and better medical care, and because food supplies become more reliable. These reduce deaths from infectious disease, especially among infants and children.',
+          'Death rates fall in Stage 2 because birth rates fall first, so there are fewer babies in the population, and because babies and young children have the highest risk of dying, having fewer of them automatically lowers the overall crude death rate of the whole country.',
+          'Death rates fall because the population gets older.',
+          'Death rates fall because people have fewer children, as contraception becomes available and women stay in education for longer.'], c: 0,
+        ms: 'Credit up to three developed reasons: clean water/sanitation, medical advances and vaccinations, improved food supply. Falling family size is a <b>Stage 3</b> (birth rate) change.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country has a crude birth rate of 38 per 1,000 and a crude death rate of 10 per 1,000. Calculate its natural increase rate as a percentage.', ans: 2.8, tol: 0.01, unit: '%',
+        ms: '(38 − 10) ÷ 10 = <b>2.8%</b> per year.' }],
+    6: [
+      { type: 'best', marks: 4, cmd: 'Compare', q: 'Compare the population structures of a high-fertility country and a low-fertility country.', o: [
+          'The Gambia has a wide-based, expansive pyramid, with about 42% of people aged 0–14, because fertility is about 4.5 children per woman. Thailand has a constrictive pyramid with a narrow base (about 15% aged 0–14) and a bulge in middle age, as fertility is about 1.0–1.2. Thailand also has far more older people (about 16% aged 65+) than The Gambia (about 2–3%).',
+          'The Gambia has a constrictive pyramid with a narrow base because its fertility rate is low, while Thailand has an expansive pyramid with a wide base because many babies are born each year. Both countries have about the same share of older people aged 65 and over, as life expectancy is the same in both, and their dependency ratios are almost identical, at about 50.',
+          'The Gambia has lots of children and Thailand has lots of old people.',
+          'The Gambia is a poor country in Africa, while Thailand is a richer country in Asia with more industry and tourism.'], c: 0,
+        ms: '<b>Compare</b> needs similarities or differences for both countries, with data: the shape of the base, the youth share, the older share, and the reasons (fertility rates).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country has 40% of its population aged 0–14, 5% aged 65+ and 55% aged 15–64. Calculate its dependency ratio, to 1 decimal place.', ans: 81.8, tol: 0.1, unit: '',
+        ms: '(40 + 5) ÷ 55 × 100 = <b>81.8</b>.' }],
+    7: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain two reasons for the rapid growth of megacities in low- and middle-income countries.', o: [
+          'Rural–urban migration: push factors such as low farm incomes and pull factors such as higher wages and services draw millions of people to cities like Lagos. Natural increase: migrants are mostly young adults, so they have children in the city, and birth rates exceed death rates.',
+          'Megacities grow because of counter-urbanisation, as wealthy people move from the countryside into the city centre to be closer to their work, and because death rates in cities are much higher than birth rates, which means that many more people are needed to replace them each year.',
+          'Megacities grow because lots of people want to live there.',
+          'Megacities grow because of industrialisation and globalisation.'], c: 0,
+        ms: 'Two reasons, each identified (1) and developed (1–2): <b>rural–urban migration</b> (push/pull) and <b>natural increase</b> (young migrants).' },
+      { type: 'num', marks: 1, cmd: 'Calculate', q: 'The number of megacities rose from 10 in 1990 to 33 in 2018. Calculate the percentage increase.', ans: 230, tol: 1, unit: '%',
+        ms: '(33 − 10) ÷ 10 × 100 = <b>230%</b>.' }],
+    8: [
+      { type: 'best', marks: 2, cmd: 'Distinguish', q: 'Distinguish between a refugee and an internally displaced person (IDP).', o: [
+          'A refugee has crossed an international border to escape persecution, conflict or violence and is protected under international law, whereas an IDP has been forced to flee their home but remains within their own country.',
+          'A refugee is anyone who moves to another country for a better job or higher wages, whereas an internally displaced person is someone who has been forced from their home by a disaster and has crossed a border into a neighbouring country to find safety.',
+          'Refugees and IDPs are both people who have been forced to leave their homes.',
+          'A refugee lives in a refugee camp, while an IDP lives with family or friends.'], c: 0,
+        ms: 'The key difference is the <b>international border</b> (1 mark for each side). Where people live is not the defining difference.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline the consequences of forced migration for the host area, with reference to the Rohingya in Bangladesh.', need: 3, items: [
+          { t: 'Deforestation of the hills around Cox’s Bazar for shelters and firewood, increasing landslides', ok: true },
+          { t: 'Competition for informal jobs, pushing down local wages', ok: true },
+          { t: 'Tension between refugees and the host community', ok: true },
+          { t: 'Bangladesh’s population falls sharply as locals move to Myanmar', ok: false },
+          { t: 'The refugees are given full citizenship and voting rights in Bangladesh', ok: false },
+          { t: 'Local schools close because there are too few children', ok: false }],
+        ms: 'Credit environmental, economic and social consequences for Bangladesh. The Rohingya do not have citizenship in Bangladesh.' }],
+    9: [
+      { type: 'best', marks: 4, cmd: 'Explain', q: 'Explain the causes of internal displacement in one named country.', o: [
+          'In Haiti, the 2010 earthquake displaced about 1.5 million people because poorly built housing collapsed. More recently, after the assassination of President Moïse in 2021, armed gangs took control of most of Port-au-Prince, and violence, kidnapping and arson have forced over a million people to flee to other parts of the country.',
+          'In Haiti, people have been displaced mainly because of rising sea levels and long droughts, which have destroyed farmland along the coast and in the mountains, so most displaced Haitians have moved to the neighbouring Dominican Republic and the USA, where they now live as refugees in large camps run by the United Nations and the Red Cross.',
+          'People in Haiti are displaced because of earthquakes, hurricanes and violence.',
+          'Internal displacement is when people are forced to move but stay in their own country.'], c: 0,
+        ms: 'Named country (1) + at least two causes with specific detail (hazard and violence) (2) + explanation of why people had to move (1). IDPs have <b>not</b> crossed a border.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Haiti had about 314,000 IDPs in December 2023 and about 1,290,000 in June 2025. Calculate the percentage increase, to the nearest whole number.', ans: 311, tol: 2, unit: '%',
+        ms: '(1,290,000 − 314,000) ÷ 314,000 × 100 = <b>311%</b>.' }],
+    10: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why sex ratios at birth are high in some countries.', o: [
+          'In countries such as China and India, son preference is strong because sons traditionally support parents and carry on the family name. Where ultrasound is available, some parents use prenatal sex selection and abortion of female foetuses, raising the ratio above the natural level of about 105 boys per 100 girls.',
+          'Sex ratios at birth are high because women live longer than men in all countries, so there are more women than men in old age, and to balance this out over time, nature produces many more baby boys than baby girls, especially in countries with rapidly ageing populations such as Japan, Italy, Germany and South Korea.',
+          'Sex ratios are high because more boys are born than girls.',
+          'Sex ratios are high in China because of the one-child policy.'], c: 0,
+        ms: 'Explain <b>son preference</b> (1), its cultural/economic reasons (1), and the mechanism of <b>prenatal sex selection</b> (1). Naming only the one-child policy is not enough on its own.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country has 30% of its population aged 65+ and 59% aged 15–64. Calculate its old-age dependency ratio, to 1 decimal place.', ans: 50.8, tol: 0.1, unit: '',
+        ms: '30 ÷ 59 × 100 = <b>50.8</b>.' }],
+    11: [
+      { type: 'best', marks: 4, cmd: 'Evaluate', q: 'Evaluate the success of one named anti-natalist policy.', o: [
+          'China’s one-child policy (1980–2015) reduced fertility and is said to have averted hundreds of millions of births, helping investment per child. However, fertility was already falling before 1980, and the policy caused a skewed sex ratio, forced abortions and rapid ageing. Overall, it met its short-term aim but created long-term demographic problems.',
+          'China’s one-child policy was completely successful because it ended population growth immediately in 1980. Birth rates fell almost to zero, the population started to fall the following year, and because families were smaller, China avoided any problems with ageing, labour shortages or sex ratios, so it remains the best example of a population policy anywhere.',
+          'The one-child policy in China was successful because it reduced the birth rate.',
+          'China’s one-child policy is a pro-natalist policy that encouraged families to have more children through tax breaks.'], c: 0,
+        ms: '<b>Evaluate</b> needs strengths and limitations with evidence, then a judgement. Claims of immediate zero growth are inaccurate.' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three pro-natalist strategies.', need: 3, items: [
+          { t: 'Cash payments or “baby bonuses” for each child, as in Singapore', ok: true },
+          { t: 'Tax exemptions for large families, as in Hungary', ok: true },
+          { t: 'Subsidised childcare and longer paid parental leave', ok: true },
+          { t: 'Fines for couples who have more than one child', ok: false },
+          { t: 'Free sterilisation and contraception campaigns', ok: false },
+          { t: 'Raising the retirement age to 70', ok: false }],
+        ms: 'Pro-natalist = encouraging births. Fines and sterilisation are anti-natalist; raising the retirement age is an ageing policy.' }],
+    12: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how improving gender equality can affect fertility rates.', o: [
+          'When girls stay in education longer, they marry later and know more about contraception. Women with careers and incomes have more say in family decisions and face a higher opportunity cost of having children, so they tend to have fewer children, later in life.',
+          'Improving gender equality raises fertility rates, because when women have more money and rights they can afford to have more children, and governments in gender-equal societies always pay families large bonuses for every child, so birth rates rise above replacement level.',
+          'Gender equality means men and women are treated equally.',
+          'When women are educated, they have fewer children.'], c: 0,
+        ms: 'A developed chain: education → later marriage / contraception → paid work and opportunity cost → fewer children. The last answer is correct but undeveloped (1 mark).' },
+      { type: 'multi', marks: 3, cmd: 'Outline', q: 'Outline three factors that make people vulnerable to human trafficking.', need: 3, items: [
+          { t: 'Poverty and unemployment, so people accept risky job offers abroad', ok: true },
+          { t: 'Statelessness or lack of legal documents', ok: true },
+          { t: 'Conflict and displacement that break up families and communities', ok: true },
+          { t: 'Having a university degree and a well-paid job', ok: false },
+          { t: 'Living in a country with strong labour laws and inspections', ok: false },
+          { t: 'Travelling abroad on holiday with a valid passport', ok: false }],
+        ms: 'Vulnerability comes from poverty, lack of legal status, displacement and gender inequality. Strong laws reduce vulnerability.' }],
+    13: [
+      { type: 'best', marks: 2, cmd: 'Define', q: 'Define the term “demographic dividend”.', o: [
+          'The economic growth that can result when a falling birth rate increases the proportion of the population that is of working age, reducing the dependency ratio.',
+          'The money a government saves when its population ages, because older people pay more tax than workers and use fewer public services, so there is more money available for investment.',
+          'The extra money a country earns when its population grows.',
+          'A payment made to families who have more than two children.'], c: 0,
+        ms: 'Must link <b>falling fertility</b> → larger <b>working-age share</b> → potential <b>economic growth</b>.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'A country’s dependency ratio fell from 83 in 1970 to 37 in 2010. Calculate the percentage decrease, to the nearest whole number.', ans: 55, tol: 1, unit: '%',
+        ms: '(83 − 37) ÷ 83 × 100 = <b>55%</b> decrease.' }]
+  };
+
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">IB-style question · Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">Which answer would score <b>full marks</b>?</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
