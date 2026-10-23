@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rural Quest — IGCSE Geography Rural Environments Revision Game — SBL</title>
+<meta name="description" content="Edexcel IGCSE Geography revision game for Paper 2 Rural Environments: 12 levels covering biomes, ecosystem goods and services, the Amazon, farming systems, rural change in the UK, diversification, sustainable rural living and rural–urban migration in Thailand, with labelled diagrams, data skills, past paper checkpoint questions and an Edexcel Examiner boss fight.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #d97706; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --purple: #7c3aed;
+    --c1: #65a30d; --c2: #ea580c; --c3: #0284c7; --c4: #7c3aed;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  .panel { scroll-margin-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 10% 0%, rgba(0,184,176,0.14), transparent 40%), radial-gradient(circle at 100% 20%, rgba(245,158,11,0.12), transparent 35%), linear-gradient(180deg, #f4fbfc, #e9f2f5); }
+  a { color: inherit; text-decoration: none; }
+  button, input { font-family: inherit; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  /* HUD */
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; font-size: 1rem; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .hud .badges { font-size: 1.05rem; letter-spacing: 2px; white-space: nowrap; }
+  .hud .badges .off { filter: grayscale(1); opacity: 0.3; }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; }
+  .hero { text-align: center; padding: 18px 10px 6px; }
+  .kicker { display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--teal), #0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.4rem); font-weight: 900; color: var(--navy); line-height: 1.15; }
+  .hero p { color: var(--muted); max-width: 760px; margin: 8px auto 0; line-height: 1.55; font-weight: 500; }
+
+  /* level map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 18px; }
+  .lvcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; min-height: 130px; }
+  .lvcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .lvcard .num { display: block; padding-right: 24px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .lvcard .emo { font-size: 1.8rem; display: block; margin: 4px 0; }
+  .lvcard b { display: block; font-size: 1rem; line-height: 1.25; }
+  .lvcard small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 4px; line-height: 1.35; }
+  .lvcard .st { position: absolute; top: 12px; right: 12px; font-size: 1.1rem; }
+  .lvcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .lvcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+  .lvcard.done { border-color: rgba(22,163,74,0.45); background: linear-gradient(180deg, #fff, #f0fdf4); }
+  .lvcard.next { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(245,158,11,0.18); }
+  .shelf { margin-top: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .shelf h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+  .bdg-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .bdg { display: flex; gap: 10px; align-items: center; padding: 9px 11px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 0.82rem; }
+  .bdg .i { font-size: 1.6rem; filter: grayscale(1); opacity: 0.35; }
+  .bdg b { display: block; font-size: 0.9rem; }
+  .bdg.on { background: #fffbeb; border-color: rgba(245,158,11,0.5); }
+  .bdg.on .i { filter: none; opacity: 1; }
+  .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+  .linkbtn { background: none; border: none; color: var(--teal-dark); font-weight: 800; cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+
+  /* level screen */
+  .lvhead { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .lvhead .emo { font-size: 2.2rem; }
+  .lvhead h2 { font-size: 1.4rem; color: var(--navy); font-weight: 900; }
+  .lvhead .tag { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvhead .spacer { flex: 1; }
+  .panel { background: rgba(255,255,255,0.97); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: 0 14px 34px rgba(0,25,45,0.07); margin-bottom: 14px; }
+  .panel h3 { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .how { font-size: 0.93rem; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+  .how b { color: var(--ink); }
+  .stage-tag { display: inline-block; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; background: var(--amber-soft); color: #92400e; padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; }
+  .btn { border: none; border-radius: 12px; padding: 11px 18px; font-weight: 800; font-size: 0.93rem; cursor: pointer; transition: transform .2s ease; }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(135deg, #00b8b0, #0392a2); box-shadow: 0 8px 20px rgba(0,184,176,0.28); }
+  .btn.gold { color: #422006; background: linear-gradient(135deg, #fcd34d, #f59e0b); box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+  .btn.ghost { background: #fff; color: var(--navy); border: 1px solid rgba(5,43,65,0.2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .msg { font-weight: 750; font-size: 0.92rem; text-align: center; min-height: 1.3em; margin-top: 10px; }
+  .msg.ok { color: var(--green); } .msg.no { color: var(--red); } .msg.info { color: var(--amber); }
+  .shake { animation: shake .4s; }
+  @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+  /* sort engine */
+  .sg-tray { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; min-height: 54px; padding: 10px; border-radius: 14px; background: #fff; border: 1px dashed var(--line); }
+  .sg-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.86rem; padding: 6px; }
+  .sg-card { background: #fff; border: 2px solid rgba(5,43,65,0.16); border-radius: 12px; padding: 9px 11px; cursor: grab; user-select: none; touch-action: none; font-size: 0.88rem; line-height: 1.35; font-weight: 700; box-shadow: 0 3px 8px rgba(0,25,45,0.06); }
+  .sg-card small { display: block; font-weight: 500; color: var(--muted); font-size: 0.76rem; }
+  .sg-card.selected { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .sg-card.dragging { cursor: grabbing; box-shadow: 0 14px 28px rgba(0,0,0,0.22); }
+  .sg-card.correct { border-color: var(--green); background: var(--green-soft); }
+  .sg-card.incorrect { border-color: var(--red); background: var(--red-soft); }
+  .sg-card .fb { display: none; margin-top: 4px; font-size: 0.74rem; font-weight: 700; color: #7f1d1d; }
+  .sg-card.incorrect .fb { display: block; }
+  .sg-card.correct .fb.alt { display: block; color: var(--teal-dark); }
+  .sg-zones { display: grid; gap: 10px; margin-top: 12px; }
+  .sg-zones.z2 { grid-template-columns: repeat(2, 1fr); } .sg-zones.z3 { grid-template-columns: repeat(3, 1fr); } .sg-zones.z4 { grid-template-columns: repeat(4, 1fr); }
+  .sg-zone { border-radius: 16px; padding: 10px; min-height: 130px; border: 3px dashed #94a3b8; background: rgba(255,255,255,0.92); cursor: pointer; }
+  .sg-zone.hover { background: #f0fbfa; }
+  .sg-zone h4 { font-size: 0.95rem; font-weight: 900; margin-bottom: 2px; }
+  .sg-zone .zsub { font-size: 0.74rem; color: var(--muted); margin-bottom: 6px; line-height: 1.35; }
+  .sg-zone .zc { display: grid; gap: 6px; min-height: 40px; }
+  .zc1 { border-color: var(--c1); } .zc1 h4 { color: var(--c1); }
+  .zc2 { border-color: var(--c2); } .zc2 h4 { color: var(--c2); }
+  .zc3 { border-color: var(--c3); } .zc3 h4 { color: var(--c3); }
+  .zc4 { border-color: var(--c4); } .zc4 h4 { color: var(--c4); }
+  .zg { border-color: var(--green); } .zg h4 { color: var(--green); }
+  .zr { border-color: var(--red); } .zr h4 { color: var(--red); }
+
+  /* choices / mcq */
+  .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 8px 0; }
+  .choice { text-align: left; padding: 11px 12px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+  .choice:hover:not(:disabled) { border-color: var(--teal); }
+  .choice.right { border-color: var(--green); background: var(--green-soft); }
+  .choice.wrong { border-color: var(--red); background: var(--red-soft); }
+  .choice.sel { border-color: var(--navy); background: #e8f0f7; }
+  .choice:disabled { cursor: default; }
+  .fbk { display: none; margin-top: 8px; padding: 10px 12px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+  .fbk.show { display: block; } .fbk.good { background: var(--green-soft); border-left: 5px solid var(--green); } .fbk.bad { background: var(--red-soft); border-left: 5px solid var(--red); }
+  .q { padding: 14px; border-radius: 14px; background: #f8fbfd; border: 1px solid var(--line); margin-bottom: 10px; }
+  .q h4 { font-size: 0.98rem; font-weight: 850; line-height: 1.4; }
+
+  /* order */
+  .ord-pool, .ord-chain { display: grid; gap: 7px; }
+  .ord-chain { counter-reset: s; min-height: 56px; padding: 10px; border-radius: 14px; border: 2px dashed #fcd34d; background: #fffdf5; margin-top: 10px; }
+  .ord-item { padding: 10px 12px; border-radius: 11px; background: #fff; border: 2px solid rgba(5,43,65,0.16); cursor: pointer; font-size: 0.9rem; font-weight: 700; line-height: 1.4; text-align: left; color: var(--ink); }
+  .ord-chain .ord-item { border-color: var(--gold); position: relative; padding-left: 42px; }
+  .ord-chain .ord-item::before { counter-increment: s; content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #422006; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .ord-chain .ord-item.right { border-color: var(--green); background: var(--green-soft); }
+  .ord-chain .ord-item.wrong { border-color: var(--red); background: var(--red-soft); }
+  .ord-empty { color: var(--muted); font-size: 0.85rem; text-align: center; }
+  .arrow { text-align: center; color: var(--gold); font-weight: 900; line-height: 0.7; }
+
+  /* table */
+  table.data { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 0.92rem; margin: 6px 0 10px; }
+  table.data th, table.data td { padding: 9px 10px; border-bottom: 1px solid rgba(5,43,65,0.08); text-align: center; }
+  table.data th { background: #f1f5f9; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  table.data td:first-child { font-weight: 900; }
+  .cf-graph { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .cf-graph svg { display: block; width: 100%; height: auto; }
+  .cf-line { stroke-dasharray: 100 100; stroke-dashoffset: 100; transition: stroke-dashoffset 2.4s ease; }
+  .cf-graph.go .cf-line { stroke-dashoffset: 0; }
+  .cf-mark { opacity: 0; transition: opacity .6s ease; }
+  .cf-graph.go .cf-mark { opacity: 1; transition-delay: 2.4s; }
+
+  /* escape room locks */
+  .locks { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .lock { border-radius: 16px; padding: 14px; background: #fff; border: 2px solid var(--line); }
+  .lock .lh { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .lock .lh .pad { font-size: 1.6rem; }
+  .lock .lh b { font-size: 1rem; }
+  .lock .lh small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .lock.open { border-color: var(--green); background: var(--green-soft); }
+  .door { text-align: center; font-size: 3rem; margin-top: 10px; transition: transform .6s ease; }
+
+  /* yes/no flash */
+  .flash { text-align: center; padding: 20px; border-radius: 18px; background: linear-gradient(135deg, #0f3a5c, #155e75); color: #fff; }
+  .flash .card { font-size: 1.4rem; font-weight: 900; margin: 10px 0 16px; min-height: 2.2em; display: flex; align-items: center; justify-content: center; }
+  .flash .count { font-size: 0.8rem; opacity: 0.8; font-weight: 700; }
+  .flash .yn { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .flash .yn button { min-width: 140px; padding: 14px 18px; border-radius: 14px; border: none; font-weight: 900; font-size: 1rem; cursor: pointer; }
+  .flash .y { background: #4ade80; color: #052e16; } .flash .n { background: #fca5a5; color: #450a0a; }
+  .flash .fb2 { min-height: 1.5em; margin-top: 12px; font-weight: 700; font-size: 0.92rem; }
+  .flash .timer { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .tbar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; margin: 6px auto 0; max-width: 420px; }
+  .tbar div { height: 100%; background: var(--gold); transition: width 1s linear; }
+  kbd { background: rgba(255,255,255,0.2); border-radius: 4px; padding: 0 5px; font-size: 0.78rem; }
+
+  /* boss */
+  .arena { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 12px; align-items: stretch; }
+  .thinker { border-radius: 18px; padding: 14px; text-align: center; color: #fff; cursor: pointer; border: 3px solid transparent; transition: transform .2s; }
+  .thinker:hover { transform: translateY(-2px); }
+  .thinker.drop { border-color: var(--gold); }
+  .thinker.hit { animation: hit .5s; }
+  @keyframes hit { 30% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(74,222,128,0.6); } }
+  .thinker .face { font-size: 3rem; }
+  .thinker b { display: block; font-size: 1.1rem; }
+  .thinker small { display: block; opacity: 0.85; font-size: 0.78rem; line-height: 1.35; margin-top: 4px; }
+  .th-m { background: linear-gradient(160deg, #7f1d1d, #b91c1c); } .th-b { background: linear-gradient(160deg, #14532d, #15803d); }
+  .centre { display: flex; flex-direction: column; gap: 10px; align-items: stretch; justify-content: center; }
+  .hp { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: 800; }
+  .hpbar { height: 12px; border-radius: 99px; background: #e2e8f0; overflow: hidden; }
+  .hpbar div { height: 100%; background: linear-gradient(90deg, #ef4444, #f97316); transition: width .4s; }
+  .stmt { background: #fff; border: 3px solid var(--navy); border-radius: 16px; padding: 16px; font-weight: 850; font-size: 1.05rem; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; user-select: none; line-height: 1.35; }
+  .stmt.dragging { position: fixed; z-index: 1000; box-shadow: 0 16px 32px rgba(0,0,0,0.3); cursor: grabbing; }
+  .throws { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .throws button { padding: 10px; border-radius: 12px; border: none; color: #fff; font-weight: 900; cursor: pointer; font-size: 0.86rem; }
+  .throws .tm { background: #b91c1c; } .throws .tb { background: #15803d; }
+  .hearts { font-size: 1.2rem; letter-spacing: 3px; }
+
+  /* energy */
+  .country { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #0f3a5c, #134e4a); color: #fff; margin-bottom: 12px; }
+  .country b { font-size: 1.1rem; } .country p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; margin-top: 4px; }
+  .egrid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .srcs { display: grid; gap: 6px; }
+  .src { display: grid; grid-template-columns: 32px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+  .src .ic { font-size: 1.4rem; text-align: center; }
+  .src .nm { font-weight: 800; font-size: 0.9rem; }
+  .src .nm small { display: block; font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+  .src .sb { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+  .src .sb div { height: 100%; transition: width .3s; }
+  .src .ctl { display: flex; align-items: center; gap: 6px; }
+  .src .ctl button { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); background: #f8fafc; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
+  .src .ctl button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .src .ctl span { min-width: 40px; text-align: center; font-weight: 900; }
+  .src.off { opacity: 0.55; }
+  .meters { display: grid; gap: 8px; }
+  .meter { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  .meter .k { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 800; }
+  .meter .b { height: 10px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin-top: 5px; }
+  .meter .b div { height: 100%; transition: width .4s; border-radius: 99px; }
+  .bigscore { text-align: center; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid var(--gold); }
+  .bigscore .v { font-size: 2.4rem; font-weight: 900; color: #78350f; }
+  .bigscore small { display: block; font-weight: 700; color: #92400e; }
+  .total { font-weight: 900; text-align: center; padding: 8px; border-radius: 10px; }
+  .total.ok { background: var(--green-soft); color: var(--green); } .total.no { background: var(--amber-soft); color: #92400e; }
+  .warns { font-size: 0.82rem; line-height: 1.5; color: #92400e; }
+
+  /* carbon */
+  .crow { margin-bottom: 10px; }
+  .crow h4 { font-size: 0.9rem; font-weight: 900; margin-bottom: 6px; }
+  .copts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .copt { text-align: left; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: #fff; cursor: pointer; font-size: 0.86rem; font-weight: 750; color: var(--ink); }
+  .copt small { display: block; font-weight: 900; color: var(--muted); margin-top: 3px; }
+  .copt.sel { border-color: var(--navy); background: #e8f0f7; }
+  .copt.sel small { color: var(--navy); }
+  .calc { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; font-weight: 800; }
+  .calc input { width: 140px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 800; text-align: center; }
+
+  /* exam arena */
+  .exq { border-radius: 16px; padding: 14px; background: linear-gradient(135deg, #1e1b4b, #4c1d95); color: #fff; margin-bottom: 12px; }
+  .exq .mk { font-size: 0.74rem; font-weight: 900; opacity: 0.8; letter-spacing: 0.05em; text-transform: uppercase; }
+  .exq h3 { color: #fff; font-size: 1.15rem; margin-top: 4px; }
+  .pee { display: grid; gap: 8px; }
+  .slotbox { border-radius: 14px; border: 3px dashed #94a3b8; padding: 10px 12px; background: #fff; cursor: pointer; min-height: 64px; }
+  .slotbox .sl { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+  .slotbox .sv { font-size: 0.9rem; font-weight: 650; margin-top: 3px; line-height: 1.45; color: var(--muted); }
+  .slotbox.filled .sv { color: var(--ink); }
+  .slotbox.p { border-color: #2563eb; } .slotbox.p .sl { color: #2563eb; }
+  .slotbox.e { border-color: #d97706; } .slotbox.e .sl { color: #d97706; }
+  .slotbox.x { border-color: #7c3aed; } .slotbox.x .sl { color: #7c3aed; }
+  .slotbox.j { border-color: #16a34a; } .slotbox.j .sl { color: #16a34a; }
+  .slotbox.right { border-style: solid; background: var(--green-soft); }
+  .slotbox.wrong { border-style: solid; background: var(--red-soft); }
+  .slotbox.target { box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .cards { display: grid; gap: 7px; margin-bottom: 12px; }
+  .pcard { text-align: left; padding: 10px 12px; border-radius: 12px; border: 2px solid rgba(5,43,65,0.16); background: #fff; cursor: pointer; font-size: 0.88rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .pcard.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); }
+  .pcard.used { opacity: 0.3; }
+  .boss { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .boss .face { font-size: 2.6rem; }
+  .boss .hpbar { flex: 1; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; background: rgba(3,20,36,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal.on { display: flex; }
+  .mbox { background: #fff; border-radius: 20px; max-width: 520px; width: 100%; padding: 22px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.4); animation: pop .4s ease; max-height: calc(100vh - 32px); overflow-y: auto; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: none; opacity: 1; } }
+  .mbox .big { font-size: 3rem; }
+  .mbox h2 { color: var(--navy); font-size: 1.4rem; margin: 6px 0; }
+  .mbox .stats { display: flex; gap: 10px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+  .mbox .stats div { background: #f1f5f9; border-radius: 12px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .mbox .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .newbadge { margin-top: 8px; padding: 10px; border-radius: 12px; background: #fffbeb; border: 2px solid var(--gold); font-weight: 800; }
+  canvas#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+
+  @media (max-width: 900px) {
+    .sg-zones.z4 { grid-template-columns: 1fr 1fr; } .sg-zones.z3 { grid-template-columns: 1fr; }
+    .egrid { grid-template-columns: 1fr; }
+    .arena { grid-template-columns: 1fr 1fr; } .arena .centre { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 560px) {
+    main { padding: 0 10px; } .panel { padding: 14px; }
+    .hud-inner { grid-template-columns: auto 1fr auto; } .hud .badges { display: none; }
+    .sg-zones.z2 { grid-template-columns: 1fr; } .sg-zones.z4 { grid-template-columns: 1fr 1fr; }
+    .copts { grid-template-columns: 1fr; }
+    .locks { grid-template-columns: 1fr; }
+    .flash .card { font-size: 1.15rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* label-the-diagram */
+  .ld { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .ld-fig, .dg-fig { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px; }
+  .ld-fig svg, .dg-fig svg { width: 100%; height: auto; display: block; }
+  .ld-fig figcaption, .dg-fig figcaption { font-size: 0.8rem; color: var(--muted); padding: 6px 4px 2px; line-height: 1.4; }
+  .ld-pin { cursor: pointer; }
+  .ld-pin circle { fill: #fff; stroke: var(--navy); stroke-width: 3; }
+  .ld-pin text { font-size: 15px; font-weight: 900; fill: var(--navy); pointer-events: none; }
+  .ld-pin.filled circle { fill: #fef3c7; stroke: var(--gold); }
+  .ld-pin.right circle { fill: var(--green-soft); stroke: var(--green); } .ld-pin.wrong circle { fill: var(--red-soft); stroke: var(--red); }
+  .ld-pin:focus-visible circle { stroke: var(--gold); stroke-width: 5; }
+  .ld-h { font-size: 0.74rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); margin: 4px 0 6px; }
+  .ld-pool { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 40px; }
+  .ld-lab { border: 2px solid var(--line); background: #fff; border-radius: 10px; padding: 7px 9px; font-size: 0.82rem; font-weight: 700; color: var(--ink); cursor: pointer; text-align: left; line-height: 1.3; }
+  .ld-lab:hover { border-color: var(--teal); } .ld-lab.sel { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,0.25); background: #f0fbfa; }
+  .ld-done { font-size: 0.85rem; color: var(--muted); }
+  .ld-slots { list-style: none; display: grid; gap: 6px; padding: 0; margin: 0; }
+  .ld-slot { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; border: 2px dashed #94a3b8; background: #fff; border-radius: 10px; padding: 6px 8px; cursor: pointer; font-size: 0.82rem; color: var(--muted); line-height: 1.3; font-family: inherit; }
+  .ld-slot b { flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 0.85rem; }
+  .ld-slot.filled { border-style: solid; border-color: var(--gold); color: var(--ink); font-weight: 700; }
+  .ld-slot.right { border-color: var(--green); background: var(--green-soft); } .ld-slot.wrong { border-color: var(--red); background: var(--red-soft); }
+  /* data skills */
+  .dg-fig { margin-bottom: 10px; }
+  .dg-num { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .dg-num input { width: 140px; padding: 9px 11px; border-radius: 10px; border: 2px solid var(--line); font-size: 1rem; font-weight: 700; font-family: inherit; }
+  .dg-num input.right { border-color: var(--green); background: var(--green-soft); } .dg-num input.wrong { border-color: var(--red); background: var(--red-soft); }
+  .dg-unit { font-weight: 700; color: var(--muted); }
+  .dg-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .dg-table th, .dg-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: center; } .dg-table td:first-child, .dg-table th:first-child { text-align: left; }
+  .dg-table th { background: #f1f5f9; }
+  /* checkpoint */
+  .lvcard.gate { border-color: #a78bfa; background: #faf5ff; }
+  .panel.gate { border: 2px solid #a78bfa; }
+  .gate-ins { font-size: 0.92rem; margin: 10px 0 4px; }
+  .choices.one { grid-template-columns: 1fr; }
+  .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
+  @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#igcse-rural" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Rural Quest</span></div><span></span>
+</div></div>
+
+<div class="hud" role="status" aria-live="polite">
+  <div class="hud-inner">
+    <div class="xp" id="hudXp">&#11088; 0 XP</div>
+    <div class="bar" aria-hidden="true"><div id="hudBar"></div></div>
+    <div class="lv" id="hudLv">0 / 12 levels</div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+  </div>
+</div>
+
+<main id="app"></main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mbox" id="mbox"></div></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n) { return shuffle(a).slice(0, n); }
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-igcse-rural-quest-v1';
+  var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
+  S.gate = S.gate || {}; S.gv = S.gv || {};
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+  var LEVELS = [
+    { n: 1, z: 'A', emo: '🌍', t: 'The World’s Biomes', d: 'Where biomes are found and their climate and vegetation' },
+    { n: 2, z: 'A', emo: '🎁', t: 'Ecosystem Goods and Services', d: 'Open systems, goods, and the four types of service' },
+    { n: 3, z: 'A', emo: '🌳', t: 'Exploiting the Amazon', d: 'Ranching, soya, logging, mining, HEP and their impacts' },
+    { n: 4, z: 'B', emo: '🚜', t: 'Food Production and Farming', d: 'Farming systems and how farmers modify ecosystems' },
+    { n: 5, z: 'B', emo: '🏡', t: 'Characteristics of Rural Areas', d: 'Urban, suburban, rural and three rural environments compared' },
+    { n: 6, z: 'C', emo: '🏘️', t: 'UK: Suburbanisation and Counter-urbanisation', d: 'Why people move out of cities and what changes' },
+    { n: 7, z: 'C', emo: '⛰️', t: 'UK: Tourism and Isolation', d: 'The Lake District, farm job losses and the negative multiplier effect' },
+    { n: 8, z: 'C', emo: '🧀', t: 'Diversification of Farming', d: 'New sources of farm income and how well they work' },
+    { n: 9, z: 'C', emo: '♻️', t: 'Sustainable Rural Living', d: 'Egan’s Wheel, organic farming and UK NGOs' },
+    { n: 10, z: 'D', emo: '🇹🇭', t: 'Thailand: Rural–Urban Migration', d: 'Push and pull factors and impacts on rural Isan' },
+    { n: 11, z: 'D', emo: '🐘', t: 'Thailand: Managing Rural Challenges', d: 'Government, IGOs, NGOs and local communities' },
+    { n: 12, z: 'X', emo: '👹', t: 'The Edexcel Examiner', d: 'Final boss: Point, Evidence, Explain, Conclusion' }];
+  var ZONES = { A: ['Topic 01', 'Ecosystems and biomes', '#16a34a'], B: ['Topic 02', 'Farming and rural areas', '#b45309'], C: ['Topic 03', 'Developed country (UK)', '#0284c7'], D: ['Topic 04', 'Emerging country (Thailand)', '#db2777'], X: ['Final', 'Exam', '#7c3aed'] };
+  var BADGES = [
+    { id: 'eco', i: '🌍', t: 'Biome Expert', d: 'Complete Topic 01 (Levels 1–3)', ok: function () { return [1, 2, 3].every(isDone); } },
+    { id: 'farm', i: '🚜', t: 'Farming Expert', d: 'Complete Topic 02 (Levels 4–5)', ok: function () { return [4, 5].every(isDone); } },
+    { id: 'uk', i: '🏘️', t: 'Rural Change Expert', d: 'Complete Topic 03 (Levels 6–9)', ok: function () { return [6, 7, 8, 9].every(isDone); } },
+    { id: 'thai', i: '🐘', t: 'Thailand Expert', d: 'Complete Topic 04 (Levels 10–11)', ok: function () { return [10, 11].every(isDone); } },
+    { id: 'gates', i: '🔐', t: 'Past Paper Pro', d: 'Pass all 11 past paper checkpoints', ok: function () { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].every(gatePassed); } },
+    { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the Edexcel Examiner', ok: function () { return isDone(12); } },
+    { id: 'champ', i: '🏆', t: 'Rural Champion', d: 'All 12 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
+  function isDone(n) { return !!S.done[n]; }
+  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
+
+  function paintHud() {
+    $('hudXp').textContent = '⭐ ' + S.xp + ' XP';
+    var n = LEVELS.filter(function (l) { return isDone(l.n); }).length;
+    $('hudBar').style.width = (n / LEVELS.length * 100) + '%';
+    $('hudLv').textContent = n + ' / ' + LEVELS.length + ' levels' + (n ? ' · ' + overall() + '%' : '');
+    $('hudBadges').innerHTML = BADGES.map(function (b) { return '<span class="' + (b.ok() ? '' : 'off') + '" title="' + esc(b.t) + '">' + b.i + '</span>'; }).join('');
+  }
+  function xpPop(n, el) {
+    if (!n) return;
+    var r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0 };
+    var p = document.createElement('div'); p.className = 'xp-pop'; p.textContent = '+' + n + ' XP';
+    p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+    document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1200);
+  }
+
+  /* ================= CONFETTI ================= */
+  function confetti(big) {
+    var cv = $('confetti'), ctx = cv.getContext('2d'); cv.width = innerWidth; cv.height = innerHeight;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cols = ['#00b8b0', '#f59e0b', '#ef4444', '#7c3aed', '#16a34a', '#0284c7'], P = [], N = big ? 260 : 120;
+    for (var i = 0; i < N; i++) P.push({ x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * 0.5, vx: (Math.random() - 0.5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 6, a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, c: cols[i % cols.length] });
+    var t0 = performance.now();
+    (function frame(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += p.va; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.6); ctx.restore(); });
+      if (t - t0 < (big ? 4200 : 2600)) requestAnimationFrame(frame); else ctx.clearRect(0, 0, cv.width, cv.height);
+    })(t0);
+  }
+
+  /* ================= LEVEL RUNTIME ================= */
+  var run = null; // {n, c, t, xp, bonus}
+  function score(c, t, el) { run.c += c; run.t += t; var x = c * 10; run.xp += x; xpPop(x, el); }
+
+  function showMap() {
+    run = null; closeModal();
+    var nextN = (LEVELS.filter(function (l) { return !isDone(l.n) && (unlocked(l.n) || needsGate(l.n)); })[0] || {}).n;
+    $('app').innerHTML = '<div class="hero"><span class="kicker">Edexcel IGCSE Geography \u00B7 Paper 2 \u00B7 Rural Environments</span>' +
+      '<h1>\uD83C\uDF3E Rural Quest<br>Rural Environments Revision</h1>' +
+      '<p>Work through all four topics \u2014 <b>Ecosystems and biomes</b>, <b>Farming and rural areas</b>, <b>Rural change in the UK</b> and <b>Rural change in Thailand</b> \u2014 one level per lesson, then face the <b>Edexcel Examiner</b>. <b>Each level unlocks the next.</b> After each level, answer a <b>past paper checkpoint question</b> correctly to unlock the next. Earn XP for every first-try correct answer and collect all seven badges.</p></div>' +
+      '<div class="map">' + LEVELS.map(function (l) {
+        var u = unlocked(l.n), d = isDone(l.n), a = S.acc[l.n], g = !u && needsGate(l.n);
+        return '<button type="button" style="border-top:5px solid ' + ZONES[l.z][2] + '" class="lvcard' + (d ? ' done' : '') + (g ? ' gate' : '') + (l.n === nextN ? ' next' : '') + '" data-lv="' + l.n + '"' + (g ? ' data-gate="' + (l.n - 1) + '"' : '') + (u || g ? '' : ' disabled') + ' aria-label="Level ' + l.n + ': ' + esc(l.t) + (g ? ' (pass the checkpoint question to unlock)' : u ? '' : ' (locked)') + (d ? ' (complete)' : '') + '">' +
+          '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
+      }).join('') + '</div>' +
+      '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+    paintHud();
+  }
+  $('app').addEventListener('click', function (e) {
+    var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
+    if (e.target.closest('[data-map]')) showMap();
+  });
+
+  function startLevel(n) {
+    var L = LEVELS[n - 1]; run = { n: n, c: 0, t: 0, xp: 0, bonus: 0 };
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">' + L.emo + '</span><div><div class="tag">Level ' + n + ' of ' + LEVELS.length + ' \u00B7 ' + ZONES[L.z][0] + ': ' + ZONES[L.z][1] + '</div><h2>' + esc(L.t) + '</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div><div id="lv"></div>';
+    window.scrollTo(0, 0);
+    LV[n]($('lv'));
+  }
+  function finishLevel() {
+    if (!run) return;
+    var n = run.n, first = !isDone(n), before = BADGES.filter(function (b) { return b.ok(); }).map(function (b) { return b.id; });
+    var gained = run.xp + run.bonus;
+    if (first) { S.done[n] = 1; S.acc[n] = { c: run.c, t: run.t }; }
+    else if (S.acc[n] && run.t && run.c / run.t > S.acc[n].c / S.acc[n].t) S.acc[n] = { c: run.c, t: run.t };
+    S.xp += gained; save(); paintHud();
+    var newB = BADGES.filter(function (b) { return b.ok() && before.indexOf(b.id) < 0; });
+    var pct = run.t ? Math.round(run.c / run.t * 100) : 100, last = n === LEVELS.length;
+    var allDone = LEVELS.every(function (l) { return isDone(l.n); });
+    openModal('<div class="big">' + (last ? '🏆' : pct >= 90 ? '🌟' : '✅') + '</div><h2 id="mTitle">' + (last ? 'Boss defeated!' : 'Level ' + n + ' complete!') + '</h2>' +
+      '<p>' + (pct >= 90 ? 'Outstanding — exam ready!' : pct >= 70 ? 'Great work. Review the red answers to push higher.' : 'Level cleared! Replay it later to boost your accuracy.') + '</p>' +
+      '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
+      newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
+      (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Rural Champion!' : ' — reach 90% for Rural Champion.') + '</p>' : '') +
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+    confetti(last || newB.length > 0);
+  }
+  function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
+  function closeModal() { $('modal').classList.remove('on'); }
+  $('modal').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'map') showMap(); else if (b.dataset.m === 'gate') startGate(run.n); else { closeModal(); startLevel(run.n + 1); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('modal').classList.contains('on')) showMap(); });
+
+  /* ================= GENERIC: SORT (drag or tap) ================= */
+  var SG = {}, sgId = 0;
+  function sortGame(root, cfg, onDone) {
+    var id = 'sg' + (++sgId); cfg.onDone = onDone; cfg.first = null; SG[id] = cfg;
+    root.innerHTML = '<div data-sg="' + id + '"><div class="sg-tray"></div><div class="sg-zones z' + cfg.zones.length + '">' + cfg.zones.map(function (z) {
+      return '<div class="sg-zone ' + (z.cls || '') + '" data-z="' + z.id + '" role="button" tabindex="0" aria-label="Drop zone: ' + esc(z.label) + '"><h4>' + z.label + '</h4>' + (z.sub ? '<div class="zsub">' + z.sub + '</div>' : '') + '<div class="zc"></div></div>';
+    }).join('') + '</div><div class="actions"><button type="button" class="btn primary" data-sgcheck="1">Check answers</button></div><div class="msg" aria-live="polite"></div></div>';
+    var box = root.querySelector('[data-sg]'), tray = box.querySelector('.sg-tray');
+    shuffle(cfg.cards.map(function (_, i) { return i; })).forEach(function (i) {
+      var c = cfg.cards[i], el = document.createElement('div'); el.className = 'sg-card'; el.dataset.i = i; el.tabIndex = 0; el.setAttribute('role', 'button');
+      el.innerHTML = esc(c.t) + (c.s ? '<small>' + esc(c.s) + '</small>' : '') + '<span class="fb"></span>'; tray.appendChild(el);
+    });
+    trayState(box);
+  }
+  function trayState(box) {
+    var tray = box.querySelector('.sg-tray'), e = tray.querySelector('.sg-empty'), n = tray.querySelectorAll('.sg-card').length;
+    if (!n && !e) { e = document.createElement('div'); e.className = 'sg-empty'; e.textContent = 'All placed — press Check answers.'; tray.appendChild(e); }
+    if (n && e) e.remove();
+  }
+  var sel = null;
+  function selCard(c) { if (sel) sel.classList.remove('selected'); if (sel === c) { sel = null; return; } sel = c; c.classList.add('selected'); }
+  function placeCard(c, zone) { c.classList.remove('correct', 'incorrect', 'selected'); zone.querySelector('.zc').appendChild(c); sel = null; trayState(zone.closest('[data-sg]')); }
+  document.addEventListener('click', function (e) {
+    var z = e.target.closest('.sg-zone'); if (z && !e.target.closest('.sg-card') && sel && sel.closest('[data-sg]') === z.closest('[data-sg]')) placeCard(sel, z);
+    var ck = e.target.closest('[data-sgcheck]'); if (ck) checkSort(ck.closest('[data-sg]'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var c = e.target.closest && e.target.closest('.sg-card'); if (c) { e.preventDefault(); selCard(c); return; }
+    var z = e.target.closest && e.target.closest('.sg-zone'); if (z && sel) { e.preventDefault(); placeCard(sel, z); }
+  });
+  var drag = null, ox = 0, oy = 0, sx = 0, sy = 0, moved = false, origin = null;
+  document.addEventListener('pointerdown', function (e) {
+    var c = e.target.closest ? e.target.closest('.sg-card') : null; if (!c || c.dataset.locked) return;
+    drag = c; moved = false; sx = e.clientX; sy = e.clientY; origin = c.parentNode;
+    var r = c.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top; e.preventDefault();
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    if (!moved && Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) < 6) return;
+    if (!moved) { moved = true; var r = drag.getBoundingClientRect(); drag.style.width = r.width + 'px'; drag.style.position = 'fixed'; drag.style.zIndex = 1000; drag.classList.add('dragging'); }
+    drag.style.left = (e.clientX - ox) + 'px'; drag.style.top = (e.clientY - oy) + 'px';
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    drag.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); drag.style.pointerEvents = '';
+    var z = t && t.closest ? t.closest('.sg-zone') : null; if (z) z.classList.add('hover');
+    if (e.clientY < 70) window.scrollBy(0, -14); else if (e.clientY > window.innerHeight - 50) window.scrollBy(0, 14);
+  });
+  function endDrag(e) {
+    if (!drag) return; var c = drag; drag = null;
+    document.querySelectorAll('.sg-zone.hover').forEach(function (z) { z.classList.remove('hover'); });
+    if (!moved) { selCard(c); return; }
+    c.classList.remove('dragging'); c.style.position = ''; c.style.left = ''; c.style.top = ''; c.style.zIndex = ''; c.style.width = '';
+    c.style.pointerEvents = 'none'; var t = document.elementFromPoint(e.clientX, e.clientY); c.style.pointerEvents = '';
+    var home = origin.closest('[data-sg]'), z = t && t.closest ? t.closest('.sg-zone') : null;
+    if (z && z.closest('[data-sg]') === home) placeCard(c, z);
+    else if (t && t.closest && t.closest('.sg-tray') && t.closest('[data-sg]') === home) { c.classList.remove('correct', 'incorrect'); home.querySelector('.sg-tray').appendChild(c); trayState(home); }
+    else origin.appendChild(c);
+  }
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+  function checkSort(box) {
+    var cfg = SG[box.dataset.sg], right = 0, total = cfg.cards.length, m = box.querySelector('.msg');
+    var left = box.querySelectorAll('.sg-tray .sg-card').length;
+    if (left) { m.className = 'msg info'; m.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to place.'; return; }
+    box.querySelectorAll('.sg-zone').forEach(function (z) {
+      z.querySelectorAll('.sg-card').forEach(function (el) {
+        var c = cfg.cards[+el.dataset.i], ok = c.a.indexOf(z.dataset.z) > -1, fb = el.querySelector('.fb');
+        el.classList.toggle('correct', ok); el.classList.toggle('incorrect', !ok);
+        fb.className = 'fb' + (ok && c.alt ? ' alt' : '');
+        fb.textContent = ok ? (c.alt ? '✔ ' + c.alt : '') : '✖ ' + c.why;
+        if (ok) right++;
+      });
+    });
+    if (cfg.first === null) { cfg.first = right; score(right, total, box.querySelector('[data-sgcheck]')); }
+    if (right === total) {
+      m.className = 'msg ok'; m.textContent = '✅ All ' + total + ' correct!';
+      box.querySelector('[data-sgcheck]').disabled = true;
+      box.querySelectorAll('.sg-card').forEach(function (el) { el.dataset.locked = 1; });
+      setTimeout(function () { cfg.onDone(); }, 700);
+    } else { m.className = 'msg no'; m.textContent = right + '/' + total + ' correct. Read the clues on the red cards, move them and check again.'; }
+  }
+
+  /* ================= GENERIC: ORDER (tap in sequence) ================= */
+  function orderGame(root, items, labelEmpty, onDone) {
+    var order = [], pool = shuffle(items.map(function (_, i) { return i; })), first = true, done = false;
+    root.innerHTML = '<div class="ord-pool"></div><div class="ord-chain"></div><div class="actions"><button type="button" class="btn primary">Check order</button></div><div class="msg" aria-live="polite"></div>';
+    var P = root.querySelector('.ord-pool'), C = root.querySelector('.ord-chain'), B = root.querySelector('.btn'), M = root.querySelector('.msg');
+    function paint(checked) {
+      P.innerHTML = pool.filter(function (i) { return order.indexOf(i) < 0; }).map(function (i) { return '<button type="button" class="ord-item" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('');
+      C.innerHTML = order.length ? order.map(function (i, k) { return (k ? '<div class="arrow" aria-hidden="true">▼</div>' : '') + '<button type="button" class="ord-item' + (checked ? (i === k ? ' right' : ' wrong') : '') + '" data-i="' + i + '">' + esc(items[i]) + '</button>'; }).join('') : '<div class="ord-empty">' + labelEmpty + '</div>';
+    }
+    P.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.push(+b.dataset.i); paint(); M.textContent = ''; });
+    C.addEventListener('click', function (e) { var b = e.target.closest('.ord-item'); if (!b || done) return; order.splice(order.indexOf(+b.dataset.i), 1); paint(); });
+    B.addEventListener('click', function () {
+      if (order.length < items.length) { M.className = 'msg info'; M.textContent = 'Add all ' + items.length + ' first.'; return; }
+      var right = order.filter(function (i, k) { return i === k; }).length; paint(true);
+      if (first) { first = false; score(right, items.length, B); }
+      if (right === items.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Correct order!'; setTimeout(onDone, 700); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + items.length + ' in the right place. Tap the red ones to take them out and try again.'; }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: MCQ set ================= */
+  function mcq(root, qs, onDone) {
+    var answered = 0;
+    root.innerHTML = qs.map(function (q, i) {
+      var opts = q.noShuffle ? q.o.map(function (_, j) { return j; }) : shuffle(q.o.map(function (_, j) { return j; }));
+      return '<div class="q" data-q="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '">' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+    }).join('');
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice'); if (!b || b.disabled) return;
+      var box = b.closest('[data-q]'), q = qs[+box.dataset.q], j = +b.dataset.j, ok = j === q.c;
+      box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      var f = box.querySelector('.fbk'); f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.textContent = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); answered++;
+      if (answered === qs.length) setTimeout(onDone, 900);
+    });
+  }
+  function stages(root, list) {
+    // list: [{tag, title, how, build(el, next)}]
+    if (run && EXTRA[run.n]) { var at = EXTRA_AT[run.n] != null ? EXTRA_AT[run.n] : list.length - 1; list = list.slice(0, at).concat(EXTRA[run.n], list.slice(at)); }
+    var i = 0;
+    function show() {
+      var s = list[i], el;
+      var p = document.createElement('div'); p.className = 'panel';
+      p.innerHTML = '<span class="stage-tag">Part ' + (i + 1) + ' of ' + list.length + '</span><h3>' + s.title + '</h3>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+      root.appendChild(p); el = p.querySelector('.sb');
+      if (i > 0) p.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      s.build(el, function () { if (!document.body.contains(root) || !run) return; i++; if (i < list.length) show(); else finishLevel(); });
+    }
+    show();
+  }
+
+  /* ================= GENERIC: FLASH ROUND (binary, optional timer) ================= */
+  // cfg: { items:[{t, a:true|false, why}], yes:'label', no:'label', ky:'y', kn:'n', timer:0|seconds }
+  function flash(el, cfg, next) {
+    var deck = shuffle(cfg.items), i = 0, T = cfg.timer || 0, left = T, timer = null, over = false, right = 0, busy = false;
+    el.innerHTML = '<div class="flash">' + (T ? '<div class="timer" id="fTm">' + T + 's</div><div class="tbar"><div id="fTb" style="width:100%"></div></div>' : '') +
+      '<div class="count" id="fCount" style="margin-top:8px"></div><div class="card" id="fCard" aria-live="polite"></div>' +
+      '<div class="yn"><button type="button" class="y" data-a="1">' + cfg.yes + ' (' + cfg.ky.toUpperCase() + ')</button><button type="button" class="n" data-a="0">' + cfg.no + ' (' + cfg.kn.toUpperCase() + ')</button></div>' +
+      '<div class="fb2" id="fFb" aria-live="polite"></div>' + (T ? '<div class="actions" id="fStart"><button type="button" class="btn gold" id="fGo">▶ Start the clock</button></div>' : '') + '</div>';
+    var yn = el.querySelector('.yn');
+    function show() { $('fCount').textContent = (i + 1) + ' / ' + deck.length + (T ? ' · ' + right + ' correct' : ''); $('fCard').textContent = deck[i].t; busy = false; }
+    function end() {
+      over = true; clearInterval(timer); document.removeEventListener('keydown', key);
+      var missed = deck.length - i; if (missed > 0) score(0, missed);
+      var bonus = T && right === deck.length ? left * 3 : 0; run.bonus += bonus;
+      yn.style.visibility = 'hidden';
+      $('fCard').textContent = right + ' / ' + deck.length + ' correct';
+      if (T) $('fFb').textContent = bonus ? '⚡ Time bonus: ' + left + 's left × 3 = +' + bonus + ' XP!' : (missed ? '⏰ Time up! ' : '') + 'The time bonus needs a perfect round.';
+      setTimeout(next, 1800);
+    }
+    function answer(a) {
+      if (over || busy || (T && !timer)) return;
+      var it = deck[i], ok = it.a === a; if (ok) right++; score(ok ? 1 : 0, 1, $('fCard'));
+      $('fFb').textContent = (ok ? '✔ ' : '✖ ') + it.why;
+      i++;
+      if (T) { if (i >= deck.length) end(); else show(); }
+      else { busy = true; setTimeout(function () { if (!$('fCard')) return; if (i >= deck.length) end(); else { show(); $('fFb').textContent = ''; } }, 1500); }
+    }
+    function key(e) { if (!$('fCard')) { document.removeEventListener('keydown', key); return; } var k = e.key.toLowerCase(); if (k === cfg.ky) answer(true); if (k === cfg.kn) answer(false); }
+    yn.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) answer(b.dataset.a === '1'); });
+    function begin() { yn.style.visibility = 'visible'; show(); document.addEventListener('keydown', key); }
+    if (T) {
+      yn.style.visibility = 'hidden';
+      $('fGo').addEventListener('click', function () {
+        $('fStart').remove(); begin(); yn.querySelector('.y').focus();
+        timer = setInterval(function () { if (!$('fTm')) { clearInterval(timer); return; } left--; $('fTm').textContent = left + 's'; $('fTb').style.width = (left / T * 100) + '%'; if (left <= 0) end(); }, 1000);
+      });
+    } else begin();
+  }
+
+  /* ================= GENERIC: MATCH (each card to one of several choices, dropdown-free) ================= */
+  // Uses sortGame with one zone per answer; kept as a thin wrapper for readability.
+  function zonesFrom(list, cls) { return list.map(function (z, i) { return { id: z[0], label: z[1], sub: z[2] || '', cls: cls ? cls[i % cls.length] : 'zc' + ((i % 4) + 1) }; }); }
+
+  /* ================= LEVELS ================= */
+  var LV = {};
+
+  /* L1 — Biomes */
+  LV[1] = function (root) {
+    stages(root, [
+      { title: '📖 Key terms', how: 'Match each definition to the right key term.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['bm', '🌍 Biome'], ['bs', '🌐 Biosphere'], ['ec', '🔄 Ecosystem'], ['bd', '🦋 Biodiversity']], ['zc1', 'zc2', 'zc3', 'zc4']), cards: [
+          { t: 'A plant and animal community covering a large area of the Earth’s surface', a: ['bm'], why: 'For example tropical rainforest or desert.' },
+          { t: 'The parts of the Earth occupied by living organisms — land, water and air', a: ['bs'], why: 'The biosphere is the whole living layer of the planet.' },
+          { t: 'A community of plants and animals interacting with each other and their physical environment', a: ['ec'], why: 'Ecosystems can be any size, from a pond to a forest.' },
+          { t: 'The number and variety of species in an area', a: ['bd'], why: 'Rainforests have the highest biodiversity on Earth.' }] }, next); } },
+      { title: '🏷️ Biomes by latitude', how: 'Biomes form broad bands that roughly follow lines of <b>latitude</b>, because latitude controls how much energy from the Sun an area receives. Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_LAT, pins: PINS_LAT, cap: 'A simplified guide to biome belts in the northern hemisphere.', labels: [
+          { t: 'Tundra', pin: 1 },
+          { t: 'Boreal forest (taiga)', pin: 2 },
+          { t: 'Temperate deciduous forest and temperate grassland', pin: 3 },
+          { t: 'Hot desert', pin: 4 },
+          { t: 'Savanna (tropical grassland)', pin: 5 },
+          { t: 'Tropical rainforest', pin: 6 },
+          { t: 'Salt marsh', pin: null }] }, next); } },
+      { title: '🌡️ Which biome?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['tr', '🌴 Tropical rainforest'], ['de', '🏜️ Hot desert'], ['sa', '🦒 Savanna'], ['tu', '❄️ Tundra']], ['zg', 'zc4', 'zc3', 'zc2']), cards: [
+          { t: 'Hot all year (25–28°C) with over 200 cm of rain', a: ['tr'], why: 'Rain falls most days.' },
+          { t: 'Emergent, canopy, understorey and shrub layers; buttress roots', a: ['tr'], why: 'Highest biodiversity on Earth.' },
+          { t: 'Under 25 cm of rain a year, very hot days and cold nights', a: ['de'], why: 'Clear skies let heat escape at night.' },
+          { t: 'Cacti with deep or wide roots and waxy skins', a: ['de'], why: 'Adapted to drought.' },
+          { t: 'Tall grasses, scattered acacia and baobab trees, a long dry season', a: ['sa'], why: 'For example the Serengeti in East Africa.' },
+          { t: 'Large herds of grazing animals', a: ['sa'], why: 'Grasslands support grazers.' },
+          { t: 'Below 0°C most of the year, with permafrost', a: ['tu'], why: 'Ground stays frozen all year.' },
+          { t: 'Mosses, lichens and low shrubs; no trees', a: ['tu'], why: 'The growing season is too short for trees.' }] }, next); } },
+      { title: '📊 Data skills: rainfall in four biomes', how: 'Use typical annual rainfall figures.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Typical annual rainfall', bars: [['Rainforest', 250, '#047857'], ['Savanna', 100, '#a3e635'], ['Temperate forest', 110, '#65a30d'], ['Hot desert', 15, '#f59e0b'], ['Tundra', 20, '#93c5fd']], y0: 0, y1: 300, ystep: 50, minor: 10, values: true, xlab: 'Biome', ylab: 'Rainfall (cm per year)' }),
+          cap: 'Typical values; they vary from place to place within each biome.', qs: [
+          { type: 'num', q: 'How many times more rain does the rainforest receive than the hot desert?', ans: 16.7, tol: 0.1, unit: 'times (1 d.p.)', f: '250 ÷ 15 = <b>16.7</b> times.' },
+          { type: 'num', q: 'What is the difference in rainfall between the savanna and the tundra?', ans: 80, tol: 0, unit: 'cm', f: '100 − 20 = <b>80 cm</b>.' },
+          { type: 'mc', q: 'The tundra gets about as little precipitation as the desert. Why is it NOT a desert biome?', o: ['It is very cold, so little water evaporates and the ground is frozen, not hot and dry', 'It has very high temperatures all year and dense forests with lots of tall evergreen trees', 'It is close to the Equator, where hot air rises and makes heavy rain every day', 'It has the highest biodiversity of any biome, with millions of different species'], c: 0, f: 'Temperature matters as much as rainfall in deciding the biome.' }] }, next); } },
+      { title: '🧠 Biome check', build: function (el, next) { mcq(el, [
+        { q: 'Why are hot deserts found at about 15–30° north and south of the Equator?', o: ['Dry, sinking air at these latitudes stops clouds forming, so there is little rain', 'They are closest to the Sun, so they always get the most rain of any latitude on Earth', 'Cold ocean currents always flow there, which make the air very wet and cloudy', 'Mountains at these latitudes are so high that they block all of the sunlight'], c: 0, f: 'High pressure and sinking air give clear skies.' },
+        { q: 'Apart from latitude, which factor changes the pattern of biomes locally?', o: ['Altitude — mountains are colder, so the vegetation changes with height', 'Time zone — places to the east always have a different biome to the west', 'Population — places with more people always have more rainforest growing', 'Language — biomes change wherever the language spoken in a country changes'], c: 0, f: 'Altitude, distance from the sea, ocean currents and winds all matter.' }], next); } }]);
+  };
+
+  /* L2 — Goods and services */
+  LV[2] = function (root) {
+    stages(root, [
+      { title: '🔄 Inputs, flows or outputs?', how: 'An ecosystem is an <b>open system</b>: energy and matter flow in and out.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['i', '⬇️ Input'], ['f', '🔁 Flow or transfer'], ['o', '⬆️ Output']], ['zc2', 'zg', 'zc4']), cards: [
+          { t: 'Solar radiation', a: ['i'], why: 'Energy enters the system.' },
+          { t: 'Rainfall', a: ['i'], why: 'Water enters the system.' },
+          { t: 'Minerals from weathered rock', a: ['i'], why: 'Nutrients enter the soil.' },
+          { t: 'Plants photosynthesise and are eaten by consumers', a: ['f'], why: 'Energy passes along food chains.' },
+          { t: 'Decomposers return nutrients to the soil', a: ['f'], why: 'The nutrient cycle.' },
+          { t: 'Heat lost to the atmosphere', a: ['o'], why: 'Energy leaves the system.' },
+          { t: 'Eroded soil and run-off', a: ['o'], why: 'Matter leaves the system.' }] }, next); } },
+      { title: '🎁 Good or service?', how: '<b>Goods</b> = material products taken directly from an ecosystem. <b>Services</b> = the long-term benefits people gain from ecosystems.',
+        build: function (el, next) { flash(el, { yes: '📦 Good', no: '🛎️ Service', ky: 'g', kn: 's', items: [
+          { t: 'Timber for building houses', a: true, why: 'A material product.' },
+          { t: 'Fuelwood for cooking', a: true, why: 'A cheap energy source in many LICs.' },
+          { t: 'Nuts and fruit collected from the forest', a: true, why: 'Food is a good.' },
+          { t: 'Plants used to make medicines', a: true, why: 'Many drugs come from rainforest plants.' },
+          { t: 'Absorbing carbon dioxide and regulating the climate', a: false, why: 'A regulating service.' },
+          { t: 'Recycling water through the water cycle', a: false, why: 'A supporting service.' },
+          { t: 'Tourists hiking and photographing wildlife', a: false, why: 'A cultural service.' },
+          { t: 'Mangroves protecting the coast from storm surges', a: false, why: 'Natural protection — a regulating service.' }] }, next); } },
+      { title: '🛎️ Which type of service?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '🍲 Provisioning'], ['r', '🌡️ Regulating'], ['s', '🌱 Supporting'], ['c', '🎭 Cultural']], ['zc1', 'zc2', 'zg', 'zc4']), cards: [
+          { t: 'Supplying fresh water and food', a: ['p'], why: 'Basic resources.' },
+          { t: 'Storing carbon and controlling the climate', a: ['r'], why: 'Through the carbon cycle.' },
+          { t: 'Wetlands reducing flooding downstream', a: ['r'], why: 'Natural flood control.' },
+          { t: 'Soil formation and the nutrient cycle', a: ['s'], why: 'Supports all other services.' },
+          { t: 'Safari tourism on the savanna', a: ['c'], why: 'Recreation and tourism.' },
+          { t: 'Places with spiritual meaning for indigenous people', a: ['c'], why: 'A cultural benefit.' }] }, next); } },
+      { title: '🧠 Goods and services check', build: function (el, next) { mcq(el, [
+        { q: 'Which is a good provided by a tropical forest?', o: ['Timber', 'Tourism', 'Nutrient recycling', 'Wildlife habitat'], c: 0, f: 'The others are services.' },
+        { q: 'Which ecosystem provides fish and shellfish AND protection from storm surges?', o: ['Wetlands and mangroves', 'Hot deserts and dunes', 'Tundra and permafrost', 'Boreal coniferous forest'], c: 0, f: 'Mangroves are nurseries for fish and a natural sea defence.' }], next); } }]);
+  };
+
+  /* L3 — Amazon */
+  LV[3] = function (root) {
+    stages(root, [
+      { title: '🌳 How is the Amazon exploited?', how: 'The Amazon covers about <b>5.5 million km²</b> across nine countries; about 60% is in Brazil.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ag', '🐄 Farming'], ['lg', '🪵 Logging'], ['mn', '⛏️ Mining and energy'], ['rd', '🛣️ Roads and settlement']], ['zc1', 'zc4', 'zc2', 'zc3']), cards: [
+          { t: 'Cattle ranching — the biggest cause of deforestation', a: ['ag'], why: 'Earns Brazil over US$6.9 billion a year.' },
+          { t: 'Commercial soya bean farms', a: ['ag'], why: 'Brazil is one of the world’s largest soya producers.' },
+          { t: 'Valuable hardwoods such as mahogany, much of it cut illegally', a: ['lg'], why: 'Illegal logging loses tax revenue.' },
+          { t: 'The Carajás complex, the world’s largest iron ore mine', a: ['mn'], why: 'Jobs and exports, but pollution.' },
+          { t: 'The Belo Monte dam complex flooding large areas of forest', a: ['mn'], why: 'Hydroelectric power.' },
+          { t: 'The Trans-Amazonian Highway opening up the forest', a: ['rd'], why: 'Roads bring settlers and more clearance.' }] }, next); } },
+      { title: '⚖️ Social, economic or environmental impact?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['so', '👥 Social'], ['ec', '💰 Economic'], ['en', '🌿 Environmental']], ['zc2', 'zc1', 'zg']), cards: [
+          { t: 'Indigenous people lose their traditional farming and hunting lands', a: ['so'], why: 'Loss of land, culture and livelihoods.' },
+          { t: 'Conflict and violence between land-grabbers and local communities', a: ['so'], why: 'A social impact.' },
+          { t: 'Ranching and soya earn Brazil billions of dollars in exports', a: ['ec'], why: 'An economic benefit.' },
+          { t: 'Mining provides jobs at the Carajás complex', a: ['ec'], why: 'Employment.' },
+          { t: 'Burning trees releases CO₂, adding to global warming', a: ['en'], why: 'The Amazon stores huge amounts of carbon.' },
+          { t: 'Heavy rain on bare land causes soil erosion', a: ['en'], why: 'No canopy or roots to protect the soil.' },
+          { t: 'Loss of habitats reduces biodiversity', a: ['en'], why: 'About 80% of land animals live in tropical rainforests.' }] }, next); } },
+      { title: '📈 Data skills: Brazilian Amazon deforestation', how: 'Read the line graph carefully.',
+        build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Deforestation in the Brazilian Amazon', x0: 2019, x1: 2025, xticks: [2019, 2020, 2021, 2022, 2023, 2024, 2025], y0: 0, y1: 14000, ystep: 2000, minor: 500, xlab: 'Year', ylab: 'Area cleared (km²)', yfmt: function (v) { return v.toLocaleString(); },
+            series: [{ c: '#b45309', dots: true, pts: [[2019, 10100], [2020, 10900], [2021, 13000], [2022, 11600], [2023, 9000], [2024, 6300], [2025, 5800]] }] }),
+          cap: 'Approximate annual deforestation (INPE PRODES).', qs: [
+          { type: 'num', q: 'By how many km² did deforestation fall between 2021 and 2025?', ans: 7200, tol: 0, unit: 'km²', f: '13,000 − 5,800 = <b>7,200 km²</b>.' },
+          { type: 'num', q: 'Calculate the percentage decrease from 2021 to 2025, to the nearest whole number.', ans: 55, tol: 1, unit: '%', f: '7,200 ÷ 13,000 × 100 = <b>55%</b>.' },
+          { type: 'mc', q: 'Which conclusion is best supported by the graph?', o: ['Clearance has fallen since 2021, but thousands of km² are still lost every year', 'Deforestation in the Amazon has now stopped completely and the forest is growing', 'Deforestation rose every single year from 2019 to 2025 without any decline', 'The graph proves that cattle ranching no longer happens in the Amazon at all'], c: 0, f: 'Use the data and avoid overclaiming.' }] }, next); } },
+      { title: '🛡️ Sustainable management', how: 'Would each strategy help to manage the rainforest <b>sustainably</b>?',
+        build: function (el, next) { flash(el, { yes: '✅ Sustainable', no: '❌ Unsustainable', ky: 'y', kn: 'n', items: [
+          { t: 'Selective logging — cutting only certain trees', a: true, why: 'Most of the forest is left standing.' },
+          { t: 'Forest Stewardship Council (FSC) certified timber', a: true, why: 'An international agreement on responsible forestry.' },
+          { t: 'Clear-felling and burning large areas for ranching', a: false, why: 'Destroys the ecosystem.' },
+          { t: 'Debt reduction in return for conservation', a: true, why: 'Debt-for-nature swaps.' },
+          { t: 'Protected reserves and indigenous territories', a: true, why: 'Legal protection for land.' },
+          { t: 'New roads deep into untouched forest', a: false, why: 'Roads open the forest to settlers and loggers.' }] }, next); } }]);
+  };
+
+  /* L4 — Farming */
+  LV[4] = function (root) {
+    stages(root, [
+      { title: '🏷️ A farm as a system', how: 'Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_FARM, pins: PINS_FARM, cap: 'Farming as a system of inputs, processes and outputs.', labels: [
+          { t: 'Physical inputs', pin: 1 },
+          { t: 'Human inputs', pin: 2 },
+          { t: 'Processes', pin: 3 },
+          { t: 'Outputs: products and income', pin: 4 },
+          { t: 'Outputs: waste and damage', pin: 5 },
+          { t: 'Feedback: profits reinvested as new inputs', pin: 6 },
+          { t: 'Biome', pin: null }] }, next); } },
+      { title: '🌾 Which type of farming?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['ar', '🌾 Arable'], ['pa', '🐑 Pastoral'], ['su', '🏠 Subsistence'], ['co', '💷 Commercial']], ['zc4', 'zg', 'zc2', 'zc1']), cards: [
+          { t: 'Ploughing land and growing crops such as wheat', a: ['ar'], why: 'Arable = crops.' },
+          { t: 'Market gardening: intensive fruit, vegetables and flowers', a: ['ar'], why: 'A form of arable farming.' },
+          { t: 'Rearing animals on land left under grass', a: ['pa'], why: 'Pastoral = animals.' },
+          { t: 'Hill sheep farming for lamb and wool', a: ['pa'], why: 'Upland pastoral farming.' },
+          { t: 'Growing just enough food for the farmer’s family', a: ['su'], why: 'Little or nothing is sold.' },
+          { t: 'Shifting cultivation: clearing a plot, farming it until the soil is exhausted, then moving on', a: ['su'], why: 'Traditional subsistence farming.' },
+          { t: 'Growing crops or rearing animals for sale at a profit', a: ['co'], why: 'Commercial = for sale.' },
+          { t: 'A large agribusiness supplying supermarkets', a: ['co'], why: 'Large-scale commercial farming.' }] }, next); } },
+      { title: '⚙️ Intensive or extensive?', how: '<b>Intensive</b> = high inputs of labour or money per hectare. <b>Extensive</b> = low inputs over a large area.',
+        build: function (el, next) { flash(el, { yes: '🔥 Intensive', no: '🌾 Extensive', ky: 'i', kn: 'e', items: [
+          { t: 'Market gardening under greenhouses', a: true, why: 'High inputs on small plots.' },
+          { t: 'Rice paddies worked by large numbers of people', a: true, why: 'Labour-intensive.' },
+          { t: 'Sheep ranching over huge areas of Australian grassland', a: false, why: 'Low inputs per hectare.' },
+          { t: 'Hill sheep farming on upland moors', a: false, why: 'Large areas, few workers.' },
+          { t: 'Battery chicken farms', a: true, why: 'High capital input per hectare.' }] }, next); } },
+      { title: '🧠 Farming check', build: function (el, next) { mcq(el, [
+        { q: 'Which is the best definition of arable farming?', o: ['Farming that produces crops', 'Farming that grows trees', 'Farming that rears livestock', 'Farming that rears fish'], c: 0, f: 'Forestry, livestock and fish farming are other types.' },
+        { q: 'Which is a PHYSICAL factor that affects the type of farming?', o: ['The length of the growing season', 'Government subsidies for farmers', 'Transport costs to the market', 'Tradition in the farming family'], c: 0, f: 'Barley needs about 90 days and rice about 120.' },
+        { q: 'How can modifying ecosystems for farming harm the environment?', o: ['Fertiliser run-off pollutes rivers and removing hedgerows reduces biodiversity', 'Irrigation always makes soils more fertile, so no damage of any kind is ever caused', 'Greenhouses cool the climate and make the growing season much shorter', 'Terracing hillsides causes more rainfall to fall on the farm every year'], c: 0, f: 'Yields rise, but soil erosion, water pollution and habitat loss can follow.' }], next); } }]);
+  };
+
+  /* L5 — Characteristics of rural areas */
+  LV[5] = function (root) {
+    stages(root, [
+      { title: '🏙️ Urban, suburban or rural?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['u', '🏙️ Urban'], ['s', '🏘️ Suburban'], ['r', '🌾 Rural']], ['zc1', 'zc2', 'zg']), cards: [
+          { t: 'High population density; mainly secondary and tertiary jobs', a: ['u'], why: 'Towns and cities.' },
+          { t: 'A city centre with offices and shops', a: ['u'], why: 'Built-up area.' },
+          { t: 'Lower-density housing on the edge of a city, where many people commute from', a: ['s'], why: 'Suburbs.' },
+          { t: 'Low population density with hamlets and villages', a: ['r'], why: 'The countryside.' },
+          { t: 'Land used mainly for farming, forestry, conservation or recreation', a: ['r'], why: 'Rural land use.' }] }, next); } },
+      { title: '🗺️ Compare three rural environments', build: function (el, next) { sortGame(el, { zones: zonesFrom([['ld', '🇬🇧 Lake District, UK'], ['is', '🇹🇭 Isan, Thailand'], ['am', '🇧🇷 Amazon, Brazil']], ['zc2', 'zc4', 'zg']), cards: [
+          { t: 'Glaciated mountains and lakes', a: ['ld'], why: 'Including England’s highest mountain, Scafell Pike.' },
+          { t: 'About 17 million visitors a year but only about 39,000 residents', a: ['ld'], why: 'Tourism dominates.' },
+          { t: 'A National Park since 1951 and a World Heritage Site since 2017', a: ['ld'], why: 'Managed for conservation and tourism.' },
+          { t: 'Flat plateau; tropical monsoon with a long dry season', a: ['is'], why: 'North-east Thailand.' },
+          { t: 'Rice and cassava farming; young people migrate to Bangkok', a: ['is'], why: 'Rural–urban migration.' },
+          { t: 'Hot and wet all year; very sparse population', a: ['am'], why: 'Dense rainforest.' },
+          { t: 'Development versus conservation: ranching and mining against reserves', a: ['am'], why: 'A major conflict.' }] }, next); } },
+      { title: '🧠 Rural areas check', build: function (el, next) { mcq(el, [
+        { q: 'What is the rural–urban fringe?', o: ['The zone where town meets countryside and land uses compete', 'The very centre of a city where land is the most expensive', 'A remote mountain area far from any town or main road', 'A protected area of rainforest managed by indigenous people'], c: 0, f: 'New housing, retail parks, golf courses and farmland compete for space.' },
+        { q: 'Which is a type of land use found in rural environments?', o: ['Forestry', 'Skyscraper offices', 'Underground metro lines', 'Central business district'], c: 0, f: 'Farming, forestry, tourism, mining and conservation are rural land uses.' }], next); } }]);
+  };
+
+  /* L6 — UK: suburbanisation and counter-urbanisation */
+  LV[6] = function (root) {
+    stages(root, [
+      { title: '📖 Which process?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['ur', '🏙️ Urbanisation'], ['su', '🏘️ Suburbanisation'], ['cu', '🌳 Counter-urbanisation']], ['zc1', 'zc2', 'zg']), cards: [
+          { t: 'A growing percentage of the population lives in towns and cities', a: ['ur'], why: 'Urbanisation.' },
+          { t: 'The outward spread of the urban area at lower densities', a: ['su'], why: 'Suburbanisation.' },
+          { t: 'The movement of people and jobs from major cities to smaller towns and rural areas', a: ['cu'], why: 'Counter-urbanisation.' },
+          { t: 'New housing estates built on greenfield land at the edge of a city', a: ['su'], why: 'The city spreads outwards.' },
+          { t: 'A family leaves London to live in a Yorkshire village and works from home', a: ['cu'], why: 'People move to rural areas.' }] }, next); } },
+      { title: '🧲 Push or pull?', how: 'Is each a reason to <b>leave the city</b> (push) or an attraction of the <b>countryside</b> (pull)?',
+        build: function (el, next) { flash(el, { yes: '⬅️ Push (city)', no: '➡️ Pull (countryside)', ky: 'p', kn: 'l', items: [
+          { t: 'Noise and air pollution', a: true, why: 'A problem of city life.' },
+          { t: 'Higher crime rates', a: true, why: 'A push factor.' },
+          { t: 'Traffic congestion and parking shortages', a: true, why: 'A push factor.' },
+          { t: 'Larger houses with gardens', a: false, why: 'A pull of the countryside.' },
+          { t: 'Pleasant scenery and safer roads for children', a: false, why: 'A pull factor.' },
+          { t: 'Fast internet makes home-working possible', a: false, why: 'Technology enables counter-urbanisation.' }] }, next); } },
+      { title: '⚖️ Impacts of counter-urbanisation', build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '👍 Positive impact'], ['n', '👎 Negative impact']], ['zg', 'zr']), cards: [
+          { t: 'Young families keep village schools open', a: ['p'], why: 'For example in Craven District, North Yorkshire.' },
+          { t: 'Old properties are converted and modernised', a: ['p'], why: 'Improves the housing stock.' },
+          { t: 'New small businesses and restaurants open', a: ['p'], why: 'Jobs and services.' },
+          { t: 'House prices rise, so young locals cannot afford to buy', a: ['n'], why: 'Commuters and second-home owners have higher incomes.' },
+          { t: 'Post offices and village shops close because commuters shop in town', a: ['n'], why: 'Services lose customers.' },
+          { t: 'More commuting, congestion and pollution', a: ['n'], why: 'Car dependence.' }] }, next); } },
+      { title: '🧠 Rural change check', build: function (el, next) { mcq(el, [
+        { q: 'Which is the meaning of suburbanisation?', o: ['The outward growth of urban development', 'Population movement from rural to urban areas', 'Increasing movement of people from urban to rural areas', 'Population movement from the suburbs to the countryside'], c: 0, f: 'The others describe urbanisation or counter-urbanisation.' },
+        { q: 'Why is accessibility so important for people living in rural areas?', o: ['People need to reach jobs, healthcare and services that are not in their village', 'People in rural areas never need to travel, so accessibility does not matter to them', 'Good roads always cause villages to lose population and close their schools', 'Accessibility only matters to tourists, not to the people who live there'], c: 0, f: 'Poor access leads to isolation and decline.' }], next); } }]);
+  };
+
+  /* L7 — UK: tourism and isolation */
+  LV[7] = function (root) {
+    stages(root, [
+      { title: '⛰️ Tourism in the Lake District', how: 'England’s largest National Park (2,362 km²): about <b>17.5 million visitors</b> a year spend about <b>£1.8 billion</b>, but only about <b>39,000</b> people live there.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['p', '👍 Positive impact'], ['n', '👎 Negative impact']], ['zg', 'zr']), cards: [
+          { t: 'Jobs in hotels, cafés, shops and outdoor activities', a: ['p'], why: 'Tourism is the main employer.' },
+          { t: 'Visitor spending keeps village services open', a: ['p'], why: 'Supports local businesses.' },
+          { t: 'Money for conservation and footpath repair', a: ['p'], why: 'Some income is reinvested.' },
+          { t: 'Traffic congestion at honeypot sites such as Bowness and Keswick', a: ['n'], why: 'Narrow roads cannot cope.' },
+          { t: 'Footpath erosion on popular fells', a: ['n'], why: 'Millions of boots wear paths away.' },
+          { t: 'About a quarter of homes are second homes or holiday lets', a: ['n'], why: 'House prices rise beyond local wages.' },
+          { t: 'Seasonal, low-paid jobs', a: ['n'], why: 'Work dries up in winter.' }] }, next); } },
+      { title: '📉 Why has farm employment declined?', how: 'Agriculture is now only about <b>1%</b> of UK GDP and employment. Is each a cause of the decline?',
+        build: function (el, next) { flash(el, { yes: '✅ A cause', no: '❌ Not a cause', ky: 'y', kn: 'n', items: [
+          { t: 'Mechanisation: machines replaced farm workers', a: true, why: 'Output rose while jobs fell.' },
+          { t: 'Small farms merged into larger, specialised businesses', a: true, why: 'Fewer, bigger farms need fewer workers.' },
+          { t: 'Supermarkets demand cheap food and import it', a: true, why: 'Small farms struggle to make a profit.' },
+          { t: 'Young people leave for better-paid jobs in towns', a: true, why: 'Fewer people willing to farm.' },
+          { t: 'The UK now grows all of its own food', a: false, why: 'The UK produces only about 60% of the food it eats.' }] }, next); } },
+      { title: '🏷️ The negative multiplier effect', how: 'Follow the cycle from <b>START</b>. Tap a label, then tap its number. One label is a <b>trap</b>.',
+        build: function (el, next) { labelGame(el, { svg: SVG_NMULT, pins: PINS_NMULT, cap: 'A downward spiral in a remote rural area such as upland Cumbria.', labels: [
+          { t: 'Farm jobs are lost through mechanisation', pin: 1 },
+          { t: 'Young people move away for work', pin: 2 },
+          { t: 'Fewer customers, so shops, pubs and post offices close', pin: 3 },
+          { t: 'Bus routes and schools close, so the area becomes isolated', pin: 4 },
+          { t: 'The population ages and declines further', pin: 5 },
+          { t: 'New businesses arrive and house prices fall', pin: null }] }, next); } },
+      { title: '🧠 Isolation check', build: function (el, next) { mcq(el, [
+        { q: 'What is the negative multiplier effect?', o: ['A downward spiral where job losses lead to more job losses and services closing', 'A spiral of growth where new jobs attract more people and more shops and services', 'A government grant that doubles the income of every farmer each year', 'The rise in house prices caused by second-home owners buying cottages'], c: 0, f: 'One problem triggers others.' },
+        { q: 'How did Storm Desmond (2015) add to rural problems in Cumbria?', o: ['Flooding damaged homes, farms, roads and bridges and cut off communities', 'It created thousands of new farm jobs in the uplands of the Lake District', 'It brought a drought that dried up Windermere for the whole summer', 'It caused a rise in visitors because people wanted to see the floods'], c: 0, f: 'Natural hazards can increase rural isolation.' }], next); } }]);
+  };
+
+  /* L8 — Diversification */
+  LV[8] = function (root) {
+    stages(root, [
+      { title: '🔀 Diversification or not?', how: '<b>Farm diversification</b> = developing new sources of income alongside, or instead of, traditional farming.',
+        build: function (el, next) { flash(el, { yes: '✅ Diversification', no: '❌ Not diversification', ky: 'd', kn: 'n', items: [
+          { t: 'Opening a farm shop selling the farm’s own cheese', a: true, why: 'A new income stream that adds value.' },
+          { t: 'Turning a barn into a B&B for tourists', a: true, why: 'Recreation and tourism.' },
+          { t: 'Renting a field for solar panels', a: true, why: 'Energy diversification.' },
+          { t: 'Pick-your-own strawberries', a: true, why: 'Brings visitors to the farm.' },
+          { t: 'Buying a bigger tractor to grow more wheat', a: false, why: 'This increases agricultural production, not new income sources.' },
+          { t: 'Spraying more fertiliser to increase yields', a: false, why: 'Still traditional farming.' }] }, next); } },
+      { title: '⚖️ Advantage or disadvantage?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['a', '👍 Advantage'], ['d', '👎 Disadvantage']], ['zg', 'zr']), cards: [
+          { t: 'Glamping gives year-round income from spare land', a: ['a'], why: 'Tourism and leisure.' },
+          { t: 'Farm shops earn more than selling to supermarkets', a: ['a'], why: 'Farmers keep more of the price.' },
+          { t: 'Organic produce sells at higher prices and improves soils and biodiversity', a: ['a'], why: 'Premium prices.' },
+          { t: 'Wind turbines give reliable rental income', a: ['a'], why: 'Low-carbon too.' },
+          { t: 'Tourism needs investment and planning permission and brings more traffic', a: ['d'], why: 'Costs and conflict.' },
+          { t: 'Organic farming has lower yields and takes 2–3 years to convert', a: ['d'], why: 'Income falls at first.' },
+          { t: 'Turbines and solar farms have a visual impact and use farmland', a: ['d'], why: 'May face local objections.' }] }, next); } },
+      { title: '💷 Data skills: diversified income', how: 'A Cumbrian sheep farm earns income from four sources.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Annual farm income by source (example data)', bars: [['Sheep', 18000, '#65a30d'], ['Holiday cottage', 15000, '#0284c7'], ['Farm shop', 9000, '#f59e0b'], ['Solar rental', 6000, '#7c3aed']], y0: 0, y1: 20000, ystep: 5000, minor: 1000, values: true, fmt: function (v) { return '£' + v.toLocaleString(); }, yfmt: function (v) { return '£' + v.toLocaleString(); }, xlab: 'Income source', ylab: 'Income per year' }),
+          cap: 'Example data for practice calculations.', qs: [
+          { type: 'num', q: 'Calculate the total income of the farm in £.', ans: 48000, tol: 0, unit: '£', f: '18,000 + 15,000 + 9,000 + 6,000 = <b>£48,000</b>.' },
+          { type: 'num', q: 'What percentage of the total comes from diversified (non-sheep) sources?', ans: 62.5, tol: 0.1, unit: '%', f: '30,000 ÷ 48,000 × 100 = <b>62.5%</b>.' },
+          { type: 'mc', q: 'What does this suggest about why farmers diversify?', o: ['Most of the income now comes from diversified activities, not from farming itself', 'Sheep farming earns far more than all the other sources added together', 'Diversification earns nothing, so it is mainly done as a hobby by retired farmers', 'The farm would earn more money if it closed the cottage and the farm shop'], c: 0, f: 'Diversification keeps many small farms viable.' }] }, next); } },
+      { title: '🧠 Diversification check', build: function (el, next) { mcq(el, [
+        { q: 'Why do many small UK farms struggle to profit from crops and livestock alone?', o: ['Supermarkets want cheap food all year and buy from large agribusinesses or imports', 'The government pays them so much in subsidies that they do not need to sell any food', 'British people no longer eat any meat, dairy or vegetables grown in the UK', 'Farms are too small to grow anything, so they can only be used for tourism'], c: 0, f: 'Low prices squeeze small farms.' },
+        { q: 'What are GM crops?', o: ['Plants with DNA changed to increase yield or pest resistance', 'Plants whose roots are cut back to make them grow much taller', 'Animals with DNA changed to make them grow much larger', 'Livestock vaccinated so that they resist common diseases'], c: 0, f: 'GM crops are not grown commercially in the UK, though gene editing is now allowed in England.' }], next); } }]);
+  };
+
+  /* L9 — Sustainable rural living */
+  LV[9] = function (root) {
+    stages(root, [
+      { title: '🎡 Egan’s Wheel', how: 'Egan’s Wheel (2004) has eight criteria for a sustainable community. Which part of the wheel does each feature meet?',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['t', '🚌 Transport: well connected'], ['h', '🏠 Housing: well designed'], ['e', '💼 Economy: thriving'], ['en', '🌿 Environmental']], ['zc1', 'zc2', 'zc4', 'zg']), cards: [
+          { t: 'A community minibus links a village to the market town', a: ['t'], why: 'Reduces isolation.' },
+          { t: 'Cycle paths and park-and-ride at honeypot sites', a: ['t'], why: 'Less congestion.' },
+          { t: 'Shared-ownership homes so young locals can stay in the village', a: ['h'], why: 'Affordable rural housing.' },
+          { t: 'Grants help a farm open a café and wedding venue', a: ['e'], why: 'New rural jobs.' },
+          { t: 'Eco-tourism brings jobs to a remote valley', a: ['e'], why: 'Economic — and can help the environment too.' },
+          { t: 'Restoring hedgerows, woodland and peat bogs', a: ['en'], why: 'Ecosystem preservation.' }] }, next); } },
+      { title: '🌱 What do organic farmers do?', how: 'Is each practice part of <b>organic farming</b>?',
+        build: function (el, next) { flash(el, { yes: '✅ Organic', no: '❌ Not organic', ky: 'y', kn: 'n', items: [
+          { t: 'Using manure and compost instead of synthetic fertiliser', a: true, why: 'Organic fertilisers.' },
+          { t: 'Crop rotation and cover crops', a: true, why: 'Reduce soil loss and build organic matter.' },
+          { t: 'Planting hedgerows and wildflower margins', a: true, why: 'Boosts biodiversity.' },
+          { t: 'Spraying synthetic pesticides', a: false, why: 'Organic farming avoids agrochemicals.' },
+          { t: 'Growing GM crops', a: false, why: 'Organic farming uses no GMOs.' }] }, next); } },
+      { title: '🤝 Which NGO?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['pc', '🌾 Prince’s Countryside Fund'], ['acre', '🏘️ ACRE'], ['cpre', '🟩 CPRE'], ['wt', '🦔 The Wildlife Trusts']], ['zc4', 'zc2', 'zc1', 'zg']), cards: [
+          { t: 'Grants, business training and emergency help for family farms', a: ['pc'], why: 'Supports farming communities.' },
+          { t: 'Helps communities keep village halls and plan affordable housing', a: ['acre'], why: 'Action with Communities in Rural England.' },
+          { t: 'Campaigns to protect the green belt and build on brownfield land', a: ['cpre'], why: 'The countryside charity.' },
+          { t: 'Manages nature reserves and restores wetlands and peat', a: ['wt'], why: 'Conservation and education.' }] }, next); } },
+      { title: '🧠 Sustainability check', build: function (el, next) { mcq(el, [
+        { q: 'Which is the meaning of organic farming?', o: ['Farming that does not use chemical fertilisers', 'Farming that uses chemical fertilisers', 'Farming that only produces GM crops', 'Farming that does not need irrigation'], c: 0, f: 'Organic farms use manure, compost and natural pest control.' },
+        { q: 'What is the main limitation of organic farming as a sustainable strategy?', o: ['Yields are usually lower and food costs more, so it cannot feed everyone alone', 'It always pollutes rivers more than conventional farming with synthetic chemicals', 'It reduces biodiversity because hedgerows and wildflowers are removed', 'It uses far more fossil fuels because of the extra chemicals it needs'], c: 0, f: 'Organic land is only a small share of UK farmland.' }], next); } }]);
+  };
+
+  /* L10 — Thailand: rural–urban migration */
+  LV[10] = function (root) {
+    stages(root, [
+      { title: '📊 Data skills: Thailand urbanises', how: 'Thailand is an upper-middle-income, emerging economy of about 66 million people.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Share of Thailand’s population living in urban areas', bars: [['2011', 44.7, '#f9a8d4'], ['2013', 46.2, '#f472b6'], ['2015', 47.7, '#ec4899'], ['2017', 49.2, '#db2777'], ['2019', 50.7, '#be185d'], ['2021', 52.2, '#9d174d']], y0: 40, y1: 55, ystep: 5, minor: 1, values: true, xlab: 'Year', ylab: '% urban' }),
+          cap: 'World Bank data.', qs: [
+          { type: 'num', q: 'By how many percentage points did the urban share rise from 2011 to 2021?', ans: 7.5, tol: 0.05, unit: 'percentage points', f: '52.2 − 44.7 = <b>7.5</b>.' },
+          { type: 'num', q: 'What is the average rise per year over the 10 years?', ans: 0.75, tol: 0.01, unit: 'percentage points per year', f: '7.5 ÷ 10 = <b>0.75</b>.' },
+          { type: 'mc', q: 'In which two-year period did more than half of Thais first live in towns and cities?', o: ['Between 2017 and 2019', 'Between 2011 and 2013', 'Between 2013 and 2015', 'Between 2019 and 2021'], c: 0, f: '49.2% in 2017, 50.7% in 2019.' }] }, next); } },
+      { title: '🧲 Push or pull?', how: 'Is each factor <b>pushing</b> people out of rural areas or <b>pulling</b> them to the city?',
+        build: function (el, next) { flash(el, { yes: '⬅️ Push (rural)', no: '➡️ Pull (urban)', ky: 'p', kn: 'l', items: [
+          { t: 'High risk of drought and crop failure', a: true, why: 'A push factor.' },
+          { t: 'Hard farm work for low pay', a: true, why: 'A push factor.' },
+          { t: 'Lack of access to basic medical services', a: true, why: 'A push factor.' },
+          { t: 'The perception of more jobs in the city', a: false, why: 'A pull factor — even if the reality is harder.' },
+          { t: 'Better housing with piped water and electricity', a: false, why: 'A pull factor.' },
+          { t: 'Access to universities and colleges', a: false, why: 'A pull factor.' }] }, next); } },
+      { title: '🔁 Cause or consequence?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['c', '⬅️ Cause of migration'], ['q', '➡️ Consequence for rural areas']], ['zc1', 'zc4']), cards: [
+          { t: 'Rising costs of land, fertiliser and pesticides while crop prices fluctuate', a: ['c'], why: 'Rubber, sugar cane and cassava prices go up and down.' },
+          { t: 'Rural schools lack funding, so young people move for education', a: ['c'], why: 'A push factor.' },
+          { t: 'About 3 million children (24%) are raised by grandparents in skip-generation households', a: ['q'], why: 'Parents work in the city.' },
+          { t: 'Rural populations age and farm productivity falls', a: ['q'], why: 'Young adults leave.' },
+          { t: 'Remittances sent home support rural economies', a: ['q'], why: 'A positive consequence.' },
+          { t: 'Less pressure on natural resources lets some land be rewilded', a: ['q'], why: 'An environmental consequence.' }] }, next); } },
+      { title: '🧠 Migration check', build: function (el, next) { mcq(el, [
+        { q: 'Where do most migrants to Bangkok come from?', o: ['Poor rural households in the North-East (Isan)', 'Wealthy suburbs on the edge of Bangkok itself', 'The tourist islands of the Andaman coast only', 'Other capital cities in Europe and North America'], c: 0, f: 'Isan is the poorest region of Thailand.' },
+        { q: 'Thailand produces about 4% of the world’s rice but is the second-largest exporter. Why could migration threaten this?', o: ['Fewer young farm workers may reduce rice production and food security', 'Migrants take all the rice with them to Bangkok, so none is left to export', 'Rice can only be grown by people who have lived in a village all their lives', 'Cities need more land for rice, so all paddy fields are moved to Bangkok'], c: 0, f: 'An ageing farm workforce is a real concern.' }], next); } }]);
+  };
+
+  /* L11 — Thailand: managing rural challenges */
+  LV[11] = function (root) {
+    stages(root, [
+      { title: '⚠️ Which type of challenge?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['so', '👥 Social'], ['ec', '💰 Economic'], ['en', '🌿 Environmental']], ['zc2', 'zc1', 'zg']), cards: [
+          { t: 'Ageing villages and skip-generation households', a: ['so'], why: 'A social challenge.' },
+          { t: 'Poorer access to schools and health care than in cities', a: ['so'], why: 'A social challenge.' },
+          { t: 'Low and unstable crop prices and high household debt', a: ['ec'], why: 'An economic challenge.' },
+          { t: 'Reliance on remittances', a: ['ec'], why: 'An economic challenge.' },
+          { t: 'Haze from burning crop waste', a: ['en'], why: 'Air pollution.' },
+          { t: 'Soil degradation and salinity in Isan', a: ['en'], why: 'An environmental challenge.' },
+          { t: 'Elephants raiding crops near national parks', a: ['en'], why: 'Human–wildlife conflict.' }] }, next); } },
+      { title: '🏛️ Who manages it?', build: function (el, next) { sortGame(el, { zones: zonesFrom([['g', '🏛️ Government'], ['igo', '🌐 IGO'], ['ngo', '🤝 NGO'], ['lc', '🏘️ Local community']], ['zc1', 'zc2', 'zc4', 'zg']), cards: [
+          { t: 'Universal health coverage — the “30-baht” scheme (2002)', a: ['g'], why: 'National government policy.' },
+          { t: 'One Tambon One Product (OTOP) promoting village products', a: ['g'], why: 'A government scheme.' },
+          { t: 'The FAO, UNDP and Asian Development Bank funding rural projects', a: ['igo'], why: 'Members are countries.' },
+          { t: 'Operation Smile: free surgery for children with cleft lips', a: ['ngo'], why: 'A charity reaching remote families.' },
+          { t: 'Bring the Elephant Home’s Tom Yum Project', a: ['ngo'], why: 'Farmers grow crops elephants avoid.' },
+          { t: 'Community forests and rice cooperatives', a: ['lc'], why: 'Villagers share resources and profits.' }] }, next); } },
+      { title: '🧠 Management check', build: function (el, next) { mcq(el, [
+        { q: 'What does NGO stand for?', o: ['Non-governmental organisation', 'Non-global organisation', 'Non-geographically organised', 'Non-global operation'], c: 0, f: 'NGOs are charities and non-profit groups.' },
+        { q: 'How did the Royal Project Foundation (1969) help hill-tribe farmers?', o: ['It helped them replace opium with cash crops such as coffee, fruit and flowers', 'It moved all hill-tribe families to Bangkok to work in new textile and electronics factories', 'It banned all farming in the northern hills to create national parks', 'It gave every farmer a tractor so that they could clear more forest'], c: 0, f: 'This reduced poverty and deforestation and improved access to markets.' },
+        { q: 'How does the Tom Yum Project reduce human–elephant conflict?', o: ['Farmers grow lemongrass, chilli, galangal and kaffir lime, which elephants do not eat', 'Farmers build electric fences and are paid to remove every elephant from the local area', 'Elephants are moved to zoos in Bangkok so that they cannot reach any farms', 'Farmers stop farming completely and are given jobs in the national parks'], c: 0, f: 'Crops that elephants dislike protect both incomes and wildlife.' }], next); } }]);
+  };
+
+  /* L12 — EDEXCEL EXAM BOSS */
+  var EXQ = [
+    { q: 'Analyse the importance of natural ecosystems for providing goods and services.', mk: 'Based on Edexcel Summer 2021 Paper 2, Q2(f) · 8 marks · Analyse',
+      C: 'Natural ecosystems are important because they provide both goods that people use directly and services that support life over the long term.',
+      E: 'For example, tropical rainforests provide timber, fuelwood, nuts and medicines, while mangroves supply fish and protect coasts from storm surges.',
+      X: 'Services such as carbon storage and the water cycle regulate the climate for everyone, so their value is often greater than the goods, even though it is harder to put a price on.',
+      J: 'Overall, services are the most important in the long term, because over-exploiting goods such as timber destroys the regulating services that people depend on.',
+      D: ['Natural ecosystems provide no goods at all, only tourism, so they are not important.', 'Deserts have the highest biodiversity, so they provide the most goods and services.'] },
+    { q: 'Analyse how exploiting natural ecosystems can affect their goods and services.', mk: 'Based on Edexcel June 2019 Paper 2, Q2(i) · 8 marks · Analyse',
+      C: 'Exploiting ecosystems can increase some goods in the short term but reduces the goods and services available in the long term.',
+      E: 'In the Brazilian Amazon, cattle ranching and soya farming earn billions of dollars, but around 13,000 km² of forest was cleared in 2021 alone.',
+      X: 'Clearing and burning releases CO₂ and removes habitats, so the forest’s climate regulation and biodiversity are lost, and bare soils erode in heavy rain.',
+      J: 'Therefore, exploitation is only sustainable when it is controlled, for example through selective logging, FSC timber and protected reserves.',
+      D: ['Cutting down the Amazon increases rainfall everywhere, so it improves the water cycle.', 'The Amazon is mainly in Europe, so exploitation there has no global effects.'] },
+    { q: 'Analyse the factors that have caused rural change in a developed country.', mk: 'Based on Edexcel June 2022 Paper 2R, Q2(h) · 8 marks · Analyse',
+      C: 'Rural areas in the UK are changing because of a mix of counter-urbanisation, tourism and the decline in farm employment.',
+      E: 'In the Lake District, about 17.5 million visitors a year far outnumber the 39,000 residents, and about a quarter of homes are second homes or holiday lets.',
+      X: 'This pushes house prices beyond local wages, so young people leave; in remote valleys, lost farm jobs start a negative multiplier effect as services close.',
+      J: 'The most important factor depends on accessibility: commuter villages are changed most by counter-urbanisation, while remote uplands are changed most by farm job losses.',
+      D: ['Rural areas in the UK have not changed at all for the last 200 years.', 'Farming now employs most people in the UK, so farm jobs are increasing.'] },
+    { q: 'Analyse the factors that can lead to rural changes in a developing or emerging country.', mk: 'Based on Edexcel June 2022 Paper 2, Q2(h) · 8 marks · Analyse',
+      C: 'Rural change in Thailand is driven mainly by rural–urban migration, caused by push factors in the countryside and pull factors in the city.',
+      E: 'The urban share of Thailand’s population rose from 44.7% in 2011 to 52.2% in 2021, with most migrants to Bangkok coming from poor households in Isan.',
+      X: 'As young adults leave, villages age, about 3 million children grow up in skip-generation households and farm productivity falls, although remittances support rural incomes.',
+      J: 'Overall, economic factors such as low crop prices and debt are the main drivers, so schemes such as OTOP that raise rural incomes are key to managing change.',
+      D: ['Thailand is a high-income country where no one works in farming any more.', 'People leave rural Thailand because the cities have no jobs or services.'] }];
+
+  LV[12] = function (root) {
+    var order = shuffle(EXQ), qi = 0;
+    var SLOTS = [['C', 'p', 'Point'], ['E', 'e', 'Evidence / Example'], ['X', 'x', 'Explain / Develop'], ['J', 'j', 'Conclusion / Judgement']];
+    stages(root, [{ title: '👹 Final boss: the Edexcel Examiner', how: 'For each 8-mark <b>Analyse</b> question, tap a sentence card and then tap the box it belongs in: <b>Point</b>, <b>Evidence</b>, <b>Explain</b> and <b>Conclusion</b>. Two cards are <b>traps</b> — leave them out! Top-level answers use specific evidence and reach a supported conclusion.',
+      build: function (el, next) {
+        el.innerHTML = '<div class="boss"><span class="face" aria-hidden="true">👹</span><div style="flex:1"><div class="hp"><span>The Edexcel Examiner</span><span id="bhpTxt"></span></div><div class="hpbar"><div id="bhp" style="width:100%"></div></div></div></div><div id="exArea"></div>';
+        function paintBoss() { $('bhp').style.width = ((order.length - qi) / order.length * 100) + '%'; $('bhpTxt').textContent = (order.length - qi) + ' / ' + order.length + ' HP'; }
+        function showQ() {
+          var Q = order[qi], cards = shuffle([['C', Q.C], ['E', Q.E], ['X', Q.X], ['J', Q.J], ['D', Q.D[0]], ['D', Q.D[1]]]), place = {}, selC = null, first = true;
+          $('exArea').innerHTML = '<div class="exq"><div class="mk">Question ' + (qi + 1) + ' of ' + order.length + ' · ' + Q.mk + '</div><h3>' + esc(Q.q) + '</h3></div>' +
+            '<div class="cards" id="pc">' + cards.map(function (c, i) { return '<button type="button" class="pcard" data-c="' + i + '"' + (DEBUG ? ' data-t="' + c[0] + '"' : '') + '>' + esc(c[1]) + '</button>'; }).join('') + '</div>' +
+            '<div class="pee">' + SLOTS.map(function (s) { return '<div class="slotbox ' + s[1] + '" data-s="' + s[0] + '" role="button" tabindex="0"><div class="sl">' + s[2] + '</div><div class="sv">Tap a card, then tap here</div></div>'; }).join('') + '</div>' +
+            '<div class="actions"><button type="button" class="btn gold" id="attack">⚔️ Attack!</button></div><div class="msg" id="exMsg" aria-live="polite"></div>';
+          function paint() {
+            var used = {}; for (var k in place) used[place[k]] = 1;
+            $('pc').querySelectorAll('.pcard').forEach(function (b) { b.classList.toggle('used', !!used[b.dataset.c]); b.classList.toggle('sel', selC === +b.dataset.c); });
+            $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var v = place[s.dataset.s]; s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong'); s.classList.toggle('target', selC != null && v == null); s.querySelector('.sv').textContent = v != null ? cards[v][1] : 'Tap a card, then tap here'; });
+          }
+          function hitSlot(s) { var k = s.dataset.s; if (selC != null) { for (var x in place) if (place[x] === selC) delete place[x]; place[k] = selC; selC = null; } else if (place[k] != null) delete place[k]; paint(); }
+          $('pc').addEventListener('click', function (e) { var b = e.target.closest('.pcard'); if (!b) return; var c = +b.dataset.c; if (b.classList.contains('used')) { for (var x in place) if (place[x] === c) delete place[x]; } selC = selC === c ? null : c; paint(); });
+          $('exArea').querySelectorAll('.slotbox').forEach(function (s) { s.addEventListener('click', function () { hitSlot(s); }); s.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hitSlot(s); } }); });
+          $('attack').addEventListener('click', function () {
+            var m = $('exMsg');
+            if (Object.keys(place).length < 4) { m.className = 'msg info'; m.textContent = 'Fill all four boxes first.'; return; }
+            var right = 0; $('exArea').querySelectorAll('.slotbox').forEach(function (s) { var ok = cards[place[s.dataset.s]][0] === s.dataset.s; s.classList.add(ok ? 'right' : 'wrong'); if (ok) right++; });
+            if (first) { first = false; score(right, 4, this); }
+            if (right === 4) {
+              m.className = 'msg ok'; m.textContent = '💥 Critical hit! A developed, evidenced paragraph with a conclusion.'; this.disabled = true; qi++; paintBoss();
+              setTimeout(function () { if (qi < order.length) showQ(); else next(); }, 1300);
+            } else {
+              var trap = Object.keys(place).some(function (k) { return cards[place[k]][0] === 'D'; });
+              m.className = 'msg no'; m.textContent = right + '/4 correct. ' + (trap ? 'You used a TRAP card — it is inaccurate or irrelevant. ' : '') + 'Point = your main idea; Evidence = specific facts or case study; Explain = how/why it links; Conclusion = an overall judgement. Tap a red box to empty it.';
+            }
+          });
+          paint();
+        }
+        paintBoss(); showQ();
+      } }]);
+  };
+  /* ================= GENERIC: LABEL THE DIAGRAM ================= */
+  // cfg: { svg: '<svg viewBox=..>..</svg>', pins: [{n, x, y}], labels: [{t, pin}] (pin null = distractor), cap }
+  function labelGame(el, cfg, next) {
+    var order = shuffle(cfg.labels.map(function (_, i) { return i; })), place = {}, selL = null, first = true, done = false;
+    var pins = cfg.pins.map(function (p) {
+      return '<g class="ld-pin" data-p="' + p.n + '" transform="translate(' + p.x + ',' + p.y + ')" tabindex="0" role="button" aria-label="Label ' + p.n + '"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>';
+    }).join('');
+    el.innerHTML = '<div class="ld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      '<div class="ld-side"><div class="ld-h">1. Tap a label</div><div class="ld-pool"></div><div class="ld-h">2. Tap a number (here or on the diagram)</div><ol class="ld-slots">' +
+      cfg.pins.map(function (p) { return '<li><button type="button" class="ld-slot" data-p="' + p.n + '"><b>' + p.n + '</b><span></span></button></li>'; }).join('') + '</ol></div></div>' +
+      '<div class="actions"><button type="button" class="btn primary" data-ldc="1">Check labels</button></div><div class="msg" aria-live="polite"></div>';
+    var pool = el.querySelector('.ld-pool'), M = el.querySelector('.msg'), B = el.querySelector('[data-ldc]');
+    function paint(checked) {
+      var used = {}; for (var k in place) used[place[k]] = 1;
+      pool.innerHTML = order.filter(function (i) { return !used[i]; }).map(function (i) { return '<button type="button" class="ld-lab' + (selL === i ? ' sel' : '') + '" data-l="' + i + '"' + (DEBUG ? ' data-a="' + cfg.labels[i].pin + '"' : '') + '>' + esc(cfg.labels[i].t) + '</button>'; }).join('') || '<span class="ld-done">All labels placed — press Check labels.</span>';
+      el.querySelectorAll('.ld-slot').forEach(function (s) {
+        var p = +s.dataset.p, v = place[p]; s.querySelector('span').textContent = v == null ? 'Tap a label, then tap here' : cfg.labels[v].t;
+        s.classList.toggle('filled', v != null); s.classList.remove('right', 'wrong');
+        var g = el.querySelector('.ld-pin[data-p="' + p + '"]'); g.classList.remove('right', 'wrong'); g.classList.toggle('filled', v != null);
+        if (checked && v != null) { var ok = cfg.labels[v].pin === p; s.classList.add(ok ? 'right' : 'wrong'); g.classList.add(ok ? 'right' : 'wrong'); }
+      });
+    }
+    function hit(p) {
+      if (done) return;
+      if (selL != null) { for (var k in place) if (place[k] === selL) delete place[k]; place[p] = selL; selL = null; }
+      else if (place[p] != null) delete place[p];
+      M.textContent = ''; paint();
+    }
+    pool.addEventListener('click', function (e) { var b = e.target.closest('.ld-lab'); if (!b || done) return; var i = +b.dataset.l; selL = selL === i ? null : i; paint(); });
+    el.addEventListener('click', function (e) { var s = e.target.closest('.ld-slot, .ld-pin'); if (s) hit(+s.dataset.p); });
+    el.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.ld-pin')) { e.preventDefault(); hit(+e.target.closest('.ld-pin').dataset.p); } });
+    B.addEventListener('click', function () {
+      if (Object.keys(place).length < cfg.pins.length) { M.className = 'msg info'; M.textContent = 'Label all ' + cfg.pins.length + ' numbers first.'; return; }
+      var right = cfg.pins.filter(function (p) { return cfg.labels[place[p.n]].pin === p.n; }).length;
+      paint(true);
+      if (first) { first = false; score(right, cfg.pins.length, B); }
+      if (right === cfg.pins.length) { done = true; B.disabled = true; M.className = 'msg ok'; M.textContent = '✅ Perfectly labelled! Learn this diagram — you can draw it in the exam.'; setTimeout(next, 1100); }
+      else { M.className = 'msg no'; M.textContent = right + '/' + cfg.pins.length + ' correct. Tap a red number to take its label off, then try again.' + (cfg.hint ? ' ' + cfg.hint : ''); }
+    });
+    paint();
+  }
+
+  /* ================= GENERIC: DATA SKILLS (graph + calculations) ================= */
+  // cfg: { chart: svg string, cap, qs: [{type:'num', q, ans, tol, unit, f} | {type:'mc', q, o, c, f}] }
+  function dataGame(el, cfg, next) {
+    var answered = 0;
+    el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' +
+      cfg.qs.map(function (q, i) {
+        if (q.type === 'num') return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="dg-num"><input type="text" inputmode="decimal" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + q.ans + '"' : '') + '><span class="dg-unit">' + (q.unit || '') + '</span><button type="button" class="btn primary" data-dgc="1">Check</button></div><div class="fbk" aria-live="polite"></div></div>';
+        var opts = shuffle(q.o.map(function (_, j) { return j; }));
+        return '<div class="q" data-dq="' + i + '"><h4>' + q.q + '</h4><div class="choices">' + opts.map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === q.c ? ' data-ok="1"' : '') + '>' + esc(q.o[j]) + '</button>'; }).join('') + '</div><div class="fbk" aria-live="polite"></div></div>';
+      }).join('');
+    function fin() { answered++; if (answered === cfg.qs.length) setTimeout(next, 1000); }
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.choice, [data-dgc]'); if (!b || b.disabled) return;
+      var box = b.closest('[data-dq]'), q = cfg.qs[+box.dataset.dq], f = box.querySelector('.fbk'), ok;
+      if (q.type === 'num') {
+        var inp = box.querySelector('input'), v = parseFloat(String(inp.value).replace(/[^0-9.\-]/g, ''));
+        if (isNaN(v)) { f.className = 'fbk show bad'; f.textContent = 'Type a number first.'; return; }
+        ok = Math.abs(v - q.ans) <= q.tol + 1e-9; inp.disabled = true; b.disabled = true; inp.classList.add(ok ? 'right' : 'wrong');
+      } else {
+        var j = +b.dataset.j; ok = j === q.c;
+        box.querySelectorAll('.choice').forEach(function (x) { x.disabled = true; if (+x.dataset.j === q.c) x.classList.add('right'); });
+        if (!ok) b.classList.add('wrong');
+      }
+      f.className = 'fbk show ' + (ok ? 'good' : 'bad'); f.innerHTML = (ok ? '✔ ' : '✖ ') + q.f;
+      score(ok ? 1 : 0, 1, b); fin();
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { var b = e.target.closest('[data-dq]').querySelector('[data-dgc]'); if (b && !b.disabled) b.click(); } });
+  }
+
+  // Line graph with major and minor gridlines so values can be read accurately.
+  function lineChart(o) {
+    var W = 660, H = o.h || 330, L = 64, R = 18, T = 18, Bm = 52;
+    function X(x) { return L + (x - o.x0) / (o.x1 - o.x0) * (W - L - R); }
+    function Y(y) { return H - Bm - (y - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, i;
+    var minor = o.minor || o.ystep / 5;
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    (o.xticks || []).forEach(function (x) { g += '<line x1="' + X(x).toFixed(1) + '" x2="' + X(x).toFixed(1) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><text x="' + X(x).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#475569">' + x + '</text>'; });
+    if (o.zero != null) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(o.zero).toFixed(1) + '" y2="' + Y(o.zero).toFixed(1) + '" stroke="#64748b" stroke-dasharray="4 3"/>';
+    var s = (o.series || []).map(function (sr) {
+      var pts = sr.pts.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' ');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + sr.c + '" stroke-width="' + (sr.w || 2.6) + '"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/>' +
+        (sr.dots ? sr.pts.map(function (p) { return '<circle cx="' + X(p[0]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="3.6" fill="' + sr.c + '"/>'; }).join('') : '');
+    }).join('');
+    var labs = (o.series || []).filter(function (sr) { return sr.label; }), ly = o.legendBottom ? H - Bm - 12 - labs.length * 18 : T + 6;
+    var leg = (labs.length ? '<rect x="' + (L + 6) + '" y="' + ly + '" width="150" height="' + (labs.length * 18 + 8) + '" rx="6" fill="#fff" stroke="#cbd5e1"/>' : '') + labs.map(function (sr, k) { return '<g transform="translate(' + (L + 12) + ',' + (ly + 18 + k * 18) + ')"><line x1="0" x2="22" y1="-4" y2="-4" stroke="' + sr.c + '" stroke-width="3"' + (sr.dash ? ' stroke-dasharray="' + sr.dash + '"' : '') + '/><text x="28" y="0" font-size="12" fill="#1e293b">' + sr.label + '</text></g>'; }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Graph') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' + s + leg +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 10) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  /* ================= CHARTS ================= */
+  // Vertical bar chart. o: { title, bars: [[label, value, colour]], y0, y1, ystep, minor, ylab, xlab, h, fmt }
+  function barChart(o) {
+    var W = 660, H = o.h || 320, L = 70, R = 18, T = 20, Bm = 58, n = o.bars.length;
+    function Y(v) { return H - Bm - (v - o.y0) / (o.y1 - o.y0) * (H - T - Bm); }
+    var g = '', y, minor = o.minor || o.ystep / 5, slot = (W - L - R) / n, bw = Math.min(70, slot * 0.62);
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + minor).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#eef2f6"/>';
+    for (y = o.y0; y <= o.y1 + 1e-9; y = +(y + o.ystep).toFixed(6)) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(y).toFixed(1) + '" y2="' + Y(y).toFixed(1) + '" stroke="#cbd5e1"/><text x="' + (L - 6) + '" y="' + (Y(y) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#475569">' + (o.yfmt ? o.yfmt(y) : y) + '</text>';
+    var b = o.bars.map(function (br, i) {
+      var x = L + slot * i + (slot - bw) / 2, top = Y(br[1]);
+      return '<rect x="' + x.toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (H - Bm - top).toFixed(1) + '" rx="3" fill="' + (br[2] || '#0284c7') + '"/>' +
+        (o.values ? '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (top - 5).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">' + (o.fmt ? o.fmt(br[1]) : br[1]) + '</text>' : '') +
+        '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - Bm + 16) + '" text-anchor="middle" font-size="11" fill="#1e293b">' + br[0] + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title || 'Bar chart') + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' + g + b +
+      '<line x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#1e293b"/><line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - Bm) + '" y2="' + (H - Bm) + '" stroke="#1e293b"/>' +
+      '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.xlab || '') + '</text>' +
+      '<text transform="translate(16,' + ((T + H - Bm) / 2) + ') rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">' + (o.ylab || '') + '</text></svg>';
+  }
+
+  // Population pyramid. o: { title, male: [...], female: [...] } percentages of total population, youngest band first.
+  var BANDS = ['0–4', '5–9', '10–14', '15–19', '20–24', '25–29', '30–34', '35–39', '40–44', '45–49', '50–54', '55–59', '60–64', '65–69', '70–74', '75–79', '80+'];
+  function pyramid(o) {
+    var W = 320, H = 330, mid = W / 2, gap = 22, T = 30, Bm = 34, n = BANDS.length, bh = (H - T - Bm) / n, max = o.max || 8, sc = (mid - gap - 8) / max;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.title) + '"><rect width="' + W + '" height="' + H + '" fill="#fff"/>' +
+      '<text x="' + mid + '" y="16" text-anchor="middle" font-size="13" font-weight="800" fill="#0f3a5c">' + o.title + '</text>' +
+      '<text x="' + (mid - gap - 4) + '" y="28" text-anchor="end" font-size="10" fill="#0369a1" font-weight="700">Male</text><text x="' + (mid + gap + 4) + '" y="28" font-size="10" fill="#be185d" font-weight="700">Female</text>';
+    for (var k = 0; k <= max; k += 2) {
+      s += '<line x1="' + (mid - gap - k * sc) + '" x2="' + (mid - gap - k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/><line x1="' + (mid + gap + k * sc) + '" x2="' + (mid + gap + k * sc) + '" y1="' + T + '" y2="' + (H - Bm) + '" stroke="#eef2f6"/>' +
+        '<text x="' + (mid - gap - k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text><text x="' + (mid + gap + k * sc) + '" y="' + (H - Bm + 13) + '" text-anchor="middle" font-size="9" fill="#475569">' + k + '</text>';
+    }
+    BANDS.forEach(function (b, i) {
+      var y = H - Bm - (i + 1) * bh;
+      s += '<rect x="' + (mid - gap - o.male[i] * sc).toFixed(1) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.male[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#38bdf8"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 0.6).toFixed(1) + '" width="' + (o.female[i] * sc).toFixed(1) + '" height="' + (bh - 1.2).toFixed(1) + '" fill="#f472b6"/>' +
+        (i % 2 === 0 ? '<text x="' + mid + '" y="' + (y + bh * 0.75).toFixed(1) + '" text-anchor="middle" font-size="8.5" fill="#334155">' + b + '</text>' : '');
+    });
+    return s + '<text x="' + mid + '" y="' + (H - 6) + '" text-anchor="middle" font-size="10" fill="#334155">% of total population</text></svg>';
+  }
+  function twoPyramids(a, b) { return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px">' + pyramid(a) + pyramid(b) + '</div>'; }
+
+  /* ================= DIAGRAMS ================= */
+  var MK = '<defs><marker id="mB" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0f3a5c"/></marker><marker id="mR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#dc2626"/></marker></defs>';
+  var SVG_LAT = '<svg viewBox="0 0 640 470" role="img" aria-label="World biomes by latitude">' +
+    '<defs><clipPath id="glb"><circle cx="230" cy="235" r="200"/></clipPath></defs><rect width="640" height="470" fill="#f8fafc"/>' +
+    '<g clip-path="url(#glb)"><rect x="30" y="35" width="400" height="400" fill="#e2e8f0"/><rect x="30" y="35.0" width="400" height="17.3" fill="#e0f2fe"/><rect x="30" y="52.3" width="400" height="29.5" fill="#166534"/><rect x="30" y="81.8" width="400" height="38.5" fill="#65a30d"/><rect x="30" y="349.7" width="400" height="38.5" fill="#65a30d"/><rect x="30" y="120.3" width="400" height="35.0" fill="#fbbf24"/><rect x="30" y="314.7" width="400" height="35.0" fill="#fbbf24"/><rect x="30" y="155.3" width="400" height="45.0" fill="#d9f99d"/><rect x="30" y="269.7" width="400" height="45.0" fill="#d9f99d"/><rect x="30" y="200.3" width="400" height="34.7" fill="#047857"/><rect x="30" y="235.0" width="400" height="34.7" fill="#047857"/></g><circle cx="230" cy="235" r="200" fill="none" stroke="#0f172a" stroke-width="2"/>' +
+    '<line x1="30" x2="470" y1="51.6" y2="51.6" stroke="#0f172a" stroke-dasharray="5 4" stroke-width="1.2"/><text x="474" y="55.6" font-size="11" fill="#0f172a">Arctic Circle 66.5°N</text><line x1="30" x2="470" y1="155.3" y2="155.3" stroke="#0f172a" stroke-dasharray="5 4" stroke-width="1.2"/><text x="474" y="159.3" font-size="11" fill="#0f172a">Tropic of Cancer 23.5°N</text><line x1="30" x2="470" y1="235.0" y2="235.0" stroke="#0f172a" stroke-dasharray="5 4" stroke-width="1.2"/><text x="474" y="239.0" font-size="11" fill="#0f172a">Equator 0°</text><line x1="30" x2="470" y1="314.7" y2="314.7" stroke="#0f172a" stroke-dasharray="5 4" stroke-width="1.2"/><text x="474" y="318.7" font-size="11" fill="#0f172a">Tropic of Capricorn 23.5°S</text></svg>';
+  var PINS_LAT = [{ n: 1, x: 260, y: 39 }, { n: 2, x: 200, y: 65 }, { n: 3, x: 260, y: 99 }, { n: 4, x: 200, y: 138 }, { n: 5, x: 260, y: 176 }, { n: 6, x: 200, y: 217 }];
+
+  function box(x, y, w, h, fill, txt) { return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10" fill="' + fill + '" stroke="#0f3a5c" stroke-width="1.5"/>' + txt.map(function (t, i) { return '<text x="' + (x + w / 2) + '" y="' + (y + 24 + i * 17) + '" text-anchor="middle" font-size="12" fill="#0f172a">' + t + '</text>'; }).join(''); }
+  var SVG_FARM = '<svg viewBox="0 0 680 330" role="img" aria-label="A farm as a system">' + MK + '<rect width="680" height="330" fill="#f8fafc"/>' +
+    box(20, 30, 180, 90, '#dbeafe', ['sunlight, rain,', 'temperature,', 'soil, relief']) +
+    box(20, 150, 180, 90, '#fef3c7', ['labour, capital,', 'machinery, seeds,', 'fertiliser, subsidies']) +
+    box(250, 80, 180, 110, '#dcfce7', ['ploughing, sowing,', 'irrigating, spraying,', 'harvesting, milking,', 'shearing']) +
+    box(480, 30, 180, 90, '#ede9fe', ['crops, milk, meat,', 'wool, eggs,', 'money from sales']) +
+    box(480, 150, 180, 90, '#fee2e2', ['waste, run-off,', 'pollution,', 'soil erosion']) +
+    '<g stroke="#0f3a5c" stroke-width="2.5" fill="none" marker-end="url(#mB)"><path d="M200 75 L246 115"/><path d="M200 195 L246 160"/><path d="M430 120 L476 80"/><path d="M430 155 L476 190"/></g>' +
+    '<path d="M660 75 C 690 110, 690 300, 400 300 Q 110 300 110 244" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#mR)"/></svg>';
+  var PINS_FARM = [{ n: 1, x: 30, y: 30 }, { n: 2, x: 30, y: 150 }, { n: 3, x: 260, y: 80 }, { n: 4, x: 650, y: 30 }, { n: 5, x: 650, y: 150 }, { n: 6, x: 400, y: 300 }];
+
+  var SVG_NMULT = '<svg viewBox="0 0 640 400" role="img" aria-label="The negative multiplier effect in a remote rural area">' + MK + '<rect width="640" height="400" fill="#f8fafc"/>' +
+    '<g fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#mR)"><path d="M368 73 A140 140 0 0 1 430 119"/><path d="M460 210 A140 140 0 0 1 436 283"/><path d="M359 340 A140 140 0 0 1 281 340"/><path d="M204 283 A140 140 0 0 1 180 210"/><path d="M210 119 A140 140 0 0 1 272 73"/></g>' +
+    '<g font-size="30" text-anchor="middle"><text x="320" y="75">🚜</text><text x="470" y="185">🧳</text><text x="410" y="345">🏚️</text><text x="230" y="345">🚌</text><text x="170" y="185">👵</text></g>' +
+    '<text x="320" y="200" text-anchor="middle" font-size="15" font-weight="800" fill="#991b1b">Negative</text><text x="320" y="220" text-anchor="middle" font-size="15" font-weight="800" fill="#991b1b">multiplier effect</text>' +
+    '<text x="320" y="34" text-anchor="middle" font-size="11" font-weight="700" fill="#0f3a5c">START</text></svg>';
+  var PINS_NMULT = [{ n: 1, x: 365, y: 64 }, { n: 2, x: 512, y: 174 }, { n: 3, x: 452, y: 334 }, { n: 4, x: 186, y: 334 }, { n: 5, x: 128, y: 174 }];
+
+  /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
+  var EXTRA = {}, EXTRA_AT = {};
+
+  /* ================= CHECKPOINT PPQs (must answer correctly to unlock the next level) ================= */
+  var GATES = {
+    1: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 2, Q2(a)(i)', q: 'Which is the best definition of a biome?', o: [
+          'a community of animals and plants occupying a major habitat', 'a community of animals which are connected through a food web', 'a habitat where weather conditions change all year around', 'a habitat that is affected by human activity'], c: 0,
+        ms: '<b>A community of animals and plants occupying a major habitat.</b> A refers only to animals; the others are not definitions of a biome.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 2R, Q2(b)', q: 'Which is a characteristic of a tundra ecosystem?', o: [
+          'temperatures below 0°C most of the year', 'no presence of permafrost', 'precipitation all year round', 'rich in nutrients'], c: 0,
+        ms: '<b>Temperatures below 0°C most of the year.</b> Tundra has permafrost, little precipitation and nutrient-poor soils.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 2R, Q2(a)(i)', q: 'Which is a characteristic of the savanna biome?', o: ['grassland', 'daily rainfall', 'dense forest', 'permafrost'], c: 0,
+        ms: '<b>Grassland.</b> Daily rainfall is typical of rainforest, dense forest of forest biomes and permafrost of tundra.' },
+      { type: 'best', marks: 2, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q2(b)', q: 'Explain one factor that affects where biomes are found.', o: [
+          'Latitude: it controls how much energy from the Sun an area receives, so hot biomes such as rainforest are found near the Equator and cold tundra near the poles.',
+          'Latitude: places near the poles receive the most energy from the Sun, so the hottest biomes such as tropical rainforest are found in the Arctic and Antarctic regions.',
+          'Temperature affects biomes.',
+          'Biomes are found in different places.'], c: 0,
+        ms: '1 mark for a factor (e.g. <b>latitude</b>, <b>temperature</b>, rainfall, altitude) and 1 for explanation (e.g. <b>sun’s energy → rainforest near the Equator</b>; hot deserts near the tropics).' }],
+    2: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2023 Paper 2R, Q2(a)(i)', q: 'Which of these is a good provided by a tropical forest?', o: ['timber', 'recycling of nutrients', 'tourism', 'wildlife habitat'], c: 0,
+        ms: '<b>Timber.</b> Nutrient recycling, tourism and habitat are services, not goods.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 2R, Q2(c)', q: 'Which of these is one of the goods provided by natural ecosystems?', o: ['timber', 'soil formation', 'waste decomposition', 'aluminium'], c: 0,
+        ms: '<b>Timber.</b> Soil formation and decomposition are services; aluminium is a mineral, not a good from an ecosystem.' },
+      { type: 'best', marks: 1, cmd: 'Define', src: 'Based on Edexcel June 2022 Paper 2R, Q2(a)(ii)', q: 'What is meant by the term “natural ecosystem”?', o: [
+          'A community of plants and animals that interact with each other and with their physical environment.',
+          'A large area of farmland where crops are grown and animals are reared by people to sell for a profit.',
+          'The number and variety of different species that can be found in a particular area.',
+          'A plant and animal community covering a large area of the Earth’s surface.'], c: 0,
+        ms: '1 mark: <b>a community of plants and animals that interact with each other and their physical environment</b>. The last option defines a biome; the third defines biodiversity.' }],
+    3: [
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain one environmental impact of exploiting the Amazon rainforest.', o: [
+          'Trees are cleared and burned for cattle ranching, releasing stored carbon as CO₂. This adds to the greenhouse effect, so the forest’s role in regulating the global climate is reduced.',
+          'Trees are cleared for cattle ranching, which adds more carbon to the forest. This removes CO₂ from the atmosphere, so clearing the forest helps to slow down global warming and climate change.',
+          'Deforestation is bad for the environment.',
+          'Trees are cut down in the Amazon.'], c: 0,
+        ms: '1 mark for an impact (e.g. <b>CO₂ released</b>, biodiversity loss, soil erosion, river pollution) and 2 for development (e.g. <b>burning releases stored carbon</b> (1) → <b>adds to global warming</b> (1)).' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Deforestation in the Brazilian Amazon fell from about 13,000 km² in 2021 to about 5,800 km² in 2025. Calculate the percentage decrease, to the nearest whole number.', ans: 55, tol: 1, unit: '%',
+        ms: '(13,000 − 5,800) ÷ 13,000 × 100 = <b>55%</b>.' }],
+    4: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2024 Paper 2, Q2(c)', q: 'Which is the best definition of arable farming?', o: ['farming that produces crops', 'farming that grows trees', 'farming that specialises in rearing fish', 'farming that specialises in rearing livestock'], c: 0,
+        ms: '<b>Farming that produces crops.</b> The others describe forestry, fish farming and livestock farming.' },
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 2R, Q2(b)', q: 'What is meant by genetically modified (GM) crops?', o: [
+          'Plants with DNA that have been changed to increase yield.', 'Plants with root systems that have been changed to increase size.', 'Animals with DNA that have been changed to increase size.', 'Livestock that have greater resistance to disease.'], c: 0,
+        ms: '<b>Plants with DNA changed to increase yield.</b> The others refer to roots, animals or livestock, not crops.' },
+      { type: 'best', marks: 1, cmd: 'Define', src: 'Based on Edexcel June 2023 Paper 2R, Q2(a)(ii)', q: 'What is meant by the term “subsistence farming”?', o: [
+          'Producing crops and animals to feed the farmer’s own family rather than to sell at a market.',
+          'Growing crops or rearing animals on a large scale to sell for profit to large supermarkets and food companies.',
+          'Farming that uses very high inputs of labour or money compared with the farm’s size.',
+          'Rearing animals for milk, usually on lowland pasture close to large towns and cities.'], c: 0,
+        ms: '1 mark: <b>food produced to feed the farmer’s family rather than for sale</b>. The others describe commercial, intensive and dairy farming.' }],
+    5: [
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel June 2022 Paper 2R, Q2(d)', q: 'Give one type of land use found in a rural environment.', o: ['Forestry', 'A central business district', 'Inner-city high-rise flats', 'An underground metro system'], c: 0,
+        ms: '1 mark for any rural land use: <b>agriculture</b>, <b>forestry</b>, tourism, recreation, residential, mining.' },
+      { type: 'multi', marks: 2, cmd: 'Identify', q: 'Identify two characteristics of rural areas in developed countries such as the UK.', need: 2, items: [
+          { t: 'Low population density with hamlets and villages', ok: true },
+          { t: 'Populations that are often ageing', ok: true },
+          { t: 'Mainly secondary and tertiary jobs in large factories and offices', ok: false },
+          { t: 'Very high population density and tall buildings', ok: false }],
+        ms: 'Rural areas have <b>low population density</b>, small settlements and, in developed countries, often <b>ageing populations</b>.' }],
+    6: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 2R, Q2(a)', q: 'Which is the meaning of the term suburbanisation?', o: [
+          'the outward growth of urban development', 'population movement from rural to urban areas', 'increasing movement of people from urban to rural areas', 'population movement from the suburbs to the countryside'], c: 0,
+        ms: '<b>The outward growth of urban development.</b> The others describe urbanisation or counter-urbanisation.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q2(e)', q: 'Explain two reasons why accessibility matters in rural environments.', o: [
+          'People need to commute to jobs in towns, so good transport gives them a stable income. Rural people also need to reach hospitals and services, so good access maintains their quality of life and reduces isolation.',
+          'People in rural areas never need to travel, because every village has its own hospital and factory. Good access also makes villages more isolated, because tourists stay away from easy-to-reach places in the countryside.',
+          'For jobs and for hospitals.',
+          'So people can get to places.'], c: 0,
+        ms: '1 mark for each reason and 1 for development, ×2: e.g. <b>commuting to work</b> → stable income; <b>access to healthcare/services</b> → quality of life / less isolation.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 2, Q2(f)', q: 'For a named developed country, explain two factors that have caused changes in rural areas.', o: [
+          'UK: counter-urbanisation brings commuters from cities, which raises house prices so young locals cannot afford homes. Mechanisation of farming has cut farm jobs, so young people leave and village services close.',
+          'UK: urbanisation has moved millions of city people into villages, which lowers house prices for everyone. Farming now employs more people than ever, so village shops and schools are opening all the time across the country.',
+          'Counter-urbanisation and tourism.',
+          'People moving and jobs changing.'], c: 0,
+        ms: '1 mark for each factor and 1 for development, ×2, with a named developed country: e.g. <b>counter-urbanisation</b> → house prices rise; <b>decline in farm employment</b> → out-migration and closing services.' }],
+    7: [
+      { type: 'best', marks: 1, cmd: 'Define', src: 'Based on Edexcel June 2019 Paper 2, Q2(b)', q: 'What is meant by the term “negative multiplier effect”?', o: [
+          'A downward spiral in which one problem, such as job losses, triggers further problems such as closing services.',
+          'A spiral of growth in which new jobs attract more people, which in turn attracts more shops and other services.',
+          'The number of times more money a farm earns after it diversifies into tourism and leisure activities.',
+          'The movement of people and employment from major cities to smaller towns and rural areas.'], c: 0,
+        ms: '1 mark: <b>a spiral of decline where one problem triggers others</b> (e.g. depopulation, closing services).' },
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel Summer 2021 Paper 2, Q2(c)(i)', q: 'Give one factor that leads to rural isolation.', o: [
+          'The loss of local bus routes', 'The opening of a new village school', 'Faster broadband in remote villages', 'More commuters moving into the area'], c: 0,
+        ms: '1 mark for a factor, e.g. <b>loss of bus routes</b>, closure of village services, poor internet access, rural decline.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2024 Paper 2, Q2(g)', q: 'For a named developed country, explain two ways that tourist pressure can affect rural areas.', o: [
+          'UK (Lake District): huge numbers of visitors cause traffic congestion on narrow roads at honeypot sites such as Keswick. About a quarter of homes are second homes or holiday lets, so house prices rise beyond local wages.',
+          'UK (Lake District): very few tourists visit, so roads are always empty even in summer. Second homes are banned in National Parks, so house prices are lower than anywhere else in the UK and local people can easily afford to buy.',
+          'Traffic and house prices.',
+          'Tourists cause problems.'], c: 0,
+        ms: '1 mark for each way and 1 for development, ×2: e.g. <b>congestion at honeypot sites</b>; <b>second homes</b> → house prices rise; footpath erosion; seasonal jobs.' }],
+    8: [
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel June 2019 Paper 2, Q2(e)', q: 'Give one type of rural or farm diversification.', o: [
+          'Opening a bed and breakfast', 'Buying a larger combine harvester', 'Spraying more fertiliser on fields', 'Draining wet fields to grow more wheat'], c: 0,
+        ms: '1 mark, e.g. <b>B&B</b>, camping, farm shop, pick-your-own, vineyard, organic farming. The others increase agricultural production instead.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2019 Paper 2R, Q2(f)', q: 'Explain two reasons why some farmers are diversifying.', o: [
+          'To increase farm income, because supermarkets pay low prices for crops and livestock. To add value to farm products, for example selling the farm’s own meat or cheese directly to local people in a farm shop.',
+          'To reduce farm income, because the government taxes profitable farms heavily. To stop selling any of their own produce, so that they can buy all their food from large supermarkets in nearby towns and cities instead.',
+          'To make more money and to sell things.',
+          'Because farming is hard.'], c: 0,
+        ms: '1 mark for each reason and 1 for development, ×2: e.g. <b>increase income</b> (low prices); <b>add value</b> to products; use spare buildings; spread risk.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 2R, Q2(e)', q: 'For a named developed country, explain two ways farm incomes can be diversified.', o: [
+          'UK: converting barns into holiday cottages or glamping sites earns income from tourists all year. Renting fields for wind turbines or solar panels gives a reliable rental income from energy companies.',
+          'UK: buying more cattle and larger tractors earns income from tourists all year round, because visitors like machinery. Removing hedgerows to make bigger fields gives a reliable rental income from energy companies.',
+          'Tourism and energy.',
+          'They can sell more.'], c: 0,
+        ms: '1 mark for each way and 1 for development, ×2, with a named developed country: e.g. <b>tourism</b> (holiday lets, campsites), <b>renewable energy</b>, farm shops, organic produce.' }],
+    9: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2022 Paper 2, Q2(b)', q: 'Which is the meaning of the term organic farming?', o: [
+          'farming that does not use chemical fertilisers.', 'farming that only produces genetically modified crops.', 'farming that uses chemical fertilisers.', 'farming that does not require irrigation.'], c: 0,
+        ms: '<b>Farming that does not use chemical fertilisers.</b>' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 2, Q2(e)', q: 'For people living in a developed country, explain two strategies used to make rural life more sustainable.', o: [
+          'Farms diversify into farm shops and pick-your-own, which makes up for low crop prices and keeps the farm profitable. Better public transport to remote villages reduces isolation for older people who do not drive.',
+          'Farms stop selling food and close their shops, which reduces their profits and makes the farm less viable. Bus services to remote villages are cut, so older people who do not drive have to stay at home and become more isolated.',
+          'Farm shops and buses.',
+          'Making villages better.'], c: 0,
+        ms: '1 mark for each strategy and 1 for development, ×2: e.g. <b>diversification</b> → profitable farms; <b>improved transport</b> → less isolation; affordable housing; organic farming.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2023 Paper 2R, Q2(g)', q: 'Explain two strategies used to make rural living more sustainable in developing or emerging countries.', o: [
+          'NGOs install solar panels to bring electricity to villages, so families can run lights and fridges without burning fuelwood. Governments build rural health centres, so people do not have to migrate to cities for treatment.',
+          'NGOs remove electricity from villages, so families must burn more fuelwood every day for cooking and light. Governments close rural health centres, so people have to migrate to cities to get any treatment, which makes rural living less sustainable.',
+          'Solar power and health centres.',
+          'Helping villages.'], c: 0,
+        ms: '1 mark for each strategy and 1 for development, ×2: e.g. <b>NGO electricity access</b>; <b>health centres</b>; microfinance; clean water projects.' }],
+    10: [
+      { type: 'best', marks: 1, cmd: 'State', src: 'Based on Edexcel Summer 2021 Paper 2, Q2(d)(iii)', q: 'Give one factor that leads to rural–urban migration.', o: [
+          'A lack of jobs in rural areas', 'Rising crop prices in villages', 'New hospitals in rural areas', 'Plenty of rural schools'], c: 0,
+        ms: '1 mark, e.g. <b>lack of employment</b>, better jobs in the city, lack of education, rural isolation, poor transport.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel Summer 2021 Paper 2, Q2(e)', q: 'For a named developing or emerging country, explain two environmental challenges facing rural areas.', o: [
+          'Thailand: farmers burn crop waste after harvest, which creates haze and air pollution. In Isan, soils are degraded and salty, so crop yields fall and farmers struggle to earn a living.',
+          'Thailand: farmers recycle all of their crop waste, so the air is always clean. Soils in Isan are the most fertile in the world, so crop yields keep rising every single year without fertiliser.',
+          'Pollution and bad soils.',
+          'The environment is damaged.'], c: 0,
+        ms: '1 mark for each challenge and 1 for development, ×2, with a named country: e.g. <b>haze from burning crop waste</b>; <b>soil degradation and salinity</b>; drought and floods; deforestation; human–wildlife conflict.' },
+      { type: 'num', marks: 2, cmd: 'Calculate', q: 'Thailand’s urban population share rose from 44.7% in 2011 to 52.2% in 2021. Calculate the average increase per year, in percentage points.', ans: 0.75, tol: 0.01, unit: 'percentage points per year',
+        ms: '(52.2 − 44.7) ÷ 10 = <b>0.75 percentage points per year</b>.' }],
+    11: [
+      { type: 'best', marks: 1, cmd: 'Identify', src: 'Based on Edexcel June 2019 Paper 2, Q2(a)', q: 'What is the meaning of the term NGO?', o: ['non-governmental organisation', 'non-global organisation', 'non-geographically organised', 'non-global operation'], c: 0,
+        ms: '<b>Non-governmental organisation.</b>' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 2, Q2(g)', q: 'Explain how governments and NGOs manage rural challenges in developing or emerging countries.', o: [
+          'Thailand’s government introduced the 30-baht health scheme, so rural people can afford treatment. The NGO Bring the Elephant Home helps farmers grow crops that elephants avoid, reducing crop losses and conflict.',
+          'Thailand’s government closed rural hospitals, so rural people must pay much more for treatment. NGOs encourage farmers to grow crops that elephants love, so more crops are eaten and farmers’ incomes fall even further.',
+          'The government helps and NGOs help.',
+          'They give money to people.'], c: 0,
+        ms: 'Max 2 marks for a government strategy and 2 for an NGO strategy (point + development): e.g. <b>30-baht scheme</b>, OTOP, irrigation; <b>Tom Yum Project</b>, Operation Smile, Royal Project Foundation.' },
+      { type: 'best', marks: 4, cmd: 'Explain', src: 'Based on Edexcel June 2022 Paper 2R, Q2(g)', q: 'Explain one strategy used to improve health and one strategy used to improve housing in rural areas of developing or emerging countries.', o: [
+          'Health: building health centres in remote areas lets communities get treatment without long journeys. Housing: low-cost loans or self-help schemes let families build safer homes with piped water and electricity.',
+          'Health: closing village clinics means people have to travel further to get treatment. Housing: banning new homes in villages means families have to move into crowded slums in Bangkok or in other large, crowded cities.',
+          'Health centres and new houses.',
+          'Better doctors and homes.'], c: 0,
+        ms: '1 mark for each strategy and 1 for development: e.g. <b>rural health centre</b> → access to treatment; <b>housing loans / self-help schemes</b> → safer, better-serviced homes.' }]
+  };
+  function gatePassed(n) { return !!(S.gate && S.gate[n]); }
+  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+
+  function startGate(n) {
+    run = null; closeModal();
+    S.gate = S.gate || {}; S.gv = S.gv || {};
+    var pool = GATES[n], vi = (S.gv[n] || 0) % pool.length, G = pool[vi], tries = 0;
+    $('app').innerHTML = '<div class="lvhead"><span class="emo" aria-hidden="true">🔐</span><div><div class="tag">Checkpoint · after Level ' + n + ' · unlocks Level ' + (n + 1) + '</div><h2>Past paper question</h2></div><span class="spacer"></span><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button></div>' +
+      '<div class="panel gate"><p class="how">Answer this exam-style question <b>correctly</b> to unlock the next level. If you get it wrong, read the mark scheme and try another question.</p><div id="gq"></div></div>';
+    window.scrollTo(0, 0);
+    function render() {
+      var h = '<div class="exq"><div class="mk">' + (G.src ? esc(G.src) + ' · ' : 'Exam-style question · ') + 'Command term: <b>' + G.cmd + '</b> · [' + G.marks + ' mark' + (G.marks > 1 ? 's' : '') + ']</div><h3>' + esc(G.q) + '</h3></div>';
+      if (G.type === 'best') h += '<p class="gate-ins">' + (G.marks === 1 ? 'Choose the <b>correct</b> answer.' : 'Which answer would score <b>full marks</b>?') + '</p><div class="choices one">' + shuffle(G.o.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice" data-j="' + j + '"' + (DEBUG && j === G.c ? ' data-ok="1"' : '') + '>' + esc(G.o[j]) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'multi') h += '<p class="gate-ins">Select the <b>' + G.need + '</b> statements that would earn marks.</p><div class="choices one">' + shuffle(G.items.map(function (_, j) { return j; })).map(function (j) { return '<button type="button" class="choice tick" data-j="' + j + '" aria-pressed="false"' + (DEBUG && G.items[j].ok ? ' data-ok="1"' : '') + '>' + esc(G.items[j].t) + '</button>'; }).join('') + '</div>';
+      if (G.type === 'num') h += '<div class="dg-num"><input type="text" inputmode="decimal" id="gNum" aria-label="Your answer" autocomplete="off"' + (DEBUG ? ' data-a="' + G.ans + '"' : '') + '><span class="dg-unit">' + (G.unit || '') + '</span></div>';
+      h += '<div class="actions"><button type="button" class="btn gold" id="gSub">Submit answer</button></div><div id="gRes" aria-live="polite"></div>';
+      $('gq').innerHTML = h;
+      var box = $('gq'), pickB = null;
+      box.querySelectorAll('.choice').forEach(function (b) { b.addEventListener('click', function () {
+        if (b.disabled) return;
+        if (G.type === 'best') { box.querySelectorAll('.choice').forEach(function (x) { x.classList.remove('sel'); }); b.classList.add('sel'); pickB = +b.dataset.j; }
+        else { var on = !b.classList.contains('sel'); b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      }); });
+      if ($('gNum')) $('gNum').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('gSub').click(); });
+      $('gSub').addEventListener('click', function () {
+        var ok, R = $('gRes');
+        if (G.type === 'best') { if (pickB == null) { R.innerHTML = '<div class="msg info">Choose an answer first.</div>'; return; } ok = pickB === G.c; }
+        if (G.type === 'multi') {
+          var chosen = Array.prototype.map.call(box.querySelectorAll('.choice.sel'), function (b) { return +b.dataset.j; });
+          if (chosen.length !== G.need) { R.innerHTML = '<div class="msg info">Select exactly ' + G.need + ' statements.</div>'; return; }
+          ok = chosen.every(function (j) { return G.items[j].ok; });
+        }
+        if (G.type === 'num') { var v = parseFloat(String($('gNum').value).replace(/[^0-9.\-]/g, '')); if (isNaN(v)) { R.innerHTML = '<div class="msg info">Type a number first.</div>'; return; } ok = Math.abs(v - G.ans) <= G.tol + 1e-9; $('gNum').disabled = true; }
+        tries++;
+        box.querySelectorAll('.choice').forEach(function (b) {
+          b.disabled = true; var j = +b.dataset.j;
+          var good = G.type === 'best' ? j === G.c : G.items[j].ok;
+          if (good) b.classList.add('right'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+        });
+        this.disabled = true;
+        if (ok) {
+          S.gate[n] = 1; var bonus = tries === 1 ? 30 : 15; S.xp += bonus; save(); paintHud(); xpPop(bonus, this); confetti(false);
+          R.innerHTML = '<div class="fbk show good">✔ <b>Correct — checkpoint passed!</b> ' + G.ms + '</div><div class="actions"><button type="button" class="btn ghost" data-map="1">Level map</button><button type="button" class="btn primary" id="gNext">Level ' + (n + 1) + ' →</button></div>';
+          $('gNext').addEventListener('click', function () { startLevel(n + 1); }); $('gNext').focus();
+        } else {
+          S.gv[n] = (S.gv[n] || 0) + 1; save();
+          R.innerHTML = '<div class="fbk show bad">✖ <b>Not quite.</b> Mark scheme: ' + G.ms + '</div><div class="actions"><button type="button" class="btn primary" id="gAgain">Try another question →</button></div>';
+          $('gAgain').addEventListener('click', function () { vi = (vi + 1) % pool.length; G = pool[vi]; render(); });
+        }
+      });
+    }
+    render();
+  }
+
+  paintHud(); showMap();
+})();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
