@@ -329,6 +329,25 @@
   .choices.one { grid-template-columns: 1fr; }
   .choice.tick::before { content: '☐ '; } .choice.tick.sel::before { content: '☑ '; }
   @media (max-width: 860px) { .ld { grid-template-columns: 1fr; } }
+  .kbar { display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; margin: 6px 0 14px; }
+  .klevel { background: #fff; border-radius: 18px; padding: 18px 20px; margin: 0 0 18px; box-shadow: 0 4px 18px rgba(15,58,92,.08); }
+  .klevel h2 { font-size: 1.25rem; color: #0f3a5c; padding-left: 10px; margin: 0 0 10px; }
+  .kstage { border-top: 1px solid #e2e8f0; padding: 10px 0 4px; }
+  .kstage h4, .kgate h4 { margin: 4px 0 6px; color: #0f3a5c; }
+  .kzones { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+  .kzone { border: 1px solid #cbd5e1; border-radius: 12px; padding: 8px 12px; background: #f8fafc; }
+  .kzone ul, .klist, .kopts { margin: 6px 0; padding-left: 20px; }
+  .klist li, .kzone li, .kopts li { margin: 3px 0; line-height: 1.4; }
+  .kwhy { color: #64748b; font-size: .92em; }
+  .kq { margin: 8px 0 12px; }
+  .kok { color: #15803d; font-weight: 700; }
+  .kno { color: #475569; }
+  .kmk { font-size: .8rem; font-weight: 700; color: #0f766e; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 2px; }
+  .kms { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 6px 10px; border-radius: 6px; font-size: .95em; }
+  .kgate { margin-top: 12px; border: 2px dashed #f59e0b; border-radius: 14px; padding: 10px 14px; background: #fffbeb; }
+  .kld { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 14px; align-items: start; }
+  @media (max-width: 760px) { .kld { grid-template-columns: 1fr; } }
+  @media print { .top-bar, .hud, .kbar, .foot, #modal { display: none !important; } body { background: #fff !important; } .klevel { box-shadow: none; border: 1px solid #cbd5e1; break-inside: auto; } .kq, .kzone, figure { break-inside: avoid; } }
 </style>
 </head>
 <body>
@@ -442,11 +461,12 @@
           '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
       }).join('') + '</div>' +
       '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
-      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="akey">Teacher: answer key</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
     paintHud();
   }
   $('app').addEventListener('click', function (e) {
     var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
+    if (e.target.id === 'akey') { showKey(); return; }
     if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
     if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
     if (e.target.closest('[data-map]')) showMap();
@@ -1579,6 +1599,84 @@
       });
     }
     render();
+  }
+
+  var KEYSLOTS = [['C', 'Point'], ['E', 'Evidence / Example'], ['X', 'Explain / Develop'], ['J', 'Conclusion / Judgement']];
+  /* ================= TEACHER ANSWER KEY ================= */
+  function showKey() {
+    run = null; closeModal();
+    var R = { sortGame: sortGame, flash: flash, orderGame: orderGame, mcq: mcq, dataGame: dataGame, labelGame: labelGame, stages: stages }, curN = 0;
+    function why(t) { return t ? ' <span class="kwhy">— ' + t + '</span>' : ''; }
+    function opts(o, c) { return '<ul class="kopts">' + o.map(function (x, j) { return '<li class="' + (j === c ? 'kok' : 'kno') + '">' + (j === c ? '✅ ' : '') + esc(x) + '</li>'; }).join('') + '</ul>'; }
+    stages = function (root, list) {
+      if (typeof EXTRA !== 'undefined' && EXTRA[curN]) { var at = EXTRA_AT[curN] != null ? EXTRA_AT[curN] : list.length - 1; list = list.slice(0, at).concat(EXTRA[curN], list.slice(at)); }
+      list.forEach(function (s, i) {
+        var p = document.createElement('div'); p.className = 'kstage';
+        p.innerHTML = '<h4>Part ' + (i + 1) + ': ' + s.title + '</h4>' + (s.how ? '<p class="how">' + s.how + '</p>' : '') + '<div class="sb"></div>';
+        root.appendChild(p);
+        try { s.build(p.querySelector('.sb'), function () {}); } catch (e) { p.querySelector('.sb').innerHTML = '<p class="kwhy">Interactive activity — play the level to see it.</p>'; }
+      });
+    };
+    sortGame = function (root, cfg) {
+      root.innerHTML = '<div class="kzones">' + cfg.zones.map(function (z) {
+        var cs = cfg.cards.filter(function (c) { return (c.a || []).indexOf(z.id) > -1; });
+        return '<div class="kzone"><b>' + z.label + '</b><ul>' + cs.map(function (c) { return '<li>' + esc(c.t) + (c.s ? ' <small>(' + esc(c.s) + ')</small>' : '') + why(c.why) + '</li>'; }).join('') + '</ul></div>';
+      }).join('') + '</div>';
+    };
+    flash = function (el, cfg) {
+      el.innerHTML = '<ul class="klist">' + cfg.items.map(function (x) { return '<li>' + esc(x.t) + ' → <b>' + (x.a ? cfg.yes : cfg.no) + '</b>' + why(x.why) + '</li>'; }).join('') + '</ul>';
+    };
+    orderGame = function (root, items) { root.innerHTML = '<p class="kwhy">Correct order:</p><ol class="klist">' + items.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>'; };
+    mcq = function (root, qs) {
+      root.innerHTML = qs.map(function (q, i) { return '<div class="kq"><b>' + (i + 1) + '. ' + q.q + '</b>' + opts(q.o, q.c) + (q.f ? '<p class="kwhy">' + q.f + '</p>' : '') + '</div>'; }).join('');
+    };
+    dataGame = function (el, cfg) {
+      el.innerHTML = '<figure class="dg-fig">' + cfg.chart + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure>' + cfg.qs.map(function (q, i) {
+        return '<div class="kq"><b>' + (i + 1) + '. ' + q.q + '</b>' + (q.type === 'num' ? '<p class="kok">✅ ' + q.ans + ' ' + (q.unit || '') + (q.tol ? ' (accept ±' + q.tol + ')' : '') + '</p>' : opts(q.o, q.c)) + (q.f ? '<p class="kwhy">' + q.f + '</p>' : '') + '</div>';
+      }).join('');
+    };
+    labelGame = function (el, cfg) {
+      var pins = cfg.pins.map(function (p) { return '<g class="ld-pin filled" transform="translate(' + p.x + ',' + p.y + ')"><circle r="15"/><text y="5" text-anchor="middle">' + p.n + '</text></g>'; }).join('');
+      var ls = cfg.labels.filter(function (l) { return l.pin != null; }).sort(function (a, b) { return a.pin - b.pin; });
+      var traps = cfg.labels.filter(function (l) { return l.pin == null; });
+      el.innerHTML = '<div class="kld"><figure class="ld-fig">' + cfg.svg.replace('</svg>', pins + '</svg>') + (cfg.cap ? '<figcaption>' + cfg.cap + '</figcaption>' : '') + '</figure><div><ol class="klist">' +
+        ls.map(function (l) { return '<li value="' + l.pin + '">' + esc(l.t) + '</li>'; }).join('') + '</ol>' + (traps.length ? '<p class="kwhy">Trap label' + (traps.length > 1 ? 's' : '') + ': ' + traps.map(function (l) { return esc(l.t); }).join('; ') + '</p>' : '') + '</div></div>';
+    };
+    function gateHtml(n) {
+      var G = (typeof GATES !== 'undefined') && GATES[n]; if (!G || !G.length) return '';
+      return '<div class="kgate"><h4>🔐 Checkpoint after Level ' + n + (G.length > 1 ? ' — one of these ' + G.length + ' is asked (they rotate)' : '') + '</h4>' + G.map(function (g, i) {
+        var h = '<div class="kq"><div class="kmk">' + (g.src ? esc(g.src) + ' · ' : '') + (g.cmd ? g.cmd + ' · ' : '') + '[' + g.marks + ' mark' + (g.marks > 1 ? 's' : '') + ']</div><b>' + (G.length > 1 ? String.fromCharCode(65 + i) + '. ' : '') + esc(g.q) + '</b>';
+        if (g.type === 'best') h += opts(g.o, g.c);
+        if (g.type === 'multi') h += '<ul class="kopts">' + g.items.map(function (x) { return '<li class="' + (x.ok ? 'kok' : 'kno') + '">' + (x.ok ? '✅ ' : '') + esc(x.t) + '</li>'; }).join('') + '</ul>';
+        if (g.type === 'num') h += '<p class="kok">✅ ' + g.ans + ' ' + (g.unit || '') + '</p>';
+        return h + (g.ms ? '<p class="kms"><b>Mark scheme:</b> ' + g.ms + '</p>' : '') + '</div>';
+      }).join('') + '</div>';
+    }
+    function bossHtml() {
+      if (typeof EXQ === 'undefined') return '';
+      return EXQ.map(function (Q, i) {
+        return '<div class="kq"><div class="kmk">' + esc(Q.mk) + '</div><b>' + (i + 1) + '. ' + esc(Q.q) + '</b><ol class="klist">' +
+          KEYSLOTS.map(function (s) { return '<li><b>' + s[1] + ':</b> ' + esc(Q[s[0]]) + '</li>'; }).join('') + '</ol><p class="kwhy">Traps: ' + Q.D.map(esc).join(' / ') + '</p></div>';
+      }).join('');
+    }
+    $('app').innerHTML = '<div class="kbar"><button type="button" class="btn ghost" data-map="1">🗺️ Level map</button><button type="button" class="btn primary" id="kprint">🖨️ Print or save as PDF</button></div>' +
+      '<div class="hero"><span class="kicker">Teacher answer key</span><h1>' + document.title.split(' — ')[0] + '</h1><p>Every activity with its answers, every past paper checkpoint (with mark schemes) and the final boss. Sort and order activities are shown in their correct groups and order; students see them shuffled.</p></div><div id="keyBody"></div>';
+    var body = $('keyBody');
+    try {
+      LEVELS.forEach(function (L) {
+        curN = L.n;
+        var sec = document.createElement('section'); sec.className = 'klevel';
+        sec.innerHTML = '<h2 style="border-left:6px solid ' + ZONES[L.z][2] + '">' + L.emo + ' Level ' + L.n + ' · ' + ZONES[L.z][1] + ': ' + esc(L.t) + '</h2>';
+        body.appendChild(sec);
+        if (L.z === 'X' && typeof EXQ !== 'undefined') { var b = document.createElement('div'); b.className = 'kstage'; b.innerHTML = '<h4>Final boss: build each answer from the cards</h4>' + bossHtml(); sec.appendChild(b); }
+        else if (LV[L.n]) LV[L.n](sec);
+        sec.insertAdjacentHTML('beforeend', gateHtml(L.n));
+      });
+    } finally {
+      sortGame = R.sortGame; flash = R.flash; orderGame = R.orderGame; mcq = R.mcq; dataGame = R.dataGame; labelGame = R.labelGame; stages = R.stages;
+    }
+    $('kprint').addEventListener('click', function () { window.print(); });
+    window.scrollTo(0, 0);
   }
 
   paintHud(); showMap();
