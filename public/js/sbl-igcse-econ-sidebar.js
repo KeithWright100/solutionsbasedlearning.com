@@ -90,9 +90,80 @@
       {
         "slug": "business-economics",
         "label": "Business Economics",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/economics/learn/business-economics",
+        "status": "available",
+        "topics": [
+          {
+            "title": "1.2.1 Production",
+            "lessons": [
+              {
+                "label": "Production and sectors",
+                "href": "/igcse/economics/learn/business-economics/l01-production-and-sectors"
+              }
+            ]
+          },
+          {
+            "title": "1.2.2 Productivity and division of labour",
+            "lessons": [
+              {
+                "label": "Productivity",
+                "href": "/igcse/economics/learn/business-economics/l02-productivity"
+              },
+              {
+                "label": "Division of labour",
+                "href": "/igcse/economics/learn/business-economics/l03-division-of-labour"
+              }
+            ]
+          },
+          {
+            "title": "1.2.3 Costs, revenue and profit",
+            "lessons": [
+              {
+                "label": "Costs, revenue and profit",
+                "href": "/igcse/economics/learn/business-economics/l04-costs-revenue-and-profit"
+              },
+              {
+                "label": "Economies of scale",
+                "href": "/igcse/economics/learn/business-economics/l05-economies-of-scale"
+              }
+            ]
+          },
+          {
+            "title": "1.2.4 Business competition",
+            "lessons": [
+              {
+                "label": "Competition and firm size",
+                "href": "/igcse/economics/learn/business-economics/l06-competition-and-firm-size"
+              },
+              {
+                "label": "Monopoly and oligopoly",
+                "href": "/igcse/economics/learn/business-economics/l07-monopoly-and-oligopoly"
+              }
+            ]
+          },
+          {
+            "title": "1.2.5 The labour market",
+            "lessons": [
+              {
+                "label": "The labour market",
+                "href": "/igcse/economics/learn/business-economics/l08-the-labour-market"
+              }
+            ]
+          },
+          {
+            "title": "1.2.6 Government intervention",
+            "lessons": [
+              {
+                "label": "Government intervention",
+                "href": "/igcse/economics/learn/business-economics/l09-government-intervention"
+              },
+              {
+                "label": "The minimum wage",
+                "href": "/igcse/economics/learn/business-economics/l10-minimum-wage"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -102,16 +173,116 @@
       {
         "slug": "government-economy",
         "label": "Government and the Economy",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/economics/learn/government-and-the-economy",
+        "status": "available",
+        "topics": [
+          {
+            "title": "2.1.1 Macroeconomic objectives",
+            "lessons": [
+              {
+                "label": "Economic growth",
+                "href": "/igcse/economics/learn/government-and-the-economy/l01-economic-growth"
+              },
+              {
+                "label": "Inflation",
+                "href": "/igcse/economics/learn/government-and-the-economy/l02-inflation"
+              },
+              {
+                "label": "Unemployment",
+                "href": "/igcse/economics/learn/government-and-the-economy/l03-unemployment"
+              },
+              {
+                "label": "The current account",
+                "href": "/igcse/economics/learn/government-and-the-economy/l04-current-account"
+              },
+              {
+                "label": "The environment",
+                "href": "/igcse/economics/learn/government-and-the-economy/l05-protecting-the-environment"
+              },
+              {
+                "label": "Redistribution of income",
+                "href": "/igcse/economics/learn/government-and-the-economy/l06-redistribution-of-income"
+              }
+            ]
+          },
+          {
+            "title": "2.1.2 Government policies",
+            "lessons": [
+              {
+                "label": "Fiscal policy",
+                "href": "/igcse/economics/learn/government-and-the-economy/l07-fiscal-policy"
+              },
+              {
+                "label": "Monetary policy",
+                "href": "/igcse/economics/learn/government-and-the-economy/l08-monetary-policy"
+              },
+              {
+                "label": "Supply-side policy",
+                "href": "/igcse/economics/learn/government-and-the-economy/l09-supply-side-policy"
+              }
+            ]
+          },
+          {
+            "title": "2.1.3 Relationships between objectives",
+            "lessons": [
+              {
+                "label": "Conflicts between objectives",
+                "href": "/igcse/economics/learn/government-and-the-economy/l10-relationships-between-objectives"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "global-economy",
         "label": "The Global Economy",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/economics/learn/the-global-economy",
+        "status": "available",
+        "topics": [
+          {
+            "title": "2.2.1 Globalisation",
+            "lessons": [
+              {
+                "label": "Globalisation",
+                "href": "/igcse/economics/learn/the-global-economy/l01-globalisation"
+              },
+              {
+                "label": "MNCs and FDI",
+                "href": "/igcse/economics/learn/the-global-economy/l02-mncs-and-fdi"
+              }
+            ]
+          },
+          {
+            "title": "2.2.2 International trade",
+            "lessons": [
+              {
+                "label": "Free trade and protection",
+                "href": "/igcse/economics/learn/the-global-economy/l03-free-trade-and-protection"
+              },
+              {
+                "label": "Methods of protection",
+                "href": "/igcse/economics/learn/the-global-economy/l04-methods-of-protection"
+              },
+              {
+                "label": "Trading blocs and the WTO",
+                "href": "/igcse/economics/learn/the-global-economy/l05-trading-blocs-and-the-wto"
+              }
+            ]
+          },
+          {
+            "title": "2.2.3 Exchange rates",
+            "lessons": [
+              {
+                "label": "Exchange rate determination",
+                "href": "/igcse/economics/learn/the-global-economy/l06-exchange-rate-determination"
+              },
+              {
+                "label": "Appreciation and depreciation",
+                "href": "/igcse/economics/learn/the-global-economy/l07-appreciation-and-depreciation"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
