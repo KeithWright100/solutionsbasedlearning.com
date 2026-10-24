@@ -128,6 +128,47 @@
   .igcse-hero-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
   .igcse-hero-btn:hover svg { transform: translateX(4px); }
 
+
+  /* ---- v2 cards (matches the IGCSE hubs) ---- */
+  .lh-units { gap: 16px; }
+  .lh-unit-card {
+    --acc: #14B8A6; --acc-bg: #E6FBF7; --acc-deep: #0F766E;
+    position: relative; display: flex; flex-direction: column; text-decoration: none; color: var(--lh-ink);
+    border: 2px solid rgba(15, 23, 42, 0.18); border-top: 5px solid var(--acc); border-radius: 16px;
+    padding: 16px 18px 14px; box-shadow: 0 1px 2px rgba(15,23,42,.05), 0 6px 18px rgba(15,23,42,.05);
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+  }
+  a.lh-unit-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(15,23,42,.12); border-color: var(--acc); }
+  .lh-units.p2 .lh-unit-card { --acc: #6366F1; --acc-bg: #EEF0FF; --acc-deep: #4338CA; }
+  .lh-units.p3 .lh-unit-card { --acc: #8B5CF6; --acc-bg: #F1EBFE; --acc-deep: #6D28D9; }
+  .lh-units.fw .lh-unit-card { --acc: #C99A2E; --acc-bg: #FBF2DD; --acc-deep: #8A6514; }
+  .lh-unit-card__section { align-self: flex-start; background: var(--acc-bg); color: var(--acc-deep); border-radius: 999px; padding: 3px 10px; font-weight: 700; margin-bottom: 0; }
+  .lh-unit-card h3 { font-size: 1.12rem; margin: 10px 56px 12px 0; }
+  .lh-unit-card__icon { position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--acc-bg); color: var(--acc-deep); }
+  .lh-unit-card__icon svg { width: 24px; height: 24px; }
+  .lh-unit-card__bar { height: 8px; border: 1px solid var(--lh-border); background: var(--lh-bg); margin-top: auto; }
+  .lh-unit-card__bar-fill { background: linear-gradient(90deg, var(--acc), var(--lh-green)); transition: width .6s ease; }
+  .lh-unit-card__meta { font-size: 0.78rem; color: var(--lh-body); font-weight: 600; }
+  .lh-unit-card__go { color: var(--acc-deep); font-weight: 700; transition: transform .2s; display: inline-block; }
+  a.lh-unit-card:hover .lh-unit-card__go { transform: translateX(4px); }
+  .lh-unit-card--soon { border-style: dashed; border-top-style: solid; box-shadow: none; background: #fbfcfe; }
+  .lh-section-title { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; margin: 30px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--lh-border); }
+  .lh-section-title::before { content: ''; width: 6px; height: 22px; border-radius: 3px; background: var(--acc, #14B8A6); flex: none; }
+  .lh-section-title.p2 { --acc: #6366F1; } .lh-section-title.p3 { --acc: #8B5CF6; } .lh-section-title.fw { --acc: #C99A2E; }
+  .ib-continue { display: flex; align-items: center; gap: 16px; margin: 0 0 8px; padding: 16px 20px; text-decoration: none; color: #fff;
+    background: linear-gradient(135deg, #0f766e, #0e7490); border-radius: 16px; border: 2px solid rgba(255,255,255,.25);
+    box-shadow: 0 12px 28px rgba(14,116,144,.28); transition: transform .2s; }
+  .ib-continue:hover { transform: translateY(-2px); }
+  .ib-continue * { color: #fff; }
+  .ib-continue__icon { flex: none; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; }
+  .ib-continue__icon svg { width: 22px; height: 22px; fill: #fff; }
+  .ib-continue__body { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .ib-continue__body small { text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; font-weight: 800; opacity: .85; }
+  .ib-continue__body b { font-family: var(--lh-font-display); font-size: 1.08rem; }
+  .ib-continue__body span { font-size: .85rem; opacity: .9; }
+  .ib-continue__go { flex: none; font-weight: 800; background: #fff; color: #0f766e !important; border-radius: 999px; padding: 8px 16px; }
+  @media (max-width: 640px) { .ib-continue { flex-wrap: wrap; } .ib-continue__go { width: 100%; text-align: center; } }
+
   @media (max-width: 900px) {
     .hub-cta-row { grid-template-columns: 1fr; }
   }
@@ -152,8 +193,8 @@
       </nav>
       <div class="lh-progress-wrap">
         <span class="lh-progress-label">Overall Progress</span>
-        <div class="lh-progress-bar"><div class="lh-progress-bar__fill" style="width:19%;"></div></div>
-        <span class="lh-progress-pct">19%</span>
+        <div class="lh-progress-bar"><div class="lh-progress-bar__fill" id="ibOverallFill" style="width:0%;"></div></div>
+        <span class="lh-progress-pct" id="ibOverallPct">0%</span>
         <span class="lh-avatar" aria-hidden="true">S</span>
       </div>
     </header>
@@ -165,75 +206,76 @@
           <h1>IB Geography Learning Hub</h1>
           <p>Understanding our world — drainage basins to development, hazards to human diversity. Pick a unit from the sidebar or below to start lessons, quizzes, retrieval practice and your AI tutor.</p>
         </section>
+        <div id="ibContinue"></div>
 
         <h2 class="lh-section-title">Paper 1 &mdash; Optional Themes</h2>
         <div class="lh-units">
           <a class="lh-unit-card" href="/geography/paper-1/option-a">
             <span class="lh-unit-card__section">Option A</span>
             <h3>Freshwater</h3>
-            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:28%;"></div></div>
-            <div class="lh-unit-card__meta"><span>4 topics &middot; 28%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
+            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
+            <div class="lh-unit-card__meta"><span>4 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
           <a class="lh-unit-card" href="/geography/paper-1/option-e">
             <span class="lh-unit-card__section">Option E</span>
             <h3>Leisure, Tourism and Sport</h3>
-            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:10%;"></div></div>
-            <div class="lh-unit-card__meta"><span>4 topics &middot; 10%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
+            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
+            <div class="lh-unit-card__meta"><span>4 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
           <a class="lh-unit-card" href="/geography/paper-1/option-f">
             <span class="lh-unit-card__section">Option F</span>
             <h3>Food and Health</h3>
-            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:5%;"></div></div>
-            <div class="lh-unit-card__meta"><span>4 topics &middot; 5%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
+            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
+            <div class="lh-unit-card__meta"><span>4 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
         </div>
 
-        <h2 class="lh-section-title">Paper 2 &mdash; Core</h2>
-        <div class="lh-units">
+        <h2 class="lh-section-title p2">Paper 2 &mdash; Core</h2>
+        <div class="lh-units p2">
           <a class="lh-unit-card" href="/geography/paper-1/core-1">
             <span class="lh-unit-card__section">Unit 1</span>
             <h3>Changing Population</h3>
-            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:42%;"></div></div>
-            <div class="lh-unit-card__meta"><span>3 topics &middot; 42%</span><span class="lh-unit-card__go">Continue &rarr;</span></div>
+            <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
+            <div class="lh-unit-card__meta"><span>3 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
           <a class="lh-unit-card" href="/geography/paper-1/core-2">
             <span class="lh-unit-card__section">Unit 2</span>
             <h3>Global Climate</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
-            <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
+            <div class="lh-unit-card__meta"><span>3 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
           <a class="lh-unit-card" href="/geography/paper-1/core-3">
             <span class="lh-unit-card__section">Unit 3</span>
             <h3>Resource Consumption and Security</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
-            <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
+            <div class="lh-unit-card__meta"><span>3 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
         </div>
 
-        <h2 class="lh-section-title">Paper 3 &mdash; HL Core Extension</h2>
-        <div class="lh-units">
+        <h2 class="lh-section-title p3">Paper 3 &mdash; HL Core Extension</h2>
+        <div class="lh-units p3">
           <a class="lh-unit-card" href="/geography/paper-2/hl-1">
             <span class="lh-unit-card__section">Unit 4</span>
             <h3>Power, Places and Networks</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
-            <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
+            <div class="lh-unit-card__meta"><span>3 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
           <a class="lh-unit-card" href="/geography/paper-2/hl-2">
             <span class="lh-unit-card__section">Unit 5</span>
             <h3>Human Development and Diversity</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
-            <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
+            <div class="lh-unit-card__meta"><span>3 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
           <a class="lh-unit-card" href="/geography/paper-2/hl-3">
             <span class="lh-unit-card__section">Unit 6</span>
             <h3>Global Risks and Resilience</h3>
             <div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:0%;"></div></div>
-            <div class="lh-unit-card__meta"><span>3 topics &middot; 0%</span><span class="lh-unit-card__go">Start &rarr;</span></div>
+            <div class="lh-unit-card__meta"><span>3 topics</span><span class="lh-unit-card__go">Start &rarr;</span></div>
           </a>
         </div>
 
-        <h2 class="lh-section-title">Fieldwork</h2>
-        <div class="lh-units">
+        <h2 class="lh-section-title fw">Fieldwork</h2>
+        <div class="lh-units fw">
           <div class="lh-unit-card lh-unit-card--soon">
             <span class="lh-unit-card__section">Internal Assessment advice</span>
             <h3>Research and fieldwork skills</h3>
@@ -272,6 +314,66 @@
 
 <script src="/js/sbl-sidebar.js"></script>
 <script>renderSBLSidebar('lh-sidebar-mount', {});</script>
+<script>
+/* Real progress for the IB Geography hub: one GET /api/progress call; a lesson's
+   progress = success-criteria ticks saved by sbl-teach-bot.js. Manifest generated
+   from the unit lesson config files (id, number of criteria, title, href). */
+(function () {
+  var MAN = {"option-a": [["FW01", 9, "The drainage basin system", "/geography/paper-1/option-a/t1-drainage-basin/l1-the-drainage"], ["FW02", 9, "Discharge", "/geography/paper-1/option-a/t1-drainage-basin/l2-discharge"], ["FW03", 8, "Erosion, transportation and deposition", "/geography/paper-1/option-a/t1-drainage-basin/l3-erosion"], ["FW04", 8, "River landforms", "/geography/paper-1/option-a/t1-drainage-basin/l4-river-landforms"], ["FW05", 6, "Hydrographs", "/geography/paper-1/option-a/t2-flooding-and/l1-hydrographs"], ["FW06", 5, "Factors affecting flood risk", "/geography/paper-1/option-a/t2-flooding-and/l2-factors"], ["FW07", 8, "Flood mitigation", "/geography/paper-1/option-a/t2-flooding-and/l3-flood-mitigation"], ["FW08", 9, "Case studies of flood mitigation", "/geography/paper-1/option-a/t2-flooding-and/l4-case-studies-of"], ["FW09", 9, "Physical and economic water scarcity", "/geography/paper-1/option-a/t3-water-scarcity/l1-physical-and"], ["FW10", 8, "Environmental consequences of agricultural activities", "/geography/paper-1/option-a/t3-water-scarcity/l2-environmental"], ["FW11", 8, "Human pressures on lakes and aquifers", "/geography/paper-1/option-a/t3-water-scarcity/l3-human-pressures"], ["FW12", 8, "Internationally shared water resource conflict", "/geography/paper-1/option-a/t3-water-scarcity/l4-internationally"], ["FW13", 7, "Improving local water management", "/geography/paper-1/option-a/t4-water/l1-improving-local"], ["FW14", 6, "Intervention in drainage basins", "/geography/paper-1/option-a/t4-water/l2-intervention-in"], ["FW15", 6, "Integrated drainage basin management (IDBM)", "/geography/paper-1/option-a/t4-water/l3-integrated"], ["FW16", 6, "Freshwater wetland management", "/geography/paper-1/option-a/t4-water/l4-freshwater"]], "option-e": [["LT01", 7, "How have leisure patterns changed?", "/geography/paper-1/option-e/t1-changing/l1-how-have"], ["LT02", 7, "What is the link between economic development and leisure?", "/geography/paper-1/option-e/t1-changing/l2-what-is-the"], ["LT03", 7, "What factors affect participation in sport and tourism?", "/geography/paper-1/option-e/t1-changing/l3-what-factors"], ["LT04", 7, "What are the factors influencing tourism hotspots?", "/geography/paper-1/option-e/t2-tourism-and/l1-what-are-the"], ["LT05", 7, "Spheres of influence of sport and touristic facilities", "/geography/paper-1/option-e/t2-tourism-and/l2-spheres-of"], ["LT06", 6, "Case study of a national sports league", "/geography/paper-1/option-e/t2-tourism-and/l3-case-study-of-a"], ["LT07", 7, "Costs and benefits of large scale events", "/geography/paper-1/option-e/t2-tourism-and/l4-costs-and"], ["LT08", 7, "A case study of a festival in a rural location: Glastonbury", "/geography/paper-1/option-e/t2-tourism-and/l5-a-case-study-of"], ["LT09", 7, "Niche tourism", "/geography/paper-1/option-e/t3-tourism-and/l1-niche-tourism"], ["LT10", 7, "The role of TNCs in expanding international tourism destinations, including the costs and benefits", "/geography/paper-1/option-e/t3-tourism-and/l2-the-role-of"], ["LT11", 7, "Tourism as a national development strategy", "/geography/paper-1/option-e/t3-tourism-and/l3-tourism-as-a"], ["LT12", 6, "International sporting events", "/geography/paper-1/option-e/t3-tourism-and/l4-international"], ["LT13", 7, "Case study of a country hosting an international event: Rio Olympics 2016", "/geography/paper-1/option-e/t3-tourism-and/l5-case-study-of-a"], ["LT14", 6, "The consequences of unsustainable tourism", "/geography/paper-1/option-e/t4-managing/l1-the"], ["LT15", 6, "Case study: Ecotourism in Rwanda", "/geography/paper-1/option-e/t4-managing/l2-case-study"], ["LT16", 6, "Tourism in the future", "/geography/paper-1/option-e/t4-managing/l3-tourism-in-the"], ["LT17", 6, "Political and cultural influences on international sport participation", "/geography/paper-1/option-e/t4-managing/l4-political-and"]], "option-f": [["FH-t1-l1-global-patterns", 3, "Global patterns of food nutrition indicators", "/geography/paper-1/option-f/t1-measuring-food/l1-global-patterns"], ["FH-t1-l2-the-nutrition", 3, "The nutrition transition", "/geography/paper-1/option-f/t1-measuring-food/l2-the-nutrition"], ["FH-t1-l3-global-patterns", 3, "Global patterns of health indicators", "/geography/paper-1/option-f/t1-measuring-food/l3-global-patterns"], ["FH-t1-l4-the", 3, "The epidemiological transition model", "/geography/paper-1/option-f/t1-measuring-food/l4-the"], ["FH06", 7, "Energy and water footprints in food production", "/geography/paper-1/option-f/t2-food-systems/l1-energy-and"], ["FH07", 7, "Disease diffusion and barriers", "/geography/paper-1/option-f/t2-food-systems/l2-disease"], ["FH08", 6, "The role of diffusion in agriculture", "/geography/paper-1/option-f/t2-food-systems/l3-the-role-of"], ["FH09", 7, "Malaria in Kenya — a vector-borne disease case study", "/geography/paper-1/option-f/t2-food-systems/l4-malaria-in"], ["FH10", 7, "Cholera — a water-borne disease case study", "/geography/paper-1/option-f/t2-food-systems/l5-cholera-a-water"], ["FH11", 7, "The role of international organisations in combatting food insecurity and disease", "/geography/paper-1/option-f/t3-stakeholders-in/l1-the-role-of"], ["FH12", 7, "The influence of TNCs in shaping food consumption", "/geography/paper-1/option-f/t3-stakeholders-in/l2-the-influence"], ["FH13", 6, "Gender roles related to food and health", "/geography/paper-1/option-f/t3-stakeholders-in/l3-gender-roles"], ["FH14", 7, "Factors affecting the severity of famine", "/geography/paper-1/option-f/t3-stakeholders-in/l4-factors"], ["FH15", 6, "Case study: Causes of famine and food insecurity in Yemen", "/geography/paper-1/option-f/t3-stakeholders-in/l5-case-study-a"], ["FH16", 6, "Case study: Attempts to tackle food insecurity in Yemen", "/geography/paper-1/option-f/t3-stakeholders-in/l6-case-study"], ["FH17", 6, "Possible solutions to food insecurity", "/geography/paper-1/option-f/t4-future-health/l1-possible"], ["FH18", 7, "Contemporary approaches to food production", "/geography/paper-1/option-f/t4-future-health/l2-contemporary"], ["FH19", 6, "Prevention and treatment in disease management", "/geography/paper-1/option-f/t4-future-health/l3-prevention-and"], ["FH20", 7, "Managing pandemics — case study: Ebola in West Africa, 2013-16", "/geography/paper-1/option-f/t4-future-health/l4-managing"]], "core-1": [["CP01", 7, "Physical and human factors affecting population distribution at the global scale", "/geography/paper-1/core-1/t1-population-and/l1-physical-and"], ["CP02", 7, "Global patterns and classifications of economic development", "/geography/paper-1/core-1/t1-population-and/l2-global-patterns"], ["CP03", 7, "Population distribution and economic development at a national scale", "/geography/paper-1/core-1/t1-population-and/l3-population"], ["CP04", 8, "Lesson 4: Case study — Two countries with uneven population distributions: Egypt and Thailand", "/geography/paper-1/core-1/t1-population-and/l4-lesson-4-case"], ["CP05", 11, "Population change and demographic transition", "/geography/paper-1/core-1/t2-changing/l1-population"], ["CP06", 10, "Comparing demographic transition: Thailand and the Gambia", "/geography/paper-1/core-1/t2-changing/l2-comparing"], ["CP07", 11, "The consequences of megacity growth for individuals and societies", "/geography/paper-1/core-1/t2-changing/l3-the"], ["CP08", 9, "The causes and consequences of forced migration and internal displacement — The Rohingya, Burma", "/geography/paper-1/core-1/t2-changing/l4-the-causes-and"], ["CP09", 8, "Internal displacement in Haiti", "/geography/paper-1/core-1/t2-changing/l5-internal"], ["CP10", 9, "Trends in family size, sex ratios and ageing", "/geography/paper-1/core-1/t3-challenges-and/l1-trends-in"], ["CP11", 9, "Population policies", "/geography/paper-1/core-1/t3-challenges-and/l2-population"], ["CP12", 13, "Gender Equality and Human Trafficking", "/geography/paper-1/core-1/t3-challenges-and/l3-gender-equality"], ["CP13", 10, "The demographic dividend", "/geography/paper-1/core-1/t3-challenges-and/l4-the-demographic"]], "core-2": [["CC01", 7, "The atmospheric system", "/geography/paper-1/core-2/t1-causes-of/l1-the-atmospheric"], ["CC02", 7, "The global energy balance and feedback loops", "/geography/paper-1/core-2/t1-causes-of/l2-the-global"], ["CC03", 7, "The enhanced greenhouse effect, development, globalization and trade", "/geography/paper-1/core-2/t1-causes-of/l3-the-enhanced"], ["CC04", 7, "Climate change and the hydrosphere", "/geography/paper-1/core-2/t2-consequences-of/l1-climate-change"], ["CC05", 7, "Climate change and extreme weather events", "/geography/paper-1/core-2/t2-consequences-of/l2-climate-change"], ["CC06", 7, "Climate change and the biosphere — biomes, habitats and animal migration patterns", "/geography/paper-1/core-2/t2-consequences-of/l3-climate-change"], ["CC07", 7, "Climate change and agriculture", "/geography/paper-1/core-2/t2-consequences-of/l4-climate-change"], ["CC08", 7, "The impacts of climate change on people and places", "/geography/paper-1/core-2/t2-consequences-of/l5-the-impacts-of"], ["CC09", 7, "Climate change, risk and vulnerability", "/geography/paper-1/core-2/t3-responding-to/l1-climate-change"], ["CC10", 7, "Government-led adaptation and mitigation strategies", "/geography/paper-1/core-2/t3-responding-to/l2-government-led"], ["CC11", 7, "Civil society and corporate strategy", "/geography/paper-1/core-2/t3-responding-to/l3-civil-society"]], "core-3": [["RC01", 9, "Global, continental and regional progress towards poverty reduction", "/geography/paper-1/core-3/t1-global-trends/l1-global"], ["RC02", 8, "Measuring trends and patterns in resource consumption", "/geography/paper-1/core-3/t1-global-trends/l2-measuring"], ["RC03", 8, "Patterns and trends in the global availability and consumption of water", "/geography/paper-1/core-3/t1-global-trends/l3-patterns-and"], ["RC04", 8, "Patterns and trends in the global availability and consumption of land and food", "/geography/paper-1/core-3/t1-global-trends/l4-patterns-and"], ["RC05", 10, "Patterns and trends in the global availability and consumption of energy", "/geography/paper-1/core-3/t1-global-trends/l5-patterns-and"], ["RC06", 9, "The water-food-energy nexus", "/geography/paper-1/core-3/t2-impacts-of/l1-the-water-food"], ["RC07", 8, "The implications of global climate change on the nexus", "/geography/paper-1/core-3/t2-impacts-of/l2-the"], ["RC08", 8, "The water-energy-food nexus in Nepal — a small scale approach", "/geography/paper-1/core-3/t2-impacts-of/l3-the-water"], ["RC09", 8, "The water-energy-food nexus in Israel — a large-scale approach", "/geography/paper-1/core-3/t2-impacts-of/l4-the-water"], ["RC10", 8, "The disposal and recycling of consumer items", "/geography/paper-1/core-3/t2-impacts-of/l5-the-disposal"], ["RC11", 7, "The SDGs", "/geography/paper-1/core-3/t3-resource/l1-course"], ["RC12", 7, "Population and resource consumption", "/geography/paper-1/core-3/t3-resource/l2-population-and"], ["RC13", 7, "The value of the circular economy", "/geography/paper-1/core-3/t3-resource/l3-the-value-of"]], "hl-1": [["PPN-t1-l1-globalization", 6, "Globalization Indices", "/geography/paper-2/hl-1/t1-global/l1-globalization"], ["PPN-t1-l2-global", 3, "Global Superpowers", "/geography/paper-2/hl-1/t1-global/l2-global"], ["PPN-t1-l3-powerful", 4, "Powerful organizations and global groups", "/geography/paper-2/hl-1/t1-global/l3-powerful"], ["PPN-t2-l1-an-overview-of", 4, "An overview of contemporary global networks and flows", "/geography/paper-2/hl-1/t2-global-networks/l1-an-overview-of"], ["PPN-t2-l2-foreign-direct", 4, "Foreign Direct Investment and Outsourcing", "/geography/paper-2/hl-1/t2-global-networks/l2-foreign-direct"], ["PPN-t2-l3-case-study-two", 3, "Case study: Two examples of TNCs — Ikea and Tata", "/geography/paper-2/hl-1/t2-global-networks/l3-case-study-two"], ["PPN-t3-l1-political", 5, "Political factors that affect global interaction", "/geography/paper-2/hl-1/t3-human-and/l1-political"], ["PPN-t3-l2-our-shrinking", 3, "Our shrinking world", "/geography/paper-2/hl-1/t3-human-and/l2-our-shrinking"], ["PPN-t3-l3-transport", 3, "Transport developments over time", "/geography/paper-2/hl-1/t3-human-and/l3-transport"], ["PPN-t3-l4-patterns-and", 4, "Patterns and trends in communication infrastructure and use", "/geography/paper-2/hl-1/t3-human-and/l4-patterns-and"], ["PPN-t3-l5-the-influence", 4, "The influence of the physical environment on global interactions", "/geography/paper-2/hl-1/t3-human-and/l5-the-influence"]], "hl-2": [["HD-t1-l1-measuring-human", 3, "Measuring human development", "/geography/paper-2/hl-2/t1-development/l1-measuring-human"], ["HD-t1-l2-empowering", 3, "Empowering women, indigenous and minority groups", "/geography/paper-2/hl-2/t1-development/l2-empowering"], ["HD-t1-l3-the-importance", 3, "The importance of social entrepreneurship for human development — micro-finance and ‘Fairtrade’", "/geography/paper-2/hl-2/t1-development/l3-the-importance"], ["HD-t1-l4-tncs-and", 3, "TNCs and Corporate Social Responsibility", "/geography/paper-2/hl-2/t1-development/l4-tncs-and"], ["HD-t2-l1-culture", 3, "Culture, ethnicity and identity", "/geography/paper-2/hl-2/t2-changing/l1-culture"], ["HD-t2-l2-the-effects-of", 3, "The effects of global interactions on cultural diversity", "/geography/paper-2/hl-2/t2-changing/l2-the-effects-of"], ["HD-t2-l3-how-diasporas", 3, "How diasporas influence cultural diversity and identity — Chinatown in London", "/geography/paper-2/hl-2/t2-changing/l3-how-diasporas"], ["HD-t3-l1-local-and-civil", 4, "Local and civil society resistance to global interactions", "/geography/paper-2/hl-2/t3-local-responses/l1-local-and-civil"], ["HD-t3-l2-geopolitical", 3, "Geopolitical constraints on global interactions", "/geography/paper-2/hl-2/t3-local-responses/l2-geopolitical"], ["HD-t3-l3-the-role-of", 3, "The role of civil society in promoting international-mindedness", "/geography/paper-2/hl-2/t3-local-responses/l3-the-role-of"]], "hl-3": [["GR01", 8, "Threats to individuals and businesses", "/geography/paper-2/hl-3/t1-geopolitical/l1-threats-to"], ["GR02", 7, "Emerging threats to political and economic sovereignty", "/geography/paper-2/hl-3/t1-geopolitical/l2-emerging"], ["GR03", 7, "The link between globalization and increased nationalism", "/geography/paper-2/hl-3/t1-geopolitical/l3-the-link"], ["GR04", 7, "Trans-boundary pollution", "/geography/paper-2/hl-3/t2-environmental/l1-trans-boundary"], ["GR05", 8, "Environmental impacts of global flows", "/geography/paper-2/hl-3/t2-environmental/l2-environmental"], ["GR06", 9, "Environmental issues linked with global shift of industry", "/geography/paper-2/hl-3/t2-environmental/l3-environmental"], ["GR07", 7, "International civil society organisations", "/geography/paper-2/hl-3/t3-local-and/l1-international"], ["GR08", 8, "Strategies to build resilience", "/geography/paper-2/hl-3/t3-local-and/l2-strategies-to"]]};
+  var ICON = {
+    'option-a': '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+    'option-e': '<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8"/>',
+    'option-f': '<path d="M12 7c-2-3-7-2-7 3 0 5 4 10 7 10s7-5 7-10c0-5-5-6-7-3z"/><path d="M12 7c0-2 1-4 3-4"/>',
+    'core-1': '<circle cx="8" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M3 20c0-3 2.5-5.5 5-5.5s5 2.5 5 5.5M13 20c0-2.5 1.5-4.5 3-4.5s4 2 4 4.5"/>',
+    'core-2': '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    'core-3': '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    'hl-1': '<circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.3 11l9.4-5M7.3 13l9.4 5"/>',
+    'hl-2': '<path d="M4 20h16"/><path d="M6 16v-3M10 16V9M14 16v-5M18 16V6"/>',
+    'hl-3': '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v5M12 16h.01"/>'
+  };
+  var prog = {};
+  function unitOf(a) { var m = (a.getAttribute('href') || '').match(/\/(option-[a-z]|core-\d|hl-\d)$/); return m && m[1]; }
+  function stat(u) {
+    var ls = MAN[u] || [], tot = 0, ticked = 0, done = 0, started = 0;
+    ls.forEach(function (l) {
+      var p = prog[l[0]] || {}, c = Array.isArray(p.checklist) ? p.checklist.filter(Boolean).length : 0;
+      c = Math.min(c, l[1]); tot += l[1]; ticked += c; if (l[1] && c >= l[1]) done++; if (c || p.quiz_test_my_knowledge) started++;
+    });
+    return { tot: tot, ticked: ticked, done: done, n: ls.length, started: started, pct: tot ? Math.round(ticked / tot * 100) : 0 };
+  }
+  function render() {
+    var gT = 0, gK = 0;
+    document.querySelectorAll('main a.lh-unit-card').forEach(function (a) {
+      var u = unitOf(a); if (!u || !MAN[u]) return;
+      if (!a.querySelector('.lh-unit-card__icon') && ICON[u]) a.insertAdjacentHTML('afterbegin', '<span class="lh-unit-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ICON[u] + '</svg></span>');
+      var s = stat(u); gT += s.tot; gK += s.ticked;
+      var fill = a.querySelector('.lh-unit-card__bar-fill'); if (fill) fill.style.width = s.pct + '%';
+      var meta = a.querySelector('.lh-unit-card__meta span'); if (meta) meta.textContent = s.done + ' of ' + s.n + ' lessons complete · ' + s.pct + '%';
+      var go = a.querySelector('.lh-unit-card__go'); if (go) go.innerHTML = (s.started ? 'Continue' : 'Start') + ' &rarr;';
+    });
+    var g = gT ? Math.round(gK / gT * 100) : 0;
+    var f = document.getElementById('ibOverallFill'), t = document.getElementById('ibOverallPct');
+    if (f) f.style.width = g + '%'; if (t) t.textContent = g + '%';
+    // Continue banner
+    var last = null; try { last = JSON.parse(localStorage.getItem('sbl-last-lesson-ib-geography') || 'null'); } catch (e) {}
+    var all = []; Object.keys(MAN).forEach(function (u) { MAN[u].forEach(function (l) { all.push({ u: u, id: l[0], n: l[1], title: l[2], href: l[3] }); }); });
+    var target = last && all.filter(function (l) { return l.href === last.href; })[0];
+    var label = 'Continue where you left off';
+    if (!target) {
+      target = all.filter(function (l) { var p = prog[l.id] || {}; var c = Array.isArray(p.checklist) ? p.checklist.filter(Boolean).length : 0; return c > 0 && c < l.n; })[0];
+      if (!target) return;
+    }
+    var p = prog[target.id] || {}, c = Array.isArray(p.checklist) ? p.checklist.filter(Boolean).length : 0;
+    var unitName = (document.querySelector('main a.lh-unit-card[href$="/' + target.u + '"] h3') || {}).textContent || '';
+    document.getElementById('ibContinue').innerHTML = '<a class="ib-continue" href="' + target.href + '"><span class="ib-continue__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>' +
+      '<span class="ib-continue__body"><small>' + label + '</small><b>' + target.title.replace(/</g, '&lt;') + '</b><span>' + unitName + ' &middot; ' + Math.min(c, target.n) + ' of ' + target.n + ' success criteria ticked</span></span><span class="ib-continue__go">Continue &rarr;</span></a>';
+  }
+  render();
+  fetch('/api/progress', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { prog = (d && d.lessons) || {}; render(); }).catch(function () {});
+})();
+</script>
+
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
 </body>

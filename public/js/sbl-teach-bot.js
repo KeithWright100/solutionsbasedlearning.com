@@ -1534,7 +1534,7 @@ function buildRetrievalBank(lessonId) {
 })();
 /* IGCSE learn pages: progress, Continue banner and lesson chips (sbl-igcse-hub.js). */
 (function () {
-  if (!/^\/igcse\/[a-z-]+\/learn(\/|$)/.test(location.pathname)) return;
+  if (!/^\/igcse\/[a-z-]+\/learn(\/|$)/.test(location.pathname) && !/^\/geography\/paper-\d\//.test(location.pathname)) return;
   if (document.querySelector('script[src="/js/sbl-igcse-hub.js"]')) return;
   var s = document.createElement('script'); s.src = '/js/sbl-igcse-hub.js'; s.defer = true;
   (document.head || document.documentElement).appendChild(s);

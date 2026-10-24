@@ -16,6 +16,13 @@
    ============================================================ */
 (function () {
   var path = location.pathname.replace(/\/+$/, '');
+  /* IB Geography lesson pages: remember the last lesson for the IB hub's Continue banner */
+  if (/^\/geography\/paper-\d\/[^\/]+\/t\d[^\/]*\/l\d/.test(path)) {
+    var L0 = window.SBL_LESSONS || {}, hit = null;
+    Object.keys(L0).forEach(function (k) { if (L0[k] && L0[k].href && L0[k].href.replace(/\/+$/, '') === path) hit = L0[k]; });
+    try { localStorage.setItem('sbl-last-lesson-ib-geography', JSON.stringify({ href: path, id: hit && hit.id, title: hit ? hit.title : document.title.split(' — ')[0], at: Date.now() })); } catch (e) {}
+    return;
+  }
   var m = path.match(/^\/igcse\/([a-z-]+)\/learn(\/[^\/]+)?(\/[^\/]+)?$/);
   if (!m) return;
   var subj = m[1], unit = m[2] || '', sub = m[3] || '';

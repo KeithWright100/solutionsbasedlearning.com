@@ -272,3 +272,26 @@ a.ig-card.is-done { background: linear-gradient(180deg, #f3fdf6, var(--lh-surfac
 .ig-continue__body span { font-size: .85rem; opacity: .9; }
 .ig-continue__go { flex: none; font-weight: 800; background: #fff; color: #0f766e; border-radius: 999px; padding: 8px 16px; }
 @media (max-width: 640px) { .ig-continue { flex-wrap: wrap; } .ig-continue__go { width: 100%; text-align: center; } }
+
+/* Past paper practice box — teal, so it stands apart from the purple exam-style question */
+.ig-exam:has(.ig-ppq-link) {
+  background: linear-gradient(135deg, #E6FBF7, #F0FDFA); border: 2px solid rgba(20, 184, 166, 0.45);
+  border-left: 6px solid var(--lh-teal);
+}
+.ig-exam:has(.ig-ppq-link) .ig-tag { background: var(--lh-teal-deep); }
+.ig-exam:has(.ig-ppq-link) .ig-tag::before { content: '\1F4DD  '; }
+.ig-exam .ig-ppq-link {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; padding: 9px 16px;
+  background: var(--lh-teal-deep); color: #fff !important; border-radius: 999px; font-weight: 700;
+  text-decoration: none; box-shadow: 0 6px 16px rgba(15, 118, 110, 0.25); transition: transform .2s, box-shadow .2s;
+}
+.ig-exam .ig-ppq-link:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(15, 118, 110, 0.32); }
+
+/* lesson page boxes: stronger borders (matches the hub cards) */
+.ig-section {
+  border: 2px solid rgba(15, 23, 42, 0.16);
+  box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 6px 18px rgba(15,23,42,.05);
+}
+.ig-section:has(> .ig-sc-tag) { border-left: 5px solid var(--lh-green); }
+.ig-exam { border-width: 2px; }
+.ig-terms { border: 2px solid rgba(201,154,46,0.45); box-shadow: 0 6px 18px rgba(15,23,42,.05); }
