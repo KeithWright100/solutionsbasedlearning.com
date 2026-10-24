@@ -180,3 +180,95 @@ a.ig-card:hover { border-color: var(--lh-teal); transform: translateY(-2px); }
 .ppq-lightbox__close { position: absolute; top: 12px; right: 16px; font-size: 2rem; line-height: 1; background: #fff; border: 0; border-radius: 999px; width: 44px; height: 44px; cursor: pointer; }
 .ig-ppq-link { display: inline-block; margin-top: 6px; font-weight: 700; color: #15803d; }
 @media (max-width: 980px) { .ppq-card.has-src { grid-template-columns: minmax(0, 1fr); } .ppq-src { position: static; max-height: none; order: -1; } .ppq-controls { position: static; } .ppq-summary { margin-left: 0; } }
+
+/* ============================================================
+   Hub + topic overview pages — richer cards (v2)
+   Applies to the IGCSE learn home pages and topic pages for every
+   subject (Geography, Economics…). Lesson pages are unaffected.
+   ============================================================ */
+.ig-cards { gap: 16px; }
+.ig-card {
+  --acc: var(--lh-teal); --acc-bg: var(--lh-teal-bg); --acc-deep: var(--lh-teal-deep);
+  position: relative; display: flex; flex-direction: column;
+  border: 2px solid rgba(15, 23, 42, 0.18); border-top: 5px solid var(--acc);
+  border-radius: 16px; padding: 16px 18px 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 6px 18px rgba(15, 23, 42, 0.05);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+a.ig-card:hover { border-color: var(--acc); border-top-color: var(--acc); transform: translateY(-3px); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12); }
+a.ig-card:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+.ig-card .ig-num {
+  align-self: flex-start; background: var(--acc-bg); color: var(--acc-deep);
+  border-radius: 999px; padding: 3px 10px; font-size: 0.7rem; letter-spacing: 0.06em;
+}
+.ig-card h3 { font-size: 1.12rem; margin: 10px 0 6px; }
+.ig-card p { flex: 1; }
+a.ig-card::after {
+  content: 'Open \2192'; align-self: flex-end; margin-top: 12px;
+  font-size: 0.82rem; font-weight: 700; color: var(--acc-deep);
+  transition: transform .2s;
+}
+a.ig-card:hover::after { transform: translateX(4px); }
+.ig-card .ig-badge { align-self: flex-start; }
+a.ig-card .ig-badge--live { display: none; }   /* the coloured border + Open → already say it is available */
+div.ig-card { border-style: dashed; border-top-style: solid; box-shadow: none; background: #fbfcfe; }
+div.ig-card h3 { color: var(--lh-body); }
+
+/* colour by paper on the home pages; practice cards in gold */
+#paper-2 ~ .ig-cards .ig-card { --acc: var(--lh-indigo); --acc-bg: var(--lh-indigo-bg); --acc-deep: #4338CA; }
+.ig-cards .ig-card[href*="revision"],
+.ig-cards .ig-card[href*="past-papers"],
+.ig-cards .ig-card[href$="/igcse/economics"],
+.ig-cards .ig-card[href$="/igcse/geography"] { --acc: var(--lh-gold); --acc-bg: var(--lh-gold-bg); --acc-deep: #8A6514; }
+
+/* section headings */
+.ig-h2 {
+  display: flex; align-items: center; gap: 10px; font-size: 1.2rem;
+  margin: 30px 0 6px; padding-bottom: 8px; border-bottom: 2px solid var(--lh-border);
+}
+.ig-h2::before { content: ''; width: 6px; height: 22px; border-radius: 3px; background: var(--lh-teal); flex: none; }
+#paper-2.ig-h2::before { background: var(--lh-indigo); }
+.ig-sub { margin: 4px 0 8px; }
+
+/* "How to use / About this topic" box under the banner */
+.lh-page-head--banner + .ig-section {
+  border: 2px solid rgba(15, 23, 42, 0.18); border-left: 6px solid var(--lh-teal);
+  background: linear-gradient(90deg, var(--lh-teal-bg), var(--lh-surface) 45%);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+.lh-page-head--banner + .ig-section h2::before { content: '\1F9ED  '; }
+
+/* ---------- hub enhancements (sbl-igcse-hub.js) ---------- */
+.ig-card .ig-icon {
+  position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; border-radius: 12px;
+  display: grid; place-items: center; background: var(--acc-bg); color: var(--acc-deep);
+}
+.ig-card .ig-icon svg { width: 24px; height: 24px; }
+.ig-card:has(.ig-icon) h3, .ig-card:has(.ig-icon) .ig-num { margin-right: 52px; }
+.ig-prog { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ig-prog__track { height: 8px; border-radius: 999px; background: var(--lh-bg); border: 1px solid var(--lh-border); overflow: hidden; }
+.ig-prog__track span { display: block; height: 100%; min-width: 0; background: linear-gradient(90deg, var(--acc, var(--lh-teal)), var(--lh-green)); border-radius: 999px; transition: width .6s ease; }
+.ig-prog__txt { font-size: 0.78rem; font-weight: 600; color: var(--lh-body); }
+.ig-topic-prog { margin-top: 12px; max-width: 520px; }
+.ig-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ig-chip { font-size: 0.7rem; font-weight: 700; border-radius: 999px; padding: 2px 9px; border: 1px solid transparent; }
+.ig-chip--done { background: var(--lh-green-bg); color: #15803d; border-color: #bbf7d0; }
+.ig-chip--part { background: var(--lh-orange-bg); color: #C2410C; border-color: #fed7aa; }
+.ig-chip--quiz { background: var(--lh-blue-bg); color: #1D4ED8; border-color: #bfdbfe; }
+.ig-chip--ppq { background: var(--lh-gold-bg); color: #8A6514; border-color: #f3dfa8; }
+a.ig-card.is-done { background: linear-gradient(180deg, #f3fdf6, var(--lh-surface) 60%); }
+.ig-continue {
+  display: flex; align-items: center; gap: 16px; margin: 16px 0; padding: 16px 20px; text-decoration: none;
+  background: linear-gradient(135deg, #0f766e, #0e7490); color: #fff; border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.25); box-shadow: 0 12px 28px rgba(14, 116, 144, 0.28); transition: transform .2s, box-shadow .2s;
+}
+.ig-continue:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(14, 116, 144, 0.36); }
+.ig-continue__icon { flex: none; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; }
+.ig-continue__icon svg { width: 22px; height: 22px; fill: #fff; stroke: none; }
+.ig-continue__body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ig-continue, .ig-continue:hover, .ig-continue__body small, .ig-continue__body b, .ig-continue__body span { color: #fff; }
+.ig-continue__body small { text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; font-weight: 800; opacity: .85; }
+.ig-continue__body b { font-family: var(--lh-font-display); font-size: 1.08rem; }
+.ig-continue__body span { font-size: .85rem; opacity: .9; }
+.ig-continue__go { flex: none; font-weight: 800; background: #fff; color: #0f766e; border-radius: 999px; padding: 8px 16px; }
+@media (max-width: 640px) { .ig-continue { flex-wrap: wrap; } .ig-continue__go { width: 100%; text-align: center; } }

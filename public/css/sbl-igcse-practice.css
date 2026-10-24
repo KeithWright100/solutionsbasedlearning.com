@@ -1,0 +1,22 @@
+/* SBL — IGCSE paper practice pages (cards to match the learn hub). */
+.lh-units { gap: 16px; }
+.lh-unit-card {
+  --acc: #14B8A6; --acc-bg: #E6FBF7; --acc-deep: #0F766E;
+  position: relative; display: flex; flex-direction: column; text-decoration: none; color: var(--lh-ink);
+  border: 2px solid rgba(15, 23, 42, 0.18) !important; border-top: 5px solid var(--acc) !important;
+  border-radius: 16px; box-shadow: 0 1px 2px rgba(15,23,42,.05), 0 6px 18px rgba(15,23,42,.05);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.lh-unit-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(15,23,42,.12); border-color: var(--acc) !important; }
+.lh-unit-card:nth-child(4n+2) { --acc: #6366F1; --acc-bg: #EEF0FF; --acc-deep: #4338CA; }
+.lh-unit-card:nth-child(4n+3) { --acc: #F97316; --acc-bg: #FFEEE0; --acc-deep: #C2410C; }
+.lh-unit-card:nth-child(4n+4) { --acc: #8B5CF6; --acc-bg: #F1EBFE; --acc-deep: #6D28D9; }
+.lh-unit-card__section {
+  align-self: flex-start; background: var(--acc-bg); color: var(--acc-deep) !important;
+  border-radius: 999px; padding: 3px 10px; font-weight: 700;
+}
+.lh-unit-card h3 { font-size: 1.08rem; margin-top: 10px !important; }
+.lh-unit-card p { flex: 1; }
+.lh-unit-card__go { color: var(--acc-deep) !important; font-weight: 700; transition: transform .2s; display: inline-block; }
+.lh-unit-card:hover .lh-unit-card__go { transform: translateX(4px); }
+.igcse-hero-banner--cta { border: 2px solid rgba(255,255,255,.35); }
