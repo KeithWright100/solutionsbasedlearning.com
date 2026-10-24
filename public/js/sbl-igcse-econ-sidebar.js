@@ -84,6 +84,15 @@
                 "href": "/igcse/economics/learn/the-market-system/l10-externalities"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/economics/learn/the-market-system/past-papers"
+              }
+            ]
           }
         ]
       },
@@ -162,6 +171,15 @@
                 "href": "/igcse/economics/learn/business-economics/l10-minimum-wage"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/economics/learn/business-economics/past-papers"
+              }
+            ]
           }
         ]
       }
@@ -230,6 +248,15 @@
                 "href": "/igcse/economics/learn/government-and-the-economy/l10-relationships-between-objectives"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/economics/learn/government-and-the-economy/past-papers"
+              }
+            ]
           }
         ]
       },
@@ -279,6 +306,15 @@
               {
                 "label": "Appreciation and depreciation",
                 "href": "/igcse/economics/learn/the-global-economy/l07-appreciation-and-depreciation"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/economics/learn/the-global-economy/past-papers"
               }
             ]
           }
