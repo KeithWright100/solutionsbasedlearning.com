@@ -329,7 +329,7 @@ function buildRetrievalBank(lessonId) {
     window.SBL_IGCSE_GEO_RUR_LESSON_ORDER,
     window.SBL_IGCSE_GEO_ECO_LESSON_ORDER,
     window.SBL_IGCSE_GEO_RFW_LESSON_ORDER
-  ].concat(window.SBL_IGCSE_ECON_LESSON_ORDERS || []);
+  ].concat(window.SBL_IGCSE_ECON_LESSON_ORDERS || [], window.SBL_IGCSE_BUS_LESSON_ORDERS || []);
   var order = [];
   for (var k = 0; k < candidateOrders.length; k++) {
     if (candidateOrders[k] && candidateOrders[k].indexOf(lessonId) !== -1) {

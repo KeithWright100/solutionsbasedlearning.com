@@ -792,7 +792,13 @@
             </button>
           </div>
         </article>
-        <article class="subject-card business disabled" aria-label="IGCSE Business coming soon">
+        <article
+          class="subject-card business clickable"
+          tabindex="0"
+          role="link"
+          aria-label="Enter IGCSE Business"
+          data-route="/igcse/business/learn"
+        >
           <div class="subject-content">
             <span class="level-tag">IGCSE</span>
             <div class="subject-icon" aria-hidden="true">
@@ -805,8 +811,14 @@
             </div>
             <h2>IGCSE Business</h2>
             <p class="strapline">Innovate &bull; Strategise &bull; Lead</p>
-            <span class="status soon">Coming Soon</span>
-            <p class="subject-copy">Build ideas. Create value. Lead with purpose.</p>
+            <span class="status live">Live</span>
+            <p class="subject-copy">Topic 1 lessons are live, with quizzes, case studies and paper practice. More topics coming soon.</p>
+            <button class="enter-btn" type="button" aria-label="Click here to enter IGCSE Business">
+              Enter IGCSE Business
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
           </div>
         </article>
       </div>
@@ -857,7 +869,7 @@
   </div>
 
   <script>
-    const LIVE_ROUTES = { geography: "/geography", economics: "/economics", business: "/business", igcseGeography: "/igcse/geography/learn", igcseEconomics: "/igcse/economics/learn" };
+    const LIVE_ROUTES = { geography: "/geography", economics: "/economics", business: "/business", igcseGeography: "/igcse/geography/learn", igcseEconomics: "/igcse/economics/learn", igcseBusiness: "/igcse/business/learn" };
     const toast = document.getElementById("toast");
 
     function showToast(message) {

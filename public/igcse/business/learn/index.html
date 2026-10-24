@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE Business — IGCSE Business — SBL</title>
+<meta name="description" content="Edexcel IGCSE Business lessons: notes, case studies, calculations, quizzes and exam practice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
+<link rel="stylesheet" href="/css/sbl-igcse-learn.css">
+</head>
+<body class="lh">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/humanities-hub">Humanities Hub</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>IGCSE Business</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid">
+      <main>
+        <div class="lh-page-head lh-page-head--banner">
+          <h1>Edexcel IGCSE Business</h1>
+          <p>Lessons, case studies, calculations, quizzes and exam practice for the Edexcel International GCSE in Business.</p>
+        </div>
+        <section class="ig-section">
+          <h2>How to use this area</h2>
+          <p>Choose a topic, then work through its lessons in order. Every lesson has clear notes, real business examples, worked calculations where they are needed, key terms, an exam-style question with mark guidance, a <b>Test My Knowledge</b> quiz and <b>Spaced Retrieval</b> to keep earlier lessons fresh. When you are ready, try the <a href="/igcse/business">paper practice</a> questions.</p>
+        </section>
+        <h2 class="ig-h2" id="paper-1">The specification: five topics</h2>
+        <p class="ig-sub">Paper 1 (Investigating small businesses) and Paper 2 (Investigating large businesses) can both assess any of the five topics.</p>
+        <div class="ig-cards">
+          <a class="ig-card" href="/igcse/business/learn/business-activity-and-influences"><span class="ig-num">1</span><h3>Business activity and influences on business</h3><p>10 lessons: objectives, ownership, sectors, location, globalisation, exchange rates, government, external factors and success.</p><span class="ig-badge ig-badge--live">Available now</span></a>
+          <div class="ig-card"><span class="ig-num">2</span><h3>People in business</h3><p>communication, recruitment and selection, training, motivation and organisation structure.</p><span class="ig-badge ig-badge--soon">Coming soon</span></div>
+          <div class="ig-card"><span class="ig-num">3</span><h3>Business finance</h3><p>sources of finance, cash-flow forecasting, costs and break-even, financial documents and ratio analysis.</p><span class="ig-badge ig-badge--soon">Coming soon</span></div>
+          <div class="ig-card"><span class="ig-num">4</span><h3>Marketing</h3><p>market research, the market, segmentation and the marketing mix.</p><span class="ig-badge ig-badge--soon">Coming soon</span></div>
+          <div class="ig-card"><span class="ig-num">5</span><h3>Business operations</h3><p>economies of scale, production methods, lean production, factors of production and quality.</p><span class="ig-badge ig-badge--soon">Coming soon</span></div>
+        </div>
+      </main>
+
+      <aside class="lh-rail">
+        <div class="lh-panel lh-panel--accent">
+          <h2>Quick links</h2>
+          <ul class="ig-toc">
+            <li><a href="/igcse/business">Paper practice with instant marking</a></li>
+            <li><a href="/igcse/business/revision/topics">Revision topics</a></li>
+            <li><a href="/igcse/business/exam-tips">Exam tips</a></li>
+          </ul>
+        </div>
+        <div class="lh-tutor">
+          <p>Need help? Ask the AI Tutor anything about IGCSE Business.</p>
+          <div class="lh-tutor__news">
+            <p>Use the tutor to:</p>
+            <ul>
+              <li>Get a tricky concept explained another way</li>
+              <li>Check your understanding of key terms</li>
+              <li>Apply a concept to a business case study</li>
+              <li>Practise analyse and evaluate answers</li>
+            </ul>
+          </div>
+          <button type="button" class="lh-tutor__btn" onclick="openAskTutor()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/></svg>Ask AI Tutor</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
+    <div class="sbl-modal__header">
+      <div class="sbl-modal__header-text">
+        <p class="sbl-modal__eyebrow">SBL Business Tutor</p>
+        <h2 id="sblTeachBotTitle"></h2>
+        <p class="sbl-modal__subtitle" id="sblTeachBotSubtitle">IGCSE Business</p>
+      </div>
+      <div class="sbl-modal__header-actions">
+        <span class="sbl-modal__progress" id="sblTeachBotProgress"></span>
+        <button type="button" class="sbl-modal__icon-btn" id="sblTeachBotExpand">Expand to full page</button>
+        <button type="button" class="sbl-modal__icon-btn sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="sbl-modal__body" id="sblTeachBotBody"></div>
+  </div>
+</div>
+<div aria-live="polite" class="sbl-sr-only" id="sblTeachBotAnnounce"></div>
+
+<script src="/js/sbl-igcse-bus-sidebar.js"></script>
+<script>
+  renderSBLIgcseBusSidebar('lh-sidebar-mount', {
+    activeUnit: ' ',
+    activeTopic: -1,
+    activeLessonHref: ''
+  });
+</script>
+<script src="/js/sbl-igcse-bus-lessons.js"></script>
+<script src="/js/sbl-teach-bot.js"></script>
+<script src="/js/sbl-lesson-resources.js"></script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
