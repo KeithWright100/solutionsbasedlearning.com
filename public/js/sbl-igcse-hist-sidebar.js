@@ -121,9 +121,135 @@
       {
         "slug": "civil-rights-usa",
         "label": "A divided union: civil rights in the USA, 1945–74",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/history/learn/civil-rights-usa",
+        "status": "available",
+        "topics": [
+          {
+            "title": "1. The Red Scare and McCarthyism",
+            "lessons": [
+              {
+                "label": "Reasons for the Red Scare",
+                "href": "/igcse/history/learn/civil-rights-usa/l01-reasons-for-the-red-scare"
+              },
+              {
+                "label": "FBI, HUAC and Hollywood",
+                "href": "/igcse/history/learn/civil-rights-usa/l02-the-fbi-huac-and-the-hollywood-ten"
+              },
+              {
+                "label": "Hiss and the Rosenbergs",
+                "href": "/igcse/history/learn/civil-rights-usa/l03-hiss-the-rosenbergs-and-the-mccarran-act"
+              },
+              {
+                "label": "McCarthyism",
+                "href": "/igcse/history/learn/civil-rights-usa/l04-mccarthy-and-mccarthyism"
+              }
+            ]
+          },
+          {
+            "title": "2. Civil rights in the 1950s",
+            "lessons": [
+              {
+                "label": "Segregation and discrimination",
+                "href": "/igcse/history/learn/civil-rights-usa/l05-segregation-and-discrimination"
+              },
+              {
+                "label": "Brown v Topeka and Emmett Till",
+                "href": "/igcse/history/learn/civil-rights-usa/l06-brown-versus-topeka-and-emmett-till"
+              },
+              {
+                "label": "Montgomery Bus Boycott",
+                "href": "/igcse/history/learn/civil-rights-usa/l07-the-montgomery-bus-boycott"
+              },
+              {
+                "label": "Little Rock",
+                "href": "/igcse/history/learn/civil-rights-usa/l08-little-rock-1957"
+              },
+              {
+                "label": "Civil Rights Act 1957",
+                "href": "/igcse/history/learn/civil-rights-usa/l09-the-civil-rights-act-1957"
+              }
+            ]
+          },
+          {
+            "title": "3. The impact of civil rights protests, 1960–74",
+            "lessons": [
+              {
+                "label": "Sit-ins and freedom rides",
+                "href": "/igcse/history/learn/civil-rights-usa/l10-sit-ins-and-freedom-rides"
+              },
+              {
+                "label": "Meredith and King",
+                "href": "/igcse/history/learn/civil-rights-usa/l11-meredith-and-martin-luther-king"
+              },
+              {
+                "label": "Birmingham and Washington",
+                "href": "/igcse/history/learn/civil-rights-usa/l12-birmingham-and-the-march-on-washington"
+              },
+              {
+                "label": "Freedom Summer and Selma",
+                "href": "/igcse/history/learn/civil-rights-usa/l13-freedom-summer-and-selma"
+              },
+              {
+                "label": "1964 and 1965 Acts",
+                "href": "/igcse/history/learn/civil-rights-usa/l14-civil-rights-act-and-voting-rights-act"
+              },
+              {
+                "label": "Malcolm X and Black Power",
+                "href": "/igcse/history/learn/civil-rights-usa/l15-malcolm-x-and-black-power"
+              },
+              {
+                "label": "Black Panthers and riots",
+                "href": "/igcse/history/learn/civil-rights-usa/l16-the-black-panthers-and-race-riots"
+              },
+              {
+                "label": "Civil rights 1966–74",
+                "href": "/igcse/history/learn/civil-rights-usa/l17-the-civil-rights-movement-1966-74"
+              }
+            ]
+          },
+          {
+            "title": "4. Other protest movements: students, women, anti-Vietnam",
+            "lessons": [
+              {
+                "label": "Growth of protest",
+                "href": "/igcse/history/learn/civil-rights-usa/l18-reasons-for-protest-movements"
+              },
+              {
+                "label": "Student protest",
+                "href": "/igcse/history/learn/civil-rights-usa/l19-student-protest-sds-and-berkeley"
+              },
+              {
+                "label": "Anti-Vietnam and hippies",
+                "href": "/igcse/history/learn/civil-rights-usa/l20-anti-vietnam-war-protest-and-hippies"
+              },
+              {
+                "label": "Women’s movement",
+                "href": "/igcse/history/learn/civil-rights-usa/l21-the-womens-movement-roosevelt-friedan-and-now"
+              },
+              {
+                "label": "Women’s Lib and opposition",
+                "href": "/igcse/history/learn/civil-rights-usa/l22-womens-liberation-abortion-and-opposition"
+              }
+            ]
+          },
+          {
+            "title": "5. Nixon and Watergate",
+            "lessons": [
+              {
+                "label": "Nixon and the break-in",
+                "href": "/igcse/history/learn/civil-rights-usa/l23-nixon-the-plumbers-and-the-break-in"
+              },
+              {
+                "label": "Watergate scandal",
+                "href": "/igcse/history/learn/civil-rights-usa/l24-the-watergate-scandal-and-fords-pardon"
+              },
+              {
+                "label": "Impact of Watergate",
+                "href": "/igcse/history/learn/civil-rights-usa/l25-the-impact-of-watergate"
+              }
+            ]
+          }
+        ]
       }
     ]
   },

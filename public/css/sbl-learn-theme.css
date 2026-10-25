@@ -11,13 +11,13 @@
   --lh-surface:       #FFFFFF;
   --lh-border:        #E6E8EE;
   --lh-ink:           #1B2029;
-  --lh-body:          #4B5566;
-  --lh-muted:         #8A93A3;
+  --lh-body:          #262C37;
+  --lh-muted:         #545E6E;
 
   --lh-sidebar-bg:    #F3F5F9;   /* lightened: soft off-white, distinct from main surface */
   --lh-sidebar-line:  #E2E6EE;
-  --lh-sidebar-text:  #38414F;
-  --lh-sidebar-dim:   #7A8496;
+  --lh-sidebar-text:  #222832;
+  --lh-sidebar-dim:   #4F5968;
   --lh-sidebar-hover: rgba(20, 30, 50, 0.05);
   --lh-sidebar-strong: #12161F; /* dark text used on light/green accent chips */
 
