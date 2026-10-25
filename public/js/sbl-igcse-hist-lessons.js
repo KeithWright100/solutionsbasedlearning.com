@@ -7,6 +7,8 @@ window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_HIST_LESSON_ORDERS = window.SBL_IGCSE_HIST_LESSON_ORDERS || [];
 window.SBL_IGCSE_HIST_LESSON_ORDERS.push(["IGHI1101", "IGHI1102", "IGHI1103", "IGHI1104", "IGHI1201", "IGHI1202", "IGHI1203", "IGHI1204", "IGHI1301", "IGHI1302", "IGHI1303", "IGHI1401", "IGHI1402", "IGHI1403", "IGHI1404", "IGHI1405", "IGHI1501", "IGHI1502", "IGHI1503"]);
 window.SBL_IGCSE_HIST_LESSON_ORDERS.push(["IGHI2101", "IGHI2102", "IGHI2103", "IGHI2104", "IGHI2201", "IGHI2202", "IGHI2203", "IGHI2204", "IGHI2205", "IGHI2301", "IGHI2302", "IGHI2303", "IGHI2304", "IGHI2305", "IGHI2306", "IGHI2307", "IGHI2308", "IGHI2401", "IGHI2402", "IGHI2403", "IGHI2404", "IGHI2405", "IGHI2501", "IGHI2502", "IGHI2503"]);
+window.SBL_IGCSE_HIST_LESSON_ORDERS.push(["IGHI3101", "IGHI3102", "IGHI3103", "IGHI3104", "IGHI3105", "IGHI3201", "IGHI3202", "IGHI3203", "IGHI3301", "IGHI3302", "IGHI3303", "IGHI3304", "IGHI3401", "IGHI3402", "IGHI3403", "IGHI3404", "IGHI3501", "IGHI3502", "IGHI3503", "IGHI3504"]);
+window.SBL_IGCSE_HIST_LESSON_ORDERS.push(["IGHI4101", "IGHI4102", "IGHI4103", "IGHI4201", "IGHI4301", "IGHI4302", "IGHI4303", "IGHI4304", "IGHI4401", "IGHI4402", "IGHI4403", "IGHI4501", "IGHI4502", "IGHI4503", "IGHI4504"]);
 window.SBL_LESSONS["IGHI1101"] = {
  "id": "IGHI1101",
  "topicNumber": 1,
@@ -5944,6 +5946,4731 @@ window.SBL_LESSONS["IGHI2503"] = {
    "correct": 0,
    "explain": "Though politicians became more accountable.",
    "tag": "Impact of Watergate"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3101"] = {
+ "id": "IGHI3101",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Tsarist rule in 1905: reasons for discontent",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l01-tsarist-rule-in-1905",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Tsarist rule in 1905: reasons for discontent.",
+ "checklist": [
+  "I can describe Nicholas II and the system of autocracy",
+  "I can explain why different social groups were discontented in 1905",
+  "I can describe the radical threat and how the police state tried to control it"
+ ],
+ "quiz": [
+  {
+   "q": "Which family ruled Russia in 1905?",
+   "options": [
+    "The Romanovs",
+    "The Habsburgs",
+    "The Hohenzollerns",
+    "The Windsors"
+   ],
+   "correct": 0,
+   "explain": "For nearly 300 years.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "What is an autocrat?",
+   "options": [
+    "A ruler with absolute power",
+    "An elected president",
+    "A member of a parliament",
+    "A leader of a large trade union"
+   ],
+   "correct": 0,
+   "explain": "No controls on his power.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "About what percentage of the population were peasants?",
+   "options": [
+    "85 per cent",
+    "44 per cent",
+    "25 per cent",
+    "10 per cent"
+   ],
+   "correct": 0,
+   "explain": "Most were desperately poor.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "What did the government ban from newspapers during famines?",
+   "options": [
+    "The Russian word for famine",
+    "Pictures of the tsar",
+    "All foreign news",
+    "Adverts for bread and other food"
+   ],
+   "correct": 0,
+   "explain": "Russians were shocked.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "What did most middle-class liberals want?",
+   "options": [
+    "A constitution guaranteeing rights",
+    "A workers’ revolution",
+    "A return to serfdom",
+    "More power for the tsar and his army"
+   ],
+   "correct": 0,
+   "explain": "They feared radical revolution.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "What percentage of the empire’s people were Russian in 1897?",
+   "options": [
+    "44 per cent",
+    "85 per cent",
+    "100 per cent",
+    "10 per cent"
+   ],
+   "correct": 0,
+   "explain": "Out of 125 million.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "Who led the Bolsheviks?",
+   "options": [
+    "Lenin",
+    "Trotsky",
+    "Stolypin",
+    "Kerensky"
+   ],
+   "correct": 0,
+   "explain": "Vladimir Ulyanov.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "What did the Mensheviks believe?",
+   "options": [
+    "A workers’ revolution was a long way off",
+    "Revolution must happen at once",
+    "The tsar should keep all power",
+    "Terrorism was the only way to bring change"
+   ],
+   "correct": 0,
+   "explain": "Russia needed to industrialise first.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "What was the Okhrana?",
+   "options": [
+    "The secret police",
+    "The tsar’s army",
+    "A peasant commune",
+    "The Russian parliament"
+   ],
+   "correct": 0,
+   "explain": "Its agents posed as revolutionaries.",
+   "tag": "Tsarist rule in 1905"
+  },
+  {
+   "q": "Where were suspected opponents often exiled?",
+   "options": [
+    "Siberia",
+    "Finland",
+    "Switzerland",
+    "Japan"
+   ],
+   "correct": 0,
+   "explain": "The remote east of the empire.",
+   "tag": "Tsarist rule in 1905"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3102"] = {
+ "id": "IGHI3102",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The 1905 revolution",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l02-the-1905-revolution",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The 1905 revolution.",
+ "checklist": [
+  "I can explain how the Russo-Japanese War and Bloody Sunday caused the revolution",
+  "I can describe the Potemkin mutiny",
+  "I can describe the role of peasants, workers and the St Petersburg Soviet"
+ ],
+ "quiz": [
+  {
+   "q": "Why did Russia want Manchuria?",
+   "options": [
+    "Its resources and a warm-water port",
+    "Its large population",
+    "Its oil fields",
+    "To build a brand new capital city there for the tsar"
+   ],
+   "correct": 0,
+   "explain": "Russian ports froze in winter.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "Who defeated Russia in 1904–05?",
+   "options": [
+    "Japan",
+    "Germany",
+    "China",
+    "Britain"
+   ],
+   "correct": 0,
+   "explain": "A humiliating defeat.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "What happened at Tsushima in May 1905?",
+   "options": [
+    "Russia’s Baltic Fleet was destroyed",
+    "The Potemkin mutinied",
+    "Russia won a great victory",
+    "A peace treaty was signed with Japan"
+   ],
+   "correct": 0,
+   "explain": "All its battleships were lost.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "Who led the Bloody Sunday march?",
+   "options": [
+    "Father Gapon",
+    "Lenin",
+    "Trotsky",
+    "Rasputin, the monk"
+   ],
+   "correct": 0,
+   "explain": "A priest.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "How many people signed the Bloody Sunday petition?",
+   "options": [
+    "150,000",
+    "1,000",
+    "400,000",
+    "15 million"
+   ],
+   "correct": 0,
+   "explain": "Factory workers and their families.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "What did the petition ask for?",
+   "options": [
+    "An 8-hour day, trade unions and a constitution",
+    "The tsar’s abdication",
+    "War with Japan",
+    "More land for the nobles, the Church and the army officers"
+   ],
+   "correct": 0,
+   "explain": "Economic and political demands.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "What sparked the Potemkin mutiny?",
+   "options": [
+    "Maggot-infested meat",
+    "A pay cut",
+    "News of Bloody Sunday",
+    "An order to sail to Japan"
+   ],
+   "correct": 0,
+   "explain": "14 June 1905.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "Where were the Potemkin mutineers given asylum?",
+   "options": [
+    "Constanta, Romania",
+    "Odessa",
+    "St Petersburg",
+    "Tokyo, in Japan itself"
+   ],
+   "correct": 0,
+   "explain": "They sank the ship.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "How many workers struck in January 1905?",
+   "options": [
+    "Over 400,000",
+    "About 1,000",
+    "About 3,000",
+    "Over 15 million"
+   ],
+   "correct": 0,
+   "explain": "After Bloody Sunday.",
+   "tag": "The 1905 revolution"
+  },
+  {
+   "q": "Who chaired the St Petersburg Soviet?",
+   "options": [
+    "Lev Trotsky",
+    "Lenin",
+    "Father Gapon",
+    "Stolypin"
+   ],
+   "correct": 0,
+   "explain": "October 1905.",
+   "tag": "The 1905 revolution"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3103"] = {
+ "id": "IGHI3103",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The October Manifesto, repression and the tsar’s survival",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l03-october-manifesto-and-repression",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The October Manifesto, repression and the tsar’s survival.",
+ "checklist": [
+  "I can describe the terms of the October Manifesto and reactions to it",
+  "I can describe Stolypin’s repression after 1905",
+  "I can explain why Nicholas II survived the 1905 revolution"
+ ],
+ "quiz": [
+  {
+   "q": "When was the October Manifesto published?",
+   "options": [
+    "17 October 1905",
+    "9 January 1905",
+    "27 April 1906",
+    "1 September 1917"
+   ],
+   "correct": 0,
+   "explain": "After the general strike.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "Which was promised in the October Manifesto?",
+   "options": [
+    "An elected duma",
+    "Land for all peasants",
+    "An 8-hour day",
+    "The tsar’s abdication"
+   ],
+   "correct": 0,
+   "explain": "Plus civil rights.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "Who was delighted by the October Manifesto?",
+   "options": [
+    "The liberal middle classes",
+    "The Social Democrats",
+    "The peasants",
+    "The sailors of the Potemkin"
+   ],
+   "correct": 0,
+   "explain": "The general strike ended.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "Why were the Social Democrats critical?",
+   "options": [
+    "It did nothing for the workers",
+    "It gave too much land away",
+    "It ended the war",
+    "It abolished the tsar completely"
+   ],
+   "correct": 0,
+   "explain": "They felt abandoned.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "How many people were killed when the Moscow rising was crushed?",
+   "options": [
+    "Over 1,000",
+    "About 50",
+    "About 100,000",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "December 1905.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "Who led the repression after 1905?",
+   "options": [
+    "Pyotr Stolypin",
+    "Father Gapon",
+    "Alexander Kerensky",
+    "Sergei Witte"
+   ],
+   "correct": 0,
+   "explain": "Interior minister then prime minister.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "What was “Stolypin’s necktie”?",
+   "options": [
+    "The hangman’s noose",
+    "A medal",
+    "A type of uniform",
+    "A railway line to Siberia"
+   ],
+   "correct": 0,
+   "explain": "Over a thousand executed.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "What did Lenin call the 1905 revolution?",
+   "options": [
+    "A dress rehearsal",
+    "A great victory",
+    "A peasant revolt",
+    "A total failure for all"
+   ],
+   "correct": 0,
+   "explain": "It did not overthrow the tsar.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "How did Nicholas pay his armed forces?",
+   "options": [
+    "A large French loan",
+    "Taxes on vodka",
+    "Selling land",
+    "Money borrowed from Japan"
+   ],
+   "correct": 0,
+   "explain": "Keeping them loyal.",
+   "tag": "October Manifesto"
+  },
+  {
+   "q": "Why was the opposition disunited?",
+   "options": [
+    "Much unrest was spontaneous and about economic issues",
+    "It was led by the tsar",
+    "It was all Bolshevik",
+    "It was banned by the tsar in 1904, before the revolution"
+   ],
+   "correct": 0,
+   "explain": "Different groups wanted different things.",
+   "tag": "October Manifesto"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3104"] = {
+ "id": "IGHI3104",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Nicholas II and the dumas, 1906–14",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l04-nicholas-and-the-dumas",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Nicholas II and the dumas, 1906–14.",
+ "checklist": [
+  "I can explain how the Fundamental Laws limited the duma",
+  "I can describe the first four dumas and the political parties",
+  "I can explain why the dumas increased opposition to tsarism"
+ ],
+ "quiz": [
+  {
+   "q": "When were the Fundamental Laws set out?",
+   "options": [
+    "April 1906",
+    "October 1905",
+    "June 1907",
+    "February 1917"
+   ],
+   "correct": 0,
+   "explain": "The tsar was back in control.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "What could the State Council do?",
+   "options": [
+    "Block anything passed by the duma",
+    "Elect the tsar",
+    "Command the army",
+    "Dismiss all of the tsar’s ministers"
+   ],
+   "correct": 0,
+   "explain": "Half chosen by the tsar.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "What did Article 87 allow?",
+   "options": [
+    "The tsar to pass laws when the duma was not sitting",
+    "The duma to remove the tsar",
+    "Peasants to own land",
+    "Freedom of the press for every newspaper and magazine in Russia"
+   ],
+   "correct": 0,
+   "explain": "A key limit on the duma.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "Which two parties dominated the First Duma?",
+   "options": [
+    "Kadets and Trudoviks",
+    "Bolsheviks and Mensheviks",
+    "Octobrists and nationalists",
+    "The Black Hundreds and SRs"
+   ],
+   "correct": 0,
+   "explain": "They demanded land reform.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "How long did the First Duma last?",
+   "options": [
+    "10 weeks",
+    "5 years",
+    "2 days",
+    "1 year exactly"
+   ],
+   "correct": 0,
+   "explain": "Dissolved in July 1906.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "How many socialists were elected to the Second Duma?",
+   "options": [
+    "222",
+    "287",
+    "443",
+    "12"
+   ],
+   "correct": 0,
+   "explain": "Mostly SRs.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "What did Stolypin do on 3 June 1907?",
+   "options": [
+    "Changed the election rules",
+    "Abolished the duma for ever",
+    "Freed political prisoners",
+    "Gave land to peasants"
+   ],
+   "correct": 0,
+   "explain": "So conservatives would be elected.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "How many of the 443 seats did conservatives control in the Third Duma?",
+   "options": [
+    "287",
+    "222",
+    "100",
+    "443"
+   ],
+   "correct": 0,
+   "explain": "It supported the government.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "Who were the Black Hundreds?",
+   "options": [
+    "Extreme nationalist groups",
+    "Bolshevik fighters",
+    "Peasant communes",
+    "Units of the tsarist police"
+   ],
+   "correct": 0,
+   "explain": "They killed over 3,000 people.",
+   "tag": "The dumas"
+  },
+  {
+   "q": "Which party was named after the October Manifesto?",
+   "options": [
+    "The Octobrists",
+    "The Kadets",
+    "The Trudoviks",
+    "The Mensheviks"
+   ],
+   "correct": 0,
+   "explain": "More conservative than the Kadets.",
+   "tag": "The dumas"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3105"] = {
+ "id": "IGHI3105",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Stolypin’s land reform and the Lena Goldfields",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l05-stolypin-land-reform-and-lena-goldfields",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Stolypin’s land reform and the Lena Goldfields.",
+ "checklist": [
+  "I can explain the aims of Stolypin’s “wager on the strong”",
+  "I can assess how successful the land reform was",
+  "I can explain the significance of the Lena Goldfields massacre"
+ ],
+ "quiz": [
+  {
+   "q": "What did Stolypin want peasants to do?",
+   "options": [
+    "Leave the commune and set up their own farms",
+    "Join the army",
+    "Move to the cities",
+    "Give all of their land to the landlords and move to the cities"
+   ],
+   "correct": 0,
+   "explain": "Individual family farms.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "What was the “wager on the strong”?",
+   "options": [
+    "That successful farmers would support the government",
+    "A bet on the Russo-Japanese War",
+    "A plan to build a strong army",
+    "A new tax on rich peasants to pay for the army and navy"
+   ],
+   "correct": 0,
+   "explain": "Stolypin’s gamble.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "How many peasants moved to Siberia, 1905–17?",
+   "options": [
+    "3.5 million",
+    "14,000",
+    "500,000",
+    "35 million people"
+   ],
+   "correct": 0,
+   "explain": "Where there was plenty of land.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "By May 1915, what percentage had enclosed family farms?",
+   "options": [
+    "14 per cent",
+    "85 per cent",
+    "50 per cent",
+    "100 per cent"
+   ],
+   "correct": 0,
+   "explain": "Far fewer than hoped.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "When was Stolypin assassinated?",
+   "options": [
+    "September 1911",
+    "January 1905",
+    "April 1912",
+    "March 1917, at the end"
+   ],
+   "correct": 0,
+   "explain": "At the opera.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "Why did the Lena Goldfields strike begin?",
+   "options": [
+    "A protest over rotten horsemeat",
+    "The tsar visited the mines",
+    "Miners wanted to go to war",
+    "Gold prices fell sharply in Europe"
+   ],
+   "correct": 0,
+   "explain": "It spread through the goldfields.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "How many workers were killed at the Lena Goldfields?",
+   "options": [
+    "Between 200 and 500",
+    "About 10",
+    "Over 1,000",
+    "About 5,000 or more"
+   ],
+   "correct": 0,
+   "explain": "Troops fired into the crowd.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "How many strikes followed the massacre?",
+   "options": [
+    "Nearly 2,000",
+    "About 20",
+    "About 200",
+    "None at all that year"
+   ],
+   "correct": 0,
+   "explain": "A storm of protest.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "Who led the duma investigation into the massacre?",
+   "options": [
+    "Alexander Kerensky",
+    "Lenin",
+    "Stolypin",
+    "Trotsky, the revolutionary"
+   ],
+   "correct": 0,
+   "explain": "He became famous.",
+   "tag": "Stolypin and Lena"
+  },
+  {
+   "q": "Which political aim of the land reform failed?",
+   "options": [
+    "Preventing unrest in the countryside",
+    "Making Russia richer",
+    "Moving people to Siberia",
+    "Ending the commune entirely by the end of 1906"
+   ],
+   "correct": 0,
+   "explain": "Unrest returned in 1917.",
+   "tag": "Stolypin and Lena"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3201"] = {
+ "id": "IGHI3201",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The effects of the First World War on Russia",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l06-effects-of-the-first-world-war",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The effects of the First World War on Russia.",
+ "checklist": [
+  "I can describe Russia’s military defeats and Nicholas’s decision to take command",
+  "I can explain the economic and social effects of the war",
+  "I can explain the political effects of the war"
+ ],
+ "quiz": [
+  {
+   "q": "Why did Russia go to war in 1914?",
+   "options": [
+    "It was an ally of Serbia",
+    "Germany attacked Japan",
+    "It wanted to help Austria",
+    "Britain invaded Russia"
+   ],
+   "correct": 0,
+   "explain": "Austria and Germany became enemies.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "How many men did Russia lose at Tannenburg?",
+   "options": [
+    "122,000",
+    "2 million",
+    "15 million",
+    "30"
+   ],
+   "correct": 0,
+   "explain": "August 1914.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "By the end of 1915, how many men had Russia lost?",
+   "options": [
+    "2 million",
+    "122,000",
+    "500,000",
+    "15 million"
+   ],
+   "correct": 0,
+   "explain": "And it was in retreat.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "What proportion of the army had no rifles?",
+   "options": [
+    "One third",
+    "Half",
+    "All of it",
+    "One tenth"
+   ],
+   "correct": 0,
+   "explain": "Men picked up dead soldiers’ weapons.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "When did Nicholas take personal command of the army?",
+   "options": [
+    "August 1915",
+    "August 1914",
+    "February 1917",
+    "January 1905"
+   ],
+   "correct": 0,
+   "explain": "Against his ministers’ advice.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "How much did the war cost Russia, 1914–17?",
+   "options": [
+    "17 billion roubles",
+    "300 million roubles",
+    "1 billion roubles",
+    "17 million roubles"
+   ],
+   "correct": 0,
+   "explain": "15 times the war with Japan.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "Why did the government lose a quarter of its tax income?",
+   "options": [
+    "It banned the sale of alcohol",
+    "It lost the war",
+    "Peasants refused to pay",
+    "Many factories closed down for good"
+   ],
+   "correct": 0,
+   "explain": "Prohibition in 1914.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "What caused inflation during the war?",
+   "options": [
+    "The government printed more money",
+    "Prices were fixed by law",
+    "Wages rose quickly",
+    "There was far too much food in the shops"
+   ],
+   "correct": 0,
+   "explain": "Money became less valuable.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "Why did food rot in railway wagons?",
+   "options": [
+    "Trains served the army first",
+    "There was too much food",
+    "Peasants refused to unload it",
+    "The cities refused to buy it"
+   ],
+   "correct": 0,
+   "explain": "Cities ran short.",
+   "tag": "Effects of the war"
+  },
+  {
+   "q": "What was the Progressive Bloc?",
+   "options": [
+    "Duma deputies who opposed the government",
+    "A Bolshevik army unit",
+    "A group of factories",
+    "The tsar’s closest advisers at the royal court"
+   ],
+   "correct": 0,
+   "explain": "About half the duma.",
+   "tag": "Effects of the war"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3202"] = {
+ "id": "IGHI3202",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The tsarina and the influence of Rasputin",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l07-rasputin-and-the-tsarina",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The tsarina and the influence of Rasputin.",
+ "checklist": [
+  "I can explain why Alexandra became regent and why she was unpopular",
+  "I can explain how Rasputin gained influence over the royal family",
+  "I can explain how Rasputin damaged the reputation of tsarism"
+ ],
+ "quiz": [
+  {
+   "q": "Why was St Petersburg renamed Petrograd?",
+   "options": [
+    "Petersburg sounded German",
+    "The tsar moved there",
+    "It was destroyed in the war",
+    "The Bolsheviks renamed it"
+   ],
+   "correct": 0,
+   "explain": "When the war started.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "Who governed Russia as regent while Nicholas was at the front?",
+   "options": [
+    "Tsarina Alexandra",
+    "Rasputin",
+    "Prince Lvov",
+    "Grand Duke Michael"
+   ],
+   "correct": 0,
+   "explain": "From 1915.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "Why was Alexandra unpopular?",
+   "options": [
+    "She was German",
+    "She was a Bolshevik",
+    "She was a peasant",
+    "She supported the duma"
+   ],
+   "correct": 0,
+   "explain": "Russia was at war with Germany.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "How many prime ministers did Alexandra appoint, August 1915–December 1916?",
+   "options": [
+    "Four",
+    "One",
+    "Ten",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "Plus three war ministers.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "Which disease did Alexei have?",
+   "options": [
+    "Haemophilia",
+    "Tuberculosis",
+    "Typhus",
+    "Smallpox"
+   ],
+   "correct": 0,
+   "explain": "His blood did not clot.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "Why did Alexandra depend on Rasputin?",
+   "options": [
+    "He seemed able to help Alexei",
+    "He was her brother",
+    "He was a general",
+    "He was elected to the duma by peasants"
+   ],
+   "correct": 0,
+   "explain": "Gratitude became dependence.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "What did Alexandra write to Nicholas about?",
+   "options": [
+    "Rasputin’s dreams and what they meant for the war",
+    "The duma’s demands",
+    "Her plans to abdicate",
+    "Lenin’s return to Russia and the Bolsheviks’ secret plans"
+   ],
+   "correct": 0,
+   "explain": "For example an advance near Riga.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "What rumour damaged Alexandra?",
+   "options": [
+    "That she was betraying secrets to Germany",
+    "That she was a Bolshevik",
+    "That she wanted land reform",
+    "That she had secretly left Russia for good"
+   ],
+   "correct": 0,
+   "explain": "Along with rumours about Rasputin.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "Who murdered Rasputin?",
+   "options": [
+    "A group of aristocrats",
+    "The Bolsheviks",
+    "The Okhrana",
+    "German spies in Petrograd"
+   ],
+   "correct": 0,
+   "explain": "December 1916.",
+   "tag": "Rasputin"
+  },
+  {
+   "q": "How did people in the streets react to Rasputin’s death?",
+   "options": [
+    "With public rejoicing",
+    "With riots in his support",
+    "With silence",
+    "They did not hear of it"
+   ],
+   "correct": 0,
+   "explain": "Alexandra was upset.",
+   "tag": "Rasputin"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3203"] = {
+ "id": "IGHI3203",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The February Revolution and the end of tsarism",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l08-the-february-revolution",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The February Revolution and the end of tsarism.",
+ "checklist": [
+  "I can explain the long-term and immediate causes of the February Revolution",
+  "I can describe the events, including the army mutiny",
+  "I can describe the abdication of the tsar and the setting up of the Provisional Government"
+ ],
+ "quiz": [
+  {
+   "q": "On which date were the International Women’s Day marches?",
+   "options": [
+    "23 February 1917",
+    "9 January 1905",
+    "2 March 1917",
+    "25 October 1917, autumn"
+   ],
+   "correct": 0,
+   "explain": "Old-Style date.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "What announcement made people desperate in February 1917?",
+   "options": [
+    "Bread rationing from 1 March",
+    "The tsar’s return",
+    "Peace with Germany",
+    "The end of the duma for ever"
+   ],
+   "correct": 0,
+   "explain": "After a winter of shortages.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "About how many people marched in Petrograd, 23–25 February?",
+   "options": [
+    "250,000",
+    "1,000",
+    "15 million",
+    "150"
+   ],
+   "correct": 0,
+   "explain": "Helped by mild weather.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "Where was the tsar during the revolution?",
+   "options": [
+    "At army headquarters in Mogilev",
+    "In Petrograd",
+    "In Siberia",
+    "On holiday with his family in Crimea"
+   ],
+   "correct": 0,
+   "explain": "He left on 22 February.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "Which regiment first refused to fire on protesters?",
+   "options": [
+    "The Pavlovsky Regiment",
+    "The Cossacks",
+    "The Red Guards",
+    "The Czech Legion in Siberia"
+   ],
+   "correct": 0,
+   "explain": "26 February.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "How many soldiers mutinied?",
+   "options": [
+    "150,000",
+    "40,000",
+    "2 million",
+    "500"
+   ],
+   "correct": 0,
+   "explain": "Almost Petrograd’s entire defence force.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "Where did Nicholas agree to abdicate?",
+   "options": [
+    "Pskov",
+    "Petrograd",
+    "Moscow",
+    "Mogilev"
+   ],
+   "correct": 0,
+   "explain": "2 March 1917.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "Who did Nicholas name as tsar after him?",
+   "options": [
+    "His brother, Grand Duke Michael",
+    "His son Alexei",
+    "Rasputin",
+    "Prince Lvov, a liberal politician"
+   ],
+   "correct": 0,
+   "explain": "Michael refused.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "Who led the Provisional Government at first?",
+   "options": [
+    "Prince Lvov",
+    "Alexander Kerensky",
+    "Lenin",
+    "General Kornilov"
+   ],
+   "correct": 0,
+   "explain": "A well-known liberal.",
+   "tag": "February Revolution"
+  },
+  {
+   "q": "Why was it called “provisional”?",
+   "options": [
+    "It was temporary until elections",
+    "It was run by the army",
+    "It only ruled Petrograd",
+    "It had been elected by the people"
+   ],
+   "correct": 0,
+   "explain": "For a Constituent Assembly.",
+   "tag": "February Revolution"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3301"] = {
+ "id": "IGHI3301",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Weaknesses and mistakes of the Provisional Government",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l09-weaknesses-of-the-provisional-government",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Weaknesses and mistakes of the Provisional Government.",
+ "checklist": [
+  "I can explain the weaknesses of the Provisional Government, including Dual Control",
+  "I can explain the mistakes it made, including the June Offensive",
+  "I can explain why the Petrograd Soviet did not challenge it directly at first"
+ ],
+ "quiz": [
+  {
+   "q": "What is Dual Control?",
+   "options": [
+    "Power shared between the Provisional Government and the Soviet",
+    "The tsar and the duma ruling together",
+    "Two armies fighting",
+    "Two capital cities, Petrograd and Moscow, each with its own ruler"
+   ],
+   "correct": 0,
+   "explain": "Neither was in full control.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "What did Order Number 1 do?",
+   "options": [
+    "Gave the Soviet the final say on military matters",
+    "Abolished the army",
+    "Ended the war",
+    "Freed all of the political prisoners from Russia’s jails"
+   ],
+   "correct": 0,
+   "explain": "Soldiers obeyed the Soviet first.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "Why did the Provisional Government lack legitimacy?",
+   "options": [
+    "It had not been elected",
+    "It was led by the tsar",
+    "It was foreign",
+    "It was led by Bolsheviks"
+   ],
+   "correct": 0,
+   "explain": "The Soviet was elected.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "Why did the Provisional Government continue the war?",
+   "options": [
+    "It relied on allies to invest in Russia",
+    "It had already won",
+    "The Soviet demanded it",
+    "Germany ordered it to keep on fighting the war"
+   ],
+   "correct": 0,
+   "explain": "Most people wanted peace.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "Who became minister of war in May 1917?",
+   "options": [
+    "Alexander Kerensky",
+    "Lenin",
+    "Prince Lvov",
+    "General Kornilov, the soldier"
+   ],
+   "correct": 0,
+   "explain": "He launched the June Offensive.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "What happened in the June Offensive?",
+   "options": [
+    "The Russian front collapsed",
+    "Russia captured Berlin",
+    "The war ended",
+    "Germany surrendered to Russia"
+   ],
+   "correct": 0,
+   "explain": "Pushed back hundreds of kilometres.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "By October 1917, how many soldiers had deserted?",
+   "options": [
+    "Over 2 million",
+    "About 50,000",
+    "About 150,000",
+    "None at all, it was loyal"
+   ],
+   "correct": 0,
+   "explain": "Discipline collapsed.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "Who set up the Petrograd Soviet?",
+   "options": [
+    "The Mensheviks",
+    "The tsar",
+    "The Kadets",
+    "The Bolsheviks alone"
+   ],
+   "correct": 0,
+   "explain": "Like the soviet of 1905.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "Why did the Mensheviks support the Provisional Government?",
+   "options": [
+    "Russia needed a bourgeois phase first",
+    "They wanted the tsar back",
+    "They were paid by it",
+    "They wanted a long war against Germany and Austria"
+   ],
+   "correct": 0,
+   "explain": "Marxist theory.",
+   "tag": "Provisional Government"
+  },
+  {
+   "q": "By September 1917, who had a majority in the Petrograd Soviet?",
+   "options": [
+    "Bolshevik supporters",
+    "Kadets",
+    "Monarchists",
+    "Octobrists and Kadets"
+   ],
+   "correct": 0,
+   "explain": "Lenin’s goal.",
+   "tag": "Provisional Government"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3302"] = {
+ "id": "IGHI3302",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Lenin, the April Theses and the July Days",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l10-lenin-the-april-theses-and-the-july-days",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Lenin, the April Theses and the July Days.",
+ "checklist": [
+  "I can describe Lenin’s return to Russia and the April Theses",
+  "I can explain why support for the Bolsheviks grew in 1917",
+  "I can describe the July Days and their outcome"
+ ],
+ "quiz": [
+  {
+   "q": "How did Lenin travel back across Germany?",
+   "options": [
+    "In a sealed train",
+    "By aeroplane",
+    "On foot",
+    "By ship around Africa"
+   ],
+   "correct": 0,
+   "explain": "To stop him meeting German socialists.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "When did Lenin arrive at the Finland Station?",
+   "options": [
+    "3 April 1917",
+    "23 February 1917",
+    "25 October 1917",
+    "5 July 1917"
+   ],
+   "correct": 0,
+   "explain": "He spoke from an armoured car.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "Why did Germany help Lenin return?",
+   "options": [
+    "It hoped he would take Russia out of the war",
+    "It wanted him to fight Britain",
+    "He was a German citizen",
+    "He promised to give land in Russia to Germany"
+   ],
+   "correct": 0,
+   "explain": "Germany also sent money.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "Which slogan summed up the April Theses?",
+   "options": [
+    "Peace, Land and Bread",
+    "Liberty, Equality, Fraternity",
+    "Workers of the world, unite",
+    "Jobs and Freedom"
+   ],
+   "correct": 0,
+   "explain": "Also All Power to the Soviets.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "What did the April Theses say about the land?",
+   "options": [
+    "All land should be nationalised and given to peasants",
+    "Landlords should keep their estates",
+    "Land should be sold to Germany",
+    "Only the Orthodox Church should be allowed to own land"
+   ],
+   "correct": 0,
+   "explain": "Nationalisation.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "What percentage of delegates at the June Congress of Soviets were Bolsheviks?",
+   "options": [
+    "13 per cent",
+    "66 per cent",
+    "53 per cent",
+    "90 per cent"
+   ],
+   "correct": 0,
+   "explain": "SRs and Mensheviks had 66 per cent.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "About how many Red Guards were in Petrograd by July 1917?",
+   "options": [
+    "10,000",
+    "40,000",
+    "150,000",
+    "1 million"
+   ],
+   "correct": 0,
+   "explain": "Mostly loyal to the Bolsheviks.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "Who started the July Days demonstration?",
+   "options": [
+    "Anarchist revolutionaries",
+    "The Kadets",
+    "General Kornilov",
+    "Supporters of the tsar and the army"
+   ],
+   "correct": 0,
+   "explain": "The Bolsheviks joined later.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "What scattered the crowds on 4 July?",
+   "options": [
+    "A thunderstorm",
+    "A snowstorm",
+    "Cossack charges",
+    "A German air raid"
+   ],
+   "correct": 0,
+   "explain": "Troops then arrived.",
+   "tag": "April Theses and July Days"
+  },
+  {
+   "q": "What happened to Lenin after the July Days?",
+   "options": [
+    "He fled to Finland",
+    "He was executed",
+    "He became prime minister",
+    "He was sent to Siberia"
+   ],
+   "correct": 0,
+   "explain": "Trotsky was arrested.",
+   "tag": "April Theses and July Days"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3303"] = {
+ "id": "IGHI3303",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The Kornilov Revolt",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l11-the-kornilov-revolt",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The Kornilov Revolt.",
+ "checklist": [
+  "I can explain why Kerensky appointed Kornilov",
+  "I can describe the events of the Kornilov Revolt",
+  "I can explain the impact of the revolt on Kerensky and the Bolsheviks"
+ ],
+ "quiz": [
+  {
+   "q": "When did Kerensky appoint Kornilov?",
+   "options": [
+    "18 July 1917",
+    "24 August 1917",
+    "3 April 1917",
+    "25 October 1917"
+   ],
+   "correct": 0,
+   "explain": "As commander-in-chief.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "What did Kornilov want Kerensky to do?",
+   "options": [
+    "Introduce martial law and break the soviets",
+    "Give land to peasants",
+    "End the war at once",
+    "Bring back the tsar to rule the whole country again"
+   ],
+   "correct": 0,
+   "explain": "Kerensky saw it as a challenge.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "When did Kornilov send troops to Petrograd?",
+   "options": [
+    "24 August 1917",
+    "3 July 1917",
+    "2 March 1917",
+    "5 January 1918"
+   ],
+   "correct": 0,
+   "explain": "After being dismissed.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "What did Kerensky allow the Bolsheviks to do?",
+   "options": [
+    "Arm their supporters",
+    "Join his cabinet",
+    "Hold elections",
+    "Leave Russia for Finland"
+   ],
+   "correct": 0,
+   "explain": "To defend Petrograd.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "Who blocked Kornilov’s route into Petrograd?",
+   "options": [
+    "Railway workers",
+    "The Czech Legion",
+    "The Cossacks",
+    "British troops"
+   ],
+   "correct": 0,
+   "explain": "His troops also deserted.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "When was Kornilov arrested?",
+   "options": [
+    "1 September 1917",
+    "18 July 1917",
+    "25 October 1917",
+    "1 March 1917, in spring"
+   ],
+   "correct": 0,
+   "explain": "The revolt failed.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "How did the revolt make Kerensky look?",
+   "options": [
+    "Weak",
+    "Strong and decisive",
+    "Popular with the army",
+    "Like a Bolshevik leader"
+   ],
+   "correct": 0,
+   "explain": "He relied on the Bolsheviks.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "Who became president of the Petrograd Soviet on 25 September?",
+   "options": [
+    "Trotsky",
+    "Lenin",
+    "Kerensky",
+    "Stalin"
+   ],
+   "correct": 0,
+   "explain": "A huge gain for the Bolsheviks.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "How many members did the Bolsheviks have by October 1917?",
+   "options": [
+    "340,000",
+    "24,000",
+    "60,000",
+    "10,000 in all"
+   ],
+   "correct": 0,
+   "explain": "Up from 24,000 at the start of 1917.",
+   "tag": "Kornilov Revolt"
+  },
+  {
+   "q": "How many Red Guards kept their weapons after the revolt?",
+   "options": [
+    "40,000",
+    "10,000",
+    "2 million",
+    "150"
+   ],
+   "correct": 0,
+   "explain": "Military power for the Bolsheviks.",
+   "tag": "Kornilov Revolt"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3304"] = {
+ "id": "IGHI3304",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The Bolshevik takeover, October 1917",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l12-the-bolshevik-takeover",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The Bolshevik takeover, October 1917.",
+ "checklist": [
+  "I can describe the key events of the Bolshevik takeover",
+  "I can explain the roles of Lenin and Trotsky",
+  "I can explain how the failures of the Provisional Government helped the Bolsheviks"
+ ],
+ "quiz": [
+  {
+   "q": "When did Lenin secretly return to Petrograd?",
+   "options": [
+    "10 October 1917",
+    "3 April 1917",
+    "25 October 1917",
+    "1 September 1917"
+   ],
+   "correct": 0,
+   "explain": "He argued for an armed takeover.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "What was the MRC?",
+   "options": [
+    "The Military Revolutionary Committee",
+    "A Kadet newspaper",
+    "The tsar’s secret police",
+    "The Constituent Assembly of all Russia"
+   ],
+   "correct": 0,
+   "explain": "Set up by the Petrograd Soviet.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "By 21 October, who were most Petrograd regiments loyal to?",
+   "options": [
+    "The MRC",
+    "Kerensky",
+    "Kornilov",
+    "The tsar"
+   ],
+   "correct": 0,
+   "explain": "A crucial advantage.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "What did Trotsky use the MRC to take?",
+   "options": [
+    "Bridges, army headquarters and the telegraph office",
+    "The Kremlin in Moscow",
+    "The Duma building only",
+    "Finland and all of the border crossings to the west"
+   ],
+   "correct": 0,
+   "explain": "24 October.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "How much opposition did the Red Guards meet on 24–25 October?",
+   "options": [
+    "Almost none",
+    "Heavy fighting all night",
+    "A full battle with the army",
+    "German resistance"
+   ],
+   "correct": 0,
+   "explain": "Cafés and theatres stayed open.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "Where was the Provisional Government arrested?",
+   "options": [
+    "The Winter Palace",
+    "The Finland Station",
+    "The Kremlin",
+    "Pskov"
+   ],
+   "correct": 0,
+   "explain": "25–26 October.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "What government did Lenin form on 26 October?",
+   "options": [
+    "The Council of People’s Commissars",
+    "The Constituent Assembly",
+    "The Fourth Duma",
+    "The Provisional Government of Russia"
+   ],
+   "correct": 0,
+   "explain": "All its members were Bolsheviks.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "Why did elections to the Constituent Assembly pressure Lenin?",
+   "options": [
+    "The SRs were likely to win",
+    "The Bolsheviks were banned",
+    "They were cancelled",
+    "Kerensky would win"
+   ],
+   "correct": 0,
+   "explain": "Peasants supported the SRs.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "What did Trotsky say about those who walked out of the Soviet?",
+   "options": [
+    "They belonged in the dustbin of history",
+    "They were heroes",
+    "They should join the government",
+    "They were German spies paid by the Kaiser"
+   ],
+   "correct": 0,
+   "explain": "Mensheviks and right SRs.",
+   "tag": "Bolshevik takeover"
+  },
+  {
+   "q": "Which was a failure of the Provisional Government by October 1917?",
+   "options": [
+    "The army had lost all discipline",
+    "It had won the war",
+    "It had held elections",
+    "It had given all the land to peasants"
+   ],
+   "correct": 0,
+   "explain": "It could not keep order.",
+   "tag": "Bolshevik takeover"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3401"] = {
+ "id": "IGHI3401",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The early decrees and the Constituent Assembly",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l13-early-decrees-and-the-constituent-assembly",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The early decrees and the Constituent Assembly.",
+ "checklist": [
+  "I can explain the problems the Bolsheviks faced in keeping their promises",
+  "I can describe the early decrees and other measures",
+  "I can explain why and how the Bolsheviks closed the Constituent Assembly"
+ ],
+ "quiz": [
+  {
+   "q": "What area did the Bolsheviks control in late 1917?",
+   "options": [
+    "Petrograd, Moscow and the area between",
+    "All of Russia",
+    "Only Siberia",
+    "Ukraine, the Baltic and all of Siberia"
+   ],
+   "correct": 0,
+   "explain": "A very small area.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "What did the Decree on Land do?",
+   "options": [
+    "Abolished private ownership of land",
+    "Gave land back to landlords",
+    "Created state farms only",
+    "Sold large areas of land to Germany"
+   ],
+   "correct": 0,
+   "explain": "Land went to the peasants.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "What did the Decree on Work introduce?",
+   "options": [
+    "An 8-hour day",
+    "A 12-hour day",
+    "Child labour",
+    "Unpaid holidays"
+   ],
+   "correct": 0,
+   "explain": "12 November 1917.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "What was the Cheka?",
+   "options": [
+    "The Bolshevik secret police",
+    "A peasant party",
+    "The Red Army",
+    "The Constituent Assembly in Petrograd"
+   ],
+   "correct": 0,
+   "explain": "Set up in 1917.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "Which party won the Constituent Assembly elections?",
+   "options": [
+    "The Socialist Revolutionaries",
+    "The Bolsheviks",
+    "The Kadets",
+    "The Mensheviks and their allies"
+   ],
+   "correct": 0,
+   "explain": "53 per cent of the vote.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "What share of the vote did the Bolsheviks win?",
+   "options": [
+    "Just under a quarter",
+    "Over half",
+    "About 90 per cent",
+    "None of the votes at all"
+   ],
+   "correct": 0,
+   "explain": "Strong in the cities.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "When did the Constituent Assembly first meet?",
+   "options": [
+    "5 January 1918",
+    "12 November 1917",
+    "3 March 1918",
+    "25 October 1917"
+   ],
+   "correct": 0,
+   "explain": "It was dissolved after one day.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "What did the Assembly reject?",
+   "options": [
+    "A proposal giving all power to the soviets",
+    "Peace with Germany",
+    "The October Manifesto",
+    "The return of the tsar and his family to power"
+   ],
+   "correct": 0,
+   "explain": "By over 100 votes.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "What happened to opposition parties soon afterwards?",
+   "options": [
+    "They were banned",
+    "They joined the government",
+    "They won power",
+    "They were given money"
+   ],
+   "correct": 0,
+   "explain": "Leaders were arrested.",
+   "tag": "Decrees and Constituent Assembly"
+  },
+  {
+   "q": "When was the USSR formed?",
+   "options": [
+    "December 1922",
+    "October 1917",
+    "March 1918",
+    "January 1924, after Lenin"
+   ],
+   "correct": 0,
+   "explain": "Four soviet republics joined together.",
+   "tag": "Decrees and Constituent Assembly"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3402"] = {
+ "id": "IGHI3402",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The Treaty of Brest-Litovsk",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l14-the-treaty-of-brest-litovsk",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The Treaty of Brest-Litovsk.",
+ "checklist": [
+  "I can describe the negotiations at Brest-Litovsk",
+  "I can describe the terms of the treaty",
+  "I can explain the consequences of the treaty"
+ ],
+ "quiz": [
+  {
+   "q": "When did talks at Brest-Litovsk begin?",
+   "options": [
+    "22 December 1917",
+    "3 March 1918",
+    "25 October 1917",
+    "5 January 1918, in winter"
+   ],
+   "correct": 0,
+   "explain": "Russia negotiated alone.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "Who negotiated for Russia?",
+   "options": [
+    "Trotsky",
+    "Lenin",
+    "Stalin",
+    "Kerensky"
+   ],
+   "correct": 0,
+   "explain": "He expected a German revolution.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "What happened when Trotsky refused to give up land?",
+   "options": [
+    "Germany restarted its invasion",
+    "Germany surrendered",
+    "Britain declared war on Russia",
+    "The talks moved to Paris"
+   ],
+   "correct": 0,
+   "explain": "Petrograd was threatened.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "Which city became the capital in case Petrograd fell?",
+   "options": [
+    "Moscow",
+    "Kiev",
+    "Riga",
+    "Pskov, near the front"
+   ],
+   "correct": 0,
+   "explain": "Early 1918.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "When was the treaty signed?",
+   "options": [
+    "3 March 1918",
+    "22 December 1917",
+    "17 July 1918",
+    "11 November 1918"
+   ],
+   "correct": 0,
+   "explain": "On very harsh terms.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "What percentage of its coal and iron ore did Russia lose?",
+   "options": [
+    "74 per cent",
+    "26 per cent",
+    "50 per cent",
+    "10 per cent"
+   ],
+   "correct": 0,
+   "explain": "Plus half its industry.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "How much did Russia pay Germany?",
+   "options": [
+    "300 million gold roubles",
+    "17 billion roubles",
+    "$20 billion",
+    "Nothing at all, it was free"
+   ],
+   "correct": 0,
+   "explain": "On top of land losses.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "How many people did Russia lose?",
+   "options": [
+    "62 million",
+    "6 million",
+    "1 million",
+    "125 million"
+   ],
+   "correct": 0,
+   "explain": "26 per cent of its population.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "By June 1918, how many people had left Petrograd?",
+   "options": [
+    "1 million",
+    "62,000",
+    "10,000",
+    "15 million"
+   ],
+   "correct": 0,
+   "explain": "Food shortages worsened.",
+   "tag": "Brest-Litovsk"
+  },
+  {
+   "q": "What was a major consequence of the treaty?",
+   "options": [
+    "It helped cause the Civil War",
+    "It ended all opposition",
+    "It made Russia richer",
+    "It brought the tsar back to power"
+   ],
+   "correct": 0,
+   "explain": "Opponents united against the Bolsheviks.",
+   "tag": "Brest-Litovsk"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3403"] = {
+ "id": "IGHI3403",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The Civil War, 1918–20",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l15-the-civil-war",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The Civil War, 1918–20.",
+ "checklist": [
+  "I can explain the causes of the Civil War",
+  "I can describe the Reds, Whites, Greens and foreign involvement",
+  "I can describe the key events of the Civil War"
+ ],
+ "quiz": [
+  {
+   "q": "What was Trotsky’s role in the Civil War?",
+   "options": [
+    "War commissar",
+    "Leader of the Whites",
+    "Head of the Cheka",
+    "Prime minister of Finland"
+   ],
+   "correct": 0,
+   "explain": "From 13 March 1918.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "How did Trotsky make sure ex-tsarist officers stayed loyal?",
+   "options": [
+    "Political commissars supervised them",
+    "He paid them in gold",
+    "He let them choose sides",
+    "He sent them all to prison in Siberia"
+   ],
+   "correct": 0,
+   "explain": "Their families were also threatened.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "How many men were in the Red Army by 1921?",
+   "options": [
+    "5.4 million",
+    "250,000",
+    "70,000",
+    "50,000 volunteers"
+   ],
+   "correct": 0,
+   "explain": "Conscription from May 1918.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "Which White leader fought in Siberia?",
+   "options": [
+    "Admiral Kolchak",
+    "General Yudenich",
+    "General Denikin",
+    "Nestor Makhno"
+   ],
+   "correct": 0,
+   "explain": "He reached within 800 km of Moscow.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "Which White army attacked from Estonia?",
+   "options": [
+    "General Yudenich’s",
+    "Admiral Kolchak’s",
+    "The Czech Legion",
+    "The People’s Army of Komuch"
+   ],
+   "correct": 0,
+   "explain": "He nearly reached Petrograd.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "Who was Nestor Makhno?",
+   "options": [
+    "A Ukrainian anarchist Green leader",
+    "A White general",
+    "A Bolshevik commissar",
+    "A Czech officer leading the Czech Legion"
+   ],
+   "correct": 0,
+   "explain": "He fought Reds and Whites.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "How many troops did Japan send to Siberia?",
+   "options": [
+    "70,000",
+    "5.4 million",
+    "100",
+    "50,000"
+   ],
+   "correct": 0,
+   "explain": "Hoping to take land.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "When was the royal family executed?",
+   "options": [
+    "17 July 1918",
+    "2 March 1917",
+    "30 August 1918",
+    "3 March 1918"
+   ],
+   "correct": 0,
+   "explain": "At Yekaterinburg.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "Who shot Lenin on 30 August 1918?",
+   "options": [
+    "Fanya Kaplan",
+    "Trotsky",
+    "Kornilov",
+    "Admiral Kolchak"
+   ],
+   "correct": 0,
+   "explain": "This led to the Red Terror.",
+   "tag": "The Civil War"
+  },
+  {
+   "q": "Where was the final battle of the Civil War?",
+   "options": [
+    "Perekop",
+    "Tambov",
+    "Kazan",
+    "Tannenburg"
+   ],
+   "correct": 0,
+   "explain": "November 1920.",
+   "tag": "The Civil War"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3404"] = {
+ "id": "IGHI3404",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Why the Reds won the Civil War",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l16-why-the-reds-won",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Why the Reds won the Civil War.",
+ "checklist": [
+  "I can explain the weaknesses of the Whites",
+  "I can explain the strengths of the Reds",
+  "I can explain the impact of the Red Terror"
+ ],
+ "quiz": [
+  {
+   "q": "Why did the Whites have no single leader?",
+   "options": [
+    "They did not share the same aims",
+    "They all wanted the tsar",
+    "Foreign powers forbade it",
+    "They had no experienced generals at all"
+   ],
+   "correct": 0,
+   "explain": "Monarchists and SRs disagreed.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "Why were the Whites unpopular with peasants?",
+   "options": [
+    "Many wanted to take back land",
+    "They gave away too much land",
+    "They were all peasants",
+    "They banned religion in Russia"
+   ],
+   "correct": 0,
+   "explain": "Peasants feared losing land.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "What was the maximum size of the White armies?",
+   "options": [
+    "250,000 soldiers",
+    "5 million soldiers",
+    "3 million soldiers",
+    "50,000 soldiers"
+   ],
+   "correct": 0,
+   "explain": "Far fewer than the Reds.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "Why was a central location an advantage for the Reds?",
+   "options": [
+    "Control of industry, railways and population",
+    "It was warmer",
+    "It was near the sea",
+    "Foreign help always arrived there first and fastest"
+   ],
+   "correct": 0,
+   "explain": "Shorter supply lines.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "How large was the Red Army by 1920?",
+   "options": [
+    "Over 3 million",
+    "About 250,000",
+    "About 70,000",
+    "Exactly 1 million"
+   ],
+   "correct": 0,
+   "explain": "Over 5 million by 1921.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "How did Trotsky boost morale?",
+   "options": [
+    "Touring the fronts in an armoured train",
+    "Paying soldiers in gold",
+    "Letting soldiers go home",
+    "Promising them that the tsar would soon return"
+   ],
+   "correct": 0,
+   "explain": "He also imposed discipline.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "What did Red propaganda tell peasants?",
+   "options": [
+    "The Whites would take their land",
+    "The Reds would bring back the tsar",
+    "Germany was a friend",
+    "Foreigners would help them"
+   ],
+   "correct": 0,
+   "explain": "Striking images and slogans.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "What was the purpose of War Communism in the Civil War?",
+   "options": [
+    "To make sure the army had supplies",
+    "To give peasants freedom to trade",
+    "To end the war with Germany",
+    "To hold free elections in all areas"
+   ],
+   "correct": 0,
+   "explain": "Introduced by Lenin.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "About how many people did the Cheka kill, 1918–20?",
+   "options": [
+    "Nearly 300,000",
+    "About 3,000",
+    "About 30 million",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "Including the royal family.",
+   "tag": "Why the Reds won"
+  },
+  {
+   "q": "What triggered the Red Terror?",
+   "options": [
+    "The attempt to assassinate Lenin",
+    "The Kornilov Revolt",
+    "The Kronstadt Mutiny",
+    "The tsar’s abdication in March 1917"
+   ],
+   "correct": 0,
+   "explain": "August 1918.",
+   "tag": "Why the Reds won"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3501"] = {
+ "id": "IGHI3501",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "War Communism, 1918–21",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l17-war-communism",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: War Communism, 1918–21.",
+ "checklist": [
+  "I can describe the key features of War Communism",
+  "I can explain the practical and ideological reasons for War Communism",
+  "I can explain the effects of War Communism on peasants and workers"
+ ],
+ "quiz": [
+  {
+   "q": "When was War Communism in force?",
+   "options": [
+    "June 1918 to March 1921",
+    "October 1917 to March 1918",
+    "1921 to 1924",
+    "1914 to 1917"
+   ],
+   "correct": 0,
+   "explain": "During the Civil War.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "What happened to peasants’ crops under War Communism?",
+   "options": [
+    "They were requisitioned by the state",
+    "They were sold freely",
+    "They were exported to Germany",
+    "They were taxed at 10 per cent of value"
+   ],
+   "correct": 0,
+   "explain": "Peasants kept a small amount.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "What was Vesenkha?",
+   "options": [
+    "The Supreme Economic Council",
+    "The secret police",
+    "The Red Army",
+    "A peasant commune in each village"
+   ],
+   "correct": 0,
+   "explain": "It set targets.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "Which factories were nationalised?",
+   "options": [
+    "Those with more than 10 workers",
+    "Only arms factories",
+    "None",
+    "Those with more than 1,000 workers"
+   ],
+   "correct": 0,
+   "explain": "Given production targets.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "What replaced money under War Communism?",
+   "options": [
+    "Tokens",
+    "Gold coins",
+    "Foreign currency",
+    "Nothing at all"
+   ],
+   "correct": 0,
+   "explain": "Exchanged for food and clothing.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "How much grain did the state collect in 1920?",
+   "options": [
+    "6 million tonnes",
+    "1 million tonnes",
+    "80 million tonnes",
+    "600 tonnes"
+   ],
+   "correct": 0,
+   "explain": "Still not enough.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "By 1920, farm production had fallen to what share of 1913?",
+   "options": [
+    "37 per cent",
+    "90 per cent",
+    "60 per cent",
+    "10 per cent"
+   ],
+   "correct": 0,
+   "explain": "Famines followed.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "What did “kulak” mean?",
+   "options": [
+    "Closed fist",
+    "Rich farmer",
+    "Red soldier",
+    "Worker"
+   ],
+   "correct": 0,
+   "explain": "Rich peasants blamed for resistance.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "How much of Petrograd’s population left the city, 1918–20?",
+   "options": [
+    "Almost three quarters",
+    "About a tenth",
+    "None",
+    "All of it, every person"
+   ],
+   "correct": 0,
+   "explain": "Searching for food.",
+   "tag": "War Communism"
+  },
+  {
+   "q": "About how much food came from the black market?",
+   "options": [
+    "70 per cent",
+    "10 per cent",
+    "100 per cent",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "At very high prices.",
+   "tag": "War Communism"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3502"] = {
+ "id": "IGHI3502",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The Kronstadt Naval Mutiny, 1921",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l18-the-kronstadt-mutiny",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The Kronstadt Naval Mutiny, 1921.",
+ "checklist": [
+  "I can explain why the Kronstadt sailors had been seen as heroes of the revolution",
+  "I can explain the reasons for the mutiny and the sailors’ demands",
+  "I can describe how the mutiny was crushed and explain its significance"
+ ],
+ "quiz": [
+  {
+   "q": "Why was Kronstadt important?",
+   "options": [
+    "It guarded Petrograd",
+    "It was the capital",
+    "It made weapons",
+    "It was in the far east of Siberia"
+   ],
+   "correct": 0,
+   "explain": "A key naval base.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "What did Trotsky call the Kronstadt sailors?",
+   "options": [
+    "The reddest of the red",
+    "Traitors from the start",
+    "Whites in disguise",
+    "Peasant soldiers"
+   ],
+   "correct": 0,
+   "explain": "Heroes of 1917.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "When did the mutiny begin?",
+   "options": [
+    "28 February 1921",
+    "25 October 1917",
+    "17 July 1918",
+    "21 January 1924, after Lenin died"
+   ],
+   "correct": 0,
+   "explain": "On the Petropavlovsk.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "How many sailors mutinied?",
+   "options": [
+    "Over 15,000",
+    "About 500",
+    "About 50,000",
+    "About 150"
+   ],
+   "correct": 0,
+   "explain": "The whole base.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "What had happened to the bread ration in January 1921?",
+   "options": [
+    "It was cut again",
+    "It was doubled",
+    "It was abolished",
+    "It was given only to sailors"
+   ],
+   "correct": 0,
+   "explain": "Workers began to strike.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "Which was a Kronstadt demand?",
+   "options": [
+    "New soviet elections by secret vote",
+    "The return of the tsar",
+    "War with Germany",
+    "More power and money for the Cheka police"
+   ],
+   "correct": 0,
+   "explain": "The soviets were Bolshevik-controlled.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "How many Red Army soldiers attacked Kronstadt?",
+   "options": [
+    "50,000",
+    "15,000",
+    "5 million",
+    "500"
+   ],
+   "correct": 0,
+   "explain": "Across the frozen Gulf of Finland.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "When was the base back under government control?",
+   "options": [
+    "17 March 1921",
+    "28 February 1921",
+    "1 May 1921",
+    "March 1918"
+   ],
+   "correct": 0,
+   "explain": "After fierce fighting.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "About how many sailors were executed?",
+   "options": [
+    "About 500",
+    "About 8,000",
+    "None",
+    "About 50,000"
+   ],
+   "correct": 0,
+   "explain": "8,000 escaped to Finland.",
+   "tag": "Kronstadt Mutiny"
+  },
+  {
+   "q": "What did Lenin call the mutiny?",
+   "options": [
+    "The flash which lit up reality",
+    "A dress rehearsal",
+    "The dustbin of history",
+    "A peasant Brest-Litovsk, he said"
+   ],
+   "correct": 0,
+   "explain": "He abandoned War Communism.",
+   "tag": "Kronstadt Mutiny"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3503"] = {
+ "id": "IGHI3503",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "The New Economic Policy",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l19-the-new-economic-policy",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: The New Economic Policy.",
+ "checklist": [
+  "I can explain the economic and political crisis of 1921",
+  "I can describe the key features of the NEP",
+  "I can explain the economic and social effects of the NEP and opposition to it"
+ ],
+ "quiz": [
+  {
+   "q": "How many people died in the Volga famine of 1920–21?",
+   "options": [
+    "About 5 million",
+    "About 50,000",
+    "About 500",
+    "About 20 million"
+   ],
+   "correct": 0,
+   "explain": "20 million were affected.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "At which meeting did Lenin announce change in March 1921?",
+   "options": [
+    "The 10th Party Congress",
+    "The Constituent Assembly",
+    "The Fourth Duma",
+    "The Congress of Soviets in 1917"
+   ],
+   "correct": 0,
+   "explain": "Urgent steps for the peasants.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "What tax did peasants pay under the NEP?",
+   "options": [
+    "10 per cent on produce sold",
+    "All their surplus",
+    "Nothing",
+    "50 per cent of all their land to the state"
+   ],
+   "correct": 0,
+   "explain": "They sold the rest.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "Which businesses could be privately owned under the NEP?",
+   "options": [
+    "Those with fewer than 20 workers",
+    "All big factories",
+    "Only banks",
+    "None at all, all were nationalised"
+   ],
+   "correct": 0,
+   "explain": "The state kept big industry.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "How many foreign experts came to help, 1920–25?",
+   "options": [
+    "20,000",
+    "200",
+    "2 million",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "From the USA and Canada.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "Who were the Nepmen?",
+   "options": [
+    "Traders who made profits",
+    "Red Army officers",
+    "Kronstadt sailors",
+    "Foreign experts from America"
+   ],
+   "correct": 0,
+   "explain": "Some became very rich.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "What new currency was introduced in 1922?",
+   "options": [
+    "The chervonets",
+    "The rouble note",
+    "The dollar",
+    "Tokens"
+   ],
+   "correct": 0,
+   "explain": "Rationing was abolished.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "What was the “scissors crisis”?",
+   "options": [
+    "Falling food prices but high prices for goods",
+    "A shortage of scissors",
+    "A split in the party",
+    "A famine in the Volga region in 1921 and 1922"
+   ],
+   "correct": 0,
+   "explain": "Named by Trotsky.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "What did Lenin call the NEP?",
+   "options": [
+    "A peasant Brest-Litovsk",
+    "A dress rehearsal",
+    "The reddest of the red",
+    "The flash which lit up reality"
+   ],
+   "correct": 0,
+   "explain": "One step back.",
+   "tag": "The NEP"
+  },
+  {
+   "q": "Why did some Bolsheviks dislike the NEP?",
+   "options": [
+    "It looked like a return to capitalism",
+    "It banned trade",
+    "It helped workers too much",
+    "It ended the Civil War too early for Russia"
+   ],
+   "correct": 0,
+   "explain": "Inequality grew.",
+   "tag": "The NEP"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI3504"] = {
+ "id": "IGHI3504",
+ "topicNumber": 3,
+ "topicTitle": "Russia and the Soviet Union, 1905–24 (IGCSE History)",
+ "title": "Lenin’s achievements to 1924",
+ "href": "/igcse/history/learn/russia-and-the-soviet-union/l20-lenins-achievements-to-1924",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Russia and the Soviet Union, 1905–24: Lenin’s achievements to 1924.",
+ "checklist": [
+  "I can describe Lenin’s illness, death and the cult that followed",
+  "I can describe Lenin’s key achievements",
+  "I can evaluate different interpretations of Lenin"
+ ],
+ "quiz": [
+  {
+   "q": "When did Lenin suffer his first stroke?",
+   "options": [
+    "May 1922",
+    "January 1924",
+    "August 1918",
+    "March 1921"
+   ],
+   "correct": 0,
+   "explain": "Three strokes in all.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "When did Lenin die?",
+   "options": [
+    "21 January 1924",
+    "17 July 1918",
+    "December 1922",
+    "March 1923, after a stroke"
+   ],
+   "correct": 0,
+   "explain": "Aged 53.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "How old was Lenin when he died?",
+   "options": [
+    "53",
+    "37",
+    "70",
+    "45"
+   ],
+   "correct": 0,
+   "explain": "He worked 14-hour days.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "What was Petrograd renamed after Lenin’s death?",
+   "options": [
+    "Leningrad",
+    "Stalingrad",
+    "Moscow",
+    "St Petersburg"
+   ],
+   "correct": 0,
+   "explain": "Part of the cult of Lenin.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "How many people viewed Lenin’s body in the first 6 weeks?",
+   "options": [
+    "100,000",
+    "1,000",
+    "10 million",
+    "500"
+   ],
+   "correct": 0,
+   "explain": "It is still on display.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "Which of these is seen as one of Lenin’s achievements?",
+   "options": [
+    "Masterminding the October Revolution",
+    "Winning the First World War",
+    "Holding free elections",
+    "Restoring the tsar and his family to the throne"
+   ],
+   "correct": 0,
+   "explain": "He planned the takeover.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "How did Lenin persuade the party to accept the NEP?",
+   "options": [
+    "By argument and threats to resign",
+    "By holding a public vote",
+    "By asking the tsar",
+    "By force, using the Red Army against them"
+   ],
+   "correct": 0,
+   "explain": "It was a retreat from communism.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "What did a British newspaper call Lenin in 1924?",
+   "options": [
+    "An arch-traitor",
+    "A great hero",
+    "A peace-maker",
+    "A liberal reformer"
+   ],
+   "correct": 0,
+   "explain": "A hostile obituary.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "What did Stalin say Lenin had led?",
+   "options": [
+    "The workers and peasants against landlords and capitalists",
+    "The Whites to victory",
+    "Russia into the First World War",
+    "The Kronstadt sailors in their mutiny against the Bolsheviks"
+   ],
+   "correct": 0,
+   "explain": "A positive view.",
+   "tag": "Lenin’s achievements"
+  },
+  {
+   "q": "What did the Soviet Union become under Lenin?",
+   "options": [
+    "A one-party dictatorship",
+    "A democracy with many parties",
+    "A monarchy",
+    "A colony of Germany"
+   ],
+   "correct": 0,
+   "explain": "He refused to share power.",
+   "tag": "Lenin’s achievements"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4101"] = {
+ "id": "IGHI4101",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "Tokugawa Japan before 1853",
+ "href": "/igcse/history/learn/japan-in-transformation/l01-tokugawa-japan-before-1853",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: Tokugawa Japan before 1853.",
+ "checklist": [
+  "I can describe the feudal system and social classes of Tokugawa Japan",
+  "I can explain why Japan closed itself to the outside world",
+  "I can explain how the Tokugawa system was weakening by the 19th century"
+ ],
+ "quiz": [
+  {
+   "q": "Where did the Tokugawa shoguns rule from?",
+   "options": [
+    "Edo",
+    "Kyoto",
+    "Nagasaki",
+    "Osaka"
+   ],
+   "correct": 0,
+   "explain": "Later renamed Tokyo.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "What political power did the emperor have under the Tokugawa?",
+   "options": [
+    "None",
+    "Complete power",
+    "Control of the army",
+    "Control of trade"
+   ],
+   "correct": 0,
+   "explain": "He was the centre of loyalty.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "What was Bushido?",
+   "options": [
+    "The samurai code of loyalty and honour",
+    "A type of sword",
+    "A tax on rice",
+    "The emperor’s palace in the city of Kyoto"
+   ],
+   "correct": 0,
+   "explain": "“The way of the warrior”.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "Which class was despised but became wealthy?",
+   "options": [
+    "Merchants",
+    "Samurai",
+    "Daimyo",
+    "Peasant farmers"
+   ],
+   "correct": 0,
+   "explain": "As money lenders.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "When did the edict banning Japanese from leaving the country come?",
+   "options": [
+    "1636",
+    "1853",
+    "1543",
+    "1868"
+   ],
+   "correct": 0,
+   "explain": "On pain of death.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "What happened in the Shimabara Rebellion?",
+   "options": [
+    "A mainly Christian revolt was crushed",
+    "The shogun was overthrown",
+    "Perry arrived",
+    "The Dutch traders were expelled from Deshima"
+   ],
+   "correct": 0,
+   "explain": "About 37,000 died.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "Which Europeans were allowed to stay after 1641?",
+   "options": [
+    "The Dutch",
+    "The Portuguese",
+    "The Spanish",
+    "The British"
+   ],
+   "correct": 0,
+   "explain": "On Deshima island.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "What was a ronin?",
+   "options": [
+    "A samurai without a lord",
+    "A rich merchant",
+    "A Dutch trader",
+    "A Christian priest from Portugal"
+   ],
+   "correct": 0,
+   "explain": "Many samurai became poor.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "Why did daimyo fall into debt?",
+   "options": [
+    "They had to keep homes in Edo and their domains",
+    "They were banned from farming",
+    "They paid for the Dutch",
+    "They had to fund the emperor’s court in Kyoto each year"
+   ],
+   "correct": 0,
+   "explain": "And lived beyond their means.",
+   "tag": "Tokugawa Japan"
+  },
+  {
+   "q": "How did some scholars learn about Western science?",
+   "options": [
+    "Through Dutch books",
+    "By travelling to Europe",
+    "From Chinese missionaries",
+    "They could not at all"
+   ],
+   "correct": 0,
+   "explain": "One Dutch ship a year.",
+   "tag": "Tokugawa Japan"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4102"] = {
+ "id": "IGHI4102",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "Commodore Perry and the Treaty of Kanagawa",
+ "href": "/igcse/history/learn/japan-in-transformation/l02-commodore-perry-and-kanagawa",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: Commodore Perry and the Treaty of Kanagawa.",
+ "checklist": [
+  "I can explain the renewed foreign pressure on Japan before 1853",
+  "I can describe Perry’s arrival and President Fillmore’s letter",
+  "I can describe the terms of the Treaty of Kanagawa"
+ ],
+ "quiz": [
+  {
+   "q": "When did Perry arrive in Uraga Bay?",
+   "options": [
+    "8 July 1853",
+    "31 March 1854",
+    "1868",
+    "1636"
+   ],
+   "correct": 0,
+   "explain": "With four warships.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "Why were Perry’s ships called “black ships”?",
+   "options": [
+    "They were painted black and burned coal",
+    "They flew black flags",
+    "They arrived at night",
+    "They were made of black wood from America"
+   ],
+   "correct": 0,
+   "explain": "Smoke rose from their smokestacks.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "Who wrote the letter Perry delivered?",
+   "options": [
+    "President Millard Fillmore",
+    "Abraham Lincoln",
+    "Townsend Harris",
+    "The Dutch king in Amsterdam, Holland"
+   ],
+   "correct": 0,
+   "explain": "Addressed to the emperor.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "Which was a request in Fillmore’s letter?",
+   "options": [
+    "Protection for shipwrecked American sailors",
+    "Control of Edo",
+    "An end to the shogunate",
+    "Conversion of the Japanese people to Christianity"
+   ],
+   "correct": 0,
+   "explain": "Also trade and coal.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "How did Perry make his demands?",
+   "options": [
+    "As a right, not a favour",
+    "As humble requests",
+    "Through Dutch traders",
+    "In secret, through Dutch traders"
+   ],
+   "correct": 0,
+   "explain": "A veiled threat.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "Why did the shogunate face a dilemma?",
+   "options": [
+    "Refusal meant war; agreement meant unrest at home",
+    "It wanted to trade but had no ports",
+    "The emperor ordered war",
+    "It had already signed a secret treaty with Russia first"
+   ],
+   "correct": 0,
+   "explain": "It played for time.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "When was the Treaty of Kanagawa signed?",
+   "options": [
+    "31 March 1854",
+    "8 July 1853",
+    "July 1858",
+    "1867, after the shogun fell"
+   ],
+   "correct": 0,
+   "explain": "Perry returned with a larger fleet.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "Which ports did the Treaty of Kanagawa open?",
+   "options": [
+    "Shimoda and Hakodate",
+    "Nagasaki and Edo",
+    "Osaka and Kyoto",
+    "Yokohama and Kobe in the south"
+   ],
+   "correct": 0,
+   "explain": "For American ships.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "Where was the American consul to live?",
+   "options": [
+    "Shimoda",
+    "Edo",
+    "Kyoto",
+    "Nagasaki"
+   ],
+   "correct": 0,
+   "explain": "Under the treaty.",
+   "tag": "Commodore Perry"
+  },
+  {
+   "q": "In 1825, what had the shogunate ordered about foreign ships?",
+   "options": [
+    "Drive them away without second thought",
+    "Welcome them all",
+    "Let them trade at Nagasaki",
+    "Buy all their weapons and steam engines at once"
+   ],
+   "correct": 0,
+   "explain": "Isolation policy.",
+   "tag": "Commodore Perry"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4103"] = {
+ "id": "IGHI4103",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The unequal treaties and the fall of the shogunate",
+ "href": "/igcse/history/learn/japan-in-transformation/l03-unequal-treaties-and-the-fall-of-the-shogunate",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The unequal treaties and the fall of the shogunate.",
+ "checklist": [
+  "I can describe the Harris Treaty and explain why the treaties were seen as unequal",
+  "I can explain the growth of opposition, including Sonno Joi and the shi-shi",
+  "I can describe the fall of the shogunate and the start of the Meiji Restoration"
+ ],
+ "quiz": [
+  {
+   "q": "Who negotiated the Treaty of Edo in 1858?",
+   "options": [
+    "Townsend Harris",
+    "Commodore Perry",
+    "Millard Fillmore",
+    "Francis Xavier"
+   ],
+   "correct": 0,
+   "explain": "The first American consul.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "How many more ports did the Harris Treaty open?",
+   "options": [
+    "Five",
+    "Two",
+    "Ten",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "Plus a most favoured nation clause.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "Which countries signed similar treaties in 1858?",
+   "options": [
+    "Britain, France, Holland and Russia",
+    "China and Korea",
+    "Spain and Portugal",
+    "Germany and Italy, its future allies"
+   ],
+   "correct": 0,
+   "explain": "After the USA.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "Why were the treaties called “unequal”?",
+   "options": [
+    "Japan was bullied and given no equal privileges",
+    "They gave Japan too much",
+    "They were never signed",
+    "They only covered the price of rice and silk exports"
+   ],
+   "correct": 0,
+   "explain": "They favoured other nations.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "Which two clans led opposition to the shogun?",
+   "options": [
+    "Satsuma and Choshu",
+    "Tokugawa and Minamoto",
+    "Fujiwara and Taira",
+    "Tosa and Hizen only"
+   ],
+   "correct": 0,
+   "explain": "From south-west Japan.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "What did Sonno Joi mean?",
+   "options": [
+    "Revere the emperor and expel the barbarians",
+    "Rich country, strong military",
+    "Enlightened rule",
+    "The way of the warrior and the samurai code"
+   ],
+   "correct": 0,
+   "explain": "The rallying cry of the opposition.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "Who were the shi-shi?",
+   "options": [
+    "Samurai activists who attacked foreigners",
+    "Dutch traders",
+    "Merchants in Osaka",
+    "The shogun’s personal bodyguards in the city of Edo"
+   ],
+   "correct": 0,
+   "explain": "“Men of determination”.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "What lesson did clan leaders learn from Western bombardments?",
+   "options": [
+    "Japan needed Western power to protect itself",
+    "Japan should surrender to the West",
+    "Japan must stay isolated",
+    "Japan should become a colony of a Western power"
+   ],
+   "correct": 0,
+   "explain": "1860s.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "What does “Meiji” mean?",
+   "options": [
+    "Enlightened rule",
+    "Revere the emperor",
+    "Great righteousness",
+    "Divine wind"
+   ],
+   "correct": 0,
+   "explain": "Taken by Mutsuhito.",
+   "tag": "Fall of the shogunate"
+  },
+  {
+   "q": "What was Edo renamed in 1868?",
+   "options": [
+    "Tokyo",
+    "Kyoto",
+    "Osaka",
+    "Yokohama"
+   ],
+   "correct": 0,
+   "explain": "It became the capital.",
+   "tag": "Fall of the shogunate"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4201"] = {
+ "id": "IGHI4201",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The effects of the Meiji Restoration",
+ "href": "/igcse/history/learn/japan-in-transformation/l04-effects-of-the-meiji-restoration",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The effects of the Meiji Restoration.",
+ "checklist": [
+  "I can describe how Japan became an imperial power by 1912",
+  "I can explain how Western views of Japan changed",
+  "I can explain how the position of women was affected by the Meiji Restoration"
+ ],
+ "quiz": [
+  {
+   "q": "What was the Meiji ideal of fukoku kyohei?",
+   "options": [
+    "Rich country, strong military",
+    "Revere the emperor",
+    "Enlightened rule",
+    "Good wives and wise mothers for all"
+   ],
+   "correct": 0,
+   "explain": "An ancient Chinese ideal.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "Which island became a Japanese colony?",
+   "options": [
+    "Formosa (Taiwan)",
+    "Hokkaido",
+    "Hawaii",
+    "Singapore, in Malaya"
+   ],
+   "correct": 0,
+   "explain": "After the war with China.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "Which country did Japan annex by 1910?",
+   "options": [
+    "Korea",
+    "China",
+    "Russia",
+    "The Philippines"
+   ],
+   "correct": 0,
+   "explain": "Part of its new empire.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "When did Emperor Meiji die?",
+   "options": [
+    "1912",
+    "1868",
+    "1889",
+    "1926"
+   ],
+   "correct": 0,
+   "explain": "Japan was now a world power.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "Who were the yatoi?",
+   "options": [
+    "Foreign experts in Japan",
+    "Samurai rebels",
+    "Japanese prostitutes abroad",
+    "Elder statesmen"
+   ],
+   "correct": 0,
+   "explain": "They supervised factories and mines.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "What was extraterritoriality?",
+   "options": [
+    "Foreigners were outside Japanese law",
+    "Japan ruled foreign lands",
+    "Japanese could travel freely",
+    "A tax on all foreign goods coming in"
+   ],
+   "correct": 0,
+   "explain": "Under the unequal treaties.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "In 1904, what did the London Times admit?",
+   "options": [
+    "The West had failed to take Japan seriously",
+    "Japan would never be rich",
+    "Japan was a British colony",
+    "Russia would easily win any war against Japan"
+   ],
+   "correct": 0,
+   "explain": "At the start of the Russo-Japanese War.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "What were women banned from in 1889?",
+   "options": [
+    "All political activity",
+    "Working in factories",
+    "Owning clothes",
+    "Going to school or university"
+   ],
+   "correct": 0,
+   "explain": "Even listening to speeches.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "What did the 1898 Civil Code give the head of the family?",
+   "options": [
+    "Absolute authority over the family",
+    "The right to vote",
+    "Land in Korea",
+    "A government pension for life when old"
+   ],
+   "correct": 0,
+   "explain": "Wives could not take legal action.",
+   "tag": "Effects of the Meiji Restoration"
+  },
+  {
+   "q": "Who were the karayuki-san?",
+   "options": [
+    "Japanese women trapped in brothels abroad",
+    "Foreign experts",
+    "Samurai soldiers",
+    "Factory owners who employed many workers in Osaka"
+   ],
+   "correct": 0,
+   "explain": "Many from poor Kyushu families.",
+   "tag": "Effects of the Meiji Restoration"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4301"] = {
+ "id": "IGHI4301",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The Sino-Japanese War, 1894–95",
+ "href": "/igcse/history/learn/japan-in-transformation/l05-the-sino-japanese-war",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The Sino-Japanese War, 1894–95.",
+ "checklist": [
+  "I can explain why Japan and China clashed over Korea",
+  "I can describe the key events of the war, including Port Arthur",
+  "I can describe the terms of the Treaty of Shimonoseki"
+ ],
+ "quiz": [
+  {
+   "q": "What was Korea known as?",
+   "options": [
+    "The Hermit Kingdom",
+    "The Middle Kingdom",
+    "The Land of Wa",
+    "Manchukuo"
+   ],
+   "correct": 0,
+   "explain": "Because of its isolation.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "How did Japan open Korea in 1876?",
+   "options": [
+    "Gunboat diplomacy",
+    "A royal marriage",
+    "Buying it from China",
+    "A free election"
+   ],
+   "correct": 0,
+   "explain": "As Perry had done to Japan.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "Who led the Japanese army and saw war with China as inevitable?",
+   "options": [
+    "Yamagata Aritomo",
+    "Ito Hirobumi",
+    "Tojo Hideki",
+    "Hara Kei, a commoner"
+   ],
+   "correct": 0,
+   "explain": "He spoke in 1883.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "Which rebellion led to the war?",
+   "options": [
+    "The Tong Hak rebellion",
+    "The Boxer Rebellion",
+    "The Shimabara Rebellion",
+    "The Satsuma Rebellion"
+   ],
+   "correct": 0,
+   "explain": "In southern Korea, 1894.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "What did Japanese troops do on 23 July 1894?",
+   "options": [
+    "Seized the Korean king’s palace",
+    "Attacked Pearl Harbor",
+    "Invaded Russia",
+    "Signed a peace treaty with China"
+   ],
+   "correct": 0,
+   "explain": "The king declared independence from China.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "When did Port Arthur fall to Japan?",
+   "options": [
+    "21 November 1894",
+    "17 April 1895",
+    "8 February 1904",
+    "1 August 1894, at the start"
+   ],
+   "correct": 0,
+   "explain": "After a nearly 3-month siege.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "How many Chinese may have been massacred at Port Arthur?",
+   "options": [
+    "Up to 60,000",
+    "About 300",
+    "About 2 million",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "Japan’s reputation suffered.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "When was the Treaty of Shimonoseki signed?",
+   "options": [
+    "17 April 1895",
+    "5 September 1905",
+    "25 May 1915",
+    "1 August 1894"
+   ],
+   "correct": 0,
+   "explain": "Ending the war.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "Which territory did Japan gain at Shimonoseki?",
+   "options": [
+    "Formosa (Taiwan)",
+    "Southern Sakhalin",
+    "Shandong",
+    "The Philippines"
+   ],
+   "correct": 0,
+   "explain": "Also the Liaotung Peninsula.",
+   "tag": "Sino-Japanese War"
+  },
+  {
+   "q": "How much indemnity did China pay?",
+   "options": [
+    "200 million taels",
+    "30 million taels",
+    "$20 billion",
+    "300 million roubles"
+   ],
+   "correct": 0,
+   "explain": "Under the treaty.",
+   "tag": "Sino-Japanese War"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4302"] = {
+ "id": "IGHI4302",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The Triple Intervention and the Russo-Japanese War",
+ "href": "/igcse/history/learn/japan-in-transformation/l06-the-russo-japanese-war",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The Triple Intervention and the Russo-Japanese War.",
+ "checklist": [
+  "I can explain the effect of the Triple Intervention and Russian expansion in Manchuria",
+  "I can describe the Anglo-Japanese Alliance of 1902",
+  "I can describe the Russo-Japanese War and the Treaty of Portsmouth"
+ ],
+ "quiz": [
+  {
+   "q": "Which three countries made the Triple Intervention?",
+   "options": [
+    "Russia, France and Germany",
+    "Britain, France and the USA",
+    "China, Russia and Korea",
+    "Germany, Italy and Austria"
+   ],
+   "correct": 0,
+   "explain": "April 1895.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "What did the Triple Intervention force Japan to give up?",
+   "options": [
+    "The Liaotung Peninsula",
+    "Formosa",
+    "Korea",
+    "Okinawa and the Ryukyu Islands"
+   ],
+   "correct": 0,
+   "explain": "For 30 million taels.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "What railway did Russia build that alarmed Japan?",
+   "options": [
+    "The South Manchurian Railway",
+    "The Trans-Siberian Railway",
+    "The Burma Road",
+    "The Tokyo–Osaka railway line"
+   ],
+   "correct": 0,
+   "explain": "To Dairen and Port Arthur.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "Who besieged Peking in 1900?",
+   "options": [
+    "The Boxers",
+    "The Japanese army",
+    "The Tong Hak",
+    "The Russians"
+   ],
+   "correct": 0,
+   "explain": "An anti-foreign movement.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "When was the Anglo-Japanese Alliance signed?",
+   "options": [
+    "30 January 1902",
+    "23 April 1895",
+    "8 February 1904",
+    "5 September 1905"
+   ],
+   "correct": 0,
+   "explain": "For five years.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "How did the war begin?",
+   "options": [
+    "Japan torpedoed the Russian fleet at Port Arthur",
+    "Russia invaded Japan",
+    "China declared war",
+    "Britain attacked Russia’s ships in the Baltic Sea"
+   ],
+   "correct": 0,
+   "explain": "Without warning.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "Who captured Port Arthur in January 1905?",
+   "options": [
+    "General Nogi",
+    "Admiral Togo",
+    "Yamagata Aritomo",
+    "General Tojo"
+   ],
+   "correct": 0,
+   "explain": "After a five-month siege.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "Where was the Russian fleet destroyed in May 1905?",
+   "options": [
+    "Tsushima",
+    "Midway",
+    "Port Arthur",
+    "Pearl Harbor"
+   ],
+   "correct": 0,
+   "explain": "By Admiral Togo.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "Who arranged the Treaty of Portsmouth?",
+   "options": [
+    "Theodore Roosevelt",
+    "Woodrow Wilson",
+    "Franklin Roosevelt",
+    "Nicholas II"
+   ],
+   "correct": 0,
+   "explain": "In the USA.",
+   "tag": "Russo-Japanese War"
+  },
+  {
+   "q": "Why was the victory unprecedented?",
+   "options": [
+    "An Asian power beat a European nation",
+    "It was the shortest war ever",
+    "Japan lost no soldiers",
+    "It was fought only at sea, with no land battles"
+   ],
+   "correct": 0,
+   "explain": "The first time.",
+   "tag": "Russo-Japanese War"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4303"] = {
+ "id": "IGHI4303",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The First World War and the Twenty-One Demands",
+ "href": "/igcse/history/learn/japan-in-transformation/l07-first-world-war-and-twenty-one-demands",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The First World War and the Twenty-One Demands.",
+ "checklist": [
+  "I can describe Japan’s entry into the First World War and its actions in Shandong",
+  "I can describe the Twenty-One Demands",
+  "I can explain China’s response and how Japan justified the demands"
+ ],
+ "quiz": [
+  {
+   "q": "Who succeeded Emperor Meiji in 1912?",
+   "options": [
+    "Yoshihito (Taisho)",
+    "Hirohito",
+    "Mutsuhito",
+    "Keiki, the last shogun"
+   ],
+   "correct": 0,
+   "explain": "His reign was called Taisho.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "Why did Japan enter the First World War?",
+   "options": [
+    "To advance its position in China",
+    "To defend Britain",
+    "Because Germany invaded Japan",
+    "To help Russia defeat Austria and Germany"
+   ],
+   "correct": 0,
+   "explain": "An opportunity.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "When did Japan declare war on Germany?",
+   "options": [
+    "23 August 1914",
+    "7 August 1914",
+    "7 November 1914",
+    "25 May 1915"
+   ],
+   "correct": 0,
+   "explain": "After its ultimatum.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "Which German territory did Japan capture?",
+   "options": [
+    "Its lease in Shandong",
+    "German New Guinea",
+    "Hong Kong",
+    "All of Manchuria and Korea"
+   ],
+   "correct": 0,
+   "explain": "Centred on Qingdao.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "Who sent the Twenty-One Demands?",
+   "options": [
+    "Foreign Minister Kato",
+    "Emperor Taisho",
+    "Yamagata Aritomo",
+    "Prime Minister Hara Kei"
+   ],
+   "correct": 0,
+   "explain": "With the genro’s approval.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "Which Chinese leader received the demands?",
+   "options": [
+    "Yuan Shikai",
+    "Chiang Kai-Shek",
+    "Mao Zedong",
+    "Pu Yi"
+   ],
+   "correct": 0,
+   "explain": "He played for time.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "Which group was the most threatening?",
+   "options": [
+    "Group 5",
+    "Group 1",
+    "Group 3",
+    "Group 4"
+   ],
+   "correct": 0,
+   "explain": "An attack on Chinese independence.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "How long did China hold out?",
+   "options": [
+    "Nearly four months",
+    "Two days",
+    "Two years",
+    "It never agreed to anything"
+   ],
+   "correct": 0,
+   "explain": "Group 5 was dropped.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "When did China sign treaties accepting most demands?",
+   "options": [
+    "25 May 1915",
+    "7 November 1914",
+    "4 May 1919",
+    "18 September 1931"
+   ],
+   "correct": 0,
+   "explain": "Groups 1 to 4.",
+   "tag": "Twenty-One Demands"
+  },
+  {
+   "q": "How did Yamagata justify the demands?",
+   "options": [
+    "To protect Asians from Russia and for Japan’s security",
+    "To spread Christianity",
+    "To help Britain win the war",
+    "To make China a democracy with free elections like Britain"
+   ],
+   "correct": 0,
+   "explain": "Co-existence and co-prosperity.",
+   "tag": "Twenty-One Demands"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4304"] = {
+ "id": "IGHI4304",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The impact of the First World War on Japan",
+ "href": "/igcse/history/learn/japan-in-transformation/l08-impact-of-the-first-world-war",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The impact of the First World War on Japan.",
+ "checklist": [
+  "I can explain Japan’s gains at Versailles and China’s reaction",
+  "I can explain the rejection of racial equality",
+  "I can describe Japan’s economic problems, the 1923 earthquake and Hirohito’s regency"
+ ],
+ "quiz": [
+  {
+   "q": "What did the Allies promise Japan in secret treaties?",
+   "options": [
+    "To recognise its gains in China",
+    "Control of India",
+    "Membership of NATO",
+    "Half of Germany after the war ended"
+   ],
+   "correct": 0,
+   "explain": "1916–17.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "What did Japan gain at Versailles?",
+   "options": [
+    "A mandate over former German Pacific islands",
+    "Control of Australia",
+    "All of China",
+    "Siberia and the whole of the Russian Far East"
+   ],
+   "correct": 0,
+   "explain": "And kept Shandong.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "What happened on 4 May 1919?",
+   "options": [
+    "Students rioted in Peking",
+    "Japan invaded Manchuria",
+    "The earthquake struck Tokyo",
+    "Hirohito became emperor"
+   ],
+   "correct": 0,
+   "explain": "The May Fourth Movement.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "Who strongly opposed the racial equality clause?",
+   "options": [
+    "William Morris Hughes",
+    "Yuan Shikai",
+    "Hara Kei",
+    "Lloyd George, of Britain"
+   ],
+   "correct": 0,
+   "explain": "Australia’s prime minister.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "How many of 17 delegates voted for racial equality?",
+   "options": [
+    "Eleven",
+    "Seventeen",
+    "None",
+    "Two"
+   ],
+   "correct": 0,
+   "explain": "Wilson ruled it failed.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "What caused riots in Japan in August 1918?",
+   "options": [
+    "The rising price of rice",
+    "A new tax on silk",
+    "An earthquake",
+    "The death of the emperor"
+   ],
+   "correct": 0,
+   "explain": "In Kobe, Osaka and elsewhere.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "When did the Great Tokyo Earthquake strike?",
+   "options": [
+    "September 1923",
+    "August 1918",
+    "1931",
+    "1945, at the end of the war"
+   ],
+   "correct": 0,
+   "explain": "Nearly 150,000 died.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "Which city was almost completely destroyed in 1923?",
+   "options": [
+    "Yokohama",
+    "Kyoto",
+    "Osaka",
+    "Nagasaki"
+   ],
+   "correct": 0,
+   "explain": "And over half of Tokyo.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "Who were attacked after the earthquake because of a false rumour?",
+   "options": [
+    "Korean immigrants",
+    "American visitors",
+    "Chinese diplomats",
+    "The genro"
+   ],
+   "correct": 0,
+   "explain": "Murdered by gangs.",
+   "tag": "Impact of the war"
+  },
+  {
+   "q": "When did Hirohito become regent?",
+   "options": [
+    "25 November 1921",
+    "25 December 1926",
+    "1912",
+    "1936"
+   ],
+   "correct": 0,
+   "explain": "For his ill father.",
+   "tag": "Impact of the war"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4401"] = {
+ "id": "IGHI4401",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The era of party government, 1918–29",
+ "href": "/igcse/history/learn/japan-in-transformation/l09-party-government-1918-29",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The era of party government, 1918–29.",
+ "checklist": [
+  "I can explain how power was divided under the Meiji Constitution",
+  "I can describe the reforms of Hara and Kato",
+  "I can explain the limits of party government by 1929"
+ ],
+ "quiz": [
+  {
+   "q": "Who chose the prime minister under the Meiji Constitution?",
+   "options": [
+    "The emperor, advised by the genro",
+    "The voters",
+    "The army",
+    "The Diet, by a vote of all members"
+   ],
+   "correct": 0,
+   "explain": "The cabinet did not answer to the Diet.",
+   "tag": "Party government"
+  },
+  {
+   "q": "How could the army bring down a government?",
+   "options": [
+    "By refusing to provide a minister",
+    "By voting in the Diet",
+    "By closing the banks",
+    "By appealing to the League of Nations"
+   ],
+   "correct": 0,
+   "explain": "A key weakness.",
+   "tag": "Party government"
+  },
+  {
+   "q": "What was special about Hara Kei?",
+   "options": [
+    "He was the first commoner prime minister",
+    "He was a general",
+    "He was the emperor’s brother",
+    "He was a communist and a socialist leader"
+   ],
+   "correct": 0,
+   "explain": "Leader of the Seiyukai.",
+   "tag": "Party government"
+  },
+  {
+   "q": "What led to Hara becoming prime minister in 1918?",
+   "options": [
+    "The rice riots",
+    "The earthquake",
+    "The Manchurian Incident",
+    "Pearl Harbor"
+   ],
+   "correct": 0,
+   "explain": "Terauchi resigned.",
+   "tag": "Party government"
+  },
+  {
+   "q": "How did Hara die?",
+   "options": [
+    "He was stabbed at Tokyo station",
+    "In the earthquake",
+    "In battle",
+    "Of old age at his home in Kyoto"
+   ],
+   "correct": 0,
+   "explain": "November 1921.",
+   "tag": "Party government"
+  },
+  {
+   "q": "What did the 1925 Universal Manhood Suffrage Act do?",
+   "options": [
+    "Gave all men over 25 the vote",
+    "Gave women the vote",
+    "Banned political parties",
+    "Abolished the Diet and the cabinet"
+   ],
+   "correct": 0,
+   "explain": "Voters rose from 3 to 14 million.",
+   "tag": "Party government"
+  },
+  {
+   "q": "What did the Peace Preservation Law target?",
+   "options": [
+    "Groups seeking radical change, such as communists",
+    "The army",
+    "Foreign traders",
+    "Buddhist temples and Shinto shrines across all of Japan"
+   ],
+   "correct": 0,
+   "explain": "Also the press.",
+   "tag": "Party government"
+  },
+  {
+   "q": "When did Hirohito become emperor?",
+   "options": [
+    "25 December 1926",
+    "25 November 1921",
+    "1912",
+    "1936"
+   ],
+   "correct": 0,
+   "explain": "His reign was called Showa.",
+   "tag": "Party government"
+  },
+  {
+   "q": "Why did Tanaka resign in 1929?",
+   "options": [
+    "He lied to the emperor about the army’s role in an assassination",
+    "He lost an election",
+    "He was ill",
+    "The Great Depression began and his government simply ran out of money"
+   ],
+   "correct": 0,
+   "explain": "The murder of Zhang Zuolin.",
+   "tag": "Party government"
+  },
+  {
+   "q": "What were the 1930s called in Japan?",
+   "options": [
+    "The Dark Valley",
+    "The Golden Age",
+    "The Taisho era",
+    "The Meiji period"
+   ],
+   "correct": 0,
+   "explain": "After the Depression.",
+   "tag": "Party government"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4402"] = {
+ "id": "IGHI4402",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The Depression and the Manchurian Incident, 1931",
+ "href": "/igcse/history/learn/japan-in-transformation/l10-depression-and-the-manchurian-incident",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The Depression and the Manchurian Incident, 1931.",
+ "checklist": [
+  "I can explain the effects of the Great Depression on Japan",
+  "I can describe the Manchurian Incident and the different accounts of it",
+  "I can explain the consequences of the incident, including Manchukuo"
+ ],
+ "quiz": [
+  {
+   "q": "By how much did Japanese exports fall, 1929–31?",
+   "options": [
+    "50 per cent",
+    "10 per cent",
+    "90 per cent",
+    "5 per cent"
+   ],
+   "correct": 0,
+   "explain": "Wages fell too.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "Which industry was hit by the collapse of the American market?",
+   "options": [
+    "Silk",
+    "Steel",
+    "Shipbuilding",
+    "Coal"
+   ],
+   "correct": 0,
+   "explain": "Small farmers suffered.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "Why did rural hardship affect the army?",
+   "options": [
+    "Most recruits and young officers came from the countryside",
+    "The army owned farms",
+    "Soldiers were paid in rice",
+    "The army owned large silk farms in the north of the country"
+   ],
+   "correct": 0,
+   "explain": "They felt the suffering.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "What was the Guandong Army?",
+   "options": [
+    "Japan’s field army in Manchuria",
+    "China’s nationalist army",
+    "The Russian army in Siberia",
+    "The imperial guard who protected Tokyo"
+   ],
+   "correct": 0,
+   "explain": "It acted without authorisation.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "When did the Manchurian Incident happen?",
+   "options": [
+    "18 September 1931",
+    "7 July 1937",
+    "15 May 1932",
+    "26 February 1936, in Tokyo"
+   ],
+   "correct": 0,
+   "explain": "Near Mukden.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "What was blown up in the Manchurian Incident?",
+   "options": [
+    "A section of the South Manchurian Railway",
+    "A Chinese palace",
+    "A Japanese warship",
+    "A bridge in Peking used by Chinese troops"
+   ],
+   "correct": 0,
+   "explain": "Japan blamed the Chinese.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "Who planned the takeover of Manchuria?",
+   "options": [
+    "Itagaki Seishiro and Ishiwara Kanji",
+    "Hirohito and Wakatsuki",
+    "Chiang Kai-Shek",
+    "General Tojo and Prince Konoe Fumimaro"
+   ],
+   "correct": 0,
+   "explain": "Guandong Army officers.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "What did Manchuria become in 1932?",
+   "options": [
+    "Manchukuo",
+    "Korea",
+    "Formosa",
+    "Shandong province"
+   ],
+   "correct": 0,
+   "explain": "A puppet state.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "Who was installed as ruler of Manchukuo?",
+   "options": [
+    "Pu Yi",
+    "Chiang Kai-Shek",
+    "Yuan Shikai",
+    "Hirohito"
+   ],
+   "correct": 0,
+   "explain": "The last emperor of China.",
+   "tag": "Manchurian Incident"
+  },
+  {
+   "q": "Which body condemned Japan’s actions?",
+   "options": [
+    "The League of Nations",
+    "The United Nations",
+    "NATO",
+    "The Diet in Tokyo itself"
+   ],
+   "correct": 0,
+   "explain": "After the Lytton Commission.",
+   "tag": "Manchurian Incident"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4403"] = {
+ "id": "IGHI4403",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The army takes control, 1932–36",
+ "href": "/igcse/history/learn/japan-in-transformation/l11-the-army-takes-control",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The army takes control, 1932–36.",
+ "checklist": [
+  "I can describe the May 1932 incident and the end of party government",
+  "I can compare the Imperial Way and Control factions",
+  "I can describe the 26 February 1936 coup and its outcome"
+ ],
+ "quiz": [
+  {
+   "q": "Which prime minister was assassinated on 15 May 1932?",
+   "options": [
+    "Inukai Tsuyoshi",
+    "Hara Kei",
+    "Wakatsuki Reijiro",
+    "Hamaguchi Osachi"
+   ],
+   "correct": 0,
+   "explain": "By ultranationalist officers.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "Why was Inukai seen as an obstacle?",
+   "options": [
+    "He tried to restore civilian control and talked secretly with China",
+    "He wanted war with the USA",
+    "He supported the Imperial Way faction",
+    "He wanted to abolish the emperor and make Japan a republic at once by force"
+   ],
+   "correct": 0,
+   "explain": "He was 77 years old.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "What came to an end with Inukai’s death?",
+   "options": [
+    "More than a decade of party government",
+    "The Meiji Constitution",
+    "The war with China",
+    "The Anglo-Japanese Alliance with Britain"
+   ],
+   "correct": 0,
+   "explain": "Admirals led governments next.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "Which faction wanted a “Showa Restoration”?",
+   "options": [
+    "The Imperial Way faction",
+    "The Control faction",
+    "The Seiyukai",
+    "The genro, the elder statesmen"
+   ],
+   "correct": 0,
+   "explain": "Influenced by Kita Ikki.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "Which faction was eager for war with China?",
+   "options": [
+    "The Control faction",
+    "The Imperial Way faction",
+    "The Minseito",
+    "The navy"
+   ],
+   "correct": 0,
+   "explain": "More conservative.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "Who murdered General Nagata in August 1935?",
+   "options": [
+    "Colonel Aizawa",
+    "Kita Ikki",
+    "General Araki",
+    "General Tojo Hideki"
+   ],
+   "correct": 0,
+   "explain": "An Imperial Way officer.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "How many soldiers took part in the 26 February 1936 coup?",
+   "options": [
+    "Over 1,400",
+    "About 50",
+    "About 14,000",
+    "Over 100,000"
+   ],
+   "correct": 0,
+   "explain": "They seized central Tokyo.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "How did the emperor respond to the coup?",
+   "options": [
+    "He ordered loyal troops to crush it",
+    "He joined the rebels",
+    "He fled Tokyo",
+    "He resigned the throne in protest at once"
+   ],
+   "correct": 0,
+   "explain": "28 February 1936.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "What happened to Kita Ikki?",
+   "options": [
+    "He was executed",
+    "He became prime minister",
+    "He fled to China",
+    "He was pardoned"
+   ],
+   "correct": 0,
+   "explain": "With the rebel leaders.",
+   "tag": "The army takes control"
+  },
+  {
+   "q": "Which faction dominated the army after 1936?",
+   "options": [
+    "The Control faction",
+    "The Imperial Way faction",
+    "Neither faction",
+    "The Communist Party"
+   ],
+   "correct": 0,
+   "explain": "And soon the whole nation.",
+   "tag": "The army takes control"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4501"] = {
+ "id": "IGHI4501",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "Japan invades China, 1937–39",
+ "href": "/igcse/history/learn/japan-in-transformation/l12-japan-invades-china",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: Japan invades China, 1937–39.",
+ "checklist": [
+  "I can explain how the military increased its role in government after 1936",
+  "I can describe the Marco Polo Bridge Incident and how it became full-scale war",
+  "I can describe the key events of 1937–39, including the Rape of Nanking"
+ ],
+ "quiz": [
+  {
+   "q": "What did Hirota do that increased the army’s power?",
+   "options": [
+    "Brought back serving officers as armed forces ministers",
+    "Abolished the Diet",
+    "Gave the army control of banks",
+    "Made General Tojo prime minister and gave him full power"
+   ],
+   "correct": 0,
+   "explain": "1936–37.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "How did the army bring down Hirota’s cabinet?",
+   "options": [
+    "It refused to provide a new war minister",
+    "It staged a coup",
+    "It won an election",
+    "It arrested him and put him on trial for treason"
+   ],
+   "correct": 0,
+   "explain": "After accusations of corruption.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "How many seats did Hayashi’s pro-military party win?",
+   "options": [
+    "19 of 466",
+    "300 of 466",
+    "All of them",
+    "None"
+   ],
+   "correct": 0,
+   "explain": "He resigned.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "Where did fighting begin on 7 July 1937?",
+   "options": [
+    "The Marco Polo Bridge near Peiping",
+    "Mukden",
+    "Shanghai",
+    "Pearl Harbor in Hawaii, in the USA"
+   ],
+   "correct": 0,
+   "explain": "It became a full-scale war.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "What did Japan call the war with China?",
+   "options": [
+    "The China Incident",
+    "The Pacific War",
+    "The Great East Asian War",
+    "The Manchurian Incident"
+   ],
+   "correct": 0,
+   "explain": "An undeclared war.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "Which American ship did Japan sink in December 1937?",
+   "options": [
+    "The USS Panay",
+    "The USS Missouri",
+    "The USS Arizona",
+    "The Enola Gay"
+   ],
+   "correct": 0,
+   "explain": "On the Yangtse River.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "When did Nanking fall?",
+   "options": [
+    "13 December 1937",
+    "7 July 1937",
+    "March 1938",
+    "1 September 1939"
+   ],
+   "correct": 0,
+   "explain": "Followed by a massacre.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "How many Chinese may have been killed at Nanking?",
+   "options": [
+    "As many as 200,000",
+    "About 300",
+    "Exactly 9 million",
+    "None, as no one was harmed"
+   ],
+   "correct": 0,
+   "explain": "Estimates vary.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "What did national mobilisation in March 1938 require?",
+   "options": [
+    "All males aged 16–50 to register for military service",
+    "All women to work in factories",
+    "All children to leave cities",
+    "All foreigners to leave Japan and its empire immediately"
+   ],
+   "correct": 0,
+   "explain": "Japan prepared for long war.",
+   "tag": "Invasion of China"
+  },
+  {
+   "q": "How many Chinese casualties were there in the war?",
+   "options": [
+    "About 9 million",
+    "About 447,000",
+    "About 200,000",
+    "About 60,000 in total"
+   ],
+   "correct": 0,
+   "explain": "Nearly two-thirds civilians.",
+   "tag": "Invasion of China"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4502"] = {
+ "id": "IGHI4502",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The road to Pearl Harbor",
+ "href": "/igcse/history/learn/japan-in-transformation/l13-the-road-to-pearl-harbor",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The road to Pearl Harbor.",
+ "checklist": [
+  "I can explain how US economic pressure and Japanese expansion increased tension, 1939–41",
+  "I can describe the Tripartite Pact and the deadlock in negotiations",
+  "I can describe the attack on Pearl Harbor and reactions to it"
+ ],
+ "quiz": [
+  {
+   "q": "Why did the US Pacific fleet move to Pearl Harbor?",
+   "options": [
+    "To counter Japanese expansion",
+    "To attack China",
+    "To protect Australia from Germany",
+    "For training"
+   ],
+   "correct": 0,
+   "explain": "From California.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "What was the Greater East Asia Co-prosperity Sphere?",
+   "options": [
+    "A slogan to justify Japanese empire building",
+    "A free trade agreement with the USA",
+    "A peace treaty with China",
+    "A league of Asian democracies working for peace"
+   ],
+   "correct": 0,
+   "explain": "Announced in August 1940.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "Who gave Japan permission to build bases in Indo-China?",
+   "options": [
+    "Vichy France",
+    "Britain",
+    "The Netherlands",
+    "The USA"
+   ],
+   "correct": 0,
+   "explain": "September 1940.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "Which countries signed the Tripartite Pact with Japan?",
+   "options": [
+    "Germany and Italy",
+    "Germany and Russia",
+    "Britain and France",
+    "Italy and Russia"
+   ],
+   "correct": 0,
+   "explain": "27 September 1940.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "What did Hirohito think of the Tripartite Pact?",
+   "options": [
+    "It would harm Japan",
+    "It would bring peace",
+    "It was his idea",
+    "It would defeat Russia"
+   ],
+   "correct": 0,
+   "explain": "He later said it caused the war.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "What did the USA impose in July 1941?",
+   "options": [
+    "An oil embargo",
+    "A naval blockade of Tokyo",
+    "A ban on Japanese tourists",
+    "Nothing"
+   ],
+   "correct": 0,
+   "explain": "After Japan entered Indo-China.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "Who became prime minister in October 1941?",
+   "options": [
+    "General Tojo Hideki",
+    "Prince Konoe",
+    "Admiral Yamamoto",
+    "Matsuoka Yosuke, the minister"
+   ],
+   "correct": 0,
+   "explain": "Konoe resigned.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "What did Cordell Hull demand on 26 November 1941?",
+   "options": [
+    "Japan leave Indo-China and China",
+    "Japan join the Allies",
+    "Japan hand over its navy",
+    "Japan elect a new emperor at once"
+   ],
+   "correct": 0,
+   "explain": "War was now ensured.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "How many Americans died at Pearl Harbor?",
+   "options": [
+    "2,403",
+    "80,000",
+    "26,000",
+    "Fewer than 100"
+   ],
+   "correct": 0,
+   "explain": "7 December 1941.",
+   "tag": "Pearl Harbor"
+  },
+  {
+   "q": "How did Roosevelt describe 7 December 1941?",
+   "options": [
+    "A date which will live in infamy",
+    "Our finest hour",
+    "A sleeping giant",
+    "A great day of victory for all of us"
+   ],
+   "correct": 0,
+   "explain": "He asked Congress to declare war.",
+   "tag": "Pearl Harbor"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4503"] = {
+ "id": "IGHI4503",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "The war in the Pacific, 1941–45",
+ "href": "/igcse/history/learn/japan-in-transformation/l14-the-war-in-the-pacific",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: The war in the Pacific, 1941–45.",
+ "checklist": [
+  "I can describe Japan’s early victories, including the fall of Singapore",
+  "I can explain the importance of Coral Sea and Midway",
+  "I can describe the Allied advance, including island-hopping, Iwo Jima, Okinawa and the bombing of Japan"
+ ],
+ "quiz": [
+  {
+   "q": "When did Singapore fall?",
+   "options": [
+    "15 February 1942",
+    "7 December 1941",
+    "4 June 1942",
+    "15 August 1945, at the end"
+   ],
+   "correct": 0,
+   "explain": "Churchill called it the worst disaster.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "Why could Singapore not be defended from the north?",
+   "options": [
+    "Its heavy guns faced the sea",
+    "It had no soldiers",
+    "It was an island with no bridge",
+    "The British had left"
+   ],
+   "correct": 0,
+   "explain": "Japan attacked by land.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "How many Allied troops surrendered at Singapore?",
+   "options": [
+    "130,000",
+    "2,403",
+    "26,000",
+    "16 in all"
+   ],
+   "correct": 0,
+   "explain": "To General Yamashita.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "What was the Doolittle Raid?",
+   "options": [
+    "US bombers attacking Tokyo in April 1942",
+    "The fall of Manila",
+    "A Japanese attack on Hawaii",
+    "A battle in the jungles of Burma in 1942"
+   ],
+   "correct": 0,
+   "explain": "It shocked the Japanese.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "What did the Battle of the Coral Sea stop?",
+   "options": [
+    "Japan’s attempt to take Port Moresby",
+    "The bombing of Tokyo",
+    "The invasion of Okinawa",
+    "The fall of Singapore to the Japanese"
+   ],
+   "correct": 0,
+   "explain": "Japan lost two carriers.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "How did the Americans learn Yamamoto’s Midway plans?",
+   "options": [
+    "They had broken Japan’s codes",
+    "A spy in Tokyo told them",
+    "Japan announced them",
+    "By luck, and nothing more than that"
+   ],
+   "correct": 0,
+   "explain": "Known as Magic.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "How many Japanese carriers were lost at Midway?",
+   "options": [
+    "Four",
+    "One",
+    "Two",
+    "Ten in all"
+   ],
+   "correct": 0,
+   "explain": "For one US carrier.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "What strategy did MacArthur use?",
+   "options": [
+    "Island-hopping",
+    "Blockading China",
+    "Invading Manchuria",
+    "Defending Hawaii only"
+   ],
+   "correct": 0,
+   "explain": "Towards Japan.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "What were the tokkotai?",
+   "options": [
+    "Suicide attack squadrons",
+    "Codebreakers",
+    "Elite infantry",
+    "Fire-fighters in Tokyo and Osaka"
+   ],
+   "correct": 0,
+   "explain": "From October 1944.",
+   "tag": "War in the Pacific"
+  },
+  {
+   "q": "Which was the last major land battle of the war?",
+   "options": [
+    "Okinawa",
+    "Iwo Jima",
+    "Guadalcanal",
+    "Leyte Gulf"
+   ],
+   "correct": 0,
+   "explain": "April–June 1945.",
+   "tag": "War in the Pacific"
+  }
+ ]
+};
+window.SBL_LESSONS["IGHI4504"] = {
+ "id": "IGHI4504",
+ "topicNumber": 4,
+ "topicTitle": "Japan in transformation, 1853–1945 (IGCSE History)",
+ "title": "Hiroshima, Nagasaki and Japan’s surrender",
+ "href": "/igcse/history/learn/japan-in-transformation/l15-hiroshima-nagasaki-and-surrender",
+ "syllabusFocus": "Edexcel IGCSE History, Paper 2: Investigation and breadth studies — Japan in transformation, 1853–1945: Hiroshima, Nagasaki and Japan’s surrender.",
+ "checklist": [
+  "I can describe the Potsdam Declaration and Japan’s rejection of it",
+  "I can describe the effects of the atomic bombs on Hiroshima and Nagasaki",
+  "I can explain how and why Japan surrendered"
+ ],
+ "quiz": [
+  {
+   "q": "What did the Potsdam Declaration threaten?",
+   "options": [
+    "Complete and utter destruction",
+    "A trade embargo",
+    "The arrest of the emperor",
+    "Nothing at all, just a warning"
+   ],
+   "correct": 0,
+   "explain": "26 July 1945.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "Who did Truman tell about the atomic bomb at Potsdam?",
+   "options": [
+    "Only the British leader",
+    "Stalin",
+    "The Japanese",
+    "No one at all, not even Churchill"
+   ],
+   "correct": 0,
+   "explain": "Stalin was kept in the dark.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "Which plane dropped the bomb on Hiroshima?",
+   "options": [
+    "The Enola Gay",
+    "The Missouri",
+    "A Zero fighter",
+    "A B-25 bomber"
+   ],
+   "correct": 0,
+   "explain": "6 August 1945.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "About how many people died instantly at Hiroshima?",
+   "options": [
+    "80,000",
+    "2,403",
+    "200,000",
+    "8,000"
+   ],
+   "correct": 0,
+   "explain": "The heat flash killed them.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "Which country declared war on Japan on 8 August 1945?",
+   "options": [
+    "The Soviet Union",
+    "China",
+    "Britain",
+    "France and its colonies"
+   ],
+   "correct": 0,
+   "explain": "It attacked Manchuria.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "When was the second atomic bomb dropped?",
+   "options": [
+    "9 August 1945",
+    "6 August 1945",
+    "15 August 1945",
+    "2 September 1945"
+   ],
+   "correct": 0,
+   "explain": "On Nagasaki.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "What did Japan ask for when accepting the Potsdam terms?",
+   "options": [
+    "That the emperor remain sovereign",
+    "To keep Manchuria",
+    "To keep its army",
+    "A share of Korea and all of Manchuria"
+   ],
+   "correct": 0,
+   "explain": "The Allies agreed.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "When was the emperor’s surrender broadcast?",
+   "options": [
+    "15 August 1945",
+    "2 September 1945",
+    "10 August 1945",
+    "7 December 1945"
+   ],
+   "correct": 0,
+   "explain": "Millions wept.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "Who led the Allied occupation of Japan?",
+   "options": [
+    "General Douglas MacArthur",
+    "Admiral Nimitz",
+    "President Truman",
+    "General Percival of Britain"
+   ],
+   "correct": 0,
+   "explain": "From 1945 to 1951.",
+   "tag": "Atomic bombs and surrender"
+  },
+  {
+   "q": "Where was the formal surrender signed?",
+   "options": [
+    "On the USS Missouri",
+    "At Potsdam",
+    "At Pearl Harbor",
+    "In the Imperial Palace"
+   ],
+   "correct": 0,
+   "explain": "2 September 1945.",
+   "tag": "Atomic bombs and surrender"
   }
  ]
 };

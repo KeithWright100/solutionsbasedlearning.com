@@ -259,9 +259,208 @@
       {
         "slug": "russia-and-the-soviet-union",
         "label": "Russia and the Soviet Union, 1905–24",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/history/learn/russia-and-the-soviet-union",
+        "status": "available",
+        "topics": [
+          {
+            "title": "1. Tsarist rule in Russia, 1905–14",
+            "lessons": [
+              {
+                "label": "Tsarist rule in 1905",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l01-tsarist-rule-in-1905"
+              },
+              {
+                "label": "The 1905 revolution",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l02-the-1905-revolution"
+              },
+              {
+                "label": "October Manifesto",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l03-october-manifesto-and-repression"
+              },
+              {
+                "label": "The dumas",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l04-nicholas-and-the-dumas"
+              },
+              {
+                "label": "Stolypin and Lena",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l05-stolypin-land-reform-and-lena-goldfields"
+              }
+            ]
+          },
+          {
+            "title": "2. Opposition to tsarist rule, 1914–17",
+            "lessons": [
+              {
+                "label": "Effects of the war",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l06-effects-of-the-first-world-war"
+              },
+              {
+                "label": "Rasputin",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l07-rasputin-and-the-tsarina"
+              },
+              {
+                "label": "February Revolution",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l08-the-february-revolution"
+              }
+            ]
+          },
+          {
+            "title": "3. The Provisional Government and the Bolshevik revolution",
+            "lessons": [
+              {
+                "label": "Provisional Government",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l09-weaknesses-of-the-provisional-government"
+              },
+              {
+                "label": "April Theses and July Days",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l10-lenin-the-april-theses-and-the-july-days"
+              },
+              {
+                "label": "Kornilov Revolt",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l11-the-kornilov-revolt"
+              },
+              {
+                "label": "Bolshevik takeover",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l12-the-bolshevik-takeover"
+              }
+            ]
+          },
+          {
+            "title": "4. Bolshevik consolidation of power and the Civil War",
+            "lessons": [
+              {
+                "label": "Decrees and Constituent Assembly",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l13-early-decrees-and-the-constituent-assembly"
+              },
+              {
+                "label": "Brest-Litovsk",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l14-the-treaty-of-brest-litovsk"
+              },
+              {
+                "label": "The Civil War",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l15-the-civil-war"
+              },
+              {
+                "label": "Why the Reds won",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l16-why-the-reds-won"
+              }
+            ]
+          },
+          {
+            "title": "5. War Communism and the New Economic Policy",
+            "lessons": [
+              {
+                "label": "War Communism",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l17-war-communism"
+              },
+              {
+                "label": "Kronstadt Mutiny",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l18-the-kronstadt-mutiny"
+              },
+              {
+                "label": "The NEP",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l19-the-new-economic-policy"
+              },
+              {
+                "label": "Lenin’s achievements",
+                "href": "/igcse/history/learn/russia-and-the-soviet-union/l20-lenins-achievements-to-1924"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "japan-in-transformation",
+        "label": "Japan in transformation, 1853–1945",
+        "href": "/igcse/history/learn/japan-in-transformation",
+        "status": "available",
+        "topics": [
+          {
+            "title": "1. The end of isolation, 1853–68",
+            "lessons": [
+              {
+                "label": "Tokugawa Japan",
+                "href": "/igcse/history/learn/japan-in-transformation/l01-tokugawa-japan-before-1853"
+              },
+              {
+                "label": "Commodore Perry",
+                "href": "/igcse/history/learn/japan-in-transformation/l02-commodore-perry-and-kanagawa"
+              },
+              {
+                "label": "Fall of the shogunate",
+                "href": "/igcse/history/learn/japan-in-transformation/l03-unequal-treaties-and-the-fall-of-the-shogunate"
+              }
+            ]
+          },
+          {
+            "title": "2. The Meiji Restoration and its effects",
+            "lessons": [
+              {
+                "label": "Effects of the Meiji Restoration",
+                "href": "/igcse/history/learn/japan-in-transformation/l04-effects-of-the-meiji-restoration"
+              }
+            ]
+          },
+          {
+            "title": "3. Japan becomes a world power, 1894–1923",
+            "lessons": [
+              {
+                "label": "Sino-Japanese War",
+                "href": "/igcse/history/learn/japan-in-transformation/l05-the-sino-japanese-war"
+              },
+              {
+                "label": "Russo-Japanese War",
+                "href": "/igcse/history/learn/japan-in-transformation/l06-the-russo-japanese-war"
+              },
+              {
+                "label": "Twenty-One Demands",
+                "href": "/igcse/history/learn/japan-in-transformation/l07-first-world-war-and-twenty-one-demands"
+              },
+              {
+                "label": "Impact of the war",
+                "href": "/igcse/history/learn/japan-in-transformation/l08-impact-of-the-first-world-war"
+              }
+            ]
+          },
+          {
+            "title": "4. Party government and the rise of militarism, 1918–36",
+            "lessons": [
+              {
+                "label": "Party government",
+                "href": "/igcse/history/learn/japan-in-transformation/l09-party-government-1918-29"
+              },
+              {
+                "label": "Manchurian Incident",
+                "href": "/igcse/history/learn/japan-in-transformation/l10-depression-and-the-manchurian-incident"
+              },
+              {
+                "label": "The army takes control",
+                "href": "/igcse/history/learn/japan-in-transformation/l11-the-army-takes-control"
+              }
+            ]
+          },
+          {
+            "title": "5. Japan at war, 1937–45",
+            "lessons": [
+              {
+                "label": "Invasion of China",
+                "href": "/igcse/history/learn/japan-in-transformation/l12-japan-invades-china"
+              },
+              {
+                "label": "Pearl Harbor",
+                "href": "/igcse/history/learn/japan-in-transformation/l13-the-road-to-pearl-harbor"
+              },
+              {
+                "label": "War in the Pacific",
+                "href": "/igcse/history/learn/japan-in-transformation/l14-the-war-in-the-pacific"
+              },
+              {
+                "label": "Atomic bombs and surrender",
+                "href": "/igcse/history/learn/japan-in-transformation/l15-hiroshima-nagasaki-and-surrender"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "middle-east",
