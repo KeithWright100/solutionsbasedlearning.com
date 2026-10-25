@@ -138,13 +138,6 @@
         "topics": []
       },
       {
-        "slug": "japan-in-transformation",
-        "label": "Japan in transformation, 1853–1945",
-        "href": null,
-        "status": "soon",
-        "topics": []
-      },
-      {
         "slug": "middle-east",
         "label": "The Middle East: conflict, crisis and change, 1917–2012",
         "href": null,
