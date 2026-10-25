@@ -26,10 +26,10 @@
     <div class="sbl-alert sbl-alert--error" id="loginError" role="alert"></div>
     <div class="sbl-alert sbl-alert--success" id="loginNotice" role="status"></div>
 
-    <form id="loginForm" novalidate>
+    <form id="loginForm" method="post" action="/login/" novalidate>
       <div class="sbl-field">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" autocomplete="email" required>
+        <input type="email" id="email" name="email" autocomplete="username" required>
       </div>
       <div class="sbl-field">
         <label for="password">Password</label>
@@ -102,7 +102,21 @@
           btn.textContent = 'LOGIN';
           return;
         }
-        window.location.href = redirectTo;
+        // Let the browser offer to save the password. Pages that log in with
+        // fetch() (no real form submission) are often ignored by password
+        // managers, so store the credential explicitly where supported
+        // (Chrome, Edge) before leaving the page.
+        var go = function () { window.location.href = redirectTo; };
+        try {
+          if (window.PasswordCredential && navigator.credentials && navigator.credentials.store) {
+            var cred = new PasswordCredential({ id: document.getElementById('email').value, password: document.getElementById('password').value });
+            var done = false, finish = function () { if (!done) { done = true; go(); } };
+            navigator.credentials.store(cred).then(finish, finish);
+            setTimeout(finish, 1500);
+            return;
+          }
+        } catch (err) {}
+        go();
       })
       .catch(function () {
         errorBox.textContent = 'Could not reach the server. Please check your connection and try again.';
