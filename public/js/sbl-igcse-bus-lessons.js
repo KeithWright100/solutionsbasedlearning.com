@@ -6,6 +6,7 @@
 window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_BUS_LESSON_ORDERS = window.SBL_IGCSE_BUS_LESSON_ORDERS || [];
 window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS1101", "IGBS1102", "IGBS1103", "IGBS1104", "IGBS1105", "IGBS1106", "IGBS1107", "IGBS1108", "IGBS1109", "IGBS1110"]);
+window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS2101", "IGBS2102", "IGBS2103", "IGBS2104", "IGBS2105", "IGBS2106", "IGBS2107", "IGBS2108", "IGBS2109", "IGBS2110"]);
 window.SBL_LESSONS["IGBS1101"] = {
  "id": "IGBS1101",
  "topicNumber": 1,
@@ -1353,6 +1354,1356 @@ window.SBL_LESSONS["IGBS1110"] = {
    "correct": 0,
    "explain": "Customers go elsewhere.",
    "tag": "Success and failure"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2101"] = {
+ "id": "IGBS2101",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Communication in business",
+ "href": "/igcse/business/learn/people-in-business/l01-communication-methods",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Communication in business.",
+ "checklist": [
+  "I can explain why good communication is important to a business",
+  "I can describe internal and external communication",
+  "I can compare the benefits and limitations of different communication methods, including IT"
+ ],
+ "quiz": [
+  {
+   "q": "Communication between a manager and staff is:",
+   "options": [
+    "Internal",
+    "External",
+    "Formal only",
+    "Illegal"
+   ],
+   "correct": 0,
+   "explain": "It happens inside the business.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "An email from a business to a supplier is:",
+   "options": [
+    "External",
+    "Internal",
+    "Informal only",
+    "Not communication at all"
+   ],
+   "correct": 0,
+   "explain": "Suppliers are outside the business.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "Feedback shows that:",
+   "options": [
+    "The message was understood",
+    "The message was never sent",
+    "The sender was the manager in charge",
+    "The medium was a written letter"
+   ],
+   "correct": 0,
+   "explain": "It completes the communication process.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "A benefit of face-to-face communication is:",
+   "options": [
+    "Immediate feedback",
+    "A permanent written record is kept",
+    "It reaches thousands of people at once",
+    "It is always the cheapest method"
+   ],
+   "correct": 0,
+   "explain": "Questions can be answered at once.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "A limitation of a letter is that it is:",
+   "options": [
+    "Slow",
+    "Instant to receive",
+    "Unable to carry detailed information",
+    "Impossible to keep as a record"
+   ],
+   "correct": 0,
+   "explain": "Post takes time.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "Which method gives a permanent record?",
+   "options": [
+    "A written report",
+    "A quick phone call",
+    "A chat in the corridor",
+    "A face-to-face meeting"
+   ],
+   "correct": 0,
+   "explain": "Written methods can be kept.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "Ineffective communication can lead to:",
+   "options": [
+    "Mistakes and low morale",
+    "Higher motivation for all staff",
+    "Fewer errors in production",
+    "Better decisions by managers"
+   ],
+   "correct": 0,
+   "explain": "Messages are misunderstood.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "A drawback of social media for external communication is:",
+   "options": [
+    "Negative comments are public",
+    "It can only reach a few people",
+    "It is very expensive to use",
+    "Customers cannot reply to posts"
+   ],
+   "correct": 0,
+   "explain": "Complaints can spread quickly.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "A business intranet is used for:",
+   "options": [
+    "Internal communication",
+    "Advertising to the public",
+    "Paying government taxes",
+    "Sending letters to suppliers"
+   ],
+   "correct": 0,
+   "explain": "It is a private network for staff.",
+   "tag": "Communication methods"
+  },
+  {
+   "q": "The medium is:",
+   "options": [
+    "The method used to send a message",
+    "The person who receives the message",
+    "The reply sent back to the sender",
+    "The person who sends the message"
+   ],
+   "correct": 0,
+   "explain": "E.g. email, letter, meeting.",
+   "tag": "Communication methods"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2102"] = {
+ "id": "IGBS2102",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Barriers to communication",
+ "href": "/igcse/business/learn/people-in-business/l02-barriers-to-communication",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Barriers to communication.",
+ "checklist": [
+  "I can explain how barriers to communication arise",
+  "I can analyse the problems caused by ineffective communication",
+  "I can recommend ways to remove barriers to communication"
+ ],
+ "quiz": [
+  {
+   "q": "A barrier to communication is:",
+   "options": [
+    "Anything that stops a message being understood",
+    "A wall built between two offices in a firm",
+    "A legal rule about sending business letters",
+    "A formal rule about how often managers send letters"
+   ],
+   "correct": 0,
+   "explain": "It blocks understanding.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "Using technical words the receiver does not know is:",
+   "options": [
+    "Jargon",
+    "Feedback",
+    "A medium",
+    "Delegation"
+   ],
+   "correct": 0,
+   "explain": "Jargon confuses non-experts.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "A noisy factory floor is an example of:",
+   "options": [
+    "Noise / distraction",
+    "Too many layers of hierarchy",
+    "A technology failure",
+    "Using the wrong language"
+   ],
+   "correct": 0,
+   "explain": "It interferes with the message.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "A long chain of command can:",
+   "options": [
+    "Distort messages",
+    "Make messages clearer at each level",
+    "Always speed up decisions",
+    "Remove the need for feedback"
+   ],
+   "correct": 0,
+   "explain": "Messages change as they pass down.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "A good way to check understanding is to:",
+   "options": [
+    "Ask for feedback",
+    "Use more technical jargon",
+    "Send a much longer letter",
+    "Avoid speaking to staff"
+   ],
+   "correct": 0,
+   "explain": "Feedback confirms the message.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "Ineffective communication may cause:",
+   "options": [
+    "Higher staff turnover",
+    "Fewer mistakes in orders",
+    "Faster decisions by managers",
+    "Happier customers"
+   ],
+   "correct": 0,
+   "explain": "Staff feel ignored and leave.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "Sensitive news is best given:",
+   "options": [
+    "Face to face",
+    "By a notice on a board",
+    "By a mass email to all staff",
+    "In a text message to everyone"
+   ],
+   "correct": 0,
+   "explain": "It allows questions and empathy.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "Staff in different time zones is a barrier of:",
+   "options": [
+    "Distance and time",
+    "Jargon",
+    "Attitude",
+    "Using jargon in written documents"
+   ],
+   "correct": 0,
+   "explain": "Working hours do not overlap.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "Which reduces barriers?",
+   "options": [
+    "Simple, clear language",
+    "Longer chains of command",
+    "More technical jargon",
+    "Ignoring staff questions"
+   ],
+   "correct": 0,
+   "explain": "Clarity helps understanding.",
+   "tag": "Barriers to communication"
+  },
+  {
+   "q": "If a receiver distrusts the sender, the barrier is:",
+   "options": [
+    "Attitudes and relationships",
+    "Technology failure",
+    "Distance and time zones",
+    "Using the wrong medium for the message"
+   ],
+   "correct": 0,
+   "explain": "They may ignore the message.",
+   "tag": "Barriers to communication"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2103"] = {
+ "id": "IGBS2103",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Types of employment and recruitment documents",
+ "href": "/igcse/business/learn/people-in-business/l03-employment-types-and-recruitment-documents",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Types of employment and recruitment documents.",
+ "checklist": [
+  "I can describe full-time, part-time, job share and casual/seasonal/temporary employment",
+  "I can explain the benefits of each type of employment to businesses and workers",
+  "I can explain the purpose of a job description, person specification, application form and CV"
+ ],
+ "quiz": [
+  {
+   "q": "Two people sharing one full-time job is:",
+   "options": [
+    "Job share",
+    "Part-time work",
+    "Seasonal work",
+    "Full-time work"
+   ],
+   "correct": 0,
+   "explain": "They split hours and duties.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "Extra staff hired for the summer holiday are:",
+   "options": [
+    "Seasonal",
+    "Full-time and permanent",
+    "In a job share",
+    "Directors of the firm"
+   ],
+   "correct": 0,
+   "explain": "They work only in a season.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "A benefit of part-time staff is:",
+   "options": [
+    "They can cover busy periods",
+    "They always cost more per hour",
+    "They are never available at weekends",
+    "They must work 40 hours a week"
+   ],
+   "correct": 0,
+   "explain": "Flexible cover.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "A job description describes:",
+   "options": [
+    "The duties of the job",
+    "The ideal person for the job",
+    "The applicant’s own experience",
+    "The firm’s annual profits"
+   ],
+   "correct": 0,
+   "explain": "It is about the job itself.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "A person specification describes:",
+   "options": [
+    "The ideal candidate",
+    "The duties of the job",
+    "The wage paid to directors",
+    "The firm’s sales figures"
+   ],
+   "correct": 0,
+   "explain": "Skills, qualifications, qualities.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "Who writes a CV?",
+   "options": [
+    "The applicant",
+    "The human resources manager",
+    "The business owner",
+    "The government"
+   ],
+   "correct": 0,
+   "explain": "It summarises the applicant.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "Why do businesses use application forms?",
+   "options": [
+    "To compare applicants easily",
+    "To advertise products to customers",
+    "To pay employees their wages",
+    "To describe the job’s duties"
+   ],
+   "correct": 0,
+   "explain": "Same information from everyone.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "A drawback of temporary staff is that they may be:",
+   "options": [
+    "Less trained",
+    "Too expensive to dismiss",
+    "Permanent members of staff",
+    "Unable to work any shifts"
+   ],
+   "correct": 0,
+   "explain": "Little time for training.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "Shortlisting compares applicants against the:",
+   "options": [
+    "Person specification",
+    "Annual accounts",
+    "Cash-flow forecast",
+    "Total sales figures for the previous year"
+   ],
+   "correct": 0,
+   "explain": "Essential criteria.",
+   "tag": "Employment types and documents"
+  },
+  {
+   "q": "Which type of employment suits a parent wanting fewer hours?",
+   "options": [
+    "Part-time or job share",
+    "Full-time with overtime",
+    "A director’s role",
+    "Night shifts every day"
+   ],
+   "correct": 0,
+   "explain": "Fewer hours suit childcare.",
+   "tag": "Employment types and documents"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2104"] = {
+ "id": "IGBS2104",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "The recruitment and selection process",
+ "href": "/igcse/business/learn/people-in-business/l04-recruitment-and-selection",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: The recruitment and selection process.",
+ "checklist": [
+  "I can describe the stages of recruitment and selection",
+  "I can compare internal and external recruitment",
+  "I can explain how job advertisements, shortlisting and interviewing are used"
+ ],
+ "quiz": [
+  {
+   "q": "Recruitment is:",
+   "options": [
+    "Attracting people to apply for a job",
+    "Choosing the best applicant from a list",
+    "Training new workers in their first week",
+    "Dismissing staff who break the rules"
+   ],
+   "correct": 0,
+   "explain": "Getting applicants.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "Selection is:",
+   "options": [
+    "Choosing the best applicant",
+    "Advertising the vacancy on websites",
+    "Writing the job description",
+    "Paying employees’ wages"
+   ],
+   "correct": 0,
+   "explain": "Picking the right person.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "Promoting an existing employee is:",
+   "options": [
+    "Internal recruitment",
+    "External recruitment",
+    "Job rotation",
+    "Redundancy"
+   ],
+   "correct": 0,
+   "explain": "They come from inside.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "An advantage of external recruitment is:",
+   "options": [
+    "New ideas and skills",
+    "It is the cheapest method",
+    "It always takes less time",
+    "It creates no need for induction"
+   ],
+   "correct": 0,
+   "explain": "Fresh perspectives.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "A disadvantage of internal recruitment is:",
+   "options": [
+    "It creates another vacancy",
+    "It is always more expensive",
+    "The candidate is unknown to the firm",
+    "It always needs a recruitment agency"
+   ],
+   "correct": 0,
+   "explain": "Someone’s old job is left empty.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "Shortlisting means:",
+   "options": [
+    "Choosing applicants to interview",
+    "Writing a shorter job advert",
+    "Cutting the wages of staff",
+    "Cutting the number of hours staff work each week"
+   ],
+   "correct": 0,
+   "explain": "Picking the best applications.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "A job advertisement should include:",
+   "options": [
+    "The job title and how to apply",
+    "The applicant’s home address",
+    "The firm’s competitors’ prices",
+    "The names of all current staff"
+   ],
+   "correct": 0,
+   "explain": "Applicants need these details.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "Why might a business use a skills test as well as an interview?",
+   "options": [
+    "Some people interview well but lack skills",
+    "Interviews are banned by law",
+    "Tests are always cheaper than adverts",
+    "It avoids writing a job description or person specification"
+   ],
+   "correct": 0,
+   "explain": "Tests show real ability.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "Which comes first?",
+   "options": [
+    "Identifying a vacancy",
+    "Interviewing candidates",
+    "Shortlisting applicants",
+    "Offering a contract"
+   ],
+   "correct": 0,
+   "explain": "A need must exist first.",
+   "tag": "Recruitment and selection"
+  },
+  {
+   "q": "A recruitment agency is used for:",
+   "options": [
+    "External recruitment",
+    "Internal promotion",
+    "Paying wages",
+    "Calculating employees’ wages and pay slips"
+   ],
+   "correct": 0,
+   "explain": "It finds outside candidates.",
+   "tag": "Recruitment and selection"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2105"] = {
+ "id": "IGBS2105",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Legal controls over employment",
+ "href": "/igcse/business/learn/people-in-business/l05-legal-controls-over-employment",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Legal controls over employment.",
+ "checklist": [
+  "I can explain the purpose of equal opportunities legislation",
+  "I can explain the purpose of minimum wage laws",
+  "I can analyse the effects of employment laws on businesses and employees"
+ ],
+ "quiz": [
+  {
+   "q": "Discrimination means:",
+   "options": [
+    "Treating someone unfairly",
+    "Paying everyone the same wage",
+    "Training all staff equally",
+    "Hiring through an agency"
+   ],
+   "correct": 0,
+   "explain": "Unfair treatment based on a characteristic.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "Equal opportunities laws cover:",
+   "options": [
+    "Gender, race, disability and age",
+    "Only the wages of directors",
+    "The prices charged to customers",
+    "Only the wages paid to the directors of a company"
+   ],
+   "correct": 0,
+   "explain": "Protected characteristics.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "A minimum wage is:",
+   "options": [
+    "The lowest legal hourly pay",
+    "The average pay of all workers",
+    "The highest pay a firm may give",
+    "A bonus paid at Christmas"
+   ],
+   "correct": 0,
+   "explain": "A legal floor on pay.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "A drawback of a minimum wage rise for a business is:",
+   "options": [
+    "Higher wage costs",
+    "Lower staff motivation",
+    "Fewer job applicants",
+    "Less legal protection"
+   ],
+   "correct": 0,
+   "explain": "Costs go up.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "A benefit of a minimum wage for workers is:",
+   "options": [
+    "Protection from exploitation",
+    "Guaranteed promotion each year",
+    "Shorter working hours",
+    "Free training courses"
+   ],
+   "correct": 0,
+   "explain": "Fair pay.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "Refusing to interview someone because of their age is:",
+   "options": [
+    "Illegal discrimination",
+    "A legal recruitment method",
+    "Internal recruitment",
+    "Shortlisting"
+   ],
+   "correct": 0,
+   "explain": "Age is protected.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "Wage rises by $1/hour for 4 workers doing 20 hours a week. Extra weekly cost?",
+   "options": [
+    "$80",
+    "$24",
+    "$20",
+    "$4"
+   ],
+   "correct": 0,
+   "explain": "1 × 20 × 4.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "A benefit of a diverse workforce is:",
+   "options": [
+    "A wider range of ideas",
+    "Lower wage costs for all",
+    "No need for any training",
+    "Fewer laws to follow"
+   ],
+   "correct": 0,
+   "explain": "Different perspectives.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "A reasonable adjustment might be:",
+   "options": [
+    "Installing a ramp",
+    "Paying below the minimum wage",
+    "Refusing to hire older people",
+    "Removing all breaks"
+   ],
+   "correct": 0,
+   "explain": "It helps disabled staff.",
+   "tag": "Employment law"
+  },
+  {
+   "q": "How might a small firm respond to a minimum wage rise?",
+   "options": [
+    "Raise prices",
+    "Pay below the legal rate",
+    "Ignore the new law",
+    "Lower the rate itself"
+   ],
+   "correct": 0,
+   "explain": "Passing on costs.",
+   "tag": "Employment law"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2106"] = {
+ "id": "IGBS2106",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Training",
+ "href": "/igcse/business/learn/people-in-business/l06-training",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Training.",
+ "checklist": [
+  "I can explain the purpose of induction, on-the-job and off-the-job training",
+  "I can explain why training is needed to comply with health and safety laws",
+  "I can evaluate the benefits and limitations of training for a business and its workers"
+ ],
+ "quiz": [
+  {
+   "q": "Training that introduces new staff to the business is:",
+   "options": [
+    "Induction",
+    "Off-the-job",
+    "Job rotation",
+    "Appraisal"
+   ],
+   "correct": 0,
+   "explain": "First-day introduction.",
+   "tag": "Training"
+  },
+  {
+   "q": "Learning by watching an experienced worker is:",
+   "options": [
+    "On-the-job training",
+    "Off-the-job training",
+    "Induction training",
+    "External recruitment"
+   ],
+   "correct": 0,
+   "explain": "Learning while working.",
+   "tag": "Training"
+  },
+  {
+   "q": "A college course for a manager is:",
+   "options": [
+    "Off-the-job training",
+    "On-the-job training",
+    "Induction training",
+    "Induction training for a brand-new employee"
+   ],
+   "correct": 0,
+   "explain": "Away from the workplace.",
+   "tag": "Training"
+  },
+  {
+   "q": "A benefit of on-the-job training is that it is:",
+   "options": [
+    "Cheap and relevant",
+    "Delivered by outside experts",
+    "Always leads to a qualification",
+    "Done away from the workplace"
+   ],
+   "correct": 0,
+   "explain": "Low cost, specific to the job.",
+   "tag": "Training"
+  },
+  {
+   "q": "A limitation of off-the-job training is:",
+   "options": [
+    "It is expensive",
+    "It is always irrelevant",
+    "It cannot teach any new skills",
+    "It is never done by experts"
+   ],
+   "correct": 0,
+   "explain": "Fees and lost output.",
+   "tag": "Training"
+  },
+  {
+   "q": "Health and safety training helps a business to:",
+   "options": [
+    "Comply with the law",
+    "Avoid paying the minimum wage",
+    "Reduce its prices",
+    "Increase its market share"
+   ],
+   "correct": 0,
+   "explain": "It is a legal duty.",
+   "tag": "Training"
+  },
+  {
+   "q": "A risk of training staff is that they:",
+   "options": [
+    "May leave for a rival",
+    "Become less productive",
+    "Make more mistakes",
+    "Lose their skills"
+   ],
+   "correct": 0,
+   "explain": "Trained staff are valuable to others.",
+   "tag": "Training"
+  },
+  {
+   "q": "Induction usually includes:",
+   "options": [
+    "Fire and safety procedures",
+    "A degree course at university",
+    "A pay rise for the employee",
+    "A redundancy notice"
+   ],
+   "correct": 0,
+   "explain": "Rules and safety first.",
+   "tag": "Training"
+  },
+  {
+   "q": "A benefit of training for workers is:",
+   "options": [
+    "Better promotion chances",
+    "Lower pay in the future",
+    "Less job security",
+    "Fewer skills and less confidence over time"
+   ],
+   "correct": 0,
+   "explain": "New skills lead to promotion.",
+   "tag": "Training"
+  },
+  {
+   "q": "A drawback of on-the-job training is:",
+   "options": [
+    "Bad habits may be passed on",
+    "It is very expensive",
+    "It always needs a college",
+    "Workers stop producing entirely"
+   ],
+   "correct": 0,
+   "explain": "The trainer may not be perfect.",
+   "tag": "Training"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2107"] = {
+ "id": "IGBS2107",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "The importance of motivation and motivation theories",
+ "href": "/igcse/business/learn/people-in-business/l07-motivation-theories",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: The importance of motivation and motivation theories.",
+ "checklist": [
+  "I can explain why motivation is important in attracting and retaining employees and raising productivity",
+  "I can describe the motivation theories of Taylor, Maslow and Herzberg",
+  "I can apply the theories to explain how a business could motivate its workers"
+ ],
+ "quiz": [
+  {
+   "q": "Taylor believed workers are motivated mainly by:",
+   "options": [
+    "Money",
+    "Friendship",
+    "Recognition",
+    "Responsibility"
+   ],
+   "correct": 0,
+   "explain": "Scientific management focuses on pay.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "The top of Maslow’s hierarchy is:",
+   "options": [
+    "Self-actualisation",
+    "Physiological needs",
+    "Safety needs",
+    "Social needs"
+   ],
+   "correct": 0,
+   "explain": "Reaching full potential.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "Job security meets which of Maslow’s needs?",
+   "options": [
+    "Safety",
+    "Esteem",
+    "Social",
+    "Self-actualisation"
+   ],
+   "correct": 0,
+   "explain": "Safety includes security.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "In Herzberg’s theory, pay is a:",
+   "options": [
+    "Hygiene factor",
+    "Motivator",
+    "Physiological need only",
+    "Piece rate"
+   ],
+   "correct": 0,
+   "explain": "It prevents dissatisfaction.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "Which is a Herzberg motivator?",
+   "options": [
+    "Recognition",
+    "Working conditions",
+    "Pay",
+    "Supervision"
+   ],
+   "correct": 0,
+   "explain": "Motivators create satisfaction.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "Piece rate means paying workers:",
+   "options": [
+    "For each item produced",
+    "A fixed annual salary",
+    "By the number of hours worked",
+    "Only when they are promoted"
+   ],
+   "correct": 0,
+   "explain": "Taylor’s pay by results.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "Motivated workers usually lead to:",
+   "options": [
+    "Lower labour turnover",
+    "Higher absenteeism",
+    "More mistakes in production",
+    "Lower productivity"
+   ],
+   "correct": 0,
+   "explain": "They stay and work harder.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "Team-building events satisfy which of Maslow’s needs?",
+   "options": [
+    "Social",
+    "Physiological",
+    "Safety",
+    "Self-actualisation"
+   ],
+   "correct": 0,
+   "explain": "Belonging and friendship.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "A criticism of Taylor’s theory is that it:",
+   "options": [
+    "Ignores social needs",
+    "Focuses only on teamwork",
+    "Rejects the use of money",
+    "Was about self-actualisation"
+   ],
+   "correct": 0,
+   "explain": "Workers want more than money.",
+   "tag": "Motivation theories"
+  },
+  {
+   "q": "According to Herzberg, poor hygiene factors cause:",
+   "options": [
+    "Dissatisfaction",
+    "Self-actualisation",
+    "Promotion",
+    "Higher productivity"
+   ],
+   "correct": 0,
+   "explain": "They must be met first.",
+   "tag": "Motivation theories"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2108"] = {
+ "id": "IGBS2108",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Financial and non-financial methods of motivation",
+ "href": "/igcse/business/learn/people-in-business/l08-financial-and-non-financial-motivation",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Financial and non-financial methods of motivation.",
+ "checklist": [
+  "I can describe financial methods of motivation",
+  "I can describe non-financial methods of motivation",
+  "I can evaluate which methods are most suitable for different employees and businesses"
+ ],
+ "quiz": [
+  {
+   "q": "Commission is paid as:",
+   "options": [
+    "A percentage of sales",
+    "A fixed monthly salary",
+    "A company car",
+    "Extra holiday time"
+   ],
+   "correct": 0,
+   "explain": "It rises with sales.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "A company car is an example of:",
+   "options": [
+    "A fringe benefit",
+    "Commission",
+    "Job rotation",
+    "A percentage commission on sales made"
+   ],
+   "correct": 0,
+   "explain": "A non-cash extra.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "Job rotation means:",
+   "options": [
+    "Moving between tasks at the same level",
+    "Being promoted to a manager role",
+    "Being paid for each item made",
+    "Working from home on every day of the week"
+   ],
+   "correct": 0,
+   "explain": "Variety reduces boredom.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "Job enrichment means:",
+   "options": [
+    "More challenging, responsible work",
+    "More of the same simple tasks",
+    "A cut in the worker’s pay",
+    "Being given fewer hours of work each week"
+   ],
+   "correct": 0,
+   "explain": "Uses abilities more.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "Autonomy means workers:",
+   "options": [
+    "Decide how to do their work",
+    "Must follow strict instructions",
+    "Receive no pay at all",
+    "Work for many different firms"
+   ],
+   "correct": 0,
+   "explain": "Freedom and trust.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "5% commission on $8,000 sales is:",
+   "options": [
+    "$400",
+    "$40",
+    "$4,000",
+    "$800"
+   ],
+   "correct": 0,
+   "explain": "0.05 × 8,000.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "Which is a non-financial method?",
+   "options": [
+    "Job enrichment",
+    "A bonus",
+    "Commission",
+    "A pay rise for all of the staff"
+   ],
+   "correct": 0,
+   "explain": "No direct money.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "A bonus is usually paid for:",
+   "options": [
+    "Reaching a target",
+    "Joining the business",
+    "Working any hours at all",
+    "Being absent from work"
+   ],
+   "correct": 0,
+   "explain": "It rewards performance.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "Commission is most suitable for:",
+   "options": [
+    "Sales staff",
+    "Nurses in a hospital",
+    "Factory cleaners",
+    "Office receptionists"
+   ],
+   "correct": 0,
+   "explain": "Sales output is measurable.",
+   "tag": "Methods of motivation"
+  },
+  {
+   "q": "A salary is paid:",
+   "options": [
+    "As a fixed annual amount",
+    "Only for each item made",
+    "Only as a percentage of sales",
+    "Only at the end of the year"
+   ],
+   "correct": 0,
+   "explain": "Usually monthly.",
+   "tag": "Methods of motivation"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2109"] = {
+ "id": "IGBS2109",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "Organisation structure",
+ "href": "/igcse/business/learn/people-in-business/l09-organisation-structure",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: Organisation structure.",
+ "checklist": [
+  "I can interpret organisational charts and explain span of control, chain of command and delegation",
+  "I can compare hierarchical (tall) and flat structures",
+  "I can compare centralised and decentralised organisations"
+ ],
+ "quiz": [
+  {
+   "q": "Span of control is:",
+   "options": [
+    "The number of staff reporting to a manager",
+    "The number of levels in the business",
+    "The route instructions pass down",
+    "The total number of employees in the whole business"
+   ],
+   "correct": 0,
+   "explain": "Direct reports.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "A tall structure has:",
+   "options": [
+    "Many levels of hierarchy",
+    "Very wide spans of control",
+    "No managers at all",
+    "Only one level"
+   ],
+   "correct": 0,
+   "explain": "Many layers.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "An advantage of a flat structure is:",
+   "options": [
+    "Faster communication",
+    "More levels of management",
+    "Narrow spans of control",
+    "More promotion opportunities"
+   ],
+   "correct": 0,
+   "explain": "Fewer layers to pass through.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "Delegation means:",
+   "options": [
+    "Passing authority to a subordinate",
+    "Removing a manager from the firm",
+    "Promoting a worker to director",
+    "Centralising all decisions at the business’s head office"
+   ],
+   "correct": 0,
+   "explain": "Giving tasks lower down.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "In a centralised business, decisions are made:",
+   "options": [
+    "At head office",
+    "By every shop assistant",
+    "By customers",
+    "By local branch staff"
+   ],
+   "correct": 0,
+   "explain": "Senior managers decide.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "An advantage of decentralisation is:",
+   "options": [
+    "Decisions suit local needs",
+    "Every branch is identical",
+    "Head office has total control",
+    "Slower decision-making"
+   ],
+   "correct": 0,
+   "explain": "Local managers know local customers.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "The chain of command shows:",
+   "options": [
+    "Who reports to whom",
+    "The firm’s profit each year",
+    "The products the firm sells",
+    "The wages of each worker"
+   ],
+   "correct": 0,
+   "explain": "Lines of authority.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "A disadvantage of a wide span of control is that:",
+   "options": [
+    "Managers may be overloaded",
+    "Communication is always slow",
+    "There are too many levels",
+    "Workers have no freedom"
+   ],
+   "correct": 0,
+   "explain": "Too many people to supervise.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "When a manager delegates a task, who is accountable?",
+   "options": [
+    "The manager",
+    "Only the worker",
+    "The customer",
+    "The government"
+   ],
+   "correct": 0,
+   "explain": "Responsibility remains with the manager.",
+   "tag": "Organisation structure"
+  },
+  {
+   "q": "A flat structure usually has:",
+   "options": [
+    "Fewer promotion opportunities",
+    "More layers of management",
+    "Narrower spans of control",
+    "Much higher management costs than a tall structure"
+   ],
+   "correct": 0,
+   "explain": "Fewer levels to move up.",
+   "tag": "Organisation structure"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS2110"] = {
+ "id": "IGBS2110",
+ "topicNumber": 2,
+ "topicTitle": "2 People in business (IGCSE Business)",
+ "title": "The functional areas of a business",
+ "href": "/igcse/business/learn/people-in-business/l10-functional-areas",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 2 People in business: The functional areas of a business.",
+ "checklist": [
+  "I can describe the roles of the human resources, finance, marketing and production departments",
+  "I can explain dismissal, unfair dismissal and redundancy",
+  "I can analyse how the functional areas depend on each other"
+ ],
+ "quiz": [
+  {
+   "q": "Which department handles recruitment?",
+   "options": [
+    "Human resources",
+    "Finance",
+    "Marketing",
+    "Production and operations"
+   ],
+   "correct": 0,
+   "explain": "HR manages people.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "A cash-flow forecast is prepared by:",
+   "options": [
+    "Finance",
+    "Human resources",
+    "Marketing",
+    "Production"
+   ],
+   "correct": 0,
+   "explain": "Finance manages money.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Quality control is part of:",
+   "options": [
+    "Production",
+    "Marketing",
+    "Finance",
+    "Human resources"
+   ],
+   "correct": 0,
+   "explain": "Checking products.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Public relations is part of:",
+   "options": [
+    "Marketing",
+    "Production",
+    "Finance",
+    "Human resources"
+   ],
+   "correct": 0,
+   "explain": "Managing the firm’s image.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Redundancy is when:",
+   "options": [
+    "The job is no longer needed",
+    "The worker is caught stealing",
+    "The worker is promoted",
+    "The worker resigns to travel"
+   ],
+   "correct": 0,
+   "explain": "It is not the worker’s fault.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Sacking someone for being pregnant is:",
+   "options": [
+    "Unfair dismissal",
+    "Redundancy",
+    "A grievance",
+    "Fair dismissal for misconduct"
+   ],
+   "correct": 0,
+   "explain": "It is illegal.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "A grievance procedure lets:",
+   "options": [
+    "Employees raise complaints",
+    "Managers set product prices",
+    "Finance pay all the bills",
+    "Customers return products"
+   ],
+   "correct": 0,
+   "explain": "Formal complaints process.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Before dismissing a worker for lateness, a firm should give:",
+   "options": [
+    "Warnings",
+    "A promotion",
+    "Redundancy pay",
+    "A bonus"
+   ],
+   "correct": 0,
+   "explain": "Follow the disciplinary procedure.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Stock control is managed by:",
+   "options": [
+    "Production",
+    "Human resources",
+    "Marketing",
+    "Finance"
+   ],
+   "correct": 0,
+   "explain": "Raw materials and finished goods.",
+   "tag": "Functional areas"
+  },
+  {
+   "q": "Why must departments communicate?",
+   "options": [
+    "They depend on each other",
+    "The law forbids them to talk",
+    "They sell to different customers",
+    "They never share resources"
+   ],
+   "correct": 0,
+   "explain": "Interdependence.",
+   "tag": "Functional areas"
   }
  ]
 };

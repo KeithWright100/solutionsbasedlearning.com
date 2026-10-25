@@ -100,9 +100,75 @@
       {
         "slug": "people-in-business",
         "label": "People in business",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/business/learn/people-in-business",
+        "status": "available",
+        "topics": [
+          {
+            "title": "2.1 Internal and external communication",
+            "lessons": [
+              {
+                "label": "Communication methods",
+                "href": "/igcse/business/learn/people-in-business/l01-communication-methods"
+              },
+              {
+                "label": "Barriers to communication",
+                "href": "/igcse/business/learn/people-in-business/l02-barriers-to-communication"
+              }
+            ]
+          },
+          {
+            "title": "2.2 Recruitment and selection",
+            "lessons": [
+              {
+                "label": "Employment types and documents",
+                "href": "/igcse/business/learn/people-in-business/l03-employment-types-and-recruitment-documents"
+              },
+              {
+                "label": "Recruitment and selection",
+                "href": "/igcse/business/learn/people-in-business/l04-recruitment-and-selection"
+              },
+              {
+                "label": "Employment law",
+                "href": "/igcse/business/learn/people-in-business/l05-legal-controls-over-employment"
+              }
+            ]
+          },
+          {
+            "title": "2.3 Training",
+            "lessons": [
+              {
+                "label": "Training",
+                "href": "/igcse/business/learn/people-in-business/l06-training"
+              }
+            ]
+          },
+          {
+            "title": "2.4 Motivation and rewards",
+            "lessons": [
+              {
+                "label": "Motivation theories",
+                "href": "/igcse/business/learn/people-in-business/l07-motivation-theories"
+              },
+              {
+                "label": "Methods of motivation",
+                "href": "/igcse/business/learn/people-in-business/l08-financial-and-non-financial-motivation"
+              }
+            ]
+          },
+          {
+            "title": "2.5 Organisation structure and employees",
+            "lessons": [
+              {
+                "label": "Organisation structure",
+                "href": "/igcse/business/learn/people-in-business/l09-organisation-structure"
+              },
+              {
+                "label": "Functional areas",
+                "href": "/igcse/business/learn/people-in-business/l10-functional-areas"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "business-finance",
