@@ -295,3 +295,9 @@ a.ig-card.is-done { background: linear-gradient(180deg, #f3fdf6, var(--lh-surfac
 .ig-section:has(> .ig-sc-tag) { border-left: 5px solid var(--lh-green); }
 .ig-exam { border-width: 2px; }
 .ig-terms { border: 2px solid rgba(201,154,46,0.45); box-shadow: 0 6px 18px rgba(15,23,42,.05); }
+
+/* Activity / model boxes: stronger borders to match the section boxes */
+.ig-activity, .ig-model { border: 2px solid rgba(15,23,42,0.16); border-left: 5px solid #f59e0b; box-shadow: 0 4px 14px rgba(15,23,42,0.05); }
+.ig-sort li, .ig-match li { border: 1.5px solid rgba(15,23,42,0.18); }
+.ig-sort li.ok, .ig-match li.ok { border-color: #16a34a; }
+.ig-sort-btns button { border: 1.5px solid rgba(15,23,42,0.25); }
