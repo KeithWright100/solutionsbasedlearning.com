@@ -280,6 +280,15 @@
     .game-grid { grid-template-columns: 1fr; }
     .hub-kicker::before, .hub-kicker::after { width: 44px; }
   }
+
+  /* Games with a self-marking bot need an SBL account (marking runs through the signed-in API) */
+  .game-card.needs-account { position: relative; }
+  .game-card.needs-account > *:not(.account-lock) { filter: grayscale(1); opacity: 0.45; pointer-events: none; }
+  .account-lock { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(241,245,249,0.55); border-radius: inherit; text-decoration: none; z-index: 2; }
+  .account-lock span { background: #0f172a; color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 999px; font-size: 15px; box-shadow: 0 8px 20px rgba(15,23,42,.25); }
+  .account-lock small { color: #0f172a; font-weight: 600; background: rgba(255,255,255,.9); padding: 3px 10px; border-radius: 999px; }
+  .account-lock:hover span { background: #1e293b; }
 </style>
 </head>
 <body>
@@ -359,7 +368,7 @@
         </a>
       </article>
 
-      <article class="game-card">
+      <article class="game-card" data-account-required>
         <div class="game-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 8.5L11 16M16 8.5L13 16M8.5 7h7"/></svg>
         </div>
@@ -824,5 +833,23 @@
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script>
+(function () {
+  var cards = document.querySelectorAll('.game-card[data-account-required]');
+  if (!cards.length) return;
+  function lock() {
+    cards.forEach(function (c) {
+      if (c.querySelector('.account-lock')) return;
+      var play = c.querySelector('.play-btn'), href = play ? play.getAttribute('href') : location.pathname;
+      c.classList.add('needs-account');
+      c.insertAdjacentHTML('beforeend', '<a class="account-lock" href="/login/?redirect=' + encodeURIComponent(href) + '" aria-label="SBL account required: log in to play"><span>&#128274; SBL account required</span><small>Log in to play</small></a>');
+    });
+  }
+  fetch('/api/session', { credentials: 'same-origin' })
+    .then(function (r) { return r.ok ? r.json() : { loggedIn: false }; })
+    .then(function (d) { if (!d || !d.loggedIn) lock(); })
+    .catch(lock);
+})();
+</script>
 </body>
 </html>
