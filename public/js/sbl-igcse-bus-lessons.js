@@ -7,6 +7,9 @@ window.SBL_LESSONS = window.SBL_LESSONS || {};
 window.SBL_IGCSE_BUS_LESSON_ORDERS = window.SBL_IGCSE_BUS_LESSON_ORDERS || [];
 window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS1101", "IGBS1102", "IGBS1103", "IGBS1104", "IGBS1105", "IGBS1106", "IGBS1107", "IGBS1108", "IGBS1109", "IGBS1110"]);
 window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS2101", "IGBS2102", "IGBS2103", "IGBS2104", "IGBS2105", "IGBS2106", "IGBS2107", "IGBS2108", "IGBS2109", "IGBS2110"]);
+window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS3101", "IGBS3102", "IGBS3103", "IGBS3104", "IGBS3105", "IGBS3106", "IGBS3107", "IGBS3108", "IGBS3109", "IGBS3110", "IGBS3111"]);
+window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS4101", "IGBS4102", "IGBS4103", "IGBS4104", "IGBS4105", "IGBS4106", "IGBS4107", "IGBS4108", "IGBS4109", "IGBS4110", "IGBS4111"]);
+window.SBL_IGCSE_BUS_LESSON_ORDERS.push(["IGBS5101", "IGBS5102", "IGBS5103", "IGBS5104", "IGBS5105", "IGBS5106", "IGBS5107"]);
 window.SBL_LESSONS["IGBS1101"] = {
  "id": "IGBS1101",
  "topicNumber": 1,
@@ -2704,6 +2707,3921 @@ window.SBL_LESSONS["IGBS2110"] = {
    "correct": 0,
    "explain": "Interdependence.",
    "tag": "Functional areas"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3101"] = {
+ "id": "IGBS3101",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "The need for finance and internal sources",
+ "href": "/igcse/business/learn/business-finance/l01-need-for-finance-and-internal-sources",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: The need for finance and internal sources.",
+ "checklist": [
+  "I can explain why businesses need finance to start up, expand and meet short-term and long-term needs",
+  "I can describe internal sources of finance",
+  "I can evaluate the suitability of internal sources of finance"
+ ],
+ "quiz": [
+  {
+   "q": "Retained profit is:",
+   "options": [
+    "Profit kept in the business",
+    "Money borrowed from a bank for a year",
+    "Money paid to shareholders as dividends",
+    "A loan from the owner’s family members"
+   ],
+   "correct": 0,
+   "explain": "It is reinvested.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "Which is an internal source?",
+   "options": [
+    "Selling assets",
+    "A bank loan",
+    "Venture capital",
+    "Crowdfunding"
+   ],
+   "correct": 0,
+   "explain": "It comes from inside the business.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "A long-term need for finance is:",
+   "options": [
+    "Buying a new factory",
+    "Paying this week’s wages to staff",
+    "Paying an electricity bill this month",
+    "Buying stock for the next few days"
+   ],
+   "correct": 0,
+   "explain": "It lasts many years.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "An advantage of personal savings is:",
+   "options": [
+    "No interest to pay",
+    "An unlimited amount is always available",
+    "No risk at all to the owner’s money",
+    "It can be used by public companies only"
+   ],
+   "correct": 0,
+   "explain": "It is the owner’s own money.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "A drawback of retained profit is:",
+   "options": [
+    "A new business may have none",
+    "High interest must be paid each month",
+    "Control passes to new shareholders",
+    "It must be repaid within one year"
+   ],
+   "correct": 0,
+   "explain": "Profit must be made first.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "A drawback of selling assets is:",
+   "options": [
+    "Assets can only be sold once",
+    "It always requires interest payments",
+    "It means giving away shares in the firm",
+    "It is only available to sole traders"
+   ],
+   "correct": 0,
+   "explain": "It is a one-off source.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "Working capital is used for:",
+   "options": [
+    "Day-to-day running costs",
+    "Building new factories overseas",
+    "Buying another business outright",
+    "Paying long-term loans in full"
+   ],
+   "correct": 0,
+   "explain": "Short-term needs.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "Why might a start-up not use retained profit?",
+   "options": [
+    "It has not made any profit yet",
+    "It is illegal for small firms to use it",
+    "Banks do not allow it for start-ups",
+    "It has to pay too much interest on it"
+   ],
+   "correct": 0,
+   "explain": "No trading history.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "Matching means using:",
+   "options": [
+    "Short-term finance for short-term needs",
+    "Long-term loans to pay daily wages",
+    "Overdrafts to buy new factories",
+    "Exactly the same source of finance for every single need"
+   ],
+   "correct": 0,
+   "explain": "Match source to need.",
+   "tag": "Need for finance"
+  },
+  {
+   "q": "Which is a short-term need?",
+   "options": [
+    "Buying extra stock",
+    "Buying a new building",
+    "Buying new machinery",
+    "Buying a rival business"
+   ],
+   "correct": 0,
+   "explain": "Stock is used up quickly.",
+   "tag": "Need for finance"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3102"] = {
+ "id": "IGBS3102",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "External sources of finance",
+ "href": "/igcse/business/learn/business-finance/l02-external-sources-of-finance",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: External sources of finance.",
+ "checklist": [
+  "I can describe the short-term external sources: overdraft and trade payables",
+  "I can describe the long-term external sources: loans, share capital, venture capital and crowdfunding",
+  "I can evaluate the most suitable source of finance for a business"
+ ],
+ "quiz": [
+  {
+   "q": "An overdraft is:",
+   "options": [
+    "Spending more than is in the bank account",
+    "A loan repaid over ten years in full",
+    "Money raised by selling company shares",
+    "Money borrowed from a venture capitalist for ten years"
+   ],
+   "correct": 0,
+   "explain": "Up to an agreed limit.",
+   "tag": "External sources"
+  },
+  {
+   "q": "Trade payables means:",
+   "options": [
+    "Buying now and paying suppliers later",
+    "Selling shares on the stock market",
+    "Borrowing from friends and family",
+    "Selling unwanted machinery and vehicles for cash"
+   ],
+   "correct": 0,
+   "explain": "Trade credit.",
+   "tag": "External sources"
+  },
+  {
+   "q": "A stock market flotation is available to:",
+   "options": [
+    "Public limited companies",
+    "Sole traders and partnerships",
+    "Every type of business",
+    "Social enterprises only"
+   ],
+   "correct": 0,
+   "explain": "Shares sold to the public.",
+   "tag": "External sources"
+  },
+  {
+   "q": "A disadvantage of a bank loan is:",
+   "options": [
+    "Interest must be paid",
+    "Owners lose control of the firm",
+    "It never has to be repaid at all",
+    "It can only be used by plcs"
+   ],
+   "correct": 0,
+   "explain": "Borrowing has a cost.",
+   "tag": "External sources"
+  },
+  {
+   "q": "An advantage of share capital is:",
+   "options": [
+    "It never has to be repaid",
+    "The owners keep total control",
+    "There are no dividends to pay ever",
+    "It is available to sole traders"
+   ],
+   "correct": 0,
+   "explain": "Shareholders own part of the firm.",
+   "tag": "External sources"
+  },
+  {
+   "q": "Venture capitalists usually provide:",
+   "options": [
+    "Finance and advice for a share",
+    "Free grants with no conditions",
+    "Short-term overdrafts to shops",
+    "Trade credit for raw materials"
+   ],
+   "correct": 0,
+   "explain": "They invest in growing firms.",
+   "tag": "External sources"
+  },
+  {
+   "q": "Crowdfunding raises money from:",
+   "options": [
+    "Many people, usually online",
+    "A single bank manager",
+    "The government’s tax revenue",
+    "The business’s own profits"
+   ],
+   "correct": 0,
+   "explain": "Lots of small contributions.",
+   "tag": "External sources"
+  },
+  {
+   "q": "Which suits a short-term cash shortage?",
+   "options": [
+    "An overdraft",
+    "Share capital",
+    "Venture capital",
+    "A stock market flotation"
+   ],
+   "correct": 0,
+   "explain": "Flexible short-term borrowing.",
+   "tag": "External sources"
+  },
+  {
+   "q": "Collateral (security) for a loan is:",
+   "options": [
+    "An asset the bank can take",
+    "The interest rate on the loan",
+    "A share in the business",
+    "A type of trade credit"
+   ],
+   "correct": 0,
+   "explain": "If repayments are missed.",
+   "tag": "External sources"
+  },
+  {
+   "q": "A risk of crowdfunding is that:",
+   "options": [
+    "The target may not be reached",
+    "The bank can demand repayment",
+    "It must be repaid with interest",
+    "Only plcs are allowed to use it"
+   ],
+   "correct": 0,
+   "explain": "Not enough people may invest.",
+   "tag": "External sources"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3103"] = {
+ "id": "IGBS3103",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "The importance of cash",
+ "href": "/igcse/business/learn/business-finance/l03-importance-of-cash",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: The importance of cash.",
+ "checklist": [
+  "I can explain why a business needs cash to pay suppliers, overheads and employees",
+  "I can explain how a lack of cash can lead to insolvency",
+  "I can explain the difference between cash and profit"
+ ],
+ "quiz": [
+  {
+   "q": "Insolvency means:",
+   "options": [
+    "Being unable to pay debts when due",
+    "Making a loss in one month of trading",
+    "Having too much cash in the bank",
+    "Selling shares on the stock market"
+   ],
+   "correct": 0,
+   "explain": "Debts cannot be paid.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Cash is:",
+   "options": [
+    "Money available to spend now",
+    "Revenue minus total costs over a year",
+    "The value of buildings the firm owns",
+    "The total value of all sales made"
+   ],
+   "correct": 0,
+   "explain": "Money in hand or in the bank.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Profit is:",
+   "options": [
+    "Revenue minus total costs",
+    "The money in the bank right now",
+    "The amount owed by customers",
+    "The amount borrowed from banks"
+   ],
+   "correct": 0,
+   "explain": "Measured over a period.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Which can cause cash-flow problems?",
+   "options": [
+    "Customers paying late",
+    "Customers paying in cash immediately",
+    "Suppliers giving longer credit",
+    "Selling unused assets for cash"
+   ],
+   "correct": 0,
+   "explain": "Money arrives later.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Why can a profitable firm be short of cash?",
+   "options": [
+    "Sales are on credit",
+    "Its prices are too low to cover costs",
+    "It has no customers at all",
+    "Its costs are always zero"
+   ],
+   "correct": 0,
+   "explain": "Cash arrives later than profit is earned.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Overheads include:",
+   "options": [
+    "Rent and insurance",
+    "Raw materials for each item",
+    "Commission on each sale",
+    "Packaging for each product"
+   ],
+   "correct": 0,
+   "explain": "Fixed running costs.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Taking out a bank loan affects:",
+   "options": [
+    "Cash, not profit",
+    "Profit, not cash",
+    "Neither cash nor profit",
+    "Only the firm’s market share"
+   ],
+   "correct": 0,
+   "explain": "It is not revenue.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Expanding too quickly without enough cash is called:",
+   "options": [
+    "Overtrading",
+    "Insolvency",
+    "Retained profit",
+    "Crowdfunding"
+   ],
+   "correct": 0,
+   "explain": "Growth strains cash.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "What may suppliers do if they are not paid?",
+   "options": [
+    "Stop supplying",
+    "Lower their prices immediately",
+    "Give the firm a bonus",
+    "Offer longer credit terms"
+   ],
+   "correct": 0,
+   "explain": "They protect themselves.",
+   "tag": "Importance of cash"
+  },
+  {
+   "q": "Cash is often called a firm’s:",
+   "options": [
+    "Lifeblood",
+    "Capital employed",
+    "Gross profit",
+    "Market share"
+   ],
+   "correct": 0,
+   "explain": "It keeps the business alive.",
+   "tag": "Importance of cash"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3104"] = {
+ "id": "IGBS3104",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "Cash-flow forecasts",
+ "href": "/igcse/business/learn/business-finance/l04-cash-flow-forecasts",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: Cash-flow forecasts.",
+ "checklist": [
+  "I can identify cash inflows and outflows",
+  "I can calculate net cash flow and opening and closing balances",
+  "I can interpret a cash-flow forecast and suggest how to improve cash flow"
+ ],
+ "quiz": [
+  {
+   "q": "Net cash flow =",
+   "options": [
+    "Inflows − outflows",
+    "Outflows − inflows",
+    "Opening balance + inflows",
+    "Revenue − cost of sales"
+   ],
+   "correct": 0,
+   "explain": "Money in minus money out.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "Closing balance =",
+   "options": [
+    "Opening balance + net cash flow",
+    "Inflows + outflows",
+    "Net cash flow − opening balance",
+    "Revenue − total costs"
+   ],
+   "correct": 0,
+   "explain": "Carry forward.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "Which is a cash inflow?",
+   "options": [
+    "Cash sales",
+    "Paying wages to staff",
+    "Paying rent for premises",
+    "Buying new equipment"
+   ],
+   "correct": 0,
+   "explain": "Money coming in.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "The closing balance of March becomes:",
+   "options": [
+    "April’s opening balance",
+    "March’s net cash flow",
+    "April’s total outflows",
+    "The total profit of the business for the whole year"
+   ],
+   "correct": 0,
+   "explain": "It carries forward.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "Inflows $5,000, outflows $7,000. Net cash flow?",
+   "options": [
+    "($2,000)",
+    "$2,000",
+    "$12,000",
+    "($12,000)"
+   ],
+   "correct": 0,
+   "explain": "5,000 − 7,000.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "Opening $1,000, net cash flow ($1,500). Closing balance?",
+   "options": [
+    "($500)",
+    "$2,500",
+    "$500",
+    "($2,500)"
+   ],
+   "correct": 0,
+   "explain": "1,000 − 1,500.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "A negative closing balance means the firm may need:",
+   "options": [
+    "An overdraft",
+    "More stock",
+    "A price cut",
+    "To raise the wages of all of its employees"
+   ],
+   "correct": 0,
+   "explain": "To cover the shortfall.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "Which improves cash flow?",
+   "options": [
+    "Customers paying sooner",
+    "Buying much more stock than needed",
+    "Giving customers longer credit",
+    "Paying suppliers earlier than due"
+   ],
+   "correct": 0,
+   "explain": "Cash arrives earlier.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "A limitation of a cash-flow forecast is that:",
+   "options": [
+    "It is only a prediction",
+    "It shows last year’s actual profit",
+    "It cannot be shown to a bank",
+    "It never includes any outflows"
+   ],
+   "correct": 0,
+   "explain": "The future is uncertain.",
+   "tag": "Cash-flow forecasts"
+  },
+  {
+   "q": "A loan repayment is a:",
+   "options": [
+    "Cash outflow",
+    "Cash inflow",
+    "Fixed asset",
+    "Revenue item"
+   ],
+   "correct": 0,
+   "explain": "Money paid out.",
+   "tag": "Cash-flow forecasts"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3105"] = {
+ "id": "IGBS3105",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "Costs, revenue and profit",
+ "href": "/igcse/business/learn/business-finance/l05-costs-revenue-and-profit",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: Costs, revenue and profit.",
+ "checklist": [
+  "I can calculate revenue",
+  "I can distinguish between fixed and variable costs and calculate total costs",
+  "I can calculate profit or loss"
+ ],
+ "quiz": [
+  {
+   "q": "Revenue =",
+   "options": [
+    "Price × quantity sold",
+    "Fixed costs + variable costs",
+    "Revenue − total costs",
+    "Variable cost × fixed cost"
+   ],
+   "correct": 0,
+   "explain": "Value of sales.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "Which is a fixed cost?",
+   "options": [
+    "Rent",
+    "Raw materials",
+    "Packaging",
+    "Piece-rate wages"
+   ],
+   "correct": 0,
+   "explain": "It does not change with output.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "Which is a variable cost?",
+   "options": [
+    "Raw materials",
+    "Insurance",
+    "Manager’s salary",
+    "Rent of the office"
+   ],
+   "correct": 0,
+   "explain": "It rises with output.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "Total costs =",
+   "options": [
+    "Fixed costs + total variable costs",
+    "Revenue − profit for the year",
+    "Price × quantity sold",
+    "Fixed costs minus the total of all variable costs"
+   ],
+   "correct": 0,
+   "explain": "All costs added.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "100 units at $5 each gives revenue of:",
+   "options": [
+    "$500",
+    "$105",
+    "$50",
+    "$5,000"
+   ],
+   "correct": 0,
+   "explain": "5 × 100.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "FC $1,000; VC $2/unit; 300 units. Total costs?",
+   "options": [
+    "$1,600",
+    "$1,300",
+    "$600",
+    "$2,000"
+   ],
+   "correct": 0,
+   "explain": "1,000 + 600.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "Revenue $8,000, total costs $9,500. Result?",
+   "options": [
+    "Loss of $1,500",
+    "Profit of $1,500",
+    "Profit of $17,500",
+    "Loss of $17,500"
+   ],
+   "correct": 0,
+   "explain": "8,000 − 9,500.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "If output is zero, total costs equal:",
+   "options": [
+    "Fixed costs",
+    "Variable costs",
+    "Zero",
+    "Revenue"
+   ],
+   "correct": 0,
+   "explain": "Fixed costs are still paid.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "If output doubles, variable costs:",
+   "options": [
+    "Double",
+    "Stay the same",
+    "Halve",
+    "Fall to zero"
+   ],
+   "correct": 0,
+   "explain": "They change directly with output.",
+   "tag": "Costs, revenue and profit"
+  },
+  {
+   "q": "Profit =",
+   "options": [
+    "Revenue − total costs",
+    "Revenue + total costs",
+    "Total costs − revenue",
+    "Price − quantity"
+   ],
+   "correct": 0,
+   "explain": "What is left.",
+   "tag": "Costs, revenue and profit"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3106"] = {
+ "id": "IGBS3106",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "Break-even: the concept and calculation",
+ "href": "/igcse/business/learn/business-finance/l06-break-even-calculation",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: Break-even: the concept and calculation.",
+ "checklist": [
+  "I can explain the concept of break-even",
+  "I can calculate contribution per unit",
+  "I can calculate the break-even level of output using the formula"
+ ],
+ "quiz": [
+  {
+   "q": "At break-even:",
+   "options": [
+    "Total revenue = total costs",
+    "Fixed costs = variable costs",
+    "Profit is at its highest level",
+    "Revenue is exactly zero"
+   ],
+   "correct": 0,
+   "explain": "No profit, no loss.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "Contribution per unit =",
+   "options": [
+    "Price − variable cost per unit",
+    "Price − fixed costs in total",
+    "Fixed costs ÷ total revenue",
+    "Total revenue minus total costs for the whole year"
+   ],
+   "correct": 0,
+   "explain": "What each unit adds.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "Break-even output =",
+   "options": [
+    "Fixed costs ÷ contribution per unit",
+    "Contribution ÷ fixed costs",
+    "Fixed costs × contribution",
+    "Revenue divided by the total variable costs of production"
+   ],
+   "correct": 0,
+   "explain": "Units needed to cover fixed costs.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "FC $6,000, price $10, VC $4. Break-even?",
+   "options": [
+    "1,000 units",
+    "600 units",
+    "1,500 units",
+    "2,400 units"
+   ],
+   "correct": 0,
+   "explain": "6,000 ÷ 6.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "Price $8, VC $5. Contribution per unit?",
+   "options": [
+    "$3",
+    "$13",
+    "$40",
+    "$1.60"
+   ],
+   "correct": 0,
+   "explain": "8 − 5.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "Selling more than the break-even output gives:",
+   "options": [
+    "A profit",
+    "A loss",
+    "Zero revenue",
+    "Higher fixed costs"
+   ],
+   "correct": 0,
+   "explain": "Above break-even.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "Break-even = 333.3 units. What is the answer?",
+   "options": [
+    "334 units",
+    "333 units",
+    "330 units",
+    "300 units"
+   ],
+   "correct": 0,
+   "explain": "Round up.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "If fixed costs rise, the break-even output:",
+   "options": [
+    "Rises",
+    "Falls",
+    "Stays the same",
+    "Becomes zero"
+   ],
+   "correct": 0,
+   "explain": "More to cover.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "If the selling price rises, break-even output:",
+   "options": [
+    "Falls",
+    "Rises",
+    "Stays the same",
+    "Doubles"
+   ],
+   "correct": 0,
+   "explain": "Bigger contribution per unit.",
+   "tag": "Calculating break-even"
+  },
+  {
+   "q": "FC $2,000, contribution $5. Units for $1,000 profit?",
+   "options": [
+    "600",
+    "400",
+    "200",
+    "1,000"
+   ],
+   "correct": 0,
+   "explain": "(2,000 + 1,000) ÷ 5.",
+   "tag": "Calculating break-even"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3107"] = {
+ "id": "IGBS3107",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "Interpreting break-even charts",
+ "href": "/igcse/business/learn/business-finance/l07-break-even-charts",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: Interpreting break-even charts.",
+ "checklist": [
+  "I can read the break-even point, profit, loss and margin of safety from a break-even chart",
+  "I can analyse the impact of changes in revenue and costs on break-even",
+  "I can evaluate the limitations of break-even charts"
+ ],
+ "quiz": [
+  {
+   "q": "On a break-even chart, the fixed cost line is:",
+   "options": [
+    "Horizontal",
+    "Vertical",
+    "Steepest of all",
+    "Starting at zero and rising"
+   ],
+   "correct": 0,
+   "explain": "It does not change with output.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "The total revenue line starts at:",
+   "options": [
+    "Zero",
+    "The fixed cost level",
+    "The break-even point",
+    "The top of the y-axis"
+   ],
+   "correct": 0,
+   "explain": "No sales, no revenue.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "The total cost line starts at:",
+   "options": [
+    "The fixed cost level",
+    "Zero on both axes",
+    "The break-even point",
+    "The highest output level"
+   ],
+   "correct": 0,
+   "explain": "Fixed costs are paid at zero output.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "Margin of safety =",
+   "options": [
+    "Actual output − break-even output",
+    "Break-even output − fixed costs",
+    "Revenue − total costs",
+    "Selling price per unit minus variable cost per unit"
+   ],
+   "correct": 0,
+   "explain": "How far sales can fall.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "Sales 1,000 units, break-even 750. Margin of safety?",
+   "options": [
+    "250 units",
+    "1,750 units",
+    "750 units",
+    "1,000 units"
+   ],
+   "correct": 0,
+   "explain": "1,000 − 750.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "A rise in the selling price makes the revenue line:",
+   "options": [
+    "Steeper",
+    "Flatter",
+    "Horizontal",
+    "Disappear"
+   ],
+   "correct": 0,
+   "explain": "More revenue per unit.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "A rise in fixed costs causes break-even to:",
+   "options": [
+    "Rise",
+    "Fall",
+    "Stay the same",
+    "Become negative"
+   ],
+   "correct": 0,
+   "explain": "More to cover.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "To the left of break-even the business makes:",
+   "options": [
+    "A loss",
+    "A profit",
+    "No sales",
+    "Maximum profit"
+   ],
+   "correct": 0,
+   "explain": "Costs exceed revenue.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "A limitation of break-even is that it assumes:",
+   "options": [
+    "All output is sold",
+    "Prices always change",
+    "Costs are unknown",
+    "There are no fixed costs"
+   ],
+   "correct": 0,
+   "explain": "Unsold stock is ignored.",
+   "tag": "Break-even charts"
+  },
+  {
+   "q": "A fall in variable cost per unit makes break-even:",
+   "options": [
+    "Fall",
+    "Rise",
+    "Stay the same",
+    "Double"
+   ],
+   "correct": 0,
+   "explain": "Contribution increases.",
+   "tag": "Break-even charts"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3108"] = {
+ "id": "IGBS3108",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "The statement of comprehensive income",
+ "href": "/igcse/business/learn/business-finance/l08-statement-of-comprehensive-income",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: The statement of comprehensive income.",
+ "checklist": [
+  "I can identify the main features of a statement of comprehensive income",
+  "I can calculate gross profit and operating profit",
+  "I can explain how the statement and profit are used in decision making"
+ ],
+ "quiz": [
+  {
+   "q": "A statement of comprehensive income shows:",
+   "options": [
+    "Revenue, costs and profit over a period",
+    "Assets and liabilities on one date",
+    "Cash in and out over future months",
+    "The number of shares sold on the stock market each year"
+   ],
+   "correct": 0,
+   "explain": "Performance over time.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Gross profit =",
+   "options": [
+    "Revenue − cost of sales",
+    "Revenue − all expenses and tax",
+    "Operating profit − expenses",
+    "Cost of sales − revenue"
+   ],
+   "correct": 0,
+   "explain": "Before expenses.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Operating profit =",
+   "options": [
+    "Gross profit − other operating expenses",
+    "Revenue + cost of sales",
+    "Gross profit + expenses",
+    "Revenue minus gross profit and minus all taxes paid"
+   ],
+   "correct": 0,
+   "explain": "After running costs.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Which is a cost of sales for a clothes shop?",
+   "options": [
+    "Clothes bought for resale",
+    "Rent of the shop",
+    "The manager’s salary",
+    "The electricity bill for lighting and heating the shop"
+   ],
+   "correct": 0,
+   "explain": "Directly linked to goods sold.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Which is an expense (overhead)?",
+   "options": [
+    "Rent",
+    "Stock bought for resale",
+    "Raw materials used",
+    "Ingredients in each meal"
+   ],
+   "correct": 0,
+   "explain": "Not linked to each item.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Revenue $100,000; cost of sales $60,000. Gross profit?",
+   "options": [
+    "$40,000",
+    "$160,000",
+    "$60,000",
+    "$100,000"
+   ],
+   "correct": 0,
+   "explain": "100 − 60.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Gross profit $50,000; expenses $35,000. Operating profit?",
+   "options": [
+    "$15,000",
+    "$85,000",
+    "$35,000",
+    "$50,000"
+   ],
+   "correct": 0,
+   "explain": "50 − 35.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "If expenses rise and gross profit is unchanged, operating profit:",
+   "options": [
+    "Falls",
+    "Rises",
+    "Stays the same",
+    "Doubles"
+   ],
+   "correct": 0,
+   "explain": "More is deducted.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Profit retained in the business can be used to:",
+   "options": [
+    "Finance growth",
+    "Pay off all customers",
+    "Reduce share capital",
+    "Avoid all taxes"
+   ],
+   "correct": 0,
+   "explain": "Internal finance.",
+   "tag": "Income statement"
+  },
+  {
+   "q": "Who uses the income statement to decide whether to lend?",
+   "options": [
+    "Banks",
+    "Competitors only",
+    "Customers only",
+    "Suppliers of electricity"
+   ],
+   "correct": 0,
+   "explain": "Lenders check profitability.",
+   "tag": "Income statement"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3109"] = {
+ "id": "IGBS3109",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "The statement of financial position",
+ "href": "/igcse/business/learn/business-finance/l09-statement-of-financial-position",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: The statement of financial position.",
+ "checklist": [
+  "I can identify current and non-current assets and liabilities",
+  "I can explain capital employed",
+  "I can interpret a statement of financial position"
+ ],
+ "quiz": [
+  {
+   "q": "A statement of financial position shows:",
+   "options": [
+    "Assets and liabilities on a date",
+    "Revenue and costs over a year",
+    "Cash flows over future months",
+    "Revenue, costs and profit made over the whole of a year"
+   ],
+   "correct": 0,
+   "explain": "A snapshot.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Which is a non-current asset?",
+   "options": [
+    "Machinery",
+    "Inventory",
+    "Cash",
+    "Trade receivables"
+   ],
+   "correct": 0,
+   "explain": "Used for many years.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Which is a current asset?",
+   "options": [
+    "Inventory",
+    "Buildings",
+    "A long-term loan",
+    "A mortgage"
+   ],
+   "correct": 0,
+   "explain": "Turned into cash soon.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Trade payables are a:",
+   "options": [
+    "Current liability",
+    "Current asset",
+    "Non-current asset",
+    "Non-current liability"
+   ],
+   "correct": 0,
+   "explain": "Owed to suppliers soon.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "A 5-year bank loan is a:",
+   "options": [
+    "Non-current liability",
+    "Current asset",
+    "Current liability",
+    "Non-current asset owned by the business"
+   ],
+   "correct": 0,
+   "explain": "Due after one year.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Trade receivables are:",
+   "options": [
+    "Money owed by customers",
+    "Money owed to suppliers",
+    "Money owed to the bank",
+    "Money paid to staff"
+   ],
+   "correct": 0,
+   "explain": "A current asset.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Capital employed =",
+   "options": [
+    "Total equity + non-current liabilities",
+    "Current assets − current liabilities",
+    "Revenue − cost of sales",
+    "Non-current assets minus cash held at the bank at year end"
+   ],
+   "correct": 0,
+   "explain": "Long-term finance.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Equity $90,000, non-current liabilities $30,000. Capital employed?",
+   "options": [
+    "$120,000",
+    "$60,000",
+    "$90,000",
+    "It cannot be calculated from these figures"
+   ],
+   "correct": 0,
+   "explain": "90 + 30.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "Net current assets is also called:",
+   "options": [
+    "Working capital",
+    "Capital employed",
+    "Gross profit",
+    "Share capital"
+   ],
+   "correct": 0,
+   "explain": "Current assets − current liabilities.",
+   "tag": "Financial position"
+  },
+  {
+   "q": "An overdraft is a:",
+   "options": [
+    "Current liability",
+    "Non-current asset",
+    "Current asset",
+    "Non-current liability"
+   ],
+   "correct": 0,
+   "explain": "Repayable on demand.",
+   "tag": "Financial position"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3110"] = {
+ "id": "IGBS3110",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "Calculating and analysing accounting ratios",
+ "href": "/igcse/business/learn/business-finance/l10-accounting-ratios",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: Calculating and analysing accounting ratios.",
+ "checklist": [
+  "I can calculate gross profit margin, operating profit margin and markup",
+  "I can calculate return on capital employed (ROCE)",
+  "I can calculate the current ratio and acid test ratio"
+ ],
+ "quiz": [
+  {
+   "q": "Gross profit margin =",
+   "options": [
+    "(Gross profit ÷ revenue) × 100",
+    "(Revenue ÷ gross profit) × 100",
+    "(Gross profit ÷ cost of sales) × 100",
+    "(Operating profit ÷ capital) × 100"
+   ],
+   "correct": 0,
+   "explain": "As a % of revenue.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "Revenue $50,000; gross profit $20,000. GPM?",
+   "options": [
+    "40%",
+    "25%",
+    "60%",
+    "250%"
+   ],
+   "correct": 0,
+   "explain": "20 ÷ 50 × 100.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "Operating profit $6,000; revenue $40,000. OPM?",
+   "options": [
+    "15%",
+    "6.7%",
+    "24%",
+    "150%"
+   ],
+   "correct": 0,
+   "explain": "6 ÷ 40 × 100.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "Cost per item $4, selling price $6. Markup?",
+   "options": [
+    "50%",
+    "33%",
+    "150%",
+    "200%"
+   ],
+   "correct": 0,
+   "explain": "Profit $2 ÷ cost $4.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "ROCE =",
+   "options": [
+    "(Operating profit ÷ capital employed) × 100",
+    "(Revenue ÷ capital employed) × 100",
+    "(Gross profit ÷ revenue) × 100",
+    "Current assets divided by current liabilities, multiplied by 100"
+   ],
+   "correct": 0,
+   "explain": "Return on long-term finance.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "Operating profit $12,000; capital employed $80,000. ROCE?",
+   "options": [
+    "15%",
+    "6.7%",
+    "12%",
+    "80%"
+   ],
+   "correct": 0,
+   "explain": "12 ÷ 80 × 100.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "Current ratio =",
+   "options": [
+    "Current assets ÷ current liabilities",
+    "Current liabilities ÷ current assets",
+    "(Current assets − inventory) ÷ revenue",
+    "Operating profit ÷ capital employed"
+   ],
+   "correct": 0,
+   "explain": "A liquidity ratio.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "Current assets $30,000; current liabilities $20,000. Current ratio?",
+   "options": [
+    "1.5",
+    "0.67",
+    "10",
+    "50"
+   ],
+   "correct": 0,
+   "explain": "30 ÷ 20.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "The acid test ratio excludes:",
+   "options": [
+    "Inventory",
+    "Cash",
+    "Trade receivables",
+    "Current liabilities"
+   ],
+   "correct": 0,
+   "explain": "Stock may be slow to sell.",
+   "tag": "Accounting ratios"
+  },
+  {
+   "q": "CA $45,000 (inventory $15,000); CL $30,000. Acid test?",
+   "options": [
+    "1.0",
+    "1.5",
+    "0.5",
+    "2.0"
+   ],
+   "correct": 0,
+   "explain": "(45 − 15) ÷ 30.",
+   "tag": "Accounting ratios"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS3111"] = {
+ "id": "IGBS3111",
+ "topicNumber": 3,
+ "topicTitle": "3 Business finance (IGCSE Business)",
+ "title": "Liquidity and using financial documents",
+ "href": "/igcse/business/learn/business-finance/l11-liquidity-and-using-financial-documents",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 3 Business finance: Liquidity and using financial documents.",
+ "checklist": [
+  "I can explain the concept and importance of liquidity",
+  "I can interpret ratios by comparing with previous years and other businesses",
+  "I can use financial documents to assess performance and recommend decisions"
+ ],
+ "quiz": [
+  {
+   "q": "Liquidity is:",
+   "options": [
+    "The ability to pay short-term debts",
+    "The level of profit made each year",
+    "The value of all buildings owned",
+    "The number of shares issued to the public on the stock market"
+   ],
+   "correct": 0,
+   "explain": "Short-term solvency.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "Which is the most liquid asset?",
+   "options": [
+    "Cash",
+    "Inventory",
+    "Machinery",
+    "Buildings"
+   ],
+   "correct": 0,
+   "explain": "It is already cash.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "A current ratio below 1 suggests:",
+   "options": [
+    "Possible difficulty paying short-term debts",
+    "The business is extremely profitable",
+    "Too much cash is held as idle money",
+    "Long-term loans have all been repaid in full this year"
+   ],
+   "correct": 0,
+   "explain": "Liabilities exceed assets.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "An acid test of about 1 is often seen as:",
+   "options": [
+    "Healthy",
+    "Dangerously low",
+    "Too high to be useful",
+    "Impossible to achieve"
+   ],
+   "correct": 0,
+   "explain": "Liquid assets cover debts.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "A very high current ratio may mean:",
+   "options": [
+    "Too much money tied up in stock",
+    "The firm cannot pay its debts",
+    "Profits are falling sharply",
+    "Revenue has dropped to zero for the year as a whole"
+   ],
+   "correct": 0,
+   "explain": "Assets not being used well.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "Ratios are most useful when:",
+   "options": [
+    "Compared with previous years or rivals",
+    "Looked at once on their own",
+    "Calculated only for one month",
+    "Hidden from managers so that they cannot be compared"
+   ],
+   "correct": 0,
+   "explain": "Comparison gives meaning.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "To improve liquidity a business could:",
+   "options": [
+    "Chase customers who owe money",
+    "Buy much more inventory",
+    "Give customers longer credit",
+    "Pay suppliers earlier than needed"
+   ],
+   "correct": 0,
+   "explain": "Brings in cash.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "A limitation of financial documents is that they:",
+   "options": [
+    "Show the past, not the future",
+    "Show customer satisfaction levels",
+    "Always predict future profits",
+    "Include staff morale scores"
+   ],
+   "correct": 0,
+   "explain": "Historic data.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "Falling gross margin with steady sales may mean:",
+   "options": [
+    "Cost of sales has risen",
+    "Rent has fallen",
+    "Expenses fell sharply",
+    "Expenses fell sharply across the business"
+   ],
+   "correct": 0,
+   "explain": "Direct costs up or prices down.",
+   "tag": "Liquidity and analysis"
+  },
+  {
+   "q": "Why might a supermarket have a low acid test without problems?",
+   "options": [
+    "It sells stock quickly for cash",
+    "It never holds any inventory",
+    "It has no current liabilities",
+    "It is not allowed to calculate the acid test ratio at all"
+   ],
+   "correct": 0,
+   "explain": "Fast stock turnover.",
+   "tag": "Liquidity and analysis"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4101"] = {
+ "id": "IGBS4101",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "The purpose of market research",
+ "href": "/igcse/business/learn/marketing/l01-purpose-of-market-research",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: The purpose of market research.",
+ "checklist": [
+  "I can define market research",
+  "I can explain the four purposes of market research",
+  "I can analyse how market research helps a business make decisions"
+ ],
+ "quiz": [
+  {
+   "q": "Market research is:",
+   "options": [
+    "Collecting information about the market",
+    "Selling products in a market stall",
+    "Advertising products on television",
+    "Setting the price of a new product for shops"
+   ],
+   "correct": 0,
+   "explain": "Gathering and analysing data.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "A gap in the market is:",
+   "options": [
+    "A need not being met",
+    "A fall in a firm’s sales over time",
+    "A gap between price and cost",
+    "A shop that has closed down"
+   ],
+   "correct": 0,
+   "explain": "An opportunity.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Market research reduces:",
+   "options": [
+    "Risk",
+    "Revenue",
+    "Market share",
+    "Customer needs"
+   ],
+   "correct": 0,
+   "explain": "Decisions are based on evidence.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Finding out what price customers will pay helps a firm:",
+   "options": [
+    "Set its price",
+    "Pay its staff",
+    "Choose its legal structure",
+    "Calculate its tax"
+   ],
+   "correct": 0,
+   "explain": "It informs decisions.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "A drawback of market research is that it:",
+   "options": [
+    "Costs time and money",
+    "Always gives perfect answers",
+    "Makes decisions riskier",
+    "Is illegal for small firms"
+   ],
+   "correct": 0,
+   "explain": "It is not free.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Test marketing a product in one city helps to:",
+   "options": [
+    "Reduce risk before a full launch",
+    "Avoid all competition everywhere",
+    "Increase the price of the product",
+    "Remove the need for promotion"
+   ],
+   "correct": 0,
+   "explain": "Try before full investment.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Which is a purpose of market research?",
+   "options": [
+    "Understanding customer needs",
+    "Paying suppliers on time",
+    "Recruiting new staff",
+    "Calculating the break-even output of a product"
+   ],
+   "correct": 0,
+   "explain": "Know your customers.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Information about competitors helps a firm to:",
+   "options": [
+    "Make better decisions",
+    "Avoid all legal controls",
+    "Raise all of its costs",
+    "Stop selling products"
+   ],
+   "correct": 0,
+   "explain": "Know the market.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Out-of-date research may lead to:",
+   "options": [
+    "Wrong decisions",
+    "Lower risk",
+    "Better products",
+    "Higher accuracy"
+   ],
+   "correct": 0,
+   "explain": "Markets change.",
+   "tag": "Purpose of market research"
+  },
+  {
+   "q": "Discovering no local shop sells a product identifies:",
+   "options": [
+    "A gap in the market",
+    "A niche competitor",
+    "A fall in demand",
+    "A new pricing strategy for local shops"
+   ],
+   "correct": 0,
+   "explain": "An unmet need.",
+   "tag": "Purpose of market research"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4102"] = {
+ "id": "IGBS4102",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Methods of market research",
+ "href": "/igcse/business/learn/marketing/l02-methods-of-market-research",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Methods of market research.",
+ "checklist": [
+  "I can describe the methods of primary research",
+  "I can describe the methods of secondary research",
+  "I can evaluate the advantages and disadvantages of primary and secondary research"
+ ],
+ "quiz": [
+  {
+   "q": "Primary research is:",
+   "options": [
+    "New information collected first-hand",
+    "Information that already exists",
+    "Information from government reports",
+    "Information found in a library or on websites"
+   ],
+   "correct": 0,
+   "explain": "Field research.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "Which is secondary research?",
+   "options": [
+    "A market report",
+    "A questionnaire",
+    "A focus group",
+    "Test marketing"
+   ],
+   "correct": 0,
+   "explain": "It already exists.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "An advantage of primary research is that it is:",
+   "options": [
+    "Specific to the business",
+    "Always cheap and quick",
+    "Always available to rivals",
+    "Collected by the government"
+   ],
+   "correct": 0,
+   "explain": "Designed for its purpose.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "A disadvantage of secondary research is that it may be:",
+   "options": [
+    "Out of date",
+    "Too specific to the firm",
+    "Owned only by the firm",
+    "Very expensive to collect"
+   ],
+   "correct": 0,
+   "explain": "Collected earlier.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "A focus group gives:",
+   "options": [
+    "Detailed opinions",
+    "Huge numbers of responses",
+    "Government statistics",
+    "Exact sales figures"
+   ],
+   "correct": 0,
+   "explain": "In-depth discussion.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "Counting customers entering a shop is:",
+   "options": [
+    "Observation",
+    "A questionnaire",
+    "Desk research",
+    "A market report"
+   ],
+   "correct": 0,
+   "explain": "Watching behaviour.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "Selling a product in one region before a national launch is:",
+   "options": [
+    "Test marketing",
+    "Secondary research",
+    "A census",
+    "A focus group"
+   ],
+   "correct": 0,
+   "explain": "Real-world trial.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "A population census is an example of:",
+   "options": [
+    "A government report",
+    "Primary research",
+    "Test marketing",
+    "Observation of customers in the street"
+   ],
+   "correct": 0,
+   "explain": "Secondary data.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "A drawback of primary research is that it is:",
+   "options": [
+    "Expensive",
+    "Out of date",
+    "Not specific",
+    "Available to all rivals"
+   ],
+   "correct": 0,
+   "explain": "Costs time and money.",
+   "tag": "Research methods"
+  },
+  {
+   "q": "Why might a firm start with secondary research?",
+   "options": [
+    "It is cheaper and quicker",
+    "It is always more accurate",
+    "Competitors cannot see it",
+    "It answers every question"
+   ],
+   "correct": 0,
+   "explain": "Low cost overview.",
+   "tag": "Research methods"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4103"] = {
+ "id": "IGBS4103",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Using data in market research",
+ "href": "/igcse/business/learn/marketing/l03-using-market-research-data",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Using data in market research.",
+ "checklist": [
+  "I can distinguish between qualitative and quantitative data",
+  "I can explain the role of social media in collecting market research data",
+  "I can explain why reliable data matters and what makes data unreliable"
+ ],
+ "quiz": [
+  {
+   "q": "Quantitative data is:",
+   "options": [
+    "Numerical",
+    "About opinions and feelings",
+    "Always out of date",
+    "Collected only by government"
+   ],
+   "correct": 0,
+   "explain": "It can be counted.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "Qualitative data is about:",
+   "options": [
+    "Opinions and reasons",
+    "Numbers and percentages",
+    "Sales figures only",
+    "Stock levels"
+   ],
+   "correct": 0,
+   "explain": "Words, not numbers.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "“70% of customers rate us 5 stars” is:",
+   "options": [
+    "Quantitative",
+    "Qualitative",
+    "Secondary only",
+    "Unreliable by definition"
+   ],
+   "correct": 0,
+   "explain": "A number.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "A strength of qualitative data is that it:",
+   "options": [
+    "Explains why people think as they do",
+    "Is very easy to show in charts",
+    "Always comes from large samples",
+    "Is always the cheapest kind of data to collect"
+   ],
+   "correct": 0,
+   "explain": "It gives reasons.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "A benefit of social media research is that it is:",
+   "options": [
+    "Fast and cheap",
+    "Always fully representative",
+    "Free from fake reviews",
+    "Only seen by competitors"
+   ],
+   "correct": 0,
+   "explain": "Quick reach.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "A leading question causes:",
+   "options": [
+    "Bias",
+    "Reliability",
+    "Accuracy",
+    "Representation"
+   ],
+   "correct": 0,
+   "explain": "It pushes an answer.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "Asking only your friends gives a sample that is:",
+   "options": [
+    "Unrepresentative",
+    "Highly reliable",
+    "Very large",
+    "Quantitative only"
+   ],
+   "correct": 0,
+   "explain": "Not typical customers.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "Reliable data is:",
+   "options": [
+    "Accurate and representative",
+    "Always qualitative",
+    "Always secondary",
+    "Collected only from friends and family members"
+   ],
+   "correct": 0,
+   "explain": "Trustworthy.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "Social media analytics can show:",
+   "options": [
+    "Who engages with posts",
+    "A firm’s exact profit",
+    "Government tax rates",
+    "The cost of raw materials"
+   ],
+   "correct": 0,
+   "explain": "Audience information.",
+   "tag": "Market research data"
+  },
+  {
+   "q": "Why does reliability matter?",
+   "options": [
+    "Decisions depend on it",
+    "The law requires all data",
+    "It makes research cheaper",
+    "It removes competition"
+   ],
+   "correct": 0,
+   "explain": "Bad data, bad decisions.",
+   "tag": "Market research data"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4104"] = {
+ "id": "IGBS4104",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "The importance of marketing",
+ "href": "/igcse/business/learn/marketing/l04-importance-of-marketing",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: The importance of marketing.",
+ "checklist": [
+  "I can explain how marketing satisfies needs, builds relationships and keeps loyalty",
+  "I can compare market orientation and product orientation",
+  "I can calculate market share and compare niche and mass marketing"
+ ],
+ "quiz": [
+  {
+   "q": "Market orientation means:",
+   "options": [
+    "Researching customer needs first",
+    "Making the product first",
+    "Ignoring what customers want",
+    "Copying a competitor’s most successful product"
+   ],
+   "correct": 0,
+   "explain": "Customer-led.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "Product orientation means:",
+   "options": [
+    "Developing the product first",
+    "Surveying customers first",
+    "Selling only to a niche",
+    "Only ever using test marketing for products"
+   ],
+   "correct": 0,
+   "explain": "Product-led.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "A niche market is:",
+   "options": [
+    "A small specialised part of a market",
+    "The whole market for a product",
+    "A market with no customers",
+    "A market that is owned and run by the government"
+   ],
+   "correct": 0,
+   "explain": "Specialist segment.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "An advantage of mass marketing is:",
+   "options": [
+    "High sales volumes",
+    "Very little competition",
+    "Higher prices for all",
+    "No need for advertising"
+   ],
+   "correct": 0,
+   "explain": "Large market.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "Sales $3m, market $12m. Market share?",
+   "options": [
+    "25%",
+    "4%",
+    "36%",
+    "15%"
+   ],
+   "correct": 0,
+   "explain": "3 ÷ 12 × 100.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "A loyalty card helps to:",
+   "options": [
+    "Keep customer loyalty",
+    "Increase fixed costs",
+    "Reduce product quality",
+    "Remove all competitors"
+   ],
+   "correct": 0,
+   "explain": "Rewards repeat buying.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "A risk of product orientation is that:",
+   "options": [
+    "Customers may not want it",
+    "It is always cheaper",
+    "It needs more research",
+    "It always copies other firms’ existing products"
+   ],
+   "correct": 0,
+   "explain": "Demand is untested.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "An advantage of a niche market is:",
+   "options": [
+    "Less competition",
+    "Very large sales volumes",
+    "Huge economies of scale",
+    "No need for loyal customers"
+   ],
+   "correct": 0,
+   "explain": "Few rivals.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "Why is keeping customers important?",
+   "options": [
+    "It is cheaper than finding new ones",
+    "It raises fixed costs",
+    "It stops all market research",
+    "It is required by law in most countries of the world"
+   ],
+   "correct": 0,
+   "explain": "Retention saves cost.",
+   "tag": "Importance of marketing"
+  },
+  {
+   "q": "Market analysis studies:",
+   "options": [
+    "Market size and trends",
+    "Staff motivation levels",
+    "Health and safety laws",
+    "Employment contracts"
+   ],
+   "correct": 0,
+   "explain": "Understanding the market.",
+   "tag": "Importance of marketing"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4105"] = {
+ "id": "IGBS4105",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Responding to market changes and market segmentation",
+ "href": "/igcse/business/learn/marketing/l05-market-changes-and-segmentation",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Responding to market changes and market segmentation.",
+ "checklist": [
+  "I can explain how businesses respond to changing customer needs and spending patterns",
+  "I can explain how businesses respond to increased competition",
+  "I can explain how market segmentation is used to target customers"
+ ],
+ "quiz": [
+  {
+   "q": "Market segmentation means:",
+   "options": [
+    "Dividing a market into groups",
+    "Selling the same product to everyone",
+    "Closing part of a business",
+    "Merging with a competitor"
+   ],
+   "correct": 0,
+   "explain": "Groups with similar characteristics.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "Selling luxury cars to high earners is segmentation by:",
+   "options": [
+    "Income",
+    "Age",
+    "Location",
+    "Lifestyle"
+   ],
+   "correct": 0,
+   "explain": "Ability to pay.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "Sports drinks for fitness fans target:",
+   "options": [
+    "Lifestyle",
+    "Income",
+    "Location",
+    "Age of the customer"
+   ],
+   "correct": 0,
+   "explain": "Interests and activities.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "Which is a demographic factor?",
+   "options": [
+    "Family size",
+    "Hobbies",
+    "Fitness level",
+    "Favourite music"
+   ],
+   "correct": 0,
+   "explain": "Population characteristic.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "A benefit of segmentation is:",
+   "options": [
+    "Better-targeted marketing",
+    "Higher costs for every product",
+    "Fewer customer needs met",
+    "No need for research"
+   ],
+   "correct": 0,
+   "explain": "Less waste.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "A drawback of segmentation is:",
+   "options": [
+    "Higher marketing costs",
+    "Customers’ needs are met better",
+    "Less wasted advertising",
+    "More gaps spotted"
+   ],
+   "correct": 0,
+   "explain": "More campaigns needed.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "A response to increased competition could be:",
+   "options": [
+    "Improving customer service",
+    "Raising prices sharply",
+    "Reducing product quality",
+    "Stopping all promotion to save money"
+   ],
+   "correct": 0,
+   "explain": "Keep customers.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "The growth of online shopping is a change in:",
+   "options": [
+    "Spending patterns",
+    "Demographics",
+    "Legal controls",
+    "Factors of production"
+   ],
+   "correct": 0,
+   "explain": "How people buy.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "Differentiation means:",
+   "options": [
+    "Making a product different from rivals",
+    "Selling the same product as rivals",
+    "Lowering prices to zero",
+    "Removing all extra features from a product"
+   ],
+   "correct": 0,
+   "explain": "Stand out.",
+   "tag": "Market changes and segmentation"
+  },
+  {
+   "q": "A café adding vegan dishes responds to:",
+   "options": [
+    "Changing customer needs",
+    "Increased interest rates",
+    "New employment laws",
+    "Higher exchange rates"
+   ],
+   "correct": 0,
+   "explain": "Tastes have changed.",
+   "tag": "Market changes and segmentation"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4106"] = {
+ "id": "IGBS4106",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Product: new products, goods and services, and packaging",
+ "href": "/igcse/business/learn/marketing/l06-product-development-and-packaging",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Product: new products, goods and services, and packaging.",
+ "checklist": [
+  "I can describe the stages in developing a new product or service",
+  "I can explain the difference between goods and services",
+  "I can explain the importance of packaging"
+ ],
+ "quiz": [
+  {
+   "q": "The 4Ps are:",
+   "options": [
+    "Product, price, place, promotion",
+    "People, process, profit, price",
+    "Packaging, price, profit, place",
+    "Product, profit, planning, people"
+   ],
+   "correct": 0,
+   "explain": "The marketing mix.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "A service is:",
+   "options": [
+    "Intangible",
+    "Always stored in a warehouse",
+    "A physical object",
+    "Always cheaper than goods"
+   ],
+   "correct": 0,
+   "explain": "It cannot be touched.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "Which is a good?",
+   "options": [
+    "A pair of shoes",
+    "A haircut",
+    "A taxi ride",
+    "A current bank account"
+   ],
+   "correct": 0,
+   "explain": "Tangible.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "A prototype is:",
+   "options": [
+    "A working model for testing",
+    "The final mass-produced item",
+    "A type of advertising",
+    "A market report"
+   ],
+   "correct": 0,
+   "explain": "Used to test design.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "Screening ideas means:",
+   "options": [
+    "Rejecting unsuitable ideas",
+    "Showing ideas on television",
+    "Launching every idea",
+    "Copying rivals’ ideas"
+   ],
+   "correct": 0,
+   "explain": "Filtering.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "Packaging protects a product and:",
+   "options": [
+    "Attracts attention",
+    "Lowers its quality",
+    "Hides all information",
+    "Removes the brand"
+   ],
+   "correct": 0,
+   "explain": "Promotional role.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "A risk of developing new products is:",
+   "options": [
+    "High cost and possible failure",
+    "Guaranteed high sales",
+    "No need for research",
+    "Lower competition in every single market"
+   ],
+   "correct": 0,
+   "explain": "Many new products fail.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "Why is staff training important for services?",
+   "options": [
+    "Quality depends on staff",
+    "Services can be stored",
+    "Services are tangible",
+    "It reduces packaging costs"
+   ],
+   "correct": 0,
+   "explain": "People deliver services.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "Information on packaging may include:",
+   "options": [
+    "Ingredients and instructions",
+    "The firm’s profit margin",
+    "Staff wages",
+    "The firm’s cash-flow forecast for the year"
+   ],
+   "correct": 0,
+   "explain": "Informs customers.",
+   "tag": "Product and packaging"
+  },
+  {
+   "q": "Eco-friendly packaging may:",
+   "options": [
+    "Increase costs",
+    "Always reduce costs",
+    "Damage the brand",
+    "Be illegal"
+   ],
+   "correct": 0,
+   "explain": "Sustainable materials cost more.",
+   "tag": "Product and packaging"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4107"] = {
+ "id": "IGBS4107",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "The product life cycle and the Boston matrix",
+ "href": "/igcse/business/learn/marketing/l07-product-life-cycle-and-boston-matrix",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: The product life cycle and the Boston matrix.",
+ "checklist": [
+  "I can describe the main phases of the product life cycle",
+  "I can explain extension strategies",
+  "I can use the Boston matrix to analyse a product portfolio"
+ ],
+ "quiz": [
+  {
+   "q": "Sales are zero during the:",
+   "options": [
+    "Development phase",
+    "Growth phase",
+    "Maturity phase",
+    "Decline phase of the cycle"
+   ],
+   "correct": 0,
+   "explain": "Not yet launched.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "Sales rise fastest in the:",
+   "options": [
+    "Growth phase",
+    "Introduction phase",
+    "Maturity phase",
+    "Decline phase"
+   ],
+   "correct": 0,
+   "explain": "Rapid adoption.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "Sales peak and level off in:",
+   "options": [
+    "Maturity",
+    "Introduction",
+    "Development",
+    "Growth"
+   ],
+   "correct": 0,
+   "explain": "Market saturated.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "An extension strategy is used to:",
+   "options": [
+    "Extend a product’s life",
+    "Speed up a product’s decline",
+    "Close the business",
+    "Raise fixed costs"
+   ],
+   "correct": 0,
+   "explain": "Boost falling sales.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "Which is an extension strategy?",
+   "options": [
+    "A new flavour",
+    "Stopping all advertising",
+    "Raising prices sharply",
+    "Withdrawing the product"
+   ],
+   "correct": 0,
+   "explain": "Renews interest.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "A star has:",
+   "options": [
+    "High share in a high-growth market",
+    "Low share in a low-growth market",
+    "High share in a low-growth market",
+    "Low share in a market with high growth rates"
+   ],
+   "correct": 0,
+   "explain": "Invest to grow.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "A cash cow has:",
+   "options": [
+    "High share in a low-growth market",
+    "Low share in a high-growth market",
+    "Low share in a low-growth market",
+    "High share in a high-growth market"
+   ],
+   "correct": 0,
+   "explain": "Generates profit.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "A dog has:",
+   "options": [
+    "Low share, low growth",
+    "High share, high growth",
+    "High share, low growth",
+    "Low share, high growth"
+   ],
+   "correct": 0,
+   "explain": "May be withdrawn.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "Profits from cash cows are often used to:",
+   "options": [
+    "Fund question marks and stars",
+    "Pay off every competitor",
+    "Close down the business",
+    "Reduce the quality of all other products"
+   ],
+   "correct": 0,
+   "explain": "Balanced portfolio.",
+   "tag": "Product life cycle and Boston matrix"
+  },
+  {
+   "q": "A product portfolio is:",
+   "options": [
+    "A firm’s range of products",
+    "A single product’s packaging",
+    "A type of loan",
+    "A legal document"
+   ],
+   "correct": 0,
+   "explain": "All its products.",
+   "tag": "Product life cycle and Boston matrix"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4108"] = {
+ "id": "IGBS4108",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Price: pricing strategies",
+ "href": "/igcse/business/learn/marketing/l08-pricing-strategies",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Price: pricing strategies.",
+ "checklist": [
+  "I can describe cost-plus, penetration, competition, skimming and promotional pricing",
+  "I can calculate a cost-plus price",
+  "I can evaluate which pricing strategy suits a product"
+ ],
+ "quiz": [
+  {
+   "q": "Price skimming means:",
+   "options": [
+    "A high price at launch, lowered later",
+    "A low price to win market share",
+    "Matching competitors’ prices",
+    "Adding a percentage markup to the unit cost"
+   ],
+   "correct": 0,
+   "explain": "Skim the top of the market.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "Penetration pricing means:",
+   "options": [
+    "A low price to gain market share",
+    "A high launch price for innovators",
+    "A temporary sale",
+    "A price set by government"
+   ],
+   "correct": 0,
+   "explain": "Get into the market.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "Cost $10, markup 40%. Cost-plus price?",
+   "options": [
+    "$14",
+    "$10.40",
+    "$4",
+    "$40"
+   ],
+   "correct": 0,
+   "explain": "10 + 4.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "Competition pricing is common when:",
+   "options": [
+    "Products are very similar",
+    "Products are unique",
+    "There are no rivals",
+    "Products are new inventions"
+   ],
+   "correct": 0,
+   "explain": "Little difference between products.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "Buy one get one free is:",
+   "options": [
+    "Promotional pricing",
+    "Price skimming",
+    "Cost-plus pricing",
+    "Penetration pricing"
+   ],
+   "correct": 0,
+   "explain": "Temporary offer.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "A drawback of cost-plus pricing is that it:",
+   "options": [
+    "Ignores competitors",
+    "Always loses money",
+    "Is very complicated",
+    "Cannot be calculated"
+   ],
+   "correct": 0,
+   "explain": "May be too high or low.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "Skimming suits:",
+   "options": [
+    "Innovative new products",
+    "Products in decline",
+    "Identical commodity products",
+    "Clearing old stock"
+   ],
+   "correct": 0,
+   "explain": "Early adopters pay more.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "A risk of penetration pricing is:",
+   "options": [
+    "Low profits at first",
+    "Too few customers",
+    "High prices attract rivals",
+    "Customers think it is luxury"
+   ],
+   "correct": 0,
+   "explain": "Margins are thin.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "Cost $8, markup 25%. Selling price?",
+   "options": [
+    "$10",
+    "$8.25",
+    "$2",
+    "$33"
+   ],
+   "correct": 0,
+   "explain": "8 + 2.",
+   "tag": "Pricing strategies"
+  },
+  {
+   "q": "A drawback of promotional pricing is:",
+   "options": [
+    "Customers may wait for offers",
+    "It always raises profit",
+    "It increases prices",
+    "It is illegal in most countries"
+   ],
+   "correct": 0,
+   "explain": "Expect discounts.",
+   "tag": "Pricing strategies"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4109"] = {
+ "id": "IGBS4109",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Place: distribution channels",
+ "href": "/igcse/business/learn/marketing/l09-place-distribution-channels",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Place: distribution channels.",
+ "checklist": [
+  "I can describe the main distribution channels",
+  "I can compare selling through retailers and e-tailers",
+  "I can recommend a suitable distribution channel for a business"
+ ],
+ "quiz": [
+  {
+   "q": "Place in the marketing mix is about:",
+   "options": [
+    "How products reach customers",
+    "The price of a product",
+    "The design of a product",
+    "Advertising the product on television"
+   ],
+   "correct": 0,
+   "explain": "Distribution.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "An e-tailer sells:",
+   "options": [
+    "Online",
+    "Only in shops",
+    "Only to wholesalers",
+    "Only in markets"
+   ],
+   "correct": 0,
+   "explain": "E-commerce.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "A wholesaler:",
+   "options": [
+    "Buys in bulk and sells to retailers",
+    "Sells only to final consumers online",
+    "Manufactures the product itself",
+    "Sets government prices"
+   ],
+   "correct": 0,
+   "explain": "An intermediary.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "An advantage of a shop is that customers can:",
+   "options": [
+    "Try products before buying",
+    "Shop 24 hours a day",
+    "Compare prices instantly online",
+    "Avoid travelling"
+   ],
+   "correct": 0,
+   "explain": "Physical experience.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "An advantage of e-commerce is:",
+   "options": [
+    "Reaching global customers",
+    "Customers can touch products",
+    "No delivery is needed",
+    "Personal face-to-face advice"
+   ],
+   "correct": 0,
+   "explain": "Wide reach.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "A disadvantage of e-commerce is:",
+   "options": [
+    "Delivery costs and delays",
+    "High shop rent",
+    "Limited opening hours",
+    "Only customers in the local area can buy"
+   ],
+   "correct": 0,
+   "explain": "Products must be sent.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "Selling direct from a farm shop is:",
+   "options": [
+    "Producer to consumer",
+    "Producer to wholesaler",
+    "Wholesaler to retailer",
+    "Retailer to wholesaler"
+   ],
+   "correct": 0,
+   "explain": "No intermediaries.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "Longer distribution channels usually mean:",
+   "options": [
+    "Higher prices",
+    "Lower prices",
+    "No intermediaries",
+    "Faster delivery"
+   ],
+   "correct": 0,
+   "explain": "Each adds a margin.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "“Clicks and bricks” means:",
+   "options": [
+    "Selling online and in shops",
+    "Selling only online",
+    "Building new shops only",
+    "Closing all shops and selling only online"
+   ],
+   "correct": 0,
+   "explain": "Combined channels.",
+   "tag": "Place and distribution"
+  },
+  {
+   "q": "Fresh food is best suited to:",
+   "options": [
+    "Short distribution channels",
+    "Very long channels",
+    "Slow overseas shipping",
+    "Wholesalers in other continents"
+   ],
+   "correct": 0,
+   "explain": "It goes off quickly.",
+   "tag": "Place and distribution"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4110"] = {
+ "id": "IGBS4110",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Promotion: strategies and public relations",
+ "href": "/igcse/business/learn/marketing/l10-promotion-strategies",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Promotion: strategies and public relations.",
+ "checklist": [
+  "I can describe the main promotion strategies",
+  "I can compare above the line and below the line promotion",
+  "I can explain how public relations improves company image"
+ ],
+ "quiz": [
+  {
+   "q": "Above the line promotion uses:",
+   "options": [
+    "Mass media",
+    "Free samples",
+    "Direct mail only",
+    "Point-of-sale displays"
+   ],
+   "correct": 0,
+   "explain": "TV, radio, press.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "Which is below the line?",
+   "options": [
+    "A special offer",
+    "A TV advert",
+    "A cinema advert",
+    "A national newspaper advert"
+   ],
+   "correct": 0,
+   "explain": "Not mass media.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "Sponsorship means:",
+   "options": [
+    "Paying to be linked to an event or team",
+    "Giving away free samples in shops",
+    "Cutting the product’s price",
+    "Writing a press release about a new product"
+   ],
+   "correct": 0,
+   "explain": "Brand association.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "Public relations aims to:",
+   "options": [
+    "Improve the firm’s image",
+    "Cut production costs",
+    "Set product prices",
+    "Recruit new staff for the business"
+   ],
+   "correct": 0,
+   "explain": "Reputation management.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "An advantage of above the line promotion is:",
+   "options": [
+    "It reaches a huge audience",
+    "It is always the cheapest",
+    "It is easy to target",
+    "It is easy to measure how well it works"
+   ],
+   "correct": 0,
+   "explain": "Mass reach.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "A disadvantage of above the line promotion is:",
+   "options": [
+    "It is expensive",
+    "It reaches few people",
+    "It cannot build awareness",
+    "It is always illegal"
+   ],
+   "correct": 0,
+   "explain": "High cost.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "A free trial is used so customers can:",
+   "options": [
+    "Try with no risk",
+    "Pay a higher price",
+    "Avoid the product",
+    "Complain more easily"
+   ],
+   "correct": 0,
+   "explain": "Encourages first purchase.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "Branding helps a business to:",
+   "options": [
+    "Build loyalty and charge more",
+    "Reduce product quality",
+    "Avoid all competition",
+    "Lower its fixed costs of production"
+   ],
+   "correct": 0,
+   "explain": "Recognised and trusted.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "A press release is part of:",
+   "options": [
+    "Public relations",
+    "Pricing strategy",
+    "Distribution",
+    "Product design"
+   ],
+   "correct": 0,
+   "explain": "Media communication.",
+   "tag": "Promotion strategies"
+  },
+  {
+   "q": "Why might PR be trusted more than adverts?",
+   "options": [
+    "News seems more independent",
+    "It is always paid for",
+    "The firm controls everything",
+    "It uses only billboards"
+   ],
+   "correct": 0,
+   "explain": "Third-party credibility.",
+   "tag": "Promotion strategies"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS4111"] = {
+ "id": "IGBS4111",
+ "topicNumber": 4,
+ "topicTitle": "4 Marketing (IGCSE Business)",
+ "title": "Technology in promotion and the importance of a brand",
+ "href": "/igcse/business/learn/marketing/l11-technology-in-promotion-and-branding",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 4 Marketing: Technology in promotion and the importance of a brand.",
+ "checklist": [
+  "I can explain how targeted online advertising, viral advertising and e-newsletters are used",
+  "I can evaluate the benefits and drawbacks of using technology in promotion",
+  "I can explain the importance of a brand"
+ ],
+ "quiz": [
+  {
+   "q": "Targeted online advertising uses:",
+   "options": [
+    "Data about people’s interests",
+    "Only television and radio",
+    "Leaflets through every door",
+    "Billboards on motorways and busy main roads"
+   ],
+   "correct": 0,
+   "explain": "Personal data.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "Viral advertising spreads through:",
+   "options": [
+    "People sharing content",
+    "Paid TV slots only",
+    "Newspaper inserts",
+    "Shop window displays in the high street"
+   ],
+   "correct": 0,
+   "explain": "Social sharing.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "An e-newsletter is:",
+   "options": [
+    "A regular email to customers",
+    "A printed newspaper advert",
+    "A TV news programme",
+    "A billboard poster beside a busy road"
+   ],
+   "correct": 0,
+   "explain": "Email marketing.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "A benefit of digital promotion is:",
+   "options": [
+    "Results are easy to measure",
+    "It can never backfire",
+    "No skills are needed",
+    "It reaches no customers in other countries"
+   ],
+   "correct": 0,
+   "explain": "Clicks and views tracked.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "A drawback of viral marketing is:",
+   "options": [
+    "It can backfire",
+    "It is always expensive",
+    "It reaches few people",
+    "It cannot be shared"
+   ],
+   "correct": 0,
+   "explain": "Uncontrolled.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "A brand is:",
+   "options": [
+    "A name, logo or image",
+    "The price of a product",
+    "The firm’s bank account",
+    "A distribution channel"
+   ],
+   "correct": 0,
+   "explain": "Identity.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "Strong brands allow firms to:",
+   "options": [
+    "Charge premium prices",
+    "Ignore customer needs",
+    "Avoid all promotion",
+    "Pay lower wages"
+   ],
+   "correct": 0,
+   "explain": "Customers pay more.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "Brand loyalty means customers:",
+   "options": [
+    "Keep buying the same brand",
+    "Always switch brands",
+    "Only buy on discount",
+    "Never buy any products online at all"
+   ],
+   "correct": 0,
+   "explain": "Repeat purchase.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "A risk to a brand is:",
+   "options": [
+    "A scandal damaging its image",
+    "Too many loyal customers",
+    "Being easy to recognise",
+    "Higher sales from loyal customers"
+   ],
+   "correct": 0,
+   "explain": "Reputation damage.",
+   "tag": "Digital promotion and brands"
+  },
+  {
+   "q": "Customers may dislike targeted ads because they feel:",
+   "options": [
+    "Intrusive",
+    "Too cheap",
+    "Too slow",
+    "Too local"
+   ],
+   "correct": 0,
+   "explain": "Privacy concerns.",
+   "tag": "Digital promotion and brands"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5101"] = {
+ "id": "IGBS5101",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "Economies and diseconomies of scale",
+ "href": "/igcse/business/learn/business-operations/l01-economies-and-diseconomies-of-scale",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: Economies and diseconomies of scale.",
+ "checklist": [
+  "I can explain internal economies of scale",
+  "I can explain external economies of scale",
+  "I can explain diseconomies of scale and the limits of growth"
+ ],
+ "quiz": [
+  {
+   "q": "Economies of scale mean:",
+   "options": [
+    "Average costs fall as output rises",
+    "Total costs fall as output rises",
+    "Prices always rise as firms grow",
+    "Costs stay the same as output rises"
+   ],
+   "correct": 0,
+   "explain": "Lower cost per unit.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Bulk buying discounts are:",
+   "options": [
+    "Purchasing economies",
+    "Diseconomies of scale",
+    "External economies",
+    "Marketing diseconomies"
+   ],
+   "correct": 0,
+   "explain": "Buying in large quantities.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Which is an external economy of scale?",
+   "options": [
+    "A local pool of skilled labour",
+    "Bulk buying discounts",
+    "Cheaper borrowing for big firms",
+    "Specialist managers employed"
+   ],
+   "correct": 0,
+   "explain": "Outside the firm.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Lower interest rates for large firms are:",
+   "options": [
+    "Financial economies",
+    "Technical economies",
+    "Diseconomies",
+    "External economies"
+   ],
+   "correct": 0,
+   "explain": "Easier borrowing.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Diseconomies of scale mean:",
+   "options": [
+    "Average costs rise as the firm grows too big",
+    "Average costs fall as the firm grows",
+    "Revenue always rises with size",
+    "The firm gets bigger bulk-buying discounts as it grows"
+   ],
+   "correct": 0,
+   "explain": "Too big to manage.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "A cause of diseconomies of scale is:",
+   "options": [
+    "Poor communication",
+    "Bulk buying",
+    "Specialist managers",
+    "Cheaper finance"
+   ],
+   "correct": 0,
+   "explain": "Messages get lost.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Total costs $8,000 for 2,000 units. Average cost?",
+   "options": [
+    "$4",
+    "$16,000",
+    "$0.25",
+    "$10,000"
+   ],
+   "correct": 0,
+   "explain": "8,000 ÷ 2,000.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Technical economies come from:",
+   "options": [
+    "More efficient machinery",
+    "Local training colleges",
+    "Government roads",
+    "Lower motivation of staff in big firms"
+   ],
+   "correct": 0,
+   "explain": "Large firms afford better technology.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "A way to reduce diseconomies of scale is:",
+   "options": [
+    "Decentralising decisions",
+    "Adding more management layers",
+    "Ignoring staff motivation",
+    "Centralising everything"
+   ],
+   "correct": 0,
+   "explain": "Smaller, local units.",
+   "tag": "Economies of scale"
+  },
+  {
+   "q": "Diseconomies set:",
+   "options": [
+    "A limit to growth",
+    "A minimum wage",
+    "A trading bloc",
+    "A price ceiling set by the government"
+   ],
+   "correct": 0,
+   "explain": "Costs rise if too large.",
+   "tag": "Economies of scale"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5102"] = {
+ "id": "IGBS5102",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "Production processes: job, batch and flow",
+ "href": "/igcse/business/learn/business-operations/l02-job-batch-and-flow-production",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: Production processes: job, batch and flow.",
+ "checklist": [
+  "I can describe job, batch and flow production",
+  "I can explain the advantages and disadvantages of each method",
+  "I can recommend a suitable production method for a product"
+ ],
+ "quiz": [
+  {
+   "q": "Job production makes:",
+   "options": [
+    "One-off, unique products",
+    "Huge quantities of identical items",
+    "Groups of identical items",
+    "Only food products"
+   ],
+   "correct": 0,
+   "explain": "Custom-made.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "Batch production makes:",
+   "options": [
+    "Groups of identical products",
+    "Single unique items",
+    "Continuous identical items",
+    "Only services such as haircuts"
+   ],
+   "correct": 0,
+   "explain": "Batches.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "Flow production is used for:",
+   "options": [
+    "Large quantities of identical products",
+    "One-off wedding dresses",
+    "Custom house designs",
+    "Personal portraits painted for customers"
+   ],
+   "correct": 0,
+   "explain": "Mass production.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "An advantage of flow production is:",
+   "options": [
+    "Low average costs",
+    "Lots of product variety",
+    "Cheap to set up",
+    "Highly motivating work"
+   ],
+   "correct": 0,
+   "explain": "Economies of scale.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "A disadvantage of job production is:",
+   "options": [
+    "High labour costs",
+    "Low product quality",
+    "No customer contact",
+    "Boring repetitive work"
+   ],
+   "correct": 0,
+   "explain": "Skilled, slow work.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "A tailor-made suit is made by:",
+   "options": [
+    "Job production",
+    "Flow production",
+    "Batch production",
+    "Automation only"
+   ],
+   "correct": 0,
+   "explain": "Unique to the customer.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "A disadvantage of batch production is:",
+   "options": [
+    "Machines idle between batches",
+    "No variety at all",
+    "Very high prices",
+    "Every single item is completely unique"
+   ],
+   "correct": 0,
+   "explain": "Changeover time.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "A breakdown in flow production:",
+   "options": [
+    "Can stop the whole line",
+    "Only affects one item",
+    "Has no effect",
+    "Improves output across the whole factory"
+   ],
+   "correct": 0,
+   "explain": "Linked process.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "A bakery making 200 brown loaves then 200 white is using:",
+   "options": [
+    "Batch production",
+    "Job production",
+    "Flow production",
+    "Lean production with Kaizen"
+   ],
+   "correct": 0,
+   "explain": "Batches.",
+   "tag": "Job, batch and flow"
+  },
+  {
+   "q": "As small firms grow they often move from:",
+   "options": [
+    "Job to batch to flow",
+    "Flow to job",
+    "Batch to job",
+    "Flow to batch to job"
+   ],
+   "correct": 0,
+   "explain": "Scaling up.",
+   "tag": "Job, batch and flow"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5103"] = {
+ "id": "IGBS5103",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "Labour and capital intensive production and productivity",
+ "href": "/igcse/business/learn/business-operations/l03-productivity-labour-and-capital-intensive",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: Labour and capital intensive production and productivity.",
+ "checklist": [
+  "I can compare labour-intensive and capital-intensive production",
+  "I can calculate labour productivity",
+  "I can analyse the impact of productivity improvements"
+ ],
+ "quiz": [
+  {
+   "q": "Labour productivity =",
+   "options": [
+    "Output ÷ number of workers",
+    "Workers ÷ output",
+    "Output × workers",
+    "Total wages divided by output"
+   ],
+   "correct": 0,
+   "explain": "Output per worker.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "800 units, 20 workers. Productivity?",
+   "options": [
+    "40 units per worker",
+    "16,000 units",
+    "0.025 units",
+    "820 units produced per week"
+   ],
+   "correct": 0,
+   "explain": "800 ÷ 20.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "Capital intensive production uses mainly:",
+   "options": [
+    "Machinery",
+    "Workers",
+    "Land",
+    "Enterprise"
+   ],
+   "correct": 0,
+   "explain": "Technology-heavy.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "A hair salon is:",
+   "options": [
+    "Labour intensive",
+    "Capital intensive",
+    "Flow production",
+    "Fully automated"
+   ],
+   "correct": 0,
+   "explain": "People provide the service.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "A benefit of higher productivity is:",
+   "options": [
+    "Lower average costs",
+    "Higher average costs",
+    "Fewer goods produced",
+    "More waste"
+   ],
+   "correct": 0,
+   "explain": "More output per worker.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "A disadvantage of capital intensive production is:",
+   "options": [
+    "High set-up costs",
+    "Slow output",
+    "Inconsistent quality",
+    "High wage bills"
+   ],
+   "correct": 0,
+   "explain": "Machines are expensive.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "Productivity can be improved by:",
+   "options": [
+    "Training workers",
+    "Reducing all investment",
+    "Lowering motivation",
+    "Removing technology"
+   ],
+   "correct": 0,
+   "explain": "Better skills.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "Output rises from 1,000 to 1,200 with the same 10 workers. Productivity:",
+   "options": [
+    "Rises from 100 to 120",
+    "Falls from 120 to 100",
+    "Stays at 100",
+    "Rises from 10 to 12"
+   ],
+   "correct": 0,
+   "explain": "Per-worker output up.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "A risk of productivity improvements is:",
+   "options": [
+    "Job losses",
+    "Higher costs per unit",
+    "Lower quality always",
+    "Less output"
+   ],
+   "correct": 0,
+   "explain": "Fewer workers needed.",
+   "tag": "Productivity"
+  },
+  {
+   "q": "An advantage of labour intensive production is:",
+   "options": [
+    "Flexibility",
+    "Very low wage costs",
+    "Perfect consistency",
+    "Huge output"
+   ],
+   "correct": 0,
+   "explain": "People adapt.",
+   "tag": "Productivity"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5104"] = {
+ "id": "IGBS5104",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "Lean production: JIT and Kaizen",
+ "href": "/igcse/business/learn/business-operations/l04-lean-production",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: Lean production: JIT and Kaizen.",
+ "checklist": [
+  "I can explain the principles of lean production",
+  "I can evaluate just-in-time (JIT) stock control",
+  "I can explain Kaizen (continuous improvement)"
+ ],
+ "quiz": [
+  {
+   "q": "Lean production aims to:",
+   "options": [
+    "Reduce waste",
+    "Increase stock levels",
+    "Raise production costs",
+    "Remove all workers"
+   ],
+   "correct": 0,
+   "explain": "Minimise waste.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "Just-in-time means:",
+   "options": [
+    "Stock arrives exactly when needed",
+    "Large stocks held just in case",
+    "Products are made in advance",
+    "Deliveries of stock arrive only once a year"
+   ],
+   "correct": 0,
+   "explain": "Little stock held.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "An advantage of JIT is:",
+   "options": [
+    "Less cash tied up in stock",
+    "Bigger bulk discounts",
+    "No need for suppliers",
+    "Easy to meet demand surges"
+   ],
+   "correct": 0,
+   "explain": "Better cash flow.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "A disadvantage of JIT is:",
+   "options": [
+    "It relies on reliable suppliers",
+    "It needs huge warehouses",
+    "It increases wasted stock",
+    "It ties up a lot of cash in stock"
+   ],
+   "correct": 0,
+   "explain": "Late delivery halts production.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "Kaizen means:",
+   "options": [
+    "Continuous improvement",
+    "Just-in-time delivery",
+    "Mass production",
+    "Quality inspection at the end"
+   ],
+   "correct": 0,
+   "explain": "Small regular changes.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "In Kaizen, improvements are suggested by:",
+   "options": [
+    "All employees",
+    "Only the directors",
+    "Only customers",
+    "Only the government"
+   ],
+   "correct": 0,
+   "explain": "Everyone is involved.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "A benefit of Kaizen is:",
+   "options": [
+    "Higher worker motivation",
+    "Huge one-off investment",
+    "Less staff involvement",
+    "More waste of raw materials"
+   ],
+   "correct": 0,
+   "explain": "Workers feel valued.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "Which is a type of waste?",
+   "options": [
+    "Holding too much stock",
+    "Satisfied customers",
+    "Efficient processes",
+    "Highly trained workers"
+   ],
+   "correct": 0,
+   "explain": "Ties up resources.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "JIT is risky when:",
+   "options": [
+    "Transport is disrupted",
+    "Suppliers are reliable",
+    "Demand is predictable",
+    "Stock is low"
+   ],
+   "correct": 0,
+   "explain": "Supplies may not arrive.",
+   "tag": "Lean production"
+  },
+  {
+   "q": "Using resources effectively helps:",
+   "options": [
+    "Lower costs and the environment",
+    "Raise prices only",
+    "Increase waste",
+    "Reduce quality and raise prices"
+   ],
+   "correct": 0,
+   "explain": "Less waste.",
+   "tag": "Lean production"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5105"] = {
+ "id": "IGBS5105",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "The impact of technology in production",
+ "href": "/igcse/business/learn/business-operations/l05-technology-in-production",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: The impact of technology in production.",
+ "checklist": [
+  "I can explain how robotics and technology are used in production",
+  "I can analyse the benefits and drawbacks of technology in production",
+  "I can evaluate how a business balances cost, productivity, quality and flexibility"
+ ],
+ "quiz": [
+  {
+   "q": "CAD stands for:",
+   "options": [
+    "Computer-aided design",
+    "Computer-assisted delivery",
+    "Central accounting database",
+    "Cost and demand"
+   ],
+   "correct": 0,
+   "explain": "Designing on screen.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "A benefit of robots is:",
+   "options": [
+    "They can work continuously",
+    "They never need maintenance",
+    "They are cheap to buy",
+    "They are very flexible for every task"
+   ],
+   "correct": 0,
+   "explain": "No breaks needed.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "A drawback of robots is:",
+   "options": [
+    "High initial cost",
+    "Lower consistency",
+    "More workplace injuries",
+    "Slower output"
+   ],
+   "correct": 0,
+   "explain": "Expensive to install.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "CAM means computers:",
+   "options": [
+    "Control production machines",
+    "Design advertising campaigns",
+    "Manage staff payroll",
+    "Write financial reports"
+   ],
+   "correct": 0,
+   "explain": "Manufacturing.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "Robots improve safety by:",
+   "options": [
+    "Doing dangerous tasks",
+    "Removing all machines",
+    "Working fewer hours",
+    "Ignoring safety rules"
+   ],
+   "correct": 0,
+   "explain": "Welding, lifting.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "Flexibility means:",
+   "options": [
+    "Changing products or quantities quickly",
+    "Producing only one product forever",
+    "Keeping costs fixed",
+    "Avoiding all change to the product range"
+   ],
+   "correct": 0,
+   "explain": "Adaptability.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "A luxury watchmaker is likely to prioritise:",
+   "options": [
+    "Quality",
+    "Lowest possible cost",
+    "Maximum speed only",
+    "Minimum flexibility"
+   ],
+   "correct": 0,
+   "explain": "Premium market.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "Faster output may lead to:",
+   "options": [
+    "More defects",
+    "Higher quality always",
+    "Lower productivity",
+    "Fewer products"
+   ],
+   "correct": 0,
+   "explain": "A trade-off.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "A concern for workers when robots are introduced is:",
+   "options": [
+    "Job losses",
+    "Higher safety",
+    "Less boring work",
+    "Better training"
+   ],
+   "correct": 0,
+   "explain": "Fewer jobs.",
+   "tag": "Technology in production"
+  },
+  {
+   "q": "A trade-off means:",
+   "options": [
+    "Giving up some of one thing to gain another",
+    "Trading goods with other countries",
+    "A type of tariff",
+    "A type of promotion used to sell old stock at the end of each season"
+   ],
+   "correct": 0,
+   "explain": "Balancing priorities.",
+   "tag": "Technology in production"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5106"] = {
+ "id": "IGBS5106",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "Factors of production",
+ "href": "/igcse/business/learn/business-operations/l06-factors-of-production",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: Factors of production.",
+ "checklist": [
+  "I can describe the four factors of production",
+  "I can explain how the relationships between the factors change",
+  "I can explain the difference between capital-intensive and labour-intensive activities"
+ ],
+ "quiz": [
+  {
+   "q": "The four factors of production are:",
+   "options": [
+    "Land, labour, capital, enterprise",
+    "Price, product, place, promotion",
+    "Sales, costs, profit, cash",
+    "Primary, secondary, tertiary, public"
+   ],
+   "correct": 0,
+   "explain": "Inputs.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "Machinery is an example of:",
+   "options": [
+    "Capital",
+    "Land",
+    "Labour",
+    "Enterprise"
+   ],
+   "correct": 0,
+   "explain": "Man-made resource.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "The reward for enterprise is:",
+   "options": [
+    "Profit",
+    "Rent",
+    "Wages",
+    "Interest"
+   ],
+   "correct": 0,
+   "explain": "For risk-taking.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "Raw materials such as oil are:",
+   "options": [
+    "Land",
+    "Capital",
+    "Labour",
+    "Enterprise"
+   ],
+   "correct": 0,
+   "explain": "Natural resources.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "The reward for labour is:",
+   "options": [
+    "Wages",
+    "Profit",
+    "Rent",
+    "Interest"
+   ],
+   "correct": 0,
+   "explain": "Paid for work.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "Self-service checkouts show:",
+   "options": [
+    "Capital replacing labour",
+    "Labour replacing capital",
+    "Land replacing enterprise",
+    "Enterprise replacing land"
+   ],
+   "correct": 0,
+   "explain": "Technology.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "A labour-intensive activity is:",
+   "options": [
+    "Fruit picking by hand",
+    "An automated power station",
+    "A robotic car plant",
+    "An oil refinery"
+   ],
+   "correct": 0,
+   "explain": "Mostly people.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "Rising wages encourage firms to:",
+   "options": [
+    "Invest in more capital",
+    "Employ more workers",
+    "Use less technology",
+    "Close all of their factories"
+   ],
+   "correct": 0,
+   "explain": "Machines become relatively cheaper.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "Who organises the other factors of production?",
+   "options": [
+    "The entrepreneur",
+    "The government",
+    "The customer",
+    "The bank manager"
+   ],
+   "correct": 0,
+   "explain": "Enterprise.",
+   "tag": "Factors of production"
+  },
+  {
+   "q": "A capital-intensive activity uses:",
+   "options": [
+    "Much more capital than labour",
+    "Much more labour than capital",
+    "No machinery at all",
+    "Only natural resources"
+   ],
+   "correct": 0,
+   "explain": "Machine-heavy.",
+   "tag": "Factors of production"
+  }
+ ]
+};
+window.SBL_LESSONS["IGBS5107"] = {
+ "id": "IGBS5107",
+ "topicNumber": 5,
+ "topicTitle": "5 Business operations (IGCSE Business)",
+ "title": "Quality: quality control and TQM",
+ "href": "/igcse/business/learn/business-operations/l07-quality-control-and-tqm",
+ "syllabusFocus": "Edexcel IGCSE Business, The specification: five topics — 5 Business operations: Quality: quality control and TQM.",
+ "checklist": [
+  "I can explain the concept of quality in goods and services",
+  "I can compare quality control and total quality management (TQM)",
+  "I can explain how quality gives a business a competitive advantage"
+ ],
+ "quiz": [
+  {
+   "q": "Quality means:",
+   "options": [
+    "Meeting customers’ expectations",
+    "Always charging the highest price",
+    "Producing as fast as possible",
+    "Using the cheapest materials"
+   ],
+   "correct": 0,
+   "explain": "Fit for purpose.",
+   "tag": "Quality"
+  },
+  {
+   "q": "Quality control usually involves:",
+   "options": [
+    "Inspecting products for faults",
+    "Every worker improving continuously",
+    "Lowering prices",
+    "Advertising heavily"
+   ],
+   "correct": 0,
+   "explain": "Checking output.",
+   "tag": "Quality"
+  },
+  {
+   "q": "In TQM, quality is the responsibility of:",
+   "options": [
+    "Every employee",
+    "Only inspectors",
+    "Only customers",
+    "Only managers"
+   ],
+   "correct": 0,
+   "explain": "Company-wide.",
+   "tag": "Quality"
+  },
+  {
+   "q": "A drawback of quality control is:",
+   "options": [
+    "Faulty products are wasted",
+    "Every worker must be trained",
+    "It has no inspectors",
+    "It prevents all faults"
+   ],
+   "correct": 0,
+   "explain": "Faults found late.",
+   "tag": "Quality"
+  },
+  {
+   "q": "TQM aims for:",
+   "options": [
+    "Zero defects",
+    "More inspectors",
+    "Higher waste",
+    "Lower standards"
+   ],
+   "correct": 0,
+   "explain": "No faults.",
+   "tag": "Quality"
+  },
+  {
+   "q": "A drawback of TQM is:",
+   "options": [
+    "It needs training and commitment",
+    "It wastes more products",
+    "It removes staff involvement",
+    "It completely ignores product quality"
+   ],
+   "correct": 0,
+   "explain": "Culture change.",
+   "tag": "Quality"
+  },
+  {
+   "q": "High quality can allow a business to:",
+   "options": [
+    "Charge premium prices",
+    "Ignore its customers",
+    "Stop all training",
+    "Increase the number of complaints"
+   ],
+   "correct": 0,
+   "explain": "Customers pay more.",
+   "tag": "Quality"
+  },
+  {
+   "q": "Competitive advantage means:",
+   "options": [
+    "Being more attractive than rivals",
+    "Having the most staff",
+    "Spending the least on quality",
+    "Selling all products only through the internet"
+   ],
+   "correct": 0,
+   "explain": "Customers choose you.",
+   "tag": "Quality"
+  },
+  {
+   "q": "Poor quality can lead to:",
+   "options": [
+    "Lost customers",
+    "Stronger loyalty",
+    "Higher prices accepted",
+    "Fewer returns"
+   ],
+   "correct": 0,
+   "explain": "Damaged reputation.",
+   "tag": "Quality"
+  },
+  {
+   "q": "Quality in services often depends on:",
+   "options": [
+    "Staff training",
+    "Warehouse size",
+    "Machine speed",
+    "Stock levels"
+   ],
+   "correct": 0,
+   "explain": "People deliver services.",
+   "tag": "Quality"
   }
  ]
 };

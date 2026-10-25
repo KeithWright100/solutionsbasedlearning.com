@@ -94,6 +94,15 @@
                 "href": "/igcse/business/learn/business-activity-and-influences/l10-business-success-and-failure"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/business/learn/business-activity-and-influences/past-papers"
+              }
+            ]
           }
         ]
       },
@@ -167,29 +176,244 @@
                 "href": "/igcse/business/learn/people-in-business/l10-functional-areas"
               }
             ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/business/learn/people-in-business/past-papers"
+              }
+            ]
           }
         ]
       },
       {
         "slug": "business-finance",
         "label": "Business finance",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/business/learn/business-finance",
+        "status": "available",
+        "topics": [
+          {
+            "title": "3.1 Business finance – sources",
+            "lessons": [
+              {
+                "label": "Need for finance",
+                "href": "/igcse/business/learn/business-finance/l01-need-for-finance-and-internal-sources"
+              },
+              {
+                "label": "External sources",
+                "href": "/igcse/business/learn/business-finance/l02-external-sources-of-finance"
+              }
+            ]
+          },
+          {
+            "title": "3.2 Cash-flow forecasting",
+            "lessons": [
+              {
+                "label": "Importance of cash",
+                "href": "/igcse/business/learn/business-finance/l03-importance-of-cash"
+              },
+              {
+                "label": "Cash-flow forecasts",
+                "href": "/igcse/business/learn/business-finance/l04-cash-flow-forecasts"
+              }
+            ]
+          },
+          {
+            "title": "3.3 Costs and break-even analysis",
+            "lessons": [
+              {
+                "label": "Costs, revenue and profit",
+                "href": "/igcse/business/learn/business-finance/l05-costs-revenue-and-profit"
+              },
+              {
+                "label": "Calculating break-even",
+                "href": "/igcse/business/learn/business-finance/l06-break-even-calculation"
+              },
+              {
+                "label": "Break-even charts",
+                "href": "/igcse/business/learn/business-finance/l07-break-even-charts"
+              }
+            ]
+          },
+          {
+            "title": "3.4 Financial documents",
+            "lessons": [
+              {
+                "label": "Income statement",
+                "href": "/igcse/business/learn/business-finance/l08-statement-of-comprehensive-income"
+              },
+              {
+                "label": "Financial position",
+                "href": "/igcse/business/learn/business-finance/l09-statement-of-financial-position"
+              }
+            ]
+          },
+          {
+            "title": "3.5 Accounts analysis",
+            "lessons": [
+              {
+                "label": "Accounting ratios",
+                "href": "/igcse/business/learn/business-finance/l10-accounting-ratios"
+              },
+              {
+                "label": "Liquidity and analysis",
+                "href": "/igcse/business/learn/business-finance/l11-liquidity-and-using-financial-documents"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/business/learn/business-finance/past-papers"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "marketing",
         "label": "Marketing",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/business/learn/marketing",
+        "status": "available",
+        "topics": [
+          {
+            "title": "4.1 Market research",
+            "lessons": [
+              {
+                "label": "Purpose of market research",
+                "href": "/igcse/business/learn/marketing/l01-purpose-of-market-research"
+              },
+              {
+                "label": "Research methods",
+                "href": "/igcse/business/learn/marketing/l02-methods-of-market-research"
+              },
+              {
+                "label": "Market research data",
+                "href": "/igcse/business/learn/marketing/l03-using-market-research-data"
+              }
+            ]
+          },
+          {
+            "title": "4.2 The market",
+            "lessons": [
+              {
+                "label": "Importance of marketing",
+                "href": "/igcse/business/learn/marketing/l04-importance-of-marketing"
+              },
+              {
+                "label": "Market changes and segmentation",
+                "href": "/igcse/business/learn/marketing/l05-market-changes-and-segmentation"
+              }
+            ]
+          },
+          {
+            "title": "4.3 The marketing mix",
+            "lessons": [
+              {
+                "label": "Product and packaging",
+                "href": "/igcse/business/learn/marketing/l06-product-development-and-packaging"
+              },
+              {
+                "label": "Product life cycle and Boston matrix",
+                "href": "/igcse/business/learn/marketing/l07-product-life-cycle-and-boston-matrix"
+              },
+              {
+                "label": "Pricing strategies",
+                "href": "/igcse/business/learn/marketing/l08-pricing-strategies"
+              },
+              {
+                "label": "Place and distribution",
+                "href": "/igcse/business/learn/marketing/l09-place-distribution-channels"
+              },
+              {
+                "label": "Promotion strategies",
+                "href": "/igcse/business/learn/marketing/l10-promotion-strategies"
+              },
+              {
+                "label": "Digital promotion and brands",
+                "href": "/igcse/business/learn/marketing/l11-technology-in-promotion-and-branding"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/business/learn/marketing/past-papers"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "business-operations",
         "label": "Business operations",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/business/learn/business-operations",
+        "status": "available",
+        "topics": [
+          {
+            "title": "5.1 Economies and diseconomies of scale",
+            "lessons": [
+              {
+                "label": "Economies of scale",
+                "href": "/igcse/business/learn/business-operations/l01-economies-and-diseconomies-of-scale"
+              }
+            ]
+          },
+          {
+            "title": "5.2 Production",
+            "lessons": [
+              {
+                "label": "Job, batch and flow",
+                "href": "/igcse/business/learn/business-operations/l02-job-batch-and-flow-production"
+              },
+              {
+                "label": "Productivity",
+                "href": "/igcse/business/learn/business-operations/l03-productivity-labour-and-capital-intensive"
+              },
+              {
+                "label": "Lean production",
+                "href": "/igcse/business/learn/business-operations/l04-lean-production"
+              },
+              {
+                "label": "Technology in production",
+                "href": "/igcse/business/learn/business-operations/l05-technology-in-production"
+              }
+            ]
+          },
+          {
+            "title": "5.3 Factors of production",
+            "lessons": [
+              {
+                "label": "Factors of production",
+                "href": "/igcse/business/learn/business-operations/l06-factors-of-production"
+              }
+            ]
+          },
+          {
+            "title": "5.4 Quality",
+            "lessons": [
+              {
+                "label": "Quality",
+                "href": "/igcse/business/learn/business-operations/l07-quality-control-and-tqm"
+              }
+            ]
+          },
+          {
+            "title": "Exam practice",
+            "lessons": [
+              {
+                "label": "Past paper questions",
+                "href": "/igcse/business/learn/business-operations/past-papers"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
