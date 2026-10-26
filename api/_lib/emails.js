@@ -40,15 +40,15 @@ async function sendEmail({ to, subject, html, text }) {
 function wrapper(innerHtml) {
   return `<!DOCTYPE html>
 <html>
-  <body style="margin:0;padding:0;background:#0B1929;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0B1929;padding:32px 16px;">
+  <body style="margin:0;padding:0;background:#2A4663;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#2A4663;padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" style="max-width:520px;background:#10233A;border:1px solid #1B3247;border-radius:16px;overflow:hidden;">
+          <table role="presentation" width="100%" style="max-width:520px;background:#335374;border:1px solid #4A6C8E;border-radius:16px;overflow:hidden;">
             <tr>
               <td style="padding:28px 32px 0;">
                 <div style="font-family:Arial,sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em;color:#2DE1CB;">SBL</div>
-                <div style="font-size:13px;color:#7C93A3;margin-top:2px;">Solutions Based Learning</div>
+                <div style="font-size:13px;color:#C3D3DE;margin-top:2px;">Solutions Based Learning</div>
               </td>
             </tr>
             <tr>
@@ -57,7 +57,7 @@ function wrapper(innerHtml) {
               </td>
             </tr>
           </table>
-          <div style="color:#445A6B;font-size:12px;margin-top:20px;">Solutions Based Learning &middot; This is an automated message.</div>
+          <div style="color:#A9BDCC;font-size:12px;margin-top:20px;">Solutions Based Learning &middot; This is an automated message.</div>
         </td>
       </tr>
     </table>
@@ -84,16 +84,16 @@ export async function sendAdminNotificationEmail({ adminEmail, application, dash
     <p>A new request has been submitted for access to Solutions Based Learning.</p>
     <p style="font-weight:700;margin-bottom:4px;">Applicant Details</p>
     <table role="presentation" style="width:100%;font-size:14px;color:#F6FAFA;">
-      <tr><td style="color:#7C93A3;padding:3px 0;">Name</td><td style="padding:3px 0;">${first_name} ${last_name}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Email Address</td><td style="padding:3px 0;">${email}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">School / Organisation</td><td style="padding:3px 0;">${organisation}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Country</td><td style="padding:3px 0;">${country}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Role</td><td style="padding:3px 0;">${role_applied_for}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Areas of Interest</td><td style="padding:3px 0;">${(areas_of_interest || []).join(', ') || '—'}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Reason for Request</td><td style="padding:3px 0;">${reason}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Application Status</td><td style="padding:3px 0;">Pending Approval</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Reference ID</td><td style="padding:3px 0;">${reference_id}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Name</td><td style="padding:3px 0;">${first_name} ${last_name}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Email Address</td><td style="padding:3px 0;">${email}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">School / Organisation</td><td style="padding:3px 0;">${organisation}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Country</td><td style="padding:3px 0;">${country}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Role</td><td style="padding:3px 0;">${role_applied_for}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Areas of Interest</td><td style="padding:3px 0;">${(areas_of_interest || []).join(', ') || '—'}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Reason for Request</td><td style="padding:3px 0;">${reason}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Application Status</td><td style="padding:3px 0;">Pending Approval</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Reference ID</td><td style="padding:3px 0;">${reference_id}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
     </table>
     <p style="margin-top:22px;">These buttons take you to the admin dashboard to log in and review the application — they do not approve or reject it directly, for security.</p>
     <div style="margin-top:8px;">
@@ -131,7 +131,7 @@ export async function sendApprovalEmail({ email, firstName, activateUrl }) {
     <p><strong>Your application has been approved.</strong></p>
     <p>Please click the button below to create your password and activate your account.</p>
     <div style="margin:20px 0;">${button(activateUrl, 'ACTIVATE ACCOUNT')}</div>
-    <p style="font-size:13px;color:#7C93A3;">This link will expire in 7 days. If it expires, use "Forgot password" on the login page to request a new one.</p>
+    <p style="font-size:13px;color:#C3D3DE;">This link will expire in 7 days. If it expires, use "Forgot password" on the login page to request a new one.</p>
     <p>We look forward to welcoming you to the SBL community.</p>
     <p>Kind regards,<br/>Keith Wright<br/>Founder, Solutions Based Learning</p>
   `);
@@ -195,7 +195,7 @@ export async function sendPasswordResetRequestedAdminEmail({ adminEmail, student
   const html = wrapper(`
     <p>Hello,</p>
     <p><strong>${who}</strong> just requested a password reset on the Solutions Based Learning login page.</p>
-    <p style="font-size:13px;color:#7C93A3;">They've already been emailed a reset link automatically — no action is needed from you. If they get in touch still unable to log in, you can send them a fresh reset link yourself from the Admin Dashboard's Approved Users tab ("Reset Password" button).</p>
+    <p style="font-size:13px;color:#C3D3DE;">They've already been emailed a reset link automatically — no action is needed from you. If they get in touch still unable to log in, you can send them a fresh reset link yourself from the Admin Dashboard's Approved Users tab ("Reset Password" button).</p>
   `);
   return sendEmail({
     to: adminEmail,
@@ -241,13 +241,13 @@ export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dash
     <p>Hello Keith,</p>
     <p>Someone just submitted feedback through the site's feedback box.</p>
     <table role="presentation" style="width:100%;font-size:14px;color:#F6FAFA;">
-      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Overall rating</td><td style="padding:3px 0;">${stars(rating_overall)}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Supports learning</td><td style="padding:3px 0;">${stars(rating_understanding)}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Most effective for them</td><td style="padding:3px 0;">${escapeHtml(methodsDisplay)}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;vertical-align:top;">Suggestions</td><td style="padding:3px 0;">${suggestionsHtml}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Contact email</td><td style="padding:3px 0;">${escapeHtml(contact_email) || '—'}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Page</td><td style="padding:3px 0;">${escapeHtml(page_url) || '—'}</td></tr>
-      <tr><td style="color:#7C93A3;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Overall rating</td><td style="padding:3px 0;">${stars(rating_overall)}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Supports learning</td><td style="padding:3px 0;">${stars(rating_understanding)}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Most effective for them</td><td style="padding:3px 0;">${escapeHtml(methodsDisplay)}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Suggestions</td><td style="padding:3px 0;">${suggestionsHtml}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Contact email</td><td style="padding:3px 0;">${escapeHtml(contact_email) || '—'}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Page</td><td style="padding:3px 0;">${escapeHtml(page_url) || '—'}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
     </table>
     <p style="margin-top:22px;">This is also saved in the Admin Dashboard's Feedback tab if you'd rather browse it there.</p>
     <div style="margin-top:8px;">${button(dashboardUrl, 'VIEW IN ADMIN DASHBOARD')}</div>
@@ -280,7 +280,7 @@ export async function sendPasswordResetEmail({ email, firstName, resetUrl }) {
     <p>Hello ${firstName || 'there'},</p>
     <p>We received a request to reset the password for your Solutions Based Learning account.</p>
     <div style="margin:20px 0;">${button(resetUrl, 'RESET PASSWORD')}</div>
-    <p style="font-size:13px;color:#7C93A3;">This link will expire in 1 hour. If you did not request this, you can safely ignore this email — your password will not be changed.</p>
+    <p style="font-size:13px;color:#C3D3DE;">This link will expire in 1 hour. If you did not request this, you can safely ignore this email — your password will not be changed.</p>
     <p>Kind regards,<br/>The Solutions Based Learning team</p>
   `);
   return sendEmail({

@@ -1,0 +1,15 @@
+/* Lighter palette for staff pages (admin dashboard, class sheet, resource pages).
+   Loaded after sbl-theme.css and sbl-auth.css so it overrides their dark navy. */
+:root {
+  --ink:          #20374F;
+  --navy:         #2A4663;
+  --navy-raised:  #335374;
+  --navy-line:    #4A6C8E;
+  --slate:        #C3D3DE;
+  --slate-dim:    #93A9BA;
+  --slate-dimmer: #5B7894;
+}
+body { background: var(--navy); }
+/* Class sheet sticky headers and summary column */
+.cs-sheet thead th, .cs-sheet .cs-name { background: #2F4D6C; }
+.cs-sheet .cs-sum { background: #2B4865; }
