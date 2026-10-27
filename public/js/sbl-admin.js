@@ -294,10 +294,18 @@
   // field like "SL Geography Grad'28", shown on that student's
   // teacher's /teacher/ roster. Saves on blur (same pattern as the
   // Teacher <select>, just for a text field — Enter blurs it too).
+  var GROUP_OPTIONS = ["IGCSE Grad '30", "IGCSE Grad '29", "IB Grad '28", "IB Grad '27"];
   function renderGroupCell(u) {
     if (u.role !== 'student') return '—';
-    return '<input type="text" class="sbl-group-input" data-action="assign-group" data-id="' + u.id + '" value="' +
-      escapeHtml(u.group_name || '') + '" placeholder="e.g. SL Geography Grad’28" maxlength="80">';
+    var cur = u.group_name || '';
+    var opts = GROUP_OPTIONS.slice();
+    // keep any older free-text group so it isn't lost until changed
+    if (cur && opts.indexOf(cur) === -1) opts.unshift(cur);
+    return '<select class="sbl-group-input" data-action="assign-group" data-id="' + u.id + '">' +
+      '<option value="">— No group —</option>' +
+      opts.map(function (g) {
+        return '<option value="' + escapeHtml(g) + '"' + (g === cur ? ' selected' : '') + '>' + escapeHtml(g) + '</option>';
+      }).join('') + '</select>';
   }
 
   function renderApproved() {
@@ -499,7 +507,7 @@
     if (subjList) { handleSubjectChange(subjList); return; }
     var select = e.target.closest('select[data-action="assign-teacher"]');
     if (select) { handleAssignTeacher(select.getAttribute('data-id'), select.value || null, select); return; }
-    var input = e.target.closest('input[data-action="assign-group"]');
+    var input = e.target.closest('[data-action="assign-group"]');
     if (input) { handleAssignGroup(input.getAttribute('data-id'), input.value, input); return; }
   });
 
