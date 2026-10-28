@@ -62,9 +62,27 @@
       {
         "slug": "resource-consumption",
         "label": "Unit 3: Resource Consumption",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/geography/revision/guide/resource-consumption",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Global trends in consumption",
+                "href": "/geography/revision/guide/resource-consumption/topic-1-global-trends-in-consumption"
+              },
+              {
+                "label": "Impacts of changing consumption",
+                "href": "/geography/revision/guide/resource-consumption/topic-2-impacts-of-changing-trends-in-resource-consumption"
+              },
+              {
+                "label": "Resource stewardship",
+                "href": "/geography/revision/guide/resource-consumption/topic-3-resource-stewardship"
+              }
+            ]
+          }
+        ]
       }
     ]
   }

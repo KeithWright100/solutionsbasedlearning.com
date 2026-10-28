@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3"];
+window.SBL_LESSON_ORDER = ["IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
 window.SBL_LESSONS["IBGCP-T1"] = {
  "id": "IBGCP-T1",
  "topicNumber": 1,
@@ -961,6 +961,523 @@ window.SBL_LESSONS["IBGCC-T3"] = {
    "correct": 0,
    "explain": "Grassroots movements are forms of collective action that emerge from and are driven by ordinary citizens and local communities, rather than being directed from the top down by governments or large institutions.",
    "tag": "Responding to climate change"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGRC-T1"] = {
+ "id": "IBGRC-T1",
+ "topicNumber": 3,
+ "topicTitle": "Unit 3: Resource Consumption and Security (IB Geography Revision Guide)",
+ "title": "Global trends in consumption",
+ "href": "/geography/revision/guide/resource-consumption/topic-1-global-trends-in-consumption",
+ "syllabusFocus": "IB Geography, Unit 3: Resource Consumption and Security: Global trends in consumption.",
+ "checklist": [
+  "I can explain progress in reducing poverty and the growth of the new global middle class",
+  "I can use ecological footprints to measure resource consumption",
+  "I can describe and explain patterns of water availability and consumption",
+  "I can describe and explain patterns of land and food consumption",
+  "I can describe and explain patterns and trends in energy"
+ ],
+ "quiz": [
+  {
+   "q": "Absolute poverty is best defined as:",
+   "options": [
+    "A severe deprivation of basic human needs, measured against a fixed threshold regardless of place",
+    "Having less income than others in your society",
+    "Any household earning below the national average",
+    "A country with a low GDP per capita, regardless of how income is actually distributed among its people"
+   ],
+   "correct": 0,
+   "explain": "Absolute poverty refers to a severe lack of basic necessities (food, water, shelter, sanitation), measured against a fixed minimum standard that does not vary by country or society.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Relative poverty is best defined as:",
+   "options": [
+    "Having significantly less income or resources than the typical standard of living in one’s own society",
+    "Having income below a fixed international threshold",
+    "Living without access to clean water, a specific deprivation rather than a general measure of income, regardless of location.",
+    "A term used only in low-income countries"
+   ],
+   "correct": 0,
+   "explain": "Relative poverty is measured against the standard of living typical in a specific society, meaning the threshold varies from country to country.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Extreme poverty is most closely associated with:",
+   "options": [
+    "Living below an internationally defined minimum income threshold, historically referenced as around $1.90–$2.15 a day",
+    "Any household with below-average national income",
+    "A lack of access to luxury goods, rather than a lack of access to basic human needs like food or shelter, regardless of location.",
+    "A measure only used for entire countries, never individuals"
+   ],
+   "correct": 0,
+   "explain": "Extreme poverty is typically defined using an international poverty line (an income threshold updated periodically by organisations such as the World Bank), representing the most severe form of income poverty.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "An ecological footprint is best defined as:",
+   "options": [
+    "A measure of the amount of biologically productive land and water a population requires to produce the resources it consumes and absorb its waste",
+    "The physical land area a country occupies",
+    "A measure of a country's total population, regardless of how much land or water it actually occupies, according to most published research on the topic.",
+    "A measure of a country’s GDP"
+   ],
+   "correct": 0,
+   "explain": "The ecological footprint measures the biologically productive land and water area required to produce the resources a population consumes and absorb the waste it generates, expressed in global hectares.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "A global hectare (gha) is:",
+   "options": [
+    "A standardised unit representing one hectare of biologically productive land or water with world-average productivity, allowing comparison across different ecosystem types",
+    "A unit measuring exactly one hectare of any land, regardless of productivity",
+    "A unit only used to measure forest land, excluding cropland, grazing land or fishing grounds, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "A measure of a country’s population density"
+   ],
+   "correct": 0,
+   "explain": "A global hectare standardises different types of land and water (cropland, forest, fishing grounds, etc.) using world-average productivity, allowing meaningful comparison of resource use across very different ecosystems.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Biocapacity refers to:",
+   "options": [
+    "The capacity of an area’s ecosystems to produce useful biological materials and absorb waste generated by humans",
+    "The total resources a country consumes",
+    "A country's total industrial output, measured in monetary value rather than ecosystem capacity, regardless of location.",
+    "The number of protected nature reserves in a country"
+   ],
+   "correct": 0,
+   "explain": "Biocapacity is the capacity of a given area’s ecosystems to generate a renewable and ongoing supply of biological resources and to absorb the waste generated by human activity.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Globally, the largest single use of freshwater is for:",
+   "options": [
+    "Agriculture",
+    "Domestic household use",
+    "Industrial manufacturing",
+    "Golf courses and leisure facilities"
+   ],
+   "correct": 0,
+   "explain": "Agriculture, particularly irrigation, accounts for the largest share of global freshwater withdrawal, commonly estimated at around 70% worldwide.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Water stress refers to:",
+   "options": [
+    "A situation where demand for water approaches or exceeds the available supply, straining resources",
+    "A complete absence of any water resources",
+    "A psychological condition unrelated to water supply, availability or the strain placed on resources",
+    "A measure only used for drought-prone deserts"
+   ],
+   "correct": 0,
+   "explain": "Water stress describes a situation where demand for water is high relative to available supply, straining water resources even if some water remains available.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Water scarcity, as distinct from water stress, more specifically refers to:",
+   "options": [
+    "Insufficient water resources to meet demand, which can be physical (not enough water exists) or economic (infrastructure fails to deliver available water)",
+    "A mild inconvenience with no real consequences for households, farming or industry, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "A term identical in meaning to water stress with no distinction",
+    "A condition that only occurs in high-income countries"
+   ],
+   "correct": 0,
+   "explain": "Water scarcity describes a more severe insufficiency of water to meet demand, and can be split into physical scarcity (the resource genuinely does not exist in sufficient quantity) and economic scarcity (water exists but infrastructure/investment fails to make it accessible).",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "The \"nutrition transition\" refers to:",
+   "options": [
+    "A shift in diets, typically from staple-based, lower-calorie diets towards more processed, higher-calorie, higher-fat and higher-meat diets as countries develop",
+    "A country switching entirely to organic farming",
+    "A decline in total food consumption as countries develop and incomes continue to rise, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "A term used only to describe changes in high-income countries"
+   ],
+   "correct": 0,
+   "explain": "The nutrition transition describes the well-documented pattern in which diets shift as countries develop economically, typically moving from staple-crop-based diets towards diets higher in meat, dairy, fat, sugar and processed foods.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "As household incomes rise, global demand for meat and dairy products tends to:",
+   "options": [
+    "Increase, as these foods become more affordable and are often associated with rising living standards",
+    "Decrease significantly",
+    "Remain completely unaffected by income, regardless of how affordable meat and dairy become, regardless of location.",
+    "Only increase in low-income countries"
+   ],
+   "correct": 0,
+   "explain": "Rising incomes are strongly associated with increased consumption of meat and dairy, as these become more affordable and are often perceived as markers of an improving standard of living.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Middle-income countries (MICs) undergoing rapid economic growth commonly experience diets that:",
+   "options": [
+    "Shift towards higher consumption of meat, processed foods and calories, alongside declining reliance on traditional staple crops",
+    "Remain completely unchanged from previous decades, regardless of economic growth or income, according to most published research on the topic.",
+    "Shift entirely towards traditional subsistence farming",
+    "Become identical to diets in the lowest-income countries"
+   ],
+   "correct": 0,
+   "explain": "MICs undergoing rapid growth commonly see diets shift towards more meat, dairy, processed foods and overall calorie intake, alongside a relative decline in reliance on traditional staple crops as the primary food source.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "A country’s \"energy mix\" refers to:",
+   "options": [
+    "The combination of hydrocarbons, nuclear energy and renewable sources that make up a country’s energy supply",
+    "The total amount of energy a country produces",
+    "A single renewable energy source used exclusively by a country, excluding hydrocarbons or nuclear, regardless of location.",
+    "The price a country pays for imported energy"
+   ],
+   "correct": 0,
+   "explain": "A country’s energy mix describes the combination of different energy sources — hydrocarbons, nuclear power and renewables — that together make up its total energy supply.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Hydrocarbons, as an energy source, include:",
+   "options": [
+    "Coal, oil, natural gas and shale gas",
+    "Solar panels and wind turbines",
+    "Nuclear fuel rods, a non-renewable source distinct from coal, oil, natural gas or shale gas",
+    "Hydroelectric dams"
+   ],
+   "correct": 0,
+   "explain": "Hydrocarbons are fossil fuels including coal, oil, natural gas, and shale gas — energy sources formed from ancient organic material.",
+   "tag": "Global trends in consumption"
+  },
+  {
+   "q": "Renewable energy sources are considered sustainable mainly because they:",
+   "options": [
+    "Will never run out and generally do not pollute the environment during use",
+    "Are cheaper than all other energy sources in every situation, regardless of location or scale",
+    "Require no infrastructure to generate electricity",
+    "Have no associated environmental challenges at all"
+   ],
+   "correct": 0,
+   "explain": "Renewable energy sources such as sunlight, wind, water and geothermal energy are considered sustainable because they naturally replenish and generally do not pollute the environment when generating energy, although they do have their own distinct challenges (such as land use or intermittency).",
+   "tag": "Global trends in consumption"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGRC-T2"] = {
+ "id": "IBGRC-T2",
+ "topicNumber": 3,
+ "topicTitle": "Unit 3: Resource Consumption and Security (IB Geography Revision Guide)",
+ "title": "Impacts of changing trends in resource consumption",
+ "href": "/geography/revision/guide/resource-consumption/topic-2-impacts-of-changing-trends-in-resource-consumption",
+ "syllabusFocus": "IB Geography, Unit 3: Resource Consumption and Security: Impacts of changing trends in resource consumption.",
+ "checklist": [
+  "I can explain the water-food-energy nexus and national resource security",
+  "I can explain the implications of climate change for the nexus",
+  "I can explain Nepal’s small-scale approach to the nexus",
+  "I can explain Israel’s large-scale approach to the nexus",
+  "I can explain international waste flows and evaluate a recycling scheme"
+ ],
+ "quiz": [
+  {
+   "q": "The water-food-energy nexus refers to:",
+   "options": [
+    "The complex, interconnected relationships between water, food and energy systems, where a change in one affects the others",
+    "Three completely separate and unrelated resource systems",
+    "A single UN policy document, rather than a set of interconnected physical resource systems, regardless of season or location.",
+    "A term used only to describe energy production"
+   ],
+   "correct": 0,
+   "explain": "The nexus describes how water, food and energy systems are deeply interconnected, so that a change or pressure in one area has knock-on consequences for the other two.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "A key link from energy to water is that:",
+   "options": [
+    "Water used in energy production, such as cooling processes, often returns to rivers warmer than before it was used",
+    "Energy production has no effect on water at all",
+    "Energy production always purifies water, regardless of the processes involved in generating it, regardless of location.",
+    "Water is never used in energy production"
+   ],
+   "correct": 0,
+   "explain": "Water used in energy production, for example as a coolant in power generation, is often returned to rivers at a higher temperature than before, which can affect river ecosystems — a clear water-energy nexus link.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "A key link from water to energy is that:",
+   "options": [
+    "Significant energy is required to extract, treat, transport and distribute water to where it is needed",
+    "Energy is never needed to manage water supplies",
+    "Water systems require no infrastructure, regardless of how energy-intensive treatment can be, regardless of location.",
+    "Energy and water systems operate on entirely separate infrastructure with no overlap"
+   ],
+   "correct": 0,
+   "explain": "Extracting, treating, transporting and distributing water all require substantial energy input, meaning water security is partly dependent on reliable, affordable energy.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "In arid and semi-arid regions such as the Sahel, rising temperatures contribute to desertification, which then:",
+   "options": [
+    "Forces people onto more marginal land and increases pressure to chop down trees for fuelwood, further degrading the land",
+    "Has no effect on local livelihoods or resources",
+    "Automatically increases crop yields, regardless of how degraded or marginal the land becomes, regardless of season or location.",
+    "Only affects energy supplies, not food or water"
+   ],
+   "correct": 0,
+   "explain": "As desertification reduces usable land in regions like the Sahel, people are often forced onto more marginal land and turn to cutting trees for fuelwood, which further degrades soils and reduces the land’s ability to support crops — a self-reinforcing cycle affecting food and land security.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "In Bangladesh, rising sea levels linked to climate change have contributed to:",
+   "options": [
+    "Coastal flooding and saltwater intrusion onto productive farmland, reducing crop yields and displacing people",
+    "Improved agricultural productivity across the entire country",
+    "No measurable change to water or food security, despite rising sea levels and coastal flooding, regardless of location.",
+    "A reduction in the country’s population"
+   ],
+   "correct": 0,
+   "explain": "Rising sea levels in low-lying Bangladesh have caused coastal flooding and saltwater intrusion into farmland, reducing crop yields (since most crops cannot grow in saline soil) and forcing many people to migrate, often to urban slums where demand for water, food and energy increases further.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "In places such as Sri Lanka, where cyclones are common, climate change increases nexus pressure partly because:",
+   "options": [
+    "Warmer sea temperatures can intensify storms, and the resulting hard-engineering coastal defences are expensive and energy-intensive to construct, sometimes displacing productive land",
+    "Cyclones have no link to climate change",
+    "Coastal defences require no resources to build, regardless of how energy-intensive construction is, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "Cyclones only affect wealthy coastal residents"
+   ],
+   "correct": 0,
+   "explain": "Warmer sea temperatures linked to climate change can increase the intensity of tropical storms; in response, hard-engineering coastal defences (like sea walls) are often built, but these require significant energy and resources to construct, and are sometimes sited on otherwise productive land, creating trade-offs within the nexus.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "Nepal’s approach to resource security is generally shaped by the fact that it is:",
+   "options": [
+    "A mountainous, landlocked country with limited capital and difficult terrain for major infrastructure",
+    "A wealthy, flat, coastal country with easy access to capital",
+    "A country with no agricultural sector at all, despite its mountainous and landlocked terrain, regardless of location.",
+    "Identical in physical geography and economy to Israel"
+   ],
+   "correct": 0,
+   "explain": "Nepal’s mountainous, landlocked geography and relatively limited economic and technological capacity make large-scale, capital-intensive infrastructure projects (like those in Israel) far more difficult and costly, favouring smaller-scale, more localised solutions instead.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "A micro-hydropower scheme, common in rural Nepal, refers to:",
+   "options": [
+    "A small-scale hydropower installation, often built to serve a single village or local community",
+    "A massive national dam project generating electricity for the entire country",
+    "A large offshore energy platform, generating electricity far from any single village or community",
+    "A type of nuclear power plant"
+   ],
+   "correct": 0,
+   "explain": "Micro-hydropower schemes are small-scale hydroelectric installations, often using local rivers or streams to generate electricity for a single village or small community, well suited to Nepal’s mountainous terrain and dispersed rural population.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "A biogas digester, used by many rural households in Nepal, works by:",
+   "options": [
+    "Breaking down livestock and organic waste to produce methane gas, which can be used for cooking and lighting",
+    "Burning coal to generate electricity",
+    "Filtering seawater to produce freshwater, rather than breaking down organic or livestock waste, regardless of location.",
+    "Storing solar energy for later use"
+   ],
+   "correct": 0,
+   "explain": "Biogas digesters break down organic material, commonly livestock manure, in an oxygen-free environment to produce methane gas, which rural households can then use directly for cooking and lighting — a low-cost, small-scale energy solution.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "Israel naturally faces significant water security pressure mainly because it:",
+   "options": [
+    "Is located in an arid to semi-arid climate zone with limited natural freshwater resources",
+    "Has consistently high rainfall throughout the year",
+    "Has no coastline and no access to the sea, regardless of its climate or freshwater resources",
+    "Has one of the lowest population densities in the world"
+   ],
+   "correct": 0,
+   "explain": "Israel’s arid to semi-arid climate means it has historically had very limited natural freshwater resources relative to demand, making water security a longstanding national priority.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "Desalination, as used at scale in Israel, refers to the process of:",
+   "options": [
+    "Removing salt from seawater to produce usable freshwater",
+    "Adding salt to freshwater to preserve it",
+    "Recycling wastewater for drinking purposes only, rather than removing salt from seawater",
+    "Transporting water long distances by pipeline"
+   ],
+   "correct": 0,
+   "explain": "Desalination is the process of removing salt from seawater, and large-scale desalination plants along Israel’s Mediterranean coast now supply a very significant share of the country’s domestic water needs.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "Large-scale desalination is a good example of Israel’s \"capital-intensive\" approach to resource security because it:",
+   "options": [
+    "Requires very significant investment in infrastructure and energy to construct and run at a national scale",
+    "Requires very little investment or energy to operate",
+    "Is a small-scale, community-led solution, requiring very little investment or energy to operate, regardless of location.",
+    "Has no connection to the water-food-energy nexus"
+   ],
+   "correct": 0,
+   "explain": "Desalination plants require substantial capital investment to build and significant ongoing energy input to operate, making this a clear example of a large-scale, capital-intensive (rather than small-scale, low-tech) approach to resource security.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "\"International flows of waste\" refers to:",
+   "options": [
+    "The movement of waste materials, including recyclables and e-waste, across international borders for processing or disposal",
+    "Waste that is always disposed of within the country where it was generated",
+    "A term with no real-world relevance, despite the volume of recyclables and e-waste crossing borders, regardless of location.",
+    "Waste that disappears once it is exported"
+   ],
+   "correct": 0,
+   "explain": "International flows of waste describe how waste materials, including electronic waste and recyclables, are transported across borders, often from higher-income to lower-income countries, for processing, recycling or disposal.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "E-waste refers to:",
+   "options": [
+    "Discarded electronic devices and equipment, such as phones, computers and other electronics",
+    "Food waste from restaurants and households",
+    "Waste generated only by heavy industry, excluding household electronics like phones or computers",
+    "A term used exclusively for plastic packaging"
+   ],
+   "correct": 0,
+   "explain": "E-waste (electronic waste) refers to discarded electrical or electronic devices, such as old phones, computers, and other equipment, which often contain both valuable materials and hazardous substances.",
+   "tag": "Impacts of changing consumption"
+  },
+  {
+   "q": "A key reason e-waste is a growing global concern is that it:",
+   "options": [
+    "Is one of the fastest-growing waste streams globally and often contains both valuable recoverable materials and hazardous substances",
+    "Contains no materials of any value or environmental risk",
+    "Has completely stopped being produced due to new regulations, despite rising global electronics use, regardless of season or location.",
+    "Only affects a tiny number of countries worldwide"
+   ],
+   "correct": 0,
+   "explain": "E-waste is one of the fastest-growing waste streams globally, driven by rapid technological turnover; it presents both an opportunity (valuable materials like gold and copper can be recovered) and a serious risk (hazardous substances can cause environmental and health harm if not handled properly).",
+   "tag": "Impacts of changing consumption"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGRC-T3"] = {
+ "id": "IBGRC-T3",
+ "topicNumber": 3,
+ "topicTitle": "Unit 3: Resource Consumption and Security (IB Geography Revision Guide)",
+ "title": "Resource stewardship",
+ "href": "/geography/revision/guide/resource-consumption/topic-3-resource-stewardship",
+ "syllabusFocus": "IB Geography, Unit 3: Resource Consumption and Security: Resource stewardship.",
+ "checklist": [
+  "I can explain the SDGs and the links between them",
+  "I can evaluate Malthusian, Boserupian and stewardship perspectives",
+  "I can evaluate the value of the circular economy"
+ ],
+ "quiz": [
+  {
+   "q": "The UN Sustainable Development Goals (SDGs) are best described as:",
+   "options": [
+    "A set of 17 universal goals, adopted in 2015, addressing social, economic and environmental challenges to be achieved by 2030",
+    "A single environmental treaty focused only on climate change",
+    "A set of goals that apply only to low-income countries, excluding wealthier nations entirely, regardless of season or location.",
+    "A binding legal agreement enforced by international courts"
+   ],
+   "correct": 0,
+   "explain": "The SDGs are a set of 17 universal goals adopted by UN member states in 2015, addressing a wide range of interconnected social, economic and environmental challenges, with a target date of 2030.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "Which SDG focuses specifically on ensuring access to affordable, reliable, sustainable and modern energy?",
+   "options": [
+    "SDG 7 (Affordable and Clean Energy)",
+    "SDG 2 (Zero Hunger), which focuses on food security rather than energy access specifically",
+    "SDG 6 (Clean Water and Sanitation)",
+    "SDG 13 (Climate Action)"
+   ],
+   "correct": 0,
+   "explain": "SDG 7 specifically addresses access to affordable, reliable, sustainable and modern energy for all, directly connecting to this unit’s focus on energy security.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "SDG 12, \"Responsible Consumption and Production\", is directly relevant to this unit because it addresses:",
+   "options": [
+    "Ensuring sustainable consumption and production patterns, including reducing waste and resource use",
+    "Only issues related to international peace and justice",
+    "Only issues related to gender equality, rather than sustainable consumption and production, regardless of location.",
+    "A goal entirely unrelated to resource consumption"
+   ],
+   "correct": 0,
+   "explain": "SDG 12 focuses on ensuring sustainable consumption and production patterns, directly connecting to this unit’s themes of resource consumption, waste, recycling and the circular economy.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "Thomas Malthus’s original theory argued that:",
+   "options": [
+    "Population tends to grow exponentially, while food supply grows only arithmetically, eventually leading to resource shortages and population \"checks\"",
+    "Food supply would always grow faster than population",
+    "Population and resources have no meaningful relationship, regardless of how quickly either grows, regardless of any other environmental or economic factor involved.",
+    "Technology would always solve resource shortages instantly"
+   ],
+   "correct": 0,
+   "explain": "Malthus argued that population grows exponentially (rapidly multiplying) while food supply grows only arithmetically (steadily, by fixed amounts), meaning population would eventually outstrip food supply, triggering \"checks\" such as famine.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "Neo-Malthusian views update Malthus’s original theory mainly by:",
+   "options": [
+    "Extending concern beyond food supply to a wider range of resources and environmental limits, such as water, energy and ecological capacity",
+    "Rejecting any concern about population and resources entirely",
+    "Focusing exclusively on food supply, exactly as Malthus originally did, with no wider concern, according to most published research on the topic.",
+    "Arguing that resource limits are not a genuine concern"
+   ],
+   "correct": 0,
+   "explain": "Neo-Malthusian thinking extends Malthus’s original concern beyond food alone to a broader range of resources and environmental limits, incorporating concepts such as ecological footprints and carrying capacity across multiple resource types.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "Ester Boserup’s theory offers an optimistic counter-argument to Malthus by suggesting that:",
+   "options": [
+    "Population growth itself can drive innovation and technological change that increases the capacity to produce resources",
+    "Population growth has no effect on resource use whatsoever",
+    "Resources will always run out regardless of any human innovation, technology or adaptation, regardless of season or location.",
+    "Population should always be strictly limited by law"
+   ],
+   "correct": 0,
+   "explain": "Boserup argued that population growth creates necessity and pressure that can drive agricultural and technological innovation, increasing the capacity to produce food and resources — essentially the reverse causal direction to Malthus’s argument.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "A traditional \"linear economy\" is best described by the model:",
+   "options": [
+    "Take, make, dispose — resources are extracted, turned into products, and then discarded as waste",
+    "A system where no resources are ever extracted from the environment to make any products at all, regardless of location.",
+    "A model where all products are designed to last forever",
+    "A system identical to a circular economy"
+   ],
+   "correct": 0,
+   "explain": "The linear economy follows a \"take, make, dispose\" model: raw materials are extracted, manufactured into products, used, and then discarded as waste, with limited consideration for reuse or recycling.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "A circular economy is best described as:",
+   "options": [
+    "A systems approach designed to eliminate waste by keeping materials and products in use for as long as possible and regenerating natural systems",
+    "An identical system to the linear economy with a different name",
+    "A model that only applies to the recycling of paper products, excluding any other material, regardless of any other environmental or economic factor involved.",
+    "An economic system with no connection to resource consumption"
+   ],
+   "correct": 0,
+   "explain": "A circular economy is a systems-level approach designed to eliminate waste from the outset, keep materials and products in use through strategies like reuse, repair and recycling, and actively regenerate natural systems rather than depleting them.",
+   "tag": "Resource stewardship"
+  },
+  {
+   "q": "A key principle of the circular economy is:",
+   "options": [
+    "Designing products and systems to minimise waste from the outset, for example through durability, repairability and recyclability",
+    "Designing products to be discarded as quickly as possible",
+    "Extracting as many new raw materials as possible, rather than minimising waste from the outset, according to most published research on the topic.",
+    "Avoiding any consideration of a product’s full lifecycle"
+   ],
+   "correct": 0,
+   "explain": "A core circular economy principle is designing products and systems to minimise waste from the very beginning, for example by making products more durable, repairable, and easier to recycle or disassemble at the end of their life.",
+   "tag": "Resource stewardship"
   }
  ]
 };
