@@ -791,6 +791,7 @@
     html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Home Page</span></a>";
     html += '<a class="lh-sidebar__home" href="/geography">' + icon("home") + "<span>Geography overview</span></a>";
     html += '<a class="lh-sidebar__home" href="/geography/revision">' + icon("book") + "<span>Revision</span></a>";
+    html += '<a class="lh-sidebar__home" href="/geography/revision/guide">' + icon("book") + "<span>IB Geography Full Revision Guide</span></a>";
 
     TREE.forEach(function (group) {
       html += '<div class="lh-sidebar__section">';
