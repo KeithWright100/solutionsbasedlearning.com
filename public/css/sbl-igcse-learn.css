@@ -301,3 +301,13 @@ a.ig-card.is-done { background: linear-gradient(180deg, #f3fdf6, var(--lh-surfac
 .ig-sort li, .ig-match li { border: 1.5px solid rgba(15,23,42,0.18); }
 .ig-sort li.ok, .ig-match li.ok { border-color: #16a34a; }
 .ig-sort-btns button { border: 1.5px solid rgba(15,23,42,0.25); }
+
+/* Annotated maps and photo panels (added Oct 2026) */
+.ig-map svg{border:2px solid #1E3A55;border-radius:14px;}
+.ig-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0;}
+.ig-photo{margin:0;border:2px solid #1E3A55;border-radius:14px;overflow:hidden;background:var(--lh-surface,#fff);display:flex;flex-direction:column;}
+.ig-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#e2e8f0;}
+.ig-photo figcaption{padding:10px 12px 12px;font-size:.84rem;line-height:1.45;color:var(--lh-body);}
+.ig-photo small{display:block;margin-top:5px;font-size:.7rem;color:var(--lh-muted);}
+.ig-tag{display:inline-block;font-family:var(--lh-font-mono);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:4px;vertical-align:1px;}
+.ig-tag--dense{background:#fee2e2;color:#991b1b;} .ig-tag--sparse{background:#fef3c7;color:#92400e;} .ig-tag--space{background:#dbeafe;color:#1e40af;}
