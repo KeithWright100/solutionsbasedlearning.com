@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
 <link rel="stylesheet" href="/css/sbl-teach-bot.css">
 <link rel="stylesheet" href="/css/sbl-igcse-learn.css">
+<style>
+.ig-map svg{border:2px solid #1E3A55;border-radius:14px;}
+.ig-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0;}
+.ig-photo{margin:0;border:2px solid #1E3A55;border-radius:14px;overflow:hidden;background:var(--lh-surface,#fff);display:flex;flex-direction:column;}
+.ig-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#e2e8f0;}
+.ig-photo figcaption{padding:10px 12px 12px;font-size:.84rem;line-height:1.45;color:var(--lh-body);}
+.ig-photo small{display:block;margin-top:5px;font-size:.7rem;color:var(--lh-muted);}
+.ig-tag{display:inline-block;font-family:var(--lh-font-mono);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:4px;vertical-align:1px;}
+.ig-tag--dense{background:#fee2e2;color:#991b1b;} .ig-tag--sparse{background:#fef3c7;color:#92400e;} .ig-tag--space{background:#dbeafe;color:#1e40af;}
+</style>
 </head>
 <body class="lh">
 <div class="lh-shell">
@@ -62,7 +72,7 @@
         <section class="ig-section" id="sc1-global-distribution-global-patterns">
           <span class="ig-sc-tag">Success criterion 1</span>
           <h2>Global distribution: Global patterns</h2>
-<ul><li><b>Densely populated:</b> East Asia (eastern China, Japan), South Asia (the Ganges valley and delta), Western Europe, the north-east USA, and fertile river valleys and coastal plains such as the Nile and Java.</li><li><b>Sparsely populated:</b> hot deserts (Sahara, Arabian), cold regions (northern Canada, Siberia, Antarctica), high mountains (Himalayas, Andes) and dense rainforest interiors (Amazon).</li><li>Around half of the world’s population lives in a small share of its land area; a large proportion lives within about 100 km of a coast.</li></ul>
+<ul><li><b>Densely populated:</b> East Asia (eastern China, Japan), South Asia (the Ganges valley and delta), Western Europe, the north-east USA, and fertile river valleys and coastal plains such as the Nile and Java.</li><li><b>Sparsely populated:</b> hot deserts (Sahara, Arabian), cold regions (northern Canada, Siberia, Antarctica), high mountains (Himalayas, Andes) and dense rainforest interiors (Amazon).</li><li>Around half of the world’s population lives in a small share of its land area; a large proportion lives within about 100 km of a coast.</li></ul><div class="ig-photos"><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Egypt,_Cairo,_Islamic_Cairo,_the_City_of_a_Thousand_Minarets.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Egypt%2C_Cairo%2C_Islamic_Cairo%2C_the_City_of_a_Thousand_Minarets.jpg/960px-Egypt%2C_Cairo%2C_Islamic_Cairo%2C_the_City_of_a_Thousand_Minarets.jpg" alt="Rooftops and minarets of Cairo stretching to the horizon" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--dense">Dense</span> Cairo: tightly packed housing in one of Africa’s largest cities, at the head of the Nile Delta.<small>Photo: Vyacheslav Argenberg, CC BY 4.0 · Wikimedia Commons</small></figcaption></figure><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Western_Desert,_Sahara_Desert,_Libyan_Desert,_Egypt.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Western_Desert%2C_Sahara_Desert%2C_Libyan_Desert%2C_Egypt.jpg/960px-Western_Desert%2C_Sahara_Desert%2C_Libyan_Desert%2C_Egypt.jpg" alt="Empty sand and rock in the Western Desert of Egypt" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--sparse">Sparse</span> Egypt’s Western Desert: no permanent water or arable land, so almost no one lives here.<small>Photo: Vyacheslav Argenberg, CC BY 4.0 · Wikimedia Commons</small></figcaption></figure></div>
         </section>
 
         <section class="ig-section" id="sc1-global-distribution-physical-and-human-facto">
@@ -93,14 +103,159 @@
           <h2>Patterns of development: The core-periphery model</h2>
 <p>The <b>core</b> is the economically dominant region, with investment, jobs and decision-making. The <b>periphery</b> is less developed and often dependent on the core, supplying raw materials, labour and migrants.</p>
 <p>Investment and skilled people flow towards the core, so without deliberate policy the gap tends to persist or widen. The model works at different <b>scales</b>: global (HICs and LICs), national (Bangkok and rural north-east Thailand) and urban (central business district and outer informal settlements).</p>
-<div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: core or periphery?</p><p class="ig-checknote">Is each feature typical of the core or the periphery?</p><ul class="ig-sort"><li data-a="c"><span>Attracts most investment and infrastructure</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="p"><span>Supplies raw materials and migrant labour</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="c"><span>Headquarters of major companies</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="p"><span>Lower levels of service provision</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="c"><span>High wages and many skilled jobs</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="p"><span>Out-migration of young adults</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP02-d2" placeholder="Using an example at one scale, explain why core-periphery inequality often widens over time."></textarea>
+<figure class="ig-fig ig-map"><svg viewBox="0 0 720 430" role="img" aria-labelledby="fig-cp"><title id="fig-cp">The core-periphery model</title>
+<rect width="720" height="430" fill="#f8fafc"/>
+<circle cx="230" cy="215" r="185" fill="#fde68a" stroke="#b45309" stroke-width="1.5"/>
+<circle cx="230" cy="215" r="125" fill="#fed7aa" stroke="#c2410c" stroke-width="1" stroke-dasharray="5 4"/>
+<circle cx="230" cy="215" r="62" fill="#dc2626"/>
+<text x="230" y="211" font-family="Inter,sans-serif" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">CORE</text>
+<text x="230" y="229" font-family="Inter,sans-serif" font-size="10.5" fill="#fff" text-anchor="middle">wealth, power,</text>
+<text x="230" y="242" font-family="Inter,sans-serif" font-size="10.5" fill="#fff" text-anchor="middle">decisions</text>
+<text x="300" y="327" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#9a3412" text-anchor="middle">SEMI-PERIPHERY</text>
+<text x="230" y="65" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#92400e" text-anchor="middle">PERIPHERY</text>
+<line x1="66.8646" y1="291.071" x2="170.184" y2="242.893" stroke="#1d4ed8" stroke-width="3.2"/><path d="M170.184 242.893 L163.229 251.415 L159.185 242.742 Z" fill="#1d4ed8"/>
+<line x1="153.929" y1="378.135" x2="202.107" y2="274.816" stroke="#1d4ed8" stroke-width="3.2"/><path d="M202.107 274.816 L202.258 285.815 L193.585 281.771 Z" fill="#1d4ed8"/>
+<line x1="66.8646" y1="138.929" x2="170.184" y2="187.107" stroke="#1d4ed8" stroke-width="3.2"/><path d="M170.184 187.107 L159.185 187.258 L163.229 178.585 Z" fill="#1d4ed8"/>
+<line x1="289.816" y1="187.107" x2="393.135" y2="138.929" stroke="#15803d" stroke-width="3.2"/><path d="M393.135 138.929 L386.181 147.451 L382.136 138.778 Z" fill="#15803d"/>
+<line x1="280.559" y1="257.424" x2="367.888" y2="330.702" stroke="#15803d" stroke-width="3.2"/><path d="M367.888 330.702 L357.225 328 L363.376 320.67 Z" fill="#15803d"/>
+<line x1="257.893" y1="155.184" x2="306.071" y2="51.8646" stroke="#15803d" stroke-width="3.2"/><path d="M306.071 51.8646 L306.222 62.8636 L297.549 58.8194 Z" fill="#15803d"/>
+<rect x="63.0926" y="259.095" width="101.8" height="20" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/>
+<text x="113.993" y="273.095" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Raw materials</text>
+<rect x="121.705" y="321.007" width="108.4" height="20" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/>
+<text x="175.905" y="335.007" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Migrant labour</text>
+<rect x="82.8926" y="150.905" width="62.2" height="20" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/>
+<text x="113.993" y="164.905" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Profits</text>
+<rect x="278.607" y="150.905" width="134.8" height="20" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="1.4"/>
+<text x="346.007" y="164.905" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Manufactured goods</text>
+<rect x="287.054" y="287.277" width="82" height="20" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="1.4"/>
+<text x="328.054" y="301.277" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Investment</text>
+<rect x="246.395" y="88.9926" width="75.4" height="20" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="1.4"/>
+<text x="284.095" y="102.993" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="middle">Decisions</text>
+<rect x="450" y="22" width="252" height="350" rx="12" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5"/>
+<text x="464" y="48" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start">The model at three scales</text>
+<text x="464" y="76" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Global</text>
+<text x="464" y="92" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Core: HICs</text>
+<text x="464" y="107" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Periphery: LICs</text>
+<text x="464" y="128" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">National</text>
+<text x="464" y="144" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Core: Bangkok</text>
+<text x="464" y="159" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Periphery: Isan</text>
+<text x="464" y="180" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Urban</text>
+<text x="464" y="196" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Core: CBD</text>
+<text x="464" y="211" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Periphery: outer informal</text>
+<text x="464" y="226" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">settlements</text>
+<line x1="464" y1="233" x2="688" y2="233" stroke="#e2e8f0"/>
+<text x="464" y="251" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="start">Why the gap widens</text>
+<text x="464" y="269" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Flows of investment, skilled people</text>
+<text x="464" y="284" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">and profit run towards the core</text>
+<text x="464" y="299" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">(backwash). Benefits that spread</text>
+<text x="464" y="314" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">outwards are usually weaker, so</text>
+<text x="464" y="329" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">without policy the gap persists.</text>
+<text x="450" y="404" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="start">Blue arrows: flows to the core</text>
+<text x="450" y="421" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#15803d" text-anchor="start">Green arrows: flows out from the core</text>
+</svg><figcaption>Figure: the core-periphery model. Resources and people flow towards the core; goods, investment and decisions flow outwards, leaving the periphery dependent.</figcaption></figure><div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: core or periphery?</p><p class="ig-checknote">Is each feature typical of the core or the periphery?</p><ul class="ig-sort"><li data-a="c"><span>Attracts most investment and infrastructure</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="p"><span>Supplies raw materials and migrant labour</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="c"><span>Headquarters of major companies</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="p"><span>Lower levels of service provision</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="c"><span>High wages and many skilled jobs</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li><li data-a="p"><span>Out-migration of young adults</span><span class="ig-sort-btns"><button type="button" data-c="c">Core</button><button type="button" data-c="p">Periphery</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP02-d2" placeholder="Using an example at one scale, explain why core-periphery inequality often widens over time."></textarea>
         </section>
 
         <section class="ig-section" id="sc3-national-scale-thailand-core-and-periphery-i">
           <span class="ig-sc-tag">Success criterion 3</span>
           <h2>National scale: Thailand: Core and periphery in Thailand</h2>
 <p>Thailand shows a strong national core-periphery pattern. <b>Bangkok</b> and the surrounding central region form the <b>core</b>: the capital is Thailand’s <b>primate city</b>, many times larger than any other city, concentrating government, industry, finance, ports and tourism.</p>
-<p>Peripheral regions such as the <b>north-east (Isan)</b> and parts of the north and south have lower incomes, more dependence on farming, fewer services and lower investment.</p>
+<p>Peripheral regions such as the <b>north-east (Isan)</b> and parts of the north and south have lower incomes, more dependence on farming, fewer services and lower investment.</p><figure class="ig-fig ig-map"><svg viewBox="0 0 960 860" role="img" aria-labelledby="fig-thailand"><title id="fig-thailand">Annotated map of population distribution in Thailand</title>
+<rect width="960" height="860" fill="#f8fafc"/><rect x="320" y="8" width="392" height="710" rx="10" fill="#e0ecfb" stroke="#1E3A55" stroke-width="1.5"/>
+<polygon points="571.4,409.0 531.1,387.9 492.8,388.8 499.4,352.6 459.9,352.9 456.3,403.5 432.1,470.7 417.6,511.3 420.6,544.6 449.8,546.0 468.0,588.0 476.1,627.8 501.1,654.2 528.2,659.5 551.5,683.4 536.8,702.3 507.2,707.8 503.7,684.2 467.1,664.0 459.3,672.2 441.6,654.6 434.0,631.8 410.2,605.8 388.4,584.0 381.1,611.1 372.6,585.5 377.5,556.8 390.7,512.7 412.4,465.4 437.0,422.5 419.5,380.6 420.2,359.2 415.1,333.5 385.2,297.0 374.5,273.9 389.9,265.4 406.3,225.4 388.0,195.1 359.5,161.5 337.9,121.1 356.8,112.8 377.2,63.0 408.9,61.0 435.0,41.0 460.7,30.4 480.1,44.6 482.7,72.2 513.0,74.3 501.9,122.8 503.0,164.0 550.2,136.6 563.7,144.7 589.9,143.4 598.9,127.4 632.8,130.5 666.9,167.9 669.7,213.3 706.0,253.4 704.0,292.3 689.4,313.0 647.4,306.4 589.4,315.2 560.7,353.5 571.4,409.0" fill="#fdf6e3" stroke="#334155" stroke-width="1.6" />
+<path d="M483.5 309.5 Q498.1 321.0 498.1 329.1 Q498.1 337.1 501.4 341.7 Q504.8 346.3 505.9 361.2 Q507.0 376.2 517.1 383.1 Q527.2 390.0 540.7 386.6 Q554.1 383.1 547.4 378.5 Q540.7 373.9 527.2 365.9 Q513.8 357.8 499.2 353.2 Q484.6 348.6 473.4 355.5 Q462.2 362.4 457.7 368.2 Q453.3 373.9 451.0 361.3 Q448.8 348.6 452.1 334.8 Q455.5 321.0 462.2 309.5 Q468.9 298.0 483.5 309.5 Z" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="409.8" cy="105.3" rx="9" ry="9" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="462.2" cy="229.0" rx="7" ry="26" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="582.3" cy="213.8" rx="6" ry="4" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="419.6" cy="560.2" rx="5" ry="16" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="482.4" cy="647.6" rx="8" ry="15" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="381.5" cy="607.1" rx="6" ry="6" fill="#dc2626" opacity="0.85"/>
+<polyline points="461.3,247.4 464.5,279.6 481.0,309.5 477.9,337.1 481.5,346.3" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M567.6 210.6 Q530.6 268.1 493.6 325.6" fill="none" stroke="#16a34a" stroke-width="5"/><path d="M493.6 325.6 L494.9 314.7 L503.0 319.9 Z" fill="#16a34a"/>
+<circle cx="477.9" cy="337.1" r="5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="468.9" y="341.1" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#111827" text-anchor="end">Bangkok</text>
+<circle cx="409.8" cy="105.3" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="417.8" y="109.3" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Chiang Mai</text>
+<circle cx="582.3" cy="213.8" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="589.3" y="226.8" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Khon Kaen</text>
+<circle cx="383.3" cy="607.1" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="376.3" y="611.1" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="end">Phuket</text>
+<circle cx="499.4" cy="355.0" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="506.4" y="359.0" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Chonburi</text>
+<circle cx="512.4" cy="386.3" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="519.4" y="398.3" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Rayong</text>
+<text x="527.2" y="482.0" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" font-style="italic" fill="#1d4ed8" text-anchor="middle">Gulf of</text>
+<text x="527.2" y="500.4" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" font-style="italic" fill="#1d4ed8" text-anchor="middle">Thailand</text>
+<text x="334.5" y="528.0" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" font-style="italic" fill="#1d4ed8" text-anchor="middle">Andaman Sea</text>
+<text x="352.4" y="187.6" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">MYANMAR</text>
+<text x="572.0" y="95.6" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">LAOS</text>
+<text x="630.3" y="362.4" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">CAMBODIA</text>
+<text x="585.5" y="698.2" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">MALAYSIA</text>
+<text x="634.8" y="270.4" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#9a3412" text-anchor="middle">ISAN</text>
+<rect x="10" y="20" width="300" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="40.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Chiang Mai</text>
+<text x="20.0" y="58.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Thailand’s second largest city, home to about</text>
+<text x="20.0" y="73.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">131,000 people, compared with 8–10 million in</text>
+<text x="20.0" y="88.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Bangkok.</text>
+<line x1="409.8" y1="105.3" x2="310.0" y2="99.0" stroke="#475569" stroke-width="1.2"/><circle cx="409.8" cy="105.3" r="3" fill="#475569"/>
+<rect x="10" y="190" width="300" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="210.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Myanmar border</text>
+<text x="20.0" y="228.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Thailand’s border with Myanmar is mountainous</text>
+<text x="20.0" y="243.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">and forested. There are several large Burmese</text>
+<text x="20.0" y="258.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">refugee camps along its length.</text>
+<line x1="397.2" y1="196.8" x2="310.0" y2="196.8" stroke="#475569" stroke-width="1.2"/><circle cx="397.2" cy="196.8" r="3" fill="#475569"/>
+<rect x="10" y="370" width="300" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="390.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Central plains</text>
+<text x="20.0" y="408.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">The flat plains of central Thailand are</text>
+<text x="20.0" y="423.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">fertile and well watered by rivers: the “rice</text>
+<text x="20.0" y="438.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">bowl of Thailand”.</text>
+<line x1="464.5" y1="298.0" x2="310.0" y2="370.0" stroke="#475569" stroke-width="1.2"/><circle cx="464.5" cy="298.0" r="3" fill="#475569"/>
+<rect x="10" y="580" width="300" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="600.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Tourism in the south</text>
+<text x="20.0" y="618.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Tourism supports many growing populations in</text>
+<text x="20.0" y="633.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">the south, including Phuket, Lanta and other</text>
+<text x="20.0" y="648.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Andaman islands.</text>
+<line x1="383.3" y1="607.1" x2="310.0" y2="607.1" stroke="#475569" stroke-width="1.2"/><circle cx="383.3" cy="607.1" r="3" fill="#475569"/>
+<rect x="722" y="20" width="228" height="109" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="732.0" y="40.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Khorat Plateau (Isan)</text>
+<text x="732.0" y="58.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">The north-east, often called Isan,</text>
+<text x="732.0" y="73.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">has infertile, sandy soils and</text>
+<text x="732.0" y="88.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">unpredictable rainfall. Poor</text>
+<text x="732.0" y="103.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">households typically rely on</text>
+<text x="732.0" y="118.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">agriculture.</text>
+<line x1="634.8" y1="169.2" x2="722.0" y2="129.0" stroke="#475569" stroke-width="1.2"/><circle cx="634.8" cy="169.2" r="3" fill="#475569"/>
+<rect x="722" y="190" width="228" height="79" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.6"/>
+<text x="732.0" y="210.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Core and periphery</text>
+<text x="732.0" y="228.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">The “core” of Bangkok draws in</text>
+<text x="732.0" y="243.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">huge numbers of rural migrants</text>
+<text x="732.0" y="258.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">from the “periphery”.</text>
+<line x1="542.9" y1="261.2" x2="722.0" y2="261.2" stroke="#475569" stroke-width="1.2"/><circle cx="542.9" cy="261.2" r="3" fill="#475569"/>
+<rect x="722" y="320" width="228" height="139" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="732.0" y="340.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Eastern Seaboard</text>
+<text x="732.0" y="358.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Chonburi and Rayong have attracted</text>
+<text x="732.0" y="373.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">a lot of foreign investment,</text>
+<text x="732.0" y="388.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">particularly from Japan and South</text>
+<text x="732.0" y="403.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Korea. It is an important</text>
+<text x="732.0" y="418.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">“economic corridor” and the</text>
+<text x="732.0" y="433.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">fastest-growing region of</text>
+<text x="732.0" y="448.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Thailand.</text>
+<line x1="527.2" y1="376.2" x2="722.0" y2="376.2" stroke="#475569" stroke-width="1.2"/><circle cx="527.2" cy="376.2" r="3" fill="#475569"/>
+<rect x="722" y="540" width="228" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="732.0" y="560.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Bangkok</text>
+<text x="732.0" y="578.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">A population of 8–10 million: a</text>
+<text x="732.0" y="593.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">megacity as well as Thailand’s</text>
+<text x="732.0" y="608.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">primate city.</text>
+<line x1="477.9" y1="337.1" x2="722.0" y2="540.0" stroke="#475569" stroke-width="1.2"/><circle cx="477.9" cy="337.1" r="3" fill="#475569"/>
+<rect x="10" y="735" width="940" height="79" rx="8" fill="#ffffff" stroke="#b91c1c" stroke-width="1.6"/>
+<text x="20.0" y="755.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Population density and distribution in Thailand</text>
+<text x="20.0" y="773.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Distribution is shaped by access to fertile soils for farming, but is increasingly dominated by the growth and pull factors of Bangkok. The capital</text>
+<text x="20.0" y="788.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">grew up around the Chao Phraya river, which supports a vast amount of international trade. Massive rural-to-urban migration has led to very different</text>
+<text x="20.0" y="803.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">population structures in different parts of the country.</text>
+<rect x="530" y="590" width="178" height="54" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="540" y="599" width="16" height="11" rx="2" fill="#dc2626" stroke="#64748b" stroke-width=".6"/>
+<text x="564.0" y="608.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Densely populated</text>
+<line x1="538" y1="624" x2="552" y2="624" stroke="#16a34a" stroke-width="3"/><path d="M558 624 l-6 -4 v8 Z" fill="#16a34a"/>
+<text x="564.0" y="628.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Rural–urban migration</text>
+</svg><figcaption>Figure: annotated map of Thailand. Red areas are densely populated; the green arrow shows migration from the periphery to the Bangkok core.</figcaption></figure>
         </section>
 
         <section class="ig-section" id="sc3-national-scale-thailand-voluntary-internal-m">
@@ -122,13 +277,133 @@
           <span class="ig-sc-tag">Success criterion 4</span>
           <h2>Egypt and Thailand: Egypt: the Nile Valley and Delta</h2>
 <p>Almost all of Egypt’s population lives on a small fraction of its land: along the <b>Nile Valley</b> and in the <b>Nile Delta</b>, with Cairo at their junction. Population densities there are among the highest in the world.</p>
-<ul><li>The Nile provides water and fertile alluvial soils in an otherwise desert country.</li><li>The <b>Aswan High Dam</b> regulates the river’s flow, supporting year-round irrigation and reducing floods.</li><li>The <b>Western Desert</b> and Sinai have very low density because they lack water and arable land, apart from oases and coastal tourist resorts.</li><li>Internal migration is directed towards <b>Cairo</b> and the Delta, where jobs and services concentrate.</li></ul>
+<ul><li>The Nile provides water and fertile alluvial soils in an otherwise desert country.</li><li>The <b>Aswan High Dam</b> regulates the river’s flow, supporting year-round irrigation and reducing floods.</li><li>The <b>Western Desert</b> and Sinai have very low density because they lack water and arable land, apart from oases and coastal tourist resorts.</li><li>Internal migration is directed towards <b>Cairo</b> and the Delta, where jobs and services concentrate.</li></ul><figure class="ig-fig ig-map"><svg viewBox="0 0 960 880" role="img" aria-labelledby="fig-egypt"><title id="fig-egypt">Annotated map of population distribution in Egypt</title>
+<rect width="960" height="880" fill="#f8fafc"/>
+<rect x="225.0" y="250.0" width="524.6" height="478.4" fill="#eef2f6" stroke="#1E3A55" stroke-width="1.5"/>
+<clipPath id="egclip"><rect x="225.0" y="250.0" width="524.6" height="478.4"/></clipPath><g clip-path="url(#egclip)">
+<polygon points="208.6,240.8 257.8,268.4 311.1,269.3 352.1,282.2 388.9,294.6 409.4,302.0 442.2,287.3 458.6,274.4 495.5,270.2 524.2,276.2 544.7,284.0 577.5,295.1 610.3,297.4 629.5,285.9 639.0,268.4 643.1,254.6 651.3,240.8 208.6,240.8" fill="#bfdbfe" stroke="none" stroke-width="0" />
+<polygon points="757.8,737.6 736.1,710.0 728.7,700.8 681.2,659.4 679.5,629.5 687.7,621.2 651.3,570.6 637.7,544.4 622.6,519.6 591.8,447.8 566.4,401.8 549.6,353.0 553.7,348.9 583.2,414.7 601.7,435.4 615.2,450.1 624.6,442.3 636.1,418.4 644.7,383.4 656.2,365.0 659.5,362.7 653.3,434.0 679.9,480.0 716.8,572.0 749.6,664.0 757.8,737.6" fill="#bfdbfe" stroke="none" stroke-width="0" />
+<polygon points="656.3,364.9 644.8,383.4 636.0,418.2 624.8,442.1 615.2,450.2 601.6,435.3 583.1,414.8 553.8,348.9 549.6,353.0 566.6,401.6 591.8,447.8 622.8,519.5 637.9,544.5 651.1,570.4 687.8,621.4 679.7,629.4 681.0,659.3 728.7,700.6 735.9,710.0 573.4,710.0 414.4,710.0 249.6,710.0 249.6,540.6 249.6,377.0 237.3,340.0 247.9,311.6 241.5,291.9 256.3,269.8 310.9,269.1 350.3,281.2 391.0,294.8 410.0,302.0 441.5,287.4 458.4,274.2 494.6,270.4 523.7,276.2 534.9,299.1 544.4,284.0 577.2,294.9 609.2,297.5 629.3,285.9 656.3,364.9" fill="#fdf6e3" stroke="#334155" stroke-width="1.6" />
+<polyline points="629.5,285.9 657.4,362.7" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M485.3 328.2 Q466.8 314.4 459.6 301.8 Q452.5 289.1 461.7 282.2 Q470.9 275.3 485.3 273.0 Q499.6 270.7 512.9 273.0 Q526.2 275.3 537.5 279.9 Q548.8 284.5 540.6 297.1 Q532.4 309.8 523.2 321.3 Q514.0 332.8 508.8 337.4 Q503.7 342.0 485.3 328.2 Z" fill="#dc2626" opacity="0.85"/>
+<polyline points="573.4,613.9 574.6,597.3 572.2,572.9 562.7,540.3 566.0,518.6 546.3,523.7 523.8,500.2 502.9,471.7 485.3,429.4 499.6,384.8 504.9,339.7" fill="none" stroke="#dc2626" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+<ellipse cx="487.3" cy="374.2" rx="9" ry="7" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="388.9" cy="298.3" rx="13" ry="4" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="451.2" cy="286.8" rx="6" ry="6" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="557.0" cy="343.4" rx="5" ry="9" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="610.3" cy="468.5" rx="4" ry="11" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="630.8" cy="437.7" rx="6" ry="5" fill="#dc2626" opacity="0.85"/>
+<ellipse cx="573.4" cy="613.9" rx="7" ry="7" fill="#dc2626" opacity="0.85"/>
+<polyline points="507.8,714.6 532.4,682.4 561.1,654.8 572.6,622.6" fill="none" stroke="#3b82f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+<polyline points="573.4,613.9 574.6,597.3 572.2,572.9 562.7,540.3 566.0,518.6 546.3,523.7 523.8,500.2 502.9,471.7 485.3,429.4 499.6,384.8 504.9,339.7" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<polyline points="504.9,339.7 491.4,314.4 481.2,296.0 471.7,277.6" fill="none" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+<polyline points="504.9,339.7 507.8,305.2 520.1,291.4 528.7,276.7" fill="none" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+<polyline points="559.0,344.3 550.0,314.4 548.8,283.6" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 3"/>
+<rect x="565.6" y="616.9" width="14" height="5" fill="#111827"/>
+</g>
+<circle cx="504.9" cy="339.7" r="5.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="495.9" y="333.7" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#111827" text-anchor="end">Cairo</text>
+<circle cx="451.2" cy="286.8" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="445.2" y="278.8" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="end">Alexandria</text>
+<circle cx="548.8" cy="284.0" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="554.8" y="278.0" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Port Said</text>
+<circle cx="559.0" cy="343.4" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="567.0" y="353.4" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Suez</text>
+<circle cx="573.4" cy="613.9" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="583.4" y="617.9" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Aswan</text>
+<circle cx="610.3" cy="468.5" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="603.3" y="480.5" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="end">Hurghada</text>
+<circle cx="632.0" cy="437.7" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="639.0" y="449.7" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Sharm el-Sheikh</text>
+<text x="331.6" y="261.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" font-style="italic" fill="#1d4ed8" text-anchor="middle">MEDITERRANEAN SEA</text>
+<text x="684.0" y="572.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" font-style="italic" fill="#1d4ed8" text-anchor="middle">RED SEA</text>
+<text x="348.0" y="516.8" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#92400e" text-anchor="middle">WESTERN DESERT</text>
+<text x="616.4" y="378.8" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#92400e" text-anchor="middle">SINAI</text>
+<text x="532.4" y="664.0" font-family="Inter,sans-serif" font-size="10.5" font-style="italic" fill="#1d4ed8" text-anchor="end">Lake Nasser</text>
+<text x="684.0" y="319.0" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">JORDAN</text>
+<text x="659.5" y="277.6" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">ISRAEL</text>
+<text x="241.4" y="480.0" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="start">LIBYA</text>
+<text x="454.5" y="705.4" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#64748b" text-anchor="middle">SUDAN</text>
+<rect x="10" y="14" width="200" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="34.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Mediterranean coast</text>
+<text x="20.0" y="52.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">A combination of tourist</text>
+<text x="20.0" y="67.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">resorts, working ports,</text>
+<text x="20.0" y="82.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">marinas and fishing villages.</text>
+<line x1="388.9" y1="298.3" x2="210.0" y2="93.0" stroke="#475569" stroke-width="1.2"/><circle cx="388.9" cy="298.3" r="3" fill="#475569"/>
+<rect x="232" y="14" width="330" height="109" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="242.0" y="34.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">The Nile Delta</text>
+<text x="242.0" y="52.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">About 80% of Egyptians live in the Nile Delta and</text>
+<text x="242.0" y="67.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Cairo metropolis. It is one of the most fertile</text>
+<text x="242.0" y="82.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">regions in the world. Rainfall is low and 100% of</text>
+<text x="242.0" y="97.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">crops are irrigated. There is direct access to the</text>
+<text x="242.0" y="112.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Mediterranean and the rest of Europe.</text>
+<line x1="491.4" y1="291.4" x2="491.4" y2="123.0" stroke="#475569" stroke-width="1.2"/><circle cx="491.4" cy="291.4" r="3" fill="#475569"/>
+<rect x="584" y="14" width="250" height="124" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="594.0" y="34.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Suez Canal</text>
+<text x="594.0" y="52.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Completed in 1869, it connects the</text>
+<text x="594.0" y="67.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Red Sea to the Mediterranean at Port</text>
+<text x="594.0" y="82.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Said. One of the most important and</text>
+<text x="594.0" y="97.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">strategic shipping routes in the</text>
+<text x="594.0" y="112.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">world, supporting a variety of</text>
+<text x="594.0" y="127.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">industries.</text>
+<line x1="550.0" y1="314.4" x2="584.0" y2="138.0" stroke="#475569" stroke-width="1.2"/><circle cx="550.0" cy="314.4" r="3" fill="#475569"/>
+<rect x="770" y="330" width="180" height="94" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="780.0" y="350.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Sharm el-Sheikh</text>
+<text x="780.0" y="368.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Population has increased</text>
+<text x="780.0" y="383.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">because of jobs linked to</text>
+<text x="780.0" y="398.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">tourism in this popular</text>
+<text x="780.0" y="413.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">resort.</text>
+<line x1="632.0" y1="437.7" x2="770.0" y2="424.0" stroke="#475569" stroke-width="1.2"/><circle cx="632.0" cy="437.7" r="3" fill="#475569"/>
+<rect x="770" y="500" width="180" height="94" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="780.0" y="520.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Hurghada</text>
+<text x="780.0" y="538.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">A popular diving resort on</text>
+<text x="780.0" y="553.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">the Red Sea that has seen</text>
+<text x="780.0" y="568.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">growth in local</text>
+<text x="780.0" y="583.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">population.</text>
+<line x1="610.3" y1="468.5" x2="770.0" y2="500.0" stroke="#475569" stroke-width="1.2"/><circle cx="610.3" cy="468.5" r="3" fill="#475569"/>
+<rect x="10" y="300" width="200" height="79" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="320.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Faiyum Oasis</text>
+<text x="20.0" y="338.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">A fertile region of the</text>
+<text x="20.0" y="353.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">desert, fed by a branch of</text>
+<text x="20.0" y="368.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">the River Nile.</text>
+<line x1="487.3" y1="374.2" x2="210.0" y2="374.2" stroke="#475569" stroke-width="1.2"/><circle cx="487.3" cy="374.2" r="3" fill="#475569"/>
+<rect x="10" y="560" width="200" height="94" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="580.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Nile Valley</text>
+<text x="20.0" y="598.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">A fertile strip of land a few</text>
+<text x="20.0" y="613.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">kilometres wide follows the</text>
+<text x="20.0" y="628.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Nile. Farms produce cotton,</text>
+<text x="20.0" y="643.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">wheat, fruit and vegetables.</text>
+<line x1="532.4" y1="507.6" x2="210.0" y2="560.0" stroke="#475569" stroke-width="1.2"/><circle cx="532.4" cy="507.6" r="3" fill="#475569"/>
+<rect x="560" y="748" width="390" height="109" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="570.0" y="768.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Aswan High Dam</text>
+<text x="570.0" y="786.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Built in the 1960s, it controls flooding and provides water</text>
+<text x="570.0" y="801.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">for the region around Aswan and Lake Nasser, where</text>
+<text x="570.0" y="816.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">agriculture, industry and urban areas have grown. It also</text>
+<text x="570.0" y="831.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">generates hydro-electric power for the region’s growing</text>
+<text x="570.0" y="846.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">towns.</text>
+<line x1="572.6" y1="619.4" x2="572.6" y2="748.0" stroke="#475569" stroke-width="1.2"/><circle cx="572.6" cy="619.4" r="3" fill="#475569"/>
+<rect x="10" y="748" width="530" height="124" rx="8" fill="#ffffff" stroke="#b91c1c" stroke-width="1.6"/>
+<text x="20.0" y="768.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Population density and distribution in Egypt</text>
+<text x="20.0" y="786.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Egypt shows extreme differences in density, and the pattern has changed little</text>
+<text x="20.0" y="801.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">since ancient times. Desert covers about 96% of the land and is practically empty.</text>
+<text x="20.0" y="816.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Efforts to irrigate the desert have had only limited success. Fresh water is the</text>
+<text x="20.0" y="831.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">main factor determining where people live. The 21st century has also seen rapid</text>
+<text x="20.0" y="846.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">rural-to-urban migration, with Cairo, at the base of the Delta, growing into a</text>
+<text x="20.0" y="861.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">megacity.</text>
+<rect x="760" y="640" width="178" height="74" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="770" y="649" width="16" height="11" rx="2" fill="#dc2626" stroke="#64748b" stroke-width=".6"/>
+<text x="794.0" y="658.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Densely populated</text>
+<rect x="770" y="669" width="16" height="11" rx="2" fill="#fdf6e3" stroke="#64748b" stroke-width=".6"/>
+<text x="794.0" y="678.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Sparse: desert</text>
+<line x1="770" y1="694" x2="786" y2="694" stroke="#1d4ed8" stroke-width="3"/>
+<text x="794.0" y="698.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">River Nile / Suez Canal</text>
+</svg><figcaption>Figure: annotated map of Egypt. Red areas are densely populated; almost everyone lives where there is fresh water from the Nile.</figcaption></figure><div class="ig-photos"><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Nile_River_and_delta_from_orbit.jpg" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Nile_River_and_delta_from_orbit.jpg" alt="Satellite image of the green Nile Valley and Delta surrounded by desert" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--space">From space</span> The Nile Valley and Delta from orbit: the green strip is where almost all Egyptians live.<small>Photo: NASA (Jacques Descloitres, MODIS), public domain · Wikimedia Commons</small></figcaption></figure></div>
         </section>
 
         <section class="ig-section" id="sc4-egypt-and-thailand-thailand-bangkok-and-the-">
           <span class="ig-sc-tag">Success criterion 4</span>
           <h2>Egypt and Thailand: Thailand: Bangkok and the regions</h2>
-<p>Thailand’s distribution is shaped more by <b>human and economic</b> factors. The fertile central plain of the Chao Phraya river supports farming, but the dominant feature is the concentration of people and activity in <b>Bangkok</b>, the primate city. Mountainous areas of the north and west are more sparsely populated, while migration flows from the north-east towards Bangkok and the Eastern Seaboard industrial zone.</p>
+<p>Thailand’s distribution is shaped more by <b>human and economic</b> factors. The fertile central plain of the Chao Phraya river supports farming, but the dominant feature is the concentration of people and activity in <b>Bangkok</b>, the primate city. Mountainous areas of the north and west are more sparsely populated, while migration flows from the north-east towards Bangkok and the Eastern Seaboard industrial zone.</p><div class="ig-photos"><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Bangkok_skyline,_Bangkok,_Thailand.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/Bangkok_skyline%2C_Bangkok%2C_Thailand.jpg/960px-Bangkok_skyline%2C_Bangkok%2C_Thailand.jpg" alt="High-rise skyline of Bangkok" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--dense">Core</span> Bangkok: the primate city, where investment, jobs and high-rise development concentrate.<small>Photo: Vyacheslav Argenberg, CC BY 4.0 · Wikimedia Commons</small></figcaption></figure><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Growing_rice_in_Kaset_Wisai,_Isan_-_panoramio.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Growing_rice_in_Kaset_Wisai%2C_Isan_-_panoramio.jpg/960px-Growing_rice_in_Kaset_Wisai%2C_Isan_-_panoramio.jpg" alt="Green rice paddies in rural Isan, Thailand" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--sparse">Periphery</span> Rice fields in Kaset Wisai, Isan: a rural, farming-based periphery that loses young adults to Bangkok.<small>Photo: All Fronts Quiet, CC BY-SA 3.0 · Wikimedia Commons</small></figcaption></figure></div>
         </section>
 
         <section class="ig-section" id="sc4-egypt-and-thailand-comparing-the-two">
