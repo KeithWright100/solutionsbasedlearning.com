@@ -154,3 +154,72 @@
     init();
   }
 })();
+
+// ---------------------------------------------------------------
+// Diagram zoom: on IGCSE lesson pages, click or tap a diagram
+// (figure.ig-map) to open it full screen. Esc, the close button or
+// a click outside the diagram closes it.
+// ---------------------------------------------------------------
+(function () {
+  function init() {
+    var figs = document.querySelectorAll('figure.ig-map');
+    if (!figs.length) return;
+    var st = document.createElement('style');
+    st.textContent =
+      'figure.ig-map svg{cursor:zoom-in}' +
+      '.ig-zoom-hint{display:block;font-size:.8rem;color:#64748b;margin-top:2px}' +
+      '.ig-zoom{position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.88);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}' +
+      '.ig-zoom__inner{background:#fff;border-radius:14px;padding:10px;width:min(1400px,100%);max-height:100%;overflow:auto}' +
+      '.ig-zoom__inner svg{display:block;width:100%;height:auto;min-width:900px}' +
+      '.ig-zoom__close{position:fixed;top:12px;right:16px;font:600 15px/1 system-ui,sans-serif;background:#fff;color:#0f172a;border:0;border-radius:999px;padding:10px 16px;cursor:pointer}' +
+      '@media (min-width:960px){.ig-zoom__inner svg{min-width:0}}';
+    document.head.appendChild(st);
+    function open(svg) {
+      var ov = document.createElement('div');
+      ov.className = 'ig-zoom';
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-modal', 'true');
+      var inner = document.createElement('div');
+      inner.className = 'ig-zoom__inner';
+      var copy = svg.cloneNode(true);
+      copy.removeAttribute('aria-labelledby');
+      inner.appendChild(copy);
+      var btn = document.createElement('button');
+      btn.className = 'ig-zoom__close';
+      btn.type = 'button';
+      btn.textContent = 'Close ✕';
+      ov.appendChild(inner);
+      ov.appendChild(btn);
+      function close() {
+        document.removeEventListener('keydown', onKey);
+        ov.remove();
+        document.body.style.overflow = '';
+      }
+      function onKey(e) { if (e.key === 'Escape') close(); }
+      ov.addEventListener('click', function (e) { if (!inner.contains(e.target)) close(); });
+      btn.addEventListener('click', close);
+      document.addEventListener('keydown', onKey);
+      document.body.style.overflow = 'hidden';
+      document.body.appendChild(ov);
+      btn.focus();
+    }
+    figs.forEach(function (f) {
+      var svg = f.querySelector('svg');
+      if (!svg) return;
+      svg.setAttribute('tabindex', '0');
+      svg.addEventListener('click', function () { open(svg); });
+      svg.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(svg); }
+      });
+      var cap = f.querySelector('figcaption');
+      if (cap && !cap.querySelector('.ig-zoom-hint')) {
+        var h = document.createElement('span');
+        h.className = 'ig-zoom-hint';
+        h.textContent = 'Click or tap the diagram to enlarge it.';
+        cap.appendChild(h);
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
