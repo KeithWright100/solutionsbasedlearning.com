@@ -16,7 +16,7 @@
   }
   .lh-unit-card {
     background: var(--lh-surface);
-    border: 2px solid rgba(15, 23, 42, 0.5);
+    border: 2px solid #1E3A55;
     border-radius: 12px;
     padding: 1.3rem 1.4rem;
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
@@ -30,6 +30,8 @@
     margin-bottom: 0.5rem;
     display: block;
   }
+  a.lh-unit-card { display: block; text-decoration: none; color: inherit; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+  a.lh-unit-card:hover { border-color: #00B8B0; box-shadow: 0 8px 22px rgba(0, 184, 176, 0.18); transform: translateY(-2px); }
   .lh-unit-card h3 {
     font-family: var(--lh-font-display);
     font-weight: 700;
@@ -74,7 +76,7 @@
           </a>
           <a class="lh-unit-card" href="/geography/revision/topics">
             <span class="lh-unit-card__section">Available now</span>
-            <h3>Revision Topics</h3>
+            <h3>IB Revision Bots</h3>
             <p>One page per unit &mdash; Revise Me Bot with the full unit checklist, a randomised 20-question quiz, and Challenge Mode.</p>
             <div class="lh-unit-card__meta"><span>&nbsp;</span><span class="lh-unit-card__go">Open &rarr;</span></div>
           </a>
