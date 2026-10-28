@@ -37,9 +37,27 @@
       {
         "slug": "global-climate",
         "label": "Unit 2: Global Climate",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/geography/revision/guide/global-climate",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Causes of climate change",
+                "href": "/geography/revision/guide/global-climate/topic-1-causes-of-global-climate-change"
+              },
+              {
+                "label": "Consequences of climate change",
+                "href": "/geography/revision/guide/global-climate/topic-2-consequences-of-global-climate-change"
+              },
+              {
+                "label": "Responding to climate change",
+                "href": "/geography/revision/guide/global-climate/topic-3-responding-to-global-climate-change"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "resource-consumption",

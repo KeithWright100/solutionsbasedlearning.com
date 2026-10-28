@@ -85,7 +85,7 @@
   }
   .hub-cta-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.2rem;
     margin-bottom: 1.8rem;
   }
@@ -169,6 +169,14 @@
   .ib-continue__go { flex: none; font-weight: 800; background: #fff; color: #0f766e !important; border-radius: 999px; padding: 8px 16px; }
   @media (max-width: 640px) { .ib-continue { flex-wrap: wrap; } .ib-continue__go { width: 100%; text-align: center; } }
 
+  .hub-cta-row .igcse-hero-banner--cta { justify-content: space-between; }
+  .ib-games-strip { margin: 0 0 1.8rem; padding: 12px 18px; background: linear-gradient(135deg, #7c3aed, #4f46e5); box-shadow: 0 10px 24px rgba(79,70,229,.28); }
+  .ib-games-strip .ib-continue__icon { width: 40px; height: 40px; }
+  .ib-games-strip .ib-continue__go { color: #4f46e5 !important; }
+  @media (max-width: 1200px) {
+    .hub-cta-row { grid-template-columns: 1fr 1fr; }
+    .hub-cta-row > :first-child { grid-column: 1 / -1; }
+  }
   @media (max-width: 900px) {
     .hub-cta-row { grid-template-columns: 1fr; }
   }
@@ -284,6 +292,17 @@
         </div>
 
         <div class="hub-cta-row">
+          <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="IB Geography Revision Guide">
+            <div>
+              <span class="igcse-hero-kicker">Full revision guide</span>
+              <h2>IB Geography Revision Guide</h2>
+              <p>Condensed notes by topic with annotated maps, diagrams, case studies, key terms, activities and quizzes.</p>
+            </div>
+            <a class="igcse-hero-btn" href="/geography/revision/guide" aria-label="Open the IB Geography Revision Guide">
+              Revision Guide
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+            </a>
+          </section>
           <section class="igcse-hero-banner igcse-hero-banner--cta" aria-label="Revise IB Geography">
             <div>
               <span class="igcse-hero-kicker">In the meantime</span>
@@ -307,6 +326,12 @@
             </a>
           </section>
         </div>
+
+        <a class="ib-continue ib-games-strip" href="/geography/games#ib" aria-label="Full IB topic revision games">
+          <span class="ib-continue__icon"><svg viewBox="0 0 24 24"><path d="M7 7h10a5 5 0 0 1 0 10c-1.5 0-2.3-.8-3-1.6l-.6-.7h-2.8l-.6.7C9.3 16.2 8.5 17 7 17A5 5 0 0 1 7 7zm1 3v1.5H6.5v1H8V14h1v-1.5h1.5v-1H9V10H8zm7.5 1a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zm2-1.5a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z"/></svg></span>
+          <span class="ib-continue__body"><small>Play and revise</small><b>Full IB Topic Revision Games</b><span>Whole-unit quests with checkpoint past paper questions, XP and badges.</span></span>
+          <span class="ib-continue__go">Play &rarr;</span>
+        </a>
       </main>
     </div>
   </div>

@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGCP-T1", "IBGCP-T2", "IBGCP-T3"];
+window.SBL_LESSON_ORDER = ["IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3"];
 window.SBL_LESSONS["IBGCP-T1"] = {
  "id": "IBGCP-T1",
  "topicNumber": 1,
@@ -518,6 +518,449 @@ window.SBL_LESSONS["IBGCP-T3"] = {
    "correct": 0,
    "explain": "The first dividend comes from having a larger share of the population in working age relative to dependents.",
    "tag": "Challenges and opportunities"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGCC-T1"] = {
+ "id": "IBGCC-T1",
+ "topicNumber": 2,
+ "topicTitle": "Unit 2: Global Climate (IB Geography Revision Guide)",
+ "title": "Causes of global climate change",
+ "href": "/geography/revision/guide/global-climate/topic-1-causes-of-global-climate-change",
+ "syllabusFocus": "IB Geography, Unit 2: Global Climate: Causes of global climate change.",
+ "checklist": [
+  "I can explain the atmospheric system and natural causes of climate change",
+  "I can explain the global energy balance and climate feedback loops",
+  "I can explain the enhanced greenhouse effect and the links with development, globalization and trade"
+ ],
+ "quiz": [
+  {
+   "q": "The key difference between weather and climate is:",
+   "options": [
+    "Weather is short-term atmospheric conditions; climate is the average pattern over a long period",
+    "Weather and climate are the same thing",
+    "Climate only refers to temperature, and has nothing to do with rainfall, wind or long-term atmospheric patterns",
+    "Weather only occurs in the stratosphere"
+   ],
+   "correct": 0,
+   "explain": "Weather describes short-term, day-to-day atmospheric conditions, while climate describes the average weather pattern of a place over a long period, typically 30+ years.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "Most weather and climate processes relevant to this course occur in which layer of the atmosphere?",
+   "options": [
+    "The troposphere",
+    "The stratosphere",
+    "The mesosphere",
+    "The thermosphere"
+   ],
+   "correct": 0,
+   "explain": "The troposphere is the lowest layer of the atmosphere, where most weather and climate processes take place.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "Milankovitch cycles refer to:",
+   "options": [
+    "Long-term, predictable variations in Earth’s orbit and axial tilt",
+    "Short-term daily temperature changes",
+    "Volcanic eruption cycles, which occur irregularly and are unrelated to Earth's orbit or axial tilt",
+    "Ocean current cycles"
+   ],
+   "correct": 0,
+   "explain": "Milankovitch cycles are long-term, predictable variations in Earth’s orbit, axial tilt and precession that alter the distribution of solar radiation reaching Earth over thousands of years.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "Insolation refers to:",
+   "options": [
+    "The amount of incoming solar radiation received at Earth’s surface",
+    "The amount of heat trapped by greenhouse gases",
+    "The reflectivity of a surface, describing how much light it bounces back rather than absorbs",
+    "The total energy stored in the oceans"
+   ],
+   "correct": 0,
+   "explain": "Insolation is the amount of incoming solar radiation received by a given area of Earth’s surface.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "For Earth’s climate to remain roughly stable over time, incoming and outgoing energy must be:",
+   "options": [
+    "Roughly balanced",
+    "Completely unrelated",
+    "Always increasing",
+    "Always decreasing"
+   ],
+   "correct": 0,
+   "explain": "A stable climate requires a rough balance between incoming solar radiation and outgoing radiation from Earth; an imbalance leads to warming or cooling.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "Albedo is best defined as:",
+   "options": [
+    "The amount of solar radiation a surface reflects, expressed as a proportion",
+    "The temperature of a surface",
+    "The amount of carbon dioxide in the atmosphere",
+    "The rate of ice melt, measured in the volume of ice lost from glaciers each year"
+   ],
+   "correct": 0,
+   "explain": "Albedo is the proportion of incoming solar radiation that a surface reflects rather than absorbs, usually expressed as a percentage or decimal.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "The natural greenhouse effect is best described as:",
+   "options": [
+    "A natural process that keeps Earth warm enough to support life",
+    "A harmful process with no natural benefit, that only began to occur after industrialisation",
+    "A process caused entirely by human activity",
+    "A process that only began in the industrial era"
+   ],
+   "correct": 0,
+   "explain": "The natural greenhouse effect is a naturally occurring process in which certain gases trap heat, keeping Earth’s average temperature warm enough to support life.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "The \"enhanced\" greenhouse effect refers to:",
+   "options": [
+    "The intensification of the natural greenhouse effect due to increased human-caused greenhouse gas emissions",
+    "The complete absence of greenhouse gases, resulting in a planet with no atmosphere at all, regardless of location.",
+    "A process that only occurs in the stratosphere",
+    "A natural cycle unrelated to human activity"
+   ],
+   "correct": 0,
+   "explain": "The enhanced greenhouse effect describes how human activities, particularly burning fossil fuels, have increased the concentration of greenhouse gases, intensifying the natural greenhouse effect and causing additional warming.",
+   "tag": "Causes of climate change"
+  },
+  {
+   "q": "Which of these is one of the main greenhouse gases contributing to climate change?",
+   "options": [
+    "Carbon dioxide",
+    "Nitrogen, the most abundant gas in the atmosphere but not a significant greenhouse gas itself",
+    "Oxygen",
+    "Argon"
+   ],
+   "correct": 0,
+   "explain": "Carbon dioxide (CO2), along with methane and nitrous oxide, is one of the primary greenhouse gases contributing to the enhanced greenhouse effect.",
+   "tag": "Causes of climate change"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGCC-T2"] = {
+ "id": "IBGCC-T2",
+ "topicNumber": 2,
+ "topicTitle": "Unit 2: Global Climate (IB Geography Revision Guide)",
+ "title": "Consequences of global climate change",
+ "href": "/geography/revision/guide/global-climate/topic-2-consequences-of-global-climate-change",
+ "syllabusFocus": "IB Geography, Unit 2: Global Climate: Consequences of global climate change.",
+ "checklist": [
+  "I can explain the impacts of climate change on the hydrosphere",
+  "I can explain the links between climate change and extreme weather",
+  "I can explain the impacts of climate change on biomes, habitats and migration",
+  "I can explain the impacts of climate change on agriculture, using Bangladesh",
+  "I can explain the uneven impacts of climate change on people and places"
+ ],
+ "quiz": [
+  {
+   "q": "Which best describes what is happening to global ocean temperatures?",
+   "options": [
+    "Oceans are absorbing excess heat from the atmosphere and warming over time",
+    "Oceans are cooling rapidly as they release stored heat back into the surrounding atmosphere",
+    "Ocean temperature is unrelated to atmospheric warming",
+    "Oceans have shown no measurable change"
+   ],
+   "correct": 0,
+   "explain": "The oceans absorb a large proportion of the excess heat trapped by the enhanced greenhouse effect, causing measurable long-term warming.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Sea level rise is caused by two main processes, which are:",
+   "options": [
+    "Thermal expansion of seawater and melting land ice",
+    "Deforestation and desertification, two land-based processes unrelated to ocean or ice volume",
+    "Ocean acidification and coral bleaching",
+    "Increased rainfall and river discharge"
+   ],
+   "correct": 0,
+   "explain": "Sea level rise results primarily from thermal expansion (seawater expanding as it warms) and the addition of water from melting land-based ice, such as glaciers and ice sheets.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Thermal expansion refers to:",
+   "options": [
+    "Water expanding in volume as its temperature increases",
+    "Ice melting into liquid water, changing its physical state without any change in temperature",
+    "The freezing of seawater",
+    "The evaporation of ocean water"
+   ],
+   "correct": 0,
+   "explain": "Thermal expansion is the physical process by which water (like most substances) increases in volume as it warms, contributing directly to sea level rise.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "An extreme weather event is best defined as:",
+   "options": [
+    "A weather event that is significantly different from the typical or average conditions for a place and time",
+    "A weather event that happens every year at the same time and place, entirely predictably, regardless of location.",
+    "A weather event that happens every year at the same time",
+    "An event that only occurs in polar regions"
+   ],
+   "correct": 0,
+   "explain": "An extreme weather event is one that deviates significantly from the usual range of weather conditions expected for a particular place and season.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Climate change is linked to more frequent and intense heatwaves mainly because:",
+   "options": [
+    "Rising baseline global temperatures make extremely hot conditions more likely to occur",
+    "Heatwaves are entirely unrelated to average temperature",
+    "Climate change only affects winter temperatures",
+    "Heatwaves have decreased in frequency worldwide over recent decades, according to most records"
+   ],
+   "correct": 0,
+   "explain": "As average global temperatures rise, the statistical likelihood of extremely hot conditions (heatwaves) occurring also increases.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Climate change can worsen droughts in some regions primarily by:",
+   "options": [
+    "Altering precipitation patterns and increasing evaporation rates due to higher temperatures",
+    "Increasing rainfall everywhere equally",
+    "Having no effect on regional water availability",
+    "Only affecting ocean temperatures, not land conditions, rainfall or evaporation rates at all"
+   ],
+   "correct": 0,
+   "explain": "Climate change can worsen drought conditions in vulnerable regions by shifting precipitation patterns and increasing evaporation rates as temperatures rise, reducing available soil and water moisture.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "A biome is best defined as:",
+   "options": [
+    "A large-scale ecosystem characterised by a distinct climate, vegetation and animal community",
+    "A single species of plant",
+    "A single country’s national park system",
+    "A type of ocean current that circulates warm and cold water between different latitudes, regardless of location."
+   ],
+   "correct": 0,
+   "explain": "A biome is a large-scale ecological region defined by its characteristic climate, vegetation type and associated animal communities, such as tropical rainforest or tundra.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Climate change is causing biome boundaries to shift mainly because:",
+   "options": [
+    "Changing temperature and precipitation patterns alter which vegetation types can survive in a given area",
+    "Biomes are fixed and never change location",
+    "Biome boundaries are determined only by political borders, not by climate or vegetation, regardless of location.",
+    "Biomes are unaffected by climate conditions"
+   ],
+   "correct": 0,
+   "explain": "Since biomes are defined largely by climate, changing temperature and precipitation patterns can shift which vegetation types — and therefore which biome — can be sustained in a particular location.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Climate-driven habitat loss can occur through processes such as:",
+   "options": [
+    "Sea level rise submerging coastal habitats and rising temperatures altering vegetation zones",
+    "Only through direct human construction, such as building roads, cities or farmland, regardless of location.",
+    "Habitat loss is unrelated to climate change",
+    "Only volcanic eruptions cause habitat loss"
+   ],
+   "correct": 0,
+   "explain": "Climate change can directly drive habitat loss through mechanisms such as sea level rise submerging coastal ecosystems and shifting temperature/precipitation patterns altering the vegetation a habitat depends on.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Climate change can affect crop yields negatively mainly through:",
+   "options": [
+    "Increased heat stress, changing rainfall reliability, and more frequent extreme weather damaging crops",
+    "Consistently ideal growing conditions everywhere, regardless of any changes to the climate, regardless of location.",
+    "No measurable impact on agriculture",
+    "Only affecting livestock, never crops"
+   ],
+   "correct": 0,
+   "explain": "Climate change can reduce crop yields through mechanisms such as heat stress on plants, less reliable rainfall, and increased damage from extreme weather events like floods or droughts.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Shifting growing seasons due to climate change can create challenges for farmers because:",
+   "options": [
+    "Traditional planting and harvesting timings, based on historical climate patterns, may no longer match current conditions",
+    "Growing seasons never change under any circumstances",
+    "Farmers automatically know the new correct planting dates with no adjustment needed",
+    "Growing seasons are entirely unrelated to temperature, rainfall or any climate variable, regardless of season or location."
+   ],
+   "correct": 0,
+   "explain": "As temperature and rainfall patterns shift, traditional planting and harvesting calendars — often based on generations of historical climate experience — may become misaligned with actual current conditions, creating risk for farmers.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Water stress affecting agriculture due to climate change can result from:",
+   "options": [
+    "A combination of reduced or less reliable rainfall and increased evaporation from higher temperatures",
+    "Only from decreased rainfall",
+    "Agriculture is unaffected by water availability, regardless of how much rainfall a region receives, regardless of location.",
+    "Only from increased rainfall"
+   ],
+   "correct": 0,
+   "explain": "Agricultural water stress can result from both reduced/less predictable rainfall and increased evaporation rates caused by rising temperatures, reducing the water actually available to crops.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "The impacts of climate change are described as \"unevenly distributed\" because:",
+   "options": [
+    "Different places face different levels of exposure, vulnerability and capacity to adapt",
+    "Every country experiences identical impacts",
+    "Only wealthy countries experience any climate impacts",
+    "Climate change affects only one continent, with no measurable impact anywhere else, regardless of location."
+   ],
+   "correct": 0,
+   "explain": "Climate change impacts vary geographically because places differ in their physical exposure (e.g. coastal vs inland), social/economic vulnerability, and capacity to adapt or respond.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "A \"climate refugee\" or \"environmental migrant\" is someone who:",
+   "options": [
+    "Is displaced primarily due to environmental change or disaster linked to climate change",
+    "Migrates purely for tourism reasons",
+    "Has full, formal legal refugee status under international law in every country",
+    "Never crosses any kind of border, remaining entirely within a single region or country, regardless of location."
+   ],
+   "correct": 0,
+   "explain": "Climate refugees or environmental migrants are people displaced primarily due to environmental changes or disasters linked to climate change, such as sea level rise, drought or extreme weather.",
+   "tag": "Consequences of climate change"
+  },
+  {
+   "q": "Climate change can negatively affect human health through pathways such as:",
+   "options": [
+    "Increased heat-related illness, changing disease distribution, and impacts on food and water security",
+    "No pathway exists linking climate and health, according to public health researchers, regardless of location.",
+    "Only affecting mental health, never physical health",
+    "Climate change improves health outcomes universally"
+   ],
+   "correct": 0,
+   "explain": "Climate change can affect human health through multiple pathways, including increased heat-related illness and death, shifting ranges of disease-carrying vectors, and impacts on nutrition and water safety.",
+   "tag": "Consequences of climate change"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGCC-T3"] = {
+ "id": "IBGCC-T3",
+ "topicNumber": 2,
+ "topicTitle": "Unit 2: Global Climate (IB Geography Revision Guide)",
+ "title": "Responding to global climate change",
+ "href": "/geography/revision/guide/global-climate/topic-3-responding-to-global-climate-change",
+ "syllabusFocus": "IB Geography, Unit 2: Global Climate: Responding to global climate change.",
+ "checklist": [
+  "I can explain risk, vulnerability, resilience and adaptive capacity",
+  "I can evaluate government-led adaptation and mitigation strategies",
+  "I can evaluate the roles of civil society and businesses"
+ ],
+ "quiz": [
+  {
+   "q": "In the context of climate change, risk is best understood as:",
+   "options": [
+    "The likelihood and scale of harmful impacts resulting from the interaction of hazard, exposure and vulnerability",
+    "A fixed, unchangeable property of a place",
+    "Only relevant to financial investments, with no connection to physical hazards at all, regardless of season or location.",
+    "The same as a hazard"
+   ],
+   "correct": 0,
+   "explain": "Climate risk is generally understood as the potential for harmful outcomes arising from the interaction of a hazard, the exposure of people/assets to it, and their vulnerability to being harmed.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "A hazard, in this context, refers to:",
+   "options": [
+    "A potentially damaging physical event or process, such as a flood or heatwave",
+    "A place’s social characteristics",
+    "A country's wealth level, regardless of any physical processes occurring in that place",
+    "The number of people affected by an event"
+   ],
+   "correct": 0,
+   "explain": "A hazard is the potentially damaging physical event or process itself — for example, a flood, drought, heatwave or storm.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "Exposure refers to:",
+   "options": [
+    "The presence of people, property or systems in a place that could be affected by a hazard",
+    "A person’s income level",
+    "How well a government responds to disasters, rather than who or what is exposed to them, regardless of location.",
+    "A hazard’s physical intensity"
+   ],
+   "correct": 0,
+   "explain": "Exposure describes the presence of people, assets, or systems in locations that could be adversely affected by a hazard — essentially, being \"in harm’s way.\"",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "The key difference between adaptation and mitigation is:",
+   "options": [
+    "Adaptation adjusts to the impacts of climate change; mitigation reduces the causes (greenhouse gas emissions)",
+    "They mean exactly the same thing, and geographers use adaptation and mitigation interchangeably, regardless of location.",
+    "Adaptation only applies to LICs; mitigation only applies to HICs",
+    "Mitigation adjusts to impacts; adaptation reduces emissions"
+   ],
+   "correct": 0,
+   "explain": "Adaptation involves adjusting systems and practices to cope with the impacts of climate change already occurring or expected, while mitigation involves reducing greenhouse gas emissions to limit the extent of future climate change.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "Building flood defences to protect a coastal city is an example of:",
+   "options": [
+    "Adaptation",
+    "Mitigation",
+    "Neither adaptation nor mitigation",
+    "A mitigation strategy that reduces emissions"
+   ],
+   "correct": 0,
+   "explain": "Flood defences are an adaptation strategy — they help a place cope with and adjust to the impacts of climate change (like rising sea levels), rather than reducing the greenhouse gas emissions causing climate change.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "A government subsidy for renewable energy installations is an example of:",
+   "options": [
+    "Mitigation",
+    "Adaptation",
+    "Neither adaptation nor mitigation",
+    "An adaptation strategy that reduces exposure"
+   ],
+   "correct": 0,
+   "explain": "Renewable energy subsidies are a mitigation strategy — they aim to reduce future greenhouse gas emissions by shifting energy production away from fossil fuels.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "Civil society, in the context of climate change response, refers to:",
+   "options": [
+    "Non-governmental organisations, community groups, and individuals acting outside of formal government and business structures",
+    "Government ministries and agencies only",
+    "Only large multinational corporations",
+    "The military and police, government bodies responsible for security rather than civil society, regardless of season or location."
+   ],
+   "correct": 0,
+   "explain": "Civil society refers to the space of collective action outside government and business, including NGOs, community groups, campaigners and individual citizens organising around shared causes such as climate action.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "NGOs contribute to climate change response mainly by:",
+   "options": [
+    "Advocacy, research, raising public awareness, and sometimes directly implementing projects such as reforestation or disaster relief",
+    "Having no real influence on policy or public opinion",
+    "Only providing funding to governments, rather than conducting advocacy or direct projects, according to most published research on the topic.",
+    "Replacing the need for any government climate policy"
+   ],
+   "correct": 0,
+   "explain": "NGOs contribute through advocacy for stronger climate policy, conducting research, raising public awareness, and directly implementing projects such as conservation, reforestation, or community resilience programmes.",
+   "tag": "Responding to climate change"
+  },
+  {
+   "q": "A grassroots climate movement is best described as:",
+   "options": [
+    "A form of collective action that originates from and is driven by ordinary citizens and local communities",
+    "A top-down initiative led entirely by national government",
+    "A type of international corporation operating for profit rather than community benefit, regardless of location.",
+    "A formal United Nations agency"
+   ],
+   "correct": 0,
+   "explain": "Grassroots movements are forms of collective action that emerge from and are driven by ordinary citizens and local communities, rather than being directed from the top down by governments or large institutions.",
+   "tag": "Responding to climate change"
   }
  ]
 };
