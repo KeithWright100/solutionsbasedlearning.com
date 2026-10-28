@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="/css/sbl-learn-theme.css">
 <link rel="stylesheet" href="/css/sbl-teach-bot.css">
 <link rel="stylesheet" href="/css/sbl-igcse-learn.css">
+<style>
+.ig-map svg{border:2px solid #1E3A55;border-radius:14px;}
+.ig-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0;}
+.ig-photo{margin:0;border:2px solid #1E3A55;border-radius:14px;overflow:hidden;background:var(--lh-surface,#fff);display:flex;flex-direction:column;}
+.ig-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#e2e8f0;}
+.ig-photo figcaption{padding:10px 12px 12px;font-size:.84rem;line-height:1.45;color:var(--lh-body);}
+.ig-photo small{display:block;margin-top:5px;font-size:.7rem;color:var(--lh-muted);}
+.ig-tag{display:inline-block;font-family:var(--lh-font-mono);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:4px;vertical-align:1px;}
+.ig-tag--dense{background:#fee2e2;color:#991b1b;} .ig-tag--sparse{background:#fef3c7;color:#92400e;} .ig-tag--space{background:#dbeafe;color:#1e40af;}
+</style>
 </head>
 <body class="lh">
 <div class="lh-shell">
@@ -64,7 +74,178 @@
           <span class="ig-sc-tag">Success criterion 1</span>
           <h2>Demographic transition: Population pyramids</h2>
 <p>A <b>population pyramid</b> shows a population by age and sex. Cohorts: <b>young dependents (0–14)</b> at the base, the <b>working-age</b> population (15–64), and <b>elderly dependents (65+)</b> at the top.</p>
-<ul><li><b>Wide base, narrow top</b>: high birth rate, youthful, fast-growing population.</li><li><b>Straighter sides</b>: falling births and deaths, slower growth.</li><li><b>Narrow base, wide top</b>: low fertility and an ageing population.</li><li>Bulges or notches can show baby booms, wars, famines or migration.</li></ul>
+<ul><li><b>Wide base, narrow top</b>: high birth rate, youthful, fast-growing population.</li><li><b>Straighter sides</b>: falling births and deaths, slower growth.</li><li><b>Narrow base, wide top</b>: low fertility and an ageing population.</li><li>Bulges or notches can show baby booms, wars, famines or migration.</li></ul><figure class="ig-fig ig-map"><svg viewBox="0 0 960 530" role="img" aria-labelledby="fig-pyrgen"><title id="fig-pyrgen">Annotated youthful and ageing population pyramids</title>
+<rect width="960" height="530" fill="#f8fafc"/>
+<text x="215.0" y="30.0" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Youthful (expansive) pyramid</text>
+<text x="215.0" y="48.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="middle">e.g. a low-income country in DTM stage 2</text>
+<text x="690.0" y="30.0" font-family="Inter,sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">Ageing (constrictive) pyramid</text>
+<text x="690.0" y="48.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="middle">e.g. a high-income country in DTM stage 4–5</text>
+<rect x="115.0" y="423.0" width="78.0" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="423.0" width="75.0" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="440.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">0–4</text>
+<rect x="123.6" y="401.0" width="69.4" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="401.0" width="66.6" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="418.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">5–9</text>
+<rect x="132.3" y="379.0" width="60.7" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="379.0" width="58.3" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="396.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">10–14</text>
+<rect x="139.2" y="357.0" width="53.8" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="357.0" width="51.6" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="374.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">15–19</text>
+<rect x="146.2" y="335.0" width="46.8" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="335.0" width="45.0" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="352.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">20–24</text>
+<rect x="153.1" y="313.0" width="39.9" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="313.0" width="38.3" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="330.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">25–29</text>
+<rect x="159.2" y="291.0" width="33.8" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="291.0" width="32.5" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="308.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">30–34</text>
+<rect x="164.4" y="269.0" width="28.6" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="269.0" width="27.5" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="286.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">35–39</text>
+<rect x="169.6" y="247.0" width="23.4" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="247.0" width="22.5" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="264.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">40–44</text>
+<rect x="173.9" y="225.0" width="19.1" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="225.0" width="18.3" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="242.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">45–49</text>
+<rect x="177.4" y="203.0" width="15.6" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="203.0" width="15.0" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="220.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">50–54</text>
+<rect x="180.9" y="181.0" width="12.1" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="181.0" width="11.7" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="198.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">55–59</text>
+<rect x="183.5" y="159.0" width="9.5" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="159.0" width="9.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="176.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">60–64</text>
+<rect x="186.1" y="137.0" width="6.9" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="137.0" width="6.7" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="154.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">65–69</text>
+<rect x="188.2" y="115.0" width="4.8" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="115.0" width="4.6" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="132.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">70–74</text>
+<rect x="190.0" y="93.0" width="3.0" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="93.0" width="2.9" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="110.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">75–79</text>
+<rect x="191.3" y="71.0" width="1.7" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="237.0" y="71.0" width="1.7" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="215.0" y="88.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">80+</text>
+<rect x="620.6" y="423.0" width="47.4" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="423.0" width="48.4" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="440.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">0–4</text>
+<rect x="616.3" y="401.0" width="51.7" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="401.0" width="52.8" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="418.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">5–9</text>
+<rect x="611.9" y="379.0" width="56.1" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="379.0" width="57.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="396.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">10–14</text>
+<rect x="607.6" y="357.0" width="60.4" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="357.0" width="61.6" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="374.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">15–19</text>
+<rect x="603.3" y="335.0" width="64.7" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="335.0" width="66.0" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="352.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">20–24</text>
+<rect x="601.2" y="313.0" width="66.8" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="313.0" width="68.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="330.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">25–29</text>
+<rect x="596.9" y="291.0" width="71.1" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="291.0" width="72.6" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="308.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">30–34</text>
+<rect x="590.4" y="269.0" width="77.6" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="269.0" width="79.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="286.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">35–39</text>
+<rect x="577.4" y="247.0" width="90.6" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="247.0" width="92.4" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="264.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">40–44</text>
+<rect x="568.8" y="225.0" width="99.2" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="225.0" width="101.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="242.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">45–49</text>
+<rect x="568.8" y="203.0" width="99.2" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="203.0" width="101.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="220.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">50–54</text>
+<rect x="577.4" y="181.0" width="90.6" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="181.0" width="92.4" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="198.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">55–59</text>
+<rect x="592.8" y="159.0" width="75.2" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="159.0" width="79.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="176.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">60–64</text>
+<rect x="606.6" y="137.0" width="61.4" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="137.0" width="68.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="154.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">65–69</text>
+<rect x="619.4" y="115.0" width="48.6" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="115.0" width="57.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="132.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">70–74</text>
+<rect x="635.0" y="93.0" width="33.0" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="93.0" width="44.0" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="110.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">75–79</text>
+<rect x="648.6" y="71.0" width="19.4" height="20.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="712.0" y="71.0" width="35.2" height="20.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="690.0" y="88.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">80+</text>
+<text x="155.0" y="462.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Males</text>
+<text x="275.0" y="462.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#be185d" text-anchor="middle">Females</text>
+<text x="630.0" y="462.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Males</text>
+<text x="750.0" y="462.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#be185d" text-anchor="middle">Females</text>
+<path d="M30 380 h-6 V442 h6" fill="none" stroke="#0f766e" stroke-width="1.6" opacity="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="18.0" y="411.0" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#0f766e" text-anchor="middle" transform="rotate(-90 18.0 411.0)">0–14 young</text>
+<path d="M30 138 h-6 V376 h6" fill="none" stroke="#7c3aed" stroke-width="1.6" opacity="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="18.0" y="257.0" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#7c3aed" text-anchor="middle" transform="rotate(-90 18.0 257.0)">15–64 working age</text>
+<path d="M30 72 h-6 V134 h6" fill="none" stroke="#b45309" stroke-width="1.6" opacity="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="18.0" y="103.0" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#b45309" text-anchor="middle" transform="rotate(-90 18.0 103.0)">65+ elderly</text>
+<rect x="352.0" y="300.0" width="150.0" height="58.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="361.0" y="318.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Wide base</text>
+<text x="361.0" y="334.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">High birth rate: many</text>
+<text x="361.0" y="348.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">children are born.</text>
+<line x1="352.0" y1="322.0" x2="308.5" y2="407.4" stroke="#b91c1c" stroke-width="2"/>
+<path d="M306.6 411.0 L306.8 402.0 L313.8 405.6 Z" fill="#b91c1c"/>
+<rect x="352.0" y="160.0" width="150.0" height="72.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="361.0" y="178.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Concave sides</text>
+<text x="361.0" y="194.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Many die at every age,</text>
+<text x="361.0" y="208.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">so each cohort is</text>
+<text x="361.0" y="222.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">smaller.</text>
+<line x1="352.0" y1="182.0" x2="270.1" y2="276.0" stroke="#b91c1c" stroke-width="2"/>
+<path d="M267.5 279.0 L269.9 270.3 L275.8 275.5 Z" fill="#b91c1c"/>
+<rect x="352.0" y="64.0" width="150.0" height="58.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="361.0" y="82.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Narrow top</text>
+<text x="361.0" y="98.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Low life expectancy:</text>
+<text x="361.0" y="112.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">few reach old age.</text>
+<line x1="352.0" y1="86.0" x2="246.9" y2="102.4" stroke="#b91c1c" stroke-width="2"/>
+<path d="M242.9 103.0 L250.3 97.9 L251.5 105.6 Z" fill="#b91c1c"/>
+<rect x="830.0" y="330.0" width="122.0" height="72.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="839.0" y="348.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Narrow base</text>
+<text x="839.0" y="364.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Low birth rate:</text>
+<text x="839.0" y="378.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">fertility below</text>
+<text x="839.0" y="392.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">replacement.</text>
+<line x1="830.0" y1="352.0" x2="770.7" y2="408.2" stroke="#b91c1c" stroke-width="2"/>
+<path d="M767.8 411.0 L771.0 402.6 L776.4 408.3 Z" fill="#b91c1c"/>
+<rect x="830.0" y="190.0" width="122.0" height="72.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="839.0" y="208.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Bulge</text>
+<text x="839.0" y="224.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">A large earlier</text>
+<text x="839.0" y="238.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">cohort (baby</text>
+<text x="839.0" y="252.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">boom) moving up.</text>
+<line x1="830.0" y1="212.0" x2="818.3" y2="231.6" stroke="#b91c1c" stroke-width="2"/>
+<path d="M816.2 235.0 L817.0 226.0 L823.7 230.1 Z" fill="#b91c1c"/>
+<rect x="830.0" y="64.0" width="122.0" height="86.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="839.0" y="82.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Wide top</text>
+<text x="839.0" y="98.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">High life</text>
+<text x="839.0" y="112.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">expectancy: more</text>
+<text x="839.0" y="126.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">elderly</text>
+<text x="839.0" y="140.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">dependents.</text>
+<line x1="830.0" y1="86.0" x2="775.5" y2="122.8" stroke="#b91c1c" stroke-width="2"/>
+<path d="M772.2 125.0 L776.7 117.2 L781.1 123.7 Z" fill="#b91c1c"/>
+<rect x="470.0" y="140.0" width="130.0" height="100.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="479.0" y="158.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Fewer old men</text>
+<text x="479.0" y="174.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Women live longer,</text>
+<text x="479.0" y="188.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">so the oldest male</text>
+<text x="479.0" y="202.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">bars are shorter</text>
+<text x="479.0" y="216.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">than the female</text>
+<text x="479.0" y="230.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">bars.</text>
+<line x1="535.0" y1="140.0" x2="642.1" y2="82.9" stroke="#b91c1c" stroke-width="2"/>
+<path d="M645.6 81.0 L640.3 88.3 L636.6 81.4 Z" fill="#b91c1c"/>
+<rect x="40.0" y="474.0" width="880.0" height="42.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="49.0" y="492.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Reading a pyramid: each bar is the share of the population in one 5-year age group, males on the left and females on the right. Shape tells you</text>
+<text x="49.0" y="506.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">about past birth rates, death rates and migration; notches can show wars, famines or emigration.</text>
+</svg><figcaption>Figure: the main features of a youthful and an ageing population pyramid (illustrative shapes, not real data).</figcaption></figure>
         </section>
 
         <section class="ig-section" id="sc1-demographic-transition-the-demographic-trans">
@@ -73,14 +254,251 @@
 
 <div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Stage</th><th>Birth rate</th><th>Death rate</th><th>Population</th></tr></thead><tbody><tr><td>1</td><td>High</td><td>High</td><td>Stable or slow growth</td></tr><tr><td>2</td><td>High</td><td>Falling rapidly (healthcare, sanitation, food supply)</td><td>Rapid growth</td></tr><tr><td>3</td><td>Falling (contraception, education, urbanisation)</td><td>Falling, lower</td><td>Growth slows</td></tr><tr><td>4</td><td>Low</td><td>Low</td><td>Stable or slow growth</td></tr><tr><td>5</td><td>Very low</td><td>Low but rising (ageing)</td><td>Natural decrease</td></tr></tbody></table></div><p>Fertility falls because of education and employment for women, contraception, urbanisation and lower infant mortality.</p>
 <p><b>Strengths:</b> simple, shows the link between development and population, useful for comparison. <b>Limitations:</b> based on Western Europe’s history, ignores migration, cannot predict timing, and some countries move faster or skip stages because of policies or disease such as HIV/AIDS.</p>
-<div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: which DTM stage?</p><p class="ig-checknote">Match each description to an early or late stage.</p><ul class="ig-sort"><li data-a="e"><span>Death rate falls but birth rate stays high</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="l"><span>Births and deaths both low</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="e"><span>Wide-based pyramid</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="l"><span>Natural decrease as deaths exceed births</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="e"><span>Rapid population growth</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="l"><span>Narrow base and wide top</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP05-d5" placeholder="Evaluate the usefulness of the DTM for explaining population change in different countries."></textarea>
+<figure class="ig-fig ig-map"><svg viewBox="0 0 960 520" role="img" aria-labelledby="fig-dtm"><title id="fig-dtm">The Demographic Transition Model</title>
+<rect width="960" height="520" fill="#f8fafc"/>
+<rect x="70.0" y="60.0" width="166.0" height="320.0" rx="0" fill="#f1f5f9" stroke="none" stroke-width="0" opacity="1"/>
+<text x="153.0" y="38.0" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Stage 1</text>
+<text x="153.0" y="53.0" font-family="Inter,sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">High stationary</text>
+<rect x="236.0" y="60.0" width="166.0" height="320.0" rx="0" fill="#ffffff" stroke="none" stroke-width="0" opacity="1"/>
+<text x="319.0" y="38.0" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Stage 2</text>
+<text x="319.0" y="53.0" font-family="Inter,sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Early expanding</text>
+<line x1="236.0" y1="60.0" x2="236.0" y2="380.0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="402.0" y="60.0" width="166.0" height="320.0" rx="0" fill="#f1f5f9" stroke="none" stroke-width="0" opacity="1"/>
+<text x="485.0" y="38.0" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Stage 3</text>
+<text x="485.0" y="53.0" font-family="Inter,sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Late expanding</text>
+<line x1="402.0" y1="60.0" x2="402.0" y2="380.0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="568.0" y="60.0" width="166.0" height="320.0" rx="0" fill="#ffffff" stroke="none" stroke-width="0" opacity="1"/>
+<text x="651.0" y="38.0" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Stage 4</text>
+<text x="651.0" y="53.0" font-family="Inter,sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Low stationary</text>
+<line x1="568.0" y1="60.0" x2="568.0" y2="380.0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<rect x="734.0" y="60.0" width="166.0" height="320.0" rx="0" fill="#f1f5f9" stroke="none" stroke-width="0" opacity="1"/>
+<text x="817.0" y="38.0" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">Stage 5</text>
+<text x="817.0" y="53.0" font-family="Inter,sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Declining</text>
+<line x1="734.0" y1="60.0" x2="734.0" y2="380.0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/>
+<line x1="70.0" y1="380.0" x2="900.0" y2="380.0" stroke="#1b2029" stroke-width="2"/>
+<line x1="70.0" y1="60.0" x2="70.0" y2="380.0" stroke="#1b2029" stroke-width="2"/>
+<text x="40.0" y="220.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1b2029" text-anchor="middle" transform="rotate(-90 40.0 220.0)">Birth and death rates (per 1,000)</text>
+<line x1="900.0" y1="60.0" x2="900.0" y2="380.0" stroke="#64748b" stroke-width="1.5"/>
+<text x="928.0" y="220.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle" transform="rotate(-90 928.0 220.0)">Total population</text>
+<text x="485.0" y="402.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1b2029" text-anchor="middle">Time</text>
+<polygon points="236.0,109.8 244.3,110.4 252.6,111.0 260.9,111.6 269.2,112.1 277.5,112.7 285.8,113.3 294.1,113.9 302.4,114.5 310.7,115.1 319.0,115.7 327.3,116.3 335.6,116.9 343.9,117.8 352.2,118.7 360.5,119.6 368.8,120.4 377.1,121.3 385.4,122.2 393.7,123.1 402.0,124.0 410.3,131.1 418.6,138.2 426.9,145.3 435.2,152.4 443.5,159.6 451.8,166.7 460.1,173.8 468.4,180.9 476.7,188.0 485.0,195.1 493.3,202.2 501.6,209.3 509.9,216.4 518.2,223.6 526.5,230.7 534.8,237.8 543.1,244.9 551.4,252.0 559.7,259.1 568.0,266.2 568.0,301.8 559.7,301.1 551.4,300.4 543.1,299.6 534.8,298.9 526.5,298.2 518.2,297.5 509.9,296.8 501.6,296.1 493.3,295.4 485.0,294.7 476.7,291.8 468.4,289.0 460.1,286.1 451.8,283.3 443.5,280.4 435.2,277.6 426.9,274.8 418.6,271.9 410.3,269.1 402.0,266.2 393.7,262.0 385.4,257.7 377.1,253.4 368.8,249.2 360.5,244.9 352.2,240.6 343.9,236.4 335.6,232.1 327.3,227.8 319.0,223.6 310.7,215.0 302.4,206.5 294.1,198.0 285.8,189.4 277.5,180.9 269.2,172.4 260.9,163.8 252.6,155.3 244.3,146.8 236.0,138.2" fill="#fde68a" opacity=".75"/>
+<text x="349.0" y="166.7" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#92400e" text-anchor="middle">Natural</text>
+<text x="349.0" y="180.7" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#92400e" text-anchor="middle">increase</text>
+<path d="M70.0 109.8 L153.0 102.7 L236.0 109.8 L335.6 116.9 L402.0 124.0 L485.0 195.1 L568.0 266.2 L651.0 287.6 L734.0 294.7 L817.0 316.0 L900.0 323.1" fill="none" stroke="#2563eb" stroke-width="3.5" opacity="1" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M70.0 131.1 L111.5 95.6 L153.0 152.4 L194.5 102.7 L236.0 138.2 L319.0 223.6 L402.0 266.2 L485.0 294.7 L568.0 301.8 L651.0 308.9 L734.0 305.3 L817.0 298.2 L900.0 287.6" fill="none" stroke="#dc2626" stroke-width="3.5" opacity="1" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M70.0 337.3 C153.0 337.3 153.0 330.2 236.0 330.2 C319.0 330.2 319.0 259.1 402.0 259.1 C485.0 259.1 485.0 145.3 568.0 145.3 C651.0 145.3 651.0 95.6 734.0 95.6 C817.0 95.6 817.0 109.8 900.0 109.8" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="7 5" opacity="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="78.0" y="82.4" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#1d4ed8" text-anchor="start">Birth rate</text>
+<text x="119.8" y="184.7" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#b91c1c" text-anchor="start">Death rate</text>
+<text x="728.0" y="87.6" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#15803d" text-anchor="end">Total population</text>
+<circle cx="360.5" cy="368.0" r="6" fill="#b45309" stroke="#fff" stroke-width="2"/>
+<text x="360.5" y="356.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="middle">The Gambia</text>
+<circle cx="700.8" cy="368.0" r="6" fill="#7c3aed" stroke="#fff" stroke-width="2"/>
+<text x="700.8" y="356.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#7c3aed" text-anchor="middle">Thailand</text>
+<circle cx="825.3" cy="368.0" r="6" fill="#0f766e" stroke="#fff" stroke-width="2"/>
+<text x="825.3" y="356.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#0f766e" text-anchor="middle">Japan</text>
+<text x="78.0" y="424.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">Both rates high and</text>
+<text x="78.0" y="438.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">fluctuating (disease,</text>
+<text x="78.0" y="453.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">famine); little growth.</text>
+<text x="244.0" y="424.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">Death rate falls</text>
+<text x="244.0" y="438.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">(healthcare, sanitation,</text>
+<text x="244.0" y="453.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">food supply); birth rate</text>
+<text x="244.0" y="467.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">stays high: rapid growth.</text>
+<text x="410.0" y="424.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">Birth rate falls</text>
+<text x="410.0" y="438.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">(contraception, education,</text>
+<text x="410.0" y="453.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">urbanisation): growth</text>
+<text x="410.0" y="467.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">slows.</text>
+<text x="576.0" y="424.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">Both rates low: population</text>
+<text x="576.0" y="438.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">high but stable.</text>
+<text x="742.0" y="424.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">Birth rate below death</text>
+<text x="742.0" y="438.5" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">rate: natural decrease and</text>
+<text x="742.0" y="453.0" font-family="Inter,sans-serif" font-size="10.5" fill="#1b2029" text-anchor="start">ageing.</text>
+</svg><figcaption>Figure: the Demographic Transition Model, with approximate positions of the Gambia, Thailand and Japan. The shaded area is natural increase (birth rate minus death rate).</figcaption></figure><div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: which DTM stage?</p><p class="ig-checknote">Match each description to an early or late stage.</p><ul class="ig-sort"><li data-a="e"><span>Death rate falls but birth rate stays high</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="l"><span>Births and deaths both low</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="e"><span>Wide-based pyramid</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="l"><span>Natural decrease as deaths exceed births</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="e"><span>Rapid population growth</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li><li data-a="l"><span>Narrow base and wide top</span><span class="ig-sort-btns"><button type="button" data-c="e">Stages 1–2</button><button type="button" data-c="l">Stages 4–5</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP05-d5" placeholder="Evaluate the usefulness of the DTM for explaining population change in different countries."></textarea>
         </section>
 
         <section class="ig-section" id="sc2-thailand-and-the-gambia-two-countries-two-st">
           <span class="ig-sc-tag">Success criterion 2</span>
           <h2>Thailand and the Gambia: Two countries, two stages</h2>
 
-<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th></th><th>Thailand</th><th>The Gambia</th></tr></thead><tbody><tr><td>DTM stage</td><td>Stage 4, approaching 5</td><td>Stage 2 (moving into 3)</td></tr><tr><td>Fertility</td><td>Well below replacement level</td><td>High, several children per woman</td></tr><tr><td>Growth</td><td>Very slow; approaching decline</td><td>Rapid</td></tr><tr><td>Life expectancy</td><td>Higher</td><td>Lower</td></tr><tr><td>Pyramid</td><td>Narrow base, bulging middle and top</td><td>Wide base, narrow top</td></tr></tbody></table></div><p>Thailand’s fertility fell rapidly from the 1970s with family planning, education and economic growth. The Gambia’s death rate has fallen while birth rates remain high.</p>
+<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th></th><th>Thailand</th><th>The Gambia</th></tr></thead><tbody><tr><td>DTM stage</td><td>Stage 4, approaching 5</td><td>Stage 2 (moving into 3)</td></tr><tr><td>Fertility</td><td>Well below replacement level</td><td>High, several children per woman</td></tr><tr><td>Growth</td><td>Very slow; approaching decline</td><td>Rapid</td></tr><tr><td>Life expectancy</td><td>Higher</td><td>Lower</td></tr><tr><td>Pyramid</td><td>Narrow base, bulging middle and top</td><td>Wide base, narrow top</td></tr></tbody></table></div><p>Thailand’s fertility fell rapidly from the 1970s with family planning, education and economic growth. The Gambia’s death rate has fallen while birth rates remain high.</p><figure class="ig-fig ig-map"><svg viewBox="0 0 960 530" role="img" aria-labelledby="fig-thgm"><title id="fig-thgm">Population pyramids for the Gambia and Thailand</title>
+<rect width="960" height="530" fill="#f8fafc"/>
+<text x="230.0" y="30.0" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#b45309" text-anchor="middle">The Gambia</text>
+<text x="230.0" y="48.0" font-family="Inter,sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">Youthful: DTM stage 2</text>
+<text x="680.0" y="30.0" font-family="Inter,sans-serif" font-size="16" font-weight="700" fill="#7c3aed" text-anchor="middle">Thailand</text>
+<text x="680.0" y="48.0" font-family="Inter,sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">Ageing: DTM stage 4, approaching 5</text>
+<rect x="74.0" y="387.0" width="134.0" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="387.0" width="128.8" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="402.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">0–4</text>
+<rect x="85.9" y="367.0" width="122.1" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="367.0" width="117.3" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="382.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">5–9</text>
+<rect x="97.8" y="347.0" width="110.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="347.0" width="105.8" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="362.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">10–14</text>
+<rect x="109.8" y="327.0" width="98.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="327.0" width="94.4" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="342.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">15–19</text>
+<rect x="121.7" y="307.0" width="86.3" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="307.0" width="82.9" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="322.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">20–24</text>
+<rect x="133.6" y="287.0" width="74.4" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="287.0" width="71.4" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="302.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">25–29</text>
+<rect x="143.7" y="267.0" width="64.3" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="267.0" width="61.7" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="282.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">30–34</text>
+<rect x="153.8" y="247.0" width="54.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="247.0" width="52.0" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="262.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">35–39</text>
+<rect x="163.9" y="227.0" width="44.1" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="227.0" width="42.3" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="242.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">40–44</text>
+<rect x="173.1" y="207.0" width="34.9" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="207.0" width="33.5" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="222.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">45–49</text>
+<rect x="182.6" y="187.0" width="25.4" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="187.0" width="28.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="202.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">50–54</text>
+<rect x="188.5" y="167.0" width="19.5" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="167.0" width="21.9" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="182.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">55–59</text>
+<rect x="193.6" y="147.0" width="14.4" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="147.0" width="16.2" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="162.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">60–64</text>
+<rect x="197.8" y="127.0" width="10.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="127.0" width="11.4" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="142.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">65–69</text>
+<rect x="201.2" y="107.0" width="6.8" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="107.0" width="7.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="122.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">70–74</text>
+<rect x="203.8" y="87.0" width="4.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="87.0" width="4.8" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="102.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">75–79</text>
+<rect x="205.5" y="67.0" width="2.5" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="252.0" y="67.0" width="2.9" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="230.0" y="82.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">80+</text>
+<rect x="615.8" y="387.0" width="42.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="387.0" width="40.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="402.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">0–4</text>
+<rect x="610.3" y="367.0" width="47.7" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="367.0" width="45.9" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="382.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">5–9</text>
+<rect x="604.8" y="347.0" width="53.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="347.0" width="51.2" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="362.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">10–14</text>
+<rect x="602.9" y="327.0" width="55.1" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="327.0" width="52.9" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="342.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">15–19</text>
+<rect x="600.2" y="307.0" width="57.8" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="307.0" width="55.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="322.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">20–24</text>
+<rect x="595.6" y="287.0" width="62.4" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="287.0" width="60.0" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="302.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">25–29</text>
+<rect x="592.8" y="267.0" width="65.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="267.0" width="62.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="282.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">30–34</text>
+<rect x="590.1" y="247.0" width="67.9" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="247.0" width="65.3" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="262.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">35–39</text>
+<rect x="591.0" y="227.0" width="67.0" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="227.0" width="69.8" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="242.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">40–44</text>
+<rect x="589.2" y="207.0" width="68.8" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="207.0" width="71.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="222.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">45–49</text>
+<rect x="590.1" y="187.0" width="67.9" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="187.0" width="70.7" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="202.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">50–54</text>
+<rect x="594.5" y="167.0" width="63.5" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="167.0" width="66.1" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="182.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">55–59</text>
+<rect x="604.2" y="147.0" width="53.8" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="147.0" width="56.0" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="162.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">60–64</text>
+<rect x="618.3" y="127.0" width="39.7" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="127.0" width="48.5" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="142.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">65–69</text>
+<rect x="628.8" y="107.0" width="29.2" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="107.0" width="35.6" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="122.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">70–74</text>
+<rect x="641.4" y="87.0" width="16.6" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="87.0" width="24.8" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="102.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">75–79</text>
+<rect x="640.7" y="67.0" width="17.3" height="18.0" rx="1.5" fill="#3b82f6" stroke="none" stroke-width="0" opacity="1"/>
+<rect x="702.0" y="67.0" width="25.9" height="18.0" rx="1.5" fill="#ec4899" stroke="none" stroke-width="0" opacity="1"/>
+<text x="680.0" y="82.5" font-family="Inter,sans-serif" font-size="9.5" fill="#334155" text-anchor="middle">80+</text>
+<line x1="172.0" y1="406.0" x2="172.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="172.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">2%</text>
+<line x1="288.0" y1="406.0" x2="288.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="288.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">2%</text>
+<line x1="136.0" y1="406.0" x2="136.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="136.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">4%</text>
+<line x1="324.0" y1="406.0" x2="324.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="324.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">4%</text>
+<line x1="100.0" y1="406.0" x2="100.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="100.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">6%</text>
+<line x1="360.0" y1="406.0" x2="360.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="360.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">6%</text>
+<text x="150.0" y="438.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Males</text>
+<text x="310.0" y="438.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#be185d" text-anchor="middle">Females</text>
+<line x1="622.0" y1="406.0" x2="622.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="622.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">2%</text>
+<line x1="738.0" y1="406.0" x2="738.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="738.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">2%</text>
+<line x1="586.0" y1="406.0" x2="586.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="586.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">4%</text>
+<line x1="774.0" y1="406.0" x2="774.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="774.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">4%</text>
+<line x1="550.0" y1="406.0" x2="550.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="550.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">6%</text>
+<line x1="810.0" y1="406.0" x2="810.0" y2="411.0" stroke="#64748b" stroke-width="1"/>
+<text x="810.0" y="422.0" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">6%</text>
+<text x="600.0" y="438.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#1d4ed8" text-anchor="middle">Males</text>
+<text x="760.0" y="438.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#be185d" text-anchor="middle">Females</text>
+<rect x="410.0" y="250.0" width="150.0" height="72.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="419.0" y="268.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Very wide base</text>
+<text x="419.0" y="284.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">About 40% of Gambians</text>
+<text x="419.0" y="298.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">are under 15: high</text>
+<text x="419.0" y="312.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">fertility.</text>
+<line x1="410.0" y1="272.0" x2="373.7" y2="372.2" stroke="#b91c1c" stroke-width="2"/>
+<path d="M372.3 376.0 L371.4 367.0 L378.7 369.7 Z" fill="#b91c1c"/>
+<rect x="410.0" y="70.0" width="150.0" height="58.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="419.0" y="88.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Narrow top</text>
+<text x="419.0" y="104.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Few people over 65:</text>
+<text x="419.0" y="118.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">lower life expectancy.</text>
+<line x1="410.0" y1="92.0" x2="270.3" y2="134.8" stroke="#b91c1c" stroke-width="2"/>
+<path d="M266.4 136.0 L273.0 129.9 L275.3 137.4 Z" fill="#b91c1c"/>
+<rect x="800.0" y="300.0" width="150.0" height="72.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="809.0" y="318.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Narrow base</text>
+<text x="809.0" y="334.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Fertility well below</text>
+<text x="809.0" y="348.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">replacement since the</text>
+<text x="809.0" y="362.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">1990s.</text>
+<line x1="800.0" y1="322.0" x2="753.6" y2="373.0" stroke="#b91c1c" stroke-width="2"/>
+<path d="M750.9 376.0 L753.4 367.4 L759.2 372.6 Z" fill="#b91c1c"/>
+<rect x="800.0" y="165.0" width="150.0" height="72.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="809.0" y="183.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Bulging middle</text>
+<text x="809.0" y="199.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Large cohorts born</text>
+<text x="809.0" y="213.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">before fertility fell,</text>
+<text x="809.0" y="227.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">now aged 40–60.</text>
+<line x1="800.0" y1="187.0" x2="779.1" y2="212.9" stroke="#b91c1c" stroke-width="2"/>
+<path d="M776.6 216.0 L778.6 207.2 L784.7 212.2 Z" fill="#b91c1c"/>
+<rect x="800.0" y="40.0" width="150.0" height="86.0" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.5" opacity="1"/>
+<text x="809.0" y="58.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Widening top</text>
+<text x="809.0" y="74.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Rising life</text>
+<text x="809.0" y="88.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">expectancy; more women</text>
+<text x="809.0" y="102.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">than men at older</text>
+<text x="809.0" y="116.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">ages.</text>
+<line x1="800.0" y1="62.0" x2="733.4" y2="94.3" stroke="#b91c1c" stroke-width="2"/>
+<path d="M729.8 96.0 L735.4 88.9 L738.8 96.0 Z" fill="#b91c1c"/>
+<rect x="40.0" y="454.0" width="430.0" height="58.0" rx="8" fill="#ffffff" stroke="#b45309" stroke-width="1.5" opacity="1"/>
+<text x="49.0" y="472.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">The Gambia: youth dependency</text>
+<text x="49.0" y="488.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Many children rely on a smaller working population: pressure on</text>
+<text x="49.0" y="502.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">schools, health care and future jobs.</text>
+<rect x="490.0" y="454.0" width="430.0" height="58.0" rx="8" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" opacity="1"/>
+<text x="499.0" y="472.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="start">Thailand: elderly dependency</text>
+<text x="499.0" y="488.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">The large working-age cohort is ageing, with fewer young people to</text>
+<text x="499.0" y="502.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">replace it: pressure on pensions and care.</text>
+</svg><figcaption>Figure: population pyramids for the Gambia and Thailand (approximate shares of total population, based on UN estimates for the early 2020s).</figcaption></figure>
         </section>
 
         <section class="ig-section" id="sc2-thailand-and-the-gambia-dependency">
@@ -115,7 +533,7 @@
           <span class="ig-sc-tag">Success criterion 3</span>
           <h2>Megacity growth: Consequences: Mumbai</h2>
 <p>Mumbai, on India’s west coast, is the country’s financial and commercial capital, with a metropolitan population of over 20 million.</p>
-<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Type</th><th>Consequences</th></tr></thead><tbody><tr><td>Economic</td><td>A major share of India’s finance, trade and film industry; huge job opportunities, but much work is in the informal sector with low pay and no security</td></tr><tr><td>Social</td><td>Housing shortages: a large share of people live in informal settlements such as Dharavi; overcrowding; pressure on schools, health care and transport; inequality between rich and poor</td></tr><tr><td>Environmental</td><td>Air and water pollution, waste disposal problems, traffic congestion, flooding during the monsoon made worse by building over drainage and mangroves</td></tr></tbody></table></div><div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: which consequence?</p><p class="ig-checknote">Is each consequence social, economic or environmental?</p><ul class="ig-sort"><li data-a="s"><span>Overcrowded informal housing</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="e"><span>Many jobs in the informal sector</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="v"><span>Monsoon flooding worsened by building over drainage</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="s"><span>Pressure on schools and hospitals</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="e"><span>Concentration of finance and trade</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="v"><span>Air pollution from traffic</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP07-d7" placeholder="“Megacity growth brings more benefits than problems.” Discuss using Mumbai."></textarea>
+<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Type</th><th>Consequences</th></tr></thead><tbody><tr><td>Economic</td><td>A major share of India’s finance, trade and film industry; huge job opportunities, but much work is in the informal sector with low pay and no security</td></tr><tr><td>Social</td><td>Housing shortages: a large share of people live in informal settlements such as Dharavi; overcrowding; pressure on schools, health care and transport; inequality between rich and poor</td></tr><tr><td>Environmental</td><td>Air and water pollution, waste disposal problems, traffic congestion, flooding during the monsoon made worse by building over drainage and mangroves</td></tr></tbody></table></div><div class="ig-photos"><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Mumbai_skyline,_Carter_Road_Bandra.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Mumbai_skyline%2C_Carter_Road_Bandra.jpg/960px-Mumbai_skyline%2C_Carter_Road_Bandra.jpg" alt="High-rise skyline of Mumbai" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--dense">Formal</span> Mumbai’s skyline: India’s financial and commercial capital, a magnet for rural migrants.<small>Photo: Wander-earth, CC BY-SA 4.0 · Wikimedia Commons</small></figcaption></figure><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Mumbai_03-2016_52_Dharavi_near_Mahim_Junction.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Mumbai_03-2016_52_Dharavi_near_Mahim_Junction.jpg/960px-Mumbai_03-2016_52_Dharavi_near_Mahim_Junction.jpg" alt="Dense informal housing in Dharavi, Mumbai" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--sparse">Informal</span> Dharavi, Mumbai: one of Asia’s largest informal settlements, densely packed homes and workshops.<small>Photo: A.Savin, Free Art Licence · Wikimedia Commons</small></figcaption></figure></div><div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: which consequence?</p><p class="ig-checknote">Is each consequence social, economic or environmental?</p><ul class="ig-sort"><li data-a="s"><span>Overcrowded informal housing</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="e"><span>Many jobs in the informal sector</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="v"><span>Monsoon flooding worsened by building over drainage</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="s"><span>Pressure on schools and hospitals</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="e"><span>Concentration of finance and trade</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li><li data-a="v"><span>Air pollution from traffic</span><span class="ig-sort-btns"><button type="button" data-c="s">Social</button><button type="button" data-c="e">Economic</button><button type="button" data-c="v">Environmental</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP07-d7" placeholder="“Megacity growth brings more benefits than problems.” Discuss using Mumbai."></textarea>
         </section>
 
         <section class="ig-section" id="sc4-forced-migration-rohingya-key-terms">
@@ -129,21 +547,108 @@
           <span class="ig-sc-tag">Success criterion 4</span>
           <h2>Forced migration: Rohingya: Why the Rohingya were displaced</h2>
 <p>The <b>Rohingya</b> are a mainly Muslim ethnic minority from <b>Rakhine State</b> in western <b>Burma (Myanmar)</b>, a mainly Buddhist country. They have long faced discrimination and were effectively denied citizenship, leaving most <b>stateless</b>.</p>
-<p>Waves of violence, especially the military crackdown of <b>2017</b>, forced hundreds of thousands to flee, mostly across the border into <b>Bangladesh</b>. These are <b>political push factors</b>: persecution based on ethnicity and religion.</p>
+<p>Waves of violence, especially the military crackdown of <b>2017</b>, forced hundreds of thousands to flee, mostly across the border into <b>Bangladesh</b>. These are <b>political push factors</b>: persecution based on ethnicity and religion.</p><figure class="ig-fig ig-map"><svg viewBox="0 0 960 610" role="img" aria-labelledby="fig-rohingya"><title id="fig-rohingya">Map of Rohingya forced migration from Rakhine State to Cox’s Bazar</title>
+<rect width="960" height="610" fill="#f8fafc"/>
+<clipPath id="rhclip"><rect x="300.0" y="40.0" width="416.6" height="551.3"/></clipPath>
+<rect x="300.0" y="40.0" width="416.6" height="551.3" fill="#bfdbfe"/><g clip-path="url(#rhclip)">
+<polygon points="357.2,22.5 368.6,75.0 394.8,118.7 398.0,132.8 406.2,171.2 409.5,206.2 417.6,250.0 425.8,279.8 435.6,316.5 451.9,355.0 474.8,379.5 484.6,400.5 484.6,400.5 483.0,381.2 471.5,355.0 465.0,328.8 469.9,302.5 469.9,302.5 492.8,276.3 525.5,241.3 535.3,188.8 528.7,153.8 528.7,153.8 504.2,92.5 496.1,22.5 357.2,22.5" fill="#dcfce7" stroke="#334155" stroke-width="1.6" />
+<polygon points="489.5,400.5 487.9,381.2 476.4,355.0 469.9,328.8 474.8,302.5 492.8,276.3 525.5,241.3 535.3,188.8 528.7,153.8 528.7,153.8 496.1,22.5 757.5,22.5 757.5,617.5 741.1,617.5 667.6,600.0 634.9,565.0 602.2,538.8 571.2,503.8 541.8,468.7 512.4,433.8 489.5,400.5" fill="#f1f5f9" stroke="#334155" stroke-width="1.6" />
+<polygon points="528.7,153.8 496.1,22.5 651.3,22.5 634.9,127.5 594.1,171.2 535.3,188.8" fill="#e2e8f0" stroke="#334155" stroke-width="1.2" />
+<polygon points="489.5,400.5 487.9,381.2 476.4,355.0 469.9,328.8 474.8,302.5 496.1,276.3 528.7,250.0 569.6,293.7 610.4,328.8 757.5,355.0 757.5,617.5 667.6,600.0 634.9,565.0 602.2,538.8 571.2,503.8 541.8,468.7 512.4,433.8" fill="#fecaca" stroke="#991b1b" stroke-width="1.2" stroke-dasharray="5 3"/>
+<polyline points="484.6,400.5 483.0,381.2 471.5,355.0 465.0,328.8 469.9,302.5" fill="none" stroke="#1d4ed8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+</g><rect x="300.0" y="40.0" width="416.6" height="551.3" fill="none" stroke="#1E3A55" stroke-width="1.5"/>
+<ellipse cx="455.2" cy="323.5" rx="16" ry="26" fill="#f59e0b" opacity=".8" stroke="#b45309" stroke-width="1.5"/>
+<text x="475.2" y="315.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#92400e" text-anchor="start">Kutupalong</text>
+<text x="475.2" y="329.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#92400e" text-anchor="start">camps</text>
+<path d="M496.1 386.5 Q478.6 365.0 461.2 343.5" fill="none" stroke="#b91c1c" stroke-width="3.5"/><path d="M461.2 343.5 L471.2 348.2 L463.7 354.2 Z" fill="#b91c1c"/>
+<path d="M517.3 377.7 Q484.0 369.2 461.2 343.5" fill="none" stroke="#b91c1c" stroke-width="3.5"/><path d="M461.2 343.5 L471.4 347.7 L464.2 354.1 Z" fill="#b91c1c"/>
+<path d="M520.6 433.8 Q500.9 382.0 461.2 343.5" fill="none" stroke="#b91c1c" stroke-width="3.5"/><path d="M461.2 343.5 L471.6 347.0 L465.0 353.8 Z" fill="#b91c1c"/>
+<circle cx="425.8" cy="279.8" r="4.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="417.8" y="283.8" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#111827" text-anchor="end">Cox’s Bazar</text>
+<circle cx="398.0" cy="132.8" r="4" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="390.0" y="136.8" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="end">Chittagong</text>
+<circle cx="474.8" cy="379.5" r="3" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="467.8" y="383.5" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="end">Teknaf</text>
+<circle cx="491.2" cy="386.5" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="499.2" y="400.5" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Maungdaw</text>
+<circle cx="517.3" cy="377.7" r="3.5" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="525.3" y="377.7" font-family="Inter,sans-serif" font-size="11.5" fill="#111827" text-anchor="start">Buthidaung</text>
+<circle cx="577.7" cy="505.5" r="4" fill="#111827" stroke="#fff" stroke-width="1.5"/>
+<text x="585.7" y="509.5" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#111827" text-anchor="start">Sittwe</text>
+<text x="414.4" y="101.3" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#166534" text-anchor="start">BANGLADESH</text>
+<text x="651.3" y="223.8" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">MYANMAR</text>
+<text x="651.3" y="246.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">(BURMA)</text>
+<text x="577.7" y="75.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle">INDIA</text>
+<text x="643.1" y="425.0" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#991b1b" text-anchor="middle">RAKHINE STATE</text>
+<text x="365.4" y="337.5" font-family="Inter,sans-serif" font-size="13" font-weight="700" font-style="italic" fill="#1d4ed8" text-anchor="middle">Bay of Bengal</text>
+<text x="479.2" y="350.2" font-family="Inter,sans-serif" font-size="10" font-style="italic" fill="#1d4ed8" text-anchor="start">Naf River (border)</text>
+<rect x="308.0" y="441.3" width="120" height="142" fill="#ffffff" stroke="#1E3A55" stroke-width="1.2"/>
+<clipPath id="insclip"><rect x="308.0" y="441.3" width="120" height="142"/></clipPath>
+<g clip-path="url(#insclip)"><polygon points="391.8,502.1 388.2,505.0 383.8,505.3 381.0,512.4 378.4,513.6 381.3,519.4 385.3,524.2 387.8,528.6 385.6,534.3 383.4,535.5 384.9,538.8 389.0,544.1 389.7,547.8 389.6,550.8 392.1,556.8 388.7,563.0 385.7,569.8 385.1,564.9 387.0,559.8 384.9,555.9 385.4,548.7 382.9,545.3 380.8,537.4 379.7,529.1 377.0,523.6 373.0,526.9 365.9,531.6 362.4,531.0 358.6,529.5 360.7,521.3 359.4,515.1 354.6,507.5 355.3,505.1 351.7,504.3 347.3,498.9 346.9,493.6 349.1,494.6 349.2,489.9 352.2,488.3 351.6,485.5 353.0,483.2 353.2,476.4 358.1,477.9 360.8,472.5 361.2,469.3 364.6,463.7 364.4,459.9 372.4,455.4 376.9,456.6 376.3,452.5 378.5,451.3 378.0,448.8 381.7,448.3 383.7,452.2 386.5,453.8 386.6,458.8 386.4,464.3 380.5,469.8 379.8,477.6 386.3,476.5 387.8,482.6 391.7,483.9 389.9,489.3 394.5,491.8 397.2,493.0 401.8,491.1 401.9,493.8 396.7,498.1 395.3,500.6 391.8,502.1" fill="#f1f5f9" stroke="#64748b" stroke-width=".8"/><polygon points="349.2,489.9 349.1,494.6 346.9,493.6 347.3,498.9 346.3,496.7 345.3,495.1 344.8,493.8 344.6,491.8 344.0,488.9 341.4,485.1 335.7,484.8 336.2,487.5 334.3,491.2 331.7,489.9 330.8,491.1 329.0,490.4 326.6,489.8 325.6,484.3 323.5,479.4 324.5,475.4 320.7,473.6 322.1,471.2 326.0,468.8 321.5,465.3 323.7,460.8 328.6,463.6 331.6,464.0 332.1,468.5 338.0,469.5 343.8,469.4 347.3,470.5 344.5,476.1 341.7,476.5 339.8,480.2 343.2,483.6 344.2,479.4 345.9,479.4 349.2,489.9" fill="#dcfce7" stroke="#64748b" stroke-width=".8"/></g>
+<rect x="340.0" y="484.9" width="15.8" height="20.8" fill="none" stroke="#b91c1c" stroke-width="1.6"/>
+<text x="368.0" y="577.3" font-family="Inter,sans-serif" font-size="9.5" font-weight="700" fill="#334155" text-anchor="middle">Location</text>
+<rect x="10" y="40" width="270" height="94" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="60.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Impacts on the host area</text>
+<text x="20.0" y="78.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Hillsides cleared of forest for shelters</text>
+<text x="20.0" y="93.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">and fuel, raising landslide risk in the</text>
+<text x="20.0" y="108.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">monsoon; tension with local communities</text>
+<text x="20.0" y="123.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">over land, jobs and wages.</text>
+<line x1="447.0" y1="302.5" x2="280.0" y2="134.0" stroke="#475569" stroke-width="1.2"/><circle cx="447.0" cy="302.5" r="3" fill="#475569"/>
+<rect x="10" y="250" width="270" height="124" rx="8" fill="#ffffff" stroke="#1E3A55" stroke-width="1.6"/>
+<text x="20.0" y="270.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Push factors</text>
+<text x="20.0" y="288.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Long-term discrimination and waves of</text>
+<text x="20.0" y="303.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">violence, especially the military</text>
+<text x="20.0" y="318.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">crackdown of 2017, when villages were</text>
+<text x="20.0" y="333.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">burned. These are political push factors:</text>
+<text x="20.0" y="348.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">persecution based on ethnicity and</text>
+<text x="20.0" y="363.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">religion.</text>
+<line x1="504.2" y1="383.0" x2="280.0" y2="374.0" stroke="#475569" stroke-width="1.2"/><circle cx="504.2" cy="383.0" r="3" fill="#475569"/>
+<rect x="10" y="460" width="270" height="94" rx="8" fill="#ffffff" stroke="#b91c1c" stroke-width="1.6"/>
+<text x="20.0" y="480.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">The journey</text>
+<text x="20.0" y="498.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Families crossed the Naf River and the</text>
+<text x="20.0" y="513.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">border on foot or by boat. Over 700,000</text>
+<text x="20.0" y="528.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">people fled to Bangladesh from August</text>
+<text x="20.0" y="543.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">2017 (UNHCR).</text>
+<line x1="478.1" y1="363.8" x2="280.0" y2="460.0" stroke="#475569" stroke-width="1.2"/><circle cx="478.1" cy="363.8" r="3" fill="#475569"/>
+<rect x="740" y="60" width="210" height="109" rx="8" fill="#ffffff" stroke="#b45309" stroke-width="1.6"/>
+<text x="750.0" y="80.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Cox’s Bazar (receiving area)</text>
+<text x="750.0" y="98.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Very large camps such as</text>
+<text x="750.0" y="113.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Kutupalong, among the largest</text>
+<text x="750.0" y="128.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">refugee camps in the world.</text>
+<text x="750.0" y="143.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Pressure on housing, water,</text>
+<text x="750.0" y="158.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">sanitation and services.</text>
+<line x1="461.7" y1="311.3" x2="740.0" y2="169.0" stroke="#475569" stroke-width="1.2"/><circle cx="461.7" cy="311.3" r="3" fill="#475569"/>
+<rect x="740" y="300" width="210" height="124" rx="8" fill="#ffffff" stroke="#991b1b" stroke-width="1.6"/>
+<text x="750.0" y="320.0" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#b91c1c" text-anchor="start">Rakhine State (origin)</text>
+<text x="750.0" y="338.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">The Rohingya are a mainly</text>
+<text x="750.0" y="353.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Muslim minority from western</text>
+<text x="750.0" y="368.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">Burma, a mainly Buddhist</text>
+<text x="750.0" y="383.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">country. Most were denied</text>
+<text x="750.0" y="398.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">citizenship, leaving them</text>
+<text x="750.0" y="413.0" font-family="Inter,sans-serif" font-size="11.5" fill="#1b2029" text-anchor="start">stateless.</text>
+<line x1="643.1" y1="451.3" x2="740.0" y2="424.0" stroke="#475569" stroke-width="1.2"/><circle cx="643.1" cy="451.3" r="3" fill="#475569"/>
+<rect x="745" y="520" width="178" height="74" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="755" y="529" width="16" height="11" rx="2" fill="#fecaca" stroke="#64748b" stroke-width=".6"/>
+<text x="779.0" y="538.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Rakhine State, Burma</text>
+<rect x="755" y="549" width="16" height="11" rx="2" fill="#f59e0b" stroke="#64748b" stroke-width=".6"/>
+<text x="779.0" y="558.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Refugee camps</text>
+<line x1="753" y1="574" x2="767" y2="574" stroke="#b91c1c" stroke-width="3"/><path d="M773 574 l-6 -4 v8 Z" fill="#b91c1c"/>
+<text x="779.0" y="578.0" font-family="Inter,sans-serif" font-size="11" fill="#1b2029" text-anchor="start">Forced migration</text>
+</svg><figcaption>Figure: the forced migration of the Rohingya from Rakhine State in Burma (Myanmar) across the Naf River to the camps near Cox’s Bazar, Bangladesh (simplified map).</figcaption></figure>
         </section>
 
         <section class="ig-section" id="sc4-forced-migration-rohingya-consequences">
           <span class="ig-sc-tag">Success criterion 4</span>
           <h2>Forced migration: Rohingya: Consequences</h2>
 
-<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Who</th><th>Consequences</th></tr></thead><tbody><tr><td>Displaced people</td><td>Loss of homes, land, livelihoods and legal rights; trauma; dependence on aid; limited education and work in camps</td></tr><tr><td>Origin area (Rakhine)</td><td>Loss of population and labour; villages destroyed; international criticism and legal scrutiny of Burma</td></tr><tr><td>Receiving area (Cox’s Bazar, Bangladesh)</td><td>Very large camps such as Kutupalong; pressure on housing, water, sanitation and services; deforestation of hillsides; tension with local communities</td></tr></tbody></table></div><div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: which term?</p><p class="ig-checknote">Match each person to the right term.</p><ul class="ig-sort"><li data-a="r"><span>A Rohingya family living in a camp in Bangladesh</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="i"><span>A Haitian family in a camp in Port-au-Prince</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="a"><span>A person waiting for a decision on a protection claim</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="r"><span>Has crossed a border fearing persecution</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="i"><span>Displaced but still inside their own country</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="a"><span>Their claim for protection has not yet been decided</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP08-d8" placeholder="Explain the consequences of the Rohingya crisis for Bangladesh."></textarea>
+<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Who</th><th>Consequences</th></tr></thead><tbody><tr><td>Displaced people</td><td>Loss of homes, land, livelihoods and legal rights; trauma; dependence on aid; limited education and work in camps</td></tr><tr><td>Origin area (Rakhine)</td><td>Loss of population and labour; villages destroyed; international criticism and legal scrutiny of Burma</td></tr><tr><td>Receiving area (Cox’s Bazar, Bangladesh)</td><td>Very large camps such as Kutupalong; pressure on housing, water, sanitation and services; deforestation of hillsides; tension with local communities</td></tr></tbody></table></div><div class="ig-photos"><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Kutupalong_Refugee_Camp_(John_Owens-VOA).jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Kutupalong_Refugee_Camp_%28John_Owens-VOA%29.jpg/960px-Kutupalong_Refugee_Camp_%28John_Owens-VOA%29.jpg" alt="Rows of shelters in the Kutupalong refugee camp" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--space">Receiving area</span> Kutupalong camp near Cox’s Bazar: shelters cover hillsides that were once forested.<small>Photo: John Owens (VOA), public domain · Wikimedia Commons</small></figcaption></figure></div><div class="ig-activity" data-sort="1"><p class="ig-act-h">Activity: which term?</p><p class="ig-checknote">Match each person to the right term.</p><ul class="ig-sort"><li data-a="r"><span>A Rohingya family living in a camp in Bangladesh</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="i"><span>A Haitian family in a camp in Port-au-Prince</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="a"><span>A person waiting for a decision on a protection claim</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="r"><span>Has crossed a border fearing persecution</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="i"><span>Displaced but still inside their own country</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li><li data-a="a"><span>Their claim for protection has not yet been decided</span><span class="ig-sort-btns"><button type="button" data-c="r">Refugee</button><button type="button" data-c="i">IDP</button><button type="button" data-c="a">Asylum seeker</button></span></li></ul><p class="ig-act-score" aria-live="polite"></p></div><textarea class="ig-note" data-note="IBGCP08-d8" placeholder="Explain the consequences of the Rohingya crisis for Bangladesh."></textarea>
         </section>
 
         <section class="ig-section" id="sc5-displacement-in-haiti-the-2010-earthquake">
           <span class="ig-sc-tag">Success criterion 5</span>
           <h2>Displacement in Haiti: The 2010 earthquake</h2>
 <p>On <b>12 January 2010</b> a magnitude 7.0 earthquake struck close to <b>Port-au-Prince</b>, Haiti’s densely populated capital. Haiti was the poorest country in the Americas, with poorly built housing, weak building regulations and limited government capacity.</p>
-<p>Widespread destruction of homes and infrastructure caused a huge death toll and left well over a million people homeless, forcing mass <b>internal displacement</b> into emergency camps.</p>
+<p>Widespread destruction of homes and infrastructure caused a huge death toll and left well over a million people homeless, forcing mass <b>internal displacement</b> into emergency camps.</p><div class="ig-photos"><figure class="ig-photo"><a href="https://commons.wikimedia.org/wiki/File:Tent_city_in_Port-au-Prince_2010-01-21.jpg" target="_blank" rel="noopener"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Tent_city_in_Port-au-Prince_2010-01-21.jpg/960px-Tent_city_in_Port-au-Prince_2010-01-21.jpg" alt="Crowded tent camp in Port-au-Prince after the 2010 earthquake" loading="lazy"></a><figcaption><span class="ig-tag ig-tag--sparse">IDPs</span> A tent camp in Port-au-Prince, January 2010: over a million people were left homeless.<small>Photo: Fred W. Baker III (US DoD), public domain · Wikimedia Commons</small></figcaption></figure></div>
         </section>
 
         <section class="ig-section" id="sc5-displacement-in-haiti-short-and-long-term-co">
