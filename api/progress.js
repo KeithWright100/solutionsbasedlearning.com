@@ -43,7 +43,7 @@ import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
 const MAX_LESSON_ID_LENGTH = 200;
 
 export default async function handler(req, res) {
-  const session = await getSessionUser(req);
+  const session = await getSessionUser(req, res);
   if (!session) {
     return res.status(401).json({ error: 'Not signed in.' });
   }

@@ -56,7 +56,7 @@ export default async function handler(req, res) {
 
   if (req.query && req.query.tutorToken) return tutorToken(req, res);
 
-  const session = await getSessionUser(req);
+  const session = await getSessionUser(req, res);
   if (!session) {
     return res.status(200).json({ loggedIn: false });
   }
