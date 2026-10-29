@@ -275,3 +275,23 @@
     init();
   }
 })();
+
+// ---- Recently visited pages --------------------------------------------
+// This file is already on every page, so it also keeps a short list of the
+// learning pages this browser has opened (stored only in this browser's
+// localStorage, never sent anywhere). The Humanities Hub reads it to show
+// "Carry on where you left off".
+(function () {
+  try {
+    var p = location.pathname.replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/';
+    if (/^\/($|humanities-hub|login|register|set-password|forgot-password|setup-admin|admin|teacher|menu$|igcse\/menu)/.test(p.slice(0)) || p === '/') return;
+    if (!/^\/(geography|economics|business|igcse)\b/.test(p)) return;
+    var h1 = document.querySelector('h1');
+    var t = ((h1 && h1.textContent) || document.title || '').replace(/\s+/g, ' ').trim().split(' | ')[0];
+    if (!t) return;
+    var key = 'sbl-recent', list = JSON.parse(localStorage.getItem(key) || '[]');
+    list = list.filter(function (r) { return r && r.p !== p; });
+    list.unshift({ p: p, t: t.slice(0, 90), at: Date.now() });
+    localStorage.setItem(key, JSON.stringify(list.slice(0, 8)));
+  } catch (e) { /* storage blocked — ignore */ }
+})();

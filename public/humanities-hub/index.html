@@ -4,940 +4,260 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Humanities Hub | Solutions Based Learning</title>
-
+  <link rel="stylesheet" href="/css/sbl-nav.css" />
   <style>
     :root {
-      --navy: #031c33;
-      --deep-navy: #011526;
-      --teal: #00b8b0;
-      --teal-dark: #007c82;
-      --cyan: #20d7e2;
-      --white: #ffffff;
-      --soft-white: #eef7f8;
-      --ink: #062033;
-      --muted: #6b7f8d;
-      --shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --transition: all 0.35s ease;
+      --deep: #011526; --teal: #00b8b0; --teal-dark: #007c82;
+      --ink: #062033; --muted: #5f7382; --line: #dbe6ea; --bg: #f2f8f9;
+      --ib: #0b6e8a; --ig: #1f8a4c; --rev: #7a4cc2;
+      --r: 14px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      font-family: Inter, "Segoe UI", Arial, sans-serif; color: var(--ink); line-height: 1.45;
       background:
-        radial-gradient(circle at top right, rgba(0, 184, 176, 0.16), transparent 35%),
-        radial-gradient(circle at bottom left, rgba(32, 215, 226, 0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(0,184,176,.10), transparent 35%),
         linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
-      color: var(--ink);
       min-height: 100vh;
-      overflow-x: hidden;
     }
-
     a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
+    main { max-width: 1240px; margin: 0 auto; padding: 28px 20px 60px; }
 
-    .page { position: relative; min-height: 100vh; overflow: hidden; }
+    /* hero */
+    .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; margin-bottom: 30px; }
+    .welcome { background: linear-gradient(135deg, var(--deep), #03466a); color: #fff; border-radius: 22px; padding: 30px; position: relative; overflow: hidden; }
+    .welcome::after { content: ""; position: absolute; right: -60px; top: -60px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(0,184,176,.45), transparent 70%); pointer-events: none; }
+    .welcome h1 { font-size: 2rem; line-height: 1.15; margin-bottom: 8px; }
+    .welcome p { opacity: .85; max-width: 540px; }
+    .find { position: relative; margin-top: 20px; max-width: 540px; z-index: 2; }
+    .find__box { display: flex; background: #fff; border-radius: 12px; overflow: hidden; }
+    .find__box input { flex: 1; border: 0; padding: 13px 14px; font: inherit; outline: 0; color: var(--ink); min-width: 0; }
+    .find__box span { display: grid; place-items: center; padding: 0 16px; background: var(--teal); color: var(--deep); font-weight: 700; }
+    .find__list { position: absolute; left: 0; right: 0; top: calc(100% + 6px); background: #fff; color: var(--ink); border-radius: 12px; box-shadow: 0 18px 48px rgba(1,21,38,.25); padding: 6px; display: none; max-height: 320px; overflow: auto; }
+    .find__list.open { display: block; }
+    .find__list a { display: block; padding: 8px 10px; border-radius: 8px; font-size: .9rem; }
+    .find__list a small { display: block; color: var(--muted); font-size: .75rem; }
+    .find__list a:hover { background: var(--bg); }
+    .find__list div { padding: 10px; color: var(--muted); font-size: .88rem; }
+    .quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .quick a { font-size: .8rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); }
+    .quick a:hover { background: rgba(255,255,255,.22); }
 
-    .network-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 12% 20%, rgba(0, 184, 176, 0.18), transparent 18%),
-        radial-gradient(circle at 82% 14%, rgba(32, 215, 226, 0.15), transparent 18%),
-        radial-gradient(circle at 85% 72%, rgba(0, 184, 176, 0.12), transparent 16%);
+    .continue { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 22px; }
+    h2.sec { font-size: 1.05rem; margin-bottom: 12px; }
+    .resume { display: flex; gap: 12px; align-items: center; padding: 11px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 10px; }
+    .resume:hover { border-color: var(--teal); }
+    .resume .ic { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: .7rem; flex-shrink: 0; }
+    .resume b { display: block; font-size: .9rem; }
+    .resume small { color: var(--muted); font-size: .8rem; }
+    .empty { color: var(--muted); font-size: .9rem; }
+    .empty a { color: var(--teal-dark); font-weight: 600; }
+
+    /* sections */
+    .section { margin-top: 32px; }
+    .section__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+    .section__head h2 { font-size: 1.25rem; }
+    .section__head h2 span { color: var(--muted); font-weight: 500; font-size: .9rem; margin-left: 6px; }
+    .section__head a { font-size: .85rem; color: var(--teal-dark); font-weight: 600; white-space: nowrap; }
+    .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .tile { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 6px; transition: transform .2s, box-shadow .2s; }
+    .tile:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(1,21,38,.1); }
+    .tile .lvl { font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .tile h3 { font-size: 1.08rem; }
+    .tile h3 a:hover { color: var(--teal-dark); }
+    .tile p { color: var(--muted); font-size: .84rem; flex: 1; }
+    .tile .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .tile .links a { font-size: .75rem; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: var(--bg); }
+    .tile .links a:hover { background: #dff3f2; color: var(--teal-dark); }
+    .tile.ib { border-top: 4px solid var(--ib); } .tile.ib .lvl { color: var(--ib); }
+    .tile.ig { border-top: 4px solid var(--ig); } .tile.ig .lvl { color: var(--ig); }
+    .tile.soon { opacity: .6; }
+    .tile .soon-tag { align-self: flex-start; font-size: .68rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #f0f2f4; color: #8a96a0; }
+
+    .banner { margin-top: 32px; display: flex; align-items: center; gap: 20px; justify-content: space-between; flex-wrap: wrap; background: linear-gradient(135deg, var(--deep), #02324e); color: #fff; border-radius: 22px; padding: 24px 28px; }
+    .banner h2 { font-size: 1.3rem; margin-bottom: 4px; }
+    .banner p { opacity: .85; max-width: 640px; font-size: .92rem; }
+    .banner .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .banner .chips a { font-size: .8rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); }
+    .banner .chips a:hover { background: rgba(255,255,255,.22); }
+    .banner .go { background: var(--teal); color: var(--deep); font-weight: 700; padding: 11px 20px; border-radius: 12px; }
+
+    .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .news a { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: block; }
+    .news a:hover { border-color: var(--teal); }
+    .news b { display: block; margin: 8px 0 4px; }
+    .news small { color: var(--muted); font-size: .84rem; }
+    .pill { font-size: .66rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #fff1d6; color: #9a6200; }
+
+    .sitemap { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 22px; margin-top: 32px; }
+    .sm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .sm-col > h3 { background: #eef4f6; border: 1px solid var(--line); border-radius: 10px; padding: 9px; text-align: center; font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+    .sm-col details { margin: 0 0 6px 8px; border-left: 2px solid var(--line); padding-left: 10px; }
+    .sm-col summary { cursor: pointer; font-weight: 600; font-size: .88rem; padding: 5px 0; }
+    .sm-col ul { list-style: none; margin: 2px 0 6px; }
+    .sm-col li a, .sm-col li span { display: block; font-size: .82rem; padding: 3px 0; color: var(--muted); }
+    .sm-col li a:hover { color: var(--teal-dark); }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .tiles { grid-template-columns: repeat(2, 1fr); }
+      .news { grid-template-columns: 1fr; }
+      .sm-grid { grid-template-columns: 1fr 1fr; }
     }
-
-    .top-bar {
-      position: relative;
-      padding: 26px 24px;
-      color: var(--white);
-      background:
-        linear-gradient(135deg, rgba(1, 21, 38, 0.98), rgba(2, 50, 78, 0.96)),
-        radial-gradient(circle at 20% 25%, rgba(0, 184, 176, 0.32), transparent 26%),
-        radial-gradient(circle at 83% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    .top-bar-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: rgba(255, 255, 255, 0.85);
-      transition: var(--transition);
-    }
-
-    .back-link:hover { color: var(--cyan); }
-    .back-link svg { width: 18px; height: 18px; }
-
-    .top-bar-brand {
-      font-size: 1.3rem;
-      font-weight: 900;
-      letter-spacing: 0.02em;
-    }
-
-    .top-bar-brand .teal { color: var(--teal); }
-
-    .account-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: rgba(255, 255, 255, 0.85);
-      transition: var(--transition);
-      justify-self: end;
-    }
-
-    .account-link:hover { color: var(--cyan); }
-
-    main {
-      max-width: 1240px;
-      margin: 40px auto 60px;
-      padding: 0 22px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hub-title {
-      text-align: center;
-      margin-bottom: 34px;
-    }
-
-    .hub-kicker {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 22px;
-      margin-bottom: 6px;
-    }
-
-    .hub-kicker::before,
-    .hub-kicker::after {
-      content: "";
-      width: 76px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(0, 124, 130, 0.65));
-    }
-
-    .hub-kicker::after {
-      background: linear-gradient(90deg, rgba(0, 124, 130, 0.65), transparent);
-    }
-
-    .hub-title h1 {
-      font-size: clamp(1.8rem, 3.4vw, 3.1rem);
-      color: var(--navy);
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .hub-title p {
-      color: #03757a;
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
-      font-weight: 650;
-      margin-top: 6px;
-    }
-
-    .subject-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .subject-card {
-      position: relative;
-      min-height: 390px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid rgba(5, 43, 65, 0.16);
-      background: #dbe6e9;
-      box-shadow: 0 18px 38px rgba(0, 25, 45, 0.15);
-      transition: var(--transition);
-      isolation: isolate;
-      cursor: default;
-    }
-
-    .subject-card.clickable { cursor: pointer; }
-
-    .subject-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.7s ease, filter 0.4s ease;
-      z-index: -3;
-    }
-
-    .subject-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(180deg, rgba(1, 21, 38, 0.08), rgba(1, 21, 38, 0.72)),
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 38%);
-    }
-
-    .subject-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 26px 52px rgba(0, 35, 58, 0.24);
-    }
-
-    .subject-card:hover::before {
-      transform: scale(1.08);
-      filter: saturate(1.12) contrast(1.06);
-    }
-
-    .subject-card.disabled { opacity: 0.72; filter: grayscale(0.25); }
-
-    .subject-card.disabled::after {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.78)),
-        linear-gradient(180deg, rgba(1, 21, 38, 0.04), rgba(1, 21, 38, 0.18));
-    }
-
-    .subject-card.disabled:hover { transform: translateY(-5px); opacity: 0.82; }
-
-    .geography::before {
-      background-image:
-        linear-gradient(rgba(0, 45, 65, 0.1), rgba(0, 45, 65, 0.1)),
-        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1300&q=80");
-    }
-
-    .history::before {
-      background-image: url("https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1300&q=80");
-    }
-
-    .economics::before {
-      background-image: url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1300&q=80");
-    }
-
-    .business::before {
-      background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1300&q=80");
-    }
-
-    .subject-content {
-      height: 100%;
-      min-height: 390px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      text-align: center;
-      padding: 30px 24px;
-      color: var(--white);
-    }
-
-    .disabled .subject-content { color: var(--navy); }
-
-    .subject-icon {
-      position: absolute;
-      top: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 88px;
-      height: 88px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 2px solid rgba(255, 255, 255, 0.74);
-      backdrop-filter: blur(4px);
-    }
-
-    .disabled .subject-icon {
-      background: rgba(255, 255, 255, 0.72);
-      border-color: rgba(2, 32, 51, 0.16);
-    }
-
-    .subject-icon svg { width: 52px; height: 52px; stroke-width: 1.7; }
-
-    .subject-card h2 {
-      font-size: clamp(1.55rem, 2.2vw, 2.15rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 7px;
-    }
-
-    .subject-card .strapline {
-      font-size: 1.03rem;
-      font-weight: 750;
-      color: #54fff5;
-      margin-bottom: 18px;
-    }
-
-    .disabled .strapline { color: #007c82; }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 110px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 0.86rem;
-      font-weight: 850;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .status.live {
-      color: white;
-      background: linear-gradient(135deg, var(--teal), #0792a3);
-      box-shadow: 0 0 22px rgba(0, 184, 176, 0.48);
-    }
-
-    .status.soon { color: #fff; background: rgba(93, 105, 111, 0.58); }
-
-    .subject-copy {
-      font-size: 0.98rem;
-      line-height: 1.45;
-      max-width: 240px;
-      margin-bottom: 24px;
-    }
-
-    .enter-btn {
-      width: 100%;
-      max-width: 270px;
-      border: none;
-      border-radius: 18px;
-      padding: 17px 20px;
-      color: white;
-      background: linear-gradient(135deg, #00b8b0, #0392a2);
-      font-size: 1rem;
-      font-weight: 850;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
-      transition: var(--transition);
-    }
-
-    .enter-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45);
-    }
-
-    .enter-btn svg { width: 22px; height: 22px; transition: transform 0.25s ease; }
-    .enter-btn:hover svg { transform: translateX(4px); }
-
-
-    /* ---- Level sections (IB Diploma / Edexcel IGCSE) ---- */
-    .level-head {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-      margin: 0 0 14px; padding-bottom: 10px; border-bottom: 2px solid rgba(0, 124, 130, 0.18);
-    }
-    .level-head h2 { font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 900; color: var(--navy); letter-spacing: 0.02em; }
-    .level-head h2 span { color: var(--teal-dark); }
-    .level-head p { color: var(--muted); font-size: 0.92rem; font-weight: 600; }
-    .level-section { margin-bottom: 34px; }
-    .level-section + .level-section { margin-top: 6px; }
-
-    /* Compact cards: both rows are a little smaller than the original full-height cards */
-    .subject-grid.compact { gap: 16px; }
-    .compact .subject-card, .compact .subject-content { min-height: 300px; }
-    .compact .subject-content { padding: 22px 18px; }
-    .compact .subject-content { justify-content: center; }
-    .compact .subject-icon { position: static; transform: none; flex-shrink: 0; width: 62px; height: 62px; margin: 0 auto 12px; }
-    .compact .subject-icon svg { width: 38px; height: 38px; }
-    .compact .subject-card h2 { font-size: clamp(1.2rem, 1.7vw, 1.6rem); margin-bottom: 4px; }
-    .compact .subject-card .strapline { font-size: 0.9rem; margin-bottom: 12px; }
-    .compact .status { min-width: 96px; padding: 6px 13px; font-size: 0.74rem; margin-bottom: 12px; }
-    .compact .subject-copy { font-size: 0.88rem; margin-bottom: 16px; max-width: 220px; }
-    .compact .enter-btn { padding: 12px 16px; font-size: 0.84rem; border-radius: 14px; max-width: 230px; }
-    .compact .enter-btn svg { width: 18px; height: 18px; }
-    .igcse-row .subject-card::after {
-      background:
-        linear-gradient(180deg, rgba(0, 60, 70, 0.10), rgba(0, 45, 60, 0.78)),
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 38%);
-    }
-    .igcse-row .subject-card.disabled::after {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.78)),
-        linear-gradient(180deg, rgba(1, 21, 38, 0.04), rgba(1, 21, 38, 0.18));
-    }
-    .level-tag {
-      position: absolute; top: 14px; left: 14px; z-index: 2;
-      font-size: 0.66rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 4px 9px; border-radius: 999px; background: rgba(1, 21, 38, 0.72); color: #fff;
-    }
-    .disabled .level-tag { background: rgba(1, 21, 38, 0.45); }
-    @media (max-width: 1120px) { .compact .subject-card, .compact .subject-content { min-height: 290px; } }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%) translateY(120px);
-      max-width: min(92vw, 520px);
-      padding: 15px 20px;
-      border-radius: 999px;
-      background: rgba(1, 21, 38, 0.94);
-      color: white;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
-      z-index: 20;
-      font-weight: 700;
-      transition: transform 0.35s ease;
-      text-align: center;
-    }
-
-    .toast.show { transform: translateX(-50%) translateY(0); }
-
-    @media (max-width: 1120px) {
-      .subject-grid { grid-template-columns: repeat(2, 1fr); }
-      .subject-card, .subject-content { min-height: 360px; }
-    }
-
-    @media (max-width: 760px) {
-      main { padding: 0 14px; }
-      .subject-grid { grid-template-columns: 1fr; }
-      .hub-kicker::before, .hub-kicker::after { width: 44px; }
-      .subject-card, .subject-content { min-height: 340px; }
-    }
-
-    .igcse-banner {
-      margin-top: 34px;
-      border-radius: var(--radius-lg);
-      padding: 10px 34px;
-      background:
-        linear-gradient(135deg, rgba(1, 21, 38, 0.97), rgba(2, 50, 78, 0.95)),
-        radial-gradient(circle at 85% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
-      box-shadow: var(--shadow);
-      color: var(--white);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .igcse-banner-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-      padding: 22px 0;
-    }
-
-    .igcse-banner-divider {
-      height: 1px;
-      background: rgba(255, 255, 255, 0.14);
-    }
-
-    .igcse-banner-kicker {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--navy);
-      background: var(--cyan);
-      padding: 4px 10px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-    }
-
-    .igcse-banner-text h2 {
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      font-weight: 900;
-      margin-bottom: 8px;
-    }
-
-    .igcse-banner-text p {
-      font-size: 0.94rem;
-      color: rgba(255, 255, 255, 0.82);
-      max-width: 560px;
-      line-height: 1.5;
-    }
-
-    .igcse-banner-btn {
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      border: none;
-      border-radius: 18px;
-      padding: 16px 22px;
-      color: white;
-      background: linear-gradient(135deg, #00b8b0, #0392a2);
-      font-size: 0.98rem;
-      font-weight: 850;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 16px 34px rgba(0, 184, 176, 0.34);
-      transition: var(--transition);
-    }
-
-    .igcse-banner-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 42px rgba(0, 184, 176, 0.45);
-    }
-
-    .igcse-banner-btn svg { width: 20px; height: 20px; transition: transform 0.25s ease; }
-    .igcse-banner-btn:hover svg { transform: translateX(4px); }
-
-    @media (max-width: 760px) {
-      .igcse-banner { padding: 6px 20px; }
-      .igcse-banner-row { align-items: flex-start; flex-direction: column; }
-    }
-
-    .games-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .games-stat {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 13px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      font-size: 0.82rem;
-      font-weight: 750;
-      color: rgba(255, 255, 255, 0.94);
-      white-space: nowrap;
-    }
-
-    a.games-stat { text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease; }
-    a.games-stat:hover { background: rgba(32, 215, 226, 0.22); border-color: rgba(32, 215, 226, 0.7); }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
-      }
+    @media (max-width: 560px) {
+      main { padding: 20px 16px 48px; }
+      .tiles, .sm-grid { grid-template-columns: 1fr; }
+      .welcome { padding: 22px; }
+      .welcome h1 { font-size: 1.5rem; }
     }
   </style>
 </head>
-
 <body>
-  <div class="page">
-    <div class="network-bg" aria-hidden="true"></div>
+  <div id="sbl-nav"></div>
 
-    <div class="top-bar">
-      <div class="top-bar-inner">
-        <a href="/" class="back-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-          Back to SBL
-        </a>
-        <div class="top-bar-brand">SBL <span class="teal">Humanities Hub</span></div>
-        <button type="button" class="account-link" id="logoutBtn" style="background:none;border:none;cursor:pointer;font:inherit;">Log out</button>
-      </div>
-    </div>
-
-    <main>
-      <div class="hub-title">
-        <div class="hub-kicker">
-          <h1>Our Humanities Hub</h1>
+  <main>
+    <section class="hero">
+      <div class="welcome">
+        <h1 id="hello">Welcome to the Humanities Hub</h1>
+        <p>Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Use the menus above, or find a page below.</p>
+        <div class="find">
+          <label class="find__box"><input id="find" type="search" placeholder="Find a subject, topic or page…" aria-label="Find a page" autocomplete="off"><span aria-hidden="true">Find</span></label>
+          <div class="find__list" id="findList"></div>
         </div>
-        <p>Four disciplines. Two qualifications. One shared purpose.</p>
+        <div class="quick" id="quick"></div>
       </div>
-
-      <section class="igcse-banner" aria-label="IB Subject Menu" style="margin-top: 0; margin-bottom: 34px;">
-        <div class="igcse-banner-row" aria-label="IB Subject Menu">
-          <div class="igcse-banner-text">
-            <span class="igcse-banner-kicker">New: one page per subject</span>
-            <h2>IB Exam Tips, Revision Resources and Past Paper Questions</h2>
-            <p>
-              Examination tips and advice, revision guides, and past paper practice for every
-              IB subject — Geography, Economics, Business and History — all in one place.
-            </p>
-          </div>
-          <a class="igcse-banner-btn" href="/menu" aria-label="Open the IB Subject Menu">
-            Open IB Menu
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-          </a>
-        </div>
-      </section>
-
-      <section class="level-section" aria-labelledby="ibHead">
-        <div class="level-head"><h2 id="ibHead">IB <span>Diploma</span></h2><p>Ages 16–19 &middot; Geography, History, Economics and Business</p></div>
-      <div class="subject-grid compact">
-        <article
-          class="subject-card geography clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IB Geography"
-          data-route="/geography"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IB</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M3 12h18" />
-                <path d="M12 3a14 14 0 0 1 0 18" />
-                <path d="M12 3a14 14 0 0 0 0 18" />
-              </svg>
-            </div>
-            <h2>IB Geography</h2>
-            <p class="strapline">Explore &bull; Think &bull; Apply</p>
-            <span class="status live">Live</span>
-            <p class="subject-copy">
-              Understand our world. Solve real challenges. Create a better future.
-            </p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IB Geography">
-              Click here to enter IB Geography
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
-
-        <article class="subject-card history disabled" aria-label="IB History coming soon">
-          <div class="subject-content">
-            <span class="level-tag">IB</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M4 20h16" />
-                <path d="M6 17V9" />
-                <path d="M10 17V9" />
-                <path d="M14 17V9" />
-                <path d="M18 17V9" />
-                <path d="M3 9h18" />
-                <path d="M12 3l9 6H3l9-6Z" />
-              </svg>
-            </div>
-            <h2>IB History</h2>
-            <p class="strapline">Interpret &bull; Evaluate &bull; Judge</p>
-            <span class="status soon">Coming Soon</span>
-            <p class="subject-copy">
-              Learn from the past. Question perspectives. Shape the future.
-            </p>
-          </div>
-        </article>
-
-        <article
-          class="subject-card economics clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IB Economics"
-          data-route="/economics"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IB</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M4 19h16" />
-                <path d="M6 16v-4" />
-                <path d="M11 16v-7" />
-                <path d="M16 16v-10" />
-                <path d="M5 9l4-4 4 4 6-6" />
-                <path d="M17 3h2v2" />
-              </svg>
-            </div>
-            <h2>IB Economics</h2>
-            <p class="strapline">Analyse &bull; Predict &bull; Decide</p>
-            <span class="status live">In Progress</span>
-            <p class="subject-copy">
-              Understand choices. Evaluate trade-offs. Improve lives.
-            </p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IB Economics">
-              Click here to enter IB Economics
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
-
-        <article
-          class="subject-card business clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IB Business"
-          data-route="/business"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IB</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
-                <rect x="4" y="6" width="16" height="14" rx="2" />
-                <path d="M4 11h16" />
-                <path d="M10 11v2h4v-2" />
-              </svg>
-            </div>
-            <h2>IB Business</h2>
-            <p class="strapline">Innovate &bull; Strategise &bull; Lead</p>
-            <span class="status live">In Progress</span>
-            <p class="subject-copy">
-              Build ideas. Create value. Lead with purpose.
-            </p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IB Business">
-              Click here to enter IB Business
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
+      <div class="continue">
+        <h2 class="sec">Carry on where you left off</h2>
+        <div id="recent"></div>
       </div>
-      </section>
+    </section>
 
-      <section class="level-section" aria-labelledby="igcseHead">
-        <div class="level-head"><h2 id="igcseHead">Edexcel <span>IGCSE</span></h2><p>Ages 14–16 &middot; full lesson courses, past paper questions and revision</p></div>
-      <div class="subject-grid compact igcse-row">
-        <article
-          class="subject-card geography clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IGCSE Geography"
-          data-route="/igcse/geography/learn"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IGCSE</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M3 12h18" />
-                <path d="M12 3a14 14 0 0 1 0 18" />
-                <path d="M12 3a14 14 0 0 0 0 18" />
-              </svg>
-            </div>
-            <h2>IGCSE Geography</h2>
-            <p class="strapline">Explore &bull; Think &bull; Apply</p>
-            <span class="status live">Live</span>
-            <p class="subject-copy">Five topics and fieldwork, with lessons, quizzes and past paper questions.</p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IGCSE Geography">
-              Enter IGCSE Geography
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
-        <article
-          class="subject-card history clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IGCSE History"
-          data-route="/igcse/history/learn"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IGCSE</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M4 20h16" />
-                <path d="M6 17V9" />
-                <path d="M10 17V9" />
-                <path d="M14 17V9" />
-                <path d="M18 17V9" />
-                <path d="M3 9h18" />
-                <path d="M12 3l9 6H3l9-6Z" />
-              </svg>
-            </div>
-            <h2>IGCSE History</h2>
-            <p class="strapline">Interpret &bull; Evaluate &bull; Judge</p>
-            <span class="status live">Live</span>
-            <p class="subject-copy">Lessons are live for Superpower relations, Civil rights in the USA, Russia and the Soviet Union, and Japan in transformation. The Middle East is coming soon.</p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IGCSE History">
-              Enter IGCSE History
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
-        <article
-          class="subject-card economics clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IGCSE Economics"
-          data-route="/igcse/economics/learn"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IGCSE</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M4 19h16" />
-                <path d="M6 16v-4" />
-                <path d="M11 16v-7" />
-                <path d="M16 16v-10" />
-                <path d="M5 9l4-4 4 4 6-6" />
-                <path d="M17 3h2v2" />
-              </svg>
-            </div>
-            <h2>IGCSE Economics</h2>
-            <p class="strapline">Analyse &bull; Predict &bull; Decide</p>
-            <span class="status live">Live</span>
-            <p class="subject-copy">All four topics, with lessons, diagrams, calculations, quizzes and paper practice.</p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IGCSE Economics">
-              Enter IGCSE Economics
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
-        <article
-          class="subject-card business clickable"
-          tabindex="0"
-          role="link"
-          aria-label="Enter IGCSE Business"
-          data-route="/igcse/business/learn"
-        >
-          <div class="subject-content">
-            <span class="level-tag">IGCSE</span>
-            <div class="subject-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
-                <rect x="4" y="6" width="16" height="14" rx="2" />
-                <path d="M4 11h16" />
-                <path d="M10 11v2h4v-2" />
-              </svg>
-            </div>
-            <h2>IGCSE Business</h2>
-            <p class="strapline">Innovate &bull; Strategise &bull; Lead</p>
-            <span class="status live">Live</span>
-            <p class="subject-copy">All five topics are live, with lessons, quizzes, case studies and paper practice.</p>
-            <button class="enter-btn" type="button" aria-label="Click here to enter IGCSE Business">
-              Enter IGCSE Business
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-          </div>
-        </article>
+    <section class="section" aria-labelledby="ibHead">
+      <div class="section__head"><h2 id="ibHead">IB Diploma <span>Ages 16–19</span></h2><a href="/menu">IB subject menu &rarr;</a></div>
+      <div class="tiles" id="tilesIB"></div>
+    </section>
+
+    <section class="section" aria-labelledby="igHead">
+      <div class="section__head"><h2 id="igHead">IGCSE <span>Ages 14–16</span></h2><a href="/igcse/menu">IGCSE subject menu &rarr;</a></div>
+      <div class="tiles" id="tilesIG"></div>
+    </section>
+
+    <section class="banner" aria-label="Interactive Geography Games">
+      <div>
+        <h2>&#127918; Interactive Geography Games</h2>
+        <p>Games for KS3, IGCSE and the IB Diploma &mdash; build knowledge, retrieval and critical thinking through interactive challenges.</p>
+        <div class="chips"><a href="/geography/games#ks3">KS3</a><a href="/geography/games#igcse">IGCSE</a><a href="/geography/games#ib">IB Diploma</a></div>
       </div>
-      </section>
+      <a class="go" href="/geography/games">Play now &rarr;</a>
+    </section>
 
-      <section class="igcse-banner" aria-label="Interactive Geography Games" style="margin-top: 34px; margin-bottom: 34px;">
-        <div class="igcse-banner-row" aria-label="Interactive Geography Games">
-          <div class="igcse-banner-text">
-            <span class="igcse-banner-kicker">New: play &amp; learn</span>
-            <h2>&#127918; Interactive Geography Games</h2>
-            <p>
-              Games for KS3, IGCSE and the IB Diploma &mdash; develop geographical knowledge,
-              retrieval skills and critical thinking through interactive challenges.
-            </p>
-            <div class="games-stats" aria-label="Jump to games by level">
-              <a class="games-stat" href="/geography/games#ks3">&#127757; KS3</a>
-              <a class="games-stat" href="/geography/games#igcse">&#128218; IGCSE</a>
-              <a class="games-stat" href="/geography/games#ib">&#127891; IB Diploma</a>
-              <span class="games-stat">&#9889; 74 Games</span>
-            </div>
-          </div>
-          <a class="igcse-banner-btn" href="/geography/games" aria-label="Open the Interactive Geography Games hub">
-            Play Now
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-          </a>
-        </div>
-      </section>
+    <section class="section" aria-labelledby="newHead">
+      <div class="section__head"><h2 id="newHead">What's new</h2></div>
+      <div class="news">
+        <a href="/igcse/cie-economics"><span class="pill">New</span><b>Cambridge IGCSE Economics revision</b><small>23 topic pages with diagrams, quizzes and the specimen paper questions.</small></a>
+        <a href="/igcse/history/learn"><span class="pill">New</span><b>IGCSE History lessons</b><small>Superpower relations, Civil rights in the USA, and Russia and the Soviet Union.</small></a>
+        <a href="/geography/revision/guide"><span class="pill">New</span><b>IB Geography revision guide</b><small>Topic-by-topic revision pages with maps, diagrams and case studies.</small></a>
+      </div>
+    </section>
 
-      <section class="igcse-banner" aria-label="IGCSE Subject Menu">
-        <div class="igcse-banner-row" aria-label="IGCSE Subject Menu">
-          <div class="igcse-banner-text">
-            <span class="igcse-banner-kicker">New: one page per subject</span>
-            <h2>IGCSE Subject Menu</h2>
-            <p>
-              Examination tips and advice, revision guides, and past paper practice for every
-              IGCSE subject — Geography, Economics, Business and History — all in one place.
-            </p>
-          </div>
-          <a class="igcse-banner-btn" href="/igcse/menu" aria-label="Open the IGCSE Subject Menu">
-            Open IGCSE Menu
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-          </a>
-        </div>
-      </section>
-    </main>
+    <section class="sitemap" id="sitemap" aria-labelledby="smHead">
+      <div class="section__head"><h2 id="smHead">Sitemap</h2></div>
+      <div class="sm-grid" id="smGrid"></div>
+    </section>
+  </main>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  </div>
-
+  <script src="/js/sbl-nav.js"></script>
   <script>
-    const LIVE_ROUTES = { geography: "/geography", economics: "/economics", business: "/business", igcseGeography: "/igcse/geography/learn", igcseEconomics: "/igcse/economics/learn", igcseBusiness: "/igcse/business/learn", igcseHistory: "/igcse/history/learn" };
-    const toast = document.getElementById("toast");
+  (function () {
+    var NAV = window.SBL_NAV || [];
+    function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+    function menu(key) { return NAV.filter(function (m) { return m.key === key; })[0] || { cols: [] }; }
 
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add("show");
-      window.clearTimeout(showToast.timeout);
-      showToast.timeout = window.setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2600);
-    }
-
-    function navigateToRoute(route) {
-      if (Object.values(LIVE_ROUTES).includes(route)) {
-        window.location.href = route;
-      } else {
-        showToast("This subject area is coming soon.");
-      }
-    }
-
-    function setupClickableCards() {
-      const clickableCards = document.querySelectorAll(".subject-card.clickable");
-      clickableCards.forEach((card) => {
-        const route = card.dataset.route;
-        card.addEventListener("click", (event) => {
-          const clickedButton = event.target.closest("button");
-          if (clickedButton || event.currentTarget === card) {
-            navigateToRoute(route);
-          }
-        });
-        card.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            navigateToRoute(route);
-          }
-        });
-      });
-
-      const disabledCards = document.querySelectorAll(".subject-card.disabled");
-      disabledCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          showToast("This subject area is coming soon.");
-        });
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setupClickableCards();
+    // greeting
+    document.addEventListener('sbl:user', function (e) {
+      var n = ((e.detail && e.detail.fullName) || '').trim().split(/\s+/)[0];
+      if (n) document.getElementById('hello').textContent = 'Welcome back, ' + n;
     });
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      fetch("/api/logout", { method: "POST" }).finally(() => {
-        window.location.href = "/login/";
-      });
-    });
+    // subject tiles
+    function tiles(key, el, cls) {
+      var m = menu(key);
+      document.getElementById(el).innerHTML = m.cols.map(function (c) {
+        var links = c.items.filter(function (it) { return it[1] && it[2] !== 'soon' && !/^Unit|^Option|^HL/.test(it[0]); }).slice(0, 4);
+        if (c.soon) return '<div class="tile ' + cls + ' soon"><span class="lvl">' + esc(m.label) + '</span><h3>' + esc(c.title.replace(/^(IB|IGCSE) /, '')) + '</h3><p>' + esc(c.blurb) + '</p><span class="soon-tag">Coming soon</span></div>';
+        return '<div class="tile ' + cls + '"><span class="lvl">' + esc(m.label) + '</span><h3><a href="' + esc(c.href) + '">' + esc(c.title.replace(/^(IB|IGCSE) /, '')) + '</a></h3><p>' + esc(c.blurb) + '</p><div class="links">' +
+          links.map(function (it) { return '<a href="' + esc(it[1]) + '">' + esc(it[0]) + '</a>'; }).join('') + '</div></div>';
+      }).join('');
+    }
+    tiles('ib', 'tilesIB', 'ib');
+    tiles('igcse', 'tilesIG', 'ig');
+
+    // quick links
+    var quick = [['IB Geography', '/geography'], ['IGCSE Geography', '/igcse/geography/learn'], ['IGCSE Economics', '/igcse/economics/learn'], ['IGCSE Business', '/igcse/business/learn'], ['IGCSE History', '/igcse/history/learn'], ['Games', '/geography/games']];
+    document.getElementById('quick').innerHTML = quick.map(function (q) { return '<a href="' + q[1] + '">' + q[0] + '</a>'; }).join('');
+
+    // find a page (searches the same list as the menus)
+    var links = [];
+    NAV.forEach(function (m) { if (m.teacher) return; m.cols.forEach(function (c) {
+      if (c.href) links.push({ label: c.title, href: c.href, where: m.label });
+      c.items.forEach(function (it) { if (it[1] && it[2] !== 'soon') links.push({ label: it[0], href: it[1], where: c.title }); });
+    }); });
+    var find = document.getElementById('find'), list = document.getElementById('findList');
+    function run() {
+      var q = find.value.trim().toLowerCase();
+      if (!q) { list.classList.remove('open'); return; }
+      var w = q.split(/\s+/), seen = {};
+      var hits = links.filter(function (l) {
+        var k = l.href + '|' + l.label; if (seen[k]) return false; seen[k] = 1;
+        var h = (l.label + ' ' + l.where).toLowerCase();
+        return w.every(function (x) { return h.indexOf(x) !== -1; });
+      }).slice(0, 10);
+      list.innerHTML = hits.length ? hits.map(function (h) { return '<a href="' + esc(h.href) + '">' + esc(h.label) + '<small>' + esc(h.where) + '</small></a>'; }).join('') : '<div>No matching pages — try a subject name, e.g. "climate" or "business".</div>';
+      list.classList.add('open');
+    }
+    find.addEventListener('input', run);
+    find.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var a = list.querySelector('a'); if (a) location.href = a.getAttribute('href'); } if (e.key === 'Escape') list.classList.remove('open'); });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.find')) list.classList.remove('open'); });
+
+    // carry on where you left off — pages recorded in this browser by sbl-feedback-widget.js
+    var recent = [];
+    try { recent = JSON.parse(localStorage.getItem('sbl-recent') || '[]'); } catch (e) {}
+    function area(p) {
+      if (/^\/igcse\/cie-economics/.test(p)) return ['IG', 'var(--ig)', 'Cambridge IGCSE Economics'];
+      var m = p.match(/^\/igcse\/(geography|economics|business|history)/);
+      if (m) return ['IG', 'var(--ig)', 'IGCSE ' + m[1].charAt(0).toUpperCase() + m[1].slice(1)];
+      if (/^\/geography\/games/.test(p)) return ['🎮', 'var(--rev)', 'Geography games'];
+      m = p.match(/^\/(geography|economics|business)/);
+      if (m) return ['IB', 'var(--ib)', 'IB ' + (m[1] === 'business' ? 'Business Management' : m[1].charAt(0).toUpperCase() + m[1].slice(1))];
+      return ['SBL', 'var(--teal-dark)', 'SBL'];
+    }
+    function ago(t) {
+      var s = (Date.now() - t) / 1000;
+      if (s < 3600) return Math.max(1, Math.round(s / 60)) + ' min ago';
+      if (s < 86400) return Math.round(s / 3600) + ' h ago';
+      var d = Math.round(s / 86400); return d === 1 ? 'yesterday' : d + ' days ago';
+    }
+    var box = document.getElementById('recent');
+    if (recent.length) {
+      box.innerHTML = recent.slice(0, 4).map(function (r) {
+        var a = area(r.p);
+        return '<a class="resume" href="' + esc(r.p) + '"><span class="ic" style="background:' + a[1] + '">' + a[0] + '</span><span><b>' + esc(r.t) + '</b><small>' + esc(a[2]) + ' &middot; ' + ago(r.at) + '</small></span></a>';
+      }).join('');
+    } else {
+      box.innerHTML = '<p class="empty">The lessons and revision pages you open will appear here, so you can jump straight back in. Start with <a href="/geography">IB Geography</a> or <a href="/igcse/geography/learn">IGCSE Geography</a>.</p>';
+    }
+
+    // sitemap
+    document.getElementById('smGrid').innerHTML = NAV.filter(function (m) { return !m.teacher; }).map(function (m) {
+      return '<div class="sm-col"><h3>' + esc(m.label) + '</h3>' + m.cols.map(function (c) {
+        return '<details open><summary>' + esc(c.title) + '</summary><ul>' + c.items.map(function (it) {
+          return it[1] && it[2] !== 'soon' ? '<li><a href="' + esc(it[1]) + '">' + esc(it[0]) + '</a></li>' : '<li><span>' + esc(it[0]) + '</span></li>';
+        }).join('') + '</ul></details>';
+      }).join('') + '</div>';
+    }).join('');
+  })();
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-<script defer src="/js/sbl-feedback-widget.js"></script>
+  <script defer src="/js/sbl-feedback-widget.js"></script>
 </body>
 </html>
