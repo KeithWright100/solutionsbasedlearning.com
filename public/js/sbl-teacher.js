@@ -30,6 +30,7 @@
     { key: 'gr', label: 'HL: Global risks and resilience', src: '/js/sbl-gr-lessons.js' },
     { key: 'igeo', label: 'IGCSE Geography (Edexcel)', src: '/js/sbl-igcse-geo-lessons.js' },
     { key: 'iecon', label: 'IGCSE Economics (Edexcel)', src: '/js/sbl-igcse-econ-lessons.js' },
+    { key: 'ciecon', label: 'IGCSE Economics (CIE)', src: '/js/sbl-cie-econ-lessons.js' },
     { key: 'ibus', label: 'IGCSE Business (Edexcel)', src: '/js/sbl-igcse-bus-lessons.js' },
     { key: 'ihist', label: 'IGCSE History (Edexcel)', src: '/js/sbl-igcse-hist-lessons.js' },
     { key: 'ppq', label: 'Past paper questions (revision)', src: null }
@@ -326,7 +327,7 @@
 
   // ---- detail drawer: one student, one lesson ----
   // ---- whole-student overview: every lesson and PPQ topic they've saved ----
-  var UNIT_PREFIX = [['IGEN', 'iecon'], ['IGBS', 'ibus'], ['IGHI', 'ihist'], ['IGCO', 'igeo'], ['IGDV', 'igeo'], ['IGHZ', 'igeo'], ['IGCF', 'igeo'], ['IGRU', 'igeo'], ['IGEC', 'igeo'], ['IGRF', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
+  var UNIT_PREFIX = [['CIEE', 'ciecon'], ['IGEN', 'iecon'], ['IGBS', 'ibus'], ['IGHI', 'ihist'], ['IGCO', 'igeo'], ['IGDV', 'igeo'], ['IGHZ', 'igeo'], ['IGCF', 'igeo'], ['IGRU', 'igeo'], ['IGEC', 'igeo'], ['IGRF', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
   function viewOf(id) {
     if (id.indexOf('PPQ:') === 0) return 'ppq';
     for (var i = 0; i < UNIT_PREFIX.length; i++) if (id.indexOf(UNIT_PREFIX[i][0]) === 0) return UNIT_PREFIX[i][1];
@@ -411,12 +412,12 @@
     }
     if (data.readinessCompleted) html += '<div class="cs-block"><h3>Ready for the Classroom</h3><p>Completed ' + fmtDate(data.readinessCompletedAt, true) + '</p></div>';
     var keys = Object.keys(data).filter(function (k) { return k.indexOf('ib_q') === 0; })
-      .sort(function (a, b) { return (+a.slice(4)) - (+b.slice(4)); });
+      .sort(function (a, b) { var na = +a.slice(4), nb = +b.slice(4); return (isNaN(na) || isNaN(nb)) ? a.localeCompare(b, undefined, { numeric: true }) : na - nb; });
     keys.forEach(function (k) {
       var a = data[k] || {};
       var p = a.marks ? pctOf(a.awarded || 0, a.marks) : null;
       html += '<div class="cs-block"><span class="cs-mark ' + band(p) + '" style="padding:0 6px;border-radius:6px">' + (a.awarded != null ? a.awarded : '—') + ' / ' + (a.marks || '?') + '</span>' +
-        '<h3>Question ' + (+k.slice(4) + 1) + '</h3>' +
+        '<h3>' + (k.indexOf('ib_q_ppq_') === 0 ? 'Past paper ' + esc(k.slice(9).replace(/_/g, ' ')) : 'Question ' + (+k.slice(4) + 1)) + '</h3>' +
         '<p>' + esc(a.question) + '</p>' +
         '<p><b>Marked:</b> ' + fmtDate(a.at, true) + '</p>' +
         '<details><summary>Student’s answer</summary><div class="cs-answer">' + esc(a.answer || '(no text)') + '</div></details>' +
