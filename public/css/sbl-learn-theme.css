@@ -77,6 +77,13 @@
   border-right: 1px solid var(--lh-sidebar-line);
   padding: 1.25rem 0 2rem;
 }
+/* Phones and narrow tablets: the sidebar sits above the page as a normal
+   block. (The rule near the top of this file said the same, but this
+   sticky/100vh block came after it and won, so on phones the sidebar stuck
+   over the lesson as you scrolled.) */
+@media (max-width: 900px) {
+  .lh-sidebar { position: static; height: auto; overflow: visible; }
+}
 .lh-sidebar__brand {
   display: flex;
   align-items: center;
