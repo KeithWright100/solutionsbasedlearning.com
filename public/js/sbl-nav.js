@@ -78,24 +78,40 @@
           ['Revise by topic', '/igcse/history/revision/topics'],
           ['Exam tips', '/igcse/history/exam-tips']] }
       ] },
-    { key: 'rev', label: 'Revision & practice', color: 'var(--sn-rev)', blurb: 'Revision, past papers and games across every subject',
+    { key: 'rev', label: 'Revision & practice', color: 'var(--sn-rev)', blurb: 'Revision, past papers, quizzes and games by level and subject',
       cols: [
-        { title: 'Revision', items: [
-          ['IB revision guides', '/menu'],
-          ['IB Geography revision', '/geography/revision'],
-          ['IGCSE revision', '/igcse/revision'],
-          ['Cambridge Economics revision', '/igcse/cie-economics']] },
-        { title: 'Past paper questions', items: [
-          ['IB Geography', '/geography/revision/paper-questions'],
-          ['IB Business', '/business/revision/paper-questions'],
-          ['All IGCSE subjects', '/igcse'],
-          ['Cambridge Economics', '/igcse/cie-economics/past-papers']] },
-        { title: 'Quizzes', items: [
-          ['IB Geography quizzes', '/geography/quizzes']] },
-        { title: 'Geography games', href: '/geography/games', items: [
-          ['KS3 games', '/geography/games#ks3'],
-          ['IGCSE games', '/geography/games#igcse'],
-          ['IB Diploma games', '/geography/games#ib']] }
+        { title: 'IB Diploma', items: [
+          ['Geography', '', 'head'],
+          ['Revision guide', '/geography/revision/guide'],
+          ['Revise by topic', '/geography/revision/topics'],
+          ['Past paper questions', '/geography/revision/paper-questions'],
+          ['Quizzes', '/geography/quizzes'],
+          ['Economics', '', 'head'],
+          ['Revise by topic', '/economics/revision/topics'],
+          ['Business Management', '', 'head'],
+          ['Revise by topic', '/business/revision/topics'],
+          ['Past paper questions', '/business/revision/paper-questions']] },
+        { title: 'IGCSE Geography & History', items: [
+          ['Geography', '', 'head'],
+          ['Revise by topic', '/igcse/geography/revision/topics'],
+          ['Past paper questions', '/igcse/geography'],
+          ['History', '', 'head'],
+          ['Revise by topic', '/igcse/history/revision/topics']] },
+        { title: 'IGCSE Economics & Business', items: [
+          ['Economics (Edexcel)', '', 'head'],
+          ['Revise by topic', '/igcse/economics/revision/topics'],
+          ['Past paper questions', '/igcse/economics'],
+          ['Economics (Cambridge)', '', 'head'],
+          ['Topic revision', '/igcse/cie-economics', 'new'],
+          ['Specimen paper questions', '/igcse/cie-economics/past-papers', 'new'],
+          ['Business', '', 'head'],
+          ['Revise by topic', '/igcse/business/revision/topics'],
+          ['Past paper questions', '/igcse/business']] },
+        { title: 'Games', href: '/geography/games', items: [
+          ['Geography games', '', 'head'],
+          ['KS3', '/geography/games#ks3'],
+          ['IGCSE', '/geography/games#igcse'],
+          ['IB Diploma', '/geography/games#ib']] }
       ] },
     { key: 'tch', label: 'Teachers', color: 'var(--sn-tch)', teacher: true, blurb: 'Only visible to teacher and admin accounts',
       cols: [
@@ -111,6 +127,7 @@
   function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
   function tag(f) { return f === 'new' ? '<span class="sn-tag sn-tag--new">New</span>' : f === 'soon' ? '<span class="sn-tag sn-tag--soon">Soon</span>' : ''; }
   function item(it) {
+    if (it[2] === 'head') return '<li class="sn-sub">' + esc(it[0]) + '</li>';
     if (it[2] === 'soon' || !it[1]) return '<li><span class="sn-off">' + esc(it[0]) + tag('soon') + '</span></li>';
     return '<li><a href="' + esc(it[1]) + '"><span>' + esc(it[0]) + '</span>' + tag(it[2]) + '</a></li>';
   }
@@ -196,6 +213,7 @@
         (m.all ? '<a href="' + esc(m.all[1]) + '"><strong>' + esc(m.all[0]) + '</strong></a>' : '') +
         m.cols.map(function (c) {
           return '<h4>' + esc(c.title) + '</h4>' + c.items.map(function (it) {
+            if (it[2] === 'head') return '<span class="sn-mob__h">' + esc(it[0]) + '</span>';
             return (it[2] === 'soon' || !it[1]) ? '<span class="sn-off">' + esc(it[0]) + '</span>' : '<a href="' + esc(it[1]) + '"><span>' + esc(it[0]) + '</span>' + tag(it[2]) + '</a>';
           }).join('');
         }).join('') + '</div></details>';
@@ -212,7 +230,11 @@
     var out = [];
     visibleMenus().forEach(function (m) {
       m.cols.forEach(function (c) {
-        c.items.forEach(function (it) { if (it[1] && it[2] !== 'soon') out.push({ label: it[0], href: it[1], where: c.title }); });
+        var head = '';
+        c.items.forEach(function (it) {
+          if (it[2] === 'head') { head = it[0]; return; }
+          if (it[1] && it[2] !== 'soon') out.push({ label: it[0], href: it[1], where: head ? head + ' \u00b7 ' + c.title : c.title });
+        });
       });
     });
     return out;

@@ -1,0 +1,112 @@
+/* public/css/sbl-tree-nav.css
+   Collapsible "Contents" tree used in the IB Geography left sidebar
+   (drawn by /js/sbl-sidebar.js, which adds this stylesheet itself).
+   Everything is scoped to .tn-sidebar so other sidebars are unaffected. */
+
+.tn-sidebar { padding-bottom: 1.5rem; }
+
+.tn-panel {
+  margin: 0.9rem 0.75rem 0;
+  background: var(--lh-surface, #fff);
+  border: 1px solid var(--lh-border, #e6e8ee);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.tn-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  padding: 0.55rem 0.55rem 0.55rem 0.8rem;
+  background: #eaf1f8;
+  border-bottom: 1px solid var(--lh-border, #e6e8ee);
+}
+.tn-head__title {
+  display: flex; align-items: center; gap: 8px;
+  border: 0; background: none; padding: 0; cursor: pointer;
+  font: 700 0.86rem/1.2 var(--lh-font-display, inherit);
+  letter-spacing: 0.04em; color: #1d3550;
+}
+.tn-head__title svg { width: 16px; height: 16px; }
+.tn-head__tools { display: flex; gap: 2px; }
+.tn-all {
+  display: grid; place-items: center; width: 28px; height: 28px;
+  border: 0; border-radius: 7px; background: none; color: #1d3550; cursor: pointer;
+}
+.tn-all:hover { background: rgba(29, 53, 80, 0.08); }
+.tn-all svg { width: 18px; height: 18px; }
+.tn-panel.is-shut .tn-l1 { display: none; }
+.tn-panel.is-shut .tn-head { border-bottom: 0; }
+
+/* tree */
+.tn-tree { list-style: none; margin: 0; padding: 0; }
+.tn-tree[hidden] { display: none; }
+.tn-l1 { padding: 0.35rem 0; }
+.tn-node { margin: 0; }
+
+.tn-row {
+  display: flex; align-items: center; gap: 4px;
+  margin: 1px 6px; border-radius: 8px;
+  min-height: 34px;
+}
+.tn-row:hover { background: var(--lh-sidebar-hover, rgba(20,30,50,.05)); }
+.tn-label {
+  flex: 1; min-width: 0;
+  display: block; padding: 7px 4px 7px 8px;
+  border: 0; background: none; text-align: left; cursor: pointer;
+  font: inherit; font-size: 0.86rem; line-height: 1.3; color: var(--lh-sidebar-text, #222832);
+  text-decoration: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tn-tog {
+  flex: 0 0 auto;
+  display: grid; place-items: center; width: 28px; height: 28px;
+  border: 0; border-radius: 7px; background: none; cursor: pointer;
+  color: var(--lh-sidebar-dim, #4f5968); font-size: 1.05rem; line-height: 1;
+}
+.tn-tog:hover { background: rgba(20, 30, 50, 0.08); color: var(--lh-ink, #1b2029); }
+.tn-label:focus-visible, .tn-tog:focus-visible, .tn-leaf:focus-visible, .tn-all:focus-visible, .tn-head__title:focus-visible {
+  outline: 2px solid var(--lh-teal, #14b8a6); outline-offset: 1px;
+}
+
+/* levels: indentation + weight, like a contents page */
+.tn-row--section .tn-label { font-weight: 700; color: var(--lh-ink, #1b2029); }
+.tn-l2 .tn-row { margin-left: 18px; }
+.tn-row--unit .tn-label { font-weight: 500; }
+.tn-node.is-path > .tn-row--unit .tn-label { font-weight: 700; }
+.tn-l3 .tn-row { margin-left: 30px; }
+.tn-row--topic .tn-label { font-size: 0.83rem; }
+.tn-node.is-path > .tn-row--topic .tn-label { font-weight: 700; }
+.tn-l4 { margin: 0 6px 4px 42px; border-left: 2px solid var(--lh-border, #e6e8ee); }
+.tn-leaf {
+  display: block; padding: 6px 8px 6px 12px; margin: 1px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.82rem; line-height: 1.3; color: var(--lh-sidebar-dim, #4f5968); text-decoration: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tn-leaf:hover { background: var(--lh-sidebar-hover, rgba(20,30,50,.05)); color: var(--lh-ink, #1b2029); }
+
+/* current page */
+.tn-leaf.is-current, .tn-row.is-current {
+  background: #dce9f6; color: #12345a; font-weight: 700;
+}
+.tn-leaf.is-current { border-left: 3px solid #2f6db0; margin-left: -2px; }
+.tn-row.is-current .tn-label { color: #12345a; font-weight: 700; }
+
+/* not yet available */
+.tn-node.is-soon > .tn-row .tn-label { color: #9aa3b0; cursor: default; }
+.tn-soon {
+  flex: 0 0 auto; margin-right: 6px;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 999px; background: #eef0f3; color: #8a94a1;
+}
+
+/* a little more room for long unit names on desktop */
+@media (min-width: 901px) {
+  .lh-shell:has(.tn-sidebar) { grid-template-columns: 300px minmax(0, 1fr); }
+}
+
+/* phones: the sidebar sits above the page, contents start folded */
+@media (max-width: 900px) {
+  .tn-panel { margin: 0.6rem 0.75rem 0; }
+  .tn-label, .tn-leaf { white-space: normal; }
+}

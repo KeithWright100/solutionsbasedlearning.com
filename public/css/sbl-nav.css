@@ -53,6 +53,8 @@
 .sn-col ul { list-style: none; margin: 0; padding: 0; }
 .sn-col li a { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 10px; margin: 0 -10px; border-radius: 8px; font-size: .9rem; }
 .sn-col li a:hover { background: var(--sn-bg); color: var(--sn-teal-dark); }
+.sn-col li.sn-sub { font-size: .8rem; font-weight: 700; color: var(--sn-ink); margin: 10px 0 2px; }
+.sn-col li.sn-sub:first-child { margin-top: 0; }
 .sn-col li span.sn-off { display: flex; justify-content: space-between; padding: 6px 0; font-size: .9rem; color: #9aa6b0; }
 .sn-tag { font-size: .64rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; white-space: nowrap; background: #e8f6f5; color: var(--sn-teal-dark); }
 .sn-tag--new { background: #fff1d6; color: #9a6200; }
@@ -92,6 +94,7 @@
 .sn-mob__sub { padding: 0 20px 12px; }
 .sn-mob__sub h4 { font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; color: var(--sn-muted); margin: 10px 0 2px; }
 .sn-mob__sub a { display: flex; justify-content: space-between; padding: 8px 0; font-size: .92rem; }
+.sn-mob__sub span.sn-mob__h { display: block; font-weight: 700; font-size: .84rem; margin: 8px 0 0; }
 .sn-mob__sub span.sn-off { display: block; padding: 8px 0; color: #9aa6b0; font-size: .92rem; }
 
 @media (max-width: 980px) {
