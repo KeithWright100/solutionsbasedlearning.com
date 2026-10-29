@@ -759,6 +759,7 @@
       back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>',
       minusAll: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>',
       plusAll: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>',
+      check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>',
       list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>'
     };
     return icons[name] || "";
@@ -825,8 +826,8 @@
 
     html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Hub</span></a>";
     html += '<a class="lh-sidebar__home" href="/geography">' + icon("home") + "<span>Geography overview</span></a>";
-    html += '<a class="lh-sidebar__home" href="/geography/revision">' + icon("book") + "<span>Revision</span></a>";
     html += '<a class="lh-sidebar__home" href="/geography/revision/guide">' + icon("book") + "<span>Full revision guide</span></a>";
+    html += '<a class="lh-sidebar__home" href="/geography/revision">' + icon("check") + "<span>Check your understanding</span></a>";
 
     html += '<div class="tn-panel">';
     html += '<div class="tn-head"><button type="button" class="tn-head__title" aria-expanded="true">' + icon("list") + "<span>Contents</span></button>";
