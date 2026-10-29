@@ -107,10 +107,7 @@
       <fieldset class="sbl-fieldset">
         <legend>Terms of Access</legend>
         <div class="sbl-checkbox-group">
-          <label class="sbl-checkbox"><input type="checkbox" id="termsProfessional" required> I am applying for genuine educational use of this platform.</label>
-          <label class="sbl-checkbox"><input type="checkbox" id="termsSharing" required> I will not share my account credentials with others.</label>
-          <label class="sbl-checkbox"><input type="checkbox" id="termsDiscretion" required> I understand that access is granted at the discretion of the site administrator.</label>
-          <label class="sbl-checkbox"><input type="checkbox" id="termsResponsible" required> I agree to use the platform responsibly and ethically.</label>
+          <label class="sbl-checkbox"><input type="checkbox" id="termsAll" required> I am applying for genuine educational use of this platform. I will not share my account details with others, I understand that access is granted at the discretion of the site administrator, and I agree to use the platform responsibly and ethically.</label>
         </div>
       </fieldset>
 
@@ -187,16 +184,17 @@
       reason: document.getElementById('reason').value.trim(),
       areasOfInterest: areas,
       terms: {
-        professionalCapacity: document.getElementById('termsProfessional').checked,
-        noSharing: document.getElementById('termsSharing').checked,
-        adminDiscretion: document.getElementById('termsDiscretion').checked,
-        responsibleUse: document.getElementById('termsResponsible').checked
+        // One tick accepts all four terms (each is still recorded separately).
+        professionalCapacity: document.getElementById('termsAll').checked,
+        noSharing: document.getElementById('termsAll').checked,
+        adminDiscretion: document.getElementById('termsAll').checked,
+        responsibleUse: document.getElementById('termsAll').checked
       }
     };
 
     if (!form.reportValidity()) return;
     if (!payload.terms.professionalCapacity || !payload.terms.noSharing || !payload.terms.adminDiscretion || !payload.terms.responsibleUse) {
-      errorBox.textContent = 'Please accept all four terms of access before submitting.';
+      errorBox.textContent = 'Please tick the box to accept the terms of access before submitting.';
       errorBox.classList.add('is-visible');
       return;
     }
