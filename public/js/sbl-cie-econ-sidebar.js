@@ -33,37 +33,177 @@
       {
         "slug": "allocation-of-resources",
         "label": "2. Allocation of resources",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/cie-economics/allocation-of-resources",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "3. Demand and supply",
+                "href": "/igcse/cie-economics/allocation-of-resources/topic-3-markets-demand-and-supply"
+              },
+              {
+                "label": "4. Equilibrium and price changes",
+                "href": "/igcse/cie-economics/allocation-of-resources/topic-4-price-determination-and-price-changes"
+              },
+              {
+                "label": "5. PED and PES",
+                "href": "/igcse/cie-economics/allocation-of-resources/topic-5-price-elasticity"
+              },
+              {
+                "label": "6. Market failure",
+                "href": "/igcse/cie-economics/allocation-of-resources/topic-6-market-economy-and-market-failure"
+              },
+              {
+                "label": "7. Government intervention",
+                "href": "/igcse/cie-economics/allocation-of-resources/topic-7-mixed-economy-and-government-intervention"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "microeconomic-decision-makers",
         "label": "3. Microeconomic decision-makers",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/cie-economics/microeconomic-decision-makers",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "8. Money, banks and households",
+                "href": "/igcse/cie-economics/microeconomic-decision-makers/topic-8-money-banking-and-households"
+              },
+              {
+                "label": "9. Workers and wages",
+                "href": "/igcse/cie-economics/microeconomic-decision-makers/topic-9-workers"
+              },
+              {
+                "label": "10. Firms and economies of scale",
+                "href": "/igcse/cie-economics/microeconomic-decision-makers/topic-10-firms-mergers-and-economies-of-scale"
+              },
+              {
+                "label": "11. Production, costs and revenue",
+                "href": "/igcse/cie-economics/microeconomic-decision-makers/topic-11-production-costs-and-revenue"
+              },
+              {
+                "label": "12. Objectives and market structure",
+                "href": "/igcse/cie-economics/microeconomic-decision-makers/topic-12-objectives-of-firms-and-types-of-market"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "government-and-the-macroeconomy",
         "label": "4. Government and the macroeconomy",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/cie-economics/government-and-the-macroeconomy",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "13. Aims and fiscal policy",
+                "href": "/igcse/cie-economics/government-and-the-macroeconomy/topic-13-macroeconomic-aims-and-fiscal-policy"
+              },
+              {
+                "label": "14. Monetary and supply-side policy",
+                "href": "/igcse/cie-economics/government-and-the-macroeconomy/topic-14-monetary-and-supply-side-policy"
+              },
+              {
+                "label": "15. Growth and recession",
+                "href": "/igcse/cie-economics/government-and-the-macroeconomy/topic-15-economic-growth-and-recession"
+              },
+              {
+                "label": "16. Unemployment",
+                "href": "/igcse/cie-economics/government-and-the-macroeconomy/topic-16-employment-and-unemployment"
+              },
+              {
+                "label": "17. Inflation",
+                "href": "/igcse/cie-economics/government-and-the-macroeconomy/topic-17-inflation-and-deflation"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "economic-development",
         "label": "5. Economic development",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/cie-economics/economic-development",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "18. Living standards and poverty",
+                "href": "/igcse/cie-economics/economic-development/topic-18-living-standards-and-poverty"
+              },
+              {
+                "label": "19. Population and development",
+                "href": "/igcse/cie-economics/economic-development/topic-19-population-and-differences-in-development"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "international-trade-and-globalisation",
         "label": "6. Trade and globalisation",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/igcse/cie-economics/international-trade-and-globalisation",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "20. Free trade and globalisation",
+                "href": "/igcse/cie-economics/international-trade-and-globalisation/topic-20-specialisation-free-trade-and-globalisation"
+              },
+              {
+                "label": "21. Trade restrictions",
+                "href": "/igcse/cie-economics/international-trade-and-globalisation/topic-21-trade-restrictions"
+              },
+              {
+                "label": "22. Exchange rates",
+                "href": "/igcse/cie-economics/international-trade-and-globalisation/topic-22-foreign-exchange-rates"
+              },
+              {
+                "label": "23. Current account",
+                "href": "/igcse/cie-economics/international-trade-and-globalisation/topic-23-current-account-of-the-balance-of-payments"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "section": "Exam practice",
+    "units": [
+      {
+        "slug": "past-papers",
+        "label": "Specimen papers",
+        "href": "/igcse/cie-economics/past-papers",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Papers",
+            "lessons": [
+              {
+                "label": "Paper 1: Multiple choice",
+                "href": "/igcse/cie-economics/past-papers?paper=sp-p1"
+              },
+              {
+                "label": "Paper 2: Structured questions",
+                "href": "/igcse/cie-economics/past-papers?paper=sp-p2"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
@@ -130,6 +270,7 @@
 
     html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Home Page</span></a>";
     html += '<a class="lh-sidebar__home" href="/igcse/cie-economics">' + icon("home") + "<span>CIE Economics overview</span></a>";
+    html += '<a class="lh-sidebar__home" href="/igcse/cie-economics/past-papers">' + icon("book") + "<span>Specimen paper practice</span></a>";
     html += '<a class="lh-sidebar__home" href="/igcse/economics/learn">' + icon("game") + "<span>Edexcel IGCSE Economics</span></a>";
 
     if (!TREE.length) {
