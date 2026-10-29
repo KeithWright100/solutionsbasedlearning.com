@@ -1,6 +1,6 @@
 /* public/css/sbl-tree-nav.css
-   Collapsible "Contents" tree used in the IB Geography left sidebar
-   (drawn by /js/sbl-sidebar.js, which adds this stylesheet itself).
+   Collapsible "Contents" tree used in the subject left sidebars
+   (drawn by /js/sbl-sidebar.js and the IGCSE / CIE sidebar files, which adds this stylesheet itself).
    Everything is scoped to .tn-sidebar so other sidebars are unaffected. */
 
 .tn-sidebar { padding-bottom: 1.5rem; }
@@ -77,6 +77,7 @@
 .tn-row--topic .tn-label { font-size: 0.83rem; }
 .tn-node.is-path > .tn-row--topic .tn-label { font-weight: 700; }
 .tn-l4 { margin: 0 6px 4px 42px; border-left: 2px solid var(--lh-border, #e6e8ee); }
+.tn-l4.tn-l4--flat { margin-left: 30px; }
 .tn-leaf {
   display: block; padding: 6px 8px 6px 12px; margin: 1px 0;
   border-radius: 0 8px 8px 0;
