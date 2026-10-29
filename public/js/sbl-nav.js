@@ -10,6 +10,11 @@
 //                                        at the very top of <body>)
 //   <script src="/js/sbl-nav.js"></script>
 //
+// The Humanities Hub places #sbl-nav itself and gets the full header
+// (dark brand strip + menu row). Every other page gets it automatically
+// from sbl-feedback-widget.js, without a #sbl-nav element, and shows the
+// slim one-row version with the SBL logo inside the menu row.
+//
 // Item format: [label, href, flag]  flag: 'new' (badge) or 'soon'
 // (shown greyed out, not a link). A menu or column with teacher:true is
 // only shown to teacher/admin logins; adminOnly:true only to admins.
@@ -34,7 +39,8 @@
           ['HL: Power, places & networks', '/geography/paper-2/hl-1'],
           ['HL: Human development & diversity', '/geography/paper-2/hl-2'],
           ['HL: Global risks & resilience', '/geography/paper-2/hl-3'],
-          ['Revision guide', '/geography/revision/guide'],
+          ['Full revision guide', '/geography/revision/guide'],
+          ['Check your understanding', '/geography/revision'],
           ['Revise by topic', '/geography/revision/topics'],
           ['Past paper questions', '/geography/revision/paper-questions'],
           ['Exam tips', '/geography/exam-tips']] },
@@ -82,7 +88,8 @@
       cols: [
         { title: 'IB Diploma', items: [
           ['Geography', '', 'head'],
-          ['Revision guide', '/geography/revision/guide'],
+          ['Full revision guide', '/geography/revision/guide'],
+          ['Check your understanding', '/geography/revision'],
           ['Revise by topic', '/geography/revision/topics'],
           ['Past paper questions', '/geography/revision/paper-questions'],
           ['Quizzes', '/geography/quizzes'],
@@ -145,14 +152,18 @@
   function build() {
     if (document.querySelector('.sn-root')) return;
     root = document.getElementById('sbl-nav');
+    var compact = !root;
     if (!root) { root = document.createElement('div'); document.body.insertBefore(root, document.body.firstChild); }
-    root.className = 'sn-root';
+    root.className = 'sn-root' + (compact ? ' sn-root--compact' : '');
+    document.body.classList.add('has-sn');
+    if (compact) document.body.classList.add('has-sn--compact');
     root.innerHTML =
-      '<div class="sn-brand"><div class="sn-brand__in">' +
+      (compact ? '' : '<div class="sn-brand"><div class="sn-brand__in">' +
         '<a class="sn-logo" href="/humanities-hub"><b>SBL</b><span>Humanities Hub<small>Solutions Based Learning</small></span></a>' +
         '<span class="sn-brand__spacer"></span><span class="sn-brand__note">IB Diploma &middot; IGCSE &middot; KS3</span>' +
-      '</div></div>' +
+      '</div></div>') +
       '<nav class="sn-bar" aria-label="Main"><div class="sn-bar__in">' +
+        (compact ? '<a class="sn-minilogo" href="/humanities-hub" aria-label="Humanities Hub"><b>SBL</b><span>Humanities Hub</span></a>' : '') +
         '<a class="sn-home" href="/humanities-hub" aria-label="Humanities Hub home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></a>' +
         '<span class="sn-menus" style="display:contents"></span>' +
         '<span class="sn-spacer"></span>' +

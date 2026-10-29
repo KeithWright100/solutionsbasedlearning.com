@@ -9,7 +9,7 @@
   --sn-ib: #0b6e8a; --sn-ig: #1f8a4c; --sn-rev: #7a4cc2; --sn-tch: #b5651d;
   font-family: Inter, "Segoe UI", Arial, sans-serif;
   color: var(--sn-ink);
-  position: sticky; top: 0; z-index: 1000;
+  position: sticky; top: 0; z-index: 150; /* above page content, below the bots' pop-up windows (200) */
   line-height: 1.4;
 }
 .sn-root *, .sn-root *::before, .sn-root *::after { box-sizing: border-box; }
@@ -82,6 +82,23 @@
 .sn-usermenu a:hover, .sn-usermenu button:hover { background: var(--sn-bg); }
 .sn-usermenu small { display: block; padding: 6px 10px 8px; color: var(--sn-muted); font-size: .76rem; border-bottom: 1px solid var(--sn-line); margin-bottom: 4px; word-break: break-all; }
 
+/* slim one-row version used on every page except the hub */
+.sn-minilogo { display: flex; align-items: center; gap: 8px; margin-right: 8px; font-weight: 800; font-size: .9rem; white-space: nowrap; }
+.sn-minilogo b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--sn-teal); color: var(--sn-deep); font-size: .7rem; }
+.sn-root--compact .sn-home { display: none; }
+.sn-root--compact .sn-bar__in { max-width: none; height: 52px; }
+.sn-root--compact .sn-btn { padding: 8px 10px; font-size: .9rem; }
+.sn-root--compact .sn-panel__in { max-width: 1240px; }
+
+/* make room for the bar on pages whose own sidebars / panels stick to the top */
+@media (min-width: 901px) {
+  body.has-sn--compact .lh-sidebar { top: 52px; height: calc(100vh - 52px); }
+}
+@media (min-width: 1101px) {
+  body.has-sn--compact .lh-content-grid > .lh-rail { top: calc(52px + 1rem); max-height: calc(100vh - 52px - 2rem); }
+}
+body.has-sn--compact .ppq-src { top: 68px; max-height: calc(100vh - 84px); }
+
 /* phone menu */
 .sn-burger { display: none; border: 0; background: none; width: 40px; height: 40px; border-radius: 10px; place-items: center; }
 .sn-mob { display: none; border-top: 1px solid var(--sn-line); background: #fff; max-height: calc(100vh - 110px); overflow-y: auto; }
@@ -97,8 +114,12 @@
 .sn-mob__sub span.sn-mob__h { display: block; font-weight: 700; font-size: .84rem; margin: 8px 0 0; }
 .sn-mob__sub span.sn-off { display: block; padding: 8px 0; color: #9aa6b0; font-size: .92rem; }
 
+@media (max-width: 1180px) {
+  .sn-root--compact .sn-minilogo span { display: none; }
+}
 @media (max-width: 980px) {
   .sn-menu, .sn-find, .sn-home { display: none; }
+  .sn-root--compact .sn-minilogo span { display: inline; }
   .sn-burger { display: grid; }
 }
 @media (max-width: 560px) {

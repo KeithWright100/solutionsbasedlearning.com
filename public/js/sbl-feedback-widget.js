@@ -295,3 +295,23 @@
     localStorage.setItem(key, JSON.stringify(list.slice(0, 8)));
   } catch (e) { /* storage blocked — ignore */ }
 })();
+
+// ---- Shared top menu bar --------------------------------------------------
+// Adds the SBL menu bar (/js/sbl-nav.js) to every page that loads this
+// widget, so the menu never has to be pasted into individual pages.
+// Skipped on the public landing page, the log-in / account pages, and the
+// individual game screens (which need the whole screen); the games hub
+// page itself still gets it.
+(function () {
+  try {
+    if (window.__sblNavLoaded || document.querySelector('script[src="/js/sbl-nav.js"]')) return;
+    var p = location.pathname.replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/';
+    if (p === '/') return;
+    if (/^\/(login|register|set-password|forgot-password|setup-admin)(\/|$)/.test(p)) return;
+    if (/^\/geography\/games\/.+/.test(p)) return;
+    if (!document.querySelector('link[href="/css/sbl-nav.css"]')) {
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/css/sbl-nav.css'; document.head.appendChild(l);
+    }
+    var s = document.createElement('script'); s.src = '/js/sbl-nav.js'; document.head.appendChild(s);
+  } catch (e) { /* never let the menu stop the page working */ }
+})();

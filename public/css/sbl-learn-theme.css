@@ -63,7 +63,7 @@
   min-height: 100vh;
 }
 @media (max-width: 900px) {
-  .lh-shell { grid-template-columns: 1fr; }
+  .lh-shell { grid-template-columns: minmax(0, 1fr); } /* minmax stops wide content pushing the page sideways on phones */
   .lh-sidebar { position: static; height: auto; }
 }
 
