@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Humanities Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6f8; --panel:#fff; --ink:#1d2430; --muted:#667085; --line:#e3e6eb; --head:#f0f2f5;
+  --accent:#1f6f5c; --accent-ink:#fff;
+  --good:#d6efe2; --good-ink:#145c3a; --mild:#fbe9d9; --mid:#fce8b2; --bad:#f4c7c3; --bad-ink:#8a1f17;
+  --imp:#dbe8fb; --imp-ink:#1d4f91; --stab:#eceef1; --stab-ink:#475467;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12151b; --panel:#1a1f27; --ink:#e7eaf0; --muted:#98a2b3; --line:#2b313c; --head:#222833;
+  --accent:#3fae8f; --accent-ink:#0d1a15;
+  --good:#1d3b2d; --good-ink:#8fe0b4; --mild:#3a2c20; --mid:#3d3418; --bad:#4a2220; --bad-ink:#ffb4ab;
+  --imp:#1c2d47; --imp-ink:#a9c8f5; --stab:#262c36; --stab-ink:#c3cad5;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 Inter,system-ui,sans-serif}
+header{padding:18px 20px 6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}
+h1{font-size:20px;margin:0}
+.sub{color:var(--muted);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;padding:10px 20px;align-items:end}
+.bar label{display:flex;flex-direction:column;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;gap:4px}
+select,input[type=search],input[type=text],input[type=number]{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:6px 8px}
+select{min-width:120px}
+button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:7px;padding:6px 12px;cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.spacer{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:4px 20px 10px}
+.chip{border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid transparent}
+.chip.on{border-color:currentColor}
+.wrap{margin:0 20px 20px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);overflow:auto;max-height:calc(100vh - 210px)}
+table{border-collapse:separate;border-spacing:0;font-size:13px;white-space:nowrap}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:5px 7px;text-align:center}
+thead th{background:var(--head);position:sticky;z-index:2;font-weight:600}
+thead tr:nth-child(1) th{top:0;height:30px}
+thead tr:nth-child(2) th{top:30px;height:22px;font-size:11px;color:var(--muted);font-weight:500}
+thead tr:nth-child(3) th{top:52px;font-size:11px}
+.sticky{position:sticky;background:var(--panel);z-index:1;text-align:left}
+thead .sticky{z-index:3;background:var(--head)}
+.c0{left:0;min-width:92px}.c1{left:92px;min-width:110px;border-right:2px solid var(--line)}
+.grpstart{border-left:2px solid var(--line)}
+td input.mark{width:52px;padding:3px 4px;text-align:center;border-radius:5px}
+td input.alis{width:52px;padding:3px 4px;text-align:center;border-radius:5px}
+td select{min-width:0;padding:3px 4px;border-radius:5px}
+.g-good{background:var(--good);color:var(--good-ink)}
+.g-mild{background:var(--mild)}
+.g-mid{background:var(--mid)}
+.g-bad{background:var(--bad);color:var(--bad-ink)}
+.st{display:inline-block;border-radius:6px;padding:2px 8px;font-weight:600;font-size:12px}
+.st-on{background:var(--good);color:var(--good-ink)}
+.st-imp{background:var(--imp);color:var(--imp-ink)}
+.st-stab{background:var(--stab);color:var(--stab-ink)}
+.st-dec{background:var(--bad);color:var(--bad-ink)}
+.muted{color:var(--muted)}
+.overall{background:color-mix(in srgb,var(--accent) 6%,var(--panel))}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);max-width:760px;width:calc(100% - 32px);padding:0}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
+.dlg-h h2{font-size:16px;margin:0}
+.dlg-b{padding:14px 18px;max-height:70vh;overflow:auto}
+.dlg-b table{width:100%;white-space:normal}
+.dlg-b td,.dlg-b th{border:1px solid var(--line)}
+.dlg-b input{width:100%}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.note{font-size:12px;color:var(--muted);margin:10px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:0 20px 14px;font-size:12px;color:var(--muted);align-items:center}
+.legend span.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-3px;margin-right:4px}
+@media (max-width:640px){header,.bar,.chips,.legend{padding-left:16px;padding-right:16px}.wrap{margin:0 16px 16px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Humanities Tracking</h1>
+  <span class="sub">Demo with invented students · enter a raw mark and everything else calculates</span>
+</header>
+
+<div class="bar">
+  <label>Year group<select id="fYear"></select></label>
+  <label>Subject<select id="fSubj"></select></label>
+  <label>Level<select id="fLevel"><option>HL</option><option>SL</option></select></label>
+  <label>Teacher<select id="fTeacher"></select></label>
+  <label>Group<select id="fGroup"></select></label>
+  <label>Search<input type="search" id="fSearch" placeholder="Student name"></label>
+  <span class="spacer"></span>
+  <button id="bAddStudent">+ Student</button>
+  <button id="bSettings">Assessments &amp; boundaries</button>
+  <button class="primary" id="bCsv">Export CSV</button>
+</div>
+
+<div class="chips" id="chips"></div>
+<div class="legend">
+  <b>vs ALIS:</b>
+  <span><span class="sw g-good"></span>on or above</span>
+  <span><span class="sw g-mild"></span>just below</span>
+  <span><span class="sw g-mid"></span>1 grade below</span>
+  <span><span class="sw g-bad"></span>2+ grades below</span>
+</div>
+
+<div class="wrap" id="wrap"></div>
+
+<dialog id="dlg">
+  <div class="dlg-h"><h2 id="dlgTitle">Settings</h2><button id="dlgClose">Close</button></div>
+  <div class="dlg-b" id="dlgBody"></div>
+</dialog>
+
+<script>
+(function(){
+// ---------- Grade boundaries (from your Grade Boundaries sheet) ----------
+var BOUNDS = {
+  'BM Test':        [0,10,20,30,40,50,65,75],
+  'BM Exam':        [0,5,15,25,35,45,60,70],
+  'Econ Exam':      [0,15,30,40,50,60,70,80],
+  'Econ Test':      [0,20,30,40,50,65,75,85],
+  'Geog Paper 1':   [0,1,17,33,43,53,62,72],
+  'Geog Paper 2':   [0,1,16,30,42,54,68,80],
+  'Geog Paper 3':   [0,1,18,36,54,61,68,75],
+  'Geog Overall HL':[0,1,13,26,41,52,63,73],
+  'Geog Overall SL':[0,1,12,24,40,51,64,75],
+  'History (example)':[0,10,20,32,44,56,68,80]
+};
+var OVERALL = { Geography:{HL:'Geog Overall HL',SL:'Geog Overall SL'}, Economics:{HL:'Econ Exam',SL:'Econ Exam'},
+  'Business Management':{HL:'BM Exam',SL:'BM Exam'}, History:{HL:'History (example)',SL:'History (example)'} };
+function gradeFor(pct, set){
+  var b = BOUNDS[set] || BOUNDS['Econ Exam'], g = 0;
+  for (var i=0;i<b.length;i++) if (pct >= b[i]) g = i;
+  return g;
+}
+
+// ---------- Assessments per subject/level (based on your sheets) ----------
+function A(name, when, max, set, weight){ return {id:Math.random().toString(36).slice(2,8), name:name, when:when, max:max, set:set, weight:weight||1}; }
+var TEMPLATES = {
+  'Geography|HL':[A('Population','T1 Wk 8',20,'Geog Paper 1'),A('Food & health','T1 Wk 13',20,'Geog Paper 1'),A('Population P2','T1 Wk 13',20,'Geog Paper 2'),
+                  A('Freshwater','T2 Wk 6',20,'Geog Paper 1'),A('Food & health','T2 Wk 9',20,'Geog Paper 1'),A('Mid course P1','T3',40,'Geog Paper 1',2),A('Mid course P2','T3',50,'Geog Paper 2',2)],
+  'Geography|SL':[A('Population test','T1 Wk 8',20,'Geog Paper 1'),A('Population (EOU)','T1 Wk 13',20,'Geog Paper 2'),A('Freshwater test','T2 Wk 6',20,'Geog Paper 1'),
+                  A('Mid course P1','T3',40,'Geog Paper 1',2),A('Mid course P2','T3',50,'Geog Paper 2',2)],
+  'Economics|HL':[A('Unit 1.1 test','T1',24,'Econ Test'),A('Unit test 2.1–2.5','T1',25,'Econ Test'),A('Unit test 2.7–2.8','T2',25,'Econ Test'),
+                  A('Unit test 2.1–2.8','T2',35,'Econ Test'),A('Mid course','T3',60,'Econ Exam',2),A('Trial exam','T3',80,'Econ Exam',2)],
+  'Economics|SL':[A('Unit test 1.1 & 1.2','T1',30,'Econ Test'),A('Unit test 2.1–2.5','T1',20,'Econ Test'),A('Unit test 2.7 + 2.8','T2',25,'Econ Test'),
+                  A('Unit test 2.1–2.8','T2',23,'Econ Test'),A('Mid course','T3',60,'Econ Exam',2)],
+  'Business Management|HL':[A('Unit 1.1–1.3','Sep',24,'BM Test'),A('Unit 1','Nov',20,'BM Test'),A('Unit 4','Feb',20,'BM Test'),A('Mid course','T3',60,'BM Exam',2)],
+  'Business Management|SL':[A('Unit test 1.1','T1',24,'BM Test'),A('Unit test 1.3','T1',20,'BM Test'),A('Unit 4','Feb',20,'BM Test'),A('Mid course','T3',60,'BM Exam',2)],
+  'History|HL':[A('1st checkpoint','Sep',24,'History (example)'),A('2nd checkpoint','Nov',30,'History (example)'),A('3rd checkpoint','Feb',15,'History (example)'),
+                A('Mid course P1','T3',24,'History (example)',2),A('Mid course P2','T3',30,'History (example)',2),A('Mid course P3','T3',15,'History (example)',2)],
+  'History|SL':[A('1st checkpoint','Sep',15,'History (example)'),A('2nd checkpoint','Nov',24,'History (example)'),A('3rd checkpoint','Feb',30,'History (example)'),
+                A('Mid course P1','T3',24,'History (example)',2),A('Mid course P2','T3',30,'History (example)',2)]
+};
+var YEARS = ['Grad 2027','Grad 2028','Grad 2029','Grad 2030'];
+var SUBJECTS = ['Geography','Economics','Business Management','History'];
+var SUPPORT = ['','EAL','LS','Access arr.','Wellbeing'];
+
+// ---------- Invented sample students ----------
+var FIRST = ['Ava','Leo','Mia','Noah','Isla','Kai','Zara','Ethan','Lina','Arjun','Mei','Oscar','Priya','Theo','Nina','Rafi','Sofia','Jonah','Yuki','Tara','Omar','Elsa','Ben','Anya','Hugo','Lily','Ravi','Chloe'];
+var LAST = ['Archer','Bloom','Castell','Dane','Ellis','Foster','Grant','Hale','Iverson','Jarvis','Keller','Lund','Marsh','Novak','Oakes','Pryor','Quill','Reyes','Sato','Thorne','Upton','Vance','Wilde','Young'];
+var TEACHERS = { Geography:['GEOA','GEOB'], Economics:['ECOA','ECOB'], 'Business Management':['BUSA','BUSB'], History:['HISA','HISB'] };
+var seed = 7; function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
+function pick(a){ return a[Math.floor(rnd()*a.length)]; }
+
+var DATA = {}; // key year|subj|level -> {assess:[], students:[]}
+function key(){ return fYear.value+'|'+fSubj.value+'|'+fLevel.value; }
+function build(y, s, l){
+  var yi = YEARS.indexOf(y);
+  var assess = TEMPLATES[s+'|'+l].map(function(a){ var c = Object.assign({}, a); c.id = Math.random().toString(36).slice(2,8); return c; });
+  var filled = [assess.length, assess.length-1, 3, 1][yi]; // older cohorts have more marks in
+  var n = 9 + Math.floor(rnd()*6), students = [];
+  for (var i=0;i<n;i++){
+    var alis = Math.round((3.6 + rnd()*3.2)*10)/10, ability = alis/7*78 + (rnd()*16-8), drift = (rnd()*8-4);
+    var marks = {};
+    assess.forEach(function(a, k){
+      if (k >= filled) return;
+      var pct = Math.max(4, Math.min(98, ability + drift*k + (rnd()*14-7)));
+      marks[a.id] = Math.round(pct/100*a.max);
+    });
+    var fn, ln, tries = 0;
+    do { fn = pick(FIRST); ln = pick(LAST); tries++; } while (tries < 50 && students.some(function(x){ return x.last === ln; }));
+    students.push({ id:'s'+Math.random().toString(36).slice(2,8), first:fn, last:ln,
+      group: (l==='HL'?'1':'2') + '.' + (1+Math.floor(rnd()*3)), teacher: pick(TEACHERS[s]),
+      alis: alis, tg: Math.min(7, Math.round(alis + (rnd()<.5?0:1))), support: rnd()<.2 ? pick(SUPPORT.slice(1)) : '', marks: marks });
+  }
+  students.sort(function(a,b){ return a.last.localeCompare(b.last); });
+  return { assess:assess, students:students };
+}
+function data(){ var k = key(); if (!DATA[k]) { var p = k.split('|'); DATA[k] = build(p[0],p[1],p[2]); } return DATA[k]; }
+
+// ---------- Calculations ----------
+function calc(st, d){
+  var rows = [], wsum = 0, psum = 0;
+  d.assess.forEach(function(a){
+    var m = st.marks[a.id];
+    if (m === undefined || m === '' || m === null || isNaN(m)) { rows.push(null); return; }
+    var pct = m / a.max * 100, g = gradeFor(pct, a.set);
+    rows.push({ pct:pct, grade:g, vs: g - st.alis });
+    wsum += a.weight; psum += pct * a.weight;
+  });
+  var done = rows.filter(Boolean);
+  var avg = wsum ? psum / wsum : null;
+  var overallSet = OVERALL[fSubj.value][fLevel.value];
+  var grade = avg == null ? null : gradeFor(avg, overallSet);
+  var vs = grade == null ? null : Math.round((grade - st.alis)*10)/10;
+  var fromFirst = done.length >= 2 ? done[done.length-1].grade - done[0].grade : null;
+  var fromPrev = done.length >= 2 ? done[done.length-1].grade - done[done.length-2].grade : null;
+  var status = null;
+  if (vs != null) {
+    if (vs >= 0) status = 'On/above target';
+    else if (fromFirst != null && fromFirst >= 0.5) status = 'Improving towards target';
+    else if (fromPrev != null && fromPrev <= -0.5) status = 'Declining';
+    else status = 'Stable below target';
+  }
+  return { rows:rows, avg:avg, grade:grade, vs:vs, fromFirst:fromFirst, fromPrev:fromPrev, status:status };
+}
+function vsClass(v){ if (v == null) return ''; if (v >= 0) return 'g-good'; if (v <= -2) return 'g-bad'; if (v <= -1) return 'g-mid'; return 'g-mild'; }
+var ST = { 'On/above target':'st-on', 'Improving towards target':'st-imp', 'Stable below target':'st-stab', 'Declining':'st-dec' };
+function sign(v){ return v == null ? '<span class="muted">–</span>' : (v > 0 ? '+' : '') + (Math.round(v*10)/10); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+// ---------- Filters ----------
+var fYear = document.getElementById('fYear'), fSubj = document.getElementById('fSubj'), fLevel = document.getElementById('fLevel'),
+    fTeacher = document.getElementById('fTeacher'), fGroup = document.getElementById('fGroup'), fSearch = document.getElementById('fSearch');
+fYear.innerHTML = YEARS.map(function(y){ return '<option'+(y==='Grad 2028'?' selected':'')+'>'+y+'</option>'; }).join('');
+fSubj.innerHTML = SUBJECTS.map(function(s){ return '<option>'+s+'</option>'; }).join('');
+var statusFilter = null;
+function fillSub(){
+  var d = data(), t = {}, g = {};
+  d.students.forEach(function(s){ t[s.teacher] = 1; g[s.group] = 1; });
+  var tv = fTeacher.value, gv = fGroup.value;
+  fTeacher.innerHTML = '<option value="">All teachers</option>' + Object.keys(t).sort().map(function(x){ return '<option>'+x+'</option>'; }).join('');
+  fGroup.innerHTML = '<option value="">All groups</option>' + Object.keys(g).sort().map(function(x){ return '<option>'+x+'</option>'; }).join('');
+  if (t[tv]) fTeacher.value = tv; if (g[gv]) fGroup.value = gv;
+}
+[fYear, fSubj, fLevel].forEach(function(el){ el.addEventListener('change', function(){ statusFilter = null; fillSub(); render(); }); });
+[fTeacher, fGroup].forEach(function(el){ el.addEventListener('change', render); });
+fSearch.addEventListener('input', render);
+
+function visible(){
+  var d = data(), q = fSearch.value.trim().toLowerCase();
+  return d.students.filter(function(s){
+    if (fTeacher.value && s.teacher !== fTeacher.value) return false;
+    if (fGroup.value && s.group !== fGroup.value) return false;
+    if (q && (s.first+' '+s.last).toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+}
+
+// ---------- Render ----------
+var wrap = document.getElementById('wrap'), chips = document.getElementById('chips');
+function render(){
+  var d = data(), list = visible();
+  var counts = { 'On/above target':0, 'Improving towards target':0, 'Stable below target':0, 'Declining':0 };
+  var calcs = {}; list.forEach(function(s){ var c = calc(s, d); calcs[s.id] = c; if (c.status) counts[c.status]++; });
+  chips.innerHTML = '<span class="chip st-stab'+(statusFilter?'':' on')+'" data-s="">All ('+list.length+')</span>' +
+    Object.keys(counts).map(function(k){ return '<span class="chip '+ST[k]+(statusFilter===k?' on':'')+'" data-s="'+k+'">'+k+' ('+counts[k]+')</span>'; }).join('');
+  if (statusFilter) list = list.filter(function(s){ return calcs[s.id].status === statusFilter; });
+
+  var h1 = '<tr><th class="sticky c0" rowspan="3">First name</th><th class="sticky c1" rowspan="3">Surname</th>' +
+    '<th rowspan="3">Group</th><th rowspan="3">Teacher</th><th rowspan="3">ALIS</th><th rowspan="3">TG</th><th rowspan="3">Support</th>' +
+    '<th colspan="6" class="grpstart overall">Overall tracking</th>';
+  var h2 = '<tr><th colspan="6" class="grpstart overall">'+esc(OVERALL[fSubj.value][fLevel.value])+' boundaries</th>';
+  var h3 = '<tr><th class="grpstart overall">Avg vs ALIS</th><th class="overall">Avg %</th><th class="overall">Grade</th><th class="overall">From 1st</th><th class="overall">From prev.</th><th class="overall">Progress status</th>';
+  d.assess.forEach(function(a){
+    h1 += '<th colspan="4" class="grpstart">'+esc(a.name)+'</th>';
+    h2 += '<th colspan="4" class="grpstart">'+esc(a.when)+(a.weight>1?' · ×'+a.weight:'')+'</th>';
+    h3 += '<th class="grpstart">/'+a.max+'</th><th>%</th><th>Grade</th><th>vs ALIS</th>';
+  });
+  var body = list.map(function(s){
+    var c = calcs[s.id];
+    var r = '<tr data-id="'+s.id+'"><td class="sticky c0">'+esc(s.first)+'</td><td class="sticky c1">'+esc(s.last)+'</td>' +
+      '<td>'+esc(s.group)+'</td><td>'+esc(s.teacher)+'</td>' +
+      '<td><input class="alis" type="number" step="0.1" min="0" max="7" value="'+s.alis+'" data-f="alis"></td>' +
+      '<td><select data-f="tg">'+[1,2,3,4,5,6,7].map(function(g){ return '<option'+(g===s.tg?' selected':'')+'>'+g+'</option>'; }).join('')+'</select></td>' +
+      '<td><select data-f="support">'+SUPPORT.map(function(x){ return '<option value="'+x+'"'+(x===s.support?' selected':'')+'>'+(x||'—')+'</option>'; }).join('')+'</select></td>' +
+      '<td class="grpstart '+vsClass(c.vs)+'">'+sign(c.vs)+'</td>' +
+      '<td>'+(c.avg==null?'<span class="muted">–</span>':Math.round(c.avg))+'</td>' +
+      '<td><b>'+(c.grade==null?'–':c.grade)+'</b></td>' +
+      '<td>'+sign(c.fromFirst)+'</td><td>'+sign(c.fromPrev)+'</td>' +
+      '<td>'+(c.status?'<span class="st '+ST[c.status]+'">'+c.status+'</span>':'<span class="muted">No marks yet</span>')+'</td>';
+    d.assess.forEach(function(a, i){
+      var x = c.rows[i], m = s.marks[a.id];
+      r += '<td class="grpstart"><input class="mark" type="number" min="0" max="'+a.max+'" value="'+(m==null?'':m)+'" data-a="'+a.id+'"></td>' +
+        (x ? '<td>'+Math.round(x.pct)+'</td><td>'+x.grade+'</td><td class="'+vsClass(x.vs)+'">'+sign(x.vs)+'</td>'
+           : '<td class="muted">–</td><td class="muted">–</td><td class="muted">–</td>');
+    });
+    return r + '</tr>';
+  }).join('');
+  wrap.innerHTML = list.length ? '<table><thead>'+h1+'</tr>'+h2+'</tr>'+h3+'</tr></thead><tbody>'+body+'</tbody></table>'
+                               : '<div class="empty">No students match these filters.</div>';
+}
+
+chips.addEventListener('click', function(e){ var c = e.target.closest('.chip'); if (!c) return; statusFilter = c.dataset.s || null; render(); });
+
+// Editing: recalc on change, keep focus position
+wrap.addEventListener('change', function(e){
+  var el = e.target, tr = el.closest('tr[data-id]'); if (!tr) return;
+  var s = data().students.filter(function(x){ return x.id === tr.dataset.id; })[0];
+  if (el.dataset.a) {
+    var a = data().assess.filter(function(x){ return x.id === el.dataset.a; })[0];
+    if (el.value === '') delete s.marks[a.id];
+    else { var v = Math.max(0, Math.min(a.max, parseFloat(el.value))); s.marks[a.id] = v; }
+  } else if (el.dataset.f === 'alis') s.alis = parseFloat(el.value) || 0;
+  else if (el.dataset.f === 'tg') s.tg = +el.value;
+  else if (el.dataset.f === 'support') s.support = el.value;
+  var sel = el.dataset.a ? 'input[data-a="'+el.dataset.a+'"]' : '[data-f="'+el.dataset.f+'"]', id = tr.dataset.id;
+  render();
+  var again = wrap.querySelector('tr[data-id="'+id+'"] '+sel); if (again && document.activeElement === document.body) {}
+});
+wrap.addEventListener('keydown', function(e){
+  if (e.key !== 'Enter' || !e.target.classList.contains('mark')) return;
+  e.preventDefault();
+  var aid = e.target.dataset.a, tr = e.target.closest('tr'), next = tr.nextElementSibling, nid = next && next.dataset.id;
+  e.target.blur();
+  if (nid) { var n = wrap.querySelector('tr[data-id="'+nid+'"] input[data-a="'+aid+'"]'); if (n) { n.focus(); n.select(); } }
+});
+
+// ---------- Add student ----------
+document.getElementById('bAddStudent').addEventListener('click', function(){
+  openDlg('Add a student',
+    '<table><tr><th>First name</th><td><input id="nF" type="text"></td></tr><tr><th>Surname</th><td><input id="nL" type="text"></td></tr>' +
+    '<tr><th>Group</th><td><input id="nG" type="text" placeholder="e.g. 1.2"></td></tr><tr><th>Teacher</th><td><input id="nT" type="text" placeholder="Staff code"></td></tr>' +
+    '<tr><th>ALIS</th><td><input id="nA" type="number" step="0.1" min="0" max="7"></td></tr></table>' +
+    '<p style="margin-top:12px"><button class="primary" id="nSave">Add to '+esc(fSubj.value+' '+fLevel.value+' · '+fYear.value)+'</button></p>');
+  document.getElementById('nSave').onclick = function(){
+    var g = function(i){ return document.getElementById(i).value.trim(); };
+    if (!g('nF') || !g('nL')) return;
+    data().students.push({ id:'s'+Date.now(), first:g('nF'), last:g('nL'), group:g('nG')||'—', teacher:(g('nT')||'—').toUpperCase(),
+      alis:parseFloat(g('nA'))||0, tg:Math.round(parseFloat(g('nA'))||4), support:'', marks:{} });
+    data().students.sort(function(a,b){ return a.last.localeCompare(b.last); });
+    dlg.close(); fillSub(); render();
+  };
+});
+
+// ---------- Settings dialog ----------
+var dlg = document.getElementById('dlg'), dlgBody = document.getElementById('dlgBody');
+function openDlg(title, html){ document.getElementById('dlgTitle').textContent = title; dlgBody.innerHTML = html; dlg.showModal(); }
+document.getElementById('dlgClose').onclick = function(){ dlg.close(); render(); };
+dlg.addEventListener('close', render);
+var tab = 'assess';
+function settings(){
+  var d = data(), opts = Object.keys(BOUNDS);
+  var html = '<div class="tabs"><button data-t="assess"'+(tab==='assess'?' class="on"':'')+'>Assessments</button><button data-t="bounds"'+(tab==='bounds'?' class="on"':'')+'>Grade boundaries</button></div>';
+  if (tab === 'assess') {
+    html += '<p class="note" style="margin:0 0 10px">'+esc(fSubj.value+' '+fLevel.value+' · '+fYear.value)+'. Weight counts towards the average % (the mid course papers count double).</p>' +
+      '<table><tr><th>Name</th><th>When</th><th>Max mark</th><th>Boundaries</th><th>Weight</th><th></th></tr>' +
+      d.assess.map(function(a, i){
+        return '<tr data-i="'+i+'"><td><input data-k="name" type="text" value="'+esc(a.name)+'"></td><td><input data-k="when" type="text" value="'+esc(a.when)+'"></td>' +
+          '<td><input data-k="max" type="number" min="1" value="'+a.max+'"></td>' +
+          '<td><select data-k="set">'+opts.map(function(o){ return '<option'+(o===a.set?' selected':'')+'>'+o+'</option>'; }).join('')+'</select></td>' +
+          '<td><input data-k="weight" type="number" min="0" step="0.5" value="'+a.weight+'"></td><td><button data-del="'+i+'">Remove</button></td></tr>';
+      }).join('') + '</table><p style="margin-top:12px"><button class="primary" id="addA">+ Add assessment</button></p>';
+  } else {
+    html += '<p class="note" style="margin:0 0 10px">Lowest % needed for each grade. Geography, Economics and Business are copied from your sheet; the History row is an example to replace.</p>' +
+      '<table><tr><th>Set</th>'+[1,2,3,4,5,6,7].map(function(g){ return '<th>'+g+'</th>'; }).join('')+'</tr>' +
+      opts.map(function(o){ return '<tr data-set="'+esc(o)+'"><th style="text-align:left">'+esc(o)+'</th>'+BOUNDS[o].slice(1).map(function(v, i){
+        return '<td><input type="number" min="0" max="100" data-g="'+(i+1)+'" value="'+v+'"></td>'; }).join('')+'</tr>'; }).join('') + '</table>';
+  }
+  openDlg('Assessments & boundaries', html);
+}
+document.getElementById('bSettings').onclick = settings;
+dlgBody.addEventListener('click', function(e){
+  if (e.target.dataset.t) { tab = e.target.dataset.t; settings(); }
+  if (e.target.dataset.del != null) { data().assess.splice(+e.target.dataset.del, 1); settings(); }
+  if (e.target.id === 'addA') { data().assess.push(A('New assessment','',20, data().assess[0] ? data().assess[0].set : 'Econ Test')); settings(); }
+});
+dlgBody.addEventListener('change', function(e){
+  var el = e.target, tr = el.closest('tr');
+  if (tr && tr.dataset.i != null) { var a = data().assess[+tr.dataset.i], k = el.dataset.k; a[k] = (k==='max'||k==='weight') ? (parseFloat(el.value)||0) : el.value; }
+  if (tr && tr.dataset.set) BOUNDS[tr.dataset.set][+el.dataset.g] = parseFloat(el.value) || 0;
+});
+
+// ---------- CSV ----------
+document.getElementById('bCsv').onclick = function(){
+  var d = data(), list = visible();
+  var head = ['First name','Surname','Group','Teacher','ALIS','TG','Support','Avg vs ALIS','Avg %','Grade','From 1st','From previous','Status'];
+  d.assess.forEach(function(a){ head.push(a.name+' /'+a.max, a.name+' %', a.name+' grade', a.name+' vs ALIS'); });
+  var rows = [head].concat(list.map(function(s){
+    var c = calc(s, d), r = [s.first, s.last, s.group, s.teacher, s.alis, s.tg, s.support, c.vs, c.avg==null?'':Math.round(c.avg), c.grade, c.fromFirst, c.fromPrev, c.status];
+    d.assess.forEach(function(a, i){ var x = c.rows[i]; r.push(s.marks[a.id], x?Math.round(x.pct):'', x?x.grade:'', x?Math.round(x.vs*10)/10:''); });
+    return r;
+  }));
+  var csv = rows.map(function(r){ return r.map(function(v){ v = v==null ? '' : String(v); return /[",\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }).join(','); }).join('\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+  a.download = (fYear.value+' '+fSubj.value+' '+fLevel.value).replace(/\s+/g,'_') + '.csv'; a.click();
+};
+
+fillSub(); render();
+})();
+</script>
+</body>
+</html>

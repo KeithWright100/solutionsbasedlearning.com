@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humanities Hub – new design (mock-up)</title>
+<style>
+:root{
+  --navy:#031c33; --deep:#011526; --teal:#00b8b0; --teal-dark:#007c82; --cyan:#20d7e2;
+  --ink:#062033; --muted:#5f7382; --line:#dbe6ea; --bg:#f2f8f9; --card:#fff;
+  --ib:#0b6e8a; --ig:#1f8a4c; --rev:#7a4cc2; --tch:#b5651d;
+  --shadow:0 18px 48px rgba(1,21,38,.18); --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.mock{background:#fff7d6;color:#6b5200;text-align:center;font-size:.8rem;padding:6px 12px;border-bottom:1px solid #f0dc8a}
+
+/* ---------- top bar + nav ---------- */
+.brandbar{background:linear-gradient(135deg,var(--deep),#02324e);color:#fff}
+.brandbar__in{max-width:1240px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em}
+.logo b{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--teal);color:var(--deep);font-size:.85rem}
+.logo span small{display:block;font-weight:500;font-size:.72rem;opacity:.75;letter-spacing:0}
+.brandbar .spacer{flex:1}
+.updated{font-size:.75rem;opacity:.7}
+
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(1,21,38,.05)}
+.nav__in{max-width:1240px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:4px;height:58px}
+.nav__home{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;color:var(--ink)}
+.nav__home:hover{background:var(--bg)}
+.menu{position:static}
+.menu__btn{display:flex;align-items:center;gap:6px;border:0;background:none;padding:9px 12px;border-radius:10px;font-weight:600;font-size:.95rem;color:var(--ink)}
+.menu__btn:hover,.menu__btn[aria-expanded="true"]{background:var(--bg)}
+.menu__btn .dot{width:8px;height:8px;border-radius:50%}
+.menu__btn svg{transition:transform .2s}
+.menu__btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.panel{position:absolute;left:0;right:0;top:58px;background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow);display:none}
+.panel.open{display:block;animation:drop .16s ease-out}
+@keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.panel__in{max-width:1240px;margin:0 auto;padding:22px 20px 26px;display:grid;gap:22px}
+.panel__head{grid-column:1/-1;display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.panel__head h3{font-size:1.05rem}
+.panel__head p{color:var(--muted);font-size:.85rem}
+.col h4{display:flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.col h4 a{color:var(--ink)}
+.col h4 a:hover{color:var(--teal-dark)}
+.col ul{list-style:none}
+.col li a{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;margin:0 -10px;border-radius:8px;font-size:.9rem}
+.col li a:hover{background:var(--bg);color:var(--teal-dark)}
+.tag{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:999px;background:#e8f6f5;color:var(--teal-dark);white-space:nowrap}
+.tag.soon{background:#f0f2f4;color:#8a96a0}
+.tag.new{background:#fff1d6;color:#9a6200}
+.nav .spacer{flex:1}
+.search{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:6px 10px;color:var(--muted);font-size:.88rem;width:220px}
+.search input{border:0;outline:0;font:inherit;width:100%;background:none}
+.user{display:flex;align-items:center;gap:8px;border:0;background:none;padding:6px 8px;border-radius:10px;font-weight:600}
+.user:hover{background:var(--bg)}
+.user i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e3eef1;font-style:normal;font-size:.75rem;font-weight:700}
+.burger{display:none;border:0;background:none;width:40px;height:40px;border-radius:10px}
+
+/* ---------- page ---------- */
+main{max-width:1240px;margin:0 auto;padding:28px 20px 60px}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:stretch;margin-bottom:28px}
+.welcome{background:linear-gradient(135deg,var(--deep),#03466a);color:#fff;border-radius:22px;padding:30px;position:relative;overflow:hidden}
+.welcome:after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(0,184,176,.45),transparent 70%)}
+.welcome h1{font-size:2rem;line-height:1.15;margin-bottom:8px}
+.welcome p{opacity:.85;max-width:520px}
+.welcome .big-search{margin-top:20px;display:flex;background:#fff;border-radius:12px;overflow:hidden;max-width:520px}
+.big-search input{flex:1;border:0;padding:13px 14px;font:inherit;outline:0}
+.big-search button{border:0;background:var(--teal);color:var(--deep);font-weight:700;padding:0 18px}
+.continue{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px}
+.continue h2,.section h2{font-size:1.05rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.resume{display:flex;gap:12px;align-items:center;padding:11px;border-radius:12px;border:1px solid var(--line);margin-bottom:10px}
+.resume:hover{border-color:var(--teal)}
+.resume .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.72rem;flex-shrink:0}
+.resume b{display:block;font-size:.9rem}
+.resume small{color:var(--muted)}
+.bar{height:6px;border-radius:9px;background:#e7eef1;margin-top:6px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--teal)}
+
+.section{margin-top:30px}
+.section__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.section__head a{font-size:.85rem;color:var(--teal-dark);font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.tile:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(1,21,38,.1);border-color:transparent}
+.tile .lvl{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.tile h3{font-size:1.05rem}
+.tile p{color:var(--muted);font-size:.84rem;flex:1}
+.tile .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tile .links a{font-size:.75rem;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--bg)}
+.tile .links a:hover{background:#dff3f2;color:var(--teal-dark)}
+.tile.ib{border-top:4px solid var(--ib)} .tile.ib .lvl{color:var(--ib)}
+.tile.ig{border-top:4px solid var(--ig)} .tile.ig .lvl{color:var(--ig)}
+.tile.soon{opacity:.6}
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.news a{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;display:block}
+.news a:hover{border-color:var(--teal)}
+.news b{display:block;margin:6px 0 4px}
+.news small{color:var(--muted)}
+
+/* sitemap */
+.sitemap{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:30px}
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.sm-col>h3{background:#eef4f6;border:1px solid var(--line);border-radius:10px;padding:9px;text-align:center;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.sm-col details{margin:0 0 6px 10px;border-left:2px solid var(--line);padding-left:10px}
+.sm-col summary{cursor:pointer;font-weight:600;font-size:.88rem;padding:5px 0}
+.sm-col ul{list-style:none;margin:2px 0 6px}
+.sm-col li a{display:block;font-size:.82rem;padding:3px 0;color:var(--muted)}
+.sm-col li a:hover{color:var(--teal-dark)}
+.callout{margin-top:30px;border:1px dashed #b7cfd6;border-radius:16px;padding:16px 18px;background:#fbfeff;font-size:.88rem;color:var(--muted)}
+.callout b{color:var(--ink)}
+
+/* ---------- mobile ---------- */
+@media (max-width:980px){
+  .nav__in{height:56px}
+  .menu,.search,.nav__home{display:none}
+  .burger{display:grid;place-items:center}
+  .nav.mobile-open .mob{display:block}
+  .hero{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .news{grid-template-columns:1fr}
+  .sm-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .tiles,.sm-grid{grid-template-columns:1fr}
+  .welcome h1{font-size:1.5rem}
+  .updated{display:none}
+}
+.mob{display:none;border-top:1px solid var(--line);max-height:calc(100vh - 56px);overflow:auto;background:#fff}
+.mob details{border-bottom:1px solid var(--line)}
+.mob summary{list-style:none;padding:14px 20px;font-weight:700;display:flex;justify-content:space-between}
+.mob summary::-webkit-details-marker{display:none}
+.mob .msub{padding:0 20px 12px}
+.mob .msub h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:10px 0 4px}
+.mob .msub a{display:block;padding:7px 0;font-size:.92rem}
+</style>
+</head>
+<body>
+<div class="mock">Mock-up for review — layout and menus only. Links point at where pages would go.</div>
+
+<header class="brandbar">
+  <div class="brandbar__in">
+    <a class="logo" href="/"><b>SBL</b><span>Humanities Hub<small>Solutions Based Learning</small></span></a>
+    <span class="spacer"></span>
+    <span class="updated">Updated 29 October 2026</span>
+  </div>
+</header>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="nav__in" id="navIn">
+    <a class="nav__home" href="/humanities-hub" aria-label="Hub home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></a>
+    <!-- menus injected here -->
+    <span class="spacer"></span>
+    <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search SBL…" aria-label="Search"></label>
+    <button class="user" type="button"><i>KW</i>Keith <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="mob" id="mob"></div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="welcome">
+      <h1>Welcome back, Keith</h1>
+      <p>Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Use the menus above to jump straight to any subject.</p>
+      <div class="big-search"><input placeholder="Search lessons, case studies, key terms…" aria-label="Search lessons"><button type="button">Search</button></div>
+    </div>
+    <div class="continue">
+      <h2>Carry on where you left off</h2>
+      <a class="resume" href="#"><span class="ic" style="background:var(--ib)">IB</span><span style="flex:1"><b>Global climate – Unit 2.3</b><small>IB Geography · Lesson 4 of 7</small><div class="bar"><span style="width:57%"></span></div></span></a>
+      <a class="resume" href="#"><span class="ic" style="background:var(--ig)">IG</span><span style="flex:1"><b>Development: Egypt and Thailand</b><small>IGCSE Geography · Spaced Retrieval due</small><div class="bar"><span style="width:80%"></span></div></span></a>
+      <a class="resume" href="#"><span class="ic" style="background:var(--rev)">PPQ</span><span style="flex:1"><b>Cambridge Economics specimen paper</b><small>Revision · 12 of 62 questions done</small><div class="bar"><span style="width:20%"></span></div></span></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>IB Diploma</h2><a href="/menu">IB subject menu →</a></div>
+    <div class="tiles" id="tilesIB"></div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>IGCSE</h2><a href="/igcse/menu">IGCSE subject menu →</a></div>
+    <div class="tiles" id="tilesIG"></div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>What's new</h2></div>
+    <div class="news">
+      <a href="/igcse/cie-economics"><span class="tag new">New</span><b>Cambridge IGCSE Economics revision</b><small>23 topic pages, diagrams and the specimen papers.</small></a>
+      <a href="/igcse/history/learn"><span class="tag new">New</span><b>IGCSE History: four depth studies live</b><small>Superpowers, Civil rights, Russia and Japan.</small></a>
+      <a href="/geography/games"><span class="tag">Games</span><b>Interactive Geography games</b><small>KS3, IGCSE and IB Diploma.</small></a>
+    </div>
+  </section>
+
+  <section class="sitemap" id="sitemap">
+    <div class="section__head"><h2>Sitemap</h2><span style="font-size:.8rem;color:var(--muted)">Built from the same list as the menus</span></div>
+    <div class="sm-grid" id="smGrid"></div>
+  </section>
+
+  <div class="callout"><b>How this would work on the real site:</b> the menus, the subject tiles and the sitemap are all drawn from one list (one small JavaScript file). Adding a new section — e.g. KS3 — means adding it to that list once, and it appears in the top menu, the mobile menu and the sitemap on every page. The Teachers menu only shows for teacher and admin logins. Inside a subject, the existing left-hand unit menus stay as they are.</div>
+</main>
+
+<script>
+/* ===== One list drives the menus, tiles and sitemap ===== */
+var NAV = [
+  { key:'ib', label:'IB Diploma', color:'var(--ib)', blurb:'Geography, Economics, Business Management and History', cols:[
+    { title:'IB Geography', href:'/geography', blurb:'All core units, options and HL, with case studies and quizzes.', items:[
+      ['Unit 1: Changing population','/geography/paper-1/core-1-changing-population'],
+      ['Unit 2: Global climate','/geography/paper-1/core-2-global-climate'],
+      ['Unit 3: Resource consumption','/geography/paper-1/core-3-resource-consumption'],
+      ['Option: Leisure, tourism & sport','/geography/paper-1/option-e-leisure-tourism-sport'],
+      ['Option: Food & health','/geography/paper-1/option-f-food-health'],
+      ['HL: Power, places & networks','/geography/paper-2/hl-1-power-places-networks'],
+      ['HL: Development & diversity','/geography/paper-2/hl-2-human-development-diversity'],
+      ['HL: Global risks & resilience','/geography/paper-2/hl-3-global-risks-resilience'],
+      ['Revision guide','/geography/revision/guide']]},
+    { title:'IB Economics', href:'/economics', blurb:'Micro, macro, trade and development with diagrams.', items:[
+      ['Lessons','/economics'],['Revise','/economics/revision'],['Past paper questions','/economics/ppq'],['Exam tips','/economics/exam-tips']]},
+    { title:'IB Business Management', href:'/business', blurb:'All units with case studies and paper practice.', items:[
+      ['Lessons','/business'],['Revise','/business/revision'],['Past paper questions','/business/ppq'],['Exam tips','/business/exam-tips']]},
+    { title:'IB History', href:'#', soon:true, blurb:'Coming soon.', items:[['Coming soon','#',1]]}
+  ]},
+  { key:'ig', label:'IGCSE', color:'var(--ig)', blurb:'Edexcel and Cambridge courses', cols:[
+    { title:'IGCSE Geography', href:'/igcse/geography/learn', blurb:'Five topics and fieldwork.', items:[
+      ['Lessons','/igcse/geography/learn'],['Revise','/igcse/geography/revision/topics'],['Past paper questions','/igcse/geography'],['Exam tips','/igcse/geography/exam-tips'],['Research','/igcse/geography/research']]},
+    { title:'IGCSE Economics', href:'/igcse/economics/learn', blurb:'Edexcel and Cambridge (CIE).', items:[
+      ['Edexcel lessons','/igcse/economics/learn'],['Edexcel past papers','/igcse/economics'],['Cambridge (CIE) revision','/igcse/cie-economics','new'],['Cambridge specimen papers','/igcse/cie-economics/past-papers','new'],['Exam tips','/igcse/economics/exam-tips']]},
+    { title:'IGCSE Business', href:'/igcse/business/learn', blurb:'All five topics live.', items:[
+      ['Lessons','/igcse/business/learn'],['Revise','/igcse/business/revision/topics'],['Past paper questions','/igcse/business'],['Exam tips','/igcse/business/exam-tips']]},
+    { title:'IGCSE History', href:'/igcse/history/learn', blurb:'Four depth studies live.', items:[
+      ['Lessons','/igcse/history/learn'],['Revise','/igcse/history/revision/topics'],['Exam tips','/igcse/history/exam-tips'],['Past paper questions','#',1]]}
+  ]},
+  { key:'rev', label:'Revision & practice', color:'var(--rev)', blurb:'Practise across every subject', cols:[
+    { title:'Past paper questions', items:[['IB Geography','/geography/ppq'],['IGCSE Geography','/igcse/geography'],['IGCSE Economics','/igcse/economics'],['IGCSE Business','/igcse/business'],['Cambridge Economics','/igcse/cie-economics/past-papers']]},
+    { title:'Quizzes', items:[['Test My Knowledge','/quizzes'],['Spaced Retrieval','/quizzes#spaced'],['IB Geography quizzes','/geography/quizzes']]},
+    { title:'Exam technique', items:[['IB exam tips','/menu'],['IGCSE exam tips','/igcse/menu'],['Command terms','/command-terms']]},
+    { title:'Games', items:[['KS3 games','/geography/games#ks3'],['IGCSE games','/geography/games#igcse'],['IB Diploma games','/geography/games#ib']]}
+  ]},
+  { key:'tch', label:'Teachers', color:'var(--tch)', teacher:true, blurb:'Only shown to teacher and admin logins', cols:[
+    { title:'Classes', items:[['Teacher dashboard','/teacher'],['Student progress','/teacher#progress'],['Set tasks','/teacher#tasks']]},
+    { title:'Admin', items:[['Users & groups','/admin'],['Subjects & teachers','/admin#subjects']]},
+    { title:'Help', items:[['Using the site','/help'],['Sitemap','#sitemap']]}
+  ]}
+];
+
+var chev='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>';
+function tag(it){ return it[2]===1?'<span class="tag soon">Soon</span>':it[2]==='new'?'<span class="tag new">New</span>':''; }
+function link(it){ return '<li><a href="'+it[1]+'"><span>'+it[0]+'</span>'+tag(it)+'</a></li>'; }
+
+/* desktop menus */
+var navIn=document.getElementById('navIn'), spacer=navIn.querySelector('.spacer'), nav=document.getElementById('nav');
+NAV.forEach(function(m){
+  var wrap=document.createElement('div'); wrap.className='menu';
+  wrap.innerHTML='<button class="menu__btn" aria-expanded="false" aria-controls="p-'+m.key+'"><span class="dot" style="background:'+m.color+'"></span>'+m.label+chev+'</button>';
+  var p=document.createElement('div'); p.className='panel'; p.id='p-'+m.key;
+  p.innerHTML='<div class="panel__in" style="grid-template-columns:repeat('+m.cols.length+',1fr)"><div class="panel__head"><h3>'+m.label+'</h3><p>'+m.blurb+'</p></div>'+
+    m.cols.map(function(c){ return '<div class="col"><h4>'+(c.href?'<a href="'+c.href+'">'+c.title+'</a>':c.title)+(c.soon?' <span class="tag soon">Soon</span>':'')+'</h4><ul>'+c.items.map(link).join('')+'</ul></div>'; }).join('')+'</div>';
+  nav.appendChild(p); navIn.insertBefore(wrap,spacer);
+  var btn=wrap.firstChild, t;
+  function open(){ closeAll(); btn.setAttribute('aria-expanded','true'); p.classList.add('open'); }
+  btn.addEventListener('click',function(){ if(matchMedia('(hover:hover)').matches){ open(); return; } p.classList.contains('open')?closeAll():open(); });
+  [wrap,p].forEach(function(el){
+    el.addEventListener('mouseenter',function(){ clearTimeout(t); if(matchMedia('(hover:hover)').matches) open(); });
+    el.addEventListener('mouseleave',function(){ t=setTimeout(closeAll,180); });
+  });
+});
+function closeAll(){ document.querySelectorAll('.panel.open').forEach(function(x){x.classList.remove('open')}); document.querySelectorAll('.menu__btn').forEach(function(b){b.setAttribute('aria-expanded','false')}); }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeAll(); });
+document.addEventListener('click',function(e){ if(!e.target.closest('.menu')&&!e.target.closest('.panel')) closeAll(); });
+
+/* mobile menu */
+var mob=document.getElementById('mob');
+mob.innerHTML=NAV.map(function(m){ return '<details><summary><span><span class="dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+m.color+';margin-right:8px"></span>'+m.label+'</span>'+chev+'</summary><div class="msub">'+
+  m.cols.map(function(c){ return '<h4>'+c.title+'</h4>'+c.items.map(function(it){ return '<a href="'+it[1]+'">'+it[0]+' '+tag(it)+'</a>'; }).join(''); }).join('')+'</div></details>'; }).join('');
+document.getElementById('burger').addEventListener('click',function(){ var o=nav.classList.toggle('mobile-open'); this.setAttribute('aria-expanded',o); });
+
+/* tiles */
+function tiles(key,el,cls){
+  var m=NAV.filter(function(x){return x.key===key})[0];
+  document.getElementById(el).innerHTML=m.cols.map(function(c){
+    return '<a class="tile '+cls+(c.soon?' soon':'')+'" href="'+(c.href||'#')+'"><span class="lvl">'+m.label+'</span><h3>'+c.title.replace(/^(IB|IGCSE) /,'')+'</h3><p>'+c.blurb+'</p><span class="links">'+
+      c.items.slice(0,4).filter(function(it){return it[2]!==1}).map(function(it){return '<span style="font-size:.75rem;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--bg)">'+it[0].replace(/^(Unit \d|Option|HL): /,'')+'</span>';}).join('')+'</span></a>';
+  }).join('');
+}
+tiles('ib','tilesIB','ib'); tiles('ig','tilesIG','ig');
+
+/* sitemap */
+document.getElementById('smGrid').innerHTML=NAV.map(function(m){
+  return '<div class="sm-col"><h3>'+m.label+'</h3>'+m.cols.map(function(c){ return '<details open><summary>'+c.title+'</summary><ul>'+c.items.map(function(it){return '<li><a href="'+it[1]+'">'+it[0]+'</a></li>';}).join('')+'</ul></details>'; }).join('')+'</div>';
+}).join('');
+</script>
+</body>
+</html>

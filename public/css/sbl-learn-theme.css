@@ -559,6 +559,21 @@
 .lh-item-tag.quiz { color: var(--lh-gold); background: var(--lh-gold-bg); }
 /* ---------------- Right rail ---------------- */
 .lh-rail { display: flex; flex-direction: column; gap: 1.1rem; }
+/* Keep the right rail ("On this page", resources, tutor) in view while the
+   lesson scrolls. Desktop only - below 1100px the rail drops under the
+   content, so it stays in normal flow. If the rail is taller than the
+   window it scrolls on its own. */
+@media (min-width: 1101px) {
+  .lh-content-grid > .lh-rail {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-right: 2px;
+  }
+}
 .lh-panel {
   background: var(--lh-surface);
   border: 1px solid var(--lh-border);
