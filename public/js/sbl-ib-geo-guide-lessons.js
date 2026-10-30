@@ -4007,48 +4007,48 @@ window.SBL_LESSONS["IBGHD-T1"] = {
  ],
  "quiz": [
   {
-   "q": "A GII score closer to 0 indicates:",
+   "q": "Human development is described as \"multidimensional\" because it:",
    "options": [
-    "Greater equality between men and women",
-    "Greater inequality between men and women",
-    "A country with no population data available",
-    "A country with a very low HDI score"
+    "Involves several linked dimensions of wellbeing, such as health, education and income",
+    "Is measured mainly by GDP per capita, which captures all aspects of wellbeing",
+    "Develops in fixed stages that every country passes through in the same order",
+    "Depends only on access to basic needs such as food, water and shelter, which shows that income matters less than health"
    ],
    "correct": 0,
-   "explain": "On the GII scale, a score closer to 0 indicates greater equality between men and women across the measured dimensions, while a score closer to 1 indicates greater inequality.",
+   "explain": "Human development is described as multidimensional because it involves multiple interconnected dimensions of wellbeing — such as health, education and income — rather than being captured by a single economic factor alone.",
    "tag": "Development opportunities"
   },
   {
-   "q": "Validity, as it relates to a development indicator, refers to:",
+   "q": "The UN Sustainable Development Goals (SDGs) are best described as:",
    "options": [
-    "Whether an indicator actually measures what it claims to measure",
-    "Whether an indicator produces the same result every time it is measured",
-    "The total number of countries included in an indicator",
-    "The visual design of a graph showing the indicator"
+    "17 interconnected global goals with social, economic and environmental targets for 2030",
+    "Eight global goals focused mainly on halving extreme poverty by 2015, later expanded to include targets for climate",
+    "A composite index ranking countries by health, education and income",
+    "A legally binding treaty that sets emissions targets for each country"
    ],
    "correct": 0,
-   "explain": "Validity refers to whether an indicator genuinely measures what it claims to measure — for example, whether GNI per capita is a valid measure of overall \"development\" or only captures the economic dimension.",
+   "explain": "The SDGs are a set of 17 interconnected global goals, adopted by the United Nations, covering a wide range of social, economic and environmental targets that countries are encouraged to work towards by 2030.",
    "tag": "Development opportunities"
   },
   {
-   "q": "A key limitation shared by composite indicators like the HDI and GII is that they:",
+   "q": "The Human Development Index (HDI) combines indicators relating to:",
    "options": [
-    "Combine multiple factors into a single score",
-    "Are always perfectly accurate with no possible criticism",
-    "Cannot be calculated for any country",
-    "Only measure a single dimension of development"
+    "Life expectancy, years of schooling (expected and mean) and GNI per capita",
+    "Life expectancy, adult literacy and GDP per capita at market exchange rates",
+    "Infant mortality, access to clean water and GNI per capita",
+    "Maternal mortality, school enrolment and household income"
    ],
    "correct": 0,
-   "explain": "A key limitation of composite indicators like the HDI and GII is that combining multiple factors into a single score can mask important variation — a country might score well overall while performing poorly on one specific underlying dimension, or while hiding significant inequality within the country.",
+   "explain": "The HDI combines three dimensions: life expectancy at birth (health), education (expected and mean years of schooling), and gross national income (GNI) per capita, producing a composite score that reflects development more broadly than income alone.",
    "tag": "Development opportunities"
   },
   {
    "q": "Affirmative action, as it pertains to minority groups, refers to:",
    "options": [
-    "Deliberate policies or measures aimed at improving opportunities and reducing inequality for groups that have historically faced discrimination or disadvantage",
-    "Policies that reduce support for disadvantaged groups",
-    "A term unrelated to social or gender equality",
-    "A policy that applies only to majority population groups"
+    "Targeted policies that improve opportunities for groups that have faced discrimination",
+    "Equal treatment for everyone, with no special measures for any group",
+    "Aid from high-income countries given directly to minority groups, administered through NGOs",
+    "Laws that require minority groups to adopt the majority culture"
    ],
    "correct": 0,
    "explain": "Affirmative action refers to deliberate policies or measures aimed at improving opportunities and reducing inequality for groups that have historically faced discrimination or disadvantage, such as women, indigenous peoples, or other minority groups.",
@@ -4057,10 +4057,10 @@ window.SBL_LESSONS["IBGHD-T1"] = {
   {
    "q": "Affirmative action to promote gender equality for women in Nepal has included measures such as:",
    "options": [
-    "Reserved seats or quotas for women in political representation, and initiatives to improve women’s access to education and economic opportunity",
-    "Reducing women’s access to education and political participation",
-    "Banning women from all forms of employment",
-    "A complete absence of any government policy on gender equality"
+    "Reserved seats for women in politics, plus improved access to education",
+    "Banning child marriage, which removed the need for political quotas, introduced across the whole country",
+    "Equal pay laws that apply only to government employees",
+    "Free university places for women living in Kathmandu"
    ],
    "correct": 0,
    "explain": "Affirmative action in Nepal supporting gender equality has included measures such as reserved seats or quotas for women in political representation, alongside initiatives aimed at improving women’s access to education and economic opportunity.",
@@ -4069,10 +4069,10 @@ window.SBL_LESSONS["IBGHD-T1"] = {
   {
    "q": "A basic example of affirmative action supporting LGBTQ+ communities as a minority group would be:",
    "options": [
-    "Introducing anti-discrimination laws or policies that specifically protect LGBTQ+ individuals in areas such as employment or legal recognition",
-    "Removing all legal recognition or protections for LGBTQ+ individuals",
-    "A policy with no relevance to development or human rights",
-    "A measure that only applies to majority population groups"
+    "Anti-discrimination laws protecting LGBTQ+ people at work or in legal recognition",
+    "Quotas guaranteeing LGBTQ+ people a set share of parliamentary seats, similar to the quotas used for women",
+    "Funding separate schools and services for LGBTQ+ communities",
+    "Removing questions about identity from national censuses"
    ],
    "correct": 0,
    "explain": "A basic example of affirmative action supporting LGBTQ+ communities includes introducing anti-discrimination laws or policies that specifically protect LGBTQ+ individuals, such as employment protections or legal recognition of same-sex relationships, aiming to reduce disadvantage faced by this minority group.",
@@ -4081,10 +4081,10 @@ window.SBL_LESSONS["IBGHD-T1"] = {
   {
    "q": "A social entrepreneur is best defined as someone who:",
    "options": [
-    "Recognises a social problem and uses entrepreneurial principles to organise, create and manage a venture that drives social change",
-    "Starts a business purely to maximise personal financial profit",
-    "Only donates money to charity without running any kind of venture",
-    "Has no connection to solving social problems"
+    "Uses business methods to run a venture that tackles a social problem",
+    "Runs a profitable business and donates a share of profits to charity",
+    "Works for a government agency that delivers social services",
+    "Founds a charity that relies entirely on donations and grants"
    ],
    "correct": 0,
    "explain": "A social entrepreneur recognises a social problem and uses entrepreneurial principles — such as innovation, risk-taking and business strategy — to organise, create and manage a venture that drives social change, rather than purely pursuing financial profit.",
@@ -4093,10 +4093,10 @@ window.SBL_LESSONS["IBGHD-T1"] = {
   {
    "q": "A key difference between an ordinary entrepreneurial venture and a social entrepreneurial venture is that:",
    "options": [
-    "Ordinary ventures aim primarily for financial gain, while social ventures aim to drive social change using business solutions, with sustainability and social impact as the measure of success",
-    "They are identical in every respect",
-    "Social ventures never generate any revenue",
-    "Ordinary ventures always have a social purpose"
+    "Ordinary ventures aim for profit; social ventures measure success by social impact",
+    "Social ventures cannot make a profit, while ordinary ventures must, as profits must be given away",
+    "Ordinary ventures are private, while social ventures are run by governments",
+    "Social ventures can only operate in low-income countries"
    ],
    "correct": 0,
    "explain": "Ordinary entrepreneurial ventures primarily aim to serve markets with new products or services for financial gain, while social entrepreneurial ventures aim to drive social change using business solutions, measuring success through sustainability and social impact rather than profit alone.",
@@ -4105,34 +4105,22 @@ window.SBL_LESSONS["IBGHD-T1"] = {
   {
    "q": "Micro-finance is best defined as:",
    "options": [
-    "Small loans, savings, and other financial services provided to individuals or small businesses, often in low-income communities, who typically lack access to traditional banking",
-    "Very large loans given exclusively to established multinational corporations",
-    "A term unrelated to development or poverty reduction",
-    "A government tax policy"
+    "Small loans, savings and financial services for people without access to banks",
+    "Large development loans from the World Bank to national governments, mainly for large projects",
+    "Interest-free loans given only to registered businesses",
+    "Grants from NGOs that recipients do not have to repay"
    ],
    "correct": 0,
    "explain": "Micro-finance refers to small loans, savings accounts, and other financial services provided to individuals or small businesses, often in low-income communities, who typically lack access to traditional banking services, aiming to support entrepreneurship and reduce poverty.",
    "tag": "Development opportunities"
   },
   {
-   "q": "Compared to voluntary CSR commitments, International Framework Agreements (IFAs) are generally considered to offer:",
-   "options": [
-    "A more formally negotiated commitment, often involving trade unions",
-    "Weaker commitments with no negotiation involved",
-    "Identical strength and enforceability to a purely voluntary CSR statement",
-    "No meaningful difference from an ordinary company press release"
-   ],
-   "correct": 0,
-   "explain": "Compared to purely voluntary, unilateral CSR commitments, IFAs are generally considered to offer a more formally negotiated commitment, often involving trade unions as a negotiating partner, which can provide a somewhat stronger and more accountable basis for consistent labour standards across a TNC’s international operations.",
-   "tag": "Development opportunities"
-  },
-  {
    "q": "Corporate Social Responsibility (CSR) is best defined as:",
    "options": [
-    "A company’s voluntary commitment to operate in ways that consider social, environmental and economic impacts, beyond the minimum legal requirements",
-    "A legal requirement with no flexibility for any company",
-    "A tax paid exclusively by transnational corporations",
-    "A term unrelated to sustainability or human development"
+    "A company’s voluntary commitment to manage its social and environmental impacts",
+    "The legal minimum standards that every company must follow, enforced by national governments",
+    "A tax paid by TNCs to fund development in host countries",
+    "A company’s duty to maximise returns for its shareholders"
    ],
    "correct": 0,
    "explain": "Corporate Social Responsibility refers to a company’s voluntary commitment to operate in ways that consider its social, environmental and economic impacts, often going beyond the minimum legal requirements, and can include areas such as sustainable sourcing, labour standards, and community investment.",
@@ -4141,13 +4129,25 @@ window.SBL_LESSONS["IBGHD-T1"] = {
   {
    "q": "IKEA is used as an example of a TNC making progress towards sustainability partly because it has:",
    "options": [
-    "Pursued initiatives such as sourcing more sustainable materials, investing in renewable energy, and setting emissions and waste reduction targets across its supply chain",
-    "No sustainability initiatives of any kind",
-    "Reduced its business operations to a single country",
-    "Eliminated all forms of manufacturing entirely"
+    "Sourcing sustainable materials, investing in renewables and setting emissions targets",
+    "Moving all production back to Sweden to cut transport emissions, which it completed in the last decade",
+    "Stopping the sale of flat-pack furniture to reduce packaging",
+    "Replacing all its wood products with recycled plastic"
    ],
    "correct": 0,
    "explain": "IKEA is used as a CSR/sustainability example because it has pursued initiatives such as sourcing more sustainable materials (like FSC-certified wood), investing in renewable energy for its stores and operations, and setting targets to reduce emissions and waste across its global supply chain.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "An International Framework Agreement (IFA) is best defined as:",
+   "options": [
+    "An agreement between a TNC and a global union setting labour standards",
+    "A trade agreement between countries reducing tariffs on manufactured goods",
+    "A code of conduct written by a TNC without union involvement",
+    "A UN treaty making labour standards legally binding everywhere"
+   ],
+   "correct": 0,
+   "explain": "An International Framework Agreement (IFA) is a formal agreement, typically negotiated between a TNC and a global trade union federation, setting minimum labour and social standards that are intended to apply consistently across the company’s international operations and supply chain.",
    "tag": "Development opportunities"
   }
  ]
@@ -4168,10 +4168,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "Culture is best defined as:",
    "options": [
-    "The shared beliefs, values, customs, behaviours and artefacts that characterise a group of people",
-    "A fixed, unchangeable set of beliefs held by every member of a country",
-    "A term used only to describe language",
-    "A synonym for a country’s political system"
+    "The shared beliefs, values, customs, behaviours and artefacts of a group",
+    "The ancestry and nationality that a group of people share, passed down through generations",
+    "The official language and religion of a country",
+    "The art, music and literature produced by a society"
    ],
    "correct": 0,
    "explain": "Culture refers to the shared beliefs, values, customs, behaviours and artefacts (such as food, clothing, art and traditions) that characterise a particular group of people.",
@@ -4180,10 +4180,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "A cultural trait is best described as:",
    "options": [
-    "A single, specific element of a culture, such as a particular style of dress, food, or custom",
-    "An entire national culture",
-    "A term unrelated to culture",
-    "Only applicable to religious practices"
+    "A single element of a culture, such as a style of dress, food or custom",
+    "The whole set of beliefs and values shared by a group, including religion and language",
+    "A group’s shared ancestry or heritage",
+    "The way a culture changes over time"
    ],
    "correct": 0,
    "explain": "A cultural trait is a single, specific element of a culture — such as a particular style of dress, a food dish, a custom, or a form of music — rather than the entire culture as a whole.",
@@ -4192,10 +4192,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "Ethnicity differs from culture mainly because it:",
    "options": [
-    "Often refers to a group sharing a common ancestry, heritage or nationality, which may or may not align exactly with shared cultural practices",
-    "Is exactly the same concept as culture",
-    "Has no connection to identity at all",
-    "Only applies to religious groups"
+    "Often refers to shared ancestry, heritage or nationality",
+    "Refers to beliefs and customs that are learned rather than inherited",
+    "Is defined by the country in which a person lives",
+    "Refers only to a person’s religion"
    ],
    "correct": 0,
    "explain": "Ethnicity typically refers to a group sharing a common ancestry, heritage or national origin, which is related to but distinct from culture — members of the same ethnic group may share cultural traits, but ethnicity is more specifically about shared heritage and identity.",
@@ -4204,10 +4204,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "The diffusion of cultural traits refers to:",
    "options": [
-    "The spread of cultural traits, such as food, fashion or media, from one place to another over time",
-    "Cultural traits remaining permanently confined to their place of origin",
-    "A term unrelated to global interactions",
-    "Only the spread of language between countries"
+    "The spread of cultural traits, such as food or fashion, between places",
+    "The blending of two cultures into a new form, such as fusion food or music",
+    "The loss of traditional customs in one place",
+    "The deliberate protection of a culture from outside influence"
    ],
    "correct": 0,
    "explain": "The diffusion of cultural traits describes the spread of cultural elements, such as food, fashion, music or media, from their place of origin to other places over time, often accelerated by global interactions like trade, migration and communication technology.",
@@ -4216,10 +4216,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "Glocalisation refers to:",
    "options": [
-    "The process by which global brands or products are adapted to fit local cultural tastes and preferences in different markets",
-    "A global brand being sold in an identical form in every country with no local adaptation",
-    "The complete rejection of any global brands by local markets",
-    "A term unrelated to global business strategy"
+    "Global brands adapting products to local tastes and preferences",
+    "Local businesses expanding to sell their products globally, such as Thai restaurants abroad",
+    "Global brands selling identical products in every country",
+    "Governments limiting global brands to protect local culture"
    ],
    "correct": 0,
    "explain": "Glocalisation describes the process by which global brands or products are adapted to fit local cultural tastes and preferences in different markets, combining \"global\" and \"local\" — for example, a global fast food chain adjusting its menu to suit local cuisine in different countries.",
@@ -4228,10 +4228,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "Glocalisation can be seen as an example of cultural imperialism because:",
    "options": [
-    "Even while adapting to local tastes, it still represents the continued global expansion and dominance of a foreign (often Western) brand into local markets and cultural spaces",
-    "It has no connection to global brand influence at all",
-    "It always eliminates the influence of the global brand entirely",
-    "Local businesses always dominate over global brands as a result"
+    "It still spreads a foreign, often Western, brand into local markets",
+    "It forces local businesses to copy foreign products exactly",
+    "It replaces local tastes with identical global products, so local tastes disappear",
+    "It is usually imposed by foreign governments"
    ],
    "correct": 0,
    "explain": "Glocalisation can be seen as a form of cultural imperialism because, even while making surface-level adaptations to local tastes, the underlying strategy still represents the continued global expansion and commercial dominance of a foreign (often Western) brand into local markets and cultural spaces, extending its influence rather than genuinely ceding ground to local alternatives.",
@@ -4240,10 +4240,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "A diaspora is best defined as:",
    "options": [
-    "A population of people who have dispersed from their original homeland to live in other parts of the world, while often maintaining connections to their culture of origin",
-    "A group of people who have never left their country of origin",
-    "A term unrelated to migration",
-    "A single country’s entire population"
+    "A population that has dispersed from its homeland but keeps cultural ties to it",
+    "Any group of temporary migrants working abroad, such as seasonal farm workers who return home",
+    "A minority group living in its own homeland",
+    "People who have fully assimilated into a new country"
    ],
    "correct": 0,
    "explain": "A diaspora refers to a population of people who have dispersed from their original homeland to live in other parts of the world, often while maintaining cultural, social or emotional connections to their place and culture of origin.",
@@ -4252,10 +4252,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "Diaspora communities help maintain a culture abroad partly by:",
    "options": [
-    "Establishing cultural institutions, businesses, places of worship, and community networks that preserve and pass on cultural traditions in their new location",
-    "Completely severing all connections to their culture of origin",
-    "Refusing to interact with the host country’s population at all",
-    "Having no measurable impact on cultural diversity in their new location"
+    "Setting up cultural institutions, businesses, places of worship and networks",
+    "Assimilating fully so that children adopt the host culture, losing their language within one generation",
+    "Living separately and avoiding contact with the host population",
+    "Returning home regularly instead of building communities abroad"
    ],
    "correct": 0,
    "explain": "Diaspora communities often help maintain a culture abroad by establishing cultural institutions, businesses, places of worship, and community networks that help preserve and pass on cultural traditions, language and practices in their new location.",
@@ -4264,10 +4264,10 @@ window.SBL_LESSONS["IBGHD-T2"] = {
   {
    "q": "Chinese diaspora communities are found:",
    "options": [
-    "In significant numbers across many countries and cities worldwide, including North America, Europe, and Southeast Asia",
-    "Only within mainland China itself",
-    "Nowhere outside of a single specific country",
-    "Only in countries with no other diaspora populations"
+    "In large numbers worldwide, especially in Southeast Asia, North America and Europe",
+    "Mainly in Europe, because of colonial links with Britain, which has the largest Chinatown outside Asia",
+    "Mainly in Africa, due to Chinese investment projects",
+    "Mainly in North America, where most migrated in the 1800s"
    ],
    "correct": 0,
    "explain": "Chinese diaspora communities are found in significant numbers across many countries and cities worldwide, including major concentrations in North America, Europe, and throughout Southeast Asia, reflecting centuries of migration.",
@@ -4291,10 +4291,10 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "Local and civil society resistance to global interactions can be understood as:",
    "options": [
-    "The various ways in which individuals, communities and organisations push back against or resist aspects of globalisation, such as global production, TNC influence, or immigration",
-    "A term with no real-world manifestation",
-    "A process that only occurs in high-income countries",
-    "A movement that has no connection to environmental or economic issues"
+    "Ways people and organisations push back against aspects of globalisation",
+    "Government policies that restrict trade and migration, such as tariffs and travel bans",
+    "International agreements that regulate TNCs",
+    "Global brands adapting their products to local markets"
    ],
    "correct": 0,
    "explain": "Local and civil society resistance to global interactions refers to the various ways individuals, communities and organisations push back against or resist aspects of globalisation, such as campaigning against TNCs, favouring local production, or opposing immigration, often motivated by environmental, economic, cultural or social concerns.",
@@ -4303,10 +4303,10 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "Asia Pulp and Paper (APP) is a company that has faced environmental campaigns primarily because of concerns relating to:",
    "options": [
-    "Deforestation and unsustainable logging practices linked to its paper and pulp production, particularly in Indonesia",
-    "Its complete absence of any manufacturing operations",
-    "Its operations being based exclusively in high-income countries",
-    "A lack of any connection to global supply chains"
+    "Deforestation linked to pulp and paper production in Indonesia",
+    "Air pollution from its paper mills in China",
+    "Poor working conditions in its garment factories in Bangladesh",
+    "Overfishing by its shipping fleet in the Pacific"
    ],
    "correct": 0,
    "explain": "Asia Pulp and Paper (APP), a major paper and pulp producer operating primarily in Indonesia, has faced significant environmental campaigns due to concerns about deforestation and unsustainable logging practices linked to its production, threatening rainforest habitats and biodiversity.",
@@ -4315,10 +4315,10 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "Greenpeace’s campaign against Asia Pulp and Paper primarily aimed to:",
    "options": [
-    "Raise public awareness and pressure the company (and its customers) to change its sourcing and logging practices to reduce deforestation",
-    "Support the company’s continued unsustainable logging practices",
-    "Have no connection to environmental concerns at all",
-    "Encourage governments to increase deforestation rates"
+    "Pressure APP and its customers to change sourcing and stop deforestation",
+    "Persuade the Indonesian government to nationalise APP, so profits stay within the country",
+    "Organise a worldwide boycott of all paper products",
+    "Take APP to the International Court of Justice"
    ],
    "correct": 0,
    "explain": "Greenpeace’s campaign against Asia Pulp and Paper primarily aimed to raise public awareness of the company’s deforestation practices and pressure both the company and its business customers (such as major global brands) to change sourcing practices and reduce associated deforestation.",
@@ -4327,10 +4327,10 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "Geopolitical constraints on global interactions refer to:",
    "options": [
-    "Government, political or militia-imposed restrictions that limit the ability of people, goods, or information to move and interact globally",
-    "Only physical/natural barriers, such as oceans or mountains",
-    "A term unrelated to government policy",
-    "Constraints that only ever increase, never decrease, global interaction"
+    "Restrictions by governments or militias on the movement of people, goods or information",
+    "Physical barriers such as mountains, oceans and deserts, which limit how far people can travel",
+    "Limits caused by the cost of transport and communication",
+    "Restrictions imposed by TNCs on their own supply chains"
    ],
    "correct": 0,
    "explain": "Geopolitical constraints refer to government, political or militia-imposed restrictions — such as travel bans, internet censorship, or trade barriers — that limit the ability of people, goods, capital, or information to move and interact globally.",
@@ -4339,10 +4339,10 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "Government travel or immigration bans, such as restrictions targeting specific countries, represent a geopolitical constraint because they:",
    "options": [
-    "Directly restrict the movement of people between countries, limiting global interaction through migration, travel and family/business connections",
-    "Have no effect on people’s ability to travel or migrate internationally",
-    "Only ever apply to goods, never to people",
-    "Automatically increase global interaction"
+    "Directly restrict the movement of people between countries",
+    "Mainly limit the flow of goods and capital, rather than people",
+    "Only affect tourists, not migrants or students",
+    "Encourage migration to neighbouring countries"
    ],
    "correct": 0,
    "explain": "Government travel or immigration bans directly restrict the movement of people between countries, limiting global interaction through reduced migration, travel, and disrupted family, business or educational connections between affected countries and populations.",
@@ -4351,34 +4351,22 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "A specific government policy example (such as a travel ban executive order) reducing global interactions would typically involve:",
    "options": [
-    "Restricting entry into a country for citizens of specific named countries, reducing travel, migration and associated global interactions between those places",
-    "Removing all restrictions on entry to a country",
-    "Having no connection to international relations at all",
-    "Applying identically and without exception to every country in the world"
+    "Restricting entry for citizens of specific named countries",
+    "Placing tariffs on goods imported from named countries, to protect domestic jobs",
+    "Closing the border to every foreign national",
+    "Blocking access to foreign websites"
    ],
    "correct": 0,
    "explain": "A specific policy example, such as a travel ban executive order, typically involves restricting entry into a country for citizens of specific named countries, directly reducing travel, migration and associated global interactions between the restricting country and those specifically targeted nations.",
    "tag": "Local responses"
   },
   {
-   "q": "A key difference between the Hong Kong pro-democracy demonstrations and the Malala Fund is that:",
-   "options": [
-    "The Hong Kong demonstrations involved direct, large-scale public protest focused on a specific political situation",
-    "They are identical in every respect, with no meaningful differences",
-    "Neither example involves any form of civil society action",
-    "The Malala Fund involved large-scale public street demonstrations, while the Hong Kong movement was a funding organisation"
-   ],
-   "correct": 0,
-   "explain": "A key difference is that the Hong Kong demonstrations involved direct, large-scale public protest focused on a specific, immediate political situation within one place, while the Malala Fund operates as a more structured, ongoing international advocacy and funding organisation focused on a broader, more geographically diffuse global education issue, illustrating two genuinely different models of civil society action.",
-   "tag": "Local responses"
-  },
-  {
    "q": "International-mindedness, in the context of civil society and global interactions, refers to:",
    "options": [
-    "An awareness of, engagement with, and openness towards global issues, perspectives and interconnectedness beyond one’s own country",
-    "A focus purely on domestic, national issues with no international awareness",
-    "A term unrelated to global citizenship or civil society",
-    "A concept that only applies to government diplomats"
+    "Openness to and engagement with global issues and perspectives",
+    "Loyalty to one’s nation in international affairs, putting national interests first",
+    "The ability to speak more than one language",
+    "Experience of living in a foreign country"
    ],
    "correct": 0,
    "explain": "International-mindedness refers to an awareness of, engagement with, and openness towards global issues, perspectives and interconnectedness beyond one’s own country, often promoted through civil society action, education, and international collaboration.",
@@ -4387,13 +4375,25 @@ window.SBL_LESSONS["IBGHD-T3"] = {
   {
    "q": "Civil society movements can promote international-mindedness by:",
    "options": [
-    "Raising awareness of global issues, connecting with international audiences and networks, and campaigning for causes that extend beyond national borders",
-    "Deliberately avoiding any engagement with international audiences or issues",
-    "Only ever focusing on issues within a single country with no international connection",
-    "Preventing any form of cross-border communication or collaboration"
+    "Raising awareness, building global networks and campaigning across borders",
+    "Lobbying their own government to reduce foreign aid, to focus spending at home",
+    "Focusing on local issues to strengthen national identity",
+    "Replacing governments in international negotiations"
    ],
    "correct": 0,
    "explain": "Civil society movements can promote international-mindedness by raising awareness of global issues, connecting with international audiences and networks, and campaigning for causes (such as human rights, education, or democracy) that extend beyond national borders and resonate with a global audience.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "Social media has been used by civil society movements to campaign for causes, including internet freedom, mainly because it:",
+   "options": [
+    "It lets movements share information quickly and reach global audiences",
+    "It is controlled by governments, giving campaigns official support, so messages reach approved audiences only",
+    "It guarantees that campaigns cannot be censored",
+    "It is used mainly by older people with political influence"
+   ],
+   "correct": 0,
+   "explain": "Social media has been used by civil society movements because it allows for the rapid sharing of information, mobilisation of supporters, and reaching of international audiences, which can be particularly significant in situations where traditional media access or coverage may be limited or restricted by government control.",
    "tag": "Local responses"
   }
  ]
@@ -4415,9 +4415,9 @@ window.SBL_LESSONS["IBGGR-T1"] = {
    "q": "Hacking is best defined as:",
    "options": [
     "Gaining unauthorised access to computer systems, networks or data",
-    "Any use of a computer for work purposes",
-    "A type of legal cybersecurity audit",
-    "A method of encrypting personal data for protection"
+    "Using software to monitor employees’ online activity, such as keystroke logging",
+    "Sending bulk unwanted emails to advertise products",
+    "Spreading false information on social media"
    ],
    "correct": 0,
    "explain": "Hacking refers to gaining unauthorised access to computer systems, networks or data, often to steal information, disrupt services, or cause damage.",
@@ -4426,10 +4426,10 @@ window.SBL_LESSONS["IBGGR-T1"] = {
   {
    "q": "Identity theft refers to:",
    "options": [
-    "Illegally obtaining and using someone else’s personal information, typically for financial fraud",
-    "Legally changing your name",
-    "A government programme to issue new ID cards",
-    "A backup copy of personal documents"
+    "Illegally obtaining and using someone’s personal details, usually for fraud",
+    "Copying someone’s creative work without permission, such as music or photographs",
+    "Government collection of citizens’ personal data",
+    "Hacking a company to disrupt its services"
    ],
    "correct": 0,
    "explain": "Identity theft involves illegally obtaining someone’s personal information (such as bank details or ID numbers) and using it, typically to commit financial fraud in that person’s name.",
@@ -4438,10 +4438,10 @@ window.SBL_LESSONS["IBGGR-T1"] = {
   {
    "q": "A key implication of mass surveillance for personal freedoms is that it can:",
    "options": [
-    "Create a \"chilling effect\", where people alter their behaviour simply because they know they might be watched",
-    "Have no effect on individual behaviour or privacy",
-    "Guarantee complete protection from all forms of crime",
-    "Only affect people who have committed a crime"
+    "Create a “chilling effect”, where people self-censor in case they are watched",
+    "Make people more willing to share opinions online, so freedom of speech increases",
+    "Reduce crime without affecting anyone’s privacy",
+    "Only affect people living in authoritarian countries"
    ],
    "correct": 0,
    "explain": "A well-documented implication of surveillance is the \"chilling effect\" — people may self-censor or alter their behaviour simply because they are aware they could be monitored, even without direct evidence of wrongdoing.",
@@ -4450,10 +4450,10 @@ window.SBL_LESSONS["IBGGR-T1"] = {
   {
    "q": "A state’s political and economic sovereignty refers to:",
    "options": [
-    "Its authority to govern itself and control its own political and economic affairs without external interference",
-    "Its total population size",
-    "The number of trade agreements it has signed",
-    "Its physical land area"
+    "Its authority to control its own political and economic affairs",
+    "Its membership of international organisations, such as the UN or WTO",
+    "Its ability to trade freely with other countries",
+    "Its level of economic development"
    ],
    "correct": 0,
    "explain": "Sovereignty refers to a state’s authority to govern itself and control its own political and economic affairs independently, without undue external interference.",
@@ -4462,10 +4462,10 @@ window.SBL_LESSONS["IBGGR-T1"] = {
   {
    "q": "Profit repatriation refers to:",
    "options": [
-    "The process of transferring profits earned in a foreign country back to a company’s home country or a chosen low-tax location",
-    "A company permanently closing its overseas operations",
-    "A government policy limiting foreign investment",
-    "The process of a country repaying international debt"
+    "Transferring profits earned abroad back home or to a low-tax location",
+    "Reinvesting profits in the country where they were earned",
+    "Migrants sending their savings back to their home country, as remittances",
+    "Repaying loans taken from foreign banks"
    ],
    "correct": 0,
    "explain": "Profit repatriation is the process by which a company transfers profits earned in one country (often through a foreign subsidiary) back to its home country or to another jurisdiction it has chosen, often for tax reasons.",
@@ -4474,34 +4474,22 @@ window.SBL_LESSONS["IBGGR-T1"] = {
   {
    "q": "Tax avoidance, as distinct from tax evasion, refers to:",
    "options": [
-    "Legally minimising the amount of tax owed by exploiting loopholes or favourable rules in tax law",
-    "Illegally hiding income from tax authorities",
-    "Refusing to pay any tax under any circumstances",
-    "A tax that only applies to individuals, never companies"
+    "Legally reducing tax by using loopholes or favourable rules",
+    "Illegally hiding income from tax authorities, such as offshore accounts",
+    "Paying tax in advance to receive a discount",
+    "Moving abroad to a country with no income tax"
    ],
    "correct": 0,
    "explain": "Tax avoidance involves legally minimising tax liability by making use of loopholes, exemptions or favourable structures within existing tax law, distinct from tax evasion, which is the illegal non-payment or under-payment of tax owed.",
    "tag": "Geopolitical and economic risks"
   },
   {
-   "q": "Comparing an example of a country becoming more isolationist with the example of tensions in Yemen shows two different but related aspects of this lesson’s theme, namely:",
-   "options": [
-    "One example shows a state actively reducing its global engagement",
-    "These two examples have no meaningful connection to one another",
-    "Both examples show identical processes with no meaningful differences",
-    "Neither example has any real connection to globalization"
-   ],
-   "correct": 0,
-   "explain": "These two examples illustrate different but related geopolitical responses to global interconnection: one shows a state deliberately reducing its global engagement (isolationism), while the other shows how global and regional rivalries can become entangled within a more localised conflict — together demonstrating the varied ways globalization and geopolitical tension interact.",
-   "tag": "Geopolitical and economic risks"
-  },
-  {
    "q": "Nationalism, in a geopolitical context, refers to:",
    "options": [
-    "A strong sense of identity, loyalty and pride centred on one’s own nation, often prioritising national interests",
-    "A belief that all countries should have identical political systems",
-    "A term used only to describe international cooperation",
-    "A policy of unrestricted global trade"
+    "Strong identity, loyalty and pride in one’s nation, prioritising its interests",
+    "Loyalty to a smaller ethnic or regional group within a country, such as a tribe or region",
+    "Support for international cooperation and global governance",
+    "Belief in a single shared global culture"
    ],
    "correct": 0,
    "explain": "Nationalism refers to a strong sense of identity, loyalty and pride centred on one’s own nation, which often involves prioritising national interests, culture and sovereignty, sometimes in tension with international cooperation.",
@@ -4510,13 +4498,25 @@ window.SBL_LESSONS["IBGGR-T1"] = {
   {
    "q": "Tribalization refers to:",
    "options": [
-    "A fragmentation of identity into smaller groups based on characteristics such as ethnicity, culture or region, rather than a broader national or global identity",
-    "The process of countries joining together into larger political unions",
-    "A term describing increased international trade",
-    "A synonym for globalization"
+    "Identity splitting into smaller ethnic, cultural or regional groups",
+    "Countries joining together in larger political unions, such as the EU",
+    "A strong national identity shared by all citizens",
+    "The spread of a single global culture"
    ],
    "correct": 0,
    "explain": "Tribalization describes a process where identity fragments into smaller groups, often based on ethnicity, culture, religion or region, rather than uniting around a broader national or global identity.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "A commonly cited reason globalization can provoke a nationalist backlash in some places is that:",
+   "options": [
+    "Some communities link job losses or cultural change to globalisation",
+    "Globalisation has reduced trade between countries, so communities feel left behind",
+    "Nationalist parties are mainly funded by TNCs",
+    "Migration has fallen in most high-income countries"
+   ],
+   "correct": 0,
+   "explain": "A commonly cited driver of nationalist backlash is that some communities perceive job losses, rapid cultural change, or a loss of local control as directly linked to increased global economic integration, generating resentment towards globalization and its institutions.",
    "tag": "Geopolitical and economic risks"
   }
  ]
@@ -4535,24 +4535,12 @@ window.SBL_LESSONS["IBGGR-T2"] = {
  ],
  "quiz": [
   {
-   "q": "Overall, the SE Asian haze demonstrates that trans-boundary environmental problems typically require:",
-   "options": [
-    "Coordinated regional or international cooperation",
-    "No action at all, since they resolve naturally over time",
-    "Only domestic action by the country where the pollution impact is felt",
-    "Only domestic action by the country where the pollution originates"
-   ],
-   "correct": 0,
-   "explain": "Because trans-boundary pollution problems have causes and impacts spanning multiple states, they typically require coordinated regional or international cooperation — no single country acting alone (whether source or affected) can fully resolve the issue.",
-   "tag": "Environmental risks"
-  },
-  {
    "q": "Trans-boundary pollution refers to:",
    "options": [
-    "Pollution originating in one country that crosses international borders to affect other countries",
-    "Pollution that stays entirely within the country where it originates",
-    "A type of pollution that only occurs in the ocean",
-    "Pollution caused entirely by international shipping"
+    "Pollution from one country that crosses borders to affect others",
+    "Pollution that stays within the country where it starts, such as smog in one city",
+    "Pollution caused only by international shipping",
+    "Pollution that affects international waters only"
    ],
    "correct": 0,
    "explain": "Trans-boundary pollution is pollution that originates in one country but crosses international borders, affecting the environment and people of other countries, regardless of political boundaries.",
@@ -4561,34 +4549,34 @@ window.SBL_LESSONS["IBGGR-T2"] = {
   {
    "q": "The South East Asian haze is primarily caused by:",
    "options": [
-    "Large-scale fires used to clear land, often linked to agricultural expansion such as palm oil and pulp plantations",
+    "Fires used to clear land for palm oil and pulp plantations",
     "Volcanic eruptions across the region",
-    "Industrial factory emissions from Singapore",
-    "Vehicle emissions in major regional cities"
+    "Industrial emissions from factories in Singapore",
+    "Vehicle emissions in major regional cities, such as Jakarta and Kuala Lumpur"
    ],
    "correct": 0,
    "explain": "The haze is primarily caused by large-scale fires used to clear land in Indonesia, often linked to agricultural expansion such as palm oil and pulp/paper plantations, which release huge quantities of smoke and particulate matter into the atmosphere.",
    "tag": "Environmental risks"
   },
   {
-   "q": "Black water, in the context of shipping, refers to:",
+   "q": "Periods of drought, often linked to El Niño conditions, tend to make the SE Asian haze:",
    "options": [
-    "Sewage and wastewater from toilets",
-    "Wastewater from sinks and showers",
-    "A type of ballast water",
-    "Clean drinking water stored for the crew"
+    "More severe, as dry vegetation and peat burn more easily and for longer",
+    "Less severe, as drier conditions reduce the risk of fire, since the vegetation is too dry to burn",
+    "Unaffected, as the fires are deliberately lit",
+    "Less severe, as El Niño brings heavier monsoon rain"
    ],
    "correct": 0,
-   "explain": "Black water specifically refers to sewage and wastewater from toilets, which typically requires more significant treatment than grey water before it can be safely discharged.",
+   "explain": "Drier conditions, often associated with El Niño events, make vegetation and peatland more flammable and harder to extinguish, significantly worsening the scale and duration of haze-producing fires in some years.",
    "tag": "Environmental risks"
   },
   {
    "q": "Ballast water is best described as:",
    "options": [
-    "Water taken into and later discharged from a ship’s tanks to help maintain its stability and balance",
-    "Fuel used to power a ship’s engines",
-    "Fresh drinking water carried for the crew",
-    "A type of chemical cleaning agent"
+    "Water taken into and released from a ship’s tanks to keep it stable",
+    "Fuel used to power the ship’s engines, such as diesel or heavy fuel oil",
+    "Waste water from the ship’s sinks and showers",
+    "Sewage from the ship’s toilets"
    ],
    "correct": 0,
    "explain": "Ballast water is taken into a ship’s tanks (often from one port) to help maintain its stability and balance, and is later discharged, sometimes at a completely different port, potentially thousands of kilometres away.",
@@ -4597,22 +4585,34 @@ window.SBL_LESSONS["IBGGR-T2"] = {
   {
    "q": "A major environmental risk associated with discharging ballast water is:",
    "options": [
-    "It can transport invasive species from one region to another, since organisms taken up with the water in one location are released in a completely different ecosystem",
-    "It has no environmental effect whatsoever",
-    "It only ever affects the ship’s home port",
-    "It permanently removes all marine life from an area"
+    "It can carry invasive species to new ecosystems",
+    "It raises sea temperatures around ports",
+    "It adds large amounts of oil to the sea, causing oil slicks along routes",
+    "It increases the salinity of coastal waters"
    ],
    "correct": 0,
    "explain": "Because ballast water is taken up in one location and discharged in another, it can transport small organisms, larvae or microbes between regions, introducing invasive species to ecosystems where they did not previously exist and where they may have no natural predators.",
    "tag": "Environmental risks"
   },
   {
+   "q": "Grey water, in the context of shipping, refers to:",
+   "options": [
+    "Waste water from sinks, showers and laundry on board",
+    "Sewage from the ship’s toilets, which carries bacteria",
+    "Water held in tanks for stability",
+    "Oily water from the engine room"
+   ],
+   "correct": 0,
+   "explain": "Grey water is wastewater generated from everyday activities such as sinks, showers and laundry onboard a ship — distinct from sewage (black water) and fuel-related waste.",
+   "tag": "Environmental risks"
+  },
+  {
    "q": "When manufacturing industries relocate to countries with weaker environmental regulation, a common outcome is:",
    "options": [
-    "Increased risk of air, water, industrial waste and toxic chemical pollution, since environmental standards and enforcement may be less strict",
-    "A guaranteed reduction in all forms of pollution",
-    "No change in environmental outcomes whatsoever",
-    "Manufacturing pollution disappearing entirely"
+    "Higher risk of air, water and toxic pollution where rules are weaker",
+    "Less pollution, as new factories always use cleaner technology, as rules are enforced by TNCs",
+    "Pollution moving back to the TNC’s home country",
+    "Stricter environmental rules being adopted immediately"
    ],
    "correct": 0,
    "explain": "When manufacturing relocates to countries with weaker environmental regulation or enforcement, there is often an increased risk of pollution across multiple categories — air, water, industrial waste and toxic chemicals — sometimes referred to as the \"pollution haven\" effect.",
@@ -4621,10 +4621,10 @@ window.SBL_LESSONS["IBGGR-T2"] = {
   {
    "q": "Industrial waste and toxic chemical pollution from relocated manufacturing differ from general air or water pollution mainly because:",
    "options": [
-    "They often involve specific, hazardous by-products requiring careful management, storage and disposal, which can pose particularly serious localised risks if handled improperly",
-    "They have identical impacts and locations in every case",
-    "They pose no risk to human health or the environment",
-    "They only ever affect the country of the manufacturing headquarters, not the local area"
+    "They involve hazardous by-products that need careful disposal",
+    "They spread further, affecting other continents, through the atmosphere and oceans",
+    "They break down quickly in the environment",
+    "They only affect workers inside the factory"
    ],
    "correct": 0,
    "explain": "Industrial waste and toxic chemicals often involve specific hazardous by-products requiring careful management, storage and disposal; when handled improperly, they can create serious, sometimes long-lasting localised environmental and health risks distinct from more diffuse air or general water pollution.",
@@ -4633,10 +4633,10 @@ window.SBL_LESSONS["IBGGR-T2"] = {
   {
    "q": "Agro-industrialisation refers to:",
    "options": [
-    "The large-scale, mechanised and often vertically integrated industrialisation of agricultural production",
-    "A shift away from any form of commercial farming",
-    "A policy banning international food trade",
-    "A term used only to describe fishing industries"
+    "Large-scale, mechanised, often vertically integrated farming",
+    "Small-scale farming for local markets, run by family members",
+    "Moving food processing into cities",
+    "Organic farming using traditional methods"
    ],
    "correct": 0,
    "explain": "Agro-industrialisation refers to the shift towards large-scale, mechanised and often vertically integrated agricultural production, characteristic of modern global agribusiness, as opposed to smaller-scale, traditional farming methods.",
@@ -4657,22 +4657,10 @@ window.SBL_LESSONS["IBGGR-T3"] = {
  ],
  "quiz": [
   {
-   "q": "Comparing Greenpeace and Amnesty International illustrates that international civil society organisations can focus on:",
-   "options": [
-    "A range of different risk types",
-    "Only identical issues, with no meaningful variation between organisations",
-    "Only issues affecting a single country",
-    "Purely commercial, profit-driven goals"
-   ],
-   "correct": 0,
-   "explain": "Comparing Greenpeace (environmental focus) and Amnesty International (social/human rights focus) shows that civil society organisations address a range of different global risk types, while often using broadly similar underlying strategies of research, public awareness campaigning and advocacy.",
-   "tag": "Resilience"
-  },
-  {
    "q": "A civil society organisation is best defined as:",
    "options": [
-    "A non-governmental, non-profit organisation working independently of government and business to address social or environmental issues",
-    "A government department responsible for foreign policy",
+    "A non-governmental, non-profit group acting independently of government and business",
+    "A government department responsible for foreign policy, which also funds charities abroad",
     "A private company operating for financial profit",
     "An official agency of the United Nations"
    ],
@@ -4683,22 +4671,34 @@ window.SBL_LESSONS["IBGGR-T3"] = {
   {
    "q": "Greenpeace is best described as an example of:",
    "options": [
-    "An international environmental civil society organisation, known for campaigns on issues such as deforestation, ocean pollution and climate change",
-    "A government environmental regulator",
-    "A private energy company",
-    "An intergovernmental treaty body"
+    "An international environmental civil society organisation",
+    "An international human rights organisation, funded by member states",
+    "A UN environmental agency",
+    "A government pollution regulator"
    ],
    "correct": 0,
    "explain": "Greenpeace is an international environmental civil society organisation known for campaigning on issues such as deforestation, ocean and plastic pollution, and climate change, often using high-profile awareness campaigns and direct action.",
    "tag": "Resilience"
   },
   {
+   "q": "A characteristic method Greenpeace has used to raise awareness of environmental risks is:",
+   "options": [
+    "High-profile campaigns and direct action that attract media attention",
+    "Funding scientific research at universities, which they publish in scientific journals",
+    "Taking governments to the International Court of Justice",
+    "Buying land to create nature reserves"
+   ],
+   "correct": 0,
+   "explain": "Greenpeace has become known for high-profile public campaigns and direct action, deliberately designed to attract significant media coverage and public attention to a specific environmental issue, in order to build pressure for change.",
+   "tag": "Resilience"
+  },
+  {
    "q": "Re-shoring, in the context of TNCs, refers to:",
    "options": [
-    "A company moving economic activity, such as manufacturing, back closer to or within its home country, rather than relying on distant overseas production",
-    "A company permanently closing down entirely",
-    "A company expanding into as many new international markets as possible",
-    "A type of currency exchange strategy"
+    "Moving activity, such as manufacturing, back to or near the home country",
+    "Moving production to the cheapest available country, to reduce labour costs",
+    "Outsourcing services to overseas call centres",
+    "Building factories in coastal export zones"
    ],
    "correct": 0,
    "explain": "Re-shoring refers to a TNC moving economic activity, such as manufacturing, back closer to or within its home country, rather than relying on distant overseas production locations.",
@@ -4707,10 +4707,10 @@ window.SBL_LESSONS["IBGGR-T3"] = {
   {
    "q": "Re-shoring can help build resilience to global risk mainly because it:",
    "options": [
-    "Shortens and simplifies supply chains, reducing exposure to disruption from distant political, economic or physical risks",
-    "Increases a company’s reliance on long, complex international supply chains",
-    "Has no measurable effect on supply chain risk",
-    "Always increases production costs with no benefit whatsoever"
+    "It shortens supply chains, reducing exposure to distant risks",
+    "It lowers production costs through cheaper labour, in countries such as Vietnam",
+    "It increases exports to new markets",
+    "It removes the need for imported raw materials"
    ],
    "correct": 0,
    "explain": "By shortening and simplifying supply chains, re-shoring can reduce a company’s exposure to disruption from distant political, economic or physical risks (such as those studied earlier in this unit), even though it may involve trade-offs such as higher production costs.",
@@ -4719,10 +4719,10 @@ window.SBL_LESSONS["IBGGR-T3"] = {
   {
    "q": "Crowdsourcing, as a resilience-building tool, refers to:",
    "options": [
-    "Gathering ideas, information or effort from a large, dispersed group of people, often via online platforms, to help address a shared challenge",
-    "A single government department making all decisions independently",
-    "A method used exclusively by large corporations, never by civil society or government",
-    "A term unrelated to responding to global risk"
+    "Gathering information or help from many people online",
+    "Raising money from many people online, for disaster relief projects",
+    "Outsourcing work to low-cost countries",
+    "Collecting data through a government census"
    ],
    "correct": 0,
    "explain": "Crowdsourcing involves gathering ideas, information or effort from a large, dispersed group of people, often via online platforms, allowing rapid, decentralised responses to a shared challenge or crisis.",
