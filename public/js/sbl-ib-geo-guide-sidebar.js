@@ -67,9 +67,31 @@
       {
         "slug": "food-and-health",
         "label": "Option F: Food and Health",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/geography/revision/guide/food-and-health",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Measuring food and health",
+                "href": "/geography/revision/guide/food-and-health/topic-1-measuring-food-and-health"
+              },
+              {
+                "label": "Food systems and disease",
+                "href": "/geography/revision/guide/food-and-health/topic-2-food-systems-and-the-spread-of-diseases"
+              },
+              {
+                "label": "Stakeholders",
+                "href": "/geography/revision/guide/food-and-health/topic-3-stakeholders-in-food-and-health"
+              },
+              {
+                "label": "Future food and health",
+                "href": "/geography/revision/guide/food-and-health/topic-4-future-health-and-food-security-and-sustainability"
+              }
+            ]
+          }
+        ]
       }
     ]
   },

@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
+window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
 window.SBL_LESSONS["IBGFW-T1"] = {
  "id": "IBGFW-T1",
  "topicNumber": 4,
@@ -1318,6 +1318,757 @@ window.SBL_LESSONS["IBGLT-T4"] = {
    "correct": 0,
    "explain": "The Paralympics has grown significantly in importance, shown by rapidly growing global television viewership, sponsorship and media coverage, alongside an increasing number of participating athletes and countries; it is now held in the same host city shortly after the Olympic Games, reflecting a wider cultural shift towards recognising elite disability sport as a major global event in its own right.",
    "tag": "Managing for the future"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFH-T1"] = {
+ "id": "IBGFH-T1",
+ "topicNumber": 6,
+ "topicTitle": "Option F: Food and Health (IB Geography Revision Guide)",
+ "title": "Measuring food and health",
+ "href": "/geography/revision/guide/food-and-health/topic-1-measuring-food-and-health",
+ "syllabusFocus": "IB Geography, Option F: Food and Health: Measuring food and health.",
+ "checklist": [
+  "I can describe global patterns of food and nutrition indicators and evaluate them",
+  "I can explain the nutrition transition using Popkin’s five patterns",
+  "I can describe global patterns of health indicators and evaluate them",
+  "I can explain the epidemiological transition and the burden of disease"
+ ],
+ "quiz": [
+  {
+   "q": "Health is best defined as:",
+   "options": [
+    "A state of complete physical, mental and social wellbeing, not merely the absence of disease",
+    "The complete absence of disease only",
+    "A term that only applies to physical fitness, excluding any mental or social dimension of wellbeing",
+    "A fixed characteristic that cannot change over time"
+   ],
+   "correct": 0,
+   "explain": "Health is widely defined as a state of complete physical, mental and social wellbeing, not simply the absence of disease or infirmity.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "Which of these is a factor that contributes to good health?",
+   "options": [
+    "Access to clean water and sanitation",
+    "Living in complete isolation from other people",
+    "Avoiding all forms of exercise",
+    "Having no access to healthcare services"
+   ],
+   "correct": 0,
+   "explain": "Access to clean water and sanitation is a fundamental factor contributing to good health, reducing exposure to waterborne disease and infection.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "The food security index is used to measure:",
+   "options": [
+    "The availability, access, and quality of food across countries",
+    "A country’s military capacity",
+    "Only the price of food in a country, rather than its availability, access and quality combined",
+    "A country’s land area used for farming"
+   ],
+   "correct": 0,
+   "explain": "The food security index measures the availability, accessibility, and quality/safety of food across different countries, providing a composite picture of food security.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "The nutrition transition refers to:",
+   "options": [
+    "The long-term shift in dietary patterns and nutrition-related disease that occurs as a country develops economically and urbanises",
+    "A sudden, one-off change in a country’s food supply",
+    "A term used only to describe famine relief, rather than a long-term dietary and disease shift, according to most published research on the topic.",
+    "A transition that only affects high-income countries"
+   ],
+   "correct": 0,
+   "explain": "The nutrition transition describes the long-term shift in dietary patterns, physical activity, and associated disease that occurs as a country undergoes economic development and urbanisation, moving through a series of identifiable patterns over time.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "In Pattern 1 (Paleolithic/hunter-gatherers) of the nutrition transition, diet is best characterised by:",
+   "options": [
+    "Wild plants and animals, requiring labour-intensive food acquisition",
+    "High-fat, highly processed foods, rather than wild plants and animals requiring labour to acquire",
+    "Cereals dominating the diet",
+    "Reduced fat and increased fibre intake"
+   ],
+   "correct": 0,
+   "explain": "In Pattern 1, diet consists of wild plants and animals, obtained through labour-intensive hunting and gathering, associated with a lean, robust population but a high disease rate and low life expectancy.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "In Pattern 2 (settlements begin/monoculture period) of the nutrition transition, a key change is that:",
+   "options": [
+    "Cereals begin to dominate the diet as settled agriculture develops, and nutritional deficiencies begin to emerge",
+    "Diets become entirely based on hunting wild animals",
+    "Obesity becomes the dominant health concern, rather than cereals dominating a newly settled diet, regardless of location.",
+    "Life expectancy increases dramatically"
+   ],
+   "correct": 0,
+   "explain": "In Pattern 2, as settled agriculture and monoculture farming develop, cereals begin to dominate the diet; this narrower diet is associated with emerging nutritional deficiencies and declining stature, alongside high fertility and high maternal/child mortality.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "Health-Adjusted Life Expectancy (HALE) is best defined as:",
+   "options": [
+    "The average number of years a person can expect to live in full health, adjusting for years lived in poor health or disability",
+    "The total number of years a person is expected to live, regardless of health",
+    "A measure of a country's healthcare spending, rather than years lived in full health specifically, regardless of season or location.",
+    "A term unrelated to life expectancy"
+   ],
+   "correct": 0,
+   "explain": "HALE measures the average number of years a person can expect to live in full health, by adjusting standard life expectancy to account for years lived in less-than-full health due to disease or disability.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "A country could have a similar overall life expectancy to another country but a lower HALE if it has:",
+   "options": [
+    "A higher burden of chronic illness or disability among its population, reducing years lived in full health",
+    "No population at all",
+    "A larger land area, rather than a higher burden of chronic illness or disability among its population, regardless of location.",
+    "A lower birth rate"
+   ],
+   "correct": 0,
+   "explain": "If a country has a higher burden of chronic illness or disability, its HALE will be lower than its raw life expectancy figure would suggest, since more of those years are being lived in poor health rather than full health.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "The infant mortality rate measures:",
+   "options": [
+    "The number of deaths of infants under one year old per 1,000 live births",
+    "The number of deaths of adults over 65 per 1,000 population",
+    "The total birth rate of a country, rather than infant deaths under one year old per 1,000 live births",
+    "The number of hospitals in a country"
+   ],
+   "correct": 0,
+   "explain": "The infant mortality rate measures the number of deaths of infants under one year of age per 1,000 live births in a given year, and is widely used as a sensitive indicator of a population’s overall health and healthcare quality.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "A \"disease of poverty\" typically refers to a disease that is:",
+   "options": [
+    "Strongly associated with conditions of poverty, such as poor sanitation, malnutrition and limited healthcare access",
+    "Strongly associated with affluent, high-income lifestyles, rather than conditions of poverty itself, regardless of location.",
+    "Only found in high-income countries",
+    "A term with no meaningful geographical pattern"
+   ],
+   "correct": 0,
+   "explain": "A disease of poverty is a disease strongly associated with conditions of poverty, such as poor sanitation, malnutrition, overcrowding and limited access to healthcare, and is more commonly found in lower-income settings.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "A \"disease of affluence\" typically refers to a disease that is:",
+   "options": [
+    "Associated with wealthier, more sedentary lifestyles, such as high-fat diets and reduced physical activity",
+    "Associated with poor sanitation and malnutrition",
+    "Only found in low-income countries, rather than being linked to wealthier, sedentary lifestyles, regardless of location.",
+    "A disease that has been eliminated worldwide"
+   ],
+   "correct": 0,
+   "explain": "A disease of affluence is associated with wealthier, more sedentary lifestyles, including diets high in fat and sugar and reduced physical activity, and includes many noncommunicable diseases such as type 2 diabetes and heart disease.",
+   "tag": "Measuring food and health"
+  },
+  {
+   "q": "A communicable disease is one that:",
+   "options": [
+    "Can be transmitted from one person (or organism) to another, such as through infection",
+    "Cannot be transmitted between people",
+    "Is always caused by lifestyle factors alone, rather than being transmissible between people or organisms",
+    "Only affects a single individual and never spreads"
+   ],
+   "correct": 0,
+   "explain": "A communicable disease is one that can be transmitted from one person or organism to another, typically through infection by a pathogen such as a virus, bacterium or parasite.",
+   "tag": "Measuring food and health"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFH-T2"] = {
+ "id": "IBGFH-T2",
+ "topicNumber": 6,
+ "topicTitle": "Option F: Food and Health (IB Geography Revision Guide)",
+ "title": "Food systems and the spread of diseases",
+ "href": "/geography/revision/guide/food-and-health/topic-2-food-systems-and-the-spread-of-diseases",
+ "syllabusFocus": "IB Geography, Option F: Food and Health: Food systems and the spread of diseases.",
+ "checklist": [
+  "I can use a systems approach to compare energy and water footprints of food",
+  "I can explain types of disease diffusion and the barriers that affect it",
+  "I can explain the diffusion of agricultural innovations",
+  "I can explain the geography, impacts and management of malaria in Kenya",
+  "I can explain the geography, impacts and management of cholera in the DRC"
+ ],
+ "quiz": [
+  {
+   "q": "In a systems approach, \"inputs\" refer to:",
+   "options": [
+    "The resources entering a system, such as energy, water or raw materials",
+    "The final products leaving the system",
+    "A place where materials are held before being processed, rather than resources entering the system",
+    "The movement of materials between parts of the system"
+   ],
+   "correct": 0,
+   "explain": "Inputs are the resources that enter a system, such as energy, water, seeds or fertiliser in a food production system.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "In a systems approach, \"outputs\" refer to:",
+   "options": [
+    "Products or materials leaving the system, such as food products or waste",
+    "Resources entering the system",
+    "A place where materials are held within the system, rather than products or materials leaving it",
+    "The transfer of energy between two stores"
+   ],
+   "correct": 0,
+   "explain": "Outputs are the products or materials that leave a system, such as the finished food product, waste heat, or emissions.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "A \"store\" within a systems approach refers to:",
+   "options": [
+    "A place where resources are held or accumulated within the system for a period of time",
+    "The movement of energy or materials from one part of a system to another, rather than where they are held",
+    "Only the initial resources used to start a process",
+    "A physical shop selling food"
+   ],
+   "correct": 0,
+   "explain": "A store is a point within a system where resources are held, such as grain in a silo or water in a reservoir, before moving on to the next stage.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "\"Expansion diffusion\" describes a pattern in which a disease:",
+   "options": [
+    "Spreads outward from its origin, with the origin area remaining affected as new areas also become affected",
+    "Disappears entirely from its area of origin as it spreads, rather than the origin remaining affected, regardless of location.",
+    "Only ever affects a single fixed location",
+    "Skips over neighbouring areas entirely"
+   ],
+   "correct": 0,
+   "explain": "Expansion diffusion describes a disease spreading outward from its origin, with the original area remaining affected as new, nearby areas also become affected.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "\"Relocation diffusion\" describes a pattern in which a disease:",
+   "options": [
+    "Moves with people from one location to a new location, sometimes leaving the origin area behind",
+    "Spreads outward while the origin area remains affected",
+    "Never involves any human movement, rather than moving with people to a new location entirely, regardless of location.",
+    "Only spreads through animals, never humans"
+   ],
+   "correct": 0,
+   "explain": "Relocation diffusion occurs when a disease moves with people (or animals) from one place to a new place, such as through migration or travel, and can leave the origin area unaffected as the disease moves elsewhere.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "\"Adoption/acquisition\" in this context refers to:",
+   "options": [
+    "The process by which a new area or population becomes exposed to and affected by a disease",
+    "A government policy banning disease spread, rather than a new area becoming exposed to and affected",
+    "A type of vaccine",
+    "A method of measuring rainfall"
+   ],
+   "correct": 0,
+   "explain": "Adoption/acquisition refers to the process by which a new area or population becomes exposed to and subsequently affected by a disease as it diffuses.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "The diffusion of agricultural innovations refers to:",
+   "options": [
+    "The process by which new farming technologies, techniques or crop varieties spread between farmers and places over time",
+    "A single farmer inventing a new technique with no wider spread, rather than a process spreading over time, regardless of location.",
+    "The complete disappearance of traditional farming methods",
+    "A term unrelated to agriculture"
+   ],
+   "correct": 0,
+   "explain": "The diffusion of agricultural innovations describes the process by which new farming technologies, techniques or crop varieties spread from their point of origin to other farmers and places over time.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "Which of these is an example of an agricultural innovation?",
+   "options": [
+    "High-yield crop varieties developed during the Green Revolution",
+    "A traditional farming method unchanged for centuries, rather than high-yield varieties from the Green Revolution",
+    "A natural weather pattern",
+    "A geological feature of the land"
+   ],
+   "correct": 0,
+   "explain": "High-yield crop varieties, developed and spread during the Green Revolution, are a well-known example of an agricultural innovation that diffused widely and significantly increased global food production.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "Precision agriculture (using GPS, sensors and data to guide farming decisions) is an example of:",
+   "options": [
+    "A modern agricultural innovation using technology to improve efficiency",
+    "A traditional farming method with no technological element, rather than one using GPS, sensors and data",
+    "A physical barrier to diffusion",
+    "A type of disease affecting crops"
+   ],
+   "correct": 0,
+   "explain": "Precision agriculture is a modern agricultural innovation that uses technology such as GPS, sensors and data analysis to help farmers make more efficient, targeted decisions about their land and crops.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "A vector-borne disease is best defined as:",
+   "options": [
+    "A disease transmitted to humans through a living organism such as a mosquito",
+    "A disease spread directly from person to person through the air",
+    "A disease caused entirely by poor water quality, rather than one transmitted through a living organism",
+    "A disease that only affects animals, never humans"
+   ],
+   "correct": 0,
+   "explain": "A vector-borne disease is transmitted to humans through a living organism (a vector), such as a mosquito, which carries the disease-causing pathogen between hosts.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "The vector responsible for transmitting malaria is:",
+   "options": [
+    "The Anopheles mosquito",
+    "The tsetse fly",
+    "The common housefly",
+    "A species of tick, rather than the Anopheles mosquito responsible for transmitting malaria"
+   ],
+   "correct": 0,
+   "explain": "Malaria is transmitted by the Anopheles mosquito, which carries the Plasmodium parasite responsible for the disease.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "A key geographic factor contributing to malaria incidence in parts of Kenya is:",
+   "options": [
+    "Warm temperatures and standing water providing ideal mosquito breeding conditions",
+    "High altitude and consistently cold, dry conditions",
+    "A complete absence of any water sources, rather than warm temperatures and standing water conditions",
+    "Year-round freezing temperatures"
+   ],
+   "correct": 0,
+   "explain": "Warm temperatures combined with standing water (such as in areas with heavy rainfall, poor drainage, or near lakes) provide ideal breeding conditions for Anopheles mosquitoes, increasing malaria incidence in affected regions of Kenya.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "A water-borne disease is best defined as:",
+   "options": [
+    "A disease caused by consuming or contacting water contaminated with harmful pathogens",
+    "A disease transmitted through contact with a living carrier organism such as an insect",
+    "A disease spread only through the air",
+    "A disease that has no connection to sanitation or water quality"
+   ],
+   "correct": 0,
+   "explain": "A water-borne disease is caused by consuming or contacting water that has been contaminated with harmful pathogens, such as bacteria, unlike vector-borne diseases which require a living carrier organism.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "Cholera is caused by:",
+   "options": [
+    "A bacterium typically transmitted through water or food contaminated with faecal matter",
+    "A virus spread through the air",
+    "A parasite carried by mosquitoes",
+    "Poor diet alone, with no infectious cause, rather than a bacterium transmitted through contaminated water"
+   ],
+   "correct": 0,
+   "explain": "Cholera is caused by the bacterium Vibrio cholerae, typically transmitted through water or food that has been contaminated with faecal matter containing the bacterium.",
+   "tag": "Food systems and disease"
+  },
+  {
+   "q": "A key geographic factor contributing to cholera incidence is:",
+   "options": [
+    "Inadequate sanitation infrastructure and lack of access to clean water sources",
+    "Access to fully treated, safe drinking water",
+    "High altitude, cold climates, rather than inadequate sanitation infrastructure and unclean water access",
+    "Low population density in remote rural areas only"
+   ],
+   "correct": 0,
+   "explain": "Inadequate sanitation infrastructure and lack of access to clean, safe drinking water are the primary geographic factors contributing to cholera incidence, as they increase the risk of water contamination.",
+   "tag": "Food systems and disease"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFH-T3"] = {
+ "id": "IBGFH-T3",
+ "topicNumber": 6,
+ "topicTitle": "Option F: Food and Health (IB Geography Revision Guide)",
+ "title": "Stakeholders in food and health",
+ "href": "/geography/revision/guide/food-and-health/topic-3-stakeholders-in-food-and-health",
+ "syllabusFocus": "IB Geography, Option F: Food and Health: Stakeholders in food and health.",
+ "checklist": [
+  "I can evaluate the role of international organisations, governments and NGOs",
+  "I can evaluate the influence of TNCs on food consumption",
+  "I can explain gender roles and disparities in food and health",
+  "I can explain the factors affecting the severity of famine",
+  "I can evaluate the human and physical causes of food insecurity in Yemen",
+  "I can evaluate attempts to tackle food insecurity in Yemen"
+ ],
+ "quiz": [
+  {
+   "q": "The primary role of the World Food Programme (WFP) is best described as:",
+   "options": [
+    "The United Nations' frontline agency for delivering food assistance, including emergency relief, school feeding and nutrition support",
+    "Setting binding international health regulations for all countries, rather than delivering food assistance, regardless of season or location.",
+    "A private company that trades food commodities on international markets",
+    "Providing only agricultural technical advice, with no direct food distribution"
+   ],
+   "correct": 0,
+   "explain": "The WFP is the food-assistance branch of the United Nations, delivering in-kind food, cash and voucher assistance, school feeding programmes and targeted nutrition support, particularly in emergencies such as conflict or famine.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Which of the following best distinguishes the FAO from the WFP?",
+   "options": [
+    "The FAO focuses mainly on technical and advisory support to improve agricultural productivity and food security data, rather than direct emergency food distribution",
+    "The FAO only operates in high-income countries, rather than focusing on technical agricultural support, regardless of any other environmental or economic factor involved.",
+    "The FAO has no connection to agriculture at all",
+    "The FAO and WFP have identical roles with no meaningful difference"
+   ],
+   "correct": 0,
+   "explain": "The FAO (Food and Agriculture Organization of the United Nations) focuses on technical and advisory work — improving agricultural productivity, sustainable farming practices, and collecting global food security data — rather than distributing emergency food aid directly, which is the WFP's role.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "A key role of the World Health Organization (WHO) in relation to food and health is to:",
+   "options": [
+    "Coordinate international responses to disease outbreaks and set global health standards",
+    "Distribute emergency food parcels directly to affected households, rather than coordinating disease responses",
+    "Manufacture vaccines for private sale",
+    "Set global food prices"
+   ],
+   "correct": 0,
+   "explain": "The WHO coordinates international responses to disease outbreaks (such as cholera or measles outbreaks), sets global health standards and guidelines, and supports countries in strengthening their health systems.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Agribusiness is best defined as:",
+   "options": [
+    "The large-scale, industrialised business of food production, encompassing farming, processing, distribution and marketing, often run by transnational corporations",
+    "Small-scale subsistence farming carried out by a single family",
+    "A government department responsible for agricultural policy, rather than a large-scale industrialised business, regardless of any other environmental or economic factor involved.",
+    "A term with no real meaning in geography"
+   ],
+   "correct": 0,
+   "explain": "Agribusiness refers to the large-scale, industrialised business of food production — spanning farming, processing, distribution and marketing — and is typically associated with transnational corporations operating at a global scale.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Vertical integration in the food industry refers to a company:",
+   "options": [
+    "Owning or controlling multiple stages of the supply chain, such as growing, processing, and retailing its own products",
+    "Merging with a direct competitor selling the same product",
+    "Only ever operating in a single country, rather than owning multiple stages of the supply chain itself, regardless of location.",
+    "Reducing the number of products it sells"
+   ],
+   "correct": 0,
+   "explain": "Vertical integration occurs when a company owns or controls multiple stages of the supply chain — for example, growing crops, processing them, and then retailing the final product — giving it greater control over cost and quality at every stage.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Horizontal integration in the food industry refers to a company:",
+   "options": [
+    "Merging with or acquiring competitors operating at the same stage of production, increasing its market share",
+    "Controlling multiple different stages of the supply chain",
+    "Only selling products directly to farmers, rather than merging with competitors at the same production stage, regardless of location.",
+    "Reducing its overall size and market share"
+   ],
+   "correct": 0,
+   "explain": "Horizontal integration occurs when a company merges with or acquires competitors operating at the same stage of the supply chain (for example, one food processing company buying another), increasing its market share and reducing competition.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "According to UN estimates, approximately what proportion of the world's undernourished people are women or girls?",
+   "options": [
+    "60%",
+    "10%",
+    "35%",
+    "90%"
+   ],
+   "correct": 0,
+   "explain": "UN estimates suggest that around 60% of the undernourished globally are women or girls, reflecting persistent gender inequalities that constrain women's access to food, resources and economic opportunity.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Gender inequities identified as agricultural gender gaps include:",
+   "options": [
+    "Unequal access to rural resources and services, undervaluation of women's roles, gender-neutral policies that ignore real disparities, and a lack of gender-specific data",
+    "Guaranteed equal access to land and credit for men and women in all countries, contrary to actual gender gaps, regardless of any other environmental or economic factor involved.",
+    "A complete absence of any gender-based differences in agriculture",
+    "Women having greater legal land rights than men in most countries"
+   ],
+   "correct": 0,
+   "explain": "Documented agricultural gender gaps include unequal access to land, credit, labour markets and services; the undervaluation of women's roles and contributions; policies that claim to be gender-neutral but fail to address real disparities; and a lack of gender-specific data to identify and address these gaps.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "According to FAO research, closing the gender gap in access to productive agricultural resources (such as land, credit, machinery or chemicals) could:",
+   "options": [
+    "Eliminate yield gaps of 20-30% between men and women, increase domestic agricultural output by 2.5-4%, and result in around 100 million fewer people living in hunger",
+    "Have no measurable effect on global hunger",
+    "Reduce global agricultural output significantly, rather than eliminating yield gaps and reducing hunger, regardless of any other environmental or economic factor involved.",
+    "Only benefit women, with no wider economic effect"
+   ],
+   "correct": 0,
+   "explain": "FAO research estimates that closing the gender gap in access to productive resources could eliminate yield gaps of 20-30% between men and women farmers, increase domestic agricultural output by 2.5-4%, and result in approximately 100 million fewer people living in hunger worldwide.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "Famine is best distinguished from ongoing food insecurity as:",
+   "options": [
+    "An extreme, geographically specific event involving widespread acute malnutrition and mortality due to a severe lack of food access, rather than a chronic, ongoing condition",
+    "Exactly the same thing, with no meaningful distinction, rather than an extreme, geographically specific event, regardless of any other environmental or economic factor involved.",
+    "A term only used to describe drought",
+    "A condition that only ever affects wealthy countries"
+   ],
+   "correct": 0,
+   "explain": "Famine refers to an extreme, geographically specific event involving widespread acute malnutrition and significant mortality due to a severe lack of food access, distinguishing it from the broader, more chronic condition of food insecurity.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "A Food Availability Deficit (FAD) refers to famine caused primarily by:",
+   "options": [
+    "A physical shortage of food itself, such as crop failure caused by drought, pests or land degradation",
+    "People being unable to afford food that is otherwise available",
+    "Government policy alone, with no physical cause, rather than a physical shortage from drought or pests",
+    "A surplus of food with no distribution problems"
+   ],
+   "correct": 0,
+   "explain": "A Food Availability Deficit (FAD) describes famine driven primarily by a physical shortage of food itself — for example, crop failure caused by drought, pest outbreaks, or land degradation reducing the amount of food that is physically available.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "A Food Entitlement Deficit (FED) refers to famine caused primarily by:",
+   "options": [
+    "People lacking the economic or political means (income, rights or access) to obtain food that is otherwise available, such as due to poverty or unequal distribution",
+    "A total physical absence of food anywhere in the region",
+    "Excess food production with no other factors involved, rather than a lack of economic or political means, regardless of any other environmental or economic factor involved.",
+    "A term with no real application to famine"
+   ],
+   "correct": 0,
+   "explain": "A Food Entitlement Deficit (FED) describes famine driven primarily by people lacking the economic or political means to access food that is otherwise available — for example, due to poverty, unemployment, unequal distribution, or being excluded from markets — rather than a physical absence of food.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "The conflict in Yemen, which is central to this case study, began when:",
+   "options": [
+    "Houthi Shiite rebels swept into the capital Sana'a in September 2014, overthrowing President Abed-Rabbo Mansour Hadi's internationally recognised government",
+    "Yemen experienced a natural disaster with no political dimension",
+    "A trade dispute escalated into armed conflict in 2020, rather than Houthi rebels overthrowing the government in 2014, according to most published research on the topic.",
+    "The conflict has no clear starting point"
+   ],
+   "correct": 0,
+   "explain": "Yemen has been engulfed in civil war since September 2014, when Houthi Shiite rebels swept into the capital, Sana'a, and overthrew President Abed-Rabbo Mansour Hadi's internationally recognised government.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "In March 2015, the conflict in Yemen escalated significantly when:",
+   "options": [
+    "A Saudi-led coalition, backed by the United States, began a military campaign against Houthi forces allied with ousted former president Ali Abdullah Saleh",
+    "The United Nations declared Yemen independent",
+    "All fighting in Yemen ceased entirely, rather than a Saudi-led coalition beginning a military campaign, regardless of any other environmental or economic factor involved.",
+    "Yemen's government relocated permanently to Sana'a"
+   ],
+   "correct": 0,
+   "explain": "In March 2015, a Saudi-led coalition, backed by the United States, began a campaign against Houthi forces (who were allied with ousted former president Ali Abdullah Saleh) in support of Hadi's government, significantly escalating the conflict into a wider regional war.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "The conflict in Yemen has driven food insecurity primarily by:",
+   "options": [
+    "Destroying people's livelihoods and ability to purchase food, disrupting markets, and damaging infrastructure needed to produce and distribute food",
+    "Having no effect on people's ability to buy food",
+    "Increasing everyone's income across the country, rather than destroying livelihoods and disrupting markets, according to most published research on the topic.",
+    "Improving access to healthcare and food distribution networks"
+   ],
+   "correct": 0,
+   "explain": "The conflict has destroyed people's livelihoods and their ability to purchase food, making it difficult for many Yemenis to meet even minimal food and nutrition needs — a clear illustration of a Food Entitlement Deficit driven by conflict.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "The WFP's Emergency Operation in Yemen aimed to provide General Food Assistance and nutrition support to approximately:",
+   "options": [
+    "6.8 million people through General Food Assistance and 2.9 million through critical nutrition support",
+    "A few thousand people only",
+    "The entire population of the Arabian Peninsula, rather than 6.8 million people through food assistance",
+    "Only people living in the capital city"
+   ],
+   "correct": 0,
+   "explain": "The WFP's Emergency Operation aimed to assist 6.8 million people through General Food Assistance (an in-kind food basket and commodity vouchers) and 2.9 million people through critical nutrition support, focusing on those classified as severely food insecure.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "The WFP's Cash Voucher through Traders Network (CV-TN) scheme in Yemen works by:",
+   "options": [
+    "Providing beneficiaries with commodity vouchers that can be redeemed for food entitlements at participating local retail outlets linked to WFP's food service provider",
+    "Distributing only raw cash with no restrictions on its use",
+    "Requiring beneficiaries to travel to a different country to redeem support, rather than local retail outlets, regardless of any other environmental or economic factor involved.",
+    "Replacing all other forms of assistance in Yemen entirely"
+   ],
+   "correct": 0,
+   "explain": "Under the CV-TN scheme, beneficiaries redeem commodity vouchers distributed by WFP's cooperating partners for food entitlements at the closest participating retail outlet linked to WFP's food service provider — a market-based transfer modality identified as suitable and cost-effective for the Yemeni context.",
+   "tag": "Stakeholders"
+  },
+  {
+   "q": "The WFP's targeted supplementary feeding programme in Yemen treats moderate acute malnutrition in children aged 6 to 59 months using:",
+   "options": [
+    "A ready-to-use supplementary food called Plumpy'Sup, providing 535 kcal per day for an average of 90 days",
+    "No specific nutritional product, only general food aid",
+    "A programme that only accepts children over the age of 10, rather than treating children aged 6 to 59 months",
+    "Only medical treatment with no nutritional component"
+   ],
+   "correct": 0,
+   "explain": "The WFP's targeted supplementary feeding programme treats moderate acute malnutrition in children aged 6 to 59 months using Plumpy'Sup, a ready-to-use supplementary food providing 535 kcal per day for an average of 90 days.",
+   "tag": "Stakeholders"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFH-T4"] = {
+ "id": "IBGFH-T4",
+ "topicNumber": 6,
+ "topicTitle": "Option F: Food and Health (IB Geography Revision Guide)",
+ "title": "Future health and food security and sustainability",
+ "href": "/geography/revision/guide/food-and-health/topic-4-future-health-and-food-security-and-sustainability",
+ "syllabusFocus": "IB Geography, Option F: Food and Health: Future health and food security and sustainability.",
+ "checklist": [
+  "I can evaluate short- and long-term solutions to food insecurity, including waste reduction",
+  "I can evaluate contemporary approaches to food production, including GMOs",
+  "I can evaluate prevention and treatment in managing disease, using Majiang",
+  "I can evaluate the management of the 2013–16 Ebola outbreak and lessons for the future"
+ ],
+ "quiz": [
+  {
+   "q": "Food insecurity is best defined as:",
+   "options": [
+    "A state in which people lack reliable access to sufficient, safe and nutritious food to meet their needs for an active, healthy life",
+    "A situation where people always have too much food",
+    "A synonym for famine, with no distinct meaning, rather than a state of lacking reliable access to food, regardless of season or location.",
+    "A condition that only affects rural populations"
+   ],
+   "correct": 0,
+   "explain": "Food insecurity describes a state in which people lack reliable access to sufficient, safe and nutritious food to meet their dietary needs for an active, healthy life — a broader and more chronic condition than famine itself.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Increasing the amount of food aid delivered globally is limited as a solution because:",
+   "options": [
+    "The WFP reaches only around 80 million of the roughly 700 million chronically hungry people scattered across the world, showing aid alone cannot address the full scale of the problem",
+    "The WFP already reaches every chronically hungry person in the world",
+    "Food aid has completely eliminated global hunger, rather than the WFP reaching only a fraction of those in need, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "There are no chronically hungry people remaining globally"
+   ],
+   "correct": 0,
+   "explain": "The WFP reaches only around 80 million of the estimated 700 million chronically hungry people worldwide, illustrating that food aid — while vital in emergencies — cannot address the full scale of global food insecurity on its own.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Agricultural investment is identified as a potential solution to food insecurity because:",
+   "options": [
+    "African yields could potentially increase up to fourfold with support such as irrigation, given only around 4% of African agriculture is currently irrigated compared to around 40% in Asia",
+    "Investment has no effect on crop yields anywhere, rather than potentially quadrupling yields through irrigation, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "All African farms are already fully irrigated",
+    "Investment only benefits farmers in high-income countries"
+   ],
+   "correct": 0,
+   "explain": "Experts believe yields in Africa could increase up to fourfold with the right agricultural investment and support, since only around 4% of African agriculture is currently irrigated compared to around 40% in Asia — a significant untapped potential for improving food security.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Regenerative (sustainable) agriculture is best described as an approach that:",
+   "options": [
+    "Puts environmental resources such as soil, water and trees first, often through techniques like permaculture, while aiming to increase income and food supply for poor farmers",
+    "Prioritises maximum short-term yield with no regard for environmental resources",
+    "Has no connection to farmer income or food supply, rather than putting environmental resources first, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "Can only be practised in high-income countries"
+   ],
+   "correct": 0,
+   "explain": "Regenerative or sustainable agriculture prioritises long-term environmental resources — soil, water and trees — often through approaches like permaculture (sustainable, self-maintaining agricultural systems modelled on natural ecosystems), while aiming to increase both income and food supply for poorer farmers.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "The Green Revolution, dating from the 1960s, remains relevant to study today because:",
+   "options": [
+    "It dramatically raised crop yields through high-yield crop varieties and increased use of fertiliser and irrigation, but its approach and consequences (such as fertiliser dependency and environmental impacts) still shape debates about food production strategy today",
+    "It has no lasting relevance or legacy",
+    "It has since been completely reversed in every country, rather than still shaping food production debates, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic, a conclusion contradicted by the detailed evidence, data and statistics presented throughout this case study and the wider academic literature on the subject.",
+    "It only ever affected countries in Europe"
+   ],
+   "correct": 0,
+   "explain": "The Green Revolution of the 1960s dramatically raised crop yields worldwide through high-yield crop varieties, increased fertiliser use and expanded irrigation. Its legacy — including benefits in yield increases alongside longer-term issues such as fertiliser dependency and environmental impacts — continues to shape debates about food production strategy today.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Solar irrigation is a contemporary approach to food production that works by:",
+   "options": [
+    "Using solar-powered pumps to draw and distribute water for crops, offering a renewable alternative to fuel-powered irrigation, particularly useful in areas without reliable electricity grids",
+    "Removing the need for water in crop production entirely, rather than using solar-powered pumps to distribute it, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "Using solar panels to directly replace soil",
+    "Only functioning at night"
+   ],
+   "correct": 0,
+   "explain": "Solar irrigation uses solar-powered pumps to draw and distribute water for crops, providing a renewable, lower-emission alternative to diesel or grid-powered irrigation — particularly valuable in rural areas of LICs without reliable access to the electricity grid.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Curative healthcare is best described as an approach that:",
+   "options": [
+    "Focuses on treating disease and illness after it has already developed, such as through hospital treatment, surgery or medication",
+    "Focuses on stopping disease before it occurs",
+    "Has no role in any healthcare system, rather than treating disease and illness after it has already developed, regardless of location.",
+    "Is identical to primary healthcare"
+   ],
+   "correct": 0,
+   "explain": "Curative healthcare focuses on treating disease and illness after it has already developed — for example, through hospital treatment, surgery, or medication — as opposed to preventing disease from occurring in the first place.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "A key limitation of relying primarily on curative healthcare to manage disease is that it:",
+   "options": [
+    "Tends to be more expensive per person treated and does not reduce the underlying rate at which new cases of disease occur, meaning healthcare systems can remain permanently under strain",
+    "Is always cheaper than prevention in every context",
+    "Has no limitations of any kind, rather than being more expensive per person and not reducing new case rates, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "Always cures 100% of patients"
+   ],
+   "correct": 0,
+   "explain": "Curative healthcare tends to be more resource-intensive per person treated (requiring hospitals, specialist staff, equipment and medication) and does not reduce the underlying rate at which new cases of disease occur, meaning a healthcare system focused mainly on treatment can remain permanently under strain from a constant flow of new cases.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Primary (preventative) healthcare focuses on:",
+   "options": [
+    "Preventing disease before it occurs, through measures such as vaccination, health education, sanitation improvements and early screening",
+    "Only treating patients once they are critically ill",
+    "Replacing the need for any hospitals, rather than preventing disease through vaccination and screening, regardless of season or location.",
+    "A concept with no practical application"
+   ],
+   "correct": 0,
+   "explain": "Primary (preventative) healthcare focuses on stopping disease before it occurs, through measures such as vaccination programmes, health education, improved sanitation and water access, and early screening and diagnosis.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "A pandemic is best defined as:",
+   "options": [
+    "An outbreak of a disease that spreads across multiple countries or continents, affecting a very large number of people over a wide geographic area",
+    "A disease outbreak confined to a single small local area",
+    "A disease that only ever affects animals, rather than an outbreak spreading across multiple countries, according to most published research on the topic.",
+    "A term identical in meaning to ‘endemic’"
+   ],
+   "correct": 0,
+   "explain": "A pandemic is an outbreak of a disease that spreads across multiple countries or continents, affecting a very large number of people over a wide geographic area — the largest scale of disease outbreak, distinct from a more geographically contained epidemic.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Antigenic drift refers to:",
+   "options": [
+    "Small, gradual genetic mutations in a virus over time, which can allow it to partially evade existing immunity",
+    "A sudden, major genetic reassortment producing an entirely new virus subtype",
+    "A term unrelated to viruses, rather than small, gradual genetic mutations allowing partial immune evasion, regardless of location.",
+    "The physical movement of a virus between countries"
+   ],
+   "correct": 0,
+   "explain": "Antigenic drift refers to small, gradual genetic mutations that accumulate in a virus over time. These minor changes can allow the virus to partially evade existing immunity in a population, which is one reason some viruses (such as seasonal influenza) require updated vaccines periodically.",
+   "tag": "Future food and health"
+  },
+  {
+   "q": "Antigenic shift refers to:",
+   "options": [
+    "A sudden, major genetic change in a virus (such as through reassortment of genetic material between different strains), which can produce a new subtype capable of causing a pandemic if populations have little existing immunity",
+    "Gradual, minor mutations accumulating slowly over many years",
+    "The physical transport of a virus by international travellers, rather than a sudden, major genetic change, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "A process that only affects bacteria, never viruses"
+   ],
+   "correct": 0,
+   "explain": "Antigenic shift is a sudden, major genetic change in a virus, sometimes through the reassortment of genetic material between different viral strains. Because this can produce an entirely new subtype against which populations have little or no existing immunity, antigenic shift carries a much higher risk of triggering a pandemic than the gradual changes of antigenic drift.",
+   "tag": "Future food and health"
   }
  ]
 };
