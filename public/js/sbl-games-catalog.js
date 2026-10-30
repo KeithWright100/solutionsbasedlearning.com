@@ -290,7 +290,7 @@
   }
   function bySlug(s) { for (var i = 0; i < GAMES.length; i++) if (GAMES[i].slug === s) return GAMES[i]; return null; }
   function rotation(ws) {
-    var weeks = Math.round((Date.parse(ws + 'T00:00:00Z') - Date.parse('2026-01-05T00:00:00Z')) / 604800000);
+    var weeks = Math.round((Date.parse(ws + 'T00:00:00Z') - Date.parse('2026-10-26T00:00:00Z')) / 604800000);
     var n = ROTATION.length, i = ((weeks % n) + n) % n;
     return bySlug(ROTATION[i]);
   }
