@@ -56,17 +56,27 @@
 
     /* game of the week */
     .side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-    .gotw { position: relative; z-index: 1; margin-top: 18px; max-width: 640px; border-radius: 16px; padding: 12px 14px; color: var(--ink); background: linear-gradient(135deg, #f7fefd, #e6f8f6); border: 1px solid #c4eeea; box-shadow: 0 10px 26px rgba(1,21,38,.25); display: flex; gap: 12px; align-items: center; transition: background .2s, border-color .2s; }
-    .gotw:hover { background: linear-gradient(135deg, #ffffff, #eefbf9); border-color: var(--teal); }
-    .gotw__ic { width: 42px; height: 42px; border-radius: 12px; background: #fff; border: 1px solid #d5f1ee; box-shadow: 0 2px 8px rgba(0,124,130,.12); display: grid; place-items: center; font-size: 1.4rem; flex-shrink: 0; }
+    .gotw { position: relative; z-index: 1; margin-top: 18px; max-width: 640px; border-radius: 16px; padding: 12px 14px; color: var(--ink); background: linear-gradient(135deg, #eefaf8, #d8f2ee); border: 1px solid #b3e5df; box-shadow: 0 10px 26px rgba(1,21,38,.25); display: flex; gap: 12px; align-items: center; transition: background .2s, border-color .2s; }
+    .gotw:hover { background: linear-gradient(135deg, #f4fcfb, #e2f6f3); border-color: var(--teal); }
+    .gotw__ic { width: 42px; height: 42px; border-radius: 12px; background: #fff; border: 2px solid #00666b; box-shadow: 0 2px 8px rgba(0,124,130,.12); display: grid; place-items: center; font-size: 1.4rem; flex-shrink: 0; }
     .gotw__body { flex: 1; min-width: 0; }
-    .gotw__kick { font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-dark); }
-    .gotw__body h2 { font-size: 1rem; margin: 1px 0; }
-    .gotw__body p { font-size: .8rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gotw__kick { font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #00666b; }
+    .gotw__body h2 { font-size: 1.02rem; margin: 1px 0; color: #031a2b; }
+    .gotw__body p { font-size: .82rem; color: #23404f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .gotw__meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-    .gotw__meta span { font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #fff; color: var(--teal-dark); border: 1px solid #b6ebe6; }
+    .gotw__meta span { font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #fff; color: #00585c; border: 1px solid #9fdcd5; }
     .gotw__go { flex-shrink: 0; background: var(--deep); color: #fff; font-weight: 800; font-size: .85rem; padding: 9px 14px; border-radius: 10px; white-space: nowrap; }
-    .gotw[hidden] { display: none; }
+    .gotw[hidden], .resume[hidden], .latest[hidden] { display: none; }
+    .hero .continue { display: flex; flex-direction: column; }
+    .hero #recent { display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
+    .latest-wrap { display: flex; flex-direction: column; gap: 8px; padding-top: 2px; }
+    .latest { display: flex; gap: 12px; align-items: center; padding: 11px 12px; border-radius: 12px; background: #fff8e8; border: 1px solid #f3dca6; }
+    .latest:hover { border-color: #e0b55a; }
+    .latest .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: #ffe7ad; font-size: 1.05rem; flex-shrink: 0; }
+    .latest b { display: block; font-size: .88rem; }
+    .latest small { color: var(--muted); font-size: .78rem; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+    .latest .pill { margin-right: 6px; }
+    
     .hero .continue { flex: 1; padding: 18px 20px; }
     .hero .continue h2.sec { margin-bottom: 10px; }
     .hero .resume { padding: 8px 10px; margin-bottom: 8px; }
@@ -280,14 +290,45 @@
       var d = Math.round(s / 86400); return d === 1 ? 'yesterday' : d + ' days ago';
     }
     var box = document.getElementById('recent');
+    var html = '';
     if (recent.length) {
-      box.innerHTML = recent.slice(0, 4).map(function (r) {
+      html = recent.slice(0, 8).map(function (r) {
         var a = area(r.p);
         return '<a class="resume" href="' + esc(r.p) + '"><span class="ic" style="background:' + a[1] + '">' + a[0] + '</span><span><b>' + esc(r.t) + '</b><small>' + esc(a[2]) + ' &middot; ' + ago(r.at) + '</small></span></a>';
       }).join('');
     } else {
-      box.innerHTML = '<p class="empty">The lessons and revision pages you open will appear here, so you can jump straight back in. Start with <a href="/geography">IB Geography</a> or <a href="/igcse/geography/learn">IGCSE Geography</a>.</p>';
+      html = '<p class="empty">The lessons and revision pages you open will appear here, so you can jump straight back in. Start with <a href="/geography">IB Geography</a> or <a href="/igcse/geography/learn">IGCSE Geography</a>.</p>';
     }
+    /* news alert: the newest item from "What's new" */
+    html += '<div class="latest-wrap">';
+    document.querySelectorAll('.news a').forEach(function (n, i) {
+      var nb = n.querySelector('b'), ns = n.querySelector('small');
+      html += '<a class="latest" href="' + esc(n.getAttribute('href')) + '"><span class="ic" aria-hidden="true">' + (i ? '&#10024;' : '&#128227;') + '</span><span><b><span class="pill">' + (i ? 'New' : 'Latest') + '</span>' + esc(nb ? nb.textContent : '') + '</b><small>' + esc(ns ? ns.textContent : '') + '</small></span></a>';
+    });
+    html += '</div>';
+    box.innerHTML = html;
+
+    /* On wide screens, show as many recent pages as fit beside the welcome panel, so neither panel has empty space. */
+    var hero = document.querySelector('.hero'), welcome = document.querySelector('.welcome'), cont = document.querySelector('.hero .continue');
+    function fit() {
+      var items = box.querySelectorAll('.resume'), news = box.querySelectorAll('.latest');
+      items.forEach(function (el) { el.hidden = false; });
+      news.forEach(function (el, i) { el.hidden = i > 0; });
+      if (!window.matchMedia('(min-width: 981px)').matches) {
+        for (var i = 4; i < items.length; i++) items[i].hidden = true;
+        return;
+      }
+      hero.style.alignItems = 'start';
+      var shown = items.length, tooTall = function () { return cont.offsetHeight > welcome.offsetHeight + 1; };
+      while (shown > 2 && tooTall()) { items[--shown].hidden = true; }
+      /* still room? add more "What's new" items */
+      for (var k = 1; k < news.length; k++) { news[k].hidden = false; if (tooTall()) { news[k].hidden = true; break; } }
+      hero.style.alignItems = '';
+    }
+    fit();
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 120); });
+    /* the welcome panel grows a little once the game card and search chips render */
+    setTimeout(fit, 400); setTimeout(fit, 1500);
 
   })();
   </script>
