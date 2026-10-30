@@ -92,6 +92,11 @@ window.SBL_LESSONS.CC02 = {
       question: 'Outline what is meant by global dimming.',
       marks: 2,
       markScheme: 'Reduction in the amount of solar energy/sunlight reaching Earth\u2019s surface [1, reserved for a linked development]. Because volcanic activity has put dust in the atmosphere [1] and/or air pollution (sulphate aerosols) from industrialization [1], leading to a decrease in global temperatures [1]. Award a maximum of 2 marks total: 1 for identifying the reduction in solar energy reaching the surface, and 1 further mark for correctly linking this to a valid cause (volcanic dust or industrial aerosol pollution) and its effect (lower temperatures).'
+    },
+    {
+      question: "Outline how extreme warming can affect the operation of a feedback loop. [May 2021, Paper 2, Q2(b)(ii)]",
+      marks: 2,
+      markScheme: "Award one mark for describing a valid feedback loop and a second mark for explaining how warming amplifies (positive) or dampens (negative) it (for example, warming thaws permafrost, releasing methane that causes further warming; or melting ice lowers albedo so more energy is absorbed)."
     }
   ],
   readinessQuestions: [
@@ -150,6 +155,16 @@ window.SBL_LESSONS.CC03 = {
       question: 'Explain two reasons why increased trade by emerging economies has led to increased greenhouse gas emissions.',
       marks: 4,
       markScheme: 'Identification of a valid reason [1] and [1] for further development/exemplification of how it has led to an increase in GHG emissions.\n\nPossibilities must be linked to increased trade and could include:\n- Increased export of manufactured goods – increased greenhouse gas emissions from factories/industry producing these.\n- TNCs locating manufacturing plants in emerging economies – local regulations may be more lax in terms of emissions.\n- Increased trade results in increased greenhouse gas emissions from container shipping/aircraft/road transport of goods.\n- Trade in emerging economies may be instrumental in improving standard of living – per capita greenhouse gas emissions increase due to increased consumption (meat, fossil fuels)\n- Reliance of emerging economies on fossil fuels.'
+    },
+    {
+      question: "Explain two different reasons why emissions of methane are increasing. [May 2024, Paper 2, Q2(b)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for identifying a genuine and distinct source of rising methane emissions (for example, more cattle and other livestock as meat demand rises, expanding rice paddies, growing landfill sites, leaks from natural gas extraction and pipelines, or thawing permafrost and wetlands) and a second mark for explaining why that source is increasing or how it releases methane (for example, anaerobic decomposition in flooded paddies or landfill, enteric fermentation in ruminants, or warming releasing methane stored in frozen ground as a positive feedback). The two reasons must be clearly different."
+    },
+    {
+      question: "Suggest two ways in which differences in economic development lead to differences in greenhouse gas emissions between countries. [May 2023, Paper 2, Q2(b)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine link between development and emissions (for example, higher energy use per person in wealthy countries, industrialisation and manufacturing in emerging economies, car ownership and air travel, meat-rich diets, or the ability of richer countries to afford renewable energy) and a second mark for developing why it causes higher or lower emissions in some countries than others."
     }
   ],
   readinessQuestions: [
@@ -252,6 +267,13 @@ window.SBL_LESSONS.CC05 = {
     'I can explain the link between climate change and heavy rainfall/flooding.',
     'I can distinguish frequency from intensity.',
     'I can explain, in simple terms, how scientists attribute events to climate change.'
+  ],
+  ibQuestions: [
+    {
+      question: "Suggest one reason for the trend in the number of weather-related disasters over recent decades. [May 2023, Paper 2, Q4(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine reason (for example, climate change increasing the frequency or intensity of extreme events, more people and property in exposed areas such as coasts and floodplains, or better reporting and recording of disasters) and a second mark for developing it."
+    }
   ],
   readinessQuestions: [
     'Explain the difference between the frequency and intensity of an extreme weather event.',
@@ -456,6 +478,18 @@ window.SBL_LESSONS.CC09 = {
     'I can explain why vulnerability varies between places.',
     'I can apply these concepts to a real example.'
   ],
+  ibQuestions: [
+    {
+      question: "\u201cThe effects of global climate change are uneven across the world.\u201d To what extent do you agree with this statement? [May 2024, Paper 2, Q6]",
+      marks: 10,
+      markScheme: "A strong response gives evidence that effects vary between places (for example, faster warming in the Arctic, sea-level rise threatening low-lying deltas and small island states, drought in the Sahel, some high-latitude regions gaining longer growing seasons) and that vulnerability varies between groups (for example, poorer people, farmers and coastal communities are less able to adapt). It may also argue that some effects are global (for example, rising mean temperature and ocean acidification), and reaches a justified conclusion about how uneven the effects are, ideally considering both physical exposure and human vulnerability. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    },
+    {
+      question: "Explain two reasons why wealthy people are less vulnerable to climate change. [May 2023, Paper 2, Q2(c)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine reason (for example, better-quality housing in safer locations, insurance, savings, access to air conditioning, health care and information, ability to migrate, or less dependence on farming) and a second mark for explaining how this reduces their exposure or increases their ability to cope and recover."
+    }
+  ],
   readinessQuestions: [
     'Explain the difference between a hazard and vulnerability.',
     'What is meant by exposure in the context of climate risk?',
@@ -538,6 +572,11 @@ window.SBL_LESSONS.CC10 = {
       question: 'Explain how carbon offset schemes and carbon trading might lead to a global reduction in greenhouse gas emissions.',
       marks: 4,
       markScheme: 'Award [1] for explaining carbon offsetting and [1] for how it could reduce global emissions.\n\nAND\n\nAward [1] for explaining carbon trading and [1] for how it could reduce global emissions.\n\nExample: Carbon offset schemes are designed to reduce or offset carbon emissions by funding activities and projects [1] such as tree planting or solar power which reduce emissions elsewhere [1].\n\nExample: Carbon trading attempts to create a market in which emission permits issues by governments can be traded [1]. Companies that exceed their targets have to buy from those that do not – this market system attempts to limit emissions [1].\n\nAward a maximum of [2] for a description of carbon emissions offsetting and carbon trading that does not explain how global greenhouse gas emissions can be reduced over time by this approach.'
+    },
+    {
+      question: "Explain two geopolitical strategies used to reduce the effects of climate change. [May 2024, Paper 2, Q2(c)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for identifying a genuine geopolitical (international or intergovernmental) strategy (for example, international agreements such as the Paris Agreement and nationally determined contributions, the Kyoto Protocol, international carbon trading schemes, climate finance from richer to poorer countries, or regional agreements such as the EU\u2019s emissions targets) and a second mark for explaining how it reduces the effects or causes of climate change (for example, binding or pledged emission cuts, funding adaptation in vulnerable countries, or creating a price on carbon that encourages lower emissions). Do not credit purely local or individual actions."
     }
   ],
   readinessQuestions: [

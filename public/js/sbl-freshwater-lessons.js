@@ -30,7 +30,7 @@
    built from established, verified sources — Bangkok/Chao Phraya
    was confirmed as the teacher's intended case study via a
    worksheet template, but no case-study FACTS were supplied, so
-   specifics were verified via web search. Boscastle was Claude's
+   specifics were verified via web search. Boscastle was the author's
    own choice as the contrasting case study (not specified by the
    teacher) — flag this to the teacher and swap it out if their
    course uses a different second example. FW04 built from
@@ -43,7 +43,7 @@
    salinization, agrochemical run-off/eutrophication, groundwater,
    bioaccumulation" pointer plus the irrigation-types list, expanded
    with established syllabus knowledge. FW11's case studies (the
-   Aral Sea and the Ogallala Aquifer, USA) were Claude's own choice,
+   Aral Sea and the Ogallala Aquifer, USA) were the author's own choice,
    since the teacher's "11" material was only an aquifer diagram
    with no case study specified — flag this to the teacher and
    swap in their preferred example if different. FW12 uses the
@@ -78,7 +78,7 @@
    this mismatch to the teacher in case a Kissimmee case study
    should be added or substituted. Two reference images at the end
    of the Nile/Topic 3 material and within the Louisiana material
-   were not visible in the text reaching Claude — ask the teacher
+   were not visible in the text reaching the author — ask the teacher
    what these showed if specific content from them is needed.
    ============================================================ */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
@@ -214,6 +214,13 @@ window.SBL_LESSONS.FW03 = {
     'I can define the term capacity.',
     'I can explain the relationship between velocity and particle size using the curve.'
   ],
+  ibQuestions: [
+    {
+      question: "Explain two reasons why rates of erosion vary between different waterfalls. [May 2021, Paper 1, Q1(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each reason: one mark for a genuine reason (for example, rock type and hardness, joints and bedding of the rock, river discharge and velocity, the height of the fall, the amount and size of load, climate and freeze\u2013thaw), one for explaining how it changes the rate of erosion, and one for further development or an example."
+    }
+  ],
   readinessQuestions: [
     'Name the four processes of river erosion.',
     'Name the four processes of river transportation.',
@@ -262,6 +269,13 @@ window.SBL_LESSONS.FW04 = {
     'I can explain how deltas form.',
     'I can link specific landforms to the upper, middle and lower course of a river.'
   ],
+  ibQuestions: [
+    {
+      question: "Outline the main features of one landform, other than a waterfall, created by river erosion. [May 2021, Paper 1, Q1(b)]",
+      marks: 2,
+      markScheme: "Award one mark for naming a valid erosional landform (for example, a gorge, V-shaped valley, interlocking spurs, pothole or rapids) and a second mark for describing its main features (shape, size or location)."
+    }
+  ],
   readinessQuestions: [
     'Explain how a waterfall forms.',
     'Explain how a meander forms.',
@@ -307,6 +321,13 @@ window.SBL_LESSONS.FW05 = {
     'I can list the eight key controls on the shape of a hydrograph.',
     'I can distinguish between a flashy and a subdued/flat hydrograph.'
   ],
+  ibQuestions: [
+    {
+      question: "Examine how human activities within a drainage basin can affect the shape of river hydrographs. [May 2024, Paper 1, Q2(a)]",
+      marks: 10,
+      markScheme: "A strong response explains how activities such as urbanisation (impermeable surfaces and drains), deforestation, afforestation, farming practices, and dams and reservoirs change lag time, peak discharge and the steepness of the rising and falling limbs. It recognises that some activities increase flood risk while others reduce it, and that physical factors (rainfall intensity, basin shape, soil and rock type) also matter, so the effect of human activity varies with scale and place. Named examples and annotated hydrographs strengthen the answer. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'Define lag time and peak discharge.',
     'What is the difference between a "flashy" hydrograph and a "subdued" hydrograph?',
@@ -351,6 +372,18 @@ window.SBL_LESSONS.FW06 = {
     'I can describe the difference between hydrographs in urban and rural areas.',
     'I can explain natural factors affecting flood risk, including timing, volume and duration of precipitation.',
     'I can explain how flood risk varies in its distribution, frequency and magnitude.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine the view that river flooding is becoming more difficult to predict. [May 2023, Paper 1, Q2(a)]",
+      marks: 10,
+      markScheme: "A strong response explains why prediction may be harder (climate change bringing more intense and unusual rainfall, rapid urbanisation changing basin responses, flash floods and short lag times, poor data in some basins) and why it may be easier (better satellite and radar monitoring, computer modelling, river gauges, early warning systems). It recognises that prediction varies between places and between rich and poor countries, uses named examples, and reaches a justified conclusion. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    },
+    {
+      question: "Examine how human and physical factors can contribute to a low risk of river flooding. [May 2021, Paper 1, Q2(a)]",
+      marks: 10,
+      markScheme: "A strong response explains physical factors that lower flood risk (permeable rock and soils, gentle slopes, dense vegetation, elongated basin shape, steady rainfall) and human factors (afforestation, sustainable drainage, floodplain zoning, dams and levees, wetland restoration, forecasting). It considers how the factors interact, recognises that some human actions raise risk elsewhere, uses named examples, and reaches a judgement about which factors matter most. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'Define the term recurrence interval.',
@@ -546,6 +579,18 @@ window.SBL_LESSONS.FW10 = {
     'I can explain how agricultural activity impacts groundwater, through both over-abstraction and contamination.',
     'I can define bioaccumulation and explain its causes and impacts in food chains.'
   ],
+  ibQuestions: [
+    {
+      question: "Explain one way in which agricultural activities can cause salinization. [May 2024, Paper 1, Q1(c)(i)]",
+      marks: 3,
+      markScheme: "Up to three marks: one mark for identifying a farming activity (for example, over-irrigation or poorly drained irrigation in hot, dry areas), one mark for explaining the process (water evaporates, drawing salts to the surface, or a rising water table brings dissolved salts upward), and one mark for further development or a named example (for example, the Aral Sea basin or the Murray\u2013Darling basin)."
+    },
+    {
+      question: "Explain one consequence of salinization for farmers. [May 2024, Paper 1, Q1(c)(ii)]",
+      marks: 3,
+      markScheme: "Up to three marks: one mark for a genuine consequence (for example, lower crop yields or land becoming unusable), one mark for explaining why (salt reduces plants\u2019 ability to absorb water and damages soil structure), and one mark for developing the economic or social effect on farmers (lower incomes, debt, the cost of drainage or flushing, switching to salt-tolerant crops, or abandoning land)."
+    }
+  ],
   readinessQuestions: [
     'Define salinization and explain how irrigation can cause it.',
     'What is eutrophication and how is it caused by agricultural activity?',
@@ -642,6 +687,13 @@ window.SBL_LESSONS.FW12 = {
     'I can explain the positions of Ethiopia, Egypt and Sudan in the GERD dispute.',
     'I can link internationally shared water resource conflicts to relevant UN Sustainable Development Goals.'
   ],
+  ibQuestions: [
+    {
+      question: "Examine why water management issues can cause conflict between stakeholders. [May 2023, Paper 1, Q2(b)]",
+      marks: 10,
+      markScheme: "A strong response explains how competing uses (farming, industry, cities, energy, the environment) and unequal power lead to conflict at different scales, from local disputes to international ones such as the Nile and the GERD. It considers upstream and downstream positions, scarcity, growing demand, climate change and governance, and recognises that cooperation and agreements can reduce conflict. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'Give three general causes of conflict over internationally shared water resources.',
     'Why is the Nile drainage basin so important to the countries it flows through?',
@@ -689,6 +741,13 @@ window.SBL_LESSONS.FW13 = {
     'I can describe household-level strategies such as rainwater harvesting and greywater collection.',
     'I can evaluate the strengths and weaknesses of community-based approaches to water management.'
   ],
+  ibQuestions: [
+    {
+      question: "Outline one reason why most managed aquifer recharge sites are located near cities. [May 2024, Paper 1, Q1(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine reason (for example, high demand for water in cities, the supply of treated wastewater and urban stormwater to recharge aquifers, or existing infrastructure and funding) and a second mark for development."
+    }
+  ],
   readinessQuestions: [
     'What is the difference between a large-scale (top-down) and a small-scale (bottom-up) water management strategy?',
     'Explain how an ice stupa in Ladakh stores water for use in spring.',
@@ -734,6 +793,13 @@ window.SBL_LESSONS.FW14 = {
     'I can explain the physical impacts of a reservoir, such as siltation, increased evaporation and shoreline abrasion.',
     'I can describe the purpose, scale and costs/benefits of the Three Gorges Dam in China.',
     'I can evaluate how effective the Three Gorges Dam has been as a multipurpose scheme.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine the costs and benefits of building dams for different stakeholders. [May 2024, Paper 1, Q2(b)]",
+      marks: 10,
+      markScheme: "A strong response uses a named dam (for example, the Three Gorges Dam, the GERD or the Aswan High Dam) and explains benefits (hydroelectric power, flood control, irrigation water, navigation, water supply) and costs (displacement of people, loss of farmland and heritage, sediment trapping, ecological change, earthquake risk, conflict with downstream countries). It shows that costs and benefits fall differently on different stakeholders \u2014 governments, urban energy users, displaced communities, farmers and downstream countries \u2014 and may change over time, and reaches a justified judgement. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'Name three different purposes of a multipurpose dam scheme.',
@@ -781,6 +847,13 @@ window.SBL_LESSONS.FW15 = {
     'I can evaluate how effective America’s Watershed Initiative has been.',
     'I can compare IDBM with older, single-purpose approaches to managing a drainage basin.'
   ],
+  ibQuestions: [
+    {
+      question: "Examine why it can be difficult to achieve stakeholder agreement on how best to manage one or more water resources. [May 2021, Paper 1, Q2(b)]",
+      marks: 10,
+      markScheme: "A strong response uses a named basin or resource (for example, the Mississippi, the Murray\u2013Darling or the Nile) and explains the different priorities of stakeholders (farmers, cities, industry, energy companies, environmental groups, different countries or states), unequal power, and the challenges of integrated drainage basin management. It considers why agreement is sometimes reached and reaches a justified conclusion. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'Define integrated drainage basin management (IDBM) in your own words.',
     'Give two components that might be included in an IDBM plan.',
@@ -826,6 +899,18 @@ window.SBL_LESSONS.FW16 = {
     'I can explain the causes of coastal wetland loss in Louisiana.',
     'I can describe the strategies used in Louisiana’s Coastal Master Plan, including sediment diversions, shoreline protection and marsh creation.',
     'I can evaluate the effectiveness and challenges facing Louisiana’s Coastal Master Plan.'
+  ],
+  ibQuestions: [
+    {
+      question: "Outline one benefit of maintaining a wetland area. [May 2023, Paper 1, Q1(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine benefit (for example, storing floodwater, filtering pollutants, providing habitats and biodiversity, storing carbon, recharging groundwater, or supporting fishing and tourism) and a second mark for development."
+    },
+    {
+      question: "Explain one pressure on wetlands caused by agriculture and one pressure caused by altered water flow. [May 2023, Paper 1, Q1(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each pressure: one mark for a genuine pressure (agriculture: drainage for farmland, fertiliser and pesticide run-off causing eutrophication, grazing; altered flow: dams and water extraction reducing flooding of wetlands, channelisation, levees), one for explaining its effect on the wetland, and one for development or a named example (for example, the Murray\u2013Darling basin or coastal Louisiana)."
+    }
   ],
   readinessQuestions: [
     'Define a wetland and name the four main types.',

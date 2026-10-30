@@ -135,6 +135,13 @@ window.SBL_LESSONS.CP03 = {
     'I can explain how development affects distribution.',
     'I can define a megacity.'
   ],
+  ibQuestions: [
+    {
+      question: "Explain two ways in which voluntary internal migration (for example, rural\u2013urban migration) could hold back economic development. [May 2024, Paper 2, Q1(c)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for identifying a genuine way internal migration could limit development (for example, a \u201cbrain drain\u201d of young, skilled people from rural areas, an ageing and less productive rural workforce, overcrowding and informal settlements in cities, pressure on urban services, or widening regional inequality) and a second mark for explaining the economic consequence (for example, abandoned farmland and falling agricultural output in source areas, or underemployment in the informal sector and high infrastructure costs in cities that slow national growth). Accept consequences for either the source or the destination area."
+    }
+  ],
   readinessQuestions: [
     'Explain why population distribution is often uneven within a single country.',
     'Give an example of a core region and a periphery region within one country.',
@@ -385,6 +392,13 @@ window.SBL_LESSONS.CP07 = {
     'I can explain environmental consequences.',
     'I can recall one detailed megacity example.'
   ],
+  ibQuestions: [
+    {
+      question: "\u201cThe consequences of megacity growth are mainly felt by individuals.\u201d To what extent do you agree with this statement? [May 2024, Paper 2, Q5]",
+      marks: 10,
+      markScheme: "A strong response explains consequences of megacity growth for individuals (for example, housing quality, commuting times, health, pollution exposure, informal work and opportunities such as higher incomes and access to services) and compares them with consequences for wider society, governments and the environment (for example, infrastructure costs, congestion, urban sprawl, regional inequality, economic growth and national productivity). It uses named megacities such as Mumbai, Lagos or Dhaka, recognises that consequences differ between groups (rich and poor, migrants and long-term residents) and over time, and reaches a justified conclusion about whether individuals or societies feel the consequences most. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'Explain the difference between urbanisation and urban growth.',
     'Give two factors that drive megacity growth.',
@@ -597,6 +611,23 @@ window.SBL_LESSONS.CP11 = {
     'I can explain short-term impacts.',
     'I can explain long-term impacts.',
     'I can judge effectiveness using demographic evidence.'
+  ],
+  ibQuestions: [
+    {
+      question: "Suggest two reasons why different countries choose different policies to manage the challenges of an ageing population. [May 2024, Paper 2, Q1(b)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine reason why ageing policies differ between countries (for example, the speed and stage of ageing, the size of the working-age population, the cost and affordability of pensions and health care, cultural expectations of family care, political priorities or attitudes to immigration) and a second mark for developing how that reason leads to a different policy choice (for example, a country ageing rapidly with a shrinking workforce may raise the pension age or encourage immigration, while a country where families traditionally care for elders may rely less on state care homes). The two reasons must be different; do not award the second reason if it repeats the first in different words."
+    },
+    {
+      question: "Explain two ways of managing the economic problems linked to an ageing society. [May 2023, Paper 2, Q1(b)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine management strategy (for example, raising the retirement or pension age, encouraging immigration of working-age people, pro-natalist incentives, private pension schemes, increasing the participation of women and older people in the workforce, or automation) and a second mark for explaining how it reduces an economic problem of ageing (for example, more workers paying taxes to fund pensions and health care, or a lower dependency ratio)."
+    },
+    {
+      question: "\u201cPolicies to manage natural population change are more successful than policies to manage climate change.\u201d To what extent do you agree with this statement? [May 2023, Paper 2, Q5]",
+      marks: 10,
+      markScheme: "A strong response evaluates named population policies (for example, China\u2019s one-child and later policies, Singapore\u2019s or France\u2019s pro-natalist policies, Thailand\u2019s family planning campaign) and named climate policies (for example, the Paris Agreement, carbon taxes, emissions trading, national renewable energy targets), judging their success against their aims. It recognises that population policies are national and can show results within a generation, while climate change needs global cooperation and its results are harder to measure; it may also note that some population policies had unintended consequences. It reaches a justified conclusion about which type of policy has been more successful. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'Explain the difference between a pro-natalist and an anti-natalist policy.',

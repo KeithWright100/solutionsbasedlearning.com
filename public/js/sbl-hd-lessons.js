@@ -146,6 +146,13 @@ window.SBL_LESSONS['HD-t1-l3-the-importance'] = {
     'I can explain how micro-finance schemes, such as the Grameen Bank and Kiva, support human development.',
     'I can explain how Fairtrade supports human development.'
   ],
+  ibQuestions: [
+    {
+      question: "Explain how microfinance organisations and alternative trading networks can help communities to develop. [May 2021, Paper 3, Q1(a)]",
+      marks: 12,
+      markScheme: "A strong response explains how microfinance (small loans and savings, often to women, such as Grameen Bank or Kiva) and alternative trading networks (such as Fairtrade) increase incomes, empower marginalised groups and support community investment, with named examples. It recognises limitations such as debt, high interest rates and the small scale of change. Mark holistically out of 12: reward detailed, accurate knowledge, clear analysis linked to the question and well-chosen named examples."
+    }
+  ],
   readinessQuestions: [
     'What is the key difference between an ordinary entrepreneur and a social entrepreneur?',
     'What is micro-finance, and how does it aim to support development?',
@@ -274,6 +281,13 @@ window.SBL_LESSONS['HD-t2-l2-the-effects-of'] = {
     'I can describe how glocalisation can be seen as an example of cultural imperialism.',
     'I can identify specific cultural traits and compare these with those traits associated with a global culture.',
     'I can describe how Dubai is an example where the homogenisation of landscape has occurred, especially in the built environment.'
+  ],
+  ibQuestions: [
+    {
+      question: "\u201cCultural changes caused by globalisation have affected urban and rural places equally.\u201d Discuss this statement. [May 2021, Paper 3, Q2(b)]",
+      marks: 16,
+      markScheme: "A strong response discusses cultural changes (diffusion of global brands, media, language and diet, cultural hybridity, loss of traditions) and compares urban places (connected, multicultural, diaspora communities) with rural places (more isolated, but reached by the internet, migration and tourism), considering resistance and change over time, and reaches a justified conclusion. Mark holistically out of 16: reward a balanced, critical discussion of different perspectives, detailed named examples and a well-supported conclusion."
+    }
   ],
   readinessQuestions: [
     'How do cultural traits diffuse between places?',

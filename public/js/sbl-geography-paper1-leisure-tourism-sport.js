@@ -80,3 +80,141 @@ window.SBL_REVISION_TOPICS = [
     ]
   }
 ];
+
+/* ------------------------------------------------------------------
+   Added Oct 2026: May 2024, May 2023 and May 2021 sessions.
+   Same copyright rules as above: every task description and mark
+   scheme below is ORIGINAL SBL wording written from general subject
+   knowledge. Nothing is copied from the question papers, resource
+   booklets or official markschemes; resource-based parts tell the
+   student to read their own authorised booklet.
+   ------------------------------------------------------------------ */
+/* newest sessions first, then the earlier session(s) above */
+window.SBL_REVISION_TOPICS = [
+  {
+    topic: "May 2024 \u2014 Question 9 \u2014 Option E: Leisure, tourism and sport (10 marks)",
+    questions: [
+      {
+        label: "May 2024 P1 \u2014 Question 9(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 9(a) \u2014 Estimate (1+1 marks). Use the town map in your resource booklet. Estimate the straight-line distance between the two places named on your paper, and state one recreational activity that could take place at the location named.",
+        markScheme: "Award one mark for each specific, plausible answer from the student\u2019s own map. This system does not hold the map."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 9(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 9(b) \u2014 Outline (2 marks). Using the map, outline one reason for the location of the leisure complex named on your paper.",
+        markScheme: "Award one mark for a genuine locational factor (for example, flat land, space for large facilities, road access and parking, closeness to the population it serves, or cheaper land at the edge of the town) and a second mark for development using map evidence."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 9(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 9(c) \u2014 Explain (3+3 marks). Explain two management strategies that can increase site resilience in urban tourist hotspots.",
+        markScheme: "Up to three marks for each strategy: one mark for identifying a genuine strategy (for example, timed entry or visitor caps, tourist taxes, banning large cruise ships, limiting short-term rentals, pedestrianisation, spreading visitors to other areas or seasons), one for explaining how it reduces pressure or increases resilience, and one for further development or a named example (for example, Venice, Barcelona or Amsterdam)."
+      }
+    ]
+  },
+  {
+    topic: "May 2024 \u2014 Question 10 \u2014 Option E: Leisure, tourism and sport (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2024 P1 \u2014 Question 10(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 10(a) \u2014 To what extent (10 marks). To what extent does personal affluence affect people\u2019s participation in leisure activities?",
+        markScheme: "A strong response explains how affluence affects participation (cost of travel, equipment and club fees, paid holidays, high-cost sports such as golf or skiing) and compares it with other factors such as gender, age and stage in life, culture and religion, place of residence, time available and personality (Plog). It recognises that low-cost leisure (football, running, parks) is widely available, that affluence affects the type rather than the amount of leisure, and reaches a justified conclusion. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 10(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 10(b) \u2014 Examine (10 marks). Examine the environmental and economic impacts of a festival held in a rural location.",
+        markScheme: "A strong response uses a named rural festival (for example, Glastonbury) and examines economic impacts (spending in the local economy, jobs, charity donations, rising prices, costs of policing and clean-up) and environmental impacts (litter, damage to farmland, pollution of streams, transport emissions, and sustainability measures). It considers different stakeholders and timescales (during the festival and over the year), and judges whether the impacts are mainly positive or negative. " + GEOG_MARKBAND_10
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 9 \u2014 Option E: Leisure, tourism and sport (10 marks)",
+    questions: [
+      {
+        label: "May 2023 P1 \u2014 Question 9(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 9(a) \u2014 State (1+1 marks). Use the graph of visitor arrivals from two countries on your paper. State the change and the period asked for in parts (a)(i) and (a)(ii).",
+        markScheme: "Award one mark for each specific, plausible answer read from the student\u2019s own graph. This system does not hold the graph."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 9(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 9(b) \u2014 Outline (2 marks). Outline one reason why the growth of a diaspora can encourage tourism to a region.",
+        markScheme: "Award one mark for a genuine reason (for example, visiting friends and relatives, heritage or \u201croots\u201d tourism, diaspora networks spreading information and recommendations, or new flight routes serving diaspora communities) and a second mark for development."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 9(c)(i) \u2014 3 marks",
+        marks: 3,
+        question: "Question 9(c)(i) \u2014 Explain (3 marks). Explain the effects of social media on tourist visitor numbers over time.",
+        markScheme: "Up to three marks: one mark for a genuine effect (for example, photos and influencers creating new \u201cInstagram\u201d hotspots and rapid growth in visitors), one mark for explanation of how social media causes it (sharing, reviews, viral content, cheap online booking), and one mark for development over time (for example, a sudden surge followed by overcrowding, or negative reviews causing decline)."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 9(c)(ii) \u2014 3 marks",
+        marks: 3,
+        question: "Question 9(c)(ii) \u2014 Explain (3 marks). Explain the effects on visitor numbers over time when a destination\u2019s carrying capacity is exceeded.",
+        markScheme: "Up to three marks: one mark for a genuine effect (for example, overcrowding, environmental damage or local resentment), one mark for explaining how this changes the destination\u2019s appeal (perceptual carrying capacity), and one mark for development over time, ideally linked to Butler\u2019s model (stagnation and decline, or management that leads to rejuvenation)."
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 10 \u2014 Option E: Leisure, tourism and sport (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2023 P1 \u2014 Question 10(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 10(a) \u2014 Examine (10 marks). Examine the long-term benefits and costs for a country of hosting an international sporting event.",
+        markScheme: "A strong response uses named events (for example, London 2012, Rio 2016, Qatar 2022) and examines long-term benefits (regeneration, transport, sports participation, global image, tourism) and costs (debt, unused venues, displacement, environmental damage). It distinguishes long-term from short-term effects, considers different stakeholders and places, and reaches a justified judgement. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 10(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 10(b) \u2014 Examine (10 marks). Examine the reasons for variations in the spheres of influence of different kinds of leisure facility.",
+        markScheme: "A strong response explains threshold, range and sphere of influence and the leisure hierarchy, comparing local facilities (parks, gyms) with regional and national ones (stadiums, theme parks, national parks). It explains variations using factors such as uniqueness, size, cost, accessibility and transport, competition and marketing, and recognises that the internet and global media can extend spheres of influence. " + GEOG_MARKBAND_10
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 9 \u2014 Option E: Leisure, tourism and sport (10 marks)",
+    questions: [
+      {
+        label: "May 2021 P1 \u2014 Question 9(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 9(a) \u2014 Estimate (1+1 marks). Use the graph of the costs of hosting the Olympics on your paper. Estimate the values asked for in parts (a)(i) and (a)(ii).",
+        markScheme: "Award one mark for each specific, plausible value read or calculated from the student\u2019s own graph. This system does not hold the graph."
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 9(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 9(b) \u2014 Outline (2 marks). Outline one possible reason why some higher-income countries have hosted the Olympics several times.",
+        markScheme: "Award one mark for a genuine reason (for example, existing venues, infrastructure and expertise, the wealth to fund the Games, political influence in the IOC, or using the Games for regeneration and soft power) and a second mark for development."
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 9(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 9(c) \u2014 Explain (3+3 marks). Explain two ways in which participation in international sporting events has become more diverse over recent decades.",
+        markScheme: "Up to three marks for each way: one mark for a genuine way (for example, more women competing, the growth of the Paralympics, more countries taking part after decolonisation, new sports added, more athletes from the Global South), one for explanation of why, and one for development or an example."
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 10 \u2014 Option E: Leisure, tourism and sport (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2021 P1 \u2014 Question 10(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 10(a) \u2014 Examine (10 marks). Examine the contribution that ecotourism can make to the sustainability of tourism at local and global scales.",
+        markScheme: "A strong response uses a named example such as gorilla tourism in Rwanda and examines local contributions (conservation funding, revenue sharing, jobs, education) and global contributions (protecting biodiversity, raising awareness), while recognising limits (long-haul flight emissions, small scale compared with mass tourism, \u201cgreenwashing\u201d, benefits not always reaching the poorest). It reaches a judgement at both scales. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 10(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 10(b) \u2014 Examine (10 marks). Examine the geographic relationship between the hierarchy of teams and the distribution of supporters for one named national sports league.",
+        markScheme: "A strong response uses a named league (for example, the Premier League) and explains how the most successful clubs have the largest, most dispersed (national and global) supporter bases, while smaller clubs depend on local supporters. It uses ideas of threshold, sphere of influence and media coverage, notes the effects of promotion and relegation and history, and recognises exceptions. " + GEOG_MARKBAND_10
+      }
+    ]
+  }
+].concat((window.SBL_REVISION_TOPICS || []));

@@ -256,6 +256,16 @@ window.SBL_LESSONS.RC04 = {
       question: 'Explain two reasons why diets are changing in middle-income countries.',
       marks: 4,
       markScheme: 'Award [1] for identifying and describing a valid reason, with [1] for explanatory development.\n\nFor example: Rising incomes in middle-income countries have given more people sufficient disposable income [1] to incorporate more meat into their diets at the expense of vegetables and grains [1].\n\nOther possible reasons include:\n- Health awareness\n- Advertising, especially by multinational food firms\n- Environmental awareness\n- Transition to global food systems\n- Rapid urbanization and shift to energy-dense diets\n- Real term fall in the cost of large number of foodstuffs\n- Globalization/Westernization/Cultural homogenization/Role of TNCs'
+    },
+    {
+      question: "Suggest two ways in which economic development can increase the availability of food. [May 2024, Paper 2, Q3(b)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine way that development can raise food availability (for example, investment in irrigation, fertilisers and mechanisation, research into high-yielding or drought-resistant crops, better roads, storage and refrigeration, or greater ability to import food) and a second mark for developing how this increases the amount of food available (for example, higher yields per hectare, less post-harvest loss, or access to world markets when harvests fail)."
+    },
+    {
+      question: "Explain how the growth of a country\u2019s middle class can increase pressure on land use. [May 2021, Paper 2, Q3(b)(ii)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine land-use change (for example, more housing and suburban sprawl, new roads and airports, more cropland or pasture for meat and animal feed, or land acquisitions abroad) and a second mark for explaining the pressure it puts on another land use, such as forests, farmland or indigenous land."
     }
   ],
   readinessQuestions: [
@@ -314,6 +324,21 @@ window.SBL_LESSONS.RC05 = {
       question: 'Suggest two ways in which declining water availability might threaten a country\u2019s energy security.',
       marks: 4,
       markScheme: 'Award [1] identifying and describing a valid way, with [1] for explanatory development.\n\nPossible ways include:\n- less water for HEP production\n- need to safeguard supplies of safe water might lead to fracking being banned\n- falling availability of potable water may lead to increased need for desalinization plants (with their heavy energy usage)\n- lack of water needed for steam generation or cooling in thermal/nuclear power plants.\n- lack of water for geothermal energy production – water used in drilling/water used in cooling/water required in enhanced geothermal systems that rely on artificially created reservoirs in rock formations that do not have enough natural fluid\n- lack of water may lead to a decline in the production of Biofuels.\n\nFor example: Declining water availability might reduce the input of water into reservoirs in hydro-electric power generation schemes [1], so a country that is heavily dependent on hydro-power may be unable to generate as much electricity as previously and may be unable to meet demand [1].'
+    },
+    {
+      question: "For one named country, explain two factors that reduce its energy security. [May 2024, Paper 2, Q3(c)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine factor that reduces energy security in the named country (for example, dependence on imported fossil fuels, reliance on one supplier, political instability or conflict with a supplier, declining domestic reserves, ageing infrastructure, or climate effects on hydropower) and a second mark for explaining how it affects that country\u2019s energy security, with specific reference to the named country. A real, named country is needed for full marks; if no country is named, award a maximum of two marks."
+    },
+    {
+      question: "Explain one reason why oil consumption per person has fallen in some high-income countries over the last 20 years. [May 2023, Paper 2, Q3(b)(i)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine reason (for example, a switch to renewable energy or natural gas, more fuel-efficient and electric vehicles, carbon taxes and climate policies, de-industrialisation, or better energy efficiency in homes) and a second mark for explaining how it reduces oil use per person."
+    },
+    {
+      question: "Explain one reason why oil consumption per person has risen in some middle-income countries over the last 20 years. [May 2023, Paper 2, Q3(b)(ii)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine reason (for example, a growing middle class buying cars, industrialisation, rising demand for plastics and air travel, or fuel subsidies) and a second mark for explaining how it increases oil use per person."
     }
   ],
   readinessQuestions: [
@@ -413,6 +438,13 @@ window.SBL_LESSONS.RC07 = {
     'I can explain how adapting to climate change can create unintended negative effects.',
     'I can explain why climate change affects the nexus in contrasting ways in different places.',
     'I can use at least two named examples to support my explanations.'
+  ],
+  ibQuestions: [
+    {
+      question: "\u201cClimate change is the most important factor affecting the water\u2013food\u2013energy nexus.\u201d To what extent do you agree with this statement? [May 2023, Paper 2, Q6]",
+      marks: 10,
+      markScheme: "A strong response explains the nexus and how climate change affects it (for example, drought reducing water for irrigation and hydropower, higher temperatures increasing water demand) and compares climate change with other factors such as population growth, rising affluence and changing diets, urbanisation, technology, and governance and conflict. It uses examples such as Nepal or Israel, considers different scales and places, and reaches a justified conclusion about the relative importance of climate change. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'Give one way climate change can worsen desertification and pressure the nexus.',
@@ -555,6 +587,13 @@ window.SBL_LESSONS.RC10 = {
     'I can explain barriers or challenges to effective recycling.',
     'I can interpret graphs or maps showing international waste flows.'
   ],
+  ibQuestions: [
+    {
+      question: "Explain one environmental impact and one economic impact of international flows of waste on the countries that receive them. [May 2023, Paper 2, Q3(c)]",
+      marks: 4,
+      markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine impact of the stated type (environmental: for example, pollution of land, water or air from dumping or open burning of plastic and e-waste; economic: for example, jobs and income from recycling and recovering metals, or costs of clean-up and health care) and a second mark for explaining it, ideally with an example such as e-waste in Ghana or plastic waste in Malaysia."
+    }
+  ],
   readinessQuestions: [
     'What is e-waste, and why is it a growing global concern?',
     'Give one reason why waste is often exported from high-income to lower-income countries.',
@@ -646,6 +685,13 @@ window.SBL_LESSONS.RC12 = {
     'I can define resource stewardship as a balanced view.',
     'I can compare pessimistic and optimistic perspectives.',
     'I can form and justify a reasoned judgement using evidence.'
+  ],
+  ibQuestions: [
+    {
+      question: "Describe what is meant by resource stewardship. [May 2024, Paper 2, Q3(a)]",
+      marks: 2,
+      markScheme: "Award one mark for the idea of careful, responsible management or use of resources, and a second mark for development such as doing so sustainably so that resources are conserved for future generations, or through strategies such as reducing, reusing and recycling, the circular economy or efficient technology."
+    }
   ],
   readinessQuestions: [
     'Explain Malthus\u2019s original argument about population growth and food supply.',

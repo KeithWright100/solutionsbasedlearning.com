@@ -111,8 +111,8 @@
    and combined Icelandair+WOW air destination-count figures could NOT
    be confirmed from public sources and are flagged as approximate
    rather than guessed — flag this to the teacher, and note the video
-   itself ("Iceland's tourism revolution") was not watchable by Claude,
-   so answers to the specific worksheet questions (A-H) are Claude's
+   itself ("Iceland's tourism revolution") was not watchable by the author,
+   so answers to the specific worksheet questions (A-H) are the author's
    best-evidenced reconstruction, not a transcript of the video.
    LT10 uses the teacher's stakeholder definition (verbatim); the
    "general costs and benefits of TNCs" content (low-cost airlines
@@ -120,7 +120,7 @@
    the costs/benefits for different stakeholders) was independently
    researched since the teacher's material was a single instruction
    line rather than source content — flag this to the teacher. The
-   10-mark practice question in LT10 is Claude's own IB-style practice
+   10-mark practice question in LT10 is the author's own IB-style practice
    question (clearly labelled as practice, not a transcribed past
    paper question), since no specific past paper question was supplied.
    LT11 (built from the teacher's "12" numbered content block, which
@@ -168,7 +168,7 @@
    framework (Social/Economic/Environmental/Political costs,
    verbatim structure); the actual costs and benefits populated into
    that table were independently researched and verified, since the
-   teacher’s material referenced a Firefly resource Claude cannot
+   teacher’s material referenced a Firefly resource the author cannot
    access — flag this to the teacher to check against their own
    Firefly source. IMPORTANT MAPPING NOTE: the teacher’s final
    numbered content block, “17: London Olympics 2012” (political
@@ -204,7 +204,7 @@
    (“Gishwati-Mukura National Park/UNESCO Biosphere Reserve”,
    “Mountain gorilla conservation”, “Investment in ecotourism lodges”,
    “Protection and expansion of national parks”) with no source
-   article linked (Claude cannot access the teacher’s Firefly-hosted
+   article linked (the author cannot access the teacher’s Firefly-hosted
    RDB article) — the table has been completed using independently
    researched, verified facts (Gishwati-Mukura’s October 2020 UNESCO
    Biosphere Reserve designation; Rwanda’s 10% tourism revenue-sharing
@@ -366,6 +366,13 @@ window.SBL_LESSONS.LT03 = {
     'I can describe and explain how place of residence affects participation in sport and tourism.',
     'I can explain how the "power" of a passport affects freedom of movement and therefore tourism participation.'
   ],
+  ibQuestions: [
+    {
+      question: "To what extent does personal affluence affect people\u2019s participation in leisure activities? [May 2024, Paper 1, Q10(a)]",
+      marks: 10,
+      markScheme: "A strong response explains how affluence affects participation (cost of travel, equipment and club fees, paid holidays, high-cost sports such as golf or skiing) and compares it with other factors such as gender, age and stage in life, culture and religion, place of residence, time available and personality (Plog). It recognises that low-cost leisure (football, running, parks) is widely available, that affluence affects the type rather than the amount of leisure, and reaches a justified conclusion. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'Name the five factors that affect personal participation in sport and tourism covered in this lesson.',
     'Explain how cost/affluence acts as a barrier to youth participation in sport.',
@@ -460,6 +467,13 @@ window.SBL_LESSONS.LT05 = {
     'I can explain the factors that influence the number and quality of leisure, tourism and sporting facilities in a settlement, including economic development, accessibility, history/culture, climate and national events.',
     'I can apply these concepts to a specific urban and rural location.'
   ],
+  ibQuestions: [
+    {
+      question: "Examine the reasons for variations in the spheres of influence of different kinds of leisure facility. [May 2023, Paper 1, Q10(b)]",
+      marks: 10,
+      markScheme: "A strong response explains threshold, range and sphere of influence and the leisure hierarchy, comparing local facilities (parks, gyms) with regional and national ones (stadiums, theme parks, national parks). It explains variations using factors such as uniqueness, size, cost, accessibility and transport, competition and marketing, and recognises that the internet and global media can extend spheres of influence. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'Define sphere of influence and population threshold.',
     'Explain the relationship between population threshold and sphere of influence: does a smaller threshold mean a smaller or larger sphere of influence?',
@@ -505,6 +519,13 @@ window.SBL_LESSONS.LT06 = {
     'I can describe the location factors behind a specific club, using Nottingham Forest as an example.',
     'I can explain how a club’s supporter base can be distributed beyond its immediate local area.',
     'I can apply a range of geographical skills to provide a case study of a chosen Premier League team.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine the geographic relationship between the hierarchy of teams and the distribution of supporters for one named national sports league. [May 2021, Paper 1, Q10(b)]",
+      marks: 10,
+      markScheme: "A strong response uses a named league (for example, the Premier League) and explains how the most successful clubs have the largest, most dispersed (national and global) supporter bases, while smaller clubs depend on local supporters. It uses ideas of threshold, sphere of influence and media coverage, notes the effects of promotion and relegation and history, and recognises exceptions. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'How many clubs compete in the Premier League, and how many league games does each play per season?',
@@ -599,6 +620,13 @@ window.SBL_LESSONS.LT08 = {
     'I can identify a range of disadvantages that the festival brings to the local area.',
     'I can evaluate the extent to which the advantages outweigh the disadvantages, from the perspective of different stakeholders.',
     'I can describe the scale of the festival using statistics about its facilities and infrastructure.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine the environmental and economic impacts of a festival held in a rural location. [May 2024, Paper 1, Q10(b)]",
+      marks: 10,
+      markScheme: "A strong response uses a named rural festival (for example, Glastonbury) and examines economic impacts (spending in the local economy, jobs, charity donations, rising prices, costs of policing and clean-up) and environmental impacts (litter, damage to farmland, pollution of streams, transport emissions, and sustainability measures). It considers different stakeholders and timescales (during the festival and over the year), and judges whether the impacts are mainly positive or negative. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'What is the name of the farm where Glastonbury Festival is held, and in which village/parish is it located?',
@@ -787,6 +815,18 @@ window.SBL_LESSONS.LT12 = {
     'I can form a balanced conclusion about whether hosting the games is a good thing for a host city.',
     'I can identify costs and benefits of hosting events from different sources/perspectives.'
   ],
+  ibQuestions: [
+    {
+      question: "Examine the long-term benefits and costs for a country of hosting an international sporting event. [May 2023, Paper 1, Q10(a)]",
+      marks: 10,
+      markScheme: "A strong response uses named events (for example, London 2012, Rio 2016, Qatar 2022) and examines long-term benefits (regeneration, transport, sports participation, global image, tourism) and costs (debt, unused venues, displacement, environmental damage). It distinguishes long-term from short-term effects, considers different stakeholders and places, and reaches a justified judgement. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    },
+    {
+      question: "Outline one possible reason why some higher-income countries have hosted the Olympics several times. [May 2021, Paper 1, Q9(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine reason (for example, existing venues, infrastructure and expertise, the wealth to fund the Games, political influence in the IOC, or using the Games for regeneration and soft power) and a second mark for development."
+    }
+  ],
   readinessQuestions: [
     'Give one political reason a country might want to host the Olympics.',
     'Give one cultural reason a country might want to host the Olympics.',
@@ -880,6 +920,18 @@ window.SBL_LESSONS.LT14 = {
     'I can describe and explain negative environmental consequences of tourism on rural and urban hotspots.',
     'I can evaluate the impacts of tourism on Iceland and suggest ways it could be managed more sustainably.'
   ],
+  ibQuestions: [
+    {
+      question: "Explain two management strategies that can increase site resilience in urban tourist hotspots. [May 2024, Paper 1, Q9(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each strategy: one mark for identifying a genuine strategy (for example, timed entry or visitor caps, tourist taxes, banning large cruise ships, limiting short-term rentals, pedestrianisation, spreading visitors to other areas or seasons), one for explaining how it reduces pressure or increases resilience, and one for further development or a named example (for example, Venice, Barcelona or Amsterdam)."
+    },
+    {
+      question: "Explain the effects on visitor numbers over time when a destination\u2019s carrying capacity is exceeded. [May 2023, Paper 1, Q9(c)(ii)]",
+      marks: 3,
+      markScheme: "Up to three marks: one mark for a genuine effect (for example, overcrowding, environmental damage or local resentment), one mark for explaining how this changes the destination\u2019s appeal (perceptual carrying capacity), and one mark for development over time, ideally linked to Butler\u2019s model (stagnation and decline, or management that leads to rejuvenation)."
+    }
+  ],
   readinessQuestions: [
     'Define physical carrying capacity, ecological carrying capacity and perceptual carrying capacity.',
     'Give one reason the tourism industry is considered particularly unsustainable.',
@@ -925,6 +977,13 @@ window.SBL_LESSONS.LT15 = {
     'I can explain Rwanda’s mountain gorilla tourism revenue-sharing scheme and its impact on conservation.',
     'I can explain Akagera National Park’s wildlife rewilding programme.',
     'I can evaluate the extent to which tourism in Rwanda contributes to sustainability on both local and global scales.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine the contribution that ecotourism can make to the sustainability of tourism at local and global scales. [May 2021, Paper 1, Q10(a)]",
+      marks: 10,
+      markScheme: "A strong response uses a named example such as gorilla tourism in Rwanda and examines local contributions (conservation funding, revenue sharing, jobs, education) and global contributions (protecting biodiversity, raising awareness), while recognising limits (long-haul flight emissions, small scale compared with mass tourism, \u201cgreenwashing\u201d, benefits not always reaching the poorest). It reaches a judgement at both scales. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'Define sustainable tourism and ecotourism, and give one difference between them.',
@@ -972,6 +1031,18 @@ window.SBL_LESSONS.LT16 = {
     'I can explain how diaspora growth is likely to influence the future of tourism.',
     'I can evaluate the impact of differing factors on the future development of tourism.'
   ],
+  ibQuestions: [
+    {
+      question: "Outline one reason why the growth of a diaspora can encourage tourism to a region. [May 2023, Paper 1, Q9(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine reason (for example, visiting friends and relatives, heritage or \u201croots\u201d tourism, diaspora networks spreading information and recommendations, or new flight routes serving diaspora communities) and a second mark for development."
+    },
+    {
+      question: "Explain the effects of social media on tourist visitor numbers over time. [May 2023, Paper 1, Q9(c)(i)]",
+      marks: 3,
+      markScheme: "Up to three marks: one mark for a genuine effect (for example, photos and influencers creating new \u201cInstagram\u201d hotspots and rapid growth in visitors), one mark for explanation of how social media causes it (sharing, reviews, viral content, cheap online booking), and one mark for development over time (for example, a sudden surge followed by overcrowding, or negative reviews causing decline)."
+    }
+  ],
   readinessQuestions: [
     'Give two notable exceptions to the long-term growth trend in international tourism, and their causes.',
     'Roughly how many international tourist arrivals were recorded globally in 2019?',
@@ -1017,6 +1088,13 @@ window.SBL_LESSONS.LT17 = {
     'I can outline the changing gender role in international sport and how greater inclusion is being attained.',
     'I can describe barriers to gender inclusion in sport, using the Caster Semenya case study.',
     'I can evaluate a specific sport-governing-body policy (World Athletics’ DSD regulations) affecting gender inclusion.'
+  ],
+  ibQuestions: [
+    {
+      question: "Explain two ways in which participation in international sporting events has become more diverse over recent decades. [May 2021, Paper 1, Q9(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each way: one mark for a genuine way (for example, more women competing, the growth of the Paralympics, more countries taking part after decolonisation, new sports added, more athletes from the Global South), one for explanation of why, and one for development or an example."
+    }
   ],
   readinessQuestions: [
     'Define sports diplomacy.',

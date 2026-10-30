@@ -111,6 +111,13 @@ window.SBL_LESSONS['FH-t1-l2-the-nutrition'] = {
     'I can explain the relationship displayed on the graph.',
     'I can interpret and explain the stages of the nutrition transition.'
   ],
+  ibQuestions: [
+    {
+      question: "Examine how spatial variations in food consumption can affect life expectancy. [May 2021, Paper 1, Q12(a)]",
+      marks: 10,
+      markScheme: "A strong response explains how under-consumption (hunger, stunting, micronutrient deficiency) lowers life expectancy in some regions, while over-consumption and processed diets (obesity, diabetes, heart disease) affect it in others, using the nutrition transition. It recognises that other factors (health care, water and sanitation, conflict, income) also affect life expectancy and that variations exist within countries as well as between them. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'What is the nutrition transition, in your own words?',
     'What characterises Pattern 1 (hunter-gatherers) of the nutrition transition?',
@@ -202,6 +209,11 @@ window.SBL_LESSONS['FH-t1-l4-the'] = {
       question: 'Suggest three possible reasons why the health of populations in Asia might deteriorate as a result of the rising affluence shown in the diagram.',
       marks: 6,
       markScheme: 'In each case, award [1] for a valid reason, and [1] for an explanation of the link with the rising affluence shown.\n\nFor example: Rising affluence in Asia may lead to a greater incidence of obesity [1] because more people can afford to consume unhealthy, high-calorie fast food [1].\n\nOther changes for Asia have included:\n- diseases of affluence, eg increased type 2 diabetes linked with sugar; increased heart disease linked with diet; incidence of cancer if more people can afford cigarettes\n- greater proportion of people living in urban areas with poor air quality as the country modernises; resulting in asthma/respiratory illness\n- rising affluence is usually linked with industrialization in emerging economies, such as China and Bangladesh; which may result in industrial accidents and injuries\n- diseases may spread more rapidly in urban centres / megacities in emerging economies than they did in isolated rural areas in the past when distance between villages acted as a barrier to transmission.'
+    },
+    {
+      question: "To what extent are diseases linked to malnutrition? [May 2023, Paper 1, Q12(a)]",
+      marks: 10,
+      markScheme: "A strong response explains how under-nutrition is linked to disease (stunting, wasting, weakened immunity making infections such as diarrhoea, measles and malaria more deadly, micronutrient deficiencies) and how over-nutrition is linked to non-communicable disease (obesity, type 2 diabetes, heart disease). It also considers diseases with other main causes (water-borne and vector-borne disease, genetics, ageing, lifestyle factors such as smoking), uses the nutrition and epidemiological transitions, and reaches a justified conclusion. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
     }
   ],
   readinessQuestions: [
@@ -250,6 +262,13 @@ window.SBL_LESSONS.FH06 = {
     'I can apply the cornflakes example to explain energy inputs and outputs.',
     'I can link this lesson to the water-food-energy nexus.',
     'I can compare energy efficiency and water footprints between places.'
+  ],
+  ibQuestions: [
+    {
+      question: "Outline one way in which energy inputs change as farming becomes mechanised. [May 2023, Paper 1, Q11(b)]",
+      marks: 2,
+      markScheme: "Award one mark for the idea that fossil-fuel energy inputs increase (fuel for machinery, energy to make machines, fertilisers and pesticides) and a second mark for development, such as human and animal energy inputs falling, or energy efficiency (output compared with input) usually falling."
+    }
   ],
   readinessQuestions: [
     'What are the four components of a systems approach?',
@@ -341,6 +360,13 @@ window.SBL_LESSONS.FH08 = {
     'I can explain advantages of adopting agricultural innovations.',
     'I can explain possible drawbacks for farmers.',
     'I can compare innovation diffusion to disease diffusion.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine how geographic factors affect the rate of diffusion of agricultural innovations. [May 2023, Paper 1, Q12(b)]",
+      marks: 10,
+      markScheme: "A strong response explains expansion, relocation and hierarchical diffusion and how physical factors (relief, climate, soil, distance), economic factors (cost of seed, fertiliser and machinery, access to credit and markets) and social and political factors (education, extension services, government policy, communication networks such as mobile phones) speed up or slow down adoption. It uses named examples such as the Green Revolution in India or the spread of hybrid maize in Africa. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
   ],
   readinessQuestions: [
     'What is meant by the diffusion of agricultural innovations?',
@@ -435,6 +461,18 @@ window.SBL_LESSONS.FH10 = {
     'I can explain demographic and socio-economic impacts of cholera.',
     'I can evaluate intervention strategies used to combat cholera.',
     'I can compare cholera and malaria as contrasting disease types.'
+  ],
+  ibQuestions: [
+    {
+      question: "Examine the importance of economic factors in the incidence of water-borne disease. [May 2024, Paper 1, Q12(a)]",
+      marks: 10,
+      markScheme: "A strong response explains how poverty affects water-borne disease (no money for clean water, sanitation, treatment or health care; crowded informal settlements; weak public investment) and compares economic factors with physical factors (floods, warm temperatures, contaminated rivers and lakes) and political or social factors (conflict, displacement, governance, hygiene education). It uses a named example such as cholera in the DRC or Haiti, and reaches a justified conclusion about the relative importance of economic factors. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    },
+    {
+      question: "For one named water-borne disease, explain one physical factor and one human factor that contribute to its diffusion through an area. [May 2021, Paper 1, Q11(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each factor: one mark for a genuine factor (physical: flooding, rivers carrying contamination downstream, warm temperatures; human: lack of sanitation, use of untreated water, crowded settlements, movement of people and trade), one for explaining how it spreads the disease, and one for development linked to the named disease (for example, cholera)."
+    }
   ],
   readinessQuestions: [
     'What is a water-borne disease, and how is cholera typically transmitted?',
@@ -1071,6 +1109,18 @@ window.SBL_LESSONS.FH14 = {
     "I can explain how access to international aid can affect the severity of famine.",
     "I can use the 2008 global food price spike as an example of these factors interacting."
   ],
+  "ibQuestions": [
+    {
+      question: "Outline one political factor that can lead to high levels of food insecurity. [May 2024, Paper 1, Q11(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine political factor (for example, conflict and war, corruption, poor governance, blockades or sanctions, land-ownership policies, or trade restrictions) and a second mark for explaining how it reduces the availability of or access to food, ideally with an example such as Yemen."
+    },
+    {
+      question: "Explain two disadvantages of relying on international aid to reduce the severity of famine. [May 2024, Paper 1, Q11(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each disadvantage: one mark for a genuine disadvantage (for example, dependency, undermining local farmers and markets, slow arrival, insufficient or unpredictable funding, aid diverted by armed groups or corrupt officials, access blocked by conflict, or tied aid serving donor interests), one for explanation, and one for further development or a named example."
+    }
+  ],
   "readinessQuestions": [
     "What is the difference between food insecurity and famine?",
     "Explain the difference between a Food Availability Deficit (FAD) and a Food Entitlement Deficit (FED), using one example of each.",
@@ -1629,6 +1679,13 @@ window.SBL_LESSONS.FH17 = {
     "I can explain the scale of global food waste and strategies to reduce it.",
     "I can assess the strengths and limitations of these solutions."
   ],
+  "ibQuestions": [
+    {
+      question: "Examine the reasons why food insecurity remains high in many places. [May 2021, Paper 1, Q12(b)]",
+      marks: 10,
+      markScheme: "A strong response examines physical reasons (drought, floods, climate change, pests) and human reasons (poverty, conflict, poor governance, food prices, waste, gender inequality, population growth), distinguishing food availability from food entitlement. It uses named places such as Yemen or the Sahel and reaches a judgement about the most important reasons. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    }
+  ],
   "readinessQuestions": [
     "Define food insecurity.",
     "Explain one short-term and one long-term solution to food insecurity.",
@@ -1819,6 +1876,23 @@ window.SBL_LESSONS.FH18 = {
     "I can explain the advantages and disadvantages of genetically modified organisms (GMOs).",
     "I can explain how satellite technology is used to improve agricultural production.",
     "I can assess which contemporary approaches are most appropriate in different contexts."
+  ],
+  "ibQuestions": [
+    {
+      question: "To what extent do genetically modified organisms (GMOs) and vertical farming improve food security in different places? [May 2024, Paper 1, Q12(b)]",
+      marks: 10,
+      markScheme: "A strong response explains how GMOs (for example, Bt cotton, drought-tolerant or nutrient-enriched crops such as Golden Rice) and vertical farming (high yields per area, little water, near cities) can raise food availability, and evaluates their limitations (cost, corporate control of seed, public resistance, high energy use, limited range of crops). It considers which places benefit (wealthy, land-scarce cities such as Singapore versus rural smallholders in low-income countries) and whether food insecurity is mainly about access rather than production, reaching a justified conclusion. Mark holistically out of 10: reward accurate knowledge applied directly to the question, named examples, a developed and balanced argument, and a supported conclusion."
+    },
+    {
+      question: "Explain how food insecurity could be reduced by using (i) in vitro meat and (ii) vertical farming. [May 2023, Paper 1, Q11(c)]",
+      marks: 6,
+      markScheme: "Up to three marks for each: one mark for how the method increases food availability or access, one for explanation, and one for development or a limitation that affects its impact. In vitro meat: protein produced with far less land, water and feed, and close to consumers. Vertical farming: very high yields per area, year-round production, little water, grown in cities so less transport. Credit recognising cost and energy limits."
+    },
+    {
+      question: "Outline one way in which genetically modified organisms (GMOs) could help increase food production from cultivated land. [May 2021, Paper 1, Q11(b)]",
+      marks: 2,
+      markScheme: "Award one mark for a genuine way (for example, pest-resistant, drought-tolerant or salt-tolerant crops, or crops with higher yields) and a second mark for explaining how it increases output from the same land."
+    }
   ],
   "readinessQuestions": [
     "Identify three contemporary approaches to food production covered in this lesson.",
