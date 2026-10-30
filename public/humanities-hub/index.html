@@ -326,7 +326,11 @@
       hero.style.alignItems = '';
     }
     fit();
+    window.sblFitRecent = fit;
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 120); });
+    /* re-fit whenever the welcome panel changes height (e.g. when the Game of the week card appears, or fonts finish loading) */
+    if (window.ResizeObserver) { var lastH = 0; new ResizeObserver(function () { var h = welcome.offsetHeight; if (Math.abs(h - lastH) > 1) { lastH = h; clearTimeout(rt); rt = setTimeout(fit, 30); } }).observe(welcome); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fit(); });
     /* the welcome panel grows a little once the game card and search chips render */
     setTimeout(fit, 400); setTimeout(fit, 1500);
 
@@ -347,6 +351,7 @@
       document.getElementById('gotwDesc').textContent = g.desc;
       document.getElementById('gotwMeta').innerHTML = '<span>' + esc(g.level) + '</span>' + (r.note ? '<span>' + esc(r.note) + '</span>' : '');
       card.hidden = false;
+      if (window.sblFitRecent) window.sblFitRecent();
     }
     fetch('/api/session?gameOfWeek=1', { credentials: 'same-origin' })
       .then(function (r) { return r.ok ? r.json() : {}; })
