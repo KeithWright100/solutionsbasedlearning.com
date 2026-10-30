@@ -38,9 +38,31 @@
       {
         "slug": "leisure-tourism-sport",
         "label": "Option E: Leisure, Tourism and Sport",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/geography/revision/guide/leisure-tourism-sport",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Changing leisure patterns",
+                "href": "/geography/revision/guide/leisure-tourism-sport/topic-1-changing-leisure-patterns"
+              },
+              {
+                "label": "Local and national scale",
+                "href": "/geography/revision/guide/leisure-tourism-sport/topic-2-tourism-and-sport-at-the-local-and-national-scale"
+              },
+              {
+                "label": "International scale",
+                "href": "/geography/revision/guide/leisure-tourism-sport/topic-3-tourism-and-sport-at-the-international-scale"
+              },
+              {
+                "label": "Managing for the future",
+                "href": "/geography/revision/guide/leisure-tourism-sport/topic-4-managing-tourism-and-sport-for-the-future"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "food-and-health",

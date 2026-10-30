@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
+window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
 window.SBL_LESSONS["IBGFW-T1"] = {
  "id": "IBGFW-T1",
  "topicNumber": 4,
@@ -641,6 +641,683 @@ window.SBL_LESSONS["IBGFW-T4"] = {
    "correct": 0,
    "explain": "Wetlands such as marshes act like a natural sponge, absorbing large volumes of water during periods of heavy rainfall and slowly releasing it over time, which reduces the magnitude and speed of flooding in downstream areas.",
    "tag": "Water management futures"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGLT-T1"] = {
+ "id": "IBGLT-T1",
+ "topicNumber": 5,
+ "topicTitle": "Option E: Leisure, Tourism and Sport (IB Geography Revision Guide)",
+ "title": "Changing leisure patterns",
+ "href": "/geography/revision/guide/leisure-tourism-sport/topic-1-changing-leisure-patterns",
+ "syllabusFocus": "IB Geography, Option E: Leisure, Tourism and Sport: Changing leisure patterns.",
+ "checklist": [
+  "I can define leisure, sport and tourism and explain the growth of leisure time",
+  "I can explain the link between economic development and leisure, using China and the USA",
+  "I can explain the factors affecting participation, including Plog’s model"
+ ],
+ "quiz": [
+  {
+   "q": "Leisure is best defined as:",
+   "options": [
+    "Any freely chosen activity or experience that takes place in non-work time",
+    "Any activity carried out only for payment",
+    "Only activities that take place at an organised sports club, excluding any freely chosen non-work activity",
+    "Travel away from home for at least one night"
+   ],
+   "correct": 0,
+   "explain": "Leisure is any freely chosen activity or experience that takes place in non-work time, once essential and compulsory activities (such as sleeping, working, or essential domestic tasks) have been accounted for.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "Recreation is best defined as:",
+   "options": [
+    "A leisure-time activity undertaken voluntarily and for enjoyment, including individual pursuits, organised outings/events, and non-paid (non-professional) sport",
+    "Any travel away from home lasting several nights, rather than a voluntary leisure-time activity of any kind, regardless of any other environmental or economic factor involved.",
+    "Only professional, competitive sport at an international level",
+    "Compulsory activity required by an employer"
+   ],
+   "correct": 0,
+   "explain": "Recreation is a leisure-time activity undertaken voluntarily and for enjoyment, which can include individual pursuits, organised outings and events, and non-paid (non-professional) sport, distinguishing it from professional/competitive sport.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "According to the syllabus definitions used in this course, \"sport\" refers to:",
+   "options": [
+    "A physical activity involving events and competitions at the national and international scale with professional participants",
+    "Any freely chosen non-work activity of any kind, rather than a physical activity involving national or international competitions",
+    "Only activities undertaken purely for relaxation with no competitive element",
+    "Travel undertaken for at least one night"
+   ],
+   "correct": 0,
+   "explain": "In this syllabus, sport refers to physical activity involving events and competitions at the national and international scale with professional participants, distinguishing it from the broader, more informal category of recreation.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "In general, as a country’s level of economic development increases, its population’s participation in leisure activities tends to:",
+   "options": [
+    "Increase, as rising incomes give people more disposable income and, often, more free time to spend on leisure",
+    "Decrease consistently to zero",
+    "Stay completely unrelated to income at all times, rather than increasing as disposable income and free time rise",
+    "Only ever affect the number of professional athletes"
+   ],
+   "correct": 0,
+   "explain": "In general, higher levels of economic development are associated with increased participation in leisure activities, as rising incomes give people more disposable income to spend on leisure and tourism, and rising living standards are often (though not always) accompanied by more available free time.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "On an income-leisure trade-off (indifference curve) graph, a movement from a point with more leisure and less income to a point with more income and less leisure represents:",
+   "options": [
+    "A person choosing to work more hours in exchange for higher earnings, giving up some leisure time to do so",
+    "A country experiencing a natural disaster, rather than a person choosing to work more hours for higher earnings",
+    "A permanent, irreversible loss of all leisure time",
+    "A decrease in a person’s overall standard of living"
+   ],
+   "correct": 0,
+   "explain": "An income-leisure trade-off graph illustrates how individuals must choose between working more hours (more income, less leisure time) or working fewer hours (more leisure time, less income), with indifference curves representing combinations of income and leisure that provide the same level of satisfaction (utility) to that person.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "A key barrier to participation in leisure activities in low-income countries (LICs) is:",
+   "options": [
+    "Low disposable income and a greater share of time needed for work and essential survival activities, leaving little time or money for leisure",
+    "An oversupply of free leisure facilities, rather than low disposable income and limited time for leisure in LICs, regardless of season or location.",
+    "Too much paid holiday leave being offered to workers",
+    "A complete absence of any leisure activities anywhere in LICs"
+   ],
+   "correct": 0,
+   "explain": "In many LICs, low disposable income and the need to spend a greater proportion of time on work and essential survival activities (such as subsistence agriculture or informal work) leaves less time and money available for leisure, alongside often limited leisure infrastructure.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "According to a study of young people in disadvantaged UK areas (StreetGames/LSE), the single biggest barrier to young people’s participation in sport was found to be:",
+   "options": [
+    "Cost, since around a third of young people in the areas studied live in poverty and cannot afford fees for gyms and team sports",
+    "A complete lack of interest in sport among young people",
+    "An oversupply of free sports facilities, rather than cost being the single biggest barrier identified in the study, regardless of location.",
+    "Young people preferring to spend all their time on schoolwork"
+   ],
+   "correct": 0,
+   "explain": "The study found that cost was the biggest barrier to young people’s participation in sport, because a third of young people in the disadvantaged areas studied live in poverty, and adult-rate charges for leisure centres and sports facilities are unaffordable for many over-18s on very low incomes.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "Besides cost, which of the following was identified as a significant barrier to youth sport participation in disadvantaged areas?",
+   "options": [
+    "Poor local area conditions, including a lack of well-maintained parks and open spaces, and fear discouraging use of public spaces",
+    "Too many free leisure facilities being available, rather than poor local conditions and fear discouraging use of public spaces, regardless of location.",
+    "An excess of youth sports clubs in every area",
+    "Young people having too much free time and money"
+   ],
+   "correct": 0,
+   "explain": "Alongside cost, the study identified poor local area conditions (poorly maintained parks, open spaces and streets) and fear (parents being fearful of letting children use public spaces) as major barriers, alongside the observation that \"leaving school is a cliff edge for sport\" as school-provided opportunities end.",
+   "tag": "Changing leisure patterns"
+  },
+  {
+   "q": "Which of the following is an example of how \"place of residence\" can affect participation in sport and tourism?",
+   "options": [
+    "The availability of local facilities (e.g. golf or tennis courses), accessibility (e.g. road links, airports, ports), and environmental factors (e.g. weather, relief) that suit certain activities such as skiing or beach-based leisure",
+    "A person’s exact date of birth",
+    "A person's favourite colour, rather than local facility availability, accessibility and environmental factors like weather, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "The make and model of a person’s car"
+   ],
+   "correct": 0,
+   "explain": "Place of residence affects participation through the local availability of facilities (such as golf or tennis courses), accessibility (road links, airports, ports affecting how easily a person can travel), political factors (such as passport strength or government policy on leisure development), and environmental factors (such as weather and relief, which determine whether activities like skiing, mountain climbing or beach-based leisure are locally possible).",
+   "tag": "Changing leisure patterns"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGLT-T2"] = {
+ "id": "IBGLT-T2",
+ "topicNumber": 5,
+ "topicTitle": "Option E: Leisure, Tourism and Sport (IB Geography Revision Guide)",
+ "title": "Tourism and sport at the local and national scale",
+ "href": "/geography/revision/guide/leisure-tourism-sport/topic-2-tourism-and-sport-at-the-local-and-national-scale",
+ "syllabusFocus": "IB Geography, Option E: Leisure, Tourism and Sport: Tourism and sport at the local and national scale.",
+ "checklist": [
+  "I can explain the growth of tourism hotspots and apply Butler’s model",
+  "I can explain spheres of influence, thresholds and the leisure hierarchy",
+  "I can explain the location of Premier League stadiums and supporter bases",
+  "I can evaluate the costs and benefits of large-scale events, using the Full Moon Party",
+  "I can evaluate the advantages and disadvantages of Glastonbury Festival"
+ ],
+ "quiz": [
+  {
+   "q": "A \"tourism hotspot\" is best defined as:",
+   "options": [
+    "A place that experiences high levels of tourist arrivals",
+    "Any place with no tourists at all",
+    "A location that has been permanently closed to visitors, rather than a place experiencing high levels of tourist arrivals",
+    "A place with no accommodation facilities of any kind"
+   ],
+   "correct": 0,
+   "explain": "A tourism hotspot is a place that experiences high levels of tourist arrivals, often due to a combination of attractive primary resources (such as scenery or historic sites) and supporting secondary resources (such as accommodation and restaurants).",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "Three desirable factors commonly associated with the creation of a tourism hotspot include:",
+   "options": [
+    "Areas of outstanding natural beauty, historic city centres, and coastal areas with sandy beaches in hot countries",
+    "A complete absence of any scenery or historical interest, rather than areas of outstanding natural beauty or coastline",
+    "Locations with no transport links of any kind",
+    "Areas with the highest possible levels of pollution"
+   ],
+   "correct": 0,
+   "explain": "Tourism hotspots commonly develop in areas with desirable primary attractions, such as areas of outstanding natural beauty, historic city centres, and coastal areas with sandy beaches in hot countries, which draw large numbers of visitors.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "A \"primary touristic resource\" is best described as:",
+   "options": [
+    "A factor or attraction which is the main reason tourists want to visit a place, such as climate, scenery or a religious centre",
+    "A facility such as accommodation or a restaurant, provided to support tourists",
+    "A form of transport used only by locals, rather than the main attraction that draws tourists to visit a place at all, regardless of location.",
+    "A type of currency accepted only by tourists"
+   ],
+   "correct": 0,
+   "explain": "A primary touristic resource is a factor or attraction that is the main reason tourists want to visit a place, such as an appealing climate, dramatic scenery, or a significant religious or historic site; without primary resources, a place is unlikely to attract tourists in the first place.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "A \"sphere of influence\" is best defined as:",
+   "options": [
+    "The distance travelled by people visiting a place or event",
+    "The exact population of a town, rather than the distance travelled by people visiting a place or event itself",
+    "The number of staff employed at a facility",
+    "A type of leisure facility found only in rural areas"
+   ],
+   "correct": 0,
+   "explain": "A sphere of influence is the distance travelled by people visiting a place or event; facilities with a larger sphere of influence draw visitors from further away than facilities with a smaller sphere of influence.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "A \"population threshold\" is best defined as:",
+   "options": [
+    "The minimum number of people required for a facility to be viable",
+    "The maximum number of people a facility can hold at once",
+    "The total population of a country, rather than the minimum number of people required for a facility to remain viable",
+    "The number of visitors a facility receives in one day"
+   ],
+   "correct": 0,
+   "explain": "A population threshold is the minimum number of people required within reach of a facility for it to be economically viable; the smaller the threshold population required, the smaller the facility’s typical sphere of influence.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "According to the relationship between population threshold and sphere of influence:",
+   "options": [
+    "A facility with a smaller threshold population will tend to have a smaller sphere of influence",
+    "A facility with a smaller threshold population will always have a larger sphere of influence, contrary to the relationship",
+    "Threshold population and sphere of influence are completely unrelated",
+    "All facilities have exactly the same sphere of influence regardless of threshold"
+   ],
+   "correct": 0,
+   "explain": "The smaller the threshold population required for a facility to be viable, the smaller its sphere of influence tends to be; a small, low-threshold facility (like a corner shop or local park) only needs to draw from its immediate neighbourhood, while a high-threshold facility (like a national stadium) needs to draw visitors from a much wider area.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "The English Premier League consists of:",
+   "options": [
+    "20 clubs playing 38 league games each per season, mostly spread across England (occasionally including a Welsh club)",
+    "Only 5 clubs, all based in London, rather than 20 clubs playing 38 league games each spread mostly across England, regardless of location.",
+    "100 clubs playing one game per season",
+    "Clubs based only outside the United Kingdom"
+   ],
+   "correct": 0,
+   "explain": "The Premier League consists of 20 clubs, which play 38 league games each per season (excluding cup competitions); clubs are spread across mainland England, with Welsh clubs occasionally competing when promoted.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "The spatial distribution of 2022-23 Premier League clubs shows a strong cluster of clubs in:",
+   "options": [
+    "London, which had seven clubs that season, reflecting its very large population",
+    "The far South West of England, which had the most clubs of any region",
+    "Wales, which had the majority of clubs, rather than London, which had seven clubs that season given its large population",
+    "Northern Scotland"
+   ],
+   "correct": 0,
+   "explain": "London had seven Premier League clubs in the 2022-23 season (including Arsenal, Chelsea, Tottenham Hotspur and West Ham United), by far the largest regional cluster, reflecting London’s very large population (over 9 million) and its long history of football club formation.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "Besides London, another significant cluster of Premier League clubs in 2022-23 was found in:",
+   "options": [
+    "The North West of England, around Manchester and Liverpool (including Manchester City, Manchester United, Liverpool and Everton)",
+    "The Scottish Highlands",
+    "Northern Ireland, rather than the North West of England around Manchester and Liverpool with four major clubs, regardless of location.",
+    "The Isle of Wight"
+   ],
+   "correct": 0,
+   "explain": "The North West of England formed a second major cluster, with Manchester City, Manchester United, Liverpool and Everton all based within around 35 miles of each other, reflecting the region’s industrial history and large urban population.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "A \"large-scale event\" acting as a temporary site of leisure could include:",
+   "options": [
+    "Large-scale sporting, musical, cultural or religious festivals, such as the Olympics, a football World Cup, or a music festival",
+    "Only permanent, purpose-built stadiums with no time limit",
+    "Only events with fewer than ten attendees, rather than large-scale sporting, musical, cultural or religious festivals, regardless of location.",
+    "Events that never involve any visitors from outside the local area"
+   ],
+   "correct": 0,
+   "explain": "A large-scale event acting as a temporary site of leisure can include sporting events (such as the Olympics or a World Cup), musical festivals, cultural festivals, or religious festivals, all of which temporarily transform a place into a major leisure destination for the duration of the event.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "An example of an economic benefit of hosting a major event like the Olympics is:",
+   "options": [
+    "Long-term investment in infrastructure and transport, which can leave a lasting legacy for residents, such as improved public transport around a host city",
+    "A guaranteed permanent increase in unemployment",
+    "The complete removal of all existing local businesses, rather than long-term investment in infrastructure and transport, according to most published research on the topic.",
+    "A guaranteed reduction in tourism after the event"
+   ],
+   "correct": 0,
+   "explain": "A major event like the Olympics can bring long-term investment in infrastructure and transport (for example, significant transport investment around London ahead of the 2012 Olympics), which can leave a lasting legacy benefiting local residents well beyond the event itself.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "An example of an economic cost of hosting a major event like the Olympics is:",
+   "options": [
+    "The cost of hosting tending to rise over the original budget, sometimes very significantly, as seen with the 1976 Montreal Olympics, whose cost rose from an estimated $120 million to a final cost of around $1.6 billion, taking 30 years to pay off the debt",
+    "A guaranteed profit for every host city",
+    "No possibility of any facility ever being underused after the event, rather than costs rising well over the original budget, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "A complete absence of any construction costs"
+   ],
+   "correct": 0,
+   "explain": "Hosting costs frequently rise well above original budgets; the 1976 Montreal Olympics were estimated to cost $120 million but ultimately cost around $1.6 billion, roughly 13 times the original estimate, and it took the city 30 years to pay off the resulting debt.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "Glastonbury Festival is held at Worthy Farm, which is located:",
+   "options": [
+    "Near the village of Pilton, Somerset, in a rural, gently sloping farmland landscape",
+    "In the middle of a major city centre",
+    "On a remote uninhabited island, rather than near the village of Pilton, Somerset, in a rural farmland landscape",
+    "In a densely built-up industrial estate"
+   ],
+   "correct": 0,
+   "explain": "Glastonbury Festival is held at Worthy Farm, an area of gently sloping agricultural (grazing) farmland near the village of Pilton in Somerset, England, a clearly rural landscape rather than an urban one.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "The main road connecting Glastonbury to Pilton, important for the site’s accessibility, is the:",
+   "options": [
+    "A361",
+    "M25 motorway",
+    "A1",
+    "A303 only"
+   ],
+   "correct": 0,
+   "explain": "The A361 is the main road connecting Glastonbury to Pilton, and Pilton itself is described as situated on this road, making it a key accessibility factor for the festival site.",
+   "tag": "Local and national scale"
+  },
+  {
+   "q": "Glastonbury Tor, a well-known landmark near the festival site, has an approximate elevation of:",
+   "options": [
+    "Around 158 metres (518 feet)",
+    "Sea level (0 metres)",
+    "Over 4,000 metres, rather than around 158 metres, which is the approximate elevation of Glastonbury Tor",
+    "Below sea level"
+   ],
+   "correct": 0,
+   "explain": "Glastonbury Tor, a prominent hill landmark near the town of Glastonbury (a short distance from the Worthy Farm festival site itself), has an elevation of approximately 158 metres (518 feet), and is a well-known reference point in the local landscape.",
+   "tag": "Local and national scale"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGLT-T3"] = {
+ "id": "IBGLT-T3",
+ "topicNumber": 5,
+ "topicTitle": "Option E: Leisure, Tourism and Sport (IB Geography Revision Guide)",
+ "title": "Tourism and sport at the international scale",
+ "href": "/geography/revision/guide/leisure-tourism-sport/topic-3-tourism-and-sport-at-the-international-scale",
+ "syllabusFocus": "IB Geography, Option E: Leisure, Tourism and Sport: Tourism and sport at the international scale.",
+ "checklist": [
+  "I can explain niche tourism as a national strategy, using Iceland",
+  "I can evaluate the role of TNCs and budget airlines in international tourism",
+  "I can evaluate tourism as a national development strategy, using the Maldives",
+  "I can explain why countries bid to host international sporting events",
+  "I can evaluate the Rio 2016 Olympics and compare it with London 2012"
+ ],
+ "quiz": [
+  {
+   "q": "Mass tourism is best described as:",
+   "options": [
+    "Tourism typified by the package tour, with fixed itineraries, planned/guided stops and major decisions made by the organiser, offering maximum familiarity and minimum novelty",
+    "Special-interest tourism catering for small numbers of tourists",
+    "Tourism that only takes place in remote, unvisited locations, rather than fixed itineraries and package tours generally, regardless of any other environmental or economic factor involved.",
+    "A form of tourism that has declined every year since 1950"
+   ],
+   "correct": 0,
+   "explain": "Mass tourism is typified by the package tour, in which itineraries are fixed, stops are planned and guided, and all major decisions are made by the tour organiser rather than the tourist; familiarity is maximised and novelty minimised, with safety and companionship gained from travelling in large crowds.",
+   "tag": "International scale"
+  },
+  {
+   "q": "Niche tourism is best described as:",
+   "options": [
+    "Special-interest tourism catering for relatively small numbers of tourists, often based around a specific interest, culture or activity",
+    "The most popular, highest-volume form of tourism worldwide, rather than special-interest tourism for small numbers, regardless of location.",
+    "Tourism that is illegal in most countries",
+    "A synonym for mass tourism"
+   ],
+   "correct": 0,
+   "explain": "Niche tourism refers to special-interest tourism catering for relatively small numbers of tourists, in contrast to the standardised, high-volume model of mass tourism; niche tourists often seek more authentic settings and specific interests (e.g. adventure, culture, wildlife).",
+   "tag": "International scale"
+  },
+  {
+   "q": "According to the niche tourism components model (Novelli, 2005), the five broad \"macro-niche\" categories of niche tourism are:",
+   "options": [
+    "Cultural, environmental, rural, urban and other",
+    "Cheap, expensive, seasonal, year-round and illegal",
+    "Domestic, international, day-trip, short-break and long-haul",
+    "Winter, summer, spring, autumn and all-year"
+   ],
+   "correct": 0,
+   "explain": "Novelli’s (2005) niche tourism components model organises niche tourism into five broad macro-niche categories — cultural (e.g. heritage, tribal, religious), environmental (e.g. ecotourism, adventure, coastal), rural (e.g. farms, camping, festivals), urban (e.g. business, sport, gallery) and other (e.g. photographic, dark, volunteer) — each of which breaks down further into more specific \"micro-niches\".",
+   "tag": "International scale"
+  },
+  {
+   "q": "According to the Cambridge Dictionary definition used in this lesson, a stakeholder is:",
+   "options": [
+    "A person, such as an employee, customer or citizen, who is involved with an organisation or society and therefore has responsibilities towards it and an interest in its success",
+    "Only the government of a country",
+    "Only a shareholder who owns part of a company, rather than a person involved with an organisation with an interest in its success, according to most published research on the topic.",
+    "A person who has no connection to an organisation at all"
+   ],
+   "correct": 0,
+   "explain": "A stakeholder is defined as a person, such as an employee, customer or citizen, who is involved with an organisation, society, etc., and therefore has responsibilities towards it and an interest in its success — a broad definition that, in tourism, includes groups such as tourists, local residents, businesses, employees and governments.",
+   "tag": "International scale"
+  },
+  {
+   "q": "The development of low-cost/budget airlines (such as Ryanair and easyJet) in Europe has revolutionised travel mainly by:",
+   "options": [
+    "Dramatically increasing the frequency of flights and reducing the cost of travel, making short-haul international trips affordable and accessible to far more people",
+    "Making international travel more expensive and less frequent",
+    "Eliminating all short-haul flights in favour of high-speed rail, rather than reducing costs and increasing flight frequency, according to most published research on the topic.",
+    "Only operating flights between major capital cities"
+   ],
+   "correct": 0,
+   "explain": "Low-cost/budget airlines have revolutionised travel in Europe by dramatically increasing flight frequency and reducing costs, making short-haul international travel accessible and affordable to a much larger share of the population than before, and stimulating demand through low fares.",
+   "tag": "International scale"
+  },
+  {
+   "q": "A key benefit of low-cost airline TNCs for the \"regional development\" stakeholder group is that they:",
+   "options": [
+    "Operate point-to-point flights between secondary/regional airports, which typically have lower fees than major hubs, bringing new tourism, investment and connectivity to regions that previously had little international air access",
+    "Only ever fly to major international hub airports",
+    "Refuse to operate any routes to smaller towns or regions, rather than bringing new tourism and connectivity to regions, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "Have no effect on regional economies at all"
+   ],
+   "correct": 0,
+   "explain": "Low-cost airlines often use a \"secondary airport\" strategy, operating point-to-point flights between smaller, regional airports (which typically charge lower fees than major hubs); this can bring new tourism, investment and international connectivity to regions that previously had little or no direct air access, supporting regional economic development.",
+   "tag": "International scale"
+  },
+  {
+   "q": "A national development strategy is best defined as:",
+   "options": [
+    "A government policy that encourages socio-economic growth, often with equal consideration of the environment and natural resources, and frequently tied to multi-national agreements such as the Paris Accord or the Sustainable Development Goals",
+    "A short-term plan lasting only a few weeks",
+    "A plan that only applies to a single company, rather than a government policy encouraging socio-economic growth nationally, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "A strategy with no connection to environmental considerations"
+   ],
+   "correct": 0,
+   "explain": "A national development strategy is a government policy that encourages socio-economic growth, often involving an equal consideration of the environment and natural resources; most countries have medium- to long-term national development strategies, which may tie in with multi-national agreements such as the Paris Accord or the Sustainable Development Goals.",
+   "tag": "International scale"
+  },
+  {
+   "q": "On the Butler Model (Tourism Area Life Cycle) diagram used in this lesson, the number of tourists rises through the stages of exploration and involvement before reaching a peak at:",
+   "options": [
+    "Maturity, followed by stagnation",
+    "Decline, rather than maturity followed by stagnation, which is where tourist numbers peak on the Butler Model",
+    "Rejuvenation only",
+    "The exploration stage"
+   ],
+   "correct": 0,
+   "explain": "The Butler Model shows tourist numbers rising through the exploration and involvement stages, reaching a peak around the maturity stage, then levelling off at stagnation, from which a destination can branch towards rejuvenation, post-stagnation, a residential outcome, or decline, depending on how it is managed.",
+   "tag": "International scale"
+  },
+  {
+   "q": "From the stagnation stage of the Butler Model, a destination can follow several different paths, including:",
+   "options": [
+    "Rejuvenation, post-stagnation, a residential outcome, or decline",
+    "Only ever continuing to grow indefinitely",
+    "Immediately reverting back to the exploration stage, rather than rejuvenation, a residential outcome, or decline",
+    "A guaranteed permanent closure to all tourism"
+   ],
+   "correct": 0,
+   "explain": "After stagnation, the Butler Model shows a destination can follow several different paths depending on how it responds: rejuvenation (successful reinvestment/repositioning), post-stagnation, a residential outcome (the area shifts towards permanent residential use), or decline (if the destination fails to adapt).",
+   "tag": "International scale"
+  },
+  {
+   "q": "A political factor that can motivate a country to host a major international sporting event such as the Olympics is:",
+   "options": [
+    "An opportunity to boost the host country’s international reputation, \"soft power\" and global standing on the world stage",
+    "A guaranteed reduction in international influence",
+    "A legal requirement to host the games at least once every decade, rather than an opportunity to boost international reputation",
+    "The complete absence of any political motivation in hosting decisions"
+   ],
+   "correct": 0,
+   "explain": "A key political factor is the opportunity hosting provides to boost a country’s international reputation, \"soft power\" and global standing, showcasing the country to a huge global audience and potentially strengthening diplomatic and trade relationships.",
+   "tag": "International scale"
+  },
+  {
+   "q": "A cultural factor that can motivate a country to host a major international sporting event is:",
+   "options": [
+    "An opportunity to showcase national culture, heritage and identity to a global television and tourist audience",
+    "A guarantee that no cultural events will take place alongside the sport, rather than an opportunity to showcase heritage",
+    "The complete removal of all cultural exchange between host and visiting nations",
+    "A ban on any opening or closing ceremonies"
+   ],
+   "correct": 0,
+   "explain": "Hosting a major event offers a strong cultural factor/motivation: the opportunity to showcase national culture, heritage and identity to a huge global television and tourist audience, often through opening/closing ceremonies and cultural programming alongside the sporting competition itself.",
+   "tag": "International scale"
+  },
+  {
+   "q": "A key economic benefit that host countries hope to gain from hosting a major sporting event includes:",
+   "options": [
+    "Job creation (during construction and the event itself), a short-term boost in tourism spending, and long-term infrastructure/regeneration benefits",
+    "A guaranteed permanent loss of all tourism revenue",
+    "A total ban on any construction projects, rather than job creation and long-term infrastructure and regeneration benefits, regardless of season or location.",
+    "No economic effect of any kind"
+   ],
+   "correct": 0,
+   "explain": "Host countries hope to gain economic benefits including job creation (both during the construction phase and the event itself), a short-term boost in tourism spending from visiting fans, and potential long-term benefits from infrastructure and regeneration projects built to host the games.",
+   "tag": "International scale"
+  },
+  {
+   "q": "The Rio 2016 Olympics faced a major economic cost in the form of:",
+   "options": [
+    "A large budget overrun — an original projection of under US$3 billion grew to an official cost of around US$5 billion, with total costs (including government spending) reaching up to US$13.1 billion, during Brazil’s third consecutive year of recession",
+    "Coming in significantly under its original projected budget",
+    "No construction costs of any kind, rather than a large budget overrun reaching up to US$13.1 billion in total costs, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "A guaranteed government surplus as a direct result of hosting"
+   ],
+   "correct": 0,
+   "explain": "Rio 2016 experienced a substantial budget overrun: the original projected cost of under US$3 billion grew to an official cost of around US$5 billion, with total costs (including wider government spending) reaching up to US$13.1 billion — all while Brazil was in its third consecutive year of economic recession, making the financial burden especially difficult to bear.",
+   "tag": "International scale"
+  },
+  {
+   "q": "A notable \"white elephant\" outcome after the Rio 2016 Olympics was that:",
+   "options": [
+    "The Maracana Stadium was abandoned within around six months of the games due to approximately US$1 million in unpaid bills, and Olympic swimming pools were dried out and taken out of service",
+    "Every venue continued to be perfectly maintained and fully used, contrary to the Maracana Stadium's abandonment, a pattern confirmed by decades of consistent geographic observation and measurement.",
+    "All venues were immediately demolished the day after the closing ceremony",
+    "No venues were built for the games at all"
+   ],
+   "correct": 0,
+   "explain": "A clear \"white elephant\" outcome was the Maracana Stadium, which was abandoned within around six months of the games ending due to approximately US$1 million in unpaid bills; several Olympic swimming pools were also dried out and taken out of service, illustrating the difficulty of finding sustainable post-games uses for expensive venues.",
+   "tag": "International scale"
+  },
+  {
+   "q": "A genuine economic/infrastructure benefit of hosting the Rio 2016 Olympics was:",
+   "options": [
+    "The construction of 125km of Bus Rapid Transit-only roads, 440 new BRT buses, and a new 16km subway line, helping to address transport congestion in the mountainous, coastal city",
+    "No infrastructure improvements of any kind",
+    "The complete removal of all public transport, rather than the construction of new Bus Rapid Transit roads and a subway line, regardless of any other environmental or economic factor involved.",
+    "A reduction in the number of buses and subway lines"
+   ],
+   "correct": 0,
+   "explain": "A genuine infrastructure benefit was significant transport investment: 125km of Bus Rapid Transit-only roads, 440 new BRT buses, and a new 16km subway line were built, helping to address long-standing transport congestion problems in Rio’s challenging, mountainous coastal geography.",
+   "tag": "International scale"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGLT-T4"] = {
+ "id": "IBGLT-T4",
+ "topicNumber": 5,
+ "topicTitle": "Option E: Leisure, Tourism and Sport (IB Geography Revision Guide)",
+ "title": "Managing tourism and sport for the future",
+ "href": "/geography/revision/guide/leisure-tourism-sport/topic-4-managing-tourism-and-sport-for-the-future",
+ "syllabusFocus": "IB Geography, Option E: Leisure, Tourism and Sport: Managing tourism and sport for the future.",
+ "checklist": [
+  "I can explain carrying capacity and the consequences of unsustainable tourism",
+  "I can evaluate ecotourism in Rwanda at local and global scales",
+  "I can evaluate the factors that will shape tourism in the future",
+  "I can explain political and cultural influences on international sport participation"
+ ],
+ "quiz": [
+  {
+   "q": "Physical carrying capacity is best defined as:",
+   "options": [
+    "The measure of absolute space available, for example the number of spaces in a car park",
+    "The level of crowding a tourist will tolerate before deciding a location is too full",
+    "The level of use an environment can sustain before environmental damage occurs, rather than the absolute space available",
+    "The total number of tourists a country receives in a year"
+   ],
+   "correct": 0,
+   "explain": "Physical carrying capacity is the measure of absolute space available — for example, the fixed number of spaces in a car park, beds in accommodation, or spaces on a footpath — a hard physical limit on how many people/vehicles a site can accommodate at once.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "Ecological carrying capacity is best defined as:",
+   "options": [
+    "The level of use that an environment can sustain before environmental damage occurs",
+    "The exact number of car parking spaces at a site, rather than the level of use an environment can sustain before damage",
+    "The level of crowding a tourist will tolerate before a location feels too full",
+    "A measure only used for financial planning"
+   ],
+   "correct": 0,
+   "explain": "Ecological carrying capacity is the level of use that an environment can sustain before environmental damage occurs — for example, the point at which increasing visitor numbers begins to cause soil erosion, vegetation loss, or wildlife disturbance.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "Perceptual carrying capacity is best defined as:",
+   "options": [
+    "The level of crowding that a tourist will tolerate before deciding a location is too full",
+    "The level of use an environment can sustain before environmental damage occurs, rather than the crowding a tourist will tolerate",
+    "The number of parking spaces at a site",
+    "A fixed number set permanently by a national government"
+   ],
+   "correct": 0,
+   "explain": "Perceptual carrying capacity is the level of crowding that a tourist will tolerate before deciding a location is too full — a more subjective measure based on visitor experience and satisfaction, which can vary between individuals and cultures.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "Ecotourism can be distinguished from sustainable tourism more broadly because ecotourism specifically:",
+   "options": [
+    "Is a form of nature-based tourism that emphasises conservation, education and benefiting local communities, whereas \"sustainable tourism\" is the broader principle (covering environmental, economic and social sustainability) that can apply to any form of tourism, not just nature-based trips",
+    "Applies to any form of mass tourism, regardless of environmental impact",
+    "Refers only to tourism that takes place in cities, rather than being a nature-based form emphasising conservation and communities, a claim that does not match the detailed statistics, figures, dates, named places, organisations and evidence given throughout this specific case study, nor the wider geographical literature on the topic more generally.",
+    "Has no connection to conservation or local communities"
+   ],
+   "correct": 0,
+   "explain": "Ecotourism is a specific form of nature-based tourism that emphasises conservation, environmental education and benefiting local communities, whereas \"sustainable tourism\" is the broader underlying principle (covering environmental, economic and social sustainability) that can, in theory, be applied to any type of tourism, not only nature-focused trips.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "The \"triple bottom line\" diagram of sustainable tourism principles shown in this lesson organises its principles into three overlapping pillars:",
+   "options": [
+    "Environmental, economic and social",
+    "Past, present and future",
+    "Domestic, regional and international",
+    "Physical, ecological and perceptual"
+   ],
+   "correct": 0,
+   "explain": "The triple-bottom-line diagram organises sustainable tourism principles into three overlapping pillars: environmental (e.g. resource efficiency, biodiversity, physical integrity, environmental purity), economic (e.g. economic viability, local prosperity, employment quality) and social (e.g. social equity, visitor fulfilment, local control, community wellbeing, cultural richness).",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "Among the key principles of ecotourism identified in this lesson is:",
+   "options": [
+    "Using resources sustainably, reducing overconsumption and waste, supporting local economies and involving local communities, maintaining biodiversity, and educating tourists and local people about conservation",
+    "Maximising overconsumption and waste generation, rather than using resources sustainably and supporting local economies, regardless of any other social, economic or environmental factor that might be involved in a specific place.",
+    "Deliberately excluding local communities from any involvement in tourism",
+    "Actively reducing biodiversity to create more space for tourist facilities"
+   ],
+   "correct": 0,
+   "explain": "The key principles of ecotourism identified in this lesson include using resources sustainably, reducing overconsumption and waste, supporting local economies and involving local communities, maintaining biodiversity, and educating both tourists and local people about conservation and the natural environment.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "The long-term global trend in international tourist arrivals over recent decades has been one of:",
+   "options": [
+    "Year-on-year growth for decades, with a few notable exceptions caused by events such as disease (e.g. COVID-19) and terrorist incidents (e.g. 9/11)",
+    "Continuous decline every single year with no exceptions",
+    "No change at all in tourist numbers since 1950, rather than year-on-year growth with a few notable exceptions, according to most published research on the topic.",
+    "Growth only in a small number of years, with decline in most others"
+   ],
+   "correct": 0,
+   "explain": "Tourism has emerged as one of the world’s biggest industries, with international tourist arrivals increasing year on year for decades; there have been a few notable exceptions to this growth, caused by events such as disease outbreaks (most significantly COVID-19) and terrorist incidents (such as 9/11), but the overall long-term trend has been continued expansion.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "2019 UNWTO data described that year as:",
+   "options": [
+    "The 10th consecutive year of sustained growth, with international tourist arrivals reaching around 1,481 million and tourism receipts reaching around US$1,460 billion",
+    "The first year tourism had ever grown",
+    "A year in which tourism declined in every global region, rather than the 10th consecutive year of sustained growth, regardless of any other environmental or economic factor involved.",
+    "The final year tourism was ever recorded"
+   ],
+   "correct": 0,
+   "explain": "2019 marked the 10th consecutive year of sustained growth in international tourism, with global arrivals reaching around 1,481 million and tourism receipts reaching around US$1,460 billion — continued expansion across every global region (Americas, Europe, Asia and the Pacific, Africa, and the Middle East) right up to the most recent pre-pandemic year.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "According to the 2019 regional breakdown, which region recorded the largest number of international tourist arrivals?",
+   "options": [
+    "Europe (around 744 million arrivals)",
+    "Africa, rather than Europe, which recorded around 744 million arrivals and the largest number in the 2019 breakdown",
+    "The Middle East",
+    "The Americas"
+   ],
+   "correct": 0,
+   "explain": "In 2019, Europe recorded by far the largest number of international tourist arrivals of any region, at around 744 million (a 4% increase), reflecting its position as the world’s most-visited region, ahead of Asia and the Pacific (around 362 million), the Americas (around 219 million), the Middle East (around 65 million) and Africa (around 70 million).",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "Sports diplomacy is best defined as:",
+   "options": [
+    "The use of sport and sporting events as a tool to build international relationships, improve a country’s reputation, and influence diplomatic relations between nations",
+    "A ban on any political involvement in sport",
+    "A rule preventing athletes from different countries competing against each other, rather than a diplomatic and reputational tool, according to most published research on the topic.",
+    "A purely economic term with no political meaning"
+   ],
+   "correct": 0,
+   "explain": "Sports diplomacy refers to the use of sport and sporting events as a tool to build international relationships, improve a country’s reputation and \"soft power\", and influence diplomatic relations between nations — for example, through hosting major events, sporting exchanges, or high-profile sporting contact between countries with limited formal diplomatic ties.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "Participation in international sport has changed over time partly through:",
+   "options": [
+    "Growing global participation (more countries, more sports, more athletes competing at events like the Olympics and World Cup) alongside greater inclusion of previously under-represented groups, such as women and athletes with disabilities",
+    "A steady decrease in the number of countries participating in events like the Olympics, rather than growing global participation, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "No meaningful change since the first modern Olympics in 1896",
+    "A ban on all international sporting competition after 1950"
+   ],
+   "correct": 0,
+   "explain": "Participation in international sport has changed significantly over time through growing global participation — more countries, more sports and more athletes competing at major events such as the Olympics and football World Cup — alongside greater inclusion of previously under-represented groups, particularly women and athletes with disabilities, reflecting wider political and cultural shifts.",
+   "tag": "Managing for the future"
+  },
+  {
+   "q": "The Paralympics has grown significantly in importance in recent decades, shown by trends such as:",
+   "options": [
+    "Rapidly growing global television viewership, sponsorship and media coverage, alongside an increasing number of participating athletes and countries, reflecting a wider cultural shift towards recognising disability sport at the highest level",
+    "A continued decline in the number of participating athletes and countries",
+    "No connection to the Olympic Games at all, rather than growing viewership, sponsorship and participating countries over time, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "Being held in a completely different decade to the Olympic Games"
+   ],
+   "correct": 0,
+   "explain": "The Paralympics has grown significantly in importance, shown by rapidly growing global television viewership, sponsorship and media coverage, alongside an increasing number of participating athletes and countries; it is now held in the same host city shortly after the Olympic Games, reflecting a wider cultural shift towards recognising elite disability sport as a major global event in its own right.",
+   "tag": "Managing for the future"
   }
  ]
 };
