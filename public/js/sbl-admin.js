@@ -384,7 +384,8 @@
       tr.innerHTML =
         '<td>' + escapeHtml(app.first_name + ' ' + app.last_name) + '</td>' +
         '<td>' + escapeHtml(app.email) + '</td>' +
-        '<td>' + formatDate(app.decided_at) + '</td>';
+        '<td>' + formatDate(app.decided_at) + '</td>' +
+        '<td><button class="sbl-btn sbl-btn--primary sbl-btn--small" data-action="approve" data-id="' + app.id + '">Approve instead</button></td>';
       body.appendChild(tr);
     });
   }
