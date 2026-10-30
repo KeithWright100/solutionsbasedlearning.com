@@ -3,7 +3,647 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
+window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
+window.SBL_LESSONS["IBGFW-T1"] = {
+ "id": "IBGFW-T1",
+ "topicNumber": 4,
+ "topicTitle": "Option A: Freshwater (IB Geography Revision Guide)",
+ "title": "Drainage basin hydrology and geomorphology",
+ "href": "/geography/revision/guide/freshwater/topic-1-drainage-basin-hydrology-and-geomorphology",
+ "syllabusFocus": "IB Geography, Option A: Freshwater: Drainage basin hydrology and geomorphology.",
+ "checklist": [
+  "I can explain the drainage basin as an open system, including feedback loops",
+  "I can calculate discharge and explain the factors affecting it and downstream change",
+  "I can explain fluvial erosion, transport and deposition using the Hjulström curve",
+  "I can explain the formation of erosional and depositional river landforms"
+ ],
+ "quiz": [
+  {
+   "q": "A drainage basin is best described as an open system because:",
+   "options": [
+    "Energy and matter (water and sediment) can cross its boundary",
+    "It has no inputs or outputs, meaning no energy or matter of any kind can ever cross its boundary",
+    "It never changes over time",
+    "It only exists in humid climates"
+   ],
+   "correct": 0,
+   "explain": "An open system allows both energy and matter to enter and leave across its boundary; a drainage basin receives precipitation as an input and loses water as evapotranspiration and channel flow as outputs.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "Which of the following is the main input to a drainage basin system?",
+   "options": [
+    "Precipitation",
+    "Evapotranspiration",
+    "River discharge",
+    "Infiltration"
+   ],
+   "correct": 0,
+   "explain": "Precipitation (rainfall, snowfall) is the principal input of water into a drainage basin system.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "Which of these is a store within the drainage basin system?",
+   "options": [
+    "Groundwater storage",
+    "Overland flow",
+    "Precipitation, which is an input to the system rather than a store within the drainage basin",
+    "Channel flow"
+   ],
+   "correct": 0,
+   "explain": "Stores hold water within the system for a period of time; groundwater storage (in the water table/aquifer) is a key store, alongside interception, surface/depression storage and soil moisture storage.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "River discharge is calculated using the formula:",
+   "options": [
+    "Discharge = Cross-sectional area × Velocity",
+    "Discharge = Velocity ÷ Area",
+    "Discharge = Width + Depth, added together rather than multiplied by the flow's velocity",
+    "Discharge = Gradient × Load"
+   ],
+   "correct": 0,
+   "explain": "Discharge (Q) is calculated as the cross-sectional area of the channel (A) multiplied by the velocity of the flow (V), giving a volume of water passing a point per second (cumecs, m³/s).",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "A drainage basin with a circular shape, compared to an elongated one of the same area, will typically produce:",
+   "options": [
+    "A higher, faster peak discharge, as water reaches the channel from all directions in a similar time",
+    "A lower, more delayed peak discharge",
+    "No difference in discharge, regardless of how quickly water reaches the channel from all directions, regardless of location.",
+    "Discharge only during winter"
+   ],
+   "correct": 0,
+   "explain": "In a circular basin, tributaries are of similar length, so water tends to reach the main channel at roughly the same time, producing a higher and faster peak discharge than in an elongated basin.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "Impermeable rock (such as granite) tends to increase discharge because it:",
+   "options": [
+    "Prevents infiltration, increasing surface runoff into the channel",
+    "Absorbs large amounts of water, reducing runoff",
+    "Has no effect on the speed of water reaching the channel, regardless of how impermeable it is",
+    "Only affects groundwater storage"
+   ],
+   "correct": 0,
+   "explain": "Impermeable rock does not allow water to infiltrate, so a greater proportion of precipitation becomes surface runoff, reaching the channel more quickly and increasing discharge.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "Hydraulic action, as a process of river erosion, refers to:",
+   "options": [
+    "The sheer force and pressure of moving water breaking away and removing material from the bed and banks",
+    "Rocks carried by the river wearing down the bed and banks",
+    "Rock dissolving in slightly acidic river water",
+    "Rock particles wearing each other down through collision, rather than the bed and banks directly, regardless of location."
+   ],
+   "correct": 0,
+   "explain": "Hydraulic action is the sheer force of moving water, including the pressure of air trapped in cracks being compressed and released, breaking away and removing material from the channel bed and banks.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "Abrasion (also called corrasion) is the process by which:",
+   "options": [
+    "Sediment carried by the river wears away the bed and banks like sandpaper",
+    "Water dissolves soluble rock such as limestone",
+    "Transported particles collide with and wear down each other",
+    "The river's own force alone erodes the channel, without any sediment being involved at all"
+   ],
+   "correct": 0,
+   "explain": "Abrasion (corrasion) occurs when sediment being transported by the river scrapes and wears away the bed and banks of the channel, similar to the effect of sandpaper.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "Attrition refers to the process by which:",
+   "options": [
+    "Transported particles collide with each other, becoming smaller, smoother and more rounded",
+    "The river channel bed is worn down by transported sediment",
+    "Soluble rock is dissolved by the river, rather than transported particles colliding together",
+    "Sediment is deposited when the river loses energy"
+   ],
+   "correct": 0,
+   "explain": "Attrition is the process by which particles of sediment being transported collide with one another, breaking down into smaller, smoother, more rounded fragments over time.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "V-shaped valleys and interlocking spurs are typically found in a river’s:",
+   "options": [
+    "Upper course, where vertical erosion dominates",
+    "Lower course, where deposition dominates",
+    "Estuary, where tidal processes dominate",
+    "Middle course only, never occurring in the upper course where vertical erosion dominates"
+   ],
+   "correct": 0,
+   "explain": "In the upper course, rivers have high energy relative to their load and erode vertically (downwards), cutting a V-shaped valley; interlocking spurs form as the river winds around areas of harder, resistant rock.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "A waterfall commonly forms where:",
+   "options": [
+    "A band of hard, resistant rock lies over softer, less resistant rock, which erodes faster to leave a step",
+    "Soft rock lies upstream of hard rock, with no vertical erosion",
+    "A river reaches the sea, regardless of the rock type or resistance found along its course, regardless of location.",
+    "A river channel becomes perfectly straight"
+   ],
+   "correct": 0,
+   "explain": "Waterfalls typically form where a river flows over a band of hard, resistant rock overlying softer rock; the softer rock erodes faster (undercutting), leaving the hard rock overhanging until it collapses, and the waterfall gradually retreats upstream.",
+   "tag": "Drainage basins"
+  },
+  {
+   "q": "A gorge forms as a result of:",
+   "options": [
+    "A waterfall retreating upstream over time, leaving a steep-sided valley behind it",
+    "Deposition building up sediment in the lower course",
+    "A meander being cut off from the main channel, rather than a waterfall retreating upstream",
+    "Sea level rise flooding a river valley"
+   ],
+   "correct": 0,
+   "explain": "As a waterfall retreats upstream through repeated undercutting and collapse, it leaves behind a steep-sided gorge marking its former positions.",
+   "tag": "Drainage basins"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFW-T2"] = {
+ "id": "IBGFW-T2",
+ "topicNumber": 4,
+ "topicTitle": "Option A: Freshwater (IB Geography Revision Guide)",
+ "title": "Flooding and flood mitigation",
+ "href": "/geography/revision/guide/freshwater/topic-2-flooding-and-flood-mitigation",
+ "syllabusFocus": "IB Geography, Option A: Freshwater: Flooding and flood mitigation.",
+ "checklist": [
+  "I can interpret flood hydrographs and explain the factors that control their shape",
+  "I can explain the natural and human factors that affect flood risk",
+  "I can evaluate hard and soft approaches to flood mitigation",
+  "I can evaluate flood mitigation in the Chao Phraya basin and at Boscastle"
+ ],
+ "quiz": [
+  {
+   "q": "On a flood/storm hydrograph, lag time refers to:",
+   "options": [
+    "The time delay between peak precipitation and peak discharge",
+    "The total volume of water in the river",
+    "The lowest flow of the river during a dry period, rather than the delay between peak rainfall and discharge",
+    "The width of the river channel"
+   ],
+   "correct": 0,
+   "explain": "Lag time is the time delay between the peak of the rainfall event and the peak discharge in the river, reflecting how long it takes for the rainfall to translate into peak river flow.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "Peak discharge on a hydrograph is:",
+   "options": [
+    "The highest river discharge reached during the recorded event",
+    "The lowest point of river flow shown on the graph",
+    "The average discharge over the whole year, rather than the highest point reached during a single event",
+    "The point where rainfall stops"
+   ],
+   "correct": 0,
+   "explain": "Peak discharge is the highest river discharge reached during the storm event shown on the hydrograph.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "Base flow on a hydrograph represents:",
+   "options": [
+    "The river’s normal, everyday flow level sustained by groundwater before and after a storm event",
+    "The absolute peak of the storm event, rather than the river's normal flow sustained by groundwater",
+    "Water that never reaches the river channel",
+    "The time it takes for a river to flood"
+   ],
+   "correct": 0,
+   "explain": "Base flow is the river’s underlying, normal flow, sustained mainly by groundwater (through baseflow/throughflow) rather than direct storm runoff, and continues before and after a storm event.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "A flood occurs when:",
+   "options": [
+    "A river’s discharge exceeds the capacity of its channel, causing water to spill over the banks",
+    "A river's discharge is lower than average, regardless of how much water the channel can hold, regardless of location.",
+    "A river completely dries up",
+    "A dam is built across a river"
+   ],
+   "correct": 0,
+   "explain": "A flood occurs when river discharge exceeds the channel’s capacity (bankfull discharge), causing water to overflow onto the surrounding land, such as a floodplain.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "A floodplain is:",
+   "options": [
+    "The flat land bordering a river channel that is periodically covered by floodwater",
+    "A steep, narrow valley found only in the upper course",
+    "A type of dam, rather than the flat land bordering a channel that is periodically flooded",
+    "The point where a river meets the sea"
+   ],
+   "correct": 0,
+   "explain": "A floodplain is the flat area of land alongside a river channel, built up by repeated deposition during flood events, which is periodically covered by floodwater when the river overtops its banks.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "The recurrence interval (or return period) of a flood of a given size is:",
+   "options": [
+    "A statistical estimate of how often, on average, a flood of that size is likely to occur",
+    "The exact date the next flood will occur",
+    "The total number of floods that have ever happened on that river, rather than a statistical estimate",
+    "The time it takes water to drain off a floodplain"
+   ],
+   "correct": 0,
+   "explain": "Recurrence interval (return period) is a statistical estimate, based on historical data, of how frequently, on average, a flood of a particular size is likely to occur — for example, a \"1-in-100-year flood\" has roughly a 1% chance of occurring in any given year.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "Afforestation reduces flood risk mainly because it:",
+   "options": [
+    "Increases interception and infiltration rates, reducing surface runoff",
+    "Increases surface runoff into rivers",
+    "Has no effect on the drainage basin's hydrology, regardless of how much interception increases",
+    "Increases the amount of impermeable surface in a basin"
+   ],
+   "correct": 0,
+   "explain": "Planting trees increases interception (rainfall caught on leaves/branches, later evaporated) and infiltration (via root systems), which reduces the amount of precipitation that becomes rapid surface runoff, lowering flood risk.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "Dams and reservoirs help mitigate flooding by:",
+   "options": [
+    "Holding back and regulating the flow of river water, releasing it in a controlled way",
+    "Speeding up the flow of water downstream at all times",
+    "Removing all water permanently from the drainage basin, rather than regulating its release",
+    "Increasing the river’s gradient"
+   ],
+   "correct": 0,
+   "explain": "Dams and reservoirs hold back and regulate river flow, storing excess water during high-flow periods and releasing it in a controlled way, which can also be used for freshwater supply and HEP generation.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "A diversion channel helps reduce flood risk by:",
+   "options": [
+    "Taking surplus water out of the main river during times of flood, redirecting it elsewhere",
+    "Blocking all water from entering the main river, rather than diverting surplus water elsewhere",
+    "Increasing the height of the riverbed",
+    "Removing vegetation along the riverbank"
+   ],
+   "correct": 0,
+   "explain": "A diversion channel (or flood relief channel) is an overflow route that takes surplus water out of the main river channel during flood conditions, reducing pressure on the main channel and areas at risk downstream.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "Bangkok is particularly prone to flooding because it:",
+   "options": [
+    "Sits on low-lying, flat land at the base of the vast Chao Phraya River basin, close to sea level",
+    "Sits at high altitude far from any river",
+    "Has no rainfall at any time of year, regardless of how close it sits to the Chao Phraya basin, regardless of location.",
+    "Is located entirely outside the Chao Phraya drainage basin"
+   ],
+   "correct": 0,
+   "explain": "Bangkok is located on low-lying, flat land near the mouth of the Chao Phraya River, close to sea level, at the base of a vast drainage basin (over 157,000 km²) that funnels water from northern and central Thailand towards the city.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "A major cause of the severity of the 2011 Thailand floods was that:",
+   "options": [
+    "Exceptionally heavy monsoon rainfall (including from Tropical Storm Nock-ten) filled major dams, such as the Bhumibol Dam, to capacity, forcing further releases that added to the flooding",
+    "There was almost no rainfall that year",
+    "The Chao Phraya River had been completely dammed with no water allowed to flow at any point, regardless of any other social, economic or environmental factor that might be involved in a specific place.",
+    "Bangkok had built no flood defences of any kind before 2011"
+   ],
+   "correct": 0,
+   "explain": "Exceptionally heavy monsoon rainfall, intensified by Tropical Storm Nock-ten, caused major dams including the Bhumibol Dam to fill close to or beyond capacity; continuing rain then forced authorities to release more water from the dams, adding to the flooding downstream.",
+   "tag": "Flooding"
+  },
+  {
+   "q": "The 2011 Thailand floods resulted in approximately:",
+   "options": [
+    "Over 800 deaths and an estimated US$46.5 billion in economic losses, making it one of the costliest disasters of 2011",
+    "A handful of deaths and negligible economic cost",
+    "No deaths but the complete destruction of Bangkok, despite the scale of the 2011 flooding, regardless of season or location.",
+    "Only agricultural land was affected, with no impact on Bangkok"
+   ],
+   "correct": 0,
+   "explain": "The 2011 floods caused 815 deaths, affected over 13 million people, and caused an estimated US$46.5 billion in economic losses — making it, by some rankings, the world’s fourth-costliest disaster of that year.",
+   "tag": "Flooding"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFW-T3"] = {
+ "id": "IBGFW-T3",
+ "topicNumber": 4,
+ "topicTitle": "Option A: Freshwater (IB Geography Revision Guide)",
+ "title": "Water scarcity and water quality",
+ "href": "/geography/revision/guide/freshwater/topic-3-water-scarcity-and-water-quality",
+ "syllabusFocus": "IB Geography, Option A: Freshwater: Water scarcity and water quality.",
+ "checklist": [
+  "I can explain physical and economic water scarcity and the causes of drought",
+  "I can explain the environmental consequences of agriculture for water",
+  "I can explain human pressures on lakes and aquifers, using the Aral Sea and Ogallala",
+  "I can explain conflict over shared water resources, using the Nile and the GERD"
+ ],
+ "quiz": [
+  {
+   "q": "Physical water scarcity occurs when:",
+   "options": [
+    "There is not enough water available to meet demand, because natural supply is genuinely insufficient",
+    "Water is available but poverty and poor infrastructure prevent access to it",
+    "A country has too much water and floods regularly, rather than facing a genuine shortage of supply, regardless of location.",
+    "Water is scarce only because of a lack of rainfall for a single day"
+   ],
+   "correct": 0,
+   "explain": "Physical water scarcity occurs where more than around 75% of river flow is withdrawn for agriculture, industry and domestic use, meaning demand for water genuinely exceeds sustainable supply, degrading the resource. It is common in the Middle East, North Africa and parts of Central Asia, including Egypt.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "Economic water scarcity occurs when:",
+   "options": [
+    "Sufficient water exists, but a lack of investment, infrastructure or institutional capacity prevents people from accessing it",
+    "There is no water available anywhere near a population",
+    "A country deliberately exports all of its water, rather than lacking investment or infrastructure, regardless of season or location.",
+    "Rainfall is evenly distributed throughout the year"
+   ],
+   "correct": 0,
+   "explain": "Economic water scarcity occurs where water resources are physically available (less than around 25% withdrawn) but a lack of human, institutional or financial capital prevents access, common across much of Sub-Saharan Africa.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "In the IWMI global water scarcity framework, \"approaching physical water scarcity\" describes areas where:",
+   "options": [
+    "More than 60% of river flow is withdrawn, meaning scarcity will occur soon if current trends continue",
+    "Less than 25% of river flow is withdrawn",
+    "No water is withdrawn from rivers at all, rather than more than 60% of river flow being withdrawn, regardless of location.",
+    "Water scarcity has already been fully resolved"
+   ],
+   "correct": 0,
+   "explain": "\"Approaching physical water scarcity\" describes basins where more than 60% of river flow is already withdrawn; without changes in water use or supply, these areas are projected to experience physical water scarcity in future, and this affects much of South and East Asia.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "Which of these is an example of a traditional, human/animal-powered irrigation method?",
+   "options": [
+    "The shaduf, a hand- or counterweight-operated lever used to lift water from a river into irrigation channels",
+    "A satellite navigation system, rather than a hand- or counterweight-operated lever used to lift water, regardless of location.",
+    "A wind turbine",
+    "A dam over 100 metres tall"
+   ],
+   "correct": 0,
+   "explain": "The shaduf is a traditional irrigation tool, long used in the Nile Valley and elsewhere, consisting of a lever with a bucket on one end and a counterweight on the other, used to lift water by hand from a river or canal into irrigation channels.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "Drip (trickle) irrigation is generally considered more water-efficient than flood irrigation because it:",
+   "options": [
+    "Delivers small, precise amounts of water directly to the base of each plant, minimising evaporation and run-off losses",
+    "Floods the entire field with water at once",
+    "Uses no water at all, rather than delivering small, precise amounts directly to each plant, regardless of season or location.",
+    "Only works at night"
+   ],
+   "correct": 0,
+   "explain": "Drip (trickle) irrigation delivers small, controlled amounts of water directly to the root zone of each plant through a network of tubes and emitters, greatly reducing losses to evaporation and run-off compared with flood irrigation, which floods the whole field.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "Flood irrigation, which involves flooding an entire field with water, is most closely associated with an increased risk of:",
+   "options": [
+    "Salinization, because large volumes of water can raise the water table and draw dissolved salts up into the topsoil as water evaporates",
+    "Reducing soil salinity",
+    "Preventing any evaporation from occurring, rather than raising the water table and drawing up salts, according to most published research on the topic.",
+    "Eliminating the need for drainage"
+   ],
+   "correct": 0,
+   "explain": "Flood irrigation applies large volumes of water to a field. In hot, dry climates especially, much of this water evaporates, leaving dissolved salts behind in the topsoil; over time, this raises soil salinity (salinization), reducing fertility.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "An aquifer is best described as:",
+   "options": [
+    "A body of permeable rock that can store and transmit groundwater",
+    "A type of dam built across a river, rather than permeable rock that stores and transmits groundwater",
+    "A completely impermeable layer of rock",
+    "A man-made irrigation canal"
+   ],
+   "correct": 0,
+   "explain": "An aquifer is a body of permeable rock or sediment (such as sandstone or gravel) that can store and transmit significant quantities of groundwater, which can be accessed via wells or boreholes.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "The water table is best defined as:",
+   "options": [
+    "The upper surface of the zone of saturation, below which the ground is fully saturated with water",
+    "A table used to measure rainfall, rather than the upper surface of the zone of saturation below ground",
+    "The deepest possible point in any aquifer",
+    "A permanently fixed, unchanging depth below the surface everywhere on Earth"
+   ],
+   "correct": 0,
+   "explain": "The water table marks the upper surface of the zone of saturation, the level below which all pore spaces and cracks in the ground are filled with water; it rises and falls depending on recharge (from rainfall/infiltration) and abstraction (from pumping/wells).",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "The difference between an unconfined and a confined aquifer is that:",
+   "options": [
+    "An unconfined aquifer is overlain directly by permeable material and is recharged relatively easily from the surface, while a confined aquifer is trapped beneath an impermeable layer, making recharge much slower",
+    "A confined aquifer always has more water than an unconfined aquifer, regardless of how it is recharged, regardless of any other social, economic or environmental factor that might be involved in a specific place.",
+    "Unconfined aquifers only exist in deserts",
+    "There is no meaningful difference between the two"
+   ],
+   "correct": 0,
+   "explain": "An unconfined aquifer lies close to the surface, overlain by permeable rock/soil, so it can be recharged relatively easily and quickly by infiltrating rainfall. A confined aquifer is trapped beneath a layer of impermeable rock, so it recharges much more slowly, often only where the aquifer outcrops at the surface some distance away.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "Which of the following is a general cause of conflict over internationally shared water resources?",
+   "options": [
+    "Population growth and economic development increasing demand for a shared, finite resource",
+    "A total absence of any human population near the resource, rather than growing demand for a shared resource",
+    "Countries agreeing perfectly on how to share every resource",
+    "Water resources being infinite everywhere"
+   ],
+   "correct": 0,
+   "explain": "General causes of conflict over shared water resources include population growth, economic development, increased agriculture and industrial growth (all raising demand), global warming (altering supply), water pollution and groundwater depletion (reducing usable supply), ambiguity over how a shared resource should be divided, and wider political/military conflict.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "The Nile drainage basin is important to the region mainly because it:",
+   "options": [
+    "Supplies water for drinking, irrigation and agriculture, hydroelectric power, transport, tourism and wildlife habitats across multiple riparian countries in an otherwise arid/semi-arid region",
+    "Provides almost no water to any of the countries it flows through",
+    "Only flows through a single country, rather than crossing multiple riparian countries in the region, regardless of any other social, economic or environmental factor that might be involved in a specific place.",
+    "Has no economic value to any country"
+   ],
+   "correct": 0,
+   "explain": "The Nile flows through around 11 countries in a region that is otherwise largely arid or semi-arid, and is a critical source of drinking water, irrigation water for agriculture, hydroelectric power (e.g. Aswan Dam, GERD), transport, tourism and wildlife habitat (e.g. Murchison Falls National Park), making it essential to the economies and populations of its riparian states.",
+   "tag": "Water scarcity and quality"
+  },
+  {
+   "q": "Which of the following is a stakeholder group with a direct interest in Nile water allocation?",
+   "options": [
+    "Farmers and irrigation authorities needing water for agriculture",
+    "Only stakeholders based outside the Nile basin, rather than farmers and irrigation authorities themselves",
+    "Groups with absolutely no connection to water use",
+    "Only stakeholders interested in tourism"
+   ],
+   "correct": 0,
+   "explain": "Stakeholders competing for Nile water include agriculture/irrigation authorities and farmers, hydroelectric power operators, drinking water utilities, transport/navigation interests, the tourism industry, and conservation groups protecting wildlife habitats, each with different, sometimes conflicting, priorities for how the river’s water should be used.",
+   "tag": "Water scarcity and quality"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGFW-T4"] = {
+ "id": "IBGFW-T4",
+ "topicNumber": 4,
+ "topicTitle": "Option A: Freshwater (IB Geography Revision Guide)",
+ "title": "Water management futures",
+ "href": "/geography/revision/guide/freshwater/topic-4-water-management-futures",
+ "syllabusFocus": "IB Geography, Option A: Freshwater: Water management futures.",
+ "checklist": [
+  "I can evaluate local and community-based water management",
+  "I can evaluate the costs and benefits of multipurpose dams, using the Three Gorges Dam",
+  "I can evaluate integrated drainage basin management, using the Mississippi",
+  "I can evaluate wetland management, using coastal Louisiana"
+ ],
+ "quiz": [
+  {
+   "q": "A large-scale, \"top-down\" water management strategy is best described as one that is:",
+   "options": [
+    "Planned, funded and implemented by national governments or large organisations, often involving major infrastructure such as dams",
+    "Planned and funded by community members with no outside involvement",
+    "Only ever used in high-income countries, rather than any country planning major infrastructure, according to most published research on the topic.",
+    "Always cheaper than small-scale strategies"
+   ],
+   "correct": 0,
+   "explain": "Top-down water management strategies are planned and delivered by national governments, international bodies or large organisations, often involving major infrastructure projects such as large dams and reservoirs, water transfer schemes or national irrigation networks.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "A small-scale, \"bottom-up\" (intermediate) water management strategy is best described as one that:",
+   "options": [
+    "Is designed and implemented with strong involvement of local communities, often using appropriate, low-cost technology suited to local conditions",
+    "Requires a national government to make every decision, rather than involving local communities directly, according to most published research on the topic.",
+    "Is always more expensive than large-scale schemes",
+    "Can only be used to manage floods, never scarcity"
+   ],
+   "correct": 0,
+   "explain": "Bottom-up (intermediate) water management strategies are designed and implemented with strong involvement from local communities, often using appropriate, low-cost technology suited to local skills, resources and conditions, such as hand pumps, rainwater harvesting or small-scale irrigation schemes.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "A key argument in favour of community-based (bottom-up) water management approaches is that they:",
+   "options": [
+    "Tend to be more sustainable because local communities are trained and have ownership over operating and maintaining the systems, which are matched to local needs",
+    "Always require the most expensive technology available",
+    "Automatically solve water scarcity for an entire country, rather than being matched to local needs, regardless of any other environmental or economic factor involved.",
+    "Never require any external support or funding"
+   ],
+   "correct": 0,
+   "explain": "Community-based approaches are often considered more sustainable because local people are trained to build, operate and maintain the systems themselves, using technology suited to local resources and needs, giving communities a sense of ownership that improves long-term upkeep compared with externally imposed, top-down schemes.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "A \"multipurpose\" dam scheme is one that is designed to provide:",
+   "options": [
+    "Several benefits at once, such as hydroelectric power, flood control, irrigation water supply, navigation and recreation",
+    "Only hydroelectric power, with no other function",
+    "Only flood control, with no other function such as hydroelectric power or irrigation supply, regardless of season or location.",
+    "No benefits, only environmental protection"
+   ],
+   "correct": 0,
+   "explain": "A multipurpose dam scheme is designed to provide several benefits simultaneously, commonly including hydroelectric power generation, flood control, a reliable water supply for irrigation and domestic use, improved river navigation, and recreational opportunities such as fishing and boating.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "Which of the following is an example of a social cost of large dam construction?",
+   "options": [
+    "Forced displacement/resettlement of local communities whose land is flooded by the reservoir",
+    "Increased hydroelectric power generation",
+    "Improved navigation for shipping, rather than the forced displacement of local communities, regardless of location.",
+    "Reduced sediment reaching the coast"
+   ],
+   "correct": 0,
+   "explain": "A major social cost of large dam construction is the forced displacement and resettlement of communities whose homes and land are flooded by the reservoir; the Three Gorges Dam alone required the resettlement of an estimated 1.3 million people.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "Which of the following is an example of an environmental cost of large dam construction?",
+   "options": [
+    "Disruption to river ecosystems and loss of biodiversity, for example from blocking fish migration routes or trapping sediment",
+    "Increased employment in construction",
+    "Improved flood protection downstream, rather than disruption to river ecosystems and biodiversity, regardless of season or location.",
+    "Lower electricity prices"
+   ],
+   "correct": 0,
+   "explain": "Environmental costs of large dams include disrupting river ecosystems and blocking migration routes for fish species (affecting spawning), trapping sediment that would otherwise nourish downstream floodplains and deltas, and altering water temperature and flow patterns, all of which can reduce biodiversity.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "Integrated drainage basin management (IDBM) is best defined as:",
+   "options": [
+    "The process of coordinating the conservation, management and development of water, land and related resources across sectors within a given river basin, to maximise economic and social benefits equitably while preserving and restoring freshwater ecosystems",
+    "Managing only one small part of a river with no reference to the rest of the basin's water, land or resources, regardless of any other social, economic or environmental factor that might be involved in a specific place, a claim not supported by any of the case study evidence examined in this unit or by wider published geographical research on the topic.",
+    "A plan that focuses exclusively on hydroelectric power, ignoring all other uses",
+    "A strategy used only in high-income countries"
+   ],
+   "correct": 0,
+   "explain": "Integrated drainage basin management (also called integrated river basin management, IRBM) is the process of coordinating conservation, management and development of water, land and related resources across different sectors within a river basin, aiming to maximise economic and social benefits equitably while preserving, and where necessary restoring, freshwater ecosystems (adapted from the Global Water Partnership).",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "A key reason IDBM has become increasingly important is that:",
+   "options": [
+    "Growing and competing demands on water from agriculture, industry, domestic use and ecosystems mean uncoordinated, single-purpose management can create conflict and unsustainable outcomes",
+    "River basins are simple, single-use systems with no competing demands",
+    "Water scarcity issues have completely disappeared globally, despite growing and competing demands, regardless of any other social, economic or environmental factor that might be involved in a specific place.",
+    "Basins never cross administrative or national boundaries"
+   ],
+   "correct": 0,
+   "explain": "As demand for water from agriculture, industry, domestic supply and ecosystem protection grows and increasingly competes for the same limited resource, uncoordinated, single-purpose management (for example, a dam built purely for irrigation with no consideration of downstream ecology) can create conflict between users and unsustainable long-term outcomes, making a more integrated, whole-basin approach increasingly valuable.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "Which of the following would typically be a component of an integrated drainage basin management plan?",
+   "options": [
+    "Coordinated goals covering water quality, water quantity, flood risk, economic use, transportation and ecosystem health, developed with input from multiple stakeholders across the basin",
+    "A plan focused solely on one small tributary with no reference to the rest of the basin",
+    "A plan written by a single landowner with no input from any government agency or other stakeholder, regardless of any other social, economic or environmental factor that might be involved in a specific place.",
+    "A plan with no measurable goals or monitoring at all"
+   ],
+   "correct": 0,
+   "explain": "An IDBM plan typically sets coordinated goals across multiple dimensions, such as water quality, water quantity, flood risk management, economic use, transportation and ecosystem health, developed with input from a wide range of stakeholders (governments, businesses, communities, environmental groups) across the whole basin, often with monitoring tools such as periodic \"report cards\".",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "A wetland is best defined as:",
+   "options": [
+    "An area of marsh, fen, peatland or water, whether natural or artificial, permanent or temporary, with water that is static or flowing, fresh, brackish or saline",
+    "Land that is permanently dry with no water present",
+    "Only areas of ocean deeper than 200 metres, rather than marsh, fen, peatland or shallow water, regardless of any other environmental or economic factor involved.",
+    "A type of desert landform"
+   ],
+   "correct": 0,
+   "explain": "Under the Ramsar Convention’s definition, a wetland is an area of marsh, fen, peatland or water, whether natural or artificial, permanent or temporary, with water that is static or flowing, fresh, brackish or salt, including areas of marine water up to 6 metres deep at low tide.",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "Which of the following is an example of an \"inland\" wetland type?",
+   "options": [
+    "A peat bog or fen, such as the Fens of eastern England",
+    "A coral reef",
+    "A saltwater estuary",
+    "A reservoir, an artificial store rather than a naturally occurring inland wetland type like a bog"
+   ],
+   "correct": 0,
+   "explain": "Inland wetlands include freshwater marshes, fens, and peat bogs found away from the coast, such as the Fens of eastern England or peat bogs like Burns Bog in British Columbia, distinct from coastal wetlands (such as estuaries and mangroves) or marine wetlands (such as coral reefs).",
+   "tag": "Water management futures"
+  },
+  {
+   "q": "Wetlands provide flood protection value mainly because they:",
+   "options": [
+    "Can absorb large volumes of water during heavy rainfall and slowly release it, reducing the magnitude of flooding downstream",
+    "Speed up the flow of water downstream as fast as possible",
+    "Prevent any rain from ever falling, rather than absorbing and slowly releasing water during storms, regardless of season or location.",
+    "Only exist in areas with no flood risk"
+   ],
+   "correct": 0,
+   "explain": "Wetlands such as marshes act like a natural sponge, absorbing large volumes of water during periods of heavy rainfall and slowly releasing it over time, which reduces the magnitude and speed of flooding in downstream areas.",
+   "tag": "Water management futures"
+  }
+ ]
+};
 window.SBL_LESSONS["IBGCP-T1"] = {
  "id": "IBGCP-T1",
  "topicNumber": 1,

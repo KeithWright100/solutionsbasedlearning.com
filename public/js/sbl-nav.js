@@ -243,6 +243,7 @@
   // first time someone uses the search, then cached by the browser.
   var TREE_SOURCES = [
     { key: 'ib-geo', label: 'IB Geography', src: '/js/sbl-sidebar.js' },
+    { key: 'ib-guide', label: 'IB Geography revision guide', src: '/js/sbl-ib-geo-guide-sidebar.js' },
     { key: 'igcse-geo', label: 'IGCSE Geography', src: '/js/sbl-igcse-geo-sidebar.js' },
     { key: 'igcse-econ', label: 'IGCSE Economics', src: '/js/sbl-igcse-econ-sidebar.js' },
     { key: 'igcse-bus', label: 'IGCSE Business', src: '/js/sbl-igcse-bus-sidebar.js' },
