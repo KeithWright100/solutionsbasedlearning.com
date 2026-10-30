@@ -174,6 +174,50 @@
         ]
       }
     ]
+  },
+  {
+    "section": "Paper 3: HL core extension",
+    "units": [
+      {
+        "slug": "power-places-networks",
+        "label": "Unit 4: Power, Places and Networks",
+        "href": "/geography/revision/guide/power-places-networks",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Global power",
+                "href": "/geography/revision/guide/power-places-networks/topic-1-global-interactions-and-global-power"
+              },
+              {
+                "label": "Networks and flows",
+                "href": "/geography/revision/guide/power-places-networks/topic-2-global-networks-and-flows"
+              },
+              {
+                "label": "Influences on interactions",
+                "href": "/geography/revision/guide/power-places-networks/topic-3-human-and-physical-influences-on-global-interactions"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "human-development-diversity",
+        "label": "Unit 5: Human Development and Diversity",
+        "href": null,
+        "status": "soon",
+        "topics": []
+      },
+      {
+        "slug": "global-risks-resilience",
+        "label": "Unit 6: Global Risks and Resilience",
+        "href": null,
+        "status": "soon",
+        "topics": []
+      }
+    ]
   }
 ];
   /* shared with the site search in /js/sbl-nav.js */

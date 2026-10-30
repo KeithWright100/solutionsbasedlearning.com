@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3"];
+window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3", "IBGPP-T1", "IBGPP-T2", "IBGPP-T3"];
 window.SBL_LESSONS["IBGFW-T1"] = {
  "id": "IBGFW-T1",
  "topicNumber": 4,
@@ -3546,6 +3546,449 @@ window.SBL_LESSONS["IBGRC-T3"] = {
    "correct": 0,
    "explain": "A core circular economy principle is designing products and systems to minimise waste from the very beginning, for example by making products more durable, repairable, and easier to recycle or disassemble at the end of their life.",
    "tag": "Resource stewardship"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGPP-T1"] = {
+ "id": "IBGPP-T1",
+ "topicNumber": 7,
+ "topicTitle": "Unit 4: Power, Places and Networks (IB Geography Revision Guide)",
+ "title": "Global interactions and global power",
+ "href": "/geography/revision/guide/power-places-networks/topic-1-global-interactions-and-global-power",
+ "syllabusFocus": "IB Geography, Unit 4: Power, Places and Networks: Global interactions and global power.",
+ "checklist": [
+  "I can explain how globalization indices such as the KOF index measure global interactions",
+  "I can compare the economic, geopolitical and cultural power of the USA and China",
+  "I can evaluate the roles of the G7, G20, OECD, OPEC, the IMF and the NDB"
+ ],
+ "quiz": [
+  {
+   "q": "Globalisation is best defined as:",
+   "options": [
+    "The growing interconnectedness and interdependence of countries through economic, social and political ties",
+    "The process by which countries become more isolated from one another",
+    "A narrow term that refers only to international trade in physical goods, not to social or political ties",
+    "A process that only affects high-income, economically developed countries and has no impact on low-income nations"
+   ],
+   "correct": 0,
+   "explain": "Globalisation describes the increasing interconnectedness and interdependence of countries and people worldwide, through flows of trade, investment, people, information and ideas.",
+   "tag": "Global power"
+  },
+  {
+   "q": "The KOF Globalisation Index measures globalisation across which three dimensions?",
+   "options": [
+    "Economic, social and political",
+    "Military, cultural, environmental",
+    "Trade, tourism and language",
+    "Population, migration and urbanisation"
+   ],
+   "correct": 0,
+   "explain": "The KOF Globalisation Index measures globalisation along three dimensions: economic, social and political.",
+   "tag": "Global power"
+  },
+  {
+   "q": "The KOF Index is produced by aggregating how many underlying variables?",
+   "options": [
+    "Around 42",
+    "Around 10",
+    "Around 100",
+    "Around 5"
+   ],
+   "correct": 0,
+   "explain": "The current KOF Globalisation Index aggregates around 42 different variables across its three dimensions to produce an overall score.",
+   "tag": "Global power"
+  },
+  {
+   "q": "A global superpower is best defined as:",
+   "options": [
+    "A state with significant economic, military, political and cultural influence that extends globally, not just regionally",
+    "Any country with a large population, regardless of its economic strength, military reach, political weight or cultural influence abroad",
+    "A country that has managed to avoid ever becoming involved in any international military conflict",
+    "A country with the largest land area in the world"
+   ],
+   "correct": 0,
+   "explain": "A global superpower is a state with the economic, military, political and cultural influence to project power on a worldwide scale, rather than being limited to its own region.",
+   "tag": "Global power"
+  },
+  {
+   "q": "In terms of military spending, which best describes the USA and China’s positions globally?",
+   "options": [
+    "The USA is the world's largest military spender, well ahead of China",
+    "China spends more on its military than the USA",
+    "Neither country ranks among the top global military spenders",
+    "The USA and China spend virtually identical amounts on defence every single year"
+   ],
+   "correct": 0,
+   "explain": "The USA has consistently been the world’s largest military spender by a wide margin, while China’s military spending, though considerably lower, still ranks among the highest in the world.",
+   "tag": "Global power"
+  },
+  {
+   "q": "Which trading organisation are both the USA and China members of?",
+   "options": [
+    "The World Trade Organization (WTO)",
+    "The North American Free Trade Agreement (NAFTA) bloc",
+    "The European Union",
+    "ASEAN"
+   ],
+   "correct": 0,
+   "explain": "Both the USA and China are members of the World Trade Organization (WTO), which shapes global rules around international trade.",
+   "tag": "Global power"
+  },
+  {
+   "q": "The G7 is best described as:",
+   "options": [
+    "An informal group of seven advanced economies discussing global political and economic issues",
+    "A formal treaty organisation with a permanent secretariat",
+    "A military alliance",
+    "An organisation exclusively and formally focused on coordinating global oil production levels"
+   ],
+   "correct": 0,
+   "explain": "The G7 is an informal grouping of seven major advanced economies (Canada, France, Germany, Italy, Japan, the UK and the USA) that meets to discuss global political, security and economic issues; it has no treaty basis or permanent secretariat.",
+   "tag": "Global power"
+  },
+  {
+   "q": "The G20 differs from the G7 mainly because it:",
+   "options": [
+    "Includes a broader range of economies, including large emerging economies and the EU",
+    "Has fewer member countries than the G7",
+    "Focuses only on military cooperation between its member states each year",
+    "Was created before the G7 and has never admitted any new member countries since its founding"
+   ],
+   "correct": 0,
+   "explain": "The G20 includes 19 individual countries plus the European Union and African Union, bringing in major emerging economies (such as Brazil, China, India and South Africa) alongside the advanced economies already in the G7, making it a broader forum for economic cooperation.",
+   "tag": "Global power"
+  },
+  {
+   "q": "The OECD (Organization for Economic Cooperation and Development) primarily exists to:",
+   "options": [
+    "Promote policies improving economic and social wellbeing through cooperation and shared standards",
+    "Coordinate global oil production",
+    "Provide emergency financial loans to countries facing a sudden financial crisis",
+    "Act as a military alliance that coordinates the armed forces and defence spending of its member countries each year"
+   ],
+   "correct": 0,
+   "explain": "The OECD is an intergovernmental organisation that promotes policies to improve economic and social wellbeing, largely through research, data, shared standards and policy cooperation among its member countries, which are mostly high-income, developed economies.",
+   "tag": "Global power"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGPP-T2"] = {
+ "id": "IBGPP-T2",
+ "topicNumber": 7,
+ "topicTitle": "Unit 4: Power, Places and Networks (IB Geography Revision Guide)",
+ "title": "Global networks and flows",
+ "href": "/geography/revision/guide/power-places-networks/topic-2-global-networks-and-flows",
+ "syllabusFocus": "IB Geography, Unit 4: Power, Places and Networks: Global networks and flows.",
+ "checklist": [
+  "I can describe and explain flows of trade, aid, loans, remittances and illegal goods",
+  "I can explain FDI and outsourcing by TNCs, using the Shenzhen SEZ",
+  "I can compare the global strategies and supply chains of IKEA and Tata"
+ ],
+ "quiz": [
+  {
+   "q": "Global networks and flows refer to:",
+   "options": [
+    "The many movements of goods, services, capital, people and information that connect places",
+    "A single type of connection between two countries",
+    "Only physical trade in raw materials, excluding services, capital, people and information entirely",
+    "A term used exclusively for illegal trade"
+   ],
+   "correct": 0,
+   "explain": "Global networks and flows describe the many different types of movement (of goods, services, capital, people and information) that connect places around the world, forming an interconnected global system.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "Trade in manufactured goods refers to:",
+   "options": [
+    "The trade of physical, produced items such as clothing, electronics or vehicles",
+    "The exchange of intangible services, such as banking, insurance or tourism",
+    "Only raw, unprocessed materials like crude oil",
+    "Financial aid given between governments, rather than physical goods that are bought and sold"
+   ],
+   "correct": 0,
+   "explain": "Trade in manufactured goods refers to the international exchange of physical items that have been produced or processed, such as clothing, electronics, or vehicles, as opposed to raw materials or intangible services.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "Trade in services differs from trade in goods because it involves:",
+   "options": [
+    "The exchange of intangible activities, such as banking, tourism, insurance or IT support, rather than physical items",
+    "The exchange of physical products only",
+    "Only raw material extraction and processing, excluding intangible activities such as banking, tourism, insurance or IT support entirely",
+    "Financial loans between governments"
+   ],
+   "correct": 0,
+   "explain": "Trade in services involves the exchange of intangible activities, such as banking, tourism, insurance, or IT support, rather than the exchange of physical, tangible items.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "Foreign Direct Investment (FDI) is best defined as:",
+   "options": [
+    "Investment by a company in one country into business interests located in another country",
+    "A short-term purchase of foreign stocks and shares on the open market",
+    "A government loan given to another government",
+    "A tax paid by importers on goods as they legally cross an international border into another country's territory"
+   ],
+   "correct": 0,
+   "explain": "Foreign Direct Investment refers to investment made by a company or individual from one country into business interests, such as building a factory or acquiring a subsidiary, in another country, typically involving a lasting interest and some degree of control.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "Outsourcing, as a TNC strategy, refers to:",
+   "options": [
+    "A company contracting out production to another company, often abroad, to cut costs",
+    "A company permanently closing down every one of its overseas operations",
+    "A government policy restricting foreign trade",
+    "A form of illegal international trade that is banned under most countries' trade laws"
+   ],
+   "correct": 0,
+   "explain": "Outsourcing is when a company contracts out part of its production processes or services to another company, often located in a different country, typically to take advantage of lower costs or specialised expertise.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "A key reason TNCs choose to outsource part of their production is to:",
+   "options": [
+    "Take advantage of lower labour costs or specialised skills available elsewhere",
+    "Deliberately increase their own overall production costs each year",
+    "Avoid selling their products internationally so as to focus only on their home market",
+    "Reduce the overall size and reach of their business"
+   ],
+   "correct": 0,
+   "explain": "TNCs often outsource production to take advantage of lower labour costs, specialised skills, or more favourable business conditions available in another country, helping to reduce overall production costs.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "Ikea’s core global business model is best described as being based on:",
+   "options": [
+    "High-volume production of standardised products",
+    "Producing highly customised, expensive furniture for each individual market",
+    "Manufacturing only in its home country of Sweden",
+    "Selling exclusively through third-party retailers rather than its own stores"
+   ],
+   "correct": 0,
+   "explain": "Ikea’s business model relies on producing large volumes of largely standardised products, which secures lower prices from suppliers and allows the company to keep its own prices low and consistent across many different global markets.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "When entering a new international market, Ikea is generally known for:",
+   "options": [
+    "Taking a slow, carefully researched approach to local needs before opening stores",
+    "Expanding into new markets as rapidly as possible with minimal prior research",
+    "Refusing to research local markets at all before entering them",
+    "Only entering markets that are culturally identical to Sweden, avoiding any unfamiliar cultures"
+   ],
+   "correct": 0,
+   "explain": "Ikea is known for taking a deliberately slow, carefully researched approach when entering new international markets, conducting extensive research into local habits, needs and preferences before opening stores.",
+   "tag": "Networks and flows"
+  },
+  {
+   "q": "Ikea researches cultural differences between markets mainly in order to:",
+   "options": [
+    "Understand how the same products can be used differently across cultural contexts",
+    "Create an entirely different product range for every single country it enters",
+    "Avoid selling any products internationally so as to protect its Swedish domestic market share",
+    "Eliminate the need for physical stores entirely"
+   ],
+   "correct": 0,
+   "explain": "Ikea’s cultural research helps the company understand how its largely standardised product range can be presented and used differently across markets (for example through sample room displays or catalogue variations), rather than creating entirely different products for each country.",
+   "tag": "Networks and flows"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGPP-T3"] = {
+ "id": "IBGPP-T3",
+ "topicNumber": 7,
+ "topicTitle": "Unit 4: Power, Places and Networks (IB Geography Revision Guide)",
+ "title": "Human and physical influences on global interactions",
+ "href": "/geography/revision/guide/power-places-networks/topic-3-human-and-physical-influences-on-global-interactions",
+ "syllabusFocus": "IB Geography, Unit 4: Power, Places and Networks: Human and physical influences on global interactions.",
+ "checklist": [
+  "I can explain how MGOs, free trade and migration controls affect global interactions",
+  "I can explain the shrinking world, friction of distance and time-space convergence",
+  "I can explain how transport developments have reduced the friction of distance",
+  "I can analyse patterns of internet and social media use and the digital divide",
+  "I can explain how resources and geographic isolation influence global interactions"
+ ],
+ "quiz": [
+  {
+   "q": "A multi-governmental organization (MGO) is best defined as:",
+   "options": [
+    "An organisation formed by two or more national governments working towards shared goals",
+    "A single country's own internal government department or ministry",
+    "A private, profit-making company that operates entirely independently of any national government or international body",
+    "A charity run entirely by individual volunteers"
+   ],
+   "correct": 0,
+   "explain": "A multi-governmental organization (MGO) is formed by two or more national governments working together, typically through formal agreements or treaties, to pursue shared political, economic or social goals.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "A free trade zone is best defined as:",
+   "options": [
+    "An area or agreement between countries where trade barriers such as tariffs are reduced",
+    "An area where all imports and exports are completely and permanently banned",
+    "A single country with no international trade at all",
+    "A zone reserved exclusively for military purposes, where no trade agreements or tariff arrangements of any kind apply"
+   ],
+   "correct": 0,
+   "explain": "A free trade zone refers to a designated area or an agreement between countries in which trade barriers, such as tariffs and import quotas, are significantly reduced or removed, making it easier and cheaper to trade between the participating countries.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "The European Union (EU) is used as an example of an MGO because it:",
+   "options": [
+    "A political and economic union of independent member states cooperating on shared policy",
+    "A single, unified country governed by one central national government",
+    "Has no member states at all and exists only as a theoretical proposal that has never actually been implemented anywhere",
+    "Operates entirely outside of any government involvement"
+   ],
+   "correct": 0,
+   "explain": "The EU is a political and economic union of multiple independent member states that cooperate on a wide range of shared policies, including trade, movement of people, and economic regulation, making it a clear example of an MGO.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "Friction of distance refers to:",
+   "options": [
+    "Increasing distance tends to increase the time, cost or effort of interacting",
+    "The physical wear and tear on transport infrastructure that builds up over time",
+    "A term used only in physics, unrelated to geography",
+    "The number of people living between two places"
+   ],
+   "correct": 0,
+   "explain": "Friction of distance describes how increasing distance between two places tends to increase the time, cost, or effort required to travel or communicate between them, acting as a barrier to interaction.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "Time-space convergence refers to:",
+   "options": [
+    "The effective reduction in travel or communication time, though physical distance is unchanged",
+    "Places becoming physically closer together in terms of actual measured distance",
+    "The complete elimination of all travel time between any two places",
+    "A term entirely unrelated to technological change, describing only formal political boundary changes over time between states"
+   ],
+   "correct": 0,
+   "explain": "Time-space convergence describes how the effective time it takes to travel or communicate between two places has decreased over time, due to improvements in transport and communication technology, even though the actual physical distance between them remains unchanged.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "Our \"shrinking world\" is a phrase used to describe how:",
+   "options": [
+    "Better transport and communication technology has made the world feel smaller",
+    "The Earth's actual physical size has genuinely decreased over recent decades",
+    "All countries have become physically closer to one another",
+    "Technology has had no impact on global interaction, travel time or communication speed at all"
+   ],
+   "correct": 0,
+   "explain": "The phrase \"shrinking world\" describes how improvements in transport and communication technology have made the world feel smaller, by dramatically reducing the effective time and cost of travelling or communicating across distance, even though physical distances remain unchanged.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "Transport developments are directly linked to friction of distance because they:",
+   "options": [
+    "Reduce the time, cost or effort involved in travelling between places",
+    "Have no effect on how easily people or goods can travel between places",
+    "Always increase the friction of distance between places",
+    "Only affect distances within a single country"
+   ],
+   "correct": 0,
+   "explain": "Transport developments directly reduce the time, cost, and effort involved in travelling between places, which effectively lowers the friction of distance and makes interaction over long distances easier.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "A major technological development in road transport has been:",
+   "options": [
+    "The development of motorways and improved vehicle engineering",
+    "The complete elimination of all road vehicles",
+    "Roads becoming slower and less efficient over the past century",
+    "Road transport remaining completely unchanged since the 1800s"
+   ],
+   "correct": 0,
+   "explain": "The development of motorways/highways and significant improvements in vehicle engineering (such as engine efficiency and safety features) have allowed for faster, safer and more efficient road travel over time.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "A major technological development in rail transport has been:",
+   "options": [
+    "High-speed rail networks, dramatically cutting journey times between major cities",
+    "Trains becoming significantly slower over time",
+    "The complete removal of railways from most countries in favour of road and air transport",
+    "Rail transport has seen no significant technological innovation since the 1900s"
+   ],
+   "correct": 0,
+   "explain": "The introduction of high-speed rail networks, capable of travelling at very high speeds, has dramatically reduced journey times between major cities in many parts of the world, representing a major transport development.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "The internet is best defined as:",
+   "options": [
+    "A global network of interconnected computer networks sharing information worldwide",
+    "A single website that is used primarily for online communication",
+    "A type of physical transport infrastructure",
+    "A term used only to describe social media platforms, excluding email, websites or file transfer"
+   ],
+   "correct": 0,
+   "explain": "The internet is a global network of interconnected computer networks that allows data and information to be shared and communicated between devices and users all around the world.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "Global internet use since the 1990s has generally:",
+   "options": [
+    "Increased dramatically, growing from a small number of users to billions worldwide",
+    "Decreased significantly in most regions of the world since the 1990s",
+    "Remained completely unchanged",
+    "Only grown within a small number of wealthy countries with no wider global spread at all"
+   ],
+   "correct": 0,
+   "explain": "Global internet use has increased dramatically since the 1990s, growing from a relatively small number of early users to billions of people connected worldwide today, representing one of the most significant technological shifts in recent history.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "A key factor behind the rapid growth of social media has been:",
+   "options": [
+    "Rising smartphone ownership combined with platforms designed to encourage engagement",
+    "An overall decrease in global internet access and smartphone ownership across most world regions",
+    "Social media platforms becoming less accessible over time",
+    "A complete lack of interest from younger generations"
+   ],
+   "correct": 0,
+   "explain": "The rapid growth of social media has been driven by increasing smartphone ownership and internet access worldwide, combined with platform designs specifically aimed at encouraging frequent and sustained user engagement.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "A natural resource is best defined as:",
+   "options": [
+    "A material or substance found in nature that has economic or practical value to humans",
+    "Any object manufactured by humans",
+    "A type of financial asset traded on the stock market, unrelated to any natural material",
+    "A term used only to describe fossil fuels"
+   ],
+   "correct": 0,
+   "explain": "A natural resource is a material or substance occurring in nature, such as minerals, water, or fossil fuels, that has economic or practical value and use to humans.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "Global oil reserves are notably concentrated in which region?",
+   "options": [
+    "The Middle East, which holds a very large share of proven global oil reserves",
+    "Northern Europe",
+    "Antarctica",
+    "Evenly and equally distributed across every continent on Earth, with no regional concentration"
+   ],
+   "correct": 0,
+   "explain": "The Middle East holds a very large share of the world’s proven oil reserves, making it one of the most geographically concentrated and geopolitically significant natural resources in the world.",
+   "tag": "Influences on interactions"
+  },
+  {
+   "q": "The uneven global distribution of oil reserves has significant implications for global interaction because it:",
+   "options": [
+    "Creates strong economic and political dependencies between exporters and importers",
+    "Has no effect whatsoever on trade, diplomacy or international relationships between countries",
+    "Means oil is never traded internationally",
+    "Only affects countries within the same region as the reserves"
+   ],
+   "correct": 0,
+   "explain": "Because oil reserves are so unevenly distributed globally, this creates strong economic and political interdependencies between oil-exporting countries and the oil-importing countries that rely on them, significantly shaping global trade and international relationships.",
+   "tag": "Influences on interactions"
   }
  ]
 };
