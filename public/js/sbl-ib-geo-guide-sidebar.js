@@ -206,9 +206,27 @@
       {
         "slug": "human-development-diversity",
         "label": "Unit 5: Human Development and Diversity",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/geography/revision/guide/human-development-diversity",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Development opportunities",
+                "href": "/geography/revision/guide/human-development-diversity/topic-1-development-opportunities"
+              },
+              {
+                "label": "Identities and cultures",
+                "href": "/geography/revision/guide/human-development-diversity/topic-2-changing-identities-and-cultures"
+              },
+              {
+                "label": "Local responses",
+                "href": "/geography/revision/guide/human-development-diversity/topic-3-local-responses-to-global-interactions"
+              }
+            ]
+          }
+        ]
       },
       {
         "slug": "global-risks-resilience",

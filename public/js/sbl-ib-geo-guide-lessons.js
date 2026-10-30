@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3", "IBGPP-T1", "IBGPP-T2", "IBGPP-T3"];
+window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3", "IBGPP-T1", "IBGPP-T2", "IBGPP-T3", "IBGHD-T1", "IBGHD-T2", "IBGHD-T3"];
 window.SBL_LESSONS["IBGFW-T1"] = {
  "id": "IBGFW-T1",
  "topicNumber": 4,
@@ -3989,6 +3989,412 @@ window.SBL_LESSONS["IBGPP-T3"] = {
    "correct": 0,
    "explain": "Because oil reserves are so unevenly distributed globally, this creates strong economic and political interdependencies between oil-exporting countries and the oil-importing countries that rely on them, significantly shaping global trade and international relationships.",
    "tag": "Influences on interactions"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGHD-T1"] = {
+ "id": "IBGHD-T1",
+ "topicNumber": 8,
+ "topicTitle": "Unit 5: Human Development and Diversity (IB Geography Revision Guide)",
+ "title": "Development opportunities",
+ "href": "/geography/revision/guide/human-development-diversity/topic-1-development-opportunities",
+ "syllabusFocus": "IB Geography, Unit 5: Human Development and Diversity: Development opportunities.",
+ "checklist": [
+  "I can evaluate the SDGs, HDI and GII as measures of human development",
+  "I can explain affirmative action for women, LGBTQ+ people and the Dani",
+  "I can explain how microfinance and Fairtrade support human development",
+  "I can evaluate CSR and global agreements, using IKEA and IFAs"
+ ],
+ "quiz": [
+  {
+   "q": "A GII score closer to 0 indicates:",
+   "options": [
+    "Greater equality between men and women",
+    "Greater inequality between men and women",
+    "A country with no population data available",
+    "A country with a very low HDI score"
+   ],
+   "correct": 0,
+   "explain": "On the GII scale, a score closer to 0 indicates greater equality between men and women across the measured dimensions, while a score closer to 1 indicates greater inequality.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "Validity, as it relates to a development indicator, refers to:",
+   "options": [
+    "Whether an indicator actually measures what it claims to measure",
+    "Whether an indicator produces the same result every time it is measured",
+    "The total number of countries included in an indicator",
+    "The visual design of a graph showing the indicator"
+   ],
+   "correct": 0,
+   "explain": "Validity refers to whether an indicator genuinely measures what it claims to measure — for example, whether GNI per capita is a valid measure of overall \"development\" or only captures the economic dimension.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "A key limitation shared by composite indicators like the HDI and GII is that they:",
+   "options": [
+    "Combine multiple factors into a single score",
+    "Are always perfectly accurate with no possible criticism",
+    "Cannot be calculated for any country",
+    "Only measure a single dimension of development"
+   ],
+   "correct": 0,
+   "explain": "A key limitation of composite indicators like the HDI and GII is that combining multiple factors into a single score can mask important variation — a country might score well overall while performing poorly on one specific underlying dimension, or while hiding significant inequality within the country.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "Affirmative action, as it pertains to minority groups, refers to:",
+   "options": [
+    "Deliberate policies or measures aimed at improving opportunities and reducing inequality for groups that have historically faced discrimination or disadvantage",
+    "Policies that reduce support for disadvantaged groups",
+    "A term unrelated to social or gender equality",
+    "A policy that applies only to majority population groups"
+   ],
+   "correct": 0,
+   "explain": "Affirmative action refers to deliberate policies or measures aimed at improving opportunities and reducing inequality for groups that have historically faced discrimination or disadvantage, such as women, indigenous peoples, or other minority groups.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "Affirmative action to promote gender equality for women in Nepal has included measures such as:",
+   "options": [
+    "Reserved seats or quotas for women in political representation, and initiatives to improve women’s access to education and economic opportunity",
+    "Reducing women’s access to education and political participation",
+    "Banning women from all forms of employment",
+    "A complete absence of any government policy on gender equality"
+   ],
+   "correct": 0,
+   "explain": "Affirmative action in Nepal supporting gender equality has included measures such as reserved seats or quotas for women in political representation, alongside initiatives aimed at improving women’s access to education and economic opportunity.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "A basic example of affirmative action supporting LGBTQ+ communities as a minority group would be:",
+   "options": [
+    "Introducing anti-discrimination laws or policies that specifically protect LGBTQ+ individuals in areas such as employment or legal recognition",
+    "Removing all legal recognition or protections for LGBTQ+ individuals",
+    "A policy with no relevance to development or human rights",
+    "A measure that only applies to majority population groups"
+   ],
+   "correct": 0,
+   "explain": "A basic example of affirmative action supporting LGBTQ+ communities includes introducing anti-discrimination laws or policies that specifically protect LGBTQ+ individuals, such as employment protections or legal recognition of same-sex relationships, aiming to reduce disadvantage faced by this minority group.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "A social entrepreneur is best defined as someone who:",
+   "options": [
+    "Recognises a social problem and uses entrepreneurial principles to organise, create and manage a venture that drives social change",
+    "Starts a business purely to maximise personal financial profit",
+    "Only donates money to charity without running any kind of venture",
+    "Has no connection to solving social problems"
+   ],
+   "correct": 0,
+   "explain": "A social entrepreneur recognises a social problem and uses entrepreneurial principles — such as innovation, risk-taking and business strategy — to organise, create and manage a venture that drives social change, rather than purely pursuing financial profit.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "A key difference between an ordinary entrepreneurial venture and a social entrepreneurial venture is that:",
+   "options": [
+    "Ordinary ventures aim primarily for financial gain, while social ventures aim to drive social change using business solutions, with sustainability and social impact as the measure of success",
+    "They are identical in every respect",
+    "Social ventures never generate any revenue",
+    "Ordinary ventures always have a social purpose"
+   ],
+   "correct": 0,
+   "explain": "Ordinary entrepreneurial ventures primarily aim to serve markets with new products or services for financial gain, while social entrepreneurial ventures aim to drive social change using business solutions, measuring success through sustainability and social impact rather than profit alone.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "Micro-finance is best defined as:",
+   "options": [
+    "Small loans, savings, and other financial services provided to individuals or small businesses, often in low-income communities, who typically lack access to traditional banking",
+    "Very large loans given exclusively to established multinational corporations",
+    "A term unrelated to development or poverty reduction",
+    "A government tax policy"
+   ],
+   "correct": 0,
+   "explain": "Micro-finance refers to small loans, savings accounts, and other financial services provided to individuals or small businesses, often in low-income communities, who typically lack access to traditional banking services, aiming to support entrepreneurship and reduce poverty.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "Compared to voluntary CSR commitments, International Framework Agreements (IFAs) are generally considered to offer:",
+   "options": [
+    "A more formally negotiated commitment, often involving trade unions",
+    "Weaker commitments with no negotiation involved",
+    "Identical strength and enforceability to a purely voluntary CSR statement",
+    "No meaningful difference from an ordinary company press release"
+   ],
+   "correct": 0,
+   "explain": "Compared to purely voluntary, unilateral CSR commitments, IFAs are generally considered to offer a more formally negotiated commitment, often involving trade unions as a negotiating partner, which can provide a somewhat stronger and more accountable basis for consistent labour standards across a TNC’s international operations.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "Corporate Social Responsibility (CSR) is best defined as:",
+   "options": [
+    "A company’s voluntary commitment to operate in ways that consider social, environmental and economic impacts, beyond the minimum legal requirements",
+    "A legal requirement with no flexibility for any company",
+    "A tax paid exclusively by transnational corporations",
+    "A term unrelated to sustainability or human development"
+   ],
+   "correct": 0,
+   "explain": "Corporate Social Responsibility refers to a company’s voluntary commitment to operate in ways that consider its social, environmental and economic impacts, often going beyond the minimum legal requirements, and can include areas such as sustainable sourcing, labour standards, and community investment.",
+   "tag": "Development opportunities"
+  },
+  {
+   "q": "IKEA is used as an example of a TNC making progress towards sustainability partly because it has:",
+   "options": [
+    "Pursued initiatives such as sourcing more sustainable materials, investing in renewable energy, and setting emissions and waste reduction targets across its supply chain",
+    "No sustainability initiatives of any kind",
+    "Reduced its business operations to a single country",
+    "Eliminated all forms of manufacturing entirely"
+   ],
+   "correct": 0,
+   "explain": "IKEA is used as a CSR/sustainability example because it has pursued initiatives such as sourcing more sustainable materials (like FSC-certified wood), investing in renewable energy for its stores and operations, and setting targets to reduce emissions and waste across its global supply chain.",
+   "tag": "Development opportunities"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGHD-T2"] = {
+ "id": "IBGHD-T2",
+ "topicNumber": 8,
+ "topicTitle": "Unit 5: Human Development and Diversity (IB Geography Revision Guide)",
+ "title": "Changing identities and cultures",
+ "href": "/geography/revision/guide/human-development-diversity/topic-2-changing-identities-and-cultures",
+ "syllabusFocus": "IB Geography, Unit 5: Human Development and Diversity: Changing identities and cultures.",
+ "checklist": [
+  "I can use cultural terminology to describe the spectrum of cultural diversity",
+  "I can explain the effects of global interactions on culture, using glocalisation and Dubai",
+  "I can explain how diasporas influence cultural diversity, using the Chinese diaspora"
+ ],
+ "quiz": [
+  {
+   "q": "Culture is best defined as:",
+   "options": [
+    "The shared beliefs, values, customs, behaviours and artefacts that characterise a group of people",
+    "A fixed, unchangeable set of beliefs held by every member of a country",
+    "A term used only to describe language",
+    "A synonym for a country’s political system"
+   ],
+   "correct": 0,
+   "explain": "Culture refers to the shared beliefs, values, customs, behaviours and artefacts (such as food, clothing, art and traditions) that characterise a particular group of people.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "A cultural trait is best described as:",
+   "options": [
+    "A single, specific element of a culture, such as a particular style of dress, food, or custom",
+    "An entire national culture",
+    "A term unrelated to culture",
+    "Only applicable to religious practices"
+   ],
+   "correct": 0,
+   "explain": "A cultural trait is a single, specific element of a culture — such as a particular style of dress, a food dish, a custom, or a form of music — rather than the entire culture as a whole.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "Ethnicity differs from culture mainly because it:",
+   "options": [
+    "Often refers to a group sharing a common ancestry, heritage or nationality, which may or may not align exactly with shared cultural practices",
+    "Is exactly the same concept as culture",
+    "Has no connection to identity at all",
+    "Only applies to religious groups"
+   ],
+   "correct": 0,
+   "explain": "Ethnicity typically refers to a group sharing a common ancestry, heritage or national origin, which is related to but distinct from culture — members of the same ethnic group may share cultural traits, but ethnicity is more specifically about shared heritage and identity.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "The diffusion of cultural traits refers to:",
+   "options": [
+    "The spread of cultural traits, such as food, fashion or media, from one place to another over time",
+    "Cultural traits remaining permanently confined to their place of origin",
+    "A term unrelated to global interactions",
+    "Only the spread of language between countries"
+   ],
+   "correct": 0,
+   "explain": "The diffusion of cultural traits describes the spread of cultural elements, such as food, fashion, music or media, from their place of origin to other places over time, often accelerated by global interactions like trade, migration and communication technology.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "Glocalisation refers to:",
+   "options": [
+    "The process by which global brands or products are adapted to fit local cultural tastes and preferences in different markets",
+    "A global brand being sold in an identical form in every country with no local adaptation",
+    "The complete rejection of any global brands by local markets",
+    "A term unrelated to global business strategy"
+   ],
+   "correct": 0,
+   "explain": "Glocalisation describes the process by which global brands or products are adapted to fit local cultural tastes and preferences in different markets, combining \"global\" and \"local\" — for example, a global fast food chain adjusting its menu to suit local cuisine in different countries.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "Glocalisation can be seen as an example of cultural imperialism because:",
+   "options": [
+    "Even while adapting to local tastes, it still represents the continued global expansion and dominance of a foreign (often Western) brand into local markets and cultural spaces",
+    "It has no connection to global brand influence at all",
+    "It always eliminates the influence of the global brand entirely",
+    "Local businesses always dominate over global brands as a result"
+   ],
+   "correct": 0,
+   "explain": "Glocalisation can be seen as a form of cultural imperialism because, even while making surface-level adaptations to local tastes, the underlying strategy still represents the continued global expansion and commercial dominance of a foreign (often Western) brand into local markets and cultural spaces, extending its influence rather than genuinely ceding ground to local alternatives.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "A diaspora is best defined as:",
+   "options": [
+    "A population of people who have dispersed from their original homeland to live in other parts of the world, while often maintaining connections to their culture of origin",
+    "A group of people who have never left their country of origin",
+    "A term unrelated to migration",
+    "A single country’s entire population"
+   ],
+   "correct": 0,
+   "explain": "A diaspora refers to a population of people who have dispersed from their original homeland to live in other parts of the world, often while maintaining cultural, social or emotional connections to their place and culture of origin.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "Diaspora communities help maintain a culture abroad partly by:",
+   "options": [
+    "Establishing cultural institutions, businesses, places of worship, and community networks that preserve and pass on cultural traditions in their new location",
+    "Completely severing all connections to their culture of origin",
+    "Refusing to interact with the host country’s population at all",
+    "Having no measurable impact on cultural diversity in their new location"
+   ],
+   "correct": 0,
+   "explain": "Diaspora communities often help maintain a culture abroad by establishing cultural institutions, businesses, places of worship, and community networks that help preserve and pass on cultural traditions, language and practices in their new location.",
+   "tag": "Identities and cultures"
+  },
+  {
+   "q": "Chinese diaspora communities are found:",
+   "options": [
+    "In significant numbers across many countries and cities worldwide, including North America, Europe, and Southeast Asia",
+    "Only within mainland China itself",
+    "Nowhere outside of a single specific country",
+    "Only in countries with no other diaspora populations"
+   ],
+   "correct": 0,
+   "explain": "Chinese diaspora communities are found in significant numbers across many countries and cities worldwide, including major concentrations in North America, Europe, and throughout Southeast Asia, reflecting centuries of migration.",
+   "tag": "Identities and cultures"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGHD-T3"] = {
+ "id": "IBGHD-T3",
+ "topicNumber": 8,
+ "topicTitle": "Unit 5: Human Development and Diversity (IB Geography Revision Guide)",
+ "title": "Local responses to global interactions",
+ "href": "/geography/revision/guide/human-development-diversity/topic-3-local-responses-to-global-interactions",
+ "syllabusFocus": "IB Geography, Unit 5: Human Development and Diversity: Local responses to global interactions.",
+ "checklist": [
+  "I can evaluate civil society resistance to global interactions",
+  "I can explain how geopolitical constraints limit global interactions",
+  "I can compare the Hong Kong protests and the Malala Fund in promoting international-mindedness"
+ ],
+ "quiz": [
+  {
+   "q": "Local and civil society resistance to global interactions can be understood as:",
+   "options": [
+    "The various ways in which individuals, communities and organisations push back against or resist aspects of globalisation, such as global production, TNC influence, or immigration",
+    "A term with no real-world manifestation",
+    "A process that only occurs in high-income countries",
+    "A movement that has no connection to environmental or economic issues"
+   ],
+   "correct": 0,
+   "explain": "Local and civil society resistance to global interactions refers to the various ways individuals, communities and organisations push back against or resist aspects of globalisation, such as campaigning against TNCs, favouring local production, or opposing immigration, often motivated by environmental, economic, cultural or social concerns.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "Asia Pulp and Paper (APP) is a company that has faced environmental campaigns primarily because of concerns relating to:",
+   "options": [
+    "Deforestation and unsustainable logging practices linked to its paper and pulp production, particularly in Indonesia",
+    "Its complete absence of any manufacturing operations",
+    "Its operations being based exclusively in high-income countries",
+    "A lack of any connection to global supply chains"
+   ],
+   "correct": 0,
+   "explain": "Asia Pulp and Paper (APP), a major paper and pulp producer operating primarily in Indonesia, has faced significant environmental campaigns due to concerns about deforestation and unsustainable logging practices linked to its production, threatening rainforest habitats and biodiversity.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "Greenpeace’s campaign against Asia Pulp and Paper primarily aimed to:",
+   "options": [
+    "Raise public awareness and pressure the company (and its customers) to change its sourcing and logging practices to reduce deforestation",
+    "Support the company’s continued unsustainable logging practices",
+    "Have no connection to environmental concerns at all",
+    "Encourage governments to increase deforestation rates"
+   ],
+   "correct": 0,
+   "explain": "Greenpeace’s campaign against Asia Pulp and Paper primarily aimed to raise public awareness of the company’s deforestation practices and pressure both the company and its business customers (such as major global brands) to change sourcing practices and reduce associated deforestation.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "Geopolitical constraints on global interactions refer to:",
+   "options": [
+    "Government, political or militia-imposed restrictions that limit the ability of people, goods, or information to move and interact globally",
+    "Only physical/natural barriers, such as oceans or mountains",
+    "A term unrelated to government policy",
+    "Constraints that only ever increase, never decrease, global interaction"
+   ],
+   "correct": 0,
+   "explain": "Geopolitical constraints refer to government, political or militia-imposed restrictions — such as travel bans, internet censorship, or trade barriers — that limit the ability of people, goods, capital, or information to move and interact globally.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "Government travel or immigration bans, such as restrictions targeting specific countries, represent a geopolitical constraint because they:",
+   "options": [
+    "Directly restrict the movement of people between countries, limiting global interaction through migration, travel and family/business connections",
+    "Have no effect on people’s ability to travel or migrate internationally",
+    "Only ever apply to goods, never to people",
+    "Automatically increase global interaction"
+   ],
+   "correct": 0,
+   "explain": "Government travel or immigration bans directly restrict the movement of people between countries, limiting global interaction through reduced migration, travel, and disrupted family, business or educational connections between affected countries and populations.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "A specific government policy example (such as a travel ban executive order) reducing global interactions would typically involve:",
+   "options": [
+    "Restricting entry into a country for citizens of specific named countries, reducing travel, migration and associated global interactions between those places",
+    "Removing all restrictions on entry to a country",
+    "Having no connection to international relations at all",
+    "Applying identically and without exception to every country in the world"
+   ],
+   "correct": 0,
+   "explain": "A specific policy example, such as a travel ban executive order, typically involves restricting entry into a country for citizens of specific named countries, directly reducing travel, migration and associated global interactions between the restricting country and those specifically targeted nations.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "A key difference between the Hong Kong pro-democracy demonstrations and the Malala Fund is that:",
+   "options": [
+    "The Hong Kong demonstrations involved direct, large-scale public protest focused on a specific political situation",
+    "They are identical in every respect, with no meaningful differences",
+    "Neither example involves any form of civil society action",
+    "The Malala Fund involved large-scale public street demonstrations, while the Hong Kong movement was a funding organisation"
+   ],
+   "correct": 0,
+   "explain": "A key difference is that the Hong Kong demonstrations involved direct, large-scale public protest focused on a specific, immediate political situation within one place, while the Malala Fund operates as a more structured, ongoing international advocacy and funding organisation focused on a broader, more geographically diffuse global education issue, illustrating two genuinely different models of civil society action.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "International-mindedness, in the context of civil society and global interactions, refers to:",
+   "options": [
+    "An awareness of, engagement with, and openness towards global issues, perspectives and interconnectedness beyond one’s own country",
+    "A focus purely on domestic, national issues with no international awareness",
+    "A term unrelated to global citizenship or civil society",
+    "A concept that only applies to government diplomats"
+   ],
+   "correct": 0,
+   "explain": "International-mindedness refers to an awareness of, engagement with, and openness towards global issues, perspectives and interconnectedness beyond one’s own country, often promoted through civil society action, education, and international collaboration.",
+   "tag": "Local responses"
+  },
+  {
+   "q": "Civil society movements can promote international-mindedness by:",
+   "options": [
+    "Raising awareness of global issues, connecting with international audiences and networks, and campaigning for causes that extend beyond national borders",
+    "Deliberately avoiding any engagement with international audiences or issues",
+    "Only ever focusing on issues within a single country with no international connection",
+    "Preventing any form of cross-border communication or collaboration"
+   ],
+   "correct": 0,
+   "explain": "Civil society movements can promote international-mindedness by raising awareness of global issues, connecting with international audiences and networks, and campaigning for causes (such as human rights, education, or democracy) that extend beyond national borders and resonate with a global audience.",
+   "tag": "Local responses"
   }
  ]
 };
