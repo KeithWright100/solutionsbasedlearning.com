@@ -545,6 +545,9 @@
     ]
   }
 ];
+  /* shared with the site search in /js/sbl-nav.js */
+  window.SBL_TREES = window.SBL_TREES || {};
+  window.SBL_TREES["igcse-geo"] = TREE;
 
 
   /* ---------------------------------------------------------------------

@@ -34,7 +34,8 @@
     .find__box input { flex: 1; border: 0; padding: 13px 14px; font: inherit; outline: 0; color: var(--ink); min-width: 0; }
     .find__box span { display: grid; place-items: center; padding: 0 16px; background: var(--teal); color: var(--deep); font-weight: 700; }
     .find__list { position: absolute; left: 0; right: 0; top: calc(100% + 6px); background: #fff; color: var(--ink); border-radius: 12px; box-shadow: 0 18px 48px rgba(1,21,38,.25); padding: 6px; display: none; max-height: 320px; overflow: auto; }
-    .find__list.open { display: block; }
+    .find__list.is-open { display: block; }
+    .find__list a.is-active { background: var(--bg); }
     .find__list a { display: block; padding: 8px 10px; border-radius: 8px; font-size: .9rem; }
     .find__list a small { display: block; color: var(--muted); font-size: .75rem; }
     .find__list a:hover { background: var(--bg); }
@@ -135,7 +136,7 @@
         <h1 id="hello">Welcome to the Humanities Hub</h1>
         <p>Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Use the menus above, or find a page below.</p>
         <div class="find">
-          <label class="find__box"><input id="find" type="search" placeholder="Find a subject, topic or page…" aria-label="Find a page" autocomplete="off"><span aria-hidden="true">Find</span></label>
+          <label class="find__box"><input id="find" type="search" placeholder="Search lessons, topics and case studies…" aria-label="Find a page" autocomplete="off"><span aria-hidden="true">Find</span></label>
           <div class="find__list" id="findList"></div>
         </div>
         <div class="quick" id="quick"></div>
@@ -225,28 +226,9 @@
     var quick = [['IB Geography', '/geography'], ['IGCSE Geography', '/igcse/geography/learn'], ['IGCSE Economics', '/igcse/economics/learn'], ['IGCSE Business', '/igcse/business/learn'], ['IGCSE History', '/igcse/history/learn'], ['Games', '/geography/games']];
     document.getElementById('quick').innerHTML = quick.map(function (q) { return '<a href="' + q[1] + '">' + q[0] + '</a>'; }).join('');
 
-    // find a page (searches the same list as the menus)
-    var links = [];
-    NAV.forEach(function (m) { if (m.teacher) return; m.cols.forEach(function (c) {
-      if (c.href) links.push({ label: c.title, href: c.href, where: m.label });
-      var hd = ''; c.items.forEach(function (it) { if (it[2] === 'head') { hd = it[0]; return; } if (it[1] && it[2] !== 'soon') links.push({ label: it[0], href: it[1], where: hd ? hd + ' · ' + c.title : c.title }); });
-    }); });
+    // find a page — same search as the menu bar (menus + every unit, topic and lesson)
     var find = document.getElementById('find'), list = document.getElementById('findList');
-    function run() {
-      var q = find.value.trim().toLowerCase();
-      if (!q) { list.classList.remove('open'); return; }
-      var w = q.split(/\s+/), seen = {};
-      var hits = links.filter(function (l) {
-        var k = l.href + '|' + l.label; if (seen[k]) return false; seen[k] = 1;
-        var h = (l.label + ' ' + l.where).toLowerCase();
-        return w.every(function (x) { return h.indexOf(x) !== -1; });
-      }).slice(0, 10);
-      list.innerHTML = hits.length ? hits.map(function (h) { return '<a href="' + esc(h.href) + '">' + esc(h.label) + '<small>' + esc(h.where) + '</small></a>'; }).join('') : '<div>No matching pages — try a subject name, e.g. "climate" or "business".</div>';
-      list.classList.add('open');
-    }
-    find.addEventListener('input', run);
-    find.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var a = list.querySelector('a'); if (a) location.href = a.getAttribute('href'); } if (e.key === 'Escape') list.classList.remove('open'); });
-    document.addEventListener('click', function (e) { if (!e.target.closest('.find')) list.classList.remove('open'); });
+    if (window.SBLSearch && window.SBLSearch.attach) window.SBLSearch.attach(find, list, { limit: 10 });
 
     // carry on where you left off — pages recorded in this browser by sbl-feedback-widget.js
     var recent = [];

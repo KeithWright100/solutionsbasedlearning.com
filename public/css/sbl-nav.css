@@ -64,7 +64,7 @@
 .sn-find { position: relative; }
 .sn-find label { display: flex; align-items: center; gap: 6px; border: 1px solid var(--sn-line); border-radius: 10px; padding: 6px 10px; color: var(--sn-muted); width: 210px; }
 .sn-find input { border: 0; outline: 0; font: inherit; font-size: .88rem; width: 100%; background: none; color: var(--sn-ink); }
-.sn-find__list { position: absolute; right: 0; top: calc(100% + 6px); width: 320px; background: #fff; border: 1px solid var(--sn-line); border-radius: 12px; box-shadow: 0 18px 48px rgba(1,21,38,.18); padding: 6px; display: none; max-height: 60vh; overflow: auto; }
+.sn-find__list { position: absolute; right: 0; top: calc(100% + 6px); width: 380px; background: #fff; border: 1px solid var(--sn-line); border-radius: 12px; box-shadow: 0 18px 48px rgba(1,21,38,.18); padding: 6px; display: none; max-height: 60vh; overflow: auto; }
 .sn-find__list.is-open { display: block; }
 .sn-find__list a { display: block; padding: 8px 10px; border-radius: 8px; font-size: .88rem; }
 .sn-find__list a small { display: block; color: var(--sn-muted); font-size: .74rem; }
@@ -101,8 +101,13 @@ body.has-sn--compact .ppq-src { top: 68px; max-height: calc(100vh - 84px); }
 
 /* phone menu */
 .sn-burger { display: none; border: 0; background: none; width: 40px; height: 40px; border-radius: 10px; place-items: center; }
-.sn-mob { display: none; border-top: 1px solid var(--sn-line); background: #fff; max-height: calc(100vh - 110px); overflow-y: auto; }
-.sn-root.is-mob-open .sn-mob { display: block; }
+.sn-mobwrap { display: none; border-top: 1px solid var(--sn-line); background: #fff; max-height: calc(100vh - 110px); overflow-y: auto; }
+.sn-root.is-mob-open .sn-mobwrap { display: block; }
+.sn-mob { background: #fff; }
+.sn-mobfind { padding: 12px 20px; border-bottom: 1px solid var(--sn-line); }
+.sn-mobfind input { width: 100%; font: inherit; font-size: 1rem; padding: 10px 12px; border: 1px solid var(--sn-line); border-radius: 10px; outline: 0; color: var(--sn-ink); }
+.sn-mobfind input:focus { border-color: var(--sn-teal); }
+.sn-mobfind .sn-find__list { position: static; width: auto; box-shadow: none; border: 0; padding: 6px 0 0; max-height: none; }
 .sn-mob details { border-bottom: 1px solid var(--sn-line); }
 .sn-mob summary { list-style: none; padding: 14px 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .sn-mob summary::-webkit-details-marker { display: none; }

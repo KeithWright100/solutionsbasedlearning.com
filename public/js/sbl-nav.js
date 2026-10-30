@@ -173,7 +173,7 @@
           '<div class="sn-usermenu"><small class="sn-umail"></small><a href="/humanities-hub">Humanities Hub</a><a href="/">SBL home</a><button type="button" class="sn-logout">Log out</button></div></div>' +
         '<button type="button" class="sn-burger" aria-label="Open menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
       '</div></nav>' +
-      '<div class="sn-mob"></div>';
+      '<div class="sn-mobwrap"><div class="sn-mobfind"><input type="search" placeholder="Find a page…" aria-label="Find a page" autocomplete="off"><div class="sn-find__list" role="listbox"></div></div><div class="sn-mob"></div></div>';
     barIn = root.querySelector('.sn-bar__in');
     mob = root.querySelector('.sn-mob');
     findInput = root.querySelector('.sn-find input');
@@ -236,33 +236,135 @@
     root.querySelectorAll('.sn-btn').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
   }
 
-  // "Find a page" — searches every link in the menus
-  function allLinks() {
-    var out = [];
+  // ---- Site search ------------------------------------------------------
+  // Searches every link in the menus PLUS every unit, topic and lesson in
+  // the subject sidebars (each sidebar file shares its list as
+  // window.SBL_TREES). Sidebar files not already on the page are fetched the
+  // first time someone uses the search, then cached by the browser.
+  var TREE_SOURCES = [
+    { key: 'ib-geo', label: 'IB Geography', src: '/js/sbl-sidebar.js' },
+    { key: 'igcse-geo', label: 'IGCSE Geography', src: '/js/sbl-igcse-geo-sidebar.js' },
+    { key: 'igcse-econ', label: 'IGCSE Economics', src: '/js/sbl-igcse-econ-sidebar.js' },
+    { key: 'igcse-bus', label: 'IGCSE Business', src: '/js/sbl-igcse-bus-sidebar.js' },
+    { key: 'igcse-hist', label: 'IGCSE History', src: '/js/sbl-igcse-hist-sidebar.js' },
+    { key: 'cie-econ', label: 'Cambridge Economics', src: '/js/sbl-cie-econ-sidebar.js' }
+  ];
+  var treesLoading = null;
+  function loadTrees() {
+    if (treesLoading) return treesLoading;
+    window.SBL_TREES = window.SBL_TREES || {};
+    treesLoading = Promise.all(TREE_SOURCES.map(function (s) {
+      if (window.SBL_TREES[s.key]) return Promise.resolve();
+      return new Promise(function (resolve) {
+        var el = document.createElement('script');
+        el.src = s.src; el.async = true;
+        el.onload = el.onerror = function () { resolve(); };
+        document.head.appendChild(el);
+      });
+    })).then(function () { index = null; });
+    return treesLoading;
+  }
+
+  function clean(s) { return String(s || '').toLowerCase().replace(/&amp;/g, '&').replace(/[—–\-:·,.()'’"]/g, ' ').replace(/\s+/g, ' ').trim(); }
+
+  var index = null;
+  function buildIndex() {
+    var out = [], seen = {};
+    function add(label, href, where, extra, rank) {
+      if (!href || seen[href + '|' + label]) return;
+      seen[href + '|' + label] = 1;
+      out.push({ label: label, href: href, where: where, t: clean(label), hay: clean(label + ' ' + where + ' ' + (extra || '')), rank: rank });
+    }
     visibleMenus().forEach(function (m) {
       m.cols.forEach(function (c) {
+        if (c.href) add(c.title, c.href, m.label, '', 0);
         var head = '';
         c.items.forEach(function (it) {
           if (it[2] === 'head') { head = it[0]; return; }
-          if (it[1] && it[2] !== 'soon') out.push({ label: it[0], href: it[1], where: head ? head + ' \u00b7 ' + c.title : c.title });
+          if (it[1] && it[2] !== 'soon') add(it[0], it[1], head ? head + ' · ' + c.title : c.title, '', 1);
+        });
+      });
+    });
+    var trees = window.SBL_TREES || {};
+    TREE_SOURCES.forEach(function (s) {
+      (trees[s.key] || []).forEach(function (g) {
+        (g.units || []).forEach(function (u) {
+          if (u.href && u.status !== 'soon') add(u.label, u.href, s.label, g.section, 1);
+          (u.topics || []).forEach(function (tp) {
+            (tp.lessons || []).forEach(function (l) {
+              add(l.label, l.href, s.label + ' · ' + u.label, tp.title + ' ' + g.section, 2);
+            });
+          });
         });
       });
     });
     return out;
   }
-  function runFind() {
-    var q = findInput.value.trim().toLowerCase();
-    if (!q) { findList.classList.remove('is-open'); return; }
-    var words = q.split(/\s+/);
-    var hits = allLinks().filter(function (l) {
-      var hay = (l.label + ' ' + l.where).toLowerCase();
-      return words.every(function (w) { return hay.indexOf(w) !== -1; });
-    }).slice(0, 12);
-    findList.innerHTML = hits.length ? hits.map(function (h, i) {
-      return '<a href="' + esc(h.href) + '"' + (i === 0 ? ' class="is-active"' : '') + '>' + esc(h.label) + '<small>' + esc(h.where) + '</small></a>';
-    }).join('') : '<div class="sn-find__none">No matching pages.</div>';
-    findList.classList.add('is-open');
+
+  // Every word typed must match the start of a word in the page's title or
+  // its subject/unit/topic ("pop" finds population). Title matches rank first.
+  function search(q, limit) {
+    if (!index) index = buildIndex();
+    var words = clean(q).split(' ').filter(Boolean);
+    if (!words.length) return [];
+    function hasWord(text, w) { return (' ' + text).indexOf(' ' + w) !== -1; }
+    var hits = [];
+    index.forEach(function (e) {
+      var score = 0;
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i];
+        /* "coasts" should find "coastal", "floods" should find "flooding" */
+        if (w.length > 4 && /s$/.test(w) && !hasWord(e.hay, w)) w = w.replace(/(ies)$/, 'y').replace(/(es|s)$/, '');
+        if (hasWord(e.t, w)) score += 3;
+        else if (hasWord(e.hay, w)) score += 1;
+        else if (w.length > 3 && e.hay.indexOf(w) !== -1) score += 0.5;
+        else return;
+      }
+      if (e.t.indexOf(words.join(' ')) === 0) score += 4;
+      hits.push({ e: e, s: score - e.rank * 0.3 });
+    });
+    hits.sort(function (a, b) { return b.s - a.s || a.e.label.length - b.e.label.length; });
+    return hits.slice(0, limit || 12).map(function (h) { return h.e; });
   }
+  window.SBLSearch = { search: search, ready: loadTrees };
+
+  // Wire a text box + results list to the search (used by the menu bar,
+  // the phone menu and the Humanities Hub page).
+  function attachSearch(input, list, opts) {
+    opts = opts || {};
+    var active = -1;
+    function render() {
+      var q = input.value.trim();
+      if (!q) { list.classList.remove('is-open'); list.innerHTML = ''; return; }
+      var hits = search(q, opts.limit || 12);
+      active = hits.length ? 0 : -1;
+      list.innerHTML = hits.length ? hits.map(function (h, i) {
+        return '<a href="' + esc(h.href) + '"' + (i === 0 ? ' class="is-active"' : '') + '>' + esc(h.label) + '<small>' + esc(h.where) + '</small></a>';
+      }).join('') : '<div class="sn-find__none">No pages found for “' + esc(q) + '”. Try a topic, case study or subject name.</div>';
+      list.classList.add('is-open');
+    }
+    function move(d) {
+      var items = list.querySelectorAll('a');
+      if (!items.length) return;
+      if (items[active]) items[active].classList.remove('is-active');
+      active = (active + d + items.length) % items.length;
+      items[active].classList.add('is-active');
+      items[active].scrollIntoView({ block: 'nearest' });
+    }
+    input.addEventListener('focus', function () { loadTrees().then(render); });
+    input.addEventListener('input', function () { render(); loadTrees().then(function () { if (document.activeElement === input) render(); }); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        var a = list.querySelector('a.is-active') || list.querySelector('a');
+        if (a) window.location.href = a.getAttribute('href');
+      } else if (e.key === 'Escape') { list.classList.remove('is-open'); }
+    });
+    document.addEventListener('click', function (e) { if (!list.contains(e.target) && e.target !== input) list.classList.remove('is-open'); });
+  }
+  window.SBLSearch.attach = attachSearch;
 
   function wire() {
     document.addEventListener('keydown', function (e) {
@@ -271,7 +373,6 @@
     document.addEventListener('click', function (e) {
       if (!e.target.closest('.sn-menu') && !e.target.closest('.sn-panel')) closeAll();
       if (!e.target.closest('.sn-userwrap')) { userMenu.classList.remove('is-open'); userBtn.setAttribute('aria-expanded', 'false'); }
-      if (!e.target.closest('.sn-find')) findList.classList.remove('is-open');
     });
     root.querySelector('.sn-burger').addEventListener('click', function () {
       var o = root.classList.toggle('is-mob-open');
@@ -284,11 +385,9 @@
     root.querySelector('.sn-logout').addEventListener('click', function () {
       fetch('/api/logout', { method: 'POST', credentials: 'same-origin' }).finally(function () { window.location.href = '/login/'; });
     });
-    findInput.addEventListener('input', runFind);
-    findInput.addEventListener('focus', runFind);
-    findInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') { var a = findList.querySelector('a.is-active') || findList.querySelector('a'); if (a) window.location.href = a.getAttribute('href'); }
-    });
+    attachSearch(findInput, findList);
+    var mobInput = root.querySelector('.sn-mobfind input'), mobList = root.querySelector('.sn-mobfind .sn-find__list');
+    if (mobInput) attachSearch(mobInput, mobList, { limit: 8 });
   }
 
   function loadSession() {
