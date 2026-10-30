@@ -231,9 +231,27 @@
       {
         "slug": "global-risks-resilience",
         "label": "Unit 6: Global Risks and Resilience",
-        "href": null,
-        "status": "soon",
-        "topics": []
+        "href": "/geography/revision/guide/global-risks-resilience",
+        "status": "available",
+        "topics": [
+          {
+            "title": "Topics",
+            "lessons": [
+              {
+                "label": "Geopolitical and economic risks",
+                "href": "/geography/revision/guide/global-risks-resilience/topic-1-geopolitical-and-economic-risks"
+              },
+              {
+                "label": "Environmental risks",
+                "href": "/geography/revision/guide/global-risks-resilience/topic-2-environmental-risks"
+              },
+              {
+                "label": "Resilience",
+                "href": "/geography/revision/guide/global-risks-resilience/topic-3-local-and-global-resilience"
+              }
+            ]
+          }
+        ]
       }
     ]
   }

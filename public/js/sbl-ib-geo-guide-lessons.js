@@ -3,7 +3,7 @@
    teacher Class Sheet. Ids use the IBG prefix so guide scores never overwrite
    the main IB lesson pages. */
 window.SBL_LESSONS = window.SBL_LESSONS || {};
-window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3", "IBGPP-T1", "IBGPP-T2", "IBGPP-T3", "IBGHD-T1", "IBGHD-T2", "IBGHD-T3"];
+window.SBL_LESSON_ORDER = ["IBGFW-T1", "IBGFW-T2", "IBGFW-T3", "IBGFW-T4", "IBGLT-T1", "IBGLT-T2", "IBGLT-T3", "IBGLT-T4", "IBGFH-T1", "IBGFH-T2", "IBGFH-T3", "IBGFH-T4", "IBGCP-T1", "IBGCP-T2", "IBGCP-T3", "IBGCC-T1", "IBGCC-T2", "IBGCC-T3", "IBGRC-T1", "IBGRC-T2", "IBGRC-T3", "IBGPP-T1", "IBGPP-T2", "IBGPP-T3", "IBGHD-T1", "IBGHD-T2", "IBGHD-T3", "IBGGR-T1", "IBGGR-T2", "IBGGR-T3"];
 window.SBL_LESSONS["IBGFW-T1"] = {
  "id": "IBGFW-T1",
  "topicNumber": 4,
@@ -4395,6 +4395,338 @@ window.SBL_LESSONS["IBGHD-T3"] = {
    "correct": 0,
    "explain": "Civil society movements can promote international-mindedness by raising awareness of global issues, connecting with international audiences and networks, and campaigning for causes (such as human rights, education, or democracy) that extend beyond national borders and resonate with a global audience.",
    "tag": "Local responses"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGGR-T1"] = {
+ "id": "IBGGR-T1",
+ "topicNumber": 9,
+ "topicTitle": "Unit 6: Global Risks and Resilience (IB Geography Revision Guide)",
+ "title": "Geopolitical and economic risks",
+ "href": "/geography/revision/guide/global-risks-resilience/topic-1-geopolitical-and-economic-risks",
+ "syllabusFocus": "IB Geography, Unit 6: Global Risks and Resilience: Geopolitical and economic risks.",
+ "checklist": [
+  "I can explain cyber threats to individuals and risks to the global oil supply chain",
+  "I can explain how tax avoidance, drones and 3D printing threaten sovereignty",
+  "I can evaluate the link between globalization and nationalism, using two examples"
+ ],
+ "quiz": [
+  {
+   "q": "Hacking is best defined as:",
+   "options": [
+    "Gaining unauthorised access to computer systems, networks or data",
+    "Any use of a computer for work purposes",
+    "A type of legal cybersecurity audit",
+    "A method of encrypting personal data for protection"
+   ],
+   "correct": 0,
+   "explain": "Hacking refers to gaining unauthorised access to computer systems, networks or data, often to steal information, disrupt services, or cause damage.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "Identity theft refers to:",
+   "options": [
+    "Illegally obtaining and using someone else’s personal information, typically for financial fraud",
+    "Legally changing your name",
+    "A government programme to issue new ID cards",
+    "A backup copy of personal documents"
+   ],
+   "correct": 0,
+   "explain": "Identity theft involves illegally obtaining someone’s personal information (such as bank details or ID numbers) and using it, typically to commit financial fraud in that person’s name.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "A key implication of mass surveillance for personal freedoms is that it can:",
+   "options": [
+    "Create a \"chilling effect\", where people alter their behaviour simply because they know they might be watched",
+    "Have no effect on individual behaviour or privacy",
+    "Guarantee complete protection from all forms of crime",
+    "Only affect people who have committed a crime"
+   ],
+   "correct": 0,
+   "explain": "A well-documented implication of surveillance is the \"chilling effect\" — people may self-censor or alter their behaviour simply because they are aware they could be monitored, even without direct evidence of wrongdoing.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "A state’s political and economic sovereignty refers to:",
+   "options": [
+    "Its authority to govern itself and control its own political and economic affairs without external interference",
+    "Its total population size",
+    "The number of trade agreements it has signed",
+    "Its physical land area"
+   ],
+   "correct": 0,
+   "explain": "Sovereignty refers to a state’s authority to govern itself and control its own political and economic affairs independently, without undue external interference.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "Profit repatriation refers to:",
+   "options": [
+    "The process of transferring profits earned in a foreign country back to a company’s home country or a chosen low-tax location",
+    "A company permanently closing its overseas operations",
+    "A government policy limiting foreign investment",
+    "The process of a country repaying international debt"
+   ],
+   "correct": 0,
+   "explain": "Profit repatriation is the process by which a company transfers profits earned in one country (often through a foreign subsidiary) back to its home country or to another jurisdiction it has chosen, often for tax reasons.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "Tax avoidance, as distinct from tax evasion, refers to:",
+   "options": [
+    "Legally minimising the amount of tax owed by exploiting loopholes or favourable rules in tax law",
+    "Illegally hiding income from tax authorities",
+    "Refusing to pay any tax under any circumstances",
+    "A tax that only applies to individuals, never companies"
+   ],
+   "correct": 0,
+   "explain": "Tax avoidance involves legally minimising tax liability by making use of loopholes, exemptions or favourable structures within existing tax law, distinct from tax evasion, which is the illegal non-payment or under-payment of tax owed.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "Comparing an example of a country becoming more isolationist with the example of tensions in Yemen shows two different but related aspects of this lesson’s theme, namely:",
+   "options": [
+    "One example shows a state actively reducing its global engagement",
+    "These two examples have no meaningful connection to one another",
+    "Both examples show identical processes with no meaningful differences",
+    "Neither example has any real connection to globalization"
+   ],
+   "correct": 0,
+   "explain": "These two examples illustrate different but related geopolitical responses to global interconnection: one shows a state deliberately reducing its global engagement (isolationism), while the other shows how global and regional rivalries can become entangled within a more localised conflict — together demonstrating the varied ways globalization and geopolitical tension interact.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "Nationalism, in a geopolitical context, refers to:",
+   "options": [
+    "A strong sense of identity, loyalty and pride centred on one’s own nation, often prioritising national interests",
+    "A belief that all countries should have identical political systems",
+    "A term used only to describe international cooperation",
+    "A policy of unrestricted global trade"
+   ],
+   "correct": 0,
+   "explain": "Nationalism refers to a strong sense of identity, loyalty and pride centred on one’s own nation, which often involves prioritising national interests, culture and sovereignty, sometimes in tension with international cooperation.",
+   "tag": "Geopolitical and economic risks"
+  },
+  {
+   "q": "Tribalization refers to:",
+   "options": [
+    "A fragmentation of identity into smaller groups based on characteristics such as ethnicity, culture or region, rather than a broader national or global identity",
+    "The process of countries joining together into larger political unions",
+    "A term describing increased international trade",
+    "A synonym for globalization"
+   ],
+   "correct": 0,
+   "explain": "Tribalization describes a process where identity fragments into smaller groups, often based on ethnicity, culture, religion or region, rather than uniting around a broader national or global identity.",
+   "tag": "Geopolitical and economic risks"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGGR-T2"] = {
+ "id": "IBGGR-T2",
+ "topicNumber": 9,
+ "topicTitle": "Unit 6: Global Risks and Resilience (IB Geography Revision Guide)",
+ "title": "Environmental risks",
+ "href": "/geography/revision/guide/global-risks-resilience/topic-2-environmental-risks",
+ "syllabusFocus": "IB Geography, Unit 6: Global Risks and Resilience: Environmental risks.",
+ "checklist": [
+  "I can explain the causes, impacts and management of the Southeast Asian haze",
+  "I can explain the environmental impacts of shipping and carbon footprints of global flows",
+  "I can explain the environmental impacts of the global shift of industry and agribusiness"
+ ],
+ "quiz": [
+  {
+   "q": "Overall, the SE Asian haze demonstrates that trans-boundary environmental problems typically require:",
+   "options": [
+    "Coordinated regional or international cooperation",
+    "No action at all, since they resolve naturally over time",
+    "Only domestic action by the country where the pollution impact is felt",
+    "Only domestic action by the country where the pollution originates"
+   ],
+   "correct": 0,
+   "explain": "Because trans-boundary pollution problems have causes and impacts spanning multiple states, they typically require coordinated regional or international cooperation — no single country acting alone (whether source or affected) can fully resolve the issue.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "Trans-boundary pollution refers to:",
+   "options": [
+    "Pollution originating in one country that crosses international borders to affect other countries",
+    "Pollution that stays entirely within the country where it originates",
+    "A type of pollution that only occurs in the ocean",
+    "Pollution caused entirely by international shipping"
+   ],
+   "correct": 0,
+   "explain": "Trans-boundary pollution is pollution that originates in one country but crosses international borders, affecting the environment and people of other countries, regardless of political boundaries.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "The South East Asian haze is primarily caused by:",
+   "options": [
+    "Large-scale fires used to clear land, often linked to agricultural expansion such as palm oil and pulp plantations",
+    "Volcanic eruptions across the region",
+    "Industrial factory emissions from Singapore",
+    "Vehicle emissions in major regional cities"
+   ],
+   "correct": 0,
+   "explain": "The haze is primarily caused by large-scale fires used to clear land in Indonesia, often linked to agricultural expansion such as palm oil and pulp/paper plantations, which release huge quantities of smoke and particulate matter into the atmosphere.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "Black water, in the context of shipping, refers to:",
+   "options": [
+    "Sewage and wastewater from toilets",
+    "Wastewater from sinks and showers",
+    "A type of ballast water",
+    "Clean drinking water stored for the crew"
+   ],
+   "correct": 0,
+   "explain": "Black water specifically refers to sewage and wastewater from toilets, which typically requires more significant treatment than grey water before it can be safely discharged.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "Ballast water is best described as:",
+   "options": [
+    "Water taken into and later discharged from a ship’s tanks to help maintain its stability and balance",
+    "Fuel used to power a ship’s engines",
+    "Fresh drinking water carried for the crew",
+    "A type of chemical cleaning agent"
+   ],
+   "correct": 0,
+   "explain": "Ballast water is taken into a ship’s tanks (often from one port) to help maintain its stability and balance, and is later discharged, sometimes at a completely different port, potentially thousands of kilometres away.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "A major environmental risk associated with discharging ballast water is:",
+   "options": [
+    "It can transport invasive species from one region to another, since organisms taken up with the water in one location are released in a completely different ecosystem",
+    "It has no environmental effect whatsoever",
+    "It only ever affects the ship’s home port",
+    "It permanently removes all marine life from an area"
+   ],
+   "correct": 0,
+   "explain": "Because ballast water is taken up in one location and discharged in another, it can transport small organisms, larvae or microbes between regions, introducing invasive species to ecosystems where they did not previously exist and where they may have no natural predators.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "When manufacturing industries relocate to countries with weaker environmental regulation, a common outcome is:",
+   "options": [
+    "Increased risk of air, water, industrial waste and toxic chemical pollution, since environmental standards and enforcement may be less strict",
+    "A guaranteed reduction in all forms of pollution",
+    "No change in environmental outcomes whatsoever",
+    "Manufacturing pollution disappearing entirely"
+   ],
+   "correct": 0,
+   "explain": "When manufacturing relocates to countries with weaker environmental regulation or enforcement, there is often an increased risk of pollution across multiple categories — air, water, industrial waste and toxic chemicals — sometimes referred to as the \"pollution haven\" effect.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "Industrial waste and toxic chemical pollution from relocated manufacturing differ from general air or water pollution mainly because:",
+   "options": [
+    "They often involve specific, hazardous by-products requiring careful management, storage and disposal, which can pose particularly serious localised risks if handled improperly",
+    "They have identical impacts and locations in every case",
+    "They pose no risk to human health or the environment",
+    "They only ever affect the country of the manufacturing headquarters, not the local area"
+   ],
+   "correct": 0,
+   "explain": "Industrial waste and toxic chemicals often involve specific hazardous by-products requiring careful management, storage and disposal; when handled improperly, they can create serious, sometimes long-lasting localised environmental and health risks distinct from more diffuse air or general water pollution.",
+   "tag": "Environmental risks"
+  },
+  {
+   "q": "Agro-industrialisation refers to:",
+   "options": [
+    "The large-scale, mechanised and often vertically integrated industrialisation of agricultural production",
+    "A shift away from any form of commercial farming",
+    "A policy banning international food trade",
+    "A term used only to describe fishing industries"
+   ],
+   "correct": 0,
+   "explain": "Agro-industrialisation refers to the shift towards large-scale, mechanised and often vertically integrated agricultural production, characteristic of modern global agribusiness, as opposed to smaller-scale, traditional farming methods.",
+   "tag": "Environmental risks"
+  }
+ ]
+};
+window.SBL_LESSONS["IBGGR-T3"] = {
+ "id": "IBGGR-T3",
+ "topicNumber": 9,
+ "topicTitle": "Unit 6: Global Risks and Resilience (IB Geography Revision Guide)",
+ "title": "Local and global resilience",
+ "href": "/geography/revision/guide/global-risks-resilience/topic-3-local-and-global-resilience",
+ "syllabusFocus": "IB Geography, Unit 6: Global Risks and Resilience: Local and global resilience.",
+ "checklist": [
+  "I can evaluate the success of Greenpeace and Amnesty International",
+  "I can evaluate strategies to build resilience to global risks"
+ ],
+ "quiz": [
+  {
+   "q": "Comparing Greenpeace and Amnesty International illustrates that international civil society organisations can focus on:",
+   "options": [
+    "A range of different risk types",
+    "Only identical issues, with no meaningful variation between organisations",
+    "Only issues affecting a single country",
+    "Purely commercial, profit-driven goals"
+   ],
+   "correct": 0,
+   "explain": "Comparing Greenpeace (environmental focus) and Amnesty International (social/human rights focus) shows that civil society organisations address a range of different global risk types, while often using broadly similar underlying strategies of research, public awareness campaigning and advocacy.",
+   "tag": "Resilience"
+  },
+  {
+   "q": "A civil society organisation is best defined as:",
+   "options": [
+    "A non-governmental, non-profit organisation working independently of government and business to address social or environmental issues",
+    "A government department responsible for foreign policy",
+    "A private company operating for financial profit",
+    "An official agency of the United Nations"
+   ],
+   "correct": 0,
+   "explain": "A civil society organisation is a non-governmental, non-profit body that operates independently of government and business, typically working to raise awareness of and address social or environmental issues.",
+   "tag": "Resilience"
+  },
+  {
+   "q": "Greenpeace is best described as an example of:",
+   "options": [
+    "An international environmental civil society organisation, known for campaigns on issues such as deforestation, ocean pollution and climate change",
+    "A government environmental regulator",
+    "A private energy company",
+    "An intergovernmental treaty body"
+   ],
+   "correct": 0,
+   "explain": "Greenpeace is an international environmental civil society organisation known for campaigning on issues such as deforestation, ocean and plastic pollution, and climate change, often using high-profile awareness campaigns and direct action.",
+   "tag": "Resilience"
+  },
+  {
+   "q": "Re-shoring, in the context of TNCs, refers to:",
+   "options": [
+    "A company moving economic activity, such as manufacturing, back closer to or within its home country, rather than relying on distant overseas production",
+    "A company permanently closing down entirely",
+    "A company expanding into as many new international markets as possible",
+    "A type of currency exchange strategy"
+   ],
+   "correct": 0,
+   "explain": "Re-shoring refers to a TNC moving economic activity, such as manufacturing, back closer to or within its home country, rather than relying on distant overseas production locations.",
+   "tag": "Resilience"
+  },
+  {
+   "q": "Re-shoring can help build resilience to global risk mainly because it:",
+   "options": [
+    "Shortens and simplifies supply chains, reducing exposure to disruption from distant political, economic or physical risks",
+    "Increases a company’s reliance on long, complex international supply chains",
+    "Has no measurable effect on supply chain risk",
+    "Always increases production costs with no benefit whatsoever"
+   ],
+   "correct": 0,
+   "explain": "By shortening and simplifying supply chains, re-shoring can reduce a company’s exposure to disruption from distant political, economic or physical risks (such as those studied earlier in this unit), even though it may involve trade-offs such as higher production costs.",
+   "tag": "Resilience"
+  },
+  {
+   "q": "Crowdsourcing, as a resilience-building tool, refers to:",
+   "options": [
+    "Gathering ideas, information or effort from a large, dispersed group of people, often via online platforms, to help address a shared challenge",
+    "A single government department making all decisions independently",
+    "A method used exclusively by large corporations, never by civil society or government",
+    "A term unrelated to responding to global risk"
+   ],
+   "correct": 0,
+   "explain": "Crowdsourcing involves gathering ideas, information or effort from a large, dispersed group of people, often via online platforms, allowing rapid, decentralised responses to a shared challenge or crisis.",
+   "tag": "Resilience"
   }
  ]
 };
