@@ -61,6 +61,14 @@
   .sbl-quick b { display:block; color:var(--white); font-family:var(--font-display); font-size:1rem; margin-bottom:0.25rem; }
   .sbl-quick span { display:block; color:var(--slate); font-size:0.8rem; line-height:1.4; }
   .sbl-quick i { font-style:normal; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); display:block; margin-bottom:0.35rem; }
+  .gotw-panel { padding: 1.1rem 1.3rem; margin-bottom: 1.5rem; }
+  .gotw-panel h2 { font-family: var(--font-display); font-size: 1.05rem; color: var(--white); margin: 0 0 0.2rem; }
+  .gotw-panel > p { color: var(--slate); font-size: 0.85rem; margin: 0 0 0.9rem; }
+  .gotw-row { display: grid; grid-template-columns: 130px minmax(180px, 1.2fr) minmax(160px, 1fr) auto 120px; gap: 0.6rem; align-items: center; padding: 0.55rem 0; border-top: 1px solid var(--navy-line); }
+  .gotw-when b { display: block; color: var(--white); font-size: 0.88rem; }
+  .gotw-when span { color: var(--slate); font-size: 0.76rem; }
+  .gotw-status { color: var(--teal-bright); font-size: 0.8rem; }
+  @media (max-width: 860px) { .gotw-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -91,6 +99,12 @@
     <a href="/igcse/geography/learn"><i>Edexcel IGCSE</i><b>IGCSE Learning Hub</b><span>Open the IGCSE lessons and past paper questions.</span></a>
     <a href="/admin/question-sources/"><i>Games</i><b>Game Question Sources</b><span>Which IB and Edexcel past paper questions have been adapted in the revision games.</span></a>
   </nav>
+
+  <section class="sbl-panel gotw-panel" aria-labelledby="gotwHead">
+    <h2 id="gotwHead">&#127918; Game of the week</h2>
+    <p>Shown at the top of the Humanities Hub. Pick a game for this week or plan ahead; weeks left on &ldquo;Automatic&rdquo; rotate through all the games. Weeks start on Monday (Bangkok time).</p>
+    <div id="gotwRows"><div class="sbl-empty-state">Loading&hellip;</div></div>
+  </section>
 
   <div class="sbl-tabs">
     <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>
@@ -182,6 +196,8 @@
 </div>
 
 <script src="/js/sbl-admin.js"></script>
+<script src="/js/sbl-games-catalog.js"></script>
+<script src="/js/sbl-admin-gotw.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
 </body>

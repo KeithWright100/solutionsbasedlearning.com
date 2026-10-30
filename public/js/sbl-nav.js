@@ -118,7 +118,9 @@
           ['Geography games', '', 'head'],
           ['KS3', '/geography/games#ks3'],
           ['IGCSE', '/geography/games#igcse'],
-          ['IB Diploma', '/geography/games#ib']] }
+          ['IB Diploma', '/geography/games#ib'],
+          ['Economics games', '', 'head'],
+          ['Market Shock (IGCSE)', '/geography/games/market-shock', 'new']] }
       ] },
     { key: 'tch', label: 'Teachers', color: 'var(--sn-tch)', teacher: true, blurb: 'Only visible to teacher and admin accounts',
       cols: [

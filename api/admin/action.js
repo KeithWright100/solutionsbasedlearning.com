@@ -51,6 +51,7 @@ export default async function handler(req, res) {
   if (action === 'assign-subjects') return handleAssignSubjects(req, res, session);
   if (action === 'reset-password') return handleResetPassword(req, res, session);
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
+  if (action === 'set-game-of-week') return handleSetGameOfWeek(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -475,6 +476,53 @@ async function handleMarkFeedback(req, res, session) {
   }
 
   return res.status(200).json({ ok: true });
+}
+
+// ---------------------------------------------------------------
+// set-game-of-week — { week: 'YYYY-MM-DD' (a Monday), slug, note }
+// or { week, clear: true } to remove that week's pick.
+// Stored in sbl_site_settings (key 'game_of_week') as
+// { picks: { 'YYYY-MM-DD': { slug, note } } }. Weeks more than eight
+// weeks in the past are tidied away on each save. See
+// sql/012_site_settings.sql.
+// ---------------------------------------------------------------
+async function handleSetGameOfWeek(req, res, session) {
+  const body = req.body || {};
+  const week = String(body.week || '');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(week) || new Date(week + 'T00:00:00Z').getUTCDay() !== 1) {
+    return res.status(400).json({ error: 'week must be a Monday date (YYYY-MM-DD).' });
+  }
+  const clear = !!body.clear;
+  const slug = String(body.slug || '');
+  if (!clear && !/^[a-z0-9-]{2,80}$/.test(slug)) {
+    return res.status(400).json({ error: 'Choose a game.' });
+  }
+  const note = String(body.note || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+
+  const supabase = getSupabaseAdmin();
+  const { data, error: readErr } = await supabase
+    .from('sbl_site_settings').select('value').eq('key', 'game_of_week').maybeSingle();
+  if (readErr) {
+    console.error('Failed to read game of the week:', readErr);
+    return res.status(500).json({ error: 'Could not read the current picks. Has sql/012_site_settings.sql been run in Supabase?' });
+  }
+  const picks = Object.assign({}, (data && data.value && data.value.picks) || {});
+  if (clear) delete picks[week];
+  else picks[week] = { slug, note };
+  const cutoff = new Date(Date.now() - 56 * 86400000).toISOString().slice(0, 10);
+  Object.keys(picks).forEach((k) => { if (k < cutoff) delete picks[k]; });
+
+  const { error } = await supabase.from('sbl_site_settings').upsert({
+    key: 'game_of_week',
+    value: { picks },
+    updated_at: new Date().toISOString(),
+    updated_by: (session.profile && session.profile.email) || null
+  });
+  if (error) {
+    console.error('Failed to save game of the week:', error);
+    return res.status(500).json({ error: 'Could not save the game of the week.' });
+  }
+  return res.status(200).json({ ok: true, picks });
 }
 
 // ---------------------------------------------------------------

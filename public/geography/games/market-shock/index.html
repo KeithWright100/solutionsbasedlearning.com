@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Market Shock — IGCSE Economics Games — SBL</title>
+<meta name="description" content="Fast-paced supply and demand game for IGCSE Economics: read the headline, shift the right curve, then predict what happens to price and quantity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --ink: #062033; --muted: #4a6272;
+    --line: rgba(5,43,65,.13); --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec;
+    --amber: #d97706; --demand: #2563eb; --supply: #dc6b19; --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Inter","Segoe UI",Arial,sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at top right, rgba(0,184,176,.14), transparent 35%), linear-gradient(180deg,#f4fbfc 0%,#eaf4f6 100%); }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  .top-bar { padding: 18px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,.98), rgba(2,50,78,.96)); }
+  .top-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; font-weight: 700; color: rgba(255,255,255,.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; } .brand .teal { color: var(--teal); }
+  main { max-width: 1100px; margin: 22px auto 60px; padding: 0 16px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 14px 40px rgba(6,32,51,.07); }
+  .kicker { display: inline-block; font-size: .74rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg,var(--teal),#0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem,3.4vw,2.4rem); font-weight: 900; color: var(--navy); }
+  .muted { color: var(--muted); }
+  .btn { border: 0; border-radius: 12px; padding: 13px 22px; font-weight: 800; font-size: 1rem; background: linear-gradient(135deg,var(--teal),#0792a3); color: #fff; box-shadow: 0 10px 24px rgba(0,184,176,.3); transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--ghost { background: #fff; color: var(--navy); border: 1px solid var(--line); box-shadow: none; }
+
+  /* start */
+  .start { padding: 34px 30px; text-align: center; }
+  .start p.lead { max-width: 640px; margin: 10px auto 0; line-height: 1.6; font-weight: 500; color: var(--muted); }
+  .how { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 26px 0; text-align: left; }
+  .how div { background: #f4fbfc; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .how b { display: block; color: var(--navy); margin-bottom: 4px; }
+  .how span { font-size: .9rem; color: var(--muted); line-height: 1.5; }
+  .best { margin-top: 14px; font-size: .9rem; color: var(--muted); }
+
+  /* game */
+  .hud { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-weight: 800; font-size: .88rem; color: var(--navy); }
+  .chip small { font-weight: 600; color: var(--muted); margin-right: 4px; }
+  .chip.streak { background: #fff7e6; border-color: #f5c66b; color: #8a5300; }
+  .timer { flex: 1; min-width: 140px; height: 10px; background: #e2eef1; border-radius: 999px; overflow: hidden; }
+  .timer i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg,var(--teal),var(--cyan)); transition: width .1s linear; }
+  .timer.low i { background: linear-gradient(90deg,#f97316,var(--red)); }
+  .board { display: grid; grid-template-columns: 1.05fr 1fr; gap: 16px; }
+  .news { padding: 20px 22px; }
+  .news .mk { display: flex; align-items: center; gap: 10px; font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-dark); }
+  .news .mk span.em { font-size: 1.6rem; }
+  .news h2 { font-size: clamp(1.15rem,2.3vw,1.45rem); line-height: 1.3; margin: 10px 0 4px; color: var(--ink); }
+  .news .src { font-size: .78rem; color: var(--muted); }
+  .q { margin-top: 16px; font-weight: 800; color: var(--navy); }
+  .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .opt { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 11px 12px; font-weight: 700; font-size: .92rem; color: var(--ink); display: flex; gap: 8px; align-items: center; }
+  .opt:hover:not(:disabled) { border-color: var(--teal); background: #f2fbfb; }
+  .opt kbd { font: 700 .7rem/1 Inter,sans-serif; background: #eef4f6; border-radius: 5px; padding: 3px 6px; color: var(--muted); }
+  .opt.wide { grid-column: 1 / -1; }
+  .opt .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .opt.correct { border-color: var(--green); background: var(--green-soft); }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt.sel { border-color: var(--navy); background: #eef4fb; }
+  .opt:disabled { cursor: default; }
+  .pq { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .pq > div { background: #f7fbfc; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .pq b { display: block; font-size: .85rem; margin-bottom: 6px; color: var(--navy); }
+  .pq .row { display: flex; gap: 6px; }
+  .pq .opt { flex: 1; justify-content: center; padding: 9px; }
+  .check { margin-top: 12px; width: 100%; }
+  .check:disabled { opacity: .45; cursor: default; transform: none; }
+  .diagram { padding: 12px; display: flex; flex-direction: column; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; gap: 14px; justify-content: center; font-size: .78rem; font-weight: 700; color: var(--muted); margin-top: 4px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 18px; height: 3px; border-radius: 3px; vertical-align: middle; margin-right: 5px; }
+  .fb { margin-top: 14px; border-radius: 14px; padding: 14px 16px; line-height: 1.55; font-size: .95rem; display: none; }
+  .fb.show { display: block; }
+  .fb.good { background: var(--green-soft); border: 1px solid rgba(22,163,74,.35); }
+  .fb.bad { background: var(--red-soft); border: 1px solid rgba(220,38,38,.3); }
+  .fb b.t { display: block; font-size: 1.02rem; margin-bottom: 4px; }
+  .fb .pts { float: right; font-weight: 900; color: var(--green); }
+  .fb .tag { display: inline-block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; margin-top: 8px; color: var(--teal-dark); }
+  .next { margin-top: 12px; width: 100%; }
+  .shift-anim { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .fade-in { animation: fi .6s .5s both; }
+  @keyframes fi { from { opacity: 0 } to { opacity: 1 } }
+  .pop { animation: pop .35s ease-out; }
+  @keyframes pop { 0% { transform: scale(.96) } 60% { transform: scale(1.02) } 100% { transform: scale(1) } }
+
+  /* end */
+  .end { padding: 30px; }
+  .end-top { text-align: center; }
+  .big { font-size: 3rem; font-weight: 900; color: var(--navy); line-height: 1; margin-top: 8px; }
+  .stats { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+  .stats div { background: #f4fbfc; border: 1px solid var(--line); border-radius: 12px; padding: 10px 16px; text-align: center; }
+  .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .stats span { font-size: .78rem; color: var(--muted); font-weight: 700; }
+  .review { list-style: none; margin-top: 16px; }
+  .review li { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; display: flex; gap: 10px; line-height: 1.5; font-size: .92rem; }
+  .review li .ic { font-weight: 900; flex-shrink: 0; width: 22px; }
+  .review li.ok .ic { color: var(--green); } .review li.no .ic { color: var(--red); }
+  .review li small { display: block; color: var(--muted); }
+  .tip { margin-top: 18px; background: #fff7e6; border: 1px solid #f5c66b; border-radius: 14px; padding: 14px 16px; line-height: 1.55; font-size: .93rem; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .sr { position: absolute; left: -9999px; }
+
+  @media (max-width: 860px) {
+    .board { grid-template-columns: 1fr; }
+    .how { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .opts { grid-template-columns: 1fr; }
+    .start { padding: 24px 18px; }
+    .news { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a class="back-link" href="/geography/games#economics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> All games</a>
+    <span class="brand">SBL <span class="teal">Games</span> &middot; IGCSE Economics</span>
+  </div>
+</header>
+
+<main>
+  <!-- START -->
+  <section class="card start" id="startScreen">
+    <span class="kicker">IGCSE Economics &middot; Demand and supply</span>
+    <h1>Market Shock</h1>
+    <p class="lead">Breaking news is hitting the markets. Read each headline, decide which curve moves and which way, then predict what happens to the price and the quantity. Ten rounds, and the clock gets faster.</p>
+    <div class="how">
+      <div><b>1. Read the headline</b><span>Is it a change in <em>demand</em> (buyers) or <em>supply</em> (sellers)? Or is it just the good&rsquo;s own price changing?</span></div>
+      <div><b>2. Shift the curve</b><span>Pick left or right before the timer runs out. Faster answers earn bonus points; streaks of three or more score extra.</span></div>
+      <div><b>3. Predict P and Q</b><span>Say what happens to the equilibrium price and quantity, then watch the diagram move.</span></div>
+    </div>
+    <button class="btn" id="startBtn">Start the market &rarr;</button>
+    <p class="best" id="bestLine"></p>
+  </section>
+
+  <!-- GAME -->
+  <section id="gameScreen" hidden>
+    <div class="hud">
+      <span class="chip"><small>Round</small><span id="roundNo">1</span>/10</span>
+      <span class="chip"><small>Score</small><span id="scoreNo">0</span></span>
+      <span class="chip streak" id="streakChip" hidden>&#128293; <span id="streakNo">0</span> streak</span>
+      <div class="timer" id="timer" aria-hidden="true"><i id="timerBar"></i></div>
+      <span class="chip" id="timeNo">20s</span>
+    </div>
+    <div class="board">
+      <div class="card news">
+        <div class="mk"><span class="em" id="mkEmoji"></span><span>Market: <span id="mkName"></span></span></div>
+        <h2 id="headline"></h2>
+        <p class="src">SBL Market News &middot; Breaking</p>
+
+        <div id="step1">
+          <p class="q">What happens in this market?</p>
+          <div class="opts" id="opts1">
+            <button class="opt" data-a="DL"><span class="dot" style="background:var(--demand)"></span>Demand shifts left <kbd>1</kbd></button>
+            <button class="opt" data-a="DR"><span class="dot" style="background:var(--demand)"></span>Demand shifts right <kbd>2</kbd></button>
+            <button class="opt" data-a="SL"><span class="dot" style="background:var(--supply)"></span>Supply shifts left <kbd>3</kbd></button>
+            <button class="opt" data-a="SR"><span class="dot" style="background:var(--supply)"></span>Supply shifts right <kbd>4</kbd></button>
+            <button class="opt wide" data-a="MV"><span class="dot" style="background:#94a3b8"></span>No shift &mdash; it&rsquo;s a movement along a curve <kbd>5</kbd></button>
+          </div>
+        </div>
+
+        <div id="step2" hidden>
+          <p class="q">Correct! Now predict the new equilibrium:</p>
+          <div class="pq">
+            <div><b>Price</b><div class="row"><button class="opt" data-p="up">&#9650; Rises</button><button class="opt" data-p="down">&#9660; Falls</button></div></div>
+            <div><b>Quantity</b><div class="row"><button class="opt" data-q="up">&#9650; Rises</button><button class="opt" data-q="down">&#9660; Falls</button></div></div>
+          </div>
+          <button class="btn check" id="checkBtn" disabled>Check my prediction</button>
+        </div>
+
+        <div class="fb" id="fb" aria-live="polite"></div>
+        <button class="btn next" id="nextBtn" hidden>Next headline &rarr;</button>
+      </div>
+
+      <div class="card diagram">
+        <svg id="svg" viewBox="0 0 400 320" role="img" aria-label="Demand and supply diagram"></svg>
+        <div class="legend"><span><i style="background:var(--demand)"></i>Demand</span><span><i style="background:var(--supply)"></i>Supply</span><span><i style="background:#16a34a"></i>New curve</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="card end" id="endScreen" hidden>
+    <div class="end-top">
+      <span class="kicker">Market closed</span>
+      <h1 id="endTitle">Well traded!</h1>
+      <div class="big" id="endScore">0</div>
+      <p class="muted">points</p>
+      <div class="stats">
+        <div><b id="stCorrect">0/10</b><span>curves correct</span></div>
+        <div><b id="stPQ">0</b><span>P &amp; Q predictions right</span></div>
+        <div><b id="stStreak">0</b><span>best streak</span></div>
+        <div><b id="stBest">0</b><span>your best score</span></div>
+      </div>
+    </div>
+    <h2 style="font-size:1.1rem;color:var(--navy)">Your rounds</h2>
+    <ul class="review" id="review"></ul>
+    <div class="tip"><b>Exam tip:</b> a change in the good&rsquo;s <em>own price</em> never shifts its own demand or supply curve &mdash; it causes a <b>movement along</b> the curve (an extension or contraction). Only the <em>other</em> factors (income, tastes, prices of related goods, costs, technology, taxes, subsidies, weather&hellip;) shift a curve. Examiners love this distinction.</div>
+    <div class="actions">
+      <button class="btn" id="againBtn">Play again</button>
+      <a class="btn btn--ghost" href="/geography/games#economics">More games</a>
+    </div>
+  </section>
+  <div class="sr" aria-live="assertive" id="announce"></div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  /* ans: DL, DR, SL, SR or MV (movement along a curve). For MV, mv says which curve and which way. */
+  var EVENTS = [
+    { m: 'Coffee', e: '☕', h: 'Frost destroys a large part of Brazil’s coffee harvest', a: 'SL', f: 'Weather / natural disaster', why: 'Less coffee can be grown, so at every price producers can supply less. Supply shifts left: price rises and quantity falls.' },
+    { m: 'Chocolate', e: '🍫', h: 'New study claims dark chocolate is good for your heart', a: 'DR', f: 'Tastes and preferences', why: 'Consumers now want more chocolate at every price. Demand shifts right: price and quantity both rise.' },
+    { m: 'Electric cars', e: '🚗', h: 'Government pays car makers a subsidy for every electric car they produce', a: 'SR', f: 'Subsidy to producers', why: 'A subsidy lowers producers’ costs, so they supply more at every price. Supply shifts right: price falls and quantity rises.' },
+    { m: 'Cigarettes', e: '🚬', h: 'Government raises the tax on every packet of cigarettes', a: 'SL', f: 'Indirect tax', why: 'An indirect tax is paid by the producer and raises costs, so supply shifts left: price rises and quantity falls.' },
+    { m: 'Smartphones', e: '📱', h: 'New technology makes phone chips much cheaper to manufacture', a: 'SR', f: 'Technology / costs of production', why: 'Lower production costs mean firms can supply more at every price. Supply shifts right: price falls, quantity rises.' },
+    { m: 'Bus travel', e: '🚌', h: 'Recession: average incomes fall and many families sell their cars', a: 'DR', f: 'Income (inferior good)', why: 'Bus travel is an inferior good: when incomes fall, people switch from cars to buses. Demand shifts right: price and quantity rise.' },
+    { m: 'Restaurant meals', e: '🍽️', h: 'Recession: households’ incomes fall sharply', a: 'DL', f: 'Income (normal good)', why: 'Restaurant meals are a normal good, so demand falls when incomes fall. Demand shifts left: price and quantity both fall.' },
+    { m: 'Tennis balls', e: '🎾', h: 'The price of tennis rackets falls sharply', a: 'DR', f: 'Price of a complement', why: 'Rackets and balls are complements. Cheaper rackets mean more people play tennis, so demand for balls shifts right.' },
+    { m: 'Tea', e: '🍵', h: 'The price of coffee doubles', a: 'DR', f: 'Price of a substitute', why: 'Tea is a substitute for coffee. When coffee becomes more expensive, people switch to tea, so demand for tea shifts right.' },
+    { m: 'Butter', e: '🧈', h: 'Supermarkets cut the price of margarine by 40%', a: 'DL', f: 'Price of a substitute', why: 'Margarine is a substitute for butter. Cheaper margarine draws buyers away, so demand for butter shifts left.' },
+    { m: 'Printer ink', e: '🖨️', h: 'Printers become much more expensive', a: 'DL', f: 'Price of a complement', why: 'Ink is a complement to printers. Fewer people buy printers, so demand for ink shifts left: price and quantity fall.' },
+    { m: 'Rice', e: '🌾', h: 'Wages of farm workers rise by 25%', a: 'SL', f: 'Costs of production', why: 'Higher wages raise the cost of producing rice, so farmers supply less at every price. Supply shifts left.' },
+    { m: 'Orange juice', e: '🍊', h: 'Disease destroys thousands of orange trees in Florida', a: 'SL', f: 'Natural factors', why: 'Fewer oranges can be grown, so supply shifts left: the price rises and the quantity falls.' },
+    { m: 'Ice cream', e: '🍦', h: 'Record-breaking heatwave hits the country', a: 'DR', f: 'Weather / seasonal demand', why: 'Hot weather makes consumers want more ice cream at every price. Demand shifts right.' },
+    { m: 'Wheat', e: '🌾', h: 'Perfect growing weather brings a record harvest', a: 'SR', f: 'Weather', why: 'A bumper harvest means more wheat is supplied at every price. Supply shifts right: price falls, quantity rises.' },
+    { m: 'Hotel rooms in Bangkok', e: '🏨', h: 'Thirty new hotels open across the city this year', a: 'SR', f: 'Number of firms', why: 'More firms in the market means more rooms supplied at every price. Supply shifts right.' },
+    { m: 'Bicycles', e: '🚲', h: 'Petrol prices soar and drivers look for cheaper ways to commute', a: 'DR', f: 'Price of a substitute', why: 'Driving has become more expensive, so cycling becomes a more attractive substitute. Demand for bicycles shifts right.' },
+    { m: 'Football shirts', e: '👕', h: 'Local team wins the league and its shirt becomes a fashion hit', a: 'DR', f: 'Fashion and tastes', why: 'A change in tastes increases demand at every price, so demand shifts right.' },
+    { m: 'Bottled water', e: '💧', h: 'City population grows by a million people in five years', a: 'DR', f: 'Population', why: 'More consumers in the market means higher demand at every price. Demand shifts right.' },
+    { m: 'Steel', e: '🏗️', h: 'Prices of iron ore and energy jump sharply', a: 'SL', f: 'Costs of raw materials', why: 'Higher input costs reduce the quantity firms can profitably supply at every price, so supply shifts left.' },
+    { m: 'Fish', e: '🐟', h: 'Years of overfishing leave fish stocks at record lows', a: 'SL', f: 'Natural resources', why: 'With fewer fish to catch, supply shifts left: the price rises and the quantity falls.' },
+    { m: 'Solar panels', e: '☀️', h: 'Giant new factories cut the cost of making each panel', a: 'SR', f: 'Economies of scale', why: 'Lower average costs from economies of scale let firms supply more at every price. Supply shifts right.' },
+    { m: 'Sugar', e: '🍬', h: 'Government removes the subsidy paid to sugar producers', a: 'SL', f: 'Removal of a subsidy', why: 'Without the subsidy, producers’ costs rise, so supply shifts left: price rises, quantity falls.' },
+    { m: 'Avocados', e: '🥑', h: 'Avocado toast goes viral on social media', a: 'DR', f: 'Tastes and advertising', why: 'A trend increases the desire for avocados at every price. Demand shifts right.' },
+    { m: 'Processed meat', e: '🍔', h: 'Health report links processed meat to serious illness', a: 'DL', f: 'Tastes and health information', why: 'Consumers want less at every price, so demand shifts left: price and quantity fall.' },
+    { m: 'Cinema tickets', e: '🎬', h: 'Streaming services slash their monthly subscription prices', a: 'DL', f: 'Price of a substitute', why: 'Streaming is a substitute for the cinema. When it becomes cheaper, demand for cinema tickets shifts left.' },
+    { m: 'Petrol', e: '⛽', h: 'Government cuts the tax on petrol', a: 'SR', f: 'Indirect tax cut', why: 'Lower indirect tax reduces suppliers’ costs, so supply shifts right: price falls and quantity rises.' },
+    { m: 'Milk', e: '🥛', h: 'The price of cattle feed rises by a third', a: 'SL', f: 'Costs of production', why: 'Feed is a key cost for dairy farmers, so supply shifts left: price rises, quantity falls.' },
+    { m: 'Wine', e: '🍇', h: 'Storms ruin the grape harvest across France', a: 'SL', f: 'Weather', why: 'Fewer grapes means less wine supplied at every price. Supply shifts left.' },
+    { m: 'Laptops', e: '💻', h: 'Schools tell every student to bring their own laptop to class', a: 'DR', f: 'Change in needs / tastes', why: 'Consumers now need more laptops at every price, so demand shifts right.' },
+    { m: 'Timber', e: '🪵', h: 'New machinery makes logging much faster', a: 'SR', f: 'Technology', why: 'Better technology raises productivity and lowers costs, so supply shifts right.' },
+    /* movements along a curve */
+    { m: 'Coffee', e: '☕', h: 'Coffee shops raise the price of a cup of coffee', a: 'MV', mv: 'Dup', f: 'Change in the good’s own price', why: 'This is the price of coffee itself changing. Nothing shifts: there is a movement up along the demand curve, a contraction of demand. Quantity demanded falls.' },
+    { m: 'Concert tickets', e: '🎵', h: 'Promoters cut the price of concert tickets', a: 'MV', mv: 'Ddown', f: 'Change in the good’s own price', why: 'A change in the ticket price itself causes a movement down along the demand curve, an extension of demand. The curve does not shift.' },
+    { m: 'Rubber', e: '🌳', h: 'The price of rubber rises, so Thai farmers tap more trees', a: 'MV', mv: 'Sup', f: 'Change in the good’s own price', why: 'Farmers respond to a higher price of rubber itself, so there is a movement up along the supply curve, an extension of supply. The supply curve does not shift.' },
+    { m: 'Train travel', e: '🚆', h: 'Rail companies raise fares and fewer people take the train', a: 'MV', mv: 'Dup', f: 'Change in the good’s own price', why: 'The fare is the price of train travel itself, so this is a contraction of demand: a movement along the demand curve, not a shift.' }
+  ];
+  var LABEL = { DL: 'Demand shifts left', DR: 'Demand shifts right', SL: 'Supply shifts left', SR: 'Supply shifts right', MV: 'Movement along a curve' };
+  var ROUNDS = 10, KEY = 'sbl-market-shock-best';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var svg = $('svg'), NS = 'http://www.w3.org/2000/svg';
+  var state;
+
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function getBest() { try { return parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch (e) { return 0; } }
+  function setBest(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+  function show(id) { ['startScreen', 'gameScreen', 'endScreen'].forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+
+  function pickRounds() {
+    var shifts = shuffle(EVENTS.filter(function (e) { return e.a !== 'MV'; }));
+    var moves = shuffle(EVENTS.filter(function (e) { return e.a === 'MV'; }));
+    var list = shifts.slice(0, ROUNDS - 2);
+    /* never two of the same market back to back */
+    var out = shuffle(list.concat(moves.slice(0, 2)));
+    for (var i = 1; i < out.length; i++) if (out[i].m === out[i - 1].m && i + 1 < out.length) { var t = out[i]; out[i] = out[i + 1]; out[i + 1] = t; }
+    return out;
+  }
+
+  function start() {
+    state = { rounds: pickRounds(), i: 0, score: 0, streak: 0, bestStreak: 0, correct: 0, pq: 0, log: [] };
+    show('gameScreen');
+    round();
+  }
+
+  /* ---------------- diagram ---------------- */
+  var X0 = 60, X1 = 360, Y0 = 20, Y1 = 270, K = 210 / 220;
+  function el(tag, attrs, parent) { var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; }
+  function dY(x, dx) { return 40 + (x - 90 - dx) * K; }
+  function sY(x, dx) { return 250 - (x - 90 - dx) * K; }
+  function eq(dDx, sDx) { var x = 200 + (dDx + sDx) / 2; return { x: x, y: dY(x, dDx) }; }
+  function txt(x, y, s, fill, size, anchor, weight) { var t = el('text', { x: x, y: y, fill: fill || '#062033', 'font-size': size || 13, 'text-anchor': anchor || 'middle', 'font-weight': weight || 700, 'font-family': 'Inter, sans-serif' }); t.textContent = s; return t; }
+  function curve(kind, dx, color, label, extra) {
+    var g = el('g', extra || {});
+    var xa = 90 + dx, xb = 310 + dx;
+    var ya = kind === 'D' ? dY(xa, dx) : sY(xa, dx), yb = kind === 'D' ? dY(xb, dx) : sY(xb, dx);
+    el('line', { x1: xa, y1: ya, x2: xb, y2: yb, stroke: color, 'stroke-width': 4, 'stroke-linecap': 'round' }, g);
+    var lt = el('text', { x: xb + 6, y: kind === 'D' ? yb + 4 : yb + 4, fill: color, 'font-size': 14, 'font-weight': 800, 'font-family': 'Inter, sans-serif' }, g);
+    lt.textContent = label;
+    return g;
+  }
+  function eqMark(p, lab, color, cls) {
+    var g = el('g', cls ? { 'class': cls } : {});
+    el('line', { x1: X0, y1: p.y, x2: p.x, y2: p.y, stroke: color, 'stroke-width': 1.5, 'stroke-dasharray': '5 4' }, g);
+    el('line', { x1: p.x, y1: p.y, x2: p.x, y2: Y1, stroke: color, 'stroke-width': 1.5, 'stroke-dasharray': '5 4' }, g);
+    el('circle', { cx: p.x, cy: p.y, r: 6, fill: color, stroke: '#fff', 'stroke-width': 2 }, g);
+    var a = el('text', { x: X0 - 8, y: p.y + 4, fill: color, 'font-size': 12, 'font-weight': 800, 'text-anchor': 'end', 'font-family': 'Inter, sans-serif' }, g); a.textContent = 'P' + lab;
+    var b = el('text', { x: p.x, y: Y1 + 16, fill: color, 'font-size': 12, 'font-weight': 800, 'text-anchor': 'middle', 'font-family': 'Inter, sans-serif' }, g); b.textContent = 'Q' + lab;
+    return g;
+  }
+  function axes() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    el('rect', { x: 0, y: 0, width: 400, height: 320, fill: '#fbfdfe' });
+    el('line', { x1: X0, y1: Y0 - 6, x2: X0, y2: Y1, stroke: '#062033', 'stroke-width': 2 });
+    el('line', { x1: X0, y1: Y1, x2: X1 + 20, y2: Y1, stroke: '#062033', 'stroke-width': 2 });
+    txt(X0 - 30, Y0 + 10, 'Price', '#062033', 12, 'middle', 800);
+    txt(X1 + 6, Y1 + 34, 'Quantity', '#062033', 12, 'end', 800);
+  }
+  function drawBase() {
+    axes();
+    curve('S', 0, '#dc6b19', 'S');
+    curve('D', 0, '#2563eb', 'D');
+    eqMark(eq(0, 0), '1', '#062033');
+  }
+  function animateAnswer(a, mv) {
+    var DX = 55;
+    if (a === 'MV') {
+      var e = eq(0, 0), up = mv === 'Dup' || mv === 'Sup', onS = mv === 'Sup';
+      var x2 = onS ? e.x + 45 : (up ? e.x - 45 : e.x + 45);
+      var y2 = onS ? sY(x2, 0) : dY(x2, 0);
+      var g = el('g', { 'class': 'fade-in' });
+      var arrow = el('line', { x1: e.x, y1: e.y, x2: x2, y2: y2, stroke: '#16a34a', 'stroke-width': 3, 'marker-end': 'url(#ah)' }, g);
+      var defs = el('defs', {}); var m = el('marker', { id: 'ah', markerWidth: 8, markerHeight: 8, refX: 6, refY: 4, orient: 'auto' }, defs); el('path', { d: 'M0,0 L8,4 L0,8 Z', fill: '#16a34a' }, m);
+      eqMark({ x: x2, y: y2 }, '2', '#16a34a', 'fade-in');
+      txt(200, 300, onS ? 'Extension of supply (movement along S)' : (up ? 'Contraction of demand (movement along D)' : 'Extension of demand (movement along D)'), '#16a34a', 12.5);
+      return;
+    }
+    var isD = a[0] === 'D', dx = a[1] === 'R' ? DX : -DX;
+    var g2 = curve(isD ? 'D' : 'S', 0, '#16a34a', isD ? 'D2' : 'S2', { 'class': 'shift-anim', style: 'transform: translateX(0px)' });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { g2.style.transform = 'translateX(' + dx + 'px)'; }); });
+    // place a label with the shifted curve's own geometry: translateX keeps the same slope, matching dY/sY(x, dx)
+    var p2 = isD ? eq(dx, 0) : eq(0, dx);
+    eqMark(p2, '2', '#16a34a', 'fade-in');
+    var ay = isD ? 70 : 225;
+    var ax = isD ? 128 : 124;
+    var defs2 = el('defs', {}); var m2 = el('marker', { id: 'ah2', markerWidth: 8, markerHeight: 8, refX: 6, refY: 4, orient: 'auto' }, defs2); el('path', { d: 'M0,0 L8,4 L0,8 Z', fill: '#16a34a' }, m2);
+    el('line', { x1: ax, y1: ay, x2: ax + (dx > 0 ? 34 : -34), y2: ay, stroke: '#16a34a', 'stroke-width': 3, 'marker-end': 'url(#ah2)', 'class': 'fade-in' });
+  }
+
+  /* ---------------- rounds ---------------- */
+  var timerId, tLeft, tMax, t0, choice2;
+  function round() {
+    var ev = state.rounds[state.i];
+    $('roundNo').textContent = state.i + 1;
+    $('mkEmoji').textContent = ev.e;
+    $('mkName').textContent = ev.m;
+    $('headline').textContent = '“' + ev.h + '”';
+    $('headline').classList.remove('pop'); void $('headline').offsetWidth; $('headline').classList.add('pop');
+    $('step1').hidden = false; $('step2').hidden = true; $('nextBtn').hidden = true;
+    var fb = $('fb'); fb.className = 'fb'; fb.innerHTML = '';
+    Array.prototype.forEach.call(document.querySelectorAll('#opts1 .opt'), function (b) { b.disabled = false; b.className = b.className.replace(/ ?(correct|wrong)/g, ''); });
+    Array.prototype.forEach.call(document.querySelectorAll('#step2 .opt'), function (b) { b.disabled = false; b.classList.remove('sel', 'correct', 'wrong'); });
+    $('checkBtn').disabled = true; choice2 = { p: null, q: null };
+    drawBase();
+    tMax = state.i < 4 ? 20 : state.i < 7 ? 15 : 10;
+    tLeft = tMax; t0 = Date.now();
+    $('timer').classList.remove('low');
+    tick();
+    clearInterval(timerId);
+    timerId = setInterval(tick, 100);
+    $('announce').textContent = 'Round ' + (state.i + 1) + '. ' + ev.m + '. ' + ev.h;
+  }
+  function tick() {
+    tLeft = Math.max(0, tMax - (Date.now() - t0) / 1000);
+    $('timerBar').style.width = (tLeft / tMax * 100) + '%';
+    $('timeNo').textContent = Math.ceil(tLeft) + 's';
+    $('timer').classList.toggle('low', tLeft < 5);
+    if (tLeft <= 0) { clearInterval(timerId); answer1(null); }
+  }
+  function answer1(a) {
+    if ($('step1').dataset.locked === '1') return;
+    $('step1').dataset.locked = '1';
+    clearInterval(timerId);
+    var ev = state.rounds[state.i], ok = a === ev.a;
+    Array.prototype.forEach.call(document.querySelectorAll('#opts1 .opt'), function (b) {
+      b.disabled = true;
+      if (b.dataset.a === ev.a) b.classList.add('correct');
+      else if (b.dataset.a === a) b.classList.add('wrong');
+    });
+    var rec = { ev: ev, chose: a, ok: ok, pq: null, pts: 0 };
+    state.log.push(rec);
+    if (ok) {
+      state.correct++; state.streak++; state.bestStreak = Math.max(state.bestStreak, state.streak);
+      var pts = 100 + Math.round(tLeft) * 5 + (state.streak >= 3 ? 25 * (state.streak - 2) : 0);
+      rec.pts = pts; state.score += pts; updateHud();
+      if (ev.a === 'MV') { finishRound(rec, true); return; }
+      $('step2').hidden = false;
+      $('step1').hidden = true;
+    } else {
+      state.streak = 0; updateHud();
+      finishRound(rec, false, a === null);
+    }
+  }
+  function expected(a) { return { DR: ['up', 'up'], DL: ['down', 'down'], SR: ['down', 'up'], SL: ['up', 'down'] }[a]; }
+  function check2() {
+    var ev = state.rounds[state.i], exp = expected(ev.a), rec = state.log[state.log.length - 1];
+    var pOk = choice2.p === exp[0], qOk = choice2.q === exp[1];
+    Array.prototype.forEach.call(document.querySelectorAll('#step2 .opt'), function (b) {
+      b.disabled = true;
+      var key = b.dataset.p ? 'p' : 'q', want = key === 'p' ? exp[0] : exp[1], val = b.dataset.p || b.dataset.q;
+      if (val === want) b.classList.add('correct'); else if (b.classList.contains('sel')) b.classList.add('wrong');
+    });
+    $('checkBtn').disabled = true;
+    var bonus = (pOk ? 25 : 0) + (qOk ? 25 : 0);
+    state.score += bonus; rec.pts += bonus; rec.pq = (pOk ? 1 : 0) + (qOk ? 1 : 0); state.pq += rec.pq;
+    updateHud();
+    finishRound(rec, true);
+  }
+  function finishRound(rec, ok, timedOut) {
+    var ev = rec.ev, fb = $('fb');
+    animateAnswer(ev.a, ev.mv);
+    var head;
+    if (!ok) head = timedOut ? 'Time’s up!' : 'Not quite.';
+    else if (rec.pq === null) head = 'Spot on!';
+    else head = rec.pq === 2 ? 'Perfect prediction!' : rec.pq === 1 ? 'Right curve, half the prediction.' : 'Right curve, but check P and Q.';
+    var outcome = ev.a === 'MV' ? '' : ' <b>' + LABEL[ev.a] + '</b>: price ' + (expected(ev.a)[0] === 'up' ? 'rises' : 'falls') + ', quantity ' + (expected(ev.a)[1] === 'up' ? 'rises' : 'falls') + '.';
+    fb.className = 'fb show ' + (ok ? 'good' : 'bad');
+    fb.innerHTML = (rec.pts ? '<span class="pts">+' + rec.pts + '</span>' : '') + '<b class="t">' + head + '</b>' + (ok ? '' : 'The answer was <b>' + LABEL[ev.a] + '</b>. ') + ev.why + (/price/i.test(ev.why) ? '' : outcome) + '<br><span class="tag">' + ev.f + '</span>';
+    $('nextBtn').hidden = false;
+    $('nextBtn').textContent = state.i + 1 < ROUNDS ? 'Next headline →' : 'See my results →';
+    $('nextBtn').focus({ preventScroll: true });
+    $('announce').textContent = head + ' ' + ev.why;
+  }
+  function next() {
+    $('step1').dataset.locked = '0';
+    state.i++;
+    if (state.i >= ROUNDS) return end();
+    round();
+  }
+  function updateHud() {
+    $('scoreNo').textContent = state.score;
+    $('streakNo').textContent = state.streak;
+    $('streakChip').hidden = state.streak < 2;
+  }
+  function end() {
+    show('endScreen');
+    var best = Math.max(getBest(), state.score); setBest(best);
+    $('endScore').textContent = state.score;
+    $('stCorrect').textContent = state.correct + '/' + ROUNDS;
+    $('stPQ').textContent = state.pq + '/' + (state.log.filter(function (r) { return r.pq !== null; }).length * 2);
+    $('stStreak').textContent = state.bestStreak;
+    $('stBest').textContent = best;
+    $('endTitle').textContent = state.correct >= 9 ? 'Market master!' : state.correct >= 7 ? 'Well traded!' : state.correct >= 5 ? 'Steady trading' : 'Market crash — try again!';
+    var ul = $('review'); ul.innerHTML = '';
+    state.log.forEach(function (r) {
+      var li = document.createElement('li'); li.className = r.ok ? 'ok' : 'no';
+      li.innerHTML = '<span class="ic">' + (r.ok ? '✓' : '✗') + '</span><span><b>' + r.ev.e + ' ' + r.ev.m + ':</b> ' + r.ev.h + '<small>' + (r.ok ? '' : 'You chose: ' + (r.chose ? LABEL[r.chose] : 'no answer') + '. ') + 'Answer: ' + LABEL[r.ev.a] + ' (' + r.ev.f + ').</small></span>';
+      ul.appendChild(li);
+    });
+  }
+
+  /* ---------------- wiring ---------------- */
+  $('startBtn').addEventListener('click', start);
+  $('againBtn').addEventListener('click', start);
+  $('nextBtn').addEventListener('click', next);
+  $('checkBtn').addEventListener('click', check2);
+  document.querySelectorAll('#opts1 .opt').forEach(function (b) { b.addEventListener('click', function () { answer1(b.dataset.a); }); });
+  document.querySelectorAll('#step2 .opt').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var key = b.dataset.p ? 'p' : 'q';
+      document.querySelectorAll('#step2 [data-' + key + ']').forEach(function (o) { o.classList.remove('sel'); });
+      b.classList.add('sel'); choice2[key] = b.dataset[key];
+      $('checkBtn').disabled = !(choice2.p && choice2.q);
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if ($('gameScreen').hidden) return;
+    var map = { '1': 'DL', '2': 'DR', '3': 'SL', '4': 'SR', '5': 'MV' };
+    if (!$('step1').hidden && $('step1').dataset.locked !== '1' && map[e.key]) { answer1(map[e.key]); }
+  });
+  var b = getBest(); $('bestLine').textContent = b ? 'Your best score: ' + b + ' points' : '';
+  drawBase();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

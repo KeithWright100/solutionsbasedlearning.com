@@ -18,6 +18,26 @@
 // normal iframe chat.
 
 import { getSessionUser } from './_lib/auth.js';
+import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
+
+// Also: GET /api/session?gameOfWeek=1 returns the admin's Game of the
+// week picks ({ picks: { 'YYYY-MM-DD': { slug, note } } }, keyed by the
+// Monday each week starts). The hub falls back to an automatic weekly
+// rotation when there is no pick for the current week. Lives here for
+// the same 12-function reason as the tutor token.
+async function gameOfWeek(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  try {
+    const { data, error } = await getSupabaseAdmin()
+      .from('sbl_site_settings').select('value').eq('key', 'game_of_week').maybeSingle();
+    if (error) throw error;
+    const picks = (data && data.value && data.value.picks) || {};
+    return res.status(200).json({ picks });
+  } catch (err) {
+    console.error('Game of the week read failed:', err && err.message);
+    return res.status(200).json({ picks: {} });
+  }
+}
 
 const TUTOR_SECRETS = {
   tutor: 'DIRECTLINE_SECRET_TUTOR',
@@ -55,6 +75,7 @@ export default async function handler(req, res) {
   }
 
   if (req.query && req.query.tutorToken) return tutorToken(req, res);
+  if (req.query && req.query.gameOfWeek) return gameOfWeek(req, res);
 
   const session = await getSessionUser(req, res);
   if (!session) {

@@ -54,6 +54,22 @@
     .empty { color: var(--muted); font-size: .9rem; }
     .empty a { color: var(--teal-dark); font-weight: 600; }
 
+    /* game of the week */
+    .side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    .gotw { position: relative; overflow: hidden; border-radius: 22px; padding: 18px 20px; color: #fff; background: linear-gradient(135deg, #0b4f5c, #0a7c7a); display: flex; gap: 14px; align-items: center; }
+    .gotw::after { content: ""; position: absolute; right: -40px; bottom: -50px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(32,215,226,.35), transparent 70%); pointer-events: none; }
+    .gotw__ic { width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,.14); display: grid; place-items: center; font-size: 1.6rem; flex-shrink: 0; }
+    .gotw__body { flex: 1; min-width: 0; position: relative; z-index: 1; }
+    .gotw__kick { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #9ff3ee; }
+    .gotw__body h2 { font-size: 1.15rem; margin: 2px 0 2px; }
+    .gotw__body p { font-size: .82rem; opacity: .88; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .gotw__meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .gotw__meta span { font-size: .7rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: rgba(255,255,255,.14); }
+    .gotw__go { position: relative; z-index: 1; flex-shrink: 0; background: #fff; color: #0b4f5c; font-weight: 800; font-size: .88rem; padding: 10px 16px; border-radius: 12px; white-space: nowrap; }
+    .gotw__go:hover { background: #e6fbf9; }
+    .gotw[hidden] { display: none; }
+    @media (max-width: 560px) { .gotw { flex-wrap: wrap; } .gotw__go { width: 100%; text-align: center; } }
+
     /* sections */
     .section { margin-top: 32px; }
     .section__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
@@ -141,9 +157,21 @@
         </div>
         <div class="quick" id="quick"></div>
       </div>
+      <div class="side">
+        <a class="gotw" id="gotw" hidden href="/geography/games" aria-label="Game of the week">
+          <span class="gotw__ic" aria-hidden="true">&#127918;</span>
+          <div class="gotw__body">
+            <span class="gotw__kick">Game of the week</span>
+            <h2 id="gotwTitle"></h2>
+            <p id="gotwDesc"></p>
+            <span class="gotw__meta" id="gotwMeta"></span>
+          </div>
+          <span class="gotw__go">Play now &rarr;</span>
+        </a>
       <div class="continue">
         <h2 class="sec">Carry on where you left off</h2>
         <div id="recent"></div>
+      </div>
       </div>
     </section>
 
@@ -162,11 +190,11 @@
       <div class="tiles" id="tilesRev"></div>
     </section>
 
-    <section class="banner" aria-label="Interactive Geography Games">
+    <section class="banner" aria-label="Interactive games">
       <div>
-        <h2>&#127918; Interactive Geography Games</h2>
-        <p>Games for KS3, IGCSE and the IB Diploma &mdash; build knowledge, retrieval and critical thinking through interactive challenges.</p>
-        <div class="chips"><a href="/geography/games#ks3">KS3</a><a href="/geography/games#igcse">IGCSE</a><a href="/geography/games#ib">IB Diploma</a></div>
+        <h2>&#127918; Interactive Games</h2>
+        <p>Geography games for KS3, IGCSE and the IB Diploma, plus IGCSE Economics &mdash; build knowledge, retrieval and critical thinking through interactive challenges.</p>
+        <div class="chips"><a href="/geography/games#ks3">KS3</a><a href="/geography/games#igcse">IGCSE</a><a href="/geography/games#ib">IB Diploma</a><a href="/geography/games#economics">IGCSE Economics</a></div>
       </div>
       <a class="go" href="/geography/games">Play now &rarr;</a>
     </section>
@@ -174,9 +202,9 @@
     <section class="section" aria-labelledby="newHead">
       <div class="section__head"><h2 id="newHead">What's new</h2></div>
       <div class="news">
+        <a href="/geography/games/market-shock"><span class="pill">New</span><b>Market Shock: IGCSE Economics game</b><small>Shift the right curve, then predict price and quantity. Ten fast headlines.</small></a>
         <a href="/igcse/cie-economics"><span class="pill">New</span><b>Cambridge IGCSE Economics revision</b><small>23 topic pages with diagrams, quizzes and the specimen paper questions.</small></a>
         <a href="/igcse/history/learn"><span class="pill">New</span><b>IGCSE History lessons</b><small>Superpower relations, Civil rights in the USA, and Russia and the Soviet Union.</small></a>
-        <a href="/geography/revision/guide"><span class="pill">New</span><b>IB Geography revision guide</b><small>Topic-by-topic revision pages with maps, diagrams and case studies.</small></a>
       </div>
     </section>
 
@@ -258,6 +286,28 @@
       box.innerHTML = '<p class="empty">The lessons and revision pages you open will appear here, so you can jump straight back in. Start with <a href="/geography">IB Geography</a> or <a href="/igcse/geography/learn">IGCSE Geography</a>.</p>';
     }
 
+  })();
+  </script>
+  <script src="/js/sbl-games-catalog.js"></script>
+  <script>
+  /* Game of the week: the admin's pick for this week, or the automatic rotation. */
+  (function () {
+    var W = window.SBLGameOfWeek; if (!W) return;
+    function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+    function paint(picks) {
+      var r = W.resolve(picks || {}), g = r.game, card = document.getElementById('gotw');
+      if (!g || !card) return;
+      card.href = g.href;
+      card.setAttribute('aria-label', 'Game of the week: ' + g.title);
+      document.getElementById('gotwTitle').textContent = g.title;
+      document.getElementById('gotwDesc').textContent = g.desc;
+      document.getElementById('gotwMeta').innerHTML = '<span>' + esc(g.level) + '</span>' + (r.note ? '<span>' + esc(r.note) + '</span>' : '');
+      card.hidden = false;
+    }
+    fetch('/api/session?gameOfWeek=1', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (d) { paint(d && d.picks); })
+      .catch(function () { paint({}); });
   })();
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
