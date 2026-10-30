@@ -102,6 +102,13 @@ window.SBL_LESSONS['PPN-t1-l2-global'] = {
     'I can explain the characteristics that make the USA and China global superpowers.',
     'I can produce a comparative analysis of the USA and China relating to their similarities and differences.'
   ],
+  ibQuestions: [
+    {
+      question: "Discuss the challenges and opportunities that global superpowers create for other countries. [May 2021, Paper 3, Q1(b)]",
+      marks: 16,
+      markScheme: "A strong response discusses opportunities (trade, investment and aid, security alliances, technology transfer, for example China\u2019s Belt and Road Initiative or US investment) and challenges (debt dependency, political influence, cultural dominance, conflict and sanctions, resource exploitation), considering different countries and perspectives, and reaches a well-supported conclusion. Mark holistically out of 16: reward a balanced, critical discussion of different perspectives, detailed named examples and a well-supported conclusion."
+    }
+  ],
   readinessQuestions: [
     'What is a global superpower, and what characteristics does a country need to be considered one?',
     'How do the USA and China compare in terms of economic influence?',
@@ -146,6 +153,13 @@ window.SBL_LESSONS['PPN-t1-l3-powerful'] = {
     'I can explain the role of the IMF and the NDB.',
     'I can evaluate the need for each of these organisations.'
   ],
+  ibQuestions: [
+    {
+      question: "Analyse how the actions of two global groups or organisations have made countries more interconnected. [May 2021, Paper 3, Q3(a)]",
+      marks: 12,
+      markScheme: "A strong response analyses two named groups or organisations (for example, the WTO, the EU, ASEAN, the G20, the UN or the IMF) and explains how their actions (trade agreements, free movement, common rules, loans, political cooperation) increase flows of goods, people, money and ideas between countries. Mark holistically out of 12: reward detailed, accurate knowledge, clear analysis linked to the question and well-chosen named examples."
+    }
+  ],
   readinessQuestions: [
     'What is the difference between the G7 and the G20?',
     'What is the OECD, and what kind of countries tend to be members?',
@@ -189,6 +203,13 @@ window.SBL_LESSONS['PPN-t2-l1-an-overview-of'] = {
     'I can distinguish between manufactured goods and services and give examples of each.',
     'I can give examples of types of flows of capital, including aid, loans, debt relief and remittances.',
     'I can identify patterns of illegal flows and give examples of trafficking, counterfeit goods and flows of narcotics.'
+  ],
+  ibQuestions: [
+    {
+      question: "Discuss how different businesses and societies have been affected by the growth of global supply chains. [May 2021, Paper 3, Q3(b)]",
+      marks: 16,
+      markScheme: "A strong response discusses effects on TNCs (lower costs, access to markets), smaller businesses (competition or new suppliers), and societies (jobs and growth in manufacturing countries, deindustrialisation in older industrial regions, cheaper goods, working conditions, environmental impacts, vulnerability to disruption such as COVID-19), using named examples, and reaches a balanced conclusion. Mark holistically out of 16: reward a balanced, critical discussion of different perspectives, detailed named examples and a well-supported conclusion."
+    }
   ],
   readinessQuestions: [
     'What are the main types of global flow covered in this lesson?',

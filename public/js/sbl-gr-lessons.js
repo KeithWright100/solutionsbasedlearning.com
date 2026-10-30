@@ -236,6 +236,13 @@ window.SBL_LESSONS.GR05 = {
     'I can explain how personal travel contributes to carbon footprints.',
     'I can link localised shipping pollution to the wider concept of global flows.'
   ],
+  ibQuestions: [
+    {
+      question: "Analyse ways in which global trade flows can affect the size of national carbon footprints. [May 2021, Paper 3, Q2(a)]",
+      marks: 12,
+      markScheme: "A strong response analyses how production-based and consumption-based accounting differ, how the global shift of manufacturing moves emissions to countries such as China, how shipping and air freight add emissions, and how importing goods can lower a rich country\u2019s production footprint while raising its consumption footprint (embedded carbon). Mark holistically out of 12: reward detailed, accurate knowledge, clear analysis linked to the question and well-chosen named examples."
+    }
+  ],
   readinessQuestions: [
     'What is ballast water, and why can discharging it be an environmental problem?',
     'Explain the difference between grey water and black water on a ship.',

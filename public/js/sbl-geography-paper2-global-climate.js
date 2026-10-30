@@ -77,3 +77,131 @@ window.SBL_REVISION_TOPICS = [
     ]
   }
 ];
+
+/* ------------------------------------------------------------------
+   Added Oct 2026: May 2024, May 2023 and May 2021 sessions.
+   Same copyright rules as above: every task description and mark
+   scheme below is ORIGINAL SBL wording written from general subject
+   knowledge. Nothing is copied from the question papers, resource
+   booklets or official markschemes; resource-based parts tell the
+   student to read their own authorised booklet.
+   ------------------------------------------------------------------ */
+var SBL_MB10_P2 = "Mark this 10-mark essay holistically using the IB Geography extended-response markbands, judging four things together: knowledge and understanding of the topic, how directly that knowledge is applied to the exact wording of the question, the quality of the argument and evaluation including a supported conclusion, and the use of relevant named examples, case studies and, where helpful, diagrams. 0: nothing relevant. 1\u20132: a few largely descriptive or unrelated points with little structure. 3\u20134: some relevant knowledge, but generic and mostly descriptive, with only asserted judgements. 5\u20136: addresses the question with relevant examples, but the argument is narrow or one-sided and evaluation is limited. 7\u20138: addresses the whole question with a developed, evaluated argument and accurate examples, though the conclusion may not fully weigh alternatives. 9\u201310: a well-structured, balanced and critical response that weighs different perspectives, places or scales and reaches a well-supported conclusion.";
+/* newest sessions first, then the earlier session(s) above */
+window.SBL_REVISION_TOPICS = [
+  {
+    topic: "May 2024 \u2014 Question 2 \u2014 Section A: Global climate \u2014 vulnerability and resilience (10 marks, compulsory)",
+    questions: [
+      {
+        label: "May 2024 P2 \u2014 Question 2(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 2(a) \u2014 Describe (2 marks). Use the map in your resource booklet that shows the projected change in a forest biome\u2019s distribution between two dates. Describe how the distribution of the forest is projected to change.",
+        markScheme: "Award one mark for each valid descriptive point taken from the student\u2019s own map, up to two marks (for example, the overall direction of shift, areas where the forest expands or contracts, or a change in its total extent). At least one point should be supported by a specific detail from the map (a direction, place or approximate distance) for full marks. This system does not hold the map, so judge internal consistency rather than exact places."
+      },
+      {
+        label: "May 2024 P2 \u2014 Question 2(b) \u2014 4 marks",
+        marks: 4,
+        question: "Question 2(b) \u2014 Explain (2+2 marks). Explain two different reasons why emissions of methane are increasing.",
+        markScheme: "Mark each part separately, up to two marks each. For each, award one mark for identifying a genuine and distinct source of rising methane emissions (for example, more cattle and other livestock as meat demand rises, expanding rice paddies, growing landfill sites, leaks from natural gas extraction and pipelines, or thawing permafrost and wetlands) and a second mark for explaining why that source is increasing or how it releases methane (for example, anaerobic decomposition in flooded paddies or landfill, enteric fermentation in ruminants, or warming releasing methane stored in frozen ground as a positive feedback). The two reasons must be clearly different."
+      },
+      {
+        label: "May 2024 P2 \u2014 Question 2(c) \u2014 4 marks",
+        marks: 4,
+        question: "Question 2(c) \u2014 Explain (2+2 marks). Explain two geopolitical strategies used to reduce the effects of climate change.",
+        markScheme: "Mark each part separately, up to two marks each. For each, award one mark for identifying a genuine geopolitical (international or intergovernmental) strategy (for example, international agreements such as the Paris Agreement and nationally determined contributions, the Kyoto Protocol, international carbon trading schemes, climate finance from richer to poorer countries, or regional agreements such as the EU\u2019s emissions targets) and a second mark for explaining how it reduces the effects or causes of climate change (for example, binding or pledged emission cuts, funding adaptation in vulnerable countries, or creating a price on carbon that encourages lower emissions). Do not credit purely local or individual actions."
+      }
+    ]
+  },
+  {
+    topic: "May 2024 \u2014 Section C essays (10 marks \u2014 answer one)",
+    questions: [
+      {
+        label: "May 2024 P2 \u2014 Question 6 \u2014 10 marks",
+        marks: 10,
+        question: "Question 6 \u2014 To what extent (10 marks). \u201cThe effects of global climate change are uneven across the world.\u201d To what extent do you agree with this statement?",
+        markScheme: "A strong response gives evidence that effects vary between places (for example, faster warming in the Arctic, sea-level rise threatening low-lying deltas and small island states, drought in the Sahel, some high-latitude regions gaining longer growing seasons) and that vulnerability varies between groups (for example, poorer people, farmers and coastal communities are less able to adapt). It may also argue that some effects are global (for example, rising mean temperature and ocean acidification), and reaches a justified conclusion about how uneven the effects are, ideally considering both physical exposure and human vulnerability. " + SBL_MB10_P2
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 2 \u2014 Section A: Global climate \u2014 vulnerability and resilience (10 marks, compulsory)",
+    questions: [
+      {
+        label: "May 2023 P2 \u2014 Question 2(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 2(a) \u2014 Outline (2 marks). Outline what is meant by global dimming.",
+        markScheme: "Award one mark for the idea of a reduction in the amount of solar radiation reaching the Earth\u2019s surface, and a second mark for the cause, such as particulates and aerosols from burning fossil fuels or volcanic eruptions reflecting or absorbing sunlight, or making clouds more reflective."
+      },
+      {
+        label: "May 2023 P2 \u2014 Question 2(b) \u2014 4 marks",
+        marks: 4,
+        question: "Question 2(b) \u2014 Suggest (2+2 marks). Suggest two ways in which differences in economic development lead to differences in greenhouse gas emissions between countries.",
+        markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine link between development and emissions (for example, higher energy use per person in wealthy countries, industrialisation and manufacturing in emerging economies, car ownership and air travel, meat-rich diets, or the ability of richer countries to afford renewable energy) and a second mark for developing why it causes higher or lower emissions in some countries than others."
+      },
+      {
+        label: "May 2023 P2 \u2014 Question 2(c) \u2014 4 marks",
+        marks: 4,
+        question: "Question 2(c) \u2014 Explain (2+2 marks). Explain two reasons why wealthy people are less vulnerable to climate change.",
+        markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine reason (for example, better-quality housing in safer locations, insurance, savings, access to air conditioning, health care and information, ability to migrate, or less dependence on farming) and a second mark for explaining how this reduces their exposure or increases their ability to cope and recover."
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 4 \u2014 Section B: infographic (10 marks, compulsory)",
+    questions: [
+      {
+        label: "May 2023 P2 \u2014 Question 4(a)(i) \u2014 1 mark",
+        marks: 1,
+        question: "Question 4(a)(i) \u2014 Identify (1 mark). Use the infographic on the global impacts of climate change in your resource booklet. Identify the extreme weather event in the region named on your paper that had the highest economic cost.",
+        markScheme: "This system does not hold the resource, so accept the specific value or item the student says they read from their own authorised resource booklet, provided it is precise, plausible and given with correct units where relevant. Award the mark only for a specific answer; do not award it for a vague answer or for more than one answer."
+      },
+      {
+        label: "May 2023 P2 \u2014 Question 4(a)(ii) \u2014 1 mark",
+        marks: 1,
+        question: "Question 4(a)(ii) \u2014 Identify (1 mark). Using the same infographic, identify the modal value for the cost of the type of event named on your paper.",
+        markScheme: "This system does not hold the resource, so accept the specific value or item the student says they read from their own authorised resource booklet, provided it is precise, plausible and given with correct units where relevant. Award the mark only for a specific answer; do not award it for a vague answer or for more than one answer."
+      },
+      {
+        label: "May 2023 P2 \u2014 Question 4(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 4(b) \u2014 Suggest (2 marks). Suggest one reason for the trend in the number of weather-related disasters over recent decades.",
+        markScheme: "Award one mark for a genuine reason (for example, climate change increasing the frequency or intensity of extreme events, more people and property in exposed areas such as coasts and floodplains, or better reporting and recording of disasters) and a second mark for developing it."
+      },
+      {
+        label: "May 2023 P2 \u2014 Question 4(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 4(c) \u2014 To what extent (6 marks). Using the evidence in your resource booklet\u2019s infographic, to what extent are the impacts of climate change the same everywhere?",
+        markScheme: "Award one mark for each valid point drawn from the student\u2019s own infographic and a further mark for developing or supporting it, up to five marks; award the final mark for an overall judgement. Award a maximum of four marks if only one side is considered. Evidence of uneven impacts may include different types and costs of events in different regions and different numbers of people affected; evidence of similarity may include every region experiencing some extreme events. Students may also question what the infographic leaves out, such as the human cost compared with the economic cost. This system does not hold the infographic, so judge the reasoning rather than exact figures."
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 2 \u2014 Section A: Global climate \u2014 vulnerability and resilience (10 marks, compulsory)",
+    questions: [
+      {
+        label: "May 2021 P2 \u2014 Question 2(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 2(a) \u2014 Identify (1+1 marks). Use the temperature anomaly map in your resource booklet. Identify one region with a large positive anomaly and one region with a large negative anomaly, as specified on your paper.",
+        markScheme: "Award one mark for each region correctly identified from the student\u2019s own map (one positive, one negative). This system does not hold the map, so accept a plausible, specific region for each."
+      },
+      {
+        label: "May 2021 P2 \u2014 Question 2(b)(i) \u2014 2 marks",
+        marks: 2,
+        question: "Question 2(b)(i) \u2014 Outline (2 marks). Outline how extreme warming can change the albedo of a region.",
+        markScheme: "Award one mark for an effect of warming (for example, melting snow and ice, desertification, wildfires removing vegetation, or more cloud from evaporation) and a second mark for the effect on albedo (less ice means a darker surface and lower albedo; drier, bare ground or more cloud can raise albedo)."
+      },
+      {
+        label: "May 2021 P2 \u2014 Question 2(b)(ii) \u2014 2 marks",
+        marks: 2,
+        question: "Question 2(b)(ii) \u2014 Outline (2 marks). Outline how extreme warming can affect the operation of a feedback loop.",
+        markScheme: "Award one mark for describing a valid feedback loop and a second mark for explaining how warming amplifies (positive) or dampens (negative) it (for example, warming thaws permafrost, releasing methane that causes further warming; or melting ice lowers albedo so more energy is absorbed)."
+      },
+      {
+        label: "May 2021 P2 \u2014 Question 2(c) \u2014 4 marks",
+        marks: 4,
+        question: "Question 2(c) \u2014 Explain (2+2 marks). Explain two ways in which climate change affects ocean transport routes.",
+        markScheme: "Mark each part separately, up to two marks each. For each, award one mark for a genuine impact (for example, melting Arctic sea ice opening the Northern Sea Route or Northwest Passage, more intense storms disrupting shipping, sea-level rise flooding ports, or low water levels in canals during drought) and a second mark for developing its effect on shipping routes, costs or journey times."
+      }
+    ]
+  }
+].concat((window.SBL_REVISION_TOPICS || []).map(function (t) { if (!/^May \d{4}/.test(t.topic)) t.topic = 'May 2019 — ' + t.topic; return t; }));

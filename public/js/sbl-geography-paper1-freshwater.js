@@ -89,3 +89,141 @@ window.SBL_REVISION_TOPICS = [
     ]
   }
 ];
+
+/* ------------------------------------------------------------------
+   Added Oct 2026: May 2024, May 2023 and May 2021 sessions.
+   Same copyright rules as above: every task description and mark
+   scheme below is ORIGINAL SBL wording written from general subject
+   knowledge. Nothing is copied from the question papers, resource
+   booklets or official markschemes; resource-based parts tell the
+   student to read their own authorised booklet.
+   ------------------------------------------------------------------ */
+/* newest sessions first, then the earlier session(s) above */
+window.SBL_REVISION_TOPICS = [
+  {
+    topic: "May 2024 \u2014 Question 1 \u2014 Option A: Freshwater (10 marks)",
+    questions: [
+      {
+        label: "May 2024 P1 \u2014 Question 1(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 1(a) \u2014 Identify (1+1 marks). Use the map of managed aquifer recharge (MAR) sites in your resource booklet. Identify the state with the most MAR sites, and state the water source used for recharge at the location named on your paper.",
+        markScheme: "Award one mark for each correct item read from the student\u2019s own map. This system does not hold the map."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 1(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 1(b) \u2014 Outline (2 marks). Outline one reason why most managed aquifer recharge sites are located near cities.",
+        markScheme: "Award one mark for a genuine reason (for example, high demand for water in cities, the supply of treated wastewater and urban stormwater to recharge aquifers, or existing infrastructure and funding) and a second mark for development."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 1(c)(i) \u2014 3 marks",
+        marks: 3,
+        question: "Question 1(c)(i) \u2014 Explain (3 marks). Explain one way in which agricultural activities can cause salinization.",
+        markScheme: "Up to three marks: one mark for identifying a farming activity (for example, over-irrigation or poorly drained irrigation in hot, dry areas), one mark for explaining the process (water evaporates, drawing salts to the surface, or a rising water table brings dissolved salts upward), and one mark for further development or a named example (for example, the Aral Sea basin or the Murray\u2013Darling basin)."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 1(c)(ii) \u2014 3 marks",
+        marks: 3,
+        question: "Question 1(c)(ii) \u2014 Explain (3 marks). Explain one consequence of salinization for farmers.",
+        markScheme: "Up to three marks: one mark for a genuine consequence (for example, lower crop yields or land becoming unusable), one mark for explaining why (salt reduces plants\u2019 ability to absorb water and damages soil structure), and one mark for developing the economic or social effect on farmers (lower incomes, debt, the cost of drainage or flushing, switching to salt-tolerant crops, or abandoning land)."
+      }
+    ]
+  },
+  {
+    topic: "May 2024 \u2014 Question 2 \u2014 Option A: Freshwater (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2024 P1 \u2014 Question 2(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 2(a) \u2014 Examine (10 marks). Examine how human activities within a drainage basin can affect the shape of river hydrographs.",
+        markScheme: "A strong response explains how activities such as urbanisation (impermeable surfaces and drains), deforestation, afforestation, farming practices, and dams and reservoirs change lag time, peak discharge and the steepness of the rising and falling limbs. It recognises that some activities increase flood risk while others reduce it, and that physical factors (rainfall intensity, basin shape, soil and rock type) also matter, so the effect of human activity varies with scale and place. Named examples and annotated hydrographs strengthen the answer. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 2(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 2(b) \u2014 Examine (10 marks). Examine the costs and benefits of building dams for different stakeholders.",
+        markScheme: "A strong response uses a named dam (for example, the Three Gorges Dam, the GERD or the Aswan High Dam) and explains benefits (hydroelectric power, flood control, irrigation water, navigation, water supply) and costs (displacement of people, loss of farmland and heritage, sediment trapping, ecological change, earthquake risk, conflict with downstream countries). It shows that costs and benefits fall differently on different stakeholders \u2014 governments, urban energy users, displaced communities, farmers and downstream countries \u2014 and may change over time, and reaches a justified judgement. " + GEOG_MARKBAND_10
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 1 \u2014 Option A: Freshwater (10 marks)",
+    questions: [
+      {
+        label: "May 2023 P1 \u2014 Question 1(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 1(a) \u2014 State (1+1 marks). Use the map of wetlands in a river basin in your resource booklet. State the direction of flow of the river named on your paper, and estimate the length of the wetland area between the two points shown.",
+        markScheme: "Award one mark for each specific, plausible answer from the student\u2019s own map. This system does not hold the map."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 1(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 1(b) \u2014 Outline (2 marks). Outline one benefit of maintaining a wetland area.",
+        markScheme: "Award one mark for a genuine benefit (for example, storing floodwater, filtering pollutants, providing habitats and biodiversity, storing carbon, recharging groundwater, or supporting fishing and tourism) and a second mark for development."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 1(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 1(c) \u2014 Explain (3+3 marks). Explain one pressure on wetlands caused by agriculture and one pressure caused by altered water flow.",
+        markScheme: "Up to three marks for each pressure: one mark for a genuine pressure (agriculture: drainage for farmland, fertiliser and pesticide run-off causing eutrophication, grazing; altered flow: dams and water extraction reducing flooding of wetlands, channelisation, levees), one for explaining its effect on the wetland, and one for development or a named example (for example, the Murray\u2013Darling basin or coastal Louisiana)."
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 2 \u2014 Option A: Freshwater (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2023 P1 \u2014 Question 2(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 2(a) \u2014 Examine (10 marks). Examine the view that river flooding is becoming more difficult to predict.",
+        markScheme: "A strong response explains why prediction may be harder (climate change bringing more intense and unusual rainfall, rapid urbanisation changing basin responses, flash floods and short lag times, poor data in some basins) and why it may be easier (better satellite and radar monitoring, computer modelling, river gauges, early warning systems). It recognises that prediction varies between places and between rich and poor countries, uses named examples, and reaches a justified conclusion. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 2(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 2(b) \u2014 Examine (10 marks). Examine why water management issues can cause conflict between stakeholders.",
+        markScheme: "A strong response explains how competing uses (farming, industry, cities, energy, the environment) and unequal power lead to conflict at different scales, from local disputes to international ones such as the Nile and the GERD. It considers upstream and downstream positions, scarcity, growing demand, climate change and governance, and recognises that cooperation and agreements can reduce conflict. " + GEOG_MARKBAND_10
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 1 \u2014 Option A: Freshwater (10 marks)",
+    questions: [
+      {
+        label: "May 2021 P1 \u2014 Question 1(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 1(a) \u2014 Identify (1+1 marks). Use the table of the world\u2019s tallest waterfalls on your paper. Identify the country and the value asked for in parts (a)(i) and (a)(ii).",
+        markScheme: "Award one mark for each correct answer read or calculated from the student\u2019s own table. This system does not hold the table."
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 1(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 1(b) \u2014 Outline (2 marks). Outline the main features of one landform, other than a waterfall, created by river erosion.",
+        markScheme: "Award one mark for naming a valid erosional landform (for example, a gorge, V-shaped valley, interlocking spurs, pothole or rapids) and a second mark for describing its main features (shape, size or location)."
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 1(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 1(c) \u2014 Explain (3+3 marks). Explain two reasons why rates of erosion vary between different waterfalls.",
+        markScheme: "Up to three marks for each reason: one mark for a genuine reason (for example, rock type and hardness, joints and bedding of the rock, river discharge and velocity, the height of the fall, the amount and size of load, climate and freeze\u2013thaw), one for explaining how it changes the rate of erosion, and one for further development or an example."
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 2 \u2014 Option A: Freshwater (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2021 P1 \u2014 Question 2(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 2(a) \u2014 Examine (10 marks). Examine how human and physical factors can contribute to a low risk of river flooding.",
+        markScheme: "A strong response explains physical factors that lower flood risk (permeable rock and soils, gentle slopes, dense vegetation, elongated basin shape, steady rainfall) and human factors (afforestation, sustainable drainage, floodplain zoning, dams and levees, wetland restoration, forecasting). It considers how the factors interact, recognises that some human actions raise risk elsewhere, uses named examples, and reaches a judgement about which factors matter most. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 2(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 2(b) \u2014 Examine (10 marks). Examine why it can be difficult to achieve stakeholder agreement on how best to manage one or more water resources.",
+        markScheme: "A strong response uses a named basin or resource (for example, the Mississippi, the Murray\u2013Darling or the Nile) and explains the different priorities of stakeholders (farmers, cities, industry, energy companies, environmental groups, different countries or states), unequal power, and the challenges of integrated drainage basin management. It considers why agreement is sometimes reached and reaches a justified conclusion. " + GEOG_MARKBAND_10
+      }
+    ]
+  }
+].concat((window.SBL_REVISION_TOPICS || []));

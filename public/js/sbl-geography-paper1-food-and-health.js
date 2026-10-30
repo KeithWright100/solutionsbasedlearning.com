@@ -83,3 +83,135 @@ window.SBL_REVISION_TOPICS = [
     ]
   }
 ];
+
+/* ------------------------------------------------------------------
+   Added Oct 2026: May 2024, May 2023 and May 2021 sessions.
+   Same copyright rules as above: every task description and mark
+   scheme below is ORIGINAL SBL wording written from general subject
+   knowledge. Nothing is copied from the question papers, resource
+   booklets or official markschemes; resource-based parts tell the
+   student to read their own authorised booklet.
+   ------------------------------------------------------------------ */
+/* newest sessions first, then the earlier session(s) above */
+window.SBL_REVISION_TOPICS = [
+  {
+    topic: "May 2024 \u2014 Question 11 \u2014 Option F: Food and health (10 marks)",
+    questions: [
+      {
+        label: "May 2024 P1 \u2014 Question 11(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 11(a) \u2014 State (1+1 marks). Use the graph of food insecurity by region on your paper. State the value and the region asked for in parts (a)(i) and (a)(ii).",
+        markScheme: "Award one mark for each specific, plausible answer read from the student\u2019s own graph. This system does not hold the graph."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 11(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 11(b) \u2014 Outline (2 marks). Outline one political factor that can lead to high levels of food insecurity.",
+        markScheme: "Award one mark for a genuine political factor (for example, conflict and war, corruption, poor governance, blockades or sanctions, land-ownership policies, or trade restrictions) and a second mark for explaining how it reduces the availability of or access to food, ideally with an example such as Yemen."
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 11(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 11(c) \u2014 Explain (3+3 marks). Explain two disadvantages of relying on international aid to reduce the severity of famine.",
+        markScheme: "Up to three marks for each disadvantage: one mark for a genuine disadvantage (for example, dependency, undermining local farmers and markets, slow arrival, insufficient or unpredictable funding, aid diverted by armed groups or corrupt officials, access blocked by conflict, or tied aid serving donor interests), one for explanation, and one for further development or a named example."
+      }
+    ]
+  },
+  {
+    topic: "May 2024 \u2014 Question 12 \u2014 Option F: Food and health (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2024 P1 \u2014 Question 12(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 12(a) \u2014 Examine (10 marks). Examine the importance of economic factors in the incidence of water-borne disease.",
+        markScheme: "A strong response explains how poverty affects water-borne disease (no money for clean water, sanitation, treatment or health care; crowded informal settlements; weak public investment) and compares economic factors with physical factors (floods, warm temperatures, contaminated rivers and lakes) and political or social factors (conflict, displacement, governance, hygiene education). It uses a named example such as cholera in the DRC or Haiti, and reaches a justified conclusion about the relative importance of economic factors. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2024 P1 \u2014 Question 12(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 12(b) \u2014 To what extent (10 marks). To what extent do genetically modified organisms (GMOs) and vertical farming improve food security in different places?",
+        markScheme: "A strong response explains how GMOs (for example, Bt cotton, drought-tolerant or nutrient-enriched crops such as Golden Rice) and vertical farming (high yields per area, little water, near cities) can raise food availability, and evaluates their limitations (cost, corporate control of seed, public resistance, high energy use, limited range of crops). It considers which places benefit (wealthy, land-scarce cities such as Singapore versus rural smallholders in low-income countries) and whether food insecurity is mainly about access rather than production, reaching a justified conclusion. " + GEOG_MARKBAND_10
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 11 \u2014 Option F: Food and health (10 marks)",
+    questions: [
+      {
+        label: "May 2023 P1 \u2014 Question 11(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 11(a) \u2014 Identify (1+1 marks). Use the graph of energy inputs and outputs for different farm products on your paper. Identify the products asked for in parts (a)(i) and (a)(ii).",
+        markScheme: "Award one mark for each correct product identified from the student\u2019s own graph. This system does not hold the graph."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 11(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 11(b) \u2014 Outline (2 marks). Outline one way in which energy inputs change as farming becomes mechanised.",
+        markScheme: "Award one mark for the idea that fossil-fuel energy inputs increase (fuel for machinery, energy to make machines, fertilisers and pesticides) and a second mark for development, such as human and animal energy inputs falling, or energy efficiency (output compared with input) usually falling."
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 11(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 11(c) \u2014 Explain (3+3 marks). Explain how food insecurity could be reduced by using (i) in vitro meat and (ii) vertical farming.",
+        markScheme: "Up to three marks for each: one mark for how the method increases food availability or access, one for explanation, and one for development or a limitation that affects its impact. In vitro meat: protein produced with far less land, water and feed, and close to consumers. Vertical farming: very high yields per area, year-round production, little water, grown in cities so less transport. Credit recognising cost and energy limits."
+      }
+    ]
+  },
+  {
+    topic: "May 2023 \u2014 Question 12 \u2014 Option F: Food and health (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2023 P1 \u2014 Question 12(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 12(a) \u2014 To what extent (10 marks). To what extent are diseases linked to malnutrition?",
+        markScheme: "A strong response explains how under-nutrition is linked to disease (stunting, wasting, weakened immunity making infections such as diarrhoea, measles and malaria more deadly, micronutrient deficiencies) and how over-nutrition is linked to non-communicable disease (obesity, type 2 diabetes, heart disease). It also considers diseases with other main causes (water-borne and vector-borne disease, genetics, ageing, lifestyle factors such as smoking), uses the nutrition and epidemiological transitions, and reaches a justified conclusion. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2023 P1 \u2014 Question 12(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 12(b) \u2014 Examine (10 marks). Examine how geographic factors affect the rate of diffusion of agricultural innovations.",
+        markScheme: "A strong response explains expansion, relocation and hierarchical diffusion and how physical factors (relief, climate, soil, distance), economic factors (cost of seed, fertiliser and machinery, access to credit and markets) and social and political factors (education, extension services, government policy, communication networks such as mobile phones) speed up or slow down adoption. It uses named examples such as the Green Revolution in India or the spread of hybrid maize in Africa. " + GEOG_MARKBAND_10
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 11 \u2014 Option F: Food and health (10 marks)",
+    questions: [
+      {
+        label: "May 2021 P1 \u2014 Question 11(a) \u2014 2 marks",
+        marks: 2,
+        question: "Question 11(a) \u2014 State (1+1 marks). Use the topographic map in your resource booklet. Give the grid reference and the area estimate asked for in parts (a)(i) and (a)(ii).",
+        markScheme: "Award one mark for each correct, specific answer from the student\u2019s own map. This system does not hold the map."
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 11(b) \u2014 2 marks",
+        marks: 2,
+        question: "Question 11(b) \u2014 Outline (2 marks). Outline one way in which genetically modified organisms (GMOs) could help increase food production from cultivated land.",
+        markScheme: "Award one mark for a genuine way (for example, pest-resistant, drought-tolerant or salt-tolerant crops, or crops with higher yields) and a second mark for explaining how it increases output from the same land."
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 11(c) \u2014 6 marks",
+        marks: 6,
+        question: "Question 11(c) \u2014 Explain (3+3 marks). For one named water-borne disease, explain one physical factor and one human factor that contribute to its diffusion through an area.",
+        markScheme: "Up to three marks for each factor: one mark for a genuine factor (physical: flooding, rivers carrying contamination downstream, warm temperatures; human: lack of sanitation, use of untreated water, crowded settlements, movement of people and trade), one for explaining how it spreads the disease, and one for development linked to the named disease (for example, cholera)."
+      }
+    ]
+  },
+  {
+    topic: "May 2021 \u2014 Question 12 \u2014 Option F: Food and health (10 marks, answer (a) or (b))",
+    questions: [
+      {
+        label: "May 2021 P1 \u2014 Question 12(a) \u2014 10 marks",
+        marks: 10,
+        question: "Question 12(a) \u2014 Examine (10 marks). Examine how spatial variations in food consumption can affect life expectancy.",
+        markScheme: "A strong response explains how under-consumption (hunger, stunting, micronutrient deficiency) lowers life expectancy in some regions, while over-consumption and processed diets (obesity, diabetes, heart disease) affect it in others, using the nutrition transition. It recognises that other factors (health care, water and sanitation, conflict, income) also affect life expectancy and that variations exist within countries as well as between them. " + GEOG_MARKBAND_10
+      },
+      {
+        label: "May 2021 P1 \u2014 Question 12(b) \u2014 10 marks",
+        marks: 10,
+        question: "Question 12(b) \u2014 Examine (10 marks). Examine the reasons why food insecurity remains high in many places.",
+        markScheme: "A strong response examines physical reasons (drought, floods, climate change, pests) and human reasons (poverty, conflict, poor governance, food prices, waste, gender inequality, population growth), distinguishing food availability from food entitlement. It uses named places such as Yemen or the Sahel and reaches a judgement about the most important reasons. " + GEOG_MARKBAND_10
+      }
+    ]
+  }
+].concat((window.SBL_REVISION_TOPICS || []));
