@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16-mark essay synthesis maps — IB Geography Revision Guide — SBL</title>
+<meta name="description" content="Interactive mind maps linking Units 4, 5 and 6 and the core for Paper 3 16-mark essays.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
+<link rel="stylesheet" href="/css/sbl-igcse-learn.css">
+<style>
+.p3-intro{max-width:72ch}
+.p3-pick{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.p3-pick button{flex:0 0 auto;text-align:left;border:2px solid #cbd5e1;background:#fff;border-radius:12px;padding:8px 12px;font:600 .86rem/1.25 Inter,system-ui,sans-serif;color:#0f172a;cursor:pointer}
+.p3-pick button span{display:block;font:700 .62rem/1.4 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#64748b}
+.p3-pick button.is-on{border-color:#0f172a;background:#0f172a;color:#fff}.p3-pick button.is-on span{color:#fcd34d}
+.p3-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin:6px 0 12px}
+.p3-modes{display:inline-flex;border:2px solid #0f172a;border-radius:999px;overflow:hidden}
+.p3-modes button{border:0;background:#fff;padding:7px 14px;font:600 .84rem Inter,system-ui,sans-serif;cursor:pointer;color:#0f172a}
+.p3-modes button+button{border-left:2px solid #0f172a}.p3-modes button.is-on{background:#0f172a;color:#fff}
+.p3-legend{display:flex;flex-wrap:wrap;gap:6px}
+.p3-legend button{display:inline-flex;align-items:center;gap:6px;border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:5px 11px;font:600 .78rem Inter,system-ui,sans-serif;cursor:pointer;color:#0f172a}
+.p3-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.p3-legend button.is-off{opacity:.45;text-decoration:line-through}
+.p3-stage{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}
+.p3-canvas{background:#f8fafc;border:2px solid #1E3A55;border-radius:16px;overflow:hidden}
+.p3-canvas svg{display:block;width:100%;height:auto;font-family:Inter,system-ui,sans-serif}
+.p3-node{cursor:pointer;outline:none}.p3-node:focus-visible rect:first-child{stroke-width:4;stroke-dasharray:4 3}
+.p3-panel{background:#fff;border:2px solid #1E3A55;border-radius:16px;padding:16px 18px;font-size:.92rem;line-height:1.55;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+.p3-panel h3{margin:.3em 0 .5em;font:700 1.08rem/1.3 'Space Grotesk',Inter,sans-serif;color:#0f172a}
+.p3-panel h4{margin:1em 0 .4em;font:700 .74rem 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#475569}
+.p3-panel p{margin:.45em 0}
+.p3-chip{display:inline-block;border:1px solid;border-radius:8px;padding:3px 8px;line-height:1.35;font:700 .68rem 'IBM Plex Mono',monospace;letter-spacing:.03em}
+.p3-eval{background:#fff7e6;border:1px solid #f5c66b;border-radius:10px;padding:8px 11px}
+.p3-focus{font:600 .78rem 'IBM Plex Mono',monospace;color:#0f766e}
+.p3-links{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.p3-links button{width:100%;text-align:left;background:#f8fafc;border:1px solid #e2e8f0;border-left:5px solid;border-radius:9px;padding:7px 10px;font:500 .84rem/1.4 Inter,system-ui,sans-serif;color:#0f172a;cursor:pointer}
+.p3-links small,.p3-chain small{display:block;color:#475569;font-size:.8rem;margin-top:3px}
+.p3-links button:hover{background:#eef2ff}
+.p3-step{font:700 .72rem 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#c2410c;margin:0}
+.p3-uses{font-size:.85rem;font-weight:600}
+.p3-nav{display:flex;gap:8px;margin:12px 0}
+.p3-nav button,.p3-btn{border:2px solid #0f172a;background:#0f172a;color:#fff;border-radius:999px;padding:7px 15px;font:600 .84rem Inter,system-ui,sans-serif;cursor:pointer}
+.p3-nav button[disabled]{opacity:.35;cursor:default}
+.p3-btn--ghost{background:#fff;color:#0f172a;margin-top:10px}
+.p3-hint{font-size:.82rem;color:#64748b}
+.p3-lab{display:block;font-weight:700;font-size:.84rem;margin-top:10px}
+.p3-panel textarea{width:100%;box-sizing:border-box;border:1px solid #94a3b8;border-radius:10px;padding:8px;font:400 .88rem/1.45 Inter,system-ui,sans-serif;margin:6px 0 10px;resize:vertical}
+.p3-chain{padding-left:20px;margin:0}.p3-chain li{margin-bottom:7px}
+.p3-list{margin-top:18px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:14px 18px}
+.p3-list h3{margin:0 0 8px;font:700 1rem 'Space Grotesk',Inter,sans-serif}
+.p3-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.p3-cols h4{margin:4px 0 6px;font:700 .8rem Inter,system-ui,sans-serif}
+.p3-cols ul{list-style:none;margin:0;padding:0}
+.p3-cols button{background:none;border:0;padding:3px 0;text-align:left;font:500 .86rem/1.4 Inter,system-ui,sans-serif;color:#0f172a;cursor:pointer;text-decoration:underline;text-decoration-color:#cbd5e1;text-underline-offset:3px}
+.p3-band{display:grid;gap:4px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:9px 11px;font-size:.84rem;margin:10px 0}
+.p3-band b:first-child{font-size:.82rem;color:#0f766e}.p3-band i{font-style:normal;font-weight:700}
+.p3-ev{margin:0;padding-left:18px;font-size:.86rem}.p3-ev li{margin-bottom:5px}
+.p3-check{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0 0;padding:0;list-style:none}
+.p3-check li{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;font-size:.88rem;line-height:1.45}
+.p3-check b{display:block;color:#0f172a;margin-bottom:2px}
+@media (max-width:700px){.p3-canvas{overflow-x:auto}.p3-canvas svg{min-width:720px}}
+@media (max-width:1100px){.p3-stage{grid-template-columns:1fr}.p3-panel{position:static;max-height:none}}
+</style>
+</head><body class="lh">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/geography/revision/guide">IB Geography Revision Guide</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/geography/revision/guide#hl">Paper 3: HL core extension</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>16-mark essay synthesis maps</span>
+      </nav>
+    </header>
+    <main style="padding:0 0 40px">
+      <div class="lh-page-head lh-page-head--banner">
+        <h1>16-mark essay synthesis maps</h1>
+        <p>IB Geography Revision Guide &middot; Paper 3: HL core extension &middot; Units 4, 5 and 6 with links to the core</p>
+      </div>
+      <section class="ig-section p3-intro">
+        <p>The 16-mark Paper 3 essay rewards <b>synthesis</b>: bringing ideas together from across the HL units, and the core where it helps, to build one argument and reach a judgement. Each map below is built around an original practice question. Use <b>Explore</b> to see the ideas and how they connect, <b>Essay route</b> to follow one possible plan, and <b>Link challenge</b> to practise explaining connections yourself.</p>
+      </section>
+      <div id="p3-app"></div>
+      <section class="ig-section">
+        <h2>What a strong 16-mark answer does</h2>
+        <ul class="p3-check">
+          <li><b>Synthesises</b>Links at least three themes from different parts of the syllabus into one argument, rather than describing each unit in turn.</li>
+          <li><b>Uses specific evidence</b>Named places, organisations, dates and figures support each point.</li>
+          <li><b>Evaluates throughout</b>Weighs strengths and limitations, and asks “for whom?”, “where?” and “how far?”.</li>
+          <li><b>Considers perspectives and scale</b>Compares the views of different stakeholders, and local, national and global scales.</li>
+          <li><b>Reaches a judgement</b>Ends with a clear, supported conclusion that answers the command term.</li>
+          <li><b>Is well structured</b>Each paragraph makes one point of the argument, and the paragraphs link together.</li>
+        </ul>
+        <p class="p3-hint">The practice questions are written for this site in an IB style. For official questions and markschemes, use your own copy of past papers.</p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="/js/sbl-ib-geo-guide-sidebar.js"></script>
+<script>
+  renderSBLIbGuideSidebar('lh-sidebar-mount', {
+    activeUnit: 'paper3-synthesis-maps',
+    activeTopic: -1,
+    activeLessonHref: ''
+  });
+</script>
+<script src="/js/sbl-p3-synthesis-data.js"></script>
+<script src="/js/sbl-p3-synthesis.js"></script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

@@ -252,6 +252,13 @@
             ]
           }
         ]
+      },
+      {
+        "slug": "paper3-synthesis-maps",
+        "label": "16-mark essay synthesis maps",
+        "href": "/geography/revision/guide/paper3-synthesis-maps",
+        "status": "available",
+        "topics": []
       }
     ]
   }
