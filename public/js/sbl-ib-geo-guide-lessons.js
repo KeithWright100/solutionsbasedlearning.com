@@ -4408,7 +4408,7 @@ window.SBL_LESSONS["IBGGR-T1"] = {
  "checklist": [
   "I can explain cyber threats to individuals and risks to the global oil supply chain",
   "I can explain how tax avoidance, drones and 3D printing threaten sovereignty",
-  "I can evaluate the link between globalization and nationalism, using two examples"
+  "I can evaluate the link between globalization and nationalism, using North Korea and Yemen"
  ],
  "quiz": [
   {
