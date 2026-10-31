@@ -694,3 +694,30 @@ window.SBL_P3_LENS = {
   window.SBL_P3_LENS.growth = {place:'Does growth happen in whole countries, or mainly in particular zones, cities and resource regions?',process:'Which flows (investment, resources, trade, people) drive growth, and how?',power:'Who controls the wealth: TNCs, governments, elites or citizens?',possibility:'Which factors will drive growth in future as resources run down and technology changes?'};
   window.SBL_P3_EVAL.growth = ['Compare scales: national growth versus growth in particular local places, such as free trade zones.','Ask how far the possibilities of FDI and resources are realised, given profit leakage, colonial history and exploitation.','Judge whether one factor can be “main”, or whether factors work together.'];
 })();
+
+/* Keep idea ids unique in meaning across maps (needed for the build-your-own palette) */
+(function () {
+  function rename(mapId, from, to) {
+    var m = window.SBL_P3_MAPS.filter(function (x) { return x.id === mapId; })[0];
+    m.nodes.forEach(function (n) { if (n.id === from) n.id = to; });
+    m.edges.forEach(function (e) { if (e[0] === from) e[0] = to; if (e[1] === from) e[1] = to; });
+    m.route.forEach(function (r) { r.n = r.n.map(function (x) { return x === from ? to : x; }); });
+    var c = window.SBL_P3_CONCEPT[mapId]; if (c && c[from]) { c[to] = c[from]; delete c[from]; }
+  }
+  rename('future', 'ai', 'aitech'); window.SBL_P3_REFS.def.aitech = '4.3';
+  rename('technology', 'cpop', 'cmignet');
+  rename('envimpact', 'sglaw', 'govact'); window.SBL_P3_REFS.def.govact = '6.2';
+  /* general titles for the palette where an idea appears in several maps */
+  window.SBL_P3_PALETTE_TITLES = {opec:'OPEC and oil power',kof:'Globalisation indices (KOF)',tnc:'TNCs',tax:'Tax avoidance (Apple and Ireland)',sm:'Social media and protest',cpop:'Demographic weight',
+    rem:'Remittances and diasporas',dbh:'Digital divides and black holes',mpesa:'M-Pesa and mobile money',csr:'CSR and IFAs',shift:'Global shift and pollution',haze:'Southeast Asian haze',
+    cmig:'International migration',dias:'Diasporas and identity',thai:'Cultural diversity in Thailand',eat:'Buying local',net:'Internet, Web 2.0 and streaming',nat:'Nationalism',nk:'North Korea’s isolation',
+    cyber:'Cyber threats and cybersecurity',ship:'Shipping pollution and footprints',fair:'Fairtrade and microfinance',cclim:'Climate change and climate action',bloc:'Trade blocs and agreements',brexit:'Brexit',
+    prot:'Protectionism',gp:'Greenpeace and environmental campaigns',malala:'Malala Fund and citizen activists',min:'Anti-immigration groups',crowd:'Crowdsourcing and crowdfunding',reshore:'Re-shoring and near-shoring',
+    sglaw:'Singapore haze law',epass:'E-passports and e-gates',cont:'Containerisation and shrinking-world technology',deind:'Deindustrialisation',nres:'Natural and physical resources'};
+})();
+
+/* Unlock codes are checked as SHA-256 hashes; the codes themselves are held by the teacher. */
+window.SBL_P3_LOCKS = {"sovereignty": "a8e51685a503bdc785fc93e6374d6ffd63cd8c7be24e4e5947adada3b24ac11f", "civil": "f89abb13d9b23046cec19d1e00b9897d8f52098357e721e47146413e56aa4b42", "resilience": "61ff36b3a3f13e0bd775b86389a059c6969c96c19255fe40307ef35f04305f10", "supply": "b5a044c6d8797137daf93675e53dbeb87558f246efc9e566751373920f96f92f", "physical": "32cfb449e28e891fdc64b90a71d60b011995272403b531341dacc6e578e1d6c5", "lics": "a20332377136637b22cffff22912f864528bbc7557984964e86670a658797a68", "envimpact": "f9c729012b53af24828ee847845b4558ef251983775f34e15e0ee9c972823adf", "future": "907018bc8aad7c2cc5711425d4c32ff73e8a5c639bea018602c49977e1ef6322", "opposition": "992f94e1db644d147a18bf70891d5db48f11c26daef04d5e5175d3db3402320f", "growth": "abf8a05d083e52e2a9ffad9e944443df7437eeebaf823b591acbf7ab7133ca8c", "*": "f0da95c460ad21e7feae6eca60f843603cb798de84a620ab2e676172d13bea07", "risk": "cfdd4e47145817b2285cbd07d0ae710e3047978da331174e0962bc29024516fd"};
+
+/* Worked models are essays 1–4: swap Technology and change (model) with Risks vs benefits (practice) */
+(function () { var M = window.SBL_P3_MAPS, a = M.map(function (m) { return m.id; }).indexOf('risk'), b = M.map(function (m) { return m.id; }).indexOf('technology'); var t = M[a]; M[a] = M[b]; M[b] = t; })();

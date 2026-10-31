@@ -12,10 +12,15 @@
 <link rel="stylesheet" href="/css/sbl-igcse-learn.css">
 <style>
 .p3-intro{max-width:72ch}
-.p3-pick{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
-.p3-pick button{flex:0 0 auto;text-align:left;border:2px solid #cbd5e1;background:#fff;border-radius:12px;padding:8px 12px;font:600 .86rem/1.25 Inter,system-ui,sans-serif;color:#0f172a;cursor:pointer}
-.p3-pick button span{display:block;font:700 .62rem/1.4 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#64748b}
-.p3-pick button.is-on{border-color:#0f172a;background:#0f172a;color:#fff}.p3-pick button.is-on span{color:#fcd34d}
+.p3-pick-h{margin:10px 0 6px;font:700 .8rem 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:#0f172a}
+.p3-pick-h small{font:500 .8rem Inter,system-ui,sans-serif;text-transform:none;letter-spacing:0;color:#64748b;margin-left:6px}
+.p3-pick-g{display:flex;flex-wrap:wrap;gap:8px}
+.p3-pick-g button{text-align:left;border:2px solid #cbd5e1;background:#fff;border-radius:12px;padding:8px 12px;font:600 .86rem/1.25 Inter,system-ui,sans-serif;color:#0f172a;cursor:pointer}
+.p3-pick-g button span{display:block;font:700 .62rem/1.4 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#64748b}
+.p3-pick-g button.is-on{border-color:#0f172a;background:#0f172a;color:#fff}.p3-pick-g button.is-on span{color:#fcd34d}
+.p3-stat{display:block;font:600 .68rem Inter,system-ui,sans-serif;font-style:normal;margin-top:3px;color:#94a3b8}
+.p3-stat--in{color:#b45309}.p3-stat--model{color:#15803d}
+.p3-pick-g button.is-on .p3-stat{color:#cbd5e1}
 .p3-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin:6px 0 12px}
 .p3-modes{display:inline-flex;border:2px solid #0f172a;border-radius:999px;overflow:hidden}
 .p3-modes button{border:0;background:#fff;padding:7px 14px;font:600 .84rem Inter,system-ui,sans-serif;cursor:pointer;color:#0f172a}
@@ -58,6 +63,42 @@
 .p3-band{display:grid;gap:4px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:10px;padding:9px 11px;font-size:.84rem;margin:10px 0}
 .p3-band b:first-child{font-size:.82rem;color:#0f766e}.p3-band i{font-style:normal;font-weight:700}
 .p3-ev{margin:0;padding-left:18px;font-size:.86rem}.p3-ev li{margin-bottom:5px}
+.p3-legend[hidden],.p3-list[hidden],.p3-modes button[hidden]{display:none!important}
+.p3-modes button.is-locked{color:#94a3b8;cursor:not-allowed}.p3-modes button.is-locked::after{content:" 🔒";font-size:.75em}
+.p3-modes .p3-mode-build{background:#fef3c7}.p3-modes .p3-mode-build.is-on{background:#b45309;color:#fff}
+.p3-drag{touch-action:none;cursor:grab}
+.p3-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:-4px 0 10px}
+.p3-steps button{border:1px solid #cbd5e1;background:#f8fafc;border-radius:8px;padding:6px 4px;font:600 .74rem/1.2 Inter,system-ui,sans-serif;color:#334155;cursor:pointer}
+.p3-steps button.is-on{background:#0f172a;color:#fff;border-color:#0f172a}
+.p3-search{width:100%;box-sizing:border-box;border:1px solid #94a3b8;border-radius:10px;padding:7px 10px;font:400 .88rem Inter,system-ui,sans-serif;margin:4px 0 8px}
+.p3-pal{max-height:52vh;overflow:auto;border:1px solid #e2e8f0;border-radius:10px;padding:4px 6px}
+.p3-pal details{margin:2px 0}.p3-pal summary{cursor:pointer;font:700 .8rem/1.3 Inter,system-ui,sans-serif;padding:6px 8px;border-left:4px solid;border-radius:4px;background:#f8fafc}
+.p3-pal summary small{color:#64748b;font-weight:600}
+.p3-pal ul{list-style:none;margin:4px 0 6px;padding:0}
+.p3-pal li button{width:100%;text-align:left;display:flex;gap:7px;align-items:baseline;background:none;border:0;border-radius:6px;padding:5px 6px;font:500 .84rem/1.35 Inter,system-ui,sans-serif;color:#0f172a;cursor:pointer}
+.p3-pal li button:hover{background:#f1f5f9}.p3-pal li button span{font-weight:700;color:#2563eb;width:12px}
+.p3-pal li button.is-placed{color:#15803d}.p3-pal li button.is-placed span{color:#15803d}
+.p3-pal li button small{color:#64748b;font-size:.72rem}
+.p3-linkform{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;margin:8px 0}
+.p3-linklab{width:100%;box-sizing:border-box;border:1px solid #94a3b8;border-radius:8px;padding:6px 8px;font:400 .88rem Inter,system-ui,sans-serif}
+.p3-mylinks{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:.84rem}
+.p3-mylinks li{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 30px 6px 9px;position:relative}
+.p3-mylinks li small{display:block;color:#475569;font-size:.78rem;margin-top:2px}
+.p3-mylinks li button{position:absolute;right:6px;top:4px;border:0;background:none;font-size:1.1rem;cursor:pointer;color:#64748b}
+.p3-plan{display:grid;gap:8px}
+.p3-para{border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;cursor:pointer;background:#fff}
+.p3-para.is-on{border-color:#b45309;box-shadow:0 0 0 2px #fde68a}
+.p3-para b{font-size:.84rem}.p3-para textarea{margin:5px 0 4px;font-size:.84rem}
+.p3-pchips{display:flex;flex-wrap:wrap;gap:4px}.p3-pchips span{border:1px solid;border-radius:999px;padding:1px 8px;font-size:.72rem;font-weight:600}
+.p3-pchips small{color:#94a3b8;font-size:.76rem}
+.p3-checks{list-style:none;padding:0;margin:0 0 10px;font-size:.86rem}.p3-checks li{padding:3px 0;color:#64748b}.p3-checks li.ok{color:#15803d;font-weight:600}
+.p3-unlock{background:#fefce8;border:1px solid #fde68a;border-radius:12px;padding:10px 12px}
+.p3-unlock input{width:100%;box-sizing:border-box;border:1px solid #94a3b8;border-radius:8px;padding:7px 9px;font:600 1rem 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin:4px 0 8px}
+.p3-unlock button{border:2px solid #0f172a;background:#0f172a;color:#fff;border-radius:999px;padding:6px 14px;font:600 .84rem Inter,system-ui,sans-serif;cursor:pointer}
+.p3-codemsg{color:#b91c1c;font-size:.84rem;margin:6px 0 0}
+.p3-score{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;padding:9px 11px;font-size:.88rem}
+.p3-plist{font-size:.84rem;line-height:1.5}
+.p3-linkbtn{background:none;border:0;padding:0;color:#b91c1c;text-decoration:underline;cursor:pointer;font:inherit}
 .p3-cards{display:grid;gap:8px;margin:10px 0}
 .p3-cards button{text-align:left;background:#f8fafc;border:1px solid #e2e8f0;border-left:5px solid;border-radius:10px;padding:9px 11px;cursor:pointer;font:400 .84rem/1.45 Inter,system-ui,sans-serif;color:#0f172a}
 .p3-cards button:hover{background:#f1f5f9}.p3-cards b{font-size:.95rem}.p3-cards small{color:#64748b;font-weight:600}.p3-cards span{display:block;margin-top:3px;color:#334155}
@@ -66,7 +107,7 @@
 .p3-check{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0 0;padding:0;list-style:none}
 .p3-check li{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;font-size:.88rem;line-height:1.45}
 .p3-check b{display:block;color:#0f172a;margin-bottom:2px}
-@media (max-width:700px){.p3-canvas{overflow-x:auto}.p3-canvas svg{min-width:720px}}
+@media (max-width:700px){.p3-pick-g{display:grid;grid-template-columns:1fr 1fr}.p3-pick-g button{font-size:.8rem;padding:7px 9px}.p3-canvas{overflow-x:auto}.p3-canvas svg{min-width:720px}}
 @media (max-width:1100px){.p3-stage{grid-template-columns:1fr}.p3-panel{position:static;max-height:none}}
 </style>
 </head><body class="lh">
@@ -88,7 +129,7 @@
         <p>IB Geography Revision Guide &middot; Paper 3: HL core extension &middot; Units 4, 5 and 6 with links to the core</p>
       </div>
       <section class="ig-section p3-intro">
-        <p>The 16-mark Paper 3 essay rewards <b>synthesis</b>: bringing ideas together from across the HL units, and the core where it helps, to build one argument and reach a judgement. Each map below is built around an original practice question. Use <b>Explore</b> to see the ideas and how they connect, <b>Essay route</b> to follow one possible plan, and <b>Link challenge</b> to practise explaining connections yourself, and the <b>4Ps lens</b> to view the ideas through the key concepts of places, processes, power and possibilities.</p>
+        <p>The 16-mark Paper 3 essay rewards <b>synthesis</b>: bringing ideas together from across the HL units, and the core where it helps, to build one argument and reach a judgement. Each map is built around an original practice question. Start with the four <b>worked models</b>: use <b>Explore</b> to see the ideas and how they connect, <b>Essay route</b> to follow one possible plan, <b>Link challenge</b> to practise explaining connections, and the <b>4Ps lens</b> to view the ideas through places, processes, power and possibilities. Then try the <b>Your turn</b> essays: choose the syllabus ideas yourself, link them and plan your answer. When your teacher gives you the code, unlock the model map to compare.</p>
       </section>
       <div id="p3-app"></div>
       <section class="ig-section">

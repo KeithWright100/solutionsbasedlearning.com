@@ -22,8 +22,68 @@
   var root = document.getElementById('p3-app');
   if (!root || !MAPS.length) return;
 
-  var st = { map: 0, mode: 'explore', sel: null, step: 0, pick: [], hidden: {}, lens: null };
+  var st = { map: 0, mode: 'explore', sel: null, step: 0, pick: [], hidden: {}, lens: null, bstep: 'ideas', bsel: null, blink: null, bpair: null, q: '', open: {}, bpara: 0 };
   var pos = {};
+  var MODELS = 4, LOCKS = window.SBL_P3_LOCKS || {}, PT = window.SBL_P3_PALETTE_TITLES || {};
+  function isModel(i) { return (i === undefined ? st.map : i) < MODELS; }
+
+  /* ---------- palette of every Paper 3 idea ---------- */
+  var PALETTE = (function () {
+    var seen = {}, out = [];
+    MAPS.forEach(function (m) {
+      m.nodes.forEach(function (n) {
+        if (seen[n.id]) return; seen[n.id] = 1;
+        var r = n.u === 'C' ? '' : (((REFS0().over[m.id] || {})[n.id]) || REFS0().def[n.id] || '');
+        var cs = (CMAP[m.id] || {})[n.id] || [];
+        out.push({ id: n.id, u: n.u, core: n.core, t: PT[n.id] || n.t, idea: n.idea, ref: r, cs: typeof cs === 'string' ? [cs] : cs });
+      });
+    });
+    return out;
+  })();
+  function REFS0() { return window.SBL_P3_REFS || { def: {}, over: {} }; }
+  function pitem(id) { return PALETTE.filter(function (p) { return p.id === id; })[0]; }
+  function area(p) { return p.u === 'C' ? (p.core || 'Core').split(':')[0] : p.ref; }
+
+  /* ---------- saved work (this browser only) ---------- */
+  function key(id) { return 'sbl-p3-build-' + id; }
+  function load(id) {
+    var b = null;
+    try { b = JSON.parse(localStorage.getItem(key(id)) || 'null'); } catch (e) { b = null; }
+    if (!b) b = { placed: {}, links: [], plan: null, unlocked: false };
+    if (!b.plan) b.plan = [{ h: 'Introduction', txt: '', ids: [] }, { h: 'Paragraph 1', txt: '', ids: [] }, { h: 'Paragraph 2', txt: '', ids: [] }, { h: 'Paragraph 3', txt: '', ids: [] }, { h: 'Conclusion', txt: '', ids: [] }];
+    return b;
+  }
+  function save() { try { localStorage.setItem(key(M().id), JSON.stringify(st.b)); } catch (e) { } }
+  function statusOf(id) {
+    var b; try { b = JSON.parse(localStorage.getItem(key(id)) || 'null'); } catch (e) { b = null; }
+    if (b && b.unlocked) return 'Model unlocked';
+    if (b && Object.keys(b.placed || {}).length) return 'In progress';
+    return 'Not started';
+  }
+  function unlocked() { return isModel() || (st.b && st.b.unlocked); }
+  function sha256hex(ascii) {
+    /* small SHA-256 for when crypto.subtle is unavailable */
+    function rr(v, a) { return (v >>> a) | (v << (32 - a)); }
+    var mp = Math.pow, mw = mp(2, 32), i, j, res = '', words = [], blen = ascii.length * 8, hash = [], k = [], pc = 0, isC = {};
+    for (var c = 2; pc < 64; c++) { if (!isC[c]) { for (i = 0; i < 313; i += c) isC[i] = c; hash[pc] = (mp(c, .5) * mw) | 0; k[pc++] = (mp(c, 1 / 3) * mw) | 0; } }
+    hash = hash.slice(0, 8); ascii += '\x80';
+    while (ascii.length % 64 - 56) ascii += '\x00';
+    for (i = 0; i < ascii.length; i++) { j = ascii.charCodeAt(i); words[i >> 2] |= j << ((3 - i) % 4) * 8; }
+    words[words.length] = ((blen / mw) | 0); words[words.length] = blen;
+    for (j = 0; j < words.length;) {
+      var w = words.slice(j, j += 16), oh = hash; hash = hash.slice(0, 8);
+      for (i = 0; i < 64; i++) {
+        var w15 = w[i - 15], w2 = w[i - 2], a = hash[0], e = hash[4];
+        var t1 = hash[7] + (rr(e, 6) ^ rr(e, 11) ^ rr(e, 25)) + ((e & hash[5]) ^ ((~e) & hash[6])) + k[i] + (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rr(w15, 7) ^ rr(w15, 18) ^ (w15 >>> 3)) + w[i - 7] + (rr(w2, 17) ^ rr(w2, 19) ^ (w2 >>> 10))) | 0);
+        var t2 = (rr(a, 2) ^ rr(a, 13) ^ rr(a, 22)) + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+        hash = [(t1 + t2) | 0].concat(hash); hash[4] = (hash[4] + t1) | 0;
+      }
+      for (i = 0; i < 8; i++) hash[i] = (hash[i] + oh[i]) | 0;
+    }
+    for (i = 0; i < 8; i++) for (j = 3; j + 1; j--) { var b = (hash[i] >> (j * 8)) & 255; res += ((b < 16) ? 0 : '') + b.toString(16); }
+    return res;
+  }
+  function sha(text) { return Promise.resolve(sha256hex(text)); }
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function el(tag, attrs, parent) {
@@ -61,6 +121,7 @@
     '<div class="p3-pick" role="tablist" aria-label="Practice essays"></div>' +
     '<div class="p3-bar">' +
       '<div class="p3-modes" role="group" aria-label="Mode">' +
+        '<button type="button" data-mode="build" class="p3-mode-build">Build my map</button>' +
         '<button type="button" data-mode="explore">Explore</button>' +
         '<button type="button" data-mode="route">Essay route</button>' +
         '<button type="button" data-mode="link">Link challenge</button>' +
@@ -82,12 +143,20 @@
   var panel = root.querySelector('.p3-panel');
   var listEl = root.querySelector('.p3-list');
 
+  pickEl.innerHTML = '<p class="p3-pick-h">Worked models <small>Study these first: how the ideas are chosen, linked and planned</small></p><div class="p3-pick-g" data-g="m"></div>' +
+    '<p class="p3-pick-h">Your turn <small>Build your own map and plan, then unlock the model with your teacher’s code</small></p><div class="p3-pick-g" data-g="p"></div>';
+  function selectMap(i) {
+    st.map = i; st.sel = null; st.step = 0; st.pick = []; st.revealed = false; st.bsel = null; st.blink = null; st.bpair = null; st.bpara = 0;
+    st.b = isModel(i) ? null : load(MAPS[i].id);
+    st.mode = isModel(i) ? 'explore' : 'build'; st.bstep = 'ideas';
+    layout(); draw();
+  }
   MAPS.forEach(function (m, i) {
     var b = document.createElement('button');
-    b.type = 'button'; b.setAttribute('role', 'tab');
-    b.innerHTML = '<span>Essay ' + (i + 1) + '</span>' + esc(m.short);
-    b.addEventListener('click', function () { st.map = i; st.sel = null; st.step = 0; st.pick = []; st.revealed = false; layout(); draw(); });
-    pickEl.appendChild(b);
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.i = i;
+    b.innerHTML = '<span>Essay ' + (i + 1) + (isModel(i) ? ' · Model' : '') + '</span>' + esc(m.short) + (isModel(i) ? '' : '<em class="p3-stat"></em>');
+    b.addEventListener('click', function () { selectMap(i); });
+    pickEl.querySelector('[data-g="' + (isModel(i) ? 'm' : 'p') + '"]').appendChild(b);
   });
   ORDER.forEach(function (u) {
     var b = document.createElement('button');
@@ -104,7 +173,7 @@
     b.addEventListener('click', function () { st.lens = st.lens === c ? null : c; draw(); });
     cLegendEl.appendChild(b);
   });
-  function setMode(md) { var re = (md === 'concepts') !== (st.mode === 'concepts'); st.mode = md; st.sel = null; st.pick = []; st.step = 0; st.revealed = false; if (re) layout(); draw(); }
+  function setMode(md) { if (md !== 'build' && !unlocked()) return; if (md === 'build' && isModel()) return; var re = (md === 'concepts') !== (st.mode === 'concepts'); st.mode = md; st.sel = null; st.pick = []; st.step = 0; st.revealed = false; if (re) layout(); draw(); }
   root.querySelectorAll('.p3-modes button').forEach(function (b) {
     b.addEventListener('click', function () { setMode(b.dataset.mode); });
   });
@@ -189,8 +258,16 @@
   /* ---------- draw ---------- */
   function draw() {
     var m = M();
-    pickEl.querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('is-on', i === st.map); b.setAttribute('aria-selected', i === st.map); });
-    root.querySelectorAll('.p3-modes button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.mode === st.mode); });
+    pickEl.querySelectorAll('button').forEach(function (b) { var i = +b.dataset.i; b.classList.toggle('is-on', i === st.map); b.setAttribute('aria-selected', i === st.map); var e = b.querySelector('.p3-stat'); if (e) { var s0 = statusOf(MAPS[i].id); e.textContent = s0; e.className = 'p3-stat p3-stat--' + s0.split(' ')[0].toLowerCase(); } });
+    root.querySelectorAll('.p3-modes button').forEach(function (b) {
+      b.classList.toggle('is-on', b.dataset.mode === st.mode);
+      var md = b.dataset.mode;
+      b.hidden = md === 'build' && isModel();
+      var locked = md !== 'build' && !unlocked();
+      b.disabled = locked; b.classList.toggle('is-locked', locked);
+      b.title = locked ? 'Locked until your teacher gives you the code' : '';
+    });
+    if (st.mode === 'build') { legendEl.hidden = true; cLegendEl.hidden = true; drawBuild(); return; }
     legendEl.hidden = st.mode === 'concepts'; cLegendEl.hidden = st.mode !== 'concepts';
     cLegendEl.querySelectorAll('button').forEach(function (b) { b.classList.toggle('is-on', st.lens === b.dataset.c); b.classList.toggle('is-off', !!st.lens && st.lens !== b.dataset.c); });
     legendEl.querySelectorAll('button').forEach(function (b) {
@@ -241,7 +318,7 @@
       var g = el('g', { class: 'p3-node', tabindex: 0, role: 'button', 'aria-label': n.t + ' (' + UNITS[n.u].short + ')', opacity: dim ? 0.3 : (half ? 0.75 : 1) }, svg);
       el('rect', { x: p.x - NW / 2, y: p.y - NH / 2, width: NW, height: NH, rx: 12, fill: sel ? U.col : U.fill, stroke: U.col, 'stroke-width': sel ? 3 : 2 }, g);
       el('rect', { x: p.x - NW / 2, y: p.y - NH / 2, width: 8, height: NH, rx: 4, fill: U.col }, g);
-      var lines = wrap(n.t, 21).slice(0, 2);
+      var lines = wrap(n.t, NW < 200 ? 18 : 21).slice(0, 2);
       lines.forEach(function (l, i) {
         var t = el('text', { x: p.x + 4, y: p.y + (i - (lines.length - 1) / 2) * 18 + 6, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 700, fill: sel ? '#fff' : '#0f172a' }, g);
         t.textContent = l;
@@ -364,6 +441,8 @@
   }
 
   function drawList() {
+    if (!unlocked()) { listEl.hidden = true; return; }
+    listEl.hidden = false;
     var m = M(), h = '<h3>All ideas in this map</h3><div class="p3-cols">';
     ORDER.forEach(function (u) {
       var ns = m.nodes.filter(function (n) { return n.u === u; });
@@ -382,7 +461,275 @@
     });
   }
 
+  /* ================= Build my map ================= */
+  var BW = 176, BH = 58;
+  function svgPt(ev) {
+    var pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+    var p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    return { x: Math.max(BW / 2 + 4, Math.min(W - BW / 2 - 4, p.x)), y: Math.max(BH / 2 + 4, Math.min(H - BH / 2 - 4, p.y)) };
+  }
+  function freeSpot() {
+    var ids = Object.keys(st.b.placed);
+    for (var ring = 0; ring < 3; ring++) {
+      var n = 12 + ring * 4, rx = 385 - ring * 0, ry = 285 - ring * 0;
+      for (var i = 0; i < n; i++) {
+        var a = -Math.PI / 2 + (i + ring * 0.5) * 2 * Math.PI / n;
+        var x = CX + (rx - ring * 30) * Math.cos(a), y = CY + (ry - ring * 30) * Math.sin(a);
+        var ok = ids.every(function (id) { var p = st.b.placed[id]; return Math.abs(p.x - x) > BW * 0.95 || Math.abs(p.y - y) > BH * 1.1; });
+        if (ok && !(Math.abs(x - CX) < 170 + BW / 2 && Math.abs(y - CY) < 80 + BH / 2)) return { x: x, y: y };
+      }
+    }
+    return { x: 120 + Math.random() * 760, y: 60 + Math.random() * 580 };
+  }
+  function place(id, p) { st.b.placed[id] = p || freeSpot(); save(); draw(); }
+  function unplace(id) {
+    delete st.b.placed[id];
+    st.b.links = st.b.links.filter(function (l) { return l[0] !== id && l[1] !== id; });
+    st.b.plan.forEach(function (pp) { pp.ids = pp.ids.filter(function (x) { return x !== id; }); });
+    if (st.bsel === id) st.bsel = null; if (st.blink === id) st.blink = null;
+    save(); draw();
+  }
+  function bcol(p) { return UNITS[p.u]; }
+  function modelIds() { var o = {}; M().nodes.forEach(function (n) { o[n.id] = 1; }); return o; }
+
+  function drawCentre() {
+    var m = M(), ql = wrap(m.q, 32), qh = ql.length * 21 + 42;
+    el('rect', { x: CX - 170, y: CY - qh / 2, width: 340, height: qh, rx: 18, fill: '#0f172a' }, svg);
+    var tl = el('text', { x: CX, y: CY - qh / 2 + 22, 'text-anchor': 'middle', 'font-size': 10.5, fill: '#fcd34d', 'font-weight': 700, 'letter-spacing': '1.5' }, svg);
+    tl.textContent = '16-MARK PRACTICE ESSAY';
+    ql.forEach(function (l, i) { var t = el('text', { x: CX, y: CY - qh / 2 + 46 + i * 21, 'text-anchor': 'middle', 'font-size': 16, fill: '#fff', 'font-weight': 600 }, svg); t.textContent = l; });
+  }
+
+  function drawBuild() {
+    var b = st.b, P = b.placed;
+    while (svg.childNodes.length > 1) svg.removeChild(svg.lastChild);
+    var gE = el('g', {}, svg);
+    drawCentre();
+    var gN = el('g', {}, svg), gL = el('g', {}, svg);
+    var mids = b.unlocked ? modelIds() : null;
+    var paraIds = st.bstep === 'plan' && b.plan[st.bpara] ? b.plan[st.bpara].ids : null;
+    if (!Object.keys(P).length) {
+      var t0 = el('text', { x: CX, y: 110, 'text-anchor': 'middle', 'font-size': 16, fill: '#64748b', 'font-weight': 600 }, svg);
+      t0.textContent = 'Add ideas from the list, or drag them onto the map';
+    }
+    b.links.forEach(function (l, i) {
+      var pa = P[l[0]], pb = P[l[1]]; if (!pa || !pb) return;
+      var c = ctrl(pa, pb);
+      el('path', { d: 'M' + pa.x + ' ' + pa.y + ' Q' + c.x + ' ' + c.y + ' ' + pb.x + ' ' + pb.y, fill: 'none', stroke: '#0f172a', 'stroke-width': 2.2 }, gE);
+      if (l[2]) {
+        var lx = 0.25 * pa.x + 0.5 * c.x + 0.25 * pb.x, ly = 0.25 * pa.y + 0.5 * c.y + 0.25 * pb.y, w = l[2].length * 7.2 + 20;
+        el('rect', { x: lx - w / 2, y: ly - 12, width: w, height: 24, rx: 12, fill: '#0f172a' }, gL);
+        var tx = el('text', { x: lx, y: ly + 4, 'text-anchor': 'middle', 'font-size': 12.5, fill: '#fff', 'font-weight': 600 }, gL); tx.textContent = l[2];
+      }
+    });
+    Object.keys(P).forEach(function (id) {
+      var p = P[id], it = pitem(id); if (!it) return;
+      var U = bcol(it), sel = st.bsel === id || st.blink === id || (st.bpair && st.bpair.indexOf(id) >= 0);
+      var dim = paraIds && paraIds.indexOf(id) < 0;
+      var g = el('g', { class: 'p3-node p3-drag', tabindex: 0, role: 'button', 'aria-label': it.t, opacity: dim ? 0.35 : 1 }, gN);
+      var stroke = U.col, dash = '';
+      if (mids) { stroke = mids[id] ? '#16a34a' : '#94a3b8'; dash = mids[id] ? '' : '5 4'; }
+      el('rect', { x: p.x - BW / 2, y: p.y - BH / 2, width: BW, height: BH, rx: 12, fill: sel ? U.col : U.fill, stroke: stroke, 'stroke-width': sel ? 3 : (mids ? 3 : 2), 'stroke-dasharray': dash }, g);
+      el('rect', { x: p.x - BW / 2, y: p.y - BH / 2, width: 7, height: BH, rx: 3.5, fill: U.col }, g);
+      var wl = wrap(it.t, 18), three = wl.length > 2; if (three) wl = wrap(it.t, 21).slice(0, 3);
+      wl.forEach(function (l, i, arr) {
+        var t = el('text', { x: p.x + 3, y: p.y + (i - (arr.length - 1) / 2) * (three ? 14 : 17) + 5, 'text-anchor': 'middle', 'font-size': three ? 12 : 14, 'font-weight': 700, fill: sel ? '#fff' : '#0f172a' }, g); t.textContent = l;
+      });
+      var tg = el('text', { x: p.x + BW / 2 - 7, y: p.y - BH / 2 + 12, 'text-anchor': 'end', 'font-size': 10, 'font-weight': 700, fill: sel ? '#fff' : U.col }, g);
+      tg.textContent = it.u === 'C' ? 'CORE' : it.ref;
+      if (mids && mids[id]) { var ck = el('text', { x: p.x - BW / 2 + 14, y: p.y - BH / 2 + 14, 'font-size': 13, 'font-weight': 700, fill: '#16a34a' }, g); ck.textContent = '✓'; }
+      dragify(g, id);
+    });
+    svg.appendChild(gL);
+    drawBuildPanel();
+    drawList();
+  }
+
+  function dragify(g, id) {
+    var start = null, moved = false;
+    g.addEventListener('pointerdown', function (ev) { start = { x: ev.clientX, y: ev.clientY }; moved = false; g.setPointerCapture(ev.pointerId); ev.preventDefault(); });
+    g.addEventListener('pointermove', function (ev) {
+      if (!start) return;
+      if (Math.abs(ev.clientX - start.x) + Math.abs(ev.clientY - start.y) > 4) moved = true;
+      if (moved) {
+        var p = svgPt(ev), old = st.b.placed[id], dx = p.x - old.x, dy = p.y - old.y;
+        st.b.placed[id] = p;
+        g.setAttribute('transform', 'translate(' + (dx + (g._dx || 0)) + ' ' + (dy + (g._dy || 0)) + ')');
+        g._dx = (g._dx || 0) + dx; g._dy = (g._dy || 0) + dy;
+      }
+    });
+    g.addEventListener('pointerup', function () { if (!start) return; start = null; if (moved) { save(); draw(); } else bclick(id); });
+    g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); bclick(id); } });
+  }
+  function bclick(id) {
+    if (st.bstep === 'link') {
+      if (st.bpair) st.bpair = null;
+      if (!st.blink) st.blink = id;
+      else if (st.blink === id) st.blink = null;
+      else { st.bpair = [st.blink, id]; st.blink = null; }
+    } else if (st.bstep === 'plan') {
+      var pp = st.b.plan[st.bpara], k = pp.ids.indexOf(id);
+      if (k >= 0) pp.ids.splice(k, 1); else pp.ids.push(id);
+      save();
+    } else st.bsel = st.bsel === id ? null : id;
+    draw();
+  }
+
+  root.querySelector('.p3-canvas').addEventListener('dragover', function (ev) { if (st.mode === 'build') ev.preventDefault(); });
+  root.querySelector('.p3-canvas').addEventListener('drop', function (ev) {
+    if (st.mode !== 'build') return;
+    ev.preventDefault();
+    var id = ev.dataTransfer.getData('text/plain');
+    if (id && pitem(id)) place(id, svgPt(ev));
+  });
+
+  function checks() {
+    var b = st.b, ids = Object.keys(b.placed), areas = {};
+    ids.forEach(function (id) { var a = area(pitem(id)); if (a) areas[a] = 1; });
+    var body = b.plan.slice(1, -1).filter(function (p) { return p.txt.trim().length >= 15 && p.ids.length; }).length;
+    var concl = b.plan[b.plan.length - 1].txt.trim().length >= 15;
+    return [
+      ['Choose at least 5 ideas', ids.length >= 5],
+      ['Use ideas from at least 3 different syllabus areas', Object.keys(areas).length >= 3],
+      ['Draw and label at least 3 links', b.links.filter(function (l) { return l[2]; }).length >= 3],
+      ['Plan at least 2 body paragraphs (a point plus ideas)', body >= 2],
+      ['Write your conclusion’s judgement', concl]
+    ];
+  }
+
+  function stepTabs() {
+    var tabs = [['ideas', '1 Choose ideas'], ['link', '2 Link'], ['plan', '3 Plan'], ['compare', st.b.unlocked ? '4 Compare' : '4 Check and unlock']];
+    return '<div class="p3-steps">' + tabs.map(function (t) { return '<button type="button" data-bstep="' + t[0] + '"' + (st.bstep === t[0] ? ' class="is-on"' : '') + '>' + t[1] + '</button>'; }).join('') + '</div>';
+  }
+
+  function drawBuildPanel() {
+    var b = st.b, h = stepTabs(), keepScroll = panel.querySelector('.p3-pal') ? panel.querySelector('.p3-pal').scrollTop : 0;
+    if (st.bstep === 'ideas') {
+      if (st.bsel) {
+        var it = pitem(st.bsel);
+        h += chip(it) + '<h3>' + esc(it.t) + '</h3><p>' + esc(it.idea) + '</p><div class="p3-nav"><button type="button" data-unplace="' + it.id + '">Remove from my map</button><button type="button" data-desel="1" class="p3-btn--ghost">Back to the list</button></div>';
+      } else {
+        h += '<h3>Choose the ideas</h3><p>Which parts of the syllabus help answer this question? Add ideas from <b>different units</b>, and the core where useful. Drag boxes to arrange them; click a box to remove it.</p>' +
+          '<input type="search" class="p3-search" placeholder="Search ideas…" value="' + esc(st.q) + '" aria-label="Search ideas">';
+        h += '<div class="p3-pal">';
+        var groups = [];
+        ['4.1', '4.2', '4.3', '5.1', '5.2', '5.3', '6.1', '6.2', '6.3'].forEach(function (r) { groups.push([r + ' ' + (SUB[r] || ''), PALETTE.filter(function (p) { return p.u !== 'C' && p.ref === r; }), UNITS[r[0]]]); });
+        groups.push(['Core (Paper 2 units)', PALETTE.filter(function (p) { return p.u === 'C'; }), UNITS.C]);
+        var q = st.q.trim().toLowerCase();
+        groups.forEach(function (gp) {
+          var items = gp[1].filter(function (p) { return !q || (p.t + ' ' + p.idea).toLowerCase().indexOf(q) >= 0; });
+          if (!items.length) return;
+          var open = q || st.open[gp[0]];
+          h += '<details' + (open ? ' open' : '') + ' data-grp="' + esc(gp[0]) + '"><summary style="border-left-color:' + gp[2].col + '">' + esc(gp[0]) + ' <small>' + items.length + '</small></summary><ul>';
+          items.sort(function (a, c) { return a.t < c.t ? -1 : 1; }).forEach(function (p) {
+            var on = !!b.placed[p.id];
+            h += '<li><button type="button" draggable="true" data-pid="' + p.id + '" class="' + (on ? 'is-placed' : '') + '" title="' + esc(p.idea) + '"><span>' + (on ? '✓' : '+') + '</span>' + esc(p.t) + (p.u === 'C' ? ' <small>' + esc(p.core || '') + '</small>' : '') + '</button></li>';
+          });
+          h += '</ul></details>';
+        });
+        h += '</div><p class="p3-hint">' + Object.keys(b.placed).length + ' ideas on your map. Hover over an idea to see a summary.</p>';
+      }
+    } else if (st.bstep === 'link') {
+      h += '<h3>Link the ideas</h3><p>Click one box, then another, and describe the link in a few words, such as <i>drives</i>, <i>reduces</i>, <i>resists</i> or <i>depends on</i>. The best links connect ideas from <b>different units</b>.</p>';
+      if (st.blink) h += '<p class="p3-eval">First idea: <b>' + esc(pitem(st.blink).t) + '</b>. Now click a second box.</p>';
+      if (st.bpair) {
+        h += '<div class="p3-linkform"><p><b>' + esc(pitem(st.bpair[0]).t) + '</b> … <b>' + esc(pitem(st.bpair[1]).t) + '</b></p><input type="text" class="p3-linklab" maxlength="28" placeholder="e.g. drives, worsens, resists" list="p3-verbs"><datalist id="p3-verbs"><option>drives</option><option>causes</option><option>reduces</option><option>worsens</option><option>resists</option><option>depends on</option><option>enables</option><option>contrasts with</option><option>is an example of</option><option>is limited by</option></datalist><div class="p3-nav"><button type="button" data-addlink="1">Add link</button><button type="button" data-cancel="1" class="p3-btn--ghost">Cancel</button></div></div>';
+      }
+      if (b.links.length) {
+        h += '<h4>Your links</h4><ul class="p3-mylinks">';
+        b.links.forEach(function (l, i) { h += '<li><b>' + esc(pitem(l[0]).t) + '</b> ' + esc(l[2] || '…') + ' <b>' + esc(pitem(l[1]).t) + '</b><button type="button" data-dellink="' + i + '" aria-label="Delete link">×</button></li>'; });
+        h += '</ul>';
+      }
+      if (Object.keys(b.placed).length < 2) h += '<p class="p3-hint">Add at least two ideas first.</p>';
+    } else if (st.bstep === 'plan') {
+      h += '<h3>Plan your essay</h3><p>Pick a paragraph, write its main point, then click the boxes on the map that you will use as evidence in it. Each body paragraph should combine ideas from more than one unit.</p><div class="p3-plan">';
+      b.plan.forEach(function (pp, i) {
+        h += '<div class="p3-para' + (i === st.bpara ? ' is-on' : '') + '" data-para="' + i + '"><b>' + esc(pp.h) + '</b><textarea rows="2" data-ptxt="' + i + '" placeholder="' + (i === 0 ? 'Define the key terms and state your argument…' : i === b.plan.length - 1 ? 'Your judgement: to what extent, for whom, where…' : 'The main point of this paragraph…') + '">' + esc(pp.txt) + '</textarea><div class="p3-pchips">' +
+          (pp.ids.length ? pp.ids.map(function (id) { var it = pitem(id); return '<span style="border-color:' + UNITS[it.u].col + ';color:' + UNITS[it.u].col + '">' + esc(it.t) + '</span>'; }).join('') : '<small>' + (i === st.bpara ? 'Click boxes on the map to add ideas' : 'No ideas yet') + '</small>') + '</div></div>';
+      });
+      h += '</div><div class="p3-nav"><button type="button" data-addpara="1" class="p3-btn--ghost">+ Add a paragraph</button></div>';
+    } else {
+      var cs = checks();
+      h += '<h3>' + (b.unlocked ? 'Compare with the model' : 'Check your plan') + '</h3><ul class="p3-checks">' + cs.map(function (c) { return '<li class="' + (c[1] ? 'ok' : '') + '">' + (c[1] ? '✓' : '○') + ' ' + esc(c[0]) + '</li>'; }).join('') + '</ul>';
+      if (!b.unlocked) {
+        h += '<div class="p3-unlock"><label for="p3-code"><b>Teacher’s code</b></label><p class="p3-hint">When your teacher is ready, they will give you the code to unlock the model map for this essay.</p><input id="p3-code" type="text" autocomplete="off" spellcheck="false" placeholder="Enter code"><button type="button" data-unlock="1">Unlock the model</button><p class="p3-codemsg" aria-live="polite"></p></div>';
+      } else h += compareHtml();
+      h += '<p class="p3-hint" style="margin-top:14px">Your map is saved in this browser. <button type="button" class="p3-linkbtn" data-clear="1">' + (st.clearArm ? 'Click again to clear everything' : 'Start again') + '</button></p>';
+    }
+    panel.innerHTML = h;
+    var pal = panel.querySelector('.p3-pal'); if (pal) pal.scrollTop = keepScroll;
+    wireBuildPanel();
+  }
+
+  function compareHtml() {
+    var m = M(), b = st.b, mine = Object.keys(b.placed), mids = modelIds();
+    var hit = mine.filter(function (id) { return mids[id]; }), extra = mine.filter(function (id) { return !mids[id]; });
+    var miss = m.nodes.filter(function (n) { return mine.indexOf(n.id) < 0; });
+    var pct = Math.round(100 * hit.length / m.nodes.length);
+    function pairs(list) { var o = {}; list.forEach(function (l) { o[[l[0], l[1]].sort().join('|')] = 1; }); return o; }
+    var mp = pairs(m.edges), yp = pairs(b.links);
+    var linkHit = Object.keys(yp).filter(function (k) { return mp[k]; }).length;
+    var couldAdd = m.edges.filter(function (e) { return b.placed[e[0]] && b.placed[e[1]] && !yp[[e[0], e[1]].sort().join('|')]; });
+    var areasY = {}, areasM = {};
+    mine.forEach(function (id) { var a = area(pitem(id)); if (a) areasY[a] = 1; });
+    m.nodes.forEach(function (n) { var a = area(pitem(n.id)); if (a) areasM[a] = 1; });
+    var cc = { place: 0, process: 0, power: 0, possibility: 0 };
+    mine.forEach(function (id) { var c = ((CMAP[m.id] || {})[id]) || pitem(id).cs || []; (typeof c === 'string' ? [c] : c).forEach(function (k) { cc[k]++; }); });
+    var h = '<div class="p3-score"><b>' + hit.length + ' of ' + m.nodes.length + '</b> of the model’s ideas are on your map (' + pct + '%) · <b>' + linkHit + '</b> of your links match the model</div>';
+    h += '<p class="p3-hint">Green boxes on your map are in the model; dashed grey boxes are not. That does not make them wrong: if you can justify them with evidence, they may still earn credit.</p>';
+    if (hit.length) h += '<h4>Ideas you both chose</h4><p class="p3-plist">' + hit.map(function (id) { return esc(pitem(id).t); }).join(' · ') + '</p>';
+    if (miss.length) { h += '<h4>Model ideas you missed</h4><ul class="p3-links">'; miss.forEach(function (n) { h += '<li><button type="button" data-model="' + n.id + '" style="border-left-color:' + UNITS[n.u].col + '">' + esc(n.t) + '<small>' + esc(n.idea) + '</small></button></li>'; }); h += '</ul>'; }
+    if (extra.length) h += '<h4>Your extra ideas</h4><p class="p3-plist">' + extra.map(function (id) { return esc(pitem(id).t); }).join(' · ') + '</p>';
+    if (couldAdd.length) { h += '<h4>Links you could add</h4><ul class="p3-mylinks">'; couldAdd.forEach(function (e) { h += '<li><b>' + esc(node(e[0]).t) + '</b> ' + esc(e[2]) + ' <b>' + esc(node(e[1]).t) + '</b><small>' + esc(e[3]) + '</small></li>'; }); h += '</ul>'; }
+    h += '<h4>Breadth</h4><p>Syllabus areas: you used <b>' + Object.keys(areasY).length + '</b>, the model uses <b>' + Object.keys(areasM).length + '</b>.</p><p class="p3-plist">' + CORDER.map(function (k) { return '<span style="color:' + CONC[k].col + '">' + CONC[k].name + ' ' + cc[k] + '</span>'; }).join(' · ') + '</p>';
+    if (CORDER.some(function (k) { return !cc[k]; })) h += '<p class="p3-hint">Try to bring in every key concept: ' + CORDER.filter(function (k) { return !cc[k]; }).map(function (k) { return CONC[k].name; }).join(', ') + ' ' + (CORDER.filter(function (k) { return !cc[k]; }).length > 1 ? 'are' : 'is') + ' missing.</p>';
+    h += '<div class="p3-nav"><button type="button" data-goto="explore">See the model map</button><button type="button" data-goto="route" class="p3-btn--ghost">Model essay route</button></div>';
+    return h;
+  }
+
+  function wireBuildPanel() {
+    var b = st.b;
+    panel.querySelectorAll('[data-bstep]').forEach(function (x) { x.addEventListener('click', function () { st.bstep = x.dataset.bstep; st.bsel = null; st.blink = null; st.bpair = null; st.clearArm = false; draw(); }); });
+    var sr = panel.querySelector('.p3-search');
+    if (sr) sr.addEventListener('input', function () { st.q = sr.value; var pos0 = sr.selectionStart; drawBuildPanel(); var s2 = panel.querySelector('.p3-search'); s2.focus(); try { s2.setSelectionRange(pos0, pos0); } catch (e) { } });
+    panel.querySelectorAll('details[data-grp]').forEach(function (d) { d.addEventListener('toggle', function () { st.open[d.dataset.grp] = d.open; }); });
+    panel.querySelectorAll('[data-pid]').forEach(function (x) {
+      x.addEventListener('click', function () { var id = x.dataset.pid; if (b.placed[id]) unplace(id); else place(id); });
+      x.addEventListener('dragstart', function (ev) { ev.dataTransfer.setData('text/plain', x.dataset.pid); ev.dataTransfer.effectAllowed = 'copy'; });
+    });
+    var u = panel.querySelector('[data-unplace]'); if (u) u.addEventListener('click', function () { unplace(u.dataset.unplace); });
+    var d = panel.querySelector('[data-desel]'); if (d) d.addEventListener('click', function () { st.bsel = null; draw(); });
+    var lab = panel.querySelector('.p3-linklab');
+    function addLink() { var t = (lab.value || '').trim(); if (!t) { lab.focus(); return; } b.links = b.links.filter(function (l) { return [l[0], l[1]].sort().join('|') !== st.bpair.slice().sort().join('|'); }); b.links.push([st.bpair[0], st.bpair[1], t]); st.bpair = null; save(); draw(); }
+    if (lab) { lab.focus(); lab.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') addLink(); }); panel.querySelector('[data-addlink]').addEventListener('click', addLink); panel.querySelector('[data-cancel]').addEventListener('click', function () { st.bpair = null; draw(); }); }
+    panel.querySelectorAll('[data-dellink]').forEach(function (x) { x.addEventListener('click', function () { b.links.splice(+x.dataset.dellink, 1); save(); draw(); }); });
+    panel.querySelectorAll('[data-para]').forEach(function (x) { x.addEventListener('click', function (ev) { if (ev.target.tagName === 'TEXTAREA') { if (st.bpara !== +x.dataset.para) { st.bpara = +x.dataset.para; panel.querySelectorAll('.p3-para').forEach(function (q) { q.classList.toggle('is-on', q === x); }); redrawCanvasOnly(); } return; } st.bpara = +x.dataset.para; draw(); }); });
+    panel.querySelectorAll('[data-ptxt]').forEach(function (x) { x.addEventListener('input', function () { b.plan[+x.dataset.ptxt].txt = x.value; save(); }); });
+    var ap = panel.querySelector('[data-addpara]'); if (ap) ap.addEventListener('click', function () { var n = b.plan.length - 1; b.plan.splice(n, 0, { h: 'Paragraph ' + n, txt: '', ids: [] }); st.bpara = n; save(); draw(); });
+    var ub = panel.querySelector('[data-unlock]');
+    if (ub) {
+      var inp = panel.querySelector('#p3-code'), msg = panel.querySelector('.p3-codemsg');
+      function tryCode() {
+        var c = (inp.value || '').trim().toUpperCase(); if (!c) return;
+        Promise.all([sha(M().id + ':' + c), sha('all:' + c)]).then(function (hs) {
+          if (hs[0] && (hs[0] === LOCKS[M().id] || hs[1] === LOCKS['*'])) { b.unlocked = true; save(); draw(); }
+          else { msg.textContent = 'That code is not right for this essay. Check with your teacher.'; }
+        });
+      }
+      ub.addEventListener('click', tryCode); inp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') tryCode(); });
+    }
+    panel.querySelectorAll('[data-goto]').forEach(function (x) { x.addEventListener('click', function () { setMode(x.dataset.goto); }); });
+    panel.querySelectorAll('[data-model]').forEach(function (x) { x.addEventListener('click', function () { setMode('explore'); st.sel = x.dataset.model; draw(); }); });
+    var cl = panel.querySelector('[data-clear]');
+    if (cl) cl.addEventListener('click', function () {
+      if (!st.clearArm) { st.clearArm = true; draw(); return; }
+      var keepUnlock = b.unlocked; st.b = load('__none__'); st.b.unlocked = keepUnlock; st.clearArm = false; save(); draw();
+    });
+  }
+  function redrawCanvasOnly() { var keep = drawBuildPanel; drawBuildPanel = function () { }; drawBuild(); drawBuildPanel = keep; }
+
   var hash = (location.hash || '').slice(1);
-  MAPS.forEach(function (m, i) { if (m.id === hash) st.map = i; });
-  layout(); draw();
+  var start = 0; MAPS.forEach(function (m, i) { if (m.id === hash) start = i; });
+  selectMap(start);
+  var cv = root.querySelector('.p3-canvas'); if (cv.scrollWidth > cv.clientWidth) cv.scrollLeft = (cv.scrollWidth - cv.clientWidth) / 2;
 })();
