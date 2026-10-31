@@ -47,9 +47,13 @@
   function visible(n) { return !st.hidden[n.u]; }
   var REFS = window.SBL_P3_REFS || { def: {}, over: {} }, SUB = window.SBL_P3_SUB || {}, EVAL = window.SBL_P3_EVAL || {};
   function ref(n) { if (n.u === 'C') return ''; var o = REFS.over[M().id] || {}; return o[n.id] || REFS.def[n.id] || ''; }
-  function conc(n) { return (CMAP[M().id] || {})[n.id] || ''; }
+  function concs(n) { var c = (CMAP[M().id] || {})[n.id] || []; return typeof c === 'string' ? [c] : c; }
+  function conc(n) { return concs(n)[0] || ''; }
+  function has(n, c) { return concs(n).indexOf(c) >= 0; }
   function pal(n) { return st.mode === 'concepts' && conc(n) ? CONC[conc(n)] : UNITS[n.u]; }
-  function cchip(n) { var c = CONC[conc(n)]; return c ? '<span class="p3-chip" style="background:' + c.fill + ';color:' + c.col + ';border-color:' + c.col + '">Concept: ' + c.name + '</span>' : ''; }
+  function cchip(n) {
+    return concs(n).map(function (k, i) { var c = CONC[k]; return '<span class="p3-chip" style="background:' + c.fill + ';color:' + c.col + ';border-color:' + c.col + '">' + (i ? '' : 'Main concept: ') + c.name + '</span>'; }).join(' ');
+  }
   function tagOf(n) { return n.u === 'C' ? 'CORE' : (ref(n) || 'U' + n.u); }
 
   /* ---------- skeleton ---------- */
@@ -165,7 +169,7 @@
     }
     if (st.mode === 'concepts') {
       if (!st.lens) return null;
-      m.nodes.forEach(function (n) { if (conc(n) === st.lens) nodes[n.id] = 1; });
+      m.nodes.forEach(function (n) { if (has(n, st.lens)) nodes[n.id] = 1; });
       var lensNodes = Object.keys(nodes);
       m.edges.forEach(function (e, i) { if (lensNodes.indexOf(e[0]) >= 0 || lensNodes.indexOf(e[1]) >= 0) { edges[i] = 1; nodes[e[0]] = nodes[e[0]] || 2; nodes[e[1]] = nodes[e[1]] || 2; } });
       return { nodes: nodes, edges: edges, labels: true };
@@ -242,6 +246,9 @@
         var t = el('text', { x: p.x + 4, y: p.y + (i - (lines.length - 1) / 2) * 18 + 6, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 700, fill: sel ? '#fff' : '#0f172a' }, g);
         t.textContent = l;
       });
+      concs(n).forEach(function (k, i) {
+        el('circle', { cx: p.x + NW / 2 - 10 - i * 13, cy: p.y + NH / 2 - 10, r: 4.5, fill: CONC[k].col, stroke: '#fff', 'stroke-width': 1.5 }, g);
+      });
       var tag = el('text', { x: p.x + NW / 2 - 8, y: p.y - NH / 2 + 13, 'text-anchor': 'end', 'font-size': 10.5, 'font-weight': 700, fill: sel ? '#fff' : U.col }, g);
       tag.textContent = tagOf(n);
       g.addEventListener('click', function () { clickNode(n.id); });
@@ -297,9 +304,9 @@
     } else if (st.mode === 'concepts') {
       var L = LENS[m.id] || {};
       if (!st.lens) {
-        h = '<h3>The 4Ps lens</h3><p>Every idea on this map is coloured by its main key concept. Pick a concept to see the ideas that use it, how they link to the others, and a question to ask through that lens.</p><div class="p3-cards">';
+        h = '<h3>The 4Ps lens</h3><p>Every idea on this map is coloured by its main key concept, and the dots show every concept it links to. Pick a concept to see the ideas that use it, how they link to the others, and a question to ask through that lens.</p><div class="p3-cards">';
         CORDER.forEach(function (c) {
-          var k = m.nodes.filter(function (n) { return conc(n) === c; }).length;
+          var k = m.nodes.filter(function (n) { return has(n, c); }).length;
           h += '<button type="button" data-lens="' + c + '" style="border-left-color:' + CONC[c].col + '"><b style="color:' + CONC[c].col + '">' + CONC[c].name + '</b> <small>' + k + ' idea' + (k === 1 ? '' : 's') + '</small><span>' + esc(CONC[c].def) + '</span></button>';
         });
         h += '</div><div class="p3-band"><b>Using the concepts to evaluate</b><span>Link across the concepts: a <i>process</i> changes a <i>place</i>, <i>power</i> decides who gains and who loses, and <i>possibilities</i> ask what could happen next.</span><span>A paragraph that uses two or more concepts together is usually more evaluative than one that uses a single concept.</span></div>';
@@ -307,10 +314,12 @@
         var C = CONC[st.lens];
         h = '<p class="p3-step" style="color:' + C.col + '">Concept lens</p><h3 style="color:' + C.col + '">' + C.name + '</h3><p>' + esc(C.def) + '</p>';
         if (L[st.lens]) h += '<p class="p3-eval"><b>Ask for this essay:</b> ' + esc(L[st.lens]) + '</p>';
-        var ins = m.nodes.filter(function (n) { return conc(n) === st.lens; });
-        h += '<h4>Ideas through this lens</h4><ul class="p3-links">';
-        ins.forEach(function (n) { h += '<li><button type="button" data-go="' + n.id + '" style="border-left-color:' + C.col + '">' + esc(n.t) + '<small>' + esc(n.idea) + '</small></button></li>'; });
-        h += '</ul><p class="p3-hint">Faded boxes are ideas from other concepts that link to these. Click any idea to explore it.</p>';
+        var main = m.nodes.filter(function (n) { return conc(n) === st.lens; });
+        var also = m.nodes.filter(function (n) { return conc(n) !== st.lens && has(n, st.lens); });
+        function li(n) { return '<li><button type="button" data-go="' + n.id + '" style="border-left-color:' + C.col + '">' + esc(n.t) + '<small>' + esc(n.idea) + '</small></button></li>'; }
+        if (main.length) h += '<h4>Main concept for</h4><ul class="p3-links">' + main.map(li).join('') + '</ul>';
+        if (also.length) h += '<h4>Also relevant to</h4><ul class="p3-links">' + also.map(li).join('') + '</ul>';
+        h += '<p class="p3-hint">The coloured dots on each box show every concept an idea links to. Faded boxes are other ideas connected to these. Click any idea to explore it.</p>';
         h += '<div class="p3-nav">' + CORDER.filter(function (c) { return c !== st.lens; }).map(function (c) { return '<button type="button" data-lens="' + c + '" style="background:' + CONC[c].col + ';border-color:' + CONC[c].col + '">' + CONC[c].name + '</button>'; }).join('') + '</div>';
       }
     } else if (st.mode === 'route') {

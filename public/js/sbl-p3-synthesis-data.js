@@ -359,17 +359,19 @@ window.SBL_P3_EVAL = {
   supply: ['Compare stakeholders: TNCs, small firms, workers, consumers and communities.','Compare places: export zones, deindustrialised regions and consumer societies.','Consider change over time, including recent disruption and re-shoring.']
 };
 
-/* The four key concepts (places, processes, power, possibilities): main concept for each idea */
+/* The four key concepts (places, processes, power, possibilities).
+   Each idea lists every concept it is relevant to; the first is its main concept. */
+var PL='place', PR='process', PW='power', PO='possibility';
 window.SBL_P3_CONCEPT = {
-  power: {sup:'power',mgo:'power',opec:'power',rn:'power',tnc:'process',tax:'process',kof:'place',cpop:'place',sm:'possibility',cso:'possibility'},
-  inequality: {flows:'process',rem:'process',tsc:'process',cmig:'process',dbh:'place',hdi:'place',shift:'place',haze:'place',csr:'power',mpesa:'possibility'},
-  culture: {homo:'place',dias:'place',thai:'place',net:'process',cmig:'process',glocal:'possibility',tnc:'power',nk:'power',nat:'power',eat:'possibility'},
-  risk: {tsc:'process',oil:'process',cyber:'process',haze:'place',ship:'place',dev:'place',cres:'power',fair:'power',res:'possibility',cclim:'possibility'},
-  sovereignty: {tax:'power',imf:'power',ctrl:'power',prot:'power',tech:'process',bloc:'process',haze:'place',nk:'place',brexit:'possibility',cclim:'possibility'},
-  civil: {gp:'power',ai:'power',ifa:'power',hk:'place',min:'place',eat:'place',crowd:'process',cclim:'process',malala:'possibility',fair:'possibility'},
-  resilience: {reshore:'process',imo:'process',epass:'process',cyber:'power',asean:'power',sglaw:'power',local:'place',crowd:'possibility',oecd:'possibility',cclim:'possibility'},
-  technology: {cont:'process',net:'process',cpop:'place',sm:'power',fw:'power',pol:'power',epass:'power',mpesa:'possibility',tech:'possibility',cyber:'possibility'},
-  supply: {tnc:'power',nat:'power',sez:'place',work:'place',deind:'place',shift:'place',cont:'process',cons:'process',risk:'process',ccarb:'process',reshore:'possibility'}
+  power: {sup:[PW,PL],mgo:[PW,PR],opec:[PW,PL],rn:[PW,PL],tnc:[PW,PL,PR],tax:[PR,PW],kof:[PL,PR],cpop:[PL,PO],sm:[PO,PW,PR],cso:[PO,PW]},
+  inequality: {flows:[PR,PL,PW],rem:[PR,PL],tsc:[PR,PL],cmig:[PR,PL],dbh:[PL,PW],hdi:[PL],shift:[PL,PR,PW],haze:[PL,PR],csr:[PW,PO],mpesa:[PO,PR,PL]},
+  culture: {homo:[PL,PR],dias:[PL,PR],thai:[PL,PW],net:[PR,PW],cmig:[PR,PL],glocal:[PO,PR,PL],tnc:[PW,PR,PL],nk:[PW,PL],nat:[PW,PO],eat:[PO,PW,PL]},
+  risk: {tsc:[PR,PL],oil:[PR,PW,PL],cyber:[PR,PW],haze:[PL,PR],ship:[PL,PR],dev:[PL,PO],cres:[PW,PL],fair:[PW,PO],res:[PO,PW],cclim:[PO,PR,PL]},
+  sovereignty: {tax:[PW,PR],imf:[PW,PL],ctrl:[PW,PL],prot:[PW,PR],tech:[PR,PW,PO],bloc:[PR,PW,PL],haze:[PL,PW],nk:[PL,PW],brexit:[PO,PW,PL],cclim:[PO,PW]},
+  civil: {gp:[PW,PO],ai:[PW,PL],ifa:[PW,PR],hk:[PL,PW,PO],min:[PL,PW],eat:[PL,PO],crowd:[PR,PO],cclim:[PR,PO,PW],malala:[PO,PL,PW],fair:[PO,PR,PW]},
+  resilience: {reshore:[PR,PL,PW],imo:[PR,PW],epass:[PR,PW],cyber:[PW,PL],asean:[PW,PL,PO],sglaw:[PW,PL],local:[PL,PO],crowd:[PO,PL,PR],oecd:[PO,PW,PR],cclim:[PO,PL,PR]},
+  technology: {cont:[PR,PL],net:[PR,PL,PW],cpop:[PL,PR],sm:[PW,PR,PO],fw:[PW,PL],pol:[PW,PL],epass:[PW,PR],mpesa:[PO,PL],tech:[PO,PW,PR],cyber:[PO,PW]},
+  supply: {tnc:[PW,PL,PR],nat:[PW,PL,PO],sez:[PL,PR,PW],work:[PL,PW],deind:[PL,PR],shift:[PL,PR],cont:[PR,PL],cons:[PR,PL],risk:[PR,PL,PO],ccarb:[PR,PL,PW],reshore:[PO,PR,PW]}
 };
 
 /* A question to ask through each concept lens, for each essay */
@@ -384,3 +386,311 @@ window.SBL_P3_LENS = {
   technology: {place:'Which places are connected or excluded by technology?',process:'How has technology changed the speed and scale of flows?',power:'Do states, TNCs or citizens gain most power from technology?',possibility:'Will future technology open up global interactions or close them down?'},
   supply: {place:'Which places gain (export zones, consumer societies) and which lose (deindustrialised regions)?',process:'How do containerisation, offshoring and embedded carbon link producers and consumers?',power:'Who holds power in the supply chain: TNCs, workers, governments or consumers?',possibility:'Will re-shoring and regulation change who benefits in future?'}
 };
+
+/* ---------- Additions from the examined 16-mark themes (2019–2025), plus extra ideas ---------- */
+(function () {
+  var MAPS = window.SBL_P3_MAPS;
+  function get(id) { return MAPS.filter(function (m) { return m.id === id; })[0]; }
+  function add(id, nodes, edges, route) {
+    var m = get(id);
+    m.nodes = m.nodes.concat(nodes); m.edges = m.edges.concat(edges);
+    (route || []).forEach(function (r) { m.route[r[0]].n = m.route[r[0]].n.concat(r[1]); if (r[2]) m.route[r[0]].tx += ' ' + r[2]; });
+  }
+  add('power', [
+    {id:'aid', u:'4', t:'Lending and aid', idea:'Superpowers gain influence through loans, aid and investment in other countries.', ev:'China’s Belt and Road Initiative (from 2013) lends to over 140 countries; Sri Lanka leased Hambantota port to a Chinese firm for 99 years in 2017 after struggling with debt.', eval:'Brings roads, ports and power stations that other countries need, but can create debt and dependence.'},
+    {id:'conflict', u:'6', t:'Rivalry and conflict', idea:'Competition between powerful states spills into conflicts and economic shocks elsewhere.', ev:'Regional powers backed opposing sides in Yemen’s war; the Russia–Ukraine war from 2022 pushed up global food and energy prices.', eval:'Shows the challenges that concentrated power creates for other countries, not just the opportunities.'}
+  ], [
+    ['sup','aid','extends power through','Loans and investment give superpowers influence over other countries’ policies and infrastructure.'],
+    ['aid','mgo','alternative to','Belt and Road loans give countries an alternative to IMF lending and its conditions.'],
+    ['sup','conflict','drawn into','Superpower rivalry can turn local conflicts into proxy wars with global effects.'],
+    ['conflict','opec','disrupts','War and sanctions affecting oil producers move world energy prices.']
+  ], [[1,['aid','conflict'],'Lending and rivalry show that concentrated power brings other countries both opportunities and challenges.']]);
+
+  add('inequality', [
+    {id:'hicw', u:'4', t:'Winners and losers in rich countries', idea:'Global interactions benefit some people in wealthy countries much more than others.', ev:'Consumers and shareholders gain from cheaper goods and higher profits; former manufacturing towns in the US “Rust Belt” and northern England lost jobs to offshoring.', eval:'Inequality within wealthy countries can be as important as inequality between countries.'}
+  ], [
+    ['flows','hicw','creates','Offshoring and trade create winners (consumers, investors) and losers (industrial workers) within rich countries.'],
+    ['hicw','shift','other side of','Rich countries lost polluting factories along with the jobs, moving pollution to producing countries.']
+  ], [[2,['hicw'],'Even within wealthy countries, some places and people lose out.']]);
+
+  add('culture', [
+    {id:'aa', u:'5', t:'Minorities and affirmative action', idea:'Policies that protect minority groups help keep identities diverse.', ev:'Reserved seats for women and marginalised groups in Nepal; recognition of LGBTQ+ rights; the Dani of Papua.', eval:'Identity is personal and multiple, so patterns are becoming more complex, not simpler.'}
+  ], [
+    ['aa','homo','resists','Protecting minority rights and identities works against cultural homogenisation.'],
+    ['aa','nat','in tension with','Nationalist movements may push a single national identity over minority identities.']
+  ], [[3,['aa'],'Struggles over identity, from national politics to minority rights, keep patterns complex.']]);
+
+  add('resilience', [
+    {id:'ctech', u:'C', core:'Unit 2: Global climate', t:'New technology for climate risk', idea:'Renewables, carbon capture and early warning systems help manage global risks.', ev:'Rapid growth of solar and wind power; satellite monitoring of fires and storms.', eval:'Technology is unevenly available, can have unintended consequences, and does not replace changes in behaviour and policy.'}
+  ], [
+    ['ctech','cclim','supports','New energy technologies make mitigation targets more achievable.'],
+    ['ctech','cyber','both technology','Technology can reduce risk, but more digital systems also create new risks.']
+  ], [[3,['ctech'],'Global and technological solutions are powerful but unevenly shared.']]);
+
+  /* ---- New maps ---- */
+  MAPS.push({
+    id: 'physical', short: 'Physical vs human factors',
+    q: 'How far does physical geography, rather than human decisions, explain why some places are more connected and more culturally diverse than others?',
+    focus: 'Places, processes, power',
+    nodes: [
+      {id:'iso', u:'4', t:'Isolation and distance', idea:'Remote, landlocked or island places face higher transport costs and fewer connections.', ev:'Australia’s “tyranny of distance”; landlocked Nepal and Chad depend on neighbours’ ports.', eval:'Air travel, containers and the internet have reduced, but not removed, the effect of distance.'},
+      {id:'nres', u:'4', t:'Physical resources', idea:'Resources and location can make a place a hub.', ev:'Oil wealth paid for Dubai’s airport and port, making it a global hub; Singapore’s position on the Strait of Malacca.', eval:'Resources only create connections when governments and investors use them.'},
+      {id:'opec', u:'4', t:'OPEC oil states', idea:'Oil reserves connect producing states to the world economy.', ev:'Saudi Arabia, Iraq and the UAE are tied into global energy flows.', eval:'The resource curse shows physical wealth does not guarantee wider connection.'},
+      {id:'dbh', u:'4', t:'Digital black holes', idea:'Places with little digital infrastructure are left out of data flows.', ev:'Remote mountains, deserts and rural Africa have weak coverage.', eval:'Mobile networks and satellite internet are overcoming terrain.'},
+      {id:'cont', u:'4', t:'Shrinking-world technology', idea:'Transport and communication technology overcome physical barriers.', ev:'Containerisation; undersea cables; satellite internet.', eval:'Suggests physical geography matters less over time.'},
+      {id:'migr', u:'4', t:'Migration rules', idea:'Government rules decide who can move, shaping both connections and diversity.', ev:'Points-based systems in Canada and Australia; Gulf states’ large migrant workforces.', eval:'A human factor that can outweigh physical distance.'},
+      {id:'dias', u:'5', t:'Diasporas', idea:'Migrant communities create cultural diversity, mostly in cities.', ev:'London’s Chinatown; the large Indian population of Dubai.', eval:'Shows diversity is driven mainly by human movement, not physical factors.'},
+      {id:'thai', u:'5', t:'Mountains and margins in Thailand', idea:'Rugged relief helped preserve distinct cultures.', ev:'Hill peoples in the northern and western mountains near Myanmar and Laos.', eval:'Physical isolation explains part of the pattern, but borders, history and policy matter too.'},
+      {id:'prot', u:'5', t:'Protectionism and controls', idea:'Political decisions can disconnect places whatever their geography.', ev:'Trade tariffs and travel bans.', eval:'Human decisions can disconnect even well-located places.'},
+      {id:'nk', u:'6', t:'North Korea', idea:'A state can choose isolation.', ev:'Almost no internet access and very little trade, despite sharing borders with China and South Korea.', eval:'The clearest case of human, not physical, disconnection.'},
+      {id:'cpopd', u:'C', core:'Unit 1: Changing population', t:'Population distribution', idea:'Relief, climate and water shape where people live, and so how connected places are.', ev:'Most Australians live on the coast; deserts and mountains are sparsely populated.', eval:'Physical factors set the starting pattern; human factors change it.'}
+    ],
+    edges: [
+      ['iso','cont','overcome by','Technology reduces the cost and time of crossing distance.'],
+      ['iso','dbh','contributes to','Remote terrain makes infrastructure expensive to build.'],
+      ['nres','opec','linked to','Resource endowment turns some states into global hubs.'],
+      ['nres','migr','attracts','Oil wealth in the Gulf attracts large flows of migrant workers.'],
+      ['migr','dias','creates','Migration rules shape which diasporas form where.'],
+      ['thai','iso','example of','Mountains isolated communities and helped preserve their cultures.'],
+      ['prot','nk','extreme form','North Korea shows politics can disconnect a place completely.'],
+      ['cpopd','iso','explains','Physical geography sets where people live and how far apart they are.'],
+      ['dbh','cont','narrowed by','Mobile and satellite technology are closing digital gaps.']
+    ],
+    route: [
+      {h:'Introduction', n:['cpopd'], tx:'Define physical factors, connectivity and cultural diversity at different scales. Argument: physical geography sets the starting conditions, but human decisions increasingly decide outcomes.'},
+      {h:'Physical factors matter', n:['iso','nres','thai','cpopd'], tx:'Distance, relief and resources shape connection and preserve distinct cultures.'},
+      {h:'Technology reduces their importance', n:['cont','dbh','opec'], tx:'Shrinking-world technology overcomes many physical barriers over time.'},
+      {h:'Human decisions matter more', n:['migr','dias','prot','nk'], tx:'Migration rules, diasporas, protectionism and isolation are political choices.'},
+      {h:'Conclusion', n:[], tx:'Judge by scale and over time: physical factors explain more at local scales (remote valleys) and in the past; human factors explain more at national scale and today.'}
+    ]
+  });
+
+  MAPS.push({
+    id: 'lics', short: 'Power of low-income countries',
+    q: 'How far are low-income countries and their citizens able to shape global interactions, rather than simply being shaped by them?',
+    focus: 'Power, places, possibilities',
+    nodes: [
+      {id:'afcfta', u:'4', t:'African Union and AfCFTA', idea:'Acting together gives lower-income countries a stronger voice.', ev:'The African Continental Free Trade Area began trading in 2021; the African Union joined the G20 as a permanent member in 2023.', eval:'Collective power is growing, but influence over the IMF and WTO is still limited.'},
+      {id:'cobalt', u:'4', t:'Resource leverage', idea:'Control of key raw materials gives bargaining power.', ev:'The DR Congo mines around 70% of the world’s cobalt, essential for batteries; OPEC’s history shows resource power.', eval:'Profits often go to foreign firms and elites, not citizens (the resource curse).'},
+      {id:'rem', u:'4', t:'Diasporas and remittances', idea:'Migrants link home countries to global networks.', ev:'Remittances make up around a quarter to a third of Nepal’s GDP.', eval:'Gives households power to invest, but depends on decisions made in host countries.'},
+      {id:'brain', u:'4', t:'Brain drain', idea:'Skilled people leave, weakening the home country.', ev:'Doctors and nurses moving from Zimbabwe and Ghana to the UK.', eval:'A loss of power, partly balanced by remittances and returning skills.'},
+      {id:'illicit', u:'4', t:'Illegal flows', idea:'Some groups in poorer countries influence global illegal trade.', ev:'Afghanistan was long the world’s largest opium producer.', eval:'A form of influence that harms citizens and attracts outside intervention.'},
+      {id:'mob', u:'4', t:'Mobile phones and social media', idea:'Communication technology gives citizens a global voice and access to services.', ev:'M-Pesa in Kenya; social media campaigns reaching global audiences.', eval:'Digital divides remain within countries, especially in rural areas.'},
+      {id:'sdg', u:'5', t:'Shaping the SDGs', idea:'Lower-income countries took part in negotiating the global development agenda.', ev:'The SDGs (2015) were negotiated more widely than the earlier top-down MDGs.', eval:'Funding still comes mainly from richer countries.'},
+      {id:'cexp', u:'5', t:'Cultural exports', idea:'Culture from lower-income countries reaches global audiences.', ev:'Nigeria’s Nollywood and Afrobeats artists such as Burna Boy (Grammy winner, 2021).', eval:'Global platforms that spread this culture are mostly owned by firms in rich countries.'},
+      {id:'malala', u:'5', t:'Citizen activists', idea:'Individuals from poorer countries can lead global campaigns.', ev:'Malala Yousafzai and the Malala Fund.', eval:'Often needs global media and funding from richer countries to succeed.'},
+      {id:'yemen', u:'6', t:'Disruption and conflict', idea:'Groups in poorer countries can disrupt global flows.', ev:'Houthi attacks in the Red Sea from late 2023 forced ships to divert around Africa.', eval:'Influence through disruption is not the same as power to shape positive change.'},
+      {id:'ccop', u:'C', core:'Unit 2: Global climate', t:'Climate negotiations', idea:'Vulnerable countries use moral authority in climate talks.', ev:'Small island and least developed countries pushed for the 1.5°C goal (2015) and a loss and damage fund (COP27, 2022).', eval:'Agreements depend on rich countries delivering the money.'}
+    ],
+    edges: [
+      ['afcfta','sdg','both collective','Acting as a group increases lower-income countries’ voice in global agreements.'],
+      ['cobalt','afcfta','strengthens','Control of critical minerals gives African states bargaining power.'],
+      ['rem','brain','other side of','Migration brings remittances but drains skills.'],
+      ['mob','rem','cheapens','Mobile money makes sending money home cheaper.'],
+      ['mob','cexp','spreads','Social media and streaming help music and film reach global audiences.'],
+      ['mob','malala','amplifies','Digital media gives activists a global platform.'],
+      ['ccop','sdg','both negotiation','Moral and collective pressure in UN processes is a key source of influence.'],
+      ['yemen','illicit','disruptive power','Influence through disruption or illegal flows, rather than through formal power.']
+    ],
+    route: [
+      {h:'Introduction', n:[], tx:'Define low-income countries (accept that categories are blurred) and types of power: hard, soft, economic and collective. Argument: influence is growing, but it is mostly collective, cultural or disruptive rather than structural.'},
+      {h:'Collective and economic power', n:['afcfta','cobalt','sdg','ccop'], tx:'Groups of countries and resource leverage give a stronger voice.'},
+      {h:'Citizens’ influence', n:['mob','cexp','malala','rem'], tx:'Technology, culture, activists and diasporas give citizens global reach.'},
+      {h:'Limits and negative influence', n:['brain','illicit','yemen'], tx:'Brain drain, illegal flows and conflict show influence that harms citizens.'},
+      {h:'Conclusion', n:[], tx:'Judge the extent: low-income countries have more influence than before, especially when they act together, but the rules of the global system are still set mainly by richer states.'}
+    ]
+  });
+
+  MAPS.push({
+    id: 'envimpact', short: 'Environmental impacts of flows',
+    q: 'To what extent are the environmental costs of global flows borne by places that gain least from them, and can governments protect their citizens?',
+    focus: 'Places, power, possibilities',
+    nodes: [
+      {id:'hicair', u:'6', t:'Cleaner air in old industrial regions', idea:'The global shift moved heavy industry, and its pollution, away from many rich countries.', ev:'Air quality in former industrial cities such as Pittsburgh and Manchester has improved greatly since the 1970s.', eval:'Rich countries still cause emissions through what they import (embedded carbon) and share global climate impacts.'},
+      {id:'embc', u:'6', t:'Embedded carbon', idea:'Emissions from making goods are counted where they are produced, not where they are used.', ev:'A large share of China’s emissions come from making goods for export.', eval:'Consumption-based accounting shows rich countries’ real footprint.'},
+      {id:'ewaste', u:'4', t:'E-waste flows', idea:'Waste moves from rich to poorer countries.', ev:'Agbogbloshie in Ghana; the Basel Convention restricts hazardous waste exports.', eval:'Illegal flows continue despite the rules.'},
+      {id:'plastic', u:'4', t:'Plastic waste exports', idea:'Waste flows shift when one country closes its door.', ev:'China banned most plastic waste imports in 2018; exports moved to Malaysia, Vietnam and Indonesia, and Malaysia returned some containers in 2019.', eval:'Governments can protect citizens by refusing waste, but the problem moves elsewhere.'},
+      {id:'palm', u:'6', t:'Agribusiness and palm oil', idea:'Global demand drives land clearance in producing regions.', ev:'Indonesia and Malaysia produce around 85% of palm oil.', eval:'Producing regions bear the environmental cost of global consumption.'},
+      {id:'haze', u:'6', t:'Trans-boundary haze', idea:'Pollution spreads in a regional pattern from its sources.', ev:'Smoke from Sumatra and Kalimantan affects Singapore and Malaysia.', eval:'Neighbours suffer without controlling the source.'},
+      {id:'ship', u:'6', t:'Shipping lanes and ports', idea:'Pollution is concentrated in linear patterns along busy routes.', ev:'The Strait of Malacca, the English Channel and major ports.', eval:'Coastal communities near hubs bear more of the cost.'},
+      {id:'sglaw', u:'6', t:'Government action', idea:'States can regulate polluters and act beyond their borders.', ev:'Singapore’s 2014 haze law; the IMO’s 2020 sulphur cap.', eval:'Hard to enforce on activities in other countries.'},
+      {id:'csr', u:'5', t:'TNC responsibility', idea:'Companies can protect environments where governments fail.', ev:'IKEA’s FSC timber sourcing; no-deforestation policies.', eval:'Voluntary, and sometimes greenwashing.'},
+      {id:'gp', u:'6', t:'Civil society campaigns', idea:'NGOs expose polluters and pressure governments and companies.', ev:'Greenpeace campaigns against deforestation and plastic pollution.', eval:'No legal power; relies on public pressure.'},
+      {id:'ccom', u:'C', core:'Unit 2: Global climate', t:'Oceans and atmosphere', idea:'Some impacts affect the global commons, beyond any one government.', ev:'Climate change; ocean plastics; the Paris Agreement (2015).', eval:'Only global cooperation can protect citizens from these impacts.'}
+    ],
+    edges: [
+      ['hicair','embc','hides','Cleaner local air can hide the emissions rich countries cause through imports.'],
+      ['embc','ccom','adds to','Wherever emissions occur, they add to global climate change.'],
+      ['ewaste','plastic','similar pattern','Waste flows from rich to poorer countries, moving when rules change.'],
+      ['plastic','sglaw','shows limits of','One government’s ban protects its citizens but pushes waste to others.'],
+      ['palm','haze','causes','Clearing land for plantations drives the fires behind the haze.'],
+      ['haze','sglaw','prompted','The haze led Singapore to pass its own cross-border law.'],
+      ['csr','palm','tries to reduce','No-deforestation pledges aim to cut agribusiness impacts.'],
+      ['gp','csr','pressures','Campaigns push companies to adopt stronger policies.'],
+      ['ship','ccom','adds to','Shipping emissions and spills affect the oceans and atmosphere.']
+    ],
+    route: [
+      {h:'Introduction', n:[], tx:'Define global flows and environmental impacts at local, regional and global scales. Argument: costs are concentrated in producing and receiving places, but some impacts are shared by all; governments can protect citizens only partly.'},
+      {h:'The pattern of impacts', n:['ewaste','plastic','palm','ship','haze'], tx:'Waste, agribusiness, shipping and haze produce clear spatial patterns.'},
+      {h:'Rich countries: cleaner but not clean', n:['hicair','embc','ccom'], tx:'The global shift improved local environments in rich countries, but shared climate impacts remain.'},
+      {h:'Who protects citizens?', n:['sglaw','csr','gp'], tx:'Governments, TNCs and civil society each help, with clear limits.'},
+      {h:'Conclusion', n:[], tx:'Judge the extent: local and regional impacts can be partly managed by governments; global impacts need cooperation. Poorer places bear more of the cost.'}
+    ]
+  });
+
+  MAPS.push({
+    id: 'future', short: 'Future of globalisation',
+    q: 'Will improving communications technology keep globalisation accelerating, or will other forces slow it down?',
+    focus: 'Processes, power, possibilities',
+    nodes: [
+      {id:'kof', u:'4', t:'Measuring globalisation', idea:'Indices show globalisation is not growing at the same rate in every dimension.', ev:'Trade as a share of world GDP has barely grown since 2008, a slowdown sometimes called “slowbalisation”, while data flows keep rising.', eval:'Globalisation may be changing form rather than slowing.'},
+      {id:'net', u:'4', t:'Internet and streaming', idea:'Digital communication connects people and markets instantly.', ev:'Video calls, streaming and online shopping across borders.', eval:'Easy to connect, but not everyone can.'},
+      {id:'ai', u:'4', t:'AI and the Internet of Things', idea:'New technology could connect production and services even more closely.', ev:'AI translation, cloud services and remote work.', eval:'Could also bring production home, reducing some flows.'},
+      {id:'dbh', u:'4', t:'Digital divides', idea:'Uneven access limits how far technology spreads globalisation.', ev:'Rural and low-income areas have weaker access.', eval:'Mobile and satellite internet are narrowing the gap.'},
+      {id:'bloc', u:'4', t:'Trade agreements', idea:'International cooperation, not just technology, drives globalisation.', ev:'RCEP (in force 2022) and AfCFTA (2021).', eval:'Shows globalisation can accelerate for political reasons too.'},
+      {id:'smc', u:'5', t:'Social media and global culture', idea:'Platforms spread culture and ideas worldwide.', ev:'K-pop and TikTok trends reach global audiences.', eval:'Can also fuel identity politics and division.'},
+      {id:'fw', u:'5', t:'Censorship', idea:'Governments can limit digital globalisation.', ev:'China’s Great Firewall; internet shutdowns during protests.', eval:'Could split the internet into separate national systems.'},
+      {id:'prot', u:'5', t:'Protectionism', idea:'Trade barriers slow economic globalisation.', ev:'US tariffs on China from 2018 and much wider tariffs from 2025.', eval:'Political choices can reverse trends whatever the technology.'},
+      {id:'nat', u:'6', t:'Renewed nationalism', idea:'Political backlash slows integration.', ev:'Brexit; “America First”.', eval:'May be a temporary swing rather than a permanent reversal.'},
+      {id:'covid', u:'6', t:'Shocks and disruption', idea:'Global crises can slow some flows and speed up others.', ev:'COVID-19 cut travel and trade in 2020 but sped up remote work and online services.', eval:'Shows physical flows and digital flows can move in opposite directions.'},
+      {id:'reshore', u:'6', t:'Re-shoring', idea:'Firms shorten supply chains to reduce risk.', ev:'The US CHIPS Act (2022); near-shoring to Mexico.', eval:'Regional globalisation may replace global supply chains.'}
+    ],
+    edges: [
+      ['net','smc','spreads','Faster communication spreads culture and ideas.'],
+      ['ai','net','builds on','New technologies extend digital connection.'],
+      ['ai','reshore','may enable','Automation could make producing at home cheaper.'],
+      ['dbh','net','limits','Not everyone can join digital globalisation.'],
+      ['fw','net','restricts','States can block or split the internet.'],
+      ['prot','nat','driven by','Nationalist politics leads to trade barriers.'],
+      ['covid','reshore','accelerated','Pandemic disruption pushed firms to shorten supply chains.'],
+      ['kof','covid','shows','Data shows physical flows slowing while digital flows grow.'],
+      ['bloc','prot','counters','Regional trade deals keep integration growing despite tariffs elsewhere.']
+    ],
+    route: [
+      {h:'Introduction', n:['kof'], tx:'Define globalisation and communications technology. Argument: technology will keep driving digital and cultural globalisation, but political and economic forces may slow physical flows.'},
+      {h:'Technology drives acceleration', n:['net','ai','smc'], tx:'Communication technology keeps connecting people, ideas and services.'},
+      {h:'Other forces also drive it', n:['bloc'], tx:'Trade agreements show political cooperation matters as well.'},
+      {h:'Forces that slow or reverse it', n:['dbh','fw','prot','nat','covid','reshore'], tx:'Divides, censorship, protectionism, nationalism and shocks.'},
+      {h:'Conclusion', n:[], tx:'Judge the future: globalisation is likely to keep growing in digital and cultural forms, but economic globalisation may become more regional. Whether it accelerates depends on who controls the technology and on political choices.'}
+    ]
+  });
+
+  MAPS.push({
+    id: 'opposition', short: 'Opposition to globalisation',
+    q: 'To what extent is opposition to globalisation driven by cultural concerns rather than economic, political or environmental ones?',
+    focus: 'Places, power, perspectives',
+    nodes: [
+      {id:'cimp', u:'5', t:'Cultural imperialism', idea:'Fear that global, often Western, culture replaces local culture.', ev:'Around 40% of the world’s languages are at risk of disappearing; global brands in historic places.', eval:'Many people welcome global culture and blend it with their own.'},
+      {id:'star', u:'5', t:'Heritage and global brands', idea:'Opposition is strongest where brands meet national symbols.', ev:'Starbucks closed its store in Beijing’s Forbidden City in 2007 after public criticism.', eval:'A symbolic campaign with little effect on trade overall.'},
+      {id:'eat', u:'5', t:'Buying local', idea:'Movements defend local food cultures and economies.', ev:'Thailand’s “Eat Local” movement.', eval:'Mixes cultural, economic and environmental motives.'},
+      {id:'dias', u:'5', t:'Migration and identity', idea:'Immigration can create fears about national identity.', ev:'Large diaspora communities in European and US cities.', eval:'Diasporas also show many people embrace diversity.'},
+      {id:'min', u:'5', t:'Anti-immigration groups', idea:'Some civil society groups oppose migration directly.', ev:'The Minuteman Project on the US–Mexico border.', eval:'Motives combine identity, security and jobs.'},
+      {id:'brexit', u:'6', t:'Sovereignty: Brexit', idea:'Opposition to rules made by international bodies.', ev:'The 2016 “take back control” campaign.', eval:'A political motive, linked to identity and immigration.'},
+      {id:'amfirst', u:'6', t:'Jobs and trade: America First', idea:'Opposition driven by job losses and trade deficits.', ev:'Withdrawal from the TPP (2017); tariffs on China.', eval:'Mainly economic, though framed in national identity.'},
+      {id:'deind', u:'5', t:'Deindustrialisation', idea:'Places that lost industry often oppose globalisation most.', ev:'Former manufacturing towns in the US Rust Belt and northern England.', eval:'Suggests economic loss underlies much cultural resentment.'},
+      {id:'gp', u:'6', t:'Environmental opposition', idea:'Campaigns against the environmental costs of global production.', ev:'Greenpeace campaigns against deforestation by global supply chains.', eval:'Opposes how globalisation works rather than globalisation itself.'},
+      {id:'imfp', u:'4', t:'Protests against IMF conditions', idea:'In the global South, opposition often targets debt and austerity.', ev:'Protests in Kenya in 2024 against tax rises in a finance bill linked to an IMF programme.', eval:'Mainly economic and political, not cultural.'},
+      {id:'rn', u:'5', t:'Resource nationalism', idea:'Governments resist foreign control of resources.', ev:'Bolivia’s gas nationalisation (2006); Indonesia’s nickel export ban (2020).', eval:'Economic and political motives dominate.'}
+    ],
+    edges: [
+      ['cimp','star','example of','Opposition to a global brand in a national heritage site.'],
+      ['cimp','eat','also motivates','Defending local food culture against global chains.'],
+      ['dias','min','provokes','Visible migration can trigger anti-immigration movements.'],
+      ['min','brexit','related to','Immigration was a central issue in the Brexit campaign.'],
+      ['deind','amfirst','fuels','Job losses in industrial regions fed support for protectionism.'],
+      ['deind','brexit','fuels','Areas with industrial decline voted strongly to leave the EU.'],
+      ['gp','eat','shares concern','Both oppose the environmental costs of long supply chains.'],
+      ['imfp','rn','both economic','In the global South, opposition often targets debt and control of resources.']
+    ],
+    route: [
+      {h:'Introduction', n:[], tx:'Define cultural, economic, political and environmental opposition. Argument: cultural concerns are important, especially in the global North, but they are often bound up with economic loss; in the global South, economic and political motives dominate.'},
+      {h:'Cultural opposition', n:['cimp','star','eat','dias'], tx:'Fears about language, heritage, food and identity.'},
+      {h:'Economic and political opposition', n:['deind','amfirst','brexit','min'], tx:'Job losses and sovereignty, often expressed in cultural terms.'},
+      {h:'Global South and environmental opposition', n:['imfp','rn','gp'], tx:'Debt, resources and environmental costs.'},
+      {h:'Conclusion', n:[], tx:'Judge the extent: culture is a powerful way of expressing opposition, but the underlying causes are often economic. The balance varies between the global North and South, and between groups within countries.'}
+    ]
+  });
+
+  /* references, concepts, lenses and evaluation for the additions */
+  var D = window.SBL_P3_REFS.def;
+
+  var R = {aid:'4.2',conflict:'6.1',hicw:'4.2',aa:'5.1',iso:'4.3',nres:'4.3',migr:'4.2',afcfta:'4.1',cobalt:'4.1',brain:'4.2',illicit:'4.2',mob:'4.3',sdg:'5.1',cexp:'5.2',yemen:'6.1',
+    hicair:'6.2',embc:'6.2',ewaste:'4.2',plastic:'4.2',palm:'6.2',ai:'4.3',smc:'5.2',covid:'6.1',cimp:'5.2',star:'5.3',amfirst:'6.1',imfp:'4.1'};
+  for (var k in R) D[k] = R[k];
+  window.SBL_P3_REFS.over.envimpact = {gp:'6.3'};
+
+  var C = window.SBL_P3_CONCEPT;
+  C.power.aid = [PW,PL,PR]; C.power.conflict = [PW,PL,PO];
+  C.inequality.hicw = [PL,PW,PR];
+  C.culture.aa = [PW,PL,PO];
+  C.resilience.ctech = [PO,PR,PW];
+  C.physical = {iso:[PL,PR],nres:[PL,PW],opec:[PL,PW],dbh:[PL,PW],cont:[PR,PL,PO],migr:[PW,PR],dias:[PR,PL],thai:[PL,PR],prot:[PW,PL],nk:[PW,PL],cpopd:[PL,PR]};
+  C.lics = {afcfta:[PW,PL],cobalt:[PW,PL],rem:[PR,PL],brain:[PR,PL,PW],illicit:[PR,PW],mob:[PO,PR,PW],sdg:[PW,PO],cexp:[PR,PL,PW],malala:[PO,PW],yemen:[PW,PL],ccop:[PW,PO]};
+  C.envimpact = {hicair:[PL,PR],embc:[PR,PL,PW],ewaste:[PR,PL,PW],plastic:[PR,PW,PL],palm:[PL,PR],haze:[PL,PR],ship:[PL,PR],sglaw:[PW,PO],csr:[PW,PO],gp:[PO,PW],ccom:[PL,PO,PR]};
+  C.future = {kof:[PR,PL],net:[PR,PL],ai:[PO,PR],dbh:[PL,PW],bloc:[PW,PR,PO],smc:[PR,PL],fw:[PW,PL],prot:[PW,PR],nat:[PW,PO],covid:[PR,PO],reshore:[PO,PR,PL]};
+  C.opposition = {cimp:[PW,PL,PR],star:[PL,PW],eat:[PO,PL],dias:[PR,PL],min:[PW,PL],brexit:[PW,PO],amfirst:[PW,PR],deind:[PL,PR],gp:[PO,PW],imfp:[PW,PL],rn:[PW,PL]};
+
+  var L = window.SBL_P3_LENS;
+  L.physical = {place:'Which places are isolated by relief, distance or climate, and does this matter more at local or national scale?',process:'How have transport and communication technologies reduced the effect of physical barriers over time?',power:'Which human decisions (migration rules, trade policy, isolationism) connect or disconnect places?',possibility:'Will physical barriers keep shrinking in importance, or will politics decide connectivity in future?'};
+  L.lics = {place:'Which places in low-income countries are connected (megacities) and which are not (remote rural areas)?',process:'Through which flows (remittances, culture, resources) do lower-income countries influence others?',power:'Compare types of power: collective, economic, cultural, moral and disruptive.',possibility:'Could groups such as the African Union or climate coalitions gain more power in future?'};
+  L.envimpact = {place:'Where are the costs felt: producing regions, waste-receiving countries, neighbours, or everyone?',process:'Which flows (goods, waste, people, capital) cause which impacts?',power:'Who has the power to protect citizens: national governments, global agreements, TNCs or civil society?',possibility:'Which forms of governance could protect citizens better in future?'};
+  L.future = {place:'Which places are still left out of digital globalisation?',process:'Which processes are accelerating (data, culture) and which are slowing (trade, migration)?',power:'Who controls the technology and the rules: governments, tech firms or users?',possibility:'Is the future faster, slower, more regional or more divided globalisation?'};
+  L.opposition = {place:'Does opposition differ between the global North and South, and between cities and declining industrial towns?',process:'How do cultural change, deindustrialisation and migration create opposition?',power:'Who leads opposition: governments, citizens, civil society or populist parties?',possibility:'Will opposition slow globalisation, or reshape it?'};
+
+  var E = window.SBL_P3_EVAL;
+  E.power.push('Weigh opportunities (investment, aid, technology) against challenges (debt, conflict, dependence) for other countries.');
+  E.inequality.push('Consider winners and losers within wealthy countries, not just between rich and poor countries.');
+  E.culture.push('Discuss struggles over identity at different scales, from national politics to personal and minority identities.');
+  E.resilience.push('Ask whether new technology is the best way to manage risk, compared with policy, behaviour and cooperation, and who has access to it.');
+  E.physical = ['Judge relative importance at different scales: remote valleys within well-connected countries, and whole countries.','Consider change over time: can physical barriers be overcome by technology?','Separate the different dimensions: transport, digital connection, language, religion and ethnicity.'];
+  E.lics = ['Distinguish types of power and influence: hard, soft, economic, collective and disruptive.','Compare connected megacities with isolated rural areas, and citizens with governments.','Consider lower-income countries as environmental stakeholders in climate negotiations.'];
+  E.envimpact = ['Examine patterns at different scales: local, regional (haze) and global (climate).','Compare different flows: which produce the clearest patterns of impact?','Compare governments with TNC frameworks and civil society as protectors of citizens.'];
+  E.future = ['Focus on the future: will it keep accelerating, not just has it grown?','Compare economic, social and political globalisation: are they moving in the same direction?','Question who has access to, and power over, technology.'];
+  E.opposition = ['Compare global North and global South contexts.','Compare different stakeholders: governments, citizens, civil society and populist parties.','Ask whether cultural arguments are a cause of opposition or a way of expressing economic concerns.'];
+})();
+
+/* Economic growth map (2025 themes: FDI and natural resources) */
+(function () {
+  window.SBL_P3_MAPS.push({
+    id: 'growth', short: 'Drivers of economic growth',
+    q: 'What best explains why some places grow faster economically than others: foreign investment, natural resources or other factors?',
+    focus: 'Places, processes, power',
+    nodes: [
+      {id:'fdi', u:'4', t:'FDI and TNCs', idea:'Foreign investment brings capital, jobs, technology and access to markets.', ev:'FDI turned Shenzhen into a megacity after 1980; Samsung makes a large share of its smartphones in Vietnam.', eval:'Growth is concentrated in a few zones and cities, not spread evenly.'},
+      {id:'repat', u:'6', t:'Profit repatriation', idea:'Profits from FDI can leave the host country.', ev:'TNCs send profits home or to low-tax locations, as with Apple’s Irish structures.', eval:'Limits how much FDI benefits the host economy.'},
+      {id:'nres', u:'4', t:'Natural resources', idea:'Oil, gas and minerals can fund rapid growth.', ev:'Gulf states built global hubs with oil wealth; Norway’s sovereign wealth fund is the largest in the world.', eval:'Depends on governance and on what the wealth is spent on.'},
+      {id:'curse', u:'4', t:'The resource curse', idea:'Resource wealth can slow wider growth.', ev:'Nigeria’s oil and the DR Congo’s cobalt have not brought broad prosperity.', eval:'Colonial history, corruption and conflict explain why resources are not always a benefit.'},
+      {id:'opec', u:'4', t:'OPEC', idea:'Producer groups raise resource income through quotas.', ev:'OPEC+ production cuts raise oil revenues.', eval:'Price crashes, such as in 2020, show the risks of dependence.'},
+      {id:'rn', u:'5', t:'Resource nationalism', idea:'States take control of resources to keep more of the wealth.', ev:'Indonesia’s 2020 nickel export ban attracted investment in local processing.', eval:'Can deter some foreign investors.'},
+      {id:'ftz', u:'4', t:'Free trade zones and blocs', idea:'Trade rules and zones attract investment and trade.', ev:'Dubai’s free zones; the EU single market; AfCFTA (2021).', eval:'Growth may stay inside the zone rather than spreading.'},
+      {id:'techg', u:'4', t:'Technology and connectivity', idea:'Places with few resources can grow through connectivity and skills.', ev:'Singapore has almost no natural resources but is one of the richest countries; Estonia’s digital economy.', eval:'Shows resources are not necessary for growth.'},
+      {id:'hd', u:'5', t:'Human development', idea:'Education and health create productive workforces.', ev:'South Korea invested heavily in education before its rapid growth.', eval:'Human development is both a cause and a result of growth.'},
+      {id:'rejg', u:'5', t:'Rejecting globalisation', idea:'Closing off from global flows can limit growth.', ev:'North Korea’s isolation; new trade barriers after Brexit.', eval:'Some protection may help infant industries grow.'},
+      {id:'cdd', u:'C', core:'Unit 1: Changing population', t:'Demographic dividend', idea:'A large working-age population can drive growth.', ev:'Rapid growth in East Asia coincided with a large working-age population; India and Bangladesh today.', eval:'Only realised if there are jobs and education.'}
+    ],
+    edges: [
+      ['fdi','repat','weakened by','Profit repatriation reduces how much FDI benefits the host country.'],
+      ['fdi','ftz','attracted by','Zones and trade agreements attract FDI.'],
+      ['nres','curse','can lead to','Resource dependence can harm governance and other sectors.'],
+      ['nres','opec','organised through','Producer groups try to raise resource income.'],
+      ['rn','nres','controls','Governments reclaim a larger share of resource wealth.'],
+      ['rn','fdi','redirects','Export bans can attract FDI into processing at home.'],
+      ['techg','fdi','attracts','Skills and connectivity attract high-value investment.'],
+      ['hd','techg','enables','Education builds the skills a connected economy needs.'],
+      ['cdd','hd','needs','A demographic dividend depends on education and jobs.'],
+      ['rejg','fdi','deters','Isolation and trade barriers discourage investment.']
+    ],
+    route: [
+      {h:'Introduction', n:[], tx:'Define economic growth (GDP, GNI) and the scales involved. Argument: no single factor explains growth; FDI and resources matter, but governance, people and connectivity decide whether they lead to growth.'},
+      {h:'Foreign investment', n:['fdi','ftz','repat'], tx:'FDI drives growth in zones and cities, but profits can leave.'},
+      {h:'Natural resources', n:['nres','opec','rn','curse'], tx:'Resources fund growth in some places, but can be a curse.'},
+      {h:'Other factors', n:['techg','hd','cdd','rejg'], tx:'Skills, connectivity, population and openness can matter more.'},
+      {h:'Conclusion', n:[], tx:'Judge the extent and the scale: FDI and resources explain growth in particular places, but human and political factors decide whether growth is sustained and shared.'}
+    ]
+  });
+  var D = window.SBL_P3_REFS.def;
+  D.fdi='4.2'; D.repat='6.1'; D.curse='4.3'; D.ftz='4.3'; D.techg='4.3'; D.hd='5.1'; D.rejg='5.3';
+  window.SBL_P3_CONCEPT.growth = {fdi:[PR,PL,PW],repat:[PR,PW],nres:[PL,PR],curse:[PL,PW,PO],opec:[PW,PL],rn:[PW,PL],ftz:[PL,PR,PW],techg:[PR,PL,PO],hd:[PO,PL],rejg:[PW,PO],cdd:[PL,PO]};
+  window.SBL_P3_LENS.growth = {place:'Does growth happen in whole countries, or mainly in particular zones, cities and resource regions?',process:'Which flows (investment, resources, trade, people) drive growth, and how?',power:'Who controls the wealth: TNCs, governments, elites or citizens?',possibility:'Which factors will drive growth in future as resources run down and technology changes?'};
+  window.SBL_P3_EVAL.growth = ['Compare scales: national growth versus growth in particular local places, such as free trade zones.','Ask how far the possibilities of FDI and resources are realised, given profit leakage, colonial history and exploitation.','Judge whether one factor can be “main”, or whether factors work together.'];
+})();
