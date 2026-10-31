@@ -358,3 +358,29 @@ window.SBL_P3_EVAL = {
   technology: ['Judge whether technology is a cause or an enabler, compared with political and economic factors.','Compare who gains and who is excluded (digital divides).','Weigh new opportunities against new risks and controls.'],
   supply: ['Compare stakeholders: TNCs, small firms, workers, consumers and communities.','Compare places: export zones, deindustrialised regions and consumer societies.','Consider change over time, including recent disruption and re-shoring.']
 };
+
+/* The four key concepts (places, processes, power, possibilities): main concept for each idea */
+window.SBL_P3_CONCEPT = {
+  power: {sup:'power',mgo:'power',opec:'power',rn:'power',tnc:'process',tax:'process',kof:'place',cpop:'place',sm:'possibility',cso:'possibility'},
+  inequality: {flows:'process',rem:'process',tsc:'process',cmig:'process',dbh:'place',hdi:'place',shift:'place',haze:'place',csr:'power',mpesa:'possibility'},
+  culture: {homo:'place',dias:'place',thai:'place',net:'process',cmig:'process',glocal:'possibility',tnc:'power',nk:'power',nat:'power',eat:'possibility'},
+  risk: {tsc:'process',oil:'process',cyber:'process',haze:'place',ship:'place',dev:'place',cres:'power',fair:'power',res:'possibility',cclim:'possibility'},
+  sovereignty: {tax:'power',imf:'power',ctrl:'power',prot:'power',tech:'process',bloc:'process',haze:'place',nk:'place',brexit:'possibility',cclim:'possibility'},
+  civil: {gp:'power',ai:'power',ifa:'power',hk:'place',min:'place',eat:'place',crowd:'process',cclim:'process',malala:'possibility',fair:'possibility'},
+  resilience: {reshore:'process',imo:'process',epass:'process',cyber:'power',asean:'power',sglaw:'power',local:'place',crowd:'possibility',oecd:'possibility',cclim:'possibility'},
+  technology: {cont:'process',net:'process',cpop:'place',sm:'power',fw:'power',pol:'power',epass:'power',mpesa:'possibility',tech:'possibility',cyber:'possibility'},
+  supply: {tnc:'power',nat:'power',sez:'place',work:'place',deind:'place',shift:'place',cont:'process',cons:'process',risk:'process',ccarb:'process',reshore:'possibility'}
+};
+
+/* A question to ask through each concept lens, for each essay */
+window.SBL_P3_LENS = {
+  power: {place:'Which places hold power, and how does being highly connected differ from being powerful?',process:'Through which processes (investment, profit shifting, demographic change) is power moving?',power:'Who sets the rules, controls resources and decides? Compare hard, soft and economic power.',possibility:'Could power spread more widely in future through civil society, technology or emerging economies?'},
+  inequality: {place:'Which places gain and which are left behind, and does the pattern differ at global, national and local scales?',process:'Which flows (trade, FDI, migration, remittances) spread or concentrate benefits?',power:'Who decides how benefits are shared: TNCs, governments or consumers?',possibility:'Can social enterprise, CSR or new technology narrow the gap, and how far?'},
+  culture: {place:'Do connected cities and remote rural or border places change in the same way?',process:'How do diffusion, migration and digital media spread culture?',power:'Who has the power to shape culture, and who can resist it?',possibility:'Is the future homogenisation, hybridity or renewed difference?'},
+  risk: {place:'Where are the risks felt, and where are the benefits felt? Are they the same places?',process:'How does connectivity transmit both benefits and shocks?',power:'Who controls key resources and standards, and who is most exposed?',possibility:'Can resilience strategies and climate action change the balance in future?'},
+  sovereignty: {place:'Which states lose control and which keep it? Compare large and small, open and closed states.',process:'Which processes (technology, blocs, capital flows) bypass state control?',power:'How do states use protectionism, controls and taxes to reassert power?',possibility:'Will cooperation or nationalism shape sovereignty in future?'},
+  civil: {place:'How does the political context of a place affect what civil society can achieve?',process:'How do digital networks and campaigns spread civil society action?',power:'How much power do NGOs and unions have compared with states and TNCs?',possibility:'What could civil society achieve in future, and what limits it?'},
+  resilience: {place:'Which places and communities can build resilience locally?',process:'Which global rules and processes manage risks that cross borders?',power:'Who has the authority and resources to act: states, regions or TNCs?',possibility:'Which combination of local and global action offers the best future?'},
+  technology: {place:'Which places are connected or excluded by technology?',process:'How has technology changed the speed and scale of flows?',power:'Do states, TNCs or citizens gain most power from technology?',possibility:'Will future technology open up global interactions or close them down?'},
+  supply: {place:'Which places gain (export zones, consumer societies) and which lose (deindustrialised regions)?',process:'How do containerisation, offshoring and embedded carbon link producers and consumers?',power:'Who holds power in the supply chain: TNCs, workers, governments or consumers?',possibility:'Will re-shoring and regulation change who benefits in future?'}
+};

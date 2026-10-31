@@ -8,13 +8,21 @@
     'C': { name: 'Core (Paper 2)', short: 'Core', col: '#0f766e', fill: '#f0fdfa' }
   };
   var ORDER = ['4', '5', '6', 'C'];
+  var CONC = {
+    place: { name: 'Places', col: '#0e7490', fill: '#ecfeff', def: 'Places are locations with their own characteristics, at every scale from local to global. They are connected to other places, are seen differently by different people, and change over time.' },
+    process: { name: 'Processes', col: '#a16207', fill: '#fefce8', def: 'Processes are the human and physical mechanisms that cause change over time, such as flows of trade, migration, diffusion and globalisation.' },
+    power: { name: 'Power', col: '#be123c', fill: '#fff1f2', def: 'Power is the ability to influence decisions and bring about change. Ask who decides, who gains and who loses, at each scale.' },
+    possibility: { name: 'Possibilities', col: '#15803d', fill: '#f0fdf4', def: 'Possibilities are the alternative outcomes, futures and solutions. Ask what could happen next, and how certain we can be.' }
+  };
+  var CORDER = ['place', 'process', 'power', 'possibility'];
+  var CMAP = window.SBL_P3_CONCEPT || {}, LENS = window.SBL_P3_LENS || {};
   var W = 1000, H = 700, CX = 500, CY = 350, NW = 200, NH = 66;
   var NS = 'http://www.w3.org/2000/svg';
 
   var root = document.getElementById('p3-app');
   if (!root || !MAPS.length) return;
 
-  var st = { map: 0, mode: 'explore', sel: null, step: 0, pick: [], hidden: {} };
+  var st = { map: 0, mode: 'explore', sel: null, step: 0, pick: [], hidden: {}, lens: null };
   var pos = {};
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -39,6 +47,9 @@
   function visible(n) { return !st.hidden[n.u]; }
   var REFS = window.SBL_P3_REFS || { def: {}, over: {} }, SUB = window.SBL_P3_SUB || {}, EVAL = window.SBL_P3_EVAL || {};
   function ref(n) { if (n.u === 'C') return ''; var o = REFS.over[M().id] || {}; return o[n.id] || REFS.def[n.id] || ''; }
+  function conc(n) { return (CMAP[M().id] || {})[n.id] || ''; }
+  function pal(n) { return st.mode === 'concepts' && conc(n) ? CONC[conc(n)] : UNITS[n.u]; }
+  function cchip(n) { var c = CONC[conc(n)]; return c ? '<span class="p3-chip" style="background:' + c.fill + ';color:' + c.col + ';border-color:' + c.col + '">Concept: ' + c.name + '</span>' : ''; }
   function tagOf(n) { return n.u === 'C' ? 'CORE' : (ref(n) || 'U' + n.u); }
 
   /* ---------- skeleton ---------- */
@@ -49,8 +60,10 @@
         '<button type="button" data-mode="explore">Explore</button>' +
         '<button type="button" data-mode="route">Essay route</button>' +
         '<button type="button" data-mode="link">Link challenge</button>' +
+        '<button type="button" data-mode="concepts">4Ps lens</button>' +
       '</div>' +
       '<div class="p3-legend" aria-label="Show or hide units"></div>' +
+      '<div class="p3-legend p3-legend--c" aria-label="Choose a concept lens" hidden></div>' +
     '</div>' +
     '<div class="p3-stage">' +
       '<div class="p3-canvas"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-labelledby="p3-svg-title"><title id="p3-svg-title">Synthesis mind map</title></svg></div>' +
@@ -60,6 +73,7 @@
 
   var pickEl = root.querySelector('.p3-pick');
   var legendEl = root.querySelector('.p3-legend');
+  var cLegendEl = root.querySelector('.p3-legend--c');
   var svg = root.querySelector('svg');
   var panel = root.querySelector('.p3-panel');
   var listEl = root.querySelector('.p3-list');
@@ -68,7 +82,7 @@
     var b = document.createElement('button');
     b.type = 'button'; b.setAttribute('role', 'tab');
     b.innerHTML = '<span>Essay ' + (i + 1) + '</span>' + esc(m.short);
-    b.addEventListener('click', function () { st.map = i; st.sel = null; st.step = 0; st.pick = []; layout(); draw(); });
+    b.addEventListener('click', function () { st.map = i; st.sel = null; st.step = 0; st.pick = []; st.revealed = false; layout(); draw(); });
     pickEl.appendChild(b);
   });
   ORDER.forEach(function (u) {
@@ -79,13 +93,23 @@
     b.addEventListener('click', function () { st.hidden[u] = !st.hidden[u]; if (st.sel && node(st.sel).u === u) st.sel = null; draw(); });
     legendEl.appendChild(b);
   });
+  CORDER.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.c = c;
+    b.innerHTML = '<i style="background:' + CONC[c].col + '"></i>' + CONC[c].name;
+    b.addEventListener('click', function () { st.lens = st.lens === c ? null : c; draw(); });
+    cLegendEl.appendChild(b);
+  });
+  function setMode(md) { var re = (md === 'concepts') !== (st.mode === 'concepts'); st.mode = md; st.sel = null; st.pick = []; st.step = 0; st.revealed = false; if (re) layout(); draw(); }
   root.querySelectorAll('.p3-modes button').forEach(function (b) {
-    b.addEventListener('click', function () { st.mode = b.dataset.mode; st.sel = null; st.pick = []; st.step = 0; draw(); });
+    b.addEventListener('click', function () { setMode(b.dataset.mode); });
   });
 
   /* ---------- layout ---------- */
   function layout() {
-    var ns = M().nodes.slice().sort(function (a, b) { return ORDER.indexOf(a.u) - ORDER.indexOf(b.u); });
+    var ns = M().nodes.slice().sort(st.mode === 'concepts'
+      ? function (a, b) { return CORDER.indexOf(conc(a)) - CORDER.indexOf(conc(b)) || ORDER.indexOf(a.u) - ORDER.indexOf(b.u); }
+      : function (a, b) { return ORDER.indexOf(a.u) - ORDER.indexOf(b.u); });
     var n = ns.length, rx = 382, ry = n > 10 ? 286 : 268;
     NW = n > 10 ? 182 : 200;
     pos = {};
@@ -139,6 +163,13 @@
       m.edges.forEach(function (e, i) { if (nodes[e[0]] && nodes[e[1]]) edges[i] = 1; });
       return { nodes: nodes, edges: edges, labels: true };
     }
+    if (st.mode === 'concepts') {
+      if (!st.lens) return null;
+      m.nodes.forEach(function (n) { if (conc(n) === st.lens) nodes[n.id] = 1; });
+      var lensNodes = Object.keys(nodes);
+      m.edges.forEach(function (e, i) { if (lensNodes.indexOf(e[0]) >= 0 || lensNodes.indexOf(e[1]) >= 0) { edges[i] = 1; nodes[e[0]] = nodes[e[0]] || 2; nodes[e[1]] = nodes[e[1]] || 2; } });
+      return { nodes: nodes, edges: edges, labels: true };
+    }
     if (st.mode === 'link' && st.pick.length) {
       st.pick.forEach(function (id) { nodes[id] = 1; });
       if (st.revealed && st.pick.length === 2) {
@@ -156,6 +187,8 @@
     var m = M();
     pickEl.querySelectorAll('button').forEach(function (b, i) { b.classList.toggle('is-on', i === st.map); b.setAttribute('aria-selected', i === st.map); });
     root.querySelectorAll('.p3-modes button').forEach(function (b) { b.classList.toggle('is-on', b.dataset.mode === st.mode); });
+    legendEl.hidden = st.mode === 'concepts'; cLegendEl.hidden = st.mode !== 'concepts';
+    cLegendEl.querySelectorAll('button').forEach(function (b) { b.classList.toggle('is-on', st.lens === b.dataset.c); b.classList.toggle('is-off', !!st.lens && st.lens !== b.dataset.c); });
     legendEl.querySelectorAll('button').forEach(function (b) {
       var used = m.nodes.some(function (n) { return n.u === b.dataset.u; });
       b.hidden = !used; b.classList.toggle('is-off', !!st.hidden[b.dataset.u]);
@@ -169,7 +202,7 @@
     m.nodes.forEach(function (n) {
       if (!visible(n)) return;
       var p = pos[n.id];
-      el('line', { x1: CX, y1: CY, x2: p.x, y2: p.y, stroke: UNITS[n.u].col, 'stroke-width': 1, 'stroke-dasharray': '3 5', opacity: f && !f.nodes[n.id] ? 0.08 : 0.28 }, gE);
+      el('line', { x1: CX, y1: CY, x2: p.x, y2: p.y, stroke: pal(n).col, 'stroke-width': 1, 'stroke-dasharray': '3 5', opacity: f && !f.nodes[n.id] ? 0.08 : 0.28 }, gE);
     });
     // edges
     m.edges.forEach(function (e, i) {
@@ -196,13 +229,12 @@
       var t = el('text', { x: CX, y: CY - qh / 2 + 46 + i * 21, 'text-anchor': 'middle', 'font-size': 16, fill: '#fff', 'font-weight': 600 }, svg);
       t.textContent = l;
     });
-    svg.appendChild(gL);
     // nodes
     m.nodes.forEach(function (n) {
       if (!visible(n)) return;
-      var p = pos[n.id], U = UNITS[n.u];
-      var dim = f && !f.nodes[n.id], sel = st.sel === n.id || st.pick.indexOf(n.id) >= 0;
-      var g = el('g', { class: 'p3-node', tabindex: 0, role: 'button', 'aria-label': n.t + ' (' + U.short + ')', opacity: dim ? 0.3 : 1 }, svg);
+      var p = pos[n.id], U = pal(n);
+      var dim = f && !f.nodes[n.id], half = f && f.nodes[n.id] === 2, sel = st.sel === n.id || st.pick.indexOf(n.id) >= 0;
+      var g = el('g', { class: 'p3-node', tabindex: 0, role: 'button', 'aria-label': n.t + ' (' + UNITS[n.u].short + ')', opacity: dim ? 0.3 : (half ? 0.75 : 1) }, svg);
       el('rect', { x: p.x - NW / 2, y: p.y - NH / 2, width: NW, height: NH, rx: 12, fill: sel ? U.col : U.fill, stroke: U.col, 'stroke-width': sel ? 3 : 2 }, g);
       el('rect', { x: p.x - NW / 2, y: p.y - NH / 2, width: 8, height: NH, rx: 4, fill: U.col }, g);
       var lines = wrap(n.t, 21).slice(0, 2);
@@ -215,11 +247,13 @@
       g.addEventListener('click', function () { clickNode(n.id); });
       g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); clickNode(n.id); } });
     });
+    svg.appendChild(gL);
     drawPanel();
     drawList();
   }
 
   function clickNode(id) {
+    if (st.mode === 'concepts') { st.mode = 'explore'; layout(); }
     if (st.mode === 'route') st.mode = 'explore';
     if (st.mode === 'link') {
       if (st.pick.length >= 2 || st.revealed) { st.pick = []; st.revealed = false; }
@@ -245,7 +279,7 @@
         h = '<h3>Explore the map</h3><p class="p3-focus">Concepts: ' + esc(m.focus) + '</p><p>Each box is an idea you could use in this essay. The colour shows which unit it comes from. Lines show the links between ideas.</p><p><b>Click an idea</b> to see the key point, evidence, an evaluation point and how it connects to other ideas.</p><div class="p3-band"><b>Reaching the top band</b><span><i>9–12 marks:</i> <b>either</b> link several well-evidenced themes from different parts of the syllabus <b>or</b> evaluate throughout with a critical conclusion.</span><span><i>13–16 marks:</i> do <b>both</b>.</span><span>This map links ideas from ' + synthCount() + ' syllabus areas; aim to use at least three in your answer.</span></div>' + evalBox();
       } else {
         var n = node(st.sel);
-        h = chip(n) + '<h3>' + esc(n.t) + '</h3>' +
+        h = chip(n) + ' ' + cchip(n) + '<h3>' + esc(n.t) + '</h3>' +
           '<p><b>Key idea:</b> ' + esc(n.idea) + '</p>' +
           '<p><b>Evidence:</b> ' + esc(n.ev) + '</p>' +
           '<p class="p3-eval"><b>Evaluate:</b> ' + esc(n.eval) + '</p>';
@@ -259,6 +293,25 @@
           });
           h += '</ul>';
         }
+      }
+    } else if (st.mode === 'concepts') {
+      var L = LENS[m.id] || {};
+      if (!st.lens) {
+        h = '<h3>The 4Ps lens</h3><p>Every idea on this map is coloured by its main key concept. Pick a concept to see the ideas that use it, how they link to the others, and a question to ask through that lens.</p><div class="p3-cards">';
+        CORDER.forEach(function (c) {
+          var k = m.nodes.filter(function (n) { return conc(n) === c; }).length;
+          h += '<button type="button" data-lens="' + c + '" style="border-left-color:' + CONC[c].col + '"><b style="color:' + CONC[c].col + '">' + CONC[c].name + '</b> <small>' + k + ' idea' + (k === 1 ? '' : 's') + '</small><span>' + esc(CONC[c].def) + '</span></button>';
+        });
+        h += '</div><div class="p3-band"><b>Using the concepts to evaluate</b><span>Link across the concepts: a <i>process</i> changes a <i>place</i>, <i>power</i> decides who gains and who loses, and <i>possibilities</i> ask what could happen next.</span><span>A paragraph that uses two or more concepts together is usually more evaluative than one that uses a single concept.</span></div>';
+      } else {
+        var C = CONC[st.lens];
+        h = '<p class="p3-step" style="color:' + C.col + '">Concept lens</p><h3 style="color:' + C.col + '">' + C.name + '</h3><p>' + esc(C.def) + '</p>';
+        if (L[st.lens]) h += '<p class="p3-eval"><b>Ask for this essay:</b> ' + esc(L[st.lens]) + '</p>';
+        var ins = m.nodes.filter(function (n) { return conc(n) === st.lens; });
+        h += '<h4>Ideas through this lens</h4><ul class="p3-links">';
+        ins.forEach(function (n) { h += '<li><button type="button" data-go="' + n.id + '" style="border-left-color:' + C.col + '">' + esc(n.t) + '<small>' + esc(n.idea) + '</small></button></li>'; });
+        h += '</ul><p class="p3-hint">Faded boxes are ideas from other concepts that link to these. Click any idea to explore it.</p>';
+        h += '<div class="p3-nav">' + CORDER.filter(function (c) { return c !== st.lens; }).map(function (c) { return '<button type="button" data-lens="' + c + '" style="background:' + CONC[c].col + ';border-color:' + CONC[c].col + '">' + CONC[c].name + '</button>'; }).join('') + '</div>';
       }
     } else if (st.mode === 'route') {
       var s = m.route[st.step];
@@ -294,7 +347,8 @@
     var keep = panel.querySelector('#p3-ans'); var txt = keep ? keep.value : '';
     panel.innerHTML = h;
     var ta = panel.querySelector('#p3-ans'); if (ta && txt) ta.value = txt;
-    panel.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { st.sel = b.dataset.go; draw(); }); });
+    panel.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { if (st.mode === 'concepts') { st.mode = 'explore'; layout(); } st.sel = b.dataset.go; draw(); }); });
+    panel.querySelectorAll('[data-lens]').forEach(function (b) { b.addEventListener('click', function () { st.lens = b.dataset.lens; draw(); }); });
     panel.querySelectorAll('[data-step]').forEach(function (b) { b.addEventListener('click', function () { st.step += +b.dataset.step; draw(); }); });
     var r = panel.querySelector('[data-reveal]'); if (r) r.addEventListener('click', function () { st.revealed = true; draw(); });
     var ag = panel.querySelector('[data-again]'); if (ag) ag.addEventListener('click', function () { st.pick = []; st.revealed = false; draw(); });
