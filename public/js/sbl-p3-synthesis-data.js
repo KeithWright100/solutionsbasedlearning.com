@@ -716,8 +716,6 @@ window.SBL_P3_LENS = {
     sglaw:'Singapore haze law',epass:'E-passports and e-gates',cont:'Containerisation and shrinking-world technology',deind:'Deindustrialisation',nres:'Natural and physical resources'};
 })();
 
-/* Unlock codes are checked as SHA-256 hashes; the codes themselves are held by the teacher. */
-window.SBL_P3_LOCKS = {"sovereignty": "a8e51685a503bdc785fc93e6374d6ffd63cd8c7be24e4e5947adada3b24ac11f", "civil": "f89abb13d9b23046cec19d1e00b9897d8f52098357e721e47146413e56aa4b42", "resilience": "61ff36b3a3f13e0bd775b86389a059c6969c96c19255fe40307ef35f04305f10", "supply": "b5a044c6d8797137daf93675e53dbeb87558f246efc9e566751373920f96f92f", "physical": "32cfb449e28e891fdc64b90a71d60b011995272403b531341dacc6e578e1d6c5", "lics": "a20332377136637b22cffff22912f864528bbc7557984964e86670a658797a68", "envimpact": "f9c729012b53af24828ee847845b4558ef251983775f34e15e0ee9c972823adf", "future": "907018bc8aad7c2cc5711425d4c32ff73e8a5c639bea018602c49977e1ef6322", "opposition": "992f94e1db644d147a18bf70891d5db48f11c26daef04d5e5175d3db3402320f", "growth": "abf8a05d083e52e2a9ffad9e944443df7437eeebaf823b591acbf7ab7133ca8c", "*": "f0da95c460ad21e7feae6eca60f843603cb798de84a620ab2e676172d13bea07", "risk": "cfdd4e47145817b2285cbd07d0ae710e3047978da331174e0962bc29024516fd"};
 
 /* Worked models are essays 1–4: swap Technology and change (model) with Risks vs benefits (practice) */
 (function () { var M = window.SBL_P3_MAPS, a = M.map(function (m) { return m.id; }).indexOf('risk'), b = M.map(function (m) { return m.id; }).indexOf('technology'); var t = M[a]; M[a] = M[b]; M[b] = t; })();

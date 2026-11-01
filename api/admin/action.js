@@ -21,6 +21,7 @@ import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
 import { createSetupToken } from '../_lib/tokens.js';
 import { sendApprovalEmail, sendRejectionEmail, sendPasswordResetEmail } from '../_lib/emails.js';
 import { isValidEmail, isValidPassword } from '../_lib/validate.js';
+import { randomInt } from 'node:crypto';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -52,6 +53,7 @@ export default async function handler(req, res) {
   if (action === 'reset-password') return handleResetPassword(req, res, session);
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
   if (action === 'set-game-of-week') return handleSetGameOfWeek(req, res, session);
+  if (action === 'p3-codes') return handleP3Codes(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -523,6 +525,65 @@ async function handleSetGameOfWeek(req, res, session) {
     return res.status(500).json({ error: 'Could not save the game of the week.' });
   }
   return res.status(200).json({ ok: true, picks });
+}
+
+// ---------------------------------------------------------------
+// p3-codes — unlock codes for the Paper 3 synthesis map practice
+// essays (revision guide -> 16-mark essay synthesis maps).
+//   { op: 'get' }                       -> { codes, master }
+//   { op: 'set', id, code }             -> save a code you choose
+//   { op: 'random', id }                -> generate a new code
+//   { op: 'random-all', ids: [...] }    -> new codes for every essay
+//   { op: 'clear', id }                 -> back to the original code
+// id '*' is the master code that unlocks every essay. Stored in
+// sbl_site_settings (key 'p3_codes') as { codes: { id: CODE }, master }.
+// Checked by /api/session?p3unlock=… (which never returns codes).
+// ---------------------------------------------------------------
+const P3_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+function p3RandomCode(n) { let c = ''; for (let i = 0; i < n; i++) c += P3_ALPHABET[randomInt(P3_ALPHABET.length)]; return c; }
+async function handleP3Codes(req, res, session) {
+  const body = req.body || {};
+  const op = String(body.op || 'get');
+  const supabase = getSupabaseAdmin();
+  const { data, error: readErr } = await supabase
+    .from('sbl_site_settings').select('value').eq('key', 'p3_codes').maybeSingle();
+  if (readErr) {
+    console.error('Failed to read P3 codes:', readErr);
+    return res.status(500).json({ error: 'Could not read the codes. Has sql/012_site_settings.sql been run in Supabase?' });
+  }
+  const value = { codes: Object.assign({}, (data && data.value && data.value.codes) || {}), master: (data && data.value && data.value.master) || '' };
+  if (op === 'get') return res.status(200).json(value);
+
+  const validId = (x) => x === '*' || /^[a-z]{2,20}$/.test(x);
+  function put(id, code) { if (id === '*') value.master = code; else if (code) value.codes[id] = code; else delete value.codes[id]; }
+  if (op === 'set') {
+    const id = String(body.id || ''), code = String(body.code || '').trim().toUpperCase();
+    if (!validId(id)) return res.status(400).json({ error: 'Unknown essay.' });
+    if (!/^[A-Z0-9-]{4,20}$/.test(code)) return res.status(400).json({ error: 'Use 4–20 letters, numbers or hyphens.' });
+    put(id, code);
+  } else if (op === 'random') {
+    const id = String(body.id || '');
+    if (!validId(id)) return res.status(400).json({ error: 'Unknown essay.' });
+    put(id, id === '*' ? 'SBL-' + p3RandomCode(6) : p3RandomCode(5));
+  } else if (op === 'random-all') {
+    const ids = Array.isArray(body.ids) ? body.ids.map(String).filter(validId).slice(0, 60) : [];
+    ids.forEach((id) => put(id, id === '*' ? 'SBL-' + p3RandomCode(6) : p3RandomCode(5)));
+  } else if (op === 'clear') {
+    const id = String(body.id || '');
+    if (!validId(id)) return res.status(400).json({ error: 'Unknown essay.' });
+    if (id === '*') value.master = ''; else delete value.codes[id];
+  } else {
+    return res.status(400).json({ error: 'Unknown request.' });
+  }
+  const { error } = await supabase.from('sbl_site_settings').upsert({
+    key: 'p3_codes', value, updated_at: new Date().toISOString(),
+    updated_by: (session.profile && session.profile.email) || null
+  });
+  if (error) {
+    console.error('Failed to save P3 codes:', error);
+    return res.status(500).json({ error: 'Could not save the code.' });
+  }
+  return res.status(200).json(value);
 }
 
 // ---------------------------------------------------------------

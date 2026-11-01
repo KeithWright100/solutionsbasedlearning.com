@@ -24,7 +24,7 @@
 
   var st = { map: 0, mode: 'explore', sel: null, step: 0, pick: [], hidden: {}, lens: null, bstep: 'ideas', bsel: null, blink: null, bpair: null, q: '', open: {}, bpara: 0 };
   var pos = {};
-  var MODELS = 4, LOCKS = window.SBL_P3_LOCKS || {}, PT = window.SBL_P3_PALETTE_TITLES || {};
+  var MODELS = 4, PT = window.SBL_P3_PALETTE_TITLES || {};
   function isModel(i) { return (i === undefined ? st.map : i) < MODELS; }
 
   /* ---------- palette of every Paper 3 idea ---------- */
@@ -61,29 +61,6 @@
     return 'Not started';
   }
   function unlocked() { return isModel() || (st.b && st.b.unlocked); }
-  function sha256hex(ascii) {
-    /* small SHA-256 for when crypto.subtle is unavailable */
-    function rr(v, a) { return (v >>> a) | (v << (32 - a)); }
-    var mp = Math.pow, mw = mp(2, 32), i, j, res = '', words = [], blen = ascii.length * 8, hash = [], k = [], pc = 0, isC = {};
-    for (var c = 2; pc < 64; c++) { if (!isC[c]) { for (i = 0; i < 313; i += c) isC[i] = c; hash[pc] = (mp(c, .5) * mw) | 0; k[pc++] = (mp(c, 1 / 3) * mw) | 0; } }
-    hash = hash.slice(0, 8); ascii += '\x80';
-    while (ascii.length % 64 - 56) ascii += '\x00';
-    for (i = 0; i < ascii.length; i++) { j = ascii.charCodeAt(i); words[i >> 2] |= j << ((3 - i) % 4) * 8; }
-    words[words.length] = ((blen / mw) | 0); words[words.length] = blen;
-    for (j = 0; j < words.length;) {
-      var w = words.slice(j, j += 16), oh = hash; hash = hash.slice(0, 8);
-      for (i = 0; i < 64; i++) {
-        var w15 = w[i - 15], w2 = w[i - 2], a = hash[0], e = hash[4];
-        var t1 = hash[7] + (rr(e, 6) ^ rr(e, 11) ^ rr(e, 25)) + ((e & hash[5]) ^ ((~e) & hash[6])) + k[i] + (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rr(w15, 7) ^ rr(w15, 18) ^ (w15 >>> 3)) + w[i - 7] + (rr(w2, 17) ^ rr(w2, 19) ^ (w2 >>> 10))) | 0);
-        var t2 = (rr(a, 2) ^ rr(a, 13) ^ rr(a, 22)) + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
-        hash = [(t1 + t2) | 0].concat(hash); hash[4] = (hash[4] + t1) | 0;
-      }
-      for (i = 0; i < 8; i++) hash[i] = (hash[i] + oh[i]) | 0;
-    }
-    for (i = 0; i < 8; i++) for (j = 3; j + 1; j--) { var b = (hash[i] >> (j * 8)) & 255; res += ((b < 16) ? 0 : '') + b.toString(16); }
-    return res;
-  }
-  function sha(text) { return Promise.resolve(sha256hex(text)); }
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function el(tag, attrs, parent) {
@@ -711,10 +688,14 @@
       var inp = panel.querySelector('#p3-code'), msg = panel.querySelector('.p3-codemsg');
       function tryCode() {
         var c = (inp.value || '').trim().toUpperCase(); if (!c) return;
-        Promise.all([sha(M().id + ':' + c), sha('all:' + c)]).then(function (hs) {
-          if (hs[0] && (hs[0] === LOCKS[M().id] || hs[1] === LOCKS['*'])) { b.unlocked = true; save(); draw(); }
-          else { msg.textContent = 'That code is not right for this essay. Check with your teacher.'; }
-        });
+        ub.disabled = true; msg.textContent = 'Checking…';
+        fetch('/api/session?p3unlock=' + encodeURIComponent(M().id) + '&code=' + encodeURIComponent(c), { credentials: 'same-origin' })
+          .then(function (r) { return r.ok ? r.json() : { ok: false }; })
+          .then(function (d) {
+            if (d && d.ok) { b.unlocked = true; save(); draw(); }
+            else { ub.disabled = false; msg.textContent = 'That code is not right for this essay. Check with your teacher.'; }
+          })
+          .catch(function () { ub.disabled = false; msg.textContent = 'Could not check the code. Check your connection and try again.'; });
       }
       ub.addEventListener('click', tryCode); inp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') tryCode(); });
     }

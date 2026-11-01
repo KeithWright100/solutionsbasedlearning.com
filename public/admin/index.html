@@ -69,6 +69,14 @@
   .gotw-when span { color: var(--slate); font-size: 0.76rem; }
   .gotw-status { color: var(--teal-bright); font-size: 0.8rem; }
   @media (max-width: 860px) { .gotw-row { grid-template-columns: 1fr; } }
+  .p3c-row { display: grid; grid-template-columns: 220px minmax(120px, 180px) auto auto auto 1fr; gap: 0.6rem; align-items: center; padding: 0.55rem 0; border-top: 1px solid var(--navy-line); }
+  .p3c-when b { display: block; color: var(--white); font-size: 0.88rem; }
+  .p3c-when span { color: var(--slate); font-size: 0.76rem; }
+  .p3c-code { font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+  .p3c-code::placeholder { text-transform: none; letter-spacing: 0; font-family: inherit; }
+  .p3c-status, #p3codeMsg { color: var(--teal-bright); font-size: 0.8rem; }
+  .p3c-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.8rem; }
+  @media (max-width: 860px) { .p3c-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -104,6 +112,17 @@
     <h2 id="gotwHead">&#127918; Game of the week</h2>
     <p>Shown at the top of the Humanities Hub. Pick a game for this week or plan ahead; weeks left on &ldquo;Automatic&rdquo; rotate through all the games. Weeks start on Monday (Bangkok time).</p>
     <div id="gotwRows"><div class="sbl-empty-state">Loading&hellip;</div></div>
+  </section>
+
+  <section class="sbl-panel gotw-panel" aria-labelledby="p3codeHead">
+    <h2 id="p3codeHead">&#128273; Paper 3 essay codes</h2>
+    <p>Codes that unlock the model maps for the practice essays on the <a href="/geography/revision/guide/paper3-synthesis-maps" style="color:var(--teal-bright)">16-mark essay synthesis maps</a> page. Give a class the code when they have built their own map. Changing a code stops the old one working; students who have already unlocked an essay keep it.</p>
+    <div id="p3codeRows"><div class="sbl-empty-state">Loading&hellip;</div></div>
+    <div class="p3c-tools">
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="p3codeCopy">Copy all codes</button>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="p3codeAll">New codes for every essay</button>
+      <span id="p3codeMsg" aria-live="polite"></span>
+    </div>
   </section>
 
   <div class="sbl-tabs">
@@ -198,6 +217,8 @@
 <script src="/js/sbl-admin.js"></script>
 <script src="/js/sbl-games-catalog.js"></script>
 <script src="/js/sbl-admin-gotw.js"></script>
+<script src="/js/sbl-p3-synthesis-data.js"></script>
+<script src="/js/sbl-admin-p3codes.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
 </body>
