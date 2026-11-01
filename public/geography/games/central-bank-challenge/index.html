@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Central Bank Challenge — IGCSE Economics Games — SBL</title>
+<meta name="description" content="IGCSE Economics monetary policy game: diagnose each economic shock, set the interest rate, and keep inflation, unemployment and growth on target.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --ink: #062033; --muted: #4a6272;
+    --line: rgba(5,43,65,.13); --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec;
+    --amber: #d97706; --demand: #2563eb; --supply: #dc6b19; --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Inter","Segoe UI",Arial,sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at top right, rgba(0,184,176,.14), transparent 35%), linear-gradient(180deg,#f4fbfc 0%,#eaf4f6 100%); }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  .top-bar { padding: 18px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,.98), rgba(2,50,78,.96)); }
+  .top-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; font-weight: 700; color: rgba(255,255,255,.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; } .brand .teal { color: var(--teal); }
+  main { max-width: 1100px; margin: 22px auto 60px; padding: 0 16px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 14px 40px rgba(6,32,51,.07); }
+  .kicker { display: inline-block; font-size: .74rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg,var(--teal),#0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem,3.4vw,2.4rem); font-weight: 900; color: var(--navy); }
+  .muted { color: var(--muted); }
+  .btn { border: 0; border-radius: 12px; padding: 13px 22px; font-weight: 800; font-size: 1rem; background: linear-gradient(135deg,var(--teal),#0792a3); color: #fff; box-shadow: 0 10px 24px rgba(0,184,176,.3); transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--ghost { background: #fff; color: var(--navy); border: 1px solid var(--line); box-shadow: none; }
+
+  /* start */
+  .start { padding: 34px 30px; text-align: center; }
+  .start p.lead { max-width: 640px; margin: 10px auto 0; line-height: 1.6; font-weight: 500; color: var(--muted); }
+  .how { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 26px 0; text-align: left; }
+  .how div { background: #f4fbfc; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .how b { display: block; color: var(--navy); margin-bottom: 4px; }
+  .how span { font-size: .9rem; color: var(--muted); line-height: 1.5; }
+  .best { margin-top: 14px; font-size: .9rem; color: var(--muted); }
+
+  /* game */
+  .hud { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-weight: 800; font-size: .88rem; color: var(--navy); }
+  .chip small { font-weight: 600; color: var(--muted); margin-right: 4px; }
+  .chip.streak { background: #fff7e6; border-color: #f5c66b; color: #8a5300; }
+  .timer { flex: 1; min-width: 140px; height: 10px; background: #e2eef1; border-radius: 999px; overflow: hidden; }
+  .timer i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg,var(--teal),var(--cyan)); transition: width .1s linear; }
+  .timer.low i { background: linear-gradient(90deg,#f97316,var(--red)); }
+  .board { display: grid; grid-template-columns: 1.05fr 1fr; gap: 16px; }
+  .news { padding: 20px 22px; }
+  .news .mk { display: flex; align-items: center; gap: 10px; font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-dark); }
+  .news .mk span.em { font-size: 1.6rem; }
+  .news h2 { font-size: clamp(1.15rem,2.3vw,1.45rem); line-height: 1.3; margin: 10px 0 4px; color: var(--ink); }
+  .news .src { font-size: .78rem; color: var(--muted); }
+  .q { margin-top: 16px; font-weight: 800; color: var(--navy); }
+  .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .opt { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 11px 12px; font-weight: 700; font-size: .92rem; color: var(--ink); display: flex; gap: 8px; align-items: center; }
+  .opt:hover:not(:disabled) { border-color: var(--teal); background: #f2fbfb; }
+  .opt kbd { font: 700 .7rem/1 Inter,sans-serif; background: #eef4f6; border-radius: 5px; padding: 3px 6px; color: var(--muted); }
+  .opt.wide { grid-column: 1 / -1; }
+  .opt .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .opt.correct { border-color: var(--green); background: var(--green-soft); }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt.sel { border-color: var(--navy); background: #eef4fb; }
+  .opt:disabled { cursor: default; }
+  .pq { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .pq > div { background: #f7fbfc; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .pq b { display: block; font-size: .85rem; margin-bottom: 6px; color: var(--navy); }
+  .pq .row { display: flex; gap: 6px; }
+  .pq .opt { flex: 1; justify-content: center; padding: 9px; }
+  .check { margin-top: 12px; width: 100%; }
+  .check:disabled { opacity: .45; cursor: default; transform: none; }
+  .diagram { padding: 12px; display: flex; flex-direction: column; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; gap: 14px; justify-content: center; font-size: .78rem; font-weight: 700; color: var(--muted); margin-top: 4px; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 18px; height: 3px; border-radius: 3px; vertical-align: middle; margin-right: 5px; }
+  .fb { margin-top: 14px; border-radius: 14px; padding: 14px 16px; line-height: 1.55; font-size: .95rem; display: none; }
+  .fb.show { display: block; }
+  .fb.good { background: var(--green-soft); border: 1px solid rgba(22,163,74,.35); }
+  .fb.bad { background: var(--red-soft); border: 1px solid rgba(220,38,38,.3); }
+  .fb b.t { display: block; font-size: 1.02rem; margin-bottom: 4px; }
+  .fb .pts { float: right; font-weight: 900; color: var(--green); }
+  .fb .tag { display: inline-block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; margin-top: 8px; color: var(--teal-dark); }
+  .next { margin-top: 12px; width: 100%; }
+  .shift-anim { transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+  .fade-in { animation: fi .6s .5s both; }
+  @keyframes fi { from { opacity: 0 } to { opacity: 1 } }
+  .pop { animation: pop .35s ease-out; }
+  @keyframes pop { 0% { transform: scale(.96) } 60% { transform: scale(1.02) } 100% { transform: scale(1) } }
+
+  /* end */
+  .end { padding: 30px; }
+  .end-top { text-align: center; }
+  .big { font-size: 3rem; font-weight: 900; color: var(--navy); line-height: 1; margin-top: 8px; }
+  .stats { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+  .stats div { background: #f4fbfc; border: 1px solid var(--line); border-radius: 12px; padding: 10px 16px; text-align: center; }
+  .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .stats span { font-size: .78rem; color: var(--muted); font-weight: 700; }
+  .review { list-style: none; margin-top: 16px; }
+  .review li { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; display: flex; gap: 10px; line-height: 1.5; font-size: .92rem; }
+  .review li .ic { font-weight: 900; flex-shrink: 0; width: 22px; }
+  .review li.ok .ic { color: var(--green); } .review li.no .ic { color: var(--red); }
+  .review li small { display: block; color: var(--muted); }
+  .tip { margin-top: 18px; background: #fff7e6; border: 1px solid #f5c66b; border-radius: 14px; padding: 14px 16px; line-height: 1.55; font-size: .93rem; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .sr { position: absolute; left: -9999px; }
+
+  @media (max-width: 860px) {
+    .board { grid-template-columns: 1fr; }
+    .how { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .opts { grid-template-columns: 1fr; }
+    .start { padding: 24px 18px; }
+    .news { padding: 16px; }
+  }
+
+  /* Central Bank Challenge */
+  .gauges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
+  .gauge { background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+  .gauge span { display: block; font-size: .74rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .gauge b { display: block; font-size: 1.5rem; font-weight: 900; color: var(--navy); line-height: 1.2; }
+  .gauge small { font-size: .74rem; color: var(--muted); font-weight: 600; }
+  .gauge.g-ok { border-color: rgba(22,163,74,.55); background: #f3fbf6; }
+  .gauge.g-warn { border-color: #f5c66b; background: #fffaf0; }
+  .gauge.g-bad { border-color: rgba(220,38,38,.5); background: #fdf3f3; }
+  .gauge.g-rate { border-color: #0f3a5c; }
+  .rates { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 10px; }
+  .rates .opt { flex-direction: column; justify-content: center; gap: 2px; padding: 9px 4px; text-align: center; }
+  .rates .opt b { font-size: .95rem; }
+  .rates .opt small { font-size: .72rem; color: var(--muted); font-weight: 600; }
+  .rates .opt.up b { color: #b91c1c; } .rates .opt.down b { color: #1d4ed8; }
+  .fb .split { display: block; font-size: .8rem; font-weight: 700; color: var(--muted); margin: 0 0 6px; }
+  .chartnote { text-align: center; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+  #diagFb { margin-top: 12px; }
+  @media (max-width: 860px) { .gauges { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .rates { grid-template-columns: repeat(4, 1fr); } }
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a class="back-link" href="/geography/games#economics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> All games</a>
+    <span class="brand">SBL <span class="teal">Games</span> &middot; IGCSE Economics</span>
+  </div>
+</header>
+
+<main>
+  <!-- START -->
+  <section class="card start" id="startScreen">
+    <span class="kicker">IGCSE Economics &middot; Macroeconomic objectives &middot; Monetary policy</span>
+    <h1>Central Bank Challenge</h1>
+    <p class="lead">You have just been appointed governor of the central bank. For the next two years (eight quarters), news will hit the economy. Diagnose each problem, then set the interest rate to keep inflation near its 2% target without pushing unemployment up or the economy into recession.</p>
+    <div class="how">
+      <div><b>1. Diagnose the problem</b><span>Is it demand-pull inflation, cost-push inflation, falling demand, or a supply-side boost? A correct diagnosis earns bonus points.</span></div>
+      <div><b>2. Set the interest rate</b><span>Raise, hold or cut. Higher rates slow spending and inflation; lower rates boost spending and jobs. But policy works with a <em>time lag</em>.</span></div>
+      <div><b>3. Hit your targets</b><span>Each quarter scores you on inflation (1&ndash;3%), unemployment (5% or below) and growth (above 1%), plus points for choosing the right type of policy. Watch out for conflicts between objectives!</span></div>
+    </div>
+    <button class="btn" id="startBtn">Take office &rarr;</button>
+    <p class="best" id="bestLine"></p>
+  </section>
+
+  <!-- GAME -->
+  <section id="gameScreen" hidden>
+    <div class="hud">
+      <span class="chip"><small>Quarter</small><span id="qNo">1</span>/8</span>
+      <span class="chip"><small>Score</small><span id="scoreNo">0</span></span>
+      <span class="chip"><small>Interest rate</small><span id="rateNo">3.00</span>%</span>
+    </div>
+    <div class="gauges" id="gauges"></div>
+    <div class="board">
+      <div class="card news">
+        <div class="mk"><span class="em" id="evEmoji"></span><span>Economic news &middot; Quarter <span id="qNo2">1</span></span></div>
+        <h2 id="headline"></h2>
+        <p class="src" id="evDetail"></p>
+
+        <div id="step1">
+          <p class="q">1. What kind of problem is this?</p>
+          <div class="opts" id="diag">
+            <button class="opt" data-d="dp"><span class="dot" style="background:#dc2626"></span>Demand-pull inflation risk</button>
+            <button class="opt" data-d="cp"><span class="dot" style="background:#d97706"></span>Cost-push inflation</button>
+            <button class="opt" data-d="df"><span class="dot" style="background:#2563eb"></span>Falling demand (recession risk)</button>
+            <button class="opt" data-d="sb"><span class="dot" style="background:#16a34a"></span>Supply-side boost</button>
+          </div>
+        </div>
+
+        <div id="step2" hidden>
+          <div class="fb show" id="diagFb"></div>
+          <p class="q">2. Set the interest rate for this quarter</p>
+          <div class="rates" id="rates"></div>
+          <button class="btn check" id="setBtn" disabled>Announce the decision</button>
+        </div>
+
+        <div class="fb" id="fb" aria-live="polite"></div>
+        <button class="btn next" id="nextBtn" hidden>Next quarter &rarr;</button>
+      </div>
+
+      <div class="card diagram">
+        <svg id="chart" viewBox="0 0 420 300" role="img" aria-label="Chart of inflation, unemployment, growth and the interest rate over time"></svg>
+        <div class="legend"><span><i style="background:#dc2626"></i>Inflation</span><span><i style="background:#2563eb"></i>Unemployment</span><span><i style="background:#16a34a"></i>GDP growth</span><span><i style="background:#0f3a5c"></i>Interest rate</span></div>
+        <p class="chartnote">Shaded band: inflation target range (1&ndash;3%).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="card end" id="endScreen" hidden>
+    <div class="end-top">
+      <span class="kicker">Term complete</span>
+      <h1 id="endTitle">Steady hand!</h1>
+      <div class="big" id="endScore">0</div>
+      <p class="muted">points</p>
+      <div class="stats">
+        <div><b id="stDiag">0/8</b><span>problems diagnosed</span></div>
+        <div><b id="stOn">0/8</b><span>quarters with inflation on target</span></div>
+        <div><b id="stInf">0%</b><span>average inflation</span></div>
+        <div><b id="stUn">0%</b><span>average unemployment</span></div>
+        <div><b id="stBest">0</b><span>your best score</span></div>
+      </div>
+    </div>
+    <h2 style="font-size:1.1rem;color:var(--navy)">Your quarters</h2>
+    <ul class="review" id="review"></ul>
+    <div class="tip"><b>Exam tip: the transmission mechanism.</b> Higher interest rates &rarr; borrowing costs more and saving pays more &rarr; consumers and firms spend and invest less &rarr; aggregate demand falls &rarr; lower inflation, but slower growth and possibly higher unemployment. Higher rates can also raise the exchange rate, making imports cheaper (lower inflation) but exports dearer. In an evaluation, mention <b>time lags</b> (often 12&ndash;24 months), <b>conflicts between objectives</b> (especially with cost-push inflation), and <b>confidence</b>: if households and firms are pessimistic, a rate cut may not boost spending much.</div>
+    <div class="actions">
+      <button class="btn" id="againBtn">Play again</button>
+      <a class="btn btn--ghost" href="/geography/games/market-shock">Play Market Shock</a>
+      <a class="btn btn--ghost" href="/geography/games#economics">More games</a>
+    </div>
+  </section>
+  <div class="sr" aria-live="assertive" id="announce"></div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  /* t: dp demand-pull, df falling demand, cp cost-push, sb supply-side boost.
+     d: demand shock to the output gap; c: cost shock to inflation (percentage points). */
+  var EVENTS = [
+    { t: 'dp', e: '🏠', h: 'House prices soar and households borrow to spend', x: 'Rising wealth and easy credit push consumer spending well above what the economy can produce.', d: 1.7, c: 0 },
+    { t: 'dp', e: '🏛️', h: 'Government announces large tax cuts and extra spending', x: 'Expansionary fiscal policy adds to aggregate demand across the economy.', d: 1.5, c: 0 },
+    { t: 'dp', e: '✈️', h: 'Record tourist numbers and an export boom', x: 'Spending by foreign visitors and buyers pours into the economy.', d: 1.4, c: 0 },
+    { t: 'dp', e: '🛍️', h: 'Consumer confidence hits a ten-year high', x: 'Optimistic households save less and spend more on cars, holidays and electronics.', d: 1.6, c: 0 },
+    { t: 'df', e: '📉', h: 'Main export market slides into recession', x: 'Orders from abroad collapse and factories cut shifts.', d: -1.7, c: 0 },
+    { t: 'df', e: '🏦', h: 'Banking scare: firms cancel investment plans', x: 'Business confidence collapses and companies postpone new factories and equipment.', d: -1.8, c: -0.1 },
+    { t: 'df', e: '😟', h: 'Households cut spending as job fears grow', x: 'Families save more “just in case”, and shops report falling sales.', d: -1.5, c: 0 },
+    { t: 'df', e: '🏗️', h: 'Government announces deep spending cuts', x: 'Contractionary fiscal policy reduces aggregate demand.', d: -1.5, c: 0 },
+    { t: 'cp', e: '🛢️', h: 'Oil prices jump 40% after supply cuts', x: 'Higher fuel and energy costs feed into the prices of almost everything.', d: -0.5, c: 1.5 },
+    { t: 'cp', e: '🌾', h: 'Harvest failure pushes up food prices', x: 'Poor weather cuts the supply of rice and wheat, raising costs for food firms.', d: -0.3, c: 1.2 },
+    { t: 'cp', e: '💱', h: 'The currency falls 15% against the US dollar', x: 'Imported fuel, raw materials and components all become more expensive.', d: 0.2, c: 1.2 },
+    { t: 'cp', e: '🧾', h: 'Unions win large pay rises across the economy', x: 'Firms’ wage costs rise faster than productivity, and they pass them on in higher prices.', d: -0.2, c: 1.3 },
+    { t: 'sb', e: '🤖', h: 'New technology boosts productivity in factories', x: 'Firms produce more with the same workers, so average costs fall.', d: 0.4, c: -0.8 },
+    { t: 'sb', e: '🚢', h: 'Global shipping and energy costs fall sharply', x: 'Cheaper imports of fuel and materials lower firms’ costs.', d: 0.4, c: -0.8 },
+    { t: 'sb', e: '🎓', h: 'Training scheme raises the skills of the workforce', x: 'A more productive workforce increases the economy’s productive capacity.', d: 0.3, c: -0.6 }
+  ];
+  var TYPE = {
+    dp: { n: 'Demand-pull inflation risk', why: 'Spending (aggregate demand) is growing faster than the economy can produce, which pulls prices up.', fix: 'The textbook response is to <b>raise interest rates</b>: borrowing becomes dearer and saving more attractive, so consumption and investment slow, reducing aggregate demand and demand-pull inflation.' },
+    df: { n: 'Falling demand (recession risk)', why: 'Aggregate demand is falling, so firms produce less and may lay off workers.', fix: 'The textbook response is to <b>cut interest rates</b>: cheaper borrowing and lower mortgage repayments encourage spending and investment, raising aggregate demand, output and jobs.' },
+    cp: { n: 'Cost-push inflation', why: 'Firms’ costs are rising, so they raise prices even though demand is not growing. Output may fall too.', fix: 'This is a <b>dilemma</b>: raising rates fights inflation but deepens the slowdown and raises unemployment, a conflict between objectives. Many central banks hold rates or raise them only gently, and “look through” a one-off price shock.' },
+    sb: { n: 'Supply-side boost', why: 'Aggregate supply increases, so prices fall while output rises: good news on several objectives at once.', fix: 'Little action is needed: <b>hold</b> rates, or cut gently if inflation drops below target.' }
+  };
+  var STEPS = [-1, -0.5, -0.25, 0, 0.25, 0.5, 1];
+  var QUARTERS = 8, NEUTRAL = 3, KEY = 'sbl-central-bank-best';
+  var $ = function (id) { return document.getElementById(id); };
+  function getBest() { try { return parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch (e) { return 0; } }
+  function setBest(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) { } }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function f1(x) { return (Math.round(x * 10) / 10).toFixed(1); }
+
+  var S, seq, q, step, diag, hist, review, score;
+
+  function pickEvents() {
+    /* two of each type, in a random order, avoiding the same type three times running */
+    var byT = { dp: [], df: [], cp: [], sb: [] };
+    shuffle(EVENTS).forEach(function (e) { byT[e.t].push(e); });
+    var list = []; Object.keys(byT).forEach(function (k) { list = list.concat(byT[k].slice(0, 2)); });
+    for (var tries = 0; tries < 50; tries++) {
+      list = shuffle(list);
+      var ok = true; for (var i = 2; i < list.length; i++) if (list[i].t === list[i - 1].t && list[i].t === list[i - 2].t) ok = false;
+      if (ok) break;
+    }
+    return list;
+  }
+
+  function start() {
+    S = { r: 3, g: 0.3, pi: 2.4, u: 4.85, gr: 2.6, cp: 0, s: 0, dp: 0 };
+    seq = pickEvents(); q = 0; score = 0; review = [];
+    hist = [{ pi: S.pi, u: S.u, gr: S.gr, r: S.r }];
+    $('startScreen').hidden = true; $('endScreen').hidden = true; $('gameScreen').hidden = false;
+    showQuarter();
+  }
+
+  function gauges() {
+    var g = [
+      ['Inflation', f1(S.pi) + '%', 'Target 2% (1–3%)', S.pi >= 1 && S.pi <= 3 ? 'ok' : (Math.abs(S.pi - 2) <= 1.8 ? 'warn' : 'bad')],
+      ['Unemployment', f1(S.u) + '%', 'Aim: 5% or below', S.u <= 5 ? 'ok' : (S.u <= 6 ? 'warn' : 'bad')],
+      ['GDP growth', f1(S.gr) + '%', 'Aim: above 1%', S.gr >= 1 ? 'ok' : (S.gr >= 0 ? 'warn' : 'bad')],
+      ['Interest rate', S.r.toFixed(2) + '%', 'Neutral rate about 3%', 'rate']
+    ];
+    $('gauges').innerHTML = g.map(function (x) { return '<div class="gauge g-' + x[3] + '"><span>' + x[0] + '</span><b>' + x[1] + '</b><small>' + x[2] + '</small></div>'; }).join('');
+    $('rateNo').textContent = S.r.toFixed(2);
+  }
+
+  function showQuarter() {
+    var ev = seq[q]; step = 1; diag = null;
+    $('qNo').textContent = q + 1; $('qNo2').textContent = q + 1; $('scoreNo').textContent = score;
+    $('evEmoji').textContent = ev.e; $('headline').textContent = ev.h; $('evDetail').textContent = ev.x;
+    $('step1').hidden = false; $('step2').hidden = true; $('fb').className = 'fb'; $('fb').innerHTML = ''; $('nextBtn').hidden = true;
+    Array.prototype.forEach.call(document.querySelectorAll('#diag .opt'), function (b) { b.disabled = false; b.className = 'opt'; });
+    gauges(); chart();
+    $('announce').textContent = 'Quarter ' + (q + 1) + '. ' + ev.h;
+  }
+
+  document.getElementById('diag').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b || step !== 1) return;
+    var ev = seq[q], ok = b.dataset.d === ev.t; diag = ok;
+    Array.prototype.forEach.call(document.querySelectorAll('#diag .opt'), function (x) {
+      x.disabled = true;
+      if (x.dataset.d === ev.t) x.classList.add('correct'); else if (x === b) x.classList.add('wrong');
+    });
+    $('diagFb').className = 'fb show ' + (ok ? 'good' : 'bad');
+    $('diagFb').innerHTML = (ok ? '<span class="pts">+25</span><b class="t">Correct diagnosis</b>' : '<b class="t">Not quite: this is ' + TYPE[ev.t].n.toLowerCase() + '</b>') + TYPE[ev.t].why;
+    if (ok) score += 25;
+    $('scoreNo').textContent = score;
+    step = 2; $('step2').hidden = false; buildRates();
+  });
+
+  var chosen = null;
+  function buildRates() {
+    chosen = null; $('setBtn').disabled = true;
+    $('rates').innerHTML = STEPS.map(function (x) {
+      var nr = S.r + x, dis = nr < 0 || nr > 10;
+      var lab = x === 0 ? 'Hold' : (x > 0 ? '+' : '−') + Math.abs(x).toFixed(2);
+      return '<button class="opt rate' + (x > 0 ? ' up' : x < 0 ? ' down' : ' hold') + '" data-x="' + x + '"' + (dis ? ' disabled title="Interest rates cannot go below 0%"' : '') + '><b>' + lab + '</b><small>' + Math.max(0, nr).toFixed(2) + '%</small></button>';
+    }).join('');
+  }
+  document.getElementById('rates').addEventListener('click', function (e) {
+    var b = e.target.closest('.opt'); if (!b || b.disabled || step !== 2) return;
+    chosen = parseFloat(b.dataset.x);
+    Array.prototype.forEach.call(document.querySelectorAll('#rates .opt'), function (x) { x.classList.toggle('sel', x === b); });
+    $('setBtn').disabled = false;
+  });
+
+  function simulate(ev, dr) {
+    var r = Math.max(0, Math.min(10, S.r + dr)), s = r - NEUTRAL, rd = function (x) { return Math.round(x * 10) / 10; };
+    var dsh = 0.5 * S.dp + ev.d;
+    var g = 0.55 * S.g + dsh - 1.0 * s - 0.4 * S.s;
+    var cp = 0.4 * S.cp + ev.c;
+    var pi = 0.55 * S.pi + 0.45 * 2 + 0.5 * g + cp;
+    var u = Math.max(2, 5 - 0.5 * g);
+    var gr = 2.3 + 0.9 * g;
+    return { r: r, s: s, dp: dsh, g: g, cp: cp, pi: rd(pi), u: rd(u), gr: rd(gr) };
+  }
+  function policyPoints(t, dr) {
+    if (t === 'dp') return dr >= 0.5 ? 25 : dr === 0.25 ? 15 : 0;
+    if (t === 'df') return dr <= -0.5 ? 25 : dr === -0.25 ? 15 : 0;
+    if (t === 'cp') return dr === 0 || dr === 0.25 ? 25 : dr === 0.5 ? 15 : dr > 0.5 ? 5 : 0;
+    return dr === 0 || dr === -0.25 ? 25 : dr === -0.5 ? 15 : 5;
+  }
+  function quarterPoints(N) {
+    var p = 100 - 28 * Math.max(0, Math.abs(N.pi - 2) - 0.5) - 22 * Math.max(0, N.u - 5) - 15 * Math.max(0, 1 - N.gr);
+    return Math.max(0, Math.min(100, Math.round(p)));
+  }
+
+  $('setBtn').addEventListener('click', function () {
+    if (chosen === null || step !== 2) return;
+    step = 3;
+    var ev = seq[q], before = { pi: S.pi, u: S.u, gr: S.gr, r: S.r };
+    var N = simulate(ev, chosen); S = N;
+    var op = Math.round(quarterPoints(N) * 0.75), pp = policyPoints(ev.t, chosen), pts = op + pp; score += pts;
+    hist.push({ pi: N.pi, u: N.u, gr: N.gr, r: N.r });
+    Array.prototype.forEach.call(document.querySelectorAll('#rates .opt'), function (x) { x.disabled = true; });
+    $('setBtn').disabled = true;
+    var notes = [];
+    if (N.pi > 3) notes.push('Inflation is <b>above</b> the target range.');
+    else if (N.pi < 1) notes.push('Inflation is <b>below</b> the target range: there is a risk of very low inflation or deflation, which can delay spending.');
+    else notes.push('Inflation is <b>within</b> the target range.');
+    if (N.u > 5.5) notes.push('Unemployment is rising: spending is too weak.');
+    if (N.gr < 0) notes.push('GDP is shrinking: the economy is in <b>recession</b>.');
+    else if (N.gr > 4) notes.push('Growth is very fast, which may not be sustainable.');
+    var dirTxt = chosen > 0 ? 'You raised rates by ' + chosen.toFixed(2) + ' points.' : chosen < 0 ? 'You cut rates by ' + Math.abs(chosen).toFixed(2) + ' points.' : 'You held rates.';
+    var fx = chosen > 0 ? ' Higher rates also tend to raise the exchange rate, making imports cheaper but exports dearer.' : chosen < 0 ? ' Lower rates tend to weaken the exchange rate, helping exporters but making imports dearer.' : '';
+    var lag = (q === 0 || Math.abs(hist[hist.length - 2].r - before.r) < 0.01) ? '' : ' Remember that last quarter’s decision is still working through the economy (a time lag).';
+    var good = pts >= 70 && pp >= 15;
+    $('fb').className = 'fb show ' + (good ? 'good' : 'bad');
+    $('fb').innerHTML = '<span class="pts">+' + pts + '</span><b class="t">' + dirTxt + '</b>' +
+      '<span class="split">Economy on target: ' + op + '/75 · Right type of policy: ' + pp + '/25</span>' +
+      'Inflation ' + f1(before.pi) + '% → <b>' + f1(N.pi) + '%</b> · Unemployment ' + f1(before.u) + '% → <b>' + f1(N.u) + '%</b> · Growth ' + f1(before.gr) + '% → <b>' + f1(N.gr) + '%</b><br>' +
+      notes.join(' ') + fx + lag + '<span class="tag">What the textbook says</span><br>' + TYPE[ev.t].fix;
+    review.push({ ev: ev, diag: diag, dr: chosen, pts: pts, N: N });
+    gauges(); chart();
+    $('scoreNo').textContent = score;
+    $('nextBtn').hidden = false; $('nextBtn').textContent = q + 1 < QUARTERS ? 'Next quarter →' : 'See your report →';
+    $('nextBtn').focus();
+  });
+
+  $('nextBtn').addEventListener('click', function () { q++; if (q < QUARTERS) showQuarter(); else end(); });
+
+  function chart() {
+    var svg = $('chart'), W = 420, H = 300, L = 38, R = 12, T = 14, B = 34, lo = -4, hi = 10;
+    var X = function (i) { return L + (W - L - R) * i / QUARTERS; }, Y = function (v) { return T + (H - T - B) * (hi - Math.max(lo, Math.min(hi, v))) / (hi - lo); };
+    var h = '<rect x="' + L + '" y="' + Y(3) + '" width="' + (W - L - R) + '" height="' + (Y(1) - Y(3)) + '" fill="#fee2e2" opacity=".7"/>';
+    for (var v = lo; v <= hi; v += 2) h += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="' + (v === 0 ? '#94a3b8' : '#e2e8f0') + '"/><text x="' + (L - 6) + '" y="' + (Y(v) + 4) + '" font-size="10" text-anchor="end" fill="#64748b">' + v + '%</text>';
+    for (var i = 0; i <= QUARTERS; i++) h += '<text x="' + X(i) + '" y="' + (H - 16) + '" font-size="10" text-anchor="middle" fill="#64748b">' + (i === 0 ? 'Start' : 'Q' + i) + '</text>';
+    function line(k, col, dash) {
+      var pts = hist.map(function (p, i) { return X(i) + ',' + Y(p[k]); }).join(' ');
+      var dots = hist.map(function (p, i) { return '<circle cx="' + X(i) + '" cy="' + Y(p[k]) + '" r="3" fill="' + col + '"/>'; }).join('');
+      return '<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="2.5"' + (dash ? ' stroke-dasharray="5 4"' : '') + '/>' + dots;
+    }
+    h += line('r', '#0f3a5c', true) + line('gr', '#16a34a') + line('u', '#2563eb') + line('pi', '#dc2626');
+    svg.innerHTML = h;
+  }
+
+  function end() {
+    $('gameScreen').hidden = true; $('endScreen').hidden = false;
+    var best = getBest(); if (score > best) { best = score; setBest(score); }
+    var title = score >= 850 ? 'Legendary governor!' : score >= 700 ? 'A safe pair of hands' : score >= 500 ? 'Learning on the job' : 'Back to the textbook';
+    $('endTitle').textContent = title; $('endScore').textContent = score;
+    var nd = review.filter(function (r) { return r.diag; }).length, on = review.filter(function (r) { return r.N.pi >= 1 && r.N.pi <= 3; }).length;
+    var ai = review.reduce(function (a, r) { return a + r.N.pi; }, 0) / review.length, au = review.reduce(function (a, r) { return a + r.N.u; }, 0) / review.length;
+    $('stDiag').textContent = nd + '/8'; $('stOn').textContent = on + '/8'; $('stInf').textContent = f1(ai) + '%'; $('stUn').textContent = f1(au) + '%'; $('stBest').textContent = best;
+    $('review').innerHTML = review.map(function (r, i) {
+      var act = r.dr > 0 ? 'raised rates ' + r.dr.toFixed(2) : r.dr < 0 ? 'cut rates ' + Math.abs(r.dr).toFixed(2) : 'held rates';
+      return '<li class="' + (r.pts >= 70 ? 'ok' : 'no') + '"><span class="ic">' + (r.pts >= 70 ? '✓' : '✗') + '</span><div><b>Q' + (i + 1) + ': ' + r.ev.h + '</b><small>' + TYPE[r.ev.t].n + (r.diag ? ' (diagnosed ✓)' : ' (diagnosis ✗)') + ' · You ' + act + ' · Inflation ' + f1(r.N.pi) + '%, unemployment ' + f1(r.N.u) + '%, growth ' + f1(r.N.gr) + '% · ' + r.pts + ' pts</small></div></li>';
+    }).join('');
+    $('announce').textContent = title + ' You scored ' + score + ' points.';
+  }
+
+  $('startBtn').addEventListener('click', start);
+  $('againBtn').addEventListener('click', start);
+  var b0 = getBest(); if (b0) $('bestLine').textContent = 'Your best score: ' + b0 + ' points';
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

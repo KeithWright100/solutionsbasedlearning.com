@@ -278,11 +278,19 @@
     "title": "Market Shock",
     "href": "/geography/games/market-shock",
     "level": "IGCSE Economics",
-    "tag": "Live · Demand and supply · New",
+    "tag": "Live · Demand and supply",
     "desc": "Breaking news hits the markets: decide which curve shifts and which way, then predict what happens to price and quantity. Ten headlines, a faster clock every round, and a shift-or-movement trap to catch you out."
+  },
+  {
+    "slug": "central-bank-challenge",
+    "title": "Central Bank Challenge",
+    "href": "/geography/games/central-bank-challenge",
+    "level": "IGCSE Economics",
+    "tag": "Live · Monetary policy · New",
+    "desc": "Run the central bank for two years: diagnose each economic shock, set the interest rate, and keep inflation, unemployment and growth on target."
   }
 ];
-  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map"];
+  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge"];
   function weekStart(d) {
     var t = (d ? d.getTime() : Date.now()) + 7 * 3600000; /* Bangkok, UTC+7 */
     var x = new Date(t), day = (x.getUTCDay() + 6) % 7; /* Monday = 0 */
