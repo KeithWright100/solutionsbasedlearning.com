@@ -2,7 +2,8 @@
    The list of SBL games, used by the "Game of the week" card on the
    Humanities Hub and by the picker in the admin dashboard.
    Add a line here whenever a new game goes live (slug = the last part
-   of its URL). ROTATION is the order used for automatic weeks; it
+   of its URL). Always add new games at the END of the list: the hub's
+   yellow "Latest game" alert shows the last game in GAMES. ROTATION is the order used for automatic weeks; it
    alternates subjects and levels so consecutive weeks differ.
 
    window.SBLGameOfWeek.weekStart([date])  -> 'YYYY-MM-DD' Monday (Bangkok time)

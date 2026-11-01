@@ -223,6 +223,7 @@
   </main>
 
   <script src="/js/sbl-nav.js"></script>
+  <script src="/js/sbl-games-catalog.js"></script>
   <script>
   (function () {
     var NAV = window.SBL_NAV || [];
@@ -299,11 +300,19 @@
     } else {
       html = '<p class="empty">The lessons and revision pages you open will appear here, so you can jump straight back in. Start with <a href="/geography">IB Geography</a> or <a href="/igcse/geography/learn">IGCSE Geography</a>.</p>';
     }
-    /* news alert: the newest item from "What's new" */
+    /* news alert: always the newest game (the last one added to sbl-games-catalog.js),
+       then the items from "What's new" */
     html += '<div class="latest-wrap">';
-    document.querySelectorAll('.news a').forEach(function (n, i) {
+    var games = window.SBL_GAMES || [], newest = games[games.length - 1];
+    if (newest) {
+      html += '<a class="latest" href="' + esc(newest.href) + '"><span class="ic" aria-hidden="true">&#127918;</span><span><b><span class="pill">Latest game</span>' + esc(newest.title) + ': ' + esc(newest.level) + '</b><small>' + esc(newest.desc) + '</small></span></a>';
+    }
+    var shownNews = 0;
+    document.querySelectorAll('.news a').forEach(function (n) {
+      if (newest && n.getAttribute('href') === newest.href) return;
       var nb = n.querySelector('b'), ns = n.querySelector('small');
-      html += '<a class="latest" href="' + esc(n.getAttribute('href')) + '"><span class="ic" aria-hidden="true">' + (i ? '&#10024;' : '&#128227;') + '</span><span><b><span class="pill">' + (i ? 'New' : 'Latest') + '</span>' + esc(nb ? nb.textContent : '') + '</b><small>' + esc(ns ? ns.textContent : '') + '</small></span></a>';
+      html += '<a class="latest" href="' + esc(n.getAttribute('href')) + '"><span class="ic" aria-hidden="true">' + (shownNews || newest ? '&#10024;' : '&#128227;') + '</span><span><b><span class="pill">' + (shownNews || newest ? 'New' : 'Latest') + '</span>' + esc(nb ? nb.textContent : '') + '</b><small>' + esc(ns ? ns.textContent : '') + '</small></span></a>';
+      shownNews++;
     });
     html += '</div>';
     box.innerHTML = html;
@@ -336,7 +345,6 @@
 
   })();
   </script>
-  <script src="/js/sbl-games-catalog.js"></script>
   <script>
   /* Game of the week: the admin's pick for this week, or the automatic rotation. */
   (function () {
