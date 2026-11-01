@@ -36,7 +36,12 @@ import { getSupabaseAdmin } from '../_lib/supabaseAdmin.js';
 const BUCKET = 'lesson-resources';
 // 'ppq' (past paper questions file) and 'ppq_markscheme' (mark scheme links)
 // were added by sql/011_ppq_resource_slots.sql.
-const RESOURCE_TYPES = ['slides', 'notes', 'key_terms', 'diagrams', 'data_sheets', 'ppq', 'ppq_markscheme'];
+// 'paper_qp' / 'paper_ms' / 'paper_rb' / 'paper_extra' hold the files for a
+// whole exam paper (question paper, markscheme, resource booklet, other),
+// keyed by a lessonId like 'PAPER|ib-geo|2024-05|P2' — added by
+// sql/013_past_paper_files.sql, used by /admin/past-papers/.
+const RESOURCE_TYPES = ['slides', 'notes', 'key_terms', 'diagrams', 'data_sheets', 'ppq', 'ppq_markscheme',
+  'paper_qp', 'paper_ms', 'paper_rb', 'paper_extra'];
 const MAX_LESSON_ID_LENGTH = 200;
 const MAX_FILE_NAME_LENGTH = 200;
 const MAX_LINK_LENGTH = 2000;

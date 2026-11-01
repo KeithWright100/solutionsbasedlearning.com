@@ -18,6 +18,13 @@
 //                                  a link (OneNote page), redirects
 //                                  to that link instead.
 //
+// GET ?papers=1                — every past paper file on record (the
+//                                  teacher Past Paper Library at
+//                                  /teacher/past-papers/): { papers:
+//                                  [{ key, type, fileName, fileSize,
+//                                  uploadedAt }] }. Open one with
+//                                  ?lessonId=<key>&open=<type> as above.
+//
 // Teacher-only: only role 'teacher' or 'admin' gets a response.
 //
 // Lesson pages are gated by middleware.js, so only a logged-in
@@ -47,6 +54,27 @@ export default async function handler(req, res) {
   // "Teacher resources" note instead of the list.)
   if (!TEACHER_ROLES.includes(session.profile.role)) {
     return res.status(403).json({ error: 'Lesson resources are available to teachers only.', teacherOnly: true });
+  }
+
+  if (req.query.papers) {
+    const { data, error } = await getSupabaseAdmin()
+      .from('sbl_lesson_resources')
+      .select('*')
+      .like('lesson_id', 'PAPER|%');
+    if (error) {
+      console.error('Failed to load past paper files:', error);
+      return res.status(500).json({ error: 'Could not load past papers.' });
+    }
+    return res.status(200).json({
+      papers: (data || []).map((row) => ({
+        id: row.id,
+        key: row.lesson_id,
+        type: row.resource_type,
+        fileName: row.file_name,
+        fileSize: row.file_size,
+        uploadedAt: row.uploaded_at
+      }))
+    });
   }
 
   const lessonId = typeof req.query.lessonId === 'string' ? req.query.lessonId : null;
