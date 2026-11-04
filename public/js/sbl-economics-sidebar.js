@@ -99,6 +99,9 @@
     html += "</div>";
 
     html += '<a class="lh-sidebar__home" href="/economics">' + icon("home") + "<span>Economics overview</span></a>";
+    html += '<a class="lh-sidebar__home" href="/economics/revision/guide">' + icon("book") + "<span>Full revision guide</span></a>";
+    html += '<a class="lh-sidebar__home" href="/economics/revision/topics">' + icon("book") + "<span>Revise by topic</span></a>";
+    html += '<a class="lh-sidebar__home" href="/economics/exam-tips">' + icon("book") + "<span>Exam tips</span></a>";
 
     if (!TREE.length) {
       html += '<div class="lh-sidebar__section">';

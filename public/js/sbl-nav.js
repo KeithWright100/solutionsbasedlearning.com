@@ -46,6 +46,7 @@
           ['Exam tips', '/geography/exam-tips']] },
         { title: 'IB Economics', href: '/economics', blurb: 'Microeconomics, macroeconomics and the global economy.', items: [
           ['Overview', '/economics'],
+          ['Full revision guide', '/economics/revision/guide'],
           ['Revise by topic', '/economics/revision/topics'],
           ['Exam tips', '/economics/exam-tips']] },
         { title: 'IB Business Management', href: '/business', blurb: 'All five units, with case studies and paper practice.', items: [
@@ -94,6 +95,7 @@
           ['Past paper questions', '/geography/revision/paper-questions'],
           ['Quizzes', '/geography/quizzes'],
           ['Economics', '', 'head'],
+          ['Full revision guide', '/economics/revision/guide'],
           ['Revise by topic', '/economics/revision/topics'],
           ['Business Management', '', 'head'],
           ['Revise by topic', '/business/revision/topics'],
