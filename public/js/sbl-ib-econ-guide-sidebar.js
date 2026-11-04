@@ -236,6 +236,7 @@
     html += "</div>";
     html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Hub</span></a>";
     html += '<a class="lh-sidebar__home" href="/economics/revision/guide">' + icon("home") + "<span>Revision guide overview</span></a>";
+    html += '<a class="lh-sidebar__home" href="/economics/revision/guide/past-paper-questions">' + icon("check") + "<span>Past paper questions</span></a>";
     html += '<a class="lh-sidebar__home" href="/economics/revision/topics">' + icon("check") + "<span>Revise Me Bot topics</span></a>";
     html += '<a class="lh-sidebar__home" href="/economics/exam-tips">' + icon("book") + "<span>Exam tips and advice</span></a>";
     html += '<div class="tn-panel">';

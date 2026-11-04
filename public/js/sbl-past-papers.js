@@ -15,6 +15,7 @@
 
   var SUBJECTS = [
     { id: 'ib-geo', name: 'IB Geography', board: 'IB' },
+    { id: 'ib-econ', name: 'IB Economics', board: 'IB' },
     { id: 'ib-bus', name: 'IB Business Management', board: 'IB' },
     { id: 'ig-geo', name: 'IGCSE Geography', board: 'Edexcel 4GE1' },
     { id: 'ig-econ', name: 'IGCSE Economics', board: 'Edexcel 4EC1' },
@@ -31,6 +32,7 @@
   var SEED = {
     'ib-geo': ['2019-05|P2', '2019-05|P3', '2021-05|P1', '2021-05|P2', '2021-05|P3', '2023-05|P1', '2023-05|P2', '2023-05|P3-TZ2',
       '2024-05|P1', '2024-05|P2', '2024-05|P3', '2025-05|P3-TZ1', '2025-05|P3-TZ2', '2025-05|P3-TZ3'],
+    'ib-econ': ['2022-05|P1-SL', '2022-05|P1-HL', '2022-05|P2-SL', '2022-05|P2-HL', '2022-05|P3', '2023-05|P1-SL-TZ1', '2023-05|P1-HL-TZ1', '2023-05|P1-SL-TZ2', '2023-05|P1-HL-TZ2', '2023-05|P2-SL', '2023-05|P2-HL', '2023-05|P3'],
     'ib-bus': ['2025-05|P1-TZ2', '2025-05|P2-TZ2', '2025-05|P3'],
     'ig-geo': ['2019-06|P1R', '2019-06|P2R', '2021-06|P1', '2021-06|P2', '2022-06|P1', '2022-06|P2', '2023-06|P1R', '2023-06|P2R', '2025-06|P1'],
     'ig-econ': ['2019-06|P1R', '2019-06|P2R', '2020-01|P1', '2020-01|P2', '2022-06|P2R', '2023-01|P1'],
@@ -51,7 +53,7 @@
   function sessionLabel(s) { var a = s.split('-'); return MONTHS[+a[1] - 1] + ' ' + a[0]; }
   function codeLabel(c) {
     var m = c.split('-'), base = m[0].replace(/^P(\d)(R?)$/, function (_, n, r) { return 'Paper ' + n + (r ? 'R' : ''); });
-    return base + (m[1] ? ' (' + m[1].replace('TZ', 'Time zone ') + ')' : '');
+    return base + (m.length > 1 ? ' (' + m.slice(1).join(', ').replace(/TZ/g, 'Time zone ') + ')' : '');
   }
   function paperLabel(key) { var p = parse(key); return sessionLabel(p.session) + ' · ' + codeLabel(p.code); }
   function showError(msg) { var e = $('pageError'); if (e) { e.textContent = msg || ''; e.style.display = msg ? 'block' : 'none'; } }
