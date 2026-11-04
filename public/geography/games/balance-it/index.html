@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Balance It! — IB Business Management Games — SBL</title>
+<meta name="description" content="IB Business Management final accounts game: build the statement of financial position in the IB format, bin the items that do not belong, calculate the subtotals and make it balance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2; --ink: #062033; --muted: #4a6272;
+    --line: rgba(5,43,65,.13); --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec;
+    --amber: #d97706; --violet: #7c3aed; --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Inter","Segoe UI",Arial,sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at top right, rgba(0,184,176,.14), transparent 35%), linear-gradient(180deg,#f4fbfc 0%,#eaf4f6 100%); }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  .top-bar { padding: 18px 22px; color: #fff; background: linear-gradient(135deg, rgba(1,21,38,.98), rgba(2,50,78,.96)); }
+  .top-bar-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; font-weight: 700; color: rgba(255,255,255,.85); }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .brand { font-weight: 900; font-size: 1.15rem; } .brand .teal { color: var(--teal); }
+  main { max-width: 1180px; margin: 22px auto 60px; padding: 0 16px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 14px 40px rgba(6,32,51,.07); }
+  .kicker { display: inline-block; font-size: .74rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg,var(--teal),#0792a3); padding: 5px 12px; border-radius: 999px; margin-bottom: 10px; }
+  h1 { font-size: clamp(1.6rem,3.4vw,2.4rem); font-weight: 900; color: var(--navy); }
+  .muted { color: var(--muted); }
+  .btn { border: 0; border-radius: 12px; padding: 13px 22px; font-weight: 800; font-size: 1rem; background: linear-gradient(135deg,var(--teal),#0792a3); color: #fff; box-shadow: 0 10px 24px rgba(0,184,176,.3); transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:disabled { opacity: .45; cursor: default; transform: none; }
+  .btn--ghost { background: #fff; color: var(--navy); border: 1px solid var(--line); box-shadow: none; }
+  .sr { position: absolute; left: -9999px; }
+
+  /* start */
+  .start { padding: 34px 30px; text-align: center; }
+  .start p.lead { max-width: 700px; margin: 10px auto 0; line-height: 1.6; font-weight: 500; color: var(--muted); }
+  .how { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 26px 0; text-align: left; }
+  .how div { background: #f4fbfc; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .how div > b:first-child { display: block; color: var(--navy); margin-bottom: 4px; }
+  .how span b { color: var(--navy); }
+  .how span { font-size: .9rem; color: var(--muted); line-height: 1.5; }
+  .levels { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 8px; text-align: left; }
+  .lvl { border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 16px; transition: border-color .15s, transform .15s; }
+  .lvl:hover { border-color: var(--teal); transform: translateY(-2px); }
+  .lvl b { display: block; font-size: 1.02rem; color: var(--navy); margin: 6px 0 4px; }
+  .lvl span { font-size: .85rem; color: var(--muted); line-height: 1.45; display: block; }
+  .lvl i { font-style: normal; font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-dark); }
+  .lvl small { display: block; margin-top: 8px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+  .lvl .hl { display: inline-block; font: 800 .66rem/1 'IBM Plex Mono',monospace; background: var(--violet); color: #fff; border-radius: 999px; padding: 3px 7px; margin-left: 4px; vertical-align: 2px; }
+
+  /* game */
+  .hud { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-weight: 800; font-size: .88rem; color: var(--navy); }
+  .chip small { font-weight: 600; color: var(--muted); margin-right: 4px; }
+  .timer { flex: 1; min-width: 140px; height: 10px; background: #e2eef1; border-radius: 999px; overflow: hidden; }
+  .timer i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg,var(--teal),var(--cyan)); transition: width .25s linear; }
+  .timer.low i { background: linear-gradient(90deg,#f97316,var(--red)); }
+  .brief { padding: 16px 20px; margin-bottom: 14px; display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; }
+  .brief .em { font-size: 2rem; line-height: 1; }
+  .brief h2 { font-size: 1.2rem; color: var(--navy); }
+  .brief p { font-size: .92rem; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+  .brief .txt { flex: 1; min-width: 240px; }
+  .board { display: grid; grid-template-columns: 340px 1fr; gap: 16px; align-items: start; }
+  .tray { padding: 16px; position: sticky; top: 12px; }
+  .board > * { min-width: 0; }
+  .tray h3, .sheet h3 { font-size: .8rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 10px; }
+  .tray .hint { font-size: .82rem; color: var(--muted); line-height: 1.45; margin-bottom: 10px; }
+  .cards { display: flex; flex-direction: column; gap: 7px; min-height: 40px; }
+  .itm { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; border: 2px solid var(--line); background: #fff; border-radius: 11px; padding: 9px 11px; font-weight: 700; font-size: .9rem; color: var(--ink); text-align: left; touch-action: manipulation; }
+  .itm .v { font-family: 'IBM Plex Mono',monospace; font-weight: 600; color: var(--navy); }
+  .itm:hover { border-color: var(--teal); }
+  .itm.sel { border-color: var(--navy); background: #eef4fb; box-shadow: 0 0 0 3px rgba(15,58,92,.15); }
+  .itm.ok { border-color: var(--green); background: var(--green-soft); }
+  .itm.bad { border-color: var(--red); background: var(--red-soft); }
+  .itm[draggable=true] { cursor: grab; }
+  .bin { margin-top: 14px; border: 2px dashed #f59e0b; background: #fffaf0; border-radius: 14px; padding: 10px; min-height: 64px; }
+  .bin.target { background: #fff3d6; border-color: #d97706; }
+  .bin b { display: block; font-size: .8rem; color: #8a5300; margin-bottom: 6px; }
+  .bin .cards { min-height: 0; }
+  .sheet { padding: 18px 20px; }
+  .sheet .ttl { text-align: center; margin-bottom: 12px; }
+  .sheet .ttl b { display: block; font-size: 1.05rem; color: var(--navy); }
+  .sheet .ttl span { font-size: .86rem; color: var(--muted); }
+  table.sofp { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  .sofp td { padding: 4px 6px; vertical-align: middle; }
+  .sofp .h td { font-weight: 800; color: var(--navy); padding-top: 12px; }
+  .sofp .num { width: 120px; text-align: right; font-family: 'IBM Plex Mono',monospace; }
+  .sofp .colh td { font-size: .74rem; font-weight: 800; color: var(--muted); text-align: right; }
+  .slot { min-height: 42px; border: 2px dashed #b7cfd6; border-radius: 10px; display: flex; align-items: center; padding: 0 6px; color: #8aa3ad; font-size: .8rem; font-style: italic; transition: background .15s, border-color .15s; }
+  .slot.target { background: #effbfb; border-color: var(--teal); }
+  .slot.filled { border-style: solid; border-color: transparent; padding: 0; }
+  .slot .itm { padding: 7px 10px; }
+  .tot td { border-top: 1px solid #cfdde2; }
+  .tot td:first-child { font-weight: 800; }
+  .grand td { border-top: 2px solid var(--navy); }
+  input.sum { width: 110px; border: 2px solid #b7cfd6; border-radius: 9px; padding: 7px 8px; font: 600 .92rem 'IBM Plex Mono',monospace; text-align: right; color: var(--navy); }
+  input.sum:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,184,176,.18); }
+  input.sum.ok { border-color: var(--green); background: var(--green-soft); }
+  input.sum.bad { border-color: var(--red); background: var(--red-soft); }
+  .meter { margin-top: 14px; border-radius: 14px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; background: #f4f8fa; border: 1px solid var(--line); font-weight: 700; font-size: .92rem; }
+  .meter .scale { font-size: 1.8rem; transition: transform .4s; }
+  .meter.tilt-l .scale { transform: rotate(-12deg); } .meter.tilt-r .scale { transform: rotate(12deg); }
+  .meter.on { background: var(--green-soft); border-color: rgba(22,163,74,.35); color: #14532d; }
+  .dep { margin: 6px 0 12px; background: #f5f3ff; border: 1px solid #c4b5fd; border-radius: 12px; padding: 12px 14px; font-size: .9rem; line-height: 1.55; }
+  .dep b.t { display: block; color: #5b21b6; margin-bottom: 4px; }
+  .dep .row { display: flex; gap: 8px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  .controls { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .controls .btn { flex: 1; }
+  .fb { margin-top: 14px; border-radius: 14px; padding: 14px 16px; line-height: 1.55; font-size: .95rem; display: none; }
+  .fb.show { display: block; }
+  .fb.good { background: var(--green-soft); border: 1px solid rgba(22,163,74,.35); }
+  .fb.bad { background: var(--red-soft); border: 1px solid rgba(220,38,38,.3); }
+  .fb b.t { display: block; font-size: 1.02rem; margin-bottom: 4px; }
+  .fb ul { margin: 6px 0 0 18px; }
+  .pop { animation: pop .35s ease-out; }
+  @keyframes pop { 0% { transform: scale(.96) } 60% { transform: scale(1.02) } 100% { transform: scale(1) } }
+
+  /* end */
+  .end { padding: 30px; }
+  .end-top { text-align: center; }
+  .big { font-size: 3rem; font-weight: 900; color: var(--navy); line-height: 1; margin-top: 8px; }
+  .stats { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+  .stats div { background: #f4fbfc; border: 1px solid var(--line); border-radius: 12px; padding: 10px 16px; text-align: center; }
+  .stats b { display: block; font-size: 1.3rem; color: var(--navy); }
+  .stats span { font-size: .78rem; color: var(--muted); font-weight: 700; }
+  .review { list-style: none; margin-top: 16px; }
+  .review li { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; display: flex; gap: 10px; line-height: 1.5; font-size: .92rem; }
+  .review li .ic { font-weight: 900; flex-shrink: 0; width: 22px; }
+  .review li.ok .ic { color: var(--green); } .review li.no .ic { color: var(--red); }
+  .review li small { display: block; color: var(--muted); }
+  .tip { margin-top: 18px; background: #fff7e6; border: 1px solid #f5c66b; border-radius: 14px; padding: 14px 16px; line-height: 1.55; font-size: .93rem; }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+
+  @media (max-width: 960px) {
+    .board { grid-template-columns: 1fr; }
+    .tray { position: sticky; top: 0; z-index: 20; padding: 10px 12px; border-radius: 0 0 16px 16px; }
+    .tray .hint { display: none; }
+    .tray h3 { margin-bottom: 6px; }
+    #pile { flex-direction: row; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+    #pile .itm { flex: 0 0 auto; width: auto; flex-direction: column; align-items: flex-start; gap: 2px; padding: 7px 10px; font-size: .82rem; }
+    #pile p { white-space: nowrap; }
+    .bin { margin-top: 8px; padding: 6px 8px; min-height: 0; }
+    .bin .cards { flex-direction: row; flex-wrap: wrap; }
+    .bin .itm { width: auto; font-size: .8rem; padding: 5px 8px; }
+    .levels { grid-template-columns: 1fr 1fr; }
+    .how { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .levels { grid-template-columns: 1fr; }
+    .start { padding: 24px 18px; }
+    .sheet { padding: 14px 10px; }
+    .sofp .num { width: 96px; } input.sum { width: 92px; }
+  }
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a class="back-link" href="/geography/games#business"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg> All games</a>
+    <span class="brand">SBL <span class="teal">Games</span> &middot; IB Business Management</span>
+  </div>
+</header>
+
+<main>
+  <!-- START -->
+  <section class="card start" id="startScreen">
+    <span class="kicker">IB Business Management &middot; Unit 3.4 &middot; Final accounts</span>
+    <h1>Balance It!</h1>
+    <p class="lead">The accountant has left a pile of figures on your desk. Build each business&rsquo;s <b>statement of financial position</b> in the IB format, bin anything that does not belong on it, work out the subtotals, and make it balance.</p>
+    <div class="how">
+      <div><b>1. Place the items</b><span>Tap an item card, then tap a gap in the statement (or drag it there). Each item belongs in one section: assets, liabilities or equity.</span></div>
+      <div><b>2. Bin the imposters</b><span>Exam papers mix in items from the statement of profit or loss, such as revenue, cost of sales or dividends. They go in the bin, not on the balance sheet.</span></div>
+      <div><b>3. Calculate and balance</b><span>Fill in every subtotal. When <b>net assets</b> equals <b>total equity</b>, the scales balance. Fewer mistakes and faster finishes score more points.</span></div>
+    </div>
+    <h2 class="sr">Choose a level</h2>
+    <div class="levels" id="levels"></div>
+  </section>
+
+  <!-- GAME -->
+  <section id="gameScreen" hidden>
+    <div class="hud">
+      <span class="chip"><small>Business</small><span id="rNo">1</span>/<span id="rTot">3</span></span>
+      <span class="chip"><small>Score</small><span id="scoreNo">0</span></span>
+      <span class="chip" id="lvlChip"></span>
+      <div class="timer" id="timer" hidden><i id="timerBar"></i></div>
+    </div>
+    <div class="card brief">
+      <span class="em" id="bizEm"></span>
+      <div class="txt"><h2 id="bizName"></h2><p id="bizDesc"></p></div>
+    </div>
+    <div class="board">
+      <aside class="card tray">
+        <h3>Figures from the accountant ($000)</h3>
+        <p class="hint">Tap a card, then tap where it goes. Tap a placed card to send it back.</p>
+        <div class="cards" id="pile"></div>
+        <div class="bin" id="bin" data-slot="bin"><b>&#128465; Not on the statement of financial position</b><div class="cards" id="binCards"></div></div>
+      </aside>
+      <section class="card sheet" aria-live="polite">
+        <div class="ttl"><b id="sheetName"></b><span id="sheetDate"></span></div>
+        <div class="dep" id="depBox" hidden></div>
+        <table class="sofp"><tbody id="sofp"></tbody></table>
+        <div class="meter" id="meter"><span class="scale">&#9878;&#65039;</span><span id="meterTxt">Fill in net assets and total equity to test the balance.</span></div>
+        <div class="controls"><button class="btn" id="checkBtn">Check my statement</button><button class="btn btn--ghost" id="nextBtn" hidden>Next business &rarr;</button></div>
+        <div class="fb" id="fb"></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="card end" id="endScreen" hidden>
+    <div class="end-top">
+      <span class="kicker" id="endKicker">Level complete</span>
+      <h1 id="endTitle"></h1>
+      <div class="big" id="endScore">0</div>
+      <p class="muted">points</p>
+    </div>
+    <div class="stats">
+      <div><b id="stFirst">0</b><span>balanced first time</span></div>
+      <div><b id="stErr">0</b><span>mistakes fixed</span></div>
+      <div><b id="stBin">0</b><span>imposters binned</span></div>
+      <div><b id="stBest">0</b><span>your best</span></div>
+    </div>
+    <ul class="review" id="review"></ul>
+    <div class="tip"><b>Exam tip:</b> In Paper 2 &ldquo;construct&rdquo; questions, use the exact IB layout and headings, include the business name and the date (&ldquo;as at&rdquo;), put accumulated depreciation in brackets, and check that <b>net assets = total equity</b>. Items from the statement of profit or loss (revenue, cost of sales, expenses, interest, tax, dividends) never appear on the statement of financial position &mdash; only retained earnings carry across.
+      <br><a href="/business/revision/guide/finance-and-accounts/topic-2-costs-revenues-and-final-accounts" style="color:var(--teal-dark);font-weight:800">Revise final accounts in the IB Business revision guide &rarr;</a></div>
+    <div class="actions"><button class="btn" id="againBtn">Play again</button><button class="btn btn--ghost" id="menuBtn">Choose another level</button></div>
+  </section>
+  <div class="sr" aria-live="assertive" id="announce"></div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function ri(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+  function r5(a, b) { return 5 * ri(Math.ceil(a / 5), Math.floor(b / 5)); }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function fmt(n) { return n < 0 ? '(' + Math.abs(n).toLocaleString('en-GB') + ')' : n.toLocaleString('en-GB'); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var LEVELS = [
+    { id: 'co', name: 'Company', tag: 'Level 1', desc: 'Profit-making companies: share capital and retained earnings.', rounds: 3 },
+    { id: 'np', name: 'Charity', tag: 'Level 2', desc: 'Non-profit social enterprises: no share capital, and retained surplus instead of retained earnings.', rounds: 3 },
+    { id: 'hl', name: 'Depreciation', tag: 'Level 3', hl: true, desc: 'Work out accumulated depreciation first (straight-line or units of production), then build the statement.', rounds: 3 },
+    { id: 'sp', name: 'Speed round', tag: 'Level 4', desc: 'A mix of everything, more imposters, and a clock for each business.', rounds: 4, timed: 150 }
+  ];
+  var COMPANIES = [
+    ['&#9749;', 'Lotus Leaf Café Ltd', 'A chain of three cafés in Chiang Mai.'],
+    ['&#128690;', 'Riverbend Bikes Ltd', 'Makes and sells electric bicycles.'],
+    ['&#9728;&#65039;', 'Sunrise Solar plc', 'Installs solar panels on homes and schools.'],
+    ['&#127838;', 'Golden Crust Bakery Ltd', 'A bakery supplying hotels and supermarkets.'],
+    ['&#128187;', 'Pixel Forge Ltd', 'A small video-game studio.'],
+    ['&#129469;', 'Blue Lagoon Dive Co. Ltd', 'Runs scuba-diving trips and a dive shop.'],
+    ['&#128085;', 'Thread & Needle Ltd', 'A sustainable clothing brand.'],
+    ['&#127793;', 'GreenRoot Farms Ltd', 'An organic vegetable farm with a farm shop.']
+  ];
+  var CHARITIES = [
+    ['&#127858;', 'Kind Meals Foundation', 'A charity that provides free school lunches.'],
+    ['&#128062;', 'Paws Rescue Trust', 'Rescues and rehomes stray animals.'],
+    ['&#128218;', 'Open Books Initiative', 'Builds community libraries in rural villages.'],
+    ['&#129658;', 'Clean Water Collective', 'Installs water filters in remote communities.'],
+    ['&#127939;', 'Youth Sport for All', 'Runs free sports clubs for young people.']
+  ];
+  var MONTHS = ['31 December', '31 March', '30 June', '31 August'];
+  // canonical lines of the IB statement of financial position
+  var SECTIONS = [
+    { key: 'nca', head: 'Non-current assets', items: ['ppe', 'dep'], total: 'Non-current assets' },
+    { key: 'ca', head: 'Current assets', items: ['cash', 'debt', 'stock'], total: 'Current assets' },
+    { key: 'ta', grand: 'Total assets' },
+    { key: 'cl', head: 'Current liabilities', items: ['od', 'cred', 'stl'], total: 'Current liabilities' },
+    { key: 'ncl', head: 'Non-current liabilities', items: ['borr'], total: 'Non-current liabilities' },
+    { key: 'tl', grand: 'Total liabilities' },
+    { key: 'na', grand: 'Net assets' },
+    { key: 'eq', head: 'Equity', items: ['sc', 're'], total: 'Total equity' }
+  ];
+  var ITEM_SECTION = { ppe: 'nca', dep: 'nca', cash: 'ca', debt: 'ca', stock: 'ca', od: 'cl', cred: 'cl', stl: 'cl', borr: 'ncl', sc: 'eq', re: 'eq' };
+  var LABELS = { ppe: 'Property, plant and equipment', dep: 'Accumulated depreciation', cash: 'Cash', debt: 'Debtors', stock: 'Stock', od: 'Bank overdraft', cred: 'Trade creditors', stl: 'Other short-term loans', borr: 'Borrowings (long-term)', sc: 'Share capital', re: 'Retained earnings' };
+  var IMPOSTERS = [
+    ['rev', 'Sales revenue', 'Sales revenue belongs on the statement of profit or loss.'],
+    ['cos', 'Cost of sales', 'Cost of sales is an expense on the statement of profit or loss.'],
+    ['exp', 'Expenses (overheads)', 'Expenses are deducted on the statement of profit or loss.'],
+    ['int', 'Interest paid', 'Interest is a cost on the statement of profit or loss.'],
+    ['tax', 'Tax paid', 'Tax appears on the statement of profit or loss.'],
+    ['div', 'Dividends', 'Dividends are paid out of profit on the statement of profit or loss; only retained profit reaches the balance sheet.'],
+    ['gp', 'Gross profit', 'Gross profit is a line on the statement of profit or loss.'],
+    ['don', 'Donations received', 'Donations are income on a non-profit&rsquo;s statement of profit or loss.']
+  ];
+  var NAMES = { nca: 'Non-current assets', ca: 'Current assets', ta: 'Total assets', cl: 'Current liabilities', ncl: 'Non-current liabilities', tl: 'Total liabilities', na: 'Net assets', eq: 'Total equity' };
+
+  var lvl, round, rounds, score, sel = null, biz, stats, review, attempts, tLeft, tTimer, done, used;
+
+  function bestKey() { return 'sbl-balanceit-best-' + lvl.id; }
+  function getBest(id) { try { return +(localStorage.getItem('sbl-balanceit-best-' + (id || lvl.id)) || 0); } catch (e) { return 0; } }
+  function setBest(v) { try { localStorage.setItem(bestKey(), String(v)); } catch (e) {} }
+
+  function renderLevels() {
+    $('levels').innerHTML = LEVELS.map(function (L, i) {
+      var b = getBest(L.id);
+      return '<button type="button" class="lvl" data-i="' + i + '"><i>' + L.tag + '</i><b>' + L.name + (L.hl ? ' <span class="hl">HL</span>' : '') + '</b><span>' + L.desc + '</span><small>' + L.rounds + ' businesses' + (L.timed ? ' &middot; timed' : '') + (b ? ' &middot; best ' + b : '') + '</small></button>';
+    }).join('');
+  }
+  $('levels').addEventListener('click', function (e) { var b = e.target.closest('.lvl'); if (b) start(LEVELS[+b.dataset.i]); });
+
+  // ---------- build a business ----------
+  function makeBiz(kind) {
+    var np = kind === 'np', hl = kind === 'hl';
+    var pool = np ? CHARITIES : COMPANIES, who;
+    do { who = pick(pool); } while (used.indexOf(who[1]) >= 0 && used.length < pool.length);
+    used.push(who[1]);
+    var v = {}, depInfo = null;
+    if (hl) {
+      var resid = r5(0, 60);
+      if (Math.random() < 0.5) {
+        var life = pick([4, 5, 8, 10]), annual = r5(15, 90), yrs = ri(1, life - 1);
+        v.ppe = resid + annual * life; v.dep = annual * yrs;
+        depInfo = { m: 'sl', cost: v.ppe, resid: resid, life: life, yrs: yrs, annual: annual, ans: v.dep };
+      } else {
+        var k = 20 * ri(5, 30), units = pick([20000, 40000, 50000, 100000]), f = pick([0.2, 0.25, 0.4, 0.5, 0.6, 0.75, 0.8]);
+        v.ppe = resid + k; v.dep = Math.round(k * f);
+        depInfo = { m: 'up', cost: v.ppe, resid: resid, units: units, usedU: Math.round(units * f), ans: v.dep };
+      }
+    } else {
+      v.ppe = r5(np ? 80 : 150, np ? 400 : 900);
+      v.dep = r5(5, Math.round(v.ppe * 0.35));
+    }
+    v.cash = r5(5, 60); v.debt = r5(5, 50); v.stock = r5(5, 70);
+    v.cred = r5(5, 45);
+    if (Math.random() < 0.7) v.od = r5(5, 25);
+    if (Math.random() < 0.7) v.stl = r5(5, 30);
+    var nca = v.ppe - v.dep, ca = v.cash + v.debt + v.stock, cl = v.cred + (v.od || 0) + (v.stl || 0);
+    var room = nca + ca - cl;
+    if (room < 70) { v.cash += 70 - room + r5(0, 20); ca = v.cash + v.debt + v.stock; room = nca + ca - cl; }
+    v.borr = Math.max(10, 5 * Math.round(room * (ri(15, 55) / 100) / 5));
+    var na = room - v.borr;
+    if (np) v.re = na;
+    else { v.sc = Math.max(10, 5 * Math.round(na * (ri(35, 75) / 100) / 5)); v.re = na - v.sc; if (v.re <= 0) { v.sc = na - 15; v.re = 15; } }
+    var items = [];
+    Object.keys(v).forEach(function (k) {
+      var lab = LABELS[k]; if (np && k === 're') lab = 'Retained surplus';
+      items.push({ id: k, label: lab, val: k === 'dep' ? -v[k] : v[k], sec: ITEM_SECTION[k], hidden: hl && k === 'dep' });
+    });
+    var nImp = kind === 'sp' ? ri(3, 4) : (kind === 'co' ? 2 : ri(2, 3));
+    var imps = shuffle(IMPOSTERS.filter(function (x) { return np ? x[0] !== 'div' : x[0] !== 'don'; })).slice(0, nImp);
+    if (np && Math.random() < 0.6 && imps.every(function (x) { return x[0] !== 'don'; })) imps[0] = IMPOSTERS[7];
+    imps.forEach(function (x) { items.push({ id: x[0], label: x[1], val: x[0] === 'rev' || x[0] === 'don' ? r5(200, 900) : r5(10, 300), sec: 'bin', why: x[2] }); });
+    var T = { nca: nca, ca: ca, ta: nca + ca, cl: cl, ncl: v.borr, tl: cl + v.borr, na: nca + ca - cl - v.borr, eq: v.re + (v.sc || 0) };
+    return { who: who, np: np, hl: hl, items: shuffle(items), T: T, dep: depInfo, date: pick(MONTHS) + ' ' + pick([2025, 2026]) };
+  }
+
+  // ---------- render ----------
+  var place = {}; // item id -> slot key ('pile', 'bin', or 'sec:index')
+  function render() {
+    $('bizEm').innerHTML = biz.who[0]; $('bizName').innerHTML = biz.who[1];
+    $('bizDesc').innerHTML = biz.who[2] + ' ' + (biz.np ? 'As a non-profit social enterprise it has no shareholders.' : 'It is a profit-making company.') + ' Use the figures to construct its statement of financial position.';
+    $('sheetName').innerHTML = biz.who[1]; $('sheetDate').textContent = 'Statement of financial position as at ' + biz.date + ' ($000)';
+    // depreciation task
+    var d = biz.dep, db = $('depBox');
+    if (d) {
+      db.hidden = false;
+      var story = d.m === 'sl'
+        ? 'The equipment cost <b>$' + d.cost + 'k</b>, has a residual value of <b>$' + d.resid + 'k</b> and a useful life of <b>' + d.life + ' years</b>. It was bought <b>' + d.yrs + ' year' + (d.yrs > 1 ? 's' : '') + '</b> ago. Use the <b>straight-line</b> method.'
+        : 'The equipment cost <b>$' + d.cost + 'k</b>, has a residual value of <b>$' + d.resid + 'k</b> and is expected to produce <b>' + d.units.toLocaleString('en-GB') + ' units</b> in its life. So far it has produced <b>' + d.usedU.toLocaleString('en-GB') + ' units</b>. Use the <b>units of production</b> method.';
+      db.innerHTML = '<b class="t">HL step 1: Accumulated depreciation</b>' + story + '<div class="row"><label for="depIn">Accumulated depreciation ($000):</label><input class="sum" id="depIn" inputmode="numeric" autocomplete="off"><button type="button" class="btn btn--ghost" id="depBtn" style="padding:8px 14px">Check</button><span id="depMsg" class="muted" style="font-size:.85rem"></span></div>';
+      $('depBtn').addEventListener('click', checkDep);
+      $('depIn').addEventListener('keydown', function (e) { if (e.key === 'Enter') checkDep(); });
+    } else db.hidden = true;
+    var h = '<tr class="colh"><td></td><td>$000</td><td>$000</td></tr>';
+    SECTIONS.forEach(function (S) {
+      if (S.grand) {
+        h += '<tr class="tot grand"><td>' + S.grand + '</td><td></td><td class="num"><input class="sum" data-t="' + S.key + '" inputmode="numeric" autocomplete="off" aria-label="' + S.grand + '"></td></tr>';
+        return;
+      }
+      var n = biz.items.filter(function (it) { return it.sec === S.key; }).length;
+      h += '<tr class="h"><td colspan="3">' + (S.key === 'eq' && biz.np ? 'Equity' : S.head) + '</td></tr>';
+      for (var i = 0; i < n; i++) h += '<tr><td colspan="2"><div class="slot" data-slot="' + S.key + ':' + i + '">drop an item here</div></td><td></td></tr>';
+      h += '<tr class="tot"><td>' + S.total + '</td><td></td><td class="num"><input class="sum" data-t="' + S.key + '" inputmode="numeric" autocomplete="off" aria-label="' + S.total + '"></td></tr>';
+    });
+    $('sofp').innerHTML = h;
+    biz.items.forEach(function (it) { place[it.id] = 'pile'; });
+    drawCards();
+    $('sofp').querySelectorAll('input.sum').forEach(function (inp) { inp.addEventListener('input', meter); });
+    meter();
+  }
+  function cardHtml(it) {
+    var shown = it.hidden && !it.unlocked ? '?' : fmt(it.val);
+    return '<button type="button" class="itm' + (sel === it.id ? ' sel' : '') + (it.st ? ' ' + it.st : '') + '" draggable="true" data-id="' + it.id + '"><span>' + it.label + '</span><span class="v">' + shown + '</span></button>';
+  }
+  function drawCards() {
+    var pile = '', bin = '';
+    biz.items.forEach(function (it) { if (place[it.id] === 'pile') pile += cardHtml(it); else if (place[it.id] === 'bin') bin += cardHtml(it); });
+    $('pile').innerHTML = pile || '<p class="muted" style="font-size:.85rem">All items placed. Now complete the subtotals and check.</p>';
+    $('binCards').innerHTML = bin;
+    document.querySelectorAll('.slot').forEach(function (s) {
+      var key = s.dataset.slot, it = biz.items.filter(function (x) { return place[x.id] === key; })[0];
+      if (it) { s.classList.add('filled'); s.innerHTML = cardHtml(it); } else { s.classList.remove('filled'); s.innerHTML = 'drop an item here'; }
+    });
+  }
+  function itemById(id) { return biz.items.filter(function (x) { return x.id === id; })[0]; }
+  function moveTo(id, key) {
+    if (done) return;
+    var it = itemById(id); if (!it) return;
+    if (it.hidden && !it.unlocked && key !== 'pile') { flash('Work out the accumulated depreciation first (HL step 1).'); return; }
+    if (key !== 'pile' && key !== 'bin') { // slot occupied? send occupant back
+      biz.items.forEach(function (x) { if (place[x.id] === key) place[x.id] = 'pile'; });
+    }
+    place[id] = key; it.st = ''; sel = null; drawCards(); meter();
+  }
+  function flash(msg) { var f = $('fb'); f.className = 'fb show bad'; f.innerHTML = '<b class="t">Hold on</b>' + msg; }
+
+  // tap / click
+  document.addEventListener('click', function (e) {
+    if ($('gameScreen').hidden) return;
+    var card = e.target.closest('.itm');
+    var slot = e.target.closest('.slot, .bin');
+    if (card) {
+      var id = card.dataset.id, inSlot = card.closest('.slot, .bin');
+      if (sel && sel !== id && inSlot) { moveTo(sel, inSlot.dataset.slot); return; }
+      if (inSlot && !sel) { place[id] = 'pile'; itemById(id).st = ''; drawCards(); meter(); return; }
+      sel = sel === id ? null : id; drawCards(); return;
+    }
+    if (slot && sel) moveTo(sel, slot.dataset.slot);
+  });
+  // drag and drop (desktop)
+  document.addEventListener('dragstart', function (e) { var c = e.target.closest && e.target.closest('.itm'); if (c) { e.dataTransfer.setData('text/plain', c.dataset.id); sel = c.dataset.id; } });
+  document.addEventListener('dragover', function (e) { var s = e.target.closest && e.target.closest('.slot, .bin, #pile'); if (s) { e.preventDefault(); s.classList.add('target'); } });
+  document.addEventListener('dragleave', function (e) { var s = e.target.closest && e.target.closest('.slot, .bin, #pile'); if (s) s.classList.remove('target'); });
+  document.addEventListener('drop', function (e) {
+    var s = e.target.closest && e.target.closest('.slot, .bin, #pile'); if (!s) return;
+    e.preventDefault(); s.classList.remove('target');
+    var id = e.dataTransfer.getData('text/plain'); moveTo(id, s.id === 'pile' ? 'pile' : s.dataset.slot);
+  });
+
+  function checkDep() {
+    var d = biz.dep, v = Math.abs(parseFloat(($('depIn').value || '').replace(/[,()$\s]/g, '')));
+    var it = itemById('dep');
+    if (v === d.ans) {
+      it.unlocked = true; $('depIn').classList.add('ok'); $('depIn').classList.remove('bad'); $('depIn').disabled = true; $('depBtn').disabled = true;
+      $('depMsg').innerHTML = d.m === 'sl' ? '&#10003; (' + d.cost + ' &minus; ' + d.resid + ') &divide; ' + d.life + ' = ' + d.annual + ' a year &times; ' + d.yrs + ' = ' + d.ans : '&#10003; (' + d.cost + ' &minus; ' + d.resid + ') &times; ' + d.usedU.toLocaleString('en-GB') + ' &divide; ' + d.units.toLocaleString('en-GB') + ' = ' + d.ans;
+      score += 20; $('scoreNo').textContent = score; drawCards();
+    } else {
+      attempts.dep = (attempts.dep || 0) + 1; stats.err++;
+      $('depIn').classList.add('bad');
+      $('depMsg').textContent = attempts.dep >= 2 ? (d.m === 'sl' ? 'Hint: annual depreciation = (cost − residual) ÷ useful life, then multiply by the years owned.' : 'Hint: (cost − residual) × units produced so far ÷ total expected units.') : 'Not quite. Try again.';
+    }
+  }
+
+  function readT(key) { var inp = document.querySelector('input.sum[data-t="' + key + '"]'); if (!inp || inp.value.trim() === '') return null; var s = inp.value.replace(/[,$\s]/g, ''); var neg = /^\(.*\)$/.test(s) || /^-/.test(s); var n = parseFloat(s.replace(/[()\-]/g, '')); return isNaN(n) ? NaN : (neg ? -n : n); }
+  function meter() {
+    var na = readT('na'), eq = readT('eq'), m = $('meter');
+    m.classList.remove('on', 'tilt-l', 'tilt-r');
+    if (na === null || eq === null || isNaN(na) || isNaN(eq)) { $('meterTxt').textContent = 'Fill in net assets and total equity to test the balance.'; return; }
+    if (na === eq) { m.classList.add('on'); $('meterTxt').innerHTML = 'Net assets ' + fmt(na) + ' = total equity ' + fmt(eq) + '. It balances! Now check that everything else is right.'; }
+    else { m.classList.add(na > eq ? 'tilt-l' : 'tilt-r'); $('meterTxt').innerHTML = 'Net assets ' + fmt(na) + ' &ne; total equity ' + fmt(eq) + '. Not balanced yet.'; }
+  }
+
+  function check() {
+    if (done) return;
+    if (biz.dep && !itemById('dep').unlocked) { flash('Start with HL step 1: calculate the accumulated depreciation.'); return; }
+    var left = biz.items.filter(function (it) { return place[it.id] === 'pile'; });
+    if (left.length) { flash('Place every card first: ' + left.length + ' still in the pile.'); return; }
+    var wrong = [], tips = [];
+    biz.items.forEach(function (it) {
+      var p = place[it.id], ok = it.sec === 'bin' ? p === 'bin' : p.split(':')[0] === it.sec;
+      it.st = ok ? 'ok' : 'bad';
+      if (!ok) {
+        wrong.push(it);
+        if (it.sec === 'bin') tips.push('<b>' + it.label + '</b>: ' + it.why);
+        else if (p === 'bin') tips.push('<b>' + it.label + '</b> does belong on the statement of financial position, under ' + NAMES[it.sec].toLowerCase() + '.');
+        else tips.push('<b>' + it.label + '</b> is not in ' + NAMES[p.split(':')[0]].toLowerCase() + '. ' + (it.id === 'debt' ? 'Debtors <i>owe the business</i> money, so they are an asset.' : it.id === 'cred' ? 'Trade creditors are owed money <i>by</i> the business, so they are a liability.' : it.id === 'od' ? 'An overdraft must be repaid on demand: a current liability.' : it.id === 'borr' ? 'Long-term borrowing is repaid over more than a year: a non-current liability.' : it.id === 'dep' ? 'Accumulated depreciation is deducted from property, plant and equipment.' : ''));
+      }
+    });
+    var tWrong = [];
+    Object.keys(biz.T).forEach(function (k) {
+      var inp = document.querySelector('input.sum[data-t="' + k + '"]'), v = readT(k), ok = v === biz.T[k];
+      inp.classList.toggle('ok', ok); inp.classList.toggle('bad', !ok);
+      if (!ok) tWrong.push(k);
+    });
+    drawCards();
+    attempts.n++;
+    var f = $('fb');
+    if (!wrong.length && !tWrong.length) {
+      done = true; clearInterval(tTimer);
+      var pts = Math.max(30, 100 - 12 * (attempts.n - 1) - 4 * attempts.miss), bonus = 0;
+      if (lvl.timed) bonus = Math.round(tLeft / 3);
+      if (attempts.n === 1) stats.first++;
+      stats.bin += biz.items.filter(function (it) { return it.sec === 'bin'; }).length;
+      score += pts + bonus; $('scoreNo').textContent = score;
+      review.push({ ok: attempts.n === 1, name: biz.who[1], pts: pts + bonus, tries: attempts.n });
+      f.className = 'fb show good pop';
+      f.innerHTML = '<b class="t">&#9878;&#65039; Balanced! +' + (pts + bonus) + ' points</b>Net assets ' + fmt(biz.T.na) + ' = total equity ' + fmt(biz.T.eq) + '. ' + (attempts.n === 1 ? 'Perfect first time!' : 'Fixed in ' + attempts.n + ' checks.') + (bonus ? ' Time bonus: +' + bonus + '.' : '');
+      $('checkBtn').hidden = true; $('nextBtn').hidden = false; $('nextBtn').focus();
+      $('announce').textContent = 'Balanced. Plus ' + (pts + bonus) + ' points.';
+    } else {
+      stats.err += wrong.length + tWrong.length; attempts.miss += wrong.length + tWrong.length;
+      f.className = 'fb show bad pop';
+      var tt = tWrong.length ? '<li>' + tWrong.length + ' subtotal' + (tWrong.length > 1 ? 's' : '') + ' (in red) need' + (tWrong.length > 1 ? '' : 's') + ' fixing: ' + tWrong.map(function (k) { return NAMES[k].toLowerCase(); }).join(', ') + '.' + (tWrong.indexOf('nca') >= 0 ? ' Remember: non-current assets = PPE &minus; accumulated depreciation.' : '') + (tWrong.indexOf('na') >= 0 ? ' Net assets = total assets &minus; total liabilities.' : '') + '</li>' : '';
+      f.innerHTML = '<b class="t">Not balanced yet</b>Items in red are in the wrong place; red subtotals are wrong.<ul>' + tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + tt + '</ul>';
+    }
+  }
+
+  function startRound() {
+    done = false; sel = null; attempts = { n: 0, miss: 0 };
+    var kind = lvl.id === 'sp' ? pick(['co', 'co', 'np', 'hl']) : lvl.id;
+    if (lvl.id === 'sp') { biz = makeBiz(kind); if (kind === 'co' || kind === 'np') { /* more imposters in speed mode */ } }
+    else biz = makeBiz(kind);
+    $('rNo').textContent = round + 1; $('rTot').textContent = rounds;
+    $('fb').className = 'fb'; $('checkBtn').hidden = false; $('nextBtn').hidden = true;
+    render();
+    clearInterval(tTimer);
+    if (lvl.timed) {
+      tLeft = lvl.timed; $('timer').hidden = false; $('timerBar').style.width = '100%'; $('timer').classList.remove('low');
+      tTimer = setInterval(function () {
+        tLeft--; $('timerBar').style.width = (tLeft / lvl.timed * 100) + '%'; $('timer').classList.toggle('low', tLeft < 30);
+        if (tLeft <= 0) {
+          clearInterval(tTimer); done = true;
+          review.push({ ok: false, name: biz.who[1], pts: 0, tries: attempts.n, timeout: true });
+          $('fb').className = 'fb show bad'; $('fb').innerHTML = '<b class="t">Time&rsquo;s up!</b>Net assets should have been ' + fmt(biz.T.na) + ', equal to total equity.';
+          $('checkBtn').hidden = true; $('nextBtn').hidden = false;
+        }
+      }, 1000);
+    } else $('timer').hidden = true;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function start(L) {
+    lvl = L; round = 0; rounds = L.rounds; score = 0; used = []; review = []; stats = { first: 0, err: 0, bin: 0 };
+    $('scoreNo').textContent = 0; $('lvlChip').innerHTML = '<small>Level</small>' + L.name;
+    $('startScreen').hidden = true; $('endScreen').hidden = true; $('gameScreen').hidden = false;
+    startRound();
+  }
+  function next() { round++; if (round >= rounds) end(); else startRound(); }
+  function end() {
+    clearInterval(tTimer);
+    $('gameScreen').hidden = true; $('endScreen').hidden = false;
+    var best = getBest(); if (score > best) { best = score; setBest(score); }
+    var max = rounds * 100 + (lvl.id === 'hl' ? rounds * 20 : 0);
+    var r = score / max;
+    $('endTitle').textContent = r >= 0.9 ? 'Chief Financial Officer material!' : r >= 0.7 ? 'A safe pair of hands' : r >= 0.5 ? 'Junior accountant' : 'Back to the ledger';
+    $('endKicker').textContent = lvl.name + ' complete';
+    $('endScore').textContent = score; $('stFirst').textContent = stats.first + '/' + rounds; $('stErr').textContent = stats.err; $('stBin').textContent = stats.bin; $('stBest').textContent = best;
+    $('review').innerHTML = review.map(function (x) {
+      return '<li class="' + (x.ok ? 'ok' : 'no') + '"><span class="ic">' + (x.ok ? '&#10003;' : '&#10007;') + '</span><div><b>' + x.name + '</b><small>' + (x.timeout ? 'Ran out of time' : (x.tries === 1 ? 'Balanced first time' : 'Balanced after ' + x.tries + ' checks')) + ' &middot; ' + x.pts + ' points</small></div></li>';
+    }).join('');
+    $('announce').textContent = 'Level complete. You scored ' + score + ' points.';
+  }
+  $('checkBtn').addEventListener('click', check);
+  $('nextBtn').addEventListener('click', next);
+  $('againBtn').addEventListener('click', function () { start(lvl); });
+  $('menuBtn').addEventListener('click', function () { $('endScreen').hidden = true; $('startScreen').hidden = false; renderLevels(); });
+  renderLevels();
+  // test hook
+  window.__balanceIt = { makeBiz: function (k) { used = []; return makeBiz(k); }, state: function () { return { biz: biz, place: place }; } };
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
