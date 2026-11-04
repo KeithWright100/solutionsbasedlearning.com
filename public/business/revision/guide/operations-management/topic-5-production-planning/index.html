@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production planning: supply chains, stock and capacity — IB Business Management Revision Guide — SBL</title>
+<meta name="description" content="Production planning: supply chains, stock and capacity — IB Business Management Revision Guide, Unit 5: Operations management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
+<link rel="stylesheet" href="/css/sbl-igcse-learn.css">
+<style>
+.ig-map svg{border:2px solid #1E3A55;border-radius:14px;background:#fff;}
+.ed-fig{margin:16px 0;}
+.ed-fig svg{width:100%;height:auto;display:block;}
+.ed-fig figcaption{font-size:.84rem;line-height:1.5;color:var(--lh-body);margin-top:8px;}
+.hl-badge{display:inline-block;font-family:var(--lh-font-mono,monospace);font-size:.66rem;font-weight:800;letter-spacing:.06em;background:#7c3aed;color:#fff;border-radius:999px;padding:2px 8px;margin-right:6px;vertical-align:2px;}
+.ig-calc{background:#f5f3ff;border:1px solid #c4b5fd;border-radius:12px;padding:10px 14px;margin:12px 0;line-height:1.6;}
+.ig-calc b.h{display:block;color:#5b21b6;margin-bottom:4px;}
+.ig-tip{background:#fff7e6;border:1px solid #f5c66b;border-radius:12px;padding:10px 14px;margin:12px 0;line-height:1.6;}
+.ig-eg{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:12px;padding:10px 14px;margin:12px 0;line-height:1.6;}
+</style>
+</head>
+<body class="lh">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/business/revision/guide">IB Business Management Revision Guide</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/business/revision/guide#units">The IB Business Management syllabus</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/business/revision/guide/operations-management">Unit 5: Operations management</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Topic 5</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid">
+      <main>
+        <div class="lh-page-head lh-page-head--banner">
+          <h1>5. Production planning: supply chains, stock and capacity</h1>
+          <p>IB Business Management Revision Guide &middot; Unit 5: Operations management &middot; Topics &middot; Topic 5 of 6</p>
+        </div>
+
+        <section class="ig-focus" id="lesson-focus">
+          <div class="ig-li"><h2>Learning Intention</h2><p>To understand supply chains, JIT and JIC stock control, stock control charts, capacity utilisation and productivity (HL: operating leverage and cost to buy/make).</p></div>
+          <div class="ig-focus-grid">
+            <div class="ig-syl"><h2>Syllabus Statement</h2>
+              <p>5.6 Production planning: the local and global supply chain process; just-in-time (JIT) and just-in-case (JIC); stock control charts (lead time, buffer stock, reorder level, reorder quantity); capacity utilisation rate; defect rate; labour productivity; capital productivity; productivity rate; operating leverage (HL); cost to buy (CTB) and cost to make (CTM) (HL).</p>
+            </div>
+            <div class="ig-sc"><h2>Success criteria</h2><p class="ig-sc-sub">I can&hellip; <span id="scCount"></span></p>
+              <ul>
+                <li><label><input type="checkbox" aria-label="Success criterion 1"><span>Explain local and global supply chains</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 2"><span>Compare just-in-time and just-in-case stock control</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 3"><span>Draw and interpret stock control charts</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 4"><span>Calculate capacity utilisation, defect rate and productivity</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 5"><span>HL: Explain operating leverage and calculate cost to buy and cost to make</span></label></li>
+              </ul>
+              <p class="ig-sc-note">Tick each one when you are confident. Your ticks are saved to your account.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="ig-section" id="sc1-supply-chains">
+          <span class="ig-sc-tag">Success criterion 1</span>
+          <h2>Supply chains</h2>
+<figure class="ig-fig ig-map ed-fig" style="max-width:900px"><svg viewBox="0 0 900 170" role="img" aria-labelledby="fsc"><title id="fsc">The supply chain</title><rect width="900" height="170" fill="#ffffff"/>
+<rect x="20" y="40" width="150" height="70" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="95" y="70" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#2563eb" text-anchor="middle">Suppliers of</text><text x="95" y="85" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#2563eb" text-anchor="middle">raw materials</text><line x1="172" y1="75" x2="192.0" y2="75.0" stroke="#334155" stroke-width="2"/><path d="M196.0 75.0 L188.8 78.5 L188.8 71.5 Z" fill="#334155"/><rect x="198" y="40" width="150" height="70" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/><text x="273" y="80" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#ea580c" text-anchor="middle">Manufacturer</text><line x1="350" y1="75" x2="370.0" y2="75.0" stroke="#334155" stroke-width="2"/><path d="M374.0 75.0 L366.8 78.5 L366.8 71.5 Z" fill="#334155"/><rect x="376" y="40" width="150" height="70" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/><text x="451" y="70" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#16a34a" text-anchor="middle">Distributor /</text><text x="451" y="85" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#16a34a" text-anchor="middle">wholesaler</text><line x1="528" y1="75" x2="548.0" y2="75.0" stroke="#334155" stroke-width="2"/><path d="M552.0 75.0 L544.8 78.5 L544.8 71.5 Z" fill="#334155"/><rect x="554" y="40" width="150" height="70" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/><text x="629" y="80" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#7c3aed" text-anchor="middle">Retailer</text><line x1="706" y1="75" x2="726.0" y2="75.0" stroke="#334155" stroke-width="2"/><path d="M730.0 75.0 L722.8 78.5 L722.8 71.5 Z" fill="#334155"/><rect x="732" y="40" width="150" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/><text x="807" y="80" font-family="Inter,sans-serif" font-size="12.5" font-weight="700" fill="#dc2626" text-anchor="middle">Customer</text><text x="450" y="150" font-family="Inter,sans-serif" font-size="11.5" font-weight="500" font-style="italic" fill="#475569" text-anchor="middle">goods flow forwards; information and payments flow backwards</text>
+</svg><figcaption>A <b>supply chain</b> is the series of stages and organisations that a product passes through, from raw materials to the customer. Local supply chains are shorter and more resilient; global supply chains can be cheaper but are vulnerable to disruption (as shown by COVID-19 and the Suez Canal blockage in 2021).</figcaption></figure>
+        </section>
+
+        <section class="ig-section" id="sc2-jit-and-jic">
+          <span class="ig-sc-tag">Success criterion 2</span>
+          <h2>JIT and JIC</h2>
+<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Method</th><th>Meaning</th><th>Advantages</th><th>Disadvantages</th></tr></thead><tbody><tr><td>Just-in-time (JIT)</td><td>Stock arrives just as it is needed; minimal stock held</td><td>Low storage costs; less waste and obsolete stock; frees cash</td><td>Vulnerable to supply disruption; no buffer for sudden demand; frequent orders</td></tr><tr><td>Just-in-case (JIC)</td><td>Holding buffer stocks of inputs and finished goods</td><td>Can meet unexpected demand; protects against supply problems; bulk discounts</td><td>Storage, insurance and opportunity costs; risk of waste and obsolescence</td></tr></tbody></table></div>
+        </section>
+
+        <section class="ig-section" id="sc3-stock-control-charts">
+          <span class="ig-sc-tag">Success criterion 3</span>
+          <h2>Stock control charts</h2>
+<figure class="ig-fig ig-map ed-fig" style="max-width:640px"><svg viewBox="0 0 480 340" role="img" aria-labelledby="fstock"><title id="fstock">Stock control chart</title><rect width="480" height="340" fill="#ffffff"/>
+<text x="245.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Stock control chart</text>
+<path d="M70.0 68.0 L70.0 292.0 L424.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Time (weeks)</text>
+<text x="64.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Stock level (units)</text>
+<text x="65.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="70.0,105.0 161.0,226.0 175.0,243.6 175.0,105.0 266.0,226.0 280.0,243.6 280.0,105.0 371.0,226.0 385.0,243.6 385.0,105.0" fill="none" stroke="#2563eb" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="70.0" y1="105.0" x2="406.0" y2="105.0" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65.0" y="109.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">max</text>
+<line x1="70.0" y1="204.0" x2="406.0" y2="204.0" stroke="#ea580c" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65.0" y="208.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">reorder</text>
+<line x1="70.0" y1="243.6" x2="406.0" y2="243.6" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65.0" y="247.6" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">buffer</text>
+<line x1="143.5" y1="190.8" x2="170.3" y2="190.8" stroke="#7c3aed" stroke-width="1.4"/>
+<path d="M174.3 190.8 L167.1 194.3 L167.1 187.3 Z" fill="#7c3aed"/>
+<text x="157.5" y="179.8" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#7c3aed" text-anchor="middle">lead time</text>
+<text x="182.0" y="91.8" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#16a34a" text-anchor="start">delivery (reorder quantity)</text>
+</svg><figcaption>Stock is used up over time. When it falls to the <b>reorder level</b>, an order is placed; it arrives after the <b>lead time</b>, just as stock reaches the <b>buffer stock</b> level. Reorder quantity = maximum stock &minus; buffer stock. Buffer stock protects against late deliveries or unexpected demand (just-in-case).</figcaption></figure><div class="ig-calc"><b class="h">Reading the chart</b>Maximum stock 8 500 units, buffer stock 2 200 units: reorder quantity = 8 500 &minus; 2 200 = 6 300 units. If usage is 1 000 units a week and the lead time is 2 weeks, the reorder level = buffer stock + (usage &times; lead time) = 2 200 + 2 000 = 4 200 units.</div>
+        </section>
+
+        <section class="ig-section" id="sc4-capacity-utilisation-and-productivity">
+          <span class="ig-sc-tag">Success criterion 4</span>
+          <h2>Capacity utilisation and productivity</h2>
+<div class="ig-calc"><b class="h">Formulas</b><p>Capacity utilisation rate = actual output &divide; productive capacity &times; 100. A hotel with 200 rooms and 150 occupied: 75%.</p><p>Defect rate = number of defective units &divide; total output &times; 100.</p><p>Labour productivity = total output &divide; number of workers (or hours worked). Capital productivity = total output &divide; capital input (e.g. machine hours). Productivity rate = (output &divide; input) &times; 100.</p></div><p>High capacity utilisation spreads fixed costs and lowers unit costs, but leaves no room for extra orders or maintenance and can overwork staff. Low utilisation means idle resources and high unit costs. Ways to improve: increase sales (promotion), rent out spare capacity, or reduce capacity (rationalisation).</p>
+        </section>
+
+        <section class="ig-section" id="sc5-hloperating-leverage-cost-to-buy-and-cost-to">
+          <span class="ig-sc-tag">Success criterion 5</span>
+          <h2><span class="hl-badge">HL</span>Operating leverage; cost to buy and cost to make</h2>
+<p><b>Operating leverage</b> is the extent to which a firm&rsquo;s costs are fixed rather than variable. High operating leverage (high fixed costs) means profits rise sharply when sales rise above break-even, but fall sharply when sales fall.</p><div class="ig-calc"><b class="h"><span class="hl-badge">HL</span>Make or buy?</b><p>Cost to make (CTM) = fixed costs + (average variable cost &times; quantity). Cost to buy (CTB) = price per unit charged by the supplier &times; quantity.</p><p>Example: 10 000 units; FC $20 000, AVC $3 &rArr; CTM = $50 000. Supplier price $4.50 &rArr; CTB = $45 000. Buying is cheaper by $5 000, but the firm should also consider quality, reliability, control and the effect on its own staff.</p></div><textarea class="ig-note" data-note="u5t5-cap" placeholder="A factory can make 12 000 units a month and makes 9 000. Calculate capacity utilisation and suggest one way to increase it…"></textarea>
+        </section>
+
+        <section class="ig-terms" id="key-terms">
+          <h2>Key terms</h2>
+          <dl>
+            <dt>Supply chain</dt><dd>The stages and organisations through which a product passes to reach the customer.</dd>
+            <dt>Just-in-case</dt><dd>Holding buffer stock in case of unexpected demand or supply problems.</dd>
+            <dt>Buffer stock</dt><dd>The minimum stock level held as a safety margin.</dd>
+            <dt>Lead time</dt><dd>The time between placing an order and receiving it.</dd>
+            <dt>Reorder level</dt><dd>The stock level at which a new order is placed.</dd>
+            <dt>Capacity utilisation</dt><dd>Actual output as a percentage of maximum possible output.</dd>
+            <dt>Labour productivity</dt><dd>Output per worker or per hour worked.</dd>
+            <dt>Defect rate</dt><dd>The percentage of output that is faulty.</dd>
+            <dt>Operating leverage</dt><dd>HL: the proportion of a firm&rsquo;s costs that are fixed.</dd>
+            <dt>Cost to make / cost to buy</dt><dd>HL: comparing the cost of producing an item with the cost of buying it in.</dd>
+          </dl>
+        </section>
+
+            <section class="ig-exam" id="exam-practice">
+              <span class="ig-tag">Exam-style question</span>
+              <p class="ig-q">Discuss whether a supermarket chain should use just-in-time stock control. <span class="ig-marks">(10 marks)</span></p>
+              <textarea class="ig-note" data-note="exam" placeholder="Write your answer here, then check it against the mark guidance…"></textarea>
+              <details><summary>Show mark guidance</summary>
+                <ul><li>Marked with five criteria, each worth 2 marks (10 in total):</li><li>A: knowledge and understanding of relevant tools, techniques and theories.</li><li>B: application to the case study or stimulus (use names, figures and facts from it).</li><li>C: reasoned arguments, balanced, with a justified conclusion.</li><li>D: structure (introduction, logical paragraphs, conclusion) and relevant terminology.</li><li>E: individuals and societies: consider the perspectives of different stakeholders.</li><li>Define JIT and JIC.</li><li>JIT: lower storage cost, fresher stock, less waste v risk of stock-outs, supplier reliability, disruption.</li><li>Perishable goods v non-perishables; conclusion.</li></ul><p style="margin:10px 0 0;line-height:1.6"><b>Model answer:</b> JIT suits fresh food because it reduces waste and storage costs and keeps products fresh. However, supermarkets face sudden changes in demand, such as panic buying, and depend on long supply chains that can be disrupted, as seen during the pandemic. A mix of JIT for perishable items and buffer stock (JIC) for essential long-life goods is likely to be the best approach.</p>
+              </details>
+            </section>
+    
+<style>.ig-pq-list{list-style:none;margin:.8rem 0 0;padding:0}.ig-pq-list>li{padding:.6rem 0;border-bottom:1px dashed var(--lh-border,#e6e8ee);line-height:1.45}.ig-pq-list>li:last-child{border-bottom:0}.ig-pq-row{display:flex;gap:.7rem;align-items:baseline}.ig-pq-ref{flex:0 0 auto;font:600 .74rem/1.2 'IBM Plex Mono',monospace;background:#eaf1f8;color:#1d3550;border-radius:6px;padding:.25rem .45rem;white-space:nowrap}.ig-pq-t{flex:1;min-width:0}.ig-pq-m{flex:0 0 auto;font-size:.8rem;color:var(--lh-muted,#5b6472)}.ig-pq-note{font-size:.86rem;color:var(--lh-muted,#5b6472);margin:.4rem 0 0}@media (max-width:640px){.ig-pq-row{flex-wrap:wrap}}</style>
+        <section class="ig-exam" id="past-paper-questions">
+          <span class="ig-tag">Past paper questions</span>
+          <p class="ig-q">4 IB questions on this topic</p><p class="ig-pq-note">Real IB questions from May 2025, summarised in our own words. You need your own copy of the paper and case study. Each link opens the practice page with marking guidance.</p>
+          <ul class="ig-pq-list"><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2025 &middot; P2 HL TZ2 &middot; Q2(b)</span><span class="ig-pq-t">Read buffer stock from a stock control chart and calculate the reorder quantity. <a href="/business/revision/paper-questions/paper-2/may-2025-tz2">Practise &rarr;</a></span><span class="ig-pq-m">[3]</span></div></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2025 &middot; P2 HL TZ2 &middot; Q2(c)&ndash;(d)</span><span class="ig-pq-t">Calculate a supplier&rsquo;s capacity utilisation rate and defect rate. <a href="/business/revision/paper-questions/paper-2/may-2025-tz2">Practise &rarr;</a></span><span class="ig-pq-m">[3]</span></div></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2025 &middot; P2 HL TZ2 &middot; Q2(e)</span><span class="ig-pq-t">Explain one disadvantage of relying on a single supplier. <a href="/business/revision/paper-questions/paper-2/may-2025-tz2">Practise &rarr;</a></span><span class="ig-pq-m">[2]</span></div></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2025 &middot; P2 HL TZ2 &middot; Q3(d)</span><span class="ig-pq-t">Explain one problem of operating at a very high capacity utilisation rate. <a href="/business/revision/paper-questions/paper-2/may-2025-tz2">Practise &rarr;</a></span><span class="ig-pq-m">[2]</span></div></li></ul>
+          <a class="ig-ppq-link" href="/business/revision/paper-questions">All IB Business Management past paper practice &rarr;</a>
+        </section>
+        <h2 class="ig-test-h" id="test-yourself">Test yourself</h2>
+        <p class="ig-test-p">Check what you have learned, then keep earlier lessons fresh with spaced retrieval. Your scores are saved to your account.</p>
+        <div class="lh-modes">
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/><path d="M9.5 18h5M10 21h4"/></svg></span>
+            <div class="lh-mode__body">
+              <span class="lh-mode__num">1</span>
+              <p class="lh-mode__title">Test My Knowledge</p>
+              <p class="lh-mode__desc">Ten questions drawn from every lesson in this topic, with instant feedback.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-green" aria-label="Test My Knowledge: Production planning: supply chains, stock and capacity" onclick="openTestMyKnowledge('IBBU5-T5')">Start Quiz &rarr;</button>
+          </div>
+
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span>
+            <div class="lh-mode__body">
+              <span class="lh-mode__num">2</span>
+              <p class="lh-mode__title">Spaced Retrieval</p>
+              <p class="lh-mode__desc">Five questions drawn from earlier topics in Unit 5: Operations management.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-blue" aria-label="Spaced Retrieval: Production planning: supply chains, stock and capacity" onclick="openSpacedRetrieval('IBBU5-T5')">Start Retrieval &rarr;</button>
+          </div>
+        </div>
+        <nav class="ig-pager" aria-label="Lesson navigation">
+          <a href="/business/revision/guide/operations-management/topic-4-break-even-analysis"><small>&larr; Topic 4</small>Break-even analysis</a>
+          <a class="next" href="/business/revision/guide/operations-management/topic-6-crisis-management-research-and-development-mis"><small>Topic 6 &rarr;</small>HL: Crisis management, research and development, and management information systems</a>
+        </nav>
+      </main>
+
+      <aside class="lh-rail">
+        <div class="lh-panel lh-panel--accent">
+          <h2>On this page</h2>
+          <ul class="ig-toc">
+            <li><a href="#lesson-focus">Learning intention &amp; success criteria</a></li>
+            <li><a href="#sc1-supply-chains">Supply chains</a></li>
+            <li><a href="#sc2-jit-and-jic">JIT and JIC</a></li>
+            <li><a href="#sc3-stock-control-charts">Stock control charts</a></li>
+            <li><a href="#sc4-capacity-utilisation-and-productivity">Capacity utilisation and productivity</a></li>
+            <li><a href="#sc5-hloperating-leverage-cost-to-buy-and-cost-to"><span class="hl-badge">HL</span>Operating leverage; cost to buy and cost to make</a></li>
+            <li><a href="#key-terms">Key terms</a></li>
+            <li><a href="#exam-practice">Exam-style question</a></li>
+            <li><a href="#past-paper-questions">Past paper questions</a></li>
+            <li><a href="#test-yourself">Test yourself</a></li>
+          </ul>
+        </div>
+
+        <div class="lh-panel lh-panel--accent">
+          <h2>Resources</h2>
+          <ul class="lh-resources">
+            <li class="lh-resources__item" data-resource-type="slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg><span class="lh-resources__label">Lesson Slides</span></li>
+            <li class="lh-resources__item" data-resource-type="notes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/></svg><span class="lh-resources__label">Lesson Notes</span></li>
+            <li class="lh-resources__item" data-resource-type="key_terms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5"/></svg><span class="lh-resources__label">Student Workbooks</span></li>
+            <li class="lh-resources__item" data-resource-type="diagrams"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 7H3M5 12H3M5 17H3M9 8h6M9 12h6"/></svg><span class="lh-resources__label">OneNote Pages</span></li>
+            <li class="lh-resources__item" data-resource-type="data_sheets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg><span class="lh-resources__label">Quizzes</span></li>
+          </ul>
+        </div>
+
+        <div class="lh-tutor">
+          <p>Need help? Ask the AI Tutor anything about IB Business Management.</p>
+          <div class="lh-tutor__news">
+            <p>Use the tutor to:</p>
+            <ul>
+              <li>Get a tricky concept explained another way</li>
+              <li>Check your understanding of key terms</li>
+              <li>Talk through how to apply a business tool to a case study</li>
+              <li>Plan an answer to an IB-style question</li>
+            </ul>
+          </div>
+          <button type="button" class="lh-tutor__btn" onclick="openAskTutor()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/></svg>Ask AI Tutor</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="IBBU5-T5" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
+    <div class="sbl-modal__header">
+      <div class="sbl-modal__header-text">
+        <p class="sbl-modal__eyebrow">SBL Business Tutor</p>
+        <h2 id="sblTeachBotTitle"></h2>
+        <p class="sbl-modal__subtitle" id="sblTeachBotSubtitle">IB Business Management Revision Guide</p>
+      </div>
+      <div class="sbl-modal__header-actions">
+        <span class="sbl-modal__progress" id="sblTeachBotProgress"></span>
+        <button type="button" class="sbl-modal__icon-btn" id="sblTeachBotExpand">Expand to full page</button>
+        <button type="button" class="sbl-modal__icon-btn sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="sbl-modal__body" id="sblTeachBotBody"></div>
+  </div>
+</div>
+<div aria-live="polite" class="sbl-sr-only" id="sblTeachBotAnnounce"></div>
+
+<script src="/js/sbl-ib-bus-guide-sidebar.js"></script>
+<script>
+  renderSBLIbBusGuideSidebar('lh-sidebar-mount', {
+    activeUnit: 'operations-management',
+    activeTopic: 0,
+    activeLessonHref: '/business/revision/guide/operations-management/topic-5-production-planning'
+  });
+</script>
+<script src="/js/sbl-ib-bus-guide-lessons.js"></script>
+<script src="/js/sbl-teach-bot.js"></script>
+<script src="/js/sbl-lesson-resources.js"></script>
+<script>
+(function () {
+  var id = "IBBU5-T5", key = 'sbl-checklist-' + id;
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ig-sc input[type=checkbox]'));
+  function get() { return boxes.map(function (b) { return b.checked; }); }
+  function paint() {
+    var n = get().filter(Boolean).length;
+    var el = document.getElementById('scCount'); if (el) el.textContent = n + ' of ' + boxes.length + ' ticked';
+  }
+  function apply(arr) { if (Array.isArray(arr)) boxes.forEach(function (b, i) { b.checked = !!arr[i]; }); paint(); }
+  try { apply(JSON.parse(localStorage.getItem(key) || 'null')); } catch (e) {}
+  fetch('/api/progress?lessonId=' + encodeURIComponent(id), { credentials: 'same-origin' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { if (d && d.data && Array.isArray(d.data.checklist)) apply(d.data.checklist); })
+    .catch(function () {});
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      var state = get(); paint();
+      try { localStorage.setItem(key, JSON.stringify(state)); } catch (e) {}
+      fetch('/api/progress', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId: id, patch: { checklist: state } }) }).catch(function () {});
+    });
+  });
+  document.querySelectorAll('textarea.ig-note').forEach(function (t) {
+    var k = 'sbl-note-' + id + '-' + t.getAttribute('data-note');
+    try { t.value = localStorage.getItem(k) || ''; } catch (e) {}
+    t.addEventListener('input', function () { try { localStorage.setItem(k, t.value); } catch (e) {} });
+  });
+  document.querySelectorAll('.ig-activity[data-sort]').forEach(function (box) {
+    var ul = box.querySelector('.ig-sort'), lis = [].slice.call(ul.querySelectorAll('li')), sc = box.querySelector('.ig-act-score');
+    for (var i = lis.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); ul.appendChild(lis[j]); lis.splice(j, 1); }
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return; var li = b.closest('li'); if (li.classList.contains('ok')) return;
+      li.querySelectorAll('button').forEach(function (x) { x.classList.remove('bad'); });
+      if (b.getAttribute('data-c') === li.getAttribute('data-a')) { li.classList.add('ok'); b.classList.add('sel'); } else { b.classList.add('bad'); }
+      var n = box.querySelectorAll('li.ok').length, t = box.querySelectorAll('li').length;
+      sc.textContent = n + ' of ' + t + ' sorted correctly' + (n === t ? ' — well done!' : '');
+    });
+  });
+})();
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

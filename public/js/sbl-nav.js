@@ -51,6 +51,7 @@
           ['Exam tips', '/economics/exam-tips']] },
         { title: 'IB Business Management', href: '/business', blurb: 'All five units, with case studies and paper practice.', items: [
           ['Overview', '/business'],
+          ['Full revision guide', '/business/revision/guide'],
           ['Revise by topic', '/business/revision/topics'],
           ['Past paper questions', '/business/revision/paper-questions'],
           ['Exam tips', '/business/exam-tips#toolkit-challenge']] },
@@ -98,6 +99,7 @@
           ['Full revision guide', '/economics/revision/guide'],
           ['Revise by topic', '/economics/revision/topics'],
           ['Business Management', '', 'head'],
+          ['Full revision guide', '/business/revision/guide'],
           ['Revise by topic', '/business/revision/topics'],
           ['Past paper questions', '/business/revision/paper-questions']] },
         { title: 'IGCSE Geography & History', items: [
