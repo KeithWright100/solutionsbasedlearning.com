@@ -289,7 +289,7 @@ window.SBL_LESSONS["IBEU2-T1"] = {
   "I can explain the law of supply and the non-price determinants that shift the supply curve",
   "I can use diagrams to show how equilibrium price and quantity change, and explain the role of the price mechanism",
   "I can explain consumer and producer surplus and why a competitive market is allocatively efficient",
-  "I can hL: Explain the assumptions behind demand and supply, and calculate equilibrium and surplus from linear functions"
+  "I can hL: Explain the assumptions behind demand and supply, and calculate consumer and producer surplus from a diagram"
  ],
  "quiz": [
   {
@@ -401,15 +401,15 @@ window.SBL_LESSONS["IBEU2-T1"] = {
    "tag": "Demand, supply and equilibrium"
   },
   {
-   "q": "HL: Qd = 100 − 5P and Qs = −20 + 10P. What is the equilibrium price?",
+   "q": "HL: Demand meets the price axis at $20; equilibrium is P = $8, Q = 60. Consumer surplus is:",
    "options": [
-    "8",
-    "12",
-    "6",
-    "60"
+    "$360",
+    "$720",
+    "$480",
+    "$1 200"
    ],
    "correct": 0,
-   "explain": "100 − 5P = −20 + 10P gives P = 8 (and Q = 60).",
+   "explain": "½ × 60 × (20 − 8) = 360.",
    "tag": "Demand, supply and equilibrium"
   }
  ]
@@ -513,15 +513,15 @@ window.SBL_LESSONS["IBEU2-T2"] = {
    "tag": "HL: Behavioural economics"
   },
   {
-   "q": "HL: A firm that maximises revenue produces where:",
+   "q": "HL: Which is an alternative business objective to profit maximisation?",
    "options": [
-    "MR = 0",
-    "MC = MR",
-    "AR = AC",
-    "MC = AC"
+    "Increasing market share",
+    "Producing where MC = MR",
+    "Paying the lowest possible wages",
+    "Ignoring the interests of all stakeholders"
    ],
    "correct": 0,
-   "explain": "Total revenue is highest where marginal revenue is zero.",
+   "explain": "Alternatives include CSR, market share, satisficing and growth.",
    "tag": "HL: Behavioural economics"
   },
   {
@@ -1110,7 +1110,7 @@ window.SBL_LESSONS["IBEU3-T1"] = {
   "I can distinguish GDP and GNI, nominal and real, total and per capita, and explain PPP",
   "I can explain the business cycle and short-term fluctuations and long-term trend",
   "I can evaluate GDP as a measure of economic well-being and compare alternative measures",
-  "I can calculate nominal and real GDP, GDP per capita and growth rates (HL: using a price deflator)"
+  "I can calculate nominal GDP and GNI, real GDP (using a price deflator), per capita figures and growth rates"
  ],
  "quiz": [
   {
@@ -1210,7 +1210,7 @@ window.SBL_LESSONS["IBEU3-T1"] = {
    "tag": "Measuring economic activity"
   },
   {
-   "q": "HL: Nominal GDP is $1320bn and the deflator is 110. Real GDP is:",
+   "q": "Nominal GDP is $1320bn and the deflator is 110. Real GDP is:",
    "options": [
     "$1200bn",
     "$1452bn",
@@ -1496,15 +1496,15 @@ window.SBL_LESSONS["IBEU3-T3"] = {
    "tag": "Macroeconomic objectives"
   },
   {
-   "q": "HL: Weights 30, 20, 50 and price indices 108, 115, 104. The weighted index is:",
+   "q": "HL: A basket costs $400 in the base year and $430 this year. The price index is:",
    "options": [
-    "107.4",
-    "109.0",
-    "104.0",
-    "108.2"
+    "107.5",
+    "93.0",
+    "130.0",
+    "104.3"
    ],
    "correct": 0,
-   "explain": "(3240 + 2300 + 5200) ÷ 100 = 107.4.",
+   "explain": "430 ÷ 400 × 100 = 107.5.",
    "tag": "Macroeconomic objectives"
   }
  ]
@@ -2283,7 +2283,7 @@ window.SBL_LESSONS["IBEU4-T3"] = {
   {
    "q": "Remittances sent home by migrant workers appear in the:",
    "options": [
-    "Current account (secondary income)",
+    "Current account (current transfers)",
     "Capital account",
     "Financial account (portfolio investment)",
     "Reserve assets"
