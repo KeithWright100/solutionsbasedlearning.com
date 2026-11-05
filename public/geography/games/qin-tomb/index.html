@@ -151,6 +151,33 @@
     .stone { width: 46%; min-height: 80px; } .stone.wide { width: 100%; }
     .slot { min-width: 80px; }
   }
+  .kbar { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; margin-top: 18px; }
+  .kroom { padding-top: 18px; }
+  .kstep { border-top: 1px solid rgba(165,122,20,.35); padding-top: 14px; margin-top: 14px; }
+  .kq { line-height: 1.55; margin: 6px 0 10px; font-weight: 600; }
+  .klist { margin: 6px 0 8px 22px; line-height: 1.55; font-size: .95rem; }
+  ul.klist { list-style: none; margin-left: 0; }
+  .klist li { margin: 3px 0; }
+  .kok { color: #065f46; font-weight: 700; }
+  .kno { color: #6b5a49; padding-left: 26px; }
+  .kwhy { color: #7c2d12; font-weight: 400; font-size: .88rem; }
+  .kfill { background: #d9f5ea; color: #065f46; padding: 1px 8px; border-radius: 6px; margin: 0 3px; }
+  .ktab { width: 100%; border-collapse: collapse; font-size: .92rem; background: #fff; border-radius: 10px; overflow: hidden; }
+  .ktab th, .ktab td { border: 1px solid #e6d3b0; padding: 8px 10px; text-align: left; vertical-align: top; }
+  .ktab th { background: #f9eccb; }
+  .kbins { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kbins > div { background: #fff; border-radius: 10px; padding: 10px 12px; }
+  .kbins h4 { font-size: .92rem; } .kbins small { font-weight: 500; color: #6b5a49; }
+  .kmodel { background: #fff; border-left: 5px solid #e0b443; border-radius: 10px; padding: 10px 14px; line-height: 1.6; font-size: .94rem; }
+  .kev { margin-top: 14px; font-size: .92rem; line-height: 1.5; background: rgba(224,180,67,.18); border-radius: 10px; padding: 8px 12px; }
+  @media (max-width: 600px) { .kbins { grid-template-columns: 1fr; } }
+  @media print {
+    body { background: #fff !important; }
+    .top-bar, .hud, .kbar, .overlay, .doors-anim { display: none !important; }
+    .panel { box-shadow: none; border: 1px solid #ccc; break-inside: auto; }
+    .hero { background: #fff !important; color: #000 !important; } .hero h1, .hero p { color: #000 !important; }
+    .kstep { break-inside: avoid; }
+  }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -302,7 +329,7 @@
           ],
           notes: 'Some actions are less clear-cut. Historians argue about how many scholars were really killed, as the story was written down by later <b>Han</b> historians who disliked Qin.' },
         { type: 'text', label: 'Is it really that simple?', prompt: 'Choose <b>one</b> of Qin&rsquo;s actions that could be <b>both</b> a GOAT and a TOAD. Explain why.',
-          starters: 'Try: &ldquo;Building the Great Wall was a GOAT because&hellip; However, it was also a TOAD because&hellip;&rdquo;', min: 12, save: 'both',
+          starters: 'Try: &ldquo;Building the Great Wall was a GOAT because&hellip; However, it was also a TOAD because&hellip;&rdquo;', min: 12, save: 'both', model: 'Building the Great Wall was a GOAT because it protected the north from Xiongnu raids and showed Qin\u2019s power. However, it was also a TOAD because hundreds of thousands of peasants and convicts were forced to work on it, many died, and the anger it caused helped bring down the dynasty. Other good choices: standard script and coins (united the empire, but imposed by force); the tomb and Terracotta Army (an amazing legacy, but built by forced labour).',
           notes: 'Great thinking. Judging success means weighing up <b>who</b> benefited and <b>who</b> suffered.' }
       ]
     },
@@ -344,7 +371,7 @@
             ['Qin’s elixir of life', false, 'It never existed!']
           ],
           notes: 'Archaeologists think there are about <b>8,000</b> terracotta soldiers, and every face is different. Soil tests around the tomb mound have found high levels of <b>mercury</b>, so Sima Qian&rsquo;s description may be true. China has decided not to open the tomb until it can be done safely.' },
-        { type: 'verdict' }
+        { type: 'verdict', model: 'Either verdict can score well if it is supported. GOAT: united China for the first time; standard coins, script, weights and axles made trade and government easier; the written script and the name \u201CChina\u201D still exist today (long-term consequences). TOAD: harsh Legalist laws, burning books (213 BCE), killing scholars, forced labour on the Wall and tomb; resentment led to rebellion in 209 BCE and the dynasty collapsed in 206 BCE, only 15 years after unification (short-term consequences). A strong answer picks one side, uses evidence, explains it (\u201CThis meant that\u2026\u201D), mentions the other side (\u201CHowever\u2026\u201D) and ends with a conclusion.' }
       ]
     }
   ];
@@ -399,10 +426,11 @@
       '<div class="li"><b>Learning intention:</b> Can I identify consequences?<br><b>Success criteria:</b> I can define what a dynasty is &middot; I can explain the successes and failures of Qin Shi Huang&rsquo;s unification of China &middot; I can sort consequences into short-term and long-term, intended and unintended.</div>' +
       '<div class="actions"><button class="btn gold" type="button" id="goBtn">' + (started ? 'Continue the expedition' : 'Enter the tomb') + ' &rarr;</button>' +
       (started ? '<button class="btn dark" type="button" id="resetBtn">Start again</button>' : '') + '</div>' +
-      '<div class="teacher">' + (S.teacher ? 'Teacher mode is on: every chamber is open. <button type="button" id="tBtn">Turn off</button>' : 'Teacher? <button type="button" id="tBtn">Open every chamber</button>') + '</div></section>';
+      '<div class="teacher"><button type="button" id="tBtn">' + (S.teacher ? 'Teacher mode: all chambers open (turn off)' : 'Teacher: unlock all chambers') + '</button> &middot; <button type="button" id="kBtn">Teacher: answer key</button></div></section>';
     $('goBtn').onclick = map;
     if ($('resetBtn')) $('resetBtn').onclick = function () { S.done = []; S.scores = {}; S.bag = []; S.answers = {}; save(); intro(); };
     $('tBtn').onclick = function () { S.teacher = !S.teacher; save(); intro(); };
+    $('kBtn').onclick = showKey;
     window.scrollTo(0, 0);
   }
 
@@ -645,6 +673,43 @@
     };
     function selectSum() { var r = document.createRange(); r.selectNodeContents($('sum')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); $('cmsg').className = 'msg'; $('cmsg').textContent = 'Your notes are selected: press Ctrl+C (or Cmd+C) to copy.'; }
     $('again').onclick = function () { S.done = []; S.scores = {}; S.bag = []; S.answers = {}; save(); intro(); };
+    window.scrollTo(0, 0);
+  }
+
+
+  /* ================= TEACHER ANSWER KEY ================= */
+  function showKey() {
+    cur = null; $('hud').hidden = true;
+    function ok(t, why) { return '<li class="kok">&#9989; ' + t + (why ? ' <span class="kwhy">&mdash; ' + why + '</span>' : '') + '</li>'; }
+    function no(t, why) { return '<li class="kno">' + t + (why ? ' <span class="kwhy">&mdash; ' + why + '</span>' : '') + '</li>'; }
+    var h = '<div class="kbar"><button type="button" class="btn dark" id="kBack">&larr; Back to the game</button><button type="button" class="btn gold" id="kPrint">&#128424;&#65039; Print or save as PDF</button></div>' +
+      '<section class="panel hero"><span class="kicker">Teacher answer key</span><h1>Tomb of the First Emperor</h1><p>Every chamber with its answers. Students see options and stepping stones shuffled; here they are in the correct order. Wrong answers are shown with the feedback students get.</p></section>';
+    ROOMS.forEach(function (room, r) {
+      h += '<section class="panel kroom"><span class="kicker">Chamber ' + (r + 1) + '</span><h2 class="room-title">' + esc(room.title) + '</h2>';
+      room.steps.forEach(function (st, i) {
+        h += '<div class="kstep"><div class="step-label">Step ' + (i + 1) + (st.label ? ' &middot; ' + st.label : '') + '</div>';
+        if (st.prompt) h += '<p class="kq">' + st.prompt + '</p>';
+        if (st.type === 'slots') {
+          var t = ''; st.parts.forEach(function (p, j) { t += esc(p); if (j < st.answers.length) t += '<b class="kfill">' + esc(st.answers[j]) + '</b>'; });
+          h += '<p class="sentence">' + t + '</p><p class="kwhy">Distractor tiles: ' + st.extra.map(esc).join(', ') + '</p>';
+        }
+        if (st.type === 'mcq') h += '<ul class="klist">' + st.options.map(function (o, j) { return j === 0 ? ok(o[0]) : no(o[0], o[1]); }).join('') + '</ul>';
+        if (st.type === 'multi') h += '<ul class="klist">' + st.options.map(function (o) { return o[1] ? ok(o[0]) : no(o[0], o[2]); }).join('') + '</ul>';
+        if (st.type === 'order') h += (st.clue ? '<div class="scroll">' + st.clue + '</div>' : '') + '<p class="kwhy">Correct order:</p><ol class="klist">' + st.items.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>';
+        if (st.type === 'match') h += '<table class="ktab"><tr><th>' + esc(st.left) + '</th><th>' + esc(st.right) + '</th></tr>' + st.pairs.map(function (p) { return '<tr><td>' + esc(p[0]) + '</td><td>' + esc(p[1]) + '</td></tr>'; }).join('') + '</table>';
+        if (st.type === 'sort') h += (st.timed ? '<p class="kwhy">Timed: ' + st.timed + ' seconds. Unsorted scrolls burn at the end (&minus;5 points each).</p>' : '') + '<div class="kbins">' + st.bins.map(function (b, j) { return '<div><h4>' + esc(b[0]) + ' <small>(' + esc(b[1]) + ')</small></h4><ul class="klist">' + st.cards.filter(function (c) { return c[1] === j; }).map(function (c) { return '<li>' + esc(c[0]) + (c[2] ? ' <span class="kwhy">&mdash; ' + esc(c[2]) + '</span>' : '') + '</li>'; }).join('') + '</ul></div>'; }).join('') + '</div>';
+        if (st.type === 'text') h += '<p class="kwhy">Open answer (not marked automatically; at least ' + st.min + ' words). Possible answer:</p><p class="kmodel">' + st.model + '</p>';
+        if (st.type === 'verdict') h += '<p class="kq">Final judgement: GOAT or TOAD? Students pick one, choose their strongest piece of evidence from their bag and write at least 20 words.</p><p class="kmodel">' + st.model + '</p>';
+        if (st.notes) h += '<div class="notes"><h3>Notes students see after this step</h3>' + st.notes + '</div>';
+        h += '</div>';
+      });
+      if (room.evidence) h += '<p class="kev">&#127890; <b>Evidence card:</b> ' + esc(room.evidence) + '</p>';
+      h += '</section>';
+    });
+    h += '<section class="panel"><h2 class="room-title">Scoring</h2><p class="kq">Each chamber starts at 100 points: &minus;10 for each wrong answer (and a torch lost), &minus;5 for each burned scroll in Chamber 5. Losing all three torches restarts the chamber at 60 points. Maximum score: 700.</p><p class="kq">Exit ticket on the final screen: <i>Name one consequence of Qin&rsquo;s unification of China and say whether it was short-term or long-term.</i></p></section>';
+    $('app').innerHTML = h;
+    $('kBack').onclick = intro;
+    $('kPrint').onclick = function () { window.print(); };
     window.scrollTo(0, 0);
   }
 
