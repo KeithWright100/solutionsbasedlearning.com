@@ -297,6 +297,14 @@
     "level": "IB Business Management",
     "tag": "Live · Final accounts · New",
     "desc": "Build the statement of financial position in the IB format: place every figure, bin the profit-and-loss imposters, calculate the subtotals and make net assets equal total equity."
+  },
+  {
+    "slug": "qin-tomb",
+    "title": "Tomb of the First Emperor",
+    "href": "/geography/games/qin-tomb",
+    "level": "KS3 History",
+    "tag": "New",
+    "desc": "Escape through seven chambers of Qin Shi Huang's tomb, from the unification of China to the fall of the Qin dynasty. Stepping stones, a balance scale, a burning library and a river of mercury, with every chamber practising consequences."
   }
 ];
   var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it"];
