@@ -562,9 +562,35 @@ window.SBL_LESSONS["IBEU2-T3"] = {
   "I can explain the relationship between PED and total revenue, and why PED matters to firms and governments",
   "I can calculate YED and use it to classify goods",
   "I can calculate PES and explain its determinants",
-  "I can hL: Explain PED along a straight line, why primary products have low PED and PES, and the importance of YED for sectoral change"
+  "I can (HL) explain why PED changes along a straight-line demand curve, and why PED for primary commodities is lower than for manufactured products",
+  "I can (HL) explain the importance of YED for firms and in explaining changes in the sectoral structure of the economy",
+  "I can (HL) explain why PES for primary commodities is lower than for manufactured products, and the consequences for price volatility"
  ],
  "quiz": [
+  {
+   "q": "HL: Why is the PES of primary commodities usually lower than that of manufactured products?",
+   "options": [
+    "Crops and mines take a long time to expand output, and many farm products cannot be stored",
+    "Primary commodities have many close substitutes",
+    "Manufactured goods are necessities",
+    "Primary producers always have large amounts of spare capacity"
+   ],
+   "correct": 0,
+   "explain": "Long production lags, fixed land and limited storage make supply inelastic.",
+   "tag": "HL: Elasticities"
+  },
+  {
+   "q": "HL: As an economy's income rises, the share of the tertiary sector usually grows because:",
+   "options": [
+    "Many services have high YED",
+    "Services have negative YED",
+    "Primary products have high YED",
+    "Manufactured goods are inferior goods"
+   ],
+   "correct": 0,
+   "explain": "Demand for income-elastic services grows faster than income, so resources shift to services.",
+   "tag": "HL: Elasticities"
+  },
   {
    "q": "Price rises by 10% and quantity demanded falls by 25%. PED is:",
    "options": [
@@ -696,12 +722,24 @@ window.SBL_LESSONS["IBEU2-T4"] = {
  "syllabusFocus": "IB Economics, Unit 2: Microeconomics: The role of government in microeconomics.",
  "checklist": [
   "I can explain why governments intervene in markets",
-  "I can use diagrams to explain the effects of maximum and minimum prices on markets and stakeholders",
+  "I can use diagrams to explain the effects of maximum prices and both types of minimum price (with and without the government buying the surplus) on markets and stakeholders",
   "I can use diagrams to explain the effects of indirect taxes and subsidies on markets and stakeholders",
   "I can explain direct provision, regulation and nudges as alternatives",
   "I can hL: Calculate the effects of intervention on consumers, producers, government and welfare"
  ],
  "quiz": [
+  {
+   "q": "A minimum unit price for alcohol, with no further government intervention, will mainly:",
+   "options": [
+    "Raise the price and reduce the quantity bought and sold to Qd",
+    "Require the government to buy the excess supply",
+    "Increase the quantity of alcohol sold",
+    "Create a shortage of alcohol"
+   ],
+   "correct": 0,
+   "explain": "Only Qd is traded; the excess supply is not bought by the government.",
+   "tag": "Government intervention"
+  },
   {
    "q": "A maximum price set below equilibrium causes:",
    "options": [
@@ -828,17 +866,42 @@ window.SBL_LESSONS["IBEU2-T5"] = {
  "id": "IBEU2-T5",
  "topicNumber": 2,
  "topicTitle": "Unit 2: Microeconomics (IB Economics Revision Guide)",
- "title": "Market failure: externalities, common pool resources and public goods",
+ "title": "Market failure: externalities, common pool resources, public goods and asymmetric information",
  "href": "/economics/revision/guide/microeconomics/topic-5-externalities-common-pool-resources-public-goods",
- "syllabusFocus": "IB Economics, Unit 2: Microeconomics: Market failure: externalities, common pool resources and public goods.",
+ "syllabusFocus": "IB Economics, Unit 2: Microeconomics: Market failure: externalities, common pool resources, public goods and asymmetric information.",
  "checklist": [
   "I can explain market failure and draw diagrams for negative externalities of production and consumption",
   "I can draw diagrams for positive externalities and explain merit and demerit goods",
   "I can explain why common pool resources are overused and evaluate policies for sustainability",
   "I can evaluate policies to correct externalities: taxes, tradable permits, regulation, subsidies and information",
-  "I can explain public goods, the free rider problem and why governments provide them"
+  "I can explain public goods, the free rider problem and why governments provide them",
+  "I can (HL) explain adverse selection and moral hazard, and the government and private responses to asymmetric information"
  ],
  "quiz": [
+  {
+   "q": "HL: Someone who knows they are high risk buying health insurance is an example of:",
+   "options": [
+    "Adverse selection",
+    "Moral hazard by the insurance company",
+    "Signalling",
+    "Screening"
+   ],
+   "correct": 0,
+   "explain": "The better-informed party acts before the deal.",
+   "tag": "HL: Asymmetric information"
+  },
+  {
+   "q": "HL: A bank taking big risks because it expects a government bailout is:",
+   "options": [
+    "Moral hazard",
+    "Adverse selection",
+    "Collusion",
+    "Price leadership"
+   ],
+   "correct": 0,
+   "explain": "It acts riskily because others bear the cost.",
+   "tag": "HL: Asymmetric information"
+  },
   {
    "q": "An externality is:",
    "options": [
@@ -965,42 +1028,17 @@ window.SBL_LESSONS["IBEU2-T6"] = {
  "id": "IBEU2-T6",
  "topicNumber": 2,
  "topicTitle": "Unit 2: Microeconomics (IB Economics Revision Guide)",
- "title": "HL: Asymmetric information, market power and equity",
+ "title": "HL: Market power and equity",
  "href": "/economics/revision/guide/microeconomics/topic-6-asymmetric-information-market-power-equity",
- "syllabusFocus": "IB Economics, Unit 2: Microeconomics: HL: Asymmetric information, market power and equity.",
+ "syllabusFocus": "IB Economics, Unit 2: Microeconomics: HL: Market power and equity.",
  "checklist": [
-  "I can explain adverse selection and moral hazard, and the responses to asymmetric information",
   "I can explain profit maximisation (MC = MR) and the meaning of normal and abnormal profit",
   "I can compare perfect competition and monopoly, using diagrams, in terms of price, output and efficiency",
   "I can explain oligopoly, game theory and monopolistic competition",
   "I can evaluate policies to regulate market power, and explain why markets may not achieve equity"
  ],
  "quiz": [
-  {
-   "q": "HL: Someone who knows they are high risk buying health insurance is an example of:",
-   "options": [
-    "Adverse selection",
-    "Moral hazard by the insurance company",
-    "Signalling",
-    "Screening"
-   ],
-   "correct": 0,
-   "explain": "The better-informed party acts before the deal.",
-   "tag": "HL: Market power and equity"
-  },
-  {
-   "q": "HL: A bank taking big risks because it expects a government bailout is:",
-   "options": [
-    "Moral hazard",
-    "Adverse selection",
-    "Collusion",
-    "Price leadership"
-   ],
-   "correct": 0,
-   "explain": "It acts riskily because others bear the cost.",
-   "tag": "HL: Market power and equity"
-  },
-  {
+    {
    "q": "HL: All firms maximise profit where:",
    "options": [
     "MC = MR",
@@ -1243,7 +1281,7 @@ window.SBL_LESSONS["IBEU3-T2"] = {
  "href": "/economics/revision/guide/macroeconomics/topic-2-aggregate-demand-and-aggregate-supply",
  "syllabusFocus": "IB Economics, Unit 3: Macroeconomics: Variations in economic activity: aggregate demand and aggregate supply.",
  "checklist": [
-  "I can explain the components of AD and why the AD curve slopes downward",
+  "I can explain the AD curve and the components of AD",
   "I can explain the determinants of AD that shift the curve",
   "I can explain SRAS and the monetarist and Keynesian views of LRAS",
   "I can use AD/AS diagrams to show equilibrium, deflationary and inflationary gaps and changes in potential output",
@@ -1263,15 +1301,15 @@ window.SBL_LESSONS["IBEU3-T2"] = {
    "tag": "AD/AS"
   },
   {
-   "q": "Which is NOT a reason why AD slopes downward?",
+   "q": "A rise in the average price level, with nothing else changing, causes:",
    "options": [
-    "The law of diminishing returns",
-    "The wealth effect",
-    "The interest rate effect",
-    "The international trade effect"
+    "A movement along the AD curve",
+    "A shift of the AD curve to the right",
+    "A shift of the AD curve to the left",
+    "A shift of the LRAS curve"
    ],
    "correct": 0,
-   "explain": "Diminishing returns relates to supply.",
+   "explain": "Only changes in the components of AD for reasons other than the price level shift the curve.",
    "tag": "AD/AS"
   },
   {
@@ -1533,7 +1571,7 @@ window.SBL_LESSONS["IBEU3-T4"] = {
     "GDP per capita at PPP"
    ],
    "correct": 0,
-   "explain": "Usually 50–60% of median income.",
+   "explain": "Below a set share of the country's median income (commonly 50% or 60%), so the line differs between countries.",
    "tag": "Inequality and poverty"
   },
   {

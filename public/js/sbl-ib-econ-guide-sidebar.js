@@ -53,7 +53,7 @@
                 "href": "/economics/revision/guide/microeconomics/topic-4-role-of-government-in-microeconomics"
               },
               {
-                "label": "Externalities and public goods",
+                "label": "Externalities, public goods and asymmetric info",
                 "href": "/economics/revision/guide/microeconomics/topic-5-externalities-common-pool-resources-public-goods"
               },
               {
