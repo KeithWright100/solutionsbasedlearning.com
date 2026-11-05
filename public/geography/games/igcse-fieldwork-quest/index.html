@@ -381,6 +381,16 @@
 
   /* ================= STATE ================= */
   var KEY = 'sbl-igcse-fieldwork-quest-v1';
+  /* Teacher links are shown only to logged-in, active teacher or admin accounts (checked with /api/session). */
+  var IS_T = false;
+  function checkTeacher(done) {
+    try {
+      fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        IS_T = !!(d && d.loggedIn && d.user && d.user.status === 'active' && (d.user.role === 'teacher' || d.user.role === 'admin'));
+        done();
+      }).catch(function () {});
+    } catch (e) {}
+  }
   var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
   try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
   S.gate = S.gate || {}; S.gv = S.gv || {};
@@ -409,7 +419,7 @@
     { id: 'exam', i: '🛡️', t: 'Exam Survivor', d: 'Defeat the Edexcel Examiner', ok: function () { return isDone(13); } },
     { id: 'champ', i: '🏆', t: 'Fieldwork Champion', d: 'All 13 levels with 90%+ first-try accuracy', ok: function () { return LEVELS.every(function (l) { return isDone(l.n); }) && overall() >= 90; } }];
   function isDone(n) { return !!S.done[n]; }
-  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
+  function unlocked(n) { return (S.unlockAll && IS_T) || n === 1 || isDone(n) || (isDone(n - 1) && (gatePassed(n - 1) || !GATES[n - 1])); }
   function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
 
   function paintHud() {
@@ -457,13 +467,13 @@
           '<span class="st">' + (d ? '✅' : g ? '🔐' : u ? '' : '🔒') + '</span><span class="num" style="color:' + ZONES[l.z][2] + '">Level ' + l.n + ' \u00B7 ' + ZONES[l.z][1] + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : g ? '🔐 Answer the Level ' + (l.n - 1) + ' checkpoint question to unlock' : esc(l.d)) + '</small></button>';
       }).join('') + '</div>' +
       '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
-      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="akey">Teacher: answer key</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+      '<div class="foot"><span>Progress is saved in this browser.</span><span>' + (IS_T ? '<button type="button" class="linkbtn" id="teacher">' + ((S.unlockAll && IS_T) ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="akey">Teacher: answer key</button> · ' : '') + '<button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
     paintHud();
   }
   $('app').addEventListener('click', function (e) {
     var c = e.target.closest('.lvcard'); if (c && !c.disabled) { if (c.dataset.gate) startGate(+c.dataset.gate); else startLevel(+c.dataset.lv); return; }
-    if (e.target.id === 'akey') { showKey(); return; }
-    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'akey') { if (IS_T) showKey(); return; }
+    if (e.target.id === 'teacher' && IS_T) { S.unlockAll = !S.unlockAll; save(); showMap(); }
     if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false, gate: {}, gv: {} }; save(); showMap(); }
     if (e.target.closest('[data-map]')) showMap();
   });
@@ -489,7 +499,7 @@
       '<div class="stats"><div><b>' + run.c + '/' + run.t + '</b>first try</div><div><b>' + pct + '%</b>accuracy</div><div><b>+' + gained + '</b>XP' + (run.bonus ? ' (incl. ' + run.bonus + ' bonus)' : '') + '</div></div>' +
       newB.map(function (b) { return '<div class="newbadge">' + b.i + ' New badge: ' + esc(b.t) + '!</div>'; }).join('') +
       (allDone ? '<p style="margin-top:10px;font-weight:800">Overall first-try accuracy: ' + overall() + '%' + (overall() >= 90 ? ' 🏆 Fieldwork Champion!' : ' — reach 90% for Fieldwork Champion.') + '</p>' : '') +
-      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !S.unlockAll ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
+      '<div class="actions"><button type="button" class="btn ghost" data-m="map">Level map</button>' + (n < LEVELS.length ? (GATES[n] && !gatePassed(n) && !(S.unlockAll && IS_T) ? '<button type="button" class="btn primary" data-m="gate">🔐 Checkpoint question →</button>' : '<button type="button" class="btn primary" data-m="next">Level ' + (n + 1) + ' →</button>') : '') + '</div>');
     confetti(last || newB.length > 0);
   }
   function openModal(html) { $('mbox').innerHTML = html; $('modal').classList.add('on'); var b = $('mbox').querySelector('.btn.primary') || $('mbox').querySelector('.btn'); if (b) b.focus(); }
@@ -1389,7 +1399,7 @@
         ms: '(52 + 60) ÷ 2 = <b>56</b>.' }]
   };
   function gatePassed(n) { return !!(S.gate && S.gate[n]); }
-  function needsGate(n) { return !S.unlockAll && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
+  function needsGate(n) { return !(S.unlockAll && IS_T) && n > 1 && !isDone(n) && isDone(n - 1) && !gatePassed(n - 1) && !!GATES[n - 1]; }
 
   function startGate(n) {
     run = null; closeModal();
@@ -1521,6 +1531,7 @@
   }
 
   paintHud(); showMap();
+  checkTeacher(function () { if (IS_T && document.querySelector('.foot') && !document.querySelector('.modal.on')) showMap(); });
 })();
 </script>
 

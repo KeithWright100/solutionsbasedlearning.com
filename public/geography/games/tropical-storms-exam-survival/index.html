@@ -323,12 +323,22 @@
 
   /* ================= STATE ================= */
   var KEY = 'sbl-ks3-tropicalstorms-survival-v1';
+  /* Teacher links are shown only to logged-in, active teacher or admin accounts (checked with /api/session). */
+  var IS_T = false;
+  function checkTeacher(done) {
+    try {
+      fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        IS_T = !!(d && d.loggedIn && d.user && d.user.status === 'active' && (d.user.role === 'teacher' || d.user.role === 'admin'));
+        done();
+      }).catch(function () {});
+    } catch (e) {}
+  }
   var S = { done: {}, xp: 0, acc: {}, unlockAll: false };
   try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.done) S = sv; } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
   function isDone(n) { return !!S.done[n]; }
-  function unlocked(n) { return S.unlockAll || n === 1 || isDone(n - 1) || isDone(n); }
+  function unlocked(n) { return (S.unlockAll && IS_T) || n === 1 || isDone(n - 1) || isDone(n); }
   function overall() { var c = 0, t = 0; for (var k in S.acc) { c += S.acc[k].c; t += S.acc[k].t; } return t ? Math.round(c / t * 100) : 0; }
 
   function paintHud() {
@@ -376,12 +386,12 @@
           '<span class="st">' + (d ? '✅' : u ? '' : '🔒') + '</span><span class="num">Level ' + l.n + '</span><span class="emo" aria-hidden="true">' + l.emo + '</span><b>' + esc(l.t) + '</b><small>' + (d && a ? 'Done · ' + Math.round(a.c / a.t * 100) + '% first try' : esc(l.d)) + '</small></button>';
       }).join('') + '</div>' +
       '<div class="shelf"><h2>🏆 Badges</h2><div class="bdg-row">' + BADGES.map(function (b) { return '<div class="bdg' + (b.ok() ? ' on' : '') + '"><span class="i" aria-hidden="true">' + b.i + '</span><span><b>' + esc(b.t) + '</b>' + esc(b.d) + '</span></div>'; }).join('') + '</div></div>' +
-      '<div class="foot"><span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="teacher">' + (S.unlockAll ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · <button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
+      '<div class="foot"><span>Progress is saved in this browser.</span><span>' + (IS_T ? '<button type="button" class="linkbtn" id="teacher">' + ((S.unlockAll && IS_T) ? 'Teacher mode: all levels unlocked' : 'Teacher: unlock all levels') + '</button> · ' : '') + '<button type="button" class="linkbtn" id="reset">Reset progress</button></span></div>';
     paintHud();
   }
   $('app').addEventListener('click', function (e) {
     var c = e.target.closest('.lvcard'); if (c && !c.disabled) { startLevel(+c.dataset.lv); return; }
-    if (e.target.id === 'teacher') { S.unlockAll = !S.unlockAll; save(); showMap(); }
+    if (e.target.id === 'teacher' && IS_T) { S.unlockAll = !S.unlockAll; save(); showMap(); }
     if (e.target.id === 'reset' && confirm('Reset all progress and XP on this device?')) { S = { done: {}, xp: 0, acc: {}, unlockAll: false }; save(); showMap(); }
     if (e.target.closest('[data-map]')) showMap();
   });
@@ -722,6 +732,7 @@
   };
 
   paintHud(); showMap();
+  checkTeacher(function () { if (IS_T && document.querySelector('.foot') && !document.querySelector('.modal.on')) showMap(); });
 })();
 </script>
 
