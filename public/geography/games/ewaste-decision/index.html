@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>E-waste Decision Challenge — IB Geography Games — SBL</title>
+<meta name="description" content="IB DP Geography Unit 3: Resource Consumption and Security. Choose a place, spend 100 action points on up to four e-waste actions, see the results five years on, then write a pitch using the waste hierarchy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f3a5c; --navy2: #17324d; --teal: #0f766e; --teal-soft: #e8f6f3; --teal-line: #0f766e;
+    --amber: #c2410c; --amber-soft: #fff4dc; --amber-line: #f59e0b;
+    --grey-soft: #f1f1f1; --grey-line: #9ca3af; --red: #dc2626; --red-soft: #fdecec; --green: #16a34a;
+    --ink: #10243a; --muted: #5b6b7b; --line: rgba(15,58,92,.14); --gold: #f59e0b; --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); background: #f6f8f8; min-height: 100vh; }
+  a { color: inherit; text-decoration: none; }
+  button, textarea { font-family: inherit; }
+  button:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .top-bar { padding: 14px 16px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { font-size: .88rem; font-weight: 700; color: rgba(255,255,255,.85); }
+  .back-link:hover { color: #20d7e2; }
+  main { max-width: 1150px; margin: 0 auto 60px; padding: 0 16px; }
+  .hero { margin: 18px 0 16px; border-radius: 22px; padding: 26px; color: #fff; background: linear-gradient(135deg, #011526, #0f3a5c); }
+  .kicker { display: inline-block; font-size: .72rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; color: #031c33; background: #fcd34d; padding: 4px 11px; border-radius: 99px; }
+  .hero h1 { font-size: clamp(1.5rem, 3.6vw, 2.3rem); font-weight: 900; margin: 12px 0 8px; }
+  .hero p { line-height: 1.6; color: rgba(255,255,255,.88); max-width: 820px; }
+  .steps { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
+  .steps span { font-size: .78rem; font-weight: 800; padding: 5px 11px; border-radius: 99px; background: rgba(255,255,255,.12); color: rgba(255,255,255,.75); }
+  .steps span.on { background: #fcd34d; color: #031c33; }
+  .steps span.done { background: rgba(32,215,226,.25); color: #fff; }
+  .card { background: #fff; border-radius: var(--radius); border: 1px solid var(--line); padding: 22px; margin-top: 16px; box-shadow: 0 8px 24px rgba(15,58,92,.06); }
+  h2 { font-size: clamp(1.2rem, 2.6vw, 1.55rem); font-weight: 900; color: var(--navy2); margin-bottom: 6px; }
+  h3 { font-size: 1rem; font-weight: 800; color: var(--navy2); margin: 14px 0 6px; }
+  .sub { color: var(--muted); line-height: 1.55; margin-bottom: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 99px; padding: 11px 20px; font-weight: 800; font-size: .98rem; cursor: pointer; }
+  .btn.primary { background: var(--teal); color: #fff; }
+  .btn.gold { background: #fcd34d; color: #031c33; }
+  .btn.ghost { background: #fff; border: 2px solid var(--line); color: var(--ink); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .msg { margin-top: 10px; font-weight: 700; min-height: 1.3em; }
+  .msg.bad { color: var(--red); } .msg.good { color: var(--teal); }
+  /* places */
+  .places { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .place { text-align: left; background: #fff; border: 2px solid var(--line); border-radius: 16px; padding: 18px; cursor: pointer; line-height: 1.5; color: var(--ink); }
+  .place:hover { border-color: var(--teal); }
+  .place .flag { font-size: 1.8rem; }
+  .place h3 { margin: 6px 0; font-size: 1.08rem; }
+  .place p { font-size: .9rem; color: var(--muted); }
+  .place .facts { margin-top: 8px; font-size: .84rem; padding-left: 18px; color: var(--ink); }
+  .databank { background: #f0f6fb; border-radius: 14px; padding: 14px 16px; margin-top: 16px; font-size: .9rem; line-height: 1.6; }
+  .databank b { color: var(--navy); }
+  .src { font-size: .78rem; color: var(--muted); margin-top: 6px; }
+  /* hierarchy */
+  .pyr { display: grid; gap: 8px; max-width: 620px; margin: 0 auto; }
+  .slotrow { display: flex; align-items: center; gap: 10px; }
+  .slotrow .rk { flex: 0 0 120px; font-size: .78rem; font-weight: 800; color: var(--muted); text-align: right; }
+  .hslot { flex: 1; border: 2px dashed var(--line); border-radius: 12px; padding: 10px 12px; min-height: 46px; font-weight: 800; background: #fafcfc; cursor: pointer; text-align: center; }
+  .hslot.ok { border-style: solid; border-color: var(--teal); background: var(--teal-soft); color: var(--teal); cursor: default; }
+  .htiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  .htile { background: var(--navy); color: #fff; border: 0; border-radius: 10px; padding: 10px 16px; font-weight: 800; cursor: pointer; }
+  .htile.sel { background: #fcd34d; color: #031c33; }
+  .htile:disabled { opacity: .2; cursor: default; }
+  /* decision */
+  .budget { position: sticky; top: 0; z-index: 30; background: rgba(246,248,248,.97); padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .budget .meter { flex: 1 1 220px; height: 14px; background: #e5e9ec; border-radius: 99px; overflow: hidden; }
+  .budget .meter div { height: 100%; background: linear-gradient(90deg, var(--teal), #20d7e2); width: 0; transition: width .3s; }
+  .budget .meter div.over { background: var(--red); }
+  .budget b { font-size: 1.05rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .8rem; color: var(--muted); margin: 6px 0 12px; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 5px; vertical-align: -1px; border: 1.5px solid; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  .act { position: relative; padding-bottom: 34px !important; text-align: left; border-radius: 14px; padding: 14px; border: 2px solid; cursor: pointer; line-height: 1.4; color: var(--ink); display: flex; flex-direction: column; gap: 6px; min-height: 120px; }
+  .act.t1 { background: var(--teal-soft); border-color: var(--teal-line); }
+  .act.t2 { background: var(--amber-soft); border-color: var(--amber-line); }
+  .act.t3 { background: var(--grey-soft); border-color: var(--grey-line); }
+  .act .top { display: flex; gap: 12px; align-items: baseline; }
+  .act .cost { font-size: 1.35rem; font-weight: 900; }
+  .act.t1 .cost { color: var(--teal); } .act.t2 .cost { color: var(--amber); } .act.t3 .cost { color: #4b5563; }
+  .act .nm { font-weight: 800; font-size: .96rem; }
+  .act .lvl { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .act .ds { font-size: .84rem; color: #33475b; }
+  .act .note { font-size: .8rem; color: var(--navy); background: rgba(255,255,255,.75); border-radius: 8px; padding: 6px 8px; }
+  .act.on { box-shadow: 0 0 0 4px rgba(15,118,110,.35); transform: translateY(-2px); }
+  .act.on::after { content: "\2713 Chosen"; position: absolute; bottom: 10px; right: 10px; background: var(--teal); color: #fff; font-size: .72rem; font-weight: 800; padding: 3px 8px; border-radius: 99px; }
+  .act.t2.on::after { background: var(--amber); } .act.t3.on::after { background: #4b5563; }
+  /* results */
+  .bars { display: grid; gap: 12px; }
+  .bar { display: grid; grid-template-columns: 170px 1fr 48px; gap: 10px; align-items: center; }
+  .bar .lab { font-weight: 800; font-size: .9rem; }
+  .bar .tr { height: 16px; background: #e5e9ec; border-radius: 99px; overflow: hidden; }
+  .bar .tr div { height: 100%; border-radius: 99px; width: 0; transition: width .8s ease; }
+  .bar .v { font-weight: 900; text-align: right; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stake { display: grid; gap: 10px; }
+  .sh { display: flex; gap: 12px; align-items: flex-start; background: #f8fafb; border-radius: 12px; padding: 10px 12px; }
+  .sh .face { font-size: 1.8rem; line-height: 1; }
+  .sh b { display: block; font-size: .9rem; } .sh span { font-size: .86rem; color: #33475b; line-height: 1.45; }
+  .feed { list-style: none; display: grid; gap: 8px; }
+  .feed li { font-size: .9rem; line-height: 1.5; padding: 8px 12px; border-radius: 10px; background: #f8fafb; border-left: 4px solid var(--teal); }
+  .feed li.warn { border-color: var(--amber-line); background: #fffaf0; }
+  .feed li.bad { border-color: var(--red); background: var(--red-soft); }
+  .verdict { border-radius: 14px; padding: 14px 16px; margin-top: 14px; font-weight: 700; line-height: 1.55; }
+  .verdict.good { background: var(--teal-soft); color: #064e45; } .verdict.mid { background: var(--amber-soft); color: #7c2d12; } .verdict.bad { background: var(--red-soft); color: #7f1d1d; }
+  /* pitch */
+  .pbox { border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-top: 12px; }
+  .pbox h3 { margin-top: 0; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .pbox h3 .ok { font-size: .78rem; color: var(--muted); font-weight: 700; }
+  .pbox h3 .ok.yes { color: var(--teal); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 8px; }
+  .chip { background: #eef3f7; border: 1px solid var(--line); border-radius: 99px; padding: 5px 11px; font-size: .8rem; cursor: pointer; color: var(--navy); text-align: left; }
+  .chip:hover { background: #e0ecf5; }
+  textarea { width: 100%; min-height: 90px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: .96rem; line-height: 1.5; }
+  .checklist { list-style: none; display: grid; gap: 6px; margin-top: 12px; font-size: .9rem; }
+  .checklist li::before { content: "\25CB  "; color: var(--muted); }
+  .checklist li.yes::before { content: "\2713  "; color: var(--teal); font-weight: 900; }
+  .checklist li.yes { color: var(--teal); }
+  .final { white-space: pre-wrap; background: #f8fafb; border-radius: 12px; padding: 16px; line-height: 1.6; font-size: .94rem; }
+  @media (max-width: 720px) {
+    .two { grid-template-columns: 1fr; }
+    .bar { grid-template-columns: 110px 1fr 40px; }
+    .slotrow .rk { flex-basis: 74px; font-size: .7rem; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <a href="/geography/paper-1/core-3/t2-impacts-of/l5-the-disposal" class="back-link">Back to lesson &rarr;</a>
+</div></div>
+<main>
+  <section class="hero">
+    <span class="kicker">IB Unit 3 &middot; Resource Consumption &amp; Security &middot; Apply and evaluate</span>
+    <h1>&#128241; E-waste Decision Challenge</h1>
+    <p>Electronic waste is the world&rsquo;s fastest-growing waste stream. You are an adviser with <b>100 action points</b> and room for <b>no more than four actions</b>. Pick a place, use the waste hierarchy to choose your package, see what happens five years on, then pitch your plan.</p>
+    <div class="steps" id="steps"></div>
+  </section>
+  <div id="app"></div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  var KEY = 'sbl-ewaste-decision-v1';
+  var STEPS = ['1 Choose a place', '2 Waste hierarchy', '3 Decision challenge', '4 Five years on', '5 Your pitch'];
+  var BUDGET = 100, MAXA = 4;
+
+  var DATA = '<b>Global E-waste Monitor 2024:</b> the world produced a record <b>62 million tonnes</b> of e-waste in 2022, up 82% since 2010, and this is expected to reach <b>82 million tonnes by 2030</b>. Only <b>22.3%</b> was documented as formally collected and recycled. The metals in it were worth about <b>US$91 billion</b>, yet e-waste recycling meets only about <b>1%</b> of demand for rare earth elements. Asia produces about half of all e-waste; Europe produces the most per person (<b>17.6 kg</b>) and has the highest documented recycling rate (<b>42.8%</b>).<div class="src">Source: UN ITU and UNITAR, Global E-waste Monitor 2024.</div>';
+
+  /* Effects: [environment, people & health, economy, feasibility] */
+  var ACTIONS = [
+    { id: 'reduce', cost: 30, tier: 1, lvl: 'Reduce', name: 'Buy fewer, longer-lasting devices', desc: 'Set rules to buy durable, repairable devices and keep them for longer before replacing them.', fx: [4, 1, 2, 2],
+      env: 'Keeping devices longer prevents e-waste being made at all and cuts the mining and manufacturing emissions of new devices.', soc: 'Lower long-term spending frees money for other services.', trade: 'Durable devices cost more upfront, and users may resist older devices.', pri: 'Reduction sits at the top of the waste hierarchy: the greenest device is the one you never have to buy.' },
+    { id: 'repair', cost: 25, tier: 1, lvl: 'Reuse + repair', name: 'Repair + reuse hub', desc: 'A repair café and workshop that fixes screens, batteries and chargers so devices stay in use.', fx: [3, 2, 3, 2],
+      env: 'Repairing a phone or laptop extends its life and delays it becoming e-waste.', soc: 'Repair creates skilled local jobs and saves households money.', trade: 'Manufacturers often limit access to spare parts and repair manuals, and some devices are glued shut.', pri: 'Repair keeps products at their highest value, so it ranks above recycling, which only recovers materials.' },
+    { id: 'refurb', cost: 25, tier: 1, lvl: 'Reuse', name: 'Refurbish + redistribute', desc: 'Wipe, refurbish and resell or donate working devices to people who need them.', fx: [3, 3, 2, 2],
+      env: 'A refurbished device replaces a new one, avoiding new raw materials.', soc: 'Cheap refurbished devices narrow the digital divide for low-income families and schools.', trade: 'Data must be wiped securely, and older devices may need replacing again sooner.', pri: 'Reuse comes before recycling because the whole product, not just its metals, is kept in use.' },
+    { id: 'lease', cost: 25, tier: 1, lvl: 'Reduce (circular model)', name: 'Leasing (product-as-a-service)', desc: 'Lease devices instead of buying them; the supplier maintains them and takes them back.', fx: [3, 0, 2, 1],
+      env: 'Suppliers have an incentive to make devices last, then refurbish and reuse their parts.', soc: 'Predictable yearly costs; broken devices are swapped quickly.', trade: 'Users depend on one supplier, and contracts can lock buyers in for years.', pri: 'Leasing is a circular economy business model that designs waste out instead of dealing with it at the end.' },
+    { id: 'collect', cost: 15, tier: 2, lvl: 'Recycle', name: 'Collection points + labelled bins', desc: 'Drop-off points for old phones, cables and batteries, linked to a licensed recycler.', fx: [2, 1, 1, 3],
+      env: 'Stops batteries and devices going into general waste, where they can leak toxins or cause fires.', soc: 'Convenient and easy for residents to use.', trade: 'Collection only works if people use it, and recycling recovers materials but still loses the product.', pri: '' },
+    { id: 'educate', cost: 10, tier: 2, lvl: 'Supports all levels', name: 'Education campaign', desc: 'Campaigns on repairing, reusing and safely disposing of electronics.', fx: [1, 1, 0, 3],
+      env: 'Better awareness raises collection and repair rates.', soc: 'Cheap and reaches many people.', trade: 'Awareness does not always change behaviour; it works best alongside a practical action.', pri: '' },
+    { id: 'epr', cost: 20, tier: 2, lvl: 'Recycle', name: 'Producer take-back (EPR)', desc: 'Extended producer responsibility: manufacturers and sellers must take back and pay to recycle what they sell.', fx: [2, 1, 1, 2],
+      env: 'Makes producers responsible for end-of-life, encouraging easier-to-recycle designs.', soc: 'Shifts the cost from taxpayers to producers.', trade: 'Needs strong laws and enforcement; producers may pass costs on to consumers.', pri: '' },
+    { id: 'formal', cost: 20, tier: 2, lvl: 'Recycle (safely)', name: 'Safe recycling for informal workers', desc: 'Train informal recyclers and give them protective kit and cable-stripping machines instead of burning cables.', fx: [2, 3, 2, 2],
+      env: 'Ends open burning of cables, cutting toxic smoke and soil and water pollution.', soc: 'Protects the health of workers, many of them young, while keeping their income.', trade: 'Informal workers may distrust officials, and safer methods can be slower and less profitable at first.', pri: '' },
+    { id: 'export', cost: 10, tier: 3, lvl: 'Dispose elsewhere', name: 'Ship e-waste overseas', desc: 'Pay to send old electronics to another country for processing.', fx: [-2, -3, 1, 2],
+      env: 'None for the planet: the waste is simply moved.', soc: 'None: it moves health risks to poorer communities.', trade: 'Exporting hazardous e-waste is controlled under the Basel Convention, and countries are closing their doors: Thailand moved to ban e-waste imports in 2025.', pri: '' },
+    { id: 'landfill', cost: 5, tier: 3, lvl: 'Dispose', name: 'Send to landfill or incinerator', desc: 'Treat e-waste as general rubbish.', fx: [-3, -1, 1, 3],
+      env: 'None: lead, mercury and cadmium can leach into soil and water, and valuable metals are lost.', soc: 'None.', trade: 'Cheapest today, but wastes resources worth billions and stores up pollution.', pri: '' }
+  ];
+  var BYID = {}; ACTIONS.forEach(function (a) { BYID[a.id] = a; });
+
+  var PLACES = [
+    { id: 'school', flag: '&#127481;&#127469;', name: 'An international school in Bangkok', scale: 'Local scale', blurb: 'About 2,000 students with 1:1 laptops replaced every three years, plus staff computers, projectors and chargers.',
+      facts: ['Hundreds of laptops are replaced every year', 'Thailand moved to ban 463 types of e-waste imports in 2025', 'Many families and local schools cannot afford new devices'],
+      mod: { lease: [0, 0, 1, 1], refurb: [0, 1, 0, 0], formal: [-1, -1, 0, -2], epr: [0, 0, 0, -1] },
+      notes: { lease: 'Many schools already lease laptops: this fits well here.', refurb: 'Donating refurbished laptops to local Thai schools adds a strong social benefit.', formal: 'A school cannot run an informal-sector programme on its own.', epr: 'Depends on suppliers agreeing to take devices back.' },
+      stake: [
+        { who: 'School business manager', w: [0, 0, 1, 1], good: 'Happy: the plan controls costs and is easy to run.', bad: 'Worried about upfront costs and staff time.' },
+        { who: 'Students and families', w: [0, 1, 0, 0], good: 'Pleased: it is fair, and old devices help others.', bad: 'Feel the plan does little for them.' },
+        { who: 'Student environment club', w: [1, 0, 0, 0], good: 'Proud: the school is tackling waste at the source.', bad: 'Disappointed: this just moves the problem.' }
+      ] },
+    { id: 'accra', flag: '&#127468;&#127469;', name: 'Accra, Ghana', scale: 'City scale, informal sector', blurb: 'Thousands of informal workers collect and dismantle electronics, many arriving as second-hand imports from Europe. At the Agbogbloshie scrapyard, cables were burned to recover copper until the government demolished the site in 2021; the work has spread elsewhere.',
+      facts: ['A large repair and second-hand market already exists', 'Open burning releases toxic smoke', 'Informal collectors pay for scrap, so formal bins are often ignored'],
+      mod: { formal: [1, 2, 1, 1], repair: [0, 0, 1, 1], collect: [0, 0, 0, -1], reduce: [-1, 0, 0, -1], lease: [-1, 0, 0, -1], epr: [0, 0, 0, -1], export: [0, -1, 0, 0] },
+      notes: { formal: 'The biggest health gains are here: it works with the people already doing the job.', repair: 'Builds on Accra’s large existing repair trade.', collect: 'People sell scrap to informal collectors instead of giving it away.', reduce: 'Consumption per person is low, so cutting purchases saves less here.', lease: 'Few households or businesses can sign leasing contracts.', epr: 'Hard to enforce when most devices arrive second-hand.' },
+      stake: [
+        { who: 'Informal recyclers', w: [0, 1, 1, 0], good: 'Relieved: they keep their income and their health is protected.', bad: 'Fear they will lose their livelihoods.' },
+        { who: 'Environmental Protection Agency', w: [1, 0, 0, 1], good: 'Supportive: pollution falls and the plan is workable.', bad: 'Concerned: toxic burning continues.' },
+        { who: 'Local repairers and traders', w: [0, 0, 1, 0], good: 'Pleased: more business and skills.', bad: 'See little in it for them.' }
+      ] },
+    { id: 'eu', flag: '&#127466;&#127482;', name: 'Amsterdam, Netherlands', scale: 'City scale, high income', blurb: 'A wealthy city with very high consumption of electronics. EU rules already make producers pay for e-waste collection, and the EU adopted a right-to-repair law in 2024.',
+      facts: ['Europe produces about 17.6 kg of e-waste per person', 'Collection and recycling already exist under EU law', 'The EU right-to-repair rules make repair easier'],
+      mod: { reduce: [1, 0, 0, 0], repair: [0, 0, 0, 1], epr: [-1, 0, 0, 0], collect: [-1, 0, 0, 0], formal: [-2, -1, -1, -2], export: [0, 0, 0, -1] },
+      notes: { reduce: 'Consumption per person is very high, so reducing it has the biggest effect.', repair: 'The EU right-to-repair rules make this easier.', epr: 'Already required by EU law, so the extra gain is small.', collect: 'Collection already exists, so the extra gain is small.', formal: 'There is little informal e-waste work here.', export: 'Exporting hazardous e-waste outside rich countries is restricted under EU and Basel rules.' },
+      stake: [
+        { who: 'City council', w: [0, 0, 1, 1], good: 'Supportive: affordable and achievable.', bad: 'Worried about cost or how to deliver it.' },
+        { who: 'Residents', w: [0, 1, 1, 0], good: 'Pleased: repairs are cheaper and easier.', bad: 'See few benefits.' },
+        { who: 'Electronics manufacturers', w: [-1, 0, 1, 0], good: 'Accept it: business models still work.', bad: 'Unhappy: the plan cuts sales of new devices.' }
+      ] }
+  ];
+
+  var S = { step: 0, place: null, chosen: [], pitch: {}, hierDone: false };
+  try { var d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && typeof d.step === 'number') S = Object.assign(S, d); } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function place() { for (var i = 0; i < PLACES.length; i++) if (PLACES[i].id === S.place) return PLACES[i]; return null; }
+  function spent() { return S.chosen.reduce(function (t, id) { return t + BYID[id].cost; }, 0); }
+
+  function stepsBar() {
+    $('steps').innerHTML = STEPS.map(function (s, i) { return '<span class="' + (i === S.step ? 'on' : (i < S.step ? 'done' : '')) + '">' + s + '</span>'; }).join('');
+  }
+  function go(n) { S.step = n; save(); render(); window.scrollTo(0, 0); }
+  function render() { stepsBar(); [stepPlace, stepHier, stepDecide, stepResults, stepPitch][S.step](); }
+
+  /* 1: place */
+  function stepPlace() {
+    $('app').innerHTML = '<section class="card"><h2>Choose a place to advise</h2><p class="sub">Each place has a different e-waste problem, so the best package of actions is different. Play again later with another place and compare.</p><div class="places">' +
+      PLACES.map(function (p) { return '<button type="button" class="place" data-p="' + p.id + '"><div class="flag">' + p.flag + '</div><h3>' + esc(p.name) + '</h3><p><b>' + esc(p.scale) + '.</b> ' + esc(p.blurb) + '</p><ul class="facts">' + p.facts.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul></button>'; }).join('') +
+      '</div><div class="databank">' + DATA + '</div></section>';
+    [].forEach.call(document.querySelectorAll('.place'), function (b) { b.onclick = function () { if (S.place !== b.dataset.p) { S.chosen = []; S.pitch = {}; S.chipWords = 0; } S.place = b.dataset.p; go(S.hierDone ? 2 : 1); }; });
+  }
+
+  /* 2: hierarchy */
+  function stepHier() {
+    var ORDER = ['Reduce', 'Reuse + repair', 'Recycle', 'Recover', 'Dispose'];
+    var DESC = ['avoid making waste', 'keep using, fix or refurbish', 'recover the materials', 'burn for energy', 'landfill'];
+    var tiles = shuffle(ORDER), next = 0, sel = null;
+    function draw() {
+      $('app').innerHTML = '<section class="card"><h2>Warm-up: build the waste hierarchy</h2><p class="sub">Before you spend anything, put the waste hierarchy in order, from <b>most preferred</b> (top) to <b>least preferred</b> (bottom). Tap the words in order, starting with the most preferred.</p><div class="pyr">' +
+        ORDER.map(function (o, i) { return '<div class="slotrow"><span class="rk">' + (i === 0 ? 'Most preferred' : (i === ORDER.length - 1 ? 'Least preferred' : '')) + '</span><div class="hslot' + (i < next ? ' ok' : '') + '" style="margin:0 ' + (i * 4) + '%" data-i="' + i + '">' + (i < next ? esc(o) + ' <small style="font-weight:600;color:#33475b">(' + DESC[i] + ')</small>' : '') + '</div></div>'; }).join('') +
+        '</div><div class="htiles">' + tiles.map(function (t) { return '<button type="button" class="htile' + (sel === t ? ' sel' : '') + '"' + (ORDER.indexOf(t) < next ? ' disabled' : '') + '>' + esc(t) + '</button>'; }).join('') + '</div><div class="msg" id="msg" aria-live="polite"></div><div id="after"></div></section>';
+      [].forEach.call(document.querySelectorAll('.htile'), function (b) { b.onclick = function () { sel = b.textContent; place1(); }; });
+      if (next === ORDER.length) done();
+    }
+    function place1() {
+      if (ORDER[next] === sel) { next++; sel = null; draw(); }
+      else { draw(); $('msg').className = 'msg bad'; $('msg').textContent = '“' + sel + '” does not go at this level. Which option keeps the device or its materials at the highest value?'; sel = null; }
+    }
+    function done() {
+      S.hierDone = true; save();
+      $('msg').className = 'msg good'; $('msg').textContent = 'Correct!';
+      $('after').innerHTML = '<div class="databank">The higher up the hierarchy, the more of the product&rsquo;s <b>value</b> (materials, energy and labour) is kept, and the less new mining and manufacturing is needed. In the next step, <b style="color:var(--teal)">teal</b> actions sit at the top of the hierarchy, <b style="color:var(--amber)">orange</b> actions are recycling and support actions, and <b style="color:#4b5563">grey</b> actions are disposal.</div><div class="actions"><button type="button" class="btn primary" id="nx">Go to the decision challenge &rarr;</button></div>';
+      $('nx').onclick = function () { go(2); };
+    }
+    draw();
+  }
+
+  /* 3: decide */
+  function eff(a, p) { var m = p.mod[a.id] || [0, 0, 0, 0]; return a.fx.map(function (v, i) { return v + m[i]; }); }
+  function stepDecide() {
+    var p = place();
+    function draw() {
+      var sp = spent(), n = S.chosen.length;
+      $('app').innerHTML = '<section class="card"><h2>Decision challenge: ' + esc(p.name) + '</h2><p class="sub">Spend <b>no more than ' + BUDGET + ' action points</b>. Choose <b>a maximum of ' + MAXA + ' actions</b>. Tap a card to add or remove it. The &#128205; notes tell you how each action fits this place.</p>' +
+        '<div class="budget"><b>' + sp + ' / ' + BUDGET + ' points</b><div class="meter"><div style="width:' + Math.min(100, sp) + '%"' + (sp > BUDGET ? ' class="over"' : '') + '></div></div><b>' + n + ' / ' + MAXA + ' actions</b><button type="button" class="btn primary" id="nx"' + (n ? '' : ' disabled') + '>See the results &rarr;</button></div>' +
+        '<div class="msg" id="msg" aria-live="polite"></div>' +
+        '<div class="legend"><span><i style="background:var(--teal-soft);border-color:var(--teal-line)"></i>Top of the hierarchy: reduce, reuse, repair</span><span><i style="background:var(--amber-soft);border-color:var(--amber-line)"></i>Recycling and support</span><span><i style="background:var(--grey-soft);border-color:var(--grey-line)"></i>Disposal</span></div>' +
+        '<div class="grid">' + ACTIONS.map(function (a) { var on = S.chosen.indexOf(a.id) >= 0; return '<button type="button" class="act t' + a.tier + (on ? ' on' : '') + '" data-a="' + a.id + '" aria-pressed="' + on + '"><div class="top"><span class="cost">' + a.cost + '</span><span><span class="lvl">' + esc(a.lvl) + '</span><br><span class="nm">' + esc(a.name) + '</span></span></div><span class="ds">' + esc(a.desc) + '</span>' + (p.notes[a.id] ? '<span class="note">&#128205; ' + esc(p.notes[a.id]) + '</span>' : '') + '</button>'; }).join('') + '</div></section>';
+      [].forEach.call(document.querySelectorAll('.act'), function (b) {
+        b.onclick = function () {
+          var id = b.dataset.a, i = S.chosen.indexOf(id), m;
+          if (i >= 0) S.chosen.splice(i, 1);
+          else if (S.chosen.length >= MAXA) m = 'You already have four actions. Remove one first.';
+          else if (spent() + BYID[id].cost > BUDGET) m = 'That would take you over 100 points. Remove something cheaper or choose differently.';
+          else S.chosen.push(id);
+          save(); draw();
+          if (m) { $('msg').className = 'msg bad'; $('msg').textContent = m; }
+        };
+      });
+      $('nx').onclick = function () { go(3); };
+    }
+    draw();
+  }
+
+  /* 4: results */
+  function evaluate() {
+    var p = place(), tot = [0, 0, 0, 0], feed = [];
+    S.chosen.forEach(function (id) { var e = eff(BYID[id], p); e.forEach(function (v, i) { tot[i] += v; }); });
+    var has = function (id) { return S.chosen.indexOf(id) >= 0; };
+    if (has('educate') && (has('collect') || has('repair'))) { tot[0] += 1; tot[3] += 1; feed.push(['good', 'Synergy: your education campaign sends people to your ' + (has('repair') ? 'repair hub' : 'collection points') + ', so it is used much more.']); }
+    if (has('collect') && has('epr')) { tot[2] += 1; feed.push(['good', 'Synergy: producers pay for the collection points, so the scheme is properly funded.']); }
+    if (has('repair') && has('refurb')) { tot[1] += 1; feed.push(['good', 'Synergy: the repair hub supplies working devices for redistribution.']); }
+    if (has('educate') && S.chosen.length === 1) feed.push(['warn', 'Education on its own rarely changes behaviour. It works best alongside a practical action.']);
+    if (has('export')) feed.push(['bad', 'Shipping e-waste overseas only moves the problem, often to poorer communities. Hazardous e-waste exports are controlled under the Basel Convention.']);
+    if (has('landfill')) feed.push(['bad', 'Landfill wastes valuable metals and risks toxic leachate. It is the bottom of the hierarchy.']);
+    var t1 = S.chosen.filter(function (id) { return BYID[id].tier === 1; }).reduce(function (t, id) { return t + BYID[id].cost; }, 0);
+    var sp = spent();
+    var share = sp ? Math.round(t1 / sp * 100) : 0;
+    if (sp < 80) feed.push(['warn', 'You left ' + (BUDGET - sp) + ' points unspent. Could another action have added more?']);
+    S.chosen.forEach(function (id) { if (p.notes[id]) feed.push([eff(BYID[id], p).reduce(function (a, b) { return a + b; }, 0) >= BYID[id].fx.reduce(function (a, b) { return a + b; }, 0) ? 'good' : 'warn', BYID[id].name + ': ' + p.notes[id]]); });
+    var sc = tot.map(function (v) { return Math.max(0, Math.min(10, Math.round(v * 0.75))); });
+    return { sc: sc, share: share, feed: feed, total: sc.reduce(function (a, b) { return a + b; }, 0) };
+  }
+  function stepResults() {
+    var p = place(), r = evaluate();
+    var labs = [['Environment', '#0f766e'], ['People &amp; health', '#2563eb'], ['Economy', '#d97706'], ['Feasibility', '#7c3aed']];
+    var stake = p.stake.map(function (s) { var v = s.w.reduce(function (t, w, i) { return t + w * r.sc[i]; }, 0) / Math.max(1, s.w.reduce(function (t, w) { return t + Math.abs(w); }, 0)); var good = v >= 5; return '<div class="sh"><span class="face">' + (v >= 6 ? '&#128512;' : (v >= 4 ? '&#128528;' : '&#128543;')) + '</span><div><b>' + esc(s.who) + '</b><span>' + esc(good ? s.good : s.bad) + '</span></div></div>'; }).join('');
+    var vcls = r.total >= 24 && r.share >= 50 ? 'good' : (r.total >= 16 ? 'mid' : 'bad');
+    var vtxt = vcls === 'good' ? 'Strong package. Most of your points went to the top of the waste hierarchy, and it fits ' + p.name + '. Now you need to justify it.' :
+      vcls === 'mid' ? 'A reasonable package, but it could do more. Look at the bars and the feedback: could you move points higher up the hierarchy, or choose actions that fit this place better?' :
+      'This package does little to solve the problem. Go back and rethink, using the waste hierarchy and the notes for this place.';
+    $('app').innerHTML = '<section class="card"><h2>Five years later: ' + esc(p.name) + '</h2><p class="sub">Your package: ' + S.chosen.map(function (id) { return '<b>' + esc(BYID[id].name) + '</b> (' + BYID[id].cost + ')'; }).join(', ') + '. Total ' + spent() + ' points.</p>' +
+      '<div class="two"><div><h3>Impact scores (out of 10)</h3><div class="bars">' + labs.map(function (l, i) { return '<div class="bar"><span class="lab">' + l[0] + '</span><span class="tr"><div data-w="' + r.sc[i] * 10 + '" style="background:' + l[1] + '"></div></span><span class="v">' + r.sc[i] + '</span></div>'; }).join('') +
+      '<div class="bar"><span class="lab">Points spent at the top of the hierarchy</span><span class="tr"><div data-w="' + r.share + '" style="background:#0f3a5c"></div></span><span class="v">' + r.share + '%</span></div></div>' +
+      '<div class="verdict ' + vcls + '">' + vtxt + '</div></div><div><h3>Stakeholder reactions</h3><div class="stake">' + stake + '</div></div></div>' +
+      '<h3>What happened</h3><ul class="feed">' + (r.feed.length ? r.feed.map(function (f) { return '<li class="' + (f[0] === 'good' ? '' : f[0]) + '">' + esc(f[1]) + '</li>'; }).join('') : '<li>Your actions worked independently, with no particular synergies.</li>') + '</ul>' +
+      '<div class="actions"><button type="button" class="btn ghost" id="bk">&larr; Change my package</button><button type="button" class="btn primary" id="nx">Write my pitch &rarr;</button></div></section>';
+    setTimeout(function () { [].forEach.call(document.querySelectorAll('.tr div'), function (d) { d.style.width = d.dataset.w + '%'; }); }, 60);
+    $('bk').onclick = function () { go(2); };
+    $('nx').onclick = function () { go(4); };
+  }
+
+  /* 5: pitch */
+  var BOXES = [
+    { k: 'pri', t: 'Why your package is higher priority than the alternatives', ph: 'Our package is higher priority than recycling alone because...' },
+    { k: 'env', t: 'One environmental benefit', ph: 'One environmental benefit is...' },
+    { k: 'soc', t: 'One social or economic benefit', ph: 'One social/economic benefit is...' },
+    { k: 'trade', t: 'One trade-off or implementation problem', ph: 'However, one trade-off is...' }
+  ];
+  function stepPitch() {
+    var p = place(), acts = S.chosen.map(function (id) { return BYID[id]; });
+    var chips = {
+      pri: acts.filter(function (a) { return a.pri; }).map(function (a) { return a.pri; }).concat(['Recycling only recovers some of the materials, and only about 22% of the world’s e-waste is formally recycled, so preventing waste matters more.', 'Moving e-waste overseas or to landfill does not remove the problem; it shifts it to other people and places.']),
+      env: acts.filter(function (a) { return a.fx[0] > 0; }).map(function (a) { return a.env; }),
+      soc: acts.filter(function (a) { return a.fx[1] > 0 || a.fx[2] > 0; }).map(function (a) { return a.soc; }),
+      trade: acts.map(function (a) { return a.trade; })
+    };
+    $('app').innerHTML = '<section class="card"><h2>Your pitch: ' + esc(p.name) + '</h2><p class="sub">Write a short pitch to persuade decision-makers. Tap a suggestion to add it as a starting point, then <b>rewrite it in your own words</b> and add detail about ' + esc(p.name) + '.</p>' +
+      BOXES.map(function (b) { return '<div class="pbox"><h3>' + esc(b.t) + ' <span class="ok" id="ok-' + b.k + '"></span></h3><div class="chips">' + (chips[b.k] || []).map(function (c, i) { return '<button type="button" class="chip" data-k="' + b.k + '" data-i="' + i + '">+ ' + esc(c.length > 90 ? c.slice(0, 88) + '…' : c) + '</button>'; }).join('') + '</div><textarea id="ta-' + b.k + '" placeholder="' + esc(b.ph) + '" aria-label="' + esc(b.t) + '">' + esc(S.pitch[b.k] || '') + '</textarea></div>'; }).join('') +
+      '<h3>Pitch checklist</h3><ul class="checklist" id="cl"></ul><div class="actions"><button type="button" class="btn ghost" id="bk">&larr; Back to results</button><button type="button" class="btn primary" id="fin">Build my final pitch</button></div><div class="msg" id="msg" aria-live="polite"></div><div id="out"></div></section>';
+    [].forEach.call(document.querySelectorAll('.chip'), function (c) {
+      c.onclick = function () { var ta = $('ta-' + c.dataset.k), txt = chips[c.dataset.k][+c.dataset.i]; S.chipWords = (S.chipWords || 0) + txt.split(/\s+/).length; ta.value = (ta.value.trim() ? ta.value.trim() + ' ' : '') + txt; ta.dispatchEvent(new Event('input')); ta.focus(); };
+    });
+    function words(t) { t = t.trim(); return t ? t.split(/\s+/).length : 0; }
+    function check() {
+      var all = BOXES.map(function (b) { return S.pitch[b.k] || ''; }).join(' ');
+      var lower = all.toLowerCase(), pn = p.name.toLowerCase().split(/[ ,]+/).filter(function (w) { return w.length > 3; });
+      var items = [
+        ['All four parts written (at least 15 words each)', BOXES.every(function (b) { return (S.pitch[b.k] || '').trim().split(/\s+/).length >= 15; })],
+        ['Uses waste hierarchy language (reduce, reuse, repair, recycle, hierarchy, circular)', /hierarch|reduc|reuse|repair|circular/.test(lower)],
+        ['Refers to the place (' + p.name + ')', pn.some(function (w) { return lower.indexOf(w) >= 0; }) || /school|accra|ghana|amsterdam|netherlands|bangkok|thailand/.test(lower)],
+        ['Uses at least one piece of data (a number)', /\d/.test(all)],
+        ['Names a stakeholder (e.g. workers, producers, students, council)', /worker|recycler|producer|manufactur|student|famil|council|government|resident|household|agency|trader|repairer|school/.test(lower)],
+        ['Uses evaluative language (however, although, whereas, on the other hand)', /however|although|whereas|on the other hand|but /.test(lower)],
+        ['At least half of the pitch is in your own words (not just suggestions)', words(all) >= 2 * (S.chipWords || 0)]
+      ];
+      $('cl').innerHTML = items.map(function (i) { return '<li class="' + (i[1] ? 'yes' : '') + '">' + esc(i[0]) + '</li>'; }).join('');
+      BOXES.forEach(function (b) { var n = (S.pitch[b.k] || '').trim(); n = n ? n.split(/\s+/).length : 0; var el = $('ok-' + b.k); el.textContent = n + ' words'; el.className = 'ok' + (n >= 15 ? ' yes' : ''); });
+      return items;
+    }
+    BOXES.forEach(function (b) { $('ta-' + b.k).addEventListener('input', function () { S.pitch[b.k] = this.value; save(); check(); }); });
+    check();
+    $('bk').onclick = function () { go(3); };
+    $('fin').onclick = function () {
+      var items = check();
+      if (!items[0][1]) { $('msg').className = 'msg bad'; $('msg').textContent = 'Write at least 15 words in each of the four boxes first.'; return; }
+      var r = evaluate();
+      var txt = 'E-waste Decision Challenge: ' + p.name + '\n\nOur package (' + spent() + '/100 points): ' + S.chosen.map(function (id) { return BYID[id].name + ' (' + BYID[id].cost + ')'; }).join(', ') +
+        '\nImpact scores: Environment ' + r.sc[0] + '/10, People & health ' + r.sc[1] + '/10, Economy ' + r.sc[2] + '/10, Feasibility ' + r.sc[3] + '/10. Points at the top of the hierarchy: ' + r.share + '%.\n\n' +
+        BOXES.map(function (b) { return b.t + ':\n' + (S.pitch[b.k] || '').trim(); }).join('\n\n') +
+        '\n\nChecklist met: ' + items.filter(function (i) { return i[1]; }).length + ' of ' + items.length + '.';
+      $('out').innerHTML = '<h3>Your final pitch</h3><div class="final" id="final">' + esc(txt) + '</div><div class="actions"><button type="button" class="btn gold" id="cp">Copy my pitch</button><button type="button" class="btn ghost" id="again">Try another place</button></div><div class="msg" id="cmsg" aria-live="polite"></div>';
+      $('msg').className = 'msg good'; $('msg').textContent = items.every(function (i) { return i[1]; }) ? 'Every checklist point met. Excellent pitch!' : 'Pitch built. Can you tick off the rest of the checklist?';
+      $('cp').onclick = function () {
+        var ok = function () { $('cmsg').className = 'msg good'; $('cmsg').textContent = 'Copied! Paste it into OneNote.'; };
+        var sel = function () { var rg = document.createRange(); rg.selectNodeContents($('final')); var s = getSelection(); s.removeAllRanges(); s.addRange(rg); $('cmsg').className = 'msg'; $('cmsg').textContent = 'Your pitch is selected: press Ctrl+C (or Cmd+C) to copy.'; };
+        try { navigator.clipboard.writeText(txt).then(ok, sel); } catch (e) { sel(); }
+      };
+      $('again').onclick = function () { S.chosen = []; S.pitch = {}; S.chipWords = 0; S.place = null; go(0); };
+      $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  }
+
+  if (S.step > 0 && !place()) S.step = 0;
+  render();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
