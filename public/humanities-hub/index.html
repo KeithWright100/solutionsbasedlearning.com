@@ -274,12 +274,19 @@
     // carry on where you left off — pages recorded in this browser by sbl-feedback-widget.js
     var recent = [];
     try { recent = JSON.parse(localStorage.getItem('sbl-recent') || '[]'); } catch (e) {}
+    /* Games all live under /geography/games, so their subject and level come from sbl-games-catalog.js. */
+    function game(p) {
+      var m = p.match(/^\/geography\/games\/([^\/]+)/), list = window.SBL_GAMES || [];
+      if (m) for (var i = 0; i < list.length; i++) if (list[i].slug === m[1]) return list[i];
+      return null;
+    }
     function area(p) {
       if (/^\/igcse\/cie-economics/.test(p)) return ['IG', 'var(--ig)', 'Cambridge IGCSE Economics'];
       var m = p.match(/^\/igcse\/(geography|economics|business|history)/);
       if (m) return ['IG', 'var(--ig)', 'IGCSE ' + m[1].charAt(0).toUpperCase() + m[1].slice(1)];
-      if (/^\/geography\/games\/market-shock/.test(p)) return ['🎮', 'var(--rev)', 'IGCSE Economics game'];
-      if (/^\/geography\/games/.test(p)) return ['🎮', 'var(--rev)', 'Geography games'];
+      var g = game(p);
+      if (g) return ['🎮', 'var(--rev)', g.level + ' game'];
+      if (/^\/geography\/games/.test(p)) return ['🎮', 'var(--rev)', 'Humanities games'];
       m = p.match(/^\/(geography|economics|business)/);
       if (m) return ['IB', 'var(--ib)', 'IB ' + (m[1] === 'business' ? 'Business Management' : m[1].charAt(0).toUpperCase() + m[1].slice(1))];
       return ['SBL', 'var(--teal-dark)', 'SBL'];
@@ -294,8 +301,8 @@
     var html = '';
     if (recent.length) {
       html = recent.slice(0, 8).map(function (r) {
-        var a = area(r.p);
-        return '<a class="resume" href="' + esc(r.p) + '"><span class="ic" style="background:' + a[1] + '">' + a[0] + '</span><span><b>' + esc(r.t) + '</b><small>' + esc(a[2]) + ' &middot; ' + ago(r.at) + '</small></span></a>';
+        var a = area(r.p), g = game(r.p);
+        return '<a class="resume" href="' + esc(r.p) + '"><span class="ic" style="background:' + a[1] + '">' + a[0] + '</span><span><b>' + esc(g ? g.title : r.t) + '</b><small>' + esc(a[2]) + ' &middot; ' + ago(r.at) + '</small></span></a>';
       }).join('');
     } else {
       html = '<p class="empty">The lessons and revision pages you open will appear here, so you can jump straight back in. Start with <a href="/geography">IB Geography</a> or <a href="/igcse/geography/learn">IGCSE Geography</a>.</p>';
