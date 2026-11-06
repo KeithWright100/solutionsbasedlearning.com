@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>How Does Life Vary? — KS3 Geography Games — SBL</title>
-<meta name="description" content="KS3 Geography game: sort physical and human factors that affect daily life, classify real-life examples, then place Pakistan, Tanzania and Peru on a world map.">
+<meta name="description" content="KS3 Geography game: sort physical and human factors, place Pakistan, Tanzania and Peru on a world map, then compare the daily lives of three families.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap">
 <style>
 * { box-sizing: border-box; }
@@ -100,6 +100,29 @@ textarea{font:inherit;width:100%;min-height:110px;border:2px solid var(--line);b
 .mlabel{font:600 11px var(--body);fill:var(--muted)}
 .pin circle{stroke:var(--card);stroke-width:2}
 .pin text{font:700 13px var(--body);paint-order:stroke;stroke:var(--card);stroke-width:3px}
+[hidden]{display:none!important}
+/* Different lives */
+.ltabs{display:flex;gap:8px;flex-wrap:wrap}
+.ltab{font:700 .95rem var(--body);border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;padding:6px 12px;cursor:pointer}
+.ltab[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.ltab.done{border-color:var(--ok)}
+.ltab.done::after{content:" ✓";color:var(--ok)}
+.lq{font-family:var(--display);font-size:1.25rem;font-weight:600}
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ph{border:2px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;background:var(--card);min-width:0}
+.ph.ok{border-color:var(--ok)}
+.ph .pic{aspect-ratio:4/3;width:100%;max-width:100%;object-fit:cover;display:block;background:var(--line)}
+.ph .pic.contain{object-fit:contain;background:var(--bg)}
+.ph .pb{padding:10px;display:flex;flex-direction:column;gap:8px}
+.ph .quote{font-size:.98rem;line-height:1.45;margin:0}
+.ph .opts{gap:6px}
+.ph .opt{font-size:.88rem;padding:5px 11px}
+.ph .tagc{font-family:var(--display);font-weight:600;color:var(--ok)}
+.lnote{display:flex;flex-direction:column;gap:6px}
+.lnote textarea{min-height:80px}
+.lfinal{border-top:2px dashed var(--line);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.credit{font-size:.8rem;color:var(--muted)}
+@media (max-width:720px){.photos{grid-template-columns:minmax(0,1fr)}}
 .qcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px}
 .qc{border:2px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
 .qc.locked{opacity:.55}
@@ -127,6 +150,7 @@ textarea{font:inherit;width:100%;min-height:110px;border:2px solid var(--line);b
     <button class="step" data-go="0" type="button"><span class="n">1</span>Sort the factors</button>
     <button class="step" data-go="1" type="button"><span class="n">2</span>Extension</button>
     <button class="step" data-go="2" type="button"><span class="n">3</span>Map activity</button>
+    <button class="step" data-go="3" type="button"><span class="n">4</span>Different lives</button>
   </nav>
 
   <!-- STEP 1 -->
@@ -172,6 +196,22 @@ textarea{font:inherit;width:100%;min-height:110px;border:2px solid var(--line);b
     <div class="mapbox" id="mapbox"></div>
     <p class="msg" id="m2" aria-live="polite"></p>
     <div class="qcards" id="qcards"></div>
+    <div class="row" id="next2" hidden><button class="btn" data-go="3" type="button">Go to Different lives →</button></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="panel" id="s3" hidden>
+    <div class="task"><b>Activity:</b> Meet three families: one in Peru, one in Pakistan and one in Tanzania. For each topic, decide which family each photo belongs to. Then write one similarity and one difference.</div>
+    <nav class="ltabs" id="ltabs" aria-label="Topics"></nav>
+    <div id="lbody"></div>
+    <p class="msg" id="m3" aria-live="polite"></p>
+    <div class="lfinal" id="lfinal" hidden>
+      <h2>Learning check</h2>
+      <p>Can you describe some of the similarities and differences of living in different places around the world?</p>
+      <label for="lsum" class="muted">Use your notes from each topic. Try: “All three families … However, …”</label>
+      <textarea id="lsum" placeholder="All three families … However, the family in … whereas …"></textarea>
+    </div>
+    <p class="credit">Photos: Dollar Street (Gapminder), CC BY 4.0. Peru: Global Exploration (2018). Tanzania: Moa Karlberg (2015). Pakistan: Tooba Zia (2018).</p>
   </section>
 
   <p class="teacher" id="teacherRow" hidden>Teacher: <button type="button" id="answers">show all answers</button></p>
@@ -184,7 +224,7 @@ const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random(
 
 /* ---------- Steps ---------- */
 const doneSteps=new Set();
-function go(i){[0,1,2].forEach(k=>{$("#s"+k).hidden=k!==i});
+function go(i){[0,1,2,3].forEach(k=>{$("#s"+k).hidden=k!==i});
   $$(".step").forEach(b=>{b.toggleAttribute("aria-current",false);if(+b.dataset.go===i)b.setAttribute("aria-current","step");b.classList.toggle("done",doneSteps.has(+b.dataset.go))});
   window.scrollTo({top:0,behavior:"smooth"});}
 document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)go(+g.dataset.go)});
@@ -337,10 +377,71 @@ $("#qcards").addEventListener("click",e=>{
   if(line.dataset.ok)return;
   if(+b.dataset.k===q[2]){b.classList.add("picked-ok");line.dataset.ok="1";
     if(card.querySelectorAll(".qline[data-ok]").length===3)card.classList.add("ok");
-    if($$(".qline[data-ok]").length===9){$("#m2").className="msg ok";$("#m2").textContent="Map activity complete. Well done!";doneSteps.add(2);$$(".step")[2].classList.add("done")}}
+    if($$("#qcards .qline[data-ok]").length===9){$("#m2").className="msg ok";$("#m2").textContent="Map activity complete. Well done! Now meet the families who live there.";$("#next2").hidden=false;doneSteps.add(2);$$(".step")[2].classList.add("done")}}
   else{b.classList.add("picked-bad");setTimeout(()=>b.classList.remove("picked-bad"),900)}
 });
 buildMap();
+
+/* ---------- Step 4: different lives (photos: Dollar Street, CC BY 4.0) ---------- */
+const CN=["Peru","Pakistan","Tanzania"], CK=["peru","pakistan","tanzania"];
+const LIVES=[
+ {k:"home",tab:"Home",q:"The houses of these families vary. Whose home is whose?",
+  alt:{peru:"A single-storey house with walls of stacked blocks and a metal roof",pakistan:"A tall block of flats with balconies",tanzania:"A single-storey house with white walls and a green metal roof"},
+  fact:{peru:"A small house built from blocks, with a metal roof.",pakistan:"A flat in a tall, modern apartment block.",tanzania:"A one-storey house with painted walls and a metal roof."},
+  prompt:"One similarity and one difference between the homes:"},
+ {k:"cook",tab:"Cooking",q:"The cooking facilities of these families vary. Whose kitchen is whose?",
+  alt:{peru:"An outdoor stove made of stone and clay, with pots on top",pakistan:"A fitted kitchen with a gas hob and tiled wall",tanzania:"A small electric oven and a gas ring on a red gas bottle"},
+  fact:{peru:"Cooks on a stove built from stone and clay.",pakistan:"Cooks on a gas hob in a fitted kitchen.",tanzania:"Cooks with a small electric oven and a bottled-gas ring."},
+  prompt:"One similarity and one difference in how the families cook:"},
+ {k:"phone",tab:"Mobile phones",q:"All the families have mobile phones. Whose phone is whose?",
+  alt:{peru:"A small, older mobile phone with buttons, held in a hand",pakistan:"A white touchscreen smartphone",tanzania:"A mobile phone with a keypad on a patterned tablecloth"},
+  fact:{peru:"A small, older phone with buttons.",pakistan:"A touchscreen smartphone.",tanzania:"A phone with a keypad and a small screen."},
+  prompt:"Why might all three families own a mobile phone, even though their homes are so different?",contain:{peru:true}},
+ {k:"play",tab:"Play",q:"Children find ways to play in all these places. Who is playing where?",
+  alt:{peru:"A child kicking a ball outside a house with block walls",pakistan:"Two children on a red seesaw on artificial grass between tall buildings",tanzania:"Children playing on a round concrete slab in a grassy area with trees"},
+  fact:{peru:"Playing football with a ball outside the house.",pakistan:"Playing on a seesaw in a playground by the flats.",tanzania:"Playing outdoors on a concrete slab among the trees."},
+  prompt:"One similarity and one difference in how the children play:"},
+ {k:"hopes",tab:"Hopes",q:"All the families have hopes for the future. Match each family’s plans to their country.",
+  alt:{peru:"A mother with her son and baby outside their house",pakistan:"Two women standing at the door of a flat",tanzania:"A family sitting together on a sofa"},
+  quote:{peru:"Their next big plan is to buy a blender and a DVD player. Their dream is to be able to buy a refrigerator.",
+         pakistan:"Their next big plan is to buy an air conditioner. They dream of buying a new smartphone to replace their old one.",
+         tanzania:"Their next big purchase will be a tablet computer and their dream is to buy their own car someday."},
+  img:"family",prompt:"What do the families’ hopes tell you about how their lives are similar and different?"}
+];
+let lcur=0;const ldone=new Set();
+const notes={};try{Object.assign(notes,JSON.parse(localStorage.getItem("sbl-lives-notes")||"{}"))}catch(e){}
+function saveNotes(){try{localStorage.setItem("sbl-lives-notes",JSON.stringify(notes))}catch(e){}}
+const lorder={};LIVES.forEach(t=>lorder[t.k]=shuffle(CK));
+function lshow(i){
+  lcur=i;const t=LIVES[i];
+  $("#ltabs").innerHTML=LIVES.map((x,j)=>`<button type="button" class="ltab${ldone.has(j)?" done":""}" data-l="${j}" aria-current="${j===i}">${x.tab}</button>`).join("");
+  const done=ldone.has(i);
+  $("#lbody").innerHTML=`<div style="display:flex;flex-direction:column;gap:14px"><p class="lq">${t.q}</p><div class="photos">${lorder[t.k].map(c=>{
+    const src=`img/${t.img||t.k}-${c}.jpg`;
+    return `<div class="ph${done?" ok":""}" data-c="${c}"><img class="pic${t.contain&&t.contain[c]?" contain":""}" src="/geography/games/life-around-the-world/${src}" alt="${t.alt[c]}" loading="lazy">
+      <div class="pb">${t.quote?`<p class="quote">“${t.quote[c]}”</p>`:""}
+      ${done?`<p class="tagc">${CN[CK.indexOf(c)]}</p>${t.fact?`<p class="fb">${t.fact[c]}</p>`:""}`:`<div class="opts">${CN.map((n,k)=>`<button type="button" class="opt" data-a="${CK[k]}">${n}</button>`).join("")}</div><p class="fb"></p>`}</div></div>`}).join("")}</div>
+    <div class="lnote"${done?"":" hidden"}><label for="ln-${t.k}"><b>Your notes:</b> ${t.prompt}</label><textarea id="ln-${t.k}" data-k="${t.k}" placeholder="One similarity is … One difference is …">${(notes[t.k]||"").replace(/</g,"&lt;")}</textarea></div>
+    <div class="row">${i>0?`<button class="btn ghost" type="button" data-l="${i-1}">← ${LIVES[i-1].tab}</button>`:""}<span class="spacer"></span>${i<LIVES.length-1?`<button class="btn" type="button" data-l="${i+1}">Next: ${LIVES[i+1].tab} →</button>`:""}</div></div>`;
+  $("#lfinal").hidden=ldone.size<LIVES.length;
+}
+$("#s3").addEventListener("click",e=>{
+  const nav=e.target.closest("[data-l]");if(nav){lshow(+nav.dataset.l);$("#m3").textContent="";return}
+  const b=e.target.closest(".ph .opt");if(!b)return;
+  const card=b.closest(".ph"),c=card.dataset.c,t=LIVES[lcur];
+  if(b.dataset.a===c){
+    card.classList.add("ok");card.querySelector(".opts").outerHTML=`<p class="tagc">${CN[CK.indexOf(c)]}</p>`;
+    card.querySelector(".fb").textContent=t.fact?t.fact[c]:"";
+    if($$("#lbody .ph.ok").length===3){ldone.add(lcur);$("#lbody .lnote").hidden=false;
+      $(`.ltab[data-l="${lcur}"]`).classList.add("done");
+      const m=$("#m3");m.className="msg ok";
+      if(ldone.size===LIVES.length){m.textContent="All five topics matched. Finish with the learning check below.";$("#lfinal").hidden=false;doneSteps.add(3);$$(".step")[3].classList.add("done")}
+      else m.textContent="All three correct. Now write your notes.";}
+  }else{b.classList.add("picked-bad");card.querySelector(".fb").textContent="Not quite. Look for clues in the photo.";setTimeout(()=>b.classList.remove("picked-bad"),900)}
+});
+$("#s3").addEventListener("input",e=>{const k=e.target.dataset&&e.target.dataset.k;if(k){notes[k]=e.target.value;saveNotes()}if(e.target.id==="lsum"){notes.sum=e.target.value;saveNotes()}});
+$("#lsum").value=notes.sum||"";
+lshow(0);
 
 /* ---------- Teacher answers (shown only to logged-in, active teacher or admin accounts, checked with /api/session) ---------- */
 try{fetch('/api/session',{credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(d=>{
@@ -351,6 +452,8 @@ $("#answers").onclick=()=>{
   $$(".sc").forEach(card=>{if(card.classList.contains("ok"))return;const s=SCEN[+card.dataset.i];card.classList.add("ok");card.querySelector(`.opt[data-a="${s.a}"]`).classList.add("picked-ok");card.querySelector(".fb").textContent=s.f});
   COUNTRIES.forEach((c,i)=>{if(!placed.has(i)){placed.add(i);addPin(i);const ch=$(`#ctray .chip[data-c="${i}"]`);ch.classList.add("right");ch.disabled=true;unlock(i)}
     $$(`#qc${i} .qline`).forEach((l,j)=>{if(!l.dataset.ok){l.dataset.ok="1";l.querySelectorAll(".opt")[c.qs[j][2]].classList.add("picked-ok")}})});
+  $("#next2").hidden=false;
+  LIVES.forEach((_,j)=>ldone.add(j));lshow(lcur);
 };
 go(0);
 })();
