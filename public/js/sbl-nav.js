@@ -89,6 +89,7 @@
     { key: 'rev', label: 'Revision & practice', color: 'var(--sn-rev)', blurb: 'Revision, past papers, quizzes and games by level and subject',
       cols: [
         { title: 'IB Diploma', items: [
+          ['My scores', '/humanities-hub/my-scores', 'new'],
           ['Geography', '', 'head'],
           ['Full revision guide', '/geography/revision/guide'],
           ['Check your understanding', '/geography/revision'],
@@ -176,7 +177,7 @@
         '<div class="sn-find"><label><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' +
           '<input type="search" placeholder="Find a page…" aria-label="Find a page" autocomplete="off"></label><div class="sn-find__list" role="listbox"></div></div>' +
         '<div class="sn-userwrap"><button type="button" class="sn-user" aria-haspopup="true" aria-expanded="false"><i>…</i><span class="sn-uname"></span>' + CHEV + '</button>' +
-          '<div class="sn-usermenu"><small class="sn-umail"></small><a href="/humanities-hub">Humanities Hub</a><a href="/">SBL home</a><button type="button" class="sn-logout">Log out</button></div></div>' +
+          '<div class="sn-usermenu"><small class="sn-umail"></small><a href="/humanities-hub/my-scores"><strong>My scores</strong></a><a href="/humanities-hub">Humanities Hub</a><a href="/">SBL home</a><button type="button" class="sn-logout">Log out</button></div></div>' +
         '<button type="button" class="sn-burger" aria-label="Open menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
       '</div></nav>' +
       '<div class="sn-mobwrap"><div class="sn-mobfind"><input type="search" placeholder="Find a page…" aria-label="Find a page" autocomplete="off"><div class="sn-find__list" role="listbox"></div></div><div class="sn-mob"></div></div>';

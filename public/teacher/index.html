@@ -17,6 +17,12 @@
   .cs-field label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate); }
   .cs-field select, .cs-field input { background: var(--navy); color: var(--white); border: 1px solid var(--navy-line); border-radius: 10px; padding: 0.55rem 0.7rem; font: inherit; font-size: 0.9rem; min-width: 210px; }
   .cs-spacer { flex: 1; }
+  .cs-tabs { display: inline-flex; gap: 0.3rem; background: var(--navy); border: 1px solid var(--navy-line); border-radius: 12px; padding: 0.3rem; margin-bottom: 1rem; }
+  .cs-tabs button { background: none; border: 0; color: var(--slate); font: inherit; font-weight: 700; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 9px; cursor: pointer; }
+  .cs-tabs button[aria-selected="true"] { background: var(--teal); color: #04121F; }
+  .cs-tabs button:focus-visible { outline: 2px solid var(--teal-bright); outline-offset: 2px; }
+  .cs-sheet .cs-lessonhead i { display: block; font-style: normal; color: var(--slate); font-size: 0.68rem; margin-bottom: 2px; }
+  .cs-sheet td.cs-cell small { display: block; font-size: 0.66rem; color: var(--slate); font-family: var(--font-body); }
   .cs-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.7rem; margin-bottom: 1rem; }
   .cs-stat { background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 14px; padding: 0.8rem 1rem; }
   .cs-stat b { display: block; font-family: var(--font-display); font-size: 1.5rem; color: var(--white); }
@@ -84,7 +90,7 @@
   <div class="sbl-admin-header">
     <div>
       <h1>Class Sheet</h1>
-      <p>Quiz scores and marked past paper questions for your students, filled in automatically &middot; signed in as <span id="teacherName">…</span></p>
+      <p>Quiz scores, lesson questions and full past paper questions for your students, filled in automatically &middot; signed in as <span id="teacherName">…</span></p>
     </div>
     <div style="display:flex; gap:0.6rem;">
       <a href="/admin/" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="adminLink" hidden>Admin Dashboard</a>
@@ -96,11 +102,17 @@
 
   <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
 
+  <div class="cs-tabs" role="tablist" aria-label="Mark book areas">
+    <button type="button" role="tab" id="tabLessons" aria-selected="true">Lesson marks</button>
+    <button type="button" role="tab" id="tabFull" aria-selected="false">Full PPQs</button>
+  </div>
+
   <div class="cs-toolbar">
     <div class="cs-field"><label for="classSel">Class</label><select id="classSel"></select></div>
     <div class="cs-field" id="teacherField" hidden><label for="teacherSel">Viewing</label><select id="teacherSel"></select></div>
     <div class="cs-field" id="subjField" hidden><label for="subjSel">Subject</label><select id="subjSel"></select></div>
-    <div class="cs-field"><label for="viewSel">Unit</label><select id="viewSel"></select></div>
+    <div class="cs-field" id="unitField"><label for="viewSel">Unit</label><select id="viewSel"></select></div>
+    <div class="cs-field" id="paperField" hidden><label for="paperSel">Paper</label><select id="paperSel"></select></div>
     <div class="cs-field"><label for="searchBox">Find student</label><input id="searchBox" type="search" placeholder="Type a name…"></div>
     <div class="cs-spacer"></div>
   </div>

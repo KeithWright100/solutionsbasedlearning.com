@@ -187,6 +187,9 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ lessonId: lessonId, patch: patch })
+      }).then(function (r) {
+        // Let the Lesson Progress panel refresh itself once the save lands.
+        if (r && r.ok) { try { window.dispatchEvent(new CustomEvent('sbl-progress-saved', { detail: { lessonId: lessonId } })); } catch (e) {} }
       }).catch(function () { /* offline/failed — local copy still saved */ });
     } catch (e) { /* ignore */ }
   }
@@ -1538,4 +1541,174 @@ function buildRetrievalBank(lessonId) {
   if (document.querySelector('script[src="/js/sbl-igcse-hub.js"]')) return;
   var s = document.createElement('script'); s.src = '/js/sbl-igcse-hub.js'; s.defer = true;
   (document.head || document.documentElement).appendChild(s);
+})();
+
+/* ============================================================
+   Lesson Progress panel (right-hand rail), Mastery tile and the
+   Overall Progress bar in the page header.
+
+   These used to be fixed placeholder HTML (always "0% · Not started")
+   even though each activity WAS saved to the student's account. This
+   reads the student's saved progress from /api/progress and fills
+   them in, and refreshes whenever something new is saved.
+
+   An activity counts as done when:
+     Teach Me Live            opened, or any checklist item ticked
+     Test My Knowledge        quiz finished (shows the score)
+     IB-Style Questions       at least one answer marked (shows marks)
+     Spaced Retrieval Quiz    quiz finished (shows the score)
+     Challenge Mode           opened
+     Ready for the Classroom? readiness check finished
+   ============================================================ */
+(function () {
+  'use strict';
+  if (window.__sblLessonProgress) return;
+  window.__sblLessonProgress = true;
+
+  var ITEMS = [
+    { key: 'teach', match: 'teach me live' },
+    { key: 'tmk', match: 'test my knowledge' },
+    { key: 'ib', match: 'ib-style' },
+    { key: 'sr', match: 'spaced retrieval' },
+    { key: 'challenge', match: 'challenge' },
+    { key: 'ready', match: 'ready for the classroom' }
+  ];
+
+  function lessonIdOnPage() {
+    var ov = document.getElementById('sblTeachBotOverlay');
+    if (ov && ov.getAttribute('data-lesson-id')) return ov.getAttribute('data-lesson-id');
+    var b = document.querySelector('[onclick*="openTeachBot("]');
+    var m = b && String(b.getAttribute('onclick')).match(/openTeachBot\(\s*['"]([^'"]+)['"]/);
+    return m ? m[1] : null;
+  }
+
+  function status(d) {
+    d = d || {};
+    var ib = { aw: 0, mx: 0, n: 0 };
+    Object.keys(d).forEach(function (k) {
+      var v = d[k];
+      if (k.indexOf('ib_q') === 0 && v && typeof v.awarded === 'number' && typeof v.marks === 'number' && v.marks > 0) { ib.aw += v.awarded; ib.mx += v.marks; ib.n++; }
+    });
+    var tmk = d.quiz_test_my_knowledge, sr = d.quiz_spaced_retrieval;
+    var ticked = Array.isArray(d.checklist) && d.checklist.some(Boolean);
+    var s = {
+      teach: { done: !!d.teachOpenedAt || ticked },
+      tmk: { done: !!(tmk && typeof tmk.pct === 'number'), note: tmk && typeof tmk.pct === 'number' ? tmk.pct + '%' : '' },
+      ib: { done: ib.n > 0, note: ib.n ? ib.aw + '/' + ib.mx : '' },
+      sr: { done: !!(sr && typeof sr.pct === 'number'), note: sr && typeof sr.pct === 'number' ? sr.pct + '%' : '' },
+      challenge: { done: !!d.challengeOpenedAt },
+      ready: { done: !!d.readinessCompleted }
+    };
+    var n = ITEMS.filter(function (it) { return s[it.key].done; }).length;
+    s.pct = Math.round(n / ITEMS.length * 100);
+    s.any = n > 0 || Object.keys(d).length > 0;
+    s.band = tmk && tmk.band ? tmk.band : null;
+    return s;
+  }
+
+  var styled = false;
+  function addStyle() {
+    if (styled) return; styled = true;
+    var st = document.createElement('style');
+    st.textContent =
+      '.lh-checklist li.sbl-done .lh-checklist__dot{background:var(--lh-green,#16a34a)!important;border-color:var(--lh-green,#16a34a)!important;box-shadow:none}' +
+      '.lh-checklist li .sbl-lp-note{float:right;font-weight:700;color:var(--lh-green,#16a34a);font-size:.9em}' +
+      '.lh-ring circle{transition:stroke-dashoffset .6s ease}';
+    document.head.appendChild(st);
+  }
+
+  function paintLesson(s) {
+    var ring = document.querySelector('.lh-ring');
+    if (!ring) return;
+    addStyle();
+    var arcs = ring.querySelectorAll('circle');
+    var arc = arcs[arcs.length - 1];
+    if (arc && arcs.length > 1) {
+      var len = parseFloat(arc.getAttribute('stroke-dasharray')) || 226;
+      arc.setAttribute('stroke-dashoffset', String(Math.round(len * (1 - s.pct / 100))));
+    }
+    var p = ring.querySelector('.lh-ring__pct'); if (p) p.textContent = s.pct + '%';
+    var l = ring.querySelector('.lh-ring__label'); if (l) l.textContent = s.pct >= 100 ? 'Complete' : (s.any ? 'In progress' : 'Not started');
+    var panel = ring.closest('.lh-panel') || document;
+    panel.querySelectorAll('.lh-checklist li').forEach(function (li) {
+      var old = li.querySelector('.sbl-lp-note'); if (old) old.remove();
+      var t = li.textContent.toLowerCase();
+      var it = ITEMS.filter(function (x) { return t.indexOf(x.match) !== -1; })[0];
+      if (!it) return;
+      var st = s[it.key];
+      li.classList.toggle('sbl-done', !!st.done);
+      if (st.note) { var n = document.createElement('span'); n.className = 'sbl-lp-note'; n.textContent = st.note; li.appendChild(n); }
+    });
+    // "Mastery" tile
+    document.querySelectorAll('.lh-stat').forEach(function (tile) {
+      var lab = tile.querySelector('.lh-stat__label'), val = tile.querySelector('.lh-stat__value');
+      if (lab && val && /mastery/i.test(lab.textContent)) val.textContent = s.band || (s.any ? 'In progress' : 'Not started');
+    });
+  }
+
+  // The lessons in the same unit/topic as this one (for the header bar).
+  function unitLessons(id) {
+    var lists = [];
+    Object.keys(window).forEach(function (k) {
+      if (!/LESSON_ORDERS?$/.test(k)) return;
+      var v = window[k];
+      if (!Array.isArray(v)) return;
+      if (Array.isArray(v[0])) v.forEach(function (a) { lists.push(a); }); else lists.push(v);
+    });
+    for (var i = 0; i < lists.length; i++) if (lists[i].indexOf(id) !== -1) return lists[i];
+    return window.SBL_LESSONS ? Object.keys(window.SBL_LESSONS) : [id];
+  }
+
+  function paintOverall(all, id) {
+    var wrap = document.querySelector('.lh-progress-wrap');
+    if (!wrap) return;
+    var ids = unitLessons(id);
+    var sum = 0;
+    ids.forEach(function (x) { sum += status(all[x]).pct; });
+    var pct = ids.length ? Math.round(sum / ids.length) : 0;
+    var fill = wrap.querySelector('.lh-progress-bar__fill'); if (fill) fill.style.width = pct + '%';
+    var t = wrap.querySelector('.lh-progress-pct'); if (t) t.textContent = pct + '%';
+    wrap.title = 'Progress across the ' + ids.length + ' lessons in this unit';
+  }
+
+  var lessonId = null, busy = false, again = false;
+  function refresh() {
+    if (!lessonId) return;
+    if (busy) { again = true; return; }
+    busy = true;
+    fetch('/api/progress', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (res) {
+        var all = (res && res.lessons) || {};
+        paintLesson(status(all[lessonId]));
+        paintOverall(all, lessonId);
+      })
+      .catch(function () {})
+      .then(function () { busy = false; if (again) { again = false; refresh(); } });
+  }
+
+  // Teach Me Live and Challenge Mode have no score, so record opening them.
+  function markOpened(key, id) {
+    id = id || lessonId; if (!id) return;
+    var patch = {}; patch[key] = new Date().toISOString();
+    fetch('/api/progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lessonId: id, patch: patch }) })
+      .then(function (r) { if (r.ok) refresh(); }).catch(function () {});
+  }
+  function wrap(name, key) {
+    var orig = window[name];
+    if (typeof orig !== 'function' || orig.__sblWrapped) return;
+    var w = function (id) { try { markOpened(key, id); } catch (e) {} return orig.apply(this, arguments); };
+    w.__sblWrapped = true;
+    window[name] = w;
+  }
+
+  function start() {
+    lessonId = lessonIdOnPage();
+    if (!lessonId || !document.querySelector('.lh-ring, .lh-progress-wrap')) return;
+    wrap('openTeachBot', 'teachOpenedAt');
+    wrap('openChallengeMode', 'challengeOpenedAt');
+    window.addEventListener('sbl-progress-saved', function () { setTimeout(refresh, 150); });
+    refresh();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

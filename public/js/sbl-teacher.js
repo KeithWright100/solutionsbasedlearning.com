@@ -33,11 +33,25 @@
     { key: 'ciecon', label: 'IGCSE Economics (CIE)', src: '/js/sbl-cie-econ-lessons.js' },
     { key: 'ibus', label: 'IGCSE Business (Edexcel)', src: '/js/sbl-igcse-bus-lessons.js' },
     { key: 'ihist', label: 'IGCSE History (Edexcel)', src: '/js/sbl-igcse-hist-lessons.js' },
-    { key: 'ppq', label: 'Past paper questions (revision)', src: null }
+    { key: 'ppq', label: 'Full PPQs', src: null }
   ];
   var viewLessons = {};   // view key -> [{ id, title }]
   var students = [];
-  var current = { cls: '__all', view: 'u1', q: '', subj: '__all' };
+  var current = { cls: '__all', view: 'u1', q: '', subj: '__all', paper: '__all', lastUnit: 'u1' };
+
+  // Full PPQs: the revision page a past paper question was answered on tells us its paper and unit.
+  var PPQ_UNITS = [
+    ['changing-population', 'Paper 2 · Changing population'], ['global-climate', 'Paper 2 · Global climate'],
+    ['resource-consumption', 'Paper 2 · Resource consumption'], ['freshwater', 'Paper 1 · Freshwater'],
+    ['leisure-tourism-sport', 'Paper 1 · Leisure, tourism and sport'], ['food-and-health', 'Paper 1 · Food and health'],
+    ['power-places-networks', 'Paper 3 · Power, places and networks'], ['human-development-diversity', 'Paper 3 · Human development and diversity'],
+    ['global-risks-resilience', 'Paper 3 · Global risks and resilience']
+  ];
+  function ppqUnit(page) {
+    var m = String(page || '').match(/paper-questions\/([^\/?#]+)/), slug = m ? m[1] : '';
+    for (var i = 0; i < PPQ_UNITS.length; i++) if (PPQ_UNITS[i][0] === slug) return { slug: slug, name: PPQ_UNITS[i][1], order: i };
+    return { slug: 'other', name: 'Other past paper questions', order: 99 };
+  }
   var DAY = 86400000;
   var isAdmin = false;
   var viewing = '';   // admin only: '' = my students, 'all', or a teacher id
@@ -73,10 +87,16 @@
 
   function init() {
     var vs = $('viewSel');
-    VIEWS.forEach(function (v) { var o = document.createElement('option'); o.value = v.key; o.textContent = v.label; vs.appendChild(o); });
+    VIEWS.forEach(function (v) { if (!v.src) return; var o = document.createElement('option'); o.value = v.key; o.textContent = v.label; vs.appendChild(o); });
     try { var saved = localStorage.getItem('sbl-teacher-view'); if (saved && VIEWS.some(function (v) { return v.key === saved; })) current.view = saved; } catch (e) {}
-    vs.value = current.view;
-    vs.addEventListener('change', function () { current.view = vs.value; try { localStorage.setItem('sbl-teacher-view', vs.value); } catch (e) {} showView(); });
+    try { var lu = localStorage.getItem('sbl-teacher-unit'); if (lu && VIEWS.some(function (v) { return v.key === lu && v.src; })) current.lastUnit = lu; } catch (e) {}
+    if (current.view !== 'ppq') current.lastUnit = current.view;
+    vs.value = current.lastUnit;
+    vs.addEventListener('change', function () { current.view = current.lastUnit = vs.value; try { localStorage.setItem('sbl-teacher-view', vs.value); localStorage.setItem('sbl-teacher-unit', vs.value); } catch (e) {} showView(); });
+    $('paperSel').addEventListener('change', function () { current.paper = this.value; cols = ppqColumns(); render(); });
+    $('tabLessons').addEventListener('click', function () { setMode('lessons'); });
+    $('tabFull').addEventListener('click', function () { setMode('ppq'); });
+    paintTabs();
     $('classSel').addEventListener('change', function () { current.cls = this.value; try { localStorage.setItem('sbl-teacher-class', this.value); } catch (e) {} render(); });
     $('subjSel').addEventListener('change', function () { current.subj = this.value; render(); });
     $('searchBox').addEventListener('input', function () { current.q = this.value.trim().toLowerCase(); render(); });
@@ -92,6 +112,19 @@
     });
     if (isAdmin) { try { viewing = localStorage.getItem('sbl-teacher-viewing') || ''; } catch (e) {} }
     loadStudents();
+  }
+
+  function paintTabs() {
+    var full = current.view === 'ppq';
+    $('tabLessons').setAttribute('aria-selected', String(!full));
+    $('tabFull').setAttribute('aria-selected', String(full));
+    $('unitField').hidden = full;
+    $('paperField').hidden = !full;
+  }
+  function setMode(mode) {
+    current.view = mode === 'ppq' ? 'ppq' : current.lastUnit;
+    try { localStorage.setItem('sbl-teacher-view', current.view); } catch (e) {}
+    paintTabs(); showView();
   }
 
   var teachersFilled = false;
@@ -188,15 +221,30 @@
         var c = s.cells[id];
         if (id.indexOf('PPQ:') !== 0 || !c.ibCount) return;
         if (c.page && c.page.indexOf('/geography/') === -1) return; // keep the trial to Geography
-        seen[id] = true;
+        if (!seen[id]) seen[id] = ppqUnit(c.page);
       });
     });
-    return Object.keys(seen).sort().map(function (id) { return { id: id, title: id.slice(4) }; });
+    var all = Object.keys(seen).map(function (id) {
+      var t = id.slice(4), mk = t.match(/\((\d+)\s*marks?/i), qn = t.match(/Question\s+(\d+)/i);
+      return { id: id, title: t, unit: seen[id], total: mk ? +mk[1] : null, qnum: qn ? +qn[1] : 999 };
+    });
+    // Paper filter options: the papers that have marked answers
+    var ps = $('paperSel');
+    if (ps) {
+      var units = {}; all.forEach(function (c) { units[c.unit.slug] = c.unit; });
+      var ul = Object.keys(units).map(function (k) { return units[k]; }).sort(function (a, b) { return a.order - b.order; });
+      if (current.paper !== '__all' && !units[current.paper]) current.paper = '__all';
+      ps.innerHTML = '<option value="__all">All papers</option>' + ul.map(function (u) { return '<option value="' + esc(u.slug) + '">' + esc(u.name) + '</option>'; }).join('');
+      ps.value = current.paper;
+    }
+    return all.filter(function (c) { return current.paper === '__all' || c.unit.slug === current.paper; })
+      .sort(function (a, b) { return a.unit.order - b.unit.order || a.qnum - b.qnum || a.title.localeCompare(b.title); });
   }
 
   var cols = [];
   function showView() {
     var view = VIEWS.filter(function (v) { return v.key === current.view; })[0];
+    if ($('tabFull')) paintTabs();
     if (view.key === 'ppq') { cols = ppqColumns(); render(); return; }
     $('sheetWrap').innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">Loading lessons…</div>';
     lessonsFor(view).then(function (list) { if (current.view === view.key) { cols = list; render(); } });
@@ -244,18 +292,19 @@
       $('sheetNote').textContent = ''; return;
     }
     if (!cols.length) {
-      wrap.innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">' + (isPPQ ? 'No past paper questions have been marked yet. They appear here automatically when your students submit revision answers for marking.' : 'No lessons found for this unit.') + '</div>';
+      wrap.innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">' + (isPPQ ? 'No full past paper questions have been marked yet. They appear here automatically when your students submit answers on Revision › Full Past Paper Questions.' : 'No lessons found for this unit.') + '</div>';
       $('sheetNote').textContent = ''; return;
     }
 
     var h1 = '<tr><th class="cs-name" rowspan="2">Student</th>';
     var h2 = '<tr>';
     cols.forEach(function (c, i) {
-      var num = isPPQ ? 'PPQ' : 'L' + (i + 1);
-      h1 += '<th class="cs-lessonhead cs-groupstart" colspan="' + (isPPQ ? 1 : 2) + '" title="' + esc(c.title) + '"><b>' + num + '</b>' + esc(c.title.length > 60 ? c.title.slice(0, 58) + '…' : c.title) + '</th>';
+      var num = isPPQ ? (c.qnum && c.qnum !== 999 ? 'Q' + c.qnum : 'PPQ') : 'L' + (i + 1);
+      var shown = isPPQ ? c.title.replace(/^Question\s+\d+\s*[—-]?\s*/i, '') : c.title;
+      h1 += '<th class="cs-lessonhead cs-groupstart" colspan="' + (isPPQ ? 1 : 2) + '" title="' + esc((isPPQ ? c.unit.name + ' — ' : '') + c.title) + '">' + (isPPQ ? '<i>' + esc(c.unit.name) + '</i>' : '') + '<b>' + num + '</b>' + esc(shown.length > 60 ? shown.slice(0, 58) + '…' : shown) + '</th>';
       h2 += isPPQ ? '<th class="cs-groupstart">Marks</th>' : '<th class="cs-groupstart">Quiz</th><th>PPQ</th>';
     });
-    h1 += (isPPQ ? '' : '<th class="cs-groupstart" rowspan="2">Quiz avg</th>') + '<th rowspan="2"' + (isPPQ ? ' class="cs-groupstart"' : '') + '>PPQ avg</th><th rowspan="2">Last active</th><th rowspan="2">Flags</th></tr>';
+    h1 += (isPPQ ? '' : '<th class="cs-groupstart" rowspan="2">Quiz avg</th>') + '<th rowspan="2"' + (isPPQ ? ' class="cs-groupstart"' : '') + '>' + (isPPQ ? 'Full PPQ avg' : 'PPQ avg') + '</th><th rowspan="2">Last active</th><th rowspan="2">Flags</th></tr>';
     h2 += '</tr>';
 
     var body = '';
@@ -277,7 +326,11 @@
         }
         if (cell && cell.ibMax) {
           var p = pctOf(cell.ibAwarded, cell.ibMax);
-          r += '<td class="cs-cell ' + (isPPQ ? 'cs-groupstart ' : '') + band(p) + '"' + data + ' title="' + cell.ibCount + ' question(s) marked · ' + p + '%">' + cell.ibAwarded + '/' + cell.ibMax + '</td>';
+          if (isPPQ) {
+            var partial = c.total && cell.ibMax < c.total;
+            r += '<td class="cs-cell cs-groupstart ' + band(p) + '"' + data + ' title="' + cell.ibCount + ' part(s) marked · ' + cell.ibAwarded + ' of ' + cell.ibMax + ' marks attempted (' + p + '%)' + (c.total ? ' · question worth ' + c.total : '') + '">' + cell.ibAwarded + '/' + cell.ibMax + (partial ? '<small>' + cell.ibMax + ' of ' + c.total + ' marks tried</small>' : '') + '</td>';
+          } else
+          r += '<td class="cs-cell ' + band(p) + '"' + data + ' title="' + cell.ibCount + ' question(s) marked · ' + p + '%">' + cell.ibAwarded + '/' + cell.ibMax + '</td>';
         } else r += '<td class="cs-cell cs-empty' + (isPPQ ? ' cs-groupstart' : '') + '">·</td>';
       });
       var sum = rowSummary(s);
@@ -301,10 +354,15 @@
       td.addEventListener('keydown', function (e) { if (e.key === 'Enter') openDetail(td.dataset.s, td.dataset.l); });
     });
     $('sheetNote').textContent = isPPQ
-      ? 'Each column is a revision topic. Marks show the latest attempt at each question in that topic.'
+      ? 'Each column is a full past paper question from Revision › Full Past Paper Questions, grouped by paper. Marks show the latest attempt at each part; “marks tried” means the student has not answered every part yet. Click a score to see their answers and feedback.'
       : 'PPQ shows marks on the lesson’s IB-style questions (latest attempt at each question). Flags use all units, not just this one.';
   }
 
+  function fullDone(list) {
+    var n = 0;
+    list.forEach(function (s) { cols.forEach(function (c) { var cell = (s.cells || {})[c.id]; if (cell && c.total && cell.ibMax >= c.total) n++; }); });
+    return n;
+  }
   function renderStats(list) {
     var active = 0, qSum = 0, qN = 0, aw = 0, mx = 0, flagged = 0;
     list.forEach(function (s) {
@@ -320,8 +378,8 @@
     $('stats').innerHTML =
       stat(list.length, 'students') +
       stat(active, 'active in the last 7 days') +
-      (current.view === 'ppq' ? '' : stat(qN ? Math.round(qSum / qN) + '%' : '—', 'average quiz score (this unit)')) +
-      stat(mx ? Math.round(aw / mx * 100) + '%' : '—', 'average PPQ mark (this view)') +
+      (current.view === 'ppq' ? stat(fullDone(list), 'full PPQs fully answered') : stat(qN ? Math.round(qSum / qN) + '%' : '—', 'average quiz score (this unit)')) +
+      stat(mx ? Math.round(aw / mx * 100) + '%' : '—', current.view === 'ppq' ? 'average full PPQ mark' : 'average PPQ mark (this view)') +
       stat(flagged, 'students flagged');
   }
 
@@ -443,7 +501,7 @@
     var q = function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
     var head = ['Student', 'Email', 'Class'];
     cols.forEach(function (c, i) {
-      var n = isPPQ ? c.title : 'L' + (i + 1) + ' ' + c.title;
+      var n = isPPQ ? c.unit.name + ' — ' + c.title : 'L' + (i + 1) + ' ' + c.title;
       if (!isPPQ) head.push(n + ' — Quiz %');
       head.push(n + ' — PPQ marks');
     });

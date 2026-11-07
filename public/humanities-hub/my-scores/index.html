@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Scores — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #062033; --navy: #0f3a5c; --slate: #4a6272; --line: rgba(5,43,65,.13);
+    --bg: #f4f7fa; --card: #ffffff; --teal: #007c82; --teal-bg: #e3f4f4;
+    --good: #15803d; --good-bg: #dcfce7; --ok: #a16207; --ok-bg: #fef3c7; --low: #b91c1c; --low-bg: #fee2e2;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 "Inter", "Segoe UI", system-ui, Arial, sans-serif; }
+  .ms { max-width: 1100px; margin: 0 auto; padding: 28px 16px 70px; }
+  h1 { font-family: "Space Grotesk", "Inter", sans-serif; font-size: 2rem; color: var(--navy); margin: 0 0 4px; }
+  .ms-sub { color: var(--slate); margin: 0 0 22px; }
+  .ms-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 22px; }
+  .ms-stat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+  .ms-stat b { display: block; font-family: "Space Grotesk", "Inter", sans-serif; font-size: 1.7rem; color: var(--navy); line-height: 1.2; }
+  .ms-stat span { font-size: .82rem; color: var(--slate); }
+  .ms-tabs { display: inline-flex; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; margin-bottom: 16px; }
+  .ms-tabs button { border: 0; background: none; font: inherit; font-weight: 700; color: var(--slate); padding: 8px 16px; border-radius: 9px; cursor: pointer; }
+  .ms-tabs button[aria-selected="true"] { background: var(--navy); color: #fff; }
+  .ms-tabs button:focus-visible, .ms-row:focus-visible, .ms-btn:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+  .ms-unit { background: var(--card); border: 1px solid var(--line); border-radius: 16px; margin-bottom: 16px; overflow: hidden; }
+  .ms-unit h2 { font-size: 1.05rem; margin: 0; padding: 14px 16px; border-bottom: 1px solid var(--line); color: var(--navy); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .ms-unit h2 small { font-weight: 600; color: var(--slate); font-size: .82rem; }
+  .ms-scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: center; vertical-align: middle; }
+  th { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--slate); font-weight: 700; background: #f8fafc; }
+  th:first-child, td:first-child { text-align: left; }
+  td:first-child { min-width: 240px; }
+  td a { color: var(--navy); font-weight: 600; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .pill { display: inline-block; min-width: 54px; padding: 3px 9px; border-radius: 999px; font-weight: 700; font-size: .85rem; }
+  .p-good { background: var(--good-bg); color: var(--good); }
+  .p-ok { background: var(--ok-bg); color: var(--ok); }
+  .p-low { background: var(--low-bg); color: var(--low); }
+  .dash { color: #9aa9b4; }
+  .tick { color: var(--good); font-weight: 800; }
+  .bar { display: inline-flex; align-items: center; gap: 8px; }
+  .bar i { display: block; width: 70px; height: 7px; border-radius: 9px; background: #e5ebf0; overflow: hidden; }
+  .bar i b { display: block; height: 100%; background: var(--teal); }
+  .ms-btn { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 4px 11px; font: inherit; font-size: .8rem; font-weight: 700; color: var(--navy); cursor: pointer; }
+  .ms-detail td { background: #fbfcfd; text-align: left; padding: 4px 16px 14px; }
+  .fb { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-top: 10px; background: #fff; }
+  .fb h4 { margin: 0 0 6px; font-size: .92rem; display: flex; justify-content: space-between; gap: 10px; }
+  .fb p { margin: 4px 0; font-size: .88rem; }
+  .fb .lbl { font-weight: 700; color: var(--teal); }
+  .fb details { margin-top: 6px; font-size: .86rem; }
+  .fb details pre { white-space: pre-wrap; font: inherit; background: #f6f8fa; border-radius: 8px; padding: 8px 10px; margin: 6px 0 0; }
+  .sub { display: block; font-size: .74rem; color: var(--slate); font-weight: 500; }
+  .ms-empty { background: var(--card); border: 1px dashed var(--line); border-radius: 16px; padding: 26px; text-align: center; color: var(--slate); }
+  .ms-note { font-size: .82rem; color: var(--slate); margin: 4px 0 16px; }
+  @media (max-width: 640px) { h1 { font-size: 1.6rem; } td:first-child { min-width: 180px; } }
+</style>
+</head>
+<body>
+<main class="ms">
+  <h1>My scores</h1>
+  <p class="ms-sub">Your quiz scores and marked answers from SBL lessons and past paper questions. Only you and your teachers can see these.</p>
+
+  <div class="ms-stats" id="stats"></div>
+
+  <div class="ms-tabs" role="tablist" aria-label="Score areas">
+    <button type="button" role="tab" id="tabL" aria-selected="true">Lessons</button>
+    <button type="button" role="tab" id="tabP" aria-selected="false">Full PPQs</button>
+  </div>
+
+  <section id="paneL" aria-labelledby="tabL"><p class="ms-empty">Loading your scores…</p></section>
+  <section id="paneP" aria-labelledby="tabP" hidden></section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function band(p) { return p >= 70 ? 'p-good' : p >= 50 ? 'p-ok' : 'p-low'; }
+  function pill(p, text) { return '<span class="pill ' + band(p) + '">' + esc(text || p + '%') + '</span>'; }
+  function day(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' }); }
+
+  // Which lesson file each lesson ID comes from (so we can show lesson titles).
+  var UNITS = [
+    { key: 'u1', label: 'IB Geography · Unit 1: Changing population', src: '/js/sbl-population-lessons.js', pre: ['CP'] },
+    { key: 'u2', label: 'IB Geography · Unit 2: Global climate', src: '/js/sbl-climate-lessons.js', pre: ['CC'] },
+    { key: 'u3', label: 'IB Geography · Unit 3: Resource consumption and security', src: '/js/sbl-rc-lessons.js', pre: ['RC'] },
+    { key: 'fw', label: 'IB Geography · Option: Freshwater', src: '/js/sbl-freshwater-lessons.js', pre: ['FW'] },
+    { key: 'lt', label: 'IB Geography · Option: Leisure, tourism and sport', src: '/js/sbl-leisure-lessons.js', pre: ['LT'] },
+    { key: 'fh', label: 'IB Geography · Option: Food and health', src: '/js/sbl-fh-lessons.js', pre: ['FH'] },
+    { key: 'ppn', label: 'IB Geography · HL: Power, places and networks', src: '/js/sbl-unit4-lessons.js', pre: ['PPN'] },
+    { key: 'hd', label: 'IB Geography · HL: Human development and diversity', src: '/js/sbl-hd-lessons.js', pre: ['HD'] },
+    { key: 'gr', label: 'IB Geography · HL: Global risks and resilience', src: '/js/sbl-gr-lessons.js', pre: ['GR'] },
+    { key: 'igeo', label: 'IGCSE Geography (Edexcel)', src: '/js/sbl-igcse-geo-lessons.js', pre: ['IGCO', 'IGHZ', 'IGCF', 'IGRU', 'IGDV', 'IGEC', 'IGRF'] },
+    { key: 'iecon', label: 'IGCSE Economics (Edexcel)', src: '/js/sbl-igcse-econ-lessons.js', pre: ['IGEN'] },
+    { key: 'ciecon', label: 'IGCSE Economics (Cambridge)', src: '/js/sbl-cie-econ-lessons.js', pre: ['CIEE'] },
+    { key: 'ibus', label: 'IGCSE Business (Edexcel)', src: '/js/sbl-igcse-bus-lessons.js', pre: ['IGBS'] },
+    { key: 'ihist', label: 'IGCSE History (Edexcel)', src: '/js/sbl-igcse-hist-lessons.js', pre: ['IGHI'] }
+  ];
+  function unitOf(id) {
+    var p = (String(id).match(/^[A-Z]+/) || [''])[0];
+    for (var i = 0; i < UNITS.length; i++) if (UNITS[i].pre.indexOf(p) !== -1) return UNITS[i];
+    return null;
+  }
+
+  var PPQ_UNITS = [
+    ['changing-population', 'Paper 2 · Changing population'], ['global-climate', 'Paper 2 · Global climate'],
+    ['resource-consumption', 'Paper 2 · Resource consumption'], ['freshwater', 'Paper 1 · Freshwater'],
+    ['leisure-tourism-sport', 'Paper 1 · Leisure, tourism and sport'], ['food-and-health', 'Paper 1 · Food and health'],
+    ['power-places-networks', 'Paper 3 · Power, places and networks'], ['human-development-diversity', 'Paper 3 · Human development and diversity'],
+    ['global-risks-resilience', 'Paper 3 · Global risks and resilience']
+  ];
+  function ppqUnit(page) {
+    var m = String(page || '').match(/paper-questions\/([^\/?#]+)/), slug = m ? m[1] : '';
+    for (var i = 0; i < PPQ_UNITS.length; i++) if (PPQ_UNITS[i][0] === slug) return { name: PPQ_UNITS[i][1], order: i };
+    return { name: 'Other past paper questions', order: 99 };
+  }
+
+  function answers(d) {
+    var out = [];
+    Object.keys(d || {}).forEach(function (k) {
+      var v = d[k];
+      if (k.indexOf('ib_q') === 0 && v && typeof v.awarded === 'number' && typeof v.marks === 'number' && v.marks > 0) out.push(v);
+    });
+    return out.sort(function (a, b) { return String(a.at || '').localeCompare(String(b.at || '')); });
+  }
+
+  // Same rules as the Lesson Progress panel on each lesson page.
+  function lessonStatus(d) {
+    d = d || {};
+    var ib = answers(d), aw = 0, mx = 0;
+    ib.forEach(function (v) { aw += v.awarded; mx += v.marks; });
+    var tmk = d.quiz_test_my_knowledge, sr = d.quiz_spaced_retrieval;
+    var done = [
+      !!d.teachOpenedAt || (Array.isArray(d.checklist) && d.checklist.some(Boolean)),
+      !!(tmk && typeof tmk.pct === 'number'), ib.length > 0,
+      !!(sr && typeof sr.pct === 'number'), !!d.challengeOpenedAt, !!d.readinessCompleted
+    ].filter(Boolean).length;
+    var last = '';
+    [tmk && tmk.completedAt, sr && sr.completedAt, d.readinessCompletedAt, d.teachOpenedAt, d.challengeOpenedAt].concat(ib.map(function (v) { return v.at; }))
+      .forEach(function (t) { if (t && t > last) last = t; });
+    return { tmk: tmk && typeof tmk.pct === 'number' ? tmk : null, sr: sr && typeof sr.pct === 'number' ? sr : null,
+      ib: ib, aw: aw, mx: mx, done: done, ready: !!d.readinessCompleted, last: last };
+  }
+
+  function feedbackHtml(list) {
+    return list.map(function (v, i) {
+      var parts = [['What you did well', v.whatWasDoneWell], ['What was missing', v.whatIsMissing], ['Next step', v.nextStep], ['Why this mark', v.whyThisMark]]
+        .filter(function (x) { return x[1]; })
+        .map(function (x) { return '<p><span class="lbl">' + x[0] + ':</span> ' + esc(x[1]) + '</p>'; }).join('');
+      return '<div class="fb"><h4><span>' + esc(v.question ? (v.question.length > 160 ? v.question.slice(0, 158) + '…' : v.question) : 'Question ' + (i + 1)) + '</span>' +
+        pill(Math.round(v.awarded / v.marks * 100), v.awarded + '/' + v.marks) + '</h4>' +
+        (parts || '<p class="dash">No written feedback was saved for this answer.</p>') +
+        (v.answer ? '<details><summary>Your answer</summary><pre>' + esc(v.answer) + '</pre></details>' : '') +
+        (v.at ? '<p class="sub">Marked ' + esc(day(v.at)) + '</p>' : '') + '</div>';
+    }).join('');
+  }
+
+  function toggleRow(btn) {
+    var row = document.getElementById(btn.getAttribute('aria-controls'));
+    var open = row.hidden;
+    row.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Hide' : 'Feedback';
+  }
+
+  var lessons = {}, titles = {};
+
+  function loadTitles(unitsNeeded) {
+    return Promise.all(unitsNeeded.map(function (u) {
+      return new Promise(function (resolve) {
+        var s = document.createElement('script');
+        s.src = u.src;
+        s.onload = s.onerror = function () { resolve(); };
+        document.head.appendChild(s);
+      });
+    })).then(function () {
+      var L = window.SBL_LESSONS || {};
+      Object.keys(L).forEach(function (id) { titles[id] = { title: L[id].title || id, href: L[id].href || '' }; });
+    });
+  }
+
+  function renderStats(lessonIds, ppqIds) {
+    var qSum = 0, qN = 0, aw = 0, mx = 0, paw = 0, pmx = 0, complete = 0;
+    lessonIds.forEach(function (id) {
+      var s = lessonStatus(lessons[id]);
+      [s.tmk, s.sr].forEach(function (q) { if (q) { qSum += q.pct; qN++; } });
+      aw += s.aw; mx += s.mx;
+      if (s.done === 6) complete++;
+    });
+    ppqIds.forEach(function (id) { answers(lessons[id]).forEach(function (v) { paw += v.awarded; pmx += v.marks; }); });
+    function tile(v, l) { return '<div class="ms-stat"><b>' + v + '</b><span>' + l + '</span></div>'; }
+    $('stats').innerHTML =
+      tile(lessonIds.length, 'lessons started (' + complete + ' fully complete)') +
+      tile(qN ? Math.round(qSum / qN) + '%' : '—', 'average quiz score') +
+      tile(mx ? Math.round(aw / mx * 100) + '%' : '—', 'lesson exam questions (' + aw + '/' + mx + ' marks)') +
+      tile(pmx ? Math.round(paw / pmx * 100) + '%' : '—', 'full PPQs (' + paw + '/' + pmx + ' marks)');
+  }
+
+  function renderLessons(ids) {
+    if (!ids.length) {
+      $('paneL').innerHTML = '<p class="ms-empty">No lesson scores yet. Open a lesson and try <b>Test My Knowledge</b> or the <b>IB-Style Questions</b>, and your scores will appear here.</p>';
+      return;
+    }
+    var groups = {};
+    ids.forEach(function (id) { var u = unitOf(id); var k = u ? u.key : 'other'; (groups[k] = groups[k] || []).push(id); });
+    var order = UNITS.map(function (u) { return u.key; }).concat(['other']);
+    var n = 0, html = '<p class="ms-note">“Activities” counts the six lesson activities: Teach Me Live, Test My Knowledge, IB-Style Questions, Spaced Retrieval, Challenge Mode and Ready for the Classroom.</p>';
+    order.forEach(function (k) {
+      var list = groups[k]; if (!list) return;
+      var u = UNITS.filter(function (x) { return x.key === k; })[0];
+      list.sort(function (a, b) { return a.localeCompare(b, undefined, { numeric: true }); });
+      var rows = list.map(function (id) {
+        var s = lessonStatus(lessons[id]), t = titles[id] || { title: id, href: '' }, rid = 'ld' + (n++);
+        var name = t.href ? '<a href="' + esc(t.href) + '">' + esc(t.title) + '</a>' : esc(t.title);
+        var r = '<tr><td>' + name + (s.last ? '<span class="sub">Last worked on ' + esc(day(s.last)) + '</span>' : '') + '</td>' +
+          '<td>' + (s.tmk ? pill(s.tmk.pct) + (s.tmk.band ? '<span class="sub">' + esc(s.tmk.band) + '</span>' : '') : '<span class="dash">—</span>') + '</td>' +
+          '<td>' + (s.sr ? pill(s.sr.pct) : '<span class="dash">—</span>') + '</td>' +
+          '<td>' + (s.ib.length ? pill(Math.round(s.aw / s.mx * 100), s.aw + '/' + s.mx) + ' <button type="button" class="ms-btn" aria-expanded="false" aria-controls="' + rid + '">Feedback</button><span class="sub">' + s.ib.length + ' question' + (s.ib.length > 1 ? 's' : '') + '</span>' : '<span class="dash">—</span>') + '</td>' +
+          '<td>' + (s.ready ? '<span class="tick">✓</span>' : '<span class="dash">—</span>') + '</td>' +
+          '<td><span class="bar"><i><b style="width:' + Math.round(s.done / 6 * 100) + '%"></b></i>' + s.done + '/6</span></td></tr>';
+        if (s.ib.length) r += '<tr class="ms-detail" id="' + rid + '" hidden><td colspan="6">' + feedbackHtml(s.ib) + '</td></tr>';
+        return r;
+      }).join('');
+      html += '<div class="ms-unit"><h2>' + esc(u ? u.label : 'Other lessons') + '<small>' + list.length + ' lesson' + (list.length > 1 ? 's' : '') + '</small></h2><div class="ms-scroll"><table>' +
+        '<thead><tr><th scope="col">Lesson</th><th scope="col">Test My Knowledge</th><th scope="col">Spaced Retrieval</th><th scope="col">Exam questions</th><th scope="col">Ready for class</th><th scope="col">Activities</th></tr></thead><tbody>' +
+        rows + '</tbody></table></div></div>';
+    });
+    $('paneL').innerHTML = html;
+  }
+
+  function renderPPQ(ids) {
+    if (!ids.length) {
+      $('paneP').innerHTML = '<p class="ms-empty">No full past paper questions marked yet. Try one in <a href="/geography/revision/paper-questions">Revision › Full Past Paper Questions</a>.</p>';
+      return;
+    }
+    var items = ids.map(function (id) {
+      var list = answers(lessons[id]), aw = 0, mx = 0, page = '', last = '';
+      list.forEach(function (v) { aw += v.awarded; mx += v.marks; if (!page && v.page) page = v.page; if (v.at > last) last = v.at; });
+      var t = id.slice(4), mk = t.match(/\((\d+)\s*marks?/i), qn = t.match(/Question\s+(\d+)/i);
+      return { id: id, title: t, list: list, aw: aw, mx: mx, page: page, last: last, total: mk ? +mk[1] : null, qnum: qn ? +qn[1] : 999, unit: ppqUnit(page) };
+    }).filter(function (x) { return x.list.length; });
+    var groups = {};
+    items.forEach(function (x) { (groups[x.unit.name] = groups[x.unit.name] || { order: x.unit.order, list: [] }).list.push(x); });
+    var n = 0, html = '';
+    Object.keys(groups).sort(function (a, b) { return groups[a].order - groups[b].order; }).forEach(function (g) {
+      var list = groups[g].list.sort(function (a, b) { return a.qnum - b.qnum || a.title.localeCompare(b.title); });
+      var rows = list.map(function (x) {
+        var rid = 'pd' + (n++), partial = x.total && x.mx < x.total;
+        var r = '<tr><td>' + (x.page ? '<a href="' + esc(x.page) + '">' + esc(x.title) + '</a>' : esc(x.title)) + (x.last ? '<span class="sub">Last marked ' + esc(day(x.last)) + '</span>' : '') + '</td>' +
+          '<td>' + pill(Math.round(x.aw / x.mx * 100), x.aw + '/' + x.mx) + '</td>' +
+          '<td>' + x.list.length + '</td>' +
+          '<td>' + (x.total ? (partial ? '<span class="sub" style="font-size:.85rem">' + x.mx + ' of ' + x.total + ' marks tried</span>' : '<span class="tick">✓ Complete</span>') : '<span class="dash">—</span>') + '</td>' +
+          '<td><button type="button" class="ms-btn" aria-expanded="false" aria-controls="' + rid + '">Feedback</button></td></tr>' +
+          '<tr class="ms-detail" id="' + rid + '" hidden><td colspan="5">' + feedbackHtml(x.list) + '</td></tr>';
+        return r;
+      }).join('');
+      html += '<div class="ms-unit"><h2>' + esc(g) + '<small>' + list.length + ' question' + (list.length > 1 ? 's' : '') + '</small></h2><div class="ms-scroll"><table>' +
+        '<thead><tr><th scope="col">Question</th><th scope="col">Marks</th><th scope="col">Parts marked</th><th scope="col">Whole question</th><th scope="col"><span class="sbl-sr" style="position:absolute;left:-9999px">Feedback</span></th></tr></thead><tbody>' +
+        rows + '</tbody></table></div></div>';
+    });
+    $('paneP').innerHTML = html;
+  }
+
+  function setTab(which) {
+    var l = which === 'L';
+    $('tabL').setAttribute('aria-selected', String(l)); $('tabP').setAttribute('aria-selected', String(!l));
+    $('paneL').hidden = !l; $('paneP').hidden = l;
+    try { sessionStorage.setItem('sbl-myscores-tab', which); } catch (e) {}
+  }
+  $('tabL').addEventListener('click', function () { setTab('L'); });
+  $('tabP').addEventListener('click', function () { setTab('P'); });
+  try { if (sessionStorage.getItem('sbl-myscores-tab') === 'P') setTab('P'); } catch (e) {}
+  if (location.hash === '#ppq') setTab('P');
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.ms-btn[aria-controls]');
+    if (b) toggleRow(b);
+  });
+
+  fetch('/api/progress', { credentials: 'same-origin' })
+    .then(function (r) {
+      if (r.status === 401) { location.href = '/login/?redirect=' + encodeURIComponent(location.pathname); return null; }
+      return r.ok ? r.json() : Promise.reject();
+    })
+    .then(function (res) {
+      if (!res) return;
+      lessons = res.lessons || {};
+      var lessonIds = [], ppqIds = [];
+      Object.keys(lessons).forEach(function (id) {
+        var d = lessons[id] || {};
+        if (id.indexOf('PPQ:') === 0) { if (answers(d).length) ppqIds.push(id); return; }
+        if (id.indexOf('PAPER|') === 0) return;
+        var s = lessonStatus(d);
+        if (s.done || s.tmk || s.sr || s.ib.length) lessonIds.push(id);
+      });
+      renderStats(lessonIds, ppqIds);
+      renderPPQ(ppqIds);
+      var need = [];
+      lessonIds.forEach(function (id) { var u = unitOf(id); if (u && need.indexOf(u) === -1) need.push(u); });
+      return loadTitles(need).then(function () { renderLessons(lessonIds); });
+    })
+    .catch(function () {
+      $('paneL').innerHTML = '<p class="ms-empty">Sorry, your scores could not be loaded just now. Please refresh the page.</p>';
+    });
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
