@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Population Policy Lab: The Gambia and Singapore — IB Geography Games — SBL</title>
+<meta name="description" content="IB Geography Changing Population game: compare The Gambia's anti-natalist policies with Singapore's pro-natalist policies using real data, the DTM and population pyramids, evaluate what has worked, then make your own policy decisions. Copy your work to OneNote.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #b45309; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --acc: #0f3a5c; --acc-soft: #eef5fa; --male: #0f6b8f; --female: #c2416b;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 92% 2%, rgba(12,107,58,0.08), transparent 32%), radial-gradient(circle at 5% 0%, rgba(0,184,176,0.12), transparent 40%), linear-gradient(180deg, #f6fafb, #edf3f6); }
+  a { color: inherit; }
+  button, input, textarea, select { font-family: inherit; font-size: inherit; }
+  button:focus-visible, [tabindex]:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); text-decoration: none; }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; display: flex; flex-direction: column; gap: 18px; }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: 0 10px 28px rgba(0,25,45,0.06); display: flex; flex-direction: column; gap: 16px; }
+  .kicker { align-self: flex-start; display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--acc); padding: 5px 12px; border-radius: 999px; }
+  .kicker.teal { background: linear-gradient(135deg, var(--teal), #0792a3); }
+  h1 { font-size: clamp(1.6rem, 3.8vw, 2.5rem); font-weight: 900; color: var(--navy); line-height: 1.12; }
+  h2 { font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 900; color: var(--navy); line-height: 1.2; }
+  h3 { font-size: 1.08rem; font-weight: 850; color: var(--navy); }
+  p { line-height: 1.55; }
+  .muted { color: var(--muted); }
+  .small { font-size: 0.86rem; }
+
+  /* hero */
+  .hero-grid { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 16px; }
+  .box { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .box.li { border: 3px solid #ea7a1c; }
+  .box.sc { border: 3px solid #16a34a; }
+  .box.syl { border: 3px solid #16a34a; }
+  .box b.t { font-weight: 900; }
+  .box ul { padding-left: 20px; line-height: 1.6; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .stat { background: #f6f9fb; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+  .stat b { display: block; font-size: 1.55rem; font-weight: 900; color: var(--acc); font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 0.85rem; color: var(--muted); line-height: 1.35; display: block; }
+  .stat em { font-style: normal; font-size: 0.72rem; color: #7b8d98; display: block; margin-top: 4px; }
+
+  /* mission map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+  .mcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; display: flex; flex-direction: column; gap: 4px; }
+  .mcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .mcard .num { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .mcard .emo { font-size: 1.7rem; }
+  .mcard b { font-size: 1rem; line-height: 1.25; }
+  .mcard small { color: var(--muted); font-size: 0.8rem; line-height: 1.35; }
+  .mcard .st { position: absolute; top: 12px; right: 12px; font-size: 1rem; }
+  .mcard.cur { border-color: var(--acc); }
+  .mcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .mcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+
+  /* tasks */
+  .task { border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #fbfdfe; }
+  .task.done { border-color: rgba(22,163,74,0.45); background: #f6fcf8; }
+  .tnum { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt { border: 2px solid var(--line); background: #fff; color: var(--ink); border-radius: 12px; padding: 9px 13px; font-weight: 650; cursor: pointer; text-align: left; line-height: 1.35; }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.sel { border-color: var(--navy); background: #eef5fa; }
+  .opt.right { border-color: var(--green); background: var(--green-soft); }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt:disabled { cursor: default; }
+  .numrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .numrow input { width: 130px; padding: 9px 11px; border: 2px solid var(--line); border-radius: 10px; font-weight: 700; }
+  .btn { border: 2px solid var(--navy); background: var(--navy); color: #fff; border-radius: 999px; padding: 9px 18px; font-weight: 800; cursor: pointer; }
+  .btn.ghost { background: transparent; color: var(--navy); }
+  .btn.acc { background: var(--acc); border-color: var(--acc); }
+  .btn.on { background: var(--teal-dark); border-color: var(--teal-dark); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .spacer { flex: 1; }
+  .fb { font-weight: 650; line-height: 1.45; }
+  .fb.ok { color: var(--green); } .fb.bad { color: var(--red); }
+  .model { background: #f2f7fa; border-left: 5px solid var(--teal); border-radius: 10px; padding: 12px 14px; line-height: 1.55; }
+  textarea { width: 100%; min-height: 96px; border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; line-height: 1.5; resize: vertical; background: #fff; color: var(--ink); }
+  .hint { font-size: 0.86rem; color: var(--muted); }
+  .two { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+
+  /* charts */
+  .chart { width: 100%; overflow-x: auto; }
+  .chart svg { display: block; width: 100%; height: auto; min-width: 560px; }
+  .events { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ev { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 0.84rem; font-weight: 700; cursor: pointer; }
+  .ev.on { background: var(--acc); color: #fff; border-color: var(--acc); }
+  .evnote { background: var(--acc-soft); border-radius: 12px; padding: 10px 14px; line-height: 1.5; min-height: 48px; }
+  .yrs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pyr-wrap { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 16px; align-items: start; }
+  .pyr svg { min-width: 420px; }
+  #broad svg { min-width: 0; max-width: 460px; }
+  .bar-hit { cursor: pointer; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+  .src { font-size: 0.76rem; color: #6b7f8b; line-height: 1.4; }
+
+  /* sorter */
+  .tray { display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; padding: 10px; border: 2px dashed var(--line); border-radius: 14px; background: #fff; }
+  .card { border: 2px solid var(--line); background: #fff; color: var(--ink); border-radius: 10px; padding: 8px 11px; font-weight: 700; font-size: 0.9rem; cursor: grab; text-align: left; line-height: 1.3; max-width: 260px; touch-action: none; user-select: none; -webkit-user-select: none; }
+  .card.sel { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,0.25); }
+  .card.right { border-color: var(--green); background: var(--green-soft); cursor: default; }
+  .card.wrong { border-color: var(--red); background: var(--red-soft); }
+  .bins { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+  .bin { border: 2px solid var(--line); border-radius: 14px; padding: 10px; min-height: 170px; display: flex; flex-direction: column; gap: 8px; background: #f8fbfc; cursor: pointer; }
+  .bin h4 { font-size: 0.92rem; font-weight: 900; }
+  .bin .drop { display: flex; flex-direction: column; gap: 6px; }
+  .bin.b1 { border-color: #7c3aed; } .bin.b1 h4 { color: #6d28d9; }
+  .bin.b2 { border-color: var(--red); } .bin.b2 h4 { color: var(--red); }
+  .bin.b3 { border-color: var(--green); } .bin.b3 h4 { color: var(--green); }
+  .bin.b4 { border-color: var(--teal-dark); } .bin.b4 h4 { color: var(--teal-dark); }
+  .bin.over { background: #fff8e8; }
+  .ghost-drag { position: fixed; pointer-events: none; z-index: 4000; opacity: .92; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+
+  /* sources */
+  .stabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stab { border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 8px 12px; font-weight: 800; cursor: pointer; text-align: left; font-size: 0.88rem; }
+  .stab.on { border-color: var(--acc); background: var(--acc-soft); }
+  .stab.done::after { content: " ✓"; color: var(--green); }
+  .article { border: 1px solid #e4d9c4; background: #fffdf7; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .article .hd { font-family: Georgia, "Times New Roman", serif; font-size: 1.3rem; font-weight: 700; color: #1f2933; line-height: 1.25; }
+  .article .by { font-size: 0.82rem; color: #6b7280; }
+  .article p { font-family: Georgia, "Times New Roman", serif; font-size: 1.02rem; line-height: 1.6; color: #22303a; }
+  .article .cite { font-family: inherit; font-size: 0.78rem; color: #6b7280; border-top: 1px solid #ece3d1; padding-top: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; font-weight: 750; font-size: 0.86rem; cursor: pointer; }
+  .chip.sel { border-color: var(--navy); background: #eef5fa; }
+  .chip.right { border-color: var(--green); background: var(--green-soft); }
+  .chip.wrong { border-color: var(--red); background: var(--red-soft); }
+  .rate { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .rate input[type=range] { width: 220px; accent-color: var(--acc); }
+  .rate b { font-size: 1.1rem; min-width: 120px; }
+  table.score { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  table.score th, table.score td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  table.score th { background: #eef4f7; }
+  .tblwrap { overflow-x: auto; }
+
+  /* PM decision */
+  .pm-grid { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 16px; align-items: start; }
+  .pols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+  .pol { border: 2px solid var(--line); background: #fff; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; text-align: left; color: var(--ink); }
+  .pol.on { border-color: var(--acc); background: var(--acc-soft); }
+  .pol .cost { font-size: 0.78rem; font-weight: 900; color: var(--amber); }
+  .pol b { font-size: 0.98rem; }
+  .pol small { color: var(--muted); line-height: 1.35; }
+  .pol .grid-tag { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; color: var(--teal-dark); }
+  .dash { position: sticky; top: 70px; border: 2px solid var(--navy); border-radius: 16px; padding: 14px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .budget { font-weight: 900; font-size: 1.05rem; }
+  .meter { display: grid; grid-template-columns: 120px 1fr 86px; gap: 8px; align-items: center; font-size: 0.86rem; font-weight: 700; }
+  .meter .trk { height: 12px; border-radius: 99px; background: #e6edf1; position: relative; overflow: hidden; }
+  .meter .trk span { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; }
+  .meter .trk::after { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 2px; background: #94a3b8; }
+  .meter .v { font-size: 0.78rem; color: var(--muted); text-align: right; }
+  .cmp td:first-child { font-weight: 750; }
+
+  .copybar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .btn.onenote { background: #7719aa; border-color: #7719aa; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--deep); color: #fff; padding: 10px 18px; border-radius: 999px; font-weight: 750; z-index: 5000; box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+  .teacher { font-size: 0.85rem; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .teacher button { background: none; border: 0; color: var(--teal-dark); font-weight: 800; text-decoration: underline; cursor: pointer; padding: 0; }
+  .credits { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .credits li { margin-left: 18px; }
+  .navrow { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; }
+  .key h3 { margin-top: 6px; }
+  .key li { margin-left: 18px; line-height: 1.55; }
+
+  /* case chooser */
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .casecard { text-align: left; border: 3px solid var(--c); background: linear-gradient(160deg, var(--cs), #fff 70%); border-radius: 18px; padding: 18px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; color: var(--ink); box-shadow: 0 10px 24px rgba(0,25,45,0.08); transition: transform .2s ease; }
+  .casecard:hover { transform: translateY(-3px); }
+  .casecard .cflag { font-size: 2.4rem; line-height: 1; }
+  .casecard .ctype { align-self: flex-start; font-size: 0.72rem; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; color: #fff; background: var(--c); padding: 4px 10px; border-radius: 999px; }
+  .casecard b { font-size: 1.4rem; font-weight: 900; color: var(--navy); }
+  .casecard small { color: var(--muted); line-height: 1.4; }
+  .casecard .cprog { height: 8px; border-radius: 99px; background: #e6edf1; overflow: hidden; margin-top: 6px; }
+  .casecard .cprog i { display: block; height: 100%; background: var(--c); }
+  .casecard .cnum { font-size: 0.8rem; font-weight: 800; color: var(--muted); }
+  .task.locked { background: #f1f5f9; }
+  .bin.b5 { border-color: var(--amber); } .bin.b5 h4 { color: var(--amber); }
+  .clips { display: flex; flex-direction: column; gap: 8px; }
+  .clip { border: 1px solid var(--line); border-radius: 14px; background: #fbfdfe; padding: 10px 14px; }
+  .clip summary { cursor: pointer; font-weight: 800; color: var(--navy); }
+  .clip summary small { font-weight: 600; color: var(--muted); }
+  .vid { position: relative; width: 100%; max-width: 760px; aspect-ratio: 16 / 9; margin-top: 10px; border-radius: 12px; overflow: hidden; background: #000; }
+  .vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .dtm-st:hover rect { fill: rgba(245,158,11,0.12); }
+  @media (max-width: 860px) {
+    .hero-grid, .pyr-wrap, .pm-grid, .two { grid-template-columns: minmax(0,1fr); }
+    .bins { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+    .dash { position: static; }
+  }
+  @media (max-width: 480px) { .bins { grid-template-columns: minmax(0,1fr) !important; } .meter { grid-template-columns: 96px 1fr 56px; } }
+  @media (prefers-reduced-motion: reduce) { .xp-pop { animation: none; } .mcard { transition: none; } .hud .bar div { transition: none; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Population Policy Lab</span></div>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <span class="xp" id="xp">0 XP</span>
+  <div class="bar" aria-hidden="true"><div id="xpbar"></div></div>
+  <span class="lv" id="lv"></span>
+</div></div>
+
+<main id="app"></main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var shuffle = function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+
+  /* ================= DATA ================= */
+  var AGES = ['0–4','5–9','10–14','15–19','20–24','25–29','30–34','35–39','40–44','45–49','50–54','55–59','60–64','65–69','70–74','75–79','80–84','85–89','90–94','95–99','100+'];
+  var RLAB = ['', 'Not effective', 'Slightly effective', 'Partly effective', 'Mostly effective', 'Very effective'];
+
+  var CASES = {
+    /* ---------------------------------------------------------- THE GAMBIA */
+    g: {
+      id: 'g', name: 'The Gambia', flag: '🇬🇲', type: 'Anti-natalist', acc: '#0c6b3a', accSoft: '#e6f4ec',
+      tag: 'A youthful population: one of the youngest in the world',
+      intro: 'You are a young advisor to The Gambia’s Ministry of Health and the National Population Commission. The population is growing fast and is very young. Work through six briefings using real data, then recommend a plan to slow population growth and improve lives.',
+      stats: [
+        ['2.42m', 'people counted in the 2024 census', '2024 Census, Gambia Bureau of Statistics'],
+        ['4.4', 'children per woman (total fertility rate), down from 5.6 in 2013', 'Gambia DHS 2019–20'],
+        ['39.7%', 'of the population aged under 15 (2025)', 'UN World Population Prospects 2024'],
+        ['18.6', 'years: the median age (2025)', 'UN World Population Prospects 2024'],
+        ['17%', 'of married women use a modern method of contraception', 'Gambia DHS 2019–20']
+      ],
+      // UN World Population Prospects 2024, via StatisticsTimes. Crude rates per 1,000.
+      VITAL: [[1950,49.7,32.6],[1955,50.9,31.3],[1960,50.4,29.3],[1965,49.0,26.7],[1970,47.4,24.2],[1975,47.3,22.1],[1980,48.2,20.8],[1985,49.0,19.0],[1990,47.7,16.3],[1995,45.1,13.7],[2000,41.1,11.3],[2005,39.7,9.7],[2010,38.9,8.5],[2015,35.7,7.5],[2020,31.5,6.8],[2021,31.2,7.0],[2022,30.8,6.6],[2023,30.4,6.3],[2024,29.9,6.2],[2025,29.3,6.2]],
+      vitalSrc: 'UN World Population Prospects 2024 (estimates to 2023, then medium-variant projection), via StatisticsTimes.',
+      // TFR: UN WPP 2024
+      TFR: [[1950,6.35],[1955,6.33],[1960,6.25],[1965,6.19],[1970,6.26],[1975,6.43],[1980,6.41],[1985,6.36],[1990,6.25],[1995,5.99],[2000,5.72],[2005,5.71],[2010,5.56],[2015,5.00],[2020,4.25],[2021,4.17],[2022,4.08],[2023,4.01],[2024,3.91],[2025,3.80]],
+      tfrSrc: 'UN World Population Prospects 2024. Household surveys give slightly different figures: 5.6 (DHS 2013) and 4.4 (DHS 2019–20).',
+      tfrMax: 7,
+      MARKS: [[2004, 'Free basic education'], [2015, 'FGM banned'], [2016, 'Child marriage banned']],
+      PYR: { year: 2025, maxP: 8, src: 'UN World Population Prospects 2024 (2025), via StatisticsTimes',
+        m: [198133,186112,181998,157999,132595,116040,100728,80703,62056,46775,39645,35093,27634,18324,10633,6164,3276,1134,248,25,1],
+        f: [193683,182454,178648,155492,131072,115644,101377,81881,63118,48030,42998,39524,32779,22971,13611,7609,4042,1427,363,51,4] },
+      STAGE: 3,
+      sortBins: [['hb', 'Cause of the high birth rate', 'b1'], ['dr', 'Why the death rate fell', 'b4'], ['no', 'Not a cause', 'b2']],
+      CAUSES: [
+        { t: 'Children help on family farms and with work at home', a: 'hb' },
+        { t: 'Children are expected to support their parents in old age', a: 'hb' },
+        { t: 'Only 17% of married women use a modern method of contraception', a: 'hb' },
+        { t: '23% of women aged 20–24 were married before the age of 18', a: 'hb' },
+        { t: 'High child mortality: about 1 in 18 children dies before age 5, so families have more children', a: 'hb' },
+        { t: 'Men are often the main decision-makers about family size', a: 'hb' },
+        { t: 'Myths that contraception causes infertility or goes against religious teaching', a: 'hb' },
+        { t: 'Family planning is harder to reach in rural areas (TFR 6.4 in Kuntaur, 3.1 in Banjul)', a: 'hb' },
+        { t: 'Vaccinations and better health care for children', a: 'dr' },
+        { t: 'Malaria prevention in pregnancy rose from 6% to 52% of mothers (2013–2020)', a: 'dr' },
+        { t: 'Cleaner water and better sanitation', a: 'dr' },
+        { t: 'The government pays families a bonus for each new baby', a: 'no' },
+        { t: 'A large number of elderly people need care', a: 'no' }
+      ],
+      issueBins: [['gov', 'Government', 'b4'], ['fam', 'Families', 'b1'], ['env', 'Land and environment', 'b3'], ['opp', 'Opportunity', 'b5']],
+      ISSUES: [
+        { t: 'Building schools and training teachers for 1.1 million children under 15', a: 'gov' },
+        { t: 'Health care for mothers and babies (about 82,000 births a year)', a: 'gov' },
+        { t: 'Creating jobs for the young people who leave school every year', a: 'gov' },
+        { t: 'Fewer workers paying tax for each dependant (dependency ratio about 75)', a: 'gov' },
+        { t: 'Less money per child for food, uniforms and school fees', a: 'fam' },
+        { t: 'Girls taken out of school to marry or help at home', a: 'fam' },
+        { t: 'Health risks for mothers from many pregnancies close together', a: 'fam' },
+        { t: 'Forests cut for fuelwood, charcoal and farmland', a: 'env' },
+        { t: 'Farmland divided into smaller plots and soils overused', a: 'env' },
+        { t: 'Pressure on water and sanitation in fast-growing towns such as Brikama', a: 'env' },
+        { t: 'A large future workforce could boost the economy if there are jobs and skills (a “demographic dividend”)', a: 'opp' }
+      ],
+      TYPES: ['Family planning', 'Women and girls', 'Health', 'Resources and environment'],
+      POLICIES: [
+        { id: 'A', tab: 'A · Family planning services', hd: 'Bringing contraception to the villages', types: ['Family planning'],
+          p: ['Family planning has been part of the government’s health strategy since the 1990s, with a National Family Planning Policy and a costed plan supported by the UN Population Fund (UNFPA). UNFPA is the only supplier of modern contraceptives to public health facilities.',
+              'Because many villages are far from clinics, the Gambia Family Planning Association runs a Community-Based Distribution programme in more than 150 underserved communities. In 2020 it provided 75% of all new family planning users.',
+              'Use of modern contraception by married women rose from 8% in 2013 to 17% in 2019–20, and the fertility rate fell from 5.6 to 4.4. New users rose from 47,911 in 2015 to 80,918 in 2019, then fell by about 40% in 2020 when COVID-19 disrupted services.',
+              'Barriers remain: myths that contraception causes infertility or encourages promiscuity, religious objections, opposition from husbands, and shortages of staff and supplies in rural areas. Only about 40% of the demand for family planning is met by modern methods.'],
+          by: 'Based on UNFPA The Gambia (Family Planning) and the Gambia Demographic and Health Survey 2019–20', url: 'https://gambia.unfpa.org/en/topics/family-planning-10',
+          q: 'Which evidence best shows a LIMITATION of this policy?', o: ['Modern contraceptive use doubled from 8% to 17%', 'Only about 40% of demand for family planning is met, and supplies depend on one UN agency', 'The programme reaches more than 150 communities', 'The fertility rate fell from 5.6 to 4.4'], a: 1,
+          why: 'Most women who want to avoid pregnancy are still not using a modern method, and relying on one outside supplier is a risk if funding stops.' },
+        { id: 'B', tab: 'B · Girls’ education', hd: 'Getting girls into school', types: ['Women and girls'],
+          p: ['The right to education was written into the constitution in 1997. The Education Policy (2004) and the Children’s Act (2005) made basic education free and compulsory. Girls were charged lower fees or none at all in grades 7–9, and from 2010 all girls received fee exemptions. A Girls’ Scholarship Trust Fund also paid for girls to stay in school.',
+              'In 1996 there were only 74 girls for every 100 boys in primary school, and 44 for every 100 in upper secondary. By 2004 primary schools had more girls than boys (104 per 100), and by 2008 upper secondary had reached 94. In 2011, 20% of the national budget went to primary and secondary education.',
+              'Girls who stay in school tend to marry later, have their first child later, earn more and choose smaller families. The challenge now is quality: better school management and better learning.'],
+          by: 'Based on UK Government case study “MDG 3: Education for all in The Gambia”', url: 'https://www.gov.uk/government/case-studies/mdg-3-education-for-all-in-the-gambia',
+          q: 'Why might girls’ education reduce the birth rate?', o: ['Schools hand out contraceptives', 'Girls who stay in school marry later, start families later and often choose fewer children', 'The law stops students from having children', 'Fees make families too poor to have children'], a: 1,
+          why: 'Education is an indirect (development) policy: it changes the choices women make, so it works slowly but lasts.' },
+        { id: 'C', tab: 'C · Laws on child marriage and FGM', hd: 'Changing the law to protect girls', types: ['Women and girls'],
+          p: ['In 2015 The Gambia banned female genital mutilation/cutting (FGM/C). In 2016 the Children’s (Amendment) Act made marriage under the age of 18 illegal.',
+              'Laws alone do not change customs quickly. In the 2019–20 survey, 23% of women aged 20–24 had been married before 18, 14% had given birth before 18, and 73% of women aged 15–49 had experienced FGM/C. The share of girls aged 0–14 who had been cut (46%) suggests the practice is slowly declining.',
+              'In 2024 some politicians and religious leaders tried to overturn the FGM ban. On 15 July 2024 the National Assembly rejected the repeal bill, so the ban stayed.'],
+          by: 'Based on Girls Not Brides (2024), Gambia Bureau of Statistics and the Gambia DHS 2019–20', url: 'https://www.girlsnotbrides.org/articles/uphold-the-ban-on-fgmc-the-gambia/',
+          q: 'What does the 2024 attempt to repeal the FGM ban suggest about these laws?', o: ['They are fully accepted by everyone', 'There is still strong cultural resistance, so laws need education and community support to work', 'They have ended child marriage completely', 'They only apply in towns'], a: 1,
+          why: 'Laws set a clear rule, but enforcement in rural areas and changing attitudes take much longer.' },
+        { id: 'D', tab: 'D · Mothers’ and children’s health', hd: 'Healthier mothers, fewer births?', types: ['Health'],
+          p: ['When parents are confident their children will survive, they tend to have fewer of them. Improving the health of mothers and babies is therefore an important part of slowing population growth.',
+              'Malaria is a major danger in pregnancy. The share of pregnant women receiving at least three doses of preventive malaria treatment rose from 6% in 2013 to 52% in 2019–20.',
+              'However, under-5 mortality stayed at 56 deaths per 1,000 births between 2013 and 2019–20: about 1 in 18 children still dies before age 5. 44% of women and 45% of young children have anaemia.'],
+          by: 'Based on the Gambia DHS 2019–20 key findings (Gambia Bureau of Statistics)', url: 'https://www.gbosdata.org/data-stories/population-and-demography/the-gambia-demographic-and-health-survey-highlight',
+          q: 'Which statement is best supported by the source?', o: ['Child deaths have fallen sharply since 2013', 'Malaria prevention in pregnancy improved a lot, but child mortality has not fallen yet', 'Every pregnant woman now gets malaria treatment', 'Health care has no link to family size'], a: 1,
+          why: 'Progress is uneven: one measure improved greatly, but the child mortality rate that drives families to have more children has stayed the same.' },
+        { id: 'E', tab: 'E · Social marketing', hd: 'Social marketing: selling an idea', types: ['Family planning'],
+          p: ['Social marketing uses advertising methods, such as radio jingles, dramas, posters and branded low-cost products, to change behaviour for the good of society rather than for profit.',
+              'With UNFPA support, the Ministry of Health has a family planning Communication Strategy. Messages aim to correct myths (for example, that contraception causes infertility), explain spacing births for the mother’s health, and reach men, who are often the key decision-makers in the home.',
+              'Radio reaches more rural households than television, and messages from trusted local and religious leaders carry more weight than posters from the capital.'],
+          by: 'Based on UNFPA The Gambia (Family Planning)', url: 'https://gambia.unfpa.org/en/topics/family-planning-10',
+          q: 'Why is reaching men an important part of this strategy?', o: ['Men buy most of the radios', 'Men are often the main decision-makers about family size, and opposition from husbands is a key barrier', 'Only men are allowed to use contraception', 'Women do not listen to the radio'], a: 1,
+          why: 'Changing attitudes is as important as supplying contraceptives: a method is only used if the family accepts it.' },
+        { id: 'F', tab: 'F · Managing resources: forests', hd: 'Community forests: managing land for a growing population', types: ['Resources and environment'],
+          p: ['In 1983 forests covered about 43% of The Gambia, but they were being damaged by fires used to clear land for farms, grazing, fuelwood and charcoal, and by a growing population, including migrant farmers.',
+              'Charcoal production has been banned since 1980, but the ban is not fully obeyed. In 1990 the Forestry Department began handing forests to villages that could show they would manage them well. This became law in the Forest Policy (1995) and the Forest Act (1998).',
+              'By 2000 around 270 villages managed about 24,000 hectares. Village forest committees protect against fire and keep the income from the forest. Seven years after the first handovers, fires had not fallen nationally, but in many community forest villages they had become rarer and smaller.'],
+          by: 'Based on FAO, “Community forestry in The Gambia” (Dampha, 2001)', url: 'https://www.fao.org/4/ad348e/ad348e0c.htm',
+          q: 'What is the main strength of the community forestry approach?', o: ['It stopped all forest fires nationally', 'Local people benefit from the forest, so they have a reason to protect it', 'It ended the need for fuelwood', 'It moved people out of rural areas'], a: 1,
+          why: 'Giving communities ownership and income creates an incentive to manage resources sustainably, even if national results are slow.' }
+      ],
+      DECIDE: { budget: 10, meters: [['births', 'Slows birth rate'], ['dev', 'Development'], ['support', 'Public support'], ['env', 'Environment']],
+        intro: 'It is 2026 and President Adama Barrow’s government (in power since 2017) asks for your plan. You have <b>10 budget points</b>. These cards come from the class grid. Choose at least four, watch the dashboard, then read what the evidence says about your choices.',
+        cards: [
+          { id: 'tv', name: 'TV advertising campaign promoting contraception for young adults', cost: 1, e: { births: 1, dev: 0, support: 0, env: 0 }, note: 'Fewer rural homes have a TV than a radio, so this misses many of the families with the highest birth rates.' },
+          { id: 'radio', name: 'Radio programme discussing family planning and encouraging contraception', cost: 1, e: { births: 2, dev: 0, support: 1, env: 0 }, note: 'Radio reaches rural areas, and dramas and phone-ins can tackle myths. This is social marketing (Source E).' },
+          { id: 'two', name: 'Only allow people in The Gambia to have a maximum of two children', cost: 1, e: { births: 2, dev: -1, support: -3, env: 0 }, note: 'Coercive and a breach of human rights. It would be almost impossible to enforce and would destroy trust in health services.' },
+          { id: 'tax', name: 'Make people who work pay more tax to spend on schools and hospitals', cost: 0, e: { births: 0, dev: 1, support: -2, env: 0 }, note: 'Costs nothing from your budget, but over half of Gambians (53.4% in 2020) live in poverty, so there is little extra tax to collect.' },
+          { id: 'mums', name: 'Improve hospital care for pregnant mothers', cost: 2, e: { births: 1, dev: 2, support: 2, env: 0 }, note: 'Safer births and better child survival reduce the need for “insurance” births (Source D).' },
+          { id: 'forest', name: 'Protect some forest areas and plant more trees', cost: 1, e: { births: 0, dev: 1, support: 1, env: 3 }, note: 'Community forestry already does this (Source F). It protects resources but does not slow the birth rate.' },
+          { id: 'school', name: 'Offer free education to all children', cost: 3, e: { births: 2, dev: 3, support: 2, env: 0 }, note: 'Strong evidence: educating girls delays marriage and first births and leads to smaller families (Source B). It works slowly.' },
+          { id: 'aid', name: 'Ask richer countries for aid to pay for free contraception', cost: 1, e: { births: 2, dev: 0, support: 1, env: 0 }, note: 'This is what happens now: UNFPA is the only supplier of contraceptives to public clinics. It works, but depends on foreign funding (Source A).' },
+          { id: 'vacc', name: 'Provide vaccinations for common diseases to all babies', cost: 2, e: { births: 1, dev: 2, support: 2, env: 0 }, note: 'Lower child mortality helps families feel confident having fewer children, but it raises population growth at first.' },
+          { id: 'fact', name: 'Try to get more big companies to open factories in the country', cost: 2, e: { births: 1, dev: 2, support: 1, env: -1 }, note: 'Jobs for young people and women can reduce family size over time, but investors need skills, power and roads first.' },
+          { id: 'spons', name: 'Get charities to find sponsors in richer countries for children in poor families', cost: 1, e: { births: 0, dev: 1, support: 1, env: 0 }, note: 'Helps individual children, but it is small-scale and does not change national patterns.' },
+          { id: 'rights', name: 'Make sure men and women have equal rights to go to school and get a job', cost: 1, e: { births: 2, dev: 2, support: 0, env: 0 }, note: 'Women’s empowerment is one of the strongest links to lower fertility, but changing attitudes meets resistance (Source C).' },
+          { id: 'water', name: 'Build clean water pumps in every village', cost: 2, e: { births: 1, dev: 2, support: 2, env: 0 }, note: 'Fewer water-borne diseases mean fewer child deaths, and girls spend less time fetching water, so more can attend school.' },
+          { id: 'work', name: 'Make it illegal for children under 15 to do any paid work', cost: 1, e: { births: 1, dev: 1, support: -1, env: 0 }, note: 'Children become less of an economic asset, but poor families lose income and the law is hard to enforce on family farms.' },
+          { id: 'poster', name: 'Run a poster campaign to encourage people to have fewer children', cost: 1, e: { births: 1, dev: 0, support: 0, env: 0 }, note: 'Cheap, but posters alone rarely change deep-rooted beliefs, especially where literacy is lower.' },
+          { id: 'debt', name: 'Get the rich countries’ banks to cancel The Gambia’s debts', cost: 1, e: { births: 0, dev: 2, support: 1, env: 0 }, note: 'Frees money for schools and clinics, but depends on other countries agreeing.' },
+          { id: 'web', name: 'Set up computers and an internet connection in each village', cost: 3, e: { births: 0, dev: 1, support: 1, env: 0 }, note: 'Expensive and needs electricity first. Useful later, but not a priority for slowing growth.' },
+          { id: 'solar', name: 'Set up solar power to provide electricity in all the villages', cost: 2, e: { births: 0, dev: 2, support: 2, env: 2 }, note: 'Reduces the need for fuelwood (protecting forests) and powers clinics and schools.' },
+          { id: 'slums', name: 'Clear away all the slums and illegal shanty towns in the city', cost: 1, e: { births: 0, dev: -2, support: -3, env: 0 }, note: 'Makes people homeless without solving why they moved to the city. It harms the poorest families.' },
+          { id: 'dam', name: 'Build a huge dam to generate electricity for the growing city', cost: 3, e: { births: 0, dev: 2, support: -1, env: -2 }, note: 'Large-scale power, but very expensive, and it can flood farmland and move people from their homes.' }
+        ],
+        actual: 'What The Gambia is actually doing: free basic education with fee exemptions for girls (Source B); family planning through clinics and community distribution, mostly funded by UNFPA (Source A); laws against child marriage (2016) and FGM (2015, upheld in 2024) (Source C); better maternal health care (Source D); and community forestry (Source F).' },
+      pyrTasks: 'g'
+    },
+
+    /* ---------------------------------------------------------- SINGAPORE */
+    s: {
+      id: 's', name: 'Singapore', flag: '🇸🇬', type: 'Pro-natalist', acc: '#c8102e', accSoft: '#fde9ec',
+      tag: 'From “Stop at Two” to “Have three or more”',
+      intro: 'You are a young advisor in Singapore’s Strategy Group, the office that plans the country’s population policy. Singapore once worked hard to cut its birth rate. Now it has one of the lowest fertility rates in the world. Work through six briefings, then recommend a plan.',
+      stats: [
+        ['0.87', 'children per woman in 2025, a record low (preliminary)', 'Deputy PM Gan Kim Yong, Feb 2026'],
+        ['~27,500', 'resident births in 2025, the fewest on record', 'Strategy Group, Feb 2026'],
+        ['20.7%', 'of citizens aged 65 or over (2025), up from 13.1% in 2015', 'Population in Brief 2025'],
+        ['2.9', 'working-age citizens (20–64) for each citizen aged 65+, down from 4.9 in 2015', 'Population in Brief 2025'],
+        ['6.11m', 'people in 2025: 3.66m citizens, 0.54m permanent residents, 1.91m non-residents', 'Population in Brief 2025']
+      ],
+      VITAL: [[1950,44.3,12.3],[1955,41.8,8.2],[1960,36.7,6.2],[1965,29.5,5.6],[1970,21.5,5.3],[1975,17.7,5.1],[1980,17.3,5.2],[1985,16.9,5.2],[1990,16.6,5.1],[1995,14.5,4.9],[2000,12.7,4.4],[2005,9.7,4.0],[2010,8.4,3.9],[2015,8.6,4.0],[2020,8.4,4.4],[2021,8.2,4.7],[2022,8.0,5.0],[2023,8.2,4.8],[2024,8.4,5.0],[2025,8.5,5.1]],
+      vitalSrc: 'UN World Population Prospects 2024 (whole population, including non-residents), via StatisticsTimes.',
+      // Resident TFR: Singapore Department of Statistics; 2025 preliminary (Strategy Group)
+      TFR: [[1960,5.76],[1965,4.66],[1970,3.07],[1975,2.07],[1980,1.82],[1985,1.61],[1986,1.43],[1987,1.62],[1988,1.96],[1990,1.83],[1995,1.67],[2000,1.60],[2005,1.26],[2010,1.15],[2015,1.24],[2018,1.14],[2020,1.10],[2021,1.12],[2022,1.04],[2023,0.97],[2024,0.97],[2025,0.87]],
+      tfrSrc: 'Resident total fertility rate, Singapore Department of Statistics; 2025 is a preliminary figure (Strategy Group, February 2026).',
+      tfrMax: 6,
+      MARKS: [[1966, 'Family planning board set up'], [1972, 'Stop at Two disincentives'], [1984, 'Graduate Mothers’ Scheme'], [1987, 'Have three or more'], [2001, 'Baby Bonus'], [2023, 'Bigger Baby Bonus'], [2025, 'Large Families Scheme']],
+      PYR: { year: 2026, maxP: 6, src: 'UN World Population Prospects 2024 (2026 estimate). Includes non-residents such as foreign workers.',
+        m: [123772,116284,114848,143620,261600,329987,324766,282410,230688,201872,186712,165964,163094,145804,112324,78323,36078,21246,7824,1994,261],
+        f: [117364,112255,109339,130695,220746,266482,271400,250031,214724,193530,180290,162810,158884,146550,123696,92935,48372,34008,15747,5386,1032] },
+      STAGE: 5,
+      sortBins: [['lb', 'Cause of the low birth rate', 'b1'], ['age', 'Cause of ageing (longer lives)', 'b4'], ['no', 'Not a cause', 'b2']],
+      CAUSES: [
+        { t: 'High cost of housing and of raising children', a: 'lb' },
+        { t: 'Long working hours and stressful jobs', a: 'lb' },
+        { t: 'More women in higher education and careers', a: 'lb' },
+        { t: 'Later marriage: the median age of brides is 29.1', a: 'lb' },
+        { t: 'More people staying single: 29.6% of women aged 30–39 are single', a: 'lb' },
+        { t: 'Pressure and cost of education, including private tuition', a: 'lb' },
+        { t: 'Small families became the norm after the “Stop at Two” campaign', a: 'lb' },
+        { t: 'Excellent health care: life expectancy is about 84 years', a: 'age' },
+        { t: 'The large post-war baby boom generation is now reaching 65', a: 'age' },
+        { t: 'Healthier lifestyles, clean water and good housing', a: 'age' },
+        { t: 'The government limits families to two children', a: 'no' },
+        { t: 'High infant mortality', a: 'no' }
+      ],
+      issueBins: [['econ', 'Economy and workforce', 'b4'], ['gov', 'Government spending', 'b1'], ['soc', 'Society', 'b2'], ['opp', 'Opportunity', 'b5']],
+      ISSUES: [
+        { t: 'Labour shortages as fewer young people enter work', a: 'econ' },
+        { t: 'Reliance on foreign workers: 1.91 million non-residents', a: 'econ' },
+        { t: 'Rising health care and eldercare costs', a: 'gov' },
+        { t: 'Fewer taxpayers for each retiree: 4.9 workers per citizen aged 65+ in 2015, 2.4 projected in 2030', a: 'gov' },
+        { t: 'The citizen population could start shrinking by the early 2040s', a: 'soc' },
+        { t: 'Debate and tension over immigration and new citizens', a: 'soc' },
+        { t: 'Schools merging as there are fewer children', a: 'soc' },
+        { t: 'Older people working longer and sharing their experience', a: 'opp' },
+        { t: 'New jobs in the “silver economy”: health, care and products for older people', a: 'opp' },
+        { t: 'Automation and robots to fill labour gaps', a: 'opp' }
+      ],
+      TYPES: ['Anti-natalist', 'Pro-natalist: money', 'Pro-natalist: time and childcare', 'Selective (eugenic)', 'Immigration'],
+      POLICIES: [
+        { id: 'A', tab: 'A · Stop at Two (1966–1986)', hd: '“Two is enough”: Singapore’s anti-natalist years', types: ['Anti-natalist'],
+          p: ['In the 1960s Singapore’s fertility rate was around 6. The Singapore Family Planning and Population Board was set up in 1966. Abortion and sterilisation were legalised in 1970, and women were urged to be sterilised after their second child.',
+              'From 1972–73 a series of disincentives punished large families: paid maternity leave only for the first two children, higher hospital delivery fees for each extra child, tax relief only for the first three children, less priority for big families in public housing, and top primary school places for children whose parents had been sterilised. Posters announced “Small Families – Brighter Future: Two is enough.”',
+              'The fertility rate fell from 5.76 in 1960 to 2.07 in 1975 and below replacement level in 1977. It has never returned to 2.1. Statistician Saw Swee Hock argued the policy sped up a fall that would have happened anyway, and that it was not reversed quickly enough.'],
+          by: 'Based on “Population planning in Singapore” (Wikipedia, citing Saw Swee Hock and the US Library of Congress)', url: 'https://en.wikipedia.org/wiki/Population_planning_in_Singapore',
+          q: 'Which is the strongest criticism of “Stop at Two”?', o: ['It did not reduce the fertility rate', 'It worked too well: fertility fell below replacement and never recovered', 'It was too cheap', 'It only lasted one year'], a: 1,
+          why: 'An anti-natalist policy can overshoot. Singapore is still dealing with the low birth rate it helped to create.' },
+        { id: 'B', tab: 'B · Graduate Mothers’ Scheme (1984)', hd: 'Babies for graduates: a policy that backfired', types: ['Selective (eugenic)'],
+          p: ['In 1984 the government worried that university-educated women were having fewer children than less-educated women. It gave graduate mothers priority for their children’s school places, tax rebates and other benefits, and set up the Social Development Unit (SDU) to help graduates meet and marry.',
+              'The policy caused a public row known as the “Great Marriage Debate”. Critics called it eugenics and unfair to poorer families. In the 1984 general election the ruling party suffered a 12.9% swing against it, and the most controversial parts were dropped in 1985. The SDU was nicknamed “Single, Desperate and Ugly”; it became the Social Development Network in 2009.'],
+          by: 'Based on “Population planning in Singapore” (Wikipedia)', url: 'https://en.wikipedia.org/wiki/Population_planning_in_Singapore',
+          q: 'What does the 1984 election result suggest?', o: ['The policy was very popular', 'Selective policies that favour one group can lose public support quickly', 'Graduates had more children afterwards', 'Matchmaking always works'], a: 1,
+          why: 'Policies seen as unfair or discriminatory lose public trust, so they are dropped before they can work.' },
+        { id: 'C', tab: 'C · Have three or more (1987)', hd: 'A U-turn: “Have three or more, if you can afford it”', types: ['Pro-natalist: money'],
+          p: ['By 1986 the fertility rate had fallen to 1.43. The Family Planning and Population Board was closed and in 1987 the government launched a new slogan: “Have three or more, if you can afford it.”',
+              'Incentives included extra tax relief for a third and fourth child, MediSave money for third-child hospital costs and housing upgrade priority for large families. In 1990 a $20,000 tax rebate was offered for a second child born before the mother turned 28.',
+              'The fertility rate rose to 1.96 in 1988, which was also a Dragon year, popular for births in Chinese tradition. It then fell back to 1.83 in 1990 and 1.60 by 2000. Many parents said they were baffled: were they having children for the country or for themselves?'],
+          by: 'Based on “Population planning in Singapore” (Wikipedia); fertility rates from the Singapore Department of Statistics', url: 'https://en.wikipedia.org/wiki/Population_planning_in_Singapore',
+          q: 'Why is it hard to judge whether this policy worked?', o: ['There is no data', 'The 1988 rise coincided with a Dragon year, and the rise did not last', 'The government did not spend any money', 'Fertility rose every year after 1987'], a: 1,
+          why: 'A short rise may have been cultural (the Dragon year), not the policy. Fertility then kept falling.' },
+        { id: 'D', tab: 'D · The Baby Bonus (2001–today)', hd: 'Paying for babies: the Baby Bonus', types: ['Pro-natalist: money'],
+          p: ['The Baby Bonus began in 2001: $9,000 for a second child and $18,000 for a third, paid over six years, plus a Child Development Account where the government matches parents’ savings dollar for dollar.',
+              'It has been increased many times. In 2023 the cash gift rose by $3,000 to $11,000 for a first or second child and $13,000 for a third or later child. Every Singaporean baby also gets a $5,000 CDA First Step Grant, and from April 2025 a $5,000 MediSave grant.',
+              'Despite this, the resident fertility rate fell from 1.60 in 2000 to 1.24 in 2015, 0.97 in 2023–24 and 0.87 in 2025. Reasons often given for having fewer children, such as housing costs, work pressure and the cost of education, are not solved by a one-off payment.'],
+          by: 'Based on Singapore Budget 2023 reports (Malay Mail, Feb 2023), population.gov.sg and the Singapore Department of Statistics', url: 'https://www.population.gov.sg/strengthening-support-for-large-families/',
+          q: 'What does the evidence suggest about cash incentives?', o: ['They have pushed fertility back above replacement', 'Money helps families but has not reversed the fall, because the main barriers are time, housing and work pressure', 'They have caused the fertility rate to fall', 'They are no longer used'], a: 1,
+          why: 'Cash makes children more affordable, but it cannot fix long hours, stress or the cost of housing.' },
+        { id: 'E', tab: 'E · Parental leave and childcare (2023–26)', hd: 'Giving parents time: leave and childcare', types: ['Pro-natalist: time and childcare'],
+          p: ['Recent policies focus on time and shared parenting. Government-paid paternity leave became four weeks and mandatory from 1 April 2025. Shared parental leave for couples is six weeks from April 2025, rising to ten weeks from April 2026.',
+              'Childcare fees at government-supported preschools have been capped, falling to $610 for full-day childcare and $650 for infant care from January 2026.',
+              'These measures are new, so it is too early to judge them. Fertility fell to a record low of 0.87 in 2025.'],
+          by: 'Based on population.gov.sg, “Strengthening support for large families” (2025)', url: 'https://www.population.gov.sg/strengthening-support-for-large-families/',
+          q: 'Why might leave and childcare work better than cash alone?', o: ['They are cheaper than cash', 'They tackle the time and career pressures that stop people having children, and share care between both parents', 'They force people to have children', 'They only help grandparents'], a: 1,
+          why: 'Countries with higher fertility, such as France and Sweden, combine generous leave, affordable childcare and shared parenting.' },
+        { id: 'F', tab: 'F · Large Families Scheme (2025)', hd: 'Up to $16,000 more for a third child', types: ['Pro-natalist: money'],
+          p: ['In the February 2025 Budget the government launched the Large Families Scheme. For each third or later Singaporean child born from 18 February 2025, parents receive up to $16,000 more: a CDA First Step Grant of $10,000 (double the usual $5,000), a $5,000 MediSave grant for the mother and $1,000 a year of LifeSG credits until the child turns 6.',
+              'Yet in 2025 there were about 27,500 resident births, the fewest in Singapore’s history, and the fertility rate fell to 0.87. At that rate, every 100 residents today would be replaced by only 44 children and 19 grandchildren.'],
+          by: 'Based on population.gov.sg (2025) and Her World, 2 March 2026', url: 'https://www.herworld.com/pov/features/spores-fertility-rate-sinks-new-low-0-87-citizen-population-could-shrink-early-2040s',
+          q: 'What do the 2025 births tell us about this policy so far?', o: ['It has already doubled births', 'Births fell to a record low in its first year, although it is too early for a final judgement', 'It has no cost', 'It only applies to first children'], a: 1,
+          why: 'Early evidence is not encouraging, but a policy needs several years before its effect on births can be measured.' },
+        { id: 'G', tab: 'G · Immigration', hd: 'Topping up the population with new citizens', types: ['Immigration'],
+          p: ['Because births are so low, Singapore relies on immigration to keep its citizen population stable. It granted 22,766 new citizenships in 2024 and about 25,000 in 2025, and plans to admit 25,000–30,000 new citizens and about 40,000 new permanent residents a year over the next five years.',
+              'With immigration, the citizen population grew by 0.7% in 2025. Without new measures, the government says the citizen population could start to shrink by the early 2040s. There are also 1.91 million non-residents, mostly foreign workers.',
+              'Immigration fills gaps in the workforce quickly, but it is debated in Singapore because of pressure on housing, transport and jobs, and concerns about national identity.'],
+          by: 'Based on Population in Brief 2025 (Strategy Group) and Her World, 2 March 2026', url: 'https://www.population.gov.sg/population-in-brief-2025-key-trends/',
+          q: 'What is the main limitation of relying on immigration?', o: ['It cannot add people quickly', 'It does not raise the birth rate and can cause public tension over jobs, housing and identity', 'It is illegal in Singapore', 'Immigrants never work'], a: 1,
+          why: 'Immigration treats the symptom (fewer workers) rather than the cause (low fertility), and it needs public support.' }
+      ],
+      DECIDE: { budget: 8, meters: [['births', 'Birth rate'], ['work', 'Workforce'], ['support', 'Public support'], ['money', 'Government finances']],
+        intro: 'It is 2026 and Prime Minister Lawrence Wong’s government asks for your plan. You have <b>8 budget points</b>. Choose at least four policies, watch the dashboard, then read what the evidence says and what Singapore is already doing.',
+        cards: [
+          { id: 'bonus', name: 'Raise the Baby Bonus again', cost: 3, e: { births: 1, work: 0, support: 1, money: -2 }, note: 'Bigger bonuses since 2001 have not reversed the fall (Source D). Popular, but expensive for a small effect.' },
+          { id: 'leave', name: 'Longer paid parental leave for mothers and fathers', cost: 2, e: { births: 1, work: -1, support: 2, money: -1 }, note: 'Singapore is doing this: 4 weeks’ mandatory paternity leave and 10 weeks’ shared leave from 2026 (Source E).' },
+          { id: 'flex', name: 'Give workers the right to request flexible and remote work', cost: 1, e: { births: 1, work: 1, support: 1, money: 0 }, note: 'Cheap and tackles time pressure. Long working hours are one of the main reasons people give for having fewer children.' },
+          { id: 'house', name: 'Cheaper, faster public housing for young couples', cost: 3, e: { births: 1, work: 0, support: 2, money: -1 }, note: 'Many couples wait for a flat before marrying, so faster housing could lead to earlier marriage and births.' },
+          { id: 'pre', name: 'Make preschool and childcare cheaper', cost: 2, e: { births: 1, work: 1, support: 2, money: -1 }, note: 'Already happening: fee caps cut to $610/$650 in 2026 (Source E). It also helps mothers keep working.' },
+          { id: 'exam', name: 'Reduce exam pressure and the need for private tuition', cost: 1, e: { births: 1, work: 0, support: 1, money: 0 }, note: 'The fear of high education costs and pressure discourages bigger families. Changing school culture is slow.' },
+          { id: 'ivf', name: 'Fund fertility treatment and egg freezing', cost: 1, e: { births: 1, work: 0, support: 1, money: 0 }, note: 'Helps couples who marry later (brides’ median age is 29.1) and want children but struggle to conceive.' },
+          { id: 'date', name: 'Government dating and matchmaking events', cost: 1, e: { births: 0, work: 0, support: 0, money: 0 }, note: 'Singapore has run these since 1984 (Source B). Little evidence that they raise marriage or birth rates.' },
+          { id: 'mig', name: 'Admit more immigrants and new citizens', cost: 1, e: { births: 0, work: 2, support: -2, money: 1 }, note: 'Fills the workforce quickly but does not raise fertility and causes public debate (Source G).' },
+          { id: 'retire', name: 'Raise the retirement age and support older workers', cost: 1, e: { births: 0, work: 2, support: 0, money: 1 }, note: 'Helps with the shrinking workforce, but it manages ageing rather than raising the birth rate.' },
+          { id: 'robot', name: 'Invest in robots and automation', cost: 2, e: { births: 0, work: 2, support: 1, money: -1 }, note: 'Reduces the need for workers, but does not solve the fall in citizens.' },
+          { id: 'large', name: 'Extra money for families with three or more children', cost: 2, e: { births: 1, work: 0, support: 1, money: -1 }, note: 'This is the Large Families Scheme (Source F). Births still fell to a record low in its first year.' },
+          { id: 'single', name: 'A special tax on people who stay single', cost: 0, e: { births: 0, work: 0, support: -3, money: 1 }, note: 'Coercive and unfair. It would punish people who cannot find a partner or cannot have children.' },
+          { id: 'grad', name: 'Extra rewards only for university-educated mothers', cost: 1, e: { births: 0, work: 0, support: -3, money: 0 }, note: 'Tried in 1984 and dropped within a year after a public backlash (Source B).' }
+        ],
+        actual: 'What Singapore is actually doing: the Baby Bonus ($11,000–$13,000), the Large Families Scheme (up to $16,000 more for a third child), mandatory paternity leave and 10 weeks’ shared parental leave, cheaper childcare, and 25,000–30,000 new citizens a year.' },
+      pyrTasks: 's'
+    }
+  };
+
+  /* ================= VIDEO CLIPS =================
+     Keith's own video, “Youthful Population Gambia”. Each clip plays only
+     between its start and end times (seconds). Add clips as
+     { m: <briefing index 0–5>, t: 'Title', s: start, e: end }. */
+  var VIDEO = { id: 'cdDbK7Qwm_M', clips: [
+    { m: 0, t: 'Where is The Gambia? Where people live and how fast the population is growing', s: 0, e: 36 },
+    { m: 1, t: 'The Gambia’s population pyramids', s: 36, e: 48 },
+    { m: 2, t: 'Life in The Gambia: farming, families and health', s: 48, e: 108 },
+    { m: 3, t: 'A young population: children and schools', s: 108, e: 150 },
+    { m: 4, t: 'Family planning and mothers’ health', s: 150, e: 180 },
+    { m: 4, t: 'Gardens, schools and links with other countries', s: 180, e: 211 }
+  ] };
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-population-policy-lab-v1';
+  function blank() { return { done: {}, ans: {}, notes: {}, sort: {}, isort: {}, src: {}, pm: [] }; }
+  var S = { xp: 0, c: { g: blank(), s: blank() }, notes: {}, unlock: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.c) { S = Object.assign(S, sv); S.c.g = Object.assign(blank(), S.c.g); S.c.s = Object.assign(blank(), S.c.s); } } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  var IS_T = false, view = 'home', C = null, T = null;
+
+  var MISSIONS = [
+    { emo: '📈', t: 'Where is it on the DTM?', s: 'Birth and death rates since 1950, natural increase and doubling time' },
+    { emo: '🔺', t: 'The population pyramid', s: 'Read the pyramid and calculate the dependency ratio' },
+    { emo: '🧩', t: 'Recap the causes', s: 'Sort the causes of the birth and death rates' },
+    { emo: '⚠️', t: 'The issues', s: 'Who is affected, and how?' },
+    { emo: '📰', t: 'What has been done?', s: 'Real policies: read the evidence and rate their effectiveness' },
+    { emo: '🏛️', t: 'Your decision', s: 'Choose a policy package and justify it' }
+  ];
+  function nDone(id) { return Object.keys(S.c[id].done).length; }
+  function hud() {
+    var a = nDone('g'), b = nDone('s');
+    $('xp').textContent = S.xp + ' XP';
+    $('xpbar').style.width = Math.min(100, (a + b) / 12 * 100) + '%';
+    $('lv').textContent = '🇬🇲 ' + a + '/6 · 🇸🇬 ' + b + '/6';
+  }
+  function award(n, el) {
+    S.xp += n; save(); hud();
+    if (el && el.getBoundingClientRect) {
+      var r = el.getBoundingClientRect(), p = document.createElement('div');
+      p.className = 'xp-pop'; p.textContent = '+' + n + ' XP'; p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+      document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1100);
+    }
+  }
+  function toast(t) { var d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
+  function isOpen(i) { return S.unlock || i === 0 || T.done[i - 1]; }
+  function setCase(id) {
+    C = CASES[id]; T = S.c[id];
+    document.documentElement.style.setProperty('--acc', C.acc);
+    document.documentElement.style.setProperty('--acc-soft', C.accSoft);
+  }
+  function fmt(n) { return Math.round(n).toLocaleString('en-GB'); }
+  function sumRange(a, from, to) { var t = 0; for (var i = from; i <= to; i++) t += a[i]; return t; }
+  function pyrGroups(P) {
+    var tot = sumRange(P.m, 0, 20) + sumRange(P.f, 0, 20);
+    var young = sumRange(P.m, 0, 2) + sumRange(P.f, 0, 2), old = sumRange(P.m, 13, 20) + sumRange(P.f, 13, 20), work = tot - young - old;
+    return { tot: tot, young: young, old: old, work: work };
+  }
+
+  /* ================= HOME (choose a case) ================= */
+  function home() {
+    view = 'home'; C = null; T = null;
+    document.documentElement.style.setProperty('--acc', '#0f3a5c');
+    document.documentElement.style.setProperty('--acc-soft', '#eef5fa');
+    var bothDone = nDone('g') === 6 && nDone('s') === 6;
+    var h = '<section class="panel">' +
+      '<span class="kicker">IB Geography · Changing population · Population possibilities and power</span>' +
+      '<h1>Population Policy Lab: The Gambia and Singapore</h1>' +
+      '<p class="muted">Two countries, two opposite problems. The Gambia has one of the youngest populations in the world and wants to slow its growth. Singapore has one of the lowest birth rates in the world and wants more babies. Investigate each case with real data, judge what has been done, then make your own decisions.</p>' +
+      '<div class="hero-grid">' +
+        '<div style="display:flex;flex-direction:column;gap:12px">' +
+          '<div class="box li"><b class="t">Learning intention:</b><i>To engage with issues that have local and global significance.</i></div>' +
+          '<div class="box sc"><b class="t">Success criteria: I can</b><ul><li>use the demographic transition model and population pyramids to describe a country’s population</li><li>explain the issues and management options for The Gambia’s youthful population (anti-natalist)</li><li>examine the policies Singapore has used to raise its birth rate (pro-natalist)</li><li>evaluate how effective each policy has been, using evidence</li></ul></div>' +
+        '</div>' +
+        '<div class="box syl"><b class="t">Syllabus statement:</b><p>Policies associated with managing population change, focusing on:</p><ul><li>policies related to ageing societies</li><li>pronatalist or antinatalist policies</li></ul></div>' +
+      '</div></section>' +
+      '<section class="panel" id="starter"><span class="kicker teal">Starter</span><h2>🥕 Carrot or stick?</h2></section>' +
+      '<section class="panel"><h2>Choose a case study</h2><p class="muted small">Do both. Your answers save on this device, and every briefing has a <b>Copy to OneNote</b> button.</p><div class="cases">' +
+      ['g', 's'].map(function (id) {
+        var k = CASES[id], n = nDone(id);
+        return '<button type="button" class="casecard" data-case="' + id + '" style="--c:' + k.acc + ';--cs:' + k.accSoft + '"><span class="cflag" aria-hidden="true">' + k.flag + '</span><span class="ctype">' + k.type + ' policy</span><b>' + k.name + '</b><small>' + esc(k.tag) + '</small><span class="cprog"><i style="width:' + (n / 6 * 100) + '%"></i></span><span class="cnum">' + n + ' / 6 briefings complete</span></button>';
+      }).join('') + '</div>' +
+      '<div class="task' + (bothDone || S.unlock ? '' : ' locked') + '" id="cmpTask"><span class="tnum">Final challenge · Compare the two cases</span>' +
+      (bothDone || S.unlock ? '' : '<p class="hint">🔒 Unlocks when you have finished both case studies.</p>') + '</div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyAll">Copy everything to OneNote</button><span class="hint">Copies both case files with headings, ready to paste into OneNote.</span></div>' +
+      '<div class="teacher" id="tRow" hidden>Teacher: <button type="button" id="tUnlock">' + (S.unlock ? 'all briefings unlocked (turn off)' : 'unlock all briefings') + '</button> · <button type="button" id="tKey">answer key</button></div>' +
+      '<button type="button" class="btn ghost" id="reset" style="align-self:flex-start">Reset my progress</button>' +
+      '</section>' + credits();
+    $('app').innerHTML = h;
+    starter();
+    document.querySelectorAll('.casecard').forEach(function (b) { b.onclick = function () { caseHome(b.dataset.case); }; });
+    if (bothDone || S.unlock) compareTask();
+    $('copyAll').onclick = function () { copyNotes(allNotes()); };
+    $('tRow').hidden = !IS_T;
+    $('tUnlock').onclick = function () { S.unlock = !S.unlock; save(); home(); };
+    $('tKey').onclick = answerKey;
+    var rb = $('reset');
+    rb.onclick = function () {
+      if (!rb.dataset.arm) { rb.dataset.arm = 1; rb.textContent = 'Press again to delete all your answers'; setTimeout(function () { delete rb.dataset.arm; rb.textContent = 'Reset my progress'; }, 4000); return; }
+      S = { xp: 0, c: { g: blank(), s: blank() }, notes: {}, unlock: false }; save(); hud(); home();
+    };
+    hud(); window.scrollTo(0, 0);
+  }
+  function compareTask() {
+    var box = $('cmpTask');
+    var v = S.notes.cmp || '';
+    box.insertAdjacentHTML('beforeend',
+      '<p><b>Exam-style question (10 marks): Evaluate the effectiveness of pro-natalist and anti-natalist policies, using named examples.</b></p>' +
+      '<div class="tblwrap"><table class="score"><tr><th></th><th>🇬🇲 The Gambia (anti-natalist)</th><th>🇸🇬 Singapore (pro-natalist)</th></tr>' +
+      '<tr><td>Fertility rate</td><td>5.6 (2013) → 4.4 (2019–20)</td><td>1.60 (2000) → 0.87 (2025)</td></tr>' +
+      '<tr><td>Main approach</td><td>Indirect: education, health, women’s rights, plus family planning</td><td>Direct incentives: cash, leave, childcare, plus immigration</td></tr>' +
+      '<tr><td>My most effective policy</td><td>' + esc(bestPolicy('g')) + '</td><td>' + esc(bestPolicy('s')) + '</td></tr></table></div>' +
+      '<p class="hint">Plan: introduction (why governments intervene) → anti-natalist: The Gambia, strengths and limits with data → pro-natalist: Singapore, strengths and limits with data → why it is easier to lower fertility than raise it → conclusion with a clear judgement.</p>' +
+      '<textarea id="w-cmp" aria-label="Your comparison answer">' + esc(v) + '</textarea>' +
+      '<div class="row"><button type="button" class="btn ghost" id="showCmp">Show a model answer</button></div><div class="model" id="modCmp" hidden>' +
+      'Governments use anti-natalist policies to slow growth and pro-natalist policies to raise births. The evidence suggests anti-natalist policies are more effective, especially when they work through development. In The Gambia the fertility rate fell from 5.6 in 2013 to 4.4 in 2019–20 as modern contraceptive use doubled (8% to 17%) and girls reached parity in school. These indirect policies give women more choice and last, but progress is slowed by limited supplies (only about 40% of demand met), dependence on UNFPA funding and cultural resistance, shown by the 2024 attempt to repeal the FGM ban. Singapore shows that anti-natalist policy can be too effective: “Stop at Two” cut fertility from 5.76 (1960) to below replacement by 1977. Since then pro-natalist policies, from “Have three or more” (1987) to the Baby Bonus (2001) and the Large Families Scheme (2025), have failed to reverse the fall: fertility reached a record low of 0.87 in 2025. Cash cannot overcome the high cost of housing, long working hours and later marriage, and selective policies such as the 1984 Graduate Mothers’ Scheme lost public support. Singapore therefore relies on immigration (about 25,000 new citizens a year), which manages the symptom rather than the cause. Overall, it is much easier to help people have the smaller families they want than to persuade them to have larger families they do not want, so anti-natalist policies are more effective, and pro-natalist policies work best when they reduce the costs of time and work rather than simply paying parents.</div>');
+    var ta = $('w-cmp'), t = null;
+    ta.addEventListener('input', function () { S.notes.cmp = ta.value; clearTimeout(t); t = setTimeout(save, 400); });
+    $('showCmp').onclick = function () { if ((ta.value || '').trim().length < 25) { $('showCmp').textContent = 'Write your own answer first'; setTimeout(function () { $('showCmp').textContent = 'Show a model answer'; }, 1800); return; } $('modCmp').hidden = false; $('showCmp').hidden = true; };
+  }
+  function bestPolicy(id) {
+    var k = CASES[id], st = S.c[id].src, best = null, br = 0;
+    k.POLICIES.forEach(function (p) { var r = (st[p.id] && st[p.id].rate) || 0; if (st[p.id] && st[p.id].touched && r > br) { br = r; best = p; } });
+    return best ? best.tab.replace(/^[A-G] · /, '') + ' (' + br + '/5)' : '(rate the policies in briefing 5)';
+  }
+
+  function credits() {
+    return '<section class="panel credits"><h3>Sources</h3><p>Sources are adapted and shortened for students. Data:</p><ul>' +
+      '<li>Birth rates, death rates, population pyramids and The Gambia’s fertility rate: <a href="https://population.un.org/wpp/" target="_blank" rel="noopener">UN World Population Prospects 2024</a>, via <a href="https://statisticstimes.com/demographics/country/gambia-demographics.php" target="_blank" rel="noopener">StatisticsTimes</a>.</li>' +
+      '<li>The Gambia: <a href="https://gambia.unfpa.org/en/publications/preliminary-report-2024-census-gambia" target="_blank" rel="noopener">2024 Census preliminary report</a>; <a href="https://www.gbosdata.org/data-stories/population-and-demography/the-gambia-demographic-and-health-survey-highlight" target="_blank" rel="noopener">Demographic and Health Survey 2019–20</a> (Gambia Bureau of Statistics); <a href="https://dhsprogram.com/pubs/pdf/DM181/DM181.pdf" target="_blank" rel="noopener">DHS key findings</a>; <a href="https://blogs.worldbank.org/en/africacan/poverty-trends-gambia-tale-two-crises" target="_blank" rel="noopener">World Bank poverty trends</a>.</li>' +
+      '<li>Singapore: <a href="https://www.population.gov.sg/population-in-brief-2025-key-trends/" target="_blank" rel="noopener">Population in Brief 2025</a> (Strategy Group); resident fertility rates from the Singapore Department of Statistics; 2025 figures from <a href="https://www.herworld.com/pov/features/spores-fertility-rate-sinks-new-low-0-87-citizen-population-could-shrink-early-2040s" target="_blank" rel="noopener">Her World, 2 March 2026</a>.</li>' +
+      ['g', 's'].map(function (id) { return CASES[id].POLICIES.map(function (p) { return '<li>' + CASES[id].flag + ' Source ' + p.id + ': <a href="' + p.url + '" target="_blank" rel="noopener">' + esc(p.by.replace(/^Based on /, '')) + '</a></li>'; }).join(''); }).join('') +
+      '</ul></section>';
+  }
+
+  /* ================= CASE HOME ================= */
+  function caseHome(id) {
+    setCase(id); view = 'case';
+    var h = '<section class="panel">' +
+      '<div class="row"><button type="button" class="btn ghost" id="toHome">← Both case studies</button></div>' +
+      '<span class="kicker">' + C.flag + ' ' + C.type + ' policy</span>' +
+      '<h1>' + C.name + ': ' + esc(C.tag) + '</h1>' +
+      '<p class="muted">' + esc(C.intro) + '</p>' +
+      '<div class="stats">' + C.stats.map(function (s) { return '<div class="stat"><b>' + s[0] + '</b><span>' + esc(s[1]) + '</span><em>' + esc(s[2]) + '</em></div>'; }).join('') + '</div>' +
+      '</section>' +
+      '<section class="panel"><h2>Your briefings</h2><p class="muted small">Briefings unlock in order.</p><div class="map">' +
+      MISSIONS.map(function (m, i) {
+        var o = isOpen(i), d = T.done[i];
+        return '<button type="button" class="mcard' + (o && !d ? ' cur' : '') + '" data-m="' + i + '"' + (o ? '' : ' disabled') + '><span class="num">Briefing ' + (i + 1) + '</span><span class="emo" aria-hidden="true">' + m.emo + '</span><b>' + esc(m.t) + '</b><small>' + esc(m.s) + '</small><span class="st">' + (d ? '✅' : o ? '' : '🔒') + '</span></button>';
+      }).join('') + '</div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyCase">Copy my ' + C.name + ' case file to OneNote</button></div></section>';
+    $('app').innerHTML = h;
+    $('toHome').onclick = home;
+    document.querySelectorAll('.mcard').forEach(function (b) { b.onclick = function () { mission(+b.dataset.m); }; });
+    $('copyCase').onclick = function () { copyNotes(caseNotes(C.id)); };
+    hud(); window.scrollTo(0, 0);
+  }
+
+  /* ================= MISSION SHELL ================= */
+  function mission(i) {
+    view = 'mission';
+    var m = MISSIONS[i];
+    $('app').innerHTML = '<section class="panel"><span class="kicker">' + C.flag + ' ' + C.name + ' · Briefing ' + (i + 1) + ' of 6</span><h2>' + m.emo + ' ' + esc(m.t) + '</h2>' + clips(i) + '<div id="mbody" style="display:flex;flex-direction:column;gap:16px"></div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyM">Copy this briefing to OneNote</button><span class="hint">Paste into your OneNote page: headings and tables keep their layout.</span></div>' +
+      '<div class="navrow"><button type="button" class="btn ghost" id="toCase">← All ' + C.name + ' briefings</button><button type="button" class="btn acc" id="finish">Complete briefing ' + (i + 1) + ' →</button></div>' +
+      '<p class="fb" id="mfb" aria-live="polite"></p></section>';
+    [m1, m2, m3, m4, m5, m6][i]($('mbody'));
+    $('copyM').onclick = function () { copyNotes(notesFor(C.id, i)); };
+    $('toCase').onclick = function () { caseHome(C.id); };
+    $('finish').onclick = function () {
+      var need = REQ[i]();
+      if (need) { $('mfb').className = 'fb bad'; $('mfb').textContent = need; return; }
+      if (!T.done[i]) { T.done[i] = true; award(50, $('finish')); }
+      save();
+      if (i < 5) mission(i + 1); else caseHome(C.id);
+    };
+    hud(); window.scrollTo(0, 0);
+  }
+  function okAll(keys) { return keys.every(function (k) { return T.ans[k] && T.ans[k].ok; }); }
+  var REQ = [
+    function () { return okAll(['m1a', 'm1b', 'm1c', 'm1d', 'm1e']) ? '' : 'Answer all the questions correctly before moving on.'; },
+    function () { return okAll(['m2a', 'm2b', 'm2c', 'm2d', 'm2e']) ? '' : 'Complete all the pyramid tasks before moving on.'; },
+    function () { return okAll(['m3']) ? '' : 'Sort all the cards correctly before moving on.'; },
+    function () { return okAll(['m4']) ? '' : 'Sort all the cards correctly before moving on.'; },
+    function () { return C.POLICIES.every(function (p) { var s = T.src[p.id]; return s && s.q === true && s.types === true; }) ? '' : 'Complete every source (policy type and evidence question) before moving on.'; },
+    function () { return T.pm.length >= 4 && (T.notes.pm1 || '').trim().length > 20 ? '' : 'Choose at least four policies and write your decision before finishing.'; }
+  ];
+  function clips(i) {
+    if (C.id !== 'g') return '';
+    var list = VIDEO.clips.filter(function (c) { return c.m === i; });
+    if (!list.length) return '';
+    return '<div class="clips">' + list.map(function (c, k) {
+      var mm = function (s) { return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); };
+      return '<details class="clip"' + (k === 0 ? ' open' : '') + '><summary>🎬 Watch: ' + esc(c.t) + ' <small>(' + mm(c.s) + '–' + mm(c.e) + ', ' + Math.max(1, Math.round((c.e - c.s) / 60)) + ' min)</small></summary>' +
+        '<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/' + VIDEO.id + '?start=' + c.s + '&end=' + c.e + '&rel=0&modestbranding=1" title="' + esc(c.t) + '" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div></details>';
+    }).join('') + '</div>';
+  }
+
+  /* ---------- reusable question widgets ---------- */
+  function mcq(key, numl, q, opts, ans, why, xp) {
+    var TT = T;
+    var st = TT.ans[key];
+    var h = '<div class="task' + (st && st.ok ? ' done' : '') + '" data-q="' + key + '"><span class="tnum">' + esc(numl) + '</span><p><b>' + q + '</b></p><div class="opts">' +
+      opts.map(function (o, k) { var c = st && st.ok ? (k === ans ? ' right' : '') : ''; return '<button type="button" class="opt' + c + '" data-k="' + k + '"' + (st && st.ok ? ' disabled' : '') + '>' + o + '</button>'; }).join('') +
+      '</div><p class="fb' + (st && st.ok ? ' ok' : '') + '">' + (st && st.ok ? '✓ ' + why : '') + '</p></div>';
+    return { html: h, bind: function () {
+      var box = document.querySelector('[data-q="' + key + '"]');
+      box.querySelectorAll('.opt').forEach(function (b) { b.onclick = function () {
+        if (TT.ans[key] && TT.ans[key].ok) return;
+        var k = +b.dataset.k, fb = box.querySelector('.fb');
+        if (k === ans) { TT.ans[key] = { ok: true }; box.classList.add('done'); b.classList.add('right'); box.querySelectorAll('.opt').forEach(function (x) { x.disabled = true; }); fb.className = 'fb ok'; fb.innerHTML = '✓ ' + why; award(xp || 10, b); save(); }
+        else { b.classList.add('wrong'); fb.className = 'fb bad'; fb.textContent = 'Not quite. Look at the data again.'; setTimeout(function () { b.classList.remove('wrong'); }, 900); }
+      }; });
+    } };
+  }
+  function num(key, numlbl, q, ans, tol, unit, why, xp) {
+    var TT = T;
+    var st = TT.ans[key];
+    var h = '<div class="task' + (st && st.ok ? ' done' : '') + '" data-q="' + key + '"><span class="tnum">' + esc(numlbl) + '</span><p><b>' + q + '</b></p><div class="numrow"><input type="text" inputmode="decimal" aria-label="Your answer" value="' + (st ? esc(st.v) : '') + '"' + (st && st.ok ? ' disabled' : '') + '><span>' + unit + '</span><button type="button" class="btn"' + (st && st.ok ? ' disabled' : '') + '>Check</button></div><p class="fb' + (st && st.ok ? ' ok' : '') + '">' + (st && st.ok ? '✓ ' + why : '') + '</p></div>';
+    return { html: h, bind: function () {
+      var box = document.querySelector('[data-q="' + key + '"]'), inp = box.querySelector('input'), fb = box.querySelector('.fb');
+      var go = function () {
+        var v = parseFloat(String(inp.value).replace(/[^0-9.\-−]/g, '').replace('−', '-'));
+        if (isNaN(v)) { fb.className = 'fb bad'; fb.textContent = 'Type a number.'; return; }
+        if (Math.abs(v - ans) <= tol) { TT.ans[key] = { ok: true, v: inp.value }; box.classList.add('done'); inp.disabled = true; box.querySelector('button').disabled = true; fb.className = 'fb ok'; fb.innerHTML = '✓ ' + why; award(xp || 15, inp); save(); }
+        else { TT.ans[key] = { ok: false, v: inp.value }; save(); fb.className = 'fb bad'; fb.textContent = 'Not quite. Check your working and try again (round to 1 decimal place).'; }
+      };
+      box.querySelector('button').onclick = go; inp.onkeydown = function (e) { if (e.key === 'Enter') go(); };
+    } };
+  }
+  function writeTask(key, lbl, q, frame, model, checks) {
+    var TT = T;
+    var v = TT.notes[key] || '';
+    return { html: '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
+      '<textarea id="w-' + key + '" aria-label="' + esc(q.replace(/<[^>]+>/g, '')) + '">' + esc(v) + '</textarea>' +
+      (checks ? '<div class="hint"><b>Check your answer includes:</b> ' + checks + '</div>' : '') +
+      (model ? '<div class="row"><button type="button" class="btn ghost" data-show="' + key + '">Show a model answer</button></div><div class="model" id="mod-' + key + '" hidden>' + model + '</div>' : '') + '</div>',
+      bind: function () {
+        var ta = $('w-' + key), t = null;
+        ta.addEventListener('input', function () { TT.notes[key] = ta.value; clearTimeout(t); t = setTimeout(save, 400); });
+        var b = document.querySelector('[data-show="' + key + '"]');
+        if (b) b.onclick = function () {
+          if ((ta.value || '').trim().length < 25) { b.textContent = 'Write your own answer first'; setTimeout(function () { b.textContent = 'Show a model answer'; }, 1800); return; }
+          $('mod-' + key).hidden = false; b.hidden = true;
+        };
+      } };
+  }
+  function mount(body, parts) { body.insertAdjacentHTML('beforeend', parts.map(function (p) { return p.html; }).join('')); parts.forEach(function (p) { if (p.bind) p.bind(); }); }
+  function interp(series, yr) {
+    for (var i = 0; i < series.length - 1; i++) { var a = series[i], b = series[i + 1]; if (yr >= a[0] && yr <= b[0]) return a[1] + (b[1] - a[1]) * (yr - a[0]) / (b[0] - a[0]); }
+    return series[series.length - 1][1];
+  }
+
+  /* ================= LINE CHART (vital rates or TFR) ================= */
+  function lineChart(opt) {
+    var W = 860, H = 340, L = 52, R = 18, T0 = 18, B = 44, x0 = opt.x0, x1 = opt.x1, yMax = opt.yMax;
+    var X = function (y) { return L + (y - x0) / (x1 - x0) * (W - L - R); }, Y = function (v) { return T0 + (1 - v / yMax) * (H - T0 - B); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(opt.label) + '">';
+    for (var v = 0; v <= yMax; v += opt.step) s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="#e3eaee"/><text x="' + (L - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="12" fill="#4a6272">' + v + '</text>';
+    for (var yr = Math.ceil(x0 / 10) * 10; yr <= x1; yr += 10) s += '<text x="' + X(yr) + '" y="' + (H - B + 18) + '" text-anchor="middle" font-size="12" fill="#4a6272">' + yr + '</text><line x1="' + X(yr) + '" x2="' + X(yr) + '" y1="' + (H - B) + '" y2="' + (H - B + 5) + '" stroke="#94a3b8"/>';
+    s += '<text x="14" y="' + (T0 + (H - T0 - B) / 2) + '" transform="rotate(-90 14 ' + (T0 + (H - T0 - B) / 2) + ')" text-anchor="middle" font-size="12" fill="#4a6272">' + esc(opt.yLabel) + '</text>';
+    if (opt.ref) s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(opt.ref[0]) + '" y2="' + Y(opt.ref[0]) + '" stroke="#b45309" stroke-dasharray="6 5" stroke-width="2"/><text x="' + (W - R - 4) + '" y="' + (Y(opt.ref[0]) - 6) + '" text-anchor="end" font-size="12" font-weight="700" fill="#b45309">' + esc(opt.ref[1]) + '</text>';
+    if (opt.gap) { var g = opt.gap; s += '<path d="' + g.map(function (p, i) { return (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1); }).join(' ') + ' ' + g.slice().reverse().map(function (p) { return 'L' + X(p[0]).toFixed(1) + ' ' + Y(p[2]).toFixed(1); }).join(' ') + ' Z" fill="rgba(245,158,11,0.16)"/>'; }
+    opt.series.forEach(function (se) {
+      var d = se.pts.map(function (p, i) { return (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1); }).join(' ');
+      s += '<path d="' + d + '" fill="none" stroke="' + se.col + '" stroke-width="3" stroke-linejoin="round"/>';
+    });
+    (opt.marks || []).forEach(function (m, i) {
+      var yv = interp(opt.series[0].pts, m[0]), on = opt.sel === i;
+      s += '<circle cx="' + X(m[0]) + '" cy="' + Y(yv) + '" r="' + (on ? 8 : 5.5) + '" fill="' + (on ? opt.series[0].col : '#fff') + '" stroke="' + opt.series[0].col + '" stroke-width="2.5"/>';
+    });
+    s += '<line id="hov" x1="0" x2="0" y1="' + T0 + '" y2="' + (H - B) + '" stroke="#071a2c" stroke-width="1" opacity="0"/><g id="hovtip" opacity="0"><rect width="150" height="22" rx="5" fill="#071a2c"/><text x="75" y="15" text-anchor="middle" font-size="12" font-weight="700" fill="#fff"></text></g>';
+    s += '<rect id="hit" x="' + L + '" y="' + T0 + '" width="' + (W - L - R) + '" height="' + (H - T0 - B) + '" fill="transparent"/></svg>';
+    return { svg: s, X: X, Y: Y, W: W, L: L, R: R };
+  }
+  function bindHover(el, c, x0, x1, label) {
+    var svg = el.querySelector('svg'), hit = svg.querySelector('#hit'), ln = svg.querySelector('#hov'), tip = svg.querySelector('#hovtip');
+    var move = function (ev) {
+      var r = svg.getBoundingClientRect(), sx = (ev.clientX - r.left) / r.width * c.W;
+      var yr = x0 + (sx - c.L) / (c.W - c.L - c.R) * (x1 - x0), res = label(yr); if (!res) return;
+      var x = c.X(res.yr);
+      ln.setAttribute('x1', x); ln.setAttribute('x2', x); ln.setAttribute('opacity', '0.4');
+      tip.setAttribute('transform', 'translate(' + Math.min(c.W - c.R - 150, Math.max(c.L, x - 75)) + ',' + Math.max(2, res.y - 34) + ')'); tip.setAttribute('opacity', '1');
+      tip.querySelector('text').textContent = res.t;
+    };
+    hit.addEventListener('pointermove', move); hit.addEventListener('pointerdown', move);
+    hit.addEventListener('pointerleave', function () { ln.setAttribute('opacity', '0'); tip.setAttribute('opacity', '0'); });
+  }
+  function nearest(series, yr) { var best = series[0]; series.forEach(function (p) { if (Math.abs(p[0] - yr) < Math.abs(best[0] - yr)) best = p; }); return best; }
+
+  /* generic DTM diagram, stages clickable */
+  function dtmSvg(mark) {
+    var W = 760, H = 300, L = 30, R = 10, T0 = 30, B = 40, sw = (W - L - R) / 5;
+    var X = function (t) { return L + t * (W - L - R); }, Y = function (v) { return T0 + (1 - v) * (H - T0 - B); };
+    var br = [[0, .9], [.2, .9], [.4, .86], [.52, .6], [.62, .35], [.8, .26], [.9, .2], [1, .14]];
+    var dr = [[0, .86], [.12, .9], [.2, .86], [.3, .55], [.42, .34], [.6, .26], [.8, .24], [1, .2]];
+    var pop = [[0, .1], [.2, .11], [.35, .22], [.5, .45], [.65, .66], [.8, .74], [.9, .75], [1, .72]];
+    var line = function (a) { var d = 'M' + X(a[0][0]) + ' ' + Y(a[0][1]); for (var i = 1; i < a.length; i++) { var p = a[i - 1], q = a[i], cx = (X(p[0]) + X(q[0])) / 2; d += ' C' + cx + ' ' + Y(p[1]) + ' ' + cx + ' ' + Y(q[1]) + ' ' + X(q[0]) + ' ' + Y(q[1]); } return d; };
+    var names = ['1 High stationary', '2 Early expanding', '3 Late expanding', '4 Low stationary', '5 Declining'];
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Demographic transition model with five stages">';
+    for (var k = 0; k < 5; k++) s += '<g class="dtm-st" data-st="' + (k + 1) + '" style="cursor:pointer"><rect x="' + (L + k * sw) + '" y="' + T0 + '" width="' + sw + '" height="' + (H - T0 - B) + '" fill="' + (mark === k + 1 ? 'rgba(245,158,11,0.25)' : (k % 2 ? '#f6f9fb' : '#ffffff')) + '" stroke="#e3eaee"/><text x="' + (L + k * sw + sw / 2) + '" y="' + (T0 - 10) + '" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0f3a5c">' + names[k] + '</text></g>';
+    s += '<path d="' + line(pop) + '" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="7 5" pointer-events="none"/><path d="' + line(br) + '" fill="none" stroke="#0284c7" stroke-width="3.5" pointer-events="none"/><path d="' + line(dr) + '" fill="none" stroke="#dc2626" stroke-width="3.5" pointer-events="none"/>';
+    s += '<text x="' + L + '" y="' + (H - 12) + '" font-size="12" fill="#4a6272">Time →</text></svg>';
+    return s;
+  }
+
+  /* ================= M1: DTM ================= */
+  function m1(body) {
+    var x0 = 1950, x1 = 2025;
+    body.insertAdjacentHTML('beforeend',
+      '<p>The <b>crude birth rate</b> and <b>crude death rate</b> are the numbers of births and deaths per 1,000 people per year. The shaded gap between them is the <b>natural increase</b>. Hover over (or tap) the graph to read the values.</p>' +
+      '<div class="chart" id="vit"></div><div class="legend"><span><i style="background:#0284c7"></i>Crude birth rate</span><span><i style="background:#dc2626"></i>Crude death rate</span><span><i style="background:rgba(245,158,11,0.35)"></i>Natural increase</span></div>' +
+      '<p class="src">Source: ' + esc(C.vitalSrc) + '</p>');
+    var c = lineChart({ x0: x0, x1: x1, yMax: 55, step: 10, label: 'Line graph of ' + C.name + '’s crude birth and death rates, 1950 to 2025', yLabel: 'Per 1,000 people per year',
+      gap: C.VITAL, series: [{ col: '#0284c7', pts: C.VITAL.map(function (p) { return [p[0], p[1]]; }) }, { col: '#dc2626', pts: C.VITAL.map(function (p) { return [p[0], p[2]]; }) }] });
+    $('vit').innerHTML = c.svg;
+    bindHover($('vit'), c, x0, x1, function (yr) { var p = nearest(C.VITAL, yr); return { yr: p[0], y: c.Y(p[1]), t: p[0] + ': births ' + p[1].toFixed(1) + ', deaths ' + p[2].toFixed(1) }; });
+    var g = C.id === 'g';
+    var dtm = '<div class="task' + (T.ans.m1e && T.ans.m1e.ok ? ' done' : '') + '" id="dtmTask"><span class="tnum">Question 5 · The demographic transition model</span><p><b>' +
+      (g ? 'The Gambia’s death rate is now low but its birth rate, although falling, is still high. Click the stage of the DTM The Gambia is in today.' : 'Singapore’s birth rate is only just above its death rate, and its fertility rate (0.87) is far below the replacement level of 2.1. Without immigration its citizen population will soon shrink. Click the stage Singapore is moving into.') +
+      '</b></p><div class="chart" id="dtm"></div><div class="legend"><span><i style="background:#0284c7"></i>Birth rate</span><span><i style="background:#dc2626"></i>Death rate</span><span><i style="background:#16a34a"></i>Total population</span></div><p class="fb" id="dtmfb"></p></div>';
+    var parts = g ? [
+      num('m1a', 'Question 1 · Fact file', 'Read the graph: what was The Gambia’s crude birth rate in 2025?', 29.3, 0.25, 'births per 1,000 people', 'The birth rate was 29.3 per 1,000 in 2025, down from about 50 in the 1950s.', 10),
+      num('m1b', 'Question 2 · Calculate', 'Calculate the rate of natural increase in 2025. Use: (birth rate − death rate) ÷ 10. Birth rate = 29.3, death rate = 6.2.', 2.31, 0.03, '% per year', '(29.3 − 6.2) ÷ 10 = 2.31% per year.', 15),
+      num('m1c', 'Question 3 · Doubling time', 'At this rate, how many years would it take the population to double? Use the “rule of 70”: 70 ÷ growth rate.', 70 / 2.31, 0.7, 'years', '70 ÷ 2.31 = about 30 years. At this rate The Gambia’s population would double roughly every 30 years.', 15),
+      num('m1d', 'Question 4 · Compare', 'Singapore’s birth rate in 2025 was 8.5 per 1,000. How many times higher is The Gambia’s birth rate (29.3)?', 29.3 / 8.5, 0.1, 'times higher', '29.3 ÷ 8.5 = 3.4. The Gambia’s birth rate is more than three times that of a high-income country such as Singapore.', 15)
+    ] : [
+      num('m1a', 'Question 1 · Read the graph', 'What was Singapore’s crude birth rate in 1960?', 36.7, 0.3, 'births per 1,000 people', 'In 1960 the birth rate was 36.7 per 1,000. By 2025 it was 8.5.', 10),
+      mcq('m1b', 'Question 2 · Interpret', 'In which decade did Singapore’s birth rate fall most steeply?', ['1950s', '1960s', '1990s', '2010s'], 1, 'It fell from 36.7 in 1960 to 21.5 in 1970, the decade of the family planning board, legal abortion and sterilisation, and the start of “Stop at Two”.', 15),
+      num('m1c', 'Question 3 · Calculate', 'Calculate the rate of natural increase in 2025. Use: (birth rate − death rate) ÷ 10. Birth rate = 8.5, death rate = 5.1.', 0.34, 0.02, '% per year', '(8.5 − 5.1) ÷ 10 = 0.34% per year, almost zero, and the death rate is rising as the population ages.', 15),
+      num('m1d', 'Question 4 · Calculate', 'Singapore’s resident fertility rate was 5.76 in 1960 and 0.87 in 2025. Calculate the percentage change.', -84.9, 0.2, '%', '(0.87 − 5.76) ÷ 5.76 × 100 = −84.9%. Women now have about one-seventh as many children as in 1960.', 20)
+    ];
+    mount(body, parts);
+    body.insertAdjacentHTML('beforeend', dtm);
+    function drawDtm() {
+      $('dtm').innerHTML = dtmSvg(T.ans.m1e && T.ans.m1e.ok ? C.STAGE : null);
+      if (T.ans.m1e && T.ans.m1e.ok) { $('dtmfb').className = 'fb ok'; $('dtmfb').textContent = '✓ ' + dtmWhy(); return; }
+      $('dtm').querySelectorAll('.dtm-st').forEach(function (gEl) { gEl.addEventListener('click', function () {
+        if (+gEl.dataset.st === C.STAGE) { T.ans.m1e = { ok: true }; $('dtmTask').classList.add('done'); award(15, gEl); save(); drawDtm(); }
+        else { $('dtmfb').className = 'fb bad'; $('dtmfb').textContent = g ? 'Not that stage. Look at how far the death rate has fallen and whether the birth rate is still high.' : 'Not that stage. Think about what happens when the birth rate falls to, or below, the death rate.'; }
+      }); });
+    }
+    function dtmWhy() { return g ? 'Stage 3 (late expanding): the death rate has fallen to about 6, and the birth rate is falling but still about 29, so the population grows quickly.' : 'Stage 5 (declining): fertility is far below replacement, so without immigration deaths will soon outnumber births. Today Singapore is on the boundary of stages 4 and 5.'; }
+    drawDtm();
+    mount(body, [g ?
+      writeTask('m1w', 'Exam skill · Describe (3 marks)', 'Describe the changes in The Gambia’s birth and death rates since 1950.', 'Overall trend → data with years → how the gap (natural increase) changed.',
+        'The death rate fell steadily from 32.6 per 1,000 in 1950 to about 6.2 in 2025. The birth rate stayed very high, around 47–51, until about 1990, then fell to 29.3 by 2025. Because deaths fell long before births, the gap between them widened, so natural increase was highest in the 1980s and 1990s and is still over 2% a year.',
+        'both rates · data with years · the change in the gap between them') :
+      writeTask('m1w', 'Exam skill · Describe (3 marks)', 'Describe the changes in Singapore’s birth and death rates since 1950.', 'Overall trend → data with years → how the gap (natural increase) changed.',
+        'The birth rate fell sharply from 44.3 per 1,000 in 1950 to 21.5 in 1970, then more slowly to 8.5 in 2025. The death rate fell from 12.3 to a low of about 3.9 in 2010 and has since risen to 5.1 as the population ages. As a result the gap between births and deaths has shrunk to almost nothing, from over 30 per 1,000 in 1950 to 3.4 in 2025.',
+        'both rates · data with years · the change in the gap between them')]);
+  }
+
+  /* ================= M2: PYRAMID ================= */
+  function pyrSvg(P, mark) {
+    var gr = pyrGroups(P), tot = gr.tot, i;
+    var W = 560, rowH = 18, T0 = 14, H = T0 + 21 * rowH + 40, mid = W / 2, gap = 30, maxP = P.maxP, half = mid - gap - 16;
+    var sc = function (pct) { return pct / maxP * half; };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Population pyramid for ' + C.name + ' in ' + P.year + '">';
+    for (var gl = 1; gl <= maxP; gl++) s += '<line x1="' + (mid - gap - sc(gl)) + '" x2="' + (mid - gap - sc(gl)) + '" y1="' + T0 + '" y2="' + (T0 + 21 * rowH) + '" stroke="#edf2f5"/><line x1="' + (mid + gap + sc(gl)) + '" x2="' + (mid + gap + sc(gl)) + '" y1="' + T0 + '" y2="' + (T0 + 21 * rowH) + '" stroke="#edf2f5"/><text x="' + (mid - gap - sc(gl)) + '" y="' + (T0 + 21 * rowH + 14) + '" text-anchor="middle" font-size="10.5" fill="#4a6272">' + gl + '%</text><text x="' + (mid + gap + sc(gl)) + '" y="' + (T0 + 21 * rowH + 14) + '" text-anchor="middle" font-size="10.5" fill="#4a6272">' + gl + '%</text>';
+    for (i = 0; i < 21; i++) {
+      var y = T0 + (20 - i) * rowH, pm = P.m[i] / tot * 100, pf = P.f[i] / tot * 100, hl = mark === i;
+      s += '<g class="bar-hit" data-age="' + i + '"><title>' + AGES[i] + ': males ' + pm.toFixed(2) + '%, females ' + pf.toFixed(2) + '%</title><rect x="0" y="' + y + '" width="' + W + '" height="' + rowH + '" fill="' + (hl ? 'rgba(245,158,11,0.18)' : 'transparent') + '"/>' +
+        '<rect x="' + (mid - gap - sc(pm)) + '" y="' + (y + 2) + '" width="' + sc(pm) + '" height="' + (rowH - 4) + '" rx="2" fill="#0f6b8f"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 2) + '" width="' + sc(pf) + '" height="' + (rowH - 4) + '" rx="2" fill="#c2416b"/>' +
+        '<text x="' + mid + '" y="' + (y + 13) + '" text-anchor="middle" font-size="10.5" fill="#062033">' + AGES[i] + '</text></g>';
+    }
+    s += '<text x="' + (mid - gap - 4) + '" y="' + (H - 6) + '" text-anchor="end" font-size="12" font-weight="700" fill="#0f6b8f">Males (% of total)</text><text x="' + (mid + gap + 4) + '" y="' + (H - 6) + '" font-size="12" font-weight="700" fill="#c2416b">Females (% of total)</text></svg>';
+    return s;
+  }
+  function m2(body) {
+    var P = C.PYR, gr = pyrGroups(P), g = C.id === 'g';
+    var young = gr.young / 1000, work = gr.work / 1000, old = gr.old / 1000;
+    var target = g ? { age: 0, q: 'Click the largest age group on the pyramid.', ok: 'Yes: 0–4 is the widest bar. Each younger group is larger than the one above it, showing a high and still-rising number of births.', bad: 'Not the widest. Look at the base.' }
+                   : { age: 5, q: 'Click the age group with the most males.', ok: 'Yes: 25–29. Look how much wider the male bars are than the female bars between ages 20 and 39.', bad: 'Not that one. Compare the length of the blue (male) bars.' };
+    body.insertAdjacentHTML('beforeend',
+      '<p>Bars show each age group as a percentage of the whole population. Hover over a bar to see its value.</p>' +
+      '<div class="pyr-wrap"><div><div class="chart pyr" id="pyr"></div><p class="src">Source: ' + esc(P.src) + '</p></div>' +
+      '<div style="display:flex;flex-direction:column;gap:10px"><h3>Key figures (' + P.year + ')</h3><div class="tblwrap"><table class="score"><tr><th>Age group</th><th>People (thousands)</th></tr>' +
+      '<tr><td>0–14 (young dependants)</td><td>' + fmt(young) + '</td></tr><tr><td>15–64 (working age)</td><td>' + fmt(work) + '</td></tr><tr><td>65+ (elderly dependants)</td><td>' + fmt(old) + '</td></tr><tr><td><b>Total</b></td><td><b>' + fmt(gr.tot / 1000) + '</b></td></tr></table></div>' +
+      (g ? '<p class="hint"><b>Looking ahead to 2050</b> (UN projection): about 4.3 million people, median age 26.1 (18.6 in 2025), fertility rate 2.38.</p>'
+         : '<p class="hint"><b>Citizens only</b> (Population in Brief 2025): 20.7% aged 65+, median age 43.7, and 2.9 citizens aged 20–64 for each citizen aged 65+ (4.9 in 2015, 2.4 projected for 2030).</p>') +
+      '</div></div>' +
+      '<div class="task' + (T.ans.m2a && T.ans.m2a.ok ? ' done' : '') + '" id="clicktask"><span class="tnum">Task 1 · Read the pyramid</span><p><b>' + target.q + '</b></p><p class="fb" id="ctfb">' + (T.ans.m2a && T.ans.m2a.ok ? '✓ ' + target.ok : '') + '</p></div>');
+    function draw() {
+      $('pyr').innerHTML = pyrSvg(P, T.ans.m2a && T.ans.m2a.ok ? target.age : null);
+      $('pyr').querySelectorAll('.bar-hit').forEach(function (gEl) { gEl.addEventListener('click', function () {
+        if (T.ans.m2a && T.ans.m2a.ok) return;
+        if (+gEl.dataset.age === target.age) { T.ans.m2a = { ok: true }; $('clicktask').classList.add('done'); $('ctfb').className = 'fb ok'; $('ctfb').textContent = '✓ ' + target.ok; award(10, gEl); save(); draw(); }
+        else { $('ctfb').className = 'fb bad'; $('ctfb').textContent = target.bad; }
+      }); });
+    }
+    draw();
+    var dr = (gr.young + gr.old) / gr.work * 100;
+    mount(body, g ? [
+      num('m2b', 'Task 2 · Calculate', 'What percentage of The Gambia’s population is aged 0–14? Use the table: 0–14 ÷ total × 100.', gr.young / gr.tot * 100, 0.3, '%', fmt(young) + ' ÷ ' + fmt(gr.tot / 1000) + ' × 100 = ' + (gr.young / gr.tot * 100).toFixed(1) + '%. Two in every five people are children.', 15),
+      num('m2c', 'Task 3 · Dependency ratio', 'Calculate the total dependency ratio. Use: (0–14 + 65+) ÷ 15–64 × 100.', dr, 0.4, 'dependants per 100 people of working age', '(' + fmt(young) + ' + ' + fmt(old) + ') ÷ ' + fmt(work) + ' × 100 = ' + dr.toFixed(1) + '. There are about 75 dependants for every 100 people of working age, almost all of them children.', 20),
+      mcq('m2d', 'Task 4 · Describe the shape', 'Which description best fits The Gambia’s pyramid?', ['Wide base, steeply narrowing sides and a narrow top: a young, expanding population', 'Narrow base and wide top: an ageing population', 'Straight sides: a stable population', 'A bulge of males aged 25–39'], 0, 'High birth rates give a wide base, and lower life expectancy (66 years) gives a narrow top. Only 3.2% of people are 65 or over.', 10),
+      mcq('m2e', 'Task 5 · Looking ahead', 'By 2050 the median age is projected to rise from 18.6 to 26.1 and the fertility rate to fall to 2.38. What will happen to the pyramid?', ['The base will narrow relative to the middle as today’s children move into working age', 'It will become top-heavy like Japan’s', 'It will not change', 'The base will get even wider relative to the rest'], 0, 'The large young generation will reach working age. If there are jobs, this “demographic dividend” could help the economy grow.', 15),
+      writeTask('m2w', 'Exam skill · Annotate (4 marks)', 'Write three annotations for The Gambia’s pyramid. For each: a feature → evidence → reason.', 'Example: “Wide base: 13.9% of people are aged 0–4, because the birth rate is still about 29 per 1,000.”',
+        '1) Wide base: 39.7% of people are under 15, because the fertility rate is still high (4.4) and only 17% of married women use modern contraception. 2) Each age group narrows quickly up the pyramid, and only 3.2% are over 65, because life expectancy (66) is still lower than in high-income countries. 3) Very few people aged 80+, reflecting high death rates in the past and limited health care for older people.',
+        'three features · a figure for each · a reason for each')
+    ] : [
+      mcq('m2b', 'Task 2 · Explain', 'Why are there so many more men than women aged 20–39?', ['Women in Singapore live shorter lives', 'The UN figures include non-residents: many foreign workers are young men, such as construction workers', 'There was a baby boom of boys in the 1990s', 'Women leave Singapore at 20'], 1, 'Singapore has 1.91 million non-residents, mainly work permit holders and domestic workers. This swells the working ages and hides how small the citizen base is.', 15),
+      num('m2c', 'Task 3 · Calculate', 'What percentage of Singapore’s whole population is aged 65+? Use the table: 65+ ÷ total × 100.', gr.old / gr.tot * 100, 0.2, '%', fmt(old) + ' ÷ ' + fmt(gr.tot / 1000) + ' × 100 = ' + (gr.old / gr.tot * 100).toFixed(1) + '%. Among citizens only it is higher: 20.7%.', 15),
+      num('m2d', 'Task 4 · Dependency ratio', 'Calculate the total dependency ratio. Use: (0–14 + 65+) ÷ 15–64 × 100.', dr, 0.4, 'dependants per 100 people of working age', '(' + fmt(young) + ' + ' + fmt(old) + ') ÷ ' + fmt(work) + ' × 100 = ' + dr.toFixed(1) + '. It looks low because foreign workers boost the working ages, but more and more of the dependants are elderly.', 20),
+      mcq('m2e', 'Task 5 · Interpret', 'The old-age support ratio for citizens is projected to fall to 2.4 by 2030. What does this mean?', ['There will be 2.4 citizens aged 65+ for every worker', 'There will be only 2.4 working-age citizens (20–64) to support each citizen aged 65+, compared with 4.9 in 2015', 'The number of elderly will fall by 2.4%', 'Each worker will have 2.4 children'], 1, 'Fewer workers per older person means more pressure on taxes, health care and families.', 15),
+      writeTask('m2w', 'Exam skill · Explain (4 marks)', 'Explain two features of Singapore’s population pyramid and what causes them.', 'Feature → evidence from the pyramid → reason.',
+        'First, the base is narrow: children aged 0–4 are only about 4% of the population, because the fertility rate is just 0.87. Second, there is a large bulge of working-age adults aged 20–39, especially men (for example, 330,000 men aged 25–29 compared with 266,000 women), because Singapore employs about 1.9 million non-residents, many of them young male foreign workers. The upper bars are also widening as the post-war baby boomers pass 65 and life expectancy reaches 84.',
+        'two features · data from the pyramid · a reason for each')
+    ]);
+  }
+
+  /* ================= SORTER (M3, M4) ================= */
+  function sorter(body, cards, bins, store, ansKey, intro) {
+    var TT = T;
+    var st = TT[store], placed = st.placed || {}, order = st.order && st.order.length === cards.length ? st.order : shuffle(cards.map(function (_, i) { return i; }));
+    st.order = order; save();
+    var cols = Math.min(bins.length, 4);
+    body.insertAdjacentHTML('beforeend',
+      '<p>' + intro + ' Drag each card into the correct box, or tap a card and then tap a box. Then press <b>Check</b>.</p>' +
+      '<div class="tray" id="tray" aria-label="Cards to sort"></div>' +
+      '<div class="bins" style="grid-template-columns:repeat(' + cols + ',minmax(0,1fr))">' + bins.map(function (b) { return '<div class="bin ' + b[2] + '" data-bin="' + b[0] + '" role="button" tabindex="0" aria-label="' + b[1] + '"><h4>' + b[1] + '</h4><div class="drop"></div></div>'; }).join('') + '</div>' +
+      '<div class="row"><button type="button" class="btn" id="chk">Check</button><button type="button" class="btn ghost" id="rs">Start again</button><span class="fb" id="sfb" aria-live="polite"></span></div>');
+    var selC = null, done = function () { return TT.ans[ansKey] && TT.ans[ansKey].ok; };
+    function render() {
+      $('tray').innerHTML = ''; body.querySelectorAll('.bin .drop').forEach(function (d) { d.innerHTML = ''; });
+      order.forEach(function (i) {
+        var c = document.createElement('button'); c.type = 'button'; c.className = 'card' + (done() ? ' right' : ''); c.textContent = cards[i].t; c.dataset.i = i;
+        var where = placed[i]; (where ? body.querySelector('.bin[data-bin="' + where + '"] .drop') : $('tray')).appendChild(c);
+      });
+      if (done()) { $('sfb').className = 'fb ok'; $('sfb').textContent = '✓ All correct!'; }
+    }
+    function put(i, bin) { if (done()) return; if (bin) placed[i] = bin; else delete placed[i]; st.placed = placed; save(); render(); }
+    render();
+    dragify(body, '.card', function (c, el) { var b = el && el.closest('.bin'); if (b) put(+c.dataset.i, b.dataset.bin); else if (el && el.closest('#tray')) put(+c.dataset.i, null); },
+      function (c) { if (done()) return; if (selC === c) { c.classList.remove('sel'); selC = null; return; } if (selC) selC.classList.remove('sel'); selC = c; c.classList.add('sel'); }, '.bin');
+    body.querySelectorAll('.bin').forEach(function (b) {
+      var act = function () { if (selC) { put(+selC.dataset.i, b.dataset.bin); selC = null; } };
+      b.addEventListener('click', function (e) { if (!e.target.closest('.card')) act(); });
+      b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+    });
+    $('chk').onclick = function () {
+      if (done()) return;
+      var wrong = 0, left = 0;
+      body.querySelectorAll('.card').forEach(function (c) { var i = +c.dataset.i; if (!placed[i]) { left++; return; } if (placed[i] === cards[i].a) c.classList.add('right'); else { c.classList.add('wrong'); wrong++; } });
+      var fb = $('sfb');
+      if (left) { fb.className = 'fb'; fb.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to sort.'; return; }
+      if (wrong) { fb.className = 'fb bad'; fb.textContent = wrong + ' in the wrong box (shown in red). Move them and check again.'; return; }
+      TT.ans[ansKey] = { ok: true }; save(); fb.className = 'fb ok'; fb.textContent = '✓ All ' + cards.length + ' correct!'; award(40, $('chk'));
+    };
+    $('rs').onclick = function () { if (done()) return; placed = {}; st.placed = placed; save(); render(); $('sfb').textContent = ''; };
+  }
+  function dragify(container, sel, onDrop, onTap, zoneSel) {
+    var drag = null;
+    container.addEventListener('pointerdown', function (e) { var c = e.target.closest(sel); if (!c || c.classList.contains('right') || c.disabled) return; drag = { c: c, x: e.clientX, y: e.clientY, moved: false }; try { c.setPointerCapture(e.pointerId); } catch (x) {} });
+    container.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      if (!drag.moved && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) { drag.moved = true; var r = drag.c.getBoundingClientRect(); drag.g = drag.c.cloneNode(true); drag.g.classList.add('ghost-drag'); drag.g.style.width = r.width + 'px'; drag.ox = drag.x - r.left; drag.oy = drag.y - r.top; document.body.appendChild(drag.g); drag.c.style.opacity = '.35'; }
+      if (drag.moved) { drag.g.style.left = (e.clientX - drag.ox) + 'px'; drag.g.style.top = (e.clientY - drag.oy) + 'px'; document.querySelectorAll(zoneSel).forEach(function (z) { z.classList.remove('over'); }); var el = document.elementFromPoint(e.clientX, e.clientY), z = el && el.closest(zoneSel); if (z) z.classList.add('over'); }
+    });
+    var end = function (e) { if (!drag) return; var d = drag; drag = null; document.querySelectorAll(zoneSel).forEach(function (z) { z.classList.remove('over'); }); if (d.moved) { d.g.remove(); d.c.style.opacity = ''; onDrop(d.c, document.elementFromPoint(e.clientX, e.clientY)); } else onTap(d.c); };
+    container.addEventListener('pointerup', end);
+    container.addEventListener('pointercancel', function () { if (drag) { if (drag.g) drag.g.remove(); drag.c.style.opacity = ''; drag = null; } });
+  }
+
+  /* ================= M3: CAUSES ================= */
+  function m3(body) {
+    var g = C.id === 'g';
+    sorter(body, C.CAUSES, C.sortBins, 'sort', 'm3', g ? 'Why is The Gambia’s population growing so fast? Some cards explain the high birth rate, some explain why the death rate fell, and some are not causes at all.' : 'Why does Singapore have so few babies and so many older people? Sort the cards. Watch out: some are not causes.');
+    mount(body, g ? [
+      mcq('m3b', 'Explain the link', 'Why does high child mortality lead to a high birth rate?', ['Parents have more children so that enough survive to help the family and care for them in old age', 'Hospitals encourage large families', 'It lowers the death rate', 'It makes contraception cheaper'], 0, 'These are sometimes called “insurance births”. When child survival improves, families usually choose to have fewer children, but only after a delay.', 10),
+      writeTask('m3w', 'Worksheet question 1 · Explain (4 marks)', 'What are the reasons for The Gambia’s high birth and fertility rates?', 'Give at least three reasons. For each: reason → evidence → explain why it raises the birth rate.',
+        'First, many families depend on farming, so children are an economic asset who help on the land and at home, and they are expected to support their parents in old age. Second, contraception is not widely used: only 17% of married women use a modern method, because of myths, religious objections, opposition from husbands and poor access in rural areas, where the fertility rate is highest (6.4 in Kuntaur). Third, early marriage is common: 23% of women aged 20–24 were married before 18, which lengthens the time women have children. Finally, high child mortality (about 1 in 18 children die before 5) encourages parents to have more children.',
+        'at least three reasons · data from the cards · an explanation of how each raises the birth rate')
+    ] : [
+      mcq('m3b', 'Explain the link', 'Why did Singapore’s birth rate stay low even after “Stop at Two” ended in 1986?', ['Small families had become normal, and the costs of housing, education and work pressure kept rising', 'Contraception was banned', 'The government still punished large families', 'The death rate rose'], 0, 'Social norms change slowly. Once couples expect to have one or two children and pay a lot for each, it is hard to persuade them to have more.', 10),
+      writeTask('m3w', 'Exam skill · Explain (4 marks)', 'Explain two reasons for Singapore’s very low fertility rate.', 'Reason → evidence → explain why it lowers fertility.',
+        'First, people are marrying later and more are staying single: the median age of brides is 29.1 and 29.6% of women aged 30–39 are single. Fewer years of marriage means fewer births. Second, raising a child is very expensive and time-consuming in Singapore: housing, education and private tuition are costly and working hours are long, so many couples decide to have only one child or none.',
+        'two reasons · data · a clear explanation for each')
+    ]);
+  }
+
+  /* ================= M4: ISSUES ================= */
+  function m4(body) {
+    var g = C.id === 'g';
+    sorter(body, C.ISSUES, C.issueBins, 'isort', 'm4', g ? 'A youthful, fast-growing population creates challenges. Who or what is mainly affected by each one?' : 'A low birth rate and an ageing population create challenges. Which part of Singapore is mainly affected by each one?');
+    mount(body, g ? [
+      mcq('m4b', 'Evaluate a claim', 'Your worksheet quotes: “population growth and poverty are always linked.” Which response is best?', ['True: every fast-growing country is poor', 'Not always: fast growth makes cutting poverty harder, but countries can grow richer while their population grows if they invest in education, health and jobs', 'False: population has no link to poverty', 'True: poverty only exists where birth rates are high'], 1, 'In The Gambia over half the people (53.4%) were poor in 2020, and poverty is highest in rural areas (76%) where birth rates are highest. But the link is not automatic: Singapore’s population grew quickly in the 1960s while it became richer.', 15),
+      writeTask('m4w', 'Worksheet question 5 · Explain (6 marks)', 'What are the consequences of a high dependency ratio for (1) governments and (2) families?', 'Two or three points for each. Use data: dependency ratio about 75, 39.7% under 15, 53.4% in poverty.',
+        '1) Governments: with about 75 dependants for every 100 people of working age, the government must spend heavily on schools, teachers and health care for 1.1 million children, while relatively few people earn enough to pay tax. Money spent on basic services cannot be used for roads, power or jobs, so development is slower. It must also create enough jobs for the large numbers leaving school each year, or young people may migrate. 2) Families: each working adult supports more children, so there is less money for food, uniforms and school costs, which keeps families in poverty (53.4% in 2020). Girls may be taken out of school to help at home or to marry, and frequent pregnancies put mothers’ health at risk.',
+        'governments AND families · at least two points each · data · consequences explained')
+    ] : [
+      mcq('m4b', 'Interpret', 'Singapore grants about 25,000 new citizenships a year. Why might this not be a long-term solution on its own?', ['Immigrants also get older, so ever more immigration is needed unless the birth rate rises', 'Immigrants cannot work', 'It is too cheap', 'It raises the birth rate too much'], 0, 'Immigration slows ageing, but new citizens age too. It also needs public support, which can be difficult when housing and jobs feel under pressure.', 15),
+      writeTask('m4w', 'Exam skill · Explain (6 marks)', 'Explain the consequences of Singapore’s low birth rate and ageing population for (1) the government and (2) families.', 'Two or three points for each. Use data: old-age support ratio 4.9 → 2.9 → 2.4, 20.7% of citizens aged 65+.',
+        '1) Government: the old-age support ratio has fallen from 4.9 working-age citizens per older citizen in 2015 to 2.9 in 2025 and is projected to be 2.4 by 2030, so fewer taxpayers support rising spending on health care and eldercare. Labour shortages mean Singapore depends on 1.91 million non-resident workers, and the citizen population could start to shrink in the early 2040s. 2) Families: with fewer siblings, adult children carry more of the cost and time of caring for elderly parents while also working and raising their own children, which adds to the pressures that keep birth rates low.',
+        'government AND families · at least two points each · data · consequences explained')
+    ]);
+  }
+
+  /* ================= M5: POLICIES ================= */
+  function m5(body) {
+    var at = 0, sel = -1, x0 = C.TFR[0][0], x1 = 2025;
+    body.insertAdjacentHTML('beforeend',
+      '<p>The line shows the ' + (C.id === 'g' ? '' : 'resident ') + 'total fertility rate. Tap a policy to see when it started. Then work through the sources: tag each policy, use the evidence, and <b>rate how effective it has been</b>.</p>' +
+      '<div class="chart" id="tfr"></div><div class="events" id="evs">' + C.MARKS.map(function (m, i) { return '<button type="button" class="ev" data-e="' + i + '">' + m[0] + ' · ' + esc(m[1]) + '</button>'; }).join('') + '</div>' +
+      '<p class="src">Source: ' + esc(C.tfrSrc) + '</p>' +
+      '<div class="stabs" id="stabs"></div><div id="sbody" style="display:flex;flex-direction:column;gap:14px"></div><div id="scard"></div>');
+    function drawT() {
+      var c = lineChart({ x0: x0, x1: x1, yMax: C.tfrMax, step: 1, label: 'Line graph of ' + C.name + '’s total fertility rate', yLabel: 'Children per woman (TFR)', ref: [2.1, 'Replacement level 2.1'], marks: C.MARKS, sel: sel, series: [{ col: C.acc, pts: C.TFR }] });
+      $('tfr').innerHTML = c.svg;
+      bindHover($('tfr'), c, x0, x1, function (yr) { var p = nearest(C.TFR, yr); return { yr: p[0], y: c.Y(p[1]), t: p[0] + ': ' + p[1].toFixed(2) + ' children per woman' }; });
+    }
+    drawT();
+    $('evs').onclick = function (e) { var b = e.target.closest('.ev'); if (!b) return; sel = +b.dataset.e; document.querySelectorAll('.ev').forEach(function (x) { x.classList.toggle('on', x === b); }); drawT(); };
+    function tabs() { $('stabs').innerHTML = C.POLICIES.map(function (s, i) { var st = T.src[s.id] || {}; return '<button type="button" class="stab' + (i === at ? ' on' : '') + (st.q === true && st.types === true ? ' done' : '') + '" data-s="' + i + '">' + esc(s.tab) + '</button>'; }).join(''); }
+    function show() {
+      tabs(); var s = C.POLICIES[at], st = T.src[s.id] = T.src[s.id] || { tsel: [], rate: 3, why: '' };
+      $('sbody').innerHTML =
+        '<article class="article"><span class="by">Source ' + s.id + '</span><div class="hd">' + esc(s.hd) + '</div>' + s.p.map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') + '<div class="cite">' + esc(s.by) + '. <a href="' + s.url + '" target="_blank" rel="noopener">Original</a></div></article>' +
+        '<div class="task' + (st.types === true ? ' done' : '') + '" id="ttask"><span class="tnum">Step 1 · Tag the policy type</span><p><b>What type of policy does this source describe? Select all that apply, then check.</b></p><div class="chips">' +
+          C.TYPES.map(function (t) { var on = st.tsel.indexOf(t) >= 0; var c = st.types === true ? (s.types.indexOf(t) >= 0 ? ' right' : '') : (on ? ' sel' : ''); return '<button type="button" class="chip' + c + '" data-t="' + esc(t) + '">' + esc(t) + '</button>'; }).join('') +
+          '</div><div class="row"><button type="button" class="btn" id="tchk"' + (st.types === true ? ' disabled' : '') + '>Check</button><span class="fb" id="tfb">' + (st.types === true ? '✓ Correct.' : '') + '</span></div></div>' +
+        '<div class="task' + (st.q === true ? ' done' : '') + '" id="qtask"><span class="tnum">Step 2 · Use the evidence</span><p><b>' + esc(s.q) + '</b></p><div class="opts">' +
+          s.o.map(function (o, k) { return '<button type="button" class="opt' + (st.q === true && k === s.a ? ' right' : '') + '" data-k="' + k + '"' + (st.q === true ? ' disabled' : '') + '>' + esc(o) + '</button>'; }).join('') +
+          '</div><p class="fb' + (st.q === true ? ' ok' : '') + '" id="qfb">' + (st.q === true ? '✓ ' + esc(s.why) : '') + '</p></div>' +
+        '<div class="task"><span class="tnum">Step 3 · Evaluate</span><p><b>How effective has this policy been' + (C.id === 'g' ? ' at slowing population growth or managing its impacts' : ' at raising the birth rate or managing the shrinking population') + '?</b></p><div class="rate"><input type="range" min="1" max="5" step="1" value="' + st.rate + '" id="rate" aria-label="Effectiveness rating from 1 to 5"><b id="rlab"></b></div>' +
+          '<textarea id="rwhy" placeholder="It has been effective / not very effective because… The evidence is… However…" aria-label="Why did you give this rating?">' + esc(st.why) + '</textarea></div>' +
+        '<div class="navrow">' + (at > 0 ? '<button type="button" class="btn ghost" id="prev">← Source ' + C.POLICIES[at - 1].id + '</button>' : '<span></span>') + (at < C.POLICIES.length - 1 ? '<button type="button" class="btn" id="next">Source ' + C.POLICIES[at + 1].id + ' →</button>' : '') + '</div>';
+      var rate = $('rate'); $('rlab').textContent = st.rate + ' · ' + RLAB[st.rate];
+      rate.oninput = function () { st.rate = +rate.value; st.touched = true; $('rlab').textContent = st.rate + ' · ' + RLAB[st.rate]; save(); score(); };
+      var tt = null; $('rwhy').oninput = function (e) { st.why = e.target.value; st.touched = true; clearTimeout(tt); tt = setTimeout(function () { save(); score(); }, 400); };
+      document.querySelectorAll('#ttask .chip').forEach(function (c) { c.onclick = function () { if (st.types === true) return; var t = c.dataset.t, k = st.tsel.indexOf(t); if (k >= 0) st.tsel.splice(k, 1); else st.tsel.push(t); c.classList.toggle('sel'); save(); }; });
+      $('tchk').onclick = function () {
+        var ok = st.tsel.length === s.types.length && s.types.every(function (t) { return st.tsel.indexOf(t) >= 0; });
+        if (ok) { st.types = true; save(); award(10, $('tchk')); show(); }
+        else { $('tfb').className = 'fb bad'; $('tfb').textContent = st.tsel.length < s.types.length ? 'Choose a tag that fits. Read the source again.' : 'Not quite. One of your tags does not fit this source.'; }
+      };
+      document.querySelectorAll('#qtask .opt').forEach(function (b) { b.onclick = function () {
+        if (st.q === true) return;
+        if (+b.dataset.k === s.a) { st.q = true; save(); award(10, b); show(); }
+        else { b.classList.add('wrong'); $('qfb').className = 'fb bad'; $('qfb').textContent = 'Not the best answer. Look for the evidence in the source.'; setTimeout(function () { b.classList.remove('wrong'); }, 900); }
+      }; });
+      if ($('prev')) $('prev').onclick = function () { at--; show(); };
+      if ($('next')) $('next').onclick = function () { at++; show(); window.scrollTo({ top: $('stabs').offsetTop - 80, behavior: 'smooth' }); };
+      $('stabs').onclick = function (e) { var b = e.target.closest('[data-s]'); if (b) { at = +b.dataset.s; show(); } };
+      score();
+    }
+    function score() {
+      if (!$('scard')) return;
+      $('scard').innerHTML = '<h3>My policy scorecard</h3><div class="tblwrap"><table class="score"><tr><th>Policy</th><th>Type</th><th>My rating (1–5)</th><th>My reason</th></tr>' +
+        C.POLICIES.map(function (s) { var st = T.src[s.id] || {}; return '<tr><td>' + esc(s.tab) + '</td><td>' + esc(s.types.join(', ')) + '</td><td>' + (st.rate || 3) + '</td><td>' + esc(st.why || '') + '</td></tr>'; }).join('') + '</table></div>';
+    }
+    show();
+    mount(body, [C.id === 'g' ?
+      writeTask('m5w', 'IB-style question (5 marks)', 'Analyse the anti-natalist policy of a country you have studied (The Gambia).', 'Plan: what the policy aims to do → how it works (two or three named measures) → evidence of its effect → a limitation → a short judgement.', null,
+        'at least three policies · data (TFR 5.6 → 4.4, contraception 8% → 17%, parity in schools) · limitations (unmet demand, cultural resistance, aid dependence) · a clear judgement') :
+      writeTask('m5w', 'IB-style question (5 marks)', 'Analyse the pro-natalist policy of a country you have studied (Singapore).', 'Plan: why Singapore needs the policy → how it works (two or three named measures with dates) → evidence of its effect on the fertility rate → a limitation → a short judgement.', null,
+        'at least three policies with dates · data (TFR 1.96 in 1988, 1.60 in 2000, 0.87 in 2025) · reasons for limited success · immigration as an alternative · a clear judgement')]);
+  }
+
+  /* ================= M6: DECISION ================= */
+  function m6(body) {
+    var D = C.DECIDE;
+    body.insertAdjacentHTML('beforeend',
+      '<p>' + D.intro + '</p>' +
+      '<div class="pm-grid"><div class="pols" id="pols"></div><aside class="dash" aria-live="polite"><div class="budget" id="bud"></div><div id="meters" style="display:flex;flex-direction:column;gap:8px"></div><p class="src">A simplified model for discussion: real effects are debated and take years.</p></aside></div>' +
+      '<div id="cmp"></div>');
+    var card = function (id) { return D.cards.filter(function (p) { return p.id === id; })[0]; };
+    function spent() { return T.pm.reduce(function (a, id) { return a + card(id).cost; }, 0); }
+    function draw() {
+      $('pols').innerHTML = D.cards.map(function (p) { var on = T.pm.indexOf(p.id) >= 0; return '<button type="button" class="pol' + (on ? ' on' : '') + '" data-p="' + p.id + '" aria-pressed="' + on + '"><b>' + esc(p.name) + '</b><span class="cost">Cost: ' + p.cost + ' point' + (p.cost === 1 ? '' : 's') + '</span></button>'; }).join('');
+      var sp = spent(); $('bud').textContent = 'Budget used: ' + sp + ' / ' + D.budget + ' points · ' + T.pm.length + ' policies chosen';
+      var tot = {}; D.meters.forEach(function (m) { tot[m[0]] = 0; });
+      T.pm.forEach(function (id) { var p = card(id); for (var k in tot) tot[k] += p.e[k] || 0; });
+      $('meters').innerHTML = D.meters.map(function (m) { var v = Math.max(-8, Math.min(8, tot[m[0]])), w = Math.abs(v) / 8 * 50, col = v >= 0 ? '#16a34a' : '#dc2626'; return '<div class="meter"><span>' + m[1] + '</span><span class="trk"><span style="' + (v >= 0 ? 'left:50%' : 'left:' + (50 - w) + '%') + ';width:' + w + '%;background:' + col + '"></span></span><span class="v">' + (v > 0 ? 'Better +' + v : v < 0 ? 'Worse ' + v : 'No change') + '</span></div>'; }).join('');
+      $('cmp').innerHTML = T.pm.length ? '<h3>What the evidence says about your choices</h3><div class="tblwrap"><table class="score cmp"><tr><th>Your policy</th><th>Evidence and reality check</th></tr>' + T.pm.map(function (id) { var p = card(id); return '<tr><td>' + esc(p.name) + '</td><td>' + esc(p.note) + '</td></tr>'; }).join('') + '</table></div><p class="model">' + esc(D.actual) + '</p>' : '';
+      $('pols').querySelectorAll('.pol').forEach(function (b) { b.onclick = function () {
+        var id = b.dataset.p, k = T.pm.indexOf(id), p = card(id);
+        if (k >= 0) T.pm.splice(k, 1); else { if (spent() + p.cost > D.budget) { toast('Over budget: drop a policy first.'); return; } T.pm.push(id); }
+        save(); draw();
+      }; });
+    }
+    draw();
+    mount(body, [
+      writeTask('pm1', 'Your decision', 'Which policies would you choose and why?', 'Frame: “I would… because… The evidence from Source … shows… This is similar to / different from what ' + C.name + ' is doing, which… The biggest risk of my plan is…”', null,
+        'at least four policies · evidence from the sources or data · a comparison with what the government is actually doing · one risk or limitation · why you rejected at least one option')
+    ]);
+  }
+
+  /* ================= STARTER: CARROT OR STICK ================= */
+  var STARTER = [
+    { t: 'Anti · Family planning clinics in every town', a: 'carrot' },
+    { t: 'Anti · A pay bonus if everyone at a factory agrees to have no more than two children', a: 'carrot' },
+    { t: 'Anti · Posters of celebrities who have only one or two children', a: 'carrot' },
+    { t: 'Anti · Good old-age pensions, so parents do not rely on children', a: 'carrot' },
+    { t: 'Anti · Teach every pupil about birth control', a: 'carrot' },
+    { t: 'Anti · Plenty of good careers and jobs for women', a: 'carrot' },
+    { t: 'Anti · A special tax on nappies and baby food', a: 'stick' },
+    { t: 'Anti · Free school places for a first or second child only', a: 'stick' },
+    { t: 'Anti · Refuse public housing to families with more than three children', a: 'stick' },
+    { t: 'Anti · Raise the legal age of marriage', a: 'stick' },
+    { t: 'Anti · China’s one-child policy: fines for an extra child (1979–2015)', a: 'stick' },
+    { t: 'Pro · Singapore’s Baby Bonus: a cash gift for each new baby', a: 'carrot' },
+    { t: 'Pro · Paid leave for mothers and fathers', a: 'carrot' },
+    { t: 'Pro · Cheaper childcare and preschool', a: 'carrot' },
+    { t: 'Pro · Romania (1966): abortion and most contraception banned', a: 'stick' },
+    { t: 'Pro · A tax on adults who have no children', a: 'stick' }
+  ];
+  var STARTER_BINS = [['carrot', '🥕 Carrot: makes life better if people follow the plan', 'b3'], ['stick', '🪵 Stick: makes life harder if they don’t', 'b2']];
+  function starter() {
+    var box = $('starter'); if (!box) return;
+    S.st = S.st || { ans: {}, sort: {} };
+    var keepT = T; T = S.st;
+    box.insertAdjacentHTML('beforeend', '<p><b>Carrot</b> = encouraging people by making life better for them if they go along with the plan. <b>Stick</b> = making people go along with the plan by making life more difficult if they don’t. Each card says whether the policy is <b>anti</b>-natalist (fewer children) or <b>pro</b>-natalist (more children).</p>');
+    sorter(box, STARTER, STARTER_BINS, 'sort', 'st', 'Sort these population policies into carrot and stick methods.');
+    mount(box, [mcq('st2', 'Think', 'Which kind of approach is generally more acceptable in a democracy, and why?', ['Carrots: they reward people without taking away their choices', 'Sticks: they work faster so people prefer them', 'Neither is ever used', 'Sticks: they cost nothing'], 0, 'Sticks can work quickly but restrict human rights (China, Romania). Most democracies, including The Gambia and Singapore today, rely mainly on carrots.', 10)]);
+    T = keepT;
+  }
+
+  /* ================= ONENOTE ================= */
+  function notesFor(id, i) {
+    var k = CASES[id], st = S.c[id], h = '', t = '';
+    var H = function (x) { h += '<h2>' + esc(x) + '</h2>'; t += '\n' + x.toUpperCase() + '\n'; };
+    var P = function (lbl, v) { h += '<p><b>' + esc(lbl) + '</b> ' + esc(v || '(not answered yet)').replace(/\n/g, '<br>') + '</p>'; t += lbl + ' ' + (v || '(not answered yet)') + '\n'; };
+    var TB = function (head, rows) { h += '<table border="1" style="border-collapse:collapse"><tr>' + head.map(function (x) { return '<th style="padding:4px 8px">' + esc(x) + '</th>'; }).join('') + '</tr>' + rows.map(function (r) { t += r.join(' | ') + '\n'; return '<tr>' + r.map(function (x) { return '<td style="padding:4px 8px;vertical-align:top">' + esc(x) + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>'; };
+    var gr = pyrGroups(k.PYR), g = id === 'g';
+    H(k.flag + ' ' + k.name + ' · Briefing ' + (i + 1) + ': ' + MISSIONS[i].t);
+    if (i === 0) {
+      var last = k.VITAL[k.VITAL.length - 1];
+      P('Birth rate / death rate 2025:', last[1] + ' / ' + last[2] + ' per 1,000');
+      P('Natural increase 2025:', ((last[1] - last[2]) / 10).toFixed(2) + '% per year');
+      if (g) { P('Doubling time:', 'about 30 years (70 ÷ 2.31)'); P('Birth rate compared with Singapore:', '3.4 times higher'); P('DTM stage:', 'Stage 3 (late expanding)'); }
+      else { P('Fertility rate:', '5.76 (1960) → 0.87 (2025), a fall of 84.9%'); P('DTM stage:', 'On the boundary of stages 4 and 5, moving into stage 5 (declining)'); }
+      P('Describe the changes (my answer):', st.notes.m1w);
+    } else if (i === 1) {
+      P('Pyramid year:', String(k.PYR.year));
+      P('Aged 0–14 / 15–64 / 65+:', (gr.young / gr.tot * 100).toFixed(1) + '% / ' + (gr.work / gr.tot * 100).toFixed(1) + '% / ' + (gr.old / gr.tot * 100).toFixed(1) + '%');
+      P('Total dependency ratio:', ((gr.young + gr.old) / gr.work * 100).toFixed(1));
+      if (g) P('2050 (UN projection):', 'about 4.3 million people, median age 26.1, fertility rate 2.38');
+      else P('Citizens:', '20.7% aged 65+; old-age support ratio 4.9 (2015) → 2.9 (2025) → 2.4 (2030 projected)');
+      P(g ? 'Annotations (my answer):' : 'Two features explained (my answer):', st.notes.m2w);
+    } else if (i === 2) {
+      TB(k.sortBins.map(function (b) { return b[1]; }), [k.sortBins.map(function (b) { return k.CAUSES.filter(function (c) { return c.a === b[0]; }).map(function (c) { return c.t; }).join('; '); })]);
+      P('My explanation:', st.notes.m3w);
+    } else if (i === 3) {
+      TB(k.issueBins.map(function (b) { return b[1]; }), [k.issueBins.map(function (b) { return k.ISSUES.filter(function (c) { return c.a === b[0]; }).map(function (c) { return c.t; }).join('; '); })]);
+      P('Consequences (my answer):', st.notes.m4w);
+    } else if (i === 4) {
+      TB(['Policy', 'Type', 'My rating (1–5)', 'My reason'], k.POLICIES.map(function (p) { var s = st.src[p.id] || {}; return [p.tab, p.types.join(', '), String(s.rate || 3), s.why || '']; }));
+      P('Exam answer (5 marks):', st.notes.m5w);
+    } else {
+      var card = function (cid) { return k.DECIDE.cards.filter(function (p) { return p.id === cid; })[0]; };
+      TB(['My policy', 'Evidence and reality check'], st.pm.map(function (cid) { var p = card(cid); return [p.name, p.note]; }));
+      P('What the government is doing:', k.DECIDE.actual);
+      P('My decision:', st.notes.pm1);
+    }
+    return { h: h, t: t };
+  }
+  function caseNotes(id) {
+    var k = CASES[id], h = '<h1>' + k.flag + ' ' + esc(k.name) + ' · ' + k.type + ' policy · my case file</h1>', t = k.name.toUpperCase() + ' · MY CASE FILE\n';
+    for (var i = 0; i < 6; i++) { var n = notesFor(id, i); h += n.h; t += n.t; }
+    return { h: h, t: t };
+  }
+  function allNotes() {
+    var h = '<h1>Population Policy Lab · my notes</h1><p><i>Learning intention: to engage with issues that have local and global significance.</i></p>', t = 'POPULATION POLICY LAB · MY NOTES\n';
+    ['g', 's'].forEach(function (id) { var n = caseNotes(id); h += n.h; t += n.t; });
+    h += '<h2>Comparison: pro-natalist and anti-natalist policies</h2><p>' + esc(S.notes.cmp || '(not answered yet)').replace(/\n/g, '<br>') + '</p>';
+    t += '\nCOMPARISON\n' + (S.notes.cmp || '(not answered yet)') + '\n';
+    h += '<p><small>From SBL · Population Policy Lab</small></p>';
+    return { h: h, t: t };
+  }
+  function copyNotes(n) {
+    var html = '<div style="font-family:Calibri,Arial,sans-serif">' + n.h + '</div>';
+    var done = function () { toast('Copied. Paste it into OneNote with Ctrl+V.'); };
+    var fallback = function () {
+      var ta = document.createElement('textarea'); ta.value = n.t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { toast('Select and copy the text manually.'); } ta.remove();
+    };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([n.t], { type: 'text/plain' }) })]).then(done, function () {
+          if (navigator.clipboard.writeText) navigator.clipboard.writeText(n.t).then(done, fallback); else fallback();
+        });
+      } else if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(n.t).then(done, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  /* ================= TEACHER ================= */
+  function checkTeacher() {
+    try {
+      fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        IS_T = !!(d && d.loggedIn && d.user && d.user.status === 'active' && (d.user.role === 'teacher' || d.user.role === 'admin'));
+        if (IS_T && view === 'home' && $('tRow')) $('tRow').hidden = false;
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  function keyHtml() {
+    var li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+    var h = '<h3>Starter · Carrot or stick</h3>' + STARTER_BINS.map(function (b) { return '<p><b>' + b[1] + ':</b> ' + STARTER.filter(function (c) { return c.a === b[0]; }).map(function (c) { return esc(c.t); }).join('; ') + '</p>'; }).join('');
+    ['g', 's'].forEach(function (id) {
+      var k = CASES[id], gr = pyrGroups(k.PYR), g = id === 'g', last = k.VITAL[k.VITAL.length - 1];
+      h += '<h3>' + k.flag + ' ' + k.name + '</h3>';
+      h += '<h4>Briefing 1 · DTM</h4>' + li(g ? ['Birth rate 2025: 29.3', 'Natural increase: (29.3 − 6.2) ÷ 10 = 2.31%', 'Doubling time: 70 ÷ 2.31 ≈ 30.3 years', '29.3 ÷ 8.5 = 3.4 times Singapore’s', 'DTM: stage 3 (late expanding)'] : ['Birth rate 1960: 36.7', 'Steepest fall: 1960s (36.7 → 21.5)', 'Natural increase: (8.5 − 5.1) ÷ 10 = 0.34%', 'TFR change: (0.87 − 5.76) ÷ 5.76 × 100 = −84.9%', 'DTM: stage 5 (on the 4/5 boundary)']);
+      h += '<h4>Briefing 2 · Pyramid (' + k.PYR.year + ')</h4>' + li(g ? ['Largest group: 0–4', '% aged 0–14: ' + (gr.young / gr.tot * 100).toFixed(1), 'Dependency ratio: ' + ((gr.young + gr.old) / gr.work * 100).toFixed(1), 'Shape: wide base, narrow top (young, expanding)', '2050: base narrows relative to the middle (demographic dividend)'] : ['Most males: 25–29', 'Male bulge 20–39: non-resident foreign workers', '% aged 65+: ' + (gr.old / gr.tot * 100).toFixed(1), 'Dependency ratio: ' + ((gr.young + gr.old) / gr.work * 100).toFixed(1), 'OASR 2.4 = 2.4 citizens aged 20–64 per citizen aged 65+']);
+      h += '<h4>Briefing 3 · Causes</h4>' + k.sortBins.map(function (b) { return '<p><b>' + b[1] + ':</b> ' + k.CAUSES.filter(function (c) { return c.a === b[0]; }).map(function (c) { return esc(c.t); }).join('; ') + '</p>'; }).join('');
+      h += '<h4>Briefing 4 · Issues</h4>' + k.issueBins.map(function (b) { return '<p><b>' + b[1] + ':</b> ' + k.ISSUES.filter(function (c) { return c.a === b[0]; }).map(function (c) { return esc(c.t); }).join('; ') + '</p>'; }).join('');
+      h += '<h4>Briefing 5 · Policies</h4>' + li(k.POLICIES.map(function (p) { return '<b>' + p.id + '</b> (' + esc(p.types.join(', ')) + '): ' + esc(p.o[p.a]) + '. ' + esc(p.why); }));
+      h += '<h4>Briefing 6 · Decision cards</h4>' + li(k.DECIDE.cards.map(function (p) { return '<b>' + esc(p.name) + '</b> (cost ' + p.cost + '): ' + esc(p.note); }));
+    });
+    return h + '<p class="muted">Open answers are marked by the teacher. Model answers appear to students only after they write their own.</p>';
+  }
+  function answerKey() {
+    if (!IS_T) return;
+    view = 'key';
+    $('app').innerHTML = '<section class="panel key"><span class="kicker teal">Teacher answer key</span><h2>Population Policy Lab</h2>' + keyHtml() +
+      '<button type="button" class="btn ghost" id="kBack" style="align-self:flex-start">← Back</button></section>';
+    $('kBack').onclick = home; window.scrollTo(0, 0);
+  }
+  /* SBL teacher tools (shared bottom-left button, teacher accounts only) */
+  window.SBL_TEACHER_ADAPTER = {
+    key: function () { return '<h3>Population Policy Lab</h3>' + keyHtml(); },
+    unlock: function (on) { S.unlock = !!on; save(); if (view === 'home') home(); else if (view === 'case' && C) caseHome(C.id); },
+    unlockLabel: 'briefings'
+  };
+
+  hud(); home(); checkTeacher();
+})();
+</script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
