@@ -18,6 +18,7 @@
   // Slots that hold a link instead of a file: live OneNote pages, and
   // mark scheme links (shown under the PPQ file in the PPQs column).
   var LINK_TYPES = ['diagrams', 'ppq_markscheme'];
+  var MAX_LINKS = 5; // links per slot (the server allows the same)
   var LINK_LABELS = { diagrams: 'OneNote page', ppq_markscheme: 'Mark scheme' };
   var TYPE_LABELS = { ppq_markscheme: 'Mark scheme' };
   function linkLabel(type) { return LINK_LABELS[type] || 'Link'; }
@@ -217,6 +218,11 @@
         startLinkEdit(btn.getAttribute('data-lesson-id'), btn.getAttribute('data-resource-type'));
       });
     });
+    root.querySelectorAll('[data-link-add-btn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        startLinkEdit(btn.getAttribute('data-lesson-id'), btn.getAttribute('data-resource-type'), true);
+      });
+    });
   }
 
   function renderSlotCell(lessonId, type) {
@@ -236,7 +242,8 @@
         cell += '<span class="sbl-res-slot__empty">No link yet</span>';
       }
       cell += '<span class="sbl-res-slot__actions">';
-      cell += '<button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" data-link-btn ' + ids + '>' + (resource ? 'Change link' : 'Add link') + '</button>';
+      cell += '<button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" data-link-btn ' + ids + '>' + (resource ? 'Change link' + (links.length > 1 ? 's' : '') : 'Add link') + '</button>';
+      if (links.length && links.length < MAX_LINKS) cell += '<button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" data-link-add-btn ' + ids + '>+ Add another link</button>';
       if (resource) cell += '<button type="button" class="sbl-btn sbl-btn--danger sbl-btn--small" data-delete-btn data-resource-id="' + escapeHtml(resource.id || '') + '" ' + ids + '>Remove</button>';
       cell += '</span></div>';
       return cell;
@@ -274,8 +281,7 @@
   // In OneNote: right-click a page in the page list, Copy link to
   // page, then paste it here. Up to MAX_LINKS links per lesson; the
   // server keeps only the https part of each.
-  var MAX_LINKS = 5;
-  function startLinkEdit(lessonId, type) {
+  function startLinkEdit(lessonId, type, addBlank) {
     var cell = body.querySelector('[data-slot-cell="' + lessonId + '|' + type + '"]');
     if (!cell) return;
     var existing = state.resources[resourceKey(lessonId, type)];
@@ -309,7 +315,9 @@
       return input;
     }
     current.forEach(function (u) { addInput(u); });
-    list.querySelector('input').focus();
+    var inputs = list.querySelectorAll('input');
+    if (addBlank && current[0] && inputs.length < MAX_LINKS) addInput('').focus();
+    else inputs[0].focus();
     addBtn.addEventListener('click', function () { addInput('').focus(); });
 
     function save() {
