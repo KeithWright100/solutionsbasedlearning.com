@@ -789,10 +789,23 @@
   });
 
   render1();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>The 12 plans</h3><table><tr><th>Plan</th><th>Type</th><th>Cost ($m)</th><th>Why</th></tr>' + S.map(function (s) { return '<tr><td>' + s.emo + ' ' + s.t + '</td><td>' + P[s.cat] + '</td><td>' + s.cost + '</td><td>' + (s.why || '') + '</td></tr>'; }).join('') + '</table>';
+    h += '<h3>Final questions</h3>' + _ol(Q3.map(function (q) { return q.p + '<br><span class="ok">' + q.o[q.c] + '</span><br><span class="muted">' + (q.fb || '') + '</span>'; }));
+    return h + '<p class="muted">The storm news reports respond to the plans each student chooses, so there is no single correct package.</p>';
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

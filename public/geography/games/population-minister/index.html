@@ -777,10 +777,24 @@
   });
 
   renderStart();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Countries</h3>' + _li(Object.keys(COUNTRIES).map(function (k) { var c = COUNTRIES[k]; return '<b>' + c.flag + ' ' + c.name + '</b> (' + c.type + '): ' + c.blurb; }));
+    h += '<h3>Policies and their effects</h3><table><tr><th>Group</th><th>Policy</th><th>Cost</th><th>Effect</th></tr>' + POLICIES.map(function (p) { return '<tr><td>' + p.group + '</td><td>' + p.emo + ' ' + p.name + '<br><span class="muted">' + p.text + '</span></td><td>' + p.cost + '</td><td>' + (p.eff || '') + '</td></tr>'; }).join('') + '</table>';
+    h += '<h3>Events</h3>' + _li(EVENTS.map(function (e) { return '<b>' + e.emo + ' ' + e.title + '</b>: ' + (e.link || e.text || ''); }));
+    return h + '<p class="muted">This is a simulation: there is no single correct answer. Strong plans match the policies to the country’s problem (ageing or youthful).</p>';
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

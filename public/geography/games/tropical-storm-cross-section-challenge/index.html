@@ -1237,8 +1237,29 @@ fmUpdateScore(0);
 });
 
 </script>
+<script>
+/* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+(function () {
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = {
+    key: function () {
+      var src = document.querySelector('.hotspot') && document.querySelector('.hotspot').parentElement;
+      var h = '<h3>Diagram labels</h3>';
+      if (src) { var c = src.cloneNode(true); c.querySelectorAll('.hotspot').forEach(function (s) { s.innerHTML = '<div class="label" style="pointer-events:none">' + s.dataset.answer + '</div>'; s.classList.add('correct'); }); c.style.pointerEvents = 'none'; h += '<div style="overflow:auto">' + c.outerHTML + '</div>'; }
+      h += _li([].map.call(document.querySelectorAll('.hotspot'), function (s) { return '<b>' + s.id.replace(/-/g, ' ') + '</b>: ' + s.dataset.answer; }));
+      return h + '<h3>Storm Expert Challenge (model answer)</h3><p>The strongest winds are in the eye wall because it is where the air pressure changes most steeply, from the very low pressure at the centre to higher pressure outside. Warm, moist air spirals in and rises fastest here, releasing latent heat that powers the storm. In the eye, air is sinking, so it is calm and often clear.</p><p class="muted">The Final Mission appears after a perfect 9/9.</p>';
+    },
+    unlock: function (on) { var c = document.getElementById('challenge'); if (c) c.style.display = on ? 'block' : ''; if (on && typeof revealFinalMission === 'function') revealFinalMission(); },
+    unlockLabel: 'tasks'
+  };
+})();
+</script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

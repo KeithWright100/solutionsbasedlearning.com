@@ -455,9 +455,22 @@
   }
 
   paintHud(); round1();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Sort the statements</h3><table><tr><th>Statement</th><th>Answer</th><th>Why</th></tr>' + CARDS.map(function (c) { return '<tr><td>' + c.t + '</td><td>' + ZONES[c.z].label + '</td><td>' + (c.why || '') + '</td></tr>'; }).join('') + '</table>';
+    h += '<h3>Compare the themes</h3><table><tr><th>Theme</th><th>Rohingya</th><th>Haiti</th><th>Model sentence</th></tr>' + THEMES.map(function (t) { return '<tr><td><b>' + t.name + '</b><br>' + t.q + '<br><span class="muted">' + (t.a === 'diff' ? 'Difference' : 'Similarity') + '</span></td><td>' + t.r + '</td><td>' + t.h + '</td><td>' + t.model + '</td></tr>'; }).join('') + '</table>';
+    return h + '<h3>Essay questions (open)</h3>' + _ol(QUESTIONS);
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

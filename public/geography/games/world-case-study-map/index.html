@@ -648,6 +648,19 @@ function renderPyramidSVG(wrap, bands) {
 }
 
 </script>
+<script>
+/* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+(function () {
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
 
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    return '<p>This is a reference map with no scored answers. Case studies on the map:</p>' + _li(CASE_STUDIES.map(function (c) { return '<b>' + c.label + '</b>: ' + c.title + ' <span class="muted">(' + (c.paper || '') + ')</span>'; }));
+  } };
+})();
+</script>
+
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

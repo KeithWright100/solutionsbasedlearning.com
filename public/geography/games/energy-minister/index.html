@@ -802,10 +802,26 @@
   $('againBtn').addEventListener('click', function () { show('sStart'); });
 
   renderStart();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var str = function (x) { return typeof x === 'string' ? x : ''; };
+    var h = '<h3>Countries</h3>' + _li(COUNTRIES.map(function (c) { return '<b>' + c.flag + ' ' + c.name + '</b> (' + (c.levelName || '') + '): ' + (c.blurb || ''); }));
+    h += '<h3>Energy sources</h3><table><tr><th>Source</th><th>Renewable?</th><th>gCO₂/kWh</th><th>Cost</th></tr>' + SOURCES.map(function (s) { return '<tr><td>' + s.emo + ' ' + s.name + '</td><td>' + (s.ren ? 'Yes' : 'No') + '</td><td>' + s.g + '</td><td>' + s.cost + '</td></tr>'; }).join('') + '</table>';
+    h += '<h3>Policies</h3>' + _li(POLICIES.map(function (p) { return '<b>' + (p.emo || '') + ' ' + (p.name || p.title) + '</b>: ' + (p.text || '') + (str(p.msg) ? '<br><span class="muted">' + p.msg + '</span>' : ''); }));
+    h += '<h3>Events</h3>' + _li(EVENTS.map(function (e) { return '<b>' + (e.emo || '') + ' ' + e.title + '</b>: ' + (e.text || '') + (str(e.igcse) ? '<br><span class="muted">' + e.igcse + '</span>' : ''); }));
+    return h + '<p class="muted">This is a simulation: there is no single correct mix. Strong answers balance sustainability, security and affordability for each country.</p>';
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

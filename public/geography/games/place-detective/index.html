@@ -96,7 +96,23 @@ $('revealBtn').onclick=()=>{if(revealed<5){revealed++;$('feedback').textContent=
 document.querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{const n=+b.dataset.level;if(n===level&&index===0&&revealed===1)return;if(index>0&&index<cases.length&&!confirm('Switch level? Your progress on this level will be lost.'))return;startLevel(n)});
 startLevel(Math.min(4,Math.max(1,parseInt((location.search.match(/[?&]level=(\d)/)||[])[1]||'1',10))));
 </script>
+<script>
+/* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+(function () {
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '';
+    Object.keys(LEVELS).forEach(function (k) { var L = LEVELS[k];
+      h += '<h3>' + L.name + '</h3><p class="muted">' + (L.rules || '') + '</p><table><tr><th>Answer</th><th>Clues</th></tr>' + L.cases.map(function (c) { return '<tr><td><b>' + c.place + '</b></td><td>' + _ol(c.clues || []) + '</td></tr>'; }).join('') + '</table>'; });
+    return h;
+  } };
+})();
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

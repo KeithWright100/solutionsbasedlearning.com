@@ -1691,8 +1691,28 @@ updateMission3Score(0);
 updateOverallScore();
 
 </script>
+<script>
+/* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+(function () {
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = {
+    key: function () {
+      var h = '<h3>Mission 1 · Cross-section labels</h3>' + _li([].map.call(document.querySelectorAll('.m1-hotspot'), function (s) { return '<b>' + s.id.replace(/-/g, ' ') + '</b>: ' + s.dataset.answer; }));
+      h += '<h3>Mission 2 · Formation order</h3>' + _ol(m2Stages);
+      h += '<h3>Mission 3 · Conditions accepted</h3>' + _li(['Sea temperature: 27°C or more', 'Latitude: between 5° and 30° from the Equator', 'Depth of warm water: at least 46 m', 'Wind shear: below 37 km/h', 'Mid-level air: moist or humid', 'Starting disturbance: a disturbance, low pressure or tropical wave']);
+      return h;
+    },
+    unlock: function (on) { if (!on) return; if (typeof revealMission2 === 'function') revealMission2(); if (typeof revealMission3 === 'function') revealMission3(); },
+    unlockLabel: 'missions'
+  };
+})();
+</script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

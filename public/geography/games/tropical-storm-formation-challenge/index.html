@@ -361,8 +361,23 @@ document.getElementById("checkBtn").click();
 },1000);
 
 </script>
+<script>
+/* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+(function () {
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = {
+    key: function () { return '<h3>Correct order</h3>' + _ol(stages) + '<p class="muted">The extension task appears after a perfect 8/8.</p>'; },
+    unlock: function (on) { var x = document.getElementById('extension'); if (x) x.style.display = on ? 'block' : ''; },
+    unlockLabel: 'tasks'
+  };
+})();
+</script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

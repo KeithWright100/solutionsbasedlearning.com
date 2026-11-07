@@ -509,10 +509,25 @@
     function fallback() { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (err) { $('msg3').className = 'msg no'; $('msg3').textContent = 'Could not copy — select your answer and press Ctrl + C.'; } ta.remove(); }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
   });
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Round 1 · How the system works (numbered parts)</h3>' + _ol(R1.slice().sort(function (a, b) { return a.n - b.n; }).map(function (r) { return '<b>' + r.n + '</b>: ' + r.t; }));
+    var n = { diesel: 'Diesel generator', hydro: 'Micro-hydro' };
+    h += '<h3>Round 2 · Diesel or micro-hydro?</h3><table><tr><th>Statement</th><th>Answer</th></tr>' + R2.map(function (r) { return '<tr><td>' + r.t + '</td><td>' + (n[r.c] || r.c) + '</td></tr>'; }).join('') + '</table>';
+    h += '<h3>Quiz</h3>' + _ol(QUIZ.map(function (q) { return q.q + '<br><span class="ok">' + q.o[q.a] + '</span><br><span class="muted">' + (q.why || '') + '</span>'; }));
+    return h;
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

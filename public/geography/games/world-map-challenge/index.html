@@ -1168,5 +1168,22 @@ hud();
 home();
 })();
 </script>
+<script>
+/* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+(function () {
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    return '<p>World Map Challenge has no fixed answer list: each round picks countries, features, capitals or flags at random from the map data.</p>' + _li([
+      'All modes and levels are already open to students; there is nothing to unlock.',
+      'Each mode has three levels: famous, harder and expert. Students can play the whole world or one continent at a time.',
+      'Progress and XP are saved in each student’s own browser only.',
+      'Country borders follow Natural Earth; some borders are disputed.']);
+  } };
+})();
+</script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

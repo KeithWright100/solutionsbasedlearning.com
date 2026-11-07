@@ -617,10 +617,23 @@
 
   buildBoard();
   renderRegions();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Strategies</h3><table><tr><th>Strategy</th><th>Type</th><th>Benefit</th><th>Limitation</th></tr>' + STRATS.map(function (s) { return '<tr><td><b>' + s.name + '</b></td><td>' + (s.kind || '') + '</td><td>' + (s.benefit || '') + '</td><td>' + (s.limitation || '') + '</td></tr>'; }).join('') + '</table>';
+    h += '<h3>Regions</h3><table><tr><th>Region</th><th>Type of scarcity</th><th>What it needs</th></tr>' + REGIONS.map(function (r) { return '<tr><td>' + (r.flag || '') + ' ' + r.name + '</td><td>' + (r.typeName || '') + '</td><td>' + (r.need || '') + '</td></tr>'; }).join('') + '</table>';
+    return h;
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

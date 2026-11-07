@@ -433,9 +433,23 @@
   }
 
   paintHud(); round1();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Chains (correct order)</h3><p class="muted">Order: ' + LABELS.join(' → ') + '</p>';
+    CHAINS.forEach(function (c) { h += '<h4>' + c.name + '</h4>' + _ol(c.links); });
+    h += '<h3>Water, energy or food?</h3><table><tr><th>Statement</th><th>Answer</th><th>Why</th></tr>' + WEF.map(function (w) { return '<tr><td>' + w.t + '</td><td>' + NAMES[w.a] + '</td><td>' + (w.why || '') + '</td></tr>'; }).join('') + '</table>';
+    return h;
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

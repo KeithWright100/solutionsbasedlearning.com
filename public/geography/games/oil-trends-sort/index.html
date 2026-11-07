@@ -370,10 +370,23 @@
   document.getElementById('againBtn').addEventListener('click', reset);
 
   render(); startTimer();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<table><tr><th>Factor</th><th>Answer</th><th>Also accepted</th><th>Why</th></tr>';
+    CARDS.forEach(function (c) { h += '<tr><td><b>' + c.t + '</b>' + (c.d ? '<br><span class="muted">' + c.d + '</span>' : '') + '</td><td>' + NAMES[c.cat] + '</td><td>' + (c.also ? NAMES[c.also] : '') + '</td><td>' + (c.why || '') + '</td></tr>'; });
+    return h + '</table>';
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

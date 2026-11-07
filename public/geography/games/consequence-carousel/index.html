@@ -493,9 +493,27 @@
   }
 
   paintHud(); round1();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var tagName = {}; TAGSET.forEach(function (ts) { ts[2].forEach(function (p) { tagName[p[0]] = p[1]; }); });
+    var h = '<h3>Consequence cards</h3><table><tr><th>Card</th><th>Stakeholder</th><th>Tags</th></tr>' + C.map(function (c) {
+      var tags = []; TAGSET.forEach(function (ts) { (c[ts[0]] || []).forEach(function (v) { tags.push(tagName[v] || v); }); });
+      return '<tr><td>' + c.t + '</td><td>' + (WHO[c.w] ? WHO[c.w][0] : c.w) + '</td><td>' + tags.join(', ') + '</td></tr>'; }).join('') + '</table>';
+    var all = {}; C.forEach(function (c) { all[c.id] = c.t; }); Object.keys(EXTRA).forEach(function (k) { all[k] = EXTRA[k].t; });
+    h += '<h3>Linked consequences</h3>' + _li(LINKS.map(function (l) { return (all[l[0]] || l[0]) + ' → ' + (all[l[1]] || l[1]); }));
+    h += '<h3>Model paragraph</h3>' + Object.keys(PAR).map(function (k) { return '<p><b>' + k + ':</b> ' + PAR[k] + '</p>'; }).join('');
+    return h;
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

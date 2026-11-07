@@ -541,10 +541,24 @@
   });
 
   render(); startTimer();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Round 1 · Renewable or non-renewable</h3><table><tr><th>Resource</th><th>Answer</th><th>Why</th></tr>';
+    RESOURCES.forEach(function (r) { h += '<tr><td>' + r.emo + ' ' + r.label + '</td><td>' + (r.cat === 'renewable' ? 'Renewable' : 'Non-renewable') + '</td><td>' + (r.why || '') + '</td></tr>'; });
+    h += '</table><h3>Tricky questions</h3>' + _ol(TRICKY.map(function (q) { return '<b>' + q.title + '</b>: ' + q.text + '<br><span class="ok">' + q.options[q.correct] + '</span><br><span class="muted">' + (q.explain || '') + '</span>'; }));
+    return h + '<h3>Think about it (open questions)</h3>' + _ol(THINK);
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

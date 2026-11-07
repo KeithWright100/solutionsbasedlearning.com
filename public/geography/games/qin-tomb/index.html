@@ -180,6 +180,7 @@
   }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
+<style>.sbl-tonly{display:none!important}body.sbl-is-teacher .sbl-tonly{display:revert!important}</style>
 </head>
 <body>
 <div class="top-bar"><div class="top-inner">
@@ -426,7 +427,7 @@
       '<div class="li"><b>Learning intention:</b> Can I identify consequences?<br><b>Success criteria:</b> I can define what a dynasty is &middot; I can explain the successes and failures of Qin Shi Huang&rsquo;s unification of China &middot; I can sort consequences into short-term and long-term, intended and unintended.</div>' +
       '<div class="actions"><button class="btn gold" type="button" id="goBtn">' + (started ? 'Continue the expedition' : 'Enter the tomb') + ' &rarr;</button>' +
       (started ? '<button class="btn dark" type="button" id="resetBtn">Start again</button>' : '') + '</div>' +
-      '<div class="teacher"><button type="button" id="tBtn">' + (S.teacher ? 'Teacher mode: all chambers open (turn off)' : 'Teacher: unlock all chambers') + '</button> &middot; <button type="button" id="kBtn">Teacher: answer key</button></div></section>';
+      '<div class="teacher sbl-tonly"><button type="button" id="tBtn">' + (S.teacher ? 'Teacher mode: all chambers open (turn off)' : 'Teacher: unlock all chambers') + '</button> &middot; <button type="button" id="kBtn">Teacher: answer key</button></div></section>';
     $('goBtn').onclick = map;
     if ($('resetBtn')) $('resetBtn').onclick = function () { S.done = []; S.scores = {}; S.bag = []; S.answers = {}; save(); intro(); };
     $('tBtn').onclick = function () { S.teacher = !S.teacher; save(); intro(); };
@@ -722,5 +723,6 @@
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

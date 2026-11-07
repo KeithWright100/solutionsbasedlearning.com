@@ -1171,10 +1171,30 @@
   });
 
   go(0);
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>True or false</h3>' + _ol(TF.map(function (t) { return t.s + ' <span class="ok">' + (t.a ? 'True' : 'False') + '</span><br><span class="muted">' + t.why + '</span>'; }));
+    h += '<h3>Diagram labels</h3>' + _li(LBL.map(function (l) { return '<b>' + l.n + '</b>: ' + l.t; }));
+    h += '<h3>How Ruapehu formed (correct order)</h3>' + _ol(CHAIN);
+    Object.keys(SG).forEach(function (id) { var cfg = SG[id]; if (!cfg || !cfg.cards) return; var zn = {}; cfg.zones.forEach(function (z) { zn[z.id] = z.label; });
+      h += '<h3>Sort: ' + cfg.zones.map(function (z) { return z.label; }).join(' / ') + '</h3><table><tr><th>Card</th><th>Accepted</th><th>Why</th></tr>' + cfg.cards.map(function (c) { return '<tr><td>' + c.t + '</td><td>' + c.a.map(function (a) { return zn[a] || a; }).join(' or ') + '</td><td>' + (c.why || '') + '</td></tr>'; }).join('') + '</table>'; });
+    h += '<h3>Quiz</h3>' + _ol(QZ.map(function (q) { return q.q + '<br><span class="ok">' + q.o[q.c] + '</span><br><span class="muted">' + (q.f || '') + '</span>'; }));
+    var dec = function (d, t) { return '<h3>' + t + '</h3>' + _li(Object.keys(d).map(function (k) { return '<b>' + (d[k][0] === 'good' ? '✔ Best' : d[k][0] === 'bad' ? 'Weak' : 'Partly') + '</b> (' + k + '): ' + d[k][1]; })); };
+    h += dec(DEC1, 'Decision 1') + dec(DEC2, 'Decision 2');
+    h += '<h3>Future options (trade-offs)</h3>' + _li(FUT.map(function (f) { return '<b>' + f.t + '</b>: ' + f.off; }));
+    return h;
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

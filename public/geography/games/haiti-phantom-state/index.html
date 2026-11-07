@@ -567,9 +567,25 @@
   }
 
   paintHud(); round1();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Round 1 · Quick-fire locks</h3>' + _ol(LOCKS.map(function (q) { return q.q + '<br><span class="ok">' + q.opts[q.a] + '</span><br><span class="muted">' + (q.note || '') + '</span>'; }));
+    h += '<h3>The vicious circle (correct order)</h3>' + _ol(LOOP.map(function (l) { return l.t; }));
+    h += '<h3>Red herrings (do not belong)</h3>' + _li(HERRINGS.map(function (x) { return x.t + '<br><span class="muted">' + x.why + '</span>'; }));
+    h += '<h3>Where the circle could be broken (open)</h3>' + _li(BREAKS);
+    h += '<h3>Policies: what Haiti actually did</h3><table><tr><th>Policy</th><th>What happened</th><th>Result</th></tr>' + POLICIES.map(function (p) { return '<tr><td>' + p.name + '</td><td>' + (p.did || '') + '</td><td>' + (p.result || '') + '</td></tr>'; }).join('') + '</table>';
+    return h;
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

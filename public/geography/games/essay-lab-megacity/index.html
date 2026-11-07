@@ -773,10 +773,26 @@
   });
 
   newShuffle();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Question</h3><p>' + ESSAY.question + '</p><h3>Model essay (correct order)</h3>';
+    ESSAY.sections.forEach(function (sec, i) { h += '<h4>' + sec + '</h4>' + ESSAY.chunks.filter(function (c) { return c[0] === i; }).map(function (c) { return '<p>' + c[1] + '</p>'; }).join(''); });
+    h += '<h3>Colour-coding key</h3>';
+    CATS.forEach(function (c) { var arr = (ESSAY.key && ESSAY.key[c.k]) || []; if (arr.length) h += '<h4>' + c.n + '</h4>' + _li(arr.map(function (p) { return typeof p === 'string' ? p : (p.p || p.t || p.s || JSON.stringify(p)); })); });
+    if (ESSAY.examinerMark != null) h += '<h3>Examiner</h3><p><b>Mark:</b> ' + ESSAY.examinerMark + (ESSAY.examinerBand ? ' (' + ESSAY.examinerBand + ')' : '') + '</p><p>' + (ESSAY.verdict || '') + '</p>';
+    return h;
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

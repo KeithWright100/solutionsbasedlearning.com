@@ -553,10 +553,30 @@ padding:16px 0;
 
   buildBoard();
   refreshBoardState();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    return '<p>This activity is open-ended: students choose any two cards and explain the link. Many links are valid, and their sentences are marked by the SBL marker. Example strong links:</p>' + _ol([
+      '<b>Wealth of the country → Building design</b>: wealthier countries can afford building codes and reinforced, storm-resistant buildings, so fewer buildings collapse.',
+      '<b>Warning systems → Number of injuries/deaths</b>: early warnings give people time to evacuate to shelters, so fewer people are hurt or killed.',
+      '<b>Education → Number of injuries/deaths</b>: people who know what to do (evacuate, stay indoors, prepare supplies) are less likely to be injured.',
+      '<b>Category of storm → Damage to buildings</b>: higher categories have stronger winds and bigger storm surges, so more buildings are damaged or destroyed.',
+      '<b>Shape of the land → Damage to transport links</b>: low-lying coasts and river valleys flood easily, cutting off roads, bridges and railways.',
+      '<b>Damage to transport links → Number of injuries/deaths</b>: if roads are blocked, emergency services cannot reach injured people quickly.',
+      '<b>Frequency of tropical storms → Warning systems</b>: places hit often (e.g. Bangladesh, the Philippines) are more likely to invest in warning systems.',
+      '<b>Emergency services → Number of injuries/deaths</b>: well-equipped rescue teams and hospitals reduce deaths after the storm.'
+    ]) + '<p class="muted">Cards: ' + NODES.join(' · ') + '</p>';
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

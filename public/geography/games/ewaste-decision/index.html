@@ -147,6 +147,7 @@
     .card { padding: 16px; }
   }
 </style>
+<style>.sbl-tonly{display:none!important}body.sbl-is-teacher .sbl-tonly{display:revert!important}</style>
 </head>
 <body>
 <div class="top-bar"><div class="top-inner">
@@ -240,7 +241,7 @@
   function stepsBar() {
     $('steps').innerHTML = STEPS.map(function (s, i) { return S.teacher && i !== S.step ? '<button type="button" class="pill' + (i < S.step ? ' done' : '') + '" data-s="' + i + '">' + s + '</button>' : '<span class="' + (i === S.step ? 'on' : (i < S.step ? 'done' : '')) + '">' + s + '</span>'; }).join('');
     [].forEach.call(document.querySelectorAll('#steps .pill'), function (b) { b.onclick = function () { var n = +b.dataset.s; if (n > 0 && !place()) S.place = 'school'; if (n === 1) S.hierDone = false; go(n); }; });
-    $('foot').innerHTML = '<span>Progress is saved in this browser.</span><span><button type="button" class="linkbtn" id="fT">' + (S.teacher ? 'Teacher mode: all steps unlocked' : 'Teacher: unlock all steps') + '</button> &middot; <button type="button" class="linkbtn" id="fK">Teacher: answer key</button> &middot; <button type="button" class="linkbtn" id="fR">Reset progress</button></span>';
+    $('foot').innerHTML = '<span>Progress is saved in this browser.</span><span><span class="sbl-tonly"><button type="button" class="linkbtn" id="fT">' + (S.teacher ? 'Teacher mode: all steps unlocked' : 'Teacher: unlock all steps') + '</button> &middot; <button type="button" class="linkbtn" id="fK">Teacher: answer key</button> &middot; </span><button type="button" class="linkbtn" id="fR">Reset progress</button></span>';
     $('fT').onclick = function () { S.teacher = !S.teacher; save(); stepsBar(); };
     $('fK').onclick = showKey;
     $('fR').onclick = function () { var t = S.teacher; S = { step: 0, place: null, chosen: [], pitch: {}, hierDone: false, teacher: t }; save(); render(); window.scrollTo(0, 0); };
@@ -466,5 +467,6 @@
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

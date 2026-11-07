@@ -481,9 +481,20 @@
   });
   var b = getBest(); $('bestLine').textContent = b ? 'Your best score: ' + b + ' points' : '';
   drawBase();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    return '<table><tr><th>Market</th><th>Event</th><th>Answer</th><th>Factor</th><th>Why</th></tr>' + EVENTS.map(function (e) { return '<tr><td>' + e.e + ' ' + e.m + '</td><td>' + e.h + '</td><td><b>' + LABEL[e.a] + '</b></td><td>' + (e.f || '') + '</td><td>' + (e.why || '') + '</td></tr>'; }).join('') + '</table>';
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

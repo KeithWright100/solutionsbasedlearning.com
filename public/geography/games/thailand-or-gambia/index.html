@@ -520,10 +520,25 @@
   });
 
   render(); startTimer();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var n = { th: 'Thailand', gm: 'The Gambia', both: 'Both' };
+    var h = '<h3>Sort the facts</h3><table><tr><th>Fact</th><th>Answer</th><th>Why</th></tr>';
+    CARDS.forEach(function (c) { h += '<tr><td>' + c.t + '</td><td>' + n[c.c] + '</td><td>' + (c.why || '') + '</td></tr>'; });
+    h += '</table><h3>“Both” questions</h3>' + _ol(BOTHQ.map(function (q) { return '<b>' + q.src + '</b>: ' + q.text + '<br><span class="ok">' + q.options[q.correct] + '</span><br><span class="muted">' + (q.explain || '') + '</span>'; }));
+    return h + '<h3>Writing tasks (open)</h3>' + _ol(THINK);
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

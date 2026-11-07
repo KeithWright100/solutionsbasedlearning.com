@@ -409,10 +409,23 @@
 
   renderCards();
   startTimer();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var g = {}; RESOURCES.forEach(function (r) { (g[r.category] = g[r.category] || []).push(r.label); });
+    var n = { biotic: 'Biotic', abiotic: 'Abiotic', renewable: 'Renewable', nonrenewable: 'Non-renewable' };
+    return Object.keys(g).map(function (k) { return '<h3>' + (n[k] || k) + '</h3>' + _li(g[k]); }).join('');
+  } };
+
 })();
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>
