@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Japan: The Ageing Nation — IB Geography Games — SBL</title>
+<meta name="description" content="IB Geography Changing Population game: analyse Japan's ageing population with real fertility data and population pyramids, sort causes and consequences, evaluate the policies Japan has actually used, then decide what you would do in charge of Japan. Copy your work to OneNote.">
+<style>
+  :root {
+    --navy: #0f3a5c; --deep: #071a2c; --teal: #00b8b0; --teal-dark: #007c82; --cyan: #20d7e2;
+    --ink: #062033; --muted: #4a6272; --line: rgba(5,43,65,0.13);
+    --green: #16a34a; --green-soft: #e7f7ed; --red: #dc2626; --red-soft: #fdecec; --amber: #b45309; --amber-soft: #fff4dc;
+    --gold: #f59e0b; --jp: #bc002d; --jp-soft: #fde8ec; --male: #0f6b8f; --female: #c2416b;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-padding-top: 80px; }
+  body { font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); min-height: 100vh;
+    background: radial-gradient(circle at 92% 2%, rgba(188,0,45,0.10), transparent 32%), radial-gradient(circle at 5% 0%, rgba(0,184,176,0.12), transparent 40%), linear-gradient(180deg, #f6fafb, #edf3f6); }
+  a { color: inherit; }
+  button, input, textarea, select { font-family: inherit; font-size: inherit; }
+  button:focus-visible, [tabindex]:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+
+  .top-bar { padding: 16px 20px; color: #fff; background: linear-gradient(135deg, #011526, #02324e); }
+  .top-inner { max-width: 1150px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.85); text-decoration: none; }
+  .back-link:hover { color: var(--cyan); }
+  .brand { font-weight: 900; } .brand span { color: var(--teal); }
+
+  .hud { position: sticky; top: 0; z-index: 50; background: rgba(7,26,44,0.96); color: #fff; padding: 8px 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+  .hud-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+  .hud .xp { font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .hud .bar { height: 10px; border-radius: 99px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .hud .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width .6s ease; }
+  .hud .lv { font-size: 0.82rem; font-weight: 800; white-space: nowrap; color: rgba(255,255,255,0.85); }
+  .xp-pop { position: fixed; z-index: 3000; font-weight: 900; color: var(--gold); font-size: 1.1rem; pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.25); animation: xpPop 1.1s ease forwards; }
+  @keyframes xpPop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-50px); } }
+
+  main { max-width: 1150px; margin: 18px auto 60px; padding: 0 16px; display: flex; flex-direction: column; gap: 18px; }
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: 0 10px 28px rgba(0,25,45,0.06); display: flex; flex-direction: column; gap: 16px; }
+  .kicker { align-self: flex-start; display: inline-block; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--jp), #8f0022); padding: 5px 12px; border-radius: 999px; }
+  .kicker.teal { background: linear-gradient(135deg, var(--teal), #0792a3); }
+  h1 { font-size: clamp(1.6rem, 3.8vw, 2.5rem); font-weight: 900; color: var(--navy); line-height: 1.12; }
+  h2 { font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 900; color: var(--navy); line-height: 1.2; }
+  h3 { font-size: 1.08rem; font-weight: 850; color: var(--navy); }
+  p { line-height: 1.55; }
+  .muted { color: var(--muted); }
+  .small { font-size: 0.86rem; }
+
+  /* hero */
+  .hero-grid { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 16px; }
+  .box { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+  .box.li { border: 3px solid #ea7a1c; }
+  .box.sc { border: 3px solid #16a34a; }
+  .box.syl { border: 3px solid #16a34a; }
+  .box b.t { font-weight: 900; }
+  .box ul { padding-left: 20px; line-height: 1.6; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+  .stat { background: #f6f9fb; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+  .stat b { display: block; font-size: 1.55rem; font-weight: 900; color: var(--jp); font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 0.85rem; color: var(--muted); line-height: 1.35; display: block; }
+  .stat em { font-style: normal; font-size: 0.72rem; color: #7b8d98; display: block; margin-top: 4px; }
+
+  /* mission map */
+  .map { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+  .mcard { text-align: left; border: 2px solid var(--line); background: #fff; border-radius: 16px; padding: 14px; cursor: pointer; position: relative; color: var(--ink); box-shadow: 0 8px 20px rgba(0,25,45,0.06); transition: transform .2s ease; display: flex; flex-direction: column; gap: 4px; }
+  .mcard:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--teal); }
+  .mcard .num { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; color: var(--teal-dark); text-transform: uppercase; }
+  .mcard .emo { font-size: 1.7rem; }
+  .mcard b { font-size: 1rem; line-height: 1.25; }
+  .mcard small { color: var(--muted); font-size: 0.8rem; line-height: 1.35; }
+  .mcard .st { position: absolute; top: 12px; right: 12px; font-size: 1rem; }
+  .mcard.cur { border-color: var(--jp); }
+  .mcard:disabled { cursor: not-allowed; background: #f1f5f9; color: #94a3b8; box-shadow: none; }
+  .mcard:disabled .emo { filter: grayscale(1); opacity: 0.5; }
+
+  /* tasks */
+  .task { border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #fbfdfe; }
+  .task.done { border-color: rgba(22,163,74,0.45); background: #f6fcf8; }
+  .tnum { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-dark); }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt { border: 2px solid var(--line); background: #fff; color: var(--ink); border-radius: 12px; padding: 9px 13px; font-weight: 650; cursor: pointer; text-align: left; line-height: 1.35; }
+  .opt:hover:not(:disabled) { border-color: var(--teal); }
+  .opt.sel { border-color: var(--navy); background: #eef5fa; }
+  .opt.right { border-color: var(--green); background: var(--green-soft); }
+  .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+  .opt:disabled { cursor: default; }
+  .numrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .numrow input { width: 130px; padding: 9px 11px; border: 2px solid var(--line); border-radius: 10px; font-weight: 700; }
+  .btn { border: 2px solid var(--navy); background: var(--navy); color: #fff; border-radius: 999px; padding: 9px 18px; font-weight: 800; cursor: pointer; }
+  .btn.ghost { background: transparent; color: var(--navy); }
+  .btn.jp { background: var(--jp); border-color: var(--jp); }
+  .btn.on { background: var(--teal-dark); border-color: var(--teal-dark); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .spacer { flex: 1; }
+  .fb { font-weight: 650; line-height: 1.45; }
+  .fb.ok { color: var(--green); } .fb.bad { color: var(--red); }
+  .model { background: #f2f7fa; border-left: 5px solid var(--teal); border-radius: 10px; padding: 12px 14px; line-height: 1.55; }
+  textarea { width: 100%; min-height: 96px; border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; line-height: 1.5; resize: vertical; background: #fff; color: var(--ink); }
+  .hint { font-size: 0.86rem; color: var(--muted); }
+  .two { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
+
+  /* charts */
+  .chart { width: 100%; overflow-x: auto; }
+  .chart svg { display: block; width: 100%; height: auto; min-width: 560px; }
+  .events { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ev { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 0.84rem; font-weight: 700; cursor: pointer; }
+  .ev.on { background: var(--jp); color: #fff; border-color: var(--jp); }
+  .evnote { background: var(--jp-soft); border-radius: 12px; padding: 10px 14px; line-height: 1.5; min-height: 48px; }
+  .yrs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pyr-wrap { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 16px; align-items: start; }
+  .pyr svg { min-width: 420px; }
+  #broad svg { min-width: 0; max-width: 460px; }
+  .bar-hit { cursor: pointer; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+  .src { font-size: 0.76rem; color: #6b7f8b; line-height: 1.4; }
+
+  /* sorter */
+  .tray { display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; padding: 10px; border: 2px dashed var(--line); border-radius: 14px; background: #fff; }
+  .card { border: 2px solid var(--line); background: #fff; color: var(--ink); border-radius: 10px; padding: 8px 11px; font-weight: 700; font-size: 0.9rem; cursor: grab; text-align: left; line-height: 1.3; max-width: 260px; touch-action: none; user-select: none; -webkit-user-select: none; }
+  .card.sel { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,0.25); }
+  .card.right { border-color: var(--green); background: var(--green-soft); cursor: default; }
+  .card.wrong { border-color: var(--red); background: var(--red-soft); }
+  .bins { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+  .bin { border: 2px solid var(--line); border-radius: 14px; padding: 10px; min-height: 170px; display: flex; flex-direction: column; gap: 8px; background: #f8fbfc; cursor: pointer; }
+  .bin h4 { font-size: 0.92rem; font-weight: 900; }
+  .bin .drop { display: flex; flex-direction: column; gap: 6px; }
+  .bin.b1 { border-color: #7c3aed; } .bin.b1 h4 { color: #6d28d9; }
+  .bin.b2 { border-color: var(--red); } .bin.b2 h4 { color: var(--red); }
+  .bin.b3 { border-color: var(--green); } .bin.b3 h4 { color: var(--green); }
+  .bin.b4 { border-color: var(--teal-dark); } .bin.b4 h4 { color: var(--teal-dark); }
+  .bin.over { background: #fff8e8; }
+  .ghost-drag { position: fixed; pointer-events: none; z-index: 4000; opacity: .92; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+
+  /* sources */
+  .stabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stab { border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 8px 12px; font-weight: 800; cursor: pointer; text-align: left; font-size: 0.88rem; }
+  .stab.on { border-color: var(--jp); background: var(--jp-soft); }
+  .stab.done::after { content: " ✓"; color: var(--green); }
+  .article { border: 1px solid #e4d9c4; background: #fffdf7; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .article .hd { font-family: Georgia, "Times New Roman", serif; font-size: 1.3rem; font-weight: 700; color: #1f2933; line-height: 1.25; }
+  .article .by { font-size: 0.82rem; color: #6b7280; }
+  .article p { font-family: Georgia, "Times New Roman", serif; font-size: 1.02rem; line-height: 1.6; color: #22303a; }
+  .article .cite { font-family: inherit; font-size: 0.78rem; color: #6b7280; border-top: 1px solid #ece3d1; padding-top: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; font-weight: 750; font-size: 0.86rem; cursor: pointer; }
+  .chip.sel { border-color: var(--navy); background: #eef5fa; }
+  .chip.right { border-color: var(--green); background: var(--green-soft); }
+  .chip.wrong { border-color: var(--red); background: var(--red-soft); }
+  .rate { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .rate input[type=range] { width: 220px; accent-color: var(--jp); }
+  .rate b { font-size: 1.1rem; min-width: 120px; }
+  table.score { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  table.score th, table.score td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  table.score th { background: #eef4f7; }
+  .tblwrap { overflow-x: auto; }
+
+  /* PM decision */
+  .pm-grid { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 16px; align-items: start; }
+  .pols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+  .pol { border: 2px solid var(--line); background: #fff; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; text-align: left; color: var(--ink); }
+  .pol.on { border-color: var(--jp); background: var(--jp-soft); }
+  .pol .cost { font-size: 0.78rem; font-weight: 900; color: var(--amber); }
+  .pol b { font-size: 0.98rem; }
+  .pol small { color: var(--muted); line-height: 1.35; }
+  .pol .grid-tag { font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; color: var(--teal-dark); }
+  .dash { position: sticky; top: 70px; border: 2px solid var(--navy); border-radius: 16px; padding: 14px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .budget { font-weight: 900; font-size: 1.05rem; }
+  .meter { display: grid; grid-template-columns: 120px 1fr 64px; gap: 8px; align-items: center; font-size: 0.86rem; font-weight: 700; }
+  .meter .trk { height: 12px; border-radius: 99px; background: #e6edf1; position: relative; overflow: hidden; }
+  .meter .trk span { position: absolute; top: 0; bottom: 0; left: 50%; width: 0; }
+  .meter .trk::after { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 2px; background: #94a3b8; }
+  .meter .v { font-size: 0.78rem; color: var(--muted); text-align: right; }
+  .cmp td:first-child { font-weight: 750; }
+
+  .copybar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .btn.onenote { background: #7719aa; border-color: #7719aa; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--deep); color: #fff; padding: 10px 18px; border-radius: 999px; font-weight: 750; z-index: 5000; box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+  .teacher { font-size: 0.85rem; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .teacher button { background: none; border: 0; color: var(--teal-dark); font-weight: 800; text-decoration: underline; cursor: pointer; padding: 0; }
+  .credits { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .credits li { margin-left: 18px; }
+  .navrow { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; }
+  .key h3 { margin-top: 6px; }
+  .key li { margin-left: 18px; line-height: 1.55; }
+
+  @media (max-width: 860px) {
+    .hero-grid, .pyr-wrap, .pm-grid, .two { grid-template-columns: minmax(0,1fr); }
+    .bins { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+    .dash { position: static; }
+  }
+  @media (max-width: 480px) { .bins { grid-template-columns: minmax(0,1fr); } .meter { grid-template-columns: 96px 1fr 56px; } }
+  @media (prefers-reduced-motion: reduce) { .xp-pop { animation: none; } .mcard { transition: none; } .hud .bar div { transition: none; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Japan: The Ageing Nation</span></div>
+</div></div>
+<div class="hud" role="status" aria-live="polite"><div class="hud-inner">
+  <span class="xp" id="xp">0 XP</span>
+  <div class="bar" aria-hidden="true"><div id="xpbar"></div></div>
+  <span class="lv" id="lv">Briefings complete: 0 / 5</span>
+</div></div>
+
+<main id="app"></main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var shuffle = function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+
+  /* ================= DATA ================= */
+  // Total fertility rate, Japan. MHLW Vital Statistics (1947–2024); 2025 from MHLW via Nippon.com (June 2026).
+  var TFR = [[1947,4.54],[1948,4.40],[1949,4.32],[1950,3.65],[1951,3.26],[1952,2.98],[1953,2.70],[1954,2.48],[1955,2.37],[1956,2.22],[1957,2.04],[1958,2.11],[1959,2.04],[1960,2.00],[1961,1.96],[1962,1.98],[1963,2.01],[1964,2.05],[1965,2.14],[1966,1.58],[1967,2.23],[1968,2.13],[1969,2.13],[1970,2.14],[1971,2.16],[1972,2.14],[1973,2.14],[1974,2.05],[1975,1.91],[1976,1.85],[1977,1.80],[1978,1.79],[1979,1.77],[1980,1.75],[1981,1.74],[1982,1.77],[1983,1.80],[1984,1.81],[1985,1.76],[1986,1.72],[1987,1.69],[1988,1.66],[1989,1.57],[1990,1.54],[1991,1.53],[1992,1.50],[1993,1.46],[1994,1.50],[1995,1.42],[1996,1.43],[1997,1.39],[1998,1.38],[1999,1.34],[2000,1.36],[2001,1.33],[2002,1.32],[2003,1.29],[2004,1.29],[2005,1.26],[2006,1.32],[2007,1.34],[2008,1.37],[2009,1.37],[2010,1.39],[2011,1.39],[2012,1.41],[2013,1.43],[2014,1.42],[2015,1.45],[2016,1.44],[2017,1.43],[2018,1.42],[2019,1.36],[2020,1.33],[2021,1.30],[2022,1.26],[2023,1.20],[2024,1.15],[2025,1.14]];
+  var EVENTS = [
+    { y: 1947, t: 'First baby boom (1947–49)', d: 'After the Second World War, about 2.5 million babies were born each year. The TFR was 4.54 in 1947.' },
+    { y: 1957, t: 'Below replacement', d: 'The TFR dropped below the replacement level of 2.1 for the first time in 1957 (2.04).' },
+    { y: 1966, t: 'Year of the Fire Horse', d: 'In 1966 the TFR fell to 1.58. A superstition said girls born in a Fire Horse (hinoeuma) year would be hot-tempered, so many couples delayed having children. Births were about 500,000 lower than in the years either side. 2026 is the next Fire Horse year.' },
+    { y: 1972, t: 'Second baby boom (1971–74)', d: 'The children of the first boom became parents. More than 2 million babies were born each year.' },
+    { y: 1989, t: 'The "1.57 shock"', d: 'In 1989 the TFR fell to 1.57, lower than even the Fire Horse year. The shock pushed the government to start its first birth-rate plans (the Angel Plan, 1994).' },
+    { y: 2005, t: 'Low point of 1.26', d: 'The TFR hit 1.26 in 2005, then recovered slightly to 1.45 by 2015.' },
+    { y: 2025, t: 'Record low: 1.14', d: 'In 2025 there were 671,236 births, the lowest since records began in 1899, and the TFR fell to a record low of 1.14. It was the tenth year in a row that births fell.' }
+  ];
+  // Population by 5-year age group (thousands). 2000 census (Statistics Bureau via IPSS); 2020 UN estimate (1 July 2020); 2026 UN World Population Prospects 2024.
+  var AGES = ['0–4','5–9','10–14','15–19','20–24','25–29','30–34','35–39','40–44','45–49','50–54','55–59','60–64','65–69','70–74','75–79','80–84','85–89','90–94','95–99','100+'];
+  var PYR = {
+    2000: { src: 'Population Census 2000 (Statistics Bureau of Japan, via IPSS)',
+      m: [3022.521,3083.431,3353.150,3833.984,4307.242,4965.277,4436.818,4096.286,3924.171,4467.772,5210.038,4290.239,3749.528,3357.281,2670.270,1625.822,915.268,477.083,149.295,25.070,2.027],
+      f: [2881.577,2938.358,3193.462,3654.181,4114.218,4825.032,4339.792,4018.579,3876.048,4448.236,5231.952,4443.933,3986.305,3748.658,3230.306,2524.778,1699.421,1055.240,420.986,93.418,10.229] },
+    2020: { src: 'UN population estimates, 1 July 2020',
+      m: [2406,2580,2736,2932,3298,3240,3391,3767,4289,4954,4353,3905,3674,4047,4288,3193,2239,1323,506,97,10],
+      f: [2288,2462,2605,2792,3089,3036,3244,3665,4183,4847,4305,3913,3770,4305,4798,3953,3159,2394,1316,421,66] },
+    2026: { src: 'UN World Population Prospects 2024 (2026 estimate)',
+      m: [1968.258,2301.492,2662.610,2897.193,3147.954,3133.635,3062.044,3217.041,3604.791,4098.257,4934.051,4495.243,3877.719,3575.323,3605.001,4024.903,2574.414,1627.377,682.809,153.296,18.413],
+      f: [1879.422,2191.856,2521.039,2745.887,3003.501,3011.361,2942.385,3100.776,3523.816,4031.182,4866.305,4412.053,3828.838,3647.469,3892.897,4785.560,3459.285,2678.119,1585.819,550.745,107.594] }
+  };
+  // Broad age structure, millions. 2040 = IPSS 2023 projection (medium variant), from MHLW White Paper.
+  var BROAD = { 2000: null, 2020: [15.077, 74.644, 36.115], 2040: [11.42, 62.13, 39.28] };
+  (function () { var p = PYR[2000], a = 0, b = 0, c = 0; for (var i = 0; i < 21; i++) { var v = (p.m[i] + p.f[i]) / 1000; if (i < 3) a += v; else if (i < 13) b += v; else c += v; } BROAD[2000] = [a, b, c]; })();
+
+  var CARDS = [
+    { t: 'High life expectancy caused by: good medical care', a: 'cause' },
+    { t: 'High life expectancy caused by: good diet', a: 'cause' },
+    { t: 'Low birth rates caused by: emancipation of women', a: 'cause' },
+    { t: 'Low birth rates caused by: high cost of raising children', a: 'cause' },
+    { t: 'Shortage of economically active (shortage of labour force)', a: 'neg' },
+    { t: 'Reduced taxation income for the government', a: 'neg' },
+    { t: 'Increased cost of providing healthcare and care homes', a: 'neg' },
+    { t: 'Elderly people have a lot of experience and can be valuable in the workplace', a: 'pos' },
+    { t: 'Less money spent on schooling and natal medical care', a: 'pos' },
+    { t: 'Lower crime rates and less money needed to be spent on policing', a: 'pos' },
+    { t: 'Reduced spending on education and young people services', a: 'pos' },
+    { t: 'Pro-natalist policies', a: 'sol' },
+    { t: 'Increased immigration of economically active', a: 'sol' },
+    { t: 'Private healthcare and pensions', a: 'sol' },
+    { t: 'Increased taxes of economically active', a: 'sol' }
+  ];
+  var BINS = [['cause', 'Cause of ageing', 'b1'], ['neg', 'Negative consequence', 'b2'], ['pos', 'Positive consequence', 'b3'], ['sol', 'Possible solution', 'b4']];
+
+  var TYPES = ['Pro-natalist', 'Immigration', 'Technology', 'Tax and spending', 'Working longer'];
+  var SOURCES = [
+    { id: 'A', tab: 'A · The Plus One policy (2009)', hd: 'Japan’s “Plus One” plan: one more child per family?', by: 'Adapted from Alastair Bonnett, “The Plus One policy”, New Statesman, 5 March 2009',
+      url: 'https://www.newstatesman.com/long-reads/2009/03/japan-population-growth',
+      p: ['Japan’s population is expected to fall from nearly 130 million towards 100 million by the middle of the century, one of the largest declines in the developed world. Japanese women have about 1.3 children each, far below the 2.1 needed to replace the population.',
+          'The government’s answer is the “Plus One” proposal, which encourages every family to have one more child. It follows the earlier “Angel Plan” and “New Angel Plan”. It aims to make workplaces friendlier to parents and pays for 50,000 new day-care places.',
+          'Cash incentives are small. In the town of Yamatsuri, parents receive about $4,600 when a baby is born, plus $460 a year for ten years. Critics say the payments are more symbolic than life-changing, and that Japan still lags behind much of Western Europe in support for working parents.',
+          'Some politicians have even suggested women should “stay at home” to raise children. Others argue Japan should stop trying to reverse the trend and instead adapt to a smaller, older population.'],
+      types: ['Pro-natalist'], q: 'Which evidence suggests the Plus One policy was unlikely to work?',
+      o: ['Cash payments were small and “more symbolic than life-changing”', 'It funded 50,000 new day-care places', 'It followed the Angel Plan and New Angel Plan'], a: 0,
+      why: 'Small payments are unlikely to change big decisions such as having another child. The day-care places are a strength, and the earlier plans show the problem had not been solved.' },
+    { id: 'B', tab: 'B · Technology (2010)', hd: 'Robots, smart toilets and talking kettles: Japan’s high-tech answer', by: 'Adapted from Patrick Collinson, “Solving Japan’s age-old problem”, The Guardian, 20 March 2010',
+      url: 'https://www.theguardian.com/money/2010/mar/20/japan-ageing-population-technology',
+      p: ['Japan is ageing faster than any other nation. While other countries encourage immigration, Japan has instead developed a huge range of technology for its older citizens, who control about half the country’s wealth.',
+          'Examples include toilets with medical sensors that send health data to a doctor; cars with large dials and swivelling seats; and an internet-connected kettle that tells a grown-up child that their elderly parent has made their morning tea.',
+          'Robots are being developed to replace missing workers. Paro, a furry robot seal, comforts people with dementia in care homes. Riba is a care robot that can lift a person out of bed, and the HAL robot suit helps older people lift more than they could alone.',
+          'Not every idea has caught on: a robot bath that washed people automatically was a flop. Older people have also resisted using computer keyboards for remote medical care.'],
+      types: ['Technology'], q: 'Which is the strongest criticism of relying on technology?',
+      o: ['Some inventions, like the robot bath, did not catch on', 'Robots like Paro comfort people with dementia', 'Older people control about half of Japan’s wealth'], a: 0,
+      why: 'Technology can reduce the need for carers, but only if older people accept it. The robot bath and resistance to keyboards show that this is not guaranteed. It also does nothing to raise the birth rate.' },
+    { id: 'C', tab: 'C · Sales tax (2016)', hd: 'Japan delays sales tax rise as it struggles to pay for an ageing society', by: 'Adapted from “Japan delays sales tax rise to 2019”, BBC News, 1 June 2016; update from Nippon.com',
+      url: 'https://www.bbc.com/news/business-36423218',
+      p: ['Prime Minister Shinzo Abe delayed raising Japan’s sales (consumption) tax from 8% to 10% until late 2019. It was the second delay: the rise had first been planned for October 2015, then April 2017.',
+          'The last increase, from 5% to 8% in April 2014, pushed Japan into a brief recession as shoppers cut back. Japan relies heavily on people spending, but its population is shrinking and ageing, so fewer people are contributing to the economy.',
+          'Economists warned that the tax rise was vital. Japan’s public debt was over $11 trillion, more than 220% of GDP, the highest of any developed country, and the government needed money to pay for rising welfare costs for older people.',
+          'Update: the tax finally rose to 10% in October 2019. Part of the money was used to make preschool education free for all children.'],
+      types: ['Tax and spending'], q: 'Why did the government keep delaying the tax rise?',
+      o: ['It feared the rise would make people spend less and harm the economy', 'Welfare costs for older people were falling', 'Japan’s public debt was very low'], a: 0,
+      why: 'The 2014 rise caused a recession, showing the dilemma: taxes are needed to pay for an ageing society, but higher taxes can slow the economy that pays for them.' },
+    { id: 'D', tab: 'D · Immigration (2017)', hd: 'As its population ages, Japan quietly turns to immigration', by: 'Adapted from David Green, “As Its Population Ages, Japan Quietly Turns to Immigration”, Migration Policy Institute, 2017',
+      url: 'https://www.migrationpolicy.org/article/its-population-ages-japan-quietly-turns-immigration',
+      p: ['More than a quarter of Japan’s population is aged 65 or over. To fill labour shortages, the government has turned to immigration since the 1990s, but in small numbers and with little public debate.',
+          'From the 1980s, Japanese workers increasingly avoided “3-D” jobs: dirty, demanding and dangerous. In 1990 the government opened a route for workers of Japanese descent from South America, known as nikkeijin.',
+          'The foreign share of the population rose from 0.7% in 1990 to 1.8% in 2016, about 2.3 million people. The foreign workforce grew by 40% between 2013 and 2017 alone.',
+          'Yet politicians avoid calling this an immigration policy. Many Japanese see their society as ethnically and culturally uniform, and immigration remains unpopular.'],
+      types: ['Immigration'], q: 'What does the source suggest is the main limit on using immigration?',
+      o: ['Immigration is unpopular, so it happens “quietly” in small numbers', 'There are no jobs for foreign workers', 'Foreign residents have fallen since 1990'], a: 0,
+      why: 'Immigration fills labour gaps quickly, but public opinion keeps the numbers small, so its impact on a shrinking workforce of tens of millions is limited.' },
+    { id: 'E', tab: 'E · Children’s Future Strategy (2024–26)', hd: 'Bigger child allowances, paid for by a new levy', by: 'Adapted from The Japan Times (19 April 2024), Nippon.com/Jiji Press (26 December 2025) and Newsweek (20 November 2025)',
+      url: 'https://www.nippon.com/en/news/yjj2025122600378',
+      p: ['In 2024 Japan passed a law to try to reverse the falling birth rate. From October 2024, child allowances were paid to all families with no income cap, extended to children of high-school age, and doubled for the third child and beyond.',
+          'The package, about ¥3.6 trillion a year, is fully in place from 2026. It includes ¥100,000 for each pregnant woman and better parental-leave pay.',
+          'To pay for it, a new “child and child-rearing support levy” was added to everyone’s health insurance from April 2026, raising ¥600 billion in its first year and ¥1 trillion a year from 2028. The average worker pays a few hundred yen a month. Critics have nicknamed it a “singles tax” because people without children also pay.',
+          'So far the results are disappointing: births fell again to a record low of 671,236 in 2025, and the fertility rate dropped to 1.14.'],
+      types: ['Pro-natalist', 'Tax and spending'], q: 'Which evidence best shows the policy has not yet worked?',
+      o: ['Births fell to a record low in 2025', 'Allowances now go to all families', 'The levy raises ¥600 billion in 2026'], a: 0,
+      why: 'Fertility kept falling after the allowances were expanded. However, it is early: the full package only started in 2026, and birth decisions take years to change.' },
+    { id: 'F', tab: 'F · The Takaichi government (2025–26)', hd: '“Our biggest problem”: Prime Minister Takaichi’s approach', by: 'Adapted from Anadolu Agency (18 Nov 2025), Newsweek (20 Nov 2025), Nippon.com (27 Feb 2026), Euronews (1 Oct 2026) and Jiji Press (13 Aug 2026)',
+      url: 'https://www.euronews.com/2026/10/01/japans-sanae-takaichi-announces-new-tightened-measures-for-foreigners-seeking-permanent-re',
+      p: ['Sanae Takaichi became Japan’s first female prime minister in October 2025. In November 2025 she set up a Population Strategy Headquarters and called population decline Japan’s “biggest problem”. In February 2026 her Liberal Democratic Party won a large majority in a general election.',
+          'Her government is continuing the ¥3.6 trillion child package, reviewing how the costs and benefits of social security are shared between generations, and planning to revive depopulated rural areas.',
+          'On immigration, her approach is “orderly coexistence”. Foreign residents reached a record 4.1 million at the end of 2025. From October 2026, permanent residence became harder to get: applicants need above-average income, everyday Japanese and a full pension record, and the fee rose 20-fold to ¥200,000. The wait for citizenship is rising from 5 to 10 years, and a panel is discussing a limit on the share of foreign residents.',
+          'At the same time, Japan keeps admitting foreign workers on temporary visas for sectors short of staff. Critics say the government is relying on foreign labour while making it harder for those workers to settle.'],
+      types: ['Pro-natalist', 'Immigration', 'Tax and spending'], q: 'Which statement best describes the Takaichi government’s immigration policy?',
+      o: ['Admitting temporary foreign workers while making it harder to settle permanently', 'Ending all foreign worker visas', 'Encouraging large-scale permanent immigration'], a: 0,
+      why: 'Japan needs workers, so temporary visas continue, but tighter permanent-residence and citizenship rules respond to public concern. Critics argue this risks a two-tier society.' }
+  ];
+
+  var POLS = [
+    { id: 'cash', grid: 'Pro-natalist policies', name: 'Bigger child allowances and payments to pregnant women', cost: 3, e: { work: 0, births: 1, support: 1, money: -2 },
+      gov: 'Doing it: continuing the ¥3.6tn Children’s Future Strategy (allowances for all, ¥100,000 per pregnancy). Births still fell to a record low in 2025.' },
+    { id: 'family', grid: 'Pro-natalist policies', name: 'Family-friendly work: parental leave, childcare places, shorter hours', cost: 2, e: { work: 1, births: 1, support: 1, money: -1 },
+      gov: 'Partly: better parental-leave pay under the 2024 law. Source A shows earlier plans also funded day-care places, yet births kept falling.' },
+    { id: 'migr', grid: 'Increased immigration of economically active', name: 'Admit more foreign workers and let them settle', cost: 1, e: { work: 3, births: 1, support: -2, money: 1 },
+      gov: 'Mixed: still admitting temporary workers, but permanent residence and citizenship made harder in 2026; a panel is discussing a cap on the foreign share.' },
+    { id: 'priv', grid: 'Private healthcare and pensions', name: 'People pay more towards their own healthcare and pensions', cost: 0, e: { work: 0, births: 0, support: -2, money: 2 },
+      gov: 'Under review: Takaichi ordered a review of how social security benefits and burdens are shared across generations.' },
+    { id: 'tax', grid: 'Increased taxes of economically active', name: 'Raise taxes on working-age people', cost: 0, e: { work: 0, births: -1, support: -2, money: 2 },
+      gov: 'Doing it: a new child-rearing levy on health insurance from April 2026 (¥600bn, rising to ¥1tn), and the 10% consumption tax since 2019.' },
+    { id: 'tech', grid: 'From Source B', name: 'Robots and care technology', cost: 2, e: { work: 1, births: 0, support: 1, money: -1 },
+      gov: 'Japan already leads in care technology (Source B), but not every invention has been accepted by older people.' },
+    { id: 'older', grid: 'Elderly people have a lot of experience', name: 'Raise the retirement age and keep older people working', cost: 1, e: { work: 2, births: 0, support: -1, money: 1 },
+      gov: 'Linked to the government’s review of social security for “all generations”.' },
+    { id: 'rural', grid: 'From Source F', name: 'Revive rural areas and spread people beyond Tokyo', cost: 2, e: { work: 0, births: 1, support: 1, money: -1 },
+      gov: 'Doing it: Takaichi asked ministers for a strategy to revitalise depopulated areas. Tokyo has the lowest fertility rate in Japan (0.96 in 2025).' }
+  ];
+  var BUDGET = 7;
+  var METERS = [['work', 'Workforce'], ['births', 'Birth rate'], ['support', 'Public support'], ['money', 'Government finances']];
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-japan-ageing-v1';
+  var S = { xp: 0, done: {}, ans: {}, notes: {}, sort: {}, src: {}, pm: [], unlock: false };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv && sv.ans) S = Object.assign(S, sv); } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  var IS_T = false;
+  var cur = -1;
+
+  var MISSIONS = [
+    { emo: '📉', t: 'The fertility story', s: 'Read and analyse Japan’s fertility rate since 1947' },
+    { emo: '🔺', t: 'Changing pyramids', s: 'Compare population pyramids for 2000, 2020, 2026 and 2040' },
+    { emo: '🧩', t: 'Causes and consequences', s: 'Sort the issues of an ageing population' },
+    { emo: '📰', t: 'What has Japan tried?', s: 'Evaluate real policies from six adapted sources' },
+    { emo: '🏛️', t: 'You’re in charge of Japan', s: 'Choose a policy package and compare it with the current government' }
+  ];
+
+  function hud() {
+    var n = Object.keys(S.done).length;
+    $('xp').textContent = S.xp + ' XP';
+    $('xpbar').style.width = Math.min(100, n / 5 * 100) + '%';
+    $('lv').textContent = 'Briefings complete: ' + n + ' / 5';
+  }
+  function award(n, el) {
+    S.xp += n; save(); hud();
+    if (el && el.getBoundingClientRect) {
+      var r = el.getBoundingClientRect(), p = document.createElement('div');
+      p.className = 'xp-pop'; p.textContent = '+' + n + ' XP'; p.style.left = (r.left + r.width / 2 - 30) + 'px'; p.style.top = (r.top - 10) + 'px';
+      document.body.appendChild(p); setTimeout(function () { p.remove(); }, 1100);
+    }
+  }
+  function toast(t) { var d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
+  function open(i) { return S.unlock || IS_T && S.unlock || i === 0 || S.done[i - 1]; }
+
+  /* ================= HOME ================= */
+  function home() {
+    cur = -1;
+    var h = '<section class="panel">' +
+      '<span class="kicker">IB Geography · Changing population · Population possibilities and power</span>' +
+      '<h1>Japan: The Ageing Nation</h1>' +
+      '<p class="muted">You have just joined Japan’s Population Strategy Headquarters as a young advisor. Work through five briefings using real data and real news, then tell the Prime Minister what you would do.</p>' +
+      '<div class="hero-grid">' +
+        '<div style="display:flex;flex-direction:column;gap:12px">' +
+          '<div class="box li"><b class="t">Learning intention:</b><i>To engage with issues that have local and global significance.</i></div>' +
+          '<div class="box sc"><b class="t">Success criteria: I can</b><ul><li>describe and explain the issues relating to ageing populations</li><li>suggest possible solutions to the issues of ageing populations</li><li>examine the policies that have been implemented to reduce the impacts of ageing societies in Japan</li></ul></div>' +
+        '</div>' +
+        '<div class="box syl"><b class="t">Syllabus statement:</b><p>Policies associated with managing population change, focusing on:</p><ul><li>policies related to ageing societies</li><li>pronatalist or antinatalist policies</li></ul></div>' +
+      '</div>' +
+      '<div class="stats">' +
+        '<div class="stat"><b>1.14</b><span>children per woman in 2025, a record low</span><em>MHLW, June 2026</em></div>' +
+        '<div class="stat"><b>671,236</b><span>births in 2025, the fewest since records began in 1899</span><em>MHLW, June 2026</em></div>' +
+        '<div class="stat"><b>29.5%</b><span>of people aged 65 or over (1 April 2026)</span><em>Statistics Bureau of Japan</em></div>' +
+        '<div class="stat"><b>−918,253</b><span>natural decrease in 2025: deaths minus births</span><em>MHLW, June 2026</em></div>' +
+        '<div class="stat"><b>87.1 / 81.1</b><span>life expectancy of women / men (2024)</span><em>MHLW life tables</em></div>' +
+      '</div>' +
+      '</section>' +
+      '<section class="panel"><h2>Your briefings</h2><p class="muted small">Briefings unlock in order. Your answers save on this device, and every briefing has a <b>Copy to OneNote</b> button.</p><div class="map">' +
+      MISSIONS.map(function (m, i) {
+        var o = open(i), d = S.done[i];
+        return '<button type="button" class="mcard' + (o && !d ? ' cur' : '') + '" data-m="' + i + '"' + (o ? '' : ' disabled') + '><span class="num">Briefing ' + (i + 1) + '</span><span class="emo" aria-hidden="true">' + m.emo + '</span><b>' + esc(m.t) + '</b><small>' + esc(m.s) + '</small><span class="st">' + (d ? '✅' : o ? '' : '🔒') + '</span></button>';
+      }).join('') +
+      '</div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyAll">Copy my whole case file to OneNote</button><span class="hint">Copies all your answers with headings, ready to paste into your OneNote notebook.</span></div>' +
+      '<div class="teacher" id="tRow" hidden>Teacher: <button type="button" id="tUnlock">' + (S.unlock ? 'all briefings unlocked (turn off)' : 'unlock all briefings') + '</button> · <button type="button" id="tKey">answer key</button></div>' +
+      '<button type="button" class="btn ghost" id="reset" style="align-self:flex-start">Reset my progress</button>' +
+      '</section>' + credits();
+    $('app').innerHTML = h;
+    document.querySelectorAll('.mcard').forEach(function (b) { b.onclick = function () { mission(+b.dataset.m); }; });
+    $('copyAll').onclick = function () { copyNotes(allNotes()); };
+    $('tRow').hidden = !IS_T;
+    $('tUnlock').onclick = function () { S.unlock = !S.unlock; save(); home(); };
+    $('tKey').onclick = answerKey;
+    var rb = $('reset');
+    rb.onclick = function () {
+      if (!rb.dataset.arm) { rb.dataset.arm = 1; rb.textContent = 'Press again to delete all your answers'; setTimeout(function () { delete rb.dataset.arm; rb.textContent = 'Reset my progress'; }, 4000); return; }
+      S = { xp: 0, done: {}, ans: {}, notes: {}, sort: {}, src: {}, pm: [], unlock: false }; save(); hud(); home();
+    };
+    hud(); window.scrollTo(0, 0);
+  }
+
+  function credits() {
+    return '<section class="panel credits"><h3>Sources</h3><p>Articles are adapted and shortened for students. Data:</p><ul>' +
+      '<li>Fertility rate 1947–2024: Ministry of Health, Labour and Welfare (MHLW) Vital Statistics. 2025 figures: MHLW via <a href="https://www.nippon.com/en/japan-data/h02802/baby-decline-births-in-japan-drop-for-the-tenth-successive-year.html" target="_blank" rel="noopener">Nippon.com</a> (June 2026).</li>' +
+      '<li>Population 2000: Population Census (Statistics Bureau of Japan), via IPSS. 2020: UN estimates. 2026: UN World Population Prospects 2024. 2040 projection: IPSS (2023), medium variant, via the MHLW White Paper.</li>' +
+      '<li>Fire Horse year: <a href="https://www.nippon.com/en/japan-topics/g02550/" target="_blank" rel="noopener">Nippon.com</a>. Consumption tax history: <a href="https://www.nippon.com/en/features/h00013/" target="_blank" rel="noopener">Nippon.com</a>.</li>' +
+      SOURCES.map(function (s) { return '<li>Source ' + s.id + ': <a href="' + s.url + '" target="_blank" rel="noopener">' + esc(s.by.replace(/^Adapted from /, '')) + '</a></li>'; }).join('') +
+      '</ul></section>';
+  }
+
+  /* ================= MISSION SHELL ================= */
+  function mission(i) {
+    cur = i;
+    var m = MISSIONS[i];
+    $('app').innerHTML = '<section class="panel"><span class="kicker teal">Briefing ' + (i + 1) + ' of 5</span><h2>' + m.emo + ' ' + esc(m.t) + '</h2><div id="mbody" style="display:flex;flex-direction:column;gap:16px"></div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyM">Copy this briefing to OneNote</button><span class="hint">Paste into your OneNote page: headings and tables keep their layout.</span></div>' +
+      '<div class="navrow"><button type="button" class="btn ghost" id="toHome">← All briefings</button><button type="button" class="btn jp" id="finish">Complete briefing ' + (i + 1) + ' →</button></div>' +
+      '<p class="fb" id="mfb" aria-live="polite"></p></section>';
+    [m1, m2, m3, m4, m5][i]($('mbody'));
+    $('copyM').onclick = function () { copyNotes(notesFor(i)); };
+    $('toHome').onclick = home;
+    $('finish').onclick = function () {
+      var need = REQ[i]();
+      if (need) { $('mfb').className = 'fb bad'; $('mfb').textContent = need; return; }
+      if (!S.done[i]) { S.done[i] = true; award(50, $('finish')); }
+      save();
+      if (i < 4) mission(i + 1); else home();
+    };
+    hud(); window.scrollTo(0, 0);
+  }
+  var REQ = [
+    function () { return ['m1a', 'm1b', 'm1c', 'm1d'].every(function (k) { return S.ans[k] && S.ans[k].ok; }) ? '' : 'Answer the four questions correctly before moving on.'; },
+    function () { return ['m2a', 'm2b', 'm2c', 'm2d'].every(function (k) { return S.ans[k] && S.ans[k].ok; }) ? '' : 'Complete the four pyramid tasks before moving on.'; },
+    function () { return S.ans.m3 && S.ans.m3.ok ? '' : 'Sort all 15 cards correctly before moving on.'; },
+    function () { return SOURCES.every(function (s) { return S.src[s.id] && S.src[s.id].q === true && S.src[s.id].types === true; }) ? '' : 'Complete all six sources (policy type and evidence question) before moving on.'; },
+    function () { return S.pm.length >= 3 && (S.notes.pm1 || '').trim().length > 20 ? '' : 'Choose at least three policies and write your decision before finishing.'; }
+  ];
+
+  /* ---------- reusable question widgets ---------- */
+  function mcq(key, num, q, opts, ans, why, xp) {
+    var st = S.ans[key];
+    var h = '<div class="task' + (st && st.ok ? ' done' : '') + '" data-q="' + key + '"><span class="tnum">' + esc(num) + '</span><p><b>' + q + '</b></p><div class="opts">' +
+      opts.map(function (o, k) { var c = st && st.ok ? (k === ans ? ' right' : '') : ''; return '<button type="button" class="opt' + c + '" data-k="' + k + '"' + (st && st.ok ? ' disabled' : '') + '>' + o + '</button>'; }).join('') +
+      '</div><p class="fb' + (st && st.ok ? ' ok' : '') + '">' + (st && st.ok ? '✓ ' + why : '') + '</p></div>';
+    return { html: h, bind: function () {
+      var box = document.querySelector('[data-q="' + key + '"]');
+      box.querySelectorAll('.opt').forEach(function (b) { b.onclick = function () {
+        if (S.ans[key] && S.ans[key].ok) return;
+        var k = +b.dataset.k, fb = box.querySelector('.fb');
+        if (k === ans) { S.ans[key] = { ok: true }; box.classList.add('done'); b.classList.add('right'); box.querySelectorAll('.opt').forEach(function (x) { x.disabled = true; }); fb.className = 'fb ok'; fb.textContent = '✓ ' + why; award(xp || 10, b); save(); }
+        else { b.classList.add('wrong'); fb.className = 'fb bad'; fb.textContent = 'Not quite. Look at the data again.'; setTimeout(function () { b.classList.remove('wrong'); }, 900); }
+      }; });
+    } };
+  }
+  function num(key, numlbl, q, ans, tol, unit, why, xp) {
+    var st = S.ans[key];
+    var h = '<div class="task' + (st && st.ok ? ' done' : '') + '" data-q="' + key + '"><span class="tnum">' + esc(numlbl) + '</span><p><b>' + q + '</b></p><div class="numrow"><input type="text" inputmode="decimal" aria-label="Your answer" value="' + (st ? esc(st.v) : '') + '"' + (st && st.ok ? ' disabled' : '') + '><span>' + unit + '</span><button type="button" class="btn"' + (st && st.ok ? ' disabled' : '') + '>Check</button></div><p class="fb' + (st && st.ok ? ' ok' : '') + '">' + (st && st.ok ? '✓ ' + why : '') + '</p></div>';
+    return { html: h, bind: function () {
+      var box = document.querySelector('[data-q="' + key + '"]'), inp = box.querySelector('input'), fb = box.querySelector('.fb');
+      var go = function () {
+        var v = parseFloat(String(inp.value).replace(/[^0-9.\-−]/g, '').replace('−', '-'));
+        if (isNaN(v)) { fb.className = 'fb bad'; fb.textContent = 'Type a number.'; return; }
+        if (Math.abs(v - ans) <= tol) { S.ans[key] = { ok: true, v: inp.value }; box.classList.add('done'); inp.disabled = true; box.querySelector('button').disabled = true; fb.className = 'fb ok'; fb.textContent = '✓ ' + why; award(xp || 15, inp); save(); }
+        else { S.ans[key] = { ok: false, v: inp.value }; save(); fb.className = 'fb bad'; fb.textContent = 'Not quite. Check your working and try again (round to 1 decimal place).'; }
+      };
+      box.querySelector('button').onclick = go; inp.onkeydown = function (e) { if (e.key === 'Enter') go(); };
+    } };
+  }
+  function writeTask(key, lbl, q, frame, model, checks) {
+    var v = S.notes[key] || '';
+    return { html: '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
+      '<textarea id="w-' + key + '" aria-label="' + esc(q.replace(/<[^>]+>/g, '')) + '">' + esc(v) + '</textarea>' +
+      (checks ? '<div class="hint"><b>Check your answer includes:</b> ' + checks + '</div>' : '') +
+      (model ? '<div class="row"><button type="button" class="btn ghost" data-show="' + key + '">Show a model answer</button></div><div class="model" id="mod-' + key + '" hidden>' + model + '</div>' : '') + '</div>',
+      bind: function () {
+        var ta = $('w-' + key), t = null;
+        ta.addEventListener('input', function () { S.notes[key] = ta.value; clearTimeout(t); t = setTimeout(save, 400); });
+        var b = document.querySelector('[data-show="' + key + '"]');
+        if (b) b.onclick = function () {
+          if ((ta.value || '').trim().length < 25) { b.textContent = 'Write your own answer first'; setTimeout(function () { b.textContent = 'Show a model answer'; }, 1800); return; }
+          $('mod-' + key).hidden = false; b.hidden = true;
+        };
+      } };
+  }
+  function mount(body, parts) { body.insertAdjacentHTML('beforeend', parts.map(function (p) { return p.html; }).join('')); parts.forEach(function (p) { if (p.bind) p.bind(); }); }
+
+  /* ================= M1: FERTILITY ================= */
+  function tfrChart(sel) {
+    var W = 860, H = 360, L = 52, R = 18, T = 20, B = 44, x0 = 1945, x1 = 2027, yMax = 5;
+    var X = function (y) { return L + (y - x0) / (x1 - x0) * (W - L - R); }, Y = function (v) { return T + (1 - v / yMax) * (H - T - B); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Line graph of Japan’s total fertility rate from 1947 to 2025, falling from 4.54 to 1.14">';
+    for (var v = 0; v <= 5; v++) s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="#e3eaee"/><text x="' + (L - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="12" fill="#4a6272">' + v + '</text>';
+    for (var yr = 1950; yr <= 2025; yr += 10) s += '<text x="' + X(yr) + '" y="' + (H - B + 18) + '" text-anchor="middle" font-size="12" fill="#4a6272">' + yr + '</text><line x1="' + X(yr) + '" x2="' + X(yr) + '" y1="' + (H - B) + '" y2="' + (H - B + 5) + '" stroke="#94a3b8"/>';
+    s += '<text x="14" y="' + (T + (H - T - B) / 2) + '" transform="rotate(-90 14 ' + (T + (H - T - B) / 2) + ')" text-anchor="middle" font-size="12" fill="#4a6272">Children per woman (TFR)</text>';
+    s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(2.1) + '" y2="' + Y(2.1) + '" stroke="#b45309" stroke-dasharray="6 5" stroke-width="2"/><text x="' + (W - R - 4) + '" y="' + (Y(2.1) - 6) + '" text-anchor="end" font-size="12" font-weight="700" fill="#b45309">Replacement level 2.1</text>';
+    var d = TFR.map(function (p, i) { return (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1); }).join(' ');
+    s += '<path d="' + d + ' L' + X(2025) + ' ' + Y(0) + ' L' + X(1947) + ' ' + Y(0) + ' Z" fill="rgba(188,0,45,0.07)"/><path d="' + d + '" fill="none" stroke="#bc002d" stroke-width="3" stroke-linejoin="round"/>';
+    EVENTS.forEach(function (e, i) { var p = TFR.filter(function (q) { return q[0] === e.y; })[0]; s += '<circle cx="' + X(e.y) + '" cy="' + Y(p[1]) + '" r="' + (sel === i ? 8 : 5.5) + '" fill="' + (sel === i ? '#bc002d' : '#fff') + '" stroke="#bc002d" stroke-width="2.5"/>'; });
+    if (sel != null && sel >= 0) { var e = EVENTS[sel], p = TFR.filter(function (q) { return q[0] === e.y; })[0], tx = Math.min(W - R - 110, Math.max(L + 4, X(e.y) - 55)); s += '<rect x="' + tx + '" y="' + (Y(p[1]) - 36) + '" width="110" height="24" rx="6" fill="#071a2c"/><text x="' + (tx + 55) + '" y="' + (Y(p[1]) - 19) + '" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">' + e.y + ': ' + p[1].toFixed(2) + '</text>'; }
+    s += '<line id="hov" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" stroke="#071a2c" stroke-width="1" opacity="0"/><g id="hovtip" opacity="0"><rect width="96" height="22" rx="5" fill="#071a2c"/><text x="48" y="15" text-anchor="middle" font-size="12" font-weight="700" fill="#fff"></text></g>';
+    s += '<rect id="hit" x="' + L + '" y="' + T + '" width="' + (W - L - R) + '" height="' + (H - T - B) + '" fill="transparent"/></svg>';
+    return { svg: s, X: X, Y: Y, W: W, L: L, R: R, x0: x0, x1: x1 };
+  }
+  function m1(body) {
+    var sel = -1;
+    body.insertAdjacentHTML('beforeend',
+      '<p>Japan’s <b>total fertility rate (TFR)</b> is the average number of children a woman has in her lifetime. A TFR of about <b>2.1</b> keeps a population stable without migration. Hover over (or tap) the graph to read values, and tap the events to learn what happened.</p>' +
+      '<div class="chart" id="tfr"></div><div class="legend"><span><i style="background:#bc002d"></i>Japan’s total fertility rate</span><span><i style="background:#b45309"></i>Replacement level (2.1)</span></div>' +
+      '<div class="events" id="evs">' + EVENTS.map(function (e, i) { return '<button type="button" class="ev" data-e="' + i + '">' + e.y + ' · ' + esc(e.t) + '</button>'; }).join('') + '</div>' +
+      '<div class="evnote" id="evn">Tap an event to see what happened.</div>' +
+      '<p class="src">Source: MHLW Vital Statistics (1947–2024); 2025 figure from MHLW, published June 2026.</p>');
+    function draw() {
+      var c = tfrChart(sel); $('tfr').innerHTML = c.svg;
+      var svg = $('tfr').querySelector('svg'), hit = svg.querySelector('#hit'), ln = svg.querySelector('#hov'), tip = svg.querySelector('#hovtip');
+      var move = function (ev) {
+        var r = svg.getBoundingClientRect(), sx = (ev.clientX - r.left) / r.width * c.W;
+        var yr = Math.round(c.x0 + (sx - c.L) / (c.W - c.L - c.R) * (c.x1 - c.x0)); yr = Math.max(1947, Math.min(2025, yr));
+        var p = TFR.filter(function (q) { return q[0] === yr; })[0]; if (!p) return;
+        var x = c.X(yr), y = c.Y(p[1]);
+        ln.setAttribute('x1', x); ln.setAttribute('x2', x); ln.setAttribute('opacity', '0.4');
+        tip.setAttribute('transform', 'translate(' + Math.min(c.W - c.R - 96, Math.max(c.L, x - 48)) + ',' + Math.max(2, y - 34) + ')'); tip.setAttribute('opacity', '1');
+        tip.querySelector('text').textContent = yr + ': ' + p[1].toFixed(2);
+      };
+      hit.addEventListener('pointermove', move); hit.addEventListener('pointerdown', move);
+      hit.addEventListener('pointerleave', function () { ln.setAttribute('opacity', '0'); tip.setAttribute('opacity', '0'); });
+    }
+    draw();
+    $('evs').onclick = function (e) { var b = e.target.closest('.ev'); if (!b) return; sel = +b.dataset.e; document.querySelectorAll('.ev').forEach(function (x) { x.classList.toggle('on', x === b); }); $('evn').textContent = EVENTS[sel].d; draw(); };
+    mount(body, [
+      num('m1a', 'Question 1 · Read the graph', 'What was Japan’s TFR in 1947?', 4.54, 0.02, 'children per woman', 'The TFR was 4.54 in 1947, during the first baby boom.', 10),
+      mcq('m1b', 'Question 2 · Interpret', 'In which year did the TFR fall below replacement level (2.1) and never rise above it again?', ['1957', '1966', '1974', '1989'], 2, 'The TFR dipped below 2.1 in 1957 but rose above it again in the late 1960s. Since 1974 (2.05) it has stayed below replacement.', 15),
+      num('m1c', 'Question 3 · Calculate', 'Calculate the percentage change in the TFR from 1947 (4.54) to 2025 (1.14). Give your answer to 1 decimal place.', -74.9, 0.15, '%', '(1.14 − 4.54) ÷ 4.54 × 100 = −74.9%. Japan’s fertility rate has fallen by about three quarters.', 20),
+      mcq('m1d', 'Question 4 · Anomaly', 'Why does the graph dip sharply in 1966 and recover in 1967?', ['A war reduced the number of births', 'The Fire Horse superstition made many couples delay having children', 'The government introduced a one-child policy', 'A pandemic stopped hospitals delivering babies'], 1, 'Many couples avoided having a baby in the Fire Horse year (hinoeuma) and had children in 1965 or 1967 instead. It shows how culture can affect fertility.', 15),
+      writeTask('m1w', 'Exam skill · Describe (3 marks)', 'Describe the trend in Japan’s total fertility rate since 1947.', 'Use the pattern: overall trend → data with years → an anomaly or change in trend.',
+        'Japan’s TFR has fallen sharply overall, from 4.54 in 1947 to a record low of 1.14 in 2025, a fall of about 75%. The steepest decline was between 1947 and 1957, when it dropped below replacement level (2.1). After a short plateau around 2.1 in the late 1960s and early 1970s, it has stayed below replacement since 1974. There was a brief anomaly in 1966 (1.58), and a small recovery from 1.26 in 2005 to 1.45 in 2015 before it fell again.',
+        'overall trend · at least two data points with years · the replacement level · an anomaly or change in trend')
+    ]);
+  }
+
+  /* ================= M2: PYRAMIDS ================= */
+  function pyrSvg(year, mark) {
+    var p = PYR[year], tot = 0, i;
+    for (i = 0; i < 21; i++) tot += p.m[i] + p.f[i];
+    var W = 560, rowH = 18, T = 14, H = T + 21 * rowH + 40, mid = W / 2, gap = 30, maxP = 5, half = mid - gap - 16;
+    var sc = function (pct) { return pct / maxP * half; };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Population pyramid for Japan in ' + year + '">';
+    [1, 2, 3, 4, 5].forEach(function (g) { s += '<line x1="' + (mid - gap - sc(g)) + '" x2="' + (mid - gap - sc(g)) + '" y1="' + T + '" y2="' + (T + 21 * rowH) + '" stroke="#edf2f5"/><line x1="' + (mid + gap + sc(g)) + '" x2="' + (mid + gap + sc(g)) + '" y1="' + T + '" y2="' + (T + 21 * rowH) + '" stroke="#edf2f5"/><text x="' + (mid - gap - sc(g)) + '" y="' + (T + 21 * rowH + 14) + '" text-anchor="middle" font-size="10.5" fill="#4a6272">' + g + '%</text><text x="' + (mid + gap + sc(g)) + '" y="' + (T + 21 * rowH + 14) + '" text-anchor="middle" font-size="10.5" fill="#4a6272">' + g + '%</text>'; });
+    for (i = 0; i < 21; i++) {
+      var y = T + (20 - i) * rowH, pm = p.m[i] / tot * 100, pf = p.f[i] / tot * 100, hl = mark === i;
+      s += '<g class="bar-hit" data-age="' + i + '"><rect x="0" y="' + y + '" width="' + W + '" height="' + rowH + '" fill="' + (hl ? 'rgba(245,158,11,0.18)' : 'transparent') + '"/>' +
+        '<rect x="' + (mid - gap - sc(pm)) + '" y="' + (y + 2) + '" width="' + sc(pm) + '" height="' + (rowH - 4) + '" rx="2" fill="#0f6b8f"/>' +
+        '<rect x="' + (mid + gap) + '" y="' + (y + 2) + '" width="' + sc(pf) + '" height="' + (rowH - 4) + '" rx="2" fill="#c2416b"/>' +
+        '<text x="' + mid + '" y="' + (y + 13) + '" text-anchor="middle" font-size="10.5" fill="#062033">' + AGES[i] + '</text></g>';
+    }
+    s += '<text x="' + (mid - gap - 4) + '" y="' + (H - 6) + '" text-anchor="end" font-size="12" font-weight="700" fill="#0f6b8f">Males (% of total)</text><text x="' + (mid + gap + 4) + '" y="' + (H - 6) + '" font-size="12" font-weight="700" fill="#c2416b">Females (% of total)</text></svg>';
+    return s;
+  }
+  function broadSvg() {
+    var yrs = [2000, 2020, 2040], W = 420, H = 300, L = 40, B = 40, T = 16, bw = 70, cols = ['#0284c7', '#16a34a', '#bc002d'];
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Stacked bars of Japan’s age structure in 2000, 2020 and projected 2040">';
+    [0, 25, 50, 75, 100].forEach(function (g) { var y = T + (1 - g / 100) * (H - T - B); s += '<line x1="' + L + '" x2="' + (W - 10) + '" y1="' + y + '" y2="' + y + '" stroke="#edf2f5"/><text x="' + (L - 6) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11" fill="#4a6272">' + g + '%</text>'; });
+    yrs.forEach(function (yr, k) {
+      var b = BROAD[yr], tot = b[0] + b[1] + b[2], x = L + 30 + k * 120, acc = 0;
+      b.forEach(function (v, j) { var pc = v / tot * 100, h = pc / 100 * (H - T - B), y = T + (1 - (acc + pc) / 100) * (H - T - B); s += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + h + '" fill="' + cols[j] + '"/><text x="' + (x + bw / 2) + '" y="' + (y + h / 2 + 4) + '" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">' + pc.toFixed(1) + '%</text>'; acc += pc; });
+      s += '<text x="' + (x + bw / 2) + '" y="' + (H - B + 18) + '" text-anchor="middle" font-size="12.5" font-weight="700" fill="#062033">' + yr + (yr === 2040 ? '*' : '') + '</text>';
+    });
+    return s + '</svg>';
+  }
+  function m2(body) {
+    var year = 2000, target = null;
+    body.insertAdjacentHTML('beforeend',
+      '<p>Switch between the pyramids to see how Japan’s population structure has changed. Bars show each age group as a percentage of the whole population.</p>' +
+      '<div class="yrs" id="yrs">' + [2000, 2020, 2026].map(function (y) { return '<button type="button" class="btn' + (y === year ? ' on' : ' ghost') + '" data-y="' + y + '">' + y + '</button>'; }).join('') + '</div>' +
+      '<div class="pyr-wrap"><div><div class="chart pyr" id="pyr"></div><p class="src" id="pyrsrc"></p></div>' +
+      '<div style="display:flex;flex-direction:column;gap:8px"><h3>Age structure: 2000, 2020 and 2040</h3><div class="chart" id="broad"></div>' +
+      '<div class="legend"><span><i style="background:#0284c7"></i>0–14</span><span><i style="background:#16a34a"></i>15–64</span><span><i style="background:#bc002d"></i>65 and over</span></div>' +
+      '<p class="src">*2040 is a projection: IPSS (2023), medium variant: 11.42m aged 0–14, 62.13m aged 15–64, 39.28m aged 65+.</p></div></div>' +
+      '<div class="task" id="clicktask"><span class="tnum">Task 1 · Find the baby boomers</span><p><b id="ctq"></b></p><p class="fb" id="ctfb"></p></div>');
+    var steps = [
+      { y: 2000, age: 10, q: 'Japan’s first baby boomers were born in 1947–49. Click the age group they were in on the 2000 pyramid.', ok: 'Yes: in 2000 they were 51–53, so the 50–54 bars are the widest on the pyramid.' },
+      { y: 2020, age: 14, q: 'Now switch to 2020. Click the age group the first baby boomers were in.', ok: 'Yes: by 2020 they were 71–73 (70–74). This large group is now moving into the oldest ages, which will raise care costs.' }
+    ];
+    function stepNow() { return S.ans.m2a && S.ans.m2a.ok ? null : steps[S.ans.m2a1 && S.ans.m2a1.ok ? 1 : 0]; }
+    function draw() {
+      $('pyr').innerHTML = pyrSvg(year, (S.ans.m2a && S.ans.m2a.ok) ? (year === 2000 ? 10 : year === 2020 ? 14 : null) : null);
+      $('pyrsrc').textContent = 'Source: ' + PYR[year].src + '.';
+      $('broad').innerHTML = broadSvg();
+      var st = stepNow();
+      $('ctq').textContent = st ? st.q : 'Both found. ✓';
+      $('clicktask').classList.toggle('done', !st);
+      $('pyr').querySelectorAll('.bar-hit').forEach(function (g) { g.addEventListener('click', function () {
+        var s2 = stepNow(); if (!s2) return; var fb = $('ctfb');
+        if (year !== s2.y) { fb.className = 'fb bad'; fb.textContent = 'Switch to the ' + s2.y + ' pyramid first.'; return; }
+        if (+g.dataset.age === s2.age) {
+          if (s2 === steps[0]) { S.ans.m2a1 = { ok: true }; } else { S.ans.m2a = { ok: true }; }
+          fb.className = 'fb ok'; fb.textContent = '✓ ' + s2.ok; award(10, g); save(); draw();
+        } else { fb.className = 'fb bad'; fb.textContent = 'Not that one. Work out how old someone born in 1947–49 was in ' + s2.y + '.'; }
+      }); });
+    }
+    $('yrs').onclick = function (e) { var b = e.target.closest('[data-y]'); if (!b) return; year = +b.dataset.y; $('yrs').querySelectorAll('button').forEach(function (x) { x.className = 'btn' + (+x.dataset.y === year ? ' on' : ' ghost'); }); draw(); };
+    draw();
+    var b20 = BROAD[2020], b40 = BROAD[2040];
+    mount(body, [
+      mcq('m2b', 'Task 2 · Describe the change', 'Which statement best describes how the pyramid changed between 2000 and 2026?', ['The base narrowed and the top widened, so the shape became top-heavy', 'The base widened as births increased', 'The shape stayed the same but the population grew', 'The middle ages shrank while the youngest grew'], 0, 'Fewer births shrink the base, while longer lives and the ageing baby boomers widen the top. This is typical of stage 5 of the demographic transition model.', 15),
+      num('m2c', 'Task 3 · Calculate (2020)', 'Calculate Japan’s total dependency ratio in 2020. Use: (0–14 + 65+) ÷ 15–64 × 100. In 2020: 0–14 = 15.08m, 15–64 = 74.64m, 65+ = 36.12m.', (b20[0] + b20[2]) / b20[1] * 100, 0.2, 'dependants per 100 people of working age', '(15.08 + 36.12) ÷ 74.64 × 100 = 68.6. There were about 69 dependants for every 100 people of working age.', 20),
+      num('m2d', 'Task 4 · Calculate (2040 projection)', 'Calculate the projected old-age dependency ratio for 2040. Use: 65+ ÷ 15–64 × 100. In 2040: 65+ = 39.28m, 15–64 = 62.13m.', b40[2] / b40[1] * 100, 0.2, 'older people per 100 of working age', '39.28 ÷ 62.13 × 100 = 63.2. By 2040 there will be fewer than two working-age people for every person aged 65 or over.', 20),
+      writeTask('m2w', 'Exam skill · Explain (4 marks)', 'Explain two consequences of the change in Japan’s population structure shown by the pyramids.', 'Point → evidence from the pyramids → explain the consequence (“This means that…”).',
+        'First, the 65+ group grew from 17.3% of the population in 2000 to 34.8% projected in 2040, while the working-age group shrinks. This means fewer workers pay the taxes that fund pensions and healthcare, so the government faces rising costs with less income. Second, the narrowing base means fewer young people will enter the workforce in future, which causes labour shortages, for example in care homes and construction, and may force Japan to rely on technology or foreign workers.',
+        'two separate consequences · data from the pyramids or the 2040 bars · an explanation of why each matters')
+    ]);
+  }
+
+  /* ================= M3: SORT ================= */
+  function m3(body) {
+    var placed = S.sort.placed || {}, order = S.sort.order || shuffle(CARDS.map(function (_, i) { return i; }));
+    S.sort.order = order; save();
+    body.insertAdjacentHTML('beforeend',
+      '<p>These cards come from the class grid. Drag each card into the correct box, or tap a card and then tap a box. Then press <b>Check</b>.</p>' +
+      '<div class="tray" id="tray" aria-label="Cards to sort"></div>' +
+      '<div class="bins">' + BINS.map(function (b) { return '<div class="bin ' + b[2] + '" data-bin="' + b[0] + '" role="button" tabindex="0" aria-label="' + b[1] + '"><h4>' + b[1] + '</h4><div class="drop"></div></div>'; }).join('') + '</div>' +
+      '<div class="row"><button type="button" class="btn" id="chk">Check</button><button type="button" class="btn ghost" id="rs">Start again</button><span class="fb" id="sfb" aria-live="polite"></span></div>');
+    var selC = null;
+    function render() {
+      $('tray').innerHTML = ''; document.querySelectorAll('.bin .drop').forEach(function (d) { d.innerHTML = ''; });
+      order.forEach(function (i) {
+        var c = document.createElement('button'); c.type = 'button'; c.className = 'card' + (S.ans.m3 && S.ans.m3.ok ? ' right' : ''); c.textContent = CARDS[i].t; c.dataset.i = i;
+        var where = placed[i]; (where ? document.querySelector('.bin[data-bin="' + where + '"] .drop') : $('tray')).appendChild(c);
+      });
+    }
+    function put(i, bin) { if (S.ans.m3 && S.ans.m3.ok) return; if (bin) placed[i] = bin; else delete placed[i]; S.sort.placed = placed; save(); render(); }
+    render();
+    dragify(body, '.card', function (c, el) { var b = el && el.closest('.bin'); if (b) put(+c.dataset.i, b.dataset.bin); else if (el && el.closest('#tray')) put(+c.dataset.i, null); },
+      function (c) { if (S.ans.m3 && S.ans.m3.ok) return; if (selC === c) { c.classList.remove('sel'); selC = null; return; } if (selC) selC.classList.remove('sel'); selC = c; c.classList.add('sel'); }, '.bin');
+    body.querySelectorAll('.bin').forEach(function (b) {
+      var act = function () { if (selC) { put(+selC.dataset.i, b.dataset.bin); selC = null; } };
+      b.addEventListener('click', function (e) { if (!e.target.closest('.card')) act(); });
+      b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+    });
+    $('chk').onclick = function () {
+      var wrong = 0, left = 0;
+      body.querySelectorAll('.card').forEach(function (c) { var i = +c.dataset.i; if (!placed[i]) { left++; return; } if (placed[i] === CARDS[i].a) c.classList.add('right'); else { c.classList.add('wrong'); wrong++; } });
+      var fb = $('sfb');
+      if (left) { fb.className = 'fb'; fb.textContent = left + ' card' + (left > 1 ? 's' : '') + ' still to sort.'; return; }
+      if (wrong) { fb.className = 'fb bad'; fb.textContent = wrong + ' in the wrong box (shown in red). Move them and check again.'; return; }
+      S.ans.m3 = { ok: true }; save(); fb.className = 'fb ok'; fb.textContent = '✓ All 15 correct!'; award(40, $('chk'));
+    };
+    $('rs').onclick = function () { if (S.ans.m3 && S.ans.m3.ok) return; placed = {}; S.sort.placed = placed; save(); render(); $('sfb').textContent = ''; };
+    mount(body, [
+      mcq('m3b', 'Discuss', 'Some cards are “positive” consequences. Why might a geographer still question the card “Less money spent on schooling and natal medical care”?', ['Savings on schools are far smaller than the rising costs of pensions and care', 'Schools in Japan are free so there is no saving', 'Japan has more children than ever'], 0, 'Positives exist, but the savings from fewer children are outweighed by the growing costs of supporting older people.', 10),
+      writeTask('m3w', 'Exam skill · Explain a chain (4 marks)', 'Explain how a low birth rate can lead to reduced tax income for the government.', 'Link three steps: cause → effect → consequence. Use “this means that…” and “as a result…”.',
+        'A low birth rate means fewer children are born, and after about 15–20 years fewer young people enter the workforce. As a result, the number of economically active people paying income tax falls, while the number of retired people grows. This means the government collects less tax just as its spending on pensions and healthcare rises, so it may need to raise taxes, borrow more or cut services.',
+        'a clear chain of at least three linked steps · the economically active population · a consequence for government finances')
+    ]);
+  }
+  function dragify(container, sel, onDrop, onTap, zoneSel) {
+    var drag = null;
+    container.addEventListener('pointerdown', function (e) { var c = e.target.closest(sel); if (!c || c.classList.contains('right') || c.disabled) return; drag = { c: c, x: e.clientX, y: e.clientY, moved: false }; try { c.setPointerCapture(e.pointerId); } catch (x) {} });
+    container.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      if (!drag.moved && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) { drag.moved = true; var r = drag.c.getBoundingClientRect(); drag.g = drag.c.cloneNode(true); drag.g.classList.add('ghost-drag'); drag.g.style.width = r.width + 'px'; drag.ox = drag.x - r.left; drag.oy = drag.y - r.top; document.body.appendChild(drag.g); drag.c.style.opacity = '.35'; }
+      if (drag.moved) { drag.g.style.left = (e.clientX - drag.ox) + 'px'; drag.g.style.top = (e.clientY - drag.oy) + 'px'; document.querySelectorAll(zoneSel).forEach(function (z) { z.classList.remove('over'); }); var el = document.elementFromPoint(e.clientX, e.clientY), z = el && el.closest(zoneSel); if (z) z.classList.add('over'); }
+    });
+    var end = function (e) { if (!drag) return; var d = drag; drag = null; document.querySelectorAll(zoneSel).forEach(function (z) { z.classList.remove('over'); }); if (d.moved) { d.g.remove(); d.c.style.opacity = ''; onDrop(d.c, document.elementFromPoint(e.clientX, e.clientY)); } else onTap(d.c); };
+    container.addEventListener('pointerup', end);
+    container.addEventListener('pointercancel', function () { if (drag) { if (drag.g) drag.g.remove(); drag.c.style.opacity = ''; drag = null; } });
+  }
+
+  /* ================= M4: SOURCES ================= */
+  function m4(body) {
+    var at = 0;
+    body.insertAdjacentHTML('beforeend', '<p>Read each adapted source. For each one: tag the <b>type of policy</b>, answer the <b>evidence</b> question, then <b>rate how effective</b> you think it is and say why. Your ratings build a policy scorecard at the end.</p><div class="stabs" id="stabs"></div><div id="sbody" style="display:flex;flex-direction:column;gap:14px"></div><div id="scard"></div>');
+    function tabs() { $('stabs').innerHTML = SOURCES.map(function (s, i) { var st = S.src[s.id] || {}; return '<button type="button" class="stab' + (i === at ? ' on' : '') + (st.q === true && st.types === true ? ' done' : '') + '" data-s="' + i + '">' + esc(s.tab) + '</button>'; }).join(''); }
+    function show() {
+      tabs(); var s = SOURCES[at], st = S.src[s.id] = S.src[s.id] || { tsel: [], rate: 3, why: '' };
+      $('sbody').innerHTML =
+        '<article class="article"><span class="by">Source ' + s.id + '</span><div class="hd">' + esc(s.hd) + '</div>' + s.p.map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') + '<div class="cite">' + esc(s.by) + '. <a href="' + s.url + '" target="_blank" rel="noopener">Original</a></div></article>' +
+        '<div class="task' + (st.types === true ? ' done' : '') + '" id="ttask"><span class="tnum">Step 1 · Tag the policy type</span><p><b>What type of policy does this source describe? Select all that apply, then check.</b></p><div class="chips">' +
+          TYPES.map(function (t) { var on = st.tsel.indexOf(t) >= 0; var c = st.types === true ? (s.types.indexOf(t) >= 0 ? ' right' : '') : (on ? ' sel' : ''); return '<button type="button" class="chip' + c + '" data-t="' + esc(t) + '">' + esc(t) + '</button>'; }).join('') +
+          '</div><div class="row"><button type="button" class="btn" id="tchk"' + (st.types === true ? ' disabled' : '') + '>Check</button><span class="fb" id="tfb">' + (st.types === true ? '✓ Correct.' : '') + '</span></div></div>' +
+        '<div class="task' + (st.q === true ? ' done' : '') + '" id="qtask"><span class="tnum">Step 2 · Use the evidence</span><p><b>' + esc(s.q) + '</b></p><div class="opts">' +
+          s.o.map(function (o, k) { return '<button type="button" class="opt' + (st.q === true && k === s.a ? ' right' : '') + '" data-k="' + k + '"' + (st.q === true ? ' disabled' : '') + '>' + esc(o) + '</button>'; }).join('') +
+          '</div><p class="fb' + (st.q === true ? ' ok' : '') + '" id="qfb">' + (st.q === true ? '✓ ' + esc(s.why) : '') + '</p></div>' +
+        '<div class="task"><span class="tnum">Step 3 · Evaluate</span><p><b>How effective is this policy at reducing the impacts of Japan’s ageing population?</b></p><div class="rate"><input type="range" min="1" max="5" step="1" value="' + st.rate + '" id="rate" aria-label="Effectiveness rating from 1 to 5"><b id="rlab"></b></div>' +
+          '<textarea id="rwhy" placeholder="It is effective / not very effective because… The evidence is… However…" aria-label="Why did you give this rating?">' + esc(st.why) + '</textarea></div>' +
+        '<div class="navrow">' + (at > 0 ? '<button type="button" class="btn ghost" id="prev">← Source ' + SOURCES[at - 1].id + '</button>' : '<span></span>') + (at < SOURCES.length - 1 ? '<button type="button" class="btn" id="next">Source ' + SOURCES[at + 1].id + ' →</button>' : '') + '</div>';
+      var lab = ['', 'Not effective', 'Slightly effective', 'Partly effective', 'Mostly effective', 'Very effective'];
+      var rate = $('rate'); $('rlab').textContent = st.rate + ' · ' + lab[st.rate];
+      rate.oninput = function () { st.rate = +rate.value; $('rlab').textContent = st.rate + ' · ' + lab[st.rate]; save(); score(); };
+      var tt = null; $('rwhy').oninput = function (e) { st.why = e.target.value; clearTimeout(tt); tt = setTimeout(function () { save(); score(); }, 400); };
+      document.querySelectorAll('#ttask .chip').forEach(function (c) { c.onclick = function () { if (st.types === true) return; var t = c.dataset.t, k = st.tsel.indexOf(t); if (k >= 0) st.tsel.splice(k, 1); else st.tsel.push(t); c.classList.toggle('sel'); save(); }; });
+      $('tchk').onclick = function () {
+        var ok = st.tsel.length === s.types.length && s.types.every(function (t) { return st.tsel.indexOf(t) >= 0; });
+        if (ok) { st.types = true; save(); award(10, $('tchk')); show(); }
+        else { $('tfb').className = 'fb bad'; $('tfb').textContent = st.tsel.length < s.types.length ? 'There is more than that. Read the source again.' : 'Not quite. One of your tags does not fit this source.'; }
+      };
+      document.querySelectorAll('#qtask .opt').forEach(function (b) { b.onclick = function () {
+        if (st.q === true) return;
+        if (+b.dataset.k === s.a) { st.q = true; save(); award(10, b); show(); }
+        else { b.classList.add('wrong'); $('qfb').className = 'fb bad'; $('qfb').textContent = 'Not the best evidence. Look for a limitation in the source.'; setTimeout(function () { b.classList.remove('wrong'); }, 900); }
+      }; });
+      if ($('prev')) $('prev').onclick = function () { at--; show(); };
+      if ($('next')) $('next').onclick = function () { at++; show(); window.scrollTo({ top: body.offsetTop - 70, behavior: 'smooth' }); };
+      $('stabs').onclick = function (e) { var b = e.target.closest('[data-s]'); if (b) { at = +b.dataset.s; show(); } };
+      score();
+    }
+    function score() {
+      if (!$('scard')) return;
+      $('scard').innerHTML = '<h3>My policy scorecard</h3><div class="tblwrap"><table class="score"><tr><th>Source</th><th>Policy type</th><th>My rating (1–5)</th><th>My reason</th></tr>' +
+        SOURCES.map(function (s) { var st = S.src[s.id] || {}; return '<tr><td>' + s.id + '</td><td>' + esc(s.types.join(', ')) + '</td><td>' + (st.rate || 3) + '</td><td>' + esc(st.why || '') + '</td></tr>'; }).join('') + '</table></div>';
+    }
+    show();
+  }
+
+  /* ================= M5: IN CHARGE ================= */
+  function m5(body) {
+    body.insertAdjacentHTML('beforeend',
+      '<p>It is 2026 and you are advising Prime Minister Takaichi. You have a budget of <b>' + BUDGET + ' points</b>. Choose at least three policies. The first five come from the class grid; the others come from the sources. Watch the dashboard, then compare your plan with what the government is actually doing.</p>' +
+      '<div class="pm-grid"><div class="pols" id="pols"></div><aside class="dash" aria-live="polite"><div class="budget" id="bud"></div><div id="meters" style="display:flex;flex-direction:column;gap:8px"></div><p class="src">A simplified model for discussion: real effects are debated and take years.</p></aside></div>' +
+      '<div id="cmp"></div>');
+    function spent() { return S.pm.reduce(function (a, id) { return a + POLS.filter(function (p) { return p.id === id; })[0].cost; }, 0); }
+    function draw() {
+      $('pols').innerHTML = POLS.map(function (p) { var on = S.pm.indexOf(p.id) >= 0; return '<button type="button" class="pol' + (on ? ' on' : '') + '" data-p="' + p.id + '" aria-pressed="' + on + '"><span class="grid-tag">' + esc(p.grid) + '</span><b>' + esc(p.name) + '</b><span class="cost">Cost: ' + p.cost + ' point' + (p.cost === 1 ? '' : 's') + '</span></button>'; }).join('');
+      var sp = spent(); $('bud').textContent = 'Budget used: ' + sp + ' / ' + BUDGET + ' points · ' + S.pm.length + ' policies chosen';
+      var tot = { work: 0, births: 0, support: 0, money: 0 };
+      S.pm.forEach(function (id) { var p = POLS.filter(function (q) { return q.id === id; })[0]; for (var k in tot) tot[k] += p.e[k]; });
+      $('meters').innerHTML = METERS.map(function (m) { var v = Math.max(-6, Math.min(6, tot[m[0]])), w = Math.abs(v) / 6 * 50, col = v >= 0 ? '#16a34a' : '#dc2626'; return '<div class="meter"><span>' + m[1] + '</span><span class="trk"><span style="' + (v >= 0 ? 'left:50%' : 'left:' + (50 - w) + '%') + ';width:' + w + '%;background:' + col + '"></span></span><span class="v">' + (v > 0 ? 'Better +' + v : v < 0 ? 'Worse ' + v : 'No change') + '</span></div>'; }).join('');
+      $('cmp').innerHTML = S.pm.length ? '<h3>Your plan compared with the Takaichi government</h3><div class="tblwrap"><table class="score cmp"><tr><th>Your policy</th><th>What the government is doing (2025–26)</th></tr>' + S.pm.map(function (id) { var p = POLS.filter(function (q) { return q.id === id; })[0]; return '<tr><td>' + esc(p.name) + '</td><td>' + esc(p.gov) + '</td></tr>'; }).join('') + '</table></div>' : '';
+      $('pols').querySelectorAll('.pol').forEach(function (b) { b.onclick = function () {
+        var id = b.dataset.p, k = S.pm.indexOf(id), p = POLS.filter(function (q) { return q.id === id; })[0];
+        if (k >= 0) S.pm.splice(k, 1); else { if (spent() + p.cost > BUDGET) { toast('Over budget: drop a policy first.'); return; } S.pm.push(id); }
+        save(); draw();
+      }; });
+    }
+    draw();
+    mount(body, [
+      writeTask('pm1', 'Your decision', 'As Prime Minister’s advisor, which policies would you choose and why?', 'Frame: “I would… because… The evidence from Source … shows… This is similar to / different from the Takaichi government, which… The biggest risk of my plan is…”', null,
+        'at least three policies · evidence from the sources or data · a direct comparison with the current government · one risk or limitation'),
+      writeTask('pm2', 'Exam-style question (10 marks)', 'Examine the effectiveness of the policies Japan has used to manage its ageing population.', 'Plan: introduction with data → pro-natalist policies (Sources A, E) → immigration (D, F) → technology (B) → tax and spending (C, E) → conclusion: which is most effective, for whom, and over what timescale?', null,
+        'data (TFR 1.14, 29.5% aged 65+, dependency ratios) · at least three policy types · strengths and limitations of each · a judgement in the conclusion · the current Takaichi government')
+    ]);
+  }
+
+  /* ================= ONENOTE ================= */
+  function notesFor(i) {
+    var h = '', t = '';
+    var H = function (x) { h += '<h2>' + esc(x) + '</h2>'; t += '\n' + x.toUpperCase() + '\n'; };
+    var P = function (lbl, v) { h += '<p><b>' + esc(lbl) + '</b> ' + esc(v || '(not answered yet)').replace(/\n/g, '<br>') + '</p>'; t += lbl + ' ' + (v || '(not answered yet)') + '\n'; };
+    H('Briefing ' + (i + 1) + ': ' + MISSIONS[i].t);
+    if (i === 0) {
+      P('Key data:', 'TFR 4.54 (1947) → 2.04 (1957, first below replacement) → 1.58 (1966, Fire Horse) → 1.57 (1989, “1.57 shock”) → 1.26 (2005) → 1.45 (2015) → 1.14 (2025, record low).');
+      P('Percentage change 1947–2025:', '−74.9%');
+      P('Describe the trend (my answer):', S.notes.m1w);
+    } else if (i === 1) {
+      P('Age structure:', '65+ was 17.3% in 2000, 28.7% in 2020 and is projected to be 34.8% in 2040 (IPSS).');
+      P('Total dependency ratio 2020:', '68.6');
+      P('Old-age dependency ratio 2040 (projected):', '63.2');
+      P('Two consequences (my answer):', S.notes.m2w);
+    } else if (i === 2) {
+      h += '<table border="1" style="border-collapse:collapse"><tr>' + BINS.map(function (b) { return '<th style="padding:4px 8px">' + b[1] + '</th>'; }).join('') + '</tr><tr>' + BINS.map(function (b) { return '<td style="padding:4px 8px;vertical-align:top">' + CARDS.filter(function (c) { return c.a === b[0]; }).map(function (c) { return esc(c.t); }).join('<br>') + '</td>'; }).join('') + '</tr></table>';
+      BINS.forEach(function (b) { t += b[1] + ': ' + CARDS.filter(function (c) { return c.a === b[0]; }).map(function (c) { return c.t; }).join('; ') + '\n'; });
+      P('Low birth rate → reduced tax income (my answer):', S.notes.m3w);
+    } else if (i === 3) {
+      h += '<table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">Source</th><th style="padding:4px 8px">Policy type</th><th style="padding:4px 8px">Rating (1–5)</th><th style="padding:4px 8px">My reason</th></tr>' +
+        SOURCES.map(function (s) { var st = S.src[s.id] || {}; t += 'Source ' + s.id + ' (' + s.types.join(', ') + '): ' + (st.rate || 3) + '/5 – ' + (st.why || '') + '\n'; return '<tr><td style="padding:4px 8px">' + s.id + ': ' + esc(s.hd) + '</td><td style="padding:4px 8px">' + esc(s.types.join(', ')) + '</td><td style="padding:4px 8px">' + (st.rate || 3) + '</td><td style="padding:4px 8px">' + esc(st.why || '') + '</td></tr>'; }).join('') + '</table>';
+    } else {
+      P('Policies I chose:', S.pm.map(function (id) { return POLS.filter(function (p) { return p.id === id; })[0].name; }).join('; '));
+      h += '<table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">My policy</th><th style="padding:4px 8px">The Takaichi government (2025–26)</th></tr>' + S.pm.map(function (id) { var p = POLS.filter(function (q) { return q.id === id; })[0]; t += '- ' + p.name + ' | Government: ' + p.gov + '\n'; return '<tr><td style="padding:4px 8px">' + esc(p.name) + '</td><td style="padding:4px 8px">' + esc(p.gov) + '</td></tr>'; }).join('') + '</table>';
+      P('My decision:', S.notes.pm1);
+      P('Exam-style answer:', S.notes.pm2);
+    }
+    return { h: h, t: t };
+  }
+  function allNotes() {
+    var h = '<h1>Japan: The Ageing Nation · my case file</h1><p><i>Learning intention: to engage with issues that have local and global significance.</i></p>', t = 'JAPAN: THE AGEING NATION · MY CASE FILE\n';
+    for (var i = 0; i < 5; i++) { var n = notesFor(i); h += n.h; t += n.t; }
+    h += '<p><small>From SBL · Japan: The Ageing Nation</small></p>';
+    return { h: h, t: t };
+  }
+  function copyNotes(n) {
+    var html = '<div style="font-family:Calibri,Arial,sans-serif">' + n.h + '</div>';
+    var done = function () { toast('Copied. Paste it into OneNote with Ctrl+V.'); };
+    var fallback = function () {
+      var ta = document.createElement('textarea'); ta.value = n.t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { toast('Select and copy the text manually.'); } ta.remove();
+    };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([n.t], { type: 'text/plain' }) })]).then(done, function () {
+          if (navigator.clipboard.writeText) navigator.clipboard.writeText(n.t).then(done, fallback); else fallback();
+        });
+      } else if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(n.t).then(done, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  /* ================= TEACHER ================= */
+  function checkTeacher() {
+    try {
+      fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        IS_T = !!(d && d.loggedIn && d.user && d.user.status === 'active' && (d.user.role === 'teacher' || d.user.role === 'admin'));
+        if (IS_T && cur === -1 && $('tRow')) $('tRow').hidden = false;
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  function answerKey() {
+    if (!IS_T) return;
+    cur = -2;
+    var li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+    $('app').innerHTML = '<section class="panel key"><span class="kicker teal">Teacher answer key</span><h2>Japan: The Ageing Nation</h2>' +
+      '<h3>Briefing 1 · The fertility story</h3>' + li(['Q1: 4.54', 'Q2: 1974 (first dipped below 2.1 in 1957, back above in the late 1960s)', 'Q3: (1.14 − 4.54) ÷ 4.54 × 100 = −74.9%', 'Q4: the Fire Horse (hinoeuma) superstition', 'Describe: overall fall 4.54 → 1.14; below replacement since 1974; anomaly 1966; recovery 2005–15 (1.26 → 1.45) then fall']) +
+      '<h3>Briefing 2 · Changing pyramids</h3>' + li(['Task 1: 50–54 in 2000; 70–74 in 2020', 'Task 2: base narrowed and top widened (top-heavy)', 'Task 3: (15.08 + 36.12) ÷ 74.64 × 100 = 68.6', 'Task 4: 39.28 ÷ 62.13 × 100 = 63.2', '65+ share: 17.3% (2000), 28.7% (2020), 34.8% (2040 projected)']) +
+      '<h3>Briefing 3 · Sort</h3>' + BINS.map(function (b) { return '<p><b>' + b[1] + ':</b> ' + CARDS.filter(function (c) { return c.a === b[0]; }).map(function (c) { return esc(c.t); }).join('; ') + '</p>'; }).join('') + li(['Discuss: savings from fewer children are much smaller than rising pension and care costs']) +
+      '<h3>Briefing 4 · Sources</h3>' + li(SOURCES.map(function (s) { return '<b>' + s.id + '</b> (' + esc(s.types.join(', ')) + '): ' + esc(s.o[s.a]) + '. ' + esc(s.why); })) +
+      '<h3>Briefing 5 · In charge of Japan</h3>' + li(POLS.map(function (p) { return '<b>' + esc(p.name) + '</b> (cost ' + p.cost + '): ' + esc(p.gov); })) +
+      '<p class="muted">Open answers are marked by the teacher. Model answers appear to students only after they write their own.</p>' +
+      '<button type="button" class="btn ghost" id="kBack" style="align-self:flex-start">← Back</button></section>';
+    $('kBack').onclick = home; window.scrollTo(0, 0);
+  }
+
+  hud(); home(); checkTeacher();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
