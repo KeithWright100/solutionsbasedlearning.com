@@ -432,9 +432,23 @@
   $('startBtn').addEventListener('click', start);
   $('againBtn').addEventListener('click', start);
   var b0 = getBest(); if (b0) $('bestLine').textContent = 'Your best score: ' + b0 + ' points';
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<p>Students set interest rates over ' + QUARTERS + ' quarters in response to events. The best response for each type of event:</p><table><tr><th>Type</th><th>Why</th><th>Best response</th></tr>';
+    Object.keys(TYPE).forEach(function (k) { var t = TYPE[k]; h += '<tr><td><b>' + t.n + '</b></td><td>' + (t.why || '') + '</td><td>' + (t.fix || '') + '</td></tr>'; });
+    h += '</table><h3>Events and their type</h3><table><tr><th>Event</th><th>Type</th></tr>' + EVENTS.map(function (e) { return '<tr><td>' + (e.e || '') + ' ' + e.h + (e.x ? '<br><span class="muted">' + e.x + '</span>' : '') + '</td><td>' + (TYPE[e.t] ? TYPE[e.t].n : e.t) + '</td></tr>'; }).join('') + '</table>';
+    return h;
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

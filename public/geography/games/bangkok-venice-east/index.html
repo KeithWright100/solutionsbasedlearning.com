@@ -399,9 +399,22 @@
   }
 
   paintHud(); step1();
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<h3>Step 1 · Sort the clues into the 4 Ps</h3><p class="muted">Any box listed is accepted for that clue.</p><table><tr><th>Clue</th><th>Accepted P</th><th>Why</th></tr>';
+    CARDS.forEach(function (c) { h += '<tr><td><b>' + c.loc + '</b>: ' + c.t + '</td><td>' + c.cat.map(function (k) { return CATS[k].label; }).join(' or ') + '</td><td>' + (c.why || '') + '</td></tr>'; });
+    return h + '</table><h3>Steps 2 and 3</h3><p>Students justify each clue in their own words and give a verdict. These are marked by the teacher.</p>';
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>

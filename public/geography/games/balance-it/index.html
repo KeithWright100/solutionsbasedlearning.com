@@ -554,9 +554,23 @@
   renderLevels();
   // test hook
   window.__balanceIt = { makeBiz: function (k) { used = []; return makeBiz(k); }, state: function () { return { biz: biz, place: place }; } };
+
+  /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
+  var _li = function (a) { return '<ul>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>'; };
+  var _ol = function (a) { return '<ol>' + a.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol>'; };
+  var _tx = function (s) { return String(s == null ? '' : s).replace(/</g, '&lt;'); };
+
+  window.SBL_TEACHER_ADAPTER = { key: function () {
+    var h = '<p>Each round generates a new business, so the figures change every game. Use this layout to check students’ statements of financial position:</p><table><tr><th>Section</th><th>Lines</th></tr>' + SECTIONS.map(function (s) { return s.items ? '<tr><td><b>' + s.head + '</b></td><td>' + s.items.map(function (k) { return LABELS[k]; }).join('<br>') + '</td></tr>' : '<tr><td colspan="2"><b>' + s.grand + '</b></td></tr>'; }).join('') + '</table>';
+    h += '<h3>Totals</h3>' + _li(['Total assets = non-current assets + current assets', 'Total liabilities = current liabilities + non-current liabilities', 'Net assets = total assets − total liabilities', 'Equity = share capital + retained earnings (charities and non-profits have no share capital)', 'Net assets must equal equity: the statement balances']);
+    h += '<h3>Imposters (do not belong on this statement)</h3>' + _li(IMPOSTERS.map(function (x) { return '<b>' + x[1] + '</b>: ' + x[2]; }));
+    return h;
+  } };
+
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
 </body>
 </html>
