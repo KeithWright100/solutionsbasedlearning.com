@@ -321,9 +321,17 @@
     "level": "IB Geography",
     "tag": "New · Unit 1",
     "desc": "Carrot or stick? Compare The Gambia's anti-natalist policies with Singapore's pro-natalist policies using the DTM, pyramids and real data, rate what has worked, then make your own policy decisions."
+  },
+  {
+    "slug": "diaspora-flow-map",
+    "title": "Diaspora Flow Map",
+    "href": "/geography/games/diaspora-flow-map",
+    "level": "IB Geography",
+    "tag": "New · HL",
+    "desc": "Map the Chinese, Indian or your own diaspora: homeland, host countries and colour-coded flows, then mind maps on preserving and adopting culture and a six-area synthesis."
   }
 ];
-  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab"];
+  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map"];
   function weekStart(d) {
     var t = (d ? d.getTime() : Date.now()) + 7 * 3600000; /* Bangkok, UTC+7 */
     var x = new Date(t), day = (x.getUTCDay() + 6) % 7; /* Monday = 0 */
