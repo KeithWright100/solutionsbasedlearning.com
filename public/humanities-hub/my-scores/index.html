@@ -66,6 +66,8 @@
   <h1>My scores</h1>
   <p class="ms-sub">Your quiz scores and marked answers from SBL lessons and past paper questions. Only you and your teachers can see these.</p>
 
+  <p class="ms-note" id="guestNote" hidden style="background:#fff8e8;border:1px solid #f3dca6;border-radius:12px;padding:10px 14px;color:#6b4e00">You are using the shared guest login, so these scores include everyone who has used it today.</p>
+
   <div class="ms-stats" id="stats"></div>
 
   <div class="ms-tabs" role="tablist" aria-label="Score areas">
@@ -278,6 +280,9 @@
   $('tabP').addEventListener('click', function () { setTab('P'); });
   try { if (sessionStorage.getItem('sbl-myscores-tab') === 'P') setTab('P'); } catch (e) {}
   if (location.hash === '#ppq') setTab('P');
+  document.addEventListener('sbl:user', function (e) {
+    if (e.detail && String(e.detail.email || '').toLowerCase() === 'guest@solutionsbasedlearning.com') $('guestNote').hidden = false;
+  });
 
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.ms-btn[aria-controls]');

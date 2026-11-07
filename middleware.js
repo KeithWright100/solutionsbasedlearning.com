@@ -199,6 +199,22 @@ function buildCookieHeader(name, value, maxAgeSeconds) {
   return `${name}=${encodeURIComponent(value)}; Path=/; SameSite=Lax; HttpOnly; Secure; Max-Age=${maxAgeSeconds}`;
 }
 
+// The conference guest login (see api/_lib/guest.js): its access token
+// carries app_metadata.sbl_guest_until. Once that time has passed, the
+// guest is logged out and sent to the login page.
+function guestExpired(payload) {
+  const until = payload && payload.app_metadata && payload.app_metadata.sbl_guest_until;
+  return typeof until === 'number' && Date.now() >= until;
+}
+function endGuestSession(request) {
+  const loginUrl = new URL('/login/', request.url);
+  loginUrl.searchParams.set('guestEnded', '1');
+  const response = new Response(null, { status: 302, headers: { Location: loginUrl.toString() } });
+  response.headers.append('Set-Cookie', buildCookieHeader(ACCESS_COOKIE, '', 0));
+  response.headers.append('Set-Cookie', buildCookieHeader(REFRESH_COOKIE, '', 0));
+  return response;
+}
+
 function redirectToLogin(request) {
   const loginUrl = new URL('/login/', request.url);
   loginUrl.searchParams.set('redirect', new URL(request.url).pathname);
@@ -266,6 +282,7 @@ export default async function middleware(request) {
 
     payload = await verifySupabaseJwt(refreshed.access_token, { jwtSecret, supabaseUrl });
     if (!payload) return redirectToLogin(request);
+    if (guestExpired(payload)) return endGuestSession(request);
 
     // Re-issue the request to the same URL so the browser picks up
     // the fresh cookies before the page (or the admin check below)
@@ -280,6 +297,8 @@ export default async function middleware(request) {
     response.headers.append('Set-Cookie', buildCookieHeader(REFRESH_COOKIE, refreshed.refresh_token, 60 * 60 * 24 * 30));
     return response;
   }
+
+  if (guestExpired(payload)) return endGuestSession(request);
 
   if (isAdminPath || isTeacherPath) {
     const role = await getActiveRole(accessToken, supabaseUrl, anonKey, payload.sub);

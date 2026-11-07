@@ -10,6 +10,7 @@ import { isValidEmail } from './_lib/validate.js';
 import { isRateLimited, recordLoginAttempt, getClientIp, RATE_LIMIT_WINDOW_MINUTES } from './_lib/rateLimit.js';
 import { setSessionCookies } from './_lib/cookies.js';
 import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
+import { GUEST_EMAIL, guestUntil } from './_lib/guest.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -25,7 +26,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Email and password are required.' });
   }
 
-  const blocked = await isRateLimited({ email, ip });
+  // The conference guest login is shared by a room full of people on one
+  // Wi-Fi network, so a few typos must not lock everyone out: it skips the
+  // failed-attempt limit (its password is only valid for a few hours anyway).
+  const isGuest = email === GUEST_EMAIL;
+
+  const blocked = isGuest ? false : await isRateLimited({ email, ip });
   if (blocked) {
     return res.status(429).json({
       error: `Too many failed login attempts. Please wait ${RATE_LIMIT_WINDOW_MINUTES} minutes and try again, or use "Forgot password".`
@@ -49,12 +55,20 @@ export default async function handler(req, res) {
     tokenData = await tokenRes.json();
 
     if (!tokenRes.ok || !tokenData.access_token) {
-      await recordLoginAttempt({ email, ip, succeeded: false });
+      if (!isGuest) await recordLoginAttempt({ email, ip, succeeded: false });
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
   } catch (err) {
     console.error('Login request to Supabase failed:', err);
     return res.status(502).json({ error: 'Could not reach the authentication service. Please try again.' });
+  }
+
+  // The guest login only works while an admin has it switched on.
+  if (isGuest) {
+    const until = guestUntil(tokenData.user);
+    if (until === null || Date.now() >= until) {
+      return res.status(403).json({ error: 'The guest login has ended. Thank you for trying SBL!' });
+    }
   }
 
   // Reject suspended accounts even if their password is correct.

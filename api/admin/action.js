@@ -22,6 +22,7 @@ import { createSetupToken } from '../_lib/tokens.js';
 import { sendApprovalEmail, sendRejectionEmail, sendPasswordResetEmail } from '../_lib/emails.js';
 import { isValidEmail, isValidPassword } from '../_lib/validate.js';
 import { randomInt } from 'node:crypto';
+import { GUEST_EMAIL, GUEST_HOURS, guestUntil } from '../_lib/guest.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -54,6 +55,7 @@ export default async function handler(req, res) {
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
   if (action === 'set-game-of-week') return handleSetGameOfWeek(req, res, session);
   if (action === 'p3-codes') return handleP3Codes(req, res, session);
+  if (action === 'guest-access') return handleGuestAccess(req, res, session);
 
   return res.status(400).json({ error: 'Unknown or missing action.' });
 }
@@ -584,6 +586,101 @@ async function handleP3Codes(req, res, session) {
     return res.status(500).json({ error: 'Could not save the code.' });
   }
   return res.status(200).json(value);
+}
+
+// ---------------------------------------------------------------
+// guest-access — the shared conference guest login (api/_lib/guest.js).
+//   { op: 'get' }               -> { email, hours, exists, until }
+//   { op: 'start', password }   -> switch it on for GUEST_HOURS from now
+//   { op: 'stop' }              -> switch it off now
+// Start creates the account the first time (role 'student', no teacher
+// links), sets the password you chose, and clears the guest's saved
+// progress so each event starts fresh.
+// ---------------------------------------------------------------
+async function findGuest(supabase) {
+  const { data: profile, error } = await supabase
+    .from('sbl_profiles').select('id, role, status').eq('email', GUEST_EMAIL).maybeSingle();
+  if (error) throw error;
+  if (!profile) return null;
+  const { data, error: userErr } = await supabase.auth.admin.getUserById(profile.id);
+  if (userErr) throw userErr;
+  return { profile, user: data && data.user };
+}
+
+async function handleGuestAccess(req, res, session) {
+  const body = req.body || {};
+  const op = String(body.op || 'get');
+  const supabase = getSupabaseAdmin();
+  const state = (g) => ({ email: GUEST_EMAIL, hours: GUEST_HOURS, exists: !!g, until: g ? guestUntil(g.user) : null });
+
+  let guest;
+  try { guest = await findGuest(supabase); } catch (err) {
+    console.error('Guest lookup failed:', err);
+    return res.status(500).json({ error: 'Could not look up the guest account.' });
+  }
+  // Safety: never touch an account at this address that has staff rights.
+  if (guest && guest.profile.role !== 'student') {
+    return res.status(409).json({ error: GUEST_EMAIL + ' belongs to an account that is not a student account, so it cannot be used as the guest login.' });
+  }
+
+  if (op === 'get') return res.status(200).json(state(guest));
+
+  if (op === 'stop') {
+    if (!guest) return res.status(200).json(state(null));
+    const { data, error } = await supabase.auth.admin.updateUserById(guest.profile.id, {
+      app_metadata: { sbl_guest_until: Date.now() }
+    });
+    if (error) {
+      console.error('Guest stop failed:', error);
+      return res.status(500).json({ error: 'Could not switch the guest login off.' });
+    }
+    return res.status(200).json(state({ profile: guest.profile, user: data.user }));
+  }
+
+  if (op === 'start') {
+    const password = String(body.password || '');
+    if (password.length < 8 || password.length > 64) {
+      return res.status(400).json({ error: 'Choose a password of 8 to 64 characters.' });
+    }
+    const until = Date.now() + GUEST_HOURS * 60 * 60 * 1000;
+    let user;
+    if (!guest) {
+      const { data, error } = await supabase.auth.admin.createUser({
+        email: GUEST_EMAIL, password, email_confirm: true,
+        user_metadata: { full_name: 'Conference guest' },
+        app_metadata: { sbl_guest_until: until }
+      });
+      if (error || !data || !data.user) {
+        console.error('Guest create failed:', error);
+        return res.status(500).json({ error: 'Could not create the guest account' + (error && error.message ? ': ' + error.message : '.') });
+      }
+      user = data.user;
+      const { error: profileError } = await supabase.from('sbl_profiles').insert({
+        id: user.id, full_name: 'Conference guest', email: GUEST_EMAIL,
+        organisation: 'SBL guest login', role: 'student', status: 'active'
+      });
+      if (profileError) {
+        console.error('Guest profile failed:', profileError);
+        return res.status(500).json({ error: 'The guest account was created but its profile could not be saved.' });
+      }
+    } else {
+      const { data, error } = await supabase.auth.admin.updateUserById(guest.profile.id, {
+        password, app_metadata: { sbl_guest_until: until }
+      });
+      if (error) {
+        console.error('Guest start failed:', error);
+        return res.status(500).json({ error: 'Could not switch the guest login on' + (error.message ? ': ' + error.message : '.') });
+      }
+      user = data.user;
+      if (guest.profile.status !== 'active') await supabase.from('sbl_profiles').update({ status: 'active' }).eq('id', guest.profile.id);
+      // Start each event with a clean slate.
+      const { error: wipeErr } = await supabase.from('sbl_lesson_progress').delete().eq('user_id', guest.profile.id);
+      if (wipeErr) console.error('Guest progress wipe failed:', wipeErr);
+    }
+    return res.status(200).json(state({ profile: { id: user.id }, user }));
+  }
+
+  return res.status(400).json({ error: 'Unknown request.' });
 }
 
 // ---------------------------------------------------------------

@@ -8,6 +8,7 @@
 
 import { parseCookies, ACCESS_COOKIE, REFRESH_COOKIE, setSessionCookies } from './cookies.js';
 import { getSupabaseAdmin } from './supabaseAdmin.js';
+import { guestExpired } from './guest.js';
 
 // The access-token cookie only lasts an hour. middleware.js renews it
 // when a protected PAGE loads, but /api routes are not covered by the
@@ -61,6 +62,8 @@ export async function getSessionUser(req, res) {
     }
   }
   if (!user) return null;
+  // The conference guest login stops working at its end time.
+  if (guestExpired(user)) return null;
 
   const { data: profile, error: profileError } = await supabase
     .from('sbl_profiles')

@@ -68,6 +68,10 @@
   var form = document.getElementById('loginForm');
   var btn = document.getElementById('loginBtn');
   var errorBox = document.getElementById('loginError');
+  if (params.get('guestEnded')) {
+    errorBox.textContent = 'The guest login has ended. Thank you for trying SBL!';
+    errorBox.classList.add('is-visible');
+  }
   var noticeBox = document.getElementById('loginNotice');
 
   if (params.get('activated') === '1') {
