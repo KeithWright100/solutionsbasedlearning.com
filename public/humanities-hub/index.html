@@ -333,17 +333,13 @@
     var hero = document.querySelector('.hero'), welcome = document.querySelector('.welcome'), cont = document.querySelector('.hero .continue');
     function fit() {
       var items = box.querySelectorAll('.resume'), news = box.querySelectorAll('.latest');
-      items.forEach(function (el) { el.hidden = false; });
-      news.forEach(function (el, i) { el.hidden = i > 0; });
-      if (!window.matchMedia('(min-width: 981px)').matches) {
-        for (var i = 4; i < items.length; i++) items[i].hidden = true;
-        return;
-      }
+      /* the 3 most recent pages, then "Latest update" and "Latest game" */
+      items.forEach(function (el, i) { el.hidden = i > 2; });
+      news.forEach(function (el, i) { el.hidden = i > 1; });
+      if (!window.matchMedia('(min-width: 981px)').matches) return;
       hero.style.alignItems = 'start';
-      var shown = items.length, tooTall = function () { return cont.offsetHeight > welcome.offsetHeight + 1; };
+      var shown = Math.min(3, items.length), tooTall = function () { return cont.offsetHeight > welcome.offsetHeight + 1; };
       while (shown > 2 && tooTall()) { items[--shown].hidden = true; }
-      /* still room? add more "What's new" items */
-      for (var k = 1; k < news.length; k++) { news[k].hidden = false; if (tooTall()) { news[k].hidden = true; break; } }
       hero.style.alignItems = '';
     }
     fit();
