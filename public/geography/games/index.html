@@ -33,6 +33,7 @@
     color: var(--ink);
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-x: clip;
   }
 
   a { color: inherit; text-decoration: none; }
@@ -289,7 +290,49 @@
   .account-lock span { background: #0f172a; color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 999px; font-size: 15px; box-shadow: 0 8px 20px rgba(15,23,42,.25); }
   .account-lock small { color: #0f172a; font-weight: 600; background: rgba(255,255,255,.9); padding: 3px 10px; border-radius: 999px; }
   .account-lock:hover span { background: #1e293b; }
+
+  /* ===== Games home ===== */
+  .gh-search { max-width: 560px; margin: -6px auto 26px; position: relative; }
+  .gh-search svg { position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); color: var(--teal-dark); }
+  .gh-search input { width: 100%; padding: 14px 18px 14px 46px; border-radius: 999px; border: 1px solid rgba(5,43,65,.18); font: inherit; font-size: 1rem; background: #fff; box-shadow: 0 8px 22px rgba(0,25,45,.07); }
+  .gh-search input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,.18); }
+  .gh-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; margin-bottom: 40px; }
+  .gh-tile { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; min-height: 230px; padding: 26px 26px 22px; border-radius: 26px; color: #fff; text-decoration: none; box-shadow: 0 16px 34px rgba(0,25,45,.16); transition: transform .2s ease, box-shadow .2s ease; isolation: isolate; }
+  .gh-tile::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,.12); z-index: -1; transition: transform .35s ease; }
+  .gh-tile:hover, .gh-tile:focus-visible { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(0,25,45,.24); }
+  .gh-tile:hover::after { transform: scale(1.25); }
+  .gh-tile:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
+  .g1 { background: linear-gradient(140deg, #00b8b0 0%, #027f86 100%); }
+  .g2 { background: linear-gradient(140deg, #2f80ed 0%, #1b4fa8 100%); }
+  .g3 { background: linear-gradient(140deg, #f2994a 0%, #d0571b 100%); }
+  .g4 { background: linear-gradient(140deg, #5b3fc4 0%, #031c33 100%); }
+  .gh-ico { font-size: 2.6rem; line-height: 1; margin-bottom: 6px; }
+  .gh-kick { font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .gh-t { font-size: clamp(1.35rem, 2.6vw, 1.75rem); font-weight: 900; line-height: 1.15; }
+  .gh-d { font-size: .95rem; line-height: 1.45; opacity: .92; max-width: 40ch; }
+  .gh-foot { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .gh-count { font-size: .82rem; font-weight: 800; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.2); }
+  .gh-go { display: inline-flex; align-items: center; gap: 6px; font-weight: 850; padding: 9px 16px; border-radius: 999px; background: #fff; color: var(--navy); }
+  .gh-go svg { width: 16px; height: 16px; transition: transform .2s ease; }
+  .gh-tile:hover .gh-go svg { transform: translateX(3px); }
+  .gh-bar { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 0 12px; margin: -8px 0 24px; background: linear-gradient(#eef7f9 75%, rgba(238,247,249,0)); }
+  .page { overflow: clip; }
+  .gh-bar[hidden], #gh-home[hidden] { display: none; }
+  .gh-back { font-weight: 850; color: var(--teal-dark); padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid rgba(0,124,130,.3); }
+  .gh-back:hover { background: rgba(0,184,176,.1); }
+  .gh-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .gh-tabs a { padding: 8px 14px; border-radius: 999px; font-weight: 800; font-size: .9rem; color: var(--navy); background: #fff; border: 1px solid rgba(5,43,65,.16); }
+  .gh-tabs a.on { color: #fff; border-color: transparent; }
+  .gh-tabs a.on[data-go="ks3-general"] { background: #00a39c; } .gh-tabs a.on[data-go="ks3-curr"] { background: #2563c9; } .gh-tabs a.on[data-go="igcse"] { background: #dd6b26; } .gh-tabs a.on[data-go="ib"] { background: #4a32a8; }
+  .gh-none { text-align: center; color: #244253; font-weight: 700; margin: 10px 0 30px; }
+  html.gh-js body:not(.gh-view):not(.gh-searching) section.level, html.gh-js body:not(.gh-view) .more-note { display: none; }
+  body.gh-searching section.level { display: block; }
+  body.gh-searching .gh-grid { display: none; }
+  body.gh-searching .topic-nav, body.gh-searching .level-sub, body.gh-searching .topic-sub { display: none; }
+  .gh-hide { display: none !important; }
+  @media (max-width: 680px) { .gh-grid { grid-template-columns: 1fr; gap: 14px; } .gh-tile { min-height: 0; padding: 22px 20px 18px; } .gh-ico { font-size: 2.1rem; } }
 </style>
+<script>document.documentElement.classList.add("gh-js");</script>
 </head>
 <body>
 <div class="page">
@@ -310,35 +353,57 @@
       <div class="hub-kicker">
         <h1>&#127918; Interactive Humanities Games</h1>
       </div>
-      <p>Geography games for KS3, IGCSE and the IB Diploma, plus KS3 History, IGCSE Economics and IB Business Management. Develop subject knowledge, retrieval skills and critical thinking through interactive challenges &mdash; quick to play, easy to repeat.</p>
+      <p>Choose your level to find games, interactive lessons and revision challenges for KS3, IGCSE and the IB Diploma &mdash; quick to play, easy to repeat.</p>
     </div>
 
-    <nav class="level-nav" aria-label="Jump to a level">
-      <a href="#ks3">KS3 <span>50</span></a>
-      <a href="#history">KS3 History <span>1</span></a>
-      <a href="#igcse">IGCSE / KS4 <span>8</span></a>
-      <a href="#ib">IB Diploma <span>22</span></a>
-      <a href="#economics">IGCSE Economics <span>2</span></a>
-      <a href="#business">IB Business Management <span>1</span></a>
+    <div id="gh-home">
+    <div class="gh-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="ghSearch" placeholder="Search all games, e.g. population, storms, Japan&hellip;" aria-label="Search all games"></div>
+    <div class="gh-grid">
+      <a class="gh-tile g1" href="#ks3-general" data-go="ks3-general">
+        <span class="gh-ico" aria-hidden="true">&#127758;</span>
+        <span class="gh-kick">KS3 · Years 7–9</span>
+        <span class="gh-t">General games</span>
+        <span class="gh-d">World Map Challenge, Place Detective and quick quizzes for map skills and world knowledge.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="ks3-general"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="gh-tile g2" href="#ks3-curr" data-go="ks3-curr">
+        <span class="gh-ico" aria-hidden="true">&#129517;</span>
+        <span class="gh-kick">KS3 · Years 7–9</span>
+        <span class="gh-t">Curriculum games</span>
+        <span class="gh-d">Games that go with the KS3 Geography units, plus KS3 History enquiries.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="ks3-curr"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="gh-tile g3" href="#igcse" data-go="igcse">
+        <span class="gh-ico" aria-hidden="true">&#128218;</span>
+        <span class="gh-kick">IGCSE · Years 10–11</span>
+        <span class="gh-t">Interactive lessons &amp; revision</span>
+        <span class="gh-d">Edexcel IGCSE Geography by paper and topic, plus IGCSE Economics.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="igcse"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="gh-tile g4" href="#ib" data-go="ib">
+        <span class="gh-ico" aria-hidden="true">&#127891;</span>
+        <span class="gh-kick">IB Diploma</span>
+        <span class="gh-t">Interactive lessons &amp; revision</span>
+        <span class="gh-d">Case-study labs, decision games and essay practice by unit, plus IB Business.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="ib"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+    </div>
+    </div>
+    <nav class="gh-bar" id="gh-bar" aria-label="Game sections" hidden>
+      <a class="gh-back" href="#" data-go="">&larr; All games</a>
+      <div class="gh-tabs">
+        <a href="#ks3-general" data-go="ks3-general">KS3 General</a>
+        <a href="#ks3-curr" data-go="ks3-curr">KS3 Curriculum</a>
+        <a href="#igcse" data-go="igcse">IGCSE</a>
+        <a href="#ib" data-go="ib">IB Diploma</a>
+      </div>
     </nav>
+    <p class="gh-none" id="gh-none" hidden>No games match that search.</p>
 
-    <section class="level" id="ks3" aria-labelledby="ks3-h">
-      <div class="level-head"><h2 id="ks3-h">&#127757; KS3 Geography</h2><span class="level-count">50 games</span></div>
-      <p class="level-sub">Years 7&ndash;9: build core geographical knowledge and skills.</p>
+    <section class="level" id="ks3-general" data-view="ks3-general" aria-labelledby="ks3g-h">
+      <div class="level-head"><h2 id="ks3g-h">&#127758; KS3 General Geography</h2><span class="level-count">41 games</span></div>
+      <p class="level-sub">Map skills, world knowledge and quick quizzes: play any time, in any year.</p>
       <div class="game-grid">
-
-      <article class="game-card">
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/><path d="M16 5l3 3"/></svg>
-        </div>
-        <h2>How Does Life Vary?</h2>
-        <span class="status live">New &middot; Living around the world &middot; Year 7</span>
-        <p class="desc">Drag 16 factors into physical or human geography, decide what shapes six real examples of daily life, place Pakistan, Tanzania and Peru on a world map, then compare the homes, kitchens, phones, play and hopes of three real families.</p>
-        <a class="play-btn" href="/geography/games/life-around-the-world" aria-label="Play How Does Life Vary?">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
 
       <article class="game-card">
         <div class="game-icon" aria-hidden="true">
@@ -360,6 +425,54 @@
 
       <article class="game-card">
         <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" /></svg>
+        </div>
+        <h2>Place Detective</h2>
+        <span class="status live">Live</span>
+        <p class="desc">Use geographical clues to solve mystery locations. <strong>Four levels</strong>, from famous places for Year 7 up to expert detectives with technical clues and penalties for wrong guesses.</p>
+        <a class="play-btn" href="/geography/games/place-detective" aria-label="Play Place Detective">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 4h10v14l-5-3-5 3V4Z"/><path d="M5 8v12l4-2"/></svg>
+        </div>
+        <h2>KS3 Geography Quizzes</h2>
+        <span class="status live">Live</span>
+        <p class="desc">Quick multiple-choice quizzes on tropical storms, map skills and population &mdash; plus a Geography Helper in the corner for hints on tricky terms.</p>
+        <a class="play-btn" href="/geography/quizzes" aria-label="Open KS3 Geography Quizzes">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      </div>
+    </section>
+
+    <section class="level" id="ks3" data-view="ks3-curr" aria-labelledby="ks3-h">
+      <div class="level-head"><h2 id="ks3-h">&#127757; KS3 Geography curriculum</h2><span class="level-count">7 games</span></div>
+      <p class="level-sub">Years 7&ndash;9: games that go with the KS3 units, from living around the world to tropical storms and volcanoes.</p>
+      <div class="game-grid">
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/><path d="M16 5l3 3"/></svg>
+        </div>
+        <h2>How Does Life Vary?</h2>
+        <span class="status live">New &middot; Living around the world &middot; Year 7</span>
+        <p class="desc">Drag 16 factors into physical or human geography, decide what shapes six real examples of daily life, place Pakistan, Tanzania and Peru on a world map, then compare the homes, kitchens, phones, play and hopes of three real families.</p>
+        <a class="play-btn" href="/geography/games/life-around-the-world" aria-label="Play How Does Life Vary?">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 3c4 3 8 5 8 9a8 8 0 0 1-16 0c0-4 4-6 8-9Z"/></svg>
         </div>
         <h2>Tropical Storm Mission</h2>
@@ -371,18 +484,6 @@
         </a>
       </article>
 
-      <article class="game-card">
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" /></svg>
-        </div>
-        <h2>Place Detective</h2>
-        <span class="status live">Live</span>
-        <p class="desc">Use geographical clues to solve mystery locations. <strong>Four levels</strong>, from famous places for Year 7 up to expert detectives with technical clues and penalties for wrong guesses.</p>
-        <a class="play-btn" href="/geography/games/place-detective" aria-label="Play Place Detective">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
 
       <article class="game-card">
         <div class="game-icon" aria-hidden="true">
@@ -449,23 +550,11 @@
         </a>
       </article>
 
-      <article class="game-card">
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 4h10v14l-5-3-5 3V4Z"/><path d="M5 8v12l4-2"/></svg>
-        </div>
-        <h2>KS3 Geography Quizzes</h2>
-        <span class="status live">Live</span>
-        <p class="desc">Quick multiple-choice quizzes on tropical storms, map skills and population &mdash; plus a Geography Helper in the corner for hints on tricky terms.</p>
-        <a class="play-btn" href="/geography/quizzes" aria-label="Open KS3 Geography Quizzes">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
 
       </div>
     </section>
 
-    <section class="level" id="history" aria-labelledby="history-h">
+    <section class="level" id="history" data-view="ks3-curr" aria-labelledby="history-h">
       <div class="level-head"><h2 id="history-h">&#127983; KS3 History</h2><span class="level-count">1 game</span></div>
       <p class="level-sub">Years 7&ndash;9: explore the past through enquiry games.</p>
       <div class="game-grid">
@@ -484,7 +573,7 @@
       </div>
     </section>
 
-    <section class="level" id="igcse" aria-labelledby="igcse-h">
+    <section class="level" id="igcse" data-view="igcse" aria-labelledby="igcse-h">
   <div class="level-head"><h2 id="igcse-h">&#128218; IGCSE Geography (KS4)</h2><span class="level-count">8 games</span></div>
   <p class="level-sub">Edexcel IGCSE: starters, plenaries and revision games, organised by topic.</p>
   <nav class="topic-nav" aria-label="IGCSE Geography (KS4) topics"><a href="#igcse-coastal">Paper 1 · Coastal Environments <span>1</span></a><a href="#igcse-hazards">Paper 1 · Hazardous Environments <span>1</span></a><a href="#igcse-economic">Paper 2 · Economic Activity and Energy <span>3</span></a><a href="#igcse-rural">Paper 2 · Rural Environments <span>1</span></a><a href="#igcse-development">Paper 2 · Development and Human Welfare <span>1</span></a><a href="#igcse-fieldwork">Papers 1 and 2 · Fieldwork <span>1</span></a></nav>
@@ -627,7 +716,7 @@
     </div>
     </div>
 </section>
-<section class="level" id="ib" aria-labelledby="ib-h">
+<section class="level" id="ib" data-view="ib" aria-labelledby="ib-h">
   <div class="level-head"><h2 id="ib-h">&#127891; IB Diploma Geography</h2><span class="level-count">22 games</span></div>
   <p class="level-sub">IB DP: retrieval, case-study comparison and evaluation games, organised by unit.</p>
   <nav class="topic-nav" aria-label="IB Diploma Geography topics"><a href="#ib-unit1">Unit 1 · Changing Population <span>9</span></a><a href="#ib-unit2">Unit 2 · Global Climate <span>1</span></a><a href="#ib-unit3">Unit 3 · Resource Consumption and Security <span>9</span></a><a href="#ib-hl">HL · Human development and diversity <span>2</span></a><a href="#ib-all">All units · Case studies <span>1</span></a></nav>
@@ -930,7 +1019,7 @@
     </div>
   
 </section>
-<section class="level" id="economics" aria-labelledby="econ-h">
+<section class="level" id="economics" data-view="igcse" aria-labelledby="econ-h">
   <div class="level-head"><h2 id="econ-h">&#128200; IGCSE Economics</h2><span class="level-count">2 games</span></div>
   <p class="level-sub">IGCSE Economics (Cambridge and Edexcel): quick-fire games for the topics students most often mix up.</p>
   <div class="game-grid">
@@ -961,7 +1050,7 @@
 
   </div>
 </section>
-<section class="level" id="business" aria-labelledby="bus-h">
+<section class="level" id="business" data-view="ib" aria-labelledby="bus-h">
   <div class="level-head"><h2 id="bus-h">&#128188; IB Business Management</h2><span class="level-count">1 game</span></div>
   <p class="level-sub">IB Business Management: practise the calculations and layouts that Paper 2 asks you to construct.</p>
   <div class="game-grid">
@@ -986,6 +1075,62 @@
   </main>
 </div>
 
+<script>
+(function () {
+  var body = document.body, home = document.getElementById('gh-home'), bar = document.getElementById('gh-bar');
+  var secs = [].slice.call(document.querySelectorAll('section.level[data-view]'));
+  var input = document.getElementById('ghSearch'), none = document.getElementById('gh-none');
+  // card counts per view (World Map Challenge counts as its 39 games)
+  var counts = {};
+  secs.forEach(function (s) {
+    var n = 0;
+    s.querySelectorAll('.game-card').forEach(function (c) { var m = c.querySelector('.game-count b'); n += m && /(\d+) games/.test(m.textContent) ? +RegExp.$1 : 1; });
+    counts[s.dataset.view] = (counts[s.dataset.view] || 0) + n;
+  });
+  document.querySelectorAll('[data-count]').forEach(function (el) { var n = counts[el.dataset.count] || 0; el.textContent = n + (n === 1 ? ' game' : ' games'); });
+  function viewFor(hash) {
+    if (!hash) return '';
+    if (secs.some(function (s) { return s.dataset.view === hash; })) return hash;
+    var el = document.getElementById(hash), s = el && el.closest('section.level[data-view]');
+    return s ? s.dataset.view : '';
+  }
+  function show(hash, scroll) {
+    var v = viewFor(hash);
+    if (input && input.value) { input.value = ''; search(''); }
+    body.classList.toggle('gh-view', !!v);
+    home.hidden = !!v; bar.hidden = !v;
+    secs.forEach(function (s) { s.hidden = !!v && s.dataset.view !== v; });
+    bar.querySelectorAll('.gh-tabs a').forEach(function (a) { a.classList.toggle('on', a.dataset.go === v); a.setAttribute('aria-current', a.dataset.go === v ? 'page' : 'false'); });
+    if (scroll === false) return;
+    var target = v && hash !== v ? document.getElementById(hash) : null;
+    if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-go]'); if (!a) return;
+    e.preventDefault();
+    var v = a.dataset.go;
+    history.pushState(null, '', v ? '#' + v : location.pathname);
+    show(v);
+  });
+  window.addEventListener('popstate', function () { show(location.hash.slice(1)); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
+  function search(q) {
+    q = q.trim().toLowerCase();
+    body.classList.toggle('gh-searching', !!q);
+    var hits = 0;
+    secs.forEach(function (s) {
+      var any = 0;
+      s.querySelectorAll('.game-card').forEach(function (c) { var ok = !q || c.textContent.toLowerCase().indexOf(q) > -1; c.classList.toggle('gh-hide', !ok); if (ok) any++; });
+      s.querySelectorAll('.topic').forEach(function (t) { t.classList.toggle('gh-hide', !!q && !t.querySelector('.game-card:not(.gh-hide)')); });
+      s.classList.toggle('gh-hide', !!q && !any);
+      if (q) hits += any;
+    });
+    none.hidden = !q || hits > 0;
+  }
+  if (input) input.addEventListener('input', function () { search(input.value); });
+  show(location.hash.slice(1), !!location.hash);
+})();
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
 <script>
