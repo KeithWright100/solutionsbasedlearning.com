@@ -46,7 +46,8 @@ const REFRESH_COOKIE = 'sbl_rt';
 // PUBLIC_PATH_TREES — this path AND anything nested under it (a
 // trailing "/...") is public.
 //
-// ALL GAMES ARE PUBLIC (KS3, IGCSE/KS4 and IB) so they can be used to
+// ALL GAMES ARE PUBLIC (KS3, IGCSE/KS4 and IB), EXCEPT those in
+// LOCKED_GAMES below (games with self-marking past paper questions), so they can be used to
 // promote the site. '/geography/games' as a tree covers the games hub
 // page itself plus every game folder under it — including any new
 // game added later, with no change needed here. Lessons, revision,
@@ -59,7 +60,28 @@ const PUBLIC_PATH_TREES = [
 // under it. (Currently unused — kept for one-off public pages.)
 const PUBLIC_PATH_EXACT = [];
 
+// LOCKED_GAMES — games inside the public games tree that still need a
+// login, because they contain self-marking past paper (PPQ) checkpoint
+// questions with mark schemes. The games hub shows these cards with a
+// lock; this list makes the lock real, so a direct link to the game
+// (from a lesson, the Humanities Hub or a shared URL) also goes via the
+// login page. Add the folder name of any new game with PPQ checkpoints.
+const LOCKED_GAMES = [
+  'igcse-coastal-quest', 'igcse-hazard-quest', 'igcse-rural-quest',
+  'igcse-development-quest', 'igcse-fieldwork-quest', 'topic4-exam-survival',
+  'ib-population-quest', 'ib-climate-quest', 'ib-resource-quest',
+  'freshwater-quest', 'leisure-quest'
+];
+
+function isLockedGame(pathname) {
+  return LOCKED_GAMES.some((g) => {
+    const p = `/geography/games/${g}`;
+    return pathname === p || pathname.startsWith(`${p}/`);
+  });
+}
+
 function isPublicPath(pathname) {
+  if (isLockedGame(pathname)) return false;
   if (PUBLIC_PATH_EXACT.includes(pathname)) return true;
   return PUBLIC_PATH_TREES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
