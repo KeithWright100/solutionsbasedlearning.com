@@ -348,6 +348,15 @@
   .kld { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 14px; align-items: start; }
   @media (max-width: 760px) { .kld { grid-template-columns: 1fr; } }
   @media print { .top-bar, .hud, .kbar, .foot, #modal { display: none !important; } body { background: #fff !important; } .klevel { box-shadow: none; border: 1px solid #cbd5e1; break-inside: auto; } .kq, .kzone, figure { break-inside: avoid; } }
+
+  .ph-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin: 10px 0 4px; }
+  .ph { margin: 6px 0 10px; border-radius: 12px; overflow: hidden; background: #f1f5f9; border: 1px solid var(--line); position: relative; }
+  .ph img { display: block; width: 100%; max-height: 300px; object-fit: cover; }
+  .ph figcaption { font-size: .78rem; color: var(--muted); padding: 6px 10px; font-weight: 600; }
+  .ph figcaption a { color: var(--teal-dark); text-decoration: underline; }
+  .ph .ph-fb { display: none; padding: 30px; text-align: center; color: var(--muted); font-weight: 700; }
+  .ph.ph-x img { display: none; } .ph.ph-x .ph-fb { display: block; }
+  .q h4 .ph { max-width: 520px; font-weight: 400; }
 </style>
 </head>
 <body>
@@ -410,7 +419,7 @@
     { n: 11, z: 'C', emo: '🌊', t: 'Lakes and Aquifers Under Pressure', d: 'The Aral Sea and the Ogallala Aquifer' },
     { n: 12, z: 'C', emo: '🇪🇬', t: 'Shared Water Conflict: The Nile', d: 'The 1959 Agreement and the GERD dispute' },
     { n: 13, z: 'D', emo: '🧊', t: 'Improving Local Water Management', d: 'Ice stupas, Water Wise Women and top-down vs bottom-up' },
-    { n: 14, z: 'D', emo: '🏗️', t: 'Intervention: The Three Gorges Dam', d: 'Costs and benefits of multipurpose dams' },
+    { n: 14, z: 'D', emo: '🏗️', t: 'Intervention: Dams', d: 'Colorado, Hoover and the Three Gorges Dam' },
     { n: 15, z: 'D', emo: '🤝', t: 'Integrated Drainage Basin Management', d: 'America’s Watershed Initiative (Mississippi)' },
     { n: 16, z: 'D', emo: '🦩', t: 'Wetland Management', d: 'Ramsar and Louisiana’s Coastal Master Plan' },
     { n: 17, z: 'X', emo: '👹', t: 'The IB Examiner', d: 'Final boss: Claim, Evidence, Explain, Judgement' }];
@@ -849,6 +858,24 @@
           { t: 'Oxbow lake', pin: 4 },
           { t: 'Floodplain', pin: 5 },
           { t: 'Interlocking spur', pin: null }] }, next); } },
+      { title: '🏷️ Label a waterfall and gorge', how: 'Waterfalls form where a band of hard, resistant rock lies over softer rock (<b>differential erosion</b>).',
+        build: function (el, next) { labelGame(el, { svg: SVG_WATERFALL, pins: PINS_WATERFALL, cap: 'Cross-section through a waterfall.', labels: [
+          { t: 'Hard, resistant rock (cap rock)', pin: 1 },
+          { t: 'Soft, less resistant rock', pin: 2 },
+          { t: 'Overhang of hard rock', pin: 3 },
+          { t: 'Plunge pool', pin: 4 },
+          { t: 'Undercutting by hydraulic action and abrasion', pin: 5 },
+          { t: 'Gorge left behind as the waterfall retreats upstream', pin: 6 },
+          { t: 'Point bar', pin: null }] }, next); } },
+      { title: '🏷️ Label the floodplain, levees and bluffs', how: 'A cross-section across a valley in the lower course.',
+        build: function (el, next) { labelGame(el, { svg: SVG_FLOODPLAIN, pins: PINS_FLOODPLAIN, cap: 'Cross-section across a floodplain.', labels: [
+          { t: 'Bluff: steep valley side cut back by migrating meanders', pin: 1 },
+          { t: 'Floodplain: wide, flat valley floor', pin: 2 },
+          { t: 'Natural levee', pin: 3 },
+          { t: 'River channel', pin: 4 },
+          { t: 'Layers of alluvium from repeated floods', pin: 5 },
+          { t: 'Coarsest sediment, dropped first beside the channel', pin: 6 },
+          { t: 'Interlocking spurs', pin: null }] }, next); } },
       { title: '🔁 From meander to ox-bow lake', how: 'Put the stages in order.',
         build: function (el, next) { orderGame(el, ['Lateral erosion and undercutting occur on the outer (concave) banks, where flow is fastest', 'Deposition occurs on the inner (convex) banks, where flow is slack', 'Over time the meander becomes very pronounced and two neighbouring outer banks get closer', 'The narrow neck of land is cut through by erosion, often during a flood', 'The river now flows along a new, straighter channel, leaving an abandoned meander loop (cut-off)', 'Deposition seals the cut-off from the main channel, forming an ox-bow lake', 'The ox-bow lake may later dry up and fill with sediment and vegetation'], 'Tap the FIRST stage first.', next); } },
       { title: '〰️ Meander terms and sinuosity', how: '<b>Sinuosity index</b> = actual channel length ÷ straight-line distance. A value above about <b>1.5</b> is described as meandering.',
@@ -889,6 +916,16 @@
           { type: 'num', q: 'Calculate the lag time.', ans: 15, tol: 0.5, unit: 'hours', f: 'Peak discharge (hour 21) − peak rainfall (hour 6) = <b>15 hours</b>.' },
           { type: 'num', q: 'By how much did discharge rise above the base flow of 12 cumecs?', ans: 46, tol: 1, unit: 'cumecs', f: '58 − 12 = <b>46 cumecs</b>.' },
           { type: 'mc', q: 'Why is the falling limb less steep than the rising limb?', o: ['Water continues to reach the river slowly through throughflow and groundwater flow', 'It stops raining suddenly, so discharge drops at once', 'The river channel becomes narrower after a storm', 'Evaporation from the river is greatest after the peak'], c: 0, f: 'Slower transfers keep feeding the river after the storm.' }] }, next); } },
+      { title: '⚖️ Data skills: two basins, one storm', how: 'The same storm fell on two drainage basins, with peak rainfall at <b>hour 6</b>. Compare their hydrographs.',
+        build: function (el, next) { dataGame(el, { chart: lineChart({ title: 'Two storm hydrographs', x0: 0, x1: 72, xticks: [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72], y0: 0, y1: 120, ystep: 20, minor: 5, xlab: 'Hours', ylab: 'Discharge (cumecs)',
+            series: [{ c: '#dc2626', label: 'Basin A', dots: true, pts: [[0, 10], [6, 12], [8, 40], [10, 95], [12, 110], [14, 80], [18, 40], [24, 20], [36, 14], [48, 12], [72, 11]] },
+                     { c: '#16a34a', label: 'Basin B', dash: '7 4', dots: true, pts: [[0, 10], [6, 10], [12, 14], [18, 22], [24, 32], [30, 40], [36, 44], [42, 42], [48, 36], [60, 26], [72, 18]] }] }),
+          cap: 'Discharge from two basins after the same storm (fictional data).', qs: [
+          { type: 'num', q: 'Calculate the lag time for Basin A.', ans: 6, tol: 0.5, unit: 'hours', f: 'Peak at hour 12 − peak rainfall at hour 6 = <b>6 hours</b>.' },
+          { type: 'num', q: 'Calculate the lag time for Basin B.', ans: 30, tol: 1, unit: 'hours', f: 'Peak at hour 36 − hour 6 = <b>30 hours</b>.' },
+          { type: 'num', q: 'How many times higher is Basin A’s peak than Basin B’s? One decimal place.', ans: 2.5, tol: 0.05, unit: 'times', f: '110 ÷ 44 = <b>2.5</b>.' },
+          { type: 'mc', q: 'Which basin is most likely to be <b>urban, small and steep on impermeable rock</b>?', o: ['Basin A: flashy, with a short lag time and a high, narrow peak', 'Basin B: subdued, with a long lag time', 'Both are the same', 'Neither: rock type has no effect'], c: 0, f: 'Fast runoff from impermeable surfaces gives a flashy hydrograph.' },
+          { type: 'mc', q: 'Which features best explain Basin B’s hydrograph?', o: ['Large, forested basin on permeable rock with gentle slopes', 'Small, urban basin with many drains', 'Saturated clay soils after weeks of rain', 'A very high drainage density'], c: 0, f: 'Interception, infiltration and slow groundwater flow delay and lower the peak.' }] }, next); } },
       { title: '📅 River regimes', how: 'A <b>river regime</b> is the seasonal variation in a river’s discharge over a year. It depends mostly on climate: the amount and type of precipitation, temperature and evapotranspiration, plus vegetation, rock, soil and basin size.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['w', '🌧️ Winter maximum'], ['s', '❄️ Late spring / summer maximum']], ['zc3', 'zc2']), cards: [
           { t: 'The River Shannon, Ireland', a: ['w'], why: 'Atlantic depressions bring most rain in winter, when evapotranspiration is low.' },
@@ -931,6 +968,12 @@
           { t: 'Restoring a floodplain wetland', a: false, why: 'Wetlands store water and release it slowly.' },
           { t: 'Building homes on the floodplain', a: true, why: 'More people and property are exposed, so the risk rises.' },
           { t: 'Prolonged rain that saturates the soil before a storm', a: true, why: 'Saturated soil cannot absorb more water.' }] }, next); } },
+      { title: '📸 Spot the flood factor', how: 'Study each photo and decide how it affects flood risk.',
+        build: function (el, next) { mcq(el, [
+        { q: photo('Hillside deforestation in Rio de Janeiro.jpg', 'Deforested hillside, Rio de Janeiro') + 'How does the change in this photo increase flood risk?', o: ['Less interception and infiltration, so rain runs off quickly and carries soil into rivers', 'More trees intercept rain, so rivers rise slowly', 'It increases evapotranspiration', 'It has no effect on runoff'], c: 0, f: 'Deforestation shortens lag time and raises peak discharge; eroded soil also reduces channel capacity.' },
+        { q: photo('Flooding in Dufferin Street underpass beneath railway tracks, 2013-07-08.JPG', 'Flooded underpass, Toronto, July 2013') + 'Which urban factor helps explain this flood?', o: ['Impermeable roads and roofs send water into drains faster than they can carry it', 'Urban areas have more trees than the countryside', 'Cities always have permeable soils', 'Drains slow down runoff'], c: 0, f: 'Intense rain plus impermeable surfaces overwhelm drains: urban flash flooding.' },
+        { q: photo('Los Angeles River Glendale.jpg', 'The concrete channel of the Los Angeles River') + 'What type of change is shown, and what is its effect?', o: ['Channel modification (concrete lining): water moves faster, reducing local flooding but raising the risk downstream', 'Afforestation, which slows flow', 'A natural meander forming', 'A wetland that stores floodwater'], c: 0, f: 'Smooth, straight channels speed up flow, passing the problem downstream.' },
+        { q: photo('2011 flooding in Ayutthaya Province-EO-1 merged.jpg', 'Satellite image of the 2011 flooding in Ayutthaya Province') + 'Which natural factor helps explain why the 2011 floods spread so widely around Ayutthaya?', o: ['Very flat, low-lying land in a huge drainage basin, so water spreads out and drains slowly', 'Steep, rocky slopes', 'A tiny drainage basin', 'Very permeable chalk geology'], c: 0, f: 'Relief and basin size control the duration and extent of flooding.' }], next); } },
       { title: '📊 Data skills: recurrence intervals', how: '<b>Recurrence interval</b> = (n + 1) ÷ m, where <b>n</b> = number of years of records and <b>m</b> = the rank of the flood (largest = 1).',
         build: function (el, next) { dataGame(el, { chart: '<table class="dg-table"><tr><th>Rank (m)</th><th>Peak discharge (cumecs)</th></tr><tr><td>1</td><td>820</td></tr><tr><td>2</td><td>760</td></tr><tr><td>5</td><td>610</td></tr><tr><td>10</td><td>480</td></tr><tr><td>25</td><td>350</td></tr></table>',
           cap: 'Ranked annual peak discharges from 49 years of records (fictional data).', qs: [
@@ -961,6 +1004,16 @@
           { t: 'Flood forecasting and warning systems', a: ['s'], why: 'Give people time to prepare and evacuate.' },
           { t: 'Flood insurance and disaster aid', a: ['s'], why: 'Loss-sharing adjustments spread the cost.' },
           { t: 'Smartphone apps for citizens to report rising water', a: ['s'], why: 'Citizen-reporting technology improves warnings.' }] }, next); } },
+      { title: '🏷️ Label the flood management schemes', how: 'A plan view of a drainage basin using several schemes. Which are hard and which are soft?',
+        build: function (el, next) { labelGame(el, { svg: SVG_ENG, pins: PINS_ENG, cap: 'Flood management schemes in one drainage basin (plan view).', labels: [
+          { t: 'Afforestation in the upper basin (soft)', pin: 1 },
+          { t: 'Dam and reservoir (hard)', pin: 2 },
+          { t: 'Channel straightening (hard)', pin: 3 },
+          { t: 'Flood relief (diversion) channel (hard)', pin: 4 },
+          { t: 'Artificial levee protecting the town (hard)', pin: 5 },
+          { t: 'Land-use zoning: park and fields on the floodplain (soft)', pin: 6 },
+          { t: 'River gauge and warning system (soft)', pin: 7 },
+          { t: 'Sediment diversion (hard)', pin: null }] }, next); } },
       { title: '⚖️ Benefit or problem?', how: 'Is each statement a <b>benefit</b> or a <b>disadvantage</b> of the measure named?',
         build: function (el, next) { flash(el, { yes: '👍 Benefit', no: '👎 Disadvantage', ky: 'b', kn: 'd', items: [
           { t: 'Levees: protect towns from all but the largest floods', a: true, why: 'They raise channel capacity.' },
@@ -989,6 +1042,23 @@
           { t: 'The Morganza Spillway was opened for the first time since 1973', a: ['ms'], why: 'Water was diverted into the Atchafalaya basin to protect Baton Rouge and New Orleans.' },
           { t: 'The city is sinking because groundwater was pumped from beneath it', a: ['bk'], why: 'Subsidence increases flood risk.' },
           { t: 'Floods made worse by human changes to the river and its floodplain', a: ['bo'], why: 'Urbanisation, levees and land-use change affected both.' }] }, next); } },
+      { title: '🗺️ Map: the Chao Phraya basin', how: 'Four rivers (Ping, Wang, Yom and Nan) join to form the Chao Phraya, which flows south to Bangkok and the Gulf of Thailand.' + photos(photo('Flooding in Bangkok, Thailand (ASTER).jpg', 'Satellite image of flooding around Bangkok, 2011')),
+        build: function (el, next) { labelGame(el, { svg: SVG_CHAO, pins: PINS_CHAO, cap: 'Schematic map of the Chao Phraya basin.', labels: [
+          { t: 'Bhumibol Dam (Ping River)', pin: 1 },
+          { t: 'Sirikit Dam (Nan River)', pin: 2 },
+          { t: 'Nakhon Sawan: where the rivers join to form the Chao Phraya', pin: 3 },
+          { t: 'Ayutthaya: industrial estates flooded in 2011', pin: 4 },
+          { t: 'Bangkok', pin: 5 },
+          { t: 'Drainage basin boundary (watershed)', pin: 6 },
+          { t: 'Mekong River', pin: null }] }, next); } },
+      { title: '🗺️ Map: managing the Mississippi in 2011', how: 'The lower Mississippi is lined with levees, with floodways and spillways that can be opened in extreme floods.' + photos(photo('Morganza Spillway Aerial.jpg', 'The Morganza Spillway, Louisiana')),
+        build: function (el, next) { labelGame(el, { svg: SVG_MISS, pins: PINS_MISS_8, cap: 'Schematic map of the lower Mississippi.', labels: [
+          { t: 'Cairo, Illinois: Birds Point levee blown up to use the New Madrid Floodway', pin: 1 },
+          { t: 'Morganza Spillway: diverts water into the Atchafalaya basin', pin: 2 },
+          { t: 'Baton Rouge', pin: 3 },
+          { t: 'Bonnet Carré Spillway into Lake Pontchartrain', pin: 4 },
+          { t: 'New Orleans', pin: 5 },
+          { t: 'Hoover Dam', pin: null }] }, next); } },
       { title: '🛠️ Which scheme?', how: 'Match each mitigation measure to its case study.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['bk', '🇹🇭 Bangkok'], ['ms', '🇺🇸 Mississippi']], ['zc3', 'zc2']), cards: [
           { t: '“Monkey cheek” (kaem ling) retention areas that store floodwater', a: ['bk'], why: 'Royal-initiated water storage areas around Bangkok.' },
@@ -1023,15 +1093,62 @@
           { type: 'num', q: 'How many times larger is agricultural use than municipal use? Give your answer to one decimal place.', ans: 6.4, tol: 0.05, unit: 'times', f: '70 ÷ 11 = <b>6.4 times</b>.' },
           { type: 'num', q: 'If the world withdraws about 4,000 km³ of fresh water a year, how much is used by agriculture?', ans: 2800, tol: 1, unit: 'km³', f: '70% of 4,000 = <b>2,800 km³</b>.' },
           { type: 'mc', q: 'Which change would save the <b>most</b> water globally?', o: ['More efficient irrigation, such as drip systems', 'Shorter showers in homes', 'Fixing leaking taps in offices', 'Using less water to cool computers'], c: 0, f: 'Agriculture is by far the largest user, so irrigation efficiency matters most.' }] }, next); } },
+      { title: '🌍 Humans and the global water system', build: function (el, next) { mcq(el, [
+        { q: 'What is the link between access to fresh water and the growth of human populations?', o: ['Settlements and farming grew where reliable fresh water was available, so population growth has always followed water supply', 'Population only grows in deserts', 'Fresh water has no effect on where people live', 'Populations grow fastest where water is most expensive'], c: 0, f: 'Early civilisations grew along the Nile, Tigris–Euphrates, Indus and Huang He.' },
+        { q: 'Roughly how many large dams are there in the world?', o: ['Tens of thousands (more than 45,000)', 'About 500', 'About 5,000,000', 'Fewer than 100'], c: 0, f: 'Large dams now hold back a large share of the world’s river flow.' },
+        { q: 'Approximately what proportion of the world’s wetlands have been drained or lost?', o: ['About half', 'About 1%', 'Almost none', 'All of them'], c: 0, f: 'Estimates range from around half to over 60% since 1900.' },
+        { q: 'The area used to grow crops worldwide is roughly the size of which continent? And for livestock?', o: ['Crops ≈ South America; livestock ≈ Africa', 'Crops ≈ Antarctica; livestock ≈ Europe', 'Crops ≈ Australia; livestock ≈ Greenland', 'Crops ≈ Asia; livestock ≈ Asia'], c: 0, f: 'Agriculture has transformed a huge share of the land surface, altering infiltration, runoff and evapotranspiration.' },
+        { q: 'Which SDGs do these water issues relate to?', o: ['SDG 6 (clean water and sanitation), with links to SDG 2 (zero hunger), SDG 13 (climate action) and SDG 15 (life on land)', 'Only SDG 4 (quality education)', 'Only SDG 9 (industry and innovation)', 'None of the SDGs'], c: 0, f: 'Water connects to food, health, climate and ecosystems.' }], next); } },
+      { title: '👣 Data skills: water footprints', how: 'A <b>water footprint</b> is the amount of fresh water used to produce the goods and services used by a person or group.',
+        build: function (el, next) { dataGame(el, { chart: barChart({ title: 'Water footprint of products', bars: [['1 kg beef', 15400, '#b91c1c'], ['1 kg cheese', 3200, '#d97706'], ['1 litre milk', 1000, '#0284c7'], ['1 kg rice', 2500, '#16a34a'], ['1 cup coffee', 130, '#7c4a1e']], y0: 0, y1: 16000, ystep: 2000, minor: 400, ylab: 'Litres of water', values: true, fmt: function (v) { return v.toLocaleString('en-GB'); } }),
+          cap: 'Approximate global averages (Water Footprint Network).', qs: [
+          { type: 'num', q: 'How many litres of water are needed for 250 g of beef (one large steak)?', ans: 3850, tol: 1, unit: 'litres', f: '15,400 × 0.25 = <b>3,850 litres</b>.' },
+          { type: 'num', q: 'How many times more water does 1 kg of beef need than 1 litre of milk? One decimal place.', ans: 15.4, tol: 0.05, unit: 'times', f: '15,400 ÷ 1,000 = <b>15.4</b>.' },
+          { type: 'mc', q: 'Why does beef have such a large water footprint?', o: ['Most of the water is used to grow the crops that feed the cattle over several years', 'Cattle drink 15,000 litres a day', 'Beef is washed many times before it is sold', 'Water is used to freeze the meat'], c: 0, f: 'Feed crops account for most of the footprint, so changing diets increase water demand.' }] }, next); } },
+      { title: '🌐 Label the three-cell model', how: 'Global atmospheric circulation explains where rain falls. Air <b>rises</b> at the equator (low pressure, the <b>ITCZ</b>) and <b>sinks</b> at about 30° (high pressure, dry air, deserts). As the overhead sun moves north and south during the year, the ITCZ and its rain belt move with it.',
+        build: function (el, next) { labelGame(el, { svg: SVG_CELLS, pins: PINS_CELLS, cap: 'A simplified cross-section of the three-cell model in the northern hemisphere.', labels: [
+          { t: 'Rising warm, moist air at the ITCZ: low pressure and heavy rain', pin: 1 },
+          { t: 'Descending cool, dry air at about 30°: high pressure and deserts', pin: 2 },
+          { t: 'Hadley cell', pin: 3 },
+          { t: 'Ferrel cell', pin: 4 },
+          { t: 'Polar cell', pin: 5 },
+          { t: 'Rising air at the polar front (about 60°): low pressure', pin: 6 },
+          { t: 'Descending air at the equator brings rain', pin: null }] }, next); } },
       { title: '☀️ Causes of drought', build: function (el, next) { mcq(el, [
         { q: 'How can the <b>ITCZ</b> cause drought in the Sahel?', o: ['If the rain belt does not move as far north in summer, the rainy season is short or fails', 'The ITCZ stays over the Sahel all year, causing permanent floods', 'The ITCZ is a cold ocean current that blocks rain', 'The ITCZ moves south in July, bringing heavy rain'], c: 0, f: 'The seasonal shift of the Inter-Tropical Convergence Zone brings the Sahel’s rain; a weak shift means drought.' },
         { q: 'During an <b>El Niño</b> event, which areas often suffer drought?', o: ['Eastern Australia, Indonesia and southern Africa', 'Peru and Ecuador', 'The whole of the Pacific coast of South America', 'Only polar regions'], c: 0, f: 'El Niño shifts warm water east across the Pacific, bringing rain to Peru and drought to the western Pacific.' },
-        { q: 'Which UN Sustainable Development Goal is about clean water and sanitation?', o: ['SDG 6', 'SDG 2', 'SDG 13', 'SDG 11'], c: 0, f: 'SDG 6: ensure availability and sustainable management of water and sanitation for all.' }], next); } }]);
+        { q: 'Which UN Sustainable Development Goal is about clean water and sanitation?', o: ['SDG 6', 'SDG 2', 'SDG 13', 'SDG 11'], c: 0, f: 'SDG 6: ensure availability and sustainable management of water and sanitation for all.' },
+        { q: 'How can <b>global warming</b> cause drought?', o: ['Higher temperatures increase evaporation and shift rainfall belts, so some regions get less rain and lose more water', 'Warmer air holds less water vapour, so it rains more everywhere', 'Global warming stops evaporation completely', 'It only affects polar regions'], c: 0, f: 'Drier soils and less snowpack also reduce water stored for the dry season.' },
+        { q: 'How can <b>population growth</b> lead to drought conditions?', o: ['Rising demand for water and food leads to over-abstraction, so rivers, lakes and aquifers fall even in years of normal rainfall', 'More people means more rain', 'Population growth reduces water demand', 'People cause the ITCZ to move'], c: 0, f: 'This is a human (economic or demand-driven) factor, often combined with physical causes.' }], next); } },
+      { title: '🌍 Horn of Africa drought 2011: physical or economic?', how: 'Sort the causes of the 2010–11 drought and famine into <b>physical</b> water scarcity factors and <b>economic / human</b> factors.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ph', '☀️ Physical'], ['ec', '💰 Economic / human']], ['zc2', 'zc3']), cards: [
+          { t: 'Two rainy seasons in a row failed, linked to La Niña', a: ['ph'], why: 'Natural climate variability reduced rainfall.' },
+          { t: 'High temperatures increased evaporation from soils and water holes', a: ['ph'], why: 'A physical cause of water loss.' },
+          { t: 'Conflict in Somalia blocked aid from reaching many areas', a: ['ec'], why: 'Insecurity stopped help getting through.' },
+          { t: 'Poverty meant herders and farmers could not afford food when prices rose', a: ['ec'], why: 'People lacked the money to cope.' },
+          { t: 'Few wells, reservoirs or irrigation schemes to store water', a: ['ec'], why: 'Lack of investment in water infrastructure.' },
+          { t: 'Global food prices were high', a: ['ec'], why: 'Imported food became unaffordable.' },
+          { t: 'Livestock died as pasture and water dried up', a: ['ph'], why: 'A direct effect of the lack of rain.' }] }, next); } }]);
   };
 
   /* L10 — Environmental consequences of agriculture */
   LV[10] = function (root) {
     stages(root, [
+      { title: '💧 What is irrigation?', how: '<b>Irrigation</b> is the addition of water to areas where there is not enough for adequate crop growth. Water comes from surface stores (lakes, reservoirs, rivers) or from groundwater. It was used in Egypt about 6,000 years ago, and large parts of the USA and Australia are irrigated today.',
+        build: function (el, next) { mcq(el, [
+        { q: 'A <b>shaduf</b> and an <b>Archimedes screw</b> are examples of:', o: ['Simple, low-technology ways of lifting water for irrigation', 'High-tech drip irrigation systems', 'Types of salinization', 'Methods of drying wetlands'], c: 0, f: 'Both have been used for thousands of years, especially along the Nile.' },
+        { q: 'Where does irrigation take place?', o: ['In both lower- and higher-income countries, wherever rainfall is insufficient or unreliable', 'Only in low-income countries', 'Only in tropical rainforests', 'Only where it rains all year'], c: 0, f: 'For example the Central Valley (California), the Murray–Darling (Australia) and the Nile valley.' }], next); } },
+      { title: '🏷️ Label the impacts of agriculture on water', how: 'Irrigation and agrochemicals affect both the soil and water quality.' + photos(photo('Eutrophication in Lake Erie.jpg', 'Algal bloom on Lake Erie seen from space')),
+        build: function (el, next) { labelGame(el, { svg: SVG_AGRI, pins: PINS_AGRI, cap: 'Salinization and agrochemical run-off (cross-section).', labels: [
+          { t: 'Irrigation water added from a canal', pin: 1 },
+          { t: 'High evaporation in a hot, dry climate', pin: 2 },
+          { t: 'Over-irrigation raises the water table', pin: 3 },
+          { t: 'Capillary action draws salty water to the surface', pin: 4 },
+          { t: 'Salt crust left on the soil (salinization)', pin: 5 },
+          { t: 'Fertiliser and pesticide run-off into the river', pin: 6 },
+          { t: 'Nitrates leach down into the groundwater', pin: 7 },
+          { t: 'Algal bloom (eutrophication)', pin: 8 },
+          { t: 'Desalination plant', pin: null }] }, next); } },
       { title: '🚿 How efficient is each irrigation type?', how: 'Sort the irrigation methods by how much water reaches the crops.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['hi', '🟢 High efficiency'], ['md', '🟡 Medium efficiency'], ['lo', '🔴 Low efficiency']], ['zg', 'zc1', 'zr']), cards: [
           { t: 'Drip (trickle) irrigation', s: 'water delivered to each plant’s roots', a: ['hi'], why: 'Around 90% efficient: very little evaporation or runoff.' },
@@ -1044,7 +1161,9 @@
       { title: '🧂 Salinization and bioaccumulation', build: function (el, next) { mcq(el, [
         { q: 'How does irrigation cause <b>salinization</b>?', o: ['Water evaporates in hot climates and leaves dissolved salts behind in the topsoil', 'Irrigation water is always taken from the sea', 'Salt is added to the soil by farmers to help crops grow', 'Rain washes salt down into the groundwater'], c: 0, f: 'Over-watering also raises the water table, bringing salts up by capillary action.' },
         { q: 'What is <b>bioaccumulation</b>?', o: ['The build-up of a chemical such as DDT inside an organism over time, faster than it can be removed', 'The growth of algae after fertiliser run-off', 'The increase in crop yields from irrigation', 'The recycling of nutrients in a healthy ecosystem'], c: 0, f: 'Concentrations then increase up the food chain (biomagnification), harming top predators.' },
-        { q: 'Which is an impact of agriculture on <b>groundwater</b>?', o: ['Over-pumping for irrigation lowers the water table and nitrates can leach into aquifers', 'Farming always raises the water table everywhere', 'Groundwater is never used by farmers', 'Fertilisers turn groundwater into salt water'], c: 0, f: 'Both quantity (over-abstraction) and quality (nitrate pollution) are affected.' }], next); } }]);
+        { q: 'Which is an impact of agriculture on <b>groundwater</b>?', o: ['Over-pumping for irrigation lowers the water table and nitrates can leach into aquifers', 'Farming always raises the water table everywhere', 'Groundwater is never used by farmers', 'Fertilisers turn groundwater into salt water'], c: 0, f: 'Both quantity (over-abstraction) and quality (nitrate pollution) are affected.' },
+        { q: 'Which would best <b>reduce</b> agrochemical pollution of rivers?', o: ['Buffer strips of vegetation beside rivers, precise fertiliser use and limits on spreading before heavy rain', 'Applying more fertiliser so crops absorb it faster', 'Draining nearby wetlands', 'Removing all trees along river banks'], c: 0, f: 'Buffer strips and wetlands trap nutrients before they reach the water.' },
+        { q: 'How can farming on a floodplain affect river water quality during a flood?', o: ['Floodwater picks up soil, fertilisers, pesticides and animal waste from fields and carries them into the river', 'Floods always clean the river completely', 'Floodplain farming has no effect on water quality', 'Floodwater turns fertiliser into fresh water'], c: 0, f: 'Sediment and nutrient loads rise sharply during floods.' }], next); } }]);
   };
 
   /* L11 — Human pressures on lakes and aquifers */
@@ -1069,7 +1188,7 @@
           { t: 'Centre-pivot irrigation for corn, wheat and cattle feed', a: ['og'], why: 'Around 30% of the USA’s irrigation groundwater comes from it.' },
           { t: 'The Kok-Aral Dam (2005) helped the northern part recover', a: ['ar'], why: 'Water levels and fish catches rose in the North Aral.' },
           { t: 'Over-abstraction of water for agriculture is the main cause of decline', a: ['bo'], why: 'Both are examples of unsustainable irrigation.' }] }, next); } },
-      { title: '📉 Data skills: the shrinking Aral Sea', how: 'Use the figures to answer.',
+      { title: '📉 Data skills: the shrinking Aral Sea', how: 'Use the figures to answer.' + photos(photo('Aral Sea 1989-2008.jpg', 'The Aral Sea in 1989 (left) and 2008 (right)')),
         build: function (el, next) { dataGame(el, { chart: '<table class="dg-table"><tr><th>Year</th><th>Approximate area (km²)</th></tr><tr><td>1960</td><td>68,000</td></tr><tr><td>2007</td><td>6,800</td></tr></table>',
           cap: 'By 2007 the Aral Sea was about a tenth of its 1960 size.', qs: [
           { type: 'num', q: 'Calculate the percentage decrease in area from 1960 to 2007.', ans: 90, tol: 0.5, unit: '%', f: '(68,000 − 6,800) ÷ 68,000 × 100 = <b>90%</b>.' },
@@ -1080,6 +1199,28 @@
   /* L12 — Internationally shared water resources: the Nile */
   LV[12] = function (root) {
     stages(root, [
+      { title: '🗺️ Map: the Nile basin', how: 'Locate the key places, countries and dams. The Nile flows north, from Lake Victoria and the Ethiopian highlands to the Mediterranean.',
+        build: function (el, next) { labelGame(el, { svg: SVG_NILE, pins: PINS_NILE, cap: 'Schematic map of the Nile basin.', labels: [
+          { t: 'Nile Delta and Cairo', pin: 1 },
+          { t: 'Aswan High Dam and Lake Nasser', pin: 2 },
+          { t: 'Egypt', pin: 3 },
+          { t: 'Sudan', pin: 4 },
+          { t: 'Khartoum: confluence of the White and Blue Nile', pin: 5 },
+          { t: 'Blue Nile', pin: 6 },
+          { t: 'Grand Ethiopian Renaissance Dam (GERD)', pin: 7 },
+          { t: 'Ethiopia and Lake Tana (source of the Blue Nile)', pin: 8 },
+          { t: 'White Nile (flows through South Sudan)', pin: 9 },
+          { t: 'Lake Victoria (Uganda, Kenya, Tanzania)', pin: 10 },
+          { t: 'Three Gorges Dam', pin: null }] }, next); } },
+      { title: '🌍 Why is the Nile so important?', how: 'The Nile is about <b>6,650 km</b> long. Its two main tributaries, the <b>White Nile</b> and the <b>Blue Nile</b>, meet at <b>Khartoum</b>. The basin covers about 10% of Africa and 11 countries, and about <b>85%</b> of the water comes from the Ethiopian highlands via the Blue Nile. Match each stakeholder to its use of the river.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['ec', '💰 Economic uses'], ['so', '👥 Social uses'], ['en', '🌿 Environmental']], ['zc1', 'zc4', 'zg']), cards: [
+          { t: 'Egypt irrigates the desert using water stored by the Aswan High Dam', a: ['ec'], why: 'Agriculture and irrigation.' },
+          { t: 'Hydroelectric power from Aswan and the GERD', a: ['ec'], why: 'Energy for industry and homes.' },
+          { t: 'White-water rafting on the White Nile rapids in Uganda', a: ['ec'], why: 'Tourism earns income.' },
+          { t: 'Boats on the river and lakes link landlocked countries such as Rwanda and Burundi to trade', a: ['ec'], why: 'Transport where roads and railways are poor.' },
+          { t: 'Drinking water for fast-growing populations', a: ['so'], why: 'Domestic supply.' },
+          { t: 'Storing water in reservoirs to reduce the effects of drought', a: ['so'], why: 'Drought control protects lives and food supply.' },
+          { t: 'Nile crocodiles and hippos in Murchison Falls National Park, Uganda', a: ['en'], why: 'Wildlife and protected areas.' }] }, next); } },
       { title: '🧭 Whose position is it?', how: 'Sort each view in the Grand Ethiopian Renaissance Dam (GERD) dispute.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['et', '🇪🇹 Ethiopia (upstream)'], ['eg', '🇪🇬 Egypt (downstream)'], ['sd', '🇸🇩 Sudan (between)']], ['zc1', 'zc2', 'zc3']), cards: [
           { t: 'Most of our people need electricity, and the Blue Nile starts in our highlands', a: ['et'], why: 'Ethiopia sees GERD as vital for development and electricity exports.' },
@@ -1097,7 +1238,10 @@
       { title: '⏳ The Nile timeline', how: 'Put the events in order, oldest first.',
         build: function (el, next) { orderGame(el, ['1929: Anglo-Egyptian agreement gives Egypt a veto over upstream projects', '1959: Nile Waters Agreement divides the flow between Egypt and Sudan', '1999: Nile Basin Initiative set up to encourage cooperation', '2010: Upstream states sign the Cooperative Framework Agreement (CFA)', '2011: Construction of the GERD begins on the Blue Nile', '2020: Ethiopia begins filling the GERD reservoir'], 'Tap the OLDEST event first.', next); } },
       { title: '🧠 Causes of water conflict', build: function (el, next) { mcq(el, [
-        { q: 'Which is <b>not</b> usually a cause of conflict over a shared river?', o: ['Water being abundant compared with demand in every country', 'Population growth raising demand', 'Upstream dams reducing flow downstream', 'Unclear or unequal sharing agreements'], c: 0, f: 'Conflict comes from scarcity, growing demand, pollution and unequal power or agreements.' }], next); } }]);
+        { q: 'Which is <b>not</b> usually a cause of conflict over a shared river?', o: ['Water being abundant compared with demand in every country', 'Population growth raising demand', 'Upstream dams reducing flow downstream', 'Unclear or unequal sharing agreements'], c: 0, f: 'Conflict comes from scarcity, growing demand, pollution and unequal power or agreements.' },
+        { q: 'Where do the White Nile and the Blue Nile meet?', o: ['Khartoum, Sudan', 'Cairo, Egypt', 'Addis Ababa, Ethiopia', 'Kampala, Uganda'], c: 0, f: 'The confluence is in the Sudanese capital.' },
+        { q: 'If 85% of an average 84 billion m³ flow comes from Ethiopia, about how much is that?', o: ['About 71 billion m³', 'About 8 billion m³', 'About 85 billion m³', 'About 25 billion m³'], c: 0, f: '0.85 × 84 = 71.4 billion m³, yet Ethiopia had no allocation in 1959.' },
+        { q: 'How does <b>global warming</b> add to conflict over shared rivers?', o: ['Higher temperatures increase evaporation and make rainfall less reliable, reducing the water available to share', 'It increases flow in every river', 'It stops countries building dams', 'It has no link to water conflict'], c: 0, f: 'Less reliable supply plus rising demand increases tension.' }], next); } }]);
   };
 
   /* L13 — Improving local water management */
@@ -1112,7 +1256,17 @@
           { t: 'Jordan’s Water Wise Women initiative', a: ['bu'], why: 'Training local women to save water at home.' },
           { t: 'Rainwater harvesting tanks on houses', a: ['bu'], why: 'Household-level collection.' },
           { t: 'A hand pump maintained by a village water committee', a: ['bu'], why: 'Local ownership keeps it working.' },
-          { t: 'Reusing greywater from sinks to water gardens', a: ['bu'], why: 'A household strategy.' }] }, next); } },
+          { t: 'Reusing greywater from sinks to water gardens', a: ['bu'], why: 'A household strategy.' },
+          { t: 'Rainwater harvesting and greywater systems in Californian homes during drought', a: ['bu'], why: 'Household strategies in a high-income country.' },
+          { t: 'Water zoning in Burkina Faso, where communities map and share local water resources (WaterAid)', a: ['bu'], why: 'Community planning in a low-income country.' }] }, next); } },
+      { title: '🏷️ How does an ice stupa work?', how: 'Ladakh is a cold desert. Glaciers melt too late for spring sowing, so engineer Sonam Wangchuk designed cone-shaped artificial glaciers.' + photos(photo('Rainwater harvesting system.JPG', 'A household rainwater harvesting tank')),
+        build: function (el, next) { labelGame(el, { svg: SVG_STUPA, pins: PINS_STUPA, cap: 'Cross-section of an ice stupa.', labels: [
+          { t: 'Stream water collected high up the valley', pin: 1 },
+          { t: 'Buried pipe carries water downhill: gravity builds pressure', pin: 2 },
+          { t: 'Water sprayed into freezing air at night', pin: 3 },
+          { t: 'Cone of ice (stupa) stores water with little surface area to melt', pin: 4 },
+          { t: 'Spring meltwater irrigates fields when crops are sown', pin: 5 },
+          { t: 'Electric pump powered by diesel', pin: null }] }, next); } },
       { title: '🧊 True or false?', how: 'Test your case study knowledge.',
         build: function (el, next) { flash(el, { yes: '✅ True', no: '❌ False', ky: 't', kn: 'f', items: [
           { t: 'Ice stupas store winter meltwater as cone-shaped ice that melts in spring, when crops are sown', a: true, why: 'They bridge the gap before glacier melt arrives in summer.' },
@@ -1123,12 +1277,22 @@
           { t: 'Community ownership makes small schemes more likely to be maintained', a: true, why: 'People repair what they own and understand.' }] }, next); } },
       { title: '🧠 Evaluate local management', build: function (el, next) { mcq(el, [
         { q: 'Which is a <b>limitation</b> of bottom-up water schemes?', o: ['They help a small number of people and may not solve regional shortages', 'They are always too expensive for communities', 'They never use local knowledge', 'They require huge dams to work'], c: 0, f: 'Small scale is both a strength (sustainable, cheap) and a limit (reach).' },
-        { q: 'Why is local participation important for SDG 6?', o: ['Communities that are involved use water more efficiently and keep systems working', 'It removes the need for any government spending', 'It guarantees that rainfall will increase', 'Local people do not need training'], c: 0, f: 'SDG 6.b supports the participation of local communities in water management.' }], next); } }]);
+        { q: 'Why is local participation important for SDG 6?', o: ['Communities that are involved use water more efficiently and keep systems working', 'It removes the need for any government spending', 'It guarantees that rainfall will increase', 'Local people do not need training'], c: 0, f: 'SDG 6.b supports the participation of local communities in water management.' },
+        { q: 'What is <b>community engagement</b> in water management?', o: ['Involving local people in planning, decision-making and maintenance of water schemes', 'A government building a dam without consultation', 'Selling water rights to private companies', 'Exporting water to other countries'], c: 0, f: 'Engaged communities feel ownership, which makes schemes more sustainable.' },
+        { q: 'How do community strategies tend to differ between LICs and HICs?', o: ['LICs often focus on basic access (wells, pumps, water points); HICs often focus on efficiency and conservation (greywater, rainwater tanks, smart meters)', 'They are identical everywhere', 'HICs never use community strategies', 'LICs only use desalination'], c: 0, f: 'The aims differ with levels of economic development.' }], next); } }]);
   };
 
   /* L14 — Intervention in drainage basins: the Three Gorges Dam */
   LV[14] = function (root) {
     stages(root, [
+      { title: '🗺️ Map: the Three Gorges Dam', how: 'The dam on the Yangtze, completed in 2006 and fully operational by 2012, created a reservoir about 600 km long.' + photos(photo('Three Gorges Dam (12280456164).jpg', 'The Three Gorges Dam'), photo('ThreeGorgesDam-Landsat7.jpg', 'Satellite image of the dam and reservoir'), photo('Hoover dam from air.jpg', 'Hoover Dam and Lake Mead on the Colorado')),
+        build: function (el, next) { labelGame(el, { svg: SVG_YANGTZE, pins: PINS_YANGTZE, cap: 'Schematic map of the Yangtze River.', labels: [
+          { t: 'Chongqing: head of the reservoir, reached by larger ships', pin: 1 },
+          { t: 'Reservoir about 600 km long', pin: 2 },
+          { t: 'Three Gorges Dam (near Yichang)', pin: 3 },
+          { t: 'Wuhan: protected from floods downstream', pin: 4 },
+          { t: 'Shanghai and the delta: receives less sediment', pin: 5 },
+          { t: 'Yellow River (Huang He)', pin: null }] }, next); } },
       { title: '🏞️ Three Gorges Dam: social, economic or environmental?', how: 'Sort each impact. The tag shows whether it is a cost or a benefit.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['so', '👥 Social'], ['ec', '💰 Economic'], ['en', '🌿 Environmental']], ['zc4', 'zc1', 'zg']), cards: [
           { t: 'About 1.3 million people were resettled', s: 'cost', a: ['so'], why: 'Homes and villages were flooded by the reservoir.' },
@@ -1139,6 +1303,16 @@
           { t: 'Landslides along the reservoir banks', s: 'cost', a: ['en'], why: 'Changing water levels destabilise slopes.' },
           { t: 'Less coal burned for electricity, cutting CO₂ emissions', s: 'benefit', a: ['en'], why: 'Hydropower replaces fossil fuels.' },
           { t: 'Flood protection for millions of people downstream', s: 'benefit', a: ['so', 'ec'], alt: 'Accepted: flood control protects lives (social) and property and farmland (economic).', why: 'Reduces flood risk in the middle and lower Yangtze.' }] }, next); } },
+      { title: '🏜️ Colorado River: the cascading dam system', how: 'The Colorado flows through <b>7 US states</b>. Most of its water comes from <b>snowmelt in the Rocky Mountains (April–May)</b>, while the <b>Sierra Nevada</b> casts a rain shadow over much of the dry basin. A cascade of dams, including <b>Glen Canyon</b> (Lake Powell) and <b>Hoover</b> (Lake Mead), stores the water. Sort the hydrological changes caused by building a dam.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['up', '⬆️ Upstream (reservoir)'], ['dn', '⬇️ Downstream'], ['tm', '📅 Changes in flow over time']], ['zc3', 'zc2', 'zc4']), cards: [
+          { t: 'A rapid reduction in the river’s energy where it enters the reservoir', a: ['up'], why: 'The river slows and drops its load.' },
+          { t: 'Sediment builds a lake delta at the head of the reservoir', a: ['up'], why: 'Deposition in still water.' },
+          { t: 'Tributaries are rejuvenated as they adjust to the new local base level', a: ['up'], why: 'The reservoir sets a new base level.' },
+          { t: 'Clear-water erosion of the bed immediately below the dam', a: ['dn'], why: 'Sediment-free water has spare energy.' },
+          { t: 'The delta is eroded because it no longer receives enough sediment', a: ['dn'], why: 'Sediment is trapped in the reservoir.' },
+          { t: 'Floodplains receive no new silt, so soil fertility falls', a: ['dn'], why: 'No annual floods deposit alluvium.' },
+          { t: 'Less seasonal variation in discharge and removal of flood peaks', a: ['tm'], why: 'Controlled releases smooth the regime.' },
+          { t: 'Daily changes in discharge (up to about 4 m in 24 hours) to match electricity demand', a: ['tm'], why: 'HEP releases follow demand.' }] }, next); } },
       { title: '⬆️⬇️ Upstream or downstream?', how: 'Where is each impact of a large dam felt?',
         build: function (el, next) { flash(el, { yes: '⬆️ Upstream', no: '⬇️ Downstream', ky: 'u', kn: 'd', items: [
           { t: 'Towns and farmland flooded by the new reservoir', a: true, why: 'The reservoir forms behind (upstream of) the dam.' },
@@ -1149,7 +1323,9 @@
           { t: 'Clear water erodes the river bed below the dam', a: false, why: '“Hungry water” has spare energy to erode.' }] }, next); } },
       { title: '🧠 Multipurpose schemes', build: function (el, next) { mcq(el, [
         { q: 'What makes a dam a <b>multipurpose</b> scheme?', o: ['It provides several benefits at once, such as power, flood control, irrigation, navigation and water supply', 'It can be used for any purpose, but only one at a time', 'It is built by several countries', 'It has several power stations but no reservoir'], c: 0, f: 'Most large modern dams are designed to serve several purposes.' },
-        { q: 'Why can the aims of a multipurpose dam conflict?', o: ['Flood control needs an empty reservoir before the wet season, but power and irrigation need it full', 'Navigation and power generation never use water', 'A dam can only store water in winter', 'Irrigation water cannot pass through a dam'], c: 0, f: 'Managers must trade off storage for floods against storage for power and supply.' }], next); } }]);
+        { q: 'Why can the aims of a multipurpose dam conflict?', o: ['Flood control needs an empty reservoir before the wet season, but power and irrigation need it full', 'Navigation and power generation never use water', 'A dam can only store water in winter', 'Irrigation water cannot pass through a dam'], c: 0, f: 'Managers must trade off storage for floods against storage for power and supply.' },
+        { q: 'Why does the Colorado River rarely reach the sea today?', o: ['So much water is stored, evaporated and abstracted for cities and irrigation that little is left at the delta in Mexico', 'It flows into an underground cave', 'Its source has frozen permanently', 'It was diverted into the Mississippi'], c: 0, f: 'Its delta has shrunk dramatically: a clear downstream cost.' },
+        { q: 'Why is a dam evaluation stronger if it uses SEEP?', o: ['It weighs social, economic, environmental and political impacts, upstream and downstream, before reaching a judgement', 'It lists only the benefits', 'It avoids giving any conclusion', 'It focuses only on engineering'], c: 0, f: 'Weight your points: more benefits does not mean they matter more.' }], next); } }]);
   };
 
   /* L15 — Integrated drainage basin management */
@@ -1158,6 +1334,39 @@
       { title: '🤝 What is IDBM?', build: function (el, next) { mcq(el, [
         { q: 'Integrated drainage basin management (IDBM) is best described as:', o: ['Coordinating the management of water, land and related resources across the whole basin and all sectors, balancing economic, social and environmental needs', 'Managing each stretch of a river separately for one purpose', 'Building as many dams as possible in a basin', 'Letting each state or country decide alone how to use its section'], c: 0, f: 'IDBM manages the basin as one system, with all stakeholders involved.' },
         { q: 'Why has IDBM become more important?', o: ['Competing demands from farms, cities, industry, energy and ecosystems mean single-purpose management causes conflict and damage', 'Rivers now flow within single countries only', 'Water demand is falling everywhere', 'Dams are no longer built'], c: 0, f: 'Growing demand and climate change make coordination essential.' }], next); } },
+      { title: '🗺️ Map: the Mississippi basin', how: 'The Mississippi basin covers about 41% of the contiguous USA, which is why it must be managed as one system.',
+        build: function (el, next) { labelGame(el, { svg: SVG_MISS, pins: PINS_MISS_15, cap: 'Schematic map of the Mississippi drainage basin.', labels: [
+          { t: 'Missouri River (from the Rocky Mountains)', pin: 1 },
+          { t: 'Ohio River (from the east)', pin: 2 },
+          { t: 'Upper Mississippi (from Minnesota)', pin: 3 },
+          { t: 'St Louis: where the Missouri joins', pin: 4 },
+          { t: 'Gulf of Mexico dead zone (nutrient run-off)', pin: 5 },
+          { t: 'Drainage basin boundary (watershed)', pin: 6 },
+          { t: 'Colorado River', pin: null }] }, next); } },
+      { title: '🧩 America’s Watershed Initiative: six values', how: 'Match each symbol to one of the six values that the plan tries to balance.',
+        build: function (el, next) { labelGame(el, { svg: SVG_AWI, pins: PINS_AWI, cap: 'The six value areas of America’s Watershed Initiative.', labels: [
+          { t: 'Transportation', pin: 1 },
+          { t: 'Water supply', pin: 2 },
+          { t: 'Flood control and risk reduction', pin: 3 },
+          { t: 'Economy', pin: 4 },
+          { t: 'Ecosystems', pin: 5 },
+          { t: 'Recreation', pin: 6 },
+          { t: 'Desalination', pin: null }] }, next); } },
+      { title: '🏗️ Lessons from the past', how: 'In the past, rivers were often managed with <b>hard-engineered embankments</b>, one stretch at a time. Which statements are consequences of this?',
+        build: function (el, next) { flash(el, { yes: '✅ Consequence', no: '❌ Not a consequence', ky: 'y', kn: 'n', items: [
+          { t: 'Floodwater passed downstream faster, raising flood risk for towns further down', a: true, why: '“We all live downstream.”' },
+          { t: 'Floodplain wetlands were cut off from the river and lost', a: true, why: 'Embankments separate the river from its floodplain.' },
+          { t: 'Less sediment reached the delta, so it began to shrink', a: true, why: 'As on the Mississippi delta in Louisiana.' },
+          { t: 'Every flood was prevented permanently', a: false, why: 'Large floods still overtop or breach defences.' },
+          { t: 'People built more homes behind the levees', a: true, why: 'The levee effect increases exposure.' }] }, next); } },
+      { title: '🧩 What makes IRBM successful?', how: 'WWF identifies seven key elements of successful integrated river basin management. Which of these are among them?',
+        build: function (el, next) { flash(el, { yes: '✅ Key element', no: '❌ Not an element', ky: 'y', kn: 'n', items: [
+          { t: 'A long-term vision agreed by all the main stakeholders', a: true, why: 'Shared goals guide decisions.' },
+          { t: 'Integrating policies, decisions and costs across sectors such as farming, industry and energy', a: true, why: 'Avoids sectors working against each other.' },
+          { t: 'Making strategic decisions at the scale of the whole basin', a: true, why: 'The basin is the natural unit.' },
+          { t: 'Active participation by all stakeholders', a: true, why: 'Builds trust and ownership.' },
+          { t: 'Adequate investment and a solid foundation of knowledge and data', a: true, why: 'Plans need money and evidence.' },
+          { t: 'Letting the most powerful user decide alone', a: false, why: 'That is the opposite of integrated management.' }] }, next); } },
       { title: '🇺🇸 America’s Watershed Initiative: true or false?', how: 'The Mississippi River basin and America’s Watershed Initiative (AWI).',
         build: function (el, next) { flash(el, { yes: '✅ True', no: '❌ False', ky: 't', kn: 'f', items: [
           { t: 'The Mississippi basin drains about 41% of the contiguous USA', a: true, why: 'Parts of 31 US states and 2 Canadian provinces.' },
@@ -1165,7 +1374,9 @@
           { t: 'AWI is a federal agency that can fine states that break its rules', a: false, why: 'It is voluntary and works through cooperation, not law.' },
           { t: 'AWI publishes a report card grading the basin’s health and infrastructure', a: true, why: 'The basin was graded D+, showing much still needs improving.' },
           { t: 'Nutrient run-off from farms contributes to the dead zone in the Gulf of Mexico', a: true, why: 'Fertiliser causes hypoxia at the river mouth.' },
-          { t: 'IDBM means each state manages its own stretch of the river independently', a: false, why: 'That is the problem IDBM tries to solve.' }] }, next); } },
+          { t: 'IDBM means each state manages its own stretch of the river independently', a: false, why: 'That is the problem IDBM tries to solve.' },
+          { t: 'AWI’s six value areas are transportation, water supply, flood control and risk reduction, economy, ecosystems and recreation', a: true, why: 'Agreed at the 2012 summit.' },
+          { t: 'The basin is called “America’s economic engine” because of its farming, shipping and industry', a: true, why: 'Barges carry agricultural exports to the Gulf.' }] }, next); } },
       { title: '⚖️ Costs or benefits of IDBM?', how: 'Sort each statement.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['b', '👍 Benefit'], ['c', '👎 Cost or challenge']], ['zg', 'zr']), cards: [
           { t: 'Decisions upstream consider the impacts downstream', a: ['b'], why: 'Whole-basin thinking avoids passing problems on.' },
@@ -1188,6 +1399,25 @@
           { t: 'River floodplains and freshwater marshes', a: ['in'], why: 'Inland, fed by rivers.' },
           { t: 'Rice paddies', a: ['ar'], why: 'Human-made wetlands.' },
           { t: 'Reservoirs', a: ['ar'], why: 'Artificial water bodies.' }] }, next); } },
+      { title: '💎 Why are wetlands valuable?', how: 'Match each example to the value it provides.',
+        build: function (el, next) { sortGame(el, { zones: zonesFrom([['wq', '🧪 Water quality and supply'], ['fp', '🌊 Flood protection and erosion control'], ['wl', '🦆 Fish, wildlife and culture'], ['cm', '💰 Commercial benefits']]), cards: [
+          { t: 'Plants trap sediment and absorb nutrients and pollutants', a: ['wq'], why: 'Wetlands filter water.' },
+          { t: 'Wetlands recharge groundwater', a: ['wq'], why: 'A source of water supply.' },
+          { t: 'Marshes store floodwater and release it slowly', a: ['fp'], why: 'A natural sponge.' },
+          { t: 'Roots hold sediment and reduce storm-surge erosion of the coast', a: ['fp'], why: 'Erosion control.' },
+          { t: 'Nursery grounds for fish and stop-over sites for migrating birds', a: ['wl'], why: 'Fish and wildlife habitat.' },
+          { t: 'Birdwatching, boating and cultural traditions', a: ['wl'], why: 'Recreation and culture.' },
+          { t: 'Shrimp, crab and oyster fisheries', a: ['cm'], why: 'Commercial income.' }] }, next); } },
+      { title: '🗺️ Map: Louisiana’s disappearing wetlands', how: 'The Mississippi has built its delta over about 6,000 years. Today levees send its sediment straight out into the deep Gulf.' + photos(photo('Mississippi River Delta and Sediment Plume.jpg', 'The Mississippi delta and its sediment plume')),
+        build: function (el, next) { labelGame(el, { svg: SVG_LOUIS, pins: PINS_LOUIS, cap: 'Schematic map of the Louisiana coast.', labels: [
+          { t: 'Baton Rouge', pin: 1 },
+          { t: 'New Orleans', pin: 2 },
+          { t: 'Lake Pontchartrain', pin: 3 },
+          { t: 'Bird’s-foot delta: sediment lost to deep water', pin: 4 },
+          { t: 'Atchafalaya delta: one of the few areas gaining land', pin: 5 },
+          { t: 'Barataria basin: rapid wetland loss', pin: 6 },
+          { t: 'Barrier islands', pin: 7 },
+          { t: 'Lake Mead', pin: null }] }, next); } },
       { title: '🌊 Louisiana: causes or solutions?', how: 'Louisiana loses roughly a football field of coastal wetland about every 100 minutes. Sort each statement.',
         build: function (el, next) { sortGame(el, { zones: zonesFrom([['ca', '📉 Cause of wetland loss'], ['so', '🛠️ Coastal Master Plan strategy']], ['zr', 'zg']), cards: [
           { t: 'Levees on the Mississippi stop floods spreading sediment over the delta', a: ['ca'], why: 'Without new sediment, the delta sinks and erodes.' },
@@ -1196,10 +1426,14 @@
           { t: 'Hurricanes such as Katrina and Rita (2005)', a: ['ca'], why: 'Storm surges stripped away marshland.' },
           { t: 'Sediment diversions that let river water and mud back into the marshes', a: ['so'], why: 'Rebuilds land naturally.' },
           { t: 'Marsh creation using sediment dredged from the river', a: ['so'], why: 'Pumps sediment to build new marsh.' },
-          { t: 'Restoring barrier islands and protecting shorelines', a: ['so'], why: 'Reduces wave and storm-surge damage.' }] }, next); } },
+          { t: 'Restoring barrier islands and protecting shorelines', a: ['so'], why: 'Reduces wave and storm-surge damage.' },
+          { t: 'Dredged shipping channels speed up saltwater intrusion', a: ['ca'], why: 'A human cause.' }] }, next); } },
       { title: '🧠 Ramsar and wetland values', build: function (el, next) { mcq(el, [
         { q: 'The Ramsar Convention (1971) has three “pillars”. Which list is correct?', o: ['Wise use of all wetlands; designating Wetlands of International Importance; international cooperation', 'Draining wetlands for farmland; building dams; tourism', 'Banning all human use of wetlands; fencing them; fines', 'Planting forests on wetlands; desalination; irrigation'], c: 0, f: 'Ramsar sites are listed as Wetlands of International Importance.' },
         { q: 'How do wetlands reduce flood risk?', o: ['They act like a sponge, storing water during heavy rain and releasing it slowly', 'They speed up flow towards the river', 'They stop rain from falling', 'They increase surface runoff'], c: 0, f: 'Storage lowers and delays flood peaks downstream.' },
+        { q: 'Where and when was the Ramsar Convention signed?', o: ['Ramsar, Iran, in 1971', 'Paris, France, in 2015', 'Rio de Janeiro, Brazil, in 1992', 'Kyoto, Japan, in 1997'], c: 0, f: 'Its mission is the conservation and wise use of all wetlands through local, national and international action.' },
+        { q: 'Which of these is a Ramsar site in Thailand?', o: ['Don Hoi Lot, Samut Songkhram', 'Lumphini Park, Bangkok', 'Doi Inthanon summit', 'Khao San Road'], c: 0, f: 'Thailand has over a dozen Ramsar sites, including Don Hoi Lot and Kuan Ki Sian of Thale Noi.' },
+        { q: 'What kind of delta has the Mississippi built?', o: ['A bird’s-foot delta, with long channels lined by levees reaching out into the Gulf', 'An arcuate (fan-shaped) delta like the Nile', 'A cuspate (pointed) delta', 'It has no delta'], c: 0, f: 'Sediment deposited over about 6,000 years built new land; the two largest cities nearby are New Orleans and Baton Rouge.' },
         { q: 'What is the scale of Louisiana’s Coastal Master Plan?', o: ['About US$50 billion over 50 years', 'About US$5 million over 5 years', 'A one-year emergency plan', 'It has no budget'], c: 0, f: 'First adopted in 2007 and updated regularly; some large projects have been delayed or cancelled over cost and impacts on fisheries.' }], next); } }]);
   };
 
@@ -1503,6 +1737,211 @@
     '<g stroke="#0284c7" stroke-width="2" marker-end="url(#mA)"><line x1="40" y1="30" x2="40" y2="78"/><line x1="90" y1="30" x2="90" y2="86"/><line x1="140" y1="34" x2="140" y2="92"/></g>' +
     '<g font-size="11" font-weight="700" fill="#1e293b"><text x="520" y="360">Impermeable rock</text><text x="12" y="200">Permeable rock</text></g></svg>';
   var PINS_AQUIFER = [{ n: 1, x: 115, y: 50 }, { n: 2, x: 120, y: 142 }, { n: 3, x: 60, y: 172 }, { n: 4, x: 400, y: 222 }, { n: 5, x: 440, y: 158 }, { n: 6, x: 500, y: 74 }];
+
+  /* Three-cell model of atmospheric circulation (northern hemisphere cross-section) */
+  var SVG_CELLS = '<svg viewBox="0 0 640 380" role="img" aria-label="Three-cell model of atmospheric circulation">' +
+    '<defs><marker id="mC" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7L0 14z" fill="#334155"/></marker></defs>' +
+    '<rect width="640" height="380" fill="#f1f5f9"/>' +
+    '<rect x="40" y="300" width="560" height="26" fill="#d6b98c"/>' +
+    '<g font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle"><text x="60" y="344">0°</text><text x="250" y="344">30°N</text><text x="430" y="344">60°N</text><text x="590" y="344">90°N</text></g>' +
+    '<text x="320" y="370" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Latitude (equator to North Pole)</text>' +
+    '<g fill="none" stroke-width="3" marker-end="url(#mC)">' +
+      '<path d="M70 290 L70 90 Q155 60 240 90" stroke="#dc2626"/><path d="M240 100 L240 280 Q155 300 80 290" stroke="#2563eb"/>' +
+      '<path d="M420 100 Q335 70 260 100" stroke="#2563eb"/><path d="M262 280 Q340 300 418 280" stroke="#dc2626"/><path d="M428 290 L428 110" stroke="#dc2626"/>' +
+      '<path d="M438 110 Q510 80 580 110" stroke="#dc2626"/><path d="M582 120 L582 280" stroke="#2563eb"/><path d="M572 290 Q505 300 440 290" stroke="#2563eb"/></g>' +
+    '<g font-size="11" fill="#475569"><text x="160" y="200" text-anchor="middle">cell A</text><text x="340" y="200" text-anchor="middle">cell B</text><text x="508" y="200" text-anchor="middle">cell C</text></g>' +
+    '<g fill="#93c5fd" stroke="#64748b"><ellipse cx="72" cy="70" rx="34" ry="14"/><ellipse cx="430" cy="88" rx="30" ry="12"/></g>' +
+    '<g fill="#fde68a"><circle cx="250" cy="60" r="14"/></g></svg>';
+  var PINS_CELLS = [{ n: 1, x: 105, y: 250 }, { n: 2, x: 210, y: 240 }, { n: 3, x: 160, y: 160 }, { n: 4, x: 340, y: 160 }, { n: 5, x: 508, y: 160 }, { n: 6, x: 460, y: 240 }];
+
+  /* ================= PHOTOS (Wikimedia Commons, hotlinked with a fallback) ================= */
+  function photo(file, cap) {
+    var u = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(file) + '?width=720';
+    return '<figure class="ph"><img src="' + u + '" alt="' + esc(cap) + '" loading="lazy" onerror="this.closest(\'figure\').classList.add(\'ph-x\')"><span class="ph-fb" aria-hidden="true">🖼️ Photo unavailable</span><figcaption>' + cap + ' · <a href="https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(file.replace(/ /g, '_')) + '" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>';
+  }
+  function photos() { return '<div class="ph-row">' + Array.prototype.join.call(arguments, '') + '</div>'; }
+
+  /* ================= MORE DIAGRAMS ================= */
+  var MK = '<defs><marker id="mD" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0L12 6L0 12z" fill="#334155"/></marker></defs>';
+  function city(x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="6" fill="#1e293b" stroke="#fff" stroke-width="2"/>'; }
+  function dam(x, y, rot) { return '<rect x="' + (x - 3) + '" y="' + (y - 11) + '" width="6" height="22" fill="#7c2d12" transform="rotate(' + (rot || 0) + ' ' + x + ' ' + y + ')"/>'; }
+  function tx(x, y, t, o) { o = o || {}; return '<text x="' + x + '" y="' + y + '" font-size="' + (o.s || 11) + '" font-weight="' + (o.w || 700) + '" fill="' + (o.c || '#334155') + '" text-anchor="' + (o.a || 'start') + '"' + (o.i ? ' font-style="italic"' : '') + '>' + t + '</text>'; }
+
+  /* Waterfall and gorge (cross-section) */
+  var SVG_WATERFALL = '<svg viewBox="0 0 640 380" role="img" aria-label="Waterfall and gorge cross-section">' + MK +
+    '<rect width="640" height="380" fill="#e0f2fe"/>' +
+    '<path d="M0 120 L330 120 L330 152 L285 152 L285 380 L0 380Z" fill="#64748b"/>' +
+    '<path d="M0 152 L285 152 L285 380 L0 380Z" fill="#d6b98c"/>' +
+    '<path d="M285 152 L330 152 L330 120 L285 120Z" fill="#64748b"/>' +
+    '<path d="M0 98 L330 98 L330 120 L0 120Z" fill="#38bdf8"/>' +
+    '<path d="M330 106 C 352 140, 352 220, 350 300" fill="none" stroke="#38bdf8" stroke-width="22"/>' +
+    '<path d="M300 300 C 310 340, 420 345, 420 300 L 640 300 L 640 380 L 300 380Z" fill="#b45309" opacity="0.25"/>' +
+    '<path d="M300 300 C 310 342, 420 345, 420 300Z" fill="#0ea5e9"/>' +
+    '<path d="M420 300 L640 300 L640 322 L420 322Z" fill="#38bdf8"/>' +
+    '<path d="M640 300 L640 250 L470 250 L470 300" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="6 4"/>' +
+    tx(560, 240, 'old position of the falls', { s: 10, w: 600, a: 'middle', i: 1 }) +
+    '<g stroke="#334155" stroke-width="2.5" fill="none" marker-end="url(#mD)"><path d="M560 270 L 500 270"/></g>' +
+    tx(530, 290, 'retreat', { s: 10, a: 'middle' }) +
+    '<g fill="#fff" opacity="0.8"><circle cx="300" cy="290" r="4"/><circle cx="290" cy="270" r="3"/><circle cx="306" cy="250" r="3"/></g>' +
+    tx(20, 90, 'River flow →', { s: 11, c: '#075985' }) + '</svg>';
+  var PINS_WATERFALL = [{ n: 1, x: 160, y: 136 }, { n: 2, x: 140, y: 260 }, { n: 3, x: 308, y: 136 }, { n: 4, x: 362, y: 352 }, { n: 5, x: 268, y: 214 }, { n: 6, x: 520, y: 340 }];
+
+  /* Floodplain, levees and bluffs (valley cross-section) */
+  var SVG_FLOODPLAIN = '<svg viewBox="0 0 640 380" role="img" aria-label="Floodplain cross-section">' + MK +
+    '<rect width="640" height="380" fill="#f0f9ff"/>' +
+    '<path d="M0 60 L70 70 L110 220 L280 226 L300 214 L310 232 L350 232 L360 214 L380 226 L530 220 L570 70 L640 60 L640 380 L0 380Z" fill="#a8a29e"/>' +
+    '<path d="M110 220 L280 226 L300 214 L310 232 L350 232 L360 214 L380 226 L530 220 L540 300 L100 300Z" fill="#d6b98c"/>' +
+    '<g stroke="#92400e" stroke-width="1" fill="none" opacity="0.6"><path d="M110 245 L530 245"/><path d="M105 268 L535 268"/></g>' +
+    '<path d="M310 232 L350 232 L346 252 L314 252Z" fill="#38bdf8"/>' +
+    '<path d="M296 212 L300 214 L310 232 L290 226Z" fill="#a16207"/><path d="M364 212 L360 214 L350 232 L370 226Z" fill="#a16207"/>' +
+    '<path d="M110 200 L530 200" stroke="#0284c7" stroke-width="2" stroke-dasharray="7 5"/>' +
+    tx(470, 194, 'level reached in a flood', { s: 10, w: 600, a: 'middle', c: '#0369a1', i: 1 }) +
+    '<g fill="#16a34a"><circle cx="180" cy="215" r="6"/><circle cx="460" cy="214" r="6"/><circle cx="210" cy="216" r="5"/></g>' + '</svg>';
+  var PINS_FLOODPLAIN = [{ n: 1, x: 80, y: 140 }, { n: 2, x: 230, y: 206 }, { n: 3, x: 292, y: 190 }, { n: 4, x: 330, y: 212 }, { n: 5, x: 450, y: 258 }, { n: 6, x: 394, y: 204 }];
+
+  /* Flood management schemes (plan view) */
+  var SVG_ENG = '<svg viewBox="0 0 640 380" role="img" aria-label="Flood management schemes">' + MK +
+    '<rect width="640" height="380" fill="#ecfccb"/>' +
+    '<path d="M0 0 L190 0 L150 380 L0 380Z" fill="#d9f99d"/>' +
+    '<g fill="#15803d">' + [[30, 40], [60, 70], [90, 40], [40, 110], [80, 120], [110, 90], [30, 170], [70, 190]].map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="11"/>'; }).join('') + '</g>' +
+    '<path d="M150 60 C 175 70, 190 90, 205 110" fill="none" stroke="#38bdf8" stroke-width="10"/>' +
+    '<ellipse cx="225" cy="135" rx="40" ry="26" fill="#38bdf8"/>' + dam(258, 152, 40) +
+    '<path d="M262 158 L 360 200" stroke="#38bdf8" stroke-width="12"/>' +
+    '<path d="M360 200 C 380 205, 400 225, 420 250 C 440 275, 470 280, 500 270 C 540 255, 580 270, 640 300" fill="none" stroke="#38bdf8" stroke-width="12"/>' +
+    '<path d="M300 186 C 340 120, 470 130, 520 250" fill="none" stroke="#7dd3fc" stroke-width="8" stroke-dasharray="10 4"/>' +
+    '<g fill="#fca5a5" stroke="#991b1b">' + [[440, 220], [462, 226], [470, 205], [448, 200], [425, 205]].map(function (p) { return '<rect x="' + p[0] + '" y="' + p[1] + '" width="14" height="12"/>'; }).join('') + '</g>' +
+    '<path d="M396 222 C 412 242, 432 262, 462 266" fill="none" stroke="#78350f" stroke-width="4"/>' +
+    '<path d="M560 300 L 640 330 L640 380 L 520 380Z" fill="#bbf7d0" stroke="#16a34a" stroke-dasharray="5 4"/>' + tx(585, 362, 'park / fields', { s: 10, a: 'middle', c: '#166534' }) +
+    '<rect x="572" y="248" width="10" height="26" fill="#334155"/><circle cx="577" cy="244" r="6" fill="#f59e0b"/>' +
+    tx(225, 80, 'upper basin', { s: 10, a: 'middle', c: '#365314', i: 1 }) + tx(455, 192, 'town', { s: 10, a: 'middle', c: '#7f1d1d' }) + '</svg>';
+  var PINS_ENG = [{ n: 1, x: 60, y: 150 }, { n: 2, x: 225, y: 105 }, { n: 3, x: 330, y: 205 }, { n: 4, x: 420, y: 140 }, { n: 5, x: 380, y: 236 }, { n: 6, x: 600, y: 320 }, { n: 7, x: 600, y: 236 }];
+
+  /* Chao Phraya basin (schematic map) */
+  var SVG_CHAO = '<svg viewBox="0 0 640 380" role="img" aria-label="Chao Phraya basin schematic map">' + MK +
+    '<rect width="640" height="380" fill="#fef9c3"/>' +
+    '<path d="M150 0 L490 0 L470 120 L430 230 L380 300 L330 300 L250 250 L200 150Z" fill="#fde68a" stroke="#ca8a04" stroke-dasharray="6 4"/>' +
+    '<path d="M0 330 L640 330 L640 380 L0 380Z" fill="#7dd3fc"/>' + tx(470, 362, 'Gulf of Thailand', { s: 11, c: '#075985' }) +
+    '<g fill="none" stroke="#0284c7" stroke-width="4">' +
+      '<path d="M220 10 C 230 70, 250 120, 300 170"/><path d="M290 10 C 290 70, 300 120, 310 165"/><path d="M360 10 C 345 70, 330 120, 315 165"/><path d="M450 10 C 420 80, 370 130, 322 170"/>' +
+      '<path d="M310 170 C 312 210, 320 250, 330 280 C 335 300, 338 318, 340 332" stroke-width="7"/></g>' +
+    dam(246, 92, 30) + dam(398, 82, -40) + city(310, 172) + city(322, 252) + city(336, 302) +
+    tx(212, 30, 'Ping', { s: 10, c: '#0369a1' }) + tx(296, 30, 'Wang', { s: 10, c: '#0369a1' }) + tx(352, 30, 'Yom', { s: 10, c: '#0369a1' }) + tx(440, 30, 'Nan', { s: 10, c: '#0369a1' }) +
+    tx(30, 30, 'Schematic, not to scale', { s: 10, w: 600, c: '#78716c', i: 1 }) + '</svg>';
+  var PINS_CHAO = [{ n: 1, x: 222, y: 98 }, { n: 2, x: 424, y: 82 }, { n: 3, x: 282, y: 182 }, { n: 4, x: 296, y: 256 }, { n: 5, x: 362, y: 302 }, { n: 6, x: 452, y: 176 }];
+
+  /* Mississippi basin (schematic map) */
+  var SVG_MISS = '<svg viewBox="0 0 640 380" role="img" aria-label="Mississippi basin schematic map">' + MK +
+    '<rect width="640" height="380" fill="#f1f5f9"/>' +
+    '<path d="M60 40 L250 10 L380 30 L560 90 L560 170 L470 260 L400 320 L330 330 L220 260 L120 200 L50 120Z" fill="#dcfce7" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 4"/>' +
+    '<path d="M0 345 L640 345 L640 380 L0 380Z" fill="#7dd3fc"/>' + tx(470, 368, 'Gulf of Mexico', { s: 11, c: '#075985' }) +
+    '<g fill="none" stroke="#0284c7" stroke-width="4">' +
+      '<path d="M330 20 C 335 70, 330 110, 335 150"/>' +
+      '<path d="M80 60 C 150 90, 250 130, 335 150"/>' +
+      '<path d="M540 110 C 480 140, 420 170, 352 196"/>' +
+      '<path d="M150 210 C 220 230, 290 250, 342 262"/>' +
+      '<path d="M335 150 C 345 175, 350 190, 352 196 C 350 230, 345 250, 342 262 C 342 285, 340 300, 342 318 C 350 330, 362 338, 372 346" stroke-width="7"/>' +
+      '<path d="M342 284 C 318 305, 302 325, 298 346" stroke-width="3" stroke-dasharray="6 4"/></g>' +
+    '<path d="M372 346 L360 362 M372 346 L376 364 M372 346 L392 360" stroke="#0284c7" stroke-width="3"/>' +
+    '<ellipse cx="400" cy="320" rx="18" ry="9" fill="#7dd3fc"/>' +
+    city(335, 152) + city(352, 196) + city(342, 270) + city(338, 304) + city(362, 330) +
+    '<ellipse cx="420" cy="368" rx="60" ry="10" fill="#a16207" opacity="0.35"/>' +
+    tx(20, 30, 'Schematic, not to scale', { s: 10, w: 600, c: '#78716c', i: 1 }) + '</svg>';
+  var PINS_MISS_8 = [{ n: 1, x: 378, y: 196 }, { n: 2, x: 300, y: 306 }, { n: 3, x: 364, y: 298 }, { n: 4, x: 414, y: 306 }, { n: 5, x: 344, y: 342 }];
+  var PINS_MISS_15 = [{ n: 1, x: 140, y: 92 }, { n: 2, x: 480, y: 128 }, { n: 3, x: 356, y: 60 }, { n: 4, x: 310, y: 150 }, { n: 5, x: 470, y: 362 }, { n: 6, x: 516, y: 212 }];
+
+  /* Salinization and agrochemical run-off (cross-section) */
+  var SVG_AGRI = '<svg viewBox="0 0 640 380" role="img" aria-label="Impacts of agriculture on water">' + MK +
+    '<rect width="640" height="380" fill="#fef3c7"/>' +
+    '<circle cx="80" cy="50" r="26" fill="#fbbf24"/>' +
+    '<path d="M0 170 L470 170 L520 200 L640 200 L640 380 L0 380Z" fill="#c2a07a"/>' +
+    '<path d="M0 300 L640 300 L640 380 L0 380Z" fill="#7cb9e0"/>' +
+    '<path d="M0 300 L640 300" stroke="#0369a1" stroke-width="2" stroke-dasharray="7 4"/>' +
+    '<path d="M0 248 L440 248" stroke="#0369a1" stroke-width="2.5" stroke-dasharray="7 4"/>' +
+    '<path d="M0 166 L440 166" stroke="#f8fafc" stroke-width="6"/>' +
+    '<g fill="#16a34a">' + [60, 120, 180, 240, 300, 360].map(function (x) { return '<path d="M' + x + ' 166 l-8 -22 l8 8 l8 -8z"/>'; }).join('') + '</g>' +
+    '<path d="M520 200 L640 200 L640 226 L520 226Z" fill="#14b8a6"/>' + tx(580, 220, 'river', { s: 10, a: 'middle', c: '#fff' }) +
+    '<g fill="#22c55e"><circle cx="560" cy="210" r="5"/><circle cx="600" cy="212" r="4"/><circle cx="620" cy="208" r="5"/></g>' +
+    '<rect x="20" y="130" width="40" height="22" fill="#38bdf8"/>' +
+    '<g stroke="#334155" stroke-width="2.5" fill="none" marker-end="url(#mD)">' +
+      '<path d="M150 150 L150 90"/><path d="M210 150 L215 95"/>' +
+      '<path d="M260 240 L260 186"/><path d="M300 240 L300 186"/>' +
+      '<path d="M400 176 C 450 182, 490 196, 530 206"/>' +
+      '<path d="M380 196 L380 290"/></g>' +
+    tx(40, 125, 'canal', { s: 10, c: '#0369a1' }) + tx(200, 262, 'raised water table', { s: 10, c: '#0369a1', w: 600 }) + tx(200, 316, 'original water table', { s: 10, c: '#0369a1', w: 600 }) + '</svg>';
+  var PINS_AGRI = [{ n: 1, x: 40, y: 100 }, { n: 2, x: 182, y: 78 }, { n: 3, x: 330, y: 262 }, { n: 4, x: 280, y: 214 }, { n: 5, x: 420, y: 148 }, { n: 6, x: 476, y: 168 }, { n: 7, x: 405, y: 250 }, { n: 8, x: 590, y: 246 }];
+
+  /* Nile basin (schematic map) */
+  var SVG_NILE = '<svg viewBox="0 0 640 380" role="img" aria-label="Nile basin schematic map">' + MK +
+    '<rect width="640" height="380" fill="#fef3c7"/>' +
+    '<path d="M0 0 L640 0 L640 26 L0 26Z" fill="#7dd3fc"/>' + tx(320, 18, 'Mediterranean Sea', { s: 11, a: 'middle', c: '#075985' }) +
+    '<path d="M560 60 L640 120 L640 260 L600 250 L540 140Z" fill="#7dd3fc"/>' + tx(600, 180, 'Red Sea', { s: 10, a: 'middle', c: '#075985' }) +
+    '<path d="M260 26 L330 26 L310 60 Z" fill="#86efac"/>' +
+    '<g fill="none" stroke="#0284c7"><path d="M295 60 C 300 120, 290 150, 300 190 C 305 215, 300 235, 300 250" stroke-width="6"/>' +
+      '<path d="M300 250 C 295 290, 280 310, 270 340" stroke-width="4"/>' +
+      '<path d="M300 250 C 340 260, 380 270, 420 300" stroke-width="4"/>' +
+      '<path d="M310 200 C 340 205, 360 215, 380 228" stroke-width="2.5"/></g>' +
+    '<ellipse cx="300" cy="140" rx="10" ry="24" fill="#38bdf8"/>' + dam(300, 168, 90) +
+    '<ellipse cx="270" cy="362" rx="38" ry="18" fill="#38bdf8"/>' +
+    '<ellipse cx="428" cy="304" rx="12" ry="9" fill="#38bdf8"/>' + dam(392, 280, 50) +
+    city(296, 50) + city(300, 250) +
+    tx(20, 40, 'Schematic, not to scale', { s: 10, w: 600, c: '#78716c', i: 1 }) + '</svg>';
+  var PINS_NILE = [{ n: 1, x: 340, y: 46 }, { n: 2, x: 334, y: 140 }, { n: 3, x: 210, y: 110 }, { n: 4, x: 220, y: 210 }, { n: 5, x: 272, y: 236 }, { n: 6, x: 352, y: 240 }, { n: 7, x: 384, y: 304 }, { n: 8, x: 476, y: 280 }, { n: 9, x: 252, y: 310 }, { n: 10, x: 322, y: 360 }];
+
+  /* Ice stupa (cross-section) */
+  var SVG_STUPA = '<svg viewBox="0 0 640 380" role="img" aria-label="Ice stupa">' + MK +
+    '<rect width="640" height="380" fill="#e0f2fe"/>' +
+    '<path d="M0 60 L120 40 L200 90 L330 300 L640 300 L640 380 L0 380Z" fill="#cbd5e1"/>' +
+    '<path d="M60 60 L120 40 L150 58Z" fill="#fff"/>' +
+    '<path d="M100 70 C 110 90, 120 100, 140 110" stroke="#38bdf8" stroke-width="6" fill="none"/>' +
+    '<path d="M140 110 L330 296 L400 296 L400 120" stroke="#475569" stroke-width="5" fill="none" stroke-dasharray="10 4"/>' +
+    '<path d="M340 296 L400 130 L460 296Z" fill="#bae6fd" stroke="#7dd3fc" stroke-width="2"/>' +
+    '<g stroke="#0284c7" stroke-width="2"><path d="M400 118 L380 104"/><path d="M400 118 L420 104"/><path d="M400 118 L400 98"/></g>' +
+    '<path d="M470 300 L640 300 L640 320 L470 320Z" fill="#86efac"/><g fill="#16a34a">' + [500, 540, 580, 620].map(function (x) { return '<path d="M' + x + ' 300 l-6 -16 l6 6 l6 -6z"/>'; }).join('') + '</g>' +
+    '<g stroke="#334155" stroke-width="2.5" fill="none" marker-end="url(#mD)"><path d="M452 286 C 470 296, 490 300, 520 300"/></g>' +
+    tx(560, 60, 'Winter: −20 °C', { s: 12, a: 'middle', c: '#0369a1' }) + tx(560, 270, 'Spring (April–May)', { s: 11, a: 'middle', c: '#166534' }) + '</svg>';
+  var PINS_STUPA = [{ n: 1, x: 90, y: 96 }, { n: 2, x: 230, y: 230 }, { n: 3, x: 432, y: 98 }, { n: 4, x: 400, y: 230 }, { n: 5, x: 560, y: 336 }];
+
+  /* Yangtze and the Three Gorges Dam (schematic map) */
+  var SVG_YANGTZE = '<svg viewBox="0 0 640 380" role="img" aria-label="Yangtze and Three Gorges schematic map">' + MK +
+    '<rect width="640" height="380" fill="#f0fdf4"/>' +
+    '<path d="M590 120 L640 110 L640 380 L560 380 Z" fill="#7dd3fc"/>' + tx(605, 300, 'East China Sea', { s: 10, a: 'middle', c: '#075985' }) +
+    '<path d="M0 260 C 60 250, 100 230, 140 220" fill="none" stroke="#0284c7" stroke-width="5"/>' +
+    '<path d="M140 220 C 190 210, 230 200, 270 190" fill="none" stroke="#0ea5e9" stroke-width="14"/>' +
+    '<path d="M270 190 C 320 200, 360 215, 400 210 C 450 200, 500 180, 540 170 C 560 165, 575 160, 592 160" fill="none" stroke="#0284c7" stroke-width="6"/>' +
+    '<ellipse cx="370" cy="250" rx="22" ry="12" fill="#7dd3fc"/>' +
+    dam(272, 190, 10) + city(140, 220) + city(400, 210) + city(586, 160) +
+    '<path d="M592 150 L612 140 M592 160 L618 160 M592 170 L612 182" stroke="#a16207" stroke-width="3"/>' +
+    tx(20, 30, 'Schematic, not to scale', { s: 10, w: 600, c: '#78716c', i: 1 }) + '</svg>';
+  var PINS_YANGTZE = [{ n: 1, x: 120, y: 196 }, { n: 2, x: 205, y: 180 }, { n: 3, x: 286, y: 168 }, { n: 4, x: 404, y: 186 }, { n: 5, x: 560, y: 136 }];
+
+  /* America's Watershed Initiative: six values */
+  var SVG_AWI = (function () {
+    var items = [['🚢', 320, 52], ['🚰', 520, 130], ['🌊', 520, 270], ['💰', 320, 340], ['🦆', 120, 270], ['🎣', 120, 130]];
+    return '<svg viewBox="0 0 640 380" role="img" aria-label="America’s Watershed Initiative values">' +
+      '<rect width="640" height="380" fill="#f8fafc"/>' +
+      '<circle cx="320" cy="195" r="78" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>' +
+      tx(320, 188, 'Mississippi', { s: 13, a: 'middle', c: '#14532d' }) + tx(320, 206, 'basin plan', { s: 13, a: 'middle', c: '#14532d' }) +
+      items.map(function (it) { return '<line x1="320" y1="195" x2="' + it[1] + '" y2="' + it[2] + '" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4"/>'; }).join('') +
+      '<circle cx="320" cy="195" r="78" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>' + tx(320, 188, 'Mississippi', { s: 13, a: 'middle', c: '#14532d' }) + tx(320, 206, 'basin plan', { s: 13, a: 'middle', c: '#14532d' }) +
+      items.map(function (it) { return '<circle cx="' + it[1] + '" cy="' + it[2] + '" r="34" fill="#fff" stroke="#cbd5e1" stroke-width="2"/><text x="' + it[1] + '" y="' + (it[2] + 11) + '" text-anchor="middle" font-size="30">' + it[0] + '</text>'; }).join('') + '</svg>';
+  })();
+  var PINS_AWI = [{ n: 1, x: 362, y: 30 }, { n: 2, x: 562, y: 108 }, { n: 3, x: 562, y: 248 }, { n: 4, x: 362, y: 318 }, { n: 5, x: 78, y: 248 }, { n: 6, x: 78, y: 108 }];
+
+  /* Louisiana coast (schematic map) */
+  var SVG_LOUIS = '<svg viewBox="0 0 640 380" role="img" aria-label="Louisiana coast schematic map">' + MK +
+    '<rect width="640" height="380" fill="#dcfce7"/>' +
+    '<path d="M0 250 C 80 240, 140 260, 200 250 C 260 240, 300 270, 340 262 C 380 255, 410 280, 430 270 L 470 300 L 520 330 L 560 300 L 640 260 L640 380 L0 380Z" fill="#7dd3fc"/>' +
+    tx(150, 350, 'Gulf of Mexico', { s: 12, c: '#075985' }) +
+    '<g fill="#bef264" stroke="#65a30d">' + [[250, 296, 40], [310, 300, 30], [370, 304, 26]].map(function (b) { return '<ellipse cx="' + b[0] + '" cy="' + b[1] + '" rx="' + b[2] + '" ry="5"/>'; }).join('') + '</g>' +
+    '<path d="M330 200 C 360 210, 380 230, 400 250" fill="#a3e635" opacity="0.5"/>' +
+    '<g fill="#7dd3fc" opacity="0.9"><circle cx="350" cy="230" r="9"/><circle cx="372" cy="222" r="7"/><circle cx="335" cy="245" r="8"/><circle cx="362" cy="250" r="6"/></g>' +
+    '<ellipse cx="450" cy="150" rx="46" ry="22" fill="#7dd3fc"/>' +
+    '<g fill="none" stroke="#0284c7"><path d="M300 0 C 300 40, 290 70, 300 100 C 320 140, 380 170, 420 190 C 450 205, 470 230, 480 260 C 488 280, 496 300, 504 320" stroke-width="7"/>' +
+      '<path d="M504 320 L486 352 M504 320 L512 356 M504 320 L536 340" stroke-width="4"/>' +
+      '<path d="M298 60 C 260 100, 200 160, 170 240" stroke-width="4" stroke-dasharray="7 4"/></g>' +
+    '<path d="M150 240 C 160 236, 180 236, 196 246 L 180 256Z" fill="#a16207" opacity="0.6"/>' +
+    city(300, 100) + city(424, 190) + tx(20, 30, 'Schematic, not to scale', { s: 10, w: 600, c: '#78716c', i: 1 }) + '</svg>';
+  var PINS_LOUIS = [{ n: 1, x: 274, y: 96 }, { n: 2, x: 424, y: 214 }, { n: 3, x: 450, y: 122 }, { n: 4, x: 530, y: 362 }, { n: 5, x: 170, y: 214 }, { n: 6, x: 352, y: 196 }, { n: 7, x: 250, y: 318 }];
   /* ================= EXTRA STAGES (none: every stage is built into each level) ================= */
   var EXTRA = {}, EXTRA_AT = {};
 
@@ -1600,7 +2039,13 @@
       { type: 'multi', marks: 3, cmd: 'Identify', q: 'Identify three causes of drought.', need: 3, items: [
           { t: 'A weak seasonal shift of the ITCZ', ok: true }, { t: 'El Niño events', ok: true }, { t: 'Higher temperatures from global warming increasing evaporation', ok: true },
           { t: 'Building more reservoirs', ok: false }, { t: 'Increased cloud cover', ok: false }],
-        ms: 'Drought is a long period of below-average rainfall: <b>ITCZ shifts</b>, <b>ENSO</b> and <b>global warming</b> are key causes.' }],
+        ms: 'Drought is a long period of below-average rainfall: <b>ITCZ shifts</b>, <b>ENSO</b> and <b>global warming</b> are key causes.' },
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how human activity can turn a period of low rainfall into a water crisis.', o: [
+          'Population growth and irrigation increase demand, so over-abstraction drains rivers and aquifers. Poverty and lack of infrastructure mean people cannot store or buy water, and conflict can stop aid arriving.',
+          'Human activity has no effect on water crises because they are only caused by the ITCZ; rainfall alone decides whether a drought becomes a crisis, so the solution is always to wait for rain.',
+          'Humans use too much water.',
+          'People cause droughts.'], c: 0,
+        ms: '1 each for <b>increased demand / over-abstraction</b>, <b>poverty or lack of infrastructure (economic scarcity)</b>, and <b>a developed example</b> (e.g. conflict blocking aid in Somalia, 2011).' }],
     10: [
       { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how agricultural run-off can lead to the death of fish in a lake.', o: [
           'Fertiliser nitrates and phosphates wash into the lake, causing an algal bloom. When the algae die, bacteria decompose them and use up the oxygen, so fish suffocate.',
@@ -1613,7 +2058,11 @@
           'Irrigation water washes salt out of the soil, so the soil becomes too fresh for crops and farmers have to add salt as a fertiliser to restore it.',
           'Irrigation makes soil salty.',
           'Salt water is used.'], c: 0,
-        ms: '1 for <b>evaporation / rising water table</b> and 1 for <b>salts left in the soil</b>.' }],
+        ms: '1 for <b>evaporation / rising water table</b> and 1 for <b>salts left in the soil</b>.' },
+      { type: 'multi', marks: 3, cmd: 'Identify', q: 'Identify three ways in which agriculture on a floodplain can reduce water quality.', need: 3, items: [
+          { t: 'Nitrate and phosphate run-off causing eutrophication', ok: true }, { t: 'Pesticides entering the river and bioaccumulating', ok: true }, { t: 'Soil erosion increasing sediment in the river', ok: true },
+          { t: 'Planting buffer strips beside the river', ok: false }, { t: 'Drip irrigation reducing water use', ok: false }],
+        ms: 'Buffer strips and drip irrigation are ways to <b>reduce</b> impacts, not causes of poorer water quality.' }],
     11: [
       { type: 'num', marks: 2, cmd: 'Calculate', q: 'A water table fell from 25 m to 61 m below the surface over 40 years. Calculate the average fall per year.', ans: 0.9, tol: 0.01, unit: 'm per year', ms: '61 − 25 = 36 m; 36 ÷ 40 = <b>0.9 m per year</b>.' },
       { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain why the Aral Sea shrank.', o: [
@@ -1649,7 +2098,13 @@
       { type: 'multi', marks: 3, cmd: 'Identify', q: 'Identify three environmental costs of large dams.', need: 3, items: [
           { t: 'Sediment is trapped, starving the delta', ok: true }, { t: 'Fish migration routes are blocked', ok: true }, { t: 'Increased evaporation from the reservoir', ok: true },
           { t: 'Resettlement of communities', ok: false }, { t: 'Cheaper electricity', ok: false }],
-        ms: 'Resettlement is a <b>social</b> cost; cheaper electricity is an <b>economic</b> benefit.' }],
+        ms: 'Resettlement is a <b>social</b> cost; cheaper electricity is an <b>economic</b> benefit.' },
+      { type: 'best', marks: 3, cmd: 'Explain', q: 'Explain how a dam can cause erosion downstream.', o: [
+          'The reservoir traps sediment, so the water released is clear. With no load to carry it has spare energy, so it erodes the bed and banks below the dam (clear-water erosion).',
+          'Dams increase the sediment load downstream because water released from the reservoir carries extra silt, and this heavier water erodes the river bed more quickly near the delta.',
+          'Water from dams erodes the river.',
+          'Dams change the river.'], c: 0,
+        ms: '1 for <b>sediment trapped</b>, 1 for <b>clear water with spare energy</b>, 1 for <b>erosion of bed/banks or delta</b>.' }],
     15: [
       { type: 'best', marks: 2, cmd: 'Define', q: 'Define integrated drainage basin management (IDBM).', o: [
           'Coordinated management of water, land and related resources across a whole drainage basin and all sectors, to balance economic, social and environmental needs.',
