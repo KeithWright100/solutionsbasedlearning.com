@@ -175,7 +175,7 @@ window.SBL_LESSONS["IBGFW-T2"] = {
   "I can interpret flood hydrographs and explain the factors that control their shape",
   "I can explain the natural and human factors that affect flood risk",
   "I can evaluate hard and soft approaches to flood mitigation",
-  "I can evaluate flood mitigation in the Chao Phraya basin and at Boscastle"
+  "I can evaluate flood mitigation in the Chao Phraya basin and on the Mississippi"
  ],
  "quiz": [
   {
