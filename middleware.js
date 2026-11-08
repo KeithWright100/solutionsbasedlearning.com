@@ -57,8 +57,13 @@ const PUBLIC_PATH_TREES = [
   '/geography/quizzes'  // KS3 — Geography Quizzes + Geography Helper bot
 ];
 // PUBLIC_PATH_EXACT — only this exact path is public, nothing nested
-// under it. (Currently unused — kept for one-off public pages.)
-const PUBLIC_PATH_EXACT = [];
+// under it.
+//
+// The Humanities Hub home page is a public shop window: visitors can see
+// the subjects, what's new and the latest game before logging in. Every
+// lesson, revision page and My scores (/humanities-hub/my-scores) it links
+// to stays behind the login wall, so clicking one goes via the login page.
+const PUBLIC_PATH_EXACT = ['/humanities-hub', '/humanities-hub/', '/humanities-hub/index.html'];
 
 // LOCKED_GAMES — games inside the public games tree that still need a
 // login, because they contain self-marking past paper (PPQ) checkpoint
@@ -268,7 +273,7 @@ async function getActiveRole(accessToken, supabaseUrl, anonKey, userId) {
 export default async function middleware(request) {
   const { pathname } = new URL(request.url);
 
-  // Open games (KS3, IGCSE and IB) — let these through before any auth check runs.
+  // Open games (KS3, IGCSE and IB) and the Humanities Hub home page — let these through before any auth check runs.
   if (isPublicPath(pathname)) return undefined;
 
   const isAdminPath = pathname.startsWith('/admin');

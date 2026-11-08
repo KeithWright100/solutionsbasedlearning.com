@@ -155,6 +155,17 @@
       .welcome { padding: 22px; }
       .welcome h1 { font-size: 1.5rem; }
     }
+    /* logged-out preview */
+    .guest-cta { display: none; flex-wrap: wrap; gap: 10px; margin-top: 18px; position: relative; z-index: 2; }
+    .guest-cta a { font-weight: 800; font-size: .92rem; padding: 10px 18px; border-radius: 12px; }
+    .guest-cta .in { background: var(--teal); color: var(--deep); }
+    .guest-cta .req { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); color: #fff; }
+    .guest-note { display: none; font-size: .82rem; color: var(--muted); margin: -4px 0 10px; }
+    .guest-note a { color: var(--teal-dark); font-weight: 700; }
+    body.guest .guest-cta { display: flex; }
+    body.guest .guest-note { display: block; }
+    body.guest .hero #recent .resume, body.guest .hero #recent .empty { display: none; }
+    .lock { font-size: .7rem; margin-left: 4px; opacity: .7; }
   </style>
 </head>
 <body>
@@ -164,7 +175,8 @@
     <section class="hero">
       <div class="welcome">
         <h1 id="hello">Welcome to the Humanities Hub</h1>
-        <p>Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Use the menus above, or find a page below.</p>
+        <p id="intro">Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Use the menus above, or find a page below.</p>
+        <div class="guest-cta"><a class="in" href="/login/?redirect=/humanities-hub">Log in</a><a class="req" href="/register/">Request access</a></div>
         <div class="find">
           <label class="find__box"><input id="find" type="search" placeholder="Search lessons, topics and case studies…" aria-label="Find a page" autocomplete="off"><span aria-hidden="true">Find</span></label>
           <div class="find__list" id="findList"></div>
@@ -182,7 +194,8 @@
         </a>
       </div>
       <div class="continue">
-        <h2 class="sec">Carry on where you left off</h2>
+        <h2 class="sec" id="contHead">Carry on where you left off</h2>
+        <p class="guest-note">Log in to open lessons, revision and past papers. <a href="/geography/games">Most games are free to play</a>.</p>
         <div id="recent"></div>
       </div>
     </section>
@@ -335,11 +348,12 @@
       var items = box.querySelectorAll('.resume'), news = box.querySelectorAll('.latest');
       /* the 3 most recent pages, then "Latest update" and "Latest game" */
       items.forEach(function (el, i) { el.hidden = i > 2; });
-      news.forEach(function (el, i) { el.hidden = i > 1; });
+      news.forEach(function (el, i) { el.hidden = i > (document.body.classList.contains('guest') ? 3 : 1); });
       if (!window.matchMedia('(min-width: 981px)').matches) return;
       hero.style.alignItems = 'start';
       var shown = Math.min(3, items.length), tooTall = function () { return cont.offsetHeight > welcome.offsetHeight + 1; };
       while (shown > 2 && tooTall()) { items[--shown].hidden = true; }
+      if (document.body.classList.contains('guest')) { var nn = Math.min(4, news.length); while (nn > 2 && tooTall()) { news[--nn].hidden = true; } }
       hero.style.alignItems = '';
     }
     fit();
@@ -373,6 +387,22 @@
       .then(function (r) { return r.ok ? r.json() : {}; })
       .then(function (d) { paint(d && d.picks); })
       .catch(function () { paint({}); });
+  })();
+  </script>
+  <script>
+  /* Logged-out preview: the hub is public, so visitors see what's new before logging in.
+     Lessons, revision and My scores stay behind the login (middleware.js). */
+  (function () {
+    fetch('/api/session', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.loggedIn) return;
+        document.body.classList.add('guest');
+        document.getElementById('intro').textContent = 'Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Have a look at what is here, then log in to open the lessons. Most games are free to play now.';
+        document.getElementById('contHead').textContent = 'What\u2019s new on SBL';
+        if (window.sblFitRecent) window.sblFitRecent();
+      })
+      .catch(function () {});
   })();
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
