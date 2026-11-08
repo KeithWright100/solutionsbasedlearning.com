@@ -331,6 +331,28 @@
   body.gh-searching .topic-nav, body.gh-searching .level-sub, body.gh-searching .topic-sub { display: none; }
   .gh-hide { display: none !important; }
   @media (max-width: 680px) { .gh-grid { grid-template-columns: 1fr; gap: 14px; } .gh-tile { min-height: 0; padding: 22px 20px 18px; } .gh-ico { font-size: 2.1rem; } }
+
+  .kind-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 4px; }
+  .kind-jump { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 14px; font-weight: 850; font-size: .95rem; color: #fff; box-shadow: 0 8px 18px rgba(0,25,45,.12); transition: transform .2s ease; }
+  .kind-jump:hover { transform: translateY(-2px); }
+  .kind-jump span { font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.25); }
+  .k-act { background: linear-gradient(135deg, #00b8b0, #027f86); }
+  .k-rev { background: linear-gradient(135deg, #f2994a, #d0571b); }
+  .kind { margin: 26px 0 10px; padding: 20px 20px 4px; border-radius: 22px; scroll-margin-top: 70px; }
+  .kind-act { background: rgba(0,184,176,.07); border: 1px solid rgba(0,124,130,.18); }
+  .kind-rev { background: rgba(242,153,74,.08); border: 1px solid rgba(208,87,27,.2); }
+  .kind-head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .kind-ico { font-size: 2rem; line-height: 1; }
+  .kind-head > div { flex: 1; }
+  .kind-t { font-size: 1.3rem; font-weight: 900; color: var(--navy); }
+  .kind-head p { font-size: .9rem; color: #244253; margin-top: 2px; }
+  .kind-n { font-size: .8rem; font-weight: 850; padding: 4px 12px; border-radius: 999px; background: #fff; color: var(--teal-dark); white-space: nowrap; }
+  .kind-rev .kind-n { color: #b9531c; }
+  .kind-rev .topic-head h3 { color: #b9531c; border-left-color: #f2994a; }
+  .topic { scroll-margin-top: 70px; }
+  section.level { scroll-margin-top: 70px; }
+  body.gh-searching .kind-nav, body.gh-searching .kind-head p { display: none; }
+  @media (max-width: 680px) { .kind { padding: 16px 12px 2px; } .kind-head { flex-wrap: wrap; } }
 </style>
 <script>document.documentElement.classList.add("gh-js");</script>
 </head>
@@ -575,8 +597,47 @@
 
     <section class="level" id="igcse" data-view="igcse" aria-labelledby="igcse-h">
   <div class="level-head"><h2 id="igcse-h">&#128218; IGCSE Geography (KS4)</h2><span class="level-count">8 games</span></div>
-  <p class="level-sub">Edexcel IGCSE: starters, plenaries and revision games, organised by topic.</p>
-  <nav class="topic-nav" aria-label="IGCSE Geography (KS4) topics"><a href="#igcse-coastal">Paper 1 · Coastal Environments <span>1</span></a><a href="#igcse-hazards">Paper 1 · Hazardous Environments <span>1</span></a><a href="#igcse-economic">Paper 2 · Economic Activity and Energy <span>3</span></a><a href="#igcse-rural">Paper 2 · Rural Environments <span>1</span></a><a href="#igcse-development">Paper 2 · Development and Human Welfare <span>1</span></a><a href="#igcse-fieldwork">Papers 1 and 2 · Fieldwork <span>1</span></a></nav>
+  <p class="level-sub">Edexcel IGCSE: interactive activities for lessons, and full topic revision games, organised by topic.</p>
+    <nav class="kind-nav" aria-label="IGCSE Geography: activity type"><a class="kind-jump k-act" href="#igcse-act">&#129513; Interactive curriculum activities <span>2</span></a><a class="kind-jump k-rev" href="#igcse-rev">&#127942; Full topic revision games <span>6</span></a></nav>
+
+  <div class="kind kind-act" id="igcse-act">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#129513;</span><div><h3 class="kind-t">Interactive curriculum activities</h3><p>Use in lessons: starters, case-study labs, decision games, sorts and essay practice for each part of the course.</p></div><span class="kind-n">2 games</span></div>
+    <nav class="topic-nav" aria-label="IGCSE Geography: Interactive curriculum activities"><a href="#igcse-economic">Paper 2 · Economic Activity and Energy <span>2</span></a></nav>
+    <div class="topic" id="igcse-economic">
+      <div class="topic-head"><h3>Paper 2 · Economic Activity and Energy</h3><span>2 games</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/economic-activity-and-energy">Economic Activity and Energy lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+        </div>
+        <h2>Energy Sort</h2>
+        <span class="status live">Live &middot; Starter</span>
+        <p class="desc">Sort 15 energy resources into Renewable and Non-renewable against the clock, then justify the tricky cases: nuclear, fuelwood, HEP, geothermal and shale gas.</p>
+        <a class="play-btn" href="/geography/games/energy-sort" aria-label="Play Energy Sort">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c3 4 6 7 6 10a6 6 0 0 1-12 0c0-3 3-6 6-10Z"/><path d="M13 9l-3 5h3l-2 4"/></svg>
+        </div>
+        <h2>Micro-Hydro Mission</h2>
+        <span class="status live">Live &middot; Energy for last-mile communities</span>
+        <p class="desc">Label a micro-hydro system from river to village, sort diesel vs micro-hydro, then investigate Long Tanid in Malaysian Borneo &mdash; and copy your work into OneNote.</p>
+        <a class="play-btn" href="/geography/games/micro-hydro-mission" aria-label="Play Micro-Hydro Mission">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="kind kind-rev" id="igcse-rev">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#127942;</span><div><h3 class="kind-t">Full topic revision games</h3><p>Revise a whole topic in one game: levels, past-paper checkpoints and exam-style challenges.</p></div><span class="kind-n">6 games</span></div>
+    <nav class="topic-nav" aria-label="IGCSE Geography: Full topic revision games"><a href="#igcse-coastal">Paper 1 · Coastal Environments <span>1</span></a><a href="#igcse-hazards">Paper 1 · Hazardous Environments <span>1</span></a><a href="#igcse-economic-rev">Paper 2 · Economic Activity and Energy <span>1</span></a><a href="#igcse-rural">Paper 2 · Rural Environments <span>1</span></a><a href="#igcse-development">Paper 2 · Development and Human Welfare <span>1</span></a><a href="#igcse-fieldwork">Papers 1 and 2 · Fieldwork <span>1</span></a></nav>
     <div class="topic-pair">
     <div class="topic" id="igcse-coastal">
       <div class="topic-head"><h3>Paper 1 · Coastal Environments</h3><span>1 game</span></div>
@@ -615,35 +676,11 @@
       </div>
     </div>
     </div>
-    <div class="topic-pair wide-first">
-    <div class="topic" id="igcse-economic">
-      <div class="topic-head"><h3>Paper 2 · Economic Activity and Energy</h3><span>3 games</span></div>
+    <div class="topic-pair">
+    <div class="topic" id="igcse-economic-rev">
+      <div class="topic-head"><h3>Paper 2 · Economic Activity and Energy</h3><span>1 game</span></div>
       <p class="topic-sub">Links to the <a href="/igcse/geography/learn/economic-activity-and-energy">Economic Activity and Energy lessons</a>.</p>
       <div class="game-grid">
-<article class="game-card">
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
-        </div>
-        <h2>Energy Sort</h2>
-        <span class="status live">Live &middot; Starter</span>
-        <p class="desc">Sort 15 energy resources into Renewable and Non-renewable against the clock, then justify the tricky cases: nuclear, fuelwood, HEP, geothermal and shale gas.</p>
-        <a class="play-btn" href="/geography/games/energy-sort" aria-label="Play Energy Sort">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
-<article class="game-card">
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c3 4 6 7 6 10a6 6 0 0 1-12 0c0-3 3-6 6-10Z"/><path d="M13 9l-3 5h3l-2 4"/></svg>
-        </div>
-        <h2>Micro-Hydro Mission</h2>
-        <span class="status live">Live &middot; Energy for last-mile communities</span>
-        <p class="desc">Label a micro-hydro system from river to village, sort diesel vs micro-hydro, then investigate Long Tanid in Malaysian Borneo &mdash; and copy your work into OneNote.</p>
-        <a class="play-btn" href="/geography/games/micro-hydro-mission" aria-label="Play Micro-Hydro Mission">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
 <article class="game-card" data-account-required>
         <div class="game-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
@@ -715,13 +752,18 @@
       </div>
     </div>
     </div>
+  </div>
 </section>
 <section class="level" id="ib" data-view="ib" aria-labelledby="ib-h">
   <div class="level-head"><h2 id="ib-h">&#127891; IB Diploma Geography</h2><span class="level-count">22 games</span></div>
-  <p class="level-sub">IB DP: retrieval, case-study comparison and evaluation games, organised by unit.</p>
-  <nav class="topic-nav" aria-label="IB Diploma Geography topics"><a href="#ib-unit1">Unit 1 · Changing Population <span>9</span></a><a href="#ib-unit2">Unit 2 · Global Climate <span>1</span></a><a href="#ib-unit3">Unit 3 · Resource Consumption and Security <span>9</span></a><a href="#ib-hl">HL · Human development and diversity <span>2</span></a><a href="#ib-all">All units · Case studies <span>1</span></a></nav>
+  <p class="level-sub">IB DP: interactive activities for lessons, and full topic revision games, organised by unit.</p>
+    <nav class="kind-nav" aria-label="IB Diploma Geography: activity type"><a class="kind-jump k-act" href="#ib-act">&#129513; Interactive curriculum activities <span>18</span></a><a class="kind-jump k-rev" href="#ib-rev">&#127942; Full topic revision games <span>4</span></a></nav>
+
+  <div class="kind kind-act" id="ib-act">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#129513;</span><div><h3 class="kind-t">Interactive curriculum activities</h3><p>Use in lessons: starters, case-study labs, decision games, sorts and essay practice for each part of the course.</p></div><span class="kind-n">18 games</span></div>
+    <nav class="topic-nav" aria-label="IB Diploma Geography: Interactive curriculum activities"><a href="#ib-unit1">Unit 1 · Changing Population <span>8</span></a><a href="#ib-unit3">Unit 3 · Resource Consumption and Security <span>8</span></a><a href="#ib-hl">HL · Human development and diversity <span>2</span></a></nav>
     <div class="topic" id="ib-unit1">
-      <div class="topic-head"><h3>Unit 1 · Changing Population</h3><span>9 games</span></div>
+      <div class="topic-head"><h3>Unit 1 · Changing Population</h3><span>8 games</span></div>
       <p class="topic-sub">Population patterns, demographic change and forced migration.</p>
       <div class="game-grid">
       <article class="game-card">
@@ -736,7 +778,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
         </a>
       </article>
-
       <article class="game-card">
         <div class="game-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"/><path d="M3 20h18M6 20v-4M10 20v-7M14 20v-9M18 20v-12"/></svg>
@@ -745,19 +786,6 @@
         <span class="status live">New &middot; Population possibilities and power</span>
         <p class="desc">Analyse Japan&rsquo;s fertility rate since 1947 and its population pyramids, sort the causes and consequences of ageing, evaluate six real sources on what Japan has tried, then decide what you would do in charge of Japan and compare it with the Takaichi government. Copy your work to OneNote.</p>
         <a class="play-btn" href="/geography/games/japan-ageing" aria-label="Play Japan: The Ageing Nation">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
-
-<article class="game-card" data-account-required>
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 21c0-4 3-7 6-7s6 3 6 7M13 21c0-3 2-6 4-6s5 3 5 6"/></svg>
-        </div>
-        <h2>Population Quest: Changing Population</h2>
-        <span class="status live">New &middot; Unit 1 revision adventure</span>
-        <p class="desc">Fourteen levels across all three topics &mdash; distribution and development, Egypt and Thailand, the DTM, Thailand vs The Gambia, megacities, the Rohingya, Haiti, ageing, population policies, trafficking and the demographic dividend &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
-        <a class="play-btn" href="/geography/games/ib-population-quest" aria-label="Play Population Quest: Changing Population">
           Play Now
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
         </a>
@@ -836,40 +864,10 @@
       </article>
       </div>
     </div>
-    <div class="topic" id="ib-unit2">
-      <div class="topic-head"><h3>Unit 2 · Global Climate</h3><span>1 game</span></div>
-      <p class="topic-sub">Causes, consequences and responses to climate change.</p>
-      <div class="game-grid">
-<article class="game-card" data-account-required>
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
-        </div>
-        <h2>Climate Quest: Changing Climate</h2>
-        <span class="status live">Live &middot; Unit 2 revision adventure</span>
-        <p class="desc">Twelve levels across Causes, Consequences and Responding &mdash; albedo and feedback loops, sea level rise, Bangladesh, risk and vulnerability, adaptation vs mitigation, greenwashing &mdash; then beat the IB Examiner with Claim, Evidence, Explain and Judgement.</p>
-        <a class="play-btn" href="/geography/games/ib-climate-quest" aria-label="Play Climate Quest: Changing Climate">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
-      </div>
-    </div>
     <div class="topic" id="ib-unit3">
-      <div class="topic-head"><h3>Unit 3 · Resource Consumption and Security</h3><span>9 games</span></div>
+      <div class="topic-head"><h3>Unit 3 · Resource Consumption and Security</h3><span>8 games</span></div>
       <p class="topic-sub">Resources, energy, water and food security, and the nexus.</p>
       <div class="game-grid">
-<article class="game-card" data-account-required>
-        <div class="game-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3a9 9 0 1 1-8.5 6"/><path d="M3 3v6h6"/><path d="M12 8c2 2.5 3 4 3 5.5a3 3 0 0 1-6 0C9 12 10 10.5 12 8Z"/></svg>
-        </div>
-        <h2>Resource Quest: Global Resource Consumption</h2>
-        <span class="status live">New &middot; Unit 3 revision adventure</span>
-        <p class="desc">Fourteen levels across all three topics &mdash; poverty reduction, ecological footprints, water, food and energy, the nexus, Nepal and Israel, e-waste, the SDGs, Malthus vs Boserup and the circular economy &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
-        <a class="play-btn" href="/geography/games/ib-resource-quest" aria-label="Play Resource Quest: Global Resource Consumption">
-          Play Now
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
-        </a>
-      </article>
 <article class="game-card">
         <div class="game-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
@@ -998,7 +996,68 @@
       </article>
       </div>
     </div>
+  </div>
 
+  <div class="kind kind-rev" id="ib-rev">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#127942;</span><div><h3 class="kind-t">Full topic revision games</h3><p>Revise a whole topic in one game: levels, past-paper checkpoints and exam-style challenges.</p></div><span class="kind-n">4 games</span></div>
+    <nav class="topic-nav" aria-label="IB Diploma Geography: Full topic revision games"><a href="#ib-unit1-rev">Unit 1 · Changing Population <span>1</span></a><a href="#ib-unit2">Unit 2 · Global Climate <span>1</span></a><a href="#ib-unit3-rev">Unit 3 · Resource Consumption and Security <span>1</span></a><a href="#ib-all">All units · Case studies <span>1</span></a></nav>
+    <div class="topic-pair">
+    <div class="topic" id="ib-unit1-rev">
+      <div class="topic-head"><h3>Unit 1 · Changing Population</h3><span>1 game</span></div>
+      <p class="topic-sub">Population patterns, demographic change and forced migration.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 21c0-4 3-7 6-7s6 3 6 7M13 21c0-3 2-6 4-6s5 3 5 6"/></svg>
+        </div>
+        <h2>Population Quest: Changing Population</h2>
+        <span class="status live">New &middot; Unit 1 revision adventure</span>
+        <p class="desc">Fourteen levels across all three topics &mdash; distribution and development, Egypt and Thailand, the DTM, Thailand vs The Gambia, megacities, the Rohingya, Haiti, ageing, population policies, trafficking and the demographic dividend &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
+        <a class="play-btn" href="/geography/games/ib-population-quest" aria-label="Play Population Quest: Changing Population">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-unit2">
+      <div class="topic-head"><h3>Unit 2 · Global Climate</h3><span>1 game</span></div>
+      <p class="topic-sub">Causes, consequences and responses to climate change.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+        </div>
+        <h2>Climate Quest: Changing Climate</h2>
+        <span class="status live">Live &middot; Unit 2 revision adventure</span>
+        <p class="desc">Twelve levels across Causes, Consequences and Responding &mdash; albedo and feedback loops, sea level rise, Bangladesh, risk and vulnerability, adaptation vs mitigation, greenwashing &mdash; then beat the IB Examiner with Claim, Evidence, Explain and Judgement.</p>
+        <a class="play-btn" href="/geography/games/ib-climate-quest" aria-label="Play Climate Quest: Changing Climate">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic-pair">
+    <div class="topic" id="ib-unit3-rev">
+      <div class="topic-head"><h3>Unit 3 · Resource Consumption and Security</h3><span>1 game</span></div>
+      <p class="topic-sub">Resources, energy, water and food security, and the nexus.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3a9 9 0 1 1-8.5 6"/><path d="M3 3v6h6"/><path d="M12 8c2 2.5 3 4 3 5.5a3 3 0 0 1-6 0C9 12 10 10.5 12 8Z"/></svg>
+        </div>
+        <h2>Resource Quest: Global Resource Consumption</h2>
+        <span class="status live">New &middot; Unit 3 revision adventure</span>
+        <p class="desc">Fourteen levels across all three topics &mdash; poverty reduction, ecological footprints, water, food and energy, the nexus, Nepal and Israel, e-waste, the SDGs, Malthus vs Boserup and the circular economy &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
+        <a class="play-btn" href="/geography/games/ib-resource-quest" aria-label="Play Resource Quest: Global Resource Consumption">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
     <div class="topic" id="ib-all">
       <div class="topic-head"><h3>All units · Case studies</h3><span>1 game</span></div>
       <p class="topic-sub">Revise case studies from across the course on an interactive world map.</p>
@@ -1017,7 +1076,8 @@
       </article>
       </div>
     </div>
-  
+    </div>
+  </div>
 </section>
 <section class="level" id="economics" data-view="igcse" aria-labelledby="econ-h">
   <div class="level-head"><h2 id="econ-h">&#128200; IGCSE Economics</h2><span class="level-count">2 games</span></div>
@@ -1122,6 +1182,7 @@
       var any = 0;
       s.querySelectorAll('.game-card').forEach(function (c) { var ok = !q || c.textContent.toLowerCase().indexOf(q) > -1; c.classList.toggle('gh-hide', !ok); if (ok) any++; });
       s.querySelectorAll('.topic').forEach(function (t) { t.classList.toggle('gh-hide', !!q && !t.querySelector('.game-card:not(.gh-hide)')); });
+      s.querySelectorAll('.kind, .topic-pair').forEach(function (t) { t.classList.toggle('gh-hide', !!q && !t.querySelector('.game-card:not(.gh-hide)')); });
       s.classList.toggle('gh-hide', !!q && !any);
       if (q) hits += any;
     });
