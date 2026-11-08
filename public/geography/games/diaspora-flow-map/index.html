@@ -38,7 +38,7 @@
   .tools { border:1px solid var(--line); border-radius:14px; padding:12px; background:#fbfdfe; display:flex; flex-direction:column; gap:8px; }
   .modes { display:flex; gap:6px; flex-wrap:wrap; }
   .mode { border:2px solid var(--line); background:#fff; border-radius:10px; padding:8px 14px; font-weight:800; cursor:pointer; color:var(--ink); }
-  .mode.on { background:#c2410c; border-color:#c2410c; color:#fff; }
+  .mode:disabled { opacity:.8; cursor:default; } .mode.on { background:#c2410c; border-color:#c2410c; color:#fff; }
   .ftypes { display:flex; flex-wrap:wrap; gap:6px; }
   .ft { display:inline-flex; align-items:center; gap:6px; border:2px solid var(--line); background:#fff; border-radius:999px; padding:5px 11px; font-weight:700; font-size:.84rem; cursor:pointer; color:var(--ink); }
   .ft.on { border-color:var(--navy); background:#eef5fa; box-shadow:0 0 0 2px rgba(15,58,92,.15); }
@@ -157,7 +157,17 @@
   var S = { dias: null, title: '', home: null, hosts: [], flows: [], bubbles: true, mm1: {}, mm2: {}, mmCountry: '', links: [], step: 0 };
   try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv) S = Object.assign(S, sv); } catch (e) {}
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
-  var mode = 'home', curFlow = 'people', dir = 'out', pick = null, synPick = null;
+  var mode = 'home', curFlow = 'people', dir = 'out', pick = null, synPick = null, armHome = null;
+  function presetHome(id) { var d = DIAS.filter(function (x) { return x.id === id; })[0]; return d ? d.home : null; }
+  (function repair() {
+    var ph = presetHome(S.dias);
+    if (ph && S.home !== ph) {
+      // an earlier version let a click replace the fixed homeland: put it back, keep that country as a host
+      if (S.home && S.hosts.indexOf(S.home) < 0) S.hosts.push(S.home);
+      S.home = ph; save();
+    }
+    if (S.home) { var n = S.hosts.length; S.hosts = S.hosts.filter(function (h) { return h !== S.home; }); if (S.hosts.length !== n) save(); mode = 'host'; }
+  })();
 
   /* ================= SHELL ================= */
   var STEPS = [['🗺️', 'Flow map'], ['🏮', 'Preserving culture'], ['🍜', 'Adopting traits'], ['🔗', 'Synthesis']];
@@ -194,7 +204,7 @@
       '<label class="ttl">Map title <input id="title" value="' + esc(S.title) + '" maxlength="90"></label>' +
       '<div class="tools">' +
         '<div class="modes" role="radiogroup" aria-label="What do you want to do?">' +
-          [['home', '① Homeland'], ['host', '② Host countries'], ['flow', '③ Add flows']].map(function (m) { return '<button type="button" class="mode' + (mode === m[0] ? ' on' : '') + '" data-mode="' + m[0] + '" role="radio" aria-checked="' + (mode === m[0]) + '">' + m[1] + '</button>'; }).join('') +
+          [['home', '① Homeland'], ['host', '② Host countries'], ['flow', '③ Add flows']].map(function (m) { var lock = m[0] === 'home' && presetHome(S.dias); return '<button type="button" class="mode' + (mode === m[0] ? ' on' : '') + '" data-mode="' + m[0] + '" role="radio" aria-checked="' + (mode === m[0]) + '"' + (lock ? ' disabled title="The homeland is fixed for this diaspora"' : '') + '>' + m[1] + (lock ? ': ' + esc(BYID[S.home].name) + ' 🔒' : '') + '</button>'; }).join('') +
         '</div>' +
         '<p class="hint" id="hint"></p>' +
         '<div id="flowTools"' + (mode === 'flow' ? '' : ' hidden') + '><div class="ftypes">' + FLOWS.map(function (f) { return '<button type="button" class="ft' + (curFlow === f.id ? ' on' : '') + '" data-f="' + f.id + '"><svg width="34" height="10" aria-hidden="true"><line x1="1" y1="5" x2="33" y2="5" stroke="' + f.col + '" stroke-width="' + f.w + '" stroke-dasharray="' + f.dash + '"/></svg>' + esc(f.t) + '</button>'; }).join('') + '</div>' +
@@ -290,6 +300,10 @@
   }
   function clickCountry(id) {
     if (mode === 'home') {
+      if (presetHome(S.dias)) { mode = 'host'; render(); return; }
+      if (S.home && S.home !== id && armHome !== id) { armHome = id; toast('Click ' + BYID[id].name + ' again to make it the homeland instead of ' + BYID[S.home].name + '.'); return; }
+      armHome = null;
+      if (S.home && S.home !== id) { var old = S.home; S.flows = S.flows.filter(function (f) { return f.from !== old && f.to !== old; }); }
       if (S.hosts.indexOf(id) >= 0) S.hosts.splice(S.hosts.indexOf(id), 1);
       S.home = id; mode = 'host'; save(); render(); return;
     }

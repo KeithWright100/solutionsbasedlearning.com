@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resistance Files — IB Geography Games — SBL</title>
+<meta name="description" content="IB Geography: open 11 case files on local and civil resistance to global interactions (Greenpeace vs Mattel, buy local, Welsh language, the US–Mexico border, Starbucks in the Forbidden City, Thailand's local food campaign, the Minutemen). Identify causes and flows, decide reject or reform, map who holds the power and evaluate civil movements.">
+<style>
+  :root { --navy:#0f3a5c; --deep:#071a2c; --teal:#00b8b0; --teal-dark:#007c82; --ink:#062033; --muted:#4a6272; --line:rgba(5,43,65,0.13); --green:#16a34a; --gold:#f59e0b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  [hidden] { display:none !important; }
+  body { font-family:"Inter","Segoe UI",system-ui,Arial,sans-serif; color:var(--ink); min-height:100vh; background:radial-gradient(circle at 92% 2%, rgba(239,68,68,0.08), transparent 32%), radial-gradient(circle at 5% 0%, rgba(22,163,74,0.10), transparent 40%), linear-gradient(180deg,#f6fafb,#edf3f6); }
+  button, input, textarea { font-family:inherit; font-size:inherit; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+  .top-bar { padding:16px 20px; color:#fff; background:linear-gradient(135deg,#011526,#02324e); }
+  .top-inner { max-width:1150px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .back-link { font-size:.88rem; font-weight:700; color:rgba(255,255,255,.85); text-decoration:none; } .back-link:hover { color:#20d7e2; }
+  .brand { font-weight:900; } .brand span { color:var(--teal); }
+  main { max-width:1150px; margin:18px auto 60px; padding:0 16px; display:flex; flex-direction:column; gap:14px; }
+  .steps { display:flex; flex-wrap:wrap; gap:8px; }
+  .stp { border:2px solid var(--line); background:#fff; border-radius:999px; padding:8px 14px; font-weight:800; cursor:pointer; color:var(--ink); }
+  .stp.on { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:0 10px 28px rgba(0,25,45,.06); display:flex; flex-direction:column; gap:14px; }
+  .kicker { align-self:flex-start; font-size:.74rem; font-weight:850; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:linear-gradient(135deg,var(--teal),#0792a3); padding:5px 12px; border-radius:999px; }
+  h1 { font-size:clamp(1.5rem,3.6vw,2.3rem); font-weight:900; color:var(--navy); line-height:1.15; }
+  h2 { font-size:1.25rem; font-weight:900; color:var(--navy); } h3 { font-size:1.05rem; font-weight:850; color:var(--navy); }
+  p { line-height:1.55; } .muted { color:var(--muted); } .small { font-size:.86rem; } .hint { font-size:.9rem; color:var(--muted); }
+  .src { font-size:.78rem; color:#6b7f8b; line-height:1.45; } .src a { color:inherit; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; } .spacer { flex:1; }
+  .btn { border:2px solid var(--navy); background:var(--navy); color:#fff; border-radius:999px; padding:9px 18px; font-weight:800; cursor:pointer; }
+  .btn.ghost { background:transparent; color:var(--navy); } .btn.small { padding:6px 12px; font-size:.86rem; }
+  .btn.onenote { background:#7719aa; border-color:#7719aa; }
+  .cases { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+  .casecard { text-align:left; border:2px solid var(--line); background:#fff; border-radius:16px; padding:16px; cursor:pointer; display:flex; flex-direction:column; gap:6px; color:var(--ink); }
+  .casecard:hover { border-color:var(--teal); } .casecard b { font-size:1.15rem; color:var(--navy); } .casecard small { color:var(--muted); line-height:1.4; }
+  .ttl { display:flex; flex-direction:column; gap:4px; font-size:.8rem; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .ttl input { text-transform:none; letter-spacing:0; font-size:1rem; font-weight:700; color:var(--ink); border:2px solid var(--line); border-radius:10px; padding:8px 10px; max-width:640px; }
+  .tools { border:1px solid var(--line); border-radius:14px; padding:12px; background:#fbfdfe; display:flex; flex-direction:column; gap:8px; }
+  .modes { display:flex; gap:6px; flex-wrap:wrap; }
+  .mode { border:2px solid var(--line); background:#fff; border-radius:10px; padding:8px 14px; font-weight:800; cursor:pointer; color:var(--ink); }
+  .mode:disabled { opacity:.8; cursor:default; } .mode.on { background:#c2410c; border-color:#c2410c; color:#fff; }
+  .ftypes { display:flex; flex-wrap:wrap; gap:6px; }
+  .ft { display:inline-flex; align-items:center; gap:6px; border:2px solid var(--line); background:#fff; border-radius:999px; padding:5px 11px; font-weight:700; font-size:.84rem; cursor:pointer; color:var(--ink); }
+  .ft.on { border-color:var(--navy); background:#eef5fa; box-shadow:0 0 0 2px rgba(15,58,92,.15); }
+  .rad { display:inline-flex; gap:5px; align-items:center; font-size:.9rem; font-weight:600; cursor:pointer; }
+  .mapwrap { overflow-x:auto; border:1px solid var(--line); border-radius:14px; }
+  .mapwrap svg { display:block; width:100%; min-width:720px; height:auto; }
+  .check { display:flex; flex-wrap:wrap; gap:8px; }
+  .check span { border:1px solid var(--line); border-radius:999px; padding:5px 11px; font-size:.86rem; font-weight:700; color:var(--muted); background:#fff; }
+  .check span.ok { color:var(--green); border-color:rgba(22,163,74,.4); background:#e7f7ed; }
+  .tblwrap { overflow-x:auto; }
+  table.score { width:100%; border-collapse:collapse; font-size:.9rem; }
+  table.score th, table.score td { border:1px solid var(--line); padding:7px 9px; text-align:left; vertical-align:top; } table.score th { background:#eef4f7; }
+  .note { width:100%; min-width:200px; border:1px solid var(--line); border-radius:8px; padding:6px 8px; }
+  .why { width:100%; min-width:240px; min-height:54px; border:1px solid var(--line); border-radius:8px; padding:6px 8px; resize:vertical; }
+  .x { border:0; background:none; color:#dc2626; font-weight:900; cursor:pointer; font-size:1rem; }
+  .modelbox { border-top:1px dashed var(--line); padding-top:12px; display:flex; flex-direction:column; gap:10px; }
+  .model { background:#f2f7fa; border-left:5px solid var(--teal); border-radius:12px; padding:12px 14px; display:flex; flex-direction:column; gap:10px; }
+  .model ol { margin-left:20px; line-height:1.6; }
+  .btn:disabled { opacity:.45; cursor:not-allowed; }
+  .ideas { border:1px solid var(--line); border-radius:14px; padding:10px 14px; background:#fffdf5; }
+  .ideas summary { cursor:pointer; font-weight:800; color:var(--navy); } .ideas ul { margin:8px 0 6px 20px; line-height:1.55; }
+  .copybar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; border-top:1px dashed var(--line); padding-top:12px; }
+  .mm { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+  .mmc { grid-row:2; grid-column:2; align-self:center; text-align:center; background:var(--navy); color:#fff; border-radius:999px; padding:22px 18px; font-weight:900; font-size:1.05rem; line-height:1.3; box-shadow:0 8px 20px rgba(15,58,92,.25); }
+  .mmc small { display:block; font-weight:700; color:#7dd3c8; margin-top:4px; font-size:.9rem; }
+  .mmi { border:2px dashed #94a3b8; border-radius:18px; padding:10px; display:flex; flex-direction:column; gap:6px; background:#fff; }
+  .mmi b { align-self:flex-start; background:#e6f6f5; color:var(--teal-dark); border-radius:999px; padding:3px 11px; font-size:.88rem; }
+  .mmi textarea { border:0; min-height:96px; resize:vertical; line-height:1.45; background:transparent; }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:var(--deep); color:#fff; padding:10px 18px; border-radius:999px; font-weight:750; z-index:5000; }
+  @media (max-width:760px) { .mm { grid-template-columns:minmax(0,1fr); } .mmc, .mmi { grid-row:auto !important; grid-column:auto !important; } }
+
+  .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); gap:12px; }
+  .box { border-radius:14px; padding:12px 14px; display:flex; flex-direction:column; gap:6px; } .box.li { border:3px solid #ea7a1c; } .box.sc { border:3px solid #16a34a; } .box ul { padding-left:20px; line-height:1.55; }
+  .prog { display:flex; align-items:center; gap:10px; font-size:.9rem; } .prog .bar { flex:1; height:10px; border-radius:99px; background:#e6edf1; overflow:hidden; } .prog .bar i { display:block; height:100%; background:linear-gradient(90deg,var(--teal),var(--gold)); }
+  .board { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
+  .file { position:relative; text-align:left; border:0; background:#fffdf7; border-radius:6px 16px 16px 16px; padding:0 0 12px; cursor:pointer; color:var(--ink); box-shadow:0 10px 22px rgba(0,25,45,.12); display:flex; flex-direction:column; gap:6px; overflow:hidden; transition:transform .2s ease; border-top:10px solid #d4a35a; }
+  .file:hover { transform:translateY(-4px) rotate(-.4deg); }
+  .file b { padding:0 12px; font-size:1.02rem; line-height:1.3; color:var(--navy); }
+  .fmeta { padding:0 12px; font-size:.72rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#8a6d3b; }
+  .ph { position:relative; width:100%; aspect-ratio:16/10; background:linear-gradient(135deg,#0f3a5c,#007c82); overflow:hidden; }
+  .ph img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .ph .emo { position:absolute; inset:0; display:grid; place-items:center; font-size:2.6rem; }
+  .stamp { position:absolute; top:14px; right:10px; transform:rotate(8deg); border:3px solid #b91c1c; color:#b91c1c; background:rgba(255,255,255,.88); font-weight:900; font-size:.78rem; letter-spacing:.12em; padding:3px 8px; border-radius:6px; }
+  .file.done .stamp { border-color:#15803d; color:#15803d; }
+  .ov { position:fixed; inset:0; z-index:4000; background:rgba(7,26,44,.72); display:flex; align-items:flex-start; justify-content:center; padding:24px 12px; overflow:auto; }
+  .dlg { background:#fffdf7; border-radius:18px; max-width:860px; width:100%; padding:20px; display:flex; flex-direction:column; gap:12px; box-shadow:0 20px 50px rgba(0,0,0,.35); border-top:12px solid #d4a35a; }
+  .dhead { display:grid; grid-template-columns:260px 1fr auto; gap:14px; align-items:start; } .dhead .ph { border-radius:12px; }
+  .dtitle h2 { margin:4px 0; } .actors { font-size:.9rem; color:var(--muted); } .fmeta { display:block; }
+  .info { font-family:Georgia,"Times New Roman",serif; font-size:1.03rem; line-height:1.6; }
+  .q { display:flex; flex-direction:column; gap:6px; } .tnum { font-size:.72rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-dark); }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { border:2px solid var(--line); background:#fff; border-radius:999px; padding:6px 12px; font-weight:750; font-size:.86rem; cursor:pointer; color:var(--ink); }
+  .chip.sel { border-color:var(--navy); background:var(--navy); color:#fff; }
+  .rr { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-weight:800; } .rr input { width:240px; accent-color:var(--navy); } .rr b { color:var(--navy); }
+  textarea { width:100%; min-height:80px; border:2px solid var(--line); border-radius:12px; padding:10px 12px; line-height:1.5; resize:vertical; font-family:inherit; font-size:inherit; }
+  .fb { font-weight:700; } .fb.ok { color:var(--green); } .fb.bad { color:#dc2626; }
+  .model { background:#f2f7fa; border-left:5px solid var(--teal); border-radius:12px; padding:12px 14px; line-height:1.55; }
+  td.ok { color:var(--green); font-weight:700; } td.no { color:#b45309; font-weight:700; }
+  .navr { border-top:1px dashed var(--line); padding-top:10px; }
+  .gridwrap svg { display:block; width:100%; min-width:680px; height:auto; touch-action:none; border:1px solid var(--line); border-radius:14px; }
+  .gridwrap { overflow-x:auto; }
+  .tray { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:8px; }
+  .tchip { border:2px dashed var(--navy); background:#fff; border-radius:999px; padding:6px 12px; font-weight:700; font-size:.86rem; cursor:grab; touch-action:none; }
+  .task { border:1px solid var(--line); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:8px; background:#fbfdfe; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .evhead { display:grid; grid-template-columns:300px 1fr; gap:16px; align-items:start; } .evhead .ph { border-radius:12px; }
+  @media (max-width:760px) { .hero-grid, .two, .evhead, .dhead { grid-template-columns:1fr; } }
+
+  table.lp textarea { min-height:70px; border-width:1px; }
+  table.lp th { width:16%; }
+  .fourp { display:grid; grid-template-columns:1fr 1fr; gap:0; border:3px solid var(--navy); border-radius:16px; overflow:hidden; }
+  .pq { padding:14px; display:flex; flex-direction:column; gap:8px; }
+  .pq h2 { text-align:center; } .pq .hint { text-align:center; }
+  .pq-places { background:#eef5fa; border-right:2px solid var(--navy); border-bottom:2px solid var(--navy); }
+  .pq-processes { background:#fff8e8; border-bottom:2px solid var(--navy); }
+  .pq-power { background:#fdecec; border-right:2px solid var(--navy); }
+  .pq-possibility { background:#e7f7ed; }
+  .pq textarea { min-height:130px; background:#fff; }
+  .chip.add { font-size:.8rem; padding:4px 10px; }
+  @media (max-width:760px) { .fourp { grid-template-columns:1fr; } .pq { border-right:0 !important; border-bottom:2px solid var(--navy); } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ib" class="back-link">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Resistance Files</span></div>
+</div></div>
+<main id="app"></main>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  /* ================= DATA ================= */
+  function IMG(f) { return 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(f) + '?width=640'; }
+  function PAGE(f) { return 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(f.replace(/ /g, '_')); }
+  var CAUSES = ['Economic', 'Environmental / ethical', 'Cultural', 'Political', 'Social / security'];
+  var FLOWS = ['Goods and food supply chains', 'Resources (timber, paper)', 'TNC brands and supply chains', 'Money and capital', 'People and labour', 'Culture, language and media'];
+  // m = accepted main causes, s = accepted secondary causes, fl = accepted flows, rr = model position (1 reject … 5 reform)
+  var CASES = [
+    { id: 'farm', t: 'Farm-to-table restaurants', where: 'Worldwide', when: 'Ongoing', emo: '🥕', photo: 'Tomatoes at Hope Farmers Market.jpg',
+      info: 'Farm-to-table restaurants source ingredients from nearby farms and local producers rather than relying on long-distance food supply chains. This can support local businesses, reduce dependence on TNC suppliers and appeal to consumers who want fresher, more traceable food.',
+      actors: 'Restaurants, local farmers, consumers', m: ['Economic'], s: ['Environmental / ethical', 'Cultural'], fl: ['Goods and food supply chains'], rr: 4, rrT: 'Reform',
+      why: 'It does not reject trade completely, but it promotes shorter, more local supply chains.', success: 3 },
+    { id: 'local', t: 'Buy Local campaign', where: 'Towns and cities worldwide', when: 'Ongoing', emo: '🛍️', photo: 'Shops in High Street, Peebles - geograph.org.uk - 996750.jpg',
+      info: 'Buy local campaigns encourage consumers to purchase goods from local producers and independent businesses rather than from global brands or imported suppliers. Supporters argue this protects local jobs, keeps money in the local economy and strengthens local identity.',
+      actors: 'Independent shops, local councils, consumers', m: ['Economic'], s: ['Cultural', 'Environmental / ethical'], fl: ['Goods and food supply chains', 'Money and capital', 'TNC brands and supply chains'], rr: 3, rrT: 'Partial rejection or reform',
+      why: 'It reduces reliance on global brands but does not necessarily reject all global interaction.', success: 3 },
+    { id: 'barbie', t: 'Barbie vs Greenpeace', where: 'Indonesia → global', when: '2011', emo: '🐯', photo: 'Sumatran Tiger (9122811106).jpg',
+      info: 'In 2011, Greenpeace targeted Mattel, the company behind Barbie, over toy packaging linked to Indonesian rainforest destruction. Greenpeace said forensic testing found mixed tropical hardwoods in Mattel-branded packaging, and the campaign linked toy packaging to deforestation and tiger habitat loss. Mattel later announced it would stop buying paper and packaging linked to rainforest destruction.',
+      actors: 'Greenpeace, Mattel, consumers, Asia Pulp & Paper', m: ['Environmental / ethical'], s: ['Economic', 'Political'], fl: ['Resources (timber, paper)', 'TNC brands and supply chains'], rr: 4, rrT: 'Reform',
+      why: 'Greenpeace challenged Mattel’s supply chain and pressured the company to change sourcing practices.', success: 5 },
+    { id: 'ramin', t: 'Ramin Paper Trail', where: 'Sumatra, Indonesia', when: '2012', emo: '🌳', photo: 'TRONTON BERISI KAYU DI HUTAN LINDUNG.jpg',
+      info: 'Greenpeace’s Ramin Paper Trail investigation focused on Asia Pulp & Paper (APP) in Indonesia. Greenpeace argued that APP was linked to illegal ramin timber and rainforest destruction, threatening ramin trees and Sumatran tiger habitat, and undermining CITES rules on protected species.',
+      actors: 'Greenpeace, Asia Pulp & Paper, Indonesian government, CITES', m: ['Environmental / ethical'], s: ['Political'], fl: ['Resources (timber, paper)', 'TNC brands and supply chains'], rr: 4, rrT: 'Reform',
+      why: 'The campaign challenged illegal or unsustainable sourcing and called for accountability in global paper supply chains.', success: 4 },
+    { id: 'kfc', t: 'KFC packaging campaign', where: 'UK, China and Indonesia', when: '2012', emo: '🍗', photo: 'Riau deforestation 2006.jpg',
+      info: 'In 2012, Greenpeace accused KFC of using packaging linked to Indonesian rainforest destruction through supplier Asia Pulp & Paper. Greenpeace said forensic testing in the UK, China and Indonesia found rainforest fibre in KFC packaging, including food boxes and chicken buckets.',
+      actors: 'Greenpeace, KFC, Asia Pulp & Paper, consumers', m: ['Environmental / ethical'], s: ['Economic'], fl: ['Resources (timber, paper)', 'TNC brands and supply chains'], rr: 4, rrT: 'Reform',
+      why: 'The campaign pressured a global fast-food TNC to change packaging supply chains.', success: 4 },
+    { id: 'antiimm', t: 'Anti-immigration movement (USA)', where: 'United States', when: 'Ongoing', emo: '🛂', photo: 'US-Mexico-Nogales-Border.jpg',
+      info: 'In the USA, some anti-immigration movements argue that high levels of immigration can increase pressure on jobs, wages, housing, schools, healthcare and national identity. Supporters of stricter immigration controls often frame migration as a threat to economic security, cultural identity or sovereignty. Critics argue that migrants can fill labour shortages, pay taxes, support economic growth and contribute to cultural diversity.',
+      actors: 'Campaign groups, voters, politicians, migrants, employers', m: ['Cultural', 'Economic'], s: ['Political', 'Social / security'], fl: ['People and labour', 'Culture, language and media'], rr: 1, rrT: 'Often rejection',
+      why: 'It usually aims to reduce or restrict immigration flows.', success: 3 },
+    { id: 'border', t: 'Border control campaign (USA–Mexico)', where: 'USA–Mexico border', when: '2019 → 2025', emo: '🧱', photo: 'Border Fence and Imperial Beach, US Mexico Border Wall (16034498211).jpg',
+      info: 'The USA–Mexico border is a major focus of political debate about immigration and sovereignty. Policies such as border wall construction, increased border enforcement and restrictions on asylum are examples of attempts to control the movement of people into the USA. The “Remain in Mexico” policy, first introduced in 2019 and reinstated in 2025, required some non-Mexican asylum seekers to wait in Mexico while their US immigration cases were processed.',
+      actors: 'US government, Mexican government, asylum seekers, border communities', m: ['Political'], s: ['Social / security', 'Cultural', 'Economic'], fl: ['People and labour'], rr: 1, rrT: 'Restriction / rejection',
+      why: 'It aims to increase state control over borders and migration flows.', success: 3 },
+    { id: 'welsh', t: 'Welsh language protection', where: 'Wales, UK', when: 'Cymraeg 2050', emo: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', photo: 'Welsh bilingual road sign in Caernarfon.jpg',
+      info: 'Wales has policies to protect and promote the Welsh language. The Welsh Government’s Cymraeg 2050 strategy aims to reach one million Welsh speakers by 2050. This includes efforts linked to education, public life and community use of Welsh. Supporters argue that protecting Welsh helps preserve cultural identity in a globalised world where dominant languages, especially English, can weaken minority languages.',
+      actors: 'Welsh Government, schools, Welsh speakers, media (S4C)', m: ['Cultural'], s: ['Political'], fl: ['Culture, language and media'], rr: 4, rrT: 'Reform / protection',
+      why: 'It does not reject globalisation completely, but resists cultural homogenisation by protecting a minority language.', success: 3 },
+    { id: 'sbux', t: 'Starbucks out of the Forbidden City', where: 'Beijing, China', when: '2000 → 2007', emo: '☕', photo: 'Hall of Supreme Harmony, Forbidden City, Beijing, with tourists.jpg', extra: true,
+      info: 'A Starbucks opened inside Beijing’s Forbidden City in 2000, and its rent helped pay for maintenance of the palace. In January 2007 the CCTV news presenter Rui Chenggang started an online protest, arguing that the American coffee chain damaged Chinese culture at the heart of a national symbol. Millions of people backed the protest. The palace then required shops to trade under its own brand. Starbucks refused and closed the café in July 2007, saying it respected the palace’s decision. Chinese coffee brands opened under the Palace Museum name instead.',
+      actors: 'Rui Chenggang, Chinese internet users, Palace Museum, Starbucks', m: ['Cultural'], s: ['Political'], fl: ['TNC brands and supply chains', 'Culture, language and media'], rr: 2, rrT: 'Rejection (in one place)',
+      why: 'Citizens rejected a global brand in a place of national heritage, but did not reject Starbucks in China: it still has thousands of stores there.', success: 5,
+      src: ['China Daily, 16 July 2007', 'https://www.chinadaily.com.cn/china/2007-07/16/content_5435347.htm'] },
+    { id: 'eat', t: 'Eat Local: Thailand’s local food campaign', where: 'Thailand', when: '2024', emo: '🍜', photo: 'Thai Food in street.JPG', extra: true,
+      info: 'In 2024 Thailand’s Ministry of Culture launched “Local Thai Cuisine, Eat with Wisdom”. Under “One Province, One Local Dish”, each province chose a traditional dish to revive and promote, with a “Flagging Local Cuisine” logo and a theme song, “The Lost Taste”. The aims are to preserve heritage and Thai identity, turn local food into global “soft power”, and bring tourists and income to the regions.',
+      actors: 'Ministry of Culture, provinces, local cooks and farmers, tourists', m: ['Cultural'], s: ['Economic'], fl: ['Goods and food supply chains', 'Culture, language and media'], rr: 5, rrT: 'Reform: uses globalisation',
+      why: 'It does not reject global food; it protects local dishes and uses tourism and global media to spread Thai culture outward.', success: 2,
+      src: ['Thailand.go.th, September 2024', 'https://thailand.go.th/event-detail/-----soft-power'] },
+    { id: 'minute', t: 'The Minuteman Project: civilian border patrol', where: 'Arizona, USA', when: '2005', emo: '🔭', photo: 'Border USA Mexico.jpg', extra: true,
+      info: 'The Minuteman Project was founded in 2004 by Jim Gilchrist and Chris Simcox. In April 2005 about 1,200 volunteers watched a 23-mile stretch of the Arizona–Mexico border for a month, reporting people crossing to the US Border Patrol and calling themselves a “citizens’ Neighborhood Watch”. California’s governor praised them, but President George W. Bush and Mexico’s President Vicente Fox criticised “vigilante” border projects, and civil rights groups accused the movement of extremism. The group later split in leadership disputes (2007).',
+      actors: 'Volunteers, US Border Patrol, migrants, civil rights groups, politicians', m: ['Political'], s: ['Cultural', 'Social / security'], fl: ['People and labour'], rr: 1, rrT: 'Rejection',
+      why: 'Volunteers tried to stop migration flows directly, rejecting what they saw as weak government control of the border.', success: 2,
+      src: ['Minuteman Project (Wikipedia)', 'https://en.wikipedia.org/wiki/Minuteman_Project'] }
+  ];
+  var BYID = {}; CASES.forEach(function (c) { BYID[c.id] = c; });
+
+  /* ================= STATE ================= */
+  var KEY = 'sbl-resistance-files-v1';
+  var S = { c: {}, pos: {}, eval: '', step: 0 };
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv) S = Object.assign(S, sv); } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function st(id) { return S.c[id] = S.c[id] || { main: null, sec: null, fl: [], rr: 3, why: '', checked: false }; }
+  function isDone(id) { var x = S.c[id]; return !!(x && x.checked); }
+  var IS_T = false;
+
+  /* ================= SHELL ================= */
+  var STEPS = [['🗂️', 'The case files'], ['⚖️', 'Who holds the power?'], ['🔭', 'Evaluate the Minutemen'], ['🏭', 'Is local always better?'], ['🧭', '4P analysis']];
+  function render() {
+    $('app').innerHTML = '<nav class="steps">' + STEPS.map(function (s, i) { return '<button type="button" class="stp' + (S.step === i ? ' on' : '') + '" data-step="' + i + '">' + s[0] + ' ' + (i + 1) + '. ' + s[1] + '</button>'; }).join('') + '</nav><section class="panel" id="pane"></section>';
+    document.querySelectorAll('.stp').forEach(function (b) { b.onclick = function () { S.step = +b.dataset.step; save(); render(); window.scrollTo(0, 0); }; });
+    [vBoard, vGrid, vEval, vLocal, v4P][S.step]($('pane'));
+  }
+  function photo(c, cls) {
+    return '<div class="ph ' + (cls || '') + '"><span class="emo" aria-hidden="true">' + c.emo + '</span><img src="' + IMG(c.photo) + '" alt="' + esc(c.t) + '" loading="lazy" onerror="this.remove()"></div>';
+  }
+
+  /* ================= 1. BOARD ================= */
+  function vBoard(el) {
+    var n = CASES.filter(function (c) { return isDone(c.id); }).length;
+    el.innerHTML = '<span class="kicker">Population possibilities and power · Resistance to global interactions</span><h1>Resistance Files</h1>' +
+      '<p class="muted">Around the world, citizens, campaigners and governments push back against global flows. Open each case file, work out <b>why</b> people resisted, <b>which flow</b> they challenged, and whether they wanted to <b>reject</b> globalisation or <b>reform</b> it.</p>' +
+      '<div class="hero-grid"><div class="box li"><b class="t">Learning intention:</b><i>To explain the values and perceptions of differing groups or individuals.</i></div>' +
+      '<div class="box sc"><b class="t">Success criteria: I can</b><ul><li>identify the ways in which the anti-globalisation movement can be shown</li><li>describe the opposition to Starbucks in terms of globalisation and global interactions</li><li>summarise the reasons for the “Eat Local” movement in Thailand</li><li>evaluate the usefulness of civil movements, with particular reference to the Minutemen border patrol in the US</li></ul></div></div>' +
+      '<div class="prog"><b>' + n + ' / ' + CASES.length + '</b> case files closed<span class="bar"><i style="width:' + (n / CASES.length * 100) + '%"></i></span></div>' +
+      '<div class="board">' + CASES.map(function (c) {
+        var d = isDone(c.id);
+        return '<button type="button" class="file' + (d ? ' done' : '') + '" data-id="' + c.id + '">' + photo(c) + '<span class="stamp">' + (d ? 'CLOSED' : c.extra ? 'NEW FILE' : 'OPEN') + '</span><span class="fmeta">' + esc(c.where) + ' · ' + esc(c.when) + '</span><b>' + esc(c.t) + '</b></button>';
+      }).join('') + '</div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyAll">Copy my case table to OneNote</button><button type="button" class="btn ghost" id="reset">Reset</button></div>' +
+      '<p class="src">Photos: Wikimedia Commons (click a photo credit inside each file for the author and licence).</p>';
+    el.querySelectorAll('.file').forEach(function (b) { b.onclick = function () { openFile(b.dataset.id); }; });
+    $('copyAll').onclick = function () { copyNotes(notesAll()); };
+    var rb = $('reset'); rb.onclick = function () { if (!rb.dataset.arm) { rb.dataset.arm = 1; rb.textContent = 'Press again to delete all answers'; setTimeout(function () { delete rb.dataset.arm; rb.textContent = 'Reset'; }, 4000); return; } S = { c: {}, pos: {}, eval: '', step: 0 }; save(); render(); };
+  }
+  function chipRow(name, list, sel, multi) {
+    return '<div class="chips" data-g="' + name + '">' + list.map(function (x) { var on = multi ? sel.indexOf(x) >= 0 : sel === x; return '<button type="button" class="chip' + (on ? ' sel' : '') + '" data-v="' + esc(x) + '" aria-pressed="' + on + '">' + esc(x) + '</button>'; }).join('') + '</div>';
+  }
+  function openFile(id) {
+    var c = BYID[id], x = st(id);
+    var ov = document.createElement('div'); ov.className = 'ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', c.t);
+    function draw() {
+      var labs = ['', 'Reject', 'Mostly reject', 'Partly reject / partly reform', 'Mostly reform', 'Reform'];
+      ov.innerHTML = '<div class="dlg"><div class="dhead">' + photo(c, 'big') + '<div class="dtitle"><span class="fmeta">CASE FILE · ' + esc(c.where) + ' · ' + esc(c.when) + '</span><h2>' + esc(c.t) + '</h2><p class="actors"><b>Actors:</b> ' + esc(c.actors) + '</p></div><button type="button" class="x" data-close aria-label="Close">✕</button></div>' +
+        '<p class="info">' + esc(c.info) + '</p>' +
+        '<p class="src">Photo: <a href="' + PAGE(c.photo) + '" target="_blank" rel="noopener">Wikimedia Commons</a> (author and licence on the source page).' + (c.src ? ' Information: <a href="' + c.src[1] + '" target="_blank" rel="noopener">' + esc(c.src[0]) + '</a>.' : '') + '</p>' +
+        '<div class="q"><span class="tnum">Main cause</span>' + chipRow('main', CAUSES, x.main, false) + '</div>' +
+        '<div class="q"><span class="tnum">Secondary cause</span>' + chipRow('sec', CAUSES, x.sec, false) + '</div>' +
+        '<div class="q"><span class="tnum">Flow resisted or challenged (choose one or more)</span>' + chipRow('fl', FLOWS, x.fl, true) + '</div>' +
+        '<div class="q"><span class="tnum">Reject or reform?</span><div class="rr"><span>Reject</span><input type="range" min="1" max="5" step="1" value="' + x.rr + '" id="rr" aria-label="Reject or reform, 1 to 5"><span>Reform</span><b id="rrl">' + labs[x.rr] + '</b></div></div>' +
+        '<div class="q"><span class="tnum">Why?</span><textarea id="why" placeholder="It rejects / reforms globalisation because…">' + esc(x.why) + '</textarea></div>' +
+        '<div class="row"><button type="button" class="btn" id="chk">Check my file</button><span class="fb" id="fb"></span></div><div id="res"></div>' +
+        '<div class="row navr"><button type="button" class="btn ghost small" id="prev">← Previous file</button><span class="spacer"></span><button type="button" class="btn small" id="next">Next file →</button></div></div>';
+      ov.querySelectorAll('.chips').forEach(function (g) { g.querySelectorAll('.chip').forEach(function (b) { b.onclick = function () {
+        var k = g.dataset.g, v = b.dataset.v;
+        if (k === 'fl') { var i = x.fl.indexOf(v); if (i >= 0) x.fl.splice(i, 1); else x.fl.push(v); } else x[k] = x[k] === v ? null : v;
+        save(); draw(); ov.querySelector('[data-g="' + k + '"]').focus && 0;
+      }; }); });
+      var r = ov.querySelector('#rr'); r.oninput = function () { x.rr = +r.value; ov.querySelector('#rrl').textContent = labs[x.rr]; save(); };
+      var t; ov.querySelector('#why').oninput = function (e) { x.why = e.target.value; clearTimeout(t); t = setTimeout(save, 300); };
+      ov.querySelector('#chk').onclick = check;
+      ov.querySelector('[data-close]').onclick = close;
+      var idx = CASES.indexOf(c);
+      ov.querySelector('#prev').onclick = function () { close(); openFile(CASES[(idx + CASES.length - 1) % CASES.length].id); };
+      ov.querySelector('#next').onclick = function () { close(); openFile(CASES[(idx + 1) % CASES.length].id); };
+      if (x.checked) showResult();
+    }
+    function check() {
+      var fb = ov.querySelector('#fb');
+      if (!x.main || !x.sec || !x.fl.length || (x.why || '').trim().length < 10) { fb.className = 'fb bad'; fb.textContent = 'Choose both causes and at least one flow, and write why, before checking.'; return; }
+      x.checked = true; save(); showResult();
+    }
+    function showResult() {
+      var okM = c.m.indexOf(x.main) >= 0, okS = c.s.indexOf(x.sec) >= 0 || (c.m.indexOf(x.sec) >= 0 && x.sec !== x.main), okF = x.fl.every(function (f) { return c.fl.indexOf(f) >= 0; });
+      var score = [okM, okS, okF].filter(Boolean).length;
+      ov.querySelector('#fb').className = 'fb ' + (score === 3 ? 'ok' : '');
+      ov.querySelector('#fb').textContent = score === 3 ? '✓ Case closed: causes and flow all match the model.' : score + ' of 3 match the model. Compare below: some answers can be argued.';
+      ov.querySelector('#res').innerHTML = '<div class="model"><table class="score"><tr><th></th><th>You</th><th>Model answer</th></tr>' +
+        '<tr><td>Main cause</td><td class="' + (okM ? 'ok' : 'no') + '">' + esc(x.main) + '</td><td>' + esc(c.m.join(' / ')) + '</td></tr>' +
+        '<tr><td>Secondary cause</td><td class="' + (okS ? 'ok' : 'no') + '">' + esc(x.sec) + '</td><td>' + esc(c.s.join(' / ')) + '</td></tr>' +
+        '<tr><td>Flow</td><td class="' + (okF ? 'ok' : 'no') + '">' + esc(x.fl.join(', ')) + '</td><td>' + esc(c.fl.join(', ')) + '</td></tr>' +
+        '<tr><td>Reject or reform?</td><td>' + x.rr + ' / 5</td><td>' + esc(c.rrT) + '</td></tr>' +
+        '<tr><td>Why?</td><td>' + esc(x.why) + '</td><td>' + esc(c.why) + '</td></tr></table></div>';
+      document.querySelectorAll('.file[data-id="' + c.id + '"]').forEach(function (f) { f.classList.add('done'); });
+    }
+    function close() { ov.remove(); document.removeEventListener('keydown', onKey); if (S.step === 0) render(); }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    document.addEventListener('keydown', onKey);
+    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    document.body.appendChild(ov); draw(); ov.querySelector('[data-close]').focus();
+  }
+
+  /* ================= 2. POWER GRID ================= */
+  function vGrid(el) {
+    el.innerHTML = '<span class="kicker">Who holds the power?</span><h1>Reject or reform? Did it work?</h1>' +
+      '<p class="muted">Drag each case onto the grid. Left to right: did the group want to <b>reject</b> or <b>reform</b> global flows? Bottom to top: how <b>successful</b> was it? Then download the grid as a picture for your notes.</p>' +
+      '<div class="gridwrap"><div id="grid"></div></div>' +
+      '<div class="row"><button type="button" class="btn ghost small" id="model">' + (IS_T ? 'Show model positions' : 'Compare with model positions') + '</button><span class="spacer"></span><button type="button" class="btn" id="gpng">⬇ Download grid picture</button></div>' +
+      '<div class="task"><span class="tnum">Explain</span><p><b>Which kinds of resistance were most successful, and why? Use two cases from the grid.</b></p><textarea id="gw">' + esc(S.gridWhy || '') + '</textarea></div>';
+    var showModel = false;
+    function draw() {
+      var W = 960, H = 560, L = 80, R = 20, T0 = 40, B = 60, w = W - L - R, h = H - T0 - B;
+      var s = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Grid of cases by reject or reform and success" font-family="Inter, Segoe UI, Arial, sans-serif"><rect width="' + W + '" height="' + H + '" fill="#fff"/>';
+      s += '<rect x="' + L + '" y="' + T0 + '" width="' + w / 2 + '" height="' + h / 2 + '" fill="#fdecec"/><rect x="' + (L + w / 2) + '" y="' + T0 + '" width="' + w / 2 + '" height="' + h / 2 + '" fill="#e7f7ed"/><rect x="' + L + '" y="' + (T0 + h / 2) + '" width="' + w / 2 + '" height="' + h / 2 + '" fill="#f6f3ee"/><rect x="' + (L + w / 2) + '" y="' + (T0 + h / 2) + '" width="' + w / 2 + '" height="' + h / 2 + '" fill="#eef5fa"/>';
+      s += '<line x1="' + L + '" x2="' + (L + w) + '" y1="' + (T0 + h) + '" y2="' + (T0 + h) + '" stroke="#0f3a5c" stroke-width="2"/><line x1="' + L + '" x2="' + L + '" y1="' + T0 + '" y2="' + (T0 + h) + '" stroke="#0f3a5c" stroke-width="2"/>';
+      s += '<text x="' + L + '" y="' + (H - 22) + '" font-size="14" font-weight="800" fill="#b91c1c">← REJECT global flows</text><text x="' + (L + w) + '" y="' + (H - 22) + '" text-anchor="end" font-size="14" font-weight="800" fill="#15803d">REFORM global flows →</text>';
+      s += '<text x="22" y="' + (T0 + 10) + '" font-size="13" font-weight="800" fill="#0f3a5c">More</text><text x="22" y="' + (T0 + 26) + '" font-size="13" font-weight="800" fill="#0f3a5c">successful</text><text x="22" y="' + (T0 + h - 18) + '" font-size="13" font-weight="800" fill="#0f3a5c">Less</text><text x="22" y="' + (T0 + h - 2) + '" font-size="13" font-weight="800" fill="#0f3a5c">successful</text>';
+      s += '<text x="' + (W - 10) + '" y="22" text-anchor="end" font-size="15" font-weight="900" fill="#0f3a5c">Resistance to global interactions</text>';
+      var X = function (v) { return L + 40 + (v - 1) / 4 * (w - 80); }, Y = function (v) { return T0 + h - 30 - (v - 1) / 4 * (h - 60); };
+      CASES.forEach(function (c, i) {
+        var p = S.pos[c.id], x, y, placed = !!p;
+        if (showModel) { x = X(c.rr); y = Y(c.success); placed = true; }
+        else if (p) { x = p[0]; y = p[1]; }
+        else { x = W + 40; y = 0; }
+        if (!placed) return;
+        var lbl = c.t.length > 26 ? c.t.slice(0, 25) + '…' : c.t, tw = lbl.length * 6.6 + 34;
+        s += '<g class="tok" data-id="' + c.id + '" transform="translate(' + x.toFixed(1) + ',' + y.toFixed(1) + ')" style="cursor:grab"><rect x="' + (-tw / 2) + '" y="-14" width="' + tw + '" height="28" rx="14" fill="' + (showModel ? '#0f3a5c' : '#ffffff') + '" stroke="#0f3a5c" stroke-width="1.6"/><text x="' + (-tw / 2 + 12) + '" y="5" font-size="13">' + c.emo + '</text><text x="' + (-tw / 2 + 30) + '" y="4.5" font-size="11.5" font-weight="700" fill="' + (showModel ? '#fff' : '#062033') + '">' + esc(lbl) + '</text></g>';
+      });
+      s += '</svg>';
+      var tray = CASES.filter(function (c) { return !S.pos[c.id]; });
+      $('grid').innerHTML = s + (showModel ? '<p class="hint">Model positions (based on the outcome of each case). Press the button again to see yours.</p>' : (tray.length ? '<div class="tray"><span class="hint">Drag onto the grid:</span>' + tray.map(function (c) { return '<button type="button" class="tchip" data-id="' + c.id + '">' + c.emo + ' ' + esc(c.t) + '</button>'; }).join('') + '</div>' : ''));
+      if (!showModel) bindDrag();
+    }
+    function svgPoint(svg, cx, cy) { var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal; return [(cx - r.left) / r.width * vb.width, (cy - r.top) / r.height * vb.height]; }
+    function bindDrag() {
+      var svg = $('grid').querySelector('svg'), drag = null;
+      function start(id, e) { drag = { id: id }; e.preventDefault(); }
+      $('grid').querySelectorAll('.tok').forEach(function (g) { g.addEventListener('pointerdown', function (e) { start(g.dataset.id, e); }); });
+      $('grid').querySelectorAll('.tchip').forEach(function (b) {
+        b.addEventListener('pointerdown', function (e) { start(b.dataset.id, e); });
+      });
+      var move = function (e) { if (!drag) return; drag.moved = true; var p = svgPoint(svg, e.clientX, e.clientY); if (p[0] < 60 || p[0] > 960 || p[1] < 20 || p[1] > 540) return; S.pos[drag.id] = [Math.round(p[0]), Math.round(p[1])]; var g = svg.querySelector('.tok[data-id="' + drag.id + '"]'); if (g) g.setAttribute('transform', 'translate(' + p[0] + ',' + p[1] + ')'); else draw(); };
+      var end = function () { if (drag) { if (!drag.moved && !S.pos[drag.id]) { var n = Object.keys(S.pos).length; S.pos[drag.id] = [380 + (n % 4) * 70, 230 + Math.floor(n / 4) * 40]; } drag = null; save(); draw(); } };
+      window.onpointermove = move; window.onpointerup = end;
+    }
+    draw();
+    $('model').onclick = function () {
+      var placedN = Object.keys(S.pos).length;
+      if (!IS_T && placedN < 6) { toast('Place at least 6 cases first.'); return; }
+      showModel = !showModel; $('model').textContent = showModel ? 'Show my positions' : 'Compare with model positions'; draw();
+    };
+    $('gpng').onclick = function () { downloadSvg($('grid').querySelector('svg'), 'resistance-grid.png'); };
+    var t; $('gw').oninput = function (e) { S.gridWhy = e.target.value; clearTimeout(t); t = setTimeout(save, 300); };
+  }
+
+  /* ================= 3. EVALUATE ================= */
+  function vEval(el) {
+    var c = BYID.minute;
+    el.innerHTML = '<span class="kicker">Evaluate</span><h1>How useful are civil movements?</h1>' +
+      '<div class="evhead">' + photo(c, 'big') + '<div><h2>' + esc(c.t) + '</h2><p>' + esc(c.info) + '</p><p class="src">Information: <a href="' + c.src[1] + '" target="_blank" rel="noopener">' + esc(c.src[0]) + '</a>. Photo: <a href="' + PAGE(c.photo) + '" target="_blank" rel="noopener">Wikimedia Commons</a>.</p></div></div>' +
+      '<div class="two"><div class="task"><span class="tnum">Useful because…</span><textarea id="e1" placeholder="e.g. drew national attention to border security…">' + esc(S.e1 || '') + '</textarea></div><div class="task"><span class="tnum">Not useful because…</span><textarea id="e2" placeholder="e.g. no legal power; accused of vigilantism…">' + esc(S.e2 || '') + '</textarea></div></div>' +
+      '<div class="task"><span class="tnum">Exam-style question (6 marks)</span><p><b>Evaluate the usefulness of civil movements in resisting global interactions, with particular reference to the Minutemen border patrol in the US.</b></p><p class="hint">Plan: what the movement did (with data) → how it was useful → its limits → compare with another civil movement (e.g. Greenpeace vs Mattel, or Starbucks in the Forbidden City) → judgement.</p><textarea id="ev" style="min-height:160px">' + esc(S.eval) + '</textarea>' +
+      '<div class="row"><button type="button" class="btn ghost" id="showM">Show a model answer</button></div><div class="model" id="mod" hidden>' +
+      'The Minuteman Project shows that civil movements can be useful for raising awareness but have limited power to change global flows. In April 2005 about 1,200 volunteers watched 23 miles of the Arizona–Mexico border and reported crossings to the Border Patrol. This was useful in putting border security at the centre of national debate: California’s governor praised the group, and it later formed a political action committee to back politicians who wanted stronger enforcement. However, its direct effect on migration was small, because 23 miles is a tiny part of a border over 3,000 km long and volunteers had no legal power. It was also widely criticised: President Bush and Mexico’s President Fox called such projects vigilante, civil rights groups accused it of extremism, and leadership disputes split it by 2007, which reduced its influence. By comparison, Greenpeace’s campaign against Mattel (2011) was more useful because it targeted a company’s reputation and led to a change in sourcing policy, and online protest removed Starbucks from the Forbidden City (2007). Overall, civil movements are most useful when they put pressure on a powerful actor, such as a TNC or a government, that can change a flow; the Minutemen influenced debate more than the border itself.</div></div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyE">Copy my evaluation to OneNote</button></div>';
+    ['e1', 'e2'].forEach(function (k) { var t; $(k).oninput = function (e) { S[k] = e.target.value; clearTimeout(t); t = setTimeout(save, 300); }; });
+    var t2; $('ev').oninput = function (e) { S.eval = e.target.value; clearTimeout(t2); t2 = setTimeout(save, 300); };
+    $('showM').onclick = function () { if (!IS_T && (S.eval || '').trim().length < 40) { $('showM').textContent = 'Write your own answer first'; setTimeout(function () { $('showM').textContent = 'Show a model answer'; }, 1800); return; } $('mod').hidden = false; $('showM').hidden = true; };
+    $('copyE').onclick = function () { copyNotes({ h: '<h2>Evaluating the Minutemen</h2><p><b>Useful because:</b> ' + esc(S.e1 || '') + '</p><p><b>Not useful because:</b> ' + esc(S.e2 || '') + '</p><p><b>Exam answer:</b> ' + esc(S.eval || '').replace(/\n/g, '<br>') + '</p>', t: 'EVALUATING THE MINUTEMEN\nUseful: ' + (S.e1 || '') + '\nNot useful: ' + (S.e2 || '') + '\nExam answer: ' + (S.eval || '') }); };
+  }
+
+
+  /* ================= 4. LOCAL VS GLOBAL ================= */
+  var PERS = [
+    ['Local producer', 'Less competition from cheap imports; customers will pay more for local, traceable products; short supply chains.', 'Access to bigger export markets and cheaper inputs (seeds, machinery, packaging).'],
+    ['Consumer', 'Fresher, traceable food; supports the local community and local identity.', 'Lower prices, more choice and products all year round.'],
+    ['National government', 'Protects jobs and tax revenue; food security and less dependence on imports when supply chains break down.', 'Foreign investment, export earnings and cheaper goods that help keep inflation down.'],
+    ['TNC', 'Local sourcing improves its brand image, cuts transport costs and avoids tariffs (glocalisation).', 'Economies of scale, low-cost labour and efficient global supply chains = higher profit.'],
+    ['Environmental group', 'Fewer food miles and more traceable supply chains, so less hidden deforestation (e.g. APP paper).', 'Local is not always greener: produce grown in heated greenhouses can use more energy than produce grown in the sun and shipped.'],
+    ['Low-income worker', 'Local jobs where labour standards can be checked; money stays in the community.', 'Factory jobs in global supply chains can raise incomes; cheaper goods stretch a small wage further.']
+  ];
+  function vLocal(el) {
+    S.lp = S.lp || {};
+    var filled = Object.keys(S.lp).filter(function (k) { return (S.lp[k] || '').trim().length > 5; }).length;
+    el.innerHTML = '<span class="kicker">Task 4</span><h1>Is local production always better?</h1>' +
+      '<p class="muted">For each perspective, give a reason to support <b>local</b> production and a reason to support <b>globalised</b> production. Think: what is being resisted, who feels threatened, and which global flow is involved?</p>' +
+      '<div class="tblwrap"><table class="score lp"><tr><th>Perspective</th><th>Why support local production?</th><th>Why support globalised production?</th></tr>' +
+      PERS.map(function (p, i) { return '<tr><th>' + esc(p[0]) + '</th><td><textarea data-k="' + i + 'l" aria-label="' + esc(p[0]) + ': local">' + esc(S.lp[i + 'l'] || '') + '</textarea></td><td><textarea data-k="' + i + 'g" aria-label="' + esc(p[0]) + ': globalised">' + esc(S.lp[i + 'g'] || '') + '</textarea></td></tr>'; }).join('') + '</table></div>' +
+      '<div class="task"><span class="tnum">Judgement</span><p><b>Is local production always better?</b></p><div class="rr"><span>Never</span><input type="range" min="1" max="5" value="' + (S.lpv || 3) + '" id="lpv" aria-label="How far you agree"><span>Always</span><b id="lpl"></b></div><textarea id="lpw" placeholder="Local production is better for… but globalised production is better for… so overall…">' + esc(S.lpw || '') + '</textarea></div>' +
+      '<div class="row"><button type="button" class="btn ghost" id="lpm"' + (IS_T || filled >= 6 ? '' : ' disabled') + '>👀 Show model answers</button>' + (IS_T || filled >= 6 ? '' : '<span class="hint">Unlocks when you have filled in 6 boxes.</span>') + '</div><div id="lpmod"></div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copyLP">Copy my table to OneNote</button></div>';
+    var labs = ['', 'Never', 'Rarely', 'It depends', 'Usually', 'Always'];
+    var r = $('lpv'), lab = function () { $('lpl').textContent = labs[S.lpv || 3]; }; lab();
+    r.oninput = function () { S.lpv = +r.value; lab(); save(); };
+    el.querySelectorAll('textarea[data-k]').forEach(function (ta) { var t; ta.oninput = function () { S.lp[ta.dataset.k] = ta.value; clearTimeout(t); t = setTimeout(function () { save(); var n = Object.keys(S.lp).filter(function (k) { return (S.lp[k] || '').trim().length > 5; }).length; if (n >= 6 && $('lpm').disabled) { $('lpm').disabled = false; var h = $('lpm').nextElementSibling; if (h) h.remove(); } }, 300); }; });
+    var t2; $('lpw').oninput = function (e) { S.lpw = e.target.value; clearTimeout(t2); t2 = setTimeout(save, 300); };
+    $('lpm').onclick = function () { $('lpmod').innerHTML = '<div class="model"><table class="score"><tr><th>Perspective</th><th>Local</th><th>Globalised</th></tr>' + PERS.map(function (p) { return '<tr><th>' + esc(p[0]) + '</th><td>' + esc(p[1]) + '</td><td>' + esc(p[2]) + '</td></tr>'; }).join('') + '</table><p><b>Judgement:</b> Local production is not always better. It suits consumers who value freshness and identity, and governments worried about food security, but globalised production gives lower prices, more choice and jobs in exporting countries. The answer depends on the perspective, the product and the place, which is why most campaigns aim to <b>reform</b> global supply chains rather than reject them.</p></div>'; };
+    $('copyLP').onclick = function () {
+      var h = '<h2>Is local production always better?</h2><table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">Perspective</th><th style="padding:4px 8px">Why support local production?</th><th style="padding:4px 8px">Why support globalised production?</th></tr>', t = 'IS LOCAL PRODUCTION ALWAYS BETTER?\n';
+      PERS.forEach(function (p, i) { h += '<tr><td style="padding:4px 8px"><b>' + esc(p[0]) + '</b></td><td style="padding:4px 8px">' + esc(S.lp[i + 'l'] || '') + '</td><td style="padding:4px 8px">' + esc(S.lp[i + 'g'] || '') + '</td></tr>'; t += p[0] + ' | ' + (S.lp[i + 'l'] || '') + ' | ' + (S.lp[i + 'g'] || '') + '\n'; });
+      h += '</table><p><b>Judgement (' + labs[S.lpv || 3] + '):</b> ' + esc(S.lpw || '') + '</p>'; t += 'Judgement (' + labs[S.lpv || 3] + '): ' + (S.lpw || '');
+      copyNotes({ h: h, t: t });
+    };
+  }
+
+  /* ================= 5. 4P ================= */
+  var FOURP = [
+    ['places', 'Places', 'Which places or groups feel most exposed to globalisation?', ['Farming communities', 'Manufacturing towns', 'Minority-language areas (Wales)', 'Heritage sites (Forbidden City)', 'Border regions (Arizona)', 'Rainforest communities (Riau)'],
+      'Rural farming communities and manufacturing towns facing cheaper imports; minority cultures such as Welsh speakers; national heritage sites such as the Forbidden City; border regions such as Arizona; and forest communities in Riau, Sumatra, where land is cleared for pulp and paper.'],
+    ['processes', 'Processes', 'Which flows create concern: trade, migration, TNCs, culture, production?', ['Trade', 'Migration', 'TNC supply chains', 'Cultural flows', 'Globalised production'],
+      'TNC supply chains (APP paper in Mattel and KFC packaging); migration (USA–Mexico border, the Minutemen); cultural flows that threaten identity (Starbucks in the Forbidden City, English replacing Welsh); and globalised food production (farm-to-table and buy local responses).'],
+    ['power', 'Power', 'Who has power: states, TNCs, civil society, consumers, voters, migrants?', ['States', 'TNCs', 'Civil society', 'Consumers', 'Voters', 'Migrants'],
+      'TNCs such as Mattel and APP hold economic power, but civil society (Greenpeace, online protest in China) can use reputation to force change. States hold the most direct power (US border policy, Wales’ Cymraeg 2050, Thailand’s Ministry of Culture). Consumers use buying power; voters back anti-immigration parties; migrants usually have the least power.'],
+    ['possibility', 'Possibility', 'What responses are possible: local sourcing, campaigns, nationalism, restrictions, boycotts, de-globalisation?', ['Local sourcing', 'Campaigns', 'Nationalism', 'Restrictions', 'Boycotts', 'De-globalisation'],
+      'Local sourcing (farm-to-table), NGO campaigns (Greenpeace), boycotts and online protest (Starbucks, 2007), language and food protection (Wales, Thailand), restrictions and nationalism (border walls, Remain in Mexico). Most successful responses reform global flows rather than reject them; complete de-globalisation is rare.']
+  ];
+  function v4P(el) {
+    S.p4 = S.p4 || {};
+    el.innerHTML = '<span class="kicker">Task 5 · Final activity</span><h1>4P: Why do places reject globalisation?</h1>' +
+      '<p class="muted">Complete the 4P analysis using the prompt questions. Tap a prompt to add it, then explain with examples from your case files.</p>' +
+      '<div class="fourp">' + FOURP.map(function (q) { return '<div class="pq pq-' + q[0] + '"><h2>' + q[1] + '</h2><p class="hint">' + esc(q[2]) + '</p><div class="chips">' + q[3].map(function (c) { return '<button type="button" class="chip add" data-k="' + q[0] + '" data-v="' + esc(c) + '">+ ' + esc(c) + '</button>'; }).join('') + '</div><textarea data-k="' + q[0] + '" aria-label="' + q[1] + '">' + esc(S.p4[q[0]] || '') + '</textarea></div>'; }).join('') + '</div>' +
+      '<div class="task"><span class="tnum">Conclusion</span><p><b>Overall, why do places reject globalisation, and do they usually reject it or reform it?</b></p><textarea id="p4c">' + esc(S.p4c || '') + '</textarea></div>' +
+      '<div class="row"><button type="button" class="btn ghost" id="p4m">👀 Show a model 4P</button></div><div id="p4mod"></div>' +
+      '<div class="copybar"><button type="button" class="btn onenote" id="copy4P">Copy my 4P to OneNote</button></div>';
+    el.querySelectorAll('textarea[data-k]').forEach(function (ta) { var t; ta.oninput = function () { S.p4[ta.dataset.k] = ta.value; clearTimeout(t); t = setTimeout(save, 300); }; });
+    el.querySelectorAll('.chip.add').forEach(function (b) { b.onclick = function () { var ta = el.querySelector('textarea[data-k="' + b.dataset.k + '"]'); ta.value = (ta.value ? ta.value.replace(/\s*$/, '') + '\n' : '') + b.dataset.v + ': '; S.p4[b.dataset.k] = ta.value; save(); ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }; });
+    var t2; $('p4c').oninput = function (e) { S.p4c = e.target.value; clearTimeout(t2); t2 = setTimeout(save, 300); };
+    $('p4m').onclick = function () {
+      var n = FOURP.filter(function (q) { return (S.p4[q[0]] || '').trim().length > 20; }).length;
+      if (!IS_T && n < 4) { toast('Write something in all four boxes first.'); return; }
+      $('p4mod').innerHTML = '<div class="model">' + FOURP.map(function (q) { return '<p><b>' + q[1] + ':</b> ' + esc(q[4]) + '</p>'; }).join('') + '<p><b>Conclusion:</b> Places resist globalisation mainly when they feel a loss of control: over jobs and prices (economic), identity and language (cultural), borders and sovereignty (political) or the environment (ethical). Most responses aim to reform global flows, such as making TNC supply chains sustainable or protecting a language, rather than reject them, because the benefits of trade and connection are hard to give up. Outright rejection is most common for migration flows, where states have the legal power to restrict them.</p></div>';
+    };
+    $('copy4P').onclick = function () {
+      var h = '<h2>4P: Why do places reject globalisation?</h2><table border="1" style="border-collapse:collapse"><tr><td style="padding:6px 10px;vertical-align:top;width:50%"><b>Places</b><br>' + esc(S.p4.places || '').replace(/\n/g, '<br>') + '</td><td style="padding:6px 10px;vertical-align:top"><b>Processes</b><br>' + esc(S.p4.processes || '').replace(/\n/g, '<br>') + '</td></tr><tr><td style="padding:6px 10px;vertical-align:top"><b>Power</b><br>' + esc(S.p4.power || '').replace(/\n/g, '<br>') + '</td><td style="padding:6px 10px;vertical-align:top"><b>Possibility</b><br>' + esc(S.p4.possibility || '').replace(/\n/g, '<br>') + '</td></tr></table><p><b>Conclusion:</b> ' + esc(S.p4c || '') + '</p>';
+      copyNotes({ h: h, t: '4P\nPlaces: ' + (S.p4.places || '') + '\nProcesses: ' + (S.p4.processes || '') + '\nPower: ' + (S.p4.power || '') + '\nPossibility: ' + (S.p4.possibility || '') + '\nConclusion: ' + (S.p4c || '') });
+    };
+  }
+
+  /* ================= EXPORT / NOTES ================= */
+  function downloadSvg(svg, name) {
+    var xml = new XMLSerializer().serializeToString(svg), vb = svg.viewBox.baseVal, sc = 2, img = new Image();
+    img.onload = function () { var cv = document.createElement('canvas'); cv.width = vb.width * sc; cv.height = vb.height * sc; var g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(img, 0, 0, cv.width, cv.height); cv.toBlob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500); toast('Picture saved: insert it into OneNote.'); }, 'image/png'); };
+    img.onerror = function () { toast('Could not make the picture. Take a screenshot instead.'); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  }
+  function notesAll() {
+    var h = '<h2>Resistance Files: my case table</h2><table border="1" style="border-collapse:collapse"><tr>' + ['Example', 'Main cause', 'Secondary cause', 'Flow resisted', 'Reject or reform (1–5)', 'Why?'].map(function (x) { return '<th style="padding:4px 8px">' + x + '</th>'; }).join('') + '</tr>', t = 'RESISTANCE FILES\n';
+    CASES.forEach(function (c) { var x = S.c[c.id] || {}; var row = [c.t, x.main || '', x.sec || '', (x.fl || []).join(', '), x.rr ? String(x.rr) : '', x.why || '']; h += '<tr>' + row.map(function (v) { return '<td style="padding:4px 8px">' + esc(v) + '</td>'; }).join('') + '</tr>'; t += row.join(' | ') + '\n'; });
+    return { h: h + '</table>', t: t };
+  }
+  function copyNotes(n) {
+    var html = '<div style="font-family:Calibri,Arial,sans-serif">' + n.h + '</div>', done = function () { toast('Copied. Paste it into OneNote with Ctrl+V.'); };
+    var fallback = function () { var ta = document.createElement('textarea'); ta.value = n.t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { toast('Select and copy the text manually.'); } ta.remove(); };
+    try { if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([n.t], { type: 'text/plain' }) })]).then(done, fallback); else fallback(); } catch (e) { fallback(); }
+  }
+  function toast(t) { var d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
+
+  /* ================= TEACHER ================= */
+  try { fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { IS_T = !!(d && d.loggedIn && d.user && d.user.status === 'active' && (d.user.role === 'teacher' || d.user.role === 'admin')); if (IS_T) render(); }).catch(function () {}); } catch (e) {}
+  window.SBL_TEACHER_ADAPTER = {
+    key: function () {
+      return '<h3>Model answers</h3><table><tr><th>Example</th><th>Main cause</th><th>Secondary cause</th><th>Flow resisted</th><th>Reject or reform?</th><th>Why?</th></tr>' +
+        CASES.map(function (c) { return '<tr><td>' + esc(c.t) + '</td><td>' + esc(c.m.join(' / ')) + '</td><td>' + esc(c.s.join(' / ')) + '</td><td>' + esc(c.fl.join(', ')) + '</td><td>' + esc(c.rrT) + '</td><td>' + esc(c.why) + '</td></tr>'; }).join('') + '</table>' +
+        '<p class="muted">Marking accepts any listed main or secondary cause; flows are correct when every chosen flow is in the list. Reject/reform and “why” are compared, not marked.</p>';
+    }
+  };
+
+  render();
+})();
+</script>
+<script defer src="/js/sbl-teacher-tools.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>
