@@ -361,9 +361,17 @@
     "level": "IB Geography",
     "tag": "New · Option E",
     "desc": "Seventeen levels across all four Leisure, Tourism and Sport topics, from Plog and Butler to Rio 2016 and Rwanda, with past paper checkpoints and an IB Examiner boss."
+  },
+  {
+    "slug": "food-health-quest",
+    "title": "Food and Health Quest: Option F Food and Health",
+    "href": "/geography/games/food-health-quest",
+    "level": "IB Geography",
+    "tag": "New · Option F",
+    "desc": "Nineteen levels across all four Food and Health topics, from the nutrition transition to malaria, Yemen and Ebola, with past paper checkpoints and an IB Examiner boss."
   }
 ];
-  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest"];
+  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest", "food-health-quest"];
   function weekStart(d) {
     var t = (d ? d.getTime() : Date.now()) + 7 * 3600000; /* Bangkok, UTC+7 */
     var x = new Date(t), day = (x.getUTCDay() + 6) % 7; /* Monday = 0 */

@@ -70,7 +70,7 @@ const LOCKED_GAMES = [
   'igcse-coastal-quest', 'igcse-hazard-quest', 'igcse-rural-quest',
   'igcse-development-quest', 'igcse-fieldwork-quest', 'topic4-exam-survival',
   'ib-population-quest', 'ib-climate-quest', 'ib-resource-quest',
-  'freshwater-quest', 'leisure-quest'
+  'freshwater-quest', 'leisure-quest', 'food-health-quest'
 ];
 
 function isLockedGame(pathname) {
