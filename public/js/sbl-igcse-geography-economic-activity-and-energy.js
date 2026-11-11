@@ -7,12 +7,12 @@
    no specific resource answers — every question and rubric below is
    original, generic, reference-only content.
 
-   Content so far: Pearson Edexcel International GCSE Geography,
-   Paper 2R (4GE1/02R), June 2024 — Question 1, "Economic activity and
+   Content so far: Edexcel International GCSE Geography style,
+   Paper 2R, code G24-2R — Question 1, "Economic activity and
    energy" (Section A, 25 marks).
 
-   Also: Pearson Edexcel International GCSE Geography,
-   Paper 2R (4GE1/02R), June 2019 — Question 1, "Economic activity and energy" (Section A, 25 marks).
+   Also: Edexcel International GCSE Geography style,
+   Paper 2R, code G19-2R — Question 1, "Economic activity and energy" (Section A, 25 marks).
 
    Data shape: same shared engine as sbl-revision.js. */
 
@@ -20,7 +20,7 @@ window.SBL_REVISION_BUTTON_LABEL = 'Practise This Topic';
 
 window.SBL_REVISION_TOPICS = [
   {
-    topic: 'Economic Activity and Energy — June 2024, Paper 2, Question 1 (25 marks)',
+    topic: 'Economic Activity and Energy — Adapted Edexcel questions · G24-2 · Question 1 (25 marks)',
     questions: [
       {
         label: 'Q1(a)(i) — 1 mark',
@@ -79,7 +79,7 @@ window.SBL_REVISION_TOPICS = [
     ]
   },
   {
-    topic: 'Economic Activity and Energy — June 2019, Paper 2R, Question 1 (25 marks)',
+    topic: 'Economic Activity and Energy — Adapted Edexcel questions · G19-2R · Question 1 (25 marks)',
     questions: [
       {
         label: 'Q1(a) — 1 mark',

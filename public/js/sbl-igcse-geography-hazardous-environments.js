@@ -6,12 +6,12 @@
    no specific map/resource answers — every question and rubric below
    is original, generic, reference-only content.
 
-   Content so far: Pearson Edexcel International GCSE Geography,
-   Paper 1 (4GE1/01), June 2025 — Question 3, "Hazardous environments"
+   Content so far: Edexcel International GCSE Geography style,
+   Paper 1, code G25-1 — Question 3, "Hazardous environments"
    (Section A, 25 marks).
 
-   Also: Pearson Edexcel International GCSE Geography,
-   Paper 1R (4GE1/01R), June 2019 — Question 3, "Hazardous environments" (Section A, 25 marks).
+   Also: Edexcel International GCSE Geography style,
+   Paper 1R, code G19-1R — Question 3, "Hazardous environments" (Section A, 25 marks).
 
    Data shape: same shared engine as sbl-revision.js. */
 
@@ -19,7 +19,7 @@ window.SBL_REVISION_BUTTON_LABEL = 'Practise This Topic';
 
 window.SBL_REVISION_TOPICS = [
   {
-    topic: 'Hazardous Environments — June 2025, Paper 1, Question 3 (25 marks)',
+    topic: 'Hazardous Environments — Adapted Edexcel questions · G25-1 · Question 3 (25 marks)',
     questions: [
       {
         label: 'Q3(a) — 1 mark',
@@ -78,7 +78,7 @@ window.SBL_REVISION_TOPICS = [
     ]
   },
   {
-    topic: 'Hazardous Environments — June 2019, Paper 1R, Question 3 (25 marks)',
+    topic: 'Hazardous Environments — Adapted Edexcel questions · G19-1R · Question 3 (25 marks)',
     questions: [
       {
         label: 'Q3(a) — 1 mark',

@@ -7,12 +7,12 @@
    no specific resource answers — every question and rubric below is
    original, generic, reference-only content.
 
-   Content so far: Pearson Edexcel International GCSE Geography,
-   Paper 2R (4GE1/02R), June 2024 — Question 5, "Investigating rural
+   Content so far: Edexcel International GCSE Geography style,
+   Paper 2R, code G24-2R — Question 5, "Investigating rural
    environments" (Section B, Geographical Enquiry, 20 marks).
 
-   Also: Pearson Edexcel International GCSE Geography,
-   Paper 2R (4GE1/02R), June 2019 — Question 5, "Investigating rural environments" (Section B, Geographical Enquiry, 20 marks).
+   Also: Edexcel International GCSE Geography style,
+   Paper 2R, code G19-2R — Question 5, "Investigating rural environments" (Section B, Geographical Enquiry, 20 marks).
 
    Data shape: same shared engine as sbl-revision.js. */
 
@@ -20,7 +20,7 @@ window.SBL_REVISION_BUTTON_LABEL = 'Practise This Topic';
 
 window.SBL_REVISION_TOPICS = [
   {
-    topic: 'Rural Fieldwork — June 2024, Paper 2, Question 5 (20 marks)',
+    topic: 'Rural Fieldwork — Adapted Edexcel questions · G24-2 · Question 5 (20 marks)',
     questions: [
       {
         label: 'Q5(a) — 1 mark',
@@ -61,7 +61,7 @@ window.SBL_REVISION_TOPICS = [
     ]
   },
   {
-    topic: 'Rural Fieldwork — June 2019, Paper 2R, Question 5 (20 marks)',
+    topic: 'Rural Fieldwork — Adapted Edexcel questions · G19-2R · Question 5 (20 marks)',
     questions: [
       {
         label: 'Q5(a)(i) — 1 mark',

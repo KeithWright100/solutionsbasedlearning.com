@@ -7,12 +7,12 @@
    no specific resource answers — every question and rubric below is
    original, generic, reference-only content.
 
-   Content so far: Pearson Edexcel International GCSE Geography,
-   Paper 1 (4GE1/01), June 2025 — Question 5, "Investigating coastal
+   Content so far: Edexcel International GCSE Geography style,
+   Paper 1, code G25-1 — Question 5, "Investigating coastal
    environments" (Section B, Geographical Enquiry, 20 marks).
 
-   Also: Pearson Edexcel International GCSE Geography,
-   Paper 1R (4GE1/01R), June 2019 — Question 5, "Investigating coastal environments" (Section B, Geographical Enquiry, 20 marks).
+   Also: Edexcel International GCSE Geography style,
+   Paper 1R, code G19-1R — Question 5, "Investigating coastal environments" (Section B, Geographical Enquiry, 20 marks).
 
    Data shape: same shared engine as sbl-revision.js. */
 
@@ -20,7 +20,7 @@ window.SBL_REVISION_BUTTON_LABEL = 'Practise This Topic';
 
 window.SBL_REVISION_TOPICS = [
   {
-    topic: 'Coastal Fieldwork — June 2025, Paper 1, Question 5 (20 marks)',
+    topic: 'Coastal Fieldwork — Adapted Edexcel questions · G25-1 · Question 5 (20 marks)',
     questions: [
       {
         label: 'Q5(a) — 2 marks',
@@ -55,7 +55,7 @@ window.SBL_REVISION_TOPICS = [
     ]
   },
   {
-    topic: 'Coastal Fieldwork — June 2019, Paper 1R, Question 5 (20 marks)',
+    topic: 'Coastal Fieldwork — Adapted Edexcel questions · G19-1R · Question 5 (20 marks)',
     questions: [
       {
         label: 'Q5(a)(i) — 1 mark',

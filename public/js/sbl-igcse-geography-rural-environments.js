@@ -6,8 +6,8 @@
    no specific map/resource answers — every question and rubric below
    is original, generic, reference-only content.
 
-   Content so far: Pearson Edexcel International GCSE Geography,
-   Paper 2R (4GE1/02R), June 2019 — Question 2, "Rural environments"
+   Content so far: Edexcel International GCSE Geography style,
+   Paper 2R, code G19-2R — Question 2, "Rural environments"
    (Section A, 25 marks).
 
    Data shape: same shared engine as sbl-revision.js. */
@@ -16,7 +16,7 @@ window.SBL_REVISION_BUTTON_LABEL = 'Practise This Topic';
 
 window.SBL_REVISION_TOPICS = [
   {
-    topic: 'Rural Environments — June 2019, Paper 2R, Question 2 (25 marks)',
+    topic: 'Rural Environments — Adapted Edexcel questions · G19-2R · Question 2 (25 marks)',
     questions: [
       {
         label: 'Q2(a) — 1 mark',
