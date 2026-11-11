@@ -40,6 +40,7 @@
           ['HL: Human development & diversity', '/geography/paper-2/hl-2'],
           ['HL: Global risks & resilience', '/geography/paper-2/hl-3'],
           ['Full revision guide', '/geography/revision/guide'],
+          ['IB Revision games', '/geography/games#ib-rev'],
           ['Check your understanding', '/geography/revision'],
           ['Revise by topic', '/geography/revision/topics'],
           ['Past paper questions', '/geography/revision/paper-questions'],
@@ -62,7 +63,8 @@
       all: ['IGCSE subject menu', '/igcse/menu'],
       cols: [
         { title: 'IGCSE Geography', href: '/igcse/geography/learn', blurb: 'Five topics and fieldwork, with lessons, quizzes and past papers.', items: [
-          ['Lessons', '/igcse/geography/learn'],
+          ['Full revision lessons', '/igcse/geography/learn'],
+          ['IGCSE Revision games', '/geography/games#igcse-rev'],
           ['Revise by topic', '/igcse/geography/revision/topics'],
           ['Past paper questions', '/igcse/geography'],
           ['Exam tips', '/igcse/geography/exam-tips'],
@@ -76,13 +78,13 @@
           ['Exam tips', '/igcse/economics/exam-tips'],
           ['Research', '/igcse/economics/research']] },
         { title: 'IGCSE Business', href: '/igcse/business/learn', blurb: 'All five topics, with lessons, case studies and paper practice.', items: [
-          ['Lessons', '/igcse/business/learn'],
+          ['Full revision lessons', '/igcse/business/learn'],
           ['Revise by topic', '/igcse/business/revision/topics'],
           ['Past paper questions', '/igcse/business'],
           ['Exam tips', '/igcse/business/exam-tips'],
           ['Research', '/igcse/business/research']] },
         { title: 'IGCSE History', href: '/igcse/history/learn', blurb: 'Superpower relations, Civil rights in the USA, and Russia and the Soviet Union.', items: [
-          ['Lessons', '/igcse/history/learn'],
+          ['Full revision lessons', '/igcse/history/learn'],
           ['Revise by topic', '/igcse/history/revision/topics'],
           ['Exam tips', '/igcse/history/exam-tips']] }
       ] },
@@ -124,6 +126,8 @@
           ['KS3', '/geography/games#ks3'],
           ['IGCSE', '/geography/games#igcse'],
           ['IB Diploma', '/geography/games#ib'],
+          ['IGCSE Revision games', '/geography/games#igcse-rev'],
+          ['IB Revision games', '/geography/games#ib-rev'],
           ['Economics games', '', 'head'],
           ['Market Shock (IGCSE)', '/geography/games/market-shock', 'new']] }
       ] },
