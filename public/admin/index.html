@@ -55,7 +55,7 @@
   .sbl-ask-btns { display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:flex-end; }
   .sbl-ask-code { display:block; font-size:1.4rem; margin:0.7rem 0; padding:0.5rem 0.7rem; background:rgba(255,255,255,0.1); border-radius:8px; user-select:all; }
   .sbl-pend-check { width:1.1rem; height:1.1rem; cursor:pointer; }
-  #pageError.is-visible, #pageNotice.is-visible { position:sticky; top:0.5rem; z-index:20; }
+  #pageError.is-visible, #pageNotice.is-visible { position:fixed; top:1rem; left:50%; transform:translateX(-50%); width:min(760px, calc(100% - 2rem)); z-index:900; box-shadow:0 10px 30px rgba(0,0,0,0.35); cursor:pointer; }
 
   .sbl-search-input {
     width: 100%; box-sizing: border-box;

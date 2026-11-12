@@ -142,7 +142,7 @@ async function handleApprove(req, res, session) {
 
   if (profileError) {
     console.error('Failed to create profile row:', profileError);
-    return res.status(500).json({ error: 'Account was created but the profile could not be saved. Please contact support.' });
+    return res.status(500).json({ error: `Account was created but the profile could not be saved: ${profileError.message || profileError.code || 'database error'}.` });
   }
 
   const { error: updateAppError } = await supabase
@@ -157,6 +157,9 @@ async function handleApprove(req, res, session) {
 
   if (updateAppError) {
     console.error('Failed to mark application approved:', updateAppError);
+    return res.status(500).json({
+      error: `The account exists (${application.email}) but this application could not be marked approved: ${updateAppError.message || updateAppError.code || 'database error'}.`
+    });
   }
 
   let emailWarning = null;

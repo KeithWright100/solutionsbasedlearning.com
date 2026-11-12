@@ -42,12 +42,13 @@
 
   var pageError = document.getElementById('pageError');
   var pageNotice = document.getElementById('pageNotice');
+  // Messages float at the top of the screen; click one to dismiss it.
+  [pageError, pageNotice].forEach(function (el) { el.addEventListener('click', function () { el.classList.remove('is-visible'); }); });
 
   function showError(msg) {
     pageNotice.classList.remove('is-visible');
     pageError.textContent = msg;
     pageError.classList.add('is-visible');
-    if (pageError.getBoundingClientRect().bottom < 0) pageError.scrollIntoView({ block: 'nearest' });
   }
   function showNotice(msg) {
     pageError.classList.remove('is-visible');
