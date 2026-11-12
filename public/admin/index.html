@@ -49,13 +49,16 @@
   .sbl-search-bar { margin-bottom: 1rem; max-width: 320px; }
   .sbl-pending-tools { display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.8rem; }
   .sbl-bulk-status { font-weight:600; }
-  .sbl-ask-backdrop { position:fixed; inset:0; background:rgba(5,15,25,0.6); display:flex; align-items:center; justify-content:center; z-index:1000; padding:1rem; }
-  .sbl-ask { background:#1d3448; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:1.3rem 1.4rem; max-width:460px; width:100%; box-shadow:0 20px 50px rgba(0,0,0,0.4); }
-  .sbl-ask p { margin:0 0 1rem; line-height:1.5; white-space:pre-line; }
+  .sbl-ask-backdrop { position:fixed; inset:0; background:rgba(5,15,25,0.6); display:flex; align-items:center; justify-content:center; z-index:10001; padding:1rem; }
+  .sbl-ask { background:#1d3448; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:1.3rem 1.4rem; max-width:640px; width:100%; box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+  .sbl-ask-msg { margin:0 0 1rem; line-height:1.5; white-space:pre-line; }
   .sbl-ask-btns { display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:flex-end; }
+  .sbl-ask { max-height:85vh; overflow:auto; }
+  .sbl-pw-table { width:100%; border-collapse:collapse; margin:0.8rem 0 0; font-size:0.9rem; white-space:normal; }
+  .sbl-pw-table th, .sbl-pw-table td { text-align:left; padding:0.3rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.12); }
   .sbl-ask-code { display:block; font-size:1.4rem; margin:0.7rem 0; padding:0.5rem 0.7rem; background:rgba(255,255,255,0.1); border-radius:8px; user-select:all; }
   .sbl-pend-check { width:1.1rem; height:1.1rem; cursor:pointer; }
-  #pageError.is-visible, #pageNotice.is-visible { position:fixed; top:1rem; left:50%; transform:translateX(-50%); width:min(760px, calc(100% - 2rem)); z-index:900; box-shadow:0 10px 30px rgba(0,0,0,0.35); cursor:pointer; }
+  #pageError.is-visible, #pageNotice.is-visible { position:fixed; top:4.5rem; left:50%; transform:translateX(-50%); width:min(760px, calc(100% - 2rem)); z-index:10000; box-shadow:0 10px 30px rgba(0,0,0,0.35); cursor:pointer; }
 
   .sbl-search-input {
     width: 100%; box-sizing: border-box;
@@ -154,6 +157,7 @@
   <section class="sbl-panel" id="panelPending">
     <div class="sbl-pending-tools">
       <button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="approveSelected" disabled>Approve selected</button>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="approveSelectedPw" disabled title="For students whose school email blocks SBL emails: sets passwords now and shows you a list to hand out">Approve with passwords (no email)</button>
       <span class="sbl-bulk-status" id="bulkStatus" aria-live="polite"></span>
     </div>
     <div class="sbl-search-bar">

@@ -94,12 +94,17 @@ async function handleApprove(req, res, session) {
   // message — our activation email (via Resend) is the only email
   // the applicant gets, avoiding the delivery problems Supabase's
   // built-in mailer has had.
+  // tempPassword: true — set a password now and return it to the admin
+  // instead of emailing an activation link (for students whose school
+  // email blocks or delays SBL's emails, e.g. a KS3 class).
+  const wantTemp = !!(req.body && req.body.tempPassword);
+  const tempPassword = wantTemp ? makeTempPassword() : null;
   const fullName = `${application.first_name} ${application.last_name}`.trim();
-  const { data: createdUser, error: createUserError } = await supabase.auth.admin.createUser({
+  const { data: createdUser, error: createUserError } = await supabase.auth.admin.createUser(Object.assign({
     email: application.email,
     email_confirm: true,
     user_metadata: { full_name: fullName }
-  });
+  }, wantTemp ? { password: tempPassword } : {}));
 
   let userId = createdUser && createdUser.user ? createdUser.user.id : null;
   if (!userId && createUserError && /already|registered|exists/i.test(createUserError.message || '')) {
@@ -125,8 +130,18 @@ async function handleApprove(req, res, session) {
   const assignedRole = application.role_applied_for === 'Student' ? 'student' : 'user';
 
   const { data: existingProfile } = await supabase.from('sbl_profiles').select('id, application_id').eq('id', userId).maybeSingle();
-  if (existingProfile && existingProfile.application_id && existingProfile.application_id !== application.id) {
-    return res.status(409).json({ error: 'This email already has an SBL account. Reject this application as a duplicate instead.' });
+  // The applicant already has an account from an earlier application —
+  // usually a student who never got (or lost) the activation email and
+  // applied again. Close this application against that account rather
+  // than refusing, so it leaves the Pending list.
+  const existingAccount = !!(existingProfile && existingProfile.application_id && existingProfile.application_id !== application.id);
+  if (!createdUser || !createdUser.user) {
+    // Login already existed (duplicate or resumed approval): apply the
+    // temporary password to it if one was asked for.
+    if (wantTemp) {
+      const { error: pwErr } = await supabase.auth.admin.updateUserById(userId, { password: tempPassword });
+      if (pwErr) return res.status(500).json({ error: `Could not set a password: ${pwErr.message || 'auth error'}.` });
+    }
   }
 
   const { error: profileError } = existingProfile ? { error: null } : await supabase.from('sbl_profiles').insert({
@@ -145,21 +160,31 @@ async function handleApprove(req, res, session) {
     return res.status(500).json({ error: `Account was created but the profile could not be saved: ${profileError.message || profileError.code || 'database error'}.` });
   }
 
-  const { error: updateAppError } = await supabase
+  const decision = { status: 'approved', decided_at: new Date().toISOString(), decided_by: session.profile.email };
+  let { error: updateAppError } = await supabase
     .from('sbl_applications')
-    .update({
-      status: 'approved',
-      decided_at: new Date().toISOString(),
-      decided_by: session.profile.email,
-      user_id: userId
-    })
+    .update(Object.assign({ user_id: userId }, decision))
     .eq('id', applicationId);
+  if (updateAppError && existingAccount) {
+    // user_id may be unique per application — the earlier application
+    // already holds it, so close this one without the link.
+    ({ error: updateAppError } = await supabase.from('sbl_applications').update(decision).eq('id', applicationId));
+  }
 
   if (updateAppError) {
     console.error('Failed to mark application approved:', updateAppError);
     return res.status(500).json({
       error: `The account exists (${application.email}) but this application could not be marked approved: ${updateAppError.message || updateAppError.code || 'database error'}.`
     });
+  }
+
+  if (wantTemp) {
+    return res.status(200).json({ ok: true, existingAccount, password: tempPassword, email: application.email, name: fullName });
+  }
+  if (existingAccount) {
+    // No new account, so no activation email — the admin decides how
+    // to get them in (Set temp password, or they use Forgot password).
+    return res.status(200).json({ ok: true, existingAccount: true, email: application.email, name: fullName });
   }
 
   let emailWarning = null;

@@ -19,8 +19,8 @@
     return new Promise(function (resolve) {
       var wrap = document.createElement('div');
       wrap.className = 'sbl-ask-backdrop';
-      wrap.innerHTML = '<div class="sbl-ask" role="dialog" aria-modal="true"><p></p><div class="sbl-ask-btns"></div></div>';
-      var p = wrap.querySelector('p');
+      wrap.innerHTML = '<div class="sbl-ask" role="dialog" aria-modal="true"><div class="sbl-ask-msg"></div><div class="sbl-ask-btns"></div></div>';
+      var p = wrap.querySelector('.sbl-ask-msg');
       if (isHtml) p.innerHTML = message; else p.textContent = message;
       var row = wrap.querySelector('.sbl-ask-btns');
       function close(v) { document.removeEventListener('keydown', onKey); wrap.remove(); resolve(v); }
@@ -263,6 +263,8 @@
     var n = Object.keys(selected).length;
     var btn = document.getElementById('approveSelected');
     if (btn && !bulkRunning) { btn.disabled = n === 0; btn.textContent = n ? 'Approve selected (' + n + ')' : 'Approve selected'; }
+    var btn2 = document.getElementById('approveSelectedPw');
+    if (btn2 && !bulkRunning) { btn2.disabled = n === 0; btn2.textContent = n ? 'Approve ' + n + ' with passwords (no email)' : 'Approve with passwords (no email)'; }
     var all = document.getElementById('pendingAll');
     if (all) {
       var ids = visiblePendingIds();
@@ -279,16 +281,22 @@
     if (c.checked) selected[c.getAttribute('data-id')] = true; else delete selected[c.getAttribute('data-id')];
     updateBulkButton();
   });
-  document.getElementById('approveSelected').addEventListener('click', function () {
+  document.getElementById('approveSelected').addEventListener('click', function () { runBulk(false); });
+  document.getElementById('approveSelectedPw').addEventListener('click', function () { runBulk(true); });
+  function runBulk(temp) {
     var ids = Object.keys(selected);
     if (!ids.length || bulkRunning) return;
-    sblAsk('Approve ' + ids.length + ' application' + (ids.length > 1 ? 's' : '') + '? Each person gets an account and an activation email.').then(function (ok) { if (!ok) return;
+    var n = ids.length + ' application' + (ids.length > 1 ? 's' : '');
+    sblAsk(temp
+      ? 'Approve ' + n + ' and give each a password now?\n\nNo emails are sent. You get a list of passwords to hand out (e.g. for a KS3 class).'
+      : 'Approve ' + n + '? Each person gets an account and an activation email.').then(function (ok) { if (!ok) return;
     clearMessages();
     bulkRunning = true;
     var btn = document.getElementById('approveSelected');
     var status = document.getElementById('bulkStatus');
     btn.disabled = true;
-    var done = 0, failed = [], warned = 0;
+    document.getElementById('approveSelectedPw').disabled = true;
+    var done = 0, failed = [], warned = 0, existing = [], pwList = [];
     // One at a time: each approval is its own short request, so a slow
     // email never makes the whole batch time out.
     ids.reduce(function (chain, id) {
@@ -296,21 +304,50 @@
         var app = state.pending.find(function (a) { return a.id === id; });
         var name = app ? app.first_name + ' ' + app.last_name : id;
         status.textContent = 'Approving ' + (done + failed.length + 1) + ' of ' + ids.length + ' — ' + name + '…';
-        return approveRequest(id).then(function (r) {
-          if (r.ok) { done++; if (r.warning) warned++; removePending(id); }
+        return approveRequest(id, temp).then(function (r) {
+          if (r.ok) {
+            done++; if (r.warning) warned++; removePending(id);
+            if (r.existing) existing.push(r.name || name);
+            if (r.password) pwList.push([r.name || name, r.email || '', r.password]);
+          }
           else failed.push(name + ' (' + r.error + ')');
         });
       });
     }, Promise.resolve()).then(function () {
       bulkRunning = false;
       status.textContent = '';
-      var msg = done + ' approved.' + (warned ? ' ' + warned + ' activation email' + (warned > 1 ? 's' : '') + ' could not be sent — use Reset password for them.' : '');
+      var msg = done + ' approved.' + (warned ? ' ' + warned + ' activation email' + (warned > 1 ? 's' : '') + ' could not be sent — use Set temp password for them.' : '') +
+        (existing.length && !temp ? ' Already had an account (closed, no email sent): ' + existing.join(', ') + ' — use Set temp password if they can\u2019t log in.' : '');
       if (failed.length) showError(msg + ' Not approved: ' + failed.join('; '));
-      else showNotice(msg + ' Activation emails have been sent.');
+      else showNotice(msg + (temp ? '' : ' Activation emails have been sent to new accounts.'));
+      updateBulkButton();
       loadData();
+      if (pwList.length) showPasswordList(pwList);
     });
     });
-  });
+  }
+
+  // Shows the name / email / password list after "Approve with passwords",
+  // with a button to copy it all (paste into Teams, a doc or a sheet).
+  function showPasswordList(rows) {
+    var text = 'Name\tEmail\tPassword\n' + rows.map(function (r) { return r.join('\t'); }).join('\n');
+    var html = 'Passwords for ' + rows.length + ' student' + (rows.length > 1 ? 's' : '') + ' &mdash; copy them now, they are not shown again. Students log in at solutionsbasedlearning.com with their email and this password.' +
+      '<table class="sbl-pw-table"><tr><th>Name</th><th>Email</th><th>Password</th></tr>' +
+      rows.map(function (r) { return '<tr><td>' + escapeHtml(r[0]) + '</td><td>' + escapeHtml(r[1]) + '</td><td><b>' + escapeHtml(r[2]) + '</b></td></tr>'; }).join('') + '</table>';
+    function ask() {
+      return sblAsk(html, [['copy', 'Copy list'], [null, 'Close']], true).then(function (v) {
+        if (v !== 'copy') return;
+        var done = function () { showNotice('Password list copied — paste it into a document or spreadsheet.'); };
+        (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(done, function () {
+          var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          ta.remove();
+        });
+        return ask();
+      });
+    }
+    ask();
+  }
 
   // Take an approved application off the Pending list straight away,
   // instead of waiting for the full dashboard reload.
@@ -325,10 +362,10 @@
   // dropped connection or a server timeout becomes a readable error
   // instead of a click that silently does nothing. "Already approved"
   // (e.g. a retry after a timeout that actually worked) counts as ok.
-  function approveRequest(id) {
-    return postJson('/api/admin/action', { action: 'approve', applicationId: id }).then(function (result) {
+  function approveRequest(id, temp) {
+    return postJson('/api/admin/action', { action: 'approve', applicationId: id, tempPassword: !!temp }).then(function (result) {
       var err = result.data && result.data.error;
-      if (result.ok) return { ok: true, warning: result.data.warning };
+      if (result.ok) return { ok: true, warning: result.data.warning, existing: !!result.data.existingAccount, password: result.data.password, email: result.data.email, name: result.data.name };
       if (result.status === 409 && /approved/.test(err || '')) return { ok: true };
       return { ok: false, error: err || 'the server said no (' + result.status + ')' };
     }, function () {
@@ -673,7 +710,8 @@
       return approveRequest(id).then(function (r) {
         if (!r.ok) { showError('Could not approve this application: ' + r.error); loadData(); return; }
         removePending(id);
-        showNotice(r.warning || 'Application approved. The applicant has been emailed an activation link.');
+        if (r.existing) showNotice((r.name || 'This applicant') + ' already had an SBL account from an earlier application, so this one has been closed (no new email sent). If they can\u2019t log in, use \u201cSet temp password\u201d in Approved users.');
+        else showNotice(r.warning || 'Application approved. The applicant has been emailed an activation link.');
         loadData();
       });
     });
