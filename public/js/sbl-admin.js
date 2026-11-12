@@ -16,6 +16,7 @@
     pageNotice.classList.remove('is-visible');
     pageError.textContent = msg;
     pageError.classList.add('is-visible');
+    if (pageError.getBoundingClientRect().bottom < 0) pageError.scrollIntoView({ block: 'nearest' });
   }
   function showNotice(msg) {
     pageError.classList.remove('is-visible');
@@ -201,6 +202,7 @@
     list.forEach(function (app) {
       var tr = document.createElement('tr');
       tr.innerHTML =
+        '<td><input type="checkbox" class="sbl-pend-check" data-id="' + app.id + '"' + (selected[app.id] ? ' checked' : '') + ' aria-label="Select ' + escapeHtml(app.first_name + ' ' + app.last_name) + '"></td>' +
         '<td>' + escapeHtml(app.first_name + ' ' + app.last_name) + '<div class="sbl-muted">' + escapeHtml(app.reference_id) + '</div></td>' +
         '<td>' + escapeHtml(app.organisation) + '<div class="sbl-muted">' + escapeHtml(app.country) + '</div></td>' +
         '<td>' + escapeHtml(app.email) + '</td>' +
@@ -212,6 +214,92 @@
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="view" data-id="' + app.id + '">View</button>' +
         '</td>';
       body.appendChild(tr);
+    });
+    updateBulkButton();
+  }
+
+  // ---- Bulk approve (tick several pending applications, approve in one go) ----
+  var selected = {};
+  var bulkRunning = false;
+  function visiblePendingIds() {
+    return Array.prototype.map.call(document.querySelectorAll('#pendingBody .sbl-pend-check'), function (c) { return c.getAttribute('data-id'); });
+  }
+  function updateBulkButton() {
+    Object.keys(selected).forEach(function (id) {
+      if (!state.pending.some(function (a) { return a.id === id; })) delete selected[id];
+    });
+    var n = Object.keys(selected).length;
+    var btn = document.getElementById('approveSelected');
+    if (btn && !bulkRunning) { btn.disabled = n === 0; btn.textContent = n ? 'Approve selected (' + n + ')' : 'Approve selected'; }
+    var all = document.getElementById('pendingAll');
+    if (all) {
+      var ids = visiblePendingIds();
+      all.checked = ids.length > 0 && ids.every(function (id) { return selected[id]; });
+    }
+  }
+  document.getElementById('pendingAll').addEventListener('change', function (e) {
+    visiblePendingIds().forEach(function (id) { if (e.target.checked) selected[id] = true; else delete selected[id]; });
+    renderPending();
+  });
+  document.getElementById('pendingBody').addEventListener('change', function (e) {
+    var c = e.target.closest('.sbl-pend-check');
+    if (!c) return;
+    if (c.checked) selected[c.getAttribute('data-id')] = true; else delete selected[c.getAttribute('data-id')];
+    updateBulkButton();
+  });
+  document.getElementById('approveSelected').addEventListener('click', function () {
+    var ids = Object.keys(selected);
+    if (!ids.length || bulkRunning) return;
+    if (!confirm('Approve ' + ids.length + ' application' + (ids.length > 1 ? 's' : '') + '? Each person gets an account and an activation email.')) return;
+    clearMessages();
+    bulkRunning = true;
+    var btn = document.getElementById('approveSelected');
+    var status = document.getElementById('bulkStatus');
+    btn.disabled = true;
+    var done = 0, failed = [], warned = 0;
+    // One at a time: each approval is its own short request, so a slow
+    // email never makes the whole batch time out.
+    ids.reduce(function (chain, id) {
+      return chain.then(function () {
+        var app = state.pending.find(function (a) { return a.id === id; });
+        var name = app ? app.first_name + ' ' + app.last_name : id;
+        status.textContent = 'Approving ' + (done + failed.length + 1) + ' of ' + ids.length + ' — ' + name + '…';
+        return approveRequest(id).then(function (r) {
+          if (r.ok) { done++; if (r.warning) warned++; removePending(id); }
+          else failed.push(name + ' (' + r.error + ')');
+        });
+      });
+    }, Promise.resolve()).then(function () {
+      bulkRunning = false;
+      status.textContent = '';
+      var msg = done + ' approved.' + (warned ? ' ' + warned + ' activation email' + (warned > 1 ? 's' : '') + ' could not be sent — use Reset password for them.' : '');
+      if (failed.length) showError(msg + ' Not approved: ' + failed.join('; '));
+      else showNotice(msg + ' Activation emails have been sent.');
+      loadData();
+    });
+  });
+
+  // Take an approved application off the Pending list straight away,
+  // instead of waiting for the full dashboard reload.
+  function removePending(id) {
+    state.pending = state.pending.filter(function (a) { return a.id !== id; });
+    delete selected[id];
+    document.getElementById('countPending').textContent = state.pending.length;
+    renderPending();
+  }
+
+  // Sends one approval. Always resolves to { ok, error, warning } — a
+  // dropped connection or a server timeout becomes a readable error
+  // instead of a click that silently does nothing. "Already approved"
+  // (e.g. a retry after a timeout that actually worked) counts as ok.
+  function approveRequest(id) {
+    return postJson('/api/admin/action', { action: 'approve', applicationId: id }).then(function (result) {
+      var err = result.data && result.data.error;
+      if (result.ok) return { ok: true, warning: result.data.warning };
+      if (result.status === 409 && /approved/.test(err || '')) return { ok: true };
+      return { ok: false, error: err || 'the server said no (' + result.status + ')' };
+    }, function () {
+      return { ok: false, error: 'no reply from the server — refresh to check whether it went through' };
     });
   }
 
@@ -357,6 +445,7 @@
         '<td>' + formatDate(u.created_at) + '</td>' +
         '<td class="sbl-table-actions">' +
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="reset-password" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '">Reset Password</button>' +
+          '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="temp-password" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '" title="Set a new password now and show it to you — no email needed">Set temp password</button>' +
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="' + toggleAction + '" data-id="' + u.id + '">' + toggleLabel + '</button>' +
           '<button class="sbl-btn sbl-btn--danger sbl-btn--small" data-action="delete" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '">Delete</button>' +
         '</td>';
@@ -494,6 +583,7 @@
     if (action === 'make-user') return handleSetRole(id, 'user', btn);
     if (action === 'make-student') return handleSetRole(id, 'student', btn);
     if (action === 'reset-password') return handleResetPassword(id, btn.getAttribute('data-name'), btn);
+    if (action === 'temp-password') return handleTempPassword(id, btn.getAttribute('data-name'), btn);
     if (action === 'view-feedback') {
       var fb = state.feedback.find(function (f) { return f.id === id; });
       if (fb) openFeedbackModal(fb);
@@ -537,7 +627,9 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body || {})
     }).then(function (r) {
-      return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+      return r.json().catch(function () {
+        return { error: r.status >= 500 ? 'The server took too long or failed (' + r.status + '). Refresh to check whether it went through.' : 'Unexpected reply from the server (' + r.status + ').' };
+      }).then(function (data) { return { ok: r.ok, status: r.status, data: data || {} }; });
     });
   }
 
@@ -545,9 +637,10 @@
     if (!confirm('Approve this application? An account will be created and an activation email will be sent.')) return;
     clearMessages();
     withButtonBusy(btn, 'Approving…', function () {
-      return postJson('/api/admin/action', { action: 'approve', applicationId: id }).then(function (result) {
-        if (!result.ok) { showError(result.data.error || 'Could not approve this application.'); return; }
-        showNotice(result.data.warning || 'Application approved. The applicant has been emailed an activation link.');
+      return approveRequest(id).then(function (r) {
+        if (!r.ok) { showError('Could not approve this application: ' + r.error); loadData(); return; }
+        removePending(id);
+        showNotice(r.warning || 'Application approved. The applicant has been emailed an activation link.');
         loadData();
       });
     });
@@ -621,6 +714,18 @@
         if (!result.ok) { showError(result.data.error || 'Could not send the password reset email.'); return; }
         showNotice('Password reset email sent to ' + name + '.');
       });
+    });
+  }
+
+  function handleTempPassword(userId, name, btn) {
+    if (!confirm('Give ' + name + ' a new temporary password now?\n\nTheir old password stops working. No email is sent — you tell them the new one.')) return;
+    clearMessages();
+    withButtonBusy(btn, 'Setting…', function () {
+      return postJson('/api/admin/action', { action: 'temp-password', userId: userId }).then(function (result) {
+        if (!result.ok) { showError(result.data.error || 'Could not set a temporary password.'); return; }
+        showNotice(name + ' (' + result.data.email + ') can now log in with: ' + result.data.password + '  — they can change it with "Forgot password".');
+        window.prompt('New password for ' + name + ' — copy it now:', result.data.password);
+      }, function () { showError('No reply from the server. Please try again.'); });
     });
   }
 

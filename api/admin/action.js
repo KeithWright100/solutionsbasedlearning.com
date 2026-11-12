@@ -52,6 +52,7 @@ export default async function handler(req, res) {
   if (action === 'assign-group') return handleAssignGroup(req, res, session);
   if (action === 'assign-subjects') return handleAssignSubjects(req, res, session);
   if (action === 'reset-password') return handleResetPassword(req, res, session);
+  if (action === 'temp-password') return handleTempPassword(req, res, session);
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
   if (action === 'set-game-of-week') return handleSetGameOfWeek(req, res, session);
   if (action === 'p3-codes') return handleP3Codes(req, res, session);
@@ -100,7 +101,14 @@ async function handleApprove(req, res, session) {
     user_metadata: { full_name: fullName }
   });
 
-  if (createUserError || !createdUser || !createdUser.user) {
+  let userId = createdUser && createdUser.user ? createdUser.user.id : null;
+  if (!userId && createUserError && /already|registered|exists/i.test(createUserError.message || '')) {
+    // An earlier approve of this same application got as far as creating
+    // the login (then timed out or the connection dropped). Pick that
+    // login up and finish the job instead of leaving the applicant stuck.
+    userId = await findAuthUserIdByEmail(supabase, application.email);
+  }
+  if (!userId) {
     console.error('Failed to create auth user:', createUserError);
     return res.status(500).json({
       error: createUserError && createUserError.message
@@ -109,8 +117,6 @@ async function handleApprove(req, res, session) {
     });
   }
 
-  const userId = createdUser.user.id;
-
   // Students get tagged with the 'student' role (already supported by
   // the sbl_profiles CHECK constraint) so future features — progress
   // tracking, teachers monitoring their own classes — can tell them
@@ -118,7 +124,12 @@ async function handleApprove(req, res, session) {
   // becomes a plain 'user', same as before.
   const assignedRole = application.role_applied_for === 'Student' ? 'student' : 'user';
 
-  const { error: profileError } = await supabase.from('sbl_profiles').insert({
+  const { data: existingProfile } = await supabase.from('sbl_profiles').select('id, application_id').eq('id', userId).maybeSingle();
+  if (existingProfile && existingProfile.application_id && existingProfile.application_id !== application.id) {
+    return res.status(409).json({ error: 'This email already has an SBL account. Reject this application as a duplicate instead.' });
+  }
+
+  const { error: profileError } = existingProfile ? { error: null } : await supabase.from('sbl_profiles').insert({
     id: userId,
     full_name: fullName,
     email: application.email,
@@ -160,6 +171,51 @@ async function handleApprove(req, res, session) {
   }
 
   return res.status(200).json({ ok: true, warning: emailWarning });
+}
+
+// ---------------------------------------------------------------
+// temp-password — { userId }
+// Sets a new, easy-to-read temporary password straight away and
+// returns it to the admin (no email needed — handy for KS3 students
+// whose school email filters the activation / reset emails). Also
+// works for an account that never finished activation. The student
+// can change it later with "Forgot password".
+// ---------------------------------------------------------------
+const TEMP_WORDS = ['river','delta','coast','storm','canyon','glacier','island','valley','forest','harbour','desert','summit','meadow','lagoon','volcano','prairie','tundra','reef','plateau','estuary'];
+function makeTempPassword() {
+  const w = () => TEMP_WORDS[randomInt(TEMP_WORDS.length)];
+  const word1 = w(); let word2 = w(); while (word2 === word1) word2 = w();
+  return word1.charAt(0).toUpperCase() + word1.slice(1) + '-' + word2 + '-' + (10 + randomInt(90));
+}
+async function handleTempPassword(req, res, session) {
+  const { userId } = req.body || {};
+  if (!userId) return res.status(400).json({ error: 'userId is required.' });
+  const supabase = getSupabaseAdmin();
+  const { data: target } = await supabase.from('sbl_profiles').select('id, email, full_name, role').eq('id', userId).maybeSingle();
+  if (!target) return res.status(404).json({ error: 'User not found.' });
+  if (target.role === 'admin') return res.status(403).json({ error: 'Admin passwords cannot be reset here.' });
+  if ((target.email || '').toLowerCase() === GUEST_EMAIL) return res.status(403).json({ error: 'Use the Conference guest login panel for the guest account.' });
+  const password = makeTempPassword();
+  const { error } = await supabase.auth.admin.updateUserById(userId, { password });
+  if (error) {
+    console.error('Failed to set temporary password:', error);
+    return res.status(500).json({ error: 'Could not set a new password. Please try again.' });
+  }
+  return res.status(200).json({ ok: true, password, email: target.email });
+}
+
+// Looks up an existing Supabase Auth login by email (used only to
+// resume an approval that was interrupted part-way).
+async function findAuthUserIdByEmail(supabase, email) {
+  const target = String(email || '').toLowerCase();
+  for (let page = 1; page <= 20; page++) {
+    const { data, error } = await supabase.auth.admin.listUsers({ page, perPage: 1000 });
+    if (error || !data || !data.users) return null;
+    const hit = data.users.find((u) => (u.email || '').toLowerCase() === target);
+    if (hit) return hit.id;
+    if (data.users.length < 1000) return null;
+  }
+  return null;
 }
 
 // ---------------------------------------------------------------

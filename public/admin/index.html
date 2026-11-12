@@ -47,6 +47,11 @@
   .sbl-group-input:disabled { opacity: 0.5; }
 
   .sbl-search-bar { margin-bottom: 1rem; max-width: 320px; }
+  .sbl-pending-tools { display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.8rem; }
+  .sbl-bulk-status { font-weight:600; }
+  .sbl-pend-check { width:1.1rem; height:1.1rem; cursor:pointer; }
+  #pageError.is-visible, #pageNotice.is-visible { position:sticky; top:0.5rem; z-index:20; }
+
   .sbl-search-input {
     width: 100%; box-sizing: border-box;
     background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
@@ -142,12 +147,16 @@
   </div>
 
   <section class="sbl-panel" id="panelPending">
+    <div class="sbl-pending-tools">
+      <button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="approveSelected" disabled>Approve selected</button>
+      <span class="sbl-bulk-status" id="bulkStatus" aria-live="polite"></span>
+    </div>
     <div class="sbl-search-bar">
       <input type="search" id="pendingSearch" class="sbl-search-input" placeholder="Search by name or email…" aria-label="Search pending applications by name or email">
     </div>
     <table class="sbl-table">
       <thead>
-        <tr><th>Name</th><th>School</th><th>Email</th><th>Role</th><th>Submitted</th><th>Actions</th></tr>
+        <tr><th style="width:2.2rem"><input type="checkbox" id="pendingAll" aria-label="Select all pending applications shown"></th><th>Name</th><th>School</th><th>Email</th><th>Role</th><th>Submitted</th><th>Actions</th></tr>
       </thead>
       <tbody id="pendingBody"></tbody>
     </table>
