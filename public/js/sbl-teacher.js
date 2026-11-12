@@ -19,6 +19,7 @@
 
   // Unit views → the lesson config file that lists that unit's lessons.
   var VIEWS = [
+    { key: 'ks3geo', label: 'KS3 Geography', src: null, games: true },
     { key: 'u1', label: 'Unit 1: Changing population', src: '/js/sbl-population-lessons.js' },
     { key: 'u2', label: 'Unit 2: Global climate', src: '/js/sbl-climate-lessons.js' },
     { key: 'u3', label: 'Unit 3: Resource consumption and security', src: '/js/sbl-rc-lessons.js' },
@@ -87,12 +88,12 @@
 
   function init() {
     var vs = $('viewSel');
-    VIEWS.forEach(function (v) { if (!v.src) return; var o = document.createElement('option'); o.value = v.key; o.textContent = v.label; vs.appendChild(o); });
+    VIEWS.forEach(function (v) { if (!v.src && !v.games) return; var o = document.createElement('option'); o.value = v.key; o.textContent = v.label; vs.appendChild(o); });
     try { var saved = localStorage.getItem('sbl-teacher-view'); if (saved && VIEWS.some(function (v) { return v.key === saved; })) current.view = saved; } catch (e) {}
-    try { var lu = localStorage.getItem('sbl-teacher-unit'); if (lu && VIEWS.some(function (v) { return v.key === lu && v.src; })) current.lastUnit = lu; } catch (e) {}
+    try { var lu = localStorage.getItem('sbl-teacher-unit'); if (lu && VIEWS.some(function (v) { return v.key === lu && (v.src || v.games); })) current.lastUnit = lu; } catch (e) {}
     if (current.view !== 'ppq') current.lastUnit = current.view;
     vs.value = current.lastUnit;
-    vs.addEventListener('change', function () { current.view = current.lastUnit = vs.value; try { localStorage.setItem('sbl-teacher-view', vs.value); localStorage.setItem('sbl-teacher-unit', vs.value); } catch (e) {} showView(); });
+    vs.addEventListener('change', function () { current.view = current.lastUnit = vs.value; try { localStorage.setItem('sbl-teacher-view', vs.value); localStorage.setItem('sbl-teacher-unit', vs.value); } catch (e) {} if (needsReload()) loadStudents(); else showView(); });
     $('paperSel').addEventListener('change', function () { current.paper = this.value; cols = ppqColumns(); render(); });
     $('tabLessons').addEventListener('click', function () { setMode('lessons'); });
     $('tabFull').addEventListener('click', function () { setMode('ppq'); });
@@ -139,10 +140,17 @@
     $('teacherField').hidden = false;
   }
 
+  // KS3 students are not assigned to a teacher, so for the KS3 view an
+  // admin on "My students" sees every student (filter with Class).
+  function wantAll() { return isAdmin && (viewing === 'all' || (!viewing && isGames())); }
+  function isGames() { var v = VIEWS.filter(function (x) { return x.key === current.view; })[0]; return !!(v && v.games); }
+  var loadedAll = null;
+  function needsReload() { return loadedAll !== null && loadedAll !== wantAll(); }
   function loadStudents() {
     $('sheetWrap').innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">Loading students…</div>';
+    loadedAll = wantAll();
     var url = '/api/progress?myStudents=1&sheet=1' +
-      (isAdmin && viewing === 'all' ? '&all=1' : isAdmin && viewing ? '&teacherId=' + encodeURIComponent(viewing) : '');
+      (loadedAll ? '&all=1' : isAdmin && viewing ? '&teacherId=' + encodeURIComponent(viewing) : '');
     fetch(url)
       .then(function (r) {
         if (!r.ok) return r.json().then(function (d) { throw new Error(d.error || 'Could not load your students.'); });
@@ -246,6 +254,7 @@
     var view = VIEWS.filter(function (v) { return v.key === current.view; })[0];
     if ($('tabFull')) paintTabs();
     if (view.key === 'ppq') { cols = ppqColumns(); render(); return; }
+    if (view.games) { cols = GAME_PARTS; render(); return; }
     $('sheetWrap').innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">Loading lessons…</div>';
     lessonsFor(view).then(function (list) { if (current.view === view.key) { cols = list; render(); } });
   }
@@ -281,7 +290,61 @@
     return f;
   }
 
+  // ---- KS3 games mark book: one column per part of World Map Challenge ----
+  var GAME_ID = 'GAME:world-map-challenge';
+  var GAME_PARTS = [
+    { id: 'find', title: 'Find it' }, { id: 'name', title: 'Name it' }, { id: 'co', title: 'Continents & oceans' },
+    { id: 'cf', title: 'Capitals & flags' }, { id: 'phys', title: 'Physical features' }, { id: 'explore', title: 'Explore the map' }
+  ];
+  function gameOf(s) { var c = (s.cells || {})[GAME_ID]; return c && c.game ? c.game : null; }
+  function gameAvg(g) {
+    if (!g) return null; var t = 0, n = 0;
+    GAME_PARTS.forEach(function (p) { var m = g.parts[p.id]; if (m && m.lm) { t += m.ls / m.lm * 100; n++; } });
+    return n ? Math.round(t / n) : null;
+  }
+  function gameLast(g) {
+    if (!g) return null; var last = g.exploredAt || '';
+    Object.keys(g.parts).forEach(function (k) { if ((g.parts[k].at || '') > last) last = g.parts[k].at; });
+    return last || null;
+  }
+  function renderGames(list) {
+    var wrap = $('sheetWrap');
+    var active = 0, sum = 0, n = 0, played = 0;
+    list.forEach(function (s) {
+      var g = gameOf(s), last = gameLast(g), a = gameAvg(g);
+      if (g) played++;
+      if (last && Date.now() - new Date(last).getTime() <= 7 * DAY) active++;
+      if (a != null) { sum += a; n++; }
+    });
+    var stat = function (b, t) { return '<div class="cs-stat"><b>' + b + '</b><span>' + t + '</span></div>'; };
+    $('stats').innerHTML = stat(list.length, 'students') + stat(played, 'have played World Map Challenge') + stat(active, 'played in the last 7 days') + stat(n ? Math.round(sum / n) + '%' : '—', 'average latest score');
+    if (!students.length) { wrap.innerHTML = '<div class="sbl-empty-state" style="padding:2rem;">No students found.</div>'; $('sheetNote').textContent = ''; return; }
+    var h = '<tr><th class="cs-name">Student</th>' + GAME_PARTS.map(function (p) { return '<th class="cs-lessonhead cs-groupstart"><i>World Map Challenge</i>' + esc(p.title) + '</th>'; }).join('') +
+      '<th class="cs-groupstart">Average</th><th>Last played</th></tr>';
+    var body = list.map(function (s) {
+      var g = gameOf(s);
+      var r = '<tr><td class="cs-name"><button type="button" class="cs-who" data-student="' + esc(s.id) + '" title="See all of this student’s work">' + esc(s.fullName || s.email) + '</button><small>' + esc(s.groupName || '') + '</small></td>';
+      GAME_PARTS.forEach(function (p) {
+        if (p.id === 'explore') {
+          r += g && g.explored ? '<td class="cs-cell cs-groupstart" title="Places clicked on in Explore the map">' + g.explored + ' places</td>' : '<td class="cs-cell cs-empty cs-groupstart">·</td>';
+          return;
+        }
+        var m = g && g.parts[p.id];
+        if (!m || !m.lm) { r += '<td class="cs-cell cs-empty cs-groupstart">·</td>'; return; }
+        var pct = Math.round(m.ls / m.lm * 100);
+        r += '<td class="cs-cell cs-groupstart ' + band(pct) + '" title="' + esc((m.lt || '') + ' · ' + m.ls + '/' + m.lm + ' · best ' + (m.bp != null ? m.bp + '%' : '—') + ' · played ' + (m.n || 1) + ' time(s)') + '">' + pct + '%<small>' + fmtDate(m.at) + ' · ' + (m.n || 1) + '×</small></td>';
+      });
+      var a = gameAvg(g);
+      r += '<td class="cs-sum cs-groupstart ' + band(a) + '">' + (a == null ? '—' : a + '%') + '</td><td>' + fmtDate(gameLast(g)) + '</td></tr>';
+      return r;
+    }).join('') || '<tr><td class="cs-name" style="color:var(--slate)">No students match.</td></tr>';
+    wrap.innerHTML = '<table class="cs-sheet"><thead>' + h + '</thead><tbody>' + body + '</tbody></table>';
+    wrap.querySelectorAll('button.cs-who').forEach(function (b) { b.addEventListener('click', function () { openStudent(b.dataset.student); }); });
+    $('sheetNote').textContent = 'Each score is the student’s most recent round in that part of World Map Challenge — it updates every time they play (hover for the round, best score and number of plays). Only rounds played while logged in are recorded.';
+  }
+
   function render() {
+    if (isGames()) { renderGames(visibleStudents()); return; }
     var list = visibleStudents();
     var isPPQ = current.view === 'ppq';
     var wrap = $('sheetWrap');
@@ -363,6 +426,28 @@
     list.forEach(function (s) { cols.forEach(function (c) { var cell = (s.cells || {})[c.id]; if (cell && c.total && cell.ibMax >= c.total) n++; }); });
     return n;
   }
+  function downloadGamesCsv() {
+    var q = function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+    var head = ['Student', 'Email', 'Class'];
+    GAME_PARTS.forEach(function (p) { head.push(p.title + (p.id === 'explore' ? ' — places' : ' — latest %'), p.title + ' — date'); });
+    head.push('Average %');
+    var lines = [head.map(q).join(',')];
+    visibleStudents().forEach(function (s) {
+      var g = gameOf(s), row = [s.fullName, s.email, s.groupName || ''];
+      GAME_PARTS.forEach(function (p) {
+        if (p.id === 'explore') { row.push(g ? g.explored || '' : '', g && g.exploredAt ? g.exploredAt.slice(0, 10) : ''); return; }
+        var m = g && g.parts[p.id];
+        row.push(m && m.lm ? Math.round(m.ls / m.lm * 100) : '', m && m.at ? m.at.slice(0, 10) : '');
+      });
+      var a = gameAvg(g); row.push(a == null ? '' : a);
+      lines.push(row.map(q).join(','));
+    });
+    var name = 'SBL mark book - ' + (current.cls === '__all' ? 'all students' : current.cls) + ' - KS3 Geography.csv';
+    var blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name.replace(/[\\/:*?"<>|]/g, '-');
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+
   function renderStats(list) {
     var active = 0, qSum = 0, qN = 0, aw = 0, mx = 0, flagged = 0;
     list.forEach(function (s) {
@@ -411,6 +496,18 @@
       var html = '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">' + esc(s.email || '') +
         (s.assignments && s.assignments.length ? ' · ' + esc(s.assignments.map(function (a) { return a.subject + ' – ' + a.teacher; }).join(', ')) : '') + '</div>';
       if (!ids.length) html += '<div class="cs-block">No saved work yet.</div>';
+      // Game scores (KS3): one row per part of the game, latest round first.
+      ids.filter(function (id) { return id.indexOf('GAME:') === 0; }).forEach(function (id) {
+        var G = lessons[id] || {};
+        html += '<div class="cs-block"><h3>KS3 Geography · World Map Challenge</h3><table class="cs-mini"><thead><tr><th>Part</th><th>Latest</th><th>Best</th><th>Plays</th></tr></thead><tbody>' +
+          GAME_PARTS.map(function (pt) {
+            if (pt.id === 'explore') return '<tr><td>' + esc(pt.title) + '</td><td colspan="3">' + (G.explore && G.explore.n ? G.explore.n + ' places explored' : '·') + '</td></tr>';
+            var m = G['m:' + pt.id]; if (!m || !m.lm) return '<tr><td>' + esc(pt.title) + '</td><td>·</td><td>·</td><td>·</td></tr>';
+            var lp = Math.round(m.ls / m.lm * 100);
+            return '<tr><td>' + esc(pt.title) + '<small>' + esc(m.lt || '') + ' · ' + fmtDate(m.at) + '</small></td><td class="' + band(lp) + '">' + m.ls + '/' + m.lm + '</td><td class="' + band(m.bp) + '">' + (m.bp != null ? m.bp + '%' : '·') + '</td><td>' + (m.n || 1) + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      });
+      ids = ids.filter(function (id) { return id.indexOf('GAME:') !== 0; });
       var lastView = null;
       ids.forEach(function (id) {
         var v = viewOf(id);
@@ -497,6 +594,7 @@
 
   // ---- CSV of the current view ----
   function downloadCsv() {
+    if (isGames()) return downloadGamesCsv();
     var isPPQ = current.view === 'ppq';
     var q = function (v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
     var head = ['Student', 'Email', 'Class'];

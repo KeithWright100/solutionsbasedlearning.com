@@ -216,6 +216,13 @@ async function handleMyStudents(req, res, session, supabase) {
     if (wantSheet) {
       const d0 = row.data || {};
       const cell = { tmk: null, sr: null, ibAwarded: 0, ibMax: 0, ibCount: 0, page: null, updated: row.updated_at };
+      // Games (e.g. KS3 World Map Challenge): the running mark for each
+      // part of the game ("m:find" …) and the number of places explored.
+      if (String(row.lesson_id).indexOf('GAME:') === 0) {
+        const parts = {};
+        Object.keys(d0).forEach((k) => { if (k.indexOf('m:') === 0 && d0[k] && typeof d0[k] === 'object') parts[k.slice(2)] = d0[k]; });
+        cell.game = { parts, explored: d0.explore && typeof d0.explore.n === 'number' ? d0.explore.n : 0, exploredAt: d0.explore ? d0.explore.at || null : null };
+      }
       if (d0.quiz_test_my_knowledge && typeof d0.quiz_test_my_knowledge.pct === 'number') cell.tmk = d0.quiz_test_my_knowledge.pct;
       if (d0.quiz_spaced_retrieval && typeof d0.quiz_spaced_retrieval.pct === 'number') cell.sr = d0.quiz_spaced_retrieval.pct;
       Object.keys(d0).forEach((k) => {
