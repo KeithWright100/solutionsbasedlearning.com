@@ -303,9 +303,57 @@ function matchCountry(input) {
 
 // ---------- storage ----------
 var KEY = "sbl-world-map-challenge-v1";
-var S = { xp: 0, best: {}, badges: {}, regionsDone: {} };
+var S = { xp: 0, best: {}, badges: {}, regionsDone: {}, explored: {} };
 try { var raw = localStorage.getItem(KEY); if (raw) { var p = JSON.parse(raw); if (p && typeof p === "object") S = Object.assign(S, p); } } catch (e) {}
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+if (!S.explored) S.explored = {};
+
+// ---------- SBL account scores ----------
+// The game stays open to everyone and still saves in the browser. If the
+// player is logged in to SBL, each round's best score is also saved to
+// their account (shown on My scores), and scores saved on another device
+// come back here. Saved as lesson "GAME:world-map-challenge", one key per
+// round ("r:find|W|1") plus "explore" — progress.js merges top-level keys.
+var ACCT_ID = "GAME:world-map-challenge";
+var acct = null;
+function acctPost(patch) {
+  if (!acct) return;
+  try {
+    fetch("/api/progress", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lessonId: ACCT_ID, patch: patch }) })
+      .then(function (r) { if (r.status === 401) acct = null; }, function () {});
+  } catch (e) {}
+}
+function acctLoad() {
+  if (!window.fetch) return;
+  fetch("/api/progress?lessonId=" + encodeURIComponent(ACCT_ID), { credentials: "same-origin" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d) return;
+      acct = (d && d.data) || {};
+      var changed = false;
+      Object.keys(acct).forEach(function (k) {
+        if (k.indexOf("r:") !== 0) return;
+        var a = acct[k], rk = k.slice(2), b = S.best[rk];
+        if (a && (!b || a.st > b.stars || (a.st === b.stars && a.s > b.score))) { S.best[rk] = { stars: a.st, score: a.s, max: a.m }; changed = true; }
+      });
+      if (acct.explore && acct.explore.ids) acct.explore.ids.forEach(function (id) { if (!S.explored[id]) { S.explored[id] = 1; changed = true; } });
+      if (changed) { save(); if (app.querySelector(".modes")) home(); }
+      // Push scores earned while logged out (this browser) up to the account.
+      var up = {};
+      Object.keys(S.best).forEach(function (rk) {
+        var b = S.best[rk], a = acct["r:" + rk];
+        if (b.max && (!a || b.stars > a.st || (b.stars === a.st && b.score > a.s))) up["r:" + rk] = { t: titleForKey(rk), mode: rk.split("|")[0], s: b.score, m: b.max, st: b.stars, n: a ? a.n : 1, ls: b.score, at: new Date().toISOString() };
+      });
+      if (Object.keys(up).length) { Object.assign(acct, up); acctPost(up); }
+    }, function () {});
+}
+var exploreTimer = null;
+function markExplored(id) {
+  if (!id || S.explored[id]) return;
+  S.explored[id] = 1; save();
+  clearTimeout(exploreTimer);
+  exploreTimer = setTimeout(function () { acctPost({ explore: { ids: Object.keys(S.explored), n: Object.keys(S.explored).length, at: new Date().toISOString() } }); }, 1500);
+}
 
 var RANKS = [[0, "Map Rookie"], [150, "Navigator"], [400, "Pathfinder"], [800, "Explorer"], [1400, "Cartographer"], [2200, "Globetrotter"], [3200, "World Expert"]];
 var BADGES = [
@@ -615,21 +663,27 @@ var MODES = {
   co: { emo: "🌊", name: "Continents & oceans", desc: "The seven continents, five oceans and the key lines of latitude." },
   cf: { emo: "🏳️", name: "Capitals & flags", desc: "Match countries to their capital cities and flags, then see where they are." },
   phys: { emo: "⛰️", name: "Physical features", desc: "Mountains, rivers, lakes, deserts, seas and islands. Find them on the map or name the one that is highlighted." },
-  explore: { emo: "🔍", name: "Explore the map", desc: "No scores. Click any country or physical feature to learn about it, or search for one." }
+  explore: { emo: "🔍", name: "Explore the map", desc: "Click any country or physical feature to learn about it, or search for one. Counts how many places you have explored." }
 };
+function modeScore(m) {
+  var s = 0, mx = 0, n = 0;
+  Object.keys(S.best).forEach(function (k) { var b = S.best[k]; if (k.indexOf(m + "|") === 0 && b.max) { s += b.score; mx += b.max; n++; } });
+  return n ? { pct: Math.round(s / mx * 100), n: n } : null;
+}
 function modeStars(m) {
   var n = 0; Object.keys(S.best).forEach(function (k) { if (k.indexOf(m + "|") === 0) n += S.best[k].stars || 0; }); return n;
 }
 function home() {
   var cards = Object.keys(MODES).map(function (m) {
-    var M = MODES[m], st = modeStars(m);
+    var M = MODES[m], st = modeStars(m), sc = modeScore(m), exN = Object.keys(S.explored).length;
     return '<button class="mode" data-mode="' + m + '"><span class="emo">' + M.emo + '</span><b>' + M.name + '</b><small>' + M.desc + '</small>' +
-      (m === "explore" ? '<span class="prog">Free play</span>' : '<span class="prog">' + (st ? "★ " + st + " stars earned" : "Not started yet") + "</span>") + "</button>";
+      (m === "explore" ? '<span class="prog">' + (exN ? exN + " place" + (exN > 1 ? "s" : "") + " explored" : "Free play") + '</span>' :
+        '<span class="prog">' + (st || sc ? (sc ? "Score " + sc.pct + "% · " + sc.n + " round" + (sc.n > 1 ? "s" : "") + " · " : "") + "★ " + st : "Not started yet") + "</span>") + "</button>";
   }).join("");
   setScreen('<section class="hero"><span class="kicker">KS3 Geography · Map skills</span><h1>World Map Challenge</h1>' +
     '<p>How well do you know the world? Find and name countries, learn the continents and oceans, track down mountains, rivers, lakes and deserts, and test yourself on capitals and flags. Start with the famous ones, then work up to tiny islands.</p></section>' +
     '<div class="modes">' + cards + '</div>' +
-    '<p class="teacher"><b>For teachers:</b> each mode has three levels (famous, harder, expert) and can be played for the whole world or one continent at a time. Progress and XP are saved in the student\'s own browser only. Country borders follow Natural Earth; some borders are disputed.</p>');
+    '<p class="teacher"><b>For teachers:</b> each mode has three levels (famous, harder, expert) and can be played for the whole world or one continent at a time. Progress and XP are saved in the browser; students who are logged in to SBL also get their best score for every round saved to their account (see <a href="/humanities-hub/my-scores">My scores</a>). Country borders follow Natural Earth; some borders are disputed.</p>');
   app.querySelectorAll("[data-mode]").forEach(function (b) { b.onclick = function () { var m = b.getAttribute("data-mode"); if (m === "explore") explore(); else setup(m); }; });
 }
 
@@ -730,6 +784,10 @@ function start(key) {
   ask();
 }
 function regionName(r) { for (var i = 0; i < REGIONS.length; i++) if (REGIONS[i][0] === r) return REGIONS[i][1]; return r; }
+function titleForKey(k) {
+  var p = k.split("|"), keep = R; R = { mode: p[0], region: p[1], lvl: p[2] };
+  var t; try { t = roundTitle(); } catch (e) { t = k; } R = keep; return t;
+}
 function roundTitle() {
   var M = MODES[R.mode], lv = R.lvl;
   var names = { "1": "Level 1", "2": "Level 2", "3": "Level 3", M: "Marathon", c1: "Capitals 1", c2: "Capitals 2", c3: "Capitals 3", f1: "Flags 1", f2: "Flags 2", f3: "Flags 3", cont: "Continents", ocean: "Oceans", lines: "Lines of latitude", mix: "Mixed challenge" };
@@ -1058,7 +1116,18 @@ function finish() {
   var n = R.results.length, max = n * 10, pct = max ? R.score / max : 0, stars = starsFor(pct);
   var prev = S.best[R.key];
   var countable = !R.marathon || n === R.qs.length;
-  if (countable && (!prev || stars > prev.stars || (stars === prev.stars && R.score > prev.score))) S.best[R.key] = { stars: stars, score: R.score };
+  if (countable && (!prev || stars > prev.stars || (stars === prev.stars && R.score > prev.score))) S.best[R.key] = { stars: stars, score: R.score, max: max };
+  if (countable && n && acct) {
+    var a0 = acct["r:" + R.key], better = !a0 || stars > a0.st || (stars === a0.st && R.score > a0.s);
+    var entry = { t: roundTitle(), mode: R.mode, s: better ? R.score : a0.s, m: better ? max : a0.m, st: better ? stars : a0.st, n: (a0 ? a0.n || 0 : 0) + 1, ls: R.score, lm: max, at: new Date().toISOString() };
+    acct["r:" + R.key] = entry; var pt = {}; pt["r:" + R.key] = entry;
+    // One running mark per part of the game: the latest round's score
+    // replaces the last one (plus the best % so far and number of plays).
+    var m0 = acct["m:" + R.mode] || {}, pctNow = max ? Math.round(R.score / max * 100) : 0;
+    var me = { ls: R.score, lm: max, lp: pctNow, lt: roundTitle(), at: entry.at, n: (m0.n || 0) + 1, bp: Math.max(m0.bp || 0, pctNow) };
+    acct["m:" + R.mode] = me; pt["m:" + R.mode] = me;
+    acctPost(pt);
+  }
   var bonus = countable && n ? stars * 5 : 0;
   var newB = [];
   function award(b) { if (!S.badges[b]) { S.badges[b] = 1; newB.push(b); } }
@@ -1111,6 +1180,7 @@ function explore() {
     if (!k) { curMap.overlay(""); return; }
     if (k.charAt(0) === "t") { curMap.overlay("<div><b>" + esc(keyName(k)) + "</b><span>A territory, not an independent country.</span></div>"); return; }
     var c = C[k]; if (!c) return;
+    markExplored(k);
     curMap.cls(k, "target"); curMap.label(k, c.name, "", 15);
     if (k === "010") { curMap.overlay("<div><b>Antarctica</b><span>" + CONT.AN.fact + "</span></div>"); return; }
     curMap.overlay('<img alt="Flag of ' + esc(c.name) + '" src="' + flagUrl(c.iso, 160) + '"><div><b>' + esc(c.name) + "</b><span>Capital: " + esc(c.cap) + "<br>Continent: " + CONT[c.cont].name + "</span></div>");
@@ -1144,6 +1214,7 @@ function explorePhys() {
     curMap.clearCls(["target"]); curMap.clearLabels();
     if (!k || k.indexOf("p:") !== 0) { curMap.overlay(""); return; }
     var o = PH[k.slice(2)];
+    markExplored(k);
     curMap.cls(k, "target"); curMap.label(k, o.name, "", 15);
     curMap.overlay("<div><b>" + esc(o.name) + "</b><span>" + PCATS[o.cat].emo + " " + PCATS[o.cat].name + "<br>" + esc(o.fact) + "</span></div>");
   }
@@ -1163,9 +1234,10 @@ function explorePhys() {
   }; });
 }
 
-if (DEBUG) window.__wm = { PH: PH, C: C, matchCountry: matchCountry, R: function () { return R; }, start: start, S: S };
+if (DEBUG) window.__wm = { PH: PH, C: C, matchCountry: matchCountry, R: function () { return R; }, start: start, S: S, finish: finish, home: home };
 hud();
 home();
+acctLoad();
 })();
 </script>
 <script>
