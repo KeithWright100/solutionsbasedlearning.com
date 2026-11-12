@@ -9,6 +9,37 @@
 (function () {
   var state = { pending: [], rejected: [], users: [], teachers: [], feedback: [] };
 
+
+  // In-page confirm box. Used instead of the browser's confirm(), which
+  // Chrome lets you switch off ("Don't allow this site to prompt again")
+  // — after that every confirm() silently answers Cancel, so buttons
+  // seemed to do nothing. Resolves to the chosen value (null = cancel).
+  function sblAsk(message, buttons, isHtml) {
+    buttons = buttons || [[true, 'Yes'], [null, 'Cancel']];
+    return new Promise(function (resolve) {
+      var wrap = document.createElement('div');
+      wrap.className = 'sbl-ask-backdrop';
+      wrap.innerHTML = '<div class="sbl-ask" role="dialog" aria-modal="true"><p></p><div class="sbl-ask-btns"></div></div>';
+      var p = wrap.querySelector('p');
+      if (isHtml) p.innerHTML = message; else p.textContent = message;
+      var row = wrap.querySelector('.sbl-ask-btns');
+      function close(v) { document.removeEventListener('keydown', onKey); wrap.remove(); resolve(v); }
+      function onKey(e) { if (e.key === 'Escape') close(null); }
+      buttons.forEach(function (b, i) {
+        var el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'sbl-btn sbl-btn--small ' + (b[0] === null ? 'sbl-btn--secondary' : 'sbl-btn--primary');
+        el.textContent = b[1];
+        el.addEventListener('click', function () { close(b[0]); });
+        row.appendChild(el);
+      });
+      wrap.addEventListener('click', function (e) { if (e.target === wrap) close(null); });
+      document.addEventListener('keydown', onKey);
+      document.body.appendChild(wrap);
+      row.querySelector('button').focus();
+    });
+  }
+
   var pageError = document.getElementById('pageError');
   var pageNotice = document.getElementById('pageNotice');
 
@@ -250,7 +281,7 @@
   document.getElementById('approveSelected').addEventListener('click', function () {
     var ids = Object.keys(selected);
     if (!ids.length || bulkRunning) return;
-    if (!confirm('Approve ' + ids.length + ' application' + (ids.length > 1 ? 's' : '') + '? Each person gets an account and an activation email.')) return;
+    sblAsk('Approve ' + ids.length + ' application' + (ids.length > 1 ? 's' : '') + '? Each person gets an account and an activation email.').then(function (ok) { if (!ok) return;
     clearMessages();
     bulkRunning = true;
     var btn = document.getElementById('approveSelected');
@@ -276,6 +307,7 @@
       if (failed.length) showError(msg + ' Not approved: ' + failed.join('; '));
       else showNotice(msg + ' Activation emails have been sent.');
       loadData();
+    });
     });
   });
 
@@ -634,7 +666,7 @@
   }
 
   function handleApprove(id, btn) {
-    if (!confirm('Approve this application? An account will be created and an activation email will be sent.')) return;
+    sblAsk('Approve this application? An account will be created and an activation email will be sent.').then(function (ok) { if (!ok) return;
     clearMessages();
     withButtonBusy(btn, 'Approving…', function () {
       return approveRequest(id).then(function (r) {
@@ -644,12 +676,12 @@
         loadData();
       });
     });
+    });
   }
 
   function handleReject(id, btn) {
-    if (!confirm('Reject this application? The applicant will be notified by email.')) return;
-    var isDuplicate = confirm('Is this because the applicant already has an SBL account (e.g. they re-applied after trouble logging in)?\n\nOK — send the "you already have an account, use Forgot password" email.\nCancel — send the standard rejection email instead.');
-    var reason = isDuplicate ? 'duplicate' : 'general';
+    sblAsk('Reject this application? The applicant will be notified by email.').then(function (ok) { if (!ok) return;
+    return sblAsk('Which email should the applicant get?', [['general', 'Standard rejection'], ['duplicate', 'Already has an account (use Forgot password)'], [null, 'Cancel']]).then(function (reason) { if (!reason) return;
     clearMessages();
     withButtonBusy(btn, 'Rejecting…', function () {
       return postJson('/api/admin/action', { action: 'reject', applicationId: id, reason: reason }).then(function (result) {
@@ -658,11 +690,13 @@
         loadData();
       });
     });
+    });
+    });
   }
 
   function handleSuspendToggle(userId, suspend, btn) {
     var verb = suspend ? 'suspend' : 'reactivate';
-    if (!confirm('Are you sure you want to ' + verb + ' this user?')) return;
+    sblAsk('Are you sure you want to ' + verb + ' this user?').then(function (ok) { if (!ok) return;
     clearMessages();
     withButtonBusy(btn, suspend ? 'Suspending…' : 'Reactivating…', function () {
       return postJson('/api/admin/action', { action: 'suspend', userId: userId, suspend: suspend }).then(function (result) {
@@ -671,10 +705,11 @@
         loadData();
       });
     });
+    });
   }
 
   function handleDelete(userId, name, btn) {
-    if (!confirm('Permanently delete ' + name + '’s account? This cannot be undone.')) return;
+    sblAsk('Permanently delete ' + name + '’s account? This cannot be undone.').then(function (ok) { if (!ok) return;
     clearMessages();
     withButtonBusy(btn, 'Deleting…', function () {
       return postJson('/api/admin/action', { action: 'delete-user', userId: userId }).then(function (result) {
@@ -683,13 +718,14 @@
         loadData();
       });
     });
+    });
   }
 
   function handleSetRole(userId, role, btn) {
     var verb = role === 'teacher' ? 'make this user a teacher'
       : role === 'student' ? 'make this account a student'
       : 'change this account back to a regular user';
-    if (!confirm('Are you sure you want to ' + verb + '?')) return;
+    sblAsk('Are you sure you want to ' + verb + '?').then(function (ok) { if (!ok) return;
     clearMessages();
     withButtonBusy(btn, 'Updating…', function () {
       return postJson('/api/admin/action', { action: 'set-role', userId: userId, role: role }).then(function (result) {
@@ -700,6 +736,7 @@
         loadData();
       });
     });
+    });
   }
 
   // Sends the same password-reset email the public "Forgot password?"
@@ -707,7 +744,7 @@
   // any user) is stuck signing in and would rather not, or can't,
   // use the self-service flow themselves.
   function handleResetPassword(userId, name, btn) {
-    if (!confirm('Send a password reset email to ' + name + '?')) return;
+    sblAsk('Send a password reset email to ' + name + '?').then(function (ok) { if (!ok) return;
     clearMessages();
     withButtonBusy(btn, 'Sending…', function () {
       return postJson('/api/admin/action', { action: 'reset-password', userId: userId }).then(function (result) {
@@ -715,17 +752,19 @@
         showNotice('Password reset email sent to ' + name + '.');
       });
     });
+    });
   }
 
   function handleTempPassword(userId, name, btn) {
-    if (!confirm('Give ' + name + ' a new temporary password now?\n\nTheir old password stops working. No email is sent — you tell them the new one.')) return;
+    sblAsk('Give ' + name + ' a new temporary password now?\n\nTheir old password stops working. No email is sent — you tell them the new one.').then(function (ok) { if (!ok) return;
     clearMessages();
     withButtonBusy(btn, 'Setting…', function () {
       return postJson('/api/admin/action', { action: 'temp-password', userId: userId }).then(function (result) {
         if (!result.ok) { showError(result.data.error || 'Could not set a temporary password.'); return; }
         showNotice(name + ' (' + result.data.email + ') can now log in with: ' + result.data.password + '  — they can change it with "Forgot password".');
-        window.prompt('New password for ' + name + ' — copy it now:', result.data.password);
+        sblAsk('New password for ' + name + ' (' + result.data.email + '):<code class="sbl-ask-code">' + escapeHtml(result.data.password) + '</code>Tell them this now — it is not shown again. They can change it with &ldquo;Forgot password&rdquo;.', [[true, 'Done']], true);
       }, function () { showError('No reply from the server. Please try again.'); });
+    });
     });
   }
 
