@@ -452,7 +452,7 @@
   // field like "SL Geography Grad'28", shown on that student's
   // teacher's /teacher/ roster. Saves on blur (same pattern as the
   // Teacher <select>, just for a text field — Enter blurs it too).
-  var GROUP_OPTIONS = ["IGCSE Grad '30", "IGCSE Grad '29", "IB Grad '28", "IB Grad '27"];
+  var GROUP_OPTIONS = ["KS3 Grad '33", "KS3 Grad '32", "KS3 Grad '31", "IGCSE Grad '30", "IGCSE Grad '29", "IB Grad '28", "IB Grad '27"];
   function renderGroupCell(u) {
     if (u.role !== 'student') return '—';
     var cur = u.group_name || '';
