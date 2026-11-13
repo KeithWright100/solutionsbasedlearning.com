@@ -20,7 +20,7 @@
   var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75) };
   // Suggested round-the-world route, east from Thailand and back again.
   var ORDER = ['malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'canada', 'california', 'colorado', 'mexico', 'andes', 'amazon', 'argentina',
-    'southafrica', 'congo', 'kenya', 'egypt', 'sahara', 'spain', 'france', 'uk', 'arctic', 'russia', 'saudi', 'uae', 'india', 'everest', 'china'];
+    'southafrica', 'congo', 'kenya', 'egypt', 'sahara', 'morocco', 'spain', 'italy', 'france', 'uk', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'india', 'everest', 'china', 'japan'];
   function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
   var SOON = {
     malaysia: soon('malaysia', 'Malaysia', 101.4, 4.5, 'longboat', '🚣', '#2563c9', '🌴', 'rainforest, tea plantations and palm oil'),
@@ -49,6 +49,11 @@
     uae: soon('uae', 'UAE', 55.3, 25.2, 'metro', '🚇', '#0f766e', '🏙️', 'Dubai’s artificial islands'),
     india: soon('india', 'India', 72.9, 19.1, 'train', '🚆', '#ea580c', '🌧️', 'the monsoon and Mumbai'),
     everest: soon('everest', 'Mount Everest', 86.9, 28, 'climb with Sherpa guides', '🧗', '#3b5ba8', '🏔️', 'the Himalaya'),
+    morocco: soon('morocco', 'Morocco', -7.6, 31.6, 'mule trek in the Atlas Mountains', '\uD83E\uDECF', '#b91c1c', '\uD83D\uDD4C', 'the Atlas Mountains and the desert edge'),
+    italy: soon('italy', 'Italy', 14.4, 40.8, 'Vespa scooter', '\uD83D\uDEF5', '#15803d', '\uD83C\uDF0B', 'Vesuvius and Venice\u2019s floods'),
+    mongolia: soon('mongolia', 'Mongolia', 106.9, 47.9, 'horse ride across the steppe', '\uD83D\uDC0E', '#0369a1', '\u26FA', 'steppe grasslands and nomadic herders'),
+    kazakhstan: soon('kazakhstan', 'Kazakhstan', 61, 45, 'jeep to the Aral Sea', '\uD83D\uDE99', '#0e7490', '\uD83D\uDCA7', 'the shrinking Aral Sea'),
+    japan: soon('japan', 'Japan', 139.7, 35.7, 'bullet train', '\uD83D\uDE84', '#be123c', '\uD83D\uDDFE', 'earthquakes, tsunamis and an ageing population'),
     china: soon('china', 'China', 111, 30.8, 'river cruise', '🚢', '#b91c1c', '🐉', 'the Three Gorges Dam')
   };
   var KEY = 'sbl-tww-' + TIER;
@@ -131,6 +136,7 @@
   '@keyframes twSway{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}' +
   '#tww .drip{animation:twDrip 1.6s ease-in infinite}@keyframes twDrip{0%{transform:translateY(0);opacity:1}80%{opacity:1}100%{transform:translateY(40px);opacity:0}}' +
   '.tw-note{color:#4b6378;font-size:.9rem}' +
+  '.tw-swim2{animation:twSwim2 16s linear infinite}.tw-swim2.r{animation-direction:reverse}@keyframes twSwim2{from{transform:translateX(-160px)}to{transform:translateX(980px)}}' +
   '.tw-cloud{animation:twDriftC linear infinite}@keyframes twDriftC{from{transform:translateX(-120px)}to{transform:translateX(1000px)}}' +
   '.tw-smoke{animation:twSmoke 4s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom left}@keyframes twSmoke{0%,100%{transform:translate(0,0) scale(1);opacity:.9}50%{transform:translate(10px,-6px) scale(1.15);opacity:.6}}' +
   '.tw-photo{margin:0 0 12px;border-radius:14px;overflow:hidden;background:#e3ebf2}.tw-photo img{display:block;width:100%;height:240px;object-fit:cover}.tw-photo figcaption{font-size:.72rem;color:#4b6378;padding:5px 10px;background:#f3f8fd}.tw-photo figcaption a{color:#075fa8}' +
@@ -275,11 +281,21 @@
   var SCENE_PATHS = {
     river: 'M-20 120 C 90 60, 170 170, 290 110 S 470 50, 560 115 S 760 175, 920 95',
     rail: 'M-20 168 C 150 168, 220 128, 360 128 S 560 160, 680 150 S 820 120, 920 122',
+    sea: 'M-20 70 C 120 60, 200 85, 330 72 S 560 58, 680 76 S 830 80, 920 66',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
   function sceneMarkup(d) {
     var type = d.scene || 'river', P2 = SCENE_PATHS[type], k, h = '';
-    if (type === 'rail') {
+    if (type === 'sea') {
+      h += '<rect width="900" height="220" fill="#bfe6ff"/><rect y="56" width="900" height="164" fill="#2f8fcf"/>';
+      h += '<path d="M0 120 C 150 105, 300 135, 450 118 S 750 105, 900 125 L900 220 L0 220 Z" fill="#53b8e0" opacity=".6"/>';
+      var cols = ['#ff8a65', '#ffd54f', '#ba68c8', '#66bb6a', '#f06292'];
+      for (k = 0; k < 34; k++) { var cx = k * 27 + 8, cy = 200 - (k * 13) % 24; h += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (7 + k % 4 * 2) + '" fill="' + cols[k % 5] + '" opacity=".9"/>'; }
+      h += '<g class="tw-swim2" fill="#ffb347"><path d="M120 150 q8 -5 16 0 q-8 5 -16 0 Z M136 150 l5 -4 v8 Z"/><path d="M140 162 q6 -4 12 0 q-6 4 -12 0 Z"/></g><g class="tw-swim2 r" fill="#7fe3ff"><path d="M600 140 q8 -5 16 0 q-8 5 -16 0 Z M616 140 l5 -4 v8 Z"/></g>';
+      h += '<path class="tw-flow" d="M-20 60 Q 30 52 80 60 T 180 60 T 280 60 T 380 60 T 480 60 T 580 60 T 680 60 T 780 60 T 880 60 T 980 60" fill="none" stroke="#e6f6ff" stroke-width="3" stroke-dasharray="30 30"/>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-34 -2 L30 -2 L22 10 L-28 10 Z" fill="#fff" stroke="#0f3a5c" stroke-width="2"/><rect x="-16" y="-14" width="22" height="12" rx="2" fill="#e6f6ff" stroke="#0f3a5c" stroke-width="2"/><rect x="-24" y="2" width="50" height="3" fill="#0f8a83"/><line x1="12" y1="-14" x2="12" y2="-28" stroke="#0f3a5c" stroke-width="2"/><path d="M12 -28 L26 -24 L12 -20 Z" fill="#b42318"/></g></g>';
+    } else if (type === 'rail') {
       h += '<rect width="900" height="220" fill="#cfe8ff"/>';
       h += '<g fill="#fff" opacity=".9"><g class="tw-cloud" style="animation-duration:38s"><ellipse cx="80" cy="30" rx="34" ry="11"/></g><g class="tw-cloud" style="animation-duration:52s;animation-delay:-20s"><ellipse cx="300" cy="22" rx="28" ry="9"/></g></g>';
       for (k = 0; k < 24; k++) { var bx = k * 39 - 6, bh = 50 + ((k * 37) % 70), col = ['#8aa4bf', '#6f8aa8', '#9db3c8', '#7a93ad'][k % 4]; h += '<rect x="' + bx + '" y="' + (190 - bh) + '" width="34" height="' + bh + '" fill="' + col + '"/>'; for (var w = 0; w < bh - 16; w += 14) h += '<rect x="' + (bx + 6) + '" y="' + (196 - bh + w) + '" width="6" height="6" fill="#f6e7a6" opacity=".8"/><rect x="' + (bx + 20) + '" y="' + (196 - bh + w) + '" width="6" height="6" fill="#f6e7a6" opacity=".6"/>'; }
@@ -305,7 +321,7 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano' }[type];
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
