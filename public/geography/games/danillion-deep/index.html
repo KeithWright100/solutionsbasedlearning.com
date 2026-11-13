@@ -62,6 +62,8 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--focus);outline-
 .modes a{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:2px solid #aac5dd;background:#fff;color:var(--navy);font-weight:900;text-decoration:none;box-shadow:0 2px 8px #173a5d1a}
 .modes a:hover{border-color:var(--blue)}.modes a[aria-current=page]{background:var(--navy);color:#fff;border-color:var(--navy)}
 .hidden{display:none!important}
+.daily-box{margin:16px auto;max-width:540px;background:#f3f8fd;border:2px dashed var(--blue);border-radius:14px;padding:14px}.daily-box pre{font:1.35rem/1.45 "Segoe UI",Arial,sans-serif;white-space:pre-wrap;margin:8px 0 12px;background:#fff;border-radius:10px;padding:10px 12px;text-align:left}
+.lvl[data-level="3"][aria-pressed=true]{background:#fff4c9;border-color:#e0a800}
 .levels{max-width:1180px;margin:16px auto 0;padding:0 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .lvl{flex:1 1 220px;max-width:300px;border:2px solid #aac5dd;background:#fff;border-radius:14px;padding:10px 18px;cursor:pointer;font:inherit;color:var(--navy);text-align:left;box-shadow:0 3px 10px #173a5d1a}
 .lvl span{display:block;font-weight:900;font-size:1.1rem}.lvl small{display:block;color:#4b6378;font-weight:700}
@@ -149,7 +151,7 @@ body.night .top{background:linear-gradient(120deg,#020817,#0b1f4a 60%,#163a7a)!i
 <nav class="modes" aria-label="Choose a version"><a href="/geography/games/danillion">&#127956;&#65039; Mountain climb</a><a href="/geography/games/danillion-deep" aria-current="page">&#127754; Trench dive</a></nav>
 <header class="top"><h1>&#127754; Danillion: Deep Dive</h1><p>Name one answer to each prompt before time runs out. Obvious answers sink a few metres. Rare answers take you down to the bottom of the Mariana Trench.</p></header>
 
-<nav class="levels" aria-label="Choose a level"><button type="button" class="lvl" data-level="1" aria-pressed="true"><span>Level 1 &#9728;&#65039;</span><small>World places &middot; 500 points to the bottom</small></button><button type="button" class="lvl" data-level="2" aria-pressed="false"><span>Level 2 &#127769;</span><small>Night dive &middot; harder &middot; 600 to the bottom</small></button></nav>
+<nav class="levels" aria-label="Choose a level"><button type="button" class="lvl" data-level="1" aria-pressed="true"><span>Level 1 &#9728;&#65039;</span><small>World places &middot; 500 points to the bottom</small></button><button type="button" class="lvl" data-level="2" aria-pressed="false"><span>Level 2 &#127769;</span><small>Night dive &middot; harder &middot; 600 to the bottom</small></button><button type="button" class="lvl" data-level="3" aria-pressed="false"><span>Daily &#11088;</span><small>Same 7 prompts for everyone today</small></button></nav>
 <main class="wrap" id="game">
 <section class="dash" aria-label="Game dashboard">
   <div class="stat">Prompt<strong id="sPrompt">&ndash;</strong></div>
@@ -255,6 +257,7 @@ body.night .top{background:linear-gradient(120deg,#020817,#0b1f4a 60%,#163a7a)!i
       <h2 id="endTitle">Dive complete</h2>
       <p class="rank" id="endRank"></p>
       <p id="endScore"></p>
+      <div class="daily-box hidden" id="dailyBox"><p><strong>&#11088; Share your Daily result</strong> and compare with your class. New prompts in <span id="dailyWhen"></span>.</p><pre id="shareText"></pre><p class="note" style="margin:-4px 0 10px">&#129000; deep cut &middot; &#129002; very rare &middot; &#128999; rare &middot; &#129001; good thinking &middot; &#128998; well known &middot; &#11036; obvious &middot; &#11035; missed</p><button class="btn blue" id="copyBtn" type="button">Copy result</button> <span id="copyMsg" class="note" role="status"></span></div>
       <table class="sum" id="sumTable"></table>
       <p class="note">Think one of your answers should have counted? Tell Mr Wright using the feedback button.</p>
       <div class="controls"><button class="btn" id="againBtn" type="button">Dive again with new prompts</button><button class="btn purple" id="nextLevelBtn" type="button">Try Level 2 &#127769; &rarr;</button></div>
@@ -269,9 +272,21 @@ body.night .top{background:linear-gradient(120deg,#020817,#0b1f4a 60%,#163a7a)!i
 
 const LEVELS={
  1:{name:'Level 1',sub:'World places',prompts:PROMPTS,pts:500,night:false,rules:'Level 1: well-known world places. Score 500 points to reach Challenger Deep.'},
- 2:{name:'Level 2',sub:'Night dive \u00b7 harder',prompts:PROMPTS2,pts:600,night:true,rules:'Level 2: a night dive with harder prompts on rivers, lakes, seas and borders. Score 600 points to reach Challenger Deep.'}
+ 2:{name:'Level 2',sub:'Night dive \u00b7 harder',prompts:PROMPTS2,pts:600,night:true,rules:'Level 2: a night dive with harder prompts on rivers, lakes, seas and borders. Score 600 points to reach Challenger Deep.'},
+ 3:{name:'Daily',sub:'Daily challenge',prompts:PROMPTS.concat(PROMPTS2),pts:550,night:false,daily:true,rules:'Daily challenge: the same 7 prompts for everyone today, mixed from both levels. You get one go per day. Score 550 points to reach Challenger Deep.'}
 };
 let level=1;
+/* ===== Daily challenge: same prompts for everyone, worked out from today's date (Bangkok time) ===== */
+const DAILY_KEY='sbl-danillion-daily';let dailyUnlocked=false;
+function todayKey(){try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok'}).format(new Date())}catch(e){return new Date(Date.now()+7*36e5).toISOString().slice(0,10)}}
+function hashStr(t){let h=2166136261;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function dailyDeck(){const r=rng(hashStr('danillion-'+todayKey()));const pick=(arr,n)=>{const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,n)};return pick(PROMPTS,4).concat(pick(PROMPTS2,3))}
+function getDaily(){try{const d=JSON.parse(localStorage.getItem(DAILY_KEY)||'null');return d&&d.date===todayKey()?d:null}catch(e){return null}}
+function saveDaily(fin){try{localStorage.setItem(DAILY_KEY,JSON.stringify({date:todayKey(),score:score,rows:log.map(r=>r.pts),done:!!fin}))}catch(e){}}
+const EMO={0:'\u2B1B',10:'\u2B1C',25:'\u{1F7E6}',40:'\u{1F7E9}',60:'\u{1F7E7}',80:'\u{1F7EA}',100:'\u{1F7E8}'};
+function shareText(sc,rows){const d=new Date(todayKey()+'T12:00:00');const ds=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});const rr=rows.slice();while(rr.length<PER_GAME)rr.push(0);return `Danillion Daily ${ds} \u{1F30A}\n${rr.map(p=>EMO[p]||EMO[0]).join('')}\n${sc} points \u00b7 ${altFor(sc).toLocaleString('en-GB')} m deep`}
+function untilTomorrow(){const day=864e5,off=7*36e5,now=Date.now(),next=Math.floor((now+off)/day+1)*day-off,m=Math.max(0,Math.round((next-now)/6e4));return Math.floor(m/60)+' h '+(m%60)+' min'}
 const PER_GAME=7,TIME=25,TRIES=3,SUMMIT=10935;
 const RARITY={10:'Obvious',25:'Well known',40:'Good thinking',60:'Rare',80:'Very rare',100:'Deep cut'};
 const ZONES=[[0,200,'Sunlight zone','Enough light for plants and plankton to photosynthesise','#3fa3dc'],[200,1000,'Twilight zone','Too dark for photosynthesis. Animals migrate up at night','#1d6aa3'],[1000,4000,'Midnight zone','No sunlight at all. Many animals make their own light','#123d70'],[4000,6000,'Abyssal zone','Near freezing, crushing pressure, flat abyssal plains','#0b274d'],[6000,SUMMIT+1,'Hadal zone','The deep ocean trenches, where one plate sinks under another','#061530']];
@@ -342,6 +357,13 @@ function drawClimber(alt){const p=pointAt(alt);$('climber').setAttribute('transf
 function ping(d){if(reduceMotion())return;const p=pointAt(d);const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p.x.toFixed(1));c.setAttribute('cy',p.y.toFixed(1));c.setAttribute('r',8);c.setAttribute('class','sonar');$('pings').appendChild(c);setTimeout(()=>c.remove(),1600)}
 setInterval(()=>{if(reduceMotion()||document.hidden)return;const p=pointAt(shownAlt);if(p.y<46)return;const b=document.createElementNS('http://www.w3.org/2000/svg','circle');b.setAttribute('cx',(p.x-18+Math.random()*8).toFixed(1));b.setAttribute('cy',(p.y-4).toFixed(1));b.setAttribute('r',(1.2+Math.random()*1.8).toFixed(1));b.setAttribute('class','bubble');$('bubbles').appendChild(b);setTimeout(()=>b.remove(),2600)},450);
 
+function showShare(on,sc,rows){$('dailyBox').classList.toggle('hidden',!on);if(!on)return;$('shareText').textContent=shareText(sc,rows);$('dailyWhen').textContent=untilTomorrow();$('copyMsg').textContent=''}
+function showDailyDone(d){clearInterval(tick);score=d.score;log=[];$('startPanel').classList.add('hidden');$('qPanel').classList.add('hidden');const ep=$('endPanel');ep.classList.remove('hidden');
+  $('endBadge').textContent='\u2705';$('endTitle').textContent='You have played today\u2019s Daily';$('endRank').textContent='';
+  $('endScore').innerHTML=`You scored <strong>${d.score} points</strong> today${d.done?'':' (you left part-way through)'}. Come back tomorrow for 7 new prompts, or practise on Level 1 or 2.`;
+  $('sumTable').innerHTML='';showShare(true,d.score,d.rows||[]);$('againBtn').textContent='Practise on Level 1';$('nextLevelBtn').classList.add('hidden');
+  updateDash();shownAlt=0;drawClimber(altFor(d.score));countAlt(altFor(d.score));ep.focus()}
+
 /* ===== Game state ===== */
 let deck=[],idx=0,score=0,tries=TRIES,timeLeft=TIME,tick=null,done=false,log=[];
 const altFor=s=>Math.min(SUMMIT,Math.round(s*SUMMIT/LEVELS[level].pts));
@@ -353,7 +375,8 @@ function updateDash(){$('sScore').textContent=score;$('sPrompt').textContent=dec
 const relaxed=()=>$('relaxed').checked;
 
 function start(){
-  deck=shuffle(LEVELS[level].prompts.slice()).slice(0,PER_GAME);idx=0;score=0;log=[];
+  if(LEVELS[level].daily){const d=getDaily();if(d&&!dailyUnlocked){showDailyDone(d);return}deck=dailyDeck()}else deck=shuffle(LEVELS[level].prompts.slice()).slice(0,PER_GAME);
+  idx=0;score=0;log=[];$('endTitle').textContent=END_TITLE;if(LEVELS[level].daily&&!dailyUnlocked)saveDaily(false);
   $('startPanel').classList.add('hidden');$('endPanel').classList.add('hidden');$('qPanel').classList.remove('hidden');
   shownAlt=0;$('sAlt').textContent='0 m';drawClimber(0);showPrompt();
 }
@@ -400,6 +423,7 @@ function finish(i,why,raw){
     $('resGain').textContent='+0 points';
     log.push({q:P.q,ans:why==='time'?'(time ran out)':why==='pass'?'(passed)':'(no valid answer)',pts:0});
   }
+  if(LEVELS[level].daily&&!dailyUnlocked)saveDaily(idx+1>=deck.length);
   const others=P.a.map((a,k)=>({a,k})).filter(o=>o.k!==i).sort((x,y)=>y.a[1]-x.a[1]);
   const top=others.slice(0,3).map(o=>`<li><strong>${o.a[0]}</strong> <span class="rarity r${o.a[1]}">${o.a[1]}</span></li>`).join('');
   const common=P.a.filter(a=>a[1]===10).map(a=>a[0]);
@@ -432,6 +456,7 @@ function end(){
   const nb=best==null||alt>best;if(nb)setBest(alt);showBest();
   $('endScore').innerHTML=`You scored <strong>${score} points</strong> and dived to <strong>${alt.toLocaleString('en-GB')} m</strong>.${nb&&best!=null?' <strong>New personal best!</strong>':''}${alt<SUMMIT?` You needed ${LEVELS[level].pts-score} more points to reach Challenger Deep.`:''}`;
   $('sumTable').innerHTML='<tr><th>Prompt</th><th>Your answer</th><th style="text-align:right">Points</th></tr>'+log.map(r=>`<tr><td>${r.q}</td><td>${r.ans}${r.pts?` <span class="rarity r${r.pts}">${RARITY[r.pts]}</span>`:''}</td><td class="p">${r.pts}</td></tr>`).join('');
+  showShare(LEVELS[level].daily,score,log.map(r=>r.pts));$('againBtn').textContent=LEVELS[level].daily?'Practise on Level 1':AGAIN_TXT;
   announce(`Dive complete. ${rank}. ${score} points, ${alt} metres.`);ep.focus();
 }
 
@@ -445,21 +470,26 @@ function setLevel(n,quiet){level=LEVELS[n]?n:1;const L=LEVELS[level];
   $('levelNote').innerHTML=L.rules.replace(/(\d+) points/,'<strong>$1 points</strong>')+' Challenger Deep, at the bottom of the Mariana Trench, is about 10,935 m below sea level.';
   clearInterval(tick);deck=[];idx=0;score=0;shownAlt=0;$('sAlt').textContent='0 m';updateDash();drawClimber(0);showBest();
   $('qPanel').classList.add('hidden');$('endPanel').classList.add('hidden');$('startPanel').classList.remove('hidden');
-  $('nextLevelBtn').classList.toggle('hidden',level>=Object.keys(LEVELS).length);
+  $('nextLevelBtn').classList.toggle('hidden',level!==1);
+  if(L.daily&&getDaily()&&!dailyUnlocked)$('levelNote').innerHTML+=' <strong>You have already played today\u2019s Daily. Press Start to see your result.</strong>';
   if(!quiet)announce(L.name+' selected. '+L.rules)}
 document.querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{const n=+b.dataset.level;if(n===level&&$('qPanel').classList.contains('hidden'))return;if(!$('qPanel').classList.contains('hidden')&&!confirm('Switch level? This dive will end.'))return;setLevel(n)});
 $('nextLevelBtn').onclick=()=>{setLevel(level+1);start()};
-$('startBtn').onclick=start;$('climbBtn').onclick=submit;$('passBtn').onclick=()=>finish(null,'pass');$('nextBtn').onclick=next;$('againBtn').onclick=start;
+$('startBtn').onclick=start;$('climbBtn').onclick=submit;$('passBtn').onclick=()=>finish(null,'pass');$('nextBtn').onclick=next;$('againBtn').onclick=()=>{if(LEVELS[level].daily)setLevel(1,true);start()};
+$('copyBtn').onclick=()=>{const t=$('shareText').textContent;const ok=()=>{$('copyMsg').textContent='Copied! Paste it to compare with your class.'};try{navigator.clipboard.writeText(t).then(ok,()=>{fallbackCopy(t);ok()})}catch(e){fallbackCopy(t);ok()}};
+function fallbackCopy(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
 $('answerInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&done&&document.activeElement!==$('nextBtn')&&!$('qPanel').classList.contains('hidden')&&$('result').style.display==='block'){e.preventDefault();next()}});
-setLevel(Math.min(2,Math.max(1,parseInt((location.search.match(/[?&]level=(\d)/)||[])[1]||'1',10))),true);
+const END_TITLE=$('endTitle').textContent,AGAIN_TXT=$('againBtn').textContent;
+setLevel(/[?&]daily\b/.test(location.search)?3:Math.min(3,Math.max(1,parseInt((location.search.match(/[?&]level=(\d)/)||[])[1]||'1',10))),true);
 </script>
 <script>
 /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
 (function () {
-  window.SBL_TEACHER_ADAPTER = { key: function () {
+  window.SBL_TEACHER_ADAPTER = { unlockLabel: 'Daily replays', unlock: function (on) { dailyUnlocked = !!on; }, key: function () {
     var h = '<p class="muted">Each game picks ' + PER_GAME + ' prompts at random from the chosen level. Points: 10 obvious, 25 well known, 40 good thinking, 60 rare, 80 very rare, 100 deep cut. Spelling slips of one or two letters are accepted.</p>';
-    Object.keys(LEVELS).forEach(function (lk) { var L = LEVELS[lk]; h += '<h2>' + L.name + ': ' + L.sub + ' (' + L.prompts.length + ' prompts, Challenger Deep at ' + L.pts + ' points)</h2>';
+    h += '<h2>Today\u2019s Daily (' + todayKey() + ')</h2><ol>' + dailyDeck().map(function (p) { return '<li>' + p.q + '</li>'; }).join('') + '</ol>';
+    Object.keys(LEVELS).forEach(function (lk) { var L = LEVELS[lk]; if (L.daily) return; h += '<h2>' + L.name + ': ' + L.sub + ' (' + L.prompts.length + ' prompts, Challenger Deep at ' + L.pts + ' points)</h2>';
     L.prompts.forEach(function (P, n) {
       h += '<h3>' + (n + 1) + '. ' + P.q + '</h3><table><tr><th>Answer</th><th>Points</th><th>Also accepted</th></tr>' +
         P.a.slice().sort(function (x, y) { return x[1] - y[1]; }).map(function (a) { return '<tr><td><b>' + a[0] + '</b></td><td>' + a[1] + '</td><td>' + (a[2] || []).join(', ') + '</td></tr>'; }).join('') + '</table>';
