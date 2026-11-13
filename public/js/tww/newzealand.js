@@ -62,6 +62,7 @@
     country: 'New Zealand',
     gateway: 'Christchurch',
     lonlat: [171.5, -43.2],
+    locator: { box: [163.5, 179.5, -47.5, -34], places: [['Auckland', 174.76, -36.85, 'l'], ['Rotorua', 176.25, -38.14, 'r'], ['Wellington', 174.78, -41.29, 'r'], ['Hokitika', 170.97, -42.72, 't'], ['Franz Josef', 170.18, -43.39, 'l'], ['Christchurch', 172.64, -43.53, 'r'], ['Southern Alps', 167.4, -46.3, 'a'], ['Tasman Sea', 168.0, -39.5, 'a']] },
     stamp: { colour: '#3a8fb7', icon: '⛰️' },
     transport: { name: 'jet boat', verb: 'Zoom', emoji: '🚤' },
     scene: 'braided',
@@ -190,6 +191,37 @@
               explain: 'Wairakei was the second geothermal power station in the world, after Larderello in Italy. Geothermal now supplies about a fifth of New Zealand’s electricity.' },
             { type: 'mcq', q: 'In dry years New Zealand burns more coal for electricity. How does geothermal help with this problem?', options: ['Its output does not depend on rainfall, so it balances low hydro lake levels', 'It refills hydro lakes with steam', 'It makes more rain fall', 'It stores electricity like a battery'], answer: 0,
               explain: 'Hydro depends on rain and snowmelt. When lakes are low, steady geothermal output reduces the need for coal and gas.' }
+          ]
+        }
+      },
+      {
+        id: 'people', title: 'People, farming and tourism', icon: '🧑‍🤝‍🧑',
+        tasks: {
+          ks3: [
+            { type: 'mcq', q: 'Who were the first people to settle in New Zealand, arriving by canoe about 700 years ago?', options: ['Māori, from eastern Polynesia', 'British settlers', 'Dutch sailors', 'Australian farmers'], answer: 0,
+              explain: 'Māori voyagers arrived from eastern Polynesia around 1300. Europeans arrived several hundred years later.' },
+            { type: 'mcq', q: 'In the 2023 Census, about what fraction of New Zealanders were of Māori descent?', options: ['About one in five', 'About one in a hundred', 'About half', 'Almost everyone'], answer: 0,
+              explain: '19.6% of people (nearly 1 million) were of Māori descent, and the Māori population is growing faster than the population as a whole.' },
+            { type: 'mcq', q: 'In 2024 about 3.3 million international visitors came to New Zealand. How important is tourism to the economy?', options: ['It is the second-biggest export earner, after dairy', 'It earns almost nothing', 'It is bigger than all other industries put together', 'Tourists are not allowed to spend money'], answer: 0,
+              explain: 'Money spent by overseas visitors counts as an export. Only dairy products earn New Zealand more.' },
+            { type: 'mcq', q: 'Dairy (milk, butter and cheese) is New Zealand’s biggest export. Many dairy farms on the Canterbury Plains use sprinklers to water their grass. Why?', options: ['The plains are in the rain shadow of the Southern Alps, so they are quite dry', 'It rains too much there', 'Cows only drink sprinkler water', 'The soil is frozen all year'], answer: 0,
+              explain: 'Christchurch gets only about 620 mm of rain a year. Irrigation keeps grass growing through dry summers so cows can be fed.' },
+            { type: 'sort', q: 'Places like Queenstown and Rotorua attract lots of tourists. Sort the effects of tourism.', bins: ['Positive', 'Negative'],
+              items: [['Jobs in hotels, cafés and adventure activities', 0], ['Money for local businesses', 0], ['Visitors pay to see Māori culture and performances', 0], ['Traffic and crowds in busy seasons', 1], ['House prices and rents pushed up', 1], ['Carbon emissions from long-haul flights', 1]],
+              explain: 'Tourism brings jobs and income and can support culture, but it also causes congestion, pushes up housing costs and adds emissions from flights.' }
+          ],
+          adv: [
+            { type: 'number', q: 'The 2023 Census counted 4.99 million residents, and 3.31 million international visitors arrived in 2024. How many visitors were there per resident? (2 decimal places)', answer: 0.66, tol: 0.01, unit: 'per resident',
+              explain: '3.31 ÷ 4.99 = 0.66, about two visitors for every three residents each year.' },
+            { type: 'mcq', q: 'The median age of people of Māori descent is about 27, compared with about 38 for all New Zealanders. What does this suggest?', options: ['A young, fast-growing population that will make up a larger share of future workers', 'An ageing population that will soon decline', 'That Māori migrate abroad at age 27', 'That birth rates are the same for all groups'], answer: 0,
+              explain: 'A younger age structure means more people about to enter working and parenting age, so the Māori share of the population will keep rising. This matters for planning schools, jobs and services.' },
+            { type: 'mcq', q: 'International arrivals fell to about 186,000 in 2021, when borders were closed during COVID-19. What does this show about tourism-dependent economies?', options: ['They are vulnerable to external shocks they cannot control', 'Tourism always recovers within a week', 'Border closures increase tourism income', 'Tourism has no link to employment'], answer: 0,
+              explain: 'Relying on tourism makes places like Queenstown and Rotorua vulnerable to pandemics, economic downturns and changes in flight costs. Diversifying the economy reduces that risk.' },
+            { type: 'mcq', q: 'Many Canterbury farms have switched from sheep to dairy, using more irrigation and fertiliser. Which environmental problem has grown as a result?', options: ['Nitrate pollution of rivers and groundwater from fertiliser and cow urine', 'Desertification of the West Coast', 'Rising sea levels', 'Volcanic eruptions'], answer: 0,
+              explain: 'Intensive dairying adds nitrogen that leaches into groundwater and rivers, causing algae growth and drinking-water concerns. Irrigation also puts pressure on rivers and aquifers.' },
+            { type: 'sort', q: 'Classify these impacts of tourism in New Zealand.', bins: ['Economic', 'Social', 'Environmental'],
+              items: [['Second-largest export earner', 0], ['Seasonal, often low-paid jobs', 0], ['Cultural tourism supports te reo Māori and traditions', 1], ['Housing shortages for local workers', 1], ['Pressure on fragile sites such as glaciers and national parks', 2], ['Emissions from international flights', 2]],
+              explain: 'Some impacts overlap, but income and jobs are economic, culture and housing are social, and pressure on landscapes and flight emissions are environmental.' }
           ]
         }
       }

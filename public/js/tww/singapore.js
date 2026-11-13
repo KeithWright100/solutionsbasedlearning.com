@@ -27,6 +27,7 @@
     country: 'Singapore',
     gateway: 'Singapore Changi Airport',
     lonlat: [103.8, 1.35],
+    locator: { box: [101.2, 106.0, -0.6, 4.0], places: [['Singapore', 103.82, 1.35, 'r'], ['Kuala Lumpur', 101.69, 3.14, 'r'], ['Batam', 104.03, 1.05, 'b'], ['MALAYSIA', 102.6, 2.6, 'a'], ['SUMATRA', 101.9, 0.2, 'a']] },
     stamp: { colour: '#c2410c', icon: '🏙️' },
     transport: { name: 'MRT train', verb: 'Ride', emoji: '🚇' },
     scene: 'rail',

@@ -49,6 +49,7 @@
     country: 'Indonesia',
     gateway: 'Yogyakarta',
     lonlat: [110.4, -7.5],
+    locator: { box: [104.5, 116.5, -10, -4], places: [['Jakarta', 106.85, -6.2, 't'], ['Mount Merapi', 110.44, -7.54, 't'], ['Yogyakarta', 110.37, -7.8, 'l'], ['Surabaya', 112.75, -7.25, 'r'], ['JAVA', 107.6, -7.35, 'a'], ['Indian Ocean', 110.5, -9.4, 'a']] },
     stamp: { colour: '#b42318', icon: '🌋' },
     transport: { name: 'volcano hike', verb: 'Hike', emoji: '🥾' },
     scene: 'trail',

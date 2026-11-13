@@ -34,6 +34,7 @@
     country: 'Australia',
     gateway: 'Cairns',
     lonlat: [147, -18],
+    locator: { box: [139, 157, -28.5, -9], places: [['Cairns', 145.77, -16.92, 'l'], ['Townsville', 146.82, -19.26, 'l'], ['Brisbane', 153.03, -27.47, 'l'], ['Great Barrier Reef', 150.5, -15.0, 'a'], ['QUEENSLAND', 143.5, -22.5, 'a'], ['Coral Sea', 153.5, -19.0, 'a']] },
     stamp: { colour: '#0f8a83', icon: '🐠' },
     transport: { name: 'dive boat', verb: 'Sail', emoji: '🤿' },
     scene: 'sea',

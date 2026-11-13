@@ -69,6 +69,7 @@
     country: 'Brazil',
     gateway: 'Manaus',
     lonlat: [-60.0, -3.1],
+    locator: { box: [-76, -45, -13, 5], rivers: [[[-73.25, -3.75], [-69.94, -4.25], [-64.7, -3.35], [-60.0, -3.15], [-55.5, -1.9], [-54.7, -2.45], [-52.6, -1.5], [-50.0, -0.2]]], places: [['Manaus', -60.02, -3.12, 'b'], ['Belém', -48.5, -1.45, 'l'], ['Amazon River', -57.5, -1.0, 'a'], ['BRAZIL', -55, -9, 'a'], ['Atlantic Ocean', -50.5, 4.0, 'a']] },
     stamp: { colour: '#1f7a3a', icon: '🦜' },
     transport: { name: 'canoe', verb: 'Paddle', emoji: '🛶' },
     scene: 'river',

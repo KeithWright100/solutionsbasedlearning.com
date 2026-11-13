@@ -26,6 +26,7 @@
     country: 'Malaysia',
     gateway: 'Kuala Lumpur',
     lonlat: [101.4, 4.5],
+    locator: { box: [98.3, 106.2, 0.6, 7.2], places: [['Kuala Lumpur', 101.69, 3.14, 'r'], ['Cameron Highlands', 101.38, 4.47, 'b'], ['Taman Negara', 102.4, 4.75, 'r'], ['Singapore', 103.82, 1.35, 'l'], ['Strait of Malacca', 99.9, 2.2, 'a']] },
     stamp: { colour: '#2563c9', icon: '🌴' },
     transport: { name: 'longboat', verb: 'Cruise', emoji: '🚣' },
     scene: 'river',

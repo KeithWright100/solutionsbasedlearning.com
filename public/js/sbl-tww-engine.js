@@ -17,11 +17,11 @@
   var RY = [0, .062, .124, .186, .248, .31, .372, .434, .4958, .5571, .6176, .6769, .7346, .7903, .8435, .8936, .9394, .9761, 1];
   function interp(t, lat) { var a = Math.min(Math.abs(lat), 89.9) / 5, i = Math.floor(a), f = a - i; return t[i] + (t[i + 1] - t[i]) * f; }
   function P(lon, lat) { return { x: 996 + 5.56 * lon * interp(RX, lat), y: 520.6 - (lat < 0 ? -1 : 1) * 516 * interp(RY, lat) }; }
-  var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75) };
+  var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75), lonlat: [100.5, 13.75] };
   // Suggested round-the-world route, east from Thailand and back again.
-  var ORDER = ['malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'canada', 'california', 'colorado', 'mexico', 'andes', 'amazon', 'argentina',
-    'southafrica', 'congo', 'kenya', 'egypt', 'sahara', 'morocco', 'spain', 'italy', 'france', 'uk', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'india', 'everest', 'china', 'japan'];
-  function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
+  var ORDER = ['malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'alaska', 'canada', 'california', 'colorado', 'mexico', 'costarica', 'panama', 'barbados', 'andes', 'amazon', 'argentina',
+    'southafrica', 'congo', 'kenya', 'egypt', 'sahara', 'morocco', 'spain', 'italy', 'france', 'uk', 'iceland', 'svalbard', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'oman', 'india', 'everest', 'bhutan', 'china', 'southkorea', 'japan'];
+  function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), lonlat: [lon, lat], theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
   var SOON = {
     malaysia: soon('malaysia', 'Malaysia', 101.4, 4.5, 'longboat', '🚣', '#2563c9', '🌴', 'rainforest, tea plantations and palm oil'),
     singapore: soon('singapore', 'Singapore', 103.8, 1.35, 'MRT train', '🚇', '#c2410c', '🏙️', 'a crowded island city'),
@@ -54,6 +54,15 @@
     mongolia: soon('mongolia', 'Mongolia', 106.9, 47.9, 'horse ride across the steppe', '\uD83D\uDC0E', '#0369a1', '\u26FA', 'steppe grasslands and nomadic herders'),
     kazakhstan: soon('kazakhstan', 'Kazakhstan', 61, 45, 'jeep to the Aral Sea', '\uD83D\uDE99', '#0e7490', '\uD83D\uDCA7', 'the shrinking Aral Sea'),
     japan: soon('japan', 'Japan', 139.7, 35.7, 'bullet train', '\uD83D\uDE84', '#be123c', '\uD83D\uDDFE', 'earthquakes, tsunamis and an ageing population'),
+    alaska: soon('alaska', 'Alaska', -149.9, 61.2, 'bush plane', '\uD83D\uDEE9\uFE0F', '#1e3a8a', '\uD83D\uDC3B', 'glaciers, permafrost and oil in the far north'),
+    costarica: soon('costarica', 'Costa Rica', -84.1, 9.9, 'zip line through the cloud forest', '\uD83C\uDF3F', '#15803d', '\uD83D\uDC38', 'rainforest, ecotourism and renewable energy'),
+    panama: soon('panama', 'Panama Canal', -79.7, 9.1, 'cargo ship through the locks', '\uD83D\uDEA2', '#0369a1', '\u2693', 'the Panama Canal and world trade'),
+    barbados: soon('barbados', 'Barbados', -59.55, 13.1, 'catamaran', '\u26F5', '#0e7490', '\uD83C\uDFDD\uFE0F', 'Caribbean coasts, hurricanes and tourism'),
+    iceland: soon('iceland', 'Iceland', -19, 64.9, 'super jeep', '\uD83D\uDE99', '#1d4ed8', '\u2668\uFE0F', 'volcanoes, glaciers and geothermal energy'),
+    svalbard: soon('svalbard', 'Svalbard', 15.6, 78.2, 'icebreaker ship', '\uD83D\uDEA2', '#3a8fb7', '\uD83E\uDDCA', 'the polar Arctic and the Global Seed Vault'),
+    oman: soon('oman', 'Oman', 58.4, 23.6, 'dhow', '\u26F5', '#b45309', '\uD83C\uDFDC\uFE0F', 'wadis, deserts and water supply'),
+    bhutan: soon('bhutan', 'Bhutan', 89.6, 27.5, 'mountain trek', '\uD83E\uDD7E', '#c2410c', '\uD83C\uDFEF', 'a carbon-negative Himalayan kingdom'),
+    southkorea: soon('southkorea', 'South Korea', 127, 37.5, 'KTX high-speed train', '\uD83D\uDE84', '#1e40af', '\uD83C\uDFD9\uFE0F', 'rapid development and a high-tech economy'),
     china: soon('china', 'China', 111, 30.8, 'river cruise', '🚢', '#b91c1c', '🐉', 'the Three Gorges Dam')
   };
   var KEY = 'sbl-tww-' + TIER;
@@ -72,7 +81,9 @@
   var S = load(); S.stamps = S.stamps || {}; S.loc = S.loc || 'home';
   function destInfo(id) { return DEST[id] || SOON[id]; }
   function mapOf(d) { if (!d.map && d.lonlat) d.map = P(d.lonlat[0], d.lonlat[1]); return d.map; }
-  function locOf(id) { if (id === 'home' || !destInfo(id)) return { x: HOME.map.x, y: HOME.map.y, name: HOME.name }; var d = destInfo(id), m = mapOf(d); return { x: m.x, y: m.y, name: d.gateway || d.name }; }
+  function locOf(id) { if (id === 'home' || !destInfo(id)) return { x: HOME.map.x, y: HOME.map.y, name: HOME.name, ll: HOME.lonlat }; var d = destInfo(id), m = mapOf(d); return { x: m.x, y: m.y, name: d.gateway || d.name, ll: d.lonlat }; }
+  /* Great-circle distance (km) and the compass direction of travel, for the flight annotation. */
+  function gc(a, b) { var r = Math.PI / 180, la1 = a[1] * r, la2 = b[1] * r, dl = (b[0] - a[0]) * r; var h = Math.sin((la2 - la1) / 2), k = Math.sin(dl / 2); var km = 2 * 6371 * Math.asin(Math.sqrt(h * h + Math.cos(la1) * Math.cos(la2) * k * k)); var br = (Math.atan2(Math.sin(dl) * Math.cos(la2), Math.cos(la1) * Math.sin(la2) - Math.sin(la1) * Math.cos(la2) * Math.cos(dl)) / r + 360) % 360; return { km: km, dir: ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(br / 45) % 8] }; }
   function tasksOf(st) { return st.tasks[TIER] || st.tasks.ks3; }
   function maxOf(d) { return d.stations.reduce(function (s, st) { return s + tasksOf(st).length * PTS[0]; }, 0); }
   function totalPts() { var t = 0; for (var k in S.stamps) t += S.stamps[k].best || 0; return t; }
@@ -102,6 +113,7 @@
   '.tw-stats{display:flex;gap:8px;flex-wrap:wrap}.tw-stat{background:#f3f8fd;border-radius:10px;padding:6px 12px;font-weight:800;font-size:.9rem}.tw-stat strong{color:var(--blue);font-size:1.15rem}' +
   '.tw-scene{border-radius:14px;overflow:hidden;margin:12px 0 4px;background:#7cc576}.tw-scene svg{display:block;width:100%;height:auto}' +
   '.tw-flow{animation:twFlow 2.4s linear infinite}@keyframes twFlow{to{stroke-dashoffset:-60}}' +
+  '.tw-rotor{animation:twRotor .22s linear infinite;transform-box:fill-box;transform-origin:center}@keyframes twRotor{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.15)}}' +
   '.tw-bob{animation:twBob 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes twBob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}' +
   '.tw-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.tw-tab{border:2px solid #c5d3e0;background:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-weight:800;font-size:.85rem;color:#4b6378}' +
   '.tw-tab.on{border-color:var(--gold);background:#fff8e1;color:var(--navy)}.tw-tab.done{border-color:var(--green);color:var(--green)}' +
@@ -117,7 +129,7 @@
   '.tw-bank{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0 6px;min-height:44px}' +
   '.tw-chip{border:2px solid #6536b4;background:#f4efff;color:#3b1f78;border-radius:999px;padding:7px 14px;font:inherit;font-weight:800;cursor:pointer}' +
   '.tw-chip.sel{background:#6536b4;color:#fff;box-shadow:0 0 0 4px #6536b433}' +
-  '.tw-bins{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}' +
+  '.tw-bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:10px}' +
   '.tw-bin{border:3px dashed #9bb8d3;border-radius:14px;padding:10px;min-height:120px;background:#f8fbfe;cursor:pointer;text-align:left;font:inherit;color:var(--navy)}' +
   '.tw-bin h4{margin:0 0 8px;text-align:center}.tw-bin .tw-chip{display:inline-block;margin:3px}' +
   '.tw-chip.ok{border-color:var(--green);background:#eaf8ef;color:#075c31;cursor:default}' +
@@ -128,6 +140,10 @@
   '@keyframes twShake{0%,100%{transform:translate(-50%,-50%)}25%,75%{transform:translate(calc(-50% - 7px),-50%)}50%{transform:translate(calc(-50% + 7px),-50%)}}' +
   '.tw-shake{animation:twShake2 .4s}@keyframes twShake2{0%,100%{transform:none}25%,75%{transform:translateX(-7px)}50%{transform:translateX(7px)}}' +
   '.tw-graph{max-width:560px;margin:0 auto 8px}.tw-graph svg{width:100%;height:auto;display:block}' +
+  '.tw-mini{margin:14px 0 0;max-width:340px;border-radius:12px;overflow:hidden;border:2px solid #d6e3ee;background:#fff}.tw-mini svg{display:block;width:100%;height:auto}.tw-mini figcaption{font-size:.72rem;font-weight:700;color:#4b6378;padding:4px 10px;background:#f3f8fd}' +
+  '.tw-under{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}.tw-under .tw-tabs{flex:1}.tw-under .tw-mini{margin:10px 0 0;width:240px;flex:none}' +
+  '@media(max-width:760px){.tw-under{flex-direction:column}.tw-under .tw-mini{width:100%;max-width:340px}}' +
+  '.tw-flynote{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:#11243bE6;color:#fff;border-radius:12px;padding:8px 14px;text-align:center;font-size:.9rem;line-height:1.35;box-shadow:0 6px 18px #0004;pointer-events:none;max-width:92%}.tw-flynote strong{display:block;font-size:1rem}.tw-flynote b{color:#ffd166}' +
   '.tw-postcard{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:start}.tw-postcard ul{margin:6px 0 0;padding-left:20px}' +
   '.tw-bigstamp{width:170px;height:170px;margin:10px auto;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:900;text-align:center;box-shadow:0 0 0 6px #fff inset,0 8px 20px #0003;animation:twThump .7s cubic-bezier(.2,1.6,.4,1) both}' +
   '.tw-bigstamp b{font-size:3rem;line-height:1}@keyframes twThump{0%{transform:scale(2.4) rotate(-30deg);opacity:0}100%{transform:scale(1) rotate(-8deg);opacity:1}}' +
@@ -219,7 +235,12 @@
     trail.setAttribute('d', d); trail.setAttribute('opacity', '.8');
     if (wrap) { trail2.setAttribute('d', d); trail2.setAttribute('transform', 'translate(' + wrap + ' 0)'); trail2.setAttribute('opacity', '.8'); } else trail2.setAttribute('opacity', '0');
     var len = trail.getTotalLength();
-    plane.setAttribute('opacity', '1'); say('Flying to ' + DEST[id].gateway + '.');
+    plane.setAttribute('opacity', '1');
+    var g = a.ll && b.ll ? gc(a.ll, b.ll) : null, note = document.createElement('div'), hrs = g ? Math.max(1, Math.round(g.km / 850 + 0.5)) : 0;
+    note.className = 'tw-flynote'; note.setAttribute('aria-hidden', 'true');
+    note.innerHTML = '<strong>✈️ ' + esc(a.name) + ' → ' + esc(b.name) + '</strong>' + (g ? '<span>Heading <b>' + g.dir + '</b> · <b id="twKm">0</b> of ' + Math.round(g.km).toLocaleString('en-GB') + ' km · about ' + hrs + ' hour' + (hrs > 1 ? 's' : '') + ' in the air</span>' : '');
+    $('#twMapWrap').appendChild(note);
+    say('Flying ' + (g ? g.dir + ', about ' + Math.round(g.km / 100) * 100 + ' kilometres, ' : '') + 'to ' + DEST[id].gateway + '.');
     var t0 = performance.now(), dur = reduce ? 10 : 2800 + Math.min(1400, dist);
     function q(t, p0, p1, p2) { return (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + t * t * p2; }
     function step(now) {
@@ -229,6 +250,7 @@
       var sc = 1 + Math.sin(e * Math.PI) * .5;
       plane.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') rotate(' + (Math.atan2(dy, dx) * 180 / Math.PI).toFixed(1) + ') scale(' + sc.toFixed(2) + ')');
       var dash = (len * e).toFixed(1) + ' ' + (len + 10).toFixed(1); trail.style.strokeDasharray = dash; trail2.style.strokeDasharray = dash;
+      var kmEl = document.getElementById('twKm'); if (kmEl && g) kmEl.textContent = Math.round(g.km * e).toLocaleString('en-GB');
       if (t < 1) requestAnimationFrame(step); else { S.loc = id; save(); setTimeout(function () { startExpedition(id); }, reduce ? 0 : 400); }
     }
     requestAnimationFrame(step);
@@ -240,13 +262,34 @@
     var f = d.photo; if (!f) return '';
     return '<figure class="tw-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(f.file) + '?width=900" alt="' + esc(f.alt) + '" loading="lazy"><figcaption>Photo: ' + esc(f.author) + ', <a href="https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(f.file.replace(/ /g, '_')) + '" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="' + f.licenceUrl + '" target="_blank" rel="noopener">' + esc(f.licence) + '</a></figcaption></figure>';
   }
+
+  /* Small locator map for a destination: d.locator = { box: [lonW, lonE, latS, latN], places: [[name, lon, lat, pos], ...] }.
+     pos: 'r' (default), 'l', 't' or 'b' for a dot with a label; 'a' for an italic area label with no dot.
+     Optional: land: [[[lon, lat], ...], ...] extra coastline polygons, rivers: [[[lon, lat], ...]] river lines, and noBase: true to skip the world basemap (for small islands). */
+  function locatorSVG(d) {
+    var L = d.locator; if (!L || !W) return '';
+    var b = L.box, x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9, i, j;
+    for (i = 0; i <= 8; i++) for (j = 0; j <= 8; j++) { var q = P(b[0] + (b[1] - b[0]) * i / 8, b[2] + (b[3] - b[2]) * j / 8); x0 = Math.min(x0, q.x); x1 = Math.max(x1, q.x); y0 = Math.min(y0, q.y); y1 = Math.max(y1, q.y); }
+    var w = x1 - x0, h = y1 - y0, fs = w * 0.05, r = fs * 0.32, h2 = '';
+    var rv = '';
+    (L.rivers || []).forEach(function (line) { rv += '<path d="M' + line.map(function (c) { var q = P(c[0], c[1]); return q.x.toFixed(2) + ' ' + q.y.toFixed(2); }).join(' L') + '" fill="none" stroke="#3d8fc6" stroke-width="' + (fs * 0.22).toFixed(3) + '" stroke-linejoin="round" stroke-linecap="round"/>'; });
+    (L.land || []).forEach(function (poly) { h2 += '<path d="M' + poly.map(function (c) { var q = P(c[0], c[1]); return q.x.toFixed(2) + ' ' + q.y.toFixed(2); }).join(' L') + ' Z" fill="#f6f1e1" stroke="#9c9073" stroke-width="' + (fs * 0.08).toFixed(3) + '"/>'; });
+    L.places.forEach(function (pl) {
+      var q = P(pl[1], pl[2]), pos = pl[3] || 'r', tx = q.x, ty = q.y, anchor = 'start';
+      if (pos === 'a') { h2 += '<text x="' + q.x.toFixed(2) + '" y="' + q.y.toFixed(2) + '" font-size="' + (fs * 0.9).toFixed(2) + '" font-style="italic" fill="#1d5f86" text-anchor="middle" paint-order="stroke" stroke="#dff1fb" stroke-width="' + (fs * 0.25).toFixed(2) + '">' + esc(pl[0]) + '</text>'; return; }
+      if (pos === 'r') { tx += r * 1.8; ty += fs * 0.35; } else if (pos === 'l') { tx -= r * 1.8; ty += fs * 0.35; anchor = 'end'; } else if (pos === 't') { ty -= r * 2; anchor = 'middle'; } else { ty += fs * 1.15; anchor = 'middle'; }
+      h2 += '<circle cx="' + q.x.toFixed(2) + '" cy="' + q.y.toFixed(2) + '" r="' + r.toFixed(2) + '" fill="#b42318" stroke="#fff" stroke-width="' + (r * 0.4).toFixed(2) + '"/>' +
+        '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="' + fs.toFixed(2) + '" font-weight="800" fill="#11243b" text-anchor="' + anchor + '" paint-order="stroke" stroke="#fff" stroke-width="' + (fs * 0.28).toFixed(2) + '">' + esc(pl[0]) + '</text>';
+    });
+    return '<figure class="tw-mini"><svg viewBox="' + [x0, y0, w, h].map(function (v) { return v.toFixed(2); }).join(' ') + '" role="img" aria-label="Map of ' + esc(d.short || d.name) + ' showing ' + esc(L.places.filter(function (p) { return p[3] !== 'a'; }).map(function (p) { return p[0]; }).join(', ')) + '"><rect x="' + x0 + '" y="' + y0 + '" width="' + w + '" height="' + h + '" fill="#bfe3f7"/>' + (L.noBase ? '' : '<path d="' + W.d + '" fill="#f6f1e1" stroke="#9c9073" stroke-width="' + (fs * 0.08).toFixed(3) + '"/>') + rv + h2 + '</svg><figcaption>🗺️ Where you are</figcaption></figure>';
+  }
   function startExpedition(id) {
     var d = DEST[id];
     E = { d: d, si: 0, ti: 0, score: 0, stationStart: 0, tries: 0, done: [] };
     root.innerHTML = '<section class="tw-panel"><div class="tw-head"><h2>' + d.stamp.icon + ' Welcome to ' + (d.the ? 'the ' : '') + esc(d.name) + '</h2><button class="tw-btn grey" type="button" id="twBack">← World map</button></div>' +
       '<div class="tw-scene" id="twScene"></div>' +
       '<div class="tw-postcard"><div><p style="font-size:1.05rem">' + esc(d.intro[TIER] || d.intro.ks3) + '</p><p><strong>' + d.stations.length + ' stations</strong> to visit. For each question: <strong>30 points</strong> first try, <strong>20</strong> second try, <strong>10</strong> third try. Three wrong tries sends you back to the start of that station.</p>' +
-      '<button class="tw-btn" type="button" id="twStart">' + esc(d.transport.verb || 'Set off') + ' to station 1 ' + d.transport.emoji + '</button></div>' +
+      '<button class="tw-btn" type="button" id="twStart">' + esc(d.transport.verb || 'Set off') + ' to station 1 ' + d.transport.emoji + '</button>' + locatorSVG(d) + '</div>' +
       '<div>' + photoHTML(d) + '<div class="tw-panel" style="background:#f3f8fd;box-shadow:none;margin:0"><strong>Quick facts</strong><ul>' + d.facts.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul></div></div></div></section>';
     drawScene(-1, false);
     $('#twBack').onclick = function () { showMap(); };
@@ -276,12 +319,13 @@
     placeBoat(path2, at);
     host.querySelectorAll('[data-stop]').forEach(function (g) { var i = +g.getAttribute('data-stop'); g.querySelector('circle').setAttribute('fill', E.done.indexOf(i) >= 0 ? '#b8e6c4' : (i === pos ? '#fff8e1' : '#fff')); });
   }
-  /* Local journey scenes. Each destination picks one with d.scene: 'river' (default), 'rail', 'trail', 'sea' or 'braided' (jet boat).
+  /* Local journey scenes. Each destination picks one with d.scene: 'river' (default), 'rail', 'trail', 'sea', 'braided' (jet boat) or 'heli' (helicopter).
      Every scene has a path #twRiver for the vehicle (#twBoat) to follow. */
   var SCENE_PATHS = {
     river: 'M-20 120 C 90 60, 170 170, 290 110 S 470 50, 560 115 S 760 175, 920 95',
     rail: 'M-20 168 C 150 168, 220 128, 360 128 S 560 160, 680 150 S 820 120, 920 122',
     sea: 'M-20 70 C 120 60, 200 85, 330 72 S 560 58, 680 76 S 830 80, 920 66',
+    heli: 'M-20 85 C 120 68, 220 112, 340 88 S 540 62, 640 96 S 820 112, 920 78',
     braided: 'M-20 150 C 100 120, 170 180, 280 150 S 440 110, 540 150 S 720 185, 920 140',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
@@ -304,6 +348,17 @@
       h += '<path d="' + P2 + '" fill="none" stroke="#5b6573" stroke-width="16" stroke-linecap="round"/><path d="' + P2 + '" fill="none" stroke="#c7ced6" stroke-width="3" stroke-dasharray="4 7"/>';
       h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
       h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><rect x="-44" y="-22" width="40" height="18" rx="6" fill="#fff" stroke="#c2410c" stroke-width="2.5"/><rect x="2" y="-22" width="44" height="18" rx="8" fill="#fff" stroke="#c2410c" stroke-width="2.5"/><g fill="#7cc3ef"><rect x="-38" y="-18" width="9" height="7" rx="1"/><rect x="-25" y="-18" width="9" height="7" rx="1"/><rect x="8" y="-18" width="9" height="7" rx="1"/><rect x="21" y="-18" width="9" height="7" rx="1"/></g><rect x="-44" y="-8" width="90" height="3" fill="#c2410c"/></g></g>';
+    } else if (type === 'heli') {
+      h += '<defs><linearGradient id="twSkyH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc4f2"/><stop offset="1" stop-color="#d9f0ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSkyH)"/>';
+      h += '<g fill="#fff" opacity=".9"><g class="tw-cloud" style="animation-duration:40s"><ellipse cx="200" cy="26" rx="32" ry="9"/></g><g class="tw-cloud" style="animation-duration:56s;animation-delay:-22s"><ellipse cx="620" cy="18" rx="26" ry="8"/></g></g>';
+      h += '<rect y="150" width="900" height="70" fill="#1f6fb2"/><path class="tw-flow" d="M-20 170 Q 30 164 80 170 T 180 170 T 280 170 T 380 170 T 480 170 T 580 170 T 680 170 T 780 170 T 880 170 T 980 170" fill="none" stroke="#8fd0f5" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<path d="M60 160 C 200 150, 300 95, 450 82 C 600 95, 700 150, 860 160 Z" fill="#4a4440"/>';
+      h += '<path d="M60 160 C 160 154, 220 140, 300 132 L 330 160 Z" fill="#3f8f3a"/><path d="M860 160 C 760 154, 700 140, 620 132 L 600 160 Z" fill="#3f8f3a"/>';
+      h += '<path d="M420 86 L480 86 L470 92 L430 92 Z" fill="#2a2522"/>';
+      h += '<path d="M452 92 C 470 110, 440 128, 470 145 S 500 155, 520 160" fill="none" stroke="#ff7a1a" stroke-width="7" stroke-linecap="round"/><path d="M452 92 C 470 110, 440 128, 470 145 S 500 155, 520 160" fill="none" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round"/>';
+      h += '<g class="tw-smoke"><circle cx="450" cy="72" r="10" fill="#d8d4d0"/><circle cx="462" cy="58" r="9" fill="#e5e2df"/><circle cx="474" cy="46" r="7" fill="#efedeb"/></g><g class="tw-smoke" style="animation-delay:-1.5s"><circle cx="522" cy="150" r="8" fill="#f2f2f2"/><circle cx="530" cy="138" r="6" fill="#fafafa"/></g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 9" opacity=".8"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><ellipse cx="0" cy="0" rx="20" ry="11" fill="#d62828" stroke="#6b0f0f" stroke-width="2"/><path d="M4 -7 Q 16 -6 17 2 L 4 2 Z" fill="#bfe6ff" stroke="#6b0f0f" stroke-width="1.5"/><rect x="-46" y="-4" width="28" height="5" rx="2" fill="#d62828" stroke="#6b0f0f" stroke-width="1.5"/><path d="M-46 -10 L-40 -2 L-46 6" fill="none" stroke="#6b0f0f" stroke-width="2"/><line x1="0" y1="-11" x2="0" y2="-16" stroke="#333" stroke-width="2"/><rect class="tw-rotor" x="-34" y="-18" width="68" height="3" rx="1.5" fill="#333"/><path d="M-12 11 L-14 17 M12 11 L14 17 M-18 17 L18 17" stroke="#333" stroke-width="2" fill="none"/></g></g>';
     } else if (type === 'braided') {
       h += '<defs><linearGradient id="twSkyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8ec9f0"/><stop offset="1" stop-color="#e6f4ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSkyB)"/>';
       h += '<g fill="#fff" opacity=".9"><g class="tw-cloud" style="animation-duration:44s"><ellipse cx="160" cy="20" rx="30" ry="9"/></g><g class="tw-cloud" style="animation-duration:60s;animation-delay:-25s"><ellipse cx="520" cy="16" rx="26" ry="8"/></g></g>';
@@ -334,13 +389,13 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano' }[type];
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    if ((E.d.scene || 'river') === 'trail') ang = 0;
+    if ((E.d.scene || 'river') === 'trail' || E.d.scene === 'heli') ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
@@ -356,7 +411,7 @@
     if (!$('#twTask')) {
       var scene = $('#twScene'); var keepScene = scene ? scene.innerHTML : '';
       root.innerHTML = '<section class="tw-panel"><div class="tw-head"><h2>' + d.stamp.icon + ' ' + esc(d.name) + '</h2><div class="tw-stats"><span class="tw-stat">Points <strong id="twScore">0</strong></span><span class="tw-stat">Station <strong id="twSt"></strong></span></div></div>' +
-        '<div class="tw-scene" id="twScene"></div><div class="tw-tabs" id="twTabs"></div></section>' +
+        '<div class="tw-scene" id="twScene"></div><div class="tw-under"><div class="tw-tabs" id="twTabs"></div>' + locatorSVG(d) + '</div></section>' +
         '<section class="tw-panel" id="twTask" aria-live="polite"></section>';
       $('#twScene').innerHTML = keepScene; if (!keepScene) drawScene(E.si, false); else { var p = $('#twScene #twRiver'); placeBoat(p, E.stopPts[E.si]); }
     }
