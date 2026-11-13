@@ -58,7 +58,20 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--focus);outline-
 .sum{width:100%;border-collapse:collapse;margin:16px 0;text-align:left;font-size:.95rem}.sum th,.sum td{padding:8px;border-bottom:1px solid #e3ebf2;vertical-align:top}.sum th{background:#f3f8fd}
 .sum td.p{font-weight:900;text-align:right;white-space:nowrap}
 .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.modes{max-width:1180px;margin:10px auto 0;padding:0 16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.modes a{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:2px solid #aac5dd;background:#fff;color:var(--navy);font-weight:900;text-decoration:none;box-shadow:0 2px 8px #173a5d1a}
+.modes a:hover{border-color:var(--blue)}.modes a[aria-current=page]{background:var(--navy);color:#fff;border-color:var(--navy)}
 .hidden{display:none!important}
+.levels{max-width:1180px;margin:16px auto 0;padding:0 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.lvl{flex:1 1 220px;max-width:300px;border:2px solid #aac5dd;background:#fff;border-radius:14px;padding:10px 18px;cursor:pointer;font:inherit;color:var(--navy);text-align:left;box-shadow:0 3px 10px #173a5d1a}
+.lvl span{display:block;font-weight:900;font-size:1.1rem}.lvl small{display:block;color:#4b6378;font-weight:700}
+.lvl[aria-pressed=true]{border-color:var(--gold);background:#fff8e1;box-shadow:0 0 0 3px #f0b42955}
+.lvl[data-level="2"][aria-pressed=true]{background:#1b2350;color:#fff;border-color:#8fa3ff;box-shadow:0 0 0 3px #8fa3ff55}.lvl[data-level="2"][aria-pressed=true] small{color:#c9d3ff}
+#stars{transition:opacity 1s}#moon{transition:opacity 1s}
+@keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+.star{animation:twinkle ease-in-out infinite}
+body.night{background:linear-gradient(160deg,#c5cdf0,#eef1fb 50%,#e7e3f7)}
+body.night .top{background:linear-gradient(120deg,#0a0f2c,#1d2763 60%,#36438f)}
 .sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 #climber{transition:transform 1.1s cubic-bezier(.4,.1,.2,1)}
 @keyframes drift{from{transform:translateX(-90px)}to{transform:translateX(380px)}}
@@ -103,8 +116,10 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--focus);outline-
 <body>
 <a class="skip" href="#game">Skip to game</a>
 <div class="topnav"><a href="/geography/games#ks3-general">&larr; Back to Geography Games</a></div>
+<nav class="modes" aria-label="Choose a version"><a href="/geography/games/danillion" aria-current="page">&#127956;&#65039; Mountain climb</a><a href="/geography/games/danillion-deep">&#127754; Trench dive</a></nav>
 <header class="top"><h1>&#127956;&#65039; Danillion</h1><p>Name one answer to each prompt before time runs out. Obvious answers climb a few metres. Rare answers take you towards the summit.</p></header>
 
+<nav class="levels" aria-label="Choose a level"><button type="button" class="lvl" data-level="1" aria-pressed="true"><span>Level 1 &#9728;&#65039;</span><small>World places &middot; summit at 500</small></button><button type="button" class="lvl" data-level="2" aria-pressed="false"><span>Level 2 &#127769;</span><small>Night climb &middot; harder &middot; summit at 600</small></button></nav>
 <main class="wrap" id="game">
 <section class="dash" aria-label="Game dashboard">
   <div class="stat">Prompt<strong id="sPrompt">&ndash;</strong></div>
@@ -118,10 +133,12 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--focus);outline-
     <svg viewBox="0 0 300 520" role="img" aria-labelledby="mtnTitle">
       <title id="mtnTitle">A mountain from 0 to 8,849 metres. Your climber moves up as you score points.</title>
       <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4f80"/><stop offset=".45" stop-color="#6aa8dc"/><stop offset="1" stop-color="#d6ecff"/></linearGradient>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop id="sky0" offset="0" stop-color="#1d4f80"/><stop id="sky1" offset=".45" stop-color="#6aa8dc"/><stop id="sky2" offset="1" stop-color="#d6ecff"/></linearGradient>
         <clipPath id="mclip"><path id="mshape" d="M0 500 L40 430 L70 400 L95 330 L120 300 L150 60 L175 190 L200 230 L225 320 L255 380 L300 440 L300 500 Z"/></clipPath>
       </defs>
       <rect width="300" height="520" fill="url(#sky)" rx="12"/>
+      <g id="stars" opacity="0" fill="#fff"></g>
+      <g id="moon" opacity="0"><circle cx="252" cy="58" r="17" fill="#fff6d5"/><circle cx="260" cy="52" r="15" fill="#152056"/></g>
       <g fill="#fff" opacity=".85">
         <g class="cloud" style="animation-duration:46s;animation-delay:-8s"><ellipse cx="0" cy="110" rx="26" ry="8"/><ellipse cx="14" cy="104" rx="14" ry="7"/></g>
         <g class="cloud" style="animation-duration:60s;animation-delay:-35s"><ellipse cx="0" cy="150" rx="32" ry="9"/><ellipse cx="-12" cy="144" rx="15" ry="7"/></g>
@@ -160,7 +177,7 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--focus);outline-
         <tr><td><span class="rarity r80">Very rare</span></td><td>80</td></tr>
         <tr><td><span class="rarity r100">Deep cut</span></td><td>100</td></tr>
       </table>
-      <p class="note">Score <strong>500 points</strong> to reach the summit of Everest (8,849 m).</p>
+      <p class="note" id="levelNote">Score <strong>500 points</strong> to reach the summit of Everest (8,849 m).</p>
       <label class="opt"><input type="checkbox" id="relaxed"> Relaxed mode: no timer</label>
       <button class="btn" id="startBtn" type="button">Start climbing &#9650;</button>
     </section>
@@ -198,108 +215,33 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--focus);outline-
       <p id="endScore"></p>
       <table class="sum" id="sumTable"></table>
       <p class="note">Think one of your answers should have counted? Tell Mr Wright using the feedback button.</p>
-      <div class="controls"><button class="btn" id="againBtn" type="button">Climb again with new prompts</button></div>
+      <div class="controls"><button class="btn" id="againBtn" type="button">Climb again with new prompts</button><button class="btn purple" id="nextLevelBtn" type="button">Try Level 2 &#127769; &rarr;</button></div>
     </section>
   </div>
 </div>
 <div class="sr" id="live" aria-live="polite" aria-atomic="true"></div>
 </main>
 
+<script src="/js/sbl-danillion-prompts.js"></script>
 <script>
-/* ===== Prompt bank =====
-   Each answer: [display name, points, [other accepted names/spellings]].
-   Points: 10 obvious, 25 well known, 40 good thinking, 60 rare, 80 very rare, 100 deep cut.
-   near: answers students often give that are NOT correct, with a short teaching note. */
-const PROMPTS=[
-{id:'eu-landlocked',q:'Name a landlocked country in Europe.',a:[
-['Switzerland',10],['Austria',10],['Hungary',25],['Czechia',25,['Czech Republic']],['Slovakia',40],['Luxembourg',40],['Serbia',60],['Belarus',60],['Vatican City',60,['Vatican','Holy See']],['Liechtenstein',80],['Andorra',80],['San Marino',80],['Moldova',80],['North Macedonia',100,['Macedonia']],['Kosovo',100]],
-near:{'germany':'Germany has coasts on the North Sea and the Baltic Sea.','poland':'Poland has a Baltic Sea coast.','monaco':'Monaco is tiny, but it is on the Mediterranean coast.'},
-note:'Europe has 15 landlocked countries if you leave out Armenia, Azerbaijan and Kazakhstan, which lie partly in Asia.'},
-{id:'equator',q:'Name a country the Equator passes through.',a:[
-['Brazil',10],['Ecuador',10],['Kenya',25],['Indonesia',25],['Colombia',40],['Uganda',40],['Democratic Republic of the Congo',60,['DR Congo','DRC','Democratic Republic of Congo','Congo Kinshasa']],['Somalia',60],['Republic of the Congo',80,['Congo','Republic of Congo','Congo Brazzaville']],['Gabon',80],['Maldives',80],['Kiribati',100],['São Tomé and Príncipe',100,['Sao Tome','Sao Tome and Principe']]],
-near:{'peru':'Peru is close, but the Equator passes just north of it, through Ecuador and Colombia.','tanzania':'Tanzania is just south of the Equator.','malaysia':'Malaysia is just north of the Equator.','singapore':'Singapore is only about 140 km north of the Equator.'},
-note:'In the Maldives and Kiribati the Equator crosses the country’s waters between its islands.'},
-{id:'china-borders',q:'Name a country that shares a land border with China.',a:[
-['India',10],['Russia',10],['Mongolia',25],['North Korea',25],['Vietnam',25,['Viet Nam']],['Nepal',40],['Pakistan',40],['Myanmar',40,['Burma']],['Laos',40,['Lao PDR']],['Bhutan',60],['Kazakhstan',60],['Afghanistan',80],['Kyrgyzstan',100,['Kyrgyz Republic','Kirghizia']],['Tajikistan',100]],
-near:{'thailand':'Thailand is close, but Laos and Myanmar sit between Thailand and China.','south korea':'South Korea borders only North Korea.','japan':'Japan is an island country with no land borders.','bangladesh':'Bangladesh is close, but India and Myanmar separate it from China.'},
-note:'China shares land borders with 14 countries, joint most in the world with Russia.'},
-{id:'asean',q:'Name a member country of ASEAN.',a:[
-['Thailand',10],['Malaysia',10],['Singapore',10],['Vietnam',25,['Viet Nam']],['Indonesia',25],['Philippines',25],['Cambodia',40],['Laos',40,['Lao PDR']],['Myanmar',40,['Burma']],['Brunei',80,['Brunei Darussalam']],['Timor-Leste',100,['East Timor','Timor Leste','Timor']]],
-near:{'china':'China is an ASEAN partner, not a member.','japan':'Japan is an ASEAN partner, not a member.','papua new guinea':'Papua New Guinea is an observer, not a member.'},
-note:'Timor-Leste became ASEAN’s 11th member in October 2025.'},
-{id:'8000ers',q:'Name one of the 14 mountains higher than 8,000 metres.',a:[
-['Everest',10,['Mount Everest','Sagarmatha','Chomolungma']],['K2',25],['Kangchenjunga',60,['Kanchenjunga']],['Annapurna',60],['Lhotse',80],['Makalu',80],['Cho Oyu',80],['Nanga Parbat',80],['Manaslu',100],['Dhaulagiri',100],['Gasherbrum I',100,['Gasherbrum','Gasherbrum 1','Hidden Peak']],['Gasherbrum II',100,['Gasherbrum 2']],['Broad Peak',100],['Shishapangma',100,['Shisha Pangma','Xixabangma']]],
-near:{'kilimanjaro':'Kilimanjaro is Africa’s highest mountain, but it is “only” 5,895 m.','denali':'Denali is 6,190 m, the highest in North America.','aconcagua':'Aconcagua is 6,961 m, the highest outside Asia.','fuji':'Mount Fuji is 3,776 m.','k1':'There is no K1 in this list. Did you mean K2?'},
-note:'All 14 are in the Himalaya and Karakoram ranges of Asia.'},
-{id:'seven-summits',q:'Name one of the Seven Summits: the highest mountain on each continent.',a:[
-['Everest',10,['Mount Everest']],['Kilimanjaro',25],['Mont Blanc',40,['Mount Blanc']],['Denali',60,['McKinley','Mount McKinley']],['Aconcagua',60],['Elbrus',80,['Mount Elbrus']],['Kosciuszko',80,['Kosciusko','Mount Kosciuszko']],['Vinson',100,['Vinson Massif','Mount Vinson']],['Puncak Jaya',100,['Carstensz','Carstensz Pyramid']]],
-near:{'k2':'K2 is the world’s second-highest mountain, but Everest is Asia’s highest.','fuji':'Mount Fuji is Japan’s highest, not Asia’s.','matterhorn':'The Matterhorn is famous, but Elbrus and Mont Blanc are higher.','andes':'The Andes is a range. Can you name its highest peak?','himalayas':'The Himalaya is a range. Can you name its highest peak?','himalaya':'The Himalaya is a range. Can you name its highest peak?'},
-note:'Europe’s summit is Elbrus or Mont Blanc, and Australia’s is Kosciuszko or Puncak Jaya, depending on how you draw the continents. Both versions count here.'},
-{id:'100m',q:'Name a country with a population of more than 100 million.',a:[
-['China',10],['India',10],['United States',10,['USA','US','America','United States of America']],['Indonesia',25],['Brazil',25],['Russia',25],['Japan',25],['Nigeria',40],['Pakistan',40],['Mexico',40],['Bangladesh',60],['Philippines',60],['Egypt',60],['Ethiopia',80],['Vietnam',80,['Viet Nam']],['Democratic Republic of the Congo',100,['DR Congo','DRC','Democratic Republic of Congo']]],
-near:{'thailand':'Thailand has about 70 million people.','united kingdom':'The UK has about 69 million people.','uk':'The UK has about 69 million people.','germany':'Germany has about 84 million people.','iran':'Iran has about 90 million people. Close!','turkey':'Turkey has about 86 million people. Close!','congo':'Be specific: the Democratic Republic of the Congo has over 100 million people, but the Republic of the Congo has about 6 million.'},
-note:'Based on recent UN estimates, 16 countries have more than 100 million people.'},
-{id:'caribbean',q:'Name an independent island country in the Caribbean.',a:[
-['Jamaica',10],['Cuba',10],['Bahamas',25],['Barbados',25],['Haiti',25],['Dominican Republic',40],['Trinidad and Tobago',40,['Trinidad']],['Saint Lucia',60],['Grenada',60],['Antigua and Barbuda',80,['Antigua']],['Dominica',80],['Saint Kitts and Nevis',100,['Saint Kitts','St Kitts and Nevis']],['Saint Vincent and the Grenadines',100,['Saint Vincent','St Vincent']]],
-near:{'puerto rico':'Puerto Rico is a territory of the USA, not an independent country.','cayman islands':'The Cayman Islands are a British Overseas Territory.','bermuda':'Bermuda is a British territory, and it is in the Atlantic, not the Caribbean.','aruba':'Aruba is part of the Kingdom of the Netherlands.','curacao':'Curaçao is part of the Kingdom of the Netherlands.','hispaniola':'Hispaniola is an island. Name one of the two countries on it.'},
-note:'Haiti and the Dominican Republic share the island of Hispaniola.'},
-{id:'sa-capitals',q:'Name a capital city in South America.',a:[
-['Buenos Aires',10],['Lima',25],['Brasília',25,['Brasilia']],['Santiago',25],['Bogotá',40,['Bogota']],['Caracas',40],['Quito',40],['Montevideo',60],['La Paz',60],['Asunción',80,['Asuncion']],['Sucre',100],['Georgetown',100],['Paramaribo',100]],
-near:{'rio de janeiro':'Rio de Janeiro was Brazil’s capital until 1960, when it moved to Brasília.','rio':'Rio de Janeiro was Brazil’s capital until 1960, when it moved to Brasília.','sao paulo':'São Paulo is Brazil’s biggest city, but not its capital.','medellin':'Medellín is in Colombia, but Bogotá is the capital.','guayaquil':'Guayaquil is Ecuador’s biggest city, but Quito is the capital.','cusco':'Cusco was the Inca capital, but Lima is Peru’s capital today.'},
-note:'Bolivia has two capitals: La Paz (seat of government) and Sucre (constitutional capital).'},
-{id:'mekong',q:'Name a country the Mekong River flows through or along.',a:[
-['Thailand',10],['Vietnam',10,['Viet Nam']],['Laos',25,['Lao PDR']],['Cambodia',25],['China',60],['Myanmar',80,['Burma']]],
-near:{'malaysia':'The Mekong does not reach Malaysia.','india':'The Mekong rises on the Tibetan Plateau in China, not in India.','tibet':'Tibet is part of China. Name the country to score.'},
-note:'The Mekong rises in China and forms part of the borders of Myanmar, Laos and Thailand.'},
-{id:'med',q:'Name a country with a coastline on the Mediterranean Sea.',a:[
-['Italy',10],['Spain',10],['Greece',10],['France',10],['Turkey',25,['Turkiye']],['Egypt',25],['Croatia',40],['Cyprus',40],['Malta',40],['Morocco',40],['Israel',40],['Lebanon',60],['Tunisia',60],['Libya',60],['Algeria',60],['Syria',60],['Monaco',80],['Albania',80],['Montenegro',80],['Slovenia',100],['Bosnia and Herzegovina',100,['Bosnia']],['Palestine',100,['Gaza','Gaza Strip']]],
-near:{'portugal':'Portugal’s coast is on the Atlantic Ocean.','gibraltar':'Gibraltar is a British Overseas Territory.','jordan':'Jordan’s only coast is on the Red Sea.','switzerland':'Switzerland is landlocked.'},
-note:'Slovenia’s coastline is only about 47 km long, and Bosnia and Herzegovina’s is about 20 km.'},
-{id:'arctic',q:'Name a country with land inside the Arctic Circle.',a:[
-['Russia',10],['Canada',10],['Norway',25],['United States',25,['USA','US','America','United States of America','Alaska']],['Sweden',40],['Finland',40],['Denmark (Greenland)',60,['Denmark','Greenland']],['Iceland',100]],
-near:{'united kingdom':'The UK lies south of the Arctic Circle.','uk':'The UK lies south of the Arctic Circle.','antarctica':'Antarctica is at the other pole, inside the Antarctic Circle.','estonia':'Estonia is too far south.'},
-note:'Only Iceland’s tiny island of Grímsey is inside the Arctic Circle.'},
-{id:'central-america',q:'Name a country in Central America.',a:[
-['Panama',10],['Costa Rica',10],['Guatemala',25],['Honduras',40],['Nicaragua',40],['El Salvador',40,['Salvador']],['Belize',60]],
-near:{'mexico':'Mexico is usually counted as part of North America, not Central America.','cuba':'Cuba is in the Caribbean.','colombia':'Colombia is in South America.'},
-note:'Central America has seven countries, from Guatemala and Belize to Panama.'},
-{id:'brazil-borders',q:'Name a country that shares a border with Brazil.',a:[
-['Argentina',10],['Peru',25],['Colombia',25],['Venezuela',25],['Bolivia',40],['Paraguay',40],['Uruguay',40],['Guyana',80],['Suriname',80,['Surinam']],['France (French Guiana)',100,['France','French Guiana']]],
-near:{'chile':'Chile is one of only two South American countries that do not border Brazil.','ecuador':'Ecuador is one of only two South American countries that do not border Brazil.','mexico':'Mexico is in North America.'},
-note:'Brazil borders every South American country except Chile and Ecuador, and also borders France through French Guiana.'},
-{id:'germany-borders',q:'Name a country that shares a border with Germany.',a:[
-['France',10],['Poland',10],['Austria',10],['Switzerland',25],['Netherlands',25,['Holland']],['Belgium',25],['Denmark',40],['Czechia',40,['Czech Republic']],['Luxembourg',60]],
-near:{'italy':'Italy is close, but Switzerland and Austria sit in between.','hungary':'Hungary is close, but Austria sits in between.','united kingdom':'The UK is across the North Sea.','uk':'The UK is across the North Sea.'},
-note:'Germany has nine neighbours, more than any other country in Europe except Russia.'},
-{id:'australia',q:'Name an Australian state or territory.',a:[
-['New South Wales',10,['NSW']],['Victoria',25],['Queensland',25],['Western Australia',40,['WA']],['South Australia',40],['Tasmania',40],['Northern Territory',60,['NT']],['Australian Capital Territory',80,['ACT']]],
-near:{'sydney':'Sydney is a city. It is in New South Wales.','melbourne':'Melbourne is a city. It is in Victoria.','canberra':'Canberra is a city. It is in the Australian Capital Territory.','perth':'Perth is a city. It is in Western Australia.','new zealand':'New Zealand is a separate country.'},
-note:'Australia has six states and two main mainland territories.'},
-{id:'nile',q:'Name a country in the drainage basin of the River Nile.',a:[
-['Egypt',10],['Sudan',25],['Ethiopia',40],['Uganda',40],['South Sudan',40],['Kenya',60],['Tanzania',60],['Rwanda',80],['Burundi',80],['Democratic Republic of the Congo',100,['DR Congo','DRC','Democratic Republic of Congo']],['Eritrea',100]],
-near:{'libya':'Libya is next to Egypt, but its water does not drain into the Nile.','chad':'Chad’s rivers drain into Lake Chad, not the Nile.','somalia':'Somalia’s rivers drain to the Indian Ocean.','congo':'Be specific: it is the Democratic Republic of the Congo that is in the Nile basin.'},
-note:'The Blue Nile starts in Ethiopia, and the White Nile is fed by Lake Victoria (Uganda, Kenya and Tanzania).'},
-{id:'south-asia',q:'Name a country in South Asia.',a:[
-['India',10],['Pakistan',10],['Bangladesh',25],['Sri Lanka',25],['Nepal',25],['Bhutan',60],['Maldives',60],['Afghanistan',80]],
-near:{'myanmar':'Myanmar is usually counted as part of Southeast Asia.','thailand':'Thailand is in Southeast Asia.','tibet':'Tibet is part of China.','iran':'Iran is usually counted as part of the Middle East or West Asia.'},
-note:'These are the eight members of SAARC, the South Asian Association for Regional Cooperation.'},
-{id:'africa-islands',q:'Name an island country in Africa.',a:[
-['Madagascar',10],['Mauritius',25],['Seychelles',40],['Cape Verde',60,['Cabo Verde']],['Comoros',80],['São Tomé and Príncipe',100,['Sao Tome','Sao Tome and Principe']]],
-near:{'zanzibar':'Zanzibar is part of Tanzania.','canary islands':'The Canary Islands belong to Spain.','reunion':'Réunion is part of France.','mayotte':'Mayotte is part of France.','sri lanka':'Sri Lanka is in Asia.','maldives':'The Maldives is in Asia.'},
-note:'Africa has six island countries. Madagascar is the fourth-largest island in the world.'}
-];
 
-const PER_GAME=7,TIME=25,TRIES=3,SUMMIT=8849,SUMMIT_PTS=500;
+const LEVELS={
+ 1:{name:'Level 1',sub:'World places',prompts:PROMPTS,pts:500,night:false,rules:'Level 1: well-known world places. Score 500 points to reach the summit.'},
+ 2:{name:'Level 2',sub:'Night climb \u00b7 harder',prompts:PROMPTS2,pts:600,night:true,rules:'Level 2: a night climb with harder prompts on rivers, lakes, seas and borders. Score 600 points to reach the summit.'}
+};
+let level=1;
+const PER_GAME=7,TIME=25,TRIES=3,SUMMIT=8849;
 const RARITY={10:'Obvious',25:'Well known',40:'Good thinking',60:'Rare',80:'Very rare',100:'Deep cut'};
 const ZONES=[[0,1000,'Foothills','Farmland and villages','#8cc152'],[1000,3000,'Forest','Trees thin out as it gets colder','#3f8f3a'],[3000,4200,'Alpine meadow','Grass and flowers above the treeline','#a5c96a'],[4200,5500,'Bare rock','Freeze-thaw shatters the rock','#8a8580'],[5500,8000,'Snow and ice','Glaciers and high camps','#eef4fa'],[8000,SUMMIT+1,'Death zone','Too little oxygen to survive for long','#ffffff']];
 const BEST_KEY='sbl-danillion-best';
+const bestKey=()=>level===1?BEST_KEY:BEST_KEY+'-'+level;
 
 const $=id=>document.getElementById(id);
 const live=$('live');
 function announce(t){live.textContent='';setTimeout(()=>live.textContent=t,40)}
 
 /* ===== Answer matching ===== */
-function norm(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[’'`.]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^the /,'').replace(/\bst\b/g,'saint').replace(/\bmt\b/g,'mount').replace(/^mount /,'').replace(/ the /g,' ')}
+function norm(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[’'`.]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^the /,'').replace(/\bst\b/g,'saint').replace(/\bmt\b/g,'mount').replace(/^mount /,'').replace(/^(lake|river) /,'').replace(/ (river|lake)$/,'').replace(/ the /g,' ')}
 function lev(a,b){if(a===b)return 0;const m=a.length,n=b.length;if(!m)return n;if(!n)return m;let p=Array.from({length:n+1},(_,j)=>j);for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}return p[n]}
 function tol(s){return s.length<=4?0:s.length<=8?1:2}
 function buildIndex(P){const keys=[];P.a.forEach((ans,i)=>{[ans[0]].concat(ans[2]||[]).forEach(al=>keys.push({k:norm(al),i}))});Object.keys(P.near||{}).forEach(n=>keys.push({k:norm(n),near:n}));return keys}
@@ -323,6 +265,7 @@ const ROUTE=[[32,500],[95,456],[60,412],[128,372],[96,322],[146,280],[118,236],[
   const ticks=$('ticks');[0,2000,4000,6000,8849].forEach(a=>{const y=yFor(a);const l=document.createElementNS(svgNS,'line');l.setAttribute('x1',6);l.setAttribute('x2',16);l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('stroke','#11243b');l.setAttribute('stroke-width','1.5');ticks.appendChild(l);const tx=document.createElementNS(svgNS,'text');tx.setAttribute('x',19);tx.setAttribute('y',y+3.5);tx.textContent=a.toLocaleString('en-GB')+' m';if(a>=4000)tx.setAttribute('fill','#fff');if(a===8849){tx.setAttribute('fill','#fff')}ticks.appendChild(tx)});
   const dy=yFor(8000);$('deathLine').setAttribute('y1',dy);$('deathLine').setAttribute('y2',dy);$('deathTxt').setAttribute('y',dy-4);
   $('routeAll').setAttribute('points',ROUTE.map(p=>p.join(',')).join(' '));
+  const st=$('stars');for(let k=0;k<45;k++){const c=document.createElementNS(svgNS,'circle');c.setAttribute('cx',(Math.random()*300).toFixed(0));c.setAttribute('cy',(Math.random()*300).toFixed(0));c.setAttribute('r',(.5+Math.random()*1.3).toFixed(1));c.setAttribute('class','star');c.style.animationDuration=(1.5+Math.random()*3).toFixed(1)+'s';c.style.animationDelay=(-Math.random()*4).toFixed(1)+'s';st.appendChild(c)}
   const sn=$('snow');for(let k=0;k<26;k++){const c=document.createElementNS(svgNS,'circle');c.setAttribute('cx',(Math.random()*300).toFixed(0));c.setAttribute('cy',(Math.random()*40).toFixed(0));c.setAttribute('r',(1+Math.random()*1.6).toFixed(1));c.setAttribute('class','flake');c.setAttribute('opacity',(.55+Math.random()*.45).toFixed(2));c.style.animationDuration=(5+Math.random()*6).toFixed(1)+'s';c.style.animationDelay=(-Math.random()*10).toFixed(1)+'s';sn.appendChild(c)}
   const sc=document.createElementNS(svgNS,'clipPath');sc.id='snowclip';const sr=document.createElementNS(svgNS,'rect');sr.setAttribute('width',300);sr.setAttribute('height',yFor(5000));sc.appendChild(sr);document.querySelector('.mtn svg defs').appendChild(sc);sn.setAttribute('clip-path','url(#snowclip)');
 })();
@@ -340,16 +283,16 @@ function drawClimber(alt){const p=pointAt(alt);$('climber').setAttribute('transf
 
 /* ===== Game state ===== */
 let deck=[],idx=0,score=0,tries=TRIES,timeLeft=TIME,tick=null,done=false,log=[];
-const altFor=s=>Math.min(SUMMIT,Math.round(s*SUMMIT/SUMMIT_PTS));
+const altFor=s=>Math.min(SUMMIT,Math.round(s*SUMMIT/LEVELS[level].pts));
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function getBest(){try{return parseInt(localStorage.getItem(BEST_KEY)||'',10)||null}catch(e){return null}}
-function setBest(v){try{localStorage.setItem(BEST_KEY,String(v))}catch(e){}}
+function getBest(){try{return parseInt(localStorage.getItem(bestKey())||'',10)||null}catch(e){return null}}
+function setBest(v){try{localStorage.setItem(bestKey(),String(v))}catch(e){}}
 function showBest(){const b=getBest();$('sBest').textContent=b!=null?b.toLocaleString('en-GB')+' m':'–'}
 function updateDash(){$('sScore').textContent=score;$('sPrompt').textContent=deck.length?Math.min(idx+1,deck.length)+' / '+deck.length:'–'}
 const relaxed=()=>$('relaxed').checked;
 
 function start(){
-  deck=shuffle(PROMPTS.slice()).slice(0,PER_GAME);idx=0;score=0;log=[];
+  deck=shuffle(LEVELS[level].prompts.slice()).slice(0,PER_GAME);idx=0;score=0;log=[];
   $('startPanel').classList.add('hidden');$('endPanel').classList.add('hidden');$('qPanel').classList.remove('hidden');
   shownAlt=0;$('sAlt').textContent='0 m';drawClimber(0);showPrompt();
 }
@@ -424,27 +367,42 @@ function end(){
   else{rank='Foothill Wanderer';badge='\u{1F33E}'}
   $('endBadge').textContent=badge;retrigger($('endBadge'),'gain');if(alt>=SUMMIT)confetti(150);else if(alt>=5500)confetti(60);$('endRank').textContent=rank;
   const nb=best==null||alt>best;if(nb)setBest(alt);showBest();
-  $('endScore').innerHTML=`You scored <strong>${score} points</strong> and climbed to <strong>${alt.toLocaleString('en-GB')} m</strong>.${nb&&best!=null?' <strong>New personal best!</strong>':''}${alt<SUMMIT?` You needed ${SUMMIT_PTS-score} more points for the summit.`:''}`;
+  $('endScore').innerHTML=`You scored <strong>${score} points</strong> and climbed to <strong>${alt.toLocaleString('en-GB')} m</strong>.${nb&&best!=null?' <strong>New personal best!</strong>':''}${alt<SUMMIT?` You needed ${LEVELS[level].pts-score} more points for the summit.`:''}`;
   $('sumTable').innerHTML='<tr><th>Prompt</th><th>Your answer</th><th style="text-align:right">Points</th></tr>'+log.map(r=>`<tr><td>${r.q}</td><td>${r.ans}${r.pts?` <span class="rarity r${r.pts}">${RARITY[r.pts]}</span>`:''}</td><td class="p">${r.pts}</td></tr>`).join('');
   announce(`Climb complete. ${rank}. ${score} points, ${alt} metres.`);ep.focus();
 }
 
+function setLevel(n,quiet){level=LEVELS[n]?n:1;const L=LEVELS[level];
+  document.querySelectorAll('.lvl').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.level===level)));
+  document.body.classList.toggle('night',L.night);
+  const c=L.night?['#050a24','#1b2a6b','#4a5aa8']:['#1d4f80','#6aa8dc','#d6ecff'];['sky0','sky1','sky2'].forEach((id,k)=>$(id).setAttribute('stop-color',c[k]));
+  let sh=$('nightShade');if(!sh){sh=document.createElementNS('http://www.w3.org/2000/svg','rect');sh.id='nightShade';sh.setAttribute('width',300);sh.setAttribute('height',520);sh.setAttribute('fill','#0b1650');sh.style.transition='opacity 1s';$('bands').appendChild(sh)}sh.setAttribute('opacity',L.night?.38:0);
+  $('stars').setAttribute('opacity',L.night?1:0);$('moon').setAttribute('opacity',L.night?1:0);
+  document.querySelectorAll('.cloud').forEach(el=>el.parentNode.setAttribute('opacity',L.night?.35:.85));
+  $('levelNote').innerHTML=L.rules.replace(/(\d+) points/,'<strong>$1 points</strong>')+' The summit of Everest is 8,849 m.';
+  clearInterval(tick);deck=[];idx=0;score=0;shownAlt=0;$('sAlt').textContent='0 m';updateDash();drawClimber(0);showBest();
+  $('qPanel').classList.add('hidden');$('endPanel').classList.add('hidden');$('startPanel').classList.remove('hidden');
+  $('nextLevelBtn').classList.toggle('hidden',level>=Object.keys(LEVELS).length);
+  if(!quiet)announce(L.name+' selected. '+L.rules)}
+document.querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{const n=+b.dataset.level;if(n===level&&$('qPanel').classList.contains('hidden'))return;if(!$('qPanel').classList.contains('hidden')&&!confirm('Switch level? This climb will end.'))return;setLevel(n)});
+$('nextLevelBtn').onclick=()=>{setLevel(level+1);start()};
 $('startBtn').onclick=start;$('climbBtn').onclick=submit;$('passBtn').onclick=()=>finish(null,'pass');$('nextBtn').onclick=next;$('againBtn').onclick=start;
 $('answerInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submit()}});
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&done&&document.activeElement!==$('nextBtn')&&!$('qPanel').classList.contains('hidden')&&$('result').style.display==='block'){e.preventDefault();next()}});
-drawClimber(0);showBest();
+setLevel(Math.min(2,Math.max(1,parseInt((location.search.match(/[?&]level=(\d)/)||[])[1]||'1',10))),true);
 </script>
 <script>
 /* ===== SBL teacher tools adapter (answer key for teacher accounts only) ===== */
 (function () {
   window.SBL_TEACHER_ADAPTER = { key: function () {
-    var h = '<p class="muted">Each game picks ' + PER_GAME + ' of these ' + PROMPTS.length + ' prompts at random. Points: 10 obvious, 25 well known, 40 good thinking, 60 rare, 80 very rare, 100 deep cut. Spelling slips of one or two letters are accepted.</p>';
-    PROMPTS.forEach(function (P, n) {
+    var h = '<p class="muted">Each game picks ' + PER_GAME + ' prompts at random from the chosen level. Points: 10 obvious, 25 well known, 40 good thinking, 60 rare, 80 very rare, 100 deep cut. Spelling slips of one or two letters are accepted.</p>';
+    Object.keys(LEVELS).forEach(function (lk) { var L = LEVELS[lk]; h += '<h2>' + L.name + ': ' + L.sub + ' (' + L.prompts.length + ' prompts, summit at ' + L.pts + ' points)</h2>';
+    L.prompts.forEach(function (P, n) {
       h += '<h3>' + (n + 1) + '. ' + P.q + '</h3><table><tr><th>Answer</th><th>Points</th><th>Also accepted</th></tr>' +
         P.a.slice().sort(function (x, y) { return x[1] - y[1]; }).map(function (a) { return '<tr><td><b>' + a[0] + '</b></td><td>' + a[1] + '</td><td>' + (a[2] || []).join(', ') + '</td></tr>'; }).join('') + '</table>';
       var nm = Object.keys(P.near || {});
       if (nm.length) h += '<p class="muted"><b>Not accepted (with feedback):</b> ' + nm.join(', ') + '</p>';
-    });
+    }); });
     return h;
   } };
 })();
