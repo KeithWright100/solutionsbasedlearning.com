@@ -65,11 +65,14 @@
   window.TWW_DEST.amazon = {
     id: 'amazon',
     name: 'Amazon rainforest',
+    the: true,
     country: 'Brazil',
     gateway: 'Manaus',
-    map: { x: 664, y: 540 },
+    lonlat: [-60.0, -3.1],
     stamp: { colour: '#1f7a3a', icon: '🦜' },
     transport: { name: 'canoe', verb: 'Paddle', emoji: '🛶' },
+    scene: 'river',
+    photo: { file: 'Aerial view of the Amazon Rainforest.jpg', alt: 'The Solimões River winding through the Amazon rainforest, seen from a plane', author: 'lubasi', licence: 'CC BY-SA 2.0', licenceUrl: 'https://creativecommons.org/licenses/by-sa/2.0/' },
     intro: {
       ks3: 'You land in Manaus, a city of over two million people in the middle of the rainforest. From here you travel by canoe along the River Amazon. At each stop, complete the challenges to paddle on to the next one.',
       adv: 'You land in Manaus, about 3° south of the Equator. Your canoe expedition follows the River Amazon. Each station tests the processes behind the biome: structure, adaptation, climate, nutrient cycling and human pressure.'

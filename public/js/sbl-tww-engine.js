@@ -12,21 +12,44 @@
   var DEST = window.TWW_DEST || {};
   var W = window.SBL_WORLD;
   var PTS = [30, 20, 10], TRIES = 3;
-  var HOME = { id: 'home', name: 'Bangkok', x: 1553, y: 434 };
-  // Suggested route east from Thailand, across the Pacific, then on around the world.
-  var ORDER = ['malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'andes', 'amazon', 'sahara', 'everest', 'arctic'];
-  function soon(id, name, x, y, t, emoji, colour, icon) { return { id: id, name: name, map: { x: x, y: y }, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
+  /* Robinson projection, matching the World Map Challenge basemap (2000 x 1040). */
+  var RX = [1, .9986, .9954, .99, .9822, .973, .96, .9427, .9216, .8962, .8679, .835, .7986, .7597, .7186, .6732, .6213, .5722, .5322];
+  var RY = [0, .062, .124, .186, .248, .31, .372, .434, .4958, .5571, .6176, .6769, .7346, .7903, .8435, .8936, .9394, .9761, 1];
+  function interp(t, lat) { var a = Math.min(Math.abs(lat), 89.9) / 5, i = Math.floor(a), f = a - i; return t[i] + (t[i + 1] - t[i]) * f; }
+  function P(lon, lat) { return { x: 996 + 5.56 * lon * interp(RX, lat), y: 520.6 - (lat < 0 ? -1 : 1) * 516 * interp(RY, lat) }; }
+  var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75) };
+  // Suggested round-the-world route, east from Thailand and back again.
+  var ORDER = ['malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'canada', 'california', 'colorado', 'mexico', 'andes', 'amazon', 'argentina',
+    'southafrica', 'congo', 'kenya', 'egypt', 'sahara', 'spain', 'france', 'uk', 'arctic', 'russia', 'saudi', 'uae', 'india', 'everest', 'china'];
+  function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
   var SOON = {
-    malaysia: soon('malaysia', 'Malaysia', 1559, 501, 'longboat', '\uD83D\uDEA3', '#2563c9', '\uD83C\uDF34'),
-    singapore: soon('singapore', 'Singapore', 1571, 516, 'MRT train', '\uD83D\uDE87', '#c2410c', '\uD83C\uDFD9\uFE0F'),
-    indonesia: soon('indonesia', 'Indonesia', 1608, 569, 'volcano trek', '\uD83E\uDD7E', '#b42318', '\uD83C\uDF0B'),
-    australia: soon('australia', 'Great Barrier Reef', 1799, 637, 'dive boat', '\uD83E\uDD3F', '#0f8a83', '\uD83D\uDC20'),
-    newzealand: soon('newzealand', 'New Zealand', 1851, 802, 'glacier hike', '\uD83E\uDDCA', '#3a8fb7', '\uD83C\uDFD4\uFE0F'),
-    hawaii: soon('hawaii', 'Hawaii', 150, 393, 'helicopter', '\uD83D\uDE81', '#b8860b', '\uD83C\uDF3A'),
-    andes: soon('andes', 'The Andes', 615, 620, 'llama trek', '\uD83E\uDD99', '#6536b4', '\u26F0\uFE0F'),
-    sahara: soon('sahara', 'Sahara Desert', 1070, 408, 'camel', '\uD83D\uDC2A', '#c27a1a', '\uD83C\uDFDC\uFE0F'),
-    everest: soon('everest', 'Mount Everest', 1478, 335, 'climb with Sherpa guides', '\uD83E\uDDD7', '#3b5ba8', '\uD83C\uDFD4\uFE0F'),
-    arctic: soon('arctic', 'Arctic tundra', 1100, 88, 'dog sled', '\uD83D\uDEF7', '#3a8fb7', '\u2744\uFE0F')
+    malaysia: soon('malaysia', 'Malaysia', 101.4, 4.5, 'longboat', '🚣', '#2563c9', '🌴', 'rainforest, tea plantations and palm oil'),
+    singapore: soon('singapore', 'Singapore', 103.8, 1.35, 'MRT train', '🚇', '#c2410c', '🏙️', 'a crowded island city'),
+    indonesia: soon('indonesia', 'Indonesia', 110.4, -7.5, 'volcano hike', '🥾', '#b42318', '🌋', 'volcanoes on the Ring of Fire'),
+    australia: soon('australia', 'Great Barrier Reef', 147, -18, 'dive boat', '🤿', '#0f8a83', '🐠', 'coral reefs'),
+    newzealand: soon('newzealand', 'New Zealand', 176.2, -38.1, 'jet boat', '🚤', '#3a8fb7', '⛰️', 'glaciers and geothermal power'),
+    hawaii: soon('hawaii', 'Hawaii', -155.3, 19.4, 'helicopter', '🚁', '#b8860b', '🌺', 'hotspot volcanoes'),
+    canada: soon('canada', 'Canada', -116, 51.4, 'canoe and float plane', '🛩️', '#b42318', '🍁', 'boreal forest and the Rockies'),
+    california: soon('california', 'California', -118.2, 34.1, 'road trip', '🚗', '#d97706', '☀️', 'earthquakes on the San Andreas Fault'),
+    colorado: soon('colorado', 'Colorado River', -112.1, 36.1, 'white-water raft', '🚣', '#c2410c', '🏜️', 'the Grand Canyon and water stress'),
+    mexico: soon('mexico', 'Mexico', -99.1, 19.4, 'city bus', '🚌', '#15803d', '🌵', 'a sinking megacity'),
+    andes: soon('andes', 'Peru: the Andes', -72.5, -13.2, 'llama trek', '🦙', '#6536b4', '⛰️', 'fold mountains and farming terraces'),
+    argentina: soon('argentina', 'Argentina', -63, -36, 'gaucho horse ride', '🐎', '#2563c9', '🌾', 'the Pampas and Patagonia'),
+    southafrica: soon('southafrica', 'South Africa', 18.4, -33.9, 'safari truck', '🚙', '#15803d', '🦁', 'savanna and a city that nearly ran dry'),
+    congo: soon('congo', 'Congo', 23.5, -1, 'river barge', '⛴️', '#166534', '🦍', 'Africa’s great rainforest'),
+    kenya: soon('kenya', 'Kenya', 35.1, -1.5, 'safari jeep', '🚙', '#b45309', '🦒', 'savanna and the Great Rift Valley'),
+    egypt: soon('egypt', 'Egypt', 31.2, 27, 'Nile felucca', '⛵', '#ca8a04', '🐫', 'the Nile and its dams'),
+    sahara: soon('sahara', 'Sahara Desert', 5, 24, 'camel', '🐪', '#c27a1a', '🏜️', 'hot desert'),
+    spain: soon('spain', 'Spain', -3.7, 37.2, 'coach tour', '🚌', '#dc2626', '🏖️', 'tourism and water shortages'),
+    france: soon('france', 'France', 6.9, 45.9, 'cable car', '🚡', '#1d4ed8', '🎿', 'Alpine glaciers'),
+    uk: soon('uk', 'United Kingdom', -1.5, 52.5, 'train', '🚆', '#1e3a8a', '🌧️', 'coasts, rivers and floods'),
+    arctic: soon('arctic', 'Arctic tundra', 19, 69.6, 'dog sled', '🛷', '#3a8fb7', '❄️', 'tundra and permafrost'),
+    russia: soon('russia', 'Russia', 100, 62, 'Trans-Siberian train', '🚂', '#7f1d1d', '🌲', 'Siberia’s taiga'),
+    saudi: soon('saudi', 'Saudi Arabia', 46.7, 24.7, '4x4 dune drive', '🚙', '#15803d', '🛢️', 'oil and a desert climate'),
+    uae: soon('uae', 'UAE', 55.3, 25.2, 'metro', '🚇', '#0f766e', '🏙️', 'Dubai’s artificial islands'),
+    india: soon('india', 'India', 72.9, 19.1, 'train', '🚆', '#ea580c', '🌧️', 'the monsoon and Mumbai'),
+    everest: soon('everest', 'Mount Everest', 86.9, 28, 'climb with Sherpa guides', '🧗', '#3b5ba8', '🏔️', 'the Himalaya'),
+    china: soon('china', 'China', 111, 30.8, 'river cruise', '🚢', '#b91c1c', '🐉', 'the Three Gorges Dam')
   };
   var KEY = 'sbl-tww-' + TIER;
   var NS = 'http://www.w3.org/2000/svg';
@@ -43,7 +66,8 @@
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   var S = load(); S.stamps = S.stamps || {}; S.loc = S.loc || 'home';
   function destInfo(id) { return DEST[id] || SOON[id]; }
-  function locOf(id) { if (id === 'home' || !destInfo(id)) return HOME; var d = destInfo(id); return { x: d.map.x, y: d.map.y, name: d.gateway || d.name }; }
+  function mapOf(d) { if (!d.map && d.lonlat) d.map = P(d.lonlat[0], d.lonlat[1]); return d.map; }
+  function locOf(id) { if (id === 'home' || !destInfo(id)) return { x: HOME.map.x, y: HOME.map.y, name: HOME.name }; var d = destInfo(id), m = mapOf(d); return { x: m.x, y: m.y, name: d.gateway || d.name }; }
   function tasksOf(st) { return st.tasks[TIER] || st.tasks.ks3; }
   function maxOf(d) { return d.stations.reduce(function (s, st) { return s + tasksOf(st).length * PTS[0]; }, 0); }
   function totalPts() { var t = 0; for (var k in S.stamps) t += S.stamps[k].best || 0; return t; }
@@ -107,6 +131,9 @@
   '@keyframes twSway{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}' +
   '#tww .drip{animation:twDrip 1.6s ease-in infinite}@keyframes twDrip{0%{transform:translateY(0);opacity:1}80%{opacity:1}100%{transform:translateY(40px);opacity:0}}' +
   '.tw-note{color:#4b6378;font-size:.9rem}' +
+  '.tw-cloud{animation:twDriftC linear infinite}@keyframes twDriftC{from{transform:translateX(-120px)}to{transform:translateX(1000px)}}' +
+  '.tw-smoke{animation:twSmoke 4s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom left}@keyframes twSmoke{0%,100%{transform:translate(0,0) scale(1);opacity:.9}50%{transform:translate(10px,-6px) scale(1.15);opacity:.6}}' +
+  '.tw-photo{margin:0 0 12px;border-radius:14px;overflow:hidden;background:#e3ebf2}.tw-photo img{display:block;width:100%;height:240px;object-fit:cover}.tw-photo figcaption{font-size:.72rem;color:#4b6378;padding:5px 10px;background:#f3f8fd}.tw-photo figcaption a{color:#075fa8}' +
   '.tw-confetti{position:fixed;top:-14px;width:10px;height:14px;z-index:9999;pointer-events:none;border-radius:2px;animation:twFall linear forwards}@keyframes twFall{to{transform:translate(var(--dx),110vh) rotate(var(--rot))}}' +
   '@media(max-width:760px){.tw-postcard{grid-template-columns:1fr}.tw-bins{grid-template-columns:1fr}.tw-stamp{width:70px;height:70px}}' +
   '@media(prefers-reduced-motion:reduce){#tww *,#tww *::before{animation:none!important;transition:none!important}}';
@@ -117,11 +144,14 @@
   /* ---------- passport ---------- */
   function passportHTML() {
     var h = '<div class="tw-pass" aria-label="Your passport">';
+    var soonN = 0;
     ORDER.forEach(function (id) {
       var d = destInfo(id), s = S.stamps[id];
+      if (!DEST[id]) { soonN++; return; }
       if (s) h += '<div class="tw-stamp got" style="background:' + d.stamp.colour + ';border-color:' + d.stamp.colour + '" title="' + esc(d.name) + ': ' + s.best + ' points"><b>' + d.stamp.icon + '</b>' + esc(d.short || d.name) + '<br>' + s.best + ' pts</div>';
       else h += '<div class="tw-stamp"><b>' + d.stamp.icon + '</b>' + esc(d.short || d.name) + (DEST[id] ? '' : '<br><span style="font-weight:700">soon</span>') + '</div>';
     });
+    if (soonN) h += '<div class="tw-stamp" title="Coming soon"><b>\uD83D\uDEA7</b>+' + soonN + ' more<br>coming</div>';
     return h + '<div class="tw-total">Passport points<br><strong>' + totalPts() + '</strong></div></div>';
   }
 
@@ -140,18 +170,18 @@
       '<g id="twPins"></g><g id="twPlane" opacity="0"><path d="M0 -6 L30 -2 L40 0 L30 2 L0 6 L-10 18 L-16 18 L-8 4 L-20 4 L-26 12 L-30 12 L-26 0 L-30 -12 L-26 -12 L-20 -4 L-8 -4 L-16 -18 L-10 -18 Z" fill="#b42318" stroke="#fff" stroke-width="2"/></g>';
     $('#twMapWrap').appendChild(svg);
     var pins = svg.querySelector('#twPins'), route = svg.querySelector('#twRoute');
-    var rp = [HOME].concat(ORDER.slice(0, ORDER.indexOf('amazon') + 1).map(function (id) { return destInfo(id).map; }));
-    for (var r = 1; r < rp.length; r++) { var p0 = rp[r - 1], p1 = rp[r], x1 = p1.x; if (x1 - p0.x < -1000) x1 += 2000; [0, -2000].forEach(function (off) { var ln = document.createElementNS(NS, 'path'); var mx = (p0.x + x1) / 2 + off, my = (p0.y + p1.y) / 2 - 30; ln.setAttribute('d', 'M' + (p0.x + off) + ' ' + p0.y + ' Q' + mx + ' ' + my + ' ' + (x1 + off) + ' ' + p1.y); route.appendChild(ln); }); }
+    var rp = [HOME.map].concat(ORDER.map(function (id) { return mapOf(destInfo(id)); })).concat([HOME.map]);
+    for (var r = 1; r < rp.length; r++) { var p0 = rp[r - 1], p1 = rp[r], x1 = p1.x; if (x1 - p0.x < -1000) x1 += 2000; else if (x1 - p0.x > 1000) x1 -= 2000; [0, -2000, 2000].forEach(function (off) { var ln = document.createElementNS(NS, 'path'); var mx = (p0.x + x1) / 2 + off, my = (p0.y + p1.y) / 2 - 30; ln.setAttribute('d', 'M' + (p0.x + off) + ' ' + p0.y + ' Q' + mx + ' ' + my + ' ' + (x1 + off) + ' ' + p1.y); route.appendChild(ln); }); }
     function pin(x, y, label, cls, colour, onClick, aria) {
       var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'tw-pin ' + cls); g.setAttribute('transform', 'translate(' + x + ' ' + y + ')');
-      g.innerHTML = (cls.indexOf('soon') < 0 && cls.indexOf('home') < 0 ? '<circle class="pulse" r="14" fill="' + colour + '"/>' : '') + '<circle class="dot" r="12" fill="' + colour + '" stroke="#fff" stroke-width="4"/>' + (x > 1700 || cls.indexOf('left') >= 0 ? '<text x="-18" y="' + (cls.indexOf('left') >= 0 ? 8 : -12) + '" text-anchor="end">' : (cls.indexOf('below') >= 0 ? '<text x="16" y="34">' : '<text x="18" y="-12">')) + esc(label) + '</text>';
+      g.innerHTML = (cls.indexOf('soon') < 0 && cls.indexOf('home') < 0 ? '<circle class="pulse" r="14" fill="' + colour + '"/>' : '') + (cls.indexOf('soon') >= 0 ? '<title>' + esc(label) + '</title><circle class="dot" r="9" fill="' + colour + '" stroke="#fff" stroke-width="3"/>' : '<circle class="dot" r="12" fill="' + colour + '" stroke="#fff" stroke-width="4"/>' + (x > 1700 || cls.indexOf('left') >= 0 ? '<text x="-18" y="' + (cls.indexOf('left') >= 0 ? 8 : -12) + '" text-anchor="end">' : (cls.indexOf('below') >= 0 ? '<text x="16" y="34">' : '<text x="18" y="-12">')) + esc(label) + '</text>');
       if (onClick) { g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', aria || label); g.addEventListener('click', onClick); g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }); }
       pins.appendChild(g); return g;
     }
-    pin(HOME.x, HOME.y, '🏠 Bangkok', 'home', '#11243b');
+    pin(HOME.map.x, HOME.map.y, '🏠 Bangkok (start)', 'home', '#11243b');
     ORDER.forEach(function (id) {
-      var d = destInfo(id), live = !!DEST[id], got = S.stamps[id];
-      pin(d.map.x, d.map.y, (got ? '✅ ' : '') + d.name + (live ? '' : ' (soon)'), (live ? '' : 'soon') + (id === 'andes' ? ' below' : id === 'singapore' ? ' left' : ''), live ? d.stamp.colour : '#98a2b3',
+      var d = destInfo(id), live = !!DEST[id], got = S.stamps[id], m = mapOf(d);
+      pin(m.x, m.y, (got ? '✅ ' : '') + d.name + (live ? '' : ' (soon)'), (live ? '' : 'soon') + (id === 'andes' ? ' below' : id === 'singapore' ? ' left' : ''), live ? d.stamp.colour : '#98a2b3',
         live ? function () { askFly(id); } : function () { soonBox(d); },
         live ? 'Fly to ' + d.name : d.name + ', coming soon');
     });
@@ -200,19 +230,23 @@
 
   /* ---------- expedition ---------- */
   var E = null; // {d, si, ti, score, stationStart, tries, done:[]}
+  function photoHTML(d) {
+    var f = d.photo; if (!f) return '';
+    return '<figure class="tw-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(f.file) + '?width=900" alt="' + esc(f.alt) + '" loading="lazy"><figcaption>Photo: ' + esc(f.author) + ', <a href="https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(f.file.replace(/ /g, '_')) + '" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="' + f.licenceUrl + '" target="_blank" rel="noopener">' + esc(f.licence) + '</a></figcaption></figure>';
+  }
   function startExpedition(id) {
     var d = DEST[id];
     E = { d: d, si: 0, ti: 0, score: 0, stationStart: 0, tries: 0, done: [] };
-    root.innerHTML = '<section class="tw-panel"><div class="tw-head"><h2>' + d.stamp.icon + ' Welcome to the ' + esc(d.name) + '</h2><button class="tw-btn grey" type="button" id="twBack">← World map</button></div>' +
+    root.innerHTML = '<section class="tw-panel"><div class="tw-head"><h2>' + d.stamp.icon + ' Welcome to ' + (d.the ? 'the ' : '') + esc(d.name) + '</h2><button class="tw-btn grey" type="button" id="twBack">← World map</button></div>' +
       '<div class="tw-scene" id="twScene"></div>' +
       '<div class="tw-postcard"><div><p style="font-size:1.05rem">' + esc(d.intro[TIER] || d.intro.ks3) + '</p><p><strong>' + d.stations.length + ' stations</strong> to visit. For each question: <strong>30 points</strong> first try, <strong>20</strong> second try, <strong>10</strong> third try. Three wrong tries sends you back to the start of that station.</p>' +
       '<button class="tw-btn" type="button" id="twStart">' + esc(d.transport.verb || 'Set off') + ' to station 1 ' + d.transport.emoji + '</button></div>' +
-      '<div class="tw-panel" style="background:#f3f8fd;box-shadow:none;margin:0"><strong>Quick facts</strong><ul>' + d.facts.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul></div></div></section>';
+      '<div>' + photoHTML(d) + '<div class="tw-panel" style="background:#f3f8fd;box-shadow:none;margin:0"><strong>Quick facts</strong><ul>' + d.facts.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul></div></div></div></section>';
     drawScene(-1, false);
     $('#twBack').onclick = function () { showMap(); };
     $('#twStart').onclick = function () { moveTo(0, function () { renderStation(); }); };
     $('#twStart').focus();
-    say('Welcome to the ' + d.name + '. ' + (d.intro[TIER] || d.intro.ks3));
+    say('Welcome to ' + (d.the ? 'the ' : '') + d.name + '. ' + (d.intro[TIER] || d.intro.ks3));
   }
 
   /* Local journey scene: a river with a canoe (other destinations can add their own scene types). */
@@ -221,16 +255,7 @@
     var host = $('#twScene'); if (!host) return;
     var n = E.d.stations.length;
     if (!keep || !host.firstChild) {
-      var trees = '', k;
-      for (k = 0; k < 26; k++) { var tx = k * 36 + (k % 3) * 7, top = k % 2 === 0; trees += '<g class="tw-sway" style="animation-delay:-' + (k % 5) + 's"><rect x="' + (tx - 2) + '" y="' + (top ? 14 : 186) + '" width="4" height="22" fill="#5b3b22"/><circle cx="' + tx + '" cy="' + (top ? 14 : 186) + '" r="' + (14 + k % 4 * 3) + '" fill="' + (k % 3 ? '#2a8a36' : '#1f6b2a') + '"/></g>'; }
-      host.innerHTML = '<svg viewBox="0 0 900 220" role="img" aria-label="Your canoe journey along the river">' +
-        '<rect width="900" height="220" fill="#7cc576"/>' + trees +
-        '<path d="' + RIVER + '" fill="none" stroke="#3d8fc6" stroke-width="46" stroke-linecap="round"/>' +
-        '<path id="twRiver" d="' + RIVER + '" fill="none" stroke="#67b5e6" stroke-width="30" stroke-linecap="round"/>' +
-        '<path class="tw-flow" d="' + RIVER + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="18 42" opacity=".8"/>' +
-        '<g id="twStops"></g>' +
-        '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>' +
-        '</svg>';
+      var k; host.innerHTML = sceneMarkup(E.d);
       var path = host.querySelector('#twRiver'), L = path.getTotalLength(), stops = host.querySelector('#twStops');
       E.stopPts = [];
       for (k = 0; k <= n; k++) {
@@ -245,9 +270,48 @@
     placeBoat(path2, at);
     host.querySelectorAll('[data-stop]').forEach(function (g) { var i = +g.getAttribute('data-stop'); g.querySelector('circle').setAttribute('fill', E.done.indexOf(i) >= 0 ? '#b8e6c4' : (i === pos ? '#fff8e1' : '#fff')); });
   }
+  /* Local journey scenes. Each destination picks one with d.scene: 'river' (default), 'rail' or 'trail'.
+     Every scene has a path #twRiver for the vehicle (#twBoat) to follow. */
+  var SCENE_PATHS = {
+    river: 'M-20 120 C 90 60, 170 170, 290 110 S 470 50, 560 115 S 760 175, 920 95',
+    rail: 'M-20 168 C 150 168, 220 128, 360 128 S 560 160, 680 150 S 820 120, 920 122',
+    trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
+  };
+  function sceneMarkup(d) {
+    var type = d.scene || 'river', P2 = SCENE_PATHS[type], k, h = '';
+    if (type === 'rail') {
+      h += '<rect width="900" height="220" fill="#cfe8ff"/>';
+      h += '<g fill="#fff" opacity=".9"><g class="tw-cloud" style="animation-duration:38s"><ellipse cx="80" cy="30" rx="34" ry="11"/></g><g class="tw-cloud" style="animation-duration:52s;animation-delay:-20s"><ellipse cx="300" cy="22" rx="28" ry="9"/></g></g>';
+      for (k = 0; k < 24; k++) { var bx = k * 39 - 6, bh = 50 + ((k * 37) % 70), col = ['#8aa4bf', '#6f8aa8', '#9db3c8', '#7a93ad'][k % 4]; h += '<rect x="' + bx + '" y="' + (190 - bh) + '" width="34" height="' + bh + '" fill="' + col + '"/>'; for (var w = 0; w < bh - 16; w += 14) h += '<rect x="' + (bx + 6) + '" y="' + (196 - bh + w) + '" width="6" height="6" fill="#f6e7a6" opacity=".8"/><rect x="' + (bx + 20) + '" y="' + (196 - bh + w) + '" width="6" height="6" fill="#f6e7a6" opacity=".6"/>'; }
+      h += '<g fill="#3fa34d">'; for (k = 0; k < 30; k++) h += '<circle cx="' + (k * 31 + 10) + '" cy="' + (200 + (k % 3) * 3) + '" r="' + (9 + k % 3 * 2) + '"/>'; h += '</g><rect y="204" width="900" height="16" fill="#5aa64a"/>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#5b6573" stroke-width="16" stroke-linecap="round"/><path d="' + P2 + '" fill="none" stroke="#c7ced6" stroke-width="3" stroke-dasharray="4 7"/>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><rect x="-44" y="-22" width="40" height="18" rx="6" fill="#fff" stroke="#c2410c" stroke-width="2.5"/><rect x="2" y="-22" width="44" height="18" rx="8" fill="#fff" stroke="#c2410c" stroke-width="2.5"/><g fill="#7cc3ef"><rect x="-38" y="-18" width="9" height="7" rx="1"/><rect x="-25" y="-18" width="9" height="7" rx="1"/><rect x="8" y="-18" width="9" height="7" rx="1"/><rect x="21" y="-18" width="9" height="7" rx="1"/></g><rect x="-44" y="-8" width="90" height="3" fill="#c2410c"/></g></g>';
+    } else if (type === 'trail') {
+      h += '<defs><linearGradient id="twSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0f5"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSky)"/>';
+      h += '<path d="M0 220 L0 200 L120 190 L330 110 L560 34 L640 34 L760 120 L900 170 L900 220 Z" fill="#6b5b4e"/>';
+      h += '<path d="M0 220 L0 200 L120 190 L250 140 L420 170 L620 170 L760 150 L900 175 L900 220 Z" fill="#3f8f3a"/>';
+      h += '<g stroke="#9fd36b" stroke-width="2" opacity=".7">'; for (k = 0; k < 8; k++) h += '<line x1="0" y1="' + (204 + k * 2) + '" x2="900" y2="' + (204 + k * 2) + '"/>'; h += '</g>';
+      h += '<path d="M530 46 L560 34 L640 34 L668 50 L620 60 L575 58 Z" fill="#8a8079"/>';
+      h += '<g class="tw-smoke"><circle cx="600" cy="22" r="12" fill="#d8d4d0"/><circle cx="614" cy="8" r="10" fill="#e5e2df"/><circle cx="628" cy="-4" r="8" fill="#efedeb"/></g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#f3e2b8" stroke-width="5" stroke-dasharray="2 6" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><circle cx="0" cy="-30" r="6" fill="#f0b429" stroke="#11243b" stroke-width="2"/><path d="M0 -24 L0 -8 M0 -8 L-6 4 M0 -8 L6 4 M0 -19 L-8 -12 M0 -19 L9 -14" stroke="#11243b" stroke-width="3" stroke-linecap="round" fill="none"/><rect x="-10" y="-24" width="7" height="12" rx="2" fill="#b42318"/><line x1="9" y1="-14" x2="13" y2="4" stroke="#5b3b22" stroke-width="2"/></g></g>';
+    } else {
+      for (k = 0; k < 26; k++) { var tx = k * 36 + (k % 3) * 7, top = k % 2 === 0; h += '<g class="tw-sway" style="animation-delay:-' + (k % 5) + 's"><rect x="' + (tx - 2) + '" y="' + (top ? 14 : 186) + '" width="4" height="22" fill="#5b3b22"/><circle cx="' + tx + '" cy="' + (top ? 14 : 186) + '" r="' + (14 + k % 4 * 3) + '" fill="' + (k % 3 ? '#2a8a36' : '#1f6b2a') + '"/></g>'; }
+      h = '<rect width="900" height="220" fill="#7cc576"/>' + h +
+        '<path d="' + P2 + '" fill="none" stroke="#3d8fc6" stroke-width="46" stroke-linecap="round"/>' +
+        '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#67b5e6" stroke-width="30" stroke-linecap="round"/>' +
+        '<path class="tw-flow" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="18 42" opacity=".8"/>' +
+        '<g id="twStops"></g>' +
+        '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
+    }
+    var label = { river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano' }[type];
+    return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
+  }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
+    if ((E.d.scene || 'river') === 'trail') ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
