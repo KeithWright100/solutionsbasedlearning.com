@@ -19,7 +19,7 @@
   function P(lon, lat) { return { x: 996 + 5.56 * lon * interp(RX, lat), y: 520.6 - (lat < 0 ? -1 : 1) * 516 * interp(RY, lat) }; }
   var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75), lonlat: [100.5, 13.75] };
   // Suggested round-the-world route, east from Thailand and back again.
-  var ORDER = ['malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'alaska', 'canada', 'california', 'colorado', 'mexico', 'costarica', 'panama', 'barbados', 'andes', 'amazon', 'argentina',
+  var ORDER = ['bangkok', 'malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'alaska', 'canada', 'california', 'colorado', 'mexico', 'costarica', 'panama', 'barbados', 'andes', 'amazon', 'argentina',
     'southafrica', 'congo', 'kenya', 'egypt', 'sahara', 'morocco', 'spain', 'italy', 'france', 'uk', 'iceland', 'svalbard', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'oman', 'india', 'everest', 'bhutan', 'china', 'southkorea', 'japan'];
   function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), lonlat: [lon, lat], theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
   var SOON = {
@@ -200,10 +200,10 @@
       if (onClick) { g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', aria || label); g.addEventListener('click', onClick); g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }); }
       pins.appendChild(g); return g;
     }
-    pin(HOME.map.x, HOME.map.y, '🏠 Bangkok (start)', 'home', '#11243b');
+    if (!DEST.bangkok) pin(HOME.map.x, HOME.map.y, '🏠 Bangkok (start)', 'home', '#11243b');
     ORDER.forEach(function (id) {
       var d = destInfo(id), live = !!DEST[id], got = S.stamps[id], m = mapOf(d);
-      pin(m.x, m.y, (got ? '✅ ' : '') + d.name + (live ? '' : ' (soon)'), (live ? '' : 'soon') + (id === 'andes' ? ' below' : id === 'singapore' ? ' left' : ''), live ? d.stamp.colour : '#98a2b3',
+      pin(m.x, m.y, (got ? '✅ ' : '') + (id === 'bangkok' ? '🏠 Bangkok (start)' : d.name) + (live ? '' : ' (soon)'), (live ? '' : 'soon') + (id === 'andes' ? ' below' : id === 'singapore' ? ' left' : ''), live ? d.stamp.colour : '#98a2b3',
         live ? function () { askFly(id); } : function () { soonBox(d); },
         live ? 'Fly to ' + d.name : d.name + ', coming soon');
     });
@@ -220,15 +220,16 @@
     var d = DEST[id], wrap = $('#twMapWrap'), old = $('.tw-go', wrap); if (old) old.remove();
     var box = document.createElement('div'); box.className = 'tw-go';
     var s = S.stamps[id];
-    box.innerHTML = '<strong>' + esc(d.name) + '</strong> · fly to ' + esc(d.gateway) + ', then travel by ' + d.transport.emoji + ' ' + esc(d.transport.name) + '.' + (s ? '<br><span class="tw-note">Your best: ' + s.best + ' of ' + maxOf(d) + ' points. Play again to beat it.</span>' : '') +
-      '<div class="tw-row" style="justify-content:center;margin-top:8px"><button class="tw-btn" type="button" id="twFly">Fly there ✈️</button><button class="tw-btn grey" type="button" id="twCancel">Not yet</button></div>';
+    var here = d.lonlat && Math.abs(d.lonlat[0] - HOME.lonlat[0]) < 0.3 && Math.abs(d.lonlat[1] - HOME.lonlat[1]) < 0.3 && S.loc === 'home';
+    box.innerHTML = '<strong>' + esc(d.name) + '</strong> · ' + (here ? 'you are already here! Explore' : 'fly to ' + esc(d.gateway) + ', then travel') + ' by ' + d.transport.emoji + ' ' + esc(d.transport.name) + '.' + (s ? '<br><span class="tw-note">Your best: ' + s.best + ' of ' + maxOf(d) + ' points. Play again to beat it.</span>' : '') +
+      '<div class="tw-row" style="justify-content:center;margin-top:8px"><button class="tw-btn" type="button" id="twFly">' + (here ? 'Start exploring ' + d.transport.emoji : 'Fly there ✈️') + '</button><button class="tw-btn grey" type="button" id="twCancel">Not yet</button></div>';
     wrap.appendChild(box); $('#twFly').focus();
     $('#twCancel').onclick = function () { box.remove(); };
     $('#twFly').onclick = function () { box.remove(); fly(id); };
   }
   function fly(id) {
     var a = locOf(S.loc), b = locOf(id), svg = $('#twMapWrap svg'), plane = svg.querySelector('#twPlane'), trail = svg.querySelector('#twTrail'), trail2 = svg.querySelector('#twTrail2');
-    if (S.loc === id) { startExpedition(id); return; }
+    if (S.loc === id || Math.hypot(b.x - a.x, b.y - a.y) < 4) { S.loc = id; save(); startExpedition(id); return; }
     var bx = b.x, wrap = 0; if (bx - a.x < -1000) { bx += 2000; wrap = -2000; } else if (bx - a.x > 1000) { bx -= 2000; wrap = 2000; }
     var cx = (a.x + bx) / 2, dist = Math.hypot(bx - a.x, b.y - a.y), cy = Math.min(a.y, b.y) - Math.min(220, Math.max(80, dist * .22));
     var d = 'M' + a.x + ' ' + a.y + ' Q' + cx + ' ' + cy + ' ' + bx + ' ' + b.y;
