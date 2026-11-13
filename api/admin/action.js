@@ -51,6 +51,7 @@ export default async function handler(req, res) {
   if (action === 'assign-teacher') return handleAssignTeacher(req, res, session);
   if (action === 'assign-group') return handleAssignGroup(req, res, session);
   if (action === 'assign-subjects') return handleAssignSubjects(req, res, session);
+  if (action === 'bulk-assign') return handleBulkAssign(req, res, session);
   if (action === 'reset-password') return handleResetPassword(req, res, session);
   if (action === 'temp-password') return handleTempPassword(req, res, session);
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
@@ -151,6 +152,7 @@ async function handleApprove(req, res, session) {
     organisation: application.organisation,
     country: application.country,
     role: assignedRole,
+    group_name: assignedRole === 'student' ? groupFromEmail(application.email) : null,
     status: 'active',
     application_id: application.id
   });
@@ -230,6 +232,82 @@ async function handleTempPassword(req, res, session) {
     return res.status(500).json({ error: 'Could not set a new password. Please try again.' });
   }
   return res.status(200).json({ ok: true, password, email: target.email });
+}
+
+// ---------------------------------------------------------------
+// Group from a Patana student email. The two digits before the @ are
+// the graduation year (majn32@patana.ac.th → class of 2032). Counting
+// from the current school year (August–July, Bangkok time):
+//   Year 12–13 → "IB Grad 'NN", Year 10–11 → "IGCSE Grad 'NN",
+//   Year 7–9 → "KS3 Grad 'NN". Anything else → null (set by hand).
+// Moves up automatically each August — no table to maintain.
+// public/js/sbl-admin.js has the same rule for its drop-down.
+// ---------------------------------------------------------------
+export function groupFromEmail(email) {
+  const m = /^[a-z]+(\d{2})@patana\.ac\.th$/i.exec(String(email || '').trim());
+  if (!m) return null;
+  const now = new Date(Date.now() + 7 * 3600 * 1000); // Bangkok
+  const endYear = now.getUTCMonth() >= 7 ? now.getUTCFullYear() + 1 : now.getUTCFullYear();
+  const yearsLeft = 2000 + Number(m[1]) - endYear;     // 0 = Year 13
+  const stage = yearsLeft <= 1 && yearsLeft >= 0 ? 'IB' : yearsLeft <= 3 && yearsLeft >= 2 ? 'IGCSE' : yearsLeft <= 6 && yearsLeft >= 4 ? 'KS3' : null;
+  return stage ? `${stage} Grad '${m[1]}` : null;
+}
+
+// ---------------------------------------------------------------
+// bulk-assign — { studentIds: [...], groupName?, groupFromEmail?: true,
+//                 addAssignment?: { subject, teacherId }, removeSubject? }
+// Applies the same change to many students at once (Admin → Approved
+// users → tick students → bulk bar). addAssignment adds a subject +
+// teacher, replacing any existing row for that subject; students who
+// already have 3 subjects are skipped and reported.
+// ---------------------------------------------------------------
+async function handleBulkAssign(req, res, session) {
+  const b = req.body || {};
+  const ids = Array.isArray(b.studentIds) ? b.studentIds.filter((x) => typeof x === 'string').slice(0, 500) : [];
+  if (!ids.length) return res.status(400).json({ error: 'Choose at least one student.' });
+  const supabase = getSupabaseAdmin();
+
+  let add = null;
+  if (b.addAssignment) {
+    const subject = b.addAssignment.subject, teacherId = String(b.addAssignment.teacherId || '');
+    if (SUBJECTS.indexOf(subject) === -1 || !teacherId) return res.status(400).json({ error: 'Choose a subject and a teacher.' });
+    const { data: t } = await supabase.from('sbl_profiles').select('id, role').eq('id', teacherId).maybeSingle();
+    if (!t || (t.role !== 'teacher' && t.role !== 'admin')) return res.status(400).json({ error: 'The chosen account is not a teacher.' });
+    add = { subject, teacher_id: teacherId };
+  }
+  const remove = typeof b.removeSubject === 'string' && b.removeSubject ? b.removeSubject : null;
+  const setGroup = typeof b.groupName === 'string' ? (b.groupName.trim().slice(0, 80) || null) : undefined;
+
+  const { data: rows, error } = await supabase.from('sbl_profiles').select('id, email, role, teacher_id, teacher_assignments, group_name').in('id', ids);
+  if (error) return res.status(500).json({ error: 'Could not load the chosen students.' });
+
+  let updated = 0; const skipped = [];
+  for (const r of rows || []) {
+    if (r.role !== 'student') { skipped.push(`${r.email} (not a student)`); continue; }
+    const patch = {};
+    if (setGroup !== undefined) patch.group_name = setGroup;
+    if (b.groupFromEmail) {
+      const g = groupFromEmail(r.email);
+      if (g) patch.group_name = g; else { skipped.push(`${r.email} (email has no year)`); if (!add && !remove) continue; }
+    }
+    if (add || remove) {
+      let list = Array.isArray(r.teacher_assignments) && r.teacher_assignments.length
+        ? r.teacher_assignments.slice()
+        : (r.teacher_id ? [{ subject: 'Geography', teacher_id: r.teacher_id }] : []);
+      if (remove) list = list.filter((a) => a.subject !== remove);
+      if (add) {
+        list = list.filter((a) => a.subject !== add.subject);
+        if (list.length >= MAX_ASSIGNMENTS) { skipped.push(`${r.email} (already has ${MAX_ASSIGNMENTS} subjects)`); if (patch.group_name === undefined) continue; }
+        else list.push(add);
+      }
+      patch.teacher_assignments = list;
+      patch.teacher_id = list.length ? list[0].teacher_id : null;
+    }
+    if (!Object.keys(patch).length) continue;
+    const { error: uErr } = await supabase.from('sbl_profiles').update(patch).eq('id', r.id);
+    if (uErr) { console.error('bulk-assign update failed:', uErr); skipped.push(`${r.email} (could not save)`); } else updated++;
+  }
+  return res.status(200).json({ ok: true, updated, skipped });
 }
 
 // Looks up an existing Supabase Auth login by email (used only to

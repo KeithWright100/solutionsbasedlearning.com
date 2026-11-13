@@ -211,6 +211,7 @@
     document.getElementById('countFeedback').textContent = state.feedback.filter(function (f) { return f.status !== 'reviewed'; }).length;
 
     renderPending();
+    fillBulkSelects();
     renderApproved();
     renderRejected();
     renderFeedback();
@@ -452,7 +453,19 @@
   // field like "SL Geography Grad'28", shown on that student's
   // teacher's /teacher/ roster. Saves on blur (same pattern as the
   // Teacher <select>, just for a text field — Enter blurs it too).
-  var GROUP_OPTIONS = ["KS3 Grad '33", "KS3 Grad '32", "KS3 Grad '31", "IGCSE Grad '30", "IGCSE Grad '29", "IB Grad '28", "IB Grad '27"];
+  // Groups follow the school year (August–July): Years 7–9 KS3, 10–11
+  // IGCSE, 12–13 IB, labelled by graduation year. Same rule as
+  // groupFromEmail() in api/admin/action.js, so the list moves up by
+  // itself each August.
+  function schoolEndYear() { var n = new Date(Date.now() + 7 * 3600 * 1000); return n.getUTCMonth() >= 7 ? n.getUTCFullYear() + 1 : n.getUTCFullYear(); }
+  var GROUP_OPTIONS = (function () {
+    var end = schoolEndYear(), out = [];
+    for (var left = 6; left >= 0; left--) {
+      var yy = String((end + left) % 100); if (yy.length < 2) yy = '0' + yy;
+      out.push((left >= 4 ? 'KS3' : left >= 2 ? 'IGCSE' : 'IB') + " Grad '" + yy);
+    }
+    return out;
+  })();
   function renderGroupCell(u) {
     if (u.role !== 'student') return '—';
     var cur = u.group_name || '';
@@ -471,9 +484,18 @@
     var empty = document.getElementById('approvedEmpty');
     var query = searchValue('approvedSearch');
     var allUsers = state.users.filter(function (u) { return u.role !== 'admin'; });
+    var show = document.getElementById('approvedFilter').value;
+    var gsel = document.getElementById('approvedGroupFilter');
+    fillGroupFilter(allUsers);
     var users = allUsers.filter(function (u) {
+      if (show && u.role !== 'student') return false;
+      if (show === 'nogroup' && u.group_name) return false;
+      if (show === 'noteacher' && assignmentsOf(u).length) return false;
+      if (gsel.value && (u.group_name || '') !== gsel.value) return false;
       return matchesSearch(query, [u.full_name, u.email]);
     });
+    lastShownStudents = users.filter(function (u) { return u.role === 'student'; }).map(function (u) { return u.id; });
+    updateBulkBar();
     body.innerHTML = '';
     if (!users.length) {
       empty.textContent = noMatchesMessage(query, 'No approved users yet.');
@@ -495,7 +517,7 @@
     users.forEach(function (u, i) {
       if (i === unassigned.length && assigned.length) {
         var divider = document.createElement('tr');
-        divider.innerHTML = '<td colspan="9" style="padding:0.9rem 1rem 0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); border-top:2px solid var(--navy-line);">Assigned to a teacher (' + assigned.length + ')</td>';
+        divider.innerHTML = '<td colspan="10" style="padding:0.9rem 1rem 0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); border-top:2px solid var(--navy-line);">Assigned to a teacher (' + assigned.length + ')</td>';
         body.appendChild(divider);
       }
       var tr = document.createElement('tr');
@@ -505,6 +527,7 @@
       var toggleLabel = u.status === 'suspended' ? 'Reactivate' : 'Suspend';
       var toggleAction = u.status === 'suspended' ? 'reactivate' : 'suspend';
       tr.innerHTML =
+        '<td>' + (u.role === 'student' ? '<input type="checkbox" class="sbl-pend-check sbl-user-check" data-id="' + u.id + '"' + (picked[u.id] ? ' checked' : '') + ' aria-label="Select ' + escapeHtml(u.full_name) + '">' : '') + '</td>' +
         '<td>' + escapeHtml(u.full_name) + '</td>' +
         '<td>' + escapeHtml(u.email) + '</td>' +
         '<td>' + escapeHtml(u.organisation || '—') + '<div class="sbl-muted">' + escapeHtml(u.country || '') + '</div></td>' +
@@ -522,6 +545,76 @@
       body.appendChild(tr);
     });
   }
+
+  // ---- Bulk assign: tick students, then set group / add a subject ----
+  var picked = {}, lastShownStudents = [], groupFilterKey = '';
+  function fillGroupFilter(all) {
+    var sel = document.getElementById('approvedGroupFilter'), cur = sel.value, set = {};
+    all.forEach(function (u) { if (u.role === 'student' && u.group_name) set[u.group_name] = (set[u.group_name] || 0) + 1; });
+    var key = JSON.stringify(set); if (key === groupFilterKey) return; groupFilterKey = key;
+    sel.innerHTML = '<option value="">Any group</option>' + Object.keys(set).sort().map(function (g) { return '<option value="' + escapeHtml(g) + '">' + escapeHtml(g) + ' (' + set[g] + ')</option>'; }).join('');
+    sel.value = set[cur] ? cur : '';
+  }
+  function fillBulkSelects() {
+    document.getElementById('bulkGroup').innerHTML = '<option value="">— No group —</option>' + GROUP_OPTIONS.map(function (g) { return '<option value="' + escapeHtml(g) + '">' + escapeHtml(g) + '</option>'; }).join('');
+    document.getElementById('bulkSubj').innerHTML = '<option value="">Subject…</option>' + SUBJECTS.map(function (x) { return '<option>' + x + '</option>'; }).join('');
+    document.getElementById('bulkRemove').innerHTML = '<option value="">Remove subject…</option>' + SUBJECTS.map(function (x) { return '<option>' + x + '</option>'; }).join('');
+    var tsel = document.getElementById('bulkTeacher'), cur = tsel.value;
+    tsel.innerHTML = '<option value="">Teacher…</option>' + state.teachers.map(function (t) { return '<option value="' + t.id + '">' + escapeHtml(t.full_name || t.email) + '</option>'; }).join('');
+    tsel.value = cur;
+  }
+  function updateBulkBar() {
+    Object.keys(picked).forEach(function (id) { if (!state.users.some(function (u) { return u.id === id; })) delete picked[id]; });
+    var n = Object.keys(picked).length;
+    document.getElementById('bulkBar').hidden = n === 0;
+    document.getElementById('bulkCount').textContent = n + ' student' + (n === 1 ? '' : 's') + ' selected';
+    var all = document.getElementById('approvedAll');
+    all.checked = lastShownStudents.length > 0 && lastShownStudents.every(function (id) { return picked[id]; });
+  }
+  document.getElementById('approvedFilter').addEventListener('change', renderApproved);
+  document.getElementById('approvedGroupFilter').addEventListener('change', renderApproved);
+  document.getElementById('approvedAll').addEventListener('change', function (e) {
+    lastShownStudents.forEach(function (id) { if (e.target.checked) picked[id] = true; else delete picked[id]; });
+    renderApproved();
+  });
+  document.getElementById('approvedBody').addEventListener('change', function (e) {
+    var c = e.target.closest('.sbl-user-check'); if (!c) return;
+    e.stopPropagation();
+    if (c.checked) picked[c.getAttribute('data-id')] = true; else delete picked[c.getAttribute('data-id')];
+    updateBulkBar();
+  });
+  document.getElementById('bulkClear').addEventListener('click', function () { picked = {}; renderApproved(); });
+  function bulkSend(body, btn, label) {
+    var ids = Object.keys(picked);
+    if (!ids.length) return;
+    clearMessages();
+    withButtonBusy(btn, 'Saving…', function () {
+      return postJson('/api/admin/action', Object.assign({ action: 'bulk-assign', studentIds: ids }, body)).then(function (r) {
+        if (!r.ok) { showError(r.data.error || 'Could not update the selected students.'); return; }
+        var sk = r.data.skipped || [];
+        var msg = label + ': ' + r.data.updated + ' student' + (r.data.updated === 1 ? '' : 's') + ' updated.' + (sk.length ? ' Skipped: ' + sk.join('; ') + '.' : '');
+        if (sk.length) showError(msg); else showNotice(msg);
+        loadData();
+      }, function () { showError('No reply from the server. Please try again.'); });
+    });
+  }
+  document.getElementById('bulkGroupBtn').addEventListener('click', function () {
+    var g = document.getElementById('bulkGroup').value;
+    bulkSend({ groupName: g }, this, g ? 'Group set to ' + g : 'Group cleared');
+  });
+  document.getElementById('bulkEmailBtn').addEventListener('click', function () {
+    bulkSend({ groupFromEmail: true }, this, 'Groups set from email');
+  });
+  document.getElementById('bulkAddBtn').addEventListener('click', function () {
+    var sj = document.getElementById('bulkSubj').value, t = document.getElementById('bulkTeacher').value;
+    if (!sj || !t) { showError('Choose a subject and a teacher to add.'); return; }
+    bulkSend({ addAssignment: { subject: sj, teacherId: t } }, this, sj + ' added');
+  });
+  document.getElementById('bulkRemoveBtn').addEventListener('click', function () {
+    var sj = document.getElementById('bulkRemove').value, btn = this;
+    if (!sj) { showError('Choose the subject to remove.'); return; }
+    sblAsk('Remove ' + sj + ' (and its teacher) from ' + Object.keys(picked).length + ' student(s)?').then(function (ok) { if (ok) bulkSend({ removeSubject: sj }, btn, sj + ' removed'); });
+  });
 
   function renderRejected() {
     var body = document.getElementById('rejectedBody');

@@ -16,6 +16,12 @@
      normal window widths, so scroll horizontally unconditionally
      rather than relying on .sbl-table's mobile-only overflow rule. */
   .sbl-approved-scroll { overflow-x: auto; }
+  .sbl-approved-tools { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; margin-bottom:0.8rem; }
+  .sbl-approved-tools .sbl-search-input { max-width:300px; }
+  .sbl-bulkbar { position:sticky; top:4rem; z-index:50; display:flex; flex-wrap:wrap; gap:0.6rem 1rem; align-items:center; padding:0.7rem 0.9rem; margin-bottom:0.8rem; border-radius:10px; background:#1d3448; border:1px solid var(--teal-bright, #2dd4bf); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+  .sbl-bulkbar[hidden] { display:none; }
+  .sbl-bulk-part { display:inline-flex; gap:0.35rem; align-items:center; }
+  .sbl-bulk-part select { max-width:180px; }
   .sbl-approved-table { min-width: 1280px; }
   .sbl-role-select,
   .sbl-teacher-select {
@@ -173,13 +179,28 @@
   </section>
 
   <section class="sbl-panel" id="panelApproved" style="display:none;">
-    <div class="sbl-search-bar">
+    <div class="sbl-approved-tools">
       <input type="search" id="approvedSearch" class="sbl-search-input" placeholder="Search by name or email…" aria-label="Search approved users by name or email">
+      <select id="approvedFilter" class="sbl-teacher-select" aria-label="Show">
+        <option value="">Everyone</option>
+        <option value="nogroup">Students with no group</option>
+        <option value="noteacher">Students with no subject/teacher</option>
+        <option value="students">All students</option>
+      </select>
+      <select id="approvedGroupFilter" class="sbl-teacher-select" aria-label="Group"><option value="">Any group</option></select>
+    </div>
+    <div class="sbl-bulkbar" id="bulkBar" hidden>
+      <b id="bulkCount">0 selected</b>
+      <span class="sbl-bulk-part"><select id="bulkGroup" class="sbl-teacher-select" aria-label="Group for selected students"></select><button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="bulkGroupBtn">Set group</button></span>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="bulkEmailBtn" title="Patana emails end in the graduation year, e.g. majn32 → KS3 Grad '32">Group from email</button>
+      <span class="sbl-bulk-part"><select id="bulkSubj" class="sbl-teacher-select" aria-label="Subject to add"></select><select id="bulkTeacher" class="sbl-teacher-select" aria-label="Teacher for that subject"></select><button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="bulkAddBtn">Add subject</button></span>
+      <span class="sbl-bulk-part"><select id="bulkRemove" class="sbl-teacher-select" aria-label="Subject to remove"></select><button type="button" class="sbl-btn sbl-btn--danger sbl-btn--small" id="bulkRemoveBtn">Remove</button></span>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="bulkClear">Clear ticks</button>
     </div>
     <div class="sbl-approved-scroll">
       <table class="sbl-table sbl-approved-table">
         <thead>
-          <tr><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Subjects &amp; teachers</th><th>Group</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
+          <tr><th style="width:2.2rem"><input type="checkbox" id="approvedAll" aria-label="Select all students shown"></th><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Subjects &amp; teachers</th><th>Group</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
         </thead>
         <tbody id="approvedBody"></tbody>
       </table>
