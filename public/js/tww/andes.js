@@ -62,9 +62,9 @@
               spots: [{ x: 14, y: 46, a: 'Pacific Ocean' }, { x: 16, y: 70, a: 'Nazca Plate' }, { x: 80, y: 66, a: 'South American Plate' }, { x: 30, y: 85, a: 'Trench' }, { x: 40, y: 19, a: 'Volcano' }, { x: 76, y: 15, a: 'Fold mountains' }],
               extra: [],
               explain: 'The Nazca Plate moves east and sinks beneath the South American Plate. The rocks are squeezed and folded into the Andes, and melting rock rises to form volcanoes.' },
-            { type: 'mcq', q: 'What type of plate boundary formed the Andes?', options: ['Destructive (convergent): two plates move towards each other', 'Constructive: plates move apart', 'Conservative: plates slide past each other', 'There is no plate boundary'], answer: 0,
+            { type: 'mcq', q: 'What type of plate boundary formed the Andes?', options: ['Destructive: two plates move towards each other', 'Constructive: two plates move apart and magma rises between them', 'Conservative: plates slide past', 'There is no plate boundary'], answer: 0,
               explain: 'Where plates collide, layers of rock are crumpled upwards into fold mountains.' },
-            { type: 'mcq', q: 'Why does the Nazca Plate sink under the South American Plate?', options: ['Oceanic plate is denser (heavier) than continental plate', 'It is lighter', 'It is made of ice', 'It is pushed by the wind'], answer: 0,
+            { type: 'mcq', q: 'Why does the Nazca Plate sink under the South American Plate?', options: ['Oceanic plate is denser than continental plate', 'It is lighter, so it is pushed down by the heavier continent above it', 'It is made of ice', 'It is pushed by the wind'], answer: 0,
               explain: 'Oceanic crust is thinner but denser, so it is forced down into the mantle. This is called subduction.' },
             { type: 'mcq', q: 'Which other hazard is common in the Andes because of the plate boundary?', options: ['Earthquakes', 'Hurricanes', 'Tsunamis from icebergs', 'Sandstorms'], answer: 0,
               explain: 'As the plates grind together, pressure builds and is released as earthquakes.' }
@@ -74,9 +74,9 @@
               spots: [{ x: 14, y: 46, a: 'Pacific Ocean' }, { x: 16, y: 70, a: 'Nazca Plate (oceanic)' }, { x: 80, y: 66, a: 'South American Plate' }, { x: 30, y: 85, a: 'Peru–Chile Trench' }, { x: 40, y: 19, a: 'Composite volcano' }, { x: 76, y: 15, a: 'Fold mountains' }, { x: 62, y: 88, a: 'Subduction zone' }],
               extra: ['Mid-ocean ridge'],
               explain: 'A mid-ocean ridge forms at a constructive margin, not here. The oceanic Nazca Plate subducts at the trench; compression folds the continental crust, and melting releases magma that feeds composite volcanoes.' },
-            { type: 'mcq', q: 'Why does magma form above the subducting Nazca Plate?', options: ['Water released from the sinking plate lowers the melting point of the mantle above it', 'Friction melts the whole continent', 'The Sun heats the rocks', 'The ocean boils the crust'], answer: 0,
+            { type: 'mcq', q: 'Why does magma form above the subducting Nazca Plate?', options: ['Water from the sinking plate lowers the melting point of the mantle', 'Friction between the plates melts the whole continent from below', 'The Sun heats the rocks', 'The ocean boils the crust'], answer: 0,
               explain: 'As the slab sinks it releases water, which helps the mantle wedge above to melt. The magma is sticky and gas-rich, so eruptions can be explosive.' },
-            { type: 'mcq', q: 'In 1970 a huge earthquake in Peru set off an avalanche from Huascarán, the country’s highest mountain. What happened?', options: ['Ice and rock buried the town of Yungay', 'A new island formed', 'The Amazon reversed direction', 'Nothing happened'], answer: 0,
+            { type: 'mcq', q: 'In 1970 a huge earthquake in Peru set off an avalanche from Huascarán, the country’s highest mountain. What happened?', options: ['Ice and rock buried the town of Yungay', 'A new volcano formed on the side of the mountain within a few days', 'The Amazon reversed direction', 'Nothing happened'], answer: 0,
               explain: 'Earthquakes in mountains often trigger secondary hazards such as landslides and avalanches, which can be deadlier than the shaking itself.' }
           ]
         }
@@ -85,7 +85,7 @@
         id: 'altitude', title: 'High and cool', icon: '🌡️',
         tasks: {
           ks3: [
-            { type: 'mcq', graph: true, q: 'Cusco is in the tropics, but the temperature is only about 11–15°C. Why?', options: ['It is very high up, and temperature falls with altitude', 'It is near the North Pole', 'It is always cloudy', 'The Sun never shines'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Cusco is in the tropics, but the temperature is only about 11–15°C. Why?', options: ['It is high up, and temperature falls with altitude', 'It is next to a cold ocean current, which cools the air all year round', 'It is near the South Pole', 'It is always cloudy'], answer: 0,
               explain: 'At 3,300 m the air is thinner and holds less heat. Temperature falls by about 6.5°C for every 1,000 m you climb.' },
             { type: 'mcq', graph: true, q: 'Which is the driest month in Cusco?', options: ['June', 'January', 'February', 'December'], answer: 0,
               explain: 'June has almost no rain, only about 2 mm. May to August is the dry season and the busiest time for trekkers.' },
@@ -95,7 +95,7 @@
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Cusco (°C).', answer: 4.1, tol: 0.1, unit: '°C',
               explain: 'Warmest 14.9°C (November) − coolest 10.8°C (July) = 4.1°C. The range is small, but nights in the dry season can drop below freezing because clear skies let heat escape.' },
-            { type: 'mcq', graph: true, q: 'What brings Cusco’s wet season from December to March?', options: ['Moist air from the Amazon rising over the mountains as the ITCZ and the South American monsoon move south', 'Cold fronts from Antarctica', 'Westerly winds from the Pacific', 'Hurricanes'], answer: 0,
+            { type: 'mcq', graph: true, q: 'What brings Cusco’s wet season from December to March?', options: ['Moist Amazon air rising over the mountains in the southern summer', 'Cold fronts from Antarctica moving north along the coast every winter', 'Westerly winds from the Pacific', 'Hurricanes'], answer: 0,
               explain: 'In the southern summer, moisture from the Amazon basin is drawn towards the Andes and rises, giving afternoon storms.' },
             { type: 'sort', q: 'Vertical zonation: sort these land uses by altitude in the Peruvian Andes.', bins: ['Warm valleys (below 2,500 m)', 'Cool slopes (2,500–3,800 m)', 'High puna (above 3,800 m)'],
               items: [['Coffee', 0], ['Tropical fruit', 0], ['Maize', 1], ['Wheat and barley', 1], ['Alpaca and llama herding', 2], ['Frost-hardy bitter potatoes', 2]],
@@ -107,21 +107,21 @@
         id: 'farming', title: 'Terraces and llamas', icon: '🦙',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Why did the Inca build terraces on steep mountainsides?', options: ['To make flat land for crops and stop soil washing away', 'To build roads for cars', 'To stop volcanoes erupting', 'As steps for tourists'], answer: 0,
+            { type: 'mcq', q: 'Why did the Inca build terraces on steep mountainsides?', options: ['To make flat land for crops and stop soil washing away', 'To build wide roads for carts and wagons pulled by llamas', 'To stop volcanoes erupting', 'As steps for visitors'], answer: 0,
               explain: 'Terraces create flat fields, hold rainwater and reduce soil erosion. Many are still farmed today.' },
-            { type: 'mcq', q: 'What are llamas and alpacas mainly used for?', options: ['Wool, carrying loads and meat', 'Ploughing rice paddies', 'Pulling sledges on ice', 'Racing'], answer: 0,
+            { type: 'mcq', q: 'What are llamas and alpacas mainly used for?', options: ['Wool, carrying loads and meat', 'Ploughing flooded rice paddies', 'Pulling sledges on ice', 'Racing'], answer: 0,
               explain: 'Alpacas give fine wool, llamas carry loads on mountain paths, and both can live on high grasslands where crops struggle.' },
             { type: 'mcq', q: 'Machu Picchu is one of the world’s most famous ancient sites. Who built it?', options: ['The Inca', 'The Romans', 'The Aztecs', 'The Vikings'], answer: 0,
               explain: 'The Inca built Machu Picchu in the 1400s, high on a ridge above the Urubamba River. It is now a World Heritage Site.' },
-            { type: 'mcq', q: 'Culture: millions of Peruvians speak Quechua, the language of the Inca. Every June, Cusco holds Inti Raymi. What is it?', options: ['A festival of the Sun, held at the winter solstice', 'A football final', 'A llama race', 'A snow festival in December'], answer: 0,
+            { type: 'mcq', q: 'Culture: millions of Peruvians speak Quechua, the language of the Inca. Every June, Cusco holds Inti Raymi. What is it?', options: ['A festival of the Sun at the winter solstice', 'A festival celebrating the first snow on the peaks in December', 'A football final', 'A llama race'], answer: 0,
               explain: 'Inti Raymi was the Inca festival honouring the Sun god Inti. Today it is re-enacted at Sacsayhuamán, attracting both local people and tourists.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Apart from flat land, how do terraces help farming at high altitude?', options: ['Stone walls absorb heat by day and release it at night, reducing frost damage', 'They make the air thicker', 'They attract more sunlight', 'They stop all rain'], answer: 0,
+            { type: 'mcq', q: 'Apart from flat land, how do terraces help farming at high altitude?', options: ['Stone walls store heat by day and release it at night', 'They make the air thicker, so there is more oxygen for crops to grow', 'They attract more sunlight', 'They stop all rain'], answer: 0,
               explain: 'Terraces create warmer microclimates and improve drainage and irrigation, letting crops grow higher than they otherwise could.' },
-            { type: 'mcq', q: 'Peru is now one of the world’s top exporters of blueberries and avocados, grown in the desert on the coast. What makes this possible?', options: ['Irrigation using rivers fed by Andean rain and glacier melt', 'Heavy coastal rainfall', 'Snow on the beaches', 'Rainforest soils'], answer: 0,
+            { type: 'mcq', q: 'Peru is now one of the world’s top exporters of blueberries and avocados, grown in the desert on the coast. What makes this possible?', options: ['Irrigation from rivers fed by Andean rain and ice', 'Heavy coastal rainfall from the cold Humboldt Current every winter', 'Snow on the beaches', 'Rainforest soils'], answer: 0,
               explain: 'The coast is a desert, so export farms depend on water flowing down from the Andes. This links farming to the mountains’ glaciers.' },
-            { type: 'mcq', q: 'Peru limits the number of daily visitors to Machu Picchu. Why?', options: ['To reduce erosion and damage to the site and its fragile mountain environment', 'Because tourists bring no money', 'Because it is closed to Peruvians', 'To make it easier to find parking'], answer: 0,
+            { type: 'mcq', q: 'Peru limits the number of daily visitors to Machu Picchu. Why?', options: ['To reduce erosion and damage to the site', 'Because tourists bring almost no money to the local area or to the country', 'It is closed to Peruvians', 'To make parking easier'], answer: 0,
               explain: 'Tourism brings vital income but also crowding, erosion and waste. Timed tickets spread visitors out to protect the site.' }
           ]
         }
@@ -132,15 +132,15 @@
           ks3: [
             { type: 'mcq', q: 'About how much of the world’s tropical glaciers are in Peru?', options: ['About 70%', 'About 1%', 'About 10%', 'None'], answer: 0,
               explain: 'Tropical glaciers only survive on very high mountains. Most of them are in the Peruvian Andes.' },
-            { type: 'mcq', q: 'Why are the glaciers so important to people living below them?', options: ['Meltwater keeps rivers flowing in the dry season', 'They keep the towns warm', 'They are used for skating', 'They block earthquakes'], answer: 0,
+            { type: 'mcq', q: 'Why are the glaciers so important to people living below them?', options: ['Meltwater keeps rivers flowing in the dry season', 'They keep the towns warm at night by reflecting heat back down', 'They are used for skating', 'They block earthquakes'], answer: 0,
               explain: 'In the dry season, when there is little rain, glaciers release water that people use for drinking, farming and hydro-electric power.' },
-            { type: 'mcq', q: 'Peru has lost about 40% of its glacier area since the 1960s and 70s. What is the main cause?', options: ['Rising temperatures due to climate change', 'Volcanoes melting them', 'People collecting ice', 'Too much snow'], answer: 0,
+            { type: 'mcq', q: 'Peru has lost about 40% of its glacier area since the 1960s and 70s. What is the main cause?', options: ['Rising temperatures due to climate change', 'Volcanoes erupting under the ice and melting it from below', 'People collecting ice', 'Too much snow'], answer: 0,
               explain: 'Warmer air means the glaciers melt faster than snowfall can replace them, so they shrink up the mountains.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Scientists say most river catchments in the Cordillera Blanca have passed “peak water”. What does this mean?', options: ['Meltwater flow rose as glaciers shrank, but has now started to fall as there is less ice left', 'Rivers have reached their highest flood level', 'Glaciers have stopped melting', 'The rivers are full of salt water'], answer: 0,
+            { type: 'mcq', q: 'Scientists say most river catchments in the Cordillera Blanca have passed “peak water”. What does this mean?', options: ['Meltwater flow rose as ice shrank, but is now falling', 'Rivers have reached their highest ever flood level and will now stay there', 'Glaciers have stopped melting', 'The rivers are now salty'], answer: 0,
               explain: 'At first, melting releases extra water. As the ice runs out, dry-season flow declines, threatening water supplies.' },
-            { type: 'mcq', q: 'In 1941 a flood from Lake Palcacocha destroyed part of the city of Huaraz. What type of hazard was this?', options: ['A glacial lake outburst flood, when a lake held back by loose moraine suddenly bursts', 'A tsunami', 'A lahar from a volcano', 'A hurricane storm surge'], answer: 0,
+            { type: 'mcq', q: 'In 1941 a flood from Lake Palcacocha destroyed part of the city of Huaraz. What type of hazard was this?', options: ['A glacial lake outburst flood', 'A tsunami caused by an undersea earthquake', 'A lahar from a volcano', 'A hurricane storm surge'], answer: 0,
               explain: 'Lakes grow as glaciers retreat. If ice or rock falls into one, a wave can breach its moraine dam. Palcacocha is still monitored and partly drained.' },
             { type: 'sort', q: 'Classify these responses to glacier retreat.', bins: ['Reducing hazard', 'Securing water supply'],
               items: [['Lowering lake levels with pipes and siphons', 0], ['Early warning sensors on glacial lakes', 0], ['Hazard maps to stop building in flood paths', 0], ['Building reservoirs to store wet-season rain', 1], ['Restoring traditional water channels and wetlands', 1]],

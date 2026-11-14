@@ -71,11 +71,11 @@
               spots: [{ x: 14, y: 90, a: 'Caribbean Sea' }, { x: 86, y: 90, a: 'Atlantic Ocean' }, { x: 22, y: 20, a: 'Sandy beach' }, { x: 16, y: 60, a: 'Coral reef' }, { x: 46, y: 44, a: 'Coral limestone' }, { x: 84, y: 58, a: 'Big waves' }],
               extra: [],
               explain: 'The west coast faces the calm Caribbean Sea, with sandy beaches and coral reefs. The east coast faces the Atlantic, where strong winds make big waves.' },
-            { type: 'mcq', q: 'Why is the west coast calmer than the east coast?', options: ['The wind usually blows from the east, so the west coast is sheltered', 'The west coast has no water', 'Sharks stop the waves', 'The Caribbean Sea is frozen'], answer: 0,
+            { type: 'mcq', q: 'Why is the west coast calmer than the east coast?', options: ['The wind usually blows from the east, so the west is sheltered', 'The west coast has a long sea wall that stops the waves', 'Sharks stop the waves', 'The Caribbean Sea is frozen'], answer: 0,
               explain: 'Trade winds blow from the north-east across the Atlantic, building big waves on the east coast. The west coast is in the shelter of the island.' },
-            { type: 'mcq', q: 'Coral reefs only grow in certain conditions. Which is correct?', options: ['Warm, clear, shallow, salty water', 'Cold, deep, muddy water', 'Fresh water in rivers', 'Ice-covered seas'], answer: 0,
+            { type: 'mcq', q: 'Coral reefs only grow in certain conditions. Which is correct?', options: ['Warm, clear, shallow, salty water', 'Cold, deep, muddy water', 'Fresh water in rivers and lakes', 'Ice-covered seas'], answer: 0,
               explain: 'Corals need sunlight for the tiny algae living inside them, so they grow in warm, clear, shallow sea water.' },
-            { type: 'mcq', q: 'Most of Barbados’s white sand beaches are made from…', options: ['broken-up coral and shells', 'volcanic ash', 'melted glaciers', 'river mud'], answer: 0,
+            { type: 'mcq', q: 'Most of Barbados’s white sand beaches are made from…', options: ['broken-up coral and shells', 'volcanic ash from St Vincent', 'melted glaciers', 'river mud'], answer: 0,
               explain: 'Waves break down coral and shells into fine white sand, which is why healthy reefs matter for beaches.' }
           ],
           adv: [
@@ -83,11 +83,11 @@
               spots: [{ x: 14, y: 90, a: 'Caribbean Sea' }, { x: 86, y: 90, a: 'Atlantic Ocean' }, { x: 22, y: 20, a: 'Leeward coast' }, { x: 16, y: 60, a: 'Fringing reef' }, { x: 46, y: 44, a: 'Coral limestone cap' }, { x: 84, y: 58, a: 'Windward coast' }, { x: 82, y: 16, a: 'NE trade winds' }],
               extra: ['Active volcano'],
               explain: 'Barbados has no volcano. It is uplifted sediment capped by coral limestone; the leeward west coast has fringing reefs, while the windward east coast takes the full force of the trade winds and Atlantic swell.' },
-            { type: 'mcq', q: 'Unlike nearby St Vincent, Barbados is not volcanic. How did it form?', options: ['Sediments were scraped up and lifted above the sea at a subduction zone, then capped with coral', 'It is the top of a mid-ocean ridge', 'It was left by a glacier', 'It is a hotspot volcano like Hawaii'], answer: 0,
+            { type: 'mcq', q: 'Unlike nearby St Vincent, Barbados is not volcanic. How did it form?', options: ['Sediments were pushed up at a subduction zone, then capped with coral', 'It is the top of a mid-ocean ridge where new crust forms between two plates', 'It was left by a glacier', 'It is a hotspot volcano like Hawaii'], answer: 0,
               explain: 'Barbados lies east of the volcanic arc, on a wedge of sediment pushed up as the Atlantic plate sinks beneath the Caribbean plate. Coral reefs grew on it as it rose.' },
             { type: 'mcq', q: 'In the north-east, the coral cap has been worn away, exposing softer rocks. What problem does this area face?', options: ['Landslides and soil erosion', 'Volcanic eruptions', 'Glacial floods', 'Desertification by sand dunes'], answer: 0,
               explain: 'This hilly area, called the Scotland District, has clays and sandstones that slip and erode easily, especially after heavy rain.' },
-            { type: 'mcq', q: 'Healthy fringing reefs protect the west coast. How?', options: ['They break up waves offshore, reducing beach erosion and storm damage', 'They make the sea warmer', 'They stop the tide', 'They attract hurricanes away'], answer: 0,
+            { type: 'mcq', q: 'Healthy fringing reefs protect the west coast. How?', options: ['They break up waves offshore, reducing erosion', 'They make the sea warmer, which slows down the waves near the beach', 'They stop the tide', 'They push hurricanes away'], answer: 0,
               explain: 'Reefs absorb much of a wave’s energy. Damaged reefs, from warming seas, pollution or boat anchors, leave beaches and hotels more exposed.' }
           ]
         }
@@ -108,7 +108,7 @@
               explain: 'Warmest 27.0°C − coolest 24.5°C (January) = 2.5°C. The surrounding ocean keeps the range very small.' },
             { type: 'number', graph: true, q: 'Calculate the total annual rainfall (mm).', answer: 1238, tol: 10, unit: 'mm',
               explain: 'Adding the twelve months gives about 1,238 mm.' },
-            { type: 'mcq', graph: true, q: 'The wettest months, June to November, match the Atlantic hurricane season. Why?', options: ['Sea temperatures are highest then, fuelling tropical storms and waves', 'The ITCZ is furthest south', 'It is winter in Barbados', 'Snow melts in the Andes'], answer: 0,
+            { type: 'mcq', graph: true, q: 'The wettest months, June to November, match the Atlantic hurricane season. Why?', options: ['Sea temperatures are highest, fuelling tropical storms', 'The ITCZ is furthest south then, bringing cold air from the Southern Ocean', 'It is winter in Barbados', 'Snow melts in the Andes'], answer: 0,
               explain: 'Warm late-summer seas and the ITCZ further north bring tropical waves, storms and occasionally hurricanes.' }
           ]
         }
@@ -117,21 +117,21 @@
         id: 'hurricane', title: 'Hurricane Beryl', icon: '🌀',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Hurricanes form over sea that is at least about…', options: ['26–27°C', '5°C', '15°C', '0°C'], answer: 0,
+            { type: 'mcq', q: 'Hurricanes form over sea that is at least about…', options: ['26–27°C', '5°C', '15°C', '35–40°C'], answer: 0,
               explain: 'Warm sea water evaporates and the rising, condensing air releases energy that powers the storm.' },
             { type: 'sort', q: 'Sort these effects of a hurricane.', bins: ['Primary (caused directly)', 'Secondary (happen later)'],
               items: [['Roofs blown off', 0], ['Fishing boats smashed by waves', 0], ['Coastal flooding from storm surge', 0], ['Fishers lose their income', 1], ['Tourists cancel holidays', 1], ['Food prices rise', 1]],
               explain: 'Primary effects come straight from the wind, rain and waves. Secondary effects follow afterwards.' },
-            { type: 'mcq', q: 'In July 2024 Hurricane Beryl passed south of Barbados. Which group of workers was hit hardest?', options: ['Fishers, as dozens of boats in Bridgetown harbour were destroyed', 'Ski instructors', 'Coal miners', 'Glacier guides'], answer: 0,
+            { type: 'mcq', q: 'In July 2024 Hurricane Beryl passed south of Barbados. Which group of workers was hit hardest?', options: ['Fishers, as dozens of boats were destroyed', 'Sugar factory workers, as all the cane fields were flooded', 'Coal miners', 'Glacier guides'], answer: 0,
               explain: 'Huge waves wrecked about 64 fishing boats and damaged many more, as well as part of the harbour wall.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Beryl became the earliest Category 5 hurricane ever recorded in the Atlantic. What was the main reason?', options: ['Record-high sea temperatures in the Atlantic for early summer', 'A volcanic eruption', 'Cold air from the Arctic', 'An earthquake'], answer: 0,
+            { type: 'mcq', q: 'Beryl became the earliest Category 5 hurricane ever recorded in the Atlantic. What was the main reason?', options: ['Record-high sea temperatures for early summer', 'Cold air from the Arctic meeting warm air over the Caribbean', 'A volcanic eruption', 'An earthquake'], answer: 0,
               explain: 'Unusually warm water gave Beryl extra energy, so it strengthened very quickly. Scientists expect warming seas to make rapid intensification more common.' },
             { type: 'sort', q: 'Classify these ways Barbados manages hurricane risk.', bins: ['Before the storm', 'After the storm'],
               items: [['Building codes and hurricane straps for roofs', 0], ['Early warnings and shelters', 0], ['Catastrophe insurance shared with other Caribbean countries', 0], ['Rebuilding the fishing harbour', 1], ['Insurance payouts to fund recovery', 1]],
               explain: 'Preparation reduces damage; recovery measures help people return to normal more quickly.' },
-            { type: 'mcq', q: 'Barbados added “hurricane clauses” to its government debts. What do they do?', options: ['Pause debt repayments after a major disaster so money can go to recovery', 'Ban hurricanes', 'Make tourists pay for storms', 'Cancel all debts forever'], answer: 0,
+            { type: 'mcq', q: 'Barbados added “hurricane clauses” to its government debts. What do they do?', options: ['Pause repayments after a disaster so money goes to recovery', 'Make tourists pay a special tax whenever a hurricane hits the island', 'Ban hurricanes', 'Cancel all debts forever'], answer: 0,
               explain: 'Small island states can lose a large share of their GDP in one storm, so pausing repayments helps them recover faster.' }
           ]
         }
@@ -140,22 +140,22 @@
         id: 'tourism', title: 'From sugar to tourism', icon: '🏖️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'For about 300 years, Barbados’s economy was based on which crop, grown on plantations?', options: ['Sugar cane', 'Wheat', 'Tea', 'Apples'], answer: 0,
+            { type: 'mcq', q: 'For about 300 years, Barbados’s economy was based on which crop, grown on plantations?', options: ['Sugar cane', 'Tobacco', 'Coffee', 'Cotton and tea'], answer: 0,
               explain: 'Sugar plantations used the labour of enslaved Africans until slavery was abolished in the 1830s. Sugar is now a small part of the economy.' },
             { type: 'mcq', q: 'What is the biggest industry in Barbados today?', options: ['Tourism', 'Car manufacturing', 'Coal mining', 'Forestry'], answer: 0,
               explain: 'Beaches, warm weather and reefs attract visitors, many from the UK, USA and Canada.' },
             { type: 'sort', q: 'Sort the effects of tourism in Barbados.', bins: ['Positive', 'Negative'],
               items: [['Jobs in hotels and restaurants', 0], ['Money to protect reefs and beaches', 0], ['Better roads and airports', 0], ['Pollution damaging coral reefs', 1], ['Seasonal jobs with low pay', 1], ['Heavy use of fresh water', 1]],
               explain: 'Tourism brings income and jobs but needs careful management to protect the environment that visitors come to see.' },
-            { type: 'mcq', q: 'Culture: Crop Over is Barbados’s biggest festival, with costumes, music and parades. What did it originally celebrate?', options: ['The end of the sugar cane harvest', 'The first snowfall', 'A hurricane passing', 'The opening of an airport'], answer: 0,
+            { type: 'mcq', q: 'Culture: Crop Over is Barbados’s biggest festival, with costumes, music and parades. What did it originally celebrate?', options: ['The end of the sugar cane harvest', 'The first hurricane of the season passing safely', 'The opening of an airport', 'The first snowfall'], answer: 0,
               explain: 'Crop Over began on the sugar plantations and is now a summer carnival of calypso and soca music that attracts many visitors.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Why is relying on tourism risky for a small island economy like Barbados?', options: ['Shocks such as COVID-19 in 2020 or a hurricane can cause visitor numbers and income to collapse', 'Tourists never spend money', 'Tourism uses no workers', 'There is no risk'], answer: 0,
+            { type: 'mcq', q: 'Why is relying on tourism risky for a small island economy like Barbados?', options: ['Shocks like COVID-19 or a hurricane can make income collapse', 'Tourists rarely spend money on the island because most holidays are prepaid abroad', 'Tourism uses no workers', 'There is no risk'], answer: 0,
               explain: 'In 2020 international travel almost stopped, and the economy shrank sharply. Diversifying, for example into financial services, reduces this risk.' },
-            { type: 'mcq', q: 'The Folkestone Marine Reserve on the west coast is a protected area. Why create one?', options: ['To limit fishing, anchoring and pollution so reefs and fish can recover', 'To build more hotels on the reef', 'To ban all tourists from Barbados', 'To mine coral for building'], answer: 0,
+            { type: 'mcq', q: 'The Folkestone Marine Reserve on the west coast is a protected area. Why create one?', options: ['To limit fishing, anchoring and pollution so reefs recover', 'To build more hotels on the reef so tourists can see the corals from their rooms', 'To ban all tourists from Barbados', 'To mine coral for building'], answer: 0,
               explain: 'Marine protected areas zone different activities, protecting reefs that support both tourism and fishing.' },
-            { type: 'mcq', q: 'Barbados is a high-income country, yet it is classed as a Small Island Developing State. Why?', options: ['Its small size and isolation make it very vulnerable to disasters, sea-level rise and global shocks', 'It has a very low income', 'It has no tourism', 'It is landlocked'], answer: 0,
+            { type: 'mcq', q: 'Barbados is a high-income country, yet it is classed as a Small Island Developing State. Why?', options: ['Its small size and isolation make it vulnerable to shocks', 'It has a very low income per person compared with other Caribbean countries', 'It has no tourism', 'It is landlocked'], answer: 0,
               explain: 'SIDS share challenges such as small markets, high import costs and exposure to climate hazards, whatever their income level.' }
           ]
         }

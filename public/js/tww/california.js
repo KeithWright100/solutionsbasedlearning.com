@@ -58,9 +58,9 @@
               spots: [{ x: 15, y: 62, a: 'Pacific plate' }, { x: 78, y: 30, a: 'North American plate' }, { x: 78, y: 80, a: 'San Andreas Fault' }, { x: 48, y: 22, a: 'San Francisco' }, { x: 45, y: 92, a: 'Los Angeles' }],
               extra: [],
               explain: 'The San Andreas Fault separates the Pacific plate (west) from the North American plate (east). Los Angeles sits on the Pacific plate side; San Francisco sits just east of the fault.' },
-            { type: 'mcq', q: 'The two plates at the San Andreas Fault slide past each other. What type of plate boundary is this?', options: ['Conservative (transform)', 'Destructive', 'Constructive', 'Collision'], answer: 0,
+            { type: 'mcq', q: 'The two plates at the San Andreas Fault slide past each other. What type of plate boundary is this?', options: ['Conservative (transform)', 'Destructive (convergent)', 'Constructive (divergent)', 'Collision (convergent)'], answer: 0,
               explain: 'At a conservative boundary, crust is neither made nor destroyed. The plates grind past each other, getting stuck and then suddenly slipping, which causes earthquakes.' },
-            { type: 'mcq', q: 'Why are there no volcanoes along the San Andreas Fault?', options: ['The plates slide sideways, so no magma is produced', 'It is too cold', 'There is too much water', 'Volcanoes are not allowed'], answer: 0,
+            { type: 'mcq', q: 'Why are there no volcanoes along the San Andreas Fault?', options: ['The plates slide sideways, so no magma forms', 'The fault is under the sea, so water cools any magma before it can erupt', 'The crust there is too thick for magma to reach the surface', 'Volcanoes only form near the Equator'], answer: 0,
               explain: 'Volcanoes form where plates move apart or where one sinks beneath another. Sideways movement does not melt rock.' }
           ],
           adv: [
@@ -70,7 +70,7 @@
               explain: 'There is no trench here: this is a transform boundary. The Pacific plate moves north-west relative to the North American plate.' },
             { type: 'number', q: 'The San Andreas slips on average about 35 mm a year in its central section. How far would Los Angeles move along the fault in 10,000 years, in metres?', answer: 350, tol: 2, unit: 'm',
               explain: '35 mm × 10,000 = 350,000 mm = 350 m. Over millions of years this movement has shifted rocks hundreds of kilometres.' },
-            { type: 'mcq', q: 'Why do large earthquakes occur on the San Andreas rather than steady, gentle movement everywhere?', options: ['Friction locks sections of the fault; stress builds until the rocks suddenly rupture', 'Magma pushes the plates apart', 'The plates stop moving between earthquakes', 'Earthquakes happen only at night'], answer: 0,
+            { type: 'mcq', q: 'Why do large earthquakes occur on the San Andreas rather than steady, gentle movement everywhere?', options: ['Friction locks the fault; stress builds until rocks suddenly slip', 'Magma pushes the plates apart in sudden bursts every few hundred years', 'The plates stop moving completely between earthquakes', 'Earthquakes only happen when the tides are high'], answer: 0,
               explain: 'This is elastic rebound: locked sections store strain for decades or centuries, then release it in seconds. Some central sections “creep” instead, with fewer large quakes.' }
           ]
         }
@@ -79,21 +79,21 @@
         id: 'quakes', title: 'Living with earthquakes', icon: '🏚️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'In 1906 a magnitude 7.8 earthquake struck San Francisco. What caused most of the destruction?', options: ['Shaking, and huge fires that burned for days after gas pipes and chimneys broke', 'A volcanic eruption', 'A hurricane', 'Snow avalanches'], answer: 0,
+            { type: 'mcq', q: 'In 1906 a magnitude 7.8 earthquake struck San Francisco. What caused most of the destruction?', options: ['Shaking, and fires that burned for days after gas pipes broke', 'A tsunami that swept across the city from the Pacific Ocean minutes later', 'A volcanic eruption in the hills above the city', 'Landslides from the mountains into the bay'], answer: 0,
               explain: 'Shaking wrecked buildings, then fires spread across the city because broken water mains meant firefighters had little water.' },
             { type: 'sort', q: 'Sort these into things done before an earthquake and things done during or after.', bins: ['Before (prepare)', 'During or after (respond)'],
               items: [['Building earthquake-resistant structures', 0], ['Practising “Drop, Cover, Hold On” drills', 0], ['Keeping an emergency kit with water and food', 0], ['Searching collapsed buildings for survivors', 1], ['Setting up emergency shelters', 1], ['Turning off gas supplies to prevent fires', 1]],
               explain: 'Preparation saves lives before a quake; rescue and shelter matter after it.' },
-            { type: 'mcq', q: 'The 1994 Northridge earthquake in Los Angeles was magnitude 6.7 and killed 57 people. Why was the death toll fairly low for a big city?', options: ['Strict building codes and good emergency services', 'It happened in the middle of the ocean', 'Nobody lives in Los Angeles', 'The earthquake lasted one second'], answer: 0,
+            { type: 'mcq', q: 'The 1994 Northridge earthquake in Los Angeles was magnitude 6.7 and killed 57 people. Why was the death toll fairly low for a big city?', options: ['Strict building codes and good emergency services', 'It happened far out in the ocean, well away from any of the city’s homes', 'Most people had been evacuated the day before', 'The shaking lasted less than a second'], answer: 0,
               explain: 'California has strong building rules and well-trained emergency services. It also struck at 4:30 am, when roads and offices were nearly empty.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Northridge (1994, M6.7) killed 57 people but caused enormous economic losses. Which best explains this pattern for a high-income country?', options: ['Strong building codes save lives, but high-value buildings and infrastructure make repair costs huge', 'Poor buildings cause high deaths and low costs', 'Earthquakes cause no damage in rich countries', 'Insurance stops damage happening'], answer: 0,
+            { type: 'mcq', q: 'Northridge (1994, M6.7) killed 57 people but caused enormous economic losses. Which best explains this pattern for a high-income country?', options: ['Good building codes save lives, but valuable buildings are costly to repair', 'Poorly built homes collapsed, which caused many deaths but cost very little to fix', 'Earthquakes cause almost no damage in wealthy countries', 'Insurance stops damage from happening'], answer: 0,
               explain: 'HICs typically see lower death tolls but higher absolute economic losses, because so much valuable property and infrastructure is exposed.' },
             { type: 'sort', q: 'Classify these earthquake management strategies.', bins: ['Mitigation (reduce the impact)', 'Preparedness', 'Response'],
               items: [['Retrofitting bridges and buildings', 0], ['Land-use rules near faults', 0], ['ShakeAlert early warning on phones', 1], ['Statewide ShakeOut drills', 1], ['Urban search and rescue teams', 2], ['Emergency shelters and water supplies', 2]],
               explain: 'Mitigation reduces vulnerability long-term; preparedness gets people and systems ready; response deals with the immediate aftermath.' },
-            { type: 'mcq', q: 'Parts of San Francisco built on filled-in bay land suffered worse shaking in earthquakes. Why?', options: ['Loose, water-saturated ground amplifies shaking and can liquefy', 'Filled land is made of solid granite', 'It is further from the fault', 'Water absorbs all earthquake energy'], answer: 0,
+            { type: 'mcq', q: 'Parts of San Francisco built on filled-in bay land suffered worse shaking in earthquakes. Why?', options: ['Loose, wet ground amplifies shaking and can liquefy', 'Filled land is made of solid granite, which passes on the shaking more strongly', 'It is much further from the fault', 'Water absorbs all the earthquake energy'], answer: 0,
               explain: 'Soft, saturated sediments amplify seismic waves and can lose strength (liquefaction), as seen in the Marina District in 1989.' }
           ]
         }
@@ -104,15 +104,15 @@
           ks3: [
             { type: 'mcq', graph: true, q: 'Which is the wettest month in Los Angeles?', options: ['February', 'July', 'August', 'May'], answer: 0,
               explain: 'February has the tallest bar: about 92 mm. Almost no rain falls in summer.' },
-            { type: 'mcq', graph: true, q: 'What does the graph show about summers in Los Angeles?', options: ['Warm and almost completely dry', 'Cold and wet', 'Snowy', 'Very stormy'], answer: 0,
+            { type: 'mcq', graph: true, q: 'What does the graph show about summers in Los Angeles?', options: ['Warm and almost completely dry', 'Hot, with thunderstorms most afternoons', 'Cool and wet with sea fog and drizzle', 'Mild, with rain about once a week'], answer: 0,
               explain: 'June to September are warm (over 20°C) with almost no rain. This is a Mediterranean climate: hot, dry summers and mild, wet winters.' },
-            { type: 'mcq', q: 'Which other parts of the world have the same climate type as Los Angeles?', options: ['Around the Mediterranean Sea, e.g. Spain and Italy', 'The Amazon rainforest', 'Antarctica', 'Central Siberia'], answer: 0,
+            { type: 'mcq', q: 'Which other parts of the world have the same climate type as Los Angeles?', options: ['Around the Mediterranean, e.g. Spain and Italy', 'Tropical rainforests such as the Amazon and the Congo basin', 'Central Siberia and northern Canada', 'The Sahara and Arabian deserts'], answer: 0,
               explain: 'Mediterranean climates occur on the west sides of continents, about 30–40° from the Equator.' }
           ],
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Los Angeles (°C).', answer: 9.4, tol: 0.1, unit: '°C',
               explain: 'Warmest 23.7°C (August) − coolest 14.3°C (December) = 9.4°C.' },
-            { type: 'mcq', graph: true, q: 'Why are Los Angeles summers so dry?', options: ['The subtropical high-pressure belt (Pacific High) shifts north in summer, bringing sinking, stable air', 'The ITCZ is overhead in summer', 'Monsoon winds blow from the sea', 'Cold fronts arrive every week'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Why are Los Angeles summers so dry?', options: ['The Pacific High moves north in summer, bringing sinking air', 'The ITCZ is overhead in summer, bringing rising air that blocks rain clouds', 'Monsoon winds blow out to sea', 'Cold fronts arrive every week'], answer: 0,
               explain: 'In summer the subtropical high blocks rain-bearing depressions. In winter it moves south, letting mid-latitude storms bring rain.' },
             { type: 'number', q: 'Los Angeles averages 14.25 inches of precipitation a year, and 92% falls between November and April. How many inches fall in those six months? (1 decimal place)', answer: 13.1, tol: 0.1, unit: 'inches',
               explain: '14.25 × 0.92 = 13.1 inches, leaving only about 1.1 inches for May to October.' }
@@ -123,20 +123,20 @@
         id: 'fire', title: 'Wildfire and drought', icon: '🔥',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Why are wildfires common in California in late summer and autumn?', options: ['Months without rain dry out plants, and hot, strong winds spread flames', 'It snows heavily', 'There are no plants to burn', 'Volcanoes start them'], answer: 0,
+            { type: 'mcq', q: 'Why are wildfires common in California in late summer and autumn?', options: ['Months without rain dry out plants, and hot winds spread flames', 'Heavy summer thunderstorms bring rain that makes plants grow and then burn', 'There are almost no plants left to burn', 'Volcanoes start most of them'], answer: 0,
               explain: 'After a long dry summer, grass and shrubs are like tinder. Strong Santa Ana winds can turn a small fire into a huge one.' },
             { type: 'sort', q: 'Sort these into causes that make wildfires worse and ways to reduce the risk.', bins: ['Makes fires worse', 'Reduces risk'],
               items: [['Long droughts', 0], ['Hot, dry winds', 0], ['Homes built right next to forests', 0], ['Clearing dry plants around homes', 1], ['Controlled burning of undergrowth', 1], ['Fire-resistant building materials', 1]],
               explain: 'Drought, wind and building in fire-prone areas increase risk. Clearing fuel and using fire-resistant materials reduce it.' },
-            { type: 'mcq', q: 'California’s chaparral shrubs have small, tough, waxy leaves. Why?', options: ['To reduce water loss during the long, dry summer', 'To catch snow', 'To float on water', 'To attract monkeys'], answer: 0,
+            { type: 'mcq', q: 'California’s chaparral shrubs have small, tough, waxy leaves. Why?', options: ['To reduce water loss in the dry summer', 'To catch as much sunlight as possible in the shade of tall trees', 'To float on water during winter floods', 'To attract birds that spread seeds'], answer: 0,
               explain: 'Small, leathery leaves lose little water. Many chaparral plants also regrow quickly after fire.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Santa Ana winds blow from the interior towards the coast in autumn. Why are they so dangerous for fire?', options: ['Air descending from high deserts warms and dries, giving very low humidity and strong gusts', 'They bring heavy rain', 'They are cold and damp', 'They only blow at sea'], answer: 0,
+            { type: 'mcq', q: 'Santa Ana winds blow from the interior towards the coast in autumn. Why are they so dangerous for fire?', options: ['Descending desert air warms and dries, with strong gusts', 'They bring heavy rain that washes burning embers downhill into towns', 'They are cold and damp, so firefighters cannot work', 'They only blow out at sea'], answer: 0,
               explain: 'Sinking air warms adiabatically and its relative humidity drops sharply. Combined with strong gusts, this dries fuels and drives fires rapidly.' },
-            { type: 'mcq', q: 'Which human factor has most increased wildfire losses in California?', options: ['Expansion of homes into the wildland–urban interface', 'Fewer people living near forests', 'Removing all roads', 'Planting rice fields'], answer: 0,
+            { type: 'mcq', q: 'Which human factor has most increased wildfire losses in California?', options: ['More homes built at the edge of wild land', 'Fewer people living near forests and hills, so fires are spotted later', 'Removing roads from the countryside', 'Planting large rice fields'], answer: 0,
               explain: 'More homes in fire-prone landscapes means more ignitions (from power lines, vehicles and people) and more property exposed.' },
-            { type: 'mcq', q: 'Many California plants are “fire-adapted”. Which is an example?', options: ['Seeds that germinate after exposure to heat or smoke, and shrubs that resprout from roots', 'Leaves that catch fire more easily to spread seeds', 'Trees that grow only in water', 'Plants that never burn'], answer: 0,
+            { type: 'mcq', q: 'Many California plants are “fire-adapted”. Which is an example?', options: ['Seeds that sprout after fire, and shrubs that regrow from roots', 'Leaves that catch fire more easily so that seeds are spread by the wind', 'Trees that only grow in water', 'Plants that never burn at all'], answer: 0,
               explain: 'Fire is a natural part of Mediterranean ecosystems. Many species need it to regenerate.' }
           ]
         }
@@ -145,17 +145,17 @@
         id: 'valley', title: 'Farming and water', icon: '🥕',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'California’s Central Valley uses about 1% of US farmland. About how much of the country’s food does it grow?', options: ['About a quarter', 'Almost none', 'About 1%', 'All of it'], answer: 0,
+            { type: 'mcq', q: 'California’s Central Valley uses about 1% of US farmland. About how much of the country’s food does it grow?', options: ['About a quarter', 'About 1%', 'About 5%', 'About three-quarters'], answer: 0,
               explain: 'The valley grows about a quarter of the nation’s food, including about half of its fruits, nuts and vegetables.' },
-            { type: 'mcq', q: 'The Central Valley has very little summer rain. How do farmers water their crops?', options: ['Irrigation from rivers, reservoirs, canals and groundwater wells', 'They wait for snow', 'Crops do not need water', 'They use sea water'], answer: 0,
+            { type: 'mcq', q: 'The Central Valley has very little summer rain. How do farmers water their crops?', options: ['Irrigation from rivers, canals and groundwater wells', 'They rely on heavy summer thunderstorms that sweep in from the Pacific', 'Crops there do not need water', 'They use sea water from the coast'], answer: 0,
               explain: 'Snowmelt from the Sierra Nevada fills reservoirs and canals; wells pump groundwater, especially in droughts.' },
-            { type: 'mcq', q: 'Hollywood, in Los Angeles, and Silicon Valley, near San Francisco, are both famous. What are they known for?', options: ['Films and entertainment, and technology companies', 'Rice farming and fishing', 'Coal mining and steel', 'Oil drilling and shipbuilding'], answer: 0,
+            { type: 'mcq', q: 'Hollywood, in Los Angeles, and Silicon Valley, near San Francisco, are both famous. What are they known for?', options: ['Films, and technology companies', 'Car manufacturing, and steel and chemical factories', 'Rice farming and fishing', 'Oil drilling and shipbuilding'], answer: 0,
               explain: 'California’s economy is huge and varied: entertainment, technology, tourism and farming all matter.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Pumping groundwater in the San Joaquin Valley made parts of the land sink by about 8.5 m in the four decades before 1970. Why?', options: ['Removing water from aquifers allowed clay layers to compact permanently', 'Earthquakes pushed the land down', 'Rivers eroded the valley floor', 'Rising sea level flooded it'], answer: 0,
+            { type: 'mcq', q: 'Pumping groundwater in the San Joaquin Valley made parts of the land sink by about 8.5 m in the four decades before 1970. Why?', options: ['Removing water let clay layers compact permanently', 'Earthquakes on the San Andreas Fault pushed the valley floor down', 'Rivers eroded the valley floor', 'Rising sea level flooded it'], answer: 0,
               explain: 'As with Bangkok, falling water pressure lets fine-grained sediments compress. This permanently reduces aquifer storage and damages canals.' },
-            { type: 'mcq', q: 'California grows about 80% of the world’s almonds. Why has almond farming been criticised during droughts?', options: ['Almond trees need water every year and cannot be left unplanted in dry years like annual crops', 'Almonds need no water', 'Almonds grow only in winter', 'Almonds are not exported'], answer: 0,
+            { type: 'mcq', q: 'California grows about 80% of the world’s almonds. Why has almond farming been criticised during droughts?', options: ['Almond trees need water every year and can’t be left unplanted', 'Almonds need almost no water, so farmers waste the water they are given', 'Almonds only grow in winter', 'Almonds are not exported'], answer: 0,
               explain: 'Permanent tree crops lock in water demand. In droughts, farmers pump more groundwater to keep orchards alive, worsening aquifer depletion.' },
             { type: 'sort', q: 'Classify these responses to water scarcity in California.', bins: ['Increase supply', 'Reduce demand'],
               items: [['Desalination plants', 0], ['Recycling wastewater', 0], ['Recharging aquifers with flood water', 0], ['Drip irrigation instead of flooding fields', 1], ['Limits on lawn watering', 1], ['Groundwater pumping limits (SGMA)', 1]],

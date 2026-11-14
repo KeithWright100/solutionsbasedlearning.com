@@ -69,9 +69,9 @@
               spots: [{ x: 84, y: 9, a: 'Ash cloud' }, { x: 17, y: 21, a: 'Crater' }, { x: 13, y: 56, a: 'Layers of ash and lava' }, { x: 84, y: 45, a: 'Lava flow' }, { x: 84, y: 71, a: 'Vent' }, { x: 87, y: 94, a: 'Magma chamber' }],
               extra: [],
               explain: 'Magma collects in the magma chamber, rises up the vent and erupts from the crater as lava and ash. Merapi is a composite volcano, built from layers of ash and lava.' },
-            { type: 'mcq', q: 'What is the difference between magma and lava?', options: ['Magma is underground; lava is molten rock that has reached the surface', 'Lava is underground; magma is on the surface', 'They are completely different materials', 'Magma is cold and lava is hot'], answer: 0,
+            { type: 'mcq', q: 'What is the difference between magma and lava?', options: ['Magma is underground; lava has reached the surface', 'Lava is underground; magma has reached the surface and cooled', 'Magma is made of ash; lava is made of rock', 'Magma is cold rock; lava is hot, runny rock'], answer: 0,
               explain: 'It is the same molten rock. Underground it is called magma; once it erupts onto the surface it is lava.' },
-            { type: 'mcq', q: 'Indonesia is part of the "Ring of Fire". What is that?', options: ['A ring of volcanoes and earthquakes around the Pacific Ocean', 'A ring of deserts around Africa', 'A festival in Jakarta', 'A ring of forest fires in Australia'], answer: 0,
+            { type: 'mcq', q: 'Indonesia is part of the "Ring of Fire". What is that?', options: ['A ring of volcanoes and earthquakes around the Pacific', 'A belt of active volcanoes that circles the Indian Ocean', 'A ring of forest fires that burn every dry season', 'A chain of hot deserts around the Equator'], answer: 0,
               explain: 'The Ring of Fire is a horseshoe of plate boundaries around the Pacific, with most of the world’s active volcanoes.' }
           ],
           adv: [
@@ -79,9 +79,9 @@
               spots: [{ x: 15, y: 61, a: 'Oceanic plate' }, { x: 90, y: 60, a: 'Continental plate' }, { x: 41, y: 26, a: 'Ocean trench' }, { x: 64, y: 77, a: 'Rising magma' }, { x: 90, y: 16, a: 'Composite volcano' }],
               extra: ['Mid-ocean ridge', 'Hotspot'],
               explain: 'Denser oceanic crust is subducted beneath the continental plate at an ocean trench. It melts as it sinks, and the magma rises to form composite volcanoes like Merapi. Mid-ocean ridges and hotspots are different settings.' },
-            { type: 'mcq', q: 'Which plates meet beneath Java?', options: ['The Indo-Australian plate is subducted beneath the Eurasian plate', 'The Pacific plate moves apart from the Nazca plate', 'The African plate collides with the Eurasian plate', 'The North American and Pacific plates slide past each other'], answer: 0,
+            { type: 'mcq', q: 'Which plates meet beneath Java?', options: ['The Indo-Australian plate sinks beneath the Eurasian plate', 'The Pacific plate moves apart from the Philippine Sea plate', 'The African plate collides head-on with the Eurasian plate', 'The Indo-Australian and Pacific plates slide past each other'], answer: 0,
               explain: 'The Indo-Australian plate moves north and is subducted beneath the Eurasian plate along the Java Trench, forming the Sunda arc of volcanoes.' },
-            { type: 'mcq', q: 'Why are volcanoes at destructive boundaries usually explosive?', options: ['Their magma is thick and gas-rich, so pressure builds up', 'Their magma is runny and low in gas', 'They are under the sea', 'They only erupt steam'], answer: 0,
+            { type: 'mcq', q: 'Why are volcanoes at destructive boundaries usually explosive?', options: ['Their magma is thick and gas-rich, so pressure builds', 'Their magma is runny and low in gas, so it flows out quickly', 'Sea water pours into the crater and freezes the lava', 'They form over hotspots deep in the mantle'], answer: 0,
               explain: 'Melting crust produces viscous, silica-rich magma that traps gas, so pressure builds until it erupts explosively.' }
           ]
         }
@@ -90,20 +90,20 @@
         id: 'hazards', title: 'Volcanic hazards', icon: '⚠️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Most people killed by Merapi in 2010 died from pyroclastic flows. What is a pyroclastic flow?', options: ['A fast-moving cloud of very hot gas, ash and rock', 'A slow river of lava', 'A small earthquake', 'A shower of rain'], answer: 0,
+            { type: 'mcq', q: 'Most people killed by Merapi in 2010 died from pyroclastic flows. What is a pyroclastic flow?', options: ['A fast cloud of very hot gas, ash and rock', 'A slow river of lava that burns everything in its path', 'A mudflow of ash and rainwater down a valley', 'A shower of large rocks thrown from the crater'], answer: 0,
               explain: 'Pyroclastic flows rush down the slopes at hundreds of kilometres per hour and are hundreds of degrees hot. There is no time to escape.' },
             { type: 'mcq', q: 'Heavy rain mixes with loose ash on the slopes and flows downhill like wet concrete. What is this called?', options: ['A lahar', 'A tsunami', 'A tornado', 'A glacier'], answer: 0,
               explain: 'Lahars are volcanic mudflows. In Java’s heavy rains they can happen long after an eruption.' },
-            { type: 'mcq', q: 'In the 2010 eruption, roughly how many people were evacuated?', options: ['Over 350,000', 'About 35', 'About 3,500', 'Nobody'], answer: 0,
+            { type: 'mcq', q: 'In the 2010 eruption, roughly how many people were evacuated?', options: ['Over 350,000', 'About 3,500', 'About 35,000', 'Over 3 million'], answer: 0,
               explain: 'More than 350,000 people were moved to safety, but over 350 people still died.' }
           ],
           adv: [
             { type: 'sort', q: 'Sort the effects of the 2010 Merapi eruption into primary and secondary effects.', bins: ['Primary effect', 'Secondary effect'],
               items: [['Pyroclastic flows destroy villages', 0], ['Ash falls on crops and roofs', 0], ['Lahars after heavy rain', 1], ['Flights cancelled across Java', 1], ['Overcrowded evacuation camps', 1], ['Ash clouds over the volcano', 0]],
               explain: 'Primary effects come directly from the eruption (flows, ash fall). Secondary effects follow later or as a knock-on result (lahars, transport disruption, camp conditions).' },
-            { type: 'mcq', q: 'Why are lahars a hazard for months or years after an eruption?', options: ['Loose ash stays on the slopes and is remobilised by each rainy season', 'Lava keeps flowing for years', 'Ash turns into ice', 'The volcano keeps shaking'], answer: 0,
+            { type: 'mcq', q: 'Why are lahars a hazard for months or years after an eruption?', options: ['Loose ash on the slopes is washed down each rainy season', 'Lava keeps flowing slowly out of the crater for many years', 'Ash turns into hard rock that blocks rivers', 'The volcano keeps shaking the ground after it erupts'], answer: 0,
               explain: 'Huge volumes of fresh ash and debris sit in river valleys. Each heavy rain can turn them into fast, destructive mudflows.' },
-            { type: 'mcq', q: 'Which factor most increased the death toll in 2010?', options: ['Dense population living high on the slopes, and some people refusing to leave', 'The eruption happened in the Sahara', 'There was no monitoring at all', 'The volcano was asleep for a million years'], answer: 0,
+            { type: 'mcq', q: 'Which factor most increased the death toll in 2010?', options: ['Dense population high on the slopes, and some refusing to leave', 'The eruption happened at night, and there was no monitoring equipment', 'The volcano had been asleep for thousands of years', 'There were no roads at all for people to escape along'], answer: 0,
               explain: 'Merapi was well monitored and warnings were issued, but many people live close to the summit and some stayed or returned, for example to protect livestock.' }
           ]
         }
@@ -115,17 +115,17 @@
             { type: 'sort', q: 'Why do people live near Merapi? Sort these into reasons to live there and risks.', bins: ['Reason to live there', 'Risk'],
               items: [['Very fertile soils for rice and vegetables', 0], ['Pyroclastic flows', 1], ['Tourists bring money', 0], ['Ash falls on houses', 1], ['Sand and stone to sell for building', 0], ['Lahars (mudflows)', 1]],
               explain: 'Volcanic ash weathers into rich soil, and tourism and quarrying bring money, but the volcano can erupt with deadly flows, ash and mudflows.' },
-            { type: 'mcq', q: 'Why are volcanic soils so good for farming?', options: ['Weathered ash adds lots of minerals and nutrients', 'They are always frozen', 'They contain no water', 'They are made of sand dunes'], answer: 0,
+            { type: 'mcq', q: 'Why are volcanic soils so good for farming?', options: ['Weathered ash adds lots of minerals', 'They hold no water, so crops never rot', 'They are always warm from the magma below', 'They are sandy and easy to dig by hand'], answer: 0,
               explain: 'Ash and lava break down into soils rich in minerals, which is why so many people farm on volcano slopes in Java.' },
-            { type: 'mcq', q: 'Which of these is a way that volcanoes can provide energy?', options: ['Geothermal power from hot rocks underground', 'Wind turbines on the crater', 'Burning lava like coal', 'Solar panels powered by ash'], answer: 0,
+            { type: 'mcq', q: 'Which of these is a way that volcanoes can provide energy?', options: ['Geothermal power from hot rocks', 'Burning cooled lava in power stations', 'Wind turbines inside the crater', 'Collecting volcanic gas to use as fuel'], answer: 0,
               explain: 'Heat from underground can turn water into steam to drive turbines. Indonesia is one of the world’s biggest users of geothermal energy.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Which statement best explains why population density is high on Java’s volcanic slopes?', options: ['Fertile andosol soils support intensive rice farming that can feed many people', 'Land on volcanoes is free and safe', 'Volcanic slopes are cooler and never erupt', 'The government forces people to live there'], answer: 0,
+            { type: 'mcq', q: 'Which statement best explains why population density is high on Java’s volcanic slopes?', options: ['Fertile soils support intensive rice farming that feeds many people', 'Volcanic slopes are cooler, and Java’s volcanoes rarely ever erupt at all', 'Land on volcanoes is free, so poorer families move there', 'The government requires farmers to live close to volcanoes'], answer: 0,
               explain: 'Andosols from volcanic ash are fertile and hold water well, supporting several rice harvests a year and dense rural populations.' },
-            { type: 'mcq', q: 'After 2010, the government created zones where nobody may live. What is this an example of?', options: ['Land-use zoning to reduce vulnerability', 'Prediction', 'Ecotourism', 'Afforestation'], answer: 0,
+            { type: 'mcq', q: 'After 2010, the government created zones where nobody may live. What is this an example of?', options: ['Land-use zoning', 'Volcano prediction', 'Ecotourism', 'Afforestation'], answer: 0,
               explain: 'Hazard zoning reduces exposure by keeping homes out of the most dangerous areas, although moving whole villages is difficult.' },
-            { type: 'mcq', q: 'Why do some people choose to return to dangerous areas near Merapi?', options: ['Their land, livestock, income and cultural ties are there', 'The volcano has stopped erupting for ever', 'They are paid to live in danger', 'There are no other places in Java'], answer: 0,
+            { type: 'mcq', q: 'Why do some people choose to return to dangerous areas near Merapi?', options: ['Their land, livestock, income and cultural ties are there', 'The volcano has now stopped erupting for good', 'They are paid by the government to live in danger zones', 'There is no other land left anywhere on the island of Java'], answer: 0,
               explain: 'Livelihoods, land ownership, family and strong cultural and spiritual links to the mountain can outweigh the perceived risk.' }
           ]
         }
@@ -136,18 +136,18 @@
           ks3: [
             { type: 'mcq', q: 'Which instrument detects the small earthquakes that happen when magma moves?', options: ['A seismometer', 'A thermometer', 'A rain gauge', 'An anemometer'], answer: 0,
               explain: 'Seismometers record tremors. More frequent small earthquakes can mean magma is rising.' },
-            { type: 'mcq', q: 'Which of these is a warning sign that a volcano may erupt soon?', options: ['The ground starts to bulge and more gas comes out', 'Birds start singing', 'It gets colder at the summit', 'The volcano turns green'], answer: 0,
+            { type: 'mcq', q: 'Which of these is a warning sign that a volcano may erupt soon?', options: ['The ground bulges and more gas comes out', 'The summit gets colder and snow begins to fall', 'Rivers on the slopes suddenly flow faster', 'The crater lake freezes over during the night'], answer: 0,
               explain: 'Rising magma makes the ground swell and releases gases such as sulphur dioxide. Scientists measure both.' },
-            { type: 'mcq', q: 'Why did scientists raise Merapi’s alert to the highest level in October 2010?', options: ['So people would leave the danger zone before the big eruption', 'To start a festival', 'Because the volcano had stopped', 'To attract more tourists'], answer: 0,
+            { type: 'mcq', q: 'Why did scientists raise Merapi’s alert to the highest level in October 2010?', options: ['So people would leave before the big eruption', 'Because the volcano had stopped erupting', 'To close the area so they could take samples', 'To warn aircraft but not people on the ground'], answer: 0,
               explain: 'Raising the alert triggered evacuations, which saved many thousands of lives.' }
           ],
           adv: [
             { type: 'sort', q: 'Match the monitoring method to what it measures. Is it measuring ground movement and shaking, or gas and heat?', bins: ['Ground movement or shaking', 'Gas or heat'],
               items: [['Seismometer', 0], ['Tiltmeter', 0], ['GPS stations', 0], ['Sulphur dioxide spectrometer', 1], ['Thermal satellite images', 1]],
               explain: 'Seismometers, tiltmeters and GPS track tremors and deformation. Gas sensors and thermal imaging track gas output and heat as magma approaches the surface.' },
-            { type: 'mcq', q: 'Merapi was one of the best-monitored volcanoes in the world, yet over 350 people still died in 2010. What does this suggest?', options: ['Prediction alone is not enough; communication, evacuation and people’s choices matter too', 'Monitoring is useless', 'The deaths were caused by an earthquake', 'Volcanoes cannot be studied'], answer: 0,
+            { type: 'mcq', q: 'Merapi was one of the best-monitored volcanoes in the world, yet over 350 people still died in 2010. What does this suggest?', options: ['Prediction alone is not enough; communication and choices matter', 'Monitoring is useless because eruptions cannot be predicted', 'The deaths were caused mainly by an earthquake, not the eruption', 'Better instruments would have prevented every single death'], answer: 0,
               explain: 'Effective risk reduction combines prediction with clear warnings, trusted communication, evacuation plans and support for livelihoods.' },
-            { type: 'mcq', q: 'Which best describes the 2010 eruption on the Volcanic Explosivity Index (VEI)?', options: ['VEI 4: a large explosive eruption', 'VEI 0: gentle lava only', 'VEI 8: a super-eruption', 'VEI 1: a tiny eruption'], answer: 0,
+            { type: 'mcq', q: 'Which best describes the 2010 eruption on the Volcanic Explosivity Index (VEI)?', options: ['VEI 4: a large explosive eruption', 'VEI 0: gentle lava flows only', 'VEI 8: a super-eruption', 'VEI 2: a small explosive eruption'], answer: 0,
               explain: 'The 2010 eruption was VEI 4, Merapi’s largest since 1872.' }
           ]
         }

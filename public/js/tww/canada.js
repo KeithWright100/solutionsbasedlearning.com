@@ -62,9 +62,9 @@
               spots: [{ x: 82, y: 15, a: 'Cone shape' }, { x: 15, y: 35, a: 'Needle leaves' }, { x: 80, y: 62, a: 'Thick bark' }, { x: 25, y: 88, a: 'Shallow roots' }, { x: 82, y: 42, a: 'Seed cones' }],
               extra: [],
               explain: 'A cone shape lets snow slide off. Thin, waxy needles lose little water and survive frost. Thick bark protects against cold and fire. Shallow roots spread in the thin soil above frozen ground, and seeds grow in cones.' },
-            { type: 'mcq', q: 'Why do most boreal trees keep their needles all year (evergreen)?', options: ['They can start making food as soon as it is warm enough, without growing new leaves', 'They like being cold', 'The needles keep animals away', 'They have no seasons'], answer: 0,
+            { type: 'mcq', q: 'Why do most boreal trees keep their needles all year (evergreen)?', options: ['They can make food as soon as it is warm, without growing new leaves', 'Their needles stay on because they are frozen solidly in place all through the winter', 'The needles keep animals such as moose away', 'They live where there are no seasons'], answer: 0,
               explain: 'The growing season is short. Keeping needles means trees can photosynthesise straight away in spring rather than spending energy on new leaves.' },
-            { type: 'mcq', q: 'Most of Canada’s forest is boreal forest (taiga). Where is it found?', options: ['Across the north of Canada, south of the Arctic tundra', 'Only along the Pacific coast', 'In the deserts of the south', 'On Arctic islands'], answer: 0,
+            { type: 'mcq', q: 'Most of Canada’s forest is boreal forest (taiga). Where is it found?', options: ['Across the north, south of the Arctic tundra', 'Only along the Pacific coast of British Columbia', 'In the deserts of the far south', 'On the Arctic islands'], answer: 0,
               explain: 'The boreal forest is a huge belt across Canada between the tundra to the north and grasslands and mixed forest to the south. It holds over three-quarters of Canada’s forest.' }
           ],
           adv: [
@@ -72,9 +72,9 @@
               spots: [{ x: 82, y: 15, a: 'Conical shape' }, { x: 15, y: 35, a: 'Waxy needles' }, { x: 80, y: 62, a: 'Thick bark' }, { x: 25, y: 88, a: 'Shallow roots' }, { x: 82, y: 42, a: 'Seed cones' }],
               extra: ['Buttress roots'],
               explain: 'Buttress roots belong to tall rainforest trees on shallow tropical soils. Conifers have shallow, spreading roots because soils are thin, cold and often frozen below.' },
-            { type: 'mcq', q: 'Boreal soils are often podzols, acidic and low in nutrients. Why?', options: ['Acidic needle litter decomposes slowly in the cold, and leaching washes nutrients down', 'Rapid decomposition releases too many nutrients', 'Rainforest plants grow there', 'Volcanic ash covers the soil'], answer: 0,
+            { type: 'mcq', q: 'Boreal soils are often podzols, acidic and low in nutrients. Why?', options: ['Needle litter decays slowly in the cold, and leaching washes nutrients down', 'Rapid decomposition releases the nutrients too quickly for any of the plants to use them', 'Volcanic ash covers the soil', 'Rainforest plants take all the nutrients'], answer: 0,
               explain: 'Cold temperatures slow decomposition, conifer needles make the soil acidic, and water percolating down leaches minerals, leaving a grey, nutrient-poor layer.' },
-            { type: 'mcq', q: 'Natural Resources Canada says forest fires and insect outbreaks are part of a healthy boreal forest. Why?', options: ['They clear old trees, release nutrients and let new trees grow; some cones open only after fire', 'They permanently remove the forest', 'They stop the forest storing carbon forever', 'They only affect tropical forests'], answer: 0,
+            { type: 'mcq', q: 'Natural Resources Canada says forest fires and insect outbreaks are part of a healthy boreal forest. Why?', options: ['They clear old trees and let new ones grow; some cones open only after fire', 'They permanently replace the forest with open grassland, which then stores more carbon', 'They stop the forest storing carbon for ever', 'They only affect tropical forests'], answer: 0,
               explain: 'Disturbance renews the forest. Jack pine, for example, has cones sealed with resin that open in the heat of a fire.' }
           ]
         }
@@ -83,20 +83,20 @@
         id: 'rockies', title: 'The Rocky Mountains', icon: '🏔️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'How were the Rocky Mountains formed?', options: ['Rocks were squeezed and folded upwards as tectonic plates pushed together', 'A huge volcano erupted', 'Rivers piled up mud', 'Glaciers built them'], answer: 0,
+            { type: 'mcq', q: 'How were the Rocky Mountains formed?', options: ['Rocks were squeezed and folded as plates pushed together', 'A huge chain of volcanoes erupted along the edge of the continent', 'Rivers piled up layers of mud', 'Glaciers built them up'], answer: 0,
               explain: 'The Rockies are fold mountains. Compression from plate movements crumpled layers of rock upwards over millions of years.' },
-            { type: 'mcq', q: 'Lakes like Moraine Lake are bright turquoise. Why?', options: ['Glaciers grind rock into fine “rock flour” that floats in the water and reflects light', 'The water is warm', 'It is dyed for tourists', 'Coral grows in the lake'], answer: 0,
+            { type: 'mcq', q: 'Lakes like Moraine Lake are bright turquoise. Why?', options: ['Fine “rock flour” from glaciers floats in the water and reflects light', 'The water is warm enough in summer for bright blue-green algae to grow across the lake', 'It is dyed by the park to attract tourists', 'Coral grows on the bottom of the lake'], answer: 0,
               explain: 'Meltwater carries tiny rock particles into the lake. They stay suspended and scatter blue-green light.' },
             { type: 'sort', q: 'Sort these mountain landforms by what made them.', bins: ['Made by glaciers', 'Made by folding'],
               items: [['U-shaped valley', 0], ['Corrie lake', 0], ['Moraine', 0], ['Anticline (upfold)', 1], ['Syncline (downfold)', 1], ['Tilted rock layers', 1]],
               explain: 'Plate collision folded the rocks; later, ice ages carved valleys, corries and moraines into the mountains.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Which process formed the Canadian Rockies?', options: ['Compression and thrust faulting as terranes accreted to western North America', 'Hotspot volcanism', 'Divergence at a mid-ocean ridge', 'Erosion by rivers alone'], answer: 0,
+            { type: 'mcq', q: 'Which process formed the Canadian Rockies?', options: ['Compression and thrust faulting as terranes joined North America', 'Hotspot volcanism as the plate moved slowly over a deep mantle plume', 'Divergence at a mid-ocean ridge', 'Erosion by rivers alone'], answer: 0,
               explain: 'Collisions of island arcs and microcontinents with the North American plate compressed sedimentary rocks, stacking them by folding and thrust faulting.' },
-            { type: 'mcq', q: 'Moraine Lake is dammed by a pile of rock. Which landform process is most likely?', options: ['Glacial deposition or a rockfall blocking the valley', 'A lava flow', 'Coral reef growth', 'Wind-blown sand'], answer: 0,
+            { type: 'mcq', q: 'Moraine Lake is dammed by a pile of rock. Which landform process is most likely?', options: ['Glacial deposition or a rockfall', 'A lava flow from a nearby volcano', 'Coral reef growth', 'Wind-blown sand dunes'], answer: 0,
               explain: 'Debris left by glaciers or rockfalls from steep, glacially oversteepened valley sides can dam valleys and create lakes.' },
-            { type: 'mcq', q: 'Glaciers in the Rockies are retreating. What is a key downstream impact?', options: ['Lower late-summer river flow once glacier meltwater declines, affecting water supply and ecosystems', 'More snow in cities', 'Rising lake levels forever', 'No effect on rivers'], answer: 0,
+            { type: 'mcq', q: 'Glaciers in the Rockies are retreating. What is a key downstream impact?', options: ['Lower late-summer river flow once meltwater declines', 'Much more snow falling each winter on nearby cities such as Calgary', 'Lake levels rising for ever', 'No effect on the rivers'], answer: 0,
               explain: 'Glaciers act as water towers, releasing meltwater in hot, dry late summer. As they shrink, that buffer is lost.' }
           ]
         }
@@ -115,9 +115,9 @@
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Banff (°C).', answer: 23.6, tol: 0.1, unit: '°C',
               explain: 'Warmest 14.6°C (July) − coldest −9.0°C (December) = 23.6°C.' },
-            { type: 'mcq', graph: true, q: 'Banff is much drier (about 455 mm a year) than the Pacific coast of British Columbia. Why?', options: ['Moist Pacific air drops most of its moisture on the western ranges, leaving the Rockies’ eastern side in a rain shadow', 'Banff is closer to the sea', 'The Rockies have no clouds', 'Banff is in the tropics'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Banff is much drier (about 455 mm a year) than the Pacific coast of British Columbia. Why?', options: ['Pacific air drops its moisture on the western ranges, leaving a rain shadow', 'Banff is much closer to the sea, so the air there is cooler and holds less water vapour', 'The Rockies are too high for clouds', 'Banff lies in the tropics'], answer: 0,
               explain: 'Westerly winds rise over several mountain ranges, cooling and losing moisture. By the time they reach Banff, much of the moisture has fallen.' },
-            { type: 'mcq', q: 'Calgary sometimes has warm, dry “chinook” winds in winter that melt snow quickly. Which process causes them?', options: ['Air descending the eastern slopes of the Rockies warms by compression (a föhn effect)', 'Cold air from the Arctic', 'Ocean currents', 'Volcanic heat'], answer: 0,
+            { type: 'mcq', q: 'Calgary sometimes has warm, dry “chinook” winds in winter that melt snow quickly. Which process causes them?', options: ['Air descending the Rockies warms by compression (a föhn)', 'Cold, dry air blowing south from the Arctic across the Prairies', 'Warm ocean currents on the east coast', 'Volcanic heat'], answer: 0,
               explain: 'After losing moisture on the windward side, air warms at the dry adiabatic rate as it descends, raising temperatures by many degrees in hours.' }
           ]
         }
@@ -126,20 +126,20 @@
         id: 'forestry', title: 'Forests and resources', icon: '🪓',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Only about 0.2% of Canada’s boreal forest is harvested each year. What happens after trees are cut?', options: ['By law, harvested public forest must be regrown, by replanting or natural regeneration', 'The land becomes desert', 'It is always turned into farms', 'Nothing grows back'], answer: 0,
+            { type: 'mcq', q: 'Only about 0.2% of Canada’s boreal forest is harvested each year. What happens after trees are cut?', options: ['By law, harvested public forest must be regrown', 'The land is always turned into wheat and canola farms afterwards', 'The land becomes desert', 'Nothing ever grows back'], answer: 0,
               explain: 'Sustainable forestry means cutting no faster than the forest regrows, and replanting or letting trees regenerate.' },
             { type: 'sort', q: 'Sort these uses of Canada’s forests.', bins: ['Timber and products', 'Other benefits'],
               items: [['Wood for houses', 0], ['Paper and cardboard', 0], ['Wood pellets for fuel', 0], ['Storing carbon', 1], ['Habitat for moose and bears', 1], ['Tourism and recreation', 1]],
               explain: 'Forests provide timber and paper, but also wildlife habitat, carbon storage, clean water and places to visit.' },
-            { type: 'mcq', q: 'Which crop is most widely grown on the Canadian Prairies, east of the Rockies?', options: ['Wheat (and canola)', 'Rice', 'Bananas', 'Coffee'], answer: 0,
+            { type: 'mcq', q: 'Which crop is most widely grown on the Canadian Prairies, east of the Rockies?', options: ['Wheat (and canola)', 'Rice and sugar cane', 'Bananas', 'Coffee'], answer: 0,
               explain: 'The flat Prairies of Alberta, Saskatchewan and Manitoba are one of the world’s great grain-growing regions.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Which practice best supports sustainable forest management?', options: ['Harvesting below the annual growth rate, replanting, and protecting areas of old-growth forest', 'Clear-cutting all old-growth forest', 'Never planting new trees', 'Harvesting faster than the forest regrows'], answer: 0,
+            { type: 'mcq', q: 'Which practice best supports sustainable forest management?', options: ['Harvesting below the growth rate, replanting and protecting old growth', 'Clear-cutting all old-growth forest first, then replanting with one fast-growing species', 'Never planting new trees', 'Harvesting faster than the forest regrows'], answer: 0,
               explain: 'Sustainability balances economic use with long-term forest health, biodiversity and the rights of Indigenous communities.' },
-            { type: 'mcq', q: 'Alberta’s oil sands, north of Banff, are a major resource. Which is a key environmental concern?', options: ['Clearing boreal forest and peatland, high water use and greenhouse gas emissions', 'They make the forest grow faster', 'They reduce emissions', 'They have no impact'], answer: 0,
+            { type: 'mcq', q: 'Alberta’s oil sands, north of Banff, are a major resource. Which is a key environmental concern?', options: ['Clearing forest and peatland, high water use and emissions', 'They make the boreal forest grow faster because of the extra warmth', 'They reduce Canada’s emissions', 'They have no impact'], answer: 0,
               explain: 'Surface mining removes forest and wetlands, and extracting oil from sand uses large amounts of energy and water.' },
-            { type: 'mcq', q: 'Wildfires in Canada’s boreal forest have become larger in recent years. Which is the best explanation?', options: ['Warmer, drier summers and longer fire seasons linked to climate change', 'More rain in summer', 'Fewer lightning strikes', 'Colder winters'], answer: 0,
+            { type: 'mcq', q: 'Wildfires in Canada’s boreal forest have become larger in recent years. Which is the best explanation?', options: ['Warmer, drier summers and longer fire seasons', 'More summer rain helping vegetation to grow thicker', 'Fewer lightning strikes', 'Colder winters'], answer: 0,
               explain: 'Hotter, drier conditions dry out fuels; longer seasons give more time for fires to start and spread.' }
           ]
         }
@@ -148,20 +148,20 @@
         id: 'park', title: 'People and the national park', icon: '🦌',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Banff became Canada’s first national park in 1885. What is the main purpose of a national park?', options: ['To protect nature and landscapes while letting people enjoy them', 'To build factories', 'To grow crops', 'To mine for oil'], answer: 0,
+            { type: 'mcq', q: 'Banff became Canada’s first national park in 1885. What is the main purpose of a national park?', options: ['To protect nature while letting people enjoy it', 'To keep all visitors out so that wildlife is never disturbed', 'To grow crops', 'To mine for oil'], answer: 0,
               explain: 'National parks conserve wildlife and landscapes, while allowing visitors to enjoy them in ways that do not damage them.' },
-            { type: 'mcq', q: 'Banff built bridges covered in plants over the Trans-Canada Highway. Why?', options: ['So animals like bears, elk and wolves can cross safely without being hit by cars', 'For tourists to take photos', 'To grow vegetables', 'To slow down traffic'], answer: 0,
+            { type: 'mcq', q: 'Banff built bridges covered in plants over the Trans-Canada Highway. Why?', options: ['So animals can cross safely without being hit by cars', 'To give tourists better places to stop and take photographs of the mountains', 'To grow vegetables', 'To slow down traffic'], answer: 0,
               explain: 'Wildlife overpasses and fencing have greatly cut collisions between vehicles and animals.' },
-            { type: 'mcq', q: 'Who were the first people to live in the Rocky Mountain region?', options: ['First Nations peoples, for thousands of years', 'European settlers in 1885', 'Tourists', 'Nobody has ever lived there'], answer: 0,
+            { type: 'mcq', q: 'Who were the first people to live in the Rocky Mountain region?', options: ['First Nations peoples, for thousands of years', 'French fur traders, who arrived from Europe in the 1600s', 'European settlers in 1885', 'Nobody has ever lived there'], answer: 0,
               explain: 'First Nations such as the Stoney Nakoda, Blackfoot and Ktunaxa have lived in and used these lands for thousands of years.' }
           ],
           adv: [
             { type: 'sort', q: 'Classify these tourism impacts in Banff National Park.', bins: ['Positive', 'Negative'],
               items: [['Jobs in hotels, guiding and ski resorts', 0], ['Visitor fees fund conservation', 0], ['Raises awareness of conservation', 0], ['Traffic congestion and parking pressure', 1], ['Wildlife disturbance and road deaths', 1], ['Housing costs too high for local workers', 1]],
               explain: 'Tourism funds conservation and jobs but puts pressure on wildlife, infrastructure and affordable housing in park towns.' },
-            { type: 'mcq', q: 'Which is the best example of managing visitor pressure at popular sites like Moraine Lake?', options: ['Restricting private cars and running shuttle buses', 'Building a bigger car park on the lakeshore', 'Removing all trails', 'Doubling visitor numbers'], answer: 0,
+            { type: 'mcq', q: 'Which is the best example of managing visitor pressure at popular sites like Moraine Lake?', options: ['Restricting private cars and running shuttle buses', 'Building a much bigger car park right beside the lakeshore', 'Removing all of the trails', 'Doubling visitor numbers'], answer: 0,
               explain: 'Shuttles reduce congestion and parking damage while keeping access for visitors.' },
-            { type: 'mcq', q: 'Why is conservation in national parks increasingly done in partnership with Indigenous communities?', options: ['Indigenous knowledge and rights to the land improve how ecosystems are managed', 'Indigenous people do not use the land', 'It is cheaper to exclude them', 'Parks have no wildlife'], answer: 0,
+            { type: 'mcq', q: 'Why is conservation in national parks increasingly done in partnership with Indigenous communities?', options: ['Indigenous knowledge and land rights improve how ecosystems are managed', 'Indigenous people no longer use the land, so it is easier to protect if they help', 'It is cheaper to exclude them', 'Parks have no wildlife'], answer: 0,
               explain: 'Traditional ecological knowledge, for example of fire and wildlife, adds to science, and recognises Indigenous rights in their traditional territories.' }
           ]
         }

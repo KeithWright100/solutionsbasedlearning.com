@@ -59,9 +59,9 @@
               spots: [{ x: 18, y: 9, a: 'Volcano' }, { x: 50, y: 30, a: 'City buildings' }, { x: 50, y: 61, a: 'Soft lake clay' }, { x: 20, y: 79, a: 'Aquifer (water)' }, { x: 80, y: 50, a: 'Water well' }],
               extra: [],
               explain: 'Mexico City sits in a basin surrounded by volcanoes, on soft clay left by an old lake. Wells pump water from the aquifer below the clay.' },
-            { type: 'mcq', q: 'Parts of Mexico City are sinking by up to about 50 cm a year. What is the main cause?', options: ['Pumping water from under the ground, so the soft clay squashes down', 'Earthquakes every day', 'The weight of snow', 'Volcanoes sucking in the ground'], answer: 0,
+            { type: 'mcq', q: 'Parts of Mexico City are sinking by up to about 50 cm a year. What is the main cause?', options: ['Pumping groundwater, so the soft clay squashes down', 'Small earthquakes every day that shake the city lower each time', 'The weight of snow in winter', 'Nearby volcanoes pulling the ground in'], answer: 0,
               explain: 'Most of the city’s water comes from wells. As water is pumped out, the soft, wet lake clay compacts and the ground sinks.' },
-            { type: 'mcq', q: 'Which problem does sinking ground cause in Mexico City?', options: ['Cracked buildings, broken pipes and damaged roads and railways', 'More snow in winter', 'Cleaner air', 'Fewer floods'], answer: 0,
+            { type: 'mcq', q: 'Which problem does sinking ground cause in Mexico City?', options: ['Cracked buildings, broken pipes and damaged roads', 'Much more snow in winter because the city is lower', 'Cleaner air', 'Fewer floods'], answer: 0,
               explain: 'The ground sinks unevenly, so buildings tilt, pipes break and railways bend. Broken pipes lose even more water.' }
           ],
           adv: [
@@ -69,9 +69,9 @@
               spots: [{ x: 18, y: 9, a: 'Stratovolcano' }, { x: 50, y: 30, a: 'Urban area' }, { x: 50, y: 61, a: 'Lacustrine clay' }, { x: 20, y: 79, a: 'Aquifer' }, { x: 80, y: 50, a: 'Extraction well' }],
               extra: ['Coral reef'],
               explain: 'There is no coral reef in a high mountain basin. The city sits on lacustrine (lake) clay above an aquifer, ringed by stratovolcanoes such as Popocatépetl.' },
-            { type: 'mcq', q: 'Why does the ground sink unevenly (differential subsidence) across Mexico City?', options: ['The lake clay varies in thickness, so areas with thicker clay compact more', 'Gravity is stronger in some places', 'Only the old centre is sinking', 'Volcanic ash is uniform everywhere'], answer: 0,
+            { type: 'mcq', q: 'Why does the ground sink unevenly (differential subsidence) across Mexico City?', options: ['The lake clay varies in thickness, so thicker areas compact more', 'Gravity is stronger in some parts of the valley than in others, so they sink faster', 'Only the old centre is sinking', 'Volcanic ash is the same everywhere'], answer: 0,
               explain: 'Where the clay is thick, more compaction occurs; near the basin edges, on firmer ground, there is little. Sharp changes in rate damage structures that cross the boundary.' },
-            { type: 'mcq', q: 'In 2021 an elevated Metro section on Line 12 collapsed, killing over 20 people. Studies since have found that subsidence affects parts of the Metro. What does this show?', options: ['Infrastructure must be designed and monitored for differential subsidence', 'Subsidence never affects transport', 'Metro trains cause subsidence', 'Only underground lines are at risk'], answer: 0,
+            { type: 'mcq', q: 'In 2021 an elevated Metro section on Line 12 collapsed, killing over 20 people. Studies since have found that subsidence affects parts of the Metro. What does this show?', options: ['Infrastructure must be designed and monitored for subsidence', 'Subsidence never affects transport, so the collapse must have had another cause', 'Metro trains cause the subsidence', 'Only underground lines are at risk'], answer: 0,
               explain: 'Satellite radar (InSAR) now maps subsidence rates so engineers can prioritise repairs. Elevated and street-level sections are most affected.' },
             { type: 'sort', q: 'Classify these as causes of, or responses to, subsidence in Mexico City.', bins: ['Cause', 'Response'],
               items: [['Over-pumping of the aquifer', 0], ['Impermeable surfaces stopping rain recharging the aquifer', 0], ['Rapid population growth', 0], ['Repairing leaking water pipes', 1], ['Rainwater harvesting', 1], ['Monitoring with satellite radar', 1]],
@@ -83,17 +83,17 @@
         id: 'quakes', title: 'Earthquakes on a lake bed', icon: '🏚️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'In 1985 a huge earthquake hit Mexico City even though it started about 350 km away on the Pacific coast. Why was the city so badly damaged?', options: ['The soft, wet lake clay made the shaking much stronger', 'The city is on top of a volcano', 'Buildings were made of ice', 'It was very windy'], answer: 0,
+            { type: 'mcq', q: 'In 1985 a huge earthquake hit Mexico City even though it started about 350 km away on the Pacific coast. Why was the city so badly damaged?', options: ['The soft, wet lake clay amplified the shaking', 'The city is built on top of an active volcano, which erupted during the earthquake', 'Most buildings were made of wood', 'It was very windy that day'], answer: 0,
               explain: 'Soft lake sediments shake like jelly, amplifying seismic waves. Thousands of people died and many buildings collapsed.' },
-            { type: 'mcq', q: 'Mexico City has an earthquake early-warning alarm. How does it help?', options: ['Sirens and phones give people seconds to get to safety before strong shaking arrives', 'It stops earthquakes', 'It makes buildings stronger', 'It predicts earthquakes years ahead'], answer: 0,
+            { type: 'mcq', q: 'Mexico City has an earthquake early-warning alarm. How does it help?', options: ['It gives people seconds to reach safety before shaking', 'It predicts earthquakes years ahead so that people can move away in good time', 'It stops the earthquake', 'It makes buildings stronger'], answer: 0,
               explain: 'Sensors near the coast detect an earthquake and send a warning faster than the seismic waves travel to the city, giving up to about a minute.' },
-            { type: 'mcq', q: 'Why does Mexico have so many earthquakes?', options: ['Ocean plates are sinking beneath Mexico along the Pacific coast', 'It is on a hotspot', 'Plates are moving apart under the city', 'Mexico has no plate boundaries'], answer: 0,
+            { type: 'mcq', q: 'Why does Mexico have so many earthquakes?', options: ['Ocean plates are sinking beneath Mexico', 'It sits on a hotspot, like Hawaii, where magma rises from the mantle', 'Plates are moving apart under the city', 'Mexico has no plate boundaries'], answer: 0,
               explain: 'The Cocos plate is subducting beneath the North American plate along the Pacific coast. This also feeds volcanoes like Popocatépetl.' }
           ],
           adv: [
-            { type: 'mcq', q: 'In 1985, medium-height buildings (about 6–15 storeys) collapsed more than very low or very tall ones. Which best explains this?', options: ['Their natural frequency matched the amplified shaking of the lake bed (resonance)', 'They were the oldest buildings', 'Tall buildings were made of rubber', 'Low buildings were underground'], answer: 0,
+            { type: 'mcq', q: 'In 1985, medium-height buildings (about 6–15 storeys) collapsed more than very low or very tall ones. Which best explains this?', options: ['Their natural frequency matched the amplified shaking (resonance)', 'They were the oldest buildings in the city, built before any building codes existed', 'Tall buildings were made of rubber', 'Low buildings were underground'], answer: 0,
               explain: 'The soft basin resonated at a frequency close to that of mid-rise buildings, which swayed more and more until they failed.' },
-            { type: 'mcq', q: 'On 19 September 2017, exactly 32 years after the 1985 quake, a magnitude 7.1 earthquake struck central Mexico. Many people had just taken part in a national earthquake drill. What does this suggest?', options: ['Regular drills improve preparedness and response', 'Drills cause earthquakes', 'Earthquakes can be predicted by date', 'Preparedness has no effect'], answer: 0,
+            { type: 'mcq', q: 'On 19 September 2017, exactly 32 years after the 1985 quake, a magnitude 7.1 earthquake struck central Mexico. Many people had just taken part in a national earthquake drill. What does this suggest?', options: ['Regular drills improve preparedness', 'Earthquakes can be predicted by date, so drills should be held on anniversaries', 'Drills cause earthquakes', 'Preparedness has no effect'], answer: 0,
               explain: 'The drill on the anniversary meant procedures were fresh. Stricter building codes since 1985 also reduced collapses, though some buildings still failed.' },
             { type: 'sort', q: 'Classify these factors affecting earthquake impacts in Mexico City.', bins: ['Physical factor', 'Human factor'],
               items: [['Soft lake sediments amplify shaking', 0], ['Distance from the epicentre', 0], ['Depth of the earthquake', 0], ['Quality of building construction', 1], ['Early warning sirens', 1], ['High population density', 1]],
@@ -107,17 +107,17 @@
           ks3: [
             { type: 'mcq', graph: true, q: 'Which months are the wet season in Mexico City?', options: ['About June to September', 'About December to March', 'Every month is equally wet', 'Only January'], answer: 0,
               explain: 'June to September have the tallest bars. The rest of the year is mostly dry.' },
-            { type: 'mcq', graph: true, q: 'Mexico City is in the tropics, but its temperatures are only around 14–20°C. Why?', options: ['It is very high up, about 2,240 m above sea level', 'It is near the North Pole', 'It is by a cold sea', 'It is always cloudy'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Mexico City is in the tropics, but its temperatures are only around 14–20°C. Why?', options: ['It is about 2,240 m above sea level', 'It is next to a cold ocean current that cools the city all year round', 'It is near the North Pole', 'It is always cloudy'], answer: 0,
               explain: 'Temperature falls with height, about 6.5°C for every 1,000 m, so high cities are much cooler than lowlands at the same latitude.' },
-            { type: 'mcq', q: 'Mexico City often has bad air pollution. Why does smog get trapped over the city?', options: ['It sits in a basin surrounded by mountains, so polluted air cannot easily escape', 'It is too windy', 'There are no cars', 'The sea blows the smog in'], answer: 0,
+            { type: 'mcq', q: 'Mexico City often has bad air pollution. Why does smog get trapped over the city?', options: ['It sits in a basin ringed by mountains', 'Strong winds blow pollution in from factories along the coast every day', 'There are no cars', 'The sea blows the smog in'], answer: 0,
               explain: 'Mountains block the wind, and on calm, sunny days a layer of warm air can trap pollution near the ground.' }
           ],
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Mexico City (°C).', answer: 5.8, tol: 0.1, unit: '°C',
               explain: 'Warmest 19.9°C (May) − coolest 14.1°C (January) = 5.8°C, typical of a tropical highland climate.' },
-            { type: 'mcq', graph: true, q: 'Why is May the warmest month rather than July?', options: ['From June, wet-season cloud cover and rain reduce sunshine and cool the city', 'The sun is lowest in May', 'May has the longest nights', 'Snow falls in July'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Why is May the warmest month rather than July?', options: ['From June, wet-season cloud and rain cool the city', 'The sun is lowest in the sky in May, so its rays are more concentrated', 'May has the longest nights', 'Snow falls in July'], answer: 0,
               explain: 'Before the wet season, skies are clear and the sun is high, so May is warmest. Cloud and rain in summer keep temperatures down.' },
-            { type: 'mcq', q: 'Temperature inversions trap smog in the Valley of Mexico, especially in the dry season. What is an inversion?', options: ['A layer of warm air above cooler surface air, which stops air rising and mixing', 'A sudden rainstorm', 'Wind blowing upwards', 'A volcanic eruption'], answer: 0,
+            { type: 'mcq', q: 'Temperature inversions trap smog in the Valley of Mexico, especially in the dry season. What is an inversion?', options: ['Warm air above cooler surface air, stopping air rising', 'A sudden rainstorm that washes pollution down from the sky onto the streets', 'Wind blowing upwards', 'A volcanic eruption'], answer: 0,
               explain: 'Normally air cools with height and rises. On clear nights the ground cools fast, so cooler air sits beneath warmer air, a stable lid that traps pollutants.' }
           ]
         }
@@ -129,15 +129,15 @@
             { type: 'sort', q: 'Why have millions of people moved to Mexico City? Sort the push and pull factors.', bins: ['Push (from the countryside)', 'Pull (to the city)'],
               items: [['Little work apart from farming', 0], ['Low incomes', 0], ['Few schools or hospitals', 0], ['Jobs in factories, shops and offices', 1], ['Better schools and hospitals', 1], ['Family already living in the city', 1]],
               explain: 'Rural poverty pushes people away; jobs and services pull them to the city.' },
-            { type: 'mcq', q: 'Much of Mexico City’s water is pumped from far away and lifted over mountains. Why is this a problem?', options: ['It uses huge amounts of energy and is very expensive', 'The water turns salty', 'It makes the water too cold', 'It is not a problem'], answer: 0,
+            { type: 'mcq', q: 'Much of Mexico City’s water is pumped from far away and lifted over mountains. Why is this a problem?', options: ['It uses huge amounts of energy and is costly', 'The water turns salty as it travels through the pipes over the mountains', 'It makes the water too cold', 'It is not a problem'], answer: 0,
               explain: 'Some water is piped more than 100 km and lifted over 1,000 m into the valley, which costs a lot of electricity.' },
             { type: 'mcq', q: 'At Xochimilco, farmers still grow vegetables on “chinampas”, small islands built in canals. Who first built them?', options: ['The Aztecs, centuries ago', 'Spanish settlers in the 1900s', 'Modern engineers', 'Tourists'], answer: 0,
               explain: 'Chinampas are an ancient farming system on the old lake. Today they are a UNESCO World Heritage site and a popular place for boat trips.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Many newer neighbourhoods on the city’s edge were self-built, often without planning permission. What is the main challenge for these areas?', options: ['Providing water, sewage, roads and services after people have already settled', 'Too many parks', 'They have the best services', 'They are too close to the sea'], answer: 0,
+            { type: 'mcq', q: 'Many newer neighbourhoods on the city’s edge were self-built, often without planning permission. What is the main challenge for these areas?', options: ['Providing water, sewers and roads after people settle', 'They have too many parks and open spaces, so land for housing is scarce', 'They already have the best services', 'They are too close to the sea'], answer: 0,
               explain: 'Informal settlements grow faster than infrastructure. Over time many are upgraded, but water supply and transport often remain poor.' },
-            { type: 'mcq', q: 'Mexico City suffers both water shortages and flooding. How can that be?', options: ['Heavy rains run off concrete into drains instead of recharging the aquifer, while pumping and leaks drain supplies', 'It never rains in the city', 'The city has too many lakes', 'Floods only happen in the dry season'], answer: 0,
+            { type: 'mcq', q: 'Mexico City suffers both water shortages and flooding. How can that be?', options: ['Rain runs off concrete into drains instead of recharging the aquifer', 'It almost never rains in the city, so floods come only from burst pipes', 'The city has too many lakes', 'Floods only happen in the dry season'], answer: 0,
               explain: 'Impermeable surfaces send storm water into sewers and out of the basin, while the aquifer is over-pumped. Sinking ground also damages drains.' },
             { type: 'sort', q: 'Classify these strategies for a more sustainable Mexico City.', bins: ['Water', 'Transport and air quality'],
               items: [['Rainwater harvesting on homes', 0], ['Repairing leaking pipes', 0], ['Wetland parks that recharge the aquifer', 0], ['Metrobús rapid bus lanes', 1], ['Restricting car use on certain days', 1], ['Cable car lines to hillside neighbourhoods', 1]],

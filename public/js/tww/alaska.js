@@ -61,9 +61,9 @@
               spots: [{ x: 20, y: 26, a: 'Tundra plants' }, { x: 75, y: 14, a: 'Raised pipeline' }, { x: 50, y: 42, a: 'Active layer' }, { x: 55, y: 70, a: 'Permafrost' }, { x: 20, y: 88, a: 'Ice wedge' }],
               extra: [],
               explain: 'Low tundra plants grow in the thin active layer, which thaws each summer. Below is permafrost, ground that stays frozen all year, sometimes containing wedges of solid ice. Pipelines are raised so their heat does not thaw it.' },
-            { type: 'mcq', q: 'What is permafrost?', options: ['Ground that stays frozen for at least two years in a row', 'Snow that falls every winter', 'A glacier on a mountain', 'Ice floating on the sea'], answer: 0,
+            { type: 'mcq', q: 'What is permafrost?', options: ['Ground that stays frozen for at least two years in a row', 'Snow that falls every winter and melts again each spring', 'A glacier that has stopped moving on a mountain', 'Ice that floats on the sea for most of the year'], answer: 0,
               explain: 'Permafrost is soil or rock that stays at or below 0°C for at least two years. In Alaska some of it has been frozen for thousands of years.' },
-            { type: 'mcq', q: 'Why are many buildings and pipelines in Alaska built on stilts or posts?', options: ['So their heat does not melt the permafrost and make the ground sink', 'To keep away bears', 'Because of flooding from the sea', 'To get a better view'], answer: 0,
+            { type: 'mcq', q: 'Why are many buildings and pipelines in Alaska built on stilts or posts?', options: ['So their heat does not melt the permafrost below', 'To keep them above deep snow and keep away bears and moose', 'Because the sea floods the coast every spring', 'To get a better view across the flat tundra'], answer: 0,
               explain: 'Heat from a building or warm oil pipe can thaw the ice in the ground, which turns it to mud, so the ground sinks and structures crack.' }
           ],
           adv: [
@@ -73,9 +73,9 @@
               explain: 'There is no glacier here. Periglacial areas are cold but not ice-covered: the active layer thaws each summer above permanently frozen ground, and ice wedges form as water fills frost cracks and refreezes year after year.' },
             { type: 'number', q: 'About 420 miles of the 800-mile Trans-Alaska Pipeline is raised above ground because of permafrost. What percentage is that? (1 decimal place)', answer: 52.5, tol: 0.2, unit: '%',
               explain: '420 ÷ 800 × 100 = 52.5%. Where the ground is ice-rich, the warm pipe sits on supports fitted with heat pipes that help keep the ground frozen.' },
-            { type: 'mcq', q: 'Thawing permafrost releases carbon dioxide and methane from long-frozen plant material. Why do scientists call this a positive feedback?', options: ['The extra greenhouse gases cause more warming, which thaws more permafrost', 'It cools the climate and stops thawing', 'It has no link to climate', 'It makes the active layer thinner'], answer: 0,
+            { type: 'mcq', q: 'Thawing permafrost releases carbon dioxide and methane from long-frozen plant material. Why do scientists call this a positive feedback?', options: ['The extra gases cause more warming, which thaws more permafrost', 'The gases cool the climate, which stops any further thawing of the ground', 'It has no link to climate because the gases stay in the soil', 'It makes the active layer thinner each summer'], answer: 0,
               explain: 'Warming → thaw → greenhouse gas release → more warming. Feedbacks like this can amplify climate change.' },
-            { type: 'mcq', q: 'USGS scientists project that 16–24% of Alaska’s near-surface permafrost could disappear by 2100. Which impact is most likely?', options: ['Ground subsidence damaging roads, buildings and pipelines, and thermokarst lakes forming', 'More glaciers forming in the lowlands', 'A thicker active layer making roads more stable', 'Sea ice expanding'], answer: 0,
+            { type: 'mcq', q: 'USGS scientists project that 16–24% of Alaska’s near-surface permafrost could disappear by 2100. Which impact is most likely?', options: ['Ground sinking under roads and buildings, and new thaw lakes', 'More glaciers forming in the lowlands as the ground freezes harder', 'A thicker active layer making roads more stable', 'Sea ice spreading further south each winter'], answer: 0,
               explain: 'As ice-rich ground thaws it collapses, creating uneven thermokarst terrain and ponds, and damaging infrastructure built on it.' }
           ]
         }
@@ -86,17 +86,17 @@
           ks3: [
             { type: 'mcq', graph: true, q: 'Which is the coldest month in Fairbanks?', options: ['January', 'July', 'April', 'September'], answer: 0,
               explain: 'January averages about −22°C. The red line drops far below zero in winter.' },
-            { type: 'mcq', graph: true, q: 'Which months have average temperatures above 0°C?', options: ['April to September', 'October to March', 'All year', 'None'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Which months have average temperatures above 0°C?', options: ['April to September', 'October to March', 'Only June and July', 'May to October'], answer: 0,
               explain: 'Only from April to September is the line above zero, so the growing season is short.' },
-            { type: 'mcq', graph: true, q: 'Fairbanks gets only about 300 mm of precipitation a year. What does the graph show about when it falls?', options: ['Most falls in summer, especially July and August', 'Most falls in January', 'It is the same every month', 'None falls in summer'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Fairbanks gets only about 300 mm of precipitation a year. What does the graph show about when it falls?', options: ['Most falls in summer, especially July and August', 'Most falls as snow in January and February', 'It is almost exactly the same amount every month of the year', 'None falls in summer'], answer: 0,
               explain: 'The tallest bars are in July and August. In winter the air is so cold it holds very little moisture, so snowfall is light but stays on the ground for months.' }
           ],
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Fairbanks (°C).', answer: 39.4, tol: 0.2, unit: '°C',
               explain: 'Warmest 17.2°C (July) − coldest −22.2°C (January) = 39.4°C, an extreme continental range.' },
-            { type: 'mcq', graph: true, q: 'Why is Fairbanks’ temperature range so large?', options: ['It is far inland at a high latitude, with long, dark winters and long summer days', 'It is next to a warm ocean current', 'It is on the Equator', 'It is very high above sea level'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Why is Fairbanks’ temperature range so large?', options: ['It is far inland at a high latitude, with long dark winters and long summer days', 'It is next to a warm ocean current that heats it strongly in summer and cools it in winter', 'It is very high above sea level in the mountains', 'It is close to the Equator, so summers are very hot'], answer: 0,
               explain: 'At 65°N, winter days are only about 3–4 hours long and summer days about 21 hours. Being far from the sea, there is no ocean to moderate temperatures.' },
-            { type: 'mcq', q: 'Precipitation in Fairbanks is about 300 mm a year, similar to some semi-arid areas. Why is the ground still often waterlogged in summer?', options: ['Permafrost stops water draining down, and low temperatures mean little evaporation', 'It rains every day', 'Glaciers melt over the town', 'The sea floods inland'], answer: 0,
+            { type: 'mcq', q: 'Precipitation in Fairbanks is about 300 mm a year, similar to some semi-arid areas. Why is the ground still often waterlogged in summer?', options: ['Permafrost stops water draining, and evaporation is low', 'It rains almost every day from May until the end of September', 'Glaciers melt over the town and flood the streets', 'The sea floods inland during summer storms'], answer: 0,
               explain: 'The frozen layer below is impermeable, so meltwater and rain collect in the active layer, creating bogs and many small lakes.' }
           ]
         }
@@ -105,21 +105,21 @@
         id: 'oil', title: 'Oil and the pipeline', icon: '🛢️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Oil is drilled at Prudhoe Bay on the Arctic coast. Why was an 800-mile pipeline built to Valdez in the south?', options: ['The Arctic Ocean is frozen for much of the year, so tankers load oil at Valdez, an ice-free port', 'Valdez is closer to the oil wells', 'Pipelines are cheaper than wells', 'Nobody lives at Prudhoe Bay'], answer: 0,
+            { type: 'mcq', q: 'Oil is drilled at Prudhoe Bay on the Arctic coast. Why was an 800-mile pipeline built to Valdez in the south?', options: ['The Arctic Ocean freezes, so tankers load at Valdez, an ice-free port', 'Valdez is much closer to the oil wells than any possible port on the Arctic coast', 'Pipelines are cheaper than drilling new wells in the south', 'Nobody lives at Prudhoe Bay to work in a port'], answer: 0,
               explain: 'Sea ice makes shipping from the north coast very difficult. Valdez, on the south coast, stays ice-free all year.' },
             { type: 'sort', q: 'Sort these effects of the oil industry in Alaska.', bins: ['Benefit', 'Problem'],
               items: [['Jobs and money for the state', 0], ['Roads and services built for workers', 0], ['Payments to residents from oil income', 0], ['Risk of oil spills', 1], ['Disturbing caribou migration routes', 1], ['Burning oil adds to climate change', 1]],
               explain: 'Oil has brought wealth and jobs, but it brings risks to wildlife and fragile tundra, and adds to the greenhouse effect that is thawing Alaska.' },
-            { type: 'mcq', q: 'In 1989 the tanker Exxon Valdez ran aground and spilled oil into Prince William Sound. What was the main effect?', options: ['Thousands of seabirds, sea otters and fish were killed, and coastlines were polluted', 'The oil helped fish grow', 'There was no effect', 'The sea froze over'], answer: 0,
+            { type: 'mcq', q: 'In 1989 the tanker Exxon Valdez ran aground and spilled oil into Prince William Sound. What was the main effect?', options: ['Thousands of seabirds, otters and fish died, and coasts were polluted', 'The oil sank quickly to the sea floor, so there was little visible effect', 'The spill was cleaned up completely within a week', 'The sea froze over because of the oil'], answer: 0,
               explain: 'Oil coats feathers and fur and poisons wildlife. The spill harmed fisheries and wildlife for many years and led to stricter tanker rules.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Why were parts of the pipeline buried and others raised above ground?', options: ['It was buried where the ground was thaw-stable rock or gravel, and raised where permafrost was ice-rich', 'It was buried in towns only', 'It was raised only over rivers', 'Engineers chose randomly'], answer: 0,
+            { type: 'mcq', q: 'Why were parts of the pipeline buried and others raised above ground?', options: ['Buried in thaw-stable ground, raised where permafrost was ice-rich', 'It was buried only in towns so that people living there could not see it', 'It was raised only where it crossed over rivers and roads', 'Engineers chose randomly to save time'], answer: 0,
               explain: 'Ice-rich permafrost would thaw and subside under a warm buried pipe, so those sections were elevated on supports. Stable ground allowed burial.' },
             { type: 'sort', q: 'Classify these impacts of oil development on Alaska’s North Slope.', bins: ['Economic', 'Social', 'Environmental'],
               items: [['State revenue from oil royalties and taxes', 0], ['High-paid but temporary construction jobs', 0], ['Changes to traditional ways of life', 1], ['Population growth in Fairbanks and Anchorage', 1], ['Habitat fragmentation for caribou', 2], ['Risk of spills in a slow-recovering ecosystem', 2]],
               explain: 'Oil transformed Alaska’s economy, but it also brought social change and environmental risk in fragile Arctic ecosystems, where cold slows the breakdown of pollution.' },
-            { type: 'mcq', q: 'Why does an oil spill do longer-lasting damage in the Arctic than in the tropics?', options: ['Low temperatures slow evaporation and the bacterial breakdown of oil, and food webs are simple', 'Arctic water is warmer', 'There is no wildlife in the Arctic', 'Ice absorbs oil instantly'], answer: 0,
+            { type: 'mcq', q: 'Why does an oil spill do longer-lasting damage in the Arctic than in the tropics?', options: ['Cold slows evaporation and breakdown of oil, and food webs are simple', 'Arctic water is warmer than people think, so the oil spreads further and faster', 'There is almost no wildlife in the Arctic to clean it', 'Sea ice absorbs the oil and releases it every spring'], answer: 0,
               explain: 'In cold water oil breaks down slowly, it can get trapped under ice, and Arctic food chains have few species, so losing one affects many others.' }
           ]
         }
@@ -128,19 +128,19 @@
         id: 'people', title: 'People of the north', icon: '🎣',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Many Alaska Native communities live by “subsistence”. What does that mean?', options: ['Hunting, fishing and gathering food for the family and community', 'Working in offices in big cities', 'Growing crops to sell abroad', 'Buying all food from supermarkets'], answer: 0,
+            { type: 'mcq', q: 'Many Alaska Native communities live by “subsistence”. What does that mean?', options: ['Hunting, fishing and gathering food for the community', 'Working in offices in big cities such as Anchorage and Juneau', 'Growing crops on large farms to sell abroad', 'Buying all food from supermarkets'], answer: 0,
               explain: 'Fishing for salmon, hunting caribou, moose and seals, and gathering berries remain important for food and culture in rural Alaska.' },
-            { type: 'mcq', q: 'Why is there very little farming in most of Alaska?', options: ['The growing season is short and much of the ground is frozen', 'It is too hot', 'There is no rain at all', 'Farming is not allowed'], answer: 0,
+            { type: 'mcq', q: 'Why is there very little farming in most of Alaska?', options: ['The growing season is short and the ground is often frozen', 'It is too hot and dry in summer for most crops to survive there', 'There is no rain at all in Alaska', 'Farming is banned in Alaska by law'], answer: 0,
               explain: 'Only a few months are warm enough, and permafrost and poor soils limit crops. A few valleys near Anchorage do grow vegetables, helped by very long summer days.' },
-            { type: 'mcq', q: 'Some villages on Alaska’s west coast are planning to move. Why?', options: ['Thawing permafrost and coastal erosion are destroying land under homes', 'They want to be nearer shops', 'Volcanoes are erupting under them', 'The sea is freezing permanently'], answer: 0,
+            { type: 'mcq', q: 'Some villages on Alaska’s west coast are planning to move. Why?', options: ['Thawing permafrost and erosion are destroying the land', 'They want to be nearer to shops, schools and hospitals in towns', 'Volcanoes are erupting under the villages', 'The sea is freezing permanently'], answer: 0,
               explain: 'With less sea ice to protect the coast from storms, and thawing ground, the shoreline is eroding fast. Some communities have had to relocate.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Shrinking sea ice increases coastal erosion in western Alaska. What is the main reason?', options: ['Without sea ice, autumn storm waves reach the coast and erode thawing, ice-rich cliffs', 'Sea ice causes erosion when it melts', 'Rivers stop flowing', 'The land is rising'], answer: 0,
+            { type: 'mcq', q: 'Shrinking sea ice increases coastal erosion in western Alaska. What is the main reason?', options: ['Without sea ice, storm waves reach the coast and erode thawing cliffs', 'Sea ice causes erosion when it melts, as it scrapes along the shore each spring', 'Rivers stop flowing to the coast when the sea ice disappears', 'The land is rising, so cliffs become steeper'], answer: 0,
               explain: 'Sea ice used to buffer the coast during autumn storms. Longer open-water seasons and warmer permafrost cliffs mean much faster erosion.' },
-            { type: 'mcq', q: 'Relocating a village threatened by erosion is very expensive. Which factor makes it especially difficult in rural Alaska?', options: ['Remote locations with no roads, so everything must be flown or shipped in, plus a short building season', 'Too many roads to build', 'Land is free and easy to use', 'There are no people to move'], answer: 0,
+            { type: 'mcq', q: 'Relocating a village threatened by erosion is very expensive. Which factor makes it especially difficult in rural Alaska?', options: ['No roads, so materials are flown or shipped in, and a short building season', 'There are far too many roads that would need to be rebuilt once a village is moved', 'Land is free and easy to use', 'There are no people left to move'], answer: 0,
               explain: 'Many villages have no road links, so materials arrive by barge or plane, and construction is limited to a few summer months on unstable ground.' },
-            { type: 'mcq', q: 'Which is the best example of adapting to a warming Arctic?', options: ['Using heat pipes (thermosyphons) to keep permafrost frozen under buildings and the pipeline', 'Building heavier houses directly on ice-rich ground', 'Removing all tundra plants', 'Ignoring the changes'], answer: 0,
+            { type: 'mcq', q: 'Which is the best example of adapting to a warming Arctic?', options: ['Heat pipes that keep permafrost frozen under buildings', 'Building heavier houses directly on ice-rich ground', 'Removing tundra plants so that the ground dries out faster', 'Ignoring the changes because they are too slow'], answer: 0,
               explain: 'Thermosyphons draw heat out of the ground in winter, keeping foundations frozen. Raised and adjustable foundations are other adaptations.' }
           ]
         }

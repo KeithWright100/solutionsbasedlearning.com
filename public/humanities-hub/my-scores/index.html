@@ -293,7 +293,11 @@
   // ---- Games (KS3 and other games that save to the account) ----
   var GAMES = {
     'world-map-challenge': { name: 'World Map Challenge', level: 'KS3 Geography', href: '/geography/games/world-map-challenge',
-      modes: [['find', 'Find it'], ['name', 'Name it'], ['co', 'Continents & oceans'], ['cf', 'Capitals & flags'], ['phys', 'Physical features'], ['explore', 'Explore the map']] }
+      modes: [['find', 'Find it'], ['name', 'Name it'], ['co', 'Continents & oceans'], ['cf', 'Capitals & flags'], ['phys', 'Physical features'], ['explore', 'Explore the map']] },
+    'danillion': { name: 'Danillion', level: 'KS3 Geography', href: '/geography/games/danillion',
+      modes: [['l1', 'Level 1'], ['l2', 'Level 2'], ['daily', 'Daily challenge']] },
+    'travel-the-wright-way': { name: 'Travel the Wright Way', level: 'KS3 and IGCSE/IB Geography', href: '/geography/games/travel-the-wright-way', unit: 'passport stamp',
+      modes: [['ks3', 'KS3 version'], ['adv', 'IGCSE / IB version'], ['explore', 'Passport stamps']] }
   };
   function stars(n) { var t = ''; for (var i = 0; i < 3; i++) t += i < n ? '★' : '☆'; return '<span class="ms-stars" aria-label="' + n + ' of 3 stars">' + t + '</span>'; }
   function gameSummary(ids) {
@@ -312,7 +316,7 @@
         var m = mk[0], rid = 'gd' + (n++);
         if (m === 'explore') {
           var ex = d.explore;
-          rows += '<tr><td><b>' + esc(mk[1]) + '</b></td><td>' + (ex && ex.n ? '<b>' + ex.n + '</b> place' + (ex.n > 1 ? 's' : '') + ' explored' : '<span class="dash">—</span>') + '</td><td><span class="dash">—</span></td><td>' + (ex && ex.at ? esc(day(ex.at)) : '<span class="dash">—</span>') + '</td><td></td></tr>';
+          rows += '<tr><td><b>' + esc(mk[1]) + '</b></td><td>' + (ex && ex.n ? '<b>' + ex.n + '</b> ' + (g.unit || 'place') + (ex.n > 1 ? 's' : '') + (g.unit ? '' : ' explored') : '<span class="dash">—</span>') + '</td><td><span class="dash">—</span></td><td>' + (ex && ex.at ? esc(day(ex.at)) : '<span class="dash">—</span>') + '</td><td></td></tr>';
           return;
         }
         var list = Object.keys(d).filter(function (k) { return k.indexOf('r:' + m + '|') === 0 && d[k] && d[k].m; }).map(function (k) { return d[k]; });

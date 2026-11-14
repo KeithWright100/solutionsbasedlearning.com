@@ -63,9 +63,9 @@
           ks3: [
             { type: 'mcq', graph: true, q: 'Which is the warmest month in Buenos Aires?', options: ['January', 'July', 'June', 'August'], answer: 0,
               explain: 'January is the warmest (about 25°C). Buenos Aires is in the Southern Hemisphere, so summer is from December to February.' },
-            { type: 'mcq', graph: true, q: 'Why is July the coldest month?', options: ['It is winter in the Southern Hemisphere', 'It is the rainy season', 'The sea freezes', 'The Sun is overhead'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Why is July the coldest month?', options: ['It is winter in the Southern Hemisphere', 'It is the rainy season, so clouds block the sun all month', 'The sea freezes', 'The Sun is overhead'], answer: 0,
               explain: 'When it is summer in the UK, it is winter in Argentina, because the Earth is tilted.' },
-            { type: 'mcq', graph: true, q: 'Describe the rainfall in Buenos Aires.', options: ['Rain falls in every month, with a little more in summer and autumn', 'It never rains', 'All the rain falls in one month', 'There is a long dry season'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Describe the rainfall in Buenos Aires.', options: ['Rain in every month, a little more in summer and autumn', 'Almost all of the rain falls in a short wet season from June to August', 'It never rains', 'There is a long dry season'], answer: 0,
               explain: 'Every month gets rain, from about 60 mm in winter to about 140 mm in March. This reliable rain helps farming on the Pampas.' }
           ],
           adv: [
@@ -73,7 +73,7 @@
               explain: 'Warmest 24.9°C (January) − coolest 11.0°C (July) = 13.9°C, typical of a humid subtropical climate.' },
             { type: 'number', graph: true, q: 'Calculate the total annual rainfall (mm).', answer: 1236, tol: 10, unit: 'mm',
               explain: 'Adding all twelve months gives about 1,236 mm.' },
-            { type: 'mcq', q: 'Rainfall decreases from about 1,200 mm near Buenos Aires to under 500 mm in the western Pampas. How does this affect farming?', options: ['Crops dominate in the wetter east; cattle grazing and irrigated farming become more common in the drier west', 'Farming is the same everywhere', 'Rice is grown in the dry west', 'The west is covered in rainforest'], answer: 0,
+            { type: 'mcq', q: 'Rainfall decreases from about 1,200 mm near Buenos Aires to under 500 mm in the western Pampas. How does this affect farming?', options: ['Crops in the wetter east; more grazing and irrigation in the drier west', 'Farming is the same everywhere because the soils are equally fertile across the region', 'Rice is grown in the dry west', 'The west is covered in rainforest'], answer: 0,
               explain: 'Moisture from the Atlantic decreases inland, so land use changes from intensive arable farming to more extensive grazing.' }
           ]
         }
@@ -82,27 +82,27 @@
         id: 'pampas', title: 'Farming the Pampas', icon: '🐄',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'What type of natural vegetation covered the Pampas?', options: ['Tall grasses with very few trees (temperate grassland)', 'Tropical rainforest', 'Coniferous forest', 'Desert cacti'], answer: 0,
+            { type: 'mcq', q: 'What type of natural vegetation covered the Pampas?', options: ['Tall grasses with few trees (temperate grassland)', 'Tropical rainforest with tall trees and thick undergrowth', 'Coniferous forest', 'Desert cacti'], answer: 0,
               explain: 'The Pampas were natural grasslands. Dead grass rotted into thick, dark, fertile soil over thousands of years.' },
-            { type: 'mcq', q: 'Who are gauchos?', options: ['Cowboys who herd cattle on horseback', 'Fishermen', 'Miners', 'Glacier guides'], answer: 0,
+            { type: 'mcq', q: 'Who are gauchos?', options: ['Cowboys who herd cattle on horseback', 'Fishermen who sail from Buenos Aires', 'Miners', 'Glacier guides'], answer: 0,
               explain: 'Gauchos are an important part of Argentina’s culture, herding cattle across the open grasslands.' },
             { type: 'sort', q: 'Sort these into crops and animals farmed on the Pampas.', bins: ['Crops', 'Animals'],
               items: [['Soya beans', 0], ['Wheat', 0], ['Maize', 0], ['Beef cattle', 1], ['Dairy cows', 1]],
               explain: 'The Pampas mix arable (crop) farming and pastoral (animal) farming. Argentina is famous for its beef.' },
-            { type: 'mcq', q: 'Why is the Pampas so good for farming?', options: ['Flat land, fertile soils, mild temperatures and rain all year', 'It is very cold and icy', 'It is mountainous', 'It has no rain'], answer: 0,
+            { type: 'mcq', q: 'Why is the Pampas so good for farming?', options: ['Flat land, fertile soils, mild temperatures and rain', 'It is high and mountainous, so cool air protects crops from pests and disease', 'It is very cold and icy', 'It has no rain'], answer: 0,
               explain: 'These physical factors allow large farms to use machinery and grow crops for export around the world.' },
-            { type: 'mcq', q: 'Culture: an asado is a famous Argentine tradition. What is it?', options: ['A barbecue where family and friends grill beef together', 'A type of dance', 'A glacier boat trip', 'A football stadium'], answer: 0,
+            { type: 'mcq', q: 'Culture: an asado is a famous Argentine tradition. What is it?', options: ['A barbecue where family and friends grill beef', 'A dance performed by gauchos at harvest festivals across the Pampas', 'A glacier boat trip', 'A football stadium'], answer: 0,
               explain: 'Cattle ranching on the Pampas shaped Argentine food culture. Many families share an asado at weekends, often with yerba mate, a herbal tea sipped through a metal straw.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Since the 1990s, soya farming has spread rapidly in Argentina. Which is the main reason?', options: ['High demand for animal feed, especially from China, and new seeds and no-till methods', 'A fall in world food demand', 'A ban on cattle', 'Cooler temperatures'], answer: 0,
+            { type: 'mcq', q: 'Since the 1990s, soya farming has spread rapidly in Argentina. Which is the main reason?', options: ['High demand for animal feed, especially from China', 'A fall in world food demand, so farmers switched to cheaper crops', 'A ban on cattle', 'Cooler temperatures'], answer: 0,
               explain: 'Argentina became the world’s largest exporter of soybean meal and oil, used mainly to feed livestock abroad.' },
             { type: 'sort', q: 'Evaluate the expansion of soya farming.', bins: ['Benefit', 'Problem'],
               items: [['Export earnings for Argentina', 0], ['Taxes paid to the government', 0], ['High yields using machinery', 0], ['Fewer farm jobs as machines replace workers', 1], ['Forest cleared in the Gran Chaco to the north', 1], ['Soil damage from growing one crop again and again', 1]],
               explain: 'Agribusiness brings wealth but can reduce rural employment, biodiversity and soil health. Crop rotation and forest protection reduce the costs.' },
-            { type: 'mcq', q: 'What is a mollisol, the soil type of the Pampas?', options: ['A deep, dark soil rich in organic matter from decayed grass roots', 'A thin, frozen soil', 'A red, leached tropical soil', 'Sand with no nutrients'], answer: 0,
+            { type: 'mcq', q: 'What is a mollisol, the soil type of the Pampas?', options: ['A deep, dark soil rich in organic matter', 'A red, leached tropical soil with very few nutrients left in it', 'A thin, frozen soil', 'Sand with no nutrients'], answer: 0,
               explain: 'Grassland roots die and decay each year, building up humus. These are among the world’s most productive soils.' },
-            { type: 'mcq', q: 'Culture: tango, a dance and music that grew up in the port districts of Buenos Aires around 1900, is on UNESCO’s list of Intangible Cultural Heritage. Why did it develop there?', options: ['Migrants from Europe and Africa mixed their music and dance in the fast-growing port city', 'It was invented by gauchos in Patagonia', 'It came from Inca temples', 'It was brought by tourists in the 2000s'], answer: 0,
+            { type: 'mcq', q: 'Culture: tango, a dance and music that grew up in the port districts of Buenos Aires around 1900, is on UNESCO’s list of Intangible Cultural Heritage. Why did it develop there?', options: ['Migrants from Europe and Africa mixed music and dance in the port', 'It was invented by gauchos in Patagonia and later brought north to the capital', 'It came from Inca temples', 'It was brought by tourists'], answer: 0,
               explain: 'Millions of migrants, especially from Italy and Spain, arrived in Buenos Aires. Cultures blending in cities is a key theme of human geography.' }
           ]
         }
@@ -115,7 +115,7 @@
               spots: [{ x: 14, y: 90, a: 'Pacific Ocean' }, { x: 86, y: 90, a: 'Atlantic Ocean' }, { x: 16, y: 20, a: 'Westerly winds' }, { x: 44, y: 12, a: 'Andes mountains' }, { x: 22, y: 52, a: 'Rainy side' }, { x: 66, y: 40, a: 'Glacier' }, { x: 76, y: 58, a: 'Rain shadow' }],
               extra: [],
               explain: 'Westerly winds bring moist air from the Pacific. It rises over the Andes, cools and drops rain and snow on the Chilean side. The air sinks on the Argentine side, so Patagonia is dry.' },
-            { type: 'mcq', q: 'Why is Patagonia so dry?', options: ['The Andes block the wet winds, so it lies in a rain shadow', 'It is next to the Equator', 'It never has wind', 'It is below sea level'], answer: 0,
+            { type: 'mcq', q: 'Why is Patagonia so dry?', options: ['The Andes block the wet winds, giving a rain shadow', 'It is close to the Equator, where sinking air stops clouds forming', 'It never has wind', 'It is below sea level'], answer: 0,
               explain: 'Most of the moisture falls on the western side of the mountains. Patagonia gets dry, sinking air.' },
             { type: 'mcq', q: 'Which farm animal is most common on the dry Patagonian grasslands?', options: ['Sheep', 'Water buffalo', 'Camels', 'Pigs'], answer: 0,
               explain: 'Sheep can survive on sparse, dry grass and cold winds. Patagonia is known for wool production.' }
@@ -125,9 +125,9 @@
               spots: [{ x: 14, y: 90, a: 'Pacific Ocean' }, { x: 86, y: 90, a: 'Atlantic Ocean' }, { x: 16, y: 20, a: 'Prevailing westerlies' }, { x: 44, y: 12, a: 'Patagonian Ice Field' }, { x: 22, y: 52, a: 'Orographic rainfall' }, { x: 66, y: 40, a: 'Outlet glacier' }, { x: 76, y: 58, a: 'Rain-shadow steppe' }],
               extra: ['Monsoon'],
               explain: 'There is no monsoon here. Moist westerlies are forced up the Andes; orographic precipitation feeds the ice field and its outlet glaciers, while the leeward side receives sinking, warming, dry air.' },
-            { type: 'mcq', q: 'Why does air become drier and warmer as it descends the eastern side of the Andes?', options: ['It has lost moisture on the way up and warms by compression as it sinks', 'It passes over the sea', 'It is heated by volcanoes', 'It gains water from glaciers'], answer: 0,
+            { type: 'mcq', q: 'Why does air become drier and warmer as it descends the eastern side of the Andes?', options: ['It lost moisture rising, and warms by compression as it sinks', 'It passes over warm volcanoes that heat it up and dry it out', 'It passes over the sea', 'It gains water from glaciers'], answer: 0,
               explain: 'Descending air warms at the dry adiabatic rate, so relative humidity falls and clouds evaporate. This dry, gusty wind is like a föhn wind.' },
-            { type: 'mcq', q: 'Patagonia has some of the best wind conditions in the world for wind turbines. Why?', options: ['Strong, steady westerly winds blow across open, flat land', 'It has no wind at all', 'The air is very still because of high pressure', 'Turbines work better in rain'], answer: 0,
+            { type: 'mcq', q: 'Patagonia has some of the best wind conditions in the world for wind turbines. Why?', options: ['Strong, steady westerlies blow across open land', 'The air is very still because of high pressure, which keeps turbines steady', 'It has no wind at all', 'Turbines work better in rain'], answer: 0,
               explain: 'Its position in the westerlies, with few obstacles, gives high average wind speeds, a renewable resource for the future.' }
           ]
         }
@@ -136,19 +136,19 @@
         id: 'glacier', title: 'Perito Moreno Glacier', icon: '🧊',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'The Perito Moreno Glacier ends in a lake. What happens when big pieces of ice break off the front?', options: ['Calving: they crash into the water and form icebergs', 'They melt instantly', 'They float up into the sky', 'They turn into rock'], answer: 0,
+            { type: 'mcq', q: 'The Perito Moreno Glacier ends in a lake. What happens when big pieces of ice break off the front?', options: ['Calving: they crash into the water as icebergs', 'They melt instantly as soon as they touch the warm lake water', 'They float up into the sky', 'They turn into rock'], answer: 0,
               explain: 'Calving is when ice breaks off the end of a glacier. Tourists watch huge blocks crash into the lake.' },
-            { type: 'mcq', q: 'Where does the ice that feeds the glacier come from?', options: ['Snow that builds up and is squashed into ice on the Patagonian Ice Field', 'Rain on the steppe', 'Sea water', 'Underground springs'], answer: 0,
+            { type: 'mcq', q: 'Where does the ice that feeds the glacier come from?', options: ['Snow squashed into ice on the Patagonian Ice Field', 'Rain on the dry steppe that freezes overnight and flows uphill', 'Sea water', 'Underground springs'], answer: 0,
               explain: 'Heavy snowfall high in the Andes is compressed into ice, which slowly flows downhill as a glacier.' },
-            { type: 'mcq', q: 'The glacier is in Los Glaciares National Park. Why are national parks created?', options: ['To protect landscapes and wildlife while allowing people to visit', 'To build factories', 'To stop all visitors', 'To grow crops'], answer: 0,
+            { type: 'mcq', q: 'The glacier is in Los Glaciares National Park. Why are national parks created?', options: ['To protect landscapes and wildlife while allowing visits', 'To keep all visitors out so the land is never disturbed', 'To build factories', 'To grow crops'], answer: 0,
               explain: 'Los Glaciares is a UNESCO World Heritage Site, protected for its outstanding natural beauty.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Most glaciers in Patagonia are retreating, but Perito Moreno has stayed roughly stable for decades. Which explanation fits best?', options: ['High snowfall at its source balances losses, so accumulation roughly equals ablation', 'It is not made of ice', 'It is in a hot desert', 'Tourists add ice to it'], answer: 0,
+            { type: 'mcq', q: 'Most glaciers in Patagonia are retreating, but Perito Moreno has stayed roughly stable for decades. Which explanation fits best?', options: ['High snowfall balances losses, so accumulation ≈ ablation', 'It sits in a hot desert, so it melts and refreezes at the same rate every day', 'It is not made of ice', 'Tourists add ice to it'], answer: 0,
               explain: 'A glacier’s mass balance compares accumulation (snowfall) with ablation (melting and calving). In recent years scientists have measured faster thinning, so its stability may not last.' },
             { type: 'number', q: 'A glacier front advances about 2 m per day. How far would it move in a year (365 days)? Give your answer in metres.', answer: 730, tol: 0, unit: 'm',
               explain: '2 × 365 = 730 m. Ice keeps moving forward even when the front stays in the same place, because calving removes ice at a similar rate.' },
-            { type: 'mcq', q: 'Glacier tourism brings income to El Calafate. Which is a challenge of managing it?', options: ['Balancing visitor numbers, infrastructure and emissions with protecting a fragile environment', 'There are no visitors', 'Glaciers are too warm to visit', 'Tourism has no effect'], answer: 0,
+            { type: 'mcq', q: 'Glacier tourism brings income to El Calafate. Which is a challenge of managing it?', options: ['Balancing visitor numbers and emissions with protection', 'There are too few visitors to pay for roads, hotels and the national park', 'Glaciers are too warm to visit', 'Tourism has no effect'], answer: 0,
               explain: 'Boardwalks, boat limits and park fees help manage impacts while sharing benefits with local people.' }
           ]
         }

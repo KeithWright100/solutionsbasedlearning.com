@@ -278,6 +278,7 @@
     var w = x1 - x0, h = y1 - y0, fs = w * 0.05, r = fs * 0.32, h2 = '';
     var rv = '';
     (L.rivers || []).forEach(function (line) { rv += '<path d="M' + line.map(function (c) { var q = P(c[0], c[1]); return q.x.toFixed(2) + ' ' + q.y.toFixed(2); }).join(' L') + '" fill="none" stroke="#3d8fc6" stroke-width="' + (fs * 0.22).toFixed(3) + '" stroke-linejoin="round" stroke-linecap="round"/>'; });
+    (L.lakes || []).forEach(function (poly) { rv += '<path d="M' + poly.map(function (c) { var q = P(c[0], c[1]); return q.x.toFixed(2) + ' ' + q.y.toFixed(2); }).join(' L') + ' Z" fill="#bfe6ff" stroke="#3d8fc6" stroke-width="' + (fs * 0.06).toFixed(3) + '"/>'; });
     (L.land || []).forEach(function (poly) { h2 += '<path d="M' + poly.map(function (c) { var q = P(c[0], c[1]); return q.x.toFixed(2) + ' ' + q.y.toFixed(2); }).join(' L') + ' Z" fill="#f6f1e1" stroke="#9c9073" stroke-width="' + (fs * 0.08).toFixed(3) + '"/>'; });
     L.places.forEach(function (pl) {
       var q = P(pl[1], pl[2]), pos = pl[3] || 'r', tx = q.x, ty = q.y, anchor = 'start';
@@ -342,6 +343,9 @@
     pampas: 'M-20 196 C 150 192, 300 200, 450 194 S 750 188, 920 194',
     savanna: 'M-20 190 C 140 196, 260 178, 400 184 S 640 198, 760 186 S 860 180, 920 184',
     redroad: 'M-20 200 C 130 196, 240 176, 380 178 S 600 196, 720 184 S 850 172, 920 176',
+    lake: 'M-20 150 C 150 140, 300 162, 450 148 S 750 138, 920 152',
+    kili: 'M40 206 L250 194 L160 172 L380 156 L290 134 L470 116 L400 94 L560 76 L490 58 L600 44',
+    rift: 'M-20 196 C 150 190, 300 200, 450 194 S 750 186, 920 192',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
   function sceneMarkup(d) {
@@ -469,6 +473,30 @@
       [[120, 1], [300, 1.2], [520, 1.1], [700, 1.3], [860, 1]].forEach(function (b) { var bx2 = b[0], sc2 = b[1], top = 150 - 70 * sc2; h += '<path d="M' + (bx2 - 8 * sc2) + ' 152 L' + (bx2 - 6 * sc2) + ' ' + top + ' L' + (bx2 + 6 * sc2) + ' ' + top + ' L' + (bx2 + 8 * sc2) + ' 152 Z" fill="#9a7b66"/><path d="M' + bx2 + ' ' + top + ' l-14 -10 M' + bx2 + ' ' + top + ' l14 -10 M' + bx2 + ' ' + top + ' l-4 -14 M' + bx2 + ' ' + top + ' l6 -13" stroke="#7a5f4e" stroke-width="3"/><ellipse cx="' + bx2 + '" cy="' + (top - 12) + '" rx="20" ry="7" fill="#4f7a2a"/>'; });
       h += '<path d="' + P2 + '" fill="none" stroke="#d98a52" stroke-width="18" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
       h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><rect x="-34" y="-28" width="66" height="24" rx="6" fill="#f4f1de" stroke="#7a1010" stroke-width="2"/><rect x="-34" y="-12" width="66" height="5" fill="#d62828"/><g fill="#7cc3ef"><rect x="-28" y="-24" width="10" height="8"/><rect x="-14" y="-24" width="10" height="8"/><rect x="0" y="-24" width="10" height="8"/><rect x="16" y="-24" width="12" height="8"/></g><g stroke="#5b3b22" stroke-width="1.5"><rect x="-26" y="-38" width="14" height="10" fill="#f0b429"/><rect x="-10" y="-36" width="12" height="8" fill="#8a4b20"/><rect x="4" y="-40" width="10" height="12" fill="#2563c9"/></g><circle cx="-20" cy="-3" r="6" fill="#222"/><circle cx="20" cy="-3" r="6" fill="#222"/></g></g>';
+    } else if (type === 'lake') {
+      h += '<rect width="900" height="220" fill="#cfe9ff"/><circle cx="780" cy="36" r="20" fill="#ffd166"/>';
+      h += '<path d="M0 70 L120 40 L240 60 L300 50 L300 100 L0 100 Z" fill="#7a8ea3"/><path d="M600 55 L700 30 L820 48 L900 40 L900 100 L600 100 Z" fill="#7a8ea3"/>';
+      h += '<rect y="96" width="900" height="100" fill="#2f8fcf"/><path d="M0 120 C 150 110, 300 130, 450 118 S 750 108, 900 122 L900 196 L0 196 Z" fill="#3fa5dc" opacity=".6"/>';
+      h += '<g class="tw-swim2" fill="#ffd54f"><path d="M200 172 q8 -5 16 0 q-8 5 -16 0 Z M216 172 l5 -4 v8 Z"/></g><g class="tw-swim2 r" fill="#7fe3ff"><path d="M620 178 q8 -5 16 0 q-8 5 -16 0 Z M636 178 l5 -4 v8 Z"/></g>';
+      h += '<path class="tw-flow" d="M-20 110 Q 30 104 80 110 T 180 110 T 280 110 T 380 110 T 480 110 T 580 110 T 680 110 T 780 110 T 880 110 T 980 110" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<rect y="194" width="900" height="26" fill="#f2d79b"/><g fill="#7a4b20">'; for (k = 0; k < 5; k++) h += '<path d="M' + (60 + k * 190) + ' 204 l40 0 l-6 6 l-28 0 Z"/>'; h += '</g>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-30 -2 Q0 8 30 -2 L26 -6 L-26 -6 Z" fill="#6b3d17" stroke="#3f220b" stroke-width="2"/><circle cx="-2" cy="-20" r="5" fill="#5b3b22"/><rect x="-6" y="-16" width="8" height="10" rx="2" fill="#f0b429"/><line x1="6" y1="-22" x2="18" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
+    } else if (type === 'kili') {
+      h += '<defs><clipPath id="twKc"><path d="M0 220 L0 196 L200 160 L420 80 L540 40 L660 40 L780 80 L900 130 L900 220 Z"/></clipPath><linearGradient id="twSkyK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5aa6e6"/><stop offset="1" stop-color="#dff0ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSkyK)"/>';
+      h += '<g clip-path="url(#twKc)"><rect width="900" height="220" fill="#1f6b3a"/><rect width="900" height="150" fill="#8a9a4a"/><rect width="900" height="110" fill="#a8977a"/><rect width="900" height="62" fill="#fff"/></g>';
+      h += '<path d="M540 40 L660 40" stroke="#e6f6ff" stroke-width="3"/><g fill="#d9a441">'; for (k = 0; k < 12; k++) h += '<rect x="' + (k * 75) + '" y="208" width="60" height="12"/>'; h += '</g>';
+      h += '<g fill="#fff" opacity=".85"><ellipse cx="260" cy="150" rx="70" ry="10"/><ellipse cx="760" cy="140" rx="60" ry="9"/></g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#f3e2b8" stroke-width="5" stroke-dasharray="2 6" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><circle cx="0" cy="-30" r="6" fill="#5b3b22" stroke="#11243b" stroke-width="2"/><path d="M0 -24 L0 -8 M0 -8 L-6 4 M0 -8 L6 4 M0 -19 L-8 -12 M0 -19 L9 -14" stroke="#11243b" stroke-width="3" stroke-linecap="round" fill="none"/><rect x="-10" y="-24" width="7" height="12" rx="2" fill="#2563c9"/><line x1="9" y1="-14" x2="13" y2="4" stroke="#7a5a32" stroke-width="2"/></g></g>';
+    } else if (type === 'rift') {
+      h += '<rect width="900" height="220" fill="#d6ecfb"/><circle cx="460" cy="34" r="18" fill="#ffd166"/>';
+      h += '<path d="M0 60 L170 60 L230 160 L0 160 Z" fill="#7a6a4f"/><path d="M900 70 L720 70 L660 160 L900 160 Z" fill="#7a6a4f"/><g fill="#2f7a3a"><rect y="52" width="170" height="10"/><rect x="720" y="62" width="180" height="10"/></g>';
+      h += '<path d="M260 150 L320 92 L340 92 L400 150 Z" fill="#6b5b4e"/><path d="M322 92 L338 92 L334 98 L326 98 Z" fill="#3f352d"/>';
+      h += '<rect y="148" width="900" height="72" fill="#d8b45a"/><ellipse cx="560" cy="166" rx="110" ry="12" fill="#6fb2d8"/><g fill="#f48fb1">'; for (k = 0; k < 16; k++) h += '<circle cx="' + (470 + k * 11) + '" cy="' + (162 + (k % 3) * 3) + '" r="2.5"/>'; h += '</g>';
+      h += '<g stroke="#e5e7eb" stroke-width="3"><line x1="760" y1="120" x2="760" y2="150"/><line x1="780" y1="124" x2="780" y2="150"/></g><g class="tw-smoke"><circle cx="760" cy="112" r="7" fill="#f2f2f2"/><circle cx="780" cy="116" r="6" fill="#f2f2f2"/></g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#b9874a" stroke-width="16" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><rect x="-34" y="-24" width="64" height="18" rx="3" fill="#b45309" stroke="#5b2a04" stroke-width="2"/><rect x="-30" y="-36" width="48" height="12" fill="none" stroke="#5b2a04" stroke-width="2"/><rect x="18" y="-22" width="12" height="9" fill="#bfe6ff"/><circle cx="-12" cy="-30" r="4" fill="#f0b429"/><circle cx="2" cy="-30" r="4" fill="#5b3b22"/><circle cx="-20" cy="-4" r="7" fill="#222"/><circle cx="18" cy="-4" r="7" fill="#222"/><circle cx="-20" cy="-4" r="2.5" fill="#bbb"/><circle cx="18" cy="-4" r="2.5" fill="#bbb"/></g></g>';
     } else if (type === 'trail') {
       h += '<defs><linearGradient id="twSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0f5"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSky)"/>';
       h += '<path d="M0 220 L0 200 L120 190 L330 110 L560 34 L640 34 L760 120 L900 170 L900 220 Z" fill="#6b5b4e"/>';
@@ -487,14 +515,14 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor' }[type];
     if (d.sceneLabel) label = d.sceneLabel;
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad)$/.test(E.d.scene)) ang = 0;
+    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift)$/.test(E.d.scene)) ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
@@ -622,6 +650,7 @@
   function finishExpedition() {
     var d = E.d, max = maxOf(d), prev = S.stamps[d.id], best = Math.max(E.score, prev ? prev.best : 0);
     S.stamps[d.id] = { best: best, max: max, last: E.score }; save();
+    try { if (window.SBLGameAccount) { SBLGameAccount.record('travel-the-wright-way', TIER, d.id, d.name, E.score, max); SBLGameAccount.collect('travel-the-wright-way', d.id); } } catch (e) {}
     var pct = Math.round(E.score / max * 100), medal = pct >= 85 ? 'Gold explorer' : pct >= 65 ? 'Silver explorer' : 'Bronze explorer';
     confetti(120);
     root.innerHTML = '<section class="tw-panel" style="text-align:center"><h2 style="color:var(--blue);margin-top:0">Expedition complete: ' + esc(d.name) + '</h2>' +

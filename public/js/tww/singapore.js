@@ -50,9 +50,9 @@
         id: 'land', title: 'Making new land', icon: '🏗️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Singapore has run out of space. How has it made the country bigger?', options: ['Land reclamation: building new land out into the sea', 'Buying land from Antarctica', 'Draining the ocean', 'Building on clouds'], answer: 0,
+            { type: 'mcq', q: 'Singapore has run out of space. How has it made the country bigger?', options: ['Land reclamation: building new land out into the sea', 'Buying land from Malaysia to build new towns', 'Draining its large inland lakes to make new farmland', 'Cutting into hills to flatten them for building'], answer: 0,
               explain: 'Singapore fills in areas of shallow sea with sand, soil and rock to create new land. This is called land reclamation.' },
-            { type: 'mcq', q: 'Singapore’s land area was about 582 km² in 1960 and about 726 km² in 2019. Roughly how much bigger is that?', options: ['About a quarter bigger', 'About twice as big', 'About 10 times bigger', 'It has not changed'], answer: 0,
+            { type: 'mcq', q: 'Singapore’s land area was about 582 km² in 1960 and about 726 km² in 2019. Roughly how much bigger is that?', options: ['About a quarter bigger', 'About twice as big', 'About 10% bigger', 'About half as big again'], answer: 0,
               explain: '726 − 582 = 144 km² more, which is about a quarter of the 1960 size.' },
             { type: 'mcq', q: 'Which of these was built on reclaimed land?', options: ['Changi Airport', 'Mount Everest', 'The Amazon River', 'Lake Toba'], answer: 0,
               explain: 'Changi Airport was built partly on reclaimed land along Singapore’s east coast.' }
@@ -60,9 +60,9 @@
           adv: [
             { type: 'number', q: 'Singapore grew from 581.5 km² (1960) to 725.7 km² (2019). Calculate the percentage increase (to the nearest whole number).', answer: 24.8, tol: 1.3, unit: '%',
               explain: '(725.7 − 581.5) ÷ 581.5 × 100 ≈ 24.8%, so about 25%.' },
-            { type: 'mcq', q: 'Singapore now often builds polders instead of filling the sea with sand. Why?', options: ['Sand has become scarce, and some countries have banned sand exports', 'Polders are cheaper because they need no pumps', 'Sand makes the sea too salty', 'Polders are only used for farming'], answer: 0,
+            { type: 'mcq', q: 'Singapore now often builds polders instead of filling the sea with sand. Why?', options: ['Sand is scarce, and some countries have banned sand exports', 'Polders are cheaper because they need no pumps or sea walls', 'Sand makes the surrounding sea too salty for fish', 'Polders can only be used for farming, not for tall buildings'], answer: 0,
               explain: 'Polders (land enclosed by walls and drained, as in the Netherlands) need far less sand. Several neighbouring countries have restricted sand exports.' },
-            { type: 'mcq', q: 'Which is a likely environmental cost of land reclamation?', options: ['Loss of coral reefs, mangroves and sea-grass habitats', 'More rainfall', 'Fewer earthquakes', 'Higher sea temperatures everywhere'], answer: 0,
+            { type: 'mcq', q: 'Which is a likely environmental cost of land reclamation?', options: ['Loss of coral reefs, mangroves and sea-grass', 'More rainfall over the newly built land', 'Stronger earthquakes along the island’s coastline', 'Colder sea temperatures around the island'], answer: 0,
               explain: 'Filling in shallow coasts destroys marine habitats, and dredging sand damages the places it comes from.' }
           ]
         }
@@ -75,9 +75,9 @@
               spots: [{ x: 25, y: 46, a: 'Local catchment' }, { x: 75, y: 37, a: 'Imported water' }, { x: 25, y: 92, a: 'NEWater' }, { x: 63, y: 92, a: 'Desalination' }],
               extra: [],
               explain: 'Rain is collected in reservoirs (local catchment); water is piped in from Malaysia (imported); used water is cleaned and recycled (NEWater); and sea water has its salt removed (desalination).' },
-            { type: 'mcq', q: 'What is NEWater?', options: ['Used water cleaned so well it can be used again', 'Water from melted icebergs', 'Bottled water from France', 'Rainwater from the roof'], answer: 0,
+            { type: 'mcq', q: 'What is NEWater?', options: ['Used water cleaned so well it can be reused', 'Sea water collected during the monsoon season', 'Water piped from new dams in Thailand', 'Rainwater collected on top of buildings'], answer: 0,
               explain: 'NEWater is used water treated with membranes and UV light until it is ultra-clean. Most goes to factories, and some is added to reservoirs.' },
-            { type: 'mcq', q: 'Why does Singapore need four different water sources?', options: ['It has no big rivers or lakes, and wants a secure supply', 'It rains too much', 'It wants to sell water to Thailand', 'Its people drink four times more than anyone else'], answer: 0,
+            { type: 'mcq', q: 'Why does Singapore need four different water sources?', options: ['It has no big rivers or lakes, and wants a secure supply', 'It rains too little for any of its reservoirs to fill up', 'It wants to sell its spare water to Indonesia', 'Its people use four times more water than anyone'], answer: 0,
               explain: 'A small island with no big rivers has to collect, import, recycle and desalinate water to be sure it never runs out.' }
           ],
           adv: [
@@ -85,9 +85,9 @@
               spots: [{ x: 25, y: 46, a: 'Local catchment' }, { x: 75, y: 37, a: 'Imported water' }, { x: 25, y: 92, a: 'NEWater' }, { x: 63, y: 92, a: 'Desalination' }],
               extra: ['Groundwater aquifer'],
               explain: 'Singapore has no significant aquifers. Its four taps are local catchment, imported water from Malaysia, NEWater and desalination.' },
-            { type: 'mcq', q: 'Why is Singapore expanding NEWater and desalination in particular?', options: ['They do not depend on rainfall or another country, so they make supply more secure', 'They are the cheapest options', 'They use no energy', 'They are required by the UN'], answer: 0,
+            { type: 'mcq', q: 'Why is Singapore expanding NEWater and desalination in particular?', options: ['They do not depend on rainfall or another country', 'They are the cheapest and use the least energy', 'They are required by an agreement with Malaysia', 'They produce water that is free from all minerals'], answer: 0,
               explain: 'Rainfall varies and the water agreement with Malaysia runs only until 2061. Recycling and desalination are "weather-resilient", though they use a lot of energy.' },
-            { type: 'mcq', q: 'Which is the main drawback of desalination?', options: ['It uses a lot of energy and produces salty brine', 'It makes water radioactive', 'It only works in winter', 'It needs glaciers'], answer: 0,
+            { type: 'mcq', q: 'Which is the main drawback of desalination?', options: ['It uses a lot of energy and produces salty brine', 'It only works when the sea is calm in winter', 'It makes the water too salty for people to drink', 'It needs a large river nearby to supply water'], answer: 0,
               explain: 'Removing salt (usually by reverse osmosis) is energy-intensive, and the leftover brine must be disposed of carefully.' }
           ]
         }
@@ -98,17 +98,17 @@
           ks3: [
             { type: 'mcq', q: 'About how many Singapore residents live in public HDB flats?', options: ['About 8 in 10', 'About 1 in 10', 'Nobody', 'About 1 in 100'], answer: 0,
               explain: 'Around 80% of Singapore residents live in flats built by the Housing and Development Board (HDB).' },
-            { type: 'mcq', q: 'Why are most homes in Singapore in tall blocks of flats?', options: ['There is little land, so building upwards fits more people in', 'Tall buildings are cooler', 'It is the law to live above the 10th floor', 'There are no builders who can build houses'], answer: 0,
+            { type: 'mcq', q: 'Why are most homes in Singapore in tall blocks of flats?', options: ['There is little land, so building upwards fits more people in', 'Tall buildings stay cooler because they catch the strong sea breeze', 'The law says everyone must live above the tenth floor', 'Houses would sink because the ground is too soft'], answer: 0,
               explain: 'With so little land, high-rise flats let many people live in a small area.' },
-            { type: 'mcq', q: 'Singapore calls itself a "City in Nature". What does that mean?', options: ['Parks, gardens and green roofs are built into the city', 'There are no buildings at all', 'Everyone lives in the rainforest', 'The city is under the sea'], answer: 0,
+            { type: 'mcq', q: 'Singapore calls itself a "City in Nature". What does that mean?', options: ['Parks, gardens and green roofs are built into the city', 'Most people live in villages inside the rainforest', 'Buildings are made only from wood and other plants', 'The city has no roads, so people walk on nature trails'], answer: 0,
               explain: 'Singapore adds parks, park connectors, green roofs and vertical gardens to cool the city and support wildlife.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Which statement best describes Singapore’s housing policy?', options: ['The government builds most homes and helps people buy them on long leases', 'All homes are rented from private landlords', 'People must build their own houses', 'There is no planning'], answer: 0,
+            { type: 'mcq', q: 'Which statement best describes Singapore’s housing policy?', options: ['The government builds most homes and helps people buy them', 'Most homes are rented from private landlords at market prices', 'People must build their own houses on land they inherit', 'There is no planning, so anyone can build anywhere'], answer: 0,
               explain: 'HDB builds most homes and sells them on 99-year leases, with grants that make home ownership affordable.' },
-            { type: 'mcq', q: 'Dense cities like Singapore can suffer from the urban heat island effect. Which strategy helps reduce it?', options: ['Green roofs, trees and parks that shade and cool the city', 'More dark tarmac', 'Removing all trees', 'Building more car parks'], answer: 0,
+            { type: 'mcq', q: 'Dense cities like Singapore can suffer from the urban heat island effect. Which strategy helps reduce it?', options: ['Green roofs, trees and parks', 'More dark tarmac and car parks', 'Taller glass office buildings', 'More air-conditioning units'], answer: 0,
               explain: 'Vegetation provides shade and cools the air through evapotranspiration, lowering city temperatures.' },
-            { type: 'mcq', q: 'Why might Singapore’s approach be hard to copy in a city like Lagos or Mumbai?', options: ['Singapore is wealthy, small and has strong central planning and land ownership', 'Singapore has a cold climate', 'Singapore has no population', 'Other cities have too much land'], answer: 0,
+            { type: 'mcq', q: 'Why might Singapore’s approach be hard to copy in a city like Lagos or Mumbai?', options: ['Singapore is wealthy, small and has strong central planning', 'Singapore has a cooler climate, so building there is much easier', 'Lagos and Mumbai have too much empty land to plan', 'Singapore’s population is much larger and younger'], answer: 0,
               explain: 'Singapore’s wealth, small size, state land ownership and strong governance make large-scale public housing possible.' }
           ]
         }
@@ -127,9 +127,9 @@
           adv: [
             { type: 'number', graph: true, q: 'Calculate Singapore’s annual temperature range (°C).', answer: 1.8, tol: 0.15, unit: '°C',
               explain: 'Highest monthly mean 28.6°C (May) − lowest 26.8°C (December and January) = 1.8°C.' },
-            { type: 'mcq', graph: true, q: 'Singapore’s wettest months are November to January. Which explains this?', options: ['The north-east monsoon brings moist winds and heavy rain', 'The Sahara sends dust storms', 'Snow melts in the hills', 'Typhoons hit Singapore every December'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Singapore’s wettest months are November to January. Which explains this?', options: ['The north-east monsoon brings moist winds and heavy rain', 'The south-west monsoon brings dry air from Australia', 'Typhoons hit Singapore directly every December and January', 'Haze from forest fires makes clouds grow larger'], answer: 0,
               explain: 'From about December to March, north-east monsoon winds bring heavy rain, with the wettest spell at the start.' },
-            { type: 'mcq', graph: true, q: 'Compare Singapore with Kuala Lumpur (about 2,850 mm a year). Singapore gets about 2,100 mm. Which is the best comparison?', options: ['Both are very wet, but Kuala Lumpur gets roughly a third more rain', 'Singapore is much wetter', 'Both get the same', 'Kuala Lumpur is a desert'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Compare Singapore with Kuala Lumpur (about 2,850 mm a year). Singapore gets about 2,100 mm. Which is the best comparison?', options: ['Both are very wet, but Kuala Lumpur gets about a third more', 'Singapore is the wetter city, getting about a third more than KL', 'Both get about the same amount of rain each year', 'Kuala Lumpur gets about twice as much as Singapore'], answer: 0,
               explain: '2,850 is about 35% more than 2,100. Both are wet equatorial climates, but local factors such as nearby mountains affect totals.' }
           ]
         }

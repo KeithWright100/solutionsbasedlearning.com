@@ -92,7 +92,7 @@
               explain: 'From the top: emergent trees poke out above the canopy; the canopy is a thick roof of leaves; the under-canopy has younger trees; the shrub layer is close to the ground; the forest floor is dark and covered in leaf litter.' },
             { type: 'mcq', q: 'Which layer gets the least sunlight?', options: ['Forest floor', 'Canopy', 'Emergent layer', 'Under-canopy'], answer: 0,
               explain: 'The canopy blocks most of the light, so only about 2% of sunlight reaches the forest floor.' },
-            { type: 'mcq', q: 'Why is the canopy home to so many animals?', options: ['It has lots of fruit, flowers and leaves to eat, and sunlight', 'It is the coldest layer', 'It is closest to the river', 'There are no predators anywhere in the forest'], answer: 0,
+            { type: 'mcq', q: 'Why is the canopy home to so many animals?', options: ['It has lots of fruit, flowers and leaves, and sunlight', 'It is the coolest and darkest layer, so animals can hide from the hot sun', 'It is closest to the river', 'There are no predators up there'], answer: 0,
               explain: 'The canopy gets lots of sunlight, so it is full of leaves, fruit and flowers: plenty of food for animals.' }
           ],
           adv: [
@@ -102,7 +102,7 @@
               explain: 'The rainforest has five layers. Permafrost and moss-and-lichen ground cover belong to the tundra, not the tropics.' },
             { type: 'mcq', q: 'Emergent trees can reach 50 m or more. Which is the best explanation of why trees grow so tall here?', options: ['Intense competition for sunlight', 'Strong winds push them upwards', 'The soils are very deep and fertile', 'There is a long dry season'], answer: 0,
               explain: 'With water and warmth available all year, light is the limiting factor, so trees compete by growing tall to reach it.' },
-            { type: 'mcq', q: 'Which statement about light in the rainforest is correct?', options: ['Only about 2% of sunlight reaches the forest floor, so the shrub layer is sparse', 'Light increases towards the forest floor', 'The under-canopy receives more light than the canopy', 'Light is the same at every level'], answer: 0,
+            { type: 'mcq', q: 'Which statement about light in the rainforest is correct?', options: ['Only about 2% of sunlight reaches the floor, so the shrub layer is sparse', 'Light increases towards the forest floor because the leaves reflect it downwards', 'The under-canopy gets more light than the canopy', 'Light is the same at every level'], answer: 0,
               explain: 'The dense canopy intercepts most incoming light, so the floor is dim and plant growth there is limited.' }
           ]
         }
@@ -117,7 +117,7 @@
               explain: 'Drip tips let rain run off leaves; epiphytes grow on branches to reach light; lianas are woody vines rooted in the ground that climb to the canopy; buttress roots support tall trees in shallow soil.' },
             { type: 'mcq', q: 'Why do many rainforest leaves have drip tips?', options: ['So rain runs off quickly', 'To catch insects', 'To store water for the dry season', 'To keep the leaf warm'], answer: 0,
               explain: 'Drip tips let heavy rain run off quickly, so the leaf dries and mould and algae cannot grow on it.' },
-            { type: 'mcq', q: 'What do buttress roots do?', options: ['Support very tall trees in shallow soil', 'Store water underground', 'Catch falling leaves', 'Climb up other trees'], answer: 0,
+            { type: 'mcq', q: 'What do buttress roots do?', options: ['Support very tall trees in shallow soil', 'Store water deep underground for the dry season', 'Catch falling leaves', 'Climb up other trees'], answer: 0,
               explain: 'Rainforest soils are shallow, so roots spread out wide. Buttress roots act like giant props to stop tall trees falling over.' }
           ],
           adv: [
@@ -125,11 +125,11 @@
               spots: [{ x: 50, y: 14, a: 'Drip-tip leaves' }, { x: 84, y: 22, a: 'Epiphytes' }, { x: 84, y: 58, a: 'Lianas' }, { x: 16, y: 86, a: 'Buttress roots' }, { x: 63, y: 44, a: 'Thin, smooth bark' }],
               extra: ['Thick, fire-resistant bark'],
               explain: 'Thick fire-resistant bark is a savanna adaptation. Rainforest trees have thin, smooth bark because they do not need protection from cold or fire, and smooth bark stops other plants from climbing them.' },
-            { type: 'mcq', q: 'Epiphytes such as bromeliads grow on branches high in the trees. How do they get water and nutrients?', options: ['From rain, humid air and debris collecting around their roots', 'Through roots that reach the forest floor', 'By taking them from the tree they grow on, like a parasite', 'From the river'], answer: 0,
+            { type: 'mcq', q: 'Epiphytes such as bromeliads grow on branches high in the trees. How do they get water and nutrients?', options: ['From rain, humid air and debris around their roots', 'By taking them from the tree they grow on, like a parasite', 'Through roots that reach the forest floor', 'From the river below'], answer: 0,
               explain: 'Epiphytes are not parasites. They take water and nutrients from rain, the humid air and rotting debris that gathers in their leaves and roots.' },
-            { type: 'mcq', q: 'Lianas are rooted in the forest floor. What is the advantage of climbing the trunks of trees?', options: ['They reach sunlight in the canopy without growing a thick trunk', 'They avoid flooding', 'They get nutrients from the bark', 'They are protected from animals'], answer: 0,
+            { type: 'mcq', q: 'Lianas are rooted in the forest floor. What is the advantage of climbing the trunks of trees?', options: ['They reach sunlight without growing a thick trunk', 'They avoid the floods that cover the forest floor for half of every year', 'They get nutrients from the bark', 'Animals cannot reach them'], answer: 0,
               explain: 'Lianas use trees for support, so they put energy into growing upwards to the light instead of building a strong trunk.' },
-            { type: 'mcq', q: 'Many plants in the dim under-canopy have very large leaves. Why?', options: ['To capture as much of the limited light as possible', 'To lose water quickly', 'To protect them from heavy rain', 'To scare away herbivores'], answer: 0,
+            { type: 'mcq', q: 'Many plants in the dim under-canopy have very large leaves. Why?', options: ['To capture as much of the limited light as possible', 'To lose water quickly', 'To protect them from heavy rain', 'To scare away herbivores such as monkeys and sloths'], answer: 0,
               explain: 'Large leaves give a bigger surface area to catch what little light gets through the canopy.' }
           ]
         }
@@ -142,9 +142,9 @@
               explain: 'April has the tallest bar: about 330 mm of rain.' },
             { type: 'mcq', graph: true, q: 'Which is the driest month?', options: ['August', 'January', 'April', 'December'], answer: 0,
               explain: 'August has the shortest bar: about 56 mm. Even the driest month still gets some rain.' },
-            { type: 'mcq', graph: true, q: 'Describe the temperature in Manaus during the year.', options: ['Hot all year, about 27–28°C every month', 'Cold in winter and hot in summer', 'Below 20°C most of the year', 'Very changeable, from 10°C to 40°C'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Describe the temperature in Manaus during the year.', options: ['Hot all year, about 27–28°C', 'Cold in winter and hot in summer', 'Below 20°C most of the year', 'Very changeable, from 10°C to 40°C'], answer: 0,
               explain: 'The red line is almost flat: between 27.1°C and 28.5°C all year. Near the Equator the sun is high in the sky every month.' },
-            { type: 'mcq', q: 'Why does it rain on most afternoons in the rainforest?', options: ['Hot sun heats the ground, warm moist air rises, cools and forms storm clouds', 'Cold winds blow from the mountains', 'Rain blows in from the sea every afternoon', 'The trees make the clouds by shaking their leaves'], answer: 0,
+            { type: 'mcq', q: 'Why does it rain on most afternoons in the rainforest?', options: ['Hot sun heats the ground; moist air rises, cools and forms clouds', 'Cold winds blow down from the Andes every afternoon and meet the warm air', 'Rain blows in from the sea', 'The trees shake their leaves to make clouds'], answer: 0,
               explain: 'This is convectional rainfall: the sun heats the ground, moist air rises and cools, water vapour condenses into tall clouds, and heavy rain falls in the afternoon.' }
           ],
           adv: [
@@ -152,9 +152,9 @@
               explain: 'Range = highest monthly mean − lowest = 28.5 − 27.1 = 1.4°C. A tiny range is typical of equatorial climates.' },
             { type: 'mcq', graph: true, q: 'Roughly what is the total annual rainfall in Manaus?', options: ['About 2,400 mm', 'About 600 mm', 'About 1,200 mm', 'About 5,000 mm'], answer: 0,
               explain: 'Adding the 12 bars gives about 2,360 mm a year. Anything over 2,000 mm is typical for a tropical rainforest.' },
-            { type: 'mcq', graph: true, q: 'Manaus has a drier season from about June to October. Which explanation is best?', options: ['The ITCZ moves north of Manaus, so there is less rising air and convection', 'The Amazon River dries up', 'Temperatures fall sharply, so evaporation stops', 'Trade winds bring cold air from Antarctica'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Manaus has a drier season from about June to October. Which explanation is best?', options: ['The ITCZ moves north of Manaus, so there is less convection', 'Temperatures fall sharply in winter, so evaporation from the forest stops', 'The Amazon River dries up', 'Trade winds bring cold air from Antarctica'], answer: 0,
               explain: 'The ITCZ (the belt of low pressure and rising air) follows the overhead sun. When it shifts north in the middle of the year, Manaus gets less convectional rain.' },
-            { type: 'mcq', q: 'Up to half of the rain in the Amazon is recycled by the forest itself. What does this mean?', options: ['Water transpired by trees forms clouds that rain again over the forest', 'Rainwater is piped back to the river', 'Rain only falls on cleared land', 'The forest stops rain reaching the ground'], answer: 0,
+            { type: 'mcq', q: 'Up to half of the rain in the Amazon is recycled by the forest itself. What does this mean?', options: ['Water transpired by trees forms clouds that rain again', 'Rainwater is collected and piped back into the river by the forest’s roots', 'Rain only falls on cleared land', 'The forest stops rain reaching the ground'], answer: 0,
               explain: 'Trees release huge amounts of water vapour by transpiration, which forms new clouds. Cutting down the forest breaks this cycle and can make the region drier.' }
           ]
         }
@@ -167,19 +167,19 @@
               explain: 'Rainforest soils are surprisingly poor. Most of the nutrients are in the plants themselves, not the soil.' },
             { type: 'mcq', q: 'Heavy rain washes nutrients down through the soil, out of reach of roots. What is this called?', options: ['Leaching', 'Erosion', 'Evaporation', 'Weathering'], answer: 0,
               explain: 'Leaching: heavy rain dissolves nutrients and carries them deep into the ground.' },
-            { type: 'mcq', q: 'Why do dead leaves rot so quickly on the forest floor?', options: ['It is hot and wet, perfect for decomposers like fungi and insects', 'Animals eat them all straight away', 'The sun burns them up', 'It is too cold for leaves to last'], answer: 0,
+            { type: 'mcq', q: 'Why do dead leaves rot so quickly on the forest floor?', options: ['It is hot and wet, ideal for decomposers', 'Animals eat them all as soon as they land on the forest floor', 'The sun burns them up', 'It is too cold for leaves to last'], answer: 0,
               explain: 'Warm, damp conditions let fungi, bacteria and insects break leaves down in weeks, releasing nutrients back to the plants.' },
-            { type: 'mcq', q: 'What happens to the soil if the trees are cut down?', options: ['Rain washes the nutrients and soil away, so it soon becomes infertile', 'It becomes more fertile for many years', 'Nothing changes', 'It turns into sand dunes straight away'], answer: 0,
+            { type: 'mcq', q: 'What happens to the soil if the trees are cut down?', options: ['Rain washes nutrients away, so it soon becomes infertile', 'It becomes more fertile for many years because the ash adds lots of nutrients', 'Nothing changes', 'It turns to sand dunes'], answer: 0,
               explain: 'Without trees there are no new dead leaves to add nutrients and nothing to protect the soil, so heavy rain leaches and erodes it. Farmland may only last a few years.' }
           ],
           adv: [
             { type: 'mcq', q: 'In a nutrient cycle diagram for the tropical rainforest, which store is the largest?', options: ['Biomass', 'Litter', 'Soil', 'All three are equal'], answer: 0,
               explain: 'Most nutrients are held in the living biomass. The litter store is small because decomposition is so fast, and the soil store is small because of leaching.' },
-            { type: 'mcq', q: 'Why is the litter store so small?', options: ['Hot, humid conditions mean leaves decompose in weeks', 'Very few leaves fall', 'Animals carry the leaves away', 'Leaves are washed into rivers'], answer: 0,
+            { type: 'mcq', q: 'Why is the litter store so small?', options: ['Hot, humid conditions rot leaves in weeks', 'Very few leaves fall from evergreen rainforest trees', 'Animals carry the leaves away', 'Leaves are washed into rivers'], answer: 0,
               explain: 'Leaves fall all year, but decomposers break them down very quickly in the heat and humidity.' },
-            { type: 'mcq', q: 'Rainforest soils are often red. What causes this colour?', options: ['Iron and aluminium oxides left behind after intense leaching', 'Volcanic ash', 'Clay washed in by floods', 'Red-coloured leaf litter'], answer: 0,
+            { type: 'mcq', q: 'Rainforest soils are often red. What causes this colour?', options: ['Iron and aluminium oxides left after intense leaching', 'Red volcanic ash from the Andes blown east by strong winds', 'Clay washed in by floods', 'Red-coloured leaf litter'], answer: 0,
               explain: 'Intense weathering and leaching remove most minerals but leave iron and aluminium oxides behind, giving latosols their red colour.' },
-            { type: 'mcq', q: 'Which explains why cleared rainforest land often loses fertility within a few years?', options: ['The biomass store and the litter supply are removed, and the exposed soil is leached and eroded', 'Crops add too many nutrients', 'The climate becomes colder', 'Rivers flood the land every year'], answer: 0,
+            { type: 'mcq', q: 'Which explains why cleared rainforest land often loses fertility within a few years?', options: ['The biomass and litter are removed, and bare soil is leached', 'Crops add far too many nutrients to the soil, which then poisons the next crop', 'The climate becomes colder', 'Rivers flood the land every year'], answer: 0,
               explain: 'Clearing the forest removes the main nutrient store and stops the cycle, so heavy rain soon leaches and erodes the thin soil.' }
           ]
         }
@@ -193,18 +193,18 @@
               explain: 'Sustainable uses keep the forest standing and can carry on for ever. Ranching, soya farming and mining clear or pollute the forest.' },
             { type: 'mcq', q: 'What is the biggest cause of deforestation in the Brazilian Amazon?', options: ['Cattle ranching', 'Building houses', 'Tourism', 'Fishing'], answer: 0,
               explain: 'Most cleared land in the Brazilian Amazon is turned into pasture for cattle.' },
-            { type: 'mcq', q: 'Why does cutting down the rainforest matter for the whole world?', options: ['Trees store carbon; burning and clearing them releases CO₂ and adds to climate change', 'It makes the oceans saltier', 'It causes earthquakes', 'It stops the Earth spinning'], answer: 0,
+            { type: 'mcq', q: 'Why does cutting down the rainforest matter for the whole world?', options: ['Trees store carbon; clearing them releases CO₂', 'It makes the oceans saltier as more river water flows into the Atlantic', 'It causes earthquakes', 'It stops the Earth spinning'], answer: 0,
               explain: 'The Amazon stores a huge amount of carbon. When trees are burned or rot, carbon dioxide is released, adding to global warming.' }
           ],
           adv: [
             { type: 'sort', q: 'Sort these into causes of deforestation and strategies for sustainable management.', bins: ['Sustainable management', 'Cause of deforestation'],
               items: [['Cattle ranching', 1], ['Extractive reserves (e.g. rubber tapping)', 0], ['Hydroelectric dams flooding forest', 1], ['Selective logging with replanting', 0], ['New roads opening up the forest', 1], ['Debt-for-nature swaps', 0], ['Commercial soya farming', 1], ['Ecotourism', 0]],
               explain: 'Roads, dams, ranching and soya clear or flood forest. Reserves, selective logging, debt-for-nature swaps and ecotourism earn money from the forest while keeping it standing.' },
-            { type: 'mcq', q: 'Which statement best explains why selective logging is more sustainable than clear-felling?', options: ['Only mature trees are removed, so the canopy, soil and nutrient cycle are largely protected', 'It produces more timber per hectare', 'It needs no roads', 'It removes all the trees but more slowly'], answer: 0,
+            { type: 'mcq', q: 'Which statement best explains why selective logging is more sustainable than clear-felling?', options: ['Only mature trees go, so the canopy and soil are largely protected', 'It produces much more timber per hectare, so less forest needs to be cut in total', 'It needs no roads', 'It removes all the trees, but more slowly'], answer: 0,
               explain: 'By taking only some mature trees, the canopy stays mostly closed, protecting soils from leaching and erosion and letting the forest regenerate.' },
-            { type: 'mcq', q: 'An extractive reserve such as the Chico Mendes reserve is an example of:', options: ['Local people earning a living from forest products while the forest is protected', 'A mine that extracts gold', 'A national park where nobody may enter', 'A plantation of non-native trees'], answer: 0,
+            { type: 'mcq', q: 'An extractive reserve such as the Chico Mendes reserve is an example of:', options: ['People earning a living from forest products while it is protected', 'A national park where nobody at all is allowed to live, hunt or collect anything', 'A mine that extracts gold', 'A plantation of non-native trees'], answer: 0,
               explain: 'Extractive reserves allow communities to harvest products such as rubber and Brazil nuts sustainably.' },
-            { type: 'mcq', q: 'Scientists warn about a "tipping point" for the Amazon. What do they mean?', options: ['If too much forest is lost, parts could turn into drier savanna that cannot recover', 'The Amazon River will change direction', 'The forest will grow too fast', 'The rainforest will become a desert overnight'], answer: 0,
+            { type: 'mcq', q: 'Scientists warn about a "tipping point" for the Amazon. What do they mean?', options: ['Lose too much forest and parts could turn to savanna for good', 'The Amazon River could suddenly change direction and flow west into the Pacific', 'The forest will grow too fast', 'It will become a desert overnight'], answer: 0,
               explain: 'Losing trees reduces transpiration and rainfall. Beyond a certain level of deforestation, parts of the forest may dry out and shift towards savanna.' }
           ]
         }

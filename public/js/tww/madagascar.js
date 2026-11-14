@@ -63,17 +63,17 @@
           ks3: [
             { type: 'mcq', q: 'Lemurs live in the wild only in one place on Earth. Where?', options: ['Madagascar', 'The Amazon', 'Australia', 'Antarctica'], answer: 0,
               explain: 'There are over 100 kinds of lemur, and every one is found only in Madagascar.' },
-            { type: 'mcq', q: 'Why does Madagascar have so many animals found nowhere else?', options: ['It split from Africa and India millions of years ago, so its wildlife evolved in isolation', 'Zoos released them', 'It is joined to Africa', 'It is very cold'], answer: 0,
+            { type: 'mcq', q: 'Why does Madagascar have so many animals found nowhere else?', options: ['It split from Africa and India long ago, so wildlife evolved in isolation', 'Zoos and traders released many unusual animals there in the 1800s and 1900s', 'It is still joined to Africa', 'It is very cold'], answer: 0,
               explain: 'Cut off by the sea for millions of years, species evolved in their own way. Scientists call species found in only one place “endemic”.' },
-            { type: 'mcq', q: 'The Avenue of the Baobabs near Morondava is one of Madagascar’s most famous sights. How do baobab trees survive the long dry season?', options: ['They store water in their huge, thick trunks', 'They grow in rivers', 'They have no leaves ever', 'They drink sea water'], answer: 0,
+            { type: 'mcq', q: 'The Avenue of the Baobabs near Morondava is one of Madagascar’s most famous sights. How do baobab trees survive the long dry season?', options: ['They store water in their huge trunks', 'Their roots reach down to rivers deep underground below the dry soil', 'They keep their leaves all year', 'They drink sea water'], answer: 0,
               explain: 'A baobab trunk can hold thousands of litres of water, and the trees drop their leaves in the dry season to save water.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Madagascar is called a “biodiversity hotspot”. Which two conditions define a hotspot?', options: ['Very high numbers of endemic species and a large loss of original habitat', 'Hot temperatures and volcanoes', 'Many tourists and big cities', 'Few species and lots of forest'], answer: 0,
+            { type: 'mcq', q: 'Madagascar is called a “biodiversity hotspot”. Which two conditions define a hotspot?', options: ['Many endemic species and large habitat loss', 'Hot temperatures all year and many active volcanoes across the island', 'Many tourists and big cities', 'Few species and lots of forest'], answer: 0,
               explain: 'Hotspots are both irreplaceable and threatened, so they are priorities for conservation.' },
-            { type: 'mcq', q: 'Why does isolation on an island lead to high endemism?', options: ['Populations cannot mix with mainland ones, so they evolve separately to fill local niches', 'Islands have more sunlight', 'Animals swim between islands every day', 'Islands have no predators ever'], answer: 0,
+            { type: 'mcq', q: 'Why does isolation on an island lead to high endemism?', options: ['Populations can’t mix with mainland ones, so they evolve separately', 'Islands get more sunlight, so species grow larger and different from mainland ones', 'Animals swim between islands every day', 'Islands never have predators'], answer: 0,
               explain: 'Over millions of years, a few ancestors that arrived adapted to many habitats, a process called adaptive radiation.' },
-            { type: 'mcq', q: 'Which approach is most likely to protect lemurs in the long term?', options: ['Protected areas managed with local communities, who benefit from ecotourism and alternative livelihoods', 'Fencing off forests and banning local people', 'Moving all lemurs to zoos', 'Clearing forest for farmland'], answer: 0,
+            { type: 'mcq', q: 'Which approach is most likely to protect lemurs in the long term?', options: ['Protected areas run with local communities who benefit from them', 'Fencing off all the forests and banning local people from entering them at all', 'Moving all lemurs to zoos', 'Clearing forest for farmland'], answer: 0,
               explain: 'Conservation succeeds when local people gain from it. Without this, poverty pushes people to clear forest or hunt.' }
           ]
         }
@@ -88,7 +88,7 @@
               explain: 'Trade winds blow moist air from the Indian Ocean. It rises up the steep east side, giving heavy rain and rainforest. The west is much drier, with baobabs and dry forest.' },
             { type: 'mcq', graph: true, q: 'Which is the wettest month in Antananarivo?', options: ['December', 'June', 'August', 'September'], answer: 0,
               explain: 'December has the tallest bar, about 310 mm. The wet season runs from about November to March.' },
-            { type: 'mcq', graph: true, q: 'Antananarivo is in the tropics, but its winter is only about 15°C. Why?', options: ['It is about 1,280 m above sea level', 'It is near the South Pole', 'It is under the sea', 'It is covered in ice'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Antananarivo is in the tropics, but its winter is only about 15°C. Why?', options: ['It is about 1,280 m above sea level', 'It is next to a cold ocean current', 'It is near the South Pole', 'It is covered in ice'], answer: 0,
               explain: 'Temperature falls with altitude, so the highlands are much cooler than the coast.' }
           ],
           adv: [
@@ -98,7 +98,7 @@
               explain: 'There are no glaciers. Orographic rain on the windward escarpment supports rainforest; the leeward west is drier. Lavaka are huge gullies where bare highland soils have eroded.' },
             { type: 'number', graph: true, q: 'Calculate the total annual rainfall in Antananarivo (mm).', answer: 1446, tol: 10, unit: 'mm',
               explain: 'Adding all twelve months gives about 1,446 mm, mostly falling between November and March.' },
-            { type: 'mcq', graph: true, q: 'What brings Antananarivo’s wet season from November to March?', options: ['The ITCZ moves south over Madagascar in the southern summer', 'Cold fronts from Antarctica', 'Snowmelt from mountains', 'Winds from the Sahara'], answer: 0,
+            { type: 'mcq', graph: true, q: 'What brings Antananarivo’s wet season from November to March?', options: ['The ITCZ moves south over Madagascar', 'Cold fronts from Antarctica that sweep north every summer', 'Snowmelt from the mountains', 'Winds from the Sahara'], answer: 0,
               explain: 'As the overhead sun moves south, the ITCZ brings rising air and storms. This is also the cyclone season.' }
           ]
         }
@@ -107,9 +107,9 @@
         id: 'forest', title: 'Disappearing forests', icon: '🔥',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Many farmers in Madagascar clear forest using “tavy”. What is it?', options: ['Slash-and-burn: cutting and burning forest to plant crops such as rice', 'Planting new trees', 'Fishing with nets', 'Building terraces in the desert'], answer: 0,
+            { type: 'mcq', q: 'Many farmers in Madagascar clear forest using “tavy”. What is it?', options: ['Slash-and-burn: cutting and burning forest to plant crops', 'Planting new trees on old farmland to restore the forest for the lemurs', 'Fishing with nets', 'Building terraces in the desert'], answer: 0,
               explain: 'Ash briefly fertilises the soil, but after a few years the soil is worn out and farmers clear more forest.' },
-            { type: 'mcq', q: 'Madagascar is called the “Red Island”. Why?', options: ['Its red soils are exposed after forest is cleared, and eroded soil turns rivers red', 'It is covered in red flowers', 'Its sea is red', 'It has red snow'], answer: 0,
+            { type: 'mcq', q: 'Madagascar is called the “Red Island”. Why?', options: ['Red soils are exposed when forest is cleared', 'It is covered in red flowers for most of the year, especially in the highlands', 'Its sea is red', 'It has red snow'], answer: 0,
               explain: 'Without tree roots, heavy rain washes the soil away. Astronauts have said rivers look like the island is bleeding into the sea.' },
             { type: 'sort', q: 'Sort these into causes and effects of deforestation.', bins: ['Cause', 'Effect'],
               items: [['Slash-and-burn farming', 0], ['Cutting trees for charcoal', 0], ['Growing population needing land', 0], ['Soil erosion', 1], ['Lemurs losing their homes', 1], ['Rivers filling with mud', 1]],
@@ -118,9 +118,9 @@
           adv: [
             { type: 'number', q: 'A study found Madagascar’s forest cover fell by about 44% between 1953 and 2014. If there were 16 million hectares in 1953, about how many hectares remained in 2014 (in millions)?', answer: 9, tol: 0.1, unit: 'million ha',
               explain: '16 × (1 − 0.44) = 8.96, so about 9 million hectares.' },
-            { type: 'mcq', q: 'Most households cook with charcoal. Why does this put pressure on forests?', options: ['Charcoal is made by slowly burning wood, using large amounts of trees for a growing population', 'Charcoal is made from coal mines', 'Charcoal comes from the sea', 'It uses no wood'], answer: 0,
+            { type: 'mcq', q: 'Most households cook with charcoal. Why does this put pressure on forests?', options: ['Charcoal is made by burning wood, so many trees are cut', 'Charcoal is dug from coal mines under the forest, which kills the tree roots', 'Charcoal comes from the sea', 'It uses no wood at all'], answer: 0,
               explain: 'Few people have access to electricity or gas. Fast-growing tree plantations and efficient stoves can reduce the demand on natural forest.' },
-            { type: 'mcq', q: 'Why is sediment from eroded highlands a problem at the coast?', options: ['It clouds the water, smothering coral reefs and mangroves and silting up ports and rice fields', 'It makes beaches whiter', 'It cleans the sea', 'It has no effect'], answer: 0,
+            { type: 'mcq', q: 'Why is sediment from eroded highlands a problem at the coast?', options: ['It smothers reefs and mangroves and silts up ports', 'It makes beaches whiter and attracts tourists, who then damage the coast', 'It cleans the sea', 'It has no effect'], answer: 0,
               explain: 'Land degradation upstream has knock-on effects downstream, showing how physical systems are linked.' }
           ]
         }
@@ -131,19 +131,19 @@
           ks3: [
             { type: 'mcq', q: 'What is the main food eaten in Madagascar, often at every meal?', options: ['Rice', 'Bread', 'Potatoes', 'Pasta'], answer: 0,
               explain: 'Rice is grown in flooded paddy fields and terraces, especially in the highlands, a farming style similar to South-East Asia.' },
-            { type: 'mcq', q: 'Madagascar grows most of the world’s natural vanilla. What is vanilla?', options: ['The cured seed pod of an orchid', 'A type of nut', 'A root vegetable', 'A sea plant'], answer: 0,
+            { type: 'mcq', q: 'Madagascar grows most of the world’s natural vanilla. What is vanilla?', options: ['The cured seed pod of an orchid', 'The dried root of a tropical vine', 'A type of nut', 'A sea plant'], answer: 0,
               explain: 'Each vanilla flower is pollinated by hand, and the pods are dried for months, which is why vanilla is so expensive.' },
-            { type: 'mcq', q: 'Culture: the first people to settle Madagascar sailed from South-East Asia about 1,500 years ago. Which evidence shows this?', options: ['The Malagasy language is related to languages spoken in Borneo', 'Everyone speaks Thai', 'There are Inca ruins', 'The buildings are igloos'], answer: 0,
+            { type: 'mcq', q: 'Culture: the first people to settle Madagascar sailed from South-East Asia about 1,500 years ago. Which evidence shows this?', options: ['Malagasy is related to languages spoken in Borneo', 'Everyone in Madagascar speaks Thai as their first language, especially on the coast', 'There are Inca ruins', 'The buildings are igloos'], answer: 0,
               explain: 'Malagasy culture mixes South-East Asian and East African roots, seen in language, rice farming and music.' },
-            { type: 'mcq', q: 'What are zebu?', options: ['Humped cattle that show wealth and pull carts', 'Lemurs', 'Fishing boats', 'Baobab fruits'], answer: 0,
+            { type: 'mcq', q: 'What are zebu?', options: ['Humped cattle that pull carts', 'Small lemurs that live in baobab trees', 'Fishing boats', 'Baobab fruits'], answer: 0,
               explain: 'Zebu are central to rural life and ceremonies in Madagascar.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Vanilla prices swing wildly. Why is depending on one export crop risky for farmers?', options: ['A price crash, cyclone or theft of crops can wipe out a family’s income', 'Vanilla never changes price', 'Farmers can sell it to no one', 'It is grown everywhere in the world'], answer: 0,
+            { type: 'mcq', q: 'Vanilla prices swing wildly. Why is depending on one export crop risky for farmers?', options: ['A price crash, cyclone or theft can wipe out income', 'Vanilla never changes price, so farmers can never earn more however hard they work', 'Nobody buys it', 'It grows everywhere'], answer: 0,
               explain: 'Diversifying crops, cooperatives and fair-trade contracts can make incomes more stable.' },
-            { type: 'mcq', q: 'In 2023 Cyclone Freddy, one of the longest-lasting tropical cyclones on record, hit Madagascar twice. Why are poorer countries often worse affected by such hazards?', options: ['Weaker buildings, fewer warnings and less money to recover', 'Cyclones only hit poor countries', 'Poor countries have stronger winds', 'They are always on the coast'], answer: 0,
+            { type: 'mcq', q: 'In 2023 Cyclone Freddy, one of the longest-lasting tropical cyclones on record, hit Madagascar twice. Why are poorer countries often worse affected by such hazards?', options: ['Weaker buildings, fewer warnings and less money to recover', 'Cyclones only ever hit poor countries because of where they are on the map', 'Poor countries have stronger winds', 'They are always on the coast'], answer: 0,
               explain: 'Vulnerability depends on wealth, infrastructure and preparation as much as the hazard itself.' },
-            { type: 'mcq', q: 'Culture: in the highlands, some families hold famadihana, when relatives re-wrap the remains of their ancestors in new cloth and celebrate with music and dancing. What does this show about Malagasy culture?', options: ['The strong importance of ancestors and family ties', 'A dislike of music', 'That families rarely meet', 'That traditions have disappeared'], answer: 0,
+            { type: 'mcq', q: 'Culture: in the highlands, some families hold famadihana, when relatives re-wrap the remains of their ancestors in new cloth and celebrate with music and dancing. What does this show about Malagasy culture?', options: ['Ancestors and family ties are very important', 'Families rarely meet, so they only gather for ceremonies once every generation', 'Music is not valued', 'Traditions have disappeared'], answer: 0,
               explain: 'Respect for ancestors (razana) shapes land ownership, tombs and community life. Understanding culture helps explain how people use land.' }
           ]
         }

@@ -394,6 +394,7 @@ function end(){
   $('endScore').innerHTML=`You scored <strong>${score} points</strong> and climbed to <strong>${alt.toLocaleString('en-GB')} m</strong>.${nb&&best!=null?' <strong>New personal best!</strong>':''}${alt<SUMMIT?` You needed ${LEVELS[level].pts-score} more points for the summit.`:''}`;
   $('sumTable').innerHTML='<tr><th>Prompt</th><th>Your answer</th><th style="text-align:right">Points</th></tr>'+log.map(r=>`<tr><td>${r.q}</td><td>${r.ans}${r.pts?` <span class="rarity r${r.pts}">${RARITY[r.pts]}</span>`:''}</td><td class="p">${r.pts}</td></tr>`).join('');
   showShare(LEVELS[level].daily,score,log.map(r=>r.pts));$('againBtn').textContent=LEVELS[level].daily?'Practise on Level 1':AGAIN_TXT;
+  try{if(window.SBLGameAccount){const L=LEVELS[level],part=L.daily?'daily':'l'+level;SBLGameAccount.record('danillion',part,'climb',L.name+' \u00b7 Mountain climb',score,L.pts)}}catch(e){}
   announce(`Climb complete. ${rank}. ${score} points, ${alt} metres.`);ep.focus();
 }
 
@@ -440,5 +441,6 @@ setLevel(/[?&]daily\b/.test(location.search)?3:Math.min(3,Math.max(1,parseInt((l
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
 <script defer src="/js/sbl-teacher-tools.js"></script>
+<script src="/js/sbl-game-account.js"></script>
 </body>
 </html>

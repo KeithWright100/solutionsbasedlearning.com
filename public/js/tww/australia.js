@@ -61,9 +61,9 @@
               spots: [{ x: 10, y: 14, a: 'Coastline' }, { x: 30, y: 23, a: 'Lagoon' }, { x: 56, y: 18, a: 'Reef crest' }, { x: 74, y: 79, a: 'Reef slope' }, { x: 87, y: 33, a: 'Open ocean' }],
               extra: [],
               explain: 'Between the coast and the reef is a calm, shallow lagoon. Waves break on the reef crest. Behind it the reef slope drops away into the deep open ocean.' },
-            { type: 'mcq', q: 'What builds a coral reef?', options: ['Tiny animals called coral polyps', 'Seaweed', 'Rocks from volcanoes', 'Sand washed in by rivers'], answer: 0,
+            { type: 'mcq', q: 'What builds a coral reef?', options: ['Tiny animals called coral polyps', 'Seaweed that hardens when it dies', 'Rocks thrown out by undersea volcanoes', 'Sand and shells washed in by rivers'], answer: 0,
               explain: 'Corals are animals. Each polyp builds a hard skeleton of calcium carbonate (limestone), and over thousands of years these build up into reefs.' },
-            { type: 'mcq', q: 'Corals have tiny algae living inside them. What do the algae give the coral?', options: ['Food made by photosynthesis, and their colour', 'Protection from sharks', 'Extra salt', 'Warmth at night'], answer: 0,
+            { type: 'mcq', q: 'Corals have tiny algae living inside them. What do the algae give the coral?', options: ['Food from photosynthesis, and colour', 'Protection from sharks and other predators', 'Extra salt to build their skeletons', 'Warmth during the cold nights'], answer: 0,
               explain: 'The algae (zooxanthellae) use sunlight to make food, which they share with the coral. They also give corals their bright colours.' }
           ],
           adv: [
@@ -73,7 +73,7 @@
               explain: 'An atoll is a ring of reef around a lagoon, formed where a volcanic island has sunk. This diagram shows a barrier-type reef separated from the coast by a lagoon.' },
             { type: 'mcq', q: 'The relationship between coral polyps and zooxanthellae is described as:', options: ['Symbiotic: both benefit', 'Parasitic: the algae harm the coral', 'Competitive: they fight for light', 'Predatory: the coral eats the algae'], answer: 0,
               explain: 'The algae get shelter and nutrients; the coral gets most of its energy from the algae’s photosynthesis. Both benefit.' },
-            { type: 'mcq', q: 'Coral reefs cover a tiny fraction of the ocean floor but hold a huge share of marine species. Which is the best explanation?', options: ['The complex 3D structure provides many habitats and high primary productivity', 'Reef water is very cold and nutrient-rich', 'Few predators live on reefs', 'Reefs are found in deep, dark water'], answer: 0,
+            { type: 'mcq', q: 'Coral reefs cover a tiny fraction of the ocean floor but hold a huge share of marine species. Which is the best explanation?', options: ['Their complex 3D structure gives many habitats and high productivity', 'Reef water is very cold and nutrient-rich, so plankton is always abundant', 'Few predators live on reefs, so more species survive', 'Reefs are found in deep, dark water where species hide'], answer: 0,
               explain: 'Reefs create a maze of niches (caves, branches and crevices), and the coral-algae partnership supports a rich food web even in nutrient-poor tropical water.' }
           ]
         }
@@ -85,18 +85,18 @@
             { type: 'sort', q: 'Sort these into conditions that are good or bad for coral reefs.', bins: ['Good for corals', 'Bad for corals'],
               items: [['Warm water', 0], ['Clear water', 0], ['Lots of sunlight', 0], ['Muddy water from rivers', 1], ['Very deep, dark water', 1], ['Fresh water from a river mouth', 1]],
               explain: 'Corals need warm, clear, salty, shallow water so the algae get plenty of sunlight. Mud blocks light and fresh water is not salty enough.' },
-            { type: 'mcq', q: 'Why do coral reefs only grow in shallow water?', options: ['The algae inside need sunlight to photosynthesise', 'Corals cannot swim', 'Deep water is too salty', 'Sharks live in deep water'], answer: 0,
+            { type: 'mcq', q: 'Why do coral reefs only grow in shallow water?', options: ['The algae inside need sunlight', 'Corals cannot survive the high water pressure', 'Deep water is too salty for corals', 'Sharks eat corals in deep water'], answer: 0,
               explain: 'Light fades quickly with depth. Most reef-building corals grow where sunlight can reach the algae.' },
-            { type: 'mcq', q: 'Coral reefs are mostly found between the Tropics. Why?', options: ['The sea is warm enough there all year', 'There are no waves there', 'The water is fresh there', 'It never rains there'], answer: 0,
+            { type: 'mcq', q: 'Coral reefs are mostly found between the Tropics. Why?', options: ['The sea is warm enough all year', 'There are no waves near the Equator', 'The water there is fresh, not salty', 'Rivers bring the nutrients that corals need'], answer: 0,
               explain: 'Reef-building corals need water that stays warm all year, roughly above 18°C, which is found in tropical seas.' }
           ],
           adv: [
             { type: 'sort', q: 'Classify these as limiting factors for coral growth, or as factors that help reefs grow.', bins: ['Helps reef growth', 'Limits reef growth'],
               items: [['Water temperature of about 23–29°C', 0], ['Low turbidity (clear water)', 0], ['Normal ocean salinity', 0], ['Sediment from coastal erosion', 1], ['Nutrient-rich farm runoff', 1], ['Water temperature below 18°C', 1], ['Prolonged exposure at low tide', 1]],
               explain: 'Corals thrive in warm, clear, salty, low-nutrient water. Sediment, nutrient pollution, cold water and drying out at low tide all limit growth.' },
-            { type: 'mcq', q: 'There are few coral reefs on the west coasts of tropical continents. Why?', options: ['Cold ocean currents and upwelling keep the water too cool', 'The west coasts are too sunny', 'There is too much coral there already', 'The water is too clear'], answer: 0,
+            { type: 'mcq', q: 'There are few coral reefs on the west coasts of tropical continents. Why?', options: ['Cold currents and upwelling keep the water too cool', 'West coasts are too sunny, so corals get burned', 'Strong westerly winds and storms break corals on these coasts', 'The water is too clear and lacks enough nutrients'], answer: 0,
               explain: 'Cold currents and upwelling along west coasts (such as Peru or Namibia) lower sea temperatures below what reef corals tolerate.' },
-            { type: 'mcq', q: 'Why does extra nitrogen from farm fertiliser harm reefs?', options: ['It feeds algae that smother corals and can trigger crown-of-thorns starfish outbreaks', 'It makes the water too cold', 'It turns sea water fresh', 'It dissolves the reef overnight'], answer: 0,
+            { type: 'mcq', q: 'Why does extra nitrogen from farm fertiliser harm reefs?', options: ['It feeds algae that smother corals and helps starfish outbreaks', 'It makes the sea water much colder than corals are able to survive', 'It turns the sea water fresh, so corals lose their salt', 'It dissolves the coral skeletons within a few hours'], answer: 0,
               explain: 'Nutrient runoff boosts plankton and algae. Fast-growing algae outcompete corals, and more plankton helps crown-of-thorns starfish larvae survive.' }
           ]
         }
@@ -109,15 +109,15 @@
               explain: 'February has the tallest bar: about 438 mm.' },
             { type: 'mcq', graph: true, q: 'Which months make up the dry season?', options: ['About May to November', 'About December to March', 'Every month is equally wet', 'Only January'], answer: 0,
               explain: 'From about May to November the bars are short. Most rain falls from December to April.' },
-            { type: 'mcq', graph: true, q: 'How is Cairns’ climate different from the Amazon’s?', options: ['It has a clear wet season and dry season, and a cooler winter', 'It is much colder all year', 'It gets no rain at all', 'It is exactly the same'], answer: 0,
+            { type: 'mcq', graph: true, q: 'How is Cairns’ climate different from the Amazon’s?', options: ['It has clear wet and dry seasons, and a cooler winter', 'It is much colder all year round, with frosts most nights in winter', 'It gets almost no rain in any month of the year', 'It has two wet seasons each year instead of one'], answer: 0,
               explain: 'Cairns is further from the Equator (17°S), so it has a wet summer and a dry, slightly cooler winter, unlike the Amazon, which is wet all year.' }
           ],
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Cairns (°C).', answer: 6.1, tol: 0.2, unit: '°C',
               explain: 'Warmest month 27.7°C (January) − coolest 21.6°C (July) = 6.1°C. That is far bigger than Manaus (1.4°C) because Cairns is further from the Equator.' },
-            { type: 'mcq', graph: true, q: 'Which explains Cairns’ wet season from December to March?', options: ['The ITCZ and monsoon move south in the southern summer, bringing moist air and storms', 'Snow melts on nearby mountains', 'Cold currents bring rain from Antarctica', 'The sun is lowest in the sky then'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Which explains Cairns’ wet season from December to March?', options: ['The ITCZ and monsoon move south in the southern summer', 'Snow melts on the nearby mountains and feeds the coastal rivers', 'Cold currents bring rain from Antarctica in summer', 'The sun is lowest in the sky, so clouds form easily'], answer: 0,
               explain: 'In the southern summer the overhead sun, the ITCZ and the north-west monsoon shift south over northern Australia, bringing heavy convectional and monsoon rain.' },
-            { type: 'mcq', graph: true, q: 'The wet season is also tropical cyclone season. Why is this a problem for the reef?', options: ['Cyclone waves break corals, and floods carry sediment and nutrients onto reefs', 'Cyclones cool the water too much for fish', 'Cyclones add too much salt', 'Cyclones only affect land'], answer: 0,
+            { type: 'mcq', graph: true, q: 'The wet season is also tropical cyclone season. Why is this a problem for the reef?', options: ['Waves break corals, and floods carry mud and nutrients onto reefs', 'Cyclones cool the water so much that most of the reef fish cannot survive', 'Cyclones add so much salt that corals stop growing', 'Cyclones only affect the land, not the reef offshore'], answer: 0,
               explain: 'Cyclones physically smash reefs, and the heavy rain washes mud and fertiliser from farmland out to sea.' }
           ]
         }
@@ -126,20 +126,20 @@
         id: 'threats', title: 'Threats to the reef', icon: '🌡️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'What is coral bleaching?', options: ['Corals turn white when hot water makes them lose their algae', 'People paint the reef white', 'Sand covers the reef', 'Corals grow white flowers in spring'], answer: 0,
+            { type: 'mcq', q: 'What is coral bleaching?', options: ['Corals turning white when hot water makes them lose their algae', 'Sand and mud from rivers settling on the reef and turning it pale', 'Corals growing white flowers when they spawn in spring', 'Strong sunlight fading corals in very shallow water'], answer: 0,
               explain: 'When the sea gets too warm, corals push out their algae and turn white. If the heat lasts too long, the corals starve and die.' },
             { type: 'sort', q: 'Sort these threats to the reef into natural and human causes.', bins: ['Mainly natural', 'Caused or made worse by people'],
               items: [['Tropical cyclones', 0], ['Rising sea temperatures from climate change', 1], ['Fertiliser washing off farms', 1], ['Overfishing', 1], ['Damage from boat anchors', 1]],
               explain: 'Cyclones are natural (though climate change may make them stronger). Warming seas, pollution, overfishing and careless boats are caused by people.' },
-            { type: 'mcq', q: 'Which animal eats coral and can damage large areas of reef when numbers explode?', options: ['Crown-of-thorns starfish', 'Clownfish', 'Sea turtle', 'Dolphin'], answer: 0,
+            { type: 'mcq', q: 'Which animal eats coral and can damage large areas of reef when numbers explode?', options: ['Crown-of-thorns starfish', 'Clownfish', 'Green sea turtle', 'Bottlenose dolphin'], answer: 0,
               explain: 'Crown-of-thorns starfish eat coral polyps. Outbreaks can strip whole reefs.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Mass bleaching hit the Great Barrier Reef in 2016, 2017, 2020, 2022 and 2024. What does this pattern suggest?', options: ['Bleaching is becoming more frequent, leaving less time for corals to recover between events', 'Bleaching happens exactly every two years', 'The reef has become immune to heat', 'Bleaching only affects the southern reef'], answer: 0,
+            { type: 'mcq', q: 'Mass bleaching hit the Great Barrier Reef in 2016, 2017, 2020, 2022 and 2024. What does this pattern suggest?', options: ['Bleaching is more frequent, leaving less time for recovery', 'Bleaching happens exactly every two years, so it is natural', 'The reef has become immune to heat after repeated events', 'Bleaching only affects the southern part of the reef'], answer: 0,
               explain: 'Five mass bleaching events in eight years leave little recovery time. Fast-growing corals can take about a decade to recover, and slow-growing ones much longer.' },
-            { type: 'mcq', q: 'Ocean acidification is a second threat from rising CO₂. How does it harm corals?', options: ['More acidic water makes it harder to build calcium carbonate skeletons', 'It makes the water too clear', 'It warms the water', 'It adds too many nutrients'], answer: 0,
+            { type: 'mcq', q: 'Ocean acidification is a second threat from rising CO₂. How does it harm corals?', options: ['It makes it harder to build calcium carbonate skeletons', 'It makes the water far too clear for the corals to catch food', 'It warms the water above the corals’ limit', 'It adds too many nutrients for the algae'], answer: 0,
               explain: 'The ocean absorbs CO₂, forming carbonic acid. This reduces the carbonate available for corals to build and repair their skeletons.' },
-            { type: 'mcq', q: 'Which is a positive feedback that makes reef decline worse?', options: ['Dead coral is colonised by algae, which stops new coral larvae settling', 'Bleaching cools the sea', 'Fewer fish means more coral growth', 'Cyclones plant new corals'], answer: 0,
+            { type: 'mcq', q: 'Which is a positive feedback that makes reef decline worse?', options: ['Dead coral is covered by algae, which stops new corals settling', 'Bleaching cools the sea, which slows coral growth', 'Fewer fish means less grazing, so more corals grow back', 'Cyclones break up corals, which then spread out and grow elsewhere'], answer: 0,
               explain: 'When algae take over dead coral, new corals struggle to settle and grow, so the reef shifts from coral-dominated towards algae-dominated.' }
           ]
         }
@@ -152,15 +152,15 @@
               explain: 'Green zones are no-take areas. You can visit, swim and dive, but you cannot fish or take anything.' },
             { type: 'mcq', q: 'In 2004, green zones were increased from less than 5% to about what share of the Marine Park?', options: ['About a third (33%)', 'All of it (100%)', 'About 1%', 'Half of the world’s oceans'], answer: 0,
               explain: 'The 2004 zoning plan increased no-take green zones from under 5% to about 33% of the Marine Park.' },
-            { type: 'mcq', q: 'Which is the best way a tourist can help protect the reef?', options: ['Don’t touch or stand on coral, and use reef-friendly tour operators', 'Take a piece of coral home', 'Feed the fish bread', 'Drop the anchor on the coral'], answer: 0,
+            { type: 'mcq', q: 'Which is the best way a tourist can help protect the reef?', options: ['Don’t touch or stand on coral, and use reef-friendly operators', 'Feed the fish so that they stay healthy and keep the reef clean', 'Take a small piece of dead coral home as a souvenir', 'Anchor the boat on the reef so it does not drift'], answer: 0,
               explain: 'Touching or kicking coral damages the living polyps. Responsible operators use moorings instead of anchors and teach visitors how to behave.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Scientists compared reefs inside and outside no-take zones after the 2004 rezoning. Which finding supports the zoning?', options: ['Coral trout biomass was much higher and crown-of-thorns outbreaks fewer in no-take zones', 'Fish numbers were the same everywhere', 'No-take zones had more pollution', 'Zoning made bleaching stop'], answer: 0,
+            { type: 'mcq', q: 'Scientists compared reefs inside and outside no-take zones after the 2004 rezoning. Which finding supports the zoning?', options: ['More coral trout and fewer starfish outbreaks in no-take zones', 'Fish numbers were the same inside and outside every zone', 'No-take zones had more pollution, because fewer visitors cleaned them', 'Zoning stopped bleaching inside the protected areas'], answer: 0,
               explain: 'AIMS monitoring found far more coral trout and fewer crown-of-thorns outbreaks on no-take reefs. Zoning cannot stop bleaching, though, because that is driven by global warming.' },
-            { type: 'mcq', q: 'Why can local management alone not save the reef?', options: ['The biggest threat, ocean warming, is caused by global greenhouse gas emissions', 'Local managers have no boats', 'The reef is too small to manage', 'Tourists are the only threat'], answer: 0,
+            { type: 'mcq', q: 'Why can local management alone not save the reef?', options: ['The biggest threat, ocean warming, is caused by global emissions', 'Local managers do not have enough boats to patrol the reef', 'The reef is too small to be divided into management zones', 'Tourists are the only real threat, and they cannot be controlled'], answer: 0,
               explain: 'Zoning, water-quality rules and starfish culls build resilience, but only cutting global emissions can tackle marine heatwaves.' },
-            { type: 'mcq', q: 'The reef supports tourism and fishing jobs worth billions of dollars a year. Which statement best evaluates this?', options: ['It gives a strong economic reason to protect the reef, but tourism itself must be managed to avoid damage', 'Tourism is the main cause of bleaching', 'Economic value means protection is not needed', 'Tourism has no impact at all'], answer: 0,
+            { type: 'mcq', q: 'The reef supports tourism and fishing jobs worth billions of dollars a year. Which statement best evaluates this?', options: ['It gives a reason to protect the reef, but tourism must be managed', 'Tourism is the main cause of bleaching, so all reef trips should be banned', 'Its economic value means extra protection is not really needed', 'Tourism has no impact at all on the health of the reef'], answer: 0,
               explain: 'A healthy reef is worth more in the long term than one damaged for short-term gain, but visitor numbers, boats and coastal development still need careful management.' }
           ]
         }

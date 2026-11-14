@@ -51,17 +51,17 @@
           ks3: [
             { type: 'mcq', q: 'Wild orangutans live on only two islands in the world. Which ones?', options: ['Borneo and Sumatra', 'Java and Bali', 'Sri Lanka and Madagascar', 'Phuket and Langkawi'], answer: 0,
               explain: 'Orangutans live only in the rainforests of Borneo (shared by Malaysia, Indonesia and Brunei) and Sumatra (Indonesia).' },
-            { type: 'mcq', q: 'Why is the biggest threat to orangutans the loss of their forest?', options: ['They live in the trees and need the forest for food and shelter', 'They only eat fish', 'They live in caves', 'They migrate to cold countries'], answer: 0,
+            { type: 'mcq', q: 'Why is the biggest threat to orangutans the loss of their forest?', options: ['They live in trees and need the forest for food and shelter', 'They are hunted for meat more than any other animal in Asia', 'They can only survive at high altitude in cool cloud forest', 'They need to migrate long distances across open grassland'], answer: 0,
               explain: 'Orangutans spend most of their lives in the trees, eating fruit. When forest is cleared for farms and plantations, they lose their homes and food.' },
             { type: 'mcq', q: 'Malaysia’s rainforest has a similar climate to the Amazon. Why?', options: ['Both are close to the Equator', 'Both are near the sea', 'Both are very high up', 'Both are in the southern hemisphere'], answer: 0,
               explain: 'Both lie close to the Equator, so they are hot and wet all year.' }
           ],
           adv: [
-            { type: 'mcq', q: 'Which best explains why Malaysia’s rainforests have such high biodiversity?', options: ['They are very old and stable, with warmth and water all year', 'They are cold and dry, so few species compete', 'They have long winters that kill off predators', 'They have fertile volcanic soils everywhere'], answer: 0,
+            { type: 'mcq', q: 'Which best explains why Malaysia’s rainforests have such high biodiversity?', options: ['They are very old and stable, with warmth and water all year', 'They are cool and dry, so few species compete for space', 'They have long, cold winters that kill off many of the predators', 'They have fertile volcanic soils across the whole country'], answer: 0,
               explain: 'A long, stable history with year-round warmth, light and water has allowed many species to evolve and specialise.' },
             { type: 'mcq', q: 'Species found only in one place are called:', options: ['Endemic', 'Invasive', 'Migratory', 'Domesticated'], answer: 0,
               explain: 'Endemic species live naturally in only one area. Borneo has many endemic plants and animals.' },
-            { type: 'mcq', q: 'Wildlife corridors link patches of forest together. Why do they help?', options: ['Animals can move between patches to find food and mates', 'They let tourists drive through the forest', 'They make plantations more profitable', 'They stop rain falling on farms'], answer: 0,
+            { type: 'mcq', q: 'Wildlife corridors link patches of forest together. Why do they help?', options: ['Animals can move between patches to find food and mates', 'They let tourists drive through the forest more easily', 'They make palm oil plantations much more profitable for farmers', 'They stop heavy rain washing soil off nearby farms'], answer: 0,
               explain: 'Fragmented forest isolates populations. Corridors reconnect them, so animals can move, feed and breed.' }
           ]
         }
@@ -74,7 +74,7 @@
               explain: 'November has the tallest bar: about 356 mm.' },
             { type: 'mcq', graph: true, q: 'Which is the driest month?', options: ['June', 'November', 'April', 'October'], answer: 0,
               explain: 'June has the shortest bar, about 146 mm, but that is still a lot of rain.' },
-            { type: 'mcq', graph: true, q: 'Does Kuala Lumpur have a cold season?', options: ['No: it is about 27–28°C every month', 'Yes: it is below 10°C in December', 'Yes: it snows in January', 'No: it is below 15°C all year'], answer: 0,
+            { type: 'mcq', graph: true, q: 'Does Kuala Lumpur have a cold season?', options: ['No: it is about 27–28°C every month', 'Yes: it falls below 10°C in December', 'Yes: it is cool from June to August', 'No: it is below 15°C all year round'], answer: 0,
               explain: 'The temperature line is almost flat. Near the Equator it is hot all year.' }
           ],
           adv: [
@@ -82,7 +82,7 @@
               explain: 'Highest monthly mean 28.5°C (May) − lowest 27.1°C (November and December) = 1.4°C.' },
             { type: 'mcq', graph: true, q: 'Roughly what is Kuala Lumpur’s total annual rainfall?', options: ['About 2,850 mm', 'About 850 mm', 'About 1,500 mm', 'About 6,000 mm'], answer: 0,
               explain: 'The 12 bars add up to about 2,850 mm.' },
-            { type: 'mcq', graph: true, q: 'The graph has two wetter peaks, around April and around November. Which is the best explanation?', options: ['Near the Equator the sun is overhead twice a year, so the rain belt (ITCZ) passes over twice', 'Two typhoons hit every year', 'Snow melts twice a year', 'The sea freezes twice a year'], answer: 0,
+            { type: 'mcq', graph: true, q: 'The graph has two wetter peaks, around April and around November. Which is the best explanation?', options: ['The rain belt (ITCZ) passes over twice a year, following the sun', 'Two large typhoons cross the Malay Peninsula at those times every year', 'The monsoon winds stop completely in April and November', 'Air pollution from fires makes rain fall twice a year'], answer: 0,
               explain: 'The ITCZ follows the overhead sun north and south across the Equator, crossing Malaysia twice a year and bringing two rainier periods.' }
           ]
         }
@@ -95,7 +95,7 @@
               spots: [{ x: 80, y: 13, a: 'Cloud forest' }, { x: 82, y: 45, a: 'Tea plantations' }, { x: 13, y: 70, a: 'Lowland rainforest' }, { x: 86, y: 70, a: 'Oil palm plantation' }],
               extra: [],
               explain: 'The lowlands are hot (rainforest and oil palm). Higher up it is cooler, which suits tea. Near the top, the air is so cool and damp that clouds cover a mossy cloud forest.' },
-            { type: 'mcq', q: 'Why is tea grown in the Cameron Highlands instead of the lowlands?', options: ['It is cooler higher up, which suits tea bushes', 'There is no rain in the lowlands', 'Tea needs snow', 'The highlands are closer to the sea'], answer: 0,
+            { type: 'mcq', q: 'Why is tea grown in the Cameron Highlands instead of the lowlands?', options: ['It is cooler higher up, which suits tea bushes', 'There is almost no rain in Malaysia’s lowlands', 'Tea needs frost and snow to grow its best leaves', 'The highlands are closer to the ports on the coast'], answer: 0,
               explain: 'Temperature falls as you go up a mountain. The cooler highlands suit tea, vegetables and strawberries.' },
             { type: 'mcq', q: 'Temperature falls about 6.5°C for every 1,000 m you climb. Kuala Lumpur is about 28°C. Roughly how warm is it in the Cameron Highlands, about 1,500 m up?', options: ['About 18°C', 'About 28°C', 'About 5°C', 'About 35°C'], answer: 0,
               explain: '1,500 m × 6.5°C per 1,000 m ≈ 10°C cooler. 28 − 10 ≈ 18°C.' }
@@ -107,7 +107,7 @@
               explain: 'Malaysia’s highlands do not reach the cold conditions where coniferous forest grows. The sequence is lowland rainforest and oil palm, then tea, then mossy cloud forest.' },
             { type: 'number', q: 'Using a lapse rate of 6.5°C per 1,000 m, estimate the temperature at 1,500 m if it is 28°C at sea level (°C).', answer: 18.25, tol: 1, unit: '°C',
               explain: '1.5 × 6.5 = 9.75°C cooler, so 28 − 9.75 ≈ 18.3°C.' },
-            { type: 'mcq', q: 'Farms and resorts have spread up the steep slopes of the Cameron Highlands. Which problem is most likely?', options: ['Soil erosion, landslides and muddy rivers', 'More snowfall', 'Rising sea levels', 'Desertification'], answer: 0,
+            { type: 'mcq', q: 'Farms and resorts have spread up the steep slopes of the Cameron Highlands. Which problem is most likely?', options: ['Soil erosion, landslides and muddy rivers', 'Small glaciers forming on the cleared hilltops', 'Sea water flooding the highland valleys', 'Desert sand dunes spreading over farms'], answer: 0,
               explain: 'Clearing vegetation on steep slopes exposes soil to heavy tropical rain, causing erosion, landslides and sediment in rivers.' }
           ]
         }
@@ -119,18 +119,18 @@
             { type: 'sort', q: 'Sort these into benefits and problems of palm oil plantations.', bins: ['Benefit', 'Problem'],
               items: [['Jobs for local people', 0], ['Rainforest is cleared', 1], ['Money from exports', 0], ['Orangutans lose their homes', 1], ['Used in lots of foods and soaps', 0], ['Burning to clear land causes haze', 1]],
               explain: 'Palm oil brings jobs and money, but clearing and burning forest destroys habitats and causes smoky haze.' },
-            { type: 'mcq', q: 'Which two countries produce most of the world’s palm oil?', options: ['Indonesia and Malaysia', 'Brazil and Peru', 'China and Japan', 'Egypt and Kenya'], answer: 0,
+            { type: 'mcq', q: 'Which two countries produce most of the world’s palm oil?', options: ['Indonesia and Malaysia', 'Brazil and Colombia', 'Thailand and the Philippines', 'Nigeria and Ghana'], answer: 0,
               explain: 'Indonesia and Malaysia grow most of the world’s palm oil.' },
-            { type: 'mcq', q: 'What could shoppers do to help?', options: ['Choose products with certified sustainable palm oil', 'Buy as much palm oil as possible', 'Burn rainforest to grow more', 'Nothing can be done'], answer: 0,
+            { type: 'mcq', q: 'What could shoppers do to help?', options: ['Choose products with certified sustainable palm oil', 'Buy products with as much palm oil as possible', 'Choose products made with oil from new plantations', 'Avoid reading labels as they do not make a difference'], answer: 0,
               explain: 'Certified sustainable palm oil comes from plantations that are not allowed to clear new rainforest.' }
           ],
           adv: [
             { type: 'sort', q: 'Classify these impacts of palm oil as economic, or environmental and social costs.', bins: ['Economic benefit', 'Environmental or social cost'],
               items: [['Export earnings', 0], ['Loss of biodiversity', 1], ['Rural employment', 0], ['Peat fires releasing CO₂', 1], ['Smallholder incomes', 0], ['Land disputes with Indigenous communities', 1], ['Soil erosion and river pollution', 1]],
               explain: 'Palm oil supports exports and rural incomes, but it is linked to deforestation, peat fires, pollution and land conflicts.' },
-            { type: 'mcq', q: 'Why is draining and burning peat swamp forest especially bad for the climate?', options: ['Peat stores huge amounts of carbon, released as CO₂ when it dries and burns', 'Peat makes the sea level fall', 'Peat reflects sunlight', 'Peat produces oxygen when burned'], answer: 0,
+            { type: 'mcq', q: 'Why is draining and burning peat swamp forest especially bad for the climate?', options: ['Peat stores huge amounts of carbon, released as CO₂ when it burns', 'Peat fires make the sea level fall around the Malaysian coast', 'Peat reflects sunlight, so removing it cools the whole planet quickly', 'Burning peat produces oxygen, which speeds up global warming'], answer: 0,
               explain: 'Peat soils have built up carbon over thousands of years. Draining and burning them releases it quickly.' },
-            { type: 'mcq', q: 'Which is the best example of a more sustainable approach to palm oil?', options: ['Certification schemes that ban clearing primary forest and peat', 'Replacing all rainforest with plantations', 'Burning land to clear it quickly', 'Banning all agriculture in Malaysia'], answer: 0,
+            { type: 'mcq', q: 'Which is the best example of a more sustainable approach to palm oil?', options: ['Certification that bans clearing primary forest and peat', 'Replacing old rainforest with new, faster-growing oil palms', 'Burning land to clear it quickly between harvests', 'Moving all plantations onto drained peat swamps'], answer: 0,
               explain: 'Certification (such as the RSPO) sets rules on deforestation and peat. Its success depends on how strictly it is enforced.' }
           ]
         }

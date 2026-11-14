@@ -369,9 +369,57 @@
     "level": "IB Geography",
     "tag": "New · Option F",
     "desc": "Nineteen levels across all four Food and Health topics, from the nutrition transition to malaria, Yemen and Ebola, with past paper checkpoints and an IB Examiner boss."
+  },
+  {
+    "slug": "life-around-the-world",
+    "title": "How Does Life Vary?",
+    "href": "/geography/games/life-around-the-world",
+    "level": "KS3 Geography",
+    "tag": "New",
+    "desc": "Sort physical and human factors, place Pakistan, Tanzania and Peru on a world map, then compare the homes, kitchens, phones, play and hopes of three real families."
+  },
+{
+    "slug": "japan-ageing",
+    "title": "Japan: The Ageing Nation",
+    "href": "/geography/games/japan-ageing",
+    "level": "IB Geography",
+    "tag": "New · Unit 1",
+    "desc": "Analyse Japan’s fertility rate and population pyramids, sort the causes and consequences of ageing, evaluate the policies Japan has tried, then decide what you would do in charge."
+  },
+{
+    "slug": "danillion",
+    "title": "Danillion: Climb the Mountain",
+    "href": "/geography/games/danillion",
+    "level": "KS3 Geography",
+    "tag": "New · Daily challenge",
+    "desc": "A reverse-trivia challenge: every prompt has lots of right answers, but the rarer your answer, the higher you climb. Score enough to reach the summit of Everest, with a new Daily challenge every day."
+  },
+{
+    "slug": "danillion-deep",
+    "title": "Danillion: Deep Dive",
+    "href": "/geography/games/danillion-deep",
+    "level": "KS3 Geography",
+    "tag": "New · Daily challenge",
+    "desc": "The same rare-answer challenge as Danillion, but this time you pilot a submersible through the ocean zones to Challenger Deep, at the bottom of the Mariana Trench."
+  },
+{
+    "slug": "travel-the-wright-way-advanced",
+    "title": "Travel the Wright Way: IGCSE and IB",
+    "href": "/geography/games/travel-the-wright-way-advanced",
+    "level": "IGCSE and IB Geography",
+    "tag": "New · 23 destinations",
+    "desc": "The exam-level version: fly from Thailand around the world and tackle climate graph calculations, plate tectonics, ecosystems, development and sustainable management at each destination."
+  },
+{
+    "slug": "travel-the-wright-way",
+    "title": "Travel the Wright Way",
+    "href": "/geography/games/travel-the-wright-way",
+    "level": "KS3 Geography",
+    "tag": "New · 23 destinations",
+    "desc": "Start in Thailand and travel the world. At each destination explore by canoe, camel, longboat and more, then label diagrams, read climate graphs and photos, and answer questions on places, people and culture to earn passport stamps."
   }
 ];
-  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest", "food-health-quest"];
+  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest", "food-health-quest", "travel-the-wright-way", "danillion", "life-around-the-world", "japan-ageing", "danillion-deep", "travel-the-wright-way-advanced"];
   function weekStart(d) {
     var t = (d ? d.getTime() : Date.now()) + 7 * 3600000; /* Bangkok, UTC+7 */
     var x = new Date(t), day = (x.getUTCDay() + 6) % 7; /* Monday = 0 */

@@ -60,9 +60,9 @@
               spots: [{ x: 50, y: 88, a: 'Colorado River' }, { x: 20, y: 12, a: 'Canyon rim' }, { x: 78, y: 12, a: 'Youngest rocks' }, { x: 15, y: 82, a: 'Oldest rocks' }, { x: 82, y: 54, a: 'Rock layers' }],
               extra: [],
               explain: 'The river flows at the bottom of the canyon. The walls show layers of rock, with the oldest at the bottom and the youngest at the rim.' },
-            { type: 'mcq', q: 'How was the Grand Canyon made?', options: ['The Colorado River cut down through the rock as the land was slowly pushed up', 'A giant earthquake split the ground open', 'A glacier dug it out', 'People dug it'], answer: 0,
+            { type: 'mcq', q: 'How was the Grand Canyon made?', options: ['The river cut down as the land was slowly pushed up', 'A giant earthquake split the ground open along a fault in a single day', 'A glacier dug it out during the last ice age', 'People dug it to mine for gold'], answer: 0,
               explain: 'Over about 5–6 million years the river eroded downwards while the Colorado Plateau was being uplifted, carving the canyon deeper and deeper.' },
-            { type: 'mcq', q: 'Why are the oldest rocks at the bottom of the canyon?', options: ['Layers of sediment were laid down one on top of another, so lower layers are older', 'Old rocks are heavier and sink', 'The river made new rocks at the top', 'Rocks get younger as they get hotter'], answer: 0,
+            { type: 'mcq', q: 'Why are the oldest rocks at the bottom of the canyon?', options: ['Layers were laid down on top of each other, so lower ones are older', 'Old rocks are heavier, so over time they sink down through younger rocks', 'The river makes new rocks at the top', 'Rocks get younger as they get hotter'], answer: 0,
               explain: 'In undisturbed layers, each new layer is deposited on top of older ones. The canyon walls are like the pages of a history book.' }
           ],
           adv: [
@@ -72,7 +72,7 @@
               explain: 'A delta forms at a river mouth, not in a canyon. The Kaibab Limestone at the rim is about 270 million years old; the Vishnu Basement Rocks in the inner gorge are about 1.75–1.84 billion years old.' },
             { type: 'number', q: 'The canyon is about 1,857 m deep and was carved in about 6 million years. What is the average rate of downcutting in mm per year? (2 decimal places)', answer: 0.31, tol: 0.01, unit: 'mm/yr',
               explain: '1,857 m = 1,857,000 mm. 1,857,000 ÷ 6,000,000 ≈ 0.31 mm a year, slow, but over millions of years it adds up.' },
-            { type: 'mcq', q: 'Why are the Grand Canyon’s walls so steep and stepped?', options: ['The dry climate means little weathering on the walls, and hard and soft layers erode at different rates', 'Heavy rain smooths the slopes', 'Glaciers polished the walls', 'The walls are made of one type of rock'], answer: 0,
+            { type: 'mcq', q: 'Why are the Grand Canyon’s walls so steep and stepped?', options: ['A dry climate, and hard and soft layers eroding differently', 'Heavy rain smooths the slopes and then the river cuts them into steps each year', 'Glaciers polished the walls', 'The walls are all one type of rock'], answer: 0,
               explain: 'In an arid climate there is little vegetation or chemical weathering to wear slopes back. Resistant limestones and sandstones form cliffs; weaker shales form gentler slopes.' }
           ]
         }
@@ -85,15 +85,15 @@
               explain: 'July averages about 34°C, and afternoons are often well over 40°C.' },
             { type: 'mcq', graph: true, q: 'Las Vegas gets only about 106 mm of rain a year. What type of climate is this?', options: ['Hot desert', 'Tropical rainforest', 'Polar', 'Temperate maritime'], answer: 0,
               explain: 'Less than 250 mm a year is a desert. Las Vegas is in the Mojave Desert.' },
-            { type: 'mcq', q: 'Desert plants such as cacti have thick, waxy stems and spines instead of leaves. Why?', options: ['To store water and lose as little as possible', 'To catch insects', 'To keep warm', 'To grow faster in the shade'], answer: 0,
+            { type: 'mcq', q: 'Desert plants such as cacti have thick, waxy stems and spines instead of leaves. Why?', options: ['To store water and lose as little as possible', 'To catch insects for food when the soil is too dry to give them nutrients', 'To keep warm on cold nights', 'To grow faster in the shade'], answer: 0,
               explain: 'Spines reduce water loss and protect the plant; thick stems store water collected after rare rainstorms.' }
           ],
           adv: [
             { type: 'number', graph: true, q: 'Calculate the annual temperature range in Las Vegas (°C).', answer: 25.0, tol: 0.1, unit: '°C',
               explain: 'Warmest 34.0°C (July) − coldest 9.0°C (December) = 25.0°C. Deserts have large ranges because clear skies let heat escape in winter and at night.' },
-            { type: 'mcq', q: 'Which two factors best explain why Las Vegas is so dry?', options: ['Sinking air in the subtropical high-pressure belt, and the rain shadow of the Sierra Nevada', 'Cold ocean currents and the ITCZ', 'Monsoon winds and high altitude', 'Being on the Equator'], answer: 0,
+            { type: 'mcq', q: 'Which two factors best explain why Las Vegas is so dry?', options: ['Sinking subtropical high pressure, and the Sierra Nevada rain shadow', 'Cold ocean currents offshore and the ITCZ sitting overhead for most of the year', 'Monsoon winds and high altitude', 'Being close to the Equator'], answer: 0,
               explain: 'Descending, warming air suppresses cloud formation, and Pacific storms lose most of their moisture crossing California’s mountains.' },
-            { type: 'mcq', graph: true, q: 'There is a small rise in rainfall in July and August. What causes it?', options: ['The North American monsoon brings moist air and thunderstorms in late summer', 'Snow melting from the mountains', 'Winter storms from the Pacific', 'Hurricanes reaching Nevada every year'], answer: 0,
+            { type: 'mcq', graph: true, q: 'There is a small rise in rainfall in July and August. What causes it?', options: ['The North American monsoon brings late-summer storms', 'Snow melting from the mountains above the city and flowing down', 'Winter storms from the Pacific', 'Hurricanes reaching Nevada every year'], answer: 0,
               explain: 'In late summer, moist air flows north from the Gulf of California and Gulf of Mexico, triggering short, intense thunderstorms and flash floods.' }
           ]
         }
@@ -104,19 +104,19 @@
           ks3: [
             { type: 'mcq', q: 'About how many people depend on water from the Colorado River?', options: ['About 40 million', 'About 4,000', 'About 400 million', 'Nobody'], answer: 0,
               explain: 'The river supplies about 40 million people in seven US states and Mexico, including cities such as Las Vegas, Phoenix, Los Angeles and Denver.' },
-            { type: 'mcq', q: 'Today the Colorado River rarely reaches the sea. Why?', options: ['So much water is taken out for cities and farms that little is left at the end', 'It flows into a volcano', 'It freezes before reaching the sea', 'The sea is too high'], answer: 0,
+            { type: 'mcq', q: 'Today the Colorado River rarely reaches the sea. Why?', options: ['So much is taken for cities and farms that little is left', 'It drains into underground caves long before it reaches the coast', 'It freezes before reaching the sea', 'The sea level is too high'], answer: 0,
               explain: 'Dams, canals and pipelines divert most of the water before the river reaches the Gulf of California in Mexico.' },
             { type: 'sort', q: 'Sort these into things that increase water use and ways to save water.', bins: ['Uses more water', 'Saves water'],
               items: [['Green lawns and golf courses in the desert', 0], ['Growing thirsty crops like alfalfa', 0], ['Fast-growing desert cities', 0], ['Replacing lawns with desert plants', 1], ['Recycling wastewater', 1], ['Drip irrigation on farms', 1]],
               explain: 'In a desert, lawns, thirsty crops and population growth all raise demand. Desert landscaping, recycling and efficient irrigation reduce it.' }
           ],
           adv: [
-            { type: 'mcq', q: 'The 1922 Colorado River Compact gave the Upper and Lower Basins 7.5 million acre-feet each per year. Why is the river now over-allocated?', options: ['The agreement was based on unusually wet years, and drought and warming have since reduced flow', 'The river has become longer', 'Mexico takes all the water', 'Rainfall has doubled'], answer: 0,
+            { type: 'mcq', q: 'The 1922 Colorado River Compact gave the Upper and Lower Basins 7.5 million acre-feet each per year. Why is the river now over-allocated?', options: ['It was based on wet years, and drought and warming have cut flow', 'The river has become longer, so more water evaporates along the way', 'Mexico now takes most of the water', 'Rainfall has doubled since 1922'], answer: 0,
               explain: 'Flow measurements in the early 1900s came from a wet period. More was promised than the river normally carries, and higher temperatures now reduce runoff further.' },
             { type: 'sort', q: 'Classify these responses to water scarcity in the Colorado basin.', bins: ['Increase supply', 'Manage demand'],
               items: [['Cloud seeding over the Rockies', 0], ['Desalination plants on the coast', 0], ['Water recycling for drinking supply', 0], ['Paying farmers to leave fields fallow', 1], ['Cash rebates for removing lawns', 1], ['Agreed cuts when Lake Mead falls low', 1]],
               explain: 'Supply-side options add water; demand management uses less. Most experts argue demand cuts, especially in agriculture, are essential.' },
-            { type: 'mcq', q: 'Who has the strongest claim to be included in future decisions about the river?', options: ['All stakeholders, including 30 tribal nations, Mexico, farmers, cities and ecosystems', 'Only the largest city', 'Only farmers', 'Only the state where the river starts'], answer: 0,
+            { type: 'mcq', q: 'Who has the strongest claim to be included in future decisions about the river?', options: ['All stakeholders: tribal nations, Mexico, farmers, cities and ecosystems', 'Only the largest cities, because they use the most water and pay the most', 'Only the farmers who use it', 'Only the state where the river starts'], answer: 0,
               explain: 'Water conflicts involve many stakeholders. Tribal nations hold senior water rights, and the delta ecosystem in Mexico depends on flows too.' }
           ]
         }
@@ -125,20 +125,20 @@
         id: 'dams', title: 'Dams, cities and farms', icon: '🏗️',
         tasks: {
           ks3: [
-            { type: 'mcq', q: 'Hoover Dam was finished in the 1930s and created Lake Mead. What does it do?', options: ['Stores water, controls floods and generates hydro-electric power', 'Stops fish swimming', 'Makes the river saltier on purpose', 'Turns the desert into a forest'], answer: 0,
+            { type: 'mcq', q: 'Hoover Dam was finished in the 1930s and created Lake Mead. What does it do?', options: ['Stores water, controls floods and makes electricity', 'Stops fish swimming upstream so that they stay in the warm lake', 'Makes the river saltier on purpose', 'Turns the desert into a forest'], answer: 0,
               explain: 'Lake Mead stores water for Las Vegas, Arizona and California, and the dam produces electricity for millions of people.' },
-            { type: 'mcq', q: 'Las Vegas had about 2,000 people in 1922 and has nearly 2 million today. What made this growth possible in a desert?', options: ['Water and electricity from the Colorado River and Hoover Dam', 'Heavy rainfall', 'Underground lakes of fresh water everywhere', 'Snow every winter'], answer: 0,
+            { type: 'mcq', q: 'Las Vegas had about 2,000 people in 1922 and has nearly 2 million today. What made this growth possible in a desert?', options: ['Water and power from the river and Hoover Dam', 'Heavy rainfall from summer storms that fills large reservoirs near the city', 'Huge underground lakes of fresh water', 'Snow every winter'], answer: 0,
               explain: 'Without the river’s water and the dam’s power, a city this size could not exist in the Mojave Desert.' },
-            { type: 'mcq', q: 'Colorado River water helps grow most of the USA’s winter vegetables, in places like California’s Imperial Valley. Why can farmers grow crops there in winter?', options: ['Warm, sunny winters plus irrigation water from the river', 'It rains heavily all winter', 'The soil is frozen', 'Greenhouses cover the whole valley'], answer: 0,
+            { type: 'mcq', q: 'Colorado River water helps grow most of the USA’s winter vegetables, in places like California’s Imperial Valley. Why can farmers grow crops there in winter?', options: ['Warm, sunny winters plus river irrigation', 'It rains heavily all winter, so the fields never need extra water', 'The soil is frozen, which keeps pests away', 'Greenhouses cover the whole valley'], answer: 0,
               explain: 'The desert is warm and sunny in winter. Canals bring river water, so lettuce and other vegetables grow when much of the USA is too cold.' }
           ],
           adv: [
             { type: 'sort', q: 'Evaluate the large dams on the Colorado River.', bins: ['Benefit', 'Cost'],
               items: [['Reliable water supply for cities and farms', 0], ['Renewable hydro-electric power', 0], ['Flood control downstream', 0], ['Sediment trapped behind dams, starving the delta', 1], ['Evaporation losses from large reservoirs', 1], ['Colder, clearer water harming native fish', 1]],
               explain: 'Dams transformed the Southwest but changed the river’s temperature, sediment load and ecology, and lose large amounts of water to evaporation in desert heat.' },
-            { type: 'mcq', q: 'As Lake Mead’s level falls, Hoover Dam produces less electricity. Why?', options: ['Lower water means less pressure (head) driving the turbines', 'The turbines freeze', 'The dam gets wider', 'Evaporation adds energy'], answer: 0,
+            { type: 'mcq', q: 'As Lake Mead’s level falls, Hoover Dam produces less electricity. Why?', options: ['Lower water means less pressure on the turbines', 'The turbines freeze when they are exposed to the air above the water', 'The dam gets wider', 'Evaporation adds energy'], answer: 0,
               explain: 'Hydro-electric output depends on the volume of water and the height it falls. Lower reservoir levels reduce both.' },
-            { type: 'mcq', q: 'Grand Canyon rafting trips and tourism bring money but need careful management. Which is the best example of sustainable management?', options: ['Permit systems that limit the number of rafting trips each season', 'Unlimited motorboats on the river', 'Building hotels on the canyon floor', 'Removing all visitor rules'], answer: 0,
+            { type: 'mcq', q: 'Grand Canyon rafting trips and tourism bring money but need careful management. Which is the best example of sustainable management?', options: ['Permits that limit the number of rafting trips', 'Building hotels on the canyon floor so visitors do not need to hike back up', 'Unlimited motorboats on the river', 'Removing all visitor rules'], answer: 0,
               explain: 'Limiting numbers protects beaches, campsites and wildlife while keeping the economic benefits of tourism.' }
           ]
         }
