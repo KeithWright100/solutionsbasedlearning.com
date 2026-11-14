@@ -154,7 +154,9 @@
               explain: 'The same lakes provide drinking water, so in a drought people and ships compete for the same water.' },
             { type: 'sort', q: 'Sort these Panamanian jobs into economic sectors.', bins: ['Primary', 'Tertiary'],
               items: [['Banana farming', 0], ['Fishing', 0], ['Rice farming', 0], ['Canal pilot', 1], ['Banking in Panama City', 1], ['Tour guide', 1]],
-              explain: 'Primary jobs take raw materials from nature. Tertiary jobs provide services, and the canal makes Panama a hub for shipping, banking and trade.' }
+              explain: 'Primary jobs take raw materials from nature. Tertiary jobs provide services, and the canal makes Panama a hub for shipping, banking and trade.' },
+            { type: 'mcq', q: 'Culture: the Guna people live on the San Blas islands off Panama’s Caribbean coast. They are famous for molas. What are molas?', options: ['Brightly coloured cloth panels made by layering and cutting fabric', 'Fishing boats', 'Canal locks', 'Rice dishes'], answer: 0,
+              explain: 'Guna women sew molas into their blouses. The Guna govern their own territory, Guna Yala, and manage tourism there.' }
           ],
           adv: [
             { type: 'mcq', q: 'Panama’s economy grew quickly in the 2000s and 2010s. Why is the canal so important to it?', options: ['Tolls and related services such as ports, logistics and banking bring in income and jobs', 'The canal is mainly used for tourism', 'It allows Panama to export snow', 'It has no economic effect'], answer: 0,

@@ -146,7 +146,9 @@
               explain: 'Beaches, warm weather and reefs attract visitors, many from the UK, USA and Canada.' },
             { type: 'sort', q: 'Sort the effects of tourism in Barbados.', bins: ['Positive', 'Negative'],
               items: [['Jobs in hotels and restaurants', 0], ['Money to protect reefs and beaches', 0], ['Better roads and airports', 0], ['Pollution damaging coral reefs', 1], ['Seasonal jobs with low pay', 1], ['Heavy use of fresh water', 1]],
-              explain: 'Tourism brings income and jobs but needs careful management to protect the environment that visitors come to see.' }
+              explain: 'Tourism brings income and jobs but needs careful management to protect the environment that visitors come to see.' },
+            { type: 'mcq', q: 'Culture: Crop Over is Barbados’s biggest festival, with costumes, music and parades. What did it originally celebrate?', options: ['The end of the sugar cane harvest', 'The first snowfall', 'A hurricane passing', 'The opening of an airport'], answer: 0,
+              explain: 'Crop Over began on the sugar plantations and is now a summer carnival of calypso and soca music that attracts many visitors.' }
           ],
           adv: [
             { type: 'mcq', q: 'Why is relying on tourism risky for a small island economy like Barbados?', options: ['Shocks such as COVID-19 in 2020 or a hurricane can cause visitor numbers and income to collapse', 'Tourists never spend money', 'Tourism uses no workers', 'There is no risk'], answer: 0,

@@ -112,7 +112,9 @@
             { type: 'mcq', q: 'What are llamas and alpacas mainly used for?', options: ['Wool, carrying loads and meat', 'Ploughing rice paddies', 'Pulling sledges on ice', 'Racing'], answer: 0,
               explain: 'Alpacas give fine wool, llamas carry loads on mountain paths, and both can live on high grasslands where crops struggle.' },
             { type: 'mcq', q: 'Machu Picchu is one of the world’s most famous ancient sites. Who built it?', options: ['The Inca', 'The Romans', 'The Aztecs', 'The Vikings'], answer: 0,
-              explain: 'The Inca built Machu Picchu in the 1400s, high on a ridge above the Urubamba River. It is now a World Heritage Site.' }
+              explain: 'The Inca built Machu Picchu in the 1400s, high on a ridge above the Urubamba River. It is now a World Heritage Site.' },
+            { type: 'mcq', q: 'Culture: millions of Peruvians speak Quechua, the language of the Inca. Every June, Cusco holds Inti Raymi. What is it?', options: ['A festival of the Sun, held at the winter solstice', 'A football final', 'A llama race', 'A snow festival in December'], answer: 0,
+              explain: 'Inti Raymi was the Inca festival honouring the Sun god Inti. Today it is re-enacted at Sacsayhuamán, attracting both local people and tourists.' }
           ],
           adv: [
             { type: 'mcq', q: 'Apart from flat land, how do terraces help farming at high altitude?', options: ['Stone walls absorb heat by day and release it at night, reducing frost damage', 'They make the air thicker', 'They attract more sunlight', 'They stop all rain'], answer: 0,
