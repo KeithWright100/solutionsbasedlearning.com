@@ -346,6 +346,9 @@
     lake: 'M-20 150 C 150 140, 300 162, 450 148 S 750 138, 920 152',
     kili: 'M40 206 L250 194 L160 172 L380 156 L290 134 L470 116 L400 94 L560 76 L490 58 L600 44',
     rift: 'M-20 196 C 150 190, 300 200, 450 194 S 750 186, 920 192',
+    barge: 'M-20 130 C 120 110, 260 150, 400 128 S 640 108, 760 132 S 860 140, 920 126',
+    nile: 'M-20 150 C 150 142, 300 160, 450 148 S 750 140, 920 152',
+    camel: 'M-20 196 C 120 180, 220 200, 330 186 S 540 170, 660 190 S 820 196, 920 184',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
   function sceneMarkup(d) {
@@ -497,6 +500,30 @@
       h += '<g stroke="#e5e7eb" stroke-width="3"><line x1="760" y1="120" x2="760" y2="150"/><line x1="780" y1="124" x2="780" y2="150"/></g><g class="tw-smoke"><circle cx="760" cy="112" r="7" fill="#f2f2f2"/><circle cx="780" cy="116" r="6" fill="#f2f2f2"/></g>';
       h += '<path d="' + P2 + '" fill="none" stroke="#b9874a" stroke-width="16" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
       h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><rect x="-34" y="-24" width="64" height="18" rx="3" fill="#b45309" stroke="#5b2a04" stroke-width="2"/><rect x="-30" y="-36" width="48" height="12" fill="none" stroke="#5b2a04" stroke-width="2"/><rect x="18" y="-22" width="12" height="9" fill="#bfe6ff"/><circle cx="-12" cy="-30" r="4" fill="#f0b429"/><circle cx="2" cy="-30" r="4" fill="#5b3b22"/><circle cx="-20" cy="-4" r="7" fill="#222"/><circle cx="18" cy="-4" r="7" fill="#222"/><circle cx="-20" cy="-4" r="2.5" fill="#bbb"/><circle cx="18" cy="-4" r="2.5" fill="#bbb"/></g></g>';
+    } else if (type === 'barge') {
+      h += '<rect width="900" height="220" fill="#cfe3d6"/><g fill="#fff" opacity=".7"><ellipse cx="200" cy="24" rx="60" ry="10"/><ellipse cx="640" cy="18" rx="80" ry="12"/></g>';
+      h += '<g fill="#1f6b2a">'; for (k = 0; k < 32; k++) h += '<circle cx="' + (k * 29) + '" cy="' + (58 + (k * 11) % 14) + '" r="' + (18 + k % 3 * 5) + '"/>'; h += '</g><g fill="#2a8a36">'; for (k = 0; k < 32; k++) h += '<circle cx="' + (k * 29 + 12) + '" cy="' + (200 + (k * 7) % 10) + '" r="' + (16 + k % 3 * 4) + '"/>'; h += '</g>';
+      h += '<rect y="70" width="900" height="122" fill="#8a6a3f"/><path d="M0 80 C 200 90, 400 74, 600 86 S 800 78, 900 82 L900 184 C 700 176, 500 190, 300 180 S 100 188, 0 182 Z" fill="#a07c4a"/>';
+      h += '<path class="tw-flow" d="M-20 150 Q 30 144 80 150 T 180 150 T 280 150 T 380 150 T 480 150 T 580 150 T 680 150 T 780 150 T 880 150 T 980 150" fill="none" stroke="#c9a877" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<g fill="#3e8f3e" opacity=".85"><ellipse cx="140" cy="168" rx="18" ry="5"/><ellipse cx="520" cy="100" rx="22" ry="5"/><ellipse cx="760" cy="170" rx="16" ry="4"/></g>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6d3b0" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-46 -4 L42 -4 L36 6 L-42 6 Z" fill="#5b6573" stroke="#2b3138" stroke-width="2"/><rect x="-40" y="-18" width="44" height="14" fill="#e5e7eb" stroke="#2b3138" stroke-width="1.5"/><g fill="#d62828"><rect x="-36" y="-26" width="10" height="8"/><rect x="-22" y="-26" width="10" height="8"/></g><g fill="#2563c9"><rect x="-8" y="-26" width="10" height="8"/></g><rect x="10" y="-22" width="20" height="18" fill="#f4f1de" stroke="#2b3138" stroke-width="1.5"/><rect x="14" y="-18" width="12" height="5" fill="#7cc3ef"/></g></g>';
+    } else if (type === 'nile') {
+      h += '<rect width="900" height="220" fill="#ffe8b8"/><circle cx="780" cy="40" r="22" fill="#ffb347"/>';
+      h += '<path d="M0 100 C 200 90, 400 104, 600 94 S 800 98, 900 92 L900 120 L0 120 Z" fill="#e8c27a"/>';
+      h += '<g fill="#d9b25f"><path d="M120 112 L170 52 L220 112 Z"/><path d="M210 112 L245 70 L280 112 Z"/></g><path d="M170 52 L220 112 L195 112 Z" fill="#c49a45"/>';
+      h += '<rect y="112" width="900" height="16" fill="#5f9a3a"/><g fill="#3f7f2a">'; for (k = 0; k < 14; k++) { var px2 = 30 + k * 65; h += '<path d="M' + px2 + ' 118 L' + px2 + ' 92" stroke="#7a5a32" stroke-width="3"/><path d="M' + px2 + ' 92 q-12 0 -18 8 M' + px2 + ' 92 q12 0 18 8 M' + px2 + ' 92 q-6 -10 -16 -10 M' + px2 + ' 92 q6 -10 16 -10" stroke="#3f7f2a" stroke-width="3" fill="none"/>'; } h += '</g>';
+      h += '<rect y="126" width="900" height="70" fill="#2f7fbf"/><path class="tw-flow" d="M-20 160 Q 30 154 80 160 T 180 160 T 280 160 T 380 160 T 480 160 T 580 160 T 680 160 T 780 160 T 880 160 T 980 160" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<rect y="194" width="900" height="26" fill="#6aa842"/>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-30 -2 Q0 10 30 -2 L24 -6 L-24 -6 Z" fill="#fff" stroke="#0f3a5c" stroke-width="2"/><line x1="-2" y1="-6" x2="-2" y2="-44" stroke="#5b3b22" stroke-width="2.5"/><path d="M-2 -44 L-30 -6 L22 -6 Z" fill="#fff" stroke="#9aa3ad" stroke-width="1.5"/><circle cx="14" cy="-12" r="4" fill="#5b3b22"/></g></g>';
+    } else if (type === 'camel') {
+      h += '<rect width="900" height="220" fill="#ffe2a8"/><circle cx="140" cy="44" r="26" fill="#ff9f43"/>';
+      h += '<path d="M0 140 C 100 90, 180 90, 260 130 S 420 80, 520 120 S 700 70, 800 115 S 880 110, 900 120 L900 220 L0 220 Z" fill="#e9b864"/>';
+      h += '<path d="M0 170 C 120 140, 220 150, 320 168 S 520 140, 640 160 S 820 150, 900 162 L900 220 L0 220 Z" fill="#f2c977"/>';
+      h += '<g fill="#d9a441" opacity=".7"><path d="M180 108 q40 -30 80 22 Z"/><path d="M430 104 q40 -28 90 16 Z"/><path d="M700 92 q40 -26 100 22 Z"/></g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#c98a3c" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><ellipse cx="0" cy="-16" rx="20" ry="9" fill="#c98a3c" stroke="#7a4b1c" stroke-width="2"/><path d="M-8 -24 q8 -14 16 0" fill="#c98a3c" stroke="#7a4b1c" stroke-width="2"/><path d="M16 -20 L26 -38 L33 -36 L22 -16 Z" fill="#c98a3c" stroke="#7a4b1c" stroke-width="2"/><ellipse cx="31" cy="-38" rx="6" ry="4" fill="#c98a3c" stroke="#7a4b1c" stroke-width="2"/><g stroke="#7a4b1c" stroke-width="3" stroke-linecap="round"><line x1="-12" y1="-9" x2="-14" y2="4"/><line x1="-4" y1="-8" x2="-4" y2="4"/><line x1="8" y1="-8" x2="9" y2="4"/><line x1="14" y1="-9" x2="16" y2="4"/></g><circle cx="0" cy="-40" r="5" fill="#5b3b22"/><path d="M-7 -36 L7 -36 L5 -26 L-5 -26 Z" fill="#1d4f91"/><path d="M-6 -46 L6 -46 L4 -42 L-4 -42 Z" fill="#1d4f91"/></g></g>';
     } else if (type === 'trail') {
       h += '<defs><linearGradient id="twSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0f5"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSky)"/>';
       h += '<path d="M0 220 L0 200 L120 190 L330 110 L560 34 L640 34 L760 120 L900 170 L900 220 Z" fill="#6b5b4e"/>';
@@ -515,14 +542,14 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara' }[type];
     if (d.sceneLabel) label = d.sceneLabel;
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift)$/.test(E.d.scene)) ang = 0;
+    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel)$/.test(E.d.scene)) ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
@@ -581,7 +608,7 @@
 
   function climateSVG(c) {
     var x0 = 50, x1 = 470, y0 = 250, y1 = 30, bw = (x1 - x0) / 12, h = '';
-    var rMaxV = Math.max.apply(null, c.rain), rmax = c.rmax || (rMaxV <= 350 && rMaxV > 150 ? 350 : Math.max(100, Math.ceil(rMaxV / 50) * 50)), rstep = rmax > 400 ? 100 : 50;
+    var rMaxV = Math.max.apply(null, c.rain), rmax = c.rmax || (rMaxV <= 350 && rMaxV > 150 ? 350 : Math.max(100, Math.ceil(rMaxV / 50) * 50)), rstep = c.rstep || (rmax > 400 ? 100 : 50);
     var tmin = Math.min(0, Math.floor(Math.min.apply(null, c.temp) / 5) * 5), tmax = Math.max(35, Math.ceil(Math.max.apply(null, c.temp) / 5) * 5), tstep = tmax - tmin > 45 ? 10 : 5;
     function TY(v) { return y0 - (y0 - y1) * (v - tmin) / (tmax - tmin); }
     h += '<svg viewBox="0 0 520 300" role="img" aria-label="Climate graph for ' + esc(c.place) + ': rainfall bars and temperature line">';
