@@ -35,7 +35,7 @@
     lonlat: [32.53, 15.6],
     locator: { box: [21, 40, 8, 23], rivers: [[[35.1, 11.2], [34.4, 12.6], [33.6, 13.8], [32.53, 15.6]], [[31.4, 9.5], [32.4, 12.0], [32.6, 14.0], [32.53, 15.6]], [[32.53, 15.6], [33.0, 17.0], [33.9, 18.0], [32.0, 19.0], [31.2, 20.5], [31.4, 22.0]]], places: [['Khartoum', 32.53, 15.6, 'l'], ['Meroë', 33.75, 16.94, 'r'], ['Port Sudan', 37.22, 19.62, 'l'], ['SAHARA', 26.5, 19.5, 'a'], ['EGYPT', 29.5, 22.4, 'a'], ['ETHIOPIA', 37.8, 10.2, 'a'], ['Red Sea', 38.4, 21.0, 'a']] },
     stamp: { colour: '#b45309', icon: '🏜️' },
-    transport: { name: 'Nile ferry', verb: 'Sail', emoji: '⛴️' },
+    transport: { name: 'felucca on the Nile', verb: 'Sail', emoji: '⛵' },
     scene: 'nile',
     photo: { file: 'Sudan Meroe Pyramids 30sep2005.jpg', alt: 'Steep-sided ancient pyramids of Meroë standing on desert sand in Sudan', author: 'Fabrizio Demartis', licence: 'CC BY-SA 2.0', licenceUrl: 'https://creativecommons.org/licenses/by-sa/2.0/' },
     intro: {
