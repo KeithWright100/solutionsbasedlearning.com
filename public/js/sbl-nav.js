@@ -1,5 +1,5 @@
 // public/js/sbl-nav.js
-// The shared SBL top menu bar (IB Diploma / IGCSE / Revision & practice /
+// The shared SBL top menu bar (IB Diploma / IGCSE / Revision & practice / Games /
 // Teachers), drawn from ONE list — SBL_NAV below. The Humanities Hub also
 // uses this same list for its subject tiles and its sitemap, so adding a
 // page or a whole new section (e.g. KS3) means editing SBL_NAV once.
@@ -132,6 +132,44 @@
           ['IB Revision games', '/geography/games#ib-rev'],
           ['Economics games', '', 'head'],
           ['Market Shock (IGCSE)', '/geography/games/market-shock', 'new']] }
+      ] },
+    { key: 'games', label: 'Games', color: 'var(--sn-game)', blurb: 'Interactive geography, history and economics games for KS3, IGCSE and IB',
+      all: ['All games', '/geography/games'],
+      cols: [
+        { title: 'KS3', href: '/geography/games#ks3-general', items: [
+          ['Travel the Wright Way', '/geography/games/travel-the-wright-way', 'new'],
+          ['World Map Challenge', '/geography/games/world-map-challenge'],
+          ['Place Detective', '/geography/games/place-detective'],
+          ['Danillion', '/geography/games/danillion'],
+          ['Tropical Storm Mission', '/geography/games/tropical-storm-mission'],
+          ['Ruapehu Mission', '/geography/games/volcano-fantastic-place'],
+          ['How Does Life Vary?', '/geography/games/life-around-the-world'],
+          ['History', '', 'head'],
+          ['Tomb of the First Emperor', '/geography/games/qin-tomb'],
+          ['All KS3 games', '/geography/games#ks3']] },
+        { title: 'IGCSE', href: '/geography/games#igcse', items: [
+          ['Travel the Wright Way (IGCSE / IB)', '/geography/games/travel-the-wright-way-advanced', 'new'],
+          ['Coastal Quest', '/geography/games/igcse-coastal-quest'],
+          ['Hazard Quest', '/geography/games/igcse-hazard-quest'],
+          ['Rural Quest', '/geography/games/igcse-rural-quest'],
+          ['Development Quest', '/geography/games/igcse-development-quest'],
+          ['Fieldwork Quest', '/geography/games/igcse-fieldwork-quest'],
+          ['Micro-Hydro Mission', '/geography/games/micro-hydro-mission'],
+          ['Economics', '', 'head'],
+          ['Market Shock', '/geography/games/market-shock'],
+          ['Central Bank Challenge', '/geography/games/central-bank-challenge']] },
+        { title: 'IB Diploma', href: '/geography/games#ib', items: [
+          ['Population Quest', '/geography/games/ib-population-quest'],
+          ['Climate Quest', '/geography/games/ib-climate-quest'],
+          ['Resource Quest', '/geography/games/ib-resource-quest'],
+          ['Freshwater Quest', '/geography/games/freshwater-quest'],
+          ['Leisure Quest', '/geography/games/leisure-quest'],
+          ['Food and Health Quest', '/geography/games/food-health-quest'],
+          ['World Case Study Map', '/geography/games/world-case-study-map'],
+          ['Decision games', '', 'head'],
+          ['Population Minister 2025–2055', '/geography/games/population-minister'],
+          ['Energy Minister 2025–2050', '/geography/games/energy-minister'],
+          ['All IB games', '/geography/games#ib']] }
       ] },
     { key: 'tch', label: 'Teachers', color: 'var(--sn-tch)', teacher: true, blurb: 'Only visible to teacher and admin accounts',
       cols: [
