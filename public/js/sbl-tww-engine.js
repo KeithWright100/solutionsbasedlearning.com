@@ -20,7 +20,7 @@
   var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75), lonlat: [100.5, 13.75] };
   // Suggested round-the-world route, east from Thailand and back again.
   var ORDER = ['bangkok', 'malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'alaska', 'canada', 'california', 'colorado', 'mexico', 'costarica', 'panama', 'barbados', 'andes', 'amazon', 'argentina',
-    'southafrica', 'madagascar', 'malawi', 'tanzania', 'kenya', 'congo', 'egypt', 'sahara', 'gambia', 'morocco', 'spain', 'italy', 'france', 'uk', 'iceland', 'svalbard', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'oman', 'india', 'everest', 'bhutan', 'china', 'southkorea', 'japan'];
+    'southafrica', 'madagascar', 'malawi', 'tanzania', 'kenya', 'congo', 'egypt', 'sahara', 'gambia', 'morocco', 'spain', 'italy', 'france', 'uk', 'iceland', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'oman', 'india', 'everest', 'bhutan', 'china', 'southkorea', 'japan'];
   function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), lonlat: [lon, lat], theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
   var SOON = {
     malaysia: soon('malaysia', 'Malaysia', 101.4, 4.5, 'longboat', '🚣', '#2563c9', '🌴', 'rainforest, tea plantations and palm oil'),
@@ -59,7 +59,6 @@
     panama: soon('panama', 'Panama Canal', -79.7, 9.1, 'cargo ship through the locks', '\uD83D\uDEA2', '#0369a1', '\u2693', 'the Panama Canal and world trade'),
     barbados: soon('barbados', 'Barbados', -59.55, 13.1, 'catamaran', '\u26F5', '#0e7490', '\uD83C\uDFDD\uFE0F', 'Caribbean coasts, hurricanes and tourism'),
     iceland: soon('iceland', 'Iceland', -19, 64.9, 'super jeep', '\uD83D\uDE99', '#1d4ed8', '\u2668\uFE0F', 'volcanoes, glaciers and geothermal energy'),
-    svalbard: soon('svalbard', 'Svalbard', 15.6, 78.2, 'icebreaker ship', '\uD83D\uDEA2', '#3a8fb7', '\uD83E\uDDCA', 'the polar Arctic and the Global Seed Vault'),
     oman: soon('oman', 'Oman', 58.4, 23.6, 'dhow', '\u26F5', '#b45309', '\uD83C\uDFDC\uFE0F', 'wadis, deserts and water supply'),
     bhutan: soon('bhutan', 'Bhutan', 89.6, 27.5, 'mountain trek', '\uD83E\uDD7E', '#c2410c', '\uD83C\uDFEF', 'a carbon-negative Himalayan kingdom'),
     southkorea: soon('southkorea', 'South Korea', 127, 37.5, 'KTX high-speed train', '\uD83D\uDE84', '#1e40af', '\uD83C\uDFD9\uFE0F', 'rapid development and a high-tech economy'),
@@ -355,6 +354,9 @@
     sled: 'M-20 176 C 120 166, 240 184, 380 172 S 640 160, 760 174 S 860 180, 920 170',
     taiga: 'M-20 172 C 150 172, 260 164, 400 166 S 640 176, 760 170 S 860 164, 920 166',
     dunes: 'M-20 176 C 100 150, 180 190, 290 164 S 470 140, 560 176 S 760 196, 920 160',
+    dubai: 'M-20 150 C 150 150, 260 140, 400 140 S 640 152, 760 146 S 860 140, 920 140',
+    monsoon: 'M-20 176 C 150 176, 240 160, 380 162 S 600 180, 720 172 S 840 160, 920 162',
+    himal: 'M40 210 L230 196 L140 178 L360 164 L270 146 L480 132 L400 112 L600 98 L520 78 L700 60',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
   function sceneMarkup(d) {
@@ -581,6 +583,31 @@
       h += '<path d="M0 180 C 100 150, 180 194, 290 168 S 470 144, 560 180 S 760 200, 920 164 L900 220 L0 220 Z" fill="#f6c77a"/>';
       h += '<path d="' + P2 + '" fill="none" stroke="#c98a3c" stroke-width="3" stroke-dasharray="2 8"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
       h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-28 -2 L-26 -16 L-12 -18 L-6 -28 L14 -28 L20 -18 L30 -14 L30 -2 Z" fill="#f4f1de" stroke="#5b4630" stroke-width="2"/><path d="M-4 -26 L12 -26 L16 -18 L-8 -18 Z" fill="#7cc3ef"/><rect x="-22" y="-32" width="30" height="4" fill="#374151"/><circle cx="-16" cy="0" r="6" fill="#222"/><circle cx="18" cy="0" r="6" fill="#222"/><circle cx="-16" cy="0" r="2.5" fill="#bbb"/><circle cx="18" cy="0" r="2.5" fill="#bbb"/></g></g>';
+    } else if (type === 'dubai') {
+      h += '<rect width="900" height="220" fill="#d8ecf7"/><circle cx="120" cy="40" r="20" fill="#ffd166"/>';
+      h += '<g fill="#9fb3c8"><path d="M560 140 L572 140 L574 40 L578 4 L582 40 L584 140 L596 140 L590 70 L586 70 Z"/></g>';
+      for (k = 0; k < 18; k++) { var dx = k * 52 - 10, dh = 40 + ((k * 31) % 60), dc = ['#c7d3df', '#b4c3d3', '#d6dee8'][k % 3]; if (dx > 540 && dx < 610) continue; h += '<rect x="' + dx + '" y="' + (140 - dh) + '" width="30" height="' + dh + '" fill="' + dc + '"/><rect x="' + (dx + 4) + '" y="' + (144 - dh) + '" width="22" height="' + (dh - 10) + '" fill="#7cc3ef" opacity=".35"/>'; }
+      h += '<rect y="148" width="900" height="72" fill="#e9c98a"/><rect y="186" width="900" height="34" fill="#2f9fbf"/>';
+      h += '<g stroke="#9aa3ad" stroke-width="6">'; for (k = 0; k < 10; k++) h += '<line x1="' + (40 + k * 95) + '" y1="152" x2="' + (40 + k * 95) + '" y2="186"/>'; h += '</g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#d1d5db" stroke-width="10"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-46 -2 L-46 -18 Q-46 -24 -38 -24 L36 -24 Q46 -22 48 -10 L48 -2 Z" fill="#f4f4f5" stroke="#374151" stroke-width="2"/><rect x="-46" y="-10" width="94" height="4" fill="#dc2626"/><g fill="#1e293b"><rect x="-40" y="-20" width="12" height="8" rx="1"/><rect x="-24" y="-20" width="12" height="8" rx="1"/><rect x="-8" y="-20" width="12" height="8" rx="1"/><rect x="8" y="-20" width="12" height="8" rx="1"/><path d="M26 -20 L40 -20 L44 -12 L26 -12 Z"/></g></g></g>';
+    } else if (type === 'monsoon') {
+      h += '<rect width="900" height="220" fill="#9aa8b8"/><g fill="#5f6b7a"><ellipse cx="150" cy="30" rx="130" ry="30"/><ellipse cx="450" cy="24" rx="160" ry="32"/><ellipse cx="760" cy="30" rx="140" ry="30"/></g>';
+      h += '<g stroke="#dbe7f3" stroke-width="2" opacity=".8">'; for (k = 0; k < 60; k++) h += '<line x1="' + (k * 15 + 6) + '" y1="' + (56 + (k % 4) * 6) + '" x2="' + (k * 15) + '" y2="' + (76 + (k % 4) * 6) + '"/>'; h += '</g>';
+      h += '<path d="M0 130 L80 100 L160 120 L250 86 L330 116 L420 92 L500 118 L600 90 L700 120 L800 96 L900 116 L900 220 L0 220 Z" fill="#4f7f4a"/>';
+      h += '<path d="M0 150 C 200 136, 400 152, 600 142 S 820 140, 900 146 L900 220 L0 220 Z" fill="#6fb04a"/>';
+      h += '<g fill="#8fd16a" opacity=".6">'; for (k = 0; k < 14; k++) h += '<rect x="' + (k * 66) + '" y="' + (190 + (k % 2) * 8) + '" width="54" height="10" rx="2"/>'; h += '</g>';
+      h += '<g fill="#7cc3ef" opacity=".7"><ellipse cx="200" cy="200" rx="40" ry="5"/><ellipse cx="620" cy="204" rx="50" ry="5"/></g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#5b4a3a" stroke-width="12"/><path d="' + P2 + '" fill="none" stroke="#c9c2b5" stroke-width="2" stroke-dasharray="4 6"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><rect x="-50" y="-24" width="32" height="22" rx="3" fill="#1d4f91" stroke="#0b1b45" stroke-width="2"/><rect x="-16" y="-22" width="32" height="20" rx="3" fill="#b91c1c" stroke="#5a0d0d" stroke-width="2"/><rect x="18" y="-22" width="32" height="20" rx="3" fill="#b91c1c" stroke="#5a0d0d" stroke-width="2"/><rect x="-50" y="-12" width="100" height="3" fill="#facc15"/><g fill="#bfe6ff"><rect x="-46" y="-20" width="8" height="6"/><rect x="-12" y="-19" width="8" height="6"/><rect x="2" y="-19" width="8" height="6"/><rect x="22" y="-19" width="8" height="6"/><rect x="36" y="-19" width="8" height="6"/></g><g fill="#222"><circle cx="-40" cy="0" r="3.5"/><circle cx="-26" cy="0" r="3.5"/><circle cx="-8" cy="0" r="3.5"/><circle cx="8" cy="0" r="3.5"/><circle cx="26" cy="0" r="3.5"/><circle cx="42" cy="0" r="3.5"/></g></g></g>';
+    } else if (type === 'himal') {
+      h += '<rect width="900" height="220" fill="#8ec5ef"/>';
+      h += '<path d="M0 220 L0 150 L120 120 L220 70 L300 100 L420 30 L470 50 L560 10 L640 50 L720 30 L820 90 L900 80 L900 220 Z" fill="#7d8796"/>';
+      h += '<g fill="#fff"><path d="M400 42 L420 30 L446 44 L432 52 Z"/><path d="M540 22 L560 10 L586 26 L570 34 Z"/><path d="M704 40 L720 30 L742 44 L728 50 Z"/><path d="M206 80 L220 70 L236 82 Z"/></g>';
+      h += '<path d="M0 220 L0 200 L200 180 L400 170 L600 150 L760 120 L900 110 L900 220 Z" fill="#9b8b72"/>';
+      h += '<g>'; var flagCols = ['#2563c9', '#fff', '#d62828', '#2a9d8f', '#facc15']; for (k = 0; k < 15; k++) h += '<rect x="' + (60 + k * 14) + '" y="' + (182 - k * 1.2) + '" width="10" height="8" fill="' + flagCols[k % 5] + '"/>'; h += '</g><line x1="56" y1="186" x2="270" y2="164" stroke="#5b4630" stroke-width="1"/>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#c9b28f" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><circle cx="-8" cy="-26" r="5" fill="#f0b429"/><path d="M-8 -21 L-8 -6 M-8 -6 L-13 2 M-8 -6 L-3 2 M-8 -16 L-15 -10" stroke="#d62828" stroke-width="4" stroke-linecap="round" fill="none"/><rect x="-6" y="-22" width="8" height="12" rx="2" fill="#2563c9"/><circle cx="12" cy="-26" r="5" fill="#8a5a33"/><path d="M12 -21 L12 -6 M12 -6 L7 2 M12 -6 L17 2 M12 -16 L19 -10" stroke="#f97316" stroke-width="4" stroke-linecap="round" fill="none"/><rect x="2" y="-24" width="10" height="16" rx="2" fill="#7c3aed"/></g></g>';
     } else if (type === 'trail') {
       h += '<defs><linearGradient id="twSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0f5"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSky)"/>';
       h += '<path d="M0 220 L0 200 L120 190 L330 110 L560 34 L640 34 L760 120 L900 170 L900 220 Z" fill="#6b5b4e"/>';
@@ -599,14 +626,14 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara', coast: 'coach tour along the Costa del Sol', cable: 'cable car ride up to the glaciers', brit: 'train journey across northern England', sled: 'dog-sled ride across the tundra', taiga: 'Trans-Siberian train through the taiga', dunes: '4x4 drive over the dunes' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara', coast: 'coach tour along the Costa del Sol', cable: 'cable car ride up to the glaciers', brit: 'train journey across northern England', sled: 'dog-sled ride across the tundra', taiga: 'Trans-Siberian train through the taiga', dunes: '4x4 drive over the dunes', dubai: 'metro ride through Dubai', monsoon: 'train journey through the monsoon', himal: 'trek with Sherpa guides towards Everest' }[type];
     if (d.sceneLabel) label = d.sceneLabel;
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel|coast|cable|brit|sled|taiga|dunes)$/.test(E.d.scene)) ang = 0;
+    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel|coast|cable|brit|sled|taiga|dunes|dubai|monsoon|himal)$/.test(E.d.scene)) ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
