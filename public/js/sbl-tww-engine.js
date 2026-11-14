@@ -57,7 +57,7 @@
     moscow: soon('moscow', 'Moscow', 37.62, 55.75, 'Moscow Metro', '\uD83D\uDE87', '#991b1b', '\uD83C\uDFF0', 'a megacity, its Metro and cold continental winters'),
     laos: soon('laos', 'Laos', 102.13, 19.89, 'slow boat on the Mekong', '🚤', '#b91c1c', '🛕', 'the Mekong, monks and a landlocked mountain nation'),
     vietnam: soon('vietnam', 'Vietnam', 107.08, 20.91, 'junk boat in Ha Long Bay', '⛵', '#dc2626', '🍜', 'karst bays, rice deltas and fast growth'),
-    philippines: soon('philippines', 'The Philippines', 121.06, 16.92, 'jeepney and bangka boat', '🚌', '#1d4ed8', '🌋', 'volcanoes, typhoons and rice terraces'),
+    philippines: soon('philippines', 'The Philippines', 120.98, 14.6, 'jeepney and bangka boat', '🚌', '#1d4ed8', '🌋', 'volcanoes, typhoons and rice terraces'),
     newyork: soon('newyork', 'New York', -74.0, 40.71, 'yellow cab and subway', '🚕', '#ca8a04', '🗽', 'a world city, migration and skyscrapers'),
     namibia: soon('namibia', 'Namibia', 15.3, -24.7, 'four-by-four across the dunes', '🚙', '#ea580c', '🏜️', 'the Namib Desert and the Skeleton Coast'),
     pakistan: soon('pakistan', 'Pakistan', 74.6, 36.3, 'Karakoram Highway by truck', '🚚', '#15803d', '🏔️', 'the Indus, glaciers and the Karakoram'),
@@ -155,7 +155,7 @@
   '@keyframes twShake{0%,100%{transform:translate(-50%,-50%)}25%,75%{transform:translate(calc(-50% - 7px),-50%)}50%{transform:translate(calc(-50% + 7px),-50%)}}' +
   '.tw-shake{animation:twShake2 .4s}@keyframes twShake2{0%,100%{transform:none}25%,75%{transform:translateX(-7px)}50%{transform:translateX(7px)}}' +
   '.tw-graph{max-width:560px;margin:0 auto 8px}.tw-graph svg{width:100%;height:auto;display:block}' +
-  '.tw-mini{margin:14px 0 0;max-width:340px;border-radius:12px;overflow:hidden;border:2px solid #d6e3ee;background:#fff}.tw-mini svg{display:block;width:100%;height:auto}.tw-mini figcaption{font-size:.72rem;font-weight:700;color:#4b6378;padding:4px 10px;background:#f3f8fd}' +
+  '.tw-mini.tw-mapq{max-width:560px;margin:0 auto 12px}.tw-mini{margin:14px 0 0;max-width:340px;border-radius:12px;overflow:hidden;border:2px solid #d6e3ee;background:#fff}.tw-mini svg{display:block;width:100%;height:auto}.tw-mini figcaption{font-size:.72rem;font-weight:700;color:#4b6378;padding:4px 10px;background:#f3f8fd}' +
   '.tw-under{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}.tw-under .tw-tabs{flex:1}.tw-under .tw-mini{margin:10px 0 0;width:240px;flex:none}' +
   '@media(max-width:760px){.tw-under{flex-direction:column}.tw-under .tw-mini{width:100%;max-width:340px}}' +
   '.tw-flynote{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:#11243bE6;color:#fff;border-radius:12px;padding:8px 14px;text-align:center;font-size:.9rem;line-height:1.35;box-shadow:0 6px 18px #0004;pointer-events:none;max-width:92%}.tw-flynote strong{display:block;font-size:1rem}.tw-flynote b{color:#ffd166}' +
@@ -170,7 +170,7 @@
   '.tw-swim2{animation:twSwim2 16s linear infinite}.tw-swim2.r{animation-direction:reverse}@keyframes twSwim2{from{transform:translateX(-160px)}to{transform:translateX(980px)}}' +
   '.tw-cloud{animation:twDriftC linear infinite}@keyframes twDriftC{from{transform:translateX(-120px)}to{transform:translateX(1000px)}}' +
   '.tw-smoke{animation:twSmoke 4s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom left}@keyframes twSmoke{0%,100%{transform:translate(0,0) scale(1);opacity:.9}50%{transform:translate(10px,-6px) scale(1.15);opacity:.6}}' +
-  '.tw-photo{margin:0 0 12px;border-radius:14px;overflow:hidden;background:#e3ebf2}.tw-photo img{display:block;width:100%;height:240px;object-fit:cover}.tw-photo figcaption{font-size:.72rem;color:#4b6378;padding:5px 10px;background:#f3f8fd}.tw-photo figcaption a{color:#075fa8}' +
+  '.tw-photo-q .tw-photo img{height:300px}.tw-photo{margin:0 0 12px;border-radius:14px;overflow:hidden;background:#e3ebf2}.tw-photo img{display:block;width:100%;height:240px;object-fit:cover}.tw-photo figcaption{font-size:.72rem;color:#4b6378;padding:5px 10px;background:#f3f8fd}.tw-photo figcaption a{color:#075fa8}' +
   '.tw-confetti{position:fixed;top:-14px;width:10px;height:14px;z-index:9999;pointer-events:none;border-radius:2px;animation:twFall linear forwards}@keyframes twFall{to{transform:translate(var(--dx),110vh) rotate(var(--rot))}}' +
   '@media(max-width:760px){.tw-postcard{grid-template-columns:1fr}.tw-bins{grid-template-columns:1fr}.tw-stamp{width:70px;height:70px}}' +
   '@media(prefers-reduced-motion:reduce){#tww *,#tww *::before{animation:none!important;transition:none!important}}';
@@ -283,7 +283,7 @@
   /* Small locator map for a destination: d.locator = { box: [lonW, lonE, latS, latN], places: [[name, lon, lat, pos], ...] }.
      pos: 'r' (default), 'l', 't' or 'b' for a dot with a label; 'a' for an italic area label with no dot.
      Optional: land: [[[lon, lat], ...], ...] extra coastline polygons, rivers: [[[lon, lat], ...]] river lines, and noBase: true to skip the world basemap (for small islands). */
-  function locatorSVG(d) {
+  function locatorSVG(d, skills) {
     var L = d.locator; if (!L || !W) return '';
     var b = L.box, x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9, i, j;
     for (i = 0; i <= 8; i++) for (j = 0; j <= 8; j++) { var q = P(b[0] + (b[1] - b[0]) * i / 8, b[2] + (b[3] - b[2]) * j / 8); x0 = Math.min(x0, q.x); x1 = Math.max(x1, q.x); y0 = Math.min(y0, q.y); y1 = Math.max(y1, q.y); }
@@ -299,7 +299,18 @@
       h2 += '<circle cx="' + q.x.toFixed(2) + '" cy="' + q.y.toFixed(2) + '" r="' + r.toFixed(2) + '" fill="#b42318" stroke="#fff" stroke-width="' + (r * 0.4).toFixed(2) + '"/>' +
         '<text x="' + tx.toFixed(2) + '" y="' + ty.toFixed(2) + '" font-size="' + fs.toFixed(2) + '" font-weight="800" fill="#11243b" text-anchor="' + anchor + '" paint-order="stroke" stroke="#fff" stroke-width="' + (fs * 0.28).toFixed(2) + '">' + esc(pl[0]) + '</text>';
     });
-    return '<figure class="tw-mini"><svg viewBox="' + [x0, y0, w, h].map(function (v) { return v.toFixed(2); }).join(' ') + '" role="img" aria-label="Map of ' + esc(d.short || d.name) + ' showing ' + esc(L.places.filter(function (p) { return p[3] !== 'a'; }).map(function (p) { return p[0]; }).join(', ')) + '"><rect x="' + x0 + '" y="' + y0 + '" width="' + w + '" height="' + h + '" fill="#bfe3f7"/>' + (L.noBase ? '' : '<path d="' + W.d + '" fill="#f6f1e1" stroke="#9c9073" stroke-width="' + (fs * 0.08).toFixed(3) + '"/>') + rv + h2 + '</svg><figcaption>🗺️ Where you are</figcaption></figure>';
+    if (skills) {
+      var mid = (b[2] + b[3]) / 2, lo = (b[0] + b[1]) / 2, pa = P(lo, mid), pb = P(lo + 1, mid), kmPerUnit = 111.32 * Math.cos(mid * Math.PI / 180) / Math.abs(pb.x - pa.x);
+      var target = w * 0.28 * kmPerUnit, nice = [10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000], km = nice[0];
+      nice.forEach(function (n) { if (n <= target) km = n; });
+      var len = km / kmPerUnit, sx = x0 + w * 0.05, sy = y0 + h - fs * 1.1, bh = fs * 0.32, sw = (fs * 0.07).toFixed(3);
+      h2 += '<g class="tw-scale"><rect x="' + (sx - fs * 0.4).toFixed(2) + '" y="' + (sy - fs * 1.5).toFixed(2) + '" width="' + (len + fs * 2.6).toFixed(2) + '" height="' + (fs * 2.2).toFixed(2) + '" rx="' + (fs * 0.3).toFixed(2) + '" fill="#fff" opacity=".85"/>' +
+        '<rect x="' + sx.toFixed(2) + '" y="' + sy.toFixed(2) + '" width="' + (len / 2).toFixed(2) + '" height="' + bh.toFixed(2) + '" fill="#11243b"/><rect x="' + (sx + len / 2).toFixed(2) + '" y="' + sy.toFixed(2) + '" width="' + (len / 2).toFixed(2) + '" height="' + bh.toFixed(2) + '" fill="#fff" stroke="#11243b" stroke-width="' + sw + '"/>' +
+        '<text x="' + sx.toFixed(2) + '" y="' + (sy - fs * 0.3).toFixed(2) + '" font-size="' + (fs * 0.75).toFixed(2) + '" font-weight="700" fill="#11243b" text-anchor="middle">0</text><text x="' + (sx + len).toFixed(2) + '" y="' + (sy - fs * 0.3).toFixed(2) + '" font-size="' + (fs * 0.75).toFixed(2) + '" font-weight="700" fill="#11243b" text-anchor="middle">' + km + ' km</text></g>';
+      var nx = x0 + w - fs * 1.4, ny = y0 + fs * 1.0;
+      h2 += '<g class="tw-north"><circle cx="' + nx.toFixed(2) + '" cy="' + (ny + fs * 0.9).toFixed(2) + '" r="' + (fs * 1.1).toFixed(2) + '" fill="#fff" opacity=".85"/><path d="M' + nx.toFixed(2) + ' ' + (ny + fs * 0.1).toFixed(2) + ' l' + (fs * 0.45).toFixed(2) + ' ' + (fs * 1.4).toFixed(2) + ' l' + (-fs * 0.45).toFixed(2) + ' ' + (-fs * 0.35).toFixed(2) + ' l' + (-fs * 0.45).toFixed(2) + ' ' + (fs * 0.35).toFixed(2) + ' Z" fill="#b42318"/><text x="' + nx.toFixed(2) + '" y="' + (ny + fs * 0.05).toFixed(2) + '" font-size="' + (fs * 0.8).toFixed(2) + '" font-weight="800" fill="#11243b" text-anchor="middle">N</text></g>';
+    }
+    return '<figure class="tw-mini' + (skills ? ' tw-mapq' : '') + '"><svg viewBox="' + [x0, y0, w, h].map(function (v) { return v.toFixed(2); }).join(' ') + '" role="img" aria-label="Map of ' + esc(d.short || d.name) + ' showing ' + esc(L.places.filter(function (p) { return p[3] !== 'a'; }).map(function (p) { return p[0]; }).join(', ')) + '"><rect x="' + x0 + '" y="' + y0 + '" width="' + w + '" height="' + h + '" fill="#bfe3f7"/>' + (L.noBase ? '' : '<path d="' + W.d + '" fill="#f6f1e1" stroke="#9c9073" stroke-width="' + (fs * 0.08).toFixed(3) + '"/>') + rv + h2 + '</svg><figcaption>🗺️ ' + (skills ? 'Map with north arrow and scale bar' : 'Where you are') + '</figcaption></figure>';
   }
   function startExpedition(id) {
     var d = DEST[id];
@@ -378,6 +389,8 @@
     danube: 'M-20 168 C 140 160, 300 176, 460 166 S 740 160, 920 170',
     rhine: 'M-20 172 C 150 164, 300 180, 450 170 S 750 162, 920 174',
     metro: 'M-20 168 L 920 168',
+    junk: 'M-20 176 C 140 168, 300 184, 460 172 S 740 166, 920 178',
+    bangka: 'M-20 172 C 150 164, 300 180, 450 170 S 750 162, 920 174',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
   function sceneMarkup(d) {
@@ -703,6 +716,23 @@
       h += '<rect y="140" width="900" height="12" fill="#c8bba2"/><rect y="152" width="900" height="68" fill="#3b3b3b"/><g stroke="#9aa3ad" stroke-width="3"><line x1="0" y1="184" x2="900" y2="184"/><line x1="0" y1="196" x2="900" y2="196"/></g>';
       h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
       h += '<g id="twStops"></g><g id="twBoat"><g><rect x="-60" y="-26" width="120" height="30" rx="6" fill="#1d4ed8" stroke="#0b1f5c" stroke-width="2"/><rect x="-60" y="-4" width="120" height="5" fill="#93c5fd"/><g fill="#e0f2fe">' + (function () { var g = ''; for (var i = 0; i < 5; i++) g += '<rect x="' + (-52 + i * 22) + '" y="-20" width="16" height="10" rx="2"/>'; return g; })() + '</g><circle cx="58" cy="-6" r="3" fill="#fde047"/></g></g>';
+    } else if (type === 'junk') {
+      h += '<rect width="900" height="220" fill="#d7e7ec"/><g fill="#fff" opacity=".6"><ellipse cx="240" cy="40" rx="120" ry="16"/><ellipse cx="700" cy="30" rx="100" ry="12"/></g>';
+      var KT = [[30, 70, 60], [120, 40, 50], [210, 86, 40], [300, 30, 70], [420, 60, 46], [520, 24, 64], [640, 70, 44], [740, 36, 60], [850, 56, 54]];
+      for (k = 0; k < KT.length; k++) { var kx = KT[k][0], ky = KT[k][1], kw = KT[k][2]; h += '<path d="M' + (kx - kw / 2) + ' 150 C ' + (kx - kw / 2 - 4) + ' ' + (ky + 30) + ', ' + (kx - kw / 3) + ' ' + ky + ', ' + kx + ' ' + ky + ' C ' + (kx + kw / 3) + ' ' + ky + ', ' + (kx + kw / 2 + 4) + ' ' + (ky + 30) + ', ' + (kx + kw / 2) + ' 150 Z" fill="' + (k % 2 ? '#5f7f5a' : '#6f9268') + '" opacity="' + (ky > 60 ? 1 : .8) + '"/><path d="M' + (kx - kw / 2) + ' 150 l' + kw + ' 0 l-4 -6 l' + (-kw + 8) + ' 0 Z" fill="#8d8b78"/>'; }
+      h += '<rect y="150" width="900" height="70" fill="#3f8f8a"/><path d="M0 160 C 200 154, 400 168, 600 158 S 820 156, 900 162 L900 220 L0 220 Z" fill="#4fa39c" opacity=".6"/>';
+      h += '<path class="tw-flow" d="M-20 204 Q 30 198 80 204 T 180 204 T 280 204 T 380 204 T 480 204 T 580 204 T 680 204 T 780 204 T 880 204 T 980 204" fill="none" stroke="#d6f2ee" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#d6f2ee" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-44 -6 Q -46 6 -30 6 L34 6 Q 46 4 46 -10 Z" fill="#7a4a24" stroke="#4a2a12" stroke-width="2"/><rect x="-26" y="-14" width="44" height="8" fill="#e9d6b0" stroke="#4a2a12" stroke-width="1"/><line x1="-10" y1="-14" x2="-10" y2="-58" stroke="#4a2a12" stroke-width="2.5"/><line x1="16" y1="-14" x2="16" y2="-48" stroke="#4a2a12" stroke-width="2"/><path d="M-10 -56 Q 8 -46 4 -18 L-10 -18 Z" fill="#c2410c"/><path d="M16 -46 Q 30 -38 28 -18 L16 -18 Z" fill="#c2410c"/><g stroke="#7c2d12" stroke-width="1"><line x1="-10" y1="-48" x2="6" y2="-46"/><line x1="-10" y1="-38" x2="6" y2="-36"/><line x1="-10" y1="-28" x2="5" y2="-27"/></g></g></g>';
+    } else if (type === 'bangka') {
+      h += '<rect width="900" height="220" fill="#cfe7f6"/><circle cx="120" cy="44" r="22" fill="#ffd166"/>';
+      h += '<path d="M380 150 L560 26 Q 570 18 580 26 L760 150 Z" fill="#6b7a8a"/><path d="M548 34 L560 26 Q 570 18 580 26 L592 34 Q 570 44 548 34 Z" fill="#f4f4f5"/><g fill="#d1d5db" opacity=".9"><ellipse cx="580" cy="12" rx="22" ry="8"/><ellipse cx="600" cy="2" rx="16" ry="6"/></g>';
+      h += '<path d="M0 150 C 80 120, 160 124, 240 140 L260 150 Z" fill="#5f9a4a"/><path d="M700 150 C 780 126, 860 128, 900 136 L900 150 Z" fill="#5f9a4a"/>';
+      h += '<g>'; for (k = 0; k < 6; k++) { var px = 40 + k * 34; h += '<line x1="' + px + '" y1="150" x2="' + (px + 6) + '" y2="' + (112 - (k % 2) * 8) + '" stroke="#7a5a32" stroke-width="3"/><path d="M' + (px + 6) + ' ' + (112 - (k % 2) * 8) + ' l-16 6 M' + (px + 6) + ' ' + (112 - (k % 2) * 8) + ' l14 8 M' + (px + 6) + ' ' + (112 - (k % 2) * 8) + ' l-10 -8 M' + (px + 6) + ' ' + (112 - (k % 2) * 8) + ' l10 -8" stroke="#3f7f2a" stroke-width="3"/>'; } h += '</g>';
+      h += '<rect y="150" width="900" height="70" fill="#1f8fbf"/><path d="M0 160 C 200 154, 400 168, 600 158 S 820 156, 900 162 L900 220 L0 220 Z" fill="#2aa3cf" opacity=".6"/>';
+      h += '<path class="tw-flow" d="M-20 204 Q 30 198 80 204 T 180 204 T 280 204 T 380 204 T 480 204 T 580 204 T 680 204 T 780 204 T 880 204 T 980 204" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-40 -4 Q -44 4 -34 4 L32 4 Q 44 2 44 -8 Z" fill="#f4f4f5" stroke="#1d4ed8" stroke-width="2"/><rect x="-30" y="-6" width="58" height="3" fill="#dc2626"/><g stroke="#7a5a32" stroke-width="2" fill="none"><path d="M-30 -2 Q -40 -14 -56 6"/><path d="M28 -2 Q 38 -14 54 6"/><line x1="-58" y1="6" x2="56" y2="6"/></g><rect x="-14" y="-20" width="26" height="14" fill="#fde68a" stroke="#1d4ed8" stroke-width="1.5"/></g></g>';
     } else if (type === 'trail') {
       h += '<defs><linearGradient id="twSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0f5"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSky)"/>';
       h += '<path d="M0 220 L0 200 L120 190 L330 110 L560 34 L640 34 L760 120 L900 170 L900 220 Z" fill="#6b5b4e"/>';
@@ -721,14 +751,14 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara', coast: 'coach tour along the Costa del Sol', cable: 'cable car ride up to the glaciers', brit: 'train journey across northern England', sled: 'dog-sled ride across the tundra', taiga: 'Trans-Siberian train through the taiga', dunes: '4x4 drive over the dunes', dubai: 'metro ride through Dubai', monsoon: 'train journey through the monsoon', himal: 'trek with Sherpa guides towards Everest', mule: 'mule trek through the High Atlas', vespa: 'Vespa ride around the Bay of Naples', mangrove: 'river boat up the Gambia River', simien: 'trek along the Simien escarpment', adriatic: 'ferry hop along the Dalmatian coast', danube: 'river cruise along the Danube through Budapest', rhine: 'barge trip up the Rhine', metro: 'Metro ride under Moscow' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara', coast: 'coach tour along the Costa del Sol', cable: 'cable car ride up to the glaciers', brit: 'train journey across northern England', sled: 'dog-sled ride across the tundra', taiga: 'Trans-Siberian train through the taiga', dunes: '4x4 drive over the dunes', dubai: 'metro ride through Dubai', monsoon: 'train journey through the monsoon', himal: 'trek with Sherpa guides towards Everest', mule: 'mule trek through the High Atlas', vespa: 'Vespa ride around the Bay of Naples', mangrove: 'river boat up the Gambia River', simien: 'trek along the Simien escarpment', adriatic: 'ferry hop along the Dalmatian coast', danube: 'river cruise along the Danube through Budapest', rhine: 'barge trip up the Rhine', metro: 'Metro ride under Moscow', junk: 'junk boat cruise through Ha Long Bay', bangka: 'bangka outrigger boat beneath Mayon Volcano' }[type];
     if (d.sceneLabel) label = d.sceneLabel;
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel|coast|cable|brit|sled|taiga|dunes|dubai|monsoon|himal|mule|vespa|mangrove|simien|adriatic|danube|rhine|metro)$/.test(E.d.scene)) ang = 0;
+    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel|coast|cable|brit|sled|taiga|dunes|dubai|monsoon|himal|mule|vespa|mangrove|simien|adriatic|danube|rhine|metro|junk|bangka)$/.test(E.d.scene)) ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
@@ -763,6 +793,8 @@
     var box = $('#twTask'); E.task = task;
     var h = header(s, task);
     if (task.graph) h += '<div class="tw-graph">' + climateSVG(E.d.climate) + '</div>';
+    if (task.map) h += locatorSVG(E.d, true);
+    if (task.photo) h += '<div class="tw-photo-q">' + photoHTML(task.photo === true ? E.d : { photo: task.photo }) + '</div>';
     if (task.type === 'mcq') {
       var opts = shuffle(task.options.map(function (o, i) { return { t: o, ok: i === task.answer }; })); E.opts = opts;
       h += '<p class="tw-q">' + esc(task.q) + '</p><div class="tw-opts">' + opts.map(function (o, i) { return '<button type="button" class="tw-opt" data-i="' + i + '">' + esc(o.t) + '</button>'; }).join('') + '</div>';
