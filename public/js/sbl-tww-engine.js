@@ -19,8 +19,8 @@
   function P(lon, lat) { return { x: 996 + 5.56 * lon * interp(RX, lat), y: 520.6 - (lat < 0 ? -1 : 1) * 516 * interp(RY, lat) }; }
   var HOME = { id: 'home', name: 'Bangkok', map: P(100.5, 13.75), lonlat: [100.5, 13.75] };
   // Suggested round-the-world route, east from Thailand and back again.
-  var ORDER = ['bangkok', 'malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'alaska', 'canada', 'california', 'colorado', 'mexico', 'costarica', 'panama', 'barbados', 'andes', 'amazon', 'argentina',
-    'southafrica', 'madagascar', 'malawi', 'tanzania', 'kenya', 'congo', 'egypt', 'sahara', 'gambia', 'morocco', 'spain', 'italy', 'france', 'uk', 'iceland', 'arctic', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'oman', 'india', 'everest', 'bhutan', 'china', 'southkorea', 'japan'];
+  var ORDER = ['bangkok', 'laos', 'vietnam', 'philippines', 'malaysia', 'singapore', 'indonesia', 'australia', 'newzealand', 'hawaii', 'alaska', 'canada', 'newyork', 'california', 'colorado', 'mexico', 'costarica', 'panama', 'barbados', 'andes', 'amazon', 'argentina', 'namibia',
+    'southafrica', 'madagascar', 'malawi', 'tanzania', 'kenya', 'congo', 'ethiopia', 'sudan', 'egypt', 'sahara', 'gambia', 'morocco', 'spain', 'italy', 'croatia', 'hungary', 'germany', 'france', 'uk', 'iceland', 'arctic', 'moscow', 'russia', 'mongolia', 'kazakhstan', 'saudi', 'uae', 'oman', 'pakistan', 'india', 'everest', 'bhutan', 'china', 'southkorea', 'japan'];
   function soon(id, name, lon, lat, t, emoji, colour, icon, theme) { return { id: id, name: name, map: P(lon, lat), lonlat: [lon, lat], theme: theme, transport: { name: t, emoji: emoji }, stamp: { colour: colour, icon: icon } }; }
   var SOON = {
     malaysia: soon('malaysia', 'Malaysia', 101.4, 4.5, 'longboat', '🚣', '#2563c9', '🌴', 'rainforest, tea plantations and palm oil'),
@@ -49,6 +49,18 @@
     uae: soon('uae', 'UAE', 55.3, 25.2, 'metro', '🚇', '#0f766e', '🏙️', 'Dubai’s artificial islands'),
     india: soon('india', 'India', 72.9, 19.1, 'train', '🚆', '#ea580c', '🌧️', 'the monsoon and Mumbai'),
     everest: soon('everest', 'Mount Everest', 86.9, 28, 'climb with Sherpa guides', '🧗', '#3b5ba8', '🏔️', 'the Himalaya'),
+    ethiopia: soon('ethiopia', 'Ethiopia', 38.4, 13.2, 'trek in the Simien Mountains', '\uD83E\uDD7E', '#16a34a', '\u2615', 'highlands, the Blue Nile and coffee'),
+    sudan: soon('sudan', 'Sudan', 32.53, 15.6, 'Nile ferry', '\u26F4\uFE0F', '#b45309', '\uD83C\uDFDC\uFE0F', 'where the two Niles meet'),
+    croatia: soon('croatia', 'Croatia', 16.44, 43.51, 'island-hopping ferry', '\u26F4\uFE0F', '#1d4ed8', '\u26F5', 'karst landscapes and the Adriatic coast'),
+    hungary: soon('hungary', 'Hungary', 19.04, 47.5, 'Danube river cruise', '\uD83D\uDEA2', '#15803d', '\u2668\uFE0F', 'the Danube, the Great Plain and thermal springs'),
+    germany: soon('germany', 'Germany', 6.95, 50.94, 'Rhine barge and ICE train', '\uD83D\uDE84', '#374151', '\uD83C\uDFED', 'the Rhine, industry and energy transition'),
+    moscow: soon('moscow', 'Moscow', 37.62, 55.75, 'Moscow Metro', '\uD83D\uDE87', '#991b1b', '\uD83C\uDFF0', 'a megacity, its Metro and cold continental winters'),
+    laos: soon('laos', 'Laos', 102.13, 19.89, 'slow boat on the Mekong', '🚤', '#b91c1c', '🛕', 'the Mekong, monks and a landlocked mountain nation'),
+    vietnam: soon('vietnam', 'Vietnam', 107.08, 20.91, 'junk boat in Ha Long Bay', '⛵', '#dc2626', '🍜', 'karst bays, rice deltas and fast growth'),
+    philippines: soon('philippines', 'The Philippines', 121.06, 16.92, 'jeepney and bangka boat', '🚌', '#1d4ed8', '🌋', 'volcanoes, typhoons and rice terraces'),
+    newyork: soon('newyork', 'New York', -74.0, 40.71, 'yellow cab and subway', '🚕', '#ca8a04', '🗽', 'a world city, migration and skyscrapers'),
+    namibia: soon('namibia', 'Namibia', 15.3, -24.7, 'four-by-four across the dunes', '🚙', '#ea580c', '🏜️', 'the Namib Desert and the Skeleton Coast'),
+    pakistan: soon('pakistan', 'Pakistan', 74.6, 36.3, 'Karakoram Highway by truck', '🚚', '#15803d', '🏔️', 'the Indus, glaciers and the Karakoram'),
     morocco: soon('morocco', 'Morocco', -7.6, 31.6, 'mule trek in the Atlas Mountains', '\uD83E\uDECF', '#b91c1c', '\uD83D\uDD4C', 'the Atlas Mountains and the desert edge'),
     italy: soon('italy', 'Italy', 14.4, 40.8, 'Vespa scooter', '\uD83D\uDEF5', '#15803d', '\uD83C\uDF0B', 'Vesuvius and Venice\u2019s floods'),
     mongolia: soon('mongolia', 'Mongolia', 106.9, 47.9, 'horse ride across the steppe', '\uD83D\uDC0E', '#0369a1', '\u26FA', 'steppe grasslands and nomadic herders'),
@@ -360,6 +372,8 @@
     mule: 'M-20 200 C 100 196, 180 176, 280 172 S 420 140, 500 136 S 680 150, 760 128 S 860 112, 920 108',
     vespa: 'M-20 208 C 140 206, 260 210, 400 207 S 640 204, 760 208 S 860 210, 920 206',
     mangrove: 'M-20 150 C 150 140, 300 160, 450 150 S 750 140, 920 152',
+    simien: 'M-20 160 C 120 156, 220 150, 340 152 S 560 160, 680 150 S 840 146, 920 148',
+    adriatic: 'M-20 150 C 150 140, 300 160, 450 148 S 750 138, 920 150',
     trail: 'M40 206 L250 192 L150 168 L380 150 L280 126 L470 108 L390 86 L560 70 L470 52 L600 40'
   };
   function sceneMarkup(d) {
@@ -639,6 +653,23 @@
       h += '<rect y="196" width="900" height="24" fill="#3f8f3a"/>';
       h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
       h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-40 -4 Q-46 -4 -42 4 L40 4 Q46 -4 40 -4 Z" fill="#1d4ed8" stroke="#0b1b45" stroke-width="2"/><path d="M-40 -4 L40 -4" stroke="#facc15" stroke-width="3"/><rect x="-20" y="-20" width="34" height="16" fill="#f4f1de" stroke="#5b4630" stroke-width="1.5"/><path d="M-24 -20 L-3 -28 L18 -20 Z" fill="#b91c1c"/></g></g>';
+    } else if (type === 'simien') {
+      h += '<rect width="900" height="220" fill="#bcdcf2"/><g fill="#fff" opacity=".8"><ellipse cx="220" cy="40" rx="80" ry="14"/><ellipse cx="660" cy="30" rx="100" ry="16"/></g>';
+      h += '<path d="M0 220 L0 120 L60 110 L90 150 L130 104 L170 160 L210 100 L260 170 L300 120 L350 180 L900 180 L900 220 Z" fill="#6b7a5a"/>';
+      h += '<path d="M0 220 L0 176 C 200 168, 400 172, 600 166 S 820 168, 900 166 L900 220 Z" fill="#9cb86a"/>';
+      h += '<path d="M380 166 L420 110 L900 104 L900 166 Z" fill="#7f9a52"/><path d="M380 166 L420 110 L436 110 L400 166 Z" fill="#5b6b42"/>';
+      h += '<g fill="#3f6f2a">'; for (k = 0; k < 8; k++) { var lx = 470 + k * 52; h += '<rect x="' + lx + '" y="' + (86 + (k % 2) * 6) + '" width="4" height="22"/><ellipse cx="' + (lx + 2) + '" cy="' + (84 + (k % 2) * 6) + '" rx="5" ry="9"/>'; } h += '</g>';
+      h += '<g fill="#8a6a4a">'; for (k = 0; k < 5; k++) h += '<ellipse cx="' + (120 + k * 140) + '" cy="' + (196 + (k % 2) * 6) + '" rx="8" ry="5"/>'; h += '</g>';
+      h += '<path d="' + P2 + '" fill="none" stroke="#c9b28f" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/><path id="twRiver" d="' + P2 + '" fill="none" stroke="none"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><circle cx="0" cy="-26" r="5" fill="#8a5a33"/><path d="M0 -21 L0 -6 M0 -6 L-5 2 M0 -6 L5 2 M0 -16 L-7 -10 M0 -16 L8 -24" stroke="#f8fafc" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M-6 -22 L6 -22 L4 -8 L-4 -8 Z" fill="#f8fafc" stroke="#16a34a" stroke-width="1.5"/><line x1="8" y1="-24" x2="10" y2="2" stroke="#7a5a32" stroke-width="2"/></g></g>';
+    } else if (type === 'adriatic') {
+      h += '<rect width="900" height="220" fill="#cfeaf8"/><circle cx="780" cy="36" r="20" fill="#ffd166"/>';
+      h += '<path d="M0 110 C 60 70, 140 70, 200 106 Z" fill="#b8c49a"/><path d="M520 108 C 590 66, 700 66, 760 104 Z" fill="#b8c49a"/><path d="M320 104 C 360 80, 420 80, 460 102 Z" fill="#c9cfa6"/>';
+      h += '<g fill="#e9dcc2" stroke="#9a8a6a" stroke-width="1">'; for (k = 0; k < 7; k++) h += '<rect x="' + (40 + k * 18) + '" y="' + (92 - (k % 3) * 6) + '" width="14" height="' + (16 + (k % 3) * 6) + '"/>'; h += '</g><g fill="#c2410c">'; for (k = 0; k < 7; k++) h += '<path d="M' + (38 + k * 18) + ' ' + (92 - (k % 3) * 6) + ' l9 -6 l9 6 Z"/>'; h += '</g>';
+      h += '<rect y="104" width="900" height="116" fill="#1f8fbf"/><path d="M0 130 C 150 120, 300 140, 450 126 S 750 120, 900 132 L900 220 L0 220 Z" fill="#2aa3cf" opacity=".6"/>';
+      h += '<path class="tw-flow" d="M-20 180 Q 30 174 80 180 T 180 180 T 280 180 T 380 180 T 480 180 T 580 180 T 680 180 T 780 180 T 880 180 T 980 180" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="30 30"/>';
+      h += '<path id="twRiver" d="' + P2 + '" fill="none" stroke="#e6f6ff" stroke-width="2" stroke-dasharray="3 9" opacity=".7"/>';
+      h += '<g id="twStops"></g><g id="twBoat"><g class="tw-bob"><path d="M-44 -4 L40 -4 L32 8 L-38 8 Z" fill="#fff" stroke="#1e3a8a" stroke-width="2"/><rect x="-36" y="-16" width="56" height="12" fill="#f4f4f5" stroke="#1e3a8a" stroke-width="1.5"/><rect x="-36" y="-10" width="56" height="3" fill="#1d4ed8"/><g fill="#1e293b"><rect x="-32" y="-14" width="8" height="4"/><rect x="-20" y="-14" width="8" height="4"/><rect x="-8" y="-14" width="8" height="4"/><rect x="4" y="-14" width="8" height="4"/></g><rect x="-4" y="-26" width="10" height="10" fill="#dc2626"/></g></g>';
     } else if (type === 'trail') {
       h += '<defs><linearGradient id="twSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd0f5"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient></defs><rect width="900" height="220" fill="url(#twSky)"/>';
       h += '<path d="M0 220 L0 200 L120 190 L330 110 L560 34 L640 34 L760 120 L900 170 L900 220 Z" fill="#6b5b4e"/>';
@@ -657,14 +688,14 @@
         '<g id="twStops"></g>' +
         '<g id="twBoat"><g class="tw-bob"><path d="M-26 0 Q0 14 26 0 L20 -4 L-20 -4 Z" fill="#8a4b20" stroke="#5b2e10" stroke-width="2"/><circle cx="-4" cy="-14" r="5" fill="#f0b429"/><rect x="-8" y="-10" width="8" height="8" rx="2" fill="#b42318"/><line x1="4" y1="-16" x2="16" y2="4" stroke="#5b3b22" stroke-width="2.5"/></g></g>';
     }
-    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara', coast: 'coach tour along the Costa del Sol', cable: 'cable car ride up to the glaciers', brit: 'train journey across northern England', sled: 'dog-sled ride across the tundra', taiga: 'Trans-Siberian train through the taiga', dunes: '4x4 drive over the dunes', dubai: 'metro ride through Dubai', monsoon: 'train journey through the monsoon', himal: 'trek with Sherpa guides towards Everest', mule: 'mule trek through the High Atlas', vespa: 'Vespa ride around the Bay of Naples', mangrove: 'river boat up the Gambia River' }[type];
+    var label = { sea: 'boat trip out to the reef', river: 'river journey by ' + d.transport.name, rail: 'train journey across the city', trail: 'hike up the volcano', braided: 'jet boat ride up a braided river', heli: 'helicopter flight over the volcano', plane: 'bush plane flight over the tundra', road: 'road trip along the coast', canyon: 'white-water raft trip through the canyon', city: 'bus ride across the city', zip: 'zip line through the cloud forest', canal: 'voyage through the canal locks', terrace: 'llama trek past the terraces', pampas: 'gaucho horse ride across the Pampas', savanna: 'safari drive across the savanna', redroad: 'taxi-brousse ride along a red dirt road', lake: 'dugout canoe trip on the lake', kili: 'climb up Kilimanjaro', rift: 'safari drive along the Rift Valley floor', barge: 'river barge trip on the Congo', nile: 'felucca trip on the Nile', camel: 'camel trek across the Sahara', coast: 'coach tour along the Costa del Sol', cable: 'cable car ride up to the glaciers', brit: 'train journey across northern England', sled: 'dog-sled ride across the tundra', taiga: 'Trans-Siberian train through the taiga', dunes: '4x4 drive over the dunes', dubai: 'metro ride through Dubai', monsoon: 'train journey through the monsoon', himal: 'trek with Sherpa guides towards Everest', mule: 'mule trek through the High Atlas', vespa: 'Vespa ride around the Bay of Naples', mangrove: 'river boat up the Gambia River', simien: 'trek along the Simien escarpment', adriatic: 'ferry hop along the Dalmatian coast' }[type];
     if (d.sceneLabel) label = d.sceneLabel;
     return '<svg viewBox="0 0 900 220" role="img" aria-label="Your ' + esc(label) + '">' + h + '</svg>';
   }
   function placeBoat(path, len) {
     var p = path.getPointAtLength(len), p2 = path.getPointAtLength(Math.min(path.getTotalLength(), len + 2));
     var ang = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
-    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel|coast|cable|brit|sled|taiga|dunes|dubai|monsoon|himal|mule|vespa|mangrove)$/.test(E.d.scene)) ang = 0;
+    if ((E.d.scene || 'river') === 'trail' || /^(heli|zip|canal|terrace|pampas|savanna|redroad|lake|kili|rift|barge|nile|camel|coast|cable|brit|sled|taiga|dunes|dubai|monsoon|himal|mule|vespa|mangrove|simien|adriatic)$/.test(E.d.scene)) ang = 0;
     $('#twBoat').setAttribute('transform', 'translate(' + p.x.toFixed(1) + ' ' + p.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')');
   }
   function moveTo(pos, cb) {
