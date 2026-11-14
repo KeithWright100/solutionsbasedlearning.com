@@ -407,7 +407,7 @@
     "title": "Travel the Wright Way: IGCSE and IB",
     "href": "/geography/games/travel-the-wright-way-advanced",
     "level": "IGCSE and IB Geography",
-    "tag": "New · 35 destinations",
+    "tag": "New · 38 destinations",
     "desc": "The exam-level version: fly from Thailand around the world and tackle climate graph calculations, plate tectonics, ecosystems, development and sustainable management at each destination."
   },
 {
@@ -415,7 +415,7 @@
     "title": "Travel the Wright Way",
     "href": "/geography/games/travel-the-wright-way",
     "level": "KS3 Geography",
-    "tag": "New · 35 destinations",
+    "tag": "New · 38 destinations",
     "desc": "Start in Thailand and travel the world. At each destination explore by canoe, camel, longboat and more, then label diagrams, read climate graphs and photos, and answer questions on places, people and culture to earn passport stamps."
   }
 ];
