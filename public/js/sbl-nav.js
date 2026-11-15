@@ -144,6 +144,7 @@
           ['Tropical Storm Mission', '/geography/games/tropical-storm-mission'],
           ['Ruapehu Mission', '/geography/games/volcano-fantastic-place'],
           ['How Does Life Vary?', '/geography/games/life-around-the-world'],
+          ['Build a Climate Graph: Oslo', '/geography/games/climate-graph-oslo', 'new'],
           ['History', '', 'head'],
           ['Tomb of the First Emperor', '/geography/games/qin-tomb'],
           ['All KS3 games', '/geography/games#ks3']] },

@@ -417,9 +417,17 @@
     "level": "KS3 Geography",
     "tag": "New · 74 destinations",
     "desc": "Start in Thailand and travel the world. At each destination explore by canoe, camel, longboat and more, then label diagrams, read climate graphs and photos, and answer questions on places, people and culture to earn passport stamps."
+  },
+{
+    "slug": "climate-graph-oslo",
+    "title": "Build a Climate Graph: Oslo",
+    "href": "/geography/games/climate-graph-oslo",
+    "level": "KS3 Geography",
+    "tag": "New · Climate graphs",
+    "desc": "Watch a climate graph for Oslo built step by step: choose the axes and scales, plot the rainfall bars and temperature line, then read the graph."
   }
 ];
-  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest", "food-health-quest", "travel-the-wright-way", "danillion", "life-around-the-world", "japan-ageing", "danillion-deep", "travel-the-wright-way-advanced"];
+  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest", "food-health-quest", "travel-the-wright-way", "danillion", "life-around-the-world", "japan-ageing", "danillion-deep", "travel-the-wright-way-advanced", "climate-graph-oslo"];
   function weekStart(d) {
     var t = (d ? d.getTime() : Date.now()) + 7 * 3600000; /* Bangkok, UTC+7 */
     var x = new Date(t), day = (x.getUTCDay() + 6) % 7; /* Monday = 0 */
