@@ -409,6 +409,36 @@ cursor:pointer;
           options: ['A sudden rise in sea level pushed onshore by the storm', 'A very strong gust of wind that knocks down trees', 'The path the storm travels along as it moves across the land', 'A type of tropical storm that is found only in Asia'],
           correct: 0,
           explain: 'A storm surge is a wall of sea water pushed ashore by the storm’s winds and low pressure — it causes major coastal flooding.'
+        },
+        {
+          q: "In the Atlantic Ocean, what is a tropical storm called?",
+          options: ["A hurricane", "A typhoon", "A cyclone", "A tornado"],
+          correct: 0,
+          explain: "In the Atlantic and north-east Pacific they are hurricanes, in the north-west Pacific typhoons, and in the Indian Ocean cyclones. They are all the same type of storm."
+        },
+        {
+          q: "Why does a tropical storm get weaker when it moves over land?",
+          options: ["It loses its supply of warm, moist air from the ocean", "The sun is much weaker over land than over the sea", "The wind always changes direction when it reaches land", "The ground soaks up all of the storm’s energy at once"],
+          correct: 0,
+          explain: "Warm, moist air rising from the ocean is the storm’s fuel. Over land that supply is cut off, and friction with the ground slows the winds too."
+        },
+        {
+          q: "Which way do tropical storms spin in the Northern Hemisphere?",
+          options: ["Anticlockwise", "Clockwise", "They do not spin at all", "It changes every few hours"],
+          correct: 0,
+          explain: "The Coriolis effect, caused by the Earth spinning, makes them turn anticlockwise in the Northern Hemisphere and clockwise in the Southern Hemisphere."
+        },
+        {
+          q: "Which of these would help to REDUCE the impacts of a tropical storm?",
+          options: ["Building storm shelters and giving early warnings", "Building more homes right on the coast", "Cutting down mangrove forests along the coast", "Waiting until the storm arrives before leaving"],
+          correct: 0,
+          explain: "Shelters, warnings and evacuation plans save lives. Mangroves actually protect the coast by slowing down waves and storm surges."
+        },
+        {
+          q: "Where do most tropical storms form?",
+          options: ["Between about 5° and 30° north and south of the Equator", "Exactly on the Equator", "Near the North and South Poles", "Only in the Southern Hemisphere"],
+          correct: 0,
+          explain: "They form over warm seas in the tropics, but not right on the Equator, where the Coriolis effect is too weak to make them spin."
         }
       ]
     },
@@ -443,10 +473,40 @@ cursor:pointer;
           explain: 'Contour lines join points of equal height. Lines close together show steep slopes; lines far apart show gentle slopes.'
         },
         {
-          q: 'Which continent is entirely south of the Equator?',
+          q: 'Which continent surrounds the South Pole?',
           options: ['Africa', 'South America', 'Australia', 'Antarctica'],
           correct: 3,
-          explain: 'Antarctica lies entirely south of the Equator. Africa and South America are crossed by it, and Australia is south of it but not the only correct type of answer here — Antarctica is fully south.'
+          explain: 'Antarctica is the continent around the South Pole. It is the coldest, windiest and driest continent.'
+        },
+        {
+          q: "Which direction is halfway between North and East?",
+          options: ["North-East", "South-East", "North-West", "East-South"],
+          correct: 0,
+          explain: "The direction between North and East is North-East. The other in-between points are South-East, South-West and North-West."
+        },
+        {
+          q: "What are lines of latitude?",
+          options: ["Imaginary lines running east–west, showing how far north or south a place is", "Imaginary lines running north–south, showing how far east or west a place is", "Lines joining places of the same height", "Lines showing the borders between countries"],
+          correct: 0,
+          explain: "Latitude lines run around the Earth parallel to the Equator (0°). Lines of longitude run from pole to pole."
+        },
+        {
+          q: "The Prime Meridian (0° longitude) runs through which place?",
+          options: ["Greenwich, London", "Paris", "New York", "Bangkok"],
+          correct: 0,
+          explain: "The Prime Meridian passes through Greenwich in London. Places are measured as east or west of it."
+        },
+        {
+          q: "Why is a six-figure grid reference better than a four-figure one?",
+          options: ["It pinpoints a place inside the grid square", "It covers a much bigger area", "It is quicker to read", "It shows the height of the land"],
+          correct: 0,
+          explain: "A four-figure reference only names a whole grid square. A six-figure reference splits the square into tenths to find an exact spot."
+        },
+        {
+          q: "On most maps, what does a thin blue line show?",
+          options: ["A river or stream", "A main road", "A railway line", "A footpath"],
+          correct: 0,
+          explain: "Blue is used for water: rivers, streams, lakes and the sea."
         }
       ]
     },
@@ -485,6 +545,36 @@ cursor:pointer;
           options: ['Better access to education for girls and women', 'Improved access to contraception and family planning', 'A strong cultural preference for large families', 'Rising costs of raising and educating children'],
           correct: 2,
           explain: 'A cultural preference for large families tends to raise birth rates. The other options are all factors that typically lower birth rates.'
+        },
+        {
+          q: "What is migration?",
+          options: ["The movement of people from one place to another to live", "The number of babies born in a year", "The number of people living in one square kilometre", "The growth of towns and cities"],
+          correct: 0,
+          explain: "Migration is when people move to live somewhere else, either within a country or to another country."
+        },
+        {
+          q: "What is a \"push factor\"?",
+          options: ["Something that makes people want to leave a place", "Something that attracts people to a new place", "A law that stops people moving", "The cost of travelling to a new country"],
+          correct: 0,
+          explain: "Push factors, such as war, a lack of jobs or natural disasters, make people want to leave. Pull factors, such as jobs and safety, attract them somewhere new."
+        },
+        {
+          q: "Which continent has the largest population?",
+          options: ["Asia", "Africa", "Europe", "South America"],
+          correct: 0,
+          explain: "Asia has more than half of the world’s population, including China and India."
+        },
+        {
+          q: "What is \"natural increase\"?",
+          options: ["The birth rate minus the death rate", "The number of people who move into a country", "The total population of a country", "The number of people living in cities"],
+          correct: 0,
+          explain: "If more people are born than die, the population grows by natural increase. Migration is not included."
+        },
+        {
+          q: "What is a megacity?",
+          options: ["A city with more than 10 million people", "Any capital city", "A city built on the coast", "A city with lots of tall buildings"],
+          correct: 0,
+          explain: "A megacity has a population of over 10 million people. Examples include Tokyo, Delhi and Mexico City."
         }
       ]
     }
@@ -613,14 +703,26 @@ cursor:pointer;
     picker.appendChild(card);
   });
 
+  // Each quiz is also its own game: /geography/quizzes/?quiz=storms (or
+  // mapskills, population) opens that quiz straight away, without the picker.
+  var direct = null;
+  try { var want = new URLSearchParams(location.search).get('quiz'); direct = QUIZZES.find(function (x) { return x.id === want; }) || null; } catch (e) {}
+  if (direct) {
+    var tmp = document.createElement('div'); tmp.innerHTML = direct.title;
+    document.title = 'KS3 Geography Quiz: ' + tmp.textContent + ' — SBL';
+    document.querySelector('.wrap h1').innerHTML = direct.emoji + ' ' + direct.title + ' Quiz';
+    document.querySelector('.wrap .subtitle').textContent = direct.blurb + ' ' + direct.questions.length + ' questions. Stuck on a term? Tap the Geography Helper in the corner for a quick hint.';
+    picker.style.display = 'none';
+  }
+
   function startQuiz(quiz) {
     activeQuiz = quiz;
     qIndex = 0;
     score = 0;
     panel.classList.add('is-active');
-    panelTitle.textContent = quiz.emoji + ' ' + quiz.title;
+    panelTitle.innerHTML = quiz.emoji + ' ' + quiz.title;
     renderQuestion();
-    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!direct) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function renderQuestion() {
@@ -690,15 +792,17 @@ cursor:pointer;
       '<div class="score">' + score + ' / ' + total + '</div>' +
       '<p>' + msg + '</p>' +
       '<button type="button" class="btn" id="quizRetryBtn">Try again</button> ' +
-      '<button type="button" class="btn ghost" id="quizBackBtn">Choose another quiz</button>' +
+      (direct ? '<a class="btn ghost" href="/geography/games#ks3-general" style="text-decoration:none">Back to the games</a>' : '<button type="button" class="btn ghost" id="quizBackBtn">Choose another quiz</button>') +
       '</div>';
 
     document.getElementById('quizRetryBtn').addEventListener('click', function () { startQuiz(activeQuiz); });
-    document.getElementById('quizBackBtn').addEventListener('click', function () {
+    if (!direct) document.getElementById('quizBackBtn').addEventListener('click', function () {
       panel.classList.remove('is-active');
       picker.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
+
+  if (direct) startQuiz(direct);
 
   /* ==================== GEOGRAPHY HELPER UI ==================== */
 
