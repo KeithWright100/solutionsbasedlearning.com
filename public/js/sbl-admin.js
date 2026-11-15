@@ -539,6 +539,7 @@
         '<td>' + badge + '</td>' +
         '<td>' + formatDate(u.created_at) + '</td>' +
         '<td class="sbl-table-actions">' +
+          '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="rename" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '">Rename</button>' +
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="reset-password" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '">Reset Password</button>' +
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="temp-password" data-id="' + u.id + '" data-name="' + escapeHtml(u.full_name) + '" title="Set a new password now and show it to you — no email needed">Set temp password</button>' +
           '<button class="sbl-btn sbl-btn--secondary sbl-btn--small" data-action="' + toggleAction + '" data-id="' + u.id + '">' + toggleLabel + '</button>' +
@@ -749,6 +750,7 @@
     if (action === 'make-student') return handleSetRole(id, 'student', btn);
     if (action === 'reset-password') return handleResetPassword(id, btn.getAttribute('data-name'), btn);
     if (action === 'temp-password') return handleTempPassword(id, btn.getAttribute('data-name'), btn);
+    if (action === 'rename') return handleRename(id, btn.getAttribute('data-name'), btn);
     if (action === 'view-feedback') {
       var fb = state.feedback.find(function (f) { return f.id === id; });
       if (fb) openFeedbackModal(fb);
@@ -810,6 +812,34 @@
         loadData();
       });
     });
+    });
+  }
+
+  // Rename an account (e.g. a teacher saved as initials). Teachers'
+  // names should end in the surname students choose when signing up.
+  function handleRename(id, current, btn) {
+    var html = 'New name for <b>' + escapeHtml(current || '') + '</b>:<br><input type="text" id="sblRenameInput" maxlength="100" style="width:100%;margin-top:.6rem;padding:.5rem;font-size:1rem;" value="' + escapeHtml(current || '') + '">' +
+      '<div class="sbl-muted" style="font-size:.8rem;margin-top:.4rem;">For teachers, end with the surname students pick at sign-up, e.g. Mr Mitcheson.</div>';
+    var asked = sblAsk(html, [['save', 'Save'], [null, 'Cancel']], true);
+    var input = document.getElementById('sblRenameInput');
+    if (input) {
+      input.focus(); input.select();
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { var b = input.closest('.sbl-ask').querySelector('.sbl-btn--primary'); if (b) b.click(); }
+      });
+    }
+    asked.then(function (v) {
+      if (v !== 'save' || !input) return;
+      var name = input.value.replace(/\s+/g, ' ').trim();
+      if (!name || name === current) return;
+      clearMessages();
+      withButtonBusy(btn, 'Saving…', function () {
+        return postJson('/api/admin/action', { action: 'rename', userId: id, fullName: name }).then(function (result) {
+          if (!result.ok) { showError(result.data.error || 'Could not rename this account.'); return; }
+          showNotice('Renamed to ' + name + '.');
+          loadData();
+        });
+      });
     });
   }
 

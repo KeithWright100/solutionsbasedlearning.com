@@ -54,6 +54,7 @@ export default async function handler(req, res) {
   if (action === 'bulk-assign') return handleBulkAssign(req, res, session);
   if (action === 'reset-password') return handleResetPassword(req, res, session);
   if (action === 'temp-password') return handleTempPassword(req, res, session);
+  if (action === 'rename') return handleRename(req, res, session);
   if (action === 'mark-feedback') return handleMarkFeedback(req, res, session);
   if (action === 'set-game-of-week') return handleSetGameOfWeek(req, res, session);
   if (action === 'p3-codes') return handleP3Codes(req, res, session);
@@ -220,6 +221,25 @@ function makeTempPassword() {
   const word1 = w(); let word2 = w(); while (word2 === word1) word2 = w();
   return word1.charAt(0).toUpperCase() + word1.slice(1) + '-' + word2 + '-' + (10 + randomInt(90));
 }
+// rename — { userId, fullName }
+// Changes the name shown for an account (e.g. a teacher saved as
+// initials). Teacher names should end in the surname students pick on
+// the sign-up form, so sign-up choices can be matched automatically.
+async function handleRename(req, res, session) {
+  const userId = req.body && req.body.userId;
+  const fullName = String((req.body && req.body.fullName) || '').replace(/\s+/g, ' ').trim();
+  if (!userId) return res.status(400).json({ error: 'userId is required.' });
+  if (!fullName || fullName.length > 100) return res.status(400).json({ error: 'Enter a name (up to 100 characters).' });
+  const supabase = getSupabaseAdmin();
+  const { error } = await supabase.from('sbl_profiles').update({ full_name: fullName }).eq('id', userId);
+  if (error) {
+    console.error('Failed to rename user:', error);
+    return res.status(500).json({ error: 'Could not save the new name.' });
+  }
+  try { await supabase.auth.admin.updateUserById(userId, { user_metadata: { full_name: fullName } }); } catch (e) { /* profile name is what the site shows */ }
+  return res.status(200).json({ ok: true, fullName });
+}
+
 async function handleTempPassword(req, res, session) {
   const { userId } = req.body || {};
   if (!userId) return res.status(400).json({ error: 'userId is required.' });
