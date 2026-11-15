@@ -81,7 +81,13 @@
         </div>
       </fieldset>
 
-      <fieldset class="sbl-fieldset">
+      <fieldset class="sbl-fieldset" id="subjectFieldset" style="display:none;">
+        <legend>Your Subjects and Teachers</legend>
+        <p style="margin:0 0 .8rem;font-size:.92rem;">Tick each subject you study, then choose your teacher for that subject.</p>
+        <div id="subjectRows"></div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset" id="professionalFieldset">
         <legend>Professional Interest</legend>
         <div class="sbl-field">
           <label for="reason" id="reasonLabel">Why would you like access to Solutions Based Learning?</label>
@@ -144,6 +150,34 @@
   var reasonLabel = document.getElementById('reasonLabel');
   var reasonInput = document.getElementById('reason');
   var interestFieldset = document.getElementById('interestFieldset');
+  var professionalFieldset = document.getElementById('professionalFieldset');
+  var subjectFieldset = document.getElementById('subjectFieldset');
+
+  // Students tick their subjects and pick a teacher for each. The
+  // choices are written into the application's "reason" text, so they
+  // show in the admin dashboard without any database changes.
+  var SUBJECTS = ['Geography', 'History', 'Business', 'Economics'];
+  var TEACHERS = ['Ms Bond', 'Mr Dale', 'Ms Conroy', 'Mr Fieldhouse', 'Mr Fountain', 'Mr Ghazi', 'Ms Hobday', 'Mr Mitcheson', 'Mr Munir', 'Mr O’Shea', 'Ms Pembleton', 'Ms Richards', 'Mr Mark Stewart', 'Mr Sam Stuart', 'Mr Thatcher', 'Mr Worrall', 'Mr Wright']
+    .sort(function (a, b) { return a.split(' ').pop().localeCompare(b.split(' ').pop()); });
+  var subjectRows = document.getElementById('subjectRows');
+  SUBJECTS.forEach(function (subject) {
+    var row = document.createElement('div');
+    row.style.cssText = 'display:grid;grid-template-columns:minmax(130px,1fr) 2fr;gap:.6rem;align-items:center;margin-bottom:.6rem;';
+    var id = 'teacher' + subject;
+    row.innerHTML = '<label class="sbl-checkbox" style="margin:0;"><input type="checkbox" class="subject-tick" value="' + subject + '"> ' + subject + '</label>' +
+      '<div class="sbl-field" style="margin:0;"><select id="' + id + '" aria-label="Your ' + subject + ' teacher" disabled>' +
+      '<option value="">Your ' + subject + ' teacher…</option>' +
+      TEACHERS.map(function (t) { return '<option>' + t + '</option>'; }).join('') + '</select></div>';
+    var tick = row.querySelector('input'), sel = row.querySelector('select');
+    tick.addEventListener('change', function () { sel.disabled = !tick.checked; if (!tick.checked) sel.value = ''; });
+    subjectRows.appendChild(row);
+  });
+
+  function studentChoices() {
+    return Array.prototype.slice.call(document.querySelectorAll('.subject-tick:checked')).map(function (el) {
+      return { subject: el.value, teacher: document.getElementById('teacher' + el.value).value };
+    });
+  }
 
   var STAFF_TEXT = {
     email: 'Professional Email Address',
@@ -163,7 +197,14 @@
     reasonLabel.textContent = text.reasonLabel;
     reasonInput.placeholder = text.reasonPlaceholder;
     interestFieldset.style.display = isStudent ? 'none' : '';
+    subjectFieldset.style.display = isStudent ? '' : 'none';
+    professionalFieldset.style.display = isStudent ? 'none' : '';
+    reasonInput.required = !isStudent;
   }
+
+  // The student QR code links to /register/?role=student, which starts
+  // the form with "Student" already selected.
+  if (/[?&]role=student\b/i.test(location.search)) roleSelect.value = 'Student';
 
   roleSelect.addEventListener('change', updateFormForRole);
   updateFormForRole();
@@ -191,6 +232,22 @@
         responsibleUse: document.getElementById('termsAll').checked
       }
     };
+
+    if (roleSelect.value === 'Student') {
+      var choices = studentChoices();
+      if (!choices.length) {
+        errorBox.textContent = 'Please tick at least one subject.';
+        errorBox.classList.add('is-visible');
+        return;
+      }
+      var missing = choices.filter(function (c) { return !c.teacher; }).map(function (c) { return c.subject; });
+      if (missing.length) {
+        errorBox.textContent = 'Please choose your teacher for ' + missing.join(' and ') + '.';
+        errorBox.classList.add('is-visible');
+        return;
+      }
+      payload.reason = 'Student. Subjects and teachers: ' + choices.map(function (c) { return c.subject + ' (' + c.teacher + ')'; }).join('; ');
+    }
 
     if (!form.reportValidity()) return;
     if (!payload.terms.professionalCapacity || !payload.terms.noSharing || !payload.terms.adminDiscretion || !payload.terms.responsibleUse) {
