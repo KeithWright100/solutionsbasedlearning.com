@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Team Quiz — SBL</title>
+<meta name="description" content="Join your class's team quiz: type the game code and a team name, then race to guess the place.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+:root {
+  /* Phone-first: one column, big tap targets, the answer box always near the clue. */
+  --stage: #0b2e33; --panel: #123f45; --panel-2: #185259; --ink: #f4fbfa; --muted: #a9c9c6;
+  --accent: #ffc83d; --good: #3ddc97; --bad: #ff7a6b; --line: #24636a;
+  --display: 'Fredoka', 'Trebuchet MS', sans-serif; --body: 'Nunito Sans', Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--stage); color: var(--ink); font-family: var(--body); }
+[hidden] { display: none !important; }
+.top-bar { padding: 12px 16px; background: linear-gradient(135deg, #072226, #0f766e); }
+.top-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.top-bar a { font-size: .85rem; font-weight: 700; color: rgba(255,255,255,.85); text-decoration: none; }
+.brand { font-weight: 900; } .brand span { color: #a7f3e4; }
+main { max-width: 640px; margin: 0 auto; padding: 18px 16px 40px; display: grid; gap: 14px; }
+h1, h2 { font-family: var(--display); margin: 0; line-height: 1.15; text-wrap: balance; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: grid; gap: 12px; }
+label { font-weight: 800; }
+input[type=text] { width: 100%; font: 700 1.3rem var(--body); padding: 14px 16px; border-radius: 12px; border: 2px solid var(--line); background: var(--stage); color: var(--ink); }
+input.code { text-transform: uppercase; letter-spacing: .2em; font-family: var(--display); font-size: 1.8rem; text-align: center; }
+.btn { font: 800 1.15rem var(--body); border-radius: 999px; padding: 14px 22px; border: none; background: var(--accent); color: #1d1600; cursor: pointer; width: 100%; }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn:focus-visible, input:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.err { color: var(--bad); font-weight: 800; min-height: 1.3em; margin: 0; }
+.muted { color: var(--muted); margin: 0; }
+.teamtag { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--panel-2); border-radius: 14px; padding: 10px 14px; font-weight: 800; }
+.teamtag b { font-family: var(--display); font-size: 1.2rem; }
+.big { font-family: var(--display); font-size: 1.6rem; text-align: center; }
+.photo { border-radius: 14px; overflow: hidden; background: #000; aspect-ratio: 16 / 10; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.clue { background: var(--panel-2); border-radius: 12px; padding: 12px 14px; font-size: 1.1rem; font-weight: 700; }
+.clue small { display: block; color: var(--accent); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+.timer { height: 12px; border-radius: 999px; background: var(--panel-2); overflow: hidden; position: relative; }
+.timer i { position: absolute; inset: 0 auto 0 0; background: var(--good); border-radius: 999px; }
+.timer i.late { background: var(--accent); }
+.timerrow { display: flex; justify-content: space-between; font-weight: 800; font-variant-numeric: tabular-nums; font-size: .95rem; }
+.result { border-radius: 14px; padding: 16px; text-align: center; font-weight: 800; font-size: 1.2rem; }
+.result.ok { background: var(--good); color: #062b1c; }
+.result.no { background: var(--bad); color: #2d0703; }
+.result.wait { background: var(--panel-2); }
+.answer { background: var(--accent); color: #1d1600; border-radius: 14px; padding: 14px; text-align: center; font-family: var(--display); font-size: 1.7rem; }
+form.ans { display: grid; gap: 10px; }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games">&larr; Games</a>
+  <div class="brand">SBL <span>Team Quiz</span></div>
+</div></div>
+<main>
+  <!-- Join -->
+  <section id="vJoin" class="card" hidden>
+    <h1>Join the team quiz</h1>
+    <p class="muted">One phone or laptop per team. Use a team name, not your real names.</p>
+    <form id="joinForm" style="display:grid;gap:12px">
+      <label for="code">Game code (on the board)</label>
+      <input type="text" id="code" class="code" maxlength="5" autocomplete="off" autocapitalize="characters" required>
+      <label for="tname">Team name</label>
+      <input type="text" id="tname" maxlength="24" autocomplete="off" required placeholder="e.g. The Fjord Explorers">
+      <button class="btn" id="joinBtn" type="submit">Join game</button>
+      <p class="err" id="joinErr" role="alert"></p>
+    </form>
+  </section>
+
+  <!-- In game -->
+  <section id="vGame" hidden>
+    <div class="teamtag"><b id="myName"></b><span id="myScore"></span></div>
+    <div id="lobby" class="card" hidden><p class="big">You’re in!</p><p class="muted" style="text-align:center">Wait for your teacher to start the first round. Watch the board.</p></div>
+    <div id="round" class="card" hidden>
+      <div class="timerrow"><span id="roundLabel"></span><span id="secs"></span></div>
+      <div class="timer"><i id="bar"></i></div>
+      <div class="photo"><img id="photo" alt="Photo clue"></div>
+      <div id="clues" style="display:grid;gap:8px"></div>
+      <form class="ans" id="ansForm">
+        <label for="ans">Where is this?</label>
+        <input type="text" id="ans" maxlength="80" autocomplete="off" autocorrect="off" spellcheck="false">
+        <button class="btn" id="ansBtn" type="submit">Send answer</button>
+      </form>
+      <div class="result" id="result" hidden aria-live="polite"></div>
+      <p class="err" id="ansErr" role="alert"></p>
+    </div>
+    <div id="reveal" class="card" hidden>
+      <p class="muted" style="text-align:center">The answer was</p>
+      <div class="answer" id="answerText"></div>
+      <div class="result" id="roundPts"></div>
+      <p class="big" id="rankText"></p>
+      <p class="muted" style="text-align:center">Wait for the next round…</p>
+    </div>
+    <div id="done" class="card" hidden>
+      <p class="big">Game over!</p>
+      <p class="big" id="finalText"></p>
+      <p class="muted" style="text-align:center">Check the board for the podium.</p>
+    </div>
+    <div id="removed" class="card" hidden><p class="big">Your team was removed from this game.</p><button class="btn" id="rejoinBtn" type="button">Join again</button></div>
+  </section>
+</main>
+<script>
+(function () {
+  var API = '/api/session?teamGame=1';
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var me = null; // { code, teamId, teamKey, name }
+  try { me = JSON.parse(localStorage.getItem('sbl-team-quiz-team') || 'null'); } catch (e) {}
+  var urlCode = (new URLSearchParams(location.search).get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 5);
+  if (me && urlCode && me.code !== urlCode) me = null;
+  $('code').value = urlCode || '';
+  function save() { try { me ? localStorage.setItem('sbl-team-quiz-team', JSON.stringify(me)) : localStorage.removeItem('sbl-team-quiz-team'); } catch (e) {} }
+
+  function post(body) {
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Something went wrong.'); return d; }); });
+  }
+  function showJoin() { $('vJoin').hidden = false; $('vGame').hidden = true; (urlCode ? $('tname') : $('code')).focus(); }
+  $('joinForm').addEventListener('submit', function (e) {
+    e.preventDefault(); $('joinErr').textContent = ''; $('joinBtn').disabled = true;
+    post({ action: 'join', code: $('code').value, name: $('tname').value })
+      .then(function (d) { me = { code: d.code, teamId: d.teamId, teamKey: d.teamKey, name: d.name }; save(); start(); })
+      .catch(function (err) { $('joinErr').textContent = err.message; })
+      .finally(function () { $('joinBtn').disabled = false; });
+  });
+  $('rejoinBtn').addEventListener('click', function () { me = null; save(); stop(); showJoin(); });
+
+  var timer = null, state = null, endsAt = 0, lastRound = 0, sending = false;
+  function start() { $('vJoin').hidden = true; $('vGame').hidden = false; $('myName').textContent = me.name; stop(); poll(); timer = setInterval(poll, 1500); requestAnimationFrame(tick); }
+  function stop() { clearInterval(timer); timer = null; }
+  function poll() {
+    if (!me) return;
+    fetch('/api/session?teamGame=state&code=' + me.code + '&teamId=' + encodeURIComponent(me.teamId) + '&teamKey=' + encodeURIComponent(me.teamKey), { cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (x) {
+        if (!x.ok) { stop(); me = null; save(); showJoin(); $('joinErr').textContent = x.d.error || 'That game has ended.'; return; }
+        state = x.d; endsAt = Date.now() + (state.stageLeft || 0) * 1000; draw();
+      }).catch(function () {});
+  }
+  function only(id) { ['lobby', 'round', 'reveal', 'done', 'removed'].forEach(function (k) { $(k).hidden = k !== id; }); }
+  function draw() {
+    var s = state;
+    if (s.removed) { only('removed'); stop(); return; }
+    $('myScore').textContent = s.me ? s.me.score + ' pts' : '';
+    if (s.status === 'lobby') { only('lobby'); return; }
+    if (s.status === 'finished') { only('done'); $('finalText').textContent = ordinal(s.me.rank) + ' of ' + s.me.of + ' with ' + s.me.score + ' points'; stop(); return; }
+    if (s.status === 'reveal') {
+      only('reveal'); $('answerText').textContent = s.clue.answer;
+      var r = s.me.thisRound || {};
+      $('roundPts').className = 'result ' + (r.correct ? 'ok' : 'no');
+      $('roundPts').textContent = r.correct ? 'You scored ' + r.points + ' this round' : 'No points this round';
+      $('rankText').textContent = ordinal(s.me.rank) + ' of ' + s.me.of;
+      return;
+    }
+    only('round');
+    if (s.round !== lastRound) { lastRound = s.round; $('ans').value = ''; $('ansErr').textContent = ''; }
+    var c = s.clue;
+    if ($('photo').getAttribute('data-src') !== c.photo.url) { $('photo').src = c.photo.url; $('photo').setAttribute('data-src', c.photo.url); }
+    var html = c.clues.map(function (t, i) { return '<div class="clue"><small>Clue ' + (i + 2) + '</small>' + esc(t) + '</div>'; }).join('');
+    if ($('clues').innerHTML !== html) $('clues').innerHTML = html;
+    $('roundLabel').textContent = 'Round ' + s.round + ' of ' + s.totalRounds + ' · ' + (s.stage === 1 ? 'Photo' : 'Clue ' + s.stage);
+    var r = s.me.thisRound || {}, closed = s.status === 'closed';
+    var canAnswer = !closed && !r.correct && (r.attempts || 0) < 3;
+    $('ansForm').hidden = !canAnswer;
+    $('result').hidden = canAnswer && !r.attempts;
+    if (r.correct) { $('result').className = 'result ok'; $('result').textContent = 'Correct! +' + r.points + ' points'; }
+    else if (closed) { $('result').className = 'result wait'; $('result').textContent = 'Time’s up! Watch the board for the answer.'; }
+    else if (r.attempts >= 3) { $('result').className = 'result no'; $('result').textContent = 'No tries left this round.'; }
+    else if (r.attempts) { $('result').className = 'result no'; $('result').textContent = 'Not quite. ' + (3 - r.attempts) + (3 - r.attempts === 1 ? ' try' : ' tries') + ' left, worth 5 points.'; }
+  }
+  function ordinal(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  function tick() {
+    if (state && state.status === 'round') {
+      var left = Math.max(0, (endsAt - Date.now()) / 1000), used = state.stageSecs - left;
+      $('bar').style.width = (left / state.stageSecs * 100) + '%';
+      $('bar').className = used < state.bonusSecs ? '' : 'late';
+      $('secs').textContent = used < state.bonusSecs ? 'Bonus ' + Math.ceil(state.bonusSecs - used) + 's' : Math.ceil(left) + 's';
+    }
+    if (timer) requestAnimationFrame(tick);
+  }
+  $('ansForm').addEventListener('submit', function (e) {
+    e.preventDefault(); if (sending) return;
+    var a = $('ans').value.trim(); if (!a) return;
+    sending = true; $('ansBtn').disabled = true; $('ansErr').textContent = '';
+    post({ action: 'answer', code: me.code, teamId: me.teamId, teamKey: me.teamKey, answer: a })
+      .then(function (d) { if (!d.correct) { $('ans').value = ''; $('ans').focus(); } poll(); })
+      .catch(function (err) { $('ansErr').textContent = err.message; poll(); })
+      .finally(function () { sending = false; $('ansBtn').disabled = false; });
+  });
+
+  if (me && me.code) start(); else showJoin();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

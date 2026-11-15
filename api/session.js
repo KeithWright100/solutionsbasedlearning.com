@@ -20,6 +20,11 @@
 import { getSessionUser } from './_lib/auth.js';
 import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
 import { createHash } from 'node:crypto';
+import { teamGameHandler } from './_lib/teamGame.js';
+
+// Also: GET/POST /api/session?teamGame=... runs the team games (host on the
+// board, teams join by QR code). See api/_lib/teamGame.js. Lives here for
+// the same 12-function reason as the tutor token.
 
 // Also: GET /api/session?gameOfWeek=1 returns the admin's Game of the
 // week picks ({ picks: { 'YYYY-MM-DD': { slug, note } } }, keyed by the
@@ -98,6 +103,7 @@ async function tutorToken(req, res) {
 }
 
 export default async function handler(req, res) {
+  if (req.query && req.query.teamGame) return teamGameHandler(req, res);
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).json({ error: 'Method not allowed' });
