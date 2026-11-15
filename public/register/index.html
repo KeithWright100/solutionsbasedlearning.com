@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/sbl-theme.css">
 <link rel="stylesheet" href="/css/sbl-auth.css">
+<style>.req::after{content:" *";color:#f87171;font-weight:700}.req-key{font-size:.85rem;margin:0 0 .6rem}.req-key span{color:#f87171;font-weight:700}</style>
 </head>
 <body>
 <div class="sbl-contours" aria-hidden="true"></div>
@@ -38,34 +39,35 @@
     <div class="sbl-alert sbl-alert--error" id="formError" role="alert"></div>
 
     <form id="registerForm" novalidate>
+      <p class="req-key"><span>*</span> Required</p>
       <fieldset class="sbl-fieldset">
         <legend>Personal Information</legend>
         <div class="sbl-field-row">
           <div class="sbl-field">
-            <label for="firstName">First Name</label>
+            <label for="firstName" class="req">First Name</label>
             <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
           </div>
           <div class="sbl-field">
-            <label for="lastName">Last Name</label>
+            <label for="lastName" class="req">Last Name</label>
             <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
           </div>
         </div>
         <div class="sbl-field">
-          <label for="email" id="emailLabel">Professional Email Address</label>
+          <label for="email" id="emailLabel" class="req">Professional Email Address</label>
           <input type="email" id="email" name="email" autocomplete="email" required>
         </div>
         <div class="sbl-field-row">
           <div class="sbl-field">
-            <label for="organisation">School / Organisation</label>
+            <label for="organisation" class="req">School / Organisation</label>
             <input type="text" id="organisation" name="organisation" required>
           </div>
           <div class="sbl-field">
-            <label for="country">Country</label>
+            <label for="country" class="req">Country</label>
             <input type="text" id="country" name="country" required>
           </div>
         </div>
         <div class="sbl-field">
-          <label for="role">Current Role</label>
+          <label for="role" class="req">Current Role</label>
           <select id="role" name="role" required>
             <option value="" disabled selected>Select your role…</option>
             <option>Student</option>
@@ -82,11 +84,11 @@
       </fieldset>
 
       <fieldset class="sbl-fieldset" id="subjectFieldset" style="display:none;">
-        <legend>Your Subjects and Teachers</legend>
-        <p style="margin:0 0 .8rem;font-size:.92rem;">Choose your teacher for each subject you study (up to 3).</p>
+        <legend class="req">Your Subjects and Teachers</legend>
+        <p style="margin:0 0 .8rem;font-size:.92rem;">Choose at least one subject and your teacher for it (up to 3 subjects).</p>
         <div id="subjectRows"></div>
         <div class="sbl-field" style="margin-top:.8rem;">
-          <label for="gradYear">Graduation year</label>
+          <label for="gradYear" class="req">Graduation year</label>
           <select id="gradYear">
             <option value="">Select the year you graduate…</option>
             <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option>
@@ -97,7 +99,7 @@
       <fieldset class="sbl-fieldset" id="professionalFieldset">
         <legend>Professional Interest</legend>
         <div class="sbl-field">
-          <label for="reason" id="reasonLabel">Why would you like access to Solutions Based Learning?</label>
+          <label for="reason" id="reasonLabel" class="req">Why would you like access to Solutions Based Learning?</label>
           <textarea id="reason" name="reason" required placeholder="Please tell us briefly how you hope to use the platform and what interests you most about SBL."></textarea>
         </div>
       </fieldset>
@@ -118,7 +120,7 @@
       </fieldset>
 
       <fieldset class="sbl-fieldset">
-        <legend>Terms of Access</legend>
+        <legend class="req">Terms of Access</legend>
         <div class="sbl-checkbox-group">
           <label class="sbl-checkbox"><input type="checkbox" id="termsAll" required> I am applying for genuine educational use of this platform. I will not share my account details with others, I understand that access is granted at the discretion of the site administrator, and I agree to use the platform responsibly and ethically.</label>
         </div>

@@ -297,7 +297,7 @@
     var status = document.getElementById('bulkStatus');
     btn.disabled = true;
     document.getElementById('approveSelectedPw').disabled = true;
-    var done = 0, failed = [], warned = 0, existing = [], pwList = [];
+    var done = 0, failed = [], warned = 0, existing = [], pwList = [], subjNotes = [];
     // One at a time: each approval is its own short request, so a slow
     // email never makes the whole batch time out.
     ids.reduce(function (chain, id) {
@@ -309,6 +309,7 @@
           if (r.ok) {
             done++; if (r.warning) warned++; removePending(id);
             if (r.existing) existing.push(r.name || name);
+            if (r.subjectsNote) subjNotes.push(name + ': ' + r.subjectsNote);
             if (r.password) pwList.push([r.name || name, r.email || '', r.password]);
           }
           else failed.push(name + ' (' + r.error + ')');
@@ -318,7 +319,8 @@
       bulkRunning = false;
       status.textContent = '';
       var msg = done + ' approved.' + (warned ? ' ' + warned + ' activation email' + (warned > 1 ? 's' : '') + ' could not be sent — use Set temp password for them.' : '') +
-        (existing.length && !temp ? ' Already had an account (closed, no email sent): ' + existing.join(', ') + ' — use Set temp password if they can\u2019t log in.' : '');
+        (existing.length && !temp ? ' Already had an account (closed, no email sent): ' + existing.join(', ') + ' — use Set temp password if they can\u2019t log in.' : '') +
+        (subjNotes.length ? ' ' + subjNotes.join(' ') : '');
       if (failed.length) showError(msg + ' Not approved: ' + failed.join('; '));
       else showNotice(msg + (temp ? '' : ' Activation emails have been sent to new accounts.'));
       updateBulkButton();
@@ -366,7 +368,7 @@
   function approveRequest(id, temp) {
     return postJson('/api/admin/action', { action: 'approve', applicationId: id, tempPassword: !!temp }).then(function (result) {
       var err = result.data && result.data.error;
-      if (result.ok) return { ok: true, warning: result.data.warning, existing: !!result.data.existingAccount, password: result.data.password, email: result.data.email, name: result.data.name };
+      if (result.ok) return { ok: true, warning: result.data.warning, subjectsNote: result.data.subjectsNote, existing: !!result.data.existingAccount, password: result.data.password, email: result.data.email, name: result.data.name };
       if (result.status === 409 && /approved/.test(err || '')) return { ok: true };
       return { ok: false, error: err || 'the server said no (' + result.status + ')' };
     }, function () {
@@ -804,7 +806,7 @@
         if (!r.ok) { showError('Could not approve this application: ' + r.error); loadData(); return; }
         removePending(id);
         if (r.existing) showNotice((r.name || 'This applicant') + ' already had an SBL account from an earlier application, so this one has been closed (no new email sent). If they can\u2019t log in, use \u201cSet temp password\u201d in Approved users.');
-        else showNotice(r.warning || 'Application approved. The applicant has been emailed an activation link.');
+        else showNotice((r.warning || 'Application approved. The applicant has been emailed an activation link.') + (r.subjectsNote ? ' ' + r.subjectsNote : ''));
         loadData();
       });
     });

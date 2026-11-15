@@ -152,7 +152,7 @@ async function handleApprove(req, res, session) {
     organisation: application.organisation,
     country: application.country,
     role: assignedRole,
-    group_name: assignedRole === 'student' ? groupFromEmail(application.email) : null,
+    group_name: assignedRole === 'student' ? (groupFromEmail(application.email) || groupFromGradYear(parseStudentChoices(application.reason).gradYear)) : null,
     status: 'active',
     application_id: application.id
   });
@@ -161,6 +161,9 @@ async function handleApprove(req, res, session) {
     console.error('Failed to create profile row:', profileError);
     return res.status(500).json({ error: `Account was created but the profile could not be saved: ${profileError.message || profileError.code || 'database error'}.` });
   }
+
+  // New student: copy their sign-up subject/teacher choices onto the account.
+  const subjectsNote = (!existingProfile && assignedRole === 'student') ? await autoAssignFromApplication(supabase, userId, application) : null;
 
   const decision = { status: 'approved', decided_at: new Date().toISOString(), decided_by: session.profile.email };
   let { error: updateAppError } = await supabase
@@ -181,7 +184,7 @@ async function handleApprove(req, res, session) {
   }
 
   if (wantTemp) {
-    return res.status(200).json({ ok: true, existingAccount, password: tempPassword, email: application.email, name: fullName });
+    return res.status(200).json({ ok: true, existingAccount, password: tempPassword, email: application.email, name: fullName, subjectsNote });
   }
   if (existingAccount) {
     // No new account, so no activation email — the admin decides how
@@ -200,7 +203,7 @@ async function handleApprove(req, res, session) {
     emailWarning = 'The account was created, but the approval email could not be sent. You may want to contact the applicant directly.';
   }
 
-  return res.status(200).json({ ok: true, warning: emailWarning });
+  return res.status(200).json({ ok: true, warning: emailWarning, subjectsNote });
 }
 
 // ---------------------------------------------------------------
@@ -245,12 +248,74 @@ async function handleTempPassword(req, res, session) {
 // ---------------------------------------------------------------
 export function groupFromEmail(email) {
   const m = /^[a-z]+(\d{2})@patana\.ac\.th$/i.exec(String(email || '').trim());
-  if (!m) return null;
+  return m ? groupFromGradYear(2000 + Number(m[1])) : null;
+}
+
+// Same groups as groupFromEmail, from a four-digit graduation year
+// (e.g. the one a student picks on the sign-up form).
+export function groupFromGradYear(year) {
+  year = Number(year);
+  if (!year || year < 2000 || year > 2099) return null;
   const now = new Date(Date.now() + 7 * 3600 * 1000); // Bangkok
   const endYear = now.getUTCMonth() >= 7 ? now.getUTCFullYear() + 1 : now.getUTCFullYear();
-  const yearsLeft = 2000 + Number(m[1]) - endYear;     // 0 = Year 13
+  const yearsLeft = year - endYear;     // 0 = Year 13
   const stage = yearsLeft <= 1 && yearsLeft >= 0 ? 'IB' : yearsLeft <= 3 && yearsLeft >= 2 ? 'IGCSE' : yearsLeft <= 6 && yearsLeft >= 4 ? 'KS3' : null;
-  return stage ? `${stage} Grad '${m[1]}` : null;
+  return stage ? `${stage} Grad '${String(year).slice(2)}` : null;
+}
+
+// The sign-up form writes a student's choices into the application's
+// reason text, e.g. "Student. Graduating 2029. Subjects and teachers:
+// Geography (Mr Wright); History (Ms Bond)". This reads them back.
+export function parseStudentChoices(reason) {
+  const text = String(reason || '');
+  const g = /Graduating (\d{4})/.exec(text);
+  const m = /Subjects and teachers:\s*(.+)$/.exec(text);
+  const choices = [];
+  if (m) m[1].split(';').forEach((part) => {
+    const c = /^\s*([A-Za-z]+)\s*\((.+)\)\s*$/.exec(part);
+    if (c) choices.push({ subject: c[1], teacher: c[2].trim() });
+  });
+  return { gradYear: g ? Number(g[1]) : null, choices };
+}
+
+// Matches a sign-up teacher label ("Mr Mark Stewart", "Mr O’Shea") to
+// a teacher account by surname, using the first name if two teachers
+// share a surname. Returns the account id, or null if no single match.
+function matchTeacher(label, teachers) {
+  const norm = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[^a-z]/g, '');
+  const words = String(label).replace(/^(mr|mrs|ms|miss|dr)\.?\s+/i, '').trim().split(/\s+/);
+  const surname = norm(words[words.length - 1]);
+  const first = words.length > 1 ? norm(words[0]) : '';
+  let hits = teachers.filter((t) => { const w = String(t.full_name || '').trim().split(/\s+/); return norm(w[w.length - 1]) === surname; });
+  if (hits.length > 1 && first) hits = hits.filter((t) => norm(String(t.full_name || '').trim().split(/\s+/)[0]) === first);
+  return hits.length === 1 ? hits[0].id : null;
+}
+
+// Fills a newly approved student's subjects and teachers from their
+// sign-up choices. Never blocks an approval: problems come back as a
+// short note for the admin instead.
+async function autoAssignFromApplication(supabase, userId, application) {
+  const { choices } = parseStudentChoices(application.reason);
+  if (!choices.length) return null;
+  try {
+    const { data: teachers, error } = await supabase.from('sbl_profiles').select('id, full_name, role').in('role', ['teacher', 'admin']);
+    if (error) throw error;
+    const clean = [], missed = [];
+    for (const c of choices) {
+      if (SUBJECTS.indexOf(c.subject) === -1 || clean.length >= MAX_ASSIGNMENTS) continue;
+      const id = matchTeacher(c.teacher, teachers || []);
+      if (id) clean.push({ subject: c.subject, teacher_id: id }); else missed.push(`${c.subject} (${c.teacher})`);
+    }
+    if (clean.length) {
+      const { error: upErr } = await supabase.from('sbl_profiles')
+        .update({ teacher_assignments: clean, teacher_id: clean[0].teacher_id }).eq('id', userId);
+      if (upErr) throw upErr;
+    }
+    return missed.length ? `Could not match a teacher account for ${missed.join(', ')}; set ${missed.length > 1 ? 'these' : 'this'} in Approved users.` : null;
+  } catch (e) {
+    console.error('Auto-assign from sign-up failed:', e);
+    return 'Subjects and teachers could not be filled in automatically; set them in Approved users.';
+  }
 }
 
 // ---------------------------------------------------------------
