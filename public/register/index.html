@@ -85,6 +85,13 @@
         <legend>Your Subjects and Teachers</legend>
         <p style="margin:0 0 .8rem;font-size:.92rem;">Tick each subject you study (up to 3), then choose your teacher for that subject.</p>
         <div id="subjectRows"></div>
+        <div class="sbl-field" style="margin-top:.8rem;">
+          <label for="gradYear">Graduation year</label>
+          <select id="gradYear">
+            <option value="">Select the year you graduate…</option>
+            <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option>
+          </select>
+        </div>
       </fieldset>
 
       <fieldset class="sbl-fieldset" id="professionalFieldset">
@@ -157,8 +164,11 @@
   // choices are written into the application's "reason" text, so they
   // show in the admin dashboard without any database changes.
   var SUBJECTS = ['Geography', 'History', 'Business', 'Economics'];
-  var TEACHERS = ['Ms Bond', 'Mr Dale', 'Ms Conroy', 'Mr Fieldhouse', 'Mr Fountain', 'Mr Ghazi', 'Ms Hobday', 'Mr Mitcheson', 'Mr Munir', 'Mr O’Shea', 'Ms Pembleton', 'Ms Richards', 'Mr Mark Stewart', 'Mr Sam Stuart', 'Mr Thatcher', 'Mr Worrall', 'Mr Wright']
-    .sort(function (a, b) { return a.split(' ').pop().localeCompare(b.split(' ').pop()); });
+  var GEOG = ['Mr Wright', 'Ms Bond', 'Ms Hobday', 'Mr Mitcheson', 'Mr Sam Stuart', 'Ms Conroy'];
+  var HIST = ['Ms Richards', 'Ms Pembleton', 'Mr Fountain', 'Mr O\u2019Shea'];
+  var BUSEC = ['Mr Dale', 'Mr Mark Stewart', 'Mr Ghazi', 'Mr Fieldhouse', 'Mr Munir', 'Mr Thatcher', 'Mr Worrall', 'Mr Meadows'];
+  function bySurname(list) { return list.slice().sort(function (a, b) { return a.split(' ').pop().localeCompare(b.split(' ').pop()); }); }
+  var TEACHERS = { Geography: bySurname(GEOG), History: bySurname(HIST), Business: bySurname(BUSEC), Economics: bySurname(BUSEC) };
   var subjectRows = document.getElementById('subjectRows');
   SUBJECTS.forEach(function (subject) {
     var row = document.createElement('div');
@@ -167,7 +177,7 @@
     row.innerHTML = '<label class="sbl-checkbox" style="margin:0;"><input type="checkbox" class="subject-tick" value="' + subject + '"> ' + subject + '</label>' +
       '<div class="sbl-field" style="margin:0;"><select id="' + id + '" aria-label="Your ' + subject + ' teacher" disabled>' +
       '<option value="">Your ' + subject + ' teacher…</option>' +
-      TEACHERS.map(function (t) { return '<option>' + t + '</option>'; }).join('') + '</select></div>';
+      TEACHERS[subject].map(function (t) { return '<option>' + t + '</option>'; }).join('') + '</select></div>';
     var tick = row.querySelector('input'), sel = row.querySelector('select');
     tick.addEventListener('change', function () {
       sel.disabled = !tick.checked; if (!tick.checked) sel.value = '';
@@ -251,7 +261,13 @@
         errorBox.classList.add('is-visible');
         return;
       }
-      payload.reason = 'Student. Subjects and teachers: ' + choices.map(function (c) { return c.subject + ' (' + c.teacher + ')'; }).join('; ');
+      var grad = document.getElementById('gradYear').value;
+      if (!grad) {
+        errorBox.textContent = 'Please choose your graduation year.';
+        errorBox.classList.add('is-visible');
+        return;
+      }
+      payload.reason = 'Student. Graduating ' + grad + '. Subjects and teachers: ' + choices.map(function (c) { return c.subject + ' (' + c.teacher + ')'; }).join('; ');
     }
 
     if (!form.reportValidity()) return;
