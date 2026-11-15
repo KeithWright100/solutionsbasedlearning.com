@@ -83,7 +83,7 @@
 
       <fieldset class="sbl-fieldset" id="subjectFieldset" style="display:none;">
         <legend>Your Subjects and Teachers</legend>
-        <p style="margin:0 0 .8rem;font-size:.92rem;">Tick each subject you study, then choose your teacher for that subject.</p>
+        <p style="margin:0 0 .8rem;font-size:.92rem;">Tick each subject you study (up to 3), then choose your teacher for that subject.</p>
         <div id="subjectRows"></div>
       </fieldset>
 
@@ -169,7 +169,12 @@
       '<option value="">Your ' + subject + ' teacher…</option>' +
       TEACHERS.map(function (t) { return '<option>' + t + '</option>'; }).join('') + '</select></div>';
     var tick = row.querySelector('input'), sel = row.querySelector('select');
-    tick.addEventListener('change', function () { sel.disabled = !tick.checked; if (!tick.checked) sel.value = ''; });
+    tick.addEventListener('change', function () {
+      sel.disabled = !tick.checked; if (!tick.checked) sel.value = '';
+      // The admin dashboard allows at most 3 subject/teacher pairs per student.
+      var full = document.querySelectorAll('.subject-tick:checked').length >= 3;
+      Array.prototype.forEach.call(document.querySelectorAll('.subject-tick'), function (t) { if (!t.checked) t.disabled = full; });
+    });
     subjectRows.appendChild(row);
   });
 
