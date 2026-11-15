@@ -73,6 +73,44 @@ export const SETS = {
         photo: photo('Avenue of Baobabs, Madagascar (22558139260).jpg', 'Rod Waddington, CC BY-SA 2.0'),
         clues: ['A dirt road lined with giant trees that can live for hundreds of years and store water in their trunks.', 'Near Morondava, on the west coast of Madagascar.'] }
     ]
+  },
+  // Easier set for Year 7: well-known places, a mix of human and physical
+  // geography. The country is accepted as well as the place itself.
+  'guess-the-place-y7': {
+    title: 'Guess the Place: Year 7',
+    level: 'KS3 Geography',
+    rounds: [
+      { answer: 'Bangkok', accept: ['Bangkok', 'Krung Thep', 'Chao Phraya', 'Chao Phraya River', 'Thailand'],
+        photo: photo('Chao Phraya River in Bangkok 01.jpg', 'Krzysztof Golik, CC BY-SA 4.0'),
+        clues: ['A busy capital city in South-east Asia, built beside a wide river full of boats.', 'It is the capital city of Thailand.'] },
+      { answer: 'The Amazon Rainforest', accept: ['Amazon Rainforest', 'Amazon', 'Amazon Jungle', 'Amazonia', 'Amazon River', 'Brazil'],
+        photo: photo('Aerial view of the Amazon Rainforest.jpg', 'lubasi, CC BY-SA 2.0'),
+        clues: ['The largest tropical rainforest in the world, home to millions of kinds of plants and animals.', 'It grows around a huge river in South America, mostly in Brazil.'] },
+      { answer: 'Singapore', accept: ['Singapore', 'Marina Bay', 'Marina Bay Sands'],
+        photo: photo('Marina Bay Singapore-3499.jpg', 'Bijay Chaurasia, CC BY-SA 4.0'),
+        clues: ['A small island city and country, famous for its skyscrapers and one of the busiest ports in the world.', 'Its name means “Lion City”. It lies just south of Malaysia.'] },
+      { answer: 'The River Nile', accept: ['River Nile', 'Nile', 'Nile River', 'Egypt'],
+        photo: photo('Nile River, Feluccas, Aswan, Egypt.jpg', 'Vyacheslav Argenberg, CC BY 4.0'),
+        clues: ['One of the longest rivers in the world. Sailing boats called feluccas carry people along it.', 'It flows north through Egypt into the Mediterranean Sea.'] },
+      { answer: 'New York', accept: ['New York', 'New York City', 'NYC', 'Manhattan', 'USA', 'United States', 'America'],
+        photo: photo('Lower Manhattan from Staten Island Ferry Jan 2006.jpg', 'Diliff, CC BY 2.5'),
+        clues: ['The biggest city in the United States, famous for its skyscrapers and yellow taxis.', 'The Statue of Liberty stands in its harbour.'] },
+      { answer: 'Iceland', accept: ['Iceland', 'Strokkur', 'Geysir', 'Reykjavik'], reject: ['Ireland', 'Island'],
+        photo: photo('Strokkur, Área geotérmica de Geysir, Suðurland, Islandia, 2014-08-16, DD 089.JPG', 'Diego Delso, CC BY-SA 4.0'),
+        clues: ['Boiling water shoots high into the air from the ground. This is a geyser, on a volcanic island.', 'An island country in the North Atlantic Ocean. Its capital is Reykjavik.'] },
+      { answer: 'Rio de Janeiro', accept: ['Rio de Janeiro', 'Rio', 'Brazil'],
+        photo: photo('Contrasts of Rio de Janeiro - Rocinha, Ipanema, and Mountains at Sunrise.jpg', 'Donatas Dabravolskas, CC BY-SA 4.0'),
+        clues: ['A big city in South America where homes built on steep hills sit right next to famous beaches.', 'A giant statue of Christ the Redeemer looks over this city in Brazil.'] },
+      { answer: 'The Panama Canal', accept: ['Panama Canal', 'Panama', 'Miraflores Locks'],
+        photo: photo('Panamax ship exiting the Miraflores locks.jpg', 'Dicklyon, CC BY-SA 4.0'),
+        clues: ['A waterway built by people so that ships can travel between the Atlantic and Pacific Oceans.', 'It cuts through a narrow country in Central America with the same name.'] },
+      { answer: 'Norway', accept: ['Norway', 'Fjord', 'Fjords', 'Norwegian fjords', 'Geirangerfjord', 'Geiranger'],
+        photo: photo('Geirangerfjord LC0188.jpg', 'Jörg Hempel, CC BY-SA 2.0 DE'),
+        clues: ['A long, narrow arm of the sea between steep mountain walls, carved out by a glacier. It is called a fjord.', 'This country in northern Europe is famous for its fjords. Its capital is Oslo.'] },
+      { answer: 'The Arctic', accept: ['Arctic', 'The Arctic', 'Arctic Circle', 'North Pole', 'Svalbard', 'Arctic Ocean'],
+        photo: photo('Svalbard DSCF1400 (23849118591).jpg', 'Frode Bjørshol, CC BY 2.0'),
+        clues: ['A frozen region where polar bears live. In winter the sun does not rise for weeks and you can see the northern lights.', 'The cold region at the very top of the world, around the North Pole.'] }
+    ]
   }
 };
 
@@ -100,6 +138,8 @@ function lev(a, b) {
 // Accepts small spelling slips: 1 letter wrong for 5+ letters, 2 for 10+.
 export function isCorrect(given, round) {
   const g = norm(given); if (!g) return false;
+  // Real places one letter away from the answer (e.g. Ireland for Iceland).
+  if ((round.reject || []).some((x) => norm(x) === g)) return false;
   return round.accept.concat(round.answer).some((a) => {
     const t = norm(a); if (g === t || g.replace(/ /g, '') === t.replace(/ /g, '')) return true;
     const allow = t.length >= 10 ? 2 : t.length >= 5 ? 1 : 0;
