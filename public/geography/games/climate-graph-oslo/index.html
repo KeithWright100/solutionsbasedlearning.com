@@ -279,20 +279,34 @@ label.speed { display: inline-flex; align-items: center; gap: 6px; font-size: .9
     { title: 'Step 2: the rainfall axis (left)', text: '<p>The highest rainfall is <b>95 mm</b> (August), so the axis must reach at least 95.</p><p>Go from <b>0 to 100 in steps of 20</b>. That is 5 equal steps.</p>', run: function (a) { rainAxis(a); } },
     { title: 'Step 3: the temperature axis (right)', text: '<p>The coldest month is <b>−3 °C</b> and the warmest is <b>18 °C</b>, so we need numbers below zero.</p><p>Go from <b>−5 to 20 in steps of 5</b>. That is also 5 equal steps, so both axes line up.</p><p>Never skip a number: every step must be the same size.</p>', run: function (a) { tempAxis(a); } },
     { title: 'Step 4: light guide lines', text: '<p>Because both axes have 5 equal steps, one set of guide lines works for both scales. For example, 20 mm sits level with 0 °C.</p>', run: function (a) { gridlines(a); } },
-    { title: 'Step 5: plot the rainfall bars', text: '<p>Use the <b>left axis</b>. For each month, read across from the rainfall value and draw a bar up to it. Bars sit inside their month space and do not touch.</p>', plot: 'rain', run: function (a) { if (!a) { for (var i = 0; i < 12; i++) bar(i, false); return; }
-      MONTHS.forEach(function (m, i) { later(400 + i * 1000, function () { highlight(i); readout(m + ': <span style="color:var(--rain)">' + RAIN[i] + ' mm</span>'); bar(i, true, true); }); });
-      later(400 + 12 * 1000, function () { highlight(-1); readout('All 12 bars plotted'); }); } },
-    { title: 'Step 6: plot the temperatures', text: '<p>Use the <b>right axis</b>. Read across from the temperature and mark a small cross in the <b>middle</b> of each month.</p>', plot: 'temp', run: function (a) { if (!a) { for (var i = 0; i < 12; i++) dot(i, false); return; }
-      MONTHS.forEach(function (m, i) { later(400 + i * 1000, function () { highlight(i); readout(m + ': <span style="color:var(--temp)">' + TEMP[i] + ' °C</span>'); dot(i, true, true); }); });
-      later(400 + 12 * 1000, function () { highlight(-1); readout('All 12 temperatures plotted'); }); } },
+    'RAIN',
+    'TEMP',
     { title: 'Step 7: join the crosses', text: '<p>Join the crosses with a <b>smooth curve</b> in red. Temperature changes gradually from month to month, so the line should curve, not zigzag.</p>', run: function (a) { curve(a); } },
     { title: 'Step 8: finish the graph', text: '<p>Add a <b>title</b> and a <b>key</b>. Check both axes are labelled with their units: mm and °C.</p>', run: function (a) { finish(a); } },
     { title: 'Read your graph', text: '<p><b style="color:var(--rain)">1</b> Wettest: <b>August, 95 mm</b><br><b style="color:var(--temp)">2</b> Warmest: <b>July, 18 °C</b><br><b style="color:var(--temp)">3</b> Coldest: <b>January, −3 °C</b></p><p><b>Total rainfall:</b> ' + total + ' mm a year.</p><p><b>Temperature range:</b> 18 − (−3) = <b>21 °C</b>.</p><p>Oslo has cold winters below freezing, mild summers, and rain all year, with the wettest months in late summer and autumn.</p>', run: function (a) { readings(a); } }
   ];
 
+  // Rainfall and temperature are plotted one month per step: each Next adds one bar or one cross.
+  var RAIN_TEXT = '<p>Use the <b>left axis</b>. Read across from the rainfall value and draw a bar up to it. Bars sit inside their month space and do not touch.</p>';
+  var TEMP_TEXT = '<p>Use the <b>right axis</b>. Read across from the temperature and mark a small cross in the <b>middle</b> of the month.</p>';
+  var expanded = [];
+  STEPS.forEach(function (st, g) {
+    if (st === 'RAIN') MONTHS.forEach(function (m, i) { expanded.push({ group: g, sub: i, title: 'Step 5: plot the rainfall bars', text: RAIN_TEXT, short: true,
+      readout: m + ': <span style="color:var(--rain)">' + RAIN[i] + ' mm</span>', run: function (a) { bar(i, a, true); } }); });
+    else if (st === 'TEMP') MONTHS.forEach(function (m, i) { expanded.push({ group: g, sub: i, title: 'Step 6: plot the temperatures', text: TEMP_TEXT, short: true,
+      readout: m + ': <span style="color:var(--temp)">' + TEMP[i] + ' °C</span>', run: function (a) { dot(i, a, true); } }); });
+    else { st.group = g; expanded.push(st); }
+  });
+  var GROUPS = STEPS.length;
+  STEPS = expanded;
+
   var cur = 0, playing = false, autoTimer = null;
   var dots = document.getElementById('dots');
-  STEPS.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Go to ' + s.title); b.addEventListener('click', function () { stop(); go(i, true); }); dots.appendChild(b); });
+  for (var gi = 0; gi < GROUPS; gi++) (function (g) {
+    var first = STEPS.findIndex(function (s) { return s.group === g; });
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Go to ' + STEPS[first].title);
+    b.addEventListener('click', function () { stop(); go(first, true); }); dots.appendChild(b);
+  })(gi);
   function readout(html) { document.getElementById('readout').innerHTML = html; }
 
   function go(i, anim) {
@@ -304,13 +318,14 @@ label.speed { display: inline-flex; align-items: center; gap: 6px; font-size: .9
     STEPS[cur].run(!!anim);
     document.getElementById('stepTitle').textContent = STEPS[cur].title;
     document.getElementById('stepText').innerHTML = STEPS[cur].text;
-    document.getElementById('stepcount').textContent = 'Step ' + cur + ' of ' + (STEPS.length - 1);
-    if (cur === 0) document.getElementById('stepcount').textContent = 'Introduction';
-    Array.prototype.forEach.call(dots.children, function (b, k) { b.classList.toggle('on', k === cur); b.classList.toggle('done', k < cur); });
+    var st = STEPS[cur], grp = st.group;
+    document.getElementById('stepcount').textContent = grp === 0 ? 'Introduction' : 'Step ' + grp + ' of ' + (GROUPS - 1) + (st.sub != null ? ' · month ' + (st.sub + 1) + ' of 12' : '');
+    if (st.sub != null) { highlight(st.sub); readout(st.readout); }
+    Array.prototype.forEach.call(dots.children, function (b, k) { b.classList.toggle('on', k === grp); b.classList.toggle('done', k < grp); });
     document.getElementById('back').disabled = cur === 0;
     document.getElementById('next').disabled = cur === STEPS.length - 1;
     if (playing) {
-      var len = STEPS[cur].plot ? 13600 : cur === 7 ? 3600 : cur === 9 ? 3600 : 3400;
+      var len = st.short ? 1300 : st.title.indexOf('Step 7') === 0 ? 3600 : 3400;
       if (cur < STEPS.length - 1) autoTimer = setTimeout(function () { go(cur + 1, true); }, (reduce ? 4000 : len * speed()) + 1200);
       else stop();
     }
@@ -319,7 +334,7 @@ label.speed { display: inline-flex; align-items: center; gap: 6px; font-size: .9
   function play() {
     if (playing) { stop(); return; }
     playing = true; document.getElementById('play').textContent = '❚❚ Pause';
-    go(cur === STEPS.length - 1 ? 0 : (cur === 0 ? 1 : cur), true);
+    go(cur === STEPS.length - 1 || cur === 0 ? 1 : cur, true);
   }
   document.getElementById('play').addEventListener('click', play);
   document.getElementById('next').addEventListener('click', function () { stop(); go(cur + 1, true); });
