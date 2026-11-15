@@ -70,6 +70,10 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
 .photo { position: relative; border-radius: 18px; overflow: hidden; background: #000; aspect-ratio: 16 / 9; }
 .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .photo .credit { position: absolute; right: 8px; bottom: 6px; font-size: .75rem; background: rgba(0,0,0,.55); padding: 2px 8px; border-radius: 6px; }
+.ready { position: absolute; inset: 0; display: grid; place-items: center; background: #0b2e33; text-align: center; }
+.ready b { display: block; font-family: var(--display); font-size: 7rem; color: var(--accent); line-height: 1; }
+.ready span { font-size: 1.6rem; font-weight: 800; }
+.worth { display: inline-block; background: var(--accent); color: #1d1600; border-radius: 999px; padding: 4px 14px; font-family: var(--display); font-size: 1.5rem; }
 .clues { display: grid; gap: 10px; margin-top: 14px; }
 .clue { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; font-size: 1.35rem; font-weight: 700; animation: pop .4s ease; }
 .clue small { display: block; font-size: .8rem; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
@@ -116,9 +120,9 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
     <h1>Team Quiz: Guess the Place</h1>
     <p class="muted" style="font-size:1.1rem;margin:0">Teams of three join on one phone or laptop each, choose a team name, then race to name the place from a photo and clues.</p>
     <div class="rules">
-      <div class="rule"><b>3 clues a round</b>A photo on its own, then two written clues that get easier. 20 seconds each.</div>
-      <div class="rule"><b>Fast and first try</b>10 points on the photo (7 after clue 2, 4 after clue 3), plus 1 point for every second left of the first 10.</div>
-      <div class="rule"><b>Second chances</b>Wrong first time? A correct later answer still scores 5. Three tries a round.</div>
+      <div class="rule"><b>The photo</b>A 4-second countdown while the photo loads, then 20 seconds. Right first time: 10 points plus 1 for every second left of the first 10.</div>
+      <div class="rule"><b>Clue 2 and clue 3</b>Clue 2 is worth 5 points to every team still guessing. Clue 3 only appears if nobody has it yet, and is worth 3.</div>
+      <div class="rule"><b>Second chances</b>Wrong on the photo? A right answer still scores 5. Three tries a round.</div>
       <div class="rule"><b>No student data</b>Teams only give a team name. Games are deleted after 3 hours.</div>
     </div>
     <div class="card row">
@@ -152,8 +156,8 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
   <section id="vPlay" class="play" hidden>
     <div>
       <div class="roundhead"><h2 id="roundTitle"></h2><div class="cluepills" id="cluePills"><span>Photo</span><span>Clue 2</span><span>Clue 3</span></div></div>
-      <div id="timerWrap"><div class="timer"><i id="timerBar"></i></div><div class="timertext"><span id="timerLabel"></span><span id="timerSecs"></span></div></div>
-      <div class="photo"><img id="photo" alt="Photo clue for this round"><span class="credit" id="credit"></span></div>
+      <div id="timerWrap"><div class="timer"><i id="timerBar"></i></div><div class="timertext"><span id="timerLabel"></span><span><span class="worth" id="worth"></span> <span id="timerSecs"></span></span></div></div>
+      <div class="photo"><img id="photo" alt="Photo clue for this round"><span class="credit" id="credit"></span><div class="ready" id="ready" hidden><div><span>Get ready…</span><b id="readyNum">4</b><span id="readyTxt">Photo coming up</span></div></div></div>
       <div class="clues" id="clues"></div>
       <div class="answer" id="answer" hidden></div>
       <div class="controls">
@@ -225,7 +229,7 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
   });
 
   // ---- polling and drawing ----
-  var timerId = null, state = null, stageEndsAt = 0, lastKey = '';
+  var timerId = null, state = null, stageEndsAt = 0, preloaded = '';
   function startPolling() { stopPolling(); poll(); timerId = setInterval(poll, 1000); requestAnimationFrame(tick); }
   function stopPolling() { clearInterval(timerId); timerId = null; }
   function poll() {
@@ -234,7 +238,9 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
       .then(function (x) {
         if (!x.ok) { stopPolling(); game = null; try { sessionStorage.removeItem('sbl-team-quiz-host'); } catch (e) {} show('vSetup'); $('setupErr').textContent = x.d.error || 'That game has ended.'; return; }
-        state = x.d; stageEndsAt = Date.now() + (state.stageLeft || 0) * 1000; draw();
+        state = x.d; stageEndsAt = Date.now() + (state.stageLeft || 0) * 1000;
+        if (state.nextPhoto && preloaded !== state.nextPhoto) { preloaded = state.nextPhoto; (new Image()).src = state.nextPhoto; }
+        draw();
       }).catch(function () {});
   }
   function draw() {
@@ -258,10 +264,11 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
     if ($('clues').getAttribute('data-n') !== String((c.clues || []).length) + key) { $('clues').innerHTML = cl; $('clues').setAttribute('data-n', String((c.clues || []).length) + key); }
     var revealed = s.status === 'reveal';
     $('answer').hidden = !revealed; if (revealed) $('answer').textContent = c.answer;
-    Array.prototype.forEach.call($('cluePills').children, function (p, i) { p.className = revealed ? 'done' : (i + 1 === s.stage ? 'on' : (i + 1 < s.stage ? 'done' : '')); });
+    $('ready').hidden = !s.ready;
+    Array.prototype.forEach.call($('cluePills').children, function (p, i) { p.hidden = i === 2 && s.lastStage === 2 && !revealed; p.className = revealed ? 'done' : (i + 1 === s.stage ? 'on' : (i + 1 < s.stage ? 'done' : '')); });
     $('timerWrap').hidden = s.status !== 'round';
-    $('nextClueBtn').hidden = s.status !== 'round';
-    $('nextClueBtn').textContent = s.stage >= 3 ? 'End round' : 'Next clue';
+    $('nextClueBtn').hidden = s.status !== 'round' || s.ready;
+    $('nextClueBtn').textContent = s.stage >= s.lastStage ? 'End round' : 'Next clue';
     $('revealBtn').hidden = !(s.status === 'round' || s.status === 'closed');
     $('revealBtn').className = s.status === 'closed' ? 'btn' : 'btn ghost';
     $('revealBtn').textContent = s.status === 'closed' ? 'Time’s up: reveal the answer' : 'Reveal answer';
@@ -280,12 +287,19 @@ select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; bo
   }
   function tick() {
     if (state && state.status === 'round') {
-      var left = Math.max(0, (stageEndsAt - Date.now()) / 1000), used = state.stageSecs - left;
-      var bar = $('timerBar'); bar.style.width = (left / state.stageSecs * 100) + '%';
-      bar.className = used < state.bonusSecs ? '' : left > 3 ? 'late' : 'end';
-      $('timerSecs').textContent = Math.ceil(left) + 's';
-      $('timerLabel').textContent = used < state.bonusSecs ? 'Bonus points for ' + Math.ceil(state.bonusSecs - used) + ' more seconds' : (state.stage < 3 ? 'Next clue soon' : 'Last chance');
-      if (left <= 0.05 && state._polledAtZero !== state.stage) { state._polledAtZero = state.stage; poll(); }
+      var left = Math.max(0, (stageEndsAt - Date.now()) / 1000), bar = $('timerBar');
+      if (state.ready) {
+        $('readyNum').textContent = Math.max(1, Math.ceil(left));
+        bar.style.width = '100%'; bar.className = ''; $('timerLabel').textContent = 'Get ready'; $('worth').textContent = ''; $('timerSecs').textContent = '';
+      } else {
+        var used = state.stageSecs - left, bonus = Math.max(0, state.bonusSecs - Math.ceil(used));
+        bar.style.width = (left / state.stageSecs * 100) + '%';
+        bar.className = left > 3 ? (state.stage === 1 && bonus > 0 ? '' : 'late') : 'end';
+        $('timerSecs').textContent = Math.ceil(left) + 's';
+        if (state.stage === 1) { $('worth').textContent = (10 + bonus) + ' pts'; $('timerLabel').textContent = bonus > 0 ? 'Photo: points drop every second' : 'Photo: 10 points'; }
+        else { $('worth').textContent = state.stagePoints + ' pts'; $('timerLabel').textContent = state.stage < state.lastStage ? 'Clue ' + state.stage + ': next clue soon' : 'Clue ' + state.stage + ': last chance'; }
+      }
+      if (left <= 0.05 && state._polledAt !== state.stage + ':' + state.ready) { state._polledAt = state.stage + ':' + state.ready; poll(); }
     }
     if (timerId) requestAnimationFrame(tick);
   }

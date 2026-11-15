@@ -8,11 +8,15 @@
 // Answers are checked here on the server, and a round's answer is only
 // sent to the browsers once the teacher reveals it.
 //
-// Scoring (each round has 3 clues, STAGE_SECS seconds each):
-//   correct first try:  BASE[clue] points (10 / 7 / 4) + 1 bonus point for
-//                       every second left of the first 10 seconds of that clue
-//                       (e.g. right in 5 seconds on the photo = 10 + 5 = 15)
-//   correct after a wrong try: RETRY_POINTS (5), no bonus
+// Each round: a READY_SECS "get ready" countdown (the photo loads on every
+// device while it runs), then the photo, then clue 2, STAGE_SECS each.
+// Clue 3 only appears if no team got it right on the photo or clue 2.
+// Scoring:
+//   photo, first try:   10 + 1 bonus point for every second left of the
+//                       first 10 (e.g. right in 4 seconds = 10 + 6 = 16)
+//   photo, after a wrong try: 5
+//   clue 2: 5 (open to every team still guessing, no speed points)
+//   clue 3: 3
 //   up to MAX_ATTEMPTS tries per round.
 // Needs sql/014_team_games.sql.
 
@@ -22,8 +26,10 @@ import { getSessionUser } from './auth.js';
 
 const STAGE_SECS = 20;
 const BONUS_SECS = 10;
-const BASE = [10, 7, 4];
+const READY_SECS = 4;
+const PHOTO_POINTS = 10;
 const RETRY_POINTS = 5;
+const CLUE_POINTS = [null, 5, 3]; // clue 2, clue 3
 const MAX_ATTEMPTS = 3;
 const MAX_TEAMS = 30;
 
@@ -101,18 +107,25 @@ export function isCorrect(given, round) {
   });
 }
 
-function timing(game, now) {
-  if (game.status !== 'round' || !game.round_started_at) return { stage: game.status === 'reveal' ? 3 : 0, stageLeft: 0, closed: game.status !== 'round' };
+// round_started_at is when the photo appears (READY_SECS after the teacher
+// presses start). lastStage is 2 when a team got it right on the photo or
+// clue 2, so clue 3 is never shown; otherwise 3.
+function lastStageFor(answers, round) {
+  return answers.some((a) => a.round === round && a.correct && a.stage <= 2) ? 2 : 3;
+}
+function timing(game, now, lastStage) {
+  if (game.status !== 'round' || !game.round_started_at) return { stage: game.status === 'reveal' ? 3 : 0, stageLeft: 0, closed: game.status !== 'round', lastStage };
   const elapsed = (now - new Date(game.round_started_at).getTime()) / 1000;
-  const stage = Math.min(3, Math.floor(Math.max(0, elapsed) / STAGE_SECS) + 1);
-  const closed = elapsed >= 3 * STAGE_SECS;
+  if (elapsed < 0) return { elapsed, stage: 0, inStage: 0, closed: false, ready: true, stageLeft: -elapsed, lastStage };
+  const stage = Math.min(lastStage, Math.floor(elapsed / STAGE_SECS) + 1);
+  const closed = elapsed >= lastStage * STAGE_SECS;
   const inStage = elapsed - (stage - 1) * STAGE_SECS;
-  return { elapsed, stage, inStage, closed, stageLeft: closed ? 0 : Math.max(0, STAGE_SECS - inStage) };
+  return { elapsed, stage, inStage, closed, stageLeft: closed ? 0 : Math.max(0, STAGE_SECS - inStage), lastStage };
 }
 
 function publicRound(set, game, t, showAnswer) {
   const r = set.rounds[game.round]; if (!r || game.status === 'lobby' || game.status === 'finished') return null;
-  const shown = game.status === 'reveal' ? 3 : t.stage;
+  const shown = game.status === 'reveal' ? 3 : Math.max(1, t.stage);
   const out = { number: game.round + 1, photo: r.photo, clues: r.clues.slice(0, Math.max(0, shown - 1)) };
   if (showAnswer) out.answer = r.answer;
   return out;
@@ -198,8 +211,10 @@ async function answer(res, supabase, b) {
   if (!game) return res.status(404).json({ error: 'This game has ended.' });
   const { data: team } = await supabase.from('sbl_team_game_teams').select('id, team_key, removed').eq('id', String(b.teamId || '')).eq('game_code', code).maybeSingle();
   if (!team || team.removed || team.team_key !== String(b.teamKey || '')) return res.status(403).json({ error: 'Your team is no longer in this game.' });
-  const now = Date.now(), t = timing(game, now);
+  const { data: roundAnswers } = await supabase.from('sbl_team_game_answers').select('round, stage, correct').eq('game_code', code).eq('round', game.round);
+  const now = Date.now(), t = timing(game, now, lastStageFor(roundAnswers || [], game.round));
   if (game.status !== 'round' || t.closed) return res.status(409).json({ error: 'Time is up for this round.' });
+  if (t.ready) return res.status(409).json({ error: 'Wait for the photo to appear.' });
   const text = String(b.answer || '').slice(0, 80).trim();
   if (!text) return res.status(400).json({ error: 'Type an answer first.' });
   const { data: mine } = await supabase.from('sbl_team_game_answers').select('correct').eq('game_code', code).eq('team_id', team.id).eq('round', game.round);
@@ -209,7 +224,10 @@ async function answer(res, supabase, b) {
   const set = SETS[game.set_slug], round = set.rounds[game.round];
   const correct = isCorrect(text, round);
   let points = 0;
-  if (correct) points = attempts === 0 ? BASE[t.stage - 1] + Math.max(0, BONUS_SECS - Math.ceil(t.inStage)) : RETRY_POINTS;
+  if (correct) {
+    if (t.stage === 1) points = attempts === 0 ? PHOTO_POINTS + Math.max(0, BONUS_SECS - Math.ceil(t.inStage)) : RETRY_POINTS;
+    else points = CLUE_POINTS[t.stage - 1];
+  }
   const { error } = await supabase.from('sbl_team_game_answers').insert({ game_code: code, team_id: team.id, round: game.round, stage: t.stage, answer: text, correct, points });
   if (error) throw error;
   return res.status(200).json({ correct, points, attemptsLeft: correct ? 0 : MAX_ATTEMPTS - attempts - 1 });
@@ -219,13 +237,14 @@ async function host(res, supabase, b) {
   const code = cleanCode(b.code);
   const game = await loadGame(supabase, code);
   if (!game || game.host_key !== String(b.hostKey || '')) return res.status(403).json({ error: 'This game has ended or you are not its host.' });
-  const set = SETS[game.set_slug], now = Date.now(), t = timing(game, now);
+  const { data: roundAnswers } = await supabase.from('sbl_team_game_answers').select('round, stage, correct').eq('game_code', code).eq('round', game.round);
+  const set = SETS[game.set_slug], now = Date.now(), t = timing(game, now, lastStageFor(roundAnswers || [], game.round));
   let patch = null;
   if (b.op === 'start') {
     const next = game.status === 'lobby' ? 0 : game.round + 1;
-    patch = next >= set.rounds.length ? { status: 'finished' } : { status: 'round', round: next, round_started_at: new Date(now).toISOString() };
-  } else if (b.op === 'next-clue' && game.status === 'round' && !t.closed) {
-    patch = t.stage >= 3 ? { status: 'reveal' } : { round_started_at: new Date(now - t.stage * STAGE_SECS * 1000).toISOString() };
+    patch = next >= set.rounds.length ? { status: 'finished' } : { status: 'round', round: next, round_started_at: new Date(now + READY_SECS * 1000).toISOString() };
+  } else if (b.op === 'next-clue' && game.status === 'round' && !t.closed && !t.ready) {
+    patch = t.stage >= t.lastStage ? { status: 'reveal' } : { round_started_at: new Date(now - t.stage * STAGE_SECS * 1000).toISOString() };
   } else if (b.op === 'reveal' && game.status === 'round') {
     patch = { status: 'reveal' };
   } else if (b.op === 'finish') {
@@ -245,19 +264,24 @@ async function getState(req, res, supabase) {
   const game = await loadGame(supabase, code);
   if (!game) return res.status(404).json({ error: 'No game found with that code.' });
   const isHost = q.hostKey && q.hostKey === game.host_key;
-  const now = Date.now(), t = timing(game, now), set = SETS[game.set_slug];
+  const set = SETS[game.set_slug];
   const { teams, answers } = await loadTeamsAndAnswers(supabase, code);
+  const now = Date.now(), t = timing(game, now, lastStageFor(answers, game.round));
   const board = scoreboard(teams, answers);
   const status = game.status === 'round' && t.closed ? 'closed' : game.status;
   const out = {
     code, status, setTitle: set.title, totalRounds: set.rounds.length, round: game.round + 1,
-    stage: t.stage, stageSecs: STAGE_SECS, bonusSecs: BONUS_SECS, stageLeft: Math.round((t.stageLeft || 0) * 10) / 10,
+    stage: t.stage, lastStage: t.lastStage, ready: !!t.ready, readySecs: READY_SECS, stageSecs: STAGE_SECS, bonusSecs: BONUS_SECS,
+    stageLeft: Math.round((t.stageLeft || 0) * 10) / 10, stagePoints: t.stage === 2 ? CLUE_POINTS[1] : t.stage === 3 ? CLUE_POINTS[2] : null,
     clue: publicRound(set, game, t, isHost || game.status === 'reveal'),
     scores: board.map((s) => ({ name: s.name, score: s.score }))
   };
   const answeredThisRound = (id) => roundStatus(id, answers, game.round);
   if (isHost) {
     out.isHost = true;
+    // So the board can load the next photo before the teacher starts the round.
+    const nextIdx = game.status === 'lobby' ? 0 : game.round + 1;
+    if (set.rounds[nextIdx] && game.status !== 'round') out.nextPhoto = set.rounds[nextIdx].photo.url;
     out.teams = board.map((s) => Object.assign({ id: s.id }, s, { thisRound: game.status === 'lobby' ? null : answeredThisRound(s.id) }));
   } else if (q.teamId) {
     const me = teams.find((x) => x.id === q.teamId && x.team_key === q.teamKey);

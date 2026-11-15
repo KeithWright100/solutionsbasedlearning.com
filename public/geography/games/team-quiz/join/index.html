@@ -37,6 +37,9 @@ input.code { text-transform: uppercase; letter-spacing: .2em; font-family: var(-
 .big { font-family: var(--display); font-size: 1.6rem; text-align: center; }
 .photo { border-radius: 14px; overflow: hidden; background: #000; aspect-ratio: 16 / 10; }
 .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ready { position: absolute; inset: 0; display: grid; place-items: center; background: #0b2e33; text-align: center; font-weight: 800; }
+.ready b { display: block; font-family: var(--display); font-size: 4.5rem; color: var(--accent); line-height: 1; }
+.photo { position: relative; }
 .clue { background: var(--panel-2); border-radius: 12px; padding: 12px 14px; font-size: 1.1rem; font-weight: 700; }
 .clue small { display: block; color: var(--accent); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
 .timer { height: 12px; border-radius: 999px; background: var(--panel-2); overflow: hidden; position: relative; }
@@ -78,7 +81,7 @@ form.ans { display: grid; gap: 10px; }
     <div id="round" class="card" hidden>
       <div class="timerrow"><span id="roundLabel"></span><span id="secs"></span></div>
       <div class="timer"><i id="bar"></i></div>
-      <div class="photo"><img id="photo" alt="Photo clue"></div>
+      <div class="photo"><img id="photo" alt="Photo clue"><div class="ready" id="ready" hidden><div>Get ready…<b id="readyNum">4</b></div></div></div>
       <div id="clues" style="display:grid;gap:8px"></div>
       <form class="ans" id="ansForm">
         <label for="ans">Where is this?</label>
@@ -163,22 +166,29 @@ form.ans { display: grid; gap: 10px; }
     var html = c.clues.map(function (t, i) { return '<div class="clue"><small>Clue ' + (i + 2) + '</small>' + esc(t) + '</div>'; }).join('');
     if ($('clues').innerHTML !== html) $('clues').innerHTML = html;
     $('roundLabel').textContent = 'Round ' + s.round + ' of ' + s.totalRounds + ' · ' + (s.stage === 1 ? 'Photo' : 'Clue ' + s.stage);
+    $('ready').hidden = !s.ready;
+    if (s.ready) $('roundLabel').textContent = 'Round ' + s.round + ' of ' + s.totalRounds + ' · Get ready';
     var r = s.me.thisRound || {}, closed = s.status === 'closed';
-    var canAnswer = !closed && !r.correct && (r.attempts || 0) < 3;
+    var canAnswer = !closed && !s.ready && !r.correct && (r.attempts || 0) < 3;
     $('ansForm').hidden = !canAnswer;
     $('result').hidden = canAnswer && !r.attempts;
     if (r.correct) { $('result').className = 'result ok'; $('result').textContent = 'Correct! +' + r.points + ' points'; }
     else if (closed) { $('result').className = 'result wait'; $('result').textContent = 'Time’s up! Watch the board for the answer.'; }
     else if (r.attempts >= 3) { $('result').className = 'result no'; $('result').textContent = 'No tries left this round.'; }
-    else if (r.attempts) { $('result').className = 'result no'; $('result').textContent = 'Not quite. ' + (3 - r.attempts) + (3 - r.attempts === 1 ? ' try' : ' tries') + ' left, worth 5 points.'; }
+    else if (r.attempts) { $('result').className = 'result no'; $('result').textContent = 'Not quite. ' + (3 - r.attempts) + (3 - r.attempts === 1 ? ' try' : ' tries') + ' left, worth ' + (s.stage === 3 ? 3 : 5) + ' points.'; }
   }
   function ordinal(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
   function tick() {
     if (state && state.status === 'round') {
-      var left = Math.max(0, (endsAt - Date.now()) / 1000), used = state.stageSecs - left;
-      $('bar').style.width = (left / state.stageSecs * 100) + '%';
-      $('bar').className = used < state.bonusSecs ? '' : 'late';
-      $('secs').textContent = used < state.bonusSecs ? 'Bonus ' + Math.ceil(state.bonusSecs - used) + 's' : Math.ceil(left) + 's';
+      var left = Math.max(0, (endsAt - Date.now()) / 1000);
+      if (state.ready) { $('readyNum').textContent = Math.max(1, Math.ceil(left)); $('bar').style.width = '100%'; $('secs').textContent = ''; }
+      else {
+        var used = state.stageSecs - left, bonus = Math.max(0, state.bonusSecs - Math.ceil(used));
+        $('bar').style.width = (left / state.stageSecs * 100) + '%';
+        $('bar').className = state.stage === 1 && bonus > 0 ? '' : 'late';
+        $('secs').textContent = (state.stage === 1 ? (10 + bonus) : state.stagePoints) + ' pts · ' + Math.ceil(left) + 's';
+      }
+      if (left <= 0.05 && state._polledAt !== state.stage + ':' + state.ready) { state._polledAt = state.stage + ':' + state.ready; poll(); }
     }
     if (timer) requestAnimationFrame(tick);
   }
