@@ -54,5 +54,15 @@
       post(slug, { explore: acct.explore });
     });
   }
-  window.SBLGameAccount = { record: record, collect: collect, load: load };
+  // Save any keys straight onto the game's record (e.g. "w:<id>" written answers
+  // with feedback, or a hand-built "m:<part>" mark). Resolves true if saved.
+  function save(slug, patch) {
+    return load(slug).then(function (acct) {
+      if (!acct) return false;
+      Object.keys(patch).forEach(function (k) { acct[k] = patch[k]; });
+      post(slug, patch);
+      return true;
+    });
+  }
+  window.SBLGameAccount = { record: record, collect: collect, load: load, save: save };
 })();

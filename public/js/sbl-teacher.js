@@ -301,7 +301,9 @@
         { id: 'cf', title: 'Capitals & flags' }, { id: 'phys', title: 'Physical features' }, { id: 'explore', title: 'Explore the map' }] },
     { id: 'GAME:danillion', name: 'Danillion', parts: [{ id: 'l1', title: 'Level 1' }, { id: 'l2', title: 'Level 2' }, { id: 'daily', title: 'Daily' }] },
     { id: 'GAME:travel-the-wright-way', name: 'Travel the Wright Way', unit: 'stamps', unitTip: 'Destinations completed (passport stamps)',
-      parts: [{ id: 'ks3', title: 'KS3 version' }, { id: 'adv', title: 'IGCSE / IB version' }, { id: 'explore', title: 'Passport stamps' }] }
+      parts: [{ id: 'ks3', title: 'KS3 version' }, { id: 'adv', title: 'IGCSE / IB version' }, { id: 'explore', title: 'Passport stamps' }] },
+    { id: 'GAME:development-detectives', name: 'Development Detectives', writing: true,
+      parts: [{ id: 'sc1', title: 'SC1 Describe indicators' }, { id: 'sc2', title: 'SC2 Strengths & weaknesses' }, { id: 'sc3', title: 'SC3 Evaluate HDI' }, { id: 'verdict', title: 'Final paragraph (Copilot)' }, { id: 'ch', title: 'Challenges' }] }
   ];
   var GAME_PARTS = [];
   GAME_DEFS.forEach(function (G) { G.parts.forEach(function (p, i) { GAME_PARTS.push({ id: G.id + '#' + p.id, part: p.id, title: p.title, game: G, first: i === 0 }); }); });
@@ -355,7 +357,7 @@
     }).join('') || '<tr><td class="cs-name" style="color:var(--slate)">No students match.</td></tr>';
     wrap.innerHTML = '<table class="cs-sheet"><thead>' + h + '</thead><tbody>' + body + '</tbody></table>';
     wrap.querySelectorAll('button.cs-who').forEach(function (b) { b.addEventListener('click', function () { openStudent(b.dataset.student); }); });
-    $('sheetNote').textContent = 'Each score is the student’s most recent round in that part of the game (for Travel the Wright Way, their most recent destination) — it updates every time they play (hover for the round, best score and number of plays). Only games played while logged in are recorded.';
+    $('sheetNote').textContent = 'Each score is the student’s most recent round in that part of the game (for Travel the Wright Way, their most recent destination) — it updates every time they play (hover for the round, best score and number of plays). Only games played while logged in are recorded. For Development Detectives, click a student’s name to read their writing and Copilot feedback.';
   }
 
 
@@ -524,7 +526,7 @@
             var m = G['m:' + pt.id]; if (!m || !m.lm) return '<tr><td>' + esc(pt.title) + '</td><td>·</td><td>·</td><td>·</td></tr>';
             var lp = Math.round(m.ls / m.lm * 100);
             return '<tr><td>' + esc(pt.title) + '<small>' + esc(m.lt || '') + ' · ' + fmtDate(m.at) + '</small></td><td class="' + band(lp) + '">' + m.ls + '/' + m.lm + '</td><td class="' + band(m.bp) + '">' + (m.bp != null ? m.bp + '%' : '·') + '</td><td>' + (m.n || 1) + '</td></tr>';
-          }).join('') + '</tbody></table></div>';
+          }).join('') + '</tbody></table>' + gameWriting(G) + '</div>';
       });
       ids = ids.filter(function (id) { return id.indexOf('GAME:') !== 0; });
       var lastView = null;
@@ -552,6 +554,21 @@
         tr.addEventListener('click', function () { openDetail(studentId, tr.dataset.lesson, tr.dataset.title, true); });
       });
     }).catch(function (err) { $('drawerBody').innerHTML += '<div class="cs-block">' + esc(err.message) + '</div>'; });
+  }
+
+  // Written answers a game saved as "w:<id>" (e.g. Development Detectives), with any Copilot feedback.
+  function gameWriting(G) {
+    var keys = Object.keys(G).filter(function (k) { return k.indexOf('w:') === 0 && G[k] && G[k].a; });
+    if (!keys.length) return '';
+    keys.sort(function (a, b) { return a === 'w:verdict' ? -1 : b === 'w:verdict' ? 1 : String(G[a].at || '').localeCompare(String(G[b].at || '')); });
+    return '<h3 style="margin-top:12px">Written answers</h3>' + keys.map(function (k) {
+      var w = G[k], f = w.feedback || {};
+      return '<div class="cs-ans" style="margin:8px 0;padding:10px 12px;border:1px solid rgba(127,127,127,.35);border-radius:10px">' +
+        '<div style="font-weight:700">' + esc(w.q || k.slice(2)) + (w.mark != null ? ' · <span class="' + band(pctOf(w.mark, w.max || 4)) + '">' + w.mark + '/' + (w.max || 4) + '</span>' : '') + (w.checks ? ' <small>checklist ' + esc(w.checks) + '</small>' : '') + '<small> · ' + fmtDate(w.at, true) + '</small></div>' +
+        '<div style="white-space:pre-wrap;margin-top:4px">' + esc(w.a) + '</div>' +
+        (f.why || f.good || f.improve ? '<div style="margin-top:6px;font-size:.92em"><b>Copilot feedback:</b> ' + esc(f.why || '') + (f.good ? ' <b>Good:</b> ' + esc(f.good) : '') + (f.improve ? ' <b>To improve:</b> ' + esc(f.improve) : '') + '</div>' : '') +
+        '</div>';
+    }).join('');
   }
 
   function openDetail(studentId, lessonId, titleOverride, fromOverview) {

@@ -145,6 +145,7 @@
           ['Ruapehu Mission', '/geography/games/volcano-fantastic-place'],
           ['How Does Life Vary?', '/geography/games/life-around-the-world'],
           ['Build a Climate Graph: Oslo', '/geography/games/climate-graph-oslo', 'new'],
+          ['Development Detectives', '/geography/games/development-detectives', 'new'],
           ['Team Quiz: Guess the Place', '/geography/games/team-quiz/', 'new'],
           ['History', '', 'head'],
           ['Tomb of the First Emperor', '/geography/games/qin-tomb'],
