@@ -29,6 +29,8 @@
     { key: 'ppn', label: 'HL: Power, places and networks', src: '/js/sbl-unit4-lessons.js' },
     { key: 'hd', label: 'HL: Human development and diversity', src: '/js/sbl-hd-lessons.js' },
     { key: 'gr', label: 'HL: Global risks and resilience', src: '/js/sbl-gr-lessons.js' },
+    { key: 'ibecon', label: 'IB Economics (Revision Guide)', src: '/js/sbl-ib-econ-guide-lessons.js' },
+    { key: 'ibbus', label: 'IB Business Management (Revision Guide)', src: '/js/sbl-ib-bus-guide-lessons.js' },
     { key: 'igeo', label: 'IGCSE Geography (Edexcel)', src: '/js/sbl-igcse-geo-lessons.js' },
     { key: 'iecon', label: 'IGCSE Economics (Edexcel)', src: '/js/sbl-igcse-econ-lessons.js' },
     { key: 'ciecon', label: 'IGCSE Economics (CIE)', src: '/js/sbl-cie-econ-lessons.js' },
@@ -485,7 +487,7 @@
 
   // ---- detail drawer: one student, one lesson ----
   // ---- whole-student overview: every lesson and PPQ topic they've saved ----
-  var UNIT_PREFIX = [['CIEE', 'ciecon'], ['IGEN', 'iecon'], ['IGBS', 'ibus'], ['IGHI', 'ihist'], ['IGCO', 'igeo'], ['IGDV', 'igeo'], ['IGHZ', 'igeo'], ['IGCF', 'igeo'], ['IGRU', 'igeo'], ['IGEC', 'igeo'], ['IGRF', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
+  var UNIT_PREFIX = [['IBE', 'ibecon'], ['IBB', 'ibbus'], ['CIEE', 'ciecon'], ['IGEN', 'iecon'], ['IGBS', 'ibus'], ['IGHI', 'ihist'], ['IGCO', 'igeo'], ['IGDV', 'igeo'], ['IGHZ', 'igeo'], ['IGCF', 'igeo'], ['IGRU', 'igeo'], ['IGEC', 'igeo'], ['IGRF', 'igeo'], ['CP', 'u1'], ['CC', 'u2'], ['RC', 'u3'], ['FW', 'fw'], ['LT', 'lt'], ['FH', 'fh'], ['PPN', 'ppn'], ['HD', 'hd'], ['GR', 'gr']];
   function viewOf(id) {
     if (id.indexOf('PPQ:') === 0) return 'ppq';
     for (var i = 0; i < UNIT_PREFIX.length; i++) if (id.indexOf(UNIT_PREFIX[i][0]) === 0) return UNIT_PREFIX[i][1];
