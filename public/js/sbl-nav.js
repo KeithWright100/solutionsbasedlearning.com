@@ -177,7 +177,8 @@
     { key: 'tch', label: 'Teachers', color: 'var(--sn-tch)', teacher: true, blurb: 'Only visible to teacher and admin accounts',
       cols: [
         { title: 'My classes', items: [
-          ['Teacher dashboard', '/teacher']] },
+          ['Teacher dashboard', '/teacher'],
+          ['Display mode (big screen)', '/display']] },
         { title: 'Admin', adminOnly: true, items: [
           ['Users, groups & subjects', '/admin']] }
       ] }
