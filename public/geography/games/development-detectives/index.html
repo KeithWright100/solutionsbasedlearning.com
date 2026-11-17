@@ -547,7 +547,8 @@ table.data th{background:var(--accent-soft)}
   var isTeacher = false;
   function chapStatus(i) { var ch = CHAPTERS[i]; return ch.acts.every(function (a) { return S.done[i + ':' + a]; }); }
   function renderTabs() {
-    $('chapters').innerHTML = CHAPTERS.map(function (ch, i) { var locked = i > S.unlocked; return '<button type="button" class="chap' + (chapStatus(i) ? ' done' : '') + (locked ? ' locked' : '') + '"' + (i === S.chap ? ' aria-current="step"' : '') + ' data-i="' + i + '"><span class="n">' + (chapStatus(i) ? '✓' : i) + '</span>' + (locked ? '🔒 ' : '') + esc(ch.title) + '</button>'; }).join('') + '<span class="spacer"></span><span class="score-pill" id="pts">' + totalPts() + ' pts</span>';
+    $('chapters').innerHTML = CHAPTERS.map(function (ch, i) { var locked = i > S.unlocked; return '<button type="button" class="chap' + (chapStatus(i) ? ' done' : '') + (locked ? ' locked' : '') + '"' + (i === S.chap ? ' aria-current="step"' : '') + ' data-i="' + i + '"><span class="n">' + (chapStatus(i) ? '✓' : i) + '</span>' + (locked ? '🔒 ' : '') + esc(ch.title) + '</button>'; }).join('') + '<span class="spacer"></span><button type="button" class="btn ghost small" id="copyAll" style="align-self:center">📋 Copy my answers for OneNote</button><span class="score-pill" id="pts">' + totalPts() + ' pts</span>';
+    $('copyAll').onclick = copyAnswers;
     $('chapters').querySelectorAll('.chap').forEach(function (b) { b.onclick = function () { var i = +b.dataset.i; if (i > S.unlocked) { codePrompt(i); return; } S.chap = i; persist(); renderChapter(); }; });
   }
   function totalPts() { var t = 0; ['sc1', 'sc2', 'sc3', 'ch'].forEach(function (k) { t += S.pts[k][0]; }); return t; }
@@ -597,11 +598,61 @@ table.data th{background:var(--accent-soft)}
       A[cid].render(cbox.querySelector('.body'), function () { S.done['c' + i + ':' + cid] = 1; persist(); renderTabs(); showActs(); });
     } else { cbox.innerHTML = '<span class="badge">⭐ Challenges complete</span><p>Brilliant work. Look back at your writing: can you add a figure from the maps or graphs to make it stronger?</p>'; host.appendChild(cbox); }
   }
+  // Copy everything the student wrote, with scores and feedback, as formatted text for OneNote.
+  function copyAnswers() {
+    var strip = function (h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent; };
+    var html = '<h1>Development Detectives: measuring and mapping development</h1><p><i>' + new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) + '</i></p>' +
+      '<p><b>Learning intention:</b> I can explain how development is measured and mapped, and judge how useful different indicators are.</p>';
+    var txt = 'Development Detectives: measuring and mapping development\n' + new Date().toLocaleDateString('en-GB') + '\n\n';
+    var labs = { sc1: 'SC1 Describe economic, social and composite indicators', sc2: 'SC2 Explain strengths and weaknesses of each type', sc3: 'SC3 Evaluate how useful HDI is' };
+    html += '<h2>My scores</h2><ul>' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return '<li>' + labs[k] + ': <b>' + (p == null ? 'not started' : p + '%') + '</b></li>'; }).join('') + (S.perspective ? '<li>My perspective in chapter 0: <b>' + esc(S.perspective) + '</b></li>' : '') + '</ul>';
+    txt += 'My scores\n' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return labs[k] + ': ' + (p == null ? 'not started' : p + '%'); }).join('\n') + '\n\n';
+    var any = false;
+    CHAPTERS.forEach(function (ch, i) {
+      var ids = ch.acts.concat(ch.challenge).map(function (a) { return a === 'chPersp' ? 'chPerspW' : a; }).filter(function (a) { return S.written[a]; });
+      if (!ids.length) return;
+      any = true;
+      html += '<h2>Chapter ' + i + ': ' + esc(ch.title) + '</h2>'; txt += 'Chapter ' + i + ': ' + ch.title + '\n';
+      ids.forEach(function (id) {
+        var q = id === 'verdict' ? '“HDI is the best indicator of development.” My judgement:' : strip(KEYD[id] ? KEYD[id].q : id);
+        var chall = ch.challenge.indexOf(id) >= 0 || id === 'chPerspW';
+        html += '<p><b>' + (chall ? '⭐ ' : '') + esc(q) + '</b></p><p>' + esc(S.written[id]) + '</p>';
+        txt += (chall ? '* ' : '') + q + '\n' + S.written[id] + '\n';
+        if (id === 'verdict' && S.verdict && S.verdict.f) {
+          var f = S.verdict.f;
+          html += '<p><b>Feedback: ' + (S.verdict.mark != null ? S.verdict.mark + ' / 4' : '') + '</b></p><ul>' + (f.whyThisMark ? '<li>' + esc(f.whyThisMark) + '</li>' : '') + (f.whatWasDoneWell ? '<li>What was good: ' + esc(f.whatWasDoneWell) + '</li>' : '') + (f.whatIsMissing ? '<li>How to improve it: ' + esc(f.whatIsMissing) + '</li>' : '') + '</ul>';
+          txt += 'Feedback: ' + (S.verdict.mark != null ? S.verdict.mark + ' / 4. ' : '') + [f.whyThisMark, f.whatWasDoneWell, f.whatIsMissing].filter(Boolean).join(' ') + '\n';
+        }
+        txt += '\n';
+      });
+    });
+    if (!any) { flash('You haven’t saved any writing yet. Finish a writing task first.'); return; }
+    function done() { flash('Copied! Open OneNote and paste (Ctrl+V).'); }
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([txt], { type: 'text/plain' }) })]).then(done, fallback);
+      } else fallback();
+    } catch (e) { fallback(); }
+    function fallback() {
+      var box = document.createElement('div'); box.contentEditable = 'true'; box.style.cssText = 'position:fixed;left:-9999px;top:0'; box.innerHTML = html; document.body.appendChild(box);
+      var r = document.createRange(); r.selectNodeContents(box); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      sel.removeAllRanges(); box.remove();
+      ok ? done() : flash('Copying didn’t work in this browser. Select your answers and copy them by hand.');
+    }
+  }
+  function flash(msg) {
+    var t = document.createElement('div'); t.setAttribute('role', 'status'); t.textContent = msg;
+    t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1d1b26;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;z-index:2000;max-width:90vw;text-align:center';
+    document.body.appendChild(t); setTimeout(function () { t.remove(); }, 3500);
+  }
+
   function pct(k) { var p = S.pts[k]; return p[1] ? Math.round(p[0] / p[1] * 100) : null; }
   function resultsHTML() {
     var lab = { sc1: 'SC1 · Describe indicators', sc2: 'SC2 · Strengths and weaknesses', sc3: 'SC3 · Evaluate HDI' };
-    return '<h2>🏅 Case closed, Detective!</h2><div class="results">' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return '<div><span class="muted">' + lab[k] + '</span><b>' + (p == null ? '—' : p + '%') + '</b><span>' + (p == null ? '' : p >= 80 ? 'Secure' : p >= 50 ? 'Developing' : 'Needs more practice') + '</span></div>'; }).join('') + '<div><span class="muted">Final paragraph</span><b>' + (S.verdict && S.verdict.mark != null ? S.verdict.mark + ' / 4' : '—') + '</b><span>Copilot feedback</span></div></div><p>Total: <b>' + totalPts() + ' points</b>. ' + (accountOk ? 'Your scores and writing are saved for your teacher.' : 'Log in to SBL to save your work for your teacher.') + '</p><div class="row"><button class="btn ghost" type="button" id="restart">Start again</button></div>';
+    return '<h2>🏅 Case closed, Detective!</h2><div class="results">' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return '<div><span class="muted">' + lab[k] + '</span><b>' + (p == null ? '—' : p + '%') + '</b><span>' + (p == null ? '' : p >= 80 ? 'Secure' : p >= 50 ? 'Developing' : 'Needs more practice') + '</span></div>'; }).join('') + '<div><span class="muted">Final paragraph</span><b>' + (S.verdict && S.verdict.mark != null ? S.verdict.mark + ' / 4' : '—') + '</b><span>Copilot feedback</span></div></div><p>Total: <b>' + totalPts() + ' points</b>. ' + (accountOk ? 'Your scores and writing are saved for your teacher.' : 'Log in to SBL to save your work for your teacher.') + '</p><div class="row"><button class="btn" type="button" id="copyAll2">📋 Copy my answers for OneNote</button><button class="btn ghost" type="button" id="restart">Start again</button></div>';
   }
+  document.addEventListener('click', function (e) { if (e.target && e.target.id === 'copyAll2') copyAnswers(); });
   document.addEventListener('click', function (e) { if (e.target && e.target.id === 'restart') { if (!confirm('Start the whole game again? Your saved marks stay in your teacher’s mark book.')) return; try { localStorage.removeItem(KEY); } catch (er) {} location.reload(); } });
 
   // Teacher tools (teacher and admin accounts only): unlock all levels, answer key
