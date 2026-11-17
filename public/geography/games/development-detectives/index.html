@@ -116,6 +116,17 @@ table.data th{background:var(--accent-soft)}
 .codebox input{text-transform:uppercase;letter-spacing:.15em;font-family:var(--display);font-size:1.3rem;width:200px}
 .challenge{border:3px solid #f59e0b;background:#fff8e6;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
 .challenge .badge{align-self:flex-start;font:800 .8rem var(--body);letter-spacing:.08em;text-transform:uppercase;background:#b45309;color:#fff;border-radius:999px;padding:4px 12px}
+.teacher{font-size:.88rem;color:var(--muted)}
+.teacher button{background:none;border:0;padding:0;color:#0f6b5d;text-decoration:underline;font:800 .88rem var(--body);cursor:pointer}
+.keyov{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow:auto}
+.keyov .wrap{gap:14px}
+.kbar{display:flex;gap:10px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:2}
+.kact{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.kact ul,.kact ol{margin:0;padding-left:22px}
+.kok{color:var(--ok);font-weight:800}
+.kno{color:var(--muted)}
+.kmodel{background:var(--accent-soft);border-radius:10px;padding:10px 12px;font-style:italic}
+@media print{.kbar,.top-bar,#app{display:none!important}.keyov{position:static}.kact{break-inside:avoid}}
 .teacherbar{background:#1d1b26;color:#fff;border-radius:14px;padding:12px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:700}
 .teacherbar code{background:#3a3550;border-radius:6px;padding:2px 8px;font-size:1rem;letter-spacing:.08em}
 .score-pill{align-self:center;font:800 .95rem var(--body);background:#1d1b26;color:#fff;border-radius:999px;padding:6px 14px}
@@ -136,7 +147,6 @@ table.data th{background:var(--accent-soft)}
 </div></div>
 
 <main class="wrap" id="app">
-  <div id="teacherBar" class="teacherbar" hidden></div>
 
   <section class="panel" id="intro">
     <div class="eyebrow">KS3 Geography · Measuring and mapping development</div>
@@ -151,7 +161,9 @@ table.data th{background:var(--accent-soft)}
       </ol>
     </div>
     <p class="muted" id="loginNote" style="font-size:.92rem">Log in to SBL before you start so your scores and writing are saved for your teacher.</p>
+    <div class="teacher" id="teacherLinks" hidden><button type="button" id="tUnlock">Teacher: unlock all levels</button> &middot; <button type="button" id="tKey">Teacher: answer key</button> &middot; <span>Code words: <b>MONEY</b> (ch 1) · <b>HEALTH</b> (ch 2) · <b>INDEX</b> (ch 3) · <b>VERDICT</b> (ch 4)</span></div>
   </section>
+  <div id="keyov" class="keyov" hidden></div>
 
   <nav class="chapters" id="chapters" aria-label="Chapters"></nav>
   <section id="stage" aria-live="polite"></section>
@@ -302,8 +314,9 @@ table.data th{background:var(--accent-soft)}
   ];
 
   // Each activity: { sc, render(box, done) }. done() moves on.
-  var A = {};
+  var A = {}, KEYD = {};
   function mcq(id, sc, q, opts, ans, explain, pre) {
+    KEYD[id] = { type: 'mcq', q: q, opts: opts, ans: ans, explain: explain };
     A[id] = { sc: sc, render: function (box, done) {
       var order = opts.map(function (_, i) { return i; }).sort(function () { return Math.random() - .5; });
       box.innerHTML = (pre || '') + '<p class="q">' + q + '</p><div class="opts">' + order.map(function (i) { return '<button type="button" class="opt" data-i="' + i + '">' + esc(opts[i]) + '</button>'; }).join('') + '</div><div id="fb"></div>';
@@ -317,6 +330,7 @@ table.data th{background:var(--accent-soft)}
     } };
   }
   function sortAct(id, sc, q, bins, items, explain, pre) {
+    KEYD[id] = { type: 'sort', q: q, bins: bins, items: items, explain: explain };
     A[id] = { sc: sc, render: function (box, done) {
       var order = items.map(function (_, i) { return i; }).sort(function () { return Math.random() - .5; });
       var picked = {};
@@ -332,6 +346,7 @@ table.data th{background:var(--accent-soft)}
     } };
   }
   function matchAct(id, sc, q, pairs, explain) {
+    KEYD[id] = { type: 'match', q: q, pairs: pairs };
     A[id] = { sc: sc, render: function (box, done) {
       var defs = pairs.map(function (p, i) { return i; }).sort(function () { return Math.random() - .5; });
       box.innerHTML = '<p class="q">' + q + '</p><div class="opts">' + pairs.map(function (p, i) { return '<div class="sortrow" data-i="' + i + '"><label class="txt" for="m' + i + '">' + esc(p[0]) + '</label><select id="m' + i + '"><option value="">Choose a definition…</option>' + defs.map(function (d) { return '<option value="' + d + '">' + esc(pairs[d][1]) + '</option>'; }).join('') + '</select></div>'; }).join('') + '</div><div class="row"><button class="btn" type="button" id="chk">Check</button></div><div id="fb"></div>';
@@ -347,6 +362,7 @@ table.data th{background:var(--accent-soft)}
     } };
   }
   function numAct(id, sc, q, ans, tol, unit, explain, pre) {
+    KEYD[id] = { type: 'num', q: q, ans: ans, unit: unit, explain: explain };
     A[id] = { sc: sc, render: function (box, done) {
       box.innerHTML = (pre || '') + '<p class="q">' + q + '</p><div class="row"><label for="num" class="muted">Answer</label><input type="number" id="num" step="any" style="width:180px"> <b>' + esc(unit) + '</b><button class="btn" type="button" id="chk">Check</button></div><div id="fb"></div>';
       var tries = 0;
@@ -360,6 +376,7 @@ table.data th{background:var(--accent-soft)}
   }
   // Writing: frame = [text, {id, ph}] pieces, or starters; checks = [[label, regex]]
   function writeAct(id, sc, q, opt) {
+    KEYD[id] = { type: 'write', q: q, opt: opt };
     A[id] = { sc: sc, write: true, render: function (box, done) {
       var h = '<p class="q">' + q + '</p>';
       if (opt.frame) h += '<div class="frame">' + opt.frame.map(function (p, i) { return typeof p === 'string' ? '<span>' + esc(p) + '</span>' : '<input type="text" id="f' + i + '" placeholder="' + esc(p.ph || '') + '" aria-label="' + esc(p.ph || 'Your words') + '">'; }).join('') + '</div>';
@@ -402,21 +419,22 @@ table.data th{background:var(--accent-soft)}
     box.querySelectorAll('.pick').forEach(function (b) { b.onclick = function () { var i = +b.dataset.i, k = sel.indexOf(i); if (k >= 0) sel.splice(k, 1); else if (sel.length < 3) sel.push(i); else return; b.setAttribute('aria-pressed', String(sel.indexOf(i) >= 0)); var nb = box.querySelector('.next'); if (nb && sel.length < 3) nb.parentNode.remove(); show(); }; });
     show();
   } };
-  writeAct('hookWrite', 'sc1', 'Complete the sentence about your choices.', { frame: ['I would measure', { ph: 'one thing you chose' }, 'in Costa Rica because', { ph: 'why it shows development' }, '.'], checks: [['Says what you would measure', function (t) { return !/I would measure … /.test(t); }], ['Gives a reason with “because”', function (t) { return /because (?!…)\S/.test(t); }]], minWords: 10 });
-  A.chPersp = { sc: 'ch', render: function (box, done) { writeAct('chPerspW', 'ch', '<b>Challenge:</b> pick a perspective that is <i>different</i> from yours. Write two sentences explaining what someone with that view would measure in Costa Rica, and why.', { starters: ['Someone with a … perspective would measure…', 'This is because…'], checks: [['Names a perspective', has(/economic|social|environment|grassroots/i)], ['Names something to measure', has(INDIC)], ['Explains with “because”', has(/because/i)]], minWords: 20 }); A.chPerspW.render(box, done); } };
+  writeAct('hookWrite', 'sc1', 'Complete the sentence about your choices.', { model: 'I would measure how long people live in Costa Rica because a long life expectancy shows people have good healthcare, food and clean water.', frame: ['I would measure', { ph: 'one thing you chose' }, 'in Costa Rica because', { ph: 'why it shows development' }, '.'], checks: [['Says what you would measure', function (t) { return !/I would measure … /.test(t); }], ['Gives a reason with “because”', function (t) { return /because (?!…)\S/.test(t); }]], minWords: 10 });
+  writeAct('chPerspW', 'ch', '<b>Challenge:</b> pick a perspective that is <i>different</i> from yours. Write two sentences explaining what someone with that view would measure in Costa Rica, and why.', { model: 'Someone with an environmental sustainability perspective would measure how much forest is protected in Costa Rica. This is because development should not damage the environment for future generations.', starters: ['Someone with a … perspective would measure…', 'This is because…'], checks: [['Names a perspective', has(/economic|social|environment|grassroots/i)], ['Names something to measure', has(INDIC)], ['Explains with “because”', has(/because/i)]], minWords: 20 });
+  A.chPersp = { sc: 'ch', render: function (box, done) { A.chPerspW.render(box, done); } };
 
   /* Chapter 1 */
   matchAct('econMatch', 'sc1', 'Match each term to its definition.', [['GDP', 'The total value of all goods and services a country produces in a year'], ['GDP per capita', 'GDP divided by the number of people in the country'], ['Economic indicator', 'A measure of development based on income or wealth']], 'Per capita means “per person”.');
   numAct('econCalc', 'sc1', 'A country produces goods and services worth <b>$500 billion</b> in a year. It has <b>25 million</b> people. What is its GDP per capita?', 20000, 1, 'US$', '$500,000,000,000 ÷ 25,000,000 = $20,000 per person.', '<div class="formula">GDP per capita = GDP ÷ population</div>');
+  sortAct('econMapTF', 'sc1', 'True or false?', ['True', 'False'], [['Countries in North America, Oceania and western Europe tend to have a high GDP per capita', 0], ['Most countries with a very low GDP per capita are in Africa', 0], ['Every country in Asia has a high GDP per capita', 1], ['GDP per capita is about the same in every country', 1]], 'Wealth is very unevenly spread around the world.');
   A.econMap = { sc: 'sc1', render: function (box, done) {
     box.innerHTML = '<p class="q">Use the map. Tap countries to check their figures, then decide whether each statement is true or false.</p>' + mapSVG('m1', 'g') + '<div id="tf"></div>';
     wireMap('m1', 'g');
-    sortAct('econMapTF', 'sc1', 'True or false?', ['True', 'False'], [['Countries in North America, Oceania and western Europe tend to have a high GDP per capita', 0], ['Most countries with a very low GDP per capita are in Africa', 0], ['Every country in Asia has a high GDP per capita', 1], ['GDP per capita is about the same in every country', 1]], 'Wealth is very unevenly spread around the world.');
     var sub = document.createElement('div'); $('tf').appendChild(sub); A.econMapTF.render(sub, done);
   } };
   mcq('econPhoto', 'sc2', 'This photo is from Rio de Janeiro. Brazil’s GDP per capita is about ' + money(BR.g) + '. What does this photo show that GDP per capita <b>does not</b>?', ['Rich and poor people can live side by side, so wealth is not shared equally', 'Everyone in Brazil earns exactly ' + money(BR.g), 'Brazil has no money at all', 'Brazil is the richest country in the world'], 0, 'GDP per capita is an average. It hides <b>inequality</b> within a country.', photo('Contrasts of Rio de Janeiro - Rocinha, Ipanema, and Mountains at Sunrise.jpg', 'Thousands of small, tightly packed self-built houses on a steep hillside, with tall apartment blocks along a beach behind', 'Donatas Dabravolskas, CC BY-SA 4.0'));
   sortAct('econSort', 'sc2', 'Is each one a <b>strength</b> or a <b>weakness</b> of economic indicators?', ['Strength', 'Weakness'], [['Easy to measure and compare between countries', 0], ['Money lets people buy things that improve their lives', 0], ['Does not show inequality within a country', 1], ['Does not show whether growth is sustainable', 1], ['Does not show whether people have a good quality of life', 1]], 'Economic indicators are useful, but money is only part of the story.');
-  writeAct('econWrite', 'sc2', 'Complete the sentence frame about economic indicators.', { frame: ['Economic indicators such as GDP per capita are useful because', { ph: 'a strength' }, '. However, they do not show', { ph: 'a weakness' }, ', so', { ph: 'what this means' }, '.'], checks: [['Gives a strength', function (t) { return /useful because (?!…)\S/.test(t); }], ['Gives a weakness after “However”', function (t) { return /do not show (?!…)\S/.test(t); }], ['Explains what it means with “so”', function (t) { return /, so (?!…)\S/.test(t); }]], minWords: 25 });
+  writeAct('econWrite', 'sc2', 'Complete the sentence frame about economic indicators.', { model: 'Economic indicators such as GDP per capita are useful because they are easy to measure and compare between countries. However, they do not show inequality within a country, so a country can look rich even though many people are poor.', frame: ['Economic indicators such as GDP per capita are useful because', { ph: 'a strength' }, '. However, they do not show', { ph: 'a weakness' }, ', so', { ph: 'what this means' }, '.'], checks: [['Gives a strength', function (t) { return /useful because (?!…)\S/.test(t); }], ['Gives a weakness after “However”', function (t) { return /do not show (?!…)\S/.test(t); }], ['Explains what it means with “so”', function (t) { return /, so (?!…)\S/.test(t); }]], minWords: 25 });
   mcq('chQatar', 'ch', '<b>Challenge:</b> Qatar’s GDP per capita is ' + money(QA.g) + ', about three times Costa Rica’s (' + money(CR.g) + '). Life expectancy: Qatar ' + QA.l + ' years, Costa Rica ' + CR.l + ' years. What does this suggest?', ['Three times the money does not mean three times the quality of life', 'People in Qatar live three times longer', 'Costa Rica must have a very low HDI', 'GDP per capita is the only indicator we need'], 0, 'Costa Rica’s HDI is ' + CR.h.toFixed(3) + ' and Qatar’s is ' + QA.h.toFixed(3) + ': much closer than their wealth suggests.');
   A.chRank = { sc: 'ch', render: function (box, done) {
     var list = [['Japan', J.g], ['Thailand', TH.g], ['Nigeria', NG.g], ['United States', US.g], ['Costa Rica', CR.g]];
@@ -428,14 +446,14 @@ table.data th{background:var(--accent-soft)}
   /* Chapter 2 */
   matchAct('socMatch', 'sc1', 'Match each social indicator to its definition.', [['Life expectancy', 'The average number of years a person can expect to live, from birth'], ['Average years of schooling', 'The average number of years adults have spent in school'], ['Literacy rate', 'The percentage of adults who can read and write']], 'All three measure people’s quality of life, not their money.');
   numAct('socGraph', 'sc1', 'Use the bar chart. How many more years can a person in Japan expect to live than a person in Nigeria?', +(J.l - NG.l).toFixed(1), 0.15, 'years', 'Japan ' + J.l + ' − Nigeria ' + NG.l + ' = ' + (J.l - NG.l).toFixed(1) + ' years.', barChart([['Japan', J.l], ['United Kingdom', UK.l], ['Costa Rica', CR.l], ['Thailand', TH.l], ['India', IN.l], ['Nigeria', NG.l]], 100, ' years', '#0f766e'));
+  mcq('socMapQ', 'sc1', 'Use the map. Where are most of the countries with the <b>lowest</b> life expectancy?', ['Africa, south of the Sahara', 'Western Europe', 'North America', 'East Asia'], 0, 'Many countries in Africa south of the Sahara have a life expectancy under 65 years.');
   A.socMap = { sc: 'sc1', render: function (box, done) {
     box.innerHTML = mapSVG('m2', 'l') + '<div id="q2"></div>'; wireMap('m2', 'l');
-    mcq('socMapQ', 'sc1', 'Use the map. Where are most of the countries with the <b>lowest</b> life expectancy?', ['Africa, south of the Sahara', 'Western Europe', 'North America', 'East Asia'], 0, 'Many countries in Africa south of the Sahara have a life expectancy under 65 years.');
     var sub = document.createElement('div'); $('q2').appendChild(sub); A.socMapQ.render(sub, done);
   } };
   mcq('socPhoto', 'sc2', 'This is a neighbourhood on the edge of Lima. Peru’s life expectancy is ' + PE.l + ' years, close to the USA’s ' + US.l + '. What does life expectancy <b>not</b> tell us about the people living here?', ['Their living conditions, like housing, water and whether they are happy', 'How long they are likely to live', 'Anything about their health', 'Which country they live in'], 0, 'Social indicators show health and education, but not everything about quality of life.', photo('Lima PuebloJov 4.jpg', 'Small brick and wooden houses spread across a bare, sandy desert hillside on the edge of Lima', 'Håkan Svensson (Xauxa), CC BY 2.5'));
   sortAct('socSort', 'sc2', 'Strength or weakness of social indicators?', ['Strength', 'Weakness'], [['They measure things that directly affect quality of life', 0], ['They show health and education, not just money', 0], ['They don’t show whether the environment is protected', 1], ['They don’t show whether people are happy', 1], ['The data can be hard to collect in some countries', 1]], 'Social indicators get closer to people’s lives, but they still miss some things.');
-  writeAct('socWrite', 'sc2', 'Explain one strength and one weakness of social indicators. Use the sentence starters.', { starters: ['Social indicators such as … are useful because…', 'For example…', 'However, one weakness is…'], checks: [['Names a social indicator', has(/life expectancy|school|literacy/i)], ['Gives a strength with “because”', has(/because/i)], ['Gives a weakness with “however”', has(/however/i)], ['Uses an example or a figure', has(/for example|for instance|\d/i)]], minWords: 30 });
+  writeAct('socWrite', 'sc2', 'Explain one strength and one weakness of social indicators. Use the sentence starters.', { model: 'Social indicators such as life expectancy are useful because they measure things that directly affect people’s quality of life. For example, life expectancy in Japan is 85.1 years but only 55.0 in Nigeria. However, one weakness is that they do not show whether people are happy or whether the environment is protected.', starters: ['Social indicators such as … are useful because…', 'For example…', 'However, one weakness is…'], checks: [['Names a social indicator', has(/life expectancy|school|literacy/i)], ['Gives a strength with “because”', has(/because/i)], ['Gives a weakness with “however”', has(/however/i)], ['Uses an example or a figure', has(/for example|for instance|\d/i)]], minWords: 30 });
   A.chScatter = { sc: 'ch', render: function (box, done) {
     box.innerHTML = '<p class="q"><b>Challenge:</b> each dot is a country. Find a country that is <b>healthier than its money suggests</b>: high life expectancy (over 77 years) but GDP per capita under $20,000. Tap its dot.</p>' + scatter('sc') + '<div id="fb"></div>';
     var svg = $('sc');
@@ -448,7 +466,7 @@ table.data th{background:var(--accent-soft)}
       else $('fb').innerHTML = '<div class="fb bad">' + esc(d.n) + ' doesn’t fit. Look in the top-left of the graph.</div>';
     }
   } };
-  writeAct('chCuba', 'ch', '<b>Challenge:</b> Cuba’s GDP per capita is about ' + money(CU.g) + ', around a fifth of the USA’s (' + money(US.g) + '). Yet life expectancy is ' + CU.l + ' years in Cuba and ' + US.l + ' in the USA. Suggest <b>two</b> reasons why.', { starters: ['One reason might be…', 'Another reason could be…', 'This shows that…'], checks: [['Gives a first reason', has(/one reason|firstly|first/i)], ['Gives a second reason', has(/another|secondly|also/i)], ['Links back to indicators', has(/indicator|GDP|money|life expectancy/i)]], minWords: 30 });
+  writeAct('chCuba', 'ch', '<b>Challenge:</b> Cuba’s GDP per capita is about ' + money(CU.g) + ', around a fifth of the USA’s (' + money(US.g) + '). Yet life expectancy is ' + CU.l + ' years in Cuba and ' + US.l + ' in the USA. Suggest <b>two</b> reasons why.', { model: 'One reason might be that Cuba has free healthcare for everyone and lots of doctors. Another reason could be that most people have access to education. This shows that money (GDP) is not the only thing that affects life expectancy.', starters: ['One reason might be…', 'Another reason could be…', 'This shows that…'], checks: [['Gives a first reason', has(/one reason|firstly|first/i)], ['Gives a second reason', has(/another|secondly|also/i)], ['Links back to indicators', has(/indicator|GDP|money|life expectancy/i)]], minWords: 30 });
 
   /* Chapter 3 */
   sortAct('hdiParts', 'sc1', 'Which of these are used to make the HDI?', ['Used in HDI', 'Not used'], [['Life expectancy (health)', 0], ['Years of schooling (education)', 0], ['GNI per capita (income)', 0], ['How happy people feel', 1], ['How much pollution there is', 1]], 'HDI combines three things: health, education and income.');
@@ -461,20 +479,20 @@ table.data th{background:var(--accent-soft)}
     function upd() { var a = +$('sH').value, b = +$('sE').value, i = +$('sI').value; $('oH').textContent = a.toFixed(2); $('oE').textContent = b.toFixed(2); $('oI').textContent = i.toFixed(2); var h = Math.cbrt(a * b * i); $('hv').textContent = h.toFixed(3); var cat = h >= 0.8 ? ['Very high', '#1d3fa8'] : h >= 0.7 ? ['High', '#3b62d6'] : h >= 0.55 ? ['Medium', '#6b84d4'] : ['Low', '#7a1a10']; $('hc').textContent = cat[0]; $('hc').style.background = cat[1]; cb({ h: h, a: a, e: b, i: i }); }
     ['sH', 'sE', 'sI'].forEach(function (k) { $(k).addEventListener('input', upd); }); upd();
   }
+  sortAct('hdiMapTF', 'sc1', 'Use the HDI map. True or false?', ['True', 'False'], [['Most of North America, northern and western Europe and Oceania have a very high HDI', 0], ['Many countries in Africa south of the Sahara and southern Asia have a lower HDI', 0], ['Costa Rica has a low HDI', 1], ['Thailand has a higher HDI than Nigeria', 0]], 'Costa Rica’s HDI is ' + CR.h.toFixed(3) + ' (very high) and Thailand’s is ' + TH.h.toFixed(3) + ', just below very high.');
   A.hdiMap = { sc: 'sc1', render: function (box, done) {
     box.innerHTML = mapSVG('m3', 'h') + '<div id="q3"></div>'; wireMap('m3', 'h');
-    sortAct('hdiMapTF', 'sc1', 'Use the HDI map. True or false?', ['True', 'False'], [['Most of North America, northern and western Europe and Oceania have a very high HDI', 0], ['Many countries in Africa south of the Sahara and southern Asia have a lower HDI', 0], ['Costa Rica has a low HDI', 1], ['Thailand has a higher HDI than Nigeria', 0]], 'Costa Rica’s HDI is ' + CR.h.toFixed(3) + ' (very high) and Thailand’s is ' + TH.h.toFixed(3) + ', just below very high.');
     var sub = document.createElement('div'); $('q3').appendChild(sub); A.hdiMapTF.render(sub, done);
   } };
   mcq('hdiCompare', 'sc2', 'Thailand and Equatorial Guinea have almost the <b>same</b> GDP per capita. Why is Thailand’s HDI so much higher?', ['People in Thailand live longer and spend longer in school', 'Thailand is a bigger country', 'HDI only measures money', 'Equatorial Guinea has no data'], 0, 'HDI includes health and education, not just money. This is why many people think it gives a better picture.',
     '<table class="data"><thead><tr><th>Country</th><th class="num">GDP per capita</th><th class="num">Life expectancy</th><th class="num">HDI</th></tr></thead><tbody><tr><td>Thailand</td><td class="num">' + money(TH.g) + '</td><td class="num">' + TH.l + ' years</td><td class="num">' + TH.h.toFixed(3) + '</td></tr><tr><td>Equatorial Guinea</td><td class="num">' + money(EG.g) + '</td><td class="num">' + EG.l + ' years</td><td class="num">' + EG.h.toFixed(3) + '</td></tr></tbody></table>' + photo('Chao Phraya River in Bangkok 01.jpg', 'Boats on the wide Chao Phraya River in Bangkok, with temples and tall buildings along the banks', 'Krzysztof Golik, CC BY-SA 4.0'));
   sortAct('compSort', 'sc2', 'Strength or weakness of composite indicators like HDI?', ['Strength', 'Weakness'], [['Combining three scores gives a broad picture of development', 0], ['One number makes it easy to compare countries', 0], ['One number hides which part (health, education or income) is weak', 1], ['It has no measure of the environment', 1], ['It is an average, so it hides inequality', 1]], 'HDI is broader than one indicator, but no single number can show everything.');
-  writeAct('compWrite', 'sc2', 'Compare HDI with GDP per capita. Use at least two connectives from the bank.', { bank: ['whereas', 'however', 'therefore', 'because', 'this means that'], checks: [['Mentions HDI', has(/HDI|human development/i)], ['Mentions GDP or income', has(/GDP|income|money|wealth/i)], ['Uses a comparing word (whereas, however)', has(/whereas|however|while|unlike/i)], ['Explains with “because”, “therefore” or “this means”', has(/because|therefore|this means/i)]], minWords: 35 });
+  writeAct('compWrite', 'sc2', 'Compare HDI with GDP per capita. Use at least two connectives from the bank.', { model: 'HDI combines health, education and income, whereas GDP per capita only measures money. Therefore HDI gives a broader picture of development. However, HDI is still an average, which means it hides inequality between rich and poor people.', bank: ['whereas', 'however', 'therefore', 'because', 'this means that'], checks: [['Mentions HDI', has(/HDI|human development/i)], ['Mentions GDP or income', has(/GDP|income|money|wealth/i)], ['Uses a comparing word (whereas, however)', has(/whereas|however|while|unlike/i)], ['Explains with “because”, “therefore” or “this means”', has(/because|therefore|this means/i)]], minWords: 35 });
   A.chBuildLow = { sc: 'ch', render: function (box, done) {
     box.innerHTML = '<p class="q"><b>Challenge:</b> now set the <b>income score to 1.00</b> (the richest possible). Can you still make a <b>low</b> HDI (under 0.550)? What does this tell you?</p>' + sliders() + '<div id="fb"></div>';
     wireSliders(function (v) { if (S.items.chBuildLow) return; if (v.i >= 0.99 && v.h < 0.55) { award('chBuildLow', 'ch', 2, 2); $('fb').innerHTML = '<div class="fb ok">Yes! A very rich country with poor health and education would still have a low HDI. Money alone doesn’t make a country developed.</div>'; nextBtn(box, done); } });
   } };
-  writeAct('chThai', 'ch', '<b>Challenge:</b> Thailand’s HDI is ' + TH.h.toFixed(3) + ', just 0.002 below “very high”. Should Thailand be called a developed country? Give your view and one reason for and one against.', { starters: ['I think Thailand…', 'One reason for is…', 'However…'], checks: [['Gives a view', has(/I think|I believe|in my opinion/i)], ['Gives a reason for', has(/because|reason/i)], ['Gives a reason against with “however”', has(/however|on the other hand/i)]], minWords: 35 });
+  writeAct('chThai', 'ch', '<b>Challenge:</b> Thailand’s HDI is ' + TH.h.toFixed(3) + ', just 0.002 below “very high”. Should Thailand be called a developed country? Give your view and one reason for and one against.', { model: 'I think Thailand is almost a developed country. One reason for is that its HDI of 0.798 is just below very high, and life expectancy is 77.1 years. However, its GDP per capita is much lower than very developed countries, and there is inequality between Bangkok and rural areas.', starters: ['I think Thailand…', 'One reason for is…', 'However…'], checks: [['Gives a view', has(/I think|I believe|in my opinion/i)], ['Gives a reason for', has(/because|reason/i)], ['Gives a reason against with “however”', has(/however|on the other hand/i)]], minWords: 35 });
 
   /* Chapter 4 */
   mcq('verdictQuiz1', 'sc3', 'Someone says: “HDI is not enough, because it ignores pollution and climate change.” Which perspective is this?', ['Environmental sustainability', 'Economic growth', 'Grassroots', 'Human and social development'], 0, 'HDI has no measure of the environment.');
@@ -523,7 +541,7 @@ table.data th{background:var(--accent-soft)}
     };
     function showFeedback(v) { var f = v.f || {}; $('vfb').innerHTML = '<div class="fb ok"><b>Mark: ' + (v.mark != null ? v.mark + ' / 4' : '—') + '</b>' + (f.whyThisMark ? '<p>' + esc(f.whyThisMark) + '</p>' : '') + (f.whatWasDoneWell ? '<p><b>What was good:</b> ' + esc(f.whatWasDoneWell) + '</p>' : '') + (f.whatIsMissing ? '<p><b>How to improve it:</b> ' + esc(f.whatIsMissing) + '</p>' : '') + '<p class="muted" style="font-size:.85rem">You can improve your paragraph and submit it again.</p></div>'; }
   } };
-  writeAct('chIndex', 'ch', '<b>Challenge: design your own index.</b> Choose three things you would combine to measure development (they don’t have to be in HDI). Explain why your index is better than HDI, and one weakness it still has.', { starters: ['My index would combine…', 'It is better than HDI because…', 'However, one weakness is…'], checks: [['Names three measures', function (t) { return (t.match(/,| and /g) || []).length >= 2; }], ['Explains why it is better', has(/better|because/i)], ['Admits a weakness', has(/however|weakness|but/i)]], minWords: 40 });
+  writeAct('chIndex', 'ch', '<b>Challenge: design your own index.</b> Choose three things you would combine to measure development (they don’t have to be in HDI). Explain why your index is better than HDI, and one weakness it still has.', { model: 'My index would combine life expectancy, the percentage of people with clean water, and how much forest is protected. It is better than HDI because it includes the environment and basic needs. However, one weakness is that it leaves out income and whether people have a say in decisions.', starters: ['My index would combine…', 'It is better than HDI because…', 'However, one weakness is…'], checks: [['Names three measures', function (t) { return (t.match(/,| and /g) || []).length >= 2; }], ['Explains why it is better', has(/better|because/i)], ['Admits a weakness', has(/however|weakness|but/i)]], minWords: 40 });
 
   /* ---------- flow ---------- */
   var isTeacher = false;
@@ -586,14 +604,60 @@ table.data th{background:var(--accent-soft)}
   }
   document.addEventListener('click', function (e) { if (e.target && e.target.id === 'restart') { if (!confirm('Start the whole game again? Your saved marks stay in your teacher’s mark book.')) return; try { localStorage.removeItem(KEY); } catch (er) {} location.reload(); } });
 
-  // Teacher tools: code words and unlock-all
-  fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (s) {
-    if (!(s.loggedIn && s.user && (s.user.role === 'teacher' || s.user.role === 'admin'))) return;
-    isTeacher = true;
-    var bar = $('teacherBar'); bar.hidden = false;
-    bar.innerHTML = '<span>👩‍🏫 Teacher view · code words:</span>' + CODES.slice(1).map(function (c0, k) { return '<span>Ch ' + (k + 1) + ' <code>' + c0 + '</code></span>'; }).join('') + '<span class="spacer"></span><button class="btn small" type="button" id="unlockAll">Unlock all (preview)</button>';
-    $('unlockAll').onclick = function () { S.unlocked = CHAPTERS.length - 1; persist(); renderTabs(); };
+  // Teacher tools (teacher and admin accounts only): unlock all levels, answer key
+  fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (s0) {
+    if (!(s0.loggedIn && s0.user && (s0.user.role === 'teacher' || s0.user.role === 'admin'))) return;
+    isTeacher = true; $('teacherLinks').hidden = false; paintUnlock();
+    $('tUnlock').onclick = function () {
+      if (S.teacherOpen) { S.unlocked = S.preUnlock || 0; S.teacherOpen = false; if (S.chap > S.unlocked) S.chap = S.unlocked; }
+      else { S.preUnlock = S.unlocked; S.unlocked = CHAPTERS.length - 1; S.teacherOpen = true; }
+      persist(); paintUnlock(); renderChapter();
+    };
+    $('tKey').onclick = showKey;
   }).catch(function () {});
+  function paintUnlock() { $('tUnlock').textContent = S.teacherOpen ? 'Teacher mode: all levels open (turn off)' : 'Teacher: unlock all levels'; }
+
+  function keyAct(id, n) {
+    var k = KEYD[id], h = '<div class="kact"><b>' + n + '</b>';
+    if (!k) return '';
+    var q = k.q ? '<p>' + k.q + '</p>' : '';
+    if (k.type === 'mcq') h += q + '<ul>' + k.opts.map(function (o, i) { return '<li class="' + (i === k.ans ? 'kok' : 'kno') + '">' + (i === k.ans ? '✓ ' : '') + esc(o) + '</li>'; }).join('') + '</ul><p class="muted">' + k.explain + '</p>';
+    if (k.type === 'sort') h += q + '<ul>' + k.items.map(function (it) { return '<li>' + esc(it[0]) + ' → <span class="kok">' + esc(k.bins[it[1]]) + '</span></li>'; }).join('') + '</ul>';
+    if (k.type === 'match') h += q + '<ul>' + k.pairs.map(function (p) { return '<li><b>' + esc(p[0]) + '</b>: ' + esc(p[1]) + '</li>'; }).join('') + '</ul>';
+    if (k.type === 'num') h += q + '<p class="kok">Answer: ' + esc(k.ans.toLocaleString('en-GB')) + ' ' + esc(k.unit) + '</p><p class="muted">' + k.explain + '</p>';
+    if (k.type === 'write') h += q + (k.opt.frame ? '<p>Frame: <i>' + k.opt.frame.map(function (x) { return typeof x === 'string' ? esc(x) : '______'; }).join(' ') + '</i></p>' : '') + '<p>Automatic checklist: ' + k.opt.checks.map(function (c) { return esc(c[0]); }).join(' · ') + '</p>' + (k.opt.model ? '<p class="kmodel">Model answer: ' + esc(k.opt.model) + '</p>' : '');
+    if (k.type === 'custom') h += k.html;
+    return h + '</div>';
+  }
+  function showKey() {
+    var topLeft = Object.keys(D).filter(function (k) { var d = D[k]; return d.l > 77 && d.g < 20000; }).map(function (k) { return D[k].n; }).sort();
+    var rank = [['Japan', J.g], ['Thailand', TH.g], ['Nigeria', NG.g], ['United States', US.g], ['Costa Rica', CR.g]].sort(function (a, b) { return b[1] - a[1]; });
+    KEYD.hook = { type: 'custom', html: '<p>Open choice: students pick three of eight things to measure in Costa Rica. Their choices reveal a perspective (economic growth, human and social, environmental, grassroots). Good for a quick show of hands before the teacher talk.</p>' };
+    KEYD.hdiBuild = { type: 'custom', html: '<p>Build an HDI of 0.800+ with an income score below 0.70. <span class="kok">Example: health 1.00, education 1.00, income 0.65 → HDI 0.866.</span> Point: strong health and education lift HDI even when income is lower.</p>' };
+    KEYD.chBuildLow = { type: 'custom', html: '<p>Set income to 1.00 and still make a low HDI (under 0.550). <span class="kok">Example: health 0.20, education 0.20 → HDI 0.342.</span> Point: money alone doesn’t make a country developed.</p>' };
+    KEYD.chScatter = { type: 'custom', html: '<p>Any country with life expectancy over 77 years and GDP per capita under $20,000 is accepted (' + topLeft.length + ' countries), for example ' + esc(topLeft.slice(0, 12).join(', ')) + '.</p>' };
+    KEYD.chRank = { type: 'custom', html: '<p>Rank by GDP per capita: <span class="kok">' + rank.map(function (r, i) { return (i + 1) + ' ' + r[0] + ' (' + money(r[1]) + ')'; }).join(', ') + '</span>.</p>' };
+    KEYD.continuum = { type: 'custom', html: '<p>Opinion line, not marked: students place themselves from disagree to agree. Their position is carried into the final task.</p>' };
+    KEYD.verdict = { type: 'custom', html: '<p>“HDI is the best indicator of development.” Paragraph of at least 40 words, sent to the Copilot marker (no names sent). <b>Mark scheme (4 marks):</b> 1 clear opinion · 1 justifies it, referring to HDI and at least one other indicator · 1 considers the other side (a weakness or strength of HDI) · 1 supported conclusion.</p><p class="kmodel">Model answer: I partly agree that HDI is the best indicator of development. It is better than GDP per capita because it combines health (life expectancy), education (years of schooling) and income (GNI per capita), so it gives a broader picture. For example, Thailand and Equatorial Guinea have similar GDP per capita, but Thailand’s HDI is much higher because people live longer and spend longer in school. However, HDI does not measure the environment or whether people are happy or have a say in decisions, and as an average it hides inequality. Overall, HDI is one of the best indicators we have, but it should be used alongside others.</p>' };
+    var h = '<div class="wrap"><div class="kbar"><button type="button" class="btn" id="kBack">← Back to the game</button><button type="button" class="btn ghost" id="kPrint">Print or save as PDF</button></div>' +
+      '<section class="panel"><span class="eyebrow">Teacher answer key</span><h1>Development Detectives</h1><p>Every task in order, with answers. Students see options in a shuffled order. Each multiple-choice question gives 2 points first time, 1 point second time. Sorting and matching give 1 point per correct item. Writing tasks score 1 point per checklist item met.</p>' +
+      '<div class="keys"><div class="key"><b>Code words</b>Chapter 1: <strong>MONEY</strong><br>Chapter 2: <strong>HEALTH</strong><br>Chapter 3: <strong>INDEX</strong><br>Chapter 4: <strong>VERDICT</strong></div><div class="key"><b>Mark book</b>KS3 Geography view: one score per success criterion, the final paragraph mark and the challenge score. Click a student’s name to read their writing and Copilot feedback.</div></div></section>';
+    CHAPTERS.forEach(function (ch, i) {
+      h += '<section class="panel"><span class="eyebrow">Chapter ' + i + (CODES[i] ? ' · code word ' + CODES[i] : ' · no code needed') + '</span><h2>' + ch.icon + ' ' + esc(ch.title) + '</h2>';
+      var n = 0;
+      ch.acts.forEach(function (a) {
+        n++;
+        var sub = { econMap: 'econMapTF', socMap: 'socMapQ', hdiMap: 'hdiMapTF' }[a];
+        h += keyAct(sub || a, 'Task ' + n + ' (' + A[a].sc.toUpperCase() + ')' + (sub ? ' · uses the map' : ''));
+      });
+      ch.challenge.forEach(function (a, ci) { h += keyAct(a === 'chPersp' ? 'chPerspW' : a, '⭐ Challenge ' + (ci + 1)); });
+      h += '</section>';
+    });
+    h += '<p class="muted" style="font-size:.85rem">Data: HDI from the UNDP Human Development Report 2025 (2023 data); life expectancy from UN estimates; GDP per capita from IMF estimates for 2026.</p></div>';
+    var ov = $('keyov'); ov.innerHTML = h; ov.hidden = false; ov.scrollTop = 0;
+    $('kBack').onclick = function () { ov.hidden = true; ov.innerHTML = ''; };
+    $('kPrint').onclick = function () { window.print(); };
+  }
 
   renderChapter();
 })();
