@@ -283,7 +283,7 @@ table.data th{background:var(--accent-soft)}
     { title: 'The case', icon: '🔎', talk: {
         cls: '', heading: 'How could we measure how developed a country is?',
         body: '<p>Development means improving people’s lives. But people disagree about what matters most, so they measure it in different ways. These are four <b>perspectives</b>:</p>' +
-          '<div class="keys"><div class="key"><b>Economic growth</b>How much money and wealth a country makes.</div><div class="key"><b>Human and social</b>People’s health, education and quality of life.</div><div class="key"><b>Environmental sustainability</b>Whether development protects the planet for the future.</div><div class="key"><b>Grassroots</b>Whether local people have a say and feel included.</div></div>' +
+          '<div class="keys"><div class="key"><b>Economic growth</b>How much money and wealth a country makes.</div><div class="key"><b>Human and social</b>People’s health, education and quality of life.</div><div class="key"><b>Environmental sustainability</b>Whether development protects the planet for the future.</div><div class="key"><b>People having a say</b>Whether ordinary people get a say in decisions and feel included.</div></div>' +
           '<p>Geographers group development indicators into three types: <b style="color:var(--econ)">economic</b>, <b style="color:var(--soc)">social</b> and <b style="color:var(--comp)">composite</b>.</p>' },
       acts: ['hook', 'hookWrite'], challenge: ['chPersp'] },
     { title: 'Follow the money', icon: '💰', talk: {
@@ -308,7 +308,7 @@ table.data th{background:var(--accent-soft)}
     { title: 'The verdict', icon: '⚖️', talk: {
         cls: '', heading: 'Is HDI the best way to measure development?',
         body: '<p>HDI gives a broad picture, but some people criticise it, depending on their perspective:</p>' +
-          '<div class="keys"><div class="key"><b>Environmental view</b>HDI has no measure of whether the environment is protected.</div><div class="key"><b>Grassroots view</b>HDI doesn’t show whether people feel included in decisions, or how happy they are.</div><div class="key"><b>Inequality</b>HDI is an average, so it hides big differences between rich and poor people in the same country.</div></div>' +
+          '<div class="keys"><div class="key"><b>Environmental view</b>HDI has no measure of whether the environment is protected.</div><div class="key"><b>People having a say</b>HDI doesn’t show whether people feel included in decisions, or how happy they are.</div><div class="key"><b>Inequality</b>HDI is an average, so it hides big differences between rich and poor people in the same country.</div></div>' +
           '<p>The UN now also publishes a version of HDI adjusted for inequality, and one adjusted for pressure on the planet.</p>' },
       acts: ['verdictQuiz1', 'verdictQuiz2', 'verdictQuiz3', 'continuum', 'verdict'], challenge: ['chIndex'] }
   ];
@@ -404,7 +404,7 @@ table.data th{background:var(--accent-soft)}
 
   /* Chapter 0 */
   var HOOK = [['How rich people are', 'econ'], ['How much the country earns from trade', 'econ'], ['How long people live', 'soc'], ['How many children go to school', 'soc'], ['How clean the air and rivers are', 'env'], ['How much forest is protected', 'env'], ['Whether people have a say in decisions', 'grass'], ['How happy people feel', 'grass']];
-  var PNAME = { econ: 'Economic growth', soc: 'Human and social development', env: 'Environmental sustainability', grass: 'Grassroots' };
+  var PNAME = { econ: 'Economic growth', soc: 'Human and social development', env: 'Environmental sustainability', grass: 'People having a say' };
   A.hook = { sc: 'sc1', render: function (box, done) {
     var sel = S.hookPicks || [];
     box.innerHTML = photo('Monteverde Cloud Forest 01.jpg', 'Misty green cloud forest canopy at Monteverde, Costa Rica, seen from a suspension bridge', 'Cephas, CC BY-SA 4.0') +
@@ -420,7 +420,7 @@ table.data th{background:var(--accent-soft)}
     show();
   } };
   writeAct('hookWrite', 'sc1', 'Complete the sentence about your choices.', { model: 'I would measure how long people live in Costa Rica because a long life expectancy shows people have good healthcare, food and clean water.', frame: ['I would measure', { ph: 'one thing you chose' }, 'in Costa Rica because', { ph: 'why it shows development' }, '.'], checks: [['Says what you would measure', function (t) { return !/I would measure … /.test(t); }], ['Gives a reason with “because”', function (t) { return /because (?!…)\S/.test(t); }]], minWords: 10 });
-  writeAct('chPerspW', 'ch', '<b>Challenge:</b> pick a perspective that is <i>different</i> from yours. Write two sentences explaining what someone with that view would measure in Costa Rica, and why.', { model: 'Someone with an environmental sustainability perspective would measure how much forest is protected in Costa Rica. This is because development should not damage the environment for future generations.', starters: ['Someone with a … perspective would measure…', 'This is because…'], checks: [['Names a perspective', has(/economic|social|environment|grassroots/i)], ['Names something to measure', has(INDIC)], ['Explains with “because”', has(/because/i)]], minWords: 20 });
+  writeAct('chPerspW', 'ch', '<b>Challenge:</b> pick a perspective that is <i>different</i> from yours. Write two sentences explaining what someone with that view would measure in Costa Rica, and why.', { model: 'Someone with an environmental sustainability perspective would measure how much forest is protected in Costa Rica. This is because development should not damage the environment for future generations.', starters: ['Someone with a … perspective would measure…', 'This is because…'], checks: [['Names a perspective', has(/economic|social|environment|grassroots|having a say|say in/i)], ['Names something to measure', has(INDIC)], ['Explains with “because”', has(/because/i)]], minWords: 20 });
   A.chPersp = { sc: 'ch', render: function (box, done) { A.chPerspW.render(box, done); } };
 
   /* Chapter 1 */
@@ -495,8 +495,8 @@ table.data th{background:var(--accent-soft)}
   writeAct('chThai', 'ch', '<b>Challenge:</b> Thailand’s HDI is ' + TH.h.toFixed(3) + ', just 0.002 below “very high”. Should Thailand be called a developed country? Give your view and one reason for and one against.', { model: 'I think Thailand is almost a developed country. One reason for is that its HDI of 0.798 is just below very high, and life expectancy is 77.1 years. However, its GDP per capita is much lower than very developed countries, and there is inequality between Bangkok and rural areas.', starters: ['I think Thailand…', 'One reason for is…', 'However…'], checks: [['Gives a view', has(/I think|I believe|in my opinion/i)], ['Gives a reason for', has(/because|reason/i)], ['Gives a reason against with “however”', has(/however|on the other hand/i)]], minWords: 35 });
 
   /* Chapter 4 */
-  mcq('verdictQuiz1', 'sc3', 'Someone says: “HDI is not enough, because it ignores pollution and climate change.” Which perspective is this?', ['Environmental sustainability', 'Economic growth', 'Grassroots', 'Human and social development'], 0, 'HDI has no measure of the environment.');
-  mcq('verdictQuiz2', 'sc3', 'Someone says: “HDI doesn’t tell us whether local people have a say in decisions.” Which perspective is this?', ['Grassroots', 'Economic growth', 'Environmental sustainability', 'None: HDI does measure this'], 0, 'The grassroots view cares about people being included and heard.');
+  mcq('verdictQuiz1', 'sc3', 'Someone says: “HDI is not enough, because it ignores pollution and climate change.” Which perspective is this?', ['Environmental sustainability', 'Economic growth', 'People having a say', 'Human and social development'], 0, 'HDI has no measure of the environment.');
+  mcq('verdictQuiz2', 'sc3', 'Someone says: “HDI doesn’t tell us whether local people have a say in decisions.” Which perspective is this?', ['People having a say', 'Economic growth', 'Environmental sustainability', 'None: HDI does measure this'], 0, 'This view cares about ordinary people being included and heard.');
   mcq('verdictQuiz3', 'sc3', 'Which is the <b>strongest</b> argument that HDI is a <b>good</b> indicator?', ['It combines health, education and income, so it shows more than money alone', 'It is the newest indicator', 'It only measures money, so it is simple', 'It shows exactly how happy every person is'], 0, 'Combining three scores gives a broader picture than any single indicator.');
   A.continuum = { sc: 'sc3', render: function (box, done) {
     var v = S.cont == null ? 50 : S.cont;
@@ -632,7 +632,7 @@ table.data th{background:var(--accent-soft)}
   function showKey() {
     var topLeft = Object.keys(D).filter(function (k) { var d = D[k]; return d.l > 77 && d.g < 20000; }).map(function (k) { return D[k].n; }).sort();
     var rank = [['Japan', J.g], ['Thailand', TH.g], ['Nigeria', NG.g], ['United States', US.g], ['Costa Rica', CR.g]].sort(function (a, b) { return b[1] - a[1]; });
-    KEYD.hook = { type: 'custom', html: '<p>Open choice: students pick three of eight things to measure in Costa Rica. Their choices reveal a perspective (economic growth, human and social, environmental, grassroots). Good for a quick show of hands before the teacher talk.</p>' };
+    KEYD.hook = { type: 'custom', html: '<p>Open choice: students pick three of eight things to measure in Costa Rica. Their choices reveal a perspective (economic growth, human and social, environmental, people having a say). Good for a quick show of hands before the teacher talk.</p>' };
     KEYD.hdiBuild = { type: 'custom', html: '<p>Build an HDI of 0.800+ with an income score below 0.70. <span class="kok">Example: health 1.00, education 1.00, income 0.65 → HDI 0.866.</span> Point: strong health and education lift HDI even when income is lower.</p>' };
     KEYD.chBuildLow = { type: 'custom', html: '<p>Set income to 1.00 and still make a low HDI (under 0.550). <span class="kok">Example: health 0.20, education 0.20 → HDI 0.342.</span> Point: money alone doesn’t make a country developed.</p>' };
     KEYD.chScatter = { type: 'custom', html: '<p>Any country with life expectancy over 77 years and GDP per capita under $20,000 is accepted (' + topLeft.length + ' countries), for example ' + esc(topLeft.slice(0, 12).join(', ')) + '.</p>' };
