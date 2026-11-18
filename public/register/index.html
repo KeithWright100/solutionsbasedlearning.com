@@ -91,8 +91,12 @@
           <label for="gradYear" class="req">Graduation year</label>
           <select id="gradYear">
             <option value="">Select the year you graduate…</option>
-            <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option>
+            <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option><option>2033</option>
           </select>
+          <script>
+            // Year 13 to Year 7 for the current school year (Aug–Jul, Bangkok), so the list moves up each August
+            (function () { var n = new Date(Date.now() + 7 * 3600 * 1000), end = n.getUTCMonth() >= 7 ? n.getUTCFullYear() + 1 : n.getUTCFullYear(), h = '<option value="">Select the year you graduate…</option>'; for (var y = end; y <= end + 6; y++) h += '<option>' + y + '</option>'; document.getElementById('gradYear').innerHTML = h; })();
+          </script>
         </div>
       </fieldset>
 
