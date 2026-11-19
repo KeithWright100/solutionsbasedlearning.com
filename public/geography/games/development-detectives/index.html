@@ -392,7 +392,7 @@ table.data th{background:var(--accent-soft)}
         if ((t.replace(/…/g, '').match(/[A-Za-z’']+/g) || []).length < (opt.minWords || 8)) { $('fb').innerHTML = '<div class="fb bad">Write a little more first.</div>'; return; }
         if (S.items[id]) { var it = S.items[id]; if (met > it.got) { S.pts[sc][0] += met - it.got; it.got = met; persist(); saveMarks(); } }
         else award(id, sc, met, opt.checks.length);
-        saveWriting(id, q.replace(/<[^>]+>/g, ''), t, { checks: met + '/' + opt.checks.length });
+        saveWriting(id, q.replace(/<[^>]+>/g, ''), t, { sc: sc, checks: met + '/' + opt.checks.length });
         $('fb').innerHTML = '<div class="fb ' + (met === opt.checks.length ? 'ok' : 'info') + '">Saved. You met ' + met + ' of ' + opt.checks.length + ' checks.' + (met < opt.checks.length ? ' Look at the grey ones: can you improve your answer? You can edit and save again.' : ' Excellent writing!') + '</div>';
         if (!box.querySelector('.next')) nextBtn(box, done);
       };
@@ -530,11 +530,11 @@ table.data th{background:var(--accent-soft)}
           var f = d.feedback || {}, m = String(f.markAwarded || '').match(/\d+(\.\d+)?/), mark = m ? Math.min(4, +m[0]) : null;
           S.verdict = { mark: mark, f: f, text: t }; S.written.verdict = t; persist();
           showFeedback(S.verdict);
-          saveWriting('verdict', 'Is HDI the best indicator of development?', t, { mark: mark, max: 4, checks: met + '/' + checks.length, feedback: { why: f.whyThisMark || '', good: f.whatWasDoneWell || '', improve: f.whatIsMissing || '' } });
+          saveWriting('verdict', 'Is HDI the best indicator of development?', t, { sc: 'verdict', mark: mark, max: 4, checks: met + '/' + checks.length, feedback: { why: f.whyThisMark || '', good: f.whatWasDoneWell || '', improve: f.whatIsMissing || '' } });
           if (mark != null && window.SBLGameAccount) SBLGameAccount.load(SLUG).then(function (a) { if (!a) return; var old = a['m:verdict'] || {}, pct = Math.round(mark / 4 * 100); SBLGameAccount.save(SLUG, { 'm:verdict': { ls: mark, lm: 4, lp: pct, lt: 'Final paragraph (Copilot)', at: new Date().toISOString(), n: (old.n || 0) + 1, bp: Math.max(old.bp || 0, pct) } }); });
         })
         .catch(function (e) {
-          saveWriting('verdict', 'Is HDI the best indicator of development?', t, { checks: met + '/' + checks.length });
+          saveWriting('verdict', 'Is HDI the best indicator of development?', t, { sc: 'verdict', checks: met + '/' + checks.length });
           $('vfb').innerHTML = '<div class="fb bad">' + esc(e.message) + ' Your paragraph has been saved for your teacher. You can try again.</div>';
         })
         .finally(function () { btn.disabled = false; if (!box.querySelector('.next')) nextBtn(box, done); });

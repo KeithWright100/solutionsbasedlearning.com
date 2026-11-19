@@ -44,6 +44,11 @@
   .cs-sheet td.cs-name small { display: block; color: var(--slate); font-weight: 400; font-size: 0.72rem; }
   .cs-sheet td.cs-cell { cursor: pointer; font-family: var(--font-mono); min-width: 62px; color: var(--white); }
   .cs-sheet td.cs-cell:hover { outline: 2px solid var(--teal); outline-offset: -2px; }
+  .cs-sheet td.cs-cell { position: relative; }
+  .cs-badge { position: absolute; top: 3px; right: 3px; display: inline-flex; width: 15px; height: 15px; color: var(--slate); }
+  .cs-badge--fb { color: #fbbf24; }
+  .cs-ico { width: 100%; height: 100%; }
+  .cs-ans--focus { border-color: var(--teal) !important; box-shadow: 0 0 0 2px var(--teal); }
   .cs-sheet td.cs-empty { color: var(--slate-dim); cursor: default; }
   .cs-sheet td.cs-empty:hover { outline: none; }
   .cs-good { background: rgba(34,197,94,0.22); }

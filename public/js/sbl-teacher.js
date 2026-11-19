@@ -303,12 +303,23 @@
     { id: 'GAME:travel-the-wright-way', name: 'Travel the Wright Way', unit: 'stamps', unitTip: 'Destinations completed (passport stamps)',
       parts: [{ id: 'ks3', title: 'KS3 version' }, { id: 'adv', title: 'IGCSE / IB version' }, { id: 'explore', title: 'Passport stamps' }] },
     { id: 'GAME:development-detectives', name: 'Development Detectives', writing: true,
+      // part each written answer belongs to (for answers saved before they carried it)
+      writeMap: { hookWrite: 'sc1', econWrite: 'sc2', socWrite: 'sc2', compWrite: 'sc2', verdict: 'verdict', chPerspW: 'ch', chCuba: 'ch', chThai: 'ch', chIndex: 'ch' },
       parts: [{ id: 'sc1', title: 'SC1 Describe indicators' }, { id: 'sc2', title: 'SC2 Strengths & weaknesses' }, { id: 'sc3', title: 'SC3 Evaluate HDI' }, { id: 'verdict', title: 'Final paragraph (Copilot)' }, { id: 'ch', title: 'Challenges' }] }
   ];
   var GAME_PARTS = [];
   GAME_DEFS.forEach(function (G) { G.parts.forEach(function (p, i) { GAME_PARTS.push({ id: G.id + '#' + p.id, part: p.id, title: p.title, game: G, first: i === 0 }); }); });
   function gameOf(s, gid) { var c = (s.cells || {})[gid]; return c && c.game ? c.game : null; }
   function partMark(s, c) { var g = gameOf(s, c.game.id); return g && c.part !== 'explore' ? g.parts[c.part] : null; }
+  // Written answers for one part of a game: { n, fb } (fb = how many have Copilot feedback).
+  function partOfWriting(D, w) { return w.sc || (D.writeMap || {})[w.id] || w.id; }
+  function partWriting(s, c) {
+    var g = gameOf(s, c.game.id), out = { n: 0, fb: 0 };
+    ((g && g.writing) || []).forEach(function (w) { if (partOfWriting(c.game, w) === c.part) { out.n++; if (w.fb) out.fb++; } });
+    return out;
+  }
+  var ICON_FB = '<svg class="cs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" fill="currentColor"/><path d="M7 9h10M7 12.5h7" stroke="#0b1b2e" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  var ICON_PEN = '<svg class="cs-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
   function gameAvg(s) {
     var t = 0, n = 0;
     GAME_PARTS.forEach(function (c) { var m = partMark(s, c); if (m && m.lm) { t += m.ls / m.lm * 100; n++; } });
@@ -348,8 +359,10 @@
         }
         var m = partMark(s, c);
         if (!m || !m.lm) { r += '<td class="cs-cell cs-empty' + gs + '">·</td>'; return; }
-        var pct = Math.round(m.ls / m.lm * 100);
-        r += '<td class="cs-cell' + gs + ' ' + band(pct) + '" title="' + esc((m.lt || '') + ' · ' + m.ls + '/' + m.lm + ' · best ' + (m.bp != null ? m.bp + '%' : '—') + ' · played ' + (m.n || 1) + ' time(s)') + '">' + pct + '%<small>' + fmtDate(m.at) + ' · ' + (m.n || 1) + '×</small></td>';
+        var pct = Math.round(m.ls / m.lm * 100), wr = partWriting(s, c);
+        var ico = wr.fb ? '<span class="cs-badge cs-badge--fb" title="Copilot feedback — click to read">' + ICON_FB + '</span>' : wr.n ? '<span class="cs-badge" title="Written answer — click to read">' + ICON_PEN + '</span>' : '';
+        var wtip = wr.n ? ' · ' + wr.n + ' written answer(s)' + (wr.fb ? ', ' + wr.fb + ' with Copilot feedback' : '') + ' — click to read' : '';
+        r += '<td class="cs-cell' + gs + ' ' + band(pct) + (wr.n ? ' cs-haswrite' : '') + '" data-gs="' + esc(s.id) + '" data-gpart="' + esc(c.game.id + '#' + c.part) + '" title="' + esc((m.lt || '') + ' · ' + m.ls + '/' + m.lm + ' · best ' + (m.bp != null ? m.bp + '%' : '—') + ' · played ' + (m.n || 1) + ' time(s)' + wtip) + '">' + ico + pct + '%<small>' + fmtDate(m.at) + ' · ' + (m.n || 1) + '×</small></td>';
       });
       var a = gameAvg(s);
       r += '<td class="cs-sum cs-groupstart ' + band(a) + '">' + (a == null ? '—' : a + '%') + '</td><td>' + fmtDate(gameLast(s)) + '</td></tr>';
@@ -357,7 +370,8 @@
     }).join('') || '<tr><td class="cs-name" style="color:var(--slate)">No students match.</td></tr>';
     wrap.innerHTML = '<table class="cs-sheet"><thead>' + h + '</thead><tbody>' + body + '</tbody></table>';
     wrap.querySelectorAll('button.cs-who').forEach(function (b) { b.addEventListener('click', function () { openStudent(b.dataset.student); }); });
-    $('sheetNote').textContent = 'Each score is the student’s most recent round in that part of the game (for Travel the Wright Way, their most recent destination) — it updates every time they play (hover for the round, best score and number of plays). Only games played while logged in are recorded. For Development Detectives, click a student’s name to read their writing and Copilot feedback.';
+    wrap.querySelectorAll('td.cs-cell[data-gs]').forEach(function (td) { td.addEventListener('click', function () { openStudent(td.dataset.gs, td.dataset.gpart); }); });
+    $('sheetNote').textContent = 'Each score is the student’s most recent round in that part of the game (for Travel the Wright Way, their most recent destination) — it updates every time they play (hover for the round, best score and number of plays). Only games played while logged in are recorded. For Development Detectives, a speech-bubble icon means Copilot feedback and a pencil means a written answer: click the score to read it, or click a student’s name for all their work.';
   }
 
 
@@ -495,7 +509,7 @@
     for (var i = 0; i < UNIT_PREFIX.length; i++) if (id.indexOf(UNIT_PREFIX[i][0]) === 0) return UNIT_PREFIX[i][1];
     return 'other';
   }
-  function openStudent(studentId) {
+  function openStudent(studentId, focus) {
     var s = students.filter(function (x) { return x.id === studentId; })[0] || {};
     $('drawerBody').innerHTML = '<h2 id="drawerTitle">' + esc(s.fullName || s.email) + '</h2><div class="cs-sub">All units · loading…</div>';
     $('drawer').classList.add('is-open'); $('drawerBg').classList.add('is-open'); $('drawer').setAttribute('aria-hidden', 'false');
@@ -526,7 +540,7 @@
             var m = G['m:' + pt.id]; if (!m || !m.lm) return '<tr><td>' + esc(pt.title) + '</td><td>·</td><td>·</td><td>·</td></tr>';
             var lp = Math.round(m.ls / m.lm * 100);
             return '<tr><td>' + esc(pt.title) + '<small>' + esc(m.lt || '') + ' · ' + fmtDate(m.at) + '</small></td><td class="' + band(lp) + '">' + m.ls + '/' + m.lm + '</td><td class="' + band(m.bp) + '">' + (m.bp != null ? m.bp + '%' : '·') + '</td><td>' + (m.n || 1) + '</td></tr>';
-          }).join('') + '</tbody></table>' + gameWriting(G) + '</div>';
+          }).join('') + '</tbody></table>' + gameWriting(G, D) + '</div>';
       });
       ids = ids.filter(function (id) { return id.indexOf('GAME:') !== 0; });
       var lastView = null;
@@ -550,6 +564,11 @@
       if (lastView !== null) html += '</tbody></table></div>';
       html += '<p class="cs-sub">Click a lesson to see answers and feedback.</p>';
       $('drawerBody').innerHTML = html;
+      // Opened from a game score: jump to that part's written answers.
+      if (focus) {
+        var hits = $('drawerBody').querySelectorAll('.cs-ans[data-gpart="' + focus.replace(/"/g, '') + '"]');
+        if (hits.length) { hits.forEach(function (el) { el.classList.add('cs-ans--focus'); }); hits[0].scrollIntoView({ block: 'start' }); }
+      }
       $('drawerBody').querySelectorAll('tr[data-lesson]').forEach(function (tr) {
         tr.addEventListener('click', function () { openDetail(studentId, tr.dataset.lesson, tr.dataset.title, true); });
       });
@@ -557,13 +576,14 @@
   }
 
   // Written answers a game saved as "w:<id>" (e.g. Development Detectives), with any Copilot feedback.
-  function gameWriting(G) {
+  function gameWriting(G, D) {
+    D = D || {};
     var keys = Object.keys(G).filter(function (k) { return k.indexOf('w:') === 0 && G[k] && G[k].a; });
     if (!keys.length) return '';
     keys.sort(function (a, b) { return a === 'w:verdict' ? -1 : b === 'w:verdict' ? 1 : String(G[a].at || '').localeCompare(String(G[b].at || '')); });
     return '<h3 style="margin-top:12px">Written answers</h3>' + keys.map(function (k) {
       var w = G[k], f = w.feedback || {};
-      return '<div class="cs-ans" style="margin:8px 0;padding:10px 12px;border:1px solid rgba(127,127,127,.35);border-radius:10px">' +
+      return '<div class="cs-ans" data-gpart="' + esc((D.id || '') + '#' + partOfWriting(D, { id: k.slice(2), sc: w.sc })) + '" style="margin:8px 0;padding:10px 12px;border:1px solid rgba(127,127,127,.35);border-radius:10px">' +
         '<div style="font-weight:700">' + esc(w.q || k.slice(2)) + (w.mark != null ? ' · <span class="' + band(pctOf(w.mark, w.max || 4)) + '">' + w.mark + '/' + (w.max || 4) + '</span>' : '') + (w.checks ? ' <small>checklist ' + esc(w.checks) + '</small>' : '') + '<small> · ' + fmtDate(w.at, true) + '</small></div>' +
         '<div style="white-space:pre-wrap;margin-top:4px">' + esc(w.a) + '</div>' +
         (f.why || f.good || f.improve ? '<div style="margin-top:6px;font-size:.92em"><b>Copilot feedback:</b> ' + esc(f.why || '') + (f.good ? ' <b>Good:</b> ' + esc(f.good) : '') + (f.improve ? ' <b>To improve:</b> ' + esc(f.improve) : '') + '</div>' : '') +

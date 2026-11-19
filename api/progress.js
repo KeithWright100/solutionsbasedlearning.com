@@ -222,6 +222,16 @@ async function handleMyStudents(req, res, session, supabase) {
         const parts = {};
         Object.keys(d0).forEach((k) => { if (k.indexOf('m:') === 0 && d0[k] && typeof d0[k] === 'object') parts[k.slice(2)] = d0[k]; });
         cell.game = { parts, explored: d0.explore && typeof d0.explore.n === 'number' ? d0.explore.n : 0, exploredAt: d0.explore ? d0.explore.at || null : null };
+        // Written answers ("w:<id>"): which part each belongs to and whether
+        // Copilot feedback was given, so the sheet can show an icon.
+        const writing = [];
+        Object.keys(d0).forEach((k) => {
+          const v = d0[k];
+          if (k.indexOf('w:') !== 0 || !v || typeof v !== 'object' || !v.a) return;
+          const f = v.feedback || {};
+          writing.push({ id: k.slice(2), sc: typeof v.sc === 'string' ? v.sc : null, fb: !!(f.why || f.good || f.improve) });
+        });
+        if (writing.length) cell.game.writing = writing;
       }
       if (d0.quiz_test_my_knowledge && typeof d0.quiz_test_my_knowledge.pct === 'number') cell.tmk = d0.quiz_test_my_knowledge.pct;
       if (d0.quiz_spaced_retrieval && typeof d0.quiz_spaced_retrieval.pct === 'number') cell.sr = d0.quiz_spaced_retrieval.pct;
