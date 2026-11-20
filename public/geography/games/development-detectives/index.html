@@ -598,6 +598,8 @@ table.data th{background:var(--accent-soft)}
       A[cid].render(cbox.querySelector('.body'), function () { S.done['c' + i + ':' + cid] = 1; persist(); renderTabs(); showActs(); });
     } else { cbox.innerHTML = '<span class="badge">⭐ Challenges complete</span><p>Brilliant work. Look back at your writing: can you add a figure from the maps or graphs to make it stronger?</p>'; host.appendChild(cbox); }
   }
+  var DD_VERDICT_MS = '1 clear opinion · 1 justifies it, referring to HDI and at least one other indicator · 1 considers the other side (a weakness or strength of HDI) · 1 supported conclusion.';
+  var DD_VERDICT_MODEL = 'I partly agree that HDI is the best indicator of development. It is better than GDP per capita because it combines health (life expectancy), education (years of schooling) and income (GNI per capita), so it gives a broader picture. For example, Thailand and Equatorial Guinea have similar GDP per capita, but Thailand’s HDI is much higher because people live longer and spend longer in school. However, HDI does not measure the environment or whether people are happy or have a say in decisions, and as an average it hides inequality. Overall, HDI is one of the best indicators we have, but it should be used alongside others.';
   // Copy everything the student wrote, with scores and feedback, as formatted text for OneNote.
   function copyAnswers() {
     var strip = function (h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent; };
@@ -618,6 +620,9 @@ table.data th{background:var(--accent-soft)}
         var chall = ch.challenge.indexOf(id) >= 0 || id === 'chPerspW';
         html += '<p><b>' + (chall ? '⭐ ' : '') + esc(q) + '</b></p><p>' + esc(S.written[id]) + '</p>';
         txt += (chall ? '* ' : '') + q + '\n' + S.written[id] + '\n';
+        var mdl = id === 'verdict' ? DD_VERDICT_MODEL : (KEYD[id] && KEYD[id].opt && KEYD[id].opt.model);
+        if (id === 'verdict') { html += '<p><b>Mark scheme (4 marks):</b> ' + DD_VERDICT_MS + '</p>'; txt += 'Mark scheme (4 marks): ' + strip(DD_VERDICT_MS) + '\n'; }
+        if (mdl) { html += '<p style="color:#0f766e"><b>Model answer:</b> <i>' + esc(strip(mdl)) + '</i></p>'; txt += 'Model answer: ' + strip(mdl) + '\n'; }
         if (id === 'verdict' && S.verdict && S.verdict.f) {
           var f = S.verdict.f;
           html += '<p><b>Feedback: ' + (S.verdict.mark != null ? S.verdict.mark + ' / 4' : '') + '</b></p><ul>' + (f.whyThisMark ? '<li>' + esc(f.whyThisMark) + '</li>' : '') + (f.whatWasDoneWell ? '<li>What was good: ' + esc(f.whatWasDoneWell) + '</li>' : '') + (f.whatIsMissing ? '<li>How to improve it: ' + esc(f.whatIsMissing) + '</li>' : '') + '</ul>';

@@ -427,7 +427,8 @@
     $('copyAll').addEventListener('click', function () {
       var b = this;
       var txt = 'Rohingya, Haiti or Both? — comparative paragraph\n\nQuestion: ' + (r3.q === null ? '(not chosen)' : plain(QUESTIONS[r3.q])) + '\n\n' +
-        ['point', 'roh', 'hai', 'link', 'judge'].map(function (k) { return r3.f[k]; }).filter(Boolean).join(' ');
+        ['point', 'roh', 'hai', 'link', 'judge'].map(function (k) { return r3.f[k]; }).filter(Boolean).join(' ') +
+        '\n\nModel comparative sentences (one per theme):\n' + THEMES.map(function (t) { return '- ' + t.name + ' (' + (t.a === 'diff' ? 'mainly different' : 'mainly similar') + '): ' + plain(t.model); }).join('\n');
       function ok() { b.textContent = '✔ Copied — paste in OneNote'; setTimeout(function () { b.textContent = '📋 Copy question + paragraph for OneNote'; }, 2200); }
       try { navigator.clipboard.writeText(txt).then(ok, function () { fallback(txt); ok(); }); } catch (e) { fallback(txt); ok(); }
     });

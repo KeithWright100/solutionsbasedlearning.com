@@ -273,7 +273,7 @@
           'Cash incentives are small. In the town of Yamatsuri, parents receive about $4,600 when a baby is born, plus $460 a year for ten years. Critics say the payments are more symbolic than life-changing, and that Japan still lags behind much of Western Europe in support for working parents.',
           'Some politicians have even suggested women should “stay at home” to raise children. Others argue Japan should stop trying to reverse the trend and instead adapt to a smaller, older population.'],
       types: ['Pro-natalist'], q: 'Which evidence suggests the Plus One policy was unlikely to work?',
-      o: ['Cash payments were small and “more symbolic than life-changing”', 'It funded 50,000 new day-care places', 'It followed the Angel Plan and New Angel Plan'], a: 0,
+      o: ['Cash payments were small and “more symbolic than life-changing”', 'It funded 50,000 new day-care places for working parents', 'It followed the earlier Angel Plan and New Angel Plan'], a: 0,
       why: 'Small payments are unlikely to change big decisions such as having another child. The day-care places are a strength, and the earlier plans show the problem had not been solved.' },
     { id: 'B', tab: 'B · Technology (2010)', hd: 'Robots, smart toilets and talking kettles: Japan’s high-tech answer', by: 'Adapted from Patrick Collinson, “Solving Japan’s age-old problem”, The Guardian, 20 March 2010',
       url: 'https://www.theguardian.com/money/2010/mar/20/japan-ageing-population-technology',
@@ -291,7 +291,7 @@
           'Economists warned that the tax rise was vital. Japan’s public debt was over $11 trillion, more than 220% of GDP, the highest of any developed country, and the government needed money to pay for rising welfare costs for older people.',
           'Update: the tax finally rose to 10% in October 2019. Part of the money was used to make preschool education free for all children.'],
       types: ['Tax and spending'], q: 'Why did the government keep delaying the tax rise?',
-      o: ['It feared the rise would make people spend less and harm the economy', 'Welfare costs for older people were falling', 'Japan’s public debt was very low'], a: 0,
+      o: ['It feared the rise would make people spend less and harm the economy', 'Welfare costs for older people were falling quickly at the time, so taxes could fall', 'Japan’s public debt was very low, so it did not need more tax'], a: 0,
       why: 'The 2014 rise caused a recession, showing the dilemma: taxes are needed to pay for an ageing society, but higher taxes can slow the economy that pays for them.' },
     { id: 'D', tab: 'D · Immigration (2017)', hd: 'As its population ages, Japan quietly turns to immigration', by: 'Adapted from David Green, “As Its Population Ages, Japan Quietly Turns to Immigration”, Migration Policy Institute, 2017',
       url: 'https://www.migrationpolicy.org/article/its-population-ages-japan-quietly-turns-immigration',
@@ -300,7 +300,7 @@
           'The foreign share of the population rose from 0.7% in 1990 to 1.8% in 2016, about 2.3 million people. The foreign workforce grew by 40% between 2013 and 2017 alone.',
           'Yet politicians avoid calling this an immigration policy. Many Japanese see their society as ethnically and culturally uniform, and immigration remains unpopular.'],
       types: ['Immigration'], q: 'What does the source suggest is the main limit on using immigration?',
-      o: ['Immigration is unpopular, so it happens “quietly” in small numbers', 'There are no jobs for foreign workers', 'Foreign residents have fallen since 1990'], a: 0,
+      o: ['Immigration is unpopular, so it happens “quietly” in small numbers', 'There are no jobs available for foreign workers in Japan', 'The number of foreign residents has fallen since 1990'], a: 0,
       why: 'Immigration fills labour gaps quickly, but public opinion keeps the numbers small, so its impact on a shrinking workforce of tens of millions is limited.' },
     { id: 'E', tab: 'E · Children’s Future Strategy (2024–26)', hd: 'Bigger child allowances, paid for by a new levy', by: 'Adapted from The Japan Times (19 April 2024), Nippon.com/Jiji Press (26 December 2025) and Newsweek (20 November 2025)',
       url: 'https://www.nippon.com/en/news/yjj2025122600378',
@@ -318,7 +318,7 @@
           'On immigration, her approach is “orderly coexistence”. Foreign residents reached a record 4.1 million at the end of 2025. From October 2026, permanent residence became harder to get: applicants need above-average income, everyday Japanese and a full pension record, and the fee rose 20-fold to ¥200,000. The wait for citizenship is rising from 5 to 10 years, and a panel is discussing a limit on the share of foreign residents.',
           'At the same time, Japan keeps admitting foreign workers on temporary visas for sectors short of staff. Critics say the government is relying on foreign labour while making it harder for those workers to settle.'],
       types: ['Pro-natalist', 'Immigration', 'Tax and spending'], q: 'Which statement best describes the Takaichi government’s immigration policy?',
-      o: ['Admitting temporary foreign workers while making it harder to settle permanently', 'Ending all foreign worker visas', 'Encouraging large-scale permanent immigration'], a: 0,
+      o: ['Admitting temporary workers while making permanent settlement harder', 'Ending all foreign worker visas to protect jobs for Japanese citizens', 'Encouraging large-scale permanent immigration to replace the workforce'], a: 0,
       why: 'Japan needs workers, so temporary visas continue, but tighter permanent-residence and citizenship rules respond to public concern. Critics argue this risks a two-tier society.' }
   ];
 
@@ -491,6 +491,7 @@
   }
   function writeTask(key, lbl, q, frame, model, checks) {
     var v = S.notes[key] || '';
+    if (model) { var _md = document.createElement('div'); _md.innerHTML = model; S.models = S.models || {}; if (!S.models[key] || S.models[key] !== _md.textContent) { S.models[key] = _md.textContent; save(); } }
     return { html: '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
       '<textarea id="w-' + key + '" aria-label="' + esc(q.replace(/<[^>]+>/g, '')) + '">' + esc(v) + '</textarea>' +
       (checks ? '<div class="hint"><b>Check your answer includes:</b> ' + checks + '</div>' : '') +
@@ -768,28 +769,29 @@
     var h = '', t = '';
     var H = function (x) { h += '<h2>' + esc(x) + '</h2>'; t += '\n' + x.toUpperCase() + '\n'; };
     var P = function (lbl, v) { h += '<p><b>' + esc(lbl) + '</b> ' + esc(v || '(not answered yet)').replace(/\n/g, '<br>') + '</p>'; t += lbl + ' ' + (v || '(not answered yet)') + '\n'; };
+    var MA = function (key) { var m = (S.models || {})[key]; if (m) P('Model answer:', m); };
     H('Briefing ' + (i + 1) + ': ' + MISSIONS[i].t);
     if (i === 0) {
       P('Key data:', 'TFR 4.54 (1947) → 2.04 (1957, first below replacement) → 1.58 (1966, Fire Horse) → 1.57 (1989, “1.57 shock”) → 1.26 (2005) → 1.45 (2015) → 1.14 (2025, record low).');
       P('Percentage change 1947–2025:', '−74.9%');
-      P('Describe the trend (my answer):', S.notes.m1w);
+      P('Describe the trend (my answer):', S.notes.m1w); MA('m1w');
     } else if (i === 1) {
       P('Age structure:', '65+ was 17.3% in 2000, 28.7% in 2020 and is projected to be 34.8% in 2040 (IPSS).');
       P('Total dependency ratio 2020:', '68.6');
       P('Old-age dependency ratio 2040 (projected):', '63.2');
-      P('Two consequences (my answer):', S.notes.m2w);
+      P('Two consequences (my answer):', S.notes.m2w); MA('m2w');
     } else if (i === 2) {
       h += '<table border="1" style="border-collapse:collapse"><tr>' + BINS.map(function (b) { return '<th style="padding:4px 8px">' + b[1] + '</th>'; }).join('') + '</tr><tr>' + BINS.map(function (b) { return '<td style="padding:4px 8px;vertical-align:top">' + CARDS.filter(function (c) { return c.a === b[0]; }).map(function (c) { return esc(c.t); }).join('<br>') + '</td>'; }).join('') + '</tr></table>';
       BINS.forEach(function (b) { t += b[1] + ': ' + CARDS.filter(function (c) { return c.a === b[0]; }).map(function (c) { return c.t; }).join('; ') + '\n'; });
-      P('Low birth rate → reduced tax income (my answer):', S.notes.m3w);
+      P('Low birth rate → reduced tax income (my answer):', S.notes.m3w); MA('m3w');
     } else if (i === 3) {
       h += '<table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">Source</th><th style="padding:4px 8px">Policy type</th><th style="padding:4px 8px">Rating (1–5)</th><th style="padding:4px 8px">My reason</th></tr>' +
         SOURCES.map(function (s) { var st = S.src[s.id] || {}; t += 'Source ' + s.id + ' (' + s.types.join(', ') + '): ' + (st.rate || 3) + '/5 – ' + (st.why || '') + '\n'; return '<tr><td style="padding:4px 8px">' + s.id + ': ' + esc(s.hd) + '</td><td style="padding:4px 8px">' + esc(s.types.join(', ')) + '</td><td style="padding:4px 8px">' + (st.rate || 3) + '</td><td style="padding:4px 8px">' + esc(st.why || '') + '</td></tr>'; }).join('') + '</table>';
     } else {
       P('Policies I chose:', S.pm.map(function (id) { return POLS.filter(function (p) { return p.id === id; })[0].name; }).join('; '));
       h += '<table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">My policy</th><th style="padding:4px 8px">The Takaichi government (2025–26)</th></tr>' + S.pm.map(function (id) { var p = POLS.filter(function (q) { return q.id === id; })[0]; t += '- ' + p.name + ' | Government: ' + p.gov + '\n'; return '<tr><td style="padding:4px 8px">' + esc(p.name) + '</td><td style="padding:4px 8px">' + esc(p.gov) + '</td></tr>'; }).join('') + '</table>';
-      P('My decision:', S.notes.pm1);
-      P('Exam-style answer:', S.notes.pm2);
+      P('My decision:', S.notes.pm1); MA('pm1');
+      P('Exam-style answer:', S.notes.pm2); MA('pm2');
     }
     return { h: h, t: t };
   }

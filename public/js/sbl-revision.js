@@ -380,6 +380,7 @@
         if (fb.whatIsMissing) bodyHtml += '<p><strong>What is missing or needs development:</strong></p><div class="block">' + escapeHtml(fb.whatIsMissing) + '</div>';
         if (fb.nextStep) bodyHtml += '<p><strong>Next step:</strong></p><div class="block">' + escapeHtml(fb.nextStep) + '</div>';
         if (fb.followUpQuestion) bodyHtml += '<p><strong>Follow-up question:</strong></p><div class="block">' + escapeHtml(fb.followUpQuestion) + '</div>';
+        if (q.markScheme) bodyHtml += '<p><strong>Mark scheme:</strong></p><div class="block">' + escapeHtml(String(q.markScheme)) + '</div>';
       }
       bodyHtml += '</div><hr>';
     });
@@ -683,6 +684,7 @@
     if (feedback.whatIsMissing) { lines.push(''); lines.push('What is missing or needs development:'); lines.push(feedback.whatIsMissing); }
     if (feedback.nextStep) { lines.push(''); lines.push('Next step:'); lines.push(feedback.nextStep); }
     if (feedback.followUpQuestion) { lines.push(''); lines.push('Follow-up question:'); lines.push(feedback.followUpQuestion); }
+    if (q.markScheme) { lines.push(''); lines.push('Mark scheme:'); lines.push(String(q.markScheme)); }
     return lines.join('\n');
   }
 
@@ -709,6 +711,7 @@
     if (feedback.whatIsMissing) html += '<p><strong>What is missing or needs development:</strong></p><div class="block">' + escapeHtml(feedback.whatIsMissing) + '</div>';
     if (feedback.nextStep) html += '<p><strong>Next step:</strong></p><div class="block">' + escapeHtml(feedback.nextStep) + '</div>';
     if (feedback.followUpQuestion) html += '<p><strong>Follow-up question:</strong></p><div class="block">' + escapeHtml(feedback.followUpQuestion) + '</div>';
+    if (q.markScheme) html += '<p><strong>Mark scheme:</strong></p><div class="block">' + escapeHtml(String(q.markScheme)) + '</div>';
     html += '<p><em>Use your browser’s Print option and choose “Save as PDF” if you want a PDF copy.</em></p>';
     html += '</body></html>';
 

@@ -730,6 +730,9 @@
   });
   $('copyBtn').addEventListener('click', function () {
     var txt = 'Essay: ' + ESSAY.question + '\nMy mark: ' + mark + '/10\nWhat went well: ' + $('www').value.trim() + '\nEven better if: ' + $('ebi').value.trim();
+    var _pl = function (h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent.trim(); };
+    if (ESSAY.examinerMark != null) txt += '\n\nExaminer-style mark: ' + ESSAY.examinerMark + '/10' + (ESSAY.examinerBand ? ' (' + _pl(ESSAY.examinerBand) + ')' : '') + (ESSAY.verdict ? '\nWhy: ' + _pl(ESSAY.verdict) : '');
+    txt += '\n\nModel essay:\n' + ESSAY.sections.map(function (sec, i) { return sec + '\n' + ESSAY.chunks.filter(function (c) { return c[0] === i; }).map(function (c) { return _pl(c[1]); }).join(' '); }).join('\n\n');
     function done() { $('copied').textContent = 'Copied!'; setTimeout(function () { $('copied').textContent = ''; }, 2000); }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, done); else done();
   });

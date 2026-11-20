@@ -348,6 +348,11 @@
   }
 
   /* 5: pitch */
+  var EW_MODEL_HTML = '<h3>Model pitch: Accra, Ghana (repair hub + refurbish + safe recycling for informal workers + education, 80 points)</h3>' +
+'<p class="kmodel"><b>Higher priority:</b> Our package puts 50 of our 80 points into repair and reuse, which sit above recycling in the waste hierarchy because they keep the whole device in use rather than recovering a few metals. Only 22.3% of the world&rsquo;s e-waste is formally recycled, so in Accra it makes more sense to build on the existing repair trade than to install formal bins that people ignore because informal collectors pay for scrap.</p>' +
+'<p class="kmodel"><b>Environmental benefit:</b> Training informal recyclers to use cable-stripping machines instead of burning cables would end the toxic smoke that pollutes the air, soil and water around former sites such as Agbogbloshie.</p>' +
+'<p class="kmodel"><b>Social or economic benefit:</b> The repair hub and safer recycling protect the incomes of thousands of informal workers, many of them young, while cutting their exposure to lead and other toxins; refurbished phones are also cheaper for low-income households.</p>' +
+'<p class="kmodel"><b>Trade-off:</b> However, informal workers may distrust government officials, and safer methods are slower, so incomes could fall at first. The plan also does little to reduce the flow of second-hand electronics arriving from Europe, which needs action by exporting countries.</p></section>';;
   var BOXES = [
     { k: 'pri', t: 'Why your package is higher priority than the alternatives', ph: 'Our package is higher priority than recycling alone because...' },
     { k: 'env', t: 'One environmental benefit', ph: 'One environmental benefit is...' },
@@ -401,7 +406,8 @@
       $('cp').onclick = function () {
         var ok = function () { $('cmsg').className = 'msg good'; $('cmsg').textContent = 'Copied! Paste it into OneNote.'; };
         var sel = function () { var rg = document.createRange(); rg.selectNodeContents($('final')); var s = getSelection(); s.removeAllRanges(); s.addRange(rg); $('cmsg').className = 'msg'; $('cmsg').textContent = 'Your pitch is selected: press Ctrl+C (or Cmd+C) to copy.'; };
-        try { navigator.clipboard.writeText(txt).then(ok, sel); } catch (e) { sel(); }
+        var full = txt + '\n\n' + (function () { var d = document.createElement('div'); d.innerHTML = EW_MODEL_HTML; return Array.prototype.map.call(d.children, function (e) { return e.textContent; }).join('\n'); })();
+        try { navigator.clipboard.writeText(full).then(ok, sel); } catch (e) { sel(); }
       };
       $('again').onclick = function () { S.chosen = []; S.pitch = {}; S.chipWords = 0; S.place = null; go(0); };
       $('out').scrollIntoView({ behavior: 'smooth', block: 'start' });

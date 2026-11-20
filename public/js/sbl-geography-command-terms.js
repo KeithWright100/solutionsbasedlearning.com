@@ -34,7 +34,7 @@
     quiz: [
       {
         q: 'In an IB Geography question, what does the command term "Classify" ask you to do?',
-        options: ['Arrange things into groups or categories based on shared characteristics', 'Give the precise, accepted meaning of a term', 'Give reasons or causes for something', 'Weigh up strengths and weaknesses and reach a judgement'],
+        options: ['Arrange things into groups based on shared characteristics', 'Give the precise, accepted meaning of a term or concept', 'Give reasons or causes for something, showing how it happens', 'Weigh up strengths and weaknesses, then reach a judgement'],
         correct: 0,
         explain: '"Classify" asks you to sort items into categories based on features they share — an AO1 knowledge-level task.',
         misconception: 'Classify is sometimes confused with Describe — classifying is about grouping, not describing features in detail.',
@@ -50,7 +50,7 @@
       },
       {
         q: 'A "Describe" question wants you to:',
-        options: ['Break something into parts and show how they relate', 'State the main features or give a detailed account of what something is like, without saying why', 'Propose a possible explanation for an unfamiliar situation', 'Point out differences between two things'],
+        options: ['Break something into parts and show how those parts relate to each other', 'Give the main features of what something is like, without saying why', 'Propose a possible explanation for an unfamiliar situation or problem', 'Point out the differences between two things, concepts or processes'],
         correct: 1,
         explain: '"Describe" is about accurately portraying what something looks like or how it happens — not why it happens.',
         misconception: 'A common error is slipping into explanation (the "why") when a question only asks you to describe (the "what").',
@@ -58,7 +58,7 @@
       },
       {
         q: 'What does "Determine" require?',
-        options: ['Working out or identifying something precisely from the evidence or data given', 'A short answer with no supporting argument', 'A balanced review of different viewpoints', 'Picking out one named feature from a diagram'],
+        options: ['Work out or identify something precisely from the evidence or data', 'Give a short answer with no supporting argument, data or explanation of any kind', 'Give a balanced review of different viewpoints on an issue', 'Pick out one named feature from a diagram, map or photo'],
         correct: 0,
         explain: '"Determine" asks you to use the data or evidence in front of you to work something out or pin something down precisely.',
         misconception: 'Determine is sometimes treated as identical to Estimate, but Determine expects a precise, evidenced answer rather than an approximation.',
@@ -66,7 +66,7 @@
       },
       {
         q: 'An "Estimate" question is asking you to:',
-        options: ['Give an approximate value or judgement based on the information provided', 'Give the exact accepted meaning of a term', 'Sort items into categories', 'Justify a conclusion with evidence'],
+        options: ['Give an approximate value or judgement from the information given', 'Give the exact, accepted meaning of a geographical term', 'Sort a set of items into categories based on shared features', 'Justify a conclusion with detailed evidence from case studies'],
         correct: 0,
         explain: '"Estimate" wants a sensible approximate figure or judgement drawn from the material given, not an exact calculation.',
         misconception: 'Some students think an estimate can be any guess — it must still be a reasonable figure grounded in the evidence provided.',
@@ -74,7 +74,7 @@
       },
       {
         q: 'What is "Identify" asking for?',
-        options: ['A detailed account of a process', 'Picking out and naming a specific feature, factor or trend from the evidence given', 'A comparison of two options', 'An argument weighing up more than one viewpoint'],
+        options: ['Give a detailed account of how a process works, step by step', 'Pick out and name a specific feature, factor or trend from the evidence', 'Compare two options and say which one is better and why', 'Weigh up more than one viewpoint and reach a judgement'],
         correct: 1,
         explain: '"Identify" is a short, targeted task — naming the specific thing the question is pointing you towards.',
         misconception: 'Identify is often answered with too much detail; a precise, named answer is all that is needed.',
@@ -82,7 +82,7 @@
       },
       {
         q: 'An "Outline" question wants:',
-        options: ['A brief summary or overview of the main points, without detailed explanation', 'A full chain of reasoning linking cause to impact', 'A judgement on how significant something is', 'The differences between two processes'],
+        options: ['A brief summary of the main points, without detailed explanation', 'A full chain of reasoning linking a cause to its impacts', 'A judgement on how significant something is, supported with evidence', 'The differences between two processes, explained in detail'],
         correct: 0,
         explain: '"Outline" is a give a brief account or summary" instruction — main points only, not a developed explanation.',
         misconception: 'Outline is frequently over-answered with full explanation, when only a concise summary is being asked for.',
@@ -90,7 +90,7 @@
       },
       {
         q: 'What does "State" require in an answer?',
-        options: ['A short, precise answer with no supporting argument required', 'A balanced discussion of viewpoints', 'An approximate figure from a graph', 'A grouping of items by shared feature'],
+        options: ['A short, precise answer with no supporting argument required', 'A balanced discussion of different viewpoints on an issue', 'An approximate figure read from a graph or map', 'A grouping of items by a feature they share'],
         correct: 0,
         explain: '"State" wants a brief, accurate fact or point — nothing more is expected or rewarded.',
         misconception: 'Adding justification or explanation to a "state" answer wastes time without earning extra marks.',
@@ -98,7 +98,7 @@
       },
       {
         q: 'What is an "Analyse" question really asking you to do?',
-        options: ['Give a short factual answer', 'Break something down into its parts to show how they relate to each other and the bigger picture', 'Give the meaning of a term', 'List examples of a process'],
+        options: ['Give a short, factual answer with no explanation or supporting argument', 'Break something into its parts to show how they relate to each other', 'Give the precise, accepted meaning of a term or geographical concept', 'List examples of a process from case studies you have learned'],
         correct: 1,
         explain: '"Analyse" is about taking something apart to examine how its components connect and what that means overall — more than describing what happened.',
         misconception: 'Analysis is sometimes confused with description — analysis must show relationships and reasoning, not just what is present.',
@@ -106,7 +106,7 @@
       },
       {
         q: 'A "Distinguish" question wants you to:',
-        options: ['Explain the difference(s) between two or more things, concepts or processes', 'Point out only the similarities between two things', 'Give an approximate value', 'Summarise the main points briefly'],
+        options: ['Explain the differences between two or more things or processes', 'Point out only the similarities between two things or processes', 'Give an approximate value from a graph, table or map', 'Summarise the main points briefly, without explanation'],
         correct: 0,
         explain: '"Distinguish" focuses specifically on making clear how two or more things differ from one another.',
         misconception: 'Distinguish is sometimes answered as if it were Compare — but distinguishing is about difference, not similarity.',
@@ -114,7 +114,7 @@
       },
       {
         q: 'What does "Explain" ask for?',
-        options: ['A named list of features', 'Reasons or causes for something, showing how or why it happens', 'A judgement on the value of something', 'A precise definition of a term'],
+        options: ['A named list of features, without any explanation', 'Reasons or causes for something, showing how or why it happens', 'A judgement on the value or importance of something, using evidence', 'A precise definition of a key term or concept'],
         correct: 1,
         explain: '"Explain" wants you to show the mechanism or reasoning behind something — the how and why, not just the what.',
         misconception: 'An "explain" answer that only describes what happens, without reasoning through why it happens, will miss significant credit.',
@@ -122,7 +122,7 @@
       },
       {
         q: 'A "Suggest" question is asking you to:',
-        options: ['State a fact with no justification', 'Propose a solution, hypothesis or explanation using your own knowledge and reasoning, often in an unfamiliar situation', 'Point out differences between two options', 'Weigh up two viewpoints and reach a judgement'],
+        options: ['State a fact with no justification or supporting evidence', 'Propose a solution, hypothesis or explanation, often for an unfamiliar situation', 'Point out the differences between two options or viewpoints', 'Weigh up two viewpoints and reach a supported judgement'],
         correct: 1,
         explain: '"Suggest" invites you to apply your knowledge and reasoning to propose a plausible idea, often where there is no single fixed answer.',
         misconception: 'Suggest is sometimes treated as requiring one "correct" answer, when a well-reasoned, plausible proposal is what is being rewarded.',
@@ -146,7 +146,7 @@
       },
       {
         q: 'A "Contrast" question is asking you to focus on:',
-        options: ['Similarities only', 'Differences between two or more things', 'A summary of the main points', 'An estimate of a value'],
+        options: ['Similarities between two or more things', 'Differences between two or more things', 'A brief summary of the main points', 'An estimate of a value from data'],
         correct: 1,
         explain: '"Contrast" is the mirror of "Compare" — it wants the differences between the things being examined, not the similarities.',
         misconception: 'Contrast is sometimes muddled with Compare; keeping the two separate in your head (similar vs different) avoids answering the wrong question.',
@@ -154,7 +154,7 @@
       },
       {
         q: 'What is a "Discuss" question looking for?',
-        options: ['A single fact stated briefly', 'A balanced review of an issue, considering different viewpoints or arguments', 'A named list of factors', 'An approximate reading from a graph'],
+        options: ['A single fact, stated briefly and without evidence', 'A balanced review of an issue, considering different viewpoints', 'A named list of factors, without any explanation of how they work', 'An approximate reading taken from a graph or a table'],
         correct: 1,
         explain: '"Discuss" wants you to set out more than one side of an issue in a balanced way, rather than arguing for only one position.',
         misconception: 'A one-sided "discuss" answer, even if well argued, is missing the balance the command term is asking for.',
@@ -162,7 +162,7 @@
       },
       {
         q: 'What does "Evaluate" ask you to do?',
-        options: ['Weigh up the strengths and weaknesses, or make a judgement backed by evidence, about the value or significance of something', 'Give a brief factual summary', 'Sort information into categories', 'Point out only similarities'],
+        options: ['Weigh strengths and weaknesses, or judge the value of something with evidence', 'Give a brief factual summary of the main points of a topic or case study you have learned', 'Sort information into categories and label each category clearly', 'Point out only the similarities between two places, processes or ideas'],
         correct: 0,
         explain: '"Evaluate" requires a supported judgement, made after weighing up evidence for and against — not just a description of both sides.',
         misconception: 'Listing pros and cons without a final, justified judgement leaves an "evaluate" answer incomplete.',
@@ -170,7 +170,7 @@
       },
       {
         q: 'An "Examine" question wants you to:',
-        options: ['State a fact briefly', 'Consider something in close detail, uncovering the assumptions and interrelationships underlying an issue', 'Estimate a value from a diagram', 'Define a key term'],
+        options: ['State a fact briefly, with no detail or explanation needed', 'Consider something closely, uncovering its assumptions and links', 'Estimate a value from a graph, map or other diagram', 'Give the precise, accepted definition of a key term'],
         correct: 1,
         explain: '"Examine" pushes you to look closely at what is really going on beneath the surface of an issue, including assumptions that are often left unstated.',
         misconception: 'Examine is sometimes answered at the same shallow level as Describe, missing the closer scrutiny the term is asking for.',
@@ -178,7 +178,7 @@
       },
       {
         q: 'What does "Justify" require in an answer?',
-        options: ['Valid reasons or evidence to support an answer or conclusion', 'A brief unsupported statement', 'A list of categories', 'A comparison with no judgement'],
+        options: ['Valid reasons or evidence to support an answer or conclusion', 'A brief statement given without any reasons or evidence', 'A list of categories with examples of each one', 'A comparison of two things with no final judgement'],
         correct: 0,
         explain: '"Justify" wants you to back up a claim or conclusion with solid reasons or evidence, showing why it holds up.',
         misconception: 'Simply restating the conclusion more forcefully is not the same as justifying it with actual reasons or evidence.',
@@ -186,7 +186,7 @@
       },
       {
         q: 'A "To what extent" question is asking you to:',
-        options: ['Give a short, unsupported fact', 'Consider the merits of an argument or concept and reach an evidence-based conclusion about how far it is accurate, valid or significant', 'Sort items into groups', 'Give the dictionary meaning of a term'],
+        options: ['Give a short, unsupported fact about a topic or case study', 'Consider the merits of an argument and reach an evidence-based conclusion', 'Sort a set of items into groups using their shared characteristics or features', 'Give the dictionary meaning of a key term, with an example'],
         correct: 1,
         explain: '"To what extent" wants a genuine judgement of degree — how far something is true, significant or valid — supported by evidence, not just a yes/no answer.',
         misconception: 'Treating "to what extent" as a simple yes/no question misses the graded judgement the command term is actually asking for.',

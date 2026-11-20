@@ -350,7 +350,7 @@
     ['e1', 'e2'].forEach(function (k) { var t; $(k).oninput = function (e) { S[k] = e.target.value; clearTimeout(t); t = setTimeout(save, 300); }; });
     var t2; $('ev').oninput = function (e) { S.eval = e.target.value; clearTimeout(t2); t2 = setTimeout(save, 300); };
     $('showM').onclick = function () { if (!IS_T && (S.eval || '').trim().length < 40) { $('showM').textContent = 'Write your own answer first'; setTimeout(function () { $('showM').textContent = 'Show a model answer'; }, 1800); return; } $('mod').hidden = false; $('showM').hidden = true; };
-    $('copyE').onclick = function () { copyNotes({ h: '<h2>Evaluating the Minutemen</h2><p><b>Useful because:</b> ' + esc(S.e1 || '') + '</p><p><b>Not useful because:</b> ' + esc(S.e2 || '') + '</p><p><b>Exam answer:</b> ' + esc(S.eval || '').replace(/\n/g, '<br>') + '</p>', t: 'EVALUATING THE MINUTEMEN\nUseful: ' + (S.e1 || '') + '\nNot useful: ' + (S.e2 || '') + '\nExam answer: ' + (S.eval || '') }); };
+    $('copyE').onclick = function () { var n = { h: '<h2>Evaluating the Minutemen</h2><p><b>Useful because:</b> ' + esc(S.e1 || '') + '</p><p><b>Not useful because:</b> ' + esc(S.e2 || '') + '</p><p><b>Exam answer:</b> ' + esc(S.eval || '').replace(/\n/g, '<br>') + '</p>', t: 'EVALUATING THE MINUTEMEN\nUseful: ' + (S.e1 || '') + '\nNot useful: ' + (S.e2 || '') + '\nExam answer: ' + (S.eval || '') }; var md = ($('mod') ? $('mod').textContent.trim() : ''); if (md) { n.h += '<p style="color:#0f766e"><b>Model answer:</b> <i>' + esc(md) + '</i></p>'; n.t += '\nModel answer: ' + md; } copyNotes(n); };
   }
 
 
@@ -383,6 +383,8 @@
       var h = '<h2>Is local production always better?</h2><table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">Perspective</th><th style="padding:4px 8px">Why support local production?</th><th style="padding:4px 8px">Why support globalised production?</th></tr>', t = 'IS LOCAL PRODUCTION ALWAYS BETTER?\n';
       PERS.forEach(function (p, i) { h += '<tr><td style="padding:4px 8px"><b>' + esc(p[0]) + '</b></td><td style="padding:4px 8px">' + esc(S.lp[i + 'l'] || '') + '</td><td style="padding:4px 8px">' + esc(S.lp[i + 'g'] || '') + '</td></tr>'; t += p[0] + ' | ' + (S.lp[i + 'l'] || '') + ' | ' + (S.lp[i + 'g'] || '') + '\n'; });
       h += '</table><p><b>Judgement (' + labs[S.lpv || 3] + '):</b> ' + esc(S.lpw || '') + '</p>'; t += 'Judgement (' + labs[S.lpv || 3] + '): ' + (S.lpw || '');
+      h += '<h3>Model answers</h3><table border="1" style="border-collapse:collapse"><tr><th style="padding:4px 8px">Perspective</th><th style="padding:4px 8px">Local</th><th style="padding:4px 8px">Globalised</th></tr>' + PERS.map(function (p) { return '<tr><td style="padding:4px 8px"><b>' + esc(p[0]) + '</b></td><td style="padding:4px 8px">' + esc(p[1]) + '</td><td style="padding:4px 8px">' + esc(p[2]) + '</td></tr>'; }).join('') + '</table>';
+      t += '\n\nMODEL ANSWERS\n' + PERS.map(function (p) { return p[0] + ' | Local: ' + p[1] + ' | Globalised: ' + p[2]; }).join('\n');
       copyNotes({ h: h, t: t });
     };
   }
@@ -416,7 +418,9 @@
     };
     $('copy4P').onclick = function () {
       var h = '<h2>4P: Why do places reject globalisation?</h2><table border="1" style="border-collapse:collapse"><tr><td style="padding:6px 10px;vertical-align:top;width:50%"><b>Places</b><br>' + esc(S.p4.places || '').replace(/\n/g, '<br>') + '</td><td style="padding:6px 10px;vertical-align:top"><b>Processes</b><br>' + esc(S.p4.processes || '').replace(/\n/g, '<br>') + '</td></tr><tr><td style="padding:6px 10px;vertical-align:top"><b>Power</b><br>' + esc(S.p4.power || '').replace(/\n/g, '<br>') + '</td><td style="padding:6px 10px;vertical-align:top"><b>Possibility</b><br>' + esc(S.p4.possibility || '').replace(/\n/g, '<br>') + '</td></tr></table><p><b>Conclusion:</b> ' + esc(S.p4c || '') + '</p>';
-      copyNotes({ h: h, t: '4P\nPlaces: ' + (S.p4.places || '') + '\nProcesses: ' + (S.p4.processes || '') + '\nPower: ' + (S.p4.power || '') + '\nPossibility: ' + (S.p4.possibility || '') + '\nConclusion: ' + (S.p4c || '') });
+      h += '<h3>Model 4P</h3>' + FOURP.map(function (q) { return '<p><b>' + q[1] + ':</b> ' + esc(q[4]) + '</p>'; }).join('') + '<p><b>Conclusion:</b> Places resist globalisation mainly when they feel a loss of control: over jobs and prices (economic), identity and language (cultural), borders and sovereignty (political) or the environment (ethical). Most responses aim to reform global flows, such as making TNC supply chains sustainable or protecting a language, rather than reject them, because the benefits of trade and connection are hard to give up. Outright rejection is most common for migration flows, where states have the legal power to restrict them.</p>';
+      var mt = '\n\nMODEL 4P\n' + FOURP.map(function (q) { return q[1] + ': ' + q[4]; }).join('\n') + '\nConclusion: Places resist globalisation mainly when they feel a loss of control: over jobs and prices (economic), identity and language (cultural), borders and sovereignty (political) or the environment (ethical). Most responses aim to reform global flows, such as making TNC supply chains sustainable or protecting a language, rather than reject them, because the benefits of trade and connection are hard to give up. Outright rejection is most common for migration flows, where states have the legal power to restrict them.';
+      copyNotes({ h: h, t: '4P\nPlaces: ' + (S.p4.places || '') + '\nProcesses: ' + (S.p4.processes || '') + '\nPower: ' + (S.p4.power || '') + '\nPossibility: ' + (S.p4.possibility || '') + '\nConclusion: ' + (S.p4c || '') + mt });
     };
   }
 
@@ -430,6 +434,9 @@
   function notesAll() {
     var h = '<h2>Resistance Files: my case table</h2><table border="1" style="border-collapse:collapse"><tr>' + ['Example', 'Main cause', 'Secondary cause', 'Flow resisted', 'Reject or reform (1–5)', 'Why?'].map(function (x) { return '<th style="padding:4px 8px">' + x + '</th>'; }).join('') + '</tr>', t = 'RESISTANCE FILES\n';
     CASES.forEach(function (c) { var x = S.c[c.id] || {}; var row = [c.t, x.main || '', x.sec || '', (x.fl || []).join(', '), x.rr ? String(x.rr) : '', x.why || '']; h += '<tr>' + row.map(function (v) { return '<td style="padding:4px 8px">' + esc(v) + '</td>'; }).join('') + '</tr>'; t += row.join(' | ') + '\n'; });
+    h += '</table><h3>Model answers</h3><table border="1" style="border-collapse:collapse"><tr>' + ['Example', 'Main cause', 'Secondary cause', 'Flow resisted', 'Reject or reform?', 'Why?'].map(function (x) { return '<th style="padding:4px 8px">' + x + '</th>'; }).join('') + '</tr>';
+    t += '\nMODEL ANSWERS\n';
+    CASES.forEach(function (c) { var row = [c.t, c.m.join(' / '), c.s.join(' / '), c.fl.join(', '), c.rrT, c.why]; h += '<tr>' + row.map(function (v) { return '<td style="padding:4px 8px">' + esc(v) + '</td>'; }).join('') + '</tr>'; t += row.join(' | ') + '\n'; });
     return { h: h + '</table>', t: t };
   }
   function copyNotes(n) {

@@ -1137,6 +1137,12 @@
     function h(t) { T.push('', '== ' + t + ' =='); Hh.push('<h2>' + esc(t) + '</h2>'); }
     function qa(q, a) { T.push(q, a || '(not answered yet)'); Hh.push('<p><b>' + esc(q) + '</b><br>' + (a ? esc(a).replace(/\n/g, '<br>') : '<i>(not answered yet)</i>') + '</p>'); }
     function line(t) { T.push(t); Hh.push('<p>' + esc(t).replace(/\n/g, '<br>') + '</p>'); }
+    // Example answers shown in the game, copied after the student's own answer.
+    function exampleLine(sid, sel) {
+      if (!H[sid]) return; var d = document.createElement('div'); d.innerHTML = H[sid]; var ex = d.querySelector(sel); if (!ex) return;
+      var t = Array.prototype.map.call(ex.querySelectorAll('p'), function (p) { return p.textContent.trim(); }).filter(Boolean).join('\n');
+      if (!t) return; T.push('Example answer:', t); Hh.push('<p style="color:#0f766e"><b>Example answer:</b><br><i>' + esc(t).replace(/\n/g, '<br>') + '</i></p>');
+    }
     T.push('Can a volcano be a fantastic place? — Mount Ruapehu enquiry'); Hh.push('<h1>Can a volcano be a fantastic place? — Mount Ruapehu enquiry</h1>');
     ST.forEach(function (s) {
       if (s.id === 'end') return;
@@ -1153,8 +1159,8 @@
       if (s.id === 's9' && state.r.verdictChoice) extra.push('Overall I ' + state.r.verdictChoice + '.');
       if (!ws.length && !extra.length && s.id !== 's8') return;
       h(s.title); extra.forEach(line);
-      if (s.id === 's8') { line(advertText()); return; }
-      ws.forEach(function (w) { qa(stripTags(w.prompt), (state.a[w.id] || '').trim()); });
+      if (s.id === 's8') { line(advertText()); exampleLine(s.id, 'details.model'); return; }
+      ws.forEach(function (w) { qa(stripTags(w.prompt), (state.a[w.id] || '').trim()); if (w.id === 'place') exampleLine(s.id, 'details.example'); });
     });
     return { text: T.join('\n'), html: '<div>' + Hh.join('') + '</div>' };
   }

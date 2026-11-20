@@ -1189,6 +1189,7 @@ function buildRetrievalBank(lessonId) {
     if (feedback.whatIsMissing) { lines.push(''); lines.push('What is missing or needs development:'); lines.push(feedback.whatIsMissing); }
     if (feedback.nextStep) { lines.push(''); lines.push('Next step:'); lines.push(feedback.nextStep); }
     if (feedback.followUpQuestion) { lines.push(''); lines.push('Follow-up question:'); lines.push(feedback.followUpQuestion); }
+    if (ibQ.markScheme) { lines.push(''); lines.push('Mark scheme:'); lines.push(String(ibQ.markScheme)); }
     return lines.join('\n');
   }
 
@@ -1208,6 +1209,7 @@ function buildRetrievalBank(lessonId) {
     if (feedback.whatIsMissing) html += '<p><strong>What is missing or needs development:</strong></p><div class="block">' + escapeHtml(feedback.whatIsMissing) + '</div>';
     if (feedback.nextStep) html += '<p><strong>Next step:</strong></p><div class="block">' + escapeHtml(feedback.nextStep) + '</div>';
     if (feedback.followUpQuestion) html += '<p><strong>Follow-up question:</strong></p><div class="block">' + escapeHtml(feedback.followUpQuestion) + '</div>';
+    if (ibQ.markScheme) html += '<p><strong>Mark scheme:</strong></p><div class="block">' + escapeHtml(String(ibQ.markScheme)) + '</div>';
     html += '<p><em>Use your browser\u2019s Print option and choose \u201cSave as PDF\u201d if you want a PDF copy.</em></p>';
     html += '</body></html>';
 
