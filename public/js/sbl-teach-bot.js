@@ -1014,9 +1014,11 @@ function buildRetrievalBank(lessonId) {
     var wrap = document.getElementById('sblIBQuestionWrap');
 
     var html = '<h3>Question' + (lesson.ibQuestions.length > 1 ? ' ' + (ibState.activeIndex + 1) : '') + '</h3>';
-    if (ibQ.image) {
-      html += '<img src="' + escapeHtml(ibQ.image) + '" alt="' + escapeHtml(ibQ.imageAlt || 'Resource for this question') + '" style="max-width:100%; height:auto; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; margin-bottom:0.8rem; display:block;">';
-    }
+    // One resource image (image) or several (images: [{src, alt}]), e.g. a two-page infographic.
+    var ibImgs = ibQ.images ? ibQ.images : (ibQ.image ? [{ src: ibQ.image, alt: ibQ.imageAlt }] : []);
+    ibImgs.forEach(function (im) {
+      html += '<img src="' + escapeHtml(im.src) + '" alt="' + escapeHtml(im.alt || 'Resource for this question') + '" style="max-width:100%; height:auto; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; margin-bottom:0.8rem; display:block;">';
+    });
     html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(ibQ.question) + '</strong> [' + ibQ.marks + ' mark' + (ibQ.marks === 1 ? '' : 's') + ']</p>';
 
     html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker \u2014 there is nothing to copy or paste.</p>';
