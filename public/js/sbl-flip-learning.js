@@ -993,6 +993,19 @@
         { id: "ex", label: "", type: "text", prompt: "Do you agree that the pandemic changed leisure for good? Note your view and two pieces of evidence.", video: true }
       ]
     }],
+    FW01: {
+      title: "Rivers of the world: 8-minute challenge",
+      overview: {
+        heading: "How physical processes influence drainage basin systems and landforms",
+        intention: "To describe and explain physical patterns and processes.",
+        syllabus: ["The drainage basin as an open system with inputs (precipitation of varying type and intensity), outputs (evaporation and transpiration), flows (infiltration, throughflow, overland flow and base flow) and stores (including vegetation, soil, aquifers and the cryosphere)."],
+        success: ["Explain the concept of the drainage basin as an open system.", "Define the key terms connected with the drainage basin system.", "Apply the concept of inputs, outputs, stores and flows to each of the key terms."] },
+      intro: "Start the timer, then name as many of the 24 numbered rivers on the map as you can. Choose a name for each number, then check your answers. Use an atlas or the Teach Me Live bot if you get stuck after the time is up.",
+      parts: [
+        { type: "timer", minutes: 8, label: "8-minute challenge" },
+        { id: "rv", label: "", type: "rivermap", prompt: "", items: [{ n: "Niger", line: [[-10, 9.5], [-7, 12.5], [-3, 16.5], [0, 16], [3, 12], [6, 9], [6.5, 4.5]] }, { n: "Tigris and Euphrates", line: [[38.5, 37.5], [40, 35], [42, 34.4], [44.5, 32], [46.5, 31], [48.3, 30]] }, { n: "Volga", line: [[33, 57], [38, 57.7], [44, 56.3], [48.5, 55.5], [49, 52], [45.5, 48], [47.8, 46]] }, { n: "Danube", line: [[9, 48], [16, 48], [19, 47], [21, 44.8], [25, 43.7], [28, 44.5], [29.5, 45.2]] }, { n: "Yenisey", line: [[93, 51.7], [92, 56], [89, 60], [87, 64], [86, 68], [83, 71.5]] }, { n: "Mackenzie", line: [[-117, 61], [-121, 62], [-125, 64.5], [-130, 67], [-135, 68.8]] }, { n: "Amazon", line: [[-73, -4.5], [-68, -3.5], [-62, -3.3], [-56, -2.5], [-51, -0.5]] }, { n: "Missouri", line: [[-111.5, 45.5], [-108, 47.5], [-102, 47.5], [-100, 45], [-96.5, 41.5], [-94.5, 39], [-90.5, 38.8]] }, { n: "Ganges", line: [[78.5, 30], [80.5, 26.5], [84, 25.5], [88, 24.5], [90.5, 22.5]] }, { n: "Lena", line: [[106, 54], [115, 58], [121, 61], [127, 63], [127, 69], [126.5, 72.5]] }, { n: "Amur", line: [[121, 53.3], [127, 50], [131, 48], [135, 48.5], [137, 51], [140.5, 53]] }, { n: "Congo", line: [[26, -7], [25.5, 0.5], [22, 2], [18, 1], [16, -2.5], [13, -5.5]] }, { n: "Murray–Darling", line: [[151, -29], [146, -30], [143, -32], [142, -34], [140.5, -34.2], [139, -35.5]] }, { n: "Mekong", line: [[96, 32], [99, 26], [101, 21], [104, 17.5], [105.5, 13], [106, 10.5]] }, { n: "Mississippi", line: [[-95, 47], [-91.5, 43], [-90.5, 38.5], [-90, 35], [-91, 32], [-90, 29.5]] }, { n: "Ob", line: [[85, 52], [83, 55], [78, 59], [70, 61], [66, 63], [66.5, 66.5]] }, { n: "Huang He (Yellow)", line: [[97, 35], [103, 36], [106, 40], [110.5, 40.5], [110.5, 35], [114, 35], [118.5, 37.5]] }, { n: "Indus", line: [[80, 32.5], [75, 35], [72, 33.5], [71, 29.5], [68.5, 26], [67.5, 24]] }, { n: "Rio Grande", line: [[-106.6, 37.5], [-106.7, 32], [-104.5, 29.5], [-101, 29.7], [-99, 26.5], [-97.2, 26]] }, { n: "Paraná", line: [[-51, -20], [-54, -25.5], [-58.5, -27.3], [-60.5, -31.5], [-58.5, -34]] }, { n: "Yangtze", line: [[92, 34], [99, 29], [104, 28.5], [106.5, 29.6], [111, 30.7], [114, 30.5], [121.5, 31.4]] }, { n: "Yukon", line: [[-135, 61], [-141, 64.5], [-146, 66.5], [-152, 65], [-158, 62.5], [-164.5, 62.7]] }, { n: "Rhine", line: [[9.5, 47.5], [7.5, 47.6], [8.2, 49.5], [7, 50.7], [6, 52], [4.3, 52]] }, { n: "Nile", line: [[32.5, 0], [31.5, 9], [32.5, 15.5], [33.5, 19], [31.5, 22], [32.5, 26], [31, 30.5]] }] }
+      ]
+    },
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -1107,6 +1120,10 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl-rmap__map svg{display:block;width:100%;height:auto;border:1px solid var(--lh-border);border-radius:12px;background:#fff}" +
+    ".fl-rmap__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.4rem .8rem;margin-top:.8rem}" +
+    ".fl-rmap__q{display:flex;align-items:center;gap:.45rem}.fl-rmap__q b{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;border:2px solid #c2410c;color:#7a2a0a;font-size:.78rem}" +
+    ".fl-rsel{flex:1;font:500 .84rem var(--lh-font-body);padding:.3rem;border:1px solid var(--lh-border);border-radius:8px;background:#fff}.fl-rsel.fl-ok{border-color:var(--lh-green);background:var(--lh-green-bg)}.fl-rsel.fl-bad{border-color:#e57373;background:#fdecea}.fl-rsel.fl-shown{font-style:italic}" +
     ".fl-game{border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#f4fafb;margin:.3rem 0}.fl-game iframe{display:block;width:100%;height:880px;border:0}" +
     ".fl__part-title{margin:2.4rem 0 .2rem;padding:.6rem .9rem;border-radius:10px;background:#6b4fb3;color:#fff;font:700 1.1rem var(--lh-font-display)}" +
     ".fl__facts{margin:.3rem 0;padding-left:1.2rem;color:var(--lh-body)}.fl__facts li{margin:.25rem 0}" +
@@ -1179,6 +1196,63 @@
       .then(function (r) { return r.ok ? r.json() : r.json().then(function (j) { throw new Error(j.error || "Request failed"); }, function () { throw new Error("Request failed"); }); });
   }
 
+  /* ---- Rivers of the world map ----
+     Coastlines: Natural Earth (public domain), via the world-atlas package.
+     Rivers: simplified lines drawn for SBL. Drawing: d3-geo (ISC licence),
+     served from /js/vendor. */
+  function loadJs(src) {
+    return new Promise(function (ok, bad) {
+      if (document.querySelector('script[src="' + src + '"]')) { var t = setInterval(function () { if (window.d3 && window.d3.geoPath) { clearInterval(t); ok(); } }, 50); return; }
+      var sc = document.createElement("script"); sc.src = src; sc.onload = ok; sc.onerror = bad; document.head.appendChild(sc);
+    });
+  }
+  function topoFeature(topo, obj) {
+    var tf = topo.transform, arcs = topo.arcs.map(function (a) {
+      var x = 0, y = 0;
+      return a.map(function (pt) { x += pt[0]; y += pt[1]; return tf ? [x * tf.scale[0] + tf.translate[0], y * tf.scale[1] + tf.translate[1]] : pt; });
+    });
+    function ring(ids) {
+      var out = [];
+      ids.forEach(function (i) { var a = i < 0 ? arcs[~i].slice().reverse() : arcs[i]; a.forEach(function (pt, j) { if (j || !out.length) out.push(pt); }); });
+      return out;
+    }
+    function geom(g) {
+      if (g.type === "Polygon") return { type: "Polygon", coordinates: g.arcs.map(ring) };
+      if (g.type === "MultiPolygon") return { type: "MultiPolygon", coordinates: g.arcs.map(function (pl) { return pl.map(ring); }) };
+      return null;
+    }
+    var o = topo.objects[obj], gs = o.type === "GeometryCollection" ? o.geometries : [o];
+    return { type: "FeatureCollection", features: gs.map(function (g) { return { type: "Feature", properties: {}, geometry: geom(g) }; }).filter(function (f) { return f.geometry; }) };
+  }
+  function riverMap(box, part) {
+    var mapEl = box.querySelector(".fl-rmap__map");
+    var LAND = ["https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json", "https://unpkg.com/world-atlas@2/land-110m.json"];
+    function getLand(i) { return fetch(LAND[i]).then(function (r) { if (!r.ok) throw 0; return r.json(); }).catch(function () { if (i + 1 < LAND.length) return getLand(i + 1); throw 0; }); }
+    loadJs("/js/vendor/d3-array.min.js").then(function () { return loadJs("/js/vendor/d3-geo.min.js"); }).then(function () { return getLand(0); }).then(function (topo) {
+      var d3 = window.d3, W = 960, H = 490;
+      var land = topoFeature(topo, "land");
+      var proj = d3.geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H - 6]], { type: "Sphere" }), path = d3.geoPath(proj);
+      var svg = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="World map with 24 numbered rivers">' +
+        '<path d="' + path({ type: "Sphere" }) + '" fill="#e8f3fa" stroke="#9fb7c4"/>' +
+        '<path d="' + path(d3.geoGraticule10()) + '" fill="none" stroke="#d6e6ef" stroke-width=".6"/>' +
+        '<path d="' + path(land) + '" fill="#f4efe2" stroke="#8a8070" stroke-width=".6"/>';
+      part.items.forEach(function (it) { svg += '<path d="' + path({ type: "LineString", coordinates: it.line }) + '" fill="none" stroke="#2470b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'; });
+      var pts = part.items.map(function (it) { var xy = proj(it.line[Math.floor(it.line.length / 2)]); return { x: xy[0], y: xy[1], ax: xy[0], ay: xy[1] }; });
+      for (var it2 = 0; it2 < 60; it2++) pts.forEach(function (a2, i) { pts.forEach(function (b2, j) {
+        if (i >= j) return; var dx = b2.x - a2.x, dy = b2.y - a2.y, d = Math.sqrt(dx * dx + dy * dy) || 0.1;
+        if (d < 19) { var m = (19 - d) / 2, ux = dx / d, uy = dy / d; a2.x -= ux * m; a2.y -= uy * m; b2.x += ux * m; b2.y += uy * m; }
+      }); });
+      pts.forEach(function (pt, i) {
+        if (Math.abs(pt.x - pt.ax) + Math.abs(pt.y - pt.ay) > 3) svg += '<line x1="' + pt.ax.toFixed(1) + '" y1="' + pt.ay.toFixed(1) + '" x2="' + pt.x.toFixed(1) + '" y2="' + pt.y.toFixed(1) + '" stroke="#c2410c" stroke-width="1"/>';
+        svg += '<g transform="translate(' + pt.x.toFixed(1) + "," + pt.y.toFixed(1) + ')"><circle r="8.5" fill="#fff" stroke="#c2410c" stroke-width="2"/><text y="3.6" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" font-weight="700" fill="#7a2a0a">' + (i + 1) + "</text></g>";
+      });
+      svg += "</svg>";
+      mapEl.innerHTML = svg + '<p class="fl__note">Coastlines: Natural Earth (public domain). Rivers simplified. Each number marks a point on the river.</p>';
+    }).catch(function () {
+      mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use an atlas instead: find each river and note which continent and countries it flows through.</p>';
+    });
+  }
+
   function panel(base, n, ed) {
   ed = ed || {};
   var cfg = applyEdits(base, ed.edits || {});
@@ -1233,6 +1307,14 @@
       return;
     }
     if (p.type === "html") { h += '<div class="fl__part">' + p.html + "</div>"; return; }
+    if (p.type === "rivermap") {
+      h += '<div class="fl-rmap" data-id="' + p.id + '"><div class="fl-rmap__map"><p class="fl__note">Loading the map\u2026</p></div>' +
+        '<div class="fl-rmap__grid">' + p.items.map(function (_, i) {
+          var k = p.id + i, nm = p.items.map(function (it) { return it.n; }).slice().sort();
+          return '<label class="fl-rmap__q"><b>' + (i + 1) + '</b><select class="fl-rsel" data-k="' + k + '" data-a="' + esc(p.items[i].n) + '"><option value="">Which river?</option>' +
+            nm.map(function (n) { return "<option" + (saved[k] === n ? " selected" : "") + ">" + esc(n) + "</option>"; }).join("") + "</select></label>";
+        }).join("") + '</div><div class="fl__actions" style="margin-top:.6rem"><button type="button" class="fl__btn" data-rchk="1">Check my answers</button><button type="button" class="fl__btn fl__btn--ghost" data-rshow="1">Show the answers</button><span class="fl__note" data-rmsg></span></div></div>';
+    }
     if (p.type === "game") {
       h += '<div class="fl__part"><div class="fl-game"><iframe src="' + esc(p.src) + '" title="' + esc(p.title || "Game") + '" loading="lazy" allow="clipboard-write; fullscreen"></iframe></div>' +
         '<a class="fl__video" href="' + esc(p.src) + '" target="_blank" rel="noopener">Open full screen \u2197</a></div>';
@@ -1358,6 +1440,10 @@
   var edBtn = root.querySelector(".fl-edit");
   if (edBtn) edBtn.onclick = function () { openEditor(base, n, ed, root); };
   var inputs = root.querySelectorAll(".fl-in");
+  root.querySelectorAll(".fl-rmap").forEach(function (box) {
+    var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
+    if (part) riverMap(box, part);
+  });
   // Games placed inside the lesson: fit the frame, and hide the same game's card further down.
   root.querySelectorAll(".fl-game iframe").forEach(function (f) {
     var href = f.getAttribute("src");
@@ -1395,6 +1481,25 @@
       saved[t.getAttribute("data-k")] = t.value;
       try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
       t.classList.remove("fl-ok", "fl-bad");
+      return;
+    }
+  });
+  root.addEventListener("change", function (e) {
+    var t = e.target; if (!t.classList || !t.classList.contains("fl-rsel")) return;
+    saved[t.getAttribute("data-k")] = t.value;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+    t.classList.remove("fl-ok", "fl-bad");
+  });
+  root.addEventListener("click", function (e) {
+    var rb = e.target.closest("[data-rchk],[data-rshow]");
+    if (rb) {
+      var bx = rb.closest(".fl-rmap"), sl = bx.querySelectorAll(".fl-rsel"), ok = 0, show = rb.hasAttribute("data-rshow");
+      sl.forEach(function (x) {
+        if (show && !x.value) { x.value = x.getAttribute("data-a"); x.classList.add("fl-shown"); }
+        var g = x.value === x.getAttribute("data-a"); if (g) ok++;
+        x.classList.toggle("fl-ok", g); x.classList.toggle("fl-bad", !g && x.value !== "");
+      });
+      bx.querySelector("[data-rmsg]").textContent = show ? "Answers shown for any you left blank." : ok + " of " + sl.length + " correct." + (ok === sl.length ? " Excellent!" : " Fix the red ones and check again.");
       return;
     }
   });
