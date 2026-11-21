@@ -104,6 +104,26 @@
     }).join("") + "</ol>";
   }
 
+  function COMMONS_SVG() {
+    function stage(x, n, grass, soil, title, cap) {
+      var out = '<g transform="translate(' + x + ',0)">' +
+        '<rect x="10" y="40" width="210" height="110" rx="10" fill="' + grass + '" stroke="#5a7a3a"/>' +
+        '<rect x="10" y="140" width="210" height="26" rx="4" fill="' + soil + '"/>' +
+        '<text x="115" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#173a2a">' + title + "</text>";
+      var pos = [[50,70],[110,95],[170,68],[80,120],[150,122],[40,105],[190,100],[115,60],[60,140],[175,140],[130,130],[95,80]];
+      for (var i = 0; i < n; i++) out += '<g transform="translate(' + pos[i][0] + ',' + pos[i][1] + ')"><ellipse rx="13" ry="8" fill="#f4f4f0" stroke="#555"/><circle cx="12" cy="-4" r="5" fill="#333"/></g>';
+      return out + '<foreignObject x="10" y="176" width="210" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="font:13px/1.35 Inter,Arial,sans-serif;color:#22323a">' + cap + "</div></foreignObject></g>";
+    }
+    return '<svg viewBox="0 0 760 280" role="img" aria-label="The tragedy of the commons in three stages: few animals and healthy grass; more animals and degraded grass; too many animals and bare land." style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px">' +
+      '<g font-family="Inter,Arial,sans-serif">' +
+      stage(0, 3, "#7cc25a", "#8a5a3b", "1. Within carrying capacity", "Few animals graze the shared land. The grass regrows and every user benefits.") +
+      '<path d="M236 95 L262 95" stroke="#555" stroke-width="2.5" marker-end="url(#tca)"/>' +
+      stage(265, 6, "#a9bf5a", "#8a5a3b", "2. Over-use begins", "Each herder adds animals for their own gain. Use exceeds carrying capacity and the land degrades; the cost is shared by everyone.") +
+      '<path d="M501 95 L527 95" stroke="#555" stroke-width="2.5" marker-end="url(#tca)"/>' +
+      stage(530, 12, "#c9b37a", "#7a4e33", "3. Collapse", "Unless the environmental costs are managed, the land can no longer support grazing at all.") +
+      '<defs><marker id="tca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#555"/></marker></defs></g></svg>';
+  }
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -481,6 +501,204 @@
         { id: "h", label: "", type: "text", words: [20, 60], prompt: "Draft your judgement here first (optional), then take it into Challenge Mode." }
       ]
     },
+    RC02: {
+      title: "Measuring trends and patterns in resource consumption",
+      intro: "Complete before the lesson. Watch the two videos and capture three key ideas from each, plus one question or limitation. Then retrieve the key terms without notes, test your knowledge, and bring one example of a lifestyle choice that changes resource demand.",
+      parts: [
+        { type: "heading", text: "Part 1: Watch and capture", note: "Watch the two videos. Record only the most useful ideas, in your own words." },
+        { id: "a", type: "table", prompt: "",
+          links: [
+            { label: "Video 1: The ecological footprint: accounting for a small planet", url: "https://www.youtube.com/watch?v=EjyrAHzthTo" },
+            { label: "Video 2: Ecological footprint: how many planets do we need?", url: "https://www.youtube.com/watch?v=g_aguo7V0Q4" }],
+          cols: ["Video", "Three key ideas", "One question or limitation"],
+          rows: ["Video 1: Accounting for a small planet", "Video 2: How many planets do we need?"] },
+        { type: "heading", text: "Part 2: Key terms", note: "Read the core meaning of each term, then add your own example or a quick sketch idea." },
+        { id: "b", label: "", type: "table", prompt: "", given: true,
+          cols: ["Term", "Core meaning", "My example / sketch"],
+          rows: ["Ecological footprint", "Global hectare (gha)", "Biocapacity", "Ecological debtor", "Ecological creditor", "Earth Overshoot Day"],
+          prefill: {
+            0: ["Demand on biologically productive land and water to supply resources and absorb waste.", null],
+            1: ["A globally comparable hectare with world-average biological productivity.", null],
+            2: ["The productive capacity of ecosystems to regenerate resources and absorb waste.", null],
+            3: ["A country or region whose ecological footprint exceeds its biocapacity.", null],
+            4: ["A country or region whose biocapacity exceeds its ecological footprint.", null],
+            5: ["The date when annual human demand exceeds what Earth can regenerate in that year.", null] } },
+        { type: "heading", text: "Part 3: Test my knowledge", note: "Try to do this without looking at your notes. Choose an answer, then give your reason." },
+        { id: "c", type: "mcq", prompt: "", label: "", items: [
+          { q: "Which term measures demand on nature?", o: ["GDP", "Biocapacity", "Ecological footprint", "HDI"], a: 2 },
+          { q: "Biocapacity measures\u2026", o: ["ecosystem productivity", "population size", "income", "mineral reserves"], a: 0 },
+          { q: "A biocapacity reserve exists when\u2026", o: ["footprint > biocapacity", "biocapacity > footprint", "exports > imports", "GDP falls"], a: 1 },
+          { q: "A global hectare allows\u2026", o: ["a globally comparable measurement", "only national totals", "carbon-only measurement", "direct wealth comparison"], a: 0 }] },
+        { id: "d", label: "", type: "questions", prompt: "Retrieval grid",
+          rows: ["Define ecological footprint.", "Distinguish ecological footprint from biocapacity.", "Explain why high-income countries often have larger footprints.", "Explain why a large, sparsely populated country may be an ecological creditor."] },
+        { type: "heading", text: "Connect" },
+        { id: "e", type: "text", label: "", prompt: "Bring one example of a lifestyle choice that changes resource demand. Explain how it changes demand." }
+      ]
+    },
+    RC03: {
+      title: "Patterns and trends in the global availability and consumption of water",
+      intro: "Complete before the lesson. The lesson route: connect (water emergency), discover (pattern, trend and evidence), demonstrate (regional diagnosis), apply (choose solutions), reflect (IB exit ticket).",
+      parts: [
+        { type: "heading", text: "Key vocabulary" },
+        { id: "a", label: "", type: "table", prompt: "", given: true,
+          cols: ["Term", "Working definition"],
+          rows: ["Pattern", "Trend", "Physical scarcity", "Economic scarcity", "Embedded water"],
+          prefill: {
+            0: ["Spatial distribution at a particular point in time."],
+            1: ["Direction or nature of change over time."],
+            2: ["Demand exceeds naturally available and accessible supply."],
+            3: ["Water exists, but access is limited by infrastructure, investment or institutions."],
+            4: ["Water used throughout production of a good or service."] } },
+        { type: "heading", text: "Part 1: Retrieval questions" },
+        { id: "b", label: "", type: "questions", prompt: "",
+          rows: ["What is the difference between a pattern and a trend?", "Define physical water scarcity.", "Define economic water scarcity.",
+            "Which term describes the water used throughout the production and supply chain of a product?", "Why might a region with abundant freshwater still experience poor water security?"] }
+      ]
+    },
+    RC04: {
+      title: "Patterns and trends in the global availability and consumption of land and food",
+      intro: "Big question: how and why are diets changing in middle-income countries, and what are the consequences? Flip learning prepares the knowledge; class time is for geographical thinking (retrieve, investigate, evaluate, write).",
+      parts: [
+        { type: "heading", text: "Part 1: Retrieval check" },
+        { id: "a", label: "", type: "questions", letters: true, prompt: "",
+          rows: ["Define food security.", "Define malnutrition.", "Distinguish under-consumption from over-consumption.", "State one reason food availability differs between places.", "Suggest why obesity and undernutrition can occur in the same country."] },
+        { type: "heading", text: "Part 2: Evidence capture", note: "Use the sources below to complete the table and answer the questions." },
+        { id: "b", type: "table", prompt: "Complete the table.",
+          links: [
+            { label: "Global Hunger Index", url: "https://www.globalhungerindex.org" },
+            { label: "WFP HungerMap LIVE (World Food Programme)", url: "https://hungermap.wfp.org" },
+            { label: "Global Food Security Index", url: "https://insights.economistenterprise.com/sustainability/project/food-security-index/" },
+            { label: "Global Food Security Index results (2020)", url: "https://foodsecurityindex.eiu.com/Index" },
+            { label: "Video: Changing food systems", url: "https://www.youtube.com/watch?v=VcL3BQeteCc" }],
+          cols: ["Source", "One pattern or fact", "What surprised you?", "Why might it matter?"],
+          rows: ["Global Hunger Index", "Global Food Security Index", "Changing food systems video"] },
+        { id: "c", label: "", type: "questions", prompt: "Global Food Security Index: examine the results on the website and answer these questions.",
+          rows: ["What is the Global Food Security Index? What criteria does it use to measure food security?", "Which countries are the most and least food secure globally?", "Where does Thailand score on the index? Give a brief description of Thailand\u2019s results."] },
+        { type: "heading", text: "Part 3: Readiness question", note: "Think before class." },
+        { id: "d", label: "", type: "text", prompt: "Why might economic growth improve food security while also creating new health and environmental problems?" }
+      ]
+    },
+    RC05: {
+      title: "Energy patterns, security and transition",
+      intro: "Big question: how and why are the global patterns of energy production and consumption changing, and how secure and sustainable are those changes? Complete this before class.",
+      parts: [
+        { type: "heading", text: "Part A: Watch" },
+        { id: "a", type: "table", prompt: "Watch the video, then make notes.",
+          links: [{ label: "Video: 300 years of fossil fuels in 300 seconds", url: "https://www.youtube.com/watch?v=cJ-J91SwP8w" }],
+          cols: ["While watching", "Your notes"],
+          rows: ["Identify three major turning points.", "Explain why fossil fuels transform economies.", "Identify one benefit and one cost.", "Write one question for the lesson."] },
+        { type: "heading", text: "Retrieval check", note: "Answer in your own words." },
+        { id: "b", label: "", type: "questions", letters: true, prompt: "",
+          rows: ["Define renewable energy.", "Define hydrocarbons.", "Define energy mix.", "Distinguish energy production from energy consumption.", "Explain why energy security matters."] }
+      ]
+    },
+    RC06: {
+      title: "The water\u2013food\u2013energy nexus: my dinner has a nexus",
+      intro: "Big question: how can pressure on one resource create insecurity somewhere else? Complete this before the classroom lesson.",
+      parts: [
+        { id: "k", label: "", type: "table", prompt: "Resource key", given: true,
+          plainHead: true, cols: ["Water", "Food", "Energy"], rows: ["Safe supply \u2022 sanitation \u2022 irrigation"],
+          prefill: { 0: ["Production \u2022 access \u2022 nutrition", "Reliable \u2022 affordable \u2022 productive uses"] } },
+        { type: "heading", text: "What is the nexus?" },
+        { id: "a", type: "text", prompt: "Watch the nexus video. Then define the concept in one precise sentence.",
+          links: [{ label: "Video: Water, energy, food: nexus thinking explained", url: "https://www.youtube.com/watch?v=CKW_ux2Xo_w" }] },
+        { id: "b", type: "table", prompt: "Now complete the table.",
+          cols: ["Interaction", "Example from the video or your own knowledge"],
+          rows: ["Water \u2192 Food", "Food \u2192 Water", "Water \u2192 Energy", "Energy \u2192 Water", "Food \u2192 Energy", "Energy \u2192 Food"] },
+        { id: "c", type: "table", prompt: "Now complete these key terms.",
+          cols: ["Term", "Your definition"], rows: ["Water security", "Food security", "Energy security"] },
+        { type: "heading", text: "My meal investigation", note: "Create a meal, for example an English roast dinner, and trace its water, food and energy." },
+        { id: "m", label: "", type: "table", prompt: "",
+          cols: ["", "Your answer"], rows: ["My meal", "Ingredients"] },
+        { id: "n", label: "", type: "table", prompt: "",
+          cols: ["", "WATER: where was it needed?", "FOOD: what was produced?", "ENERGY: where was it used?"], rows: ["My meal"] },
+        { id: "o", label: "", type: "text", prompt: "Complete: \u201cThe resource my meal depends upon most is \u2026 because \u2026\u201d" },
+        { type: "heading", text: "Check your understanding" },
+        { id: "d", label: "d)", type: "questions", prompt: "Complete the following.",
+          rows: ["Define nexus.", "Define food security.", "Give one way food production requires water.", "Give one way water supply requires energy.", "Why is \u201cnexus\u201d more useful than simply calling these three separate systems?"] }
+      ]
+    },
+    RC08: {
+      title: "Country specialist briefing: Nepal and Israel",
+      storeAs: "RC08",
+      intro: "Pressure on resources will affect the future security of different places. The next two lessons focus on two countries at very different levels of development: Nepal and Israel. You will pair up: one of you is the Nepal researcher and the other the Israel researcher. In the following lesson you will compare, contrast and apply the 4 Ps to form an opinion. This briefing is the same on the Nepal and Israel lesson pages, and your notes appear on both.",
+      parts: [
+        { type: "heading", text: "Questions to keep in mind" },
+        { type: "html", html: '<ol class="fl__cover" style="margin-left:1.4rem"><li>To what extent do Nepal and Israel have resource security?</li><li>Is there a difference in the way both countries have tried to achieve resource security?</li><li>How might this security be affected in the future, especially as a result of climate change?</li></ol>' },
+        { type: "heading", text: "Prepare your background research",
+          note: "Research your chosen country using the Teach Me Live bots on the two lesson pages and the videos, and take notes. Use an atlas to locate your country and its main physical features." },
+        { type: "html", html: '<p><a class="fl__video" href="/geography/paper-1/core-3/t2-impacts-of/l3-the-water">Nepal lesson page &rarr;</a> <a class="fl__video" href="/geography/paper-1/core-3/t2-impacts-of/l4-the-water">Israel lesson page &rarr;</a></p>' },
+        { id: "a", label: "A.", type: "table", prompt: "Nepal specialist",
+          links: [{ label: "Video: Nepal: Himalaya, Kathmandu", url: "https://www.youtube.com/watch?v=w3Becl-1JPI" }],
+          cols: ["Category", "Essential notes"],
+          rows: ["Physical and human pressures", "Threats to water, energy and food", "Small-scale responses", "Climate-change future", "Overall security judgement"] },
+        { id: "b", label: "B.", type: "table", prompt: "Israel specialist",
+          links: [{ label: "Video: Israel: small but outstanding", url: "https://www.youtube.com/watch?v=AoizSL-TEJQ" }],
+          cols: ["Category", "Essential notes"],
+          rows: ["Physical and human pressures", "Threats to water, energy and food", "Large-scale / high-tech responses", "Climate-change future", "Overall security judgement"] }
+      ]
+    },
+    RC10: {
+      title: "Disposal and recycling of consumer items",
+      intro: "Enquiry question: how should societies manage the growing amount of waste created by consumption? Complete this before the lesson.",
+      parts: [
+        { type: "heading", text: "Part 1: The waste hierarchy" },
+        { id: "a", type: "table", prompt: "Watch the Reduce, Reuse, Recycle video and record:",
+          links: [{ label: "Video: Reduce, reuse, recycle (in that order)", url: "https://www.youtube.com/watch?v=EWxjFLDoIDA" }],
+          cols: ["", "Student-friendly definition", "One example"],
+          rows: ["Reduce", "Reuse", "Recycle"] },
+        { id: "b", type: "text", prompt: "In one sentence, explain why the three actions are placed in that order." },
+        { type: "heading", text: "Part 2: Vocabulary preparation" },
+        { id: "c", type: "table", prompt: "Complete the table of key terms.",
+          cols: ["Term", "Student definition", "Example"],
+          rows: ["Municipal solid waste", "Reduce", "Reuse", "Recycle", "Upcycle", "Downcycle", "Waste recovery", "Landfill"] },
+        { type: "heading", text: "Part 3: Personal waste audit", note: "Choose five items discarded at home during one evening." },
+        { id: "d", type: "table", prompt: "For each item, record:",
+          cols: ["", "What was the item?", "What material was it made from?", "Why was it discarded?", "What happened to it?", "Could it have been reduced, reused, repaired, recycled or composted?"],
+          rows: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"] }
+      ]
+    },
+    RC12: {
+      title: "Population and resource consumption: prepare for the dinner party",
+      intro: "Complete this before the lesson to prepare for the dinner party debate. Use the three presentations and the Teach Me Live bot on this page.",
+      parts: [
+        { type: "heading", text: "Part 1: Key terms" },
+        { id: "a", type: "table", prompt: "Define the following.",
+          cols: ["Key term", "Definition", "Example country"],
+          rows: ["Underpopulation", "Overpopulation", "Optimum population", "Resource stewardship"] },
+        { type: "heading", text: "Part 2: Pessimistic and optimistic approaches",
+          note: "Read the three presentations, then complete the table. Sketch the graphs in OneNote and describe them in the table." },
+        { id: "b", type: "table", prompt: "Malthus versus Boserup",
+          links: [
+            { label: "Presentation: Malthus vs Boserup (introduction)", url: "/geography/resources/flip/malthus-vs-boserup-intro.pptx" },
+            { label: "Presentation: Malthus", url: "/geography/resources/flip/malthus.ppt" },
+            { label: "Presentation: Boserup", url: "/geography/resources/flip/boserup.ppt" }],
+          cols: ["", "PESSIMISTIC approach (Malthus\u2019s original theory, the Club of Rome and neo-Malthusianism)", "OPTIMISTIC approach (Boserup)"],
+          rows: ["Name the geographer and the year of the published work", "Main arguments", "Graphs to illustrate the arguments (sketch in OneNote, describe here)", "Limitations / criticisms", "Present-day case study to support these arguments"] }
+      ]
+    },
+    RC13: {
+      title: "The value of the circular economy",
+      intro: "For flip learning, read and watch the following, and with additional research, answer the questions.",
+      parts: [
+        { type: "heading", text: "Part A: The tragedy of the commons",
+          note: "Read the Geography Review article \u201cThe circular economy\u201d (April 2017) from your class OneNote page, and watch the video." },
+        { type: "html", html: COMMONS_SVG() },
+        { id: "a", label: "", type: "questions", prompt: "",
+          links: [{ label: "Video: What is the tragedy of the commons? (Nicholas Amendolare, TED-Ed)", url: "https://www.youtube.com/watch?v=CxC161GvMPc" }],
+          rows: ["Explain the concept of resource stewardship.", "List the different global commons.", "Explain the concept behind the tragedy of the commons, and use an example of a resource to illustrate it.", "Describe the characteristics of the circular economy and the three principles behind it."] },
+        { type: "heading", text: "Part B: Linear and circular economies (optional)", note: "This talk is quite long, so you may want to watch it at home." },
+        { id: "b", label: "", type: "text", prompt: "Write a paragraph comparing the linear economy with the circular economy. Give as many examples as you can, from the video or your own ideas.",
+          links: [{ label: "Video: Ellen MacArthur: learning and the circular economy (TED)", url: "https://www.youtube.com/watch?v=eOGy683afyo" }] },
+        { type: "heading", text: "Part C: The circular vs the linear economy" },
+        { id: "c", label: "", type: "text", prompt: "Watch the video and write the difference between the circular and the linear economy.",
+          links: [{ label: "Video: The circular vs the linear economy", url: "https://www.youtube.com/watch?v=RyIKCfKyZ-g" }] },
+        { type: "heading", text: "Part D: The Story of Electronics" },
+        { id: "d", label: "", type: "questions", prompt: "Watch the video and answer the questions.",
+          links: [{ label: "Video: The Story of Electronics", url: "https://www.youtube.com/watch?v=sW_7i6T_H78" }],
+          rows: ["What does \u2018designed for the dump\u2019 mean?", "How is this achieved by companies?", "Why do companies design goods that will soon be put in the dump?", "How is Annie\u2019s DVD player designed for the dump?", "How many months is the average electronic item used for?", "How many raw materials are used in the manufacturing of electronics?", "What is added to the raw materials during manufacturing? Give an example.", "What has been the impact of electronics manufacturing in Silicon Valley, California, on (a) the environment?", "\u2026and (b) people?", "What is e-waste?", "What waste comes out of electronic goods?", "Where is most e-waste recycling done?", "How is e-waste recycled?", "What are the impacts of e-waste?", "What does \u2018externalising the true cost of production\u2019 mean?", "Explain the term extended producer responsibility (take-back).", "Why are there few \u2018green\u2019 electronics for consumers?"] }
+      ]
+    },
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -535,6 +753,7 @@
     }]
   };
 
+  FLIP.RC09 = FLIP.RC08;
   window.SBL_FLIP_IDS = Object.keys(FLIP);
   var overlay = document.querySelector("[data-lesson-id]");
   var id = overlay && overlay.getAttribute("data-lesson-id");
@@ -594,6 +813,9 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl-mcq{margin:.4rem 0 1rem}.fl-mcq__o{display:flex;flex-wrap:wrap;gap:.4rem;margin:.3rem 0}" +
+    ".fl-opt{border:1px solid var(--lh-border);background:#fff;border-radius:10px;padding:.4rem .7rem;font:500 .86rem var(--lh-font-body);cursor:pointer;color:var(--lh-ink)}" +
+    ".fl-opt:hover{border-color:var(--lh-teal)}.fl-opt.right{background:var(--lh-green-bg);border-color:var(--lh-green)}.fl-opt.wrong{background:#fdecea;border-color:#e57373}" +
     ".fl__prompts{margin:.3rem 0 .5rem;padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem}" +
     ".fl__prompts li{padding-left:.2rem}.fl__prompts li span{color:var(--lh-ink)}" +
     ".fl__pcopy{margin-left:.5rem;border:1px solid var(--lh-teal);background:#fff;color:var(--lh-teal-deep);border-radius:999px;padding:.05rem .55rem;font:600 .72rem var(--lh-font-body);cursor:pointer;vertical-align:1px}" +
@@ -639,7 +861,7 @@
   function panel(base, n, ed) {
   ed = ed || {};
   var cfg = applyEdits(base, ed.edits || {});
-  var KEY = "sbl-flip-" + id + (n ? "-" + (n + 1) : "");
+  var KEY = "sbl-flip-" + (base.storeAs || id) + (n ? "-" + (n + 1) : "");
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
   var h = '<details class="fl" id="flipLearning' + (n ? n + 1 : "") + '"><summary>' +
@@ -701,13 +923,23 @@
       p.rows.forEach(function (r, i) {
         if (isGroup(r)) { h += '<tr><td class="fl__grp" colspan="' + cols.length + '">' + esc(r.slice(1)) + "</td></tr>"; return; }
         var ex = p.prefill && p.prefill[i];
-        h += '<tr><td class="fl__rh"' + (p.rhw ? ' style="width:' + p.rhw + '"' : "") + '>' + esc(r) + (ex && !p.given ? '<br><span class="fl__note">Example</span>' : "") + "</td>";
+        h += '<tr><td class="fl__rh"' + (p.rhw || p.plainHead ? ' style="' + (p.rhw ? "width:" + p.rhw + ";" : "") + (p.plainHead ? "font-weight:400;color:var(--lh-body)" : "") + '"' : "") + '>' + esc(r) + (ex && !p.given ? '<br><span class="fl__note">Example</span>' : "") + "</td>";
         for (var c = 1; c < cols.length; c++)
           h += ex && ex[c - 1] !== null ? '<td class="' + (p.given ? "fl__given" : "fl__ex") + '">' + esc(ex[c - 1] || "") + "</td>" : "<td>" + box(saved, cellKey(p, i, c), r + ": " + cols[c], 2, 1) + "</td>";
         h += "</tr>";
       });
       h += "</tbody></table></div>";
     }
+    if (p.type === "mcq")
+      p.items.forEach(function (it, i) {
+        var k = p.id + i, pick = saved[k];
+        h += '<div class="fl-mcq" data-mk="' + k + '" data-a="' + it.a + '"><p class="fl__vq"><b>' + (i + 1) + ".</b> " + esc(it.q) + "</p><div class=\"fl-mcq__o\">" +
+          it.o.map(function (o, j) {
+            var c = pick == null ? "" : (j === it.a ? " right" : (+pick === j ? " wrong" : ""));
+            return '<button type="button" class="fl-opt' + c + '" data-j="' + j + '"><b>' + "ABCDEF".charAt(j) + "</b> " + esc(o) + "</button>";
+          }).join("") + '</div><p class="fl__note fl-mcq__fb">' + (pick == null ? "" : (+pick === it.a ? "\u2713 Correct." : "Not quite: the answer is " + "ABCDEF".charAt(it.a) + ".")) + "</p>" +
+          '<p class="fl__note" style="margin-top:.2rem">Reason:</p>' + box(saved, k + "r", "Reason for question " + (i + 1), 2) + "</div>";
+      });
     if (p.type === "questions")
       p.rows.forEach(function (r, i) { h += '<p class="fl__vq">' + (p.letters ? "abcdefghij".charAt(i) + ")" : (i + 1) + ".") + " " + esc(r) + "</p>" + box(saved, p.id + i, r, 3); });
     h += "</div>";
@@ -736,6 +968,14 @@
     inputs.forEach(function (t) { if (t.value.trim()) done++; });
     root.querySelector(".fl__state").textContent = done ? done + " / " + inputs.length + " answered" : "Not started";
   }
+  root.addEventListener("click", function (e) {
+    var b = e.target.closest(".fl-opt"); if (!b) return;
+    var g = b.closest(".fl-mcq"), k = g.getAttribute("data-mk"), a = +g.getAttribute("data-a"), j = +b.getAttribute("data-j");
+    saved[k] = j;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+    g.querySelectorAll(".fl-opt").forEach(function (o) { var oj = +o.getAttribute("data-j"); o.className = "fl-opt" + (oj === a ? " right" : (oj === j ? " wrong" : "")); });
+    g.querySelector(".fl-mcq__fb").textContent = j === a ? "\u2713 Correct." : "Not quite: the answer is " + "ABCDEF".charAt(a) + ".";
+  });
   root.addEventListener("input", function (e) {
     if (!e.target.classList.contains("fl-in")) return;
     saved[e.target.getAttribute("data-k")] = e.target.value;
@@ -762,6 +1002,11 @@
       if (p.prompt) { html += "<p><b>" + esc((lab ? lab + " " : "") + p.prompt) + "</b></p>"; out.push((lab ? lab + " " : "") + p.prompt); }
       (p.links || []).forEach(function (l) { html += '<p><a href="' + esc(l.url) + '">' + esc(l.label) + "</a></p>"; out.push(l.label + ": " + l.url); });
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
+      if (p.type === "mcq") p.items.forEach(function (it, i) {
+        var k = p.id + i, pk = saved[k], ch = pk == null ? "(not answered)" : "ABCDEF".charAt(+pk) + " " + it.o[+pk] + (+pk === it.a ? " \u2713" : " (answer: " + "ABCDEF".charAt(it.a) + ")");
+        html += "<p><i>" + (i + 1) + ". " + esc(it.q) + "</i><br>Answer: " + esc(ch) + "<br>Reason: " + cellHtml(ans(k + "r")) + "</p>";
+        out.push((i + 1) + ". " + it.q, "Answer: " + ch, "Reason: " + ans(k + "r"));
+      });
       if (p.type === "questions") p.rows.forEach(function (r, i) {
         var n = p.letters ? "abcdefghij".charAt(i) + ")" : (i + 1) + ".";
         html += "<p><i>" + n + " " + esc(r) + "</i><br>" + cellHtml(ans(p.id + i)) + "</p>";
