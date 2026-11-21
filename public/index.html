@@ -138,6 +138,19 @@
       top: 22px;
       right: 24px;
       z-index: 2;
+      display: flex;
+      gap: 10px;
+    }
+
+    .top-hero-account a.signup {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--navy);
+    }
+
+    .top-hero-account a.signup:hover {
+      background: var(--white);
+      border-color: var(--white);
     }
 
     .top-hero-account a {
@@ -456,6 +469,7 @@
 
     <header class="top-hero">
       <div class="top-hero-account">
+        <a href="/register/" id="topSignupLink" class="signup">Sign up</a>
         <a href="/login/" id="topAccountLink">Log in</a>
       </div>
       <div class="hero-inner">
@@ -617,6 +631,8 @@
         if (!link) return;
         link.textContent = "Enter Hub";
         link.href = "/humanities-hub";
+        const su = document.getElementById("topSignupLink");
+        if (su) su.remove();
       })
       .catch(() => {});
   </script>
