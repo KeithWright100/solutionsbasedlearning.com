@@ -124,6 +124,44 @@
       '<defs><marker id="tca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#555"/></marker></defs></g></svg>';
   }
 
+  var LOOPS_SVG =
+    '<svg viewBox="0 0 760 230" role="img" aria-label="Linear economy: take, make, use, dispose. Circular economy: make, use, then reuse, repair and recycle back into making, with biological materials returned to the soil." style="width:100%;max-width:760px;height:auto;display:block;margin-top:12px;background:#fff;border:1px solid var(--lh-border);border-radius:10px">' +
+    '<defs><marker id="lp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#555"/></marker></defs>' +
+    '<g font-family="Inter,Arial,sans-serif" font-size="13" text-anchor="middle">' +
+    '<text x="170" y="26" font-weight="700" font-size="14" fill="#7a2a1a">Linear economy</text>' +
+    [["Take", 40], ["Make", 120], ["Use", 200], ["Dispose", 285]].map(function (b) { return '<rect x="' + (b[1] - 35) + '" y="95" width="70" height="36" rx="8" fill="#fbe3dc" stroke="#c0583b"/><text x="' + b[1] + '" y="118" fill="#7a2a1a">' + b[0] + "</text>"; }).join("") +
+    '<path d="M75 113 H83" stroke="#555" stroke-width="2" marker-end="url(#lp)"/><path d="M155 113 H163" stroke="#555" stroke-width="2" marker-end="url(#lp)"/><path d="M235 113 H248" stroke="#555" stroke-width="2" marker-end="url(#lp)"/>' +
+    '<text x="285" y="160" font-size="11" fill="#7a2a1a">landfill or burning</text>' +
+    '<line x1="380" y1="20" x2="380" y2="210" stroke="#ddd"/>' +
+    '<text x="570" y="26" font-weight="700" font-size="14" fill="#0b4f3d">Circular economy</text>' +
+    '<circle cx="570" cy="122" r="70" fill="none" stroke="#1d9e75" stroke-width="3" stroke-dasharray="10 6"/>' +
+    '<rect x="535" y="40" width="70" height="30" rx="8" fill="#e1f5ee" stroke="#1d9e75"/><text x="570" y="60" fill="#0b4f3d">Make</text>' +
+    '<rect x="615" y="108" width="80" height="30" rx="8" fill="#e1f5ee" stroke="#1d9e75"/><text x="655" y="128" fill="#0b4f3d">Use</text>' +
+    '<rect x="510" y="175" width="120" height="30" rx="8" fill="#e1f5ee" stroke="#1d9e75"/><text x="570" y="195" fill="#0b4f3d">Repair and reuse</text>' +
+    '<rect x="435" y="108" width="90" height="30" rx="8" fill="#e1f5ee" stroke="#1d9e75"/><text x="480" y="128" fill="#0b4f3d">Recycle</text>' +
+    '<text x="705" y="200" font-size="11" fill="#5a4a1a">biological</text><text x="705" y="214" font-size="11" fill="#5a4a1a">materials → soil</text>' +
+    '</g></svg>';
+  var CIRCULAR_READING =
+    '<details class="optx" open><summary>📖 Reading: the circular economy (SBL briefing)</summary><div class="fl__read">' +
+    '<h4>Why is a new model needed?</h4>' +
+    '<p>Most of the world still runs a <b>linear economy</b>: we <i>take</i> raw materials, <i>make</i> products, <i>use</i> them and then <i>dispose</i> of them. Each step adds value, but the end point is waste. As population and wealth grow, so does the demand for metals, fossil fuels, water and land. In 1972 the Club of Rome’s <i>Limits to Growth</i> report used computer models to warn that if consumption kept rising, resources would run short and pollution would build up, eventually forcing a fall in food supply, industrial output and population. Plastics show the problem today: only about 9% of the plastic ever produced has been recycled, and most of the rest is landfilled, burned or leaks into the environment.</p>' +
+    '<h4>What is a circular economy?</h4>' +
+    '<p>A <b>circular economy</b> is designed so that waste is not created in the first place. Products and materials are kept in use for as long as possible, at their highest value, and natural systems are allowed to recover. The Ellen MacArthur Foundation, a leading promoter of the idea, sums it up in <b>three principles</b>:</p>' +
+    '<ol><li><b>Eliminate waste and pollution</b>: design products so they can be repaired, taken apart and reused.</li>' +
+    '<li><b>Circulate products and materials at their highest value</b>: maintain, share, reuse and remanufacture before recycling.</li>' +
+    '<li><b>Regenerate nature</b>: return biological materials safely to the soil and support natural systems.</li></ol>' +
+    '<h4>Two kinds of loop</h4>' +
+    '<p>The idea grew from “cradle to cradle” design, developed by architect William McDonough and chemist Michael Braungart. It separates materials into two cycles. In the <b>biological cycle</b>, things that can safely break down (food, wood, cotton) are composted or digested and return to the soil. In the <b>technical cycle</b>, metals, plastics and electronics are kept circulating through repair, reuse, remanufacturing and, as a last step, recycling. The tighter the loop, the more value is kept: repairing a phone saves far more energy and material than shredding it for recycling.</p>' +
+    '<h4>Examples at different scales</h4>' +
+    '<ul><li><b>Local:</b> at Kalundborg in Denmark, a power station, refinery, drug factory and other firms swap steam, water, gypsum and other by-products, so one company’s waste becomes another’s raw material (industrial symbiosis).</li>' +
+    '<li><b>Business:</b> instead of selling light bulbs, Philips has supplied lighting to Schiphol Airport “as a service”. Philips keeps ownership of the fittings, so it has a reason to make them last and to reuse the parts.</li>' +
+    '<li><b>National:</b> since 2016 large French supermarkets have been banned from destroying unsold food that is still edible; it must be donated or used for animal feed or compost.</li>' +
+    '<li><b>City:</b> Amsterdam aims to halve its use of new raw materials by 2030 and to be fully circular by 2050.</li>' +
+    '<li><b>Regional and global:</b> the EU’s rules on electrical waste (WEEE) make producers responsible for taking back and recycling old appliances, and the UN Sustainable Development Goals include halving food waste per person by 2030 (target 12.3).</li></ul>' +
+    '<h4>Challenges and debates</h4>' +
+    '<p>Going circular is not easy. When oil is cheap, new plastic can cost less than recycled plastic, so firms need incentives or regulation to change. Safety rules can also get in the way: food past its “use by” date cannot be redistributed. Some argue that governments must set targets and laws, while others expect businesses and consumers to lead through renting, sharing and repairing. Optimists point to new materials, product-as-a-service models and young consumers who value access over ownership; pessimists argue that growth in total consumption could cancel out these gains.</p>' +
+    LOOPS_SVG + '</div></details>';
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -682,8 +720,9 @@
       intro: "For flip learning, read and watch the following, and with additional research, answer the questions.",
       parts: [
         { type: "heading", text: "Part A: The tragedy of the commons",
-          note: "Read the Geography Review article \u201cThe circular economy\u201d (April 2017) from your class OneNote page, and watch the video." },
+          note: "Read the briefing below and watch the video, then answer the questions. Use additional research too." },
         { type: "html", html: COMMONS_SVG() },
+        { type: "html", html: CIRCULAR_READING },
         { id: "a", label: "", type: "questions", prompt: "",
           links: [{ label: "Video: What is the tragedy of the commons? (Nicholas Amendolare, TED-Ed)", url: "https://www.youtube.com/watch?v=CxC161GvMPc" }],
           rows: ["Explain the concept of resource stewardship.", "List the different global commons.", "Explain the concept behind the tragedy of the commons, and use an example of a resource to illustrate it.", "Describe the characteristics of the circular economy and the three principles behind it."] },
@@ -813,6 +852,7 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl__read{font-size:.92rem;line-height:1.6;color:var(--lh-body)}.fl__read h4{margin:1rem 0 .3rem;font:700 .98rem var(--lh-font-display);color:var(--lh-ink)}.fl__read p{margin:.3rem 0}.fl__read ul,.fl__read ol{margin:.3rem 0 .3rem 1.3rem;padding:0}.fl__read li{margin:.25rem 0}" +
     ".fl-mcq{margin:.4rem 0 1rem}.fl-mcq__o{display:flex;flex-wrap:wrap;gap:.4rem;margin:.3rem 0}" +
     ".fl-opt{border:1px solid var(--lh-border);background:#fff;border-radius:10px;padding:.4rem .7rem;font:500 .86rem var(--lh-font-body);cursor:pointer;color:var(--lh-ink)}" +
     ".fl-opt:hover{border-color:var(--lh-teal)}.fl-opt.right{background:var(--lh-green-bg);border-color:var(--lh-green)}.fl-opt.wrong{background:#fdecea;border-color:#e57373}" +
