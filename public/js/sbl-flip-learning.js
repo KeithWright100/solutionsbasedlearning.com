@@ -772,8 +772,14 @@
           { t: "All-inclusive", d: "When tourists pay a hotel complex one price which includes all meals, drinks, entertainment, activities, etc. All-inclusive holidays are very common in the Mediterranean and the Caribbean." } ] }
       ]
     }, {
-      kind: "lesson", open: true,
+      kind: "lesson", open: true, inline: true,
       title: "How have leisure patterns changed?",
+      overview: {
+        intention: "To describe and explain human patterns and processes.",
+        syllabus: ["The growth and changing purpose of leisure time for societies in different geographic and development contexts.",
+          "Categorisation of touristic activities (cost, duration, destination) and sporting activities (cost, popularity, site)."],
+        success: ["Define the key terms leisure, recreation, sport and tourism.", "Describe how patterns of leisure time have increased in the USA and globally.",
+          "Explain some reasons for the growth in leisure time globally.", "Categorise a number of touristic and sporting activities into different groups."] },
       time: "about 60 minutes",
       sub: "Low screen time: most activities use printed cards. Use this panel to run, check and record them.",
       intro: "Before the lesson: complete the Flip learning key terms above. Optional: play the first levels of the Leisure Quest.",
@@ -940,7 +946,11 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
-    ".fl__stage{display:block;width:100%;height:auto;border-radius:12px;margin:2rem 0 .2rem}" +
+    ".fl__stage{display:block;width:100%;max-width:340px;height:auto;border-radius:10px;margin:2rem 0 .2rem}" +
+    ".fl--inline{border-left:0;border-top:5px solid var(--lh-orange);padding:0}.fl__ihead{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem .2rem}.fl__ihead h2{margin:0;font:700 1.3rem var(--lh-font-display);color:var(--lh-ink);flex:1}.fl--inline .fl__body{border-top:0}" +
+    ".lh-ov{display:flex;flex-direction:column;gap:.8rem;margin:0 0 1.2rem}.lh-ov__li{border:3px solid #e0782b;border-radius:12px;background:#fff;padding:.8rem 1rem;font-size:1.02rem;color:var(--lh-ink)}" +
+    ".lh-ov__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}.lh-ov__box{border:3px solid #2ea44f;border-radius:12px;background:#fff;padding:.8rem 1rem}" +
+    ".lh-ov__box h3{margin:0 0 .4rem;font:700 1rem var(--lh-font-display);color:var(--lh-ink)}.lh-ov__box p{margin:.3rem 0;color:var(--lh-body)}.lh-ov__box ul{margin:.2rem 0 0 1.1rem;padding:0;color:var(--lh-body)}.lh-ov__box li{margin:.2rem 0}" +
     ".fl--lesson{border-left-color:var(--lh-orange);margin:0}.fl--lesson .fl__logo-b{color:#c2410c}" +
     ".fl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;margin:.4rem 0 .8rem}" +
     ".fl-card{position:relative;border:1px dashed #9fb7c4;border-radius:10px;padding:.5rem .6rem;background:#fff}.fl-card svg{display:block;width:100%;height:70px;background:#eef5fb;border-radius:8px}" +
@@ -1008,13 +1018,18 @@
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
   var isL = cfg.kind === "lesson";
-  var h = '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"' + (cfg.open ? " open" : "") + '><summary>' +
+  var inl = !!cfg.inline;
+  var h = inl
+    ? '<section class="fl fl--lesson fl--inline" id="flipLearning' + (n ? n + 1 : "") + '"><div class="fl__ihead"><h2>Lesson resources</h2><span class="fl__state"></span></div><div class="fl__body">'
+    : '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"' + (cfg.open ? " open" : "") + '><summary>' +
+    (inl ? "" : (
     (isL ? '<span class="fl__logo" aria-label="Lesson Resources"><span class="fl__logo-a">Lesson</span> <span class="fl__logo-b">Resources</span></span>'
          : '<span class="fl__logo" aria-label="Flip Learning"><span class="fl__logo-a">Flip</span> <span class="fl__logo-b">Learning</span></span>') +
     '<span class="fl__h"><span class="fl__eyebrow">' + (isL ? "Classroom" + (cfg.time ? " \u00b7 " + esc(cfg.time) : "") : "Pre-lesson" + (cfg.part ? " · " + esc(cfg.part) : "")) + '</span><p class="fl__title">' + esc(cfg.title) + '</p><span class="fl__sub">' + (isL ? esc(cfg.sub || "") : "Use the Teach Me bot and additional resources to complete") + '</span></span>' +
     '<span class="fl__state"></span>' +
     '<svg class="fl__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="fl__body">' +
-    (isL ? "" : '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">');
+    (isL ? "" : '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">')
+    ));
   if (cfg.intro) h += '<p class="fl__intro">' + esc(cfg.intro) + "</p>";
   if (cfg.teacherNote) h += '<p class="fl__tnote">' + esc(cfg.teacherNote) + "</p>";
   if (cfg._note) h += '<p class="fl__tnote"><b>Note from ' + esc(ed.teacher || "your teacher") + ":</b> " + esc(cfg._note).replace(/\n/g, "<br>") + "</p>";
@@ -1141,7 +1156,7 @@
 
   h += '<div class="fl__actions"><button type="button" class="fl__btn fl-copy">Copy my answers for OneNote</button>' +
     '<button type="button" class="fl__btn fl__btn--ghost" data-print="1">Print / save as PDF</button>' +
-    '<span class="fl__note">Your answers save automatically on this device.</span></div></div></details>';
+    '<span class="fl__note">Your answers save automatically on this device.</span></div></div>' + (inl ? "</section>" : "</details>");
 
   if (ed.replace) { ed.replace.insertAdjacentHTML("afterend", h); ed.replace.remove(); }
   else if (isL) {
@@ -1152,6 +1167,13 @@
   else modes.insertAdjacentHTML("beforebegin", h);
   var root = document.getElementById("flipLearning" + (n ? n + 1 : ""));
   if (ed.open) root.open = true;
+  if (cfg.overview && !document.getElementById("lhOverview")) {
+    var o = cfg.overview, first = document.querySelector(".lh-stats") || document.querySelector(".fl:not(.fl--lesson)") || modes;
+    first.insertAdjacentHTML("beforebegin", '<section class="lh-ov" id="lhOverview">' +
+      '<div class="lh-ov__li"><b>Learning intention:</b> <i>' + esc(o.intention) + "</i></div>" +
+      '<div class="lh-ov__row"><div class="lh-ov__box"><h3>Syllabus statement</h3>' + o.syllabus.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("") + "</div>" +
+      '<div class="lh-ov__box"><h3>Success criteria</h3><p>I can:</p><ul>' + o.success.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div></div></section>");
+  }
   var edBtn = root.querySelector(".fl-edit");
   if (edBtn) edBtn.onclick = function () { openEditor(base, n, ed, root); };
   var inputs = root.querySelectorAll(".fl-in");
