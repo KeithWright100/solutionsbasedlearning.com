@@ -225,13 +225,26 @@
 })();
 
 /* ---- Games inside lesson pages ----
-   Any activity card that links to a game (/geography/games/...) shows the
+   An activity card that links to a short game (listed in EMBED) (/geography/games/...) shows the
    game itself inside the card, as it looks when opened, with a link to open
    it full screen. The frame grows to fit the game (same site, so its height
    can be read). */
 (function () {
   function setup() {
-    var links = document.querySelectorAll('.lh-mode a.lh-mode__btn[href^="/geography/games/"]');
+    // Only games whose start screen fits in about one screen are shown in the
+    // page; longer ones (the Quests, case-study games) stay as cards that open
+    // in a new tab. Add or remove slugs here to change a game.
+    var EMBED = ["balance-it", "central-bank-challenge", "climate-graph-oslo", "diaspora-flow-map", "energy-minister", "life-around-the-world", "market-shock", "nexus-chain-reaction", "population-minister", "qin-tomb", "sdg-recap", "team-quiz", "tropical-storm-links", "water-security-decision", "world-case-study-map", "world-map-challenge", "energy-sort", "resource-classification-challenge", "tropical-storms-exam-survival", "tropical-storm-formation-challenge"];
+    // Longer games shown in the page on particular lessons only (e.g. the unit's
+    // Quest on its final lesson, as end-of-unit revision).
+    var EMBED_ON = {
+      "/geography/paper-1/core-1/t3-challenges-and/l4-the-demographic": ["ib-population-quest"]
+    };
+    var links = Array.prototype.filter.call(document.querySelectorAll('.lh-mode a.lh-mode__btn[href^="/geography/games/"]'), function (a) {
+      var slug = a.getAttribute('href').replace(/^\/geography\/games\//, '').replace(/[\/?#].*$/, '');
+      var here = (EMBED_ON[location.pathname.replace(/\/+$/, '')] || []);
+      return EMBED.indexOf(slug) >= 0 || here.indexOf(slug) >= 0;
+    });
     if (!links.length) return;
     var css = document.createElement('style');
     css.textContent =
