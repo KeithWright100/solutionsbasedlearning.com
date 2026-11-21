@@ -90,7 +90,7 @@
 
   levels.forEach(function (l) {
     h += '<section class="sh-sec" id="lvl-' + l.id + '"><div class="sh-head"><h2><span class="lvl-badge lvl-' + l.id + '">' + esc(l.badge) + '</span>' + esc(l.title) + '<span class="age">' + esc(l.age) + '</span></h2></div>' +
-      '<div class="sh-level"><div class="sh-start' + (l.soon ? ' soon' : '') + '" style="--lc:' + l.c + '"><div><span class="lvl-badge" style="background:rgba(255,255,255,.2)">' + esc(l.badge) + '</span><h3>' + esc(l.title) + '</h3><p>' + esc(l.blurb || '') + '</p></div>' +
+      '<div class="sh-level" style="--lc:' + l.c + '"><div class="sh-start' + (l.soon ? ' soon' : '') + '" style="--lc:' + l.c + '"><div><span class="lvl-badge" style="background:rgba(255,255,255,.2)">' + esc(l.badge) + '</span><h3>' + esc(l.title) + '</h3><p>' + esc(l.blurb || '') + '</p></div>' +
       (l.soon ? '<span class="go" style="background:#dfe6ea;color:#5f7382">Coming soon</span>' : (l.start ? '<a class="go" href="' + esc(l.start[1]) + '">' + esc(l.start[0]) + ' →</a>' : '')) + '</div>' +
       '<div class="sh-res">' + l.items.map(function (it) { return '<a class="sh-tile" href="' + esc(it[1]) + '"><span class="ic">' + icon(iconFor(it[0])) + '</span><span><b>' + esc(it[0]) + (it[2] === 'new' ? '<span class="pill">New</span>' : '') + '</b><small>' + esc(sub(it[0])) + '</small></span></a>'; }).join('') + '</div>' +
       (l.units.length ? '<div class="sh-units"><span class="lab">Units</span>' + l.units.map(function (u) { return '<a href="' + esc(u[1]) + '">' + esc(u[0]) + '</a>'; }).join('') + '</div>' : '') +
@@ -113,7 +113,7 @@
     var gl = document.getElementById('gl'); if (!gl) return;
     var list = games.filter(function (g) { return !filt || g._l === filt; }).slice().reverse();
     var shown = showAll ? list : list.slice(0, 9);
-    gl.innerHTML = shown.map(function (g) { return '<a class="sh-game" href="' + esc(g.href) + '"><div class="top"><span class="lvl-badge lvl-' + g._l.toLowerCase() + '">' + g._l + '</span>' + (g.tag === 'New' ? '<span class="pill">New</span>' : '') + '</div><h3>' + esc(g.title) + '</h3><p>' + esc(g.desc || '') + '</p><span class="play">Play →</span></a>'; }).join('');
+    gl.innerHTML = shown.map(function (g) { return '<a class="sh-game g-' + g._l.toLowerCase() + '" href="' + esc(g.href) + '"><div class="top"><span class="lvl-badge lvl-' + g._l.toLowerCase() + '">' + g._l + '</span>' + (g.tag === 'New' ? '<span class="pill">New</span>' : '') + '</div><h3>' + esc(g.title) + '</h3><p>' + esc(g.desc || '') + '</p><span class="play">Play →</span></a>'; }).join('');
     document.getElementById('gm').innerHTML = list.length > 9 && !showAll ? '<button type="button" id="gmb">Show all ' + list.length + ' games</button>' : '';
     var b = document.getElementById('gmb'); if (b) b.onclick = function () { showAll = true; drawGames(); };
   }

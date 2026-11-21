@@ -101,3 +101,16 @@ main { max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px; }
   .sh-start { min-height: 0; }
   .sh-two { grid-template-columns: 1fr; }
 }
+
+/* coloured borders: subject colour for the top cards, level colour for each level */
+.sh-card { border: 2px solid var(--c); border-top-width: 5px; }
+.sh-level { border: 2px solid var(--lc, var(--line)); border-top-width: 5px; }
+.sh-level .sh-tile { border-color: color-mix(in srgb, var(--lc, #dbe6ea) 30%, #ffffff); }
+.sh-level .sh-tile:hover { border-color: var(--lc, var(--c)); }
+.sh-level .sh-tile .ic { background: color-mix(in srgb, var(--lc, var(--c)) 12%, #ffffff); color: var(--lc, var(--c)); }
+.sh-level .sh-units a:hover { border-color: var(--lc, var(--c)); color: var(--lc, var(--c)); }
+.sh-game { border-top-width: 5px; }
+.sh-game.g-ks3 { border-color: #f3c3ad; border-top-color: #c2410c; }
+.sh-game.g-igcse { border-color: #b7dfc8; border-top-color: #1f8a4c; }
+.sh-game.g-ib { border-color: #b6d8e2; border-top-color: #0b6e8a; }
+.others a { border: 2px solid var(--c); }
