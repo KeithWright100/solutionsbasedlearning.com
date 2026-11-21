@@ -214,6 +214,11 @@
   }
   @media (max-width: 480px) { .bins { grid-template-columns: minmax(0,1fr) !important; } .meter { grid-template-columns: 96px 1fr 56px; } }
   @media (prefers-reduced-motion: reduce) { .xp-pop { animation: none; } .mcard { transition: none; } .hud .bar div { transition: none; } }
+.optx{border:1.5px dashed #9fb7c4;border-radius:12px;padding:10px 14px;background:rgba(255,255,255,.6)}
+.optx>summary{cursor:pointer;font-weight:700;color:#0f5a73}
+.optx[open]>summary{margin-bottom:10px}
+.evid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 18px;margin-top:6px}
+.evid h4{margin:0 0 4px}.evid ul{margin:0;padding-left:18px}.evid li{margin:2px 0}
 </style>
 </head>
 <body>
@@ -673,11 +678,11 @@
   }
   function okAll(keys) { return keys.every(function (k) { return T.ans[k] && T.ans[k].ok; }); }
   var REQ = [
-    function () { return okAll(['m1a', 'm1b', 'm1c', 'm1d', 'm1e']) ? '' : 'Answer all the questions correctly before moving on.'; },
-    function () { return okAll(['m2a', 'm2b', 'm2c', 'm2d', 'm2e']) ? '' : 'Complete all the pyramid tasks before moving on.'; },
+    function () { return okAll(['m1a', 'm1b', 'm1e']) ? '' : 'Answer questions 1 to 3 correctly before moving on.'; },
+    function () { return okAll(C.id === 'g' ? ['m2a', 'm2c', 'm2d'] : ['m2a', 'm2b', 'm2d']) ? '' : 'Complete tasks 1 to 3 before moving on.'; },
     function () { return okAll(['m3']) ? '' : 'Sort all the cards correctly before moving on.'; },
     function () { return okAll(['m4']) ? '' : 'Sort all the cards correctly before moving on.'; },
-    function () { return C.POLICIES.every(function (p) { var s = T.src[p.id]; return s && s.q === true && s.types === true; }) ? '' : 'Complete every source (policy type and evidence question) before moving on.'; },
+    function () { return C.POLICIES.filter(function (p) { var s = T.src[p.id]; return s && s.q === true && s.types === true; }).length >= Math.min(2, C.POLICIES.length) ? '' : 'Complete at least two sources (policy type and evidence question) before moving on.'; },
     function () { return T.pm.length >= 4 && (T.notes.pm1 || '').trim().length > 20 ? '' : 'Choose at least four policies and write your decision before finishing.'; }
   ];
   function clips(i) {
@@ -727,19 +732,41 @@
     var TT = T;
     var v = TT.notes[key] || '';
     if (model) { var _md = document.createElement('div'); _md.innerHTML = model; TT.models = TT.models || {}; if (!TT.models[key] || TT.models[key] !== _md.textContent) { TT.models[key] = _md.textContent; save(); } }
-    return { html: '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
+    var opt = key !== 'pm1';
+    return { html: (opt ? '<details class="optx"><summary>✍️ Optional exam practice · ' + esc(lbl) + '</summary>' : '') + '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
       '<textarea id="w-' + key + '" aria-label="' + esc(q.replace(/<[^>]+>/g, '')) + '">' + esc(v) + '</textarea>' +
       (checks ? '<div class="hint"><b>Check your answer includes:</b> ' + checks + '</div>' : '') +
-      (model ? '<div class="row"><button type="button" class="btn ghost" data-show="' + key + '">Show a model answer</button></div><div class="model" id="mod-' + key + '" hidden>' + model + '</div>' : '') + '</div>',
+      (model ? '<div class="row"><button type="button" class="btn ghost" data-show="' + key + '">Show a model answer</button></div><div class="model" id="mod-' + key + '" hidden>' + model + '</div>' : '') + '</div>' + (opt ? '</details>' : ''),
       bind: function () {
         var ta = $('w-' + key), t = null;
         ta.addEventListener('input', function () { TT.notes[key] = ta.value; clearTimeout(t); t = setTimeout(save, 400); });
         var b = document.querySelector('[data-show="' + key + '"]');
         if (b) b.onclick = function () {
-          if ((ta.value || '').trim().length < 25) { b.textContent = 'Write your own answer first'; setTimeout(function () { b.textContent = 'Show a model answer'; }, 1800); return; }
+          if (!opt && (ta.value || '').trim().length < 25) { b.textContent = 'Write your own answer first'; setTimeout(function () { b.textContent = 'Show a model answer'; }, 1800); return; }
           $('mod-' + key).hidden = false; b.hidden = true;
         };
       } };
+  }
+  function relabel(part, lbl) { part.html = part.html.replace(/(<span class="tnum">)[^<]*(<\/span>)/, '$1' + lbl + '$2'); return part; }
+  function extra(parts) {
+    if (!parts.length) return { html: '' };
+    parts.forEach(function (p) { relabel(p, 'Extra practice'); });
+    return { html: '<details class="optx"><summary>➕ Extra practice (optional) · ' + parts.length + ' more question' + (parts.length > 1 ? 's' : '') + '</summary><div style="display:flex;flex-direction:column;gap:14px;margin-top:12px">' + parts.map(function (p) { return p.html; }).join('') + '</div></details>',
+      bind: function () { parts.forEach(function (p) { if (p.bind) p.bind(); }); } };
+  }
+  /* A balanced subset of sort cards (round-robin across the boxes). */
+  function pick(cards, n) {
+    if (cards.length <= n) return cards;
+    var by = {}, keys = [], out = [];
+    cards.forEach(function (c) { if (!by[c.a]) { by[c.a] = []; keys.push(c.a); } by[c.a].push(c); });
+    for (var r = 0; out.length < n; r++) keys.forEach(function (k) { if (out.length < n && by[k][r]) out.push(by[k][r]); });
+    return cards.filter(function (c) { return out.indexOf(c) >= 0; });
+  }
+  function evidence(cards, bins) {
+    return '<details class="optx"><summary>📋 All the evidence: read every card (' + cards.length + ')</summary><div class="evid">' + bins.map(function (b) {
+      var l = cards.filter(function (c) { return c.a === b[0]; });
+      return l.length ? '<div><h4>' + esc(b[1]) + '</h4><ul>' + l.map(function (c) { return '<li>' + esc(c.t) + '</li>'; }).join('') + '</ul></div>' : '';
+    }).join('') + '</div></details>';
   }
   function mount(body, parts) { body.insertAdjacentHTML('beforeend', parts.map(function (p) { return p.html; }).join('')); parts.forEach(function (p) { if (p.bind) p.bind(); }); }
   function interp(series, yr) {
@@ -815,7 +842,7 @@
     var dtm = '<div class="task' + (T.ans.m1e && T.ans.m1e.ok ? ' done' : '') + '" id="dtmTask"><span class="tnum">Question 5 · The demographic transition model</span><p><b>' +
       (g ? 'The Gambia’s death rate is now low but its birth rate, although falling, is still high. Click the stage of the DTM The Gambia is in today.' : 'Singapore’s birth rate is only just above its death rate, and its fertility rate (0.87) is far below the replacement level of 2.1. Without immigration its citizen population will soon shrink. Click the stage Singapore is moving into.') +
       '</b></p><div class="chart" id="dtm"></div><div class="legend"><span><i style="background:#0284c7"></i>Birth rate</span><span><i style="background:#dc2626"></i>Death rate</span><span><i style="background:#16a34a"></i>Total population</span></div><p class="fb" id="dtmfb"></p></div>';
-    var parts = g ? [
+    var _p = g ? [
       num('m1a', 'Question 1 · Fact file', 'Read the graph: what was The Gambia’s crude birth rate in 2025?', 29.3, 0.25, 'births per 1,000 people', 'The birth rate was 29.3 per 1,000 in 2025, down from about 50 in the 1950s.', 10),
       num('m1b', 'Question 2 · Calculate', 'Calculate the rate of natural increase in 2025. Use: (birth rate − death rate) ÷ 10. Birth rate = 29.3, death rate = 6.2.', 2.31, 0.03, '% per year', '(29.3 − 6.2) ÷ 10 = 2.31% per year.', 15),
       num('m1c', 'Question 3 · Doubling time', 'At this rate, how many years would it take the population to double? Use the “rule of 70”: 70 ÷ growth rate.', 70 / 2.31, 0.7, 'years', '70 ÷ 2.31 = about 30 years. At this rate The Gambia’s population would double roughly every 30 years.', 15),
@@ -826,8 +853,9 @@
       num('m1c', 'Question 3 · Calculate', 'Calculate the rate of natural increase in 2025. Use: (birth rate − death rate) ÷ 10. Birth rate = 8.5, death rate = 5.1.', 0.34, 0.02, '% per year', '(8.5 − 5.1) ÷ 10 = 0.34% per year, almost zero, and the death rate is rising as the population ages.', 15),
       num('m1d', 'Question 4 · Calculate', 'Singapore’s resident fertility rate was 5.76 in 1960 and 0.87 in 2025. Calculate the percentage change.', -84.9, 0.2, '%', '(0.87 − 5.76) ÷ 5.76 × 100 = −84.9%. Women now have about one-seventh as many children as in 1960.', 20)
     ];
-    mount(body, parts);
-    body.insertAdjacentHTML('beforeend', dtm);
+    mount(body, [_p[0], _p[1]]);
+    body.insertAdjacentHTML('beforeend', dtm.replace('Question 5 · The demographic transition model', 'Question 3 · The demographic transition model'));
+    mount(body, [extra([_p[2], _p[3]])]);
     function drawDtm() {
       $('dtm').innerHTML = dtmSvg(T.ans.m1e && T.ans.m1e.ok ? C.STAGE : null);
       if (T.ans.m1e && T.ans.m1e.ok) { $('dtmfb').className = 'fb ok'; $('dtmfb').textContent = '✓ ' + dtmWhy(); return; }
@@ -888,7 +916,7 @@
     }
     draw();
     var dr = (gr.young + gr.old) / gr.work * 100;
-    mount(body, g ? [
+    var _p = g ? [
       num('m2b', 'Task 2 · Calculate', 'What percentage of The Gambia’s population is aged 0–14? Use the table: 0–14 ÷ total × 100.', gr.young / gr.tot * 100, 0.3, '%', fmt(young) + ' ÷ ' + fmt(gr.tot / 1000) + ' × 100 = ' + (gr.young / gr.tot * 100).toFixed(1) + '%. Two in every five people are children.', 15),
       num('m2c', 'Task 3 · Dependency ratio', 'Calculate the total dependency ratio. Use: (0–14 + 65+) ÷ 15–64 × 100.', dr, 0.4, 'dependants per 100 people of working age', '(' + fmt(young) + ' + ' + fmt(old) + ') ÷ ' + fmt(work) + ' × 100 = ' + dr.toFixed(1) + '. There are about 75 dependants for every 100 people of working age, almost all of them children.', 20),
       mcq('m2d', 'Task 4 · Describe the shape', 'Which description best fits The Gambia’s pyramid?', ['Wide base, steeply narrowing sides and a narrow top: a young, expanding population', 'Narrow base and wide top: an ageing population', 'Straight sides: a stable population', 'A bulge of males aged 25–39'], 0, 'High birth rates give a wide base, and lower life expectancy (66 years) gives a narrow top. Only 3.2% of people are 65 or over.', 10),
@@ -904,13 +932,17 @@
       writeTask('m2w', 'Exam skill · Explain (4 marks)', 'Explain two features of Singapore’s population pyramid and what causes them.', 'Feature → evidence from the pyramid → reason.',
         'First, the base is narrow: children aged 0–4 are only about 4% of the population, because the fertility rate is just 0.87. Second, there is a large bulge of working-age adults aged 20–39, especially men (for example, 330,000 men aged 25–29 compared with 266,000 women), because Singapore employs about 1.9 million non-residents, many of them young male foreign workers. The upper bars are also widening as the post-war baby boomers pass 65 and life expectancy reaches 84.',
         'two features · data from the pyramid · a reason for each')
-    ]);
+    ];
+    var _req = g ? [1, 2] : [0, 2];
+    mount(body, _req.map(function (k, n) { return relabel(_p[k], 'Task ' + (n + 2) + _p[k].html.match(/<span class="tnum">Task \d( · [^<]*)<\/span>/)[1]); })
+      .concat([extra([0, 1, 2, 3].filter(function (k) { return _req.indexOf(k) < 0; }).map(function (k) { return _p[k]; })), _p[4]]));
   }
 
   /* ================= SORTER (M3, M4) ================= */
   function sorter(body, cards, bins, store, ansKey, intro) {
     var TT = T;
-    var st = TT[store], placed = st.placed || {}, order = st.order && st.order.length === cards.length ? st.order : shuffle(cards.map(function (_, i) { return i; }));
+    var st = TT[store], placed = st.placed || {}, order = st.order && st.order.length === cards.length ? st.order : null;
+    if (!order) { order = shuffle(cards.map(function (_, i) { return i; })); placed = {}; st.placed = placed; }
     st.order = order; save();
     var cols = Math.min(bins.length, 4);
     body.insertAdjacentHTML('beforeend',
@@ -963,7 +995,8 @@
   /* ================= M3: CAUSES ================= */
   function m3(body) {
     var g = C.id === 'g';
-    sorter(body, C.CAUSES, C.sortBins, 'sort', 'm3', g ? 'Why is The Gambia’s population growing so fast? Some cards explain the high birth rate, some explain why the death rate fell, and some are not causes at all.' : 'Why does Singapore have so few babies and so many older people? Sort the cards. Watch out: some are not causes.');
+    sorter(body, pick(C.CAUSES, 8), C.sortBins, 'sort', 'm3', g ? 'Why is The Gambia’s population growing so fast? Some cards explain the high birth rate, some explain why the death rate fell, and some are not causes at all.' : 'Why does Singapore have so few babies and so many older people? Sort the cards. Watch out: some are not causes.');
+    body.insertAdjacentHTML('beforeend', evidence(C.CAUSES, C.sortBins));
     mount(body, g ? [
       mcq('m3b', 'Explain the link', 'Why does high child mortality lead to a high birth rate?', ['Parents have more children so that enough survive to help the family and care for them in old age', 'Hospitals encourage large families', 'It lowers the death rate', 'It makes contraception cheaper'], 0, 'These are sometimes called “insurance births”. When child survival improves, families usually choose to have fewer children, but only after a delay.', 10),
       writeTask('m3w', 'Worksheet question 1 · Explain (4 marks)', 'What are the reasons for The Gambia’s high birth and fertility rates?', 'Give at least three reasons. For each: reason → evidence → explain why it raises the birth rate.',
@@ -980,7 +1013,8 @@
   /* ================= M4: ISSUES ================= */
   function m4(body) {
     var g = C.id === 'g';
-    sorter(body, C.ISSUES, C.issueBins, 'isort', 'm4', g ? 'A youthful, fast-growing population creates challenges. Who or what is mainly affected by each one?' : 'A low birth rate and an ageing population create challenges. Which part of Singapore is mainly affected by each one?');
+    sorter(body, pick(C.ISSUES, 8), C.issueBins, 'isort', 'm4', g ? 'A youthful, fast-growing population creates challenges. Who or what is mainly affected by each one?' : 'A low birth rate and an ageing population create challenges. Which part of Singapore is mainly affected by each one?');
+    body.insertAdjacentHTML('beforeend', evidence(C.ISSUES, C.issueBins));
     mount(body, g ? [
       mcq('m4b', 'Evaluate a claim', 'Your worksheet quotes: “population growth and poverty are always linked.” Which response is best?', ['True: every fast-growing country is poor', 'Not always: fast growth makes cutting poverty harder, but countries can grow richer while their population grows if they invest in education, health and jobs', 'False: population has no link to poverty', 'True: poverty only exists where birth rates are high'], 1, 'In The Gambia over half the people (53.4%) were poor in 2020, and poverty is highest in rural areas (76%) where birth rates are highest. But the link is not automatic: Singapore’s population grew quickly in the 1960s while it became richer.', 15),
       writeTask('m4w', 'Worksheet question 5 · Explain (6 marks)', 'What are the consequences of a high dependency ratio for (1) governments and (2) families?', 'Two or three points for each. Use data: dependency ratio about 75, 39.7% under 15, 53.4% in poverty.',
@@ -998,7 +1032,7 @@
   function m5(body) {
     var at = 0, sel = -1, x0 = C.TFR[0][0], x1 = 2025;
     body.insertAdjacentHTML('beforeend',
-      '<p>The line shows the ' + (C.id === 'g' ? '' : 'resident ') + 'total fertility rate. Tap a policy to see when it started. Then work through the sources: tag each policy, use the evidence, and <b>rate how effective it has been</b>.</p>' +
+      '<p>The line shows the ' + (C.id === 'g' ? '' : 'resident ') + 'total fertility rate. Tap a policy to see when it started. Then work through the sources: tag each policy, use the evidence, and <b>rate how effective it has been</b>. <b>Complete at least two sources</b>; the others are optional.</p>' +
       '<div class="chart" id="tfr"></div><div class="events" id="evs">' + C.MARKS.map(function (m, i) { return '<button type="button" class="ev" data-e="' + i + '">' + m[0] + ' · ' + esc(m[1]) + '</button>'; }).join('') + '</div>' +
       '<p class="src">Source: ' + esc(C.tfrSrc) + '</p>' +
       '<div class="stabs" id="stabs"></div><div id="sbody" style="display:flex;flex-direction:column;gap:14px"></div><div id="scard"></div>');

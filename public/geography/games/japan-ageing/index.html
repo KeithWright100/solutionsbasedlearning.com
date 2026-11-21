@@ -194,6 +194,9 @@
   }
   @media (max-width: 480px) { .bins { grid-template-columns: minmax(0,1fr); } .meter { grid-template-columns: 96px 1fr 56px; } }
   @media (prefers-reduced-motion: reduce) { .xp-pop { animation: none; } .mcard { transition: none; } .hud .bar div { transition: none; } }
+.optx{border:1.5px dashed #b9a3a8;border-radius:12px;padding:10px 14px;background:rgba(255,255,255,.6)}
+.optx>summary{cursor:pointer;font-weight:700;color:#8a1f33}
+.optx[open]>summary{margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -455,7 +458,7 @@
     function () { return ['m1a', 'm1b', 'm1c', 'm1d'].every(function (k) { return S.ans[k] && S.ans[k].ok; }) ? '' : 'Answer the four questions correctly before moving on.'; },
     function () { return ['m2a', 'm2b', 'm2c', 'm2d'].every(function (k) { return S.ans[k] && S.ans[k].ok; }) ? '' : 'Complete the four pyramid tasks before moving on.'; },
     function () { return S.ans.m3 && S.ans.m3.ok ? '' : 'Sort all 15 cards correctly before moving on.'; },
-    function () { return SOURCES.every(function (s) { return S.src[s.id] && S.src[s.id].q === true && S.src[s.id].types === true; }) ? '' : 'Complete all six sources (policy type and evidence question) before moving on.'; },
+    function () { return SOURCES.filter(function (s) { return S.src[s.id] && S.src[s.id].q === true && S.src[s.id].types === true; }).length >= 3 ? '' : 'Complete at least three sources (policy type and evidence question) before moving on.'; },
     function () { return S.pm.length >= 3 && (S.notes.pm1 || '').trim().length > 20 ? '' : 'Choose at least three policies and write your decision before finishing.'; }
   ];
 
@@ -492,16 +495,17 @@
   function writeTask(key, lbl, q, frame, model, checks) {
     var v = S.notes[key] || '';
     if (model) { var _md = document.createElement('div'); _md.innerHTML = model; S.models = S.models || {}; if (!S.models[key] || S.models[key] !== _md.textContent) { S.models[key] = _md.textContent; save(); } }
-    return { html: '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
+    var opt = key !== 'pm1';
+    return { html: (opt ? '<details class="optx"><summary>✍️ Optional exam practice · ' + esc(lbl) + '</summary>' : '') + '<div class="task" data-w="' + key + '"><span class="tnum">' + esc(lbl) + '</span><p><b>' + q + '</b></p>' + (frame ? '<p class="hint">' + frame + '</p>' : '') +
       '<textarea id="w-' + key + '" aria-label="' + esc(q.replace(/<[^>]+>/g, '')) + '">' + esc(v) + '</textarea>' +
       (checks ? '<div class="hint"><b>Check your answer includes:</b> ' + checks + '</div>' : '') +
-      (model ? '<div class="row"><button type="button" class="btn ghost" data-show="' + key + '">Show a model answer</button></div><div class="model" id="mod-' + key + '" hidden>' + model + '</div>' : '') + '</div>',
+      (model ? '<div class="row"><button type="button" class="btn ghost" data-show="' + key + '">Show a model answer</button></div><div class="model" id="mod-' + key + '" hidden>' + model + '</div>' : '') + '</div>' + (opt ? '</details>' : ''),
       bind: function () {
         var ta = $('w-' + key), t = null;
         ta.addEventListener('input', function () { S.notes[key] = ta.value; clearTimeout(t); t = setTimeout(save, 400); });
         var b = document.querySelector('[data-show="' + key + '"]');
         if (b) b.onclick = function () {
-          if ((ta.value || '').trim().length < 25) { b.textContent = 'Write your own answer first'; setTimeout(function () { b.textContent = 'Show a model answer'; }, 1800); return; }
+          if (!opt && (ta.value || '').trim().length < 25) { b.textContent = 'Write your own answer first'; setTimeout(function () { b.textContent = 'Show a model answer'; }, 1800); return; }
           $('mod-' + key).hidden = false; b.hidden = true;
         };
       } };
@@ -692,7 +696,7 @@
   /* ================= M4: SOURCES ================= */
   function m4(body) {
     var at = 0;
-    body.insertAdjacentHTML('beforeend', '<p>Read each adapted source. For each one: tag the <b>type of policy</b>, answer the <b>evidence</b> question, then <b>rate how effective</b> you think it is and say why. Your ratings build a policy scorecard at the end.</p><div class="stabs" id="stabs"></div><div id="sbody" style="display:flex;flex-direction:column;gap:14px"></div><div id="scard"></div>');
+    body.insertAdjacentHTML('beforeend', '<p><b>Complete at least three sources</b>; the others are optional. For each one: tag the <b>type of policy</b>, answer the <b>evidence</b> question, then <b>rate how effective</b> you think it is and say why. Your ratings build a policy scorecard at the end.</p><div class="stabs" id="stabs"></div><div id="sbody" style="display:flex;flex-direction:column;gap:14px"></div><div id="scard"></div>');
     function tabs() { $('stabs').innerHTML = SOURCES.map(function (s, i) { var st = S.src[s.id] || {}; return '<button type="button" class="stab' + (i === at ? ' on' : '') + (st.q === true && st.types === true ? ' done' : '') + '" data-s="' + i + '">' + esc(s.tab) + '</button>'; }).join(''); }
     function show() {
       tabs(); var s = SOURCES[at], st = S.src[s.id] = S.src[s.id] || { tsel: [], rate: 3, why: '' };
