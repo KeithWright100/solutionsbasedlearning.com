@@ -66,7 +66,7 @@
     var items = [], units = [];
     c.items.forEach(function (it) { if (!it[1] || it[2] === 'soon' || it[2] === 'head') return; (/^(Unit|Option|HL)/.test(it[0]) ? units : items).push(it); });
     levels.push({ id: lv, badge: lv === 'ib' ? 'IB Diploma' : 'IGCSE', age: lv === 'ib' ? 'Ages 16–19' : 'Ages 14–16', c: lv === 'ib' ? '#0b6e8a' : '#1f8a4c',
-      title: c.title, blurb: c.blurb, soon: c.soon, start: c.href ? [lv === 'ib' ? 'Enter ' + c.title : 'Start the lessons', c.href] : null, items: items, units: units });
+      title: c.title, blurb: c.blurb, soon: c.soon, start: c.href ? [lv === 'ib' ? 'Enter ' + c.title : lv === 'igcse' ? 'Start the revision lessons' : 'Start the lessons', c.href] : null, items: items, units: units });
   });
   var games = (window.SBL_GAMES || []).filter(function (g) { return S.gameRe.test(g.level || ''); });
   var art = key === 'geography' ? '<svg class="art" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="3"><circle cx="100" cy="100" r="80"/><path d="M20 100h160M100 20c-30 30-30 130 0 160M100 20c30 30 30 130 0 160M35 60h130M35 140h130"/></svg>'

@@ -344,6 +344,7 @@
     }]
   };
 
+  window.SBL_FLIP_IDS = Object.keys(FLIP);
   var overlay = document.querySelector("[data-lesson-id]");
   var id = overlay && overlay.getAttribute("data-lesson-id");
   var list = id && FLIP[id];
