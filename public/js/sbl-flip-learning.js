@@ -772,7 +772,7 @@
           { t: "All-inclusive", d: "When tourists pay a hotel complex one price which includes all meals, drinks, entertainment, activities, etc. All-inclusive holidays are very common in the Mediterranean and the Caribbean." } ] }
       ]
     }, {
-      kind: "lesson", open: true, inline: true,
+      kind: "lesson", open: true, inline: true, afterCard: 2,
       title: "How have leisure patterns changed?",
       overview: {
         intention: "To describe and explain human patterns and processes.",
@@ -809,11 +809,13 @@
         { id: "a4", label: "a)", type: "sort", prompt: "Factor card sort", bins: ["Technology", "Affluence", "Accessibility"], cards: [{ t: "Budget airlines and cheap flights", a: ["Technology", "Accessibility"] }, { t: "The internet and online booking", a: ["Technology"] }, { t: "Rising incomes", a: ["Affluence"] }, { t: "More paid holiday entitlement", a: ["Affluence"] }, { t: "Shorter working week", a: ["Affluence"] }, { t: "Machines do more of the housework", a: ["Technology"] }, { t: "Car ownership rises", a: ["Affluence", "Accessibility"] }, { t: "New motorways and high-speed rail", a: ["Accessibility"] }, { t: "Earlier retirement and longer life expectancy", a: ["Affluence"] }, { t: "Streaming and gaming at home", a: ["Technology"] }, { t: "Visa-free travel between countries", a: ["Accessibility"] }, { t: "More dual-income households", a: ["Affluence"] }, { t: "Package holidays (one price for all)", a: ["Affluence", "Accessibility"], rb: true }, { t: "Smartphones: maps, translation, payments", a: ["Technology", "Accessibility"], rb: true }, { t: "Credit cards and buy-now-pay-later", a: ["Affluence", "Technology"], rb: true }] },
         { id: "a4r", label: "b)", type: "rank", prompt: "Rank the top 3 factors that have done most to increase leisure time and participation.", n: 3, options: ["Budget airlines and cheap flights", "The internet and online booking", "Rising incomes", "More paid holiday entitlement", "Shorter working week", "Machines do more of the housework", "Car ownership rises", "New motorways and high-speed rail", "Earlier retirement and longer life expectancy", "Streaming and gaming at home", "Visa-free travel between countries", "More dual-income households", "Package holidays (one price for all)", "Smartphones: maps, translation, payments", "Credit cards and buy-now-pay-later"] },
         { id: "a4c", label: "c)", type: "text", prompt: "Why is your number 1 the most important?" },
-        { type: "heading", text: "Activity 5: Jigsaw: types of tourist and sporting activity",
-          note: "Nagle and Cooke pp. 213\u2013217. Expert group A: pp. 213\u2013214; B: pp. 215\u2013216; C: p. 217. Fill in your rows, then teach your new group and complete the rest." },
+        { type: "heading", text: "Activity 5: Types of tourist and sporting activity", note: "Use research to complete the table." },
+        { type: "html", html: '<div class="fl__imgs">' + IMG("lt01-leisure-share", "Bar chart: share of the day spent on leisure in 18 OECD countries, around 2006") +
+            IMG("lt01-gender-gap-leisure", "Scatter chart: gender gap in leisure time, 2020: minutes per day for men and women by country") + "</div>" +
+            '<p class="fl__note">Leisure share: SBL chart of OECD data (Society at a Glance 2009). Gender gap in leisure time: Our World in Data, from OECD Gender Data (CC BY).</p>' },
         { id: "a5", label: "", type: "table", prompt: "",
-          cols: ["Type", "Description", "Example"],
-          rows: ["Domestic tourism", "International tourism", "Mass tourism", "Niche tourism", "Ecotourism", "Cultural / heritage tourism", "Adventure tourism", "Sports tourism", "Participant vs spectator"] },
+          cols: ["Types of tourist or sporting activities", "Description and/or example"],
+          rows: ["Domestic tourism", "International tourism", "Mass tourism", "Niche tourism", "Ecotourism", "Cultural / heritage tourism", "Adventure tourism", "Sports tourism", "Participant vs spectator sport"] },
         { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
         { type: "heading", text: "Plenary: relay brain dump",
           note: "In teams, take turns at the whiteboard: one point each, 3 minutes. Then circle the point most likely to appear in an exam." },
@@ -1155,8 +1157,8 @@
 
   if (ed.replace) { ed.replace.insertAdjacentHTML("afterend", h); ed.replace.remove(); }
   else if (isL) {
-    // In-class lessons sit directly under the Teach Me Live card.
-    var last = document.querySelectorAll(".fl--lesson"), teach = modes.querySelector(".lh-mode");
+    // In-class lessons sit under card number cfg.afterCard (default 1, Teach Me Live).
+    var last = document.querySelectorAll(".fl--lesson"), cards = modes.querySelectorAll(".lh-mode"), teach = cards[Math.min((cfg.afterCard || 1), cards.length) - 1];
     (last.length ? last[last.length - 1] : teach || modes).insertAdjacentHTML("afterend", h);
   }
   else modes.insertAdjacentHTML("beforebegin", h);
