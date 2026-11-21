@@ -162,6 +162,19 @@
     '<p>Going circular is not easy. When oil is cheap, new plastic can cost less than recycled plastic, so firms need incentives or regulation to change. Safety rules can also get in the way: food past its “use by” date cannot be redistributed. Some argue that governments must set targets and laws, while others expect businesses and consumers to lead through renting, sharing and repairing. Optimists point to new materials, product-as-a-service models and young consumers who value access over ownership; pessimists argue that growth in total consumption could cancel out these gains.</p>' +
     LOOPS_SVG + '</div></details>';
 
+  var TRAFFIC_SVG = (function () {
+    var O = [["South Americans", 60], ["Eastern and Central Europeans", 120], ["Sub-Saharan Africans", 180], ["South Asians", 240], ["East Asians", 300]];
+    var D = [["Western and Central Europe", 90], ["Middle East", 180], ["North America, Central America and the Caribbean", 270]];
+    var F = [[0,0],[0,2],[1,0],[1,1],[2,0],[2,1],[2,2],[3,1],[3,2],[4,0],[4,1],[4,2]];
+    var s = '<svg viewBox="0 0 760 350" role="img" aria-label="Schematic of main international human trafficking flows from origin groups to destination regions" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12.5">';
+    s += '<text x="20" y="28" font-weight="700" fill="#444">Origin of victims</text><text x="740" y="28" text-anchor="end" font-weight="700" fill="#0f6e56">Destination region</text>';
+    F.forEach(function (f) { var y1 = O[f[0]][1], y2 = D[f[1]][1]; s += '<path d="M230 ' + y1 + ' C400 ' + y1 + ' 400 ' + y2 + ' 530 ' + y2 + '" fill="none" stroke="#1d9e75" stroke-opacity=".55" stroke-width="3"/>'; });
+    O.forEach(function (o) { s += '<rect x="20" y="' + (o[1] - 17) + '" width="210" height="34" rx="8" fill="#f1efe8" stroke="#888"/><text x="125" y="' + (o[1] + 4) + '" text-anchor="middle" fill="#333">' + o[0] + "</text>"; });
+    D.forEach(function (d) { s += '<rect x="530" y="' + (d[1] - 24) + '" width="210" height="48" rx="8" fill="#e1f5ee" stroke="#1d9e75"/><foreignObject x="534" y="' + (d[1] - 22) + '" width="202" height="44"><div xmlns="http://www.w3.org/1999/xhtml" style="font:600 12px/1.25 Inter,Arial,sans-serif;color:#0b4f3d;height:44px;display:flex;align-items:center;justify-content:center;text-align:center">' + d[0] + "</div></foreignObject>"; });
+    s += '<text x="20" y="340" font-size="11" fill="#666">Main flows (each at least 5% of victims in the destination region). Simplified from UNODC, Global Report on Trafficking in Persons.</text></g></svg>';
+    return s;
+  })();
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -350,8 +363,16 @@
         { id: "c", type: "text", label: "", prompt: "Why did so many Japanese families avoid having children in 1966? Who were the Firehorse women?", video: true }
       ]
     }],
-    CP12: {
+    CP12: [{
       title: "Gender equality and human trafficking",
+      overview: {
+        heading: "Population possibilities and power over the decision-making process",
+        intention: "To describe and explain human patterns and processes.",
+        sdgs: [{ n: 10, t: "Reduced inequalities", c: "#dd1367" }, { n: 5, t: "Gender equality", c: "#ef402b" }],
+        syllabus: ["Policies associated with managing population change, focusing on gender equality policies and anti-trafficking policies."],
+        success: ["Define gender equality and human trafficking.", "Describe the patterns of gender equality and flows in human trafficking globally.",
+          "Explain the policies put in place in Kerala, India, attempting to improve gender equality.",
+          "Evaluate the effectiveness of the UN Protocol to prevent, suppress and punish trafficking in persons."] },
       intro: "Complete this before the lesson. Use the Teach Me Live bot on this page to help you research.",
       parts: [
         { type: "heading", text: "Part 1: Gender equality" },
@@ -359,7 +380,8 @@
           links: [{ label: "Video: The girl effect: the clock is ticking", url: "https://www.youtube.com/watch?v=1e8xgF0JtVg" }] },
         { type: "heading", text: "Human trafficking",
           note: "Definition: “The unlawful act of transporting or coercing people in order to benefit from their work or service, typically in the form of forced labour or sexual exploitation.”" },
-        { id: "b", type: "text", prompt: "Why are humans trafficked? Give as many examples as you can, e.g. countries." },
+        { id: "b", type: "text", prompt: "Why are humans trafficked?" },
+        { id: "b2", type: "text", label: "c)", prompt: "Give as many examples as you can, e.g. countries." },
         { type: "heading", text: "Part 2: Gender equality: the global gender gap",
           note: "The Gender Inequality Index (GII), published by the UNDP in the Human Development Reports, is a composite measure of gender disadvantage in three dimensions: reproductive health, empowerment and the labour market. It runs from 0 (greater equality) to 1 (greater inequality)." },
         { id: "c", type: "table", prompt: "Research and complete the table on what the GII measures.",
@@ -369,9 +391,58 @@
         { id: "d", type: "table", prompt: "Why does gender equality vary between countries? Through research, note reasons why it varies across the world. We will build on this in the lesson.",
           note: "Use the countries in the Global Gender Gap Index rankings (World Economic Forum) below to find some reasons.",
           before: IMG("cp12-gender-gap", "Global Gender Gap Index rankings"),
-          cols: ["", "Country", "Reason"], rows: ["1", "2", "3", "4", "5", "6"] }
+          cols: ["", "Country", "Reason"], rows: ["1", "2", "3", "4"] }
       ]
-    },
+    }, {
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "Gender equality and human trafficking",
+      intro: "Before the lesson: complete the Flip learning above.",
+      parts: [
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter: important definitions" },
+        { id: "s0", label: "", type: "table", prompt: "", given: true, cols: ["Term", "Definition"], rows: ["Gender equality", "Human trafficking"],
+          prefill: { 0: ["When women and men enjoy the same rights and opportunities across all sectors of society, including economic participation and decision-making, and when the different behaviours, aspirations and needs of women and men are equally valued and favoured."],
+                     1: ["The buying and selling of human beings, usually across national borders, for purposes such as prostitution, sexual slavery or forced labour. Many victims are tricked or coerced into the trade; others are abducted or blackmailed."] } },
+        { type: "heading", text: "Activity 1: Pair and share (big whiteboard time)",
+          note: "Person 1 reads link A and person 2 reads link B. Feed back to each other: what do the two pieces agree and disagree on?" },
+        { id: "a1", label: "", type: "table", prompt: "",
+          links: [{ label: "A: BBC News video report", url: "https://www.bbc.com/news/av/business-36761796" },
+                  { label: "B: \u201cThe privileged lie of gender equality in Thailand\u201d (ASEAN NOW)", url: "https://aseannow.com/topic/908215-the-privileged-lie-of-gender-equality-in-thailand/" }],
+          cols: ["", "Your comments"], rows: ["What they agree on", "What they disagree on"] },
+        { type: "heading", text: "Activity 2: Infographic analysis" },
+        { id: "a2", label: "", type: "text", before: IMG("cp12-india-gender", "Infographic: India on the Global Gender Gap Index, ranks for 2006, 2016 and 2017 and for each part of the index"),
+          prompt: "What does the infographic tell you about gender equality in India? Make some comments, then we will discuss." },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
+        { type: "heading", text: "Activity 3: Case study: Kerala, literacy and gender equality",
+          note: "Read the Kerala case study, then answer the questions on your graphic organiser." },
+        { id: "a3", label: "", type: "questions", letters: true, prompt: "",
+          links: [{ label: "Case study: Kerala: literacy and gender equality (PDF)", url: "/geography/resources/flip/kerala-case-study.pdf" }],
+          rows: ["Describe the geographical location of Kerala, India.",
+            "Use the chart below to describe how literacy rates in Kerala compare with other parts of India.",
+            "Describe the demographic changes that have occurred in Kerala.",
+            "What is the relationship between infant mortality rates and female literacy?",
+            "Describe the policies that have been put in place to increase gender equality and female literacy rates in Kerala.",
+            "What challenges might Kerala face in the future?"] },
+        { type: "html", html: IMG("cp12-literacy", "Bar chart: literacy rate in selected Indian states, 2011; Kerala highest at 94%") },
+        { type: "heading", text: "Activity 4: Human trafficking" },
+        { id: "a4a", label: "a)", type: "text", prompt: "Watch the video clip and take notes on human trafficking.",
+          links: [{ label: "Video: Tools That Teach: What is human trafficking?", url: "https://www.youtube.com/watch?v=35uM5VMrZas" }] },
+        { id: "a4b", label: "b)", type: "text", prompt: "Study the information below. Note anything that surprises you.",
+          before: '<ul class="fl__facts"><li>The International Labour Organization (ILO) estimated <b>20.9 million</b> victims of forced labour, including trafficking, worldwide (2012).</li><li><b>68%</b> of them were trapped in forced labour.</li><li><b>26%</b> were children.</li><li><b>55%</b> were women and girls.</li><li>The ILO estimated that forced labour is a <b>$150 billion</b> industry worldwide (2014).</li><li>The US Department of Labor has identified <b>139 goods from 75 countries</b> made by forced and child labour.</li></ul><p class="fl__note">Sources: ILO; US Department of Labor, List of Goods Produced by Child Labor or Forced Labor.</p>' },
+        { id: "a4c", label: "c)", type: "text", before: TRAFFIC_SVG, prompt: "Describe the pattern of human trafficking flows shown in the diagram. (3 marks)" },
+        { type: "heading", text: "Activity 5: How is the UN dealing with human trafficking?",
+          note: "The UN strategy to prevent human trafficking. It is really important that you learn most of these. Match each strategy with the description of what it involves." },
+        { id: "a5", label: "", type: "match", termCol: "Strategy", defCol: "What it involves (choose the matching one)", noExample: true, prompt: "", items: [{ t: "Strengthen prevention", d: "Warn vulnerable groups and alleviate the factors that make people vulnerable to trafficking, such as poverty, underdevelopment and lack of opportunity." }, { t: "Reduce demand", d: "Attack the problem at its source by lowering incentives to trade and decreasing demand for the products and services of exploited people." }, { t: "Create a special purpose fund", d: "Attract and leverage resources into funding projects around the world committed to ending human trafficking." }, { t: "Strengthen partnerships", d: "Build up regional and thematic networks involving civil society, inter-governmental organisations and the private sector." }, { t: "Improve law enforcement", d: "Strengthen information exchange between law enforcement agencies on international trafficking routes and traffickers’ profiles, to dismantle criminal groups and convict traffickers." }, { t: "Enrich knowledge", d: "Deepen world understanding of the scope and nature of human trafficking through more data collection and analysis, joint research and an evidence-based report on global trafficking trends." }, { t: "Create an informal contact group", d: "Give like-minded Member States ownership of the process and create long-term momentum." }, { t: "Support and protect victims", d: "Ensure housing, counselling, medical, psychological and material assistance, keeping in mind the special needs of women, children and people at risk, such as those in refugee camps and conflict zones." }, { t: "Implement international commitments", d: "Ensure that international agreements are turned into national laws and practice, by assisting countries in need and improving the monitoring of compliance." }] },
+        { type: "heading", text: "Activity 6: Case studies",
+          note: "Choose one of the projects, NGOs or CAS clubs on the Firefly page and create a simple case study file. We will share these between us." },
+        { id: "a6", label: "", type: "table", prompt: "",
+          cols: ["", "Your notes"],
+          rows: ["Project / NGO chosen", "Location, the nature of the problem and the goals of the project", "Strategies used to tackle the problem", "Impact: what have been the successes?", "Evaluation: what still needs to be done, and what are the limitations?"] },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
+        { type: "heading", text: "Activity 7: Exit ticket" },
+        { id: "a7", label: "", type: "text", prompt: "Explain how gender equality and human trafficking are linked." }
+      ]
+    }],
     CP13: {
       title: "The demographic dividend",
       intro: "Complete this before the lesson. Use the video and the Teach Me Live bot on this page to answer the following.",
@@ -938,9 +1009,14 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl__facts{margin:.3rem 0;padding-left:1.2rem;color:var(--lh-body)}.fl__facts li{margin:.25rem 0}" +
     ".fl__stage{display:block;width:100%;max-width:600px;height:auto;border-radius:12px;margin:2rem 0 .3rem}" +
     ".fl--inline{border-left:0;border-top:5px solid var(--lh-orange);padding:0}.fl__ihead{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem .2rem}.fl__ihead h2{margin:0;font:700 1.3rem var(--lh-font-display);color:var(--lh-ink);flex:1}.fl--inline .fl__body{border-top:0}" +
     ".lh-ov{display:flex;flex-direction:column;gap:.8rem;margin:0 0 1.2rem}.lh-ov__li{border:3px solid #e0782b;border-radius:12px;background:#fff;padding:.8rem 1rem;font-size:1.02rem;color:var(--lh-ink)}" +
+    ".lh-ov__hd{background:#6b4fb3;color:#fff;border-radius:12px;padding:.7rem 1rem;font:700 1.15rem var(--lh-font-display);text-align:center}" +
+    ".lh-ov__top{display:flex;gap:.8rem;align-items:stretch}.lh-ov__top .lh-ov__li{flex:1}.lh-ov__sdgs{display:flex;gap:.5rem}" +
+    ".lh-sdg{width:96px;border-radius:8px;color:#fff;padding:.45rem .5rem;font:700 .72rem/1.15 var(--lh-font-body);text-transform:uppercase;display:flex;flex-direction:column;gap:.15rem}.lh-sdg b{font:800 1.6rem/1 var(--lh-font-display)}" +
+    "@media (max-width:640px){.lh-ov__top{flex-direction:column}}" +
     ".lh-ov__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}.lh-ov__box{border:3px solid #2ea44f;border-radius:12px;background:#fff;padding:.8rem 1rem}" +
     ".lh-ov__box h3{margin:0 0 .4rem;font:700 1rem var(--lh-font-display);color:var(--lh-ink)}.lh-ov__box p{margin:.3rem 0;color:var(--lh-body)}.lh-ov__box ul{margin:.2rem 0 0 1.1rem;padding:0;color:var(--lh-body)}.lh-ov__box li{margin:.2rem 0}" +
     ".fl--lesson{border-left-color:var(--lh-orange);margin:0}.fl--lesson .fl__logo-b{color:#c2410c}" +
@@ -1126,13 +1202,13 @@
     if (p.type === "match") {
       var order = p.items.map(function (_, i) { return i; });
       for (var q = order.length - 1, seed = 7; q > 0; q--) { seed = (seed * 9301 + 49297) % 233280; var j = Math.floor(seed / 233280 * (q + 1)); var tmp = order[q]; order[q] = order[j]; order[j] = tmp; }
-      h += '<div class="fl__scroll"><table class="fl-match"><thead><tr><th>Key term</th><th>Definition (choose the matching one)</th><th>Your example</th></tr></thead><tbody>';
+      h += '<div class="fl__scroll"><table class="fl-match"><thead><tr><th>' + esc(p.termCol || "Key term") + '</th><th>' + esc(p.defCol || "Definition (choose the matching one)") + '</th>' + (p.noExample ? "" : "<th>Your example</th>") + '</tr></thead><tbody>';
       p.items.forEach(function (it, i) {
         var k = p.id + i, pick = saved[k];
         var cls = pick == null || pick === "" ? "" : (+pick === i ? " fl-ok" : " fl-bad");
         h += '<tr><td class="fl__rh">' + esc(it.t) + '</td><td><select class="fl-sel' + cls + '" data-mk="' + k + '" data-a="' + i + '" aria-label="Definition for ' + esc(it.t) + '"><option value="">Choose a definition\u2026</option>' +
           order.map(function (o) { return '<option value="' + o + '"' + (pick != null && pick !== "" && +pick === o ? " selected" : "") + ">" + esc(p.items[o].d) + "</option>"; }).join("") +
-          '</select><span class="fl-mfb">' + (cls === " fl-ok" ? "\u2713 " + esc(it.d) : cls ? "Try again" : "") + "</span></td><td>" + box(saved, k + "e", "Example for " + it.t, 2, 1) + "</td></tr>";
+          '</select><span class="fl-mfb">' + (cls === " fl-ok" ? "\u2713 " + esc(it.d) : cls ? "Try again" : "") + "</span></td>" + (p.noExample ? "" : "<td>" + box(saved, k + "e", "Example for " + it.t, 2, 1) + "</td>") + "</tr>";
       });
       h += "</tbody></table></div>";
     }
@@ -1167,7 +1243,9 @@
   if (cfg.overview && !document.getElementById("lhOverview")) {
     var o = cfg.overview, first = document.querySelector(".lh-stats") || document.querySelector(".fl:not(.fl--lesson)") || modes;
     first.insertAdjacentHTML("beforebegin", '<section class="lh-ov" id="lhOverview">' +
-      '<div class="lh-ov__li"><b>Learning intention:</b> <i>' + esc(o.intention) + "</i></div>" +
+      (o.heading ? '<div class="lh-ov__hd">' + esc(o.heading) + "</div>" : "") +
+      '<div class="lh-ov__top"><div class="lh-ov__li"><b>Learning intention:</b> <i>' + esc(o.intention) + "</i></div>" +
+      (o.sdgs ? '<div class="lh-ov__sdgs">' + o.sdgs.map(function (g) { return '<span class="lh-sdg" style="background:' + g.c + '"><b>' + g.n + "</b>" + esc(g.t) + "</span>"; }).join("") + "</div>" : "") + "</div>" +
       '<div class="lh-ov__row"><div class="lh-ov__box"><h3>Syllabus statement</h3>' + o.syllabus.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("") + "</div>" +
       '<div class="lh-ov__box"><h3>Success criteria</h3><p>I can:</p><ul>' + o.success.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></div></div></section>");
   }
