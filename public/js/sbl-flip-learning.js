@@ -772,7 +772,7 @@
           { t: "All-inclusive", d: "When tourists pay a hotel complex one price which includes all meals, drinks, entertainment, activities, etc. All-inclusive holidays are very common in the Mediterranean and the Caribbean." } ] }
       ]
     }, {
-      kind: "lesson",
+      kind: "lesson", open: true,
       title: "How have leisure patterns changed?",
       time: "about 60 minutes",
       sub: "Low screen time: most activities use printed cards. Use this panel to run, check and record them.",
@@ -788,6 +788,7 @@
             3: ["Factor card sort + ranking", "Sort 15 cards into Technology, Affluence and Accessibility; orange cards are rule-breakers; rank the top 3."],
             4: ["Jigsaw: Nagle and Cooke pp. 213\u2013217", "Expert groups A, B and C read one section each, fill their rows, then regroup and teach."],
             5: ["Relay brain dump", "Teams take turns at the whiteboard, one point each, for 3 minutes; circle the point most likely to appear in an exam."] } },
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
         { type: "heading", text: "Starter: test your key terms" },
         { id: "st", label: "", type: "text", prompt: "Use the flashcards to test yourself on the key terms. Write down any terms you got wrong.",
           links: [{ label: "Quizlet: IB Geography: Leisure, Sport and Tourism", url: "https://quizlet.com/br/365094824/ib-geography-leisure-sport-and-tourism-flash-cards/" }] },
@@ -798,6 +799,7 @@
           note: "Work in pairs. Describe the word on the card so your partner can guess it, without saying the word or the three banned words. Swap roles after each card. 5 minutes." },
         { type: "timer", minutes: 5, label: "5-minute timer" },
         { id: "a2", label: "", type: "taboo", prompt: "", cards: [{ t: "Leisure", ban: ["free time", "work", "relax"] }, { t: "Recreation", ban: ["hobby", "activity", "free time"] }, { t: "Tourism", ban: ["holiday", "travel", "night"] }, { t: "Sport", ban: ["game", "compete", "rules"] }, { t: "Domestic tourism", ban: ["home", "country", "abroad"] }, { t: "International tourism", ban: ["abroad", "country", "border"] }, { t: "Mass tourism", ban: ["package", "crowds", "beach"] }, { t: "Niche tourism", ban: ["small", "specialist", "market"] }, { t: "Ecotourism", ban: ["nature", "green", "environment"] }, { t: "Affluence", ban: ["rich", "money", "wealth"] }, { t: "Disposable income", ban: ["spend", "money", "bills"] }, { t: "Accessibility", ban: ["reach", "transport", "easy"] }, { t: "Paid holidays", ban: ["work", "leave", "days"] }, { t: "Discretionary time", ban: ["free", "choose", "spare"] }, { t: "Leisure participation", ban: ["take part", "join", "activity"] }, { t: "Spectator sport", ban: ["watch", "stadium", "fan"] }] },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
         { type: "heading", text: "Activity 3: Human graph and TEA",
           note: "Stand along the 1970\u20132006 floor axis as data points for average working hours. Then answer the exam question on your mini whiteboard using TEA." },
         { id: "a3t", label: "", type: "table", prompt: "Describe the trend in working hours from 1970 to 2006. [3]", given: true,
@@ -816,6 +818,7 @@
         { id: "a5", label: "", type: "table", prompt: "",
           cols: ["Type", "Description", "Example"],
           rows: ["Domestic tourism", "International tourism", "Mass tourism", "Niche tourism", "Ecotourism", "Cultural / heritage tourism", "Adventure tourism", "Sports tourism", "Participant vs spectator"] },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
         { type: "heading", text: "Plenary: relay brain dump",
           note: "In teams, take turns at the whiteboard: one point each, 3 minutes. Then circle the point most likely to appear in an exam." },
         { type: "timer", minutes: 3, label: "3-minute relay" },
@@ -937,6 +940,7 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl__stage{display:block;width:100%;height:auto;border-radius:12px;margin:2rem 0 .2rem}" +
     ".fl--lesson{border-left-color:var(--lh-orange);margin:0}.fl--lesson .fl__logo-b{color:#c2410c}" +
     ".fl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;margin:.4rem 0 .8rem}" +
     ".fl-card{position:relative;border:1px dashed #9fb7c4;border-radius:10px;padding:.5rem .6rem;background:#fff}.fl-card svg{display:block;width:100%;height:70px;background:#eef5fb;border-radius:8px}" +
@@ -1004,7 +1008,7 @@
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
   var isL = cfg.kind === "lesson";
-  var h = '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"><summary>' +
+  var h = '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"' + (cfg.open ? " open" : "") + '><summary>' +
     (isL ? '<span class="fl__logo" aria-label="Lesson Resources"><span class="fl__logo-a">Lesson</span> <span class="fl__logo-b">Resources</span></span>'
          : '<span class="fl__logo" aria-label="Flip Learning"><span class="fl__logo-a">Flip</span> <span class="fl__logo-b">Learning</span></span>') +
     '<span class="fl__h"><span class="fl__eyebrow">' + (isL ? "Classroom" + (cfg.time ? " \u00b7 " + esc(cfg.time) : "") : "Pre-lesson" + (cfg.part ? " · " + esc(cfg.part) : "")) + '</span><p class="fl__title">' + esc(cfg.title) + '</p><span class="fl__sub">' + (isL ? esc(cfg.sub || "") : "Use the Teach Me bot and additional resources to complete") + '</span></span>' +
@@ -1046,6 +1050,7 @@
       return;
     }
     if (p.type === "html") { h += '<div class="fl__part">' + p.html + "</div>"; return; }
+    if (p.type === "banner") { h += '<img class="fl__stage" src="' + esc(p.src) + '" alt="' + esc(p.alt || "") + '">'; return; }
     var lab = p.label != null ? p.label : p.id + ")";
     h += '<div class="fl__part">';
     if (p.prompt)
