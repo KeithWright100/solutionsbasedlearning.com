@@ -21,7 +21,10 @@ import { getSessionUser } from './_lib/auth.js';
 import { getSupabaseAdmin } from './_lib/supabaseAdmin.js';
 import { createHash } from 'node:crypto';
 import { teamGameHandler } from './_lib/teamGame.js';
+import { flipEditsHandler } from './_lib/flipEdits.js';
 
+// Also: GET/PUT/DELETE /api/session?flipEdits=1 saves and loads teacher edits
+// to the Flip learning panels (api/_lib/flipEdits.js, sql/015_flip_edits.sql).
 // Also: GET/POST /api/session?teamGame=... runs the team games (host on the
 // board, teams join by QR code). See api/_lib/teamGame.js. Lives here for
 // the same 12-function reason as the tutor token.
@@ -104,6 +107,7 @@ async function tutorToken(req, res) {
 
 export default async function handler(req, res) {
   if (req.query && req.query.teamGame) return teamGameHandler(req, res);
+  if (req.query && req.query.flipEdits) return flipEditsHandler(req, res);
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).json({ error: 'Method not allowed' });

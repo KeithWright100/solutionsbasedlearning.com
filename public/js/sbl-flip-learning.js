@@ -403,10 +403,48 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl__adapt{font-size:.78rem;font-weight:600;color:var(--lh-teal-deep);background:var(--lh-teal-bg);border-radius:999px;padding:.3rem .7rem}" +
+    ".fl-ed{margin-top:1rem;padding:1rem 1.1rem;border:2px solid var(--lh-gold);border-radius:12px;background:var(--lh-gold-bg)}" +
+    ".fl-ed h3{margin:0 0 .3rem;font:700 1rem var(--lh-font-display);color:var(--lh-ink)}" +
+    ".fl-ed__l{display:block;margin-top:.9rem;font-weight:600;font-size:.88rem;color:var(--lh-ink)}" +
+    ".fl-edf{display:block;width:100%;box-sizing:border-box;margin-top:.35rem;border:1px solid var(--lh-border);border-radius:8px;padding:.45rem .55rem;font:400 .88rem var(--lh-font-body);background:#fff;resize:vertical}" +
+    ".fl-ed__link{display:grid;grid-template-columns:1fr 1.4fr;gap:.5rem}" +
+    ".fl-ed__hide{display:flex;flex-direction:column;gap:.25rem;margin-top:.4rem;max-height:240px;overflow:auto;background:#fff;border:1px solid var(--lh-border);border-radius:8px;padding:.5rem .7rem;font-weight:400}" +
+    ".fl-ed__hide label{display:flex;gap:.45rem;align-items:flex-start;font-size:.85rem}" +
     "@media print{body.fl-printing .fl:not(.fl--print){display:none!important}.lh-sidebar,.lh-topbar,.lh-rail,.lh-modes,.lh-stats,.lh-tip,.fl__actions,.fl__top,.fl__banner,.fl__yts{display:none!important}.fl{border:0}.fl td .fl-in{border:0}}";
   document.head.appendChild(css);
 
-  function panel(cfg, n) {
+  /* ---- Teacher edits (stored per teacher, see api/_lib/flipEdits.js) ---- */
+  function panelId(n) { return id + (n ? "-" + (n + 1) : ""); }
+  function hasEdits(e) { return !!(e && (e.intro || e.note || (e.links && e.links.length) || (e.hide && e.hide.length) || (e.add && e.add.length))); }
+  function applyEdits(base, e) {
+    var c = Object.assign({}, base);
+    if (e.intro) c.intro = e.intro;
+    c._note = e.note || "";
+    c._links = e.links || [];
+    var hide = e.hide || [];
+    c.parts = base.parts.filter(function (_, i) { return hide.indexOf(i) < 0; });
+    if (e.add && e.add.length) c.parts = c.parts.concat([
+      { type: "heading", text: "Extra questions from your teacher" },
+      { id: "tq", label: "", type: "questions", prompt: "", rows: e.add }]);
+    return c;
+  }
+  function partLabel(p) {
+    if (p.type === "heading") return "Heading: " + p.text;
+    if (p.type === "html") return "Diagram";
+    var lab = p.label != null ? p.label : p.id + ")";
+    var t = p.prompt || (p.rows && p.rows[0]) || "";
+    return ((lab ? lab + " " : "") + t).slice(0, 90) + (t.length > 90 ? "…" : "");
+  }
+  function api(method, q, body) {
+    return fetch("/api/session?flipEdits=1" + q, { method: method, credentials: "same-origin",
+      headers: body ? { "Content-Type": "application/json" } : {}, body: body ? JSON.stringify(body) : undefined })
+      .then(function (r) { return r.ok ? r.json() : r.json().then(function (j) { throw new Error(j.error || "Request failed"); }, function () { throw new Error("Request failed"); }); });
+  }
+
+  function panel(base, n, ed) {
+  ed = ed || {};
+  var cfg = applyEdits(base, ed.edits || {});
   var KEY = "sbl-flip-" + id + (n ? "-" + (n + 1) : "");
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
@@ -418,9 +456,12 @@
     '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">';
   if (cfg.intro) h += '<p class="fl__intro">' + esc(cfg.intro) + "</p>";
   if (cfg.teacherNote) h += '<p class="fl__tnote">' + esc(cfg.teacherNote) + "</p>";
+  if (cfg._note) h += '<p class="fl__tnote"><b>Note from ' + esc(ed.teacher || "your teacher") + ":</b> " + esc(cfg._note).replace(/\n/g, "<br>") + "</p>";
   if (cfg.cover) h += '<ul class="fl__cover">' + cfg.cover.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>";
   h += '<div class="fl__top"><button type="button" class="fl__bot" onclick="window.openTeachBot && openTeachBot(\'' + id + '\')">Open Teach Me Live &rarr;</button>' +
-    '<button type="button" class="fl__btn fl__btn--ghost fl-copy">Copy to OneNote</button></div>';
+    '<button type="button" class="fl__btn fl__btn--ghost fl-copy">Copy to OneNote</button>' +
+    (ed.canEdit ? '<button type="button" class="fl__btn fl__btn--ghost fl-edit">\u270f\ufe0f Edit for my classes</button>' : "") +
+    (hasEdits(ed.edits) ? '<span class="fl__adapt">' + (ed.canEdit ? "Your classes see your edited version" : "Adapted by your teacher") + "</span>" : "") + "</div>";
 
   function ytId(u) { var m = /(?:youtu\.be\/|[?&]v=)([\w-]{11})/.exec(u || ""); return m && m[1]; }
   function embed(u) {
@@ -439,6 +480,8 @@
     (p.links || []).forEach(function (l) { out += '<a class="fl__video" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + " &rarr;</a>"; });
     return out;
   }
+
+  if (cfg._links.length) h += '<div class="fl__part"><p class="fl__q">Links from ' + esc(ed.teacher || "your teacher") + "</p>" + links({ links: cfg._links }) + "</div>";
 
   cfg.parts.forEach(function (p) {
     if (p.type === "heading") {
@@ -480,8 +523,12 @@
     '<button type="button" class="fl__btn fl__btn--ghost" data-print="1">Print / save as PDF</button>' +
     '<span class="fl__note">Your answers save automatically on this device.</span></div></div></details>';
 
-  modes.insertAdjacentHTML("beforebegin", h);
+  if (ed.replace) { ed.replace.insertAdjacentHTML("afterend", h); ed.replace.remove(); }
+  else modes.insertAdjacentHTML("beforebegin", h);
   var root = document.getElementById("flipLearning" + (n ? n + 1 : ""));
+  if (ed.open) root.open = true;
+  var edBtn = root.querySelector(".fl-edit");
+  if (edBtn) edBtn.onclick = function () { openEditor(base, n, ed, root); };
   var inputs = root.querySelectorAll(".fl-in");
 
   function state() {
@@ -568,5 +615,66 @@
     };
   });
   }
-  list.forEach(panel);
+  /* ---- The editor (teachers only) ---- */
+  function openEditor(base, n, ed, root) {
+    if (root.querySelector(".fl-ed")) return;
+    var e = ed.edits || {}, hide = e.hide || [];
+    var linkRows = (e.links || []).concat([{ label: "", url: "" }, { label: "", url: "" }]).slice(0, 6);
+    var h = '<div class="fl-ed"><h3>Edit this task for your classes</h3>' +
+      '<p class="fl__note">Only students assigned to you see these changes. The original task is never changed, and you can revert at any time.</p>' +
+      '<label class="fl-ed__l">Introduction<textarea class="fl-edf" data-voice="off" data-f="intro" rows="3">' + esc(e.intro || base.intro || "") + "</textarea></label>" +
+      '<label class="fl-ed__l">Note to your students (optional)<textarea class="fl-edf" data-voice="off" data-f="note" rows="2" placeholder="For example: We will go through Part C together in class.">' + esc(e.note || "") + "</textarea></label>" +
+      '<div class="fl-ed__l">Links and videos (optional, must start with https://)' + linkRows.map(function (l) {
+        return '<div class="fl-ed__link"><input class="fl-edf" data-voice="off" data-f="lab" placeholder="Label, e.g. Video: BBC Bitesize" value="' + esc(l.label) + '"><input class="fl-edf" data-voice="off" data-f="url" placeholder="https://" value="' + esc(l.url) + '"></div>';
+      }).join("") + "</div>" +
+      '<div class="fl-ed__l">Hide parts of the task (tick to hide)<div class="fl-ed__hide">' + base.parts.map(function (p, i) {
+        return '<label><input type="checkbox" data-hide="' + i + '"' + (hide.indexOf(i) >= 0 ? " checked" : "") + "> " + esc(partLabel(p)) + "</label>";
+      }).join("") + "</div></div>" +
+      '<label class="fl-ed__l">Add your own questions (one per line, optional)<textarea class="fl-edf" data-voice="off" data-f="add" rows="4">' + esc((e.add || []).join("\n")) + "</textarea></label>" +
+      '<div class="fl__actions"><button type="button" class="fl__btn" data-act="save">Save for my classes</button>' +
+      '<button type="button" class="fl__btn fl__btn--ghost" data-act="cancel">Cancel</button>' +
+      (hasEdits(e) ? '<button type="button" class="fl__btn fl__btn--ghost" data-act="revert">Revert to the original</button>' : "") +
+      '<span class="fl__note" data-msg></span></div></div>';
+    root.querySelector(".fl__top").insertAdjacentHTML("afterend", h);
+    var box = root.querySelector(".fl-ed"), msg = box.querySelector("[data-msg]");
+    function val(f) { return box.querySelector('[data-f="' + f + '"]').value.trim(); }
+    box.querySelector('[data-act="cancel"]').onclick = function () { box.remove(); };
+    box.querySelector('[data-act="save"]').onclick = function () {
+      var intro = val("intro");
+      var data = {
+        intro: intro && intro !== (base.intro || "") ? intro : "",
+        note: val("note"),
+        links: Array.prototype.map.call(box.querySelectorAll(".fl-ed__link"), function (r) {
+          return { label: r.querySelector('[data-f="lab"]').value.trim(), url: r.querySelector('[data-f="url"]').value.trim() };
+        }).filter(function (l) { return l.label || l.url; }),
+        hide: Array.prototype.filter.call(box.querySelectorAll("[data-hide]"), function (c) { return c.checked; }).map(function (c) { return +c.getAttribute("data-hide"); }),
+        add: val("add").split("\n").map(function (x) { return x.trim(); }).filter(Boolean)
+      };
+      var bad = data.links.filter(function (l) { return !l.label || !/^https:\/\//i.test(l.url); });
+      if (bad.length) { msg.textContent = "Each link needs a label and an address starting with https://"; msg.style.color = "var(--lh-orange)"; return; }
+      msg.textContent = "Saving…"; msg.style.color = "";
+      api("PUT", "", { panel: panelId(n), data: data }).then(function (r) {
+        panel(base, n, { edits: r.edits, canEdit: true, replace: root, open: true });
+      }, function (err) { msg.textContent = "Could not save: " + err.message; msg.style.color = "var(--lh-orange)"; });
+    };
+    var rv = box.querySelector('[data-act="revert"]');
+    if (rv) rv.onclick = function () {
+      if (!window.confirm("Remove your edits and go back to the original task?")) return;
+      api("DELETE", "&panel=" + encodeURIComponent(panelId(n))).then(function () {
+        panel(base, n, { edits: {}, canEdit: true, replace: root, open: true });
+      }, function (err) { msg.textContent = "Could not revert: " + err.message; });
+    };
+  }
+
+  list.forEach(function (c, n) {
+    panel(c, n, {});
+    // Load the teacher's version (a teacher's own edits, or a student's teacher's edits).
+    try {
+      api("GET", "&panel=" + encodeURIComponent(panelId(n)) + "&subject=" + encodeURIComponent(c.subject || "Geography")).then(function (r) {
+        if (!r || (!r.canEdit && !hasEdits(r.edits))) return;
+        var root = document.getElementById("flipLearning" + (n ? n + 1 : ""));
+        panel(c, n, { edits: r.edits || {}, canEdit: !!r.canEdit, teacher: r.teacher || "", replace: root, open: root.open });
+      }).catch(function () {});
+    } catch (err) {}
+  });
 })();
