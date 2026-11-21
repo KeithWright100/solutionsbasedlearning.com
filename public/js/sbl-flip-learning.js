@@ -447,6 +447,40 @@
         { id: "e", type: "text", prompt: "Challenge question: which corporate strategy is likely to be the most effective? Explain why." }
       ]
     },
+    RC01: {
+      title: "Global, continental and regional progress towards poverty reduction",
+      intro: "Complete the following activities before the lesson. Use the Teach Me Live bot on this page to help you research.",
+      parts: [
+        { type: "heading", text: "Part 1: Defining poverty" },
+        { id: "a", type: "table", prompt: "Research the following terms.",
+          cols: ["Term", "Definition", "Limitation or caution"],
+          rows: ["Absolute poverty", "Relative poverty", "Income poverty", "Extreme poverty", "Multidimensional poverty"] },
+        { id: "b", type: "text", prompt: "In your own words, distinguish between absolute and relative poverty." },
+        { type: "heading", text: "Part 2: Global poverty in five facts", note: "Study the evidence (source: World Bank)." },
+        { id: "c", label: "a)", type: "table", rhw: "48%", prompt: "For each fact, label it progress, continuing challenge, or both, and explain why.",
+          cols: ["Evidence", "Progress / challenge / both", "Why?"],
+          rows: [
+            "1. The number of people living in extreme poverty fell from about 2.3 billion in 1990 to around 831 million in 2025.",
+            "2. Much of the historical decline was driven by broad-based economic growth in East Asia and South Asia.",
+            "3. The pace of poverty reduction has slowed substantially during the last decade.",
+            "4. Extreme poverty is increasingly concentrated in Sub-Saharan Africa and in countries affected by conflict and fragility.",
+            "5. Nearly three-quarters of people in extreme poverty live in rural communities."] },
+        { id: "d", label: "b)", type: "table", rhw: "48%", prompt: "Then complete these sentences.",
+          cols: ["Sentence starter", "Your completion"],
+          rows: ["The most positive global trend is \u2026 because \u2026", "However, progress is spatially uneven because \u2026", "The statistic that most changes my understanding is \u2026 because \u2026"] },
+        { type: "heading", text: "Part 3: Indicator detective",
+          note: "Select two development indicators and explain how each is connected to poverty. Suggested choices: GNI per capita at PPP, life expectancy, infant mortality, access to clean water, years of schooling, electricity access, HDI." },
+        { id: "e", type: "table", prompt: "Recording table",
+          cols: ["", "Indicator chosen", "What does it measure?", "How could poverty affect it?", "Why might it give an incomplete picture?"],
+          rows: ["Indicator 1", "Indicator 2"] },
+        { id: "f", type: "text", prompt: "PEE paragraph for indicator 1.",
+          note: "Point: \u2026 is a useful indicator of poverty because \u2026 Evidence/example: a low/high value may indicate \u2026 Explanation: this is linked to poverty because \u2026 However, the indicator may hide \u2026" },
+        { id: "g", type: "text", prompt: "PEE paragraph for indicator 2.", note: "Use the same writing frame." },
+        { type: "heading", text: "Part 4: Readiness question",
+          note: "\u201cGlobal poverty is disappearing.\u201d To what extent do you agree? Write a short initial judgement (maximum 60 words) using two facts from the evidence box. Open Challenge Mode on this page to write it and test your thinking with the Challenge Tutor. It becomes the starting point for the classroom lesson." },
+        { id: "h", label: "", type: "text", words: [20, 60], prompt: "Draft your judgement here first (optional), then take it into Challenge Mode." }
+      ]
+    },
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -667,7 +701,7 @@
       p.rows.forEach(function (r, i) {
         if (isGroup(r)) { h += '<tr><td class="fl__grp" colspan="' + cols.length + '">' + esc(r.slice(1)) + "</td></tr>"; return; }
         var ex = p.prefill && p.prefill[i];
-        h += '<tr><td class="fl__rh">' + esc(r) + (ex && !p.given ? '<br><span class="fl__note">Example</span>' : "") + "</td>";
+        h += '<tr><td class="fl__rh"' + (p.rhw ? ' style="width:' + p.rhw + '"' : "") + '>' + esc(r) + (ex && !p.given ? '<br><span class="fl__note">Example</span>' : "") + "</td>";
         for (var c = 1; c < cols.length; c++)
           h += ex && ex[c - 1] !== null ? '<td class="' + (p.given ? "fl__given" : "fl__ex") + '">' + esc(ex[c - 1] || "") + "</td>" : "<td>" + box(saved, cellKey(p, i, c), r + ": " + cols[c], 2, 1) + "</td>";
         h += "</tr>";

@@ -52,6 +52,29 @@ window.SBL_LESSONS.RC01 = {
     'I can explain environmental implications of a growing middle class.',
     'I can explain political implications of a growing middle class.'
   ],
+  // Readiness question from the flip learning task (Part 4): students write a
+  // short initial judgement here before the classroom lesson.
+  challenge: {
+    question: '“Global poverty is disappearing.” To what extent do you agree?',
+    intro: 'Readiness question: write a short initial judgement (maximum 60 words) using at least two facts from the evidence box in the Flip learning task. This becomes the starting point for the classroom lesson.',
+    levels: [
+      {
+        label: 'Build the claim',
+        questions: [
+          'Extreme poverty fell from about 2.3 billion people in 1990 to around 831 million in 2025. How strong is this as evidence that poverty is disappearing?',
+          'Which regions drove most of the fall, and what does that suggest about how poverty is reduced?'
+        ]
+      },
+      {
+        label: 'Challenge the claim',
+        questions: [
+          'The pace of poverty reduction has slowed in the last decade. What does this suggest about the future?',
+          'Extreme poverty is increasingly concentrated in Sub-Saharan Africa and in fragile or conflict-affected states. Why might it be harder to reduce there?',
+          'Does falling extreme poverty mean that relative or multidimensional poverty is also disappearing?'
+        ]
+      }
+    ]
+  },
   readinessQuestions: [
     'Explain the difference between absolute poverty and relative poverty.',
     'Why is the growth of the global middle class concentrated in Asia?',
