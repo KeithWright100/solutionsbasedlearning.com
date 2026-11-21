@@ -947,7 +947,7 @@
     ".fl-card p{margin:.4rem 0 0;font-size:.8rem;line-height:1.35;color:var(--lh-body)}.fl-card__k{position:absolute;top:.35rem;left:.5rem;font:800 1rem var(--lh-font-display);color:#c2410c}" +
     ".fl-ord select,.fl-binsel,.fl-ranksel{font:600 .85rem var(--lh-font-body);padding:.3rem;border:1px solid var(--lh-border);border-radius:8px;background:#fff}" +
     ".fl-ord select.fl-ok,.fl-binsel.fl-ok{border-color:var(--lh-green);background:var(--lh-green-bg)}.fl-ord select.fl-bad,.fl-binsel.fl-bad{border-color:#e57373;background:#fdecea}" +
-    ".fl-rb{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:#ea7a26;border-radius:999px;padding:.05rem .45rem;margin-left:.3rem}.fl-sortfb{font-size:.78rem;color:var(--lh-muted);width:28%}" +
+    ".fl-rb{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:#ea7a26;border-radius:999px;padding:.05rem .45rem;margin-left:.3rem}.fl-sortgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:.8rem}.fl-sorttab td.fl__rh{width:62%}.fl-sortfb{display:block;font-size:.75rem;font-weight:500;color:var(--lh-muted);margin-top:.15rem}" +
     ".fl-taboo__card{max-width:320px;margin:.3rem 0;border-radius:14px;overflow:hidden;border:2px solid #5b3fa8;text-align:center;background:#fff}" +
     ".fl-taboo__t{background:#5b3fa8;color:#fff;font:800 1.35rem var(--lh-font-display);padding:1rem .6rem}.fl-taboo__ban{padding:.6rem}.fl-taboo__ban span{font:700 .72rem var(--lh-font-mono);letter-spacing:.08em;text-transform:uppercase;color:#b42318}" +
     ".fl-taboo__ban ul{list-style:none;margin:.3rem 0 0;padding:0;font:600 1rem var(--lh-font-body);color:var(--lh-ink)}.fl-taboo__ban li{padding:.15rem 0}" +
@@ -1099,13 +1099,18 @@
     if (p.type === "timer")
       h += '<div class="fl-timer" data-sec="' + (p.minutes * 60) + '"><span class="fl-timer__t">' + p.minutes + ':00</span><button type="button" class="fl__btn fl__btn--ghost" data-tm="go">Start</button><button type="button" class="fl__btn fl__btn--ghost" data-tm="reset">Reset</button>' + (p.label ? '<span class="fl__note">' + esc(p.label) + "</span>" : "") + "</div>";
     if (p.type === "sort") {
-      h += '<div class="fl__scroll"><table class="fl-sorttab"><thead><tr><th>Factor card</th><th>Your box</th><th></th></tr></thead><tbody>';
-      p.cards.forEach(function (c, i) {
-        var k = p.id + i;
-        h += '<tr><td class="fl__rh">' + esc(c.t) + (c.rb ? ' <span class="fl-rb">Rule-breaker?</span>' : "") + '</td><td><select class="fl-binsel" data-k="' + k + '" data-ok="' + c.a.join("|") + '"><option value="">Choose\u2026</option>' +
-          p.bins.map(function (b) { return "<option" + (saved[k] === b ? " selected" : "") + ">" + esc(b) + "</option>"; }).join("") + '</select></td><td class="fl-sortfb"></td></tr>';
+      var half = Math.ceil(p.cards.length / 2);
+      h += '<div class="fl-sortgrid">';
+      [p.cards.slice(0, half), p.cards.slice(half)].forEach(function (group, gi) {
+        h += '<div class="fl__scroll"><table class="fl-sorttab"><thead><tr><th>Factor card</th><th>Your box</th></tr></thead><tbody>';
+        group.forEach(function (c, j) {
+          var i = gi * half + j, k = p.id + i;
+          h += '<tr><td class="fl__rh">' + esc(c.t) + (c.rb ? ' <span class="fl-rb">Rule-breaker?</span>' : "") + '<span class="fl-sortfb"></span></td><td><select class="fl-binsel" data-k="' + k + '" data-ok="' + c.a.join("|") + '"><option value="">Choose\u2026</option>' +
+            p.bins.map(function (b) { return "<option" + (saved[k] === b ? " selected" : "") + ">" + esc(b) + "</option>"; }).join("") + "</select></td></tr>";
+        });
+        h += "</tbody></table></div>";
       });
-      h += "</tbody></table></div>" + '<div class="fl__actions" style="margin-top:.6rem"><button type="button" class="fl__btn fl__btn--ghost" data-sortchk="1">Check my sort</button><span class="fl__note" data-sortmsg></span></div>';
+      h += "</div>" + '<div class="fl__actions" style="margin-top:.6rem"><button type="button" class="fl__btn fl__btn--ghost" data-sortchk="1">Check my sort</button><span class="fl__note" data-sortmsg></span></div>';
     }
     if (p.type === "rank") {
       h += '<div class="fl-rank">';
