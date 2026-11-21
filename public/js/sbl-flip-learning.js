@@ -193,8 +193,9 @@
             "What do you think was their goal in making the video?",
             "Do you think that it is effective? Justify your reasons."
           ] },
-        { type: "heading", text: "Part 2: Read: causes of forced migration", note: "Open the Concern article from your class OneNote." },
+        { type: "heading", text: "Part 2: Read: causes of forced migration", note: "Read the Concern article, then complete the table." },
         { id: "b", label: "a)", type: "table", prompt: "Complete the table for each cause.",
+          links: [{ label: "Article: Six causes of forced migration (Concern Worldwide)", url: "https://concernusa.org/news/forced-migration-causes/" }],
           cols: ["Cause", "How it forces movement", "Direct, indirect or both?"],
           rows: ["Drought", "Hunger", "Flooding", "Earthquakes", "War and conflict", "Economic circumstances"] },
         { id: "c", label: "b)", type: "text", prompt: "Which cause is most significant globally? Justify your choice and acknowledge one counterargument." },
@@ -238,13 +239,13 @@
       ]
     },
     CP11: [{
-      part: "11a",
       title: "Ageing populations: the UK and Japan",
       intro: "Complete this before the lesson. Use the Teach Me Live bot on this page to help you.",
       parts: [
         { type: "heading", text: "Activity 1: What do you know?",
           note: "In class you will mind map these on the large whiteboards. Prepare your notes now, using the UK and/or Japan. If you can make judgements about the implications of the solutions, even better." },
-        { id: "a", label: "", type: "table", prompt: "", video: true,
+        { id: "a", label: "", type: "table", prompt: "",
+          links: [{ label: "Help link: Japan's pro-natal policy (Prezi)", url: "https://prezi.com/qayllgzlbrbf/japans-pro-natal-policy/" }],
           cols: ["", "Your notes (UK and/or Japan)"],
           rows: ["Calculation of the dependency ratio", "Reasons for an ageing population", "Problems", "Potential solutions"] },
         { type: "heading", text: "Activity 2: Read the population data sets",
@@ -267,6 +268,7 @@
         { type: "heading", text: "Part 2: Gender equality: the global gender gap",
           note: "The Gender Inequality Index (GII), published by the UNDP in the Human Development Reports, is a composite measure of gender disadvantage in three dimensions: reproductive health, empowerment and the labour market. It runs from 0 (greater equality) to 1 (greater inequality)." },
         { id: "c", type: "table", prompt: "Research and complete the table on what the GII measures.",
+          links: [{ label: "Gender Inequality Index (UNDP Human Development Reports)", url: "https://hdr.undp.org/data-center/thematic-composite-indices/gender-inequality-index#/indicies/GII" }],
           cols: ["Dimension", "What could we measure?", "Why might inequality here matter?"],
           rows: ["Reproductive health", "Empowerment", "Labour market"] },
         { id: "d", type: "table", prompt: "Why does gender equality vary between countries? Through research, note reasons why it varies across the world. We will build on this in the lesson.",
@@ -364,6 +366,10 @@
     ".fl>summary::-webkit-details-marker{display:none}" +
     ".fl__icon{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--lh-teal-bg);color:var(--lh-teal-deep)}" +
     ".fl__icon svg{width:22px;height:22px}" +
+    ".fl__logo{flex:none;font:800 1.55rem/1 var(--lh-font-display);letter-spacing:-.01em;padding-right:1rem;margin-right:.1rem;border-right:1px solid var(--lh-border)}" +
+    ".fl__logo-a{color:#13284b}.fl__logo-b{color:#1a9a9a}" +
+    ".fl__sub{display:block;margin-top:.15rem;font-size:.8rem;color:var(--lh-muted)}" +
+    "@media (max-width:640px){.fl__logo{font-size:1.15rem;padding-right:.6rem}.fl__state{display:none}}" +
     ".fl__h{flex:1}.fl__eyebrow{font:500 .7rem var(--lh-font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lh-teal-deep)}" +
     ".fl__title{margin:.1rem 0 0;font:700 1.02rem var(--lh-font-display);color:var(--lh-ink)}" +
     ".fl__state{font-size:.8rem;color:var(--lh-muted);white-space:nowrap}" +
@@ -404,8 +410,8 @@
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
   var h = '<details class="fl" id="flipLearning' + (n ? n + 1 : "") + '"><summary>' +
-    '<span class="fl__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg></span>' +
-    '<span class="fl__h"><span class="fl__eyebrow">Flip learning · pre-lesson' + (cfg.part ? " · " + esc(cfg.part) : "") + '</span><p class="fl__title">' + esc(cfg.title) + "</p></span>" +
+    '<span class="fl__logo" aria-label="Flip Learning"><span class="fl__logo-a">Flip</span> <span class="fl__logo-b">Learning</span></span>' +
+    '<span class="fl__h"><span class="fl__eyebrow">Pre-lesson' + (cfg.part ? " · " + esc(cfg.part) : "") + '</span><p class="fl__title">' + esc(cfg.title) + '</p><span class="fl__sub">Use the Teach Me bot and additional resources to complete</span></span>' +
     '<span class="fl__state"></span>' +
     '<svg class="fl__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="fl__body">' +
     '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">';
