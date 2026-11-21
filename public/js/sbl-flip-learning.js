@@ -175,8 +175,8 @@
             5: ["Growing flows of investment, information, people and trade.", "Connected cities attract businesses and migrants."]
           } },
         { type: "heading", text: "Part 3: Where are the world's megacities?" },
-        { id: "c", type: "text", before: IMG("cp07-megacities-map", "Map: the 15 fastest-growing megacities"), prompt: "Describe the distribution of the world's megacities.",
-          note: "Use the map of the 15 fastest-growing megacities and Video 2. Mention continents, coasts and named examples with figures." }
+        { id: "c", type: "text", before: IMG("cp07-megacities-map", "Chart: fifteen of the world's largest megacities, 2011 and projected 2025"), prompt: "Describe the distribution of the world's megacities.",
+          note: "Use the chart of the largest megacities and Video 2. Mention continents, coasts and named examples with figures." }
       ]
     },
     CP08: {
@@ -199,7 +199,7 @@
           cols: ["Cause", "How it forces movement", "Direct, indirect or both?"],
           rows: ["Drought", "Hunger", "Flooding", "Earthquakes", "War and conflict", "Economic circumstances"] },
         { id: "c", label: "b)", type: "text", prompt: "Which cause is most significant globally? Justify your choice and acknowledge one counterargument." },
-        { type: "heading", text: "Part 3: Reading photographs", note: "Look carefully at the photo below." },
+        { type: "heading", text: "Part 3: Reading photographs", note: "Look at the photo on your class OneNote page." },
         { id: "d", label: "", type: "questions", letters: true, prompt: "", before: IMG("cp08-photo", "Photograph to analyse"),
           rows: [
             "What's happening in the photo?",
@@ -225,7 +225,7 @@
       intro: "Flipped learning check (about 5 minutes). Watch the video and use the map to complete the table and question.",
       parts: [
         { type: "heading", text: "Part 1: Watch and capture" },
-        { id: "a", type: "table", prompt: "Complete the table.", before: IMG("cp09-haiti-map", "Map of the 2010 Haiti earthquake"),
+        { id: "a", type: "table", prompt: "Complete the table.", before: IMG("cp09-haiti-map", "Simplified map of the 2010 Haiti earthquake: epicentre, distance rings and damage in nearby towns"),
           links: [{ label: "Video: Haiti earthquake documentary", url: "https://www.youtube.com/watch?v=uS4EMk_H0lQ" }],
           cols: ["Prompt", "Your notes"],
           rows: ["Date, magnitude and location", "Two immediate impacts", "Why people were internally displaced", "IDP definition", "Why IDPs are not refugees"] },
