@@ -175,6 +175,13 @@
     return s;
   })();
 
+  var DD_PYRAMIDS = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;max-width:760px">' +
+    PYRAMID("Niger", [100, 81, 66, 52, 41, 32, 26, 22, 18, 15, 12, 10, 7, 6, 4, 2, 1]) +
+    PYRAMID("Indonesia", [47, 43, 43, 43, 40, 38, 40, 38, 35, 32, 28, 23, 16, 11, 8, 4, 3]) +
+    PYRAMID("Republic of Korea", [22, 22, 22, 28, 33, 31, 34, 37, 40, 42, 41, 39, 31, 23, 19, 17, 21]) +
+    PYRAMID("Germany", [21, 20, 21, 24, 26, 30, 32, 30, 29, 37, 43, 38, 34, 28, 26, 29, 38]) + "</div>" +
+    '<p class="fl__note">Population pyramids, 2017: each age group as a percentage of the total (approximate, from UN World Population Prospects data). Same scale for all four countries.</p>';
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -443,8 +450,14 @@
         { id: "a7", label: "", type: "text", prompt: "Explain how gender equality and human trafficking are linked." }
       ]
     }],
-    CP13: {
+    CP13: [{
       title: "The demographic dividend",
+      overview: {
+        heading: "How population can be considered a resource",
+        intention: "To explore the contrasting opportunities and constraints of people living in different areas.",
+        sdgs: [{ n: 8, t: "Decent work and economic growth", c: "#a21942" }],
+        syllabus: ["The demographic dividend and the ways in which population could be considered a resource when contemplating possible futures.", "One case study of a country benefiting from a demographic dividend."],
+        success: ["Define the demographic dividend.", "Identify countries that benefit from the demographic dividend.", "Explain how countries can benefit from a demographic dividend.", "Develop case study knowledge of South Korea and how it benefited from the demographic dividend."] },
       intro: "Complete this before the lesson. Use the video and the Teach Me Live bot on this page to answer the following.",
       parts: [
         { id: "a", label: "", type: "questions", letters: true, prompt: "",
@@ -455,7 +468,48 @@
             "What are the benefits for a country in this situation?"
           ] }
       ]
-    },
+    }, {
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "The demographic dividend",
+      intro: "Before the lesson: complete the Flip learning above.",
+      parts: [
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter: countries and the demographic dividend" },
+        { type: "html", html: DD_PYRAMIDS },
+        { id: "s1", label: "", type: "text", prompt: "Study the population pyramids. Which country would you judge most likely to benefit from what the IMF describes as the first demographic dividend? Justify your answer.",
+          note: "Sketch or paste the pyramid into OneNote and annotate it to show your reasons." },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
+        { type: "heading", text: "Activity 1: The demographic dividend and gender",
+          note: "The demographic dividend is the benefit achieved from a change in the population structure as a country goes through the demographic transition. As fertility rates decline, the proportion of working-age people increases, so the dependency ratio falls. Make sure you understand this, then try the activities below." },
+        { id: "w1", label: "a)", type: "sort", cardCol: "Statement", binCol: "Stage", prompt: "Sort each statement into the stage of the demographic dividend where it belongs.",
+          note: "Triggers: why fertility falls. Population change: how the age structure changes. Benefits: the opportunities that follow. Conditions and risks: what is needed for the dividend to pay off, and what could go wrong.", bins: ["Triggers", "Population change", "Benefits", "Conditions and risks"], cards: [{ t: "Family planning and contraception more accessible", a: ["Triggers"] }, { t: "Improvement in education access, especially for girls", a: ["Triggers"] }, { t: "Infant and child mortality rates reduce", a: ["Triggers"] }, { t: "Fertility rates decline", a: ["Population change"] }, { t: "There is a lag between falling fertility and increased life expectancy", a: ["Population change"] }, { t: "Reduced fertility rate leads to a bulge in working age population", a: ["Population change"] }, { t: "Young age dependency ratio drops dramatically", a: ["Population change"] }, { t: "Increased labour supply", a: ["Population change", "Benefits"] }, { t: "Parents can save more money as the cost of fewer children falls", a: ["Benefits"] }, { t: "Parents can invest more in their (fewer) children", a: ["Benefits"] }, { t: "Lower fertility means the female population may have better health and more opportunities", a: ["Benefits"] }, { t: "Increased tax revenue for investment in infrastructure and growth", a: ["Benefits"] }, { t: "Economic growth and improvements in living standards", a: ["Benefits"] }, { t: "Improved education and training to take advantage of the growing workforce", a: ["Conditions and risks"] }, { t: "Investment in industries that can utilise the growing labour supply", a: ["Conditions and risks"] }, { t: "Possible decrease in wages due to excess labour", a: ["Conditions and risks"] }] },
+        { id: "w2", label: "b)", type: "text", prompt: "Now put the statements into a logical chain. Draw it as a flowchart in OneNote, then write the chain here in order, linking each step with \u201cwhich leads to\u201d.",
+          note: "Example start: Better family planning access \u2192 smaller families \u2192 \u2026" },
+        { id: "w3", label: "c)", type: "table", prompt: "Many of the issues in the demographic dividend concern gender equality. It is argued that a bigger role for women in the workforce pays an even greater dividend than the working-age bulge alone. Using your studies of gender equality policies, show how improved opportunities for women lead to effects on society and the economy.",
+          cols: ["", "Your answer"],
+          rows: ["Causes of improved gender equality (e.g. education access for girls, legal rights for women, better family planning)", "Effects on families (e.g. smaller families, longer lives)", "Effects on the economy (e.g. increased skills of women, more money to save)", "Effects on society"] },
+        { type: "heading", text: "Activity 2: Conceptual thinking: South Korea",
+          note: "Read the South Korea case study. Use it and what you have learned so far to structure your notes with the four concepts." },
+        { id: "k1", label: "a)", type: "table", prompt: "Case study notes",
+          links: [{ label: "Case study: South Korea\u2019s demographic dividend (PDF)", url: "/geography/resources/flip/south-korea-demographic-dividend.pdf" }],
+          cols: ["Concept", "Question", "Your notes"], given: true,
+          rows: ["Place", "Place ", "Power", "Power ", "Possibility", "Possibility ", "Possibility  ", "Process", "Process "],
+          prefill: { 0: ["Which country or countries are experiencing a demographic dividend?", null], 1: ["What are the dependency ratio, life expectancy, birth rate and fertility rate of South Korea?", null],
+            2: ["How has the South Korean government ensured that the country benefits from the demographic dividend?", null], 3: ["What policies have been put in place?", null],
+            4: ["How has South Korea benefited from the demographic dividend?", null], 5: ["What changes has the demographic dividend caused to the social and economic development of South Korea?", null],
+            6: ["What are the likely challenges and opportunities for South Korea in the future?", null],
+            7: ["What is the demographic dividend?", null], 8: ["What has happened in terms of demographic transition in South Korea?", null] } },
+        { id: "k2", label: "b)", type: "text", prompt: "Explain how South Korea developed and benefited from the demographic dividend. (6 marks)" },
+        { type: "heading", text: "Activity 3: Now Thailand\u2019s turn", note: "Use the Thailand case study to produce a short case study." },
+        { id: "t1", label: "", type: "table", prompt: "",
+          links: [{ label: "Case study: Thailand\u2019s demographic dividend (PDF)", url: "/geography/resources/flip/thailand-demographic-dividend.pdf" }],
+          cols: ["", "Your notes"],
+          rows: ["Location and background", "How fertility was reduced (policies and who was involved)", "How the population structure changed", "Investment in people: education, health and gender equality", "Jobs, economic growth and benefits", "Future challenges and opportunities", "Overall judgement: how successful has Thailand been?"] },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
+        { type: "heading", text: "Exit ticket" },
+        { id: "x1", label: "", type: "text", prompt: "Compare South Korea and Thailand: which country has gained more from its demographic dividend, and why?" }
+      ]
+    }],
     CC08: {
       title: "The impacts of climate change on people and places",
       intro: "Complete this before the lesson. Your understanding should show the impacts of climate change on people and places, including where the impacts happen (their spatial distribution). Use the Teach Me Live bot on this page if you get stuck.",
@@ -1180,7 +1234,7 @@
       var half = Math.ceil(p.cards.length / 2);
       h += '<div class="fl-sortgrid">';
       [p.cards.slice(0, half), p.cards.slice(half)].forEach(function (group, gi) {
-        h += '<div class="fl__scroll"><table class="fl-sorttab"><thead><tr><th>Factor card</th><th>Your box</th></tr></thead><tbody>';
+        h += '<div class="fl__scroll"><table class="fl-sorttab"><thead><tr><th>' + esc(p.cardCol || "Factor card") + '</th><th>' + esc(p.binCol || "Your box") + '</th></tr></thead><tbody>';
         group.forEach(function (c, j) {
           var i = gi * half + j, k = p.id + i;
           h += '<tr><td class="fl__rh">' + esc(c.t) + (c.rb ? ' <span class="fl-rb">Rule-breaker?</span>' : "") + '<span class="fl-sortfb"></span></td><td><select class="fl-binsel" data-k="' + k + '" data-ok="' + c.a.join("|") + '"><option value="">Choose\u2026</option>' +
@@ -1294,7 +1348,7 @@
         x.classList.toggle("fl-ok", good); x.classList.toggle("fl-bad", !good && x.value !== "");
         fb.textContent = !x.value ? "" : good ? (acc.length > 1 ? "\u2713 (also: " + acc.filter(function (a) { return a !== x.value; }).join(", ") + ")" : "\u2713") : "Think again";
       });
-      part.querySelector("[data-sortmsg]").textContent = ok2 + " of " + all.length + " accepted. Any well-argued alternative is fine for the rule-breakers.";
+      part.querySelector("[data-sortmsg]").textContent = ok2 + " of " + all.length + " accepted." + (part.querySelector(".fl-rb") ? " Any well-argued alternative is fine for the rule-breakers." : "");
     }
     if (b.hasAttribute("data-tb")) {
       var tb = b.closest(".fl-taboo"); tb._i = tb._i || 0;
