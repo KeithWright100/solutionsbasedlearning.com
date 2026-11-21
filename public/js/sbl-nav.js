@@ -70,18 +70,18 @@
           ['Past paper questions', '/igcse/geography'],
           ['Exam tips', '/igcse/geography/exam-tips'],
           ['Research', '/igcse/geography/research']] },
-        { title: 'IGCSE Economics', href: '/igcse/economics/learn', blurb: 'Edexcel lessons and paper practice, plus Cambridge (CIE) revision.', items: [
-          ['Edexcel lessons', '/igcse/economics/learn'],
+        { title: 'IGCSE Economics', href: '/igcse/economics/learn', blurb: 'Edexcel revision lessons and paper practice, plus Cambridge (CIE) revision.', items: [
+          ['Edexcel revision lessons', '/igcse/economics/learn'],
           ['Edexcel revise by topic bots', '/igcse/economics/revision/topics'],
           ['Edexcel past paper questions', '/igcse/economics'],
           ['Cambridge (CIE) revision', '/igcse/cie-economics', 'new'],
-          ['Cambridge specimen papers', '/igcse/cie-economics/past-papers', 'new'],
+          ['Cambridge exam style papers', '/igcse/cie-economics/past-papers', 'new'],
           ['Exam tips', '/igcse/economics/exam-tips'],
           ['Research', '/igcse/economics/research']] },
         { title: 'IGCSE Business', href: '/igcse/business/learn', blurb: 'All five topics, with lessons, case studies and paper practice.', items: [
           ['Full revision lessons', '/igcse/business/learn'],
           ['Revise by topic bots', '/igcse/business/revision/topics'],
-          ['Past paper questions', '/igcse/business'],
+          ['Past paper style questions', '/igcse/business'],
           ['Exam tips', '/igcse/business/exam-tips'],
           ['Research', '/igcse/business/research']] },
         { title: 'IGCSE History', href: '/igcse/history/learn', blurb: 'Superpower relations, Civil rights in the USA, and Russia and the Soviet Union.', items: [
@@ -119,10 +119,10 @@
           ['Past paper questions', '/igcse/economics'],
           ['Economics (Cambridge)', '', 'head'],
           ['Topic revision', '/igcse/cie-economics', 'new'],
-          ['Specimen paper questions', '/igcse/cie-economics/past-papers', 'new'],
+          ['Exam style papers', '/igcse/cie-economics/past-papers', 'new'],
           ['Business', '', 'head'],
           ['Revise by topic bots', '/igcse/business/revision/topics'],
-          ['Past paper questions', '/igcse/business']] },
+          ['Past paper style questions', '/igcse/business']] },
         { title: 'Games', href: '/geography/games', items: [
           ['Geography games', '', 'head'],
           ['KS3', '/geography/games#ks3'],
