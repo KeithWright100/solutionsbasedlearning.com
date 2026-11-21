@@ -738,6 +738,40 @@
           rows: ["What does \u2018designed for the dump\u2019 mean?", "How is this achieved by companies?", "Why do companies design goods that will soon be put in the dump?", "How is Annie\u2019s DVD player designed for the dump?", "How many months is the average electronic item used for?", "How many raw materials are used in the manufacturing of electronics?", "What is added to the raw materials during manufacturing? Give an example.", "What has been the impact of electronics manufacturing in Silicon Valley, California, on (a) the environment?", "\u2026and (b) people?", "What is e-waste?", "What waste comes out of electronic goods?", "Where is most e-waste recycling done?", "How is e-waste recycled?", "What are the impacts of e-waste?", "What does \u2018externalising the true cost of production\u2019 mean?", "Explain the term extended producer responsibility (take-back).", "Why are there few \u2018green\u2019 electronics for consumers?"] }
       ]
     },
+    LT01: {
+      title: "Key terms glossary: leisure, tourism and sport",
+      intro: "Complete the key terms table before the lesson. For each key term, choose the matching definition from the drop-down (it turns green when it is right), then give your own example.",
+      parts: [
+        { id: "a", label: "", type: "match", prompt: "", items: [
+          { t: "Leisure", d: "Any freely chosen activity or experience that takes place in non-work time." },
+          { t: "Recreation", d: "A leisure time activity undertaken voluntarily and for enjoyment." },
+          { t: "Tourism", d: "Travel away from home for at least one night for the purpose of leisure (IB definition)." },
+          { t: "Sport", d: "A physical activity involving a set of rules or customs. The activity may be competitive." },
+          { t: "Domestic tourism", d: "Tourism within the country of residency." },
+          { t: "International tourism", d: "Tourism outside the country of residency." },
+          { t: "Mass tourism", d: "Large-scale tourism when flights, accommodation, tours and transfers are booked together and often part of a group." },
+          { t: "Niche tourism", d: "Specialist tourism for a small market segment with particular interests." },
+          { t: "Affluence", d: "Wealth: having more income to spend." },
+          { t: "Accessibility", d: "How easy it is to reach a place." },
+          { t: "Disposable income", d: "Income left after taxes and essential bills." },
+          { t: "Discretionary time", d: "Free time a person can choose how to use." },
+          { t: "Day trips (day tourism)", d: "Visits to places of interest, e.g. the beach or a ruin, but without staying overnight." },
+          { t: "Sustainable tourism", d: "Tourism that preserves primary tourist resources and supports the livelihoods and culture of local people." },
+          { t: "Low-cost (budget) airlines", d: "Airlines that offer cheaper than normal flights by removing add-ons like airport check-in, in-flight meals, checked baggage and pre-selected seats." },
+          { t: "Health spas", d: "Hotels or resorts that tourists visit for health treatments. This may include massages, detoxes or mud treatments." },
+          { t: "Sports tours", d: "Trips that either go to play sport or view sport. Trips to the football World Cup or Olympics are becoming much more common." },
+          { t: "(Economic) leakage", d: "Money that is lost from a tourist destination. This money is often taken overseas by TNCs, e.g. InterContinental or Hilton." },
+          { t: "Honeypot", d: "A location that attracts a large number of tourists. Antigua in Guatemala would be considered a honeypot location in Central America." },
+          { t: "Safari", d: "Tourism that goes to view wildlife in its natural habitat. Safaris are very common in Africa, e.g. Kenya, Tanzania and Botswana." },
+          { t: "Secondary tourist/recreational resources", d: "Facilities that have been purposefully built for tourists, e.g. hotels, restaurants, golf courses and airports." },
+          { t: "Heritage tourism", d: "Tourism based on historic legacy as its main focus, e.g. natural landscape, historical buildings." },
+          { t: "Primary tourist/recreational resources", d: "Pre-existing tourist attractions that often exist naturally, e.g. the weather, wildlife, beaches, indigenous people or mountains." },
+          { t: "Medical tourism", d: "When people travel to other countries to undergo medical procedures, e.g. dentistry or plastic surgery, either because medical standards are better or treatment is cheaper in the destination." },
+          { t: "Ecotourism", d: "Like sustainable tourism, but with a focus on the natural environment." },
+          { t: "Resorts", d: "A settlement where the primary function is tourism. Resorts are normally associated with the coast. Large hotel complexes are considered to be resorts." },
+          { t: "All-inclusive", d: "When tourists pay a hotel complex one price which includes all meals, drinks, entertainment, activities, etc. All-inclusive holidays are very common in the Mediterranean and the Caribbean." } ] }
+      ]
+    },
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -852,6 +886,8 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl-match td{vertical-align:middle}.fl-match td:nth-child(2){width:52%}.fl-sel{width:100%;font:400 .82rem var(--lh-font-body);padding:.35rem;border:1px solid var(--lh-border);border-radius:8px;background:#fff}" +
+    ".fl-sel.fl-ok{border-color:var(--lh-green);background:var(--lh-green-bg)}.fl-sel.fl-bad{border-color:#e57373;background:#fdecea}.fl-mfb{display:block;font-size:.78rem;color:var(--lh-body);margin-top:.2rem;line-height:1.35}" +
     ".fl__read{font-size:.92rem;line-height:1.6;color:var(--lh-body)}.fl__read h4{margin:1rem 0 .3rem;font:700 .98rem var(--lh-font-display);color:var(--lh-ink)}.fl__read p{margin:.3rem 0}.fl__read ul,.fl__read ol{margin:.3rem 0 .3rem 1.3rem;padding:0}.fl__read li{margin:.25rem 0}" +
     ".fl-mcq{margin:.4rem 0 1rem}.fl-mcq__o{display:flex;flex-wrap:wrap;gap:.4rem;margin:.3rem 0}" +
     ".fl-opt{border:1px solid var(--lh-border);background:#fff;border-radius:10px;padding:.4rem .7rem;font:500 .86rem var(--lh-font-body);cursor:pointer;color:var(--lh-ink)}" +
@@ -970,6 +1006,19 @@
       });
       h += "</tbody></table></div>";
     }
+    if (p.type === "match") {
+      var order = p.items.map(function (_, i) { return i; });
+      for (var q = order.length - 1, seed = 7; q > 0; q--) { seed = (seed * 9301 + 49297) % 233280; var j = Math.floor(seed / 233280 * (q + 1)); var tmp = order[q]; order[q] = order[j]; order[j] = tmp; }
+      h += '<div class="fl__scroll"><table class="fl-match"><thead><tr><th>Key term</th><th>Definition (choose the matching one)</th><th>Your example</th></tr></thead><tbody>';
+      p.items.forEach(function (it, i) {
+        var k = p.id + i, pick = saved[k];
+        var cls = pick == null || pick === "" ? "" : (+pick === i ? " fl-ok" : " fl-bad");
+        h += '<tr><td class="fl__rh">' + esc(it.t) + '</td><td><select class="fl-sel' + cls + '" data-mk="' + k + '" data-a="' + i + '" aria-label="Definition for ' + esc(it.t) + '"><option value="">Choose a definition\u2026</option>' +
+          order.map(function (o) { return '<option value="' + o + '"' + (pick != null && pick !== "" && +pick === o ? " selected" : "") + ">" + esc(p.items[o].d) + "</option>"; }).join("") +
+          '</select><span class="fl-mfb">' + (cls === " fl-ok" ? "\u2713 " + esc(it.d) : cls ? "Try again" : "") + "</span></td><td>" + box(saved, k + "e", "Example for " + it.t, 2, 1) + "</td></tr>";
+      });
+      h += "</tbody></table></div>";
+    }
     if (p.type === "mcq")
       p.items.forEach(function (it, i) {
         var k = p.id + i, pick = saved[k];
@@ -1006,8 +1055,24 @@
     });
     var done = 0;
     inputs.forEach(function (t) { if (t.value.trim()) done++; });
+    var sels = root.querySelectorAll(".fl-sel");
+    if (sels.length) {
+      var right = 0; sels.forEach(function (x) { if (x.value !== "" && x.value === x.getAttribute("data-a")) right++; });
+      root.querySelector(".fl__state").textContent = right + " / " + sels.length + " matched" + (done ? " \u00b7 " + done + " examples" : "");
+      return;
+    }
     root.querySelector(".fl__state").textContent = done ? done + " / " + inputs.length + " answered" : "Not started";
   }
+  root.addEventListener("change", function (e) {
+    var sel = e.target.closest(".fl-sel"); if (!sel) return;
+    var k = sel.getAttribute("data-mk"), a = sel.getAttribute("data-a");
+    saved[k] = sel.value;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+    var ok = sel.value !== "" && sel.value === a;
+    sel.className = "fl-sel" + (sel.value === "" ? "" : ok ? " fl-ok" : " fl-bad");
+    sel.nextSibling.textContent = sel.value === "" ? "" : ok ? "\u2713 " + sel.options[sel.selectedIndex].text : "Try again";
+    state();
+  });
   root.addEventListener("click", function (e) {
     var b = e.target.closest(".fl-opt"); if (!b) return;
     var g = b.closest(".fl-mcq"), k = g.getAttribute("data-mk"), a = +g.getAttribute("data-a"), j = +b.getAttribute("data-j");
@@ -1042,6 +1107,15 @@
       if (p.prompt) { html += "<p><b>" + esc((lab ? lab + " " : "") + p.prompt) + "</b></p>"; out.push((lab ? lab + " " : "") + p.prompt); }
       (p.links || []).forEach(function (l) { html += '<p><a href="' + esc(l.url) + '">' + esc(l.label) + "</a></p>"; out.push(l.label + ": " + l.url); });
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
+      if (p.type === "match") {
+        html += "<table " + T + "><tr><th " + D + ">Key term</th><th " + D + ">Definition</th><th " + D + ">Example</th></tr>";
+        p.items.forEach(function (it, i) {
+          var k = p.id + i, pk = saved[k], def = pk == null || pk === "" ? "" : p.items[+pk].d + (+pk === i ? "" : " (not matched)");
+          html += "<tr><td " + D + "><b>" + esc(it.t) + "</b></td><td " + D + ">" + cellHtml(def) + "</td><td " + D + ">" + cellHtml(ans(k + "e")) + "</td></tr>";
+          out.push("- " + it.t + " | " + def + " | Example: " + ans(k + "e"));
+        });
+        html += "</table>";
+      }
       if (p.type === "mcq") p.items.forEach(function (it, i) {
         var k = p.id + i, pk = saved[k], ch = pk == null ? "(not answered)" : "ABCDEF".charAt(+pk) + " " + it.o[+pk] + (+pk === it.a ? " \u2713" : " (answer: " + "ABCDEF".charAt(it.a) + ")");
         html += "<p><i>" + (i + 1) + ". " + esc(it.q) + "</i><br>Answer: " + esc(ch) + "<br>Reason: " + cellHtml(ans(k + "r")) + "</p>";
