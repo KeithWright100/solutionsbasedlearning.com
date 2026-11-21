@@ -55,6 +55,18 @@
     PYRAMID("Pyramid A", [100, 92, 84, 76, 68, 60, 52, 45, 38, 32, 26, 21, 16, 12, 8, 5, 3]) +
     PYRAMID("Pyramid B", [52, 55, 57, 58, 60, 64, 67, 70, 70, 72, 70, 68, 62, 54, 42, 30, 22]) + "</div>";
 
+  /* Image slot: shows /images/flip/<name>.png (or .jpg) when the file exists;
+     otherwise shows the fallback (if given) or nothing. */
+  function IMG(name, alt, fallback) {
+    return '<figure class="fl__img"><img src="/images/flip/' + name + '.png" alt="' + alt + '" onerror="SBLFlipImg(this)">' +
+      (fallback ? '<div class="fl__fb" hidden>' + fallback + "</div>" : "") + "</figure>";
+  }
+  window.SBLFlipImg = function (im) {
+    if (!im.getAttribute("data-jpg")) { im.setAttribute("data-jpg", "1"); im.src = im.src.replace(/\.png$/, ".jpg"); return; }
+    var f = im.parentNode, fb = f.querySelector(".fl__fb");
+    if (fb) { fb.hidden = false; im.remove(); } else f.remove();
+  };
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -82,6 +94,7 @@
 
     CP03: {
       title: "The core–periphery model",
+      teacherNote: "As there isn't much home learning, I will go through this with you in class.",
       intro: "Complete this before the lesson. Ask the Teach Me Live bot on this page to help you with each part.",
       parts: [
         { type: "heading", text: "Part A: Key concepts" },
@@ -162,7 +175,7 @@
             5: ["Growing flows of investment, information, people and trade.", "Connected cities attract businesses and migrants."]
           } },
         { type: "heading", text: "Part 3: Where are the world's megacities?" },
-        { id: "c", type: "text", prompt: "Describe the distribution of the world's megacities.",
+        { id: "c", type: "text", before: IMG("cp07-megacities-map", "Map: the 15 fastest-growing megacities"), prompt: "Describe the distribution of the world's megacities.",
           note: "Use the map of the 15 fastest-growing megacities from class and Video 2. Mention continents, coasts and named examples with figures." }
       ]
     },
@@ -186,7 +199,7 @@
           rows: ["Drought", "Hunger", "Flooding", "Earthquakes", "War and conflict", "Economic circumstances"] },
         { id: "c", label: "b)", type: "text", prompt: "Which cause is most significant globally? Justify your choice and acknowledge one counterargument." },
         { type: "heading", text: "Part 3: Reading photographs", note: "Look at the photo on your class OneNote page." },
-        { id: "d", label: "", type: "questions", letters: true, prompt: "",
+        { id: "d", label: "", type: "questions", letters: true, prompt: "", before: IMG("cp08-photo", "Photograph to analyse"),
           rows: [
             "What's happening in the photo?",
             "Why do you think this has happened?",
@@ -211,7 +224,7 @@
       intro: "Flipped learning check (about 5 minutes). Watch the video and use the map from your class OneNote to complete the table and question.",
       parts: [
         { type: "heading", text: "Part 1: Watch and capture" },
-        { id: "a", type: "table", prompt: "Complete the table.",
+        { id: "a", type: "table", prompt: "Complete the table.", before: IMG("cp09-haiti-map", "Map of the 2010 Haiti earthquake"),
           links: [{ label: "Video: Haiti earthquake documentary", url: "https://www.youtube.com/watch?v=uS4EMk_H0lQ" }],
           cols: ["Prompt", "Your notes"],
           rows: ["Date, magnitude and location", "Two immediate impacts", "Why people were internally displaced", "IDP definition", "Why IDPs are not refugees"] },
@@ -236,7 +249,7 @@
           rows: ["Calculation of the dependency ratio", "Reasons for an ageing population", "Problems", "Potential solutions"] },
         { type: "heading", text: "Activity 2: Read the population data sets",
           note: "Use the population data sets for Japan in Firefly (the 2018 population pyramid and the total fertility rate graph) to analyse the national trends." },
-        { id: "b", type: "text", label: "", prompt: "What national trends do the data sets show for Japan? Use figures from the data." },
+        { id: "b", type: "text", label: "", before: '<div class="fl__imgs">' + IMG("cp11-japan-pyramid", "Japan population pyramid, 2018") + IMG("cp11-fertility", "Total fertility rate in the USA and Japan, 1947 to 2010") + "</div>", prompt: "What national trends do the data sets show for Japan? Use figures from the data." },
         { type: "heading", text: "Extension" },
         { id: "c", type: "text", label: "", prompt: "Why did so many Japanese families avoid having children in 1966? Who were the Firehorse women?", video: true }
       ]
@@ -258,7 +271,21 @@
           rows: ["Reproductive health", "Empowerment", "Labour market"] },
         { id: "d", type: "table", prompt: "Why does gender equality vary between countries? Through research, note reasons why it varies across the world. We will build on this in the lesson.",
           note: "Use the countries in the Global Gender Gap Index rankings (World Economic Forum) on your class OneNote page to find some reasons.",
+          before: IMG("cp12-gender-gap", "Global Gender Gap Index rankings"),
           cols: ["", "Country", "Reason"], rows: ["1", "2", "3", "4", "5", "6"] }
+      ]
+    },
+    CP13: {
+      title: "The demographic dividend",
+      intro: "Complete this before the lesson. Use the video and the Teach Me Live bot on this page to answer the following.",
+      parts: [
+        { id: "a", label: "", type: "questions", letters: true, prompt: "",
+          links: [{ label: "Video: Demographic dividend explained", url: "https://www.youtube.com/watch?v=bhkrS0qSJLg" }],
+          rows: [
+            "What is the demographic dividend, and when does it occur?",
+            "What are the characteristics of the population pyramid?",
+            "What are the benefits for a country in this situation?"
+          ] }
       ]
     },
     CP05: [{
@@ -274,10 +301,10 @@
             "#Measures of fertility", "Crude birth rate", "Total fertility rate", "General fertility rate",
             "#Measures of mortality", "Crude death rate", "Life expectancy", "Infant mortality rate",
             "#Population structure", "Dependency ratio", "Ageing ratio", "Replacement level", "Doubling time", "Population momentum", "Population projections"],
-          links: [{ label: "Video: What is a dependency ratio?", url: "https://www.youtube.com/watch?v=t0kAO4p5bmk&t=28s" }] },
+          links: [{ label: "Video: What is a dependency ratio?", url: "https://www.youtube.com/watch?v=t0kAO4p5bmk" }] },
         { type: "heading", text: "Part 2: Interpreting the demographic transition model",
           note: "Study the model below and complete the table to show what is happening at each stage. Stage 1 has been done to help you." },
-        { type: "html", html: DTM_SVG },
+        { type: "html", html: IMG("cp05-dtm", "Demographic transition model", DTM_SVG) },
         { id: "b", label: "", type: "table", prompt: "What happens at each stage?",
           cols: ["DTM stage", "Birth rate", "Death rate", "Natural increase", "Total population", "Reasons for total population change"],
           rows: ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"],
@@ -298,7 +325,7 @@
         { type: "heading", text: "Part 1: What are population pyramids?" },
         { id: "a", type: "text", prompt: "Watch the video to learn how to interpret population pyramids for countries at contrasting levels of economic development. Write down three things you learned.",
           links: [{ label: "Video: Population pyramids: powerful predictors of the future (Kim Preshoff, TED-Ed)", url: "https://www.youtube.com/watch?v=RLmKfXwWQtE" }] },
-        { id: "b", type: "table", before: PYRAMIDS, prompt: "Study the two pyramids. Which one is a rich country and which is a poor country? Use the PPT for help, and consider the shape, the base and the top.",
+        { id: "b", type: "table", before: IMG("cp05-pyramids", "Two population pyramids, A and B", PYRAMIDS), prompt: "Study the two pyramids. Which one is a rich country and which is a poor country? Use the PPT for help, and consider the shape, the base and the top.",
           note: "If in doubt, ask the bot about appropriate labels.",
           cols: ["", "Pyramid A", "Pyramid B"],
           rows: ["Rich or poor country?", "The shape of the pyramid", "The base", "The top", "Labels you would add to the graph"] },
@@ -359,12 +386,17 @@
     ".fl-in{width:100%;box-sizing:border-box;border:1px solid var(--lh-border);border-radius:8px;padding:.45rem .55rem;font:inherit;font-size:.88rem;resize:vertical;background:var(--lh-bg)}" +
     ".fl td .fl-in{border-color:transparent;background:transparent;min-height:2.4rem}.fl td .fl-in:focus,.fl-in:focus{outline:2px solid var(--lh-teal);background:#fff}" +
     ".fl__vq{margin:.6rem 0 .25rem;color:var(--lh-ink)}.fl__video{display:inline-block;margin:.1rem 1.2rem .6rem 0;color:var(--lh-blue);font-weight:600}" +
+    ".fl__yts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem;margin:.3rem 0 .3rem;max-width:760px}" +
+    ".fl__yt{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000}.fl__yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}" +
+    ".fl__img{margin:.3rem 0 .6rem}.fl__img img{display:block;max-width:100%;max-height:520px;height:auto;border:1px solid var(--lh-border);border-radius:10px;background:#fff}" +
+    ".fl__imgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}" +
+    ".fl__tnote{margin:.2rem 0 .8rem;padding:.55rem .8rem;border-radius:10px;background:var(--lh-gold-bg);color:var(--lh-ink);font-size:.9rem}" +
     ".fl__note{font-size:.84rem;color:var(--lh-muted);margin:.2rem 0 .5rem}" +
     ".fl__actions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.4rem}" +
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
-    "@media print{body.fl-printing .fl:not(.fl--print){display:none!important}.lh-sidebar,.lh-topbar,.lh-rail,.lh-modes,.lh-stats,.lh-tip,.fl__actions,.fl__top,.fl__banner{display:none!important}.fl{border:0}.fl td .fl-in{border:0}}";
+    "@media print{body.fl-printing .fl:not(.fl--print){display:none!important}.lh-sidebar,.lh-topbar,.lh-rail,.lh-modes,.lh-stats,.lh-tip,.fl__actions,.fl__top,.fl__banner,.fl__yts{display:none!important}.fl{border:0}.fl td .fl-in{border:0}}";
   document.head.appendChild(css);
 
   function panel(cfg, n) {
@@ -378,12 +410,21 @@
     '<svg class="fl__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="fl__body">' +
     '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">';
   if (cfg.intro) h += '<p class="fl__intro">' + esc(cfg.intro) + "</p>";
+  if (cfg.teacherNote) h += '<p class="fl__tnote">' + esc(cfg.teacherNote) + "</p>";
   if (cfg.cover) h += '<ul class="fl__cover">' + cfg.cover.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>";
   h += '<div class="fl__top"><button type="button" class="fl__bot" onclick="window.openTeachBot && openTeachBot(\'' + id + '\')">Open Teach Me Live &rarr;</button>' +
     '<button type="button" class="fl__btn fl__btn--ghost fl-copy">Copy to OneNote</button></div>';
 
+  function ytId(u) { var m = /(?:youtu\.be\/|[?&]v=)([\w-]{11})/.exec(u || ""); return m && m[1]; }
+  function embed(u) {
+    var v = ytId(u);
+    return v ? '<div class="fl__yt"><iframe src="https://www.youtube-nocookie.com/embed/' + v + '" title="Video" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>' : "";
+  }
   function links(p) {
-    var out = "";
+    var vids = [], v0 = p.video === true ? cfg.video : p.video;
+    if (v0) vids.push(v0);
+    (p.links || []).forEach(function (l) { if (ytId(l.url)) vids.push(l.url); });
+    var out = vids.length ? '<div class="fl__yts">' + vids.map(embed).join("") + "</div>" : "";
     var v = p.video === true ? cfg.video : p.video;
     if (p.video) out += v
       ? '<a class="fl__video" href="' + esc(v) + '" target="_blank" rel="noopener">Watch the video &rarr;</a>'
@@ -404,6 +445,7 @@
       h += '<p class="fl__q">' + (lab ? "<b>" + esc(lab) + "</b>" : "") + esc(p.prompt) + "</p>";
     if (p.note) h += '<p class="fl__note">' + esc(p.note) + "</p>";
     h += links(p);
+    if (p.before && p.type !== "terms" && p.type !== "table") h += '<div class="fl__pair">' + p.before + "</div>";
     if (p.type === "text") {
       h += box(saved, p.id, p.prompt, p.words ? 6 : 4);
       if (p.words) h += '<p class="fl__note fl__wc" data-wc="' + p.id + '" data-min="' + p.words[0] + '" data-max="' + p.words[1] + '"></p>';
@@ -470,6 +512,7 @@
       if (p.type === "html") return;
       var lab = p.label != null ? p.label : p.id + ")";
       if (p.prompt) { html += "<p><b>" + esc((lab ? lab + " " : "") + p.prompt) + "</b></p>"; out.push((lab ? lab + " " : "") + p.prompt); }
+      (p.links || []).forEach(function (l) { html += '<p><a href="' + esc(l.url) + '">' + esc(l.label) + "</a></p>"; out.push(l.label + ": " + l.url); });
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
       if (p.type === "questions") p.rows.forEach(function (r, i) {
         var n = p.letters ? "abcdefghij".charAt(i) + ")" : (i + 1) + ".";
