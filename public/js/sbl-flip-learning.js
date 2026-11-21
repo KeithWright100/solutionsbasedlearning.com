@@ -67,6 +67,43 @@
     if (fb) { fb.hidden = false; im.remove(); } else f.remove();
   };
 
+  var HEALTH = '<div class="fl__scroll"><table><thead><tr><th>How climate is changing</th><th>What happens</th><th>Effects on health</th></tr></thead><tbody>' +
+    [["Rising temperatures", "More frequent and intense heatwaves; the urban heat island makes cities hotter", "Heat stroke, dehydration, heart and lung illness"],
+     ["Extreme weather", "More flooding, storms and wildfires; damage to homes and infrastructure; water supplies contaminated", "Injury and death, water-borne illness (e.g. cholera), stress and mental health problems"],
+     ["Air quality", "More pollution and wildfire smoke; longer pollen seasons", "Asthma and other breathing problems, more allergies"],
+     ["Vector-borne diseases", "Warmer, wetter and longer warm seasons let mosquitoes and ticks spread to new areas", "More cases of malaria, dengue, Zika and Lyme disease"]
+    ].map(function (r) { return "<tr><td class=\"fl__rh\">" + r[0] + "</td><td class=\"fl__given\">" + r[1] + "</td><td class=\"fl__given\">" + r[2] + "</td></tr>"; }).join("") +
+    '</tbody></table></div><p class="fl__note">Summary of how climate change affects health (not a complete list).</p>';
+
+  var RISK_SVG =
+    '<svg viewBox="0 0 760 330" role="img" aria-label="Diagram: risk is where hazard, exposure and vulnerability overlap. Climate drives the hazard; socio-economic processes shape exposure and vulnerability." style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px">' +
+    '<g font-family="Inter,Arial,sans-serif" font-size="13" text-anchor="middle">' +
+    '<rect x="16" y="70" width="170" height="190" rx="12" fill="#e3f0f7" stroke="#7fb1cc"/><text x="101" y="98" font-weight="700" fill="#1d4f6b">Climate</text>' +
+    '<text x="101" y="140" fill="#1d4f6b">Natural</text><text x="101" y="157" fill="#1d4f6b">variability</text>' +
+    '<text x="101" y="200" fill="#1d4f6b">Human-caused</text><text x="101" y="217" fill="#1d4f6b">climate change</text>' +
+    '<rect x="574" y="70" width="170" height="190" rx="12" fill="#efe8f6" stroke="#a98bc9"/><text x="659" y="98" font-weight="700" fill="#4b2c6b">Socio-economic</text><text x="659" y="115" font-weight="700" fill="#4b2c6b">processes</text>' +
+    '<text x="659" y="150" fill="#4b2c6b">Development</text><text x="659" y="167" fill="#4b2c6b">and wealth</text>' +
+    '<text x="659" y="198" fill="#4b2c6b">Adaptation and</text><text x="659" y="215" fill="#4b2c6b">mitigation</text><text x="659" y="243" fill="#4b2c6b">Governance</text>' +
+    '<circle cx="335" cy="165" r="92" fill="rgba(224,123,26,0.45)" stroke="#c1600f" stroke-width="2"/>' +
+    '<circle cx="425" cy="120" r="92" fill="rgba(42,99,184,0.38)" stroke="#2a63b8" stroke-width="2"/>' +
+    '<circle cx="425" cy="210" r="92" fill="rgba(29,158,117,0.38)" stroke="#0f6e56" stroke-width="2"/>' +
+    '<text x="290" y="170" font-weight="700" fill="#7a3b06">Hazard</text>' +
+    '<text x="455" y="80" font-weight="700" fill="#173f7a">Vulnerability</text>' +
+    '<text x="455" y="262" font-weight="700" fill="#0b4f3d">Exposure</text>' +
+    '<text x="396" y="170" font-weight="800" font-size="16" fill="#111">RISK</text>' +
+    '<path d="M186 165 L238 165" stroke="#555" stroke-width="2" marker-end="url(#ar)"/>' +
+    '<path d="M574 140 L520 128" stroke="#555" stroke-width="2" marker-end="url(#ar)"/><path d="M574 190 L520 204" stroke="#555" stroke-width="2" marker-end="url(#ar)"/>' +
+    '<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#555"/></marker></defs>' +
+    '<text x="380" y="315" font-size="12" fill="#555">Risk is greatest where a hazard affects people and places that are both exposed and vulnerable.</text>' +
+    '</g></svg>';
+
+  /* A list of prompts with a Copy button each, to paste into Teach Me Live. */
+  function PROMPTS(list) {
+    return '<ol class="fl__prompts">' + list.map(function (t) {
+      return '<li><span>' + t + '</span><button type="button" class="fl__pcopy" onclick="var b=this,t=b.previousSibling.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent=\'Copied\';setTimeout(function(){b.textContent=\'Copy\'},1500)},function(){window.prompt(\'Copy:\',t)})">Copy</button></li>';
+    }).join("") + "</ol>";
+  }
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -290,6 +327,126 @@
           ] }
       ]
     },
+    CC08: {
+      title: "The impacts of climate change on people and places",
+      intro: "Complete this before the lesson. Your understanding should show the impacts of climate change on people and places, including where the impacts happen (their spatial distribution). Use the Teach Me Live bot on this page if you get stuck.",
+      parts: [
+        { type: "heading", text: "Part 1: Transportation" },
+        { id: "a", type: "table", prompt: "Watch the video, then complete the table of positive and negative impacts of climate change on transportation.",
+          links: [{ label: "Video: Canada's new shipping shortcut (the Northwest Passage)", url: "https://www.youtube.com/watch?v=ZcDwtO4RWmo" }],
+          cols: ["Impacts on transportation", "Positive or negative? (SEEP)", "Explanation (give detail and an example location)"],
+          rows: ["Melting sea ice in the Northwest Passage", "Impacts on roads and other transport infrastructure", "Traffic congestion and accidents", "Transport times (duration of travel)", "Other impacts"] },
+        { type: "heading", text: "Part 2: Case study: climate refugees" },
+        { id: "b", type: "text", prompt: "Define a climate refugee and give examples of places." },
+        { id: "c", type: "text", prompt: "Explain why this occurs (the processes)." },
+        { id: "d", type: "table", prompt: "Create a short case study of Bangladesh. First watch the video, then make notes.",
+          links: [{ label: "Video: How global climate change is already devastating Bangladesh", url: "https://www.youtube.com/watch?v=I9yJ7K_3n50" }],
+          cols: ["", "Your notes"],
+          rows: ["Location", "Why is this happening? (hazards, relief, development status, etc.)", "Impacts: describe and explain them", "Solutions: are there any?"] },
+        { type: "heading", text: "Part 3: Impacts on people's health",
+          note: "Use the WHO video as a starting point. The summary table gives examples to base your research on." },
+        { type: "html", html: HEALTH },
+        { id: "e", type: "table", prompt: "For each health impact, explain why it occurs (the processes) and give an example (place).",
+          links: [{ label: "Video: WHO: Climate change and health", url: "https://www.youtube.com/watch?v=HC8eG05ceIs" }],
+          cols: ["Health impact", "Why it occurs (processes)", "Example (place)"],
+          rows: ["Heat stroke", "Increase in vector-borne diseases", "Allergies", "Stress and mental health", "Another impact of your choice"] }
+      ]
+    },
+    CC09: {
+      title: "Climate change, risk and vulnerability",
+      intro: "Complete this before the lesson. Use the Teach Me Live bot on this page to help you answer the questions.",
+      parts: [
+        { type: "heading", text: "Part 1: Risk, hazard and vulnerability" },
+        { id: "a", label: "", type: "questions", letters: true, prompt: "",
+          rows: ["Define risk.", "Define hazard, and explain how risk can be calculated.", "Define vulnerability."] },
+        { id: "b", label: "d)", type: "text", before: RISK_SVG,
+          prompt: "What is a vulnerability assessment? Make sure your answer has enough detail. Use the diagram as a starting point." },
+        { type: "heading", text: "Part 2: The global pattern of vulnerability" },
+        { id: "c", label: "a)", type: "text", before: IMG("cc09-ccvi", "Climate Change Vulnerability Index 2017: average score by region, countries in each risk category, and the five most and least vulnerable countries"),
+          prompt: "Using the data, describe the global pattern of vulnerability to climate change (4 marks).",
+          note: "Tip: use the regional averages and name countries, with their scores, as evidence." },
+        { type: "heading", text: "Part 3: Adaptive capacity and vulnerable groups" },
+        { id: "d", label: "", type: "questions", prompt: "",
+          rows: ["Define adaptive capacity.", "Give examples of how countries can become more resilient to climate change."] },
+        { id: "e", label: "3.", type: "table", prompt: "Explain why these groups are more vulnerable, giving an example of each.",
+          cols: ["Group", "Why are they more vulnerable?", "Example (place)"],
+          rows: ["Women", "The poor", "The elderly"] }
+      ]
+    },
+    CC10: {
+      title: "Government-led adaptation and mitigation strategies",
+      intro: "Complete these activities before the lesson. Use the Teach Me Live bot on this page to help you complete the tables.",
+      parts: [
+        { type: "heading", text: "Starter prompts for Teach Me Live", note: "Copy a prompt and paste it into the bot." },
+        { type: "html", html: PROMPTS([
+          "Teach me this lesson as if I am new to the topic. Pause after each key idea and ask me a check question.",
+          "Explain adaptation and mitigation, then give me one clear government-led example of each.",
+          "Why might a strategy be both adaptation and mitigation? Give one possible example and explain the overlap.",
+          "Explain climate action at local, national and international scales. Give a government example at each scale.",
+          "Teach me the difference between a voluntary climate pledge and a legally binding target.",
+          "Explain why countries disagree about responsibility for climate change.",
+          "Explain the meaning of common but differentiated responsibilities in simple terms.",
+          "Compare the UNFCCC, Kyoto Protocol and Paris Agreement. Question me after each agreement.",
+          "Explain how wealth, vulnerability, energy security and political priorities influence government decisions.",
+          "Test whether I am ready for the lesson using eight short oral questions. Do not reveal answers until I respond."]) },
+        { type: "heading", text: "A. Foundations" },
+        { id: "a", label: "A.", type: "table", prompt: "Foundations table",
+          cols: ["Concept", "Definition in my own words", "Government-led example", "Why it matters"],
+          rows: ["Adaptation", "Mitigation", "Climate agreement", "Government policy", "Carbon emissions", "Carbon sink", "Climate finance"] },
+        { type: "heading", text: "B. Adaptation and mitigation" },
+        { id: "b", label: "B1.", type: "table", prompt: "Adaptation, mitigation or both?",
+          note: "Write A (adaptation), M (mitigation) or Both.",
+          links: [{ label: "Video: Adapting to climate change: five countries set an example", url: "https://www.youtube.com/watch?v=oshaiU7oHOo" }],
+          cols: ["Strategy", "A / M / Both", "How it works", "Possible limitation"],
+          rows: ["Sea walls and surge barriers", "Renewable electricity subsidies", "Drought-resistant crops", "Electric vehicle incentives", "Urban drainage and flood storage", "Carbon tax", "Afforestation", "Building insulation", "Managed coastal retreat", "Carbon capture and storage"] },
+        { id: "c", label: "B2.", type: "table", prompt: "Scale of action",
+          cols: ["Example", "Main scale", "Who decides?", "Who benefits?", "Possible conflict"],
+          rows: ["City heat-action plan", "National carbon tax", "Regional emissions-trading scheme", "Paris Agreement pledge", "Coastal protection for one settlement"] },
+        { type: "heading", text: "C. Climate agreements" },
+        { id: "d", label: "C1.", type: "table", prompt: "Comparison organiser",
+          cols: ["Agreement", "Core purpose / feature", "Strength", "Limitation or debate"],
+          rows: ["UNFCCC (adopted 1992)", "Kyoto Protocol (adopted 1997)", "Paris Agreement (adopted 2015)"] },
+        { type: "heading", text: "C2. Questions to ask the bot", note: "Ask these about each agreement, then use the answers for C1 and C3." },
+        { type: "html", html: PROMPTS([
+          "What problem was this agreement designed to address?",
+          "Who was expected to act, and how did responsibilities differ?",
+          "Were commitments legally binding, nationally chosen, or mainly procedural?",
+          "How was progress reported or reviewed?",
+          "What is one defensible success and one defensible limitation?",
+          "How did this agreement influence the next stage of climate cooperation?"]) },
+        { id: "e", label: "C3.", type: "table", prompt: "Agreement triangle",
+          cols: ["", "Ambition", "Participation", "Enforcement"],
+          rows: ["Guiding question", "My judgement"], given: true,
+          prefill: { 0: ["How demanding are the goals?", "How widely can countries take part?", "What encourages or compels delivery?"], 1: [null, null, null] } },
+        { type: "heading", text: "D. Think: countries, interests and power" },
+        { id: "f", label: "D1.", type: "table", prompt: "Comparative enquiry",
+          cols: ["Actor", "Priorities / pressures", "Likely climate demands", "Possible concession", "Evidence to verify"],
+          rows: ["United States", "China", "India", "European Union", "Maldives / small island states", "Environmental NGO"] }
+      ]
+    },
+    CC11: {
+      title: "Civil society and corporate strategy",
+      intro: "Complete all the flip learning activities before the lesson. Open Teach Me Live on this page and work through the starter prompts and the seven \u201cWhat should I know?\u201d statements. Write your answers in your own words, and tick each statement in the bot only when you can explain it without help.",
+      parts: [
+        { type: "heading", text: "Part 1: Core knowledge", note: "Use these bot prompts. Copy one and paste it into the bot." },
+        { type: "html", html: PROMPTS(["What is civil society?", "NGOs and climate advocacy", "Grassroots movements", "Corporate social responsibility", "What is greenwashing?", "Individual actions", "Civil society vs government roles"]) },
+        { id: "a", type: "table", prompt: "Complete the table.",
+          cols: ["Concept", "Meaning in your own words", "Example", "Why is it important?"],
+          rows: ["Civil society", "NGO", "Climate advocacy", "Grassroots movement", "Corporate social responsibility", "Greenwashing"] },
+        { type: "heading", text: "Part 2: How civil society creates change", note: "Ask the bot the question below, then complete the table." },
+        { type: "html", html: PROMPTS(["How can civil society organisations influence action on climate change?"]) },
+        { id: "b", type: "table", prompt: "Complete the table.",
+          cols: ["Method", "How does it work?", "Possible strength", "Possible limitation"],
+          rows: ["Research and evidence", "Awareness campaigns", "Petitions", "Lobbying governments", "Protests and demonstrations", "Social media campaigns", "Community projects"] },
+        { id: "c", type: "text", prompt: "Thinking question: which method is likely to have the greatest influence on governments? Explain why." },
+        { type: "heading", text: "Part 3: Corporate climate strategies", note: "Ask the bot the question below, then complete the table." },
+        { type: "html", html: PROMPTS(["What strategies can corporations use to respond to climate change?"]) },
+        { id: "d", type: "table", prompt: "Complete the table.",
+          cols: ["Corporate strategy", "How does it work?", "How could it address climate change?", "Possible limitation"],
+          rows: ["Improving energy efficiency", "Using renewable energy", "Changing production processes", "Developing lower-carbon products", "Using sustainable supply chains", "Carbon offsetting", "Setting net-zero targets", "Climate-friendly marketing"] },
+        { id: "e", type: "text", prompt: "Challenge question: which corporate strategy is likely to be the most effective? Explain why." }
+      ]
+    },
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -380,7 +537,7 @@
     ".fl__banner{display:block;width:100%;max-width:900px;height:auto;border-radius:10px;margin:1rem auto 0}" +
     ".fl__intro{margin:1rem 0 .6rem;color:var(--lh-body)}.fl__cover{margin:-.3rem 0 .8rem 1.2rem;padding:0;color:var(--lh-body)}" +
     ".fl__bot{display:inline-flex;align-items:center;gap:.4rem;border:0;border-radius:999px;padding:.5rem 1rem;background:var(--lh-indigo);color:#fff;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
-    ".fl__part{margin-top:1.3rem}.fl__q{font-weight:600;color:var(--lh-ink);margin:0 0 .5rem}.fl__q b{display:inline-block;min-width:1.6rem;color:var(--lh-teal-deep)}" +
+    ".fl__part{margin-top:1.3rem}.fl__q{font-weight:600;color:var(--lh-ink);margin:0 0 .5rem}.fl__q b{display:inline-block;min-width:1.6rem;margin-right:.3rem;color:var(--lh-teal-deep)}" +
     ".fl__head{margin:2rem 0 .2rem;padding-top:1rem;border-top:2px solid var(--lh-teal-bg);font:700 1.05rem var(--lh-font-display);color:var(--lh-teal-deep)}" +
     ".fl__head+.fl__note{margin-top:.2rem}" +
     ".fl__scroll{overflow-x:auto}" +
@@ -403,6 +560,9 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl__prompts{margin:.3rem 0 .5rem;padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem}" +
+    ".fl__prompts li{padding-left:.2rem}.fl__prompts li span{color:var(--lh-ink)}" +
+    ".fl__pcopy{margin-left:.5rem;border:1px solid var(--lh-teal);background:#fff;color:var(--lh-teal-deep);border-radius:999px;padding:.05rem .55rem;font:600 .72rem var(--lh-font-body);cursor:pointer;vertical-align:1px}" +
     ".fl__adapt{font-size:.78rem;font-weight:600;color:var(--lh-teal-deep);background:var(--lh-teal-bg);border-radius:999px;padding:.3rem .7rem}" +
     ".fl-ed{margin-top:1rem;padding:1rem 1.1rem;border:2px solid var(--lh-gold);border-radius:12px;background:var(--lh-gold-bg)}" +
     ".fl-ed h3{margin:0 0 .3rem;font:700 1rem var(--lh-font-display);color:var(--lh-ink)}" +
