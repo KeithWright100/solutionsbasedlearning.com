@@ -104,7 +104,7 @@
     .tile.ib { border-top: 4px solid var(--ib); } .tile.ib .lvl { color: var(--ib); }
     .tile.ig { border-top: 4px solid var(--ig); } .tile.ig .lvl { color: var(--ig); }
     .tile.rv { border-top: 4px solid var(--rev); } .tile.rv .lvl { color: var(--rev); }
-    .tile.soon { opacity: .6; }
+    .tile.soon > :not(.enter) { opacity: .6; }
     .more { margin-top: 8px; border-top: 1px solid var(--line); padding-top: 8px; }
     .more summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: .84rem; font-weight: 700; color: var(--teal-dark); padding: 2px 0; }
     .more summary::-webkit-details-marker { display: none; }
@@ -117,6 +117,11 @@
     .more li a:hover { background: var(--bg); color: var(--teal-dark); }
     .more li.hd { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 8px 0 2px; }
     .more li.hd:first-child { margin-top: 2px; }
+    .tile .enter { margin-top: auto; align-self: stretch; text-align: center; font-size: .84rem; font-weight: 800; padding: 9px 12px; border-radius: 10px; background: var(--deep); color: #fff; transition: background .15s; }
+    .tile .enter:hover { background: var(--teal-dark); }
+    .tile.ib .enter { background: var(--ib); } .tile.ig .enter { background: var(--ig); }
+    .tile.ib .enter:hover, .tile.ig .enter:hover { background: var(--deep); }
+    .tile.soon .enter { opacity: 1; }
     .tile .soon-tag { align-self: flex-start; font-size: .68rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #f0f2f4; color: #8a96a0; }
 
     .banner { margin-top: 32px; display: flex; align-items: center; gap: 20px; justify-content: space-between; flex-wrap: wrap; background: linear-gradient(135deg, var(--deep), #02324e); color: #fff; border-radius: 22px; padding: 24px 28px; }
@@ -261,16 +266,23 @@
       }).join('');
       return n ? '<details class="more"><summary><span class="pm" aria-hidden="true"></span>All pages <small>(' + n + ')</small></summary><ul>' + lis + '</ul></details>' : '';
     }
+    // "Enter Geography Hub" button: each subject has its own home page under /subjects/
+    function enter(title) {
+      var m = /Geograph|Econom|Business|History/.exec(title); if (!m) return '';
+      var k = { Geograph: 'geography', Econom: 'economics', Business: 'business', History: 'history' }[m[0]];
+      var n = k.charAt(0).toUpperCase() + k.slice(1);
+      return '<a class="enter" href="/subjects/' + k + '/">Enter ' + n + ' Hub <span aria-hidden="true">&rarr;</span></a>';
+    }
     function tiles(key, el, cls) {
       var m = menu(key);
       document.getElementById(el).innerHTML = m.cols.map(function (c) {
         var title = key === 'rev' ? c.title : c.title.replace(/^(IB|IGCSE) /, '');
-        if (c.soon) return '<div class="tile ' + cls + ' soon"><span class="lvl">' + esc(m.label) + '</span><h3>' + esc(title) + '</h3><p>' + esc(c.blurb) + '</p><span class="soon-tag">Coming soon</span></div>';
+        if (c.soon) return '<div class="tile ' + cls + ' soon"><span class="lvl">' + esc(m.label) + '</span><h3>' + esc(title) + '</h3><p>' + esc(c.blurb) + '</p><span class="soon-tag">Coming soon</span>' + (key === 'rev' ? '' : enter(title)) + '</div>';
         var quick = c.items.filter(function (it) { return it[1] && it[2] !== 'soon' && it[2] !== 'head' && !/^Unit|^Option|^HL/.test(it[0]); }).slice(0, 4);
         var blurb = c.blurb ? '<p>' + esc(c.blurb) + '</p>' : '<p></p>';
         return '<div class="tile ' + cls + '"><span class="lvl">' + esc(m.label) + '</span><h3>' + (c.href ? '<a href="' + esc(c.href) + '">' + esc(title) + '</a>' : esc(title)) + '</h3>' + blurb +
           (c.blurb ? '<div class="links">' + quick.map(function (it) { return '<a href="' + esc(it[1]) + '">' + esc(it[0]) + '</a>'; }).join('') + '</div>' : '') +
-          fullList(c) + '</div>';
+          fullList(c) + (key === 'rev' ? '' : enter(title)) + '</div>';
       }).join('');
     }
     tiles('ib', 'tilesIB', 'ib');
