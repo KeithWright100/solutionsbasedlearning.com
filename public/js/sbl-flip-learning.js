@@ -176,7 +176,7 @@
           } },
         { type: "heading", text: "Part 3: Where are the world's megacities?" },
         { id: "c", type: "text", before: IMG("cp07-megacities-map", "Map: the 15 fastest-growing megacities"), prompt: "Describe the distribution of the world's megacities.",
-          note: "Use the map of the 15 fastest-growing megacities from class and Video 2. Mention continents, coasts and named examples with figures." }
+          note: "Use the map of the 15 fastest-growing megacities and Video 2. Mention continents, coasts and named examples with figures." }
       ]
     },
     CP08: {
@@ -198,7 +198,7 @@
           cols: ["Cause", "How it forces movement", "Direct, indirect or both?"],
           rows: ["Drought", "Hunger", "Flooding", "Earthquakes", "War and conflict", "Economic circumstances"] },
         { id: "c", label: "b)", type: "text", prompt: "Which cause is most significant globally? Justify your choice and acknowledge one counterargument." },
-        { type: "heading", text: "Part 3: Reading photographs", note: "Look at the photo on your class OneNote page." },
+        { type: "heading", text: "Part 3: Reading photographs", note: "Look carefully at the photo below." },
         { id: "d", label: "", type: "questions", letters: true, prompt: "", before: IMG("cp08-photo", "Photograph to analyse"),
           rows: [
             "What's happening in the photo?",
@@ -221,7 +221,7 @@
     },
     CP09: {
       title: "Internal displacement in Haiti",
-      intro: "Flipped learning check (about 5 minutes). Watch the video and use the map from your class OneNote to complete the table and question.",
+      intro: "Flipped learning check (about 5 minutes). Watch the video and use the map to complete the table and question.",
       parts: [
         { type: "heading", text: "Part 1: Watch and capture" },
         { id: "a", type: "table", prompt: "Complete the table.", before: IMG("cp09-haiti-map", "Map of the 2010 Haiti earthquake"),
@@ -270,7 +270,7 @@
           cols: ["Dimension", "What could we measure?", "Why might inequality here matter?"],
           rows: ["Reproductive health", "Empowerment", "Labour market"] },
         { id: "d", type: "table", prompt: "Why does gender equality vary between countries? Through research, note reasons why it varies across the world. We will build on this in the lesson.",
-          note: "Use the countries in the Global Gender Gap Index rankings (World Economic Forum) on your class OneNote page to find some reasons.",
+          note: "Use the countries in the Global Gender Gap Index rankings (World Economic Forum) below to find some reasons.",
           before: IMG("cp12-gender-gap", "Global Gender Gap Index rankings"),
           cols: ["", "Country", "Reason"], rows: ["1", "2", "3", "4", "5", "6"] }
       ]
