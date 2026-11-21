@@ -223,3 +223,57 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+/* ---- Games inside lesson pages ----
+   Any activity card that links to a game (/geography/games/...) shows the
+   game itself inside the card, as it looks when opened, with a link to open
+   it full screen. The frame grows to fit the game (same site, so its height
+   can be read). */
+(function () {
+  function setup() {
+    var links = document.querySelectorAll('.lh-mode a.lh-mode__btn[href^="/geography/games/"]');
+    if (!links.length) return;
+    var css = document.createElement('style');
+    css.textContent =
+      '.lh-mode--game{flex-wrap:wrap}' +
+      '.lh-game{flex:0 0 100%;margin-top:.9rem;border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#f4fafb}' +
+      '.lh-game iframe{display:block;width:100%;height:720px;border:0}' +
+      '.lh-mode--game .lh-mode__btn{white-space:nowrap}';
+    document.head.appendChild(css);
+    links.forEach(function (a) {
+      var card = a.closest('.lh-mode');
+      if (!card || card.classList.contains('lh-mode--game')) return;
+      card.classList.add('lh-mode--game');
+      var title = (card.querySelector('.lh-mode__title') || {}).textContent || 'Game';
+      a.textContent = 'Open full screen \u2197';
+      var box = document.createElement('div');
+      box.className = 'lh-game';
+      var f = document.createElement('iframe');
+      f.src = a.getAttribute('href');
+      f.title = title;
+      f.loading = 'lazy';
+      f.setAttribute('allow', 'clipboard-write; fullscreen');
+      box.appendChild(f);
+      card.appendChild(box);
+      function fit() {
+        try {
+          var d = f.contentDocument; if (!d || !d.body) return;
+          var h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight);
+          // At most about one screen high; longer games scroll inside the frame.
+          var cap = Math.max(620, Math.min(900, Math.round(window.innerHeight * 0.88)));
+          var want = Math.min(h, cap), cur = f.getBoundingClientRect().height;
+          if (h > 200 && Math.abs(want - cur) > 8) f.style.height = want + 'px';
+        } catch (e) {}
+      }
+      f.addEventListener('load', function () {
+        fit();
+        try {
+          if (window.ResizeObserver) new ResizeObserver(fit).observe(f.contentDocument.body);
+          f.contentDocument.addEventListener('click', function () { setTimeout(fit, 60); });
+        } catch (e) {}
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
+  else setup();
+})();

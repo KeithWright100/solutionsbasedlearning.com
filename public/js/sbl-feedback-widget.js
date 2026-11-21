@@ -16,6 +16,8 @@
 // to load.
 
 (function () {
+  // Games shown inside a lesson page (iframe) use the lesson page's own buttons.
+  try { if (window.self !== window.top && window.parent.location.host === location.host) return; } catch (e) {}
   if (window.__sblFeedbackWidgetLoaded) return;
   window.__sblFeedbackWidgetLoaded = true;
 

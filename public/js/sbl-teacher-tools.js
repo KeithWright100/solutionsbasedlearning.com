@@ -15,6 +15,7 @@
  * The unlock choice is remembered per game on this device.
  */
 (function () {
+  try { if (window.self !== window.top && window.parent.location.host === location.host) return; } catch (e) {}
   'use strict';
   if (window.__sblTeacherTools) return;
   window.__sblTeacherTools = true;

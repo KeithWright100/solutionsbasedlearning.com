@@ -206,6 +206,8 @@
 
   function build() {
     if (document.querySelector('.sn-root')) return;
+    // A game shown inside a lesson page doesn't need a second menu bar.
+    try { if (window.self !== window.top && window.parent.location.host === location.host) return; } catch (e) {}
     root = document.getElementById('sbl-nav');
     var compact = !root;
     if (!root) { root = document.createElement('div'); document.body.insertBefore(root, document.body.firstChild); }
