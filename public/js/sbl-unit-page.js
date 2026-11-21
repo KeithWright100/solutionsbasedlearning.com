@@ -64,15 +64,15 @@
     ".up-th small{margin-left:auto;font-size:.8rem;color:var(--lh-muted);white-space:nowrap}" +
     ".up-bar{height:5px;border-radius:5px;background:var(--lh-border);margin:0 0 .9rem 46px;overflow:hidden}.up-bar i{display:block;height:100%;background:var(--lh-teal);border-radius:5px}" +
     ".up-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.8rem}" +
-    ".up-card{position:relative;display:flex;flex-direction:column;gap:.45rem;min-height:128px;background:var(--lh-surface);border:1px solid var(--lh-border);border-radius:14px;padding:.9rem 1rem;text-decoration:none;color:var(--lh-ink);transition:border-color .15s,transform .15s,box-shadow .15s}" +
-    ".up-card:hover{border-color:var(--lh-teal);transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,60,70,.08)}" +
+    ".up-card{position:relative;display:flex;flex-direction:column;gap:.45rem;min-height:128px;background:var(--lh-surface);border:2px solid var(--lh-teal);border-radius:14px;padding:.9rem 1rem;text-decoration:none;color:var(--lh-ink);transition:border-color .15s,transform .15s,box-shadow .15s}" +
+    ".up-card:hover{border-color:var(--lh-teal-deep);transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,60,70,.08)}" +
     ".up-l{font:500 .7rem var(--lh-font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--lh-muted)}" +
     ".up-t{font-weight:600;font-size:.93rem;line-height:1.35}" +
     ".up-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:auto}" +
     ".up-tag{font-size:.7rem;font-weight:600;border-radius:6px;padding:.12rem .45rem}" +
     ".up-tag--case{background:var(--lh-purple-bg);color:var(--lh-purple)}.up-tag--flip{background:var(--lh-teal-bg);color:var(--lh-teal-deep)}.up-tag--hl{background:var(--lh-gold-bg);color:var(--lh-gold)}" +
     ".up-st{font-size:.74rem;font-weight:600;color:var(--lh-muted)}.up-st--done{color:var(--lh-green)}.up-st--prog{color:var(--lh-orange)}" +
-    ".up-card--done{border-color:var(--lh-green-bg)}" +
+    ".up-card--done{border-color:var(--lh-green)}" +
     ".up-go{position:absolute;right:.9rem;top:.85rem;width:16px;height:16px;color:var(--lh-muted)}.up-card:hover .up-go{color:var(--lh-teal)}" +
     "@media (max-width:640px){.up-bar{margin-left:0}.up-grid{grid-template-columns:1fr}}";
   document.head.appendChild(css);
