@@ -354,20 +354,64 @@
       ]
     },
     CP11: [{
-      title: "Ageing populations: the UK and Japan",
+      title: "Japan\u2019s ageing population",
+      overview: {
+        heading: "Population possibilities and power over the decision-making process",
+        intention: "To engage with issues that have local and global significance.",
+        sdgs: [{ n: 1, t: "No poverty", c: "#e5243b" }],
+        syllabus: ["Policies associated with managing population change, focusing on: policies related to ageing societies; pro-natalist or anti-natalist policies."],
+        success: ["Describe and explain the issues relating to ageing populations.", "Suggest possible solutions to the issues of ageing populations.",
+          "Examine the policies that have been implemented to reduce the impacts of ageing societies in Japan.",
+          "Explain the issues and management options to solve The Gambia\u2019s youthful population (anti-natalist)."] },
       intro: "Complete this before the lesson. Use the Teach Me Live bot on this page to help you.",
       parts: [
+        { id: "a", label: "a)", type: "questions", prompt: "Watch the video and answer the questions.",
+          links: [{ label: "Video: Japan\u2019s ageing population", url: "https://www.youtube.com/watch?v=R8wdLWUEnzI" }],
+          rows: ["How has the Japanese government responded to the ageing population?", "The ageing population has led to what kind of ‘revolution’?", "According to Sakae Matsuzawa, what is the secret to longevity?", "What is the average life expectancy in Japan?", "How many centenarians are there in Japan?", "What percentage of the Japanese population is elderly?", "What percentage of the population will be elderly by 2050?", "How much of Japan’s budget is spent on pensions and social security?", "What percentage of social aid is allocated to the elderly?", "How has the worker-to-retiree ratio changed since 1965?", "How many elderly people live alone?", "How much is the robot industry worth?", "What startling fact is revealed about nappies?", "Which possible solution is hindered by language and cultural issues?", "What will happen to Japan’s consumption tax?"] },
+        { id: "b", label: "b)", type: "text", prompt: "Optional: watch this video and take notes on how Japan has dealt with an ageing population.",
+          links: [{ label: "Video: How is Japan dealing with its rapidly ageing population?", url: "https://www.youtube.com/watch?v=wF14TCrMN2Q" }] }
+      ]
+    }, {
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "Population policies",
+      intro: "Before the lesson: complete the Flip learning above.",
+      parts: [
+        { type: "part", text: "Part 1: Ageing societies" },
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter: can you do this?",
+          note: "\u201cA stupendous 20% of the country is said to participate in radio callisthenics on a regular basis.\u201d Let\u2019s have a go!" },
+        { id: "s1", label: "", type: "text", prompt: "Why might regular exercise like this matter for an ageing society?",
+          links: [{ label: "Video: Japanese radio callisthenics (rajio taiso)", url: "https://www.youtube.com/watch?v=yKTgY9VG3RM" }, { label: "Read more (Japan Centre blog)", url: "https://www.japancentre.com/en/blogs" }] },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
         { type: "heading", text: "Activity 1: What do you know?",
-          note: "In class you will mind map these on the large whiteboards. Prepare your notes now, using the UK and/or Japan. If you can make judgements about the implications of the solutions, even better." },
-        { id: "a", label: "", type: "table", prompt: "",
-          links: [{ label: "Help link: Japan's pro-natal policy (Prezi)", url: "https://prezi.com/qayllgzlbrbf/japans-pro-natal-policy/" }],
-          cols: ["", "Your notes (UK and/or Japan)"],
-          rows: ["Calculation of the dependency ratio", "Reasons for an ageing population", "Problems", "Potential solutions"] },
-        { type: "heading", text: "Activity 2: Read the population data sets",
-          note: "Use the population data sets for Japan in Firefly (the 2018 population pyramid and the total fertility rate graph) to analyse the national trends." },
-        { id: "b", type: "text", label: "", before: '<div class="fl__imgs">' + IMG("cp11-japan-pyramid", "Japan population pyramid, 2018") + IMG("cp11-fertility", "Total fertility rate in the USA and Japan, 1947 to 2010") + "</div>", prompt: "What national trends do the data sets show for Japan? Use figures from the data." },
-        { type: "heading", text: "Extension" },
-        { id: "c", type: "text", label: "", prompt: "Why did so many Japanese families avoid having children in 1966? Who were the Firehorse women?", video: true }
+          note: "On the large whiteboards, mind map the following. You can use the UK and/or Japan. If you can make judgements about the implications of the solutions, even better." },
+        { id: "m1", label: "", type: "table", prompt: "",
+          links: [{ label: "Help link: Japan\u2019s pro-natal policy (Prezi)", url: "https://prezi.com/qayllgzlbrbf/japans-pro-natal-policy/" }],
+          cols: ["", "Your notes"], rows: ["Calculation of the dependency ratio", "Reasons for an ageing population", "Problems", "Potential solutions"] },
+        { type: "heading", text: "Activity 2: Ageing societies sort" },
+        { id: "w12", label: "", type: "sort", cardCol: "Statement", binCol: "Category", prompt: "Sort the statements into causes, consequences or solutions relating to ageing societies.",
+          bins: ["Causes", "Consequences", "Solutions"], cards: [{ t: "A huge tax burden on workers to cover the pensions of an increasing elderly population.", a: ["Consequences"] }, { t: "The decline in the birth rate in HICs has increased the percentage of elderly in the population structure.", a: ["Causes"] }, { t: "Economic decline as the proportion of working age decreases and there is less tax revenue.", a: ["Consequences"] }, { t: "Encourage immigration of working-age migrants to fill labour and tax shortages.", a: ["Solutions"] }, { t: "An even wider differential between the life expectancy of HICs and LICs.", a: ["Consequences"] }, { t: "Raise the retirement age, thus increasing the length of the working life and payment of taxes.", a: ["Solutions"] }, { t: "Over-65s are expected to go from 7% to 14% of the world’s population.", a: ["Consequences"] }, { t: "The ‘baby boom’ increase in fertility rates after WWII is now reaching old age.", a: ["Causes"] }, { t: "Grandparents are available as cheap childcare, enabling parents to work.", a: ["Consequences"] }, { t: "An increase in the old age dependency ratio.", a: ["Consequences"] }, { t: "The government embarks on a pro-natalist policy to raise fertility rates.", a: ["Solutions"] }, { t: "The ‘grey economy’ is created, consisting of a large market of money- and time-rich consumers.", a: ["Consequences"] }, { t: "Improvements in health care and medical advances have increased life expectancy.", a: ["Causes"] }, { t: "Provide volunteering, unpaid, artistic and social opportunities for the elderly to maintain a mentally healthy elderly population.", a: ["Solutions"] }, { t: "An increase in health care provision needed to cover elderly needs.", a: ["Consequences"] }, { t: "Improvements in food production, diet and health in HICs help the elderly to live longer.", a: ["Causes"] }, { t: "The need for immigration to fill labour and tax shortages.", a: ["Consequences", "Solutions"] }, { t: "The retirement age and the age to qualify for pensions may be raised.", a: ["Solutions"] }, { t: "Utilise the experience and skills of the elderly by providing more flexible work placements.", a: ["Solutions"] }] },
+        { type: "heading", text: "Activity 3: Read the population data sets" },
+        { id: "d1", label: "", type: "text", before: '<div class="fl__imgs">' + IMG("cp11-japan-pyramid", "Japan population pyramid, 2018") + IMG("cp11-fertility", "Total fertility rate in Japan and the USA") + "</div>",
+          prompt: "Use the population data sets for Japan to analyse the national trends. Use figures from the data." },
+        { id: "d2", label: "", type: "text", prompt: "Extension: why did so many Japanese families avoid having children in 1966? Who were the Firehorse women?", video: true },
+        { type: "heading", text: "Activity 4: Managing Japan\u2019s ageing population",
+          note: "Complete all five briefings. Each briefing has a Copy to OneNote button, so all your work can go into your pages in a few clicks." },
+        { type: "game", src: "/geography/games/japan-ageing", title: "Japan: The Ageing Nation" },
+        { type: "part", text: "Part 2: Evaluating pro- and anti-natalist policies" },
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "What we are working on",
+          note: "Evaluating using specific information and detail \u00b7 analysing a range of resources \u00b7 recapping graphs and models already taught \u00b7 drawing conclusions from the evidence." },
+        { id: "p1", label: "a)", type: "table", prompt: "Definitions of pro- and anti-natalist policies, with named examples.",
+          cols: ["", "Definition", "Named example"], rows: ["Pro-natalist policy", "Anti-natalist policy"] },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
+        { type: "heading", text: "Population Policy Lab: The Gambia and Singapore", note: "Work through the lab. You might need to screenshot some sources into OneNote." },
+        { type: "game", src: "/geography/games/population-policy-lab", title: "Population Policy Lab" },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
+        { type: "heading", text: "Past paper question time" },
+        { id: "q1", label: "", type: "text", prompt: "Explain three social or economic impacts of an anti-natalist policy in one named country. [2+2+2]",
+          note: "Point-development: for each impact, one mark for the point and one for developing it with detail from your named country. Then mark it with the self-marking practice bot.",
+          links: [{ label: "Self-marking practice: Changing Population questions", url: "/geography/revision/paper-questions/changing-population" }] }
       ]
     }],
     CP12: [{
@@ -1063,6 +1107,8 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl-game{border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#f4fafb;margin:.3rem 0}.fl-game iframe{display:block;width:100%;height:880px;border:0}" +
+    ".fl__part-title{margin:2.4rem 0 .2rem;padding:.6rem .9rem;border-radius:10px;background:#6b4fb3;color:#fff;font:700 1.1rem var(--lh-font-display)}" +
     ".fl__facts{margin:.3rem 0;padding-left:1.2rem;color:var(--lh-body)}.fl__facts li{margin:.25rem 0}" +
     ".fl__stage{display:block;width:100%;max-width:600px;height:auto;border-radius:12px;margin:2rem 0 .3rem}" +
     ".fl--inline{border-left:0;border-top:5px solid var(--lh-orange);padding:0}.fl__ihead{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem .2rem}.fl__ihead h2{margin:0;font:700 1.3rem var(--lh-font-display);color:var(--lh-ink);flex:1}.fl--inline .fl__body{border-top:0}" +
@@ -1187,6 +1233,12 @@
       return;
     }
     if (p.type === "html") { h += '<div class="fl__part">' + p.html + "</div>"; return; }
+    if (p.type === "game") {
+      h += '<div class="fl__part"><div class="fl-game"><iframe src="' + esc(p.src) + '" title="' + esc(p.title || "Game") + '" loading="lazy" allow="clipboard-write; fullscreen"></iframe></div>' +
+        '<a class="fl__video" href="' + esc(p.src) + '" target="_blank" rel="noopener">Open full screen \u2197</a></div>';
+      return;
+    }
+    if (p.type === "part") { h += '<h2 class="fl__part-title">' + esc(p.text) + "</h2>"; return; }
     if (p.type === "banner") { h += '<img class="fl__stage" src="' + esc(p.src) + '" alt="' + esc(p.alt || "") + '">'; return; }
     var lab = p.label != null ? p.label : p.id + ")";
     h += '<div class="fl__part">';
@@ -1306,6 +1358,19 @@
   var edBtn = root.querySelector(".fl-edit");
   if (edBtn) edBtn.onclick = function () { openEditor(base, n, ed, root); };
   var inputs = root.querySelectorAll(".fl-in");
+  // Games placed inside the lesson: fit the frame, and hide the same game's card further down.
+  root.querySelectorAll(".fl-game iframe").forEach(function (f) {
+    var href = f.getAttribute("src");
+    document.querySelectorAll('.lh-mode a.lh-mode__btn[href="' + href + '"]').forEach(function (a) { var c = a.closest(".lh-mode"); if (c) c.style.display = "none"; });
+    function fit() {
+      try {
+        var d = f.contentDocument; if (!d || !d.body) return;
+        var hh = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight), cap = Math.max(620, Math.min(900, Math.round(window.innerHeight * 0.88)));
+        var want = Math.min(hh, cap); if (hh > 200 && Math.abs(want - f.getBoundingClientRect().height) > 8) f.style.height = want + "px";
+      } catch (e) {}
+    }
+    f.addEventListener("load", function () { fit(); try { if (window.ResizeObserver) new ResizeObserver(fit).observe(f.contentDocument.body); } catch (e) {} });
+  });
 
   function state() {
     root.querySelectorAll(".fl__wc").forEach(function (el) {

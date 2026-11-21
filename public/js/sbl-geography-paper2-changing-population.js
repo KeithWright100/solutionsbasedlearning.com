@@ -263,4 +263,16 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   }
+  ,
+  {
+    topic: "SBL practice \u2014 Population policies (6 marks)",
+    questions: [
+      {
+        label: "SBL practice \u2014 Anti-natalist policy impacts \u2014 6 marks",
+        marks: 6,
+        question: "Explain (2+2+2 marks). Explain three social or economic impacts of an anti-natalist population policy in one named country.",
+        markScheme: "Point-development marking. For each of three distinct impacts: award one mark for a valid social or economic impact of an anti-natalist policy and a second mark for development that explains it or adds specific detail from the named country (a fact, figure, date or place). Maximum 2 marks per impact; maximum 6. Impacts must be different (not the same impact restated) and must be social or economic, not just demographic. Credit, for example: an ageing population and rising old-age dependency, increasing pension and health care costs (China\u2019s one-child policy, 1980\u20132015; the \u20184-2-1\u2019 family problem); a skewed sex ratio at birth caused by son preference, leading to a surplus of men who cannot find partners and to bride trafficking (China, about 117 boys per 100 girls at its peak in the late 2000s); future labour shortages and slower economic growth as the working-age population shrinks; more investment per child in education and health, raising human capital and household savings; women gaining more education and joining the workforce; or human rights concerns such as forced sterilisations and abortions, fines and the \u2018hidden\u2019 unregistered children who lacked access to schools and services. Thailand\u2019s voluntary family planning programme or India\u2019s sterilisation campaigns are also acceptable named examples. Do not credit impacts with no link to a named country beyond the first mark of each pair. Do not credit pro-natalist examples."
+      }
+    ]
+  }
 ].concat((window.SBL_REVISION_TOPICS || []).map(function (t) { if (!/^May \d{4}/.test(t.topic)) t.topic = 'May 2019 — ' + t.topic; return t; }));
