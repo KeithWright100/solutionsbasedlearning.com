@@ -178,10 +178,10 @@
       cols: [
         { title: 'My classes', items: [
           ['Teacher dashboard', '/teacher'],
-          ['Display mode (big screen)', '/display']] },
-        { title: 'Admin', adminOnly: true, items: [
-          ['Users, groups & subjects', '/admin']] }
-      ] }
+          ['Display mode (big screen)', '/display']] }
+      ] },
+    // A plain link (no dropdown): only shown to admin logins.
+    { key: 'adm', label: 'Admin', color: 'var(--sn-tch)', href: '/admin', teacher: true, adminOnly: true, cols: [] }
   ];
   window.SBL_NAV = SBL_NAV;
 
@@ -196,7 +196,7 @@
 
   var role = '';
   function visibleMenus() {
-    return SBL_NAV.filter(function (m) { return !m.teacher || role === 'teacher' || role === 'admin'; })
+    return SBL_NAV.filter(function (m) { return (!m.teacher || role === 'teacher' || role === 'admin') && (!m.adminOnly || role === 'admin'); })
       .map(function (m) {
         return Object.assign({}, m, { cols: m.cols.filter(function (c) { return !c.adminOnly || role === 'admin'; }) });
       });
@@ -248,6 +248,11 @@
     menus.forEach(function (m) {
       var wrap = document.createElement('div');
       wrap.className = 'sn-menu';
+      if (m.href) {
+        wrap.innerHTML = '<a class="sn-btn" href="' + esc(m.href) + '"><span class="sn-dot" style="background:' + m.color + '"></span>' + esc(m.label) + '</a>';
+        holder.appendChild(wrap);
+        return;
+      }
       wrap.innerHTML = '<button type="button" class="sn-btn" aria-expanded="false" aria-controls="sn-p-' + m.key + '"><span class="sn-dot" style="background:' + m.color + '"></span>' + esc(m.label) + CHEV + '</button>';
       var p = document.createElement('div');
       p.className = 'sn-panel'; p.id = 'sn-p-' + m.key;
@@ -275,6 +280,7 @@
     });
     // phone menu
     mob.innerHTML = menus.map(function (m) {
+      if (m.href) return '<a class="sn-mob__link" href="' + esc(m.href) + '"><span class="sn-dot" style="background:' + m.color + '"></span>' + esc(m.label) + '</a>';
       return '<details><summary><span class="sn-dot" style="background:' + m.color + '"></span>' + esc(m.label) + CHEV + '</summary><div class="sn-mob__sub">' +
         (m.all ? '<a href="' + esc(m.all[1]) + '"><strong>' + esc(m.all[0]) + '</strong></a>' : '') +
         m.cols.map(function (c) {
@@ -332,6 +338,7 @@
       out.push({ label: label, href: href, where: where, t: clean(label), hay: clean(label + ' ' + where + ' ' + (extra || '')), rank: rank });
     }
     visibleMenus().forEach(function (m) {
+      if (m.href) add(m.label, m.href, '', '', 0);
       m.cols.forEach(function (c) {
         if (c.href) add(c.title, c.href, m.label, '', 0);
         var head = '';
