@@ -784,16 +784,6 @@
       sub: "Low screen time: most activities use printed cards. Use this panel to run, check and record them.",
       intro: "Before the lesson: complete the Flip learning key terms above. Optional: play the first levels of the Leisure Quest.",
       parts: [
-        { id: "plan", label: "", type: "table", prompt: "Lesson plan", given: true, rhw: "14%",
-          cols: ["Time", "Activity", "What happens"],
-          rows: ["0\u20135 min", "5\u201310 min", "10\u201320 min", "20\u201335 min", "35\u201350 min", "50\u201360 min"],
-          prefill: {
-            0: ["Then-and-now line-up", "Pairs order picture cards A\u2013H in time order and say what changed."],
-            1: ["Key-term Taboo", "Describe the word on the card without saying it or the banned words."],
-            2: ["Human graph + TEA", "Students stand on a 1970\u20132006 floor axis as data points for working hours, then write a 3-mark answer using TEA."],
-            3: ["Factor card sort + ranking", "Sort 15 cards into Technology, Affluence and Accessibility; orange cards are rule-breakers; rank the top 3."],
-            4: ["Jigsaw: Nagle and Cooke pp. 213\u2013217", "Expert groups A, B and C read one section each, fill their rows, then regroup and teach."],
-            5: ["Relay brain dump", "Teams take turns at the whiteboard, one point each, for 3 minutes; circle the point most likely to appear in an exam."] } },
         { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
         { type: "heading", text: "Starter: test your key terms" },
         { id: "st", label: "", type: "text", prompt: "Use the flashcards to test yourself on the key terms. Write down any terms you got wrong.",
@@ -946,7 +936,7 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
-    ".fl__stage{display:block;width:100%;max-width:340px;height:auto;border-radius:10px;margin:2rem 0 .2rem}" +
+    ".fl__stage{display:block;width:100%;max-width:600px;height:auto;border-radius:12px;margin:2rem 0 .3rem}" +
     ".fl--inline{border-left:0;border-top:5px solid var(--lh-orange);padding:0}.fl__ihead{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem .2rem}.fl__ihead h2{margin:0;font:700 1.3rem var(--lh-font-display);color:var(--lh-ink);flex:1}.fl--inline .fl__body{border-top:0}" +
     ".lh-ov{display:flex;flex-direction:column;gap:.8rem;margin:0 0 1.2rem}.lh-ov__li{border:3px solid #e0782b;border-radius:12px;background:#fff;padding:.8rem 1rem;font-size:1.02rem;color:var(--lh-ink)}" +
     ".lh-ov__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}.lh-ov__box{border:3px solid #2ea44f;border-radius:12px;background:#fff;padding:.8rem 1rem}" +
