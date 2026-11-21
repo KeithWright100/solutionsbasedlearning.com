@@ -93,7 +93,7 @@
       '<div class="sh-level" style="--lc:' + l.c + '"><div class="sh-start' + (l.soon ? ' soon' : '') + '" style="--lc:' + l.c + '"><div><span class="lvl-badge" style="background:rgba(255,255,255,.2)">' + esc(l.badge) + '</span><h3>' + esc(l.title) + '</h3><p>' + esc(l.blurb || '') + '</p></div>' +
       (l.soon ? '<span class="go" style="background:#dfe6ea;color:#5f7382">Coming soon</span>' : (l.start ? '<a class="go" href="' + esc(l.start[1]) + '">' + esc(l.start[0]) + ' →</a>' : '')) + '</div>' +
       '<div class="sh-res">' + l.items.map(function (it) { return '<a class="sh-tile" href="' + esc(it[1]) + '"><span class="ic">' + icon(iconFor(it[0])) + '</span><span><b>' + esc(it[0]) + (it[2] === 'new' ? '<span class="pill">New</span>' : '') + '</b><small>' + esc(sub(it[0])) + '</small></span></a>'; }).join('') + '</div>' +
-      (l.units.length ? '<div class="sh-units"><span class="lab">Units</span>' + l.units.map(function (u) { return '<a href="' + esc(u[1]) + '">' + esc(u[0]) + '</a>'; }).join('') + '</div>' : '') +
+      (l.units.length ? '<div class="sh-units"><span class="lab">Lesson units</span>' + l.units.map(function (u) { return '<a href="' + esc(u[1]) + '">' + esc(u[0]) + '</a>'; }).join('') + '</div>' : '') +
       '</div></section>';
   });
 
