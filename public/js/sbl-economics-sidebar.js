@@ -99,16 +99,27 @@
     html += "</div>";
 
     html += '<a class="lh-sidebar__home" href="/economics">' + icon("home") + "<span>Economics overview</span></a>";
-    html += '<a class="lh-sidebar__home" href="/economics/revision/guide">' + icon("book") + "<span>Full revision guide</span></a>";
-    html += '<a class="lh-sidebar__home" href="/economics/revision/topics">' + icon("book") + "<span>Revise by topic</span></a>";
-    html += '<a class="lh-sidebar__home" href="/economics/exam-tips">' + icon("book") + "<span>Exam tips</span></a>";
 
-    if (!TREE.length) {
-      html += '<div class="lh-sidebar__section">';
-      html += '<div class="lh-sidebar__section-title">Syllabus</div>';
-      html += '<p style="padding:0 1rem; font-size:0.82rem; color:var(--lh-muted);">Units are being added — check back soon.</p>';
-      html += "</div>";
+    // Same three sections as the overview page: Syllabus, Revision bot, Practice.
+    var here = location.pathname.replace(/\/index\.html$/, "").replace(/\/+$/, "");
+    function link(label, href, sub) {
+      var on = here === href.replace(/\/+$/, "");
+      return '<div class="lh-unit' + (on ? " lh-unit--active" : "") + '"><a class="lh-unit__link" href="' + href + '"><span>' + label + (sub ? '<small style="display:block;font-size:0.72rem;color:var(--lh-muted);font-weight:400;margin-top:2px">' + sub + "</small>" : "") + "</span></a></div>";
     }
+    function section(title, sub, links) {
+      return '<div class="lh-sidebar__section"><div class="lh-sidebar__section-title">' + title + "</div>" +
+        '<p style="padding:0 1rem;margin:-0.2rem 0 0.4rem;font-size:0.76rem;color:var(--lh-muted);">' + sub + "</p>" + links + "</div>";
+    }
+    html += section("Syllabus", "Full revision guide", link("Full revision guide", "/economics/revision/guide", "All four units, SL and HL"));
+    html += section("Revision bot", "Learn and be tested by a bot",
+      link("Unit 1: Introduction to Economics", "/economics/revision/topics/introduction-to-economics") +
+      link("Unit 2: Microeconomics", "/economics/revision/topics/microeconomics") +
+      link("Unit 3: Macroeconomics", "/economics/revision/topics/macroeconomics") +
+      link("Unit 4: The Global Economy", "/economics/revision/topics/the-global-economy") +
+      link("All topics", "/economics/revision/topics"));
+    html += section("Practice", "Answer PPQs, with immediate score and feedback",
+      link("Past paper questions", "/economics/revision/guide/past-paper-questions/", "Self-marking, with feedback") +
+      link("Exam tips", "/economics/exam-tips", "Command terms and technique"));
 
     TREE.forEach(function (group) {
       html += '<div class="lh-sidebar__section">';
