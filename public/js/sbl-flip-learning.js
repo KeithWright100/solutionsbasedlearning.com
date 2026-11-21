@@ -738,7 +738,7 @@
           rows: ["What does \u2018designed for the dump\u2019 mean?", "How is this achieved by companies?", "Why do companies design goods that will soon be put in the dump?", "How is Annie\u2019s DVD player designed for the dump?", "How many months is the average electronic item used for?", "How many raw materials are used in the manufacturing of electronics?", "What is added to the raw materials during manufacturing? Give an example.", "What has been the impact of electronics manufacturing in Silicon Valley, California, on (a) the environment?", "\u2026and (b) people?", "What is e-waste?", "What waste comes out of electronic goods?", "Where is most e-waste recycling done?", "How is e-waste recycled?", "What are the impacts of e-waste?", "What does \u2018externalising the true cost of production\u2019 mean?", "Explain the term extended producer responsibility (take-back).", "Why are there few \u2018green\u2019 electronics for consumers?"] }
       ]
     },
-    LT01: {
+    LT01: [{
       title: "Key terms glossary: leisure, tourism and sport",
       intro: "Complete the key terms table before the lesson. For each key term, choose the matching definition from the drop-down (it turns green when it is right), then give your own example.",
       parts: [
@@ -771,7 +771,58 @@
           { t: "Resorts", d: "A settlement where the primary function is tourism. Resorts are normally associated with the coast. Large hotel complexes are considered to be resorts." },
           { t: "All-inclusive", d: "When tourists pay a hotel complex one price which includes all meals, drinks, entertainment, activities, etc. All-inclusive holidays are very common in the Mediterranean and the Caribbean." } ] }
       ]
-    },
+    }, {
+      kind: "lesson",
+      title: "How have leisure patterns changed?",
+      time: "about 60 minutes",
+      sub: "Low screen time: most activities use printed cards. Use this panel to run, check and record them.",
+      intro: "Before the lesson: complete the Flip learning key terms above. Optional: play the first levels of the Leisure Quest.",
+      parts: [
+        { id: "plan", label: "", type: "table", prompt: "Lesson plan", given: true, rhw: "14%",
+          cols: ["Time", "Activity", "What happens"],
+          rows: ["0\u20135 min", "5\u201310 min", "10\u201320 min", "20\u201335 min", "35\u201350 min", "50\u201360 min"],
+          prefill: {
+            0: ["Then-and-now line-up", "Pairs order picture cards A\u2013H in time order and say what changed."],
+            1: ["Key-term Taboo", "Describe the word on the card without saying it or the banned words."],
+            2: ["Human graph + TEA", "Students stand on a 1970\u20132006 floor axis as data points for working hours, then write a 3-mark answer using TEA."],
+            3: ["Factor card sort + ranking", "Sort 15 cards into Technology, Affluence and Accessibility; orange cards are rule-breakers; rank the top 3."],
+            4: ["Jigsaw: Nagle and Cooke pp. 213\u2013217", "Expert groups A, B and C read one section each, fill their rows, then regroup and teach."],
+            5: ["Relay brain dump", "Teams take turns at the whiteboard, one point each, for 3 minutes; circle the point most likely to appear in an exam."] } },
+        { type: "heading", text: "Starter: test your key terms" },
+        { id: "st", label: "", type: "text", prompt: "Use the flashcards to test yourself on the key terms. Write down any terms you got wrong.",
+          links: [{ label: "Quizlet: IB Geography: Leisure, Sport and Tourism", url: "https://quizlet.com/br/365094824/ib-geography-leisure-sport-and-tourism-flash-cards/" }] },
+        { type: "heading", text: "Activity 1: Then and now", note: "In pairs, put the picture cards in order from oldest to newest. For each move along the line, say one thing that changed." },
+        { id: "a1", label: "a)", type: "order", prompt: "Put picture cards A\u2013H in time order, oldest to newest.", cards: [{ k: "A", text: "Families sit in striped deckchairs on a crowded beach at a seaside resort in their home country; they arrived by steam train.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"128\" cy=\"16\" r=\"9\"/><path d=\"M8 34 q12 -8 24 0 t24 0 t24 0 t24 0 t24 0 t24 0\"/><rect x=\"0\" y=\"40\" width=\"160\" height=\"30\" fill=\"#f3dcae\" stroke=\"none\"/><path d=\"M40 62 l10 -18 l10 18 M45 53 h10 M84 62 l10 -18 l10 18 M89 53 h10\"/></g></svg>" }, { k: "B", text: "Workers from the same factory play football against another factory’s team on a Saturday afternoon, their only day off besides Sunday.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 62 V24 l14 -10 v48 M18 24 h14\"/><path d=\"M30 14 v-6 h4 v10\"/><circle cx=\"80\" cy=\"54\" r=\"7\"/><circle cx=\"118\" cy=\"18\" r=\"6\"/><path d=\"M118 24 v20 l-8 18 M118 44 l8 18 M106 32 l12 -4 l10 6\"/><path d=\"M10 64 h140\"/></g></svg>" }, { k: "C", text: "A family boards a chartered jet for a two-week package holiday to a beach hotel in Spain; flights, hotel and meals are all in one price.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M30 48 l90 -26 c10 -3 16 2 10 8 l-86 32 z\"/><path d=\"M78 34 l-14 -20 h8 l24 16 M74 46 l-6 16 h8 l14 -20\"/><path d=\"M14 66 h132\"/></g></svg>" }, { k: "D", text: "The whole family gathers in the living room to watch one of the country’s few TV channels on a new black-and-white television.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"50\" y=\"20\" width=\"60\" height=\"38\" rx=\"6\"/><rect x=\"58\" y=\"27\" width=\"44\" height=\"24\" rx=\"3\"/><path d=\"M66 20 l-10 -12 M94 20 l10 -12 M60 58 v8 M100 58 v8\"/></g></svg>" }, { k: "E", text: "An aerobics class in leg warmers at a new private gym; members pay a monthly fee to keep fit.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"80\" cy=\"12\" r=\"6\"/><path d=\"M80 18 v22 l-10 22 M80 40 l10 22 M66 6 l14 18 l14 -18\"/><path d=\"M64 60 h-6 M102 60 h-6\"/><path d=\"M20 30 h20 M20 24 v12 M40 24 v12 M120 30 h20 M120 24 v12 M140 24 v12\"/></g></svg>" }, { k: "F", text: "Friends book cheap flights online with a budget airline for a weekend city break in another European capital.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"36\" y=\"22\" width=\"56\" height=\"34\" rx=\"3\"/><path d=\"M28 60 h72\"/><path d=\"M110 30 l30 -10 c4 -1 6 2 2 4 l-28 14 z M126 24 l-6 -8 h4 l10 6\"/></g></svg>" }, { k: "G", text: "Millions of people watch professional players compete in a video game tournament streamed live online, filling a stadium too.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"20\" y=\"8\" width=\"70\" height=\"40\" rx=\"4\"/><path d=\"M48 20 l14 8 l-14 8 z\"/><path d=\"M104 40 h40 c8 0 10 20 2 20 c-6 0 -8 -8 -12 -8 h-20 c-4 0 -6 8 -12 8 c-8 0 -6 -20 2 -20 z M112 46 v8 M108 50 h8 M136 48 v.1 M132 52 v.1\"/></g></svg>" }, { k: "H", text: "With travel banned, people stay at home streaming films on demand and joining online workout classes on their laptops.", icon: "<svg viewBox=\"0 0 160 70\" aria-hidden=\"true\"><g stroke=\"#173a5e\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 36 l30 -24 l30 24 v30 h-60 z\"/><path d=\"M42 66 v-16 h16 v16\"/><rect x=\"96\" y=\"22\" width=\"50\" height=\"30\" rx=\"3\"/><path d=\"M90 56 h62\"/><path d=\"M116 30 l12 7 l-12 7 z\"/></g></svg>" }], answer: ["B", "A", "D", "C", "E", "F", "G", "H"] },
+        { id: "a1b", label: "b)", type: "questions", prompt: "Three things that changed about leisure over time.", rows: ["First change", "Second change", "Third change"] },
+        { type: "heading", text: "Activity 2: Key-term Taboo",
+          note: "Work in pairs. Describe the word on the card so your partner can guess it, without saying the word or the three banned words. Swap roles after each card. 5 minutes." },
+        { type: "timer", minutes: 5, label: "5-minute timer" },
+        { id: "a2", label: "", type: "taboo", prompt: "", cards: [{ t: "Leisure", ban: ["free time", "work", "relax"] }, { t: "Recreation", ban: ["hobby", "activity", "free time"] }, { t: "Tourism", ban: ["holiday", "travel", "night"] }, { t: "Sport", ban: ["game", "compete", "rules"] }, { t: "Domestic tourism", ban: ["home", "country", "abroad"] }, { t: "International tourism", ban: ["abroad", "country", "border"] }, { t: "Mass tourism", ban: ["package", "crowds", "beach"] }, { t: "Niche tourism", ban: ["small", "specialist", "market"] }, { t: "Ecotourism", ban: ["nature", "green", "environment"] }, { t: "Affluence", ban: ["rich", "money", "wealth"] }, { t: "Disposable income", ban: ["spend", "money", "bills"] }, { t: "Accessibility", ban: ["reach", "transport", "easy"] }, { t: "Paid holidays", ban: ["work", "leave", "days"] }, { t: "Discretionary time", ban: ["free", "choose", "spare"] }, { t: "Leisure participation", ban: ["take part", "join", "activity"] }, { t: "Spectator sport", ban: ["watch", "stadium", "fan"] }] },
+        { type: "heading", text: "Activity 3: Human graph and TEA",
+          note: "Stand along the 1970\u20132006 floor axis as data points for average working hours. Then answer the exam question on your mini whiteboard using TEA." },
+        { id: "a3t", label: "", type: "table", prompt: "Describe the trend in working hours from 1970 to 2006. [3]", given: true,
+          cols: ["Letter", "What to write", "Mark"], rows: ["Trend", "Evidence", "Anomaly"],
+          prefill: { 0: ["The overall direction, e.g. \u201cWorking hours fell overall.\u201d", "[1]"],
+                     1: ["Figures with dates and units, e.g. \u201cfrom __ hours a week in 1970 to __ in 2006, a fall of __ hours.\u201d", "[1]"],
+                     2: ["A change in the rate or an exception, e.g. \u201cthe fall was fastest between __ and __\u201d.", "[1]"] } },
+        { id: "a3", label: "", type: "text", prompt: "My answer", note: "Don\u2019t explain why: the command term is describe. Use the graph\u2019s own numbers. Then swap with a partner: did you include T, E and A? Mark it out of 3." },
+        { type: "heading", text: "Activity 4: Why has leisure time grown?",
+          note: "Sort each factor card into Technology, Affluence or Accessibility. The orange rule-breaker cards could fit more than one box: decide where, and be ready to explain why." },
+        { id: "a4", label: "a)", type: "sort", prompt: "Factor card sort", bins: ["Technology", "Affluence", "Accessibility"], cards: [{ t: "Budget airlines and cheap flights", a: ["Technology", "Accessibility"] }, { t: "The internet and online booking", a: ["Technology"] }, { t: "Rising incomes", a: ["Affluence"] }, { t: "More paid holiday entitlement", a: ["Affluence"] }, { t: "Shorter working week", a: ["Affluence"] }, { t: "Machines do more of the housework", a: ["Technology"] }, { t: "Car ownership rises", a: ["Affluence", "Accessibility"] }, { t: "New motorways and high-speed rail", a: ["Accessibility"] }, { t: "Earlier retirement and longer life expectancy", a: ["Affluence"] }, { t: "Streaming and gaming at home", a: ["Technology"] }, { t: "Visa-free travel between countries", a: ["Accessibility"] }, { t: "More dual-income households", a: ["Affluence"] }, { t: "Package holidays (one price for all)", a: ["Affluence", "Accessibility"], rb: true }, { t: "Smartphones: maps, translation, payments", a: ["Technology", "Accessibility"], rb: true }, { t: "Credit cards and buy-now-pay-later", a: ["Affluence", "Technology"], rb: true }] },
+        { id: "a4r", label: "b)", type: "rank", prompt: "Rank the top 3 factors that have done most to increase leisure time and participation.", n: 3, options: ["Budget airlines and cheap flights", "The internet and online booking", "Rising incomes", "More paid holiday entitlement", "Shorter working week", "Machines do more of the housework", "Car ownership rises", "New motorways and high-speed rail", "Earlier retirement and longer life expectancy", "Streaming and gaming at home", "Visa-free travel between countries", "More dual-income households", "Package holidays (one price for all)", "Smartphones: maps, translation, payments", "Credit cards and buy-now-pay-later"] },
+        { id: "a4c", label: "c)", type: "text", prompt: "Why is your number 1 the most important?" },
+        { type: "heading", text: "Activity 5: Jigsaw: types of tourist and sporting activity",
+          note: "Nagle and Cooke pp. 213\u2013217. Expert group A: pp. 213\u2013214; B: pp. 215\u2013216; C: p. 217. Fill in your rows, then teach your new group and complete the rest." },
+        { id: "a5", label: "", type: "table", prompt: "",
+          cols: ["Type", "Description", "Example"],
+          rows: ["Domestic tourism", "International tourism", "Mass tourism", "Niche tourism", "Ecotourism", "Cultural / heritage tourism", "Adventure tourism", "Sports tourism", "Participant vs spectator"] },
+        { type: "heading", text: "Plenary: relay brain dump",
+          note: "In teams, take turns at the whiteboard: one point each, 3 minutes. Then circle the point most likely to appear in an exam." },
+        { type: "timer", minutes: 3, label: "3-minute relay" },
+        { type: "heading", text: "Extension", note: "Optional homework: watch the TED talk, then be ready for a \u201cstand on the line\u201d debate next lesson: \u201cThe pandemic changed leisure for good.\u201d" },
+        { id: "ex", label: "", type: "text", prompt: "Do you agree that the pandemic changed leisure for good? Note your view and two pieces of evidence.", video: true }
+      ]
+    }],
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -886,6 +937,18 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl--lesson{border-left-color:var(--lh-orange);margin:0}.fl--lesson .fl__logo-b{color:#c2410c}" +
+    ".fl-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem;margin:.4rem 0 .8rem}" +
+    ".fl-card{position:relative;border:1px dashed #9fb7c4;border-radius:10px;padding:.5rem .6rem;background:#fff}.fl-card svg{display:block;width:100%;height:70px;background:#eef5fb;border-radius:8px}" +
+    ".fl-card p{margin:.4rem 0 0;font-size:.8rem;line-height:1.35;color:var(--lh-body)}.fl-card__k{position:absolute;top:.35rem;left:.5rem;font:800 1rem var(--lh-font-display);color:#c2410c}" +
+    ".fl-ord select,.fl-binsel,.fl-ranksel{font:600 .85rem var(--lh-font-body);padding:.3rem;border:1px solid var(--lh-border);border-radius:8px;background:#fff}" +
+    ".fl-ord select.fl-ok,.fl-binsel.fl-ok{border-color:var(--lh-green);background:var(--lh-green-bg)}.fl-ord select.fl-bad,.fl-binsel.fl-bad{border-color:#e57373;background:#fdecea}" +
+    ".fl-rb{display:inline-block;font-size:.7rem;font-weight:700;color:#fff;background:#ea7a26;border-radius:999px;padding:.05rem .45rem;margin-left:.3rem}.fl-sortfb{font-size:.78rem;color:var(--lh-muted);width:28%}" +
+    ".fl-taboo__card{max-width:320px;margin:.3rem 0;border-radius:14px;overflow:hidden;border:2px solid #5b3fa8;text-align:center;background:#fff}" +
+    ".fl-taboo__t{background:#5b3fa8;color:#fff;font:800 1.35rem var(--lh-font-display);padding:1rem .6rem}.fl-taboo__ban{padding:.6rem}.fl-taboo__ban span{font:700 .72rem var(--lh-font-mono);letter-spacing:.08em;text-transform:uppercase;color:#b42318}" +
+    ".fl-taboo__ban ul{list-style:none;margin:.3rem 0 0;padding:0;font:600 1rem var(--lh-font-body);color:var(--lh-ink)}.fl-taboo__ban li{padding:.15rem 0}" +
+    ".fl-timer{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:.4rem 0}.fl-timer__t{font:800 1.8rem var(--lh-font-mono);color:var(--lh-ink);min-width:5.5rem}.fl-timer--done .fl-timer__t{color:#b42318}" +
+    ".fl-rank{display:flex;flex-direction:column;gap:.45rem;max-width:520px}.fl-rank__r{display:flex;gap:.6rem;align-items:center}.fl-rank__r b{width:1.8rem;height:1.8rem;border-radius:50%;display:grid;place-items:center;background:var(--lh-teal-bg);color:var(--lh-teal-deep)}.fl-rank__r select{flex:1}" +
     ".fl-match td{vertical-align:middle}.fl-match td:nth-child(2){width:52%}.fl-sel{width:100%;font:400 .82rem var(--lh-font-body);padding:.35rem;border:1px solid var(--lh-border);border-radius:8px;background:#fff}" +
     ".fl-sel.fl-ok{border-color:var(--lh-green);background:var(--lh-green-bg)}.fl-sel.fl-bad{border-color:#e57373;background:#fdecea}.fl-mfb{display:block;font-size:.78rem;color:var(--lh-body);margin-top:.2rem;line-height:1.35}" +
     ".fl__read{font-size:.92rem;line-height:1.6;color:var(--lh-body)}.fl__read h4{margin:1rem 0 .3rem;font:700 .98rem var(--lh-font-display);color:var(--lh-ink)}.fl__read p{margin:.3rem 0}.fl__read ul,.fl__read ol{margin:.3rem 0 .3rem 1.3rem;padding:0}.fl__read li{margin:.25rem 0}" +
@@ -940,12 +1003,14 @@
   var KEY = "sbl-flip-" + (base.storeAs || id) + (n ? "-" + (n + 1) : "");
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
-  var h = '<details class="fl" id="flipLearning' + (n ? n + 1 : "") + '"><summary>' +
-    '<span class="fl__logo" aria-label="Flip Learning"><span class="fl__logo-a">Flip</span> <span class="fl__logo-b">Learning</span></span>' +
-    '<span class="fl__h"><span class="fl__eyebrow">Pre-lesson' + (cfg.part ? " · " + esc(cfg.part) : "") + '</span><p class="fl__title">' + esc(cfg.title) + '</p><span class="fl__sub">Use the Teach Me bot and additional resources to complete</span></span>' +
+  var isL = cfg.kind === "lesson";
+  var h = '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"><summary>' +
+    (isL ? '<span class="fl__logo" aria-label="Lesson Resources"><span class="fl__logo-a">Lesson</span> <span class="fl__logo-b">Resources</span></span>'
+         : '<span class="fl__logo" aria-label="Flip Learning"><span class="fl__logo-a">Flip</span> <span class="fl__logo-b">Learning</span></span>') +
+    '<span class="fl__h"><span class="fl__eyebrow">' + (isL ? "Classroom" + (cfg.time ? " \u00b7 " + esc(cfg.time) : "") : "Pre-lesson" + (cfg.part ? " · " + esc(cfg.part) : "")) + '</span><p class="fl__title">' + esc(cfg.title) + '</p><span class="fl__sub">' + (isL ? esc(cfg.sub || "") : "Use the Teach Me bot and additional resources to complete") + '</span></span>' +
     '<span class="fl__state"></span>' +
     '<svg class="fl__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><div class="fl__body">' +
-    '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">';
+    (isL ? "" : '<img class="fl__banner" src="/images/flip-learning-banner.jpg" alt="Flip Learning: learn first, think deep, apply together. Learn, inquiry, think, collaborate, apply.">');
   if (cfg.intro) h += '<p class="fl__intro">' + esc(cfg.intro) + "</p>";
   if (cfg.teacherNote) h += '<p class="fl__tnote">' + esc(cfg.teacherNote) + "</p>";
   if (cfg._note) h += '<p class="fl__tnote"><b>Note from ' + esc(ed.teacher || "your teacher") + ":</b> " + esc(cfg._note).replace(/\n/g, "<br>") + "</p>";
@@ -1006,6 +1071,41 @@
       });
       h += "</tbody></table></div>";
     }
+    if (p.type === "order") {
+      h += '<div class="fl-cards">' + p.cards.map(function (c) {
+        return '<div class="fl-card"><span class="fl-card__k">' + c.k + "</span>" + (c.icon || "") + "<p>" + esc(c.text) + "</p></div>";
+      }).join("") + "</div>";
+      h += '<div class="fl__scroll"><table class="fl-ord"><tr><th>Order</th>' + p.answer.map(function (_, i) { return "<th>" + (i + 1) + "</th>"; }).join("") +
+        "</tr><tr><th>Card letter</th>" + p.answer.map(function (_, i) {
+          var k = p.id + "s" + i;
+          return '<td><select class="fl-ordsel" data-k="' + k + '" aria-label="Card in position ' + (i + 1) + '"><option value=""></option>' +
+            p.cards.map(function (c) { return "<option" + (saved[k] === c.k ? " selected" : "") + ">" + c.k + "</option>"; }).join("") + "</select></td>";
+        }).join("") + "</tr></table></div>" +
+        '<div class="fl__actions" style="margin-top:.6rem"><button type="button" class="fl__btn fl__btn--ghost" data-ordchk="' + p.id + '" data-ans="' + p.answer.join("") + '">Check the order</button><span class="fl__note" data-ordfb="' + p.id + '"></span></div>';
+    }
+    if (p.type === "taboo")
+      h += '<div class="fl-taboo" data-cards="' + esc(JSON.stringify(p.cards)) + '"><div class="fl-taboo__card"><div class="fl-taboo__t"></div><div class="fl-taboo__ban"><span>Don\u2019t say</span><ul></ul></div></div>' +
+        '<div class="fl__actions"><button type="button" class="fl__btn fl__btn--ghost" data-tb="prev">\u2190 Previous</button><button type="button" class="fl__btn" data-tb="next">Next card \u2192</button><button type="button" class="fl__btn fl__btn--ghost" data-tb="shuffle">Shuffle</button><span class="fl__note" data-tbn></span></div></div>';
+    if (p.type === "timer")
+      h += '<div class="fl-timer" data-sec="' + (p.minutes * 60) + '"><span class="fl-timer__t">' + p.minutes + ':00</span><button type="button" class="fl__btn fl__btn--ghost" data-tm="go">Start</button><button type="button" class="fl__btn fl__btn--ghost" data-tm="reset">Reset</button>' + (p.label ? '<span class="fl__note">' + esc(p.label) + "</span>" : "") + "</div>";
+    if (p.type === "sort") {
+      h += '<div class="fl__scroll"><table class="fl-sorttab"><thead><tr><th>Factor card</th><th>Your box</th><th></th></tr></thead><tbody>';
+      p.cards.forEach(function (c, i) {
+        var k = p.id + i;
+        h += '<tr><td class="fl__rh">' + esc(c.t) + (c.rb ? ' <span class="fl-rb">Rule-breaker?</span>' : "") + '</td><td><select class="fl-binsel" data-k="' + k + '" data-ok="' + c.a.join("|") + '"><option value="">Choose\u2026</option>' +
+          p.bins.map(function (b) { return "<option" + (saved[k] === b ? " selected" : "") + ">" + esc(b) + "</option>"; }).join("") + '</select></td><td class="fl-sortfb"></td></tr>';
+      });
+      h += "</tbody></table></div>" + '<div class="fl__actions" style="margin-top:.6rem"><button type="button" class="fl__btn fl__btn--ghost" data-sortchk="1">Check my sort</button><span class="fl__note" data-sortmsg></span></div>';
+    }
+    if (p.type === "rank") {
+      h += '<div class="fl-rank">';
+      for (var rr = 0; rr < p.n; rr++) {
+        var rk = p.id + rr;
+        h += '<label class="fl-rank__r"><b>' + (rr + 1) + '</b><select class="fl-ranksel" data-k="' + rk + '"><option value="">Choose a factor\u2026</option>' +
+          p.options.map(function (o) { return "<option" + (saved[rk] === o ? " selected" : "") + ">" + esc(o) + "</option>"; }).join("") + "</select></label>";
+      }
+      h += "</div>";
+    }
     if (p.type === "match") {
       var order = p.items.map(function (_, i) { return i; });
       for (var q = order.length - 1, seed = 7; q > 0; q--) { seed = (seed * 9301 + 49297) % 233280; var j = Math.floor(seed / 233280 * (q + 1)); var tmp = order[q]; order[q] = order[j]; order[j] = tmp; }
@@ -1039,6 +1139,11 @@
     '<span class="fl__note">Your answers save automatically on this device.</span></div></div></details>';
 
   if (ed.replace) { ed.replace.insertAdjacentHTML("afterend", h); ed.replace.remove(); }
+  else if (isL) {
+    // In-class lessons sit directly under the Teach Me Live card.
+    var last = document.querySelectorAll(".fl--lesson"), teach = modes.querySelector(".lh-mode");
+    (last.length ? last[last.length - 1] : teach || modes).insertAdjacentHTML("afterend", h);
+  }
   else modes.insertAdjacentHTML("beforebegin", h);
   var root = document.getElementById("flipLearning" + (n ? n + 1 : ""));
   if (ed.open) root.open = true;
@@ -1063,6 +1168,59 @@
     }
     root.querySelector(".fl__state").textContent = done ? done + " / " + inputs.length + " answered" : "Not started";
   }
+  root.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t.classList && (t.classList.contains("fl-ordsel") || t.classList.contains("fl-binsel") || t.classList.contains("fl-ranksel"))) {
+      saved[t.getAttribute("data-k")] = t.value;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+      t.classList.remove("fl-ok", "fl-bad");
+      return;
+    }
+  });
+  root.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-ordchk],[data-sortchk],[data-tb],[data-tm]"); if (!b) return;
+    if (b.hasAttribute("data-ordchk")) {
+      var ans = b.getAttribute("data-ans"), right = 0, sels = b.closest(".fl__part").querySelectorAll(".fl-ordsel");
+      sels.forEach(function (x, i) { var ok = x.value === ans.charAt(i); if (ok) right++; x.classList.toggle("fl-ok", ok); x.classList.toggle("fl-bad", !ok && x.value !== ""); });
+      root.querySelector('[data-ordfb="' + b.getAttribute("data-ordchk") + '"]').textContent = right === sels.length ? "\u2713 All in the right order." : right + " of " + sels.length + " in the right place. Try again.";
+    }
+    if (b.hasAttribute("data-sortchk")) {
+      var part = b.closest(".fl__part"), ok2 = 0, all = part.querySelectorAll(".fl-binsel");
+      all.forEach(function (x) {
+        var acc = x.getAttribute("data-ok").split("|"), good = acc.indexOf(x.value) >= 0, fb = x.closest("tr").querySelector(".fl-sortfb");
+        if (good) ok2++;
+        x.classList.toggle("fl-ok", good); x.classList.toggle("fl-bad", !good && x.value !== "");
+        fb.textContent = !x.value ? "" : good ? (acc.length > 1 ? "\u2713 (also: " + acc.filter(function (a) { return a !== x.value; }).join(", ") + ")" : "\u2713") : "Think again";
+      });
+      part.querySelector("[data-sortmsg]").textContent = ok2 + " of " + all.length + " accepted. Any well-argued alternative is fine for the rule-breakers.";
+    }
+    if (b.hasAttribute("data-tb")) {
+      var tb = b.closest(".fl-taboo"); tb._i = tb._i || 0;
+      var act = b.getAttribute("data-tb"), n = tb._cards.length;
+      if (act === "next") tb._i = (tb._i + 1) % n; if (act === "prev") tb._i = (tb._i - 1 + n) % n;
+      if (act === "shuffle") { tb._cards.sort(function () { return Math.random() - 0.5; }); tb._i = 0; }
+      showTaboo(tb);
+    }
+    if (b.hasAttribute("data-tm")) {
+      var tm = b.closest(".fl-timer"), total = +tm.getAttribute("data-sec"), lab = tm.querySelector(".fl-timer__t");
+      function fmt(x) { return Math.floor(x / 60) + ":" + ("0" + (x % 60)).slice(-2); }
+      if (b.getAttribute("data-tm") === "reset") { clearInterval(tm._iv); tm._iv = null; tm._left = total; lab.textContent = fmt(total); tm.classList.remove("fl-timer--done"); tm.querySelector('[data-tm="go"]').textContent = "Start"; return; }
+      if (tm._iv) { clearInterval(tm._iv); tm._iv = null; b.textContent = "Resume"; return; }
+      if (tm._left == null) tm._left = total;
+      b.textContent = "Pause";
+      tm._iv = setInterval(function () {
+        tm._left--; lab.textContent = fmt(Math.max(0, tm._left));
+        if (tm._left <= 0) { clearInterval(tm._iv); tm._iv = null; tm.classList.add("fl-timer--done"); lab.textContent = "Time!"; b.textContent = "Start"; tm._left = null; }
+      }, 1000);
+    }
+  });
+  function showTaboo(tb) {
+    var c = tb._cards[tb._i];
+    tb.querySelector(".fl-taboo__t").textContent = c.t;
+    tb.querySelector(".fl-taboo__ban ul").innerHTML = c.ban.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("");
+    tb.querySelector("[data-tbn]").textContent = "Card " + (tb._i + 1) + " of " + tb._cards.length;
+  }
+  root.querySelectorAll(".fl-taboo").forEach(function (tb) { tb._cards = JSON.parse(tb.getAttribute("data-cards")); tb._i = 0; showTaboo(tb); });
   root.addEventListener("change", function (e) {
     var sel = e.target.closest(".fl-sel"); if (!sel) return;
     var k = sel.getAttribute("data-mk"), a = sel.getAttribute("data-a");
@@ -1107,6 +1265,12 @@
       if (p.prompt) { html += "<p><b>" + esc((lab ? lab + " " : "") + p.prompt) + "</b></p>"; out.push((lab ? lab + " " : "") + p.prompt); }
       (p.links || []).forEach(function (l) { html += '<p><a href="' + esc(l.url) + '">' + esc(l.label) + "</a></p>"; out.push(l.label + ": " + l.url); });
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
+      if (p.type === "order") {
+        var seq = p.answer.map(function (_, i) { return saved[p.id + "s" + i] || "_"; }).join(" ");
+        html += "<p>My order: " + esc(seq) + "</p>"; out.push("My order: " + seq);
+      }
+      if (p.type === "sort") p.cards.forEach(function (c, i) { var v = saved[p.id + i] || ""; html += "<p>" + esc(c.t) + ": " + esc(v) + "</p>"; out.push("- " + c.t + ": " + v); });
+      if (p.type === "rank") for (var q2 = 0; q2 < p.n; q2++) { var v2 = saved[p.id + q2] || ""; html += "<p>" + (q2 + 1) + ". " + esc(v2) + "</p>"; out.push((q2 + 1) + ". " + v2); }
       if (p.type === "match") {
         html += "<table " + T + "><tr><th " + D + ">Key term</th><th " + D + ">Definition</th><th " + D + ">Example</th></tr>";
         p.items.forEach(function (it, i) {
