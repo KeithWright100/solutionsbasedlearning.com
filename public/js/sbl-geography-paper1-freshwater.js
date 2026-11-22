@@ -226,4 +226,22 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   }
+  ,
+  {
+    topic: "SBL practice \u2014 The drainage basin system (6 marks)",
+    questions: [
+      {
+        label: "SBL practice \u2014 Flows and stores \u2014 2 marks",
+        marks: 2,
+        question: "Identify (1+1 marks). Using a drainage basin systems diagram (for example, the one in Freshwater Lesson 1 on this site), identify two flows and two stores.",
+        markScheme: "Award one mark for two correct flows and one mark for two correct stores. Flows (transfers) include: infiltration, percolation, throughfall, stemflow, overland flow (surface runoff), throughflow, groundwater flow (baseflow), channel flow. Stores include: interception storage (vegetation), surface/depression storage, soil water storage, groundwater storage (aquifers), channel storage, snow and ice (cryosphere). Do not credit inputs or outputs (precipitation, evaporation, transpiration) as flows or stores."
+      },
+      {
+        label: "SBL practice \u2014 The systems concept \u2014 4 marks",
+        marks: 4,
+        question: "Explain (4 marks). Explain the concept of the drainage basin as a system, as shown in a systems diagram.",
+        markScheme: "Award up to 4 marks for developed explanation. Credit: the drainage basin is an open system because it has inputs and outputs that cross its boundary (the watershed) [1]; inputs such as precipitation (with type and intensity varying) enter the system [1]; water is held in stores such as vegetation (interception), the soil, groundwater/aquifers and the cryosphere [1]; water moves between stores by flows/transfers such as infiltration, throughflow, overland flow and baseflow [1]; water leaves as outputs \u2014 evaporation, transpiration (evapotranspiration) and river discharge to the sea [1]; the diagram simplifies reality by showing the links and sequence of processes, and can show how a change in one part (e.g. more intense rain, deforestation) affects other parts / feedback [1]. Maximum 4. One mark only for simply listing the four components without explanation."
+      }
+    ]
+  }
 ].concat((window.SBL_REVISION_TOPICS || []));

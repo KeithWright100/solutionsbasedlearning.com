@@ -182,6 +182,85 @@
     PYRAMID("Germany", [21, 20, 21, 24, 26, 30, 32, 30, 29, 37, 43, 38, 34, 28, 26, 29, 38]) + "</div>" +
     '<p class="fl__note">Population pyramids, 2017: each age group as a percentage of the total (approximate, from UN World Population Prospects data). Same scale for all four countries.</p>';
 
+  var BASIN_SVG = (function () {
+    var s = '<svg viewBox="0 0 760 420" role="img" aria-label="Drainage basin with nine numbered features to label" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif">';
+    s += '<path d="M60 360 C60 160 200 40 380 30 C560 40 700 160 700 360 Z" fill="#eef5e8" stroke="none"/>';
+    s += '<path d="M60 360 C60 160 200 40 380 30 C560 40 700 160 700 360" fill="none" stroke="#5a3e1b" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/>';
+    s += '<rect x="0" y="360" width="760" height="60" fill="#cfe6f3"/><text x="660" y="400" font-size="13" fill="#2b6a8a" font-style="italic">sea</text>';
+    var riv = ["M380 60 C370 120 395 170 385 220", "M250 110 C285 160 320 190 385 220", "M520 100 C480 160 430 190 385 220", "M150 210 C220 240 280 260 330 280", "M640 220 C560 250 470 260 420 285"];
+    riv.forEach(function (d) { s += '<path d="' + d + '" fill="none" stroke="#2470b8" stroke-width="2.5" stroke-linecap="round"/>'; });
+    s += '<path d="M385 220 C365 250 400 265 380 285 C355 305 405 320 380 345 C372 352 378 358 380 362" fill="none" stroke="#2470b8" stroke-width="5" stroke-linecap="round"/>';
+    s += '<path d="M372 362 L388 362 L420 392 L340 392 Z" fill="#a9d3ea" opacity=".9"/>';
+    var pts = [[380, 30], [380, 62], [250, 112], [385, 220], [383, 300], [390, 255], [372, 356], [392, 392], [600, 395]];
+    pts.forEach(function (p, i) { s += '<g transform="translate(' + p[0] + "," + p[1] + ')"><circle r="11" fill="#fff" stroke="#c2410c" stroke-width="2.2"/><text y="4" text-anchor="middle" font-size="11.5" font-weight="700" fill="#7a2a0a">' + (i + 1) + "</text></g>"; });
+    s += '<text x="20" y="20" font-size="11" fill="#666">Dotted line: the edge of the basin</text></g></svg>';
+    return s;
+  })();
+  var SYSTEM_SVG = (function () {
+    var C = { i: ["#dbe8fb", "#2a5db0"], s: ["#d7f0ea", "#0f6e56"], f: ["#fde7cf", "#b4610e"], o: ["#eadfd4", "#6b4a2b"] };
+    function box(x, y, w, t, k) { return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="30" rx="15" fill="' + C[k][0] + '" stroke="' + C[k][1] + '" stroke-width="1.6"/><text x="' + (x + w / 2) + '" y="' + (y + 20) + '" text-anchor="middle" font-size="12.5" font-weight="600" fill="' + C[k][1] + '">' + t + "</text>"; }
+    function ar(d) { return '<path d="' + d + '" fill="none" stroke="#555" stroke-width="1.8" marker-end="url(#sa)"/>'; }
+    var s = '<svg viewBox="0 0 760 520" role="img" aria-label="Drainage basin systems diagram showing inputs, stores, flows and outputs" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><defs><marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#555"/></marker></defs><g font-family="Inter,Arial,sans-serif">';
+    s += box(300, 14, 160, "Precipitation", "i") + box(300, 74, 160, "Interception store", "s") + box(300, 134, 160, "Throughfall / stemflow", "f") +
+      box(300, 194, 160, "Surface store", "s") + box(300, 254, 160, "Infiltration", "f") + box(300, 314, 160, "Soil water store", "s") +
+      box(300, 374, 160, "Percolation", "f") + box(300, 434, 160, "Groundwater store", "s") +
+      box(530, 194, 190, "Overland flow", "f") + box(530, 314, 190, "Throughflow", "f") + box(530, 434, 190, "Groundwater flow (baseflow)", "f") +
+      box(560, 474, 160, "Channel store", "s") + box(330, 482, 140, "River discharge", "o") +
+      box(40, 74, 160, "Evaporation", "o") + box(40, 194, 160, "Transpiration", "o");
+    s += ar("M380 44 V72") + ar("M380 104 V132") + ar("M380 164 V192") + ar("M380 224 V252") + ar("M380 284 V312") + ar("M380 344 V372") + ar("M380 404 V432");
+    s += ar("M460 209 H528") + ar("M460 329 H528") + ar("M460 449 H528") + ar("M740 224 V470 H722") + '<path d="M720 209 H740 M720 329 H740 M720 449 H740" stroke="#555" stroke-width="1.8" fill="none"/>' + ar("M560 489 H472");
+    s += ar("M300 89 H202") + ar("M300 209 H202") + ar("M300 329 H250 V224 H202");
+    s += '<g font-size="11.5"><rect x="40" y="290" width="12" height="12" rx="6" fill="' + C.i[0] + '" stroke="' + C.i[1] + '"/><text x="58" y="300">Input</text><rect x="40" y="310" width="12" height="12" rx="6" fill="' + C.s[0] + '" stroke="' + C.s[1] + '"/><text x="58" y="320">Store</text><rect x="40" y="330" width="12" height="12" rx="6" fill="' + C.f[0] + '" stroke="' + C.f[1] + '"/><text x="58" y="340">Flow (transfer)</text><rect x="40" y="350" width="12" height="12" rx="6" fill="' + C.o[0] + '" stroke="' + C.o[1] + '"/><text x="58" y="360">Output</text></g>';
+    return s + "</g></svg>";
+  })();
+
+  var DISCHARGE_SVG =
+    '<svg viewBox="0 0 760 300" role="img" aria-label="River channel cross-section showing width, mean depth, cross-sectional area and velocity" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="13">' +
+    '<path d="M20 60 L120 70 C170 80 190 230 300 240 L470 245 C590 238 600 90 660 72 L740 62 L740 300 L20 300 Z" fill="#c9a77a"/>' +
+    '<path d="M138 100 C175 110 195 232 300 240 L470 245 C585 238 600 112 642 100 Z" fill="#8fc6e6" opacity=".9"/>' +
+    '<line x1="138" y1="100" x2="642" y2="100" stroke="#1f5e85" stroke-width="2"/>' +
+    '<path d="M150 82 H630" stroke="#b42318" stroke-width="2" marker-start="url(#da)" marker-end="url(#da)"/><text x="390" y="76" text-anchor="middle" fill="#b42318" font-weight="700">Width</text>' +
+    [230, 320, 410, 500, 580].map(function (x) { return '<line x1="' + x + '" y1="104" x2="' + x + '" y2="' + (x < 300 ? 226 : x > 560 ? 190 : 238) + '" stroke="#b42318" stroke-width="1.6" stroke-dasharray="4 3"/>'; }).join("") +
+    '<text x="405" y="170" text-anchor="middle" fill="#7a1d12" font-weight="700">Mean depth = average of the depth readings</text>' +
+    '<text x="390" y="285" text-anchor="middle" fill="#3a2a14" font-weight="700">Cross-sectional area (m²) = width × mean depth</text>' +
+    '<circle cx="680" cy="150" r="26" fill="#fff" stroke="#c2410c" stroke-width="2.5"/><circle cx="680" cy="150" r="5" fill="#c2410c"/><text x="680" y="198" text-anchor="middle" fill="#c2410c" font-weight="700">Velocity</text><text x="680" y="214" text-anchor="middle" fill="#c2410c" font-size="11">(flow out of the page, m/s)</text>' +
+    '<rect x="20" y="10" width="400" height="34" rx="8" fill="#13324a"/><text x="220" y="33" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">Discharge (m³/s) = cross-sectional area × velocity</text>' +
+    '<defs><marker id="da" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#b42318"/></marker></defs></g></svg>';
+  var CHANNEL_SVG = (function () {
+    var s = '<svg viewBox="0 0 760 300" role="img" aria-label="River channel cross-section with five numbered features to label" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif">';
+    s += '<path d="M20 70 L130 80 C175 90 195 230 300 238 L470 244 C585 236 600 98 650 84 L740 74 L740 300 L20 300 Z" fill="#c9a77a"/>';
+    s += '<path d="M146 110 C180 120 198 230 300 238 L470 244 C583 236 600 122 636 110 Z" fill="#8fc6e6"/>';
+    s += '<path d="M146 110 C180 120 198 230 300 238 L470 244 C583 236 600 122 636 110" fill="none" stroke="#b42318" stroke-width="4" stroke-dasharray="1 0"/>';
+    s += '<line x1="146" y1="110" x2="636" y2="110" stroke="#1f5e85" stroke-width="2"/>';
+    [[385, 252, "1"], [176, 160, "2"], [390, 52, "3"], [512, 236, "4"], [390, 170, "5"]].forEach(function (p) { s += '<g transform="translate(' + p[0] + "," + p[1] + ')"><circle r="12" fill="#fff" stroke="#c2410c" stroke-width="2.2"/><text y="4.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a2a0a">' + p[2] + "</text></g>"; });
+    s += '<path d="M150 68 H632" stroke="#555" stroke-width="1.4" stroke-dasharray="5 4"/><text x="20" y="22" font-size="11.5" fill="#666">Red line: where the water touches the channel. Dashed line above: the whole channel.</text>';
+    return s + "</g></svg>";
+  })();
+  var ISOVEL_SVG = (function () {
+    var X = function (d) { return 60 + d / 1.5 * 640; }, Y = function (z) { return 40 + z / 0.6 * 300; };
+    var bed = [[0, 0], [0.05, 0.25], [0.1, 0.5], [0.15, 0.55], [0.3, 0.56], [0.6, 0.45], [0.9, 0.3], [1.2, 0.12], [1.35, 0], [1.5, 0]];
+    var s = '<div class="fl-iso"><svg viewBox="0 0 760 410" role="img" aria-label="River cross-section with velocity readings at points, for drawing isovels" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12">';
+    s += '<path d="M' + bed.map(function (p) { return X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1); }).join(" L") + ' L' + X(1.5) + " " + Y(0.6) + " L" + X(0) + " " + Y(0.6) + ' Z" fill="#d9c3a0" stroke="#6b4a2b" stroke-width="1.5"/>';
+    s += '<path d="M' + bed.map(function (p) { return X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1); }).join(" L") + ' Z" fill="#e3f2fb"/>';
+    s += '<line x1="' + X(0) + '" y1="' + Y(0) + '" x2="' + X(1.5) + '" y2="' + Y(0) + '" stroke="#1f5e85" stroke-dasharray="6 4"/>';
+    for (var z = 0.1; z <= 0.61; z += 0.1) s += '<text x="52" y="' + (Y(z) + 4) + '" text-anchor="end" fill="#555">' + z.toFixed(1) + "</text>";
+    for (var d = 0.2; d <= 1.41; d += 0.2) s += '<text x="' + X(d) + '" y="' + (Y(0.6) + 18) + '" text-anchor="middle" fill="#555">' + d.toFixed(1) + "</text>";
+    s += '<text x="' + X(0.75) + '" y="398" text-anchor="middle" fill="#333">Distance from the left bank (m)</text><text x="16" y="' + Y(0.3) + '" transform="rotate(-90 16 ' + Y(0.3) + ')" text-anchor="middle" fill="#333">Depth (m)</text>';
+    var v = { 0.2: [0.47, 0.53, 0.44, 0.32, 0.10], 0.4: [0.29, 0.32, 0.22, 0.10], 0.6: [0.23, 0.18, 0.07], 0.8: [0.11, 0.08], 1.0: [0.05] };
+    Object.keys(v).forEach(function (dd) { v[dd].forEach(function (val, i) { var x = X(+dd), y = Y((i + 1) / 10); s += '<circle cx="' + x + '" cy="' + y + '" r="3.5" fill="#13324a"/><text x="' + (x + 6) + '" y="' + (y + 4) + '" fill="#13324a" font-weight="600">' + val.toFixed(2) + "</text>"; }); });
+    s += '<g class="iso-model" fill="none" stroke-width="2.4"><path d="M169.0 40.0 L170.0 45.0 L171.3 51.8 L172.6 58.8 L173.5 63.5 L174.8 70.6 L175.8 75.6 L177.1 82.4 L178.4 89.4 L180.9 94.1 L183.5 98.8 L186.2 103.5 L188.9 108.2 L191.5 112.9 L193.1 119.4 L194.4 124.7 L196.0 131.3 L197.3 136.5 L196.0 142.6 L193.1 146.2 L189.6 150.6 L185.7 155.3 L181.9 160.0 L178.7 164.5 L175.8 168.6 L172.9 172.8 L170.0 176.9 L167.0 181.2 L163.7 185.9 L160.3 190.6 L155.9 195.3 L152.6 198.8 L149.3 202.4 L146.4 204.7 L143.0 200.0 L141.0 194.6 L139.6 188.2 L138.2 182.0 L136.8 176.5 L135.3 169.8 L134.0 164.7 L132.4 157.6 L131.3 152.9 L129.6 145.9 L128.8 141.2 L128.7 134.1 L129.5 129.2 L130.6 122.4 L131.7 115.3 L132.5 110.6 L133.6 103.5 L134.8 96.5 L133.9 89.4 L133.4 82.4 L133.6 75.3 L134.1 68.2 L134.6 61.2 L135.2 54.1 L135.5 49.4 L136.0 42.4" stroke="#b42318"/><path d="M331.5 40.0 L331.5 47.1 L332.1 53.1 L332.9 58.8 L333.9 65.9 L334.9 72.9 L335.6 77.6 L336.6 84.7 L336.1 91.8 L332.7 96.5 L329.4 101.2 L326.3 105.5 L323.4 109.6 L320.5 113.7 L317.6 117.7 L312.7 122.4 L308.9 125.0 L303.1 129.0 L301.7 134.1 L303.4 138.8 L300.2 142.7 L295.9 145.9 L291.6 149.1 L286.5 152.9 L282.9 155.6 L277.1 159.9 L273.8 162.4 L268.4 166.8 L265.5 169.4 L260.1 174.1 L256.8 177.0 L252.1 181.2 L248.1 184.6 L244.1 188.2 L239.5 191.9 L234.8 195.3 L230.8 198.3 L226.9 202.4 L222.5 207.1 L219.2 210.7 L216.0 214.1 L211.6 218.8 L207.6 223.1 L204.7 226.2 L200.6 230.6 L196.3 235.3 L193.1 238.6 L189.8 242.4 L185.7 247.1 L181.6 251.8 L178.7 255.1 L175.4 258.8 L171.3 263.5 L167.1 267.1 L158.4 267.1 L149.7 267.2 L143.8 265.9 L138.5 261.2 L135.3 258.3 L130.5 254.1 L127.7 249.4 L126.6 242.6 L125.7 237.6 L124.3 230.6 L122.6 225.9 L120.8 220.7 L118.4 214.1 L116.8 209.4 L115.0 203.1 L114.1 197.6 L112.9 190.6 L112.0 185.9 L110.8 178.8 L109.3 171.8 L108.2 167.1 L106.5 160.0 L105.4 155.3 L104.2 148.2 L103.4 143.5 L102.2 136.5 L102.3 129.4 L103.4 122.7 L104.2 117.6 L104.7 110.6 L103.5 103.5 L102.7 98.8 L101.5 91.8 L101.0 84.7 L100.5 78.4 L100.1 72.9 L99.6 65.9 L99.0 58.8 L98.8 51.8 L99.3 44.7" stroke="#e07b1a"/><path d="M415.6 40.0 L415.6 47.1 L415.6 54.1 L415.6 61.2 L415.6 68.2 L415.6 75.3 L415.6 82.4 L415.6 89.4 L412.0 94.1 L408.0 98.8 L404.4 103.0 L401.5 106.4 L398.7 111.9 L395.8 117.6 L393.3 122.4 L390.9 127.1 L388.5 131.8 L386.1 136.5 L382.1 141.2 L377.6 143.5 L372.6 146.2 L366.8 149.3 L361.0 152.4 L355.6 155.3 L351.1 157.6 L346.6 160.1 L340.8 163.2 L335.0 166.3 L329.2 169.3 L324.6 171.8 L320.2 174.1 L314.7 177.3 L309.5 181.2 L306.0 183.8 L300.9 188.2 L297.3 191.2 L291.7 195.3 L288.5 197.6 L282.9 201.8 L278.9 204.7 L274.2 208.1 L269.2 211.8 L265.5 214.5 L259.7 218.7 L256.4 221.2 L251.0 225.1 L246.7 228.2 L242.4 231.4 L237.2 235.3 L233.7 237.9 L228.8 242.4 L225.0 246.5 L222.1 249.8 L218.3 254.1 L214.2 258.8 L210.5 263.0 L207.6 266.3 L203.9 270.6 L199.8 275.3 L196.0 279.5 L193.1 282.9 L189.5 287.1 L184.5 289.6 L175.8 289.7 L167.1 289.8 L158.4 289.9 L149.7 290.0 L143.9 288.8 L139.4 284.7 L135.3 281.1 L131.4 277.6 L126.6 273.3 L123.5 270.6 L118.2 265.9 L115.0 263.0 L112.9 256.5 L112.1 251.5 L110.9 244.7 L109.7 237.6 L108.9 232.9 L107.7 225.9 L106.2 221.2 L103.7 214.1 L102.5 209.4 L101.3 202.4 L100.5 197.6 L99.3 190.6 L98.1 183.5 L97.3 178.8 L96.1 171.8 L94.7 165.9 L93.4 160.0 L92.2 152.9 L91.4 148.2 L90.1 141.2 L88.9 134.1 L88.8 129.4 L89.5 124.7 L89.6 117.6 L88.8 112.9 L87.6 105.9 L86.4 98.8 L85.6 94.1 L84.9 87.1 L84.4 80.0 L83.8 72.9 L83.3 65.9 L82.9 61.2 L82.4 54.1 L81.9 47.1 L81.2 40.0" stroke="#2a63b8"/><g font-weight="700" font-size="13"><text x="' + X(0.255) + '" y="' + Y(0.06) + '" fill="#b42318">0.4</text><text x="' + X(0.5) + '" y="' + Y(0.06) + '" fill="#e07b1a">0.2</text><text x="' + X(0.72) + '" y="' + Y(0.33) + '" fill="#2a63b8">0.1</text></g></g>';
+    s += '<text x="' + X(1.5) + '" y="' + (Y(0) - 10) + '" text-anchor="end" fill="#555">Velocity (m/s) at each point</text></g></svg>';
+    return s + '<div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn fl__btn--ghost" data-iso="1">Show model isovels</button><span class="fl__note">Try drawing the 0.4, 0.2 and 0.1 m/s isovels yourself first (in OneNote), then compare.</span></div></div>';
+  })();
+  var FLOW_SVG =
+    '<svg viewBox="0 0 760 230" role="img" aria-label="Laminar flow: parallel layers of water. Turbulent flow: water with horizontal and vertical eddies" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><defs><marker id="fa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#1f5e85"/></marker><marker id="fb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#c2410c"/></marker></defs><g font-family="Inter,Arial,sans-serif" font-size="13">' +
+    '<rect x="20" y="40" width="330" height="150" rx="10" fill="#e3f2fb" stroke="#7fb1cc"/><text x="185" y="28" text-anchor="middle" font-weight="700">a) Laminar flow</text>' +
+    [75, 115, 155].map(function (y) { return '<path d="M45 ' + y + ' H320" stroke="#1f5e85" stroke-width="5" marker-end="url(#fa)"/>'; }).join("") +
+    '<rect x="410" y="40" width="330" height="150" rx="10" fill="#e3f2fb" stroke="#7fb1cc"/><text x="575" y="28" text-anchor="middle" font-weight="700">b) Turbulent flow</text>' +
+    '<path d="M430 75 C460 55 480 95 455 95 C440 95 445 70 470 66 C500 60 510 95 490 95 C475 95 480 68 510 64 C545 60 560 92 540 92 C525 92 530 66 560 62 L700 62" fill="none" stroke="#c2410c" stroke-width="2.6" marker-end="url(#fb)"/>' +
+    '<path d="M450 175 C440 130 500 120 495 150 C492 170 465 160 480 135 C500 105 560 125 545 155 C535 175 515 160 530 135 C550 105 610 120 600 150 C592 175 570 160 585 135 C600 112 660 110 700 120" fill="none" stroke="#c2410c" stroke-width="2.6" marker-end="url(#fb)"/>' +
+    '<text x="20" y="215" fill="#555">Upstream</text><text x="350" y="215" text-anchor="end" fill="#555">Downstream →</text><text x="410" y="215" fill="#555">Upstream</text><text x="740" y="215" text-anchor="end" fill="#555">Downstream →</text></g></svg>';
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -993,7 +1072,7 @@
         { id: "ex", label: "", type: "text", prompt: "Do you agree that the pandemic changed leisure for good? Note your view and two pieces of evidence.", video: true }
       ]
     }],
-    FW01: {
+    FW01: [{
       title: "Rivers of the world: 8-minute challenge",
       overview: {
         heading: "How physical processes influence drainage basin systems and landforms",
@@ -1003,9 +1082,83 @@
       intro: "Start the timer, then name as many of the 24 numbered rivers on the map as you can. Choose a name for each number, then check your answers. Use an atlas or the Teach Me Live bot if you get stuck after the time is up.",
       parts: [
         { type: "timer", minutes: 8, label: "8-minute challenge" },
-        { id: "rv", label: "", type: "rivermap", prompt: "", items: [{ n: "Niger", line: [[-10, 9.5], [-7, 12.5], [-3, 16.5], [0, 16], [3, 12], [6, 9], [6.5, 4.5]] }, { n: "Tigris and Euphrates", line: [[38.5, 37.5], [40, 35], [42, 34.4], [44.5, 32], [46.5, 31], [48.3, 30]] }, { n: "Volga", line: [[33, 57], [38, 57.7], [44, 56.3], [48.5, 55.5], [49, 52], [45.5, 48], [47.8, 46]] }, { n: "Danube", line: [[9, 48], [16, 48], [19, 47], [21, 44.8], [25, 43.7], [28, 44.5], [29.5, 45.2]] }, { n: "Yenisey", line: [[93, 51.7], [92, 56], [89, 60], [87, 64], [86, 68], [83, 71.5]] }, { n: "Mackenzie", line: [[-117, 61], [-121, 62], [-125, 64.5], [-130, 67], [-135, 68.8]] }, { n: "Amazon", line: [[-73, -4.5], [-68, -3.5], [-62, -3.3], [-56, -2.5], [-51, -0.5]] }, { n: "Missouri", line: [[-111.5, 45.5], [-108, 47.5], [-102, 47.5], [-100, 45], [-96.5, 41.5], [-94.5, 39], [-90.5, 38.8]] }, { n: "Ganges", line: [[78.5, 30], [80.5, 26.5], [84, 25.5], [88, 24.5], [90.5, 22.5]] }, { n: "Lena", line: [[106, 54], [115, 58], [121, 61], [127, 63], [127, 69], [126.5, 72.5]] }, { n: "Amur", line: [[121, 53.3], [127, 50], [131, 48], [135, 48.5], [137, 51], [140.5, 53]] }, { n: "Congo", line: [[26, -7], [25.5, 0.5], [22, 2], [18, 1], [16, -2.5], [13, -5.5]] }, { n: "Murray–Darling", line: [[151, -29], [146, -30], [143, -32], [142, -34], [140.5, -34.2], [139, -35.5]] }, { n: "Mekong", line: [[96, 32], [99, 26], [101, 21], [104, 17.5], [105.5, 13], [106, 10.5]] }, { n: "Mississippi", line: [[-95, 47], [-91.5, 43], [-90.5, 38.5], [-90, 35], [-91, 32], [-90, 29.5]] }, { n: "Ob", line: [[85, 52], [83, 55], [78, 59], [70, 61], [66, 63], [66.5, 66.5]] }, { n: "Huang He (Yellow)", line: [[97, 35], [103, 36], [106, 40], [110.5, 40.5], [110.5, 35], [114, 35], [118.5, 37.5]] }, { n: "Indus", line: [[80, 32.5], [75, 35], [72, 33.5], [71, 29.5], [68.5, 26], [67.5, 24]] }, { n: "Rio Grande", line: [[-106.6, 37.5], [-106.7, 32], [-104.5, 29.5], [-101, 29.7], [-99, 26.5], [-97.2, 26]] }, { n: "Paraná", line: [[-51, -20], [-54, -25.5], [-58.5, -27.3], [-60.5, -31.5], [-58.5, -34]] }, { n: "Yangtze", line: [[92, 34], [99, 29], [104, 28.5], [106.5, 29.6], [111, 30.7], [114, 30.5], [121.5, 31.4]] }, { n: "Yukon", line: [[-135, 61], [-141, 64.5], [-146, 66.5], [-152, 65], [-158, 62.5], [-164.5, 62.7]] }, { n: "Rhine", line: [[9.5, 47.5], [7.5, 47.6], [8.2, 49.5], [7, 50.7], [6, 52], [4.3, 52]] }, { n: "Nile", line: [[32.5, 0], [31.5, 9], [32.5, 15.5], [33.5, 19], [31.5, 22], [32.5, 26], [31, 30.5]] }] }
+        { id: "rv", label: "a)", type: "rivermap", prompt: "", items: [{ n: "Niger", line: [[-10, 9.5], [-7, 12.5], [-3, 16.5], [0, 16], [3, 12], [6, 9], [6.5, 4.5]] }, { n: "Tigris and Euphrates", line: [[38.5, 37.5], [40, 35], [42, 34.4], [44.5, 32], [46.5, 31], [48.3, 30]] }, { n: "Volga", line: [[33, 57], [38, 57.7], [44, 56.3], [48.5, 55.5], [49, 52], [45.5, 48], [47.8, 46]] }, { n: "Danube", line: [[9, 48], [16, 48], [19, 47], [21, 44.8], [25, 43.7], [28, 44.5], [29.5, 45.2]] }, { n: "Yenisey", line: [[93, 51.7], [92, 56], [89, 60], [87, 64], [86, 68], [83, 71.5]] }, { n: "Mackenzie", line: [[-117, 61], [-121, 62], [-125, 64.5], [-130, 67], [-135, 68.8]] }, { n: "Amazon", line: [[-73, -4.5], [-68, -3.5], [-62, -3.3], [-56, -2.5], [-51, -0.5]] }, { n: "Missouri", line: [[-111.5, 45.5], [-108, 47.5], [-102, 47.5], [-100, 45], [-96.5, 41.5], [-94.5, 39], [-90.5, 38.8]] }, { n: "Ganges", line: [[78.5, 30], [80.5, 26.5], [84, 25.5], [88, 24.5], [90.5, 22.5]] }, { n: "Lena", line: [[106, 54], [115, 58], [121, 61], [127, 63], [127, 69], [126.5, 72.5]] }, { n: "Amur", line: [[121, 53.3], [127, 50], [131, 48], [135, 48.5], [137, 51], [140.5, 53]] }, { n: "Congo", line: [[26, -7], [25.5, 0.5], [22, 2], [18, 1], [16, -2.5], [13, -5.5]] }, { n: "Murray–Darling", line: [[151, -29], [146, -30], [143, -32], [142, -34], [140.5, -34.2], [139, -35.5]] }, { n: "Mekong", line: [[96, 32], [99, 26], [101, 21], [104, 17.5], [105.5, 13], [106, 10.5]] }, { n: "Mississippi", line: [[-95, 47], [-91.5, 43], [-90.5, 38.5], [-90, 35], [-91, 32], [-90, 29.5]] }, { n: "Ob", line: [[85, 52], [83, 55], [78, 59], [70, 61], [66, 63], [66.5, 66.5]] }, { n: "Huang He (Yellow)", line: [[97, 35], [103, 36], [106, 40], [110.5, 40.5], [110.5, 35], [114, 35], [118.5, 37.5]] }, { n: "Indus", line: [[80, 32.5], [75, 35], [72, 33.5], [71, 29.5], [68.5, 26], [67.5, 24]] }, { n: "Rio Grande", line: [[-106.6, 37.5], [-106.7, 32], [-104.5, 29.5], [-101, 29.7], [-99, 26.5], [-97.2, 26]] }, { n: "Paraná", line: [[-51, -20], [-54, -25.5], [-58.5, -27.3], [-60.5, -31.5], [-58.5, -34]] }, { n: "Yangtze", line: [[92, 34], [99, 29], [104, 28.5], [106.5, 29.6], [111, 30.7], [114, 30.5], [121.5, 31.4]] }, { n: "Yukon", line: [[-135, 61], [-141, 64.5], [-146, 66.5], [-152, 65], [-158, 62.5], [-164.5, 62.7]] }, { n: "Rhine", line: [[9.5, 47.5], [7.5, 47.6], [8.2, 49.5], [7, 50.7], [6, 52], [4.3, 52]] }, { n: "Nile", line: [[32.5, 0], [31.5, 9], [32.5, 15.5], [33.5, 19], [31.5, 22], [32.5, 26], [31, 30.5]] }] }
+        ,{ id: "rq", label: "b)", type: "text", prompt: "Now try an online rivers quiz. Note your score and any rivers you found difficult.",
+          links: [{ label: "World rivers quiz (World Geography Games)", url: "https://world-geography-games.com/en/world_rivers.html" }] }
       ]
-    },
+    }, {
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "The drainage basin system",
+      intro: "Before the lesson: complete the Flip learning above.",
+      parts: [
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter: features of a drainage basin" },
+        { id: "s1", label: "", type: "text", prompt: "Watch the video and study the slides on the Firefly page, then write your own definition of a drainage basin.",
+          links: [{ label: "Video: USDA watershed learning animation", url: "https://www.youtube.com/watch?v=dUlAANVBYHM" }] },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
+        { type: "heading", text: "Activity 1: Labelling the key features of a drainage basin" },
+        { type: "html", html: BASIN_SVG },
+        { id: "l1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose the matching one)", noExample: true, prompt: "Label the diagram: choose the feature for each number.", items: [{ t: "Number 1", d: "Watershed" }, { t: "Number 2", d: "Source" }, { t: "Number 3", d: "Tributary" }, { t: "Number 4", d: "Confluence" }, { t: "Number 5", d: "Main river channel" }, { t: "Number 6", d: "Meander" }, { t: "Number 7", d: "Mouth" }, { t: "Number 8", d: "Estuary" }, { t: "Number 9", d: "Sea" }] },
+        { id: "g1", label: "b)", type: "cloze", prompt: "Now complete the missing words.",
+          text: "A river basin is an area of land drained by a river and its tributaries (small streams). The river basin takes its name from the shape of a [[bowl]]. All precipitation that falls onto the hillside will eventually find its way to the river channel (whether overland or [[underground]]). Rivers start at their [[source]]. This is normally a spring site in a mountainous area. Various [[tributaries]] meet up at a [[confluence]] and eventually flow downhill into the main river channel. The river then flows through an ever widening [[valley]] until it reaches the [[sea]]. This is the [[mouth]] of the river and may also be called an [[estuary]] or a delta." },
+        { type: "heading", text: "Activity 2: The drainage basin system",
+          note: "In class you will place these terms on an A2 laminated sheet (follow the instructions on Firefly), then take a photo for your OneNote. All terms will need defining." },
+        { id: "t1", label: "a)", type: "sort", cardCol: "Term", binCol: "Input, store, flow or output?", prompt: "Decide whether each term is an input, a store, a flow (transfer) or an output.", bins: ["Input", "Store", "Flow", "Output"], cards: [{ t: "Precipitation", a: ["Input"] }, { t: "Interception", a: ["Store"] }, { t: "Throughfall", a: ["Flow"] }, { t: "Stemflow", a: ["Flow"] }, { t: "Infiltration", a: ["Flow"] }, { t: "Capillary action", a: ["Flow"] }, { t: "Throughflow", a: ["Flow"] }, { t: "Overland flow / surface run-off", a: ["Flow"] }, { t: "Groundwater", a: ["Store"] }, { t: "Water table", a: ["Store"] }, { t: "Groundwater flow", a: ["Flow"] }, { t: "Channel precipitation", a: ["Input"] }, { t: "Channel flow / run-off", a: ["Flow", "Output"] }, { t: "Depression storage", a: ["Store"] }, { t: "Ice and snow", a: ["Store"] }, { t: "Transpiration", a: ["Output"] }] },
+        { id: "t2", label: "", type: "table", prompt: "Define each term.", cols: ["Term", "Definition"], rows: ["Precipitation", "Interception", "Throughfall", "Stemflow", "Infiltration", "Capillary action", "Throughflow", "Overland flow / surface run-off", "Groundwater", "Water table", "Groundwater flow", "Channel precipitation", "Channel flow / run-off", "Depression storage", "Ice and snow", "Transpiration"] },
+        { id: "f1", label: "b)", type: "questions", letters: true, prompt: "Read the text, then answer the questions.",
+          before: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Feedback loops.</b> A system is always trying to maintain a balance (equilibrium). Feedback loops explain how a system, such as a drainage basin, loses and then tries to regain its balance. Positive feedback causes instability by changing inputs (for example, an increase in precipitation). Negative feedback tries to restore the equilibrium by reducing inputs or increasing outputs. Humans can alter feedback loops by changing the amount of water released from dams, changing the amount of water used, or increasing run-off through deforestation.</div>',
+          rows: ["Define the term feedback loop.", "What is the difference between positive and negative feedback?", "List some examples of the ways in which humans can alter feedback loops."] },
+        { id: "f2", label: "iv)", type: "text", before: SYSTEM_SVG, prompt: "The diagram shows a drainage basin systems diagram. Explain the concept of a systems diagram." },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
+        { type: "heading", text: "Activity 3: Reviewing terminology", note: "Practise the flashcards before we go live." },
+        { type: "linkcard", url: "https://quizlet.com/151184009/the-hydrological-cycle-flash-cards/", icon: "Q", title: "The hydrological cycle", sub: "Quizlet: flashcards, learn and test, then Quizlet Live in class" },
+        { type: "heading", text: "Past paper practice" },
+        { id: "q1", label: "", type: "questions", prompt: "Answer using the systems diagram above, then mark your answers with the self-marking practice bot.",
+          links: [{ label: "Self-marking practice: Freshwater questions", url: "/geography/revision/paper-questions/freshwater" }],
+          rows: ["Identify two flows and two stores in the diagram. (2)", "Explain the concept of the drainage basin systems diagram. (4)"] }
+      ]
+    }],
+    FW02: [{
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "Discharge",
+      overview: {
+        heading: "How physical processes influence drainage basin systems and landforms",
+        intention: "To explain the systems approach.",
+        syllabus: ["River discharge and its relationship to stream flow, channel characteristics and hydraulic radius."],
+        success: ["Define discharge and know how to calculate it.", "Explain how the river channel changes with distance from its source in terms of shape, gradient and bed roughness.",
+          "Explain and calculate variations of the hydraulic radius within the river channel.", "Explain how and why discharge changes downstream."] },
+      intro: "",
+      parts: [
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter: key words bingo", note: "A random card of hydrological cycle words is made for you." },
+        { id: "bg", label: "", type: "bingo", prompt: "", words: ["Transfer", "Soil moisture", "Interception", "Overland flow / surface run-off", "Groundwater flow", "Relief", "Groundwater / aquifer", "Percolation", "Cryosphere", "Frontal", "Throughflow", "Water table", "Precipitation", "Infiltration", "Output", "Transpiration", "Store", "Evapotranspiration", "Surface storage", "Input", "Stemflow", "Channel flow", "Convectional", "Orographic"] },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
+        { type: "heading", text: "Activity 1: Defining discharge" },
+        { type: "html", html: DISCHARGE_SVG },
+        { id: "d1", label: "a)", type: "text", prompt: "Write down the definition of discharge and all the associated terminology (units included)." },
+        { id: "d2", label: "b)", type: "mcq", prompt: "Quick calculations", items: [
+          { q: "A river is 4 m wide with a mean depth of 0.5 m. What is its cross-sectional area?", o: ["0.2 m\u00b2", "2 m\u00b2", "4.5 m\u00b2", "8 m\u00b2"], a: 1 },
+          { q: "The same river flows at 0.6 m/s. What is its discharge?", o: ["0.3 m\u00b3/s (cumecs)", "1.2 m\u00b3/s (cumecs)", "2.6 m\u00b3/s (cumecs)", "3.3 m\u00b3/s (cumecs)"], a: 1 },
+          { q: "Hydraulic radius = cross-sectional area \u00f7 wetted perimeter. A channel has an area of 2 m\u00b2 and a wetted perimeter of 5 m. What is its hydraulic radius?", o: ["0.4 m", "2.5 m", "7 m", "10 m"], a: 0 },
+          { q: "Which channel is the most efficient (least friction)?", o: ["Hydraulic radius 0.2 m", "Hydraulic radius 0.4 m", "Hydraulic radius 0.6 m", "They are all equally efficient"], a: 2 }] },
+        { type: "heading", text: "Activity 2: More key terms", note: "These terms are very important for your coursework. Read them, then label the diagram. Make your own copy in OneNote." },
+        { id: "k0", label: "", type: "table", prompt: "", given: true, cols: ["Term", "Definition"], rows: ["Bed", "Bank", "Channel", "Wetted perimeter", "Cross-sectional area"],
+          prefill: { 0: ["The bottom of the river channel."], 1: ["The sides of the river channel."], 2: ["The confines of the river, including the bed and both banks."], 3: ["The total length of the bed and banks in contact with the water."], 4: ["The width of the river multiplied by its mean depth, usually in m². Depth varies across the river, so an average of several readings is used."] } },
+        { type: "html", html: CHANNEL_SVG },
+        { id: "k1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose the matching one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "Bed" }, { t: "Number 2", d: "Bank" }, { t: "Number 3", d: "Channel" }, { t: "Number 4", d: "Wetted perimeter" }, { t: "Number 5", d: "Cross-sectional area" }] },
+        { id: "k2", label: "b)", type: "text", prompt: "As you move from the source to the mouth, both the discharge and the velocity of a river increase. Suggest why." },
+        { type: "heading", text: "Activity 3: Channel shape and velocity" },
+        { id: "v0", label: "a)", type: "table", prompt: "Velocity", given: true, cols: ["Term", "Definition"], rows: ["Velocity"],
+          prefill: { 0: ["The speed at which the water in a river is travelling, normally measured in metres per second (m/s). It can be measured with a flow meter or, more commonly, by timing a floating object over a set distance. Velocity = distance (m) \u00f7 time (s)."] } },
+        { id: "v1", label: "b)", type: "text", before: ISOVEL_SVG, prompt: "Isovels are lines joining points of equal velocity (a type of isoline). Join the dots to draw the isovels, then describe where the water flows fastest and explain why." },
+        { id: "v2", label: "c)", type: "table", before: FLOW_SVG, prompt: "Describe and define the different types of flow in a river. You may need to search for these.",
+          cols: ["Type of flow", "Definition and description"], rows: ["i) Laminar flow", "ii) Turbulent flow"] },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
+        { type: "heading", text: "Exit ticket" },
+        { id: "x1", label: "", type: "text", prompt: "Explain how and why discharge changes downstream." }
+      ]
+    }],
     CP05: [{
       part: "5a",
       title: "Why do populations change, and how does population change affect people and places?",
@@ -1120,6 +1273,14 @@
     ".fl__btn{border:1px solid var(--lh-teal);background:var(--lh-teal);color:#fff;border-radius:999px;padding:.5rem 1rem;font:600 .85rem var(--lh-font-body);cursor:pointer}" +
     ".fl__btn--ghost{background:transparent;color:var(--lh-teal-deep)}" +
     ".fl__pair{margin:.2rem 0 .8rem}" +
+    ".fl-bingo__grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;max-width:520px;padding:.5rem;border-radius:12px;background:#21506b}" +
+    ".fl-bingo__c{min-height:62px;border:0;border-radius:8px;background:#f2f8fb;color:#13324a;font:600 .85rem var(--lh-font-body);cursor:pointer;padding:.3rem}.fl-bingo__c.on{background:#f59e0b;color:#fff;text-decoration:line-through}" +
+    ".fl-bingo__win{position:absolute;inset:0;display:grid;place-items:center;font:800 3rem var(--lh-font-display);color:#fff;background:rgba(15,110,86,.82);border-radius:12px;pointer-events:none}" +
+    ".fl-iso .iso-model{display:none}.fl-iso--show .iso-model{display:inline}" +
+    ".fl-cloze__t{line-height:2.4;font-size:.98rem;color:var(--lh-ink)}.fl-cloze .fl-rsel{flex:none;width:auto;min-width:8rem;margin:0 .2rem}" +
+    ".fl-lcard{display:flex;align-items:center;gap:.9rem;max-width:560px;margin:.4rem 0;padding:.9rem 1.1rem;border:2px solid #4255ff;border-radius:14px;background:#f1f3ff;color:#1a1d4a;text-decoration:none}" +
+    ".fl-lcard:hover{background:#e4e8ff}.fl-lcard__i{flex:none;width:44px;height:44px;border-radius:10px;background:#4255ff;color:#fff;display:grid;place-items:center;font:800 1.3rem var(--lh-font-display)}" +
+    ".fl-lcard b{display:block;font-size:1rem}.fl-lcard small{color:#4a4f7a}.fl-lcard__go{margin-left:auto;font-weight:700;color:#4255ff;white-space:nowrap}" +
     ".fl-rmap__map svg{display:block;width:100%;height:auto;border:1px solid var(--lh-border);border-radius:12px;background:#fff}" +
     ".fl-rmap__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.4rem .8rem;margin-top:.8rem}" +
     ".fl-rmap__q{display:flex;align-items:center;gap:.45rem}.fl-rmap__q b{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;border:2px solid #c2410c;color:#7a2a0a;font-size:.78rem}" +
@@ -1307,6 +1468,24 @@
       return;
     }
     if (p.type === "html") { h += '<div class="fl__part">' + p.html + "</div>"; return; }
+    if (p.type === "bingo") {
+      h += '<div class="fl-bingo" data-k="' + p.id + '" data-words="' + esc(JSON.stringify(p.words)) + '"><div class="fl-bingo__grid"></div>' +
+        '<div class="fl__actions" style="margin-top:.5rem"><button type="button" class="fl__btn fl__btn--ghost" data-bingo="new">New card</button><span class="fl__note">Tap a word when your teacher reads its definition. Four in a row, column or diagonal: shout \u201cBingo!\u201d</span></div></div>';
+    }
+    if (p.type === "cloze") {
+      var bank = [];
+      p.text.replace(/\[\[([^\]]+)\]\]/g, function (_, w) { if (bank.indexOf(w) < 0) bank.push(w); return _; });
+      bank.sort();
+      var gi = 0;
+      h += '<div class="fl-rmap fl-cloze"><p class="fl__note">Word bank: ' + bank.map(esc).join(" \u00b7 ") + '</p><p class="fl-cloze__t">' +
+        esc(p.text).replace(/\[\[([^\]]+)\]\]/g, function (_, w) {
+          var k = p.id + (gi++);
+          return '<select class="fl-rsel" data-k="' + k + '" data-a="' + w + '"><option value="">\u2026</option>' + bank.map(function (b) { return "<option" + (saved[k] === b ? " selected" : "") + ">" + b + "</option>"; }).join("") + "</select>";
+        }) + '</p><div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn" data-rchk="1">Check my answers</button><button type="button" class="fl__btn fl__btn--ghost" data-rshow="1">Show the answers</button><span class="fl__note" data-rmsg></span></div></div>';
+    }
+    if (p.type === "linkcard") {
+      h += '<a class="fl-lcard" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="fl-lcard__i">' + (p.icon || "") + '</span><span><b>' + esc(p.title) + "</b><small>" + esc(p.sub || "") + "</small></span><span class=\"fl-lcard__go\">Open \u2197</span></a>";
+    }
     if (p.type === "rivermap") {
       h += '<div class="fl-rmap" data-id="' + p.id + '"><div class="fl-rmap__map"><p class="fl__note">Loading the map\u2026</p></div>' +
         '<div class="fl-rmap__grid">' + p.items.map(function (_, i) {
@@ -1440,6 +1619,26 @@
   var edBtn = root.querySelector(".fl-edit");
   if (edBtn) edBtn.onclick = function () { openEditor(base, n, ed, root); };
   var inputs = root.querySelectorAll(".fl-in");
+  root.querySelectorAll(".fl-bingo").forEach(function (bg) {
+    var words = JSON.parse(bg.getAttribute("data-words")), k = bg.getAttribute("data-k"), st = saved[k];
+    function deal() { var w = words.slice().sort(function () { return Math.random() - 0.5; }).slice(0, 16); st = { w: w, on: [] }; save(); draw(); }
+    function save() { saved[k] = st; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} }
+    function win() { var L = [], i; for (i = 0; i < 4; i++) { L.push([0, 1, 2, 3].map(function (j) { return i * 4 + j; })); L.push([0, 1, 2, 3].map(function (j) { return j * 4 + i; })); } L.push([0, 5, 10, 15]); L.push([3, 6, 9, 12]); return L.some(function (l) { return l.every(function (x) { return st.on.indexOf(x) >= 0; }); }); }
+    function draw() {
+      var g = bg.querySelector(".fl-bingo__grid");
+      g.innerHTML = st.w.map(function (w, i) { return '<button type="button" class="fl-bingo__c' + (st.on.indexOf(i) >= 0 ? " on" : "") + '" data-i="' + i + '">' + esc(w) + "</button>"; }).join("") + (win() ? '<div class="fl-bingo__win">BINGO!</div>' : "");
+    }
+    bg.addEventListener("click", function (e) {
+      var c = e.target.closest(".fl-bingo__c");
+      if (c) { var i = +c.getAttribute("data-i"), at = st.on.indexOf(i); if (at >= 0) st.on.splice(at, 1); else st.on.push(i); save(); draw(); }
+      if (e.target.closest('[data-bingo="new"]')) deal();
+    });
+    if (!st || !st.w) deal(); else draw();
+  });
+  root.querySelectorAll(".fl-iso").forEach(function (box) {
+    var b = box.querySelector("[data-iso]"); if (!b) return;
+    b.onclick = function () { var on = box.classList.toggle("fl-iso--show"); b.textContent = on ? "Hide model isovels" : "Show model isovels"; };
+  });
   root.querySelectorAll(".fl-rmap").forEach(function (box) {
     var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
     if (part) riverMap(box, part);

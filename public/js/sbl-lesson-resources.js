@@ -290,3 +290,18 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
   else setup();
 })();
+
+/* ---- Revision Quests: only on the last lesson of each topic ----
+   Quest cards (/geography/games/*-quest) are hidden on other lesson pages. */
+(function () {
+  var LAST = ["/geography/paper-1/core-1/t1-population-and/l4-lesson-4-case", "/geography/paper-1/core-1/t2-changing/l5-internal", "/geography/paper-1/core-1/t3-challenges-and/l4-the-demographic", "/geography/paper-1/core-2/t1-causes-of/l3-the-enhanced", "/geography/paper-1/core-2/t2-consequences-of/l5-the-impacts-of", "/geography/paper-1/core-2/t3-responding-to/l3-civil-society", "/geography/paper-1/core-3/t1-global-trends/l5-patterns-and", "/geography/paper-1/core-3/t2-impacts-of/l5-the-disposal", "/geography/paper-1/core-3/t3-resource/l3-the-value-of", "/geography/paper-1/option-a/t1-drainage-basin/l4-river-landforms", "/geography/paper-1/option-a/t2-flooding-and/l4-case-studies-of", "/geography/paper-1/option-a/t3-water-scarcity/l4-internationally", "/geography/paper-1/option-a/t4-water/l4-freshwater", "/geography/paper-1/option-e/t1-changing/l4-changing", "/geography/paper-1/option-e/t2-tourism-and/l5-a-case-study-of", "/geography/paper-1/option-e/t3-tourism-and/l5-case-study-of-a", "/geography/paper-1/option-e/t4-managing/l4-political-and", "/geography/paper-1/option-f/t1-measuring-food/l5-food-and-health", "/geography/paper-1/option-f/t2-food-systems/l5-cholera-a-water", "/geography/paper-1/option-f/t3-stakeholders-in/l6-case-study", "/geography/paper-1/option-f/t4-future-health/l4-managing", "/geography/paper-2/hl-1/t1-global/l3-powerful", "/geography/paper-2/hl-1/t2-global-networks/l4-synthesis", "/geography/paper-2/hl-1/t3-human-and/l5-the-influence", "/geography/paper-2/hl-2/t1-development/l4-tncs-and", "/geography/paper-2/hl-2/t2-changing/l3-how-diasporas", "/geography/paper-2/hl-2/t3-local-responses/l3-the-role-of", "/geography/paper-2/hl-3/t1-geopolitical/l3-the-link", "/geography/paper-2/hl-3/t2-environmental/l3-environmental", "/geography/paper-2/hl-3/t3-local-and/l2-strategies-to"];
+  function run() {
+    var here = location.pathname.replace(/\/+$/, '');
+    if (!/^\/geography\/paper-[12]\/[^/]+\/t\d/.test(here) || LAST.indexOf(here) >= 0) return;
+    document.querySelectorAll('.lh-mode a.lh-mode__btn[href$="-quest"]').forEach(function (a) {
+      if (!/^\/geography\/games\//.test(a.getAttribute('href'))) return;
+      var c = a.closest('.lh-mode'); if (c) c.style.display = 'none';
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
