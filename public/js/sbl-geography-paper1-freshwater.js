@@ -256,4 +256,52 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   }
+  ,
+  {
+    topic: "SBL practice \u2014 The Hjulstr\u00f6m curve (18 marks)",
+    questions: [
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (a) \u2014 1 mark",
+        marks: 1,
+        question: "State (1 mark). Using the Hjulstr\u00f6m curve in Freshwater Lesson 3 on this site, state the minimum water velocity at which particles are eroded.",
+        markScheme: "Award 1 mark for about 20 cm/s (accept 15\u201325 cm/s). Units must be given."
+      },
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (b) \u2014 1 mark",
+        marks: 1,
+        question: "State (1 mark). State the particle size that is eroded at that minimum velocity.",
+        markScheme: "Award 1 mark for about 0.3 mm (accept 0.2\u20130.5 mm), or for naming medium sand."
+      },
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (c) \u2014 1 mark",
+        marks: 1,
+        question: "State (1 mark). Using the same graph, what is the maximum size of particle that can be transported at a velocity of 10 cm/s?",
+        markScheme: "Award 1 mark for about 1.5 mm (accept 1\u20132 mm, coarse sand). Larger particles would be deposited at this velocity."
+      },
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (d) \u2014 3 marks",
+        marks: 3,
+        question: "State (3 marks). State three ways in which the load of a river is transported.",
+        markScheme: "1 mark each for any three of: traction (rolling or sliding along the bed), saltation (bouncing along the bed), suspension (carried within the water), solution (dissolved). Names alone are enough."
+      },
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (e) \u2014 3 marks",
+        marks: 3,
+        question: "Describe (3 marks). Describe the variations in the boundary between erosion and transport (the critical erosion velocity curve).",
+        markScheme: "Up to 3 marks for description using the graph: the velocity needed to erode is lowest for sand of about 0.2\u20130.5 mm, at about 20 cm/s [1]; for larger particles (gravel, pebbles, boulders) the velocity needed rises steadily, to several hundred cm/s for boulders [1]; for finer particles (silt and clay) the velocity needed also rises, to over 300 cm/s for clay, even though the particles are smaller [1]. Credit use of figures from the graph (e.g. the U or V shape of the curve)."
+      },
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (f) \u2014 5 marks",
+        marks: 5,
+        question: "Explain (5 marks). Explain the variations in the erosion\u2013transport boundary that you have described.",
+        markScheme: "Point development, up to 5 marks. Larger particles (gravel to boulders) are heavier, so more energy and therefore a higher velocity is needed to lift and move them [1+1]. Sand-sized particles are small enough to be lifted easily but are not cohesive, so they need the lowest velocity [1]. Clay and silt particles are very fine and cohesive: they stick together, so a high velocity is needed to break the bonds [1+1]. They also form a smooth bed, so they lie within a thin layer of slow-moving water next to the bed and are not exposed to turbulent flow [1]. Maximum 5."
+      },
+      {
+        label: "SBL practice \u2014 Hjulstr\u00f6m (g) \u2014 4 marks",
+        marks: 4,
+        question: "Explain (4 marks). Explain why the range of water velocity over which particles are transported varies for particles from 0.01 to 1.0 mm in size.",
+        markScheme: "Up to 4 marks. The transport range is the gap between the erosion curve and the settling curve [1]. For the finest particles (around 0.01 mm) the range is very wide: they need a high velocity to be eroded because they are cohesive, but once in suspension they settle only when the water is almost still, because they are so light [1+1]. As particle size increases towards 1 mm, the settling velocity rises (heavier particles fall out sooner) while the erosion velocity stays low, so the range narrows [1]. Credit figures from the graph, e.g. 0.01 mm is transported from about 0.1 to over 100 cm/s, while 1 mm is transported only between about 7 and 25 cm/s [1]. Maximum 4."
+      }
+    ]
+  }
 ].concat((window.SBL_REVISION_TOPICS || []));
