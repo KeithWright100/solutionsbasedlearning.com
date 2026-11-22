@@ -1799,6 +1799,7 @@
     ".fl-anim__g{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.fl-anim__t{margin:0}.fl-anim__t figcaption{margin-top:.3rem;font-size:.88rem}.fl-anim__t figcaption b{display:block;color:var(--lh-teal,#0f766e)}.fl-anim__t figcaption span{color:var(--lh-muted,#555)}@media(max-width:640px){.fl-anim__g{grid-template-columns:1fr}}" +
     ".fl-vel{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-vel__top{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.fl-vel__top input{flex:1;min-width:220px;accent-color:#0f8a6e}.fl-vel__v{font-weight:700;color:#1f5e85}.fl-vel__rows{display:grid;gap:.35rem;margin:.7rem 0}.fl-vel__r{display:grid;grid-template-columns:10rem 1fr;gap:.6rem;align-items:center;font-size:.9rem}.fl-vel__s{padding:.25rem .6rem;border-radius:99px;font-weight:600;font-size:.85rem;transition:background .2s}.fl-vel__s.er{background:#fde2dd;color:#8a1c0f}.fl-vel__s.tr{background:#dbe8fb;color:#1d4f9a}.fl-vel__s.de{background:#efe3cf;color:#6b4a2b}" +
     ".fl-chat{display:grid;gap:.5rem;margin:.3rem 0 .6rem}.fl-chat p{margin:0;padding:.6rem .85rem;border-radius:14px;max-width:85%;font-size:.92rem;line-height:1.45}.fl-chat__a{background:#e8f0fb;justify-self:start;border-bottom-left-radius:4px}.fl-chat__b{background:#dcf3e8;justify-self:end;border-bottom-right-radius:4px}" +
+    ".fl-loc svg{width:100%;max-width:760px;height:auto;display:block;border:1px solid var(--lh-border);border-radius:10px}.fl-clue{border:1px solid var(--lh-border);border-radius:10px;margin:.35rem 0;background:#fff}.fl-clue>summary{cursor:pointer;padding:.55rem .8rem;font-weight:700;color:#1f5e85}.fl-clue>p{margin:0;padding:0 .8rem .7rem}" +
     ".fl-gis{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-gis__ctl{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.6rem}.fl-gis__ctl label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;font-weight:600}.fl-gis__ctl select{padding:.4rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit;min-width:14rem}.fl-gis__map svg{width:100%;height:auto;display:block}.fl-gis__c{cursor:pointer}.fl-gis__c:hover{stroke:#13324a;stroke-width:1.2}.fl-gis__info{min-height:2.6rem;margin:.5rem 0;padding:.5rem .7rem;background:#f4f8fb;border-radius:8px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:center}.fl-gis__legend{display:grid;gap:.4rem;font-size:.8rem}.fl-gis__legend div{display:flex;flex-wrap:wrap;gap:.3rem .8rem;align-items:center}.fl-gis__legend span{display:inline-flex;align-items:center;gap:.3rem}.fl-gis__legend i{display:inline-block;width:16px;height:12px;border-radius:2px}" +
     ".fl-sin{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-sin__in{display:flex;flex-wrap:wrap;gap:1rem}.fl-sin__in label{font-size:.9rem;font-weight:600;display:flex;flex-direction:column;gap:.25rem}.fl-sin__in input{width:9rem;padding:.35rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit}.fl-sin__out{font-size:1rem;margin:.6rem 0 .2rem;color:#13324a}" +
     ".fl-use{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.4rem 0}.fl-use__n{font-size:.85rem;font-weight:600;color:var(--lh-muted,#555);margin-right:.3rem}.fl-use__c{font-size:.82rem;padding:.2rem .55rem;border-radius:99px;border:1px solid var(--lh-border);background:#fff;color:#555}.fl-use__c.on{background:#dcf3e8;border-color:#3aa57a;color:#0b5e3c;font-weight:600}.fl-use__c.on::before{content:'\\2713 '}" +
@@ -1953,6 +1954,26 @@
       mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use the Our World in Data link instead.</p>';
     });
   }
+  /* Locator map: part.box [[west, south], [east, north]], part.hi [country ids to highlight],
+     part.points [{ t, lon, lat }], part.labels [{ t, lon, lat, sea }]. Country borders: Natural Earth via world-atlas. */
+  function locMap(box, part) {
+    var mapEl = box.querySelector(".fl-loc__map");
+    var SRC = ["https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json", "https://unpkg.com/world-atlas@2/countries-50m.json", "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"];
+    function get(i) { return fetch(SRC[i]).then(function (r) { if (!r.ok) throw 0; return r.json(); }).catch(function () { if (i + 1 < SRC.length) return get(i + 1); throw 0; }); }
+    loadJs("/js/vendor/d3-array.min.js").then(function () { return loadJs("/js/vendor/d3-geo.min.js"); }).then(function () { return get(0); }).then(function (topo) {
+      var d3 = window.d3, W = 760, H = 520, fc = topoFeature(topo, "countries"), b = part.box;
+      var frame = { type: "Feature", geometry: { type: "Polygon", coordinates: [[[b[0][0], b[0][1]], [b[1][0], b[0][1]], [b[1][0], b[1][1]], [b[0][0], b[1][1]], [b[0][0], b[0][1]]]] } };
+      var proj = d3.geoMercator().fitExtent([[0, 0], [W, H]], frame), path = d3.geoPath(proj), hi = (part.hi || []).map(String);
+      var svg = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(part.alt || "Locator map") + '"><defs><clipPath id="lcc' + part.id + '"><rect width="' + W + '" height="' + H + '"/></clipPath></defs><rect width="' + W + '" height="' + H + '" fill="#cfe6f5"/><g clip-path="url(#lcc' + part.id + ')">';
+      svg += '<path d="' + path(d3.geoGraticule().step([10, 10])()) + '" fill="none" stroke="#b5d3e6" stroke-width=".7"/>';
+      fc.features.forEach(function (f) { var on = hi.indexOf(String(+f.id)) >= 0; svg += '<path d="' + path(f) + '" fill="' + (on ? "#f6c76b" : "#eef0e6") + '" stroke="#8a8f80" stroke-width=".7"/>'; });
+      if (part.lines) { if (part.lines.lat != null) svg += '<path d="' + path({ type: "LineString", coordinates: [[-180, part.lines.lat], [-90, part.lines.lat], [0, part.lines.lat], [90, part.lines.lat], [180, part.lines.lat]] }) + '" fill="none" stroke="#b42318" stroke-width="2"/>'; if (part.lines.lon != null) svg += '<path d="' + path({ type: "LineString", coordinates: [[part.lines.lon, -85], [part.lines.lon, 0], [part.lines.lon, 85]] }) + '" fill="none" stroke="#b42318" stroke-width="2"/>'; }
+      (part.labels || []).forEach(function (l) { var p = proj([l.lon, l.lat]); svg += '<text x="' + p[0].toFixed(1) + '" y="' + p[1].toFixed(1) + '" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="' + (l.sea ? 13 : 12.5) + '" ' + (l.sea ? 'font-style="italic" fill="#2f6f99"' : 'font-weight="700" fill="#4a4a3a"') + ">" + esc(l.t) + "</text>"; });
+      (part.points || []).forEach(function (pt) { var p = proj([pt.lon, pt.lat]); svg += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="6" fill="#b42318" stroke="#fff" stroke-width="2"/><text x="' + (p[0] + 10).toFixed(1) + '" y="' + (p[1] + 5).toFixed(1) + '" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="800" fill="#7a1d12" stroke="#fff" stroke-width="3" paint-order="stroke">' + esc(pt.t) + "</text>"; });
+      svg += '</g><g transform="translate(' + (W - 40) + ',40)" font-family="Inter,Arial,sans-serif"><circle r="20" fill="#fff" fill-opacity=".85"/><path d="M0 -15 L6 4 L0 0 L-6 4 Z" fill="#13324a"/><text y="15" text-anchor="middle" font-size="11" font-weight="700">N</text></g>';
+      mapEl.innerHTML = svg + '</svg><p class="fl__note">Borders: Natural Earth (public domain).</p>';
+    }).catch(function () { mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use an atlas instead.</p>'; });
+  }
   function riverMap(box, part) {
     var mapEl = box.querySelector(".fl-rmap__map");
     var LAND = ["https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json", "https://unpkg.com/world-atlas@2/land-110m.json"];
@@ -2057,6 +2078,7 @@
     if (p.type === "linkcard") {
       h += '<a class="fl-lcard" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="fl-lcard__i">' + (p.icon || "") + '</span><span><b>' + esc(p.title) + "</b><small>" + esc(p.sub || "") + "</small></span><span class=\"fl-lcard__go\">Open \u2197</span></a>";
     }
+    if (p.type === "locmap") h += '<div class="fl-loc" data-id="' + p.id + '"><div class="fl-loc__map"><p class="fl__note">Loading the map\u2026</p></div></div>';
     if (p.type === "gismap") {
       h += '<div class="fl-gis" data-id="' + p.id + '"><div class="fl-gis__ctl"><label>Main map (colour) <select data-g="a">' + p.layers.map(function (L, i) { return '<option value="' + i + '"' + (i === (p.a || 0) ? " selected" : "") + ">" + esc(L.name) + "</option>"; }).join("") + '</select></label>' +
         '<label>Overlay (circles) <select data-g="b"><option value="">None</option>' + p.layers.map(function (L, i) { return '<option value="' + i + '">' + esc(L.name) + "</option>"; }).join("") + "</select></label></div>" +
@@ -2242,6 +2264,10 @@
   root.querySelectorAll(".fl-iso").forEach(function (box) {
     var b = box.querySelector("[data-iso]"); if (!b) return;
     b.onclick = function () { var on = box.classList.toggle("fl-iso--show"); b.textContent = on ? "Hide model isovels" : "Show model isovels"; };
+  });
+  root.querySelectorAll(".fl-loc").forEach(function (box) {
+    var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
+    if (part) locMap(box, part);
   });
   root.querySelectorAll(".fl-gis").forEach(function (box) {
     var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];

@@ -15,6 +15,33 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
     reflect: { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" }
   };
   window.SBL_KS3_BANNERS = B;
+  function CLIMATE_SVG(name, T, R, tMin, tMax, rMax, w) {
+    var M = "JFMAMJJASOND", X0 = 56, X1 = (w || 360) - 46, Y0 = 30, Y1 = 250, bw = (X1 - X0) / 12;
+    var ty = function (t) { return Y1 - (t - tMin) / (tMax - tMin) * (Y1 - Y0); }, ry = function (r) { return Y1 - r / rMax * (Y1 - Y0); };
+    var s = '<svg viewBox="0 0 ' + (w || 360) + ' 290" role="img" aria-label="Climate graph for ' + name + '" style="width:100%;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="10.5">';
+    s += '<text x="' + ((w || 360) / 2) + '" y="18" text-anchor="middle" font-weight="700" font-size="13">' + name + "</text>";
+    for (var k = 0; k <= 5; k++) { var y = Y1 - k / 5 * (Y1 - Y0); s += '<line x1="' + X0 + '" y1="' + y + '" x2="' + X1 + '" y2="' + y + '" stroke="#eee"/><text x="' + (X0 - 5) + '" y="' + (y + 3.5) + '" text-anchor="end" fill="#1f5e85">' + Math.round(k / 5 * rMax) + '</text><text x="' + (X1 + 5) + '" y="' + (y + 3.5) + '" fill="#b42318">' + Math.round(tMin + k / 5 * (tMax - tMin)) + "</text>"; }
+    R.forEach(function (r, i) { s += '<rect x="' + (X0 + i * bw + 2).toFixed(1) + '" y="' + ry(r).toFixed(1) + '" width="' + (bw - 4).toFixed(1) + '" height="' + (Y1 - ry(r)).toFixed(1) + '" fill="#5aa6d1"/><text x="' + (X0 + i * bw + bw / 2).toFixed(1) + '" y="' + (Y1 + 13) + '" text-anchor="middle">' + M[i] + "</text>"; });
+    s += '<path d="M' + T.map(function (t, i) { return (X0 + i * bw + bw / 2).toFixed(1) + " " + ty(t).toFixed(1); }).join(" L") + '" fill="none" stroke="#b42318" stroke-width="2.5"/>' + T.map(function (t, i) { return '<circle cx="' + (X0 + i * bw + bw / 2).toFixed(1) + '" cy="' + ty(t).toFixed(1) + '" r="2.6" fill="#b42318"/>'; }).join("");
+    s += '<line x1="' + X0 + '" y1="' + Y1 + '" x2="' + X1 + '" y2="' + Y1 + '" stroke="#333"/><line x1="' + X0 + '" y1="' + Y0 + '" x2="' + X0 + '" y2="' + Y1 + '" stroke="#1f5e85"/><line x1="' + X1 + '" y1="' + Y0 + '" x2="' + X1 + '" y2="' + Y1 + '" stroke="#b42318"/>';
+    s += '<text x="12" y="140" transform="rotate(-90 12 140)" text-anchor="middle" fill="#1f5e85">Precipitation (mm)</text><text x="' + ((w || 360) - 8) + '" y="140" transform="rotate(90 ' + ((w || 360) - 8) + ' 140)" text-anchor="middle" fill="#b42318">Temperature (°C)</text>';
+    return s + "</g></svg>";
+  }
+  var BLANK_CLIMATE = (function () {
+    var X0 = 80, X1 = 680, Y0 = 40, Y1 = 400, M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var s = '<svg viewBox="0 0 760 450" role="img" aria-label="Blank climate graph axes for Oslo: rainfall 0 to 100 millimetres on the left, temperature minus 5 to 25 degrees on the right, months along the bottom" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12">';
+    for (var y = Y0; y <= Y1 + 0.1; y += 9) s += '<line x1="' + X0 + '" y1="' + y + '" x2="' + X1 + '" y2="' + y + '" stroke="' + ((y - Y0) % 72 === 0 ? "#b9cbe0" : "#e3ecf5") + '"/>';
+    for (var x = X0; x <= X1 + 0.1; x += 10) s += '<line x1="' + x + '" y1="' + Y0 + '" x2="' + x + '" y2="' + Y1 + '" stroke="' + ((x - X0) % 50 === 0 ? "#b9cbe0" : "#e3ecf5") + '"/>';
+    for (var k = 0; k <= 5; k++) { var yy = Y1 - k * 72; s += '<text x="' + (X0 - 8) + '" y="' + (yy + 4) + '" text-anchor="end" fill="#1f5e85" font-weight="700">' + (k * 20) + "</text>"; }
+    for (var t = 0; t <= 6; t++) { var yt = Y1 - t * 60; s += '<line x1="' + X1 + '" y1="' + yt + '" x2="' + (X1 + 5) + '" y2="' + yt + '" stroke="#b42318" stroke-width="2"/><text x="' + (X1 + 9) + '" y="' + (yt + 4) + '" fill="#b42318" font-weight="700">' + (t * 5 - 5) + "</text>"; }
+    M.forEach(function (m, i) { s += '<text x="' + (X0 + 25 + i * 50) + '" y="' + (Y1 + 18) + '" text-anchor="middle">' + m + "</text>"; });
+    s += '<line x1="' + X0 + '" y1="' + Y0 + '" x2="' + X0 + '" y2="' + Y1 + '" stroke="#1f5e85" stroke-width="2"/><line x1="' + X1 + '" y1="' + Y0 + '" x2="' + X1 + '" y2="' + Y1 + '" stroke="#b42318" stroke-width="2"/><line x1="' + X0 + '" y1="' + Y1 + '" x2="' + X1 + '" y2="' + Y1 + '" stroke="#333" stroke-width="2"/>';
+    s += '<text x="' + X0 + '" y="26" text-anchor="middle" fill="#1f5e85" font-weight="700">Rainfall (mm)</text><text x="' + X1 + '" y="26" text-anchor="middle" fill="#b42318" font-weight="700">Temperature (°C)</text><text x="380" y="444" text-anchor="middle" fill="#333">Climate graph for Oslo</text>';
+    return s + "</g></svg>";
+  })();
+  var OSLO_T = [-3, -2, 2, 7, 13, 17, 18, 17, 12, 6, 1, -2], OSLO_R = [49, 37, 48, 41, 54, 81, 84, 95, 90, 90, 73, 63];
+  var BKK_T = [27.5, 28.7, 29.8, 30.9, 30.4, 29.8, 29.4, 29.2, 28.7, 28.4, 28.1, 27.0], BKK_R = [21, 20, 52, 81, 220, 210, 207, 242, 331, 244, 59, 13];
+  var CLIMATE_PAIR = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem">' + CLIMATE_SVG("Oslo, Norway", OSLO_T, OSLO_R, -5, 20, 100) + CLIMATE_SVG("Bangkok, Thailand", BKK_T, BKK_R, 0, 35, 350) + "</div>";
   var JUXT_SVG = (function () {
     var s = '<svg viewBox="0 0 760 300" role="img" aria-label="Illustration: modern skyscrapers rising directly behind an area of small informal homes with metal roofs" style="width:100%;max-width:760px;height:auto;display:block;border:1px solid var(--lh-border);border-radius:10px"><defs><linearGradient id="jsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe0f5"/><stop offset="1" stop-color="#eef7fc"/></linearGradient></defs><rect width="760" height="300" fill="url(#jsky)"/>';
     [[420, 40, 60], [490, 70, 50], [550, 20, 70], [630, 90, 55], [690, 60, 50], [360, 100, 50]].forEach(function (b) {
@@ -193,6 +220,70 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
       B.reflect,
       { type: "heading", text: "Review your learning", note: "Play the class Kahoot to check what you have learned." },
       { type: "linkcard", url: "https://create.kahoot.it/share/gis-analysing-inequality-at-different-scales-1/db767d5f-22bc-44d8-82b3-bc49c711a93a", icon: "K", title: "Kahoot: GIS, analysing inequality at different scales", sub: "Your teacher will start the game on the board" }
+    ]
+  });
+
+  L["KS3-Y7FP-L5"] = lesson({
+    title: "Oslo: weather, climate and climate graphs",
+    overview: {
+      heading: "Fantastic places",
+      intention: "To describe the location and climate of Oslo, and to draw and interpret a climate graph.",
+      syllabus: ["Key question: what is the climate like in Oslo, and how can we show climate data visually?"],
+      success: ["Describe the location of Oslo using continent, country, hemisphere, compass directions and nearby features.",
+        "Read climate data to find the coldest and wettest months and calculate the temperature range.",
+        "Draw a climate graph for Oslo and use it to describe the climate in detail."]
+    },
+    parts: [
+      B.connect,
+      { type: "heading", text: "Starter: What’s the weather like?", note: "Look out of the window. What things make up the ‘weather’? Write as many words as you can on your whiteboard, then complete the table." },
+      { id: "s0", label: "a)", type: "text", prompt: "Weather words I can think of:" },
+      { id: "s1", label: "b)", type: "table", prompt: "Describe each weather variable.", cols: ["Variable", "Description"], rows: ["Temperature (hot or cold?) and humidity", "Precipitation (rainfall or snow?)", "Extreme weather events", "Air pressure and wind speed", "Wind direction", "Cloud cover and different types of cloud"] },
+      B.demonstrate,
+      { type: "heading", text: "Activity 1: Place: which city am I?", note: "Grab a small whiteboard. Your teacher will reveal up to 10 clues. After each clue, wait to be told before you raise your board." },
+      { type: "html", html: '<details class="fl-clue"><summary>Clue 1</summary><p>I am a capital city.</p></details><details class="fl-clue"><summary>Clue 2</summary><p>I am in the Northern Hemisphere, and in the Eastern Hemisphere too.</p></details><details class="fl-clue"><summary>Clue 3</summary><p>I am on the continent of Europe.</p></details><details class="fl-clue"><summary>Clue 4</summary><p>I am in a region called Scandinavia.</p></details><details class="fl-clue"><summary>Clue 5</summary><p>I sit at the head of a long, narrow inlet of the sea called a fjord.</p></details><details class="fl-clue"><summary>Clue 6</summary><p>In winter the average temperature is below 0°C, and there can be snow for months.</p></details><details class="fl-clue"><summary>Clue 7</summary><p>In summer it stays light until nearly 11 at night.</p></details><details class="fl-clue"><summary>Clue 8</summary><p>My country became rich from oil and gas found under the North Sea.</p></details><details class="fl-clue"><summary>Clue 9</summary><p>The Nobel Peace Prize is awarded in my city every December.</p></details><details class="fl-clue"><summary>Clue 10</summary><p>I am the capital of Norway.</p></details><details class="fl-clue"><summary>Reveal the answer</summary><p><b>Oslo, Norway</b></p></details>' },
+      { type: "heading", text: "Activity 2: Describing the location of Oslo" },
+      { id: "loc", label: "", type: "locmap", alt: "Map of northern Europe with Norway highlighted and Oslo marked", box: [[-6, 52], [32, 71]], hi: [578], points: [{ t: "Oslo", lon: 10.75, lat: 59.91 }],
+        labels: [{ t: "NORWAY", lon: 9, lat: 62.5 }, { t: "SWEDEN", lon: 16, lat: 63 }, { t: "FINLAND", lon: 26.5, lat: 63.5 }, { t: "DENMARK", lon: 9.3, lat: 56.1 }, { t: "UK", lon: -1.5, lat: 53.2 }, { t: "North Sea", lon: 3, lat: 56.5, sea: true }, { t: "Norwegian Sea", lon: 3, lat: 66.5, sea: true }, { t: "Baltic Sea", lon: 19.5, lat: 57.5, sea: true }, { t: "Skagerrak", lon: 8.8, lat: 57.8, sea: true }] },
+      { id: "l1", label: "", type: "text", words: [40, 100], prompt: "Describe the location of Oslo. Include the continent, country, hemisphere, compass directions and nearby (adjacent) features.",
+        note: "Sentence starters: Oslo is the capital city of ___, in the continent of ___. It is in the ___ Hemisphere. It lies in the ___ of Norway, at the head of the Oslofjord, which leads to the ___. To the east is ___." },
+      { type: "heading", text: "Oslo is a long way north!", note: "Look at the other places on the same line of latitude as Oslo (about 60\u00b0N)." },
+      { id: "lat", label: "", type: "locmap", alt: "World map with a line along latitude 60 degrees north and a line along longitude 10.75 degrees east, crossing at Oslo", box: [[-170, -56], [180, 78]], points: [{ t: "Oslo", lon: 10.75, lat: 59.91 }], lines: { lat: 59.91, lon: 10.75 },
+        labels: [{ t: "Oslo: 59\u00b055\u2032N, 10\u00b045\u2032E", lon: -120, lat: -45 }] },
+      { id: "lat1", label: "", type: "table", prompt: "What do you think Oslo\u2019s climate will be like? Discuss with the person next to you, then write your predictions.", cols: ["", "My prediction and why"], rows: ["Rainfall / precipitation", "Temperature", "Hours of sunlight"] },
+      { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Oslo has dramatic physical and human geography!</b><ul style="margin:.4rem 0 0 1.1rem;padding:0"><li><b>Physical:</b> the city sits at the head of the Oslofjord and is surrounded by forested hills; on dark winter nights the northern lights (aurora borealis) can sometimes be seen.</li><li><b>Human:</b> a modern waterfront of offices, apartments and the Opera House, a busy harbour, and the Holmenkollen ski jump on the hills above the city.</li></ul></div>' },
+      { id: "lat2", label: "", type: "text", prompt: "List two physical and two human features of Oslo." },
+      { type: "heading", text: "Activity 3: Processes: Oslo’s climate data", note: "Here is the average rainfall (in millimetres) and temperature (in °C) for each month in Oslo." },
+      { id: "d0", label: "", type: "table", prompt: "", given: true, cols: ["Month", "J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"], rows: ["Temperature (°C)", "Rainfall (mm)"],
+        prefill: { 0: OSLO_T.map(String), 1: OSLO_R.map(String) } },
+      { id: "d1", label: "", type: "mcq", noReason: true, prompt: "Read the data", items: [
+        { q: "Which is the coldest month?", o: ["January", "February", "November", "December"], a: 0 },
+        { q: "Which is the wettest month?", o: ["June", "July", "August", "October"], a: 2 },
+        { q: "What is the temperature range (the difference between the hottest and coldest months)? Be careful with the negative number!", o: ["15°C", "18°C", "21°C", "-21°C"], a: 2 }] },
+      { id: "d2", label: "", type: "text", prompt: "This table is not a very interesting way to show the data! In a pair or small group, use your big whiteboard to show the data in a more visual way. Describe your idea here, and take a photo for OneNote." },
+      { type: "heading", text: "Activity 4: Constructing a climate graph", note: "Use the graph paper your teacher gives you to plot the climate graph for Oslo: rainfall as blue bars, temperature as a red line. Use the game below for help." },
+      { type: "html", html: '<p class="fl__q" style="margin:0 0 .4rem">How are we going to construct the axes?</p>' + BLANK_CLIMATE + '<p class="fl__note">Rainfall uses the left axis (0\u2013100 mm) and temperature the right axis (\u22125 to 25\u00b0C), so check which scale you are reading before you plot each point. Use <b>Print / save as PDF</b> at the bottom of the page to print it.</p>' },
+      { type: "game", src: "/geography/games/climate-graph-oslo", title: "Build a Climate Graph: Oslo" },
+      { type: "heading", text: "Activity 5: Developing your writing" },
+      { id: "w1", label: "", type: "text", words: [80, 180], prompt: "Write a paragraph about the annual climate of Oslo.",
+        before: '<div class="fl__tnote"><b>Refer to:</b><ul style="margin:.3rem 0 0 1.1rem;padding:0"><li>the hottest and coldest months (give both the months and the temperatures in \u00b0C)</li><li>the wettest and driest months</li><li>the <b>mean</b> (average) temperature for the year: you will need to calculate this!</li><li>the <b>total</b> rainfall for the year</li><li>the <b>range</b> of temperature: remember there are negative numbers, so be careful!</li></ul></div>',
+        note: "Each term turns green when you use it.",
+        mustUse: [["Hottest", "hottest|warmest"], ["Coldest", "coldest"], ["Wettest", "wettest"], ["Driest", "driest"], ["Mean", "mean|average"], ["Total rainfall", "total"], ["Range", "range"], ["\u00b0C", "\u00b0c|degrees"], ["mm", "mm|millimetre"]] },
+      { id: "w2", label: "", type: "mcq", noReason: true, prompt: "Check your calculations", items: [
+        { q: "What is the mean (average) temperature for the year in Oslo? (Add the 12 temperatures, then divide by 12.)", o: ["about 5.5\u00b0C", "about 7.2\u00b0C", "about 8.6\u00b0C", "about 10.5\u00b0C"], a: 1 },
+        { q: "What is the total rainfall for the year?", o: ["705 mm", "780 mm", "805 mm", "905 mm"], a: 2 },
+        { q: "Which is the driest month?", o: ["January", "February", "April", "May"], a: 1 }] },
+      B.quizzes,
+      { id: "q1", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+        { q: "On a climate graph, rainfall is usually shown as…", o: ["a red line", "blue bars", "a pie chart", "dots"], a: 1 },
+        { q: "Oslo is in which hemispheres?", o: ["Northern and Western", "Southern and Eastern", "Northern and Eastern", "Southern and Western"], a: 2 },
+        { q: "Which of these is weather, not climate?", o: ["Oslo has cold winters", "It is snowing in Oslo today", "Oslo’s wettest month is August", "Summers in Oslo are mild"], a: 1 },
+        { q: "Oslo sits at the head of a long, narrow sea inlet called a…", o: ["delta", "fjord", "lagoon", "bay"], a: 1 }] },
+      B.challenge,
+      { type: "heading", text: "Extra for experts: comparing climate graphs", note: "Compare Oslo with Bangkok. Look very carefully at the axes before you answer." },
+      { type: "html", html: CLIMATE_PAIR + '<p class="fl__note">Approximate monthly averages.</p>' },
+      { id: "x1", label: "", type: "questions", letters: true, prompt: "", rows: ["Why do we need to be careful when comparing these two climate graphs?", "Which city has the bigger precipitation (rainfall) range? Show your working.", "Which city has the bigger temperature range? Show your working."] },
+      B.reflect,
+      { id: "r1", label: "", type: "text", prompt: "Exit ticket: what is the difference between weather and climate? Give one example of each for Oslo." }
     ]
   });
 })(window.SBL_FLIP_EXTRA);

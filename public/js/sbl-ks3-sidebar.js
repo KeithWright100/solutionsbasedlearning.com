@@ -32,7 +32,14 @@
         "topics": [
           {
             "title": "Lessons",
-            "lessons": []
+            "lessons": [
+                {
+                  "label": "Oslo: weather, climate and climate graphs",
+                  "href": "/ks3/geography/y7-fantastic-places/l5-oslo-climate",
+                  "id": "KS3-Y7FP-L5",
+                  "n": 5
+                }
+              ]
           }
         ]
       },
