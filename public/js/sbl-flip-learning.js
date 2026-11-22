@@ -1943,9 +1943,12 @@
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
   var isL = cfg.kind === "lesson";
   var inl = !!cfg.inline;
+  /* Panels start open; if a student collapses one, it stays collapsed on that device until they open it again. */
+  var OPENKEY = KEY + "-collapsed", startOpen = cfg.open !== false;
+  try { if (localStorage.getItem(OPENKEY) === "1") startOpen = false; } catch (e) {}
   var h = inl
     ? '<section class="fl fl--lesson fl--inline" id="flipLearning' + (n ? n + 1 : "") + '"><div class="fl__ihead"><h2>Lesson resources</h2><span class="fl__state"></span></div><div class="fl__body">'
-    : '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"' + (cfg.open ? " open" : "") + '><summary>' +
+    : '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"' + (startOpen ? " open" : "") + '><summary>' +
     (inl ? "" : (
     (isL ? '<span class="fl__logo" aria-label="Lesson Resources"><span class="fl__logo-a">Lesson</span> <span class="fl__logo-b">Resources</span></span>'
          : '<span class="fl__logo" aria-label="Flip Learning"><span class="fl__logo-a">Flip</span> <span class="fl__logo-b">Learning</span></span>') +
@@ -2129,6 +2132,10 @@
   else modes.insertAdjacentHTML("beforebegin", h);
   var root = document.getElementById("flipLearning" + (n ? n + 1 : ""));
   if (ed.open) root.open = true;
+  if (root && root.tagName === "DETAILS") root.addEventListener("toggle", function () {
+    if (document.body.classList.contains("fl-printing")) return;
+    try { if (root.open) localStorage.removeItem(OPENKEY); else localStorage.setItem(OPENKEY, "1"); } catch (e) {}
+  });
   if (cfg.overview && !document.getElementById("lhOverview")) {
     var o = cfg.overview, first = document.querySelector(".lh-stats") || document.querySelector(".fl:not(.fl--lesson)") || modes;
     first.insertAdjacentHTML("beforebegin", '<section class="lh-ov" id="lhOverview">' +
