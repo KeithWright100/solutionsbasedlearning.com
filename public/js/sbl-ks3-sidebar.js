@@ -107,7 +107,14 @@
         "topics": [
           {
             "title": "Lessons",
-            "lessons": []
+            "lessons": [
+                {
+                  "label": "GIS: analysing inequality at different scales",
+                  "href": "/ks3/geography/y8-development-and-inequality/l3-gis-inequality",
+                  "id": "KS3-Y8DEV-L3",
+                  "n": 3
+                }
+              ]
           }
         ]
       },
@@ -278,7 +285,7 @@
           h += '<ul class="tn-tree tn-l4"' + (uOpen ? "" : " hidden") + ' data-for="' + uid + '">';
           ls.forEach(function (l, li) {
             var cur = here && here.lesson && norm(l.href) === norm(here.lesson);
-            h += '<li><a class="tn-leaf' + (cur ? " is-current" : "") + '" href="' + esc(l.href) + '"' + (cur ? ' aria-current="page"' : "") + ">" + (li + 1) + ". " + esc(l.label) + "</a></li>";
+            h += '<li><a class="tn-leaf' + (cur ? " is-current" : "") + '" href="' + esc(l.href) + '"' + (cur ? ' aria-current="page"' : "") + ">" + (l.n || li + 1) + ". " + esc(l.label) + "</a></li>";
           });
           h += "</ul>";
         }

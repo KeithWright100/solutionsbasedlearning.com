@@ -1798,6 +1798,7 @@
     ".fl-bingo__win{position:absolute;inset:0;display:grid;place-items:center;font:800 3rem var(--lh-font-display);color:#fff;background:rgba(15,110,86,.82);border-radius:12px;pointer-events:none}" +
     ".fl-anim__g{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.fl-anim__t{margin:0}.fl-anim__t figcaption{margin-top:.3rem;font-size:.88rem}.fl-anim__t figcaption b{display:block;color:var(--lh-teal,#0f766e)}.fl-anim__t figcaption span{color:var(--lh-muted,#555)}@media(max-width:640px){.fl-anim__g{grid-template-columns:1fr}}" +
     ".fl-vel{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-vel__top{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.fl-vel__top input{flex:1;min-width:220px;accent-color:#0f8a6e}.fl-vel__v{font-weight:700;color:#1f5e85}.fl-vel__rows{display:grid;gap:.35rem;margin:.7rem 0}.fl-vel__r{display:grid;grid-template-columns:10rem 1fr;gap:.6rem;align-items:center;font-size:.9rem}.fl-vel__s{padding:.25rem .6rem;border-radius:99px;font-weight:600;font-size:.85rem;transition:background .2s}.fl-vel__s.er{background:#fde2dd;color:#8a1c0f}.fl-vel__s.tr{background:#dbe8fb;color:#1d4f9a}.fl-vel__s.de{background:#efe3cf;color:#6b4a2b}" +
+    ".fl-gis{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-gis__ctl{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.6rem}.fl-gis__ctl label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;font-weight:600}.fl-gis__ctl select{padding:.4rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit;min-width:14rem}.fl-gis__map svg{width:100%;height:auto;display:block}.fl-gis__c{cursor:pointer}.fl-gis__c:hover{stroke:#13324a;stroke-width:1.2}.fl-gis__info{min-height:2.6rem;margin:.5rem 0;padding:.5rem .7rem;background:#f4f8fb;border-radius:8px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:center}.fl-gis__legend{display:grid;gap:.4rem;font-size:.8rem}.fl-gis__legend div{display:flex;flex-wrap:wrap;gap:.3rem .8rem;align-items:center}.fl-gis__legend span{display:inline-flex;align-items:center;gap:.3rem}.fl-gis__legend i{display:inline-block;width:16px;height:12px;border-radius:2px}" +
     ".fl-sin{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-sin__in{display:flex;flex-wrap:wrap;gap:1rem}.fl-sin__in label{font-size:.9rem;font-weight:600;display:flex;flex-direction:column;gap:.25rem}.fl-sin__in input{width:9rem;padding:.35rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit}.fl-sin__out{font-size:1rem;margin:.6rem 0 .2rem;color:#13324a}" +
     ".fl-use{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.4rem 0}.fl-use__n{font-size:.85rem;font-weight:600;color:var(--lh-muted,#555);margin-right:.3rem}.fl-use__c{font-size:.82rem;padding:.2rem .55rem;border-radius:99px;border:1px solid var(--lh-border);background:#fff;color:#555}.fl-use__c.on{background:#dcf3e8;border-color:#3aa57a;color:#0b5e3c;font-weight:600}.fl-use__c.on::before{content:'\\2713 '}" +
     ".fl-iso .iso-model{display:none}.fl-iso--show .iso-model{display:inline}" +
@@ -1907,7 +1908,49 @@
       return null;
     }
     var o = topo.objects[obj], gs = o.type === "GeometryCollection" ? o.geometries : [o];
-    return { type: "FeatureCollection", features: gs.map(function (g) { return { type: "Feature", properties: {}, geometry: geom(g) }; }).filter(function (f) { return f.geometry; }) };
+    return { type: "FeatureCollection", features: gs.map(function (g) { return { type: "Feature", id: g.id, properties: g.properties || {}, geometry: geom(g) }; }).filter(function (f) { return f.geometry; }) };
+  }
+  /* Interactive world map for KS3/IB GIS tasks: choose a data layer to colour the countries,
+     add a second layer as circles on top (overlay), and tap a country to read its values.
+     part.layers: [{ key, name, unit, bands: [5 labels], colors: [5 colours] }], part.data: "id:b1:b2:b3;..." (0 = no data). */
+  function gisMap(box, part) {
+    var mapEl = box.querySelector(".fl-gis__map"), info = box.querySelector(".fl-gis__info"), legend = box.querySelector(".fl-gis__legend");
+    var selA = box.querySelector('[data-g="a"]'), selB = box.querySelector('[data-g="b"]');
+    var DATA = {};
+    part.data.split(";").forEach(function (r) { var f = r.split(":"); if (f.length > 1) DATA[String(+f[0])] = f.slice(1).map(Number); });
+    var SRC = ["https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json", "https://unpkg.com/world-atlas@2/countries-110m.json"];
+    function get(i) { return fetch(SRC[i]).then(function (r) { if (!r.ok) throw 0; return r.json(); }).catch(function () { if (i + 1 < SRC.length) return get(i + 1); throw 0; }); }
+    loadJs("/js/vendor/d3-array.min.js").then(function () { return loadJs("/js/vendor/d3-geo.min.js"); }).then(function () { return get(0); }).then(function (topo) {
+      var d3 = window.d3, W = 960, H = 490, fc = topoFeature(topo, "countries");
+      var proj = d3.geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H - 6]], { type: "Sphere" }), path = d3.geoPath(proj);
+      var feats = fc.features.filter(function (f) { return f.properties.name !== "Antarctica"; });
+      function draw() {
+        var a = +selA.value, b = selB.value === "" ? -1 : +selB.value, LA = part.layers[a], LB = b >= 0 ? part.layers[b] : null;
+        var svg = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="World map coloured by ' + esc(LA.name) + (LB ? ", with circles showing " + esc(LB.name) : "") + '"><defs><pattern id="glnd" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#eceff2"/><path d="M0 0V6" stroke="#cfd5db" stroke-width="2"/></pattern></defs>' +
+          '<path d="' + path({ type: "Sphere" }) + '" fill="#e8f3fa" stroke="#9fb7c4"/><path d="' + path(d3.geoGraticule10()) + '" fill="none" stroke="#d6e6ef" stroke-width=".6"/>';
+        feats.forEach(function (f, i) {
+          var v = (DATA[String(+f.id)] || [])[a];
+          svg += '<path class="fl-gis__c" data-i="' + i + '" d="' + path(f) + '" fill="' + (v ? LA.colors[v - 1] : "url(#glnd)") + '" stroke="#fff" stroke-width=".5"/>';
+        });
+        if (LB) feats.forEach(function (f, i) {
+          var v = (DATA[String(+f.id)] || [])[b]; if (!v) return;
+          var c = path.centroid(f); if (!isFinite(c[0])) return;
+          svg += '<circle class="fl-gis__c" data-i="' + i + '" cx="' + c[0].toFixed(1) + '" cy="' + c[1].toFixed(1) + '" r="' + (1.5 + v * 1.6).toFixed(1) + '" fill="' + LB.colors[4] + '" fill-opacity=".75" stroke="#fff" stroke-width=".8"/>';
+        });
+        mapEl.innerHTML = svg + "</svg>";
+        legend.innerHTML = '<div><b>' + esc(LA.name) + "</b> (colour)" + LA.bands.map(function (t, i) { return '<span><i style="background:' + LA.colors[i] + '"></i>' + esc(t) + "</span>"; }).join("") + '<span><i style="background:#e2e6ea"></i>No data</span></div>' +
+          (LB ? '<div><b>' + esc(LB.name) + "</b> (circles)" + LB.bands.map(function (t, i) { var r = 1.5 + (i + 1) * 1.6; return '<span><svg width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="' + r + '" fill="' + LB.colors[4] + '" fill-opacity=".75"/></svg>' + esc(t) + "</span>"; }).join("") + "</div>" : "");
+      }
+      function show(i) {
+        var f = feats[i], d = DATA[String(+f.id)] || [];
+        info.innerHTML = "<b>" + esc(f.properties.name || "") + "</b>" + part.layers.map(function (L, k) { return '<span>' + esc(L.name) + ": " + (d[k] ? esc(L.bands[d[k] - 1]) : "no data") + "</span>"; }).join("");
+      }
+      mapEl.addEventListener("mousemove", function (e) { var t = e.target.closest(".fl-gis__c"); if (t) show(+t.getAttribute("data-i")); });
+      mapEl.addEventListener("click", function (e) { var t = e.target.closest(".fl-gis__c"); if (t) show(+t.getAttribute("data-i")); });
+      selA.onchange = draw; selB.onchange = draw; draw();
+    }).catch(function () {
+      mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use the Our World in Data link instead.</p>';
+    });
   }
   function riverMap(box, part) {
     var mapEl = box.querySelector(".fl-rmap__map");
@@ -2012,6 +2055,12 @@
     }
     if (p.type === "linkcard") {
       h += '<a class="fl-lcard" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="fl-lcard__i">' + (p.icon || "") + '</span><span><b>' + esc(p.title) + "</b><small>" + esc(p.sub || "") + "</small></span><span class=\"fl-lcard__go\">Open \u2197</span></a>";
+    }
+    if (p.type === "gismap") {
+      h += '<div class="fl-gis" data-id="' + p.id + '"><div class="fl-gis__ctl"><label>Main map (colour) <select data-g="a">' + p.layers.map(function (L, i) { return '<option value="' + i + '"' + (i === (p.a || 0) ? " selected" : "") + ">" + esc(L.name) + "</option>"; }).join("") + '</select></label>' +
+        '<label>Overlay (circles) <select data-g="b"><option value="">None</option>' + p.layers.map(function (L, i) { return '<option value="' + i + '">' + esc(L.name) + "</option>"; }).join("") + "</select></label></div>" +
+        '<div class="fl-gis__map"><p class="fl__note">Loading the map\u2026</p></div><div class="fl-gis__info">Move over or tap a country to see its data.</div><div class="fl-gis__legend"></div>' +
+        (p.source ? '<p class="fl__note">' + esc(p.source) + "</p>" : "") + "</div>";
     }
     if (p.type === "rivermap") {
       h += '<div class="fl-rmap" data-id="' + p.id + '"><div class="fl-rmap__map"><p class="fl__note">Loading the map\u2026</p></div>' +
@@ -2192,6 +2241,10 @@
   root.querySelectorAll(".fl-iso").forEach(function (box) {
     var b = box.querySelector("[data-iso]"); if (!b) return;
     b.onclick = function () { var on = box.classList.toggle("fl-iso--show"); b.textContent = on ? "Hide model isovels" : "Show model isovels"; };
+  });
+  root.querySelectorAll(".fl-gis").forEach(function (box) {
+    var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
+    if (part) gisMap(box, part);
   });
   root.querySelectorAll(".fl-rmap").forEach(function (box) {
     var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
