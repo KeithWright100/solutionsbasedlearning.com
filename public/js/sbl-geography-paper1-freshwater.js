@@ -244,4 +244,16 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   }
+  ,
+  {
+    topic: "SBL practice \u2014 Discharge and channel shape (6 marks)",
+    questions: [
+      {
+        label: "SBL practice \u2014 Discharge and channel size and shape \u2014 6 marks",
+        marks: 6,
+        question: "Explain (6 marks). Explain how stream discharge is related to channel size and shape.",
+        markScheme: "Point development: award up to 3 points, each worth 2 marks (1 mark for a valid point, 1 mark for developing it with explanation, a calculation or an example). Valid points include: (1) Discharge = cross-sectional area \u00d7 velocity, so a larger channel (greater width \u00d7 mean depth) can carry a greater discharge [1]; developed by noting that width and depth both increase downstream as discharge rises, or by a simple worked figure [1]. (2) Channel shape controls efficiency through the hydraulic radius (cross-sectional area \u00f7 wetted perimeter) [1]; developed by explaining that a deep, semicircular or wide-and-deep channel has less water in contact with the bed and banks, so less friction, higher velocity and therefore higher discharge for the same area, whereas a wide, shallow channel loses more energy to friction [1]. (3) Bed and bank roughness (Manning\u2019s n) [1]; developed by explaining that rough, boulder-strewn upland channels create turbulence and friction that reduce velocity and discharge, while smoother lowland channels of silt and clay allow faster flow [1]. (4) Bankfull discharge [1]; developed by explaining that a channel is most efficient at bankfull because the hydraulic radius is greatest, and that once water spills onto the floodplain the wetted perimeter rises sharply and efficiency falls [1]. (5) Downstream change (Bradshaw model) [1]; developed by explaining that although the gradient falls, the larger, more efficient channel means velocity and discharge both increase towards the mouth [1]. Credit relevant labelled diagrams. Do not award marks for simply defining discharge without linking it to channel size or shape. Maximum 6 marks."
+      }
+    ]
+  }
 ].concat((window.SBL_REVISION_TOPICS || []));

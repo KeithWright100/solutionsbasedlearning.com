@@ -261,6 +261,112 @@
     '<path d="M450 175 C440 130 500 120 495 150 C492 170 465 160 480 135 C500 105 560 125 545 155 C535 175 515 160 530 135 C550 105 610 120 600 150 C592 175 570 160 585 135 C600 112 660 110 700 120" fill="none" stroke="#c2410c" stroke-width="2.6" marker-end="url(#fb)"/>' +
     '<text x="20" y="215" fill="#555">Upstream</text><text x="350" y="215" text-anchor="end" fill="#555">Downstream →</text><text x="410" y="215" fill="#555">Upstream</text><text x="740" y="215" text-anchor="end" fill="#555">Downstream →</text></g></svg>';
 
+  var CHANNELS_SVG = "<svg viewBox=\"0 0 760 270\" role=\"img\" aria-label=\"Concrete channel cross-section with isovels from 25 to 45 cm per second\" style=\"width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px\"><g font-family=\"Inter,Arial,sans-serif\" font-size=\"12\"><text x=\"20\" y=\"22\" font-weight=\"700\" font-size=\"14\">a) Concrete channel</text><path d=\"M120 40 L210 230 L550 230 L640 40 L665 40 L570 252 L190 252 L95 40 Z\" fill=\"#cfcfcf\" stroke=\"#777\"/><defs><clipPath id=\"ccw\"><path d=\"M140 80 L210 230 L550 230 L620 80 Z\"/></clipPath></defs><path d=\"M140 80 L210 230 L550 230 L620 80 Z\" fill=\"#e3f2fb\"/><g clip-path=\"url(#ccw)\"><line x1=\"140\" y1=\"80\" x2=\"620\" y2=\"80\" stroke=\"#1f5e85\" stroke-width=\"2\"/><path d=\"M150 80 A230 140 0 0 0 610 80\" fill=\"none\" stroke=\"#2a63b8\" stroke-width=\"2\"/><text x=\"207\" y=\"180\" fill=\"#2a63b8\" font-weight=\"700\">25</text><path d=\"M190 80 A190 112 0 0 0 570 80\" fill=\"none\" stroke=\"#0f8a6e\" stroke-width=\"2\"/><text x=\"236\" y=\"161\" fill=\"#0f8a6e\" font-weight=\"700\">30</text><path d=\"M230 80 A150 86 0 0 0 530 80\" fill=\"none\" stroke=\"#7a9a1a\" stroke-width=\"2\"/><text x=\"264\" y=\"143\" fill=\"#7a9a1a\" font-weight=\"700\">35</text><path d=\"M270 80 A110 62 0 0 0 490 80\" fill=\"none\" stroke=\"#e07b1a\" stroke-width=\"2\"/><text x=\"293\" y=\"126\" fill=\"#e07b1a\" font-weight=\"700\">40</text><path d=\"M318 80 A62 36 0 0 0 442 80\" fill=\"none\" stroke=\"#b42318\" stroke-width=\"2\"/><text x=\"328\" y=\"108\" fill=\"#b42318\" font-weight=\"700\">45</text></g><text x=\"740\" y=\"262\" text-anchor=\"end\" fill=\"#555\">Isovels show velocity in cm/s</text></g></svg>";
+  var NATURAL_ISO = "<div class=\"fl-iso\"><svg viewBox=\"0 0 760 300\" role=\"img\" aria-label=\"Natural channel cross-section with velocity readings in cm per second, for completing the isovels\" style=\"width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px\"><g font-family=\"Inter,Arial,sans-serif\" font-size=\"12\"><text x=\"20\" y=\"22\" font-weight=\"700\" font-size=\"14\">b) Natural channel</text><defs><clipPath id=\"ncw\"><rect x=\"0\" y=\"70\" width=\"760\" height=\"230\"/></clipPath></defs><path d=\"M20 30 L70 30 L80 70 L95 150 L120 215 L170 240 L230 238 L290 215 L330 200 L370 212 L420 250 L480 262 L540 255 L600 235 L650 180 L675 110 L690 70 L700 30 L740 30 L740 290 L20 290 Z\" fill=\"#c9a77a\"/><path clip-path=\"url(#ncw)\" d=\"M70 30 L80 70 L95 150 L120 215 L170 240 L230 238 L290 215 L330 200 L370 212 L420 250 L480 262 L540 255 L600 235 L650 180 L675 110 L690 70 L700 30 Z\" fill=\"#e3f2fb\"/><line x1=\"80\" y1=\"70\" x2=\"690\" y2=\"70\" stroke=\"#1f5e85\" stroke-width=\"2\"/><ellipse cx=\"84\" cy=\"93\" rx=\"10\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"91\" cy=\"133\" rx=\"10\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"101\" cy=\"169\" rx=\"8\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"114\" cy=\"202\" rx=\"6\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"132\" cy=\"224\" rx=\"5\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"158\" cy=\"237\" rx=\"6\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"185\" cy=\"242\" rx=\"6\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"215\" cy=\"242\" rx=\"10\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"245\" cy=\"235\" rx=\"10\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"275\" cy=\"224\" rx=\"8\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"300\" cy=\"214\" rx=\"9\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"320\" cy=\"207\" rx=\"9\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"340\" cy=\"206\" rx=\"9\" ry=\"4\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"360\" cy=\"212\" rx=\"7\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"382\" cy=\"224\" rx=\"7\" ry=\"4\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"408\" cy=\"244\" rx=\"10\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"435\" cy=\"256\" rx=\"9\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"465\" cy=\"262\" rx=\"10\" ry=\"4\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"495\" cy=\"263\" rx=\"10\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"525\" cy=\"260\" rx=\"7\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"555\" cy=\"253\" rx=\"5\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"585\" cy=\"243\" rx=\"10\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"612\" cy=\"224\" rx=\"5\" ry=\"5\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"638\" cy=\"197\" rx=\"5\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"656\" cy=\"166\" rx=\"6\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"669\" cy=\"130\" rx=\"7\" ry=\"6\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"679\" cy=\"103\" rx=\"8\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><ellipse cx=\"686\" cy=\"83\" rx=\"5\" ry=\"3\" fill=\"#9c8a74\" stroke=\"#6b5a45\"/><g class=\"iso-model\" fill=\"none\" stroke-width=\"2.4\"><path d=\"M677.8 70.0 L675.7 75.7 L672.5 84.1 L670.4 89.8 L668.3 95.4 L665.1 103.9 L663.0 109.6 L660.4 117.1 L658.0 123.7 L656.0 129.3 L652.9 137.8 L650.9 143.5 L648.5 150.4 L645.9 157.6 L643.9 163.3 L640.8 171.7 L637.0 177.4 L632.6 182.2 L628.7 186.5 L624.1 191.5 L619.0 197.2 L613.8 202.8 L608.9 208.3 L604.9 212.7 L600.9 217.0 L595.8 222.6 L589.1 226.6 L581.1 229.3 L573.2 231.9 L565.3 234.6 L557.4 237.2 L549.4 239.8 L541.5 242.5 L529.6 244.7 L521.7 245.7 L509.8 247.0 L501.4 248.0 L490.0 249.3 L478.1 250.0 L468.3 248.0 L458.3 246.0 L450.4 244.4 L440.0 242.4 L430.6 240.5 L422.6 237.7 L417.7 233.9 L410.8 228.7 L406.5 225.4 L399.1 219.8 L394.9 216.6 L387.9 211.3 L383.0 207.6 L376.7 202.8 L369.6 200.0 L360.2 197.2 L351.3 194.5 L343.4 192.1 L335.5 189.7 L323.6 190.2 L315.7 193.2 L307.7 196.2 L299.8 199.1 L291.9 202.1 L284.0 205.1 L276.0 208.2 L268.1 211.2 L260.5 214.1 L253.1 217.0 L245.7 219.8 L238.3 222.6 L231.0 225.4 L220.6 226.9 L208.7 227.3 L196.8 227.7 L184.9 228.1 L177.0 228.4 L169.1 226.8 L161.1 222.8 L155.0 219.8 L149.2 216.9 L141.3 212.9 L133.4 209.0 L128.6 205.7 L125.5 197.5 L123.2 191.5 L121.0 185.9 L117.7 177.4 L115.6 171.7 L113.4 166.1 L110.1 157.6 L108.0 152.0 L105.7 145.1 L104.3 137.8 L102.7 129.3 L101.7 123.7 L100.1 115.2 L98.5 106.7 L97.4 101.1 L95.9 92.6 L94.3 84.1 L93.2 78.5 L91.6 70.0 L91.6 70.0\" stroke=\"#2a63b8\"/><path d=\"M657.3 70.0 L655.1 75.7 L652.5 82.8 L649.8 89.8 L647.7 95.4 L644.6 103.9 L642.6 109.6 L640.6 115.3 L637.6 123.7 L635.5 129.3 L632.6 137.5 L630.5 143.5 L628.5 149.1 L625.4 157.6 L623.3 163.3 L618.6 168.9 L613.5 174.6 L608.9 179.7 L604.9 184.0 L600.7 188.7 L595.5 194.3 L590.4 200.0 L585.3 205.7 L581.1 209.0 L573.2 211.6 L565.3 214.3 L557.2 217.0 L548.7 219.8 L540.3 222.6 L529.6 225.4 L521.7 226.3 L509.8 227.7 L501.9 228.6 L490.0 230.0 L478.1 230.4 L467.6 228.3 L458.3 226.4 L450.4 224.8 L439.3 222.6 L430.9 219.8 L426.6 216.5 L419.7 211.3 L414.7 207.5 L408.6 202.8 L402.8 198.5 L397.4 194.3 L390.9 189.4 L385.9 185.9 L379.1 182.7 L370.7 180.2 L361.3 177.4 L351.9 174.6 L343.4 172.0 L335.5 169.8 L323.6 170.0 L315.7 172.6 L307.7 175.6 L299.8 178.6 L291.9 181.6 L284.0 184.5 L276.0 187.5 L268.1 190.6 L260.2 193.6 L252.3 196.6 L244.3 199.7 L236.4 202.7 L228.8 205.7 L220.6 207.6 L208.7 208.0 L196.8 208.4 L188.9 208.7 L177.0 209.1 L169.8 205.7 L164.2 202.8 L157.2 199.3 L149.2 195.4 L143.8 191.5 L141.3 185.1 L138.4 177.4 L136.2 171.7 L133.4 164.5 L130.8 157.6 L128.6 152.0 L125.5 143.9 L123.9 137.8 L122.3 129.3 L121.3 123.7 L119.7 115.2 L118.1 106.7 L117.0 101.1 L115.4 92.6 L113.8 84.1 L112.8 78.5 L111.2 70.0 L111.2 70.0\" stroke=\"#0f8a6e\"/><path d=\"M631.6 70.0 L628.7 77.8 L626.3 84.1 L624.2 89.8 L621.1 98.3 L619.1 103.9 L616.8 110.4 L614.0 118.0 L612.0 123.7 L609.0 132.2 L607.0 137.8 L604.9 143.7 L601.5 152.0 L597.0 157.0 L593.0 161.4 L588.7 166.1 L583.6 171.7 L578.5 177.4 L573.3 183.0 L569.2 187.3 L561.3 190.2 L553.4 192.9 L545.5 195.5 L537.5 198.2 L529.6 200.8 L517.7 202.5 L509.8 203.5 L497.9 204.8 L490.0 205.8 L478.1 205.8 L470.2 204.3 L462.3 202.7 L450.4 200.3 L442.5 198.4 L437.2 194.3 L430.6 189.3 L426.0 185.9 L418.7 180.3 L414.7 177.3 L407.4 171.7 L402.8 168.3 L394.9 163.3 L388.2 160.4 L379.1 157.6 L371.1 155.2 L363.2 152.9 L355.3 150.5 L347.4 148.1 L339.4 146.1 L327.5 145.4 L319.6 146.3 L309.9 149.1 L302.4 152.0 L294.8 154.8 L287.3 157.6 L279.7 160.4 L272.1 163.3 L264.2 166.3 L256.2 169.4 L248.3 172.4 L240.4 175.4 L232.5 178.5 L224.5 181.5 L216.6 183.7 L204.7 184.1 L192.8 184.5 L180.9 184.3 L173.0 180.4 L167.1 177.4 L162.0 171.7 L159.8 166.1 L157.2 159.3 L154.4 152.0 L152.2 146.3 L149.2 138.7 L147.3 132.2 L145.7 123.7 L144.7 118.0 L143.1 109.6 L141.5 101.1 L140.4 95.4 L138.8 87.0 L137.4 79.1 L136.2 72.8 L135.7 70.0\" stroke=\"#e07b1a\"/><path d=\"M601.9 70.0 L599.8 75.7 L597.0 83.2 L594.6 89.8 L592.6 95.4 L589.6 103.9 L587.6 109.6 L585.1 116.5 L582.5 123.7 L580.5 129.3 L577.2 137.4 L573.2 141.8 L569.1 146.3 L564.0 152.0 L558.9 157.6 L553.7 163.3 L545.9 166.1 L537.5 168.9 L529.6 171.5 L521.7 174.1 L513.8 175.0 L501.9 176.4 L493.4 177.4 L482.1 178.3 L474.2 176.7 L463.4 174.6 L454.3 172.4 L449.6 168.9 L442.5 163.5 L438.5 160.4 L431.0 154.8 L426.6 151.4 L419.9 146.3 L414.7 142.7 L406.8 138.2 L399.6 135.0 L391.0 132.2 L383.0 129.8 L375.1 127.4 L367.2 125.0 L359.2 122.6 L351.3 120.3 L339.4 118.1 L331.5 117.5 L320.8 118.0 L311.7 119.6 L303.8 121.8 L295.8 124.7 L287.9 127.7 L280.0 130.6 L272.1 133.6 L264.2 136.6 L256.2 139.6 L248.3 142.6 L240.4 145.7 L232.5 148.7 L224.5 151.8 L216.6 154.8 L208.7 156.2 L196.8 156.6 L185.4 154.8 L183.1 149.1 L180.9 143.5 L177.6 135.0 L175.4 129.3 L173.5 120.9 L172.4 115.2 L170.8 106.7 L169.2 98.3 L168.2 92.6 L166.6 84.1 L165.1 76.2 L163.9 70.0 L163.9 70.0\" stroke=\"#b42318\"/></g><circle cx=\"110\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"115\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"110\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"115\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">15</text><circle cx=\"170\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"175\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"170\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"175\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"170\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"175\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">25</text><circle cx=\"170\" cy=\"210\" r=\"3.2\" fill=\"#13324a\"/><text x=\"175\" y=\"214\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"230\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"235\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"230\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"235\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"230\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"235\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">25</text><circle cx=\"230\" cy=\"210\" r=\"3.2\" fill=\"#13324a\"/><text x=\"235\" y=\"214\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"290\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"295\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"290\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"295\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"290\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"295\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"350\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"355\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"350\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"355\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"350\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"355\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"410\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"415\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"410\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"415\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"410\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"415\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">25</text><circle cx=\"410\" cy=\"210\" r=\"3.2\" fill=\"#13324a\"/><text x=\"415\" y=\"214\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"470\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"475\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"470\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"475\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"470\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"475\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"470\" cy=\"210\" r=\"3.2\" fill=\"#13324a\"/><text x=\"475\" y=\"214\" fill=\"#13324a\" font-weight=\"600\">25</text><circle cx=\"530\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"535\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"530\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"535\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">35</text><circle cx=\"530\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"535\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"530\" cy=\"210\" r=\"3.2\" fill=\"#13324a\"/><text x=\"535\" y=\"214\" fill=\"#13324a\" font-weight=\"600\">25</text><circle cx=\"590\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"595\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"590\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"595\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">30</text><circle cx=\"590\" cy=\"170\" r=\"3.2\" fill=\"#13324a\"/><text x=\"595\" y=\"174\" fill=\"#13324a\" font-weight=\"600\">25</text><circle cx=\"590\" cy=\"210\" r=\"3.2\" fill=\"#13324a\"/><text x=\"595\" y=\"214\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"650\" cy=\"90\" r=\"3.2\" fill=\"#13324a\"/><text x=\"655\" y=\"94\" fill=\"#13324a\" font-weight=\"600\">20</text><circle cx=\"650\" cy=\"130\" r=\"3.2\" fill=\"#13324a\"/><text x=\"655\" y=\"134\" fill=\"#13324a\" font-weight=\"600\">15</text><text x=\"740\" y=\"22\" text-anchor=\"end\" fill=\"#555\">Velocity in cm/s at each point</text></g></svg><div class=\"fl__actions\" style=\"margin-top:.4rem\"><button type=\"button\" class=\"fl__btn fl__btn--ghost\" data-iso=\"1\">Show model isovels</button><span class=\"fl__note\">Draw the 15, 20, 25 and 30 cm/s isovels yourself first (in OneNote), then compare.</span></div></div>";
+  var HR_SVG = (function () {
+    function ch(x, y, w, h, fill, lab, dl, wl) {
+      return '<path d="M' + (x - 22) + ' ' + y + ' H' + x + ' V' + (y + h) + ' H' + (x + w) + ' V' + y + ' H' + (x + w + 22) + ' V' + (y + h + 22) + ' H' + (x - 22) + ' Z" fill="#a0784e"/>' +
+        '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + fill + '"/>' +
+        '<path d="M' + (x - 34) + ' ' + y + ' V' + (y + h) + '" stroke="#222" stroke-width="1.6" marker-start="url(#ha)" marker-end="url(#ha)"/><text x="' + (x - 42) + '" y="' + (y + h / 2 + 5) + '" text-anchor="end" font-weight="700">' + dl + '</text>' +
+        '<path d="M' + (x + w + 34) + ' ' + y + ' V' + (y + h) + '" stroke="#222" stroke-width="1.6" marker-start="url(#ha)" marker-end="url(#ha)"/><text x="' + (x + w + 42) + '" y="' + (y + h / 2 + 5) + '" font-weight="700">' + dl + '</text>' +
+        '<path d="M' + x + ' ' + (y + h + 36) + ' H' + (x + w) + '" stroke="#222" stroke-width="1.6" marker-start="url(#ha)" marker-end="url(#ha)"/><text x="' + (x + w / 2) + '" y="' + (y + h + 56) + '" text-anchor="middle" font-weight="700">' + wl + '</text>' +
+        '<text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 5) + '" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">' + lab + '</text>';
+    }
+    var s = '<svg viewBox="0 0 760 300" role="img" aria-label="Hydraulic radius: two rectangular channels, A 20 m wide and 4 m deep, B 5 m wide and 4 m deep" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><defs><marker id="ha" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#222"/></marker></defs><g font-family="Inter,Arial,sans-serif" font-size="13">';
+    s += '<rect x="20" y="14" width="720" height="62" rx="10" fill="#13324a"/><text x="380" y="40" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">Hydraulic radius = cross-sectional area ÷ wetted perimeter</text><text x="380" y="62" text-anchor="middle" fill="#cfe6f5">Area = depth × width.   Wetted perimeter = depth + width + depth.   Higher hydraulic radius = more efficient channel.</text>';
+    s += ch(80, 120, 330, 68, "#0f8a6e", "Channel A (green)", "4 m", "20 m");
+    s += ch(590, 120, 85, 68, "#c2410c", "B", "4 m", "5 m");
+    s += '<text x="632" y="110" text-anchor="middle" fill="#c2410c" font-weight="700">Channel B (orange)</text><text x="20" y="290" fill="#555">Not to scale vertically. All measurements in metres.</text>';
+    return s + "</g></svg>";
+  })();
+  var BANKFULL_SVG =
+    '<svg viewBox="0 0 760 270" role="img" aria-label="River cross-section survey showing below-bank, bankfull and over-bank water levels" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12.5">' +
+    '<path d="M40 70 L170 72 L220 78 L260 96 L290 140 L320 190 L360 205 L420 204 L460 190 L490 160 L510 140 L540 130 L600 124 L660 110 L720 64 L720 250 L40 250 Z" fill="#d9c3a0" stroke="#6b4a2b" stroke-width="2"/>' +
+    '<line x1="40" y1="62" x2="720" y2="62" stroke="#0f8a6e" stroke-width="2.4"/><text x="60" y="54" fill="#0f8a6e" font-weight="700">Over bank (flood)</text>' +
+    '<line x1="236" y1="86" x2="680" y2="86" stroke="#b42318" stroke-width="2.4"/><text x="600" y="80" text-anchor="middle" fill="#b42318" font-weight="700">Bankfull</text>' +
+    '<line x1="301" y1="158" x2="478" y2="158" stroke="#2a63b8" stroke-width="2.4"/><text x="390" y="150" text-anchor="middle" fill="#2a63b8" font-weight="700">Below bank</text>' +
+    '<text x="390" y="230" text-anchor="middle" fill="#5a3d1e">Stream bed</text><text x="600" y="150" text-anchor="middle" fill="#5a3d1e">Gravel bar</text>' +
+    '<text x="380" y="266" text-anchor="middle" fill="#555">Distance across the channel →</text></g></svg>';
+  var BRADSHAW_SVG = (function () {
+    var rows = [["Discharge", 1], ["Occupied channel width", 1], ["Channel depth", 1], ["Average velocity", 1], ["Load quantity", 1], ["Load particle size", -1], ["Channel bed roughness", -1], ["Slope angle (gradient)", -1]];
+    var s = '<svg viewBox="0 0 760 490" role="img" aria-label="Bradshaw model: discharge, width, depth, velocity and load quantity increase downstream; particle size, bed roughness and gradient decrease" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="13">';
+    s += '<text x="40" y="30" font-weight="700" font-size="15">Upstream (source)</text><text x="720" y="30" text-anchor="end" font-weight="700" font-size="15">Downstream (mouth)</text>';
+    rows.forEach(function (r, i) {
+      var y = 46 + i * 52, h = 44, m = y + h / 2, c = r[1] > 0 ? "#2a9d8f" : "#e07b1a";
+      s += '<rect x="40" y="' + y + '" width="680" height="' + h + '" fill="none" stroke="#ccc"/>';
+      s += r[1] > 0 ? '<path d="M40 ' + m + ' L720 ' + y + ' L720 ' + (y + h) + ' Z" fill="' + c + '" opacity=".85"/><text x="712" y="' + (m + 5) + '" text-anchor="end" font-weight="700" fill="#08332d">' + r[0] + "</text>"
+        : '<path d="M40 ' + y + ' L720 ' + m + ' L40 ' + (y + h) + ' Z" fill="' + c + '" opacity=".85"/><text x="48" y="' + (m + 5) + '" font-weight="700" fill="#4a2506">' + r[0] + "</text>";
+    });
+    s += '<text x="40" y="482" fill="#555">Green = increases downstream. Orange = decreases downstream. Wider wedge = larger value.</text>';
+    return s + "</g></svg>";
+  })();
+  var SCHUMM_SVG = (function () {
+    var X = function (t) { return 70 + t * 560; }, Y = function (v) { return 330 - v * 290; };
+    function line(f, c, lab, dy) { var p = []; for (var t = 0; t <= 1.0001; t += 0.02) p.push(X(t).toFixed(1) + " " + Y(f(t)).toFixed(1)); return '<path d="M' + p.join(" L") + '" fill="none" stroke="' + c + '" stroke-width="3"/><text x="' + (X(1) + 8) + '" y="' + (Y(f(1)) + 4 + (dy || 0)) + '" fill="' + c + '" font-weight="700">' + lab + "</text>"; }
+    var s = '<svg viewBox="0 0 760 380" role="img" aria-label="Schumm model: from source to mouth discharge, width, depth and velocity rise while gradient falls, across upland, floodplain and estuarine zones" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12.5">';
+    [["Zone 1: Upland", 0, 1 / 3], ["Zone 2: Floodplain", 1 / 3, 2 / 3], ["Zone 3: Estuarine", 2 / 3, 1]].forEach(function (z, i) {
+      s += '<rect x="' + X(z[1]) + '" y="30" width="' + (X(z[2]) - X(z[1])) + '" height="300" fill="' + ["#f3efe6", "#eef6ea", "#e8f2f8"][i] + '"/><text x="' + ((X(z[1]) + X(z[2])) / 2) + '" y="22" text-anchor="middle" font-weight="700">' + z[0] + "</text>";
+    });
+    s += line(function (t) { return 0.06 + 0.86 * (1 - Math.exp(-3.2 * t)) / (1 - Math.exp(-3.2)); }, "#13324a", "Discharge");
+    s += line(function (t) { return 0.06 + 0.62 * t; }, "#2a63b8", "Width");
+    s += line(function (t) { return 0.06 + 0.46 * t; }, "#0f8a6e", "Depth");
+    s += line(function (t) { return 0.06 + 0.26 * t; }, "#b42318", "Velocity");
+    s += line(function (t) { return 0.02 + 0.92 * Math.exp(-6 * t); }, "#e07b1a", "Gradient", -2);
+    s += '<line x1="70" y1="330" x2="630" y2="330" stroke="#333"/><line x1="70" y1="30" x2="70" y2="330" stroke="#333"/><text x="70" y="350" fill="#333">Source</text><text x="630" y="350" text-anchor="end" fill="#333">Mouth</text><text x="350" y="372" text-anchor="middle" fill="#555">Distance downstream →</text>';
+    return s + "</g></svg>";
+  })();
+
+  /* FW03: animated erosion and transport tiles (SMIL, my own drawings) */
+  function ANIM_TILE(title, sub, body) {
+    return '<figure class="fl-anim__t"><svg viewBox="0 0 340 190" role="img" aria-label="' + title + ': ' + sub + '" style="width:100%;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif">' + body + '</g></svg><figcaption><b>' + title + '</b><span>' + sub + "</span></figcaption></figure>";
+  }
+  function ANIM_SET(tiles, note) {
+    return '<div class="fl-anim"><div class="fl-anim__g">' + tiles.join("") + '</div><div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn fl__btn--ghost" data-anim="1">Pause animations</button>' + (note ? '<span class="fl__note">' + note + "</span>" : "") + "</div></div>";
+  }
+  var WATER = '<rect x="0" y="0" width="340" height="190" fill="#e3f2fb"/>';
+  var FLOWLINES = [40, 80, 120].map(function (y, i) { return '<path d="M-60 ' + y + ' h40" stroke="#7fb1cc" stroke-width="2.5" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" from="0 0" to="420 0" dur="' + (2.2 + i * 0.4) + 's" repeatCount="indefinite"/></path>'; }).join("");
+  var BED = '<path d="M0 160 Q85 152 170 158 T340 156 V190 H0 Z" fill="#c9a77a"/>';
+  var EROSION_ANIM = ANIM_SET([
+    ANIM_TILE("Hydraulic action", "the force of the water", WATER +
+      '<rect x="250" y="0" width="90" height="190" fill="#b08a5c"/><path d="M250 50 l20 6 M250 95 l26 -4 M250 135 l18 8" stroke="#6b4a2b" stroke-width="2"/>' +
+      '<polygon points="250,90 278,92 250,96" fill="#e3f2fb"><animate attributeName="points" values="250,90 278,92 250,96;250,90 278,92 250,96;250,84 290,92 250,102;250,90 278,92 250,96" keyTimes="0;.4;.6;1" dur="3s" repeatCount="indefinite"/></polygon>' +
+      [60, 95, 130].map(function (y, i) { return '<path d="M30 ' + y + ' q20 -14 40 0 t40 0 t40 0" fill="none" stroke="#1f5e85" stroke-width="3" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" values="0 0;95 0;95 0" keyTimes="0;.55;1" dur="1.6s" begin="-' + (i * 0.3) + 's" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;.55;.7" dur="1.6s" begin="-' + (i * 0.3) + 's" repeatCount="indefinite"/></path>'; }).join("") +
+      '<polygon points="250,60 262,58 266,70 252,72" fill="#8b6a43"><animateMotion path="M0 0 L-60 40 L-220 80" keyTimes="0;.5;1" calcMode="linear" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.3;.9;1" dur="3s" repeatCount="indefinite"/></polygon>' +
+      '<text x="12" y="180" font-size="11" fill="#1f5e85">Water forces air into cracks in the bank</text>'),
+    ANIM_TILE("Abrasion (corrasion)", "load scrapes the bed and banks", WATER + FLOWLINES + BED +
+      '<path d="M20 158 H320" stroke="#7a5a35" stroke-width="2" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" from="0" to="-110" dur="2s" repeatCount="indefinite"/></path>' +
+      [0, 1.3].map(function (b) { return '<g><ellipse cx="0" cy="0" rx="14" ry="10" fill="#8a7a66" stroke="#4a3d2e" stroke-width="1.5"/><animateMotion path="M-20 147 L360 149" dur="2.6s" begin="-' + b + 's" repeatCount="indefinite"/></g>'; }).join("") +
+      [0, .65, 1.3, 1.95].map(function (b) { return '<circle r="2" fill="#7a5a35"><animateMotion path="M0 160 l-10 -14" dur="2.6s" begin="-' + b + 's" repeatCount="indefinite"/><animate attributeName="cx" values="60;300" dur="2.6s" begin="-' + b + 's" repeatCount="indefinite"/></circle>'; }).join("") +
+      '<text x="12" y="20" font-size="11" fill="#1f5e85">Like sandpaper: the bed is worn down</text>'),
+    ANIM_TILE("Attrition", "load collides and breaks up", WATER + FLOWLINES + BED +
+      '<polygon points="-16,-10 6,-14 16,0 4,13 -14,9" fill="#8a7a66" stroke="#4a3d2e" stroke-width="1.5"><animateMotion values="40,110;150,110;150,110" keyTimes="0;.45;1" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.45;.5;1" dur="3s" repeatCount="indefinite"/></polygon>' +
+      '<polygon points="-14,-12 12,-9 15,6 -4,14 -16,4" fill="#9a8a74" stroke="#4a3d2e" stroke-width="1.5"><animateMotion values="300,110;185,110;185,110" keyTimes="0;.45;1" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.45;.5;1" dur="3s" repeatCount="indefinite"/></polygon>' +
+      '<path d="M168 92 l4 10 l10 -4 l-6 9 l9 6 l-11 1 l1 11 l-7 -8 l-8 7 l2 -11 l-11 -2 l10 -5 z" fill="#f2b705"><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;.44;.48;.58;1" dur="3s" repeatCount="indefinite"/></path>' +
+      [[-1, -1, 9], [1, -1, 8], [-1, 1, 7], [1, 1, 8], [0, 1.4, 6]].map(function (d) { return '<circle r="' + d[2] + '" fill="#a39480" stroke="#4a3d2e" stroke-width="1.2"><animateMotion values="168,110;168,110;' + (168 + d[0] * 40) + ',' + (110 + d[1] * 28) + ';' + (230 + d[0] * 30) + ',' + (110 + d[1] * 28) + '" keyTimes="0;.47;.65;1" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;.47;.5;1" dur="3s" repeatCount="indefinite"/></circle>'; }).join("") +
+      '<text x="12" y="20" font-size="11" fill="#1f5e85">Pieces become smaller and more rounded</text>'),
+    ANIM_TILE("Solution (corrosion)", "weak acids dissolve some rocks", WATER + FLOWLINES + BED +
+      '<rect x="120" y="96" width="100" height="62" rx="4" fill="#e9e4d4" stroke="#9c9478" stroke-width="2"><animate attributeName="height" values="62;30;62" keyTimes="0;.95;1" dur="5s" repeatCount="indefinite"/><animate attributeName="y" values="96;128;96" keyTimes="0;.95;1" dur="5s" repeatCount="indefinite"/></rect>' +
+      '<text x="170" y="150" text-anchor="middle" font-size="11" fill="#6b6450">limestone</text>' +
+      [0, .5, 1, 1.5, 2, 2.5, 3, 3.5].map(function (b, i) { return '<circle r="3" fill="#0f8a6e"><animateMotion path="M' + (130 + (i * 11) % 80) + ' 120 q30 -40 140 -60" dur="2.8s" begin="-' + b + 's" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="2.8s" begin="-' + b + 's" repeatCount="indefinite"/></circle>'; }).join("") +
+      '<text x="12" y="20" font-size="11" fill="#1f5e85">Dissolved minerals are carried away</text>')
+  ], "Watch each one, then match the definitions below.");
+  var TRANSPORT_ANIM = ANIM_SET([
+    ANIM_TILE("Traction", "large boulders roll or slide along the bed", WATER + FLOWLINES + BED +
+      '<g><g><polygon points="-26,-6 -16,-24 8,-26 26,-8 22,16 -6,26 -24,16" fill="#8a7a66" stroke="#4a3d2e" stroke-width="2"/><path d="M-10 -8 l12 4" stroke="#4a3d2e"/><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="6s" repeatCount="indefinite"/></g><animateMotion path="M-30 130 L370 130" dur="6s" repeatCount="indefinite"/></g>' +
+      '<rect x="12" y="10" width="120" height="10" rx="5" fill="#ddd"/><rect x="12" y="10" width="120" height="10" rx="5" fill="#b42318"/><text x="140" y="19" font-size="11" fill="#555">Energy needed: highest</text>'),
+    ANIM_TILE("Saltation", "smaller stones bounce along the bed", WATER + FLOWLINES + BED +
+      [0, .8, 1.6].map(function (b) { return '<circle r="7" fill="#9a7b52" stroke="#4a3d2e" stroke-width="1.2"><animateMotion path="M-10 152 Q30 95 70 152 Q110 95 150 152 Q190 95 230 152 Q270 95 310 152 Q330 120 350 140" dur="2.4s" begin="-' + b + 's" repeatCount="indefinite"/></circle>'; }).join("") +
+      '<rect x="12" y="10" width="120" height="10" rx="5" fill="#ddd"/><rect x="12" y="10" width="84" height="10" rx="5" fill="#e07b1a"/><text x="140" y="19" font-size="11" fill="#555">Energy needed: high</text>'),
+    ANIM_TILE("Suspension", "fine sand, silt and clay carried in the water", WATER + BED +
+      (function () { var s = "", i; for (i = 0; i < 26; i++) { var y = 40 + (i * 37) % 105, d = 3 + (i % 5) * 0.4; s += '<circle r="' + (1.6 + (i % 3) * 0.6) + '" fill="#8b6a43"><animateMotion path="M' + (-20 - (i * 29) % 300) + ' ' + y + ' q90 -8 180 0 t180 0 t180 0" dur="' + d + 's" repeatCount="indefinite"/></circle>'; } return s; })() +
+      '<rect x="12" y="10" width="120" height="10" rx="5" fill="#ddd"/><rect x="12" y="10" width="48" height="10" rx="5" fill="#0f8a6e"/><text x="140" y="19" font-size="11" fill="#555">Energy needed: low</text>'),
+    ANIM_TILE("Solution", "dissolved minerals carried invisibly", '<rect x="0" y="0" width="340" height="190" fill="#d8efe7"/>' + FLOWLINES + BED +
+      (function () { var s = "", i; for (i = 0; i < 12; i++) { s += '<text font-size="9" fill="#0f6e56" opacity=".75">' + (i % 2 ? "Ca²⁺" : "HCO₃⁻") + '<animateMotion path="M' + (-30 - i * 28) + ' ' + (40 + (i * 23) % 100) + ' h420" dur="5s" repeatCount="indefinite"/></text>'; } return s; })() +
+      '<rect x="12" y="10" width="120" height="10" rx="5" fill="#ddd"/><rect x="12" y="10" width="14" height="10" rx="5" fill="#2a63b8"/><text x="140" y="19" font-size="11" fill="#555">Energy needed: almost none</text>')
+  ], "The red to blue bars show how much energy the river needs for each one.");
+  var VEL_TESTER = '<div class="fl-vel" data-vel="1"><div class="fl-vel__top"><label for="flVel"><b>River velocity:</b> <span class="fl-vel__v">30 cm/s</span></label><input id="flVel" type="range" min="0" max="100" value="49" step="1"></div>' +
+    '<div class="fl-vel__rows"></div><p class="fl__note">Simplified from the Hjulström curve (you will meet the full graph later). Move the slider down to slow the river and watch which load is dropped first.</p></div>';
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -1118,6 +1224,50 @@
           rows: ["Identify two flows and two stores in the diagram. (2)", "Explain the concept of the drainage basin systems diagram. (4)"] }
       ]
     }],
+    FW03: {
+      title: "Erosion, transportation and deposition",
+      overview: {
+        heading: "How physical processes influence drainage basin systems and landforms",
+        intention: "To describe and explain physical patterns and processes.",
+        syllabus: ["River processes of erosion, transportation and deposition and spatial and temporal factors influencing their operation, including channel characteristics and seasonality."],
+        success: ["Define and explain the four types of erosion and the four types of transportation that occur in a river.", "Define deposition and explain when it will occur in a river.",
+          "Explain the conditions in a river that result in the different types of erosion, transportation and deposition."] },
+      intro: "Complete this before the lesson. Watch each animation, then match the processes to their definitions. Use the Teach Me Live bot on this page if you get stuck.",
+      parts: [
+        { type: "heading", text: "Part 1: The four types of erosion" },
+        { type: "html", html: EROSION_ANIM },
+        { id: "e1", label: "a)", type: "match", termCol: "Erosion process", defCol: "Definition (choose the matching one)", noExample: true, prompt: "Match each type of erosion to its definition.",
+          items: [{ t: "Hydraulic action", d: "The force of turbulent water hits the bed and banks, forcing water and air into cracks so that joints widen and loose fragments are swept away." },
+            { t: "Abrasion (corrasion)", d: "Load carried by the river scrapes and rubs against the bed and banks, wearing them away like sandpaper." },
+            { t: "Attrition", d: "Pieces of load knock into each other and into the bed, breaking into smaller, more rounded pieces." },
+            { t: "Solution (corrosion)", d: "Weak acids in the water dissolve soluble rocks such as limestone, and the minerals are carried away." }] },
+        { id: "e2", label: "b)", type: "text", prompt: "Attrition and abrasion both involve the river's load. Explain the difference between them: which one wears away the channel, and which one changes the load itself?" },
+        { type: "heading", text: "Part 2: The four types of transportation" },
+        { type: "html", html: TRANSPORT_ANIM },
+        { id: "t1", label: "a)", type: "match", termCol: "Transport process", defCol: "Definition (choose the matching one)", noExample: true, prompt: "Match each type of transportation to its definition.",
+          items: [{ t: "Traction", d: "The largest boulders roll or slide along the river bed." },
+            { t: "Saltation", d: "Smaller stones and pebbles bounce along the bed in a leap-frogging motion." },
+            { t: "Suspension", d: "Fine sand, silt and clay are carried along within the body of the water." },
+            { t: "Solution", d: "Minerals are dissolved in the water, like sugar in a cup of tea, and carried downstream unseen." }] },
+        { id: "t2", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+          { q: "Which type of transport needs the most energy?", o: ["Traction", "Saltation", "Suspension", "Solution"], a: 0 },
+          { q: "After heavy rain the river turns brown. Which type of transport is mainly responsible?", o: ["Traction", "Saltation", "Suspension", "Solution"], a: 2 },
+          { q: "Which load would you NOT be able to see in the water?", o: ["Traction", "Saltation", "Suspension", "Solution"], a: 3 }] },
+        { type: "heading", text: "Part 3: Deposition" },
+        { id: "d1", label: "a)", type: "text", prompt: "Define deposition." },
+        { id: "d2", label: "", type: "match", termCol: "What the river is doing", defCol: "Load it deposits (choose one)", noExample: true, prompt: "Now complete the worksheet: as the river loses energy, which load does it drop at each point?",
+          items: [{ t: "1. River flowing fast", d: "Boulders" }, { t: "2. River slowing", d: "Pebbles and rocks" }, { t: "3. River slows to a trickle", d: "Small stones and pebbles" }, { t: "4. River almost at a standstill", d: "Sediment such as clay and silt" }] },
+        { type: "heading", text: "b) When will deposition occur in a channel?", note: "Use the velocity tester first, then sort the situations." },
+        { type: "html", html: VEL_TESTER },
+        { id: "d3", label: "i)", type: "sort", cardCol: "Situation", binCol: "Deposition or erosion?", prompt: "Will each situation mainly cause deposition or erosion?", bins: ["Deposition likely", "Erosion likely"],
+          cards: [{ t: "The river enters a lake or the sea", a: ["Deposition likely"] }, { t: "The inside bend of a meander, where water is slow and shallow", a: ["Deposition likely"] },
+            { t: "Discharge falls after a storm (the falling limb of the hydrograph)", a: ["Deposition likely"] }, { t: "Flood water spreads out over the floodplain", a: ["Deposition likely"] },
+            { t: "Flow enters shallow water or moves over vegetation, increasing friction", a: ["Deposition likely"] }, { t: "A landslide suddenly adds a large amount of load", a: ["Deposition likely"] },
+            { t: "Discharge rises quickly during a storm (the rising limb)", a: ["Erosion likely"] }, { t: "The outside bend of a meander, where water is fast and deep", a: ["Erosion likely"] },
+            { t: "A steep upland channel after heavy rain", a: ["Erosion likely"] }, { t: "The channel narrows through a gorge, speeding the flow up", a: ["Erosion likely"] }] },
+        { id: "d4", label: "ii)", type: "text", prompt: "Using the velocity tester and your sort, explain when deposition will occur in a river channel. Refer to velocity, discharge and the size of the load." }
+      ]
+    },
     FW02: [{
       kind: "lesson", open: true, inline: true, afterCard: 2,
       title: "Discharge",
@@ -1154,6 +1304,52 @@
         { id: "v1", label: "b)", type: "text", before: ISOVEL_SVG, prompt: "Isovels are lines joining points of equal velocity (a type of isoline). Join the dots to draw the isovels, then describe where the water flows fastest and explain why." },
         { id: "v2", label: "c)", type: "table", before: FLOW_SVG, prompt: "Describe and define the different types of flow in a river. You may need to search for these.",
           cols: ["Type of flow", "Definition and description"], rows: ["i) Laminar flow", "ii) Turbulent flow"] },
+        { id: "v3", label: "d)", type: "mcq", prompt: "Choose the correct word in each statement, then write the completed statements in OneNote.", items: [
+          { q: "A river in a deep, broad channel, often with a gentle gradient and a small bed load, will have a ____ velocity than a river in a shallow, narrow, rock-filled channel, even if the second river is steeper.", o: ["greater", "lesser"], a: 0 },
+          { q: "The velocity of a river ____ as it nears the sea.", o: ["increases", "decreases"], a: 0 },
+          { q: "Velocity ____ as the depth, width and discharge of a river all increase.", o: ["increases", "decreases"], a: 0 },
+          { q: "As bed roughness ____, so does turbulence and the river's ability to pick up and transport sediment.", o: ["increases", "decreases"], a: 0 }] },
+        { type: "html", html: CHANNELS_SVG },
+        { id: "v4", label: "e)", type: "text", before: NATURAL_ISO, prompt: "Channel (a) already has its isovels. Complete the isovels for the natural channel (b) by joining points of equal velocity. Then compare the two: where is the fastest flow in each channel, and why is the natural channel slower overall?" },
+        { type: "heading", text: "Activity 4: Calculating the hydraulic radius" },
+        { type: "html", html: HR_SVG },
+        { id: "h1", label: "a)", type: "table", prompt: "Work out the hydraulic radius of the two worked examples. Show your working.", cols: ["Channel", "Cross-sectional area (m²)", "Wetted perimeter (m)", "Hydraulic radius (m)"], rows: ["Channel A (green)", "Channel B (orange)"] },
+        { id: "h2", label: "", type: "mcq", noReason: true, prompt: "Check your answers", items: [
+          { q: "What is the hydraulic radius of Channel A (green)?", o: ["0.35 m", "2.86 m", "3.5 m", "5 m"], a: 1 },
+          { q: "What is the hydraulic radius of Channel B (orange)?", o: ["0.65 m", "1.54 m", "2.86 m", "4 m"], a: 1 }] },
+        { id: "h3", label: "b)", type: "text", prompt: "Which colour channel is more efficient, and why?" },
+        { id: "h4", label: "c)", type: "questions", letters: true, prompt: "Produce these on the large whiteboards, then photograph them for your OneNote.",
+          before: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Question 1.</b> Velocity increases downstream even though the gradient of the channel falls. Using the Bradshaw model (Activity 7) and your knowledge of hydraulic geometry, explain why.<br><b>Question 2.</b> River A is 2 m deep and 12 m wide. River B is 4 m deep and 6 m wide.</div>',
+          rows: ["Answer Question 1.", "Draw a diagram of each river to show its wetted perimeter.", "Calculate the wetted perimeter of each river.", "Calculate the hydraulic radius of each river.", "Which river is more efficient?"] },
+        { id: "h5", label: "", type: "mcq", noReason: true, prompt: "Check your Question 2 answers", items: [
+          { q: "Wetted perimeter of River A?", o: ["14 m", "16 m", "24 m", "26 m"], a: 1 },
+          { q: "Wetted perimeter of River B?", o: ["10 m", "14 m", "16 m", "24 m"], a: 1 },
+          { q: "Hydraulic radius of River A and River B?", o: ["A 1.5 m, B 1.71 m", "A 1.71 m, B 1.5 m", "Both 1.5 m", "A 2 m, B 4 m"], a: 0 },
+          { q: "Which river is more efficient?", o: ["River A", "River B", "Both the same: they have the same area"], a: 1 }] },
+        { id: "h6", label: "d)", type: "text", before: BANKFULL_SVG, prompt: "The survey shows three water levels in the same channel. How does the hydraulic radius change as the water rises from below bank to bankfull? What happens to efficiency once the river spills over its banks onto the floodplain?" },
+        { type: "heading", text: "Activity 5: Manning's bed roughness coefficient" },
+        { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><p style="margin:0 0 .5rem">A river flowing over large, angular boulders between banks of coarse material meets far more resistance than a river with a bed and banks of smooth, cohesive clay and silt. The rougher the bed and banks, the more turbulence, which is why a mountain stream can still pick up loose material and carry it downstream.</p><p style="margin:0 0 .5rem">Roughness is hard to measure, so the engineer Robert Manning produced a roughness coefficient (<i>n</i>) that links the three main factors controlling a river’s velocity:</p><p style="text-align:center;font-size:1.15rem;margin:.6rem 0"><b>V = R<sup>0.67</sup> × S<sup>0.5</sup> ÷ n</b></p><p style="margin:0">V = velocity, R = hydraulic radius, S = channel slope (gradient), n = boundary roughness. The higher the value of <i>n</i>, the rougher the bed and banks.</p></div>' +
+          '<div class="fl__scroll" style="margin-top:.6rem"><table style="max-width:560px"><thead><tr><th>Bed profile</th><th>Sand and gravel</th><th>Coarse gravel</th><th>Boulders</th></tr></thead><tbody><tr><th>Uniform</th><td>0.02</td><td>0.03</td><td>0.05</td></tr><tr><th>Undulating</th><td>0.05</td><td>0.06</td><td>0.07</td></tr><tr><th>Highly irregular</th><td>0.08</td><td>0.09</td><td>0.10</td></tr></tbody></table></div>' },
+        { id: "m1", label: "", type: "questions", letters: true, prompt: "Study the idea behind Manning’s coefficient and explain the concept.",
+          rows: ["What three factors did Manning link together?", "What is bed roughness like upstream?", "What is bed roughness like downstream?", "How does bed roughness affect velocity?"] },
+        { id: "m2", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+          { q: "Which bed has the lowest roughness value?", o: ["Uniform sand and gravel", "Undulating coarse gravel", "Highly irregular boulders", "Uniform boulders"], a: 0 },
+          { q: "If n doubles and the hydraulic radius and slope stay the same, velocity will…", o: ["double", "stay the same", "halve", "quadruple"], a: 2 }] },
+        { type: "heading", text: "Activity 6: Explain the factors that affect velocity", note: "We can now explain all the factors that affect velocity and discharge in a river." },
+        { id: "e1", label: "1.", type: "table", prompt: "Briefly explain the impact each factor has on velocity.", cols: ["Factor", "Impact on velocity"], rows: ["a. Gradient", "b. Hydraulic radius", "c. Bed roughness"] },
+        { id: "e2", label: "2.", type: "text", prompt: "Explain why velocity changes downstream." },
+        { id: "e3", label: "3.", type: "text", prompt: "Explain why cross-sectional area changes downstream." },
+        { id: "e4", label: "4.", type: "text", prompt: "Explain why discharge changes downstream." },
+        { type: "heading", text: "Activity 7: River models: the Bradshaw model", note: "The Bradshaw model includes the river's load, so read these definitions first." },
+        { id: "r0", label: "", type: "table", prompt: "", given: true, cols: ["Type of load", "Definition"], rows: ["Suspended load", "Bedload", "Dissolved (solution) load"],
+          prefill: { 0: ["Fine material (clay, silt and fine sand) light enough to be held up and carried within the body of the water."], 1: ["Larger material that moves along the bed by rolling, sliding or saltating (bouncing). It may come from inside the channel or be supplied from outside it, for example from the valley sides."], 2: ["Minerals carried in solution. They can come from chemical weathering, erosion of soluble rock, mineral springs and pollution."] } },
+        { id: "b1", label: "a)", type: "text", before: BRADSHAW_SVG, prompt: "Describe what the Bradshaw model shows, then explain it." },
+        { type: "heading", text: "Activity 8: River models: the Schumm model", note: "Like the Bradshaw model, this theoretical model shows how river variables change from source to mouth. You can use either model to write hypotheses for your Internal Assessment." },
+        { id: "s1", label: "b)", type: "text", before: SCHUMM_SVG, prompt: "Describe how each variable changes from source to mouth, and say how the Schumm model compares with the Bradshaw model." },
+        { type: "heading", text: "Activity 9: Past paper practice" },
+        { id: "pq", label: "", type: "questions", prompt: "Write your answer, then mark it with the self-marking practice bot.",
+          links: [{ label: "Self-marking practice: Freshwater questions", url: "/geography/revision/paper-questions/freshwater" }],
+          rows: ["Explain how stream discharge is related to channel size and shape. (6)"] },
         { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
         { type: "heading", text: "Exit ticket" },
         { id: "x1", label: "", type: "text", prompt: "Explain how and why discharge changes downstream." }
@@ -1276,6 +1472,8 @@
     ".fl-bingo__grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;max-width:520px;padding:.5rem;border-radius:12px;background:#21506b}" +
     ".fl-bingo__c{min-height:62px;border:0;border-radius:8px;background:#f2f8fb;color:#13324a;font:600 .85rem var(--lh-font-body);cursor:pointer;padding:.3rem}.fl-bingo__c.on{background:#f59e0b;color:#fff;text-decoration:line-through}" +
     ".fl-bingo__win{position:absolute;inset:0;display:grid;place-items:center;font:800 3rem var(--lh-font-display);color:#fff;background:rgba(15,110,86,.82);border-radius:12px;pointer-events:none}" +
+    ".fl-anim__g{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.fl-anim__t{margin:0}.fl-anim__t figcaption{margin-top:.3rem;font-size:.88rem}.fl-anim__t figcaption b{display:block;color:var(--lh-teal,#0f766e)}.fl-anim__t figcaption span{color:var(--lh-muted,#555)}@media(max-width:640px){.fl-anim__g{grid-template-columns:1fr}}" +
+    ".fl-vel{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-vel__top{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.fl-vel__top input{flex:1;min-width:220px;accent-color:#0f8a6e}.fl-vel__v{font-weight:700;color:#1f5e85}.fl-vel__rows{display:grid;gap:.35rem;margin:.7rem 0}.fl-vel__r{display:grid;grid-template-columns:10rem 1fr;gap:.6rem;align-items:center;font-size:.9rem}.fl-vel__s{padding:.25rem .6rem;border-radius:99px;font-weight:600;font-size:.85rem;transition:background .2s}.fl-vel__s.er{background:#fde2dd;color:#8a1c0f}.fl-vel__s.tr{background:#dbe8fb;color:#1d4f9a}.fl-vel__s.de{background:#efe3cf;color:#6b4a2b}" +
     ".fl-iso .iso-model{display:none}.fl-iso--show .iso-model{display:inline}" +
     ".fl-cloze__t{line-height:2.4;font-size:.98rem;color:var(--lh-ink)}.fl-cloze .fl-rsel{flex:none;width:auto;min-width:8rem;margin:0 .2rem}" +
     ".fl-lcard{display:flex;align-items:center;gap:.9rem;max-width:560px;margin:.4rem 0;padding:.9rem 1.1rem;border:2px solid #4255ff;border-radius:14px;background:#f1f3ff;color:#1a1d4a;text-decoration:none}" +
@@ -1462,12 +1660,12 @@
 
   if (cfg._links.length) h += '<div class="fl__part"><p class="fl__q">Links from ' + esc(ed.teacher || "your teacher") + "</p>" + links({ links: cfg._links }) + "</div>";
 
-  cfg.parts.forEach(function (p) {
+  cfg.parts.forEach(function (p, pi) {
     if (p.type === "heading") {
       h += '<h3 class="fl__head">' + esc(p.text) + "</h3>" + (p.note ? '<p class="fl__note">' + esc(p.note) + "</p>" : "");
       return;
     }
-    if (p.type === "html") { h += '<div class="fl__part">' + p.html + "</div>"; return; }
+    if (p.type === "html") { h += '<div class="fl__part" data-pi="' + pi + '">' + p.html + "</div>"; return; }
     if (p.type === "bingo") {
       h += '<div class="fl-bingo" data-k="' + p.id + '" data-words="' + esc(JSON.stringify(p.words)) + '"><div class="fl-bingo__grid"></div>' +
         '<div class="fl__actions" style="margin-top:.5rem"><button type="button" class="fl__btn fl__btn--ghost" data-bingo="new">New card</button><span class="fl__note">Tap a word when your teacher reads its definition. Four in a row, column or diagonal: shout \u201cBingo!\u201d</span></div></div>';
@@ -1507,14 +1705,14 @@
       h += '<p class="fl__q">' + (lab ? "<b>" + esc(lab) + "</b>" : "") + esc(p.prompt) + "</p>";
     if (p.note) h += '<p class="fl__note">' + esc(p.note) + "</p>";
     h += links(p);
-    if (p.before && p.type !== "terms" && p.type !== "table") h += '<div class="fl__pair">' + p.before + "</div>";
+    if (p.before && p.type !== "terms" && p.type !== "table") h += '<div class="fl__pair" data-pi="' + pi + '">' + p.before + "</div>";
     if (p.type === "text") {
       h += box(saved, p.id, p.prompt, p.words ? 6 : 4);
       if (p.words) h += '<p class="fl__note fl__wc" data-wc="' + p.id + '" data-min="' + p.words[0] + '" data-max="' + p.words[1] + '"></p>';
     }
     if (p.type === "terms" || p.type === "table") {
       var cols = tableCols(p);
-      if (p.before) h += '<div class="fl__pair">' + p.before + "</div>";
+      if (p.before) h += '<div class="fl__pair" data-pi="' + pi + '">' + p.before + "</div>";
       h += '<div class="fl__scroll"><table' + (cols.length > 4 ? ' class="fl__wide"' : "") + "><thead><tr>" + cols.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
       p.rows.forEach(function (r, i) {
         if (isGroup(r)) { h += '<tr><td class="fl__grp" colspan="' + cols.length + '">' + esc(r.slice(1)) + "</td></tr>"; return; }
@@ -1587,7 +1785,7 @@
             var c = pick == null ? "" : (j === it.a ? " right" : (+pick === j ? " wrong" : ""));
             return '<button type="button" class="fl-opt' + c + '" data-j="' + j + '"><b>' + "ABCDEF".charAt(j) + "</b> " + esc(o) + "</button>";
           }).join("") + '</div><p class="fl__note fl-mcq__fb">' + (pick == null ? "" : (+pick === it.a ? "\u2713 Correct." : "Not quite: the answer is " + "ABCDEF".charAt(it.a) + ".")) + "</p>" +
-          '<p class="fl__note" style="margin-top:.2rem">Reason:</p>' + box(saved, k + "r", "Reason for question " + (i + 1), 2) + "</div>";
+          (p.noReason ? "" : '<p class="fl__note" style="margin-top:.2rem">Reason:</p>' + box(saved, k + "r", "Reason for question " + (i + 1), 2)) + "</div>";
       });
     if (p.type === "questions")
       p.rows.forEach(function (r, i) { h += '<p class="fl__vq">' + (p.letters ? "abcdefghij".charAt(i) + ")" : (i + 1) + ".") + " " + esc(r) + "</p>" + box(saved, p.id + i, r, 3); });
@@ -1634,6 +1832,23 @@
       if (e.target.closest('[data-bingo="new"]')) deal();
     });
     if (!st || !st.w) deal(); else draw();
+  });
+  root.querySelectorAll("[data-anim]").forEach(function (b) {
+    var box = b.closest(".fl-anim"), on = true;
+    b.onclick = function () { on = !on; box.querySelectorAll("svg").forEach(function (s) { if (s.pauseAnimations) { if (on) s.unpauseAnimations(); else s.pauseAnimations(); } }); b.textContent = on ? "Pause animations" : "Play animations"; };
+  });
+  root.querySelectorAll("[data-vel]").forEach(function (box) {
+    var L = [["Clay", "under 0.004 mm", 150, 0.15], ["Silt", "0.004–0.06 mm", 50, 0.8], ["Sand", "0.06–2 mm", 20, 4], ["Gravel", "2–16 mm", 60, 30], ["Pebbles", "16–64 mm", 180, 120], ["Boulders", "over 256 mm", 600, 400]];
+    var r = box.querySelector("input"), out = box.querySelector(".fl-vel__v"), rows = box.querySelector(".fl-vel__rows");
+    function draw() {
+      var v = Math.pow(10, -1 + 4 * r.value / 100);
+      out.textContent = (v < 1 ? v.toFixed(1) : Math.round(v)) + " cm/s" + (v < 1 ? " (almost still)" : v > 300 ? " (major flood)" : "");
+      rows.innerHTML = L.map(function (p) {
+        var s = v >= p[2] ? ["er", "Eroded and picked up"] : v >= p[3] ? ["tr", "Kept moving (transported)"] : ["de", "Deposited"];
+        return '<div class="fl-vel__r"><span><b>' + p[0] + "</b> <small>" + p[1] + '</small></span><span class="fl-vel__s ' + s[0] + '">' + s[1] + "</span></div>";
+      }).join("");
+    }
+    r.addEventListener("input", draw); draw();
   });
   root.querySelectorAll(".fl-iso").forEach(function (box) {
     var b = box.querySelector("[data-iso]"); if (!b) return;
@@ -1778,17 +1993,62 @@
     setTimeout(function () { document.body.classList.remove("fl-printing"); root.classList.remove("fl--print"); }, 500);
   };
 
-  function buildCopy() {
+  /* Diagrams for Copy to OneNote: every SVG or image in a part becomes a PNG; text-only boxes are copied as text. */
+  function rasterOne(el) {
+    return new Promise(function (res) {
+      try {
+        var w = 760, h0, src;
+        if (el.tagName.toLowerCase() === "svg") {
+          var vb = (el.getAttribute("viewBox") || "0 0 760 300").split(/[\s,]+/).map(Number); w = vb[2]; h0 = vb[3];
+          var c = el.cloneNode(true);
+          if (!el.closest(".fl-iso--show")) c.querySelectorAll(".iso-model").forEach(function (m) { m.parentNode.removeChild(m); });
+          c.setAttribute("xmlns", "http://www.w3.org/2000/svg"); c.setAttribute("width", w); c.setAttribute("height", h0);
+          var str = new XMLSerializer().serializeToString(c).replace(/var\(--[a-z-]+(,\s*([^)]+))?\)/g, function (m, a, fb) { return fb || "#d0d7de"; });
+          src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(str);
+        } else { src = el.currentSrc || el.src; }
+        var im = new Image();
+        im.onload = function () {
+          try {
+            var W = el.tagName.toLowerCase() === "svg" ? w : (im.naturalWidth || 760), H = el.tagName.toLowerCase() === "svg" ? h0 : (im.naturalHeight || 400);
+            var k = Math.min(2, 1600 / W), cv = document.createElement("canvas");
+            cv.width = Math.round(W * k); cv.height = Math.round(H * k);
+            var g = cv.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(im, 0, 0, cv.width, cv.height);
+            res('<p><img src="' + cv.toDataURL("image/png") + '" width="' + Math.min(640, W) + '" alt="' + esc(el.getAttribute("aria-label") || el.getAttribute("alt") || "Diagram") + '"></p>');
+          } catch (e) { res(""); }
+        };
+        im.onerror = function () { res(""); };
+        im.src = src;
+      } catch (e) { res(""); }
+    });
+  }
+  function gatherMedia() {
+    var jobs = [], media = {};
+    root.querySelectorAll("[data-pi]").forEach(function (box) {
+      if (box.closest(".fl-ed")) return;
+      var pi = box.getAttribute("data-pi");
+      if (box.querySelector(".fl-anim,.fl-vel,.fl-rmap,.fl-game,iframe")) return;
+      var els = [].slice.call(box.querySelectorAll("svg,img")).filter(function (e) { return !e.closest("svg") || e.tagName.toLowerCase() === "svg" && !e.parentNode.closest("svg"); });
+      if (!els.length) {
+        var t = box.cloneNode(true); t.querySelectorAll("button,input,textarea,select,script,style").forEach(function (x) { x.parentNode.removeChild(x); });
+        media[pi] = '<div>' + t.innerHTML + "</div>"; return;
+      }
+      jobs.push(Promise.all(els.map(rasterOne)).then(function (a) { media[pi] = a.join(""); }));
+    });
+    return Promise.all(jobs).then(function () { return media; });
+  }
+  function buildCopy(media) {
+    media = media || {};
     var T = 'style="border-collapse:collapse;border:1px solid #999"', D = 'style="border:1px solid #999;padding:4px 6px;vertical-align:top"';
     var html = "<h2>Flip learning: " + esc(cfg.title) + "</h2>", out = ["Flip learning: " + cfg.title, ""];
     function ans(k) { return saved[k] || ""; }
     function cellHtml(v) { return esc(v).replace(/\n/g, "<br>") || "&nbsp;"; }
-    cfg.parts.forEach(function (p) {
+    cfg.parts.forEach(function (p, pi) {
       if (p.type === "heading") { html += "<h3>" + esc(p.text) + "</h3>"; out.push(p.text.toUpperCase(), ""); return; }
-      if (p.type === "html") return;
+      if (p.type === "html") { if (media[pi]) { html += media[pi]; out.push("[Diagram]", ""); } return; }
       var lab = p.label != null ? p.label : p.id + ")";
       if (p.prompt) { html += "<p><b>" + esc((lab ? lab + " " : "") + p.prompt) + "</b></p>"; out.push((lab ? lab + " " : "") + p.prompt); }
       (p.links || []).forEach(function (l) { html += '<p><a href="' + esc(l.url) + '">' + esc(l.label) + "</a></p>"; out.push(l.label + ": " + l.url); });
+      if (p.before && media[pi]) html += media[pi];
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
       if (p.type === "order") {
         var seq = p.answer.map(function (_, i) { return saved[p.id + "s" + i] || "_"; }).join(" ");
@@ -1797,18 +2057,18 @@
       if (p.type === "sort") p.cards.forEach(function (c, i) { var v = saved[p.id + i] || ""; html += "<p>" + esc(c.t) + ": " + esc(v) + "</p>"; out.push("- " + c.t + ": " + v); });
       if (p.type === "rank") for (var q2 = 0; q2 < p.n; q2++) { var v2 = saved[p.id + q2] || ""; html += "<p>" + (q2 + 1) + ". " + esc(v2) + "</p>"; out.push((q2 + 1) + ". " + v2); }
       if (p.type === "match") {
-        html += "<table " + T + "><tr><th " + D + ">Key term</th><th " + D + ">Definition</th><th " + D + ">Example</th></tr>";
+        html += "<table " + T + "><tr><th " + D + ">" + esc(p.termCol || "Key term") + "</th><th " + D + ">" + esc((p.defCol || "Definition").replace(/ \(choose.*\)$/, "")) + "</th>" + (p.noExample ? "" : "<th " + D + ">Example</th>") + "</tr>";
         p.items.forEach(function (it, i) {
           var k = p.id + i, pk = saved[k], def = pk == null || pk === "" ? "" : p.items[+pk].d + (+pk === i ? "" : " (not matched)");
-          html += "<tr><td " + D + "><b>" + esc(it.t) + "</b></td><td " + D + ">" + cellHtml(def) + "</td><td " + D + ">" + cellHtml(ans(k + "e")) + "</td></tr>";
-          out.push("- " + it.t + " | " + def + " | Example: " + ans(k + "e"));
+          html += "<tr><td " + D + "><b>" + esc(it.t) + "</b></td><td " + D + ">" + cellHtml(def) + "</td>" + (p.noExample ? "" : "<td " + D + ">" + cellHtml(ans(k + "e")) + "</td>") + "</tr>";
+          out.push("- " + it.t + " | " + def + (p.noExample ? "" : " | Example: " + ans(k + "e")));
         });
         html += "</table>";
       }
       if (p.type === "mcq") p.items.forEach(function (it, i) {
         var k = p.id + i, pk = saved[k], ch = pk == null ? "(not answered)" : "ABCDEF".charAt(+pk) + " " + it.o[+pk] + (+pk === it.a ? " \u2713" : " (answer: " + "ABCDEF".charAt(it.a) + ")");
-        html += "<p><i>" + (i + 1) + ". " + esc(it.q) + "</i><br>Answer: " + esc(ch) + "<br>Reason: " + cellHtml(ans(k + "r")) + "</p>";
-        out.push((i + 1) + ". " + it.q, "Answer: " + ch, "Reason: " + ans(k + "r"));
+        html += "<p><i>" + (i + 1) + ". " + esc(it.q) + "</i><br>Answer: " + esc(ch) + (p.noReason ? "" : "<br>Reason: " + cellHtml(ans(k + "r"))) + "</p>";
+        out.push((i + 1) + ". " + it.q, "Answer: " + ch); if (!p.noReason) out.push("Reason: " + ans(k + "r"));
       });
       if (p.type === "questions") p.rows.forEach(function (r, i) {
         var n = p.letters ? "abcdefghij".charAt(i) + ")" : (i + 1) + ".";
@@ -1838,7 +2098,7 @@
   }
   root.querySelectorAll(".fl-copy").forEach(function (btn) {
     btn.onclick = function () {
-      var c = buildCopy(), label = btn.textContent;
+      var c = buildCopy(), label = btn.textContent, mp = gatherMedia().then(buildCopy);
       function ok() { btn.textContent = "Copied ✓ paste into OneNote"; setTimeout(function () { btn.textContent = label; }, 2200); }
       function plain() {
         if (navigator.clipboard) navigator.clipboard.writeText(c.text).then(ok, function () { window.prompt("Copy:", c.text); });
@@ -1847,7 +2107,7 @@
       try {
         if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
           navigator.clipboard.write([new ClipboardItem({
-            "text/html": new Blob([c.html], { type: "text/html" }),
+            "text/html": mp.then(function (r) { return new Blob([r.html], { type: "text/html" }); }, function () { return new Blob([c.html], { type: "text/html" }); }),
             "text/plain": new Blob([c.text], { type: "text/plain" })
           })]).then(ok, plain);
           return;
