@@ -233,6 +233,10 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
         "Explain how scientists, communities and authorities manage safe access (power), and suggest a responsible future idea (possibilities)."]
     },
     parts: [
+      B.connect,
+      { type: "heading", text: "Starter: our case study", note: "Study the photo below and answer the questions." },
+      { type: "html", html: '<img src="/images/flip/ks3-y7fp-ruapehu-starter.jpg" alt="A snow-capped volcano behind a steaming landscape of brightly coloured, mineral-stained rocks and a pale blue pool" style="width:100%;max-width:700px;height:auto;display:block;border-radius:10px;border:1px solid var(--lh-border)">' },
+      { id: "st", label: "", type: "questions", prompt: "", rows: ["Where do you think the photograph was taken?", "What can you observe?", "What processes may have shaped this landscape?", "What would you need to know before calling it \u201cfantastic\u201d?"] },
       B.demonstrate,
       { type: "heading", text: "Activity 1: Ruapehu Mission", note: "Play the game to explore Mount Ruapehu. Your scores save to your account if you are logged in." },
       { type: "game", src: "/geography/games/volcano-fantastic-place", title: "Ruapehu Mission" },
