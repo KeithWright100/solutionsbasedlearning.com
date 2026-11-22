@@ -367,6 +367,19 @@
   var VEL_TESTER = '<div class="fl-vel" data-vel="1"><div class="fl-vel__top"><label for="flVel"><b>River velocity:</b> <span class="fl-vel__v">30 cm/s</span></label><input id="flVel" type="range" min="0" max="100" value="49" step="1"></div>' +
     '<div class="fl-vel__rows"></div><p class="fl__note">Simplified from the Hjulström curve (you will meet the full graph later). Move the slider down to slow the river and watch which load is dropped first.</p></div>';
 
+  var WHITEBOARD = (function () {
+    var hand = 'font-family="Comic Sans MS,Chalkboard SE,Segoe Print,cursive"';
+    var s = '<svg viewBox="0 0 760 470" role="img" aria-label="Whiteboard checklist: draw the four types of erosion, the four types of transportation and deposition" style="width:100%;max-width:760px;height:auto;display:block">';
+    s += '<rect x="14" y="14" width="732" height="420" rx="6" fill="#c9ced3"/><rect x="24" y="24" width="712" height="400" rx="3" fill="#fdfdfd"/>';
+    s += [[10, 10], [728, 10]].map(function (p) { return '<rect x="' + p[0] + '" y="' + p[1] + '" width="22" height="22" rx="4" fill="#8a9097"/>'; }).join("");
+    s += '<rect x="10" y="432" width="740" height="16" rx="3" fill="#b9bfc5"/><rect x="520" y="404" width="120" height="32" rx="4" fill="#d9a86c" stroke="#a87a43"/><rect x="520" y="404" width="120" height="8" fill="#8a8f96"/>';
+    s += '<rect x="668" y="352" width="16" height="84" rx="3" fill="#1d4fd8"/><rect x="668" y="372" width="16" height="64" rx="2" fill="#e8eaed" stroke="#c3c7cc"/>';
+    s += '<g ' + hand + '><text x="50" y="66" font-size="24" font-weight="700" fill="#1d4fd8">In pairs, draw and label:</text>';
+    var L = [["#b42318", "Erosion", "hydraulic action, abrasion, attrition, solution"], ["#0f766e", "Transportation", "traction, saltation, suspension, solution"], ["#a16207", "Deposition", "when and why the load is dropped, largest first"]];
+    L.forEach(function (r, i) { var y = 118 + i * 78; s += '<rect x="52" y="' + (y - 20) + '" width="22" height="22" rx="3" fill="none" stroke="' + r[0] + '" stroke-width="2.5"/><text x="88" y="' + y + '" font-size="22" font-weight="700" fill="' + r[0] + '">' + r[1] + '</text><text x="88" y="' + (y + 28) + '" font-size="17" fill="#333">' + r[2] + "</text>"; });
+    s += '<text x="50" y="382" font-size="17" fill="#1d4fd8">Use arrows and key words. Photograph your board for OneNote.</text></g>';
+    return s + "</svg>";
+  })();
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -1224,7 +1237,7 @@
           rows: ["Identify two flows and two stores in the diagram. (2)", "Explain the concept of the drainage basin systems diagram. (4)"] }
       ]
     }],
-    FW03: {
+    FW03: [{
       title: "Erosion, transportation and deposition",
       overview: {
         heading: "How physical processes influence drainage basin systems and landforms",
@@ -1267,7 +1280,17 @@
             { t: "A steep upland channel after heavy rain", a: ["Erosion likely"] }, { t: "The channel narrows through a gorge, speeding the flow up", a: ["Erosion likely"] }] },
         { id: "d4", label: "ii)", type: "text", prompt: "Using the velocity tester and your sort, explain when deposition will occur in a river channel. Refer to velocity, discharge and the size of the load." }
       ]
-    },
+    }, {
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "Erosion, transportation and deposition",
+      intro: "",
+      parts: [
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter: types of erosion, transportation and deposition", note: "Go to the large whiteboards. In pairs, draw diagrams to explain the four processes of erosion, the four processes of transportation, and deposition." },
+        { type: "html", html: WHITEBOARD },
+        { id: "w1", label: "", type: "text", prompt: "Which process was hardest to show in a diagram, and how did you and your partner solve it?" }
+      ]
+    }],
     FW02: [{
       kind: "lesson", open: true, inline: true, afterCard: 2,
       title: "Discharge",
