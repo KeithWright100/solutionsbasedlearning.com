@@ -9,7 +9,7 @@
     :root {
       --deep: #011526; --teal: #00b8b0; --teal-dark: #007c82;
       --ink: #062033; --muted: #5f7382; --line: #dbe6ea; --bg: #f2f8f9;
-      --ib: #0b6e8a; --ig: #1f8a4c; --rev: #7a4cc2;
+      --ib: #0b6e8a; --ig: #1f8a4c; --rev: #7a4cc2; --ks3: #c2410c;
       --r: 14px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -103,6 +103,7 @@
     .tile .links a:hover { background: #dff3f2; color: var(--teal-dark); border-color: var(--teal-dark); }
     .tile.ib { border-top: 4px solid var(--ib); } .tile.ib .lvl { color: var(--ib); }
     .tile.ig { border-top: 4px solid var(--ig); } .tile.ig .lvl { color: var(--ig); }
+    .tile.k3 { border-top: 4px solid var(--ks3); } .tile.k3 .lvl { color: var(--ks3); } .tile.k3 .enter { background: var(--ks3); } .tile.k3 .enter:hover { background: var(--deep); }
     .tile.rv { border-top: 4px solid var(--rev); } .tile.rv .lvl { color: var(--rev); }
     .tile.soon > :not(.enter) { opacity: .6; }
     .more { margin-top: 8px; border-top: 1px solid var(--line); padding-top: 8px; }
@@ -215,6 +216,11 @@
       <div class="tiles" id="tilesIG"></div>
     </section>
 
+    <section class="section" aria-labelledby="ks3Head">
+      <div class="section__head"><h2 id="ks3Head">KS3 <span>Ages 11–14</span></h2><a href="/ks3/geography">KS3 Geography home &rarr;</a></div>
+      <div class="tiles" id="tilesKS3"></div>
+    </section>
+
     <section class="section" aria-labelledby="revHead">
       <div class="section__head"><h2 id="revHead">Revision &amp; practice <span>By level and subject</span></h2></div>
       <div class="tiles" id="tilesRev"></div>
@@ -288,9 +294,19 @@
     tiles('ib', 'tilesIB', 'ib');
     tiles('igcse', 'tilesIG', 'ig');
     tiles('rev', 'tilesRev', 'rv');
+    // KS3: one tile per year, listing that year's Geography units
+    (function () {
+      var m = menu('ks3'), el = document.getElementById('tilesKS3'); if (!el) return;
+      el.innerHTML = m.cols.map(function (c) {
+        var units = c.items.filter(function (it) { return it[1] && it[2] !== 'head' && !/games/i.test(it[0]); });
+        return '<div class="tile k3"><span class="lvl">KS3 Geography</span><h3><a href="/ks3/geography">' + esc(c.title) + '</a></h3><p>' + units.length + ' units of curriculum lessons, quizzes and activities.</p>' +
+          '<div class="links">' + units.map(function (it) { return '<a href="' + esc(it[1]) + '">' + esc(it[0]) + '</a>'; }).join('') + '</div>' +
+          '<a class="enter" href="/ks3/geography">Enter KS3 Geography <span aria-hidden="true">&rarr;</span></a></div>';
+      }).join('') + '<div class="tile k3"><span class="lvl">KS3</span><h3><a href="/geography/games#ks3">Games</a></h3><p>Map challenges, place detectives, storm missions and more. Free to play.</p><div class="links"><a href="/geography/games/world-map-challenge">World Map Challenge</a><a href="/geography/games/travel-the-wright-way">Travel the Wright Way</a><a href="/geography/quizzes">KS3 quizzes</a></div><a class="enter" href="/geography/games#ks3">Play KS3 games <span aria-hidden="true">&rarr;</span></a></div>';
+    })();
 
     // quick links
-    var quick = [['IB Geography', '/geography'], ['IGCSE Geography', '/igcse/geography/learn'], ['IGCSE Economics', '/igcse/economics/learn'], ['IGCSE Business', '/igcse/business/learn'], ['IGCSE History', '/igcse/history/learn'], ['Games', '/geography/games']];
+    var quick = [['KS3 Geography', '/ks3/geography'], ['IB Geography', '/geography'], ['IGCSE Geography', '/igcse/geography/learn'], ['IGCSE Economics', '/igcse/economics/learn'], ['IGCSE Business', '/igcse/business/learn'], ['IGCSE History', '/igcse/history/learn'], ['Games', '/geography/games']];
     document.getElementById('quick').innerHTML = quick.map(function (q) { return '<a href="' + q[1] + '">' + q[0] + '</a>'; }).join('');
 
     // find a page — same search as the menu bar (menus + every unit, topic and lesson)
@@ -307,6 +323,7 @@
       return null;
     }
     function area(p) {
+      if (/^\/ks3\//.test(p)) return ['KS3', 'var(--ks3)', 'KS3 Geography'];
       if (/^\/igcse\/cie-economics/.test(p)) return ['IG', 'var(--ig)', 'Cambridge IGCSE Economics'];
       var m = p.match(/^\/igcse\/(geography|economics|business|history)/);
       if (m) return ['IG', 'var(--ig)', 'IGCSE ' + m[1].charAt(0).toUpperCase() + m[1].slice(1)];
