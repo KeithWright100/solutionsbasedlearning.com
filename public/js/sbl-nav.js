@@ -29,7 +29,7 @@
     { key: 'ib', label: 'IB Diploma', color: 'var(--sn-ib)', blurb: 'Geography, Economics, Business Management and History',
       all: ['IB subject menu', '/menu'],
       cols: [
-        { title: 'IB Geography', href: '/geography', blurb: 'Core units, options and HL, with case studies, quizzes and games.', items: [
+        { title: 'IB Geography lessons', href: '/geography', blurb: 'Core units, options and HL, with case studies, quizzes and games.', items: [
           ['Unit 1: Changing population', '/geography/paper-1/core-1'],
           ['Unit 2: Global climate', '/geography/paper-1/core-2'],
           ['Unit 3: Resource consumption', '/geography/paper-1/core-3'],
