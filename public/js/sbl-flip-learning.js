@@ -1731,6 +1731,9 @@
   };
 
   FLIP.RC09 = FLIP.RC08;
+  /* Lessons defined in other files (e.g. /js/sbl-ks3-lessons.js) register here. */
+  var EXTRA = window.SBL_FLIP_EXTRA || {};
+  Object.keys(EXTRA).forEach(function (k) { FLIP[k] = EXTRA[k]; });
   window.SBL_FLIP_IDS = Object.keys(FLIP);
   var overlay = document.querySelector("[data-lesson-id]");
   var id = overlay && overlay.getAttribute("data-lesson-id");
@@ -1947,7 +1950,7 @@
   var OPENKEY = KEY + "-collapsed", startOpen = cfg.open !== false;
   try { if (localStorage.getItem(OPENKEY) === "1") startOpen = false; } catch (e) {}
   var h = inl
-    ? '<section class="fl fl--lesson fl--inline" id="flipLearning' + (n ? n + 1 : "") + '"><div class="fl__ihead"><h2>Lesson resources</h2><span class="fl__state"></span></div><div class="fl__body">'
+    ? '<section class="fl fl--lesson fl--inline" id="flipLearning' + (n ? n + 1 : "") + '"><div class="fl__ihead"><h2>' + esc(cfg.heading || "Lesson resources") + '</h2><span class="fl__state"></span></div><div class="fl__body">'
     : '<details class="fl' + (isL ? " fl--lesson" : "") + '" id="flipLearning' + (n ? n + 1 : "") + '"' + (startOpen ? " open" : "") + '><summary>' +
     (inl ? "" : (
     (isL ? '<span class="fl__logo" aria-label="Lesson Resources"><span class="fl__logo-a">Lesson</span> <span class="fl__logo-b">Resources</span></span>'
@@ -1961,7 +1964,7 @@
   if (cfg.teacherNote) h += '<p class="fl__tnote">' + esc(cfg.teacherNote) + "</p>";
   if (cfg._note) h += '<p class="fl__tnote"><b>Note from ' + esc(ed.teacher || "your teacher") + ":</b> " + esc(cfg._note).replace(/\n/g, "<br>") + "</p>";
   if (cfg.cover) h += '<ul class="fl__cover">' + cfg.cover.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>";
-  h += '<div class="fl__top"><button type="button" class="fl__bot" onclick="window.openTeachBot && openTeachBot(\'' + id + '\')">Open Teach Me Live &rarr;</button>' +
+  h += '<div class="fl__top">' + (cfg.noBot ? "" : '<button type="button" class="fl__bot" onclick="window.openTeachBot && openTeachBot(\'' + id + '\')">Open Teach Me Live &rarr;</button>') +
     '<button type="button" class="fl__btn fl__btn--ghost fl-copy">Copy to OneNote</button>' +
     (ed.canEdit ? '<button type="button" class="fl__btn fl__btn--ghost fl-edit">\u270f\ufe0f Edit for my classes</button>' : "") +
     (hasEdits(ed.edits) ? '<span class="fl__adapt">' + (ed.canEdit ? "Your classes see your edited version" : "Adapted by your teacher") + "</span>" : "") + "</div>";

@@ -89,6 +89,27 @@
           ['Revise by topic bots', '/igcse/history/revision/topics'],
           ['Exam tips', '/igcse/history/exam-tips']] }
       ] },
+    { key: 'ks3', label: 'KS3', color: 'var(--sn-ks3)', blurb: 'Key Stage 3 Geography lessons for Years 7 to 9',
+      all: ['KS3 Geography home', '/ks3/geography'],
+      cols: [
+        { title: 'Year 7', href: '/ks3/geography', items: [
+          ['Introduction to Geography', '/ks3/geography/y7-introduction-to-geography'],
+          ['Fantastic Places', '/ks3/geography/y7-fantastic-places'],
+          ['Map Skills', '/ks3/geography/y7-map-skills'],
+          ['Project', '/ks3/geography/y7-project'],
+          ['Oceans and Waste', '/ks3/geography/y7-oceans-and-waste']] },
+        { title: 'Year 8', href: '/ks3/geography', items: [
+          ['Tropical Storms', '/ks3/geography/y8-tropical-storms'],
+          ['Development and Inequalities', '/ks3/geography/y8-development-and-inequality'],
+          ['Climate Change', '/ks3/geography/y8-climate-change'],
+          ['Micro-climates', '/ks3/geography/y8-micro-climates'],
+          ['Africa Is Not a Country', '/ks3/geography/y8-africa-is-not-a-country']] },
+        { title: 'Year 9', href: '/ks3/geography', items: [
+          ['Project', '/ks3/geography/y9-project'],
+          ['Restless Earth', '/ks3/geography/y9-restless-earth'],
+          ['Population', '/ks3/geography/y9-population'],
+          ['KS3 games', '/geography/games#ks3']] }
+      ] },
     { key: 'rev', label: 'Revision & practice', color: 'var(--sn-rev)', blurb: 'Revision, past papers, quizzes and games by level and subject',
       cols: [
         { title: 'IB Diploma', items: [
@@ -311,7 +332,8 @@
     { key: 'igcse-econ', label: 'IGCSE Economics', src: '/js/sbl-igcse-econ-sidebar.js' },
     { key: 'igcse-bus', label: 'IGCSE Business', src: '/js/sbl-igcse-bus-sidebar.js' },
     { key: 'igcse-hist', label: 'IGCSE History', src: '/js/sbl-igcse-hist-sidebar.js' },
-    { key: 'cie-econ', label: 'Cambridge Economics', src: '/js/sbl-cie-econ-sidebar.js' }
+    { key: 'cie-econ', label: 'Cambridge Economics', src: '/js/sbl-cie-econ-sidebar.js' },
+    { key: 'ks3-geo', label: 'KS3 Geography', src: '/js/sbl-ks3-sidebar.js' }
   ];
   var treesLoading = null;
   function loadTrees() {
