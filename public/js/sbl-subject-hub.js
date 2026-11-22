@@ -58,11 +58,12 @@
     if (/overview/.test(t)) return 'Start here'; if (/cambridge|cie/.test(t)) return 'Cambridge syllabus'; return 'Open';
   }
   var NAV = window.SBL_NAV || [];
-  function col(title) { for (var i = 0; i < NAV.length; i++) for (var j = 0; j < (NAV[i].cols || []).length; j++) if (NAV[i].cols[j].title === title) return NAV[i].cols[j]; return null; }
+  function col(title) { for (var i = 0; i < NAV.length; i++) for (var j = 0; j < (NAV[i].cols || []).length; j++) if (NAV[i].cols[j].title === title || NAV[i].cols[j].title === title + ' lessons') return NAV[i].cols[j]; return null; }
   var levels = [];
   if (S.ks3) levels.push({ id: 'ks3', badge: 'KS3', age: 'Ages 11–14', c: '#c2410c', title: S.ks3.title, blurb: S.ks3.blurb, start: S.ks3.start, items: S.ks3.items, units: [] });
   ['igcse', 'ib'].forEach(function (lv) {
     var c = col(S.nav[lv]); if (!c) return;
+    c = Object.assign({}, c, { title: c.title.replace(/ lessons$/, '') });
     var items = [], units = [];
     c.items.forEach(function (it) { if (!it[1] || it[2] === 'soon' || it[2] === 'head') return; (/^(Unit|Option|HL)/.test(it[0]) ? units : items).push(it); });
     levels.push({ id: lv, badge: lv === 'ib' ? 'IB Diploma' : 'IGCSE', age: lv === 'ib' ? 'Ages 16–19' : 'Ages 14–16', c: lv === 'ib' ? '#0b6e8a' : '#1f8a4c',
