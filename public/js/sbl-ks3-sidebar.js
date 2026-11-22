@@ -34,6 +34,12 @@
             "title": "Lessons",
             "lessons": [
                 {
+                  "label": "Mount Ruapehu: a fantastic volcanic place",
+                  "href": "/ks3/geography/y7-fantastic-places/l3-mount-ruapehu",
+                  "id": "KS3-Y7FP-L3",
+                  "n": 3
+                },
+                {
                   "label": "Oslo: weather, climate and climate graphs",
                   "href": "/ks3/geography/y7-fantastic-places/l5-oslo-climate",
                   "id": "KS3-Y7FP-L5",

@@ -223,6 +223,42 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
     ]
   });
 
+  L["KS3-Y7FP-L3"] = lesson({
+    title: "Mount Ruapehu: a fantastic volcanic place",
+    overview: {
+      heading: "Fantastic places",
+      intention: "To explain what makes Mount Ruapehu a fantastic place, using place, processes, power and possibilities.",
+      syllabus: ["Key question: what makes Mount Ruapehu fantastic, and how can people visit it safely and responsibly?"],
+      success: ["Describe what makes Mount Ruapehu distinctive (place).", "Explain how volcanic activity has shaped the landscape (processes).",
+        "Explain how scientists, communities and authorities manage safe access (power), and suggest a responsible future idea (possibilities)."]
+    },
+    parts: [
+      B.demonstrate,
+      { type: "heading", text: "Activity 1: Ruapehu Mission", note: "Play the game to explore Mount Ruapehu. Your scores save to your account if you are logged in." },
+      { type: "game", src: "/geography/games/volcano-fantastic-place", title: "Ruapehu Mission" },
+      { type: "heading", text: "Activity 2: Persuasive tourist advert", note: "ROLE: you are a travel writer and geographer. Persuade people to visit Mount Ruapehu while keeping the geography accurate and the advice responsible." },
+      { type: "html", html: '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.7rem;margin:.4rem 0"><div style="border:2px solid #1b8bb0;border-radius:10px;padding:.7rem .9rem;background:#fff"><b style="color:#1b8bb0">PLACE</b><p style="margin:.3rem 0 0">what makes Mount Ruapehu distinctive</p></div><div style="border:2px solid #e0703a;border-radius:10px;padding:.7rem .9rem;background:#fff"><b style="color:#e0703a">PROCESSES</b><p style="margin:.3rem 0 0">how volcanic activity shaped the landscape</p></div><div style="border:2px solid #7650ad;border-radius:10px;padding:.7rem .9rem;background:#fff"><b style="color:#7650ad">POWER</b><p style="margin:.3rem 0 0">how scientists, communities or authorities influence safe access</p></div><div style="border:2px solid #4a8a3f;border-radius:10px;padding:.7rem .9rem;background:#fff"><b style="color:#4a8a3f">POSSIBILITIES</b><p style="margin:.3rem 0 0">one positive but responsible future idea</p></div></div>' },
+      { type: "html", html: '<div class="fl__tnote"><b>Your advert must include:</b><ul style="margin:.3rem 0 0 1.1rem;padding:0"><li>a title and a slogan</li><li>a rhetorical question and direct address (talk to the reader as \u201cyou\u201d)</li><li>at least three persuasive adjectives</li><li>a clear statement about following current official guidance and restrictions</li></ul></div>' },
+      { id: "p1", label: "a)", type: "table", prompt: "Planning frame", cols: ["", "My plan"], rows: ["Title and slogan", "PLACE evidence", "PROCESSES evidence", "POWER evidence", "POSSIBILITIES idea", "Persuasive techniques", "Safety statement"] },
+      { type: "html", html: '<div class="fl__tnote" style="background:#fff8f0;border:1px solid #f3c9a5"><p style="margin:0 0 .3rem;font-size:.85rem;color:#666">Example for inspiration. Yours needs to be better and more detailed: you can do this!</p><h3 style="margin:.2rem 0;color:#13284b">Visit Mount Ruapehu</h3><p style="margin:0 0 .5rem;font-style:italic">Can one mountain be shaped by both fire and ice?</p><p style="margin:0 0 .5rem;color:#c2410c;font-weight:700">Discover a snow-capped volcanic cone, an acidic crater lake, glaciers and vivid mineral-stained rocks in a place shaped by powerful Earth processes.</p><p style="margin:0 0 .5rem">Explore approved routes, learn how subduction creates magma and see how eruptions, glaciers and lahars have shaped Ruapehu. GNS Science, the Department of Conservation, iwi, emergency managers, communities and visitors all play a part in keeping access responsible.</p><p style="margin:0 0 .5rem;color:#b42318;font-weight:700">Follow current official guidance and never enter a restricted area.</p><p style="margin:0;font-weight:800;color:#1b8bb0">VISIT MOUNT RUAPEHU: GEOGRAPHY COMES ALIVE</p></div>' },
+      { id: "p2", label: "b)", type: "text", words: [120, 250], prompt: "Write your persuasive tourist advert for Mount Ruapehu.", note: "Each item turns green when you use it.",
+        mustUse: [["Place", "distinctive|unique|special"], ["Processes", "subduction|magma|erupt|lahar"], ["Power", "scientist|gns|geonet|conservation|iwi|authorit|emergency"], ["Possibilities", "future"], ["Rhetorical question", "\\?"], ["Direct address", "\\byou\\b"], ["Safety statement", "guidance|restrict|safe"]] },
+      B.quizzes,
+      { id: "q1", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+        { q: "Mount Ruapehu is on which island of New Zealand?", o: ["North Island", "South Island", "Stewart Island", "Chatham Island"], a: 0 },
+        { q: "Ruapehu formed because one tectonic plate sinks beneath another. This process is called\u2026", o: ["erosion", "subduction", "deposition", "weathering"], a: 1 },
+        { q: "A fast-moving flow of volcanic mud and water is called a\u2026", o: ["glacier", "lahar", "geyser", "fjord"], a: 1 },
+        { q: "Why does the Crater Lake on Ruapehu need careful monitoring?", o: ["It is very acidic and can feed eruptions and lahars", "It is used for swimming", "It freezes every summer", "It is the source of all New Zealand\u2019s drinking water"], a: 0 }] },
+      B.reflect,
+      { type: "heading", text: "Final geographical judgement", note: "How far do you agree: \u201cMount Ruapehu is fantastic because of its volcano\u201d?" },
+      { id: "j1", label: "", type: "table", prompt: "", cols: ["", "Your sentence"], rows: ["PLACE: Ruapehu is distinctive because\u2026", "PROCESSES: Volcanic processes have\u2026", "POWER: Decisions are influenced by\u2026", "POSSIBILITIES: In the future, Ruapehu could\u2026"] },
+      { id: "j2", label: "", type: "text", prompt: "VERDICT: Overall, I agree / partly agree / disagree because the most important evidence is\u2026" },
+      { type: "heading", text: "Exit ticket: one idea for each P", note: "Complete the four rows, then give your final verdict." },
+      { id: "x1", label: "", type: "table", prompt: "", cols: ["", "Evidence", "Why it matters"], rows: ["PLACE", "PROCESSES", "POWER", "POSSIBILITIES"] },
+      { id: "x2", label: "", type: "text", prompt: "FINAL VERDICT: Fantastic, partly fantastic or too risky? Choose one and give your main reason." }
+    ]
+  });
+
   L["KS3-Y7FP-L5"] = lesson({
     title: "Oslo: weather, climate and climate graphs",
     overview: {
