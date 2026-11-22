@@ -245,6 +245,37 @@ window.SBL_LESSONS.FW04 = {
   topicTitle: 'Drainage basin hydrology and geomorphology',
   title: 'River landforms',
   href: '/geography/paper-1/option-a/t1-drainage-basin/l4-river-landforms',
+  // Challenge question set by the course teacher (10-mark Examine-style
+  // statement); guiding questions written for the Challenge Tutor.
+  challenge: {
+    question: 'Fluvial landforms can only be classified as either erosional, depositional or transportational. Critically examine this statement. (10)',
+    intro: 'This is a 10-mark question. Work through the guiding questions below, then talk it through with the Challenge Tutor before you write your answer.',
+    levels: [
+      {
+        label: 'Build the claim',
+        questions: [
+          'Which river landforms are clearly the result of erosion? Think about waterfalls, gorges, V-shaped valleys and potholes.',
+          'Which landforms are clearly the result of deposition? Think about levees, deltas and point bars.',
+          'Is there any landform that is mainly made by transportation, or is transportation the link between erosion and deposition?'
+        ]
+      },
+      {
+        label: 'Challenge the claim',
+        questions: [
+          'A meander has erosion on the outer bend and deposition on the inner bend at the same time. Which category does it belong to?',
+          'A floodplain is widened by lateral erosion but built up by deposition of alluvium. What does that suggest about simple categories?',
+          'An ox-bow lake is cut off by erosion and then sealed by deposition. How does the time scale change the classification?',
+          'Does the classification change depending on river discharge, season or flood events?'
+        ]
+      },
+      {
+        label: 'Reach a judgement',
+        questions: [
+          'To what extent is the statement valid? Is it more useful to see landforms on a continuum, or as the result of several processes working together?'
+        ]
+      }
+    ]
+  },
   syllabusFocus: 'Erosional landforms (V-shaped valleys, interlocking spurs, waterfalls and gorges, potholes, river cliffs) and depositional landforms (levees, floodplains, point bars, deltas), and how these landforms relate to changing energy, sediment load and channel processes along a river’s course.',
   starterButtons: [
     { label: 'Teach me this lesson', request: 'Give me a full overview of erosional and depositional river landforms' },

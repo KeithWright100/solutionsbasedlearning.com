@@ -382,6 +382,166 @@
   })();
   var LONGPROFILE_SVG = "<svg viewBox=\"0 0 760 420\" role=\"img\" aria-label=\"Long profile of a river from upper to lower course, with cross-sections showing a V-shaped valley, a wider valley and a wide flat floodplain\" style=\"width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px\"><defs><marker id=\"lpa\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0 L10 5 L0 10z\" fill=\"#333\"/></marker><marker id=\"lpb\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0 L10 5 L0 10z\" fill=\"#2a63b8\"/></marker></defs><g font-family=\"Inter,Arial,sans-serif\" font-size=\"13\"><rect x=\"20\" y=\"10\" width=\"233\" height=\"400\" fill=\"#f6efe4\"/><rect x=\"253\" y=\"10\" width=\"233\" height=\"400\" fill=\"#eef6ea\"/><rect x=\"486\" y=\"10\" width=\"254\" height=\"400\" fill=\"#e8f2f8\"/><text x=\"136\" y=\"32\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"15\">1. Upper course</text><text x=\"370\" y=\"32\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"15\">2. Middle course</text><text x=\"613\" y=\"32\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"15\">3. Lower course</text><path d=\"M30 60 C90 70 150 120 220 150 C320 195 420 215 520 222 C600 226 660 228 700 228 L700 240 L30 240 Z\" fill=\"#c9a77a\"/><path d=\"M30 60 C90 70 150 120 220 150 C320 195 420 215 520 222 C600 226 660 228 700 228\" fill=\"none\" stroke=\"#1f5e85\" stroke-width=\"3\"/><path d=\"M700 228 H740\" stroke=\"#1f5e85\" stroke-width=\"3\"/><path d=\"M700 228 h40 v12 h-40z\" fill=\"#8fc6e6\"/><text x=\"720\" y=\"220\" text-anchor=\"middle\" font-size=\"11\" fill=\"#1f5e85\">Sea</text><path d=\"M90 56 H560\" stroke=\"#333\" stroke-width=\"2\" marker-end=\"url(#lpa)\"/><text x=\"330\" y=\"76\" text-anchor=\"middle\">Gradient decreases</text><path d=\"M240 120 L470 175\" stroke=\"#2a63b8\" stroke-width=\"2.5\" marker-end=\"url(#lpb)\"/><text x=\"355\" y=\"135\" fill=\"#2a63b8\" font-weight=\"700\" transform=\"rotate(13 355 135)\">Transportation</text><text x=\"60\" y=\"190\" font-weight=\"700\" fill=\"#7a2a0a\">Mainly erosion</text><text x=\"560\" y=\"205\" font-weight=\"700\" fill=\"#6b4a2b\">Lots of deposition</text><path d=\"M685 228 L740 228\" stroke=\"#555\" stroke-dasharray=\"3 3\"/><text x=\"735\" y=\"258\" text-anchor=\"end\" font-size=\"11\" fill=\"#555\">Base level (sea level)</text><text x=\"30\" y=\"272\" font-weight=\"700\" fill=\"#333\">Cross-profiles (valley cross-sections)</text><path d=\"M50 290 L110 382 Q136 400 162 382 L222 290 L226 384 L46 384 Z\" fill=\"#c9a77a\" stroke=\"#6b4a2b\" stroke-width=\"1.5\"/><path d=\"M114 368 L158 368\" stroke=\"#1f5e85\" stroke-width=\"2.5\"/><text x=\"136\" y=\"402\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#3a2a14\" font-size=\"12\">Vertical erosion (cutting down)</text><path d=\"M270 290 L305 330 Q312 352 335 356 L405 356 Q428 352 435 330 L470 290 L460 384 L280 384 Z\" fill=\"#c9a77a\" stroke=\"#6b4a2b\" stroke-width=\"1.5\"/><path d=\"M312 344 L428 344\" stroke=\"#1f5e85\" stroke-width=\"2.5\"/><text x=\"370\" y=\"402\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#3a2a14\" font-size=\"12\">Lateral erosion (valley widening)</text><path d=\"M500 290 L515 320 Q520 340 540 342 L686 342 Q706 340 711 320 L726 290 L726 384 L500 384 Z\" fill=\"#c9a77a\" stroke=\"#6b4a2b\" stroke-width=\"1.5\"/><path d=\"M528 334 L698 334\" stroke=\"#1f5e85\" stroke-width=\"2.5\"/><text x=\"613\" y=\"402\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#3a2a14\" font-size=\"12\">Deposition of alluvium</text></g></svg>";
   var HJULSTROM_SVG = "<svg viewBox=\"0 0 760 450\" role=\"img\" aria-label=\"Hjulstr\u00f6m curve: river velocity against particle size, showing zones where particles are eroded, transported and deposited\" style=\"width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px\"><g font-family=\"Inter,Arial,sans-serif\" font-size=\"12\"><rect x=\"80\" y=\"30\" width=\"620\" height=\"360\" fill=\"#fdf0cf\"/><path d=\"M80 30 L700 30 L700.0 43.5 L700.0 43.5 L694.8 45.1 L689.7 46.7 L684.5 48.3 L679.3 50.0 L674.2 51.7 L669.0 53.4 L663.8 55.1 L658.7 56.9 L653.5 58.6 L648.3 60.4 L643.2 62.3 L638.0 64.1 L632.8 66.0 L627.7 67.8 L622.5 69.7 L617.3 71.6 L612.2 73.6 L607.0 75.5 L601.8 77.5 L596.7 79.5 L591.5 81.5 L586.3 83.6 L581.2 85.7 L576.0 87.8 L570.8 89.9 L565.7 92.1 L560.5 94.3 L555.3 96.5 L550.2 98.7 L545.0 101.0 L539.8 103.3 L534.7 105.6 L529.5 107.9 L524.3 110.3 L519.2 112.6 L514.0 115.0 L508.8 117.3 L503.7 119.7 L498.5 122.1 L493.3 124.5 L488.2 127.0 L483.0 129.6 L477.8 132.4 L472.7 135.3 L467.5 138.3 L462.3 141.3 L457.2 144.4 L452.0 147.4 L446.8 150.5 L441.7 153.5 L436.5 156.4 L431.3 159.3 L426.2 162.0 L421.0 164.6 L415.8 167.1 L410.7 169.3 L405.5 171.3 L400.3 173.1 L395.2 174.6 L390.0 175.8 L384.8 176.9 L379.7 177.9 L374.5 178.9 L369.3 179.9 L364.2 180.7 L359.0 181.5 L353.8 182.1 L348.7 182.6 L343.5 182.9 L338.3 183.0 L333.2 182.7 L328.0 181.8 L322.8 180.5 L317.7 178.7 L312.5 176.7 L307.3 174.5 L302.2 172.1 L297.0 169.7 L291.8 167.3 L286.7 165.0 L281.5 162.7 L276.3 160.3 L271.2 157.8 L266.0 155.1 L260.8 152.3 L255.7 149.4 L250.5 146.4 L245.3 143.3 L240.2 140.2 L235.0 137.0 L229.8 133.8 L224.7 130.6 L219.5 127.5 L214.3 124.3 L209.2 121.1 L204.0 118.1 L198.8 115.0 L193.7 112.1 L188.5 109.2 L183.3 106.5 L178.2 103.8 L173.0 101.2 L167.8 98.5 L162.7 95.9 L157.5 93.3 L152.3 90.8 L147.2 88.2 L142.0 85.7 L136.8 83.2 L131.7 80.7 L126.5 78.2 L121.3 75.8 L116.2 73.3 L111.0 70.9 L105.8 68.5 L100.7 66.2 L95.5 63.9 L90.3 61.5 L85.2 59.3 L80.0 57.0 Z\" fill=\"#d9e8c4\"/><path d=\"M183.3 390.0 L188.5 384.7 L193.7 379.5 L198.8 374.4 L204.0 369.3 L209.2 364.2 L214.3 359.2 L219.5 354.2 L224.7 349.4 L229.8 344.5 L235.0 339.7 L240.2 335.0 L245.3 330.4 L250.5 325.8 L255.7 321.3 L260.8 316.8 L266.0 312.4 L271.2 308.1 L276.3 303.8 L281.5 299.6 L286.7 295.5 L291.8 291.5 L297.0 287.5 L302.2 283.6 L307.3 279.9 L312.5 276.1 L317.7 272.5 L322.8 268.9 L328.0 265.3 L333.2 261.8 L338.3 258.3 L343.5 254.8 L348.7 251.4 L353.8 247.9 L359.0 244.5 L364.2 241.0 L369.3 237.6 L374.5 234.1 L379.7 230.6 L384.8 227.1 L390.0 223.5 L395.2 219.9 L400.3 216.2 L405.5 212.6 L410.7 208.9 L415.8 205.2 L421.0 201.4 L426.2 197.7 L431.3 194.0 L436.5 190.3 L441.7 186.6 L446.8 182.9 L452.0 179.2 L457.2 175.6 L462.3 172.0 L467.5 168.5 L472.7 164.9 L477.8 161.5 L483.0 158.1 L488.2 154.8 L493.3 151.5 L498.5 148.3 L503.7 145.1 L508.8 141.9 L514.0 138.7 L519.2 135.5 L524.3 132.4 L529.5 129.3 L534.7 126.2 L539.8 123.2 L545.0 120.2 L550.2 117.2 L555.3 114.3 L560.5 111.4 L565.7 108.6 L570.8 105.8 L576.0 103.1 L581.2 100.5 L586.3 97.9 L591.5 95.4 L596.7 93.0 L596.7 93.0 L601.8 90.6 L607.0 88.3 L612.2 86.0 L617.3 83.7 L622.5 81.4 L627.7 79.2 L632.8 77.0 L638.0 74.9 L643.2 72.8 L648.3 70.7 L653.5 68.7 L658.7 66.7 L663.8 64.8 L669.0 62.9 L674.2 61.0 L679.3 59.2 L684.5 57.5 L689.7 55.8 L694.8 54.1 L700.0 52.5 L700 390 L183.3 390 Z\" fill=\"#f3c9bd\"/><line x1=\"80.0\" y1=\"30\" x2=\"80.0\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"80.0\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">0.001</text><line x1=\"183.3\" y1=\"30\" x2=\"183.3\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"183.3\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">0.01</text><line x1=\"286.7\" y1=\"30\" x2=\"286.7\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"286.7\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">0.1</text><line x1=\"390.0\" y1=\"30\" x2=\"390.0\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"390.0\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">1</text><line x1=\"493.3\" y1=\"30\" x2=\"493.3\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"493.3\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">10</text><line x1=\"596.7\" y1=\"30\" x2=\"596.7\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"596.7\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">100</text><line x1=\"700.0\" y1=\"30\" x2=\"700.0\" y2=\"390\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"700.0\" y=\"406\" text-anchor=\"middle\" fill=\"#333\">1000</text><line x1=\"80\" y1=\"390.0\" x2=\"700\" y2=\"390.0\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"72\" y=\"394.0\" text-anchor=\"end\" fill=\"#333\">0.1</text><line x1=\"80\" y1=\"300.0\" x2=\"700\" y2=\"300.0\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"72\" y=\"304.0\" text-anchor=\"end\" fill=\"#333\">1</text><line x1=\"80\" y1=\"210.0\" x2=\"700\" y2=\"210.0\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"72\" y=\"214.0\" text-anchor=\"end\" fill=\"#333\">10</text><line x1=\"80\" y1=\"120.0\" x2=\"700\" y2=\"120.0\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"72\" y=\"124.0\" text-anchor=\"end\" fill=\"#333\">100</text><line x1=\"80\" y1=\"30.0\" x2=\"700\" y2=\"30.0\" stroke=\"#fff\" stroke-opacity=\".7\"/><text x=\"72\" y=\"34.0\" text-anchor=\"end\" fill=\"#333\">1000</text><path d=\"M80.0 57.0 L85.2 59.3 L90.3 61.5 L95.5 63.9 L100.7 66.2 L105.8 68.5 L111.0 70.9 L116.2 73.3 L121.3 75.8 L126.5 78.2 L131.7 80.7 L136.8 83.2 L142.0 85.7 L147.2 88.2 L152.3 90.8 L157.5 93.3 L162.7 95.9 L167.8 98.5 L173.0 101.2 L178.2 103.8 L183.3 106.5 L188.5 109.2 L193.7 112.1 L198.8 115.0 L204.0 118.1 L209.2 121.1 L214.3 124.3 L219.5 127.5 L224.7 130.6 L229.8 133.8 L235.0 137.0 L240.2 140.2 L245.3 143.3 L250.5 146.4 L255.7 149.4 L260.8 152.3 L266.0 155.1 L271.2 157.8 L276.3 160.3 L281.5 162.7 L286.7 165.0 L291.8 167.3 L297.0 169.7 L302.2 172.1 L307.3 174.5 L312.5 176.7 L317.7 178.7 L322.8 180.5 L328.0 181.8 L333.2 182.7 L338.3 183.0 L343.5 182.9 L348.7 182.6 L353.8 182.1 L359.0 181.5 L364.2 180.7 L369.3 179.9 L374.5 178.9 L379.7 177.9 L384.8 176.9 L390.0 175.8 L395.2 174.6 L400.3 173.1 L405.5 171.3 L410.7 169.3 L415.8 167.1 L421.0 164.6 L426.2 162.0 L431.3 159.3 L436.5 156.4 L441.7 153.5 L446.8 150.5 L452.0 147.4 L457.2 144.4 L462.3 141.3 L467.5 138.3 L472.7 135.3 L477.8 132.4 L483.0 129.6 L488.2 127.0 L493.3 124.5 L498.5 122.1 L503.7 119.7 L508.8 117.3 L514.0 115.0 L519.2 112.6 L524.3 110.3 L529.5 107.9 L534.7 105.6 L539.8 103.3 L545.0 101.0 L550.2 98.7 L555.3 96.5 L560.5 94.3 L565.7 92.1 L570.8 89.9 L576.0 87.8 L581.2 85.7 L586.3 83.6 L591.5 81.5 L596.7 79.5 L601.8 77.5 L607.0 75.5 L612.2 73.6 L617.3 71.6 L622.5 69.7 L627.7 67.8 L632.8 66.0 L638.0 64.1 L643.2 62.3 L648.3 60.4 L653.5 58.6 L658.7 56.9 L663.8 55.1 L669.0 53.4 L674.2 51.7 L679.3 50.0 L684.5 48.3 L689.7 46.7 L694.8 45.1 L700.0 43.5\" fill=\"none\" stroke=\"#1d3b2a\" stroke-width=\"2.6\"/><path d=\"M183.3 390.0 L188.5 384.7 L193.7 379.5 L198.8 374.4 L204.0 369.3 L209.2 364.2 L214.3 359.2 L219.5 354.2 L224.7 349.4 L229.8 344.5 L235.0 339.7 L240.2 335.0 L245.3 330.4 L250.5 325.8 L255.7 321.3 L260.8 316.8 L266.0 312.4 L271.2 308.1 L276.3 303.8 L281.5 299.6 L286.7 295.5 L291.8 291.5 L297.0 287.5 L302.2 283.6 L307.3 279.9 L312.5 276.1 L317.7 272.5 L322.8 268.9 L328.0 265.3 L333.2 261.8 L338.3 258.3 L343.5 254.8 L348.7 251.4 L353.8 247.9 L359.0 244.5 L364.2 241.0 L369.3 237.6 L374.5 234.1 L379.7 230.6 L384.8 227.1 L390.0 223.5 L395.2 219.9 L400.3 216.2 L405.5 212.6 L410.7 208.9 L415.8 205.2 L421.0 201.4 L426.2 197.7 L431.3 194.0 L436.5 190.3 L441.7 186.6 L446.8 182.9 L452.0 179.2 L457.2 175.6 L462.3 172.0 L467.5 168.5 L472.7 164.9 L477.8 161.5 L483.0 158.1 L488.2 154.8 L493.3 151.5 L498.5 148.3 L503.7 145.1 L508.8 141.9 L514.0 138.7 L519.2 135.5 L524.3 132.4 L529.5 129.3 L534.7 126.2 L539.8 123.2 L545.0 120.2 L550.2 117.2 L555.3 114.3 L560.5 111.4 L565.7 108.6 L570.8 105.8 L576.0 103.1 L581.2 100.5 L586.3 97.9 L591.5 95.4 L596.7 93.0\" fill=\"none\" stroke=\"#6b1d12\" stroke-width=\"2.6\"/><path d=\"M596.7 93.0 L601.8 90.6 L607.0 88.3 L612.2 86.0 L617.3 83.7 L622.5 81.4 L627.7 79.2 L632.8 77.0 L638.0 74.9 L643.2 72.8 L648.3 70.7 L653.5 68.7 L658.7 66.7 L663.8 64.8 L669.0 62.9 L674.2 61.0 L679.3 59.2 L684.5 57.5 L689.7 55.8 L694.8 54.1 L700.0 52.5\" fill=\"none\" stroke=\"#6b1d12\" stroke-width=\"2.6\" stroke-dasharray=\"7 5\"/><rect x=\"80\" y=\"30\" width=\"620\" height=\"360\" fill=\"none\" stroke=\"#333\"/><text x=\"300\" y=\"66\" font-weight=\"700\" font-size=\"15\" fill=\"#2f5a1c\">EROSION (particles picked up)</text><text x=\"110\" y=\"250\" font-weight=\"700\" font-size=\"15\" fill=\"#7a5a10\">TRANSPORT</text><text x=\"110\" y=\"268\" fill=\"#7a5a10\">(particles kept moving)</text><text x=\"520\" y=\"330\" font-weight=\"700\" font-size=\"15\" fill=\"#7a2414\">DEPOSITION</text><text x=\"520\" y=\"348\" fill=\"#7a2414\">(particles dropped)</text><text x=\"266.0\" y=\"142.5\" fill=\"#1d3b2a\" font-weight=\"700\" transform=\"rotate(-8 266.0 142.5)\">Critical erosion velocity</text><text x=\"311.7\" y=\"242.5\" fill=\"#6b1d12\" font-weight=\"700\" transform=\"rotate(-31 311.7 242.5)\">Settling (fall) velocity</text><text x=\"390\" y=\"440\" text-anchor=\"middle\" fill=\"#333\">Particle size (mm), log scale</text><text x=\"22\" y=\"210\" transform=\"rotate(-90 22 210)\" text-anchor=\"middle\" fill=\"#333\">River velocity (cm/s), log scale</text><text x=\"116.2\" y=\"422\" text-anchor=\"middle\" fill=\"#555\" font-style=\"italic\">clay</text><text x=\"209.2\" y=\"422\" text-anchor=\"middle\" fill=\"#555\" font-style=\"italic\">silt</text><text x=\"343.5\" y=\"422\" text-anchor=\"middle\" fill=\"#555\" font-style=\"italic\">sand</text><text x=\"467.5\" y=\"422\" text-anchor=\"middle\" fill=\"#555\" font-style=\"italic\">gravel</text><text x=\"576.0\" y=\"422\" text-anchor=\"middle\" fill=\"#555\" font-style=\"italic\">pebbles</text><text x=\"669.0\" y=\"422\" text-anchor=\"middle\" fill=\"#555\" font-style=\"italic\">boulders</text></g></svg>";
+  /* FW04: river landform diagrams (my own drawings) */
+  function LF_NUM(x, y, n) { return '<g transform="translate(' + x + "," + y + ')"><circle r="12" fill="#fff" stroke="#c2410c" stroke-width="2.2"/><text y="4.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7a2a0a">' + n + "</text></g>"; }
+  function LF_SVG(h, label, body) { return '<svg viewBox="0 0 760 ' + h + '" role="img" aria-label="' + label + '" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><defs><marker id="lfa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#1f5e85"/></marker><marker id="lfr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#b42318"/></marker></defs><g font-family="Inter,Arial,sans-serif" font-size="12.5">' + body + "</g></svg>"; }
+  var LF_WATERFALL = LF_SVG(360, "Cross-section of a waterfall: resistant rock over less resistant rock, overhang, plunge pool, fallen rocks and a gorge left as the waterfall retreats upstream",
+    '<rect x="0" y="0" width="760" height="360" fill="#eef6fb"/>' +
+    '<path d="M0 120 L430 120 L430 150 L0 150 Z" fill="#7d8a96"/>' +
+    [20, 60, 100, 140, 180, 220, 260, 300, 340, 380].map(function (x) { return '<path d="M' + x + ' 124 l14 22" stroke="#5d6873" stroke-width="1.2"/>'; }).join("") +
+    '<path d="M0 150 L380 150 Q368 200 372 250 L400 290 L760 290 L760 360 L0 360 Z" fill="#d9b98a"/>' +
+    [170, 190, 210, 230, 250, 270].map(function (y) { return '<path d="M0 ' + y + ' H' + (y < 255 ? 360 : 390) + '" stroke="#c4a171" stroke-width="1"/>'; }).join("") +
+    '<path d="M380 150 Q368 200 372 250 L400 290 Q470 300 520 290 L760 290 L760 360" fill="none" stroke="#8a6a3e" stroke-width="1.5"/>' +
+    '<path d="M0 110 L430 110 L430 120 L0 120 Z" fill="#8fc6e6"/><path d="M430 110 Q470 120 478 190 Q482 240 470 282" fill="none" stroke="#8fc6e6" stroke-width="18" opacity=".85"/>' +
+    '<path d="M400 262 Q450 300 540 286 L760 286 L760 270 L520 270 Q470 268 440 255 Z" fill="#8fc6e6" opacity=".9"/>' +
+    '<ellipse cx="460" cy="292" rx="70" ry="22" fill="#5aa6d1" opacity=".9"/>' +
+    '<polygon points="520,288 540,276 556,284 548,296" fill="#6b5a45"/><polygon points="566,286 580,280 590,290 574,296" fill="#6b5a45"/><polygon points="430,300 444,292 452,302" fill="#6b5a45"/>' +
+    '<path d="M60 100 H220" stroke="#1f5e85" stroke-width="2.5" marker-end="url(#lfa)"/><text x="60" y="92" fill="#1f5e85" font-weight="700">River flow</text>' +
+    '<path d="M430 120 H700 V290 M560 120 V290" fill="none" stroke="#b42318" stroke-width="1.6" stroke-dasharray="6 5"/>' +
+    '<path d="M690 200 H520" stroke="#b42318" stroke-width="2.5" marker-end="url(#lfr)"/><text x="745" y="40" text-anchor="end" fill="#b42318" font-weight="700">The waterfall retreats upstream.</text><text x="745" y="58" text-anchor="end" fill="#b42318">Dashed lines: where it used to be.</text><text x="745" y="76" text-anchor="end" fill="#b42318">The steep-sided valley left behind is a gorge.</text>' +
+    LF_NUM(200, 135, 1) + LF_NUM(200, 215, 2) + LF_NUM(404, 165, 3) + LF_NUM(460, 316, 4) + LF_NUM(560, 306, 5) + LF_NUM(630, 240, 6));
+  var LF_FLOODPLAIN = LF_SVG(300, "Cross-section of a river valley in the lower course: steep bluffs, a wide flat floodplain made of layers of alluvium, and the river channel",
+    '<rect x="0" y="0" width="760" height="300" fill="#eef6fb"/>' +
+    '<path d="M0 40 L90 50 L130 170 L630 170 L670 50 L760 40 L760 300 L0 300 Z" fill="#a98a66"/>' +
+    '<path d="M130 170 L630 170 L622 230 L138 230 Z" fill="#e6d3a8"/>' + [185, 200, 215].map(function (y) { return '<path d="M134 ' + y + ' H626" stroke="#c9b17f" stroke-width="1.2"/>'; }).join("") +
+    '<path d="M330 170 Q345 196 370 196 L400 196 Q425 196 432 170 Z" fill="#8fc6e6"/>' +
+    '<path d="M140 168 L630 168" stroke="#4d7a2c" stroke-width="3"/>' +
+    '<path d="M200 150 H300" stroke="#1f5e85" stroke-width="2" marker-end="url(#lfa)"/><path d="M560 150 H460" stroke="#1f5e85" stroke-width="2" marker-end="url(#lfa)"/><text x="380" y="140" text-anchor="middle" fill="#1f5e85">meanders migrate across the valley floor</text>' +
+    LF_NUM(112, 110, 1) + LF_NUM(240, 185, 2) + LF_NUM(520, 205, 3) + LF_NUM(380, 215, 4) +
+    '<text x="380" y="290" text-anchor="middle" fill="#555">Width of the floodplain can be many kilometres</text>');
+  var LF_LEVEE = LF_SVG(300, "Cross-section of a river with levees: coarse material deposited close to the banks, finer silt further away across the floodplain, normal and flood water levels",
+    '<rect x="0" y="0" width="760" height="300" fill="#eef6fb"/>' +
+    '<path d="M0 190 L250 182 Q300 160 320 150 Q335 210 380 214 Q425 210 440 150 Q460 160 510 182 L760 190 L760 300 L0 300 Z" fill="#e6d3a8"/>' +
+    '<path d="M240 182 Q290 160 322 150 L330 186 Z" fill="#a8875a"/><path d="M520 182 Q470 160 438 150 L430 186 Z" fill="#a8875a"/>' +
+    '<path d="M0 230 H760" stroke="#c9b17f"/><path d="M0 250 H760" stroke="#c9b17f"/>' +
+    '<path d="M330 186 Q340 210 380 212 Q420 210 430 186 Z" fill="#8fc6e6"/><path d="M330 186 H430" stroke="#1f5e85" stroke-width="2"/>' +
+    '<path d="M60 120 H700" stroke="#1f5e85" stroke-width="2" stroke-dasharray="8 5"/>' +
+    [250, 290, 470, 510].map(function (x, i) { return '<circle cx="' + x + '" cy="' + (i % 3 ? 170 : 178) + '" r="4" fill="#6b5a45"/>'; }).join("") +
+    [90, 140, 620, 670].map(function (x) { return '<circle cx="' + x + '" cy="186" r="1.8" fill="#6b5a45"/>'; }).join("") +
+    LF_NUM(290, 135, 1) + LF_NUM(380, 200, 2) + LF_NUM(700, 100, 3) + LF_NUM(120, 206, 4) + LF_NUM(490, 150, 5) +
+    '<text x="380" y="290" text-anchor="middle" fill="#555">Vertical scale exaggerated</text>');
+  var LF_MEANDER = LF_SVG(380, "Plan view of a meander showing the line of fastest flow on the outside bend, a river cliff where erosion happens, a point bar where deposition happens, and a cross-section from A to B",
+    '<rect x="0" y="0" width="760" height="380" fill="#eaf3e0"/>' +
+    '<path d="M20 60 C200 40 300 60 330 140 C360 220 300 300 420 320 C520 335 600 270 740 280" fill="none" stroke="#8fc6e6" stroke-width="54" stroke-linecap="round"/>' +
+    '<path d="M20 52 C200 30 312 50 346 134 C378 220 320 300 420 312 C520 326 600 262 740 272" fill="none" stroke="#b42318" stroke-width="3" stroke-dasharray="9 6"/>' +
+    '<path d="M330 90 C360 140 372 170 365 200" fill="none" stroke="#8a5a2b" stroke-width="7"/>' +
+    '<path d="M290 150 C285 190 280 230 300 262" fill="none" stroke="#e8cf86" stroke-width="16" stroke-linecap="round"/>' +
+    '<path d="M260 178 L398 178" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/><text x="250" y="182" text-anchor="end" font-weight="700">A</text><text x="406" y="182" font-weight="700">B</text>' +
+    '<path d="M60 60 H160" stroke="#1f5e85" stroke-width="2.5" marker-end="url(#lfa)"/>' +
+    LF_NUM(376, 84, 1) + LF_NUM(268, 236, 2) + LF_NUM(170, 30, 3) + LF_NUM(424, 140, 4) + LF_NUM(244, 140, 5) +
+    '<g transform="translate(470,40)"><rect width="270" height="150" rx="8" fill="#fff" stroke="#ccc"/><text x="12" y="20" font-weight="700">Cross-section A–B</text>' +
+    '<path d="M15 50 L60 52 Q130 60 200 120 L215 40 L255 38 L255 140 L15 140 Z" fill="#c9a77a"/><path d="M60 52 Q130 60 200 120 L210 60 Z" fill="#8fc6e6"/><path d="M60 52 H210" stroke="#1f5e85" stroke-width="2"/><path d="M60 52 Q130 60 200 120" fill="none" stroke="#e8cf86" stroke-width="6"/>' +
+    '<text x="20" y="40" font-weight="700">A</text><text x="248" y="32" font-weight="700">B</text><text x="80" y="80" font-size="11" fill="#6b4a2b">gentle slope</text><text x="150" y="134" font-size="11" fill="#5a3a1a">deep, steep side</text></g>' +
+    '<text x="20" y="370" fill="#555">Dashed red line: thalweg. Arrow: direction of flow.</text>');
+  function OXB(stage) {
+    var d = ["M10 20 C50 18 70 20 75 40 C80 62 60 70 80 70 C110 70 120 40 150 42",
+      "M10 20 C40 18 66 20 72 40 C76 62 64 66 80 66 C110 66 118 42 150 42",
+      "M10 20 C40 18 66 20 72 40 C76 62 64 66 80 66 C110 66 118 42 150 42",
+      "M10 20 C40 18 66 20 72 40 C76 62 64 66 80 66 C110 66 118 42 150 42"][stage];
+    var s = '<svg viewBox="0 0 160 90" aria-hidden="true"><rect width="160" height="90" fill="#eaf3e0"/>';
+    if (stage < 3) s += '<path d="' + d + '" fill="none" stroke="#8fc6e6" stroke-width="' + (stage ? 12 : 10) + '"/>';
+    else s += '<path d="M66 32 C78 50 60 66 80 66 C104 66 112 48 106 38" fill="none" stroke="#8fc6e6" stroke-width="11"/>';
+    if (stage === 1) s += '<path d="M70 34 L108 40" stroke="#b42318" stroke-width="2" stroke-dasharray="3 2"/>';
+    if (stage >= 2) s += '<path d="M10 20 C40 20 80 32 150 42" fill="none" stroke="#8fc6e6" stroke-width="' + (stage === 2 ? 9 : 12) + '"/>';
+    if (stage === 3) s += '<path d="M62 30 L70 38 M102 38 L110 44" stroke="#c9a77a" stroke-width="5"/>';
+    return s + "</svg>";
+  }
+  var LF_OXBOW = LF_SVG(190, "Four stages in the formation of an ox-bow lake, from a tight meander to a cut-off lake",
+    '<rect width="760" height="190" fill="#fff"/>' + [0, 1, 2, 3].map(function (i) {
+      var x = 12 + i * 187;
+      return '<g transform="translate(' + x + ',20)"><g transform="scale(1.1)">' + OXB(i).replace('<svg viewBox="0 0 160 90" aria-hidden="true">', "").replace("</svg>", "") + '</g><text x="88" y="124" text-anchor="middle" font-weight="700">Stage ' + (i + 1) + "</text></g>";
+    }).join("") + LF_NUM(300, 40, 1) + LF_NUM(474, 36, 2) + LF_NUM(672, 112, 3) + LF_NUM(630, 46, 4) +
+    '<text x="380" y="176" text-anchor="middle" fill="#555">Water flows from left to right in each stage.</text>');
+  var LF_DELTA = LF_SVG(420, "A delta in plan view with distributaries and the delta front, and a cross-section showing topset, foreset and bottomset beds",
+    '<rect width="760" height="420" fill="#d7ecf7"/>' +
+    '<path d="M0 0 H380 L380 40 Q300 70 250 150 Q230 190 180 200 Q100 205 20 230 L0 240 Z" fill="#cfe3b0"/>' +
+    '<path d="M0 0 H260 V20 Q230 60 200 100 Q160 140 0 140 Z" fill="#b9d79a"/>' +
+    '<path d="M20 0 C60 40 90 60 120 80" fill="none" stroke="#5aa6d1" stroke-width="8"/>' +
+    ['M120 80 C160 110 200 150 230 180', 'M120 80 C160 90 220 80 300 70', 'M120 80 C120 120 100 170 90 210', 'M150 100 C190 140 200 120 260 130'].map(function (d) { return '<path d="' + d + '" fill="none" stroke="#5aa6d1" stroke-width="4"/>'; }).join("") +
+    LF_NUM(60, 35, 1) + LF_NUM(270, 98, 2) + LF_NUM(200, 214, 3) + LF_NUM(340, 150, 4) +
+    '<g transform="translate(400,30)"><rect width="345" height="370" rx="8" fill="#fff" stroke="#ccc"/><text x="14" y="22" font-weight="700">Cross-section through the delta</text>' +
+    '<path d="M10 70 H330" stroke="#1f5e85" stroke-width="2"/><text x="300" y="64" font-size="11" fill="#1f5e85">sea level</text>' +
+    '<path d="M10 60 L150 64 L150 90 L10 90 Z" fill="#e6c98a"/>' +
+    '<path d="M150 64 L230 210 L150 210 Z" fill="#d1a86a"/><path d="M10 90 L150 90 L150 210 L10 210 Z" fill="#d1a86a"/>' + [0, 1, 2, 3].map(function (i) { return '<path d="M' + (120 + i * 8) + ' 64 L' + (190 + i * 8) + ' 210" stroke="#a5803f"/>'; }).join("") +
+    '<path d="M10 210 L330 210 L330 250 L10 250 Z" fill="#9e8a72"/>' +
+    '<path d="M10 250 H330 V280 H10 Z" fill="#7e6c58"/><text x="170" y="270" text-anchor="middle" fill="#fff" font-size="11">older sea bed</text>' +
+    LF_NUM(80, 77, 5) + LF_NUM(170, 150, 6) + LF_NUM(270, 230, 7) +
+    '<text x="14" y="310" font-size="11.5" fill="#333">Coarse material settles first and builds forward;</text><text x="14" y="326" font-size="11.5" fill="#333">the finest clay travels furthest out to sea.</text></g>');
+
+  /* FW04 lesson: whiteboard, starter pictures, meander development and geometry (my own drawings) */
+  function WB_BOARD(title, rows, foot) {
+    var hand = 'font-family="Comic Sans MS,Chalkboard SE,Segoe Print,cursive"';
+    var s = '<svg viewBox="0 0 760 470" role="img" aria-label="Whiteboard: ' + title + '" style="width:100%;max-width:760px;height:auto;display:block">';
+    s += '<rect x="14" y="14" width="732" height="420" rx="6" fill="#c9ced3"/><rect x="24" y="24" width="712" height="400" rx="3" fill="#fdfdfd"/><rect x="10" y="10" width="22" height="22" rx="4" fill="#8a9097"/><rect x="728" y="10" width="22" height="22" rx="4" fill="#8a9097"/>';
+    s += '<rect x="10" y="432" width="740" height="16" rx="3" fill="#b9bfc5"/><rect x="520" y="404" width="120" height="32" rx="4" fill="#d9a86c" stroke="#a87a43"/><rect x="520" y="404" width="120" height="8" fill="#8a8f96"/><rect x="668" y="352" width="16" height="84" rx="3" fill="#1d4fd8"/><rect x="668" y="372" width="16" height="64" rx="2" fill="#e8eaed" stroke="#c3c7cc"/>';
+    s += '<g ' + hand + '><text x="50" y="66" font-size="24" font-weight="700" fill="#1d4fd8">' + title + '</text>';
+    var cols = ["#b42318", "#0f766e", "#a16207", "#6d28d9", "#1d4fd8"];
+    rows.forEach(function (r, i) { var y = 112 + i * 52; s += '<rect x="52" y="' + (y - 18) + '" width="20" height="20" rx="3" fill="none" stroke="' + cols[i % 5] + '" stroke-width="2.5"/><text x="86" y="' + y + '" font-size="21" font-weight="700" fill="' + cols[i % 5] + '">' + r + "</text>"; });
+    s += '<text x="50" y="390" font-size="17" fill="#1d4fd8">' + foot + "</text></g>";
+    return s + "</svg>";
+  }
+  var WB_LANDFORMS = WB_BOARD("Listen, then draw and label:", ["Meanders", "Ox-bow lakes", "Floodplains and bluffs", "Levees", "Deltas"], "Label every diagram. Photograph your board for OneNote.");
+  function PIC(k, body) { return '<figure class="fl-anim__t"><svg viewBox="0 0 340 210" role="img" aria-label="Picture ' + k + '" style="width:100%;height:auto;display:block;border:1px solid var(--lh-border);border-radius:10px">' + body + '</svg><figcaption><b>Picture ' + k + "</b></figcaption></figure>"; }
+  var STARTER_PICS = '<div class="fl-anim"><div class="fl-anim__g">' + [
+    PIC("A", '<defs><linearGradient id="spa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6f8796"/><stop offset=".35" stop-color="#2f3c33"/><stop offset="1" stop-color="#1f2a22"/></linearGradient></defs><rect width="340" height="210" fill="url(#spa)"/>' +
+      '<path d="M330 70 C250 62 170 66 150 76 C120 92 250 92 270 104 C300 122 120 112 80 124 C40 138 220 140 250 152 C290 168 120 170 60 176 C30 180 20 200 10 206" fill="none" stroke="#dfe9ee" stroke-width="7" stroke-linecap="round"/>'),
+    PIC("B", '<rect width="340" height="210" fill="#fff"/><path d="M10 110 L70 20 L270 20 L330 110 Z" fill="#e4cfa2"/><path d="M60 110 L100 30 L240 30 L280 110 Z" fill="#b9d79a"/><path d="M70 20 L100 30 M60 110 L70 20 M270 20 L240 30 M280 110 L270 20" stroke="#a5803f" stroke-width="2"/>' +
+      '<path d="M10 110 H330 V195 H10 Z" fill="#c9a77a"/><path d="M60 110 H280 L272 140 H68 Z" fill="#e6d3a8"/><path d="M10 160 H330" stroke="#b08a5c"/>' +
+      '<path d="M170 30 C120 40 230 50 165 62 C100 74 240 84 170 96 C130 102 160 108 170 110" fill="none" stroke="#5aa6d1" stroke-width="7"/><path d="M218 44 C250 44 252 60 226 60" fill="none" stroke="#5aa6d1" stroke-width="5"/><path d="M110 84 C90 84 92 98 112 98" fill="none" stroke="#5aa6d1" stroke-width="4"/>'),
+    PIC("C", '<rect width="340" height="210" fill="#2f5a3a"/>' + (function () { var s = "", i; for (i = 0; i < 90; i++) s += '<circle cx="' + ((i * 53) % 340) + '" cy="' + ((i * 37) % 210) + '" r="' + (6 + i % 5) + '" fill="' + (i % 2 ? "#3c6b45" : "#26482f") + '"/>'; return s; })() +
+      '<path d="M0 150 C60 140 90 160 120 150 C150 140 140 110 170 108 C200 106 200 140 230 150 C270 162 300 140 340 150" fill="none" stroke="#2c3e5c" stroke-width="12"/><path d="M150 112 C120 80 220 70 196 110" fill="none" stroke="#3b4e6e" stroke-width="10"/>'),
+    PIC("D", '<rect width="340" height="210" fill="#fff"/><g font-family="Inter,Arial" font-size="10.5" fill="#333">' + [0, 1, 2].map(function (i) {
+      var y = 20 + i * 64, lv = i === 0 ? "" : '<path d="M100 ' + (y + 22) + ' q20 -' + (4 + i * 5) + ' 40 0 M200 ' + (y + 22) + ' q20 -' + (4 + i * 5) + ' 40 0" fill="#c9a77a" stroke="#a5803f"/>';
+      return '<path d="M20 ' + (y + 22) + ' H140 Q150 ' + (y + 52) + ' 170 ' + (y + 52) + ' Q190 ' + (y + 52) + ' 200 ' + (y + 22) + ' H320" fill="none" stroke="#777"/><path d="M' + (i === 1 ? "20 " + (y + 14) + " H320" : "146 " + (y + 34) + " H194") + '" stroke="#5aa6d1" stroke-width="' + (i === 1 ? 3 : 2) + '"/>' + lv + '<text x="20" y="' + (y + 8) + '">(' + "abc".charAt(i) + ")</text>";
+    }).join("") + "</g>")
+  ].join("") + "</div></div>";
+  var MEANDER_DEV = (function () {
+    var s = '<svg viewBox="0 0 760 290" role="img" aria-label="Four stages showing a straight river developing into a meandering river with pools, riffles and a line of bluffs" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="11.5">';
+    var paths = ["M90 20 L90 240", "M90 20 C80 70 104 100 90 130 C76 160 104 190 90 240", "M90 20 C40 60 140 90 90 130 C40 170 140 200 90 240", "M100 20 C20 50 170 100 95 135 C20 170 170 205 100 240"];
+    var titles = ["1. Straight channel", "2. Pools and riffles", "3. Meanders form", "4. Meanders migrate"];
+    paths.forEach(function (d, i) {
+      var x = 8 + i * 188;
+      s += '<g transform="translate(' + x + ',0)"><rect x="0" y="0" width="180" height="262" rx="8" fill="#eaf3e0"/>';
+      if (i === 3) s += '<path d="M14 20 L14 240 M166 20 L166 240" stroke="#8a5a2b" stroke-width="5" stroke-dasharray="2 0"/><text x="20" y="252" fill="#6b4a2b">bluffs</text><text x="130" y="252" fill="#6b4a2b">bluffs</text>';
+      s += '<path d="' + d + '" fill="none" stroke="#8fc6e6" stroke-width="' + (i < 2 ? 18 : 16) + '" stroke-linecap="round"/>';
+      if (i === 0 || i === 1) s += [55, 105, 155, 205].map(function (y, j) { return j % 2 ? '<g><circle cx="90" cy="' + y + '" r="5" fill="#9c8a74"/><circle cx="84" cy="' + (y + 6) + '" r="3" fill="#9c8a74"/><circle cx="96" cy="' + (y + 5) + '" r="3" fill="#9c8a74"/></g>' : '<ellipse cx="90" cy="' + y + '" rx="7" ry="11" fill="#2f78b3" opacity=".7"/>'; }).join("");
+      if (i === 1) s += '<text x="108" y="58" fill="#1f5e85">pool</text><text x="108" y="110" fill="#6b5a45">riffle</text>';
+      if (i >= 2) s += '<path d="' + d + '" fill="none" stroke="#b42318" stroke-width="1.6" stroke-dasharray="5 4" transform="translate(' + (i === 2 ? 4 : 5) + ',0)"/>';
+      if (i === 2) s += '<text x="128" y="96" fill="#7a2a0a">erosion</text><text x="30" y="96" fill="#6b4a2b">deposition</text>';
+      if (i === 3) s += '<path d="M60 150 l0 26" stroke="#b42318" stroke-width="2" marker-end="url(#mda)"/><text x="40" y="190" fill="#b42318">migrate</text>';
+      s += '<text x="90" y="16" text-anchor="middle" font-weight="700" font-size="12.5" fill="#222" dy="-2"></text></g>';
+      s += '<text x="' + (x + 90) + '" y="282" text-anchor="middle" font-weight="700" font-size="12.5">' + titles[i] + "</text>";
+    });
+    s += '<defs><marker id="mda" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#b42318"/></marker></defs>';
+    return s + "</g></svg>";
+  })();
+  var MEANDER_GEOM = (function () {
+    var s = '<svg viewBox="0 0 760 330" role="img" aria-label="Meander geometry: wavelength from crest to crest, meander width across the belt, and a cross-section showing helicoidal flow" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><defs><marker id="mga" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#333"/></marker><marker id="mgh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#b42318"/></marker></defs><g font-family="Inter,Arial,sans-serif" font-size="12.5">';
+    s += '<rect x="10" y="10" width="460" height="310" rx="8" fill="#eaf3e0"/>';
+    s += '<path d="M20 165 C60 165 70 70 120 70 C170 70 180 260 230 260 C280 260 290 70 340 70 C390 70 400 165 460 165" fill="none" stroke="#8fc6e6" stroke-width="18"/>';
+    s += '<path d="M120 46 H340" stroke="#333" stroke-width="1.6" marker-start="url(#mga)" marker-end="url(#mga)"/><text x="230" y="38" text-anchor="middle" font-weight="700">Meander wavelength</text>';
+    s += '<path d="M120 52 V62 M340 52 V62" stroke="#333"/><text x="120" y="98" text-anchor="middle" fill="#7a2a0a" font-weight="700">crest</text><text x="340" y="98" text-anchor="middle" fill="#7a2a0a" font-weight="700">crest</text>';
+    s += '<path d="M410 61 V269" stroke="#333" stroke-width="1.6" marker-start="url(#mga)" marker-end="url(#mga)"/><text x="418" y="170" font-weight="700">Meander</text><text x="418" y="186" font-weight="700">width</text>';
+    s += '<path d="M400 61 H350 M400 269 H240" stroke="#333" stroke-dasharray="3 3"/><text x="30" y="296" fill="#555" font-size="11.5">Crest = the outermost point of a bend.</text><text x="30" y="311" fill="#555" font-size="11.5">Wavelength = distance from one crest to the next on the same side.</text>';
+    s += '<g transform="translate(490,30)"><text x="0" y="12" font-weight="700">Helicoidal flow (cross-section)</text><path d="M0 40 L20 40 Q60 44 110 60 Q170 90 200 160 L215 30 L260 30 L260 200 L0 200 Z" fill="#c9a77a"/><path d="M20 40 Q60 44 110 60 Q170 90 200 160 L212 40 Z" fill="#8fc6e6"/><path d="M20 40 H212" stroke="#1f5e85" stroke-width="2"/>';
+    s += '<path d="M70 52 C120 44 190 46 196 80 C200 120 170 130 140 110 C110 92 90 80 70 70" fill="none" stroke="#b42318" stroke-width="2.4" marker-end="url(#mgh)"/>';
+    s += '<text x="0" y="220" font-size="11.5">Left (inner bend): shallow, slow, deposition</text><text x="0" y="236" font-size="11.5">Right (outer bend): deep, fast, erosion</text><text x="0" y="258" font-size="11.5" fill="#b42318">Water spirals in a corkscrew: surface water</text><text x="0" y="273" font-size="11.5" fill="#b42318">flows to the outer bank, bed water flows</text><text x="0" y="288" font-size="11.5" fill="#b42318">back to the inner bank.</text></g>';
+    return s + "</g></svg>";
+  })();
+  var SINUOSITY = '<div class="fl-sin" data-sin="1"><p class="fl__q" style="margin-top:0">Sinuosity index calculator</p><p class="fl__note">Sinuosity index = actual channel length ÷ straight-line distance between the same two points.</p><div class="fl-sin__in"><label>Channel length (km) <input type="number" min="0" step="0.1" data-s="c" value="7.5"></label><label>Straight-line distance (km) <input type="number" min="0" step="0.1" data-s="d" value="3"></label></div><p class="fl-sin__out"></p><p class="fl__note">1.0–1.05 straight · 1.05–1.5 sinuous · over 1.5 meandering</p></div>';
+
+  var DELTA_TYPES = (function () {
+    var s = '<svg viewBox="0 0 760 250" role="img" aria-label="Three types of delta in plan view: arcuate (fan-shaped), bird’s-foot and cuspate" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12.5">';
+    var T = [["Arcuate (fan-shaped)", "e.g. Nile, Egypt", '<path d="M0 0 H230 V40 Q200 150 115 165 Q30 150 0 40 Z" fill="#cfe3b0"/><path d="M115 0 V60" stroke="#5aa6d1" stroke-width="7"/>' + ["M115 60 C100 100 70 130 40 140", "M115 60 C112 110 108 140 105 163", "M115 60 C130 100 160 130 190 140", "M115 60 C95 90 80 110 55 120", "M115 60 C140 90 160 110 180 118"].map(function (d) { return '<path d="' + d + '" fill="none" stroke="#5aa6d1" stroke-width="3"/>'; }).join("")],
+      ["Bird’s-foot", "e.g. Mississippi, USA", '<path d="M0 0 H230 V40 H0 Z" fill="#cfe3b0"/><path d="M115 40 L100 120 L70 165 L84 168 L108 128 L112 175 L122 175 L124 128 L150 170 L162 164 L130 118 L125 40 Z" fill="#cfe3b0"/><path d="M118 0 V120 M118 120 L77 166 M118 120 L117 174 M118 120 L156 166" fill="none" stroke="#5aa6d1" stroke-width="4"/>'],
+      ["Cuspate (pointed)", "e.g. Tiber, Italy", '<path d="M0 0 H230 V70 L115 140 L0 70 Z" fill="#cfe3b0"/><path d="M115 0 V138" stroke="#5aa6d1" stroke-width="6"/>']];
+    T.forEach(function (t, i) {
+      var x = 15 + i * 248;
+      s += '<g transform="translate(' + x + ',14)"><rect width="230" height="190" rx="6" fill="#d7ecf7"/>' + t[2] + '</g><text x="' + (x + 115) + '" y="224" text-anchor="middle" font-weight="700">' + t[0] + '</text><text x="' + (x + 115) + '" y="241" text-anchor="middle" fill="#555">' + t[1] + "</text>";
+    });
+    return s + "</g></svg>";
+  })();
+
   var FLIP = {
     CP02: {
       title: "Global patterns and classifications of economic development",
@@ -1326,6 +1486,109 @@
         { type: "linkcard", url: "https://wayground.com/activity/signup/qdp?quizId=5ebb02b3058d13001b9f5d41&fromPage=/admin/quiz/5ebb02b3058d13001b9f5d41/rivers-erosion-transportation-and-deposition&action=preview&ctaSource=use_activity_cta", icon: "W", title: "Rivers: erosion, transportation and deposition", sub: "Wayground quiz (22 questions)" }
       ]
     }],
+    FW04: [{
+      title: "Drawing, labelling and explaining river landforms",
+      overview: {
+        heading: "How physical processes influence drainage basin systems and landforms",
+        intention: "To describe and explain physical patterns and processes.",
+        syllabus: ["The formation of typical river landforms, including waterfalls, floodplains, meanders, levees and deltas."],
+        success: ["Describe and explain the formation of a waterfall.", "Describe and explain the formation of floodplains and associated features in the middle and lower course, such as meanders and levees.",
+          "Describe and explain the conditions required for, and the formation of, deltas."] },
+      intro: "For this section of the syllabus you need to be able to draw, label and explain in detail, using geographical terminology, six landforms. For each one: study the diagram, label it, then write your explanation. Copy the diagrams into OneNote (Copy to OneNote includes them) and practise drawing them from memory.",
+      parts: [
+        { type: "heading", text: "1: Waterfalls and gorges" },
+        { type: "html", html: LF_WATERFALL },
+        { id: "w1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "More resistant (hard) rock" }, { t: "Number 2", d: "Less resistant (soft) rock" }, { t: "Number 3", d: "Overhang of unsupported rock" }, { t: "Number 4", d: "Plunge pool" }, { t: "Number 5", d: "Fallen rocks" }, { t: "Number 6", d: "Gorge" }] },
+        { id: "w2", label: "b)", type: "order", prompt: "Put the stages of waterfall formation in the correct order.", answer: ["B", "D", "F", "A", "E", "C"],
+          cards: [{ k: "A", text: "The overhang becomes too heavy and collapses into the plunge pool." },
+            { k: "B", text: "The river flows over a band of resistant rock lying on top of less resistant rock." },
+            { k: "C", text: "The process repeats, so the waterfall retreats upstream and leaves a steep-sided gorge." },
+            { k: "D", text: "The less resistant rock is eroded faster by hydraulic action and abrasion, undercutting the hard rock." },
+            { k: "E", text: "The fallen rocks swirl around at the base, deepening the plunge pool by abrasion and increasing the undercutting." },
+            { k: "F", text: "An overhang of unsupported resistant rock is left above the plunge pool." }] },
+        { id: "w3", label: "c)", type: "text", words: [120, 250], prompt: "Use the video to draw, describe and explain the formation of waterfalls and gorges. Draw your diagram in OneNote, then write your explanation here.",
+          note: "Include these terms as a minimum. Each one turns green when you use it.",
+          mustUse: [["Resistant (hard) rock", "(?<!less )resistant|hard rock|harder rock"], ["Less resistant (soft) rock", "less resistant|soft rock|softer rock"], ["Overhang", "overhang|over hang"], ["Hydraulic action"], ["Abrasion", "abrasion|corrasion"], ["Plunge pool"], ["Differential erosion"], ["Retreat", "retreat"], ["Gorge", "gorge"]],
+          links: [{ label: "Video: how waterfalls are formed", url: "https://www.youtube.com/watch?v=6t2FllizRN4" }] },
+        { id: "w4", label: "d)", type: "text", prompt: "Extended learning: refer to a specific example of a waterfall, including its rock types.",
+          before: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Example: Gullfoss, Iceland.</b> Gullfoss is on the Hv\u00edt\u00e1 river in south-west Iceland. It falls in two steps, each formed by a layer of resistant basalt lava with softer sedimentary rocks between them. As it has retreated it has cut a gorge about 70 m deep and around 2.5 km long. You could use Gullfoss or research your own example, such as High Force (England) or Niagara Falls.</div>' },
+        { type: "heading", text: "2: Floodplains and bluffs" },
+        { type: "html", html: LF_FLOODPLAIN },
+        { id: "f1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "Bluff (steep valley side)" }, { t: "Number 2", d: "Floodplain (flat valley floor)" }, { t: "Number 3", d: "Layers of alluvium" }, { t: "Number 4", d: "River channel" }] },
+        { id: "f2", label: "b)", type: "text", words: [100, 200], prompt: "Explain how a floodplain and its bluffs form. Include lateral erosion by migrating meanders and deposition of alluvium during floods." },
+        { type: "heading", text: "3: Levees" },
+        { type: "html", html: LF_LEVEE },
+        { id: "l1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "Levee" }, { t: "Number 2", d: "River channel at its normal level" }, { t: "Number 3", d: "Flood water level" }, { t: "Number 4", d: "Fine silt and clay deposited further away" }, { t: "Number 5", d: "Coarse sediment deposited first, next to the channel" }] },
+        { id: "l2", label: "b)", type: "text", words: [100, 200], prompt: "Explain how levees form. Why is the coarsest material deposited closest to the channel?" },
+        { type: "heading", text: "4: Meanders" },
+        { type: "html", html: LF_MEANDER },
+        { id: "m1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "River cliff" }, { t: "Number 2", d: "Point bar (slip-off slope)" }, { t: "Number 3", d: "Thalweg (line of fastest flow)" }, { t: "Number 4", d: "Outside bend: fast, deep water and erosion" }, { t: "Number 5", d: "Inside bend: slow, shallow water and deposition" }] },
+        { id: "m2", label: "b)", type: "text", words: [100, 200], prompt: "Explain how a meander forms and develops. Use the terms thalweg, helicoidal flow, lateral erosion, river cliff and point bar." },
+        { type: "heading", text: "5: Ox-bow lakes" },
+        { type: "html", html: LF_OXBOW },
+        { id: "o1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "The neck of the meander narrows" }, { t: "Number 2", d: "The river cuts through the neck during a flood" }, { t: "Number 3", d: "Ox-bow lake" }, { t: "Number 4", d: "Deposition seals off the old channel" }] },
+        { id: "o2", label: "b)", type: "text", words: [80, 160], prompt: "Explain the four stages in the formation of an ox-bow lake." },
+        { type: "heading", text: "6: Deltas" },
+        { type: "html", html: LF_DELTA },
+        { id: "d1", label: "a)", type: "match", termCol: "Label", defCol: "Feature (choose one)", noExample: true, prompt: "Label the diagram.",
+          items: [{ t: "Number 1", d: "Main river channel" }, { t: "Number 2", d: "Distributary" }, { t: "Number 3", d: "Delta front (coastline)" }, { t: "Number 4", d: "Sea" }, { t: "Number 5", d: "Topset beds" }, { t: "Number 6", d: "Foreset beds" }, { t: "Number 7", d: "Bottomset beds" }] },
+        { id: "d2", label: "b)", type: "questions", letters: true, prompt: "Answer these questions.",
+          rows: ["What conditions are needed for a delta to form? (Think about the river's load, the sea's tides and currents, and what happens to the river's velocity.)", "Why does salt water (flocculation) help clay particles to settle?", "Name an example of a delta and describe its shape."] },
+        { id: "d3", label: "c)", type: "text", words: [100, 200], prompt: "Explain how a delta forms, including the topset, foreset and bottomset beds." }
+      ]
+    }, {
+      kind: "lesson", open: true, inline: true, afterCard: 2,
+      title: "Drawing, labelling and explaining middle and lower river landforms",
+      intro: "",
+      parts: [
+        { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
+        { type: "heading", text: "Starter 1: Whiteboard time", note: "I will talk you through what to draw. Produce labelled diagrams on the large whiteboards." },
+        { type: "html", html: WB_LANDFORMS },
+        { type: "heading", text: "Starter 2: Name the landforms", note: "How many middle and lower course landforms can you name from the pictures?" },
+        { type: "html", html: STARTER_PICS },
+        { id: "s2", label: "", type: "table", prompt: "", cols: ["Picture", "Landforms I can name"], rows: ["Picture A", "Picture B", "Picture C", "Picture D"] },
+        { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
+        { type: "heading", text: "a) Meanders", note: "Use the videos and animations to draw, describe and explain the formation of meanders. Aim to draw a sequence of diagrams showing how a straight river develops into a meandering river, using the correct terminology." },
+        { type: "html", html: MEANDER_DEV },
+        { type: "html", html: MEANDER_GEOM },
+        { id: "m1", label: "i)", type: "text", words: [200, 400], prompt: "Draw your sequence of diagrams in OneNote, then describe and explain the formation of meanders here.", note: "Include these terms as a minimum. Each one turns green when you use it.",
+          mustUse: [["Meander", "meander"], ["Outer bend", "outer bend|outside bend"], ["Erosion", "erosion|erode"], ["Inner bend", "inner bend|inside bend"], ["Deposition", "deposit"], ["River cliff", "river cliff"], ["Slip-off slope / point bar", "slip.off slope|point bar"], ["Helicoidal flow", "helicoidal"], ["Thalweg", "thalweg"], ["Meander wavelength", "wave.?length"], ["Meander width", "meander width|width of the meander"], ["Crest", "crest"], ["Deep water", "deep"], ["Shallow water", "shallow"], ["Corrasion", "corrasion|abrasion"], ["Hydraulic action", "hydraulic action"], ["Lateral erosion", "lateral"], ["Fastest flow", "fastest"], ["Slowest flow", "slowest"], ["Pools and riffles", "pool.*riffle|riffle.*pool"]] },
+        { type: "heading", text: "Extended learning", note: "Refer to a specific example (possibly including rock type), calculate a sinuosity index, and explain how meander migration creates a line of bluffs." },
+        { type: "html", html: SINUOSITY },
+        { type: "heading", text: "ii) Meander migration and bluffs", note: "Use this structure to explain how meander migration develops a line of bluffs." },
+        { id: "m2", label: "", type: "cloze", prompt: "",
+          text: "As the river flows downstream it becomes deeper and [[wider]]. The erosion on the [[outer]] bend of the meander [[widens]] the valley floor, while [[deposition]] builds up alluvium on the valley floor. At the same time, erosion and deposition cause the meanders to [[migrate]] gradually downstream. This creates a line of [[river]] [[bluffs]] along the edge of the valley floor." },
+        { id: "m3", label: "iii)", type: "text", prompt: "Refer to a specific example of a meandering river. Include its sinuosity index if you can find the measurements, and the rock type if relevant." },
+        { type: "heading", text: "b) Ox-bow lakes", note: "Draw a diagram in OneNote to show how a fully developed meander can develop into an ox-bow lake, then explain it step by step." },
+        { type: "html", html: LF_OXBOW },
+        { id: "o1", label: "i)", type: "order", prompt: "Put these statements in order to explain the formation of an ox-bow lake.", answer: ["J", "I", "L", "A", "F", "M", "K", "D", "H", "E", "B", "G", "C"],
+          cards: [{"k": "A", "text": "Deposition occurs on the convex banks because of slack water flow."}, {"k": "B", "text": "When enough deposition has taken place, the cut-off is sealed off from the main river channel."}, {"k": "C", "text": "An ox-bow lake may not be permanent: the water may dry up and it fills with sediment and vegetation."}, {"k": "D", "text": "A new, straighter river channel is created, through which the river now flows."}, {"k": "E", "text": "Deposition can now take place next to the riverbank."}, {"k": "F", "text": "Over time, the meander becomes very pronounced."}, {"k": "G", "text": "An ox-bow lake is now formed."}, {"k": "H", "text": "An abandoned meander loop, called a cut-off, is formed."}, {"k": "I", "text": "Rivers in the lower course meander widely across the low-lying floodplain."}, {"k": "J", "text": "An ox-bow lake is a horseshoe or crescent-shaped lake."}, {"k": "K", "text": "The narrow neck of land between the two concave banks is eventually cut through, by lateral erosion or by strong currents during a flood."}, {"k": "L", "text": "Lateral erosion and undercutting occur on the concave banks, where stream flow is fastest."}, {"k": "M", "text": "Two neighbouring concave banks get closer."}] },
+        { id: "o2", label: "ii)", type: "text", words: [120, 250], prompt: "Now explain the formation of an ox-bow lake step by step in your own words, referring to your diagram.",
+          mustUse: [["Meander", "meander"], ["Neck", "neck"], ["Lateral erosion", "lateral"], ["Concave bank", "concave|outer bend|outside bend"], ["Convex bank", "convex|inner bend|inside bend"], ["Flood", "flood"], ["Cut-off", "cut.?off"], ["Deposition", "deposit"], ["Ox-bow lake", "ox.?bow"]] },
+        { type: "heading", text: "c) Floodplains and levees", note: "Draw, describe and explain the formation of floodplains and levees." },
+        { type: "html", html: LF_FLOODPLAIN },
+        { type: "html", html: LF_LEVEE },
+        { id: "c1", label: "i)", type: "text", words: [150, 300], prompt: "Draw your diagrams in OneNote, then describe and explain the formation of floodplains and levees here.", note: "Include these terms as a minimum. Each one turns green when you use it.",
+          mustUse: [["Floodplain", "flood.?plain"], ["Levees", "levee"], ["Pebbles", "pebble"], ["Sand", "sand"], ["Silt", "silt"], ["Clay", "clay"], ["Flooding", "flood"], ["Alluvium", "alluvi"], ["Overflow", "overflow|over.?top|burst"], ["Deposition", "deposit"], ["Coarse particles", "coarse"], ["Fine particles", "fine"]] },
+        { id: "c2", label: "ii)", type: "text", prompt: "Extended learning: to what extent is the floodplain a depositional or an erosional landform?" },
+        { type: "heading", text: "d) Deltas: large whiteboard time", note: "Draw, describe and explain the formation of deltas on the large whiteboards, then photograph your board for OneNote." },
+        { type: "html", html: LF_DELTA },
+        { id: "e1", label: "i)", type: "text", words: [150, 300], prompt: "Describe and explain the formation of deltas.", note: "Include these terms as a minimum. Each one turns green when you use it.",
+          mustUse: [["Mouth", "mouth"], ["Alluvium", "alluvi"], ["Erosion in the river", "erosion|erode"], ["Sediment", "sediment"], ["Flocculation", "floccul"], ["Vegetation", "vegetation"], ["Distributaries", "distributar"]] },
+        { type: "heading", text: "Extended learning", note: "Name and draw the different types of delta. What conditions are needed in the river and at the mouth for a delta to form?" },
+        { type: "html", html: DELTA_TYPES },
+        { id: "e2", label: "ii)", type: "table", prompt: "Types of delta", cols: ["Type of delta", "Shape and how it forms", "Example"], rows: ["Arcuate", "Bird\u2019s-foot", "Cuspate"] },
+        { id: "e3", label: "iii)", type: "table", prompt: "Conditions needed for a delta to form", cols: ["Where", "Conditions"], rows: ["In the river", "At the mouth"] },
+        { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" },
+        { type: "heading", text: "Review your learning", note: "Practise the key terms for the whole Freshwater unit so far. The 10-mark challenge question for this lesson is in the Challenge Mode card." },
+        { type: "linkcard", url: "https://quizlet.com/vn/147768321/ib-freshwater-key-terms-flash-cards/", icon: "Q", title: "IB Freshwater key terms", sub: "Quizlet: flashcards, learn and test" }
+      ]
+    }],
     FW02: [{
       kind: "lesson", open: true, inline: true, afterCard: 2,
       title: "Discharge",
@@ -1532,6 +1795,8 @@
     ".fl-bingo__win{position:absolute;inset:0;display:grid;place-items:center;font:800 3rem var(--lh-font-display);color:#fff;background:rgba(15,110,86,.82);border-radius:12px;pointer-events:none}" +
     ".fl-anim__g{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.fl-anim__t{margin:0}.fl-anim__t figcaption{margin-top:.3rem;font-size:.88rem}.fl-anim__t figcaption b{display:block;color:var(--lh-teal,#0f766e)}.fl-anim__t figcaption span{color:var(--lh-muted,#555)}@media(max-width:640px){.fl-anim__g{grid-template-columns:1fr}}" +
     ".fl-vel{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-vel__top{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.fl-vel__top input{flex:1;min-width:220px;accent-color:#0f8a6e}.fl-vel__v{font-weight:700;color:#1f5e85}.fl-vel__rows{display:grid;gap:.35rem;margin:.7rem 0}.fl-vel__r{display:grid;grid-template-columns:10rem 1fr;gap:.6rem;align-items:center;font-size:.9rem}.fl-vel__s{padding:.25rem .6rem;border-radius:99px;font-weight:600;font-size:.85rem;transition:background .2s}.fl-vel__s.er{background:#fde2dd;color:#8a1c0f}.fl-vel__s.tr{background:#dbe8fb;color:#1d4f9a}.fl-vel__s.de{background:#efe3cf;color:#6b4a2b}" +
+    ".fl-sin{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-sin__in{display:flex;flex-wrap:wrap;gap:1rem}.fl-sin__in label{font-size:.9rem;font-weight:600;display:flex;flex-direction:column;gap:.25rem}.fl-sin__in input{width:9rem;padding:.35rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit}.fl-sin__out{font-size:1rem;margin:.6rem 0 .2rem;color:#13324a}" +
+    ".fl-use{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.4rem 0}.fl-use__n{font-size:.85rem;font-weight:600;color:var(--lh-muted,#555);margin-right:.3rem}.fl-use__c{font-size:.82rem;padding:.2rem .55rem;border-radius:99px;border:1px solid var(--lh-border);background:#fff;color:#555}.fl-use__c.on{background:#dcf3e8;border-color:#3aa57a;color:#0b5e3c;font-weight:600}.fl-use__c.on::before{content:'\\2713 '}" +
     ".fl-iso .iso-model{display:none}.fl-iso--show .iso-model{display:inline}" +
     ".fl-cloze__t{line-height:2.4;font-size:.98rem;color:var(--lh-ink)}.fl-cloze .fl-rsel{flex:none;width:auto;min-width:8rem;margin:0 .2rem}" +
     ".fl-lcard{display:flex;align-items:center;gap:.9rem;max-width:560px;margin:.4rem 0;padding:.9rem 1.1rem;border:2px solid #4255ff;border-radius:14px;background:#f1f3ff;color:#1a1d4a;text-decoration:none}" +
@@ -1767,6 +2032,7 @@
     if (p.type === "text") {
       h += box(saved, p.id, p.prompt, p.words ? 6 : 4);
       if (p.words) h += '<p class="fl__note fl__wc" data-wc="' + p.id + '" data-min="' + p.words[0] + '" data-max="' + p.words[1] + '"></p>';
+      if (p.mustUse) h += '<div class="fl-use" data-use="' + p.id + '"><span class="fl-use__n"></span>' + p.mustUse.map(function (u) { return '<span class="fl-use__c" data-re="' + esc(u[1] || u[0].toLowerCase()) + '">' + esc(u[0]) + "</span>"; }).join("") + "</div>";
     }
     if (p.type === "terms" || p.type === "table") {
       var cols = tableCols(p);
@@ -1895,6 +2161,11 @@
     var box = b.closest(".fl-anim"), on = true;
     b.onclick = function () { on = !on; box.querySelectorAll("svg").forEach(function (s) { if (s.pauseAnimations) { if (on) s.unpauseAnimations(); else s.pauseAnimations(); } }); b.textContent = on ? "Pause animations" : "Play animations"; };
   });
+  root.querySelectorAll("[data-sin]").forEach(function (box) {
+    var c = box.querySelector('[data-s="c"]'), d = box.querySelector('[data-s="d"]'), out = box.querySelector(".fl-sin__out");
+    function calc() { var a = parseFloat(c.value), b = parseFloat(d.value); if (!(a > 0 && b > 0)) { out.textContent = "Enter both lengths."; return; } var si = a / b; out.innerHTML = "Sinuosity index = " + a + " \u00f7 " + b + " = <b>" + si.toFixed(2) + "</b> (" + (si < 1.05 ? "straight" : si <= 1.5 ? "sinuous" : "meandering") + ")" + (a < b ? " \u2013 check: the channel can\u2019t be shorter than the straight line." : ""); }
+    c.addEventListener("input", calc); d.addEventListener("input", calc); calc();
+  });
   root.querySelectorAll("[data-vel]").forEach(function (box) {
     var L = [["Clay", "under 0.004 mm", 350, 0.05], ["Silt", "0.004\u20130.06 mm", 90, 0.2], ["Sand", "0.06\u20132 mm", 20, 2.8], ["Gravel", "2\u201316 mm", 58, 26], ["Pebbles", "16\u201364 mm", 180, 116], ["Boulders", "over 256 mm", 550, 430]];
     var r = box.querySelector("input"), out = box.querySelector(".fl-vel__v"), rows = box.querySelector(".fl-vel__rows");
@@ -1936,6 +2207,11 @@
       var lo = +el.getAttribute("data-min"), hi = +el.getAttribute("data-max");
       el.textContent = n + " words (aim for " + lo + "\u2013" + hi + ")" + (n >= lo && n <= hi ? " \u2713" : "");
       el.style.color = n >= lo && n <= hi ? "var(--lh-green)" : "";
+    });
+    root.querySelectorAll(".fl-use").forEach(function (el) {
+      var t = (saved[el.getAttribute("data-use")] || "").toLowerCase(), c = el.querySelectorAll(".fl-use__c"), n = 0;
+      c.forEach(function (x) { var ok = false; try { ok = new RegExp(x.getAttribute("data-re")).test(t); } catch (e) {} x.classList.toggle("on", ok); if (ok) n++; });
+      el.querySelector(".fl-use__n").textContent = "Key terms used: " + n + " of " + c.length + (n === c.length ? " \u2713" : "");
     });
     var done = 0;
     inputs.forEach(function (t) { if (t.value.trim()) done++; });
