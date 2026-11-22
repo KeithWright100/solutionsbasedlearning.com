@@ -27,6 +27,8 @@ export const config = {
     '/humanities-hub/:path*',
     '/igcse/:path*',
     '/economics/:path*',
+    // KS3 Geography lessons (/ks3/geography/...)
+    '/ks3/:path*',
     // The admin dashboard — always gated, and additionally requires
     // role === 'admin' (checked below), not just "logged in".
     '/admin/:path*',
