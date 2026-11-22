@@ -6,7 +6,7 @@
    KS3-TEMPLATE is the sample lesson shown at /ks3/geography/template-preview. */
 window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
 (function (L) {
-  function lesson(cfg) { cfg.kind = "lesson"; cfg.inline = true; cfg.open = true; cfg.noBot = true; cfg.heading = cfg.heading || "Lesson"; cfg.intro = cfg.intro || ""; return [cfg]; }
+  function lesson(cfg) { cfg.kind = "lesson"; cfg.inline = true; cfg.markbook = true; cfg.open = true; cfg.noBot = true; cfg.heading = cfg.heading || "Lesson"; cfg.intro = cfg.intro || ""; return [cfg]; }
   var B = {
     connect: { type: "banner", src: "/images/flip/banner-connect.jpg", alt: "Connect" },
     demonstrate: { type: "banner", src: "/images/flip/banner-demonstrate.jpg", alt: "Demonstrate" },
@@ -15,6 +15,21 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
     reflect: { type: "banner", src: "/images/flip/banner-reflect.jpg", alt: "Reflect" }
   };
   window.SBL_KS3_BANNERS = B;
+  var JUXT_SVG = (function () {
+    var s = '<svg viewBox="0 0 760 300" role="img" aria-label="Illustration: modern skyscrapers rising directly behind an area of small informal homes with metal roofs" style="width:100%;max-width:760px;height:auto;display:block;border:1px solid var(--lh-border);border-radius:10px"><defs><linearGradient id="jsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe0f5"/><stop offset="1" stop-color="#eef7fc"/></linearGradient></defs><rect width="760" height="300" fill="url(#jsky)"/>';
+    [[420, 40, 60], [490, 70, 50], [550, 20, 70], [630, 90, 55], [690, 60, 50], [360, 100, 50]].forEach(function (b) {
+      s += '<rect x="' + b[0] + '" y="' + b[1] + '" width="' + b[2] + '" height="' + (210 - b[1]) + '" fill="#7d93a8"/>';
+      for (var y = b[1] + 10; y < 200; y += 14) for (var x = b[0] + 6; x < b[0] + b[2] - 8; x += 12) s += '<rect x="' + x + '" y="' + y + '" width="7" height="8" fill="#d8e6f2"/>';
+    });
+    s += '<rect x="0" y="200" width="760" height="100" fill="#a58b6a"/>';
+    for (var i = 0; i < 26; i++) {
+      var x = (i % 13) * 58 - 10 + (i > 12 ? 28 : 0), y = i > 12 ? 248 : 212, w = 46 + (i * 7) % 14, h = 26 + (i * 5) % 10;
+      var c = ["#b9c3cc", "#9aa8b4", "#c7b59a", "#8f9ea9", "#b0a088"][i % 5];
+      s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + ["#d9c7a5", "#c9b48f", "#e1d2b5"][i % 3] + '" stroke="#7a6a52"/><path d="M' + (x - 3) + ' ' + y + ' L' + (x + w / 2) + ' ' + (y - 9) + ' L' + (x + w + 3) + ' ' + y + ' Z" fill="' + c + '" stroke="#6b7680"/>';
+    }
+    s += '<text x="12" y="290" font-family="Inter,Arial,sans-serif" font-size="12" fill="#fff">Illustration</text>';
+    return s + "</svg>";
+  })();
   var SCALES_SVG = (function () {
     var s = '<svg viewBox="0 0 760 266" role="img" aria-label="Inequality at three scales: global between countries, national within a country, local within a city" style="width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px"><g font-family="Inter,Arial,sans-serif" font-size="12.5">';
     var sh = ["#14695a", "#3b9e8a", "#7cc5b5", "#b7e1d8", "#e6f4f1"];
@@ -57,6 +72,66 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
       { id: "h1", label: "", type: "text", prompt: "Challenge question: a harder question that stretches your thinking." },
       B.reflect,
       { id: "r1", label: "", type: "text", prompt: "Exit ticket: what is one thing you learned today, and one question you still have?" }
+    ]
+  });
+
+  L["KS3-Y8DEV-L2"] = lesson({
+    title: "How does life vary around the world?",
+    overview: {
+      heading: "Development and inequalities",
+      intention: "To understand how we measure development and how life varies between and within countries.",
+      syllabus: ["Key question: how does life vary around the world, and how can we measure development without stereotyping places?"],
+      success: ["Define development, development indicator and composite indicator.",
+        "Use development indicators to describe how life varies between countries such as Costa Rica, Thailand and Kenya.",
+        "Explain why life also varies within a country, and why we should not generalise or stereotype places."]
+    },
+    parts: [
+      B.connect,
+      { type: "heading", text: "Starter: Kahoot recap", note: "Recap last lesson. Your teacher will start the game on the board." },
+      { type: "linkcard", url: "https://create.kahoot.it/details/16af2697-645b-4c58-a31d-8c6b76ca750b", icon: "K", title: "Kahoot: development recap", sub: "Join with the game PIN on the board" },
+      { type: "heading", text: "Activity 1: Mix and match key terms" },
+      { id: "k1", label: "", type: "match", termCol: "Key term", defCol: "Definition (choose one)", noExample: true, prompt: "Match each key term to its definition.",
+        items: [{ t: "Development", d: "The improvement in people’s quality of life within a country or region." },
+          { t: "Development indicator", d: "A measurable piece of data used to assess and compare levels of development between countries or regions." },
+          { t: "Composite indicator", d: "A measure that combines several individual indicators to give a more complete picture of development." }] },
+      B.demonstrate,
+      { type: "heading", text: "Activity 2: Exploring development in Costa Rica", note: "Costa Rica is a small country in Central America, the part of North America between Mexico and South America. Study the information below." },
+      { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Costa Rica fact file</b><ul style="margin:.4rem 0 0 1.1rem;padding:0"><li>Population: about 5.2 million people.</li><li>Human Development Index (HDI): 0.833, ranked 62nd of 193 countries (UNDP, 2023 data). This counts as <b>very high</b> human development.</li><li>Life expectancy: about 81 years, longer than in the USA.</li><li>GDP per capita: about US$20,000 (World Bank, 2025).</li><li>Almost all of its electricity (about 98%) comes from renewable sources, mostly hydroelectric power.</li><li>Forest covered only about 20% of the country in the 1980s; after protection and replanting it now covers over half.</li><li>Costa Rica abolished its army in 1948 and spends the money on education, health and the environment.</li><li>It often comes top of the Happy Planet Index, which compares wellbeing and life expectancy with environmental impact.</li></ul></div>' },
+      { id: "c1", label: "a)", type: "table", prompt: "Sort the facts into development indicators.", cols: ["Type of indicator", "Evidence from Costa Rica"], rows: ["Economic (money and jobs)", "Social (health, education, wellbeing)", "Environmental", "Composite (more than one combined)"] },
+      { id: "c2", label: "b)", type: "text", prompt: "Costa Rica is not a rich country, yet people live long and happy lives. Suggest why." },
+      { type: "heading", text: "Activity 3: Development Detectives (main activity)", note: "Play the game below. There are pause points throughout where we will discuss your understanding. The game ends with a short assessment that gives you an immediate score and feedback, and your scores save to your account." },
+      { type: "game", src: "/geography/games/development-detectives", title: "Development Detectives" },
+      { id: "dd1", label: "a)", type: "text", prompt: "Challenge answers: copy your answers to the challenges here." },
+      { id: "dd2", label: "b)", type: "text", words: [60, 200], prompt: "Assessment: copy your final answer here, with your score and the feedback you were given." },
+      { type: "heading", text: "Activity 4: How does life vary around the world?", note: "Work through the activity below to learn how life varies in different parts of the world. Screenshot each page and paste it into OneNote." },
+      { type: "game", src: "/geography/games/life-around-the-world", title: "How Does Life Vary?" },
+      { id: "lv1", label: "", type: "text", prompt: "Summarise the three most surprising differences you found between places." },
+      { type: "heading", text: "Activity 5: Who is correct, Izzy or Sam?" },
+      { id: "is1", label: "", type: "text", prompt: "Who is correct? Justify your answer.",
+        before: '<div class="fl-chat"><p class="fl-chat__a"><b>Izzy:</b> Kenya is a poor country, so everyone who lives there must be poor.</p><p class="fl-chat__b"><b>Sam:</b> I don’t agree. Life varies inside a country. Nairobi has wealthy suburbs, shopping centres and skyscrapers, but also informal settlements, and life in rural areas is different again.</p></div>' },
+      { type: "heading", text: "Activity 6: So, how much does life vary in Thailand?" },
+      { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Thailand fact file</b><ul style="margin:.4rem 0 0 1.1rem;padding:0"><li>Human Development Index (HDI): 0.798, ranked 76th of 193 countries (UNDP, 2023 data). It is fourth in South-East Asia, after Singapore, Brunei and Malaysia.</li><li>When inequality is taken into account, Thailand’s HDI score falls by about 15%.</li><li>Wealth is very unevenly shared: the richest 5% of landowners hold about 80% of all land.</li><li>Bangkok is a global city with high incomes and modern services, while many rural areas, for example in the north-east (Isan), rely on farming and have lower incomes.</li></ul></div>' },
+      { id: "th1", label: "", type: "text", words: [80, 200], prompt: "How does life vary in Thailand? Use the information above and your own experience." },
+      { type: "heading", text: "Activity 7: Don’t generalise or create stereotypes", note: "Study the illustration below." },
+      { type: "html", html: JUXT_SVG },
+      { id: "st1", label: "", type: "questions", letters: true, prompt: "", rows: ["What does stereotyping mean?", "Geographers use the word ‘juxtaposition’ to describe images like this one. What do you think it means? Think about what the image is showing."] },
+      { type: "heading", text: "Activity 8: Using statistics in geography", note: "Study all of the information below." },
+      { id: "ke0", label: "", type: "table", prompt: "Kenya: key statistics", given: true, cols: ["Indicator", "Kenya"], rows: ["Population", "GDP per capita", "Life expectancy", "Human Development Index (HDI)", "Living in towns and cities", "Adult literacy"],
+        prefill: { 0: ["About 57 million (2025)"], 1: ["About US$2,360 (World Bank, 2025)"], 2: ["63.6 years (2023)"], 3: ["0.628, ranked 143rd of 193 (2023)"], 4: ["About 30% (most people live in rural areas)"], 5: ["About 83% (2021)"] } },
+      { id: "ke1", label: "", type: "text", words: [80, 200], prompt: "Using everything you have learned this lesson, describe what life is like in Kenya. Remember that life varies within the country: avoid generalising." },
+      { type: "heading", text: "Activity 9: Who is correct in this discussion?" },
+      { id: "dc1", label: "", type: "text", prompt: "Write your response here.",
+        before: '<div class="fl-chat"><p class="fl-chat__a"><b>Student A:</b> The best way to measure development is GDP per capita. If a country is rich, its people have a good quality of life.</p><p class="fl-chat__b"><b>Student B:</b> GDP per capita only shows money. Costa Rica has a lower GDP per capita than many countries but people live long, happy lives. We need a composite indicator like the HDI.</p></div>' },
+      B.quizzes,
+      { id: "q1", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+        { q: "Which of these is a social indicator of development?", o: ["GDP per capita", "Life expectancy", "Exports", "Unemployment rate"], a: 1 },
+        { q: "The Human Development Index (HDI) is an example of…", o: ["a single indicator", "a composite indicator", "a stereotype", "a type of map"], a: 1 },
+        { q: "Which statement is true?", o: ["Everyone in a low-income country is poor", "Life can vary a lot within one country", "GDP per capita shows how happy people are", "Development only means getting richer"], a: 1 },
+        { q: "Costa Rica makes almost all of its electricity from…", o: ["coal", "nuclear power", "renewable sources", "imported oil"], a: 2 }] },
+      B.challenge,
+      { id: "h1", label: "", type: "text", prompt: "Challenge: Costa Rica has a much lower GDP per capita than the USA, yet people there live longer. Which indicator do you think gives the best picture of development? Explain your choice and its limitations." },
+      B.reflect,
+      { id: "r1", label: "", type: "text", prompt: "Exit ticket: write one thing you now understand about how life varies, and one stereotype you will avoid." }
     ]
   });
 

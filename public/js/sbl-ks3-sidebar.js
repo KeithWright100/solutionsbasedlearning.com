@@ -109,6 +109,12 @@
             "title": "Lessons",
             "lessons": [
                 {
+                  "label": "How does life vary around the world?",
+                  "href": "/ks3/geography/y8-development-and-inequality/l2-how-does-life-vary",
+                  "id": "KS3-Y8DEV-L2",
+                  "n": 2
+                },
+                {
                   "label": "GIS: analysing inequality at different scales",
                   "href": "/ks3/geography/y8-development-and-inequality/l3-gis-inequality",
                   "id": "KS3-Y8DEV-L3",

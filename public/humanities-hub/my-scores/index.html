@@ -83,6 +83,7 @@
   <section id="paneP" aria-labelledby="tabP" hidden></section>
 </main>
 
+<script src="/js/sbl-ks3-sidebar.js"></script>
 <script>
 (function () {
   'use strict';
@@ -303,6 +304,12 @@
     'development-detectives': { name: 'Development Detectives', level: 'KS3 Geography', href: '/geography/games/development-detectives',
       modes: [['sc1', 'SC1 Describe indicators'], ['sc2', 'SC2 Strengths & weaknesses'], ['sc3', 'SC3 Evaluate HDI'], ['verdict', 'Final paragraph (Copilot)'], ['ch', 'Challenges']] }
   };
+  // KS3 lesson quizzes (saved as "GAME:ks3-<lesson>", part "quiz"), named from the KS3 contents.
+  ((window.SBL_TREES || {})['ks3-geo'] || []).forEach(function (g) {
+    (g.units || []).forEach(function (u) { (u.topics || []).forEach(function (t) { (t.lessons || []).forEach(function (l) {
+      if (l.id) GAMES['ks3-' + String(l.id).toLowerCase().replace(/^ks3-/, '')] = { name: l.label, level: 'KS3 Geography lesson \u00b7 ' + g.section + ' \u00b7 ' + u.label, href: l.href, modes: [['quiz', 'Lesson quiz']] };
+    }); }); });
+  });
   function stars(n) { var t = ''; for (var i = 0; i < 3; i++) t += i < n ? '★' : '☆'; return '<span class="ms-stars" aria-label="' + n + ' of 3 stars">' + t + '</span>'; }
   function gameSummary(ids) {
     var rounds = 0, s = 0, mx = 0;

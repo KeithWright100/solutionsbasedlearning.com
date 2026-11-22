@@ -307,6 +307,18 @@
       writeMap: { hookWrite: 'sc1', econWrite: 'sc2', socWrite: 'sc2', compWrite: 'sc2', verdict: 'verdict', chPerspW: 'ch', chCuba: 'ch', chThai: 'ch', chIndex: 'ch' },
       parts: [{ id: 'sc1', title: 'SC1 Describe indicators' }, { id: 'sc2', title: 'SC2 Strengths & weaknesses' }, { id: 'sc3', title: 'SC3 Evaluate HDI' }, { id: 'verdict', title: 'Final paragraph (Copilot)' }, { id: 'ch', title: 'Challenges' }] }
   ];
+  // KS3 lessons: each lesson's multiple-choice quizzes save as "GAME:ks3-<lesson>" (part "quiz"),
+  // listed from the KS3 contents in /js/sbl-ks3-sidebar.js so new lessons appear automatically.
+  ((window.SBL_TREES || {})['ks3-geo'] || []).forEach(function (g) {
+    (g.units || []).forEach(function (u) {
+      (u.topics || []).forEach(function (t) {
+        (t.lessons || []).forEach(function (l) {
+          if (!l.id) return;
+          GAME_DEFS.push({ id: 'GAME:ks3-' + String(l.id).toLowerCase().replace(/^ks3-/, ''), name: g.section.replace('Year ', 'Y') + ' ' + u.label + ' L' + (l.n || '') + ': ' + l.label, parts: [{ id: 'quiz', title: 'Lesson quiz' }] });
+        });
+      });
+    });
+  });
   var GAME_PARTS = [];
   GAME_DEFS.forEach(function (G) { G.parts.forEach(function (p, i) { GAME_PARTS.push({ id: G.id + '#' + p.id, part: p.id, title: p.title, game: G, first: i === 0 }); }); });
   function gameOf(s, gid) { var c = (s.cells || {})[gid]; return c && c.game ? c.game : null; }

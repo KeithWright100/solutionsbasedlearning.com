@@ -1798,6 +1798,7 @@
     ".fl-bingo__win{position:absolute;inset:0;display:grid;place-items:center;font:800 3rem var(--lh-font-display);color:#fff;background:rgba(15,110,86,.82);border-radius:12px;pointer-events:none}" +
     ".fl-anim__g{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.fl-anim__t{margin:0}.fl-anim__t figcaption{margin-top:.3rem;font-size:.88rem}.fl-anim__t figcaption b{display:block;color:var(--lh-teal,#0f766e)}.fl-anim__t figcaption span{color:var(--lh-muted,#555)}@media(max-width:640px){.fl-anim__g{grid-template-columns:1fr}}" +
     ".fl-vel{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-vel__top{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.fl-vel__top input{flex:1;min-width:220px;accent-color:#0f8a6e}.fl-vel__v{font-weight:700;color:#1f5e85}.fl-vel__rows{display:grid;gap:.35rem;margin:.7rem 0}.fl-vel__r{display:grid;grid-template-columns:10rem 1fr;gap:.6rem;align-items:center;font-size:.9rem}.fl-vel__s{padding:.25rem .6rem;border-radius:99px;font-weight:600;font-size:.85rem;transition:background .2s}.fl-vel__s.er{background:#fde2dd;color:#8a1c0f}.fl-vel__s.tr{background:#dbe8fb;color:#1d4f9a}.fl-vel__s.de{background:#efe3cf;color:#6b4a2b}" +
+    ".fl-chat{display:grid;gap:.5rem;margin:.3rem 0 .6rem}.fl-chat p{margin:0;padding:.6rem .85rem;border-radius:14px;max-width:85%;font-size:.92rem;line-height:1.45}.fl-chat__a{background:#e8f0fb;justify-self:start;border-bottom-left-radius:4px}.fl-chat__b{background:#dcf3e8;justify-self:end;border-bottom-right-radius:4px}" +
     ".fl-gis{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-gis__ctl{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.6rem}.fl-gis__ctl label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;font-weight:600}.fl-gis__ctl select{padding:.4rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit;min-width:14rem}.fl-gis__map svg{width:100%;height:auto;display:block}.fl-gis__c{cursor:pointer}.fl-gis__c:hover{stroke:#13324a;stroke-width:1.2}.fl-gis__info{min-height:2.6rem;margin:.5rem 0;padding:.5rem .7rem;background:#f4f8fb;border-radius:8px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:center}.fl-gis__legend{display:grid;gap:.4rem;font-size:.8rem}.fl-gis__legend div{display:flex;flex-wrap:wrap;gap:.3rem .8rem;align-items:center}.fl-gis__legend span{display:inline-flex;align-items:center;gap:.3rem}.fl-gis__legend i{display:inline-block;width:16px;height:12px;border-radius:2px}" +
     ".fl-sin{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-sin__in{display:flex;flex-wrap:wrap;gap:1rem}.fl-sin__in label{font-size:.9rem;font-weight:600;display:flex;flex-direction:column;gap:.25rem}.fl-sin__in input{width:9rem;padding:.35rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit}.fl-sin__out{font-size:1rem;margin:.6rem 0 .2rem;color:#13324a}" +
     ".fl-use{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.4rem 0}.fl-use__n{font-size:.85rem;font-weight:600;color:var(--lh-muted,#555);margin-right:.3rem}.fl-use__c{font-size:.82rem;padding:.2rem .55rem;border-radius:99px;border:1px solid var(--lh-border);background:#fff;color:#555}.fl-use__c.on{background:#dcf3e8;border-color:#3aa57a;color:#0b5e3c;font-weight:600}.fl-use__c.on::before{content:'\\2713 '}" +
@@ -2159,7 +2160,7 @@
     if (p.type === "mcq")
       p.items.forEach(function (it, i) {
         var k = p.id + i, pick = saved[k];
-        h += '<div class="fl-mcq" data-mk="' + k + '" data-a="' + it.a + '"><p class="fl__vq"><b>' + (i + 1) + ".</b> " + esc(it.q) + "</p><div class=\"fl-mcq__o\">" +
+        h += '<div class="fl-mcq" data-mk="' + k + '" data-pid="' + p.id + '" data-a="' + it.a + '"><p class="fl__vq"><b>' + (i + 1) + ".</b> " + esc(it.q) + "</p><div class=\"fl-mcq__o\">" +
           it.o.map(function (o, j) {
             var c = pick == null ? "" : (j === it.a ? " right" : (+pick === j ? " wrong" : ""));
             return '<button type="button" class="fl-opt' + c + '" data-j="' + j + '"><b>' + "ABCDEF".charAt(j) + "</b> " + esc(o) + "</button>";
@@ -2372,10 +2373,28 @@
     var b = e.target.closest(".fl-opt"); if (!b) return;
     var g = b.closest(".fl-mcq"), k = g.getAttribute("data-mk"), a = +g.getAttribute("data-a"), j = +b.getAttribute("data-j");
     saved[k] = j;
+    if (saved[k + "f"] == null) saved[k + "f"] = j;   /* first try: this is what counts for the mark book */
     try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+    if (cfg.markbook) sendQuiz(g);
     g.querySelectorAll(".fl-opt").forEach(function (o) { var oj = +o.getAttribute("data-j"); o.className = "fl-opt" + (oj === a ? " right" : (oj === j ? " wrong" : "")); });
     g.querySelector(".fl-mcq__fb").textContent = j === a ? "\u2713 Correct." : "Not quite: the answer is " + "ABCDEF".charAt(a) + ".";
   });
+  /* Lessons with cfg.markbook (KS3) send each multiple-choice quiz to the student's account once every
+     question has been answered: score = questions right first time. It then shows on My scores and in
+     the teacher's KS3 Geography mark book. Students who are not logged in: nothing is sent. */
+  function sendQuiz(g) {
+    var pid = g.getAttribute("data-pid"), part = cfg.parts.filter(function (q) { return q.id === pid && q.type === "mcq"; })[0];
+    if (!part) return;
+    var got = 0, all = true;
+    part.items.forEach(function (it, i) { var f = saved[pid + i + "f"]; if (f == null) all = false; else if (+f === it.a) got++; });
+    if (!all || saved[pid + "_sent"]) return;
+    saved[pid + "_sent"] = 1;
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+    var slug = "ks3-" + String(id).toLowerCase().replace(/^ks3-/, "");
+    function go() { if (window.SBLGameAccount) window.SBLGameAccount.record(slug, "quiz", pid, part.prompt || "Lesson quiz", got, part.items.length); }
+    if (window.SBLGameAccount) go();
+    else { var sc = document.createElement("script"); sc.src = "/js/sbl-game-account.js"; sc.onload = go; document.head.appendChild(sc); }
+  }
   root.addEventListener("input", function (e) {
     if (!e.target.classList.contains("fl-in")) return;
     saved[e.target.getAttribute("data-k")] = e.target.value;
