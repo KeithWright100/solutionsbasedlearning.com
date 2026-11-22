@@ -181,7 +181,7 @@
     <section class="hero">
       <div class="welcome">
         <h1 id="hello">Welcome to the Humanities Hub</h1>
-        <p id="intro">Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Use the menus above, or find a page below.</p>
+        <p id="intro">Lessons, revision and past paper practice for KS3, IGCSE and IB Diploma Humanities. Use the menus above, or find a page below.</p>
         <div class="guest-cta"><a class="in" href="/login/?redirect=/humanities-hub">Log in</a><a class="req" href="/register/">Request access</a></div>
         <div class="find">
           <label class="find__box"><input id="find" type="search" placeholder="Search lessons, topics and case studies…" aria-label="Find a page" autocomplete="off"><span aria-hidden="true">Find</span></label>
@@ -427,7 +427,7 @@
       .then(function (d) {
         if (d && d.loggedIn) return;
         document.body.classList.add('guest');
-        document.getElementById('intro').textContent = 'Lessons, revision and past paper practice for IB Diploma and IGCSE Humanities. Have a look at what is here, then log in to open the lessons. Most games are free to play now.';
+        document.getElementById('intro').textContent = 'Lessons, revision and past paper practice for KS3, IGCSE and IB Diploma Humanities. Have a look at what is here, then log in to open the lessons. Most games are free to play now.';
         document.getElementById('contHead').textContent = 'What\u2019s new on SBL';
         if (window.sblFitRecent) window.sblFitRecent();
       })
