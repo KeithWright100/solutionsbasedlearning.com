@@ -217,4 +217,16 @@ window.SBL_REVISION_TOPICS = [
       }
     ]
   }
+  ,
+  {
+    topic: "SBL practice \u2014 Leisure and development (10 marks)",
+    questions: [
+      {
+        label: "SBL practice \u2014 Leisure at different stages of development \u2014 10 marks",
+        marks: 10,
+        question: "Examine (10 marks). Examine the factors that explain how leisure activity is changing in countries at different stages of development.",
+        markScheme: "Indicative content (credit any valid, well-supported points). Factors: (1) Income and disposable income: rising incomes in developing and developed countries increase spending on leisure, sport and tourism, and widen choice (e.g. China\u2019s growing middle class; 5.6 billion domestic trips in 2024; higher-income US households far more likely to take part in costly sports such as swimming, golf or skiing). (2) Leisure time is not simply linked to wealth: the \u2018free-time paradox\u2019 in HICs such as the USA, where many high-wage workers work longer hours while low-wage workers gained more free time since the 1960s; migrant workers in China work very long hours and send remittances home. (3) Infrastructure and investment: transport (high-speed rail, roads, cheaper travel reduces the friction of distance), parks, gyms, multiplexes, theme parks (Shanghai Disney, Wanda City). (4) Paid holidays and working hours: two-day weekends, Golden Week, paid leave (only about half of Chinese workers had paid holidays). (5) Technology: TV, internet and phones move leisure into the home and make it more individual; variation by ethnicity, education and income in the USA (e.g. internet use 71% white, 60% African-American, 56% Hispanic in 2015). (6) Demographic change: ageing populations (China\u2019s 254 million over-60s in 2019; US over-75s have about 7.6 hours of leisure a day) and changing life stages. (7) Culture and government: China\u2019s shift from saving to spending, government promotion of domestic and \u2018red\u2019 tourism; individualisation of leisure in the USA (fewer team sports, more gyms and jogging). (8) Inequality within countries: low-income, rural and migrant groups excluded; car ownership. To reach the top band the response must: examine (weigh up) several factors rather than list them; use detailed, located evidence from at least two countries at contrasting levels of development (e.g. China UMIC and USA HIC); recognise complexity and exceptions (wealth increases choice but not always time; national averages hide inequality); and reach a supported conclusion about which factors are most important, possibly at different scales or for different groups. Responses that only describe changes without explaining factors, or use only one country, should not go above the 5\u20136 band. " + GEOG_MARKBAND_10
+      }
+    ]
+  }
 ].concat((window.SBL_REVISION_TOPICS || []));
