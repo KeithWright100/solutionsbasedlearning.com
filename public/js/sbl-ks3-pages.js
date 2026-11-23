@@ -53,7 +53,7 @@
       if (!ls.length) out += '<div class="lh-unit-card lh-unit-card--soon"><span class="lh-unit-card__section">Coming soon</span><h3>Lessons for this unit are on their way</h3><div class="lh-unit-card__meta"><span>Check back soon, or try the KS3 games while you wait.</span></div></div>';
       ls.forEach(function (l, i) {
         var done = v[norm(l.href)];
-        out += '<a class="lh-unit-card" href="' + esc(l.href) + '"><span class="lh-unit-card__icon" aria-hidden="true">' + ICON(U.icon) + '</span><span class="lh-unit-card__section">Lesson ' + (l.n || i + 1) + "</span><h3>" + esc(l.label) + '</h3><div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:' + (done ? 100 : 0) + '%"></div></div><div class="lh-unit-card__meta"><span>' + (done ? "Opened" : "Not started") + '</span><span class="lh-unit-card__go">' + (done ? "Open again" : "Start") + " &rarr;</span></div></a>";
+        out += '<a class="lh-unit-card" href="' + esc(l.href) + '"><span class="lh-unit-card__icon" aria-hidden="true">' + ICON(U.icon) + '</span><span class="lh-unit-card__section">' + (typeof l.n === "string" ? esc(l.n) : "Lesson " + (l.n || i + 1)) + "</span><h3>" + esc(l.label) + '</h3><div class="lh-unit-card__bar"><div class="lh-unit-card__bar-fill" style="width:' + (done ? 100 : 0) + '%"></div></div><div class="lh-unit-card__meta"><span>' + (done ? "Opened" : "Not started") + '</span><span class="lh-unit-card__go">' + (done ? "Open again" : "Start") + " &rarr;</span></div></a>";
       });
       out += "</div>";
       unitEl.innerHTML = out;

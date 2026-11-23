@@ -314,7 +314,7 @@
       (u.topics || []).forEach(function (t) {
         (t.lessons || []).forEach(function (l) {
           if (!l.id) return;
-          GAME_DEFS.push({ id: 'GAME:ks3-' + String(l.id).toLowerCase().replace(/^ks3-/, ''), name: g.section.replace('Year ', 'Y') + ' ' + u.label + ' L' + (l.n || '') + ': ' + l.label, parts: [{ id: 'quiz', title: 'Lesson quiz' }] });
+          GAME_DEFS.push({ id: 'GAME:ks3-' + String(l.id).toLowerCase().replace(/^ks3-/, ''), name: g.section.replace('Year ', 'Y') + ' ' + u.label + (typeof l.n === 'string' ? ' ' : ' L' + (l.n || '') + ': ') + l.label, parts: [{ id: 'quiz', title: 'Lesson quiz' }] });
         });
       });
     });

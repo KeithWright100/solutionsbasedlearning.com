@@ -44,6 +44,12 @@
                   "href": "/ks3/geography/y7-fantastic-places/l5-oslo-climate",
                   "id": "KS3-Y7FP-L5",
                   "n": 5
+                },
+                {
+                  "label": "Assessment: leaflet of a fantastic place",
+                  "href": "/ks3/geography/y7-fantastic-places/assessment-leaflet",
+                  "id": "KS3-Y7FP-ASSESS",
+                  "n": "Assessment"
                 }
               ]
           }
@@ -304,7 +310,7 @@
           h += '<ul class="tn-tree tn-l4"' + (uOpen ? "" : " hidden") + ' data-for="' + uid + '">';
           ls.forEach(function (l, li) {
             var cur = here && here.lesson && norm(l.href) === norm(here.lesson);
-            h += '<li><a class="tn-leaf' + (cur ? " is-current" : "") + '" href="' + esc(l.href) + '"' + (cur ? ' aria-current="page"' : "") + ">" + (l.n || li + 1) + ". " + esc(l.label) + "</a></li>";
+            h += '<li><a class="tn-leaf' + (cur ? " is-current" : "") + '" href="' + esc(l.href) + '"' + (cur ? ' aria-current="page"' : "") + ">" + (typeof l.n === "string" ? "" : (l.n || li + 1) + ". ") + esc(l.label) + "</a></li>";
           });
           h += "</ul>";
         }
