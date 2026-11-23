@@ -1267,6 +1267,28 @@
           rows: ["What does \u2018designed for the dump\u2019 mean?", "How is this achieved by companies?", "Why do companies design goods that will soon be put in the dump?", "How is Annie\u2019s DVD player designed for the dump?", "How many months is the average electronic item used for?", "How many raw materials are used in the manufacturing of electronics?", "What is added to the raw materials during manufacturing? Give an example.", "What has been the impact of electronics manufacturing in Silicon Valley, California, on (a) the environment?", "\u2026and (b) people?", "What is e-waste?", "What waste comes out of electronic goods?", "Where is most e-waste recycling done?", "How is e-waste recycled?", "What are the impacts of e-waste?", "What does \u2018externalising the true cost of production\u2019 mean?", "Explain the term extended producer responsibility (take-back).", "Why are there few \u2018green\u2019 electronics for consumers?"] }
       ]
     },
+    LT03: {
+      title: "What factors affect participation in sport and tourism?",
+      overview: {
+        heading: "What factors affect participation in sport and tourism?",
+        intention: "To describe and explain human patterns and processes.",
+        syllabus: ["Factors that affect personal participation in sport and tourism, including affluence, gender, stage in life, personality and place of residence."],
+        success: ["Describe and explain how affluence, gender, stage in life, personality and place of residence affect participation in sport.", "Describe and explain how affluence, gender, stage in life, personality and place of residence affect participation in tourism.", "Apply what I have learnt over the past three lessons to some past paper questions."] },
+      intro: "Complete this before the lesson.",
+      parts: [
+        { type: "heading", text: "Part 1: Retrieval practice crossword", note: "Review the last two lessons: every answer is a sport or category of sport. Type in the squares (click a square twice to switch between across and down), then check your answers." },
+        { id: "cw", label: "", type: "crossword", prompt: "", words: [{"a": "MARTIALARTS", "c": "Practised for fitness, these sports can be dangerous if applied in combat.", "r": 9, "col": 1, "d": "A", "n": 11, "len": "7, 4"}, {"a": "TENNIS", "c": "A globally played and watched sport; its major events are in the US, France, the UK and Australia.", "r": 5, "col": 5, "d": "D", "n": 7}, {"a": "ATHLETICS", "c": "Perhaps the oldest and purest of sports: it tests who can run fastest, jump highest and throw furthest.", "r": 6, "col": 1, "d": "A", "n": 8}, {"a": "CRICKET", "c": "A bat and ball sport played by millions but limited to countries with a British colonial background.", "r": 8, "col": 3, "d": "D", "n": 10}, {"a": "TABLETENNIS", "c": "This indoor bat and ball sport began in England, but at the 2008 Beijing Olympics China won every medal in the singles events.", "r": 0, "col": 5, "d": "D", "n": 2, "len": "5, 6"}, {"a": "ROWING", "c": "In this water sport competitors face backwards to move forwards.", "r": 9, "col": 9, "d": "D", "n": 12}, {"a": "BASKETBALL", "c": "This team sport was developed in the USA and, although played around the world, is dominated by the professional league in that country.", "r": 4, "col": 1, "d": "A", "n": 6}, {"a": "EQUESTRIAN", "c": "In this type of sport men and women compete together, even up to Olympic level.", "r": 13, "col": 0, "d": "A", "n": 14}, {"a": "FITNESS", "c": "This category of activities includes aerobics, jogging and going to the gym.", "r": 0, "col": 3, "d": "A", "n": 1}, {"a": "FISHING", "c": "Can be a non-sport occupation as well as a sport or pastime, with extremely high participation in many areas of the world.", "r": 7, "col": 11, "d": "D", "n": 9}, {"a": "FOOTBALL", "c": "The most global sport, accessible to all with a little space and a ball to kick around.", "r": 2, "col": 1, "d": "A", "n": 4}, {"a": "ATHLON", "c": "A Greek term for sport: this suffix, added to \u201cbi\u201d, \u201ctri\u201d and \u201cdec\u201d, names a set of fitness sports.", "r": 12, "col": 5, "d": "D", "n": 13}, {"a": "YOGA", "c": "Originally to stimulate spiritual and mental well-being; in the Western world it is practised more often for physical health.", "r": 1, "col": 2, "d": "D", "n": 3}, {"a": "CYCLING", "c": "Done worldwide for recreation, on rough terrain, indoors or outside, and always while sitting down.", "r": 17, "col": 0, "d": "A", "n": 15}, {"a": "GOLF", "c": "This sport needs a large playing area and has therefore been traditionally expensive to play.", "r": 2, "col": 10, "d": "D", "n": 5}] },
+        { type: "heading", text: "Part 2: What factors affect participation in sport and tourism?", note: "Watch the video, then answer the question in each box. Think about sport AND tourism." },
+        { id: "v", label: "", type: "text", prompt: "Brainstorm: before you watch, list as many factors as you can think of that might stop someone taking part in sport or tourism.", links: [{ label: "Video: Social groups and barriers impacting sport", url: "https://www.youtube.com/watch?v=aZemjQUjry0" }] },
+        { id: "f", label: "", type: "cards", prompt: "",
+          items: [{ t: "1. Affluence", icon: "\ud83d\udcb0", c: "#0f766e", q: "How does wealth (or a lack of it) affect which sports people play and whether and where they go on holiday?" },
+            { t: "2. Place of residence", icon: "\ud83d\udccd", c: "#2a63b8", q: "How do where you live (urban or rural, near the coast or mountains, which country and passport) affect participation?" },
+            { t: "3. Gender", icon: "\u26a7\ufe0f", c: "#b42318", q: "Why are participation rates in sport different for men and women? Are there differences in tourism too?" },
+            { t: "4. Life cycle stage", icon: "\ud83d\udc76\u2192\ud83d\udc75", c: "#c2410c", q: "How do sport and tourism change from childhood to young adult, parent and retirement?" },
+            { t: "5. Personality", icon: "\ud83e\udde0", c: "#6b2fa3", q: "How do introverts and extroverts (or Plog\u2019s psychocentric and allocentric tourists) choose different activities?" },
+            { t: "Which matters most?", icon: "\u2696\ufe0f", c: "#13284b", q: "Which factor do you think has the biggest effect on participation? Justify your choice with an example." }] }
+      ]
+    },
     LT02: [{
       title: "What is the relationship between leisure and income?",
       overview: {
@@ -1860,6 +1882,8 @@
     ".fl-anim__g{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.fl-anim__t{margin:0}.fl-anim__t figcaption{margin-top:.3rem;font-size:.88rem}.fl-anim__t figcaption b{display:block;color:var(--lh-teal,#0f766e)}.fl-anim__t figcaption span{color:var(--lh-muted,#555)}@media(max-width:640px){.fl-anim__g{grid-template-columns:1fr}}" +
     ".fl-vel{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-vel__top{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.fl-vel__top input{flex:1;min-width:220px;accent-color:#0f8a6e}.fl-vel__v{font-weight:700;color:#1f5e85}.fl-vel__rows{display:grid;gap:.35rem;margin:.7rem 0}.fl-vel__r{display:grid;grid-template-columns:10rem 1fr;gap:.6rem;align-items:center;font-size:.9rem}.fl-vel__s{padding:.25rem .6rem;border-radius:99px;font-weight:600;font-size:.85rem;transition:background .2s}.fl-vel__s.er{background:#fde2dd;color:#8a1c0f}.fl-vel__s.tr{background:#dbe8fb;color:#1d4f9a}.fl-vel__s.de{background:#efe3cf;color:#6b4a2b}" +
     ".fl-chat{display:grid;gap:.5rem;margin:.3rem 0 .6rem}.fl-chat p{margin:0;padding:.6rem .85rem;border-radius:14px;max-width:85%;font-size:.92rem;line-height:1.45}.fl-chat__a{background:#e8f0fb;justify-self:start;border-bottom-left-radius:4px}.fl-chat__b{background:#dcf3e8;justify-self:end;border-bottom-right-radius:4px}" +
+    ".fl-cw{--cw:30px}.fl-cw__wrap{overflow-x:auto;padding-bottom:.3rem}.fl-cw__g{display:grid;gap:2px;width:max-content;margin:0 auto}.fl-cw__g>div{width:var(--cw);height:var(--cw)}.fl-cw__c{position:relative;background:#fff;outline:1.5px solid #13284b}.fl-cw__c span{position:absolute;top:1px;left:2px;font-size:9px;font-weight:700;color:#13284b;pointer-events:none}.fl-cw__i{width:100%;height:100%;border:0;padding:6px 0 0;text-align:center;font:700 15px var(--lh-font-body);text-transform:uppercase;background:transparent;color:#13284b}.fl-cw__i:focus{outline:2px solid #6b2fa3;background:#f4ecfb}.fl-cw__i.ok{background:#dcf3e8}.fl-cw__i.bad{background:#fdecea;color:#b42318}.fl-cw__clues{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:.8rem 0}.fl-cw__clues h4{margin:0 0 .3rem;color:#6b2fa3}.fl-cw__clues ol{margin:0;padding-left:1.8rem;font-size:.9rem;line-height:1.45}.fl-cw__clues li{margin:.2rem 0}@media(max-width:640px){.fl-cw{--cw:23px}.fl-cw__i{font-size:12px}}" +
+    ".fl-qc{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem}.fl-qc__c{border:2px solid var(--c);border-radius:12px;padding:.7rem .8rem;background:#fff}.fl-qc__h{font:700 1rem var(--lh-font-display);color:var(--c);display:flex;align-items:center;gap:.4rem}.fl-qc__c .fl__vq{margin-top:.3rem}" +
     ".fl-rev__lock{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}.fl-rev__in{padding:.45rem .6rem;border:1px solid var(--lh-border);border-radius:8px;font:inherit;width:12rem}.fl-rev__body{border:1px dashed #6b2fa3;border-radius:10px;padding:.8rem 1rem;background:#faf6ff;font-size:.93rem;line-height:1.55}.fl-rev__body p{margin:0 0 .6rem}" +
     ".fl-ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem}.fl-ig a{display:block;text-decoration:none;color:#13284b;font-weight:700;font-size:.9rem}.fl-ig img{width:100%;height:auto;display:block;border:1px solid var(--lh-border);border-radius:8px;margin-bottom:.3rem;box-shadow:0 2px 8px rgba(0,0,0,.08)}.fl-g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:.7rem}.fl-g2 svg{border:1px solid var(--lh-border);border-radius:8px}" +
     ".fl-wf{display:grid;gap:.6rem}.fl-wf__q{background:#13284b;color:#fff;border-radius:12px;padding:.8rem 1rem;font-weight:700;font-size:1.02rem}.fl-wf__q span{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#7fd3d3;margin-bottom:.2rem}.fl-wf__s{display:grid;grid-template-columns:3rem 1fr;gap:.8rem;border:1px solid var(--lh-border);border-left:6px solid var(--c);border-radius:12px;padding:.8rem;background:#fff}.fl-wf__n{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:800 1.1rem var(--lh-font-display)}.fl-wf__s b{font-size:1.02rem;color:var(--c)}.fl-wf__chips{display:flex;flex-wrap:wrap;gap:.3rem;margin:.35rem 0}.fl-wf__chips i{font-style:normal;font-size:.78rem;padding:.15rem .55rem;border-radius:99px;background:#f1f4f7}.fl-wf__st{margin:.3rem 0 0;padding:.5rem .7rem;background:#f8fafc;border-radius:8px;font-style:italic;font-size:.9rem;line-height:1.5}ul.fl-wf__st{padding-left:1.6rem}" +
@@ -2142,6 +2166,21 @@
     if (p.type === "linkcard") {
       h += '<a class="fl-lcard" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="fl-lcard__i">' + (p.icon || "") + '</span><span><b>' + esc(p.title) + "</b><small>" + esc(p.sub || "") + "</small></span><span class=\"fl-lcard__go\">Open \u2197</span></a>";
     }
+    if (p.type === "crossword") {
+      var cw = p.words, H = 0, Wd = 0, cell = {};
+      cw.forEach(function (w) { for (var i = 0; i < w.a.length; i++) { var r = w.r + (w.d === "D" ? i : 0), c = w.col + (w.d === "A" ? i : 0); H = Math.max(H, r + 1); Wd = Math.max(Wd, c + 1); var k = r + "_" + c; cell[k] = cell[k] || { ch: w.a.charAt(i) }; if (!i) cell[k].n = w.n; } });
+      h += '<div class="fl-cw" data-id="' + p.id + '"><div class="fl-cw__wrap"><div class="fl-cw__g" style="grid-template-columns:repeat(' + Wd + ',var(--cw))">';
+      for (var rr = 0; rr < H; rr++) for (var cc = 0; cc < Wd; cc++) {
+        var ce = cell[rr + "_" + cc];
+        h += ce ? '<div class="fl-cw__c">' + (ce.n ? "<span>" + ce.n + "</span>" : "") + '<input class="fl-cw__i" maxlength="1" data-voice="off" autocomplete="off" aria-label="Row ' + (rr + 1) + ", column " + (cc + 1) + '" data-r="' + rr + '" data-c="' + cc + '" data-a="' + ce.ch + '" value="' + esc(saved[p.id + "_" + rr + "_" + cc] || "") + '"></div>' : "<div></div>";
+      }
+      h += '</div></div><div class="fl-cw__clues">' + [["A", "Across"], ["D", "Down"]].map(function (dd) {
+        return "<div><h4>" + dd[1] + "</h4><ol>" + cw.filter(function (w) { return w.d === dd[0]; }).sort(function (a, b) { return a.n - b.n; }).map(function (w) { return '<li value="' + w.n + '">' + esc(w.c) + " <b>(" + (w.len || w.a.length) + ")</b></li>"; }).join("") + "</ol></div>";
+      }).join("") + '</div><div class="fl__actions"><button type="button" class="fl__btn" data-cw="check">Check my answers</button><button type="button" class="fl__btn fl__btn--ghost" data-cw="clear">Clear wrong letters</button><span class="fl__note fl-cw__msg"></span></div></div>';
+    }
+    if (p.type === "cards") {
+      h += '<div class="fl-qc">' + p.items.map(function (it, i) { return '<div class="fl-qc__c" style="--c:' + (it.c || "#6b2fa3") + '"><div class="fl-qc__h">' + (it.icon ? '<span aria-hidden="true">' + it.icon + "</span>" : "") + esc(it.t) + '</div><p class="fl__vq">' + esc(it.q) + "</p>" + box(saved, p.id + i, it.t, 4) + "</div>"; }).join("") + "</div>";
+    }
     if (p.type === "reveal") {
       h += '<div class="fl__part fl-rev"><p class="fl__q">' + esc(p.label || "Model answer") + '</p><div class="fl-rev__lock"><input type="password" class="fl-rev__in" data-voice="off" placeholder="Teacher code" aria-label="Code to show the ' + esc(p.label || "model answer") + '"><button type="button" class="fl__btn" data-rev="' + esc(btoa(String(p.code).toLowerCase())) + '">Show</button><span class="fl__note fl-rev__msg"></span></div><div class="fl-rev__body" hidden>' + p.html + "</div></div>";
       return;
@@ -2332,6 +2371,31 @@
   root.querySelectorAll(".fl-iso").forEach(function (box) {
     var b = box.querySelector("[data-iso]"); if (!b) return;
     b.onclick = function () { var on = box.classList.toggle("fl-iso--show"); b.textContent = on ? "Hide model isovels" : "Show model isovels"; };
+  });
+  root.querySelectorAll(".fl-cw").forEach(function (cw) {
+    var pid = cw.getAttribute("data-id"), dir = "A";
+    function at(r, c) { return cw.querySelector('.fl-cw__i[data-r="' + r + '"][data-c="' + c + '"]'); }
+    cw.addEventListener("focusin", function (e) { var t = e.target; if (!t.classList.contains("fl-cw__i")) return; var r = +t.dataset.r, c = +t.dataset.c; if (dir === "A" && !at(r, c + 1) && !at(r, c - 1)) dir = "D"; else if (dir === "D" && !at(r + 1, c) && !at(r - 1, c)) dir = "A"; });
+    cw.addEventListener("click", function (e) { var t = e.target; if (t.classList.contains("fl-cw__i") && document.activeElement === t && t._f) { var r = +t.dataset.r, c = +t.dataset.c; if (dir === "A" && (at(r + 1, c) || at(r - 1, c))) dir = "D"; else if (dir === "D" && (at(r, c + 1) || at(r, c - 1))) dir = "A"; } if (t.classList.contains("fl-cw__i")) t._f = 1; });
+    cw.addEventListener("input", function (e) {
+      var t = e.target; if (!t.classList.contains("fl-cw__i")) return;
+      t.value = t.value.replace(/[^a-z]/gi, "").slice(-1).toUpperCase(); t.classList.remove("ok", "bad");
+      saved[pid + "_" + t.dataset.r + "_" + t.dataset.c] = t.value; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+      if (t.value) { var n = dir === "A" ? at(+t.dataset.r, +t.dataset.c + 1) : at(+t.dataset.r + 1, +t.dataset.c); if (n) n.focus(); }
+    });
+    cw.addEventListener("keydown", function (e) {
+      var t = e.target; if (!t.classList.contains("fl-cw__i")) return; var r = +t.dataset.r, c = +t.dataset.c, m = { ArrowLeft: [0, -1], ArrowRight: [0, 1], ArrowUp: [-1, 0], ArrowDown: [1, 0] }[e.key];
+      if (m) { var n = at(r + m[0], c + m[1]); if (n) { dir = m[0] ? "D" : "A"; n.focus(); } e.preventDefault(); }
+      if (e.key === "Backspace" && !t.value) { var p2 = dir === "A" ? at(r, c - 1) : at(r - 1, c); if (p2) { p2.focus(); e.preventDefault(); } }
+    });
+    cw.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-cw]"); if (!b) return; var all = cw.querySelectorAll(".fl-cw__i"), right = 0, filled = 0;
+      all.forEach(function (i) { if (!i.value) { i.classList.remove("ok", "bad"); return; } filled++; var okk = i.value === i.dataset.a; if (okk) right++;
+        if (b.dataset.cw === "check") { i.classList.toggle("ok", okk); i.classList.toggle("bad", !okk); }
+        else if (!okk) { i.value = ""; i.classList.remove("bad"); saved[pid + "_" + i.dataset.r + "_" + i.dataset.c] = ""; } });
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+      cw.querySelector(".fl-cw__msg").textContent = b.dataset.cw === "check" ? right + " of " + all.length + " letters correct" + (right === all.length ? " \u2713 Crossword complete!" : "") : "Wrong letters cleared.";
+    });
   });
   root.querySelectorAll("[data-rev]").forEach(function (b) {
     var box = b.closest(".fl-rev"), inp = box.querySelector(".fl-rev__in"), msg = box.querySelector(".fl-rev__msg"), body = box.querySelector(".fl-rev__body");
@@ -2574,6 +2638,8 @@
       if (p.prompt) { html += "<p><b>" + esc((lab ? lab + " " : "") + p.prompt) + "</b></p>"; out.push((lab ? lab + " " : "") + p.prompt); }
       (p.links || []).forEach(function (l) { html += '<p><a href="' + esc(l.url) + '">' + esc(l.label) + "</a></p>"; out.push(l.label + ": " + l.url); });
       if (p.before && media[pi]) html += media[pi];
+      if (p.type === "cards") p.items.forEach(function (it, i) { html += "<p><b>" + esc(it.t) + ":</b> <i>" + esc(it.q) + "</i><br>" + cellHtml(ans(p.id + i)) + "</p>"; out.push(it.t + ": " + it.q, ans(p.id + i)); });
+      if (p.type === "crossword") { var got = 0, tot = 0; p.words.forEach(function (w) { for (var q3 = 0; q3 < w.a.length; q3++) { tot++; if ((saved[p.id + "_" + (w.r + (w.d === "D" ? q3 : 0)) + "_" + (w.col + (w.d === "A" ? q3 : 0))] || "") === w.a.charAt(q3)) got++; } }); html += "<p>Crossword completed.</p>"; out.push("Crossword completed."); }
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
       if (p.type === "order") {
         var seq = p.answer.map(function (_, i) { return saved[p.id + "s" + i] || "_"; }).join(" ");
