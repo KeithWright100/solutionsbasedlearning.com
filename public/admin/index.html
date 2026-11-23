@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+<link rel="stylesheet" href="/css/sbl-staff.css">
+<style>
+  /* The Approved Users table gained Role + Teacher (+ Group) columns
+     on top of its original six — wider than comfortably fits at
+     normal window widths, so scroll horizontally unconditionally
+     rather than relying on .sbl-table's mobile-only overflow rule. */
+  .sbl-approved-scroll { overflow-x: auto; }
+  .sbl-approved-tools { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; margin-bottom:0.8rem; }
+  .sbl-approved-tools .sbl-search-input { max-width:300px; }
+  .sbl-bulkbar { position:sticky; top:4rem; z-index:50; display:flex; flex-wrap:wrap; gap:0.6rem 1rem; align-items:center; padding:0.7rem 0.9rem; margin-bottom:0.8rem; border-radius:10px; background:#1d3448; border:1px solid var(--teal-bright, #2dd4bf); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+  .sbl-bulkbar[hidden] { display:none; }
+  .sbl-bulk-part { display:inline-flex; gap:0.35rem; align-items:center; }
+  .sbl-bulk-part select { max-width:180px; }
+  .sbl-approved-table { min-width: 1280px; }
+  .sbl-role-select,
+  .sbl-teacher-select {
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.35rem 1.6rem 0.35rem 0.55rem; font-size: 0.78rem;
+    font-family: inherit; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%237C93A3'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%237C93A3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 0.5rem center;
+  }
+  .sbl-role-select:disabled, .sbl-teacher-select:disabled { opacity: 0.5; }
+  .us-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:0.7rem; margin-bottom:1.2rem; }
+  .us-stat { background:var(--navy); border:1px solid var(--navy-line); border-radius:12px; padding:0.8rem 1rem; }
+  .us-stat b { display:block; font-family:var(--font-display); font-size:1.45rem; color:var(--white); }
+  .us-stat span { font-size:0.78rem; color:var(--slate); }
+  .us-h { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); margin:1.2rem 0 0.6rem; }
+  .us-bars { display:grid; grid-template-columns:repeat(8,1fr); gap:0.5rem; align-items:end; height:150px; padding:0.5rem 0; }
+  .us-bar { display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; font-size:0.72rem; color:var(--slate); gap:3px; }
+  .us-bar i { display:block; width:100%; max-width:46px; border-radius:6px 6px 0 0; background:var(--teal); min-height:2px; }
+  .us-bar i.ppq { background:#f59e0b; }
+  .us-bar .pair { display:flex; gap:3px; align-items:flex-end; width:100%; justify-content:center; height:110px; }
+  .us-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+  @media (max-width: 900px) { .us-grid2 { grid-template-columns:1fr; } }
+  .sbl-group-input {
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.35rem 0.55rem; font-size: 0.78rem;
+    font-family: inherit; width: 9.5rem;
+  }
+  .sbl-group-input::placeholder { color: var(--navy-line); }
+  .sbl-group-input:disabled { opacity: 0.5; }
+
+  .sbl-search-bar { margin-bottom: 1rem; max-width: 320px; }
+  .sbl-pending-tools { display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.8rem; }
+  .sbl-bulk-status { font-weight:600; }
+  .sbl-ask-backdrop { position:fixed; inset:0; background:rgba(5,15,25,0.6); display:flex; align-items:center; justify-content:center; z-index:10001; padding:1rem; }
+  .sbl-ask { background:#1d3448; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:1.3rem 1.4rem; max-width:640px; width:100%; box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+  .sbl-ask-msg { margin:0 0 1rem; line-height:1.5; white-space:pre-line; }
+  .sbl-ask-btns { display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:flex-end; }
+  .sbl-ask { max-height:85vh; overflow:auto; }
+  .sbl-pw-table { width:100%; border-collapse:collapse; margin:0.8rem 0 0; font-size:0.9rem; white-space:normal; }
+  .sbl-pw-table th, .sbl-pw-table td { text-align:left; padding:0.3rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.12); }
+  .sbl-ask-code { display:block; font-size:1.4rem; margin:0.7rem 0; padding:0.5rem 0.7rem; background:rgba(255,255,255,0.1); border-radius:8px; user-select:all; }
+  .sbl-pend-check { width:1.1rem; height:1.1rem; cursor:pointer; }
+  #pageError.is-visible, #pageNotice.is-visible { position:fixed; top:4.5rem; left:50%; transform:translateX(-50%); width:min(760px, calc(100% - 2rem)); z-index:10000; box-shadow:0 10px 30px rgba(0,0,0,0.35); cursor:pointer; }
+
+  .sbl-search-input {
+    width: 100%; box-sizing: border-box;
+    background: var(--navy); border: 1px solid var(--navy-line); border-radius: 8px;
+    color: var(--white); padding: 0.55rem 0.75rem; font-size: 0.85rem;
+    font-family: inherit;
+  }
+  .sbl-search-input::placeholder { color: var(--slate); }
+  .sbl-search-input:focus { outline: 2px solid var(--teal, #2DE1CB); outline-offset: 1px; }
+  .sbl-quick { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:0.8rem; margin-bottom:1.6rem; }
+  .sbl-quick a { display:block; background:var(--navy-raised); border:1px solid var(--navy-line); border-radius:14px; padding:0.95rem 1.05rem; text-decoration:none; transition:border-color .15s, transform .15s; }
+  .sbl-quick a:hover, .sbl-quick a:focus-visible { border-color:var(--teal-bright); transform:translateY(-1px); }
+  .sbl-quick b { display:block; color:var(--white); font-family:var(--font-display); font-size:1rem; margin-bottom:0.25rem; }
+  .sbl-quick span { display:block; color:var(--slate); font-size:0.8rem; line-height:1.4; }
+  .sbl-quick i { font-style:normal; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); display:block; margin-bottom:0.35rem; }
+  .gotw-panel { padding: 1.1rem 1.3rem; margin-bottom: 1.5rem; }
+  .gotw-panel h2 { font-family: var(--font-display); font-size: 1.05rem; color: var(--white); margin: 0 0 0.2rem; }
+  .gotw-panel > p { color: var(--slate); font-size: 0.85rem; margin: 0 0 0.9rem; }
+  .gotw-row { display: grid; grid-template-columns: 130px minmax(180px, 1.2fr) minmax(160px, 1fr) auto 120px; gap: 0.6rem; align-items: center; padding: 0.55rem 0; border-top: 1px solid var(--navy-line); }
+  .gotw-when b { display: block; color: var(--white); font-size: 0.88rem; }
+  .gotw-when span { color: var(--slate); font-size: 0.76rem; }
+  .gotw-status { color: var(--teal-bright); font-size: 0.8rem; }
+  @media (max-width: 860px) { .gotw-row { grid-template-columns: 1fr; } }
+  .p3c-row { display: grid; grid-template-columns: 220px minmax(120px, 180px) auto auto auto 1fr; gap: 0.6rem; align-items: center; padding: 0.55rem 0; border-top: 1px solid var(--navy-line); }
+  .p3c-when b { display: block; color: var(--white); font-size: 0.88rem; }
+  .p3c-when span { color: var(--slate); font-size: 0.76rem; }
+  .p3c-code { font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+  .p3c-code::placeholder { text-transform: none; letter-spacing: 0; font-family: inherit; }
+  .p3c-status, #p3codeMsg { color: var(--teal-bright); font-size: 0.8rem; }
+  .p3c-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.8rem; }
+  @media (max-width: 860px) { .p3c-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-admin-shell">
+
+  <div class="sbl-admin-header">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Solutions Based Learning &middot; signed in as <span id="adminName">…</span></p>
+    </div>
+    <div style="display:flex; gap:0.6rem;">
+      <a href="/humanities-hub" class="sbl-btn sbl-btn--secondary sbl-btn--small">&larr; Home</a>
+      <a href="/teacher/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Class Sheet</a>
+      <a href="/admin/resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">IB Lesson Resources</a>
+      <a href="/admin/igcse-resources/" class="sbl-btn sbl-btn--secondary sbl-btn--small">IGCSE Lesson Resources</a>
+      <a href="/admin/past-papers/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Past Paper Files</a>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
+  <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.5rem;"></div>
+
+  <nav class="sbl-quick" aria-label="Admin quick links">
+    <a href="/teacher/"><i>Teaching</i><b>Class Sheet</b><span>Student quiz, IB-style and past paper scores by lesson.</span></a>
+    <a href="/admin/resources/"><i>IB Geography</i><b>IB Lesson Resources</b><span>Slides, notes, workbooks, OneNote links, quizzes and PPQs for each IB lesson.</span></a>
+    <a href="/admin/igcse-resources/"><i>Edexcel IGCSE</i><b>IGCSE Lesson Resources</b><span>The same resource slots for every IGCSE Geography lesson.</span></a>
+    <a href="/igcse/geography/learn"><i>Edexcel IGCSE</i><b>IGCSE Learning Hub</b><span>Open the IGCSE lessons and past paper questions.</span></a>
+    <a href="/admin/past-papers/"><i>All subjects</i><b>Past Paper Files</b><span>Upload question papers, markschemes and resource booklets for every exam paper.</span></a>
+    <a href="/admin/question-sources/"><i>Games</i><b>Game Question Sources</b><span>Which IB and Edexcel past paper questions have been adapted in the revision games.</span></a>
+  </nav>
+
+  <section class="sbl-panel gotw-panel" aria-labelledby="gotwHead">
+    <h2 id="gotwHead">&#127918; Game of the week</h2>
+    <p>Shown at the top of the Humanities Hub. Pick a game for this week or plan ahead; weeks left on &ldquo;Automatic&rdquo; rotate through all the games. Weeks start on Monday (Bangkok time).</p>
+    <div id="gotwRows"><div class="sbl-empty-state">Loading&hellip;</div></div>
+  </section>
+
+  <section class="sbl-panel gotw-panel" aria-labelledby="guestHead">
+    <h2 id="guestHead">&#127903; Conference guest login</h2>
+    <p>A shared login for conferences and demos. It gives student-level access to every lesson and revision page (never the teacher or admin pages), and switches itself off after 6 hours.</p>
+    <div id="guestPanel"><div class="sbl-empty-state">Loading&hellip;</div></div>
+  </section>
+
+  <section class="sbl-panel gotw-panel" aria-labelledby="p3codeHead">
+    <h2 id="p3codeHead">&#128273; Paper 3 essay codes</h2>
+    <p>Codes that unlock the model maps for the practice essays on the <a href="/geography/revision/guide/paper3-synthesis-maps" style="color:var(--teal-bright)">16-mark essay synthesis maps</a> page. Give a class the code when they have built their own map. Changing a code stops the old one working; students who have already unlocked an essay keep it.</p>
+    <div id="p3codeRows"><div class="sbl-empty-state">Loading&hellip;</div></div>
+    <div class="p3c-tools">
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="p3codeCopy">Copy all codes</button>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="p3codeAll">New codes for every essay</button>
+      <span id="p3codeMsg" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="sbl-panel gotw-panel" aria-labelledby="lgcodeHead">
+    <h2 id="lgcodeHead">&#128269; Lesson game code words</h2>
+    <p>Lesson games where the teacher unlocks each chapter by saying a code word. On the game page, teacher accounts also see <i>Teacher: unlock all levels</i> and <i>Teacher: answer key</i>.</p>
+    <details open>
+      <summary style="cursor:pointer;font-weight:700"><a href="/geography/games/development-detectives" style="color:var(--teal-bright)">Development Detectives</a> · KS3 · Measuring and mapping development · about 1 hour</summary>
+      <p style="margin:.6rem 0">Codes: <b>MONEY</b> (ch 1) · <b>HEALTH</b> (ch 2) · <b>INDEX</b> (ch 3) · <b>VERDICT</b> (ch 4). Scores go to the Class Sheet (KS3 Geography view), one per success criterion plus the final paragraph mark; click a student’s name to read their writing and Copilot feedback.</p>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.92rem"><thead><tr><th style="text-align:left;padding:8px 10px">Chapter</th><th style="text-align:left;padding:8px 10px">Code</th><th style="text-align:left;padding:8px 10px">What students do</th><th style="text-align:left;padding:8px 10px">Writing</th><th style="text-align:left;padding:8px 10px">Challenge (early finishers)</th></tr></thead><tbody><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">0 The case</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">none</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Pick three things to measure Costa Rica by, which reveals their perspective</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">One sentence frame</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Write from a different perspective</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">1 Follow the money</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>MONEY</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Match definitions, work out a GDP per capita, read a GDP map, look at a Rio photo (inequality), sort strengths and weaknesses</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Full sentence frame</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Qatar vs Costa Rica; rank 5 countries</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">2 Health and schooling</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>HEALTH</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Definitions, a life expectancy bar chart (Japan − Nigeria), a map, a Lima photo, sorting</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Sentence starters</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Find a country healthier than its money suggests on a scatter graph; Cuba vs USA</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">3 Build an index</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>INDEX</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">What makes up HDI, HDI sliders, HDI map, Thailand vs Equatorial Guinea (same money, different HDI)</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Connectives bank</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Make a rich country with a low HDI; is Thailand developed?</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">4 The verdict</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>VERDICT</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Three perspective questions, the agree/disagree line, a paragraph with a live checklist, sent to Copilot for a mark out of 4</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Free paragraph</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Design your own index</td></tr></tbody></table></div>
+    </details>
+  </section>
+
+  <div class="sbl-tabs">
+    <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="approved">Approved Users <span class="sbl-tab__count" id="countApproved">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="rejected">Rejected Applications <span class="sbl-tab__count" id="countRejected">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="feedback">Feedback <span class="sbl-tab__count" id="countFeedback">0</span></button>
+    <button type="button" class="sbl-tab" data-tab="usage">Usage</button>
+  </div>
+
+  <section class="sbl-panel" id="panelPending">
+    <div class="sbl-pending-tools">
+      <button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="approveSelected" disabled>Approve selected</button>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="approveSelectedPw" disabled title="For students whose school email blocks SBL emails: sets passwords now and shows you a list to hand out">Approve with passwords (no email)</button>
+      <span class="sbl-bulk-status" id="bulkStatus" aria-live="polite"></span>
+    </div>
+    <div class="sbl-search-bar">
+      <input type="search" id="pendingSearch" class="sbl-search-input" placeholder="Search by name or email…" aria-label="Search pending applications by name or email">
+    </div>
+    <table class="sbl-table">
+      <thead>
+        <tr><th style="width:2.2rem"><input type="checkbox" id="pendingAll" aria-label="Select all pending applications shown"></th><th>Name</th><th>School</th><th>Email</th><th>Role</th><th>Submitted</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="pendingBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="pendingEmpty" style="display:none;">No pending applications right now.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelApproved" style="display:none;">
+    <div class="sbl-approved-tools">
+      <input type="search" id="approvedSearch" class="sbl-search-input" placeholder="Search by name or email…" aria-label="Search approved users by name or email">
+      <select id="approvedFilter" class="sbl-teacher-select" aria-label="Show">
+        <option value="">Everyone</option>
+        <option value="nogroup">Students with no group</option>
+        <option value="noteacher">Students with no subject/teacher</option>
+        <option value="students">All students</option>
+      </select>
+      <select id="approvedGroupFilter" class="sbl-teacher-select" aria-label="Group"><option value="">Any group</option></select>
+    </div>
+    <div class="sbl-bulkbar" id="bulkBar" hidden>
+      <b id="bulkCount">0 selected</b>
+      <span class="sbl-bulk-part"><select id="bulkGroup" class="sbl-teacher-select" aria-label="Group for selected students"></select><button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="bulkGroupBtn">Set group</button></span>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="bulkEmailBtn" title="Patana emails end in the graduation year, e.g. majn32 → KS3 Grad '32">Group from email</button>
+      <span class="sbl-bulk-part"><select id="bulkSubj" class="sbl-teacher-select" aria-label="Subject to add"></select><select id="bulkTeacher" class="sbl-teacher-select" aria-label="Teacher for that subject"></select><button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="bulkAddBtn">Add subject</button></span>
+      <span class="sbl-bulk-part"><select id="bulkRemove" class="sbl-teacher-select" aria-label="Subject to remove"></select><button type="button" class="sbl-btn sbl-btn--danger sbl-btn--small" id="bulkRemoveBtn">Remove</button></span>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="bulkClear">Clear ticks</button>
+    </div>
+    <div class="sbl-approved-scroll">
+      <table class="sbl-table sbl-approved-table">
+        <thead>
+          <tr><th style="width:2.2rem"><input type="checkbox" id="approvedAll" aria-label="Select all students shown"></th><th>User Name</th><th>Email</th><th>Institution</th><th>Role</th><th>Subjects &amp; teachers</th><th>Group</th><th>Status</th><th>Approved</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="approvedBody"></tbody>
+      </table>
+    </div>
+    <div class="sbl-empty-state" id="approvedEmpty" style="display:none;">No approved users yet.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelRejected" style="display:none;">
+    <div class="sbl-search-bar">
+      <input type="search" id="rejectedSearch" class="sbl-search-input" placeholder="Search by name or email…" aria-label="Search rejected applications by name or email">
+    </div>
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Applicant Name</th><th>Email</th><th>Date Rejected</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="rejectedBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="rejectedEmpty" style="display:none;">No rejected applications.</div>
+  </section>
+
+  <section class="sbl-panel" id="panelUsage" style="display:none; padding:1.2rem 1.3rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+      <p class="sbl-muted" style="margin:0;">Student activity from saved lesson progress: quizzes, IB-style and past paper marks. Teachers&rsquo; and admins&rsquo; own activity is left out. Games are open without login, so they&rsquo;re not counted here.</p>
+      <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="usageRefresh">Refresh</button>
+    </div>
+    <div id="usageBody"><div class="sbl-empty-state">Loading usage&hellip;</div></div>
+  </section>
+
+  <section class="sbl-panel" id="panelFeedback" style="display:none;">
+    <table class="sbl-table">
+      <thead>
+        <tr><th>Submitted</th><th>Overall</th><th>Supports Learning</th><th>Most Effective</th><th>Suggestion</th><th>Status</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="feedbackBody"></tbody>
+    </table>
+    <div class="sbl-empty-state" id="feedbackEmpty" style="display:none;">No feedback submitted yet.</div>
+  </section>
+
+</div>
+
+<div class="sbl-modal-backdrop" id="viewModalBackdrop">
+  <div class="sbl-modal">
+    <h2>Application details</h2>
+    <dl id="viewModalBody"></dl>
+    <div class="sbl-auth-actions" style="margin-top:1.75rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary" id="closeModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="sbl-modal-backdrop" id="feedbackModalBackdrop">
+  <div class="sbl-modal">
+    <h2>Feedback details</h2>
+    <dl id="feedbackModalBody"></dl>
+    <div class="sbl-auth-actions" style="margin-top:1.75rem;">
+      <button type="button" class="sbl-btn sbl-btn--secondary" id="closeFeedbackModalBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/sbl-admin.js"></script>
+<script src="/js/sbl-games-catalog.js"></script>
+<script src="/js/sbl-admin-gotw.js"></script>
+<script src="/js/sbl-p3-synthesis-data.js"></script>
+<script src="/js/sbl-admin-p3codes.js"></script>
+<script src="/js/sbl-admin-guest.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

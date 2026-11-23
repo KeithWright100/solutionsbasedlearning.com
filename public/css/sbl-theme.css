@@ -1,0 +1,142 @@
+/* ============================================================
+   SBL — Solutions Based Learning
+   Shared design system
+
+   Signature motif: the contour line. Geography is the live
+   subject and the whole ecosystem's founding metaphor — reading
+   a landscape by its contours, then finding a route through it.
+   The same line language appears three ways:
+     1. Ambient topographic contours (backgrounds)
+     2. The Thinking Pathway (THINK → SOLVE, a route through the hub)
+     3. Syllabus trail nodes (a route through a subject)
+   ============================================================ */
+
+:root {
+  /* ---- Color ---- */
+  --ink:          #060D16;   /* deepest background, page edges */
+  --navy:         #0B1929;   /* primary background */
+  --navy-raised:  #10233A;   /* panel surfaces */
+  --navy-line:    #1B3247;   /* hairlines / dividers on navy */
+  --teal:         #17B8A6;   /* SBL brand teal — live / active */
+  --teal-bright:  #2DE1CB;   /* glow, hover, high-emphasis */
+  --white:        #F6FAFA;   /* primary text on navy */
+  --slate:        #7C93A3;   /* secondary text */
+  --slate-dim:    #445A6B;   /* muted / coming-soon state */
+  --slate-dimmer: #2A3B49;   /* coming-soon borders */
+
+  /* ---- Type ---- */
+  --font-display: 'Space Grotesk', 'Arial Narrow', sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'SFMono-Regular', monospace;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---- Ambient topographic contours ----
+   A single repeating SVG of nested, imperfect contour rings,
+   used at very low opacity as atmosphere. Never decorative-only
+   noise: on the geography pages the same linework reappears at
+   full strength as real UI (the trail), so the background reads
+   as "the same world, zoomed out." */
+.sbl-contours {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%2317B8A6' stroke-width='1'%3E%3Cpath d='M-50 620 Q 150 560 300 610 T 650 580 T 900 640'/%3E%3Cpath d='M-50 500 Q 180 430 340 490 T 700 450 T 900 510'/%3E%3Cpath d='M-50 380 Q 200 300 380 370 T 720 320 T 900 390'/%3E%3Cpath d='M-50 260 Q 220 170 400 250 T 740 190 T 900 270'/%3E%3Cpath d='M-50 140 Q 240 40 420 130 T 760 60 T 900 150'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 800px 800px;
+  background-repeat: repeat;
+  animation: driftContours 90s linear infinite;
+}
+@keyframes driftContours {
+  from { background-position: 0 0; }
+  to   { background-position: -800px -400px; }
+}
+
+/* ---- Skip link / focus ---- */
+.sbl-skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--teal);
+  color: var(--ink);
+  padding: 0.75rem 1.25rem;
+  z-index: 100;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.sbl-skip:focus { left: 1rem; top: 1rem; }
+
+:focus-visible {
+  outline: 2px solid var(--teal-bright);
+  outline-offset: 3px;
+}
+
+/* ---- Eyebrow / mono labels (status, coordinates, taglines) ---- */
+.sbl-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.sbl-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sbl-status--live { color: var(--teal-bright); }
+.sbl-status--soon { color: var(--slate-dim); }
+.sbl-status__dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+}
+.sbl-status--live .sbl-status__dot { box-shadow: 0 0 8px var(--teal-bright); animation: pulseDot 2.2s var(--ease) infinite; }
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.75); }
+}
+
+/* ---- Footer ---- */
+.sbl-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  color: var(--slate);
+  border-top: 1px solid var(--navy-line);
+  max-width: 720px;
+  margin: 0 auto;
+}

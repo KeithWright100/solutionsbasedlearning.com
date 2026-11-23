@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Paper Files — Admin Dashboard — Solutions Based Learning</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+<link rel="stylesheet" href="/css/sbl-staff.css">
+<style>
+  .sbl-admin-shell { max-width: 1320px; }
+  .pp-intro { color: var(--slate); max-width: 900px; line-height: 1.55; margin: 0 0 1.2rem; }
+  .pp-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .pp-tabs button { font-family: inherit; cursor: pointer; background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 999px; color: var(--white); padding: 0.45rem 0.95rem; font-size: 0.84rem; font-weight: 600; }
+  .pp-tabs button span { color: var(--slate); font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; margin-left: 0.3rem; }
+  .pp-tabs button.is-active { background: var(--teal, #2DE1CB); border-color: var(--teal, #2DE1CB); color: #04211d; }
+  .pp-tabs button.is-active span { color: #04211d; }
+  .pp-toolbar { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  .pp-toolbar h2 { font-family: var(--font-display); font-size: 1.05rem; color: var(--white); margin: 0; flex: 1; }
+  .pp-search { min-width: 220px; background: var(--navy-raised); border: 1px solid var(--navy-line); border-radius: 10px; color: var(--white); padding: 0.55rem 0.9rem; font-size: 0.88rem; font-family: inherit; }
+  .pp-search::placeholder { color: var(--slate); }
+  .pp-scroll { overflow: auto; }
+  .pp-table { min-width: 900px; }
+  .pp-table th, .pp-table td { vertical-align: top; }
+  .pp-group td { background: var(--navy) !important; border-top: 2px solid var(--teal-bright); padding: 0.6rem 1rem !important; font-family: var(--font-display); font-weight: 700; color: var(--white); }
+  .pp-paper b { color: var(--white); font-size: 0.9rem; }
+  .pp-file { display: block; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--teal-bright); font-size: 0.82rem; text-decoration: none; }
+  .pp-file:hover { text-decoration: underline; }
+  .pp-slot small { display: block; color: var(--slate); font-size: 0.72rem; margin: 0.1rem 0 0.35rem; }
+  .pp-none { display: block; color: var(--slate); font-size: 0.8rem; margin-bottom: 0.35rem; }
+  .pp-actions { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .pp-add { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: flex-end; padding: 1rem 1.2rem; margin-bottom: 1.2rem; }
+  .pp-add label { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate); }
+  .pp-add select, .pp-add input[type=text], .pp-add input[type=number] { background: var(--navy); color: var(--white); border: 1px solid var(--navy-line); border-radius: 8px; padding: 0.45rem 0.6rem; font: inherit; font-size: 0.86rem; text-transform: none; letter-spacing: 0; }
+  .pp-add .pp-check { flex-direction: row; align-items: center; gap: 0.35rem; padding-bottom: 0.5rem; }
+  .pp-add h3 { width: 100%; margin: 0 0 0.2rem; font-family: var(--font-display); font-size: 0.95rem; color: var(--white); }
+</style>
+</head>
+<body data-mode="admin">
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-admin-shell">
+  <div class="sbl-admin-header">
+    <div>
+      <h1>Past Paper Files</h1>
+      <p>Upload the question paper, markscheme and resource booklet for each exam paper &middot; signed in as <span id="staffName">…</span></p>
+    </div>
+    <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+      <a href="/admin/" class="sbl-btn sbl-btn--secondary sbl-btn--small">&larr; Back to Dashboard</a>
+      <a href="/teacher/past-papers/" class="sbl-btn sbl-btn--secondary sbl-btn--small">Teacher library view</a>
+    </div>
+  </div>
+  <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.2rem;"></div>
+  <div class="sbl-alert sbl-alert--success" id="pageNotice" role="status" style="margin-bottom:1.2rem;"></div>
+  <p class="pp-intro">Files are private: only teacher and admin logins can open them (in the <a href="/teacher/past-papers/" style="color:var(--teal-bright)">Past Paper Library</a>). Students never see them, in line with the exam boards&rsquo; licences. Upload PDFs, Word, PowerPoint or images; uploading again replaces the file.</p>
+  <form class="sbl-panel pp-add" id="ppAdd">
+    <h3>Add a paper that is not listed</h3>
+    <label>Subject <select id="ppAddSubject"></select></label>
+    <label>Month <select id="ppAddMonth"></select></label>
+    <label>Year <input type="number" id="ppAddYear" min="2000" max="2100" style="width:90px"></label>
+    <label>Paper <input type="text" id="ppAddPaper" maxlength="1" placeholder="1" style="width:60px"></label>
+    <label class="pp-check"><input type="checkbox" id="ppAddR"> R paper</label>
+    <label>Time zone <select id="ppAddTz"><option value="">None</option><option value="TZ0">TZ0</option><option value="TZ1">TZ1</option><option value="TZ2">TZ2</option><option value="TZ3">TZ3</option></select></label>
+    <button type="submit" class="sbl-btn sbl-btn--secondary sbl-btn--small">Add paper</button>
+  </form>
+  <div class="pp-tabs" id="ppTabs" role="tablist" aria-label="Subjects"></div>
+  <section class="sbl-panel">
+    <div class="pp-toolbar" style="padding:1rem 1.2rem 0;"><h2 id="ppHead"></h2><input type="search" class="pp-search" id="ppSearch" placeholder="Filter, e.g. 2024 or Paper 2"></div>
+    <div class="pp-scroll" id="ppBody"><div class="sbl-empty-state">Loading&hellip;</div></div>
+  </section>
+</div>
+<script src="/js/sbl-past-papers.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

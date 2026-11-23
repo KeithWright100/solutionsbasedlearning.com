@@ -1,0 +1,466 @@
+/* public/js/sbl-games-catalog.js
+   The list of SBL games, used by the "Game of the week" card on the
+   Humanities Hub and by the picker in the admin dashboard.
+   Add a line here whenever a new game goes live (slug = the last part
+   of its URL). Always add new games at the END of the list: the hub's
+   yellow "Latest game" alert shows the last game in GAMES. ROTATION is the order used for automatic weeks; it
+   alternates subjects and levels so consecutive weeks differ.
+
+   window.SBLGameOfWeek.weekStart([date])  -> 'YYYY-MM-DD' Monday (Bangkok time)
+   window.SBLGameOfWeek.resolve(picks)     -> { game, note, picked } for this week */
+(function () {
+  var GAMES = [
+  {
+    "slug": "world-map-challenge",
+    "title": "World Map Challenge",
+    "href": "/geography/games/world-map-challenge",
+    "level": "KS3 Geography",
+    "tag": "New",
+    "desc": "Find and name the countries of the world, track down mountains, rivers, lakes, deserts and seas, learn the continents, oceans and lines of latitude, and test yourself on capitals and flags. Three levels from famous countries to tiny islands, for the whole world or one continent."
+  },
+  {
+    "slug": "tropical-storm-mission",
+    "title": "Tropical Storm Mission",
+    "href": "/geography/games/tropical-storm-mission",
+    "level": "KS3 Geography",
+    "tag": "Live",
+    "desc": "Three linked missions: label a storm's cross-section, sequence its formation, then set the conditions to build and steer your own tropical storm."
+  },
+  {
+    "slug": "place-detective",
+    "title": "Place Detective",
+    "href": "/geography/games/place-detective",
+    "level": "KS3 Geography",
+    "tag": "Live",
+    "desc": "Use geographical clues to solve mystery locations. Four levels, from famous places for Year 7 up to expert detectives with technical clues and penalties for wrong guesses."
+  },
+  {
+    "slug": "tropical-storm-links",
+    "title": "Tropical Storm: Link It Up",
+    "href": "/geography/games/tropical-storm-links",
+    "level": "KS3 Geography",
+    "tag": "Live",
+    "desc": "Tap a cause circle, then the impact it leads to, and explain the link — instant AI feedback on every connection you make."
+  },
+  {
+    "slug": "storm-ready-city",
+    "title": "Storm-Ready City",
+    "href": "/geography/games/storm-ready-city",
+    "level": "KS3 Geography",
+    "tag": "Live · Reducing storm impacts",
+    "desc": "Sort 12 plans into Prediction, Preparation and Protection, spend a $50m city budget, survive a Category 4 storm — then try again with only $10m."
+  },
+  {
+    "slug": "tropical-storms-exam-survival",
+    "title": "Tropical Storms: Exam Survival Challenge",
+    "href": "/geography/games/tropical-storms-exam-survival",
+    "level": "KS3 Geography",
+    "tag": "Live · 6 levels",
+    "desc": "Measuring storms on the Saffir-Simpson Scale, Hazard/Exposure/Vulnerability in Typhoon Haiyan, the 3Ps, key terms, comparing deadly storms across countries, and future trends — sort, classify and answer your way through to the final boss level."
+  },
+  {
+    "slug": "volcano-fantastic-place",
+    "title": "Ruapehu Mission",
+    "href": "/geography/games/volcano-fantastic-place",
+    "level": "KS3 Geography",
+    "tag": "Live · Can a volcano be a fantastic place?",
+    "desc": "A Year 7 enquiry on Mount Ruapehu, New Zealand: label the subduction diagram, sort evidence into the 4 Ps, make a decision, write a tourist advert — then copy every answer into OneNote."
+  },
+  {
+    "slug": "bangkok-venice-east",
+    "title": "Was Bangkok the Venice of the East?",
+    "href": "/geography/games/bangkok-venice-east",
+    "level": "KS3 Geography",
+    "tag": "Live · The 4 Ps Challenge",
+    "desc": "Sort 15 clues about old Bangkok’s canals and modern Venice into Place, Processes, Power and Possibilities, justify your thinking, rate your confidence — some clues earn bonus points for fitting more than one P — then give your verdict."
+  },
+  {
+    "slug": "igcse-coastal-quest",
+    "title": "Coastal Quest",
+    "href": "/geography/games/igcse-coastal-quest",
+    "level": "IGCSE Geography",
+    "tag": "Live · Whole topic revision",
+    "desc": "16 levels, one per lesson: waves, erosion and weathering, headlands to stumps, spits, dunes, coral reefs, threats, conflicts, flooding, hard and soft engineering, Sri Lanka and Holderness. Labelled diagrams, data skills, a past paper checkpoint after every level and an Edexcel Examiner boss fight."
+  },
+  {
+    "slug": "igcse-hazard-quest",
+    "title": "Hazard Quest",
+    "href": "/geography/games/igcse-hazard-quest",
+    "level": "IGCSE Geography",
+    "tag": "Live · Whole topic revision",
+    "desc": "13 levels, one per lesson: hazards and vulnerability, plate tectonics, earthquakes and tsunamis, Japan 2011, Haiti 2010, volcanoes, Kīlauea 2018, tropical cyclones and Typhoon Haiyan. Labelled diagrams, data skills, a past paper checkpoint after every level and an Edexcel Examiner boss fight."
+  },
+  {
+    "slug": "energy-sort",
+    "title": "Energy Sort",
+    "href": "/geography/games/energy-sort",
+    "level": "IGCSE Geography",
+    "tag": "Live · Starter",
+    "desc": "Sort 15 energy resources into Renewable and Non-renewable against the clock, then justify the tricky cases: nuclear, fuelwood, HEP, geothermal and shale gas."
+  },
+  {
+    "slug": "micro-hydro-mission",
+    "title": "Micro-Hydro Mission",
+    "href": "/geography/games/micro-hydro-mission",
+    "level": "IGCSE Geography",
+    "tag": "Live · Energy for last-mile communities",
+    "desc": "Label a micro-hydro system from river to village, sort diesel vs micro-hydro, then investigate Long Tanid in Malaysian Borneo — and copy your work into OneNote."
+  },
+  {
+    "slug": "topic4-exam-survival",
+    "title": "Topic 4 Exam Survival Challenge",
+    "href": "/geography/games/topic4-exam-survival",
+    "level": "IGCSE Geography",
+    "tag": "Live · IGCSE Economic Activity & Energy",
+    "desc": "Ten mini-games to save Veridia’s economy and energy future: sector sort, Clark Fisher, location escape room, Malthus vs Boserup boss fight, energy mix builder, carbon calculator and a final P-E-E exam boss, with a past paper checkpoint question after each level. Earn XP and badges."
+  },
+  {
+    "slug": "igcse-rural-quest",
+    "title": "Rural Quest",
+    "href": "/geography/games/igcse-rural-quest",
+    "level": "IGCSE Geography",
+    "tag": "Live · Whole topic revision",
+    "desc": "12 levels, one per lesson: biomes, ecosystem goods and services, the Amazon, farming systems, rural change in the UK, diversification, sustainable rural living and rural–urban migration in Thailand. Labelled diagrams, data skills, a past paper checkpoint after every level and an Edexcel Examiner boss fight."
+  },
+  {
+    "slug": "igcse-development-quest",
+    "title": "Development Quest",
+    "href": "/geography/games/igcse-development-quest",
+    "level": "IGCSE Geography",
+    "tag": "Live · Whole topic revision",
+    "desc": "10 levels, one per lesson: measuring development, GDP, HDI, Gini and corruption, the DTM, population pyramids, causes of uneven development, Italy, aid and trade, and the Nigeria and Kenya projects. A past paper checkpoint after every level and a 12-mark Discuss boss fight."
+  },
+  {
+    "slug": "igcse-fieldwork-quest",
+    "title": "Fieldwork Quest",
+    "href": "/geography/games/igcse-fieldwork-quest",
+    "level": "IGCSE Geography",
+    "tag": "Live · Coastal and rural fieldwork",
+    "desc": "13 levels in three parts: fieldwork skills (enquiry process, data types, sampling pros and cons, risk, presenting and analysing data, evaluation), then our Sam Roi Yot coastal study and rural study. A past paper checkpoint after every level and an 8-mark Evaluate boss fight."
+  },
+  {
+    "slug": "ib-population-quest",
+    "title": "Population Quest: Changing Population",
+    "href": "/geography/games/ib-population-quest",
+    "level": "IB Geography",
+    "tag": "New · Unit 1 revision adventure",
+    "desc": "Fourteen levels across all three topics — distribution and development, Egypt and Thailand, the DTM, Thailand vs The Gambia, megacities, the Rohingya, Haiti, ageing, population policies, trafficking and the demographic dividend — with checkpoint past paper questions, then beat the IB Examiner."
+  },
+  {
+    "slug": "thailand-or-gambia",
+    "title": "Thailand, The Gambia or Both?",
+    "href": "/geography/games/thailand-or-gambia",
+    "level": "IB Geography",
+    "tag": "Live · Unit 1 · Retrieval",
+    "desc": "Sort 20 demographic statements into Thailand, The Gambia or Both, then explain the shared features — dependency, falling fertility, falling mortality and migration."
+  },
+  {
+    "slug": "population-minister",
+    "title": "Population Minister 2025–2055",
+    "href": "/geography/games/population-minister",
+    "level": "IB Geography",
+    "tag": "Live · Unit 1 · Plenary",
+    "desc": "Manage Thailand's ageing or The Gambia's youthful population for three decades. Choose responses, watch the pyramid change, survive events, then compare both countries."
+  },
+  {
+    "slug": "consequence-carousel",
+    "title": "Consequence Carousel: the Rohingya Crisis",
+    "href": "/geography/games/consequence-carousel",
+    "level": "IB Geography",
+    "tag": "Live · Unit 1 forced migration",
+    "desc": "Sort the consequences for refugees, Bangladesh, Myanmar and aid organisations, label them social/economic/political/environmental, short/long term and direct/indirect, draw the cause-and-effect arrows, then build an exam paragraph."
+  },
+  {
+    "slug": "haiti-phantom-state",
+    "title": "The Phantom State: Haiti 2010",
+    "href": "/geography/games/haiti-phantom-state",
+    "level": "IB Geography",
+    "tag": "Live · Unit 1 forced migration",
+    "desc": "Crack the evidence vault on the 2010 earthquake, build the doom loop between state fragility and displacement (spot the red herrings), then try to do better than Haiti as Minister of Reconstruction."
+  },
+  {
+    "slug": "rohingya-or-haiti",
+    "title": "Rohingya, Haiti or Both?",
+    "href": "/geography/games/rohingya-or-haiti",
+    "level": "IB Geography",
+    "tag": "Live · Unit 1 forced migration essay prep",
+    "desc": "Sort 26 evidence cards into Rohingya only, Haiti only or Both, decide whether each essay theme is a similarity or a difference, then build a comparative PEEL paragraph to paste into OneNote."
+  },
+  {
+    "slug": "essay-lab-megacity",
+    "title": "Essay Lab: Megacity Growth (Mumbai)",
+    "href": "/geography/games/essay-lab-megacity",
+    "level": "IB Geography",
+    "tag": "Live · Unit 1 · 10-mark essay",
+    "desc": "Rebuild a model essay on Mumbai’s megacity growth, colour-code the 6 P’s, grade it /10, then prove why it reaches the top markband."
+  },
+  {
+    "slug": "ib-climate-quest",
+    "title": "Climate Quest: Changing Climate",
+    "href": "/geography/games/ib-climate-quest",
+    "level": "IB Geography",
+    "tag": "Live · Unit 2 revision adventure",
+    "desc": "Twelve levels across Causes, Consequences and Responding — albedo and feedback loops, sea level rise, Bangladesh, risk and vulnerability, adaptation vs mitigation, greenwashing — then beat the IB Examiner with Claim, Evidence, Explain and Judgement."
+  },
+  {
+    "slug": "ib-resource-quest",
+    "title": "Resource Quest: Global Resource Consumption",
+    "href": "/geography/games/ib-resource-quest",
+    "level": "IB Geography",
+    "tag": "New · Unit 3 revision adventure",
+    "desc": "Fourteen levels across all three topics — poverty reduction, ecological footprints, water, food and energy, the nexus, Nepal and Israel, e-waste, the SDGs, Malthus vs Boserup and the circular economy — with checkpoint past paper questions, then beat the IB Examiner."
+  },
+  {
+    "slug": "resource-classification-challenge",
+    "title": "Resource Classification Challenge",
+    "href": "/geography/games/resource-classification-challenge",
+    "level": "IB Geography",
+    "tag": "Live · Unit 3 · Sort",
+    "desc": "Drag and drop 16 real-world resources into Renewable, Non-Renewable, Biotic and Abiotic before the clock runs out."
+  },
+  {
+    "slug": "oil-trends-sort",
+    "title": "Oil Trends Sort",
+    "href": "/geography/games/oil-trends-sort",
+    "level": "IB Geography",
+    "tag": "Live · Unit 3 · Sort",
+    "desc": "Drag 28 statements into four boxes: what increases or decreases the consumption and the production of oil? Clues for every wrong answer, then an “examine” writing task."
+  },
+  {
+    "slug": "energy-minister",
+    "title": "Energy Minister 2025–2050",
+    "href": "/geography/games/energy-minister",
+    "level": "IB Geography",
+    "tag": "Live · Plenary",
+    "desc": "Run the UK, Thailand, India or Kenya's electricity mix for three decades. Balance sustainability, energy security, reliability and cost, survive random events, then write up your pathway."
+  },
+  {
+    "slug": "water-security-decision",
+    "title": "Water Security Decision Game",
+    "href": "/geography/games/water-security-decision",
+    "level": "IB Geography",
+    "tag": "Live · Unit 3 · Apply & evaluate",
+    "desc": "Advise Israel, Singapore, rural Ethiopia, Punjab or Bangkok. Fund only two strategies, survive a drought year, then justify each with a benefit, a limitation and regional fit."
+  },
+  {
+    "slug": "nexus-chain-reaction",
+    "title": "Nexus Chain Reaction",
+    "href": "/geography/games/nexus-chain-reaction",
+    "level": "IB Geography",
+    "tag": "Live · Unit 3 climate change and the nexus",
+    "desc": "Rebuild eight chain reactions link by link — from rising temperatures to pressure on water, energy and food — sort each effect into the nexus, then explain one chain."
+  },
+  {
+    "slug": "nepal-climate-adaptation",
+    "title": "Nepal: Adapting to Climate Change",
+    "href": "/geography/games/nepal-climate-adaptation",
+    "level": "IB Geography",
+    "tag": "Live · Unit 3 Nepal case study",
+    "desc": "Crack the evidence vault on rural Nepal, sort monsoon and dry-season impacts on water, food and energy, then spend a small grant on adaptation projects for a hill village."
+  },
+  {
+    "slug": "essay-lab-diets",
+    "title": "Essay Lab: Changing Diets",
+    "href": "/geography/games/essay-lab-diets",
+    "level": "IB Geography",
+    "tag": "Live · Unit 3 · Paper 2 essay",
+    "desc": "Rebuild a model 10-mark essay like a jigsaw, colour-code its evaluation, definitions, places, processes, possibilities and power, then grade it with the IB markbands."
+  },
+  {
+    "slug": "world-case-study-map",
+    "title": "World Case Study Map",
+    "href": "/geography/games/world-case-study-map",
+    "level": "IB Geography",
+    "tag": "Live · Interactive case-study map",
+    "desc": "Click dots on a world map to open real case studies — Place, Processes, Power and Possibilities for each. Starting with Population density in Egypt and Thailand."
+  },
+  {
+    "slug": "market-shock",
+    "title": "Market Shock",
+    "href": "/geography/games/market-shock",
+    "level": "IGCSE Economics",
+    "tag": "Live · Demand and supply",
+    "desc": "Breaking news hits the markets: decide which curve shifts and which way, then predict what happens to price and quantity. Ten headlines, a faster clock every round, and a shift-or-movement trap to catch you out."
+  },
+  {
+    "slug": "central-bank-challenge",
+    "title": "Central Bank Challenge",
+    "href": "/geography/games/central-bank-challenge",
+    "level": "IGCSE Economics",
+    "tag": "Live · Monetary policy",
+    "desc": "Run the central bank for two years: diagnose each economic shock, set the interest rate, and keep inflation, unemployment and growth on target."
+  },
+  {
+    "slug": "balance-it",
+    "title": "Balance It!",
+    "href": "/geography/games/balance-it",
+    "level": "IB Business Management",
+    "tag": "Live · Final accounts · New",
+    "desc": "Build the statement of financial position in the IB format: place every figure, bin the profit-and-loss imposters, calculate the subtotals and make net assets equal total equity."
+  },
+  {
+    "slug": "qin-tomb",
+    "title": "Tomb of the First Emperor",
+    "href": "/geography/games/qin-tomb",
+    "level": "KS3 History",
+    "tag": "New",
+    "desc": "Escape through seven chambers of Qin Shi Huang's tomb, from the unification of China to the fall of the Qin dynasty. Stepping stones, a balance scale, a burning library and a river of mercury, with every chamber practising consequences."
+  },
+  {
+    "slug": "ewaste-decision",
+    "title": "E-waste Decision Challenge",
+    "href": "/geography/games/ewaste-decision",
+    "level": "IB Geography",
+    "tag": "New · Unit 3",
+    "desc": "Advise a Bangkok school, Accra or Amsterdam: spend 100 action points on up to four e-waste actions using the waste hierarchy, see the results five years on, then pitch your package."
+  },
+  {
+    "slug": "population-policy-lab",
+    "title": "Population Policy Lab: The Gambia and Singapore",
+    "href": "/geography/games/population-policy-lab",
+    "level": "IB Geography",
+    "tag": "New · Unit 1",
+    "desc": "Carrot or stick? Compare The Gambia's anti-natalist policies with Singapore's pro-natalist policies using the DTM, pyramids and real data, rate what has worked, then make your own policy decisions."
+  },
+  {
+    "slug": "diaspora-flow-map",
+    "title": "Diaspora Flow Map",
+    "href": "/geography/games/diaspora-flow-map",
+    "level": "IB Geography",
+    "tag": "New · HL",
+    "desc": "Map the Chinese, Indian or your own diaspora: homeland, host countries and colour-coded flows, then mind maps on preserving and adopting culture and a six-area synthesis."
+  },
+  {
+    "slug": "resistance-files",
+    "title": "Resistance Files",
+    "href": "/geography/games/resistance-files",
+    "level": "IB Geography",
+    "tag": "New · HL",
+    "desc": "Open 11 case files on resistance to globalisation, place them on a reject-or-reform power grid, evaluate the Minutemen, debate local production and finish with a 4P analysis."
+  },
+  {
+    "slug": "freshwater-quest",
+    "title": "Freshwater Quest: Option A Freshwater",
+    "href": "/geography/games/freshwater-quest",
+    "level": "IB Geography",
+    "tag": "New · Option A",
+    "desc": "Sixteen levels across all four Freshwater topics, from drainage basins and hydrographs to the Nile, the Three Gorges Dam and Louisiana's wetlands, with past paper checkpoints and an IB Examiner boss."
+  },
+  {
+    "slug": "sdg-recap",
+    "title": "SDG Recap Quest",
+    "href": "/geography/games/sdg-recap",
+    "level": "IB Geography",
+    "tag": "New · Course introduction",
+    "desc": "Recap the 17 Sustainable Development Goals, why they were introduced, how on track the world is and where, then link them to the Paper 2 core in a synthesis challenge."
+  },
+  {
+    "slug": "leisure-quest",
+    "title": "Leisure Quest: Option E Leisure, Tourism and Sport",
+    "href": "/geography/games/leisure-quest",
+    "level": "IB Geography",
+    "tag": "New · Option E",
+    "desc": "Seventeen levels across all four Leisure, Tourism and Sport topics, from Plog and Butler to Rio 2016 and Rwanda, with past paper checkpoints and an IB Examiner boss."
+  },
+  {
+    "slug": "food-health-quest",
+    "title": "Food and Health Quest: Option F Food and Health",
+    "href": "/geography/games/food-health-quest",
+    "level": "IB Geography",
+    "tag": "New · Option F",
+    "desc": "Nineteen levels across all four Food and Health topics, from the nutrition transition to malaria, Yemen and Ebola, with past paper checkpoints and an IB Examiner boss."
+  },
+  {
+    "slug": "life-around-the-world",
+    "title": "How Does Life Vary?",
+    "href": "/geography/games/life-around-the-world",
+    "level": "KS3 Geography",
+    "tag": "New",
+    "desc": "Sort physical and human factors, place Pakistan, Tanzania and Peru on a world map, then compare the homes, kitchens, phones, play and hopes of three real families."
+  },
+{
+    "slug": "japan-ageing",
+    "title": "Japan: The Ageing Nation",
+    "href": "/geography/games/japan-ageing",
+    "level": "IB Geography",
+    "tag": "New · Unit 1",
+    "desc": "Analyse Japan’s fertility rate and population pyramids, sort the causes and consequences of ageing, evaluate the policies Japan has tried, then decide what you would do in charge."
+  },
+{
+    "slug": "danillion",
+    "title": "Danillion: Climb the Mountain",
+    "href": "/geography/games/danillion",
+    "level": "KS3 Geography",
+    "tag": "New · Daily challenge",
+    "desc": "A reverse-trivia challenge: every prompt has lots of right answers, but the rarer your answer, the higher you climb. Score enough to reach the summit of Everest, with a new Daily challenge every day."
+  },
+{
+    "slug": "danillion-deep",
+    "title": "Danillion: Deep Dive",
+    "href": "/geography/games/danillion-deep",
+    "level": "KS3 Geography",
+    "tag": "New · Daily challenge",
+    "desc": "The same rare-answer challenge as Danillion, but this time you pilot a submersible through the ocean zones to Challenger Deep, at the bottom of the Mariana Trench."
+  },
+{
+    "slug": "travel-the-wright-way-advanced",
+    "title": "Travel the Wright Way: IGCSE and IB",
+    "href": "/geography/games/travel-the-wright-way-advanced",
+    "level": "IGCSE and IB Geography",
+    "tag": "New · 75 destinations",
+    "desc": "The exam-level version: fly from Thailand around the world and tackle climate graph calculations, plate tectonics, ecosystems, development and sustainable management at each destination."
+  },
+{
+    "slug": "travel-the-wright-way",
+    "title": "Travel the Wright Way",
+    "href": "/geography/games/travel-the-wright-way",
+    "level": "KS3 Geography",
+    "tag": "New · 75 destinations",
+    "desc": "Start in Thailand and travel the world. At each destination explore by canoe, camel, longboat and more, then label diagrams, read climate graphs and photos, and answer questions on places, people and culture to earn passport stamps."
+  },
+{
+    "slug": "climate-graph-oslo",
+    "title": "Build a Climate Graph: Oslo",
+    "href": "/geography/games/climate-graph-oslo",
+    "level": "KS3 Geography",
+    "tag": "New · Climate graphs",
+    "desc": "Watch a climate graph for Oslo built step by step: choose the axes and scales, plot the rainfall bars and temperature line, then read the graph."
+  },
+{
+    "slug": "team-quiz",
+    "title": "Team Quiz: Guess the Place",
+    "href": "/geography/games/team-quiz/",
+    "level": "KS3 Geography",
+    "tag": "New · Live team game",
+    "desc": "A live class game on the board: teams join with a QR code and a team name, then race to name the place from a photo and clues."
+  },
+{
+    "slug": "development-detectives",
+    "title": "Development Detectives",
+    "href": "/geography/games/development-detectives",
+    "level": "KS3 Geography",
+    "tag": "New · Lesson game",
+    "desc": "Measure and map development with GDP per capita, life expectancy and HDI, build your own HDI, then judge whether it is the best indicator."
+  }
+];
+  var ROTATION = ["market-shock", "ib-population-quest", "igcse-coastal-quest", "world-map-challenge", "thailand-or-gambia", "igcse-hazard-quest", "tropical-storm-mission", "population-minister", "energy-sort", "place-detective", "consequence-carousel", "micro-hydro-mission", "tropical-storm-links", "haiti-phantom-state", "topic4-exam-survival", "storm-ready-city", "rohingya-or-haiti", "igcse-rural-quest", "tropical-storms-exam-survival", "essay-lab-megacity", "igcse-development-quest", "volcano-fantastic-place", "ib-climate-quest", "igcse-fieldwork-quest", "bangkok-venice-east", "ib-resource-quest", "resource-classification-challenge", "oil-trends-sort", "energy-minister", "water-security-decision", "nexus-chain-reaction", "nepal-climate-adaptation", "essay-lab-diets", "world-case-study-map", "central-bank-challenge", "balance-it", "population-policy-lab", "diaspora-flow-map", "resistance-files", "freshwater-quest", "sdg-recap", "leisure-quest", "food-health-quest", "travel-the-wright-way", "danillion", "life-around-the-world", "japan-ageing", "danillion-deep", "travel-the-wright-way-advanced", "climate-graph-oslo", "team-quiz", "development-detectives"];
+  function weekStart(d) {
+    var t = (d ? d.getTime() : Date.now()) + 7 * 3600000; /* Bangkok, UTC+7 */
+    var x = new Date(t), day = (x.getUTCDay() + 6) % 7; /* Monday = 0 */
+    return new Date(Date.UTC(x.getUTCFullYear(), x.getUTCMonth(), x.getUTCDate() - day)).toISOString().slice(0, 10);
+  }
+  function bySlug(s) { for (var i = 0; i < GAMES.length; i++) if (GAMES[i].slug === s) return GAMES[i]; return null; }
+  function rotation(ws) {
+    var weeks = Math.round((Date.parse(ws + 'T00:00:00Z') - Date.parse('2026-10-26T00:00:00Z')) / 604800000);
+    var n = ROTATION.length, i = ((weeks % n) + n) % n;
+    return bySlug(ROTATION[i]);
+  }
+  function resolve(picks, ws) {
+    ws = ws || weekStart();
+    var p = picks && picks[ws], g = p && bySlug(p.slug);
+    if (g) return { game: g, note: p.note || '', picked: true, week: ws };
+    return { game: rotation(ws), note: '', picked: false, week: ws };
+  }
+  window.SBL_GAMES = GAMES;
+  window.SBLGameOfWeek = { weekStart: weekStart, resolve: resolve, rotation: rotation, bySlug: bySlug };
+})();

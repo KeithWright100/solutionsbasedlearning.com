@@ -1,0 +1,313 @@
+/* SBL — IGCSE Geography "traditional" lesson pages.
+   Sits on top of sbl-learn-theme.css (same shell, sidebar and right
+   rail as the IB pages) and only styles the reading content. */
+
+.lh-stat__label { display: block; }
+.ig-objectives { background: var(--lh-teal-bg); border: 1px solid rgba(20,184,166,0.25); border-radius: 14px; padding: 16px 20px; margin: 18px 0 8px; }
+.ig-objectives h2 { font-family: var(--lh-font-display); font-size: 1rem; color: var(--lh-teal-deep); margin: 0 0 8px; }
+.ig-objectives ul { margin: 0; padding-left: 1.2rem; color: var(--lh-ink); }
+.ig-objectives li { margin: 4px 0; line-height: 1.5; }
+
+.ig-section { background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 16px; padding: 20px 24px; margin: 16px 0; scroll-margin-top: 20px; }
+.ig-section h2 { font-family: var(--lh-font-display); font-size: 1.3rem; color: var(--lh-ink); margin: 0 0 10px; }
+.ig-section p, .ig-section li { color: var(--lh-body); line-height: 1.7; font-size: 0.97rem; }
+.ig-section p { margin: 0 0 10px; }
+.ig-section ul, .ig-section ol { margin: 0 0 10px; padding-left: 1.3rem; }
+.ig-section li { margin: 4px 0; }
+.ig-section b { color: var(--lh-ink); }
+.ig-section h4 { font-family: var(--lh-font-display); margin: 0 0 6px; color: var(--lh-ink); }
+
+.ig-fig { margin: 14px 0; }
+.ig-fig svg { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--lh-border); display: block; }
+.ig-fig figcaption { font-size: 0.84rem; color: var(--lh-muted); margin-top: 6px; line-height: 1.45; }
+
+.ig-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 10px 0; }
+.ig-compare > div { border-radius: 12px; padding: 12px 14px; border: 1px solid var(--lh-border); background: var(--lh-bg); }
+.ig-compare > div:first-child { border-top: 4px solid var(--lh-teal); }
+.ig-compare > div:last-child { border-top: 4px solid #ef4444; }
+
+.ig-table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 0.9rem; }
+.ig-table th { text-align: left; background: var(--lh-bg); color: var(--lh-ink); font-weight: 700; padding: 9px 10px; border-bottom: 2px solid var(--lh-border); }
+.ig-table td { padding: 9px 10px; border-bottom: 1px solid var(--lh-border); color: var(--lh-body); vertical-align: top; line-height: 1.5; }
+.ig-table-wrap { overflow-x: auto; }
+
+.ig-terms { background: var(--lh-gold-bg); border: 1px solid rgba(201,154,46,0.3); border-radius: 16px; padding: 16px 20px; margin: 16px 0; }
+.ig-terms h2 { font-family: var(--lh-font-display); font-size: 1.05rem; color: #8a6514; margin: 0 0 8px; }
+.ig-terms dl { margin: 0; display: grid; grid-template-columns: minmax(130px, max-content) 1fr; gap: 6px 14px; }
+.ig-terms dt { font-weight: 700; color: var(--lh-ink); }
+.ig-terms dd { margin: 0; color: var(--lh-body); line-height: 1.5; }
+
+.ig-case { background: var(--lh-blue-bg); border: 1px solid rgba(59,130,246,0.25); border-left: 5px solid var(--lh-blue); border-radius: 16px; padding: 16px 22px; margin: 16px 0; }
+.ig-case .ig-tag { display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--lh-blue); border-radius: 999px; padding: 3px 10px; margin-bottom: 6px; }
+.ig-case h2 { font-family: var(--lh-font-display); font-size: 1.15rem; margin: 2px 0 8px; color: var(--lh-ink); }
+.ig-case p, .ig-case li { color: var(--lh-body); line-height: 1.65; font-size: 0.95rem; }
+.ig-case ul { padding-left: 1.2rem; margin: 6px 0; }
+
+.ig-exam { background: var(--lh-purple-bg); border: 1px solid rgba(139,92,246,0.25); border-radius: 16px; padding: 16px 22px; margin: 16px 0; }
+.ig-exam .ig-tag { display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--lh-purple); border-radius: 999px; padding: 3px 10px; }
+.ig-exam .ig-q { font-weight: 700; color: var(--lh-ink); font-size: 1.02rem; margin: 10px 0; line-height: 1.5; }
+.ig-exam .ig-marks { color: var(--lh-purple); font-weight: 800; white-space: nowrap; }
+.ig-exam details { background: var(--lh-surface); border-radius: 10px; padding: 10px 14px; border: 1px solid var(--lh-border); }
+.ig-exam summary { cursor: pointer; font-weight: 700; color: var(--lh-purple); }
+.ig-exam details ul { margin: 8px 0 0; padding-left: 1.2rem; }
+.ig-exam details li { color: var(--lh-body); line-height: 1.55; margin: 4px 0; font-size: 0.93rem; }
+.ig-exam textarea { width: 100%; min-height: 120px; margin: 4px 0 10px; border-radius: 10px; border: 1px solid var(--lh-border); padding: 10px 12px; font: inherit; font-size: 0.93rem; line-height: 1.55; resize: vertical; background: #fff; }
+
+.ig-test-h { font-family: var(--lh-font-display); font-size: 1.2rem; color: var(--lh-ink); margin: 26px 0 4px; }
+.ig-test-p { color: var(--lh-body); margin: 0 0 10px; }
+
+.ig-pager { display: flex; justify-content: space-between; gap: 12px; margin: 22px 0 8px; flex-wrap: wrap; }
+.ig-pager a { flex: 1; min-width: 200px; border: 1px solid var(--lh-border); background: var(--lh-surface); border-radius: 14px; padding: 12px 16px; text-decoration: none; color: var(--lh-ink); }
+.ig-pager a:hover { border-color: var(--lh-teal); }
+.ig-pager a small { display: block; color: var(--lh-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.ig-pager a.next { text-align: right; }
+
+.ig-toc { list-style: none; margin: 0; padding: 0; }
+.ig-toc li { margin: 2px 0; }
+.ig-toc a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--lh-body); text-decoration: none; font-size: 0.88rem; line-height: 1.35; }
+.ig-toc a:hover { background: var(--lh-bg); color: var(--lh-ink); }
+
+/* hub + topic pages */
+.ig-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 24px; }
+.ig-card { display: block; background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 16px; padding: 16px 18px; text-decoration: none; color: var(--lh-ink); transition: border-color .2s, transform .2s; }
+a.ig-card:hover { border-color: var(--lh-teal); transform: translateY(-2px); }
+.ig-card .ig-num { font-family: var(--lh-font-mono); font-size: 0.75rem; color: var(--lh-teal-deep); font-weight: 600; }
+.ig-card h3 { font-family: var(--lh-font-display); font-size: 1.08rem; margin: 4px 0 6px; }
+.ig-card p { font-size: 0.88rem; color: var(--lh-body); line-height: 1.5; margin: 0; }
+.ig-card.is-soon { opacity: 0.6; }
+.ig-card .ig-badge { display: inline-block; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; border-radius: 999px; padding: 2px 8px; margin-top: 8px; }
+.ig-badge--live { background: var(--lh-green-bg); color: #15803d; }
+.ig-badge--soon { background: var(--lh-bg); color: var(--lh-muted); }
+.ig-h2 { font-family: var(--lh-font-display); font-size: 1.15rem; color: var(--lh-ink); margin: 22px 0 4px; }
+.ig-sub { color: var(--lh-body); margin: 0 0 6px; font-size: 0.93rem; }
+
+@media (max-width: 720px) {
+  .ig-compare { grid-template-columns: 1fr; }
+  .ig-section { padding: 16px; }
+  .ig-terms dl { grid-template-columns: 1fr; }
+  .ig-terms dd { margin-bottom: 6px; }
+}
+
+/* lesson focus: learning intention, syllabus statement, success criteria */
+.ig-focus { margin: 18px 0 8px; }
+.ig-li { border: 3px solid #ea7317; border-radius: 14px; padding: 12px 18px; text-align: center; background: var(--lh-surface); margin-bottom: 12px; }
+.ig-li h2, .ig-syl h2, .ig-sc h2 { font-family: var(--lh-font-display); font-size: 1.05rem; color: var(--lh-ink); margin: 0 0 4px; }
+.ig-li p { margin: 0; font-weight: 700; color: var(--lh-ink); }
+.ig-focus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ig-syl, .ig-sc { border: 3px solid #16a34a; border-radius: 14px; padding: 12px 16px; background: var(--lh-surface); }
+.ig-syl p { margin: 0 0 8px; color: var(--lh-ink); line-height: 1.5; }
+.ig-syl p + p { font-weight: 600; }
+.ig-sc-sub { margin: 0 0 6px; font-weight: 700; color: var(--lh-ink); }
+.ig-sc-sub span { font-weight: 500; color: var(--lh-muted); font-size: 0.82rem; margin-left: 6px; }
+.ig-sc ul { list-style: none; margin: 0; padding: 0; }
+.ig-sc li { margin: 6px 0; }
+.ig-sc label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; color: var(--lh-ink); line-height: 1.45; font-size: 0.93rem; }
+.ig-sc input { width: 18px; height: 18px; margin-top: 2px; accent-color: #16a34a; flex: none; }
+.ig-sc input:checked + span { color: var(--lh-muted); text-decoration: line-through; text-decoration-color: rgba(22,163,74,0.6); }
+.ig-sc-note { font-size: 0.78rem; color: var(--lh-muted); margin: 8px 0 0; }
+.ig-sc-tag { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #15803d; background: var(--lh-green-bg); border-radius: 999px; padding: 3px 9px; margin-bottom: 6px; }
+.ig-note { width: 100%; min-height: 90px; border-radius: 10px; border: 1px solid var(--lh-border); padding: 10px 12px; font: inherit; font-size: 0.93rem; line-height: 1.5; resize: vertical; margin-top: 4px; }
+.ig-matrix th { background: var(--lh-bg); }
+.ig-matrix td { text-align: center; font-size: 1rem; }
+.ig-checknote { font-size: 0.82rem; color: var(--lh-muted); font-style: italic; }
+@media (max-width: 720px) { .ig-focus-grid { grid-template-columns: 1fr; } }
+
+/* interactive activities (sort / match) */
+.ig-activity, .ig-model { border: 1px solid var(--lh-border); border-radius: 12px; padding: 12px 14px; margin: 12px 0; background: var(--lh-bg); }
+.ig-act-h { font-weight: 800; color: var(--lh-ink); margin: 0 0 6px; }
+.ig-sort, .ig-match { list-style: none; padding: 0; margin: 8px 0; }
+.ig-sort li, .ig-match li { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 10px; padding: 8px 10px; margin: 6px 0; font-size: 0.92rem; }
+.ig-sort li > span:first-child, .ig-match li > span { flex: 1 1 260px; }
+.ig-sort-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.ig-sort-btns button, .ig-act-btn { border: 1px solid var(--lh-border); background: var(--lh-surface); border-radius: 999px; padding: 4px 10px; font: inherit; font-size: 0.8rem; cursor: pointer; }
+.ig-act-btn { background: #16a34a; color: #fff; border-color: #16a34a; padding: 6px 14px; font-weight: 700; }
+.ig-sort-btns button.bad { background: #fee2e2; border-color: #ef4444; }
+.ig-sort-btns button.sel { background: #16a34a; color: #fff; border-color: #16a34a; }
+.ig-sort li.ok, .ig-match li.ok { border-color: #16a34a; background: #f0fdf4; }
+.ig-match li.bad { border-color: #ef4444; background: #fef2f2; }
+.ig-match select { font: inherit; font-size: 0.85rem; padding: 4px 6px; border-radius: 8px; border: 1px solid var(--lh-border); }
+.ig-act-score { font-weight: 700; color: #15803d; font-size: 0.88rem; }
+.ig-model p { line-height: 1.6; }
+.ig-note + .ig-note { margin-top: 8px; }
+
+/* past paper questions */
+.ppq-controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end; background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 14px; padding: 14px 16px; margin: 16px 0 6px; }
+.ppq-controls label { display: flex; flex-direction: column; gap: 4px; font-size: 0.78rem; font-weight: 700; color: var(--lh-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.ppq-controls select { font: inherit; font-size: 0.92rem; text-transform: none; letter-spacing: 0; color: var(--lh-ink); padding: 7px 10px; border-radius: 9px; border: 1px solid var(--lh-border); background: #fff; max-width: 100%; }
+.ppq-summary { margin-left: auto; font-size: 0.88rem; color: var(--lh-body); }
+.ppq-group { font-family: var(--lh-font-display); font-size: 1.1rem; color: var(--lh-ink); margin: 26px 0 10px; }
+.ppq-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; background: var(--lh-surface); border: 1px solid var(--lh-border); border-radius: 16px; padding: 18px; margin: 0 0 16px; }
+.ppq-card.has-src { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+.ppq-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.ppq-chip { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--lh-bg); color: var(--lh-body); border: 1px solid var(--lh-border); }
+.ppq-chip--q { background: #1b2029; color: #fff; border-color: #1b2029; }
+.ppq-chip--m { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
+.ppq-chip--done { background: #dcfce7; border-color: #16a34a; color: #166534; }
+.ppq-lesson { display: inline-block; font-size: 0.8rem; font-weight: 600; color: #15803d; text-decoration: none; margin-bottom: 8px; }
+.ppq-lesson:hover { text-decoration: underline; }
+.ppq-intro { font-size: 0.9rem; color: var(--lh-body); background: var(--lh-bg); border-left: 3px solid #94a3b8; padding: 8px 12px; border-radius: 6px; margin: 4px 0 10px; }
+.ppq-text { font-weight: 700; color: var(--lh-ink); line-height: 1.5; margin: 4px 0 12px; }
+.ppq-opts { border: 0; padding: 0; margin: 0 0 12px; display: grid; gap: 8px; }
+.ppq-opts label { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--lh-border); border-radius: 10px; padding: 9px 12px; cursor: pointer; background: #fff; }
+.ppq-opts label b { min-width: 1.1em; }
+.ppq-opts label.is-right { border-color: #16a34a; background: #f0fdf4; }
+.ppq-opts label.is-wrong { border-color: #dc2626; background: #fef2f2; }
+.ppq-answer { width: 100%; box-sizing: border-box; font: inherit; font-size: 0.95rem; line-height: 1.5; padding: 10px 12px; border: 1px solid var(--lh-border); border-radius: 10px; resize: vertical; }
+.ppq-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 10px; }
+.ppq-photo { font: inherit; font-size: 0.82rem; border: 1px dashed var(--lh-border); background: #fff; border-radius: 8px; padding: 6px 11px; cursor: pointer; color: var(--lh-body); }
+.ppq-photo-status { font-size: 0.8rem; color: var(--lh-muted); }
+.ppq-btn { font: inherit; font-weight: 700; font-size: 0.88rem; border: 0; border-radius: 10px; padding: 9px 16px; background: #16a34a; color: #fff; cursor: pointer; }
+.ppq-btn:disabled { opacity: 0.6; cursor: wait; }
+.ppq-btn--ghost { background: #fff; color: #15803d; border: 1px solid #16a34a; margin-top: 10px; }
+.ppq-btn--sm { padding: 6px 12px; font-size: 0.8rem; }
+.ppq-note { font-size: 0.86rem; color: var(--lh-muted); }
+.ppq-err { color: #b91c1c; font-size: 0.88rem; }
+.ppq-result { display: flex; gap: 14px; align-items: flex-start; margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--lh-border); }
+.ppq-score { font-family: var(--lh-font-display); font-size: 1.5rem; font-weight: 700; color: #15803d; white-space: nowrap; }
+.ppq-fb p { margin: 0 0 8px; font-size: 0.9rem; line-height: 1.5; }
+.ppq-ms { margin-top: 12px; border: 1px solid #f59e0b; background: #fffbeb; border-radius: 12px; padding: 12px 14px; }
+.ppq-ms__h { font-weight: 800; color: #92400e; margin: 0 0 6px; }
+.ppq-ms__body { font-size: 0.84rem; line-height: 1.5; max-height: 360px; overflow: auto; color: var(--lh-body); }
+.ppq-self { margin-top: 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 0.88rem; }
+.ppq-src { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; background: #f8fafc; border: 1px solid var(--lh-border); border-radius: 12px; padding: 10px; }
+.ppq-src__h { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--lh-muted); margin: 0 0 8px; }
+.ppq-src figure { margin: 0 0 10px; }
+.ppq-zoom { display: block; padding: 0; border: 1px solid var(--lh-border); border-radius: 8px; background: #fff; cursor: zoom-in; width: 100%; }
+.ppq-zoom img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.ppq-src figcaption { font-size: 0.74rem; color: var(--lh-muted); margin-top: 4px; }
+.ppq-lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(15, 23, 42, 0.85); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.ppq-lightbox img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 8px; }
+.ppq-lightbox__close { position: absolute; top: 12px; right: 16px; font-size: 2rem; line-height: 1; background: #fff; border: 0; border-radius: 999px; width: 44px; height: 44px; cursor: pointer; }
+.ig-ppq-link { display: inline-block; margin-top: 6px; font-weight: 700; color: #15803d; }
+@media (max-width: 980px) { .ppq-card.has-src { grid-template-columns: minmax(0, 1fr); } .ppq-src { position: static; max-height: none; order: -1; } .ppq-controls { position: static; } .ppq-summary { margin-left: 0; } }
+
+/* ============================================================
+   Hub + topic overview pages — richer cards (v2)
+   Applies to the IGCSE learn home pages and topic pages for every
+   subject (Geography, Economics…). Lesson pages are unaffected.
+   ============================================================ */
+.ig-cards { gap: 16px; }
+.ig-card {
+  --acc: var(--lh-teal); --acc-bg: var(--lh-teal-bg); --acc-deep: var(--lh-teal-deep);
+  position: relative; display: flex; flex-direction: column;
+  border: 2px solid rgba(15, 23, 42, 0.18); border-top: 5px solid var(--acc);
+  border-radius: 16px; padding: 16px 18px 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 6px 18px rgba(15, 23, 42, 0.05);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+a.ig-card:hover { border-color: var(--acc); border-top-color: var(--acc); transform: translateY(-3px); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12); }
+a.ig-card:focus-visible { outline: 3px solid var(--acc); outline-offset: 2px; }
+.ig-card .ig-num {
+  align-self: flex-start; background: var(--acc-bg); color: var(--acc-deep);
+  border-radius: 999px; padding: 3px 10px; font-size: 0.7rem; letter-spacing: 0.06em;
+}
+.ig-card h3 { font-size: 1.12rem; margin: 10px 0 6px; }
+.ig-card p { flex: 1; }
+a.ig-card::after {
+  content: 'Open \2192'; align-self: flex-end; margin-top: 12px;
+  font-size: 0.82rem; font-weight: 700; color: var(--acc-deep);
+  transition: transform .2s;
+}
+a.ig-card:hover::after { transform: translateX(4px); }
+.ig-card .ig-badge { align-self: flex-start; }
+a.ig-card .ig-badge--live { display: none; }   /* the coloured border + Open → already say it is available */
+div.ig-card { border-style: dashed; border-top-style: solid; box-shadow: none; background: #fbfcfe; }
+div.ig-card h3 { color: var(--lh-body); }
+
+/* colour by paper on the home pages; practice cards in gold */
+#paper-2 ~ .ig-cards .ig-card { --acc: var(--lh-indigo); --acc-bg: var(--lh-indigo-bg); --acc-deep: #4338CA; }
+.ig-cards .ig-card[href*="revision"],
+.ig-cards .ig-card[href*="past-papers"],
+.ig-cards .ig-card[href$="/igcse/economics"],
+.ig-cards .ig-card[href$="/igcse/geography"] { --acc: var(--lh-gold); --acc-bg: var(--lh-gold-bg); --acc-deep: #8A6514; }
+
+/* section headings */
+.ig-h2 {
+  display: flex; align-items: center; gap: 10px; font-size: 1.2rem;
+  margin: 30px 0 6px; padding-bottom: 8px; border-bottom: 2px solid var(--lh-border);
+}
+.ig-h2::before { content: ''; width: 6px; height: 22px; border-radius: 3px; background: var(--lh-teal); flex: none; }
+#paper-2.ig-h2::before { background: var(--lh-indigo); }
+.ig-sub { margin: 4px 0 8px; }
+
+/* "How to use / About this topic" box under the banner */
+.lh-page-head--banner + .ig-section {
+  border: 2px solid rgba(15, 23, 42, 0.18); border-left: 6px solid var(--lh-teal);
+  background: linear-gradient(90deg, var(--lh-teal-bg), var(--lh-surface) 45%);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+.lh-page-head--banner + .ig-section h2::before { content: '\1F9ED  '; }
+
+/* ---------- hub enhancements (sbl-igcse-hub.js) ---------- */
+.ig-card .ig-icon {
+  position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; border-radius: 12px;
+  display: grid; place-items: center; background: var(--acc-bg); color: var(--acc-deep);
+}
+.ig-card .ig-icon svg { width: 24px; height: 24px; }
+.ig-card:has(.ig-icon) h3, .ig-card:has(.ig-icon) .ig-num { margin-right: 52px; }
+.ig-prog { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ig-prog__track { height: 8px; border-radius: 999px; background: var(--lh-bg); border: 1px solid var(--lh-border); overflow: hidden; }
+.ig-prog__track span { display: block; height: 100%; min-width: 0; background: linear-gradient(90deg, var(--acc, var(--lh-teal)), var(--lh-green)); border-radius: 999px; transition: width .6s ease; }
+.ig-prog__txt { font-size: 0.78rem; font-weight: 600; color: var(--lh-body); }
+.ig-topic-prog { margin-top: 12px; max-width: 520px; }
+.ig-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ig-chip { font-size: 0.7rem; font-weight: 700; border-radius: 999px; padding: 2px 9px; border: 1px solid transparent; }
+.ig-chip--done { background: var(--lh-green-bg); color: #15803d; border-color: #bbf7d0; }
+.ig-chip--part { background: var(--lh-orange-bg); color: #C2410C; border-color: #fed7aa; }
+.ig-chip--quiz { background: var(--lh-blue-bg); color: #1D4ED8; border-color: #bfdbfe; }
+.ig-chip--ppq { background: var(--lh-gold-bg); color: #8A6514; border-color: #f3dfa8; }
+a.ig-card.is-done { background: linear-gradient(180deg, #f3fdf6, var(--lh-surface) 60%); }
+.ig-continue {
+  display: flex; align-items: center; gap: 16px; margin: 16px 0; padding: 16px 20px; text-decoration: none;
+  background: linear-gradient(135deg, #0f766e, #0e7490); color: #fff; border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.25); box-shadow: 0 12px 28px rgba(14, 116, 144, 0.28); transition: transform .2s, box-shadow .2s;
+}
+.ig-continue:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(14, 116, 144, 0.36); }
+.ig-continue__icon { flex: none; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; }
+.ig-continue__icon svg { width: 22px; height: 22px; fill: #fff; stroke: none; }
+.ig-continue__body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ig-continue, .ig-continue:hover, .ig-continue__body small, .ig-continue__body b, .ig-continue__body span { color: #fff; }
+.ig-continue__body small { text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; font-weight: 800; opacity: .85; }
+.ig-continue__body b { font-family: var(--lh-font-display); font-size: 1.08rem; }
+.ig-continue__body span { font-size: .85rem; opacity: .9; }
+.ig-continue__go { flex: none; font-weight: 800; background: #fff; color: #0f766e; border-radius: 999px; padding: 8px 16px; }
+@media (max-width: 640px) { .ig-continue { flex-wrap: wrap; } .ig-continue__go { width: 100%; text-align: center; } }
+
+/* Past paper practice box — teal, so it stands apart from the purple exam-style question */
+.ig-exam:has(.ig-ppq-link) {
+  background: linear-gradient(135deg, #E6FBF7, #F0FDFA); border: 2px solid rgba(20, 184, 166, 0.45);
+  border-left: 6px solid var(--lh-teal);
+}
+.ig-exam:has(.ig-ppq-link) .ig-tag { background: var(--lh-teal-deep); }
+.ig-exam:has(.ig-ppq-link) .ig-tag::before { content: '\1F4DD  '; }
+.ig-exam .ig-ppq-link {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; padding: 9px 16px;
+  background: var(--lh-teal-deep); color: #fff !important; border-radius: 999px; font-weight: 700;
+  text-decoration: none; box-shadow: 0 6px 16px rgba(15, 118, 110, 0.25); transition: transform .2s, box-shadow .2s;
+}
+.ig-exam .ig-ppq-link:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(15, 118, 110, 0.32); }
+
+/* lesson page boxes: stronger borders (matches the hub cards) */
+.ig-section {
+  border: 2px solid rgba(15, 23, 42, 0.16);
+  box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 6px 18px rgba(15,23,42,.05);
+}
+.ig-section:has(> .ig-sc-tag) { border-left: 5px solid var(--lh-green); }
+.ig-exam { border-width: 2px; }
+.ig-terms { border: 2px solid rgba(201,154,46,0.45); box-shadow: 0 6px 18px rgba(15,23,42,.05); }
+
+/* Activity / model boxes: stronger borders to match the section boxes */
+.ig-activity, .ig-model { border: 2px solid rgba(15,23,42,0.16); border-left: 5px solid #f59e0b; box-shadow: 0 4px 14px rgba(15,23,42,0.05); }
+.ig-sort li, .ig-match li { border: 1.5px solid rgba(15,23,42,0.18); }
+.ig-sort li.ok, .ig-match li.ok { border-color: #16a34a; }
+.ig-sort-btns button { border: 1.5px solid rgba(15,23,42,0.25); }
+
+/* Annotated maps and photo panels (added Oct 2026) */
+.ig-map svg{border:2px solid #1E3A55;border-radius:14px;}
+.ig-photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0;}
+.ig-photo{margin:0;border:2px solid #1E3A55;border-radius:14px;overflow:hidden;background:var(--lh-surface,#fff);display:flex;flex-direction:column;}
+.ig-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#e2e8f0;}
+.ig-photo figcaption{padding:10px 12px 12px;font-size:.84rem;line-height:1.45;color:var(--lh-body);}
+.ig-photo small{display:block;margin-top:5px;font-size:.7rem;color:var(--lh-muted);}
+.ig-tag{display:inline-block;font-family:var(--lh-font-mono);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:4px;vertical-align:1px;}
+.ig-tag--dense{background:#fee2e2;color:#991b1b;} .ig-tag--sparse{background:#fef3c7;color:#92400e;} .ig-tag--space{background:#dbeafe;color:#1e40af;}

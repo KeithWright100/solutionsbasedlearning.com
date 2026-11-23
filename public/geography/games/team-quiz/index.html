@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Quiz: Guess the Place — Host — SBL</title>
+<meta name="description" content="Host a live team quiz on the board: teams join with a QR code and a team name, then race to guess the place from a photo and clues.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+:root {
+  /* Game-show stage for the board: deep teal stage, bright answer panels. Photo centre, teams down the right. */
+  --stage: #0b2e33; --panel: #123f45; --panel-2: #185259; --ink: #f4fbfa; --muted: #a9c9c6;
+  --accent: #ffc83d; --good: #3ddc97; --bad: #ff7a6b; --line: #24636a;
+  --display: 'Fredoka', 'Trebuchet MS', sans-serif; --body: 'Nunito Sans', Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--stage); color: var(--ink); font-family: var(--body); }
+[hidden] { display: none !important; }
+a { color: inherit; }
+.top-bar { padding: 14px 16px; background: linear-gradient(135deg, #072226, #0f766e); }
+.top-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.top-bar a { font-size: .88rem; font-weight: 700; color: rgba(255,255,255,.85); text-decoration: none; }
+.top-bar a:hover { color: #fff; text-decoration: underline; }
+.brand { font-weight: 900; } .brand span { color: #a7f3e4; }
+main { max-width: 1400px; margin: 0 auto; padding: 22px 16px 40px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.15; text-wrap: balance; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+.btn { font: 700 1.05rem var(--body); border-radius: 999px; padding: 12px 22px; border: 2px solid var(--accent); background: var(--accent); color: #1d1600; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--muted); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.muted { color: var(--muted); }
+.err { color: var(--bad); font-weight: 700; min-height: 1.4em; }
+
+/* setup */
+.setup { max-width: 760px; margin: 30px auto; display: grid; gap: 18px; }
+.setup h1 { font-size: 2.4rem; }
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.rule { background: var(--panel-2); border-radius: 14px; padding: 14px; }
+.rule b { display: block; font-family: var(--display); font-size: 1.15rem; color: var(--accent); margin-bottom: 4px; }
+select { font: 600 1rem var(--body); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--stage); color: var(--ink); }
+
+/* lobby */
+.lobby { display: grid; grid-template-columns: minmax(280px, 420px) 1fr; gap: 22px; align-items: start; }
+@media (max-width: 860px) { .lobby, .play { grid-template-columns: 1fr !important; } }
+.qrbox { background: #fff; color: #0b2e33; border-radius: 18px; padding: 18px; text-align: center; }
+.qrbox svg { width: 100%; height: auto; max-width: 340px; }
+.code { font-family: var(--display); font-size: 3.2rem; letter-spacing: .12em; color: #0b2e33; }
+.joinurl { font-size: .95rem; word-break: break-all; }
+.teamgrid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.chip { background: var(--panel-2); border-radius: 999px; padding: 10px 16px; font-weight: 800; font-size: 1.1rem; display: inline-flex; gap: 10px; align-items: center; animation: pop .35s ease; }
+.chip button { background: none; border: none; color: var(--muted); font-size: 1rem; cursor: pointer; padding: 0 2px; }
+@keyframes pop { from { transform: scale(.8); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* play */
+.play { display: grid; grid-template-columns: 1fr 330px; gap: 20px; align-items: start; }
+.roundhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.roundhead h2 { font-size: 1.7rem; }
+.cluepills { display: flex; gap: 8px; }
+.cluepills span { padding: 5px 12px; border-radius: 999px; background: var(--panel-2); color: var(--muted); font-weight: 800; font-size: .9rem; }
+.cluepills span.on { background: var(--accent); color: #1d1600; }
+.cluepills span.done { background: #2a6b72; color: var(--ink); }
+.timer { height: 18px; border-radius: 999px; background: var(--panel-2); overflow: hidden; position: relative; margin-bottom: 6px; }
+.timer i { position: absolute; inset: 0 auto 0 0; background: var(--good); border-radius: 999px; }
+.timer i.late { background: var(--accent); }
+.timer i.end { background: var(--bad); }
+.timertext { display: flex; justify-content: space-between; font-weight: 800; font-variant-numeric: tabular-nums; margin-bottom: 12px; }
+.photo { position: relative; border-radius: 18px; overflow: hidden; background: #000; aspect-ratio: 16 / 9; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo .credit { position: absolute; right: 8px; bottom: 6px; font-size: .75rem; background: rgba(0,0,0,.55); padding: 2px 8px; border-radius: 6px; }
+.ready { position: absolute; inset: 0; display: grid; place-items: center; background: #0b2e33; text-align: center; }
+.ready b { display: block; font-family: var(--display); font-size: 7rem; color: var(--accent); line-height: 1; }
+.ready span { font-size: 1.6rem; font-weight: 800; }
+.worth { display: inline-block; background: var(--accent); color: #1d1600; border-radius: 999px; padding: 4px 14px; font-family: var(--display); font-size: 1.5rem; }
+.clues { display: grid; gap: 10px; margin-top: 14px; }
+.clue { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; font-size: 1.35rem; font-weight: 700; animation: pop .4s ease; }
+.clue small { display: block; font-size: .8rem; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; }
+.answer { margin-top: 14px; background: var(--accent); color: #1d1600; border-radius: 16px; padding: 16px 20px; font-family: var(--display); font-size: 2.2rem; text-align: center; animation: pop .4s ease; }
+.board h3 { font-size: 1.3rem; margin-bottom: 10px; }
+.board ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.board li { display: grid; grid-template-columns: 30px 1fr auto auto; gap: 8px; align-items: center; background: var(--panel-2); border-radius: 12px; padding: 9px 12px; font-weight: 800; }
+.board li .pos { color: var(--muted); }
+.board li .sc { font-variant-numeric: tabular-nums; font-size: 1.15rem; }
+.board li .st { font-size: .85rem; padding: 2px 8px; border-radius: 999px; }
+.st.ok { background: var(--good); color: #062b1c; }
+.st.no { background: var(--bad); color: #2d0703; }
+.st.wait { background: transparent; color: var(--muted); }
+.controls { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* finish */
+.podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: end; max-width: 820px; margin: 20px auto; }
+.podium div { background: var(--panel); border-radius: 16px 16px 0 0; text-align: center; padding: 16px 10px; }
+.podium .p1 { min-height: 220px; background: var(--accent); color: #1d1600; }
+.podium .p2 { min-height: 170px; } .podium .p3 { min-height: 130px; }
+.podium b { display: block; font-family: var(--display); font-size: 1.5rem; }
+.podium span { font-size: 2.2rem; font-weight: 900; }
+@media (prefers-reduced-motion: reduce) { .chip, .clue, .answer { animation: none; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Team Quiz</span></div>
+</div></div>
+<main>
+  <!-- Not a teacher -->
+  <section id="vNoHost" class="setup" hidden>
+    <h1>Team Quiz: Guess the Place</h1>
+    <div class="card">
+      <p><b>Teachers:</b> log in with your teacher account to host a game on the board.</p>
+      <p class="row"><a class="btn" href="/login/?redirect=/geography/games/team-quiz/" style="text-decoration:none">Log in to host</a></p>
+      <p class="muted" style="margin-top:16px">Joining as a team? Scan the QR code on the board, or go to <a href="/geography/games/team-quiz/join/">the join page</a> and type the game code.</p>
+    </div>
+  </section>
+
+  <!-- Setup -->
+  <section id="vSetup" class="setup" hidden>
+    <h1>Team Quiz: Guess the Place</h1>
+    <p class="muted" style="font-size:1.1rem;margin:0">Teams of three join on one phone or laptop each, choose a team name, then race to name the place from a photo and clues.</p>
+    <div class="rules">
+      <div class="rule"><b>The photo</b>A 4-second countdown while the photo loads, then 20 seconds. Right first time: 10 points plus 1 for every second left of the first 10.</div>
+      <div class="rule"><b>Clue 2 and clue 3</b>Clue 2 is worth 5 points to every team still guessing. Clue 3 only appears if nobody has it yet, and is worth 3.</div>
+      <div class="rule"><b>Second chances</b>Wrong on the photo? A right answer still scores 5. Three tries a round.</div>
+      <div class="rule"><b>No student data</b>Teams only give a team name. Games are deleted after 3 hours.</div>
+    </div>
+    <div class="card row">
+      <label for="setPick" style="font-weight:800">Question set</label>
+      <select id="setPick"><option value="guess-the-place-y7">Guess the Place: Year 7 (easier, 10 rounds)</option><option value="guess-the-place">Guess the Place: Year 8–9 (harder, 10 rounds)</option></select>
+      <button class="btn" id="createBtn" type="button">Create game</button>
+    </div>
+    <p class="err" id="setupErr" role="alert"></p>
+  </section>
+
+  <!-- Lobby -->
+  <section id="vLobby" class="lobby" hidden>
+    <div class="qrbox">
+      <div id="qr"></div>
+      <div class="muted" style="color:#335;font-weight:700">Scan to join, or go to</div>
+      <div class="joinurl" id="joinUrl"></div>
+      <div style="margin-top:8px;font-weight:800;color:#335">Game code</div>
+      <div class="code" id="codeBig"></div>
+    </div>
+    <div class="card">
+      <h2 style="font-size:2rem">Teams, join now!</h2>
+      <p class="muted">One phone or laptop per team. Choose a team name you’re happy to see on the board.</p>
+      <div class="teamgrid" id="lobbyTeams"></div>
+      <p class="muted" id="lobbyCount" style="margin-top:14px"></p>
+      <div class="controls"><button class="btn" id="startBtn" type="button" disabled>Start round 1</button><button class="btn ghost" id="endBtn1" type="button">End game</button></div>
+      <p class="err" id="lobbyErr" role="alert"></p>
+    </div>
+  </section>
+
+  <!-- Play -->
+  <section id="vPlay" class="play" hidden>
+    <div>
+      <div class="roundhead"><h2 id="roundTitle"></h2><div class="cluepills" id="cluePills"><span>Photo</span><span>Clue 2</span><span>Clue 3</span></div></div>
+      <div id="timerWrap"><div class="timer"><i id="timerBar"></i></div><div class="timertext"><span id="timerLabel"></span><span><span class="worth" id="worth"></span> <span id="timerSecs"></span></span></div></div>
+      <div class="photo"><img id="photo" alt="Photo clue for this round"><span class="credit" id="credit"></span><div class="ready" id="ready" hidden><div><span>Get ready…</span><b id="readyNum">4</b><span id="readyTxt">Photo coming up</span></div></div></div>
+      <div class="clues" id="clues"></div>
+      <div class="answer" id="answer" hidden></div>
+      <div class="controls">
+        <button class="btn" id="nextClueBtn" type="button">Next clue</button>
+        <button class="btn ghost" id="revealBtn" type="button">Reveal answer</button>
+        <button class="btn" id="nextRoundBtn" type="button" hidden>Next round</button>
+        <button class="btn ghost" id="endBtn2" type="button">End game</button>
+      </div>
+      <p class="err" id="playErr" role="alert"></p>
+    </div>
+    <aside class="card board"><h3 id="boardTitle">Leaderboard</h3><ol id="board"></ol><p class="muted" style="margin:12px 0 0;font-size:.9rem" id="joinAgain"></p></aside>
+  </section>
+
+  <!-- Finished -->
+  <section id="vDone" hidden>
+    <h1 style="text-align:center;font-size:2.6rem;margin-top:10px">Final scores</h1>
+    <div class="podium" id="podium"></div>
+    <div class="card board" style="max-width:820px;margin:0 auto"><ol id="finalBoard"></ol></div>
+    <p class="row" style="justify-content:center;margin-top:20px"><button class="btn" id="newGameBtn" type="button">Host another game</button></p>
+  </section>
+</main>
+
+<script src="/js/sbl-qr.js"></script>
+<script>
+(function () {
+  var API = '/api/session?teamGame=1';
+  var $ = function (id) { return document.getElementById(id); };
+  var views = ['vNoHost', 'vSetup', 'vLobby', 'vPlay', 'vDone'];
+  function show(v) { views.forEach(function (id) { $(id).hidden = id !== v; }); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var game = null; // { code, hostKey }
+  try { game = JSON.parse(sessionStorage.getItem('sbl-team-quiz-host') || 'null'); } catch (e) {}
+  function save() { try { sessionStorage.setItem('sbl-team-quiz-host', JSON.stringify(game)); } catch (e) {} }
+
+  function post(body) {
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Something went wrong.'); return d; }); });
+  }
+  function hostOp(op, extra) { return post(Object.assign({ action: 'host', code: game.code, hostKey: game.hostKey, op: op }, extra || {})).then(poll).catch(function (e) { $('playErr').textContent = e.message; $('lobbyErr').textContent = e.message; }); }
+
+  // ---- start: is this a teacher? ----
+  fetch('/api/session').then(function (r) { return r.json(); }).then(function (s) {
+    var ok = s.loggedIn && s.user && (s.user.role === 'teacher' || s.user.role === 'admin');
+    if (!ok) { show('vNoHost'); return; }
+    if (game && game.code) { startPolling(); } else show('vSetup');
+  }).catch(function () { show('vNoHost'); });
+
+  $('createBtn').addEventListener('click', function () {
+    $('createBtn').disabled = true; $('setupErr').textContent = '';
+    post({ action: 'create', set: $('setPick').value }).then(function (d) { game = { code: d.code, hostKey: d.hostKey }; save(); startPolling(); })
+      .catch(function (e) { $('setupErr').textContent = e.message; }).finally(function () { $('createBtn').disabled = false; });
+  });
+  $('startBtn').addEventListener('click', function () { hostOp('start'); });
+  $('nextClueBtn').addEventListener('click', function () { hostOp('next-clue'); });
+  $('revealBtn').addEventListener('click', function () { hostOp('reveal'); });
+  $('nextRoundBtn').addEventListener('click', function () { hostOp('start'); });
+  // End game needs a second click within 3 seconds, so a stray click can't end it.
+  function endGame(e) {
+    var b = e.currentTarget;
+    if (b.getAttribute('data-armed')) { hostOp('finish'); return; }
+    b.setAttribute('data-armed', '1'); var t = b.textContent; b.textContent = 'Click again to end';
+    setTimeout(function () { b.removeAttribute('data-armed'); b.textContent = t; }, 3000);
+  }
+  $('endBtn1').addEventListener('click', endGame); $('endBtn2').addEventListener('click', endGame);
+  $('newGameBtn').addEventListener('click', function () { game = null; try { sessionStorage.removeItem('sbl-team-quiz-host'); } catch (e) {} stopPolling(); show('vSetup'); });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-remove]'); if (!b) return;
+    hostOp('remove-team', { teamId: b.getAttribute('data-remove') });
+  });
+
+  // ---- polling and drawing ----
+  var timerId = null, state = null, stageEndsAt = 0, preloaded = '';
+  function startPolling() { stopPolling(); poll(); timerId = setInterval(poll, 1000); requestAnimationFrame(tick); }
+  function stopPolling() { clearInterval(timerId); timerId = null; }
+  function poll() {
+    if (!game) return;
+    return fetch('/api/session?teamGame=state&code=' + encodeURIComponent(game.code) + '&hostKey=' + encodeURIComponent(game.hostKey), { cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (x) {
+        if (!x.ok) { stopPolling(); game = null; try { sessionStorage.removeItem('sbl-team-quiz-host'); } catch (e) {} show('vSetup'); $('setupErr').textContent = x.d.error || 'That game has ended.'; return; }
+        state = x.d; stageEndsAt = Date.now() + (state.stageLeft || 0) * 1000;
+        if (state.nextPhoto && preloaded !== state.nextPhoto) { preloaded = state.nextPhoto; (new Image()).src = state.nextPhoto; }
+        draw();
+      }).catch(function () {});
+  }
+  function draw() {
+    var s = state;
+    if (s.status === 'lobby') {
+      show('vLobby');
+      var url = location.origin + '/geography/games/team-quiz/join/?code=' + s.code;
+      if ($('codeBig').textContent !== s.code) { $('codeBig').textContent = s.code; $('joinUrl').textContent = url.replace(/^https?:\/\//, ''); $('qr').innerHTML = window.SBLQR ? window.SBLQR.svg(url, 340) : ''; }
+      $('lobbyTeams').innerHTML = s.teams.map(function (t) { return '<span class="chip">' + esc(t.name) + '<button type="button" data-remove="' + esc(t.id) + '" aria-label="Remove ' + esc(t.name) + '">✕</button></span>'; }).join('');
+      $('lobbyCount').textContent = s.teams.length ? s.teams.length + (s.teams.length === 1 ? ' team has' : ' teams have') + ' joined.' : 'Waiting for the first team…';
+      $('startBtn').disabled = !s.teams.length;
+      return;
+    }
+    if (s.status === 'finished') { show('vDone'); drawFinal(); stopPolling(); return; }
+    show('vPlay');
+    var c = s.clue || {};
+    $('roundTitle').textContent = 'Round ' + s.round + ' of ' + s.totalRounds;
+    var key = s.round + ':' + s.status;
+    if ($('photo').getAttribute('data-src') !== (c.photo && c.photo.url)) { $('photo').src = c.photo.url; $('photo').setAttribute('data-src', c.photo.url); $('credit').textContent = 'Photo: ' + c.photo.credit; }
+    var cl = (c.clues || []).map(function (t, i) { return '<div class="clue"><small>Clue ' + (i + 2) + '</small>' + esc(t) + '</div>'; }).join('');
+    if ($('clues').getAttribute('data-n') !== String((c.clues || []).length) + key) { $('clues').innerHTML = cl; $('clues').setAttribute('data-n', String((c.clues || []).length) + key); }
+    var revealed = s.status === 'reveal';
+    $('answer').hidden = !revealed; if (revealed) $('answer').textContent = c.answer;
+    $('ready').hidden = !s.ready;
+    Array.prototype.forEach.call($('cluePills').children, function (p, i) { p.hidden = i === 2 && s.lastStage === 2 && !revealed; p.className = revealed ? 'done' : (i + 1 === s.stage ? 'on' : (i + 1 < s.stage ? 'done' : '')); });
+    $('timerWrap').hidden = s.status !== 'round';
+    $('nextClueBtn').hidden = s.status !== 'round' || s.ready;
+    $('nextClueBtn').textContent = s.stage >= s.lastStage ? 'End round' : 'Next clue';
+    $('revealBtn').hidden = !(s.status === 'round' || s.status === 'closed');
+    $('revealBtn').className = s.status === 'closed' ? 'btn' : 'btn ghost';
+    $('revealBtn').textContent = s.status === 'closed' ? 'Time’s up: reveal the answer' : 'Reveal answer';
+    $('nextRoundBtn').hidden = !revealed;
+    $('nextRoundBtn').textContent = s.round >= s.totalRounds ? 'Final scores' : 'Next round';
+    var answered = s.teams.filter(function (t) { return t.thisRound && t.thisRound.correct; }).length;
+    $('boardTitle').textContent = revealed ? 'Leaderboard' : 'Leaderboard · ' + answered + ' of ' + s.teams.length + ' correct';
+    $('board').innerHTML = s.teams.map(function (t, i) {
+      var r = t.thisRound || {}, st;
+      if (r.correct) st = '<span class="st ok">+' + r.points + '</span>';
+      else if (r.attempts) st = '<span class="st no">' + (revealed ? '0' : '✕ ' + r.attempts) + '</span>';
+      else st = '<span class="st wait">' + (revealed ? '0' : '…') + '</span>';
+      return '<li><span class="pos">' + (i + 1) + '</span><span>' + esc(t.name) + '</span>' + st + '<span class="sc">' + t.score + '</span></li>';
+    }).join('');
+    $('joinAgain').textContent = 'Join code: ' + s.code;
+  }
+  function tick() {
+    if (state && state.status === 'round') {
+      var left = Math.max(0, (stageEndsAt - Date.now()) / 1000), bar = $('timerBar');
+      if (state.ready) {
+        $('readyNum').textContent = Math.max(1, Math.ceil(left));
+        bar.style.width = '100%'; bar.className = ''; $('timerLabel').textContent = 'Get ready'; $('worth').textContent = ''; $('timerSecs').textContent = '';
+      } else {
+        var used = state.stageSecs - left, bonus = Math.max(0, state.bonusSecs - Math.ceil(used));
+        bar.style.width = (left / state.stageSecs * 100) + '%';
+        bar.className = left > 3 ? (state.stage === 1 && bonus > 0 ? '' : 'late') : 'end';
+        $('timerSecs').textContent = Math.ceil(left) + 's';
+        if (state.stage === 1) { $('worth').textContent = (10 + bonus) + ' pts'; $('timerLabel').textContent = bonus > 0 ? 'Photo: points drop every second' : 'Photo: 10 points'; }
+        else { $('worth').textContent = state.stagePoints + ' pts'; $('timerLabel').textContent = state.stage < state.lastStage ? 'Clue ' + state.stage + ': next clue soon' : 'Clue ' + state.stage + ': last chance'; }
+      }
+      if (left <= 0.05 && state._polledAt !== state.stage + ':' + state.ready) { state._polledAt = state.stage + ':' + state.ready; poll(); }
+    }
+    if (timerId) requestAnimationFrame(tick);
+  }
+  function drawFinal() {
+    var t = state.scores || [];
+    var order = [1, 0, 2];
+    $('podium').innerHTML = order.map(function (i) { var x = t[i]; return x ? '<div class="p' + (i + 1) + '"><b>' + esc(x.name) + '</b><span>' + x.score + '</span><div>' + ['1st', '2nd', '3rd'][i] + '</div></div>' : '<div style="visibility:hidden"></div>'; }).join('');
+    $('finalBoard').innerHTML = t.map(function (x, i) { return '<li><span class="pos">' + (i + 1) + '</span><span>' + esc(x.name) + '</span><span></span><span class="sc">' + x.score + '</span></li>'; }).join('');
+  }
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

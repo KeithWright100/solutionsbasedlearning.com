@@ -1,0 +1,1718 @@
+/* ============================================================
+   SBL Tutor — reusable engine (shared across Geography, Business
+   and Economics, and any future subject that reuses this file)
+   Reads lesson config from window.SBL_LESSONS[lessonId] and the
+   fixed syllabus sequence in window.SBL_LESSON_ORDER (populated by
+   lesson-config files such as sbl-population-lessons.js and
+   sbl-climate-lessons.js, loaded before this file) and renders one
+   shared tutor interface with six entry points:
+
+     openTeachBot(lessonId)        — full Teach Me Live panel
+     openTestMyKnowledge(lessonId) — jumps straight into the
+                                      10-question lesson quiz
+     openSpacedRetrieval(lessonId) — 5-question cumulative quiz
+                                      drawn only from lessons that
+                                      come BEFORE this one in
+                                      SBL_LESSON_ORDER (never from
+                                      future/untaught lessons)
+     openChallengeMode(lessonId)   — guided independent-thinking mode
+                                      using the separate, dedicated
+                                      "SBL Challenge Tutor" agent.
+     openIBQuestions(lessonId)     — authentic IB-style exam question
+                                      practice. Submits the student's
+                                      answer to the /api/mark-ppq
+                                      serverless function, which talks
+                                      to the SBL PPQ Marker Copilot
+                                      Studio agent via Direct Line
+                                      (secret held server-side).
+                                      Feedback is rendered directly in
+                                      this panel — no chat window, no
+                                      copy/paste required.
+     openReadinessCheck(lessonId)  — 3-5 oral-style discussion
+                                      questions for pairs to work
+                                      through at the start of class.
+                                      No AI/chat involved — reads
+                                      lesson.readinessQuestions.
+     openAskTutor(subjectLabel)    — general "Ask AI Tutor" sidebar
+                                      panel, present on every lesson
+                                      page. Opens the same Teach Me
+                                      Live bot with no lesson attached
+                                      — a plain chat window, no
+                                      syllabus focus/checklist/quiz.
+                                      Optional subjectLabel (e.g.
+                                      "IGCSE Geography") retitles the
+                                      modal as "<subjectLabel> Research"
+                                      for subject research pages.
+     openSocraticChallenge(label)  — general Socratic Challenge Tutor
+                                      with no lesson attached — a
+                                      student pastes a teacher-set
+                                      challenge question straight into
+                                      the chat, no fixed question list
+                                      required. Optional label (e.g.
+                                      "IGCSE Geography") retitles the
+                                      modal as "<label> Socratic
+                                      Challenge".
+
+   Teach Me Live and Challenge Mode still use embedded Copilot
+   Studio webchat iframes. IB-Style Questions uses the server-side
+   /api/mark-ppq route instead — no Claude, Anthropic, OpenAI or
+   other AI API is called directly from this file.
+   Speak/listen support lives in /js/sbl-voice.js (loaded below).
+   ============================================================ */
+(function () {
+
+  var SBL_TEACH_BOT_IFRAME_SRC =
+    'https://copilotstudio.microsoft.com/environments/Default-9732db31-8695-4030-ae01-e3217b1daaec/bots/crf78_sblgeographytutor_cUR45B/webchat?__version__=2&enableFileAttachment=false&cliAgent=true';
+
+  var SBL_CHALLENGE_TUTOR_IFRAME_SRC =
+    'https://copilotstudio.microsoft.com/environments/Default-9732db31-8695-4030-ae01-e3217b1daaec/bots/crf78_sblchallengetutor_6y7BmB/webchat?__version__=2&enableFileAttachment=false&cliAgent=true';
+
+  /* Voice chat (speak + listen) for the Copilot Studio tutors.
+     Tokens come from /api/session?tutorToken=..., which uses the Direct
+     Line secrets stored in Vercel (DIRECTLINE_SECRET_TUTOR and
+     DIRECTLINE_SECRET_CHALLENGE). Until a secret is added, that route
+     returns 503 and the tutor quietly uses the normal iframe above. If the
+     voice chat ever fails to load, it falls back to the iframe too.
+     Set a value to '' to switch voice chat off for that tutor. */
+  var SBL_TEACH_BOT_TOKEN_URL = '/api/session?tutorToken=tutor';
+  var SBL_CHALLENGE_TUTOR_TOKEN_URL = '/api/session?tutorToken=challenge';
+
+  // Load the shared speak/listen helper (mic on answer boxes, read-aloud).
+  (function () {
+    if (window.SBLVoice || document.querySelector('script[src="/js/sbl-voice.js"]')) return;
+    var s = document.createElement('script'); s.src = '/js/sbl-voice.js'; s.defer = true;
+    document.head.appendChild(s);
+  })();
+
+  // Puts a tutor chat into `wrap`: voice-enabled Web Chat when a token
+  // endpoint is set, otherwise (or on any failure) the standard iframe.
+  function mountTutorChat(wrap, iframeSrc, title) {
+    var tokenUrl = iframeSrc === SBL_CHALLENGE_TUTOR_IFRAME_SRC ? SBL_CHALLENGE_TUTOR_TOKEN_URL : SBL_TEACH_BOT_TOKEN_URL;
+    function useIframe() {
+      wrap.innerHTML = '';
+      var iframe = document.createElement('iframe');
+      iframe.title = title;
+      iframe.src = iframeSrc;
+      iframe.setAttribute('allow', 'microphone');
+      wrap.appendChild(iframe);
+    }
+    if (tokenUrl && window.SBLVoice && window.SBLVoice.renderCopilotChat) {
+      window.SBLVoice.renderCopilotChat(wrap, tokenUrl, useIframe);
+    } else {
+      useIframe();
+    }
+  }
+
+  var overlay, modal, bodyMount, titleEl, subtitleEl, progressEl, closeBtn, expandBtn, announceEl;
+  var lastFocusedElement = null;
+  var currentLesson = null;
+  var isExpanded = false;
+  var iframeLoaded = false;
+  var quizState = null;
+  var ibState = null;
+  var readinessState = null;
+
+  /* ---------------- Utilities ---------------- */
+
+  function announce(msg) {
+    if (!announceEl) return;
+    announceEl.textContent = '';
+    window.setTimeout(function () { announceEl.textContent = msg; }, 30);
+  }
+
+  function escapeHtml(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function checklistKey(lessonId) { return 'sbl-checklist-' + lessonId; }
+
+  function getChecklistState(lessonId, total) {
+    try {
+      var raw = window.localStorage.getItem(checklistKey(lessonId));
+      if (!raw) return new Array(total).fill(false);
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return new Array(total).fill(false);
+      while (parsed.length < total) parsed.push(false);
+      return parsed;
+    } catch (e) {
+      return new Array(total).fill(false);
+    }
+  }
+
+  // Writes to this device's localStorage only — used when a value
+  // just arrived FROM the server, so there's no need to immediately
+  // send it straight back.
+  function saveChecklistStateLocalOnly(lessonId, state) {
+    try {
+      window.localStorage.setItem(checklistKey(lessonId), JSON.stringify(state));
+    } catch (e) { /* localStorage unavailable — progress simply won't persist */ }
+  }
+
+  function saveChecklistState(lessonId, state) {
+    saveChecklistStateLocalOnly(lessonId, state);
+    syncProgress(lessonId, { checklist: state });
+  }
+
+  function challengeNotesKey(lessonId) { return 'sbl-challenge-notes-' + lessonId; }
+
+  function getChallengeNotes(lessonId) {
+    try {
+      return window.localStorage.getItem(challengeNotesKey(lessonId)) || '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function saveChallengeNotes(lessonId, text) {
+    try {
+      window.localStorage.setItem(challengeNotesKey(lessonId), text);
+    } catch (e) { /* localStorage unavailable — notes simply won't persist */ }
+  }
+
+  /* ---------------- Server progress sync ----------------
+     Lesson pages are only reachable while logged in (middleware.js
+     gates them), so any visitor here has an account. This mirrors
+     a few key events — checklist ticks, quiz completions, readiness
+     check completion — up to the student's account via /api/progress,
+     so it carries across devices instead of living only in this
+     browser's localStorage. Best-effort and non-blocking: if the
+     request fails (offline, hiccup), localStorage still has the
+     student's progress and nothing in the UI breaks. */
+
+  function syncProgress(lessonId, patch) {
+    try {
+      fetch('/api/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId: lessonId, patch: patch })
+      }).then(function (r) {
+        // Let the Lesson Progress panel refresh itself once the save lands.
+        if (r && r.ok) { try { window.dispatchEvent(new CustomEvent('sbl-progress-saved', { detail: { lessonId: lessonId } })); } catch (e) {} }
+      }).catch(function () { /* offline/failed — local copy still saved */ });
+    } catch (e) { /* ignore */ }
+  }
+
+  function loadServerProgress(lessonId, callback) {
+    fetch('/api/progress?lessonId=' + encodeURIComponent(lessonId))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (result) { callback(result && result.data ? result.data : null); })
+      .catch(function () { callback(null); });
+  }
+
+  // Distinct top-level key per quiz "kind" (Test My Knowledge vs
+  // Spaced Retrieval currently share this engine but have different
+  // contextLabel text) so each one's saved result lives in its own
+  // slot and completing one never overwrites another's saved score.
+  function quizProgressKey(contextLabel) {
+    return 'quiz_' + contextLabel.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  }
+
+  function copyText(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        onDone(true);
+      }, function () {
+        fallbackCopy(text, onDone);
+      });
+    } else {
+      fallbackCopy(text, onDone);
+    }
+  }
+
+  function fallbackCopy(text, onDone) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      onDone(ok);
+    } catch (e) {
+      onDone(false);
+    }
+  }
+
+  function buildPrompt(lesson, requestLabel, requestText) {
+    var lines = [];
+    lines.push('My current lesson is: ' + lesson.title + '.');
+    lines.push('Syllabus focus: ' + lesson.syllabusFocus);
+    lines.push('Request: ' + requestText);
+    lines.push('Explain it simply first, then add exam-level detail appropriate to this syllabus.');
+    lines.push('Give a clear example, identify one common misconception if relevant, and finish with one short check-for-understanding question.');
+    lines.push('Suggest a simple labelled diagram if useful.');
+    lines.push('Do not write a full essay or an assessed answer for me.');
+    return lines.join(' ');
+  }
+
+  function buildReviewPrompt(lesson, weakTags) {
+    var topics = weakTags.length ? weakTags.join(', ') : 'the topics I got wrong';
+    return 'My current lesson is: ' + lesson.title +
+      '. I just completed a quiz and want to review: ' + topics +
+      '. Explain each of these simply first, then add exam-level detail appropriate to this syllabus, with one example each. Finish with one short check-for-understanding question per topic. Do not write a full essay or an assessed answer for me.';
+  }
+
+  function buildChallengeOpener(challenge) {
+    if (challenge.openerPrompt) {
+      return challenge.openerPrompt;
+    }
+    if (challenge.checklistItems && challenge.checklistItems.length) {
+      return 'Please test me with simple, direct questions drawn one at a time from this checklist for ' +
+        (challenge.unitTitle || 'this unit') + ':\n' +
+        challenge.checklistItems.map(function (item) { return '- ' + item; }).join('\n') +
+        '\nAsk me about a different checklist item each time, in a random order, phrased as a direct question (for example: "Explain the pro-natal population policy in The Gambia."). Wait for my answer before asking the next question. If I get one clearly wrong, briefly correct me before moving on. Do not give me the answer before I attempt it.';
+    }
+    if (challenge.levels && challenge.levels.length) {
+      var lines = [
+        'I am working on this challenge question: "' + challenge.question + '".',
+        'Please help me think it through using the thinking questions below, moving through them one level at a time, starting at Level 1.',
+        'Ask me only one question at a time and wait for my answer before asking the next. Only move on to the next level once I have answered every question in the current level. Within a level you can ask the questions in any order.',
+        'Do not give me answers, structures, plans, or model responses — if I am stuck, help me reason my way there with a smaller follow-up prompt instead.'
+      ];
+      challenge.levels.forEach(function (lvl) {
+        lines.push((lvl.label || 'Level') + ':');
+        (lvl.questions || []).forEach(function (q) { lines.push('- ' + q); });
+      });
+      return lines.join('\n');
+    }
+    return 'I am working on this challenge question: "' + challenge.question + '". Please help me think it through by asking me one question at a time. Do not give me answers, structures, plans, or model responses.';
+  }
+
+  function masteryBand(pct) {
+    if (pct >= 90) return 'Mastery';
+    if (pct >= 70) return 'Secure';
+    if (pct >= 50) return 'Developing';
+    return 'Beginning';
+  }
+
+  /* ---------------- Spaced retrieval bank ---------------- */
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  /* Returns a NEW question object with its options (and correct-answer
+     letter) shuffled into a random order. Never mutates the source
+     question, since the same authored quiz data is reused across every
+     student and every attempt — this keeps the underlying lesson data
+     untouched while making sure the correct answer doesn't keep landing
+     on the same letter (e.g. "B") question after question. */
+  function shuffleOptions(q) {
+    var order = shuffle(q.options.map(function (_, i) { return i; }));
+    var copy = {};
+    for (var key in q) {
+      if (Object.prototype.hasOwnProperty.call(q, key)) copy[key] = q[key];
+    }
+    copy.options = order.map(function (i) { return q.options[i]; });
+    copy.correct = order.indexOf(q.correct);
+    return copy;
+  }
+function buildRetrievalBank(lessonId) {
+  var candidateOrders = [
+    window.SBL_LESSON_ORDER,
+    window.SBL_PPN_LESSON_ORDER,
+    window.SBL_FH_LESSON_ORDER,
+    window.SBL_HD_LESSON_ORDER,
+    window.SBL_FW_LESSON_ORDER,
+    window.SBL_LT_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_DEV_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_HAZ_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_CFW_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_RUR_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_ECO_LESSON_ORDER,
+    window.SBL_IGCSE_GEO_RFW_LESSON_ORDER
+  ].concat(window.SBL_IGCSE_ECON_LESSON_ORDERS || [], window.SBL_IGCSE_BUS_LESSON_ORDERS || [], window.SBL_IGCSE_HIST_LESSON_ORDERS || []);
+  var order = [];
+  for (var k = 0; k < candidateOrders.length; k++) {
+    if (candidateOrders[k] && candidateOrders[k].indexOf(lessonId) !== -1) {
+      order = candidateOrders[k];
+      break;
+    }
+  }
+  var idx = order.indexOf(lessonId);
+  
+    if (idx <= 0) return [];
+
+    var pool = [];
+    for (var i = 0; i < idx; i++) {
+      var prevLesson = window.SBL_LESSONS[order[i]];
+      if (!prevLesson) continue;
+      prevLesson.quiz.forEach(function (q) {
+        pool.push({
+          q: q.q, options: q.options, correct: q.correct,
+          explain: q.explain, misconception: q.misconception, tag: q.tag,
+          sourceLessonTitle: prevLesson.title
+        });
+      });
+    }
+    return pool;
+  }
+
+  /* ---------------- Focus management ---------------- */
+
+  function getFocusableElements() {
+    if (!modal) return [];
+    return Array.prototype.slice.call(
+      modal.querySelectorAll('button, [href], input, select, textarea, iframe, [tabindex]:not([tabindex="-1"])')
+    ).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+  }
+
+  /* ---------------- Shared setup ---------------- */
+
+  function bindElements() {
+    overlay = document.getElementById('sblTeachBotOverlay');
+    modal = document.getElementById('sblTeachBotModal');
+    bodyMount = document.getElementById('sblTeachBotBody');
+    titleEl = document.getElementById('sblTeachBotTitle');
+    subtitleEl = document.getElementById('sblTeachBotSubtitle');
+    progressEl = document.getElementById('sblTeachBotProgress');
+    closeBtn = document.getElementById('sblTeachBotClose');
+    expandBtn = document.getElementById('sblTeachBotExpand');
+    announceEl = document.getElementById('sblTeachBotAnnounce');
+  }
+
+  function openModalShell(lessonId) {
+    bindElements();
+    if (!overlay) return false;
+    lessonId = lessonId || overlay.getAttribute('data-lesson-id');
+    currentLesson = window.SBL_LESSONS && window.SBL_LESSONS[lessonId];
+    if (!currentLesson) {
+      console.error('SBL Tutor: no lesson configuration found for id "' + lessonId + '"');
+      return false;
+    }
+    lastFocusedElement = document.activeElement;
+    iframeLoaded = false;
+    quizState = null;
+    ibState = null;
+    readinessState = null;
+    overlay.hidden = false;
+    return true;
+  }
+
+  /* ---------------- Entry point 1: Teach Me Live ---------------- */
+
+  window.openTeachBot = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Knowledge acquisition for home learning';
+    modal.setAttribute('aria-label', 'SBL Tutor: ' + currentLesson.title);
+
+    renderTeachBody();
+    updateProgress();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 2: Test My Knowledge ---------------- */
+
+  window.openTestMyKnowledge = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Test My Knowledge: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = currentLesson.quiz.length + ' lesson-specific questions with instant feedback.';
+    modal.setAttribute('aria-label', 'Test My Knowledge: ' + currentLesson.title);
+
+    bodyMount.innerHTML = '<div class="sbl-teach-panel" style="border-right:none; width:100%;" id="sblQuizMount"></div>';
+    startQuizWithQuestions(shuffle(currentLesson.quiz), 'Test My Knowledge', false, null);
+    updateProgress();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 3: Spaced Retrieval ---------------- */
+
+  window.openSpacedRetrieval = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Spaced Retrieval: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Cumulative recall practice from previously taught lessons only.';
+    modal.setAttribute('aria-label', 'Spaced Retrieval: ' + currentLesson.title);
+
+    var bank = buildRetrievalBank(currentLesson.id);
+
+    if (bank.length === 0) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3>' +
+        '<p class="sbl-teach-focus">This is the first lesson in the unit, so there are no previous lessons to draw retrieval questions from yet. Spaced retrieval will unlock automatically as you move through later lessons.</p></div></div>';
+      if (closeBtn) closeBtn.focus();
+      return;
+    }
+
+    var picked = shuffle(bank).slice(0, Math.min(5, bank.length));
+    bodyMount.innerHTML = '<div class="sbl-teach-panel" style="border-right:none; width:100%;" id="sblQuizMount"></div>';
+    startQuizWithQuestions(picked, 'Spaced Retrieval', true, function () {
+      var note = document.createElement('div');
+      note.className = 'sbl-ready-note';
+      note.style.marginTop = '1rem';
+      note.textContent = 'Ready for class: bring this knowledge into today\u2019s discussion, case-study analysis, the 4Ps and written application.';
+      document.getElementById('sblQuizMount').appendChild(note);
+    });
+    updateProgress();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 4: Challenge Mode ---------------- */
+
+  window.openChallengeMode = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Challenge: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Think it through yourself first, then challenge your thinking with the tutor.';
+    modal.setAttribute('aria-label', 'Challenge Mode: ' + currentLesson.title);
+
+    renderChallengeBody();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 5: IB-Style Questions ---------------- */
+
+  window.openIBQuestions = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'IB-Style Questions: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Practice authentic IB questions and get instant, examiner-style marked feedback.';
+    modal.setAttribute('aria-label', 'IB-Style Questions: ' + currentLesson.title);
+
+    renderIBQuestionsBody();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 6: Ready for the Classroom ---------------- */
+
+  window.openReadinessCheck = function (lessonId) {
+    if (!openModalShell(lessonId)) return;
+    titleEl.textContent = 'Ready for the Classroom: ' + currentLesson.title;
+    if (subtitleEl) subtitleEl.textContent = 'Oral-style questions to check you\u2019re ready for today\u2019s lesson.';
+    modal.setAttribute('aria-label', 'Ready for the Classroom: ' + currentLesson.title);
+
+    renderReadinessBody();
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 7: Ask AI Tutor (general, no lesson) ---------------- */
+  /* Reuses the exact same "SBL Tutor" Copilot Studio bot as
+     Teach Me Live, but with no lesson attached — just a plain chat
+     window for general questions from anywhere on the
+     site. This is what the sidebar "Ask AI Tutor" panel calls. */
+
+  window.openAskTutor = function (subjectLabel) {
+    bindElements();
+    if (!overlay) return;
+    currentLesson = null;
+    lastFocusedElement = document.activeElement;
+    iframeLoaded = false;
+    quizState = null;
+    ibState = null;
+    readinessState = null;
+    overlay.hidden = false;
+
+    titleEl.textContent = subjectLabel ? subjectLabel + ' Research' : 'Ask AI Tutor';
+    if (subtitleEl) {
+      subtitleEl.textContent = subjectLabel
+        ? 'Ask questions to research and explore ' + subjectLabel + ' topics.'
+        : 'General help with your syllabus — ask me anything.';
+    }
+    modal.setAttribute('aria-label', subjectLabel ? subjectLabel + ' Research' : 'SBL Tutor: general help');
+    if (progressEl) progressEl.textContent = '';
+
+    bodyMount.innerHTML =
+      '<div class="sbl-teach-panel sbl-teach-chatpanel" style="border-right:none; width:100%;" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
+    loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
+
+    if (closeBtn) closeBtn.focus();
+  };
+
+  /* ---------------- Entry point 8: Socratic Challenge (general, no lesson) ---------------- */
+  /* Reuses the exact same "SBL Challenge Tutor" Copilot Studio bot as
+     Challenge Mode, but with no lesson attached — a student pastes a
+     teacher-set challenge question straight into the chat rather than
+     working through a fixed pre-written question. */
+
+  window.openSocraticChallenge = function (subjectLabel) {
+    bindElements();
+    if (!overlay) return;
+    currentLesson = null;
+    lastFocusedElement = document.activeElement;
+    iframeLoaded = false;
+    quizState = null;
+    ibState = null;
+    readinessState = null;
+    overlay.hidden = false;
+
+    var label = subjectLabel ? subjectLabel + ' Socratic Challenge' : 'Socratic Challenge';
+    titleEl.textContent = label;
+    if (subtitleEl) subtitleEl.textContent = 'Copy in your teacher’s question or information to begin.';
+    modal.setAttribute('aria-label', label);
+    if (progressEl) progressEl.textContent = '';
+
+    bodyMount.innerHTML =
+      '<div class="sbl-teach-grid">' +
+      '<div class="sbl-teach-panel">' +
+      '<div class="sbl-teach-section"><h3>How this works</h3>' +
+      '<p class="sbl-teach-focus">Copy in the question or information your teacher has given you. The bot will then ask you questions relating to the topic, to develop and stretch your understanding &mdash; it won’t give you answers, structures or model responses.</p>' +
+      '</div></div>' +
+      '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>' +
+      '</div>';
+    loadIframeIfNeeded(SBL_CHALLENGE_TUTOR_IFRAME_SRC);
+
+    if (closeBtn) closeBtn.focus();
+  };
+
+  window.closeTeachBot = function () {
+    if (!overlay) return;
+    overlay.hidden = true;
+    if (window.SBLVoice) window.SBLVoice.stop();
+    setExpanded(false);
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  };
+
+  function setExpanded(state) {
+    isExpanded = state;
+    if (!overlay) return;
+    overlay.classList.toggle('is-expanded', isExpanded);
+    if (expandBtn) {
+      expandBtn.setAttribute('aria-label', isExpanded ? 'Collapse view' : 'Expand to full page');
+      expandBtn.textContent = isExpanded ? 'Collapse view' : 'Expand to full page';
+    }
+    document.body.style.overflow = (!overlay.hidden && isExpanded) ? 'hidden' : '';
+  }
+
+  /* ---------------- Teach Me Live body ---------------- */
+
+  function renderTeachBody() {
+    var lesson = currentLesson;
+    var checklistState = getChecklistState(lesson.id, lesson.checklist.length);
+    var doneCount = checklistState.filter(Boolean).length;
+    var pct = Math.round((doneCount / lesson.checklist.length) * 100);
+
+    var html = '<div class="sbl-teach-grid">';
+
+    html += '<div class="sbl-teach-panel">';
+    html += '<div class="sbl-teach-section"><h3>Syllabus focus</h3><p class="sbl-teach-focus">' + escapeHtml(lesson.syllabusFocus) + '</p></div>';
+
+    html += '<div class="sbl-teach-section"><h3>Starter prompts</h3><div class="sbl-prompt-grid" id="sblPromptGrid"></div>';
+    html += '<div class="sbl-copy-status" id="sblCopyStatus"></div></div>';
+
+    html += '<div class="sbl-teach-section"><h3>What should I know?</h3>';
+    html += '<div class="sbl-progress-row"><div class="sbl-progress-track"><div class="sbl-progress-fill" id="sblChecklistFill" style="width:' + pct + '%;"></div></div><span id="sblChecklistPct">' + pct + '%</span><button type="button" class="sbl-reset-btn" id="sblChecklistReset">Reset progress</button></div>';
+    html += '<ul class="sbl-checklist-list" id="sblChecklistList"></ul>';
+    html += '<p class="sbl-progress-note">Progress is saved to your account, so it carries across devices when you log in.</p></div>';
+
+    if (lesson.quiz && lesson.quiz.length) {
+      html += '<div class="sbl-teach-section"><h3>Test My Knowledge</h3><p class="sbl-teach-focus">' + lesson.quiz.length + ' lesson-specific questions with instant feedback and a mastery score.</p><button type="button" class="sbl-quiz-action" id="sblLaunchQuizFromTeach">Start ' + lesson.quiz.length + '-question quiz &rarr;</button></div>';
+    }
+
+    html += '<div class="sbl-teach-section"><h3>Spaced Retrieval</h3><p class="sbl-teach-focus">5 cumulative questions drawn only from lessons you have already reached in this unit.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchRetrievalFromTeach">Start Spaced Retrieval &rarr;</button></div>';
+
+    if (lesson.ibQuestions && lesson.ibQuestions.length) {
+      html += '<div class="sbl-teach-section"><h3>IB-Style Questions</h3><p class="sbl-teach-focus">Practice authentic IB questions and get instant, examiner-style marked feedback.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchIBFromTeach">Practice Now &rarr;</button></div>';
+    }
+
+    if (lesson.challenge) {
+      html += '<div class="sbl-teach-section"><h3>Challenge</h3><p class="sbl-teach-focus">Think through a challenge question independently, then discuss it with the Challenge Tutor.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchChallengeFromTeach">Start Challenge &rarr;</button></div>';
+    }
+
+    if (lesson.readinessQuestions && lesson.readinessQuestions.length) {
+      html += '<div class="sbl-teach-section"><h3>Ready for the Classroom?</h3><p class="sbl-teach-focus">Discussion questions to work through in pairs before class.</p><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblLaunchReadinessFromTeach">Start Readiness Check &rarr;</button></div>';
+    }
+
+    html += '<div class="sbl-teach-section sbl-ready-note">Ready for class: you will use this knowledge in class for discussion, collaboration, case-study analysis, the 4Ps and written application.</div>';
+
+    html += '</div>';
+
+    html += '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
+
+    html += '</div>';
+
+    bodyMount.innerHTML = html;
+
+    renderPromptButtons(lesson);
+    renderChecklist(lesson, checklistState);
+    loadIframeIfNeeded(SBL_TEACH_BOT_IFRAME_SRC);
+
+    // Pull this student's saved checklist for this lesson from their
+    // account and, if it differs from what's on this device (e.g.
+    // they last ticked items on a different computer), re-render
+    // with the account version so progress follows them around.
+    (function () {
+      var lessonAtRequestTime = lesson;
+      loadServerProgress(lesson.id, function (serverData) {
+        if (currentLesson !== lessonAtRequestTime) return; // panel moved on already
+        if (!serverData || !Array.isArray(serverData.checklist)) return;
+        var serverState = serverData.checklist.slice();
+        while (serverState.length < lesson.checklist.length) serverState.push(false);
+        saveChecklistStateLocalOnly(lesson.id, serverState);
+        renderChecklist(lesson, serverState);
+        updateChecklistProgress(lesson, serverState);
+      });
+    })();
+
+    var quizFromTeachBtn = document.getElementById('sblLaunchQuizFromTeach');
+    if (quizFromTeachBtn) {
+      quizFromTeachBtn.addEventListener('click', function () {
+        window.openTestMyKnowledge(lesson.id);
+      });
+    }
+    document.getElementById('sblLaunchRetrievalFromTeach').addEventListener('click', function () {
+      window.openSpacedRetrieval(lesson.id);
+    });
+    var challengeBtn = document.getElementById('sblLaunchChallengeFromTeach');
+    if (challengeBtn) {
+      challengeBtn.addEventListener('click', function () {
+        window.openChallengeMode(lesson.id);
+      });
+    }
+    var ibBtn = document.getElementById('sblLaunchIBFromTeach');
+    if (ibBtn) {
+      ibBtn.addEventListener('click', function () {
+        window.openIBQuestions(lesson.id);
+      });
+    }
+    var readinessBtn = document.getElementById('sblLaunchReadinessFromTeach');
+    if (readinessBtn) {
+      readinessBtn.addEventListener('click', function () {
+        window.openReadinessCheck(lesson.id);
+      });
+    }
+  }
+
+  function loadIframeIfNeeded(src) {
+    if (iframeLoaded) return;
+    var wrap = document.getElementById('sblFrameWrap');
+    if (!wrap) return;
+    mountTutorChat(wrap, src || SBL_TEACH_BOT_IFRAME_SRC, 'SBL Tutor chat');
+    iframeLoaded = true;
+  }
+
+  /* ---------------- Starter prompts (clipboard copy) ---------------- */
+
+  function renderPromptButtons(lesson) {
+    var grid = document.getElementById('sblPromptGrid');
+    var statusBox = document.getElementById('sblCopyStatus');
+    grid.innerHTML = '';
+
+    lesson.starterButtons.forEach(function (btnConf) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'sbl-prompt-btn';
+      btn.textContent = btnConf.label;
+      btn.addEventListener('click', function () {
+        var prompt = buildPrompt(lesson, btnConf.label, btnConf.request);
+        copyText(prompt, function (success) {
+          grid.querySelectorAll('.sbl-prompt-btn').forEach(function (b) { b.classList.remove('is-copied'); });
+          if (success) {
+            btn.classList.add('is-copied');
+            statusBox.className = 'sbl-copy-status is-visible';
+            statusBox.innerHTML = 'Prompt copied. Paste it into the tutor chat and press Send.';
+            announce('Prompt copied to clipboard. Paste it into the tutor chat and press Send.');
+          } else {
+            statusBox.className = 'sbl-copy-status is-visible';
+            statusBox.innerHTML =
+              'Automatic copy did not work. Select and copy this prompt manually:' +
+              '<textarea readonly rows="3">' + escapeHtml(prompt) + '</textarea>';
+            announce('Automatic copy failed. A manual copy box is available below the starter prompts.');
+          }
+        });
+      });
+      grid.appendChild(btn);
+    });
+  }
+
+  /* ---------------- Checklist ---------------- */
+
+  function renderChecklist(lesson, state) {
+    var list = document.getElementById('sblChecklistList');
+    list.innerHTML = '';
+
+    lesson.checklist.forEach(function (item, i) {
+      var li = document.createElement('li');
+      li.className = 'sbl-checklist-item' + (state[i] ? ' is-done' : '');
+      var checkboxId = 'sblChecklist_' + lesson.id + '_' + i;
+
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.id = checkboxId;
+      input.checked = !!state[i];
+      input.addEventListener('change', function () {
+        state[i] = input.checked;
+        saveChecklistState(lesson.id, state);
+        li.classList.toggle('is-done', input.checked);
+        updateChecklistProgress(lesson, state);
+      });
+
+      var label = document.createElement('label');
+      label.setAttribute('for', checkboxId);
+      label.textContent = item;
+
+      li.appendChild(input);
+      li.appendChild(label);
+      list.appendChild(li);
+    });
+
+    var resetBtn = document.getElementById('sblChecklistReset');
+    resetBtn.addEventListener('click', function () {
+      var cleared = new Array(lesson.checklist.length).fill(false);
+      saveChecklistState(lesson.id, cleared);
+      renderChecklist(lesson, cleared);
+      updateChecklistProgress(lesson, cleared);
+      announce('Checklist progress reset.');
+    });
+  }
+
+  function updateChecklistProgress(lesson, state) {
+    var doneCount = state.filter(Boolean).length;
+    var pct = Math.round((doneCount / lesson.checklist.length) * 100);
+    var fill = document.getElementById('sblChecklistFill');
+    var pctEl = document.getElementById('sblChecklistPct');
+    if (fill) fill.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+    announce('Checklist progress: ' + doneCount + ' of ' + lesson.checklist.length + ' complete, ' + pct + ' percent.');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    if (!progressEl || !currentLesson) return;
+    var state = getChecklistState(currentLesson.id, currentLesson.checklist.length);
+    var doneCount = state.filter(Boolean).length;
+    progressEl.textContent = doneCount + '/' + currentLesson.checklist.length + ' checked';
+  }
+
+  /* ---------------- Challenge Mode body ---------------- */
+
+  function renderChallengeBody() {
+    var lesson = currentLesson;
+
+    if (!lesson.challenge) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>Challenge</h3>' +
+        '<p class="sbl-teach-focus">A challenge question is not yet available for this lesson.</p></div></div>';
+      return;
+    }
+
+    var challenge = lesson.challenge;
+    var savedNotes = getChallengeNotes(lesson.id);
+
+    var html = '<div class="sbl-teach-grid">';
+
+    html += '<div class="sbl-teach-panel">';
+
+    html += '<div class="sbl-teach-section"><h3>Challenge question</h3><p class="sbl-teach-focus"><strong>' + escapeHtml(challenge.question) + '</strong></p>';
+    if (challenge.intro) {
+      html += '<p class="sbl-teach-focus">' + escapeHtml(challenge.intro) + '</p>';
+    }
+    html += '<p class="sbl-teach-focus">Think it through yourself first. Make some notes below before you open the Challenge Tutor \u2014 it will ask you questions rather than give you answers, structures or model responses.</p>';
+    html += '</div>';
+
+    html += '<div class="sbl-teach-section"><h3>My notes</h3>';
+    html += '<textarea id="sblChallengeNotes" rows="10" placeholder="Jot down your initial ideas, evidence, examples and thinking here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;">' + escapeHtml(savedNotes) + '</textarea>';
+    html += '<p class="sbl-progress-note" id="sblChallengeNotesStatus">Notes are saved automatically on this device.</p>';
+    html += '</div>';
+
+    html += '<div class="sbl-teach-section sbl-ready-note">When you feel ready, write your final response independently \u2014 using your notes and the tutor conversation to guide you, not to copy from.</div>';
+
+    html += '</div>';
+
+    html += '<div class="sbl-teach-panel sbl-teach-chatpanel" id="sblFramePanel"><div class="sbl-teach-bot-frame-wrap" id="sblFrameWrap"></div></div>';
+
+    html += '</div>';
+
+    bodyMount.innerHTML = html;
+
+    var notesArea = document.getElementById('sblChallengeNotes');
+    var notesStatus = document.getElementById('sblChallengeNotesStatus');
+    var saveTimer = null;
+    notesArea.addEventListener('input', function () {
+      window.clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(function () {
+        saveChallengeNotes(lesson.id, notesArea.value);
+        notesStatus.textContent = 'Notes saved.';
+        window.setTimeout(function () {
+          notesStatus.textContent = 'Notes are saved automatically on this device.';
+        }, 1500);
+      }, 500);
+    });
+
+    renderChallengeLaunch(lesson, challenge);
+  }
+
+  function renderChallengeLaunch(lesson, challenge) {
+    var wrap = document.getElementById('sblFrameWrap');
+    if (!wrap) return;
+
+    var launch = document.createElement('div');
+    launch.className = 'sbl-challenge-launch';
+    launch.style.cssText = 'display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; padding:2rem; gap:1rem;';
+    launch.innerHTML =
+      '<p class="sbl-teach-focus" style="max-width:22rem;">Ready to talk it through? The Challenge Tutor will ask you questions to help develop your own thinking.</p>' +
+      '<button type="button" class="sbl-quiz-action" id="sblLaunchChallengeTutor">Challenge Tutor &rarr;</button>';
+    wrap.innerHTML = '';
+    wrap.appendChild(launch);
+
+    document.getElementById('sblLaunchChallengeTutor').addEventListener('click', function () {
+      mountTutorChat(wrap, SBL_CHALLENGE_TUTOR_IFRAME_SRC, 'SBL Challenge Tutor chat');
+      iframeLoaded = true;
+
+      copyText(buildChallengeOpener(challenge), function (success) {
+        if (success) {
+          announce('An opening message has been copied. Paste it into the Challenge Tutor chat and press Send to get started.');
+        }
+      });
+    });
+  }
+
+  /* ---------------- Photo-of-handwriting answer attach ----------------
+     Students can attach a photo of a handwritten answer instead of
+     typing. The photo is read client-side with Tesseract.js (loaded
+     from a CDN only the first time a student actually uses this, so
+     typing-only students never pay the cost) and the extracted text is
+     dropped into the existing answer textarea for the student to check
+     and correct — it is never auto-submitted. Handwriting recognition
+     is not reliable, so the student always reviews the text before
+     pressing "Submit for Marking" as normal. No change to the marking
+     pipeline itself.
+     ------------------------------------------------------------------ */
+
+  var TESSERACT_CDN_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+  var tesseractLoadPromise = null;
+
+  function loadTesseract() {
+    if (window.Tesseract) return Promise.resolve();
+    if (tesseractLoadPromise) return tesseractLoadPromise;
+    tesseractLoadPromise = new Promise(function (resolve, reject) {
+      var script = document.createElement('script');
+      script.src = TESSERACT_CDN_URL;
+      script.onload = function () { resolve(); };
+      script.onerror = function () {
+        tesseractLoadPromise = null;
+        reject(new Error('Could not load the handwriting reader.'));
+      };
+      document.head.appendChild(script);
+    });
+    return tesseractLoadPromise;
+  }
+
+  function renderPhotoAttachUI(mountId, textareaId) {
+    var mount = document.getElementById(mountId);
+    if (!mount) return;
+
+    mount.innerHTML =
+      '<button type="button" id="' + mountId + 'Btn" ' +
+      'style="background:#fff; border:1px dashed var(--lh-border, #d9dde3); border-radius:8px; padding:0.5rem 0.9rem; font-size:0.85rem; font-family:inherit; cursor:pointer; color:#33495a;">' +
+      '📷 Attach a photo of your handwritten answer instead</button>' +
+      '<input type="file" accept="image/*" capture="environment" id="' + mountId + 'File" style="display:none;">' +
+      '<div id="' + mountId + 'Status"></div>';
+
+    var btn = document.getElementById(mountId + 'Btn');
+    var fileInput = document.getElementById(mountId + 'File');
+    var status = document.getElementById(mountId + 'Status');
+
+    btn.addEventListener('click', function () { fileInput.click(); });
+
+    fileInput.addEventListener('change', function () {
+      var file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+
+      var previewUrl = URL.createObjectURL(file);
+      status.innerHTML =
+        '<div style="display:flex; gap:10px; align-items:flex-start; margin-top:0.5rem;">' +
+        '<img src="' + previewUrl + '" alt="Preview of the attached photo" style="width:64px; height:64px; object-fit:cover; border-radius:6px; border:1px solid var(--lh-border, #d9dde3); flex:none;">' +
+        '<p class="sbl-progress-note" style="margin:0;" role="status">Reading your handwriting… this can take a little while, especially the first time.</p>' +
+        '</div>';
+      announce('Reading your handwriting, please wait.');
+      btn.disabled = true;
+
+      loadTesseract()
+        .then(function () { return window.Tesseract.recognize(file, 'eng'); })
+        .then(function (result) {
+          var text = ((result && result.data && result.data.text) || '').trim();
+          btn.disabled = false;
+          if (!text) {
+            status.innerHTML =
+              '<p class="sbl-progress-note" style="margin-top:0.5rem; color:#9a3b3b;">We couldn’t read any text in that photo. Try a clearer, well-lit, straight-on photo — or type your answer instead.</p>';
+            announce('We could not read any text in that photo. Please try again or type your answer.');
+            return;
+          }
+          var textarea = document.getElementById(textareaId);
+          textarea.value = textarea.value.trim() ? textarea.value.trim() + '\n\n' + text : text;
+          status.innerHTML =
+            '<p class="sbl-progress-note" style="margin-top:0.5rem;">We’ve added what we could read from your photo into the box above — <strong>check it over and fix anything that’s wrong</strong> before you submit, as handwriting reading isn’t perfect.</p>';
+          announce('We have read your photo. Please check the text in the answer box before submitting, as handwriting reading is not perfect.');
+          textarea.focus();
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          console.error('Photo answer OCR failed:', err);
+          status.innerHTML =
+            '<p class="sbl-progress-note" style="margin-top:0.5rem; color:#9a3b3b;">Sorry, we couldn’t read that photo right now. Please check your internet connection and try again, or type your answer instead.</p>';
+          announce('We could not read that photo. Please try again or type your answer.');
+        });
+    });
+  }
+
+  /* ---------------- IB-Style Questions body (PPQ Marker) ----------------
+     Submitting an answer calls the /api/mark-ppq serverless function
+     directly (which talks to the SBL PPQ Marker Copilot Studio agent
+     via Direct Line, with the secret held server-side). No chat window
+     or copy/paste is involved — feedback is rendered straight into
+     this panel.
+     ------------------------------------------------------------------ */
+
+  function renderIBQuestionsBody() {
+    var lesson = currentLesson;
+
+    if (!lesson.ibQuestions || !lesson.ibQuestions.length) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>IB-Style Questions</h3>' +
+        '<p class="sbl-teach-focus">No IB-style questions are available for this lesson yet.</p></div></div>';
+      return;
+    }
+
+    ibState = { lesson: lesson, activeIndex: 0 };
+
+    var html = '<div class="sbl-teach-panel" style="border-right:none; width:100%;">';
+
+    if (lesson.ibQuestions.length > 1) {
+      html += '<div class="sbl-teach-section"><h3>Choose a question</h3><div class="sbl-prompt-grid" id="sblIBQuestionList"></div></div>';
+    }
+
+    html += '<div class="sbl-teach-section" id="sblIBQuestionWrap"></div>';
+    html += '</div>';
+
+    bodyMount.innerHTML = html;
+
+    if (lesson.ibQuestions.length > 1) {
+      var list = document.getElementById('sblIBQuestionList');
+      lesson.ibQuestions.forEach(function (ibQ, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'sbl-prompt-btn';
+        btn.textContent = 'Question ' + (i + 1) + ' [' + ibQ.marks + ']';
+        btn.addEventListener('click', function () {
+          ibState.activeIndex = i;
+          renderIBQuestionWorkspace();
+        });
+        list.appendChild(btn);
+      });
+    }
+
+    renderIBQuestionWorkspace();
+  }
+
+  function renderIBQuestionWorkspace() {
+    var lesson = ibState.lesson;
+    var ibQ = lesson.ibQuestions[ibState.activeIndex];
+    var wrap = document.getElementById('sblIBQuestionWrap');
+
+    var html = '<h3>Question' + (lesson.ibQuestions.length > 1 ? ' ' + (ibState.activeIndex + 1) : '') + '</h3>';
+    // One resource image (image) or several (images: [{src, alt}]), e.g. a two-page infographic.
+    var ibImgs = ibQ.images ? ibQ.images : (ibQ.image ? [{ src: ibQ.image, alt: ibQ.imageAlt }] : []);
+    ibImgs.forEach(function (im) {
+      html += '<img src="' + escapeHtml(im.src) + '" alt="' + escapeHtml(im.alt || 'Resource for this question') + '" style="max-width:100%; height:auto; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; margin-bottom:0.8rem; display:block;">';
+    });
+    html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(ibQ.question) + '</strong> [' + ibQ.marks + ' mark' + (ibQ.marks === 1 ? '' : 's') + ']</p>';
+
+    html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker \u2014 there is nothing to copy or paste.</p>';
+    html += '<textarea id="sblIBAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
+    html += '<div id="sblIBPhotoAttach" style="margin-top:0.6rem;"></div>';
+    html += '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action" id="sblIBSubmit">Submit for Marking &rarr;</button></div>';
+    html += '<div id="sblIBFeedbackSection"></div>';
+
+    wrap.innerHTML = html;
+
+    renderPhotoAttachUI('sblIBPhotoAttach', 'sblIBAnswer');
+
+    document.getElementById('sblIBSubmit').addEventListener('click', function () {
+      var answerBox = document.getElementById('sblIBAnswer');
+      var answerText = answerBox.value.trim();
+      if (!answerText) {
+        announce('Please write an answer before submitting for marking.');
+        answerBox.focus();
+        return;
+      }
+      submitForPPQMarking(lesson, ibQ, answerText);
+    });
+  }
+
+  function submitForPPQMarking(lesson, ibQ, answerText) {
+    var section = document.getElementById('sblIBFeedbackSection');
+    var submitBtn = document.getElementById('sblIBSubmit');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Marking\u2026';
+    section.innerHTML =
+      '<div class="sbl-progress-note" style="margin-top:1rem;" role="status">' +
+      'Marking your answer \u2014 this usually takes a few seconds\u2026</div>';
+    announce('Submitting your answer for marking. Please wait.');
+
+    fetch('/api/mark-ppq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: ibQ.question,
+        maxMark: ibQ.marks,
+        markingGuidance: ibQ.markScheme,
+        studentAnswer: answerText
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data && data.error ? data.error : 'Marking failed.');
+          return data;
+        });
+      })
+      .then(function (data) {
+        renderPPQFeedback(lesson, ibQ, answerText, data.feedback, data.raw);
+      })
+      .catch(function (err) {
+        section.innerHTML =
+          '<div class="sbl-quiz-feedback is-incorrect" style="margin-top:1rem;">' +
+          '<strong>Sorry, marking did not complete.</strong> ' + escapeHtml(err.message || 'Please try again.') +
+          '</div>' +
+          '<div style="margin-top:0.8rem;"><button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBRetry">Try again</button></div>';
+        announce('Marking failed. ' + (err.message || 'Please try again.'));
+        var retryBtn = document.getElementById('sblIBRetry');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', function () {
+            submitForPPQMarking(lesson, ibQ, answerText);
+          });
+        }
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit for Marking \u2192';
+      });
+  }
+
+  function renderPPQFeedback(lesson, ibQ, answerText, feedback, rawText) {
+    var section = document.getElementById('sblIBFeedbackSection');
+    feedback = feedback || {};
+
+    var markLine = feedback.markAwarded
+      ? escapeHtml(feedback.markAwarded)
+      : '\u2014 / ' + ibQ.marks;
+
+    var html = '<div class="sbl-quiz-result" style="margin-top:1.2rem;">';
+    html += '<div class="sbl-quiz-progress">Marked feedback</div>';
+    html += '<div class="sbl-quiz-result__score">' + markLine + '</div>';
+
+    html += '<div class="sbl-quiz-result__breakdown">';
+    if (feedback.whyThisMark) {
+      html += '<p><strong>Why this mark was awarded</strong><br>' + escapeHtml(feedback.whyThisMark) + '</p>';
+    }
+    if (feedback.whatWasDoneWell) {
+      html += '<p><strong>What was done well</strong><br>' + escapeHtml(feedback.whatWasDoneWell) + '</p>';
+    }
+    if (feedback.whatIsMissing) {
+      html += '<p><strong>What is missing or needs development</strong><br>' + escapeHtml(feedback.whatIsMissing) + '</p>';
+    }
+    if (feedback.nextStep) {
+      html += '<p><strong>Next step</strong><br>' + escapeHtml(feedback.nextStep) + '</p>';
+    }
+    if (feedback.followUpQuestion) {
+      html += '<p><strong>Follow-up question</strong><br>' + escapeHtml(feedback.followUpQuestion) + '</p>';
+    }
+    html += '</div>';
+
+    html += '<div class="sbl-quiz-result__actions">';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBTryAgain">Answer again</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBDownload">Download report (print / save as PDF)</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblIBOneNote">Copy report for OneNote</button>';
+    html += '</div></div>';
+
+    section.innerHTML = html;
+    announce('Marking complete. You scored ' + markLine + '.');
+    saveIBAttempt(lesson, ibQ, answerText, feedback);
+
+    document.getElementById('sblIBTryAgain').addEventListener('click', function () {
+      renderIBQuestionWorkspace();
+    });
+    document.getElementById('sblIBDownload').addEventListener('click', function () {
+      downloadIBReport(lesson, ibQ, answerText, feedback);
+    });
+    document.getElementById('sblIBOneNote').addEventListener('click', function () {
+      var text = buildIBPlainTextReport(lesson, ibQ, answerText, feedback);
+      copyText(text, function (success) {
+        announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
+      });
+    });
+  }
+
+  // Saves the latest marked attempt for this IB-style question to the
+  // student's progress (one key per question, "ib_q<n>"), so their
+  // assigned teacher can see it on /teacher/. Best-effort, like the
+  // other progress syncs.
+  function saveIBAttempt(lesson, ibQ, answerText, feedback) {
+    if (!lesson || !lesson.id || !ibState) return;
+    var idx = ibState.activeIndex || 0;
+    var m = String(feedback.markAwarded || '').match(/(\d+(?:\.\d+)?)/);
+    var patch = {};
+    patch['ib_q' + idx] = {
+      question: String(ibQ.question || '').slice(0, 600),
+      marks: Number(ibQ.marks) || null,
+      awarded: m ? Number(m[1]) : null,
+      markAwarded: feedback.markAwarded || null,
+      answer: String(answerText || '').slice(0, 6000),
+      whyThisMark: feedback.whyThisMark || '',
+      whatWasDoneWell: feedback.whatWasDoneWell || '',
+      whatIsMissing: feedback.whatIsMissing || '',
+      nextStep: feedback.nextStep || '',
+      at: new Date().toISOString()
+    };
+    syncProgress(lesson.id, patch);
+  }
+
+  function buildIBPlainTextReport(lesson, ibQ, answerText, feedback) {
+    feedback = feedback || {};
+    var lines = [];
+    lines.push('SBL Geography \u2014 IB-Style Question Report');
+    lines.push('Lesson: ' + lesson.title);
+    lines.push('Completed: ' + new Date().toLocaleString());
+    lines.push('');
+    lines.push('Question [' + ibQ.marks + ' marks]: ' + ibQ.question);
+    lines.push('');
+    lines.push('My answer:');
+    lines.push(answerText);
+    lines.push('');
+    lines.push('Mark awarded: ' + (feedback.markAwarded || ('\u2014 / ' + ibQ.marks)));
+    if (feedback.whyThisMark) { lines.push(''); lines.push('Why this mark was awarded:'); lines.push(feedback.whyThisMark); }
+    if (feedback.whatWasDoneWell) { lines.push(''); lines.push('What was done well:'); lines.push(feedback.whatWasDoneWell); }
+    if (feedback.whatIsMissing) { lines.push(''); lines.push('What is missing or needs development:'); lines.push(feedback.whatIsMissing); }
+    if (feedback.nextStep) { lines.push(''); lines.push('Next step:'); lines.push(feedback.nextStep); }
+    if (feedback.followUpQuestion) { lines.push(''); lines.push('Follow-up question:'); lines.push(feedback.followUpQuestion); }
+    if (ibQ.markScheme) { lines.push(''); lines.push('Mark scheme:'); lines.push(String(ibQ.markScheme)); }
+    return lines.join('\n');
+  }
+
+  function downloadIBReport(lesson, ibQ, answerText, feedback) {
+    feedback = feedback || {};
+    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Geography IB-Style Question Report</title>' +
+      '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:700px;margin:0 auto;color:#1B2029;}' +
+      'h1{font-size:1.3rem;} .block{margin:1rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;white-space:pre-wrap;}</style></head><body>';
+    html += '<h1>SBL Geography \u2014 IB-Style Question Report</h1>';
+    html += '<p><strong>Lesson:</strong> ' + escapeHtml(lesson.title) + '<br>';
+    html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '</p><hr>';
+    html += '<p><strong>Question [' + ibQ.marks + ' marks]:</strong> ' + escapeHtml(ibQ.question) + '</p>';
+    html += '<p><strong>My answer:</strong></p><div class="block">' + escapeHtml(answerText) + '</div>';
+    html += '<p><strong>Mark awarded:</strong> ' + escapeHtml(feedback.markAwarded || ('\u2014 / ' + ibQ.marks)) + '</p>';
+    if (feedback.whyThisMark) html += '<p><strong>Why this mark was awarded:</strong></p><div class="block">' + escapeHtml(feedback.whyThisMark) + '</div>';
+    if (feedback.whatWasDoneWell) html += '<p><strong>What was done well:</strong></p><div class="block">' + escapeHtml(feedback.whatWasDoneWell) + '</div>';
+    if (feedback.whatIsMissing) html += '<p><strong>What is missing or needs development:</strong></p><div class="block">' + escapeHtml(feedback.whatIsMissing) + '</div>';
+    if (feedback.nextStep) html += '<p><strong>Next step:</strong></p><div class="block">' + escapeHtml(feedback.nextStep) + '</div>';
+    if (feedback.followUpQuestion) html += '<p><strong>Follow-up question:</strong></p><div class="block">' + escapeHtml(feedback.followUpQuestion) + '</div>';
+    if (ibQ.markScheme) html += '<p><strong>Mark scheme:</strong></p><div class="block">' + escapeHtml(String(ibQ.markScheme)) + '</div>';
+    html += '<p><em>Use your browser\u2019s Print option and choose \u201cSave as PDF\u201d if you want a PDF copy.</em></p>';
+    html += '</body></html>';
+
+    var reportWindow = window.open('', '_blank');
+    if (!reportWindow) {
+      announce('Please allow pop-ups to download the report.');
+      return;
+    }
+    reportWindow.document.open();
+    reportWindow.document.write(html);
+    reportWindow.document.close();
+  }
+
+  /* ---------------- Ready for the Classroom body ---------------- */
+
+  function renderReadinessBody() {
+    var lesson = currentLesson;
+
+    if (!lesson.readinessQuestions || !lesson.readinessQuestions.length) {
+      bodyMount.innerHTML =
+        '<div class="sbl-teach-panel" style="border-right:none; width:100%;">' +
+        '<div class="sbl-teach-section"><h3>Ready for the Classroom?</h3>' +
+        '<p class="sbl-teach-focus">Readiness questions are not yet available for this lesson.</p></div></div>';
+      return;
+    }
+
+    readinessState = { lesson: lesson, index: 0 };
+    bodyMount.innerHTML = '<div class="sbl-teach-panel" style="border-right:none; width:100%;" id="sblReadinessMount"></div>';
+    renderReadinessQuestion();
+  }
+
+  function renderReadinessQuestion() {
+    var mount = document.getElementById('sblReadinessMount');
+    var lesson = readinessState.lesson;
+    var qs = lesson.readinessQuestions;
+    var i = readinessState.index;
+    var isLast = i === qs.length - 1;
+
+    var html = '<div class="sbl-quiz-progress">Question ' + (i + 1) + ' of ' + qs.length + '</div>';
+    html += '<p class="sbl-teach-focus" style="font-size:1.15rem; margin-top:1rem; line-height:1.5;"><strong>' + escapeHtml(qs[i]) + '</strong></p>';
+    html += '<p class="sbl-progress-note" style="margin-top:1rem;">Pair up and discuss this question aloud before moving to the next one.</p>';
+    html += '<div style="margin-top:1.5rem; display:flex; gap:0.6rem; flex-wrap:wrap;">';
+    if (i > 0) html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblReadinessPrev">&larr; Previous</button>';
+    html += '<button type="button" class="sbl-quiz-action" id="sblReadinessNext">' + (isLast ? 'Finish' : 'Next question &rarr;') + '</button>';
+    html += '</div>';
+    mount.innerHTML = html;
+
+    var prevBtn = document.getElementById('sblReadinessPrev');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        readinessState.index--;
+        renderReadinessQuestion();
+      });
+    }
+    document.getElementById('sblReadinessNext').addEventListener('click', function () {
+      if (isLast) {
+        renderReadinessComplete();
+      } else {
+        readinessState.index++;
+        renderReadinessQuestion();
+      }
+    });
+  }
+
+  function renderReadinessComplete() {
+    syncProgress(readinessState.lesson.id, {
+      readinessCompleted: true,
+      readinessCompletedAt: new Date().toISOString()
+    });
+
+    var mount = document.getElementById('sblReadinessMount');
+    mount.innerHTML =
+      '<div class="sbl-quiz-result">' +
+      '<p class="sbl-teach-focus" style="font-size:1.1rem;"><strong>Nice work \u2014 you\u2019re ready to bring this into class!</strong></p>' +
+      '<p class="sbl-teach-focus">Use these questions again in pairs at the start of the lesson if it helps.</p>' +
+      '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblReadinessRestart">Start again</button>' +
+      '</div>';
+    document.getElementById('sblReadinessRestart').addEventListener('click', function () {
+      readinessState.index = 0;
+      renderReadinessQuestion();
+    });
+  }
+
+  /* ---------------- Generic quiz engine (used by both
+     Test My Knowledge and Spaced Retrieval) ---------------- */
+
+  function startQuizWithQuestions(questions, contextLabel, showSource, onComplete) {
+    quizState = {
+      questions: questions.map(shuffleOptions),
+      index: 0,
+      score: 0,
+      answered: false,
+      results: [],
+      contextLabel: contextLabel,
+      showSource: showSource,
+      onComplete: onComplete
+    };
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    var mount = document.getElementById('sblQuizMount');
+    var q = quizState.questions[quizState.index];
+
+    var html = '<div class="sbl-quiz-progress">' + escapeHtml(quizState.contextLabel) + ' \u2014 Question ' + (quizState.index + 1) + ' of ' + quizState.questions.length + '</div>';
+    if (quizState.showSource && q.sourceLessonTitle) {
+      html += '<div class="sbl-quiz-progress" style="margin-top:-0.4rem; margin-bottom:0.6rem;">From: ' + escapeHtml(q.sourceLessonTitle) + '</div>';
+    }
+    html += '<p class="sbl-quiz-question">' + escapeHtml(q.q) + '</p>';
+    html += '<div class="sbl-quiz-options" id="sblQuizOptions">';
+    q.options.forEach(function (opt, idx) {
+      var letter = ['A', 'B', 'C', 'D'][idx];
+      html += '<button type="button" class="sbl-quiz-option" data-index="' + idx + '">' + letter + '. ' + escapeHtml(opt) + '</button>';
+    });
+    html += '</div><div id="sblQuizFeedbackWrap"></div>';
+    mount.innerHTML = html;
+
+    var optionButtons = mount.querySelectorAll('.sbl-quiz-option');
+    optionButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (quizState.answered) return;
+        quizState.answered = true;
+        var chosen = parseInt(btn.getAttribute('data-index'), 10);
+        var isCorrect = chosen === q.correct;
+        if (isCorrect) quizState.score++;
+        quizState.results.push({ tag: q.tag, correct: isCorrect });
+
+        optionButtons.forEach(function (b) {
+          b.disabled = true;
+          var i = parseInt(b.getAttribute('data-index'), 10);
+          if (i === q.correct) b.classList.add('is-correct');
+          else if (i === chosen) b.classList.add('is-incorrect');
+        });
+
+        var isLast = quizState.index === quizState.questions.length - 1;
+        var feedbackWrap = document.getElementById('sblQuizFeedbackWrap');
+        var feedbackClass = isCorrect ? 'is-correct' : 'is-incorrect';
+        feedbackWrap.innerHTML =
+          '<div class="sbl-quiz-feedback ' + feedbackClass + '"><strong>' + (isCorrect ? 'Correct.' : 'Not quite.') + '</strong> ' + (isCorrect ? escapeHtml(q.explain) : escapeHtml(q.explain) + (q.misconception ? ' <em>Common misconception: ' + escapeHtml(q.misconception) + '</em>' : '')) + '</div>' +
+          '<button type="button" class="sbl-quiz-next" id="sblQuizNextBtn">' + (isLast ? 'See my results' : 'Next question') + ' &rarr;</button>';
+
+        announce(isCorrect ? 'Correct answer.' : 'Incorrect answer. ' + q.explain);
+
+        document.getElementById('sblQuizNextBtn').addEventListener('click', function () {
+          quizState.answered = false;
+          if (isLast) {
+            renderQuizResult();
+          } else {
+            quizState.index++;
+            renderQuizQuestion();
+          }
+        });
+      });
+    });
+  }
+
+  function renderQuizResult() {
+    var mount = document.getElementById('sblQuizMount');
+    var lesson = currentLesson;
+    var total = quizState.questions.length;
+    var score = quizState.score;
+    var pct = Math.round((score / total) * 100);
+    var band = masteryBand(pct);
+    var strengths = quizState.results.filter(function (r) { return r.correct; }).map(function (r) { return r.tag; });
+    var toRevisit = quizState.results.filter(function (r) { return !r.correct; }).map(function (r) { return r.tag; });
+
+    var html = '<div class="sbl-quiz-result">';
+    html += '<div class="sbl-quiz-progress">' + escapeHtml(quizState.contextLabel) + ' complete</div>';
+    html += '<div class="sbl-quiz-result__score">' + score + ' / ' + total + '</div>';
+    html += '<p class="sbl-quiz-result__label">' + pct + '% correct \u2014 Mastery level: <strong>' + band + '</strong></p>';
+    html += '<div class="sbl-quiz-result__breakdown">';
+    html += '<p><strong>Strengths:</strong> ' + (strengths.length ? escapeHtml(strengths.join(', ')) : 'Keep practising \u2014 try again to build strengths here.') + '</p>';
+    html += '<p><strong>Topics to revisit:</strong> ' + (toRevisit.length ? escapeHtml(toRevisit.join(', ')) : 'None \u2014 great work.') + '</p>';
+    html += '</div>';
+    html += '<div class="sbl-quiz-result__actions">';
+    html += '<button type="button" class="sbl-quiz-action" id="sblQuizReview">Review with Tutor</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblQuizRetry">Try again</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblQuizDownload">Download quiz report (print / save as PDF)</button>';
+    html += '<button type="button" class="sbl-quiz-action sbl-quiz-action--secondary" id="sblQuizOneNote">Copy report for OneNote</button>';
+    html += '</div></div>';
+    mount.innerHTML = html;
+
+    var savedState = quizState;
+
+    document.getElementById('sblQuizRetry').addEventListener('click', function () {
+      startQuizWithQuestions(savedState.questions.slice(), savedState.contextLabel, savedState.showSource, savedState.onComplete);
+    });
+
+    document.getElementById('sblQuizReview').addEventListener('click', function () {
+      var prompt = buildReviewPrompt(lesson, toRevisit);
+      copyText(prompt, function (success) {
+        var statusBox = document.getElementById('sblCopyStatus');
+        var msg = success
+          ? 'Review prompt copied. Paste it into the tutor chat and press Send.'
+          : 'Automatic copy did not work. Select and copy this prompt manually:<textarea readonly rows="3">' + escapeHtml(prompt) + '</textarea>';
+        if (statusBox) {
+          statusBox.className = 'sbl-copy-status is-visible';
+          statusBox.innerHTML = msg;
+        }
+        announce(success ? 'Review prompt copied to clipboard.' : 'Automatic copy failed. A manual copy box is available.');
+      });
+    });
+
+    document.getElementById('sblQuizDownload').addEventListener('click', function () {
+      downloadQuizReport(lesson, score, total, pct, band, savedState);
+    });
+
+    document.getElementById('sblQuizOneNote').addEventListener('click', function () {
+      var text = buildPlainTextReport(lesson, score, total, pct, band, savedState);
+      copyText(text, function (success) {
+        announce(success ? 'Report copied for OneNote.' : 'Automatic copy failed. Please try again.');
+      });
+    });
+
+    if (lesson) {
+      var quizPatch = {};
+      quizPatch[quizProgressKey(savedState.contextLabel)] = {
+        label: savedState.contextLabel,
+        score: score,
+        total: total,
+        pct: pct,
+        band: band,
+        completedAt: new Date().toISOString()
+      };
+      syncProgress(lesson.id, quizPatch);
+    }
+
+    if (typeof savedState.onComplete === 'function') {
+      savedState.onComplete();
+    }
+  }
+
+  function buildPlainTextReport(lesson, score, total, pct, band, state) {
+    var lines = [];
+    lines.push('SBL Quiz Report');
+    if (lesson.topicNumber && lesson.topicTitle) {
+      lines.push('Topic ' + lesson.topicNumber + ': ' + lesson.topicTitle);
+    }
+    lines.push('Lesson: ' + lesson.title);
+    lines.push('Assessment: ' + state.contextLabel);
+    lines.push('Completed: ' + new Date().toLocaleString());
+    lines.push('Score: ' + score + ' / ' + total + ' (' + pct + '%) \u2014 Mastery level: ' + band);
+    lines.push('');
+    state.questions.forEach(function (q, i) {
+      var result = state.results[i];
+      lines.push((i + 1) + '. ' + q.q + (state.showSource && q.sourceLessonTitle ? ' [from: ' + q.sourceLessonTitle + ']' : ''));
+      lines.push('Correct answer: ' + q.options[q.correct]);
+      lines.push('Result: ' + (result && result.correct ? 'Correct' : 'Incorrect'));
+      lines.push('Explanation: ' + q.explain);
+      if (!(result && result.correct) && q.misconception) lines.push('Common misconception: ' + q.misconception);
+      lines.push('');
+    });
+    return lines.join('\n');
+  }
+
+  function downloadQuizReport(lesson, score, total, pct, band, state) {
+    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SBL Quiz Report</title>' +
+      '<style>body{font-family:Arial,sans-serif;padding:2rem;max-width:700px;margin:0 auto;color:#1B2029;}' +
+      'h1{font-size:1.3rem;} .q{margin:1rem 0;padding:0.8rem;border:1px solid #ddd;border-radius:8px;}' +
+      '.correct{color:#14532D;} .incorrect{color:#9F1239;} .src{font-size:0.8rem;color:#666;}</style></head><body>';
+    html += '<h1>SBL \u2014 Quiz Report</h1>';
+    html += '<p>';
+    if (lesson.topicNumber && lesson.topicTitle) {
+      html += '<strong>Topic ' + lesson.topicNumber + ':</strong> ' + escapeHtml(lesson.topicTitle) + '<br>';
+    }
+    html += '<strong>Lesson:</strong> ' + escapeHtml(lesson.title) + '<br>';
+    html += '<strong>Assessment:</strong> ' + escapeHtml(state.contextLabel) + '<br>';
+    html += '<strong>Completed:</strong> ' + new Date().toLocaleString() + '<br>';
+    html += '<strong>Score:</strong> ' + score + ' / ' + total + ' (' + pct + '%) \u2014 Mastery level: ' + band + '</p><hr>';
+    state.questions.forEach(function (q, i) {
+      var result = state.results[i];
+      html += '<div class="q"><p><strong>' + (i + 1) + '. ' + escapeHtml(q.q) + '</strong>' +
+        (state.showSource && q.sourceLessonTitle ? ' <span class="src">(from: ' + escapeHtml(q.sourceLessonTitle) + ')</span>' : '') + '</p>';
+      html += '<p>Correct answer: ' + escapeHtml(q.options[q.correct]) + '</p>';
+      html += '<p class="' + (result && result.correct ? 'correct' : 'incorrect') + '">Result: ' + (result && result.correct ? 'Correct' : 'Incorrect') + '</p>';
+      html += '<p>' + escapeHtml(q.explain) + '</p>';
+      if (!(result && result.correct) && q.misconception) html += '<p><em>Common misconception: ' + escapeHtml(q.misconception) + '</em></p>';
+      html += '</div>';
+    });
+    html += '<p><em>Use your browser\u2019s Print option and choose \u201cSave as PDF\u201d if you want a PDF copy.</em></p>';
+    html += '</body></html>';
+
+    var reportWindow = window.open('', '_blank');
+    if (!reportWindow) {
+      announce('Please allow pop-ups to download the report.');
+      return;
+    }
+    reportWindow.document.open();
+    reportWindow.document.write(html);
+    reportWindow.document.close();
+  }
+
+  /* ---------------- Global listeners ---------------- */
+
+  document.addEventListener('DOMContentLoaded', function () {
+    bindElements();
+    if (!overlay) return;
+
+    if (closeBtn) closeBtn.addEventListener('click', window.closeTeachBot);
+    if (expandBtn) expandBtn.addEventListener('click', function () { setExpanded(!isExpanded); });
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) window.closeTeachBot();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!overlay || overlay.hidden) return;
+
+      if (e.key === 'Escape') {
+        if (isExpanded) { setExpanded(false); }
+        else { window.closeTeachBot(); }
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        var focusable = getFocusableElements();
+        if (focusable.length === 0) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+    });
+  });
+
+})();
+/* IGCSE learn pages: progress, Continue banner and lesson chips (sbl-igcse-hub.js). */
+(function () {
+  if (!/^\/igcse\/[a-z-]+\/learn(\/|$)/.test(location.pathname) && !/^\/geography\/paper-\d\//.test(location.pathname)) return;
+  if (document.querySelector('script[src="/js/sbl-igcse-hub.js"]')) return;
+  var s = document.createElement('script'); s.src = '/js/sbl-igcse-hub.js'; s.defer = true;
+  (document.head || document.documentElement).appendChild(s);
+})();
+
+/* ============================================================
+   Lesson Progress panel (right-hand rail), Mastery tile and the
+   Overall Progress bar in the page header.
+
+   These used to be fixed placeholder HTML (always "0% · Not started")
+   even though each activity WAS saved to the student's account. This
+   reads the student's saved progress from /api/progress and fills
+   them in, and refreshes whenever something new is saved.
+
+   An activity counts as done when:
+     Teach Me Live            opened, or any checklist item ticked
+     Test My Knowledge        quiz finished (shows the score)
+     IB-Style Questions       at least one answer marked (shows marks)
+     Spaced Retrieval Quiz    quiz finished (shows the score)
+     Challenge Mode           opened
+     Ready for the Classroom? readiness check finished
+   ============================================================ */
+(function () {
+  'use strict';
+  if (window.__sblLessonProgress) return;
+  window.__sblLessonProgress = true;
+
+  var ITEMS = [
+    { key: 'teach', match: 'teach me live' },
+    { key: 'tmk', match: 'test my knowledge' },
+    { key: 'ib', match: 'ib-style' },
+    { key: 'sr', match: 'spaced retrieval' },
+    { key: 'challenge', match: 'challenge' },
+    { key: 'ready', match: 'ready for the classroom' }
+  ];
+
+  function lessonIdOnPage() {
+    var ov = document.getElementById('sblTeachBotOverlay');
+    if (ov && ov.getAttribute('data-lesson-id')) return ov.getAttribute('data-lesson-id');
+    var b = document.querySelector('[onclick*="openTeachBot("]');
+    var m = b && String(b.getAttribute('onclick')).match(/openTeachBot\(\s*['"]([^'"]+)['"]/);
+    return m ? m[1] : null;
+  }
+
+  function status(d) {
+    d = d || {};
+    var ib = { aw: 0, mx: 0, n: 0 };
+    Object.keys(d).forEach(function (k) {
+      var v = d[k];
+      if (k.indexOf('ib_q') === 0 && v && typeof v.awarded === 'number' && typeof v.marks === 'number' && v.marks > 0) { ib.aw += v.awarded; ib.mx += v.marks; ib.n++; }
+    });
+    var tmk = d.quiz_test_my_knowledge, sr = d.quiz_spaced_retrieval;
+    var ticked = Array.isArray(d.checklist) && d.checklist.some(Boolean);
+    var s = {
+      teach: { done: !!d.teachOpenedAt || ticked },
+      tmk: { done: !!(tmk && typeof tmk.pct === 'number'), note: tmk && typeof tmk.pct === 'number' ? tmk.pct + '%' : '' },
+      ib: { done: ib.n > 0, note: ib.n ? ib.aw + '/' + ib.mx : '' },
+      sr: { done: !!(sr && typeof sr.pct === 'number'), note: sr && typeof sr.pct === 'number' ? sr.pct + '%' : '' },
+      challenge: { done: !!d.challengeOpenedAt },
+      ready: { done: !!d.readinessCompleted }
+    };
+    var n = ITEMS.filter(function (it) { return s[it.key].done; }).length;
+    s.pct = Math.round(n / ITEMS.length * 100);
+    s.any = n > 0 || Object.keys(d).length > 0;
+    s.band = tmk && tmk.band ? tmk.band : null;
+    return s;
+  }
+
+  var styled = false;
+  function addStyle() {
+    if (styled) return; styled = true;
+    var st = document.createElement('style');
+    st.textContent =
+      '.lh-checklist li.sbl-done .lh-checklist__dot{background:var(--lh-green,#16a34a)!important;border-color:var(--lh-green,#16a34a)!important;box-shadow:none}' +
+      '.lh-checklist li .sbl-lp-note{float:right;font-weight:700;color:var(--lh-green,#16a34a);font-size:.9em}' +
+      '.lh-ring circle{transition:stroke-dashoffset .6s ease}';
+    document.head.appendChild(st);
+  }
+
+  function paintLesson(s) {
+    var ring = document.querySelector('.lh-ring');
+    if (!ring) return;
+    addStyle();
+    var arcs = ring.querySelectorAll('circle');
+    var arc = arcs[arcs.length - 1];
+    if (arc && arcs.length > 1) {
+      var len = parseFloat(arc.getAttribute('stroke-dasharray')) || 226;
+      arc.setAttribute('stroke-dashoffset', String(Math.round(len * (1 - s.pct / 100))));
+    }
+    var p = ring.querySelector('.lh-ring__pct'); if (p) p.textContent = s.pct + '%';
+    var l = ring.querySelector('.lh-ring__label'); if (l) l.textContent = s.pct >= 100 ? 'Complete' : (s.any ? 'In progress' : 'Not started');
+    var panel = ring.closest('.lh-panel') || document;
+    panel.querySelectorAll('.lh-checklist li').forEach(function (li) {
+      var old = li.querySelector('.sbl-lp-note'); if (old) old.remove();
+      var t = li.textContent.toLowerCase();
+      var it = ITEMS.filter(function (x) { return t.indexOf(x.match) !== -1; })[0];
+      if (!it) return;
+      var st = s[it.key];
+      li.classList.toggle('sbl-done', !!st.done);
+      if (st.note) { var n = document.createElement('span'); n.className = 'sbl-lp-note'; n.textContent = st.note; li.appendChild(n); }
+    });
+    // "Mastery" tile
+    document.querySelectorAll('.lh-stat').forEach(function (tile) {
+      var lab = tile.querySelector('.lh-stat__label'), val = tile.querySelector('.lh-stat__value');
+      if (lab && val && /mastery/i.test(lab.textContent)) val.textContent = s.band || (s.any ? 'In progress' : 'Not started');
+    });
+  }
+
+  // The lessons in the same unit/topic as this one (for the header bar).
+  function unitLessons(id) {
+    var lists = [];
+    Object.keys(window).forEach(function (k) {
+      if (!/LESSON_ORDERS?$/.test(k)) return;
+      var v = window[k];
+      if (!Array.isArray(v)) return;
+      if (Array.isArray(v[0])) v.forEach(function (a) { lists.push(a); }); else lists.push(v);
+    });
+    for (var i = 0; i < lists.length; i++) if (lists[i].indexOf(id) !== -1) return lists[i];
+    return window.SBL_LESSONS ? Object.keys(window.SBL_LESSONS) : [id];
+  }
+
+  function paintOverall(all, id) {
+    var wrap = document.querySelector('.lh-progress-wrap');
+    if (!wrap) return;
+    var ids = unitLessons(id);
+    var sum = 0;
+    ids.forEach(function (x) { sum += status(all[x]).pct; });
+    var pct = ids.length ? Math.round(sum / ids.length) : 0;
+    var fill = wrap.querySelector('.lh-progress-bar__fill'); if (fill) fill.style.width = pct + '%';
+    var t = wrap.querySelector('.lh-progress-pct'); if (t) t.textContent = pct + '%';
+    wrap.title = 'Progress across the ' + ids.length + ' lessons in this unit';
+  }
+
+  var lessonId = null, busy = false, again = false;
+  function refresh() {
+    if (!lessonId) return;
+    if (busy) { again = true; return; }
+    busy = true;
+    fetch('/api/progress', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (res) {
+        var all = (res && res.lessons) || {};
+        paintLesson(status(all[lessonId]));
+        paintOverall(all, lessonId);
+      })
+      .catch(function () {})
+      .then(function () { busy = false; if (again) { again = false; refresh(); } });
+  }
+
+  // Teach Me Live and Challenge Mode have no score, so record opening them.
+  function markOpened(key, id) {
+    id = id || lessonId; if (!id) return;
+    var patch = {}; patch[key] = new Date().toISOString();
+    fetch('/api/progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lessonId: id, patch: patch }) })
+      .then(function (r) { if (r.ok) refresh(); }).catch(function () {});
+  }
+  function wrap(name, key) {
+    var orig = window[name];
+    if (typeof orig !== 'function' || orig.__sblWrapped) return;
+    var w = function (id) { try { markOpened(key, id); } catch (e) {} return orig.apply(this, arguments); };
+    w.__sblWrapped = true;
+    window[name] = w;
+  }
+
+  function start() {
+    lessonId = lessonIdOnPage();
+    if (!lessonId || !document.querySelector('.lh-ring, .lh-progress-wrap')) return;
+    wrap('openTeachBot', 'teachOpenedAt');
+    wrap('openChallengeMode', 'challengeOpenedAt');
+    window.addEventListener('sbl-progress-saved', function () { setTimeout(refresh, 150); });
+    refresh();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();

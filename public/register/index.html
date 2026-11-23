@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Access — Solutions Based Learning</title>
+<meta name="description" content="Request access to Solutions Based Learning.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-theme.css">
+<link rel="stylesheet" href="/css/sbl-auth.css">
+<style>.req::after{content:" *";color:#f87171;font-weight:700}.req-key{font-size:.85rem;margin:0 0 .6rem}.req-key span{color:#f87171;font-weight:700}</style>
+</head>
+<body>
+<div class="sbl-contours" aria-hidden="true"></div>
+<div class="sbl-auth-shell">
+  <a href="/" class="sbl-auth-brand">
+    <span class="sbl-auth-brand__mark">SBL</span>
+    <span class="sbl-auth-brand__name">Solutions <strong>Based</strong> Learning</span>
+  </a>
+
+  <div class="sbl-auth-card sbl-auth-card--wide" id="formCard">
+    <h1>Request Access to Solutions Based Learning</h1>
+    <p class="sbl-auth-card__lead">
+      Solutions Based Learning (SBL) is an educational platform designed to support inquiry, critical
+      thinking, independent learning and the thoughtful integration of AI into education. Access is
+      currently available by application only. We welcome requests from educators, school leaders,
+      curriculum specialists and educational professionals who share an interest in innovative teaching
+      and learning. Please complete the form below. All applications are reviewed individually before
+      access is granted.
+    </p>
+
+    <div class="sbl-auth-notice">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16v-4M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <span>Solutions Based Learning is currently in active development. Access is being granted to a limited group of educational professionals as the platform continues to grow.</span>
+    </div>
+
+    <div class="sbl-alert sbl-alert--error" id="formError" role="alert"></div>
+
+    <form id="registerForm" novalidate>
+      <p class="req-key"><span>*</span> Required</p>
+      <fieldset class="sbl-fieldset">
+        <legend>Personal Information</legend>
+        <div class="sbl-field-row">
+          <div class="sbl-field">
+            <label for="firstName" class="req">First Name</label>
+            <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="sbl-field">
+            <label for="lastName" class="req">Last Name</label>
+            <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="sbl-field">
+          <label for="email" id="emailLabel" class="req">Professional Email Address</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="sbl-field-row">
+          <div class="sbl-field">
+            <label for="organisation" class="req">School / Organisation</label>
+            <input type="text" id="organisation" name="organisation" required>
+          </div>
+          <div class="sbl-field">
+            <label for="country" class="req">Country</label>
+            <input type="text" id="country" name="country" required>
+          </div>
+        </div>
+        <div class="sbl-field">
+          <label for="role" class="req">Current Role</label>
+          <select id="role" name="role" required>
+            <option value="" disabled selected>Select your role…</option>
+            <option>Student</option>
+            <option>Teacher</option>
+            <option>Head of Department</option>
+            <option>School Leader</option>
+            <option>Curriculum Coordinator</option>
+            <option>Educational Consultant</option>
+            <option>University Lecturer</option>
+            <option>Trainee Teacher</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset" id="subjectFieldset" style="display:none;">
+        <legend class="req">Your Subjects and Teachers</legend>
+        <p style="margin:0 0 .8rem;font-size:.92rem;">Choose at least one subject and your teacher for it (up to 3 subjects).</p>
+        <div id="subjectRows"></div>
+        <div class="sbl-field" style="margin-top:.8rem;">
+          <label for="gradYear" class="req">Graduation year</label>
+          <select id="gradYear">
+            <option value="">Select the year you graduate…</option>
+            <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option><option>2033</option>
+          </select>
+          <script>
+            // Year 13 to Year 7 for the current school year (Aug–Jul, Bangkok), so the list moves up each August
+            (function () { var n = new Date(Date.now() + 7 * 3600 * 1000), end = n.getUTCMonth() >= 7 ? n.getUTCFullYear() + 1 : n.getUTCFullYear(), h = '<option value="">Select the year you graduate…</option>'; for (var y = end; y <= end + 6; y++) h += '<option>' + y + '</option>'; document.getElementById('gradYear').innerHTML = h; })();
+          </script>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset" id="professionalFieldset">
+        <legend>Professional Interest</legend>
+        <div class="sbl-field">
+          <label for="reason" id="reasonLabel" class="req">Why would you like access to Solutions Based Learning?</label>
+          <textarea id="reason" name="reason" required placeholder="Please tell us briefly how you hope to use the platform and what interests you most about SBL."></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset" id="interestFieldset">
+        <legend>Areas of Interest</legend>
+        <div class="sbl-checkbox-group" id="interestGroup">
+          <label class="sbl-checkbox"><input type="checkbox" value="Geography Education"> Geography Education</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Humanities Education"> Humanities Education</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="AI in Education"> AI in Education</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Flipped Learning"> Flipped Learning</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Inquiry-Based Learning"> Inquiry-Based Learning</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Curriculum Development"> Curriculum Development</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Assessment and Feedback"> Assessment and Feedback</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Professional Learning"> Professional Learning</label>
+          <label class="sbl-checkbox"><input type="checkbox" value="Other"> Other</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="sbl-fieldset">
+        <legend class="req">Terms of Access</legend>
+        <div class="sbl-checkbox-group">
+          <label class="sbl-checkbox"><input type="checkbox" id="termsAll" required> I am applying for genuine educational use of this platform. I will not share my account details with others, I understand that access is granted at the discretion of the site administrator, and I agree to use the platform responsibly and ethically.</label>
+        </div>
+      </fieldset>
+
+      <div class="sbl-auth-actions">
+        <button type="submit" class="sbl-btn sbl-btn--primary" id="submitBtn">REQUEST ACCESS</button>
+      </div>
+    </form>
+
+    <div class="sbl-auth-links">
+      <a href="/login/">Already have an account? Log in</a>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="sbl-auth-card" id="successCard" style="display:none;">
+    <h1>Application received</h1>
+    <p class="sbl-auth-card__lead" id="successMessage"></p>
+    <a href="/" class="sbl-btn sbl-btn--secondary">Return to homepage</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var form = document.getElementById('registerForm');
+  var btn = document.getElementById('submitBtn');
+  var errorBox = document.getElementById('formError');
+
+  // Same single application form and admin approval queue for
+  // everyone — but a few labels swap to fit students better when
+  // "Student" is picked from the role dropdown. Nothing here changes
+  // what gets validated or submitted, just the wording shown.
+  var roleSelect = document.getElementById('role');
+  var emailLabel = document.getElementById('emailLabel');
+  var reasonLabel = document.getElementById('reasonLabel');
+  var reasonInput = document.getElementById('reason');
+  var interestFieldset = document.getElementById('interestFieldset');
+  var professionalFieldset = document.getElementById('professionalFieldset');
+  var subjectFieldset = document.getElementById('subjectFieldset');
+
+  // Students tick their subjects and pick a teacher for each. The
+  // choices are written into the application's "reason" text, so they
+  // show in the admin dashboard without any database changes.
+  var SUBJECTS = ['Geography', 'History', 'Business', 'Economics'];
+  var GEOG = ['Mr Wright', 'Ms Bond', 'Ms Hobday', 'Mr Mitcheson', 'Mr Sam Stuart', 'Ms Conroy'];
+  var HIST = ['Ms Richards', 'Ms Pembleton', 'Mr Fountain', 'Mr O\u2019Shea'];
+  var BUSEC = ['Mr Dale', 'Mr Mark Stewart', 'Mr Ghazi', 'Mr Fieldhouse', 'Mr Munir', 'Mr Thatcher', 'Mr Worrall', 'Mr Meadows'];
+  function bySurname(list) { return list.slice().sort(function (a, b) { return a.split(' ').pop().localeCompare(b.split(' ').pop()); }); }
+  var TEACHERS = { Geography: bySurname(GEOG), History: bySurname(HIST), Business: bySurname(BUSEC), Economics: bySurname(BUSEC) };
+  var subjectRows = document.getElementById('subjectRows');
+  SUBJECTS.forEach(function (subject) {
+    var row = document.createElement('div');
+    row.style.cssText = 'display:grid;grid-template-columns:minmax(130px,1fr) 2fr;gap:.6rem;align-items:center;margin-bottom:.6rem;';
+    var id = 'teacher' + subject;
+    row.innerHTML = '<label class="sbl-checkbox" style="margin:0;"><input type="checkbox" class="subject-tick" value="' + subject + '"> ' + subject + '</label>' +
+      '<div class="sbl-field" style="margin:0;"><select id="' + id + '" aria-label="Your ' + subject + ' teacher">' +
+      '<option value="">Teacher…</option>' +
+      TEACHERS[subject].map(function (t) { return '<option>' + t + '</option>'; }).join('') + '</select></div>';
+    var tick = row.querySelector('input'), sel = row.querySelector('select');
+    // Works whichever is tapped first: picking a teacher ticks the subject,
+    // and unticking a subject clears its teacher. Max 3 subjects, to match
+    // the admin dashboard.
+    function refreshLimit() {
+      var full = document.querySelectorAll('.subject-tick:checked').length >= 3;
+      Array.prototype.forEach.call(document.querySelectorAll('.subject-tick'), function (t) { if (!t.checked) t.disabled = full; });
+    }
+    tick.addEventListener('change', function () { if (!tick.checked) sel.value = ''; refreshLimit(); });
+    sel.addEventListener('change', function () {
+      if (sel.value && !tick.checked) {
+        if (document.querySelectorAll('.subject-tick:checked').length >= 3) {
+          sel.value = '';
+          errorBox.textContent = 'You can choose up to 3 subjects. Untick one first.';
+          errorBox.classList.add('is-visible');
+          return;
+        }
+        tick.checked = true;
+      }
+      errorBox.classList.remove('is-visible');
+      refreshLimit();
+    });
+    subjectRows.appendChild(row);
+  });
+
+  function studentChoices() {
+    return Array.prototype.slice.call(document.querySelectorAll('.subject-tick:checked')).map(function (el) {
+      return { subject: el.value, teacher: document.getElementById('teacher' + el.value).value };
+    });
+  }
+
+  var STAFF_TEXT = {
+    email: 'Professional Email Address',
+    reasonLabel: 'Why would you like access to Solutions Based Learning?',
+    reasonPlaceholder: 'Please tell us briefly how you hope to use the platform and what interests you most about SBL.'
+  };
+  var STUDENT_TEXT = {
+    email: 'Email Address',
+    reasonLabel: 'Which class or teacher is this application for?',
+    reasonPlaceholder: 'e.g. Year 12 IB Geography, Mr Wright'
+  };
+
+  function updateFormForRole() {
+    var isStudent = roleSelect.value === 'Student';
+    var text = isStudent ? STUDENT_TEXT : STAFF_TEXT;
+    emailLabel.textContent = text.email;
+    reasonLabel.textContent = text.reasonLabel;
+    reasonInput.placeholder = text.reasonPlaceholder;
+    interestFieldset.style.display = isStudent ? 'none' : '';
+    subjectFieldset.style.display = isStudent ? '' : 'none';
+    professionalFieldset.style.display = isStudent ? 'none' : '';
+    reasonInput.required = !isStudent;
+  }
+
+  // The student QR code links to /register/?role=student, which starts
+  // the form with "Student" already selected.
+  if (/[?&]role=student\b/i.test(location.search)) roleSelect.value = 'Student';
+
+  roleSelect.addEventListener('change', updateFormForRole);
+  updateFormForRole();
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.classList.remove('is-visible');
+
+    var areas = Array.prototype.slice.call(document.querySelectorAll('#interestGroup input:checked')).map(function (el) { return el.value; });
+
+    var payload = {
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      organisation: document.getElementById('organisation').value.trim(),
+      country: document.getElementById('country').value.trim(),
+      roleAppliedFor: document.getElementById('role').value,
+      reason: document.getElementById('reason').value.trim(),
+      areasOfInterest: areas,
+      terms: {
+        // One tick accepts all four terms (each is still recorded separately).
+        professionalCapacity: document.getElementById('termsAll').checked,
+        noSharing: document.getElementById('termsAll').checked,
+        adminDiscretion: document.getElementById('termsAll').checked,
+        responsibleUse: document.getElementById('termsAll').checked
+      }
+    };
+
+    if (roleSelect.value === 'Student') {
+      var choices = studentChoices();
+      if (!choices.length) {
+        errorBox.textContent = 'Please tick at least one subject.';
+        errorBox.classList.add('is-visible');
+        return;
+      }
+      var missing = choices.filter(function (c) { return !c.teacher; }).map(function (c) { return c.subject; });
+      if (missing.length) {
+        errorBox.textContent = 'Please choose your teacher for ' + missing.join(' and ') + '.';
+        errorBox.classList.add('is-visible');
+        return;
+      }
+      var grad = document.getElementById('gradYear').value;
+      if (!grad) {
+        errorBox.textContent = 'Please choose your graduation year.';
+        errorBox.classList.add('is-visible');
+        return;
+      }
+      payload.reason = 'Student. Graduating ' + grad + '. Subjects and teachers: ' + choices.map(function (c) { return c.subject + ' (' + c.teacher + ')'; }).join('; ');
+    }
+
+    if (!form.reportValidity()) return;
+    if (!payload.terms.professionalCapacity || !payload.terms.noSharing || !payload.terms.adminDiscretion || !payload.terms.responsibleUse) {
+      errorBox.textContent = 'Please tick the box to accept the terms of access before submitting.';
+      errorBox.classList.add('is-visible');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'SUBMITTING…';
+
+    fetch('/api/register-application', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+      .then(function (result) {
+        if (!result.ok) {
+          errorBox.textContent = result.data.error || 'Could not submit your application. Please try again.';
+          errorBox.classList.add('is-visible');
+          btn.disabled = false;
+          btn.textContent = 'REQUEST ACCESS';
+          return;
+        }
+        document.getElementById('formCard').style.display = 'none';
+        var successCard = document.getElementById('successCard');
+        var msg = 'Thank you — your application has been received. Your reference ID is ' + result.data.referenceId + '. All applications are reviewed individually, so this can take a little time. We will email you as soon as a decision has been made.';
+        if (result.data.warning) msg += ' (' + result.data.warning + ')';
+        document.getElementById('successMessage').textContent = msg;
+        successCard.style.display = 'block';
+      })
+      .catch(function () {
+        errorBox.textContent = 'Could not reach the server. Please check your connection and try again.';
+        errorBox.classList.add('is-visible');
+        btn.disabled = false;
+        btn.textContent = 'REQUEST ACCESS';
+      });
+  });
+})();
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elasticities of demand and supply — IB Economics Revision Guide — SBL</title>
+<meta name="description" content="Elasticities of demand and supply — IB Economics Revision Guide, Unit 2: Microeconomics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/sbl-learn-theme.css">
+<link rel="stylesheet" href="/css/sbl-teach-bot.css">
+<link rel="stylesheet" href="/css/sbl-igcse-learn.css">
+<style>
+.ig-map svg{border:2px solid #1E3A55;border-radius:14px;background:#fff;}
+.ed-fig{margin:16px 0;}
+.ed-fig svg{width:100%;height:auto;display:block;}
+.ed-fig figcaption{font-size:.84rem;line-height:1.5;color:var(--lh-body);margin-top:8px;}
+.hl-badge{display:inline-block;font-family:var(--lh-font-mono,monospace);font-size:.66rem;font-weight:800;letter-spacing:.06em;background:#7c3aed;color:#fff;border-radius:999px;padding:2px 8px;margin-right:6px;vertical-align:2px;}
+.ig-calc{background:#f5f3ff;border:1px solid #c4b5fd;border-radius:12px;padding:10px 14px;margin:12px 0;line-height:1.6;}
+.ig-calc b.h{display:block;color:#5b21b6;margin-bottom:4px;}
+.ig-tip{background:#fff7e6;border:1px solid #f5c66b;border-radius:12px;padding:10px 14px;margin:12px 0;line-height:1.6;}
+.ig-eg{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:12px;padding:10px 14px;margin:12px 0;line-height:1.6;}
+.ig-section h3{font-size:1.04rem;font-weight:700;margin:20px 0 8px;color:var(--lh-ink,#0f172a);}
+</style>
+<style id="ig-syl-list-css">.ig-syl-list{list-style:none;margin:2px 0 0;padding:0}.ig-syl-list li{position:relative;margin:6px 0;padding-left:20px;line-height:1.45;font-size:.93rem;color:var(--lh-ink)}.ig-syl-list li::before{content:"";position:absolute;left:5px;top:.55em;width:7px;height:7px;border-radius:50%;background:#16a34a}.ig-syl-list li.ig-syl-h{padding-left:0;font-weight:700;margin-top:12px}.ig-syl-list li.ig-syl-h:first-child{margin-top:2px}.ig-syl-list li.ig-syl-h::before{display:none}.ig-syl-list .hl-badge{display:inline-block;font:800 .66rem/1 var(--lh-font-mono,monospace);background:#7c3aed;color:#fff;border-radius:999px;padding:3px 8px;margin-right:6px;vertical-align:2px}</style>
+</head>
+<body class="lh">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
+  <div>
+    <header class="lh-topbar">
+      <nav class="lh-crumbs" aria-label="Breadcrumb">
+        <a href="/economics/revision/guide">IB Economics Revision Guide</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/economics/revision/guide#units">The IB Economics syllabus</a>
+        <span class="lh-crumbs__sep">/</span>
+        <a href="/economics/revision/guide/microeconomics">Unit 2: Microeconomics</a>
+        <span class="lh-crumbs__sep">/</span>
+        <span>Topic 3</span>
+      </nav>
+    </header>
+
+    <div class="lh-content-grid">
+      <main>
+        <div class="lh-page-head lh-page-head--banner">
+          <h1>3. Elasticities of demand and supply</h1>
+          <p>IB Economics Revision Guide &middot; Unit 2: Microeconomics &middot; Topics &middot; Topic 3 of 6</p>
+        </div>
+
+        <section class="ig-focus" id="lesson-focus">
+          <div class="ig-li"><h2>Learning Intention</h2><p>To understand how responsive demand and supply are to changes in price and income, what determines elasticity, and why it matters to firms and governments.</p></div>
+          <div class="ig-focus-grid">
+            <div class="ig-syl"><h2>Syllabus Statement</h2>
+              <ul class="ig-syl-list"><li class="ig-syl-h">2.5 Elasticity of demand</li><li>PED (calculation, range of values, determinants, PED and total revenue, importance for firms and government)</li><li>YED (calculation, significance of sign and size: normal, inferior, luxury and necessity goods; Engel curve)</li><li class="ig-syl-h"><span class="hl-badge">HL</span>Higher Level only</li><li>Changing PED along a straight-line demand curve (with diagram)</li><li>Why PED for primary commodities is lower than for manufactured products</li><li>Importance of YED for firms</li><li>Importance of YED in explaining changes in the sectoral structure of the economy</li><li class="ig-syl-h">2.6 Elasticity of supply</li><li>PES (calculation, range, determinants)</li><li class="ig-syl-h"><span class="hl-badge">HL</span>Higher Level only</li><li>Why PES for primary commodities is lower than for manufactured products</li></ul>
+            </div>
+            <div class="ig-sc"><h2>Success criteria</h2><p class="ig-sc-sub">I can&hellip; <span id="scCount"></span></p>
+              <ul>
+                <li><label><input type="checkbox" aria-label="Success criterion 1"><span>Calculate PED and explain the range of values and its determinants</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 2"><span>Explain the relationship between PED and total revenue, and why PED matters to firms and governments</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 3"><span>Calculate YED and use it to classify goods</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 4"><span>Calculate PES and explain its determinants</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 5"><span>HL: Explain why PED changes along a straight-line demand curve, and why PED for primary commodities is lower than for manufactured products</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 6"><span>HL: Explain the importance of YED for firms and in explaining changes in the sectoral structure of the economy</span></label></li>
+                <li><label><input type="checkbox" aria-label="Success criterion 7"><span>HL: Explain why PES for primary commodities is lower than for manufactured products, and the consequences for price volatility</span></label></li>
+              </ul>
+              <p class="ig-sc-note">Tick each one when you are confident. Your ticks are saved to your account.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="ig-section" id="sc1-price-elasticity-of-demand-ped">
+          <span class="ig-sc-tag">Success criterion 1</span>
+          <h2>Price elasticity of demand (PED)</h2>
+<div class="ig-calc"><b class="h">Formula</b>PED = %&Delta; quantity demanded &divide; %&Delta; price. The answer is negative (law of demand), so we usually ignore the sign. Example: price rises from $10 to $12 (+20%) and quantity falls from 500 to 450 (&minus;10%). PED = &minus;10 &divide; 20 = &minus;0.5: inelastic.<br><b>Rearranging:</b> %&Delta;Qd = PED &times; %&Delta;P. If PED = &minus;1.2 and price falls by 5%, quantity demanded rises by 6%.</div><div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>PED value (ignoring sign)</th><th>Meaning</th></tr></thead><tbody><tr><td>0</td><td>Perfectly inelastic: quantity does not change</td></tr><tr><td>0 to 1</td><td>Inelastic: %&Delta;Qd &lt; %&Delta;P</td></tr><tr><td>1</td><td>Unit elastic: %&Delta;Qd = %&Delta;P</td></tr><tr><td>1 to &infin;</td><td>Elastic: %&Delta;Qd &gt; %&Delta;P</td></tr><tr><td>&infin;</td><td>Perfectly elastic: any price rise causes demand to fall to zero</td></tr></tbody></table></div><figure class="ig-fig ig-map ed-fig" style="max-width:960px"><svg viewBox="0 0 960 340" role="img" aria-labelledby="fped"><title id="fped">Price elasticity of demand diagrams</title><rect width="960" height="340" fill="#ffffff"/>
+<text x="245.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">PED: from perfectly inelastic to perfectly elastic</text>
+<path d="M70.0 68.0 L70.0 292.0 L424.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="64.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Price</text>
+<text x="65.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="140.0,281.0 140.0,83.0" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="120.0" y="77.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">PED = 0</text>
+<polyline points="80.5,116.0 402.5,116.0" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="342.5" y="108.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#dc2626" text-anchor="start">PED = ∞</text>
+<path d="M175.0 83.0 C178.5 94.0 186.1 130.7 196.0 149.0 C205.9 167.3 215.8 178.7 234.5 193.0 C253.2 207.3 279.4 224.2 308.0 234.8 C336.6 245.4 389.7 253.1 406.0 256.8" fill="none" stroke="#7c3aed" stroke-width="2.6" stroke-linecap="round"/>
+<text x="376.0" y="246.8" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#7c3aed" text-anchor="start">PED = 1</text>
+<polyline points="227.5,133.6 402.5,186.4" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="392.5" y="178.4" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#16a34a" text-anchor="start">elastic</text>
+<polyline points="252.0,146.8 294.0,274.4" fill="none" stroke="#0f766e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="298.0" y="270.4" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#0f766e" text-anchor="start">inelastic</text>
+<text x="725.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">PED changes along a straight-line demand curve</text>
+<path d="M550.0 68.0 L550.0 292.0 L904.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="904.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="544.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Price</text>
+<text x="545.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="550.0,72.0 900.0,292.0" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="886.0" y="286.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D</text>
+<circle cx="725.0" cy="182.0" r="3.6" fill="#7c3aed"/>
+<text x="733.0" y="178.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#7c3aed" text-anchor="start">PED = 1</text>
+<text x="606.0" y="116.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#16a34a" text-anchor="start">PED &gt; 1 (elastic)</text>
+<text x="760.0" y="248.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#0f766e" text-anchor="start">PED &lt; 1 (inelastic)</text>
+<text x="572.8" y="84.8" font-family="Inter,sans-serif" font-size="10.5" fill="#0f172a" text-anchor="start">PED → ∞</text>
+<text x="872.0" y="277.2" font-family="Inter,sans-serif" font-size="10.5" fill="#0f172a" text-anchor="end">PED → 0</text>
+</svg><figcaption>Left: the range of PED values. A unit-elastic curve (rectangular hyperbola) keeps total revenue constant at every price. Right <span class="hl-badge">HL</span>: along a straight-line demand curve the slope is constant but PED is not: demand is elastic at high prices and inelastic at low prices, with PED = 1 at the midpoint, where total revenue is maximised.</figcaption></figure><p><b>Determinants of PED</b>: the number and closeness of <b>substitutes</b> (the most important), the <b>degree of necessity</b> (and addictiveness), the <b>proportion of income</b> spent on the good, and <b>time</b> (demand becomes more elastic in the long run as consumers find alternatives). How broadly a good is defined matters: demand for &ldquo;food&rdquo; is inelastic, but for one brand of cereal it is elastic.</p>
+        </section>
+
+        <section class="ig-section" id="sc2-ped-and-total-revenue-why-ped-matters">
+          <span class="ig-sc-tag">Success criterion 2</span>
+          <h2>PED and total revenue; why PED matters</h2>
+<figure class="ig-fig ig-map ed-fig" style="max-width:960px"><svg viewBox="0 0 960 340" role="img" aria-labelledby="frev"><title id="frev">PED and total revenue</title><rect width="960" height="340" fill="#ffffff"/>
+<polygon points="70.0,204.0 70.0,138.0 190.0,138.0 190.0,204.0" fill="#16a34a" opacity="0.3"/>
+<polygon points="190.0,292.0 190.0,204.0 223.4,204.0 223.4,292.0" fill="#dc2626" opacity="0.3"/>
+<text x="245.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Price rise with inelastic demand</text>
+<path d="M70.0 68.0 L70.0 292.0 L424.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="64.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Price</text>
+<text x="65.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="161.0,80.8 259.0,274.4" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="263.0" y="272.4" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D</text>
+<text x="130.0" y="175.0" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#16a34a" text-anchor="middle">+ gain</text>
+<polyline points="70.0,204.0 223.4,204.0 223.4,292.0" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="223.4" y="307.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q1</text>
+<text x="65.0" y="208.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P1</text>
+<polyline points="70.0,138.0 190.0,138.0 190.0,292.0" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="190.0" y="307.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q2</text>
+<text x="65.0" y="142.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P2</text>
+<text x="189.5" y="261.2" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#dc2626" text-anchor="end">− loss</text>
+<text x="262.5" y="107.2" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start">Total revenue rises</text>
+<polygon points="550.0,204.0 550.0,160.0 669.9,160.0 669.9,204.0" fill="#16a34a" opacity="0.3"/>
+<polygon points="669.9,292.0 669.9,204.0 783.6,204.0 783.6,292.0" fill="#dc2626" opacity="0.3"/>
+<text x="725.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Price rise with elastic demand</text>
+<path d="M550.0 68.0 L550.0 292.0 L904.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="904.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="544.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Price</text>
+<text x="545.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="567.5,120.4 886.0,243.6" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="876.0" y="235.6" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D</text>
+<text x="609.9" y="186.0" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#16a34a" text-anchor="middle">+ gain</text>
+<text x="726.8" y="252.0" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#dc2626" text-anchor="middle">− loss</text>
+<polyline points="550.0,204.0 783.6,204.0 783.6,292.0" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="783.6" y="307.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q1</text>
+<text x="545.0" y="208.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P1</text>
+<polyline points="550.0,160.0 669.9,160.0 669.9,292.0" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="669.9" y="307.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q2</text>
+<text x="545.0" y="164.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P2</text>
+<text x="707.5" y="102.8" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#0f172a" text-anchor="start">Total revenue falls</text>
+</svg><figcaption>With inelastic demand (left) the percentage fall in quantity is smaller than the percentage rise in price, so the revenue gained (green) is bigger than the revenue lost (red): total revenue rises. With elastic demand (right) the opposite happens. Firms with inelastic demand can raise revenue by raising price; governments raise more tax revenue by taxing goods with inelastic demand.</figcaption></figure><div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Demand</th><th>Price rise</th><th>Price cut</th></tr></thead><tbody><tr><td>Inelastic (PED &lt; 1)</td><td>Total revenue rises</td><td>Total revenue falls</td></tr><tr><td>Unit elastic (PED = 1)</td><td>No change</td><td>No change</td></tr><tr><td>Elastic (PED &gt; 1)</td><td>Total revenue falls</td><td>Total revenue rises</td></tr></tbody></table></div><ul><li><b>Firms</b> use PED to set prices: raise prices for inelastic products, cut prices for elastic ones. It also helps with price discrimination (charging different groups different prices).</li><li><b>Governments</b> raise more tax revenue by taxing goods with inelastic demand (fuel, tobacco, alcohol), but such taxes do little to cut consumption and may be regressive. PED also predicts the effect of subsidies and of a currency depreciation on export revenue.</li></ul><p class="ig-tip"><b>Exam tip:</b> Total revenue = price &times; quantity. On the diagram, show the revenue gained and lost as rectangles.</p>
+        </section>
+
+        <section class="ig-section" id="sc3-income-elasticity-of-demand-yed">
+          <span class="ig-sc-tag">Success criterion 3</span>
+          <h2>Income elasticity of demand (YED)</h2>
+<div class="ig-calc"><b class="h">Formula</b>YED = %&Delta; quantity demanded &divide; %&Delta; income. Example: incomes rise by 5% and demand for restaurant meals rises by 8%. YED = 8 &divide; 5 = +1.6: a normal, income-elastic (luxury) good.<br><b>Rearranging:</b> %&Delta;Qd = YED &times; %&Delta;income. If YED for bus travel is &minus;0.5 and incomes rise by 4%, demand falls by 2%.</div><figure class="ig-fig ig-map ed-fig" style="max-width:640px"><svg viewBox="0 0 480 340" role="img" aria-labelledby="fyed"><title id="fyed">Engel curves showing YED</title><rect width="480" height="340" fill="#ffffff"/>
+<text x="245.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Income elasticity of demand</text>
+<path d="M70.0 68.0 L70.0 292.0 L424.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity demanded</text>
+<text x="64.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Income</text>
+<text x="65.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="105.0,270.0 210.0,80.8" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="202.0" y="84.8" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="end">necessity, 0 &lt; YED &lt; 1</text>
+<path d="M105.0 270.0 C122.5 261.9 175.0 234.1 210.0 221.6 C245.0 209.1 282.3 201.8 315.0 195.2 C347.7 188.6 390.8 184.2 406.0 182.0" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round"/>
+<text x="316.0" y="170.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#16a34a" text-anchor="start">luxury, YED &gt; 1</text>
+<path d="M280.0 270.0 C284.7 259.0 306.8 226.0 308.0 204.0 C309.2 182.0 297.5 158.5 287.0 138.0 C276.5 117.5 252.0 90.3 245.0 80.8" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round"/>
+<text x="253.0" y="84.8" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#dc2626" text-anchor="start">inferior, YED &lt; 0</text>
+</svg><figcaption>YED = %&Delta;Qd &divide; %&Delta;Y. Normal goods have positive YED: necessities are income inelastic (0 &lt; YED &lt; 1) and luxuries are income elastic (YED &gt; 1). Inferior goods have negative YED: demand falls as income rises.</figcaption></figure><div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Value</th><th>Type of good</th><th>Examples</th></tr></thead><tbody><tr><td>YED &lt; 0</td><td>Inferior good</td><td>Bus travel, cheap own-brand food</td></tr><tr><td>0 &lt; YED &lt; 1</td><td>Normal good, income inelastic (necessity)</td><td>Basic food, utilities</td></tr><tr><td>YED &gt; 1</td><td>Normal good, income elastic (luxury)</td><td>Foreign holidays, sports cars, fine dining</td></tr></tbody></table></div>
+        </section>
+
+        <section class="ig-section" id="sc4-price-elasticity-of-supply-pes">
+          <span class="ig-sc-tag">Success criterion 4</span>
+          <h2>Price elasticity of supply (PES)</h2>
+<div class="ig-calc"><b class="h">Formula</b>PES = %&Delta; quantity supplied &divide; %&Delta; price. Example: price rises by 10%, quantity supplied rises by 4%. PES = 0.4: inelastic.<br><b>Rearranging:</b> %&Delta;Qs = PES &times; %&Delta;P. If PES = 1.5 and price rises by 6%, quantity supplied rises by 9%.</div><figure class="ig-fig ig-map ed-fig" style="max-width:640px"><svg viewBox="0 0 480 340" role="img" aria-labelledby="fpes"><title id="fpes">PES: supply curves</title><rect width="480" height="340" fill="#ffffff"/>
+<text x="245.0" y="34.0" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Price elasticity of supply</text>
+<path d="M70.0 68.0 L70.0 292.0 L424.0 292.0" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424.0" y="322.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="64.0" y="60.0" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a">Price</text>
+<text x="65.0" y="306.0" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="210.0,283.2 210.0,80.8" fill="none" stroke="#0f766e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="186.0" y="74.8" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#0f766e" text-anchor="start">PES = 0</text>
+<polyline points="84.0,102.8 406.0,102.8" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="346.0" y="94.8" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#dc2626" text-anchor="start">PES = ∞</text>
+<polyline points="70.0,292.0 350.0,116.0" fill="none" stroke="#7c3aed" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="354.0" y="120.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#7c3aed" text-anchor="start">PES = 1</text>
+<polyline points="70.0,226.0 371.0,131.4" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="341.0" y="145.4" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#16a34a" text-anchor="start">PES &gt; 1</text>
+<polyline points="161.0,292.0 280.0,116.0" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="222.0" y="120.0" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">PES &lt; 1</text>
+</svg><figcaption>Any straight-line supply curve through the origin has PES = 1; one that starts on the price axis is elastic and one that starts on the quantity axis is inelastic. PES depends on time, spare capacity, the mobility of factors, stock levels and how quickly costs rise. <span class="hl-badge">HL</span> Primary products have lower PES than manufactured products because output takes time to grow and cannot easily be stored.</figcaption></figure><p><b>Determinants of PES</b>: <b>time</b> (supply is more elastic in the long run), <b>spare capacity</b>, the <b>mobility of factors of production</b>, the ability to <b>store stock</b>, and <b>how fast costs rise</b> as output increases.</p>
+        </section>
+
+        <section class="ig-section" id="sc5-hl-ped-straight-line-and-primary-commodities">
+          <span class="ig-sc-tag">Success criterion 5</span>
+          <h2><span class="hl-badge">HL</span>PED along a straight-line demand curve; PED of primary commodities</h2>
+<h3>Why PED changes along a straight-line demand curve</h3><p>A straight-line demand curve has a <b>constant slope</b> (the same <i>absolute</i> change in quantity for each $1 change in price), but PED uses <b>percentage</b> changes. At high prices, a $1 change is a small percentage of the price, while the change in quantity is a large percentage of the small quantity, so demand is <b>elastic</b>. At low prices the opposite is true, so demand is <b>inelastic</b>. At the midpoint PED = 1 and <b>total revenue is maximised</b>. So you cannot judge PED from the slope (steepness) of a curve alone, except for the special cases of perfectly elastic and perfectly inelastic demand.</p>
+<div class="ig-calc"><b class="h"><span class="hl-badge">HL</span>Worked example: demand Qd = 100 &minus; 10P</b><div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Price change</th><th>Quantity change</th><th>%&Delta;Qd</th><th>%&Delta;P</th><th>PED</th><th>Total revenue before</th></tr></thead><tbody><tr><td>$8 &rarr; $7</td><td>20 &rarr; 30</td><td>+50%</td><td>&minus;12.5%</td><td>4 (elastic)</td><td>$160</td></tr><tr><td>$5 &rarr; $4</td><td>50 &rarr; 60</td><td>+20%</td><td>&minus;20%</td><td>1 (unit elastic)</td><td>$250 (maximum)</td></tr><tr><td>$2 &rarr; $1</td><td>80 &rarr; 90</td><td>+12.5%</td><td>&minus;50%</td><td>0.25 (inelastic)</td><td>$160</td></tr></tbody></table></div>Each $1 price cut adds 10 units (constant slope), but PED falls from 4 to 0.25 as we move down the curve. Cutting price raises revenue in the elastic (upper) section and lowers it in the inelastic (lower) section.</div>
+<p>See the right-hand diagram in success criterion 1 for the HL diagram of PED along a straight-line demand curve.</p>
+<h3>Why PED for primary commodities is generally lower than for manufactured products</h3><ul><li><b>Necessities with few substitutes</b>: food, energy and many raw materials have no close substitutes, so people keep buying when prices rise.</li><li><b>Derived demand for raw materials</b>: firms need oil, copper or cotton to produce; in the short run they cannot switch inputs, and the raw material is often a small share of the final price.</li><li><b>Broad definition</b>: &ldquo;wheat&rdquo; or &ldquo;coffee&rdquo; is a broad category, whereas manufactured products are sold as brands (one phone or car model) with many close substitutes, so their demand is more elastic.</li><li><b>Small share of income</b> for basic foods in high-income countries.</li></ul><figure class="ig-fig ig-map ed-fig" style="max-width:960px"><svg viewBox="0 0 960 340" role="img" aria-labelledby="fpedprim"><title id="fpedprim">A fall in supply with inelastic and elastic demand</title><rect width="960" height="340" fill="#ffffff"/>
+<text x="245" y="34" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Primary product: price-inelastic demand</text>
+<path d="M70 68 L70 292 L424 292" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424" y="322" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="64" y="60" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="start">Price</text>
+<text x="65" y="306" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="220,80 285,284" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="290" y="288" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D</text>
+<polyline points="110,272 370,90" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="375" y="94" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">S1</text>
+<polyline points="80,244.0 300,90" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-dasharray="7 4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="305" y="94" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">S2</text>
+<circle cx="250.0" cy="174.0" r="3.6" fill="#0f172a"/>
+<polyline points="70,174.0 250.0,174.0 250.0,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65" y="178.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P1</text>
+<text x="259.0" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q1</text>
+<circle cx="237.2" cy="134.0" r="3.6" fill="#0f172a"/>
+<polyline points="70,134.0 237.2,134.0 237.2,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65" y="138.0" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P2</text>
+<text x="228.2" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q2</text>
+<line x1="84" y1="174.0" x2="84" y2="134.0" stroke="#dc2626" stroke-width="2"/>
+<text x="90" y="158.0" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#dc2626" text-anchor="start">big price change</text>
+<text x="725" y="34" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Manufactured product: price-elastic demand</text>
+<path d="M550 68 L550 292 L904 292" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="904" y="322" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="544" y="60" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="start">Price</text>
+<text x="545" y="306" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="590,130 880,230" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="885" y="234" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D</text>
+<polyline points="590,272 850,90" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="855" y="94" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">S1</text>
+<polyline points="560,244.0 780,90" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-dasharray="7 4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="785" y="94" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">S2</text>
+<circle cx="725.9" cy="176.9" r="3.6" fill="#0f172a"/>
+<polyline points="550,176.9 725.9,176.9 725.9,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="545" y="180.9" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P1</text>
+<text x="725.9" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q1</text>
+<circle cx="679.0" cy="160.7" r="3.6" fill="#0f172a"/>
+<polyline points="550,160.7 679.0,160.7 679.0,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="545" y="164.7" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P2</text>
+<text x="679.0" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q2</text>
+<line x1="564" y1="176.9" x2="564" y2="160.7" stroke="#dc2626" stroke-width="2"/>
+<text x="570" y="172.8" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#dc2626" text-anchor="start">small change</text>
+</svg><figcaption><span class="hl-badge">HL</span> The same fall in supply (S1 to S2, for example after a poor harvest) causes a much larger rise in price when demand is price inelastic (left), as it is for most primary commodities, than when demand is price elastic (right), as for most manufactured products. A good harvest has the opposite effect: prices and farm incomes fall sharply.</figcaption></figure><p><b>Consequences</b>: with low PED, any shift in supply (weather, disease, conflict) causes <b>large swings in price</b>, and farmers&rsquo; and commodity-exporting countries&rsquo; revenues are volatile. A bumper harvest can even <b>lower</b> farm revenue, because the price falls proportionately more than output rises. Low PED also means indirect taxes on commodities such as fuel raise a lot of revenue.</p>
+        </section>
+
+        <section class="ig-section" id="sc6-hl-importance-of-yed">
+          <span class="ig-sc-tag">Success criterion 6</span>
+          <h2><span class="hl-badge">HL</span>Importance of YED for firms and for the sectoral structure of the economy</h2>
+<h3>Importance of YED for firms</h3><ul><li><b>Forecasting sales over the business cycle</b>: in an economic boom, demand for income-elastic goods (foreign holidays, new cars, restaurant meals) grows fastest; in a recession it falls fastest, while demand for inferior goods (discount supermarkets, bus travel) rises. Firms use YED to plan output, stock levels, staffing and investment.</li><li><b>Spreading risk through the product range</b>: a firm selling only luxuries is very exposed to recessions, so firms may offer a mix of products with different YEDs (for example a supermarket with a premium range and a value range).</li><li><b>Choosing markets</b>: firms selling income-elastic products target fast-growing economies where incomes are rising quickly (luxury brands expanding in Asia).</li><li><b>Marketing and pricing</b>: firms reposition products, for example marketing a value range more heavily when incomes fall.</li></ul>
+<p class="ig-eg"><b>Example:</b> If YED for new cars is +2.5 and incomes are forecast to fall by 2% in a recession, a car maker can expect sales to fall by about 5% (2.5 &times; 2%), and can cut production before unsold stock builds up.</p>
+<h3>Importance of YED in explaining changes in the sectoral structure of the economy</h3><p>The three sectors are <b>primary</b> (agriculture, fishing, forestry, mining), <b>secondary</b> (manufacturing and construction) and <b>tertiary</b> (services). Their products have different YEDs:</p><ul><li><b>Primary products</b> (especially food) have <b>low YED</b> (0 &lt; YED &lt; 1, and some are inferior). As incomes rise, people spend a <b>smaller share</b> of income on food (Engel&rsquo;s law).</li><li><b>Manufactured goods</b> have higher YED, so their share of spending grows as countries move from low to middle incomes.</li><li><b>Services</b> (tourism, finance, education, healthcare, entertainment) have the <b>highest YED</b>, so their share keeps growing as incomes rise.</li></ul><figure class="ig-fig ig-map ed-fig" style="max-width:520px"><svg viewBox="0 0 480 340" role="img" aria-labelledby="fsect"><title id="fsect">Sectoral change as incomes rise</title><rect width="480" height="340" fill="#ffffff"/>
+<text x="240" y="34" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Sector shares of output as incomes rise (illustrative)</text>
+<path d="M70 60 L70 292 L440 292" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="64" y="52" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="start">% of GDP</text>
+<rect x="100" y="171.0" width="70" height="121.0" fill="#16a34a" opacity="0.8"/>
+<text x="135" y="235.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">55%</text>
+<rect x="100" y="127.0" width="70" height="44.0" fill="#ea580c" opacity="0.8"/>
+<text x="135" y="153.0" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">20%</text>
+<rect x="100" y="72.0" width="70" height="55.0" fill="#2563eb" opacity="0.8"/>
+<text x="135" y="103.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">25%</text>
+<text x="135" y="310" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0f172a" text-anchor="middle">Low income</text>
+<rect x="215" y="237.0" width="70" height="55.0" fill="#16a34a" opacity="0.8"/>
+<text x="250" y="268.5" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">25%</text>
+<rect x="215" y="166.6" width="70" height="70.4" fill="#ea580c" opacity="0.8"/>
+<text x="250" y="205.8" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">32%</text>
+<rect x="215" y="72.0" width="70" height="94.6" fill="#2563eb" opacity="0.8"/>
+<text x="250" y="123.29999999999998" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">43%</text>
+<text x="250" y="310" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0f172a" text-anchor="middle">Middle income</text>
+<rect x="330" y="285.4" width="70" height="6.6" fill="#16a34a" opacity="0.8"/>
+<rect x="330" y="237.0" width="70" height="48.4" fill="#ea580c" opacity="0.8"/>
+<text x="365" y="265.2" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">22%</text>
+<rect x="330" y="72.0" width="70" height="165.0" fill="#2563eb" opacity="0.8"/>
+<text x="365" y="158.49999999999997" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">75%</text>
+<text x="365" y="310" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0f172a" text-anchor="middle">High income</text>
+<rect x="90" y="324" width="10" height="10" fill="#16a34a"/>
+<text x="104" y="333" font-family="Inter,sans-serif" font-size="11" fill="#0f172a" text-anchor="start">Primary</text>
+<rect x="175" y="324" width="10" height="10" fill="#ea580c"/>
+<text x="189" y="333" font-family="Inter,sans-serif" font-size="11" fill="#0f172a" text-anchor="start">Secondary</text>
+<rect x="270" y="324" width="10" height="10" fill="#2563eb"/>
+<text x="284" y="333" font-family="Inter,sans-serif" font-size="11" fill="#0f172a" text-anchor="start">Tertiary (services)</text>
+</svg><figcaption><span class="hl-badge">HL</span> Illustrative shares, not data for a particular country. Because YED is lowest for primary products, higher for manufactured goods and highest for many services, the structure of output shifts from the primary sector to the secondary and then the tertiary sector as an economy grows.</figcaption></figure><p>So, as an economy grows, demand and resources (labour and capital) <b>shift from the primary sector to the secondary sector and then to the tertiary sector</b>. This is why high-income economies are dominated by services. It also helps explain why countries that depend on exporting primary commodities may see their export revenues grow more slowly than world incomes, and why the prices of primary products tend to fall relative to manufactured goods over the long term: a reason to <b>diversify</b>.</p>
+        </section>
+
+        <section class="ig-section" id="sc7-hl-pes-of-primary-commodities">
+          <span class="ig-sc-tag">Success criterion 7</span>
+          <h2><span class="hl-badge">HL</span>Why PES for primary commodities is lower than for manufactured products</h2>
+<div class="ig-table-wrap"><table class="ig-table"><thead><tr><th>Determinant of PES</th><th>Primary commodities (low PES)</th><th>Manufactured products (higher PES)</th></tr></thead><tbody><tr><td><b>Time / length of production</b></td><td>Crops follow growing seasons; coffee and rubber trees take years to mature; new mines and oil fields take years to open</td><td>Output can be raised in days or weeks by adding shifts or overtime</td></tr><tr><td><b>Unused (spare) capacity</b></td><td>Land is usually fully in use; farms cannot quickly expand</td><td>Factories often have spare capacity</td></tr><tr><td><b>Mobility of factors of production</b></td><td>Land is fixed and specific (land for coffee cannot quickly grow something else); specialist mining equipment</td><td>Workers and machinery can more easily be moved between product lines</td></tr><tr><td><b>Ability to store</b></td><td>Many farm products are perishable, so stocks cannot be held to release when prices rise</td><td>Most goods can be stored as stock and released quickly</td></tr><tr><td><b>Rate at which costs rise</b></td><td>Extra output means using poorer land or deeper deposits, so costs rise quickly</td><td>Extra output can often be produced at similar cost</td></tr></tbody></table></div><figure class="ig-fig ig-map ed-fig" style="max-width:960px"><svg viewBox="0 0 960 340" role="img" aria-labelledby="fpesprim"><title id="fpesprim">A rise in demand with inelastic and elastic supply</title><rect width="960" height="340" fill="#ffffff"/>
+<text x="245" y="34" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Primary product: price-inelastic supply</text>
+<path d="M70 68 L70 292 L424 292" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="424" y="322" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="64" y="60" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="start">Price</text>
+<text x="65" y="306" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="220,284 265,80" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="270" y="84" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">S</text>
+<polyline points="100,90 320,280" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="325" y="284" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D1</text>
+<polyline points="180,90 400,280" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-dasharray="7 4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="405" y="284" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D2</text>
+<circle cx="236.7" cy="208.1" r="3.6" fill="#0f172a"/>
+<polyline points="70,208.1 236.7,208.1 236.7,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65" y="212.1" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P1</text>
+<text x="227.7" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q1</text>
+<circle cx="249.5" cy="150.1" r="3.6" fill="#0f172a"/>
+<polyline points="70,150.1 249.5,150.1 249.5,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="65" y="154.1" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P2</text>
+<text x="258.5" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q2</text>
+<line x1="84" y1="208.1" x2="84" y2="150.1" stroke="#dc2626" stroke-width="2"/>
+<text x="90" y="183.1" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#dc2626" text-anchor="start">big price change</text>
+<text x="725" y="34" font-family="Inter,sans-serif" font-size="13.5" font-weight="700" fill="#0f172a" text-anchor="middle">Manufactured product: price-elastic supply</text>
+<path d="M550 68 L550 292 L904 292" fill="none" stroke="#0f172a" stroke-width="1.8"/>
+<text x="904" y="322" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="end">Quantity</text>
+<text x="544" y="60" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0f172a" text-anchor="start">Price</text>
+<text x="545" y="306" font-family="Inter,sans-serif" font-size="11" fill="#475569" text-anchor="end">0</text>
+<polyline points="570,230 880,150" fill="none" stroke="#ea580c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="885" y="154" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#ea580c" text-anchor="start">S</text>
+<polyline points="580,90 800,280" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="805" y="284" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D1</text>
+<polyline points="660,90 880,280" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-dasharray="7 4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="885" y="284" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#2563eb" text-anchor="start">D2</text>
+<circle cx="702.5" cy="195.8" r="3.6" fill="#0f172a"/>
+<polyline points="550,195.8 702.5,195.8 702.5,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="545" y="199.8" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P1</text>
+<text x="702.5" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q1</text>
+<circle cx="764.1" cy="179.9" r="3.6" fill="#0f172a"/>
+<polyline points="550,179.9 764.1,179.9 764.1,292" fill="none" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4"/>
+<text x="545" y="183.9" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="end">P2</text>
+<text x="764.1" y="307" font-family="Inter,sans-serif" font-size="11.5" fill="#0f172a" text-anchor="middle">Q2</text>
+<line x1="564" y1="195.8" x2="564" y2="179.9" stroke="#dc2626" stroke-width="2"/>
+<text x="570" y="191.85000000000002" font-family="Inter,sans-serif" font-size="10.5" font-weight="700" fill="#dc2626" text-anchor="start">small change</text>
+</svg><figcaption><span class="hl-badge">HL</span> The same rise in demand (D1 to D2) causes a large rise in price and only a small rise in output when supply is price inelastic (left), as for crops and minerals in the short run. When supply is price elastic (right), as for most manufactured goods, firms expand output quickly and the price barely changes.</figcaption></figure><p><b>Consequences</b>: because both PED and PES are low for primary commodities, any shift in demand or supply causes <b>large price fluctuations</b> and unstable incomes for farmers and for <b>commodity-dependent countries</b>. This makes planning and investment difficult and can cause government revenue to swing. Responses include buffer stock schemes, minimum (support) prices, commodity agreements and <b>diversification</b> into manufacturing and services.</p><p class="ig-eg"><b>Real-world example:</b> World coffee prices roughly doubled between 2020 and 2022 after frost and drought in Brazil. New coffee trees take three to four years to produce a crop (inelastic supply), and coffee drinkers kept buying (inelastic demand).</p><p class="ig-tip"><b>Exam tip:</b> For &ldquo;why are commodity prices volatile?&rdquo;, draw a diagram with steep (inelastic) demand and supply and show a shift: the steeper the curves, the bigger the price change.</p>
+        </section>
+
+        <section class="ig-terms" id="key-terms">
+          <h2>Key terms</h2>
+          <dl>
+            <dt>Price elasticity of demand (PED)</dt><dd>The responsiveness of quantity demanded to a change in price.</dd>
+            <dt>Income elasticity of demand (YED)</dt><dd>The responsiveness of demand to a change in income.</dd>
+            <dt>Price elasticity of supply (PES)</dt><dd>The responsiveness of quantity supplied to a change in price.</dd>
+            <dt>Total revenue</dt><dd>Price multiplied by quantity sold.</dd>
+            <dt>Unit elastic</dt><dd>Elasticity equal to one: the percentage change in quantity equals the percentage change in price.</dd>
+            <dt>Luxury good</dt><dd>A normal good with YED greater than one.</dd>
+            <dt>Primary product</dt><dd>A product of agriculture, fishing, forestry or mining.</dd>
+            <dt>Engel&rsquo;s law</dt><dd>As income rises, the proportion of income spent on food falls.</dd>
+            <dt>Sectoral structure</dt><dd>The shares of the primary, secondary and tertiary sectors in a country&rsquo;s output and employment.</dd>
+            <dt>Commodity-dependent country</dt><dd>A country that relies on primary commodities for most of its export earnings.</dd>
+          </dl>
+        </section>
+
+            <section class="ig-exam" id="exam-practice">
+              <span class="ig-tag">Exam-style question</span>
+              <p class="ig-q">Explain why governments might choose to impose indirect taxes on goods with price inelastic demand. <span class="ig-marks">(10 marks)</span></p>
+              <textarea class="ig-note" data-note="exam" placeholder="Write your answer here, then check it against the mark guidance…"></textarea>
+              <details><summary>Show mark guidance</summary>
+                <ul><li>Level 4 (9–10): a clear, accurate and fully labelled diagram, fully explained; precise definitions of key terms; a well-developed explanation applied to the question.</li><li>Level 3 (6–8): relevant terms defined and a correct diagram, but the explanation is not fully developed or the diagram is not fully explained.</li><li>Level 2 (3–5): some understanding, with a diagram that has errors or is not linked to the explanation.</li><li>Level 1 (1–2): little understanding; few or no relevant terms or diagram.</li><li>Define PED, inelastic demand and indirect tax.</li><li>Draw a tax diagram with steep (inelastic) demand showing large tax revenue and small fall in quantity.</li><li>Explain: high revenue, most of the burden falls on consumers, small fall in consumption.</li></ul><p style="margin:10px 0 0;line-height:1.6"><b>Model answer:</b> When demand is price inelastic, a tax that raises price causes a smaller percentage fall in quantity demanded. On a diagram with a steep demand curve, the supply curve shifts up by the tax and quantity falls only slightly, so tax revenue (tax per unit &times; new quantity) is large. Governments therefore tax fuel, tobacco and alcohol to raise revenue. Most of the tax burden falls on consumers. However, because quantity falls little, such taxes are less effective at reducing consumption.</p>
+              </details>
+            </section>
+    
+<style>.ig-pq-list{list-style:none;margin:.8rem 0 0;padding:0}.ig-pq-list>li{padding:.6rem 0;border-bottom:1px dashed var(--lh-border,#e6e8ee);line-height:1.45}.ig-pq-list>li:last-child{border-bottom:0}.ig-pq-row{display:flex;gap:.7rem;align-items:baseline}.ig-pq-ref{flex:0 0 auto;font:600 .74rem/1.2 'IBM Plex Mono',monospace;background:#eaf1f8;color:#1d3550;border-radius:6px;padding:.25rem .45rem;white-space:nowrap}.ig-pq-t{flex:1;min-width:0}.ig-pq-m{flex:0 0 auto;font-size:.8rem;color:var(--lh-muted,#5b6472)}.ig-pq-list details{margin:.35rem 0 0 0}.ig-pq-list summary{cursor:pointer;font-size:.82rem;font-weight:600;color:#0f766e}.ig-pq-list details ul{margin:.35rem 0 0 1.1rem;font-size:.88rem}.ig-pq-note{font-size:.86rem;color:var(--lh-muted,#5b6472);margin:.4rem 0 0}.ig-pq-h{font:700 .8rem/1.3 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#1d3550;margin:1rem 0 0}@media (max-width:640px){.ig-pq-row{flex-wrap:wrap}}</style>
+        <section class="ig-exam" id="past-paper-questions">
+          <span class="ig-tag">Past paper questions</span>
+          <p class="ig-q">6 IB questions on this topic</p><p class="ig-pq-note">These are real IB questions from May 2022 and May 2023, reworded here as a summary. Paper 2 and Paper 3 questions use texts and data from the paper, so ask your teacher for a copy of the paper before you answer. Write your answer, then check it against the tips.</p>
+          <ul class="ig-pq-list"><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2023 &middot; P1 HL TZ2 &middot; Q1(a)</span><span class="ig-pq-t">Explain why goods have different income elasticities of demand.</span><span class="ig-pq-m">[10]</span></div><details><summary>How to answer</summary><ul><li>Paper 1 (a) is marked with the 10-mark bands: define the key terms, draw a fully labelled diagram and explain it, and answer every part of the question.</li><li>YED formula; necessities, luxuries and inferior goods with an Engel curve or demand shift diagram.</li></ul></details></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2023 &middot; P3 HL &middot; Q1(a)(i)</span><span class="ig-pq-t">Calculate PED from a demand diagram.</span><span class="ig-pq-m">[2]</span></div><details><summary>How to answer</summary><ul><li>%ΔQd ÷ %ΔP from the original point.</li></ul></details></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2023 &middot; P3 HL &middot; Q1(a)(iv)</span><span class="ig-pq-t">Explain why PED would change if the price kept rising along a straight-line demand curve.</span><span class="ig-pq-m">[4]</span></div><details><summary>How to answer</summary><ul><li>HL: PED rises (more elastic) towards the top of a straight-line demand curve; explain with percentages.</li></ul></details></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2022 &middot; P3 HL &middot; Q1(a)(iii)</span><span class="ig-pq-t">Calculate PED from a demand diagram for a price rise.</span><span class="ig-pq-m">[2]</span></div><details><summary>How to answer</summary><ul><li>PED = %ΔQd ÷ %ΔP using the original values as the base.</li></ul></details></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2022 &middot; P3 HL &middot; Q1(a)(iv)</span><span class="ig-pq-t">Calculate the change in export value after a price rise.</span><span class="ig-pq-m">[2]</span></div><details><summary>How to answer</summary><ul><li>Revenue = price × quantity before and after; give the difference with units.</li></ul></details></li><li><div class="ig-pq-row"><span class="ig-pq-ref">May 2022 &middot; P3 HL &middot; Q2(a)(v)</span><span class="ig-pq-t">Show from a diagram that supply would be price inelastic.</span><span class="ig-pq-m">[2]</span></div><details><summary>How to answer</summary><ul><li>Calculate PES between two points and show it is less than 1.</li></ul></details></li></ul>
+          <a class="ig-ppq-link" href="/economics/revision/guide/past-paper-questions">All IB Economics past paper questions by paper &rarr;</a>
+        </section>
+        <h2 class="ig-test-h" id="test-yourself">Test yourself</h2>
+        <p class="ig-test-p">Check what you have learned, then keep earlier lessons fresh with spaced retrieval. Your scores are saved to your account.</p>
+        <div class="lh-modes">
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V16h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 2Z"/><path d="M9.5 18h5M10 21h4"/></svg></span>
+            <div class="lh-mode__body">
+              <span class="lh-mode__num">1</span>
+              <p class="lh-mode__title">Test My Knowledge</p>
+              <p class="lh-mode__desc">Ten questions drawn from every lesson in this topic, with instant feedback.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-green" aria-label="Test My Knowledge: Elasticities of demand and supply" onclick="openTestMyKnowledge('IBEU2-T3')">Start Quiz &rarr;</button>
+          </div>
+
+          <div class="lh-mode">
+            <span class="lh-mode__icon lh-bg-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span>
+            <div class="lh-mode__body">
+              <span class="lh-mode__num">2</span>
+              <p class="lh-mode__title">Spaced Retrieval</p>
+              <p class="lh-mode__desc">Five questions drawn from earlier topics in Unit 2: Microeconomics.</p>
+            </div>
+            <button type="button" class="lh-mode__btn lh-c-blue" aria-label="Spaced Retrieval: Elasticities of demand and supply" onclick="openSpacedRetrieval('IBEU2-T3')">Start Retrieval &rarr;</button>
+          </div>
+        </div>
+        <nav class="ig-pager" aria-label="Lesson navigation">
+          <a href="/economics/revision/guide/microeconomics/topic-2-behavioural-economics-and-business-objectives"><small>&larr; Topic 2</small>HL: Critique of rational choice, behavioural economics and business objectives</a>
+          <a class="next" href="/economics/revision/guide/microeconomics/topic-4-role-of-government-in-microeconomics"><small>Topic 4 &rarr;</small>The role of government in microeconomics</a>
+        </nav>
+      </main>
+
+      <aside class="lh-rail">
+        <div class="lh-panel lh-panel--accent">
+          <h2>On this page</h2>
+          <ul class="ig-toc">
+            <li><a href="#lesson-focus">Learning intention &amp; success criteria</a></li>
+            <li><a href="#sc1-price-elasticity-of-demand-ped">Price elasticity of demand (PED)</a></li>
+            <li><a href="#sc2-ped-and-total-revenue-why-ped-matters">PED and total revenue; why PED matters</a></li>
+            <li><a href="#sc3-income-elasticity-of-demand-yed">Income elasticity of demand (YED)</a></li>
+            <li><a href="#sc4-price-elasticity-of-supply-pes">Price elasticity of supply (PES)</a></li>
+            <li><a href="#sc5-hl-ped-straight-line-and-primary-commodities"><span class="hl-badge">HL</span>PED along a straight line; primary commodities</a></li>
+            <li><a href="#sc6-hl-importance-of-yed"><span class="hl-badge">HL</span>Importance of YED</a></li>
+            <li><a href="#sc7-hl-pes-of-primary-commodities"><span class="hl-badge">HL</span>PES of primary commodities</a></li>
+            <li><a href="#key-terms">Key terms</a></li>
+            <li><a href="#exam-practice">Exam-style question</a></li>
+            <li><a href="#past-paper-questions">Past paper questions</a></li>
+            <li><a href="#test-yourself">Test yourself</a></li>
+          </ul>
+        </div>
+
+        <div class="lh-panel lh-panel--accent">
+          <h2>Resources</h2>
+          <ul class="lh-resources">
+            <li class="lh-resources__item" data-resource-type="slides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg><span class="lh-resources__label">Lesson Slides</span></li>
+            <li class="lh-resources__item" data-resource-type="notes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/></svg><span class="lh-resources__label">Lesson Notes</span></li>
+            <li class="lh-resources__item" data-resource-type="key_terms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5"/></svg><span class="lh-resources__label">Student Workbooks</span></li>
+            <li class="lh-resources__item" data-resource-type="diagrams"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M5 7H3M5 12H3M5 17H3M9 8h6M9 12h6"/></svg><span class="lh-resources__label">OneNote Pages</span></li>
+            <li class="lh-resources__item" data-resource-type="data_sheets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg><span class="lh-resources__label">Quizzes</span></li>
+          </ul>
+        </div>
+
+        <div class="lh-tutor">
+          <p>Need help? Ask the AI Tutor anything about IB Economics.</p>
+          <div class="lh-tutor__news">
+            <p>Use the tutor to:</p>
+            <ul>
+              <li>Get a tricky concept explained another way</li>
+              <li>Check your understanding of key terms</li>
+              <li>Talk through how to draw and explain a diagram</li>
+              <li>Plan an answer to an IB-style question</li>
+            </ul>
+          </div>
+          <button type="button" class="lh-tutor__btn" onclick="openAskTutor()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2Z"/></svg>Ask AI Tutor</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="sbl-modal-overlay" id="sblTeachBotOverlay" data-lesson-id="IBEU2-T3" hidden>
+  <div class="sbl-modal" role="dialog" aria-modal="true" aria-labelledby="sblTeachBotTitle" id="sblTeachBotModal">
+    <div class="sbl-modal__header">
+      <div class="sbl-modal__header-text">
+        <p class="sbl-modal__eyebrow">SBL Economics Tutor</p>
+        <h2 id="sblTeachBotTitle"></h2>
+        <p class="sbl-modal__subtitle" id="sblTeachBotSubtitle">IB Economics Revision Guide</p>
+      </div>
+      <div class="sbl-modal__header-actions">
+        <span class="sbl-modal__progress" id="sblTeachBotProgress"></span>
+        <button type="button" class="sbl-modal__icon-btn" id="sblTeachBotExpand">Expand to full page</button>
+        <button type="button" class="sbl-modal__icon-btn sbl-modal__close" id="sblTeachBotClose" aria-label="Close">&times;</button>
+      </div>
+    </div>
+    <div class="sbl-modal__body" id="sblTeachBotBody"></div>
+  </div>
+</div>
+<div aria-live="polite" class="sbl-sr-only" id="sblTeachBotAnnounce"></div>
+
+<script src="/js/sbl-ib-econ-guide-sidebar.js"></script>
+<script>
+  renderSBLIbEconGuideSidebar('lh-sidebar-mount', {
+    activeUnit: 'microeconomics',
+    activeTopic: 0,
+    activeLessonHref: '/economics/revision/guide/microeconomics/topic-3-elasticities-of-demand-and-supply'
+  });
+</script>
+<script src="/js/sbl-ib-econ-guide-lessons.js"></script>
+<script src="/js/sbl-teach-bot.js"></script>
+<script src="/js/sbl-lesson-resources.js"></script>
+<script>
+(function () {
+  var id = "IBEU2-T3", key = 'sbl-checklist-' + id;
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ig-sc input[type=checkbox]'));
+  function get() { return boxes.map(function (b) { return b.checked; }); }
+  function paint() {
+    var n = get().filter(Boolean).length;
+    var el = document.getElementById('scCount'); if (el) el.textContent = n + ' of ' + boxes.length + ' ticked';
+  }
+  function apply(arr) { if (Array.isArray(arr)) boxes.forEach(function (b, i) { b.checked = !!arr[i]; }); paint(); }
+  try { apply(JSON.parse(localStorage.getItem(key) || 'null')); } catch (e) {}
+  fetch('/api/progress?lessonId=' + encodeURIComponent(id), { credentials: 'same-origin' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { if (d && d.data && Array.isArray(d.data.checklist)) apply(d.data.checklist); })
+    .catch(function () {});
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      var state = get(); paint();
+      try { localStorage.setItem(key, JSON.stringify(state)); } catch (e) {}
+      fetch('/api/progress', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lessonId: id, patch: { checklist: state } }) }).catch(function () {});
+    });
+  });
+  document.querySelectorAll('textarea.ig-note').forEach(function (t) {
+    var k = 'sbl-note-' + id + '-' + t.getAttribute('data-note');
+    try { t.value = localStorage.getItem(k) || ''; } catch (e) {}
+    t.addEventListener('input', function () { try { localStorage.setItem(k, t.value); } catch (e) {} });
+  });
+  document.querySelectorAll('.ig-activity[data-sort]').forEach(function (box) {
+    var ul = box.querySelector('.ig-sort'), lis = [].slice.call(ul.querySelectorAll('li')), sc = box.querySelector('.ig-act-score');
+    for (var i = lis.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); ul.appendChild(lis[j]); lis.splice(j, 1); }
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return; var li = b.closest('li'); if (li.classList.contains('ok')) return;
+      li.querySelectorAll('button').forEach(function (x) { x.classList.remove('bad'); });
+      if (b.getAttribute('data-c') === li.getAttribute('data-a')) { li.classList.add('ok'); b.classList.add('sel'); } else { b.classList.add('bad'); }
+      var n = box.querySelectorAll('li.ok').length, t = box.querySelectorAll('li').length;
+      sc.textContent = n + ' of ' + t + ' sorted correctly' + (n === t ? ' — well done!' : '');
+    });
+  });
+})();
+</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

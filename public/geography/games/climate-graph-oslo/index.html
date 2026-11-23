@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build a Climate Graph: Oslo — KS3 Geography Games — SBL</title>
+<meta name="description" content="KS3 Geography: watch a climate graph for Oslo built step by step, from choosing the axes and scales to plotting rainfall bars and a temperature line.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* One visual world: a sheet of graph paper on a slate desk. Graph left, data and steps right. */
+  --desk: #5d6b8a;
+  --paper: #fbfdff;
+  --grid: #d7e6f3;
+  --ink: #1d2b3a;
+  --muted: #5a6878;
+  --rain: #2f8fd0;
+  --temp: #d8312b;
+  --accent: #1f6f5c;
+  --font-body: 'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--desk); color: var(--ink); font-family: var(--font-body); }
+.top-bar { padding: 14px 16px; color: #fff; background: linear-gradient(135deg, #0b3b36, #0f766e); }
+.top-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.top-bar a { color: rgba(255,255,255,.85); font-size: .88rem; font-weight: 700; text-decoration: none; }
+.top-bar a:hover { color: #fff; text-decoration: underline; }
+.brand { font-weight: 900; } .brand span { color: #a7f3e4; }
+main { padding: 20px 16px 28px; }
+.sheet { max-width: 1180px; margin: 0 auto; background: var(--paper); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.25); padding: 22px 24px 20px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-bottom: 10px; }
+h1 { font-size: 1.6rem; margin: 0; text-wrap: balance; }
+h1 small { display: block; font-size: .95rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.stepcount { font-size: .95rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.layout { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(260px, 1fr); gap: 22px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+
+.graphwrap { background-color: var(--paper); background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(#eef5fb 1px, transparent 1px), linear-gradient(90deg, #eef5fb 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; border: 1px solid var(--grid); border-radius: 6px; }
+svg { display: block; width: 100%; height: auto; }
+.axis { stroke: var(--ink); stroke-width: 2.2; fill: none; stroke-linecap: round; }
+.tick { stroke: var(--ink); stroke-width: 2; }
+.gridline { stroke: #b9cfe3; stroke-width: 1; stroke-dasharray: 4 4; }
+.hand { font-family: var(--font-hand); font-weight: 700; }
+.lab { font-family: var(--font-body); font-weight: 700; font-variant-numeric: tabular-nums; }
+.fade { transition: opacity .45s ease; }
+
+.panel { display: grid; gap: 14px; }
+.explain { background: #f2f7fb; border: 1px solid var(--grid); border-radius: 8px; padding: 14px 16px; min-height: 150px; }
+.explain h2 { margin: 0 0 6px; font-size: 1.15rem; color: var(--accent); text-wrap: balance; }
+.explain p { margin: 0 0 6px; line-height: 1.45; font-size: 1rem; }
+.explain .readout { font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; min-height: 1.6em; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: .98rem; }
+th, td { padding: 5px 10px; text-align: center; border-bottom: 1px solid #e3ebf2; }
+th { font-size: .9rem; }
+th.t, td.t { color: var(--temp); font-weight: 700; }
+th.r, td.r { color: var(--rain); font-weight: 700; }
+tr.on td { background: #fff4c4; }
+tr { transition: background .3s; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+button { font: inherit; font-weight: 700; border-radius: 999px; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); padding: 8px 16px; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; min-width: 108px; }
+button:disabled { opacity: .4; cursor: default; }
+button:focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+.dots { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+.dots button { width: 14px; height: 14px; padding: 0; border-width: 2px; min-width: 0; }
+.dots button.on { background: var(--accent); border-color: var(--accent); }
+.dots button.done { background: #9cc9bd; border-color: #9cc9bd; }
+label.speed { display: inline-flex; align-items: center; gap: 6px; font-size: .95rem; color: var(--muted); }
+.note { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ks3">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Climate Graph Builder</span></div>
+</div></div>
+<main>
+<div class="sheet">
+  <header>
+    <h1>Let’s construct a climate graph for Oslo<small>Watch each step, or move through it at your own pace</small></h1>
+    <div class="stepcount" id="stepcount" aria-live="polite"></div>
+  </header>
+  <div class="layout">
+    <div>
+      <div class="graphwrap"><svg id="g" viewBox="0 0 760 590" role="img" aria-labelledby="gTitle"><title id="gTitle">Climate graph for Oslo, built step by step</title></svg></div>
+      <div class="controls">
+        <button id="back" type="button">◀ Back</button>
+        <button id="play" type="button" class="primary">▶ Play</button>
+        <button id="next" type="button">Next ▶</button>
+        <button id="restart" type="button">Start again</button>
+        <label class="speed"><input type="checkbox" id="slow"> Slower</label>
+        <div class="dots" id="dots" aria-label="Steps"></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="explain" aria-live="polite">
+        <h2 id="stepTitle"></h2>
+        <div id="stepText"></div>
+        <div class="readout" id="readout"></div>
+      </div>
+      <table aria-label="Oslo climate data">
+        <thead><tr><th>Month</th><th class="t">Temp °C</th><th class="r">Rainfall (mm)</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <p class="note">Keyboard: ← and → move between steps, space plays or pauses.</p>
+    </div>
+  </div>
+</div>
+</main>
+
+<script>
+(function () {
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var TEMP = [-3, -2, 2, 7, 13, 17, 18, 17, 12, 6, 1, -2];
+  var RAIN = [49, 37, 48, 41, 54, 81, 84, 95, 90, 90, 73, 63];
+  var X0 = 100, X1 = 660, Y0 = 120, Y1 = 450, MW = (X1 - X0) / 12;
+  var RMAX = 100, TMIN = -5, TMAX = 20;
+  var ry = function (r) { return Y1 - r / RMAX * (Y1 - Y0); };
+  var ty = function (t) { return Y1 - (t - TMIN) / (TMAX - TMIN) * (Y1 - Y0); };
+  var mx = function (i) { return X0 + MW * i + MW / 2; };
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('g');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var tbody = document.getElementById('tbody');
+  MONTHS.forEach(function (m, i) {
+    var tr = document.createElement('tr'); tr.id = 'row' + i;
+    tr.innerHTML = '<td>' + m + '</td><td class="t">' + TEMP[i] + '</td><td class="r">' + RAIN[i] + '</td>';
+    tbody.appendChild(tr);
+  });
+  function highlight(i) { for (var k = 0; k < 12; k++) document.getElementById('row' + k).classList.toggle('on', k === i); }
+
+  function el(tag, attrs, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    svg.appendChild(e); return e;
+  }
+
+  // Animation helpers: each step is a list of timed actions. Changing step cancels pending ones.
+  var timers = [], raf = [];
+  function cancelAll() { timers.forEach(clearTimeout); raf.forEach(cancelAnimationFrame); timers = []; raf = []; }
+  function speed() { return document.getElementById('slow').checked ? 1.8 : 1; }
+  function later(ms, fn) { if (reduce) { fn(); return; } timers.push(setTimeout(fn, ms * speed())); }
+  function tween(ms, fn, done) {
+    if (reduce) { fn(1); if (done) done(); return; }
+    var start = null, dur = ms * speed();
+    function frame(ts) { if (start === null) start = ts; var p = Math.min(1, (ts - start) / dur); fn(1 - Math.pow(1 - p, 3)); if (p < 1) raf.push(requestAnimationFrame(frame)); else if (done) done(); }
+    raf.push(requestAnimationFrame(frame));
+  }
+  function drawLine(x1, y1, x2, y2, cls, ms, extra) {
+    var l = el('line', Object.assign({ x1: x1, y1: y1, x2: x1, y2: y1, 'class': cls }, extra || {}));
+    tween(ms, function (p) { l.setAttribute('x2', x1 + (x2 - x1) * p); l.setAttribute('y2', y1 + (y2 - y1) * p); });
+    return l;
+  }
+  function appear(e, ms) { e.classList.add('fade'); e.style.opacity = 0; later(ms || 30, function () { e.style.opacity = 1; }); return e; }
+
+  // ---------- pieces of the graph (instant = draw without animation) ----------
+  function xAxis(anim) {
+    var ms = anim ? 900 : 0;
+    if (anim) drawLine(X0, Y1, X1, Y1, 'axis', ms); else el('line', { x1: X0, y1: Y1, x2: X1, y2: Y1, 'class': 'axis' });
+    MONTHS.forEach(function (m, i) {
+      var x = X0 + MW * (i + 1);
+      var t = el('line', { x1: x, y1: Y1, x2: x, y2: Y1 + 8, 'class': 'tick' });
+      var lab = el('text', { x: mx(i), y: Y1 + 30, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 22, fill: 'var(--ink)' }, m);
+      if (anim) { appear(t, 700 + i * 90); appear(lab, 760 + i * 90); }
+    });
+    var cap = el('text', { x: (X0 + X1) / 2, y: Y1 + 60, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 26, fill: 'var(--ink)' }, 'Month');
+    if (anim) appear(cap, 1900);
+  }
+  function rainAxis(anim) {
+    if (anim) drawLine(X0, Y1, X0, Y0 - 10, 'axis', 700); else el('line', { x1: X0, y1: Y1, x2: X0, y2: Y0 - 10, 'class': 'axis' });
+    for (var r = 0; r <= RMAX; r += 20) (function (r, k) {
+      var y = ry(r);
+      var tk = el('line', { x1: X0 - 8, y1: y, x2: X0, y2: y, 'class': 'tick' });
+      var lb = el('text', { x: X0 - 14, y: y + 6, 'text-anchor': 'end', 'class': 'lab', 'font-size': 18, fill: 'var(--rain)' }, r);
+      if (anim) { appear(tk, 600 + k * 260); appear(lb, 600 + k * 260); }
+    })(r, r / 20);
+    var t1 = el('text', { x: X0 - 10, y: Y0 - 42, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 26, fill: 'var(--rain)' }, 'Rainfall');
+    var t2 = el('text', { x: X0 - 10, y: Y0 - 18, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 22, fill: 'var(--rain)' }, '(mm)');
+    if (anim) { appear(t1, 2300); appear(t2, 2300); }
+  }
+  function tempAxis(anim) {
+    if (anim) drawLine(X1, Y1, X1, Y0 - 10, 'axis', 700); else el('line', { x1: X1, y1: Y1, x2: X1, y2: Y0 - 10, 'class': 'axis' });
+    for (var t = TMIN; t <= TMAX; t += 5) (function (t, k) {
+      var y = ty(t);
+      var tk = el('line', { x1: X1, y1: y, x2: X1 + 8, y2: y, 'class': 'tick' });
+      var lb = el('text', { x: X1 + 14, y: y + 6, 'class': 'lab', 'font-size': 18, fill: 'var(--temp)' }, t);
+      if (anim) { appear(tk, 600 + k * 260); appear(lb, 600 + k * 260); }
+    })(t, (t - TMIN) / 5);
+    var t1 = el('text', { x: X1 + 10, y: Y0 - 42, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 26, fill: 'var(--temp)' }, 'Temperature');
+    var t2 = el('text', { x: X1 + 10, y: Y0 - 18, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 22, fill: 'var(--temp)' }, '(°C)');
+    if (anim) { appear(t1, 2300); appear(t2, 2300); }
+  }
+  function gridlines(anim) {
+    for (var k = 1; k <= 5; k++) {
+      var y = ry(k * 20);
+      if (anim) { (function (y, k) { later(200 + k * 220, function () { drawLine(X0, y, X1, y, 'gridline', 600); }); })(y, k); }
+      else el('line', { x1: X0, y1: y, x2: X1, y2: y, 'class': 'gridline' });
+    }
+  }
+  var BW = MW * 0.72;
+  function bar(i, anim, guide) {
+    var x = X0 + MW * i + (MW - BW) / 2, h = Y1 - ry(RAIN[i]);
+    var b = el('rect', { x: x, y: Y1, width: BW, height: 0, fill: 'var(--rain)', opacity: 0.85, rx: 2 });
+    if (!anim) { b.setAttribute('y', Y1 - h); b.setAttribute('height', h); return; }
+    if (guide) {
+      var g = el('line', { x1: X0, y1: ry(RAIN[i]), x2: X0, y2: ry(RAIN[i]), stroke: 'var(--rain)', 'stroke-width': 2, 'stroke-dasharray': '6 5' });
+      tween(450, function (p) { g.setAttribute('x2', X0 + (x + BW - X0) * p); }, function () { later(500, function () { g.remove(); }); });
+    }
+    tween(650, function (p) { b.setAttribute('y', Y1 - h * p); b.setAttribute('height', h * p); });
+  }
+  function dot(i, anim, guide) {
+    var x = mx(i), y = ty(TEMP[i]);
+    if (anim && guide) {
+      var g = el('line', { x1: X1, y1: y, x2: X1, y2: y, stroke: 'var(--temp)', 'stroke-width': 2, 'stroke-dasharray': '6 5' });
+      tween(450, function (p) { g.setAttribute('x2', X1 + (x - X1) * p); }, function () { later(500, function () { g.remove(); }); });
+    }
+    var c = el('g', {});
+    var a = document.createElementNS(NS, 'line'), b = document.createElementNS(NS, 'line');
+    [[a, x - 6, y - 6, x + 6, y + 6], [b, x - 6, y + 6, x + 6, y - 6]].forEach(function (s) {
+      s[0].setAttribute('x1', s[1]); s[0].setAttribute('y1', s[2]); s[0].setAttribute('x2', s[3]); s[0].setAttribute('y2', s[4]);
+      s[0].setAttribute('stroke', 'var(--temp)'); s[0].setAttribute('stroke-width', 3); s[0].setAttribute('stroke-linecap', 'round'); c.appendChild(s[0]);
+    });
+    if (anim) { c.style.opacity = 0; c.classList.add('fade'); later(400, function () { c.style.opacity = 1; }); }
+  }
+  function curvePath() {
+    var p = MONTHS.map(function (m, i) { return [mx(i), ty(TEMP[i])]; });
+    var d = 'M' + p[0][0] + ' ' + p[0][1];
+    for (var i = 0; i < p.length - 1; i++) {
+      var p0 = p[i - 1] || p[i], p1 = p[i], p2 = p[i + 1], p3 = p[i + 2] || p2;
+      var c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      d += ' C' + c1[0].toFixed(1) + ' ' + c1[1].toFixed(1) + ' ' + c2[0].toFixed(1) + ' ' + c2[1].toFixed(1) + ' ' + p2[0] + ' ' + p2[1];
+    }
+    return d;
+  }
+  function curve(anim) {
+    var path = el('path', { d: curvePath(), fill: 'none', stroke: 'var(--temp)', 'stroke-width': 3.5, 'stroke-linecap': 'round' });
+    if (!anim) return;
+    var L = path.getTotalLength();
+    path.setAttribute('stroke-dasharray', L); path.setAttribute('stroke-dashoffset', L);
+    tween(2600, function (p) { path.setAttribute('stroke-dashoffset', L * (1 - p)); });
+  }
+  function finish(anim) {
+    var t = el('text', { x: (X0 + X1) / 2, y: 38, 'text-anchor': 'middle', 'class': 'hand', 'font-size': 34, fill: 'var(--ink)' }, 'Climate graph for Oslo, Norway');
+    var k = el('g', {});
+    var kx = (X0 + X1) / 2 - 190, ky = Y1 + 84;
+    var bg = document.createElementNS(NS, 'rect'); [['x', kx - 10], ['y', ky - 8], ['width', 400], ['height', 36], ['rx', 6], ['fill', '#ffffff'], ['stroke', '#b9cfe3']].forEach(function (a) { bg.setAttribute(a[0], a[1]); }); k.appendChild(bg);
+    var sw = document.createElementNS(NS, 'rect'); [['x', kx], ['y', ky + 2], ['width', 22], ['height', 14], ['fill', 'var(--rain)']].forEach(function (a) { sw.setAttribute(a[0], a[1]); }); k.appendChild(sw);
+    var ln = document.createElementNS(NS, 'line'); [['x1', kx + 190], ['y1', ky + 9], ['x2', kx + 212], ['y2', ky + 9], ['stroke', 'var(--temp)'], ['stroke-width', 3.5]].forEach(function (a) { ln.setAttribute(a[0], a[1]); }); k.appendChild(ln);
+    [['Rainfall (bars)', kx + 32], ['Temperature (line)', kx + 222]].forEach(function (r) { var tx = document.createElementNS(NS, 'text'); tx.setAttribute('x', r[1]); tx.setAttribute('y', ky + 15); tx.setAttribute('font-size', 16); tx.setAttribute('class', 'lab'); tx.setAttribute('fill', 'var(--ink)'); tx.textContent = r[0]; k.appendChild(tx); });
+    if (anim) { appear(t, 200); appear(k, 900); }
+  }
+  function readings(anim) {
+    var marks = [[mx(7), ry(95), 'var(--rain)', '1'], [mx(6), ty(18), 'var(--temp)', '2'], [mx(0), ty(-3), 'var(--temp)', '3']];
+    marks.forEach(function (m, i) {
+      var g = el('g', {});
+      var ring = document.createElementNS(NS, 'circle'); [['cx', m[0]], ['cy', m[1]], ['r', 16], ['fill', 'none'], ['stroke', m[2]], ['stroke-width', 3]].forEach(function (a) { ring.setAttribute(a[0], a[1]); }); g.appendChild(ring);
+      var bx = m[0] + (i === 0 ? 22 : i === 1 ? -22 : 22), by = m[1] - 22;
+      var bubble = document.createElementNS(NS, 'circle'); [['cx', bx], ['cy', by], ['r', 13], ['fill', m[2]]].forEach(function (a) { bubble.setAttribute(a[0], a[1]); }); g.appendChild(bubble);
+      var n = document.createElementNS(NS, 'text'); [['x', bx], ['y', by + 6], ['text-anchor', 'middle'], ['font-size', 17], ['class', 'lab'], ['fill', '#ffffff']].forEach(function (a) { n.setAttribute(a[0], a[1]); }); n.textContent = m[3]; g.appendChild(n);
+      if (anim) { g.style.opacity = 0; g.classList.add('fade'); later(400 + i * 700, function () { g.style.opacity = 1; }); }
+    });
+  }
+
+  // ---------- the steps ----------
+  var total = RAIN.reduce(function (a, b) { return a + b; }, 0);
+  var STEPS = [
+    { title: 'Start with the data', text: '<p>We have the average temperature and rainfall for each month in Oslo. A climate graph shows both on one set of axes:</p><p><b style="color:var(--rain)">rainfall as bars</b> and <b style="color:var(--temp)">temperature as a line</b>.</p>', run: function () {} },
+    { title: 'Step 1: the x-axis', text: '<p>Draw a horizontal line and split it into <b>12 equal spaces</b>, one for each month. Label the months under the spaces, not on the lines.</p>', run: function (a) { xAxis(a); } },
+    { title: 'Step 2: the rainfall axis (left)', text: '<p>The highest rainfall is <b>95 mm</b> (August), so the axis must reach at least 95.</p><p>Go from <b>0 to 100 in steps of 20</b>. That is 5 equal steps.</p>', run: function (a) { rainAxis(a); } },
+    { title: 'Step 3: the temperature axis (right)', text: '<p>The coldest month is <b>−3 °C</b> and the warmest is <b>18 °C</b>, so we need numbers below zero.</p><p>Go from <b>−5 to 20 in steps of 5</b>. That is also 5 equal steps, so both axes line up.</p><p>Never skip a number: every step must be the same size.</p>', run: function (a) { tempAxis(a); } },
+    { title: 'Step 4: light guide lines', text: '<p>Because both axes have 5 equal steps, one set of guide lines works for both scales. For example, 20 mm sits level with 0 °C.</p>', run: function (a) { gridlines(a); } },
+    'RAIN',
+    'TEMP',
+    { title: 'Step 7: join the crosses', text: '<p>Join the crosses with a <b>smooth curve</b> in red. Temperature changes gradually from month to month, so the line should curve, not zigzag.</p>', run: function (a) { curve(a); } },
+    { title: 'Step 8: finish the graph', text: '<p>Add a <b>title</b> and a <b>key</b>. Check both axes are labelled with their units: mm and °C.</p>', run: function (a) { finish(a); } },
+    { title: 'Read your graph', text: '<p><b style="color:var(--rain)">1</b> Wettest: <b>August, 95 mm</b><br><b style="color:var(--temp)">2</b> Warmest: <b>July, 18 °C</b><br><b style="color:var(--temp)">3</b> Coldest: <b>January, −3 °C</b></p><p><b>Total rainfall:</b> ' + total + ' mm a year.</p><p><b>Temperature range:</b> 18 − (−3) = <b>21 °C</b>.</p><p>Oslo has cold winters below freezing, mild summers, and rain all year, with the wettest months in late summer and autumn.</p>', run: function (a) { readings(a); } }
+  ];
+
+  // Rainfall and temperature are plotted one month per step: each Next adds one bar or one cross.
+  var RAIN_TEXT = '<p>Use the <b>left axis</b>. Read across from the rainfall value and draw a bar up to it. Bars sit inside their month space and do not touch.</p>';
+  var TEMP_TEXT = '<p>Use the <b>right axis</b>. Read across from the temperature and mark a small cross in the <b>middle</b> of the month.</p>';
+  var expanded = [];
+  STEPS.forEach(function (st, g) {
+    if (st === 'RAIN') MONTHS.forEach(function (m, i) { expanded.push({ group: g, sub: i, title: 'Step 5: plot the rainfall bars', text: RAIN_TEXT, short: true,
+      readout: m + ': <span style="color:var(--rain)">' + RAIN[i] + ' mm</span>', run: function (a) { bar(i, a, true); } }); });
+    else if (st === 'TEMP') MONTHS.forEach(function (m, i) { expanded.push({ group: g, sub: i, title: 'Step 6: plot the temperatures', text: TEMP_TEXT, short: true,
+      readout: m + ': <span style="color:var(--temp)">' + TEMP[i] + ' °C</span>', run: function (a) { dot(i, a, true); } }); });
+    else { st.group = g; expanded.push(st); }
+  });
+  var GROUPS = STEPS.length;
+  STEPS = expanded;
+
+  var cur = 0, playing = false, autoTimer = null;
+  var dots = document.getElementById('dots');
+  for (var gi = 0; gi < GROUPS; gi++) (function (g) {
+    var first = STEPS.findIndex(function (s) { return s.group === g; });
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Go to ' + STEPS[first].title);
+    b.addEventListener('click', function () { stop(); go(first, true); }); dots.appendChild(b);
+  })(gi);
+  function readout(html) { document.getElementById('readout').innerHTML = html; }
+
+  function go(i, anim) {
+    cancelAll(); clearTimeout(autoTimer);
+    cur = Math.max(0, Math.min(STEPS.length - 1, i));
+    while (svg.lastChild && svg.lastChild.nodeName !== 'title') svg.removeChild(svg.lastChild);
+    highlight(-1); readout('');
+    for (var k = 0; k < cur; k++) STEPS[k].run(false);
+    STEPS[cur].run(!!anim);
+    document.getElementById('stepTitle').textContent = STEPS[cur].title;
+    document.getElementById('stepText').innerHTML = STEPS[cur].text;
+    var st = STEPS[cur], grp = st.group;
+    document.getElementById('stepcount').textContent = grp === 0 ? 'Introduction' : 'Step ' + grp + ' of ' + (GROUPS - 1) + (st.sub != null ? ' · month ' + (st.sub + 1) + ' of 12' : '');
+    if (st.sub != null) { highlight(st.sub); readout(st.readout); }
+    Array.prototype.forEach.call(dots.children, function (b, k) { b.classList.toggle('on', k === grp); b.classList.toggle('done', k < grp); });
+    document.getElementById('back').disabled = cur === 0;
+    document.getElementById('next').disabled = cur === STEPS.length - 1;
+    if (playing) {
+      var len = st.short ? 1300 : st.title.indexOf('Step 7') === 0 ? 3600 : 3400;
+      if (cur < STEPS.length - 1) autoTimer = setTimeout(function () { go(cur + 1, true); }, (reduce ? 4000 : len * speed()) + 1200);
+      else stop();
+    }
+  }
+  function stop() { playing = false; clearTimeout(autoTimer); document.getElementById('play').textContent = '▶ Play'; }
+  function play() {
+    if (playing) { stop(); return; }
+    playing = true; document.getElementById('play').textContent = '❚❚ Pause';
+    go(cur === STEPS.length - 1 || cur === 0 ? 1 : cur, true);
+  }
+  document.getElementById('play').addEventListener('click', play);
+  document.getElementById('next').addEventListener('click', function () { stop(); go(cur + 1, true); });
+  document.getElementById('back').addEventListener('click', function () { stop(); go(cur - 1, true); });
+  document.getElementById('restart').addEventListener('click', function () { stop(); go(0, false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, button')) { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); stop(); go(cur + 1, true); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); stop(); go(cur - 1, true); }
+    else if (e.key === ' ') { e.preventDefault(); play(); }
+  });
+
+  // Open showing the finished graph as a preview, ready to start from the beginning.
+  go(STEPS.length - 1, false);
+  document.getElementById('stepTitle').textContent = 'The finished climate graph';
+  document.getElementById('stepText').innerHTML = '<p>This is what we are going to build. Press <b>Play</b> to watch it drawn step by step, or use <b>Next</b> to go at your own pace.</p>';
+  document.getElementById('stepcount').textContent = 'Preview';
+  cur = 0;
+  Array.prototype.forEach.call(dots.children, function (b) { b.classList.remove('on', 'done'); });
+  document.getElementById('back').disabled = true;
+  document.getElementById('next').disabled = false;
+  var firstNext = true;
+  var nextBtn = document.getElementById('next');
+  nextBtn.addEventListener('click', function () { if (firstNext) { firstNext = false; } }, true);
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

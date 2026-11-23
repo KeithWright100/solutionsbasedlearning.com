@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Development Detectives — KS3 Geography Games — SBL</title>
+<meta name="description" content="KS3 Geography lesson game: measure and map development with economic, social and composite indicators (GDP per capita, life expectancy, HDI), then judge whether HDI is the best indicator.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+* { box-sizing: border-box; }
+html,body{margin:0}
+[hidden]{display:none!important}
+a{color:inherit}
+:root{
+  --bg:#f5f4f9; --card:#ffffff; --fg:#1d1b26; --muted:#5a5768; --line:#dcd8e8;
+  --accent:#6d3fc0; --accent-soft:#efe9fb; --accent-dark:#4c2a8c;
+  --econ:#b45309; --econ-soft:#fdf0e1; --soc:#0f766e; --soc-soft:#e1f3f0; --comp:#1d4ed8; --comp-soft:#e4ebfd;
+  --ok:#15803d; --ok-soft:#dcf3e3; --bad:#b42318; --bad-soft:#fde4e1;
+  --sea:#d7e9f5; --nodata:#d6d3cc; --mapline:#ffffff;
+  --display:'Fredoka','Trebuchet MS',sans-serif; --body:'Nunito Sans',Arial,sans-serif;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5}
+.top-bar{padding:14px 16px;color:#fff;background:linear-gradient(135deg,#3b1f6e,#6d3fc0)}
+.top-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top-bar a{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.88);text-decoration:none}
+.top-bar a:hover{color:#fff;text-decoration:underline}
+.brand{font-weight:900}.brand span{color:#e3d6ff}
+.wrap{max-width:1080px;margin:0 auto;padding:22px 16px 60px;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.8rem,4.5vw,2.6rem)}
+h2{font-size:1.5rem} h3{font-size:1.2rem}
+p{margin:0}
+.muted{color:var(--muted)}
+.eyebrow{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;color:var(--accent)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.spacer{flex:1}
+.btn{font:800 1rem var(--body);border-radius:999px;padding:10px 22px;cursor:pointer;border:2px solid var(--accent);background:var(--accent);color:#fff}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.small{padding:6px 14px;font-size:.9rem}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,path.c:focus-visible,circle.dot:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.li-box{border:4px solid #e8742a;border-radius:10px;padding:14px 18px;text-align:center;background:#fff}
+.sc-box{border:4px solid #1fb050;border-radius:10px;padding:14px 18px;background:#fff}
+.sc-box ol{margin:6px 0 0;padding-left:22px}
+/* chapter tabs */
+.chapters{display:flex;gap:8px;flex-wrap:wrap}
+.chap{border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:7px 14px;font:700 .95rem var(--body);cursor:pointer;display:flex;gap:8px;align-items:center}
+.chap .n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-family:var(--display);font-size:.85rem}
+.chap[aria-current="step"]{border-color:var(--accent);background:var(--accent-soft)}
+.chap.done .n{background:var(--ok);color:#fff}
+.chap.locked{opacity:.6}
+/* teacher talk */
+.talk{border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px;border:3px solid var(--accent);background:var(--accent-soft)}
+.talk.econ{border-color:var(--econ);background:var(--econ-soft)} .talk.soc{border-color:var(--soc);background:var(--soc-soft)} .talk.comp{border-color:var(--comp);background:var(--comp-soft)}
+.talk .badge{align-self:flex-start;font:800 .8rem var(--body);letter-spacing:.08em;text-transform:uppercase;background:#1d1b26;color:#fff;border-radius:999px;padding:4px 12px}
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.key{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid var(--line)}
+.key b{display:block;font-family:var(--display);font-size:1.15rem;margin-bottom:4px}
+.formula{font-family:var(--display);font-size:1.3rem;text-align:center;background:#fff;border-radius:14px;padding:12px;border:1px dashed var(--line)}
+/* activities */
+.act-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sc-tag{font:800 .78rem var(--body);border-radius:999px;padding:3px 10px;background:var(--accent-soft);color:var(--accent-dark)}
+.q{font-size:1.15rem;font-weight:700}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;font:600 1rem var(--body);background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--fg)}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)} .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{border-radius:12px;padding:12px 14px;font-weight:600}
+.fb.ok{background:var(--ok-soft);color:#14532d} .fb.bad{background:var(--bad-soft);color:#7a1a10} .fb.info{background:var(--accent-soft);color:var(--accent-dark)}
+.sortrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 12px}
+.sortrow .txt{flex:1 1 260px;font-weight:600}
+.sortrow.right{border-color:var(--ok);background:var(--ok-soft)} .sortrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.toggle{font:700 .92rem var(--body);border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--fg)}
+.toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}
+select,input[type=text],input[type=number]{font:600 1rem var(--body);border:2px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;color:var(--fg)}
+textarea{width:100%;min-height:96px;font:600 1.02rem/1.5 var(--body);border:2px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--fg);resize:vertical}
+.frame{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:1.08rem;line-height:2}
+.frame input{flex:1 1 220px;min-width:180px}
+.bank{display:flex;flex-wrap:wrap;gap:6px}
+.bank span{background:var(--accent-soft);color:var(--accent-dark);border-radius:999px;padding:3px 10px;font-weight:700;font-size:.9rem}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.checklist li{display:flex;gap:8px;align-items:center;font-weight:600;color:var(--muted)}
+.checklist li.met{color:var(--ok)}
+.checklist li .tick{width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font-size:.8rem;flex:none}
+.checklist li.met .tick{background:var(--ok);color:#fff;border-color:var(--ok)}
+figure{margin:0;display:flex;flex-direction:column;gap:6px}
+figure img{width:100%;max-height:360px;object-fit:cover;border-radius:14px;display:block;background:#e5e3ec}
+figcaption{font-size:.82rem;color:var(--muted)}
+.map{width:100%;height:auto;display:block;background:var(--sea);border-radius:14px}
+.map path.c{stroke:var(--mapline);stroke-width:.8;cursor:pointer}
+.map path.c:hover{stroke:#1d1b26;stroke-width:2}
+.map path.c.sel{stroke:#1d1b26;stroke-width:3}
+.legend{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.85rem;font-weight:700}
+.legend i{display:inline-block;width:22px;height:14px;border-radius:3px;margin-right:4px;vertical-align:-2px;border:1px solid rgba(0,0,0,.15)}
+.mapinfo{font-weight:700;min-height:1.6em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.pick{text-align:left;font:700 1rem var(--body);background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;color:var(--fg)}
+.pick[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.persp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.persp div{border-radius:14px;padding:12px 14px;background:#fff;border:2px solid var(--line)}
+.persp div.on{border-color:var(--accent);background:var(--accent-soft)}
+.slider{display:grid;grid-template-columns:170px 1fr 60px;gap:10px;align-items:center;font-weight:700}
+.slider input{width:100%}
+.hdi-out{font-family:var(--display);font-size:2.4rem;text-align:center}
+.cat{display:inline-block;border-radius:999px;padding:2px 12px;font:800 .95rem var(--body);color:#fff}
+table.data{border-collapse:collapse;width:100%;font-size:1rem}
+table.data th,table.data td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+table.data td.num,table.data th.num{text-align:right;font-variant-numeric:tabular-nums}
+table.data th{background:var(--accent-soft)}
+.continuum{display:flex;flex-direction:column;gap:6px}
+.continuum input{width:100%}
+.continuum .ends{display:flex;justify-content:space-between;font-weight:800}
+.waiting{border:3px dashed var(--accent);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px;background:#fff}
+.codebox{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.codebox input{text-transform:uppercase;letter-spacing:.15em;font-family:var(--display);font-size:1.3rem;width:200px}
+.challenge{border:3px solid #f59e0b;background:#fff8e6;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.challenge .badge{align-self:flex-start;font:800 .8rem var(--body);letter-spacing:.08em;text-transform:uppercase;background:#b45309;color:#fff;border-radius:999px;padding:4px 12px}
+.teacher{font-size:.88rem;color:var(--muted)}
+.teacher button{background:none;border:0;padding:0;color:#0f6b5d;text-decoration:underline;font:800 .88rem var(--body);cursor:pointer}
+.keyov{position:fixed;inset:0;z-index:1000;background:var(--bg);overflow:auto}
+.keyov .wrap{gap:14px}
+.kbar{display:flex;gap:10px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:2}
+.kact{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.kact ul,.kact ol{margin:0;padding-left:22px}
+.kok{color:var(--ok);font-weight:800}
+.kno{color:var(--muted)}
+.kmodel{background:var(--accent-soft);border-radius:10px;padding:10px 12px;font-style:italic}
+@media print{.kbar,.top-bar,#app{display:none!important}.keyov{position:static}.kact{break-inside:avoid}}
+.teacherbar{background:#1d1b26;color:#fff;border-radius:14px;padding:12px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:700}
+.teacherbar code{background:#3a3550;border-radius:6px;padding:2px 8px;font-size:1rem;letter-spacing:.08em}
+.score-pill{align-self:center;font:800 .95rem var(--body);background:#1d1b26;color:#fff;border-radius:999px;padding:6px 14px}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.results div{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px}
+.results b{display:block;font-family:var(--display);font-size:2rem}
+.progress{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent)}
+.chart{width:100%;height:auto;display:block}
+@media (max-width:640px){ .slider{grid-template-columns:1fr 60px} .slider label{grid-column:1/-1} .panel,.talk{padding:16px} }
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner">
+  <a href="/geography/games#ks3">&larr; Back to Geography Games</a>
+  <div class="brand">SBL <span>Development Detectives</span></div>
+</div></div>
+
+<main class="wrap" id="app">
+
+  <section class="panel" id="intro">
+    <div class="eyebrow">KS3 Geography · Measuring and mapping development</div>
+    <h1>Development Detectives</h1>
+    <p class="muted">You are an analyst for a world development agency. Your case: how developed is a country, really? Your teacher will stop the class at each chapter. When you finish early, take on the challenge.</p>
+    <div class="li-box"><b style="font-family:var(--display);font-size:1.25rem">Learning intention</b><br><i style="font-weight:700">I can explain how development is measured and mapped, and judge how useful different indicators are.</i></div>
+    <div class="sc-box"><b style="font-family:var(--display);font-size:1.15rem">Success criteria · I can:</b>
+      <ol>
+        <li><b>SC1</b> describe economic, social and composite indicators of development (e.g. GNI per capita, literacy rate, HDI)</li>
+        <li><b>SC2</b> explain the strengths and weaknesses of each type of indicator</li>
+        <li><b>SC3</b> evaluate how useful HDI is as a measure of development, and judge whether it is the best indicator</li>
+      </ol>
+    </div>
+    <p class="muted" id="loginNote" style="font-size:.92rem">Log in to SBL before you start so your scores and writing are saved for your teacher.</p>
+    <div class="teacher" id="teacherLinks" hidden><button type="button" id="tUnlock">Teacher: unlock all levels</button> &middot; <button type="button" id="tKey">Teacher: answer key</button> &middot; <span>Code words: <b>MONEY</b> (ch 1) · <b>HEALTH</b> (ch 2) · <b>INDEX</b> (ch 3) · <b>VERDICT</b> (ch 4)</span></div>
+  </section>
+  <div id="keyov" class="keyov" hidden></div>
+
+  <nav class="chapters" id="chapters" aria-label="Chapters"></nav>
+  <section id="stage" aria-live="polite"></section>
+</main>
+
+<script src="/js/sbl-game-account.js"></script>
+<script src="/js/sbl-dev-detectives-data.js"></script>
+<script>
+(function () {
+  var SLUG = 'development-detectives';
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var D = window.DD_DATA || {};
+  function c(code) { return D[code] || {}; }
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-GB'); }
+  var COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
+  function photo(file, alt, credit, w) { return '<figure><img src="' + COMMONS + encodeURIComponent(file) + '?width=' + (w || 1000) + '" alt="' + esc(alt) + '" loading="lazy"><figcaption>Photo: ' + esc(credit) + ', Wikimedia Commons</figcaption></figure>'; }
+  function localPhoto(src, alt, credit) { return '<figure><img src="' + src + '" alt="' + esc(alt) + '" loading="lazy"><figcaption>Photo: ' + esc(credit) + '</figcaption></figure>'; }
+
+  /* ---------- maps ---------- */
+  var METRICS = {
+    g: { name: 'GDP per capita (US$)', bands: [1000, 4000, 13000, 40000], labels: ['under $1,000', '$1,000–4,000', '$4,000–13,000', '$13,000–40,000', 'over $40,000'], fmt: money, src: 'IMF estimates for 2026' },
+    l: { name: 'Life expectancy (years)', bands: [60, 65, 70, 75, 80], labels: ['under 60', '60–65', '65–70', '70–75', '75–80', 'over 80'], fmt: function (v) { return v.toFixed(1) + ' years'; }, src: 'UN estimates' },
+    h: { name: 'Human Development Index', bands: [0.55, 0.7, 0.8], labels: ['Low (under 0.550)', 'Medium (0.550–0.699)', 'High (0.700–0.799)', 'Very high (0.800+)'], fmt: function (v) { return v.toFixed(3); }, src: 'UNDP Human Development Report 2025 (2023 data)' }
+  };
+  var PAL = { 5: ['#fde7d6', '#f9b98a', '#e8803f', '#b45309', '#6b3206'], 6: ['#e3f3f0', '#b5e0d7', '#79c3b3', '#3d9c8a', '#0f6b5d', '#063f37'], 4: ['#e4ebfd', '#a9bff7', '#5b82e8', '#1d3fa8'] };
+  function bandOf(m, v) { var b = METRICS[m].bands, i = 0; while (i < b.length && v >= b[i]) i++; return i; }
+  function colourOf(m, v) { var n = METRICS[m].bands.length + 1; return PAL[n][bandOf(m, v)]; }
+  function mapSVG(id, m, opts) {
+    opts = opts || {};
+    var h = '<svg class="map" id="' + id + '" viewBox="0 40 2000 860" role="img" aria-label="World map shaded by ' + esc(METRICS[m].name) + '">';
+    (window.DD_SHAPES || []).forEach(function (s) {
+      var d = D[s[0]], v = d && d[m];
+      var fill = v == null ? 'var(--nodata)' : colourOf(m, v);
+      h += '<path class="c" data-code="' + s[0] + '" d="' + s[1] + '" fill="' + fill + '"><title>' + esc(d ? d.n : '') + (v != null ? ': ' + METRICS[m].fmt(v) : '') + '</title></path>';
+    });
+    h += '</svg>';
+    var leg = '<div class="legend"><span>' + esc(METRICS[m].name) + ':</span>' + METRICS[m].labels.map(function (l, i) { return '<span><i style="background:' + PAL[METRICS[m].labels.length][i] + '"></i>' + esc(l) + '</span>'; }).join('') + '<span><i style="background:var(--nodata)"></i>no data</span></div>';
+    return h + leg + '<div class="mapinfo" id="' + id + 'Info">Tap a country to see its figure.</div><div class="muted" style="font-size:.8rem">Data: ' + esc(METRICS[m].src) + '.</div>';
+  }
+  function wireMap(id, m, onPick) {
+    var svg = $(id); if (!svg) return;
+    svg.addEventListener('click', function (e) {
+      var p = e.target.closest('path.c'); if (!p) return;
+      svg.querySelectorAll('path.sel').forEach(function (x) { x.classList.remove('sel'); });
+      p.classList.add('sel');
+      var d = D[p.getAttribute('data-code')];
+      $(id + 'Info').textContent = d ? d.n + ': ' + (d[m] != null ? METRICS[m].fmt(d[m]) : 'no data') : 'No data for this area.';
+      if (onPick) onPick(p.getAttribute('data-code'));
+    });
+  }
+
+  /* ---------- charts ---------- */
+  function barChart(rows, max, unit, colour) {
+    var W = 720, rowH = 46, H = rows.length * rowH + 30, left = 150, scale = (W - left - 70) / max;
+    var h = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Bar chart: ' + esc(rows.map(function (r) { return r[0] + ' ' + r[1] + unit; }).join(', ')) + '">';
+    for (var t = 0; t <= max; t += 20) { var x = left + t * scale; h += '<line x1="' + x + '" y1="4" x2="' + x + '" y2="' + (H - 24) + '" stroke="#dcd8e8"/><text x="' + x + '" y="' + (H - 6) + '" font-size="13" text-anchor="middle" fill="#5a5768">' + t + '</text>'; }
+    rows.forEach(function (r, i) {
+      var y = 8 + i * rowH, w = r[1] * scale;
+      h += '<text x="' + (left - 10) + '" y="' + (y + 24) + '" font-size="16" font-weight="700" text-anchor="end" fill="#1d1b26">' + esc(r[0]) + '</text>';
+      h += '<rect x="' + left + '" y="' + (y + 6) + '" width="' + w.toFixed(1) + '" height="28" rx="5" fill="' + colour + '"/>';
+      h += '<text x="' + (left + w + 8) + '" y="' + (y + 25) + '" font-size="15" font-weight="800" fill="#1d1b26">' + r[1] + '</text>';
+    });
+    return h + '</svg>';
+  }
+  function scatter(id) {
+    var W = 760, H = 460, L = 64, R = 20, T = 16, B = 56;
+    function xs(g) { var a = Math.log10(300), b = Math.log10(150000); return L + (Math.log10(g) - a) / (b - a) * (W - L - R); }
+    function ys(l) { return T + (90 - l) / 40 * (H - T - B); }
+    var h = '<svg class="chart" id="' + id + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Scatter graph of GDP per capita against life expectancy for every country">';
+    [500, 1000, 5000, 10000, 50000, 100000].forEach(function (g) { var x = xs(g); h += '<line x1="' + x + '" y1="' + T + '" x2="' + x + '" y2="' + (H - B) + '" stroke="#e6e3ef"/><text x="' + x + '" y="' + (H - B + 20) + '" font-size="13" text-anchor="middle" fill="#5a5768">$' + (g >= 1000 ? g / 1000 + 'k' : g) + '</text>'; });
+    [50, 60, 70, 80, 90].forEach(function (l) { var y = ys(l); h += '<line x1="' + L + '" y1="' + y + '" x2="' + (W - R) + '" y2="' + y + '" stroke="#e6e3ef"/><text x="' + (L - 8) + '" y="' + (y + 5) + '" font-size="13" text-anchor="end" fill="#5a5768">' + l + '</text>'; });
+    h += '<text x="' + ((W + L) / 2) + '" y="' + (H - 10) + '" font-size="14" font-weight="700" text-anchor="middle" fill="#1d1b26">GDP per capita (US$, log scale)</text><text transform="translate(16 ' + ((H - B) / 2) + ') rotate(-90)" font-size="14" font-weight="700" text-anchor="middle" fill="#1d1b26">Life expectancy (years)</text>';
+    Object.keys(D).forEach(function (k) { var d = D[k]; if (d.g == null || d.l == null) return; h += '<circle class="dot" tabindex="0" data-code="' + k + '" cx="' + xs(d.g).toFixed(1) + '" cy="' + ys(d.l).toFixed(1) + '" r="6" fill="#6d3fc0" fill-opacity=".55" stroke="#fff" stroke-width="1" style="cursor:pointer"><title>' + esc(d.n) + '</title></circle>'; });
+    return h + '</svg><div class="mapinfo" id="' + id + 'Info">Tap a dot to see which country it is.</div>';
+  }
+
+  /* ---------- state ---------- */
+  var CODES = ['', 'MONEY', 'HEALTH', 'INDEX', 'VERDICT'];
+  var KEY = 'sbl-dd-v1';
+  var S = { unlocked: 0, at: 0, chap: 0, done: {}, pts: { sc1: [0, 0], sc2: [0, 0], sc3: [0, 0], ch: [0, 0] }, items: {}, written: {}, perspective: null, verdict: null };
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && saved.pts) S = saved; } catch (e) {}
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  var accountOk = false, firstSave = true;
+  if (window.SBLGameAccount) SBLGameAccount.load(SLUG).then(function (a) { accountOk = !!a; $('loginNote').textContent = a ? 'You are logged in: your scores and writing are saved for your teacher.' : 'You are not logged in, so nothing is saved for your teacher. Log in to SBL first if you can.'; });
+
+  var SC_TITLES = { sc1: 'SC1 Describe indicators', sc2: 'SC2 Strengths & weaknesses', sc3: 'SC3 Evaluate HDI', ch: 'Challenges' };
+  function award(itemId, sc, got, max) {
+    if (S.items[itemId]) return; // each item counts once
+    S.items[itemId] = { sc: sc, got: got, max: max };
+    S.pts[sc][0] += got; S.pts[sc][1] += max; persist(); saveMarks();
+  }
+  function saveMarks() {
+    if (!window.SBLGameAccount) return;
+    var at = new Date().toISOString(), patch = {};
+    SBLGameAccount.load(SLUG).then(function (acct) {
+      if (!acct) return;
+      ['sc1', 'sc2', 'sc3', 'ch'].forEach(function (sc) {
+        var p = S.pts[sc]; if (!p[1]) return;
+        var old = acct['m:' + sc] || {}, pct = Math.round(p[0] / p[1] * 100);
+        patch['m:' + sc] = { ls: p[0], lm: p[1], lp: pct, lt: SC_TITLES[sc], at: at, n: (old.n || 0) + (firstSave || !old.n ? 1 : 0), bp: Math.max(old.bp || 0, pct) };
+      });
+      firstSave = false;
+      if (Object.keys(patch).length) SBLGameAccount.save(SLUG, patch);
+    });
+  }
+  function saveWriting(id, q, text, extra) {
+    S.written[id] = text; persist();
+    if (!window.SBLGameAccount) return;
+    var p = {}; p['w:' + id] = Object.assign({ q: q, a: text, at: new Date().toISOString() }, extra || {});
+    SBLGameAccount.save(SLUG, p);
+  }
+
+  /* ---------- content ---------- */
+  var J = c('392'), NG = c('566'), CR = c('188'), TH = c('764'), EG = c('226'), QA = c('634'), CU = c('192'), US = c('840'), BR = c('076'), PE = c('604'), UK = c('826'), IN = c('356');
+  var CHAPTERS = [
+    { title: 'The case', icon: '🔎', talk: {
+        cls: '', heading: 'How could we measure how developed a country is?',
+        body: '<p>Development means improving people’s lives. But people disagree about what matters most, so they measure it in different ways. These are four <b>perspectives</b>:</p>' +
+          '<div class="keys"><div class="key"><b>Economic growth</b>How much money and wealth a country makes.</div><div class="key"><b>Human and social</b>People’s health, education and quality of life.</div><div class="key"><b>Environmental sustainability</b>Whether development protects the planet for the future.</div><div class="key"><b>People having a say</b>Whether ordinary people get a say in decisions and feel included.</div></div>' +
+          '<p>Geographers group development indicators into three types: <b style="color:var(--econ)">economic</b>, <b style="color:var(--soc)">social</b> and <b style="color:var(--comp)">composite</b>.</p>' },
+      acts: ['hook', 'hookWrite'], challenge: ['chPersp'] },
+    { title: 'Follow the money', icon: '💰', talk: {
+        cls: 'econ', heading: 'Economic indicators',
+        body: '<p>Economic indicators focus on the <b>income or wealth</b> of a country.</p>' +
+          '<div class="keys"><div class="key"><b>GDP</b>Gross Domestic Product: the total value of all the goods and services a country produces in a year.</div><div class="key"><b>GDP per capita</b>GDP divided by the population: the average value produced per person.</div><div class="key"><b>GNI per capita</b>Like GDP per capita, but includes money earned from abroad. HDI uses this one.</div></div>' +
+          '<div class="formula">GDP per capita = GDP ÷ population</div>' + mapSVG('mapG', 'g') },
+      acts: ['econMatch', 'econCalc', 'econMap', 'econPhoto', 'econSort', 'econWrite'], challenge: ['chQatar', 'chRank'] },
+    { title: 'Health and schooling', icon: '🩺', talk: {
+        cls: 'soc', heading: 'Social indicators',
+        body: '<p>Social indicators focus on people’s <b>quality of life</b>, especially health and education.</p>' +
+          '<div class="keys"><div class="key"><b>Life expectancy</b>The average number of years a person can expect to live, from birth.</div><div class="key"><b>Average years of schooling</b>The average number of years adults have spent in school.</div><div class="key"><b>Literacy rate</b>The percentage of adults who can read and write.</div></div>' +
+          barChart([['Japan', J.l], ['United Kingdom', UK.l], ['Costa Rica', CR.l], ['Thailand', TH.l], ['India', IN.l], ['Nigeria', NG.l]], 100, ' years', '#0f766e') +
+          '<p class="muted" style="font-size:.85rem">Life expectancy at birth, UN estimates.</p>' + mapSVG('mapL', 'l') },
+      acts: ['socMatch', 'socGraph', 'socMap', 'socPhoto', 'socSort', 'socWrite'], challenge: ['chScatter', 'chCuba'] },
+    { title: 'Build an index', icon: '🧮', talk: {
+        cls: 'comp', heading: 'Composite indicators: the HDI',
+        body: '<p>A composite indicator combines economic and social data into <b>one score</b>. The best known is the <b>Human Development Index (HDI)</b>, from 0 to 1.</p>' +
+          '<div class="formula">HDI = health score + education score + income score <span style="font-size:.9rem">(combined like an average)</span></div>' +
+          '<div class="keys"><div class="key"><b>Health</b>uses life expectancy</div><div class="key"><b>Education</b>uses years of schooling</div><div class="key"><b>Income</b>uses GNI per capita</div></div>' + mapSVG('mapH', 'h') },
+      acts: ['hdiParts', 'hdiBuild', 'hdiMap', 'hdiCompare', 'compSort', 'compWrite'], challenge: ['chBuildLow', 'chThai'] },
+    { title: 'The verdict', icon: '⚖️', talk: {
+        cls: '', heading: 'Is HDI the best way to measure development?',
+        body: '<p>HDI gives a broad picture, but some people criticise it, depending on their perspective:</p>' +
+          '<div class="keys"><div class="key"><b>Environmental view</b>HDI has no measure of whether the environment is protected.</div><div class="key"><b>People having a say</b>HDI doesn’t show whether people feel included in decisions, or how happy they are.</div><div class="key"><b>Inequality</b>HDI is an average, so it hides big differences between rich and poor people in the same country.</div></div>' +
+          '<p>The UN now also publishes a version of HDI adjusted for inequality, and one adjusted for pressure on the planet.</p>' },
+      acts: ['verdictQuiz1', 'verdictQuiz2', 'verdictQuiz3', 'continuum', 'verdict'], challenge: ['chIndex'] }
+  ];
+
+  // Each activity: { sc, render(box, done) }. done() moves on.
+  var A = {}, KEYD = {};
+  function mcq(id, sc, q, opts, ans, explain, pre) {
+    KEYD[id] = { type: 'mcq', q: q, opts: opts, ans: ans, explain: explain };
+    A[id] = { sc: sc, render: function (box, done) {
+      var order = opts.map(function (_, i) { return i; }).sort(function () { return Math.random() - .5; });
+      box.innerHTML = (pre || '') + '<p class="q">' + q + '</p><div class="opts">' + order.map(function (i) { return '<button type="button" class="opt" data-i="' + i + '">' + esc(opts[i]) + '</button>'; }).join('') + '</div><div id="fb"></div>';
+      var tries = 0;
+      box.querySelectorAll('.opt').forEach(function (b) { b.onclick = function () {
+        if (box.querySelector('.opt.right')) return;
+        var i = +b.dataset.i; tries++;
+        if (i === ans) { b.classList.add('right'); award(id, sc, tries === 1 ? 2 : 1, 2); $('fb').innerHTML = '<div class="fb ok">' + (tries === 1 ? 'Correct! ' : 'Got it on the second try. ') + explain + '</div>'; nextBtn(box, done); }
+        else { b.classList.add('wrong'); b.disabled = true; if (tries >= 2) { award(id, sc, 0, 2); box.querySelectorAll('.opt').forEach(function (x) { if (+x.dataset.i === ans) x.classList.add('right'); }); $('fb').innerHTML = '<div class="fb bad">Not this time. ' + explain + '</div>'; nextBtn(box, done); } else $('fb').innerHTML = '<div class="fb bad">Not quite. Try again.</div>'; }
+      }; });
+    } };
+  }
+  function sortAct(id, sc, q, bins, items, explain, pre) {
+    KEYD[id] = { type: 'sort', q: q, bins: bins, items: items, explain: explain };
+    A[id] = { sc: sc, render: function (box, done) {
+      var order = items.map(function (_, i) { return i; }).sort(function () { return Math.random() - .5; });
+      var picked = {};
+      box.innerHTML = (pre || '') + '<p class="q">' + q + '</p><div class="opts">' + order.map(function (i) { return '<div class="sortrow" data-i="' + i + '"><span class="txt">' + esc(items[i][0]) + '</span>' + bins.map(function (b, bi) { return '<button type="button" class="toggle" aria-pressed="false" data-b="' + bi + '">' + esc(b) + '</button>'; }).join('') + '</div>'; }).join('') + '</div><div class="row"><button class="btn" type="button" id="chk" disabled>Check</button></div><div id="fb"></div>';
+      box.querySelectorAll('.sortrow').forEach(function (r) { r.querySelectorAll('.toggle').forEach(function (t) { t.onclick = function () { if (box.dataset.checked) return; r.querySelectorAll('.toggle').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); t.setAttribute('aria-pressed', 'true'); picked[r.dataset.i] = +t.dataset.b; $('chk').disabled = Object.keys(picked).length < items.length; }; }); });
+      $('chk').onclick = function () {
+        box.dataset.checked = '1'; var right = 0;
+        box.querySelectorAll('.sortrow').forEach(function (r) { var i = +r.dataset.i, ok = picked[i] === items[i][1]; if (ok) right++; r.classList.add(ok ? 'right' : 'wrong'); if (!ok) r.querySelector('.txt').innerHTML += ' <small>(' + esc(bins[items[i][1]]) + ')</small>'; });
+        award(id, sc, right, items.length);
+        $('fb').innerHTML = '<div class="fb ' + (right === items.length ? 'ok' : 'info') + '">' + right + ' of ' + items.length + ' correct. ' + explain + '</div>';
+        this.disabled = true; nextBtn(box, done);
+      };
+    } };
+  }
+  function matchAct(id, sc, q, pairs, explain) {
+    KEYD[id] = { type: 'match', q: q, pairs: pairs };
+    A[id] = { sc: sc, render: function (box, done) {
+      var defs = pairs.map(function (p, i) { return i; }).sort(function () { return Math.random() - .5; });
+      box.innerHTML = '<p class="q">' + q + '</p><div class="opts">' + pairs.map(function (p, i) { return '<div class="sortrow" data-i="' + i + '"><label class="txt" for="m' + i + '">' + esc(p[0]) + '</label><select id="m' + i + '"><option value="">Choose a definition…</option>' + defs.map(function (d) { return '<option value="' + d + '">' + esc(pairs[d][1]) + '</option>'; }).join('') + '</select></div>'; }).join('') + '</div><div class="row"><button class="btn" type="button" id="chk">Check</button></div><div id="fb"></div>';
+      $('chk').onclick = function () {
+        var vals = pairs.map(function (_, i) { return $('m' + i).value; });
+        if (vals.some(function (v) { return v === ''; })) { $('fb').innerHTML = '<div class="fb bad">Choose a definition for every term first.</div>'; return; }
+        var right = 0;
+        box.querySelectorAll('.sortrow').forEach(function (r, i) { var ok = +vals[i] === i; if (ok) right++; r.classList.add(ok ? 'right' : 'wrong'); $('m' + i).disabled = true; if (!ok) r.insertAdjacentHTML('beforeend', '<small style="flex-basis:100%">Answer: ' + esc(pairs[i][1]) + '</small>'); });
+        award(id, sc, right, pairs.length);
+        $('fb').innerHTML = '<div class="fb ' + (right === pairs.length ? 'ok' : 'info') + '">' + right + ' of ' + pairs.length + ' correct. ' + explain + '</div>';
+        this.disabled = true; nextBtn(box, done);
+      };
+    } };
+  }
+  function numAct(id, sc, q, ans, tol, unit, explain, pre) {
+    KEYD[id] = { type: 'num', q: q, ans: ans, unit: unit, explain: explain };
+    A[id] = { sc: sc, render: function (box, done) {
+      box.innerHTML = (pre || '') + '<p class="q">' + q + '</p><div class="row"><label for="num" class="muted">Answer</label><input type="number" id="num" step="any" style="width:180px"> <b>' + esc(unit) + '</b><button class="btn" type="button" id="chk">Check</button></div><div id="fb"></div>';
+      var tries = 0;
+      $('chk').onclick = function () {
+        var v = parseFloat(String($('num').value).replace(/,/g, '')); if (isNaN(v)) return; tries++;
+        if (Math.abs(v - ans) <= tol) { award(id, sc, tries === 1 ? 2 : 1, 2); $('fb').innerHTML = '<div class="fb ok">Correct! ' + explain + '</div>'; this.disabled = true; nextBtn(box, done); }
+        else if (tries >= 2) { award(id, sc, 0, 2); $('fb').innerHTML = '<div class="fb bad">The answer is ' + esc(ans.toLocaleString('en-GB')) + ' ' + esc(unit) + '. ' + explain + '</div>'; this.disabled = true; nextBtn(box, done); }
+        else $('fb').innerHTML = '<div class="fb bad">Not quite. Check your working and try again.</div>';
+      };
+    } };
+  }
+  // Writing: frame = [text, {id, ph}] pieces, or starters; checks = [[label, regex]]
+  function writeAct(id, sc, q, opt) {
+    KEYD[id] = { type: 'write', q: q, opt: opt };
+    A[id] = { sc: sc, write: true, render: function (box, done) {
+      var h = '<p class="q">' + q + '</p>';
+      if (opt.frame) h += '<div class="frame">' + opt.frame.map(function (p, i) { return typeof p === 'string' ? '<span>' + esc(p) + '</span>' : '<input type="text" id="f' + i + '" placeholder="' + esc(p.ph || '') + '" aria-label="' + esc(p.ph || 'Your words') + '">'; }).join('') + '</div>';
+      else h += (opt.starters ? '<div class="bank"><b>Sentence starters:</b>' + opt.starters.map(function (s) { return '<span>' + esc(s) + '</span>'; }).join('') + '</div>' : '') + (opt.bank ? '<div class="bank"><b>Connectives:</b>' + opt.bank.map(function (s) { return '<span>' + esc(s) + '</span>'; }).join('') + '</div>' : '') + '<textarea id="wt" aria-label="Your answer" placeholder="Write your answer here…"></textarea>';
+      h += '<ul class="checklist" id="cl">' + opt.checks.map(function (c, i) { return '<li data-i="' + i + '"><span class="tick">✓</span>' + esc(c[0]) + '</li>'; }).join('') + '</ul>';
+      h += '<div class="row"><button class="btn" type="button" id="sv">Save my writing</button><span class="muted" id="wc"></span></div><div id="fb"></div>';
+      box.innerHTML = h;
+      function text() { if (opt.frame) return opt.frame.map(function (p, i) { return typeof p === 'string' ? p : ($('f' + i).value.trim() || '…'); }).join(' ').replace(/\s+/g, ' ').replace(/\s+([.,])/g, '$1'); return $('wt').value.trim(); }
+      function check() { var t = text(), met = 0; opt.checks.forEach(function (c, i) { var ok = c[1](t); if (ok) met++; box.querySelector('#cl li[data-i="' + i + '"]').classList.toggle('met', ok); }); $('wc').textContent = (t.match(/[A-Za-z’']+/g) || []).length + ' words'; return met; }
+      box.addEventListener('input', check); check();
+      $('sv').onclick = function () {
+        var t = text(), met = check();
+        if ((t.replace(/…/g, '').match(/[A-Za-z’']+/g) || []).length < (opt.minWords || 8)) { $('fb').innerHTML = '<div class="fb bad">Write a little more first.</div>'; return; }
+        if (S.items[id]) { var it = S.items[id]; if (met > it.got) { S.pts[sc][0] += met - it.got; it.got = met; persist(); saveMarks(); } }
+        else award(id, sc, met, opt.checks.length);
+        saveWriting(id, q.replace(/<[^>]+>/g, ''), t, { sc: sc, checks: met + '/' + opt.checks.length });
+        $('fb').innerHTML = '<div class="fb ' + (met === opt.checks.length ? 'ok' : 'info') + '">Saved. You met ' + met + ' of ' + opt.checks.length + ' checks.' + (met < opt.checks.length ? ' Look at the grey ones: can you improve your answer? You can edit and save again.' : ' Excellent writing!') + '</div>';
+        if (!box.querySelector('.next')) nextBtn(box, done);
+      };
+    } };
+  }
+  var has = function (re) { return function (t) { return re.test(t); }; };
+  var INDIC = /\b(GDP|GNI|income|wealth|money|life expectancy|school|education|literacy|HDI|health)\b/i;
+  function nextBtn(box, done) { if (box.querySelector('.next')) return; box.insertAdjacentHTML('beforeend', '<div class="row"><span class="spacer"></span><button class="btn next" type="button">Next →</button></div>'); box.querySelector('.next').onclick = done; box.querySelector('.next').focus(); }
+
+  /* Chapter 0 */
+  var HOOK = [['How rich people are', 'econ'], ['How much the country earns from trade', 'econ'], ['How long people live', 'soc'], ['How many children go to school', 'soc'], ['How clean the air and rivers are', 'env'], ['How much forest is protected', 'env'], ['Whether people have a say in decisions', 'grass'], ['How happy people feel', 'grass']];
+  var PNAME = { econ: 'Economic growth', soc: 'Human and social development', env: 'Environmental sustainability', grass: 'People having a say' };
+  A.hook = { sc: 'sc1', render: function (box, done) {
+    var sel = S.hookPicks || [];
+    box.innerHTML = photo('Monteverde Cloud Forest 01.jpg', 'Misty green cloud forest canopy at Monteverde, Costa Rica, seen from a suspension bridge', 'Cephas, CC BY-SA 4.0') +
+      '<p class="q">Your first case: <b>Costa Rica</b>, in Central America. Choose the <b>three</b> things you would measure to decide how developed it is.</p><div class="cards">' +
+      HOOK.map(function (h, i) { return '<button type="button" class="pick" aria-pressed="' + (sel.indexOf(i) >= 0) + '" data-i="' + i + '">' + esc(h[0]) + '</button>'; }).join('') + '</div><div id="persp"></div>';
+    function show() {
+      var count = { econ: 0, soc: 0, env: 0, grass: 0 }; sel.forEach(function (i) { count[HOOK[i][1]]++; });
+      var top = Object.keys(count).sort(function (a, b) { return count[b] - count[a]; })[0];
+      $('persp').innerHTML = sel.length === 3 ? '<div class="fb info">Your choices show a <b>' + PNAME[top] + '</b> perspective. Everyone sees development a little differently, and that is why there are different indicators.</div><div class="persp">' + Object.keys(PNAME).map(function (k) { return '<div class="' + (count[k] ? 'on' : '') + '"><b>' + PNAME[k] + '</b><br><span class="muted">' + count[k] + ' of your choices</span></div>'; }).join('') + '</div>' : '<p class="muted">' + (3 - sel.length) + ' more to choose.</p>';
+      if (sel.length === 3) { S.perspective = PNAME[top]; S.hookPicks = sel.slice(); persist(); if (!S.items.hook) award('hook', 'sc1', 1, 1); nextBtn(box, done); }
+    }
+    box.querySelectorAll('.pick').forEach(function (b) { b.onclick = function () { var i = +b.dataset.i, k = sel.indexOf(i); if (k >= 0) sel.splice(k, 1); else if (sel.length < 3) sel.push(i); else return; b.setAttribute('aria-pressed', String(sel.indexOf(i) >= 0)); var nb = box.querySelector('.next'); if (nb && sel.length < 3) nb.parentNode.remove(); show(); }; });
+    show();
+  } };
+  writeAct('hookWrite', 'sc1', 'Complete the sentence about your choices.', { model: 'I would measure how long people live in Costa Rica because a long life expectancy shows people have good healthcare, food and clean water.', frame: ['I would measure', { ph: 'one thing you chose' }, 'in Costa Rica because', { ph: 'why it shows development' }, '.'], checks: [['Says what you would measure', function (t) { return !/I would measure … /.test(t); }], ['Gives a reason with “because”', function (t) { return /because (?!…)\S/.test(t); }]], minWords: 10 });
+  writeAct('chPerspW', 'ch', '<b>Challenge:</b> pick a perspective that is <i>different</i> from yours. Write two sentences explaining what someone with that view would measure in Costa Rica, and why.', { model: 'Someone with an environmental sustainability perspective would measure how much forest is protected in Costa Rica. This is because development should not damage the environment for future generations.', starters: ['Someone with a … perspective would measure…', 'This is because…'], checks: [['Names a perspective', has(/economic|social|environment|grassroots|having a say|say in/i)], ['Names something to measure', has(INDIC)], ['Explains with “because”', has(/because/i)]], minWords: 20 });
+  A.chPersp = { sc: 'ch', render: function (box, done) { A.chPerspW.render(box, done); } };
+
+  /* Chapter 1 */
+  matchAct('econMatch', 'sc1', 'Match each term to its definition.', [['GDP', 'The total value of all goods and services a country produces in a year'], ['GDP per capita', 'GDP divided by the number of people in the country'], ['Economic indicator', 'A measure of development based on income or wealth']], 'Per capita means “per person”.');
+  numAct('econCalc', 'sc1', 'A country produces goods and services worth <b>$500 billion</b> in a year. It has <b>25 million</b> people. What is its GDP per capita?', 20000, 1, 'US$', '$500,000,000,000 ÷ 25,000,000 = $20,000 per person.', '<div class="formula">GDP per capita = GDP ÷ population</div>');
+  sortAct('econMapTF', 'sc1', 'True or false?', ['True', 'False'], [['Countries in North America, Oceania and western Europe tend to have a high GDP per capita', 0], ['Most countries with a very low GDP per capita are in Africa', 0], ['Every country in Asia has a high GDP per capita', 1], ['GDP per capita is about the same in every country', 1]], 'Wealth is very unevenly spread around the world.');
+  A.econMap = { sc: 'sc1', render: function (box, done) {
+    box.innerHTML = '<p class="q">Use the map. Tap countries to check their figures, then decide whether each statement is true or false.</p>' + mapSVG('m1', 'g') + '<div id="tf"></div>';
+    wireMap('m1', 'g');
+    var sub = document.createElement('div'); $('tf').appendChild(sub); A.econMapTF.render(sub, done);
+  } };
+  mcq('econPhoto', 'sc2', 'This photo is from Rio de Janeiro. Brazil’s GDP per capita is about ' + money(BR.g) + '. What does this photo show that GDP per capita <b>does not</b>?', ['Rich and poor people can live side by side, so wealth is not shared equally', 'Everyone in Brazil earns exactly ' + money(BR.g), 'Brazil has no money at all', 'Brazil is the richest country in the world'], 0, 'GDP per capita is an average. It hides <b>inequality</b> within a country.', photo('Contrasts of Rio de Janeiro - Rocinha, Ipanema, and Mountains at Sunrise.jpg', 'Thousands of small, tightly packed self-built houses on a steep hillside, with tall apartment blocks along a beach behind', 'Donatas Dabravolskas, CC BY-SA 4.0'));
+  sortAct('econSort', 'sc2', 'Is each one a <b>strength</b> or a <b>weakness</b> of economic indicators?', ['Strength', 'Weakness'], [['Easy to measure and compare between countries', 0], ['Money lets people buy things that improve their lives', 0], ['Does not show inequality within a country', 1], ['Does not show whether growth is sustainable', 1], ['Does not show whether people have a good quality of life', 1]], 'Economic indicators are useful, but money is only part of the story.');
+  writeAct('econWrite', 'sc2', 'Complete the sentence frame about economic indicators.', { model: 'Economic indicators such as GDP per capita are useful because they are easy to measure and compare between countries. However, they do not show inequality within a country, so a country can look rich even though many people are poor.', frame: ['Economic indicators such as GDP per capita are useful because', { ph: 'a strength' }, '. However, they do not show', { ph: 'a weakness' }, ', so', { ph: 'what this means' }, '.'], checks: [['Gives a strength', function (t) { return /useful because (?!…)\S/.test(t); }], ['Gives a weakness after “However”', function (t) { return /do not show (?!…)\S/.test(t); }], ['Explains what it means with “so”', function (t) { return /, so (?!…)\S/.test(t); }]], minWords: 25 });
+  mcq('chQatar', 'ch', '<b>Challenge:</b> Qatar’s GDP per capita is ' + money(QA.g) + ', about three times Costa Rica’s (' + money(CR.g) + '). Life expectancy: Qatar ' + QA.l + ' years, Costa Rica ' + CR.l + ' years. What does this suggest?', ['Three times the money does not mean three times the quality of life', 'People in Qatar live three times longer', 'Costa Rica must have a very low HDI', 'GDP per capita is the only indicator we need'], 0, 'Costa Rica’s HDI is ' + CR.h.toFixed(3) + ' and Qatar’s is ' + QA.h.toFixed(3) + ': much closer than their wealth suggests.');
+  A.chRank = { sc: 'ch', render: function (box, done) {
+    var list = [['Japan', J.g], ['Thailand', TH.g], ['Nigeria', NG.g], ['United States', US.g], ['Costa Rica', CR.g]];
+    var correct = list.slice().sort(function (a, b) { return b[1] - a[1]; }).map(function (x) { return x[0]; });
+    box.innerHTML = '<p class="q"><b>Challenge:</b> rank these countries by GDP per capita, highest (1) to lowest (5). Use the map if you need to.</p><div class="opts">' + list.map(function (x, i) { return '<div class="sortrow"><label class="txt" for="r' + i + '">' + x[0] + '</label><select id="r' + i + '"><option value="">Rank…</option>' + [1, 2, 3, 4, 5].map(function (n) { return '<option>' + n + '</option>'; }).join('') + '</select></div>'; }).join('') + '</div><div class="row"><button class="btn" type="button" id="chk">Check</button></div><div id="fb"></div>';
+    $('chk').onclick = function () { var right = 0; list.forEach(function (x, i) { var r = +$('r' + i).value; if (correct[r - 1] === x[0]) right++; }); award('chRank', 'ch', right, 5); $('fb').innerHTML = '<div class="fb ' + (right === 5 ? 'ok' : 'info') + '">' + right + ' of 5 in the right place. The order is: ' + correct.map(function (n, i) { return (i + 1) + ' ' + n + ' (' + money(list.filter(function (x) { return x[0] === n; })[0][1]) + ')'; }).join(', ') + '.</div>'; this.disabled = true; nextBtn(box, done); };
+  } };
+
+  /* Chapter 2 */
+  matchAct('socMatch', 'sc1', 'Match each social indicator to its definition.', [['Life expectancy', 'The average number of years a person can expect to live, from birth'], ['Average years of schooling', 'The average number of years adults have spent in school'], ['Literacy rate', 'The percentage of adults who can read and write']], 'All three measure people’s quality of life, not their money.');
+  numAct('socGraph', 'sc1', 'Use the bar chart. How many more years can a person in Japan expect to live than a person in Nigeria?', +(J.l - NG.l).toFixed(1), 0.15, 'years', 'Japan ' + J.l + ' − Nigeria ' + NG.l + ' = ' + (J.l - NG.l).toFixed(1) + ' years.', barChart([['Japan', J.l], ['United Kingdom', UK.l], ['Costa Rica', CR.l], ['Thailand', TH.l], ['India', IN.l], ['Nigeria', NG.l]], 100, ' years', '#0f766e'));
+  mcq('socMapQ', 'sc1', 'Use the map. Where are most of the countries with the <b>lowest</b> life expectancy?', ['Africa, south of the Sahara', 'Western Europe', 'North America', 'East Asia'], 0, 'Many countries in Africa south of the Sahara have a life expectancy under 65 years.');
+  A.socMap = { sc: 'sc1', render: function (box, done) {
+    box.innerHTML = mapSVG('m2', 'l') + '<div id="q2"></div>'; wireMap('m2', 'l');
+    var sub = document.createElement('div'); $('q2').appendChild(sub); A.socMapQ.render(sub, done);
+  } };
+  mcq('socPhoto', 'sc2', 'This is a neighbourhood on the edge of Lima. Peru’s life expectancy is ' + PE.l + ' years, close to the USA’s ' + US.l + '. What does life expectancy <b>not</b> tell us about the people living here?', ['Their living conditions, like housing, water and whether they are happy', 'How long they are likely to live', 'Anything about their health', 'Which country they live in'], 0, 'Social indicators show health and education, but not everything about quality of life.', photo('Lima PuebloJov 4.jpg', 'Small brick and wooden houses spread across a bare, sandy desert hillside on the edge of Lima', 'Håkan Svensson (Xauxa), CC BY 2.5'));
+  sortAct('socSort', 'sc2', 'Strength or weakness of social indicators?', ['Strength', 'Weakness'], [['They measure things that directly affect quality of life', 0], ['They show health and education, not just money', 0], ['They don’t show whether the environment is protected', 1], ['They don’t show whether people are happy', 1], ['The data can be hard to collect in some countries', 1]], 'Social indicators get closer to people’s lives, but they still miss some things.');
+  writeAct('socWrite', 'sc2', 'Explain one strength and one weakness of social indicators. Use the sentence starters.', { model: 'Social indicators such as life expectancy are useful because they measure things that directly affect people’s quality of life. For example, life expectancy in Japan is 85.1 years but only 55.0 in Nigeria. However, one weakness is that they do not show whether people are happy or whether the environment is protected.', starters: ['Social indicators such as … are useful because…', 'For example…', 'However, one weakness is…'], checks: [['Names a social indicator', has(/life expectancy|school|literacy/i)], ['Gives a strength with “because”', has(/because/i)], ['Gives a weakness with “however”', has(/however/i)], ['Uses an example or a figure', has(/for example|for instance|\d/i)]], minWords: 30 });
+  A.chScatter = { sc: 'ch', render: function (box, done) {
+    box.innerHTML = '<p class="q"><b>Challenge:</b> each dot is a country. Find a country that is <b>healthier than its money suggests</b>: high life expectancy (over 77 years) but GDP per capita under $20,000. Tap its dot.</p>' + scatter('sc') + '<div id="fb"></div>';
+    var svg = $('sc');
+    svg.addEventListener('click', function (e) { var d0 = e.target.closest('circle.dot'); if (!d0) return; pickDot(d0); });
+    svg.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { var d0 = e.target.closest('circle.dot'); if (d0) { e.preventDefault(); pickDot(d0); } } });
+    function pickDot(dot) {
+      var d = D[dot.getAttribute('data-code')]; $('scInfo').textContent = d.n + ': ' + money(d.g) + ', ' + d.l + ' years';
+      if (S.items.chScatter) return;
+      if (d.l > 77 && d.g < 20000) { dot.setAttribute('fill', '#15803d'); dot.setAttribute('fill-opacity', '1'); award('chScatter', 'ch', 2, 2); $('fb').innerHTML = '<div class="fb ok">Great find: ' + esc(d.n) + '! Good healthcare and education can raise life expectancy even without great wealth.</div>'; nextBtn(box, done); }
+      else $('fb').innerHTML = '<div class="fb bad">' + esc(d.n) + ' doesn’t fit. Look in the top-left of the graph.</div>';
+    }
+  } };
+  writeAct('chCuba', 'ch', '<b>Challenge:</b> Cuba’s GDP per capita is about ' + money(CU.g) + ', around a fifth of the USA’s (' + money(US.g) + '). Yet life expectancy is ' + CU.l + ' years in Cuba and ' + US.l + ' in the USA. Suggest <b>two</b> reasons why.', { model: 'One reason might be that Cuba has free healthcare for everyone and lots of doctors. Another reason could be that most people have access to education. This shows that money (GDP) is not the only thing that affects life expectancy.', starters: ['One reason might be…', 'Another reason could be…', 'This shows that…'], checks: [['Gives a first reason', has(/one reason|firstly|first/i)], ['Gives a second reason', has(/another|secondly|also/i)], ['Links back to indicators', has(/indicator|GDP|money|life expectancy/i)]], minWords: 30 });
+
+  /* Chapter 3 */
+  sortAct('hdiParts', 'sc1', 'Which of these are used to make the HDI?', ['Used in HDI', 'Not used'], [['Life expectancy (health)', 0], ['Years of schooling (education)', 0], ['GNI per capita (income)', 0], ['How happy people feel', 1], ['How much pollution there is', 1]], 'HDI combines three things: health, education and income.');
+  A.hdiBuild = { sc: 'sc1', render: function (box, done) {
+    box.innerHTML = '<p class="q">Build an HDI. Move the sliders. <b>Can you make an HDI of 0.800 or more (very high) while keeping the income score below 0.70?</b></p>' + sliders() + '<div id="fb"></div>';
+    wireSliders(function (v) { if (S.items.hdiBuild) return; if (v.h >= 0.8 && v.i < 0.7) { award('hdiBuild', 'sc1', 2, 2); $('fb').innerHTML = '<div class="fb ok">You did it! Strong health and education scores can give a country a high HDI even when income is lower.</div>'; nextBtn(box, done); } });
+  } };
+  function sliders() { return '<div class="slider"><label for="sH">Health score</label><input type="range" id="sH" min="0" max="1" step="0.01" value="0.6"><output id="oH">0.60</output></div><div class="slider"><label for="sE">Education score</label><input type="range" id="sE" min="0" max="1" step="0.01" value="0.6"><output id="oE">0.60</output></div><div class="slider"><label for="sI">Income score</label><input type="range" id="sI" min="0" max="1" step="0.01" value="0.6"><output id="oI">0.60</output></div><div class="hdi-out">HDI <span id="hv">0.600</span> <span class="cat" id="hc"></span></div>'; }
+  function wireSliders(cb) {
+    function upd() { var a = +$('sH').value, b = +$('sE').value, i = +$('sI').value; $('oH').textContent = a.toFixed(2); $('oE').textContent = b.toFixed(2); $('oI').textContent = i.toFixed(2); var h = Math.cbrt(a * b * i); $('hv').textContent = h.toFixed(3); var cat = h >= 0.8 ? ['Very high', '#1d3fa8'] : h >= 0.7 ? ['High', '#3b62d6'] : h >= 0.55 ? ['Medium', '#6b84d4'] : ['Low', '#7a1a10']; $('hc').textContent = cat[0]; $('hc').style.background = cat[1]; cb({ h: h, a: a, e: b, i: i }); }
+    ['sH', 'sE', 'sI'].forEach(function (k) { $(k).addEventListener('input', upd); }); upd();
+  }
+  sortAct('hdiMapTF', 'sc1', 'Use the HDI map. True or false?', ['True', 'False'], [['Most of North America, northern and western Europe and Oceania have a very high HDI', 0], ['Many countries in Africa south of the Sahara and southern Asia have a lower HDI', 0], ['Costa Rica has a low HDI', 1], ['Thailand has a higher HDI than Nigeria', 0]], 'Costa Rica’s HDI is ' + CR.h.toFixed(3) + ' (very high) and Thailand’s is ' + TH.h.toFixed(3) + ', just below very high.');
+  A.hdiMap = { sc: 'sc1', render: function (box, done) {
+    box.innerHTML = mapSVG('m3', 'h') + '<div id="q3"></div>'; wireMap('m3', 'h');
+    var sub = document.createElement('div'); $('q3').appendChild(sub); A.hdiMapTF.render(sub, done);
+  } };
+  mcq('hdiCompare', 'sc2', 'Thailand and Equatorial Guinea have almost the <b>same</b> GDP per capita. Why is Thailand’s HDI so much higher?', ['People in Thailand live longer and spend longer in school', 'Thailand is a bigger country', 'HDI only measures money', 'Equatorial Guinea has no data'], 0, 'HDI includes health and education, not just money. This is why many people think it gives a better picture.',
+    '<table class="data"><thead><tr><th>Country</th><th class="num">GDP per capita</th><th class="num">Life expectancy</th><th class="num">HDI</th></tr></thead><tbody><tr><td>Thailand</td><td class="num">' + money(TH.g) + '</td><td class="num">' + TH.l + ' years</td><td class="num">' + TH.h.toFixed(3) + '</td></tr><tr><td>Equatorial Guinea</td><td class="num">' + money(EG.g) + '</td><td class="num">' + EG.l + ' years</td><td class="num">' + EG.h.toFixed(3) + '</td></tr></tbody></table>' + photo('Chao Phraya River in Bangkok 01.jpg', 'Boats on the wide Chao Phraya River in Bangkok, with temples and tall buildings along the banks', 'Krzysztof Golik, CC BY-SA 4.0'));
+  sortAct('compSort', 'sc2', 'Strength or weakness of composite indicators like HDI?', ['Strength', 'Weakness'], [['Combining three scores gives a broad picture of development', 0], ['One number makes it easy to compare countries', 0], ['One number hides which part (health, education or income) is weak', 1], ['It has no measure of the environment', 1], ['It is an average, so it hides inequality', 1]], 'HDI is broader than one indicator, but no single number can show everything.');
+  writeAct('compWrite', 'sc2', 'Compare HDI with GDP per capita. Use at least two connectives from the bank.', { model: 'HDI combines health, education and income, whereas GDP per capita only measures money. Therefore HDI gives a broader picture of development. However, HDI is still an average, which means it hides inequality between rich and poor people.', bank: ['whereas', 'however', 'therefore', 'because', 'this means that'], checks: [['Mentions HDI', has(/HDI|human development/i)], ['Mentions GDP or income', has(/GDP|income|money|wealth/i)], ['Uses a comparing word (whereas, however)', has(/whereas|however|while|unlike/i)], ['Explains with “because”, “therefore” or “this means”', has(/because|therefore|this means/i)]], minWords: 35 });
+  A.chBuildLow = { sc: 'ch', render: function (box, done) {
+    box.innerHTML = '<p class="q"><b>Challenge:</b> now set the <b>income score to 1.00</b> (the richest possible). Can you still make a <b>low</b> HDI (under 0.550)? What does this tell you?</p>' + sliders() + '<div id="fb"></div>';
+    wireSliders(function (v) { if (S.items.chBuildLow) return; if (v.i >= 0.99 && v.h < 0.55) { award('chBuildLow', 'ch', 2, 2); $('fb').innerHTML = '<div class="fb ok">Yes! A very rich country with poor health and education would still have a low HDI. Money alone doesn’t make a country developed.</div>'; nextBtn(box, done); } });
+  } };
+  writeAct('chThai', 'ch', '<b>Challenge:</b> Thailand’s HDI is ' + TH.h.toFixed(3) + ', just 0.002 below “very high”. Should Thailand be called a developed country? Give your view and one reason for and one against.', { model: 'I think Thailand is almost a developed country. One reason for is that its HDI of 0.798 is just below very high, and life expectancy is 77.1 years. However, its GDP per capita is much lower than very developed countries, and there is inequality between Bangkok and rural areas.', starters: ['I think Thailand…', 'One reason for is…', 'However…'], checks: [['Gives a view', has(/I think|I believe|in my opinion/i)], ['Gives a reason for', has(/because|reason/i)], ['Gives a reason against with “however”', has(/however|on the other hand/i)]], minWords: 35 });
+
+  /* Chapter 4 */
+  mcq('verdictQuiz1', 'sc3', 'Someone says: “HDI is not enough, because it ignores pollution and climate change.” Which perspective is this?', ['Environmental sustainability', 'Economic growth', 'People having a say', 'Human and social development'], 0, 'HDI has no measure of the environment.');
+  mcq('verdictQuiz2', 'sc3', 'Someone says: “HDI doesn’t tell us whether local people have a say in decisions.” Which perspective is this?', ['People having a say', 'Economic growth', 'Environmental sustainability', 'None: HDI does measure this'], 0, 'This view cares about ordinary people being included and heard.');
+  mcq('verdictQuiz3', 'sc3', 'Which is the <b>strongest</b> argument that HDI is a <b>good</b> indicator?', ['It combines health, education and income, so it shows more than money alone', 'It is the newest indicator', 'It only measures money, so it is simple', 'It shows exactly how happy every person is'], 0, 'Combining three scores gives a broader picture than any single indicator.');
+  A.continuum = { sc: 'sc3', render: function (box, done) {
+    var v = S.cont == null ? 50 : S.cont;
+    box.innerHTML = '<p class="q">“<b>HDI is the best indicator of development.</b>” Where do you stand?</p><div class="continuum"><input type="range" id="cv" min="0" max="100" value="' + v + '" aria-label="How much you agree, from disagree to agree"><div class="ends"><span>Disagree</span><span>Partly agree</span><span>Agree</span></div><div class="fb info" id="cl2"></div></div>';
+    function lab() { var x = +$('cv').value; S.cont = x; persist(); $('cl2').textContent = 'You ' + (x < 34 ? 'disagree' : x < 67 ? 'partly agree' : 'agree') + '. Now explain why in the final task.'; }
+    $('cv').addEventListener('input', lab); lab(); nextBtn(box, done);
+  } };
+  A.verdict = { sc: 'sc3', render: function (box, done) {
+    var stance = S.cont == null ? '' : S.cont < 34 ? 'disagree' : S.cont < 67 ? 'partly agree' : 'agree';
+    box.innerHTML = '<p class="q">Final task: “HDI is the best indicator of development.” Write a paragraph giving your judgement.</p>' +
+      '<div class="key" style="background:var(--accent-soft)"><b>Build your paragraph</b>1. State your opinion: I ' + (stance || 'agree / disagree / partly agree') + ' that… <br>2. Justify it, referring to different indicators (HDI, GDP per capita, life expectancy…).<br>3. Give the other side: However…<br>4. Conclude: Overall…</div>' +
+      '<textarea id="vt" style="min-height:170px" aria-label="Your paragraph" placeholder="I ' + esc(stance || 'partly agree') + ' that HDI is the best indicator of development because…">' + esc(S.written.verdict || '') + '</textarea>' +
+      '<ul class="checklist" id="vcl"></ul><div class="row"><button class="btn" type="button" id="vs">Submit for feedback</button><span class="muted" id="vwc"></span></div><div id="vfb"></div>';
+    var checks = [['States an opinion (agree / disagree / partly agree)', /\b(agree|disagree|partly)\b/i], ['Refers to HDI and another indicator', function (t) { return /HDI|human development/i.test(t) && /GDP|GNI|income|life expectancy|school|literacy/i.test(t); }], ['Gives the other side with “however”', /however|on the other hand|although/i], ['Mentions something HDI misses (environment, happiness, inequality, having a say)', /environment|pollution|climate|happ|inequal|say|decision|included/i], ['Ends with a conclusion (“Overall”, “In conclusion”)', /overall|in conclusion|to conclude|on balance/i]];
+    function test(c, t) { return typeof c === 'function' ? c(t) : c.test(t); }
+    function chk() { var t = $('vt').value, met = 0; $('vcl').innerHTML = checks.map(function (c) { var ok = test(c[1], t); if (ok) met++; return '<li class="' + (ok ? 'met' : '') + '"><span class="tick">✓</span>' + esc(c[0]) + '</li>'; }).join(''); $('vwc').textContent = (t.match(/[A-Za-z’']+/g) || []).length + ' words'; return met; }
+    $('vt').addEventListener('input', chk); chk();
+    if (S.verdict) showFeedback(S.verdict);
+    $('vs').onclick = function () {
+      var t = $('vt').value.trim(), met = chk();
+      if ((t.match(/[A-Za-z’']+/g) || []).length < 40) { $('vfb').innerHTML = '<div class="fb bad">Aim for at least 40 words before you submit.</div>'; return; }
+      var btn = this; btn.disabled = true; $('vfb').innerHTML = '<div class="fb info">Sending your paragraph for feedback…</div>';
+      if (!S.items.verdictChecks) award('verdictChecks', 'sc3', met, checks.length);
+      fetch('/api/mark-ppq', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+        question: 'To what extent do you agree that the Human Development Index (HDI) is the best indicator of development? (KS3 Geography, 13-year-old students)',
+        maxMark: 4,
+        markingGuidance: 'Award 1 mark for a clear opinion (agree, disagree or partly agree). Award 1 mark for justifying the opinion by referring to HDI and at least one other indicator (for example GDP or GNI per capita, life expectancy, years of schooling, literacy). Award 1 mark for considering the other side, such as a weakness of HDI (no environmental measure, does not show happiness or whether people have a say, hides inequality) or a strength of HDI (combines health, education and income). Award 1 mark for a supported conclusion. This is a Year 8-9 (KS3) class activity, not an exam: keep feedback short, warm and encouraging, in simple language, 1-2 short sentences per section.',
+        studentAnswer: t }) })
+        .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Feedback is not available right now.'); return d; }); })
+        .then(function (d) {
+          var f = d.feedback || {}, m = String(f.markAwarded || '').match(/\d+(\.\d+)?/), mark = m ? Math.min(4, +m[0]) : null;
+          S.verdict = { mark: mark, f: f, text: t }; S.written.verdict = t; persist();
+          showFeedback(S.verdict);
+          saveWriting('verdict', 'Is HDI the best indicator of development?', t, { sc: 'verdict', mark: mark, max: 4, checks: met + '/' + checks.length, feedback: { why: f.whyThisMark || '', good: f.whatWasDoneWell || '', improve: f.whatIsMissing || '' } });
+          if (mark != null && window.SBLGameAccount) SBLGameAccount.load(SLUG).then(function (a) { if (!a) return; var old = a['m:verdict'] || {}, pct = Math.round(mark / 4 * 100); SBLGameAccount.save(SLUG, { 'm:verdict': { ls: mark, lm: 4, lp: pct, lt: 'Final paragraph (Copilot)', at: new Date().toISOString(), n: (old.n || 0) + 1, bp: Math.max(old.bp || 0, pct) } }); });
+        })
+        .catch(function (e) {
+          saveWriting('verdict', 'Is HDI the best indicator of development?', t, { sc: 'verdict', checks: met + '/' + checks.length });
+          $('vfb').innerHTML = '<div class="fb bad">' + esc(e.message) + ' Your paragraph has been saved for your teacher. You can try again.</div>';
+        })
+        .finally(function () { btn.disabled = false; if (!box.querySelector('.next')) nextBtn(box, done); });
+    };
+    function showFeedback(v) { var f = v.f || {}; $('vfb').innerHTML = '<div class="fb ok"><b>Mark: ' + (v.mark != null ? v.mark + ' / 4' : '—') + '</b>' + (f.whyThisMark ? '<p>' + esc(f.whyThisMark) + '</p>' : '') + (f.whatWasDoneWell ? '<p><b>What was good:</b> ' + esc(f.whatWasDoneWell) + '</p>' : '') + (f.whatIsMissing ? '<p><b>How to improve it:</b> ' + esc(f.whatIsMissing) + '</p>' : '') + '<p class="muted" style="font-size:.85rem">You can improve your paragraph and submit it again.</p></div>'; }
+  } };
+  writeAct('chIndex', 'ch', '<b>Challenge: design your own index.</b> Choose three things you would combine to measure development (they don’t have to be in HDI). Explain why your index is better than HDI, and one weakness it still has.', { model: 'My index would combine life expectancy, the percentage of people with clean water, and how much forest is protected. It is better than HDI because it includes the environment and basic needs. However, one weakness is that it leaves out income and whether people have a say in decisions.', starters: ['My index would combine…', 'It is better than HDI because…', 'However, one weakness is…'], checks: [['Names three measures', function (t) { return (t.match(/,| and /g) || []).length >= 2; }], ['Explains why it is better', has(/better|because/i)], ['Admits a weakness', has(/however|weakness|but/i)]], minWords: 40 });
+
+  /* ---------- flow ---------- */
+  var isTeacher = false;
+  function chapStatus(i) { var ch = CHAPTERS[i]; return ch.acts.every(function (a) { return S.done[i + ':' + a]; }); }
+  function renderTabs() {
+    $('chapters').innerHTML = CHAPTERS.map(function (ch, i) { var locked = i > S.unlocked; return '<button type="button" class="chap' + (chapStatus(i) ? ' done' : '') + (locked ? ' locked' : '') + '"' + (i === S.chap ? ' aria-current="step"' : '') + ' data-i="' + i + '"><span class="n">' + (chapStatus(i) ? '✓' : i) + '</span>' + (locked ? '🔒 ' : '') + esc(ch.title) + '</button>'; }).join('') + '<span class="spacer"></span><button type="button" class="btn ghost small" id="copyAll" style="align-self:center">📋 Copy my answers for OneNote</button><span class="score-pill" id="pts">' + totalPts() + ' pts</span>';
+    $('copyAll').onclick = copyAnswers;
+    $('chapters').querySelectorAll('.chap').forEach(function (b) { b.onclick = function () { var i = +b.dataset.i; if (i > S.unlocked) { codePrompt(i); return; } S.chap = i; persist(); renderChapter(); }; });
+  }
+  function totalPts() { var t = 0; ['sc1', 'sc2', 'sc3', 'ch'].forEach(function (k) { t += S.pts[k][0]; }); return t; }
+  function codePrompt(i) {
+    $('stage').innerHTML = '<div class="waiting"><h2>🔒 Chapter ' + i + ': ' + esc(CHAPTERS[i].title) + '</h2><p>Your teacher will give you the code word when the class is ready.</p>' + codeBox(i) + '</div>';
+    wireCode(i);
+  }
+  function codeBox(i) { return '<div class="codebox"><label for="code' + i + '"><b>Code word for chapter ' + i + '</b></label><input type="text" id="code' + i + '" autocomplete="off" spellcheck="false"><button class="btn" type="button" id="codeGo' + i + '">Unlock</button><span class="msg" id="codeMsg' + i + '" role="alert"></span></div>'; }
+  function wireCode(i) {
+    function go() { var v = $('code' + i).value.trim().toUpperCase(); if (v === CODES[i] || isTeacher && v === '') { S.unlocked = Math.max(S.unlocked, i); S.chap = i; persist(); renderChapter(); window.scrollTo(0, $('chapters').offsetTop - 10); } else $('codeMsg' + i).textContent = 'That’s not the code. Listen for your teacher.'; }
+    $('codeGo' + i).onclick = go; $('code' + i).addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+  }
+  function renderChapter() {
+    renderTabs();
+    var i = S.chap, ch = CHAPTERS[i];
+    var h = '<div class="talk ' + ch.talk.cls + '"><span class="badge">📣 Teacher talk · Chapter ' + i + '</span><h2>' + ch.icon + ' ' + esc(ch.talk.heading) + '</h2>' + ch.talk.body + '</div>';
+    h += '<div id="acts" style="display:flex;flex-direction:column;gap:18px;margin-top:18px"></div>';
+    $('stage').innerHTML = h;
+    ['mapG', 'mapL', 'mapH'].forEach(function (id) { if ($(id)) wireMap(id, id.slice(3).toLowerCase()); });
+    showActs();
+  }
+  function showActs() {
+    var i = S.chap, ch = CHAPTERS[i], host = $('acts'); host.innerHTML = '';
+    var idx = 0; while (idx < ch.acts.length && S.done[i + ':' + ch.acts[idx]]) idx++;
+    ch.acts.slice(0, idx).forEach(function (a, k) { host.insertAdjacentHTML('beforeend', '<div class="panel" style="padding:12px 18px"><div class="act-head"><b>✓ Task ' + (k + 1) + ' done</b><span class="sc-tag">' + A[a].sc.toUpperCase() + '</span></div></div>'); });
+    if (idx < ch.acts.length) {
+      var a = ch.acts[idx], panel = document.createElement('section'); panel.className = 'panel';
+      panel.innerHTML = '<div class="act-head"><span class="eyebrow">Your turn · Task ' + (idx + 1) + ' of ' + ch.acts.length + '</span><span class="sc-tag">' + A[a].sc.toUpperCase() + '</span></div><div class="progress"><i style="width:' + Math.round(idx / ch.acts.length * 100) + '%"></i></div><div class="body"></div>';
+      host.appendChild(panel);
+      A[a].render(panel.querySelector('.body'), function () { S.done[i + ':' + a] = 1; persist(); renderTabs(); showActs(); panel.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+      return;
+    }
+    // chapter finished: wait for the next code, with challenges
+    var nextI = i + 1;
+    var w = document.createElement('div'); w.className = 'waiting';
+    if (nextI < CHAPTERS.length) w.innerHTML = '<h2>✅ Chapter ' + i + ' complete!</h2><p>Wait for your teacher to talk through the next part. While you wait, try the <b>challenge</b> below for bonus points.</p>' + (nextI > S.unlocked ? codeBox(nextI) : '<div class="row"><button class="btn" type="button" id="goNext">Go to chapter ' + nextI + ' →</button></div>');
+    else w.innerHTML = resultsHTML();
+    host.appendChild(w);
+    if (nextI < CHAPTERS.length) { if (nextI > S.unlocked) wireCode(nextI); else $('goNext').onclick = function () { S.chap = nextI; persist(); renderChapter(); window.scrollTo(0, $('chapters').offsetTop - 10); }; }
+    // challenges
+    var ci = 0; while (ci < ch.challenge.length && S.done['c' + i + ':' + ch.challenge[ci]]) ci++;
+    var cbox = document.createElement('section'); cbox.className = 'challenge';
+    if (ci < ch.challenge.length) {
+      var cid = ch.challenge[ci];
+      cbox.innerHTML = '<span class="badge">⭐ Challenge ' + (ci + 1) + ' of ' + ch.challenge.length + ' · bonus points</span><div class="body"></div>';
+      host.appendChild(cbox);
+      A[cid].render(cbox.querySelector('.body'), function () { S.done['c' + i + ':' + cid] = 1; persist(); renderTabs(); showActs(); });
+    } else { cbox.innerHTML = '<span class="badge">⭐ Challenges complete</span><p>Brilliant work. Look back at your writing: can you add a figure from the maps or graphs to make it stronger?</p>'; host.appendChild(cbox); }
+  }
+  var DD_VERDICT_MS = '1 clear opinion · 1 justifies it, referring to HDI and at least one other indicator · 1 considers the other side (a weakness or strength of HDI) · 1 supported conclusion.';
+  var DD_VERDICT_MODEL = 'I partly agree that HDI is the best indicator of development. It is better than GDP per capita because it combines health (life expectancy), education (years of schooling) and income (GNI per capita), so it gives a broader picture. For example, Thailand and Equatorial Guinea have similar GDP per capita, but Thailand’s HDI is much higher because people live longer and spend longer in school. However, HDI does not measure the environment or whether people are happy or have a say in decisions, and as an average it hides inequality. Overall, HDI is one of the best indicators we have, but it should be used alongside others.';
+  // Copy everything the student wrote, with scores and feedback, as formatted text for OneNote.
+  function copyAnswers() {
+    var strip = function (h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent; };
+    var html = '<h1>Development Detectives: measuring and mapping development</h1><p><i>' + new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) + '</i></p>' +
+      '<p><b>Learning intention:</b> I can explain how development is measured and mapped, and judge how useful different indicators are.</p>';
+    var txt = 'Development Detectives: measuring and mapping development\n' + new Date().toLocaleDateString('en-GB') + '\n\n';
+    var labs = { sc1: 'SC1 Describe economic, social and composite indicators', sc2: 'SC2 Explain strengths and weaknesses of each type', sc3: 'SC3 Evaluate how useful HDI is' };
+    html += '<h2>My scores</h2><ul>' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return '<li>' + labs[k] + ': <b>' + (p == null ? 'not started' : p + '%') + '</b></li>'; }).join('') + (S.perspective ? '<li>My perspective in chapter 0: <b>' + esc(S.perspective) + '</b></li>' : '') + '</ul>';
+    txt += 'My scores\n' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return labs[k] + ': ' + (p == null ? 'not started' : p + '%'); }).join('\n') + '\n\n';
+    var any = false;
+    CHAPTERS.forEach(function (ch, i) {
+      var ids = ch.acts.concat(ch.challenge).map(function (a) { return a === 'chPersp' ? 'chPerspW' : a; }).filter(function (a) { return S.written[a]; });
+      if (!ids.length) return;
+      any = true;
+      html += '<h2>Chapter ' + i + ': ' + esc(ch.title) + '</h2>'; txt += 'Chapter ' + i + ': ' + ch.title + '\n';
+      ids.forEach(function (id) {
+        var q = id === 'verdict' ? '“HDI is the best indicator of development.” My judgement:' : strip(KEYD[id] ? KEYD[id].q : id);
+        var chall = ch.challenge.indexOf(id) >= 0 || id === 'chPerspW';
+        html += '<p><b>' + (chall ? '⭐ ' : '') + esc(q) + '</b></p><p>' + esc(S.written[id]) + '</p>';
+        txt += (chall ? '* ' : '') + q + '\n' + S.written[id] + '\n';
+        var mdl = id === 'verdict' ? DD_VERDICT_MODEL : (KEYD[id] && KEYD[id].opt && KEYD[id].opt.model);
+        if (id === 'verdict') { html += '<p><b>Mark scheme (4 marks):</b> ' + DD_VERDICT_MS + '</p>'; txt += 'Mark scheme (4 marks): ' + strip(DD_VERDICT_MS) + '\n'; }
+        if (mdl) { html += '<p style="color:#0f766e"><b>Model answer:</b> <i>' + esc(strip(mdl)) + '</i></p>'; txt += 'Model answer: ' + strip(mdl) + '\n'; }
+        if (id === 'verdict' && S.verdict && S.verdict.f) {
+          var f = S.verdict.f;
+          html += '<p><b>Feedback: ' + (S.verdict.mark != null ? S.verdict.mark + ' / 4' : '') + '</b></p><ul>' + (f.whyThisMark ? '<li>' + esc(f.whyThisMark) + '</li>' : '') + (f.whatWasDoneWell ? '<li>What was good: ' + esc(f.whatWasDoneWell) + '</li>' : '') + (f.whatIsMissing ? '<li>How to improve it: ' + esc(f.whatIsMissing) + '</li>' : '') + '</ul>';
+          txt += 'Feedback: ' + (S.verdict.mark != null ? S.verdict.mark + ' / 4. ' : '') + [f.whyThisMark, f.whatWasDoneWell, f.whatIsMissing].filter(Boolean).join(' ') + '\n';
+        }
+        txt += '\n';
+      });
+    });
+    if (!any) { flash('You haven’t saved any writing yet. Finish a writing task first.'); return; }
+    function done() { flash('Copied! Open OneNote and paste (Ctrl+V).'); }
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([txt], { type: 'text/plain' }) })]).then(done, fallback);
+      } else fallback();
+    } catch (e) { fallback(); }
+    function fallback() {
+      var box = document.createElement('div'); box.contentEditable = 'true'; box.style.cssText = 'position:fixed;left:-9999px;top:0'; box.innerHTML = html; document.body.appendChild(box);
+      var r = document.createRange(); r.selectNodeContents(box); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      sel.removeAllRanges(); box.remove();
+      ok ? done() : flash('Copying didn’t work in this browser. Select your answers and copy them by hand.');
+    }
+  }
+  function flash(msg) {
+    var t = document.createElement('div'); t.setAttribute('role', 'status'); t.textContent = msg;
+    t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1d1b26;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;z-index:2000;max-width:90vw;text-align:center';
+    document.body.appendChild(t); setTimeout(function () { t.remove(); }, 3500);
+  }
+
+  function pct(k) { var p = S.pts[k]; return p[1] ? Math.round(p[0] / p[1] * 100) : null; }
+  function resultsHTML() {
+    var lab = { sc1: 'SC1 · Describe indicators', sc2: 'SC2 · Strengths and weaknesses', sc3: 'SC3 · Evaluate HDI' };
+    return '<h2>🏅 Case closed, Detective!</h2><div class="results">' + ['sc1', 'sc2', 'sc3'].map(function (k) { var p = pct(k); return '<div><span class="muted">' + lab[k] + '</span><b>' + (p == null ? '—' : p + '%') + '</b><span>' + (p == null ? '' : p >= 80 ? 'Secure' : p >= 50 ? 'Developing' : 'Needs more practice') + '</span></div>'; }).join('') + '<div><span class="muted">Final paragraph</span><b>' + (S.verdict && S.verdict.mark != null ? S.verdict.mark + ' / 4' : '—') + '</b><span>Copilot feedback</span></div></div><p>Total: <b>' + totalPts() + ' points</b>. ' + (accountOk ? 'Your scores and writing are saved for your teacher.' : 'Log in to SBL to save your work for your teacher.') + '</p><div class="row"><button class="btn" type="button" id="copyAll2">📋 Copy my answers for OneNote</button><button class="btn ghost" type="button" id="restart">Start again</button></div>';
+  }
+  document.addEventListener('click', function (e) { if (e.target && e.target.id === 'copyAll2') copyAnswers(); });
+  document.addEventListener('click', function (e) { if (e.target && e.target.id === 'restart') { if (!confirm('Start the whole game again? Your saved marks stay in your teacher’s mark book.')) return; try { localStorage.removeItem(KEY); } catch (er) {} location.reload(); } });
+
+  // Teacher tools (teacher and admin accounts only): unlock all levels, answer key
+  fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (s0) {
+    if (!(s0.loggedIn && s0.user && (s0.user.role === 'teacher' || s0.user.role === 'admin'))) return;
+    isTeacher = true; $('teacherLinks').hidden = false; paintUnlock();
+    $('tUnlock').onclick = function () {
+      if (S.teacherOpen) { S.unlocked = S.preUnlock || 0; S.teacherOpen = false; if (S.chap > S.unlocked) S.chap = S.unlocked; }
+      else { S.preUnlock = S.unlocked; S.unlocked = CHAPTERS.length - 1; S.teacherOpen = true; }
+      persist(); paintUnlock(); renderChapter();
+    };
+    $('tKey').onclick = showKey;
+  }).catch(function () {});
+  function paintUnlock() { $('tUnlock').textContent = S.teacherOpen ? 'Teacher mode: all levels open (turn off)' : 'Teacher: unlock all levels'; }
+
+  function keyAct(id, n) {
+    var k = KEYD[id], h = '<div class="kact"><b>' + n + '</b>';
+    if (!k) return '';
+    var q = k.q ? '<p>' + k.q + '</p>' : '';
+    if (k.type === 'mcq') h += q + '<ul>' + k.opts.map(function (o, i) { return '<li class="' + (i === k.ans ? 'kok' : 'kno') + '">' + (i === k.ans ? '✓ ' : '') + esc(o) + '</li>'; }).join('') + '</ul><p class="muted">' + k.explain + '</p>';
+    if (k.type === 'sort') h += q + '<ul>' + k.items.map(function (it) { return '<li>' + esc(it[0]) + ' → <span class="kok">' + esc(k.bins[it[1]]) + '</span></li>'; }).join('') + '</ul>';
+    if (k.type === 'match') h += q + '<ul>' + k.pairs.map(function (p) { return '<li><b>' + esc(p[0]) + '</b>: ' + esc(p[1]) + '</li>'; }).join('') + '</ul>';
+    if (k.type === 'num') h += q + '<p class="kok">Answer: ' + esc(k.ans.toLocaleString('en-GB')) + ' ' + esc(k.unit) + '</p><p class="muted">' + k.explain + '</p>';
+    if (k.type === 'write') h += q + (k.opt.frame ? '<p>Frame: <i>' + k.opt.frame.map(function (x) { return typeof x === 'string' ? esc(x) : '______'; }).join(' ') + '</i></p>' : '') + '<p>Automatic checklist: ' + k.opt.checks.map(function (c) { return esc(c[0]); }).join(' · ') + '</p>' + (k.opt.model ? '<p class="kmodel">Model answer: ' + esc(k.opt.model) + '</p>' : '');
+    if (k.type === 'custom') h += k.html;
+    return h + '</div>';
+  }
+  function showKey() {
+    var topLeft = Object.keys(D).filter(function (k) { var d = D[k]; return d.l > 77 && d.g < 20000; }).map(function (k) { return D[k].n; }).sort();
+    var rank = [['Japan', J.g], ['Thailand', TH.g], ['Nigeria', NG.g], ['United States', US.g], ['Costa Rica', CR.g]].sort(function (a, b) { return b[1] - a[1]; });
+    KEYD.hook = { type: 'custom', html: '<p>Open choice: students pick three of eight things to measure in Costa Rica. Their choices reveal a perspective (economic growth, human and social, environmental, people having a say). Good for a quick show of hands before the teacher talk.</p>' };
+    KEYD.hdiBuild = { type: 'custom', html: '<p>Build an HDI of 0.800+ with an income score below 0.70. <span class="kok">Example: health 1.00, education 1.00, income 0.65 → HDI 0.866.</span> Point: strong health and education lift HDI even when income is lower.</p>' };
+    KEYD.chBuildLow = { type: 'custom', html: '<p>Set income to 1.00 and still make a low HDI (under 0.550). <span class="kok">Example: health 0.20, education 0.20 → HDI 0.342.</span> Point: money alone doesn’t make a country developed.</p>' };
+    KEYD.chScatter = { type: 'custom', html: '<p>Any country with life expectancy over 77 years and GDP per capita under $20,000 is accepted (' + topLeft.length + ' countries), for example ' + esc(topLeft.slice(0, 12).join(', ')) + '.</p>' };
+    KEYD.chRank = { type: 'custom', html: '<p>Rank by GDP per capita: <span class="kok">' + rank.map(function (r, i) { return (i + 1) + ' ' + r[0] + ' (' + money(r[1]) + ')'; }).join(', ') + '</span>.</p>' };
+    KEYD.continuum = { type: 'custom', html: '<p>Opinion line, not marked: students place themselves from disagree to agree. Their position is carried into the final task.</p>' };
+    KEYD.verdict = { type: 'custom', html: '<p>“HDI is the best indicator of development.” Paragraph of at least 40 words, sent to the Copilot marker (no names sent). <b>Mark scheme (4 marks):</b> 1 clear opinion · 1 justifies it, referring to HDI and at least one other indicator · 1 considers the other side (a weakness or strength of HDI) · 1 supported conclusion.</p><p class="kmodel">Model answer: I partly agree that HDI is the best indicator of development. It is better than GDP per capita because it combines health (life expectancy), education (years of schooling) and income (GNI per capita), so it gives a broader picture. For example, Thailand and Equatorial Guinea have similar GDP per capita, but Thailand’s HDI is much higher because people live longer and spend longer in school. However, HDI does not measure the environment or whether people are happy or have a say in decisions, and as an average it hides inequality. Overall, HDI is one of the best indicators we have, but it should be used alongside others.</p>' };
+    var h = '<div class="wrap"><div class="kbar"><button type="button" class="btn" id="kBack">← Back to the game</button><button type="button" class="btn ghost" id="kPrint">Print or save as PDF</button></div>' +
+      '<section class="panel"><span class="eyebrow">Teacher answer key</span><h1>Development Detectives</h1><p>Every task in order, with answers. Students see options in a shuffled order. Each multiple-choice question gives 2 points first time, 1 point second time. Sorting and matching give 1 point per correct item. Writing tasks score 1 point per checklist item met.</p>' +
+      '<div class="keys"><div class="key"><b>Code words</b>Chapter 1: <strong>MONEY</strong><br>Chapter 2: <strong>HEALTH</strong><br>Chapter 3: <strong>INDEX</strong><br>Chapter 4: <strong>VERDICT</strong></div><div class="key"><b>Mark book</b>KS3 Geography view: one score per success criterion, the final paragraph mark and the challenge score. Click a student’s name to read their writing and Copilot feedback.</div></div></section>';
+    CHAPTERS.forEach(function (ch, i) {
+      h += '<section class="panel"><span class="eyebrow">Chapter ' + i + (CODES[i] ? ' · code word ' + CODES[i] : ' · no code needed') + '</span><h2>' + ch.icon + ' ' + esc(ch.title) + '</h2>';
+      var n = 0;
+      ch.acts.forEach(function (a) {
+        n++;
+        var sub = { econMap: 'econMapTF', socMap: 'socMapQ', hdiMap: 'hdiMapTF' }[a];
+        h += keyAct(sub || a, 'Task ' + n + ' (' + A[a].sc.toUpperCase() + ')' + (sub ? ' · uses the map' : ''));
+      });
+      ch.challenge.forEach(function (a, ci) { h += keyAct(a === 'chPersp' ? 'chPerspW' : a, '⭐ Challenge ' + (ci + 1)); });
+      h += '</section>';
+    });
+    h += '<p class="muted" style="font-size:.85rem">Data: HDI from the UNDP Human Development Report 2025 (2023 data); life expectancy from UN estimates; GDP per capita from IMF estimates for 2026.</p></div>';
+    var ov = $('keyov'); ov.innerHTML = h; ov.hidden = false; ov.scrollTop = 0;
+    $('kBack').onclick = function () { ov.hidden = true; ov.innerHTML = ''; };
+    $('kPrint').onclick = function () { window.print(); };
+  }
+
+  renderChapter();
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

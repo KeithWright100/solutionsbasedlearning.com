@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Interactive Geography Games | Solutions Based Learning</title>
+<meta name="description" content="Play interactive KS3, IGCSE and IB Geography games — quick, focused challenges that build geographical knowledge, retrieval skills and critical thinking.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #031c33;
+    --teal: #00b8b0;
+    --teal-dark: #007c82;
+    --cyan: #20d7e2;
+    --white: #ffffff;
+    --ink: #062033;
+    --shadow: 0 24px 60px rgba(0, 28, 52, 0.25);
+    --radius-xl: 28px;
+    --radius-lg: 22px;
+    --transition: all 0.35s ease;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(0, 184, 176, 0.16), transparent 35%),
+      radial-gradient(circle at bottom left, rgba(32, 215, 226, 0.12), transparent 30%),
+      linear-gradient(180deg, #f4fbfc 0%, #eaf4f6 100%);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; }
+
+  .page { position: relative; min-height: 100vh; overflow: hidden; }
+
+  .top-bar {
+    position: relative;
+    padding: 26px 24px;
+    color: var(--white);
+    background:
+      linear-gradient(135deg, rgba(1, 21, 38, 0.98), rgba(2, 50, 78, 0.96)),
+      radial-gradient(circle at 20% 25%, rgba(0, 184, 176, 0.32), transparent 26%),
+      radial-gradient(circle at 83% 20%, rgba(32, 215, 226, 0.22), transparent 30%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .top-bar-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.85);
+    transition: var(--transition);
+  }
+
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 18px; height: 18px; }
+
+  .top-bar-brand {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+
+  .top-bar-brand .teal { color: var(--teal); }
+
+  main {
+    max-width: 1240px;
+    margin: 40px auto 60px;
+    padding: 0 22px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hub-title {
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  .hub-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 6px;
+  }
+
+  .hub-kicker::before,
+  .hub-kicker::after {
+    content: "";
+    width: 76px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 124, 130, 0.65));
+  }
+
+  .hub-kicker::after {
+    background: linear-gradient(90deg, rgba(0, 124, 130, 0.65), transparent);
+  }
+
+  .hub-title h1 {
+    font-size: clamp(1.6rem, 3.2vw, 2.7rem);
+    color: var(--navy);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+  }
+
+  .hub-title p {
+    color: #03757a;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 650;
+    margin-top: 8px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .game-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(5, 43, 65, 0.16);
+    background: linear-gradient(160deg, #ffffff, #eef7f8);
+    box-shadow: 0 18px 38px rgba(0, 25, 45, 0.12);
+    transition: var(--transition);
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .game-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0, 35, 58, 0.18); }
+  .game-card.soon { opacity: 0.85; }
+
+  .game-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, rgba(0, 184, 176, 0.16), rgba(32, 215, 226, 0.16));
+    color: var(--teal-dark);
+  }
+
+  .game-icon svg { width: 34px; height: 34px; stroke-width: 1.8; }
+
+  .game-card h2 {
+    font-size: 1.3rem;
+    font-weight: 850;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 5px 13px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 850;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .status.live {
+    color: white;
+    background: linear-gradient(135deg, var(--teal), #0792a3);
+    box-shadow: 0 0 18px rgba(0, 184, 176, 0.4);
+  }
+
+  .status.soon { color: white; background: rgba(93, 105, 111, 0.72); }
+  .status.building { color: #4a3300; background: repeating-linear-gradient(-45deg, #ffd54a 0 10px, #f0b429 10px 20px); }
+
+  .game-count { margin: -4px 0 18px; }
+  .game-count b { display: inline-block; font-size: 0.8rem; font-weight: 850; color: #fff; background: linear-gradient(135deg, #00b8b0, #0792a3); padding: 4px 10px; border-radius: 99px; margin-bottom: 8px; }
+  .game-count ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .game-count li { font-size: 0.78rem; font-weight: 700; color: #0f3a5c; background: rgba(0,184,176,0.1); border: 1px solid rgba(0,124,130,0.18); border-radius: 99px; padding: 3px 9px; }
+  .game-card p.desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #244253;
+    margin-bottom: 22px;
+    flex: 1;
+  }
+
+  .play-btn {
+    align-self: flex-start;
+    border: none;
+    border-radius: 14px;
+    padding: 13px 22px;
+    color: white;
+    background: linear-gradient(135deg, #00b8b0, #0392a2);
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 14px 30px rgba(0, 184, 176, 0.3);
+    transition: var(--transition);
+  }
+
+  .play-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(0, 184, 176, 0.4); }
+  .play-btn svg { width: 18px; height: 18px; transition: transform 0.25s ease; }
+  .play-btn:hover svg { transform: translateX(4px); }
+
+  .play-btn.disabled {
+    background: rgba(93, 105, 111, 0.5);
+    box-shadow: none;
+    cursor: default;
+  }
+  .play-btn.disabled:hover { transform: none; }
+
+  .more-note {
+    text-align: center;
+    margin-top: 30px;
+    padding: 22px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px dashed rgba(0, 124, 130, 0.3);
+    color: #03757a;
+    font-weight: 650;
+  }
+
+
+  .level-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: -8px 0 30px; }
+  .level-nav a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: #fff; border: 1px solid rgba(5, 43, 65, 0.16); font-weight: 800; font-size: 0.92rem; color: var(--navy); box-shadow: 0 6px 16px rgba(0, 25, 45, 0.06); transition: var(--transition); }
+  .level-nav a:hover { border-color: var(--teal); color: var(--teal-dark); transform: translateY(-2px); }
+  .level-nav a span { font-size: 0.74rem; padding: 2px 8px; border-radius: 999px; background: rgba(0, 184, 176, 0.14); color: var(--teal-dark); }
+  .level { margin-bottom: 38px; scroll-margin-top: 20px; }
+  .level-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 2px solid rgba(0, 124, 130, 0.18); padding-bottom: 8px; margin-bottom: 6px; }
+  .level-head h2 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-weight: 900; color: var(--navy); }
+  .level-count { font-size: 0.82rem; font-weight: 800; color: #03757a; white-space: nowrap; }
+  .level-sub { color: #244253; font-size: 0.95rem; margin-bottom: 16px; }
+
+  .topic { margin: 20px 0 26px; scroll-margin-top: 20px; }
+.topic-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.topic-head h3 { font-size: 1.12rem; font-weight: 850; color: var(--teal-dark); padding-left: 12px; border-left: 4px solid var(--teal); }
+.topic-head span { font-size: 0.78rem; font-weight: 800; color: #5b7280; white-space: nowrap; }
+.topic-sub { color: #244253; font-size: 0.9rem; margin: 0 0 12px 16px; }
+.topic-sub a { color: var(--teal-dark); font-weight: 700; text-decoration: underline; }
+.topic-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
+.topic-nav a { padding: 6px 12px; border-radius: 999px; background: rgba(0, 184, 176, 0.08); border: 1px solid rgba(0, 124, 130, 0.22); font-size: 0.84rem; font-weight: 750; color: var(--navy); transition: var(--transition); }
+.topic-nav a:hover { background: rgba(0, 184, 176, 0.18); }
+.topic-nav a span { font-size: 0.72rem; color: var(--teal-dark); margin-left: 4px; }
+.topic-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; align-items: start; }
+.topic-pair.wide-first { grid-template-columns: 2fr 1fr; }
+.topic-pair .game-grid { grid-template-columns: 1fr; }
+.topic-pair.wide-first .topic:first-child .game-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) { .topic-pair, .topic-pair.wide-first { grid-template-columns: 1fr; } }
+.topic-soon { margin-top: 6px; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,0.6); border: 1px dashed rgba(0, 124, 130, 0.3); color: #03757a; font-weight: 650; font-size: 0.9rem; }
+@media (max-width: 760px) {
+    main { padding: 0 14px; }
+    .game-grid { grid-template-columns: 1fr; }
+    .hub-kicker::before, .hub-kicker::after { width: 44px; }
+  }
+
+  /* Games with a self-marking bot need an SBL account (marking runs through the signed-in API) */
+  .game-card.needs-account { position: relative; }
+  .game-card.needs-account > *:not(.account-lock) { filter: grayscale(1); opacity: 0.45; pointer-events: none; }
+  .account-lock { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(241,245,249,0.55); border-radius: inherit; text-decoration: none; z-index: 2; }
+  .account-lock span { background: #0f172a; color: #fff; font-weight: 700; padding: 10px 18px; border-radius: 999px; font-size: 15px; box-shadow: 0 8px 20px rgba(15,23,42,.25); }
+  .account-lock small { color: #0f172a; font-weight: 600; background: rgba(255,255,255,.9); padding: 3px 10px; border-radius: 999px; }
+  .account-lock:hover span { background: #1e293b; }
+
+  /* ===== Games home ===== */
+  .gh-search { max-width: 560px; margin: -6px auto 26px; position: relative; }
+  .gh-search svg { position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%); color: var(--teal-dark); }
+  .gh-search input { width: 100%; padding: 14px 18px 14px 46px; border-radius: 999px; border: 1px solid rgba(5,43,65,.18); font: inherit; font-size: 1rem; background: #fff; box-shadow: 0 8px 22px rgba(0,25,45,.07); }
+  .gh-search input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0,184,176,.18); }
+  .gh-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; margin-bottom: 40px; }
+  .gh-tile { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; min-height: 230px; padding: 26px 26px 22px; border-radius: 26px; color: #fff; text-decoration: none; box-shadow: 0 16px 34px rgba(0,25,45,.16); transition: transform .2s ease, box-shadow .2s ease; isolation: isolate; }
+  .gh-tile::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,.12); z-index: -1; transition: transform .35s ease; }
+  .gh-tile:hover, .gh-tile:focus-visible { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(0,25,45,.24); }
+  .gh-tile:hover::after { transform: scale(1.25); }
+  .gh-tile:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
+  .g1 { background: linear-gradient(140deg, #00b8b0 0%, #027f86 100%); }
+  .g2 { background: linear-gradient(140deg, #2f80ed 0%, #1b4fa8 100%); }
+  .g3 { background: linear-gradient(140deg, #f2994a 0%, #d0571b 100%); }
+  .g4 { background: linear-gradient(140deg, #5b3fc4 0%, #031c33 100%); }
+  .gh-ico { font-size: 2.6rem; line-height: 1; margin-bottom: 6px; }
+  .gh-kick { font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .gh-t { font-size: clamp(1.35rem, 2.6vw, 1.75rem); font-weight: 900; line-height: 1.15; }
+  .gh-d { font-size: .95rem; line-height: 1.45; opacity: .92; max-width: 40ch; }
+  .gh-foot { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .gh-count { font-size: .82rem; font-weight: 800; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.2); }
+  .gh-go { display: inline-flex; align-items: center; gap: 6px; font-weight: 850; padding: 9px 16px; border-radius: 999px; background: #fff; color: var(--navy); }
+  .gh-go svg { width: 16px; height: 16px; transition: transform .2s ease; }
+  .gh-tile:hover .gh-go svg { transform: translateX(3px); }
+  .gh-bar { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 0 12px; margin: -8px 0 24px; background: linear-gradient(#eef7f9 75%, rgba(238,247,249,0)); }
+  .page { overflow: clip; }
+  .gh-bar[hidden], #gh-home[hidden] { display: none; }
+  .gh-back { font-weight: 850; color: var(--teal-dark); padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid rgba(0,124,130,.3); }
+  .gh-back:hover { background: rgba(0,184,176,.1); }
+  .gh-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .gh-tabs a { padding: 8px 14px; border-radius: 999px; font-weight: 800; font-size: .9rem; color: var(--navy); background: #fff; border: 1px solid rgba(5,43,65,.16); }
+  .gh-tabs a.on { color: #fff; border-color: transparent; }
+  .gh-tabs a.on[data-go="ks3-general"] { background: #00a39c; } .gh-tabs a.on[data-go="ks3-curr"] { background: #2563c9; } .gh-tabs a.on[data-go="igcse"] { background: #dd6b26; } .gh-tabs a.on[data-go="ib"] { background: #4a32a8; }
+  .gh-none { text-align: center; color: #244253; font-weight: 700; margin: 10px 0 30px; }
+  html.gh-js body:not(.gh-view):not(.gh-searching) section.level, html.gh-js body:not(.gh-view) .more-note { display: none; }
+  body.gh-searching section.level { display: block; }
+  body.gh-searching .gh-grid { display: none; }
+  body.gh-searching .topic-nav, body.gh-searching .level-sub, body.gh-searching .topic-sub { display: none; }
+  .gh-hide { display: none !important; }
+  @media (max-width: 680px) { .gh-grid { grid-template-columns: 1fr; gap: 14px; } .gh-tile { min-height: 0; padding: 22px 20px 18px; } .gh-ico { font-size: 2.1rem; } }
+
+  .kind-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 4px; }
+  .kind-jump { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 14px; font-weight: 850; font-size: .95rem; color: #fff; box-shadow: 0 8px 18px rgba(0,25,45,.12); transition: transform .2s ease; }
+  .kind-jump:hover { transform: translateY(-2px); }
+  .kind-jump span { font-size: .75rem; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.25); }
+  .k-act { background: linear-gradient(135deg, #00b8b0, #027f86); }
+  .k-rev { background: linear-gradient(135deg, #f2994a, #d0571b); }
+  .kind { margin: 26px 0 10px; padding: 20px 20px 4px; border-radius: 22px; scroll-margin-top: 70px; }
+  .kind-act { background: rgba(0,184,176,.07); border: 1px solid rgba(0,124,130,.18); }
+  .kind-rev { background: rgba(242,153,74,.08); border: 1px solid rgba(208,87,27,.2); }
+  .kind-head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .kind-ico { font-size: 2rem; line-height: 1; }
+  .kind-head > div { flex: 1; }
+  .kind-t { font-size: 1.3rem; font-weight: 900; color: var(--navy); }
+  .kind-head p { font-size: .9rem; color: #244253; margin-top: 2px; }
+  .kind-n { font-size: .8rem; font-weight: 850; padding: 4px 12px; border-radius: 999px; background: #fff; color: var(--teal-dark); white-space: nowrap; }
+  .kind-rev .kind-n { color: #b9531c; }
+  .kind-rev .topic-head h3 { color: #b9531c; border-left-color: #f2994a; }
+  .topic { scroll-margin-top: 70px; }
+  section.level { scroll-margin-top: 70px; }
+  body.gh-searching .kind-nav, body.gh-searching .kind-head p { display: none; }
+  @media (max-width: 680px) { .kind { padding: 16px 12px 2px; } .kind-head { flex-wrap: wrap; } }
+</style>
+<script>document.documentElement.classList.add("gh-js");</script>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="/humanities-hub" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6" /></svg>
+        Back to Humanities Hub
+      </a>
+      <div class="top-bar-brand">SBL <span class="teal">Geography Games</span></div>
+      <span></span>
+    </div>
+  </div>
+
+  <main>
+    <div class="hub-title">
+      <div class="hub-kicker">
+        <h1>&#127918; Interactive Humanities Games</h1>
+      </div>
+      <p>Choose your level to find games, interactive lessons and revision challenges for KS3, IGCSE and the IB Diploma &mdash; quick to play, easy to repeat.</p>
+    </div>
+
+    <div id="gh-home">
+    <div class="gh-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="ghSearch" placeholder="Search all games, e.g. population, storms, Japan&hellip;" aria-label="Search all games"></div>
+    <div class="gh-grid">
+      <a class="gh-tile g1" href="#ks3-general" data-go="ks3-general">
+        <span class="gh-ico" aria-hidden="true">&#127758;</span>
+        <span class="gh-kick">KS3 · Years 7–9</span>
+        <span class="gh-t">General games</span>
+        <span class="gh-d">World Map Challenge, Place Detective and quick quizzes for map skills and world knowledge.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="ks3-general"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="gh-tile g2" href="#ks3-curr" data-go="ks3-curr">
+        <span class="gh-ico" aria-hidden="true">&#129517;</span>
+        <span class="gh-kick">KS3 · Years 7–9</span>
+        <span class="gh-t">Curriculum games</span>
+        <span class="gh-d">Games that go with the KS3 Geography units, plus KS3 History enquiries.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="ks3-curr"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="gh-tile g3" href="#igcse" data-go="igcse">
+        <span class="gh-ico" aria-hidden="true">&#128218;</span>
+        <span class="gh-kick">IGCSE · Years 10–11</span>
+        <span class="gh-t">Interactive lessons &amp; revision</span>
+        <span class="gh-d">Edexcel IGCSE Geography by paper and topic, plus IGCSE Economics.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="igcse"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="gh-tile g4" href="#ib" data-go="ib">
+        <span class="gh-ico" aria-hidden="true">&#127891;</span>
+        <span class="gh-kick">IB Diploma</span>
+        <span class="gh-t">Interactive lessons &amp; revision</span>
+        <span class="gh-d">Case-study labs, decision games and essay practice by unit, plus IB Business.</span>
+        <span class="gh-foot"><span class="gh-count" data-count="ib"></span><span class="gh-go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+    </div>
+    </div>
+    <nav class="gh-bar" id="gh-bar" aria-label="Game sections" hidden>
+      <a class="gh-back" href="#" data-go="">&larr; All games</a>
+      <div class="gh-tabs">
+        <a href="#ks3-general" data-go="ks3-general">KS3 General</a>
+        <a href="#ks3-curr" data-go="ks3-curr">KS3 Curriculum</a>
+        <a href="#igcse" data-go="igcse">IGCSE</a>
+        <a href="#ib" data-go="ib">IB Diploma</a>
+      </div>
+    </nav>
+    <p class="gh-none" id="gh-none" hidden>No games match that search.</p>
+
+    <section class="level" id="ks3-general" data-view="ks3-general" aria-labelledby="ks3g-h">
+      <div class="level-head"><h2 id="ks3g-h">&#127758; KS3 General Geography</h2><span class="level-count">47 games</span></div>
+      <p class="level-sub">Map skills, world knowledge and quick quizzes: play any time, in any year.</p>
+      <div class="game-grid">
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M10 20c0-3 3-5 6-5s6 2 6 5"/></svg>
+        </div>
+        <h2>Team Quiz: Guess the Place</h2>
+        <span class="status live">New &middot; Live team game &middot; Teacher-led</span>
+        <p class="desc">The teacher puts the game on the board; teams join with a QR code and a team name, then race to name the place from a photo and clues. Faster, first-try answers score more.</p>
+        <a class="play-btn" href="/geography/games/team-quiz/" aria-label="Host Team Quiz: Guess the Place">
+          Host or join
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/></svg>
+        </div>
+        <h2>World Map Challenge</h2>
+        <span class="status live">New</span>
+        <p class="desc">Find and name the countries of the world, track down mountains, rivers, lakes, deserts and seas, learn the continents, oceans and lines of latitude, and test yourself on capitals and flags. <strong>Three levels</strong> from famous countries to tiny islands, for the whole world or one continent.</p>
+        <div class="game-count"><b>39 games &middot; 130 levels</b>
+          <ul>
+            <li>Find it: 7 games, 28 levels</li><li>Name it: 7 games, 28 levels</li><li>Capitals: 7 games, 21 levels</li><li>Flags: 7 games, 21 levels</li><li>Continents &amp; oceans: 4 games, 4 levels</li><li>Physical features: 7 games, 28 levels</li>
+          </ul>
+        </div>
+        <a class="play-btn" href="/geography/games/world-map-challenge" aria-label="Play World Map Challenge">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" /></svg>
+        </div>
+        <h2>Place Detective</h2>
+        <span class="status live">Live</span>
+        <p class="desc">Use geographical clues to solve mystery locations. <strong>Four levels</strong>, from famous places for Year 7 up to expert detectives with technical clues and penalties for wrong guesses.</p>
+        <a class="play-btn" href="/geography/games/place-detective" aria-label="Play Place Detective">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 20l6-11 4 6 3-4 5 9H3Z"/><path d="M9 9V4l3 1.5L9 7"/></svg>
+        </div>
+        <h2>Danillion</h2>
+        <span class="status live">Live</span>
+        <p class="desc">A reverse-trivia challenge: each prompt has lots of right answers, but <strong>the rarer your answer, the more points you score</strong>. Everyone names Brazil for the Equator; name Kiribati and you shoot up the mountain. You get 25 seconds and 3 tries per prompt, and after each one you see the rarest answers you could have given. Score 500 points to reach the summit of Everest, climbing through farmland, forest, alpine meadow, snow and the death zone.</p>
+        <div class="game-count"><b>2 versions &middot; 2 levels + Daily &middot; 35 prompts</b>
+          <ul>
+            <li>Level 1: world places</li><li>Level 2: night climb, harder</li><li>&#11088; Daily: same 7 prompts for everyone, one go a day</li><li>Countries, capitals, peaks, rivers, seas</li><li>Relaxed mode: no timer</li><li>Also as a Mariana Trench dive</li>
+          </ul>
+        </div>
+        <a class="play-btn" href="/geography/games/danillion" aria-label="Play Danillion">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 6c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0"/><path d="M4 9l4 11h8l4-11"/><path d="M12 11v6"/></svg>
+        </div>
+        <h2>Danillion: Deep Dive</h2>
+        <span class="status live">Live</span>
+        <p class="desc">The same rare-answer challenge as Danillion, but this time you dive. Pilot a submersible down through the <strong>sunlight, twilight, midnight, abyssal and hadal zones</strong>, meeting anglerfish, jellyfish and marine snow on the way, to reach <strong>Challenger Deep</strong>, about 10,935 m down at the bottom of the Mariana Trench. Each zone shows a quick fact about life and light at that depth.</p>
+        <div class="game-count"><b>2 levels + Daily &middot; 35 prompts</b>
+          <ul>
+            <li>Level 1: world places</li><li>Level 2: night dive, harder</li><li>&#11088; Daily challenge with shareable results</li><li>5 ocean zones</li><li>Same prompts as the mountain climb</li>
+          </ul>
+        </div>
+        <a class="play-btn" href="/geography/games/danillion-deep" aria-label="Play Danillion: Deep Dive">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 16l20-8-6 10-4-3-3 4-1-5z"/><circle cx="6" cy="6" r="2"/></svg>
+        </div>
+        <h2>Travel the Wright Way</h2>
+        <span class="status live">New</span>
+        <p class="desc">Fly around the world from Bangkok and explore each destination your way, by longboat, bullet train, cable car, camel and more. At each stop, <strong>label diagrams, read climate graphs, study photos and maps, and answer questions</strong> on landscapes, people and culture, then collect a passport stamp. <a href="/geography/games/travel-the-wright-way-advanced"><strong>Play the IGCSE / IB version &rarr;</strong></a></p>
+        <div class="game-count"><b>KS3 and IGCSE/IB versions &middot; 75 destinations live</b>
+          <ul>
+            <li>&#127758; Six continents</li><li>&#128506;&#65039; Labelling, climate graphs and map skills</li><li>&#128247; Photo questions</li><li>&#127915; Passport stamps</li>
+          </ul>
+          <span hidden>Destinations: Bangkok, Malaysia, Singapore, Indonesia: Mount Merapi, Great Barrier Reef, New Zealand, Hawaii, Alaska, Canada, California, Colorado River, Mexico City, Costa Rica, Panama Canal, Barbados, The Andes, Amazon rainforest, Argentina, South Africa, Madagascar, Malawi, Kilimanjaro, Kenya, The Congo, Egypt, Sahara Desert, Spain, French Alps, United Kingdom, Arctic Svalbard, Siberia, Saudi Arabia, Dubai, Mumbai, Mount Everest, The Gambia, Morocco, Italy, Ethiopia, Sudan, Croatia, Hungary, Germany, Moscow, Laos, Vietnam, The Philippines, New York, Namibia, Pakistan, Iceland, Mongolia, Kazakhstan, Oman, Bhutan, China, South Korea, Japan, Suez Canal, Rio de Janeiro, Algeria, Lima, Colombia, Cambodia, Norway, Kiruna (Sweden), Finland, Chad, Zambia, Montserrat (Caribbean), Latvia, Poland, Slovakia, Slovenia, Austria.</span>
+        </div>
+        <a class="play-btn" href="/geography/games/travel-the-wright-way" aria-label="Play Travel the Wright Way">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0"/><path d="M12 4c-5 0-8 3-8 6M12 20c5 0 8-3 8-6M20 10c0-3-3-6-6-6M4 14c0 3 3 6 6 6"/></svg>
+        </div>
+        <h2>Tropical Storms Quiz</h2>
+        <span class="status live">Quiz &middot; 10 questions</span>
+        <p class="desc">Ten multiple-choice questions on how tropical storms form, their structure, their impacts and how people reduce them. Stuck on a term? Ask the Geography Helper in the corner.</p>
+        <a class="play-btn" href="/geography/quizzes/?quiz=storms" aria-label="Play Tropical Storms Quiz">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13 13l-4.5 2.5L11 11z"/></svg>
+        </div>
+        <h2>Map Skills Quiz</h2>
+        <span class="status live">Quiz &middot; 10 questions</span>
+        <p class="desc">Ten multiple-choice questions on compass directions, grid references, scale, contour lines, latitude and longitude. Stuck on a term? Ask the Geography Helper in the corner.</p>
+        <a class="play-btn" href="/geography/quizzes/?quiz=mapskills" aria-label="Play Map Skills Quiz">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M10 20c0-3 3-5 6-5s6 2 6 5"/></svg>
+        </div>
+        <h2>Population Quiz</h2>
+        <span class="status live">Quiz &middot; 10 questions</span>
+        <p class="desc">Ten multiple-choice questions on population density, urbanisation, migration, birth rates and megacities. Stuck on a term? Ask the Geography Helper in the corner.</p>
+        <a class="play-btn" href="/geography/quizzes/?quiz=population" aria-label="Play Population Quiz">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      </div>
+    </section>
+
+    <section class="level" id="ks3" data-view="ks3-curr" aria-labelledby="ks3-h">
+      <div class="level-head"><h2 id="ks3-h">&#127757; KS3 Geography curriculum</h2><span class="level-count">9 games</span></div>
+      <p class="level-sub">Years 7&ndash;9: games that go with the KS3 units, from living around the world to tropical storms and volcanoes.</p>
+      <div class="game-grid">
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5 20 20"/><path d="M7 12v-2M10 12V8M13 12v-3"/></svg>
+        </div>
+        <h2>Development Detectives</h2>
+        <span class="status live">New &middot; Measuring development &middot; Lesson game</span>
+        <p class="desc">A full lesson on measuring and mapping development: GDP per capita, life expectancy and HDI on real world maps and graphs, sentence-building writing tasks, challenges for early finishers, and a final judgement marked with feedback. The teacher unlocks each chapter with a code word.</p>
+        <a class="play-btn" href="/geography/games/development-detectives" aria-label="Play Development Detectives">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4v16h16"/><path d="M7 20v-5M11 20v-8M15 20v-6M19 20v-4"/><path d="M6 12c3-6 7-7 13-4"/></svg>
+        </div>
+        <h2>Build a Climate Graph: Oslo</h2>
+        <span class="status live">New &middot; Climate graphs &middot; Skills</span>
+        <p class="desc">Watch a climate graph for Oslo built step by step: choose the axes and scales, plot the rainfall bars month by month, mark the temperatures and join them with a smooth curve, then read the graph.</p>
+        <a class="play-btn" href="/geography/games/climate-graph-oslo" aria-label="Play Build a Climate Graph: Oslo">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/><path d="M16 5l3 3"/></svg>
+        </div>
+        <h2>How Does Life Vary?</h2>
+        <span class="status live">New &middot; Living around the world &middot; Year 7</span>
+        <p class="desc">Drag 16 factors into physical or human geography, decide what shapes six real examples of daily life, place Pakistan, Tanzania and Peru on a world map, then compare the homes, kitchens, phones, play and hopes of three real families.</p>
+        <a class="play-btn" href="/geography/games/life-around-the-world" aria-label="Play How Does Life Vary?">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 3c4 3 8 5 8 9a8 8 0 0 1-16 0c0-4 4-6 8-9Z"/></svg>
+        </div>
+        <h2>Tropical Storm Mission</h2>
+        <span class="status live">Live</span>
+        <p class="desc">Three linked missions: label a storm's cross-section, sequence its formation, then set the conditions to build and steer your own tropical storm.</p>
+        <a class="play-btn" href="/geography/games/tropical-storm-mission" aria-label="Play Tropical Storm Mission">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 8.5L11 16M16 8.5L13 16M8.5 7h7"/></svg>
+        </div>
+        <h2>Tropical Storm: Link It Up</h2>
+        <span class="status live">Live</span>
+        <p class="desc">Tap a cause circle, then the impact it leads to, and explain the link &mdash; instant AI feedback on every connection you make.</p>
+        <a class="play-btn" href="/geography/games/tropical-storm-links" aria-label="Play Tropical Storm: Link It Up">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3Z"/><path d="M9 12a3 3 0 1 0 3-3"/></svg>
+        </div>
+        <h2>Storm-Ready City</h2>
+        <span class="status live">Live &middot; Reducing storm impacts</span>
+        <p class="desc">Sort 12 plans into Prediction, Preparation and Protection, spend a $50m city budget, survive a Category 4 storm &mdash; then try again with only $10m.</p>
+        <a class="play-btn" href="/geography/games/storm-ready-city" aria-label="Play Storm-Ready City">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c4 3 8 5 8 9a8 8 0 0 1-16 0c0-4 4-6 8-9Z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h2>Tropical Storms: Exam Survival Challenge</h2>
+        <span class="status live">Live &middot; 6 levels</span>
+        <p class="desc">Measuring storms on the Saffir-Simpson Scale, Hazard/Exposure/Vulnerability in Typhoon Haiyan, the 3Ps, key terms, comparing deadly storms across countries, and future trends &mdash; sort, classify and answer your way through to the final boss level.</p>
+        <a class="play-btn" href="/geography/games/tropical-storms-exam-survival" aria-label="Play Tropical Storms: Exam Survival Challenge">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 20h18L15 9l-2 2-2-3-8 12Z"/><path d="M11 5c0-1.5 1-2.5 2-2.5M14 6.5c1-1 2.2-1 3-.5"/></svg>
+        </div>
+        <h2>Ruapehu Mission</h2>
+        <span class="status live">Live &middot; Can a volcano be a fantastic place?</span>
+        <p class="desc">A Year 7 enquiry on Mount Ruapehu, New Zealand: label the subduction diagram, sort evidence into the 4 Ps, make a decision, write a tourist advert &mdash; then copy every answer into OneNote.</p>
+        <a class="play-btn" href="/geography/games/volcano-fantastic-place" aria-label="Play Ruapehu Mission">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 21V9l8-5 8 5v12"/><path d="M10 21v-6h4v6"/><path d="M2 21h20"/><path d="M6 16v-4M18 16v-4"/></svg>
+        </div>
+        <h2>Was Bangkok the Venice of the East?</h2>
+        <span class="status live">Live &middot; The 4 Ps Challenge</span>
+        <p class="desc">Sort 15 clues about old Bangkok&rsquo;s canals and modern Venice into Place, Processes, Power and Possibilities, justify your thinking, rate your confidence &mdash; some clues earn bonus points for fitting more than one P &mdash; then give your verdict.</p>
+        <a class="play-btn" href="/geography/games/bangkok-venice-east" aria-label="Play Was Bangkok the Venice of the East">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+
+      </div>
+    </section>
+
+    <section class="level" id="history" data-view="ks3-curr" aria-labelledby="history-h">
+      <div class="level-head"><h2 id="history-h">&#127983; KS3 History</h2><span class="level-count">1 game</span></div>
+      <p class="level-sub">Years 7&ndash;9: explore the past through enquiry games.</p>
+      <div class="game-grid">
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V10l7-6 7 6v11"/><path d="M10 21v-5a2 2 0 0 1 4 0v5"/><path d="M8 13h.01M16 13h.01"/></svg>
+        </div>
+        <h2>Tomb of the First Emperor</h2>
+        <span class="status live">New &middot; Qin dynasty &middot; Year 7</span>
+        <p class="desc">An Indiana Jones-style escape through seven chambers of Qin Shi Huang&rsquo;s tomb: define a dynasty, cross the stepping stones of the six conquered states, balance the scale of standards, light the Great Wall corridor, save scrolls from the burning library, cross the river of mercury and judge the First Emperor: GOAT or TOAD? Every chamber practises identifying consequences.</p>
+        <a class="play-btn" href="/geography/games/qin-tomb" aria-label="Play Tomb of the First Emperor">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </section>
+
+    <section class="level" id="igcse" data-view="igcse" aria-labelledby="igcse-h">
+  <div class="level-head"><h2 id="igcse-h">&#128218; IGCSE Geography (KS4)</h2><span class="level-count">8 games</span></div>
+  <p class="level-sub">Edexcel IGCSE: interactive activities for lessons, and full topic revision games, organised by topic.</p>
+    <nav class="kind-nav" aria-label="IGCSE Geography: activity type"><a class="kind-jump k-act" href="#igcse-act">&#129513; Interactive curriculum activities <span>2</span></a><a class="kind-jump k-rev" href="#igcse-rev">&#127942; Full topic revision games <span>6</span></a></nav>
+
+  <div class="kind kind-act" id="igcse-act">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#129513;</span><div><h3 class="kind-t">Interactive curriculum activities</h3><p>Use in lessons: starters, case-study labs, decision games, sorts and essay practice for each part of the course.</p></div><span class="kind-n">2 games</span></div>
+    <nav class="topic-nav" aria-label="IGCSE Geography: Interactive curriculum activities"><a href="#igcse-economic">Paper 2 · Economic Activity and Energy <span>2</span></a></nav>
+    <div class="topic" id="igcse-economic">
+      <div class="topic-head"><h3>Paper 2 · Economic Activity and Energy</h3><span>2 games</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/economic-activity-and-energy">Economic Activity and Energy lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+        </div>
+        <h2>Energy Sort</h2>
+        <span class="status live">Live &middot; Starter</span>
+        <p class="desc">Sort 15 energy resources into Renewable and Non-renewable against the clock, then justify the tricky cases: nuclear, fuelwood, HEP, geothermal and shale gas.</p>
+        <a class="play-btn" href="/geography/games/energy-sort" aria-label="Play Energy Sort">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c3 4 6 7 6 10a6 6 0 0 1-12 0c0-3 3-6 6-10Z"/><path d="M13 9l-3 5h3l-2 4"/></svg>
+        </div>
+        <h2>Micro-Hydro Mission</h2>
+        <span class="status live">Live &middot; Energy for last-mile communities</span>
+        <p class="desc">Label a micro-hydro system from river to village, sort diesel vs micro-hydro, then investigate Long Tanid in Malaysian Borneo &mdash; and copy your work into OneNote.</p>
+        <a class="play-btn" href="/geography/games/micro-hydro-mission" aria-label="Play Micro-Hydro Mission">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="kind kind-rev" id="igcse-rev">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#127942;</span><div><h3 class="kind-t">Full topic revision games</h3><p>Revise a whole topic in one game: levels, past-paper checkpoints and exam-style challenges.</p></div><span class="kind-n">6 games</span></div>
+    <nav class="topic-nav" aria-label="IGCSE Geography: Full topic revision games"><a href="#igcse-coastal">Paper 1 · Coastal Environments <span>1</span></a><a href="#igcse-hazards">Paper 1 · Hazardous Environments <span>1</span></a><a href="#igcse-economic-rev">Paper 2 · Economic Activity and Energy <span>1</span></a><a href="#igcse-rural">Paper 2 · Rural Environments <span>1</span></a><a href="#igcse-development">Paper 2 · Development and Human Welfare <span>1</span></a><a href="#igcse-fieldwork">Papers 1 and 2 · Fieldwork <span>1</span></a></nav>
+    <div class="topic-pair">
+    <div class="topic" id="igcse-coastal">
+      <div class="topic-head"><h3>Paper 1 · Coastal Environments</h3><span>1 game</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/coastal-environments">Coastal Environments lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M6 8l3-5 3 5"/></svg>
+        </div>
+        <h2>Coastal Quest</h2>
+        <span class="status live">Live &middot; Whole topic revision</span>
+        <p class="desc">16 levels, one per lesson: waves, erosion and weathering, headlands to stumps, spits, dunes, coral reefs, threats, conflicts, flooding, hard and soft engineering, Sri Lanka and Holderness. Labelled diagrams, data skills, a past paper checkpoint after every level and an Edexcel Examiner boss fight.</p>
+        <a class="play-btn" href="/geography/games/igcse-coastal-quest" aria-label="Play Coastal Quest">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="igcse-hazards">
+      <div class="topic-head"><h3>Paper 1 · Hazardous Environments</h3><span>1 game</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/hazardous-environments">Hazardous Environments lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 20h18L14 8l-3 5-2-2-6 9Z"/><path d="M12 3v2M8 5l1 1.5M16 5l-1 1.5"/></svg>
+        </div>
+        <h2>Hazard Quest</h2>
+        <span class="status live">Live &middot; Whole topic revision</span>
+        <p class="desc">13 levels, one per lesson: hazards and vulnerability, plate tectonics, earthquakes and tsunamis, Japan 2011, Haiti 2010, volcanoes, Kīlauea 2018, tropical cyclones and Typhoon Haiyan. Labelled diagrams, data skills, a past paper checkpoint after every level and an Edexcel Examiner boss fight.</p>
+        <a class="play-btn" href="/geography/games/igcse-hazard-quest" aria-label="Play Hazard Quest">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic-pair">
+    <div class="topic" id="igcse-economic-rev">
+      <div class="topic-head"><h3>Paper 2 · Economic Activity and Energy</h3><span>1 game</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/economic-activity-and-energy">Economic Activity and Energy lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+        </div>
+        <h2>Topic 4 Exam Survival Challenge</h2>
+        <span class="status live">Live &middot; IGCSE Economic Activity &amp; Energy</span>
+        <p class="desc">Ten mini-games to save Veridia&rsquo;s economy and energy future: sector sort, Clark Fisher, location escape room, Malthus vs Boserup boss fight, energy mix builder, carbon calculator and a final P-E-E exam boss, with a past paper checkpoint question after each level. Earn XP and badges.</p>
+        <a class="play-btn" href="/geography/games/topic4-exam-survival" aria-label="Play Topic 4 Exam Survival Challenge">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="igcse-rural">
+      <div class="topic-head"><h3>Paper 2 · Rural Environments</h3><span>1 game</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/rural-environments">Rural Environments lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V11l7-6 7 6v10"/><path d="M12 21v-5"/><path d="M8 14h1M15 14h1"/></svg>
+        </div>
+        <h2>Rural Quest</h2>
+        <span class="status live">Live &middot; Whole topic revision</span>
+        <p class="desc">12 levels, one per lesson: biomes, ecosystem goods and services, the Amazon, farming systems, rural change in the UK, diversification, sustainable rural living and rural&ndash;urban migration in Thailand. Labelled diagrams, data skills, a past paper checkpoint after every level and an Edexcel Examiner boss fight.</p>
+        <a class="play-btn" href="/geography/games/igcse-rural-quest" aria-label="Play Rural Quest">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic-pair">
+    <div class="topic" id="igcse-development">
+      <div class="topic-head"><h3>Paper 2 · Development and Human Welfare</h3><span>1 game</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/development-and-human-welfare">Development and Human Welfare lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 20h18"/><path d="M6 16v-4M11 16V8M16 16v-6M21 4l-5 5-4-3-6 5"/></svg>
+        </div>
+        <h2>Development Quest</h2>
+        <span class="status live">Live &middot; Whole topic revision</span>
+        <p class="desc">10 levels, one per lesson: measuring development, GDP, HDI, Gini and corruption, the DTM, population pyramids, causes of uneven development, Italy, aid and trade, and the Nigeria and Kenya projects. A past paper checkpoint after every level and a 12-mark Discuss boss fight.</p>
+        <a class="play-btn" href="/geography/games/igcse-development-quest" aria-label="Play Development Quest">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="igcse-fieldwork">
+      <div class="topic-head"><h3>Papers 1 and 2 · Fieldwork</h3><span>1 game</span></div>
+      <p class="topic-sub">Links to the <a href="/igcse/geography/learn/coastal-fieldwork">Coastal fieldwork</a> and <a href="/igcse/geography/learn/rural-fieldwork">Rural fieldwork</a> lessons.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2Z"/></svg>
+        </div>
+        <h2>Fieldwork Quest</h2>
+        <span class="status live">Live &middot; Coastal and rural fieldwork</span>
+        <p class="desc">13 levels in three parts: fieldwork skills (enquiry process, data types, sampling pros and cons, risk, presenting and analysing data, evaluation), then our Sam Roi Yot coastal study and rural study. A past paper checkpoint after every level and an 8-mark Evaluate boss fight.</p>
+        <a class="play-btn" href="/geography/games/igcse-fieldwork-quest" aria-label="Play Fieldwork Quest">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+<section class="level" id="ib" data-view="ib" aria-labelledby="ib-h">
+  <div class="level-head"><h2 id="ib-h">&#127891; IB Diploma Geography</h2><span class="level-count">27 games</span></div>
+  <p class="level-sub">IB DP: interactive activities for lessons, and full topic revision games, organised by unit.</p>
+    <nav class="kind-nav" aria-label="IB Diploma Geography: activity type"><a class="kind-jump k-act" href="#ib-act">&#129513; Interactive curriculum activities <span>20</span></a><a class="kind-jump k-rev" href="#ib-rev">&#127942; Full topic revision games <span>8</span></a></nav>
+
+  <div class="kind kind-act" id="ib-act">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#129513;</span><div><h3 class="kind-t">Interactive curriculum activities</h3><p>Use in lessons: starters, case-study labs, decision games, sorts and essay practice for each part of the course.</p></div><span class="kind-n">20 games</span></div>
+    <nav class="topic-nav" aria-label="IB Diploma Geography: Interactive curriculum activities"><a href="#ib-intro">Course introduction · The SDGs <span>1</span></a><a href="#ib-unit1">Unit 1 · Changing Population <span>8</span></a><a href="#ib-unit3">Unit 3 · Resource Consumption and Security <span>8</span></a><a href="#ib-hl">HL · Human development and diversity <span>2</span></a><a href="#business">IB Business Management <span>1</span></a></nav>
+    <div class="topic" id="ib-intro">
+      <div class="topic-head"><h3>Course introduction · The SDGs</h3><span>1 game</span></div>
+      <p class="topic-sub">Recap the UN Sustainable Development Goals and how they link across the course.</p>
+      <div class="game-grid">
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg>
+        </div>
+        <h2>SDG Recap Quest</h2>
+        <span class="status live">New &middot; Course introduction recap</span>
+        <p class="desc">Seven short levels: the 17 goals and five Ps, MDGs vs SDGs, a goal detective, the UN&rsquo;s 2025 progress data, a map of where progress is fastest and slowest, links to your case studies, and a synthesis challenge linking the goals to the Paper 2 core.</p>
+        <a class="play-btn" href="/geography/games/sdg-recap" aria-label="Play SDG Recap Quest">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-unit1">
+      <div class="topic-head"><h3>Unit 1 · Changing Population</h3><span>8 games</span></div>
+      <p class="topic-sub">Population patterns, demographic change and forced migration.</p>
+      <div class="game-grid">
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V10M9 20V6M15 20v-6M20 20v-9"/><path d="M3 20h18"/></svg>
+        </div>
+        <h2>Population Policy Lab: The Gambia and Singapore</h2>
+        <span class="status live">New &middot; Pro- and anti-natalist policies</span>
+        <p class="desc">Start with carrot or stick, then investigate two opposite cases: The Gambia&rsquo;s youthful population (anti-natalist) and Singapore&rsquo;s record-low birth rate (pro-natalist). Use the DTM, pyramids and real data, rate what each government has done, then make your own policy decisions. Copy your work to OneNote.</p>
+        <a class="play-btn" href="/geography/games/population-policy-lab" aria-label="Play Population Policy Lab">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"/><path d="M3 20h18M6 20v-4M10 20v-7M14 20v-9M18 20v-12"/></svg>
+        </div>
+        <h2>Japan: The Ageing Nation</h2>
+        <span class="status live">New &middot; Population possibilities and power</span>
+        <p class="desc">Analyse Japan&rsquo;s fertility rate since 1947 and its population pyramids, sort the causes and consequences of ageing, evaluate six real sources on what Japan has tried, then decide what you would do in charge of Japan and compare it with the Takaichi government. Copy your work to OneNote.</p>
+        <a class="play-btn" href="/geography/games/japan-ageing" aria-label="Play Japan: The Ageing Nation">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg>
+        </div>
+        <h2>Thailand, The Gambia or Both?</h2>
+        <span class="status live">Live &middot; Unit 1 &middot; Retrieval</span>
+        <p class="desc">Sort 20 demographic statements into Thailand, The Gambia or Both, then explain the shared features &mdash; dependency, falling fertility, falling mortality and migration.</p>
+        <a class="play-btn" href="/geography/games/thailand-or-gambia" aria-label="Play Thailand, The Gambia or Both">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18"/><path d="M11 6H7M11 10H4M11 14H6M11 18H8"/><path d="M13 6h3M13 10h6M13 14h5M13 18h4"/></svg>
+        </div>
+        <h2>Population Minister 2025&ndash;2055</h2>
+        <span class="status live">Live &middot; Unit 1 &middot; Plenary</span>
+        <p class="desc">Manage Thailand's ageing or The Gambia's youthful population for three decades. Choose responses, watch the pyramid change, survive events, then compare both countries.</p>
+        <a class="play-btn" href="/geography/games/population-minister" aria-label="Play Population Minister">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg>
+        </div>
+        <h2>Consequence Carousel: the Rohingya Crisis</h2>
+        <span class="status live">Live &middot; Unit 1 forced migration</span>
+        <p class="desc">Sort the consequences for refugees, Bangladesh, Myanmar and aid organisations, label them social/economic/political/environmental, short/long term and direct/indirect, draw the cause-and-effect arrows, then build an exam paragraph.</p>
+        <a class="play-btn" href="/geography/games/consequence-carousel" aria-label="Play Consequence Carousel: the Rohingya Crisis">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/><path d="M9 12h6M12 9v6"/></svg>
+        </div>
+        <h2>The Phantom State: Haiti 2010</h2>
+        <span class="status live">Live &middot; Unit 1 forced migration</span>
+        <p class="desc">Crack the evidence vault on the 2010 earthquake, build the doom loop between state fragility and displacement (spot the red herrings), then try to do better than Haiti as Minister of Reconstruction.</p>
+        <a class="play-btn" href="/geography/games/haiti-phantom-state" aria-label="Play The Phantom State: Haiti 2010">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg>
+        </div>
+        <h2>Rohingya, Haiti or Both?</h2>
+        <span class="status live">Live &middot; Unit 1 forced migration essay prep</span>
+        <p class="desc">Sort 26 evidence cards into Rohingya only, Haiti only or Both, decide whether each essay theme is a similarity or a difference, then build a comparative PEEL paragraph to paste into OneNote.</p>
+        <a class="play-btn" href="/geography/games/rohingya-or-haiti" aria-label="Play Rohingya, Haiti or Both?">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>
+        </div>
+        <h2>Essay Lab: Megacity Growth (Mumbai)</h2>
+        <span class="status live">Live &middot; Unit 1 &middot; 10-mark essay</span>
+        <p class="desc">Rebuild a model essay on Mumbai&rsquo;s megacity growth, colour-code the 6 P&rsquo;s, grade it /10, then prove why it reaches the top markband.</p>
+        <a class="play-btn" href="/geography/games/essay-lab-megacity" aria-label="Open Essay Lab: Megacity Growth">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-unit3">
+      <div class="topic-head"><h3>Unit 3 · Resource Consumption and Security</h3><span>8 games</span></div>
+      <p class="topic-sub">Resources, energy, water and food security, and the nexus.</p>
+      <div class="game-grid">
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <h2>Resource Classification Challenge</h2>
+        <span class="status live">Live &middot; Unit 3 &middot; Sort</span>
+        <p class="desc">Drag and drop 16 real-world resources into Renewable, Non-Renewable, Biotic and Abiotic before the clock runs out.</p>
+        <a class="play-btn" href="/geography/games/resource-classification-challenge" aria-label="Play Resource Classification Challenge">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 3h6v3l-1 2v11a2 2 0 0 1-2 2h0a2 2 0 0 1-2-2V8L9 6V3Z"/><path d="M5 14h3M16 14h3M5 18h3M16 18h3"/></svg>
+        </div>
+        <h2>Oil Trends Sort</h2>
+        <span class="status live">Live &middot; Unit 3 &middot; Sort</span>
+        <p class="desc">Drag 28 statements into four boxes: what increases or decreases the consumption and the production of oil? Clues for every wrong answer, then an &ldquo;examine&rdquo; writing task.</p>
+        <a class="play-btn" href="/geography/games/oil-trends-sort" aria-label="Play Oil Trends Sort">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h2>Energy Minister 2025&ndash;2050</h2>
+        <span class="status live">Live &middot; Plenary</span>
+        <p class="desc">Run the UK, Thailand, India or Kenya's electricity mix for three decades. Balance sustainability, energy security, reliability and cost, survive random events, then write up your pathway.</p>
+        <a class="play-btn" href="/geography/games/energy-minister" aria-label="Play Energy Minister">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3c3.5 4.2 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.5-6.8 6-11Z"/></svg>
+        </div>
+        <h2>Water Security Decision Game</h2>
+        <span class="status live">Live &middot; Unit 3 &middot; Apply &amp; evaluate</span>
+        <p class="desc">Advise Israel, Singapore, rural Ethiopia, Punjab or Bangkok. Fund only two strategies, survive a drought year, then justify each with a benefit, a limitation and regional fit.</p>
+        <a class="play-btn" href="/geography/games/water-security-decision" aria-label="Play the Water Security Decision Game">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="7" y="2" width="10" height="16" rx="2"/><path d="M11 15h2"/><path d="M4 22l3-3M20 22l-3-3M12 18v4"/></svg>
+        </div>
+        <h2>E-waste Decision Challenge</h2>
+        <span class="status live">New &middot; Unit 3 &middot; Apply &amp; evaluate</span>
+        <p class="desc">Advise a Bangkok school, Accra or Amsterdam. Build the waste hierarchy, spend 100 action points on up to four actions, see the results five years on, then pitch your package with an environmental benefit, a social or economic benefit and a trade-off.</p>
+        <a class="play-btn" href="/geography/games/ewaste-decision" aria-label="Play the E-waste Decision Challenge">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 15l6-6"/><path d="M11 6l1-1a4 4 0 0 1 6 6l-1 1"/><path d="M13 18l-1 1a4 4 0 0 1-6-6l1-1"/></svg>
+        </div>
+        <h2>Nexus Chain Reaction</h2>
+        <span class="status live">Live &middot; Unit 3 climate change and the nexus</span>
+        <p class="desc">Rebuild eight chain reactions link by link &mdash; from rising temperatures to pressure on water, energy and food &mdash; sort each effect into the nexus, then explain one chain.</p>
+        <a class="play-btn" href="/geography/games/nexus-chain-reaction" aria-label="Play Nexus Chain Reaction">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 20l6-11 4 6 3-4 5 9z"/><path d="M8 11l1.5 1.5L11 11"/></svg>
+        </div>
+        <h2>Nepal: Adapting to Climate Change</h2>
+        <span class="status live">Live &middot; Unit 3 Nepal case study</span>
+        <p class="desc">Crack the evidence vault on rural Nepal, sort monsoon and dry-season impacts on water, food and energy, then spend a small grant on adaptation projects for a hill village.</p>
+        <a class="play-btn" href="/geography/games/nepal-climate-adaptation" aria-label="Play Nepal: Adapting to Climate Change">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>
+        </div>
+        <h2>Essay Lab: Changing Diets</h2>
+        <span class="status live">Live &middot; Unit 3 &middot; Paper 2 essay</span>
+        <p class="desc">Rebuild a model 10-mark essay like a jigsaw, colour-code its evaluation, definitions, places, processes, possibilities and power, then grade it with the IB markbands.</p>
+        <a class="play-btn" href="/geography/games/essay-lab-diets" aria-label="Open Essay Lab: Changing Diets">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-hl">
+      <div class="topic-head"><h3>HL · Human development and diversity</h3><span>2 games</span></div>
+      <p class="topic-sub">Culture, identity, diasporas and resistance to globalisation.</p>
+      <div class="game-grid">
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/><path d="M6 8l5 3M17 7l-5 4"/></svg>
+        </div>
+        <h2>Diaspora Flow Map</h2>
+        <span class="status live">New &middot; Diasporas and cultural diffusion</span>
+        <p class="desc">Build a world flow map for the Chinese, Indian or your own diaspora: label the homeland and host countries and draw colour-coded flows of people, remittances, food, language, religion and more. Then complete mind maps on preserving and adopting culture and link the six synthesis areas. Download the map as a picture for your notes.</p>
+        <a class="play-btn" href="/geography/games/diaspora-flow-map" aria-label="Play Diaspora Flow Map">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      <article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 13l2 2 4-4"/></svg>
+        </div>
+        <h2>Resistance Files</h2>
+        <span class="status live">New &middot; Local responses to global interactions</span>
+        <p class="desc">Open 11 case files on resistance to globalisation, from farm-to-table and Welsh language laws to Starbucks in the Forbidden City and the Minutemen. Identify the causes and flows, place each one on a power grid of reject or reform against success, evaluate the Minutemen, debate whether local production is always better, then finish with a 4P analysis. Copy everything into OneNote.</p>
+        <a class="play-btn" href="/geography/games/resistance-files" aria-label="Play Resistance Files">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="business">
+      <div class="topic-head"><h3>IB Business Management</h3><span>1 game</span></div>
+      <p class="topic-sub">Practise the calculations and layouts that Paper 2 asks you to construct.</p>
+      <div class="game-grid">
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18"/><path d="M7 21h10"/><path d="M5 7h14"/><path d="M5 7l-3 6h6z"/><path d="M19 7l-3 6h6z"/></svg>
+        </div>
+        <h2>Balance It!</h2>
+        <span class="status live">Live &middot; Final accounts &middot; New</span>
+        <p class="desc">Build each business&rsquo;s statement of financial position in the IB format: place every figure, bin the profit-and-loss imposters, calculate the subtotals and make net assets equal total equity. Company, charity, HL depreciation and speed levels.</p>
+        <a class="play-btn" href="/geography/games/balance-it" aria-label="Play Balance It!">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="kind kind-rev" id="ib-rev">
+    <div class="kind-head"><span class="kind-ico" aria-hidden="true">&#127942;</span><div><h3 class="kind-t">Full topic revision games</h3><p>Revise a whole topic in one game: levels, past-paper checkpoints and exam-style challenges.</p></div><span class="kind-n">8 games</span></div>
+    <nav class="topic-nav" aria-label="IB Diploma Geography: Full topic revision games"><a href="#ib-optA">Paper 1 · Option A · Freshwater <span>1</span></a><a href="#ib-optE">Paper 1 · Option E · Leisure, Tourism and Sport <span>1</span></a><a href="#ib-optF">Paper 1 · Option F · Food and Health <span>1</span></a><a href="#ib-unit1-rev">Unit 1 · Changing Population <span>1</span></a><a href="#ib-unit2">Unit 2 · Global Climate <span>1</span></a><a href="#ib-unit3-rev">Unit 3 · Resource Consumption and Security <span>1</span></a><a href="#ib-all">All units · Case studies <span>1</span></a><a href="#ib-p3">Paper 3 · HL 16-mark essay synthesis <span>1</span></a></nav>
+    <div class="topic-pair">
+    <div class="topic" id="ib-optA">
+      <div class="topic-head"><h3>Paper 1 · Option A · Freshwater</h3><span>1 game</span></div>
+      <p class="topic-sub">Paper 1 optional theme: drainage basins, flooding, water scarcity and water management. Links to the <a href="/geography/paper-1/option-a">Freshwater lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2.5s6.5 7.4 6.5 12a6.5 6.5 0 1 1-13 0c0-4.6 6.5-12 6.5-12Z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg>
+        </div>
+        <h2>Freshwater Quest: Option A Freshwater</h2>
+        <span class="status live">New &middot; Option A revision adventure</span>
+        <p class="desc">Sixteen levels across all four topics &mdash; the drainage basin system, discharge, the Hjulstr&ouml;m curve, landforms, hydrographs, flood risk and mitigation, Bangkok and the Mississippi, water scarcity, the Aral Sea and Ogallala, the Nile and the GERD, ice stupas, the Three Gorges Dam, IDBM and Louisiana&rsquo;s wetlands &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
+        <a class="play-btn" href="/geography/games/freshwater-quest" aria-label="Play Freshwater Quest: Option A Freshwater">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-optE">
+      <div class="topic-head"><h3>Paper 1 · Option E · Leisure, Tourism and Sport</h3><span>1 game</span></div>
+      <p class="topic-sub">Paper 1 optional theme: leisure patterns, hotspots, events, international tourism and sustainability. Links to the <a href="/geography/paper-1/option-e">Leisure, Tourism and Sport lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 3c2.5 3 2.5 15 0 18M3 12h18M5 7c4 2 10 2 14 0M5 17c4-2 10-2 14 0"/></svg>
+        </div>
+        <h2>Leisure Quest: Option E Leisure, Tourism and Sport</h2>
+        <span class="status live">New &middot; Option E revision adventure</span>
+        <p class="desc">Seventeen levels across all four topics &mdash; leisure growth, participation and Plog, hotspots and Butler, spheres of influence, the Premier League, the Full Moon Party, Glastonbury, Iceland, budget airlines, the Maldives, Olympic hosting and Rio 2016, carrying capacity, Rwanda, future tourism and sport and politics &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
+        <a class="play-btn" href="/geography/games/leisure-quest" aria-label="Play Leisure Quest: Option E Leisure, Tourism and Sport">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic-pair">
+    <div class="topic" id="ib-optF">
+      <div class="topic-head"><h3>Paper 1 · Option F · Food and Health</h3><span>1 game</span></div>
+      <p class="topic-sub">Paper 1 optional theme: food and health indicators, disease diffusion, stakeholders, famine and future food security. Links to the <a href="/geography/paper-1/option-f">Food and Health lessons</a>.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 11h16a8 8 0 0 1-16 0Z"/><path d="M12 11V5M9 4c1 1 2 1 3 1s2 0 3-1"/><path d="M8 21h8"/></svg>
+        </div>
+        <h2>Food and Health Quest: Option F Food and Health</h2>
+        <span class="status live">New &middot; Option F revision adventure</span>
+        <p class="desc">Nineteen levels across all four topics &mdash; the hunger index, the nutrition and epidemiological transitions, water footprints, disease diffusion, malaria in Kenya, cholera in the DRC, the WFP and TNCs, gender, famine in Yemen, GM crops and food waste, prevention in Majiang and the Ebola outbreak. Labelled diagrams, case-study maps, past paper checkpoints and an IB Examiner boss.</p>
+        <a class="play-btn" href="/geography/games/food-health-quest" aria-label="Play Food and Health Quest: Option F Food and Health">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic-pair">
+    <div class="topic" id="ib-unit1-rev">
+      <div class="topic-head"><h3>Unit 1 · Changing Population</h3><span>1 game</span></div>
+      <p class="topic-sub">Population patterns, demographic change and forced migration.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 21c0-4 3-7 6-7s6 3 6 7M13 21c0-3 2-6 4-6s5 3 5 6"/></svg>
+        </div>
+        <h2>Population Quest: Changing Population</h2>
+        <span class="status live">New &middot; Unit 1 revision adventure</span>
+        <p class="desc">Fourteen levels across all three topics &mdash; distribution and development, Egypt and Thailand, the DTM, Thailand vs The Gambia, megacities, the Rohingya, Haiti, ageing, population policies, trafficking and the demographic dividend &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
+        <a class="play-btn" href="/geography/games/ib-population-quest" aria-label="Play Population Quest: Changing Population">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-unit2">
+      <div class="topic-head"><h3>Unit 2 · Global Climate</h3><span>1 game</span></div>
+      <p class="topic-sub">Causes, consequences and responses to climate change.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+        </div>
+        <h2>Climate Quest: Changing Climate</h2>
+        <span class="status live">Live &middot; Unit 2 revision adventure</span>
+        <p class="desc">Twelve levels across Causes, Consequences and Responding &mdash; albedo and feedback loops, sea level rise, Bangladesh, risk and vulnerability, adaptation vs mitigation, greenwashing &mdash; then beat the IB Examiner with Claim, Evidence, Explain and Judgement.</p>
+        <a class="play-btn" href="/geography/games/ib-climate-quest" aria-label="Play Climate Quest: Changing Climate">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic-pair">
+    <div class="topic" id="ib-unit3-rev">
+      <div class="topic-head"><h3>Unit 3 · Resource Consumption and Security</h3><span>1 game</span></div>
+      <p class="topic-sub">Resources, energy, water and food security, and the nexus.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3a9 9 0 1 1-8.5 6"/><path d="M3 3v6h6"/><path d="M12 8c2 2.5 3 4 3 5.5a3 3 0 0 1-6 0C9 12 10 10.5 12 8Z"/></svg>
+        </div>
+        <h2>Resource Quest: Global Resource Consumption</h2>
+        <span class="status live">New &middot; Unit 3 revision adventure</span>
+        <p class="desc">Fourteen levels across all three topics &mdash; poverty reduction, ecological footprints, water, food and energy, the nexus, Nepal and Israel, e-waste, the SDGs, Malthus vs Boserup and the circular economy &mdash; with checkpoint past paper questions, then beat the IB Examiner.</p>
+        <a class="play-btn" href="/geography/games/ib-resource-quest" aria-label="Play Resource Quest: Global Resource Consumption">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    <div class="topic" id="ib-all">
+      <div class="topic-head"><h3>All units · Case studies</h3><span>1 game</span></div>
+      <p class="topic-sub">Revise case studies from across the course on an interactive world map.</p>
+      <div class="game-grid">
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/><circle cx="8.3" cy="9" r="1.3" fill="currentColor" stroke="none"/><circle cx="16.5" cy="11.5" r="1.3" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h2>World Case Study Map</h2>
+        <span class="status live">Live &middot; Interactive case-study map</span>
+        <p class="desc">Click dots on a world map to open real case studies &mdash; Place, Processes, Power and Possibilities for each. Starting with Population density in Egypt and Thailand.</p>
+        <a class="play-btn" href="/geography/games/world-case-study-map" aria-label="Open World Case Study Map">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+    </div>
+    <div class="topic" id="ib-p3">
+      <div class="topic-head"><h3>Paper 3 · HL 16-mark essay synthesis</h3><span>1 game</span></div>
+      <p class="topic-sub">Link ideas from Units 4, 5 and 6 and the core to plan top-band Paper 3 essays.</p>
+      <div class="game-grid">
+<article class="game-card" data-account-required>
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><path d="M6 7l3.5 3M18 7l-3.5 3M6 17l3.5-3M18 17l-3.5-3"/></svg>
+        </div>
+        <h2>16-Mark Essay Synthesis Maps</h2>
+        <span class="status live">Live &middot; Paper 3 essay planning</span>
+        <p class="desc">Interactive mind maps for 15 Paper 3 essays: study four worked models, then build your own maps. Explore how ideas from Units 4, 5 and 6 and the core connect, follow an essay route, practise explaining links, view ideas through the 4Ps, then unlock the model map with your teacher&rsquo;s code.</p>
+        <a class="play-btn" href="/geography/revision/guide/paper3-synthesis-maps" aria-label="Open 16-Mark Essay Synthesis Maps">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="level" id="economics" data-view="igcse" aria-labelledby="econ-h">
+  <div class="level-head"><h2 id="econ-h">&#128200; IGCSE Economics</h2><span class="level-count">2 games</span></div>
+  <p class="level-sub">IGCSE Economics (Cambridge and Edexcel): quick-fire games for the topics students most often mix up.</p>
+  <div class="game-grid">
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M7 7l10 10"/><path d="M7 17L17 7"/></svg>
+        </div>
+        <h2>Market Shock</h2>
+        <span class="status live">Live &middot; Demand and supply</span>
+        <p class="desc">Breaking news hits the markets: decide which curve shifts and which way, then predict what happens to price and quantity. Ten headlines, a faster clock every round, and a shift-or-movement trap to catch you out.</p>
+        <a class="play-btn" href="/geography/games/market-shock" aria-label="Play Market Shock">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+<article class="game-card">
+        <div class="game-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18"/><path d="M4 10h16"/><path d="M12 3l8 5H4z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
+        </div>
+        <h2>Central Bank Challenge</h2>
+        <span class="status live">Live &middot; Monetary policy</span>
+        <p class="desc">You run the central bank for two years. Diagnose each shock (demand-pull, cost-push, falling demand or a supply-side boost), set the interest rate, and keep inflation, unemployment and growth on target.</p>
+        <a class="play-btn" href="/geography/games/central-bank-challenge" aria-label="Play Central Bank Challenge">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+        </a>
+      </article>
+
+  </div>
+</section>
+
+
+    <div class="more-note">More games are being added &mdash; check back soon.</div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var body = document.body, home = document.getElementById('gh-home'), bar = document.getElementById('gh-bar');
+  var secs = [].slice.call(document.querySelectorAll('section.level[data-view]'));
+  var input = document.getElementById('ghSearch'), none = document.getElementById('gh-none');
+  // card counts per view (World Map Challenge counts as its 39 games)
+  var counts = {};
+  secs.forEach(function (s) {
+    var n = 0;
+    s.querySelectorAll('.game-card').forEach(function (c) { var m = c.querySelector('.game-count b'); n += m && /(\d+) games/.test(m.textContent) ? +RegExp.$1 : 1; });
+    counts[s.dataset.view] = (counts[s.dataset.view] || 0) + n;
+  });
+  document.querySelectorAll('[data-count]').forEach(function (el) { var n = counts[el.dataset.count] || 0; el.textContent = n + (n === 1 ? ' game' : ' games'); });
+  function viewFor(hash) {
+    if (!hash) return '';
+    if (secs.some(function (s) { return s.dataset.view === hash; })) return hash;
+    var el = document.getElementById(hash), s = el && el.closest('section.level[data-view]');
+    return s ? s.dataset.view : '';
+  }
+  function show(hash, scroll) {
+    var v = viewFor(hash);
+    if (input && input.value) { input.value = ''; search(''); }
+    body.classList.toggle('gh-view', !!v);
+    home.hidden = !!v; bar.hidden = !v;
+    secs.forEach(function (s) { s.hidden = !!v && s.dataset.view !== v; });
+    bar.querySelectorAll('.gh-tabs a').forEach(function (a) { a.classList.toggle('on', a.dataset.go === v); a.setAttribute('aria-current', a.dataset.go === v ? 'page' : 'false'); });
+    if (scroll === false) return;
+    var target = v && hash !== v ? document.getElementById(hash) : null;
+    if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-go]'); if (!a) return;
+    e.preventDefault();
+    var v = a.dataset.go;
+    history.pushState(null, '', v ? '#' + v : location.pathname);
+    show(v);
+  });
+  window.addEventListener('popstate', function () { show(location.hash.slice(1)); });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
+  function search(q) {
+    q = q.trim().toLowerCase();
+    body.classList.toggle('gh-searching', !!q);
+    var hits = 0;
+    secs.forEach(function (s) {
+      var any = 0;
+      s.querySelectorAll('.game-card').forEach(function (c) { var ok = !q || c.textContent.toLowerCase().indexOf(q) > -1; c.classList.toggle('gh-hide', !ok); if (ok) any++; });
+      s.querySelectorAll('.topic').forEach(function (t) { t.classList.toggle('gh-hide', !!q && !t.querySelector('.game-card:not(.gh-hide)')); });
+      s.querySelectorAll('.kind, .topic-pair').forEach(function (t) { t.classList.toggle('gh-hide', !!q && !t.querySelector('.game-card:not(.gh-hide)')); });
+      s.classList.toggle('gh-hide', !!q && !any);
+      if (q) hits += any;
+    });
+    none.hidden = !q || hits > 0;
+  }
+  if (input) input.addEventListener('input', function () { search(input.value); });
+  show(location.hash.slice(1), !!location.hash);
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+<script>
+(function () {
+  var cards = document.querySelectorAll('.game-card[data-account-required]');
+  if (!cards.length) return;
+  function lock() {
+    cards.forEach(function (c) {
+      if (c.querySelector('.account-lock')) return;
+      var play = c.querySelector('.play-btn'), href = play ? play.getAttribute('href') : location.pathname;
+      c.classList.add('needs-account');
+      c.insertAdjacentHTML('beforeend', '<a class="account-lock" href="/login/?redirect=' + encodeURIComponent(href) + '" aria-label="SBL account required: log in to play"><span>&#128274; SBL account required</span><small>Log in to play</small></a>');
+    });
+  }
+  fetch('/api/session', { credentials: 'same-origin' })
+    .then(function (r) { return r.ok ? r.json() : { loggedIn: false }; })
+    .then(function (d) { if (!d || !d.loggedIn) lock(); })
+    .catch(lock);
+})();
+</script>
+</body>
+</html>
