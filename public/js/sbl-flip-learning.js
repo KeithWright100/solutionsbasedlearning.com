@@ -2385,6 +2385,15 @@
     tb.querySelector("[data-tbn]").textContent = "Card " + (tb._i + 1) + " of " + tb._cards.length;
   }
   root.querySelectorAll(".fl-taboo").forEach(function (tb) { tb._cards = JSON.parse(tb.getAttribute("data-cards")); tb._i = 0; showTaboo(tb); });
+  /* Matching tables: a definition already chosen in one row is removed from the other rows' lists
+     (hidden; disabled as well for browsers that ignore hidden options). Changing a choice puts it back. */
+  function hideUsed(tbl) {
+    var sels = [].slice.call(tbl.querySelectorAll(".fl-sel")), used = sels.map(function (x) { return x.value; });
+    sels.forEach(function (x) {
+      [].slice.call(x.options).forEach(function (o) { var off = o.value !== "" && o.value !== x.value && used.indexOf(o.value) >= 0; o.hidden = off; o.disabled = off; });
+    });
+  }
+  root.querySelectorAll("table.fl-match").forEach(hideUsed);
   root.addEventListener("change", function (e) {
     var sel = e.target.closest(".fl-sel"); if (!sel) return;
     var k = sel.getAttribute("data-mk"), a = sel.getAttribute("data-a");
@@ -2393,6 +2402,7 @@
     var ok = sel.value !== "" && sel.value === a;
     sel.className = "fl-sel" + (sel.value === "" ? "" : ok ? " fl-ok" : " fl-bad");
     sel.nextSibling.textContent = sel.value === "" ? "" : ok ? "\u2713 " + sel.options[sel.selectedIndex].text : "Try again";
+    var tbl = sel.closest("table.fl-match"); if (tbl) hideUsed(tbl);
     state();
   });
   root.addEventListener("click", function (e) {
