@@ -102,15 +102,80 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
     ]
   });
 
-  L["KS3-Y8DEV-L2"] = lesson({
+  L["KS3-Y8DEV-L1"] = lesson({
     title: "How does life vary around the world?",
     overview: {
       heading: "Development and inequalities",
-      intention: "To understand how we measure development and how life varies between and within countries.",
-      syllabus: ["Key question: how does life vary around the world, and how can we measure development without stereotyping places?"],
+      intention: "To understand how and why life varies between and within countries, without stereotyping places.",
+      syllabus: ["Key question: how does life vary around the world, and why should we be careful not to generalise?"],
+      success: ["Define climate, inequality and GDP per capita.",
+        "Describe how life varies around the world, using clues from photos and data.",
+        "Explain why life also varies within a country, such as Thailand and Kenya, and why stereotypes are misleading."]
+    },
+    parts: [
+      B.connect,
+      { type: "heading", text: "Starter: True or false? (Time for educated guesswork)", note: "In pairs, discuss each statement and decide whether it is true or false." },
+      { id: "tf", label: "", type: "mcq", noReason: true, prompt: "", items: [
+        { q: "If a country has a high GDP per person, everyone in that country is wealthy.", o: ["True", "False"], a: 1 },
+        { q: "Some high-income countries still have people living in poverty.", o: ["True", "False"], a: 0 },
+        { q: "All people in low-income countries are poor.", o: ["True", "False"], a: 1 },
+        { q: "Most of the world\u2019s population lives in low-income countries.", o: ["True", "False"], a: 1 },
+        { q: "Life expectancy is usually higher in countries with better access to healthcare, clean water and education.", o: ["True", "False"], a: 0 },
+        { q: "A country can become wealthier without reducing inequality.", o: ["True", "False"], a: 0 },
+        { q: "Development only means economic growth.", o: ["True", "False"], a: 1 },
+        { q: "Every person in a highly developed country enjoys a high quality of life.", o: ["True", "False"], a: 1 },
+        { q: "Girls and boys have equal access to education in every country.", o: ["True", "False"], a: 1 },
+        { q: "Countries can have modern cities and poor rural areas at the same time.", o: ["True", "False"], a: 0 },
+        { q: "A country with a high average income automatically has low inequality.", o: ["True", "False"], a: 1 },
+        { q: "Some countries with lower incomes have higher life expectancy than richer countries.", o: ["True", "False"], a: 0 }] },
+      { type: "heading", text: "Activity 1: Mix and match key terms" },
+      { id: "k1", label: "", type: "match", termCol: "Key term", defCol: "Definition (choose one)", noExample: true, prompt: "",
+        items: [{ t: "Climate", d: "The average of weather conditions (e.g. rain, sun, wind) in a place, taken over a long period of time (usually 30 years or more)." },
+          { t: "Inequality", d: "The uneven distribution of resources, opportunities and living conditions." },
+          { t: "GDP per capita", d: "The total value of all the goods and services produced in a country in a year, divided by its population." }] },
+      B.demonstrate,
+      { type: "heading", text: "Activity 2: How does life vary around the world?", note: "Study the photographs your teacher shows you." },
+      { id: "c1", label: "a)", type: "table", prompt: "What clues do the photographs give us about living in these places?", cols: ["", "What I can see, and what it tells me"], rows: ["Clue 1", "Clue 2", "Clue 3", "Clue 4", "Can you add any more?"] },
+      { id: "c2", label: "b)", type: "text", before: "<svg viewBox=\"0 0 760 330\" role=\"img\" aria-label=\"Mind map: life varies around the world in wealth, health, education, housing, jobs, climate, culture and technology\" style=\"width:100%;max-width:760px;height:auto;display:block;background:#fff;border:1px solid var(--lh-border);border-radius:10px\"><g font-family=\"Inter,Arial,sans-serif\"><line x1=\"380\" y1=\"165\" x2=\"380\" y2=\"40\" stroke=\"#0f766e\" stroke-width=\"2.5\"/><rect x=\"295\" y=\"23\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#0f766e\" stroke-width=\"2\"/><text x=\"380\" y=\"45\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#0f766e\">Wealth and income</text><line x1=\"380\" y1=\"165\" x2=\"585\" y2=\"77\" stroke=\"#b42318\" stroke-width=\"2.5\"/><rect x=\"500\" y=\"60\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#b42318\" stroke-width=\"2\"/><text x=\"585\" y=\"82\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#b42318\">Health</text><line x1=\"380\" y1=\"165\" x2=\"670\" y2=\"165\" stroke=\"#2a63b8\" stroke-width=\"2.5\"/><rect x=\"585\" y=\"148\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#2a63b8\" stroke-width=\"2\"/><text x=\"670\" y=\"170\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#2a63b8\">Education</text><line x1=\"380\" y1=\"165\" x2=\"585\" y2=\"253\" stroke=\"#c2410c\" stroke-width=\"2.5\"/><rect x=\"500\" y=\"236\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#c2410c\" stroke-width=\"2\"/><text x=\"585\" y=\"258\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#c2410c\">Housing</text><line x1=\"380\" y1=\"165\" x2=\"380\" y2=\"290\" stroke=\"#6b2fa3\" stroke-width=\"2.5\"/><rect x=\"295\" y=\"273\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#6b2fa3\" stroke-width=\"2\"/><text x=\"380\" y=\"295\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#6b2fa3\">Jobs</text><line x1=\"380\" y1=\"165\" x2=\"175\" y2=\"253\" stroke=\"#5e8f3c\" stroke-width=\"2.5\"/><rect x=\"90\" y=\"236\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#5e8f3c\" stroke-width=\"2\"/><text x=\"175\" y=\"258\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#5e8f3c\">Climate and environment</text><line x1=\"380\" y1=\"165\" x2=\"90\" y2=\"165\" stroke=\"#a16207\" stroke-width=\"2.5\"/><rect x=\"5\" y=\"148\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#a16207\" stroke-width=\"2\"/><text x=\"90\" y=\"170\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#a16207\">Culture and religion</text><line x1=\"380\" y1=\"165\" x2=\"175\" y2=\"77\" stroke=\"#13284b\" stroke-width=\"2.5\"/><rect x=\"90\" y=\"60\" width=\"170\" height=\"34\" rx=\"17\" fill=\"#fff\" stroke=\"#13284b\" stroke-width=\"2\"/><text x=\"175\" y=\"82\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#13284b\">Technology</text><ellipse cx=\"380\" cy=\"165\" rx=\"110\" ry=\"40\" fill=\"#6b2fa3\"/><text x=\"380\" y=\"160\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"800\" fill=\"#fff\">How does life vary</text><text x=\"380\" y=\"180\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"800\" fill=\"#fff\">around the world?</text></g></svg>", prompt: "Life varies around the world in many ways. Study the diagram, then add two more ways of your own and explain one of them." },
+      { type: "heading", text: "Activity 3: How does life vary around the world?", note: "Work through the activity below to learn how life varies in different parts of the world. Screenshot each page and paste it into OneNote." },
+      { type: "game", src: "/geography/games/life-around-the-world", title: "How Does Life Vary?" },
+      { id: "lv1", label: "", type: "text", prompt: "Summarise the three most surprising differences you found between places." },
+      { type: "heading", text: "Activity 4: Who is correct, Izzy or Sam?" },
+      { id: "is1", label: "", type: "text", prompt: "Who is correct? Justify your answer.",
+        before: '<div class="fl-chat"><p class="fl-chat__a"><b>Izzy:</b> Kenya is a poor country, so everyone who lives there must be poor.</p><p class="fl-chat__b"><b>Sam:</b> I don’t agree. Life varies inside a country. Nairobi has wealthy suburbs, shopping centres and skyscrapers, but also informal settlements, and life in rural areas is different again.</p></div>' },
+      { type: "heading", text: "Activity 5: So, how much does life vary in Thailand?" },
+      { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Thailand fact file</b><ul style="margin:.4rem 0 0 1.1rem;padding:0"><li>Human Development Index (HDI): 0.798, ranked 76th of 193 countries (UNDP, 2023 data). It is fourth in South-East Asia, after Singapore, Brunei and Malaysia.</li><li>When inequality is taken into account, Thailand’s HDI score falls by about 15%.</li><li>Wealth is very unevenly shared: the richest 5% of landowners hold about 80% of all land.</li><li>Bangkok is a global city with high incomes and modern services, while many rural areas, for example in the north-east (Isan), rely on farming and have lower incomes.</li></ul></div>' },
+      { id: "th1", label: "", type: "text", words: [80, 200], prompt: "How does life vary in Thailand? Use the information above and your own experience." },
+      { type: "heading", text: "Activity 6: Don’t generalise or create stereotypes", note: "Study the illustration below." },
+      { type: "html", html: JUXT_SVG },
+      { id: "st1", label: "", type: "questions", letters: true, prompt: "", rows: ["What does stereotyping mean?", "Geographers use the word ‘juxtaposition’ to describe images like this one. What do you think it means? Think about what the image is showing."] },
+      { type: "heading", text: "Activity 7: Using statistics in geography", note: "Study all of the information below." },
+      { id: "ke0", label: "", type: "table", prompt: "Kenya: key statistics", given: true, cols: ["Indicator", "Kenya"], rows: ["Population", "GDP per capita", "Life expectancy", "Human Development Index (HDI)", "Living in towns and cities", "Adult literacy"],
+        prefill: { 0: ["About 57 million (2025)"], 1: ["About US$2,360 (World Bank, 2025)"], 2: ["63.6 years (2023)"], 3: ["0.628, ranked 143rd of 193 (2023)"], 4: ["About 30% (most people live in rural areas)"], 5: ["About 83% (2021)"] } },
+      { id: "ke1", label: "", type: "text", words: [80, 200], prompt: "Using everything you have learned this lesson, describe what life is like in Kenya. Remember that life varies within the country: avoid generalising." },
+      { type: "heading", text: "Activity 8: Who is correct in this discussion?" },
+      { id: "dc1", label: "", type: "text", prompt: "Write your response here.",
+        before: '<div class="fl-chat"><p class="fl-chat__a"><b>Student A:</b> The best way to measure development is GDP per capita. If a country is rich, its people have a good quality of life.</p><p class="fl-chat__b"><b>Student B:</b> GDP per capita only shows money. Costa Rica has a lower GDP per capita than many countries but people live long, happy lives. We need a composite indicator like the HDI.</p></div>' },
+      B.quizzes,
+      { id: "q1", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+        { q: "Which is the best definition of climate?", o: ["The weather today", "The average weather over 30 years or more", "How hot it is in summer", "The amount of rain in one storm"], a: 1 },
+        { q: "GDP per capita is\u2026", o: ["the total money a government spends", "the value of goods and services produced, divided by the population", "the average life expectancy", "the number of jobs in a country"], a: 1 },
+        { q: "Which statement avoids a stereotype?", o: ["Everyone in Kenya is poor", "Life in Kenya varies between cities and rural areas", "All of Africa is one poor country", "Thailand has no modern cities"], a: 1 }] },
+      B.reflect,
+      { type: "heading", text: "Plenary: Analysing inaccuracies", note: "Write a response to Jun, suggesting why each of his sentences might be misleading." },
+      { id: "j1", label: "", type: "table", before: '<div class="fl-chat"><p class="fl-chat__a"><b>Jun:</b> 1. Africa is a poor country. 2. Everyone in Thailand lives on a farm. 3. Rich countries like the USA don\u2019t have any poverty. 4. Kenya has no big cities or modern buildings.</p></div><div class="fl__tnote"><b>Structure:</b> Jun says\u2026 This is misleading because\u2026 A more accurate sentence would be\u2026</div>', prompt: "", cols: ["Jun\u2019s sentence", "Why it is misleading", "A more accurate sentence"], rows: ["1. Africa is a poor country.", "2. Everyone in Thailand lives on a farm.", "3. Rich countries like the USA don\u2019t have any poverty.", "4. Kenya has no big cities or modern buildings."] }
+    ]
+  });
+
+  L["KS3-Y8DEV-L2"] = lesson({
+    title: "How do we measure development?",
+    overview: {
+      heading: "Development and inequalities",
+      intention: "To understand how we measure development using single and composite indicators.",
+      syllabus: ["Key question: how can we measure development, and which indicators give the best picture?"],
       success: ["Define development, development indicator and composite indicator.",
-        "Use development indicators to describe how life varies between countries such as Costa Rica, Thailand and Kenya.",
-        "Explain why life also varies within a country, and why we should not generalise or stereotype places."]
+        "Use development indicators to describe development in Costa Rica.",
+        "Evaluate which indicators give the best picture of development, using Development Detectives."]
     },
     parts: [
       B.connect,
@@ -130,25 +195,6 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
       { type: "game", src: "/geography/games/development-detectives", title: "Development Detectives" },
       { id: "dd1", label: "a)", type: "text", prompt: "Challenge answers: copy your answers to the challenges here." },
       { id: "dd2", label: "b)", type: "text", words: [60, 200], prompt: "Assessment: copy your final answer here, with your score and the feedback you were given." },
-      { type: "heading", text: "Activity 4: How does life vary around the world?", note: "Work through the activity below to learn how life varies in different parts of the world. Screenshot each page and paste it into OneNote." },
-      { type: "game", src: "/geography/games/life-around-the-world", title: "How Does Life Vary?" },
-      { id: "lv1", label: "", type: "text", prompt: "Summarise the three most surprising differences you found between places." },
-      { type: "heading", text: "Activity 5: Who is correct, Izzy or Sam?" },
-      { id: "is1", label: "", type: "text", prompt: "Who is correct? Justify your answer.",
-        before: '<div class="fl-chat"><p class="fl-chat__a"><b>Izzy:</b> Kenya is a poor country, so everyone who lives there must be poor.</p><p class="fl-chat__b"><b>Sam:</b> I don’t agree. Life varies inside a country. Nairobi has wealthy suburbs, shopping centres and skyscrapers, but also informal settlements, and life in rural areas is different again.</p></div>' },
-      { type: "heading", text: "Activity 6: So, how much does life vary in Thailand?" },
-      { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Thailand fact file</b><ul style="margin:.4rem 0 0 1.1rem;padding:0"><li>Human Development Index (HDI): 0.798, ranked 76th of 193 countries (UNDP, 2023 data). It is fourth in South-East Asia, after Singapore, Brunei and Malaysia.</li><li>When inequality is taken into account, Thailand’s HDI score falls by about 15%.</li><li>Wealth is very unevenly shared: the richest 5% of landowners hold about 80% of all land.</li><li>Bangkok is a global city with high incomes and modern services, while many rural areas, for example in the north-east (Isan), rely on farming and have lower incomes.</li></ul></div>' },
-      { id: "th1", label: "", type: "text", words: [80, 200], prompt: "How does life vary in Thailand? Use the information above and your own experience." },
-      { type: "heading", text: "Activity 7: Don’t generalise or create stereotypes", note: "Study the illustration below." },
-      { type: "html", html: JUXT_SVG },
-      { id: "st1", label: "", type: "questions", letters: true, prompt: "", rows: ["What does stereotyping mean?", "Geographers use the word ‘juxtaposition’ to describe images like this one. What do you think it means? Think about what the image is showing."] },
-      { type: "heading", text: "Activity 8: Using statistics in geography", note: "Study all of the information below." },
-      { id: "ke0", label: "", type: "table", prompt: "Kenya: key statistics", given: true, cols: ["Indicator", "Kenya"], rows: ["Population", "GDP per capita", "Life expectancy", "Human Development Index (HDI)", "Living in towns and cities", "Adult literacy"],
-        prefill: { 0: ["About 57 million (2025)"], 1: ["About US$2,360 (World Bank, 2025)"], 2: ["63.6 years (2023)"], 3: ["0.628, ranked 143rd of 193 (2023)"], 4: ["About 30% (most people live in rural areas)"], 5: ["About 83% (2021)"] } },
-      { id: "ke1", label: "", type: "text", words: [80, 200], prompt: "Using everything you have learned this lesson, describe what life is like in Kenya. Remember that life varies within the country: avoid generalising." },
-      { type: "heading", text: "Activity 9: Who is correct in this discussion?" },
-      { id: "dc1", label: "", type: "text", prompt: "Write your response here.",
-        before: '<div class="fl-chat"><p class="fl-chat__a"><b>Student A:</b> The best way to measure development is GDP per capita. If a country is rich, its people have a good quality of life.</p><p class="fl-chat__b"><b>Student B:</b> GDP per capita only shows money. Costa Rica has a lower GDP per capita than many countries but people live long, happy lives. We need a composite indicator like the HDI.</p></div>' },
       B.quizzes,
       { id: "q1", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
         { q: "Which of these is a social indicator of development?", o: ["GDP per capita", "Life expectancy", "Exports", "Unemployment rate"], a: 1 },
@@ -158,7 +204,50 @@ window.SBL_FLIP_EXTRA = window.SBL_FLIP_EXTRA || {};
       B.challenge,
       { id: "h1", label: "", type: "text", prompt: "Challenge: Costa Rica has a much lower GDP per capita than the USA, yet people there live longer. Which indicator do you think gives the best picture of development? Explain your choice and its limitations." },
       B.reflect,
-      { id: "r1", label: "", type: "text", prompt: "Exit ticket: write one thing you now understand about how life varies, and one stereotype you will avoid." }
+      { id: "r1", label: "", type: "text", prompt: "Exit ticket: which indicator do you think gives the best picture of development, and why?" }
+    ]
+  });
+
+  L["KS3-Y8DEV-GROUP"] = lesson({
+    title: "The Development Summit (group task)",
+    overview: {
+      heading: "Development and inequalities",
+      intention: "To work as a group to consolidate what we have learned about measuring development and inequality.",
+      syllabus: ["Key question: which country is the most developed, and does the answer depend on how we measure it?"],
+      success: ["Use economic and social indicators to compare six countries.",
+        "Explain why a country\u2019s wealth does not always match its level of development.",
+        "Present a group decision, supported by evidence, and assess other groups fairly."]
+    },
+    parts: [
+      B.connect,
+      { type: "heading", text: "Starter: First impressions", note: "On your own, before you see any data, put these countries in order from most developed to least developed. We will come back to this at the end." },
+      { id: "s1", label: "", type: "rank", prompt: "1 = most developed, 6 = least developed.", n: 6, placeholder: "Choose a country\u2026", options: ["Norway", "Qatar", "Costa Rica", "Thailand", "India", "Kenya"] },
+      B.demonstrate,
+      { type: "heading", text: "Activity 1: Choose your roles", note: "Welcome to the Development Summit. Your group is a team of advisers to the United Nations. Your job is to decide which of six countries is the most developed, and to convince the summit you are right." },
+      { type: "html", html: "<div style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem\"><div style=\"border:2px solid #0f766e;border-radius:12px;padding:.6rem .7rem;background:#fff\"><div style=\"font-weight:800;color:#0f766e\">Economist</div><div style=\"font-size:.92rem;margin-top:.25rem\">Wealth and jobs: GNI per person, types of work, trade.</div></div><div style=\"border:2px solid #b42318;border-radius:12px;padding:.6rem .7rem;background:#fff\"><div style=\"font-weight:800;color:#b42318\">Health and education expert</div><div style=\"font-size:.92rem;margin-top:.25rem\">Life expectancy, years of schooling, access to doctors and clean water.</div></div><div style=\"border:2px solid #6b2fa3;border-radius:12px;padding:.6rem .7rem;background:#fff\"><div style=\"font-weight:800;color:#6b2fa3\">Equality officer</div><div style=\"font-size:.92rem;margin-top:.25rem\">Who gets left behind? Gaps between rich and poor, cities and countryside, men and women.</div></div><div style=\"border:2px solid #5e8f3c;border-radius:12px;padding:.6rem .7rem;background:#fff\"><div style=\"font-weight:800;color:#5e8f3c\">Environment adviser</div><div style=\"font-size:.92rem;margin-top:.25rem\">Is development sustainable? Energy, pollution and carbon emissions.</div></div></div><div class=\"fl__tnote\" style=\"margin-top:.6rem\"><b>Groups of 4:</b> each person takes one role. You are the expert for your role, so you must speak up for your evidence in the summit.</div>" },
+      { type: "heading", text: "Activity 2: Study the country cards", note: "Read all six cards together. Each expert should focus on the evidence for their role." },
+      { type: "html", html: "<div style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem\"><div style=\"border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#fff\"><div style=\"background:#13284b;color:#fff;padding:.45rem .7rem\"><b style=\"font-size:1.05rem\">Norway</b> <span style=\"opacity:.85;font-size:.85rem\">Europe</span></div><div style=\"padding:.5rem .7rem;font-size:.92rem\"><div><b>HDI:</b> 0.970 (world rank 2nd)</div><div><b>GNI per person:</b> $112,710</div><div><b>Life expectancy:</b> 83.3 years</div><div><b>Expected schooling:</b> 18.8 years</div><div style=\"margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--lh-border)\">One of the most equal societies in the world. Almost all electricity comes from hydropower, but much of its wealth comes from selling oil and gas.</div></div></div><div style=\"border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#fff\"><div style=\"background:#7a1f3d;color:#fff;padding:.45rem .7rem\"><b style=\"font-size:1.05rem\">Qatar</b> <span style=\"opacity:.85;font-size:.85rem\">Middle East</span></div><div style=\"padding:.5rem .7rem;font-size:.92rem\"><div><b>HDI:</b> 0.886 (world rank 43rd)</div><div><b>GNI per person:</b> \u2248 $100,000*</div><div><b>Life expectancy:</b> \u2248 82 years*</div><div><b>Expected schooling:</b> \u2248 13 years*</div><div style=\"margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--lh-border)\">Most people living there are migrant workers, many of whom earn far less than Qatari citizens. Very high carbon emissions per person.</div></div></div><div style=\"border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#fff\"><div style=\"background:#0f766e;color:#fff;padding:.45rem .7rem\"><b style=\"font-size:1.05rem\">Costa Rica</b> <span style=\"opacity:.85;font-size:.85rem\">Central America</span></div><div style=\"padding:.5rem .7rem;font-size:.92rem\"><div><b>HDI:</b> 0.833 (world rank 62nd)</div><div><b>GNI per person:</b> $23,417</div><div><b>Life expectancy:</b> 80.8 years</div><div><b>Expected schooling:</b> 16.3 years</div><div style=\"margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--lh-border)\">No army since 1948; money goes to health and education instead. Nearly all electricity comes from renewable sources.</div></div></div><div style=\"border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#fff\"><div style=\"background:#2a63b8;color:#fff;padding:.45rem .7rem\"><b style=\"font-size:1.05rem\">Thailand</b> <span style=\"opacity:.85;font-size:.85rem\">South-east Asia</span></div><div style=\"padding:.5rem .7rem;font-size:.92rem\"><div><b>HDI:</b> 0.798 (world rank 76th)</div><div><b>GNI per person:</b> \u2248 $19,000*</div><div><b>Life expectancy:</b> \u2248 76 years*</div><div><b>Expected schooling:</b> \u2248 15 years*</div><div style=\"margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--lh-border)\">Bangkok is a modern, wealthy city, but incomes are much lower in many rural areas such as the north-east.</div></div></div><div style=\"border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#fff\"><div style=\"background:#c2410c;color:#fff;padding:.45rem .7rem\"><b style=\"font-size:1.05rem\">India</b> <span style=\"opacity:.85;font-size:.85rem\">South Asia</span></div><div style=\"padding:.5rem .7rem;font-size:.92rem\"><div><b>HDI:</b> 0.685 (world rank 130th)</div><div><b>GNI per person:</b> \u2248 $9,000*</div><div><b>Life expectancy:</b> \u2248 72 years*</div><div><b>Expected schooling:</b> \u2248 13 years*</div><div style=\"margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--lh-border)\">Fast-growing technology cities such as Bengaluru, but many people in rural areas still live in poverty.</div></div></div><div style=\"border-radius:12px;overflow:hidden;border:1px solid var(--lh-border);background:#fff\"><div style=\"background:#5e8f3c;color:#fff;padding:.45rem .7rem\"><b style=\"font-size:1.05rem\">Kenya</b> <span style=\"opacity:.85;font-size:.85rem\">East Africa</span></div><div style=\"padding:.5rem .7rem;font-size:.92rem\"><div><b>HDI:</b> 0.628 (world rank 143rd)</div><div><b>GNI per person:</b> \u2248 $5,000*</div><div><b>Life expectancy:</b> 63.6 years</div><div><b>Expected schooling:</b> \u2248 11 years*</div><div style=\"margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--lh-border)\">Nairobi is a technology hub (mobile money began here), but many rural households still have no electricity.</div></div></div></div><div class=\"fl__tnote\" style=\"margin-top:.5rem;font-size:.85rem\">Data: UNDP Human Development Report 2025 (2023 figures). GNI per person is adjusted for the cost of living (PPP). * rounded estimate.</div>" },
+      { id: "t1", label: "", type: "table", prompt: "As a group, complete the evidence table. Each expert fills in their own column.", cols: ["Country", "Economist: wealth", "Health and education", "Equality", "Environment"], rows: ["Norway", "Qatar", "Costa Rica", "Thailand", "India", "Kenya"] },
+      { type: "heading", text: "Activity 3: Spot the surprises", note: "Discuss these questions as a group. Write your group\u2019s answers." },
+      { id: "m1", type: "questions", letters: true, prompt: "", rows: ["Qatar is almost as rich as Norway. Why is its HDI so much lower? Use the cards to suggest two reasons.",
+        "Costa Rica earns about one fifth of Norway\u2019s GNI per person, yet people live only about two and a half years less. How?",
+        "Which country would the environment adviser be most worried about? Why?",
+        "Which country has the biggest gap between its cities and its countryside? What does this tell you about using one average for a whole country?"] },
+      { type: "heading", text: "Activity 4: Prepare your summit pitch", note: "Your group must agree on the most developed country. It does not have to be the one with the highest HDI, but you must justify your choice. Each expert speaks for about 30 seconds." },
+      { id: "p1", label: "", type: "text", words: [100, 250], prompt: "Write your group\u2019s pitch. Every expert must add one piece of evidence.",
+        before: '<div class="fl__tnote"><b>Pitch frame:</b> We believe ___ is the most developed country because\u2026 The economist\u2019s evidence shows\u2026 Our health and education expert found\u2026 However, our equality officer warns that\u2026 Our environment adviser thinks\u2026 Overall\u2026</div>',
+        mustUse: [["Indicator", "indicator"], ["HDI", "hdi|human development"], ["GNI or GDP", "gni|gdp"], ["Life expectancy", "life expectancy"], ["Inequality", "inequal|equal|gap"], ["However", "however|but|although"]] },
+      { type: "heading", text: "Activity 5: The summit", note: "Each group presents its pitch. While you listen, assess each group." },
+      { id: "pa", label: "", type: "table", prompt: "Peer assessment. Give each group a score out of 3 for each column, and one question you would ask them.", cols: ["Group and country chosen", "Used evidence (/3)", "Considered inequality (/3)", "Persuasive (/3)", "My question for them"], rows: ["Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6"] },
+      B.quizzes,
+      { id: "q1", label: "", type: "mcq", noReason: true, prompt: "Quick check", items: [
+        { q: "Which three things does the HDI combine?", o: ["Wealth, health and education", "Wealth, climate and population", "Health, religion and jobs", "Exports, imports and debt"], a: 0 },
+        { q: "Why might a rich country have a lower HDI than expected?", o: ["Its wealth is shared unequally, or spent less on health and education", "It has too many schools", "It is too far from the equator", "The HDI only measures wealth"], a: 0 },
+        { q: "Which statement about Kenya is the most accurate?", o: ["Everyone in Kenya is poor", "Kenya has modern cities such as Nairobi but many rural areas lack electricity", "Kenya has no technology", "Kenya is the least developed country in the world"], a: 1 },
+        { q: "An average figure for a whole country can hide\u2026", o: ["differences between regions and groups of people", "the capital city", "the climate", "nothing at all"], a: 0 }] },
+      B.reflect,
+      { id: "r1", label: "a)", type: "text", prompt: "Look back at your starter order. Did you change your mind? What surprised you most?" },
+      { id: "r2", label: "b)", type: "text", prompt: "How well did your group work together? What did you do well in your role, and what would you do differently next time?" }
     ]
   });
 

@@ -129,15 +129,27 @@
             "lessons": [
                 {
                   "label": "How does life vary around the world?",
+                  "href": "/ks3/geography/y8-development-and-inequality/l1-life-around-the-world",
+                  "id": "KS3-Y8DEV-L1",
+                  "n": 1
+                },
+                {
+                  "label": "How do we measure development?",
                   "href": "/ks3/geography/y8-development-and-inequality/l2-how-does-life-vary",
                   "id": "KS3-Y8DEV-L2",
                   "n": 2
                 },
                 {
+                  "label": "The Development Summit (group task)",
+                  "href": "/ks3/geography/y8-development-and-inequality/l3-development-summit",
+                  "id": "KS3-Y8DEV-GROUP",
+                  "n": 3
+                },
+                {
                   "label": "GIS: analysing inequality at different scales",
                   "href": "/ks3/geography/y8-development-and-inequality/l3-gis-inequality",
                   "id": "KS3-Y8DEV-L3",
-                  "n": 3
+                  "n": 4
                 }
               ]
           }

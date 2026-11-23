@@ -2407,7 +2407,7 @@
       h += '<div class="fl-rank">';
       for (var rr = 0; rr < p.n; rr++) {
         var rk = p.id + rr;
-        h += '<label class="fl-rank__r"><b>' + (rr + 1) + '</b><select class="fl-ranksel" data-k="' + rk + '"><option value="">Choose a factor\u2026</option>' +
+        h += '<label class="fl-rank__r"><b>' + (rr + 1) + '</b><select class="fl-ranksel" data-k="' + rk + '"><option value="">' + esc(p.placeholder || "Choose a factor\u2026") + '</option>' +
           p.options.map(function (o) { return "<option" + (saved[rk] === o ? " selected" : "") + ">" + esc(o) + "</option>"; }).join("") + "</select></label>";
       }
       h += "</div>";
