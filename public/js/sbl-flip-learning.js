@@ -1267,6 +1267,45 @@
           rows: ["What does \u2018designed for the dump\u2019 mean?", "How is this achieved by companies?", "Why do companies design goods that will soon be put in the dump?", "How is Annie\u2019s DVD player designed for the dump?", "How many months is the average electronic item used for?", "How many raw materials are used in the manufacturing of electronics?", "What is added to the raw materials during manufacturing? Give an example.", "What has been the impact of electronics manufacturing in Silicon Valley, California, on (a) the environment?", "\u2026and (b) people?", "What is e-waste?", "What waste comes out of electronic goods?", "Where is most e-waste recycling done?", "How is e-waste recycled?", "What are the impacts of e-waste?", "What does \u2018externalising the true cost of production\u2019 mean?", "Explain the term extended producer responsibility (take-back).", "Why are there few \u2018green\u2019 electronics for consumers?"] }
       ]
     },
+    "HD-t2-l3-how-diasporas": {
+      title: "How do diasporas shape identity and cultural diversity?",
+      overview: {
+        heading: "How global interactions bring cultural influences and changes to places",
+        intention: "To explain the values and perceptions of differing groups or individuals.",
+        sdgs: [{ n: 10, t: "Reduced inequalities", c: "#dd1367" }, { n: 17, t: "Partnerships for the goals", c: "#19486a" }],
+        syllabus: ["How diasporas influence cultural diversity and identity at both global and local scales.", "Case study of a global diaspora population and its culture(s)."],
+        success: ["Define and explain the role of diasporas in maintaining a culture abroad.", "Describe the presence of Chinese diasporas worldwide.", "Summarise the importance of the Chinese diaspora in San Francisco.", "Apply the IB essay mark scheme to an answer on the topic of diasporas, using the Chinese in the USA as an example."] },
+      intro: "Complete this before the lesson, and arrive ready to discuss Part D.",
+      parts: [
+        { type: "heading", text: "Part A: Recap: the effects of globalisation", note: "Complete some of the effects of globalisation for each of the following in the right-hand column." },
+        { id: "a", label: "", type: "table", prompt: "", cols: ["Aspect of globalisation", "Effects"], rows: ["Transport, especially air transport and tourism", "Transnational companies and global products", "Economic migrants, e.g. Mexicans into the USA", "Global events, e.g. the World Cup", "Global media", "Economic integration: the euro, trade", "Trade unions and international campaigns", "Communications: the internet", "Peace"] },
+        { type: "heading", text: "Part B: What are diasporas?" },
+        { id: "b0", label: "1.", type: "text", prompt: "Define the term diaspora and give examples." },
+        { type: "html", html: '<div class="fl__tnote" style="background:var(--lh-teal-bg)"><b>Reading summary: the economic power of diasporas</b> <span style="font-size:.85rem;color:#555">(summarised from a 2011 article in <i>The Economist</i>; read the full PDF your teacher has given you)</span><ul style="margin:.4rem 0 0 1.1rem;padding:0"><li>Diaspora networks (Huguenots, Scots, Jews and many others) have long been an economic force. Cheap travel and modern communications have made them larger and more numerous.</li><li>In 2011 there were about <b>215 million</b> first-generation migrants, around 3% of the world\u2019s population. More Chinese people lived outside China than there were French people in France, and about 22 million Indians lived abroad.</li><li>Unexpected communities exist too: Lebanese in West Africa, Japanese in Brazil, Welsh in Patagonia, and West Africans in southern China.</li><li><b>Business:</b> ties of kinship and language build trust and spread information, making trade and investment across borders easier. Much foreign investment in China has passed through the Chinese diaspora.</li><li><b>Ideas:</b> students educated abroad return with knowledge and contacts, such as China\u2019s \u201csea turtles\u201d and Indian engineers linked to Silicon Valley.</li><li><b>Money:</b> migrants send remittances home and help firms in their host country operate in their homeland.</li><li><b>Host countries:</b> immigrants were about an eighth of the US population but founded about a quarter of its technology and engineering firms.</li><li><b>Brain drain:</b> the article argues these fears are overblown, because the chance to work abroad encourages people to gain skills, and many return to start businesses.</li><li><b>Politics:</b> returning graduates helped drive India\u2019s economic reforms in the 1990s and now advise China\u2019s government.</li><li><b>Tensions:</b> hostility to immigration grows in hard times, based on fears about welfare and wages, although the evidence for these is weak or mixed.</li></ul></div>' },
+        { id: "b", label: "2.", type: "questions", letters: true, prompt: "Read the PDF and answer these questions.",
+          rows: ["Why can a country have a much larger global diaspora than its resident population?", "How can people maintain identity ties with a place they do not live in?", "What cultural traits might diaspora communities maintain?", "How might diasporas benefit source countries?", "How might diasporas benefit host countries?", "What tensions or problems might diasporas create?"] },
+        { type: "heading", text: "Part C: Case study profile", note: "Choose one diaspora to research: Chinese (possibly the easiest), Indian, Irish, Jewish, Filipino, Caribbean, or your own choice. Research will be required." },
+        { id: "c", label: "", type: "table", prompt: "", cols: ["Profile", "My research"], rows: ["Name of group", "Source country / homeland", "Major host countries", "Why did migration occur?", "Cultural traits maintained", "Economic links created", "Political links created", "Cultural impact on host countries", "Benefits for the source country", "Benefits for the host country", "Tensions"] },
+        { type: "heading", text: "Part D: Benefits and problems", note: "Decide whether each statement is a benefit or a problem of diasporas, then check your sort." },
+        { id: "d", label: "", type: "sort", cardCol: "Statement", binCol: "Benefit or problem?", prompt: "", bins: ["Benefit", "Problem"],
+          cards: [{ t: "Improved economic links with different countries", a: ["Benefit"] },
+            { t: "Loss of workers from the source country (brain drain)", a: ["Problem"] },
+            { t: "Increased political influence around the world", a: ["Benefit"] },
+            { t: "The diaspora\u2019s culture is spread around the world and tourism to the source country increases (e.g. St Patrick\u2019s Day for Ireland)", a: ["Benefit"] },
+            { t: "Many wrongful claims of citizenship due to descent status (e.g. a rise in Irish passport applications)", a: ["Problem"] },
+            { t: "More revenue for source-country businesses (e.g. Guinness in Ireland)", a: ["Benefit"] },
+            { t: "Global awareness of and support for sports teams (e.g. Gaelic football)", a: ["Benefit"] },
+            { t: "Possible political and economic interference from people living outside the country", a: ["Problem"] },
+            { t: "Dilution of culture", a: ["Problem"] },
+            { t: "Possible dependency on outside help (e.g. over-reliance on remittances)", a: ["Problem"] },
+            { t: "Remittances sent home by migrants living overseas", a: ["Benefit"] }] },
+        { id: "e", label: "", type: "cards", prompt: "",
+          items: [{ t: "Identity", icon: "\ud83e\udded", c: "#6b2fa3", q: "Do diasporas strengthen cultural identity or dilute it?" },
+            { t: "Economy", icon: "\ud83d\udcb8", c: "#0f766e", q: "Do diasporas create economic benefits through remittances and tourism?" },
+            { t: "Politics", icon: "\ud83c\udfdb\ufe0f", c: "#2a63b8", q: "Can diasporas increase political influence?" },
+            { t: "Tensions", icon: "\u26a0\ufe0f", c: "#b42318", q: "Can diasporas create tensions around belonging, integration or nationalism?" }] }
+      ]
+    },
     LT03: [{
       title: "What factors affect participation in sport and tourism?",
       overview: {
