@@ -98,6 +98,12 @@
                 "href": "/igcse/geography/lessons/development-and-human-welfare/l08-reducing-the-development-gap",
                 "id": "IGL-DV08",
                 "n": 8
+              },
+              {
+                "label": "Case studies: development projects in Nigeria and Kenya",
+                "href": "/igcse/geography/lessons/development-and-human-welfare/l09-nigeria-and-kenya-projects",
+                "id": "IGL-DV09",
+                "n": 9
               }
             ]
           }
