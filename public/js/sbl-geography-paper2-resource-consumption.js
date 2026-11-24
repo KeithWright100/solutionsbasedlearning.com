@@ -119,6 +119,63 @@ window.SBL_REVISION_TOPICS = [
     ]
   },
   {
+    "topic": "SBL practice \u2014 Fashion and the circular economy infographic (IB-style, 10 marks)",
+    "questions": [
+      {
+        "label": "SBL practice \u2014 Question 4(a)(i) \u2014 1 mark",
+        "marks": 1,
+        "question": "Question 4(a)(i) \u2014 Estimate (1 mark). Study Figure 1. Estimate the value of second-hand and repaired clothing sales in Country X in 2022.",
+        "markScheme": "Figure values: 2015 40, 2016 38, 2017 45, 2018 52, 2019 60, 2020 58, 2021 70, 2022 81 (US$ million). Award 1 mark for a value from 79 to 83 million US dollars. Units required (US$ million or million dollars). This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/fashion-circular-economy.svg",
+            "alt": "Infographic on fashion and the circular economy: a line graph of second-hand clothing sales 2015 to 2022, a table of textile waste outcomes in three countries, a survey of five cities and garment industry facts",
+            "caption": "Figure 1: Fashion and the circular economy (SBL practice infographic)"
+          }
+        ]
+      },
+      {
+        "label": "SBL practice \u2014 Question 4(a)(ii) \u2014 1 mark",
+        "marks": 1,
+        "question": "Question 4(a)(ii) \u2014 Calculate (1 mark). Calculate the percentage increase in sales between 2015 and 2022. Show your working.",
+        "markScheme": "Sales rose from 40 to 81 (US$ million): (81 \u2212 40) / 40 \u00d7 100 = 102.5%. Award 1 mark for an answer from 100% to 105%, or an answer that is correctly calculated from the student\u2019s own 2022 estimate in part (a)(i). This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/fashion-circular-economy.svg",
+            "alt": "Infographic on fashion and the circular economy: a line graph of second-hand clothing sales 2015 to 2022, a table of textile waste outcomes in three countries, a survey of five cities and garment industry facts",
+            "caption": "Figure 1: Fashion and the circular economy (SBL practice infographic)"
+          }
+        ]
+      },
+      {
+        "label": "SBL practice \u2014 Question 4(b) \u2014 2 marks",
+        "marks": 2,
+        "question": "Question 4(b) \u2014 Suggest (2 marks). Suggest one reason why the survey results in Figure 1 might not represent the views of each city\u2019s whole population.",
+        "markScheme": "The survey was online, of 300 people aged 16\u201335 in each city. Award 1 mark for a valid reason and 1 for development, e.g. only young people aged 16\u201335 were asked (1), and older people may care less about sustainable fashion or be less able to afford it (1); the survey was online (1), so people without internet access are excluded (1); 300 people is a small sample for a large city (1), so results may not be representative (1); people may say they support sustainable fashion to seem responsible (1) but not actually buy it (1). This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/fashion-circular-economy.svg",
+            "alt": "Infographic on fashion and the circular economy: a line graph of second-hand clothing sales 2015 to 2022, a table of textile waste outcomes in three countries, a survey of five cities and garment industry facts",
+            "caption": "Figure 1: Fashion and the circular economy (SBL practice infographic)"
+          }
+        ]
+      },
+      {
+        "label": "SBL practice \u2014 Question 4(c) \u2014 6 marks",
+        "marks": 6,
+        "question": "Question 4(c) \u2014 To what extent (6 marks). Using evidence from Figure 1, to what extent is the circular economy reducing the environmental impacts of the fashion industry?",
+        "markScheme": "Figure evidence: second-hand and repaired clothing sales roughly doubled from 40 to 81 US$ million (2015\u20132022), with a dip in 2016 and 2020; Country A reuses 12% and recycles 9% of textiles, Country B 6% and 4%, Country C 18% and 15%, while landfill is 49%, 70% and 32% and burning 30%, 20% and 35%; textile waste is 16, 9 and 4 kg per person per year; survey support for sustainable fashion ranges from 47% (City E) to 86% (City D); in Country Y garment exports earn 60% of export income and employ about 700,000 people, 85% women, many internal migrants; brands could cut water use by up to 25% by making longer-lasting clothes. Award 1 mark for each valid point using the evidence and a further mark for development, up to 5 marks; award the 6th mark for an overall judgement that weighs evidence on both sides. Maximum 4 marks if only one side is considered. Points for: rising sales of second-hand and repaired clothing; Country C reuses and recycles a third of textiles and produces little waste; strong stated support in some cities. Points against: most textiles in every country are still burned or sent to landfill (up to 90% in Country B); sales of 81 million are likely to be small compared with total clothing sales; support in a survey does not mean changed buying habits; fast fashion remains vital to economies such as Country Y; water savings are potential, not achieved. A good judgement might be that the circular economy is growing but is only reducing impacts to a small extent so far. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/fashion-circular-economy.svg",
+            "alt": "Infographic on fashion and the circular economy: a line graph of second-hand clothing sales 2015 to 2022, a table of textile waste outcomes in three countries, a survey of five cities and garment industry facts",
+            "caption": "Figure 1: Fashion and the circular economy (SBL practice infographic)"
+          }
+        ]
+      }
+    ]
+  },
+  {
     topic: "May 2023 \u2014 Question 3 \u2014 Section A: Global resource consumption and security (10 marks, compulsory)",
     questions: [
       {

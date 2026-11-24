@@ -161,6 +161,63 @@ window.SBL_REVISION_TOPICS = [
     ]
   },
   {
+    "topic": "SBL practice \u2014 Ageing-related policies graph (IB-style, 10 marks)",
+    "questions": [
+      {
+        "label": "SBL practice \u2014 Question 1(a)(i) \u2014 1 mark",
+        "marks": 1,
+        "question": "Question 1(a)(i) \u2014 Estimate (1 mark). Study Figure 1. Estimate the global percentage of governments that promote healthy ageing.",
+        "markScheme": "Figure values: global average for promote healthy ageing is 72%. Award 1 mark for any value from 70% to 74%. Units are not essential, but the value must be a single figure, not a range wider than 2 percentage points. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/ageing-policies.svg",
+            "alt": "Bar and dot graph of the percentage of governments with five ageing-related policies, globally and for three regions",
+            "caption": "Figure 1: Ageing-related policies adopted by governments, by region (SBL practice data)"
+          }
+        ]
+      },
+      {
+        "label": "SBL practice \u2014 Question 1(a)(ii) \u2014 1 mark",
+        "marks": 1,
+        "question": "Question 1(a)(ii) \u2014 State (1 mark). Using Figure 1, state which policy shows the smallest difference between the highest and the lowest regional values.",
+        "markScheme": "Figure values (Europe and North America / East and South-East Asia / Sub-Saharan Africa): promote healthy ageing 96/80/44 (range 52); prevent elder abuse 74/58/36 (range 38); support long-term care 88/52/12 (range 76); raise pension age 80/30/6 (range 74); encourage older workers 62/20/4 (range 58). Award 1 mark for: prevent elder abuse. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/ageing-policies.svg",
+            "alt": "Bar and dot graph of the percentage of governments with five ageing-related policies, globally and for three regions",
+            "caption": "Figure 1: Ageing-related policies adopted by governments, by region (SBL practice data)"
+          }
+        ]
+      },
+      {
+        "label": "SBL practice \u2014 Question 1(b) \u2014 4 marks",
+        "marks": 4,
+        "question": "Question 1(b) \u2014 Suggest (2+2 marks). Using Figure 1, suggest two reasons why governments in Europe and North America are much more likely than governments in Sub-Saharan Africa to raise the pension age.",
+        "markScheme": "Figure values: raise pension age is 80% in Europe and North America and 6% in Sub-Saharan Africa. Mark each reason separately, up to 2 marks each: 1 mark for a valid reason and 1 for development. Credit e.g. older age structure and higher dependency ratio in Europe/North America (1), so pension costs are rising and must be controlled (1); higher life expectancy (1) means people draw pensions for longer (1); fewer people in Sub-Saharan Africa have formal pensions (1) because many work in the informal sector or rely on family support (1); youthful populations in Sub-Saharan Africa (1) mean governments prioritise children, education and jobs (1). Do not credit a reason that simply restates the figures. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/ageing-policies.svg",
+            "alt": "Bar and dot graph of the percentage of governments with five ageing-related policies, globally and for three regions",
+            "caption": "Figure 1: Ageing-related policies adopted by governments, by region (SBL practice data)"
+          }
+        ]
+      },
+      {
+        "label": "SBL practice \u2014 Question 1(c) \u2014 4 marks",
+        "marks": 4,
+        "question": "Question 1(c) \u2014 Explain (2+2 marks). Explain two ways in which an ageing population can create challenges for a country\u2019s economy.",
+        "markScheme": "Mark each way separately, up to 2 marks each: 1 mark for a valid challenge and 1 for explaining it. Credit e.g. a shrinking working-age population (1) leads to labour shortages and slower economic growth (1); rising pension costs (1) increase government spending or require higher taxes on workers (1); higher healthcare and long-term care costs (1) put pressure on public budgets (1); a higher old-age dependency ratio (1) means fewer workers support each older person (1). Award a maximum of 2 if both ways are the same idea. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
+        "images": [
+          {
+            "src": "/images/revision-ppq/sbl-practice/ageing-policies.svg",
+            "alt": "Bar and dot graph of the percentage of governments with five ageing-related policies, globally and for three regions",
+            "caption": "Figure 1: Ageing-related policies adopted by governments, by region (SBL practice data)"
+          }
+        ]
+      }
+    ]
+  },
+  {
     topic: "May 2024 \u2014 Section C essays (10 marks \u2014 answer one)",
     questions: [
       {
