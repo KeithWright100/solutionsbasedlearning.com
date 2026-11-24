@@ -2180,7 +2180,7 @@
       mapEl.addEventListener("click", function (e) { var t = e.target.closest(".fl-gis__c"); if (t) show(+t.getAttribute("data-i")); });
       selA.onchange = draw; selB.onchange = draw; draw();
     }).catch(function () {
-      mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use the Our World in Data link instead.</p>';
+      mapEl.innerHTML = '<p class="fl__note">' + esc(part.fallback || "The map could not load (check your internet connection). Use the Our World in Data link instead.") + '</p>';
     });
   }
   /* Locator map: part.box [[west, south], [east, north]], part.hi [country ids to highlight],
@@ -2397,7 +2397,7 @@
     }
     if (p.type === "locmap") h += '<div class="fl-loc" data-id="' + p.id + '"><div class="fl-loc__map"><p class="fl__note">Loading the map\u2026</p></div></div>';
     if (p.type === "gismap") {
-      h += '<div class="fl-gis" data-id="' + p.id + '"><div class="fl-gis__ctl"><label>Main map (colour) <select data-g="a">' + p.layers.map(function (L, i) { return '<option value="' + i + '"' + (i === (p.a || 0) ? " selected" : "") + ">" + esc(L.name) + "</option>"; }).join("") + '</select></label>' +
+      h += '<div class="fl-gis" data-id="' + p.id + '"><div class="fl-gis__ctl"' + (p.layers.length < 2 ? ' hidden' : '') + '><label>Main map (colour) <select data-g="a">' + p.layers.map(function (L, i) { return '<option value="' + i + '"' + (i === (p.a || 0) ? " selected" : "") + ">" + esc(L.name) + "</option>"; }).join("") + '</select></label>' +
         '<label>Overlay (circles) <select data-g="b"><option value="">None</option>' + p.layers.map(function (L, i) { return '<option value="' + i + '">' + esc(L.name) + "</option>"; }).join("") + "</select></label></div>" +
         '<div class="fl-gis__map"><p class="fl__note">Loading the map\u2026</p></div><div class="fl-gis__info">Move over or tap a country to see its data.</div><div class="fl-gis__legend"></div>' +
         (p.source ? '<p class="fl__note">' + esc(p.source) + "</p>" : "") + "</div>";

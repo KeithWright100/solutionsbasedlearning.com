@@ -104,6 +104,12 @@
                 "href": "/igcse/geography/lessons/development-and-human-welfare/l09-nigeria-and-kenya-projects",
                 "id": "IGL-DV09",
                 "n": 9
+              },
+              {
+                "label": "How to answer a 12-mark question",
+                "href": "/igcse/geography/lessons/development-and-human-welfare/l10-how-to-answer-a-12-mark-question",
+                "id": "IGL-DV10",
+                "n": 10
               }
             ]
           }
