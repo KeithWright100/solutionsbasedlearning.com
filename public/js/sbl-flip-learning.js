@@ -2257,7 +2257,7 @@
   if (cfg._note) h += '<p class="fl__tnote"><b>Note from ' + esc(ed.teacher || "your teacher") + ":</b> " + esc(cfg._note).replace(/\n/g, "<br>") + "</p>";
   if (cfg.cover) h += '<ul class="fl__cover">' + cfg.cover.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>";
   h += '<div class="fl__top">' + (cfg.noBot ? "" : '<button type="button" class="fl__bot" onclick="window.openTeachBot && openTeachBot(\'' + id + '\')">Open Teach Me Live &rarr;</button>') +
-    '<button type="button" class="fl__btn fl__btn--ghost fl-copy">Copy to OneNote</button>' +
+    '<button type="button" class="fl__btn fl__btn--ghost fl-copy">' + (isL ? "Copy this lesson to OneNote" : "Copy flip learning to OneNote") + '</button>' +
     (ed.canEdit ? '<button type="button" class="fl__btn fl__btn--ghost fl-edit">\u270f\ufe0f Edit for my classes</button>' : "") +
     (hasEdits(ed.edits) ? '<span class="fl__adapt">' + (ed.canEdit ? "Your classes see your edited version" : "Adapted by your teacher") + "</span>" : "") + "</div>";
 
@@ -2440,7 +2440,7 @@
     h += "</div>";
   });
 
-  h += '<div class="fl__actions"><button type="button" class="fl__btn fl-copy">Copy my answers for OneNote</button>' +
+  h += '<div class="fl__actions"><button type="button" class="fl__btn fl-copy">' + (isL ? "Copy my lesson answers for OneNote" : "Copy my flip learning answers for OneNote") + '</button>' +
     '<button type="button" class="fl__btn fl__btn--ghost" data-print="1">Print / save as PDF</button>' +
     '<span class="fl__note">Your answers save automatically on this device.</span></div></div>' + (inl ? "</section>" : "</details>");
 
@@ -2767,7 +2767,7 @@
   function buildCopy(media) {
     media = media || {};
     var T = 'style="border-collapse:collapse;border:1px solid #999"', D = 'style="border:1px solid #999;padding:4px 6px;vertical-align:top"';
-    var html = "<h2>Flip learning: " + esc(cfg.title) + "</h2>", out = ["Flip learning: " + cfg.title, ""];
+    var kindLabel = isL ? "Lesson" : "Flip learning", html = "<h2>" + kindLabel + ": " + esc(cfg.title) + "</h2>", out = [kindLabel + ": " + cfg.title, ""];
     function ans(k) { return saved[k] || ""; }
     function cellHtml(v) { return esc(v).replace(/\n/g, "<br>") || "&nbsp;"; }
     cfg.parts.forEach(function (p, pi) {
