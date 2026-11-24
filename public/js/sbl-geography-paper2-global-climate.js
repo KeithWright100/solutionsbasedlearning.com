@@ -95,8 +95,9 @@ window.SBL_REVISION_TOPICS = [
       {
         label: "May 2024 P2 \u2014 Question 2(a) \u2014 2 marks",
         marks: 2,
-        question: "Question 2(a) \u2014 Describe (2 marks). Use the map in your resource booklet that shows the projected change in a forest biome\u2019s distribution between two dates. Describe how the distribution of the forest is projected to change.",
-        markScheme: "Award one mark for each valid descriptive point taken from the student\u2019s own map, up to two marks (for example, the overall direction of shift, areas where the forest expands or contracts, or a change in its total extent). At least one point should be supported by a specific detail from the map (a direction, place or approximate distance) for full marks. This system does not hold the map, so judge internal consistency rather than exact places."
+        question: "Question 2(a) \u2014 Describe (2 marks). Study Figure 1. Describe how the distribution of the forest is projected to change between 1990 and 2100.",
+        markScheme: "Figure: in 1990 the forest lies mainly between about 35\u00b0N and 41\u00b0N, in the central and south-eastern area; by 2100 it lies mainly between about 40\u00b0N and 46\u00b0N, further north and north-east, with patches near the Canadian border, and it has gone from the south of its 1990 range. Total area is similar or slightly larger. The scale bar shows 500 km. Award 1 mark per valid descriptive point, max 2, e.g. shifts north (polewards) (1); by about 5\u00b0 of latitude or about 500 km (1); disappears from the south, below about 38\u00b0N (1); expands into the north-east (1). At least one point needs specific evidence (latitude, distance or direction) for full marks. Figure 1 is an SBL practice version of the resource with practice data, so the figures differ from the original paper; mark against the figure values given here. The student can see Figure 1.",
+        images: [{"src": "/images/revision-ppq/sbl-practice/forest-biome-shift.svg", "alt": "Two maps of a simplified eastern North America showing a temperate forest biome in 1990 and projected for 2100, further north", "caption": "Figure 1: Projected change in a temperate forest biome, 1990 to 2100 (SBL practice version, illustrative data)"}]
       },
       {
         label: "May 2024 P2 \u2014 Question 2(b) \u2014 4 marks",
@@ -109,63 +110,6 @@ window.SBL_REVISION_TOPICS = [
         marks: 4,
         question: "Question 2(c) \u2014 Explain (2+2 marks). Explain two geopolitical strategies used to reduce the effects of climate change.",
         markScheme: "Mark each part separately, up to two marks each. For each, award one mark for identifying a genuine geopolitical (international or intergovernmental) strategy (for example, international agreements such as the Paris Agreement and nationally determined contributions, the Kyoto Protocol, international carbon trading schemes, climate finance from richer to poorer countries, or regional agreements such as the EU\u2019s emissions targets) and a second mark for explaining how it reduces the effects or causes of climate change (for example, binding or pledged emission cuts, funding adaptation in vulnerable countries, or creating a price on carbon that encourages lower emissions). Do not credit purely local or individual actions."
-      }
-    ]
-  },
-  {
-    "topic": "SBL practice \u2014 Forest biome shift map (IB-style, 10 marks)",
-    "questions": [
-      {
-        "label": "SBL practice \u2014 Question 2(a) \u2014 2 marks",
-        "marks": 2,
-        "question": "Question 2(a) \u2014 Describe (2 marks). Study Figure 1. Describe how the distribution of the forest is projected to change between 1990 and 2100.",
-        "markScheme": "Figure: in 1990 the forest lies mainly between about 35\u00b0N and 41\u00b0N, in the central and south-eastern area; by 2100 it lies mainly between about 40\u00b0N and 46\u00b0N, further north and north-east, with patches near the Canadian border, and it has gone from the south of its 1990 range. Total area is similar or slightly larger. Award 1 mark per valid descriptive point, max 2, e.g. shifts north (or polewards) (1); about 5\u00b0 of latitude / about 500 km (1); disappears from the south (below about 38\u00b0N) (1); expands into the north-east (1). At least one point needs specific evidence (latitude, distance or direction) for full marks. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
-        "images": [
-          {
-            "src": "/images/revision-ppq/sbl-practice/forest-biome-shift.svg",
-            "alt": "Two maps of a simplified eastern North America showing a temperate forest biome in 1990 and projected for 2100, further north",
-            "caption": "Figure 1: Projected change in a temperate forest biome, 1990 to 2100 (SBL practice map)"
-          }
-        ]
-      },
-      {
-        "label": "SBL practice \u2014 Question 2(b) \u2014 1 mark",
-        "marks": 1,
-        "question": "Question 2(b) \u2014 Estimate (1 mark). Using the scale on Figure 1, estimate how far north the centre of the forest is projected to move between 1990 and 2100.",
-        "markScheme": "The centre moves from about 37\u00b0N to about 42\u00b0N, about 5\u00b0 of latitude. The scale bar shows 500 km, equal to about 4.5\u00b0 of latitude. Award 1 mark for an estimate from 450 km to 650 km. Units (km) required. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
-        "images": [
-          {
-            "src": "/images/revision-ppq/sbl-practice/forest-biome-shift.svg",
-            "alt": "Two maps of a simplified eastern North America showing a temperate forest biome in 1990 and projected for 2100, further north",
-            "caption": "Figure 1: Projected change in a temperate forest biome, 1990 to 2100 (SBL practice map)"
-          }
-        ]
-      },
-      {
-        "label": "SBL practice \u2014 Question 2(c) \u2014 4 marks",
-        "marks": 4,
-        "question": "Question 2(c) \u2014 Explain (2+2 marks). Explain two reasons why climate change could cause a forest biome to shift polewards.",
-        "markScheme": "Mark each reason separately, up to 2 marks each: 1 for the reason and 1 for explaining it. Credit e.g. rising temperatures (1) mean the tree species\u2019 ideal temperature range moves to higher latitudes (1); more frequent droughts or heatwaves in the south (1) kill trees or stop seedlings surviving (1); longer growing seasons further north (1) allow trees to establish where it was too cold (1); pests and diseases spreading in warmer conditions (1) weaken trees at the southern edge (1); changes in rainfall patterns (1) make southern areas too dry (1). This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
-        "images": [
-          {
-            "src": "/images/revision-ppq/sbl-practice/forest-biome-shift.svg",
-            "alt": "Two maps of a simplified eastern North America showing a temperate forest biome in 1990 and projected for 2100, further north",
-            "caption": "Figure 1: Projected change in a temperate forest biome, 1990 to 2100 (SBL practice map)"
-          }
-        ]
-      },
-      {
-        "label": "SBL practice \u2014 Question 2(d) \u2014 3 marks",
-        "marks": 3,
-        "question": "Question 2(d) \u2014 Suggest (3 marks). Suggest three possible impacts of the shift shown in Figure 1 on people or ecosystems in the region.",
-        "markScheme": "Award 1 mark for each valid impact, max 3. Credit e.g. loss of timber or forestry jobs in the south; new forestry opportunities in the north; loss of habitat for species unable to move as fast as the climate changes; species migration and new competition in northern ecosystems; changes to tourism or recreation; increased fire risk where dying forest remains; reduced carbon storage during the transition; changes to water supply or soil protection. Each impact must be distinct. This is an SBL practice question with SBL practice data; the student can see the figure on the page.",
-        "images": [
-          {
-            "src": "/images/revision-ppq/sbl-practice/forest-biome-shift.svg",
-            "alt": "Two maps of a simplified eastern North America showing a temperate forest biome in 1990 and projected for 2100, further north",
-            "caption": "Figure 1: Projected change in a temperate forest biome, 1990 to 2100 (SBL practice map)"
-          }
-        ]
       }
     ]
   },
