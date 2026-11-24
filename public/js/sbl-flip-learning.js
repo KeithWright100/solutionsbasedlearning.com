@@ -2260,6 +2260,12 @@
       var o = {}; for (var k in q) o[k] = q[k];
       if (it.text) o.text = it.text; else if (it.fig) o.text = String(o.text).replace(/Use Figure [0-9a-z]+ in the Resource Booklet[^.]*\./i, "Use " + it.fig + ".");
       if (it.ms) o.ms = it.ms; if (it.label) o.label = it.label;
+      // Options may be stored as ["text", ...] with a number answer, or as [["A", "text"], ...] with a letter answer.
+      if (o.options && o.options.length && Array.isArray(o.options[0])) {
+        var letters = o.options.map(function (x) { return String(x[0]); });
+        o.options = o.options.map(function (x) { return x[1]; });
+        if (typeof o.answer === "string") o.answer = letters.indexOf(o.answer);
+      }
       return o;
     }).filter(Boolean);
   }
@@ -2843,7 +2849,7 @@
   });
   root.addEventListener("click", function (e) {
     var b = e.target.closest(".fl-opt"); if (!b) return;
-    var g = b.closest(".fl-mcq"), k = g.getAttribute("data-mk"), a = +g.getAttribute("data-a"), j = +b.getAttribute("data-j");
+    var g = b.closest(".fl-mcq"); if (!g) return; var k = g.getAttribute("data-mk"), a = +g.getAttribute("data-a"), j = +b.getAttribute("data-j");
     saved[k] = j;
     if (saved[k + "f"] == null) saved[k + "f"] = j;   /* first try: this is what counts for the mark book */
     try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}

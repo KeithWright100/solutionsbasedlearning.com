@@ -92,6 +92,12 @@
                 "href": "/igcse/geography/lessons/development-and-human-welfare/l07-italy-uneven-development",
                 "id": "IGL-DV07",
                 "n": 7
+              },
+              {
+                "label": "International strategies to reduce the development gap",
+                "href": "/igcse/geography/lessons/development-and-human-welfare/l08-reducing-the-development-gap",
+                "id": "IGL-DV08",
+                "n": 8
               }
             ]
           }
