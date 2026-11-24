@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memory Pairs — Geography Games — SBL</title>
+<meta name="description" content="Memory Pairs: turn over two cards at a time to match key terms with definitions, or diagrams with their names. IB Freshwater, IB Leisure and tourism, and Edexcel IGCSE Coasts and Hazards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#13284b; --muted:#5a6878; --teal:#0f766e; --bg:#eef4f8; color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif; }
+.top-bar { padding: 14px 16px; color: #fff; background: linear-gradient(135deg, #0b3b36, #0f766e); }
+.top-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.top-bar a { color: rgba(255,255,255,.88); font-size: .9rem; font-weight: 700; text-decoration: none; }
+.top-bar a:hover { color: #fff; text-decoration: underline; }
+.brand { font-weight: 900; } .brand span { color: #a7f3e4; }
+main { max-width: 1180px; margin: 0 auto; padding: 18px 16px 40px; }
+h1 { margin: 0 0 4px; font-size: 1.7rem; }
+.sub { margin: 0 0 16px; color: var(--muted); }
+.picker { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.pick { text-align: left; border: 2px solid #cfdde8; background: #fff; border-radius: 12px; padding: 10px 12px; cursor: pointer; font: inherit; color: inherit; }
+.pick:hover { border-color: var(--teal); }
+.pick[aria-pressed="true"] { border-color: var(--teal); background: #e3f5f1; }
+.pick small { display: block; color: var(--muted); font-size: .78rem; }
+.pick b { font-size: 1rem; }
+.pick .best { display: block; font-size: .78rem; color: var(--teal); margin-top: 2px; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 10px; }
+.bar h2 { margin: 0; font-size: 1.2rem; }
+.stats { font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card { position: relative; aspect-ratio: 3 / 2; perspective: 900px; border: 0; padding: 0; background: none; cursor: pointer; font: inherit; color: inherit; transition: opacity .45s, transform .45s; }
+.card .in { position: absolute; inset: 0; transition: transform .45s; transform-style: preserve-3d; }
+.card.up .in { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.back { background: linear-gradient(135deg, #0f766e, #2563eb); border: 2px solid #8fb8e8; }
+.back svg { width: 44%; height: auto; }
+.front { transform: rotateY(180deg); background: #fff; border: 2px solid #9fb6cc; padding: 8px 10px; text-align: center; font-size: clamp(.72rem, 1.25vw, .98rem); line-height: 1.25; }
+.front.term { font-weight: 700; font-size: clamp(.9rem, 1.7vw, 1.25rem); color: var(--teal); }
+.front.pic { padding: 4px; } .front.pic svg { width: 100%; height: 100%; }
+.card:focus-visible .face { outline: 3px solid #f59e0b; outline-offset: 2px; }
+.card.ok .front { border-color: #16a34a; box-shadow: 0 0 0 4px #bbf7d0; }
+.card.no .front { border-color: #dc2626; box-shadow: 0 0 0 4px #fecaca; }
+.card.gone { opacity: 0; transform: scale(.85); pointer-events: none; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+.btn { font: inherit; font-weight: 700; border: 0; border-radius: 10px; padding: 10px 18px; cursor: pointer; background: #d6ebee; color: #0b4f63; }
+.btn.main { background: var(--teal); color: #fff; }
+.done { display: none; margin-top: 18px; background: #fff; border-radius: 14px; border: 2px solid #16a34a; padding: 16px 18px; }
+.done.show { display: block; }
+.done h3 { margin: 0 0 6px; color: #15803d; }
+.review { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px; margin-top: 10px; }
+.rv { display: flex; gap: 10px; align-items: center; border: 1px solid #d5e1ea; border-radius: 10px; padding: 8px 10px; font-size: .92rem; }
+.rv b { color: var(--teal); min-width: 9em; }
+.rv svg { width: 120px; height: 78px; flex: none; }
+.note { font-size: .8rem; color: var(--muted); margin-top: 14px; text-align: center; }
+@media (max-width: 640px) { .board { gap: 7px; } .card { aspect-ratio: 1 / 1; } .front { font-size: .66rem; padding: 4px; } .front.term { font-size: .8rem; } }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="top-inner"><a href="/geography/games">&larr; All games</a><span class="brand">SBL <span>Memory Pairs</span></span></div></div>
+<main>
+  <h1>Memory Pairs</h1>
+  <p class="sub">Turn over two cards at a time. If they match, both disappear. If not, they turn back over, so remember where they were. Find all 8 pairs in as few moves as you can.</p>
+  <div class="picker" id="picker" role="group" aria-label="Choose a set of cards"></div>
+  <div class="bar"><h2 id="setTitle"></h2><span class="stats" id="stats"></span></div>
+  <div class="board" id="board"></div>
+  <div class="actions"><button type="button" class="btn" id="reset">Shuffle and restart</button></div>
+  <section class="done" id="done" aria-live="polite"></section>
+  <p class="note">Diagrams are drawn for SBL. Definitions are written in our own words.</p>
+</main>
+<script>
+(function () {
+// Original line diagrams, viewBox 0 0 200 130.
+var W='#4a90d9',WL='#a9d0f5',L='#8fbf6a',S='#d9b77a',R='#a08770',R2='#c8b49a',K='#33475b';
+function sv(b){return '<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" stroke-linecap="round">'+b+'</svg>';}
+var D={
+// ---- IB Freshwater ----
+waterfall: sv('<path d="M0 40h95v90H0z" fill="'+R+'"/><path d="M0 40h95v14H0z" fill="#6e5a48"/><path d="M95 54h0v76h105V95c-20 0-30-4-45-4s-25-10-30-25" fill="'+R2+'"/><path d="M95 54c0-8-3-14-3-14H0v-6h96c4 0 6 8 6 20" fill="'+W+'"/><path d="M98 54c2 20 6 32 10 40" stroke="'+W+'" stroke-width="6" fill="none"/><ellipse cx="112" cy="98" rx="18" ry="6" fill="'+W+'"/><path d="M130 96h70" stroke="'+W+'" stroke-width="5"/><path d="M80 54l15 0" stroke="#fff" stroke-dasharray="3 3"/>'),
+meander: sv('<rect width="200" height="130" fill="'+L+'"/><path d="M-5 30C40 30 50 100 95 100S150 30 205 30" fill="none" stroke="'+W+'" stroke-width="14"/><path d="M45 72l-6-4M150 58l6-4" stroke="'+S+'" stroke-width="6"/>'),
+oxbow: sv('<rect width="200" height="130" fill="'+L+'"/><path d="M-5 40h210" stroke="'+W+'" stroke-width="12"/><path d="M60 52c-10 30 10 60 40 60s50-30 40-60" fill="none" stroke="'+W+'" stroke-width="12"/><path d="M62 46l12 0M126 46l12 0" stroke="'+S+'" stroke-width="7"/>'),
+levee: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 90h40c10 0 15-22 28-22s12 22 22 22c0 18 40 18 40 0 10 0 10-22 22-22s18 22 28 22h20v40H0z" fill="'+S+'"/><path d="M90 90c0 18 40 18 40 0z" fill="'+W+'"/><path d="M0 104h200v26H0z" fill="'+R+'" opacity=".6"/><path d="M0 90h40M160 90h40" stroke="'+L+'" stroke-width="4"/>'),
+delta: sv('<rect width="200" height="130" fill="'+W+'"/><path d="M70 0h60c0 30 40 50 60 110H10C30 50 70 30 70 0z" fill="'+S+'"/><path d="M100 0v40M100 40c-10 20-30 40-50 70M100 40c0 30 0 50 5 70M100 40c15 20 35 40 55 70M75 80c-8 10-20 20-30 30" stroke="'+W+'" stroke-width="5" fill="none"/>'),
+hydrograph: sv('<path d="M25 10v100h165" stroke="'+K+'" stroke-width="2" fill="none"/><rect x="40" y="20" width="10" height="30" fill="'+W+'"/><rect x="52" y="20" width="10" height="45" fill="'+W+'"/><rect x="64" y="20" width="10" height="20" fill="'+W+'"/><path d="M28 95h40c15 0 20-62 40-62s30 55 80 58" stroke="#d8312b" stroke-width="3" fill="none"/><path d="M28 97h80c20 0 40-4 80-4" stroke="'+K+'" stroke-dasharray="4 3" fill="none"/><path d="M57 14h51" stroke="'+K+'" stroke-width="1.5"/><path d="M57 10v8M108 10v8" stroke="'+K+'"/>'),
+basin: sv('<rect width="200" height="130" fill="#f7f2e7"/><path d="M20 20c40-15 120-15 160 5 10 30-30 80-75 100C60 100 10 60 20 20z" fill="'+L+'" stroke="'+K+'" stroke-width="2.5" stroke-dasharray="6 4"/><path d="M105 125c0-25-5-50-30-80M100 80c20-10 40-30 55-45M90 60c-20-5-35-15-45-30" stroke="'+W+'" stroke-width="3.5" fill="none"/><circle cx="105" cy="122" r="4" fill="'+K+'"/>'),
+aquifer: sv('<rect width="200" height="45" fill="#e8f3fb"/><path d="M0 45h200v20H0z" fill="#9b7b5a"/><path d="M0 65h200v35H0z" fill="#e3cf9e"/><path d="M0 72h200v28H0z" fill="'+WL+'" opacity=".8"/><path d="M0 100h200v30H0z" fill="#6b5a4c"/><path d="M0 72h200" stroke="'+W+'" stroke-width="2" stroke-dasharray="6 4"/><path d="M150 20v62" stroke="'+K+'" stroke-width="4"/><path d="M142 20h16" stroke="'+K+'" stroke-width="4"/><path d="M30 30l6 10M45 25l6 10M60 30l6 10" stroke="'+W+'" stroke-width="2"/>'),
+// ---- IGCSE Coasts ----
+arch: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 95h200v35H0z" fill="'+W+'"/><path d="M20 95V45c0-10 10-15 30-15h80c20 0 30 5 30 15v50h-35V75c0-15-10-25-35-25S75 60 75 75v20z" fill="'+R+'"/>'),
+stack: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 95h200v35H0z" fill="'+W+'"/><path d="M0 95V30h50l10 65z" fill="'+R+'"/><path d="M110 95l5-55c0-6 25-6 25 0l5 55z" fill="'+R+'"/><path d="M165 95l3-15h10l3 15z" fill="'+R+'"/>'),
+spit: sv('<rect width="200" height="130" fill="'+W+'"/><path d="M0 0h70c-5 30 0 50 10 60 20 15 60 20 100 22 15 1 15 10 0 12-30 2-60 2-80-4C70 85 40 70 0 70z" fill="'+S+'"/><path d="M0 0h60C55 30 40 55 0 62z" fill="'+L+'"/><path d="M175 82c10-2 15 10 8 18" stroke="'+S+'" stroke-width="6" fill="none"/><path d="M40 105h60" stroke="#fff" stroke-width="3"/><path d="M96 99l8 6-8 6" stroke="#fff" stroke-width="3" fill="none"/>'),
+platform: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 20h90v55c0 4-6 6-6 10v10h116v35H0z" fill="'+R+'"/><path d="M84 85c-4 0-8 4-8 4" stroke="#6e5a48" stroke-width="3" fill="none"/><path d="M84 95h116v6H84z" fill="#8a7460"/><path d="M84 92h116" stroke="'+W+'" stroke-width="10" opacity=".85"/><path d="M84 88h116" stroke="'+WL+'" stroke-width="2" stroke-dasharray="5 4"/>'),
+headland: sv('<rect width="200" height="130" fill="'+W+'"/><path d="M0 0h200v40c-20 0-25 20-35 45-6 15-20 15-26 0-8-20-10-40-40-40s-30 20-38 40c-6 15-20 15-26 0C25 60 20 40 0 40z" fill="'+L+'"/><path d="M0 40c20 0 25 20 35 45 6 15 20 15 26 0 8-20 8-40 38-40s32 20 40 40c6 15 20 15 26 0 10-25 15-45 35-45" stroke="'+S+'" stroke-width="4" fill="none"/>'),
+groynes: sv('<rect width="200" height="130" fill="'+W+'"/><path d="M0 0h200v60H0z" fill="'+S+'"/><path d="M0 0h200v25H0z" fill="'+L+'"/><path d="M30 40l40 8v12M90 40l40 8v12M150 40l40 8v12" fill="'+S+'"/><path d="M40 35v55M100 35v55M160 35v55" stroke="#6e4a2a" stroke-width="6"/><path d="M60 105h60" stroke="#fff" stroke-width="3"/><path d="M116 99l8 6-8 6" stroke="#fff" stroke-width="3" fill="none"/>'),
+seawall: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 50h90v80H0z" fill="'+L+'"/><path d="M0 50h80v80H0z" fill="#a8956f"/><path d="M80 40h22c-8 10-10 30-6 60v30H80z" fill="#9aa3ab"/><path d="M98 40c-8-6-18-6-22 2" stroke="#9aa3ab" stroke-width="6" fill="none"/><path d="M102 100h98v30h-98z" fill="'+W+'"/><path d="M110 92c10-25 30-30 45-18" stroke="'+W+'" stroke-width="5" fill="none"/>'),
+lsd: sv('<rect width="200" height="130" fill="'+W+'"/><path d="M0 0h200v55H0z" fill="'+S+'"/><path d="M25 52l20-28 12 28 20-28 12 28 20-28 12 28 20-28 12 28" stroke="'+K+'" stroke-width="2.5" fill="none"/><path d="M165 52l8-6v9z" fill="'+K+'"/><path d="M30 110l30-40M80 110l30-40M130 110l30-40" stroke="#fff" stroke-width="3"/><path d="M152 76l8-6 0 10z" fill="#fff"/><text x="28" y="124" font-size="12" font-weight="700" fill="#fff" font-family="Arial">prevailing wind &#8599;</text>'),
+// ---- IGCSE Hazards ----
+destructive: sv('<rect width="200" height="45" fill="#e8f3fb"/><path d="M0 45h100l40 85H0z" fill="#b5a28a"/><path d="M0 45h100v8H0z" fill="#9c8a70"/><path d="M100 45h100v14H100z" fill="#7f8c9a"/><path d="M100 45h100v-8h-100z" fill="'+W+'"/><path d="M100 59l40 71h20l-40-71z" fill="#7f8c9a"/><path d="M60 45l12-28 12 28z" fill="'+R+'"/><path d="M72 18l2-8" stroke="#d8312b" stroke-width="3"/><path d="M80 60c10 0 20 0 32 10" stroke="#d8312b" stroke-width="3" fill="none"/><path d="M175 52h-25M155 47l-6 5 6 5" stroke="'+K+'" stroke-width="2" fill="none"/>'),
+constructive: sv('<rect width="200" height="45" fill="#e8f3fb"/><path d="M0 45h200v85H0z" fill="#e7a25a" opacity=".5"/><path d="M0 45h95v18H0zM105 45h95v18h-95z" fill="#7f8c9a"/><path d="M0 37h200v8H0z" fill="'+W+'"/><path d="M100 120V45" stroke="#d8312b" stroke-width="5"/><path d="M88 37l12-14 12 14z" fill="'+R+'"/><path d="M60 55H25M30 50l-6 5 6 5M140 55h35M170 50l6 5-6 5" stroke="'+K+'" stroke-width="2" fill="none"/><path d="M100 120c-30 0-50-20-60-40M100 120c30 0 50-20 60-40" stroke="#d8312b" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>'),
+conservative: sv('<rect width="200" height="130" fill="#d9cdb5"/><path d="M100 0v130" stroke="'+K+'" stroke-width="3" stroke-dasharray="8 5"/><path d="M40 20h0" /><path d="M0 60h100M100 75h100" stroke="#555" stroke-width="5"/><path d="M60 35V95M50 85l10 10 10-10" stroke="'+K+'" stroke-width="3" fill="none"/><path d="M140 95V35M130 45l10-10 10 10" stroke="'+K+'" stroke-width="3" fill="none"/>'),
+collision: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 130V80h60l40-55 40 55h60v50z" fill="#b5a28a"/><path d="M85 45l15-20 15 20-8-3-7 6-7-6z" fill="#fff"/><path d="M40 100h30M64 95l6 5-6 5M160 100h-30M136 95l-6 5 6 5" stroke="'+K+'" stroke-width="2.5" fill="none"/><path d="M100 80v50" stroke="'+K+'" stroke-dasharray="4 3"/>'),
+composite: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M15 120l75-95h20l75 95z" fill="'+R+'"/><path d="M40 100l55-70M160 100l-55-70M60 110l40-55 40 55" stroke="#6e5a48" stroke-width="2" fill="none"/><path d="M100 120V28" stroke="#d8312b" stroke-width="5"/><ellipse cx="100" cy="126" rx="25" ry="5" fill="#d8312b"/><path d="M95 22c-10-15 15-15 5-22M105 20c8-10-2-14 8-20" stroke="#888" stroke-width="5" fill="none"/>'),
+shield: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 120c40-10 70-55 95-60h10c25 5 55 50 95 60z" fill="#6e5a48"/><path d="M100 120V62" stroke="#d8312b" stroke-width="4"/><path d="M104 62c20 8 40 30 55 50" stroke="#e86a2e" stroke-width="4" fill="none"/><path d="M96 62c-20 8-40 30-55 50" stroke="#e86a2e" stroke-width="4" fill="none"/><ellipse cx="100" cy="125" rx="30" ry="5" fill="#d8312b"/>'),
+cyclone: sv('<rect width="200" height="130" fill="#e8f3fb"/><path d="M0 120h200v10H0z" fill="'+W+'"/><path d="M90 30c-30-15-60-10-85 0l10 80h75zM110 30c30-15 60-10 85 0l-10 80h-75z" fill="#b8c4d0"/><path d="M90 110V30M110 110V30" stroke="'+K+'" stroke-width="1"/><path d="M70 100c-5-25-5-50 10-60M130 100c5-25 5-50-10-60" stroke="#fff" stroke-width="2.5" fill="none"/><path d="M80 40l-4 4M120 40l4 4" stroke="#fff" stroke-width="2.5"/><path d="M100 115V40" stroke="'+K+'" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M15 115h50M58 110l7 5-7 5M185 115h-50M142 110l-7 5 7 5" stroke="'+K+'" stroke-width="2" fill="none"/>'),
+layers: sv('<rect width="200" height="130" fill="#fff"/><circle cx="100" cy="65" r="60" fill="#8a7460"/><circle cx="100" cy="65" r="54" fill="#e86a2e"/><circle cx="100" cy="65" r="30" fill="#f2b134"/><circle cx="100" cy="65" r="14" fill="#f7e06a"/><path d="M100 65L160 5v120z" fill="#fff"/>')
+};
+
+  var GLOBE = '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="#bfe3ff" stroke="#fff" stroke-width="3"/><path d="M18 20c6 2 8 8 14 8s6 6 2 10-2 10-6 12M40 12c-2 6 4 8 8 10s4 8 8 8M10 36c6 0 10 4 12 10" fill="none" stroke="#2f9e6a" stroke-width="5" stroke-linecap="round"/><path d="M6 32h52M32 6c10 8 10 44 0 52M32 6c-10 8-10 44 0 52" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/></svg>';
+  var SETS = [{"id": "fw-terms", "group": "IB Geography · Option A Freshwater", "title": "Freshwater key terms", "kind": "terms", "pairs": [["Interception", "Rain caught by leaves and plants before it reaches the ground."], ["Infiltration", "Water soaking down into the soil from the surface."], ["Throughflow", "Water moving sideways through the soil towards a river."], ["Groundwater flow", "Very slow movement of water through rock below the water table."], ["Lag time", "The time between peak rainfall and peak discharge."], ["Discharge", "The volume of water passing a point in a river each second (cumecs)."], ["Hydraulic action", "The force of water pushing air into cracks in the bed and banks, breaking them apart."], ["Eutrophication", "Extra nutrients in water cause algae to grow, which uses up oxygen and harms life."]]}, {"id": "fw-diagrams", "group": "IB Geography · Option A Freshwater", "title": "Freshwater diagrams", "kind": "diagrams", "pairs": [["Waterfall", "waterfall"], ["Meander", "meander"], ["Ox-bow lake", "oxbow"], ["Levee", "levee"], ["Delta", "delta"], ["Storm hydrograph", "hydrograph"], ["Drainage basin and watershed", "basin"], ["Aquifer", "aquifer"]]}, {"id": "lt-terms", "group": "IB Geography · Option E Leisure, tourism and sport", "title": "Leisure and tourism key terms", "kind": "terms", "pairs": [["Leisure", "Any freely chosen activity done in a person’s free time, away from work and other duties."], ["Tourism", "Travelling away from home for at least one night, for leisure or business."], ["Primary tourist resource", "A natural or cultural feature that attracts visitors in the first place, such as a beach or an old city."], ["Secondary tourist resource", "Facilities built to serve visitors, such as hotels, restaurants and transport."], ["Carrying capacity", "The largest number of visitors a place can take before the environment or the visitor experience is damaged."], ["Pleasure periphery", "Tourist destinations spreading further and further out from the rich countries where most tourists live."], ["Multiplier effect", "Tourist spending creates jobs and income that are spent again, so more money flows round the local economy."], ["Economic leakage", "Tourist money that leaves the destination, for example to foreign-owned hotels or for imported food."]]}, {"id": "co-terms", "group": "Edexcel IGCSE · Coastal environments", "title": "Coasts key terms", "kind": "terms", "pairs": [["Fetch", "The distance of open water the wind blows over to form a wave."], ["Longshore drift", "The zig-zag movement of sediment along a beach, in the direction of the prevailing wind."], ["Abrasion", "Rocks thrown by waves scrape and wear away the cliff."], ["Attrition", "Pebbles knock into each other and become smaller and rounder."], ["Constructive wave", "A low, gentle wave with a strong swash that builds up the beach."], ["Destructive wave", "A tall, frequent wave with a strong backwash that removes material from the beach."], ["Freeze-thaw weathering", "Water in a crack freezes, expands and widens the crack until the rock breaks."], ["Managed retreat", "Allowing the sea to flood low-value land, so a new natural defence such as a salt marsh forms."]]}, {"id": "co-diagrams", "group": "Edexcel IGCSE · Coastal environments", "title": "Coasts diagrams", "kind": "diagrams", "pairs": [["Arch", "arch"], ["Stack and stump", "stack"], ["Spit", "spit"], ["Wave-cut notch and platform", "platform"], ["Headlands and bays", "headland"], ["Groynes", "groynes"], ["Sea wall", "seawall"], ["Longshore drift", "lsd"]]}, {"id": "hz-terms", "group": "Edexcel IGCSE · Hazardous environments", "title": "Hazards key terms", "kind": "terms", "pairs": [["Convection currents", "Heat from the core makes the mantle rise and sink slowly, dragging the plates."], ["Subduction", "The denser oceanic plate sinks under another plate and melts."], ["Hotspot", "A plume of magma rising through the middle of a plate, as at Hawaii."], ["Focus", "The point underground where an earthquake starts."], ["Epicentre", "The point on the surface directly above the earthquake’s focus."], ["Storm surge", "Sea level is raised by low pressure and strong winds pushing water onto the coast."], ["Eye", "The calm, cloud-free centre of a tropical cyclone, with sinking air."], ["Coriolis effect", "The Earth’s rotation deflects moving air, making storms spin."]]}, {"id": "hz-diagrams", "group": "Edexcel IGCSE · Hazardous environments", "title": "Hazards diagrams", "kind": "diagrams", "pairs": [["Destructive (convergent) plate boundary", "destructive"], ["Constructive (divergent) plate boundary", "constructive"], ["Conservative plate boundary", "conservative"], ["Collision plate boundary", "collision"], ["Composite volcano", "composite"], ["Shield volcano", "shield"], ["Tropical cyclone cross-section", "cyclone"], ["Structure of the Earth", "layers"]]}];
+  var KEY = 'sbl-memory-pairs-best';
+  var best = {}; try { best = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var set, cards, open, moves, found, busy, t0;
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function drawPicker() {
+    $('picker').innerHTML = SETS.map(function (s, i) {
+      return '<button type="button" class="pick" data-i="' + i + '" aria-pressed="' + (set === s) + '"><small>' + esc(s.group) + '</small><b>' + esc(s.title) + '</b>' +
+        (best[s.id] ? '<span class="best">Best: ' + best[s.id] + ' moves</span>' : '') + '</button>';
+    }).join('');
+  }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function start(s) {
+    set = s; open = []; moves = 0; found = 0; busy = false; t0 = Date.now();
+    try { history.replaceState(null, '', '#' + s.id); } catch (e) {}
+    cards = [];
+    s.pairs.forEach(function (p, i) {
+      cards.push({ pair: i, html: p[0], cls: 'term', label: p[0] });
+      cards.push(s.kind === 'diagrams' ? { pair: i, html: D[p[1]], cls: 'pic', label: 'Diagram' } : { pair: i, html: esc(p[1]), cls: '', label: p[1] });
+    });
+    shuffle(cards);
+    $('board').innerHTML = cards.map(function (c, i) {
+      return '<button type="button" class="card" data-i="' + i + '" aria-label="Card ' + (i + 1) + ', face down"><span class="in"><span class="face back">' + GLOBE + '</span><span class="face front ' + c.cls + '">' + (c.cls === 'term' ? esc(c.html) : c.html) + '</span></span></button>';
+    }).join('');
+    $('setTitle').textContent = s.title;
+    $('done').className = 'done'; $('done').innerHTML = '';
+    drawPicker(); stats();
+  }
+  function stats() { $('stats').textContent = found + '/8 pairs · ' + moves + ' moves'; }
+  function el(i) { return $('board').querySelector('[data-i="' + i + '"]'); }
+  function flip(i) {
+    if (busy || open.indexOf(i) > -1) return;
+    var b = el(i); if (!b || b.classList.contains('gone')) return;
+    b.classList.add('up'); b.setAttribute('aria-label', 'Card ' + (i + 1) + ': ' + cards[i].label);
+    open.push(i);
+    if (open.length < 2) return;
+    moves++; busy = true;
+    var a = open[0], c = open[1], ok = cards[a].pair === cards[c].pair;
+    el(a).classList.add(ok ? 'ok' : 'no'); el(c).classList.add(ok ? 'ok' : 'no');
+    setTimeout(function () {
+      [a, c].forEach(function (k) {
+        var e = el(k); e.classList.remove('ok', 'no');
+        if (ok) { e.classList.add('gone'); e.setAttribute('aria-hidden', 'true'); e.tabIndex = -1; }
+        else { e.classList.remove('up'); e.setAttribute('aria-label', 'Card ' + (k + 1) + ', face down'); }
+      });
+      if (ok) found++;
+      open = []; busy = false; stats();
+      if (found === 8) finish();
+    }, ok ? 900 : 1300);
+    stats();
+  }
+  function finish() {
+    var secs = Math.round((Date.now() - t0) / 1000), prev = best[set.id], rec = !prev || moves < prev;
+    if (rec) { best[set.id] = moves; try { localStorage.setItem(KEY, JSON.stringify(best)); } catch (e) {} }
+    var rv = set.pairs.map(function (p) {
+      return '<div class="rv"><b>' + esc(p[0]) + '</b>' + (set.kind === 'diagrams' ? D[p[1]] : '<span>' + esc(p[1]) + '</span>') + '</div>';
+    }).join('');
+    $('done').innerHTML = '<h3>All 8 pairs found!</h3><p>' + moves + ' moves in ' + Math.floor(secs / 60) + ' min ' + (secs % 60) + ' s. ' +
+      (rec ? (prev ? 'New best on this device (was ' + prev + ').' : 'That is your best so far on this device.') : 'Your best is ' + prev + ' moves. 8 moves is a perfect game.') +
+      '</p><p><b>Review the pairs</b>, then copy any you found tricky into your notes.</p><div class="review">' + rv + '</div><div class="actions"><button type="button" class="btn main" id="again">Play again</button></div>';
+    $('done').className = 'done show'; drawPicker();
+    $('again').onclick = function () { start(set); window.scrollTo({ top: $('board').offsetTop - 80, behavior: 'smooth' }); };
+  }
+  $('board').addEventListener('click', function (e) { var b = e.target.closest('.card'); if (b) flip(+b.dataset.i); });
+  $('picker').addEventListener('click', function (e) { var b = e.target.closest('.pick'); if (b) start(SETS[+b.dataset.i]); });
+  $('reset').onclick = function () { start(set); };
+  var h = location.hash.slice(1), first = SETS.filter(function (s) { return s.id === h; })[0] || SETS[0];
+  start(first);
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/sbl-feedback-widget.js"></script>
+</body>
+</html>

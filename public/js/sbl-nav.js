@@ -173,6 +173,7 @@
           ['All KS3 games', '/geography/games#ks3']] },
         { title: 'IGCSE', href: '/geography/games#igcse', items: [
           ['Travel the Wright Way (IGCSE / IB)', '/geography/games/travel-the-wright-way-advanced', 'new'],
+          ['Memory Pairs: Coasts and Hazards', '/geography/games/memory-pairs#co-terms', 'new'],
           ['Coastal Quest', '/geography/games/igcse-coastal-quest'],
           ['Hazard Quest', '/geography/games/igcse-hazard-quest'],
           ['Rural Quest', '/geography/games/igcse-rural-quest'],
@@ -183,6 +184,7 @@
           ['Market Shock', '/geography/games/market-shock'],
           ['Central Bank Challenge', '/geography/games/central-bank-challenge']] },
         { title: 'IB Diploma', href: '/geography/games#ib', items: [
+          ['Memory Pairs: Freshwater and Leisure', '/geography/games/memory-pairs#fw-terms', 'new'],
           ['Population Quest', '/geography/games/ib-population-quest'],
           ['Climate Quest', '/geography/games/ib-climate-quest'],
           ['Resource Quest', '/geography/games/ib-resource-quest'],
