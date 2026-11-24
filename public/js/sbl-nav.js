@@ -64,6 +64,7 @@
       all: ['IGCSE subject menu', '/igcse/menu'],
       cols: [
         { title: 'IGCSE Geography', href: '/igcse/geography/learn', blurb: 'Five topics and fieldwork, with lessons, quizzes and past papers.', items: [
+          ['Classroom lessons', '/igcse/geography/lessons', 'new'],
           ['Full revision lessons', '/igcse/geography/learn'],
           ['IGCSE Revision games', '/geography/games#igcse-rev'],
           ['Revise by topic bots', '/igcse/geography/revision/topics'],

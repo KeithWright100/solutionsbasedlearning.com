@@ -2026,6 +2026,8 @@
     ".fl-rev__lock{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}.fl-rev__in{padding:.45rem .6rem;border:1px solid var(--lh-border);border-radius:8px;font:inherit;width:12rem}.fl-rev__body{border:1px dashed #6b2fa3;border-radius:10px;padding:.8rem 1rem;background:#faf6ff;font-size:.93rem;line-height:1.55}.fl-rev__body p{margin:0 0 .6rem}" +
     ".fl-ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem}.fl-ig a{display:block;text-decoration:none;color:#13284b;font-weight:700;font-size:.9rem}.fl-ig img{width:100%;height:auto;display:block;border:1px solid var(--lh-border);border-radius:8px;margin-bottom:.3rem;box-shadow:0 2px 8px rgba(0,0,0,.08)}.fl-g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:.7rem}.fl-g2 svg{border:1px solid var(--lh-border);border-radius:8px}" +
     ".fl-wf{display:grid;gap:.6rem}.fl-wf__q{background:#13284b;color:#fff;border-radius:12px;padding:.8rem 1rem;font-weight:700;font-size:1.02rem}.fl-wf__q span{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#7fd3d3;margin-bottom:.2rem}.fl-wf__s{display:grid;grid-template-columns:3rem 1fr;gap:.8rem;border:1px solid var(--lh-border);border-left:6px solid var(--c);border-radius:12px;padding:.8rem;background:#fff}.fl-wf__n{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:800 1.1rem var(--lh-font-display)}.fl-wf__s b{font-size:1.02rem;color:var(--c)}.fl-wf__chips{display:flex;flex-wrap:wrap;gap:.3rem;margin:.35rem 0}.fl-wf__chips i{font-style:normal;font-size:.78rem;padding:.15rem .55rem;border-radius:99px;background:#f1f4f7}.fl-wf__st{margin:.3rem 0 0;padding:.5rem .7rem;background:#f8fafc;border-radius:8px;font-style:italic;font-size:.9rem;line-height:1.5}ul.fl-wf__st{padding-left:1.6rem}" +
+    ".fl-ppq__q{border:1px solid var(--lh-border);border-radius:12px;padding:.8rem .9rem;margin:.6rem 0;background:#fff}.fl-ppq__meta{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.35rem}.fl-ppq__chip{font-size:.74rem;font-weight:700;padding:.12rem .5rem;border-radius:99px;background:#eef2ff;color:#3730a3}.fl-ppq__chip--m{background:#fef3c7;color:#92400e}.fl-ppq__chip--ok{background:#dcfce7;color:#166534}.fl-ppq__res{margin-top:.6rem;border-left:4px solid #6b2fa3;background:#faf5ff;border-radius:8px;padding:.6rem .8rem}.fl-ppq__score{font-weight:800;font-size:1.15rem;color:#6b2fa3}.fl-ppq__res p{margin:.35rem 0}.fl-ppq__ms{margin-top:.5rem;background:#f8fafc;border:1px dashed #94a3b8;border-radius:8px;padding:.5rem .7rem;font-size:.92rem}" +
+    ".fl-board{position:relative;width:100%;max-width:820px;margin:.5rem 0;touch-action:none;user-select:none}.fl-board__bg svg{width:100%;height:auto;display:block}.fl-chip{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;text-align:center;background:#fff;border:2px solid #6b2fa3;color:#13284b;border-radius:10px;font-size:clamp(.62rem,1.35vw,.86rem);font-weight:700;line-height:1.15;padding:.2rem .3rem;cursor:grab;box-shadow:0 2px 6px rgba(0,0,0,.15);box-sizing:border-box}.fl-chip:focus-visible{outline:3px solid #f59e0b}.fl-chip.is-drag{cursor:grabbing;z-index:5;box-shadow:0 8px 18px rgba(0,0,0,.25)}.fl-chip--dot{border-radius:50%;background:#6b2fa3;color:#fff;font-size:clamp(.8rem,1.8vw,1.05rem)}.fl-board__key{columns:2 260px;margin:.4rem 0;padding:0;list-style:none;font-size:.93rem}.fl-board__key li{margin:.15rem 0;break-inside:avoid}.fl-board__key b{display:inline-block;min-width:1.6em;color:#6b2fa3}" +
     ".fl-loc svg{width:100%;max-width:760px;height:auto;display:block;border:1px solid var(--lh-border);border-radius:10px}.fl-clue{border:1px solid var(--lh-border);border-radius:10px;margin:.35rem 0;background:#fff}.fl-clue>summary{cursor:pointer;padding:.55rem .8rem;font-weight:700;color:#1f5e85}.fl-clue>p{margin:0;padding:0 .8rem .7rem}" +
     ".fl-gis{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-gis__ctl{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:.6rem}.fl-gis__ctl label{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;font-weight:600}.fl-gis__ctl select{padding:.4rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit;min-width:14rem}.fl-gis__map svg{width:100%;height:auto;display:block}.fl-gis__c{cursor:pointer}.fl-gis__c:hover{stroke:#13324a;stroke-width:1.2}.fl-gis__info{min-height:2.6rem;margin:.5rem 0;padding:.5rem .7rem;background:#f4f8fb;border-radius:8px;font-size:.88rem;display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:center}.fl-gis__legend{display:grid;gap:.4rem;font-size:.8rem}.fl-gis__legend div{display:flex;flex-wrap:wrap;gap:.3rem .8rem;align-items:center}.fl-gis__legend span{display:inline-flex;align-items:center;gap:.3rem}.fl-gis__legend i{display:inline-block;width:16px;height:12px;border-radius:2px}" +
     ".fl-sin{border:1px solid var(--lh-border);border-radius:10px;padding:.8rem;background:#fff}.fl-sin__in{display:flex;flex-wrap:wrap;gap:1rem}.fl-sin__in label{font-size:.9rem;font-weight:600;display:flex;flex-direction:column;gap:.25rem}.fl-sin__in input{width:9rem;padding:.35rem .5rem;border:1px solid var(--lh-border);border-radius:6px;font:inherit}.fl-sin__out{font-size:1rem;margin:.6rem 0 .2rem;color:#13324a}" +
@@ -2195,6 +2197,7 @@
       svg += '<path d="' + path(d3.geoGraticule().step([10, 10])()) + '" fill="none" stroke="#b5d3e6" stroke-width=".7"/>';
       fc.features.forEach(function (f) { var on = hi.indexOf(String(+f.id)) >= 0; svg += '<path d="' + path(f) + '" fill="' + (on ? "#f6c76b" : "#eef0e6") + '" stroke="#8a8f80" stroke-width=".7"/>'; });
       if (part.lines) { if (part.lines.lat != null) svg += '<path d="' + path({ type: "LineString", coordinates: [[-180, part.lines.lat], [-90, part.lines.lat], [0, part.lines.lat], [90, part.lines.lat], [180, part.lines.lat]] }) + '" fill="none" stroke="#b42318" stroke-width="2"/>'; if (part.lines.lon != null) svg += '<path d="' + path({ type: "LineString", coordinates: [[part.lines.lon, -85], [part.lines.lon, 0], [part.lines.lon, 85]] }) + '" fill="none" stroke="#b42318" stroke-width="2"/>'; }
+      (part.paths || []).forEach(function (pl) { svg += '<path d="' + path({ type: "LineString", coordinates: pl.coords }) + '" fill="none" stroke="' + (pl.color || "#1f5e85") + '" stroke-width="' + (pl.width || 4) + '"' + (pl.dash ? ' stroke-dasharray="' + pl.dash + '"' : "") + ' stroke-linecap="round"/>'; });
       (part.labels || []).forEach(function (l) { var p = proj([l.lon, l.lat]); svg += '<text x="' + p[0].toFixed(1) + '" y="' + p[1].toFixed(1) + '" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="' + (l.sea ? 13 : 12.5) + '" ' + (l.sea ? 'font-style="italic" fill="#2f6f99"' : 'font-weight="700" fill="#4a4a3a"') + ">" + esc(l.t) + "</text>"; });
       (part.points || []).forEach(function (pt) { var p = proj([pt.lon, pt.lat]); svg += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="6" fill="#b42318" stroke="#fff" stroke-width="2"/><text x="' + (p[0] + 10).toFixed(1) + '" y="' + (p[1] + 5).toFixed(1) + '" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="800" fill="#7a1d12" stroke="#fff" stroke-width="3" paint-order="stroke">' + esc(pt.t) + "</text>"; });
       svg += '</g><g transform="translate(' + (W - 40) + ',40)" font-family="Inter,Arial,sans-serif"><circle r="20" fill="#fff" fill-opacity=".85"/><path d="M0 -15 L6 4 L0 0 L-6 4 Z" fill="#13324a"/><text y="15" text-anchor="middle" font-size="11" font-weight="700">N</text></g>';
@@ -2228,6 +2231,52 @@
     }).catch(function () {
       mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use an atlas instead: find each river and note which continent and countries it flows through.</p>';
     });
+  }
+
+  /* Self-marking past paper questions inside a lesson. The questions and SBL mark schemes live in a
+     login-protected data file (the same one the IGCSE past paper pages use); written answers are marked
+     by the SBL PPQ Marker through /api/mark-ppq, and each mark is saved to the student's account so it
+     shows in the PPQ column of the teacher Class Sheet. */
+  var PPQ_DATA = {};
+  function loadPPQ(src) {
+    if (PPQ_DATA[src]) return Promise.resolve(PPQ_DATA[src]);
+    return new Promise(function (res, rej) {
+      var prev = window.SBL_IGCSE_PPQ, sc = document.createElement("script"); sc.src = src;
+      sc.onload = function () { PPQ_DATA[src] = window.SBL_IGCSE_PPQ; window.SBL_IGCSE_PPQ = prev; PPQ_DATA[src] ? res(PPQ_DATA[src]) : rej(); };
+      sc.onerror = function () { rej(); }; document.head.appendChild(sc);
+    });
+  }
+  function ppqItems(part, D) {
+    return part.items.map(function (it) {
+      var q = D && D.parts.filter(function (x) { return x.key === it.key; })[0];
+      if (!q) return null;
+      var o = {}; for (var k in q) o[k] = q[k];
+      if (it.text) o.text = it.text; else if (it.fig) o.text = String(o.text).replace(/Use Figure [0-9a-z]+ in the Resource Booklet[^.]*\./i, "Use " + it.fig + ".");
+      if (it.ms) o.ms = it.ms; if (it.label) o.label = it.label;
+      return o;
+    }).filter(Boolean);
+  }
+  function boardPos(p, i) {
+    var t = p.tray || [2, 80, 96, 18], cols = p.trayCols || 5, r = Math.floor(i / cols), c = i % cols, rows = Math.ceil(p.items.length / cols);
+    return [+(t[0] + (c + 0.5) * t[2] / cols).toFixed(2), +(t[1] + (r + 0.5) * t[3] / rows).toFixed(2)];
+  }
+  function boardReport(p, savedObj) {
+    var vb = p.vb || [800, 600], out = [];
+    p.items.forEach(function (t, i) {
+      var v = savedObj[p.id + "_" + i], xy = v ? v.split(",").map(Number) : boardPos(p, i), name = (p.dots ? "abcdefghijklmnop".charAt(i) + ") " : "") + t;
+      if (p.slots) {
+        var best = -1; p.slots.forEach(function (sl, k) { if (Math.abs(sl[0] - xy[0]) < 0.5 && Math.abs(sl[1] - xy[1]) < 0.5) best = k; });
+        out.push({ k: best, t: name });
+      } else if (p.circles) {
+        var X = xy[0] / 100 * vb[0], Y = xy[1] / 100 * vb[1], ins = p.circles.filter(function (cc) { return Math.pow(X - cc.cx, 2) + Math.pow(Y - cc.cy, 2) <= cc.r * cc.r; }).map(function (cc) { return cc.label; });
+        out.push({ t: name, where: ins.length ? ins.join(" + ") : (v ? "outside all circles" : "not placed") });
+      }
+    });
+    if (p.slots) {
+      var rows = p.slots.map(function (sl, k) { var hit = out.filter(function (o) { return o.k === k; })[0]; return (sl[2] || "Slot " + (k + 1)) + ": " + (hit ? hit.t : "(empty)"); });
+      return rows;
+    }
+    return out.map(function (o) { return o.t + " \u2192 " + o.where; });
   }
 
   function panel(base, n, ed) {
@@ -2323,6 +2372,15 @@
     if (p.type === "reveal") {
       h += '<div class="fl__part fl-rev"><p class="fl__q">' + esc(p.label || "Model answer") + '</p><div class="fl-rev__lock"><input type="password" class="fl-rev__in" data-voice="off" placeholder="Teacher code" aria-label="Code to show the ' + esc(p.label || "model answer") + '"><button type="button" class="fl__btn" data-rev="' + esc(btoa(String(p.code).toLowerCase())) + '">Show</button><span class="fl__note fl-rev__msg"></span></div><div class="fl-rev__body" hidden>' + p.html + "</div></div>";
       return;
+    }
+    if (p.type === "ppq") h += '<div class="fl-ppq" data-id="' + p.id + '"><p class="fl__note">Loading the past paper questions\u2026</p></div>';
+    if (p.type === "board") {
+      var vb = p.vb || [800, 600], cw = p.chipW || 18, chh = p.chipH || 9;
+      if (p.dots) h += '<ul class="fl-board__key">' + p.items.map(function (t, i) { return "<li><b>" + "abcdefghijklmnop".charAt(i) + ")</b> " + esc(t) + "</li>"; }).join("") + "</ul>";
+      h += '<div class="fl-board" data-id="' + p.id + '"><div class="fl-board__bg">' + p.bg + "</div>" + p.items.map(function (t, i) {
+        var pos = boardPos(p, i);
+        return '<div class="fl-chip' + (p.dots ? " fl-chip--dot" : "") + '" tabindex="0" role="button" aria-label="' + esc((p.dots ? "abcdefghijklmnop".charAt(i) + ") " : "") + t) + ': drag, or use the arrow keys to move" data-i="' + i + '" style="left:' + pos[0] + "%;top:" + pos[1] + "%;width:" + (p.dots ? 5.2 : cw) + "%;" + (p.dots ? "aspect-ratio:1/1" : "height:" + chh + "%") + '">' + esc(p.dots ? "abcdefghijklmnop".charAt(i) : t) + "</div>";
+      }).join("") + '</div><div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn fl__btn--ghost" data-board-reset="' + p.id + '">Put the cards back</button><span class="fl__note">' + esc(p.hint || "Drag the cards into position. On a keyboard, tab to a card and use the arrow keys.") + "</span></div>";
     }
     if (p.type === "locmap") h += '<div class="fl-loc" data-id="' + p.id + '"><div class="fl-loc__map"><p class="fl__note">Loading the map\u2026</p></div></div>';
     if (p.type === "gismap") {
@@ -2545,6 +2603,101 @@
     var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
     if (part) locMap(box, part);
   });
+  root.querySelectorAll(".fl-board").forEach(function (box) {
+    var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
+    if (!part) return;
+    function put(chip, x, y) { chip.style.left = x + "%"; chip.style.top = y + "%"; }
+    function store(chip, x, y) {
+      if (part.slots) {
+        var best = null, bd = part.snap || 9;
+        part.slots.forEach(function (sl, k) { var d = Math.sqrt(Math.pow(sl[0] - x, 2) + Math.pow(sl[1] - y, 2)); if (d < bd) { bd = d; best = sl; } });
+        if (best) {
+          var other = [].slice.call(box.querySelectorAll(".fl-chip")).filter(function (c2) { return c2 !== chip && saved[part.id + "_" + c2.getAttribute("data-i")] === best[0] + "," + best[1]; })[0];
+          if (other) { var oi = +other.getAttribute("data-i"), op = boardPos(part, oi); delete saved[part.id + "_" + oi]; put(other, op[0], op[1]); }
+          x = best[0]; y = best[1];
+        }
+      }
+      x = Math.max(2, Math.min(98, +x.toFixed(2))); y = Math.max(2, Math.min(98, +y.toFixed(2)));
+      put(chip, x, y); saved[part.id + "_" + chip.getAttribute("data-i")] = x + "," + y;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+    }
+    box.querySelectorAll(".fl-chip").forEach(function (chip) {
+      var v = saved[part.id + "_" + chip.getAttribute("data-i")]; if (v) { var xy = v.split(","); put(chip, xy[0], xy[1]); }
+      var drag = null;
+      chip.addEventListener("pointerdown", function (e) { var r = box.getBoundingClientRect(); drag = { r: r }; chip.classList.add("is-drag"); try { chip.setPointerCapture(e.pointerId); } catch (er) {} e.preventDefault(); });
+      chip.addEventListener("pointermove", function (e) { if (!drag) return; put(chip, ((e.clientX - drag.r.left) / drag.r.width * 100).toFixed(2), ((e.clientY - drag.r.top) / drag.r.height * 100).toFixed(2)); });
+      function end() { if (!drag) return; drag = null; chip.classList.remove("is-drag"); store(chip, parseFloat(chip.style.left), parseFloat(chip.style.top)); }
+      chip.addEventListener("pointerup", end); chip.addEventListener("pointercancel", end);
+      chip.addEventListener("keydown", function (e) {
+        var d = { ArrowLeft: [-2, 0], ArrowRight: [2, 0], ArrowUp: [0, -2], ArrowDown: [0, 2] }[e.key]; if (!d) return; e.preventDefault();
+        var x = parseFloat(chip.style.left) + d[0], y = parseFloat(chip.style.top) + d[1];
+        if (part.slots) { put(chip, x, y); clearTimeout(chip._t); chip._t = setTimeout(function () { store(chip, parseFloat(chip.style.left), parseFloat(chip.style.top)); }, 600); } else store(chip, x, y);
+      });
+    });
+    var rb = root.querySelector('[data-board-reset="' + part.id + '"]');
+    if (rb) rb.onclick = function () { box.querySelectorAll(".fl-chip").forEach(function (chip) { var i = +chip.getAttribute("data-i"), p0 = boardPos(part, i); delete saved[part.id + "_" + i]; put(chip, p0[0], p0[1]); }); try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {} };
+  });
+  root.querySelectorAll(".fl-ppq").forEach(function (box) {
+    var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
+    if (!part) return;
+    loadPPQ(part.data).then(function (D) {
+      var items = ppqItems(part, D);
+      box.innerHTML = items.map(function (q, i) {
+        var k = part.id + "_" + q.key, fb = saved[k + "_fb"], f = null; try { f = fb ? JSON.parse(fb) : null; } catch (e) {}
+        var mcq = q.type === "mcq" && q.options && q.options.length;
+        return '<div class="fl-ppq__q" data-key="' + esc(q.key) + '"><div class="fl-ppq__meta"><b>' + esc(q.label || (items.length > 1 ? "abcdefghij".charAt(i) + ")" : "")) + "</b>" +
+          '<span class="fl-ppq__chip">' + esc(q.paperLabel || "Past paper question") + '</span><span class="fl-ppq__chip fl-ppq__chip--m">' + q.marks + (q.marks === 1 ? " mark" : " marks") + "</span>" +
+          (f && f.score != null ? '<span class="fl-ppq__chip fl-ppq__chip--ok">Last score ' + f.score + "/" + q.marks + "</span>" : "") + "</div>" +
+          '<p class="fl__vq">' + esc(q.text) + "</p>" +
+          (mcq ? '<div class="fl-mcq__o">' + q.options.map(function (o, j) { var pk = saved[k]; return '<button type="button" class="fl-opt' + (pk == null ? "" : (j === q.answer ? " right" : (+pk === j ? " wrong" : ""))) + '" data-ppq-opt="' + j + '"><b>' + "ABCDEF".charAt(j) + "</b> " + esc(o) + "</button>"; }).join("") + "</div>"
+               : '<textarea class="fl-in fl__box" data-k="' + k + '" rows="' + Math.min(14, 3 + q.marks * 2) + '" aria-label="Your answer">' + esc(saved[k] || "") + "</textarea>" +
+                 '<div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn" data-ppq-mark="1">Mark my answer &rarr;</button><span class="fl__note fl-ppq__st"></span></div>') +
+          '<div class="fl-ppq__out">' + (f ? ppqFb(q, f) : "") + "</div></div>";
+      }).join("") + (part.after ? '<p class="fl__note">' + esc(part.after) + "</p>" : "");
+      box.querySelectorAll(".fl-ppq__q").forEach(function (card) {
+        var q = items.filter(function (x) { return x.key === card.getAttribute("data-key"); })[0], k = part.id + "_" + q.key;
+        card.addEventListener("click", function (e) {
+          var ms = e.target.closest("[data-ppq-ms]");
+          if (ms) { var m = card.querySelector(".fl-ppq__ms"); if (m) { m.hidden = !m.hidden; ms.textContent = m.hidden ? "Show the mark scheme" : "Hide the mark scheme"; } return; }
+          var op = e.target.closest("[data-ppq-opt]");
+          if (op) {
+            var j = +op.getAttribute("data-ppq-opt"); if (saved[k] != null) return; saved[k] = j;
+            card.querySelectorAll("[data-ppq-opt]").forEach(function (b) { var bj = +b.getAttribute("data-ppq-opt"); b.className = "fl-opt" + (bj === q.answer ? " right" : (bj === j ? " wrong" : "")); });
+            var f1 = { score: j === q.answer ? q.marks : 0, why: q.ms }; saved[k + "_fb"] = JSON.stringify(f1);
+            try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+            card.querySelector(".fl-ppq__out").innerHTML = ppqFb(q, f1); ppqRecord(q, f1, "Option " + "ABCDEF".charAt(j)); return;
+          }
+          if (!e.target.closest("[data-ppq-mark]")) return;
+          var btn = e.target.closest("[data-ppq-mark]"), ta = card.querySelector("textarea"), st = card.querySelector(".fl-ppq__st"), ans = ta.value.trim();
+          if (!ans) { st.textContent = "Write your answer first."; ta.focus(); return; }
+          btn.disabled = true; btn.textContent = "Marking\u2026"; st.textContent = "This usually takes a few seconds.";
+          fetch("/api/mark-ppq", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: (q.paperLabel || "Past paper question") + ", Question " + q.id + " (" + (D.topic || "") + "). " + q.text + (part.figNote ? " [" + part.figNote + "]" : ""), maxMark: q.marks, markingGuidance: q.ms, studentAnswer: ans }) })
+            .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d && d.error || "Marking failed."); return d; }); })
+            .then(function (d) {
+              var fb2 = d.feedback || {}, m2 = String(fb2.markAwarded || "").match(/(\d+(?:\.\d+)?)/);
+              var f2 = { score: m2 ? Math.min(+m2[1], q.marks) : null, why: fb2.whyThisMark || "", well: fb2.whatWasDoneWell || "", miss: fb2.whatIsMissing || "", next: fb2.nextStep || "" };
+              saved[k + "_fb"] = JSON.stringify(f2); try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+              card.querySelector(".fl-ppq__out").innerHTML = ppqFb(q, f2); st.textContent = "";
+              if (f2.score != null) ppqRecord(q, f2, ans);
+            })
+            .catch(function (er) { st.textContent = "Sorry, marking did not complete. " + (er.message || "") + " Please try again."; })
+            .then(function () { btn.disabled = false; btn.innerHTML = "Mark my answer &rarr;"; });
+        });
+      });
+    }).catch(function () { box.innerHTML = '<p class="fl__note">The past paper questions could not load. Make sure you are logged in, then refresh the page.</p>'; });
+  });
+  function ppqFb(q, f) {
+    return '<div class="fl-ppq__res"><div class="fl-ppq__score">' + (f.score == null ? "\u2014" : f.score) + " / " + q.marks + "</div>" +
+      (f.why ? "<p><b>Why this mark</b><br>" + esc(f.why) + "</p>" : "") + (f.well ? "<p><b>What you did well</b><br>" + esc(f.well) + "</p>" : "") +
+      (f.miss ? "<p><b>What is missing</b><br>" + esc(f.miss) + "</p>" : "") + (f.next ? "<p><b>Next step</b><br>" + esc(f.next) + "</p>" : "") +
+      '</div><button type="button" class="fl__btn fl__btn--ghost" data-ppq-ms="1" style="margin-top:.4rem">Show the mark scheme</button><div class="fl-ppq__ms" hidden><b>Mark scheme</b><br>' + esc(q.ms) + "</div>";
+  }
+  function ppqRecord(q, f, ans) {
+    var patch = {}; patch["ib_q_ppq_" + q.key] = { question: ((q.paperLabel || "") + " Q" + q.id + ": " + q.text).slice(0, 600), marks: q.marks, awarded: f.score, page: location.pathname, at: new Date().toISOString(), source: "IGCSE past paper (lesson)",
+      answer: String(ans || "").slice(0, 6000), whyThisMark: f.why || "", whatWasDoneWell: f.well || "", whatIsMissing: f.miss || "", nextStep: f.next || "" };
+    fetch("/api/progress", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lessonId: q.lesson, patch: patch }) }).catch(function () {});
+  }
   root.querySelectorAll(".fl-gis").forEach(function (box) {
     var part = cfg.parts.filter(function (q) { return q.id === box.getAttribute("data-id"); })[0];
     if (part) gisMap(box, part);
@@ -2754,7 +2907,7 @@
     root.querySelectorAll("[data-pi]").forEach(function (box) {
       if (box.closest(".fl-ed")) return;
       var pi = box.getAttribute("data-pi");
-      if (box.querySelector(".fl-anim,.fl-vel,.fl-rmap,.fl-game,iframe")) return;
+      if (box.querySelector(".fl-anim,.fl-vel,.fl-rmap,.fl-game,iframe,.fl-board")) return;
       var els = [].slice.call(box.querySelectorAll("svg,img")).filter(function (e) { return !e.closest("svg") || e.tagName.toLowerCase() === "svg" && !e.parentNode.closest("svg"); });
       if (!els.length) {
         var t = box.cloneNode(true); t.querySelectorAll("button,input,textarea,select,script,style").forEach(function (x) { x.parentNode.removeChild(x); });
@@ -2780,6 +2933,13 @@
       if (p.type === "cards") p.items.forEach(function (it, i) { html += "<p><b>" + esc(it.t) + ":</b> <i>" + esc(it.q) + "</i><br>" + cellHtml(ans(p.id + i)) + "</p>"; out.push(it.t + ": " + it.q, ans(p.id + i)); });
       if (p.type === "crossword") { var got = 0, tot = 0; p.words.forEach(function (w) { for (var q3 = 0; q3 < w.a.length; q3++) { tot++; if ((saved[p.id + "_" + (w.r + (w.d === "D" ? q3 : 0)) + "_" + (w.col + (w.d === "A" ? q3 : 0))] || "") === w.a.charAt(q3)) got++; } }); html += "<p>Crossword completed.</p>"; out.push("Crossword completed."); }
       if (p.type === "text") { html += "<p>" + cellHtml(ans(p.id)) + "</p>"; out.push(ans(p.id)); }
+      if (p.type === "board") { var br = boardReport(p, saved); html += "<p>" + br.map(esc).join("<br>") + "</p>"; out = out.concat(br); }
+      if (p.type === "ppq") { var PD = PPQ_DATA[p.data]; if (PD) ppqItems(p, PD).forEach(function (q) {
+        var k = p.id + "_" + q.key, fq = null; try { fq = JSON.parse(saved[k + "_fb"] || "null"); } catch (e) {}
+        var a = q.type === "mcq" && q.options && q.options.length ? (saved[k] != null ? "ABCDEF".charAt(+saved[k]) + " " + q.options[+saved[k]] : "") : ans(k);
+        html += "<p><i>" + esc(q.text) + " (" + q.marks + ")</i><br>" + cellHtml(a) + (fq ? "<br><b>Score: " + (fq.score == null ? "?" : fq.score) + "/" + q.marks + "</b>" + (fq.next ? "<br>Next step: " + esc(fq.next) : "") : "") + "</p>";
+        out.push(q.text + " (" + q.marks + ")", a, fq ? "Score: " + fq.score + "/" + q.marks : "");
+      }); }
       if (p.type === "order") {
         var seq = p.answer.map(function (_, i) { return saved[p.id + "s" + i] || "_"; }).join(" ");
         html += "<p>My order: " + esc(seq) + "</p>"; out.push("My order: " + seq);
