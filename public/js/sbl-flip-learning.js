@@ -2664,9 +2664,23 @@
           '<p class="fl__vq">' + esc(q.text) + "</p>" +
           (mcq ? '<div class="fl-mcq__o">' + q.options.map(function (o, j) { var pk = saved[k]; return '<button type="button" class="fl-opt' + (pk == null ? "" : (j === q.answer ? " right" : (+pk === j ? " wrong" : ""))) + '" data-ppq-opt="' + j + '"><b>' + "ABCDEF".charAt(j) + "</b> " + esc(o) + "</button>"; }).join("") + "</div>"
                : '<textarea class="fl-in fl__box" data-k="' + k + '" rows="' + Math.min(14, 3 + q.marks * 2) + '" aria-label="Your answer">' + esc(saved[k] || "") + "</textarea>" +
-                 '<div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn" data-ppq-mark="1">Mark my answer &rarr;</button><span class="fl__note fl-ppq__st"></span></div>') +
+                 '<div class="fl__actions" style="margin-top:.4rem"><button type="button" class="fl__btn fl__btn--ghost" data-ppq-photo="1" title="Upload a photo of your handwritten answer">\ud83d\udcce Upload a photo of my written answer</button><input type="file" accept="image/*" capture="environment" hidden data-ppq-file="1"><button type="button" class="fl__btn" data-ppq-mark="1">Mark my answer &rarr;</button><span class="fl__note fl-ppq__st" role="status"></span></div>') +
           '<div class="fl-ppq__out">' + (f ? ppqFb(q, f) : "") + "</div></div>";
       }).join("") + (part.after ? '<p class="fl__note">' + esc(part.after) + "</p>" : "");
+      box.querySelectorAll("[data-ppq-file]").forEach(function (inp) {
+        inp.addEventListener("change", function () {
+          var f = inp.files && inp.files[0]; if (!f) return;
+          var card = inp.closest(".fl-ppq__q"), ta = card.querySelector("textarea"), st = card.querySelector(".fl-ppq__st"), pb = card.querySelector("[data-ppq-photo]");
+          pb.disabled = true; st.textContent = "Reading your handwriting\u2026 this can take a little while the first time.";
+          (window.Tesseract ? Promise.resolve() : loadJs("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js")).then(function () { return window.Tesseract.recognize(f, "eng"); }).then(function (r) {
+            var t = ((r && r.data && r.data.text) || "").trim(); pb.disabled = false; inp.value = "";
+            if (!t) { st.textContent = "We couldn\u2019t read any text in that photo. Try a clearer, well-lit, straight-on photo, or type your answer."; return; }
+            ta.value = ta.value.trim() ? ta.value.trim() + "\n\n" + t : t;
+            saved[ta.getAttribute("data-k")] = ta.value; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+            st.textContent = "We added what we could read into the box. Check it and fix any mistakes before you press Mark my answer: handwriting reading isn\u2019t perfect."; ta.focus();
+          }).catch(function () { pb.disabled = false; inp.value = ""; st.textContent = "Sorry, we couldn\u2019t read that photo. Check your connection and try again, or type your answer."; });
+        });
+      });
       box.querySelectorAll(".fl-ppq__q").forEach(function (card) {
         var q = items.filter(function (x) { return x.key === card.getAttribute("data-key"); })[0], k = part.id + "_" + q.key;
         card.addEventListener("click", function (e) {
@@ -2680,6 +2694,7 @@
             try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
             card.querySelector(".fl-ppq__out").innerHTML = ppqFb(q, f1); ppqRecord(q, f1, "Option " + "ABCDEF".charAt(j)); return;
           }
+          if (e.target.closest("[data-ppq-photo]")) { card.querySelector("[data-ppq-file]").click(); return; }
           if (!e.target.closest("[data-ppq-mark]")) return;
           var btn = e.target.closest("[data-ppq-mark]"), ta = card.querySelector("textarea"), st = card.querySelector(".fl-ppq__st"), ans = ta.value.trim();
           if (!ans) { st.textContent = "Write your answer first."; ta.focus(); return; }
