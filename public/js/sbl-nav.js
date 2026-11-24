@@ -198,8 +198,7 @@
     { key: 'tch', label: 'Teachers', color: 'var(--sn-tch)', teacher: true, blurb: 'Only visible to teacher and admin accounts',
       cols: [
         { title: 'My classes', items: [
-          ['Teacher dashboard', '/teacher'],
-          ['Display mode (big screen)', '/display']] }
+          ['Teacher dashboard', '/teacher']] }
       ] },
     // A plain link (no dropdown): only shown to admin logins.
     { key: 'adm', label: 'Admin', color: 'var(--sn-tch)', href: '/admin', teacher: true, adminOnly: true, cols: [] }
