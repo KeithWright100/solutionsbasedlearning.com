@@ -506,6 +506,7 @@
       minusAll: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>',
       plusAll: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>',
       game: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M16 12h.01M18 13.5h.01"/></svg>',
+      pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
       check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>',
       list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>'
     };
@@ -574,6 +575,8 @@
     html += '<a class="lh-sidebar__home" href="/igcse/history/learn">' + icon("home") + "<span>IGCSE History overview</span></a>";
     html += '<a class="lh-sidebar__home" href="/igcse/history/exam-tips">' + icon("book") + "<span>Exam tips</span></a>";
     html += '<a class="lh-sidebar__home" href="/igcse/history/revision/topics">' + icon("check") + "<span>Revision topics</span></a>";
+    var onPpq = /^\/igcse\/history\/?$/.test(location.pathname.replace(/index\.html$/, ""));
+    html += '<a class="lh-sidebar__home' + (onPpq ? ' is-current' : '') + '" href="/igcse/history"' + (onPpq ? ' aria-current="page"' : '') + '>' + icon("pen") + "<span>Past paper questions</span></a>";
     html += '<div class="tn-panel">';
     html += '<div class="tn-head"><button type="button" class="tn-head__title" aria-expanded="true">' + icon("list") + "<span>Contents</span></button>";
     html += '<span class="tn-head__tools"><button type="button" class="tn-all" data-all="close" title="Collapse all" aria-label="Collapse all">' + icon("minusAll") + '</button>';

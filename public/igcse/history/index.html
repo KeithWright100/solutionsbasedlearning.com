@@ -74,10 +74,12 @@
   @media (max-width: 760px) {
     .igcse-hero-banner--cta { flex-direction: column; align-items: flex-start; }
   }
+  .lh-sidebar__home.is-current { background: rgba(32, 215, 226, 0.14); font-weight: 700; }
 </style>
 </head>
 <body class="lh">
-<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Syllabus navigation"></aside>
   <div>
     <header class="lh-topbar">
       <nav class="lh-crumbs" aria-label="Breadcrumb">
@@ -93,9 +95,9 @@
 
     <div class="lh-content-grid" style="grid-template-columns: minmax(0,1fr);">
       <main>
-        <div class="lh-page-head">
-          <h1>History — IGCSE Paper Practice</h1>
-          <p>Pick a topic below, choose a question, write a full answer, and get instant, examiner-style marked feedback.</p>
+        <div class="lh-page-head lh-page-head--banner">
+          <h1>IGCSE History: Past Paper Questions</h1>
+          <p>Adapted Edexcel questions for Paper 1 and Paper 2. Pick a topic, choose a question, write a full answer and get instant examiner-style marked feedback.</p>
         </div>
 
         <div id="sblRevisionTopicList"></div>
@@ -120,6 +122,10 @@
 
 <div aria-live="polite" class="sbl-sr-only" id="sblRevisionAnnounce"></div>
 
+<script src="/js/sbl-igcse-hist-sidebar.js"></script>
+<script>
+  renderSBLIgcseHistSidebar('lh-sidebar-mount', { activeUnit: ' ', activeTopic: -1, activeLessonHref: '' });
+</script>
 <script src="/js/sbl-igcse-history-questions.js"></script>
 <script src="/js/sbl-revision.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>

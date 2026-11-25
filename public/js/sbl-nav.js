@@ -85,9 +85,10 @@
           ['Past paper style questions', '/igcse/business'],
           ['Exam tips', '/igcse/business/exam-tips'],
           ['Research', '/igcse/business/research']] },
-        { title: 'IGCSE History', href: '/igcse/history/learn', blurb: 'Superpower relations, Civil rights in the USA, and Russia and the Soviet Union.', items: [
+        { title: 'IGCSE History', href: '/igcse/history/learn', blurb: 'Superpower relations, Civil rights in the USA, Russia and the Soviet Union, and Japan in transformation.', items: [
           ['Full revision lessons', '/igcse/history/learn'],
           ['Revise by topic bots', '/igcse/history/revision/topics'],
+          ['Past paper questions', '/igcse/history', 'new'],
           ['Exam tips', '/igcse/history/exam-tips']] }
       ] },
     { key: 'ks3', label: 'KS3', color: 'var(--sn-ks3)', blurb: 'Key Stage 3 Geography lessons for Years 7 to 9',
@@ -134,7 +135,8 @@
           ['Revise by topic bots', '/igcse/geography/revision/topics'],
           ['Past paper questions', '/igcse/geography'],
           ['History', '', 'head'],
-          ['Revise by topic bots', '/igcse/history/revision/topics']] },
+          ['Revise by topic bots', '/igcse/history/revision/topics'],
+          ['Past paper questions', '/igcse/history', 'new']] },
         { title: 'IGCSE Economics & Business', items: [
           ['Economics (Edexcel)', '', 'head'],
           ['Revise by topic bots', '/igcse/economics/revision/topics'],
