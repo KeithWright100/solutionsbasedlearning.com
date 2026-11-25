@@ -404,6 +404,11 @@ window.SBL_LESSONS['HD-t3-l2-geopolitical'] = {
   title: 'Geopolitical constraints on global interactions',
   href: '/geography/paper-2/hl-2/t3-local-responses/l2-geopolitical',
   syllabusFocus: 'Geopolitical constraints on global interactions: government and militia controls on personal freedoms to participate in global interactions, and national trade restrictions, including protectionism and resource nationalism.',
+  challenge: {
+    question: 'Restrictions, rights and relations: (1) Is it ever right for a government to place restrictions on its people? (2) At what point should a government place restrictions on its dealings with a foreign country? (3) Should human rights influence the dealings of one country with another?',
+    intro: 'Think about restrictions on the internet, travel and trade from this lesson, and about who gains and who loses. Choose one question to start with.',
+    openerPrompt: 'I am working on a Socratic challenge for my IB Geography lesson on geopolitical constraints on global interactions. The three questions are:\n1. Is it ever right for a government to place restrictions on its people?\n2. At what point should a government place restrictions on its dealings with a foreign country?\n3. Should human rights influence the dealings of one country with another?\nPlease help me think these through one question at a time, starting with question 1. Ask me only one question at a time and wait for my answer. Push me to consider different perspectives (governments, citizens, businesses, other countries) and to use real examples such as internet censorship, travel bans, sanctions, tariffs and resource nationalism. Do not give me answers, structures, plans or model responses. If I am stuck, help me reason my way there with a smaller follow-up question.'
+  },
   starterButtons: [
     { label: 'Teach me this lesson', request: 'Give me a full overview of this lesson' },
     { label: 'Government controls on freedoms', request: 'Explain how governments can restrict personal freedoms to participate in global interactions' },
