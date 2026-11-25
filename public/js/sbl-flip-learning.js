@@ -2218,7 +2218,7 @@
   /* Regions inside one country (e.g. Thailand), coloured by a chosen data layer. Each region is a rough
      lon/lat polygon clipped to the country's outline, so it only needs the world map file. */
   function regionMap(box, part) {
-    var mapEl = box.querySelector(".fl-gis__map"), info = box.querySelector(".fl-gis__info"), legend = box.querySelector(".fl-gis__legend"), sel = box.querySelector('[data-g="r"]');
+    var mapEl = box.querySelector(".fl-gis__map"), info = box.querySelector(".fl-gis__info"), legend = box.querySelector(".fl-gis__legend"), sel = box.querySelector('[data-g="r"]'), osel = box.querySelector('[data-g="o"]');
     var SRC = ["https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json", "https://unpkg.com/world-atlas@2/countries-50m.json"];
     function get(i) { return fetch(SRC[i]).then(function (r) { if (!r.ok) throw 0; return r.json(); }).catch(function () { if (i + 1 < SRC.length) return get(i + 1); throw 0; }); }
     loadJs("/js/vendor/d3-array.min.js").then(function () { return loadJs("/js/vendor/d3-geo.min.js"); }).then(function () { return get(0); }).then(function (topo) {
@@ -2238,12 +2238,16 @@
         svg += '</g><path d="' + path(cf) + '" fill="none" stroke="#334155" stroke-width="1.6"/>';
         part.regions.forEach(function (rg, i) { var p = proj(rg.label), v = L.values[i];
           svg += '<text x="' + p[0].toFixed(1) + '" y="' + p[1].toFixed(1) + '" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="800" fill="#13284b" stroke="#fff" stroke-width="3" paint-order="stroke" pointer-events="none">' + esc(rg.name) + '</text><text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 15).toFixed(1) + '" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12" fill="#13284b" stroke="#fff" stroke-width="3" paint-order="stroke" pointer-events="none">' + (v == null ? "no data" : esc((L.fmt || "{v}").replace("{v}", v >= 1000 ? v.toLocaleString("en-US") : v))) + "</text>"; });
+        var O = osel.value === "" ? null : part.layers[+osel.value];
+        if (O) part.regions.forEach(function (rg, i) { var v = O.values[i], k = band(O, v); if (k < 0) return; var p = proj(rg.label);
+          svg += '<circle class="fl-gis__c" data-i="' + i + '" cx="' + (p[0] + (rg.dot ? rg.dot[0] : 0)).toFixed(1) + '" cy="' + (p[1] - 32 + (rg.dot ? rg.dot[1] : 0)).toFixed(1) + '" r="' + (5 + k * 4) + '" fill="' + O.colors[O.colors.length - 1] + '" fill-opacity=".7" stroke="#fff" stroke-width="1.5"/>'; });
         (part.points || []).forEach(function (pt) { var p = proj([pt.lon, pt.lat]); svg += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4" fill="#b42318" stroke="#fff" stroke-width="1.5"/>'; });
         mapEl.innerHTML = svg + "</svg>";
-        legend.innerHTML = "<div><b>" + esc(L.name) + "</b>" + L.bands.map(function (t, i) { return '<span><i style="background:' + L.colors[i] + '"></i>' + esc(t) + "</span>"; }).join("") + "</div>";
+        legend.innerHTML = "<div><b>" + esc(L.name) + "</b> (colour)" + L.bands.map(function (t, i) { return '<span><i style="background:' + L.colors[i] + '"></i>' + esc(t) + "</span>"; }).join("") + "</div>" +
+          (O ? "<div><b>" + esc(O.name) + "</b> (circles)" + O.bands.map(function (t, i) { var r = 5 + i * 4; return '<span><svg width="' + (2 * r + 2) + '" height="' + (2 * r + 2) + '" aria-hidden="true"><circle cx="' + (r + 1) + '" cy="' + (r + 1) + '" r="' + r + '" fill="' + O.colors[O.colors.length - 1] + '" fill-opacity=".7"/></svg>' + esc(t) + "</span>"; }).join("") + "</div>" : "");
       }
       function show(i) { var rg = part.regions[i]; info.innerHTML = "<b>" + esc(rg.name) + "</b>" + part.layers.map(function (L) { var v = L.values[i]; return "<span>" + esc(L.name) + ": " + (v == null ? "no data" : esc((L.fmt || "{v}").replace("{v}", v >= 1000 ? v.toLocaleString("en-US") : v))) + "</span>"; }).join("") + (rg.note ? "<span>" + esc(rg.note) + "</span>" : ""); }
-      sel.onchange = draw; draw();
+      sel.onchange = draw; osel.onchange = draw; draw();
       mapEl.addEventListener("mouseover", function (e) { var t = e.target.closest(".fl-gis__c"); if (t) show(+t.getAttribute("data-i")); });
       mapEl.addEventListener("click", function (e) { var t = e.target.closest(".fl-gis__c"); if (t) show(+t.getAttribute("data-i")); });
     }).catch(function () { mapEl.innerHTML = '<p class="fl__note">The map could not load (check your internet connection). Use the data table below instead.</p>'; });
@@ -2423,7 +2427,7 @@
       h += '<div class="fl__part fl-rev"><p class="fl__q">' + esc(p.label || "Model answer") + '</p><div class="fl-rev__lock"><input type="password" class="fl-rev__in" data-voice="off" placeholder="Teacher code" aria-label="Code to show the ' + esc(p.label || "model answer") + '"><button type="button" class="fl__btn" data-rev="' + esc(btoa(String(p.code).toLowerCase())) + '">Show</button><span class="fl__note fl-rev__msg"></span></div><div class="fl-rev__body" hidden>' + p.html + "</div></div>";
       return;
     }
-    if (p.type === "regionmap") h += '<div class="fl-gis fl-reg" data-id="' + p.id + '"><div class="fl-gis__ctl"><label>Show <select data-g="r">' + p.layers.map(function (L, i) { return '<option value="' + i + '">' + esc(L.name) + "</option>"; }).join("") + '</select></label></div><div class="fl-gis__map"><p class="fl__note">Loading the map\u2026</p></div><div class="fl-gis__info">Move over or tap a region to see its data.</div><div class="fl-gis__legend"></div>' + (p.source ? '<p class="fl__note">' + esc(p.source) + "</p>" : "") + "</div>";
+    if (p.type === "regionmap") h += '<div class="fl-gis fl-reg" data-id="' + p.id + '"><div class="fl-gis__ctl"><label>Main map (colour) <select data-g="r">' + p.layers.map(function (L, i) { return '<option value="' + i + '">' + esc(L.name) + "</option>"; }).join("") + '</select></label><label>Overlay (circles) <select data-g="o"><option value="">None</option>' + p.layers.map(function (L, i) { return '<option value="' + i + '">' + esc(L.name) + "</option>"; }).join("") + '</select></label></div><div class="fl-gis__map"><p class="fl__note">Loading the map\u2026</p></div><div class="fl-gis__info">Move over or tap a region to see its data.</div><div class="fl-gis__legend"></div>' + (p.source ? '<p class="fl__note">' + esc(p.source) + "</p>" : "") + "</div>";
     if (p.type === "ppq") h += '<div class="fl-ppq" data-id="' + p.id + '"><p class="fl__note">Loading the past paper questions\u2026</p></div>';
     if (p.type === "board") {
       var vb = p.vb || [800, 600], cw = p.chipW || 18, chh = p.chipH || 9;
