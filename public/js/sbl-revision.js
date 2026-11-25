@@ -117,6 +117,25 @@
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="M9 13h6M9 17h4"/></svg>';
   }
 
+  // Optional source/extract texts for a question: [{title, note, text}]
+  function renderExtractsHtml(extracts) {
+    if (!extracts || !extracts.length) return '';
+    var html = '';
+    extracts.forEach(function (ex) {
+      html += '<div class="sbl-rev-extract" style="margin:0.8rem 0; padding:0.8rem 1rem; border-left:4px solid #6b2fa3; background:#f7f3fb; border-radius:8px;">';
+      if (ex.title) html += '<p style="margin:0 0 0.35rem; font-weight:700;">' + escapeHtml(ex.title) + '</p>';
+      html += '<p style="margin:0; line-height:1.55; white-space:pre-wrap;">' + escapeHtml(ex.text || '') + '</p>';
+      if (ex.note) html += '<p style="margin:0.4rem 0 0; font-size:0.78rem; color:var(--lh-muted, #666);">' + escapeHtml(ex.note) + '</p>';
+      html += '</div>';
+    });
+    return html;
+  }
+
+  function extractsPlainText(extracts) {
+    if (!extracts || !extracts.length) return '';
+    return extracts.map(function (ex) { return (ex.title || 'Extract') + ':\n' + (ex.text || ''); }).join('\n\n');
+  }
+
   function renderImagesHtml(images) {
     if (!images || !images.length) return '';
     var html = '';
@@ -366,6 +385,7 @@
         });
       }
       bodyHtml += '<p><strong>Question:</strong> ' + escapeHtml(q.question) + '</p>';
+      if (q.extracts && q.extracts.length) bodyHtml += '<div class="block">' + escapeHtml(extractsPlainText(q.extracts)) + '</div>';
 
       if (!entry) {
         bodyHtml += '<p style="color:#b23a3a; font-style:italic;">Not yet answered — not included in the total below.</p>';
@@ -511,6 +531,7 @@
 
     var html = '<h3 style="margin-top:1rem;">' + escapeHtml(q.label || ('Question' + (topic.questions.length > 1 ? ' ' + (activeQuestionIndex + 1) : ''))) + '</h3>';
     html += renderImagesHtml(q.images);
+    html += renderExtractsHtml(q.extracts);
     html += '<p class="sbl-teach-focus"><strong>' + escapeHtml(q.question) + '</strong> [' + q.marks + ' mark' + (q.marks === 1 ? '' : 's') + ']</p>';
     html += '<p class="sbl-progress-note" style="margin-top:1rem;">Write your answer below, then submit it for marking. Your answer is sent straight to the examiner-style marker — there is nothing to copy or paste.</p>';
     html += '<textarea id="sblRevisionAnswer" rows="8" placeholder="Type your answer here..." style="width:100%; box-sizing:border-box; font-family:inherit; font-size:0.95rem; padding:0.7rem; border:1px solid var(--lh-border, #d9dde3); border-radius:8px; resize:vertical;"></textarea>';
@@ -553,7 +574,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        question: q.question,
+        question: q.extracts && q.extracts.length ? q.question + '\n\n' + extractsPlainText(q.extracts) : q.question,
         maxMark: q.marks,
         markingGuidance: q.markScheme,
         studentAnswer: answerText
@@ -671,6 +692,7 @@
     lines.push('Completed: ' + new Date().toLocaleString());
     lines.push('');
     lines.push('Question [' + q.marks + ' marks]: ' + q.question);
+    if (q.extracts && q.extracts.length) { lines.push(''); lines.push(extractsPlainText(q.extracts)); }
     if (q.images && q.images.length) {
       lines.push('(See the resource image' + (q.images.length > 1 ? 's' : '') + ' on the question page — not included in this text copy.)');
     }
@@ -704,6 +726,7 @@
       });
     }
     html += '<p><strong>Question [' + q.marks + ' marks]:</strong> ' + escapeHtml(q.question) + '</p>';
+    if (q.extracts && q.extracts.length) html += '<div class="block">' + escapeHtml(extractsPlainText(q.extracts)) + '</div>';
     html += '<p><strong>My answer:</strong></p><div class="block">' + escapeHtml(answerText) + '</div>';
     html += '<p><strong>Mark awarded:</strong> ' + escapeHtml(feedback.markAwarded || ('— / ' + q.marks)) + '</p>';
     if (feedback.whyThisMark) html += '<p><strong>Why this mark was awarded:</strong></p><div class="block">' + escapeHtml(feedback.whyThisMark) + '</div>';
