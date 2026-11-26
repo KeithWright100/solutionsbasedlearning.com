@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated graph: the income and leisure trade-off — SBL</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { --ink:#13284b; --muted:#4b5563; --blue:#2a63b8; --teal:#0f766e; --orange:#c2410c; --bg:#f4fafb; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Inter, Arial, sans-serif; color: var(--ink); background: var(--bg); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 14px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; }
+  @media (max-width: 560px) { .wrap { grid-template-columns: 1fr; } }
+  .cap { font-size: .93rem; }
+  .card { background:#fff; border:1px solid #d6e2e6; border-radius:14px; padding: 12px; }
+  svg { width:100%; height:auto; display:block; }
+  .steps { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  .steps button { width:30px; height:30px; border-radius:50%; border:2px solid #b8cfd4; background:#fff; color:var(--muted); font-weight:700; cursor:pointer; font: 700 13px Inter, Arial, sans-serif; }
+  .steps button.on { background: var(--teal); border-color: var(--teal); color:#fff; }
+  .steps button.done { border-color: var(--teal); color: var(--teal); }
+  h2 { margin: 0 0 6px; font-size: 1.15rem; color: var(--teal); }
+  .cap { font-size: .98rem; line-height: 1.55; min-height: 150px; }
+  .cap b { color: var(--ink); }
+  .ctl { display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+  .ctl button { border:0; border-radius:10px; padding:.55rem .9rem; font: 700 .9rem Inter, Arial, sans-serif; cursor:pointer; background:#e3f1ee; color: var(--teal); }
+  .ctl button.primary { background: var(--teal); color:#fff; }
+  .ctl button:disabled { opacity:.45; cursor:default; }
+  .gauges { margin-top: 12px; display:grid; gap:8px; }
+  .g { display:grid; grid-template-columns: 70px 1fr 64px; align-items:center; gap:8px; font-size:.85rem; }
+  .g .bar { height:14px; background:#eef2f4; border-radius:7px; overflow:hidden; }
+  .g .bar i { display:block; height:100%; border-radius:7px; transition: width .15s linear; }
+  .explore { margin-top: 12px; padding: 10px; border-radius: 10px; background:#fff8ec; border:1px solid #f5d9a8; display:none; }
+  .explore.on { display:block; }
+  .explore label { font-size:.85rem; font-weight:600; display:block; margin-bottom:4px; }
+  .explore input[type=range] { width:100%; }
+  .icbtns { display:flex; gap:6px; margin: 6px 0; flex-wrap: wrap; }
+  .icbtns button { border:1px solid #b8cfd4; background:#fff; border-radius:8px; padding:.3rem .6rem; font: 700 .8rem Inter, Arial, sans-serif; cursor:pointer; color: var(--blue); }
+  .icbtns button.on { background: var(--blue); color:#fff; border-color: var(--blue); }
+  .note { font-size:.78rem; color: var(--muted); margin-top: 8px; }
+  .sr { position:absolute; left:-9999px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <svg id="g" viewBox="0 0 400 300" role="img" aria-label="Animated indifference curves showing the trade-off between income and leisure">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#c2410c"/></marker>
+      </defs>
+      <g font-family="Inter,Arial,sans-serif">
+        <g id="axes">
+          <line x1="55" y1="18" x2="55" y2="255" stroke="#333" stroke-width="2"/>
+          <line x1="55" y1="255" x2="390" y2="255" stroke="#333" stroke-width="2"/>
+          <text x="22" y="140" transform="rotate(-90 22 140)" text-anchor="middle" font-size="14">Income</text>
+          <text x="222" y="285" text-anchor="middle" font-size="14">Leisure</text>
+          <text id="axHelpY" x="40" y="140" transform="rotate(-90 40 140)" text-anchor="middle" font-size="10.5" fill="#c2410c" opacity="0">more money from work →</text>
+          <text id="axHelpX" x="388" y="246" font-size="10.5" fill="#c2410c" text-anchor="end" opacity="0">more free time →</text>
+        </g>
+        <g id="curves"></g>
+        <g id="slopes" opacity="0">
+          <line id="slopeA" stroke="#c2410c" stroke-width="2" stroke-dasharray="5 4"/>
+          <line id="slopeB" stroke="#c2410c" stroke-width="2" stroke-dasharray="5 4"/>
+          <text id="slopeAt" font-size="10.5" fill="#c2410c">steep: give up a lot of income</text>
+          <text id="slopeBt" font-size="10.5" fill="#c2410c">flat: give up only a little</text>
+        </g>
+        <g id="deltas" opacity="0">
+          <line id="dM" stroke="#555" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <line id="dL" stroke="#555" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <text id="dMt" font-size="13" text-anchor="end">ΔM</text>
+          <text id="dLt" font-size="13" text-anchor="middle">ΔL</text>
+        </g>
+        <g id="outArrow" opacity="0"><line x1="150" y1="205" x2="250" y2="105" stroke="#c2410c" stroke-width="2.5" marker-end="url(#arr)"/><text x="262" y="102" font-size="11" fill="#c2410c">higher satisfaction</text></g>
+        <g id="ptA" opacity="0"><circle r="7" fill="#13284b"/><text x="6" y="-10" font-size="15" font-weight="700">A</text></g>
+        <g id="ptB" opacity="0"><circle r="7" fill="#13284b"/><text x="4" y="-12" font-size="15" font-weight="700">B</text></g>
+        <g id="mover" opacity="0"><circle r="8" fill="#c2410c" stroke="#fff" stroke-width="2"/></g>
+      </g>
+    </svg>
+    <div class="gauges" aria-live="off">
+      <div class="g"><span>Income</span><span class="bar"><i id="gI" style="width:0;background:#2a63b8"></i></span><span id="gIt">–</span></div>
+      <div class="g"><span>Leisure</span><span class="bar"><i id="gL" style="width:0;background:#0f766e"></i></span><span id="gLt">–</span></div>
+      <div class="g"><span>Satisfaction</span><span class="bar"><i id="gS" style="width:0;background:#c2410c"></i></span><span id="gSt">–</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="steps" id="steps" aria-label="Steps"></div>
+    <h2 id="title"></h2>
+    <div class="cap" id="cap" aria-live="polite"></div>
+    <div class="explore" id="explore">
+      <label for="slide">Move along the curve</label>
+      <input type="range" id="slide" min="0" max="100" value="20">
+      <div class="icbtns" id="icbtns" aria-label="Choose a curve"></div>
+      <div class="note">Moving along one curve: income and leisure change, satisfaction stays the same. Changing curve: satisfaction changes.</div>
+    </div>
+    <div class="ctl">
+      <button type="button" id="back">← Back</button>
+      <button type="button" id="replay">↻ Replay step</button>
+      <button type="button" id="next" class="primary">Next →</button>
+    </div>
+    <p class="note">Graph redrawn by SBL. Indifference curves are a simple economic model: real choices also depend on culture, family and the jobs available.</p>
+  </div>
+</div>
+<script>
+(function () {
+  var X0 = 55, Y0 = 255, XMAX = 380;
+  // curve k: y = Y0 - (c + K/(x - X0 + 10)) style hyperbola in screen space
+  var IC = [ {name:"IC1", k:5200, c:8}, {name:"IC2", k:7600, c:20}, {name:"IC3", k:10200, c:34}, {name:"IC4", k:13200, c:50} ];
+  function yOf(ic, x) { var d = x - X0 + 6; return Y0 - (ic.c + ic.k / d); }
+  function xStart(ic) { // first x where curve is below top margin y=22
+    for (var x = X0 + 6; x < XMAX; x += 0.5) if (yOf(ic, x) >= 22) return x; return X0 + 6;
+  }
+  function pathOf(ic) {
+    var s = "", x0 = xStart(ic);
+    for (var x = x0; x <= XMAX; x += 3) s += (s ? " L" : "M") + x.toFixed(1) + " " + yOf(ic, x).toFixed(1);
+    return s;
+  }
+  var NS = "http://www.w3.org/2000/svg", curvesG = document.getElementById("curves"), paths = [], labels = [];
+  IC.forEach(function (ic, i) {
+    var p = document.createElementNS(NS, "path"); p.setAttribute("d", pathOf(ic)); p.setAttribute("fill", "none");
+    p.setAttribute("stroke", "#2a63b8"); p.setAttribute("stroke-width", "3"); p.setAttribute("stroke-linecap", "round");
+    var len = p.getTotalLength ? 0 : 0; curvesG.appendChild(p); len = p.getTotalLength();
+    p.style.strokeDasharray = len; p.style.strokeDashoffset = len; p.dataset.len = len; paths.push(p);
+    var t = document.createElementNS(NS, "text"); t.setAttribute("x", XMAX + 2); t.setAttribute("y", yOf(ic, XMAX) - 6);
+    t.setAttribute("font-size", "12"); t.setAttribute("fill", "#2a63b8"); t.setAttribute("text-anchor", "end"); t.textContent = ic.name;
+    t.setAttribute("opacity", "0"); curvesG.appendChild(t); labels.push(t);
+  });
+  var $ = function (id) { return document.getElementById(id); };
+  var XA = 100, XB = 205, ic2 = IC[1];
+  var A = { x: XA, y: yOf(ic2, XA) }, B = { x: XB, y: yOf(ic2, XB) };
+  $("ptA").setAttribute("transform", "translate(" + A.x + "," + A.y + ")");
+  $("ptB").setAttribute("transform", "translate(" + B.x + "," + B.y + ")");
+  function setLine(id, x1, y1, x2, y2) { var l = $(id); l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2); }
+  setLine("dM", A.x, A.y, A.x, B.y); setLine("dL", A.x, B.y, B.x, B.y);
+  $("dMt").setAttribute("x", A.x - 6); $("dMt").setAttribute("y", (A.y + B.y) / 2 + 4);
+  $("dLt").setAttribute("x", (A.x + B.x) / 2); $("dLt").setAttribute("y", B.y + 16);
+  function slope(ic, x) { return (yOf(ic, x + 0.5) - yOf(ic, x - 0.5)); }
+  function tangent(id, tid, x, half, tx, ty) {
+    var y = yOf(ic2, x), m = slope(ic2, x), dx = half / Math.sqrt(1 + m * m);
+    setLine(id, x - dx, y - m * dx, x + dx, y + m * dx); $(tid).setAttribute("x", tx); $(tid).setAttribute("y", ty);
+  }
+  tangent("slopeA", "slopeAt", XA, 40, XA + 14, A.y - 4);
+  tangent("slopeB", "slopeBt", XB, 50, XB - 10, B.y + 30);
+
+  // ---------- animation helpers ----------
+  var timers = [];
+  function clearAnims() { timers.forEach(function (t) { cancelAnimationFrame(t.raf); clearTimeout(t.to); }); timers = []; }
+  function tween(ms, fn, done) {
+    var t0 = null, rec = {};
+    function step(ts) { if (t0 === null) t0 = ts; var k = Math.min(1, (ts - t0) / ms); k = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; fn(k); if (k < 1) rec.raf = requestAnimationFrame(step); else if (done) done(); }
+    rec.raf = requestAnimationFrame(step); timers.push(rec);
+  }
+  function later(ms, fn) { var rec = { to: setTimeout(fn, ms) }; timers.push(rec); }
+  function show(id, on) { $(id).setAttribute("opacity", on ? 1 : 0); }
+  function fadeIn(id, ms) { tween(ms || 500, function (k) { $(id).setAttribute("opacity", k); }); }
+  function drawCurve(i, ms, done) { var p = paths[i], L = +p.dataset.len; tween(ms || 1200, function (k) { p.style.strokeDashoffset = L * (1 - k); }, function () { labels[i].setAttribute("opacity", 1); if (done) done(); }); }
+  function curveState(i, on) { var p = paths[i]; p.style.strokeDashoffset = on ? 0 : p.dataset.len; labels[i].setAttribute("opacity", on ? 1 : 0); }
+  function gauges(x, y, icIndex) {
+    var inc = Math.max(0, Math.min(100, (Y0 - y) / (Y0 - 22) * 100)), lei = Math.max(0, Math.min(100, (x - X0) / (XMAX - X0) * 100));
+    $("gI").style.width = inc + "%"; $("gL").style.width = lei + "%";
+    $("gIt").textContent = Math.round(inc); $("gLt").textContent = Math.round(lei);
+    if (icIndex == null) { $("gS").style.width = "0"; $("gSt").textContent = "–"; }
+    else { $("gS").style.width = (25 * (icIndex + 1)) + "%"; $("gSt").textContent = IC[icIndex].name; }
+  }
+  function moveDot(x, y) { $("mover").setAttribute("transform", "translate(" + x + "," + y + ")"); }
+
+  // ---------- steps ----------
+  var S = [
+    { t: "1. The axes", c: "The graph compares two things a person wants: <b>income</b> (money earned from work, up the side) and <b>leisure</b> (free time, along the bottom).<br><br>There are only 24 hours in a day. Every extra hour at work earns more income but leaves less leisure time. So people face a <b>trade-off</b>.",
+      run: function () { fadeIn("axHelpY"); later(500, function () { fadeIn("axHelpX"); }); } },
+    { t: "2. An indifference curve", c: "This line is an <b>indifference curve (IC)</b>. Every point on it gives the person the <b>same level of satisfaction</b> (economists call this utility).<br><br>Because they are equally happy anywhere on the line, they are <b>indifferent</b> between those combinations of income and leisure.",
+      run: function () { drawCurve(1, 1400); } },
+    { t: "3. Point A", c: "At <b>point A</b> this person has <b>a lot of income but very little leisure</b>, for example someone working long hours or two jobs.<br><br>Watch the gauges: income is high, leisure is low.",
+      run: function () { curveState(1, true); fadeIn("ptA"); show("mover", 1); moveDot(A.x, A.y); gauges(A.x, A.y, 1); } },
+    { t: "4. Trading income for leisure", c: "Moving from <b>A to B</b>, the person works fewer hours. They give up some income (<b>ΔM</b>, the change in money) to gain more free time (<b>ΔL</b>, the change in leisure).<br><br>Because A and B are on the <b>same curve</b>, they are <b>just as satisfied</b>. The satisfaction gauge does not move.",
+      run: function () { curveState(1, true); show("ptA", 1); show("mover", 1);
+        later(300, function () { tween(2200, function (k) { var x = A.x + (B.x - A.x) * k, y = yOf(ic2, x); moveDot(x, y); gauges(x, y, 1); }, function () { fadeIn("ptB"); fadeIn("deltas", 700); }); }); } },
+    { t: "5. Why is the curve bent?", c: "The curve is <b>steep at A</b>: with very little free time, a person will give up <b>a lot of income</b> for one more hour of leisure.<br><br>It is <b>flat at B</b>: with plenty of free time already, they would give up <b>only a little income</b> for more. Each extra hour of leisure is worth less the more you have (<b>diminishing marginal utility</b>).",
+      run: function () { curveState(1, true); show("ptA", 1); show("ptB", 1); show("deltas", 1); show("mover", 0); gauges(B.x, B.y, 1); fadeIn("slopes", 800); } },
+    { t: "6. Higher curves = more satisfaction", c: "There is a whole family of curves. Curves <b>further from the origin</b> (IC3, IC4) mean <b>more income and more leisure</b> together, so <b>higher satisfaction</b>. IC1 is the least satisfying.<br><br>People try to reach the highest curve they can, but their <b>wage</b> and the <b>hours available</b> limit how far out they can get.",
+      run: function () { curveState(1, true); show("ptA", 1); show("ptB", 1); show("deltas", 0); show("slopes", 0); show("mover", 0);
+        drawCurve(0, 900, function () { drawCurve(2, 900, function () { drawCurve(3, 900, function () { fadeIn("outArrow"); }); }); }); } },
+    { t: "7. Try it, then link it to development", c: "Use the slider to move along a curve, and the buttons to switch curves.<br><br><b>Geography link:</b> as countries develop and wages rise, people <i>can</i> reach higher curves. But many in HICs choose more work, not more leisure (“time is the new money”). <b>Low-income groups</b> may be stuck near IC1, working long hours just to earn enough.",
+      run: function () { [0,1,2,3].forEach(function (i) { curveState(i, true); }); show("ptA", 0); show("ptB", 0); show("deltas", 0); show("slopes", 0); show("outArrow", 0); show("mover", 1); $("explore").classList.add("on"); exploreUpdate(); } }
+  ];
+  var cur = 0, done = {};
+  var stepsEl = $("steps");
+  S.forEach(function (s, i) { var b = document.createElement("button"); b.type = "button"; b.textContent = i + 1; b.setAttribute("aria-label", "Step " + (i + 1) + ": " + s.t.replace(/^\d+\.\s*/, "")); b.addEventListener("click", function () { go(i); }); stepsEl.appendChild(b); });
+  function reset() {
+    clearAnims(); [0,1,2,3].forEach(function (i) { curveState(i, false); });
+    ["axHelpY","axHelpX","ptA","ptB","deltas","slopes","outArrow","mover"].forEach(function (id) { show(id, 0); });
+    $("explore").classList.remove("on"); gauges(X0, Y0, null);
+    paths.forEach(function (p) { p.setAttribute("stroke-width", 3); p.setAttribute("stroke", "#2a63b8"); });
+  }
+  function go(i) {
+    cur = i; done[i] = true; reset();
+    if (i >= 1) { show("axHelpY", 1); show("axHelpX", 1); }
+    $("title").textContent = S[i].t; $("cap").innerHTML = S[i].c;
+    Array.prototype.forEach.call(stepsEl.children, function (b, j) { b.className = (j === i ? "on" : (done[j] ? "done" : "")); });
+    $("back").disabled = i === 0; $("next").disabled = i === S.length - 1;
+    $("next").textContent = i === S.length - 1 ? "Finished" : "Next →";
+    S[i].run();
+  }
+  $("back").addEventListener("click", function () { if (cur > 0) go(cur - 1); });
+  $("next").addEventListener("click", function () { if (cur < S.length - 1) go(cur + 1); });
+  $("replay").addEventListener("click", function () { go(cur); });
+
+  // explore mode
+  var exIC = 1, icb = $("icbtns");
+  IC.forEach(function (ic, i) { var b = document.createElement("button"); b.type = "button"; b.textContent = ic.name; b.addEventListener("click", function () { exIC = i; exploreUpdate(); }); icb.appendChild(b); });
+  function exploreUpdate() {
+    var ic = IC[exIC], xs = xStart(ic) + 4, v = +$("slide").value / 100, x = xs + (XMAX - 10 - xs) * v, y = yOf(ic, x);
+    moveDot(x, y); gauges(x, y, exIC);
+    Array.prototype.forEach.call(icb.children, function (b, j) { b.className = j === exIC ? "on" : ""; });
+    paths.forEach(function (p, j) { p.setAttribute("stroke-width", j === exIC ? 4 : 2.5); p.setAttribute("stroke", j === exIC ? "#2a63b8" : "#93b4e0"); });
+  }
+  $("slide").addEventListener("input", exploreUpdate);
+  go(0);
+})();
+</script>
+</body>
+</html>

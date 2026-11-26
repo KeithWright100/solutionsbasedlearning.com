@@ -112,7 +112,8 @@
 </style>
 </head>
 <body class="lh">
-<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Subject navigation"></aside>
   <div>
     <header class="lh-topbar">
       <nav class="lh-crumbs" aria-label="Breadcrumb">
@@ -256,5 +257,10 @@
 </div>
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script src="/js/sbl-ib-econ-guide-sidebar.js"></script>
+<script>
+  renderSBLIbEconGuideSidebar('lh-sidebar-mount', { activeUnit: ' ', activeTopic: -1, activeLessonHref: '' });
+  (function(){var P=location.pathname.replace(/index\.html$/,'').replace(/\/$/,'');var best=null;Array.prototype.forEach.call(document.querySelectorAll('#lh-sidebar-mount .lh-sidebar__home'),function(a){var h=a.getAttribute('href');if(h==='/humanities-hub')return;if(P===h||P.indexOf(h+'/')===0){if(!best||h.length>best.getAttribute('href').length)best=a;}});if(best){best.classList.add('is-current');best.setAttribute('aria-current','page');}})();
+</script>
 </body>
 </html>
