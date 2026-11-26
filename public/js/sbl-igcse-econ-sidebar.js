@@ -357,6 +357,8 @@
       minusAll: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>',
       plusAll: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>',
       game: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 11v3M5.5 12.5h3M16 12h.01M18 13.5h.01"/></svg>',
+      pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+      search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
       check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg>',
       list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>'
     };
@@ -423,8 +425,14 @@
     html += "</div>";
     html += '<a class="lh-sidebar__home" href="/humanities-hub">' + icon("back") + "<span>Back to Humanities Hub</span></a>";
     html += '<a class="lh-sidebar__home" href="/igcse/economics/learn">' + icon("home") + "<span>IGCSE Economics overview</span></a>";
-    html += '<a class="lh-sidebar__home" href="/igcse/economics">' + icon("book") + "<span>Paper practice</span></a>";
-    html += '<a class="lh-sidebar__home" href="/igcse/economics/revision/topics">' + icon("check") + "<span>Revision topics</span></a>";
+    (function () {
+      var P = location.pathname.replace(/index\.html$/, "").replace(/\/$/, "");
+      var QL = [["/igcse/economics/exam-tips", "book", "Exam tips", ""], ["/igcse/economics/revision/topics", "check", "Revision topics", "/igcse/economics/revision/topics"], ["/igcse/economics", "pen", "Past paper questions", "/igcse/economics/paper-questions"], ["/igcse/economics/research", "search", "Research and Socratic Challenge", ""]];
+      QL.forEach(function (l) {
+        var cur = P === l[0] || (l[3] && P.indexOf(l[3]) === 0);
+        html += '<a class="lh-sidebar__home' + (cur ? ' is-current' : '') + '" href="' + l[0] + '"' + (cur ? ' aria-current="page"' : '') + '>' + icon(l[1]) + '<span>' + l[2] + '</span></a>';
+      });
+    })();
     html += '<div class="tn-panel">';
     html += '<div class="tn-head"><button type="button" class="tn-head__title" aria-expanded="true">' + icon("list") + "<span>Contents</span></button>";
     html += '<span class="tn-head__tools"><button type="button" class="tn-all" data-all="close" title="Collapse all" aria-label="Collapse all">' + icon("minusAll") + '</button>';

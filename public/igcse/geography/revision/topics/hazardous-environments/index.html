@@ -114,7 +114,8 @@
 </style>
 </head>
 <body class="lh">
-<div class="lh-shell" style="grid-template-columns: minmax(0,1fr);">
+<div class="lh-shell">
+  <aside class="lh-sidebar" id="lh-sidebar-mount" aria-label="Subject navigation"></aside>
   <div>
     <header class="lh-topbar">
       <nav class="lh-crumbs" aria-label="Breadcrumb">
@@ -216,5 +217,9 @@
 <script src="/js/sbl-teach-bot.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/js/sbl-feedback-widget.js"></script>
+<script src="/js/sbl-igcse-geo-sidebar.js"></script>
+<script>
+  renderSBLIgcseGeoSidebar('lh-sidebar-mount', { activeUnit: ' ', activeTopic: -1, activeLessonHref: '' });
+</script>
 </body>
 </html>

@@ -133,6 +133,7 @@
 }
 .lh-sidebar__home:hover { background: var(--lh-sidebar-hover); color: var(--lh-sidebar-strong); }
 .lh-sidebar__home svg { width: 15px; height: 15px; flex-shrink: 0; }
+.lh-sidebar__home.is-current { background: var(--lh-sidebar-hover); color: var(--lh-sidebar-strong); font-weight: 700; box-shadow: inset 3px 0 0 #20d7e2; }
 
 .lh-sidebar__section {
   margin-bottom: 0.4rem;
