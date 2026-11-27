@@ -2112,6 +2112,28 @@
     var t = p.prompt || (p.rows && p.rows[0]) || "";
     return ((lab ? lab + " " : "") + t).slice(0, 90) + (t.length > 90 ? "…" : "");
   }
+  /* ---- Save my work: copy a panel's answers into the student's SBL account ----
+     Answers already save on the device as students type (localStorage). This also keeps
+     them in the account (via /api/progress, key "flipwork_<panel>") so unfinished work
+     follows the student to another device or the next lesson. */
+  var WORK = {};
+  function workKey(n) { return "flipwork_" + (n + 1); }
+  function workGet() {
+    if (!WORK._get) WORK._get = fetch("/api/progress?lessonId=" + encodeURIComponent(id), { credentials: "same-origin" })
+      .then(function (r) { if (r.status === 401) return { _out: true }; return r.ok ? r.json() : {}; })
+      .catch(function () { return {}; });
+    return WORK._get;
+  }
+  function workSend(n, data, keep) {
+    var patch = {}; patch[workKey(n)] = { d: data, at: new Date().toISOString() };
+    return fetch("/api/progress", { method: "POST", credentials: "same-origin", keepalive: !!keep,
+      headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lessonId: id, patch: patch }) })
+      .then(function (r) { if (!r.ok) throw new Error(r.status === 401 ? "Log in to save to your account." : "Could not save. Check your connection and try again."); return r; });
+  }
+  function workWhen(iso) {
+    try { return new Date(iso).toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; }
+  }
+
   function api(method, q, body) {
     return fetch("/api/session?flipEdits=1" + q, { method: method, credentials: "same-origin",
       headers: body ? { "Content-Type": "application/json" } : {}, body: body ? JSON.stringify(body) : undefined })
@@ -2361,6 +2383,7 @@
   if (cfg._note) h += '<p class="fl__tnote"><b>Note from ' + esc(ed.teacher || "your teacher") + ":</b> " + esc(cfg._note).replace(/\n/g, "<br>") + "</p>";
   if (cfg.cover) h += '<ul class="fl__cover">' + cfg.cover.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>";
   h += '<div class="fl__top">' + (cfg.noBot ? "" : '<button type="button" class="fl__bot" onclick="window.openTeachBot && openTeachBot(\'' + id + '\')">Open Teach Me Live &rarr;</button>') +
+    '<button type="button" class="fl__btn fl-save" title="Keep your answers in your SBL account, so you can finish on another device or next lesson">\ud83d\udcbe Save my work</button>' +
     '<button type="button" class="fl__btn fl__btn--ghost fl-copy">' + (isL ? "Copy this lesson to OneNote" : "Copy flip learning to OneNote") + '</button>' +
     (ed.canEdit ? '<button type="button" class="fl__btn fl__btn--ghost fl-edit">\u270f\ufe0f Edit for my classes</button>' : "") +
     (hasEdits(ed.edits) ? '<span class="fl__adapt">' + (ed.canEdit ? "Your classes see your edited version" : "Adapted by your teacher") + "</span>" : "") + "</div>";
@@ -2554,9 +2577,10 @@
     h += "</div>";
   });
 
-  h += '<div class="fl__actions"><button type="button" class="fl__btn fl-copy">' + (isL ? "Copy my lesson answers for OneNote" : "Copy my flip learning answers for OneNote") + '</button>' +
+  h += '<div class="fl__actions"><button type="button" class="fl__btn fl-save">\ud83d\udcbe Save my work</button>' +
+    '<button type="button" class="fl__btn fl__btn--ghost fl-copy">' + (isL ? "Copy my lesson answers for OneNote" : "Copy my flip learning answers for OneNote") + '</button>' +
     '<button type="button" class="fl__btn fl__btn--ghost" data-print="1">Print / save as PDF</button>' +
-    '<span class="fl__note">Your answers save automatically on this device.</span></div></div>' + (inl ? "</section>" : "</details>");
+    '<span class="fl__note fl-save-msg">Your answers save on this device as you type. Press <b>Save my work</b> to keep them in your account, so you can finish them on another device or next lesson.</span></div></div>' + (inl ? "</section>" : "</details>");
 
   if (ed.replace) { ed.replace.insertAdjacentHTML("afterend", h); ed.replace.remove(); }
   else if (isL) {
@@ -2567,6 +2591,66 @@
   else modes.insertAdjacentHTML("beforebegin", h);
   var root = document.getElementById("flipLearning" + (n ? n + 1 : ""));
   if (ed.open) root.open = true;
+  (function wireSave() {
+    var W = WORK[KEY] || (WORK[KEY] = { last: null, timer: null });
+    var btns = root.querySelectorAll(".fl-save"), msgs = root.querySelectorAll(".fl-save-msg");
+    function say(t, bad) { msgs.forEach(function (m) { m.innerHTML = t; m.style.color = bad ? "var(--lh-orange, #c2410c)" : ""; }); }
+    function snapshot() { return JSON.stringify(saved); }
+    function doSave(keep, quiet) {
+      var snap = snapshot();
+      if (quiet && (snap === W.last || W.hold)) return Promise.resolve();
+      W.hold = false;
+      if (!quiet) btns.forEach(function (b) { b.disabled = true; b.textContent = "Saving\u2026"; });
+      return workSend(n, saved, keep).then(function () {
+        W.last = snap;
+        say("\u2705 Saved to your account at " + workWhen(new Date().toISOString()) + ". You can finish this on any device.");
+      }, function (err) { if (!quiet) say(err.message, true); })
+        .then(function () {
+          if (quiet) return;
+          var ok = W.last === snap;
+          btns.forEach(function (b) { b.disabled = false; b.textContent = ok ? "\u2705 Saved" : "\ud83d\udcbe Save my work"; });
+          if (ok) setTimeout(function () { btns.forEach(function (b) { b.textContent = "\ud83d\udcbe Save my work"; }); }, 2500);
+        });
+    }
+    btns.forEach(function (b) { b.onclick = function () { doSave(false, false); }; });
+    // Quiet backup every 3 minutes while answers change, and when the page is closed or hidden.
+    if (!W.timer) {
+      W.timer = setInterval(function () { if (W.last !== null && W.doSave) W.doSave(false, true); }, 180000);
+      document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden" && W.last !== null && W.doSave) W.doSave(true, true); });
+    }
+    W.doSave = doSave;
+    workGet().then(function (r) {
+      if (r && r._out) { btns.forEach(function (b) { b.hidden = true; }); return; }
+      var srv = r && r.data && r.data[workKey(n)];
+      var local = snapshot();
+      if (!srv || !srv.d) { if (W.last === null) W.last = Object.keys(saved).length ? "" : local; return; }
+      var remote = JSON.stringify(srv.d);
+      if (remote === local) { W.last = local; say("\u2705 Your answers are saved in your account (last saved " + workWhen(srv.at) + ")."); return; }
+      W.last = W.last === null ? remote : W.last;
+      if (!Object.keys(saved).length) {
+        // Nothing on this device yet: bring back the work saved in the account.
+        try { localStorage.setItem(KEY, remote); } catch (e) {}
+        var flag = "sbl-flip-restored-" + KEY;
+        try { if (sessionStorage.getItem(flag)) return; sessionStorage.setItem(flag, "1"); } catch (e) {}
+        location.reload();
+        return;
+      }
+      W.hold = true; // don't back up over the account copy until the student chooses
+      if (root.querySelector(".fl-restore")) return;
+      root.querySelector(".fl__top").insertAdjacentHTML("afterend",
+        '<div class="fl-restore" style="margin:.6rem 0;padding:.7rem .9rem;border:1.5px solid #f59e0b;background:#fff8ec;border-radius:10px;font-size:.92rem">' +
+        "You have different answers saved in your account (saved " + esc(workWhen(srv.at)) + "). " +
+        '<button type="button" class="fl__btn" data-restore="load">Load my saved work</button> ' +
+        '<button type="button" class="fl__btn fl__btn--ghost" data-restore="keep">Keep this device\u2019s answers</button></div>');
+      var box = root.querySelector(".fl-restore");
+      box.querySelector('[data-restore="load"]').onclick = function () {
+        if (!window.confirm("Replace the answers on this device with the work saved in your account?")) return;
+        try { localStorage.setItem(KEY, remote); } catch (e) {}
+        location.reload();
+      };
+      box.querySelector('[data-restore="keep"]').onclick = function () { box.remove(); doSave(false, false); };
+    });
+  })();
   if (root && root.tagName === "DETAILS") root.addEventListener("toggle", function () {
     if (document.body.classList.contains("fl-printing")) return;
     try { if (root.open) localStorage.removeItem(OPENKEY); else localStorage.setItem(OPENKEY, "1"); } catch (e) {}
