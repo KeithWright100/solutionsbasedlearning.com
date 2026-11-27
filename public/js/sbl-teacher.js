@@ -139,7 +139,19 @@
       list.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(t.name) + '’s students</option>'; }).join('');
     if (!sel.querySelector('option[value="' + String(viewing).replace(/"/g, '') + '"]')) viewing = '';
     sel.value = viewing;
-    $('teacherField').hidden = false;
+    // Teacher tabs along the top (admins): My students, each teacher, All students.
+    var tabs = $('teacherTabs');
+    var items = [{ v: '', t: 'My students' }].concat(list.map(function (t) { return { v: t.id, t: t.name }; }), [{ v: 'all', t: 'All students' }]);
+    tabs.innerHTML = items.map(function (it) {
+      return '<button type="button" role="tab" data-v="' + esc(it.v) + '" aria-selected="' + (it.v === viewing) + '">' + esc(it.t) + '</button>';
+    }).join('');
+    tabs.hidden = false;
+    tabs.onclick = function (e) {
+      var b = e.target.closest('[data-v]'); if (!b) return;
+      sel.value = b.getAttribute('data-v');
+      Array.prototype.forEach.call(tabs.children, function (x) { x.setAttribute('aria-selected', String(x === b)); });
+      sel.dispatchEvent(new Event('change'));
+    };
   }
 
   // KS3 students are not assigned to a teacher, so for the KS3 view an
@@ -171,16 +183,53 @@
       });
   }
 
+  // ---- Classes: subject + grad year, e.g. "Bus 27", "Ec 28" ----
+  // The grad year comes from the student's group ("IB Grad '27") or, if that is
+  // missing, from a Patana email (majn32@patana.ac.th → 32). The stage follows the
+  // school year (Aug–Jul): the next 2 grad years are IB, then 2 IGCSE, then 3 KS3,
+  // so the classes move up by themselves each August. A student appears in every
+  // class they belong to (one per subject the viewed teacher teaches them).
+  var SUBJ_SHORT = { 'Geography': 'Geo', 'Economics': 'Ec', 'Business': 'Bus', 'Business Management': 'Bus', 'History': 'Hist' };
+  function subjShort(s) { return SUBJ_SHORT[s] || String(s || '').slice(0, 4); }
+  function schoolEndYY() { var n = new Date(Date.now() + 7 * 3600 * 1000); return (n.getUTCMonth() >= 7 ? n.getUTCFullYear() + 1 : n.getUTCFullYear()) % 100; }
+  function gradYY(s) {
+    var m = /'\s*(\d{2})\b/.exec(s.groupName || '') || /grad\D*(\d{2})\b/i.exec(s.groupName || '') || /^[a-z]+(\d{2})@patana\.ac\.th$/i.exec(String(s.email || '').trim());
+    return m ? m[1] : '';
+  }
+  function stageOfYY(yy) {
+    if (!yy) return '';
+    var left = (+yy - schoolEndYY() + 100) % 100;
+    return left <= 1 ? 'IB' : left <= 3 ? 'IGCSE' : left <= 6 ? 'KS3' : 'Other';
+  }
+  function classKeysOf(s) {
+    var yy = gradYY(s), subs = s.subjects || [], keys = [];
+    if (!yy) return ['__nogy'];
+    if (subs.length) subs.forEach(function (x) { keys.push('c|' + x + '|' + yy); });
+    else keys.push('s|' + stageOfYY(yy) + '|' + yy);
+    return keys;
+  }
+  function classLabel(key) {
+    if (key === '__all') return 'all students';
+    if (key === '__nogy') return 'No grad year';
+    var p = key.split('|');
+    return p[0] === 'c' ? subjShort(p[1]) + ' ' + p[2] : p[1] + ' ' + p[2] + ' (no subject set)';
+  }
   function fillClasses() {
-    var sel = $('classSel'), groups = {};
-    students.forEach(function (s) { groups[s.groupName || ''] = true; });
-    var names = Object.keys(groups).filter(Boolean).sort();
-    sel.innerHTML = '<option value="__all">All my students (' + students.length + ')</option>' +
-      names.map(function (g) {
-        var n = students.filter(function (s) { return s.groupName === g; }).length;
-        return '<option value="' + esc(g) + '">' + esc(g) + ' (' + n + ')</option>';
-      }).join('') +
-      (groups[''] && names.length ? '<option value="__none">No class set</option>' : '');
+    var sel = $('classSel'), count = {};
+    students.forEach(function (s) { classKeysOf(s).forEach(function (k) { count[k] = (count[k] || 0) + 1; }); });
+    var byStage = { IB: [], IGCSE: [], KS3: [], Other: [] };
+    Object.keys(count).forEach(function (k) {
+      if (k === '__nogy') return;
+      var p = k.split('|'); (byStage[stageOfYY(p[2])] || byStage.Other).push(k);
+    });
+    var html = '<option value="__all">All ' + (viewing === 'all' ? 'students' : 'my students') + ' (' + students.length + ')</option>';
+    [['KS3', 'KS3'], ['IGCSE', 'IGCSE'], ['IB', 'IB'], ['Other', 'Other']].forEach(function (st) {
+      var ks = byStage[st[0]].sort(function (a, b) { var pa = a.split('|'), pb = b.split('|'); return pa[2].localeCompare(pb[2]) || classLabel(a).localeCompare(classLabel(b)); });
+      if (!ks.length) return;
+      html += '<optgroup label="' + st[1] + '">' + ks.map(function (k) { return '<option value="' + esc(k) + '">' + esc(classLabel(k)) + ' (' + count[k] + ')</option>'; }).join('') + '</optgroup>';
+    });
+    if (count.__nogy) html += '<option value="__nogy">No grad year (' + count.__nogy + ')</option>';
+    sel.innerHTML = html;
     current.cls = '__all';
     try { var saved = localStorage.getItem('sbl-teacher-class'); if (saved && sel.querySelector('option[value="' + saved.replace(/"/g, '') + '"]')) sel.value = saved; } catch (e) {}
     current.cls = sel.value;
@@ -193,7 +242,8 @@
     students.forEach(function (s) { (s.subjects || []).forEach(function (x) { set[x] = true; }); });
     var names = Object.keys(set).sort();
     var wrap = $('subjField'), sel = $('subjSel');
-    if (names.length < 2) { wrap.hidden = true; current.subj = '__all'; return; }
+    // The class list now carries the subject (e.g. "Bus 27"), so this separate filter stays hidden.
+    if (true || names.length < 2) { wrap.hidden = true; current.subj = '__all'; return; }
     wrap.hidden = false;
     sel.innerHTML = '<option value="__all">All my subjects</option>' + names.map(function (n) { return '<option>' + esc(n) + '</option>'; }).join('');
   }
@@ -263,8 +313,7 @@
 
   function visibleStudents() {
     return students.filter(function (s) {
-      if (current.cls === '__none' && s.groupName) return false;
-      if (current.cls !== '__all' && current.cls !== '__none' && s.groupName !== current.cls) return false;
+      if (current.cls !== '__all' && classKeysOf(s).indexOf(current.cls) === -1) return false;
       if (current.subj !== '__all' && (s.subjects || []).indexOf(current.subj) === -1) return false;
       if (current.q && (s.fullName || '').toLowerCase().indexOf(current.q) === -1 && (s.email || '').toLowerCase().indexOf(current.q) === -1) return false;
       return true;
@@ -487,7 +536,7 @@
       var a = gameAvg(s); row.push(a == null ? '' : a);
       lines.push(row.map(q).join(','));
     });
-    var name = 'SBL mark book - ' + (current.cls === '__all' ? 'all students' : current.cls) + ' - KS3 Geography.csv';
+    var name = 'SBL mark book - ' + classLabel(current.cls) + ' - KS3 Geography.csv';
     var blob = new Blob(['\ufeff' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name.replace(/[\\/:*?"<>|]/g, '-');
     document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
@@ -687,7 +736,7 @@
       lines.push(row.map(q).join(','));
     });
     var view = VIEWS.filter(function (v) { return v.key === current.view; })[0];
-    var name = 'SBL class sheet - ' + (current.cls === '__all' ? 'all students' : current.cls) + ' - ' + view.label + '.csv';
+    var name = 'SBL class sheet - ' + classLabel(current.cls) + ' - ' + view.label + '.csv';
     var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name.replace(/[\\/:*?"<>|]/g, '-');
     document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);

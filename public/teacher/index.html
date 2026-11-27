@@ -14,9 +14,15 @@
   .sbl-admin-shell { max-width: 1500px; }
   .cs-toolbar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: flex-end; margin-bottom: 1rem; }
   .cs-field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .cs-field[hidden] { display: none; }
   .cs-field label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate); }
   .cs-field select, .cs-field input { background: var(--navy); color: var(--white); border: 1px solid var(--navy-line); border-radius: 10px; padding: 0.55rem 0.7rem; font: inherit; font-size: 0.9rem; min-width: 210px; }
   .cs-spacer { flex: 1; }
+  .cs-teachers { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1rem; }
+  .cs-teachers[hidden] { display: none; }
+  .cs-teachers button { font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 0.45rem 0.95rem; border-radius: 999px; border: 1px solid var(--navy-line); background: var(--navy); color: var(--white); }
+  .cs-teachers button[aria-selected="true"] { background: var(--teal); border-color: var(--teal); color: #04121F; }
+  .cs-teachers button:focus-visible { outline: 2px solid var(--teal-bright); outline-offset: 2px; }
   .cs-tabs { display: inline-flex; gap: 0.3rem; background: var(--navy); border: 1px solid var(--navy-line); border-radius: 12px; padding: 0.3rem; margin-bottom: 1rem; }
   .cs-tabs button { background: none; border: 0; color: var(--slate); font: inherit; font-weight: 700; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 9px; cursor: pointer; }
   .cs-tabs button[aria-selected="true"] { background: var(--teal); color: #04121F; }
@@ -106,6 +112,8 @@
   </div>
 
   <div class="sbl-alert sbl-alert--error" id="pageError" role="alert" style="margin-bottom:1.5rem;"></div>
+
+  <div class="cs-teachers" id="teacherTabs" role="tablist" aria-label="Choose a teacher" hidden></div>
 
   <div class="cs-tabs" role="tablist" aria-label="Mark book areas">
     <button type="button" role="tab" id="tabLessons" aria-selected="true">Lesson marks</button>

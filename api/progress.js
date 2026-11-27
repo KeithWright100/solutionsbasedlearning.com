@@ -268,7 +268,10 @@ async function handleMyStudents(req, res, session, supabase) {
     {
       id: s.id, fullName: s.full_name, email: s.email, status: s.status, groupName: s.group_name || null,
       // the subjects I teach this student (from their assignments)
-      subjects: (Array.isArray(s.teacher_assignments) ? s.teacher_assignments : [])
+      // (older accounts linked only by teacher_id count as Geography, as on the admin page)
+      subjects: (Array.isArray(s.teacher_assignments) && s.teacher_assignments.length
+        ? s.teacher_assignments
+        : (s.teacher_id ? [{ subject: 'Geography', teacher_id: s.teacher_id }] : []))
         .filter((a) => a && (allMode || a.teacher_id === me)).map((a) => a.subject)
         .filter((v, i, arr) => arr.indexOf(v) === i),
       // admins only: every subject + teacher for this student
