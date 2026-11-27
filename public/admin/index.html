@@ -20,6 +20,23 @@
   .sbl-approved-tools .sbl-search-input { max-width:300px; }
   .sbl-bulkbar { position:sticky; top:4rem; z-index:50; display:flex; flex-wrap:wrap; gap:0.6rem 1rem; align-items:center; padding:0.7rem 0.9rem; margin-bottom:0.8rem; border-radius:10px; background:#1d3448; border:1px solid var(--teal-bright, #2dd4bf); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
   .sbl-bulkbar[hidden] { display:none; }
+  .sbl-stage-tabs { display:flex; flex-wrap:wrap; gap:0.5rem; margin:0 0 0.9rem; }
+  .sbl-stage-tabs button { font:inherit; font-size:0.85rem; font-weight:600; cursor:pointer; padding:0.45rem 0.9rem; border-radius:999px; border:1px solid var(--navy-line); background:var(--navy-raised); color:var(--white); }
+  .sbl-stage-tabs button small { color:var(--slate); font-weight:500; margin-left:0.25rem; }
+  .sbl-stage-tabs button b { display:inline-block; min-width:1.4rem; margin-left:0.35rem; padding:0 0.35rem; border-radius:999px; background:rgba(255,255,255,0.12); font-size:0.75rem; }
+  .sbl-stage-tabs button.is-active { background:var(--teal, #2DE1CB); border-color:var(--teal, #2DE1CB); color:#04211d; }
+  .sbl-stage-tabs button.is-active small { color:#04211d; }
+  .sbl-grad-head td { padding:0.9rem 1rem 0.5rem !important; border-top:2px solid var(--navy-line); background:var(--navy) !important; }
+  .sbl-grad-head label { display:flex; align-items:center; gap:0.6rem; cursor:pointer; font-size:0.8rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--teal-bright); }
+  .sbl-grad-head .sbl-muted { text-transform:none; letter-spacing:0; font-weight:500; }
+  .sbl-tools-drawer { margin:0 0 1.5rem; border:1px solid var(--navy-line); border-radius:14px; background:var(--navy-raised); }
+  .sbl-tools-drawer > summary { cursor:pointer; list-style:none; padding:0.9rem 1.2rem; display:flex; flex-wrap:wrap; gap:0.3rem 1rem; align-items:baseline; }
+  .sbl-tools-drawer > summary::-webkit-details-marker { display:none; }
+  .sbl-tools-drawer > summary span { font-family:var(--font-display); font-weight:700; color:var(--white); }
+  .sbl-tools-drawer > summary span::after { content:" \25BE"; color:var(--teal-bright); }
+  .sbl-tools-drawer[open] > summary span::after { content:" \25B4"; }
+  .sbl-tools-drawer > summary small { color:var(--slate); }
+  .sbl-tools-drawer__body { padding:0 1rem 0.2rem; }
   .sbl-bulk-part { display:inline-flex; gap:0.35rem; align-items:center; }
   .sbl-bulk-part select { max-width:180px; }
   .sbl-approved-table { min-width: 1280px; }
@@ -131,6 +148,9 @@
     <a href="/admin/question-sources/"><i>Games</i><b>Game Question Sources</b><span>Which IB and Edexcel past paper questions have been adapted in the revision games.</span></a>
   </nav>
 
+  <details class="sbl-tools-drawer" id="toolsDrawer">
+    <summary><span>&#129520; Teacher tools</span><small>Game of the week · Conference guest login · Paper 3 essay codes · Lesson game code words</small></summary>
+    <div class="sbl-tools-drawer__body">
   <section class="sbl-panel gotw-panel" aria-labelledby="gotwHead">
     <h2 id="gotwHead">&#127918; Game of the week</h2>
     <p>Shown at the top of the Humanities Hub. Pick a game for this week or plan ahead; weeks left on &ldquo;Automatic&rdquo; rotate through all the games. Weeks start on Monday (Bangkok time).</p>
@@ -163,6 +183,8 @@
       <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.92rem"><thead><tr><th style="text-align:left;padding:8px 10px">Chapter</th><th style="text-align:left;padding:8px 10px">Code</th><th style="text-align:left;padding:8px 10px">What students do</th><th style="text-align:left;padding:8px 10px">Writing</th><th style="text-align:left;padding:8px 10px">Challenge (early finishers)</th></tr></thead><tbody><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">0 The case</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">none</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Pick three things to measure Costa Rica by, which reveals their perspective</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">One sentence frame</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Write from a different perspective</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">1 Follow the money</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>MONEY</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Match definitions, work out a GDP per capita, read a GDP map, look at a Rio photo (inequality), sort strengths and weaknesses</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Full sentence frame</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Qatar vs Costa Rica; rank 5 countries</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">2 Health and schooling</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>HEALTH</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Definitions, a life expectancy bar chart (Japan − Nigeria), a map, a Lima photo, sorting</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Sentence starters</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Find a country healthier than its money suggests on a scatter graph; Cuba vs USA</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">3 Build an index</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>INDEX</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">What makes up HDI, HDI sliders, HDI map, Thailand vs Equatorial Guinea (same money, different HDI)</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Connectives bank</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Make a rich country with a low HDI; is Thailand developed?</td></tr><tr><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">4 The verdict</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top"><b>VERDICT</b></td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Three perspective questions, the agree/disagree line, a paragraph with a live checklist, sent to Copilot for a mark out of 4</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Free paragraph</td><td style="padding:8px 10px;border-top:1px solid rgba(255,255,255,.15);vertical-align:top">Design your own index</td></tr></tbody></table></div>
     </details>
   </section>
+    </div>
+  </details>
 
   <div class="sbl-tabs">
     <button type="button" class="sbl-tab is-active" data-tab="pending">Pending Applications <span class="sbl-tab__count" id="countPending">0</span></button>
@@ -201,6 +223,7 @@
       </select>
       <select id="approvedGroupFilter" class="sbl-teacher-select" aria-label="Group"><option value="">Any group</option></select>
     </div>
+    <div class="sbl-stage-tabs" id="stageTabs" role="tablist" aria-label="Show users by stage"></div>
     <div class="sbl-bulkbar" id="bulkBar" hidden>
       <b id="bulkCount">0 selected</b>
       <span class="sbl-bulk-part"><select id="bulkGroup" class="sbl-teacher-select" aria-label="Group for selected students"></select><button type="button" class="sbl-btn sbl-btn--primary sbl-btn--small" id="bulkGroupBtn">Set group</button></span>

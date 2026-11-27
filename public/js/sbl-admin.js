@@ -468,6 +468,46 @@
     }
     return out;
   })();
+  // Stage tabs: split the Approved Users list by school stage, using the
+  // grad-year group label (e.g. "KS3 Grad '32"). The grad years for each
+  // stage come from GROUP_OPTIONS, so they move up by themselves each August.
+  var STAGES = (function () {
+    var by = { KS3: [], IGCSE: [], IB: [] };
+    GROUP_OPTIONS.forEach(function (g) { var m = /^(KS3|IGCSE|IB) Grad '(\d\d)$/.exec(g); if (m) by[m[1]].push(m[2]); });
+    function rng(a) { a = a.slice().sort(); return a.length > 1 ? a[0] + '\u2013' + a[a.length - 1] : (a[0] || ''); }
+    return [
+      { key: 'all', label: 'Everyone' },
+      { key: 'KS3', label: 'KS3', sub: 'Grad ' + rng(by.KS3) },
+      { key: 'IGCSE', label: 'IGCSE', sub: 'Grad ' + rng(by.IGCSE) },
+      { key: 'IB', label: 'IB', sub: 'Grad ' + rng(by.IB) },
+      { key: 'nogroup', label: 'Students with no group' },
+      { key: 'staff', label: 'Teachers & staff' }
+    ];
+  })();
+  function stageOf(u) {
+    if (u.role !== 'student') return 'staff';
+    var m = /^(KS3|IGCSE|IB)\b/.exec(u.group_name || '');
+    return m ? m[1] : (u.group_name ? 'other' : 'nogroup');
+  }
+  var currentStage = 'all';
+  try { currentStage = localStorage.getItem('sbl_admin_stage') || 'all'; } catch (e) {}
+  if (!STAGES.some(function (st) { return st.key === currentStage; })) currentStage = 'all';
+  function renderStageTabs(allUsers) {
+    var el = document.getElementById('stageTabs'); if (!el) return;
+    var counts = { all: allUsers.length };
+    allUsers.forEach(function (u) { var k = stageOf(u); counts[k] = (counts[k] || 0) + 1; });
+    el.innerHTML = STAGES.map(function (st) {
+      return '<button type="button" role="tab" data-stage="' + st.key + '" aria-selected="' + (st.key === currentStage) + '"' + (st.key === currentStage ? ' class="is-active"' : '') + '>' +
+        escapeHtml(st.label) + (st.sub ? '<small>' + escapeHtml(st.sub) + '</small>' : '') + '<b>' + (counts[st.key] || 0) + '</b></button>';
+    }).join('');
+  }
+  document.getElementById('stageTabs').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-stage]'); if (!b) return;
+    currentStage = b.getAttribute('data-stage');
+    try { localStorage.setItem('sbl_admin_stage', currentStage); } catch (err) {}
+    renderApproved();
+  });
+
   function renderGroupCell(u) {
     if (u.role !== 'student') return '—';
     var cur = u.group_name || '';
@@ -489,7 +529,9 @@
     var show = document.getElementById('approvedFilter').value;
     var gsel = document.getElementById('approvedGroupFilter');
     fillGroupFilter(allUsers);
+    renderStageTabs(allUsers);
     var users = allUsers.filter(function (u) {
+      if (currentStage !== 'all' && stageOf(u) !== currentStage) return false;
       if (show && u.role !== 'student') return false;
       if (show === 'nogroup' && u.group_name) return false;
       if (show === 'noteacher' && assignmentsOf(u).length) return false;
@@ -512,14 +554,35 @@
       return String(x.full_name || x.email || '').localeCompare(String(y.full_name || y.email || ''), 'en', { sensitivity: 'base' });
     };
     var isAssigned = function (u) { return assignmentsOf(u).length > 0; };
-    var unassigned = users.filter(function (u) { return !isAssigned(u); }).sort(byName);
-    var assigned = users.filter(isAssigned).sort(byName);
-    users = unassigned.concat(assigned);
+    var byGrad = currentStage === 'KS3' || currentStage === 'IGCSE' || currentStage === 'IB';
+    var heads = {};
+    if (byGrad) {
+      // One section per grad year (oldest year group first), unassigned students first within each.
+      users.sort(function (x, y) {
+        return String(x.group_name).localeCompare(String(y.group_name)) || (isAssigned(x) - isAssigned(y)) || byName(x, y);
+      });
+      users.forEach(function (u, i) { if (i === 0 || u.group_name !== users[i - 1].group_name) heads[i] = u.group_name; });
+    } else {
+      var unassigned = users.filter(function (u) { return !isAssigned(u); }).sort(byName);
+      var assigned = users.filter(isAssigned).sort(byName);
+      users = unassigned.concat(assigned);
+      if (unassigned.length && assigned.length) heads[unassigned.length] = null;
+    }
 
     users.forEach(function (u, i) {
-      if (i === unassigned.length && assigned.length) {
+      if (byGrad && heads.hasOwnProperty(i)) {
+        var g = heads[i], inGroup = users.filter(function (x) { return x.group_name === g; });
+        var ids = inGroup.map(function (x) { return x.id; });
+        var allPicked = ids.every(function (id) { return picked[id]; });
+        var noTeacher = inGroup.filter(function (x) { return !isAssigned(x); }).length;
+        var head = document.createElement('tr');
+        head.className = 'sbl-grad-head';
+        head.innerHTML = '<td colspan="10"><label><input type="checkbox" class="sbl-grad-check" data-ids="' + ids.join(',') + '"' + (allPicked ? ' checked' : '') + ' aria-label="Select everyone in ' + escapeHtml(g) + '">' +
+          escapeHtml(g) + ' (' + inGroup.length + ')' + (noTeacher ? ' <span class="sbl-muted">· ' + noTeacher + ' with no subject/teacher</span>' : '') + '</label></td>';
+        body.appendChild(head);
+      } else if (!byGrad && heads.hasOwnProperty(i)) {
         var divider = document.createElement('tr');
-        divider.innerHTML = '<td colspan="10" style="padding:0.9rem 1rem 0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); border-top:2px solid var(--navy-line);">Assigned to a teacher (' + assigned.length + ')</td>';
+        divider.innerHTML = '<td colspan="10" style="padding:0.9rem 1rem 0.5rem; font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-bright); border-top:2px solid var(--navy-line);">Assigned to a teacher (' + (users.length - i) + ')</td>';
         body.appendChild(divider);
       }
       var tr = document.createElement('tr');
@@ -581,6 +644,8 @@
     renderApproved();
   });
   document.getElementById('approvedBody').addEventListener('change', function (e) {
+    var gc = e.target.closest('.sbl-grad-check');
+    if (gc) { (gc.getAttribute('data-ids') || '').split(',').forEach(function (id) { if (!id) return; if (gc.checked) picked[id] = true; else delete picked[id]; }); renderApproved(); return; }
     var c = e.target.closest('.sbl-user-check'); if (!c) return;
     e.stopPropagation();
     if (c.checked) picked[c.getAttribute('data-id')] = true; else delete picked[c.getAttribute('data-id')];
