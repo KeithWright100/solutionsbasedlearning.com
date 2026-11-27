@@ -505,6 +505,8 @@
     var b = e.target.closest('[data-stage]'); if (!b) return;
     currentStage = b.getAttribute('data-stage');
     try { localStorage.setItem('sbl_admin_stage', currentStage); } catch (err) {}
+    document.getElementById('approvedGroupFilter').value = '';
+    groupFilterKey = '';
     renderApproved();
   });
 
@@ -542,7 +544,12 @@
     updateBulkBar();
     body.innerHTML = '';
     if (!users.length) {
-      empty.textContent = noMatchesMessage(query, 'No approved users yet.');
+      var filtered = query || show || gsel.value || currentStage !== 'all';
+      if (filtered && allUsers.length) {
+        empty.innerHTML = 'No users match these filters. <button type="button" class="sbl-btn sbl-btn--secondary sbl-btn--small" id="approvedClearFilters" style="margin-left:0.6rem">Clear filters</button>';
+      } else {
+        empty.textContent = noMatchesMessage(query, 'No approved users yet.');
+      }
       empty.style.display = 'block';
       return;
     }
@@ -616,9 +623,11 @@
   var picked = {}, lastShownStudents = [], groupFilterKey = '';
   function fillGroupFilter(all) {
     var sel = document.getElementById('approvedGroupFilter'), cur = sel.value, set = {};
-    all.forEach(function (u) { if (u.role === 'student' && u.group_name) set[u.group_name] = (set[u.group_name] || 0) + 1; });
-    var key = JSON.stringify(set); if (key === groupFilterKey) return; groupFilterKey = key;
-    sel.innerHTML = '<option value="">Any group</option>' + Object.keys(set).sort().map(function (g) { return '<option value="' + escapeHtml(g) + '">' + escapeHtml(g) + ' (' + set[g] + ')</option>'; }).join('');
+    all.forEach(function (u) { if (u.role === 'student' && u.group_name && (currentStage === 'all' || stageOf(u) === currentStage)) set[u.group_name] = (set[u.group_name] || 0) + 1; });
+    var key = currentStage + JSON.stringify(set); if (key === groupFilterKey) return; groupFilterKey = key;
+    if (cur && !set[cur]) cur = '';
+    sel.disabled = !Object.keys(set).length;
+    sel.innerHTML = '<option value="">' + (currentStage === 'all' ? 'Any group' : 'All grad years') + '</option>' + Object.keys(set).sort().map(function (g) { return '<option value="' + escapeHtml(g) + '">' + escapeHtml(g) + ' (' + set[g] + ')</option>'; }).join('');
     sel.value = set[cur] ? cur : '';
   }
   function fillBulkSelects() {
@@ -639,6 +648,16 @@
   }
   document.getElementById('approvedFilter').addEventListener('change', renderApproved);
   document.getElementById('approvedGroupFilter').addEventListener('change', renderApproved);
+  document.getElementById('approvedEmpty').addEventListener('click', function (e) {
+    if (!e.target.closest('#approvedClearFilters')) return;
+    document.getElementById('approvedSearch').value = '';
+    document.getElementById('approvedFilter').value = '';
+    document.getElementById('approvedGroupFilter').value = '';
+    currentStage = 'all';
+    try { localStorage.setItem('sbl_admin_stage', 'all'); } catch (err) {}
+    groupFilterKey = '';
+    renderApproved();
+  });
   document.getElementById('approvedAll').addEventListener('change', function (e) {
     lastShownStudents.forEach(function (id) { if (e.target.checked) picked[id] = true; else delete picked[id]; });
     renderApproved();
@@ -734,6 +753,7 @@
       var toggleLabel = f.status === 'reviewed' ? 'Mark new' : 'Mark reviewed';
       tr.innerHTML =
         '<td>' + formatDate(f.created_at) + '</td>' +
+        '<td>' + escapeHtml(f.contact_name || '—') + '<div class="sbl-muted">' + escapeHtml(f.contact_email || '') + '</div></td>' +
         '<td>' + (f.rating_overall ? f.rating_overall + ' / 5' : '—') + '</td>' +
         '<td>' + (f.rating_understanding ? f.rating_understanding + ' / 5' : '—') + '</td>' +
         '<td>' + escapeHtml(formatMethods(f.effective_methods)) + '</td>' +
@@ -788,6 +808,7 @@
       '<dt>Supports learning</dt><dd>' + (f.rating_understanding ? f.rating_understanding + ' / 5' : '—') + '</dd>' +
       '<dt>Most effective for them</dt><dd>' + escapeHtml(formatMethods(f.effective_methods)) + '</dd>' +
       '<dt>Suggestions</dt><dd>' + escapeHtml(f.suggestions || '—') + '</dd>' +
+      '<dt>Name</dt><dd>' + escapeHtml(f.contact_name || '—') + '</dd>' +
       '<dt>Contact email</dt><dd>' + escapeHtml(f.contact_email || '—') + '</dd>' +
       '<dt>Page</dt><dd>' + escapeHtml(f.page_url || '—') + '</dd>';
     feedbackModalBackdrop.classList.add('is-open');

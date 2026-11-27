@@ -53,8 +53,12 @@ export default async function handler(req, res) {
     ? body.suggestions.trim().slice(0, MAX_SUGGESTIONS_LENGTH)
     : '';
   const contactEmail = typeof body.contactEmail === 'string' ? body.contactEmail.trim() : '';
+  const contactName = typeof body.contactName === 'string' ? body.contactName.trim().replace(/\s+/g, ' ').slice(0, 120) : '';
   const pageUrl = typeof body.pageUrl === 'string' ? body.pageUrl.trim().slice(0, 500) : '';
 
+  if (contactName.length < 2) {
+    return res.status(400).json({ error: 'Please enter your full name.' });
+  }
   if (!contactEmail || !isValidEmail(contactEmail)) {
     return res.status(400).json({ error: 'Please enter a valid email address.' });
   }
@@ -82,20 +86,35 @@ export default async function handler(req, res) {
     console.error('Feedback rate-limit check failed:', err);
   }
 
-  const { data: inserted, error: insertError } = await supabase
+  const row = {
+    rating_overall: ratingOverall,
+    rating_understanding: ratingUnderstanding,
+    effective_methods: effectiveMethods,
+    suggestions: suggestions || null,
+    contact_email: contactEmail,
+    contact_name: contactName,
+    page_url: pageUrl || null,
+    user_agent: (req.headers['user-agent'] || '').slice(0, 300),
+    submitter_ip: ip
+  };
+  let { data: inserted, error: insertError } = await supabase
     .from('sbl_feedback')
-    .insert({
-      rating_overall: ratingOverall,
-      rating_understanding: ratingUnderstanding,
-      effective_methods: effectiveMethods,
-      suggestions: suggestions || null,
-      contact_email: contactEmail,
-      page_url: pageUrl || null,
-      user_agent: (req.headers['user-agent'] || '').slice(0, 300),
-      submitter_ip: ip
-    })
-    .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, page_url, created_at')
+    .insert(row)
+    .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, contact_name, page_url, created_at')
     .single();
+
+  // Before sql/016 has run there is no contact_name column: save the
+  // feedback anyway, with the name at the start of the suggestions.
+  if (insertError && /contact_name/.test(String(insertError.message || '') + String(insertError.details || ''))) {
+    delete row.contact_name;
+    row.suggestions = ('[Name: ' + contactName + '] ' + (suggestions || '')).trim();
+    ({ data: inserted, error: insertError } = await supabase
+      .from('sbl_feedback')
+      .insert(row)
+      .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, page_url, created_at')
+      .single());
+    if (inserted) inserted.contact_name = contactName;
+  }
 
   if (insertError) {
     console.error('Failed to insert feedback:', insertError);

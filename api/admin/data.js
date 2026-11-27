@@ -36,9 +36,20 @@ export default async function handler(req, res) {
       .limit(500),
     supabase
       .from('sbl_feedback')
-      .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, page_url, status, created_at')
+      .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, contact_name, page_url, status, created_at')
       .order('created_at', { ascending: false })
       .limit(300)
+      .then(function (r) {
+        // Before sql/016 has run there is no contact_name column: load without it.
+        if (r.error && /contact_name/.test(String(r.error.message || ''))) {
+          return supabase
+            .from('sbl_feedback')
+            .select('id, rating_overall, rating_understanding, effective_methods, suggestions, contact_email, page_url, status, created_at')
+            .order('created_at', { ascending: false })
+            .limit(300);
+        }
+        return r;
+      })
   ]);
 
   if (pendingRes.error || decidedRes.error || profilesRes.error || feedbackRes.error) {

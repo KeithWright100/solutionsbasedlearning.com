@@ -227,7 +227,7 @@ function escapeHtml(str) {
 export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dashboardUrl }) {
   const {
     rating_overall, rating_understanding, effective_methods,
-    suggestions, contact_email, page_url, created_at
+    suggestions, contact_email, contact_name, page_url, created_at
   } = feedback;
 
   const submittedDisplay = new Date(created_at).toLocaleString('en-GB', {
@@ -245,6 +245,7 @@ export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dash
       <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Supports learning</td><td style="padding:3px 0;">${stars(rating_understanding)}</td></tr>
       <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Most effective for them</td><td style="padding:3px 0;">${escapeHtml(methodsDisplay)}</td></tr>
       <tr><td style="color:#C3D3DE;padding:3px 0;vertical-align:top;">Suggestions</td><td style="padding:3px 0;">${suggestionsHtml}</td></tr>
+      <tr><td style="color:#C3D3DE;padding:3px 0;">Name</td><td style="padding:3px 0;">${escapeHtml(contact_name) || '—'}</td></tr>
       <tr><td style="color:#C3D3DE;padding:3px 0;">Contact email</td><td style="padding:3px 0;">${escapeHtml(contact_email) || '—'}</td></tr>
       <tr><td style="color:#C3D3DE;padding:3px 0;">Page</td><td style="padding:3px 0;">${escapeHtml(page_url) || '—'}</td></tr>
       <tr><td style="color:#C3D3DE;padding:3px 0;">Submitted</td><td style="padding:3px 0;">${submittedDisplay}</td></tr>
@@ -260,6 +261,7 @@ export async function sendFeedbackNotificationEmail({ adminEmail, feedback, dash
     `Supports learning: ${stars(rating_understanding)}`,
     `Most effective for them: ${methodsDisplay}`,
     `Suggestions: ${suggestions || '—'}`,
+    `Name: ${contact_name || '—'}`,
     `Contact email: ${contact_email || '—'}`,
     `Page: ${page_url || '—'}`,
     `Submitted: ${submittedDisplay}`,

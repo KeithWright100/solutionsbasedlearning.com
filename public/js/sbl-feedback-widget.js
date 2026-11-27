@@ -138,8 +138,12 @@
           '<textarea class="sblfw-textarea" id="sblfw-suggestions" maxlength="4000" placeholder="Optional"></textarea>' +
         '</div>' +
         '<div class="sblfw-field">' +
-          '<label class="sblfw-label" for="sblfw-email">Your email address</label>' +
-          '<input type="email" class="sblfw-emailinput" id="sblfw-email" maxlength="254" placeholder="name@school.com">' +
+          '<label class="sblfw-label" for="sblfw-name">Your full name <span style="color:#F87171">*</span></label>' +
+          '<input type="text" class="sblfw-emailinput" id="sblfw-name" maxlength="120" autocomplete="name" placeholder="First and last name" required aria-required="true">' +
+        '</div>' +
+        '<div class="sblfw-field">' +
+          '<label class="sblfw-label" for="sblfw-email">Your email address <span style="color:#F87171">*</span></label>' +
+          '<input type="email" class="sblfw-emailinput" id="sblfw-email" maxlength="254" placeholder="name@school.com" autocomplete="email" required aria-required="true">' +
         '</div>' +
         '<div class="sblfw-actions">' +
           '<button type="button" class="sblfw-btn sblfw-btn-secondary" id="sblfw-cancel">Cancel</button>' +
@@ -156,6 +160,15 @@
 
     backdrop.appendChild(modal);
     document.body.appendChild(backdrop);
+    // Logged-in users: fill in their name and email from their account (still editable, still required).
+    try {
+      fetch('/api/session', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        if (!d || !d.loggedIn || !d.user) return;
+        var n = backdrop.querySelector('#sblfw-name'), e = backdrop.querySelector('#sblfw-email');
+        if (n && !n.value && d.user.fullName) n.value = d.user.fullName;
+        if (e && !e.value && d.user.email) e.value = d.user.email;
+      }).catch(function () {});
+    } catch (err) {}
     return backdrop;
   }
 
@@ -221,9 +234,15 @@
       var methodEls = backdrop.querySelectorAll('input[name="sblfw-method"]:checked');
       var suggestions = backdrop.querySelector('#sblfw-suggestions').value.trim();
       var email = backdrop.querySelector('#sblfw-email').value.trim();
+      var name = backdrop.querySelector('#sblfw-name').value.trim();
 
       var effectiveMethods = Array.prototype.map.call(methodEls, function (el) { return el.value; });
 
+      if (name.length < 2) {
+        showError('Please enter your full name.');
+        backdrop.querySelector('#sblfw-name').focus();
+        return;
+      }
       if (!email) {
         showError('Please enter your email address.');
         return;
@@ -243,6 +262,7 @@
         effectiveMethods: effectiveMethods,
         suggestions: suggestions,
         contactEmail: email,
+        contactName: name,
         pageUrl: window.location.href
       };
 
